@@ -29,6 +29,15 @@ func ConeParticleEmitterFromJSObject(p js.Value, ctx js.Value) *ConeParticleEmit
 	return &ConeParticleEmitter{p: p, ctx: ctx}
 }
 
+// ConeParticleEmitterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ConeParticleEmitterArrayToJSArray(array []*ConeParticleEmitter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewConeParticleEmitterOpts contains optional parameters for NewConeParticleEmitter.
 type NewConeParticleEmitterOpts struct {
 	Radius              *float64
@@ -83,9 +92,7 @@ func (c *ConeParticleEmitter) ApplyToShader(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#clone
 func (c *ConeParticleEmitter) Clone() *ConeParticleEmitter {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("clone", args...)
+	retVal := c.p.Call("clone")
 	return ConeParticleEmitterFromJSObject(retVal, c.ctx)
 }
 
@@ -94,9 +101,7 @@ func (c *ConeParticleEmitter) Clone() *ConeParticleEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#getclassname
 func (c *ConeParticleEmitter) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -105,9 +110,7 @@ func (c *ConeParticleEmitter) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#geteffectdefines
 func (c *ConeParticleEmitter) GetEffectDefines() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffectDefines", args...)
+	retVal := c.p.Call("getEffectDefines")
 	return retVal.String()
 }
 
@@ -128,9 +131,7 @@ func (c *ConeParticleEmitter) Parse(serializationObject interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#serialize
 func (c *ConeParticleEmitter) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 

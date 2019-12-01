@@ -27,6 +27,15 @@ func BasisTranscodeConfigurationFromJSObject(p js.Value, ctx js.Value) *BasisTra
 	return &BasisTranscodeConfiguration{p: p, ctx: ctx}
 }
 
+// BasisTranscodeConfigurationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BasisTranscodeConfigurationArrayToJSArray(array []*BasisTranscodeConfiguration) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // LoadMipmapLevels returns the LoadMipmapLevels property of class BasisTranscodeConfiguration.

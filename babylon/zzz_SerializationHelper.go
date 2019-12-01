@@ -27,6 +27,15 @@ func SerializationHelperFromJSObject(p js.Value, ctx js.Value) *SerializationHel
 	return &SerializationHelper{p: p, ctx: ctx}
 }
 
+// SerializationHelperArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SerializationHelperArrayToJSArray(array []*SerializationHelper) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // AppendSerializedAnimations calls the AppendSerializedAnimations method on the SerializationHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.serializationhelper#appendserializedanimations

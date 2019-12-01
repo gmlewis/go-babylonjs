@@ -29,9 +29,18 @@ func SceneFromJSObject(p js.Value, ctx js.Value) *Scene {
 	return &Scene{AbstractScene: AbstractSceneFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SceneArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SceneArrayToJSArray(array []*Scene) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSceneOpts contains optional parameters for NewScene.
 type NewSceneOpts struct {
-	Options *SceneOptions
+	Options js.Value
 }
 
 // NewScene returns a new Scene object.
@@ -49,7 +58,7 @@ func (ba *Babylon) NewScene(engine *Engine, opts *NewSceneOpts) *Scene {
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	p := ba.ctx.Get("Scene").New(args...)
@@ -243,11 +252,11 @@ func (s *Scene) AddParser(name string, parser js.Value) {
 // AddParticleSystem calls the AddParticleSystem method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#addparticlesystem
-func (s *Scene) AddParticleSystem(newParticleSystem *IParticleSystem) {
+func (s *Scene) AddParticleSystem(newParticleSystem js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newParticleSystem.JSObject())
+	args = append(args, newParticleSystem)
 
 	s.p.Call("addParticleSystem", args...)
 }
@@ -305,9 +314,7 @@ func (s *Scene) AddTransformNode(newTransformNode *TransformNode) {
 // https://doc.babylonjs.com/api/classes/babylon.scene#animate
 func (s *Scene) Animate() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("animate", args...)
+	s.p.Call("animate")
 }
 
 // SceneAttachControlOpts contains optional parameters for Scene.AttachControl.
@@ -639,9 +646,7 @@ func (s *Scene) BeginWeightedAnimation(target interface{}, from float64, to floa
 // https://doc.babylonjs.com/api/classes/babylon.scene#cleancachedtexturebuffer
 func (s *Scene) CleanCachedTextureBuffer() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("cleanCachedTextureBuffer", args...)
+	s.p.Call("cleanCachedTextureBuffer")
 }
 
 // ClearCachedVertexData calls the ClearCachedVertexData method on the Scene object.
@@ -649,9 +654,7 @@ func (s *Scene) CleanCachedTextureBuffer() {
 // https://doc.babylonjs.com/api/classes/babylon.scene#clearcachedvertexdata
 func (s *Scene) ClearCachedVertexData() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("clearCachedVertexData", args...)
+	s.p.Call("clearCachedVertexData")
 }
 
 // CollisionCoordinatorFactory calls the CollisionCoordinatorFactory method on the Scene object.
@@ -659,9 +662,7 @@ func (s *Scene) ClearCachedVertexData() {
 // https://doc.babylonjs.com/api/classes/babylon.scene#collisioncoordinatorfactory
 func (s *Scene) CollisionCoordinatorFactory() *ICollisionCoordinator {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("CollisionCoordinatorFactory", args...)
+	retVal := s.p.Call("CollisionCoordinatorFactory")
 	return ICollisionCoordinatorFromJSObject(retVal, s.ctx)
 }
 
@@ -739,7 +740,7 @@ func (s *Scene) CreateDefaultCameraOrLight(opts *SceneCreateDefaultCameraOrLight
 
 // SceneCreateDefaultEnvironmentOpts contains optional parameters for Scene.CreateDefaultEnvironment.
 type SceneCreateDefaultEnvironmentOpts struct {
-	Options *IEnvironmentHelperOptions
+	Options js.Value
 }
 
 // CreateDefaultEnvironment calls the CreateDefaultEnvironment method on the Scene object.
@@ -755,7 +756,7 @@ func (s *Scene) CreateDefaultEnvironment(opts *SceneCreateDefaultEnvironmentOpts
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	retVal := s.p.Call("createDefaultEnvironment", args...)
@@ -837,7 +838,7 @@ func (s *Scene) CreateDefaultSkybox(opts *SceneCreateDefaultSkyboxOpts) *Mesh {
 
 // SceneCreateDefaultVRExperienceOpts contains optional parameters for Scene.CreateDefaultVRExperience.
 type SceneCreateDefaultVRExperienceOpts struct {
-	WebVROptions *VRExperienceHelperOptions
+	WebVROptions js.Value
 }
 
 // CreateDefaultVRExperience calls the CreateDefaultVRExperience method on the Scene object.
@@ -853,7 +854,7 @@ func (s *Scene) CreateDefaultVRExperience(opts *SceneCreateDefaultVRExperienceOp
 	if opts.WebVROptions == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.WebVROptions.JSObject())
+		args = append(args, opts.WebVROptions)
 	}
 
 	retVal := s.p.Call("createDefaultVRExperience", args...)
@@ -863,14 +864,14 @@ func (s *Scene) CreateDefaultVRExperience(opts *SceneCreateDefaultVRExperienceOp
 // CreateDefaultXRExperienceAsync calls the CreateDefaultXRExperienceAsync method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#createdefaultxrexperienceasync
-func (s *Scene) CreateDefaultXRExperienceAsync(options *WebXRDefaultExperienceOptions) *WebXRDefaultExperience {
+func (s *Scene) CreateDefaultXRExperienceAsync(options *WebXRDefaultExperienceOptions) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, options.JSObject())
 
 	retVal := s.p.Call("createDefaultXRExperienceAsync", args...)
-	return WebXRDefaultExperienceFromJSObject(retVal, s.ctx)
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 // SceneCreateOrUpdateSelectionOctreeOpts contains optional parameters for Scene.CreateOrUpdateSelectionOctree.
@@ -882,7 +883,7 @@ type SceneCreateOrUpdateSelectionOctreeOpts struct {
 // CreateOrUpdateSelectionOctree calls the CreateOrUpdateSelectionOctree method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#createorupdateselectionoctree
-func (s *Scene) CreateOrUpdateSelectionOctree(opts *SceneCreateOrUpdateSelectionOctreeOpts) *AbstractMesh {
+func (s *Scene) CreateOrUpdateSelectionOctree(opts *SceneCreateOrUpdateSelectionOctreeOpts) *Octree {
 	if opts == nil {
 		opts = &SceneCreateOrUpdateSelectionOctreeOpts{}
 	}
@@ -901,7 +902,7 @@ func (s *Scene) CreateOrUpdateSelectionOctree(opts *SceneCreateOrUpdateSelection
 	}
 
 	retVal := s.p.Call("createOrUpdateSelectionOctree", args...)
-	return AbstractMeshFromJSObject(retVal, s.ctx)
+	return OctreeFromJSObject(retVal, s.ctx)
 }
 
 // SceneCreatePickingRayOpts contains optional parameters for Scene.CreatePickingRay.
@@ -1052,9 +1053,7 @@ func (s *Scene) DeleteCompoundImpostor(compound interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.scene#detachcontrol
 func (s *Scene) DetachControl() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("detachControl", args...)
+	s.p.Call("detachControl")
 }
 
 // SceneDisableDepthRendererOpts contains optional parameters for Scene.DisableDepthRenderer.
@@ -1086,9 +1085,7 @@ func (s *Scene) DisableDepthRenderer(opts *SceneDisableDepthRendererOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.scene#disablegeometrybufferrenderer
 func (s *Scene) DisableGeometryBufferRenderer() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("disableGeometryBufferRenderer", args...)
+	s.p.Call("disableGeometryBufferRenderer")
 }
 
 // DisablePhysicsEngine calls the DisablePhysicsEngine method on the Scene object.
@@ -1096,9 +1093,7 @@ func (s *Scene) DisableGeometryBufferRenderer() {
 // https://doc.babylonjs.com/api/classes/babylon.scene#disablephysicsengine
 func (s *Scene) DisablePhysicsEngine() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("disablePhysicsEngine", args...)
+	s.p.Call("disablePhysicsEngine")
 }
 
 // Dispose calls the Dispose method on the Scene object.
@@ -1106,9 +1101,7 @@ func (s *Scene) DisablePhysicsEngine() {
 // https://doc.babylonjs.com/api/classes/babylon.scene#dispose
 func (s *Scene) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // SceneEnableDepthRendererOpts contains optional parameters for Scene.EnableDepthRenderer.
@@ -1209,7 +1202,7 @@ func (s *Scene) ExecuteOnceBeforeRender(jsFunc func(), opts *SceneExecuteOnceBef
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	if opts.Timeout == nil {
 		args = append(args, js.Undefined())
@@ -1227,7 +1220,7 @@ func (s *Scene) ExecuteWhenReady(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	s.p.Call("executeWhenReady", args...)
 }
@@ -1237,9 +1230,7 @@ func (s *Scene) ExecuteWhenReady(jsFunc func()) {
 // https://doc.babylonjs.com/api/classes/babylon.scene#freeactivemeshes
 func (s *Scene) FreeActiveMeshes() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("freeActiveMeshes", args...)
+	s.p.Call("freeActiveMeshes")
 }
 
 // FreeProcessedMaterials calls the FreeProcessedMaterials method on the Scene object.
@@ -1247,9 +1238,7 @@ func (s *Scene) FreeActiveMeshes() {
 // https://doc.babylonjs.com/api/classes/babylon.scene#freeprocessedmaterials
 func (s *Scene) FreeProcessedMaterials() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("freeProcessedMaterials", args...)
+	s.p.Call("freeProcessedMaterials")
 }
 
 // FreeRenderingGroups calls the FreeRenderingGroups method on the Scene object.
@@ -1257,9 +1246,7 @@ func (s *Scene) FreeProcessedMaterials() {
 // https://doc.babylonjs.com/api/classes/babylon.scene#freerenderinggroups
 func (s *Scene) FreeRenderingGroups() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("freeRenderingGroups", args...)
+	s.p.Call("freeRenderingGroups")
 }
 
 // SceneFreezeActiveMeshesOpts contains optional parameters for Scene.FreezeActiveMeshes.
@@ -1292,9 +1279,7 @@ func (s *Scene) FreezeActiveMeshes(opts *SceneFreezeActiveMeshesOpts) *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.scene#freezematerials
 func (s *Scene) FreezeMaterials() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("freezeMaterials", args...)
+	s.p.Call("freezeMaterials")
 }
 
 // GetActiveBones calls the GetActiveBones method on the Scene object.
@@ -1302,9 +1287,7 @@ func (s *Scene) FreezeMaterials() {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivebones
 func (s *Scene) GetActiveBones() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getActiveBones", args...)
+	retVal := s.p.Call("getActiveBones")
 	return retVal.Float()
 }
 
@@ -1313,21 +1296,17 @@ func (s *Scene) GetActiveBones() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactiveindices
 func (s *Scene) GetActiveIndices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getActiveIndices", args...)
+	retVal := s.p.Call("getActiveIndices")
 	return retVal.Float()
 }
 
 // GetActiveMeshes calls the GetActiveMeshes method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivemeshes
-func (s *Scene) GetActiveMeshes() *AbstractMesh {
+func (s *Scene) GetActiveMeshes() *SmartArray {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getActiveMeshes", args...)
-	return AbstractMeshFromJSObject(retVal, s.ctx)
+	retVal := s.p.Call("getActiveMeshes")
+	return SmartArrayFromJSObject(retVal, s.ctx)
 }
 
 // GetActiveParticles calls the GetActiveParticles method on the Scene object.
@@ -1335,23 +1314,21 @@ func (s *Scene) GetActiveMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactiveparticles
 func (s *Scene) GetActiveParticles() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getActiveParticles", args...)
+	retVal := s.p.Call("getActiveParticles")
 	return retVal.Float()
 }
 
 // GetAllAnimatablesByTarget calls the GetAllAnimatablesByTarget method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getallanimatablesbytarget
-func (s *Scene) GetAllAnimatablesByTarget(target interface{}) *[]Animatable {
+func (s *Scene) GetAllAnimatablesByTarget(target interface{}) []*Animatable {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, target)
 
 	retVal := s.p.Call("getAllAnimatablesByTarget", args...)
-	return []AnimatableFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // GetAnimatableByTarget calls the GetAnimatableByTarget method on the Scene object.
@@ -1385,9 +1362,7 @@ func (s *Scene) GetAnimationGroupByName(name string) *AnimationGroup {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getanimationratio
 func (s *Scene) GetAnimationRatio() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAnimationRatio", args...)
+	retVal := s.p.Call("getAnimationRatio")
 	return retVal.Float()
 }
 
@@ -1435,9 +1410,7 @@ func (s *Scene) GetBoneByName(name string) *Bone {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getboundingboxrenderer
 func (s *Scene) GetBoundingBoxRenderer() *BoundingBoxRenderer {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getBoundingBoxRenderer", args...)
+	retVal := s.p.Call("getBoundingBoxRenderer")
 	return BoundingBoxRendererFromJSObject(retVal, s.ctx)
 }
 
@@ -1446,9 +1419,7 @@ func (s *Scene) GetBoundingBoxRenderer() *BoundingBoxRenderer {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getcachedeffect
 func (s *Scene) GetCachedEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getCachedEffect", args...)
+	retVal := s.p.Call("getCachedEffect")
 	return EffectFromJSObject(retVal, s.ctx)
 }
 
@@ -1457,9 +1428,7 @@ func (s *Scene) GetCachedEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getcachedmaterial
 func (s *Scene) GetCachedMaterial() *Material {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getCachedMaterial", args...)
+	retVal := s.p.Call("getCachedMaterial")
 	return MaterialFromJSObject(retVal, s.ctx)
 }
 
@@ -1468,9 +1437,7 @@ func (s *Scene) GetCachedMaterial() *Material {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getcachedvisibility
 func (s *Scene) GetCachedVisibility() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getCachedVisibility", args...)
+	retVal := s.p.Call("getCachedVisibility")
 	return retVal.Float()
 }
 
@@ -1545,9 +1512,7 @@ func (s *Scene) GetCamerasByTags(tagsQuery string, opts *SceneGetCamerasByTagsOp
 // https://doc.babylonjs.com/api/classes/babylon.scene#getclassname
 func (s *Scene) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -1556,9 +1521,7 @@ func (s *Scene) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getengine
 func (s *Scene) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEngine", args...)
+	retVal := s.p.Call("getEngine")
 	return EngineFromJSObject(retVal, s.ctx)
 }
 
@@ -1567,9 +1530,7 @@ func (s *Scene) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getframeid
 func (s *Scene) GetFrameId() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getFrameId", args...)
+	retVal := s.p.Call("getFrameId")
 	return retVal.Float()
 }
 
@@ -1578,9 +1539,7 @@ func (s *Scene) GetFrameId() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getgeometries
 func (s *Scene) GetGeometries() *Geometry {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getGeometries", args...)
+	retVal := s.p.Call("getGeometries")
 	return GeometryFromJSObject(retVal, s.ctx)
 }
 
@@ -1641,9 +1600,7 @@ func (s *Scene) GetIndividualParser(name string) js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getinternalstep
 func (s *Scene) GetInternalStep() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getInternalStep", args...)
+	retVal := s.p.Call("getInternalStep")
 	return retVal.Float()
 }
 
@@ -1899,14 +1856,14 @@ func (s *Scene) GetMeshByUniqueID(uniqueId float64) *AbstractMesh {
 // GetMeshesByID calls the GetMeshesByID method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getmeshesbyid
-func (s *Scene) GetMeshesByID(id string) *[]AbstractMesh {
+func (s *Scene) GetMeshesByID(id string) []*AbstractMesh {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, id)
 
 	retVal := s.p.Call("getMeshesByID", args...)
-	return []AbstractMeshFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // SceneGetMeshesByTagsOpts contains optional parameters for Scene.GetMeshesByTags.
@@ -1993,9 +1950,7 @@ func (s *Scene) GetNodeByName(name string) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getoutlinerenderer
 func (s *Scene) GetOutlineRenderer() *OutlineRenderer {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getOutlineRenderer", args...)
+	retVal := s.p.Call("getOutlineRenderer")
 	return OutlineRendererFromJSObject(retVal, s.ctx)
 }
 
@@ -2015,14 +1970,14 @@ func (s *Scene) GetParser(name string) js.Value {
 // GetParticleSystemByID calls the GetParticleSystemByID method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getparticlesystembyid
-func (s *Scene) GetParticleSystemByID(id string) *IParticleSystem {
+func (s *Scene) GetParticleSystemByID(id string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, id)
 
 	retVal := s.p.Call("getParticleSystemByID", args...)
-	return IParticleSystemFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // GetPhysicsEngine calls the GetPhysicsEngine method on the Scene object.
@@ -2030,9 +1985,7 @@ func (s *Scene) GetParticleSystemByID(id string) *IParticleSystem {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getphysicsengine
 func (s *Scene) GetPhysicsEngine() *IPhysicsEngine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getPhysicsEngine", args...)
+	retVal := s.p.Call("getPhysicsEngine")
 	return IPhysicsEngineFromJSObject(retVal, s.ctx)
 }
 
@@ -2041,9 +1994,7 @@ func (s *Scene) GetPhysicsEngine() *IPhysicsEngine {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getpointerovermesh
 func (s *Scene) GetPointerOverMesh() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getPointerOverMesh", args...)
+	retVal := s.p.Call("getPointerOverMesh")
 	return AbstractMeshFromJSObject(retVal, s.ctx)
 }
 
@@ -2052,9 +2003,7 @@ func (s *Scene) GetPointerOverMesh() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getpointeroversprite
 func (s *Scene) GetPointerOverSprite() *Sprite {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getPointerOverSprite", args...)
+	retVal := s.p.Call("getPointerOverSprite")
 	return SpriteFromJSObject(retVal, s.ctx)
 }
 
@@ -2063,9 +2012,7 @@ func (s *Scene) GetPointerOverSprite() *Sprite {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getprojectionmatrix
 func (s *Scene) GetProjectionMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getProjectionMatrix", args...)
+	retVal := s.p.Call("getProjectionMatrix")
 	return MatrixFromJSObject(retVal, s.ctx)
 }
 
@@ -2074,9 +2021,7 @@ func (s *Scene) GetProjectionMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getrenderid
 func (s *Scene) GetRenderId() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getRenderId", args...)
+	retVal := s.p.Call("getRenderId")
 	return retVal.Float()
 }
 
@@ -2085,9 +2030,7 @@ func (s *Scene) GetRenderId() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getsceneuniformbuffer
 func (s *Scene) GetSceneUniformBuffer() *UniformBuffer {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getSceneUniformBuffer", args...)
+	retVal := s.p.Call("getSceneUniformBuffer")
 	return UniformBufferFromJSObject(retVal, s.ctx)
 }
 
@@ -2148,9 +2091,7 @@ func (s *Scene) GetSoundByName(name string) *Sound {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getstepid
 func (s *Scene) GetStepId() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getStepId", args...)
+	retVal := s.p.Call("getStepId")
 	return retVal.Float()
 }
 
@@ -2172,9 +2113,7 @@ func (s *Scene) GetTextureByUniqueID(uniqueId float64) *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.scene#gettotalvertices
 func (s *Scene) GetTotalVertices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTotalVertices", args...)
+	retVal := s.p.Call("getTotalVertices")
 	return retVal.Float()
 }
 
@@ -2183,9 +2122,7 @@ func (s *Scene) GetTotalVertices() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.scene#gettransformmatrix
 func (s *Scene) GetTransformMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTransformMatrix", args...)
+	retVal := s.p.Call("getTransformMatrix")
 	return MatrixFromJSObject(retVal, s.ctx)
 }
 
@@ -2231,14 +2168,14 @@ func (s *Scene) GetTransformNodeByUniqueID(uniqueId float64) *TransformNode {
 // GetTransformNodesByID calls the GetTransformNodesByID method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#gettransformnodesbyid
-func (s *Scene) GetTransformNodesByID(id string) *[]TransformNode {
+func (s *Scene) GetTransformNodesByID(id string) []*TransformNode {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, id)
 
 	retVal := s.p.Call("getTransformNodesByID", args...)
-	return []TransformNodeFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // GetUniqueId calls the GetUniqueId method on the Scene object.
@@ -2246,9 +2183,7 @@ func (s *Scene) GetTransformNodesByID(id string) *[]TransformNode {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getuniqueid
 func (s *Scene) GetUniqueId() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getUniqueId", args...)
+	retVal := s.p.Call("getUniqueId")
 	return retVal.Float()
 }
 
@@ -2257,9 +2192,7 @@ func (s *Scene) GetUniqueId() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getviewmatrix
 func (s *Scene) GetViewMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getViewMatrix", args...)
+	retVal := s.p.Call("getViewMatrix")
 	return MatrixFromJSObject(retVal, s.ctx)
 }
 
@@ -2268,9 +2201,7 @@ func (s *Scene) GetViewMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.scene#getwaitingitemscount
 func (s *Scene) GetWaitingItemsCount() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getWaitingItemsCount", args...)
+	retVal := s.p.Call("getWaitingItemsCount")
 	return retVal.Float()
 }
 
@@ -2304,9 +2235,7 @@ func (s *Scene) GetWorldExtends(opts *SceneGetWorldExtendsOpts) js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.scene#incrementrenderid
 func (s *Scene) IncrementRenderId() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("incrementRenderId", args...)
+	s.p.Call("incrementRenderId")
 }
 
 // IsActiveMesh calls the IsActiveMesh method on the Scene object.
@@ -2355,9 +2284,7 @@ func (s *Scene) IsCachedMaterialInvalid(material *Material, effect *Effect, opts
 // https://doc.babylonjs.com/api/classes/babylon.scene#isphysicsenabled
 func (s *Scene) IsPhysicsEnabled() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isPhysicsEnabled", args...)
+	retVal := s.p.Call("isPhysicsEnabled")
 	return retVal.Bool()
 }
 
@@ -2391,9 +2318,7 @@ func (s *Scene) IsPointerCaptured(opts *SceneIsPointerCapturedOpts) bool {
 // https://doc.babylonjs.com/api/classes/babylon.scene#isready
 func (s *Scene) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isReady", args...)
+	retVal := s.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -2546,7 +2471,7 @@ func (s *Scene) MultiPickWithRay(ray *Ray, predicate func(), opts *SceneMultiPic
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, ray.JSObject())
-	args = append(args, predicate)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
 
 	if opts.TrianglePredicate == nil {
 		args = append(args, js.Undefined())
@@ -2771,7 +2696,7 @@ func (s *Scene) RegisterAfterRender(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	s.p.Call("registerAfterRender", args...)
 }
@@ -2783,7 +2708,7 @@ func (s *Scene) RegisterBeforeRender(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	s.p.Call("registerBeforeRender", args...)
 }
@@ -2974,11 +2899,11 @@ func (s *Scene) RemoveMultiMaterial(toRemove *MultiMaterial) float64 {
 // RemoveParticleSystem calls the RemoveParticleSystem method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#removeparticlesystem
-func (s *Scene) RemoveParticleSystem(toRemove *IParticleSystem) float64 {
+func (s *Scene) RemoveParticleSystem(toRemove js.Value) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	args = append(args, toRemove)
 
 	retVal := s.p.Call("removeParticleSystem", args...)
 	return retVal.Float()
@@ -3071,9 +2996,7 @@ func (s *Scene) Render(opts *SceneRenderOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.scene#resetcachedmaterial
 func (s *Scene) ResetCachedMaterial() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("resetCachedMaterial", args...)
+	s.p.Call("resetCachedMaterial")
 }
 
 // ResetLastAnimationTimeFrame calls the ResetLastAnimationTimeFrame method on the Scene object.
@@ -3081,9 +3004,7 @@ func (s *Scene) ResetCachedMaterial() {
 // https://doc.babylonjs.com/api/classes/babylon.scene#resetlastanimationtimeframe
 func (s *Scene) ResetLastAnimationTimeFrame() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("resetLastAnimationTimeFrame", args...)
+	s.p.Call("resetLastAnimationTimeFrame")
 }
 
 // SetActiveCameraByID calls the SetActiveCameraByID method on the Scene object.
@@ -3117,9 +3038,7 @@ func (s *Scene) SetActiveCameraByName(name string) *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.scene#setdefaultcandidateproviders
 func (s *Scene) SetDefaultCandidateProviders() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("setDefaultCandidateProviders", args...)
+	s.p.Call("setDefaultCandidateProviders")
 }
 
 // SetPointerOverMesh calls the SetPointerOverMesh method on the Scene object.
@@ -3264,7 +3183,7 @@ func (s *Scene) SetTransformMatrix(viewL *Matrix, projectionL *Matrix, opts *Sce
 
 // SceneSimulatePointerDownOpts contains optional parameters for Scene.SimulatePointerDown.
 type SceneSimulatePointerDownOpts struct {
-	PointerEventInit *PointerEventInit
+	PointerEventInit js.Value
 }
 
 // SimulatePointerDown calls the SimulatePointerDown method on the Scene object.
@@ -3282,7 +3201,7 @@ func (s *Scene) SimulatePointerDown(pickResult *PickingInfo, opts *SceneSimulate
 	if opts.PointerEventInit == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.PointerEventInit.JSObject())
+		args = append(args, opts.PointerEventInit)
 	}
 
 	retVal := s.p.Call("simulatePointerDown", args...)
@@ -3291,7 +3210,7 @@ func (s *Scene) SimulatePointerDown(pickResult *PickingInfo, opts *SceneSimulate
 
 // SceneSimulatePointerMoveOpts contains optional parameters for Scene.SimulatePointerMove.
 type SceneSimulatePointerMoveOpts struct {
-	PointerEventInit *PointerEventInit
+	PointerEventInit js.Value
 }
 
 // SimulatePointerMove calls the SimulatePointerMove method on the Scene object.
@@ -3309,7 +3228,7 @@ func (s *Scene) SimulatePointerMove(pickResult *PickingInfo, opts *SceneSimulate
 	if opts.PointerEventInit == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.PointerEventInit.JSObject())
+		args = append(args, opts.PointerEventInit)
 	}
 
 	retVal := s.p.Call("simulatePointerMove", args...)
@@ -3318,7 +3237,7 @@ func (s *Scene) SimulatePointerMove(pickResult *PickingInfo, opts *SceneSimulate
 
 // SceneSimulatePointerUpOpts contains optional parameters for Scene.SimulatePointerUp.
 type SceneSimulatePointerUpOpts struct {
-	PointerEventInit *PointerEventInit
+	PointerEventInit js.Value
 	DoubleTap        *bool
 }
 
@@ -3337,7 +3256,7 @@ func (s *Scene) SimulatePointerUp(pickResult *PickingInfo, opts *SceneSimulatePo
 	if opts.PointerEventInit == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.PointerEventInit.JSObject())
+		args = append(args, opts.PointerEventInit)
 	}
 	if opts.DoubleTap == nil {
 		args = append(args, js.Undefined())
@@ -3354,9 +3273,7 @@ func (s *Scene) SimulatePointerUp(pickResult *PickingInfo, opts *SceneSimulatePo
 // https://doc.babylonjs.com/api/classes/babylon.scene#sortlightsbypriority
 func (s *Scene) SortLightsByPriority() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("sortLightsByPriority", args...)
+	s.p.Call("sortLightsByPriority")
 }
 
 // StopAllAnimations calls the StopAllAnimations method on the Scene object.
@@ -3364,9 +3281,7 @@ func (s *Scene) SortLightsByPriority() {
 // https://doc.babylonjs.com/api/classes/babylon.scene#stopallanimations
 func (s *Scene) StopAllAnimations() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("stopAllAnimations", args...)
+	s.p.Call("stopAllAnimations")
 }
 
 // SceneStopAnimationOpts contains optional parameters for Scene.StopAnimation.
@@ -3432,9 +3347,7 @@ func (s *Scene) SwitchActiveCamera(newCamera *Camera, opts *SceneSwitchActiveCam
 // https://doc.babylonjs.com/api/classes/babylon.scene#unfreezeactivemeshes
 func (s *Scene) UnfreezeActiveMeshes() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("unfreezeActiveMeshes", args...)
+	retVal := s.p.Call("unfreezeActiveMeshes")
 	return SceneFromJSObject(retVal, s.ctx)
 }
 
@@ -3443,9 +3356,7 @@ func (s *Scene) UnfreezeActiveMeshes() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.scene#unfreezematerials
 func (s *Scene) UnfreezeMaterials() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("unfreezeMaterials", args...)
+	s.p.Call("unfreezeMaterials")
 }
 
 // UnregisterAfterRender calls the UnregisterAfterRender method on the Scene object.
@@ -3455,7 +3366,7 @@ func (s *Scene) UnregisterAfterRender(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	s.p.Call("unregisterAfterRender", args...)
 }
@@ -3467,7 +3378,7 @@ func (s *Scene) UnregisterBeforeRender(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	s.p.Call("unregisterBeforeRender", args...)
 }
@@ -3499,11 +3410,10 @@ func (s *Scene) UpdateTransformMatrix(opts *SceneUpdateTransformMatrixOpts) {
 // WhenReadyAsync calls the WhenReadyAsync method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#whenreadyasync
-func (s *Scene) WhenReadyAsync() {
+func (s *Scene) WhenReadyAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("whenReadyAsync", args...)
+	retVal := s.p.Call("whenReadyAsync")
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 /*
@@ -3608,7 +3518,7 @@ func (s *Scene) SetActiveParticlesPerfCounter(activeParticlesPerfCounter *PerfCo
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#aftercamerarender
 func (s *Scene) AfterCameraRender(afterCameraRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(afterCameraRender)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {afterCameraRender(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -3616,7 +3526,7 @@ func (s *Scene) AfterCameraRender(afterCameraRender func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#aftercamerarender
 func (s *Scene) SetAfterCameraRender(afterCameraRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(afterCameraRender)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {afterCameraRender(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -3624,7 +3534,7 @@ func (s *Scene) SetAfterCameraRender(afterCameraRender func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#afterrender
 func (s *Scene) AfterRender(afterRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(afterRender)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {afterRender(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -3632,7 +3542,7 @@ func (s *Scene) AfterRender(afterRender func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#afterrender
 func (s *Scene) SetAfterRender(afterRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(afterRender)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {afterRender(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -3768,7 +3678,7 @@ func (s *Scene) SetAudioEnabled(audioEnabled bool) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#audiolistenerpositionprovider
 func (s *Scene) AudioListenerPositionProvider(audioListenerPositionProvider func()) *Scene {
-	p := ba.ctx.Get("Scene").New(audioListenerPositionProvider)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {audioListenerPositionProvider(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -3776,7 +3686,7 @@ func (s *Scene) AudioListenerPositionProvider(audioListenerPositionProvider func
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#audiolistenerpositionprovider
 func (s *Scene) SetAudioListenerPositionProvider(audioListenerPositionProvider func()) *Scene {
-	p := ba.ctx.Get("Scene").New(audioListenerPositionProvider)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {audioListenerPositionProvider(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -3832,7 +3742,7 @@ func (s *Scene) SetAutoClearDepthAndStencil(autoClearDepthAndStencil bool) *Scen
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beforecamerarender
 func (s *Scene) BeforeCameraRender(beforeCameraRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(beforeCameraRender)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {beforeCameraRender(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -3840,7 +3750,7 @@ func (s *Scene) BeforeCameraRender(beforeCameraRender func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beforecamerarender
 func (s *Scene) SetBeforeCameraRender(beforeCameraRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(beforeCameraRender)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {beforeCameraRender(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -3848,7 +3758,7 @@ func (s *Scene) SetBeforeCameraRender(beforeCameraRender func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beforerender
 func (s *Scene) BeforeRender(beforeRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(beforeRender)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {beforeRender(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -3856,7 +3766,7 @@ func (s *Scene) BeforeRender(beforeRender func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beforerender
 func (s *Scene) SetBeforeRender(beforeRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(beforeRender)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {beforeRender(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4040,7 +3950,7 @@ func (s *Scene) SetConstantlyUpdateMeshUnderPointer(constantlyUpdateMeshUnderPoi
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#customlodselector
 func (s *Scene) CustomLODSelector(customLODSelector func()) *Scene {
-	p := ba.ctx.Get("Scene").New(customLODSelector)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customLODSelector(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4048,7 +3958,7 @@ func (s *Scene) CustomLODSelector(customLODSelector func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#customlodselector
 func (s *Scene) SetCustomLODSelector(customLODSelector func()) *Scene {
-	p := ba.ctx.Get("Scene").New(customLODSelector)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customLODSelector(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4231,16 +4141,16 @@ func (s *Scene) SetDumpNextRenderTargets(dumpNextRenderTargets bool) *Scene {
 // EffectLayers returns the EffectLayers property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#effectlayers
-func (s *Scene) EffectLayers(effectLayers []EffectLayer) *Scene {
-	p := ba.ctx.Get("Scene").New(effectLayers.JSObject())
+func (s *Scene) EffectLayers(effectLayers []*EffectLayer) *Scene {
+	p := ba.ctx.Get("Scene").New(effectLayers)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SetEffectLayers sets the EffectLayers property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#effectlayers
-func (s *Scene) SetEffectLayers(effectLayers []EffectLayer) *Scene {
-	p := ba.ctx.Get("Scene").New(effectLayers.JSObject())
+func (s *Scene) SetEffectLayers(effectLayers []*EffectLayer) *Scene {
+	p := ba.ctx.Get("Scene").New(effectLayers)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4584,7 +4494,7 @@ func (s *Scene) SetGeometryBufferRenderer(geometryBufferRenderer *GeometryBuffer
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivemeshcandidates
 func (s *Scene) GetActiveMeshCandidates(getActiveMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(getActiveMeshCandidates)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getActiveMeshCandidates(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4592,7 +4502,7 @@ func (s *Scene) GetActiveMeshCandidates(getActiveMeshCandidates func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivemeshcandidates
 func (s *Scene) SetGetActiveMeshCandidates(getActiveMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(getActiveMeshCandidates)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getActiveMeshCandidates(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4600,7 +4510,7 @@ func (s *Scene) SetGetActiveMeshCandidates(getActiveMeshCandidates func()) *Scen
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivesubmeshcandidates
 func (s *Scene) GetActiveSubMeshCandidates(getActiveSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(getActiveSubMeshCandidates)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getActiveSubMeshCandidates(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4608,7 +4518,7 @@ func (s *Scene) GetActiveSubMeshCandidates(getActiveSubMeshCandidates func()) *S
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivesubmeshcandidates
 func (s *Scene) SetGetActiveSubMeshCandidates(getActiveSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(getActiveSubMeshCandidates)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getActiveSubMeshCandidates(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4616,7 +4526,7 @@ func (s *Scene) SetGetActiveSubMeshCandidates(getActiveSubMeshCandidates func())
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getcollidingsubmeshcandidates
 func (s *Scene) GetCollidingSubMeshCandidates(getCollidingSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(getCollidingSubMeshCandidates)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getCollidingSubMeshCandidates(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4624,7 +4534,7 @@ func (s *Scene) GetCollidingSubMeshCandidates(getCollidingSubMeshCandidates func
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getcollidingsubmeshcandidates
 func (s *Scene) SetGetCollidingSubMeshCandidates(getCollidingSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(getCollidingSubMeshCandidates)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getCollidingSubMeshCandidates(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4632,7 +4542,7 @@ func (s *Scene) SetGetCollidingSubMeshCandidates(getCollidingSubMeshCandidates f
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getdeterministicframetime
 func (s *Scene) GetDeterministicFrameTime(getDeterministicFrameTime func()) *Scene {
-	p := ba.ctx.Get("Scene").New(getDeterministicFrameTime)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getDeterministicFrameTime(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4640,7 +4550,7 @@ func (s *Scene) GetDeterministicFrameTime(getDeterministicFrameTime func()) *Sce
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getdeterministicframetime
 func (s *Scene) SetGetDeterministicFrameTime(getDeterministicFrameTime func()) *Scene {
-	p := ba.ctx.Get("Scene").New(getDeterministicFrameTime)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getDeterministicFrameTime(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4648,7 +4558,7 @@ func (s *Scene) SetGetDeterministicFrameTime(getDeterministicFrameTime func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getintersectingsubmeshcandidates
 func (s *Scene) GetIntersectingSubMeshCandidates(getIntersectingSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(getIntersectingSubMeshCandidates)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getIntersectingSubMeshCandidates(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4656,7 +4566,7 @@ func (s *Scene) GetIntersectingSubMeshCandidates(getIntersectingSubMeshCandidate
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getintersectingsubmeshcandidates
 func (s *Scene) SetGetIntersectingSubMeshCandidates(getIntersectingSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(getIntersectingSubMeshCandidates)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getIntersectingSubMeshCandidates(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -4775,32 +4685,32 @@ func (s *Scene) SetIsLoading(isLoading bool) *Scene {
 // Layers returns the Layers property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#layers
-func (s *Scene) Layers(layers []Layer) *Scene {
-	p := ba.ctx.Get("Scene").New(layers.JSObject())
+func (s *Scene) Layers(layers []*Layer) *Scene {
+	p := ba.ctx.Get("Scene").New(layers)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SetLayers sets the Layers property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#layers
-func (s *Scene) SetLayers(layers []Layer) *Scene {
-	p := ba.ctx.Get("Scene").New(layers.JSObject())
+func (s *Scene) SetLayers(layers []*Layer) *Scene {
+	p := ba.ctx.Get("Scene").New(layers)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // LensFlareSystems returns the LensFlareSystems property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#lensflaresystems
-func (s *Scene) LensFlareSystems(lensFlareSystems []LensFlareSystem) *Scene {
-	p := ba.ctx.Get("Scene").New(lensFlareSystems.JSObject())
+func (s *Scene) LensFlareSystems(lensFlareSystems []*LensFlareSystem) *Scene {
+	p := ba.ctx.Get("Scene").New(lensFlareSystems)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SetLensFlareSystems sets the LensFlareSystems property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#lensflaresystems
-func (s *Scene) SetLensFlareSystems(lensFlareSystems []LensFlareSystem) *Scene {
-	p := ba.ctx.Get("Scene").New(lensFlareSystems.JSObject())
+func (s *Scene) SetLensFlareSystems(lensFlareSystems []*LensFlareSystem) *Scene {
+	p := ba.ctx.Get("Scene").New(lensFlareSystems)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5464,7 +5374,7 @@ func (s *Scene) SetOnDataLoadedObservable(onDataLoadedObservable *Observable) *S
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ondispose
 func (s *Scene) OnDispose(onDispose func()) *Scene {
-	p := ba.ctx.Get("Scene").New(onDispose)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5472,7 +5382,7 @@ func (s *Scene) OnDispose(onDispose func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ondispose
 func (s *Scene) SetOnDispose(onDispose func()) *Scene {
-	p := ba.ctx.Get("Scene").New(onDispose)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5720,7 +5630,7 @@ func (s *Scene) SetOnNewTransformNodeAddedObservable(onNewTransformNodeAddedObse
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerdown
 func (s *Scene) OnPointerDown(onPointerDown func()) *Scene {
-	p := ba.ctx.Get("Scene").New(onPointerDown)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerDown(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5728,7 +5638,7 @@ func (s *Scene) OnPointerDown(onPointerDown func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerdown
 func (s *Scene) SetOnPointerDown(onPointerDown func()) *Scene {
-	p := ba.ctx.Get("Scene").New(onPointerDown)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerDown(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5736,7 +5646,7 @@ func (s *Scene) SetOnPointerDown(onPointerDown func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointermove
 func (s *Scene) OnPointerMove(onPointerMove func()) *Scene {
-	p := ba.ctx.Get("Scene").New(onPointerMove)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerMove(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5744,7 +5654,7 @@ func (s *Scene) OnPointerMove(onPointerMove func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointermove
 func (s *Scene) SetOnPointerMove(onPointerMove func()) *Scene {
-	p := ba.ctx.Get("Scene").New(onPointerMove)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerMove(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5768,7 +5678,7 @@ func (s *Scene) SetOnPointerObservable(onPointerObservable *Observable) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerpick
 func (s *Scene) OnPointerPick(onPointerPick func()) *Scene {
-	p := ba.ctx.Get("Scene").New(onPointerPick)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerPick(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5776,7 +5686,7 @@ func (s *Scene) OnPointerPick(onPointerPick func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerpick
 func (s *Scene) SetOnPointerPick(onPointerPick func()) *Scene {
-	p := ba.ctx.Get("Scene").New(onPointerPick)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerPick(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5784,7 +5694,7 @@ func (s *Scene) SetOnPointerPick(onPointerPick func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerup
 func (s *Scene) OnPointerUp(onPointerUp func()) *Scene {
-	p := ba.ctx.Get("Scene").New(onPointerUp)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerUp(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5792,7 +5702,7 @@ func (s *Scene) OnPointerUp(onPointerUp func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerup
 func (s *Scene) SetOnPointerUp(onPointerUp func()) *Scene {
-	p := ba.ctx.Get("Scene").New(onPointerUp)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerUp(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5895,16 +5805,16 @@ func (s *Scene) SetOnTransformNodeRemovedObservable(onTransformNodeRemovedObserv
 // ParticleSystems returns the ParticleSystems property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#particlesystems
-func (s *Scene) ParticleSystems(particleSystems *IParticleSystem) *Scene {
-	p := ba.ctx.Get("Scene").New(particleSystems.JSObject())
+func (s *Scene) ParticleSystems(particleSystems js.Value) *Scene {
+	p := ba.ctx.Get("Scene").New(particleSystems)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SetParticleSystems sets the ParticleSystems property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#particlesystems
-func (s *Scene) SetParticleSystems(particleSystems *IParticleSystem) *Scene {
-	p := ba.ctx.Get("Scene").New(particleSystems.JSObject())
+func (s *Scene) SetParticleSystems(particleSystems js.Value) *Scene {
+	p := ba.ctx.Get("Scene").New(particleSystems)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5928,7 +5838,7 @@ func (s *Scene) SetParticlesEnabled(particlesEnabled bool) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointerdownpredicate
 func (s *Scene) PointerDownPredicate(pointerDownPredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(pointerDownPredicate)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownPredicate(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5936,7 +5846,7 @@ func (s *Scene) PointerDownPredicate(pointerDownPredicate func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointerdownpredicate
 func (s *Scene) SetPointerDownPredicate(pointerDownPredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(pointerDownPredicate)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownPredicate(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5944,7 +5854,7 @@ func (s *Scene) SetPointerDownPredicate(pointerDownPredicate func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointermovepredicate
 func (s *Scene) PointerMovePredicate(pointerMovePredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(pointerMovePredicate)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerMovePredicate(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5952,7 +5862,7 @@ func (s *Scene) PointerMovePredicate(pointerMovePredicate func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointermovepredicate
 func (s *Scene) SetPointerMovePredicate(pointerMovePredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(pointerMovePredicate)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerMovePredicate(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5960,7 +5870,7 @@ func (s *Scene) SetPointerMovePredicate(pointerMovePredicate func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointeruppredicate
 func (s *Scene) PointerUpPredicate(pointerUpPredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(pointerUpPredicate)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpPredicate(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -5968,7 +5878,7 @@ func (s *Scene) PointerUpPredicate(pointerUpPredicate func()) *Scene {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointeruppredicate
 func (s *Scene) SetPointerUpPredicate(pointerUpPredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(pointerUpPredicate)
+	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpPredicate(); return nil}))
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -6119,16 +6029,16 @@ func (s *Scene) SetProbesEnabled(probesEnabled bool) *Scene {
 // ProceduralTextures returns the ProceduralTextures property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#proceduraltextures
-func (s *Scene) ProceduralTextures(proceduralTextures []ProceduralTexture) *Scene {
-	p := ba.ctx.Get("Scene").New(proceduralTextures.JSObject())
+func (s *Scene) ProceduralTextures(proceduralTextures []*ProceduralTexture) *Scene {
+	p := ba.ctx.Get("Scene").New(proceduralTextures)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SetProceduralTextures sets the ProceduralTextures property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#proceduraltextures
-func (s *Scene) SetProceduralTextures(proceduralTextures []ProceduralTexture) *Scene {
-	p := ba.ctx.Get("Scene").New(proceduralTextures.JSObject())
+func (s *Scene) SetProceduralTextures(proceduralTextures []*ProceduralTexture) *Scene {
+	p := ba.ctx.Get("Scene").New(proceduralTextures)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -6151,16 +6061,16 @@ func (s *Scene) SetProceduralTexturesEnabled(proceduralTexturesEnabled bool) *Sc
 // ReflectionProbes returns the ReflectionProbes property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#reflectionprobes
-func (s *Scene) ReflectionProbes(reflectionProbes []ReflectionProbe) *Scene {
-	p := ba.ctx.Get("Scene").New(reflectionProbes.JSObject())
+func (s *Scene) ReflectionProbes(reflectionProbes []*ReflectionProbe) *Scene {
+	p := ba.ctx.Get("Scene").New(reflectionProbes)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SetReflectionProbes sets the ReflectionProbes property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#reflectionprobes
-func (s *Scene) SetReflectionProbes(reflectionProbes []ReflectionProbe) *Scene {
-	p := ba.ctx.Get("Scene").New(reflectionProbes.JSObject())
+func (s *Scene) SetReflectionProbes(reflectionProbes []*ReflectionProbe) *Scene {
+	p := ba.ctx.Get("Scene").New(reflectionProbes)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
@@ -6311,48 +6221,48 @@ func (s *Scene) SetSkeletonsEnabled(skeletonsEnabled bool) *Scene {
 // SoundTracks returns the SoundTracks property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#soundtracks
-func (s *Scene) SoundTracks(soundTracks []SoundTrack) *Scene {
-	p := ba.ctx.Get("Scene").New(soundTracks.JSObject())
+func (s *Scene) SoundTracks(soundTracks []*SoundTrack) *Scene {
+	p := ba.ctx.Get("Scene").New(soundTracks)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SetSoundTracks sets the SoundTracks property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#soundtracks
-func (s *Scene) SetSoundTracks(soundTracks []SoundTrack) *Scene {
-	p := ba.ctx.Get("Scene").New(soundTracks.JSObject())
+func (s *Scene) SetSoundTracks(soundTracks []*SoundTrack) *Scene {
+	p := ba.ctx.Get("Scene").New(soundTracks)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // Sounds returns the Sounds property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#sounds
-func (s *Scene) Sounds(sounds []Sound) *Scene {
-	p := ba.ctx.Get("Scene").New(sounds.JSObject())
+func (s *Scene) Sounds(sounds []*Sound) *Scene {
+	p := ba.ctx.Get("Scene").New(sounds)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SetSounds sets the Sounds property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#sounds
-func (s *Scene) SetSounds(sounds []Sound) *Scene {
-	p := ba.ctx.Get("Scene").New(sounds.JSObject())
+func (s *Scene) SetSounds(sounds []*Sound) *Scene {
+	p := ba.ctx.Get("Scene").New(sounds)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SpriteManagers returns the SpriteManagers property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#spritemanagers
-func (s *Scene) SpriteManagers(spriteManagers []ISpriteManager) *Scene {
-	p := ba.ctx.Get("Scene").New(spriteManagers.JSObject())
+func (s *Scene) SpriteManagers(spriteManagers []*ISpriteManager) *Scene {
+	p := ba.ctx.Get("Scene").New(spriteManagers)
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SetSpriteManagers sets the SpriteManagers property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#spritemanagers
-func (s *Scene) SetSpriteManagers(spriteManagers []ISpriteManager) *Scene {
-	p := ba.ctx.Get("Scene").New(spriteManagers.JSObject())
+func (s *Scene) SetSpriteManagers(spriteManagers []*ISpriteManager) *Scene {
+	p := ba.ctx.Get("Scene").New(spriteManagers)
 	return SceneFromJSObject(p, ba.ctx)
 }
 

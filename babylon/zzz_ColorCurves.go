@@ -30,6 +30,15 @@ func ColorCurvesFromJSObject(p js.Value, ctx js.Value) *ColorCurves {
 	return &ColorCurves{p: p, ctx: ctx}
 }
 
+// ColorCurvesArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ColorCurvesArrayToJSArray(array []*ColorCurves) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ColorCurvesBindOpts contains optional parameters for ColorCurves.Bind.
 type ColorCurvesBindOpts struct {
 	PositiveUniform *string
@@ -74,9 +83,7 @@ func (c *ColorCurves) Bind(colorCurves *ColorCurves, effect *Effect, opts *Color
 // https://doc.babylonjs.com/api/classes/babylon.colorcurves#clone
 func (c *ColorCurves) Clone() *ColorCurves {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("clone", args...)
+	retVal := c.p.Call("clone")
 	return ColorCurvesFromJSObject(retVal, c.ctx)
 }
 
@@ -85,9 +92,7 @@ func (c *ColorCurves) Clone() *ColorCurves {
 // https://doc.babylonjs.com/api/classes/babylon.colorcurves#getclassname
 func (c *ColorCurves) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -121,9 +126,7 @@ func (c *ColorCurves) PrepareUniforms(uniformsList string) {
 // https://doc.babylonjs.com/api/classes/babylon.colorcurves#serialize
 func (c *ColorCurves) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 

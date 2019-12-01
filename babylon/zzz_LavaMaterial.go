@@ -27,6 +27,15 @@ func LavaMaterialFromJSObject(p js.Value, ctx js.Value) *LavaMaterial {
 	return &LavaMaterial{p: p, ctx: ctx}
 }
 
+// LavaMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LavaMaterialArrayToJSArray(array []*LavaMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLavaMaterial returns a new LavaMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial
@@ -225,7 +234,7 @@ type LavaMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the LavaMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#forcecompilationasync
-func (l *LavaMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *LavaMaterialForceCompilationAsyncOpts) {
+func (l *LavaMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *LavaMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &LavaMaterialForceCompilationAsyncOpts{}
 	}
@@ -240,7 +249,8 @@ func (l *LavaMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *LavaMater
 		args = append(args, opts.Options)
 	}
 
-	l.p.Call("forceCompilationAsync", args...)
+	retVal := l.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, l.ctx)
 }
 
 // Freeze calls the Freeze method on the LavaMaterial object.
@@ -248,9 +258,7 @@ func (l *LavaMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *LavaMater
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#freeze
 func (l *LavaMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("freeze", args...)
+	l.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the LavaMaterial object.
@@ -258,9 +266,7 @@ func (l *LavaMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getactivetextures
 func (l *LavaMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getActiveTextures", args...)
+	retVal := l.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, l.ctx)
 }
 
@@ -269,9 +275,7 @@ func (l *LavaMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getalphatesttexture
 func (l *LavaMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getAlphaTestTexture", args...)
+	retVal := l.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, l.ctx)
 }
 
@@ -280,9 +284,7 @@ func (l *LavaMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getanimatables
 func (l *LavaMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getAnimatables", args...)
+	retVal := l.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -291,9 +293,7 @@ func (l *LavaMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getbindedmeshes
 func (l *LavaMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getBindedMeshes", args...)
+	retVal := l.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, l.ctx)
 }
 
@@ -302,9 +302,7 @@ func (l *LavaMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getclassname
 func (l *LavaMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getClassName", args...)
+	retVal := l.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -313,9 +311,7 @@ func (l *LavaMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#geteffect
 func (l *LavaMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getEffect", args...)
+	retVal := l.p.Call("getEffect")
 	return EffectFromJSObject(retVal, l.ctx)
 }
 
@@ -324,9 +320,7 @@ func (l *LavaMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getscene
 func (l *LavaMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getScene", args...)
+	retVal := l.p.Call("getScene")
 	return SceneFromJSObject(retVal, l.ctx)
 }
 
@@ -419,9 +413,7 @@ func (l *LavaMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#markdirty
 func (l *LavaMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("markDirty", args...)
+	l.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the LavaMaterial object.
@@ -429,9 +421,7 @@ func (l *LavaMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#needalphablending
 func (l *LavaMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("needAlphaBlending", args...)
+	retVal := l.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -453,9 +443,7 @@ func (l *LavaMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#needalphatesting
 func (l *LavaMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("needAlphaTesting", args...)
+	retVal := l.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -479,9 +467,7 @@ func (l *LavaMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#serialize
 func (l *LavaMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("serialize", args...)
+	retVal := l.p.Call("serialize")
 	return retVal
 }
 
@@ -515,9 +501,7 @@ func (l *LavaMaterial) ToString(opts *LavaMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#unbind
 func (l *LavaMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("unbind", args...)
+	l.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the LavaMaterial object.
@@ -525,9 +509,7 @@ func (l *LavaMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#unfreeze
 func (l *LavaMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("unfreeze", args...)
+	l.p.Call("unfreeze")
 }
 
 /*
@@ -599,16 +581,16 @@ func (l *LavaMaterial) SetAlphaMode(alphaMode float64) *LavaMaterial {
 // Animations returns the Animations property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#animations
-func (l *LavaMaterial) Animations(animations []Animation) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(animations.JSObject())
+func (l *LavaMaterial) Animations(animations []*Animation) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(animations)
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#animations
-func (l *LavaMaterial) SetAnimations(animations []Animation) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(animations.JSObject())
+func (l *LavaMaterial) SetAnimations(animations []*Animation) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(animations)
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -904,7 +886,7 @@ func (l *LavaMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *LavaMateri
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getrendertargettextures
 func (l *LavaMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("LavaMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -912,7 +894,7 @@ func (l *LavaMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getrendertargettextures
 func (l *LavaMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("LavaMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1176,7 +1158,7 @@ func (l *LavaMaterial) SetNoiseTexture(noiseTexture *BaseTexture) *LavaMaterial 
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onbind
 func (l *LavaMaterial) OnBind(onBind func()) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(onBind)
+	p := ba.ctx.Get("LavaMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1184,7 +1166,7 @@ func (l *LavaMaterial) OnBind(onBind func()) *LavaMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onbind
 func (l *LavaMaterial) SetOnBind(onBind func()) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(onBind)
+	p := ba.ctx.Get("LavaMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1208,7 +1190,7 @@ func (l *LavaMaterial) SetOnBindObservable(onBindObservable *Observable) *LavaMa
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#oncompiled
 func (l *LavaMaterial) OnCompiled(onCompiled func()) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(onCompiled)
+	p := ba.ctx.Get("LavaMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1216,7 +1198,7 @@ func (l *LavaMaterial) OnCompiled(onCompiled func()) *LavaMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#oncompiled
 func (l *LavaMaterial) SetOnCompiled(onCompiled func()) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(onCompiled)
+	p := ba.ctx.Get("LavaMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1224,7 +1206,7 @@ func (l *LavaMaterial) SetOnCompiled(onCompiled func()) *LavaMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#ondispose
 func (l *LavaMaterial) OnDispose(onDispose func()) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(onDispose)
+	p := ba.ctx.Get("LavaMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1232,7 +1214,7 @@ func (l *LavaMaterial) OnDispose(onDispose func()) *LavaMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#ondispose
 func (l *LavaMaterial) SetOnDispose(onDispose func()) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(onDispose)
+	p := ba.ctx.Get("LavaMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1256,7 +1238,7 @@ func (l *LavaMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onerror
 func (l *LavaMaterial) OnError(onError func()) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(onError)
+	p := ba.ctx.Get("LavaMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1264,7 +1246,7 @@ func (l *LavaMaterial) OnError(onError func()) *LavaMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onerror
 func (l *LavaMaterial) SetOnError(onError func()) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(onError)
+	p := ba.ctx.Get("LavaMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 

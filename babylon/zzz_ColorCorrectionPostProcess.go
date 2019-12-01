@@ -32,6 +32,15 @@ func ColorCorrectionPostProcessFromJSObject(p js.Value, ctx js.Value) *ColorCorr
 	return &ColorCorrectionPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ColorCorrectionPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ColorCorrectionPostProcessArrayToJSArray(array []*ColorCorrectionPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewColorCorrectionPostProcessOpts contains optional parameters for NewColorCorrectionPostProcess.
 type NewColorCorrectionPostProcessOpts struct {
 	SamplingMode *float64
@@ -112,9 +121,7 @@ func (c *ColorCorrectionPostProcess) Activate(camera *Camera, opts *ColorCorrect
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#apply
 func (c *ColorCorrectionPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("apply", args...)
+	retVal := c.p.Call("apply")
 	return EffectFromJSObject(retVal, c.ctx)
 }
 
@@ -147,9 +154,7 @@ func (c *ColorCorrectionPostProcess) Dispose(opts *ColorCorrectionPostProcessDis
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#getcamera
 func (c *ColorCorrectionPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getCamera", args...)
+	retVal := c.p.Call("getCamera")
 	return CameraFromJSObject(retVal, c.ctx)
 }
 
@@ -158,9 +163,7 @@ func (c *ColorCorrectionPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#getclassname
 func (c *ColorCorrectionPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -169,9 +172,7 @@ func (c *ColorCorrectionPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#geteffect
 func (c *ColorCorrectionPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffect", args...)
+	retVal := c.p.Call("getEffect")
 	return EffectFromJSObject(retVal, c.ctx)
 }
 
@@ -180,9 +181,7 @@ func (c *ColorCorrectionPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#geteffectname
 func (c *ColorCorrectionPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffectName", args...)
+	retVal := c.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -191,9 +190,7 @@ func (c *ColorCorrectionPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#getengine
 func (c *ColorCorrectionPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEngine", args...)
+	retVal := c.p.Call("getEngine")
 	return EngineFromJSObject(retVal, c.ctx)
 }
 
@@ -202,9 +199,7 @@ func (c *ColorCorrectionPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#isready
 func (c *ColorCorrectionPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReady", args...)
+	retVal := c.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -213,9 +208,7 @@ func (c *ColorCorrectionPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#isreusable
 func (c *ColorCorrectionPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReusable", args...)
+	retVal := c.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -224,9 +217,7 @@ func (c *ColorCorrectionPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#marktexturedirty
 func (c *ColorCorrectionPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("markTextureDirty", args...)
+	c.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the ColorCorrectionPostProcess object.
@@ -301,9 +292,7 @@ func (c *ColorCorrectionPostProcess) UpdateEffect(opts *ColorCorrectionPostProce
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#useownoutput
 func (c *ColorCorrectionPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("useOwnOutput", args...)
+	c.p.Call("useOwnOutput")
 }
 
 /*
@@ -552,7 +541,7 @@ func (c *ColorCorrectionPostProcess) SetName(name string) *ColorCorrectionPostPr
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onactivate
 func (c *ColorCorrectionPostProcess) OnActivate(onActivate func()) *ColorCorrectionPostProcess {
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onActivate)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -560,7 +549,7 @@ func (c *ColorCorrectionPostProcess) OnActivate(onActivate func()) *ColorCorrect
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onactivate
 func (c *ColorCorrectionPostProcess) SetOnActivate(onActivate func()) *ColorCorrectionPostProcess {
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onActivate)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -584,7 +573,7 @@ func (c *ColorCorrectionPostProcess) SetOnActivateObservable(onActivateObservabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onafterrender
 func (c *ColorCorrectionPostProcess) OnAfterRender(onAfterRender func()) *ColorCorrectionPostProcess {
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -592,7 +581,7 @@ func (c *ColorCorrectionPostProcess) OnAfterRender(onAfterRender func()) *ColorC
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onafterrender
 func (c *ColorCorrectionPostProcess) SetOnAfterRender(onAfterRender func()) *ColorCorrectionPostProcess {
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -616,7 +605,7 @@ func (c *ColorCorrectionPostProcess) SetOnAfterRenderObservable(onAfterRenderObs
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onapply
 func (c *ColorCorrectionPostProcess) OnApply(onApply func()) *ColorCorrectionPostProcess {
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onApply)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -624,7 +613,7 @@ func (c *ColorCorrectionPostProcess) OnApply(onApply func()) *ColorCorrectionPos
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onapply
 func (c *ColorCorrectionPostProcess) SetOnApply(onApply func()) *ColorCorrectionPostProcess {
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onApply)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -648,7 +637,7 @@ func (c *ColorCorrectionPostProcess) SetOnApplyObservable(onApplyObservable *Obs
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onbeforerender
 func (c *ColorCorrectionPostProcess) OnBeforeRender(onBeforeRender func()) *ColorCorrectionPostProcess {
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -656,7 +645,7 @@ func (c *ColorCorrectionPostProcess) OnBeforeRender(onBeforeRender func()) *Colo
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onbeforerender
 func (c *ColorCorrectionPostProcess) SetOnBeforeRender(onBeforeRender func()) *ColorCorrectionPostProcess {
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -680,7 +669,7 @@ func (c *ColorCorrectionPostProcess) SetOnBeforeRenderObservable(onBeforeRenderO
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onsizechanged
 func (c *ColorCorrectionPostProcess) OnSizeChanged(onSizeChanged func()) *ColorCorrectionPostProcess {
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -688,7 +677,7 @@ func (c *ColorCorrectionPostProcess) OnSizeChanged(onSizeChanged func()) *ColorC
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onsizechanged
 func (c *ColorCorrectionPostProcess) SetOnSizeChanged(onSizeChanged func()) *ColorCorrectionPostProcess {
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func TiledPlaneBuilderFromJSObject(p js.Value, ctx js.Value) *TiledPlaneBuilder 
 	return &TiledPlaneBuilder{p: p, ctx: ctx}
 }
 
+// TiledPlaneBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TiledPlaneBuilderArrayToJSArray(array []*TiledPlaneBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // TiledPlaneBuilderCreateTiledPlaneOpts contains optional parameters for TiledPlaneBuilder.CreateTiledPlane.
 type TiledPlaneBuilderCreateTiledPlaneOpts struct {
 	Scene *Scene

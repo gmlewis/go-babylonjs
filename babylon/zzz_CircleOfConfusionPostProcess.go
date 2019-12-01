@@ -27,6 +27,15 @@ func CircleOfConfusionPostProcessFromJSObject(p js.Value, ctx js.Value) *CircleO
 	return &CircleOfConfusionPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CircleOfConfusionPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CircleOfConfusionPostProcessArrayToJSArray(array []*CircleOfConfusionPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCircleOfConfusionPostProcessOpts contains optional parameters for NewCircleOfConfusionPostProcess.
 type NewCircleOfConfusionPostProcessOpts struct {
 	SamplingMode     *float64
@@ -119,9 +128,7 @@ func (c *CircleOfConfusionPostProcess) Activate(camera *Camera, opts *CircleOfCo
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#apply
 func (c *CircleOfConfusionPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("apply", args...)
+	retVal := c.p.Call("apply")
 	return EffectFromJSObject(retVal, c.ctx)
 }
 
@@ -154,9 +161,7 @@ func (c *CircleOfConfusionPostProcess) Dispose(opts *CircleOfConfusionPostProces
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#getcamera
 func (c *CircleOfConfusionPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getCamera", args...)
+	retVal := c.p.Call("getCamera")
 	return CameraFromJSObject(retVal, c.ctx)
 }
 
@@ -165,9 +170,7 @@ func (c *CircleOfConfusionPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#getclassname
 func (c *CircleOfConfusionPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -176,9 +179,7 @@ func (c *CircleOfConfusionPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#geteffect
 func (c *CircleOfConfusionPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffect", args...)
+	retVal := c.p.Call("getEffect")
 	return EffectFromJSObject(retVal, c.ctx)
 }
 
@@ -187,9 +188,7 @@ func (c *CircleOfConfusionPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#geteffectname
 func (c *CircleOfConfusionPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffectName", args...)
+	retVal := c.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -198,9 +197,7 @@ func (c *CircleOfConfusionPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#getengine
 func (c *CircleOfConfusionPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEngine", args...)
+	retVal := c.p.Call("getEngine")
 	return EngineFromJSObject(retVal, c.ctx)
 }
 
@@ -209,9 +206,7 @@ func (c *CircleOfConfusionPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#isready
 func (c *CircleOfConfusionPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReady", args...)
+	retVal := c.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -220,9 +215,7 @@ func (c *CircleOfConfusionPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#isreusable
 func (c *CircleOfConfusionPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReusable", args...)
+	retVal := c.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -231,9 +224,7 @@ func (c *CircleOfConfusionPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#marktexturedirty
 func (c *CircleOfConfusionPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("markTextureDirty", args...)
+	c.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the CircleOfConfusionPostProcess object.
@@ -308,9 +299,7 @@ func (c *CircleOfConfusionPostProcess) UpdateEffect(opts *CircleOfConfusionPostP
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#useownoutput
 func (c *CircleOfConfusionPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("useOwnOutput", args...)
+	c.p.Call("useOwnOutput")
 }
 
 /*
@@ -639,7 +628,7 @@ func (c *CircleOfConfusionPostProcess) SetName(name string) *CircleOfConfusionPo
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onactivate
 func (c *CircleOfConfusionPostProcess) OnActivate(onActivate func()) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onActivate)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -647,7 +636,7 @@ func (c *CircleOfConfusionPostProcess) OnActivate(onActivate func()) *CircleOfCo
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onactivate
 func (c *CircleOfConfusionPostProcess) SetOnActivate(onActivate func()) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onActivate)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -671,7 +660,7 @@ func (c *CircleOfConfusionPostProcess) SetOnActivateObservable(onActivateObserva
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onafterrender
 func (c *CircleOfConfusionPostProcess) OnAfterRender(onAfterRender func()) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -679,7 +668,7 @@ func (c *CircleOfConfusionPostProcess) OnAfterRender(onAfterRender func()) *Circ
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onafterrender
 func (c *CircleOfConfusionPostProcess) SetOnAfterRender(onAfterRender func()) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -703,7 +692,7 @@ func (c *CircleOfConfusionPostProcess) SetOnAfterRenderObservable(onAfterRenderO
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onapply
 func (c *CircleOfConfusionPostProcess) OnApply(onApply func()) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onApply)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -711,7 +700,7 @@ func (c *CircleOfConfusionPostProcess) OnApply(onApply func()) *CircleOfConfusio
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onapply
 func (c *CircleOfConfusionPostProcess) SetOnApply(onApply func()) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onApply)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -735,7 +724,7 @@ func (c *CircleOfConfusionPostProcess) SetOnApplyObservable(onApplyObservable *O
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onbeforerender
 func (c *CircleOfConfusionPostProcess) OnBeforeRender(onBeforeRender func()) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -743,7 +732,7 @@ func (c *CircleOfConfusionPostProcess) OnBeforeRender(onBeforeRender func()) *Ci
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onbeforerender
 func (c *CircleOfConfusionPostProcess) SetOnBeforeRender(onBeforeRender func()) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -767,7 +756,7 @@ func (c *CircleOfConfusionPostProcess) SetOnBeforeRenderObservable(onBeforeRende
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onsizechanged
 func (c *CircleOfConfusionPostProcess) OnSizeChanged(onSizeChanged func()) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -775,7 +764,7 @@ func (c *CircleOfConfusionPostProcess) OnSizeChanged(onSizeChanged func()) *Circ
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onsizechanged
 func (c *CircleOfConfusionPostProcess) SetOnSizeChanged(onSizeChanged func()) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 

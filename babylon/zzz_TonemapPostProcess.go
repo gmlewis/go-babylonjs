@@ -27,6 +27,15 @@ func TonemapPostProcessFromJSObject(p js.Value, ctx js.Value) *TonemapPostProces
 	return &TonemapPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// TonemapPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TonemapPostProcessArrayToJSArray(array []*TonemapPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTonemapPostProcessOpts contains optional parameters for NewTonemapPostProcess.
 type NewTonemapPostProcessOpts struct {
 	SamplingMode  *float64
@@ -37,7 +46,7 @@ type NewTonemapPostProcessOpts struct {
 // NewTonemapPostProcess returns a new TonemapPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess
-func (ba *Babylon) NewTonemapPostProcess(name string, _operator *TonemappingOperator, exposureAdjustment float64, camera *Camera, opts *NewTonemapPostProcessOpts) *TonemapPostProcess {
+func (ba *Babylon) NewTonemapPostProcess(name string, _operator js.Value, exposureAdjustment float64, camera *Camera, opts *NewTonemapPostProcessOpts) *TonemapPostProcess {
 	if opts == nil {
 		opts = &NewTonemapPostProcessOpts{}
 	}
@@ -45,7 +54,7 @@ func (ba *Babylon) NewTonemapPostProcess(name string, _operator *TonemappingOper
 	args := make([]interface{}, 0, 4+3)
 
 	args = append(args, name)
-	args = append(args, _operator.JSObject())
+	args = append(args, _operator)
 	args = append(args, exposureAdjustment)
 	args = append(args, camera.JSObject())
 
@@ -107,9 +116,7 @@ func (t *TonemapPostProcess) Activate(camera *Camera, opts *TonemapPostProcessAc
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#apply
 func (t *TonemapPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("apply", args...)
+	retVal := t.p.Call("apply")
 	return EffectFromJSObject(retVal, t.ctx)
 }
 
@@ -142,9 +149,7 @@ func (t *TonemapPostProcess) Dispose(opts *TonemapPostProcessDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#getcamera
 func (t *TonemapPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getCamera", args...)
+	retVal := t.p.Call("getCamera")
 	return CameraFromJSObject(retVal, t.ctx)
 }
 
@@ -153,9 +158,7 @@ func (t *TonemapPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#getclassname
 func (t *TonemapPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getClassName", args...)
+	retVal := t.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -164,9 +167,7 @@ func (t *TonemapPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#geteffect
 func (t *TonemapPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getEffect", args...)
+	retVal := t.p.Call("getEffect")
 	return EffectFromJSObject(retVal, t.ctx)
 }
 
@@ -175,9 +176,7 @@ func (t *TonemapPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#geteffectname
 func (t *TonemapPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getEffectName", args...)
+	retVal := t.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -186,9 +185,7 @@ func (t *TonemapPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#getengine
 func (t *TonemapPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getEngine", args...)
+	retVal := t.p.Call("getEngine")
 	return EngineFromJSObject(retVal, t.ctx)
 }
 
@@ -197,9 +194,7 @@ func (t *TonemapPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#isready
 func (t *TonemapPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("isReady", args...)
+	retVal := t.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -208,9 +203,7 @@ func (t *TonemapPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#isreusable
 func (t *TonemapPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("isReusable", args...)
+	retVal := t.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -219,9 +212,7 @@ func (t *TonemapPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#marktexturedirty
 func (t *TonemapPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("markTextureDirty", args...)
+	t.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the TonemapPostProcess object.
@@ -296,9 +287,7 @@ func (t *TonemapPostProcess) UpdateEffect(opts *TonemapPostProcessUpdateEffectOp
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#useownoutput
 func (t *TonemapPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("useOwnOutput", args...)
+	t.p.Call("useOwnOutput")
 }
 
 /*
@@ -563,7 +552,7 @@ func (t *TonemapPostProcess) SetName(name string) *TonemapPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#onactivate
 func (t *TonemapPostProcess) OnActivate(onActivate func()) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(onActivate)
+	p := ba.ctx.Get("TonemapPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -571,7 +560,7 @@ func (t *TonemapPostProcess) OnActivate(onActivate func()) *TonemapPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#onactivate
 func (t *TonemapPostProcess) SetOnActivate(onActivate func()) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(onActivate)
+	p := ba.ctx.Get("TonemapPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -595,7 +584,7 @@ func (t *TonemapPostProcess) SetOnActivateObservable(onActivateObservable *Obser
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#onafterrender
 func (t *TonemapPostProcess) OnAfterRender(onAfterRender func()) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("TonemapPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -603,7 +592,7 @@ func (t *TonemapPostProcess) OnAfterRender(onAfterRender func()) *TonemapPostPro
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#onafterrender
 func (t *TonemapPostProcess) SetOnAfterRender(onAfterRender func()) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("TonemapPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -627,7 +616,7 @@ func (t *TonemapPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable 
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#onapply
 func (t *TonemapPostProcess) OnApply(onApply func()) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(onApply)
+	p := ba.ctx.Get("TonemapPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -635,7 +624,7 @@ func (t *TonemapPostProcess) OnApply(onApply func()) *TonemapPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#onapply
 func (t *TonemapPostProcess) SetOnApply(onApply func()) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(onApply)
+	p := ba.ctx.Get("TonemapPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -659,7 +648,7 @@ func (t *TonemapPostProcess) SetOnApplyObservable(onApplyObservable *Observable)
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#onbeforerender
 func (t *TonemapPostProcess) OnBeforeRender(onBeforeRender func()) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("TonemapPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -667,7 +656,7 @@ func (t *TonemapPostProcess) OnBeforeRender(onBeforeRender func()) *TonemapPostP
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#onbeforerender
 func (t *TonemapPostProcess) SetOnBeforeRender(onBeforeRender func()) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("TonemapPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -691,7 +680,7 @@ func (t *TonemapPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#onsizechanged
 func (t *TonemapPostProcess) OnSizeChanged(onSizeChanged func()) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("TonemapPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -699,7 +688,7 @@ func (t *TonemapPostProcess) OnSizeChanged(onSizeChanged func()) *TonemapPostPro
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#onsizechanged
 func (t *TonemapPostProcess) SetOnSizeChanged(onSizeChanged func()) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("TonemapPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 

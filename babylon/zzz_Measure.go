@@ -27,6 +27,15 @@ func MeasureFromJSObject(p js.Value, ctx js.Value) *Measure {
 	return &Measure{p: p, ctx: ctx}
 }
 
+// MeasureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MeasureArrayToJSArray(array []*Measure) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMeasure returns a new Measure object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure
@@ -89,9 +98,7 @@ func (m *Measure) CopyFromFloats(left float64, top float64, width float64, heigh
 // https://doc.babylonjs.com/api/classes/babylon.measure#empty
 func (m *Measure) Empty() *Measure {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("Empty", args...)
+	retVal := m.p.Call("Empty")
 	return MeasureFromJSObject(retVal, m.ctx)
 }
 

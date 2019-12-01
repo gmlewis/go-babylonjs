@@ -27,6 +27,15 @@ func SubtractBlockFromJSObject(p js.Value, ctx js.Value) *SubtractBlock {
 	return &SubtractBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SubtractBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SubtractBlockArrayToJSArray(array []*SubtractBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSubtractBlock returns a new SubtractBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock
@@ -152,9 +161,7 @@ func (s *SubtractBlock) ConnectTo(other *NodeMaterialBlock, opts *SubtractBlockC
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock#dispose
 func (s *SubtractBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the SubtractBlock object.
@@ -162,9 +169,7 @@ func (s *SubtractBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock#getclassname
 func (s *SubtractBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (s *SubtractBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterial
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock#serialize
 func (s *SubtractBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

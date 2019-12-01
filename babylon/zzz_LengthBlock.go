@@ -27,6 +27,15 @@ func LengthBlockFromJSObject(p js.Value, ctx js.Value) *LengthBlock {
 	return &LengthBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// LengthBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LengthBlockArrayToJSArray(array []*LengthBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLengthBlock returns a new LengthBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock
@@ -152,9 +161,7 @@ func (l *LengthBlock) ConnectTo(other *NodeMaterialBlock, opts *LengthBlockConne
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock#dispose
 func (l *LengthBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("dispose", args...)
+	l.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the LengthBlock object.
@@ -162,9 +169,7 @@ func (l *LengthBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock#getclassname
 func (l *LengthBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getClassName", args...)
+	retVal := l.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (l *LengthBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBu
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock#serialize
 func (l *LengthBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("serialize", args...)
+	retVal := l.p.Call("serialize")
 	return retVal
 }
 

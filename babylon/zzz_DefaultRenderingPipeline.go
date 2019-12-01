@@ -28,6 +28,15 @@ func DefaultRenderingPipelineFromJSObject(p js.Value, ctx js.Value) *DefaultRend
 	return &DefaultRenderingPipeline{PostProcessRenderPipeline: PostProcessRenderPipelineFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DefaultRenderingPipelineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DefaultRenderingPipelineArrayToJSArray(array []*DefaultRenderingPipeline) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDefaultRenderingPipelineOpts contains optional parameters for NewDefaultRenderingPipeline.
 type NewDefaultRenderingPipelineOpts struct {
 	Name           *string
@@ -106,9 +115,7 @@ func (d *DefaultRenderingPipeline) AddEffect(renderEffect *PostProcessRenderEffe
 // https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#dispose
 func (d *DefaultRenderingPipeline) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the DefaultRenderingPipeline object.
@@ -116,9 +123,7 @@ func (d *DefaultRenderingPipeline) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#getclassname
 func (d *DefaultRenderingPipeline) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -142,9 +147,7 @@ func (d *DefaultRenderingPipeline) Parse(source interface{}, scene *Scene, rootU
 // https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#prepare
 func (d *DefaultRenderingPipeline) Prepare() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("prepare", args...)
+	d.p.Call("prepare")
 }
 
 // RemoveCamera calls the RemoveCamera method on the DefaultRenderingPipeline object.
@@ -164,9 +167,7 @@ func (d *DefaultRenderingPipeline) RemoveCamera(camera *Camera) {
 // https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#serialize
 func (d *DefaultRenderingPipeline) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("serialize", args...)
+	retVal := d.p.Call("serialize")
 	return retVal
 }
 

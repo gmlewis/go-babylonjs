@@ -27,6 +27,15 @@ func GeometryFromJSObject(p js.Value, ctx js.Value) *Geometry {
 	return &Geometry{p: p, ctx: ctx}
 }
 
+// GeometryArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GeometryArrayToJSArray(array []*Geometry) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGeometryOpts contains optional parameters for NewGeometry.
 type NewGeometryOpts struct {
 	VertexData *VertexData
@@ -110,9 +119,7 @@ func (g *Geometry) CreateGeometryForMesh(mesh *Mesh) *Geometry {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#dispose
 func (g *Geometry) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // ExtractFromMesh calls the ExtractFromMesh method on the Geometry object.
@@ -134,9 +141,7 @@ func (g *Geometry) ExtractFromMesh(mesh *Mesh, id string) *Geometry {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#getengine
 func (g *Geometry) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getEngine", args...)
+	retVal := g.p.Call("getEngine")
 	return EngineFromJSObject(retVal, g.ctx)
 }
 
@@ -145,9 +150,7 @@ func (g *Geometry) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#getindexbuffer
 func (g *Geometry) GetIndexBuffer() *DataBuffer {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getIndexBuffer", args...)
+	retVal := g.p.Call("getIndexBuffer")
 	return DataBufferFromJSObject(retVal, g.ctx)
 }
 
@@ -187,9 +190,7 @@ func (g *Geometry) GetIndices(opts *GeometryGetIndicesOpts) js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#getscene
 func (g *Geometry) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getScene", args...)
+	retVal := g.p.Call("getScene")
 	return SceneFromJSObject(retVal, g.ctx)
 }
 
@@ -198,9 +199,7 @@ func (g *Geometry) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#gettotalindices
 func (g *Geometry) GetTotalIndices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getTotalIndices", args...)
+	retVal := g.p.Call("getTotalIndices")
 	return retVal.Float()
 }
 
@@ -209,9 +208,7 @@ func (g *Geometry) GetTotalIndices() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#gettotalvertices
 func (g *Geometry) GetTotalVertices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getTotalVertices", args...)
+	retVal := g.p.Call("getTotalVertices")
 	return retVal.Float()
 }
 
@@ -233,9 +230,7 @@ func (g *Geometry) GetVertexBuffer(kind string) *VertexBuffer {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#getvertexbuffers
 func (g *Geometry) GetVertexBuffers() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getVertexBuffers", args...)
+	retVal := g.p.Call("getVertexBuffers")
 	return retVal
 }
 
@@ -277,9 +272,7 @@ func (g *Geometry) GetVerticesData(kind string, opts *GeometryGetVerticesDataOpt
 // https://doc.babylonjs.com/api/classes/babylon.geometry#getverticesdatakinds
 func (g *Geometry) GetVerticesDataKinds() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getVerticesDataKinds", args...)
+	retVal := g.p.Call("getVerticesDataKinds")
 	return retVal.String()
 }
 
@@ -288,9 +281,7 @@ func (g *Geometry) GetVerticesDataKinds() string {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#isdisposed
 func (g *Geometry) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("isDisposed", args...)
+	retVal := g.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -299,9 +290,7 @@ func (g *Geometry) IsDisposed() bool {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#isready
 func (g *Geometry) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("isReady", args...)
+	retVal := g.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -377,9 +366,7 @@ func (g *Geometry) Parse(parsedVertexData interface{}, scene *Scene, rootUrl str
 // https://doc.babylonjs.com/api/classes/babylon.geometry#randomid
 func (g *Geometry) RandomId() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("RandomId", args...)
+	retVal := g.p.Call("RandomId")
 	return retVal.String()
 }
 
@@ -426,9 +413,7 @@ func (g *Geometry) RemoveVerticesData(kind string) {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#serialize
 func (g *Geometry) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("serialize", args...)
+	retVal := g.p.Call("serialize")
 	return retVal
 }
 
@@ -437,9 +422,7 @@ func (g *Geometry) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.geometry#serializeverticedata
 func (g *Geometry) SerializeVerticeData() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("serializeVerticeData", args...)
+	retVal := g.p.Call("serializeVerticeData")
 	return retVal
 }
 
@@ -565,9 +548,7 @@ func (g *Geometry) SetVerticesData(kind string, data js.Value, opts *GeometrySet
 // https://doc.babylonjs.com/api/classes/babylon.geometry#tolefthanded
 func (g *Geometry) ToLeftHanded() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("toLeftHanded", args...)
+	g.p.Call("toLeftHanded")
 }
 
 // GeometryUpdateIndicesOpts contains optional parameters for Geometry.UpdateIndices.
@@ -637,7 +618,7 @@ type GeometryUpdateVerticesDataDirectlyOpts struct {
 // UpdateVerticesDataDirectly calls the UpdateVerticesDataDirectly method on the Geometry object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#updateverticesdatadirectly
-func (g *Geometry) UpdateVerticesDataDirectly(kind string, data []float64, offset float64, opts *GeometryUpdateVerticesDataDirectlyOpts) {
+func (g *Geometry) UpdateVerticesDataDirectly(kind string, data []*float64, offset float64, opts *GeometryUpdateVerticesDataDirectlyOpts) {
 	if opts == nil {
 		opts = &GeometryUpdateVerticesDataDirectlyOpts{}
 	}
@@ -645,7 +626,7 @@ func (g *Geometry) UpdateVerticesDataDirectly(kind string, data []float64, offse
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, kind)
-	args = append(args, data)
+	args = append(args, float64ArrayToJSArray(data))
 	args = append(args, offset)
 
 	if opts.UseBytes == nil {
@@ -759,7 +740,7 @@ func (g *Geometry) SetId(id string) *Geometry {
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#ongeometryupdated
 func (g *Geometry) OnGeometryUpdated(onGeometryUpdated func()) *Geometry {
-	p := ba.ctx.Get("Geometry").New(onGeometryUpdated)
+	p := ba.ctx.Get("Geometry").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGeometryUpdated(); return nil}))
 	return GeometryFromJSObject(p, ba.ctx)
 }
 
@@ -767,7 +748,7 @@ func (g *Geometry) OnGeometryUpdated(onGeometryUpdated func()) *Geometry {
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#ongeometryupdated
 func (g *Geometry) SetOnGeometryUpdated(onGeometryUpdated func()) *Geometry {
-	p := ba.ctx.Get("Geometry").New(onGeometryUpdated)
+	p := ba.ctx.Get("Geometry").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGeometryUpdated(); return nil}))
 	return GeometryFromJSObject(p, ba.ctx)
 }
 

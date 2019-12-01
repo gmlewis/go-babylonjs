@@ -27,6 +27,15 @@ func SixDofDragBehaviorFromJSObject(p js.Value, ctx js.Value) *SixDofDragBehavio
 	return &SixDofDragBehavior{p: p, ctx: ctx}
 }
 
+// SixDofDragBehaviorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SixDofDragBehaviorArrayToJSArray(array []*SixDofDragBehavior) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSixDofDragBehavior returns a new SixDofDragBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior
@@ -55,9 +64,7 @@ func (s *SixDofDragBehavior) Attach(ownerNode *Mesh) {
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#detach
 func (s *SixDofDragBehavior) Detach() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("detach", args...)
+	s.p.Call("detach")
 }
 
 // Init calls the Init method on the SixDofDragBehavior object.
@@ -65,9 +72,7 @@ func (s *SixDofDragBehavior) Detach() {
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#init
 func (s *SixDofDragBehavior) Init() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("init", args...)
+	s.p.Call("init")
 }
 
 /*

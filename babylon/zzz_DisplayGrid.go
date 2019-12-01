@@ -27,6 +27,15 @@ func DisplayGridFromJSObject(p js.Value, ctx js.Value) *DisplayGrid {
 	return &DisplayGrid{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DisplayGridArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DisplayGridArrayToJSArray(array []*DisplayGrid) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDisplayGridOpts contains optional parameters for NewDisplayGrid.
 type NewDisplayGridOpts struct {
 	Name *string
@@ -71,9 +80,7 @@ func (d *DisplayGrid) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#dispose
 func (d *DisplayGrid) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the DisplayGrid object.
@@ -94,9 +101,7 @@ func (d *DisplayGrid) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#getclassname
 func (d *DisplayGrid) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 

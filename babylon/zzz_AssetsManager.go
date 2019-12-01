@@ -29,6 +29,15 @@ func AssetsManagerFromJSObject(p js.Value, ctx js.Value) *AssetsManager {
 	return &AssetsManager{p: p, ctx: ctx}
 }
 
+// AssetsManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AssetsManagerArrayToJSArray(array []*AssetsManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAssetsManager returns a new AssetsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager
@@ -267,20 +276,17 @@ func (a *AssetsManager) AddTextureTask(taskName string, url string, opts *Assets
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#load
 func (a *AssetsManager) Load() *AssetsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("load", args...)
+	retVal := a.p.Call("load")
 	return AssetsManagerFromJSObject(retVal, a.ctx)
 }
 
 // LoadAsync calls the LoadAsync method on the AssetsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#loadasync
-func (a *AssetsManager) LoadAsync() {
+func (a *AssetsManager) LoadAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("loadAsync", args...)
+	retVal := a.p.Call("loadAsync")
+	return PromiseFromJSObject(retVal, a.ctx)
 }
 
 // RemoveTask calls the RemoveTask method on the AssetsManager object.
@@ -300,9 +306,7 @@ func (a *AssetsManager) RemoveTask(task *AbstractAssetTask) {
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#reset
 func (a *AssetsManager) Reset() *AssetsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("reset", args...)
+	retVal := a.p.Call("reset")
 	return AssetsManagerFromJSObject(retVal, a.ctx)
 }
 
@@ -328,7 +332,7 @@ func (a *AssetsManager) SetAutoHideLoadingUI(autoHideLoadingUI bool) *AssetsMana
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onfinish
 func (a *AssetsManager) OnFinish(onFinish func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onFinish)
+	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onFinish(); return nil}))
 	return AssetsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -336,7 +340,7 @@ func (a *AssetsManager) OnFinish(onFinish func()) *AssetsManager {
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onfinish
 func (a *AssetsManager) SetOnFinish(onFinish func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onFinish)
+	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onFinish(); return nil}))
 	return AssetsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -344,7 +348,7 @@ func (a *AssetsManager) SetOnFinish(onFinish func()) *AssetsManager {
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onprogress
 func (a *AssetsManager) OnProgress(onProgress func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onProgress)
+	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onProgress(); return nil}))
 	return AssetsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -352,7 +356,7 @@ func (a *AssetsManager) OnProgress(onProgress func()) *AssetsManager {
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onprogress
 func (a *AssetsManager) SetOnProgress(onProgress func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onProgress)
+	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onProgress(); return nil}))
 	return AssetsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -376,7 +380,7 @@ func (a *AssetsManager) SetOnProgressObservable(onProgressObservable *Observable
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontaskerror
 func (a *AssetsManager) OnTaskError(onTaskError func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onTaskError)
+	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onTaskError(); return nil}))
 	return AssetsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -384,7 +388,7 @@ func (a *AssetsManager) OnTaskError(onTaskError func()) *AssetsManager {
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontaskerror
 func (a *AssetsManager) SetOnTaskError(onTaskError func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onTaskError)
+	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onTaskError(); return nil}))
 	return AssetsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -408,7 +412,7 @@ func (a *AssetsManager) SetOnTaskErrorObservable(onTaskErrorObservable *Observab
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksuccess
 func (a *AssetsManager) OnTaskSuccess(onTaskSuccess func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onTaskSuccess)
+	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onTaskSuccess(); return nil}))
 	return AssetsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -416,7 +420,7 @@ func (a *AssetsManager) OnTaskSuccess(onTaskSuccess func()) *AssetsManager {
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksuccess
 func (a *AssetsManager) SetOnTaskSuccess(onTaskSuccess func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onTaskSuccess)
+	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onTaskSuccess(); return nil}))
 	return AssetsManagerFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func AnimationRangeFromJSObject(p js.Value, ctx js.Value) *AnimationRange {
 	return &AnimationRange{p: p, ctx: ctx}
 }
 
+// AnimationRangeArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnimationRangeArrayToJSArray(array []*AnimationRange) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnimationRange returns a new AnimationRange object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationrange
@@ -47,9 +56,7 @@ func (ba *Babylon) NewAnimationRange(name string, from float64, to float64) *Ani
 // https://doc.babylonjs.com/api/classes/babylon.animationrange#clone
 func (a *AnimationRange) Clone() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("clone", args...)
+	retVal := a.p.Call("clone")
 	return AnimationRangeFromJSObject(retVal, a.ctx)
 }
 

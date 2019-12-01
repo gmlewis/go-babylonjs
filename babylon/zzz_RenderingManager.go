@@ -29,6 +29,15 @@ func RenderingManagerFromJSObject(p js.Value, ctx js.Value) *RenderingManager {
 	return &RenderingManager{p: p, ctx: ctx}
 }
 
+// RenderingManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RenderingManagerArrayToJSArray(array []*RenderingManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRenderingManager returns a new RenderingManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager
@@ -77,11 +86,11 @@ func (r *RenderingManager) Dispatch(subMesh *SubMesh, opts *RenderingManagerDisp
 // DispatchParticles calls the DispatchParticles method on the RenderingManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#dispatchparticles
-func (r *RenderingManager) DispatchParticles(particleSystem *IParticleSystem) {
+func (r *RenderingManager) DispatchParticles(particleSystem js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, particleSystem.JSObject())
+	args = append(args, particleSystem)
 
 	r.p.Call("dispatchParticles", args...)
 }
@@ -89,11 +98,11 @@ func (r *RenderingManager) DispatchParticles(particleSystem *IParticleSystem) {
 // DispatchSprites calls the DispatchSprites method on the RenderingManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#dispatchsprites
-func (r *RenderingManager) DispatchSprites(spriteManager *ISpriteManager) {
+func (r *RenderingManager) DispatchSprites(spriteManager js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, spriteManager.JSObject())
+	args = append(args, spriteManager)
 
 	r.p.Call("dispatchSprites", args...)
 }
@@ -103,9 +112,7 @@ func (r *RenderingManager) DispatchSprites(spriteManager *ISpriteManager) {
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#freerenderinggroups
 func (r *RenderingManager) FreeRenderingGroups() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("freeRenderingGroups", args...)
+	r.p.Call("freeRenderingGroups")
 }
 
 // GetAutoClearDepthStencilSetup calls the GetAutoClearDepthStencilSetup method on the RenderingManager object.

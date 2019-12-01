@@ -29,6 +29,15 @@ func AutoRotationBehaviorFromJSObject(p js.Value, ctx js.Value) *AutoRotationBeh
 	return &AutoRotationBehavior{p: p, ctx: ctx}
 }
 
+// AutoRotationBehaviorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AutoRotationBehaviorArrayToJSArray(array []*AutoRotationBehavior) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Attach calls the Attach method on the AutoRotationBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#attach
@@ -46,9 +55,7 @@ func (a *AutoRotationBehavior) Attach(camera *ArcRotateCamera) {
 // https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#detach
 func (a *AutoRotationBehavior) Detach() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("detach", args...)
+	a.p.Call("detach")
 }
 
 // Init calls the Init method on the AutoRotationBehavior object.
@@ -56,9 +63,7 @@ func (a *AutoRotationBehavior) Detach() {
 // https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#init
 func (a *AutoRotationBehavior) Init() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("init", args...)
+	a.p.Call("init")
 }
 
 /*

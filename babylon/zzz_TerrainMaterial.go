@@ -27,6 +27,15 @@ func TerrainMaterialFromJSObject(p js.Value, ctx js.Value) *TerrainMaterial {
 	return &TerrainMaterial{p: p, ctx: ctx}
 }
 
+// TerrainMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TerrainMaterialArrayToJSArray(array []*TerrainMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTerrainMaterial returns a new TerrainMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial
@@ -225,7 +234,7 @@ type TerrainMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the TerrainMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#forcecompilationasync
-func (t *TerrainMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *TerrainMaterialForceCompilationAsyncOpts) {
+func (t *TerrainMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *TerrainMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &TerrainMaterialForceCompilationAsyncOpts{}
 	}
@@ -240,7 +249,8 @@ func (t *TerrainMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *Terrai
 		args = append(args, opts.Options)
 	}
 
-	t.p.Call("forceCompilationAsync", args...)
+	retVal := t.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, t.ctx)
 }
 
 // Freeze calls the Freeze method on the TerrainMaterial object.
@@ -248,9 +258,7 @@ func (t *TerrainMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *Terrai
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#freeze
 func (t *TerrainMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("freeze", args...)
+	t.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the TerrainMaterial object.
@@ -258,9 +266,7 @@ func (t *TerrainMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getactivetextures
 func (t *TerrainMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getActiveTextures", args...)
+	retVal := t.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, t.ctx)
 }
 
@@ -269,9 +275,7 @@ func (t *TerrainMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getalphatesttexture
 func (t *TerrainMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getAlphaTestTexture", args...)
+	retVal := t.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, t.ctx)
 }
 
@@ -280,9 +284,7 @@ func (t *TerrainMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getanimatables
 func (t *TerrainMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getAnimatables", args...)
+	retVal := t.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -291,9 +293,7 @@ func (t *TerrainMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getbindedmeshes
 func (t *TerrainMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getBindedMeshes", args...)
+	retVal := t.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, t.ctx)
 }
 
@@ -302,9 +302,7 @@ func (t *TerrainMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getclassname
 func (t *TerrainMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getClassName", args...)
+	retVal := t.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -313,9 +311,7 @@ func (t *TerrainMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#geteffect
 func (t *TerrainMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getEffect", args...)
+	retVal := t.p.Call("getEffect")
 	return EffectFromJSObject(retVal, t.ctx)
 }
 
@@ -324,9 +320,7 @@ func (t *TerrainMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getscene
 func (t *TerrainMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getScene", args...)
+	retVal := t.p.Call("getScene")
 	return SceneFromJSObject(retVal, t.ctx)
 }
 
@@ -419,9 +413,7 @@ func (t *TerrainMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#markdirty
 func (t *TerrainMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("markDirty", args...)
+	t.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the TerrainMaterial object.
@@ -429,9 +421,7 @@ func (t *TerrainMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#needalphablending
 func (t *TerrainMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("needAlphaBlending", args...)
+	retVal := t.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -453,9 +443,7 @@ func (t *TerrainMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#needalphatesting
 func (t *TerrainMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("needAlphaTesting", args...)
+	retVal := t.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -479,9 +467,7 @@ func (t *TerrainMaterial) Parse(source interface{}, scene *Scene, rootUrl string
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#serialize
 func (t *TerrainMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("serialize", args...)
+	retVal := t.p.Call("serialize")
 	return retVal
 }
 
@@ -515,9 +501,7 @@ func (t *TerrainMaterial) ToString(opts *TerrainMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#unbind
 func (t *TerrainMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("unbind", args...)
+	t.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the TerrainMaterial object.
@@ -525,9 +509,7 @@ func (t *TerrainMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#unfreeze
 func (t *TerrainMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("unfreeze", args...)
+	t.p.Call("unfreeze")
 }
 
 /*
@@ -599,16 +581,16 @@ func (t *TerrainMaterial) SetAlphaMode(alphaMode float64) *TerrainMaterial {
 // Animations returns the Animations property of class TerrainMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#animations
-func (t *TerrainMaterial) Animations(animations []Animation) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(animations.JSObject())
+func (t *TerrainMaterial) Animations(animations []*Animation) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(animations)
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class TerrainMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#animations
-func (t *TerrainMaterial) SetAnimations(animations []Animation) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(animations.JSObject())
+func (t *TerrainMaterial) SetAnimations(animations []*Animation) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(animations)
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -952,7 +934,7 @@ func (t *TerrainMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *Terrain
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getrendertargettextures
 func (t *TerrainMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("TerrainMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -960,7 +942,7 @@ func (t *TerrainMaterial) GetRenderTargetTextures(getRenderTargetTextures func()
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getrendertargettextures
 func (t *TerrainMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("TerrainMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1192,7 +1174,7 @@ func (t *TerrainMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *TerrainMat
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onbind
 func (t *TerrainMaterial) OnBind(onBind func()) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(onBind)
+	p := ba.ctx.Get("TerrainMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1200,7 +1182,7 @@ func (t *TerrainMaterial) OnBind(onBind func()) *TerrainMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onbind
 func (t *TerrainMaterial) SetOnBind(onBind func()) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(onBind)
+	p := ba.ctx.Get("TerrainMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1224,7 +1206,7 @@ func (t *TerrainMaterial) SetOnBindObservable(onBindObservable *Observable) *Ter
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#oncompiled
 func (t *TerrainMaterial) OnCompiled(onCompiled func()) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(onCompiled)
+	p := ba.ctx.Get("TerrainMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1232,7 +1214,7 @@ func (t *TerrainMaterial) OnCompiled(onCompiled func()) *TerrainMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#oncompiled
 func (t *TerrainMaterial) SetOnCompiled(onCompiled func()) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(onCompiled)
+	p := ba.ctx.Get("TerrainMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1240,7 +1222,7 @@ func (t *TerrainMaterial) SetOnCompiled(onCompiled func()) *TerrainMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#ondispose
 func (t *TerrainMaterial) OnDispose(onDispose func()) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(onDispose)
+	p := ba.ctx.Get("TerrainMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1248,7 +1230,7 @@ func (t *TerrainMaterial) OnDispose(onDispose func()) *TerrainMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#ondispose
 func (t *TerrainMaterial) SetOnDispose(onDispose func()) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(onDispose)
+	p := ba.ctx.Get("TerrainMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1272,7 +1254,7 @@ func (t *TerrainMaterial) SetOnDisposeObservable(onDisposeObservable *Observable
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onerror
 func (t *TerrainMaterial) OnError(onError func()) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(onError)
+	p := ba.ctx.Get("TerrainMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1280,7 +1262,7 @@ func (t *TerrainMaterial) OnError(onError func()) *TerrainMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onerror
 func (t *TerrainMaterial) SetOnError(onError func()) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(onError)
+	p := ba.ctx.Get("TerrainMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 

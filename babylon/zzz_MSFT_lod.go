@@ -27,6 +27,15 @@ func MSFT_lodFromJSObject(p js.Value, ctx js.Value) *MSFT_lod {
 	return &MSFT_lod{p: p, ctx: ctx}
 }
 
+// MSFT_lodArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MSFT_lodArrayToJSArray(array []*MSFT_lod) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class MSFT_lod.

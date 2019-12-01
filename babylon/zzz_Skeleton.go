@@ -29,6 +29,15 @@ func SkeletonFromJSObject(p js.Value, ctx js.Value) *Skeleton {
 	return &Skeleton{p: p, ctx: ctx}
 }
 
+// SkeletonArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SkeletonArrayToJSArray(array []*Skeleton) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSkeleton returns a new Skeleton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton
@@ -207,9 +216,7 @@ func (s *Skeleton) DeleteAnimationRange(name string, opts *SkeletonDeleteAnimati
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#dispose
 func (s *Skeleton) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // SkeletonEnableBlendingOpts contains optional parameters for Skeleton.EnableBlending.
@@ -241,9 +248,7 @@ func (s *Skeleton) EnableBlending(opts *SkeletonEnableBlendingOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#getanimatables
 func (s *Skeleton) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAnimatables", args...)
+	retVal := s.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -265,9 +270,7 @@ func (s *Skeleton) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#getanimationranges
 func (s *Skeleton) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAnimationRanges", args...)
+	retVal := s.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, s.ctx)
 }
 
@@ -287,12 +290,10 @@ func (s *Skeleton) GetBoneIndexByName(name string) float64 {
 // GetChildren calls the GetChildren method on the Skeleton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#getchildren
-func (s *Skeleton) GetChildren() *[]Bone {
+func (s *Skeleton) GetChildren() []*Bone {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getChildren", args...)
-	return []BoneFromJSObject(retVal, s.ctx)
+	retVal := s.p.Call("getChildren")
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the Skeleton object.
@@ -300,9 +301,7 @@ func (s *Skeleton) GetChildren() *[]Bone {
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#getclassname
 func (s *Skeleton) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -311,9 +310,7 @@ func (s *Skeleton) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#getposematrix
 func (s *Skeleton) GetPoseMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getPoseMatrix", args...)
+	retVal := s.p.Call("getPoseMatrix")
 	return MatrixFromJSObject(retVal, s.ctx)
 }
 
@@ -322,9 +319,7 @@ func (s *Skeleton) GetPoseMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#getscene
 func (s *Skeleton) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getScene", args...)
+	retVal := s.p.Call("getScene")
 	return SceneFromJSObject(retVal, s.ctx)
 }
 
@@ -373,9 +368,7 @@ func (s *Skeleton) Parse(parsedSkeleton interface{}, scene *Scene) *Skeleton {
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#prepare
 func (s *Skeleton) Prepare() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("prepare", args...)
+	s.p.Call("prepare")
 }
 
 // ReturnToRest calls the ReturnToRest method on the Skeleton object.
@@ -383,9 +376,7 @@ func (s *Skeleton) Prepare() {
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#returntorest
 func (s *Skeleton) ReturnToRest() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("returnToRest", args...)
+	s.p.Call("returnToRest")
 }
 
 // Serialize calls the Serialize method on the Skeleton object.
@@ -393,9 +384,7 @@ func (s *Skeleton) ReturnToRest() {
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#serialize
 func (s *Skeleton) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 
@@ -404,9 +393,7 @@ func (s *Skeleton) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#sortbones
 func (s *Skeleton) SortBones() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("sortBones", args...)
+	s.p.Call("sortBones")
 }
 
 // SkeletonToStringOpts contains optional parameters for Skeleton.ToString.
@@ -455,16 +442,16 @@ func (s *Skeleton) SetAnimationPropertiesOverride(animationPropertiesOverride *A
 // Animations returns the Animations property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#animations
-func (s *Skeleton) Animations(animations []Animation) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(animations.JSObject())
+func (s *Skeleton) Animations(animations []*Animation) *Skeleton {
+	p := ba.ctx.Get("Skeleton").New(animations)
 	return SkeletonFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#animations
-func (s *Skeleton) SetAnimations(animations []Animation) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(animations.JSObject())
+func (s *Skeleton) SetAnimations(animations []*Animation) *Skeleton {
+	p := ba.ctx.Get("Skeleton").New(animations)
 	return SkeletonFromJSObject(p, ba.ctx)
 }
 

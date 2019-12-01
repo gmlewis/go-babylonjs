@@ -33,16 +33,25 @@ func HtmlElementTextureFromJSObject(p js.Value, ctx js.Value) *HtmlElementTextur
 	return &HtmlElementTexture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// HtmlElementTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HtmlElementTextureArrayToJSArray(array []*HtmlElementTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewHtmlElementTexture returns a new HtmlElementTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture
-func (ba *Babylon) NewHtmlElementTexture(name string, element js.Value, options *IHtmlElementTextureOptions) *HtmlElementTexture {
+func (ba *Babylon) NewHtmlElementTexture(name string, element js.Value, options js.Value) *HtmlElementTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
 	args = append(args, element)
-	args = append(args, options.JSObject())
+	args = append(args, options)
 
 	p := ba.ctx.Get("HtmlElementTexture").New(args...)
 	return HtmlElementTextureFromJSObject(p, ba.ctx)
@@ -53,9 +62,7 @@ func (ba *Babylon) NewHtmlElementTexture(name string, element js.Value, options 
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#clone
 func (h *HtmlElementTexture) Clone() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("clone", args...)
+	retVal := h.p.Call("clone")
 	return BaseTextureFromJSObject(retVal, h.ctx)
 }
 
@@ -64,9 +71,7 @@ func (h *HtmlElementTexture) Clone() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#delayload
 func (h *HtmlElementTexture) DelayLoad() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("delayLoad", args...)
+	h.p.Call("delayLoad")
 }
 
 // Dispose calls the Dispose method on the HtmlElementTexture object.
@@ -74,9 +79,7 @@ func (h *HtmlElementTexture) DelayLoad() {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#dispose
 func (h *HtmlElementTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("dispose", args...)
+	h.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the HtmlElementTexture object.
@@ -84,9 +87,7 @@ func (h *HtmlElementTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#getbasesize
 func (h *HtmlElementTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getBaseSize", args...)
+	retVal := h.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -95,9 +96,7 @@ func (h *HtmlElementTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#getclassname
 func (h *HtmlElementTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getClassName", args...)
+	retVal := h.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -106,9 +105,7 @@ func (h *HtmlElementTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#getinternaltexture
 func (h *HtmlElementTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getInternalTexture", args...)
+	retVal := h.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, h.ctx)
 }
 
@@ -117,9 +114,7 @@ func (h *HtmlElementTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#getreflectiontexturematrix
 func (h *HtmlElementTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getReflectionTextureMatrix", args...)
+	retVal := h.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, h.ctx)
 }
 
@@ -128,9 +123,7 @@ func (h *HtmlElementTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#getscene
 func (h *HtmlElementTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getScene", args...)
+	retVal := h.p.Call("getScene")
 	return SceneFromJSObject(retVal, h.ctx)
 }
 
@@ -139,9 +132,7 @@ func (h *HtmlElementTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#getsize
 func (h *HtmlElementTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getSize", args...)
+	retVal := h.p.Call("getSize")
 	return retVal
 }
 
@@ -150,9 +141,7 @@ func (h *HtmlElementTexture) GetSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#gettexturematrix
 func (h *HtmlElementTexture) GetTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getTextureMatrix", args...)
+	retVal := h.p.Call("getTextureMatrix")
 	return MatrixFromJSObject(retVal, h.ctx)
 }
 
@@ -161,9 +150,7 @@ func (h *HtmlElementTexture) GetTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#isready
 func (h *HtmlElementTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("isReady", args...)
+	retVal := h.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -172,9 +159,7 @@ func (h *HtmlElementTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#isreadyornotblocking
 func (h *HtmlElementTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("isReadyOrNotBlocking", args...)
+	retVal := h.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -220,9 +205,7 @@ func (h *HtmlElementTexture) ReadPixels(opts *HtmlElementTextureReadPixelsOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#releaseinternaltexture
 func (h *HtmlElementTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("releaseInternalTexture", args...)
+	h.p.Call("releaseInternalTexture")
 }
 
 // Scale calls the Scale method on the HtmlElementTexture object.
@@ -242,9 +225,7 @@ func (h *HtmlElementTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#serialize
 func (h *HtmlElementTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("serialize", args...)
+	retVal := h.p.Call("serialize")
 	return retVal
 }
 
@@ -253,9 +234,7 @@ func (h *HtmlElementTexture) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#tostring
 func (h *HtmlElementTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("toString", args...)
+	retVal := h.p.Call("toString")
 	return retVal.String()
 }
 
@@ -303,7 +282,7 @@ func (h *HtmlElementTexture) WhenAllReady(textures *BaseTexture, callback func()
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	h.p.Call("WhenAllReady", args...)
 }
@@ -730,7 +709,7 @@ func (h *HtmlElementTexture) SetNoMipmap(noMipmap bool) *HtmlElementTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#ondispose
 func (h *HtmlElementTexture) OnDispose(onDispose func()) *HtmlElementTexture {
-	p := ba.ctx.Get("HtmlElementTexture").New(onDispose)
+	p := ba.ctx.Get("HtmlElementTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return HtmlElementTextureFromJSObject(p, ba.ctx)
 }
 
@@ -738,7 +717,7 @@ func (h *HtmlElementTexture) OnDispose(onDispose func()) *HtmlElementTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#ondispose
 func (h *HtmlElementTexture) SetOnDispose(onDispose func()) *HtmlElementTexture {
-	p := ba.ctx.Get("HtmlElementTexture").New(onDispose)
+	p := ba.ctx.Get("HtmlElementTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return HtmlElementTextureFromJSObject(p, ba.ctx)
 }
 

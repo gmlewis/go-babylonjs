@@ -27,6 +27,15 @@ func PhysicsUpdraftEventFromJSObject(p js.Value, ctx js.Value) *PhysicsUpdraftEv
 	return &PhysicsUpdraftEvent{p: p, ctx: ctx}
 }
 
+// PhysicsUpdraftEventArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsUpdraftEventArrayToJSArray(array []*PhysicsUpdraftEvent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhysicsUpdraftEvent returns a new PhysicsUpdraftEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent
@@ -47,9 +56,7 @@ func (ba *Babylon) NewPhysicsUpdraftEvent(_scene *Scene, _origin *Vector3, _opti
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent#disable
 func (p *PhysicsUpdraftEvent) Disable() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("disable", args...)
+	p.p.Call("disable")
 }
 
 // PhysicsUpdraftEventDisposeOpts contains optional parameters for PhysicsUpdraftEvent.Dispose.
@@ -81,9 +88,7 @@ func (p *PhysicsUpdraftEvent) Dispose(opts *PhysicsUpdraftEventDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent#enable
 func (p *PhysicsUpdraftEvent) Enable() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("enable", args...)
+	p.p.Call("enable")
 }
 
 // GetData calls the GetData method on the PhysicsUpdraftEvent object.
@@ -91,9 +96,7 @@ func (p *PhysicsUpdraftEvent) Enable() {
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent#getdata
 func (p *PhysicsUpdraftEvent) GetData() *PhysicsUpdraftEventData {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getData", args...)
+	retVal := p.p.Call("getData")
 	return PhysicsUpdraftEventDataFromJSObject(retVal, p.ctx)
 }
 

@@ -30,9 +30,18 @@ func VideoRecorderFromJSObject(p js.Value, ctx js.Value) *VideoRecorder {
 	return &VideoRecorder{p: p, ctx: ctx}
 }
 
+// VideoRecorderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VideoRecorderArrayToJSArray(array []*VideoRecorder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVideoRecorderOpts contains optional parameters for NewVideoRecorder.
 type NewVideoRecorderOpts struct {
-	Options *VideoRecorderOptions
+	Options js.Value
 }
 
 // NewVideoRecorder returns a new VideoRecorder object.
@@ -50,7 +59,7 @@ func (ba *Babylon) NewVideoRecorder(engine *Engine, opts *NewVideoRecorderOpts) 
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	p := ba.ctx.Get("VideoRecorder").New(args...)
@@ -62,9 +71,7 @@ func (ba *Babylon) NewVideoRecorder(engine *Engine, opts *NewVideoRecorderOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.videorecorder#dispose
 func (v *VideoRecorder) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // IsSupported calls the IsSupported method on the VideoRecorder object.
@@ -89,7 +96,7 @@ type VideoRecorderStartRecordingOpts struct {
 // StartRecording calls the StartRecording method on the VideoRecorder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorder#startrecording
-func (v *VideoRecorder) StartRecording(opts *VideoRecorderStartRecordingOpts) *Blob {
+func (v *VideoRecorder) StartRecording(opts *VideoRecorderStartRecordingOpts) *Promise {
 	if opts == nil {
 		opts = &VideoRecorderStartRecordingOpts{}
 	}
@@ -108,7 +115,7 @@ func (v *VideoRecorder) StartRecording(opts *VideoRecorderStartRecordingOpts) *B
 	}
 
 	retVal := v.p.Call("startRecording", args...)
-	return BlobFromJSObject(retVal, v.ctx)
+	return PromiseFromJSObject(retVal, v.ctx)
 }
 
 // StopRecording calls the StopRecording method on the VideoRecorder object.
@@ -116,9 +123,7 @@ func (v *VideoRecorder) StartRecording(opts *VideoRecorderStartRecordingOpts) *B
 // https://doc.babylonjs.com/api/classes/babylon.videorecorder#stoprecording
 func (v *VideoRecorder) StopRecording() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("stopRecording", args...)
+	v.p.Call("stopRecording")
 }
 
 /*

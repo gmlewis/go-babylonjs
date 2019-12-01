@@ -27,6 +27,15 @@ func AbstractAssetTaskFromJSObject(p js.Value, ctx js.Value) *AbstractAssetTask 
 	return &AbstractAssetTask{p: p, ctx: ctx}
 }
 
+// AbstractAssetTaskArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AbstractAssetTaskArrayToJSArray(array []*AbstractAssetTask) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAbstractAssetTask returns a new AbstractAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask
@@ -45,9 +54,7 @@ func (ba *Babylon) NewAbstractAssetTask(name string) *AbstractAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask#reset
 func (a *AbstractAssetTask) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("reset", args...)
+	a.p.Call("reset")
 }
 
 // Run calls the Run method on the AbstractAssetTask object.
@@ -58,8 +65,8 @@ func (a *AbstractAssetTask) Run(scene *Scene, onSuccess func(), onError func()) 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	a.p.Call("run", args...)
 }
@@ -72,8 +79,8 @@ func (a *AbstractAssetTask) RunTask(scene *Scene, onSuccess func(), onError func
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	a.p.Call("runTask", args...)
 }
@@ -132,7 +139,7 @@ func (a *AbstractAssetTask) SetName(name string) *AbstractAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask#onerror
 func (a *AbstractAssetTask) OnError(onError func()) *AbstractAssetTask {
-	p := ba.ctx.Get("AbstractAssetTask").New(onError)
+	p := ba.ctx.Get("AbstractAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return AbstractAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -140,7 +147,7 @@ func (a *AbstractAssetTask) OnError(onError func()) *AbstractAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask#onerror
 func (a *AbstractAssetTask) SetOnError(onError func()) *AbstractAssetTask {
-	p := ba.ctx.Get("AbstractAssetTask").New(onError)
+	p := ba.ctx.Get("AbstractAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return AbstractAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -148,7 +155,7 @@ func (a *AbstractAssetTask) SetOnError(onError func()) *AbstractAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask#onsuccess
 func (a *AbstractAssetTask) OnSuccess(onSuccess func()) *AbstractAssetTask {
-	p := ba.ctx.Get("AbstractAssetTask").New(onSuccess)
+	p := ba.ctx.Get("AbstractAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return AbstractAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -156,7 +163,7 @@ func (a *AbstractAssetTask) OnSuccess(onSuccess func()) *AbstractAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask#onsuccess
 func (a *AbstractAssetTask) SetOnSuccess(onSuccess func()) *AbstractAssetTask {
-	p := ba.ctx.Get("AbstractAssetTask").New(onSuccess)
+	p := ba.ctx.Get("AbstractAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return AbstractAssetTaskFromJSObject(p, ba.ctx)
 }
 

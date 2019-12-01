@@ -27,6 +27,15 @@ func BackgroundMaterialFromJSObject(p js.Value, ctx js.Value) *BackgroundMateria
 	return &BackgroundMaterial{p: p, ctx: ctx}
 }
 
+// BackgroundMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BackgroundMaterialArrayToJSArray(array []*BackgroundMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBackgroundMaterial returns a new BackgroundMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial
@@ -147,9 +156,7 @@ func (b *BackgroundMaterial) BindViewProjection(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#builduniformlayout
 func (b *BackgroundMaterial) BuildUniformLayout() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("buildUniformLayout", args...)
+	b.p.Call("buildUniformLayout")
 }
 
 // Clone calls the Clone method on the BackgroundMaterial object.
@@ -241,7 +248,7 @@ type BackgroundMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the BackgroundMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#forcecompilationasync
-func (b *BackgroundMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *BackgroundMaterialForceCompilationAsyncOpts) {
+func (b *BackgroundMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *BackgroundMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &BackgroundMaterialForceCompilationAsyncOpts{}
 	}
@@ -256,7 +263,8 @@ func (b *BackgroundMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *Bac
 		args = append(args, opts.Options)
 	}
 
-	b.p.Call("forceCompilationAsync", args...)
+	retVal := b.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, b.ctx)
 }
 
 // Freeze calls the Freeze method on the BackgroundMaterial object.
@@ -264,9 +272,7 @@ func (b *BackgroundMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *Bac
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#freeze
 func (b *BackgroundMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("freeze", args...)
+	b.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the BackgroundMaterial object.
@@ -274,9 +280,7 @@ func (b *BackgroundMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#getactivetextures
 func (b *BackgroundMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getActiveTextures", args...)
+	retVal := b.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, b.ctx)
 }
 
@@ -285,9 +289,7 @@ func (b *BackgroundMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#getalphatesttexture
 func (b *BackgroundMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getAlphaTestTexture", args...)
+	retVal := b.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, b.ctx)
 }
 
@@ -296,9 +298,7 @@ func (b *BackgroundMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#getbindedmeshes
 func (b *BackgroundMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getBindedMeshes", args...)
+	retVal := b.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, b.ctx)
 }
 
@@ -307,9 +307,7 @@ func (b *BackgroundMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#getclassname
 func (b *BackgroundMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getClassName", args...)
+	retVal := b.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -318,9 +316,7 @@ func (b *BackgroundMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#geteffect
 func (b *BackgroundMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEffect", args...)
+	retVal := b.p.Call("getEffect")
 	return EffectFromJSObject(retVal, b.ctx)
 }
 
@@ -329,9 +325,7 @@ func (b *BackgroundMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#getscene
 func (b *BackgroundMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getScene", args...)
+	retVal := b.p.Call("getScene")
 	return SceneFromJSObject(retVal, b.ctx)
 }
 
@@ -424,9 +418,7 @@ func (b *BackgroundMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#markdirty
 func (b *BackgroundMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("markDirty", args...)
+	b.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the BackgroundMaterial object.
@@ -434,9 +426,7 @@ func (b *BackgroundMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#needalphablending
 func (b *BackgroundMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("needAlphaBlending", args...)
+	retVal := b.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -458,9 +448,7 @@ func (b *BackgroundMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#needalphatesting
 func (b *BackgroundMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("needAlphaTesting", args...)
+	retVal := b.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -484,9 +472,7 @@ func (b *BackgroundMaterial) Parse(source interface{}, scene *Scene, rootUrl str
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#serialize
 func (b *BackgroundMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("serialize", args...)
+	retVal := b.p.Call("serialize")
 	return retVal
 }
 
@@ -520,9 +506,7 @@ func (b *BackgroundMaterial) ToString(opts *BackgroundMaterialToStringOpts) stri
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#unbind
 func (b *BackgroundMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("unbind", args...)
+	b.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the BackgroundMaterial object.
@@ -530,9 +514,7 @@ func (b *BackgroundMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#unfreeze
 func (b *BackgroundMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("unfreeze", args...)
+	b.p.Call("unfreeze")
 }
 
 /*
@@ -604,16 +586,16 @@ func (b *BackgroundMaterial) SetAlphaMode(alphaMode float64) *BackgroundMaterial
 // Animations returns the Animations property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#animations
-func (b *BackgroundMaterial) Animations(animations []Animation) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(animations.JSObject())
+func (b *BackgroundMaterial) Animations(animations []*Animation) *BackgroundMaterial {
+	p := ba.ctx.Get("BackgroundMaterial").New(animations)
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#animations
-func (b *BackgroundMaterial) SetAnimations(animations []Animation) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(animations.JSObject())
+func (b *BackgroundMaterial) SetAnimations(animations []*Animation) *BackgroundMaterial {
+	p := ba.ctx.Get("BackgroundMaterial").New(animations)
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -989,7 +971,7 @@ func (b *BackgroundMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *Back
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#getrendertargettextures
 func (b *BackgroundMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("BackgroundMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -997,7 +979,7 @@ func (b *BackgroundMaterial) GetRenderTargetTextures(getRenderTargetTextures fun
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#getrendertargettextures
 func (b *BackgroundMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("BackgroundMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1229,7 +1211,7 @@ func (b *BackgroundMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *Backgro
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#onbind
 func (b *BackgroundMaterial) OnBind(onBind func()) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(onBind)
+	p := ba.ctx.Get("BackgroundMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1237,7 +1219,7 @@ func (b *BackgroundMaterial) OnBind(onBind func()) *BackgroundMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#onbind
 func (b *BackgroundMaterial) SetOnBind(onBind func()) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(onBind)
+	p := ba.ctx.Get("BackgroundMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1261,7 +1243,7 @@ func (b *BackgroundMaterial) SetOnBindObservable(onBindObservable *Observable) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#oncompiled
 func (b *BackgroundMaterial) OnCompiled(onCompiled func()) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(onCompiled)
+	p := ba.ctx.Get("BackgroundMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1269,7 +1251,7 @@ func (b *BackgroundMaterial) OnCompiled(onCompiled func()) *BackgroundMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#oncompiled
 func (b *BackgroundMaterial) SetOnCompiled(onCompiled func()) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(onCompiled)
+	p := ba.ctx.Get("BackgroundMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1277,7 +1259,7 @@ func (b *BackgroundMaterial) SetOnCompiled(onCompiled func()) *BackgroundMateria
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#ondispose
 func (b *BackgroundMaterial) OnDispose(onDispose func()) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(onDispose)
+	p := ba.ctx.Get("BackgroundMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1285,7 +1267,7 @@ func (b *BackgroundMaterial) OnDispose(onDispose func()) *BackgroundMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#ondispose
 func (b *BackgroundMaterial) SetOnDispose(onDispose func()) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(onDispose)
+	p := ba.ctx.Get("BackgroundMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1309,7 +1291,7 @@ func (b *BackgroundMaterial) SetOnDisposeObservable(onDisposeObservable *Observa
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#onerror
 func (b *BackgroundMaterial) OnError(onError func()) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(onError)
+	p := ba.ctx.Get("BackgroundMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1317,7 +1299,7 @@ func (b *BackgroundMaterial) OnError(onError func()) *BackgroundMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#onerror
 func (b *BackgroundMaterial) SetOnError(onError func()) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(onError)
+	p := ba.ctx.Get("BackgroundMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1660,16 +1642,16 @@ func (b *BackgroundMaterial) SetShadowLevel(shadowLevel *float) *BackgroundMater
 // ShadowLights returns the ShadowLights property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#shadowlights
-func (b *BackgroundMaterial) ShadowLights(shadowLights *IShadowLight) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(shadowLights.JSObject())
+func (b *BackgroundMaterial) ShadowLights(shadowLights js.Value) *BackgroundMaterial {
+	p := ba.ctx.Get("BackgroundMaterial").New(shadowLights)
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetShadowLights sets the ShadowLights property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#shadowlights
-func (b *BackgroundMaterial) SetShadowLights(shadowLights *IShadowLight) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(shadowLights.JSObject())
+func (b *BackgroundMaterial) SetShadowLights(shadowLights js.Value) *BackgroundMaterial {
+	p := ba.ctx.Get("BackgroundMaterial").New(shadowLights)
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func RecastJSCrowdFromJSObject(p js.Value, ctx js.Value) *RecastJSCrowd {
 	return &RecastJSCrowd{p: p, ctx: ctx}
 }
 
+// RecastJSCrowdArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RecastJSCrowdArrayToJSArray(array []*RecastJSCrowd) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRecastJSCrowd returns a new RecastJSCrowd object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd
@@ -76,9 +85,7 @@ func (r *RecastJSCrowd) AgentGoto(index float64, destination *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#dispose
 func (r *RecastJSCrowd) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetAgentPosition calls the GetAgentPosition method on the RecastJSCrowd object.
@@ -112,9 +119,7 @@ func (r *RecastJSCrowd) GetAgentVelocity(index float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#getagents
 func (r *RecastJSCrowd) GetAgents() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getAgents", args...)
+	retVal := r.p.Call("getAgents")
 	return retVal.Float()
 }
 
@@ -123,9 +128,7 @@ func (r *RecastJSCrowd) GetAgents() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#getdefaultqueryextent
 func (r *RecastJSCrowd) GetDefaultQueryExtent() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getDefaultQueryExtent", args...)
+	retVal := r.p.Call("getDefaultQueryExtent")
 	return Vector3FromJSObject(retVal, r.ctx)
 }
 

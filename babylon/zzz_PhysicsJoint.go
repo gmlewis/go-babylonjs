@@ -30,15 +30,24 @@ func PhysicsJointFromJSObject(p js.Value, ctx js.Value) *PhysicsJoint {
 	return &PhysicsJoint{p: p, ctx: ctx}
 }
 
+// PhysicsJointArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsJointArrayToJSArray(array []*PhysicsJoint) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhysicsJoint returns a new PhysicsJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjoint
-func (ba *Babylon) NewPhysicsJoint(jsType float64, jointData *PhysicsJointData) *PhysicsJoint {
+func (ba *Babylon) NewPhysicsJoint(jsType float64, jointData js.Value) *PhysicsJoint {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, jsType)
-	args = append(args, jointData.JSObject())
+	args = append(args, jointData)
 
 	p := ba.ctx.Get("PhysicsJoint").New(args...)
 	return PhysicsJointFromJSObject(p, ba.ctx)
@@ -51,7 +60,7 @@ func (p *PhysicsJoint) ExecuteNativeFunction(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	p.p.Call("executeNativeFunction", args...)
 }
@@ -125,16 +134,16 @@ func (p *PhysicsJoint) SetHingeJoint(HingeJoint float64) *PhysicsJoint {
 // JointData returns the JointData property of class PhysicsJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjoint#jointdata
-func (p *PhysicsJoint) JointData(jointData *PhysicsJointData) *PhysicsJoint {
-	p := ba.ctx.Get("PhysicsJoint").New(jointData.JSObject())
+func (p *PhysicsJoint) JointData(jointData js.Value) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(jointData)
 	return PhysicsJointFromJSObject(p, ba.ctx)
 }
 
 // SetJointData sets the JointData property of class PhysicsJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjoint#jointdata
-func (p *PhysicsJoint) SetJointData(jointData *PhysicsJointData) *PhysicsJoint {
-	p := ba.ctx.Get("PhysicsJoint").New(jointData.JSObject())
+func (p *PhysicsJoint) SetJointData(jointData js.Value) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(jointData)
 	return PhysicsJointFromJSObject(p, ba.ctx)
 }
 

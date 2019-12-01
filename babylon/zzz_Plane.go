@@ -27,6 +27,15 @@ func PlaneFromJSObject(p js.Value, ctx js.Value) *Plane {
 	return &Plane{p: p, ctx: ctx}
 }
 
+// PlaneArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PlaneArrayToJSArray(array []*Plane) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPlane returns a new Plane object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.plane
@@ -48,9 +57,7 @@ func (ba *Babylon) NewPlane(a float64, b float64, c float64, d float64) *Plane {
 // https://doc.babylonjs.com/api/classes/babylon.plane#asarray
 func (p *Plane) AsArray() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("asArray", args...)
+	retVal := p.p.Call("asArray")
 	return retVal.Float()
 }
 
@@ -59,9 +66,7 @@ func (p *Plane) AsArray() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.plane#clone
 func (p *Plane) Clone() *Plane {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("clone", args...)
+	retVal := p.p.Call("clone")
 	return PlaneFromJSObject(retVal, p.ctx)
 }
 
@@ -140,9 +145,7 @@ func (p *Plane) FromPositionAndNormal(origin *Vector3, normal *Vector3) *Plane {
 // https://doc.babylonjs.com/api/classes/babylon.plane#getclassname
 func (p *Plane) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -151,9 +154,7 @@ func (p *Plane) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.plane#gethashcode
 func (p *Plane) GetHashCode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getHashCode", args...)
+	retVal := p.p.Call("getHashCode")
 	return retVal.Float()
 }
 
@@ -176,9 +177,7 @@ func (p *Plane) IsFrontFacingTo(direction *Vector3, epsilon float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.plane#normalize
 func (p *Plane) Normalize() *Plane {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("normalize", args...)
+	retVal := p.p.Call("normalize")
 	return PlaneFromJSObject(retVal, p.ctx)
 }
 

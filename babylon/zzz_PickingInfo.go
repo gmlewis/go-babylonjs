@@ -29,6 +29,15 @@ func PickingInfoFromJSObject(p js.Value, ctx js.Value) *PickingInfo {
 	return &PickingInfo{p: p, ctx: ctx}
 }
 
+// PickingInfoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PickingInfoArrayToJSArray(array []*PickingInfo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // PickingInfoGetNormalOpts contains optional parameters for PickingInfo.GetNormal.
 type PickingInfoGetNormalOpts struct {
 	UseWorldCoordinates *bool
@@ -65,9 +74,7 @@ func (p *PickingInfo) GetNormal(opts *PickingInfoGetNormalOpts) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.pickinginfo#gettexturecoordinates
 func (p *PickingInfo) GetTextureCoordinates() *Vector2 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getTextureCoordinates", args...)
+	retVal := p.p.Call("getTextureCoordinates")
 	return Vector2FromJSObject(retVal, p.ctx)
 }
 

@@ -30,6 +30,15 @@ func DigitalRainPostProcessFromJSObject(p js.Value, ctx js.Value) *DigitalRainPo
 	return &DigitalRainPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DigitalRainPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DigitalRainPostProcessArrayToJSArray(array []*DigitalRainPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDigitalRainPostProcessOpts contains optional parameters for NewDigitalRainPostProcess.
 type NewDigitalRainPostProcessOpts struct {
 	Options *string
@@ -96,9 +105,7 @@ func (d *DigitalRainPostProcess) Activate(camera *Camera, opts *DigitalRainPostP
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#apply
 func (d *DigitalRainPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("apply", args...)
+	retVal := d.p.Call("apply")
 	return EffectFromJSObject(retVal, d.ctx)
 }
 
@@ -131,9 +138,7 @@ func (d *DigitalRainPostProcess) Dispose(opts *DigitalRainPostProcessDisposeOpts
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#getcamera
 func (d *DigitalRainPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getCamera", args...)
+	retVal := d.p.Call("getCamera")
 	return CameraFromJSObject(retVal, d.ctx)
 }
 
@@ -142,9 +147,7 @@ func (d *DigitalRainPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#getclassname
 func (d *DigitalRainPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -153,9 +156,7 @@ func (d *DigitalRainPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#geteffect
 func (d *DigitalRainPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getEffect", args...)
+	retVal := d.p.Call("getEffect")
 	return EffectFromJSObject(retVal, d.ctx)
 }
 
@@ -164,9 +165,7 @@ func (d *DigitalRainPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#geteffectname
 func (d *DigitalRainPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getEffectName", args...)
+	retVal := d.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -175,9 +174,7 @@ func (d *DigitalRainPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#getengine
 func (d *DigitalRainPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getEngine", args...)
+	retVal := d.p.Call("getEngine")
 	return EngineFromJSObject(retVal, d.ctx)
 }
 
@@ -186,9 +183,7 @@ func (d *DigitalRainPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#isready
 func (d *DigitalRainPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isReady", args...)
+	retVal := d.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -197,9 +192,7 @@ func (d *DigitalRainPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#isreusable
 func (d *DigitalRainPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isReusable", args...)
+	retVal := d.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -208,9 +201,7 @@ func (d *DigitalRainPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#marktexturedirty
 func (d *DigitalRainPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("markTextureDirty", args...)
+	d.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the DigitalRainPostProcess object.
@@ -285,9 +276,7 @@ func (d *DigitalRainPostProcess) UpdateEffect(opts *DigitalRainPostProcessUpdate
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#useownoutput
 func (d *DigitalRainPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("useOwnOutput", args...)
+	d.p.Call("useOwnOutput")
 }
 
 /*
@@ -568,7 +557,7 @@ func (d *DigitalRainPostProcess) SetName(name string) *DigitalRainPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#onactivate
 func (d *DigitalRainPostProcess) OnActivate(onActivate func()) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(onActivate)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -576,7 +565,7 @@ func (d *DigitalRainPostProcess) OnActivate(onActivate func()) *DigitalRainPostP
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#onactivate
 func (d *DigitalRainPostProcess) SetOnActivate(onActivate func()) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(onActivate)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -600,7 +589,7 @@ func (d *DigitalRainPostProcess) SetOnActivateObservable(onActivateObservable *O
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#onafterrender
 func (d *DigitalRainPostProcess) OnAfterRender(onAfterRender func()) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -608,7 +597,7 @@ func (d *DigitalRainPostProcess) OnAfterRender(onAfterRender func()) *DigitalRai
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#onafterrender
 func (d *DigitalRainPostProcess) SetOnAfterRender(onAfterRender func()) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -632,7 +621,7 @@ func (d *DigitalRainPostProcess) SetOnAfterRenderObservable(onAfterRenderObserva
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#onapply
 func (d *DigitalRainPostProcess) OnApply(onApply func()) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(onApply)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -640,7 +629,7 @@ func (d *DigitalRainPostProcess) OnApply(onApply func()) *DigitalRainPostProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#onapply
 func (d *DigitalRainPostProcess) SetOnApply(onApply func()) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(onApply)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -664,7 +653,7 @@ func (d *DigitalRainPostProcess) SetOnApplyObservable(onApplyObservable *Observa
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#onbeforerender
 func (d *DigitalRainPostProcess) OnBeforeRender(onBeforeRender func()) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -672,7 +661,7 @@ func (d *DigitalRainPostProcess) OnBeforeRender(onBeforeRender func()) *DigitalR
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#onbeforerender
 func (d *DigitalRainPostProcess) SetOnBeforeRender(onBeforeRender func()) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -696,7 +685,7 @@ func (d *DigitalRainPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObser
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#onsizechanged
 func (d *DigitalRainPostProcess) OnSizeChanged(onSizeChanged func()) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -704,7 +693,7 @@ func (d *DigitalRainPostProcess) OnSizeChanged(onSizeChanged func()) *DigitalRai
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#onsizechanged
 func (d *DigitalRainPostProcess) SetOnSizeChanged(onSizeChanged func()) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 

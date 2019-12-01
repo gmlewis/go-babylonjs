@@ -27,6 +27,15 @@ func ReplaceColorBlockFromJSObject(p js.Value, ctx js.Value) *ReplaceColorBlock 
 	return &ReplaceColorBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ReplaceColorBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ReplaceColorBlockArrayToJSArray(array []*ReplaceColorBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewReplaceColorBlock returns a new ReplaceColorBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock
@@ -152,9 +161,7 @@ func (r *ReplaceColorBlock) ConnectTo(other *NodeMaterialBlock, opts *ReplaceCol
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#dispose
 func (r *ReplaceColorBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ReplaceColorBlock object.
@@ -162,9 +169,7 @@ func (r *ReplaceColorBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#getclassname
 func (r *ReplaceColorBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (r *ReplaceColorBlock) ReplaceRepeatableContent(vertexShaderState *NodeMate
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#serialize
 func (r *ReplaceColorBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 

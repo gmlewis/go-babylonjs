@@ -27,6 +27,15 @@ func RGBDTextureToolsFromJSObject(p js.Value, ctx js.Value) *RGBDTextureTools {
 	return &RGBDTextureTools{p: p, ctx: ctx}
 }
 
+// RGBDTextureToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RGBDTextureToolsArrayToJSArray(array []*RGBDTextureTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ExpandRGBDTexture calls the ExpandRGBDTexture method on the RGBDTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rgbdtexturetools#expandrgbdtexture

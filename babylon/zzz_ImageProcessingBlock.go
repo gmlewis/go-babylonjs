@@ -27,6 +27,15 @@ func ImageProcessingBlockFromJSObject(p js.Value, ctx js.Value) *ImageProcessing
 	return &ImageProcessingBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ImageProcessingBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ImageProcessingBlockArrayToJSArray(array []*ImageProcessingBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewImageProcessingBlock returns a new ImageProcessingBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock
@@ -152,9 +161,7 @@ func (i *ImageProcessingBlock) ConnectTo(other *NodeMaterialBlock, opts *ImagePr
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock#dispose
 func (i *ImageProcessingBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("dispose", args...)
+	i.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ImageProcessingBlock object.
@@ -162,9 +169,7 @@ func (i *ImageProcessingBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock#getclassname
 func (i *ImageProcessingBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -421,9 +426,7 @@ func (i *ImageProcessingBlock) ReplaceRepeatableContent(vertexShaderState *NodeM
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock#serialize
 func (i *ImageProcessingBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("serialize", args...)
+	retVal := i.p.Call("serialize")
 	return retVal
 }
 

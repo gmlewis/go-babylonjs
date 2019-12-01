@@ -27,6 +27,15 @@ func ValueAndUnitFromJSObject(p js.Value, ctx js.Value) *ValueAndUnit {
 	return &ValueAndUnit{p: p, ctx: ctx}
 }
 
+// ValueAndUnitArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ValueAndUnitArrayToJSArray(array []*ValueAndUnit) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewValueAndUnitOpts contains optional parameters for NewValueAndUnit.
 type NewValueAndUnitOpts struct {
 	Unit                 *float64

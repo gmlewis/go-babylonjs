@@ -27,6 +27,15 @@ func WebXRInputFromJSObject(p js.Value, ctx js.Value) *WebXRInput {
 	return &WebXRInput{p: p, ctx: ctx}
 }
 
+// WebXRInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRInputArrayToJSArray(array []*WebXRInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWebXRInput returns a new WebXRInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrinput
@@ -45,9 +54,7 @@ func (ba *Babylon) NewWebXRInput(baseExperience *WebXRExperienceHelper) *WebXRIn
 // https://doc.babylonjs.com/api/classes/babylon.webxrinput#dispose
 func (w *WebXRInput) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 /*
@@ -71,16 +78,16 @@ func (w *WebXRInput) SetBaseExperience(baseExperience *WebXRExperienceHelper) *W
 // Controllers returns the Controllers property of class WebXRInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrinput#controllers
-func (w *WebXRInput) Controllers(controllers []WebXRController) *WebXRInput {
-	p := ba.ctx.Get("WebXRInput").New(controllers.JSObject())
+func (w *WebXRInput) Controllers(controllers []*WebXRController) *WebXRInput {
+	p := ba.ctx.Get("WebXRInput").New(controllers)
 	return WebXRInputFromJSObject(p, ba.ctx)
 }
 
 // SetControllers sets the Controllers property of class WebXRInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrinput#controllers
-func (w *WebXRInput) SetControllers(controllers []WebXRController) *WebXRInput {
-	p := ba.ctx.Get("WebXRInput").New(controllers.JSObject())
+func (w *WebXRInput) SetControllers(controllers []*WebXRController) *WebXRInput {
+	p := ba.ctx.Get("WebXRInput").New(controllers)
 	return WebXRInputFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func SceneLoaderProgressEventFromJSObject(p js.Value, ctx js.Value) *SceneLoader
 	return &SceneLoaderProgressEvent{p: p, ctx: ctx}
 }
 
+// SceneLoaderProgressEventArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SceneLoaderProgressEventArrayToJSArray(array []*SceneLoaderProgressEvent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSceneLoaderProgressEvent returns a new SceneLoaderProgressEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent

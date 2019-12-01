@@ -27,6 +27,15 @@ func DeferredFromJSObject(p js.Value, ctx js.Value) *Deferred {
 	return &Deferred{p: p, ctx: ctx}
 }
 
+// DeferredArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DeferredArrayToJSArray(array []*Deferred) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDeferred returns a new Deferred object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred
@@ -60,7 +69,7 @@ func (d *Deferred) SetPromise(promise *Promise) *Deferred {
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#reject
 func (d *Deferred) Reject(reject func()) *Deferred {
-	p := ba.ctx.Get("Deferred").New(reject)
+	p := ba.ctx.Get("Deferred").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {reject(); return nil}))
 	return DeferredFromJSObject(p, ba.ctx)
 }
 
@@ -68,7 +77,7 @@ func (d *Deferred) Reject(reject func()) *Deferred {
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#reject
 func (d *Deferred) SetReject(reject func()) *Deferred {
-	p := ba.ctx.Get("Deferred").New(reject)
+	p := ba.ctx.Get("Deferred").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {reject(); return nil}))
 	return DeferredFromJSObject(p, ba.ctx)
 }
 
@@ -76,7 +85,7 @@ func (d *Deferred) SetReject(reject func()) *Deferred {
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#resolve
 func (d *Deferred) Resolve(resolve func()) *Deferred {
-	p := ba.ctx.Get("Deferred").New(resolve)
+	p := ba.ctx.Get("Deferred").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {resolve(); return nil}))
 	return DeferredFromJSObject(p, ba.ctx)
 }
 
@@ -84,7 +93,7 @@ func (d *Deferred) Resolve(resolve func()) *Deferred {
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#resolve
 func (d *Deferred) SetResolve(resolve func()) *Deferred {
-	p := ba.ctx.Get("Deferred").New(resolve)
+	p := ba.ctx.Get("Deferred").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {resolve(); return nil}))
 	return DeferredFromJSObject(p, ba.ctx)
 }
 

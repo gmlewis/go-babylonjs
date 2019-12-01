@@ -29,6 +29,15 @@ func SceneInstrumentationFromJSObject(p js.Value, ctx js.Value) *SceneInstrument
 	return &SceneInstrumentation{p: p, ctx: ctx}
 }
 
+// SceneInstrumentationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SceneInstrumentationArrayToJSArray(array []*SceneInstrumentation) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSceneInstrumentation returns a new SceneInstrumentation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation
@@ -47,9 +56,7 @@ func (ba *Babylon) NewSceneInstrumentation(scene *Scene) *SceneInstrumentation {
 // https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#dispose
 func (s *SceneInstrumentation) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 /*

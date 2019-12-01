@@ -27,6 +27,15 @@ func ParticleHelperFromJSObject(p js.Value, ctx js.Value) *ParticleHelper {
 	return &ParticleHelper{p: p, ctx: ctx}
 }
 
+// ParticleHelperArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ParticleHelperArrayToJSArray(array []*ParticleHelper) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ParticleHelperCreateAsyncOpts contains optional parameters for ParticleHelper.CreateAsync.
 type ParticleHelperCreateAsyncOpts struct {
 	Gpu *bool
@@ -35,7 +44,7 @@ type ParticleHelperCreateAsyncOpts struct {
 // CreateAsync calls the CreateAsync method on the ParticleHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlehelper#createasync
-func (p *ParticleHelper) CreateAsync(jsType string, scene *Scene, opts *ParticleHelperCreateAsyncOpts) *ParticleSystemSet {
+func (p *ParticleHelper) CreateAsync(jsType string, scene *Scene, opts *ParticleHelperCreateAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ParticleHelperCreateAsyncOpts{}
 	}
@@ -52,7 +61,7 @@ func (p *ParticleHelper) CreateAsync(jsType string, scene *Scene, opts *Particle
 	}
 
 	retVal := p.p.Call("CreateAsync", args...)
-	return ParticleSystemSetFromJSObject(retVal, p.ctx)
+	return PromiseFromJSObject(retVal, p.ctx)
 }
 
 // ParticleHelperCreateDefaultOpts contains optional parameters for ParticleHelper.CreateDefault.
@@ -65,7 +74,7 @@ type ParticleHelperCreateDefaultOpts struct {
 // CreateDefault calls the CreateDefault method on the ParticleHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlehelper#createdefault
-func (p *ParticleHelper) CreateDefault(emitter *AbstractMesh, opts *ParticleHelperCreateDefaultOpts) *IParticleSystem {
+func (p *ParticleHelper) CreateDefault(emitter *AbstractMesh, opts *ParticleHelperCreateDefaultOpts) js.Value {
 	if opts == nil {
 		opts = &ParticleHelperCreateDefaultOpts{}
 	}
@@ -91,17 +100,17 @@ func (p *ParticleHelper) CreateDefault(emitter *AbstractMesh, opts *ParticleHelp
 	}
 
 	retVal := p.p.Call("CreateDefault", args...)
-	return IParticleSystemFromJSObject(retVal, p.ctx)
+	return retVal
 }
 
 // ExportSet calls the ExportSet method on the ParticleHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlehelper#exportset
-func (p *ParticleHelper) ExportSet(systems *IParticleSystem) *ParticleSystemSet {
+func (p *ParticleHelper) ExportSet(systems js.Value) *ParticleSystemSet {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, systems.JSObject())
+	args = append(args, systems)
 
 	retVal := p.p.Call("ExportSet", args...)
 	return ParticleSystemSetFromJSObject(retVal, p.ctx)

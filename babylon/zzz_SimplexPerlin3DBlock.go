@@ -27,6 +27,15 @@ func SimplexPerlin3DBlockFromJSObject(p js.Value, ctx js.Value) *SimplexPerlin3D
 	return &SimplexPerlin3DBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SimplexPerlin3DBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SimplexPerlin3DBlockArrayToJSArray(array []*SimplexPerlin3DBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSimplexPerlin3DBlock returns a new SimplexPerlin3DBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock
@@ -152,9 +161,7 @@ func (s *SimplexPerlin3DBlock) ConnectTo(other *NodeMaterialBlock, opts *Simplex
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock#dispose
 func (s *SimplexPerlin3DBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the SimplexPerlin3DBlock object.
@@ -162,9 +169,7 @@ func (s *SimplexPerlin3DBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock#getclassname
 func (s *SimplexPerlin3DBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (s *SimplexPerlin3DBlock) ReplaceRepeatableContent(vertexShaderState *NodeM
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock#serialize
 func (s *SimplexPerlin3DBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

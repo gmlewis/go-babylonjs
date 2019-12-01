@@ -27,6 +27,15 @@ func ShadowOnlyMaterialFromJSObject(p js.Value, ctx js.Value) *ShadowOnlyMateria
 	return &ShadowOnlyMaterial{p: p, ctx: ctx}
 }
 
+// ShadowOnlyMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ShadowOnlyMaterialArrayToJSArray(array []*ShadowOnlyMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewShadowOnlyMaterial returns a new ShadowOnlyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial
@@ -237,7 +246,7 @@ type ShadowOnlyMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the ShadowOnlyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#forcecompilationasync
-func (s *ShadowOnlyMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *ShadowOnlyMaterialForceCompilationAsyncOpts) {
+func (s *ShadowOnlyMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *ShadowOnlyMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ShadowOnlyMaterialForceCompilationAsyncOpts{}
 	}
@@ -252,7 +261,8 @@ func (s *ShadowOnlyMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *Sha
 		args = append(args, opts.Options)
 	}
 
-	s.p.Call("forceCompilationAsync", args...)
+	retVal := s.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 // Freeze calls the Freeze method on the ShadowOnlyMaterial object.
@@ -260,9 +270,7 @@ func (s *ShadowOnlyMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *Sha
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#freeze
 func (s *ShadowOnlyMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("freeze", args...)
+	s.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the ShadowOnlyMaterial object.
@@ -270,9 +278,7 @@ func (s *ShadowOnlyMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#getactivetextures
 func (s *ShadowOnlyMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getActiveTextures", args...)
+	retVal := s.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, s.ctx)
 }
 
@@ -281,9 +287,7 @@ func (s *ShadowOnlyMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#getalphatesttexture
 func (s *ShadowOnlyMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAlphaTestTexture", args...)
+	retVal := s.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, s.ctx)
 }
 
@@ -292,9 +296,7 @@ func (s *ShadowOnlyMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#getbindedmeshes
 func (s *ShadowOnlyMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getBindedMeshes", args...)
+	retVal := s.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, s.ctx)
 }
 
@@ -303,9 +305,7 @@ func (s *ShadowOnlyMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#getclassname
 func (s *ShadowOnlyMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -314,9 +314,7 @@ func (s *ShadowOnlyMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#geteffect
 func (s *ShadowOnlyMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEffect", args...)
+	retVal := s.p.Call("getEffect")
 	return EffectFromJSObject(retVal, s.ctx)
 }
 
@@ -325,9 +323,7 @@ func (s *ShadowOnlyMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#getscene
 func (s *ShadowOnlyMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getScene", args...)
+	retVal := s.p.Call("getScene")
 	return SceneFromJSObject(retVal, s.ctx)
 }
 
@@ -420,9 +416,7 @@ func (s *ShadowOnlyMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#markdirty
 func (s *ShadowOnlyMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("markDirty", args...)
+	s.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the ShadowOnlyMaterial object.
@@ -430,9 +424,7 @@ func (s *ShadowOnlyMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#needalphablending
 func (s *ShadowOnlyMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("needAlphaBlending", args...)
+	retVal := s.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -454,9 +446,7 @@ func (s *ShadowOnlyMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#needalphatesting
 func (s *ShadowOnlyMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("needAlphaTesting", args...)
+	retVal := s.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -480,9 +470,7 @@ func (s *ShadowOnlyMaterial) Parse(source interface{}, scene *Scene, rootUrl str
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#serialize
 func (s *ShadowOnlyMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 
@@ -516,9 +504,7 @@ func (s *ShadowOnlyMaterial) ToString(opts *ShadowOnlyMaterialToStringOpts) stri
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#unbind
 func (s *ShadowOnlyMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("unbind", args...)
+	s.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the ShadowOnlyMaterial object.
@@ -526,9 +512,7 @@ func (s *ShadowOnlyMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#unfreeze
 func (s *ShadowOnlyMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("unfreeze", args...)
+	s.p.Call("unfreeze")
 }
 
 /*
@@ -536,16 +520,16 @@ func (s *ShadowOnlyMaterial) Unfreeze() {
 // ActiveLight returns the ActiveLight property of class ShadowOnlyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#activelight
-func (s *ShadowOnlyMaterial) ActiveLight(activeLight *IShadowLight) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(activeLight.JSObject())
+func (s *ShadowOnlyMaterial) ActiveLight(activeLight js.Value) *ShadowOnlyMaterial {
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(activeLight)
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetActiveLight sets the ActiveLight property of class ShadowOnlyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#activelight
-func (s *ShadowOnlyMaterial) SetActiveLight(activeLight *IShadowLight) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(activeLight.JSObject())
+func (s *ShadowOnlyMaterial) SetActiveLight(activeLight js.Value) *ShadowOnlyMaterial {
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(activeLight)
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -616,16 +600,16 @@ func (s *ShadowOnlyMaterial) SetAlphaMode(alphaMode float64) *ShadowOnlyMaterial
 // Animations returns the Animations property of class ShadowOnlyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#animations
-func (s *ShadowOnlyMaterial) Animations(animations []Animation) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(animations.JSObject())
+func (s *ShadowOnlyMaterial) Animations(animations []*Animation) *ShadowOnlyMaterial {
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(animations)
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class ShadowOnlyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#animations
-func (s *ShadowOnlyMaterial) SetAnimations(animations []Animation) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(animations.JSObject())
+func (s *ShadowOnlyMaterial) SetAnimations(animations []*Animation) *ShadowOnlyMaterial {
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(animations)
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -841,7 +825,7 @@ func (s *ShadowOnlyMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *Shad
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#getrendertargettextures
 func (s *ShadowOnlyMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -849,7 +833,7 @@ func (s *ShadowOnlyMaterial) GetRenderTargetTextures(getRenderTargetTextures fun
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#getrendertargettextures
 func (s *ShadowOnlyMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1049,7 +1033,7 @@ func (s *ShadowOnlyMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *ShadowO
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#onbind
 func (s *ShadowOnlyMaterial) OnBind(onBind func()) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(onBind)
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1057,7 +1041,7 @@ func (s *ShadowOnlyMaterial) OnBind(onBind func()) *ShadowOnlyMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#onbind
 func (s *ShadowOnlyMaterial) SetOnBind(onBind func()) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(onBind)
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1081,7 +1065,7 @@ func (s *ShadowOnlyMaterial) SetOnBindObservable(onBindObservable *Observable) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#oncompiled
 func (s *ShadowOnlyMaterial) OnCompiled(onCompiled func()) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(onCompiled)
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1089,7 +1073,7 @@ func (s *ShadowOnlyMaterial) OnCompiled(onCompiled func()) *ShadowOnlyMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#oncompiled
 func (s *ShadowOnlyMaterial) SetOnCompiled(onCompiled func()) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(onCompiled)
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1097,7 +1081,7 @@ func (s *ShadowOnlyMaterial) SetOnCompiled(onCompiled func()) *ShadowOnlyMateria
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#ondispose
 func (s *ShadowOnlyMaterial) OnDispose(onDispose func()) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(onDispose)
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1105,7 +1089,7 @@ func (s *ShadowOnlyMaterial) OnDispose(onDispose func()) *ShadowOnlyMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#ondispose
 func (s *ShadowOnlyMaterial) SetOnDispose(onDispose func()) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(onDispose)
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1129,7 +1113,7 @@ func (s *ShadowOnlyMaterial) SetOnDisposeObservable(onDisposeObservable *Observa
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#onerror
 func (s *ShadowOnlyMaterial) OnError(onError func()) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(onError)
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1137,7 +1121,7 @@ func (s *ShadowOnlyMaterial) OnError(onError func()) *ShadowOnlyMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#onerror
 func (s *ShadowOnlyMaterial) SetOnError(onError func()) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(onError)
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func NLerpBlockFromJSObject(p js.Value, ctx js.Value) *NLerpBlock {
 	return &NLerpBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// NLerpBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NLerpBlockArrayToJSArray(array []*NLerpBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewNLerpBlock returns a new NLerpBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nlerpblock
@@ -152,9 +161,7 @@ func (n *NLerpBlock) ConnectTo(other *NodeMaterialBlock, opts *NLerpBlockConnect
 // https://doc.babylonjs.com/api/classes/babylon.nlerpblock#dispose
 func (n *NLerpBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("dispose", args...)
+	n.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the NLerpBlock object.
@@ -162,9 +169,7 @@ func (n *NLerpBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.nlerpblock#getclassname
 func (n *NLerpBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getClassName", args...)
+	retVal := n.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (n *NLerpBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBui
 // https://doc.babylonjs.com/api/classes/babylon.nlerpblock#serialize
 func (n *NLerpBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("serialize", args...)
+	retVal := n.p.Call("serialize")
 	return retVal
 }
 

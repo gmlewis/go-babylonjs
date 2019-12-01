@@ -27,6 +27,15 @@ func FogBlockFromJSObject(p js.Value, ctx js.Value) *FogBlock {
 	return &FogBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FogBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FogBlockArrayToJSArray(array []*FogBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFogBlock returns a new FogBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock
@@ -152,9 +161,7 @@ func (f *FogBlock) ConnectTo(other *NodeMaterialBlock, opts *FogBlockConnectToOp
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#dispose
 func (f *FogBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("dispose", args...)
+	f.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the FogBlock object.
@@ -162,9 +169,7 @@ func (f *FogBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#getclassname
 func (f *FogBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -435,9 +440,7 @@ func (f *FogBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuild
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#serialize
 func (f *FogBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("serialize", args...)
+	retVal := f.p.Call("serialize")
 	return retVal
 }
 

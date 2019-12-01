@@ -27,6 +27,15 @@ func PowBlockFromJSObject(p js.Value, ctx js.Value) *PowBlock {
 	return &PowBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PowBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PowBlockArrayToJSArray(array []*PowBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPowBlock returns a new PowBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powblock
@@ -152,9 +161,7 @@ func (p *PowBlock) ConnectTo(other *NodeMaterialBlock, opts *PowBlockConnectToOp
 // https://doc.babylonjs.com/api/classes/babylon.powblock#dispose
 func (p *PowBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the PowBlock object.
@@ -162,9 +169,7 @@ func (p *PowBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.powblock#getclassname
 func (p *PowBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (p *PowBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuild
 // https://doc.babylonjs.com/api/classes/babylon.powblock#serialize
 func (p *PowBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 

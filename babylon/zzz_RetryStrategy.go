@@ -27,6 +27,15 @@ func RetryStrategyFromJSObject(p js.Value, ctx js.Value) *RetryStrategy {
 	return &RetryStrategy{p: p, ctx: ctx}
 }
 
+// RetryStrategyArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RetryStrategyArrayToJSArray(array []*RetryStrategy) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // RetryStrategyExponentialBackoffOpts contains optional parameters for RetryStrategy.ExponentialBackoff.
 type RetryStrategyExponentialBackoffOpts struct {
 	MaxRetries   *float64

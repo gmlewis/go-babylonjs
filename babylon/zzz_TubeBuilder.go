@@ -27,6 +27,15 @@ func TubeBuilderFromJSObject(p js.Value, ctx js.Value) *TubeBuilder {
 	return &TubeBuilder{p: p, ctx: ctx}
 }
 
+// TubeBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TubeBuilderArrayToJSArray(array []*TubeBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // TubeBuilderCreateTubeOpts contains optional parameters for TubeBuilder.CreateTube.
 type TubeBuilderCreateTubeOpts struct {
 	Scene *Scene

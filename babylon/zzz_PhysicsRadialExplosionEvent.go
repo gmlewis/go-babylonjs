@@ -27,6 +27,15 @@ func PhysicsRadialExplosionEventFromJSObject(p js.Value, ctx js.Value) *PhysicsR
 	return &PhysicsRadialExplosionEvent{p: p, ctx: ctx}
 }
 
+// PhysicsRadialExplosionEventArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsRadialExplosionEventArrayToJSArray(array []*PhysicsRadialExplosionEvent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhysicsRadialExplosionEvent returns a new PhysicsRadialExplosionEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent
@@ -70,9 +79,7 @@ func (p *PhysicsRadialExplosionEvent) Dispose(opts *PhysicsRadialExplosionEventD
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent#getdata
 func (p *PhysicsRadialExplosionEvent) GetData() *PhysicsRadialExplosionEventData {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getData", args...)
+	retVal := p.p.Call("getData")
 	return PhysicsRadialExplosionEventDataFromJSObject(retVal, p.ctx)
 }
 
@@ -93,11 +100,11 @@ func (p *PhysicsRadialExplosionEvent) GetImpostorHitData(impostor *PhysicsImpost
 // TriggerAffectedImpostorsCallback calls the TriggerAffectedImpostorsCallback method on the PhysicsRadialExplosionEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent#triggeraffectedimpostorscallback
-func (p *PhysicsRadialExplosionEvent) TriggerAffectedImpostorsCallback(affectedImpostorsWithData []PhysicsAffectedImpostorWithData) {
+func (p *PhysicsRadialExplosionEvent) TriggerAffectedImpostorsCallback(affectedImpostorsWithData []*PhysicsAffectedImpostorWithData) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, affectedImpostorsWithData.JSObject())
+	args = append(args, PhysicsAffectedImpostorWithDataArrayToJSArray(affectedImpostorsWithData))
 
 	p.p.Call("triggerAffectedImpostorsCallback", args...)
 }

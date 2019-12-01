@@ -30,6 +30,15 @@ func MultiMaterialFromJSObject(p js.Value, ctx js.Value) *MultiMaterial {
 	return &MultiMaterial{Material: MaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
+// MultiMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MultiMaterialArrayToJSArray(array []*MultiMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMultiMaterial returns a new MultiMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial
@@ -242,7 +251,7 @@ type MultiMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the MultiMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#forcecompilationasync
-func (m *MultiMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MultiMaterialForceCompilationAsyncOpts) {
+func (m *MultiMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MultiMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &MultiMaterialForceCompilationAsyncOpts{}
 	}
@@ -257,7 +266,8 @@ func (m *MultiMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MultiMat
 		args = append(args, opts.Options)
 	}
 
-	m.p.Call("forceCompilationAsync", args...)
+	retVal := m.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, m.ctx)
 }
 
 // Freeze calls the Freeze method on the MultiMaterial object.
@@ -265,9 +275,7 @@ func (m *MultiMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MultiMat
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#freeze
 func (m *MultiMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("freeze", args...)
+	m.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the MultiMaterial object.
@@ -275,9 +283,7 @@ func (m *MultiMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#getactivetextures
 func (m *MultiMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getActiveTextures", args...)
+	retVal := m.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -286,9 +292,7 @@ func (m *MultiMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#getalphatesttexture
 func (m *MultiMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getAlphaTestTexture", args...)
+	retVal := m.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -297,9 +301,7 @@ func (m *MultiMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#getbindedmeshes
 func (m *MultiMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getBindedMeshes", args...)
+	retVal := m.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, m.ctx)
 }
 
@@ -308,9 +310,7 @@ func (m *MultiMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#getchildren
 func (m *MultiMaterial) GetChildren() *Material {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getChildren", args...)
+	retVal := m.p.Call("getChildren")
 	return MaterialFromJSObject(retVal, m.ctx)
 }
 
@@ -319,9 +319,7 @@ func (m *MultiMaterial) GetChildren() *Material {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#getclassname
 func (m *MultiMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -330,9 +328,7 @@ func (m *MultiMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#geteffect
 func (m *MultiMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getEffect", args...)
+	retVal := m.p.Call("getEffect")
 	return EffectFromJSObject(retVal, m.ctx)
 }
 
@@ -341,9 +337,7 @@ func (m *MultiMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#getscene
 func (m *MultiMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getScene", args...)
+	retVal := m.p.Call("getScene")
 	return SceneFromJSObject(retVal, m.ctx)
 }
 
@@ -449,9 +443,7 @@ func (m *MultiMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#markdirty
 func (m *MultiMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markDirty", args...)
+	m.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the MultiMaterial object.
@@ -459,9 +451,7 @@ func (m *MultiMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#needalphablending
 func (m *MultiMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("needAlphaBlending", args...)
+	retVal := m.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -483,9 +473,7 @@ func (m *MultiMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#needalphatesting
 func (m *MultiMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("needAlphaTesting", args...)
+	retVal := m.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -523,9 +511,7 @@ func (m *MultiMaterial) ParseMultiMaterial(parsedMultiMaterial interface{}, scen
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#serialize
 func (m *MultiMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("serialize", args...)
+	retVal := m.p.Call("serialize")
 	return retVal
 }
 
@@ -559,9 +545,7 @@ func (m *MultiMaterial) ToString(opts *MultiMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#unbind
 func (m *MultiMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("unbind", args...)
+	m.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the MultiMaterial object.
@@ -569,9 +553,7 @@ func (m *MultiMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#unfreeze
 func (m *MultiMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("unfreeze", args...)
+	m.p.Call("unfreeze")
 }
 
 /*
@@ -627,16 +609,16 @@ func (m *MultiMaterial) SetAlphaMode(alphaMode float64) *MultiMaterial {
 // Animations returns the Animations property of class MultiMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#animations
-func (m *MultiMaterial) Animations(animations []Animation) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(animations.JSObject())
+func (m *MultiMaterial) Animations(animations []*Animation) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(animations)
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class MultiMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#animations
-func (m *MultiMaterial) SetAnimations(animations []Animation) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(animations.JSObject())
+func (m *MultiMaterial) SetAnimations(animations []*Animation) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(animations)
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -852,7 +834,7 @@ func (m *MultiMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *MultiMate
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#getrendertargettextures
 func (m *MultiMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("MultiMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -860,7 +842,7 @@ func (m *MultiMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#getrendertargettextures
 func (m *MultiMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("MultiMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1060,7 +1042,7 @@ func (m *MultiMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *MultiMateria
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#onbind
 func (m *MultiMaterial) OnBind(onBind func()) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(onBind)
+	p := ba.ctx.Get("MultiMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1068,7 +1050,7 @@ func (m *MultiMaterial) OnBind(onBind func()) *MultiMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#onbind
 func (m *MultiMaterial) SetOnBind(onBind func()) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(onBind)
+	p := ba.ctx.Get("MultiMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1092,7 +1074,7 @@ func (m *MultiMaterial) SetOnBindObservable(onBindObservable *Observable) *Multi
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#oncompiled
 func (m *MultiMaterial) OnCompiled(onCompiled func()) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(onCompiled)
+	p := ba.ctx.Get("MultiMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1100,7 +1082,7 @@ func (m *MultiMaterial) OnCompiled(onCompiled func()) *MultiMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#oncompiled
 func (m *MultiMaterial) SetOnCompiled(onCompiled func()) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(onCompiled)
+	p := ba.ctx.Get("MultiMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1108,7 +1090,7 @@ func (m *MultiMaterial) SetOnCompiled(onCompiled func()) *MultiMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#ondispose
 func (m *MultiMaterial) OnDispose(onDispose func()) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(onDispose)
+	p := ba.ctx.Get("MultiMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1116,7 +1098,7 @@ func (m *MultiMaterial) OnDispose(onDispose func()) *MultiMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#ondispose
 func (m *MultiMaterial) SetOnDispose(onDispose func()) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(onDispose)
+	p := ba.ctx.Get("MultiMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1140,7 +1122,7 @@ func (m *MultiMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#onerror
 func (m *MultiMaterial) OnError(onError func()) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(onError)
+	p := ba.ctx.Get("MultiMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1148,7 +1130,7 @@ func (m *MultiMaterial) OnError(onError func()) *MultiMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#onerror
 func (m *MultiMaterial) SetOnError(onError func()) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(onError)
+	p := ba.ctx.Get("MultiMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 

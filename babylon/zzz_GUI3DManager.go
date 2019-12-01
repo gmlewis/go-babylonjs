@@ -29,6 +29,15 @@ func GUI3DManagerFromJSObject(p js.Value, ctx js.Value) *GUI3DManager {
 	return &GUI3DManager{p: p, ctx: ctx}
 }
 
+// GUI3DManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GUI3DManagerArrayToJSArray(array []*GUI3DManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGUI3DManagerOpts contains optional parameters for NewGUI3DManager.
 type NewGUI3DManagerOpts struct {
 	Scene *Scene
@@ -85,9 +94,7 @@ func (g *GUI3DManager) ContainsControl(control *Control3D) bool {
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager#dispose
 func (g *GUI3DManager) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // RemoveControl calls the RemoveControl method on the GUI3DManager object.

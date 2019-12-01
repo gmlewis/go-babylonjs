@@ -28,6 +28,15 @@ func RadioGroupFromJSObject(p js.Value, ctx js.Value) *RadioGroup {
 	return &RadioGroup{SelectorGroup: SelectorGroupFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RadioGroupArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RadioGroupArrayToJSArray(array []*RadioGroup) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRadioGroup returns a new RadioGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiogroup

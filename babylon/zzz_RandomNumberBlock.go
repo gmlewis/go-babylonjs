@@ -27,6 +27,15 @@ func RandomNumberBlockFromJSObject(p js.Value, ctx js.Value) *RandomNumberBlock 
 	return &RandomNumberBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RandomNumberBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RandomNumberBlockArrayToJSArray(array []*RandomNumberBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRandomNumberBlock returns a new RandomNumberBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock
@@ -152,9 +161,7 @@ func (r *RandomNumberBlock) ConnectTo(other *NodeMaterialBlock, opts *RandomNumb
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock#dispose
 func (r *RandomNumberBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the RandomNumberBlock object.
@@ -162,9 +169,7 @@ func (r *RandomNumberBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock#getclassname
 func (r *RandomNumberBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (r *RandomNumberBlock) ReplaceRepeatableContent(vertexShaderState *NodeMate
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock#serialize
 func (r *RandomNumberBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 

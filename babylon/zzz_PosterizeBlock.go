@@ -29,6 +29,15 @@ func PosterizeBlockFromJSObject(p js.Value, ctx js.Value) *PosterizeBlock {
 	return &PosterizeBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PosterizeBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PosterizeBlockArrayToJSArray(array []*PosterizeBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPosterizeBlock returns a new PosterizeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock
@@ -154,9 +163,7 @@ func (p *PosterizeBlock) ConnectTo(other *NodeMaterialBlock, opts *PosterizeBloc
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock#dispose
 func (p *PosterizeBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the PosterizeBlock object.
@@ -164,9 +171,7 @@ func (p *PosterizeBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock#getclassname
 func (p *PosterizeBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -451,9 +456,7 @@ func (p *PosterizeBlock) ReplaceRepeatableContent(vertexShaderState *NodeMateria
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock#serialize
 func (p *PosterizeBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 

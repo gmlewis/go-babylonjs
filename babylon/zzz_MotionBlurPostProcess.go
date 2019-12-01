@@ -36,6 +36,15 @@ func MotionBlurPostProcessFromJSObject(p js.Value, ctx js.Value) *MotionBlurPost
 	return &MotionBlurPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// MotionBlurPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MotionBlurPostProcessArrayToJSArray(array []*MotionBlurPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMotionBlurPostProcessOpts contains optional parameters for NewMotionBlurPostProcess.
 type NewMotionBlurPostProcessOpts struct {
 	SamplingMode     *float64
@@ -128,9 +137,7 @@ func (m *MotionBlurPostProcess) Activate(camera *Camera, opts *MotionBlurPostPro
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#apply
 func (m *MotionBlurPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("apply", args...)
+	retVal := m.p.Call("apply")
 	return EffectFromJSObject(retVal, m.ctx)
 }
 
@@ -175,9 +182,7 @@ func (m *MotionBlurPostProcess) ExcludeSkinnedMesh(skinnedMesh *AbstractMesh) {
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#getcamera
 func (m *MotionBlurPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getCamera", args...)
+	retVal := m.p.Call("getCamera")
 	return CameraFromJSObject(retVal, m.ctx)
 }
 
@@ -186,9 +191,7 @@ func (m *MotionBlurPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#getclassname
 func (m *MotionBlurPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -197,9 +200,7 @@ func (m *MotionBlurPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#geteffect
 func (m *MotionBlurPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getEffect", args...)
+	retVal := m.p.Call("getEffect")
 	return EffectFromJSObject(retVal, m.ctx)
 }
 
@@ -208,9 +209,7 @@ func (m *MotionBlurPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#geteffectname
 func (m *MotionBlurPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getEffectName", args...)
+	retVal := m.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -219,9 +218,7 @@ func (m *MotionBlurPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#getengine
 func (m *MotionBlurPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getEngine", args...)
+	retVal := m.p.Call("getEngine")
 	return EngineFromJSObject(retVal, m.ctx)
 }
 
@@ -230,9 +227,7 @@ func (m *MotionBlurPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#isready
 func (m *MotionBlurPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("isReady", args...)
+	retVal := m.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -241,9 +236,7 @@ func (m *MotionBlurPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#isreusable
 func (m *MotionBlurPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("isReusable", args...)
+	retVal := m.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -252,9 +245,7 @@ func (m *MotionBlurPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#marktexturedirty
 func (m *MotionBlurPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markTextureDirty", args...)
+	m.p.Call("markTextureDirty")
 }
 
 // RemoveExcludedSkinnedMesh calls the RemoveExcludedSkinnedMesh method on the MotionBlurPostProcess object.
@@ -341,9 +332,7 @@ func (m *MotionBlurPostProcess) UpdateEffect(opts *MotionBlurPostProcessUpdateEf
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#useownoutput
 func (m *MotionBlurPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("useOwnOutput", args...)
+	m.p.Call("useOwnOutput")
 }
 
 /*
@@ -624,7 +613,7 @@ func (m *MotionBlurPostProcess) SetName(name string) *MotionBlurPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#onactivate
 func (m *MotionBlurPostProcess) OnActivate(onActivate func()) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(onActivate)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -632,7 +621,7 @@ func (m *MotionBlurPostProcess) OnActivate(onActivate func()) *MotionBlurPostPro
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#onactivate
 func (m *MotionBlurPostProcess) SetOnActivate(onActivate func()) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(onActivate)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -656,7 +645,7 @@ func (m *MotionBlurPostProcess) SetOnActivateObservable(onActivateObservable *Ob
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#onafterrender
 func (m *MotionBlurPostProcess) OnAfterRender(onAfterRender func()) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -664,7 +653,7 @@ func (m *MotionBlurPostProcess) OnAfterRender(onAfterRender func()) *MotionBlurP
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#onafterrender
 func (m *MotionBlurPostProcess) SetOnAfterRender(onAfterRender func()) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -688,7 +677,7 @@ func (m *MotionBlurPostProcess) SetOnAfterRenderObservable(onAfterRenderObservab
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#onapply
 func (m *MotionBlurPostProcess) OnApply(onApply func()) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(onApply)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -696,7 +685,7 @@ func (m *MotionBlurPostProcess) OnApply(onApply func()) *MotionBlurPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#onapply
 func (m *MotionBlurPostProcess) SetOnApply(onApply func()) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(onApply)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -720,7 +709,7 @@ func (m *MotionBlurPostProcess) SetOnApplyObservable(onApplyObservable *Observab
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#onbeforerender
 func (m *MotionBlurPostProcess) OnBeforeRender(onBeforeRender func()) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -728,7 +717,7 @@ func (m *MotionBlurPostProcess) OnBeforeRender(onBeforeRender func()) *MotionBlu
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#onbeforerender
 func (m *MotionBlurPostProcess) SetOnBeforeRender(onBeforeRender func()) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -752,7 +741,7 @@ func (m *MotionBlurPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObserv
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#onsizechanged
 func (m *MotionBlurPostProcess) OnSizeChanged(onSizeChanged func()) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -760,7 +749,7 @@ func (m *MotionBlurPostProcess) OnSizeChanged(onSizeChanged func()) *MotionBlurP
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#onsizechanged
 func (m *MotionBlurPostProcess) SetOnSizeChanged(onSizeChanged func()) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 

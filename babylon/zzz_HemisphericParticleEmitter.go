@@ -28,6 +28,15 @@ func HemisphericParticleEmitterFromJSObject(p js.Value, ctx js.Value) *Hemispher
 	return &HemisphericParticleEmitter{p: p, ctx: ctx}
 }
 
+// HemisphericParticleEmitterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HemisphericParticleEmitterArrayToJSArray(array []*HemisphericParticleEmitter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewHemisphericParticleEmitterOpts contains optional parameters for NewHemisphericParticleEmitter.
 type NewHemisphericParticleEmitterOpts struct {
 	Radius              *float64
@@ -82,9 +91,7 @@ func (h *HemisphericParticleEmitter) ApplyToShader(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#clone
 func (h *HemisphericParticleEmitter) Clone() *HemisphericParticleEmitter {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("clone", args...)
+	retVal := h.p.Call("clone")
 	return HemisphericParticleEmitterFromJSObject(retVal, h.ctx)
 }
 
@@ -93,9 +100,7 @@ func (h *HemisphericParticleEmitter) Clone() *HemisphericParticleEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#getclassname
 func (h *HemisphericParticleEmitter) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getClassName", args...)
+	retVal := h.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -104,9 +109,7 @@ func (h *HemisphericParticleEmitter) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#geteffectdefines
 func (h *HemisphericParticleEmitter) GetEffectDefines() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getEffectDefines", args...)
+	retVal := h.p.Call("getEffectDefines")
 	return retVal.String()
 }
 
@@ -127,9 +130,7 @@ func (h *HemisphericParticleEmitter) Parse(serializationObject interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#serialize
 func (h *HemisphericParticleEmitter) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("serialize", args...)
+	retVal := h.p.Call("serialize")
 	return retVal
 }
 

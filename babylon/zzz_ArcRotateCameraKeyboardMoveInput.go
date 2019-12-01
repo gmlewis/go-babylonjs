@@ -29,6 +29,15 @@ func ArcRotateCameraKeyboardMoveInputFromJSObject(p js.Value, ctx js.Value) *Arc
 	return &ArcRotateCameraKeyboardMoveInput{p: p, ctx: ctx}
 }
 
+// ArcRotateCameraKeyboardMoveInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArcRotateCameraKeyboardMoveInputArrayToJSArray(array []*ArcRotateCameraKeyboardMoveInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ArcRotateCameraKeyboardMoveInputAttachControlOpts contains optional parameters for ArcRotateCameraKeyboardMoveInput.AttachControl.
 type ArcRotateCameraKeyboardMoveInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -60,9 +69,7 @@ func (a *ArcRotateCameraKeyboardMoveInput) AttachControl(element js.Value, opts 
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#checkinputs
 func (a *ArcRotateCameraKeyboardMoveInput) CheckInputs() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("checkInputs", args...)
+	a.p.Call("checkInputs")
 }
 
 // DetachControl calls the DetachControl method on the ArcRotateCameraKeyboardMoveInput object.
@@ -82,9 +89,7 @@ func (a *ArcRotateCameraKeyboardMoveInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#getclassname
 func (a *ArcRotateCameraKeyboardMoveInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -93,9 +98,7 @@ func (a *ArcRotateCameraKeyboardMoveInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#getsimplename
 func (a *ArcRotateCameraKeyboardMoveInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getSimpleName", args...)
+	retVal := a.p.Call("getSimpleName")
 	return retVal.String()
 }
 

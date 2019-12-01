@@ -27,6 +27,15 @@ func WoodProceduralTextureFromJSObject(p js.Value, ctx js.Value) *WoodProcedural
 	return &WoodProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// WoodProceduralTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WoodProceduralTextureArrayToJSArray(array []*WoodProceduralTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWoodProceduralTextureOpts contains optional parameters for NewWoodProceduralTexture.
 type NewWoodProceduralTextureOpts struct {
 	FallbackTexture *Texture
@@ -67,9 +76,7 @@ func (ba *Babylon) NewWoodProceduralTexture(name string, size float64, scene *Sc
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#clone
 func (w *WoodProceduralTexture) Clone() *ProceduralTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("clone", args...)
+	retVal := w.p.Call("clone")
 	return ProceduralTextureFromJSObject(retVal, w.ctx)
 }
 
@@ -137,9 +144,7 @@ func (w *WoodProceduralTexture) CreateFromBase64String(data string, name string,
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#dispose
 func (w *WoodProceduralTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the WoodProceduralTexture object.
@@ -147,9 +152,7 @@ func (w *WoodProceduralTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#getbasesize
 func (w *WoodProceduralTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getBaseSize", args...)
+	retVal := w.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -158,9 +161,7 @@ func (w *WoodProceduralTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#getclassname
 func (w *WoodProceduralTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getClassName", args...)
+	retVal := w.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -169,9 +170,7 @@ func (w *WoodProceduralTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#getcontent
 func (w *WoodProceduralTexture) GetContent() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getContent", args...)
+	retVal := w.p.Call("getContent")
 	return retVal
 }
 
@@ -180,9 +179,7 @@ func (w *WoodProceduralTexture) GetContent() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#geteffect
 func (w *WoodProceduralTexture) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getEffect", args...)
+	retVal := w.p.Call("getEffect")
 	return EffectFromJSObject(retVal, w.ctx)
 }
 
@@ -191,9 +188,7 @@ func (w *WoodProceduralTexture) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#getinternaltexture
 func (w *WoodProceduralTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getInternalTexture", args...)
+	retVal := w.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, w.ctx)
 }
 
@@ -202,9 +197,7 @@ func (w *WoodProceduralTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#getreflectiontexturematrix
 func (w *WoodProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getReflectionTextureMatrix", args...)
+	retVal := w.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, w.ctx)
 }
 
@@ -213,9 +206,7 @@ func (w *WoodProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#getrendersize
 func (w *WoodProceduralTexture) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getRenderSize", args...)
+	retVal := w.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -224,9 +215,7 @@ func (w *WoodProceduralTexture) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#getscene
 func (w *WoodProceduralTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getScene", args...)
+	retVal := w.p.Call("getScene")
 	return SceneFromJSObject(retVal, w.ctx)
 }
 
@@ -235,9 +224,7 @@ func (w *WoodProceduralTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#getsize
 func (w *WoodProceduralTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getSize", args...)
+	retVal := w.p.Call("getSize")
 	return retVal
 }
 
@@ -271,9 +258,7 @@ func (w *WoodProceduralTexture) GetTextureMatrix(opts *WoodProceduralTextureGetT
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#isready
 func (w *WoodProceduralTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("isReady", args...)
+	retVal := w.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -282,9 +267,7 @@ func (w *WoodProceduralTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#isreadyornotblocking
 func (w *WoodProceduralTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("isReadyOrNotBlocking", args...)
+	retVal := w.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -410,9 +393,7 @@ func (w *WoodProceduralTexture) ReadPixels(opts *WoodProceduralTextureReadPixels
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#releaseinternaltexture
 func (w *WoodProceduralTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("releaseInternalTexture", args...)
+	w.p.Call("releaseInternalTexture")
 }
 
 // WoodProceduralTextureRenderOpts contains optional parameters for WoodProceduralTexture.Render.
@@ -444,9 +425,7 @@ func (w *WoodProceduralTexture) Render(opts *WoodProceduralTextureRenderOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#reset
 func (w *WoodProceduralTexture) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("reset", args...)
+	w.p.Call("reset")
 }
 
 // ResetRefreshCounter calls the ResetRefreshCounter method on the WoodProceduralTexture object.
@@ -454,9 +433,7 @@ func (w *WoodProceduralTexture) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#resetrefreshcounter
 func (w *WoodProceduralTexture) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("resetRefreshCounter", args...)
+	w.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the WoodProceduralTexture object.
@@ -489,9 +466,7 @@ func (w *WoodProceduralTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#serialize
 func (w *WoodProceduralTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("serialize", args...)
+	retVal := w.p.Call("serialize")
 	return retVal
 }
 
@@ -638,9 +613,7 @@ func (w *WoodProceduralTexture) SetVector3(name string, value *Vector3) *Procedu
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#tostring
 func (w *WoodProceduralTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("toString", args...)
+	retVal := w.p.Call("toString")
 	return retVal.String()
 }
 
@@ -661,9 +634,7 @@ func (w *WoodProceduralTexture) UpdateSamplingMode(samplingMode float64) {
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#updateshaderuniforms
 func (w *WoodProceduralTexture) UpdateShaderUniforms() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("updateShaderUniforms", args...)
+	w.p.Call("updateShaderUniforms")
 }
 
 // WoodProceduralTextureUpdateURLOpts contains optional parameters for WoodProceduralTexture.UpdateURL.
@@ -706,7 +677,7 @@ func (w *WoodProceduralTexture) WhenAllReady(textures *BaseTexture, callback fun
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	w.p.Call("WhenAllReady", args...)
 }
@@ -1549,7 +1520,7 @@ func (w *WoodProceduralTexture) SetNoMipmap(noMipmap bool) *WoodProceduralTextur
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#ondispose
 func (w *WoodProceduralTexture) OnDispose(onDispose func()) *WoodProceduralTexture {
-	p := ba.ctx.Get("WoodProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("WoodProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return WoodProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1557,7 +1528,7 @@ func (w *WoodProceduralTexture) OnDispose(onDispose func()) *WoodProceduralTextu
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#ondispose
 func (w *WoodProceduralTexture) SetOnDispose(onDispose func()) *WoodProceduralTexture {
-	p := ba.ctx.Get("WoodProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("WoodProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return WoodProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1581,7 +1552,7 @@ func (w *WoodProceduralTexture) SetOnDisposeObservable(onDisposeObservable *Obse
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#ongenerated
 func (w *WoodProceduralTexture) OnGenerated(onGenerated func()) *WoodProceduralTexture {
-	p := ba.ctx.Get("WoodProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("WoodProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return WoodProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1589,7 +1560,7 @@ func (w *WoodProceduralTexture) OnGenerated(onGenerated func()) *WoodProceduralT
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#ongenerated
 func (w *WoodProceduralTexture) SetOnGenerated(onGenerated func()) *WoodProceduralTexture {
-	p := ba.ctx.Get("WoodProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("WoodProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return WoodProceduralTextureFromJSObject(p, ba.ctx)
 }
 

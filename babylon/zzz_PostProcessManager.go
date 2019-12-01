@@ -28,6 +28,15 @@ func PostProcessManagerFromJSObject(p js.Value, ctx js.Value) *PostProcessManage
 	return &PostProcessManager{p: p, ctx: ctx}
 }
 
+// PostProcessManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PostProcessManagerArrayToJSArray(array []*PostProcessManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPostProcessManager returns a new PostProcessManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessmanager
@@ -90,9 +99,7 @@ func (p *PostProcessManager) DirectRender(postProcesses *PostProcess, opts *Post
 // https://doc.babylonjs.com/api/classes/babylon.postprocessmanager#dispose
 func (p *PostProcessManager) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 /*

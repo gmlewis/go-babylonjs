@@ -29,6 +29,15 @@ func ReflectionProbeFromJSObject(p js.Value, ctx js.Value) *ReflectionProbe {
 	return &ReflectionProbe{p: p, ctx: ctx}
 }
 
+// ReflectionProbeArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ReflectionProbeArrayToJSArray(array []*ReflectionProbe) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewReflectionProbeOpts contains optional parameters for NewReflectionProbe.
 type NewReflectionProbeOpts struct {
 	GenerateMipMaps *bool
@@ -81,9 +90,7 @@ func (r *ReflectionProbe) AttachToMesh(mesh *AbstractMesh) {
 // https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#dispose
 func (r *ReflectionProbe) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ReflectionProbe object.
@@ -91,9 +98,7 @@ func (r *ReflectionProbe) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#getclassname
 func (r *ReflectionProbe) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -102,9 +107,7 @@ func (r *ReflectionProbe) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#getscene
 func (r *ReflectionProbe) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getScene", args...)
+	retVal := r.p.Call("getScene")
 	return SceneFromJSObject(retVal, r.ctx)
 }
 
@@ -128,9 +131,7 @@ func (r *ReflectionProbe) Parse(parsedReflectionProbe interface{}, scene *Scene,
 // https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#serialize
 func (r *ReflectionProbe) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 

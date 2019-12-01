@@ -27,10 +27,19 @@ func WebXRDefaultExperienceFromJSObject(p js.Value, ctx js.Value) *WebXRDefaultE
 	return &WebXRDefaultExperience{p: p, ctx: ctx}
 }
 
+// WebXRDefaultExperienceArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRDefaultExperienceArrayToJSArray(array []*WebXRDefaultExperience) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CreateAsync calls the CreateAsync method on the WebXRDefaultExperience object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#createasync
-func (w *WebXRDefaultExperience) CreateAsync(scene *Scene, options *WebXRDefaultExperienceOptions) *WebXRDefaultExperience {
+func (w *WebXRDefaultExperience) CreateAsync(scene *Scene, options *WebXRDefaultExperienceOptions) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -38,7 +47,7 @@ func (w *WebXRDefaultExperience) CreateAsync(scene *Scene, options *WebXRDefault
 	args = append(args, options.JSObject())
 
 	retVal := w.p.Call("CreateAsync", args...)
-	return WebXRDefaultExperienceFromJSObject(retVal, w.ctx)
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // Dispose calls the Dispose method on the WebXRDefaultExperience object.
@@ -46,9 +55,7 @@ func (w *WebXRDefaultExperience) CreateAsync(scene *Scene, options *WebXRDefault
 // https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#dispose
 func (w *WebXRDefaultExperience) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 /*

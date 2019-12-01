@@ -28,6 +28,15 @@ func BoundingBoxRendererFromJSObject(p js.Value, ctx js.Value) *BoundingBoxRende
 	return &BoundingBoxRenderer{p: p, ctx: ctx}
 }
 
+// BoundingBoxRendererArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoundingBoxRendererArrayToJSArray(array []*BoundingBoxRenderer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBoundingBoxRenderer returns a new BoundingBoxRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer
@@ -46,9 +55,7 @@ func (ba *Babylon) NewBoundingBoxRenderer(scene *Scene) *BoundingBoxRenderer {
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#dispose
 func (b *BoundingBoxRenderer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("dispose", args...)
+	b.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the BoundingBoxRenderer object.
@@ -56,9 +63,7 @@ func (b *BoundingBoxRenderer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#rebuild
 func (b *BoundingBoxRenderer) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("rebuild", args...)
+	b.p.Call("rebuild")
 }
 
 // Register calls the Register method on the BoundingBoxRenderer object.
@@ -66,9 +71,7 @@ func (b *BoundingBoxRenderer) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#register
 func (b *BoundingBoxRenderer) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("register", args...)
+	b.p.Call("register")
 }
 
 // Render calls the Render method on the BoundingBoxRenderer object.

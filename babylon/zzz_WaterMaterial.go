@@ -27,6 +27,15 @@ func WaterMaterialFromJSObject(p js.Value, ctx js.Value) *WaterMaterial {
 	return &WaterMaterial{p: p, ctx: ctx}
 }
 
+// WaterMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WaterMaterialArrayToJSArray(array []*WaterMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWaterMaterialOpts contains optional parameters for NewWaterMaterial.
 type NewWaterMaterialOpts struct {
 	RenderTargetSize *Vector2
@@ -277,7 +286,7 @@ type WaterMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the WaterMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#forcecompilationasync
-func (w *WaterMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *WaterMaterialForceCompilationAsyncOpts) {
+func (w *WaterMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *WaterMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &WaterMaterialForceCompilationAsyncOpts{}
 	}
@@ -292,7 +301,8 @@ func (w *WaterMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *WaterMat
 		args = append(args, opts.Options)
 	}
 
-	w.p.Call("forceCompilationAsync", args...)
+	retVal := w.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // Freeze calls the Freeze method on the WaterMaterial object.
@@ -300,9 +310,7 @@ func (w *WaterMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *WaterMat
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#freeze
 func (w *WaterMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("freeze", args...)
+	w.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the WaterMaterial object.
@@ -310,9 +318,7 @@ func (w *WaterMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getactivetextures
 func (w *WaterMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getActiveTextures", args...)
+	retVal := w.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, w.ctx)
 }
 
@@ -321,9 +327,7 @@ func (w *WaterMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getalphatesttexture
 func (w *WaterMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getAlphaTestTexture", args...)
+	retVal := w.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, w.ctx)
 }
 
@@ -332,9 +336,7 @@ func (w *WaterMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getanimatables
 func (w *WaterMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getAnimatables", args...)
+	retVal := w.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -343,9 +345,7 @@ func (w *WaterMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getbindedmeshes
 func (w *WaterMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getBindedMeshes", args...)
+	retVal := w.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, w.ctx)
 }
 
@@ -354,9 +354,7 @@ func (w *WaterMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getclassname
 func (w *WaterMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getClassName", args...)
+	retVal := w.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -365,9 +363,7 @@ func (w *WaterMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#geteffect
 func (w *WaterMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getEffect", args...)
+	retVal := w.p.Call("getEffect")
 	return EffectFromJSObject(retVal, w.ctx)
 }
 
@@ -376,9 +372,7 @@ func (w *WaterMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getrenderlist
 func (w *WaterMaterial) GetRenderList() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getRenderList", args...)
+	retVal := w.p.Call("getRenderList")
 	return AbstractMeshFromJSObject(retVal, w.ctx)
 }
 
@@ -387,9 +381,7 @@ func (w *WaterMaterial) GetRenderList() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getscene
 func (w *WaterMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getScene", args...)
+	retVal := w.p.Call("getScene")
 	return SceneFromJSObject(retVal, w.ctx)
 }
 
@@ -482,9 +474,7 @@ func (w *WaterMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#markdirty
 func (w *WaterMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("markDirty", args...)
+	w.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the WaterMaterial object.
@@ -492,9 +482,7 @@ func (w *WaterMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#needalphablending
 func (w *WaterMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("needAlphaBlending", args...)
+	retVal := w.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -516,9 +504,7 @@ func (w *WaterMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#needalphatesting
 func (w *WaterMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("needAlphaTesting", args...)
+	retVal := w.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -542,9 +528,7 @@ func (w *WaterMaterial) Parse(source interface{}, scene *Scene, rootUrl string) 
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#serialize
 func (w *WaterMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("serialize", args...)
+	retVal := w.p.Call("serialize")
 	return retVal
 }
 
@@ -578,9 +562,7 @@ func (w *WaterMaterial) ToString(opts *WaterMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#unbind
 func (w *WaterMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("unbind", args...)
+	w.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the WaterMaterial object.
@@ -588,9 +570,7 @@ func (w *WaterMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#unfreeze
 func (w *WaterMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("unfreeze", args...)
+	w.p.Call("unfreeze")
 }
 
 /*
@@ -662,16 +642,16 @@ func (w *WaterMaterial) SetAlphaMode(alphaMode float64) *WaterMaterial {
 // Animations returns the Animations property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#animations
-func (w *WaterMaterial) Animations(animations []Animation) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(animations.JSObject())
+func (w *WaterMaterial) Animations(animations []*Animation) *WaterMaterial {
+	p := ba.ctx.Get("WaterMaterial").New(animations)
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#animations
-func (w *WaterMaterial) SetAnimations(animations []Animation) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(animations.JSObject())
+func (w *WaterMaterial) SetAnimations(animations []*Animation) *WaterMaterial {
+	p := ba.ctx.Get("WaterMaterial").New(animations)
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1047,7 +1027,7 @@ func (w *WaterMaterial) SetFresnelSeparate(fresnelSeparate bool) *WaterMaterial 
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getrendertargettextures
 func (w *WaterMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("WaterMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1055,7 +1035,7 @@ func (w *WaterMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getrendertargettextures
 func (w *WaterMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("WaterMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1271,7 +1251,7 @@ func (w *WaterMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *WaterMateria
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#onbind
 func (w *WaterMaterial) OnBind(onBind func()) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(onBind)
+	p := ba.ctx.Get("WaterMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1279,7 +1259,7 @@ func (w *WaterMaterial) OnBind(onBind func()) *WaterMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#onbind
 func (w *WaterMaterial) SetOnBind(onBind func()) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(onBind)
+	p := ba.ctx.Get("WaterMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1303,7 +1283,7 @@ func (w *WaterMaterial) SetOnBindObservable(onBindObservable *Observable) *Water
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#oncompiled
 func (w *WaterMaterial) OnCompiled(onCompiled func()) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(onCompiled)
+	p := ba.ctx.Get("WaterMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1311,7 +1291,7 @@ func (w *WaterMaterial) OnCompiled(onCompiled func()) *WaterMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#oncompiled
 func (w *WaterMaterial) SetOnCompiled(onCompiled func()) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(onCompiled)
+	p := ba.ctx.Get("WaterMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1319,7 +1299,7 @@ func (w *WaterMaterial) SetOnCompiled(onCompiled func()) *WaterMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#ondispose
 func (w *WaterMaterial) OnDispose(onDispose func()) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(onDispose)
+	p := ba.ctx.Get("WaterMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1327,7 +1307,7 @@ func (w *WaterMaterial) OnDispose(onDispose func()) *WaterMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#ondispose
 func (w *WaterMaterial) SetOnDispose(onDispose func()) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(onDispose)
+	p := ba.ctx.Get("WaterMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1351,7 +1331,7 @@ func (w *WaterMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#onerror
 func (w *WaterMaterial) OnError(onError func()) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(onError)
+	p := ba.ctx.Get("WaterMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1359,7 +1339,7 @@ func (w *WaterMaterial) OnError(onError func()) *WaterMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#onerror
 func (w *WaterMaterial) SetOnError(onError func()) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(onError)
+	p := ba.ctx.Get("WaterMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 

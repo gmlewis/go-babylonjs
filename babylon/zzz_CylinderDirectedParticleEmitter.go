@@ -28,6 +28,15 @@ func CylinderDirectedParticleEmitterFromJSObject(p js.Value, ctx js.Value) *Cyli
 	return &CylinderDirectedParticleEmitter{CylinderParticleEmitter: CylinderParticleEmitterFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CylinderDirectedParticleEmitterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CylinderDirectedParticleEmitterArrayToJSArray(array []*CylinderDirectedParticleEmitter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCylinderDirectedParticleEmitterOpts contains optional parameters for NewCylinderDirectedParticleEmitter.
 type NewCylinderDirectedParticleEmitterOpts struct {
 	Radius      *float64
@@ -94,9 +103,7 @@ func (c *CylinderDirectedParticleEmitter) ApplyToShader(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#clone
 func (c *CylinderDirectedParticleEmitter) Clone() *CylinderDirectedParticleEmitter {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("clone", args...)
+	retVal := c.p.Call("clone")
 	return CylinderDirectedParticleEmitterFromJSObject(retVal, c.ctx)
 }
 
@@ -105,9 +112,7 @@ func (c *CylinderDirectedParticleEmitter) Clone() *CylinderDirectedParticleEmitt
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#getclassname
 func (c *CylinderDirectedParticleEmitter) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -116,9 +121,7 @@ func (c *CylinderDirectedParticleEmitter) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#geteffectdefines
 func (c *CylinderDirectedParticleEmitter) GetEffectDefines() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffectDefines", args...)
+	retVal := c.p.Call("getEffectDefines")
 	return retVal.String()
 }
 
@@ -139,9 +142,7 @@ func (c *CylinderDirectedParticleEmitter) Parse(serializationObject interface{})
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#serialize
 func (c *CylinderDirectedParticleEmitter) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 

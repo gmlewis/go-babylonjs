@@ -28,6 +28,15 @@ func EffectLayerSceneComponentFromJSObject(p js.Value, ctx js.Value) *EffectLaye
 	return &EffectLayerSceneComponent{p: p, ctx: ctx}
 }
 
+// EffectLayerSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EffectLayerSceneComponentArrayToJSArray(array []*EffectLayerSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewEffectLayerSceneComponent returns a new EffectLayerSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent
@@ -58,9 +67,7 @@ func (e *EffectLayerSceneComponent) AddFromContainer(container *AbstractScene) {
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#dispose
 func (e *EffectLayerSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("dispose", args...)
+	e.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the EffectLayerSceneComponent object.
@@ -68,9 +75,7 @@ func (e *EffectLayerSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#rebuild
 func (e *EffectLayerSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("rebuild", args...)
+	e.p.Call("rebuild")
 }
 
 // Register calls the Register method on the EffectLayerSceneComponent object.
@@ -78,9 +83,7 @@ func (e *EffectLayerSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#register
 func (e *EffectLayerSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("register", args...)
+	e.p.Call("register")
 }
 
 // EffectLayerSceneComponentRemoveFromContainerOpts contains optional parameters for EffectLayerSceneComponent.RemoveFromContainer.

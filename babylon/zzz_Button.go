@@ -27,6 +27,15 @@ func ButtonFromJSObject(p js.Value, ctx js.Value) *Button {
 	return &Button{Rectangle: RectangleFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ButtonArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ButtonArrayToJSArray(array []*Button) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewButtonOpts contains optional parameters for NewButton.
 type NewButtonOpts struct {
 	Name *string
@@ -70,9 +79,7 @@ func (b *Button) AddControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.button#clearcontrols
 func (b *Button) ClearControls() *Container {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("clearControls", args...)
+	retVal := b.p.Call("clearControls")
 	return ContainerFromJSObject(retVal, b.ctx)
 }
 
@@ -166,9 +173,7 @@ func (b *Button) CreateSimpleButton(name string, text string) *Button {
 // https://doc.babylonjs.com/api/classes/babylon.button#dispose
 func (b *Button) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("dispose", args...)
+	b.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the Button object.
@@ -216,9 +221,7 @@ func (b *Button) GetChildByType(name string, jsType string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.button#getclassname
 func (b *Button) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getClassName", args...)
+	retVal := b.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -381,9 +384,7 @@ func (b *Button) RemoveControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.button#_flagdescendantsasmatrixdirty
 func (b *Button) _flagDescendantsAsMatrixDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("_flagDescendantsAsMatrixDirty", args...)
+	b.p.Call("_flagDescendantsAsMatrixDirty")
 }
 
 /*
@@ -1448,7 +1449,7 @@ func (b *Button) SetParent(parent *Container) *Button {
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointerdownanimation
 func (b *Button) PointerDownAnimation(pointerDownAnimation func()) *Button {
-	p := ba.ctx.Get("Button").New(pointerDownAnimation)
+	p := ba.ctx.Get("Button").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return ButtonFromJSObject(p, ba.ctx)
 }
 
@@ -1456,7 +1457,7 @@ func (b *Button) PointerDownAnimation(pointerDownAnimation func()) *Button {
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointerdownanimation
 func (b *Button) SetPointerDownAnimation(pointerDownAnimation func()) *Button {
-	p := ba.ctx.Get("Button").New(pointerDownAnimation)
+	p := ba.ctx.Get("Button").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return ButtonFromJSObject(p, ba.ctx)
 }
 
@@ -1464,7 +1465,7 @@ func (b *Button) SetPointerDownAnimation(pointerDownAnimation func()) *Button {
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointerenteranimation
 func (b *Button) PointerEnterAnimation(pointerEnterAnimation func()) *Button {
-	p := ba.ctx.Get("Button").New(pointerEnterAnimation)
+	p := ba.ctx.Get("Button").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return ButtonFromJSObject(p, ba.ctx)
 }
 
@@ -1472,7 +1473,7 @@ func (b *Button) PointerEnterAnimation(pointerEnterAnimation func()) *Button {
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointerenteranimation
 func (b *Button) SetPointerEnterAnimation(pointerEnterAnimation func()) *Button {
-	p := ba.ctx.Get("Button").New(pointerEnterAnimation)
+	p := ba.ctx.Get("Button").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return ButtonFromJSObject(p, ba.ctx)
 }
 
@@ -1480,7 +1481,7 @@ func (b *Button) SetPointerEnterAnimation(pointerEnterAnimation func()) *Button 
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointeroutanimation
 func (b *Button) PointerOutAnimation(pointerOutAnimation func()) *Button {
-	p := ba.ctx.Get("Button").New(pointerOutAnimation)
+	p := ba.ctx.Get("Button").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return ButtonFromJSObject(p, ba.ctx)
 }
 
@@ -1488,7 +1489,7 @@ func (b *Button) PointerOutAnimation(pointerOutAnimation func()) *Button {
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointeroutanimation
 func (b *Button) SetPointerOutAnimation(pointerOutAnimation func()) *Button {
-	p := ba.ctx.Get("Button").New(pointerOutAnimation)
+	p := ba.ctx.Get("Button").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return ButtonFromJSObject(p, ba.ctx)
 }
 
@@ -1496,7 +1497,7 @@ func (b *Button) SetPointerOutAnimation(pointerOutAnimation func()) *Button {
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointerupanimation
 func (b *Button) PointerUpAnimation(pointerUpAnimation func()) *Button {
-	p := ba.ctx.Get("Button").New(pointerUpAnimation)
+	p := ba.ctx.Get("Button").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return ButtonFromJSObject(p, ba.ctx)
 }
 
@@ -1504,7 +1505,7 @@ func (b *Button) PointerUpAnimation(pointerUpAnimation func()) *Button {
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointerupanimation
 func (b *Button) SetPointerUpAnimation(pointerUpAnimation func()) *Button {
-	p := ba.ctx.Get("Button").New(pointerUpAnimation)
+	p := ba.ctx.Get("Button").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return ButtonFromJSObject(p, ba.ctx)
 }
 

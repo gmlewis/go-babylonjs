@@ -28,6 +28,15 @@ func SpriteSceneComponentFromJSObject(p js.Value, ctx js.Value) *SpriteSceneComp
 	return &SpriteSceneComponent{p: p, ctx: ctx}
 }
 
+// SpriteSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SpriteSceneComponentArrayToJSArray(array []*SpriteSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSpriteSceneComponent returns a new SpriteSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent
@@ -46,9 +55,7 @@ func (ba *Babylon) NewSpriteSceneComponent(scene *Scene) *SpriteSceneComponent {
 // https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#dispose
 func (s *SpriteSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the SpriteSceneComponent object.
@@ -56,9 +63,7 @@ func (s *SpriteSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#rebuild
 func (s *SpriteSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("rebuild", args...)
+	s.p.Call("rebuild")
 }
 
 // Register calls the Register method on the SpriteSceneComponent object.
@@ -66,9 +71,7 @@ func (s *SpriteSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#register
 func (s *SpriteSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("register", args...)
+	s.p.Call("register")
 }
 
 /*

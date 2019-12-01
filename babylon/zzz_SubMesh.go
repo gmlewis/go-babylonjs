@@ -27,6 +27,15 @@ func SubMeshFromJSObject(p js.Value, ctx js.Value) *SubMesh {
 	return &SubMesh{BaseSubMesh: BaseSubMeshFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SubMeshArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SubMeshArrayToJSArray(array []*SubMesh) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSubMeshOpts contains optional parameters for NewSubMesh.
 type NewSubMeshOpts struct {
 	RenderingMesh     *Mesh
@@ -178,9 +187,7 @@ func (s *SubMesh) CreateFromIndices(materialIndex float64, startIndex float64, i
 // https://doc.babylonjs.com/api/classes/babylon.submesh#dispose
 func (s *SubMesh) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetBoundingInfo calls the GetBoundingInfo method on the SubMesh object.
@@ -188,9 +195,7 @@ func (s *SubMesh) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.submesh#getboundinginfo
 func (s *SubMesh) GetBoundingInfo() *BoundingInfo {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getBoundingInfo", args...)
+	retVal := s.p.Call("getBoundingInfo")
 	return BoundingInfoFromJSObject(retVal, s.ctx)
 }
 
@@ -199,9 +204,7 @@ func (s *SubMesh) GetBoundingInfo() *BoundingInfo {
 // https://doc.babylonjs.com/api/classes/babylon.submesh#getclassname
 func (s *SubMesh) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -210,9 +213,7 @@ func (s *SubMesh) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.submesh#getmaterial
 func (s *SubMesh) GetMaterial() *Material {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getMaterial", args...)
+	retVal := s.p.Call("getMaterial")
 	return MaterialFromJSObject(retVal, s.ctx)
 }
 
@@ -221,9 +222,7 @@ func (s *SubMesh) GetMaterial() *Material {
 // https://doc.babylonjs.com/api/classes/babylon.submesh#getmesh
 func (s *SubMesh) GetMesh() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getMesh", args...)
+	retVal := s.p.Call("getMesh")
 	return AbstractMeshFromJSObject(retVal, s.ctx)
 }
 
@@ -232,9 +231,7 @@ func (s *SubMesh) GetMesh() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.submesh#getrenderingmesh
 func (s *SubMesh) GetRenderingMesh() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getRenderingMesh", args...)
+	retVal := s.p.Call("getRenderingMesh")
 	return MeshFromJSObject(retVal, s.ctx)
 }
 

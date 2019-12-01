@@ -27,6 +27,15 @@ func ChromaticAberrationPostProcessFromJSObject(p js.Value, ctx js.Value) *Chrom
 	return &ChromaticAberrationPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ChromaticAberrationPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ChromaticAberrationPostProcessArrayToJSArray(array []*ChromaticAberrationPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewChromaticAberrationPostProcessOpts contains optional parameters for NewChromaticAberrationPostProcess.
 type NewChromaticAberrationPostProcessOpts struct {
 	SamplingMode     *float64
@@ -120,9 +129,7 @@ func (c *ChromaticAberrationPostProcess) Activate(camera *Camera, opts *Chromati
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#apply
 func (c *ChromaticAberrationPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("apply", args...)
+	retVal := c.p.Call("apply")
 	return EffectFromJSObject(retVal, c.ctx)
 }
 
@@ -155,9 +162,7 @@ func (c *ChromaticAberrationPostProcess) Dispose(opts *ChromaticAberrationPostPr
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#getcamera
 func (c *ChromaticAberrationPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getCamera", args...)
+	retVal := c.p.Call("getCamera")
 	return CameraFromJSObject(retVal, c.ctx)
 }
 
@@ -166,9 +171,7 @@ func (c *ChromaticAberrationPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#getclassname
 func (c *ChromaticAberrationPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -177,9 +180,7 @@ func (c *ChromaticAberrationPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#geteffect
 func (c *ChromaticAberrationPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffect", args...)
+	retVal := c.p.Call("getEffect")
 	return EffectFromJSObject(retVal, c.ctx)
 }
 
@@ -188,9 +189,7 @@ func (c *ChromaticAberrationPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#geteffectname
 func (c *ChromaticAberrationPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffectName", args...)
+	retVal := c.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -199,9 +198,7 @@ func (c *ChromaticAberrationPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#getengine
 func (c *ChromaticAberrationPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEngine", args...)
+	retVal := c.p.Call("getEngine")
 	return EngineFromJSObject(retVal, c.ctx)
 }
 
@@ -210,9 +207,7 @@ func (c *ChromaticAberrationPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#isready
 func (c *ChromaticAberrationPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReady", args...)
+	retVal := c.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -221,9 +216,7 @@ func (c *ChromaticAberrationPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#isreusable
 func (c *ChromaticAberrationPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReusable", args...)
+	retVal := c.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -232,9 +225,7 @@ func (c *ChromaticAberrationPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#marktexturedirty
 func (c *ChromaticAberrationPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("markTextureDirty", args...)
+	c.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the ChromaticAberrationPostProcess object.
@@ -309,9 +300,7 @@ func (c *ChromaticAberrationPostProcess) UpdateEffect(opts *ChromaticAberrationP
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#useownoutput
 func (c *ChromaticAberrationPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("useOwnOutput", args...)
+	c.p.Call("useOwnOutput")
 }
 
 /*
@@ -608,7 +597,7 @@ func (c *ChromaticAberrationPostProcess) SetName(name string) *ChromaticAberrati
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#onactivate
 func (c *ChromaticAberrationPostProcess) OnActivate(onActivate func()) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(onActivate)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -616,7 +605,7 @@ func (c *ChromaticAberrationPostProcess) OnActivate(onActivate func()) *Chromati
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#onactivate
 func (c *ChromaticAberrationPostProcess) SetOnActivate(onActivate func()) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(onActivate)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -640,7 +629,7 @@ func (c *ChromaticAberrationPostProcess) SetOnActivateObservable(onActivateObser
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#onafterrender
 func (c *ChromaticAberrationPostProcess) OnAfterRender(onAfterRender func()) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -648,7 +637,7 @@ func (c *ChromaticAberrationPostProcess) OnAfterRender(onAfterRender func()) *Ch
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#onafterrender
 func (c *ChromaticAberrationPostProcess) SetOnAfterRender(onAfterRender func()) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -672,7 +661,7 @@ func (c *ChromaticAberrationPostProcess) SetOnAfterRenderObservable(onAfterRende
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#onapply
 func (c *ChromaticAberrationPostProcess) OnApply(onApply func()) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(onApply)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -680,7 +669,7 @@ func (c *ChromaticAberrationPostProcess) OnApply(onApply func()) *ChromaticAberr
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#onapply
 func (c *ChromaticAberrationPostProcess) SetOnApply(onApply func()) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(onApply)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -704,7 +693,7 @@ func (c *ChromaticAberrationPostProcess) SetOnApplyObservable(onApplyObservable 
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#onbeforerender
 func (c *ChromaticAberrationPostProcess) OnBeforeRender(onBeforeRender func()) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -712,7 +701,7 @@ func (c *ChromaticAberrationPostProcess) OnBeforeRender(onBeforeRender func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#onbeforerender
 func (c *ChromaticAberrationPostProcess) SetOnBeforeRender(onBeforeRender func()) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -736,7 +725,7 @@ func (c *ChromaticAberrationPostProcess) SetOnBeforeRenderObservable(onBeforeRen
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#onsizechanged
 func (c *ChromaticAberrationPostProcess) OnSizeChanged(onSizeChanged func()) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -744,7 +733,7 @@ func (c *ChromaticAberrationPostProcess) OnSizeChanged(onSizeChanged func()) *Ch
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#onsizechanged
 func (c *ChromaticAberrationPostProcess) SetOnSizeChanged(onSizeChanged func()) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 

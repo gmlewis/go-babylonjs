@@ -29,14 +29,23 @@ func HingeJointFromJSObject(p js.Value, ctx js.Value) *HingeJoint {
 	return &HingeJoint{MotorEnabledJoint: MotorEnabledJointFromJSObject(p, ctx), ctx: ctx}
 }
 
+// HingeJointArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HingeJointArrayToJSArray(array []*HingeJoint) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewHingeJoint returns a new HingeJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hingejoint
-func (ba *Babylon) NewHingeJoint(jointData *PhysicsJointData) *HingeJoint {
+func (ba *Babylon) NewHingeJoint(jointData js.Value) *HingeJoint {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jointData.JSObject())
+	args = append(args, jointData)
 
 	p := ba.ctx.Get("HingeJoint").New(args...)
 	return HingeJointFromJSObject(p, ba.ctx)
@@ -49,7 +58,7 @@ func (h *HingeJoint) ExecuteNativeFunction(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	h.p.Call("executeNativeFunction", args...)
 }
@@ -179,16 +188,16 @@ func (h *HingeJoint) SetHingeJoint(HingeJoint float64) *HingeJoint {
 // JointData returns the JointData property of class HingeJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hingejoint#jointdata
-func (h *HingeJoint) JointData(jointData *PhysicsJointData) *HingeJoint {
-	p := ba.ctx.Get("HingeJoint").New(jointData.JSObject())
+func (h *HingeJoint) JointData(jointData js.Value) *HingeJoint {
+	p := ba.ctx.Get("HingeJoint").New(jointData)
 	return HingeJointFromJSObject(p, ba.ctx)
 }
 
 // SetJointData sets the JointData property of class HingeJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hingejoint#jointdata
-func (h *HingeJoint) SetJointData(jointData *PhysicsJointData) *HingeJoint {
-	p := ba.ctx.Get("HingeJoint").New(jointData.JSObject())
+func (h *HingeJoint) SetJointData(jointData js.Value) *HingeJoint {
+	p := ba.ctx.Get("HingeJoint").New(jointData)
 	return HingeJointFromJSObject(p, ba.ctx)
 }
 

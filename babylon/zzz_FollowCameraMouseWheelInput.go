@@ -29,6 +29,15 @@ func FollowCameraMouseWheelInputFromJSObject(p js.Value, ctx js.Value) *FollowCa
 	return &FollowCameraMouseWheelInput{p: p, ctx: ctx}
 }
 
+// FollowCameraMouseWheelInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FollowCameraMouseWheelInputArrayToJSArray(array []*FollowCameraMouseWheelInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // FollowCameraMouseWheelInputAttachControlOpts contains optional parameters for FollowCameraMouseWheelInput.AttachControl.
 type FollowCameraMouseWheelInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -72,9 +81,7 @@ func (f *FollowCameraMouseWheelInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#getclassname
 func (f *FollowCameraMouseWheelInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -83,9 +90,7 @@ func (f *FollowCameraMouseWheelInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#getsimplename
 func (f *FollowCameraMouseWheelInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getSimpleName", args...)
+	retVal := f.p.Call("getSimpleName")
 	return retVal.String()
 }
 

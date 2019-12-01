@@ -27,6 +27,15 @@ func MeshBuilderFromJSObject(p js.Value, ctx js.Value) *MeshBuilder {
 	return &MeshBuilder{p: p, ctx: ctx}
 }
 
+// MeshBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MeshBuilderArrayToJSArray(array []*MeshBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // MeshBuilderCreateBoxOpts contains optional parameters for MeshBuilder.CreateBox.
 type MeshBuilderCreateBoxOpts struct {
 	Scene *Scene

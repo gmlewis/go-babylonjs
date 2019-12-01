@@ -27,6 +27,15 @@ func BoundingInfoFromJSObject(p js.Value, ctx js.Value) *BoundingInfo {
 	return &BoundingInfo{p: p, ctx: ctx}
 }
 
+// BoundingInfoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoundingInfoArrayToJSArray(array []*BoundingInfo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBoundingInfoOpts contains optional parameters for NewBoundingInfo.
 type NewBoundingInfoOpts struct {
 	WorldMatrix *Matrix
@@ -99,11 +108,11 @@ func (b *BoundingInfo) IntersectsPoint(point *Vector3) bool {
 // IsCompletelyInFrustum calls the IsCompletelyInFrustum method on the BoundingInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#iscompletelyinfrustum
-func (b *BoundingInfo) IsCompletelyInFrustum(frustumPlanes []DeepImmutable) bool {
+func (b *BoundingInfo) IsCompletelyInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := b.p.Call("isCompletelyInFrustum", args...)
 	return retVal.Bool()
@@ -111,25 +120,25 @@ func (b *BoundingInfo) IsCompletelyInFrustum(frustumPlanes []DeepImmutable) bool
 
 // BoundingInfoIsInFrustumOpts contains optional parameters for BoundingInfo.IsInFrustum.
 type BoundingInfoIsInFrustumOpts struct {
-	Strategy *Plane
+	Strategy *float64
 }
 
 // IsInFrustum calls the IsInFrustum method on the BoundingInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#isinfrustum
-func (b *BoundingInfo) IsInFrustum(frustumPlanes []DeepImmutable, opts *BoundingInfoIsInFrustumOpts) bool {
+func (b *BoundingInfo) IsInFrustum(frustumPlanes []*Plane, opts *BoundingInfoIsInFrustumOpts) bool {
 	if opts == nil {
 		opts = &BoundingInfoIsInFrustumOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	if opts.Strategy == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Strategy.JSObject())
+		args = append(args, *opts.Strategy)
 	}
 
 	retVal := b.p.Call("isInFrustum", args...)

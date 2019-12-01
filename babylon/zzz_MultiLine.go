@@ -27,6 +27,15 @@ func MultiLineFromJSObject(p js.Value, ctx js.Value) *MultiLine {
 	return &MultiLine{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
+// MultiLineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MultiLineArrayToJSArray(array []*MultiLine) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMultiLineOpts contains optional parameters for NewMultiLine.
 type NewMultiLineOpts struct {
 	Name *string
@@ -84,9 +93,7 @@ func (m *MultiLine) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.multiline#dispose
 func (m *MultiLine) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("dispose", args...)
+	m.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the MultiLine object.
@@ -120,9 +127,7 @@ func (m *MultiLine) GetAt(index float64) *MultiLinePoint {
 // https://doc.babylonjs.com/api/classes/babylon.multiline#getclassname
 func (m *MultiLine) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -309,9 +314,7 @@ func (m *MultiLine) Remove(value float64) {
 // https://doc.babylonjs.com/api/classes/babylon.multiline#reset
 func (m *MultiLine) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("reset", args...)
+	m.p.Call("reset")
 }
 
 // ResetLinks calls the ResetLinks method on the MultiLine object.
@@ -319,9 +322,7 @@ func (m *MultiLine) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.multiline#resetlinks
 func (m *MultiLine) ResetLinks() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("resetLinks", args...)
+	m.p.Call("resetLinks")
 }
 
 // MultiLine_drawOpts contains optional parameters for MultiLine._draw.
@@ -355,9 +356,7 @@ func (m *MultiLine) _draw(context js.Value, opts *MultiLine_drawOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.multiline#_measure
 func (m *MultiLine) _measure() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("_measure", args...)
+	m.p.Call("_measure")
 }
 
 /*
@@ -477,16 +476,16 @@ func (m *MultiLine) SetColor(color string) *MultiLine {
 // Dash returns the Dash property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#dash
-func (m *MultiLine) Dash(dash []number) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(dash.JSObject())
+func (m *MultiLine) Dash(dash []*float64) *MultiLine {
+	p := ba.ctx.Get("MultiLine").New(dash)
 	return MultiLineFromJSObject(p, ba.ctx)
 }
 
 // SetDash sets the Dash property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#dash
-func (m *MultiLine) SetDash(dash []number) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(dash.JSObject())
+func (m *MultiLine) SetDash(dash []*float64) *MultiLine {
+	p := ba.ctx.Get("MultiLine").New(dash)
 	return MultiLineFromJSObject(p, ba.ctx)
 }
 
@@ -1070,7 +1069,7 @@ func (m *MultiLine) SetOnDirtyObservable(onDirtyObservable *Observable) *MultiLi
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#onpointupdate
 func (m *MultiLine) OnPointUpdate(onPointUpdate func()) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(onPointUpdate)
+	p := ba.ctx.Get("MultiLine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointUpdate(); return nil}))
 	return MultiLineFromJSObject(p, ba.ctx)
 }
 
@@ -1078,7 +1077,7 @@ func (m *MultiLine) OnPointUpdate(onPointUpdate func()) *MultiLine {
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#onpointupdate
 func (m *MultiLine) SetOnPointUpdate(onPointUpdate func()) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(onPointUpdate)
+	p := ba.ctx.Get("MultiLine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointUpdate(); return nil}))
 	return MultiLineFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func KeepAssetsFromJSObject(p js.Value, ctx js.Value) *KeepAssets {
 	return &KeepAssets{AbstractScene: AbstractSceneFromJSObject(p, ctx), ctx: ctx}
 }
 
+// KeepAssetsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KeepAssetsArrayToJSArray(array []*KeepAssets) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // AddEffectLayer calls the AddEffectLayer method on the KeepAssets object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#addeffectlayer
@@ -290,16 +299,16 @@ func (k *KeepAssets) SetCameras(cameras *Camera) *KeepAssets {
 // EffectLayers returns the EffectLayers property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#effectlayers
-func (k *KeepAssets) EffectLayers(effectLayers []EffectLayer) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(effectLayers.JSObject())
+func (k *KeepAssets) EffectLayers(effectLayers []*EffectLayer) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(effectLayers)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // SetEffectLayers sets the EffectLayers property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#effectlayers
-func (k *KeepAssets) SetEffectLayers(effectLayers []EffectLayer) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(effectLayers.JSObject())
+func (k *KeepAssets) SetEffectLayers(effectLayers []*EffectLayer) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(effectLayers)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
@@ -338,32 +347,32 @@ func (k *KeepAssets) SetGeometries(geometries *Geometry) *KeepAssets {
 // Layers returns the Layers property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#layers
-func (k *KeepAssets) Layers(layers []Layer) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(layers.JSObject())
+func (k *KeepAssets) Layers(layers []*Layer) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(layers)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // SetLayers sets the Layers property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#layers
-func (k *KeepAssets) SetLayers(layers []Layer) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(layers.JSObject())
+func (k *KeepAssets) SetLayers(layers []*Layer) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(layers)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // LensFlareSystems returns the LensFlareSystems property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#lensflaresystems
-func (k *KeepAssets) LensFlareSystems(lensFlareSystems []LensFlareSystem) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(lensFlareSystems.JSObject())
+func (k *KeepAssets) LensFlareSystems(lensFlareSystems []*LensFlareSystem) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(lensFlareSystems)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // SetLensFlareSystems sets the LensFlareSystems property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#lensflaresystems
-func (k *KeepAssets) SetLensFlareSystems(lensFlareSystems []LensFlareSystem) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(lensFlareSystems.JSObject())
+func (k *KeepAssets) SetLensFlareSystems(lensFlareSystems []*LensFlareSystem) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(lensFlareSystems)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
@@ -450,48 +459,48 @@ func (k *KeepAssets) SetMultiMaterials(multiMaterials *MultiMaterial) *KeepAsset
 // ParticleSystems returns the ParticleSystems property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#particlesystems
-func (k *KeepAssets) ParticleSystems(particleSystems *IParticleSystem) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(particleSystems.JSObject())
+func (k *KeepAssets) ParticleSystems(particleSystems js.Value) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(particleSystems)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // SetParticleSystems sets the ParticleSystems property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#particlesystems
-func (k *KeepAssets) SetParticleSystems(particleSystems *IParticleSystem) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(particleSystems.JSObject())
+func (k *KeepAssets) SetParticleSystems(particleSystems js.Value) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(particleSystems)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // ProceduralTextures returns the ProceduralTextures property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#proceduraltextures
-func (k *KeepAssets) ProceduralTextures(proceduralTextures []ProceduralTexture) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(proceduralTextures.JSObject())
+func (k *KeepAssets) ProceduralTextures(proceduralTextures []*ProceduralTexture) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(proceduralTextures)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // SetProceduralTextures sets the ProceduralTextures property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#proceduraltextures
-func (k *KeepAssets) SetProceduralTextures(proceduralTextures []ProceduralTexture) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(proceduralTextures.JSObject())
+func (k *KeepAssets) SetProceduralTextures(proceduralTextures []*ProceduralTexture) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(proceduralTextures)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // ReflectionProbes returns the ReflectionProbes property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#reflectionprobes
-func (k *KeepAssets) ReflectionProbes(reflectionProbes []ReflectionProbe) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(reflectionProbes.JSObject())
+func (k *KeepAssets) ReflectionProbes(reflectionProbes []*ReflectionProbe) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(reflectionProbes)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // SetReflectionProbes sets the ReflectionProbes property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#reflectionprobes
-func (k *KeepAssets) SetReflectionProbes(reflectionProbes []ReflectionProbe) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(reflectionProbes.JSObject())
+func (k *KeepAssets) SetReflectionProbes(reflectionProbes []*ReflectionProbe) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(reflectionProbes)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
@@ -530,16 +539,16 @@ func (k *KeepAssets) SetSkeletons(skeletons *Skeleton) *KeepAssets {
 // Sounds returns the Sounds property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#sounds
-func (k *KeepAssets) Sounds(sounds []Sound) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(sounds.JSObject())
+func (k *KeepAssets) Sounds(sounds []*Sound) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(sounds)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // SetSounds sets the Sounds property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#sounds
-func (k *KeepAssets) SetSounds(sounds []Sound) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(sounds.JSObject())
+func (k *KeepAssets) SetSounds(sounds []*Sound) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(sounds)
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 

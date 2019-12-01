@@ -30,6 +30,15 @@ func PostProcessRenderEffectFromJSObject(p js.Value, ctx js.Value) *PostProcessR
 	return &PostProcessRenderEffect{p: p, ctx: ctx}
 }
 
+// PostProcessRenderEffectArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PostProcessRenderEffectArrayToJSArray(array []*PostProcessRenderEffect) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPostProcessRenderEffectOpts contains optional parameters for NewPostProcessRenderEffect.
 type NewPostProcessRenderEffectOpts struct {
 	SingleInstance *bool
@@ -47,7 +56,7 @@ func (ba *Babylon) NewPostProcessRenderEffect(engine *Engine, name string, getPo
 
 	args = append(args, engine.JSObject())
 	args = append(args, name)
-	args = append(args, getPostProcesses)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { getPostProcesses(); return nil }))
 
 	if opts.SingleInstance == nil {
 		args = append(args, js.Undefined())
@@ -67,7 +76,7 @@ type PostProcessRenderEffectGetPostProcessesOpts struct {
 // GetPostProcesses calls the GetPostProcesses method on the PostProcessRenderEffect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect#getpostprocesses
-func (p *PostProcessRenderEffect) GetPostProcesses(opts *PostProcessRenderEffectGetPostProcessesOpts) []js.Value {
+func (p *PostProcessRenderEffect) GetPostProcesses(opts *PostProcessRenderEffectGetPostProcessesOpts) []*PostProcess {
 	if opts == nil {
 		opts = &PostProcessRenderEffectGetPostProcessesOpts{}
 	}

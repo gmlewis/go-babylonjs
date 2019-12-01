@@ -28,6 +28,15 @@ func KeyboardInfoPreFromJSObject(p js.Value, ctx js.Value) *KeyboardInfoPre {
 	return &KeyboardInfoPre{KeyboardInfo: KeyboardInfoFromJSObject(p, ctx), ctx: ctx}
 }
 
+// KeyboardInfoPreArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KeyboardInfoPreArrayToJSArray(array []*KeyboardInfoPre) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewKeyboardInfoPre returns a new KeyboardInfoPre object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfopre

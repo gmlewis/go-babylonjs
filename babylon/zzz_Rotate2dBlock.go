@@ -27,6 +27,15 @@ func Rotate2dBlockFromJSObject(p js.Value, ctx js.Value) *Rotate2dBlock {
 	return &Rotate2dBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// Rotate2dBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Rotate2dBlockArrayToJSArray(array []*Rotate2dBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRotate2dBlock returns a new Rotate2dBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock
@@ -152,9 +161,7 @@ func (r *Rotate2dBlock) ConnectTo(other *NodeMaterialBlock, opts *Rotate2dBlockC
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock#dispose
 func (r *Rotate2dBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the Rotate2dBlock object.
@@ -162,9 +169,7 @@ func (r *Rotate2dBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock#getclassname
 func (r *Rotate2dBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (r *Rotate2dBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterial
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock#serialize
 func (r *Rotate2dBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 

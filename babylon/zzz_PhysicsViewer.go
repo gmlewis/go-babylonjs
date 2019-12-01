@@ -27,6 +27,15 @@ func PhysicsViewerFromJSObject(p js.Value, ctx js.Value) *PhysicsViewer {
 	return &PhysicsViewer{p: p, ctx: ctx}
 }
 
+// PhysicsViewerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsViewerArrayToJSArray(array []*PhysicsViewer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhysicsViewer returns a new PhysicsViewer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsviewer
@@ -45,9 +54,7 @@ func (ba *Babylon) NewPhysicsViewer(scene *Scene) *PhysicsViewer {
 // https://doc.babylonjs.com/api/classes/babylon.physicsviewer#dispose
 func (p *PhysicsViewer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // HideImpostor calls the HideImpostor method on the PhysicsViewer object.

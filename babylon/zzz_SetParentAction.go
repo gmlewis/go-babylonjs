@@ -29,6 +29,15 @@ func SetParentActionFromJSObject(p js.Value, ctx js.Value) *SetParentAction {
 	return &SetParentAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SetParentActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SetParentActionArrayToJSArray(array []*SetParentAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSetParentActionOpts contains optional parameters for NewSetParentAction.
 type NewSetParentActionOpts struct {
 	Condition *Condition
@@ -63,9 +72,7 @@ func (ba *Babylon) NewSetParentAction(triggerOptions interface{}, target interfa
 // https://doc.babylonjs.com/api/classes/babylon.setparentaction#execute
 func (s *SetParentAction) Execute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("execute", args...)
+	s.p.Call("execute")
 }
 
 // GetTriggerParameter calls the GetTriggerParameter method on the SetParentAction object.
@@ -73,9 +80,7 @@ func (s *SetParentAction) Execute() {
 // https://doc.babylonjs.com/api/classes/babylon.setparentaction#gettriggerparameter
 func (s *SetParentAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTriggerParameter", args...)
+	retVal := s.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -97,9 +102,7 @@ func (s *SetParentAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.setparentaction#skiptonextactiveaction
 func (s *SetParentAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("skipToNextActiveAction", args...)
+	s.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the SetParentAction object.

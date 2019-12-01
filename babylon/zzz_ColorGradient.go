@@ -27,6 +27,15 @@ func ColorGradientFromJSObject(p js.Value, ctx js.Value) *ColorGradient {
 	return &ColorGradient{p: p, ctx: ctx}
 }
 
+// ColorGradientArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ColorGradientArrayToJSArray(array []*ColorGradient) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // GetColorToRef calls the GetColorToRef method on the ColorGradient object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradient#getcolortoref

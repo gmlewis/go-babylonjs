@@ -27,6 +27,15 @@ func PBRClearCoatConfigurationFromJSObject(p js.Value, ctx js.Value) *PBRClearCo
 	return &PBRClearCoatConfiguration{p: p, ctx: ctx}
 }
 
+// PBRClearCoatConfigurationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PBRClearCoatConfigurationArrayToJSArray(array []*PBRClearCoatConfiguration) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPBRClearCoatConfiguration returns a new PBRClearCoatConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration
@@ -34,7 +43,7 @@ func (ba *Babylon) NewPBRClearCoatConfiguration(markAllSubMeshesAsTexturesDirty 
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, markAllSubMeshesAsTexturesDirty)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { markAllSubMeshesAsTexturesDirty(); return nil }))
 
 	p := ba.ctx.Get("PBRClearCoatConfiguration").New(args...)
 	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
@@ -43,11 +52,11 @@ func (ba *Babylon) NewPBRClearCoatConfiguration(markAllSubMeshesAsTexturesDirty 
 // AddFallbacks calls the AddFallbacks method on the PBRClearCoatConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#addfallbacks
-func (p *PBRClearCoatConfiguration) AddFallbacks(defines *IMaterialClearCoatDefines, fallbacks *EffectFallbacks, currentRank float64) float64 {
+func (p *PBRClearCoatConfiguration) AddFallbacks(defines js.Value, fallbacks *EffectFallbacks, currentRank float64) float64 {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, fallbacks.JSObject())
 	args = append(args, currentRank)
 
@@ -162,9 +171,7 @@ func (p *PBRClearCoatConfiguration) GetAnimatables(animatables js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#getclassname
 func (p *PBRClearCoatConfiguration) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -184,11 +191,11 @@ func (p *PBRClearCoatConfiguration) HasTexture(texture *BaseTexture) bool {
 // IsReadyForSubMesh calls the IsReadyForSubMesh method on the PBRClearCoatConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#isreadyforsubmesh
-func (p *PBRClearCoatConfiguration) IsReadyForSubMesh(defines *IMaterialClearCoatDefines, scene *Scene, engine *Engine, disableBumpMap bool) bool {
+func (p *PBRClearCoatConfiguration) IsReadyForSubMesh(defines js.Value, scene *Scene, engine *Engine, disableBumpMap bool) bool {
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, scene.JSObject())
 	args = append(args, engine.JSObject())
 	args = append(args, disableBumpMap)
@@ -214,11 +221,11 @@ func (p *PBRClearCoatConfiguration) Parse(source interface{}, scene *Scene, root
 // PrepareDefines calls the PrepareDefines method on the PBRClearCoatConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#preparedefines
-func (p *PBRClearCoatConfiguration) PrepareDefines(defines *IMaterialClearCoatDefines, scene *Scene) {
+func (p *PBRClearCoatConfiguration) PrepareDefines(defines js.Value, scene *Scene) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, scene.JSObject())
 
 	p.p.Call("prepareDefines", args...)
@@ -241,9 +248,7 @@ func (p *PBRClearCoatConfiguration) PrepareUniformBuffer(uniformBuffer *UniformB
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#serialize
 func (p *PBRClearCoatConfiguration) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 

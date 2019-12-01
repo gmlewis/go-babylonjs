@@ -27,6 +27,15 @@ func InstantiationToolsFromJSObject(p js.Value, ctx js.Value) *InstantiationTool
 	return &InstantiationTools{p: p, ctx: ctx}
 }
 
+// InstantiationToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func InstantiationToolsArrayToJSArray(array []*InstantiationTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Instantiate calls the Instantiate method on the InstantiationTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instantiationtools#instantiate

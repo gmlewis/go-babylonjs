@@ -30,6 +30,15 @@ func DebugLayerFromJSObject(p js.Value, ctx js.Value) *DebugLayer {
 	return &DebugLayer{p: p, ctx: ctx}
 }
 
+// DebugLayerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DebugLayerArrayToJSArray(array []*DebugLayer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDebugLayer returns a new DebugLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer
@@ -48,9 +57,7 @@ func (ba *Babylon) NewDebugLayer(scene *Scene) *DebugLayer {
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer#hide
 func (d *DebugLayer) Hide() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("hide", args...)
+	d.p.Call("hide")
 }
 
 // IsVisible calls the IsVisible method on the DebugLayer object.
@@ -58,9 +65,7 @@ func (d *DebugLayer) Hide() {
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer#isvisible
 func (d *DebugLayer) IsVisible() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isVisible", args...)
+	retVal := d.p.Call("isVisible")
 	return retVal.Bool()
 }
 
@@ -98,7 +103,7 @@ type DebugLayerShowOpts struct {
 // Show calls the Show method on the DebugLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer#show
-func (d *DebugLayer) Show(opts *DebugLayerShowOpts) *DebugLayer {
+func (d *DebugLayer) Show(opts *DebugLayerShowOpts) *Promise {
 	if opts == nil {
 		opts = &DebugLayerShowOpts{}
 	}
@@ -112,7 +117,7 @@ func (d *DebugLayer) Show(opts *DebugLayerShowOpts) *DebugLayer {
 	}
 
 	retVal := d.p.Call("show", args...)
-	return DebugLayerFromJSObject(retVal, d.ctx)
+	return PromiseFromJSObject(retVal, d.ctx)
 }
 
 /*

@@ -27,6 +27,15 @@ func InputManagerFromJSObject(p js.Value, ctx js.Value) *InputManager {
 	return &InputManager{p: p, ctx: ctx}
 }
 
+// InputManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func InputManagerArrayToJSArray(array []*InputManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewInputManager returns a new InputManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager
@@ -81,9 +90,7 @@ func (i *InputManager) AttachControl(opts *InputManagerAttachControlOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#detachcontrol
 func (i *InputManager) DetachControl() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("detachControl", args...)
+	i.p.Call("detachControl")
 }
 
 // GetPointerOverMesh calls the GetPointerOverMesh method on the InputManager object.
@@ -91,9 +98,7 @@ func (i *InputManager) DetachControl() {
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#getpointerovermesh
 func (i *InputManager) GetPointerOverMesh() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getPointerOverMesh", args...)
+	retVal := i.p.Call("getPointerOverMesh")
 	return AbstractMeshFromJSObject(retVal, i.ctx)
 }
 
@@ -136,7 +141,7 @@ func (i *InputManager) SetPointerOverMesh(mesh *AbstractMesh) {
 
 // InputManagerSimulatePointerDownOpts contains optional parameters for InputManager.SimulatePointerDown.
 type InputManagerSimulatePointerDownOpts struct {
-	PointerEventInit *PointerEventInit
+	PointerEventInit js.Value
 }
 
 // SimulatePointerDown calls the SimulatePointerDown method on the InputManager object.
@@ -154,7 +159,7 @@ func (i *InputManager) SimulatePointerDown(pickResult *PickingInfo, opts *InputM
 	if opts.PointerEventInit == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.PointerEventInit.JSObject())
+		args = append(args, opts.PointerEventInit)
 	}
 
 	i.p.Call("simulatePointerDown", args...)
@@ -162,7 +167,7 @@ func (i *InputManager) SimulatePointerDown(pickResult *PickingInfo, opts *InputM
 
 // InputManagerSimulatePointerMoveOpts contains optional parameters for InputManager.SimulatePointerMove.
 type InputManagerSimulatePointerMoveOpts struct {
-	PointerEventInit *PointerEventInit
+	PointerEventInit js.Value
 }
 
 // SimulatePointerMove calls the SimulatePointerMove method on the InputManager object.
@@ -180,7 +185,7 @@ func (i *InputManager) SimulatePointerMove(pickResult *PickingInfo, opts *InputM
 	if opts.PointerEventInit == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.PointerEventInit.JSObject())
+		args = append(args, opts.PointerEventInit)
 	}
 
 	i.p.Call("simulatePointerMove", args...)
@@ -188,7 +193,7 @@ func (i *InputManager) SimulatePointerMove(pickResult *PickingInfo, opts *InputM
 
 // InputManagerSimulatePointerUpOpts contains optional parameters for InputManager.SimulatePointerUp.
 type InputManagerSimulatePointerUpOpts struct {
-	PointerEventInit *PointerEventInit
+	PointerEventInit js.Value
 	DoubleTap        *bool
 }
 
@@ -207,7 +212,7 @@ func (i *InputManager) SimulatePointerUp(pickResult *PickingInfo, opts *InputMan
 	if opts.PointerEventInit == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.PointerEventInit.JSObject())
+		args = append(args, opts.PointerEventInit)
 	}
 	if opts.DoubleTap == nil {
 		args = append(args, js.Undefined())

@@ -29,6 +29,15 @@ func ShadowGeneratorFromJSObject(p js.Value, ctx js.Value) *ShadowGenerator {
 	return &ShadowGenerator{p: p, ctx: ctx}
 }
 
+// ShadowGeneratorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ShadowGeneratorArrayToJSArray(array []*ShadowGenerator) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewShadowGeneratorOpts contains optional parameters for NewShadowGenerator.
 type NewShadowGeneratorOpts struct {
 	UsefulFloatFirst *bool
@@ -37,7 +46,7 @@ type NewShadowGeneratorOpts struct {
 // NewShadowGenerator returns a new ShadowGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator
-func (ba *Babylon) NewShadowGenerator(mapSize float64, light *IShadowLight, opts *NewShadowGeneratorOpts) *ShadowGenerator {
+func (ba *Babylon) NewShadowGenerator(mapSize float64, light js.Value, opts *NewShadowGeneratorOpts) *ShadowGenerator {
 	if opts == nil {
 		opts = &NewShadowGeneratorOpts{}
 	}
@@ -45,7 +54,7 @@ func (ba *Babylon) NewShadowGenerator(mapSize float64, light *IShadowLight, opts
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, mapSize)
-	args = append(args, light.JSObject())
+	args = append(args, light)
 
 	if opts.UsefulFloatFirst == nil {
 		args = append(args, js.Undefined())
@@ -102,9 +111,7 @@ func (s *ShadowGenerator) BindShadowLight(lightIndex string, effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#dispose
 func (s *ShadowGenerator) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // ShadowGeneratorForceCompilationOpts contains optional parameters for ShadowGenerator.ForceCompilation.
@@ -145,7 +152,7 @@ type ShadowGeneratorForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the ShadowGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#forcecompilationasync
-func (s *ShadowGenerator) ForceCompilationAsync(opts *ShadowGeneratorForceCompilationAsyncOpts) {
+func (s *ShadowGenerator) ForceCompilationAsync(opts *ShadowGeneratorForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ShadowGeneratorForceCompilationAsyncOpts{}
 	}
@@ -158,7 +165,8 @@ func (s *ShadowGenerator) ForceCompilationAsync(opts *ShadowGeneratorForceCompil
 		args = append(args, opts.Options)
 	}
 
-	s.p.Call("forceCompilationAsync", args...)
+	retVal := s.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 // GetClassName calls the GetClassName method on the ShadowGenerator object.
@@ -166,9 +174,7 @@ func (s *ShadowGenerator) ForceCompilationAsync(opts *ShadowGeneratorForceCompil
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#getclassname
 func (s *ShadowGenerator) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -177,21 +183,17 @@ func (s *ShadowGenerator) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#getdarkness
 func (s *ShadowGenerator) GetDarkness() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getDarkness", args...)
+	retVal := s.p.Call("getDarkness")
 	return retVal.Float()
 }
 
 // GetLight calls the GetLight method on the ShadowGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#getlight
-func (s *ShadowGenerator) GetLight() *IShadowLight {
+func (s *ShadowGenerator) GetLight() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getLight", args...)
-	return IShadowLightFromJSObject(retVal, s.ctx)
+	retVal := s.p.Call("getLight")
+	return retVal
 }
 
 // GetShadowMap calls the GetShadowMap method on the ShadowGenerator object.
@@ -199,9 +201,7 @@ func (s *ShadowGenerator) GetLight() *IShadowLight {
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#getshadowmap
 func (s *ShadowGenerator) GetShadowMap() *RenderTargetTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getShadowMap", args...)
+	retVal := s.p.Call("getShadowMap")
 	return RenderTargetTextureFromJSObject(retVal, s.ctx)
 }
 
@@ -210,9 +210,7 @@ func (s *ShadowGenerator) GetShadowMap() *RenderTargetTexture {
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#getshadowmapforrendering
 func (s *ShadowGenerator) GetShadowMapForRendering() *RenderTargetTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getShadowMapForRendering", args...)
+	retVal := s.p.Call("getShadowMapForRendering")
 	return RenderTargetTextureFromJSObject(retVal, s.ctx)
 }
 
@@ -221,9 +219,7 @@ func (s *ShadowGenerator) GetShadowMapForRendering() *RenderTargetTexture {
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#gettransformmatrix
 func (s *ShadowGenerator) GetTransformMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTransformMatrix", args...)
+	retVal := s.p.Call("getTransformMatrix")
 	return MatrixFromJSObject(retVal, s.ctx)
 }
 
@@ -273,9 +269,7 @@ func (s *ShadowGenerator) PrepareDefines(defines interface{}, lightIndex float64
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#recreateshadowmap
 func (s *ShadowGenerator) RecreateShadowMap() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("recreateShadowMap", args...)
+	s.p.Call("recreateShadowMap")
 }
 
 // ShadowGeneratorRemoveShadowCasterOpts contains optional parameters for ShadowGenerator.RemoveShadowCaster.
@@ -310,9 +304,7 @@ func (s *ShadowGenerator) RemoveShadowCaster(mesh *AbstractMesh, opts *ShadowGen
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#serialize
 func (s *ShadowGenerator) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

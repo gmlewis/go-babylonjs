@@ -27,6 +27,15 @@ func RawTexture3DFromJSObject(p js.Value, ctx js.Value) *RawTexture3D {
 	return &RawTexture3D{Texture: TextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RawTexture3DArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RawTexture3DArrayToJSArray(array []*RawTexture3D) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRawTexture3DOpts contains optional parameters for NewRawTexture3D.
 type NewRawTexture3DOpts struct {
 	GenerateMipMaps *bool
@@ -82,9 +91,7 @@ func (ba *Babylon) NewRawTexture3D(data js.Value, width float64, height float64,
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#clone
 func (r *RawTexture3D) Clone() *Texture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("clone", args...)
+	retVal := r.p.Call("clone")
 	return TextureFromJSObject(retVal, r.ctx)
 }
 
@@ -152,9 +159,7 @@ func (r *RawTexture3D) CreateFromBase64String(data string, name string, scene *S
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#dispose
 func (r *RawTexture3D) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the RawTexture3D object.
@@ -162,9 +167,7 @@ func (r *RawTexture3D) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#getbasesize
 func (r *RawTexture3D) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getBaseSize", args...)
+	retVal := r.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -173,9 +176,7 @@ func (r *RawTexture3D) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#getclassname
 func (r *RawTexture3D) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -184,9 +185,7 @@ func (r *RawTexture3D) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#getinternaltexture
 func (r *RawTexture3D) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getInternalTexture", args...)
+	retVal := r.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, r.ctx)
 }
 
@@ -195,9 +194,7 @@ func (r *RawTexture3D) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#getreflectiontexturematrix
 func (r *RawTexture3D) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getReflectionTextureMatrix", args...)
+	retVal := r.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, r.ctx)
 }
 
@@ -206,9 +203,7 @@ func (r *RawTexture3D) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#getscene
 func (r *RawTexture3D) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getScene", args...)
+	retVal := r.p.Call("getScene")
 	return SceneFromJSObject(retVal, r.ctx)
 }
 
@@ -217,9 +212,7 @@ func (r *RawTexture3D) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#getsize
 func (r *RawTexture3D) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getSize", args...)
+	retVal := r.p.Call("getSize")
 	return retVal
 }
 
@@ -253,9 +246,7 @@ func (r *RawTexture3D) GetTextureMatrix(opts *RawTexture3DGetTextureMatrixOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#isready
 func (r *RawTexture3D) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isReady", args...)
+	retVal := r.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -264,9 +255,7 @@ func (r *RawTexture3D) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#isreadyornotblocking
 func (r *RawTexture3D) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isReadyOrNotBlocking", args...)
+	retVal := r.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -392,9 +381,7 @@ func (r *RawTexture3D) ReadPixels(opts *RawTexture3DReadPixelsOpts) js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#releaseinternaltexture
 func (r *RawTexture3D) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("releaseInternalTexture", args...)
+	r.p.Call("releaseInternalTexture")
 }
 
 // Scale calls the Scale method on the RawTexture3D object.
@@ -414,9 +401,7 @@ func (r *RawTexture3D) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#serialize
 func (r *RawTexture3D) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 
@@ -425,9 +410,7 @@ func (r *RawTexture3D) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#tostring
 func (r *RawTexture3D) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("toString", args...)
+	retVal := r.p.Call("toString")
 	return retVal.String()
 }
 
@@ -495,7 +478,7 @@ func (r *RawTexture3D) WhenAllReady(textures *BaseTexture, callback func()) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	r.p.Call("WhenAllReady", args...)
 }
@@ -1306,7 +1289,7 @@ func (r *RawTexture3D) SetNoMipmap(noMipmap bool) *RawTexture3D {
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#ondispose
 func (r *RawTexture3D) OnDispose(onDispose func()) *RawTexture3D {
-	p := ba.ctx.Get("RawTexture3D").New(onDispose)
+	p := ba.ctx.Get("RawTexture3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return RawTexture3DFromJSObject(p, ba.ctx)
 }
 
@@ -1314,7 +1297,7 @@ func (r *RawTexture3D) OnDispose(onDispose func()) *RawTexture3D {
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#ondispose
 func (r *RawTexture3D) SetOnDispose(onDispose func()) *RawTexture3D {
-	p := ba.ctx.Get("RawTexture3D").New(onDispose)
+	p := ba.ctx.Get("RawTexture3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return RawTexture3DFromJSObject(p, ba.ctx)
 }
 

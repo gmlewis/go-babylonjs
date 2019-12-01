@@ -27,6 +27,15 @@ func ViveControllerFromJSObject(p js.Value, ctx js.Value) *ViveController {
 	return &ViveController{WebVRController: WebVRControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ViveControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ViveControllerArrayToJSArray(array []*ViveController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewViveController returns a new ViveController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller
@@ -69,9 +78,7 @@ func (v *ViveController) AttachToPoseControlledCamera(camera *TargetCamera) {
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#dispose
 func (v *ViveController) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // ViveControllerGetForwardRayOpts contains optional parameters for ViveController.GetForwardRay.
@@ -132,7 +139,7 @@ func (v *ViveController) OnButtonStateChange(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	v.p.Call("onButtonStateChange", args...)
 }
@@ -144,7 +151,7 @@ func (v *ViveController) Onleftstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	v.p.Call("onleftstickchanged", args...)
 }
@@ -156,7 +163,7 @@ func (v *ViveController) Onrightstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	v.p.Call("onrightstickchanged", args...)
 }
@@ -166,9 +173,7 @@ func (v *ViveController) Onrightstickchanged(callback func()) {
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#update
 func (v *ViveController) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("update", args...)
+	v.p.Call("update")
 }
 
 // UpdateFromDevice calls the UpdateFromDevice method on the ViveController object.

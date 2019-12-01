@@ -29,6 +29,15 @@ func ConvolutionPostProcessFromJSObject(p js.Value, ctx js.Value) *ConvolutionPo
 	return &ConvolutionPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ConvolutionPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ConvolutionPostProcessArrayToJSArray(array []*ConvolutionPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewConvolutionPostProcessOpts contains optional parameters for NewConvolutionPostProcess.
 type NewConvolutionPostProcessOpts struct {
 	SamplingMode *float64
@@ -115,9 +124,7 @@ func (c *ConvolutionPostProcess) Activate(camera *Camera, opts *ConvolutionPostP
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#apply
 func (c *ConvolutionPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("apply", args...)
+	retVal := c.p.Call("apply")
 	return EffectFromJSObject(retVal, c.ctx)
 }
 
@@ -150,9 +157,7 @@ func (c *ConvolutionPostProcess) Dispose(opts *ConvolutionPostProcessDisposeOpts
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#getcamera
 func (c *ConvolutionPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getCamera", args...)
+	retVal := c.p.Call("getCamera")
 	return CameraFromJSObject(retVal, c.ctx)
 }
 
@@ -161,9 +166,7 @@ func (c *ConvolutionPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#getclassname
 func (c *ConvolutionPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -172,9 +175,7 @@ func (c *ConvolutionPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#geteffect
 func (c *ConvolutionPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffect", args...)
+	retVal := c.p.Call("getEffect")
 	return EffectFromJSObject(retVal, c.ctx)
 }
 
@@ -183,9 +184,7 @@ func (c *ConvolutionPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#geteffectname
 func (c *ConvolutionPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffectName", args...)
+	retVal := c.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -194,9 +193,7 @@ func (c *ConvolutionPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#getengine
 func (c *ConvolutionPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEngine", args...)
+	retVal := c.p.Call("getEngine")
 	return EngineFromJSObject(retVal, c.ctx)
 }
 
@@ -205,9 +202,7 @@ func (c *ConvolutionPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#isready
 func (c *ConvolutionPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReady", args...)
+	retVal := c.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -216,9 +211,7 @@ func (c *ConvolutionPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#isreusable
 func (c *ConvolutionPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReusable", args...)
+	retVal := c.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -227,9 +220,7 @@ func (c *ConvolutionPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#marktexturedirty
 func (c *ConvolutionPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("markTextureDirty", args...)
+	c.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the ConvolutionPostProcess object.
@@ -304,9 +295,7 @@ func (c *ConvolutionPostProcess) UpdateEffect(opts *ConvolutionPostProcessUpdate
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#useownoutput
 func (c *ConvolutionPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("useOwnOutput", args...)
+	c.p.Call("useOwnOutput")
 }
 
 /*
@@ -651,7 +640,7 @@ func (c *ConvolutionPostProcess) SetName(name string) *ConvolutionPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onactivate
 func (c *ConvolutionPostProcess) OnActivate(onActivate func()) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(onActivate)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -659,7 +648,7 @@ func (c *ConvolutionPostProcess) OnActivate(onActivate func()) *ConvolutionPostP
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onactivate
 func (c *ConvolutionPostProcess) SetOnActivate(onActivate func()) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(onActivate)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -683,7 +672,7 @@ func (c *ConvolutionPostProcess) SetOnActivateObservable(onActivateObservable *O
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onafterrender
 func (c *ConvolutionPostProcess) OnAfterRender(onAfterRender func()) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -691,7 +680,7 @@ func (c *ConvolutionPostProcess) OnAfterRender(onAfterRender func()) *Convolutio
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onafterrender
 func (c *ConvolutionPostProcess) SetOnAfterRender(onAfterRender func()) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -715,7 +704,7 @@ func (c *ConvolutionPostProcess) SetOnAfterRenderObservable(onAfterRenderObserva
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onapply
 func (c *ConvolutionPostProcess) OnApply(onApply func()) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(onApply)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -723,7 +712,7 @@ func (c *ConvolutionPostProcess) OnApply(onApply func()) *ConvolutionPostProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onapply
 func (c *ConvolutionPostProcess) SetOnApply(onApply func()) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(onApply)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -747,7 +736,7 @@ func (c *ConvolutionPostProcess) SetOnApplyObservable(onApplyObservable *Observa
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onbeforerender
 func (c *ConvolutionPostProcess) OnBeforeRender(onBeforeRender func()) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -755,7 +744,7 @@ func (c *ConvolutionPostProcess) OnBeforeRender(onBeforeRender func()) *Convolut
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onbeforerender
 func (c *ConvolutionPostProcess) SetOnBeforeRender(onBeforeRender func()) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -779,7 +768,7 @@ func (c *ConvolutionPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObser
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onsizechanged
 func (c *ConvolutionPostProcess) OnSizeChanged(onSizeChanged func()) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -787,7 +776,7 @@ func (c *ConvolutionPostProcess) OnSizeChanged(onSizeChanged func()) *Convolutio
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onsizechanged
 func (c *ConvolutionPostProcess) SetOnSizeChanged(onSizeChanged func()) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 

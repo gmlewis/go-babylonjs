@@ -28,6 +28,15 @@ func FlyCameraFromJSObject(p js.Value, ctx js.Value) *FlyCamera {
 	return &FlyCamera{TargetCamera: TargetCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FlyCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FlyCameraArrayToJSArray(array []*FlyCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFlyCameraOpts contains optional parameters for NewFlyCamera.
 type NewFlyCameraOpts struct {
 	SetActiveOnSceneIfNoneActive *bool
@@ -100,9 +109,7 @@ func (f *FlyCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#dispose
 func (f *FlyCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("dispose", args...)
+	f.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the FlyCamera object.
@@ -110,9 +117,7 @@ func (f *FlyCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#getclassname
 func (f *FlyCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -134,9 +139,7 @@ func (f *FlyCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#gettarget
 func (f *FlyCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getTarget", args...)
+	retVal := f.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, f.ctx)
 }
 
@@ -157,9 +160,7 @@ func (f *FlyCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#storestate
 func (f *FlyCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("storeState", args...)
+	retVal := f.p.Call("storeState")
 	return CameraFromJSObject(retVal, f.ctx)
 }
 
@@ -489,7 +490,7 @@ func (f *FlyCamera) SetNoRotationConstraint(noRotationConstraint bool) *FlyCamer
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#oncollide
 func (f *FlyCamera) OnCollide(onCollide func()) *FlyCamera {
-	p := ba.ctx.Get("FlyCamera").New(onCollide)
+	p := ba.ctx.Get("FlyCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return FlyCameraFromJSObject(p, ba.ctx)
 }
 
@@ -497,7 +498,7 @@ func (f *FlyCamera) OnCollide(onCollide func()) *FlyCamera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#oncollide
 func (f *FlyCamera) SetOnCollide(onCollide func()) *FlyCamera {
-	p := ba.ctx.Get("FlyCamera").New(onCollide)
+	p := ba.ctx.Get("FlyCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return FlyCameraFromJSObject(p, ba.ctx)
 }
 

@@ -29,6 +29,15 @@ func BoneIKControllerFromJSObject(p js.Value, ctx js.Value) *BoneIKController {
 	return &BoneIKController{p: p, ctx: ctx}
 }
 
+// BoneIKControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoneIKControllerArrayToJSArray(array []*BoneIKController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBoneIKControllerOpts contains optional parameters for NewBoneIKController.
 type NewBoneIKControllerOpts struct {
 	Options js.Value
@@ -62,9 +71,7 @@ func (ba *Babylon) NewBoneIKController(mesh *AbstractMesh, bone *Bone, opts *New
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#update
 func (b *BoneIKController) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("update", args...)
+	b.p.Call("update")
 }
 
 /*

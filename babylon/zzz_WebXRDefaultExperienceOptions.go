@@ -27,6 +27,15 @@ func WebXRDefaultExperienceOptionsFromJSObject(p js.Value, ctx js.Value) *WebXRD
 	return &WebXRDefaultExperienceOptions{p: p, ctx: ctx}
 }
 
+// WebXRDefaultExperienceOptionsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRDefaultExperienceOptionsArrayToJSArray(array []*WebXRDefaultExperienceOptions) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // DisableDefaultUI returns the DisableDefaultUI property of class WebXRDefaultExperienceOptions.
@@ -48,16 +57,16 @@ func (w *WebXRDefaultExperienceOptions) SetDisableDefaultUI(disableDefaultUI boo
 // FloorMeshes returns the FloorMeshes property of class WebXRDefaultExperienceOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperienceoptions#floormeshes
-func (w *WebXRDefaultExperienceOptions) FloorMeshes(floorMeshes []AbstractMesh) *WebXRDefaultExperienceOptions {
-	p := ba.ctx.Get("WebXRDefaultExperienceOptions").New(floorMeshes.JSObject())
+func (w *WebXRDefaultExperienceOptions) FloorMeshes(floorMeshes []*AbstractMesh) *WebXRDefaultExperienceOptions {
+	p := ba.ctx.Get("WebXRDefaultExperienceOptions").New(floorMeshes)
 	return WebXRDefaultExperienceOptionsFromJSObject(p, ba.ctx)
 }
 
 // SetFloorMeshes sets the FloorMeshes property of class WebXRDefaultExperienceOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperienceoptions#floormeshes
-func (w *WebXRDefaultExperienceOptions) SetFloorMeshes(floorMeshes []AbstractMesh) *WebXRDefaultExperienceOptions {
-	p := ba.ctx.Get("WebXRDefaultExperienceOptions").New(floorMeshes.JSObject())
+func (w *WebXRDefaultExperienceOptions) SetFloorMeshes(floorMeshes []*AbstractMesh) *WebXRDefaultExperienceOptions {
+	p := ba.ctx.Get("WebXRDefaultExperienceOptions").New(floorMeshes)
 	return WebXRDefaultExperienceOptionsFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func KeyPropertySetFromJSObject(p js.Value, ctx js.Value) *KeyPropertySet {
 	return &KeyPropertySet{p: p, ctx: ctx}
 }
 
+// KeyPropertySetArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KeyPropertySetArrayToJSArray(array []*KeyPropertySet) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Background returns the Background property of class KeyPropertySet.

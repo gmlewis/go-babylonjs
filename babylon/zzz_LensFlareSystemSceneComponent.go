@@ -28,6 +28,15 @@ func LensFlareSystemSceneComponentFromJSObject(p js.Value, ctx js.Value) *LensFl
 	return &LensFlareSystemSceneComponent{p: p, ctx: ctx}
 }
 
+// LensFlareSystemSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LensFlareSystemSceneComponentArrayToJSArray(array []*LensFlareSystemSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLensFlareSystemSceneComponent returns a new LensFlareSystemSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent
@@ -58,9 +67,7 @@ func (l *LensFlareSystemSceneComponent) AddFromContainer(container *AbstractScen
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#dispose
 func (l *LensFlareSystemSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("dispose", args...)
+	l.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the LensFlareSystemSceneComponent object.
@@ -68,9 +75,7 @@ func (l *LensFlareSystemSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#rebuild
 func (l *LensFlareSystemSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("rebuild", args...)
+	l.p.Call("rebuild")
 }
 
 // Register calls the Register method on the LensFlareSystemSceneComponent object.
@@ -78,9 +83,7 @@ func (l *LensFlareSystemSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#register
 func (l *LensFlareSystemSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("register", args...)
+	l.p.Call("register")
 }
 
 // LensFlareSystemSceneComponentRemoveFromContainerOpts contains optional parameters for LensFlareSystemSceneComponent.RemoveFromContainer.

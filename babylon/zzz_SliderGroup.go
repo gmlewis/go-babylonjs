@@ -28,6 +28,15 @@ func SliderGroupFromJSObject(p js.Value, ctx js.Value) *SliderGroup {
 	return &SliderGroup{SelectorGroup: SelectorGroupFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SliderGroupArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SliderGroupArrayToJSArray(array []*SliderGroup) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSliderGroup returns a new SliderGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.slidergroup

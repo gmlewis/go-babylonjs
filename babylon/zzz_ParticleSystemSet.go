@@ -27,14 +27,21 @@ func ParticleSystemSetFromJSObject(p js.Value, ctx js.Value) *ParticleSystemSet 
 	return &ParticleSystemSet{p: p, ctx: ctx}
 }
 
+// ParticleSystemSetArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ParticleSystemSetArrayToJSArray(array []*ParticleSystemSet) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Dispose calls the Dispose method on the ParticleSystemSet object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#dispose
 func (p *ParticleSystemSet) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // ParticleSystemSetParseOpts contains optional parameters for ParticleSystemSet.Parse.
@@ -70,9 +77,7 @@ func (p *ParticleSystemSet) Parse(data interface{}, scene *Scene, opts *Particle
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#serialize
 func (p *ParticleSystemSet) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 
@@ -151,16 +156,16 @@ func (p *ParticleSystemSet) SetEmitterNode(emitterNode *TransformNode) *Particle
 // Systems returns the Systems property of class ParticleSystemSet.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#systems
-func (p *ParticleSystemSet) Systems(systems *IParticleSystem) *ParticleSystemSet {
-	p := ba.ctx.Get("ParticleSystemSet").New(systems.JSObject())
+func (p *ParticleSystemSet) Systems(systems js.Value) *ParticleSystemSet {
+	p := ba.ctx.Get("ParticleSystemSet").New(systems)
 	return ParticleSystemSetFromJSObject(p, ba.ctx)
 }
 
 // SetSystems sets the Systems property of class ParticleSystemSet.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#systems
-func (p *ParticleSystemSet) SetSystems(systems *IParticleSystem) *ParticleSystemSet {
-	p := ba.ctx.Get("ParticleSystemSet").New(systems.JSObject())
+func (p *ParticleSystemSet) SetSystems(systems js.Value) *ParticleSystemSet {
+	p := ba.ctx.Get("ParticleSystemSet").New(systems)
 	return ParticleSystemSetFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func AnimationEventFromJSObject(p js.Value, ctx js.Value) *AnimationEvent {
 	return &AnimationEvent{p: p, ctx: ctx}
 }
 
+// AnimationEventArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnimationEventArrayToJSArray(array []*AnimationEvent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnimationEventOpts contains optional parameters for NewAnimationEvent.
 type NewAnimationEventOpts struct {
 	OnlyOnce *bool
@@ -43,7 +52,7 @@ func (ba *Babylon) NewAnimationEvent(frame float64, action func(), opts *NewAnim
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, frame)
-	args = append(args, action)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
 
 	if opts.OnlyOnce == nil {
 		args = append(args, js.Undefined())
@@ -61,7 +70,7 @@ func (ba *Babylon) NewAnimationEvent(frame float64, action func(), opts *NewAnim
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#action
 func (a *AnimationEvent) Action(action func()) *AnimationEvent {
-	p := ba.ctx.Get("AnimationEvent").New(action)
+	p := ba.ctx.Get("AnimationEvent").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {action(); return nil}))
 	return AnimationEventFromJSObject(p, ba.ctx)
 }
 
@@ -69,7 +78,7 @@ func (a *AnimationEvent) Action(action func()) *AnimationEvent {
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#action
 func (a *AnimationEvent) SetAction(action func()) *AnimationEvent {
-	p := ba.ctx.Get("AnimationEvent").New(action)
+	p := ba.ctx.Get("AnimationEvent").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {action(); return nil}))
 	return AnimationEventFromJSObject(p, ba.ctx)
 }
 

@@ -30,6 +30,15 @@ func AsciiArtFontTextureFromJSObject(p js.Value, ctx js.Value) *AsciiArtFontText
 	return &AsciiArtFontTexture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AsciiArtFontTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AsciiArtFontTextureArrayToJSArray(array []*AsciiArtFontTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAsciiArtFontTextureOpts contains optional parameters for NewAsciiArtFontTexture.
 type NewAsciiArtFontTextureOpts struct {
 	Scene *Scene
@@ -64,9 +73,7 @@ func (ba *Babylon) NewAsciiArtFontTexture(name string, font string, text string,
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#clone
 func (a *AsciiArtFontTexture) Clone() *AsciiArtFontTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("clone", args...)
+	retVal := a.p.Call("clone")
 	return AsciiArtFontTextureFromJSObject(retVal, a.ctx)
 }
 
@@ -75,9 +82,7 @@ func (a *AsciiArtFontTexture) Clone() *AsciiArtFontTexture {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#delayload
 func (a *AsciiArtFontTexture) DelayLoad() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("delayLoad", args...)
+	a.p.Call("delayLoad")
 }
 
 // Dispose calls the Dispose method on the AsciiArtFontTexture object.
@@ -85,9 +90,7 @@ func (a *AsciiArtFontTexture) DelayLoad() {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#dispose
 func (a *AsciiArtFontTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the AsciiArtFontTexture object.
@@ -95,9 +98,7 @@ func (a *AsciiArtFontTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#getbasesize
 func (a *AsciiArtFontTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getBaseSize", args...)
+	retVal := a.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -106,9 +107,7 @@ func (a *AsciiArtFontTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#getclassname
 func (a *AsciiArtFontTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -117,9 +116,7 @@ func (a *AsciiArtFontTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#getinternaltexture
 func (a *AsciiArtFontTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getInternalTexture", args...)
+	retVal := a.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, a.ctx)
 }
 
@@ -128,9 +125,7 @@ func (a *AsciiArtFontTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#getreflectiontexturematrix
 func (a *AsciiArtFontTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getReflectionTextureMatrix", args...)
+	retVal := a.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, a.ctx)
 }
 
@@ -139,9 +134,7 @@ func (a *AsciiArtFontTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#getscene
 func (a *AsciiArtFontTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getScene", args...)
+	retVal := a.p.Call("getScene")
 	return SceneFromJSObject(retVal, a.ctx)
 }
 
@@ -150,9 +143,7 @@ func (a *AsciiArtFontTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#getsize
 func (a *AsciiArtFontTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getSize", args...)
+	retVal := a.p.Call("getSize")
 	return retVal
 }
 
@@ -161,9 +152,7 @@ func (a *AsciiArtFontTexture) GetSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#gettexturematrix
 func (a *AsciiArtFontTexture) GetTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTextureMatrix", args...)
+	retVal := a.p.Call("getTextureMatrix")
 	return MatrixFromJSObject(retVal, a.ctx)
 }
 
@@ -172,9 +161,7 @@ func (a *AsciiArtFontTexture) GetTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#isready
 func (a *AsciiArtFontTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("isReady", args...)
+	retVal := a.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -183,9 +170,7 @@ func (a *AsciiArtFontTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#isreadyornotblocking
 func (a *AsciiArtFontTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("isReadyOrNotBlocking", args...)
+	retVal := a.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -245,9 +230,7 @@ func (a *AsciiArtFontTexture) ReadPixels(opts *AsciiArtFontTextureReadPixelsOpts
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#releaseinternaltexture
 func (a *AsciiArtFontTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("releaseInternalTexture", args...)
+	a.p.Call("releaseInternalTexture")
 }
 
 // Scale calls the Scale method on the AsciiArtFontTexture object.
@@ -267,9 +250,7 @@ func (a *AsciiArtFontTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#serialize
 func (a *AsciiArtFontTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("serialize", args...)
+	retVal := a.p.Call("serialize")
 	return retVal
 }
 
@@ -278,9 +259,7 @@ func (a *AsciiArtFontTexture) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#tostring
 func (a *AsciiArtFontTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("toString", args...)
+	retVal := a.p.Call("toString")
 	return retVal.String()
 }
 
@@ -304,7 +283,7 @@ func (a *AsciiArtFontTexture) WhenAllReady(textures *BaseTexture, callback func(
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	a.p.Call("WhenAllReady", args...)
 }
@@ -731,7 +710,7 @@ func (a *AsciiArtFontTexture) SetNoMipmap(noMipmap bool) *AsciiArtFontTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#ondispose
 func (a *AsciiArtFontTexture) OnDispose(onDispose func()) *AsciiArtFontTexture {
-	p := ba.ctx.Get("AsciiArtFontTexture").New(onDispose)
+	p := ba.ctx.Get("AsciiArtFontTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return AsciiArtFontTextureFromJSObject(p, ba.ctx)
 }
 
@@ -739,7 +718,7 @@ func (a *AsciiArtFontTexture) OnDispose(onDispose func()) *AsciiArtFontTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#ondispose
 func (a *AsciiArtFontTexture) SetOnDispose(onDispose func()) *AsciiArtFontTexture {
-	p := ba.ctx.Get("AsciiArtFontTexture").New(onDispose)
+	p := ba.ctx.Get("AsciiArtFontTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return AsciiArtFontTextureFromJSObject(p, ba.ctx)
 }
 

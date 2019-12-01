@@ -27,6 +27,15 @@ func WebVRControllerFromJSObject(p js.Value, ctx js.Value) *WebVRController {
 	return &WebVRController{PoseEnabledController: PoseEnabledControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// WebVRControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebVRControllerArrayToJSArray(array []*WebVRController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWebVRController returns a new WebVRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller
@@ -69,9 +78,7 @@ func (w *WebVRController) AttachToPoseControlledCamera(camera *TargetCamera) {
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#dispose
 func (w *WebVRController) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 // WebVRControllerGetForwardRayOpts contains optional parameters for WebVRController.GetForwardRay.
@@ -132,7 +139,7 @@ func (w *WebVRController) OnButtonStateChange(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	w.p.Call("onButtonStateChange", args...)
 }
@@ -144,7 +151,7 @@ func (w *WebVRController) Onleftstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	w.p.Call("onleftstickchanged", args...)
 }
@@ -156,7 +163,7 @@ func (w *WebVRController) Onrightstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	w.p.Call("onrightstickchanged", args...)
 }
@@ -166,9 +173,7 @@ func (w *WebVRController) Onrightstickchanged(callback func()) {
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#update
 func (w *WebVRController) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("update", args...)
+	w.p.Call("update")
 }
 
 // UpdateFromDevice calls the UpdateFromDevice method on the WebVRController object.

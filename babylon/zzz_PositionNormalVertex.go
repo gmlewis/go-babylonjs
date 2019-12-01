@@ -27,6 +27,15 @@ func PositionNormalVertexFromJSObject(p js.Value, ctx js.Value) *PositionNormalV
 	return &PositionNormalVertex{p: p, ctx: ctx}
 }
 
+// PositionNormalVertexArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PositionNormalVertexArrayToJSArray(array []*PositionNormalVertex) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPositionNormalVertexOpts contains optional parameters for NewPositionNormalVertex.
 type NewPositionNormalVertexOpts struct {
 	Position *Vector3
@@ -63,9 +72,7 @@ func (ba *Babylon) NewPositionNormalVertex(opts *NewPositionNormalVertexOpts) *P
 // https://doc.babylonjs.com/api/classes/babylon.positionnormalvertex#clone
 func (p *PositionNormalVertex) Clone() *PositionNormalVertex {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("clone", args...)
+	retVal := p.p.Call("clone")
 	return PositionNormalVertexFromJSObject(retVal, p.ctx)
 }
 

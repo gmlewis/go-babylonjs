@@ -29,14 +29,21 @@ func PhysicsRaycastResultFromJSObject(p js.Value, ctx js.Value) *PhysicsRaycastR
 	return &PhysicsRaycastResult{p: p, ctx: ctx}
 }
 
+// PhysicsRaycastResultArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsRaycastResultArrayToJSArray(array []*PhysicsRaycastResult) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CalculateHitDistance calls the CalculateHitDistance method on the PhysicsRaycastResult object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#calculatehitdistance
 func (p *PhysicsRaycastResult) CalculateHitDistance() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("calculateHitDistance", args...)
+	p.p.Call("calculateHitDistance")
 }
 
 // PhysicsRaycastResultResetOpts contains optional parameters for PhysicsRaycastResult.Reset.

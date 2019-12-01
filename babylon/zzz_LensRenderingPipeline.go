@@ -30,6 +30,15 @@ func LensRenderingPipelineFromJSObject(p js.Value, ctx js.Value) *LensRenderingP
 	return &LensRenderingPipeline{PostProcessRenderPipeline: PostProcessRenderPipelineFromJSObject(p, ctx), ctx: ctx}
 }
 
+// LensRenderingPipelineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LensRenderingPipelineArrayToJSArray(array []*LensRenderingPipeline) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLensRenderingPipelineOpts contains optional parameters for NewLensRenderingPipeline.
 type NewLensRenderingPipelineOpts struct {
 	Ratio   *float64
@@ -82,9 +91,7 @@ func (l *LensRenderingPipeline) AddEffect(renderEffect *PostProcessRenderEffect)
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#disablechromaticaberration
 func (l *LensRenderingPipeline) DisableChromaticAberration() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("disableChromaticAberration", args...)
+	l.p.Call("disableChromaticAberration")
 }
 
 // DisableDepthOfField calls the DisableDepthOfField method on the LensRenderingPipeline object.
@@ -92,9 +99,7 @@ func (l *LensRenderingPipeline) DisableChromaticAberration() {
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#disabledepthoffield
 func (l *LensRenderingPipeline) DisableDepthOfField() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("disableDepthOfField", args...)
+	l.p.Call("disableDepthOfField")
 }
 
 // DisableEdgeBlur calls the DisableEdgeBlur method on the LensRenderingPipeline object.
@@ -102,9 +107,7 @@ func (l *LensRenderingPipeline) DisableDepthOfField() {
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#disableedgeblur
 func (l *LensRenderingPipeline) DisableEdgeBlur() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("disableEdgeBlur", args...)
+	l.p.Call("disableEdgeBlur")
 }
 
 // DisableEdgeDistortion calls the DisableEdgeDistortion method on the LensRenderingPipeline object.
@@ -112,9 +115,7 @@ func (l *LensRenderingPipeline) DisableEdgeBlur() {
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#disableedgedistortion
 func (l *LensRenderingPipeline) DisableEdgeDistortion() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("disableEdgeDistortion", args...)
+	l.p.Call("disableEdgeDistortion")
 }
 
 // DisableGrain calls the DisableGrain method on the LensRenderingPipeline object.
@@ -122,9 +123,7 @@ func (l *LensRenderingPipeline) DisableEdgeDistortion() {
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#disablegrain
 func (l *LensRenderingPipeline) DisableGrain() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("disableGrain", args...)
+	l.p.Call("disableGrain")
 }
 
 // DisableHighlights calls the DisableHighlights method on the LensRenderingPipeline object.
@@ -132,9 +131,7 @@ func (l *LensRenderingPipeline) DisableGrain() {
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#disablehighlights
 func (l *LensRenderingPipeline) DisableHighlights() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("disableHighlights", args...)
+	l.p.Call("disableHighlights")
 }
 
 // DisableNoiseBlur calls the DisableNoiseBlur method on the LensRenderingPipeline object.
@@ -142,9 +139,7 @@ func (l *LensRenderingPipeline) DisableHighlights() {
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#disablenoiseblur
 func (l *LensRenderingPipeline) DisableNoiseBlur() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("disableNoiseBlur", args...)
+	l.p.Call("disableNoiseBlur")
 }
 
 // DisablePentagonBokeh calls the DisablePentagonBokeh method on the LensRenderingPipeline object.
@@ -152,9 +147,7 @@ func (l *LensRenderingPipeline) DisableNoiseBlur() {
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#disablepentagonbokeh
 func (l *LensRenderingPipeline) DisablePentagonBokeh() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("disablePentagonBokeh", args...)
+	l.p.Call("disablePentagonBokeh")
 }
 
 // LensRenderingPipelineDisposeOpts contains optional parameters for LensRenderingPipeline.Dispose.
@@ -186,9 +179,7 @@ func (l *LensRenderingPipeline) Dispose(opts *LensRenderingPipelineDisposeOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#enablenoiseblur
 func (l *LensRenderingPipeline) EnableNoiseBlur() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("enableNoiseBlur", args...)
+	l.p.Call("enableNoiseBlur")
 }
 
 // EnablePentagonBokeh calls the EnablePentagonBokeh method on the LensRenderingPipeline object.
@@ -196,9 +187,7 @@ func (l *LensRenderingPipeline) EnableNoiseBlur() {
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#enablepentagonbokeh
 func (l *LensRenderingPipeline) EnablePentagonBokeh() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("enablePentagonBokeh", args...)
+	l.p.Call("enablePentagonBokeh")
 }
 
 // GetClassName calls the GetClassName method on the LensRenderingPipeline object.
@@ -206,9 +195,7 @@ func (l *LensRenderingPipeline) EnablePentagonBokeh() {
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#getclassname
 func (l *LensRenderingPipeline) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getClassName", args...)
+	retVal := l.p.Call("getClassName")
 	return retVal.String()
 }
 

@@ -29,6 +29,15 @@ func OctreeBlockFromJSObject(p js.Value, ctx js.Value) *OctreeBlock {
 	return &OctreeBlock{p: p, ctx: ctx}
 }
 
+// OctreeBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func OctreeBlockArrayToJSArray(array []*OctreeBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewOctreeBlock returns a new OctreeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock
@@ -41,7 +50,7 @@ func (ba *Babylon) NewOctreeBlock(minPoint *Vector3, maxPoint *Vector3, capacity
 	args = append(args, capacity)
 	args = append(args, depth)
 	args = append(args, maxDepth)
-	args = append(args, creationFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { creationFunc(); return nil }))
 
 	p := ba.ctx.Get("OctreeBlock").New(args...)
 	return OctreeBlockFromJSObject(p, ba.ctx)
@@ -76,14 +85,12 @@ func (o *OctreeBlock) AddEntry(entry *T) {
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#createinnerblocks
 func (o *OctreeBlock) CreateInnerBlocks() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("createInnerBlocks", args...)
+	o.p.Call("createInnerBlocks")
 }
 
 // OctreeBlockIntersectsOpts contains optional parameters for OctreeBlock.Intersects.
 type OctreeBlockIntersectsOpts struct {
-	AllowDuplicate *T
+	AllowDuplicate *bool
 }
 
 // Intersects calls the Intersects method on the OctreeBlock object.
@@ -103,7 +110,7 @@ func (o *OctreeBlock) Intersects(sphereCenter *Vector3, sphereRadius float64, se
 	if opts.AllowDuplicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AllowDuplicate.JSObject())
+		args = append(args, *opts.AllowDuplicate)
 	}
 
 	o.p.Call("intersects", args...)
@@ -136,7 +143,7 @@ func (o *OctreeBlock) RemoveEntry(entry *T) {
 
 // OctreeBlockSelectOpts contains optional parameters for OctreeBlock.Select.
 type OctreeBlockSelectOpts struct {
-	AllowDuplicate *T
+	AllowDuplicate *bool
 }
 
 // Select calls the Select method on the OctreeBlock object.
@@ -155,7 +162,7 @@ func (o *OctreeBlock) Select(frustumPlanes *Plane, selection *SmartArrayNoDuplic
 	if opts.AllowDuplicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AllowDuplicate.JSObject())
+		args = append(args, *opts.AllowDuplicate)
 	}
 
 	o.p.Call("select", args...)
@@ -166,16 +173,16 @@ func (o *OctreeBlock) Select(frustumPlanes *Plane, selection *SmartArrayNoDuplic
 // Blocks returns the Blocks property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#blocks
-func (o *OctreeBlock) Blocks(blocks []OctreeBlock) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(blocks.JSObject())
+func (o *OctreeBlock) Blocks(blocks []*OctreeBlock) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(blocks)
 	return OctreeBlockFromJSObject(p, ba.ctx)
 }
 
 // SetBlocks sets the Blocks property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#blocks
-func (o *OctreeBlock) SetBlocks(blocks []OctreeBlock) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(blocks.JSObject())
+func (o *OctreeBlock) SetBlocks(blocks []*OctreeBlock) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(blocks)
 	return OctreeBlockFromJSObject(p, ba.ctx)
 }
 

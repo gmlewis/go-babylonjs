@@ -27,6 +27,15 @@ func PanoramaToCubeMapToolsFromJSObject(p js.Value, ctx js.Value) *PanoramaToCub
 	return &PanoramaToCubeMapTools{p: p, ctx: ctx}
 }
 
+// PanoramaToCubeMapToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PanoramaToCubeMapToolsArrayToJSArray(array []*PanoramaToCubeMapTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ConvertPanoramaToCubemap calls the ConvertPanoramaToCubemap method on the PanoramaToCubeMapTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.panoramatocubemaptools#convertpanoramatocubemap

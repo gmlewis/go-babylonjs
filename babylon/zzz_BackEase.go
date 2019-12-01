@@ -29,6 +29,15 @@ func BackEaseFromJSObject(p js.Value, ctx js.Value) *BackEase {
 	return &BackEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// BackEaseArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BackEaseArrayToJSArray(array []*BackEase) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBackEaseOpts contains optional parameters for NewBackEase.
 type NewBackEaseOpts struct {
 	Amplitude *float64
@@ -72,9 +81,7 @@ func (b *BackEase) Ease(gradient float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.backease#geteasingmode
 func (b *BackEase) GetEasingMode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEasingMode", args...)
+	retVal := b.p.Call("getEasingMode")
 	return retVal.Float()
 }
 

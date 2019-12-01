@@ -27,6 +27,15 @@ func PhysicsVortexEventFromJSObject(p js.Value, ctx js.Value) *PhysicsVortexEven
 	return &PhysicsVortexEvent{p: p, ctx: ctx}
 }
 
+// PhysicsVortexEventArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsVortexEventArrayToJSArray(array []*PhysicsVortexEvent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhysicsVortexEvent returns a new PhysicsVortexEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent
@@ -47,9 +56,7 @@ func (ba *Babylon) NewPhysicsVortexEvent(_scene *Scene, _origin *Vector3, _optio
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent#disable
 func (p *PhysicsVortexEvent) Disable() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("disable", args...)
+	p.p.Call("disable")
 }
 
 // PhysicsVortexEventDisposeOpts contains optional parameters for PhysicsVortexEvent.Dispose.
@@ -81,9 +88,7 @@ func (p *PhysicsVortexEvent) Dispose(opts *PhysicsVortexEventDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent#enable
 func (p *PhysicsVortexEvent) Enable() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("enable", args...)
+	p.p.Call("enable")
 }
 
 // GetData calls the GetData method on the PhysicsVortexEvent object.
@@ -91,9 +96,7 @@ func (p *PhysicsVortexEvent) Enable() {
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent#getdata
 func (p *PhysicsVortexEvent) GetData() *PhysicsVortexEventData {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getData", args...)
+	retVal := p.p.Call("getData")
 	return PhysicsVortexEventDataFromJSObject(retVal, p.ctx)
 }
 

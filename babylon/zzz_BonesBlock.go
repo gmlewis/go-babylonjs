@@ -27,6 +27,15 @@ func BonesBlockFromJSObject(p js.Value, ctx js.Value) *BonesBlock {
 	return &BonesBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// BonesBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BonesBlockArrayToJSArray(array []*BonesBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBonesBlock returns a new BonesBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock
@@ -152,9 +161,7 @@ func (b *BonesBlock) ConnectTo(other *NodeMaterialBlock, opts *BonesBlockConnect
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#dispose
 func (b *BonesBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("dispose", args...)
+	b.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the BonesBlock object.
@@ -162,9 +169,7 @@ func (b *BonesBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#getclassname
 func (b *BonesBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getClassName", args...)
+	retVal := b.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -435,9 +440,7 @@ func (b *BonesBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBui
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#serialize
 func (b *BonesBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("serialize", args...)
+	retVal := b.p.Call("serialize")
 	return retVal
 }
 

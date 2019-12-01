@@ -27,14 +27,21 @@ func WebRequestFromJSObject(p js.Value, ctx js.Value) *WebRequest {
 	return &WebRequest{p: p, ctx: ctx}
 }
 
+// WebRequestArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebRequestArrayToJSArray(array []*WebRequest) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Abort calls the Abort method on the WebRequest object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webrequest#abort
 func (w *WebRequest) Abort() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("abort", args...)
+	w.p.Call("abort")
 }
 
 // GetResponseHeader calls the GetResponseHeader method on the WebRequest object.
@@ -65,7 +72,7 @@ func (w *WebRequest) Open(method string, url string) {
 
 // WebRequestSendOpts contains optional parameters for WebRequest.Send.
 type WebRequestSendOpts struct {
-	Body *Document
+	Body js.Value
 }
 
 // Send calls the Send method on the WebRequest object.
@@ -81,7 +88,7 @@ func (w *WebRequest) Send(opts *WebRequestSendOpts) {
 	if opts.Body == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Body.JSObject())
+		args = append(args, opts.Body)
 	}
 
 	w.p.Call("send", args...)
@@ -122,7 +129,7 @@ func (w *WebRequest) SetCustomRequestHeaders(CustomRequestHeaders js.Value) *Web
 //
 // https://doc.babylonjs.com/api/classes/babylon.webrequest#customrequestmodifiers
 func (w *WebRequest) CustomRequestModifiers(CustomRequestModifiers func()) *WebRequest {
-	p := ba.ctx.Get("WebRequest").New(CustomRequestModifiers)
+	p := ba.ctx.Get("WebRequest").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {CustomRequestModifiers(); return nil}))
 	return WebRequestFromJSObject(p, ba.ctx)
 }
 
@@ -130,7 +137,7 @@ func (w *WebRequest) CustomRequestModifiers(CustomRequestModifiers func()) *WebR
 //
 // https://doc.babylonjs.com/api/classes/babylon.webrequest#customrequestmodifiers
 func (w *WebRequest) SetCustomRequestModifiers(CustomRequestModifiers func()) *WebRequest {
-	p := ba.ctx.Get("WebRequest").New(CustomRequestModifiers)
+	p := ba.ctx.Get("WebRequest").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {CustomRequestModifiers(); return nil}))
 	return WebRequestFromJSObject(p, ba.ctx)
 }
 
@@ -138,7 +145,7 @@ func (w *WebRequest) SetCustomRequestModifiers(CustomRequestModifiers func()) *W
 //
 // https://doc.babylonjs.com/api/classes/babylon.webrequest#onprogress
 func (w *WebRequest) Onprogress(onprogress func()) *WebRequest {
-	p := ba.ctx.Get("WebRequest").New(onprogress)
+	p := ba.ctx.Get("WebRequest").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onprogress(); return nil}))
 	return WebRequestFromJSObject(p, ba.ctx)
 }
 
@@ -146,7 +153,7 @@ func (w *WebRequest) Onprogress(onprogress func()) *WebRequest {
 //
 // https://doc.babylonjs.com/api/classes/babylon.webrequest#onprogress
 func (w *WebRequest) SetOnprogress(onprogress func()) *WebRequest {
-	p := ba.ctx.Get("WebRequest").New(onprogress)
+	p := ba.ctx.Get("WebRequest").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onprogress(); return nil}))
 	return WebRequestFromJSObject(p, ba.ctx)
 }
 

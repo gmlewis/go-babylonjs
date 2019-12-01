@@ -27,6 +27,15 @@ func RenderingGroupInfoFromJSObject(p js.Value, ctx js.Value) *RenderingGroupInf
 	return &RenderingGroupInfo{p: p, ctx: ctx}
 }
 
+// RenderingGroupInfoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RenderingGroupInfoArrayToJSArray(array []*RenderingGroupInfo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Camera returns the Camera property of class RenderingGroupInfo.

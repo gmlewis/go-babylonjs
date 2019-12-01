@@ -27,10 +27,19 @@ func WebXREnterExitUIFromJSObject(p js.Value, ctx js.Value) *WebXREnterExitUI {
 	return &WebXREnterExitUI{p: p, ctx: ctx}
 }
 
+// WebXREnterExitUIArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXREnterExitUIArrayToJSArray(array []*WebXREnterExitUI) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CreateAsync calls the CreateAsync method on the WebXREnterExitUI object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexitui#createasync
-func (w *WebXREnterExitUI) CreateAsync(scene *Scene, helper *WebXRExperienceHelper, options *WebXREnterExitUIOptions) *WebXREnterExitUI {
+func (w *WebXREnterExitUI) CreateAsync(scene *Scene, helper *WebXRExperienceHelper, options *WebXREnterExitUIOptions) *Promise {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -39,7 +48,7 @@ func (w *WebXREnterExitUI) CreateAsync(scene *Scene, helper *WebXRExperienceHelp
 	args = append(args, options.JSObject())
 
 	retVal := w.p.Call("CreateAsync", args...)
-	return WebXREnterExitUIFromJSObject(retVal, w.ctx)
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // Dispose calls the Dispose method on the WebXREnterExitUI object.
@@ -47,9 +56,7 @@ func (w *WebXREnterExitUI) CreateAsync(scene *Scene, helper *WebXRExperienceHelp
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexitui#dispose
 func (w *WebXREnterExitUI) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 /*

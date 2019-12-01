@@ -28,6 +28,15 @@ func OutlineRendererFromJSObject(p js.Value, ctx js.Value) *OutlineRenderer {
 	return &OutlineRenderer{p: p, ctx: ctx}
 }
 
+// OutlineRendererArrayToJSArray returns a JavaScript Array for the wrapped array.
+func OutlineRendererArrayToJSArray(array []*OutlineRenderer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewOutlineRenderer returns a new OutlineRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer
@@ -46,9 +55,7 @@ func (ba *Babylon) NewOutlineRenderer(scene *Scene) *OutlineRenderer {
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#dispose
 func (o *OutlineRenderer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("dispose", args...)
+	o.p.Call("dispose")
 }
 
 // IsReady calls the IsReady method on the OutlineRenderer object.
@@ -70,9 +77,7 @@ func (o *OutlineRenderer) IsReady(subMesh *SubMesh, useInstances bool) bool {
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#rebuild
 func (o *OutlineRenderer) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("rebuild", args...)
+	o.p.Call("rebuild")
 }
 
 // Register calls the Register method on the OutlineRenderer object.
@@ -80,9 +85,7 @@ func (o *OutlineRenderer) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#register
 func (o *OutlineRenderer) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("register", args...)
+	o.p.Call("register")
 }
 
 // OutlineRendererRenderOpts contains optional parameters for OutlineRenderer.Render.
@@ -93,7 +96,7 @@ type OutlineRendererRenderOpts struct {
 // Render calls the Render method on the OutlineRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#render
-func (o *OutlineRenderer) Render(subMesh *SubMesh, batch *_InstancesBatch, opts *OutlineRendererRenderOpts) {
+func (o *OutlineRenderer) Render(subMesh *SubMesh, batch js.Value, opts *OutlineRendererRenderOpts) {
 	if opts == nil {
 		opts = &OutlineRendererRenderOpts{}
 	}
@@ -101,7 +104,7 @@ func (o *OutlineRenderer) Render(subMesh *SubMesh, batch *_InstancesBatch, opts 
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, subMesh.JSObject())
-	args = append(args, batch.JSObject())
+	args = append(args, batch)
 
 	if opts.UseOverlay == nil {
 		args = append(args, js.Undefined())

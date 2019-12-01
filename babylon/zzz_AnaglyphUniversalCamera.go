@@ -29,6 +29,15 @@ func AnaglyphUniversalCameraFromJSObject(p js.Value, ctx js.Value) *AnaglyphUniv
 	return &AnaglyphUniversalCamera{UniversalCamera: UniversalCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AnaglyphUniversalCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnaglyphUniversalCameraArrayToJSArray(array []*AnaglyphUniversalCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnaglyphUniversalCamera returns a new AnaglyphUniversalCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera
@@ -88,9 +97,7 @@ func (a *AnaglyphUniversalCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#dispose
 func (a *AnaglyphUniversalCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the AnaglyphUniversalCamera object.
@@ -98,9 +105,7 @@ func (a *AnaglyphUniversalCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#getclassname
 func (a *AnaglyphUniversalCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -122,9 +127,7 @@ func (a *AnaglyphUniversalCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#gettarget
 func (a *AnaglyphUniversalCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTarget", args...)
+	retVal := a.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -145,9 +148,7 @@ func (a *AnaglyphUniversalCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#storestate
 func (a *AnaglyphUniversalCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("storeState", args...)
+	retVal := a.p.Call("storeState")
 	return CameraFromJSObject(retVal, a.ctx)
 }
 
@@ -429,7 +430,7 @@ func (a *AnaglyphUniversalCamera) SetNoRotationConstraint(noRotationConstraint b
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#oncollide
 func (a *AnaglyphUniversalCamera) OnCollide(onCollide func()) *AnaglyphUniversalCamera {
-	p := ba.ctx.Get("AnaglyphUniversalCamera").New(onCollide)
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
 }
 
@@ -437,7 +438,7 @@ func (a *AnaglyphUniversalCamera) OnCollide(onCollide func()) *AnaglyphUniversal
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#oncollide
 func (a *AnaglyphUniversalCamera) SetOnCollide(onCollide func()) *AnaglyphUniversalCamera {
-	p := ba.ctx.Get("AnaglyphUniversalCamera").New(onCollide)
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
 }
 

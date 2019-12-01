@@ -27,6 +27,15 @@ func SphereBuilderFromJSObject(p js.Value, ctx js.Value) *SphereBuilder {
 	return &SphereBuilder{p: p, ctx: ctx}
 }
 
+// SphereBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SphereBuilderArrayToJSArray(array []*SphereBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // SphereBuilderCreateSphereOpts contains optional parameters for SphereBuilder.CreateSphere.
 type SphereBuilderCreateSphereOpts struct {
 	Scene *Scene

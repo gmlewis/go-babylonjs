@@ -29,6 +29,15 @@ func EngineViewFromJSObject(p js.Value, ctx js.Value) *EngineView {
 	return &EngineView{p: p, ctx: ctx}
 }
 
+// EngineViewArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EngineViewArrayToJSArray(array []*EngineView) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Camera returns the Camera property of class EngineView.

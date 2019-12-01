@@ -27,6 +27,15 @@ func TriPlanarMaterialFromJSObject(p js.Value, ctx js.Value) *TriPlanarMaterial 
 	return &TriPlanarMaterial{p: p, ctx: ctx}
 }
 
+// TriPlanarMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TriPlanarMaterialArrayToJSArray(array []*TriPlanarMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTriPlanarMaterial returns a new TriPlanarMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial
@@ -225,7 +234,7 @@ type TriPlanarMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the TriPlanarMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#forcecompilationasync
-func (t *TriPlanarMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *TriPlanarMaterialForceCompilationAsyncOpts) {
+func (t *TriPlanarMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *TriPlanarMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &TriPlanarMaterialForceCompilationAsyncOpts{}
 	}
@@ -240,7 +249,8 @@ func (t *TriPlanarMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *TriP
 		args = append(args, opts.Options)
 	}
 
-	t.p.Call("forceCompilationAsync", args...)
+	retVal := t.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, t.ctx)
 }
 
 // Freeze calls the Freeze method on the TriPlanarMaterial object.
@@ -248,9 +258,7 @@ func (t *TriPlanarMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *TriP
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#freeze
 func (t *TriPlanarMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("freeze", args...)
+	t.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the TriPlanarMaterial object.
@@ -258,9 +266,7 @@ func (t *TriPlanarMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getactivetextures
 func (t *TriPlanarMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getActiveTextures", args...)
+	retVal := t.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, t.ctx)
 }
 
@@ -269,9 +275,7 @@ func (t *TriPlanarMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getalphatesttexture
 func (t *TriPlanarMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getAlphaTestTexture", args...)
+	retVal := t.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, t.ctx)
 }
 
@@ -280,9 +284,7 @@ func (t *TriPlanarMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getanimatables
 func (t *TriPlanarMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getAnimatables", args...)
+	retVal := t.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -291,9 +293,7 @@ func (t *TriPlanarMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getbindedmeshes
 func (t *TriPlanarMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getBindedMeshes", args...)
+	retVal := t.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, t.ctx)
 }
 
@@ -302,9 +302,7 @@ func (t *TriPlanarMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getclassname
 func (t *TriPlanarMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getClassName", args...)
+	retVal := t.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -313,9 +311,7 @@ func (t *TriPlanarMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#geteffect
 func (t *TriPlanarMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getEffect", args...)
+	retVal := t.p.Call("getEffect")
 	return EffectFromJSObject(retVal, t.ctx)
 }
 
@@ -324,9 +320,7 @@ func (t *TriPlanarMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getscene
 func (t *TriPlanarMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getScene", args...)
+	retVal := t.p.Call("getScene")
 	return SceneFromJSObject(retVal, t.ctx)
 }
 
@@ -419,9 +413,7 @@ func (t *TriPlanarMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#markdirty
 func (t *TriPlanarMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("markDirty", args...)
+	t.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the TriPlanarMaterial object.
@@ -429,9 +421,7 @@ func (t *TriPlanarMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#needalphablending
 func (t *TriPlanarMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("needAlphaBlending", args...)
+	retVal := t.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -453,9 +443,7 @@ func (t *TriPlanarMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#needalphatesting
 func (t *TriPlanarMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("needAlphaTesting", args...)
+	retVal := t.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -479,9 +467,7 @@ func (t *TriPlanarMaterial) Parse(source interface{}, scene *Scene, rootUrl stri
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#serialize
 func (t *TriPlanarMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("serialize", args...)
+	retVal := t.p.Call("serialize")
 	return retVal
 }
 
@@ -515,9 +501,7 @@ func (t *TriPlanarMaterial) ToString(opts *TriPlanarMaterialToStringOpts) string
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#unbind
 func (t *TriPlanarMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("unbind", args...)
+	t.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the TriPlanarMaterial object.
@@ -525,9 +509,7 @@ func (t *TriPlanarMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#unfreeze
 func (t *TriPlanarMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("unfreeze", args...)
+	t.p.Call("unfreeze")
 }
 
 /*
@@ -599,16 +581,16 @@ func (t *TriPlanarMaterial) SetAlphaMode(alphaMode float64) *TriPlanarMaterial {
 // Animations returns the Animations property of class TriPlanarMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#animations
-func (t *TriPlanarMaterial) Animations(animations []Animation) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(animations.JSObject())
+func (t *TriPlanarMaterial) Animations(animations []*Animation) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(animations)
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class TriPlanarMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#animations
-func (t *TriPlanarMaterial) SetAnimations(animations []Animation) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(animations.JSObject())
+func (t *TriPlanarMaterial) SetAnimations(animations []*Animation) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(animations)
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -904,7 +886,7 @@ func (t *TriPlanarMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *TriPl
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getrendertargettextures
 func (t *TriPlanarMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("TriPlanarMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -912,7 +894,7 @@ func (t *TriPlanarMaterial) GetRenderTargetTextures(getRenderTargetTextures func
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getrendertargettextures
 func (t *TriPlanarMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("TriPlanarMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1192,7 +1174,7 @@ func (t *TriPlanarMaterial) SetNormalTextureZ(normalTextureZ *BaseTexture) *TriP
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onbind
 func (t *TriPlanarMaterial) OnBind(onBind func()) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(onBind)
+	p := ba.ctx.Get("TriPlanarMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1200,7 +1182,7 @@ func (t *TriPlanarMaterial) OnBind(onBind func()) *TriPlanarMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onbind
 func (t *TriPlanarMaterial) SetOnBind(onBind func()) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(onBind)
+	p := ba.ctx.Get("TriPlanarMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1224,7 +1206,7 @@ func (t *TriPlanarMaterial) SetOnBindObservable(onBindObservable *Observable) *T
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#oncompiled
 func (t *TriPlanarMaterial) OnCompiled(onCompiled func()) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(onCompiled)
+	p := ba.ctx.Get("TriPlanarMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1232,7 +1214,7 @@ func (t *TriPlanarMaterial) OnCompiled(onCompiled func()) *TriPlanarMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#oncompiled
 func (t *TriPlanarMaterial) SetOnCompiled(onCompiled func()) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(onCompiled)
+	p := ba.ctx.Get("TriPlanarMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1240,7 +1222,7 @@ func (t *TriPlanarMaterial) SetOnCompiled(onCompiled func()) *TriPlanarMaterial 
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#ondispose
 func (t *TriPlanarMaterial) OnDispose(onDispose func()) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(onDispose)
+	p := ba.ctx.Get("TriPlanarMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1248,7 +1230,7 @@ func (t *TriPlanarMaterial) OnDispose(onDispose func()) *TriPlanarMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#ondispose
 func (t *TriPlanarMaterial) SetOnDispose(onDispose func()) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(onDispose)
+	p := ba.ctx.Get("TriPlanarMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1272,7 +1254,7 @@ func (t *TriPlanarMaterial) SetOnDisposeObservable(onDisposeObservable *Observab
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onerror
 func (t *TriPlanarMaterial) OnError(onError func()) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(onError)
+	p := ba.ctx.Get("TriPlanarMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1280,7 +1262,7 @@ func (t *TriPlanarMaterial) OnError(onError func()) *TriPlanarMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onerror
 func (t *TriPlanarMaterial) SetOnError(onError func()) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(onError)
+	p := ba.ctx.Get("TriPlanarMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 

@@ -30,6 +30,15 @@ func VideoDomeFromJSObject(p js.Value, ctx js.Value) *VideoDome {
 	return &VideoDome{TransformNode: TransformNodeFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VideoDomeArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VideoDomeArrayToJSArray(array []*VideoDome) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVideoDome returns a new VideoDome object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome
@@ -48,7 +57,7 @@ func (ba *Babylon) NewVideoDome(name string, urlsOrVideo string, options js.Valu
 
 // VideoDomeAddBehaviorOpts contains optional parameters for VideoDome.AddBehavior.
 type VideoDomeAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the VideoDome object.
@@ -66,7 +75,7 @@ func (v *VideoDome) AddBehavior(behavior js.Value, opts *VideoDomeAddBehaviorOpt
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := v.p.Call("addBehavior", args...)
@@ -281,9 +290,7 @@ func (v *VideoDome) DeleteAnimationRange(name string, opts *VideoDomeDeleteAnima
 // https://doc.babylonjs.com/api/classes/babylon.videodome#detachfrombone
 func (v *VideoDome) DetachFromBone() *TransformNode {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("detachFromBone", args...)
+	retVal := v.p.Call("detachFromBone")
 	return TransformNodeFromJSObject(retVal, v.ctx)
 }
 
@@ -347,9 +354,7 @@ func (v *VideoDome) FreezeWorldMatrix(opts *VideoDomeFreezeWorldMatrixOpts) *Tra
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getabsolutepivotpoint
 func (v *VideoDome) GetAbsolutePivotPoint() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getAbsolutePivotPoint", args...)
+	retVal := v.p.Call("getAbsolutePivotPoint")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -371,9 +376,7 @@ func (v *VideoDome) GetAbsolutePivotPointToRef(result *Vector3) *TransformNode {
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getabsoluteposition
 func (v *VideoDome) GetAbsolutePosition() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getAbsolutePosition", args...)
+	retVal := v.p.Call("getAbsolutePosition")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -408,23 +411,21 @@ func (v *VideoDome) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getanimationranges
 func (v *VideoDome) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getAnimationRanges", args...)
+	retVal := v.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, v.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the VideoDome object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getbehaviorbyname
-func (v *VideoDome) GetBehaviorByName(name string) *Node {
+func (v *VideoDome) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := v.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, v.ctx)
+	return retVal
 }
 
 // VideoDomeGetChildMeshesOpts contains optional parameters for VideoDome.GetChildMeshes.
@@ -525,9 +526,7 @@ func (v *VideoDome) GetChildren(opts *VideoDomeGetChildrenOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getclassname
 func (v *VideoDome) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -619,9 +618,7 @@ func (v *VideoDome) GetDistanceToCamera(opts *VideoDomeGetDistanceToCameraOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getengine
 func (v *VideoDome) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getEngine", args...)
+	retVal := v.p.Call("getEngine")
 	return EngineFromJSObject(retVal, v.ctx)
 }
 
@@ -661,9 +658,7 @@ func (v *VideoDome) GetHierarchyBoundingVectors(opts *VideoDomeGetHierarchyBound
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getpivotmatrix
 func (v *VideoDome) GetPivotMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getPivotMatrix", args...)
+	retVal := v.p.Call("getPivotMatrix")
 	return MatrixFromJSObject(retVal, v.ctx)
 }
 
@@ -672,9 +667,7 @@ func (v *VideoDome) GetPivotMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getpivotpoint
 func (v *VideoDome) GetPivotPoint() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getPivotPoint", args...)
+	retVal := v.p.Call("getPivotPoint")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -696,9 +689,7 @@ func (v *VideoDome) GetPivotPointToRef(result *Vector3) *TransformNode {
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getposematrix
 func (v *VideoDome) GetPoseMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getPoseMatrix", args...)
+	retVal := v.p.Call("getPoseMatrix")
 	return MatrixFromJSObject(retVal, v.ctx)
 }
 
@@ -707,9 +698,7 @@ func (v *VideoDome) GetPoseMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getpositionexpressedinlocalspace
 func (v *VideoDome) GetPositionExpressedInLocalSpace() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getPositionExpressedInLocalSpace", args...)
+	retVal := v.p.Call("getPositionExpressedInLocalSpace")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -743,9 +732,7 @@ func (v *VideoDome) GetPositionInCameraSpace(opts *VideoDomeGetPositionInCameraS
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getscene
 func (v *VideoDome) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getScene", args...)
+	retVal := v.p.Call("getScene")
 	return SceneFromJSObject(retVal, v.ctx)
 }
 
@@ -754,9 +741,7 @@ func (v *VideoDome) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.videodome#getworldmatrix
 func (v *VideoDome) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getWorldMatrix", args...)
+	retVal := v.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, v.ctx)
 }
 
@@ -815,9 +800,7 @@ func (v *VideoDome) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.videodome#isdisposed
 func (v *VideoDome) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("isDisposed", args...)
+	retVal := v.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -1015,7 +998,7 @@ func (v *VideoDome) RegisterAfterWorldMatrixUpdate(jsFunc func()) *TransformNode
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := v.p.Call("registerAfterWorldMatrixUpdate", args...)
 	return TransformNodeFromJSObject(retVal, v.ctx)
@@ -1107,9 +1090,7 @@ func (v *VideoDome) Serialize(opts *VideoDomeSerializeOpts) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.videodome#serializeanimationranges
 func (v *VideoDome) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("serializeAnimationRanges", args...)
+	retVal := v.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -1303,9 +1284,7 @@ func (v *VideoDome) Translate(axis *Vector3, distance float64, opts *VideoDomeTr
 // https://doc.babylonjs.com/api/classes/babylon.videodome#unfreezeworldmatrix
 func (v *VideoDome) UnfreezeWorldMatrix() *VideoDome {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("unfreezeWorldMatrix", args...)
+	retVal := v.p.Call("unfreezeWorldMatrix")
 	return VideoDomeFromJSObject(retVal, v.ctx)
 }
 
@@ -1316,7 +1295,7 @@ func (v *VideoDome) UnregisterAfterWorldMatrixUpdate(jsFunc func()) *TransformNo
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := v.p.Call("unregisterAfterWorldMatrixUpdate", args...)
 	return TransformNodeFromJSObject(retVal, v.ctx)
@@ -1805,7 +1784,7 @@ func (v *VideoDome) SetOnAfterWorldMatrixUpdateObservable(onAfterWorldMatrixUpda
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#ondispose
 func (v *VideoDome) OnDispose(onDispose func()) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(onDispose)
+	p := ba.ctx.Get("VideoDome").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return VideoDomeFromJSObject(p, ba.ctx)
 }
 
@@ -1813,7 +1792,7 @@ func (v *VideoDome) OnDispose(onDispose func()) *VideoDome {
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#ondispose
 func (v *VideoDome) SetOnDispose(onDispose func()) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(onDispose)
+	p := ba.ctx.Get("VideoDome").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return VideoDomeFromJSObject(p, ba.ctx)
 }
 
@@ -1837,7 +1816,7 @@ func (v *VideoDome) SetOnDisposeObservable(onDisposeObservable *Observable) *Vid
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#onready
 func (v *VideoDome) OnReady(onReady func()) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(onReady)
+	p := ba.ctx.Get("VideoDome").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return VideoDomeFromJSObject(p, ba.ctx)
 }
 
@@ -1845,7 +1824,7 @@ func (v *VideoDome) OnReady(onReady func()) *VideoDome {
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#onready
 func (v *VideoDome) SetOnReady(onReady func()) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(onReady)
+	p := ba.ctx.Get("VideoDome").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return VideoDomeFromJSObject(p, ba.ctx)
 }
 

@@ -29,6 +29,15 @@ func KHR_materials_specularFromJSObject(p js.Value, ctx js.Value) *KHR_materials
 	return &KHR_materials_specular{p: p, ctx: ctx}
 }
 
+// KHR_materials_specularArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KHR_materials_specularArrayToJSArray(array []*KHR_materials_specular) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class KHR_materials_specular.

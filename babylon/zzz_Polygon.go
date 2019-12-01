@@ -29,6 +29,15 @@ func PolygonFromJSObject(p js.Value, ctx js.Value) *Polygon {
 	return &Polygon{p: p, ctx: ctx}
 }
 
+// PolygonArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PolygonArrayToJSArray(array []*Polygon) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // PolygonCircleOpts contains optional parameters for Polygon.Circle.
 type PolygonCircleOpts struct {
 	Cx            *float64

@@ -28,6 +28,15 @@ func ProceduralTextureSceneComponentFromJSObject(p js.Value, ctx js.Value) *Proc
 	return &ProceduralTextureSceneComponent{p: p, ctx: ctx}
 }
 
+// ProceduralTextureSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ProceduralTextureSceneComponentArrayToJSArray(array []*ProceduralTextureSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewProceduralTextureSceneComponent returns a new ProceduralTextureSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent
@@ -46,9 +55,7 @@ func (ba *Babylon) NewProceduralTextureSceneComponent(scene *Scene) *ProceduralT
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#dispose
 func (p *ProceduralTextureSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the ProceduralTextureSceneComponent object.
@@ -56,9 +63,7 @@ func (p *ProceduralTextureSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#rebuild
 func (p *ProceduralTextureSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("rebuild", args...)
+	p.p.Call("rebuild")
 }
 
 // Register calls the Register method on the ProceduralTextureSceneComponent object.
@@ -66,9 +71,7 @@ func (p *ProceduralTextureSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#register
 func (p *ProceduralTextureSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("register", args...)
+	p.p.Call("register")
 }
 
 /*

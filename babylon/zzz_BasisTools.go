@@ -28,6 +28,15 @@ func BasisToolsFromJSObject(p js.Value, ctx js.Value) *BasisTools {
 	return &BasisTools{p: p, ctx: ctx}
 }
 
+// BasisToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BasisToolsArrayToJSArray(array []*BasisTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // GetInternalFormatFromBasisFormat calls the GetInternalFormatFromBasisFormat method on the BasisTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basistools#getinternalformatfrombasisformat
@@ -57,7 +66,7 @@ func (b *BasisTools) LoadTextureFromTranscodeResult(texture *InternalTexture, tr
 // TranscodeAsync calls the TranscodeAsync method on the BasisTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basistools#transcodeasync
-func (b *BasisTools) TranscodeAsync(imageData js.Value, config *BasisTranscodeConfiguration) *TranscodeResult {
+func (b *BasisTools) TranscodeAsync(imageData js.Value, config *BasisTranscodeConfiguration) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -65,7 +74,7 @@ func (b *BasisTools) TranscodeAsync(imageData js.Value, config *BasisTranscodeCo
 	args = append(args, config.JSObject())
 
 	retVal := b.p.Call("TranscodeAsync", args...)
-	return TranscodeResultFromJSObject(retVal, b.ctx)
+	return PromiseFromJSObject(retVal, b.ctx)
 }
 
 /*

@@ -31,6 +31,15 @@ func PBRMaterialFromJSObject(p js.Value, ctx js.Value) *PBRMaterial {
 	return &PBRMaterial{PBRBaseMaterial: PBRBaseMaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PBRMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PBRMaterialArrayToJSArray(array []*PBRMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPBRMaterial returns a new PBRMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial
@@ -151,9 +160,7 @@ func (p *PBRMaterial) BindViewProjection(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#builduniformlayout
 func (p *PBRMaterial) BuildUniformLayout() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("buildUniformLayout", args...)
+	p.p.Call("buildUniformLayout")
 }
 
 // Clone calls the Clone method on the PBRMaterial object.
@@ -239,7 +246,7 @@ type PBRMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the PBRMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#forcecompilationasync
-func (p *PBRMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *PBRMaterialForceCompilationAsyncOpts) {
+func (p *PBRMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *PBRMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &PBRMaterialForceCompilationAsyncOpts{}
 	}
@@ -254,7 +261,8 @@ func (p *PBRMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *PBRMateria
 		args = append(args, opts.Options)
 	}
 
-	p.p.Call("forceCompilationAsync", args...)
+	retVal := p.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, p.ctx)
 }
 
 // Freeze calls the Freeze method on the PBRMaterial object.
@@ -262,9 +270,7 @@ func (p *PBRMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *PBRMateria
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#freeze
 func (p *PBRMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("freeze", args...)
+	p.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the PBRMaterial object.
@@ -272,9 +278,7 @@ func (p *PBRMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#getactivetextures
 func (p *PBRMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getActiveTextures", args...)
+	retVal := p.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
@@ -283,9 +287,7 @@ func (p *PBRMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#getalphatesttexture
 func (p *PBRMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAlphaTestTexture", args...)
+	retVal := p.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
@@ -294,9 +296,7 @@ func (p *PBRMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#getanimatables
 func (p *PBRMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAnimatables", args...)
+	retVal := p.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -305,9 +305,7 @@ func (p *PBRMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#getbindedmeshes
 func (p *PBRMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getBindedMeshes", args...)
+	retVal := p.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, p.ctx)
 }
 
@@ -316,9 +314,7 @@ func (p *PBRMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#getclassname
 func (p *PBRMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -327,9 +323,7 @@ func (p *PBRMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#geteffect
 func (p *PBRMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEffect", args...)
+	retVal := p.p.Call("getEffect")
 	return EffectFromJSObject(retVal, p.ctx)
 }
 
@@ -338,9 +332,7 @@ func (p *PBRMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#getscene
 func (p *PBRMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getScene", args...)
+	retVal := p.p.Call("getScene")
 	return SceneFromJSObject(retVal, p.ctx)
 }
 
@@ -362,9 +354,7 @@ func (p *PBRMaterial) HasTexture(texture *BaseTexture) bool {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#ismetallicworkflow
 func (p *PBRMaterial) IsMetallicWorkflow() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isMetallicWorkflow", args...)
+	retVal := p.p.Call("isMetallicWorkflow")
 	return retVal.Bool()
 }
 
@@ -444,9 +434,7 @@ func (p *PBRMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#markdirty
 func (p *PBRMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("markDirty", args...)
+	p.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the PBRMaterial object.
@@ -454,9 +442,7 @@ func (p *PBRMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#needalphablending
 func (p *PBRMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("needAlphaBlending", args...)
+	retVal := p.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -478,9 +464,7 @@ func (p *PBRMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#needalphatesting
 func (p *PBRMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("needAlphaTesting", args...)
+	retVal := p.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -504,9 +488,7 @@ func (p *PBRMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *P
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#serialize
 func (p *PBRMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 
@@ -540,9 +522,7 @@ func (p *PBRMaterial) ToString(opts *PBRMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#unbind
 func (p *PBRMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("unbind", args...)
+	p.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the PBRMaterial object.
@@ -550,9 +530,7 @@ func (p *PBRMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#unfreeze
 func (p *PBRMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("unfreeze", args...)
+	p.p.Call("unfreeze")
 }
 
 /*
@@ -736,16 +714,16 @@ func (p *PBRMaterial) SetAmbientTextureStrength(ambientTextureStrength float64) 
 // Animations returns the Animations property of class PBRMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#animations
-func (p *PBRMaterial) Animations(animations []Animation) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(animations.JSObject())
+func (p *PBRMaterial) Animations(animations []*Animation) *PBRMaterial {
+	p := ba.ctx.Get("PBRMaterial").New(animations)
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class PBRMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#animations
-func (p *PBRMaterial) SetAnimations(animations []Animation) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(animations.JSObject())
+func (p *PBRMaterial) SetAnimations(animations []*Animation) *PBRMaterial {
+	p := ba.ctx.Get("PBRMaterial").New(animations)
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1025,7 +1003,7 @@ func (p *PBRMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOri
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#customshadernameresolve
 func (p *PBRMaterial) CustomShaderNameResolve(customShaderNameResolve func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(customShaderNameResolve)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customShaderNameResolve(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1033,7 +1011,7 @@ func (p *PBRMaterial) CustomShaderNameResolve(customShaderNameResolve func()) *P
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#customshadernameresolve
 func (p *PBRMaterial) SetCustomShaderNameResolve(customShaderNameResolve func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(customShaderNameResolve)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customShaderNameResolve(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1361,7 +1339,7 @@ func (p *PBRMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *PBRMaterial
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#getrendertargettextures
 func (p *PBRMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1369,7 +1347,7 @@ func (p *PBRMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *P
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#getrendertargettextures
 func (p *PBRMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1825,7 +1803,7 @@ func (p *PBRMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *PBRMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#onbind
 func (p *PBRMaterial) OnBind(onBind func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(onBind)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1833,7 +1811,7 @@ func (p *PBRMaterial) OnBind(onBind func()) *PBRMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#onbind
 func (p *PBRMaterial) SetOnBind(onBind func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(onBind)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1857,7 +1835,7 @@ func (p *PBRMaterial) SetOnBindObservable(onBindObservable *Observable) *PBRMate
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#oncompiled
 func (p *PBRMaterial) OnCompiled(onCompiled func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(onCompiled)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1865,7 +1843,7 @@ func (p *PBRMaterial) OnCompiled(onCompiled func()) *PBRMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#oncompiled
 func (p *PBRMaterial) SetOnCompiled(onCompiled func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(onCompiled)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1873,7 +1851,7 @@ func (p *PBRMaterial) SetOnCompiled(onCompiled func()) *PBRMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#ondispose
 func (p *PBRMaterial) OnDispose(onDispose func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(onDispose)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1881,7 +1859,7 @@ func (p *PBRMaterial) OnDispose(onDispose func()) *PBRMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#ondispose
 func (p *PBRMaterial) SetOnDispose(onDispose func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(onDispose)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1905,7 +1883,7 @@ func (p *PBRMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *P
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#onerror
 func (p *PBRMaterial) OnError(onError func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(onError)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1913,7 +1891,7 @@ func (p *PBRMaterial) OnError(onError func()) *PBRMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#onerror
 func (p *PBRMaterial) SetOnError(onError func()) *PBRMaterial {
-	p := ba.ctx.Get("PBRMaterial").New(onError)
+	p := ba.ctx.Get("PBRMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 

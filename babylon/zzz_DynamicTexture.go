@@ -29,6 +29,15 @@ func DynamicTextureFromJSObject(p js.Value, ctx js.Value) *DynamicTexture {
 	return &DynamicTexture{Texture: TextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DynamicTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DynamicTextureArrayToJSArray(array []*DynamicTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDynamicTextureOpts contains optional parameters for NewDynamicTexture.
 type NewDynamicTextureOpts struct {
 	SamplingMode *float64
@@ -70,9 +79,7 @@ func (ba *Babylon) NewDynamicTexture(name string, options interface{}, scene *Sc
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#clear
 func (d *DynamicTexture) Clear() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("clear", args...)
+	d.p.Call("clear")
 }
 
 // Clone calls the Clone method on the DynamicTexture object.
@@ -80,9 +87,7 @@ func (d *DynamicTexture) Clear() {
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#clone
 func (d *DynamicTexture) Clone() *DynamicTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("clone", args...)
+	retVal := d.p.Call("clone")
 	return DynamicTextureFromJSObject(retVal, d.ctx)
 }
 
@@ -150,9 +155,7 @@ func (d *DynamicTexture) CreateFromBase64String(data string, name string, scene 
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#dispose
 func (d *DynamicTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // DynamicTextureDrawTextOpts contains optional parameters for DynamicTexture.DrawText.
@@ -197,9 +200,7 @@ func (d *DynamicTexture) DrawText(text string, x float64, y float64, font string
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#getbasesize
 func (d *DynamicTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getBaseSize", args...)
+	retVal := d.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -208,9 +209,7 @@ func (d *DynamicTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#getclassname
 func (d *DynamicTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -219,9 +218,7 @@ func (d *DynamicTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#getcontext
 func (d *DynamicTexture) GetContext() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getContext", args...)
+	retVal := d.p.Call("getContext")
 	return retVal
 }
 
@@ -230,9 +227,7 @@ func (d *DynamicTexture) GetContext() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#getinternaltexture
 func (d *DynamicTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getInternalTexture", args...)
+	retVal := d.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, d.ctx)
 }
 
@@ -241,9 +236,7 @@ func (d *DynamicTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#getreflectiontexturematrix
 func (d *DynamicTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getReflectionTextureMatrix", args...)
+	retVal := d.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, d.ctx)
 }
 
@@ -252,9 +245,7 @@ func (d *DynamicTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#getscene
 func (d *DynamicTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getScene", args...)
+	retVal := d.p.Call("getScene")
 	return SceneFromJSObject(retVal, d.ctx)
 }
 
@@ -263,9 +254,7 @@ func (d *DynamicTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#getsize
 func (d *DynamicTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getSize", args...)
+	retVal := d.p.Call("getSize")
 	return retVal
 }
 
@@ -299,9 +288,7 @@ func (d *DynamicTexture) GetTextureMatrix(opts *DynamicTextureGetTextureMatrixOp
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#isready
 func (d *DynamicTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isReady", args...)
+	retVal := d.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -310,9 +297,7 @@ func (d *DynamicTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#isreadyornotblocking
 func (d *DynamicTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isReadyOrNotBlocking", args...)
+	retVal := d.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -438,9 +423,7 @@ func (d *DynamicTexture) ReadPixels(opts *DynamicTextureReadPixelsOpts) js.Value
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#releaseinternaltexture
 func (d *DynamicTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("releaseInternalTexture", args...)
+	d.p.Call("releaseInternalTexture")
 }
 
 // Scale calls the Scale method on the DynamicTexture object.
@@ -473,9 +456,7 @@ func (d *DynamicTexture) ScaleTo(width float64, height float64) {
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#serialize
 func (d *DynamicTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("serialize", args...)
+	retVal := d.p.Call("serialize")
 	return retVal
 }
 
@@ -484,9 +465,7 @@ func (d *DynamicTexture) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#tostring
 func (d *DynamicTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("toString", args...)
+	retVal := d.p.Call("toString")
 	return retVal.String()
 }
 
@@ -572,7 +551,7 @@ func (d *DynamicTexture) WhenAllReady(textures *BaseTexture, callback func()) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	d.p.Call("WhenAllReady", args...)
 }
@@ -1367,7 +1346,7 @@ func (d *DynamicTexture) SetNoMipmap(noMipmap bool) *DynamicTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#ondispose
 func (d *DynamicTexture) OnDispose(onDispose func()) *DynamicTexture {
-	p := ba.ctx.Get("DynamicTexture").New(onDispose)
+	p := ba.ctx.Get("DynamicTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return DynamicTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1375,7 +1354,7 @@ func (d *DynamicTexture) OnDispose(onDispose func()) *DynamicTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#ondispose
 func (d *DynamicTexture) SetOnDispose(onDispose func()) *DynamicTexture {
-	p := ba.ctx.Get("DynamicTexture").New(onDispose)
+	p := ba.ctx.Get("DynamicTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return DynamicTextureFromJSObject(p, ba.ctx)
 }
 

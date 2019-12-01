@@ -27,6 +27,15 @@ func AngleFromJSObject(p js.Value, ctx js.Value) *Angle {
 	return &Angle{p: p, ctx: ctx}
 }
 
+// AngleArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AngleArrayToJSArray(array []*Angle) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAngle returns a new Angle object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.angle
@@ -59,9 +68,7 @@ func (a *Angle) BetweenTwoPoints(av *Vector2, b *Vector2) *Angle {
 // https://doc.babylonjs.com/api/classes/babylon.angle#degrees
 func (a *Angle) Degrees() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("degrees", args...)
+	retVal := a.p.Call("degrees")
 	return retVal.Float()
 }
 
@@ -96,9 +103,7 @@ func (a *Angle) FromRadians(radians float64) *Angle {
 // https://doc.babylonjs.com/api/classes/babylon.angle#radians
 func (a *Angle) Radians() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("radians", args...)
+	retVal := a.p.Call("radians")
 	return retVal.Float()
 }
 

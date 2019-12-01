@@ -29,6 +29,15 @@ func StereoscopicGamepadCameraFromJSObject(p js.Value, ctx js.Value) *Stereoscop
 	return &StereoscopicGamepadCamera{GamepadCamera: GamepadCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StereoscopicGamepadCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StereoscopicGamepadCameraArrayToJSArray(array []*StereoscopicGamepadCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStereoscopicGamepadCamera returns a new StereoscopicGamepadCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera
@@ -89,9 +98,7 @@ func (s *StereoscopicGamepadCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#dispose
 func (s *StereoscopicGamepadCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the StereoscopicGamepadCamera object.
@@ -99,9 +106,7 @@ func (s *StereoscopicGamepadCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#getclassname
 func (s *StereoscopicGamepadCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -123,9 +128,7 @@ func (s *StereoscopicGamepadCamera) GetFrontPosition(distance float64) *Vector3 
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#gettarget
 func (s *StereoscopicGamepadCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTarget", args...)
+	retVal := s.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, s.ctx)
 }
 
@@ -146,9 +149,7 @@ func (s *StereoscopicGamepadCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#storestate
 func (s *StereoscopicGamepadCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("storeState", args...)
+	retVal := s.p.Call("storeState")
 	return CameraFromJSObject(retVal, s.ctx)
 }
 
@@ -430,7 +431,7 @@ func (s *StereoscopicGamepadCamera) SetNoRotationConstraint(noRotationConstraint
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#oncollide
 func (s *StereoscopicGamepadCamera) OnCollide(onCollide func()) *StereoscopicGamepadCamera {
-	p := ba.ctx.Get("StereoscopicGamepadCamera").New(onCollide)
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
 }
 
@@ -438,7 +439,7 @@ func (s *StereoscopicGamepadCamera) OnCollide(onCollide func()) *StereoscopicGam
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#oncollide
 func (s *StereoscopicGamepadCamera) SetOnCollide(onCollide func()) *StereoscopicGamepadCamera {
-	p := ba.ctx.Get("StereoscopicGamepadCamera").New(onCollide)
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
 }
 

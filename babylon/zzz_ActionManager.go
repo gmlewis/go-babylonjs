@@ -30,6 +30,15 @@ func ActionManagerFromJSObject(p js.Value, ctx js.Value) *ActionManager {
 	return &ActionManager{AbstractActionManager: AbstractActionManagerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ActionManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ActionManagerArrayToJSArray(array []*ActionManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewActionManager returns a new ActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager
@@ -48,9 +57,7 @@ func (ba *Babylon) NewActionManager(scene *Scene) *ActionManager {
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#dispose
 func (a *ActionManager) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // GetScene calls the GetScene method on the ActionManager object.
@@ -58,9 +65,7 @@ func (a *ActionManager) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#getscene
 func (a *ActionManager) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getScene", args...)
+	retVal := a.p.Call("getScene")
 	return SceneFromJSObject(retVal, a.ctx)
 }
 

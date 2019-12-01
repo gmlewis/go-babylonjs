@@ -27,37 +27,46 @@ func WebXREnterExitUIOptionsFromJSObject(p js.Value, ctx js.Value) *WebXREnterEx
 	return &WebXREnterExitUIOptions{p: p, ctx: ctx}
 }
 
+// WebXREnterExitUIOptionsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXREnterExitUIOptionsArrayToJSArray(array []*WebXREnterExitUIOptions) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // CustomButtons returns the CustomButtons property of class WebXREnterExitUIOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexituioptions#custombuttons
-func (w *WebXREnterExitUIOptions) CustomButtons(customButtons []WebXREnterExitUIButton) *WebXREnterExitUIOptions {
-	p := ba.ctx.Get("WebXREnterExitUIOptions").New(customButtons.JSObject())
+func (w *WebXREnterExitUIOptions) CustomButtons(customButtons []*WebXREnterExitUIButton) *WebXREnterExitUIOptions {
+	p := ba.ctx.Get("WebXREnterExitUIOptions").New(customButtons)
 	return WebXREnterExitUIOptionsFromJSObject(p, ba.ctx)
 }
 
 // SetCustomButtons sets the CustomButtons property of class WebXREnterExitUIOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexituioptions#custombuttons
-func (w *WebXREnterExitUIOptions) SetCustomButtons(customButtons []WebXREnterExitUIButton) *WebXREnterExitUIOptions {
-	p := ba.ctx.Get("WebXREnterExitUIOptions").New(customButtons.JSObject())
+func (w *WebXREnterExitUIOptions) SetCustomButtons(customButtons []*WebXREnterExitUIButton) *WebXREnterExitUIOptions {
+	p := ba.ctx.Get("WebXREnterExitUIOptions").New(customButtons)
 	return WebXREnterExitUIOptionsFromJSObject(p, ba.ctx)
 }
 
 // ReferenceSpaceType returns the ReferenceSpaceType property of class WebXREnterExitUIOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexituioptions#referencespacetype
-func (w *WebXREnterExitUIOptions) ReferenceSpaceType(referenceSpaceType *XRReferenceSpaceType) *WebXREnterExitUIOptions {
-	p := ba.ctx.Get("WebXREnterExitUIOptions").New(referenceSpaceType.JSObject())
+func (w *WebXREnterExitUIOptions) ReferenceSpaceType(referenceSpaceType js.Value) *WebXREnterExitUIOptions {
+	p := ba.ctx.Get("WebXREnterExitUIOptions").New(referenceSpaceType)
 	return WebXREnterExitUIOptionsFromJSObject(p, ba.ctx)
 }
 
 // SetReferenceSpaceType sets the ReferenceSpaceType property of class WebXREnterExitUIOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexituioptions#referencespacetype
-func (w *WebXREnterExitUIOptions) SetReferenceSpaceType(referenceSpaceType *XRReferenceSpaceType) *WebXREnterExitUIOptions {
-	p := ba.ctx.Get("WebXREnterExitUIOptions").New(referenceSpaceType.JSObject())
+func (w *WebXREnterExitUIOptions) SetReferenceSpaceType(referenceSpaceType js.Value) *WebXREnterExitUIOptions {
+	p := ba.ctx.Get("WebXREnterExitUIOptions").New(referenceSpaceType)
 	return WebXREnterExitUIOptionsFromJSObject(p, ba.ctx)
 }
 
@@ -80,16 +89,16 @@ func (w *WebXREnterExitUIOptions) SetRenderTarget(renderTarget *WebXRRenderTarge
 // SessionMode returns the SessionMode property of class WebXREnterExitUIOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexituioptions#sessionmode
-func (w *WebXREnterExitUIOptions) SessionMode(sessionMode *XRSessionMode) *WebXREnterExitUIOptions {
-	p := ba.ctx.Get("WebXREnterExitUIOptions").New(sessionMode.JSObject())
+func (w *WebXREnterExitUIOptions) SessionMode(sessionMode js.Value) *WebXREnterExitUIOptions {
+	p := ba.ctx.Get("WebXREnterExitUIOptions").New(sessionMode)
 	return WebXREnterExitUIOptionsFromJSObject(p, ba.ctx)
 }
 
 // SetSessionMode sets the SessionMode property of class WebXREnterExitUIOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexituioptions#sessionmode
-func (w *WebXREnterExitUIOptions) SetSessionMode(sessionMode *XRSessionMode) *WebXREnterExitUIOptions {
-	p := ba.ctx.Get("WebXREnterExitUIOptions").New(sessionMode.JSObject())
+func (w *WebXREnterExitUIOptions) SetSessionMode(sessionMode js.Value) *WebXREnterExitUIOptions {
+	p := ba.ctx.Get("WebXREnterExitUIOptions").New(sessionMode)
 	return WebXREnterExitUIOptionsFromJSObject(p, ba.ctx)
 }
 

@@ -29,6 +29,15 @@ func PostProcessesOptimizationFromJSObject(p js.Value, ctx js.Value) *PostProces
 	return &PostProcessesOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PostProcessesOptimizationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PostProcessesOptimizationArrayToJSArray(array []*PostProcessesOptimization) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPostProcessesOptimizationOpts contains optional parameters for NewPostProcessesOptimization.
 type NewPostProcessesOptimizationOpts struct {
 	Priority *float64
@@ -73,9 +82,7 @@ func (p *PostProcessesOptimization) Apply(scene *Scene, optimizer *SceneOptimize
 // https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization#getdescription
 func (p *PostProcessesOptimization) GetDescription() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getDescription", args...)
+	retVal := p.p.Call("getDescription")
 	return retVal.String()
 }
 

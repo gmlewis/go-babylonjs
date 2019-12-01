@@ -28,6 +28,15 @@ func ShadowGeneratorSceneComponentFromJSObject(p js.Value, ctx js.Value) *Shadow
 	return &ShadowGeneratorSceneComponent{p: p, ctx: ctx}
 }
 
+// ShadowGeneratorSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ShadowGeneratorSceneComponentArrayToJSArray(array []*ShadowGeneratorSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewShadowGeneratorSceneComponent returns a new ShadowGeneratorSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent
@@ -58,9 +67,7 @@ func (s *ShadowGeneratorSceneComponent) AddFromContainer(container *AbstractScen
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#dispose
 func (s *ShadowGeneratorSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the ShadowGeneratorSceneComponent object.
@@ -68,9 +75,7 @@ func (s *ShadowGeneratorSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#rebuild
 func (s *ShadowGeneratorSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("rebuild", args...)
+	s.p.Call("rebuild")
 }
 
 // Register calls the Register method on the ShadowGeneratorSceneComponent object.
@@ -78,9 +83,7 @@ func (s *ShadowGeneratorSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#register
 func (s *ShadowGeneratorSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("register", args...)
+	s.p.Call("register")
 }
 
 // ShadowGeneratorSceneComponentRemoveFromContainerOpts contains optional parameters for ShadowGeneratorSceneComponent.RemoveFromContainer.

@@ -27,6 +27,15 @@ func DepthOfFieldEffectFromJSObject(p js.Value, ctx js.Value) *DepthOfFieldEffec
 	return &DepthOfFieldEffect{PostProcessRenderEffect: PostProcessRenderEffectFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DepthOfFieldEffectArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DepthOfFieldEffectArrayToJSArray(array []*DepthOfFieldEffect) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDepthOfFieldEffectOpts contains optional parameters for NewDepthOfFieldEffect.
 type NewDepthOfFieldEffectOpts struct {
 	BlurLevel           *DepthOfFieldEffectBlurLevel
@@ -84,9 +93,7 @@ func (d *DepthOfFieldEffect) DisposeEffects(camera *Camera) {
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#getclassname
 func (d *DepthOfFieldEffect) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -98,7 +105,7 @@ type DepthOfFieldEffectGetPostProcessesOpts struct {
 // GetPostProcesses calls the GetPostProcesses method on the DepthOfFieldEffect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#getpostprocesses
-func (d *DepthOfFieldEffect) GetPostProcesses(opts *DepthOfFieldEffectGetPostProcessesOpts) []js.Value {
+func (d *DepthOfFieldEffect) GetPostProcesses(opts *DepthOfFieldEffectGetPostProcessesOpts) []*PostProcess {
 	if opts == nil {
 		opts = &DepthOfFieldEffectGetPostProcessesOpts{}
 	}

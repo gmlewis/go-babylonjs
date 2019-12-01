@@ -29,6 +29,15 @@ func BezierCurveEaseFromJSObject(p js.Value, ctx js.Value) *BezierCurveEase {
 	return &BezierCurveEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// BezierCurveEaseArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BezierCurveEaseArrayToJSArray(array []*BezierCurveEase) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBezierCurveEaseOpts contains optional parameters for NewBezierCurveEase.
 type NewBezierCurveEaseOpts struct {
 	X1 *float64
@@ -90,9 +99,7 @@ func (b *BezierCurveEase) Ease(gradient float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.beziercurveease#geteasingmode
 func (b *BezierCurveEase) GetEasingMode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEasingMode", args...)
+	retVal := b.p.Call("getEasingMode")
 	return retVal.Float()
 }
 

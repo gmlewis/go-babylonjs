@@ -31,6 +31,15 @@ func SpotLightFromJSObject(p js.Value, ctx js.Value) *SpotLight {
 	return &SpotLight{ShadowLight: ShadowLightFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SpotLightArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SpotLightArrayToJSArray(array []*SpotLight) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSpotLight returns a new SpotLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight
@@ -51,7 +60,7 @@ func (ba *Babylon) NewSpotLight(name string, position *Vector3, direction *Vecto
 
 // SpotLightAddBehaviorOpts contains optional parameters for SpotLight.AddBehavior.
 type SpotLightAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the SpotLight object.
@@ -69,7 +78,7 @@ func (s *SpotLight) AddBehavior(behavior js.Value, opts *SpotLightAddBehaviorOpt
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := s.p.Call("addBehavior", args...)
@@ -208,9 +217,7 @@ func (s *SpotLight) CompareLightsPriority(a *Light, b *Light) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#computetransformedinformation
 func (s *SpotLight) ComputeTransformedInformation() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("computeTransformedInformation", args...)
+	retVal := s.p.Call("computeTransformedInformation")
 	return retVal.Bool()
 }
 
@@ -313,9 +320,7 @@ func (s *SpotLight) DeleteAnimationRange(name string, opts *SpotLightDeleteAnima
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#dispose
 func (s *SpotLight) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // ForceProjectionMatrixCompute calls the ForceProjectionMatrixCompute method on the SpotLight object.
@@ -323,9 +328,7 @@ func (s *SpotLight) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#forceprojectionmatrixcompute
 func (s *SpotLight) ForceProjectionMatrixCompute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("forceProjectionMatrixCompute", args...)
+	s.p.Call("forceProjectionMatrixCompute")
 }
 
 // GetAbsolutePosition calls the GetAbsolutePosition method on the SpotLight object.
@@ -333,9 +336,7 @@ func (s *SpotLight) ForceProjectionMatrixCompute() {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getabsoluteposition
 func (s *SpotLight) GetAbsolutePosition() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAbsolutePosition", args...)
+	retVal := s.p.Call("getAbsolutePosition")
 	return Vector3FromJSObject(retVal, s.ctx)
 }
 
@@ -370,23 +371,21 @@ func (s *SpotLight) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getanimationranges
 func (s *SpotLight) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAnimationRanges", args...)
+	retVal := s.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, s.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the SpotLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getbehaviorbyname
-func (s *SpotLight) GetBehaviorByName(name string) *Node {
+func (s *SpotLight) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := s.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // SpotLightGetChildMeshesOpts contains optional parameters for SpotLight.GetChildMeshes.
@@ -456,9 +455,7 @@ func (s *SpotLight) GetChildren(opts *SpotLightGetChildrenOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getclassname
 func (s *SpotLight) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -508,9 +505,7 @@ func (s *SpotLight) GetDepthMinZ(activeCamera *Camera) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getdepthscale
 func (s *SpotLight) GetDepthScale() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getDepthScale", args...)
+	retVal := s.p.Call("getDepthScale")
 	return retVal.Float()
 }
 
@@ -550,9 +545,7 @@ func (s *SpotLight) GetDescendants(opts *SpotLightGetDescendantsOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getengine
 func (s *SpotLight) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEngine", args...)
+	retVal := s.p.Call("getEngine")
 	return EngineFromJSObject(retVal, s.ctx)
 }
 
@@ -592,9 +585,7 @@ func (s *SpotLight) GetHierarchyBoundingVectors(opts *SpotLightGetHierarchyBound
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getrotation
 func (s *SpotLight) GetRotation() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getRotation", args...)
+	retVal := s.p.Call("getRotation")
 	return Vector3FromJSObject(retVal, s.ctx)
 }
 
@@ -603,9 +594,7 @@ func (s *SpotLight) GetRotation() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getscaledintensity
 func (s *SpotLight) GetScaledIntensity() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getScaledIntensity", args...)
+	retVal := s.p.Call("getScaledIntensity")
 	return retVal.Float()
 }
 
@@ -614,9 +603,7 @@ func (s *SpotLight) GetScaledIntensity() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getscene
 func (s *SpotLight) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getScene", args...)
+	retVal := s.p.Call("getScene")
 	return SceneFromJSObject(retVal, s.ctx)
 }
 
@@ -648,12 +635,10 @@ func (s *SpotLight) GetShadowDirection(opts *SpotLightGetShadowDirectionOpts) *V
 // GetShadowGenerator calls the GetShadowGenerator method on the SpotLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getshadowgenerator
-func (s *SpotLight) GetShadowGenerator() *IShadowGenerator {
+func (s *SpotLight) GetShadowGenerator() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getShadowGenerator", args...)
-	return IShadowGeneratorFromJSObject(retVal, s.ctx)
+	retVal := s.p.Call("getShadowGenerator")
+	return retVal
 }
 
 // GetTypeID calls the GetTypeID method on the SpotLight object.
@@ -661,9 +646,7 @@ func (s *SpotLight) GetShadowGenerator() *IShadowGenerator {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#gettypeid
 func (s *SpotLight) GetTypeID() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTypeID", args...)
+	retVal := s.p.Call("getTypeID")
 	return retVal.Float()
 }
 
@@ -672,9 +655,7 @@ func (s *SpotLight) GetTypeID() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#getworldmatrix
 func (s *SpotLight) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getWorldMatrix", args...)
+	retVal := s.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, s.ctx)
 }
 
@@ -696,9 +677,7 @@ func (s *SpotLight) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#isdisposed
 func (s *SpotLight) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isDisposed", args...)
+	retVal := s.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -757,9 +736,7 @@ func (s *SpotLight) IsReady(opts *SpotLightIsReadyOpts) bool {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#needcube
 func (s *SpotLight) NeedCube() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("needCube", args...)
+	retVal := s.p.Call("needCube")
 	return retVal.Bool()
 }
 
@@ -768,9 +745,7 @@ func (s *SpotLight) NeedCube() bool {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#needprojectionmatrixcompute
 func (s *SpotLight) NeedProjectionMatrixCompute() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("needProjectionMatrixCompute", args...)
+	retVal := s.p.Call("needProjectionMatrixCompute")
 	return retVal.Bool()
 }
 
@@ -833,9 +808,7 @@ func (s *SpotLight) RemoveBehavior(behavior js.Value) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#serialize
 func (s *SpotLight) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 
@@ -844,9 +817,7 @@ func (s *SpotLight) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#serializeanimationranges
 func (s *SpotLight) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serializeAnimationRanges", args...)
+	retVal := s.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -878,16 +849,16 @@ func (s *SpotLight) SetEnabled(value bool) {
 // SetShadowProjectionMatrix calls the SetShadowProjectionMatrix method on the SpotLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#setshadowprojectionmatrix
-func (s *SpotLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []AbstractMesh) *IShadowLight {
+func (s *SpotLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []*AbstractMesh) js.Value {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, matrix.JSObject())
 	args = append(args, viewMatrix.JSObject())
-	args = append(args, renderList.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(renderList))
 
 	retVal := s.p.Call("setShadowProjectionMatrix", args...)
-	return IShadowLightFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // SpotLightToStringOpts contains optional parameters for SpotLight.ToString.
@@ -1027,7 +998,7 @@ func (s *SpotLight) SetBehaviors(behaviors js.Value) *SpotLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#customprojectionmatrixbuilder
 func (s *SpotLight) CustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(customProjectionMatrixBuilder)
+	p := ba.ctx.Get("SpotLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customProjectionMatrixBuilder(); return nil}))
 	return SpotLightFromJSObject(p, ba.ctx)
 }
 
@@ -1035,7 +1006,7 @@ func (s *SpotLight) CustomProjectionMatrixBuilder(customProjectionMatrixBuilder 
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#customprojectionmatrixbuilder
 func (s *SpotLight) SetCustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(customProjectionMatrixBuilder)
+	p := ba.ctx.Get("SpotLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customProjectionMatrixBuilder(); return nil}))
 	return SpotLightFromJSObject(p, ba.ctx)
 }
 
@@ -1571,7 +1542,7 @@ func (s *SpotLight) SetName(name string) *SpotLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#ondispose
 func (s *SpotLight) OnDispose(onDispose func()) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(onDispose)
+	p := ba.ctx.Get("SpotLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return SpotLightFromJSObject(p, ba.ctx)
 }
 
@@ -1579,7 +1550,7 @@ func (s *SpotLight) OnDispose(onDispose func()) *SpotLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#ondispose
 func (s *SpotLight) SetOnDispose(onDispose func()) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(onDispose)
+	p := ba.ctx.Get("SpotLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return SpotLightFromJSObject(p, ba.ctx)
 }
 
@@ -1603,7 +1574,7 @@ func (s *SpotLight) SetOnDisposeObservable(onDisposeObservable *Observable) *Spo
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#onready
 func (s *SpotLight) OnReady(onReady func()) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(onReady)
+	p := ba.ctx.Get("SpotLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return SpotLightFromJSObject(p, ba.ctx)
 }
 
@@ -1611,7 +1582,7 @@ func (s *SpotLight) OnReady(onReady func()) *SpotLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#onready
 func (s *SpotLight) SetOnReady(onReady func()) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(onReady)
+	p := ba.ctx.Get("SpotLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return SpotLightFromJSObject(p, ba.ctx)
 }
 

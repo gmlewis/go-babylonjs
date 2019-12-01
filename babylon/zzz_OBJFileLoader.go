@@ -28,9 +28,18 @@ func OBJFileLoaderFromJSObject(p js.Value, ctx js.Value) *OBJFileLoader {
 	return &OBJFileLoader{p: p, ctx: ctx}
 }
 
+// OBJFileLoaderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func OBJFileLoaderArrayToJSArray(array []*OBJFileLoader) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewOBJFileLoaderOpts contains optional parameters for NewOBJFileLoader.
 type NewOBJFileLoaderOpts struct {
-	MeshLoadOptions *MeshLoadOptions
+	MeshLoadOptions js.Value
 }
 
 // NewOBJFileLoader returns a new OBJFileLoader object.
@@ -46,7 +55,7 @@ func (ba *Babylon) NewOBJFileLoader(opts *NewOBJFileLoaderOpts) *OBJFileLoader {
 	if opts.MeshLoadOptions == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.MeshLoadOptions.JSObject())
+		args = append(args, opts.MeshLoadOptions)
 	}
 
 	p := ba.ctx.Get("OBJFileLoader").New(args...)
@@ -71,9 +80,7 @@ func (o *OBJFileLoader) CanDirectLoad(data string) bool {
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#createplugin
 func (o *OBJFileLoader) CreatePlugin() *ISceneLoaderPluginAsync {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("createPlugin", args...)
+	retVal := o.p.Call("createPlugin")
 	return ISceneLoaderPluginAsyncFromJSObject(retVal, o.ctx)
 }
 
@@ -86,7 +93,7 @@ type OBJFileLoaderImportMeshAsyncOpts struct {
 // ImportMeshAsync calls the ImportMeshAsync method on the OBJFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#importmeshasync
-func (o *OBJFileLoader) ImportMeshAsync(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, opts *OBJFileLoaderImportMeshAsyncOpts) js.Value {
+func (o *OBJFileLoader) ImportMeshAsync(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, opts *OBJFileLoaderImportMeshAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &OBJFileLoaderImportMeshAsyncOpts{}
 	}
@@ -110,7 +117,7 @@ func (o *OBJFileLoader) ImportMeshAsync(meshesNames interface{}, scene *Scene, d
 	}
 
 	retVal := o.p.Call("importMeshAsync", args...)
-	return retVal
+	return PromiseFromJSObject(retVal, o.ctx)
 }
 
 // OBJFileLoaderLoadAssetContainerAsyncOpts contains optional parameters for OBJFileLoader.LoadAssetContainerAsync.
@@ -122,7 +129,7 @@ type OBJFileLoaderLoadAssetContainerAsyncOpts struct {
 // LoadAssetContainerAsync calls the LoadAssetContainerAsync method on the OBJFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#loadassetcontainerasync
-func (o *OBJFileLoader) LoadAssetContainerAsync(scene *Scene, data string, rootUrl string, opts *OBJFileLoaderLoadAssetContainerAsyncOpts) *AssetContainer {
+func (o *OBJFileLoader) LoadAssetContainerAsync(scene *Scene, data string, rootUrl string, opts *OBJFileLoaderLoadAssetContainerAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &OBJFileLoaderLoadAssetContainerAsyncOpts{}
 	}
@@ -145,7 +152,7 @@ func (o *OBJFileLoader) LoadAssetContainerAsync(scene *Scene, data string, rootU
 	}
 
 	retVal := o.p.Call("loadAssetContainerAsync", args...)
-	return AssetContainerFromJSObject(retVal, o.ctx)
+	return PromiseFromJSObject(retVal, o.ctx)
 }
 
 // OBJFileLoaderLoadAsyncOpts contains optional parameters for OBJFileLoader.LoadAsync.
@@ -157,7 +164,7 @@ type OBJFileLoaderLoadAsyncOpts struct {
 // LoadAsync calls the LoadAsync method on the OBJFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#loadasync
-func (o *OBJFileLoader) LoadAsync(scene *Scene, data string, rootUrl string, opts *OBJFileLoaderLoadAsyncOpts) {
+func (o *OBJFileLoader) LoadAsync(scene *Scene, data string, rootUrl string, opts *OBJFileLoaderLoadAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &OBJFileLoaderLoadAsyncOpts{}
 	}
@@ -179,7 +186,8 @@ func (o *OBJFileLoader) LoadAsync(scene *Scene, data string, rootUrl string, opt
 		args = append(args, *opts.FileName)
 	}
 
-	o.p.Call("loadAsync", args...)
+	retVal := o.p.Call("loadAsync", args...)
+	return PromiseFromJSObject(retVal, o.ctx)
 }
 
 /*

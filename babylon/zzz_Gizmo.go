@@ -27,6 +27,15 @@ func GizmoFromJSObject(p js.Value, ctx js.Value) *Gizmo {
 	return &Gizmo{p: p, ctx: ctx}
 }
 
+// GizmoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GizmoArrayToJSArray(array []*Gizmo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGizmoOpts contains optional parameters for NewGizmo.
 type NewGizmoOpts struct {
 	GizmoLayer *UtilityLayerRenderer
@@ -57,9 +66,7 @@ func (ba *Babylon) NewGizmo(opts *NewGizmoOpts) *Gizmo {
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#dispose
 func (g *Gizmo) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // SetCustomMesh calls the SetCustomMesh method on the Gizmo object.

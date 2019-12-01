@@ -27,6 +27,15 @@ func GroundMeshFromJSObject(p js.Value, ctx js.Value) *GroundMesh {
 	return &GroundMesh{Mesh: MeshFromJSObject(p, ctx), ctx: ctx}
 }
 
+// GroundMeshArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GroundMeshArrayToJSArray(array []*GroundMesh) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGroundMesh returns a new GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh
@@ -163,9 +172,7 @@ func (g *GroundMesh) ApplySkeleton(skeleton *Skeleton) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#bakecurrenttransformintovertices
 func (g *GroundMesh) BakeCurrentTransformIntoVertices() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("bakeCurrentTransformIntoVertices", args...)
+	retVal := g.p.Call("bakeCurrentTransformIntoVertices")
 	return MeshFromJSObject(retVal, g.ctx)
 }
 
@@ -200,9 +207,7 @@ func (g *GroundMesh) Center(meshesOrMinMaxVector js.Value) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#cleanmatrixweights
 func (g *GroundMesh) CleanMatrixWeights() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("cleanMatrixWeights", args...)
+	g.p.Call("cleanMatrixWeights")
 }
 
 // GroundMeshCloneOpts contains optional parameters for GroundMesh.Clone.
@@ -253,9 +258,7 @@ func (g *GroundMesh) Clone(opts *GroundMeshCloneOpts) *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#converttoflatshadedmesh
 func (g *GroundMesh) ConvertToFlatShadedMesh() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("convertToFlatShadedMesh", args...)
+	retVal := g.p.Call("convertToFlatShadedMesh")
 	return MeshFromJSObject(retVal, g.ctx)
 }
 
@@ -264,9 +267,7 @@ func (g *GroundMesh) ConvertToFlatShadedMesh() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#converttounindexedmesh
 func (g *GroundMesh) ConvertToUnIndexedMesh() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("convertToUnIndexedMesh", args...)
+	retVal := g.p.Call("convertToUnIndexedMesh")
 	return MeshFromJSObject(retVal, g.ctx)
 }
 
@@ -1001,7 +1002,7 @@ func (g *GroundMesh) CreateTube(name string, path *Vector3, radius float64, tess
 	args = append(args, path.JSObject())
 	args = append(args, radius)
 	args = append(args, tessellation)
-	args = append(args, radiusFunction)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { radiusFunction(); return nil }))
 	args = append(args, cap)
 	args = append(args, scene.JSObject())
 
@@ -1163,7 +1164,7 @@ type GroundMeshExtrudeShapeCustomOpts struct {
 // ExtrudeShapeCustom calls the ExtrudeShapeCustom method on the GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#extrudeshapecustom
-func (g *GroundMesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector3, scaleFunction *Function, rotationFunction *Function, ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *GroundMeshExtrudeShapeCustomOpts) *Mesh {
+func (g *GroundMesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector3, scaleFunction func(), rotationFunction func(), ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *GroundMeshExtrudeShapeCustomOpts) *Mesh {
 	if opts == nil {
 		opts = &GroundMeshExtrudeShapeCustomOpts{}
 	}
@@ -1173,8 +1174,8 @@ func (g *GroundMesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vecto
 	args = append(args, name)
 	args = append(args, shape.JSObject())
 	args = append(args, path.JSObject())
-	args = append(args, scaleFunction.JSObject())
-	args = append(args, rotationFunction.JSObject())
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { scaleFunction(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { rotationFunction(); return nil }))
 	args = append(args, ribbonCloseArray)
 	args = append(args, ribbonClosePath)
 	args = append(args, cap)
@@ -1230,9 +1231,7 @@ func (g *GroundMesh) FlipFaces(opts *GroundMeshFlipFacesOpts) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#forcesharedvertices
 func (g *GroundMesh) ForceSharedVertices() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("forceSharedVertices", args...)
+	g.p.Call("forceSharedVertices")
 }
 
 // FreezeNormals calls the FreezeNormals method on the GroundMesh object.
@@ -1240,9 +1239,7 @@ func (g *GroundMesh) ForceSharedVertices() {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#freezenormals
 func (g *GroundMesh) FreezeNormals() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("freezeNormals", args...)
+	retVal := g.p.Call("freezeNormals")
 	return MeshFromJSObject(retVal, g.ctx)
 }
 
@@ -1251,9 +1248,7 @@ func (g *GroundMesh) FreezeNormals() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#getanimatables
 func (g *GroundMesh) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getAnimatables", args...)
+	retVal := g.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -1262,21 +1257,17 @@ func (g *GroundMesh) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#getclassname
 func (g *GroundMesh) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getClassName", args...)
+	retVal := g.p.Call("getClassName")
 	return retVal.String()
 }
 
 // GetEmittedParticleSystems calls the GetEmittedParticleSystems method on the GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#getemittedparticlesystems
-func (g *GroundMesh) GetEmittedParticleSystems() *IParticleSystem {
+func (g *GroundMesh) GetEmittedParticleSystems() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getEmittedParticleSystems", args...)
-	return IParticleSystemFromJSObject(retVal, g.ctx)
+	retVal := g.p.Call("getEmittedParticleSystems")
+	return retVal
 }
 
 // GetHeightAtCoordinates calls the GetHeightAtCoordinates method on the GroundMesh object.
@@ -1296,12 +1287,10 @@ func (g *GroundMesh) GetHeightAtCoordinates(x float64, z float64) float64 {
 // GetHierarchyEmittedParticleSystems calls the GetHierarchyEmittedParticleSystems method on the GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#gethierarchyemittedparticlesystems
-func (g *GroundMesh) GetHierarchyEmittedParticleSystems() *IParticleSystem {
+func (g *GroundMesh) GetHierarchyEmittedParticleSystems() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getHierarchyEmittedParticleSystems", args...)
-	return IParticleSystemFromJSObject(retVal, g.ctx)
+	retVal := g.p.Call("getHierarchyEmittedParticleSystems")
+	return retVal
 }
 
 // GroundMeshGetIndicesOpts contains optional parameters for GroundMesh.GetIndices.
@@ -1380,9 +1369,7 @@ func (g *GroundMesh) GetLODLevelAtDistance(distance float64) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#getlodlevels
 func (g *GroundMesh) GetLODLevels() *MeshLODLevel {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getLODLevels", args...)
+	retVal := g.p.Call("getLODLevels")
 	return MeshLODLevelFromJSObject(retVal, g.ctx)
 }
 
@@ -1420,9 +1407,7 @@ func (g *GroundMesh) GetNormalAtCoordinatesToRef(x float64, z float64, ref *Vect
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#gettotalindices
 func (g *GroundMesh) GetTotalIndices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getTotalIndices", args...)
+	retVal := g.p.Call("getTotalIndices")
 	return retVal.Float()
 }
 
@@ -1431,9 +1416,7 @@ func (g *GroundMesh) GetTotalIndices() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#gettotalvertices
 func (g *GroundMesh) GetTotalVertices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getTotalVertices", args...)
+	retVal := g.p.Call("getTotalVertices")
 	return retVal.Float()
 }
 
@@ -1488,9 +1471,7 @@ func (g *GroundMesh) GetVerticesData(kind string, opts *GroundMeshGetVerticesDat
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#getverticesdatakinds
 func (g *GroundMesh) GetVerticesDataKinds() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getVerticesDataKinds", args...)
+	retVal := g.p.Call("getVerticesDataKinds")
 	return retVal.String()
 }
 
@@ -1618,9 +1599,7 @@ func (g *GroundMesh) IsVerticesDataPresent(kind string) bool {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#makegeometryunique
 func (g *GroundMesh) MakeGeometryUnique() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("makeGeometryUnique", args...)
+	retVal := g.p.Call("makeGeometryUnique")
 	return MeshFromJSObject(retVal, g.ctx)
 }
 
@@ -1662,14 +1641,14 @@ type GroundMeshMergeMeshesOpts struct {
 // MergeMeshes calls the MergeMeshes method on the GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#mergemeshes
-func (g *GroundMesh) MergeMeshes(meshes []js.Value, opts *GroundMeshMergeMeshesOpts) *Mesh {
+func (g *GroundMesh) MergeMeshes(meshes []*Mesh, opts *GroundMeshMergeMeshesOpts) *Mesh {
 	if opts == nil {
 		opts = &GroundMeshMergeMeshesOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+5)
 
-	args = append(args, meshes)
+	args = append(args, MeshArrayToJSArray(meshes))
 
 	if opts.DisposeSource == nil {
 		args = append(args, js.Undefined())
@@ -1811,7 +1790,7 @@ func (g *GroundMesh) RegisterAfterRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := g.p.Call("registerAfterRender", args...)
 	return MeshFromJSObject(retVal, g.ctx)
@@ -1824,7 +1803,7 @@ func (g *GroundMesh) RegisterBeforeRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := g.p.Call("registerBeforeRender", args...)
 	return MeshFromJSObject(retVal, g.ctx)
@@ -1959,9 +1938,7 @@ func (g *GroundMesh) SetMaterialByID(id string) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#setnormalsforcpuskinning
 func (g *GroundMesh) SetNormalsForCPUSkinning() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("setNormalsForCPUSkinning", args...)
+	retVal := g.p.Call("setNormalsForCPUSkinning")
 	return retVal
 }
 
@@ -1970,9 +1947,7 @@ func (g *GroundMesh) SetNormalsForCPUSkinning() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#setpositionsforcpuskinning
 func (g *GroundMesh) SetPositionsForCPUSkinning() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("setPositionsForCPUSkinning", args...)
+	retVal := g.p.Call("setPositionsForCPUSkinning")
 	return retVal
 }
 
@@ -2026,21 +2001,21 @@ func (g *GroundMesh) SetVerticesData(kind string, data js.Value, opts *GroundMes
 // GroundMeshSimplifyOpts contains optional parameters for GroundMesh.Simplify.
 type GroundMeshSimplifyOpts struct {
 	ParallelProcessing *bool
-	SimplificationType *SimplificationType
+	SimplificationType js.Value
 	SuccessCallback    *func()
 }
 
 // Simplify calls the Simplify method on the GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#simplify
-func (g *GroundMesh) Simplify(settings []ISimplificationSettings, opts *GroundMeshSimplifyOpts) *Mesh {
+func (g *GroundMesh) Simplify(settings []*ISimplificationSettings, opts *GroundMeshSimplifyOpts) *Mesh {
 	if opts == nil {
 		opts = &GroundMeshSimplifyOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, settings.JSObject())
+	args = append(args, ISimplificationSettingsArrayToJSArray(settings))
 
 	if opts.ParallelProcessing == nil {
 		args = append(args, js.Undefined())
@@ -2050,7 +2025,7 @@ func (g *GroundMesh) Simplify(settings []ISimplificationSettings, opts *GroundMe
 	if opts.SimplificationType == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SimplificationType.JSObject())
+		args = append(args, opts.SimplificationType)
 	}
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
@@ -2079,9 +2054,7 @@ func (g *GroundMesh) Subdivide(count float64) {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#synchronizeinstances
 func (g *GroundMesh) SynchronizeInstances() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("synchronizeInstances", args...)
+	retVal := g.p.Call("synchronizeInstances")
 	return MeshFromJSObject(retVal, g.ctx)
 }
 
@@ -2090,9 +2063,7 @@ func (g *GroundMesh) SynchronizeInstances() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#tolefthanded
 func (g *GroundMesh) ToLeftHanded() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("toLeftHanded", args...)
+	retVal := g.p.Call("toLeftHanded")
 	return MeshFromJSObject(retVal, g.ctx)
 }
 
@@ -2126,9 +2097,7 @@ func (g *GroundMesh) ToString(opts *GroundMeshToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#unfreezenormals
 func (g *GroundMesh) UnfreezeNormals() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("unfreezeNormals", args...)
+	retVal := g.p.Call("unfreezeNormals")
 	return MeshFromJSObject(retVal, g.ctx)
 }
 
@@ -2139,7 +2108,7 @@ func (g *GroundMesh) UnregisterAfterRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := g.p.Call("unregisterAfterRender", args...)
 	return MeshFromJSObject(retVal, g.ctx)
@@ -2152,7 +2121,7 @@ func (g *GroundMesh) UnregisterBeforeRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := g.p.Call("unregisterBeforeRender", args...)
 	return MeshFromJSObject(retVal, g.ctx)
@@ -2163,9 +2132,7 @@ func (g *GroundMesh) UnregisterBeforeRender(jsFunc func()) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#updatecoordinateheights
 func (g *GroundMesh) UpdateCoordinateHeights() *GroundMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("updateCoordinateHeights", args...)
+	retVal := g.p.Call("updateCoordinateHeights")
 	return GroundMeshFromJSObject(retVal, g.ctx)
 }
 
@@ -2217,7 +2184,7 @@ func (g *GroundMesh) UpdateMeshPositions(positionFunction func(), opts *GroundMe
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, positionFunction)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { positionFunction(); return nil }))
 
 	if opts.ComputeNormals == nil {
 		args = append(args, js.Undefined())
@@ -2268,9 +2235,7 @@ func (g *GroundMesh) UpdateVerticesData(kind string, data js.Value, opts *Ground
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#validateskinning
 func (g *GroundMesh) ValidateSkinning() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("validateSkinning", args...)
+	retVal := g.p.Call("validateSkinning")
 	return retVal
 }
 
@@ -2776,7 +2741,7 @@ func (g *GroundMesh) SetOnBeforeBindObservable(onBeforeBindObservable *Observabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#onbeforedraw
 func (g *GroundMesh) OnBeforeDraw(onBeforeDraw func()) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(onBeforeDraw)
+	p := ba.ctx.Get("GroundMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeDraw(); return nil}))
 	return GroundMeshFromJSObject(p, ba.ctx)
 }
 
@@ -2784,7 +2749,7 @@ func (g *GroundMesh) OnBeforeDraw(onBeforeDraw func()) *GroundMesh {
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#onbeforedraw
 func (g *GroundMesh) SetOnBeforeDraw(onBeforeDraw func()) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(onBeforeDraw)
+	p := ba.ctx.Get("GroundMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeDraw(); return nil}))
 	return GroundMeshFromJSObject(p, ba.ctx)
 }
 
@@ -2824,7 +2789,7 @@ func (g *GroundMesh) SetOnBeforeRenderObservable(onBeforeRenderObservable *Obser
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#onlodlevelselection
 func (g *GroundMesh) OnLODLevelSelection(onLODLevelSelection func()) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(onLODLevelSelection)
+	p := ba.ctx.Get("GroundMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onLODLevelSelection(); return nil}))
 	return GroundMeshFromJSObject(p, ba.ctx)
 }
 
@@ -2832,7 +2797,7 @@ func (g *GroundMesh) OnLODLevelSelection(onLODLevelSelection func()) *GroundMesh
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#onlodlevelselection
 func (g *GroundMesh) SetOnLODLevelSelection(onLODLevelSelection func()) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(onLODLevelSelection)
+	p := ba.ctx.Get("GroundMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onLODLevelSelection(); return nil}))
 	return GroundMeshFromJSObject(p, ba.ctx)
 }
 

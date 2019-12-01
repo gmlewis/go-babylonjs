@@ -29,6 +29,15 @@ func FramingBehaviorFromJSObject(p js.Value, ctx js.Value) *FramingBehavior {
 	return &FramingBehavior{p: p, ctx: ctx}
 }
 
+// FramingBehaviorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FramingBehaviorArrayToJSArray(array []*FramingBehavior) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Attach calls the Attach method on the FramingBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.framingbehavior#attach
@@ -46,9 +55,7 @@ func (f *FramingBehavior) Attach(camera *ArcRotateCamera) {
 // https://doc.babylonjs.com/api/classes/babylon.framingbehavior#detach
 func (f *FramingBehavior) Detach() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("detach", args...)
+	f.p.Call("detach")
 }
 
 // Init calls the Init method on the FramingBehavior object.
@@ -56,9 +63,7 @@ func (f *FramingBehavior) Detach() {
 // https://doc.babylonjs.com/api/classes/babylon.framingbehavior#init
 func (f *FramingBehavior) Init() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("init", args...)
+	f.p.Call("init")
 }
 
 // StopAllAnimations calls the StopAllAnimations method on the FramingBehavior object.
@@ -66,9 +71,7 @@ func (f *FramingBehavior) Init() {
 // https://doc.babylonjs.com/api/classes/babylon.framingbehavior#stopallanimations
 func (f *FramingBehavior) StopAllAnimations() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("stopAllAnimations", args...)
+	f.p.Call("stopAllAnimations")
 }
 
 // FramingBehaviorZoomOnBoundingInfoOpts contains optional parameters for FramingBehavior.ZoomOnBoundingInfo.

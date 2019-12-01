@@ -27,6 +27,15 @@ func PlaneDragGizmoFromJSObject(p js.Value, ctx js.Value) *PlaneDragGizmo {
 	return &PlaneDragGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PlaneDragGizmoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PlaneDragGizmoArrayToJSArray(array []*PlaneDragGizmo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPlaneDragGizmoOpts contains optional parameters for NewPlaneDragGizmo.
 type NewPlaneDragGizmoOpts struct {
 	Color      *Color3
@@ -71,9 +80,7 @@ func (ba *Babylon) NewPlaneDragGizmo(dragPlaneNormal *Vector3, opts *NewPlaneDra
 // https://doc.babylonjs.com/api/classes/babylon.planedraggizmo#dispose
 func (p *PlaneDragGizmo) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // SetCustomMesh calls the SetCustomMesh method on the PlaneDragGizmo object.

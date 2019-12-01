@@ -27,6 +27,15 @@ func BoundingBoxGizmoFromJSObject(p js.Value, ctx js.Value) *BoundingBoxGizmo {
 	return &BoundingBoxGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
+// BoundingBoxGizmoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoundingBoxGizmoArrayToJSArray(array []*BoundingBoxGizmo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBoundingBoxGizmoOpts contains optional parameters for NewBoundingBoxGizmo.
 type NewBoundingBoxGizmoOpts struct {
 	Color      *Color3
@@ -63,9 +72,7 @@ func (ba *Babylon) NewBoundingBoxGizmo(opts *NewBoundingBoxGizmoOpts) *BoundingB
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#dispose
 func (b *BoundingBoxGizmo) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("dispose", args...)
+	b.p.Call("dispose")
 }
 
 // EnableDragBehavior calls the EnableDragBehavior method on the BoundingBoxGizmo object.
@@ -73,9 +80,7 @@ func (b *BoundingBoxGizmo) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#enabledragbehavior
 func (b *BoundingBoxGizmo) EnableDragBehavior() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("enableDragBehavior", args...)
+	b.p.Call("enableDragBehavior")
 }
 
 // MakeNotPickableAndWrapInBoundingBox calls the MakeNotPickableAndWrapInBoundingBox method on the BoundingBoxGizmo object.
@@ -144,9 +149,7 @@ func (b *BoundingBoxGizmo) SetEnabledScaling(enable bool) {
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#updateboundingbox
 func (b *BoundingBoxGizmo) UpdateBoundingBox() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("updateBoundingBox", args...)
+	b.p.Call("updateBoundingBox")
 }
 
 /*
@@ -235,7 +238,7 @@ func (b *BoundingBoxGizmo) SetIgnoreChildren(ignoreChildren bool) *BoundingBoxGi
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#includechildpredicate
 func (b *BoundingBoxGizmo) IncludeChildPredicate(includeChildPredicate func()) *BoundingBoxGizmo {
-	p := ba.ctx.Get("BoundingBoxGizmo").New(includeChildPredicate)
+	p := ba.ctx.Get("BoundingBoxGizmo").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {includeChildPredicate(); return nil}))
 	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
 }
 
@@ -243,7 +246,7 @@ func (b *BoundingBoxGizmo) IncludeChildPredicate(includeChildPredicate func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#includechildpredicate
 func (b *BoundingBoxGizmo) SetIncludeChildPredicate(includeChildPredicate func()) *BoundingBoxGizmo {
-	p := ba.ctx.Get("BoundingBoxGizmo").New(includeChildPredicate)
+	p := ba.ctx.Get("BoundingBoxGizmo").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {includeChildPredicate(); return nil}))
 	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
 }
 

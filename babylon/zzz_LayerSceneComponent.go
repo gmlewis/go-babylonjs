@@ -28,6 +28,15 @@ func LayerSceneComponentFromJSObject(p js.Value, ctx js.Value) *LayerSceneCompon
 	return &LayerSceneComponent{p: p, ctx: ctx}
 }
 
+// LayerSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LayerSceneComponentArrayToJSArray(array []*LayerSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLayerSceneComponent returns a new LayerSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent
@@ -58,9 +67,7 @@ func (l *LayerSceneComponent) AddFromContainer(container *AbstractScene) {
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#dispose
 func (l *LayerSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("dispose", args...)
+	l.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the LayerSceneComponent object.
@@ -68,9 +75,7 @@ func (l *LayerSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#rebuild
 func (l *LayerSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("rebuild", args...)
+	l.p.Call("rebuild")
 }
 
 // Register calls the Register method on the LayerSceneComponent object.
@@ -78,9 +83,7 @@ func (l *LayerSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#register
 func (l *LayerSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("register", args...)
+	l.p.Call("register")
 }
 
 // LayerSceneComponentRemoveFromContainerOpts contains optional parameters for LayerSceneComponent.RemoveFromContainer.

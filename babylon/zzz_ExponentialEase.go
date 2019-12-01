@@ -29,6 +29,15 @@ func ExponentialEaseFromJSObject(p js.Value, ctx js.Value) *ExponentialEase {
 	return &ExponentialEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ExponentialEaseArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ExponentialEaseArrayToJSArray(array []*ExponentialEase) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewExponentialEaseOpts contains optional parameters for NewExponentialEase.
 type NewExponentialEaseOpts struct {
 	Exponent *float64
@@ -72,9 +81,7 @@ func (e *ExponentialEase) Ease(gradient float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.exponentialease#geteasingmode
 func (e *ExponentialEase) GetEasingMode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("getEasingMode", args...)
+	retVal := e.p.Call("getEasingMode")
 	return retVal.Float()
 }
 

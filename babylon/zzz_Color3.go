@@ -27,6 +27,15 @@ func Color3FromJSObject(p js.Value, ctx js.Value) *Color3 {
 	return &Color3{p: p, ctx: ctx}
 }
 
+// Color3ArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Color3ArrayToJSArray(array []*Color3) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewColor3 returns a new Color3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3
@@ -74,9 +83,7 @@ func (c *Color3) AddToRef(otherColor *Color3, result *Color3) *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#asarray
 func (c *Color3) AsArray() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("asArray", args...)
+	retVal := c.p.Call("asArray")
 	return retVal.Float()
 }
 
@@ -85,9 +92,7 @@ func (c *Color3) AsArray() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#black
 func (c *Color3) Black() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("Black", args...)
+	retVal := c.p.Call("Black")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -96,9 +101,7 @@ func (c *Color3) Black() *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#blue
 func (c *Color3) Blue() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("Blue", args...)
+	retVal := c.p.Call("Blue")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -122,9 +125,7 @@ func (c *Color3) ClampToRef(min float64, max float64, result *Color3) *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#clone
 func (c *Color3) Clone() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("clone", args...)
+	retVal := c.p.Call("clone")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -244,9 +245,7 @@ func (c *Color3) FromInts(r float64, g float64, b float64) *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#getclassname
 func (c *Color3) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -255,9 +254,7 @@ func (c *Color3) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.color3#gethashcode
 func (c *Color3) GetHashCode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getHashCode", args...)
+	retVal := c.p.Call("getHashCode")
 	return retVal.Float()
 }
 
@@ -266,9 +263,7 @@ func (c *Color3) GetHashCode() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#gray
 func (c *Color3) Gray() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("Gray", args...)
+	retVal := c.p.Call("Gray")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -277,9 +272,7 @@ func (c *Color3) Gray() *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#green
 func (c *Color3) Green() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("Green", args...)
+	retVal := c.p.Call("Green")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -333,9 +326,7 @@ func (c *Color3) LerpToRef(left *Color3, right *Color3, amount float64, result *
 // https://doc.babylonjs.com/api/classes/babylon.color3#magenta
 func (c *Color3) Magenta() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("Magenta", args...)
+	retVal := c.p.Call("Magenta")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -371,9 +362,7 @@ func (c *Color3) MultiplyToRef(otherColor *Color3, result *Color3) *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#purple
 func (c *Color3) Purple() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("Purple", args...)
+	retVal := c.p.Call("Purple")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -382,9 +371,7 @@ func (c *Color3) Purple() *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#random
 func (c *Color3) Random() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("Random", args...)
+	retVal := c.p.Call("Random")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -393,9 +380,7 @@ func (c *Color3) Random() *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#red
 func (c *Color3) Red() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("Red", args...)
+	retVal := c.p.Call("Red")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -487,9 +472,7 @@ func (c *Color3) SubtractToRef(otherColor *Color3, result *Color3) *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#teal
 func (c *Color3) Teal() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("Teal", args...)
+	retVal := c.p.Call("Teal")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -550,9 +533,7 @@ func (c *Color3) ToColor4(opts *Color3ToColor4Opts) *Color4 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#togammaspace
 func (c *Color3) ToGammaSpace() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toGammaSpace", args...)
+	retVal := c.p.Call("toGammaSpace")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -574,9 +555,7 @@ func (c *Color3) ToGammaSpaceToRef(convertedColor *Color3) *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#tohsv
 func (c *Color3) ToHSV() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toHSV", args...)
+	retVal := c.p.Call("toHSV")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -597,9 +576,7 @@ func (c *Color3) ToHSVToRef(result *Color3) {
 // https://doc.babylonjs.com/api/classes/babylon.color3#tohexstring
 func (c *Color3) ToHexString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toHexString", args...)
+	retVal := c.p.Call("toHexString")
 	return retVal.String()
 }
 
@@ -608,9 +585,7 @@ func (c *Color3) ToHexString() string {
 // https://doc.babylonjs.com/api/classes/babylon.color3#tolinearspace
 func (c *Color3) ToLinearSpace() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toLinearSpace", args...)
+	retVal := c.p.Call("toLinearSpace")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -632,9 +607,7 @@ func (c *Color3) ToLinearSpaceToRef(convertedColor *Color3) *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#toluminance
 func (c *Color3) ToLuminance() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toLuminance", args...)
+	retVal := c.p.Call("toLuminance")
 	return retVal.Float()
 }
 
@@ -643,9 +616,7 @@ func (c *Color3) ToLuminance() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#tostring
 func (c *Color3) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toString", args...)
+	retVal := c.p.Call("toString")
 	return retVal.String()
 }
 
@@ -654,9 +625,7 @@ func (c *Color3) ToString() string {
 // https://doc.babylonjs.com/api/classes/babylon.color3#white
 func (c *Color3) White() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("White", args...)
+	retVal := c.p.Call("White")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
@@ -665,9 +634,7 @@ func (c *Color3) White() *Color3 {
 // https://doc.babylonjs.com/api/classes/babylon.color3#yellow
 func (c *Color3) Yellow() *Color3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("Yellow", args...)
+	retVal := c.p.Call("Yellow")
 	return Color3FromJSObject(retVal, c.ctx)
 }
 

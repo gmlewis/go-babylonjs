@@ -29,14 +29,21 @@ func FresnelParametersFromJSObject(p js.Value, ctx js.Value) *FresnelParameters 
 	return &FresnelParameters{p: p, ctx: ctx}
 }
 
+// FresnelParametersArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FresnelParametersArrayToJSArray(array []*FresnelParameters) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Clone calls the Clone method on the FresnelParameters object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#clone
 func (f *FresnelParameters) Clone() *FresnelParameters {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("clone", args...)
+	retVal := f.p.Call("clone")
 	return FresnelParametersFromJSObject(retVal, f.ctx)
 }
 
@@ -58,9 +65,7 @@ func (f *FresnelParameters) Parse(parsedFresnelParameters interface{}) *FresnelP
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#serialize
 func (f *FresnelParameters) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("serialize", args...)
+	retVal := f.p.Call("serialize")
 	return retVal
 }
 

@@ -29,6 +29,15 @@ func SpritePackedManagerFromJSObject(p js.Value, ctx js.Value) *SpritePackedMana
 	return &SpritePackedManager{SpriteManager: SpriteManagerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SpritePackedManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SpritePackedManagerArrayToJSArray(array []*SpritePackedManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSpritePackedManagerOpts contains optional parameters for NewSpritePackedManager.
 type NewSpritePackedManagerOpts struct {
 	SpriteJSON   *string
@@ -76,9 +85,7 @@ func (ba *Babylon) NewSpritePackedManager(name string, imgUrl string, capacity f
 // https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#dispose
 func (s *SpritePackedManager) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // SpritePackedManagerIntersectsOpts contains optional parameters for SpritePackedManager.Intersects.
@@ -148,9 +155,7 @@ func (s *SpritePackedManager) MultiIntersects(ray *Ray, camera *Camera, opts *Sp
 // https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#render
 func (s *SpritePackedManager) Render() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("render", args...)
+	s.p.Call("render")
 }
 
 /*
@@ -255,7 +260,7 @@ func (s *SpritePackedManager) SetName(name string) *SpritePackedManager {
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#ondispose
 func (s *SpritePackedManager) OnDispose(onDispose func()) *SpritePackedManager {
-	p := ba.ctx.Get("SpritePackedManager").New(onDispose)
+	p := ba.ctx.Get("SpritePackedManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return SpritePackedManagerFromJSObject(p, ba.ctx)
 }
 
@@ -263,7 +268,7 @@ func (s *SpritePackedManager) OnDispose(onDispose func()) *SpritePackedManager {
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#ondispose
 func (s *SpritePackedManager) SetOnDispose(onDispose func()) *SpritePackedManager {
-	p := ba.ctx.Get("SpritePackedManager").New(onDispose)
+	p := ba.ctx.Get("SpritePackedManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return SpritePackedManagerFromJSObject(p, ba.ctx)
 }
 

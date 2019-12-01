@@ -27,6 +27,15 @@ func MixMaterialFromJSObject(p js.Value, ctx js.Value) *MixMaterial {
 	return &MixMaterial{p: p, ctx: ctx}
 }
 
+// MixMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MixMaterialArrayToJSArray(array []*MixMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMixMaterial returns a new MixMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial
@@ -225,7 +234,7 @@ type MixMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the MixMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#forcecompilationasync
-func (m *MixMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MixMaterialForceCompilationAsyncOpts) {
+func (m *MixMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MixMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &MixMaterialForceCompilationAsyncOpts{}
 	}
@@ -240,7 +249,8 @@ func (m *MixMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MixMateria
 		args = append(args, opts.Options)
 	}
 
-	m.p.Call("forceCompilationAsync", args...)
+	retVal := m.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, m.ctx)
 }
 
 // Freeze calls the Freeze method on the MixMaterial object.
@@ -248,9 +258,7 @@ func (m *MixMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MixMateria
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#freeze
 func (m *MixMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("freeze", args...)
+	m.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the MixMaterial object.
@@ -258,9 +266,7 @@ func (m *MixMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getactivetextures
 func (m *MixMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getActiveTextures", args...)
+	retVal := m.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -269,9 +275,7 @@ func (m *MixMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getalphatesttexture
 func (m *MixMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getAlphaTestTexture", args...)
+	retVal := m.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -280,9 +284,7 @@ func (m *MixMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getanimatables
 func (m *MixMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getAnimatables", args...)
+	retVal := m.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -291,9 +293,7 @@ func (m *MixMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getbindedmeshes
 func (m *MixMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getBindedMeshes", args...)
+	retVal := m.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, m.ctx)
 }
 
@@ -302,9 +302,7 @@ func (m *MixMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getclassname
 func (m *MixMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -313,9 +311,7 @@ func (m *MixMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#geteffect
 func (m *MixMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getEffect", args...)
+	retVal := m.p.Call("getEffect")
 	return EffectFromJSObject(retVal, m.ctx)
 }
 
@@ -324,9 +320,7 @@ func (m *MixMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getscene
 func (m *MixMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getScene", args...)
+	retVal := m.p.Call("getScene")
 	return SceneFromJSObject(retVal, m.ctx)
 }
 
@@ -419,9 +413,7 @@ func (m *MixMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#markdirty
 func (m *MixMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markDirty", args...)
+	m.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the MixMaterial object.
@@ -429,9 +421,7 @@ func (m *MixMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#needalphablending
 func (m *MixMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("needAlphaBlending", args...)
+	retVal := m.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -453,9 +443,7 @@ func (m *MixMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#needalphatesting
 func (m *MixMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("needAlphaTesting", args...)
+	retVal := m.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -479,9 +467,7 @@ func (m *MixMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *M
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#serialize
 func (m *MixMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("serialize", args...)
+	retVal := m.p.Call("serialize")
 	return retVal
 }
 
@@ -515,9 +501,7 @@ func (m *MixMaterial) ToString(opts *MixMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#unbind
 func (m *MixMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("unbind", args...)
+	m.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the MixMaterial object.
@@ -525,9 +509,7 @@ func (m *MixMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#unfreeze
 func (m *MixMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("unfreeze", args...)
+	m.p.Call("unfreeze")
 }
 
 /*
@@ -599,16 +581,16 @@ func (m *MixMaterial) SetAlphaMode(alphaMode float64) *MixMaterial {
 // Animations returns the Animations property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#animations
-func (m *MixMaterial) Animations(animations []Animation) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(animations.JSObject())
+func (m *MixMaterial) Animations(animations []*Animation) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(animations)
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#animations
-func (m *MixMaterial) SetAnimations(animations []Animation) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(animations.JSObject())
+func (m *MixMaterial) SetAnimations(animations []*Animation) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(animations)
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -984,7 +966,7 @@ func (m *MixMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *MixMaterial
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getrendertargettextures
 func (m *MixMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("MixMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -992,7 +974,7 @@ func (m *MixMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *M
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getrendertargettextures
 func (m *MixMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("MixMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1240,7 +1222,7 @@ func (m *MixMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *MixMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onbind
 func (m *MixMaterial) OnBind(onBind func()) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(onBind)
+	p := ba.ctx.Get("MixMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1248,7 +1230,7 @@ func (m *MixMaterial) OnBind(onBind func()) *MixMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onbind
 func (m *MixMaterial) SetOnBind(onBind func()) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(onBind)
+	p := ba.ctx.Get("MixMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1272,7 +1254,7 @@ func (m *MixMaterial) SetOnBindObservable(onBindObservable *Observable) *MixMate
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#oncompiled
 func (m *MixMaterial) OnCompiled(onCompiled func()) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(onCompiled)
+	p := ba.ctx.Get("MixMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1280,7 +1262,7 @@ func (m *MixMaterial) OnCompiled(onCompiled func()) *MixMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#oncompiled
 func (m *MixMaterial) SetOnCompiled(onCompiled func()) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(onCompiled)
+	p := ba.ctx.Get("MixMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1288,7 +1270,7 @@ func (m *MixMaterial) SetOnCompiled(onCompiled func()) *MixMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#ondispose
 func (m *MixMaterial) OnDispose(onDispose func()) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(onDispose)
+	p := ba.ctx.Get("MixMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1296,7 +1278,7 @@ func (m *MixMaterial) OnDispose(onDispose func()) *MixMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#ondispose
 func (m *MixMaterial) SetOnDispose(onDispose func()) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(onDispose)
+	p := ba.ctx.Get("MixMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1320,7 +1302,7 @@ func (m *MixMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *M
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onerror
 func (m *MixMaterial) OnError(onError func()) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(onError)
+	p := ba.ctx.Get("MixMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1328,7 +1310,7 @@ func (m *MixMaterial) OnError(onError func()) *MixMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onerror
 func (m *MixMaterial) SetOnError(onError func()) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(onError)
+	p := ba.ctx.Get("MixMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 

@@ -29,6 +29,15 @@ func StereoscopicFreeCameraFromJSObject(p js.Value, ctx js.Value) *StereoscopicF
 	return &StereoscopicFreeCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StereoscopicFreeCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StereoscopicFreeCameraArrayToJSArray(array []*StereoscopicFreeCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStereoscopicFreeCamera returns a new StereoscopicFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera
@@ -89,9 +98,7 @@ func (s *StereoscopicFreeCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera#dispose
 func (s *StereoscopicFreeCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the StereoscopicFreeCamera object.
@@ -99,9 +106,7 @@ func (s *StereoscopicFreeCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera#getclassname
 func (s *StereoscopicFreeCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -123,9 +128,7 @@ func (s *StereoscopicFreeCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera#gettarget
 func (s *StereoscopicFreeCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTarget", args...)
+	retVal := s.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, s.ctx)
 }
 
@@ -146,9 +149,7 @@ func (s *StereoscopicFreeCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera#storestate
 func (s *StereoscopicFreeCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("storeState", args...)
+	retVal := s.p.Call("storeState")
 	return CameraFromJSObject(retVal, s.ctx)
 }
 
@@ -398,7 +399,7 @@ func (s *StereoscopicFreeCamera) SetNoRotationConstraint(noRotationConstraint bo
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera#oncollide
 func (s *StereoscopicFreeCamera) OnCollide(onCollide func()) *StereoscopicFreeCamera {
-	p := ba.ctx.Get("StereoscopicFreeCamera").New(onCollide)
+	p := ba.ctx.Get("StereoscopicFreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return StereoscopicFreeCameraFromJSObject(p, ba.ctx)
 }
 
@@ -406,7 +407,7 @@ func (s *StereoscopicFreeCamera) OnCollide(onCollide func()) *StereoscopicFreeCa
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera#oncollide
 func (s *StereoscopicFreeCamera) SetOnCollide(onCollide func()) *StereoscopicFreeCamera {
-	p := ba.ctx.Get("StereoscopicFreeCamera").New(onCollide)
+	p := ba.ctx.Get("StereoscopicFreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return StereoscopicFreeCameraFromJSObject(p, ba.ctx)
 }
 

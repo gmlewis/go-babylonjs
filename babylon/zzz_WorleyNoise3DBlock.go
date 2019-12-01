@@ -27,6 +27,15 @@ func WorleyNoise3DBlockFromJSObject(p js.Value, ctx js.Value) *WorleyNoise3DBloc
 	return &WorleyNoise3DBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// WorleyNoise3DBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WorleyNoise3DBlockArrayToJSArray(array []*WorleyNoise3DBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWorleyNoise3DBlock returns a new WorleyNoise3DBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock
@@ -152,9 +161,7 @@ func (w *WorleyNoise3DBlock) ConnectTo(other *NodeMaterialBlock, opts *WorleyNoi
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#dispose
 func (w *WorleyNoise3DBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the WorleyNoise3DBlock object.
@@ -162,9 +169,7 @@ func (w *WorleyNoise3DBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#getclassname
 func (w *WorleyNoise3DBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getClassName", args...)
+	retVal := w.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (w *WorleyNoise3DBlock) ReplaceRepeatableContent(vertexShaderState *NodeMat
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#serialize
 func (w *WorleyNoise3DBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("serialize", args...)
+	retVal := w.p.Call("serialize")
 	return retVal
 }
 

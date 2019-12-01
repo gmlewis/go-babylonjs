@@ -32,6 +32,15 @@ func ArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *ArcRotateCamera {
 	return &ArcRotateCamera{TargetCamera: TargetCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ArcRotateCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArcRotateCameraArrayToJSArray(array []*ArcRotateCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewArcRotateCameraOpts contains optional parameters for NewArcRotateCamera.
 type NewArcRotateCameraOpts struct {
 	SetActiveOnSceneIfNoneActive *bool
@@ -133,9 +142,7 @@ func (a *ArcRotateCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#dispose
 func (a *ArcRotateCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // ArcRotateCameraFocusOnOpts contains optional parameters for ArcRotateCamera.FocusOn.
@@ -169,9 +176,7 @@ func (a *ArcRotateCamera) FocusOn(meshesOrMinMaxVectorAndDistance *AbstractMesh,
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#getclassname
 func (a *ArcRotateCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -193,9 +198,7 @@ func (a *ArcRotateCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#gettarget
 func (a *ArcRotateCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTarget", args...)
+	retVal := a.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -204,9 +207,7 @@ func (a *ArcRotateCamera) GetTarget() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#rebuildanglesandradius
 func (a *ArcRotateCamera) RebuildAnglesAndRadius() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("rebuildAnglesAndRadius", args...)
+	a.p.Call("rebuildAnglesAndRadius")
 }
 
 // SetMatUp calls the SetMatUp method on the ArcRotateCamera object.
@@ -214,9 +215,7 @@ func (a *ArcRotateCamera) RebuildAnglesAndRadius() {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#setmatup
 func (a *ArcRotateCamera) SetMatUp() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("setMatUp", args...)
+	a.p.Call("setMatUp")
 }
 
 // SetPosition calls the SetPosition method on the ArcRotateCamera object.
@@ -268,9 +267,7 @@ func (a *ArcRotateCamera) SetTarget(target *AbstractMesh, opts *ArcRotateCameraS
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#storestate
 func (a *ArcRotateCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("storeState", args...)
+	retVal := a.p.Call("storeState")
 	return CameraFromJSObject(retVal, a.ctx)
 }
 
@@ -742,7 +739,7 @@ func (a *ArcRotateCamera) SetNoRotationConstraint(noRotationConstraint bool) *Ar
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#oncollide
 func (a *ArcRotateCamera) OnCollide(onCollide func()) *ArcRotateCamera {
-	p := ba.ctx.Get("ArcRotateCamera").New(onCollide)
+	p := ba.ctx.Get("ArcRotateCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return ArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
@@ -750,7 +747,7 @@ func (a *ArcRotateCamera) OnCollide(onCollide func()) *ArcRotateCamera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#oncollide
 func (a *ArcRotateCamera) SetOnCollide(onCollide func()) *ArcRotateCamera {
-	p := ba.ctx.Get("ArcRotateCamera").New(onCollide)
+	p := ba.ctx.Get("ArcRotateCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return ArcRotateCameraFromJSObject(p, ba.ctx)
 }
 

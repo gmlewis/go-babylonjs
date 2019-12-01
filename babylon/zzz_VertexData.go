@@ -27,6 +27,15 @@ func VertexDataFromJSObject(p js.Value, ctx js.Value) *VertexData {
 	return &VertexData{p: p, ctx: ctx}
 }
 
+// VertexDataArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VertexDataArrayToJSArray(array []*VertexData) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // VertexDataApplyToGeometryOpts contains optional parameters for VertexData.ApplyToGeometry.
 type VertexDataApplyToGeometryOpts struct {
 	Updatable *bool
@@ -487,9 +496,7 @@ func (v *VertexData) Merge(other *VertexData, opts *VertexDataMergeOpts) *Vertex
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#serialize
 func (v *VertexData) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("serialize", args...)
+	retVal := v.p.Call("serialize")
 	return retVal
 }
 

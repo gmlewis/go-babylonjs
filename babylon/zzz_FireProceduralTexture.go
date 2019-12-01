@@ -27,6 +27,15 @@ func FireProceduralTextureFromJSObject(p js.Value, ctx js.Value) *FireProcedural
 	return &FireProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FireProceduralTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FireProceduralTextureArrayToJSArray(array []*FireProceduralTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFireProceduralTextureOpts contains optional parameters for NewFireProceduralTexture.
 type NewFireProceduralTextureOpts struct {
 	FallbackTexture *Texture
@@ -67,9 +76,7 @@ func (ba *Babylon) NewFireProceduralTexture(name string, size float64, scene *Sc
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#clone
 func (f *FireProceduralTexture) Clone() *ProceduralTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("clone", args...)
+	retVal := f.p.Call("clone")
 	return ProceduralTextureFromJSObject(retVal, f.ctx)
 }
 
@@ -137,9 +144,7 @@ func (f *FireProceduralTexture) CreateFromBase64String(data string, name string,
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#dispose
 func (f *FireProceduralTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("dispose", args...)
+	f.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the FireProceduralTexture object.
@@ -147,9 +152,7 @@ func (f *FireProceduralTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#getbasesize
 func (f *FireProceduralTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getBaseSize", args...)
+	retVal := f.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -158,9 +161,7 @@ func (f *FireProceduralTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#getclassname
 func (f *FireProceduralTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -169,9 +170,7 @@ func (f *FireProceduralTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#getcontent
 func (f *FireProceduralTexture) GetContent() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getContent", args...)
+	retVal := f.p.Call("getContent")
 	return retVal
 }
 
@@ -180,9 +179,7 @@ func (f *FireProceduralTexture) GetContent() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#geteffect
 func (f *FireProceduralTexture) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getEffect", args...)
+	retVal := f.p.Call("getEffect")
 	return EffectFromJSObject(retVal, f.ctx)
 }
 
@@ -191,9 +188,7 @@ func (f *FireProceduralTexture) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#getinternaltexture
 func (f *FireProceduralTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getInternalTexture", args...)
+	retVal := f.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, f.ctx)
 }
 
@@ -202,9 +197,7 @@ func (f *FireProceduralTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#getreflectiontexturematrix
 func (f *FireProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getReflectionTextureMatrix", args...)
+	retVal := f.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, f.ctx)
 }
 
@@ -213,9 +206,7 @@ func (f *FireProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#getrendersize
 func (f *FireProceduralTexture) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getRenderSize", args...)
+	retVal := f.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -224,9 +215,7 @@ func (f *FireProceduralTexture) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#getscene
 func (f *FireProceduralTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getScene", args...)
+	retVal := f.p.Call("getScene")
 	return SceneFromJSObject(retVal, f.ctx)
 }
 
@@ -235,9 +224,7 @@ func (f *FireProceduralTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#getsize
 func (f *FireProceduralTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getSize", args...)
+	retVal := f.p.Call("getSize")
 	return retVal
 }
 
@@ -271,9 +258,7 @@ func (f *FireProceduralTexture) GetTextureMatrix(opts *FireProceduralTextureGetT
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#isready
 func (f *FireProceduralTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("isReady", args...)
+	retVal := f.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -282,9 +267,7 @@ func (f *FireProceduralTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#isreadyornotblocking
 func (f *FireProceduralTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("isReadyOrNotBlocking", args...)
+	retVal := f.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -410,9 +393,7 @@ func (f *FireProceduralTexture) ReadPixels(opts *FireProceduralTextureReadPixels
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#releaseinternaltexture
 func (f *FireProceduralTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("releaseInternalTexture", args...)
+	f.p.Call("releaseInternalTexture")
 }
 
 // FireProceduralTextureRenderOpts contains optional parameters for FireProceduralTexture.Render.
@@ -444,9 +425,7 @@ func (f *FireProceduralTexture) Render(opts *FireProceduralTextureRenderOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#reset
 func (f *FireProceduralTexture) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("reset", args...)
+	f.p.Call("reset")
 }
 
 // ResetRefreshCounter calls the ResetRefreshCounter method on the FireProceduralTexture object.
@@ -454,9 +433,7 @@ func (f *FireProceduralTexture) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#resetrefreshcounter
 func (f *FireProceduralTexture) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("resetRefreshCounter", args...)
+	f.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the FireProceduralTexture object.
@@ -489,9 +466,7 @@ func (f *FireProceduralTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#serialize
 func (f *FireProceduralTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("serialize", args...)
+	retVal := f.p.Call("serialize")
 	return retVal
 }
 
@@ -638,9 +613,7 @@ func (f *FireProceduralTexture) SetVector3(name string, value *Vector3) *Procedu
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#tostring
 func (f *FireProceduralTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("toString", args...)
+	retVal := f.p.Call("toString")
 	return retVal.String()
 }
 
@@ -661,9 +634,7 @@ func (f *FireProceduralTexture) UpdateSamplingMode(samplingMode float64) {
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#updateshaderuniforms
 func (f *FireProceduralTexture) UpdateShaderUniforms() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("updateShaderUniforms", args...)
+	f.p.Call("updateShaderUniforms")
 }
 
 // FireProceduralTextureUpdateURLOpts contains optional parameters for FireProceduralTexture.UpdateURL.
@@ -706,7 +677,7 @@ func (f *FireProceduralTexture) WhenAllReady(textures *BaseTexture, callback fun
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	f.p.Call("WhenAllReady", args...)
 }
@@ -1613,7 +1584,7 @@ func (f *FireProceduralTexture) SetNoMipmap(noMipmap bool) *FireProceduralTextur
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#ondispose
 func (f *FireProceduralTexture) OnDispose(onDispose func()) *FireProceduralTexture {
-	p := ba.ctx.Get("FireProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("FireProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return FireProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1621,7 +1592,7 @@ func (f *FireProceduralTexture) OnDispose(onDispose func()) *FireProceduralTextu
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#ondispose
 func (f *FireProceduralTexture) SetOnDispose(onDispose func()) *FireProceduralTexture {
-	p := ba.ctx.Get("FireProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("FireProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return FireProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1645,7 +1616,7 @@ func (f *FireProceduralTexture) SetOnDisposeObservable(onDisposeObservable *Obse
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#ongenerated
 func (f *FireProceduralTexture) OnGenerated(onGenerated func()) *FireProceduralTexture {
-	p := ba.ctx.Get("FireProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("FireProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return FireProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1653,7 +1624,7 @@ func (f *FireProceduralTexture) OnGenerated(onGenerated func()) *FireProceduralT
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#ongenerated
 func (f *FireProceduralTexture) SetOnGenerated(onGenerated func()) *FireProceduralTexture {
-	p := ba.ctx.Get("FireProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("FireProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return FireProceduralTextureFromJSObject(p, ba.ctx)
 }
 

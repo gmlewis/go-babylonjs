@@ -27,6 +27,15 @@ func TrailMeshFromJSObject(p js.Value, ctx js.Value) *TrailMesh {
 	return &TrailMesh{Mesh: MeshFromJSObject(p, ctx), ctx: ctx}
 }
 
+// TrailMeshArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TrailMeshArrayToJSArray(array []*TrailMesh) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTrailMeshOpts contains optional parameters for NewTrailMesh.
 type NewTrailMeshOpts struct {
 	Diameter  *float64
@@ -190,9 +199,7 @@ func (t *TrailMesh) ApplySkeleton(skeleton *Skeleton) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#bakecurrenttransformintovertices
 func (t *TrailMesh) BakeCurrentTransformIntoVertices() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("bakeCurrentTransformIntoVertices", args...)
+	retVal := t.p.Call("bakeCurrentTransformIntoVertices")
 	return MeshFromJSObject(retVal, t.ctx)
 }
 
@@ -227,9 +234,7 @@ func (t *TrailMesh) Center(meshesOrMinMaxVector js.Value) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#cleanmatrixweights
 func (t *TrailMesh) CleanMatrixWeights() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("cleanMatrixWeights", args...)
+	t.p.Call("cleanMatrixWeights")
 }
 
 // Clone calls the Clone method on the TrailMesh object.
@@ -251,9 +256,7 @@ func (t *TrailMesh) Clone(name string, newGenerator *AbstractMesh) *TrailMesh {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#converttoflatshadedmesh
 func (t *TrailMesh) ConvertToFlatShadedMesh() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("convertToFlatShadedMesh", args...)
+	retVal := t.p.Call("convertToFlatShadedMesh")
 	return MeshFromJSObject(retVal, t.ctx)
 }
 
@@ -262,9 +265,7 @@ func (t *TrailMesh) ConvertToFlatShadedMesh() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#converttounindexedmesh
 func (t *TrailMesh) ConvertToUnIndexedMesh() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("convertToUnIndexedMesh", args...)
+	retVal := t.p.Call("convertToUnIndexedMesh")
 	return MeshFromJSObject(retVal, t.ctx)
 }
 
@@ -999,7 +1000,7 @@ func (t *TrailMesh) CreateTube(name string, path *Vector3, radius float64, tesse
 	args = append(args, path.JSObject())
 	args = append(args, radius)
 	args = append(args, tessellation)
-	args = append(args, radiusFunction)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { radiusFunction(); return nil }))
 	args = append(args, cap)
 	args = append(args, scene.JSObject())
 
@@ -1161,7 +1162,7 @@ type TrailMeshExtrudeShapeCustomOpts struct {
 // ExtrudeShapeCustom calls the ExtrudeShapeCustom method on the TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#extrudeshapecustom
-func (t *TrailMesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector3, scaleFunction *Function, rotationFunction *Function, ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *TrailMeshExtrudeShapeCustomOpts) *Mesh {
+func (t *TrailMesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector3, scaleFunction func(), rotationFunction func(), ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *TrailMeshExtrudeShapeCustomOpts) *Mesh {
 	if opts == nil {
 		opts = &TrailMeshExtrudeShapeCustomOpts{}
 	}
@@ -1171,8 +1172,8 @@ func (t *TrailMesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector
 	args = append(args, name)
 	args = append(args, shape.JSObject())
 	args = append(args, path.JSObject())
-	args = append(args, scaleFunction.JSObject())
-	args = append(args, rotationFunction.JSObject())
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { scaleFunction(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { rotationFunction(); return nil }))
 	args = append(args, ribbonCloseArray)
 	args = append(args, ribbonClosePath)
 	args = append(args, cap)
@@ -1228,9 +1229,7 @@ func (t *TrailMesh) FlipFaces(opts *TrailMeshFlipFacesOpts) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#forcesharedvertices
 func (t *TrailMesh) ForceSharedVertices() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("forceSharedVertices", args...)
+	t.p.Call("forceSharedVertices")
 }
 
 // FreezeNormals calls the FreezeNormals method on the TrailMesh object.
@@ -1238,9 +1237,7 @@ func (t *TrailMesh) ForceSharedVertices() {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#freezenormals
 func (t *TrailMesh) FreezeNormals() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("freezeNormals", args...)
+	retVal := t.p.Call("freezeNormals")
 	return MeshFromJSObject(retVal, t.ctx)
 }
 
@@ -1249,9 +1246,7 @@ func (t *TrailMesh) FreezeNormals() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#getanimatables
 func (t *TrailMesh) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getAnimatables", args...)
+	retVal := t.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -1260,32 +1255,26 @@ func (t *TrailMesh) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#getclassname
 func (t *TrailMesh) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getClassName", args...)
+	retVal := t.p.Call("getClassName")
 	return retVal.String()
 }
 
 // GetEmittedParticleSystems calls the GetEmittedParticleSystems method on the TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#getemittedparticlesystems
-func (t *TrailMesh) GetEmittedParticleSystems() *IParticleSystem {
+func (t *TrailMesh) GetEmittedParticleSystems() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getEmittedParticleSystems", args...)
-	return IParticleSystemFromJSObject(retVal, t.ctx)
+	retVal := t.p.Call("getEmittedParticleSystems")
+	return retVal
 }
 
 // GetHierarchyEmittedParticleSystems calls the GetHierarchyEmittedParticleSystems method on the TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#gethierarchyemittedparticlesystems
-func (t *TrailMesh) GetHierarchyEmittedParticleSystems() *IParticleSystem {
+func (t *TrailMesh) GetHierarchyEmittedParticleSystems() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getHierarchyEmittedParticleSystems", args...)
-	return IParticleSystemFromJSObject(retVal, t.ctx)
+	retVal := t.p.Call("getHierarchyEmittedParticleSystems")
+	return retVal
 }
 
 // TrailMeshGetIndicesOpts contains optional parameters for TrailMesh.GetIndices.
@@ -1364,9 +1353,7 @@ func (t *TrailMesh) GetLODLevelAtDistance(distance float64) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#getlodlevels
 func (t *TrailMesh) GetLODLevels() *MeshLODLevel {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getLODLevels", args...)
+	retVal := t.p.Call("getLODLevels")
 	return MeshLODLevelFromJSObject(retVal, t.ctx)
 }
 
@@ -1375,9 +1362,7 @@ func (t *TrailMesh) GetLODLevels() *MeshLODLevel {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#gettotalindices
 func (t *TrailMesh) GetTotalIndices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getTotalIndices", args...)
+	retVal := t.p.Call("getTotalIndices")
 	return retVal.Float()
 }
 
@@ -1386,9 +1371,7 @@ func (t *TrailMesh) GetTotalIndices() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#gettotalvertices
 func (t *TrailMesh) GetTotalVertices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getTotalVertices", args...)
+	retVal := t.p.Call("getTotalVertices")
 	return retVal.Float()
 }
 
@@ -1443,9 +1426,7 @@ func (t *TrailMesh) GetVerticesData(kind string, opts *TrailMeshGetVerticesDataO
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#getverticesdatakinds
 func (t *TrailMesh) GetVerticesDataKinds() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getVerticesDataKinds", args...)
+	retVal := t.p.Call("getVerticesDataKinds")
 	return retVal.String()
 }
 
@@ -1573,9 +1554,7 @@ func (t *TrailMesh) IsVerticesDataPresent(kind string) bool {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#makegeometryunique
 func (t *TrailMesh) MakeGeometryUnique() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("makeGeometryUnique", args...)
+	retVal := t.p.Call("makeGeometryUnique")
 	return MeshFromJSObject(retVal, t.ctx)
 }
 
@@ -1617,14 +1596,14 @@ type TrailMeshMergeMeshesOpts struct {
 // MergeMeshes calls the MergeMeshes method on the TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#mergemeshes
-func (t *TrailMesh) MergeMeshes(meshes []js.Value, opts *TrailMeshMergeMeshesOpts) *Mesh {
+func (t *TrailMesh) MergeMeshes(meshes []*Mesh, opts *TrailMeshMergeMeshesOpts) *Mesh {
 	if opts == nil {
 		opts = &TrailMeshMergeMeshesOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+5)
 
-	args = append(args, meshes)
+	args = append(args, MeshArrayToJSArray(meshes))
 
 	if opts.DisposeSource == nil {
 		args = append(args, js.Undefined())
@@ -1740,7 +1719,7 @@ func (t *TrailMesh) RegisterAfterRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := t.p.Call("registerAfterRender", args...)
 	return MeshFromJSObject(retVal, t.ctx)
@@ -1753,7 +1732,7 @@ func (t *TrailMesh) RegisterBeforeRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := t.p.Call("registerBeforeRender", args...)
 	return MeshFromJSObject(retVal, t.ctx)
@@ -1888,9 +1867,7 @@ func (t *TrailMesh) SetMaterialByID(id string) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#setnormalsforcpuskinning
 func (t *TrailMesh) SetNormalsForCPUSkinning() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("setNormalsForCPUSkinning", args...)
+	retVal := t.p.Call("setNormalsForCPUSkinning")
 	return retVal
 }
 
@@ -1899,9 +1876,7 @@ func (t *TrailMesh) SetNormalsForCPUSkinning() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#setpositionsforcpuskinning
 func (t *TrailMesh) SetPositionsForCPUSkinning() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("setPositionsForCPUSkinning", args...)
+	retVal := t.p.Call("setPositionsForCPUSkinning")
 	return retVal
 }
 
@@ -1955,21 +1930,21 @@ func (t *TrailMesh) SetVerticesData(kind string, data js.Value, opts *TrailMeshS
 // TrailMeshSimplifyOpts contains optional parameters for TrailMesh.Simplify.
 type TrailMeshSimplifyOpts struct {
 	ParallelProcessing *bool
-	SimplificationType *SimplificationType
+	SimplificationType js.Value
 	SuccessCallback    *func()
 }
 
 // Simplify calls the Simplify method on the TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#simplify
-func (t *TrailMesh) Simplify(settings []ISimplificationSettings, opts *TrailMeshSimplifyOpts) *Mesh {
+func (t *TrailMesh) Simplify(settings []*ISimplificationSettings, opts *TrailMeshSimplifyOpts) *Mesh {
 	if opts == nil {
 		opts = &TrailMeshSimplifyOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, settings.JSObject())
+	args = append(args, ISimplificationSettingsArrayToJSArray(settings))
 
 	if opts.ParallelProcessing == nil {
 		args = append(args, js.Undefined())
@@ -1979,7 +1954,7 @@ func (t *TrailMesh) Simplify(settings []ISimplificationSettings, opts *TrailMesh
 	if opts.SimplificationType == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SimplificationType.JSObject())
+		args = append(args, opts.SimplificationType)
 	}
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
@@ -1996,9 +1971,7 @@ func (t *TrailMesh) Simplify(settings []ISimplificationSettings, opts *TrailMesh
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#start
 func (t *TrailMesh) Start() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("start", args...)
+	t.p.Call("start")
 }
 
 // Stop calls the Stop method on the TrailMesh object.
@@ -2006,9 +1979,7 @@ func (t *TrailMesh) Start() {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#stop
 func (t *TrailMesh) Stop() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("stop", args...)
+	t.p.Call("stop")
 }
 
 // Subdivide calls the Subdivide method on the TrailMesh object.
@@ -2028,9 +1999,7 @@ func (t *TrailMesh) Subdivide(count float64) {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#synchronizeinstances
 func (t *TrailMesh) SynchronizeInstances() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("synchronizeInstances", args...)
+	retVal := t.p.Call("synchronizeInstances")
 	return MeshFromJSObject(retVal, t.ctx)
 }
 
@@ -2039,9 +2008,7 @@ func (t *TrailMesh) SynchronizeInstances() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#tolefthanded
 func (t *TrailMesh) ToLeftHanded() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("toLeftHanded", args...)
+	retVal := t.p.Call("toLeftHanded")
 	return MeshFromJSObject(retVal, t.ctx)
 }
 
@@ -2075,9 +2042,7 @@ func (t *TrailMesh) ToString(opts *TrailMeshToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#unfreezenormals
 func (t *TrailMesh) UnfreezeNormals() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("unfreezeNormals", args...)
+	retVal := t.p.Call("unfreezeNormals")
 	return MeshFromJSObject(retVal, t.ctx)
 }
 
@@ -2088,7 +2053,7 @@ func (t *TrailMesh) UnregisterAfterRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := t.p.Call("unregisterAfterRender", args...)
 	return MeshFromJSObject(retVal, t.ctx)
@@ -2101,7 +2066,7 @@ func (t *TrailMesh) UnregisterBeforeRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := t.p.Call("unregisterBeforeRender", args...)
 	return MeshFromJSObject(retVal, t.ctx)
@@ -2112,9 +2077,7 @@ func (t *TrailMesh) UnregisterBeforeRender(jsFunc func()) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#update
 func (t *TrailMesh) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("update", args...)
+	t.p.Call("update")
 }
 
 // TrailMeshUpdateIndicesOpts contains optional parameters for TrailMesh.UpdateIndices.
@@ -2165,7 +2128,7 @@ func (t *TrailMesh) UpdateMeshPositions(positionFunction func(), opts *TrailMesh
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, positionFunction)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { positionFunction(); return nil }))
 
 	if opts.ComputeNormals == nil {
 		args = append(args, js.Undefined())
@@ -2216,9 +2179,7 @@ func (t *TrailMesh) UpdateVerticesData(kind string, data js.Value, opts *TrailMe
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#validateskinning
 func (t *TrailMesh) ValidateSkinning() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("validateSkinning", args...)
+	retVal := t.p.Call("validateSkinning")
 	return retVal
 }
 
@@ -2708,7 +2669,7 @@ func (t *TrailMesh) SetOnBeforeBindObservable(onBeforeBindObservable *Observable
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#onbeforedraw
 func (t *TrailMesh) OnBeforeDraw(onBeforeDraw func()) *TrailMesh {
-	p := ba.ctx.Get("TrailMesh").New(onBeforeDraw)
+	p := ba.ctx.Get("TrailMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeDraw(); return nil}))
 	return TrailMeshFromJSObject(p, ba.ctx)
 }
 
@@ -2716,7 +2677,7 @@ func (t *TrailMesh) OnBeforeDraw(onBeforeDraw func()) *TrailMesh {
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#onbeforedraw
 func (t *TrailMesh) SetOnBeforeDraw(onBeforeDraw func()) *TrailMesh {
-	p := ba.ctx.Get("TrailMesh").New(onBeforeDraw)
+	p := ba.ctx.Get("TrailMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeDraw(); return nil}))
 	return TrailMeshFromJSObject(p, ba.ctx)
 }
 
@@ -2756,7 +2717,7 @@ func (t *TrailMesh) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observ
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#onlodlevelselection
 func (t *TrailMesh) OnLODLevelSelection(onLODLevelSelection func()) *TrailMesh {
-	p := ba.ctx.Get("TrailMesh").New(onLODLevelSelection)
+	p := ba.ctx.Get("TrailMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onLODLevelSelection(); return nil}))
 	return TrailMeshFromJSObject(p, ba.ctx)
 }
 
@@ -2764,7 +2725,7 @@ func (t *TrailMesh) OnLODLevelSelection(onLODLevelSelection func()) *TrailMesh {
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#onlodlevelselection
 func (t *TrailMesh) SetOnLODLevelSelection(onLODLevelSelection func()) *TrailMesh {
-	p := ba.ctx.Get("TrailMesh").New(onLODLevelSelection)
+	p := ba.ctx.Get("TrailMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onLODLevelSelection(); return nil}))
 	return TrailMeshFromJSObject(p, ba.ctx)
 }
 

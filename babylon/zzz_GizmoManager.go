@@ -27,6 +27,15 @@ func GizmoManagerFromJSObject(p js.Value, ctx js.Value) *GizmoManager {
 	return &GizmoManager{p: p, ctx: ctx}
 }
 
+// GizmoManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GizmoManagerArrayToJSArray(array []*GizmoManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGizmoManager returns a new GizmoManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager
@@ -57,9 +66,7 @@ func (g *GizmoManager) AttachToMesh(mesh *AbstractMesh) {
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#dispose
 func (g *GizmoManager) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 /*
@@ -67,16 +74,16 @@ func (g *GizmoManager) Dispose() {
 // AttachableMeshes returns the AttachableMeshes property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#attachablemeshes
-func (g *GizmoManager) AttachableMeshes(attachableMeshes []AbstractMesh) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(attachableMeshes.JSObject())
+func (g *GizmoManager) AttachableMeshes(attachableMeshes []*AbstractMesh) *GizmoManager {
+	p := ba.ctx.Get("GizmoManager").New(attachableMeshes)
 	return GizmoManagerFromJSObject(p, ba.ctx)
 }
 
 // SetAttachableMeshes sets the AttachableMeshes property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#attachablemeshes
-func (g *GizmoManager) SetAttachableMeshes(attachableMeshes []AbstractMesh) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(attachableMeshes.JSObject())
+func (g *GizmoManager) SetAttachableMeshes(attachableMeshes []*AbstractMesh) *GizmoManager {
+	p := ba.ctx.Get("GizmoManager").New(attachableMeshes)
 	return GizmoManagerFromJSObject(p, ba.ctx)
 }
 

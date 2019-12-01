@@ -27,14 +27,23 @@ func EffectWrapperFromJSObject(p js.Value, ctx js.Value) *EffectWrapper {
 	return &EffectWrapper{p: p, ctx: ctx}
 }
 
+// EffectWrapperArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EffectWrapperArrayToJSArray(array []*EffectWrapper) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewEffectWrapper returns a new EffectWrapper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrapper
-func (ba *Babylon) NewEffectWrapper(creationOptions *EffectWrapperCreationOptions) *EffectWrapper {
+func (ba *Babylon) NewEffectWrapper(creationOptions js.Value) *EffectWrapper {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, creationOptions.JSObject())
+	args = append(args, creationOptions)
 
 	p := ba.ctx.Get("EffectWrapper").New(args...)
 	return EffectWrapperFromJSObject(p, ba.ctx)
@@ -45,9 +54,7 @@ func (ba *Babylon) NewEffectWrapper(creationOptions *EffectWrapperCreationOption
 // https://doc.babylonjs.com/api/classes/babylon.effectwrapper#dispose
 func (e *EffectWrapper) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("dispose", args...)
+	e.p.Call("dispose")
 }
 
 /*

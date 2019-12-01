@@ -29,6 +29,15 @@ func SimplificationQueueFromJSObject(p js.Value, ctx js.Value) *SimplificationQu
 	return &SimplificationQueue{p: p, ctx: ctx}
 }
 
+// SimplificationQueueArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SimplificationQueueArrayToJSArray(array []*SimplificationQueue) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSimplificationQueue returns a new SimplificationQueue object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationqueue
@@ -57,9 +66,7 @@ func (s *SimplificationQueue) AddTask(task *ISimplificationTask) {
 // https://doc.babylonjs.com/api/classes/babylon.simplificationqueue#executenext
 func (s *SimplificationQueue) ExecuteNext() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("executeNext", args...)
+	s.p.Call("executeNext")
 }
 
 // RunSimplification calls the RunSimplification method on the SimplificationQueue object.

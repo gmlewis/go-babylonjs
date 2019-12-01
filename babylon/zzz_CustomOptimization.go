@@ -29,6 +29,15 @@ func CustomOptimizationFromJSObject(p js.Value, ctx js.Value) *CustomOptimizatio
 	return &CustomOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CustomOptimizationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CustomOptimizationArrayToJSArray(array []*CustomOptimization) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCustomOptimizationOpts contains optional parameters for NewCustomOptimization.
 type NewCustomOptimizationOpts struct {
 	Priority *float64
@@ -73,9 +82,7 @@ func (c *CustomOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) bool
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#getdescription
 func (c *CustomOptimization) GetDescription() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getDescription", args...)
+	retVal := c.p.Call("getDescription")
 	return retVal.String()
 }
 
@@ -85,7 +92,7 @@ func (c *CustomOptimization) GetDescription() string {
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#onapply
 func (c *CustomOptimization) OnApply(onApply func()) *CustomOptimization {
-	p := ba.ctx.Get("CustomOptimization").New(onApply)
+	p := ba.ctx.Get("CustomOptimization").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return CustomOptimizationFromJSObject(p, ba.ctx)
 }
 
@@ -93,7 +100,7 @@ func (c *CustomOptimization) OnApply(onApply func()) *CustomOptimization {
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#onapply
 func (c *CustomOptimization) SetOnApply(onApply func()) *CustomOptimization {
-	p := ba.ctx.Get("CustomOptimization").New(onApply)
+	p := ba.ctx.Get("CustomOptimization").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return CustomOptimizationFromJSObject(p, ba.ctx)
 }
 
@@ -101,7 +108,7 @@ func (c *CustomOptimization) SetOnApply(onApply func()) *CustomOptimization {
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#ongetdescription
 func (c *CustomOptimization) OnGetDescription(onGetDescription func()) *CustomOptimization {
-	p := ba.ctx.Get("CustomOptimization").New(onGetDescription)
+	p := ba.ctx.Get("CustomOptimization").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGetDescription(); return nil}))
 	return CustomOptimizationFromJSObject(p, ba.ctx)
 }
 
@@ -109,7 +116,7 @@ func (c *CustomOptimization) OnGetDescription(onGetDescription func()) *CustomOp
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#ongetdescription
 func (c *CustomOptimization) SetOnGetDescription(onGetDescription func()) *CustomOptimization {
-	p := ba.ctx.Get("CustomOptimization").New(onGetDescription)
+	p := ba.ctx.Get("CustomOptimization").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGetDescription(); return nil}))
 	return CustomOptimizationFromJSObject(p, ba.ctx)
 }
 

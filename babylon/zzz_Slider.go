@@ -27,6 +27,15 @@ func SliderFromJSObject(p js.Value, ctx js.Value) *Slider {
 	return &Slider{BaseSlider: BaseSliderFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SliderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SliderArrayToJSArray(array []*Slider) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSliderOpts contains optional parameters for NewSlider.
 type NewSliderOpts struct {
 	Name *string
@@ -71,9 +80,7 @@ func (s *Slider) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.slider#dispose
 func (s *Slider) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the Slider object.
@@ -94,9 +101,7 @@ func (s *Slider) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.slider#getclassname
 func (s *Slider) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 

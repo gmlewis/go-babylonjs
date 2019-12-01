@@ -27,6 +27,15 @@ func Vector4FromJSObject(p js.Value, ctx js.Value) *Vector4 {
 	return &Vector4{p: p, ctx: ctx}
 }
 
+// Vector4ArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Vector4ArrayToJSArray(array []*Vector4) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVector4 returns a new Vector4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4
@@ -88,9 +97,7 @@ func (v *Vector4) AddToRef(otherVector *Vector4, result *Vector4) *Vector4 {
 // https://doc.babylonjs.com/api/classes/babylon.vector4#asarray
 func (v *Vector4) AsArray() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("asArray", args...)
+	retVal := v.p.Call("asArray")
 	return retVal.Float()
 }
 
@@ -113,9 +120,7 @@ func (v *Vector4) Center(value1 *Vector4, value2 *Vector4) *Vector4 {
 // https://doc.babylonjs.com/api/classes/babylon.vector4#clone
 func (v *Vector4) Clone() *Vector4 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("clone", args...)
+	retVal := v.p.Call("clone")
 	return Vector4FromJSObject(retVal, v.ctx)
 }
 
@@ -277,9 +282,7 @@ func (v *Vector4) EqualsWithEpsilon(otherVector *Vector4, opts *Vector4EqualsWit
 // https://doc.babylonjs.com/api/classes/babylon.vector4#floor
 func (v *Vector4) Floor() *Vector4 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("floor", args...)
+	retVal := v.p.Call("floor")
 	return Vector4FromJSObject(retVal, v.ctx)
 }
 
@@ -288,9 +291,7 @@ func (v *Vector4) Floor() *Vector4 {
 // https://doc.babylonjs.com/api/classes/babylon.vector4#fract
 func (v *Vector4) Fract() *Vector4 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("fract", args...)
+	retVal := v.p.Call("fract")
 	return Vector4FromJSObject(retVal, v.ctx)
 }
 
@@ -324,13 +325,13 @@ func (v *Vector4) FromArray(array js.Value, opts *Vector4FromArrayOpts) *Vector4
 // FromArrayToRef calls the FromArrayToRef method on the Vector4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#fromarraytoref
-func (v *Vector4) FromArrayToRef(array js.Value, offset float64, result float64) {
+func (v *Vector4) FromArrayToRef(array js.Value, offset float64, result *Vector4) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, array)
 	args = append(args, offset)
-	args = append(args, result)
+	args = append(args, result.JSObject())
 
 	v.p.Call("FromArrayToRef", args...)
 }
@@ -397,9 +398,7 @@ func (v *Vector4) FromVector3(source *Vector3, opts *Vector4FromVector3Opts) *Ve
 // https://doc.babylonjs.com/api/classes/babylon.vector4#getclassname
 func (v *Vector4) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -408,9 +407,7 @@ func (v *Vector4) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.vector4#gethashcode
 func (v *Vector4) GetHashCode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getHashCode", args...)
+	retVal := v.p.Call("getHashCode")
 	return retVal.Float()
 }
 
@@ -419,9 +416,7 @@ func (v *Vector4) GetHashCode() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vector4#length
 func (v *Vector4) Length() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("length", args...)
+	retVal := v.p.Call("length")
 	return retVal.Float()
 }
 
@@ -430,9 +425,7 @@ func (v *Vector4) Length() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vector4#lengthsquared
 func (v *Vector4) LengthSquared() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("lengthSquared", args...)
+	retVal := v.p.Call("lengthSquared")
 	return retVal.Float()
 }
 
@@ -551,9 +544,7 @@ func (v *Vector4) MultiplyToRef(otherVector *Vector4, result *Vector4) *Vector4 
 // https://doc.babylonjs.com/api/classes/babylon.vector4#negate
 func (v *Vector4) Negate() *Vector4 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("negate", args...)
+	retVal := v.p.Call("negate")
 	return Vector4FromJSObject(retVal, v.ctx)
 }
 
@@ -588,9 +579,7 @@ func (v *Vector4) NormalizeToRef(vector *Vector4, result *Vector4) {
 // https://doc.babylonjs.com/api/classes/babylon.vector4#one
 func (v *Vector4) One() *Vector4 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("One", args...)
+	retVal := v.p.Call("One")
 	return Vector4FromJSObject(retVal, v.ctx)
 }
 
@@ -782,9 +771,7 @@ func (v *Vector4) ToArray(array js.Value, opts *Vector4ToArrayOpts) *Vector4 {
 // https://doc.babylonjs.com/api/classes/babylon.vector4#tostring
 func (v *Vector4) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("toString", args...)
+	retVal := v.p.Call("toString")
 	return retVal.String()
 }
 
@@ -793,9 +780,7 @@ func (v *Vector4) ToString() string {
 // https://doc.babylonjs.com/api/classes/babylon.vector4#tovector3
 func (v *Vector4) ToVector3() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("toVector3", args...)
+	retVal := v.p.Call("toVector3")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -849,9 +834,7 @@ func (v *Vector4) TransformNormalToRef(vector *Vector4, transformation *Matrix, 
 // https://doc.babylonjs.com/api/classes/babylon.vector4#zero
 func (v *Vector4) Zero() *Vector4 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("Zero", args...)
+	retVal := v.p.Call("Zero")
 	return Vector4FromJSObject(retVal, v.ctx)
 }
 

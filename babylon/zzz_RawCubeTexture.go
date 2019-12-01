@@ -27,6 +27,15 @@ func RawCubeTextureFromJSObject(p js.Value, ctx js.Value) *RawCubeTexture {
 	return &RawCubeTexture{CubeTexture: CubeTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RawCubeTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RawCubeTextureArrayToJSArray(array []*RawCubeTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRawCubeTextureOpts contains optional parameters for NewRawCubeTexture.
 type NewRawCubeTextureOpts struct {
 	Format          *float64
@@ -91,9 +100,7 @@ func (ba *Babylon) NewRawCubeTexture(scene *Scene, data js.Value, size float64, 
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#clone
 func (r *RawCubeTexture) Clone() *CubeTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("clone", args...)
+	retVal := r.p.Call("clone")
 	return CubeTextureFromJSObject(retVal, r.ctx)
 }
 
@@ -188,9 +195,7 @@ func (r *RawCubeTexture) DelayLoad(opts *RawCubeTextureDelayLoadOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#dispose
 func (r *RawCubeTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the RawCubeTexture object.
@@ -198,9 +203,7 @@ func (r *RawCubeTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#getbasesize
 func (r *RawCubeTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getBaseSize", args...)
+	retVal := r.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -209,9 +212,7 @@ func (r *RawCubeTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#getclassname
 func (r *RawCubeTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -220,9 +221,7 @@ func (r *RawCubeTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#getinternaltexture
 func (r *RawCubeTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getInternalTexture", args...)
+	retVal := r.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, r.ctx)
 }
 
@@ -231,9 +230,7 @@ func (r *RawCubeTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#getreflectiontexturematrix
 func (r *RawCubeTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getReflectionTextureMatrix", args...)
+	retVal := r.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, r.ctx)
 }
 
@@ -242,9 +239,7 @@ func (r *RawCubeTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#getscene
 func (r *RawCubeTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getScene", args...)
+	retVal := r.p.Call("getScene")
 	return SceneFromJSObject(retVal, r.ctx)
 }
 
@@ -253,9 +248,7 @@ func (r *RawCubeTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#getsize
 func (r *RawCubeTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getSize", args...)
+	retVal := r.p.Call("getSize")
 	return retVal
 }
 
@@ -264,9 +257,7 @@ func (r *RawCubeTexture) GetSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#gettexturematrix
 func (r *RawCubeTexture) GetTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getTextureMatrix", args...)
+	retVal := r.p.Call("getTextureMatrix")
 	return MatrixFromJSObject(retVal, r.ctx)
 }
 
@@ -275,9 +266,7 @@ func (r *RawCubeTexture) GetTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#isready
 func (r *RawCubeTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isReady", args...)
+	retVal := r.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -286,9 +275,7 @@ func (r *RawCubeTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#isreadyornotblocking
 func (r *RawCubeTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isReadyOrNotBlocking", args...)
+	retVal := r.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -349,9 +336,7 @@ func (r *RawCubeTexture) ReadPixels(opts *RawCubeTextureReadPixelsOpts) js.Value
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#releaseinternaltexture
 func (r *RawCubeTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("releaseInternalTexture", args...)
+	r.p.Call("releaseInternalTexture")
 }
 
 // Scale calls the Scale method on the RawCubeTexture object.
@@ -371,9 +356,7 @@ func (r *RawCubeTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#serialize
 func (r *RawCubeTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 
@@ -394,9 +377,7 @@ func (r *RawCubeTexture) SetReflectionTextureMatrix(value *Matrix) {
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#tostring
 func (r *RawCubeTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("toString", args...)
+	retVal := r.p.Call("toString")
 	return retVal.String()
 }
 
@@ -439,7 +420,7 @@ type RawCubeTextureUpdateRGBDAsyncOpts struct {
 // UpdateRGBDAsync calls the UpdateRGBDAsync method on the RawCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#updatergbdasync
-func (r *RawCubeTexture) UpdateRGBDAsync(data js.Value, opts *RawCubeTextureUpdateRGBDAsyncOpts) {
+func (r *RawCubeTexture) UpdateRGBDAsync(data js.Value, opts *RawCubeTextureUpdateRGBDAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &RawCubeTextureUpdateRGBDAsyncOpts{}
 	}
@@ -464,7 +445,8 @@ func (r *RawCubeTexture) UpdateRGBDAsync(data js.Value, opts *RawCubeTextureUpda
 		args = append(args, *opts.LodOffset)
 	}
 
-	r.p.Call("updateRGBDAsync", args...)
+	retVal := r.p.Call("updateRGBDAsync", args...)
+	return PromiseFromJSObject(retVal, r.ctx)
 }
 
 // UpdateSamplingMode calls the UpdateSamplingMode method on the RawCubeTexture object.
@@ -519,7 +501,7 @@ func (r *RawCubeTexture) WhenAllReady(textures *BaseTexture, callback func()) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	r.p.Call("WhenAllReady", args...)
 }
@@ -978,7 +960,7 @@ func (r *RawCubeTexture) SetNoMipmap(noMipmap bool) *RawCubeTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#ondispose
 func (r *RawCubeTexture) OnDispose(onDispose func()) *RawCubeTexture {
-	p := ba.ctx.Get("RawCubeTexture").New(onDispose)
+	p := ba.ctx.Get("RawCubeTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return RawCubeTextureFromJSObject(p, ba.ctx)
 }
 
@@ -986,7 +968,7 @@ func (r *RawCubeTexture) OnDispose(onDispose func()) *RawCubeTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#ondispose
 func (r *RawCubeTexture) SetOnDispose(onDispose func()) *RawCubeTexture {
-	p := ba.ctx.Get("RawCubeTexture").New(onDispose)
+	p := ba.ctx.Get("RawCubeTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return RawCubeTextureFromJSObject(p, ba.ctx)
 }
 

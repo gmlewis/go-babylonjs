@@ -29,6 +29,15 @@ func VRDeviceOrientationArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *V
 	return &VRDeviceOrientationArcRotateCamera{ArcRotateCamera: ArcRotateCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VRDeviceOrientationArcRotateCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VRDeviceOrientationArcRotateCameraArrayToJSArray(array []*VRDeviceOrientationArcRotateCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVRDeviceOrientationArcRotateCameraOpts contains optional parameters for NewVRDeviceOrientationArcRotateCamera.
 type NewVRDeviceOrientationArcRotateCameraOpts struct {
 	CompensateDistortion *bool
@@ -136,9 +145,7 @@ func (v *VRDeviceOrientationArcRotateCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#dispose
 func (v *VRDeviceOrientationArcRotateCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // VRDeviceOrientationArcRotateCameraFocusOnOpts contains optional parameters for VRDeviceOrientationArcRotateCamera.FocusOn.
@@ -172,9 +179,7 @@ func (v *VRDeviceOrientationArcRotateCamera) FocusOn(meshesOrMinMaxVectorAndDist
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#getclassname
 func (v *VRDeviceOrientationArcRotateCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -196,9 +201,7 @@ func (v *VRDeviceOrientationArcRotateCamera) GetFrontPosition(distance float64) 
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#gettarget
 func (v *VRDeviceOrientationArcRotateCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getTarget", args...)
+	retVal := v.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -207,9 +210,7 @@ func (v *VRDeviceOrientationArcRotateCamera) GetTarget() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#rebuildanglesandradius
 func (v *VRDeviceOrientationArcRotateCamera) RebuildAnglesAndRadius() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("rebuildAnglesAndRadius", args...)
+	v.p.Call("rebuildAnglesAndRadius")
 }
 
 // SetMatUp calls the SetMatUp method on the VRDeviceOrientationArcRotateCamera object.
@@ -217,9 +218,7 @@ func (v *VRDeviceOrientationArcRotateCamera) RebuildAnglesAndRadius() {
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#setmatup
 func (v *VRDeviceOrientationArcRotateCamera) SetMatUp() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("setMatUp", args...)
+	v.p.Call("setMatUp")
 }
 
 // SetPosition calls the SetPosition method on the VRDeviceOrientationArcRotateCamera object.
@@ -271,9 +270,7 @@ func (v *VRDeviceOrientationArcRotateCamera) SetTarget(target *AbstractMesh, opt
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#storestate
 func (v *VRDeviceOrientationArcRotateCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("storeState", args...)
+	retVal := v.p.Call("storeState")
 	return CameraFromJSObject(retVal, v.ctx)
 }
 
@@ -745,7 +742,7 @@ func (v *VRDeviceOrientationArcRotateCamera) SetNoRotationConstraint(noRotationC
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#oncollide
 func (v *VRDeviceOrientationArcRotateCamera) OnCollide(onCollide func()) *VRDeviceOrientationArcRotateCamera {
-	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(onCollide)
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
@@ -753,7 +750,7 @@ func (v *VRDeviceOrientationArcRotateCamera) OnCollide(onCollide func()) *VRDevi
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#oncollide
 func (v *VRDeviceOrientationArcRotateCamera) SetOnCollide(onCollide func()) *VRDeviceOrientationArcRotateCamera {
-	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(onCollide)
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
 }
 

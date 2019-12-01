@@ -27,6 +27,15 @@ func ScrollViewerFromJSObject(p js.Value, ctx js.Value) *ScrollViewer {
 	return &ScrollViewer{Rectangle: RectangleFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ScrollViewerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ScrollViewerArrayToJSArray(array []*ScrollViewer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewScrollViewerOpts contains optional parameters for NewScrollViewer.
 type NewScrollViewerOpts struct {
 	Name         *string
@@ -76,9 +85,7 @@ func (s *ScrollViewer) AddControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.scrollviewer#clearcontrols
 func (s *ScrollViewer) ClearControls() *Container {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("clearControls", args...)
+	retVal := s.p.Call("clearControls")
 	return ContainerFromJSObject(retVal, s.ctx)
 }
 
@@ -114,9 +121,7 @@ func (s *ScrollViewer) ContainsControl(control *Control) bool {
 // https://doc.babylonjs.com/api/classes/babylon.scrollviewer#dispose
 func (s *ScrollViewer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the ScrollViewer object.
@@ -164,9 +169,7 @@ func (s *ScrollViewer) GetChildByType(name string, jsType string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.scrollviewer#getclassname
 func (s *ScrollViewer) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -329,9 +332,7 @@ func (s *ScrollViewer) RemoveControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.scrollviewer#resetwindow
 func (s *ScrollViewer) ResetWindow() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("resetWindow", args...)
+	s.p.Call("resetWindow")
 }
 
 // _flagDescendantsAsMatrixDirty calls the _flagDescendantsAsMatrixDirty method on the ScrollViewer object.
@@ -339,9 +340,7 @@ func (s *ScrollViewer) ResetWindow() {
 // https://doc.babylonjs.com/api/classes/babylon.scrollviewer#_flagdescendantsasmatrixdirty
 func (s *ScrollViewer) _flagDescendantsAsMatrixDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("_flagDescendantsAsMatrixDirty", args...)
+	s.p.Call("_flagDescendantsAsMatrixDirty")
 }
 
 // _link calls the _link method on the ScrollViewer object.

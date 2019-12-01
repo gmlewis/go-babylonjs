@@ -27,6 +27,15 @@ func EdgesRendererFromJSObject(p js.Value, ctx js.Value) *EdgesRenderer {
 	return &EdgesRenderer{p: p, ctx: ctx}
 }
 
+// EdgesRendererArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EdgesRendererArrayToJSArray(array []*EdgesRenderer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewEdgesRendererOpts contains optional parameters for NewEdgesRenderer.
 type NewEdgesRendererOpts struct {
 	Epsilon                       *float64
@@ -71,9 +80,7 @@ func (ba *Babylon) NewEdgesRenderer(source *AbstractMesh, opts *NewEdgesRenderer
 // https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#dispose
 func (e *EdgesRenderer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("dispose", args...)
+	e.p.Call("dispose")
 }
 
 // IsReady calls the IsReady method on the EdgesRenderer object.
@@ -81,9 +88,7 @@ func (e *EdgesRenderer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#isready
 func (e *EdgesRenderer) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("isReady", args...)
+	retVal := e.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -92,9 +97,7 @@ func (e *EdgesRenderer) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#render
 func (e *EdgesRenderer) Render() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("render", args...)
+	e.p.Call("render")
 }
 
 // _generateEdgesLines calls the _generateEdgesLines method on the EdgesRenderer object.
@@ -102,9 +105,7 @@ func (e *EdgesRenderer) Render() {
 // https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#_generateedgeslines
 func (e *EdgesRenderer) _generateEdgesLines() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("_generateEdgesLines", args...)
+	e.p.Call("_generateEdgesLines")
 }
 
 /*

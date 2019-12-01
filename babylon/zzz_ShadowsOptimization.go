@@ -29,6 +29,15 @@ func ShadowsOptimizationFromJSObject(p js.Value, ctx js.Value) *ShadowsOptimizat
 	return &ShadowsOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ShadowsOptimizationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ShadowsOptimizationArrayToJSArray(array []*ShadowsOptimization) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewShadowsOptimizationOpts contains optional parameters for NewShadowsOptimization.
 type NewShadowsOptimizationOpts struct {
 	Priority *float64
@@ -73,9 +82,7 @@ func (s *ShadowsOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) boo
 // https://doc.babylonjs.com/api/classes/babylon.shadowsoptimization#getdescription
 func (s *ShadowsOptimization) GetDescription() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getDescription", args...)
+	retVal := s.p.Call("getDescription")
 	return retVal.String()
 }
 

@@ -29,6 +29,15 @@ func SkeletonViewerFromJSObject(p js.Value, ctx js.Value) *SkeletonViewer {
 	return &SkeletonViewer{p: p, ctx: ctx}
 }
 
+// SkeletonViewerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SkeletonViewerArrayToJSArray(array []*SkeletonViewer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSkeletonViewerOpts contains optional parameters for NewSkeletonViewer.
 type NewSkeletonViewerOpts struct {
 	AutoUpdateBonesMatrices *bool
@@ -69,9 +78,7 @@ func (ba *Babylon) NewSkeletonViewer(skeleton *Skeleton, mesh *AbstractMesh, sce
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#dispose
 func (s *SkeletonViewer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // Update calls the Update method on the SkeletonViewer object.
@@ -79,9 +86,7 @@ func (s *SkeletonViewer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#update
 func (s *SkeletonViewer) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("update", args...)
+	s.p.Call("update")
 }
 
 /*

@@ -30,6 +30,15 @@ func EffectLayerFromJSObject(p js.Value, ctx js.Value) *EffectLayer {
 	return &EffectLayer{p: p, ctx: ctx}
 }
 
+// EffectLayerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EffectLayerArrayToJSArray(array []*EffectLayer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewEffectLayer returns a new EffectLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer
@@ -49,9 +58,7 @@ func (ba *Babylon) NewEffectLayer(name string, scene *Scene) *EffectLayer {
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#dispose
 func (e *EffectLayer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("dispose", args...)
+	e.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the EffectLayer object.
@@ -59,9 +66,7 @@ func (e *EffectLayer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#getclassname
 func (e *EffectLayer) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("getClassName", args...)
+	retVal := e.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -70,9 +75,7 @@ func (e *EffectLayer) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#geteffectname
 func (e *EffectLayer) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("getEffectName", args...)
+	retVal := e.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -108,9 +111,7 @@ func (e *EffectLayer) IsReady(subMesh *SubMesh, useInstances bool) bool {
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#needstencil
 func (e *EffectLayer) NeedStencil() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("needStencil", args...)
+	retVal := e.p.Call("needStencil")
 	return retVal.Bool()
 }
 
@@ -134,9 +135,7 @@ func (e *EffectLayer) Parse(parsedEffectLayer interface{}, scene *Scene, rootUrl
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#render
 func (e *EffectLayer) Render() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("render", args...)
+	e.p.Call("render")
 }
 
 // Serialize calls the Serialize method on the EffectLayer object.
@@ -144,9 +143,7 @@ func (e *EffectLayer) Render() {
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#serialize
 func (e *EffectLayer) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("serialize", args...)
+	retVal := e.p.Call("serialize")
 	return retVal
 }
 
@@ -155,9 +152,7 @@ func (e *EffectLayer) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#shouldrender
 func (e *EffectLayer) ShouldRender() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("shouldRender", args...)
+	retVal := e.p.Call("shouldRender")
 	return retVal.Bool()
 }
 

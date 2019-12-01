@@ -27,6 +27,15 @@ func KHR_materials_pbrSpecularGlossinessFromJSObject(p js.Value, ctx js.Value) *
 	return &KHR_materials_pbrSpecularGlossiness{p: p, ctx: ctx}
 }
 
+// KHR_materials_pbrSpecularGlossinessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KHR_materials_pbrSpecularGlossinessArrayToJSArray(array []*KHR_materials_pbrSpecularGlossiness) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class KHR_materials_pbrSpecularGlossiness.

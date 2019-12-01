@@ -30,9 +30,18 @@ func SoundTrackFromJSObject(p js.Value, ctx js.Value) *SoundTrack {
 	return &SoundTrack{p: p, ctx: ctx}
 }
 
+// SoundTrackArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SoundTrackArrayToJSArray(array []*SoundTrack) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSoundTrackOpts contains optional parameters for NewSoundTrack.
 type NewSoundTrackOpts struct {
-	Options *ISoundTrackOptions
+	Options js.Value
 }
 
 // NewSoundTrack returns a new SoundTrack object.
@@ -50,7 +59,7 @@ func (ba *Babylon) NewSoundTrack(scene *Scene, opts *NewSoundTrackOpts) *SoundTr
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	p := ba.ctx.Get("SoundTrack").New(args...)
@@ -86,9 +95,7 @@ func (s *SoundTrack) ConnectToAnalyser(analyser *Analyser) {
 // https://doc.babylonjs.com/api/classes/babylon.soundtrack#dispose
 func (s *SoundTrack) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // RemoveSound calls the RemoveSound method on the SoundTrack object.
@@ -120,9 +127,7 @@ func (s *SoundTrack) SetVolume(newVolume float64) {
 // https://doc.babylonjs.com/api/classes/babylon.soundtrack#switchpanningmodeltoequalpower
 func (s *SoundTrack) SwitchPanningModelToEqualPower() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("switchPanningModelToEqualPower", args...)
+	s.p.Call("switchPanningModelToEqualPower")
 }
 
 // SwitchPanningModelToHRTF calls the SwitchPanningModelToHRTF method on the SoundTrack object.
@@ -130,9 +135,7 @@ func (s *SoundTrack) SwitchPanningModelToEqualPower() {
 // https://doc.babylonjs.com/api/classes/babylon.soundtrack#switchpanningmodeltohrtf
 func (s *SoundTrack) SwitchPanningModelToHRTF() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("switchPanningModelToHRTF", args...)
+	s.p.Call("switchPanningModelToHRTF")
 }
 
 /*
@@ -156,16 +159,16 @@ func (s *SoundTrack) SetId(id float64) *SoundTrack {
 // SoundCollection returns the SoundCollection property of class SoundTrack.
 //
 // https://doc.babylonjs.com/api/classes/babylon.soundtrack#soundcollection
-func (s *SoundTrack) SoundCollection(soundCollection []Sound) *SoundTrack {
-	p := ba.ctx.Get("SoundTrack").New(soundCollection.JSObject())
+func (s *SoundTrack) SoundCollection(soundCollection []*Sound) *SoundTrack {
+	p := ba.ctx.Get("SoundTrack").New(soundCollection)
 	return SoundTrackFromJSObject(p, ba.ctx)
 }
 
 // SetSoundCollection sets the SoundCollection property of class SoundTrack.
 //
 // https://doc.babylonjs.com/api/classes/babylon.soundtrack#soundcollection
-func (s *SoundTrack) SetSoundCollection(soundCollection []Sound) *SoundTrack {
-	p := ba.ctx.Get("SoundTrack").New(soundCollection.JSObject())
+func (s *SoundTrack) SetSoundCollection(soundCollection []*Sound) *SoundTrack {
+	p := ba.ctx.Get("SoundTrack").New(soundCollection)
 	return SoundTrackFromJSObject(p, ba.ctx)
 }
 

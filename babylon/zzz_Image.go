@@ -27,6 +27,15 @@ func ImageFromJSObject(p js.Value, ctx js.Value) *Image {
 	return &Image{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ImageArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ImageArrayToJSArray(array []*Image) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewImageOpts contains optional parameters for NewImage.
 type NewImageOpts struct {
 	Name *string
@@ -77,9 +86,7 @@ func (i *Image) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.image#dispose
 func (i *Image) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("dispose", args...)
+	i.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the Image object.
@@ -100,9 +107,7 @@ func (i *Image) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.image#getclassname
 func (i *Image) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -252,9 +257,7 @@ func (i *Image) MoveToVector3(position *Vector3, scene *Scene) {
 // https://doc.babylonjs.com/api/classes/babylon.image#synchronizesizewithcontent
 func (i *Image) SynchronizeSizeWithContent() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("synchronizeSizeWithContent", args...)
+	i.p.Call("synchronizeSizeWithContent")
 }
 
 // _draw calls the _draw method on the Image object.

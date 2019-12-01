@@ -27,6 +27,15 @@ func PlaneBuilderFromJSObject(p js.Value, ctx js.Value) *PlaneBuilder {
 	return &PlaneBuilder{p: p, ctx: ctx}
 }
 
+// PlaneBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PlaneBuilderArrayToJSArray(array []*PlaneBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // PlaneBuilderCreatePlaneOpts contains optional parameters for PlaneBuilder.CreatePlane.
 type PlaneBuilderCreatePlaneOpts struct {
 	Scene *Scene

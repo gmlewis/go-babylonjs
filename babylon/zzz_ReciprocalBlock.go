@@ -27,6 +27,15 @@ func ReciprocalBlockFromJSObject(p js.Value, ctx js.Value) *ReciprocalBlock {
 	return &ReciprocalBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ReciprocalBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ReciprocalBlockArrayToJSArray(array []*ReciprocalBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewReciprocalBlock returns a new ReciprocalBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock
@@ -152,9 +161,7 @@ func (r *ReciprocalBlock) ConnectTo(other *NodeMaterialBlock, opts *ReciprocalBl
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#dispose
 func (r *ReciprocalBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ReciprocalBlock object.
@@ -162,9 +169,7 @@ func (r *ReciprocalBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#getclassname
 func (r *ReciprocalBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (r *ReciprocalBlock) ReplaceRepeatableContent(vertexShaderState *NodeMateri
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#serialize
 func (r *ReciprocalBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 

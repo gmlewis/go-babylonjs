@@ -27,6 +27,15 @@ func ValueConditionFromJSObject(p js.Value, ctx js.Value) *ValueCondition {
 	return &ValueCondition{Condition: ConditionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ValueConditionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ValueConditionArrayToJSArray(array []*ValueCondition) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewValueConditionOpts contains optional parameters for NewValueCondition.
 type NewValueConditionOpts struct {
 	Operator *float64
@@ -75,9 +84,7 @@ func (v *ValueCondition) GetOperatorName(operator float64) string {
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#isvalid
 func (v *ValueCondition) IsValid() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("isValid", args...)
+	retVal := v.p.Call("isValid")
 	return retVal.Bool()
 }
 
@@ -86,9 +93,7 @@ func (v *ValueCondition) IsValid() bool {
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#serialize
 func (v *ValueCondition) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("serialize", args...)
+	retVal := v.p.Call("serialize")
 	return retVal
 }
 

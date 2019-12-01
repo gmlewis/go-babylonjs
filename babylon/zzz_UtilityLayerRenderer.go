@@ -27,6 +27,15 @@ func UtilityLayerRendererFromJSObject(p js.Value, ctx js.Value) *UtilityLayerRen
 	return &UtilityLayerRenderer{p: p, ctx: ctx}
 }
 
+// UtilityLayerRendererArrayToJSArray returns a JavaScript Array for the wrapped array.
+func UtilityLayerRendererArrayToJSArray(array []*UtilityLayerRenderer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewUtilityLayerRendererOpts contains optional parameters for NewUtilityLayerRenderer.
 type NewUtilityLayerRendererOpts struct {
 	HandleEvents *bool
@@ -59,9 +68,7 @@ func (ba *Babylon) NewUtilityLayerRenderer(originalScene *Scene, opts *NewUtilit
 // https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#dispose
 func (u *UtilityLayerRenderer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	u.p.Call("dispose", args...)
+	u.p.Call("dispose")
 }
 
 // GetRenderCamera calls the GetRenderCamera method on the UtilityLayerRenderer object.
@@ -69,9 +76,7 @@ func (u *UtilityLayerRenderer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#getrendercamera
 func (u *UtilityLayerRenderer) GetRenderCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := u.p.Call("getRenderCamera", args...)
+	retVal := u.p.Call("getRenderCamera")
 	return CameraFromJSObject(retVal, u.ctx)
 }
 
@@ -80,9 +85,7 @@ func (u *UtilityLayerRenderer) GetRenderCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#render
 func (u *UtilityLayerRenderer) Render() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	u.p.Call("render", args...)
+	u.p.Call("render")
 }
 
 // SetRenderCamera calls the SetRenderCamera method on the UtilityLayerRenderer object.
@@ -135,7 +138,7 @@ func (u *UtilityLayerRenderer) SetDefaultUtilityLayer(DefaultUtilityLayer *Utili
 //
 // https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#mainscenetrackerpredicate
 func (u *UtilityLayerRenderer) MainSceneTrackerPredicate(mainSceneTrackerPredicate func()) *UtilityLayerRenderer {
-	p := ba.ctx.Get("UtilityLayerRenderer").New(mainSceneTrackerPredicate)
+	p := ba.ctx.Get("UtilityLayerRenderer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {mainSceneTrackerPredicate(); return nil}))
 	return UtilityLayerRendererFromJSObject(p, ba.ctx)
 }
 
@@ -143,7 +146,7 @@ func (u *UtilityLayerRenderer) MainSceneTrackerPredicate(mainSceneTrackerPredica
 //
 // https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#mainscenetrackerpredicate
 func (u *UtilityLayerRenderer) SetMainSceneTrackerPredicate(mainSceneTrackerPredicate func()) *UtilityLayerRenderer {
-	p := ba.ctx.Get("UtilityLayerRenderer").New(mainSceneTrackerPredicate)
+	p := ba.ctx.Get("UtilityLayerRenderer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {mainSceneTrackerPredicate(); return nil}))
 	return UtilityLayerRendererFromJSObject(p, ba.ctx)
 }
 

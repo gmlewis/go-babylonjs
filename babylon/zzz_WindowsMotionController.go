@@ -27,6 +27,15 @@ func WindowsMotionControllerFromJSObject(p js.Value, ctx js.Value) *WindowsMotio
 	return &WindowsMotionController{WebVRController: WebVRControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// WindowsMotionControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WindowsMotionControllerArrayToJSArray(array []*WindowsMotionController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWindowsMotionController returns a new WindowsMotionController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller
@@ -69,9 +78,7 @@ func (w *WindowsMotionController) AttachToPoseControlledCamera(camera *TargetCam
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#dispose
 func (w *WindowsMotionController) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 // WindowsMotionControllerGetForwardRayOpts contains optional parameters for WindowsMotionController.GetForwardRay.
@@ -138,7 +145,7 @@ func (w *WindowsMotionController) OnButtonStateChange(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	w.p.Call("onButtonStateChange", args...)
 }
@@ -150,7 +157,7 @@ func (w *WindowsMotionController) Onleftstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	w.p.Call("onleftstickchanged", args...)
 }
@@ -162,7 +169,7 @@ func (w *WindowsMotionController) Onrightstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	w.p.Call("onrightstickchanged", args...)
 }
@@ -172,9 +179,7 @@ func (w *WindowsMotionController) Onrightstickchanged(callback func()) {
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#update
 func (w *WindowsMotionController) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("update", args...)
+	w.p.Call("update")
 }
 
 // UpdateFromDevice calls the UpdateFromDevice method on the WindowsMotionController object.

@@ -29,6 +29,15 @@ func WebXRSessionManagerFromJSObject(p js.Value, ctx js.Value) *WebXRSessionMana
 	return &WebXRSessionManager{p: p, ctx: ctx}
 }
 
+// WebXRSessionManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRSessionManagerArrayToJSArray(array []*WebXRSessionManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWebXRSessionManager returns a new WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager
@@ -47,19 +56,16 @@ func (ba *Babylon) NewWebXRSessionManager(scene *Scene) *WebXRSessionManager {
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#dispose
 func (w *WebXRSessionManager) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 // ExitXRAsync calls the ExitXRAsync method on the WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#exitxrasync
-func (w *WebXRSessionManager) ExitXRAsync() {
+func (w *WebXRSessionManager) ExitXRAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("exitXRAsync", args...)
+	retVal := w.p.Call("exitXRAsync")
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // GetRenderTargetTextureForEye calls the GetRenderTargetTextureForEye method on the WebXRSessionManager object.
@@ -78,7 +84,7 @@ func (w *WebXRSessionManager) GetRenderTargetTextureForEye(eye *XREye) *RenderTa
 // WebXRSessionManagerGetWebXRRenderTargetOpts contains optional parameters for WebXRSessionManager.GetWebXRRenderTarget.
 type WebXRSessionManagerGetWebXRRenderTargetOpts struct {
 	OnStateChangedObservable *Observable
-	Options                  *WebXRState
+	Options                  *WebXRManagedOutputCanvasOptions
 }
 
 // GetWebXRRenderTarget calls the GetWebXRRenderTarget method on the WebXRSessionManager object.
@@ -109,11 +115,10 @@ func (w *WebXRSessionManager) GetWebXRRenderTarget(opts *WebXRSessionManagerGetW
 // InitializeAsync calls the InitializeAsync method on the WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#initializeasync
-func (w *WebXRSessionManager) InitializeAsync() {
+func (w *WebXRSessionManager) InitializeAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("initializeAsync", args...)
+	retVal := w.p.Call("initializeAsync")
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // WebXRSessionManagerInitializeSessionAsyncOpts contains optional parameters for WebXRSessionManager.InitializeSessionAsync.
@@ -124,14 +129,14 @@ type WebXRSessionManagerInitializeSessionAsyncOpts struct {
 // InitializeSessionAsync calls the InitializeSessionAsync method on the WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#initializesessionasync
-func (w *WebXRSessionManager) InitializeSessionAsync(xrSessionMode *XRSessionMode, opts *WebXRSessionManagerInitializeSessionAsyncOpts) *XRSession {
+func (w *WebXRSessionManager) InitializeSessionAsync(xrSessionMode js.Value, opts *WebXRSessionManagerInitializeSessionAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &WebXRSessionManagerInitializeSessionAsyncOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, xrSessionMode.JSObject())
+	args = append(args, xrSessionMode)
 
 	if opts.OptionalFeatures == nil {
 		args = append(args, js.Undefined())
@@ -140,67 +145,68 @@ func (w *WebXRSessionManager) InitializeSessionAsync(xrSessionMode *XRSessionMod
 	}
 
 	retVal := w.p.Call("initializeSessionAsync", args...)
-	return XRSessionFromJSObject(retVal, w.ctx)
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // IsSessionSupportedAsync calls the IsSessionSupportedAsync method on the WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#issessionsupportedasync
-func (w *WebXRSessionManager) IsSessionSupportedAsync(sessionMode *XRSessionMode) bool {
+func (w *WebXRSessionManager) IsSessionSupportedAsync(sessionMode js.Value) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, sessionMode.JSObject())
+	args = append(args, sessionMode)
 
 	retVal := w.p.Call("IsSessionSupportedAsync", args...)
-	return retVal.Bool()
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // SetReferenceSpaceAsync calls the SetReferenceSpaceAsync method on the WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#setreferencespaceasync
-func (w *WebXRSessionManager) SetReferenceSpaceAsync(referenceSpace *XRReferenceSpaceType) {
+func (w *WebXRSessionManager) SetReferenceSpaceAsync(referenceSpace js.Value) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, referenceSpace.JSObject())
+	args = append(args, referenceSpace)
 
-	w.p.Call("setReferenceSpaceAsync", args...)
+	retVal := w.p.Call("setReferenceSpaceAsync", args...)
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // StartRenderingToXRAsync calls the StartRenderingToXRAsync method on the WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#startrenderingtoxrasync
-func (w *WebXRSessionManager) StartRenderingToXRAsync() {
+func (w *WebXRSessionManager) StartRenderingToXRAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("startRenderingToXRAsync", args...)
+	retVal := w.p.Call("startRenderingToXRAsync")
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // SupportsSessionAsync calls the SupportsSessionAsync method on the WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#supportssessionasync
-func (w *WebXRSessionManager) SupportsSessionAsync(sessionMode *XRSessionMode) bool {
+func (w *WebXRSessionManager) SupportsSessionAsync(sessionMode js.Value) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, sessionMode.JSObject())
+	args = append(args, sessionMode)
 
 	retVal := w.p.Call("supportsSessionAsync", args...)
-	return retVal.Bool()
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // UpdateRenderStateAsync calls the UpdateRenderStateAsync method on the WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#updaterenderstateasync
-func (w *WebXRSessionManager) UpdateRenderStateAsync(state *XRRenderState) {
+func (w *WebXRSessionManager) UpdateRenderStateAsync(state *XRRenderState) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, state.JSObject())
 
-	w.p.Call("updateRenderStateAsync", args...)
+	retVal := w.p.Call("updateRenderStateAsync", args...)
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 /*

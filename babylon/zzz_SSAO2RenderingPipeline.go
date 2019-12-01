@@ -27,6 +27,15 @@ func SSAO2RenderingPipelineFromJSObject(p js.Value, ctx js.Value) *SSAO2Renderin
 	return &SSAO2RenderingPipeline{PostProcessRenderPipeline: PostProcessRenderPipelineFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SSAO2RenderingPipelineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SSAO2RenderingPipelineArrayToJSArray(array []*SSAO2RenderingPipeline) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSSAO2RenderingPipelineOpts contains optional parameters for NewSSAO2RenderingPipeline.
 type NewSSAO2RenderingPipelineOpts struct {
 	Cameras *Camera
@@ -97,9 +106,7 @@ func (s *SSAO2RenderingPipeline) Dispose(opts *SSAO2RenderingPipelineDisposeOpts
 // https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#getclassname
 func (s *SSAO2RenderingPipeline) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -123,9 +130,7 @@ func (s *SSAO2RenderingPipeline) Parse(source interface{}, scene *Scene, rootUrl
 // https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#serialize
 func (s *SSAO2RenderingPipeline) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

@@ -27,6 +27,15 @@ func RectangleFromJSObject(p js.Value, ctx js.Value) *Rectangle {
 	return &Rectangle{Container: ContainerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RectangleArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RectangleArrayToJSArray(array []*Rectangle) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRectangleOpts contains optional parameters for NewRectangle.
 type NewRectangleOpts struct {
 	Name *string
@@ -70,9 +79,7 @@ func (r *Rectangle) AddControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.rectangle#clearcontrols
 func (r *Rectangle) ClearControls() *Container {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("clearControls", args...)
+	retVal := r.p.Call("clearControls")
 	return ContainerFromJSObject(retVal, r.ctx)
 }
 
@@ -108,9 +115,7 @@ func (r *Rectangle) ContainsControl(control *Control) bool {
 // https://doc.babylonjs.com/api/classes/babylon.rectangle#dispose
 func (r *Rectangle) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the Rectangle object.
@@ -158,9 +163,7 @@ func (r *Rectangle) GetChildByType(name string, jsType string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.rectangle#getclassname
 func (r *Rectangle) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -323,9 +326,7 @@ func (r *Rectangle) RemoveControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.rectangle#_flagdescendantsasmatrixdirty
 func (r *Rectangle) _flagDescendantsAsMatrixDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("_flagDescendantsAsMatrixDirty", args...)
+	r.p.Call("_flagDescendantsAsMatrixDirty")
 }
 
 /*

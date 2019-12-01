@@ -28,6 +28,15 @@ func PointerInfoPreFromJSObject(p js.Value, ctx js.Value) *PointerInfoPre {
 	return &PointerInfoPre{PointerInfoBase: PointerInfoBaseFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PointerInfoPreArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PointerInfoPreArrayToJSArray(array []*PointerInfoPre) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPointerInfoPre returns a new PointerInfoPre object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfopre

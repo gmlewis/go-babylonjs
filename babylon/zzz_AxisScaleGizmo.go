@@ -27,6 +27,15 @@ func AxisScaleGizmoFromJSObject(p js.Value, ctx js.Value) *AxisScaleGizmo {
 	return &AxisScaleGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AxisScaleGizmoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AxisScaleGizmoArrayToJSArray(array []*AxisScaleGizmo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAxisScaleGizmoOpts contains optional parameters for NewAxisScaleGizmo.
 type NewAxisScaleGizmoOpts struct {
 	Color      *Color3
@@ -71,9 +80,7 @@ func (ba *Babylon) NewAxisScaleGizmo(dragAxis *Vector3, opts *NewAxisScaleGizmoO
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#dispose
 func (a *AxisScaleGizmo) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // AxisScaleGizmoSetCustomMeshOpts contains optional parameters for AxisScaleGizmo.SetCustomMesh.

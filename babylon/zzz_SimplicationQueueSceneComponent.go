@@ -28,6 +28,15 @@ func SimplicationQueueSceneComponentFromJSObject(p js.Value, ctx js.Value) *Simp
 	return &SimplicationQueueSceneComponent{p: p, ctx: ctx}
 }
 
+// SimplicationQueueSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SimplicationQueueSceneComponentArrayToJSArray(array []*SimplicationQueueSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSimplicationQueueSceneComponent returns a new SimplicationQueueSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent
@@ -46,9 +55,7 @@ func (ba *Babylon) NewSimplicationQueueSceneComponent(scene *Scene) *Simplicatio
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#dispose
 func (s *SimplicationQueueSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the SimplicationQueueSceneComponent object.
@@ -56,9 +63,7 @@ func (s *SimplicationQueueSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#rebuild
 func (s *SimplicationQueueSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("rebuild", args...)
+	s.p.Call("rebuild")
 }
 
 // Register calls the Register method on the SimplicationQueueSceneComponent object.
@@ -66,9 +71,7 @@ func (s *SimplicationQueueSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#register
 func (s *SimplicationQueueSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("register", args...)
+	s.p.Call("register")
 }
 
 /*

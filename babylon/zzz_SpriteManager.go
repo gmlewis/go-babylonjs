@@ -29,6 +29,15 @@ func SpriteManagerFromJSObject(p js.Value, ctx js.Value) *SpriteManager {
 	return &SpriteManager{p: p, ctx: ctx}
 }
 
+// SpriteManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SpriteManagerArrayToJSArray(array []*SpriteManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSpriteManagerOpts contains optional parameters for NewSpriteManager.
 type NewSpriteManagerOpts struct {
 	Epsilon      *float64
@@ -83,9 +92,7 @@ func (ba *Babylon) NewSpriteManager(name string, imgUrl string, capacity float64
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#dispose
 func (s *SpriteManager) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // SpriteManagerIntersectsOpts contains optional parameters for SpriteManager.Intersects.
@@ -155,9 +162,7 @@ func (s *SpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *SpriteMa
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#render
 func (s *SpriteManager) Render() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("render", args...)
+	s.p.Call("render")
 }
 
 /*
@@ -262,7 +267,7 @@ func (s *SpriteManager) SetName(name string) *SpriteManager {
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#ondispose
 func (s *SpriteManager) OnDispose(onDispose func()) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(onDispose)
+	p := ba.ctx.Get("SpriteManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return SpriteManagerFromJSObject(p, ba.ctx)
 }
 
@@ -270,7 +275,7 @@ func (s *SpriteManager) OnDispose(onDispose func()) *SpriteManager {
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#ondispose
 func (s *SpriteManager) SetOnDispose(onDispose func()) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(onDispose)
+	p := ba.ctx.Get("SpriteManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return SpriteManagerFromJSObject(p, ba.ctx)
 }
 

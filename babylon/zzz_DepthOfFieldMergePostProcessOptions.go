@@ -27,6 +27,15 @@ func DepthOfFieldMergePostProcessOptionsFromJSObject(p js.Value, ctx js.Value) *
 	return &DepthOfFieldMergePostProcessOptions{p: p, ctx: ctx}
 }
 
+// DepthOfFieldMergePostProcessOptionsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DepthOfFieldMergePostProcessOptionsArrayToJSArray(array []*DepthOfFieldMergePostProcessOptions) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Bloom returns the Bloom property of class DepthOfFieldMergePostProcessOptions.

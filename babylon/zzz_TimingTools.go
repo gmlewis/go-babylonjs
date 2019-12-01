@@ -27,6 +27,15 @@ func TimingToolsFromJSObject(p js.Value, ctx js.Value) *TimingTools {
 	return &TimingTools{p: p, ctx: ctx}
 }
 
+// TimingToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TimingToolsArrayToJSArray(array []*TimingTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // SetImmediate calls the SetImmediate method on the TimingTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.timingtools#setimmediate
@@ -34,7 +43,7 @@ func (t *TimingTools) SetImmediate(action func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
 
 	t.p.Call("SetImmediate", args...)
 }

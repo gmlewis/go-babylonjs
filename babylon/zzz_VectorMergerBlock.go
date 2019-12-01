@@ -27,6 +27,15 @@ func VectorMergerBlockFromJSObject(p js.Value, ctx js.Value) *VectorMergerBlock 
 	return &VectorMergerBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VectorMergerBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VectorMergerBlockArrayToJSArray(array []*VectorMergerBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVectorMergerBlock returns a new VectorMergerBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectormergerblock
@@ -152,9 +161,7 @@ func (v *VectorMergerBlock) ConnectTo(other *NodeMaterialBlock, opts *VectorMerg
 // https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#dispose
 func (v *VectorMergerBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the VectorMergerBlock object.
@@ -162,9 +169,7 @@ func (v *VectorMergerBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#getclassname
 func (v *VectorMergerBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (v *VectorMergerBlock) ReplaceRepeatableContent(vertexShaderState *NodeMate
 // https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#serialize
 func (v *VectorMergerBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("serialize", args...)
+	retVal := v.p.Call("serialize")
 	return retVal
 }
 

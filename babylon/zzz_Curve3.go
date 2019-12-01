@@ -30,6 +30,15 @@ func Curve3FromJSObject(p js.Value, ctx js.Value) *Curve3 {
 	return &Curve3{p: p, ctx: ctx}
 }
 
+// Curve3ArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Curve3ArrayToJSArray(array []*Curve3) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCurve3 returns a new Curve3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.curve3
@@ -139,9 +148,7 @@ func (c *Curve3) CreateQuadraticBezier(v0 *Vector3, v1 *Vector3, v2 *Vector3, nb
 // https://doc.babylonjs.com/api/classes/babylon.curve3#getpoints
 func (c *Curve3) GetPoints() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getPoints", args...)
+	retVal := c.p.Call("getPoints")
 	return Vector3FromJSObject(retVal, c.ctx)
 }
 
@@ -150,9 +157,7 @@ func (c *Curve3) GetPoints() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.curve3#length
 func (c *Curve3) Length() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("length", args...)
+	retVal := c.p.Call("length")
 	return retVal.Float()
 }
 

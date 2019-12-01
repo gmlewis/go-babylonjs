@@ -29,6 +29,15 @@ func WebXRCameraFromJSObject(p js.Value, ctx js.Value) *WebXRCamera {
 	return &WebXRCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// WebXRCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRCameraArrayToJSArray(array []*WebXRCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWebXRCamera returns a new WebXRCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera
@@ -86,9 +95,7 @@ func (w *WebXRCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera#dispose
 func (w *WebXRCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the WebXRCamera object.
@@ -96,9 +103,7 @@ func (w *WebXRCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera#getclassname
 func (w *WebXRCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getClassName", args...)
+	retVal := w.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -120,9 +125,7 @@ func (w *WebXRCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera#gettarget
 func (w *WebXRCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getTarget", args...)
+	retVal := w.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, w.ctx)
 }
 
@@ -143,9 +146,7 @@ func (w *WebXRCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera#storestate
 func (w *WebXRCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("storeState", args...)
+	retVal := w.p.Call("storeState")
 	return CameraFromJSObject(retVal, w.ctx)
 }
 
@@ -424,7 +425,7 @@ func (w *WebXRCamera) SetNoRotationConstraint(noRotationConstraint bool) *WebXRC
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera#oncollide
 func (w *WebXRCamera) OnCollide(onCollide func()) *WebXRCamera {
-	p := ba.ctx.Get("WebXRCamera").New(onCollide)
+	p := ba.ctx.Get("WebXRCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return WebXRCameraFromJSObject(p, ba.ctx)
 }
 
@@ -432,7 +433,7 @@ func (w *WebXRCamera) OnCollide(onCollide func()) *WebXRCamera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera#oncollide
 func (w *WebXRCamera) SetOnCollide(onCollide func()) *WebXRCamera {
-	p := ba.ctx.Get("WebXRCamera").New(onCollide)
+	p := ba.ctx.Get("WebXRCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return WebXRCameraFromJSObject(p, ba.ctx)
 }
 

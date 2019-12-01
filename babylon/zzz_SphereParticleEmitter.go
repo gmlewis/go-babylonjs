@@ -28,6 +28,15 @@ func SphereParticleEmitterFromJSObject(p js.Value, ctx js.Value) *SphereParticle
 	return &SphereParticleEmitter{p: p, ctx: ctx}
 }
 
+// SphereParticleEmitterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SphereParticleEmitterArrayToJSArray(array []*SphereParticleEmitter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSphereParticleEmitterOpts contains optional parameters for NewSphereParticleEmitter.
 type NewSphereParticleEmitterOpts struct {
 	Radius              *float64
@@ -82,9 +91,7 @@ func (s *SphereParticleEmitter) ApplyToShader(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#clone
 func (s *SphereParticleEmitter) Clone() *SphereParticleEmitter {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("clone", args...)
+	retVal := s.p.Call("clone")
 	return SphereParticleEmitterFromJSObject(retVal, s.ctx)
 }
 
@@ -93,9 +100,7 @@ func (s *SphereParticleEmitter) Clone() *SphereParticleEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#getclassname
 func (s *SphereParticleEmitter) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -104,9 +109,7 @@ func (s *SphereParticleEmitter) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#geteffectdefines
 func (s *SphereParticleEmitter) GetEffectDefines() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEffectDefines", args...)
+	retVal := s.p.Call("getEffectDefines")
 	return retVal.String()
 }
 
@@ -127,9 +130,7 @@ func (s *SphereParticleEmitter) Parse(serializationObject interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#serialize
 func (s *SphereParticleEmitter) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

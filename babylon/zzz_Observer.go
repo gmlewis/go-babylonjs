@@ -27,6 +27,15 @@ func ObserverFromJSObject(p js.Value, ctx js.Value) *Observer {
 	return &Observer{p: p, ctx: ctx}
 }
 
+// ObserverArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ObserverArrayToJSArray(array []*Observer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewObserverOpts contains optional parameters for NewObserver.
 type NewObserverOpts struct {
 	Scope *interface{}
@@ -42,7 +51,7 @@ func (ba *Babylon) NewObserver(callback func(), mask float64, opts *NewObserverO
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 	args = append(args, mask)
 
 	if opts.Scope == nil {
@@ -61,7 +70,7 @@ func (ba *Babylon) NewObserver(callback func(), mask float64, opts *NewObserverO
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#callback
 func (o *Observer) Callback(callback func()) *Observer {
-	p := ba.ctx.Get("Observer").New(callback)
+	p := ba.ctx.Get("Observer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {callback(); return nil}))
 	return ObserverFromJSObject(p, ba.ctx)
 }
 
@@ -69,7 +78,7 @@ func (o *Observer) Callback(callback func()) *Observer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#callback
 func (o *Observer) SetCallback(callback func()) *Observer {
-	p := ba.ctx.Get("Observer").New(callback)
+	p := ba.ctx.Get("Observer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {callback(); return nil}))
 	return ObserverFromJSObject(p, ba.ctx)
 }
 

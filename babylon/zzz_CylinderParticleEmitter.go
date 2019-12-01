@@ -28,6 +28,15 @@ func CylinderParticleEmitterFromJSObject(p js.Value, ctx js.Value) *CylinderPart
 	return &CylinderParticleEmitter{p: p, ctx: ctx}
 }
 
+// CylinderParticleEmitterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CylinderParticleEmitterArrayToJSArray(array []*CylinderParticleEmitter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCylinderParticleEmitterOpts contains optional parameters for NewCylinderParticleEmitter.
 type NewCylinderParticleEmitterOpts struct {
 	Radius              *float64
@@ -88,9 +97,7 @@ func (c *CylinderParticleEmitter) ApplyToShader(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#clone
 func (c *CylinderParticleEmitter) Clone() *CylinderParticleEmitter {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("clone", args...)
+	retVal := c.p.Call("clone")
 	return CylinderParticleEmitterFromJSObject(retVal, c.ctx)
 }
 
@@ -99,9 +106,7 @@ func (c *CylinderParticleEmitter) Clone() *CylinderParticleEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#getclassname
 func (c *CylinderParticleEmitter) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -110,9 +115,7 @@ func (c *CylinderParticleEmitter) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#geteffectdefines
 func (c *CylinderParticleEmitter) GetEffectDefines() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffectDefines", args...)
+	retVal := c.p.Call("getEffectDefines")
 	return retVal.String()
 }
 
@@ -133,9 +136,7 @@ func (c *CylinderParticleEmitter) Parse(serializationObject interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#serialize
 func (c *CylinderParticleEmitter) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 

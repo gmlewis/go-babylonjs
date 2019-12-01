@@ -27,6 +27,15 @@ func VertexOutputBlockFromJSObject(p js.Value, ctx js.Value) *VertexOutputBlock 
 	return &VertexOutputBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VertexOutputBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VertexOutputBlockArrayToJSArray(array []*VertexOutputBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVertexOutputBlock returns a new VertexOutputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexoutputblock
@@ -152,9 +161,7 @@ func (v *VertexOutputBlock) ConnectTo(other *NodeMaterialBlock, opts *VertexOutp
 // https://doc.babylonjs.com/api/classes/babylon.vertexoutputblock#dispose
 func (v *VertexOutputBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the VertexOutputBlock object.
@@ -162,9 +169,7 @@ func (v *VertexOutputBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.vertexoutputblock#getclassname
 func (v *VertexOutputBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (v *VertexOutputBlock) ReplaceRepeatableContent(vertexShaderState *NodeMate
 // https://doc.babylonjs.com/api/classes/babylon.vertexoutputblock#serialize
 func (v *VertexOutputBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("serialize", args...)
+	retVal := v.p.Call("serialize")
 	return retVal
 }
 

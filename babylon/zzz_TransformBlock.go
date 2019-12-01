@@ -27,6 +27,15 @@ func TransformBlockFromJSObject(p js.Value, ctx js.Value) *TransformBlock {
 	return &TransformBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// TransformBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TransformBlockArrayToJSArray(array []*TransformBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTransformBlock returns a new TransformBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock
@@ -152,9 +161,7 @@ func (t *TransformBlock) ConnectTo(other *NodeMaterialBlock, opts *TransformBloc
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#dispose
 func (t *TransformBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("dispose", args...)
+	t.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the TransformBlock object.
@@ -162,9 +169,7 @@ func (t *TransformBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#getclassname
 func (t *TransformBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getClassName", args...)
+	retVal := t.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (t *TransformBlock) ReplaceRepeatableContent(vertexShaderState *NodeMateria
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#serialize
 func (t *TransformBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("serialize", args...)
+	retVal := t.p.Call("serialize")
 	return retVal
 }
 

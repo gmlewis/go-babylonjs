@@ -27,6 +27,15 @@ func StackPanelFromJSObject(p js.Value, ctx js.Value) *StackPanel {
 	return &StackPanel{Container: ContainerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StackPanelArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StackPanelArrayToJSArray(array []*StackPanel) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStackPanelOpts contains optional parameters for NewStackPanel.
 type NewStackPanelOpts struct {
 	Name *string
@@ -70,9 +79,7 @@ func (s *StackPanel) AddControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#clearcontrols
 func (s *StackPanel) ClearControls() *Container {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("clearControls", args...)
+	retVal := s.p.Call("clearControls")
 	return ContainerFromJSObject(retVal, s.ctx)
 }
 
@@ -108,9 +115,7 @@ func (s *StackPanel) ContainsControl(control *Control) bool {
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#dispose
 func (s *StackPanel) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the StackPanel object.
@@ -158,9 +163,7 @@ func (s *StackPanel) GetChildByType(name string, jsType string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#getclassname
 func (s *StackPanel) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -323,9 +326,7 @@ func (s *StackPanel) RemoveControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#_flagdescendantsasmatrixdirty
 func (s *StackPanel) _flagDescendantsAsMatrixDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("_flagDescendantsAsMatrixDirty", args...)
+	s.p.Call("_flagDescendantsAsMatrixDirty")
 }
 
 /*

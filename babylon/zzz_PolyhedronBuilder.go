@@ -27,6 +27,15 @@ func PolyhedronBuilderFromJSObject(p js.Value, ctx js.Value) *PolyhedronBuilder 
 	return &PolyhedronBuilder{p: p, ctx: ctx}
 }
 
+// PolyhedronBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PolyhedronBuilderArrayToJSArray(array []*PolyhedronBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // PolyhedronBuilderCreatePolyhedronOpts contains optional parameters for PolyhedronBuilder.CreatePolyhedron.
 type PolyhedronBuilderCreatePolyhedronOpts struct {
 	Scene *Scene

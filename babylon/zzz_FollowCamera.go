@@ -30,6 +30,15 @@ func FollowCameraFromJSObject(p js.Value, ctx js.Value) *FollowCamera {
 	return &FollowCamera{TargetCamera: TargetCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FollowCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FollowCameraArrayToJSArray(array []*FollowCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFollowCameraOpts contains optional parameters for NewFollowCamera.
 type NewFollowCameraOpts struct {
 	LockedTarget *AbstractMesh
@@ -102,9 +111,7 @@ func (f *FollowCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#getclassname
 func (f *FollowCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -126,9 +133,7 @@ func (f *FollowCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#gettarget
 func (f *FollowCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getTarget", args...)
+	retVal := f.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, f.ctx)
 }
 
@@ -149,9 +154,7 @@ func (f *FollowCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#storestate
 func (f *FollowCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("storeState", args...)
+	retVal := f.p.Call("storeState")
 	return CameraFromJSObject(retVal, f.ctx)
 }
 

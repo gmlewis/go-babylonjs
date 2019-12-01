@@ -29,28 +29,37 @@ func EnvironmentTextureToolsFromJSObject(p js.Value, ctx js.Value) *EnvironmentT
 	return &EnvironmentTextureTools{p: p, ctx: ctx}
 }
 
+// EnvironmentTextureToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EnvironmentTextureToolsArrayToJSArray(array []*EnvironmentTextureTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CreateEnvTextureAsync calls the CreateEnvTextureAsync method on the EnvironmentTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#createenvtextureasync
-func (e *EnvironmentTextureTools) CreateEnvTextureAsync(texture *CubeTexture) js.Value {
+func (e *EnvironmentTextureTools) CreateEnvTextureAsync(texture *CubeTexture) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, texture.JSObject())
 
 	retVal := e.p.Call("CreateEnvTextureAsync", args...)
-	return retVal
+	return PromiseFromJSObject(retVal, e.ctx)
 }
 
 // CreateImageDataArrayBufferViews calls the CreateImageDataArrayBufferViews method on the EnvironmentTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#createimagedataarraybufferviews
-func (e *EnvironmentTextureTools) CreateImageDataArrayBufferViews(arrayBuffer interface{}, info *EnvironmentTextureInfo) js.Value {
+func (e *EnvironmentTextureTools) CreateImageDataArrayBufferViews(arrayBuffer interface{}, info js.Value) []*[]ArrayBufferView {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, arrayBuffer)
-	args = append(args, info.JSObject())
+	args = append(args, info)
 
 	retVal := e.p.Call("CreateImageDataArrayBufferViews", args...)
 	return retVal
@@ -59,39 +68,40 @@ func (e *EnvironmentTextureTools) CreateImageDataArrayBufferViews(arrayBuffer in
 // GetEnvInfo calls the GetEnvInfo method on the EnvironmentTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#getenvinfo
-func (e *EnvironmentTextureTools) GetEnvInfo(data js.Value) *EnvironmentTextureInfo {
+func (e *EnvironmentTextureTools) GetEnvInfo(data js.Value) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, data)
 
 	retVal := e.p.Call("GetEnvInfo", args...)
-	return EnvironmentTextureInfoFromJSObject(retVal, e.ctx)
+	return retVal
 }
 
 // UploadEnvLevelsAsync calls the UploadEnvLevelsAsync method on the EnvironmentTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#uploadenvlevelsasync
-func (e *EnvironmentTextureTools) UploadEnvLevelsAsync(texture *InternalTexture, arrayBuffer interface{}, info *EnvironmentTextureInfo) {
+func (e *EnvironmentTextureTools) UploadEnvLevelsAsync(texture *InternalTexture, arrayBuffer interface{}, info js.Value) *Promise {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, texture.JSObject())
 	args = append(args, arrayBuffer)
-	args = append(args, info.JSObject())
+	args = append(args, info)
 
-	e.p.Call("UploadEnvLevelsAsync", args...)
+	retVal := e.p.Call("UploadEnvLevelsAsync", args...)
+	return PromiseFromJSObject(retVal, e.ctx)
 }
 
 // UploadEnvSpherical calls the UploadEnvSpherical method on the EnvironmentTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#uploadenvspherical
-func (e *EnvironmentTextureTools) UploadEnvSpherical(texture *InternalTexture, info *EnvironmentTextureInfo) {
+func (e *EnvironmentTextureTools) UploadEnvSpherical(texture *InternalTexture, info js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, texture.JSObject())
-	args = append(args, info.JSObject())
+	args = append(args, info)
 
 	e.p.Call("UploadEnvSpherical", args...)
 }
@@ -99,14 +109,15 @@ func (e *EnvironmentTextureTools) UploadEnvSpherical(texture *InternalTexture, i
 // UploadLevelsAsync calls the UploadLevelsAsync method on the EnvironmentTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#uploadlevelsasync
-func (e *EnvironmentTextureTools) UploadLevelsAsync(texture *InternalTexture, imageData js.Value) {
+func (e *EnvironmentTextureTools) UploadLevelsAsync(texture *InternalTexture, imageData js.Value) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, texture.JSObject())
 	args = append(args, imageData)
 
-	e.p.Call("UploadLevelsAsync", args...)
+	retVal := e.p.Call("UploadLevelsAsync", args...)
+	return PromiseFromJSObject(retVal, e.ctx)
 }
 
 /*

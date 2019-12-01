@@ -27,6 +27,15 @@ func HDRToolsFromJSObject(p js.Value, ctx js.Value) *HDRTools {
 	return &HDRTools{p: p, ctx: ctx}
 }
 
+// HDRToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HDRToolsArrayToJSArray(array []*HDRTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // GetCubeMapTextureData calls the GetCubeMapTextureData method on the HDRTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrtools#getcubemaptexturedata
@@ -44,25 +53,25 @@ func (h *HDRTools) GetCubeMapTextureData(buffer js.Value, size float64) js.Value
 // RGBE_ReadHeader calls the RGBE_ReadHeader method on the HDRTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrtools#rgbe_readheader
-func (h *HDRTools) RGBE_ReadHeader(uint8array js.Value) *HDRInfo {
+func (h *HDRTools) RGBE_ReadHeader(uint8array js.Value) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, uint8array)
 
 	retVal := h.p.Call("RGBE_ReadHeader", args...)
-	return HDRInfoFromJSObject(retVal, h.ctx)
+	return retVal
 }
 
 // RGBE_ReadPixels calls the RGBE_ReadPixels method on the HDRTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrtools#rgbe_readpixels
-func (h *HDRTools) RGBE_ReadPixels(uint8array js.Value, hdrInfo *HDRInfo) js.Value {
+func (h *HDRTools) RGBE_ReadPixels(uint8array js.Value, hdrInfo js.Value) js.Value {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uint8array)
-	args = append(args, hdrInfo.JSObject())
+	args = append(args, hdrInfo)
 
 	retVal := h.p.Call("RGBE_ReadPixels", args...)
 	return retVal

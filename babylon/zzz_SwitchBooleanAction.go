@@ -29,6 +29,15 @@ func SwitchBooleanActionFromJSObject(p js.Value, ctx js.Value) *SwitchBooleanAct
 	return &SwitchBooleanAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SwitchBooleanActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SwitchBooleanActionArrayToJSArray(array []*SwitchBooleanAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSwitchBooleanActionOpts contains optional parameters for NewSwitchBooleanAction.
 type NewSwitchBooleanActionOpts struct {
 	Condition *Condition
@@ -63,9 +72,7 @@ func (ba *Babylon) NewSwitchBooleanAction(triggerOptions interface{}, target int
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#execute
 func (s *SwitchBooleanAction) Execute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("execute", args...)
+	s.p.Call("execute")
 }
 
 // GetTriggerParameter calls the GetTriggerParameter method on the SwitchBooleanAction object.
@@ -73,9 +80,7 @@ func (s *SwitchBooleanAction) Execute() {
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#gettriggerparameter
 func (s *SwitchBooleanAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTriggerParameter", args...)
+	retVal := s.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -97,9 +102,7 @@ func (s *SwitchBooleanAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#skiptonextactiveaction
 func (s *SwitchBooleanAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("skipToNextActiveAction", args...)
+	s.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the SwitchBooleanAction object.

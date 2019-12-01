@@ -30,6 +30,15 @@ func AudioEngineFromJSObject(p js.Value, ctx js.Value) *AudioEngine {
 	return &AudioEngine{p: p, ctx: ctx}
 }
 
+// AudioEngineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AudioEngineArrayToJSArray(array []*AudioEngine) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAudioEngineOpts contains optional parameters for NewAudioEngine.
 type NewAudioEngineOpts struct {
 	HostElement js.Value
@@ -72,9 +81,7 @@ func (a *AudioEngine) ConnectToAnalyser(analyser *Analyser) {
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#dispose
 func (a *AudioEngine) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // GetGlobalVolume calls the GetGlobalVolume method on the AudioEngine object.
@@ -82,9 +89,7 @@ func (a *AudioEngine) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#getglobalvolume
 func (a *AudioEngine) GetGlobalVolume() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getGlobalVolume", args...)
+	retVal := a.p.Call("getGlobalVolume")
 	return retVal.Float()
 }
 
@@ -93,9 +98,7 @@ func (a *AudioEngine) GetGlobalVolume() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#lock
 func (a *AudioEngine) Lock() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("lock", args...)
+	a.p.Call("lock")
 }
 
 // SetGlobalVolume calls the SetGlobalVolume method on the AudioEngine object.
@@ -115,9 +118,7 @@ func (a *AudioEngine) SetGlobalVolume(newVolume float64) {
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#unlock
 func (a *AudioEngine) Unlock() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("unlock", args...)
+	a.p.Call("unlock")
 }
 
 /*

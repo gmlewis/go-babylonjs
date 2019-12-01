@@ -27,6 +27,15 @@ func RemapBlockFromJSObject(p js.Value, ctx js.Value) *RemapBlock {
 	return &RemapBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RemapBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RemapBlockArrayToJSArray(array []*RemapBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRemapBlock returns a new RemapBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock
@@ -152,9 +161,7 @@ func (r *RemapBlock) ConnectTo(other *NodeMaterialBlock, opts *RemapBlockConnect
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#dispose
 func (r *RemapBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the RemapBlock object.
@@ -162,9 +169,7 @@ func (r *RemapBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#getclassname
 func (r *RemapBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (r *RemapBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBui
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#serialize
 func (r *RemapBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 

@@ -27,6 +27,15 @@ func LightGizmoFromJSObject(p js.Value, ctx js.Value) *LightGizmo {
 	return &LightGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
+// LightGizmoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LightGizmoArrayToJSArray(array []*LightGizmo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLightGizmoOpts contains optional parameters for NewLightGizmo.
 type NewLightGizmoOpts struct {
 	GizmoLayer *UtilityLayerRenderer
@@ -57,9 +66,7 @@ func (ba *Babylon) NewLightGizmo(opts *NewLightGizmoOpts) *LightGizmo {
 // https://doc.babylonjs.com/api/classes/babylon.lightgizmo#dispose
 func (l *LightGizmo) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("dispose", args...)
+	l.p.Call("dispose")
 }
 
 // SetCustomMesh calls the SetCustomMesh method on the LightGizmo object.

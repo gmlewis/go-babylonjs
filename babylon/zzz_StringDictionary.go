@@ -29,6 +29,15 @@ func StringDictionaryFromJSObject(p js.Value, ctx js.Value) *StringDictionary {
 	return &StringDictionary{p: p, ctx: ctx}
 }
 
+// StringDictionaryArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StringDictionaryArrayToJSArray(array []*StringDictionary) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Add calls the Add method on the StringDictionary object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stringdictionary#add
@@ -48,9 +57,7 @@ func (s *StringDictionary) Add(key string, value *T) bool {
 // https://doc.babylonjs.com/api/classes/babylon.stringdictionary#clear
 func (s *StringDictionary) Clear() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("clear", args...)
+	s.p.Call("clear")
 }
 
 // Contains calls the Contains method on the StringDictionary object.
@@ -85,7 +92,7 @@ func (s *StringDictionary) ForEach(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	s.p.Call("forEach", args...)
 }
@@ -138,7 +145,7 @@ func (s *StringDictionary) GetOrAddWithFactory(key string, factory func()) *T {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, key)
-	args = append(args, factory)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { factory(); return nil }))
 
 	retVal := s.p.Call("getOrAddWithFactory", args...)
 	return TFromJSObject(retVal, s.ctx)

@@ -30,6 +30,15 @@ func LayerFromJSObject(p js.Value, ctx js.Value) *Layer {
 	return &Layer{p: p, ctx: ctx}
 }
 
+// LayerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LayerArrayToJSArray(array []*Layer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLayerOpts contains optional parameters for NewLayer.
 type NewLayerOpts struct {
 	IsBackground *bool
@@ -70,9 +79,7 @@ func (ba *Babylon) NewLayer(name string, imgUrl string, scene *Scene, opts *NewL
 // https://doc.babylonjs.com/api/classes/babylon.layer#dispose
 func (l *Layer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("dispose", args...)
+	l.p.Call("dispose")
 }
 
 // Render calls the Render method on the Layer object.
@@ -80,9 +87,7 @@ func (l *Layer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.layer#render
 func (l *Layer) Render() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("render", args...)
+	l.p.Call("render")
 }
 
 /*
@@ -203,7 +208,7 @@ func (l *Layer) SetOffset(offset *Vector2) *Layer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#onafterrender
 func (l *Layer) OnAfterRender(onAfterRender func()) *Layer {
-	p := ba.ctx.Get("Layer").New(onAfterRender)
+	p := ba.ctx.Get("Layer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return LayerFromJSObject(p, ba.ctx)
 }
 
@@ -211,7 +216,7 @@ func (l *Layer) OnAfterRender(onAfterRender func()) *Layer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#onafterrender
 func (l *Layer) SetOnAfterRender(onAfterRender func()) *Layer {
-	p := ba.ctx.Get("Layer").New(onAfterRender)
+	p := ba.ctx.Get("Layer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return LayerFromJSObject(p, ba.ctx)
 }
 
@@ -235,7 +240,7 @@ func (l *Layer) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#onbeforerender
 func (l *Layer) OnBeforeRender(onBeforeRender func()) *Layer {
-	p := ba.ctx.Get("Layer").New(onBeforeRender)
+	p := ba.ctx.Get("Layer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return LayerFromJSObject(p, ba.ctx)
 }
 
@@ -243,7 +248,7 @@ func (l *Layer) OnBeforeRender(onBeforeRender func()) *Layer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#onbeforerender
 func (l *Layer) SetOnBeforeRender(onBeforeRender func()) *Layer {
-	p := ba.ctx.Get("Layer").New(onBeforeRender)
+	p := ba.ctx.Get("Layer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return LayerFromJSObject(p, ba.ctx)
 }
 
@@ -267,7 +272,7 @@ func (l *Layer) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#ondispose
 func (l *Layer) OnDispose(onDispose func()) *Layer {
-	p := ba.ctx.Get("Layer").New(onDispose)
+	p := ba.ctx.Get("Layer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return LayerFromJSObject(p, ba.ctx)
 }
 
@@ -275,7 +280,7 @@ func (l *Layer) OnDispose(onDispose func()) *Layer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#ondispose
 func (l *Layer) SetOnDispose(onDispose func()) *Layer {
-	p := ba.ctx.Get("Layer").New(onDispose)
+	p := ba.ctx.Get("Layer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return LayerFromJSObject(p, ba.ctx)
 }
 

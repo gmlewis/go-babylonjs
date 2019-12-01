@@ -29,6 +29,15 @@ func StereoscopicArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *Stereosc
 	return &StereoscopicArcRotateCamera{ArcRotateCamera: ArcRotateCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StereoscopicArcRotateCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StereoscopicArcRotateCameraArrayToJSArray(array []*StereoscopicArcRotateCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStereoscopicArcRotateCamera returns a new StereoscopicArcRotateCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera
@@ -118,9 +127,7 @@ func (s *StereoscopicArcRotateCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#dispose
 func (s *StereoscopicArcRotateCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // StereoscopicArcRotateCameraFocusOnOpts contains optional parameters for StereoscopicArcRotateCamera.FocusOn.
@@ -154,9 +161,7 @@ func (s *StereoscopicArcRotateCamera) FocusOn(meshesOrMinMaxVectorAndDistance *A
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#getclassname
 func (s *StereoscopicArcRotateCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -178,9 +183,7 @@ func (s *StereoscopicArcRotateCamera) GetFrontPosition(distance float64) *Vector
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#gettarget
 func (s *StereoscopicArcRotateCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTarget", args...)
+	retVal := s.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, s.ctx)
 }
 
@@ -189,9 +192,7 @@ func (s *StereoscopicArcRotateCamera) GetTarget() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#rebuildanglesandradius
 func (s *StereoscopicArcRotateCamera) RebuildAnglesAndRadius() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("rebuildAnglesAndRadius", args...)
+	s.p.Call("rebuildAnglesAndRadius")
 }
 
 // SetMatUp calls the SetMatUp method on the StereoscopicArcRotateCamera object.
@@ -199,9 +200,7 @@ func (s *StereoscopicArcRotateCamera) RebuildAnglesAndRadius() {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#setmatup
 func (s *StereoscopicArcRotateCamera) SetMatUp() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("setMatUp", args...)
+	s.p.Call("setMatUp")
 }
 
 // SetPosition calls the SetPosition method on the StereoscopicArcRotateCamera object.
@@ -253,9 +252,7 @@ func (s *StereoscopicArcRotateCamera) SetTarget(target *AbstractMesh, opts *Ster
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#storestate
 func (s *StereoscopicArcRotateCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("storeState", args...)
+	retVal := s.p.Call("storeState")
 	return CameraFromJSObject(retVal, s.ctx)
 }
 
@@ -727,7 +724,7 @@ func (s *StereoscopicArcRotateCamera) SetNoRotationConstraint(noRotationConstrai
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#oncollide
 func (s *StereoscopicArcRotateCamera) OnCollide(onCollide func()) *StereoscopicArcRotateCamera {
-	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(onCollide)
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
@@ -735,7 +732,7 @@ func (s *StereoscopicArcRotateCamera) OnCollide(onCollide func()) *StereoscopicA
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#oncollide
 func (s *StereoscopicArcRotateCamera) SetOnCollide(onCollide func()) *StereoscopicArcRotateCamera {
-	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(onCollide)
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
 }
 

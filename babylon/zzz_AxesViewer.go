@@ -27,6 +27,15 @@ func AxesViewerFromJSObject(p js.Value, ctx js.Value) *AxesViewer {
 	return &AxesViewer{p: p, ctx: ctx}
 }
 
+// AxesViewerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AxesViewerArrayToJSArray(array []*AxesViewer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAxesViewerOpts contains optional parameters for NewAxesViewer.
 type NewAxesViewerOpts struct {
 	ScaleLines       *float64
@@ -83,9 +92,7 @@ func (ba *Babylon) NewAxesViewer(scene *Scene, opts *NewAxesViewerOpts) *AxesVie
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#createinstance
 func (a *AxesViewer) CreateInstance() *AxesViewer {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("createInstance", args...)
+	retVal := a.p.Call("createInstance")
 	return AxesViewerFromJSObject(retVal, a.ctx)
 }
 
@@ -94,9 +101,7 @@ func (a *AxesViewer) CreateInstance() *AxesViewer {
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#dispose
 func (a *AxesViewer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // Update calls the Update method on the AxesViewer object.

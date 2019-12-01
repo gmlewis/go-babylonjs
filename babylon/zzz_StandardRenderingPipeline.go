@@ -30,6 +30,15 @@ func StandardRenderingPipelineFromJSObject(p js.Value, ctx js.Value) *StandardRe
 	return &StandardRenderingPipeline{PostProcessRenderPipeline: PostProcessRenderPipelineFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StandardRenderingPipelineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StandardRenderingPipelineArrayToJSArray(array []*StandardRenderingPipeline) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStandardRenderingPipelineOpts contains optional parameters for NewStandardRenderingPipeline.
 type NewStandardRenderingPipelineOpts struct {
 	OriginalPostProcess *PostProcess
@@ -82,9 +91,7 @@ func (s *StandardRenderingPipeline) AddEffect(renderEffect *PostProcessRenderEff
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#dispose
 func (s *StandardRenderingPipeline) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the StandardRenderingPipeline object.
@@ -92,9 +99,7 @@ func (s *StandardRenderingPipeline) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#getclassname
 func (s *StandardRenderingPipeline) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -118,9 +123,7 @@ func (s *StandardRenderingPipeline) Parse(source interface{}, scene *Scene, root
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#serialize
 func (s *StandardRenderingPipeline) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

@@ -28,6 +28,15 @@ func PointParticleEmitterFromJSObject(p js.Value, ctx js.Value) *PointParticleEm
 	return &PointParticleEmitter{p: p, ctx: ctx}
 }
 
+// PointParticleEmitterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PointParticleEmitterArrayToJSArray(array []*PointParticleEmitter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPointParticleEmitter returns a new PointParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter
@@ -56,9 +65,7 @@ func (p *PointParticleEmitter) ApplyToShader(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter#clone
 func (p *PointParticleEmitter) Clone() *PointParticleEmitter {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("clone", args...)
+	retVal := p.p.Call("clone")
 	return PointParticleEmitterFromJSObject(retVal, p.ctx)
 }
 
@@ -67,9 +74,7 @@ func (p *PointParticleEmitter) Clone() *PointParticleEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter#getclassname
 func (p *PointParticleEmitter) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -78,9 +83,7 @@ func (p *PointParticleEmitter) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter#geteffectdefines
 func (p *PointParticleEmitter) GetEffectDefines() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEffectDefines", args...)
+	retVal := p.p.Call("getEffectDefines")
 	return retVal.String()
 }
 
@@ -101,9 +104,7 @@ func (p *PointParticleEmitter) Parse(serializationObject interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter#serialize
 func (p *PointParticleEmitter) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 

@@ -27,6 +27,15 @@ func ColorPickerFromJSObject(p js.Value, ctx js.Value) *ColorPicker {
 	return &ColorPicker{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ColorPickerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ColorPickerArrayToJSArray(array []*ColorPicker) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewColorPickerOpts contains optional parameters for NewColorPicker.
 type NewColorPickerOpts struct {
 	Name *string
@@ -71,9 +80,7 @@ func (c *ColorPicker) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#dispose
 func (c *ColorPicker) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the ColorPicker object.
@@ -94,9 +101,7 @@ func (c *ColorPicker) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#getclassname
 func (c *ColorPicker) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -244,7 +249,7 @@ func (c *ColorPicker) MoveToVector3(position *Vector3, scene *Scene) {
 // ShowPickerDialogAsync calls the ShowPickerDialogAsync method on the ColorPicker object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#showpickerdialogasync
-func (c *ColorPicker) ShowPickerDialogAsync(advancedTexture *AdvancedDynamicTexture, options js.Value) js.Value {
+func (c *ColorPicker) ShowPickerDialogAsync(advancedTexture *AdvancedDynamicTexture, options js.Value) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -252,7 +257,7 @@ func (c *ColorPicker) ShowPickerDialogAsync(advancedTexture *AdvancedDynamicText
 	args = append(args, options)
 
 	retVal := c.p.Call("ShowPickerDialogAsync", args...)
-	return retVal
+	return PromiseFromJSObject(retVal, c.ctx)
 }
 
 // _onPointerDown calls the _onPointerDown method on the ColorPicker object.

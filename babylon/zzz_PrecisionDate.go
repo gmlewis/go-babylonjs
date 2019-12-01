@@ -27,6 +27,15 @@ func PrecisionDateFromJSObject(p js.Value, ctx js.Value) *PrecisionDate {
 	return &PrecisionDate{p: p, ctx: ctx}
 }
 
+// PrecisionDateArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PrecisionDateArrayToJSArray(array []*PrecisionDate) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Now returns the Now property of class PrecisionDate.

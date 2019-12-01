@@ -27,6 +27,15 @@ func WaveBlockFromJSObject(p js.Value, ctx js.Value) *WaveBlock {
 	return &WaveBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// WaveBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WaveBlockArrayToJSArray(array []*WaveBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWaveBlock returns a new WaveBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.waveblock
@@ -152,9 +161,7 @@ func (w *WaveBlock) ConnectTo(other *NodeMaterialBlock, opts *WaveBlockConnectTo
 // https://doc.babylonjs.com/api/classes/babylon.waveblock#dispose
 func (w *WaveBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the WaveBlock object.
@@ -162,9 +169,7 @@ func (w *WaveBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.waveblock#getclassname
 func (w *WaveBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getClassName", args...)
+	retVal := w.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (w *WaveBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuil
 // https://doc.babylonjs.com/api/classes/babylon.waveblock#serialize
 func (w *WaveBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("serialize", args...)
+	retVal := w.p.Call("serialize")
 	return retVal
 }
 

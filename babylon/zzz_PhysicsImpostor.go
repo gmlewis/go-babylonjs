@@ -29,29 +29,38 @@ func PhysicsImpostorFromJSObject(p js.Value, ctx js.Value) *PhysicsImpostor {
 	return &PhysicsImpostor{p: p, ctx: ctx}
 }
 
+// PhysicsImpostorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsImpostorArrayToJSArray(array []*PhysicsImpostor) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhysicsImpostorOpts contains optional parameters for NewPhysicsImpostor.
 type NewPhysicsImpostorOpts struct {
-	_options *PhysicsImpostorParameters
+	_options js.Value
 	_scene   *Scene
 }
 
 // NewPhysicsImpostor returns a new PhysicsImpostor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor
-func (ba *Babylon) NewPhysicsImpostor(object *IPhysicsEnabledObject, jsType float64, opts *NewPhysicsImpostorOpts) *PhysicsImpostor {
+func (ba *Babylon) NewPhysicsImpostor(object js.Value, jsType float64, opts *NewPhysicsImpostorOpts) *PhysicsImpostor {
 	if opts == nil {
 		opts = &NewPhysicsImpostorOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, object.JSObject())
+	args = append(args, object)
 	args = append(args, jsType)
 
 	if opts._options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts._options.JSObject())
+		args = append(args, opts._options)
 	}
 	if opts._scene == nil {
 		args = append(args, js.Undefined())
@@ -141,11 +150,11 @@ func (p *PhysicsImpostor) ApplyImpulse(force *Vector3, contactPoint *Vector3) *P
 // Clone calls the Clone method on the PhysicsImpostor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#clone
-func (p *PhysicsImpostor) Clone(newObject *IPhysicsEnabledObject) *PhysicsImpostor {
+func (p *PhysicsImpostor) Clone(newObject js.Value) *PhysicsImpostor {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newObject.JSObject())
+	args = append(args, newObject)
 
 	retVal := p.p.Call("clone", args...)
 	return PhysicsImpostorFromJSObject(retVal, p.ctx)
@@ -154,13 +163,13 @@ func (p *PhysicsImpostor) Clone(newObject *IPhysicsEnabledObject) *PhysicsImpost
 // CreateJoint calls the CreateJoint method on the PhysicsImpostor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#createjoint
-func (p *PhysicsImpostor) CreateJoint(otherImpostor *PhysicsImpostor, jointType float64, jointData *PhysicsJointData) *PhysicsImpostor {
+func (p *PhysicsImpostor) CreateJoint(otherImpostor *PhysicsImpostor, jointType float64, jointData js.Value) *PhysicsImpostor {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, otherImpostor.JSObject())
 	args = append(args, jointType)
-	args = append(args, jointData.JSObject())
+	args = append(args, jointData)
 
 	retVal := p.p.Call("createJoint", args...)
 	return PhysicsImpostorFromJSObject(retVal, p.ctx)
@@ -171,9 +180,7 @@ func (p *PhysicsImpostor) CreateJoint(otherImpostor *PhysicsImpostor, jointType 
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#dispose
 func (p *PhysicsImpostor) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // ExecuteNativeFunction calls the ExecuteNativeFunction method on the PhysicsImpostor object.
@@ -183,7 +190,7 @@ func (p *PhysicsImpostor) ExecuteNativeFunction(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	p.p.Call("executeNativeFunction", args...)
 }
@@ -193,9 +200,7 @@ func (p *PhysicsImpostor) ExecuteNativeFunction(jsFunc func()) {
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#forceupdate
 func (p *PhysicsImpostor) ForceUpdate() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("forceUpdate", args...)
+	p.p.Call("forceUpdate")
 }
 
 // GetAngularVelocity calls the GetAngularVelocity method on the PhysicsImpostor object.
@@ -203,9 +208,7 @@ func (p *PhysicsImpostor) ForceUpdate() {
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#getangularvelocity
 func (p *PhysicsImpostor) GetAngularVelocity() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAngularVelocity", args...)
+	retVal := p.p.Call("getAngularVelocity")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -227,9 +230,7 @@ func (p *PhysicsImpostor) GetBoxSizeToRef(result *Vector3) *PhysicsImpostor {
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#getlinearvelocity
 func (p *PhysicsImpostor) GetLinearVelocity() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getLinearVelocity", args...)
+	retVal := p.p.Call("getLinearVelocity")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -238,9 +239,7 @@ func (p *PhysicsImpostor) GetLinearVelocity() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#getobjectcenter
 func (p *PhysicsImpostor) GetObjectCenter() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getObjectCenter", args...)
+	retVal := p.p.Call("getObjectCenter")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -249,9 +248,7 @@ func (p *PhysicsImpostor) GetObjectCenter() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#getobjectextendsize
 func (p *PhysicsImpostor) GetObjectExtendSize() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getObjectExtendSize", args...)
+	retVal := p.p.Call("getObjectExtendSize")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -273,9 +270,7 @@ func (p *PhysicsImpostor) GetParam(paramName string) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#getparentsrotation
 func (p *PhysicsImpostor) GetParentsRotation() *Quaternion {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getParentsRotation", args...)
+	retVal := p.p.Call("getParentsRotation")
 	return QuaternionFromJSObject(retVal, p.ctx)
 }
 
@@ -284,9 +279,7 @@ func (p *PhysicsImpostor) GetParentsRotation() *Quaternion {
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#getradius
 func (p *PhysicsImpostor) GetRadius() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getRadius", args...)
+	retVal := p.p.Call("getRadius")
 	return retVal.Float()
 }
 
@@ -295,9 +288,7 @@ func (p *PhysicsImpostor) GetRadius() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#isbodyinitrequired
 func (p *PhysicsImpostor) IsBodyInitRequired() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isBodyInitRequired", args...)
+	retVal := p.p.Call("isBodyInitRequired")
 	return retVal.Bool()
 }
 
@@ -308,7 +299,7 @@ func (p *PhysicsImpostor) RegisterAfterPhysicsStep(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	p.p.Call("registerAfterPhysicsStep", args...)
 }
@@ -320,7 +311,7 @@ func (p *PhysicsImpostor) RegisterBeforePhysicsStep(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	p.p.Call("registerBeforePhysicsStep", args...)
 }
@@ -328,12 +319,12 @@ func (p *PhysicsImpostor) RegisterBeforePhysicsStep(jsFunc func()) {
 // RegisterOnPhysicsCollide calls the RegisterOnPhysicsCollide method on the PhysicsImpostor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#registeronphysicscollide
-func (p *PhysicsImpostor) RegisterOnPhysicsCollide(collideAgainst *PhysicsImpostor, jsFunc *PhysicsImpostor) {
+func (p *PhysicsImpostor) RegisterOnPhysicsCollide(collideAgainst *PhysicsImpostor, jsFunc func()) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, collideAgainst.JSObject())
-	args = append(args, jsFunc.JSObject())
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	p.p.Call("registerOnPhysicsCollide", args...)
 }
@@ -343,9 +334,7 @@ func (p *PhysicsImpostor) RegisterOnPhysicsCollide(collideAgainst *PhysicsImpost
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#resetupdateflags
 func (p *PhysicsImpostor) ResetUpdateFlags() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("resetUpdateFlags", args...)
+	p.p.Call("resetUpdateFlags")
 }
 
 // SetAngularVelocity calls the SetAngularVelocity method on the PhysicsImpostor object.
@@ -426,9 +415,7 @@ func (p *PhysicsImpostor) SetParam(paramName string, value float64) {
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#setscalingupdated
 func (p *PhysicsImpostor) SetScalingUpdated() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("setScalingUpdated", args...)
+	p.p.Call("setScalingUpdated")
 }
 
 // Sleep calls the Sleep method on the PhysicsImpostor object.
@@ -436,9 +423,7 @@ func (p *PhysicsImpostor) SetScalingUpdated() {
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#sleep
 func (p *PhysicsImpostor) Sleep() *PhysicsImpostor {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("sleep", args...)
+	retVal := p.p.Call("sleep")
 	return PhysicsImpostorFromJSObject(retVal, p.ctx)
 }
 
@@ -523,7 +508,7 @@ func (p *PhysicsImpostor) UnregisterAfterPhysicsStep(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	p.p.Call("unregisterAfterPhysicsStep", args...)
 }
@@ -535,7 +520,7 @@ func (p *PhysicsImpostor) UnregisterBeforePhysicsStep(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	p.p.Call("unregisterBeforePhysicsStep", args...)
 }
@@ -543,12 +528,12 @@ func (p *PhysicsImpostor) UnregisterBeforePhysicsStep(jsFunc func()) {
 // UnregisterOnPhysicsCollide calls the UnregisterOnPhysicsCollide method on the PhysicsImpostor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#unregisteronphysicscollide
-func (p *PhysicsImpostor) UnregisterOnPhysicsCollide(collideAgainst *PhysicsImpostor, jsFunc *PhysicsImpostor) {
+func (p *PhysicsImpostor) UnregisterOnPhysicsCollide(collideAgainst *PhysicsImpostor, jsFunc func()) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, collideAgainst.JSObject())
-	args = append(args, jsFunc.JSObject())
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	p.p.Call("unregisterOnPhysicsCollide", args...)
 }
@@ -558,9 +543,7 @@ func (p *PhysicsImpostor) UnregisterOnPhysicsCollide(collideAgainst *PhysicsImpo
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#wakeup
 func (p *PhysicsImpostor) WakeUp() *PhysicsImpostor {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("wakeUp", args...)
+	retVal := p.p.Call("wakeUp")
 	return PhysicsImpostorFromJSObject(retVal, p.ctx)
 }
 
@@ -570,7 +553,7 @@ func (p *PhysicsImpostor) WakeUp() *PhysicsImpostor {
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#afterstep
 func (p *PhysicsImpostor) AfterStep(afterStep func()) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(afterStep)
+	p := ba.ctx.Get("PhysicsImpostor").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {afterStep(); return nil}))
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 
@@ -578,7 +561,7 @@ func (p *PhysicsImpostor) AfterStep(afterStep func()) *PhysicsImpostor {
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#afterstep
 func (p *PhysicsImpostor) SetAfterStep(afterStep func()) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(afterStep)
+	p := ba.ctx.Get("PhysicsImpostor").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {afterStep(); return nil}))
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 
@@ -586,7 +569,7 @@ func (p *PhysicsImpostor) SetAfterStep(afterStep func()) *PhysicsImpostor {
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#beforestep
 func (p *PhysicsImpostor) BeforeStep(beforeStep func()) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(beforeStep)
+	p := ba.ctx.Get("PhysicsImpostor").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {beforeStep(); return nil}))
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 
@@ -594,7 +577,7 @@ func (p *PhysicsImpostor) BeforeStep(beforeStep func()) *PhysicsImpostor {
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#beforestep
 func (p *PhysicsImpostor) SetBeforeStep(beforeStep func()) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(beforeStep)
+	p := ba.ctx.Get("PhysicsImpostor").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {beforeStep(); return nil}))
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 
@@ -825,16 +808,16 @@ func (p *PhysicsImpostor) SetNoImpostor(NoImpostor float64) *PhysicsImpostor {
 // Object returns the Object property of class PhysicsImpostor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#object
-func (p *PhysicsImpostor) Object(object *IPhysicsEnabledObject) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(object.JSObject())
+func (p *PhysicsImpostor) Object(object js.Value) *PhysicsImpostor {
+	p := ba.ctx.Get("PhysicsImpostor").New(object)
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 
 // SetObject sets the Object property of class PhysicsImpostor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#object
-func (p *PhysicsImpostor) SetObject(object *IPhysicsEnabledObject) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(object.JSObject())
+func (p *PhysicsImpostor) SetObject(object js.Value) *PhysicsImpostor {
+	p := ba.ctx.Get("PhysicsImpostor").New(object)
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 
@@ -842,7 +825,7 @@ func (p *PhysicsImpostor) SetObject(object *IPhysicsEnabledObject) *PhysicsImpos
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#oncollide
 func (p *PhysicsImpostor) OnCollide(onCollide func()) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(onCollide)
+	p := ba.ctx.Get("PhysicsImpostor").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 
@@ -850,7 +833,7 @@ func (p *PhysicsImpostor) OnCollide(onCollide func()) *PhysicsImpostor {
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#oncollide
 func (p *PhysicsImpostor) SetOnCollide(onCollide func()) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(onCollide)
+	p := ba.ctx.Get("PhysicsImpostor").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 
@@ -858,7 +841,7 @@ func (p *PhysicsImpostor) SetOnCollide(onCollide func()) *PhysicsImpostor {
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#oncollideevent
 func (p *PhysicsImpostor) OnCollideEvent(onCollideEvent func()) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(onCollideEvent)
+	p := ba.ctx.Get("PhysicsImpostor").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollideEvent(); return nil}))
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 
@@ -866,7 +849,7 @@ func (p *PhysicsImpostor) OnCollideEvent(onCollideEvent func()) *PhysicsImpostor
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#oncollideevent
 func (p *PhysicsImpostor) SetOnCollideEvent(onCollideEvent func()) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(onCollideEvent)
+	p := ba.ctx.Get("PhysicsImpostor").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollideEvent(); return nil}))
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 

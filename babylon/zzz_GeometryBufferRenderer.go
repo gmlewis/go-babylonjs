@@ -27,6 +27,15 @@ func GeometryBufferRendererFromJSObject(p js.Value, ctx js.Value) *GeometryBuffe
 	return &GeometryBufferRenderer{p: p, ctx: ctx}
 }
 
+// GeometryBufferRendererArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GeometryBufferRendererArrayToJSArray(array []*GeometryBufferRenderer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGeometryBufferRendererOpts contains optional parameters for NewGeometryBufferRenderer.
 type NewGeometryBufferRendererOpts struct {
 	Ratio *float64
@@ -59,9 +68,7 @@ func (ba *Babylon) NewGeometryBufferRenderer(scene *Scene, opts *NewGeometryBuff
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#dispose
 func (g *GeometryBufferRenderer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // GetGBuffer calls the GetGBuffer method on the GeometryBufferRenderer object.
@@ -69,9 +76,7 @@ func (g *GeometryBufferRenderer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#getgbuffer
 func (g *GeometryBufferRenderer) GetGBuffer() *MultiRenderTarget {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getGBuffer", args...)
+	retVal := g.p.Call("getGBuffer")
 	return MultiRenderTargetFromJSObject(retVal, g.ctx)
 }
 

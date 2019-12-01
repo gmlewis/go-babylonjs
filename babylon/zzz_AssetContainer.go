@@ -27,6 +27,15 @@ func AssetContainerFromJSObject(p js.Value, ctx js.Value) *AssetContainer {
 	return &AssetContainer{AbstractScene: AbstractSceneFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AssetContainerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AssetContainerArrayToJSArray(array []*AssetContainer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAssetContainer returns a new AssetContainer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer
@@ -45,9 +54,7 @@ func (ba *Babylon) NewAssetContainer(scene *Scene) *AssetContainer {
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#addalltoscene
 func (a *AssetContainer) AddAllToScene() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("addAllToScene", args...)
+	a.p.Call("addAllToScene")
 }
 
 // AddEffectLayer calls the AddEffectLayer method on the AssetContainer object.
@@ -117,9 +124,7 @@ func (a *AssetContainer) AddReflectionProbe(newReflectionProbe *ReflectionProbe)
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#createrootmesh
 func (a *AssetContainer) CreateRootMesh() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("createRootMesh", args...)
+	retVal := a.p.Call("createRootMesh")
 	return MeshFromJSObject(retVal, a.ctx)
 }
 
@@ -128,9 +133,7 @@ func (a *AssetContainer) CreateRootMesh() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#dispose
 func (a *AssetContainer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // GetGlowLayerByName calls the GetGlowLayerByName method on the AssetContainer object.
@@ -286,9 +289,7 @@ func (a *AssetContainer) Parse(jsonData interface{}, scene *Scene, container *As
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#removeallfromscene
 func (a *AssetContainer) RemoveAllFromScene() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("removeAllFromScene", args...)
+	a.p.Call("removeAllFromScene")
 }
 
 // RemoveEffectLayer calls the RemoveEffectLayer method on the AssetContainer object.
@@ -399,16 +400,16 @@ func (a *AssetContainer) SetCameras(cameras *Camera) *AssetContainer {
 // EffectLayers returns the EffectLayers property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#effectlayers
-func (a *AssetContainer) EffectLayers(effectLayers []EffectLayer) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(effectLayers.JSObject())
+func (a *AssetContainer) EffectLayers(effectLayers []*EffectLayer) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(effectLayers)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
 // SetEffectLayers sets the EffectLayers property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#effectlayers
-func (a *AssetContainer) SetEffectLayers(effectLayers []EffectLayer) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(effectLayers.JSObject())
+func (a *AssetContainer) SetEffectLayers(effectLayers []*EffectLayer) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(effectLayers)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
@@ -447,32 +448,32 @@ func (a *AssetContainer) SetGeometries(geometries *Geometry) *AssetContainer {
 // Layers returns the Layers property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#layers
-func (a *AssetContainer) Layers(layers []Layer) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(layers.JSObject())
+func (a *AssetContainer) Layers(layers []*Layer) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(layers)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
 // SetLayers sets the Layers property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#layers
-func (a *AssetContainer) SetLayers(layers []Layer) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(layers.JSObject())
+func (a *AssetContainer) SetLayers(layers []*Layer) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(layers)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
 // LensFlareSystems returns the LensFlareSystems property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#lensflaresystems
-func (a *AssetContainer) LensFlareSystems(lensFlareSystems []LensFlareSystem) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(lensFlareSystems.JSObject())
+func (a *AssetContainer) LensFlareSystems(lensFlareSystems []*LensFlareSystem) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(lensFlareSystems)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
 // SetLensFlareSystems sets the LensFlareSystems property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#lensflaresystems
-func (a *AssetContainer) SetLensFlareSystems(lensFlareSystems []LensFlareSystem) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(lensFlareSystems.JSObject())
+func (a *AssetContainer) SetLensFlareSystems(lensFlareSystems []*LensFlareSystem) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(lensFlareSystems)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
@@ -559,48 +560,48 @@ func (a *AssetContainer) SetMultiMaterials(multiMaterials *MultiMaterial) *Asset
 // ParticleSystems returns the ParticleSystems property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#particlesystems
-func (a *AssetContainer) ParticleSystems(particleSystems *IParticleSystem) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(particleSystems.JSObject())
+func (a *AssetContainer) ParticleSystems(particleSystems js.Value) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(particleSystems)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
 // SetParticleSystems sets the ParticleSystems property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#particlesystems
-func (a *AssetContainer) SetParticleSystems(particleSystems *IParticleSystem) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(particleSystems.JSObject())
+func (a *AssetContainer) SetParticleSystems(particleSystems js.Value) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(particleSystems)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
 // ProceduralTextures returns the ProceduralTextures property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#proceduraltextures
-func (a *AssetContainer) ProceduralTextures(proceduralTextures []ProceduralTexture) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(proceduralTextures.JSObject())
+func (a *AssetContainer) ProceduralTextures(proceduralTextures []*ProceduralTexture) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(proceduralTextures)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
 // SetProceduralTextures sets the ProceduralTextures property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#proceduraltextures
-func (a *AssetContainer) SetProceduralTextures(proceduralTextures []ProceduralTexture) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(proceduralTextures.JSObject())
+func (a *AssetContainer) SetProceduralTextures(proceduralTextures []*ProceduralTexture) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(proceduralTextures)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
 // ReflectionProbes returns the ReflectionProbes property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#reflectionprobes
-func (a *AssetContainer) ReflectionProbes(reflectionProbes []ReflectionProbe) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(reflectionProbes.JSObject())
+func (a *AssetContainer) ReflectionProbes(reflectionProbes []*ReflectionProbe) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(reflectionProbes)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
 // SetReflectionProbes sets the ReflectionProbes property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#reflectionprobes
-func (a *AssetContainer) SetReflectionProbes(reflectionProbes []ReflectionProbe) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(reflectionProbes.JSObject())
+func (a *AssetContainer) SetReflectionProbes(reflectionProbes []*ReflectionProbe) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(reflectionProbes)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
@@ -655,16 +656,16 @@ func (a *AssetContainer) SetSkeletons(skeletons *Skeleton) *AssetContainer {
 // Sounds returns the Sounds property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#sounds
-func (a *AssetContainer) Sounds(sounds []Sound) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(sounds.JSObject())
+func (a *AssetContainer) Sounds(sounds []*Sound) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(sounds)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 
 // SetSounds sets the Sounds property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#sounds
-func (a *AssetContainer) SetSounds(sounds []Sound) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(sounds.JSObject())
+func (a *AssetContainer) SetSounds(sounds []*Sound) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(sounds)
 	return AssetContainerFromJSObject(p, ba.ctx)
 }
 

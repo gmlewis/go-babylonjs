@@ -28,6 +28,15 @@ func EngineStoreFromJSObject(p js.Value, ctx js.Value) *EngineStore {
 	return &EngineStore{p: p, ctx: ctx}
 }
 
+// EngineStoreArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EngineStoreArrayToJSArray(array []*EngineStore) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // FallbackTexture returns the FallbackTexture property of class EngineStore.

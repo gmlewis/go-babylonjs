@@ -27,6 +27,15 @@ func DataReaderFromJSObject(p js.Value, ctx js.Value) *DataReader {
 	return &DataReader{p: p, ctx: ctx}
 }
 
+// DataReaderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DataReaderArrayToJSArray(array []*DataReader) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDataReader returns a new DataReader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.datareader
@@ -43,13 +52,14 @@ func (ba *Babylon) NewDataReader(buffer js.Value) *DataReader {
 // LoadAsync calls the LoadAsync method on the DataReader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.datareader#loadasync
-func (d *DataReader) LoadAsync(byteLength float64) {
+func (d *DataReader) LoadAsync(byteLength float64) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, byteLength)
 
-	d.p.Call("loadAsync", args...)
+	retVal := d.p.Call("loadAsync", args...)
+	return PromiseFromJSObject(retVal, d.ctx)
 }
 
 // ReadString calls the ReadString method on the DataReader object.
@@ -70,9 +80,7 @@ func (d *DataReader) ReadString(byteLength float64) string {
 // https://doc.babylonjs.com/api/classes/babylon.datareader#readuint32
 func (d *DataReader) ReadUint32() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("readUint32", args...)
+	retVal := d.p.Call("readUint32")
 	return retVal.Float()
 }
 

@@ -27,6 +27,15 @@ func DesaturateBlockFromJSObject(p js.Value, ctx js.Value) *DesaturateBlock {
 	return &DesaturateBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DesaturateBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DesaturateBlockArrayToJSArray(array []*DesaturateBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDesaturateBlock returns a new DesaturateBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock
@@ -152,9 +161,7 @@ func (d *DesaturateBlock) ConnectTo(other *NodeMaterialBlock, opts *DesaturateBl
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock#dispose
 func (d *DesaturateBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the DesaturateBlock object.
@@ -162,9 +169,7 @@ func (d *DesaturateBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock#getclassname
 func (d *DesaturateBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (d *DesaturateBlock) ReplaceRepeatableContent(vertexShaderState *NodeMateri
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock#serialize
 func (d *DesaturateBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("serialize", args...)
+	retVal := d.p.Call("serialize")
 	return retVal
 }
 

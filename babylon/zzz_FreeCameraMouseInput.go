@@ -29,6 +29,15 @@ func FreeCameraMouseInputFromJSObject(p js.Value, ctx js.Value) *FreeCameraMouse
 	return &FreeCameraMouseInput{p: p, ctx: ctx}
 }
 
+// FreeCameraMouseInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FreeCameraMouseInputArrayToJSArray(array []*FreeCameraMouseInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFreeCameraMouseInputOpts contains optional parameters for NewFreeCameraMouseInput.
 type NewFreeCameraMouseInputOpts struct {
 	TouchEnabled *bool
@@ -97,9 +106,7 @@ func (f *FreeCameraMouseInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#getclassname
 func (f *FreeCameraMouseInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -108,9 +115,7 @@ func (f *FreeCameraMouseInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#getsimplename
 func (f *FreeCameraMouseInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getSimpleName", args...)
+	retVal := f.p.Call("getSimpleName")
 	return retVal.String()
 }
 

@@ -27,6 +27,15 @@ func ImageScrollBarFromJSObject(p js.Value, ctx js.Value) *ImageScrollBar {
 	return &ImageScrollBar{BaseSlider: BaseSliderFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ImageScrollBarArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ImageScrollBarArrayToJSArray(array []*ImageScrollBar) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewImageScrollBarOpts contains optional parameters for NewImageScrollBar.
 type NewImageScrollBarOpts struct {
 	Name *string
@@ -71,9 +80,7 @@ func (i *ImageScrollBar) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#dispose
 func (i *ImageScrollBar) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("dispose", args...)
+	i.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the ImageScrollBar object.
@@ -94,9 +101,7 @@ func (i *ImageScrollBar) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#getclassname
 func (i *ImageScrollBar) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 

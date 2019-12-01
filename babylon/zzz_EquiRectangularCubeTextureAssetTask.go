@@ -27,6 +27,15 @@ func EquiRectangularCubeTextureAssetTaskFromJSObject(p js.Value, ctx js.Value) *
 	return &EquiRectangularCubeTextureAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
+// EquiRectangularCubeTextureAssetTaskArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EquiRectangularCubeTextureAssetTaskArrayToJSArray(array []*EquiRectangularCubeTextureAssetTask) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewEquiRectangularCubeTextureAssetTaskOpts contains optional parameters for NewEquiRectangularCubeTextureAssetTask.
 type NewEquiRectangularCubeTextureAssetTaskOpts struct {
 	NoMipmap   *bool
@@ -67,9 +76,7 @@ func (ba *Babylon) NewEquiRectangularCubeTextureAssetTask(name string, url strin
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#reset
 func (e *EquiRectangularCubeTextureAssetTask) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("reset", args...)
+	e.p.Call("reset")
 }
 
 // Run calls the Run method on the EquiRectangularCubeTextureAssetTask object.
@@ -80,8 +87,8 @@ func (e *EquiRectangularCubeTextureAssetTask) Run(scene *Scene, onSuccess func()
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	e.p.Call("run", args...)
 }
@@ -94,8 +101,8 @@ func (e *EquiRectangularCubeTextureAssetTask) RunTask(scene *Scene, onSuccess fu
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	e.p.Call("runTask", args...)
 }
@@ -186,7 +193,7 @@ func (e *EquiRectangularCubeTextureAssetTask) SetNoMipmap(noMipmap bool) *EquiRe
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#onerror
 func (e *EquiRectangularCubeTextureAssetTask) OnError(onError func()) *EquiRectangularCubeTextureAssetTask {
-	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(onError)
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -194,7 +201,7 @@ func (e *EquiRectangularCubeTextureAssetTask) OnError(onError func()) *EquiRecta
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#onerror
 func (e *EquiRectangularCubeTextureAssetTask) SetOnError(onError func()) *EquiRectangularCubeTextureAssetTask {
-	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(onError)
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -202,7 +209,7 @@ func (e *EquiRectangularCubeTextureAssetTask) SetOnError(onError func()) *EquiRe
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#onsuccess
 func (e *EquiRectangularCubeTextureAssetTask) OnSuccess(onSuccess func()) *EquiRectangularCubeTextureAssetTask {
-	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(onSuccess)
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -210,7 +217,7 @@ func (e *EquiRectangularCubeTextureAssetTask) OnSuccess(onSuccess func()) *EquiR
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#onsuccess
 func (e *EquiRectangularCubeTextureAssetTask) SetOnSuccess(onSuccess func()) *EquiRectangularCubeTextureAssetTask {
-	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(onSuccess)
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 

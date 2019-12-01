@@ -27,6 +27,15 @@ func AxisDragGizmoFromJSObject(p js.Value, ctx js.Value) *AxisDragGizmo {
 	return &AxisDragGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AxisDragGizmoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AxisDragGizmoArrayToJSArray(array []*AxisDragGizmo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAxisDragGizmoOpts contains optional parameters for NewAxisDragGizmo.
 type NewAxisDragGizmoOpts struct {
 	Color      *Color3
@@ -71,9 +80,7 @@ func (ba *Babylon) NewAxisDragGizmo(dragAxis *Vector3, opts *NewAxisDragGizmoOpt
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#dispose
 func (a *AxisDragGizmo) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // SetCustomMesh calls the SetCustomMesh method on the AxisDragGizmo object.

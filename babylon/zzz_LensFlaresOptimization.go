@@ -29,6 +29,15 @@ func LensFlaresOptimizationFromJSObject(p js.Value, ctx js.Value) *LensFlaresOpt
 	return &LensFlaresOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
+// LensFlaresOptimizationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LensFlaresOptimizationArrayToJSArray(array []*LensFlaresOptimization) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLensFlaresOptimizationOpts contains optional parameters for NewLensFlaresOptimization.
 type NewLensFlaresOptimizationOpts struct {
 	Priority *float64
@@ -73,9 +82,7 @@ func (l *LensFlaresOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) 
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization#getdescription
 func (l *LensFlaresOptimization) GetDescription() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getDescription", args...)
+	retVal := l.p.Call("getDescription")
 	return retVal.String()
 }
 

@@ -27,6 +27,15 @@ func PointerDragBehaviorFromJSObject(p js.Value, ctx js.Value) *PointerDragBehav
 	return &PointerDragBehavior{p: p, ctx: ctx}
 }
 
+// PointerDragBehaviorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PointerDragBehaviorArrayToJSArray(array []*PointerDragBehavior) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPointerDragBehaviorOpts contains optional parameters for NewPointerDragBehavior.
 type NewPointerDragBehaviorOpts struct {
 	Options js.Value
@@ -83,9 +92,7 @@ func (p *PointerDragBehavior) Attach(ownerNode *AbstractMesh, opts *PointerDragB
 // https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#detach
 func (p *PointerDragBehavior) Detach() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("detach", args...)
+	p.p.Call("detach")
 }
 
 // Init calls the Init method on the PointerDragBehavior object.
@@ -93,9 +100,7 @@ func (p *PointerDragBehavior) Detach() {
 // https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#init
 func (p *PointerDragBehavior) Init() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("init", args...)
+	p.p.Call("init")
 }
 
 // ReleaseDrag calls the ReleaseDrag method on the PointerDragBehavior object.
@@ -103,9 +108,7 @@ func (p *PointerDragBehavior) Init() {
 // https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#releasedrag
 func (p *PointerDragBehavior) ReleaseDrag() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("releaseDrag", args...)
+	p.p.Call("releaseDrag")
 }
 
 // PointerDragBehaviorStartDragOpts contains optional parameters for PointerDragBehavior.StartDrag.
@@ -422,7 +425,7 @@ func (p *PointerDragBehavior) SetUseObjectOrienationForDragging(useObjectOrienat
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#validatedrag
 func (p *PointerDragBehavior) ValidateDrag(validateDrag func()) *PointerDragBehavior {
-	p := ba.ctx.Get("PointerDragBehavior").New(validateDrag)
+	p := ba.ctx.Get("PointerDragBehavior").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {validateDrag(); return nil}))
 	return PointerDragBehaviorFromJSObject(p, ba.ctx)
 }
 
@@ -430,7 +433,7 @@ func (p *PointerDragBehavior) ValidateDrag(validateDrag func()) *PointerDragBeha
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#validatedrag
 func (p *PointerDragBehavior) SetValidateDrag(validateDrag func()) *PointerDragBehavior {
-	p := ba.ctx.Get("PointerDragBehavior").New(validateDrag)
+	p := ba.ctx.Get("PointerDragBehavior").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {validateDrag(); return nil}))
 	return PointerDragBehaviorFromJSObject(p, ba.ctx)
 }
 

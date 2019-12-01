@@ -27,14 +27,21 @@ func TargetedAnimationFromJSObject(p js.Value, ctx js.Value) *TargetedAnimation 
 	return &TargetedAnimation{p: p, ctx: ctx}
 }
 
+// TargetedAnimationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TargetedAnimationArrayToJSArray(array []*TargetedAnimation) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Serialize calls the Serialize method on the TargetedAnimation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetedanimation#serialize
 func (t *TargetedAnimation) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("serialize", args...)
+	retVal := t.p.Call("serialize")
 	return retVal
 }
 

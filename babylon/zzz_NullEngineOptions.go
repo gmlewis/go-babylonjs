@@ -27,6 +27,15 @@ func NullEngineOptionsFromJSObject(p js.Value, ctx js.Value) *NullEngineOptions 
 	return &NullEngineOptions{p: p, ctx: ctx}
 }
 
+// NullEngineOptionsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NullEngineOptionsArrayToJSArray(array []*NullEngineOptions) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // DeterministicLockstep returns the DeterministicLockstep property of class NullEngineOptions.

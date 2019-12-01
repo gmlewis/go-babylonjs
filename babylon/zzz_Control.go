@@ -29,6 +29,15 @@ func ControlFromJSObject(p js.Value, ctx js.Value) *Control {
 	return &Control{p: p, ctx: ctx}
 }
 
+// ControlArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ControlArrayToJSArray(array []*Control) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewControlOpts contains optional parameters for NewControl.
 type NewControlOpts struct {
 	Name *string
@@ -73,9 +82,7 @@ func (c *Control) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.control#dispose
 func (c *Control) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the Control object.
@@ -96,9 +103,7 @@ func (c *Control) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.control#getclassname
 func (c *Control) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 

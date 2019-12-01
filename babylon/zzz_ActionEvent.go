@@ -27,6 +27,15 @@ func ActionEventFromJSObject(p js.Value, ctx js.Value) *ActionEvent {
 	return &ActionEvent{p: p, ctx: ctx}
 }
 
+// ActionEventArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ActionEventArrayToJSArray(array []*ActionEvent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewActionEventOpts contains optional parameters for NewActionEvent.
 type NewActionEventOpts struct {
 	SourceEvent    *interface{}

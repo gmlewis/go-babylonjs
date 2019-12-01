@@ -27,6 +27,15 @@ func STLExportFromJSObject(p js.Value, ctx js.Value) *STLExport {
 	return &STLExport{p: p, ctx: ctx}
 }
 
+// STLExportArrayToJSArray returns a JavaScript Array for the wrapped array.
+func STLExportArrayToJSArray(array []*STLExport) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // STLExportCreateSTLOpts contains optional parameters for STLExport.CreateSTL.
 type STLExportCreateSTLOpts struct {
 	Download       *bool

@@ -27,6 +27,15 @@ func TorusBuilderFromJSObject(p js.Value, ctx js.Value) *TorusBuilder {
 	return &TorusBuilder{p: p, ctx: ctx}
 }
 
+// TorusBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TorusBuilderArrayToJSArray(array []*TorusBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CreateTorus calls the CreateTorus method on the TorusBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.torusbuilder#createtorus

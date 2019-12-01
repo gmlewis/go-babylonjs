@@ -29,6 +29,15 @@ func SceneLoaderFromJSObject(p js.Value, ctx js.Value) *SceneLoader {
 	return &SceneLoader{p: p, ctx: ctx}
 }
 
+// SceneLoaderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SceneLoaderArrayToJSArray(array []*SceneLoader) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // SceneLoaderAppendOpts contains optional parameters for SceneLoader.Append.
 type SceneLoaderAppendOpts struct {
 	SceneFilename   *string
@@ -97,7 +106,7 @@ type SceneLoaderAppendAsyncOpts struct {
 // AppendAsync calls the AppendAsync method on the SceneLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#appendasync
-func (s *SceneLoader) AppendAsync(rootUrl string, opts *SceneLoaderAppendAsyncOpts) *Scene {
+func (s *SceneLoader) AppendAsync(rootUrl string, opts *SceneLoaderAppendAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &SceneLoaderAppendAsyncOpts{}
 	}
@@ -128,7 +137,7 @@ func (s *SceneLoader) AppendAsync(rootUrl string, opts *SceneLoaderAppendAsyncOp
 	}
 
 	retVal := s.p.Call("AppendAsync", args...)
-	return SceneFromJSObject(retVal, s.ctx)
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 // GetPluginForExtension calls the GetPluginForExtension method on the SceneLoader object.
@@ -213,7 +222,7 @@ type SceneLoaderImportMeshAsyncOpts struct {
 // ImportMeshAsync calls the ImportMeshAsync method on the SceneLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#importmeshasync
-func (s *SceneLoader) ImportMeshAsync(meshNames interface{}, rootUrl string, opts *SceneLoaderImportMeshAsyncOpts) js.Value {
+func (s *SceneLoader) ImportMeshAsync(meshNames interface{}, rootUrl string, opts *SceneLoaderImportMeshAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &SceneLoaderImportMeshAsyncOpts{}
 	}
@@ -245,7 +254,7 @@ func (s *SceneLoader) ImportMeshAsync(meshNames interface{}, rootUrl string, opt
 	}
 
 	retVal := s.p.Call("ImportMeshAsync", args...)
-	return retVal
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 // IsPluginForExtensionAvailable calls the IsPluginForExtensionAvailable method on the SceneLoader object.
@@ -386,7 +395,7 @@ type SceneLoaderLoadAssetContainerAsyncOpts struct {
 // LoadAssetContainerAsync calls the LoadAssetContainerAsync method on the SceneLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#loadassetcontainerasync
-func (s *SceneLoader) LoadAssetContainerAsync(rootUrl string, opts *SceneLoaderLoadAssetContainerAsyncOpts) *AssetContainer {
+func (s *SceneLoader) LoadAssetContainerAsync(rootUrl string, opts *SceneLoaderLoadAssetContainerAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &SceneLoaderLoadAssetContainerAsyncOpts{}
 	}
@@ -417,7 +426,7 @@ func (s *SceneLoader) LoadAssetContainerAsync(rootUrl string, opts *SceneLoaderL
 	}
 
 	retVal := s.p.Call("LoadAssetContainerAsync", args...)
-	return AssetContainerFromJSObject(retVal, s.ctx)
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 // SceneLoaderLoadAsyncOpts contains optional parameters for SceneLoader.LoadAsync.
@@ -431,7 +440,7 @@ type SceneLoaderLoadAsyncOpts struct {
 // LoadAsync calls the LoadAsync method on the SceneLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#loadasync
-func (s *SceneLoader) LoadAsync(rootUrl string, opts *SceneLoaderLoadAsyncOpts) *Scene {
+func (s *SceneLoader) LoadAsync(rootUrl string, opts *SceneLoaderLoadAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &SceneLoaderLoadAsyncOpts{}
 	}
@@ -462,7 +471,7 @@ func (s *SceneLoader) LoadAsync(rootUrl string, opts *SceneLoaderLoadAsyncOpts) 
 	}
 
 	retVal := s.p.Call("LoadAsync", args...)
-	return SceneFromJSObject(retVal, s.ctx)
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 // RegisterPlugin calls the RegisterPlugin method on the SceneLoader object.

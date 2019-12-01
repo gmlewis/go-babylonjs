@@ -27,6 +27,15 @@ func NodeMaterialBlockFromJSObject(p js.Value, ctx js.Value) *NodeMaterialBlock 
 	return &NodeMaterialBlock{p: p, ctx: ctx}
 }
 
+// NodeMaterialBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NodeMaterialBlockArrayToJSArray(array []*NodeMaterialBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewNodeMaterialBlockOpts contains optional parameters for NewNodeMaterialBlock.
 type NewNodeMaterialBlockOpts struct {
 	Target        js.Value
@@ -178,9 +187,7 @@ func (n *NodeMaterialBlock) ConnectTo(other *NodeMaterialBlock, opts *NodeMateri
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#dispose
 func (n *NodeMaterialBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("dispose", args...)
+	n.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the NodeMaterialBlock object.
@@ -188,9 +195,7 @@ func (n *NodeMaterialBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#getclassname
 func (n *NodeMaterialBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getClassName", args...)
+	retVal := n.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -475,9 +480,7 @@ func (n *NodeMaterialBlock) ReplaceRepeatableContent(vertexShaderState *NodeMate
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#serialize
 func (n *NodeMaterialBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("serialize", args...)
+	retVal := n.p.Call("serialize")
 	return retVal
 }
 

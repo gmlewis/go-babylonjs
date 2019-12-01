@@ -27,6 +27,15 @@ func ExtrasAsMetadataFromJSObject(p js.Value, ctx js.Value) *ExtrasAsMetadata {
 	return &ExtrasAsMetadata{p: p, ctx: ctx}
 }
 
+// ExtrasAsMetadataArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ExtrasAsMetadataArrayToJSArray(array []*ExtrasAsMetadata) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class ExtrasAsMetadata.

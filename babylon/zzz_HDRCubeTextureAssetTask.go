@@ -27,6 +27,15 @@ func HDRCubeTextureAssetTaskFromJSObject(p js.Value, ctx js.Value) *HDRCubeTextu
 	return &HDRCubeTextureAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
+// HDRCubeTextureAssetTaskArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HDRCubeTextureAssetTaskArrayToJSArray(array []*HDRCubeTextureAssetTask) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewHDRCubeTextureAssetTaskOpts contains optional parameters for NewHDRCubeTextureAssetTask.
 type NewHDRCubeTextureAssetTaskOpts struct {
 	NoMipmap          *bool
@@ -79,9 +88,7 @@ func (ba *Babylon) NewHDRCubeTextureAssetTask(name string, url string, size floa
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#reset
 func (h *HDRCubeTextureAssetTask) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("reset", args...)
+	h.p.Call("reset")
 }
 
 // Run calls the Run method on the HDRCubeTextureAssetTask object.
@@ -92,8 +99,8 @@ func (h *HDRCubeTextureAssetTask) Run(scene *Scene, onSuccess func(), onError fu
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	h.p.Call("run", args...)
 }
@@ -106,8 +113,8 @@ func (h *HDRCubeTextureAssetTask) RunTask(scene *Scene, onSuccess func(), onErro
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	h.p.Call("runTask", args...)
 }
@@ -214,7 +221,7 @@ func (h *HDRCubeTextureAssetTask) SetNoMipmap(noMipmap bool) *HDRCubeTextureAsse
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#onerror
 func (h *HDRCubeTextureAssetTask) OnError(onError func()) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(onError)
+	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -222,7 +229,7 @@ func (h *HDRCubeTextureAssetTask) OnError(onError func()) *HDRCubeTextureAssetTa
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#onerror
 func (h *HDRCubeTextureAssetTask) SetOnError(onError func()) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(onError)
+	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -230,7 +237,7 @@ func (h *HDRCubeTextureAssetTask) SetOnError(onError func()) *HDRCubeTextureAsse
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#onsuccess
 func (h *HDRCubeTextureAssetTask) OnSuccess(onSuccess func()) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(onSuccess)
+	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -238,7 +245,7 @@ func (h *HDRCubeTextureAssetTask) OnSuccess(onSuccess func()) *HDRCubeTextureAss
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#onsuccess
 func (h *HDRCubeTextureAssetTask) SetOnSuccess(onSuccess func()) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(onSuccess)
+	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 

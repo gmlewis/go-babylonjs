@@ -29,6 +29,15 @@ func BoneFromJSObject(p js.Value, ctx js.Value) *Bone {
 	return &Bone{Node: NodeFromJSObject(p, ctx), ctx: ctx}
 }
 
+// BoneArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoneArrayToJSArray(array []*Bone) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBoneOpts contains optional parameters for NewBone.
 type NewBoneOpts struct {
 	ParentBone  *Bone
@@ -83,7 +92,7 @@ func (ba *Babylon) NewBone(name string, skeleton *Skeleton, opts *NewBoneOpts) *
 
 // BoneAddBehaviorOpts contains optional parameters for Bone.AddBehavior.
 type BoneAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the Bone object.
@@ -101,7 +110,7 @@ func (b *Bone) AddBehavior(behavior js.Value, opts *BoneAddBehaviorOpts) *Node {
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := b.p.Call("addBehavior", args...)
@@ -165,9 +174,7 @@ func (b *Bone) BeginAnimation(name string, opts *BoneBeginAnimationOpts) *Animat
 // https://doc.babylonjs.com/api/classes/babylon.bone#computeabsolutetransforms
 func (b *Bone) ComputeAbsoluteTransforms() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("computeAbsoluteTransforms", args...)
+	b.p.Call("computeAbsoluteTransforms")
 }
 
 // BoneComputeWorldMatrixOpts contains optional parameters for Bone.ComputeWorldMatrix.
@@ -395,9 +402,7 @@ func (b *Bone) GetAbsolutePositionToRef(mesh *AbstractMesh, result *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.bone#getabsolutetransform
 func (b *Bone) GetAbsoluteTransform() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getAbsoluteTransform", args...)
+	retVal := b.p.Call("getAbsoluteTransform")
 	return MatrixFromJSObject(retVal, b.ctx)
 }
 
@@ -432,9 +437,7 @@ func (b *Bone) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.bone#getanimationranges
 func (b *Bone) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getAnimationRanges", args...)
+	retVal := b.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, b.ctx)
 }
 
@@ -443,23 +446,21 @@ func (b *Bone) GetAnimationRanges() *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.bone#getbasematrix
 func (b *Bone) GetBaseMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getBaseMatrix", args...)
+	retVal := b.p.Call("getBaseMatrix")
 	return MatrixFromJSObject(retVal, b.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the Bone object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#getbehaviorbyname
-func (b *Bone) GetBehaviorByName(name string) *Node {
+func (b *Bone) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := b.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, b.ctx)
+	return retVal
 }
 
 // BoneGetChildMeshesOpts contains optional parameters for Bone.GetChildMeshes.
@@ -496,12 +497,10 @@ func (b *Bone) GetChildMeshes(opts *BoneGetChildMeshesOpts) *AbstractMesh {
 // GetChildren calls the GetChildren method on the Bone object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#getchildren
-func (b *Bone) GetChildren() *[]Bone {
+func (b *Bone) GetChildren() []*Bone {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getChildren", args...)
-	return []BoneFromJSObject(retVal, b.ctx)
+	retVal := b.p.Call("getChildren")
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the Bone object.
@@ -509,9 +508,7 @@ func (b *Bone) GetChildren() *[]Bone {
 // https://doc.babylonjs.com/api/classes/babylon.bone#getclassname
 func (b *Bone) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getClassName", args...)
+	retVal := b.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -592,9 +589,7 @@ func (b *Bone) GetDirectionToRef(localAxis *Vector3, mesh *AbstractMesh, result 
 // https://doc.babylonjs.com/api/classes/babylon.bone#getengine
 func (b *Bone) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEngine", args...)
+	retVal := b.p.Call("getEngine")
 	return EngineFromJSObject(retVal, b.ctx)
 }
 
@@ -634,9 +629,7 @@ func (b *Bone) GetHierarchyBoundingVectors(opts *BoneGetHierarchyBoundingVectors
 // https://doc.babylonjs.com/api/classes/babylon.bone#getindex
 func (b *Bone) GetIndex() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getIndex", args...)
+	retVal := b.p.Call("getIndex")
 	return retVal.Float()
 }
 
@@ -645,9 +638,7 @@ func (b *Bone) GetIndex() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.bone#getinvertedabsolutetransform
 func (b *Bone) GetInvertedAbsoluteTransform() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getInvertedAbsoluteTransform", args...)
+	retVal := b.p.Call("getInvertedAbsoluteTransform")
 	return MatrixFromJSObject(retVal, b.ctx)
 }
 
@@ -656,9 +647,7 @@ func (b *Bone) GetInvertedAbsoluteTransform() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.bone#getlocalmatrix
 func (b *Bone) GetLocalMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getLocalMatrix", args...)
+	retVal := b.p.Call("getLocalMatrix")
 	return MatrixFromJSObject(retVal, b.ctx)
 }
 
@@ -708,9 +697,7 @@ func (b *Bone) GetLocalPositionFromAbsoluteToRef(position *Vector3, mesh *Abstra
 // https://doc.babylonjs.com/api/classes/babylon.bone#getparent
 func (b *Bone) GetParent() *Bone {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getParent", args...)
+	retVal := b.p.Call("getParent")
 	return BoneFromJSObject(retVal, b.ctx)
 }
 
@@ -764,9 +751,7 @@ func (b *Bone) GetPositionToRef(space js.Value, mesh *AbstractMesh, result *Vect
 // https://doc.babylonjs.com/api/classes/babylon.bone#getrestpose
 func (b *Bone) GetRestPose() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getRestPose", args...)
+	retVal := b.p.Call("getRestPose")
 	return MatrixFromJSObject(retVal, b.ctx)
 }
 
@@ -893,9 +878,7 @@ func (b *Bone) GetRotationToRef(space js.Value, mesh *AbstractMesh, result *Vect
 // https://doc.babylonjs.com/api/classes/babylon.bone#getscale
 func (b *Bone) GetScale() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getScale", args...)
+	retVal := b.p.Call("getScale")
 	return Vector3FromJSObject(retVal, b.ctx)
 }
 
@@ -916,9 +899,7 @@ func (b *Bone) GetScaleToRef(result *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.bone#getscene
 func (b *Bone) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getScene", args...)
+	retVal := b.p.Call("getScene")
 	return SceneFromJSObject(retVal, b.ctx)
 }
 
@@ -927,9 +908,7 @@ func (b *Bone) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.bone#getskeleton
 func (b *Bone) GetSkeleton() *Skeleton {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getSkeleton", args...)
+	retVal := b.p.Call("getSkeleton")
 	return SkeletonFromJSObject(retVal, b.ctx)
 }
 
@@ -938,9 +917,7 @@ func (b *Bone) GetSkeleton() *Skeleton {
 // https://doc.babylonjs.com/api/classes/babylon.bone#gettransformnode
 func (b *Bone) GetTransformNode() *TransformNode {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getTransformNode", args...)
+	retVal := b.p.Call("getTransformNode")
 	return TransformNodeFromJSObject(retVal, b.ctx)
 }
 
@@ -949,9 +926,7 @@ func (b *Bone) GetTransformNode() *TransformNode {
 // https://doc.babylonjs.com/api/classes/babylon.bone#getworldmatrix
 func (b *Bone) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getWorldMatrix", args...)
+	retVal := b.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, b.ctx)
 }
 
@@ -973,9 +948,7 @@ func (b *Bone) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.bone#isdisposed
 func (b *Bone) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("isDisposed", args...)
+	retVal := b.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -1046,9 +1019,7 @@ func (b *Bone) LinkTransformNode(transformNode *TransformNode) {
 // https://doc.babylonjs.com/api/classes/babylon.bone#markasdirty
 func (b *Bone) MarkAsDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("markAsDirty", args...)
+	b.p.Call("markAsDirty")
 }
 
 // ParseAnimationRanges calls the ParseAnimationRanges method on the Bone object.
@@ -1083,9 +1054,7 @@ func (b *Bone) RemoveBehavior(behavior js.Value) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.bone#returntorest
 func (b *Bone) ReturnToRest() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("returnToRest", args...)
+	b.p.Call("returnToRest")
 }
 
 // BoneRotateOpts contains optional parameters for Bone.Rotate.
@@ -1154,9 +1123,7 @@ func (b *Bone) Scale(x float64, y float64, z float64, opts *BoneScaleOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.bone#serializeanimationranges
 func (b *Bone) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("serializeAnimationRanges", args...)
+	retVal := b.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -1661,7 +1628,7 @@ func (b *Bone) SetName(name string) *Bone {
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#ondispose
 func (b *Bone) OnDispose(onDispose func()) *Bone {
-	p := ba.ctx.Get("Bone").New(onDispose)
+	p := ba.ctx.Get("Bone").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return BoneFromJSObject(p, ba.ctx)
 }
 
@@ -1669,7 +1636,7 @@ func (b *Bone) OnDispose(onDispose func()) *Bone {
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#ondispose
 func (b *Bone) SetOnDispose(onDispose func()) *Bone {
-	p := ba.ctx.Get("Bone").New(onDispose)
+	p := ba.ctx.Get("Bone").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return BoneFromJSObject(p, ba.ctx)
 }
 
@@ -1693,7 +1660,7 @@ func (b *Bone) SetOnDisposeObservable(onDisposeObservable *Observable) *Bone {
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#onready
 func (b *Bone) OnReady(onReady func()) *Bone {
-	p := ba.ctx.Get("Bone").New(onReady)
+	p := ba.ctx.Get("Bone").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return BoneFromJSObject(p, ba.ctx)
 }
 
@@ -1701,7 +1668,7 @@ func (b *Bone) OnReady(onReady func()) *Bone {
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#onready
 func (b *Bone) SetOnReady(onReady func()) *Bone {
-	p := ba.ctx.Get("Bone").New(onReady)
+	p := ba.ctx.Get("Bone").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return BoneFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func DecalBuilderFromJSObject(p js.Value, ctx js.Value) *DecalBuilder {
 	return &DecalBuilder{p: p, ctx: ctx}
 }
 
+// DecalBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DecalBuilderArrayToJSArray(array []*DecalBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CreateDecal calls the CreateDecal method on the DecalBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.decalbuilder#createdecal

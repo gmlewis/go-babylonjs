@@ -28,6 +28,15 @@ func ModelShapeFromJSObject(p js.Value, ctx js.Value) *ModelShape {
 	return &ModelShape{p: p, ctx: ctx}
 }
 
+// ModelShapeArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ModelShapeArrayToJSArray(array []*ModelShape) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
  */

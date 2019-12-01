@@ -27,6 +27,15 @@ func StereoscopicInterlacePostProcessFromJSObject(p js.Value, ctx js.Value) *Ste
 	return &StereoscopicInterlacePostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StereoscopicInterlacePostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StereoscopicInterlacePostProcessArrayToJSArray(array []*StereoscopicInterlacePostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStereoscopicInterlacePostProcessOpts contains optional parameters for NewStereoscopicInterlacePostProcess.
 type NewStereoscopicInterlacePostProcessOpts struct {
 	SamplingMode *float64
@@ -106,9 +115,7 @@ func (s *StereoscopicInterlacePostProcess) Activate(camera *Camera, opts *Stereo
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#apply
 func (s *StereoscopicInterlacePostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("apply", args...)
+	retVal := s.p.Call("apply")
 	return EffectFromJSObject(retVal, s.ctx)
 }
 
@@ -141,9 +148,7 @@ func (s *StereoscopicInterlacePostProcess) Dispose(opts *StereoscopicInterlacePo
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#getcamera
 func (s *StereoscopicInterlacePostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getCamera", args...)
+	retVal := s.p.Call("getCamera")
 	return CameraFromJSObject(retVal, s.ctx)
 }
 
@@ -152,9 +157,7 @@ func (s *StereoscopicInterlacePostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#getclassname
 func (s *StereoscopicInterlacePostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -163,9 +166,7 @@ func (s *StereoscopicInterlacePostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#geteffect
 func (s *StereoscopicInterlacePostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEffect", args...)
+	retVal := s.p.Call("getEffect")
 	return EffectFromJSObject(retVal, s.ctx)
 }
 
@@ -174,9 +175,7 @@ func (s *StereoscopicInterlacePostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#geteffectname
 func (s *StereoscopicInterlacePostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEffectName", args...)
+	retVal := s.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -185,9 +184,7 @@ func (s *StereoscopicInterlacePostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#getengine
 func (s *StereoscopicInterlacePostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEngine", args...)
+	retVal := s.p.Call("getEngine")
 	return EngineFromJSObject(retVal, s.ctx)
 }
 
@@ -196,9 +193,7 @@ func (s *StereoscopicInterlacePostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#isready
 func (s *StereoscopicInterlacePostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isReady", args...)
+	retVal := s.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -207,9 +202,7 @@ func (s *StereoscopicInterlacePostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#isreusable
 func (s *StereoscopicInterlacePostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isReusable", args...)
+	retVal := s.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -218,9 +211,7 @@ func (s *StereoscopicInterlacePostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#marktexturedirty
 func (s *StereoscopicInterlacePostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("markTextureDirty", args...)
+	s.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the StereoscopicInterlacePostProcess object.
@@ -295,9 +286,7 @@ func (s *StereoscopicInterlacePostProcess) UpdateEffect(opts *StereoscopicInterl
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#useownoutput
 func (s *StereoscopicInterlacePostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("useOwnOutput", args...)
+	s.p.Call("useOwnOutput")
 }
 
 /*
@@ -546,7 +535,7 @@ func (s *StereoscopicInterlacePostProcess) SetName(name string) *StereoscopicInt
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onactivate
 func (s *StereoscopicInterlacePostProcess) OnActivate(onActivate func()) *StereoscopicInterlacePostProcess {
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onActivate)
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -554,7 +543,7 @@ func (s *StereoscopicInterlacePostProcess) OnActivate(onActivate func()) *Stereo
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onactivate
 func (s *StereoscopicInterlacePostProcess) SetOnActivate(onActivate func()) *StereoscopicInterlacePostProcess {
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onActivate)
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -578,7 +567,7 @@ func (s *StereoscopicInterlacePostProcess) SetOnActivateObservable(onActivateObs
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onafterrender
 func (s *StereoscopicInterlacePostProcess) OnAfterRender(onAfterRender func()) *StereoscopicInterlacePostProcess {
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onAfterRender)
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -586,7 +575,7 @@ func (s *StereoscopicInterlacePostProcess) OnAfterRender(onAfterRender func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onafterrender
 func (s *StereoscopicInterlacePostProcess) SetOnAfterRender(onAfterRender func()) *StereoscopicInterlacePostProcess {
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onAfterRender)
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -610,7 +599,7 @@ func (s *StereoscopicInterlacePostProcess) SetOnAfterRenderObservable(onAfterRen
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onapply
 func (s *StereoscopicInterlacePostProcess) OnApply(onApply func()) *StereoscopicInterlacePostProcess {
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onApply)
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -618,7 +607,7 @@ func (s *StereoscopicInterlacePostProcess) OnApply(onApply func()) *Stereoscopic
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onapply
 func (s *StereoscopicInterlacePostProcess) SetOnApply(onApply func()) *StereoscopicInterlacePostProcess {
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onApply)
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -642,7 +631,7 @@ func (s *StereoscopicInterlacePostProcess) SetOnApplyObservable(onApplyObservabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onbeforerender
 func (s *StereoscopicInterlacePostProcess) OnBeforeRender(onBeforeRender func()) *StereoscopicInterlacePostProcess {
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -650,7 +639,7 @@ func (s *StereoscopicInterlacePostProcess) OnBeforeRender(onBeforeRender func())
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onbeforerender
 func (s *StereoscopicInterlacePostProcess) SetOnBeforeRender(onBeforeRender func()) *StereoscopicInterlacePostProcess {
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -674,7 +663,7 @@ func (s *StereoscopicInterlacePostProcess) SetOnBeforeRenderObservable(onBeforeR
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onsizechanged
 func (s *StereoscopicInterlacePostProcess) OnSizeChanged(onSizeChanged func()) *StereoscopicInterlacePostProcess {
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -682,7 +671,7 @@ func (s *StereoscopicInterlacePostProcess) OnSizeChanged(onSizeChanged func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onsizechanged
 func (s *StereoscopicInterlacePostProcess) SetOnSizeChanged(onSizeChanged func()) *StereoscopicInterlacePostProcess {
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 

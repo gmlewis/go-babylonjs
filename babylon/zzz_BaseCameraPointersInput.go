@@ -29,6 +29,15 @@ func BaseCameraPointersInputFromJSObject(p js.Value, ctx js.Value) *BaseCameraPo
 	return &BaseCameraPointersInput{p: p, ctx: ctx}
 }
 
+// BaseCameraPointersInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BaseCameraPointersInputArrayToJSArray(array []*BaseCameraPointersInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // BaseCameraPointersInputAttachControlOpts contains optional parameters for BaseCameraPointersInput.AttachControl.
 type BaseCameraPointersInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -72,9 +81,7 @@ func (b *BaseCameraPointersInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.basecamerapointersinput#getclassname
 func (b *BaseCameraPointersInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getClassName", args...)
+	retVal := b.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -83,9 +90,7 @@ func (b *BaseCameraPointersInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.basecamerapointersinput#getsimplename
 func (b *BaseCameraPointersInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getSimpleName", args...)
+	retVal := b.p.Call("getSimpleName")
 	return retVal.String()
 }
 

@@ -27,6 +27,15 @@ func DDSToolsFromJSObject(p js.Value, ctx js.Value) *DDSTools {
 	return &DDSTools{p: p, ctx: ctx}
 }
 
+// DDSToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DDSToolsArrayToJSArray(array []*DDSTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // GetDDSInfo calls the GetDDSInfo method on the DDSTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ddstools#getddsinfo

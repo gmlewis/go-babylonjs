@@ -27,6 +27,15 @@ func GradientBlockColorStepFromJSObject(p js.Value, ctx js.Value) *GradientBlock
 	return &GradientBlockColorStep{p: p, ctx: ctx}
 }
 
+// GradientBlockColorStepArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GradientBlockColorStepArrayToJSArray(array []*GradientBlockColorStep) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGradientBlockColorStep returns a new GradientBlockColorStep object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblockcolorstep

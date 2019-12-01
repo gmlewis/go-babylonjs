@@ -27,6 +27,15 @@ func MeshAssetTaskFromJSObject(p js.Value, ctx js.Value) *MeshAssetTask {
 	return &MeshAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
+// MeshAssetTaskArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MeshAssetTaskArrayToJSArray(array []*MeshAssetTask) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMeshAssetTask returns a new MeshAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask
@@ -48,9 +57,7 @@ func (ba *Babylon) NewMeshAssetTask(name string, meshesNames interface{}, rootUr
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#reset
 func (m *MeshAssetTask) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("reset", args...)
+	m.p.Call("reset")
 }
 
 // Run calls the Run method on the MeshAssetTask object.
@@ -61,8 +68,8 @@ func (m *MeshAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	m.p.Call("run", args...)
 }
@@ -75,8 +82,8 @@ func (m *MeshAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	m.p.Call("runTask", args...)
 }
@@ -118,64 +125,64 @@ func (m *MeshAssetTask) SetIsCompleted(isCompleted bool) *MeshAssetTask {
 // LoadedAnimationGroups returns the LoadedAnimationGroups property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedanimationgroups
-func (m *MeshAssetTask) LoadedAnimationGroups(loadedAnimationGroups []AnimationGroup) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(loadedAnimationGroups.JSObject())
+func (m *MeshAssetTask) LoadedAnimationGroups(loadedAnimationGroups []*AnimationGroup) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedAnimationGroups)
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // SetLoadedAnimationGroups sets the LoadedAnimationGroups property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedanimationgroups
-func (m *MeshAssetTask) SetLoadedAnimationGroups(loadedAnimationGroups []AnimationGroup) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(loadedAnimationGroups.JSObject())
+func (m *MeshAssetTask) SetLoadedAnimationGroups(loadedAnimationGroups []*AnimationGroup) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedAnimationGroups)
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // LoadedMeshes returns the LoadedMeshes property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedmeshes
-func (m *MeshAssetTask) LoadedMeshes(loadedMeshes []AbstractMesh) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(loadedMeshes.JSObject())
+func (m *MeshAssetTask) LoadedMeshes(loadedMeshes []*AbstractMesh) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedMeshes)
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // SetLoadedMeshes sets the LoadedMeshes property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedmeshes
-func (m *MeshAssetTask) SetLoadedMeshes(loadedMeshes []AbstractMesh) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(loadedMeshes.JSObject())
+func (m *MeshAssetTask) SetLoadedMeshes(loadedMeshes []*AbstractMesh) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedMeshes)
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // LoadedParticleSystems returns the LoadedParticleSystems property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedparticlesystems
-func (m *MeshAssetTask) LoadedParticleSystems(loadedParticleSystems []IParticleSystem) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(loadedParticleSystems.JSObject())
+func (m *MeshAssetTask) LoadedParticleSystems(loadedParticleSystems []*IParticleSystem) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedParticleSystems)
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // SetLoadedParticleSystems sets the LoadedParticleSystems property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedparticlesystems
-func (m *MeshAssetTask) SetLoadedParticleSystems(loadedParticleSystems []IParticleSystem) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(loadedParticleSystems.JSObject())
+func (m *MeshAssetTask) SetLoadedParticleSystems(loadedParticleSystems []*IParticleSystem) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedParticleSystems)
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // LoadedSkeletons returns the LoadedSkeletons property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedskeletons
-func (m *MeshAssetTask) LoadedSkeletons(loadedSkeletons []Skeleton) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(loadedSkeletons.JSObject())
+func (m *MeshAssetTask) LoadedSkeletons(loadedSkeletons []*Skeleton) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedSkeletons)
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // SetLoadedSkeletons sets the LoadedSkeletons property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedskeletons
-func (m *MeshAssetTask) SetLoadedSkeletons(loadedSkeletons []Skeleton) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(loadedSkeletons.JSObject())
+func (m *MeshAssetTask) SetLoadedSkeletons(loadedSkeletons []*Skeleton) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedSkeletons)
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -215,7 +222,7 @@ func (m *MeshAssetTask) SetName(name string) *MeshAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#onerror
 func (m *MeshAssetTask) OnError(onError func()) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(onError)
+	p := ba.ctx.Get("MeshAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -223,7 +230,7 @@ func (m *MeshAssetTask) OnError(onError func()) *MeshAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#onerror
 func (m *MeshAssetTask) SetOnError(onError func()) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(onError)
+	p := ba.ctx.Get("MeshAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -231,7 +238,7 @@ func (m *MeshAssetTask) SetOnError(onError func()) *MeshAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#onsuccess
 func (m *MeshAssetTask) OnSuccess(onSuccess func()) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(onSuccess)
+	p := ba.ctx.Get("MeshAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -239,7 +246,7 @@ func (m *MeshAssetTask) OnSuccess(onSuccess func()) *MeshAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#onsuccess
 func (m *MeshAssetTask) SetOnSuccess(onSuccess func()) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(onSuccess)
+	p := ba.ctx.Get("MeshAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 

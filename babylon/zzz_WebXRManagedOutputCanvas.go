@@ -27,11 +27,20 @@ func WebXRManagedOutputCanvasFromJSObject(p js.Value, ctx js.Value) *WebXRManage
 	return &WebXRManagedOutputCanvas{p: p, ctx: ctx}
 }
 
+// WebXRManagedOutputCanvasArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRManagedOutputCanvasArrayToJSArray(array []*WebXRManagedOutputCanvas) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWebXRManagedOutputCanvasOpts contains optional parameters for NewWebXRManagedOutputCanvas.
 type NewWebXRManagedOutputCanvasOpts struct {
 	Canvas                   js.Value
 	OnStateChangedObservable *Observable
-	Configuration            *WebXRState
+	Configuration            *WebXRManagedOutputCanvasOptions
 }
 
 // NewWebXRManagedOutputCanvas returns a new WebXRManagedOutputCanvas object.
@@ -71,9 +80,7 @@ func (ba *Babylon) NewWebXRManagedOutputCanvas(engine *ThinEngine, opts *NewWebX
 // https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#dispose
 func (w *WebXRManagedOutputCanvas) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 // InitializeXRLayerAsync calls the InitializeXRLayerAsync method on the WebXRManagedOutputCanvas object.

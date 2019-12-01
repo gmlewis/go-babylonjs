@@ -30,6 +30,15 @@ func SetStateActionFromJSObject(p js.Value, ctx js.Value) *SetStateAction {
 	return &SetStateAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SetStateActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SetStateActionArrayToJSArray(array []*SetStateAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSetStateActionOpts contains optional parameters for NewSetStateAction.
 type NewSetStateActionOpts struct {
 	Condition *Condition
@@ -64,9 +73,7 @@ func (ba *Babylon) NewSetStateAction(triggerOptions interface{}, target interfac
 // https://doc.babylonjs.com/api/classes/babylon.setstateaction#execute
 func (s *SetStateAction) Execute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("execute", args...)
+	s.p.Call("execute")
 }
 
 // GetTriggerParameter calls the GetTriggerParameter method on the SetStateAction object.
@@ -74,9 +81,7 @@ func (s *SetStateAction) Execute() {
 // https://doc.babylonjs.com/api/classes/babylon.setstateaction#gettriggerparameter
 func (s *SetStateAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTriggerParameter", args...)
+	retVal := s.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -98,9 +103,7 @@ func (s *SetStateAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.setstateaction#skiptonextactiveaction
 func (s *SetStateAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("skipToNextActiveAction", args...)
+	s.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the SetStateAction object.

@@ -29,6 +29,15 @@ func ContainerFromJSObject(p js.Value, ctx js.Value) *Container {
 	return &Container{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ContainerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ContainerArrayToJSArray(array []*Container) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewContainerOpts contains optional parameters for NewContainer.
 type NewContainerOpts struct {
 	Name *string
@@ -72,9 +81,7 @@ func (c *Container) AddControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.container#clearcontrols
 func (c *Container) ClearControls() *Container {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("clearControls", args...)
+	retVal := c.p.Call("clearControls")
 	return ContainerFromJSObject(retVal, c.ctx)
 }
 
@@ -110,9 +117,7 @@ func (c *Container) ContainsControl(control *Control) bool {
 // https://doc.babylonjs.com/api/classes/babylon.container#dispose
 func (c *Container) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the Container object.
@@ -160,9 +165,7 @@ func (c *Container) GetChildByType(name string, jsType string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.container#getclassname
 func (c *Container) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -325,9 +328,7 @@ func (c *Container) RemoveControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.container#_flagdescendantsasmatrixdirty
 func (c *Container) _flagDescendantsAsMatrixDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("_flagDescendantsAsMatrixDirty", args...)
+	c.p.Call("_flagDescendantsAsMatrixDirty")
 }
 
 /*

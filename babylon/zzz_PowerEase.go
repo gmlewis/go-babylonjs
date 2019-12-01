@@ -29,6 +29,15 @@ func PowerEaseFromJSObject(p js.Value, ctx js.Value) *PowerEase {
 	return &PowerEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PowerEaseArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PowerEaseArrayToJSArray(array []*PowerEase) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPowerEaseOpts contains optional parameters for NewPowerEase.
 type NewPowerEaseOpts struct {
 	Power *float64
@@ -72,9 +81,7 @@ func (p *PowerEase) Ease(gradient float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.powerease#geteasingmode
 func (p *PowerEase) GetEasingMode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEasingMode", args...)
+	retVal := p.p.Call("getEasingMode")
 	return retVal.Float()
 }
 

@@ -27,6 +27,15 @@ func CloudProceduralTextureFromJSObject(p js.Value, ctx js.Value) *CloudProcedur
 	return &CloudProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CloudProceduralTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CloudProceduralTextureArrayToJSArray(array []*CloudProceduralTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCloudProceduralTextureOpts contains optional parameters for NewCloudProceduralTexture.
 type NewCloudProceduralTextureOpts struct {
 	FallbackTexture *Texture
@@ -67,9 +76,7 @@ func (ba *Babylon) NewCloudProceduralTexture(name string, size float64, scene *S
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#clone
 func (c *CloudProceduralTexture) Clone() *ProceduralTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("clone", args...)
+	retVal := c.p.Call("clone")
 	return ProceduralTextureFromJSObject(retVal, c.ctx)
 }
 
@@ -137,9 +144,7 @@ func (c *CloudProceduralTexture) CreateFromBase64String(data string, name string
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#dispose
 func (c *CloudProceduralTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the CloudProceduralTexture object.
@@ -147,9 +152,7 @@ func (c *CloudProceduralTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#getbasesize
 func (c *CloudProceduralTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getBaseSize", args...)
+	retVal := c.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -158,9 +161,7 @@ func (c *CloudProceduralTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#getclassname
 func (c *CloudProceduralTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -169,9 +170,7 @@ func (c *CloudProceduralTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#getcontent
 func (c *CloudProceduralTexture) GetContent() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getContent", args...)
+	retVal := c.p.Call("getContent")
 	return retVal
 }
 
@@ -180,9 +179,7 @@ func (c *CloudProceduralTexture) GetContent() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#geteffect
 func (c *CloudProceduralTexture) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffect", args...)
+	retVal := c.p.Call("getEffect")
 	return EffectFromJSObject(retVal, c.ctx)
 }
 
@@ -191,9 +188,7 @@ func (c *CloudProceduralTexture) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#getinternaltexture
 func (c *CloudProceduralTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getInternalTexture", args...)
+	retVal := c.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, c.ctx)
 }
 
@@ -202,9 +197,7 @@ func (c *CloudProceduralTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#getreflectiontexturematrix
 func (c *CloudProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getReflectionTextureMatrix", args...)
+	retVal := c.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, c.ctx)
 }
 
@@ -213,9 +206,7 @@ func (c *CloudProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#getrendersize
 func (c *CloudProceduralTexture) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getRenderSize", args...)
+	retVal := c.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -224,9 +215,7 @@ func (c *CloudProceduralTexture) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#getscene
 func (c *CloudProceduralTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getScene", args...)
+	retVal := c.p.Call("getScene")
 	return SceneFromJSObject(retVal, c.ctx)
 }
 
@@ -235,9 +224,7 @@ func (c *CloudProceduralTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#getsize
 func (c *CloudProceduralTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getSize", args...)
+	retVal := c.p.Call("getSize")
 	return retVal
 }
 
@@ -271,9 +258,7 @@ func (c *CloudProceduralTexture) GetTextureMatrix(opts *CloudProceduralTextureGe
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#isready
 func (c *CloudProceduralTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReady", args...)
+	retVal := c.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -282,9 +267,7 @@ func (c *CloudProceduralTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#isreadyornotblocking
 func (c *CloudProceduralTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReadyOrNotBlocking", args...)
+	retVal := c.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -410,9 +393,7 @@ func (c *CloudProceduralTexture) ReadPixels(opts *CloudProceduralTextureReadPixe
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#releaseinternaltexture
 func (c *CloudProceduralTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("releaseInternalTexture", args...)
+	c.p.Call("releaseInternalTexture")
 }
 
 // CloudProceduralTextureRenderOpts contains optional parameters for CloudProceduralTexture.Render.
@@ -444,9 +425,7 @@ func (c *CloudProceduralTexture) Render(opts *CloudProceduralTextureRenderOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#reset
 func (c *CloudProceduralTexture) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("reset", args...)
+	c.p.Call("reset")
 }
 
 // ResetRefreshCounter calls the ResetRefreshCounter method on the CloudProceduralTexture object.
@@ -454,9 +433,7 @@ func (c *CloudProceduralTexture) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#resetrefreshcounter
 func (c *CloudProceduralTexture) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("resetRefreshCounter", args...)
+	c.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the CloudProceduralTexture object.
@@ -489,9 +466,7 @@ func (c *CloudProceduralTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#serialize
 func (c *CloudProceduralTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 
@@ -638,9 +613,7 @@ func (c *CloudProceduralTexture) SetVector3(name string, value *Vector3) *Proced
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#tostring
 func (c *CloudProceduralTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toString", args...)
+	retVal := c.p.Call("toString")
 	return retVal.String()
 }
 
@@ -661,9 +634,7 @@ func (c *CloudProceduralTexture) UpdateSamplingMode(samplingMode float64) {
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#updateshaderuniforms
 func (c *CloudProceduralTexture) UpdateShaderUniforms() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("updateShaderUniforms", args...)
+	c.p.Call("updateShaderUniforms")
 }
 
 // CloudProceduralTextureUpdateURLOpts contains optional parameters for CloudProceduralTexture.UpdateURL.
@@ -706,7 +677,7 @@ func (c *CloudProceduralTexture) WhenAllReady(textures *BaseTexture, callback fu
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	c.p.Call("WhenAllReady", args...)
 }
@@ -1549,7 +1520,7 @@ func (c *CloudProceduralTexture) SetNoMipmap(noMipmap bool) *CloudProceduralText
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#ondispose
 func (c *CloudProceduralTexture) OnDispose(onDispose func()) *CloudProceduralTexture {
-	p := ba.ctx.Get("CloudProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("CloudProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return CloudProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1557,7 +1528,7 @@ func (c *CloudProceduralTexture) OnDispose(onDispose func()) *CloudProceduralTex
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#ondispose
 func (c *CloudProceduralTexture) SetOnDispose(onDispose func()) *CloudProceduralTexture {
-	p := ba.ctx.Get("CloudProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("CloudProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return CloudProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1581,7 +1552,7 @@ func (c *CloudProceduralTexture) SetOnDisposeObservable(onDisposeObservable *Obs
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#ongenerated
 func (c *CloudProceduralTexture) OnGenerated(onGenerated func()) *CloudProceduralTexture {
-	p := ba.ctx.Get("CloudProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("CloudProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return CloudProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1589,7 +1560,7 @@ func (c *CloudProceduralTexture) OnGenerated(onGenerated func()) *CloudProcedura
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#ongenerated
 func (c *CloudProceduralTexture) SetOnGenerated(onGenerated func()) *CloudProceduralTexture {
-	p := ba.ctx.Get("CloudProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("CloudProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return CloudProceduralTextureFromJSObject(p, ba.ctx)
 }
 

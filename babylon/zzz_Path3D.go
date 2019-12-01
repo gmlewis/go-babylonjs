@@ -27,6 +27,15 @@ func Path3DFromJSObject(p js.Value, ctx js.Value) *Path3D {
 	return &Path3D{p: p, ctx: ctx}
 }
 
+// Path3DArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Path3DArrayToJSArray(array []*Path3D) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPath3DOpts contains optional parameters for NewPath3D.
 type NewPath3DOpts struct {
 	FirstNormal           *Vector3
@@ -98,9 +107,7 @@ func (p *Path3D) GetBinormalAt(position float64, opts *Path3DGetBinormalAtOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.path3d#getbinormals
 func (p *Path3D) GetBinormals() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getBinormals", args...)
+	retVal := p.p.Call("getBinormals")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -122,9 +129,7 @@ func (p *Path3D) GetClosestPositionTo(target *Vector3) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.path3d#getcurve
 func (p *Path3D) GetCurve() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getCurve", args...)
+	retVal := p.p.Call("getCurve")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -146,9 +151,7 @@ func (p *Path3D) GetDistanceAt(position float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.path3d#getdistances
 func (p *Path3D) GetDistances() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getDistances", args...)
+	retVal := p.p.Call("getDistances")
 	return retVal.Float()
 }
 
@@ -184,9 +187,7 @@ func (p *Path3D) GetNormalAt(position float64, opts *Path3DGetNormalAtOpts) *Vec
 // https://doc.babylonjs.com/api/classes/babylon.path3d#getnormals
 func (p *Path3D) GetNormals() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getNormals", args...)
+	retVal := p.p.Call("getNormals")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -208,9 +209,7 @@ func (p *Path3D) GetPointAt(position float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.path3d#getpoints
 func (p *Path3D) GetPoints() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getPoints", args...)
+	retVal := p.p.Call("getPoints")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -272,9 +271,7 @@ func (p *Path3D) GetTangentAt(position float64, opts *Path3DGetTangentAtOpts) *V
 // https://doc.babylonjs.com/api/classes/babylon.path3d#gettangents
 func (p *Path3D) GetTangents() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getTangents", args...)
+	retVal := p.p.Call("getTangents")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -283,9 +280,7 @@ func (p *Path3D) GetTangents() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.path3d#length
 func (p *Path3D) Length() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("length", args...)
+	retVal := p.p.Call("length")
 	return retVal.Float()
 }
 

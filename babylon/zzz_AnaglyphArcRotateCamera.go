@@ -29,6 +29,15 @@ func AnaglyphArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *AnaglyphArcR
 	return &AnaglyphArcRotateCamera{ArcRotateCamera: ArcRotateCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AnaglyphArcRotateCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnaglyphArcRotateCameraArrayToJSArray(array []*AnaglyphArcRotateCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnaglyphArcRotateCamera returns a new AnaglyphArcRotateCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera
@@ -117,9 +126,7 @@ func (a *AnaglyphArcRotateCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera#dispose
 func (a *AnaglyphArcRotateCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // AnaglyphArcRotateCameraFocusOnOpts contains optional parameters for AnaglyphArcRotateCamera.FocusOn.
@@ -153,9 +160,7 @@ func (a *AnaglyphArcRotateCamera) FocusOn(meshesOrMinMaxVectorAndDistance *Abstr
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera#getclassname
 func (a *AnaglyphArcRotateCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -177,9 +182,7 @@ func (a *AnaglyphArcRotateCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera#gettarget
 func (a *AnaglyphArcRotateCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTarget", args...)
+	retVal := a.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -188,9 +191,7 @@ func (a *AnaglyphArcRotateCamera) GetTarget() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera#rebuildanglesandradius
 func (a *AnaglyphArcRotateCamera) RebuildAnglesAndRadius() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("rebuildAnglesAndRadius", args...)
+	a.p.Call("rebuildAnglesAndRadius")
 }
 
 // SetMatUp calls the SetMatUp method on the AnaglyphArcRotateCamera object.
@@ -198,9 +199,7 @@ func (a *AnaglyphArcRotateCamera) RebuildAnglesAndRadius() {
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera#setmatup
 func (a *AnaglyphArcRotateCamera) SetMatUp() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("setMatUp", args...)
+	a.p.Call("setMatUp")
 }
 
 // SetPosition calls the SetPosition method on the AnaglyphArcRotateCamera object.
@@ -252,9 +251,7 @@ func (a *AnaglyphArcRotateCamera) SetTarget(target *AbstractMesh, opts *Anaglyph
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera#storestate
 func (a *AnaglyphArcRotateCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("storeState", args...)
+	retVal := a.p.Call("storeState")
 	return CameraFromJSObject(retVal, a.ctx)
 }
 
@@ -726,7 +723,7 @@ func (a *AnaglyphArcRotateCamera) SetNoRotationConstraint(noRotationConstraint b
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera#oncollide
 func (a *AnaglyphArcRotateCamera) OnCollide(onCollide func()) *AnaglyphArcRotateCamera {
-	p := ba.ctx.Get("AnaglyphArcRotateCamera").New(onCollide)
+	p := ba.ctx.Get("AnaglyphArcRotateCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return AnaglyphArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
@@ -734,7 +731,7 @@ func (a *AnaglyphArcRotateCamera) OnCollide(onCollide func()) *AnaglyphArcRotate
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera#oncollide
 func (a *AnaglyphArcRotateCamera) SetOnCollide(onCollide func()) *AnaglyphArcRotateCamera {
-	p := ba.ctx.Get("AnaglyphArcRotateCamera").New(onCollide)
+	p := ba.ctx.Get("AnaglyphArcRotateCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return AnaglyphArcRotateCameraFromJSObject(p, ba.ctx)
 }
 

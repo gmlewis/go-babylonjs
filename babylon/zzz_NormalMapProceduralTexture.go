@@ -27,6 +27,15 @@ func NormalMapProceduralTextureFromJSObject(p js.Value, ctx js.Value) *NormalMap
 	return &NormalMapProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// NormalMapProceduralTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NormalMapProceduralTextureArrayToJSArray(array []*NormalMapProceduralTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewNormalMapProceduralTextureOpts contains optional parameters for NewNormalMapProceduralTexture.
 type NewNormalMapProceduralTextureOpts struct {
 	FallbackTexture *Texture
@@ -67,9 +76,7 @@ func (ba *Babylon) NewNormalMapProceduralTexture(name string, size float64, scen
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#clone
 func (n *NormalMapProceduralTexture) Clone() *ProceduralTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("clone", args...)
+	retVal := n.p.Call("clone")
 	return ProceduralTextureFromJSObject(retVal, n.ctx)
 }
 
@@ -137,9 +144,7 @@ func (n *NormalMapProceduralTexture) CreateFromBase64String(data string, name st
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#dispose
 func (n *NormalMapProceduralTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("dispose", args...)
+	n.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the NormalMapProceduralTexture object.
@@ -147,9 +152,7 @@ func (n *NormalMapProceduralTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#getbasesize
 func (n *NormalMapProceduralTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getBaseSize", args...)
+	retVal := n.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -158,9 +161,7 @@ func (n *NormalMapProceduralTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#getclassname
 func (n *NormalMapProceduralTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getClassName", args...)
+	retVal := n.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -169,9 +170,7 @@ func (n *NormalMapProceduralTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#getcontent
 func (n *NormalMapProceduralTexture) GetContent() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getContent", args...)
+	retVal := n.p.Call("getContent")
 	return retVal
 }
 
@@ -180,9 +179,7 @@ func (n *NormalMapProceduralTexture) GetContent() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#geteffect
 func (n *NormalMapProceduralTexture) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getEffect", args...)
+	retVal := n.p.Call("getEffect")
 	return EffectFromJSObject(retVal, n.ctx)
 }
 
@@ -191,9 +188,7 @@ func (n *NormalMapProceduralTexture) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#getinternaltexture
 func (n *NormalMapProceduralTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getInternalTexture", args...)
+	retVal := n.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, n.ctx)
 }
 
@@ -202,9 +197,7 @@ func (n *NormalMapProceduralTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#getreflectiontexturematrix
 func (n *NormalMapProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getReflectionTextureMatrix", args...)
+	retVal := n.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, n.ctx)
 }
 
@@ -213,9 +206,7 @@ func (n *NormalMapProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#getrendersize
 func (n *NormalMapProceduralTexture) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getRenderSize", args...)
+	retVal := n.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -224,9 +215,7 @@ func (n *NormalMapProceduralTexture) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#getscene
 func (n *NormalMapProceduralTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getScene", args...)
+	retVal := n.p.Call("getScene")
 	return SceneFromJSObject(retVal, n.ctx)
 }
 
@@ -235,9 +224,7 @@ func (n *NormalMapProceduralTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#getsize
 func (n *NormalMapProceduralTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getSize", args...)
+	retVal := n.p.Call("getSize")
 	return retVal
 }
 
@@ -271,9 +258,7 @@ func (n *NormalMapProceduralTexture) GetTextureMatrix(opts *NormalMapProceduralT
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#isready
 func (n *NormalMapProceduralTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("isReady", args...)
+	retVal := n.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -282,9 +267,7 @@ func (n *NormalMapProceduralTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#isreadyornotblocking
 func (n *NormalMapProceduralTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("isReadyOrNotBlocking", args...)
+	retVal := n.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -410,9 +393,7 @@ func (n *NormalMapProceduralTexture) ReadPixels(opts *NormalMapProceduralTexture
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#releaseinternaltexture
 func (n *NormalMapProceduralTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("releaseInternalTexture", args...)
+	n.p.Call("releaseInternalTexture")
 }
 
 // NormalMapProceduralTextureRenderOpts contains optional parameters for NormalMapProceduralTexture.Render.
@@ -444,9 +425,7 @@ func (n *NormalMapProceduralTexture) Render(opts *NormalMapProceduralTextureRend
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#reset
 func (n *NormalMapProceduralTexture) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("reset", args...)
+	n.p.Call("reset")
 }
 
 // ResetRefreshCounter calls the ResetRefreshCounter method on the NormalMapProceduralTexture object.
@@ -454,9 +433,7 @@ func (n *NormalMapProceduralTexture) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#resetrefreshcounter
 func (n *NormalMapProceduralTexture) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("resetRefreshCounter", args...)
+	n.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the NormalMapProceduralTexture object.
@@ -489,9 +466,7 @@ func (n *NormalMapProceduralTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#serialize
 func (n *NormalMapProceduralTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("serialize", args...)
+	retVal := n.p.Call("serialize")
 	return retVal
 }
 
@@ -638,9 +613,7 @@ func (n *NormalMapProceduralTexture) SetVector3(name string, value *Vector3) *Pr
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#tostring
 func (n *NormalMapProceduralTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("toString", args...)
+	retVal := n.p.Call("toString")
 	return retVal.String()
 }
 
@@ -661,9 +634,7 @@ func (n *NormalMapProceduralTexture) UpdateSamplingMode(samplingMode float64) {
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#updateshaderuniforms
 func (n *NormalMapProceduralTexture) UpdateShaderUniforms() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("updateShaderUniforms", args...)
+	n.p.Call("updateShaderUniforms")
 }
 
 // NormalMapProceduralTextureUpdateURLOpts contains optional parameters for NormalMapProceduralTexture.UpdateURL.
@@ -706,7 +677,7 @@ func (n *NormalMapProceduralTexture) WhenAllReady(textures *BaseTexture, callbac
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	n.p.Call("WhenAllReady", args...)
 }
@@ -1549,7 +1520,7 @@ func (n *NormalMapProceduralTexture) SetNoMipmap(noMipmap bool) *NormalMapProced
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#ondispose
 func (n *NormalMapProceduralTexture) OnDispose(onDispose func()) *NormalMapProceduralTexture {
-	p := ba.ctx.Get("NormalMapProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("NormalMapProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return NormalMapProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1557,7 +1528,7 @@ func (n *NormalMapProceduralTexture) OnDispose(onDispose func()) *NormalMapProce
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#ondispose
 func (n *NormalMapProceduralTexture) SetOnDispose(onDispose func()) *NormalMapProceduralTexture {
-	p := ba.ctx.Get("NormalMapProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("NormalMapProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return NormalMapProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1581,7 +1552,7 @@ func (n *NormalMapProceduralTexture) SetOnDisposeObservable(onDisposeObservable 
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#ongenerated
 func (n *NormalMapProceduralTexture) OnGenerated(onGenerated func()) *NormalMapProceduralTexture {
-	p := ba.ctx.Get("NormalMapProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("NormalMapProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return NormalMapProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1589,7 +1560,7 @@ func (n *NormalMapProceduralTexture) OnGenerated(onGenerated func()) *NormalMapP
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#ongenerated
 func (n *NormalMapProceduralTexture) SetOnGenerated(onGenerated func()) *NormalMapProceduralTexture {
-	p := ba.ctx.Get("NormalMapProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("NormalMapProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return NormalMapProceduralTextureFromJSObject(p, ba.ctx)
 }
 

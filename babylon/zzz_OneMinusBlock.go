@@ -27,6 +27,15 @@ func OneMinusBlockFromJSObject(p js.Value, ctx js.Value) *OneMinusBlock {
 	return &OneMinusBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// OneMinusBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func OneMinusBlockArrayToJSArray(array []*OneMinusBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewOneMinusBlock returns a new OneMinusBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock
@@ -152,9 +161,7 @@ func (o *OneMinusBlock) ConnectTo(other *NodeMaterialBlock, opts *OneMinusBlockC
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock#dispose
 func (o *OneMinusBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("dispose", args...)
+	o.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the OneMinusBlock object.
@@ -162,9 +169,7 @@ func (o *OneMinusBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock#getclassname
 func (o *OneMinusBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("getClassName", args...)
+	retVal := o.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (o *OneMinusBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterial
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock#serialize
 func (o *OneMinusBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("serialize", args...)
+	retVal := o.p.Call("serialize")
 	return retVal
 }
 

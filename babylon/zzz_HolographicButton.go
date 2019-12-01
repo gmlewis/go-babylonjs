@@ -27,6 +27,15 @@ func HolographicButtonFromJSObject(p js.Value, ctx js.Value) *HolographicButton 
 	return &HolographicButton{Button3D: Button3DFromJSObject(p, ctx), ctx: ctx}
 }
 
+// HolographicButtonArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HolographicButtonArrayToJSArray(array []*HolographicButton) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewHolographicButtonOpts contains optional parameters for NewHolographicButton.
 type NewHolographicButtonOpts struct {
 	Name           *string
@@ -76,22 +85,20 @@ func (h *HolographicButton) AddBehavior(behavior js.Value) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#dispose
 func (h *HolographicButton) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("dispose", args...)
+	h.p.Call("dispose")
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the HolographicButton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#getbehaviorbyname
-func (h *HolographicButton) GetBehaviorByName(name string) *Control3D {
+func (h *HolographicButton) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := h.p.Call("getBehaviorByName", args...)
-	return Control3DFromJSObject(retVal, h.ctx)
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the HolographicButton object.
@@ -99,9 +106,7 @@ func (h *HolographicButton) GetBehaviorByName(name string) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#getclassname
 func (h *HolographicButton) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getClassName", args...)
+	retVal := h.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -441,7 +446,7 @@ func (h *HolographicButton) SetPlateMaterial(plateMaterial *StandardMaterial) *H
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#pointerdownanimation
 func (h *HolographicButton) PointerDownAnimation(pointerDownAnimation func()) *HolographicButton {
-	p := ba.ctx.Get("HolographicButton").New(pointerDownAnimation)
+	p := ba.ctx.Get("HolographicButton").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 
@@ -449,7 +454,7 @@ func (h *HolographicButton) PointerDownAnimation(pointerDownAnimation func()) *H
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#pointerdownanimation
 func (h *HolographicButton) SetPointerDownAnimation(pointerDownAnimation func()) *HolographicButton {
-	p := ba.ctx.Get("HolographicButton").New(pointerDownAnimation)
+	p := ba.ctx.Get("HolographicButton").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 
@@ -457,7 +462,7 @@ func (h *HolographicButton) SetPointerDownAnimation(pointerDownAnimation func())
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#pointerenteranimation
 func (h *HolographicButton) PointerEnterAnimation(pointerEnterAnimation func()) *HolographicButton {
-	p := ba.ctx.Get("HolographicButton").New(pointerEnterAnimation)
+	p := ba.ctx.Get("HolographicButton").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 
@@ -465,7 +470,7 @@ func (h *HolographicButton) PointerEnterAnimation(pointerEnterAnimation func()) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#pointerenteranimation
 func (h *HolographicButton) SetPointerEnterAnimation(pointerEnterAnimation func()) *HolographicButton {
-	p := ba.ctx.Get("HolographicButton").New(pointerEnterAnimation)
+	p := ba.ctx.Get("HolographicButton").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 
@@ -473,7 +478,7 @@ func (h *HolographicButton) SetPointerEnterAnimation(pointerEnterAnimation func(
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#pointeroutanimation
 func (h *HolographicButton) PointerOutAnimation(pointerOutAnimation func()) *HolographicButton {
-	p := ba.ctx.Get("HolographicButton").New(pointerOutAnimation)
+	p := ba.ctx.Get("HolographicButton").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 
@@ -481,7 +486,7 @@ func (h *HolographicButton) PointerOutAnimation(pointerOutAnimation func()) *Hol
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#pointeroutanimation
 func (h *HolographicButton) SetPointerOutAnimation(pointerOutAnimation func()) *HolographicButton {
-	p := ba.ctx.Get("HolographicButton").New(pointerOutAnimation)
+	p := ba.ctx.Get("HolographicButton").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 
@@ -489,7 +494,7 @@ func (h *HolographicButton) SetPointerOutAnimation(pointerOutAnimation func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#pointerupanimation
 func (h *HolographicButton) PointerUpAnimation(pointerUpAnimation func()) *HolographicButton {
-	p := ba.ctx.Get("HolographicButton").New(pointerUpAnimation)
+	p := ba.ctx.Get("HolographicButton").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 
@@ -497,7 +502,7 @@ func (h *HolographicButton) PointerUpAnimation(pointerUpAnimation func()) *Holog
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#pointerupanimation
 func (h *HolographicButton) SetPointerUpAnimation(pointerUpAnimation func()) *HolographicButton {
-	p := ba.ctx.Get("HolographicButton").New(pointerUpAnimation)
+	p := ba.ctx.Get("HolographicButton").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 

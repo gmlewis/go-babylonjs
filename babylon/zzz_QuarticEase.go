@@ -29,6 +29,15 @@ func QuarticEaseFromJSObject(p js.Value, ctx js.Value) *QuarticEase {
 	return &QuarticEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// QuarticEaseArrayToJSArray returns a JavaScript Array for the wrapped array.
+func QuarticEaseArrayToJSArray(array []*QuarticEase) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Ease calls the Ease method on the QuarticEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quarticease#ease
@@ -47,9 +56,7 @@ func (q *QuarticEase) Ease(gradient float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.quarticease#geteasingmode
 func (q *QuarticEase) GetEasingMode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("getEasingMode", args...)
+	retVal := q.p.Call("getEasingMode")
 	return retVal.Float()
 }
 

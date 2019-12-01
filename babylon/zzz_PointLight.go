@@ -30,6 +30,15 @@ func PointLightFromJSObject(p js.Value, ctx js.Value) *PointLight {
 	return &PointLight{ShadowLight: ShadowLightFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PointLightArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PointLightArrayToJSArray(array []*PointLight) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPointLight returns a new PointLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight
@@ -47,7 +56,7 @@ func (ba *Babylon) NewPointLight(name string, position *Vector3, scene *Scene) *
 
 // PointLightAddBehaviorOpts contains optional parameters for PointLight.AddBehavior.
 type PointLightAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the PointLight object.
@@ -65,7 +74,7 @@ func (p *PointLight) AddBehavior(behavior js.Value, opts *PointLightAddBehaviorO
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := p.p.Call("addBehavior", args...)
@@ -204,9 +213,7 @@ func (p *PointLight) CompareLightsPriority(a *Light, b *Light) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#computetransformedinformation
 func (p *PointLight) ComputeTransformedInformation() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("computeTransformedInformation", args...)
+	retVal := p.p.Call("computeTransformedInformation")
 	return retVal.Bool()
 }
 
@@ -339,9 +346,7 @@ func (p *PointLight) Dispose(opts *PointLightDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#forceprojectionmatrixcompute
 func (p *PointLight) ForceProjectionMatrixCompute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("forceProjectionMatrixCompute", args...)
+	p.p.Call("forceProjectionMatrixCompute")
 }
 
 // GetAbsolutePosition calls the GetAbsolutePosition method on the PointLight object.
@@ -349,9 +354,7 @@ func (p *PointLight) ForceProjectionMatrixCompute() {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getabsoluteposition
 func (p *PointLight) GetAbsolutePosition() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAbsolutePosition", args...)
+	retVal := p.p.Call("getAbsolutePosition")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -386,23 +389,21 @@ func (p *PointLight) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getanimationranges
 func (p *PointLight) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAnimationRanges", args...)
+	retVal := p.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, p.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the PointLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getbehaviorbyname
-func (p *PointLight) GetBehaviorByName(name string) *Node {
+func (p *PointLight) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := p.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, p.ctx)
+	return retVal
 }
 
 // PointLightGetChildMeshesOpts contains optional parameters for PointLight.GetChildMeshes.
@@ -472,9 +473,7 @@ func (p *PointLight) GetChildren(opts *PointLightGetChildrenOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getclassname
 func (p *PointLight) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -524,9 +523,7 @@ func (p *PointLight) GetDepthMinZ(activeCamera *Camera) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getdepthscale
 func (p *PointLight) GetDepthScale() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getDepthScale", args...)
+	retVal := p.p.Call("getDepthScale")
 	return retVal.Float()
 }
 
@@ -566,9 +563,7 @@ func (p *PointLight) GetDescendants(opts *PointLightGetDescendantsOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getengine
 func (p *PointLight) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEngine", args...)
+	retVal := p.p.Call("getEngine")
 	return EngineFromJSObject(retVal, p.ctx)
 }
 
@@ -608,9 +603,7 @@ func (p *PointLight) GetHierarchyBoundingVectors(opts *PointLightGetHierarchyBou
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getrotation
 func (p *PointLight) GetRotation() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getRotation", args...)
+	retVal := p.p.Call("getRotation")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -619,9 +612,7 @@ func (p *PointLight) GetRotation() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getscaledintensity
 func (p *PointLight) GetScaledIntensity() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getScaledIntensity", args...)
+	retVal := p.p.Call("getScaledIntensity")
 	return retVal.Float()
 }
 
@@ -630,9 +621,7 @@ func (p *PointLight) GetScaledIntensity() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getscene
 func (p *PointLight) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getScene", args...)
+	retVal := p.p.Call("getScene")
 	return SceneFromJSObject(retVal, p.ctx)
 }
 
@@ -664,12 +653,10 @@ func (p *PointLight) GetShadowDirection(opts *PointLightGetShadowDirectionOpts) 
 // GetShadowGenerator calls the GetShadowGenerator method on the PointLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getshadowgenerator
-func (p *PointLight) GetShadowGenerator() *IShadowGenerator {
+func (p *PointLight) GetShadowGenerator() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getShadowGenerator", args...)
-	return IShadowGeneratorFromJSObject(retVal, p.ctx)
+	retVal := p.p.Call("getShadowGenerator")
+	return retVal
 }
 
 // GetTypeID calls the GetTypeID method on the PointLight object.
@@ -677,9 +664,7 @@ func (p *PointLight) GetShadowGenerator() *IShadowGenerator {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#gettypeid
 func (p *PointLight) GetTypeID() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getTypeID", args...)
+	retVal := p.p.Call("getTypeID")
 	return retVal.Float()
 }
 
@@ -688,9 +673,7 @@ func (p *PointLight) GetTypeID() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#getworldmatrix
 func (p *PointLight) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getWorldMatrix", args...)
+	retVal := p.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, p.ctx)
 }
 
@@ -712,9 +695,7 @@ func (p *PointLight) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#isdisposed
 func (p *PointLight) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isDisposed", args...)
+	retVal := p.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -773,9 +754,7 @@ func (p *PointLight) IsReady(opts *PointLightIsReadyOpts) bool {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#needcube
 func (p *PointLight) NeedCube() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("needCube", args...)
+	retVal := p.p.Call("needCube")
 	return retVal.Bool()
 }
 
@@ -784,9 +763,7 @@ func (p *PointLight) NeedCube() bool {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#needprojectionmatrixcompute
 func (p *PointLight) NeedProjectionMatrixCompute() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("needProjectionMatrixCompute", args...)
+	retVal := p.p.Call("needProjectionMatrixCompute")
 	return retVal.Bool()
 }
 
@@ -849,9 +826,7 @@ func (p *PointLight) RemoveBehavior(behavior js.Value) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#serialize
 func (p *PointLight) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 
@@ -860,9 +835,7 @@ func (p *PointLight) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#serializeanimationranges
 func (p *PointLight) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serializeAnimationRanges", args...)
+	retVal := p.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -894,16 +867,16 @@ func (p *PointLight) SetEnabled(value bool) {
 // SetShadowProjectionMatrix calls the SetShadowProjectionMatrix method on the PointLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#setshadowprojectionmatrix
-func (p *PointLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []AbstractMesh) *IShadowLight {
+func (p *PointLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []*AbstractMesh) js.Value {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, matrix.JSObject())
 	args = append(args, viewMatrix.JSObject())
-	args = append(args, renderList.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(renderList))
 
 	retVal := p.p.Call("setShadowProjectionMatrix", args...)
-	return IShadowLightFromJSObject(retVal, p.ctx)
+	return retVal
 }
 
 // PointLightToStringOpts contains optional parameters for PointLight.ToString.
@@ -1027,7 +1000,7 @@ func (p *PointLight) SetBehaviors(behaviors js.Value) *PointLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#customprojectionmatrixbuilder
 func (p *PointLight) CustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *PointLight {
-	p := ba.ctx.Get("PointLight").New(customProjectionMatrixBuilder)
+	p := ba.ctx.Get("PointLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customProjectionMatrixBuilder(); return nil}))
 	return PointLightFromJSObject(p, ba.ctx)
 }
 
@@ -1035,7 +1008,7 @@ func (p *PointLight) CustomProjectionMatrixBuilder(customProjectionMatrixBuilder
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#customprojectionmatrixbuilder
 func (p *PointLight) SetCustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *PointLight {
-	p := ba.ctx.Get("PointLight").New(customProjectionMatrixBuilder)
+	p := ba.ctx.Get("PointLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customProjectionMatrixBuilder(); return nil}))
 	return PointLightFromJSObject(p, ba.ctx)
 }
 
@@ -1539,7 +1512,7 @@ func (p *PointLight) SetName(name string) *PointLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#ondispose
 func (p *PointLight) OnDispose(onDispose func()) *PointLight {
-	p := ba.ctx.Get("PointLight").New(onDispose)
+	p := ba.ctx.Get("PointLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return PointLightFromJSObject(p, ba.ctx)
 }
 
@@ -1547,7 +1520,7 @@ func (p *PointLight) OnDispose(onDispose func()) *PointLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#ondispose
 func (p *PointLight) SetOnDispose(onDispose func()) *PointLight {
-	p := ba.ctx.Get("PointLight").New(onDispose)
+	p := ba.ctx.Get("PointLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return PointLightFromJSObject(p, ba.ctx)
 }
 
@@ -1571,7 +1544,7 @@ func (p *PointLight) SetOnDisposeObservable(onDisposeObservable *Observable) *Po
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#onready
 func (p *PointLight) OnReady(onReady func()) *PointLight {
-	p := ba.ctx.Get("PointLight").New(onReady)
+	p := ba.ctx.Get("PointLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return PointLightFromJSObject(p, ba.ctx)
 }
 
@@ -1579,7 +1552,7 @@ func (p *PointLight) OnReady(onReady func()) *PointLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#onready
 func (p *PointLight) SetOnReady(onReady func()) *PointLight {
-	p := ba.ctx.Get("PointLight").New(onReady)
+	p := ba.ctx.Get("PointLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return PointLightFromJSObject(p, ba.ctx)
 }
 

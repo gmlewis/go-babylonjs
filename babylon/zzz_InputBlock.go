@@ -27,6 +27,15 @@ func InputBlockFromJSObject(p js.Value, ctx js.Value) *InputBlock {
 	return &InputBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// InputBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func InputBlockArrayToJSArray(array []*InputBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewInputBlockOpts contains optional parameters for NewInputBlock.
 type NewInputBlockOpts struct {
 	Target js.Value
@@ -184,9 +193,7 @@ func (i *InputBlock) ConnectTo(other *NodeMaterialBlock, opts *InputBlockConnect
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#dispose
 func (i *InputBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("dispose", args...)
+	i.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the InputBlock object.
@@ -194,9 +201,7 @@ func (i *InputBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#getclassname
 func (i *InputBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -481,9 +486,7 @@ func (i *InputBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBui
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#serialize
 func (i *InputBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("serialize", args...)
+	retVal := i.p.Call("serialize")
 	return retVal
 }
 
@@ -515,11 +518,11 @@ func (i *InputBlock) SetAsAttribute(opts *InputBlockSetAsAttributeOpts) *InputBl
 // SetAsSystemValue calls the SetAsSystemValue method on the InputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#setassystemvalue
-func (i *InputBlock) SetAsSystemValue(value *NodeMaterialSystemValues) *InputBlock {
+func (i *InputBlock) SetAsSystemValue(value js.Value) *InputBlock {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	args = append(args, value)
 
 	retVal := i.p.Call("setAsSystemValue", args...)
 	return InputBlockFromJSObject(retVal, i.ctx)
@@ -530,9 +533,7 @@ func (i *InputBlock) SetAsSystemValue(value *NodeMaterialSystemValues) *InputBlo
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#setdefaultvalue
 func (i *InputBlock) SetDefaultValue() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("setDefaultValue", args...)
+	i.p.Call("setDefaultValue")
 }
 
 // UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the InputBlock object.
@@ -889,16 +890,16 @@ func (i *InputBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *InputBloc
 // SystemValue returns the SystemValue property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#systemvalue
-func (i *InputBlock) SystemValue(systemValue *NodeMaterialSystemValues) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(systemValue.JSObject())
+func (i *InputBlock) SystemValue(systemValue js.Value) *InputBlock {
+	p := ba.ctx.Get("InputBlock").New(systemValue)
 	return InputBlockFromJSObject(p, ba.ctx)
 }
 
 // SetSystemValue sets the SystemValue property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#systemvalue
-func (i *InputBlock) SetSystemValue(systemValue *NodeMaterialSystemValues) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(systemValue.JSObject())
+func (i *InputBlock) SetSystemValue(systemValue js.Value) *InputBlock {
+	p := ba.ctx.Get("InputBlock").New(systemValue)
 	return InputBlockFromJSObject(p, ba.ctx)
 }
 
@@ -970,7 +971,7 @@ func (i *InputBlock) SetValue(value interface{}) *InputBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#valuecallback
 func (i *InputBlock) ValueCallback(valueCallback func()) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(valueCallback)
+	p := ba.ctx.Get("InputBlock").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {valueCallback(); return nil}))
 	return InputBlockFromJSObject(p, ba.ctx)
 }
 
@@ -978,7 +979,7 @@ func (i *InputBlock) ValueCallback(valueCallback func()) *InputBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#valuecallback
 func (i *InputBlock) SetValueCallback(valueCallback func()) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(valueCallback)
+	p := ba.ctx.Get("InputBlock").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {valueCallback(); return nil}))
 	return InputBlockFromJSObject(p, ba.ctx)
 }
 

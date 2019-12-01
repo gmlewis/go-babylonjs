@@ -29,6 +29,15 @@ func SceneOptimizerOptionsFromJSObject(p js.Value, ctx js.Value) *SceneOptimizer
 	return &SceneOptimizerOptions{p: p, ctx: ctx}
 }
 
+// SceneOptimizerOptionsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SceneOptimizerOptionsArrayToJSArray(array []*SceneOptimizerOptions) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSceneOptimizerOptionsOpts contains optional parameters for NewSceneOptimizerOptions.
 type NewSceneOptimizerOptionsOpts struct {
 	TargetFrameRate *float64
@@ -75,8 +84,8 @@ func (s *SceneOptimizerOptions) AddCustomOptimization(onApply func(), onGetDescr
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, onApply)
-	args = append(args, onGetDescription)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onApply(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onGetDescription(); return nil }))
 
 	if opts.Priority == nil {
 		args = append(args, js.Undefined())

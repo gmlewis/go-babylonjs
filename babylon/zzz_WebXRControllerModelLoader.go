@@ -27,6 +27,15 @@ func WebXRControllerModelLoaderFromJSObject(p js.Value, ctx js.Value) *WebXRCont
 	return &WebXRControllerModelLoader{p: p, ctx: ctx}
 }
 
+// WebXRControllerModelLoaderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRControllerModelLoaderArrayToJSArray(array []*WebXRControllerModelLoader) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWebXRControllerModelLoader returns a new WebXRControllerModelLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontrollermodelloader

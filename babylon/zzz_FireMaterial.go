@@ -27,6 +27,15 @@ func FireMaterialFromJSObject(p js.Value, ctx js.Value) *FireMaterial {
 	return &FireMaterial{p: p, ctx: ctx}
 }
 
+// FireMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FireMaterialArrayToJSArray(array []*FireMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFireMaterial returns a new FireMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial
@@ -225,7 +234,7 @@ type FireMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the FireMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#forcecompilationasync
-func (f *FireMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FireMaterialForceCompilationAsyncOpts) {
+func (f *FireMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FireMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &FireMaterialForceCompilationAsyncOpts{}
 	}
@@ -240,7 +249,8 @@ func (f *FireMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FireMater
 		args = append(args, opts.Options)
 	}
 
-	f.p.Call("forceCompilationAsync", args...)
+	retVal := f.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, f.ctx)
 }
 
 // Freeze calls the Freeze method on the FireMaterial object.
@@ -248,9 +258,7 @@ func (f *FireMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FireMater
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#freeze
 func (f *FireMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("freeze", args...)
+	f.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the FireMaterial object.
@@ -258,9 +266,7 @@ func (f *FireMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getactivetextures
 func (f *FireMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getActiveTextures", args...)
+	retVal := f.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, f.ctx)
 }
 
@@ -269,9 +275,7 @@ func (f *FireMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getalphatesttexture
 func (f *FireMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getAlphaTestTexture", args...)
+	retVal := f.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, f.ctx)
 }
 
@@ -280,9 +284,7 @@ func (f *FireMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getanimatables
 func (f *FireMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getAnimatables", args...)
+	retVal := f.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -291,9 +293,7 @@ func (f *FireMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getbindedmeshes
 func (f *FireMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getBindedMeshes", args...)
+	retVal := f.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, f.ctx)
 }
 
@@ -302,9 +302,7 @@ func (f *FireMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getclassname
 func (f *FireMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -313,9 +311,7 @@ func (f *FireMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#geteffect
 func (f *FireMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getEffect", args...)
+	retVal := f.p.Call("getEffect")
 	return EffectFromJSObject(retVal, f.ctx)
 }
 
@@ -324,9 +320,7 @@ func (f *FireMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getscene
 func (f *FireMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getScene", args...)
+	retVal := f.p.Call("getScene")
 	return SceneFromJSObject(retVal, f.ctx)
 }
 
@@ -419,9 +413,7 @@ func (f *FireMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#markdirty
 func (f *FireMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("markDirty", args...)
+	f.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the FireMaterial object.
@@ -429,9 +421,7 @@ func (f *FireMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#needalphablending
 func (f *FireMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("needAlphaBlending", args...)
+	retVal := f.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -453,9 +443,7 @@ func (f *FireMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#needalphatesting
 func (f *FireMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("needAlphaTesting", args...)
+	retVal := f.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -479,9 +467,7 @@ func (f *FireMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#serialize
 func (f *FireMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("serialize", args...)
+	retVal := f.p.Call("serialize")
 	return retVal
 }
 
@@ -515,9 +501,7 @@ func (f *FireMaterial) ToString(opts *FireMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#unbind
 func (f *FireMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("unbind", args...)
+	f.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the FireMaterial object.
@@ -525,9 +509,7 @@ func (f *FireMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#unfreeze
 func (f *FireMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("unfreeze", args...)
+	f.p.Call("unfreeze")
 }
 
 /*
@@ -599,16 +581,16 @@ func (f *FireMaterial) SetAlphaMode(alphaMode float64) *FireMaterial {
 // Animations returns the Animations property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#animations
-func (f *FireMaterial) Animations(animations []Animation) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(animations.JSObject())
+func (f *FireMaterial) Animations(animations []*Animation) *FireMaterial {
+	p := ba.ctx.Get("FireMaterial").New(animations)
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#animations
-func (f *FireMaterial) SetAnimations(animations []Animation) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(animations.JSObject())
+func (f *FireMaterial) SetAnimations(animations []*Animation) *FireMaterial {
+	p := ba.ctx.Get("FireMaterial").New(animations)
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -872,7 +854,7 @@ func (f *FireMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *FireMateri
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getrendertargettextures
 func (f *FireMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("FireMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -880,7 +862,7 @@ func (f *FireMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getrendertargettextures
 func (f *FireMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("FireMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1080,7 +1062,7 @@ func (f *FireMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *FireMaterial 
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#onbind
 func (f *FireMaterial) OnBind(onBind func()) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(onBind)
+	p := ba.ctx.Get("FireMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1088,7 +1070,7 @@ func (f *FireMaterial) OnBind(onBind func()) *FireMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#onbind
 func (f *FireMaterial) SetOnBind(onBind func()) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(onBind)
+	p := ba.ctx.Get("FireMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1112,7 +1094,7 @@ func (f *FireMaterial) SetOnBindObservable(onBindObservable *Observable) *FireMa
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#oncompiled
 func (f *FireMaterial) OnCompiled(onCompiled func()) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(onCompiled)
+	p := ba.ctx.Get("FireMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1120,7 +1102,7 @@ func (f *FireMaterial) OnCompiled(onCompiled func()) *FireMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#oncompiled
 func (f *FireMaterial) SetOnCompiled(onCompiled func()) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(onCompiled)
+	p := ba.ctx.Get("FireMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1128,7 +1110,7 @@ func (f *FireMaterial) SetOnCompiled(onCompiled func()) *FireMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#ondispose
 func (f *FireMaterial) OnDispose(onDispose func()) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(onDispose)
+	p := ba.ctx.Get("FireMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1136,7 +1118,7 @@ func (f *FireMaterial) OnDispose(onDispose func()) *FireMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#ondispose
 func (f *FireMaterial) SetOnDispose(onDispose func()) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(onDispose)
+	p := ba.ctx.Get("FireMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1160,7 +1142,7 @@ func (f *FireMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#onerror
 func (f *FireMaterial) OnError(onError func()) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(onError)
+	p := ba.ctx.Get("FireMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1168,7 +1150,7 @@ func (f *FireMaterial) OnError(onError func()) *FireMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#onerror
 func (f *FireMaterial) SetOnError(onError func()) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(onError)
+	p := ba.ctx.Get("FireMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return FireMaterialFromJSObject(p, ba.ctx)
 }
 

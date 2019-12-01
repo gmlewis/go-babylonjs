@@ -28,6 +28,15 @@ func NullEngineFromJSObject(p js.Value, ctx js.Value) *NullEngine {
 	return &NullEngine{Engine: EngineFromJSObject(p, ctx), ctx: ctx}
 }
 
+// NullEngineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NullEngineArrayToJSArray(array []*NullEngine) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewNullEngineOpts contains optional parameters for NewNullEngine.
 type NewNullEngineOpts struct {
 	Options *NullEngineOptions
@@ -58,9 +67,7 @@ func (ba *Babylon) NewNullEngine(opts *NewNullEngineOpts) *NullEngine {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#arealleffectsready
 func (n *NullEngine) AreAllEffectsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("areAllEffectsReady", args...)
+	retVal := n.p.Call("areAllEffectsReady")
 	return retVal.Bool()
 }
 
@@ -69,20 +76,18 @@ func (n *NullEngine) AreAllEffectsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#beginframe
 func (n *NullEngine) BeginFrame() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("beginFrame", args...)
+	n.p.Call("beginFrame")
 }
 
 // BeginOcclusionQuery calls the BeginOcclusionQuery method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#beginocclusionquery
-func (n *NullEngine) BeginOcclusionQuery(algorithmType float64, query *WebGLQuery) *Engine {
+func (n *NullEngine) BeginOcclusionQuery(algorithmType float64, query js.Value) *Engine {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, algorithmType)
-	args = append(args, query.JSObject())
+	args = append(args, query)
 
 	retVal := n.p.Call("beginOcclusionQuery", args...)
 	return EngineFromJSObject(retVal, n.ctx)
@@ -185,11 +190,11 @@ func (n *NullEngine) BindSamplers(effect *Effect) {
 // BindTransformFeedback calls the BindTransformFeedback method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#bindtransformfeedback
-func (n *NullEngine) BindTransformFeedback(value *WebGLTransformFeedback) {
+func (n *NullEngine) BindTransformFeedback(value js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	args = append(args, value)
 
 	n.p.Call("bindTransformFeedback", args...)
 }
@@ -209,11 +214,11 @@ func (n *NullEngine) BindTransformFeedbackBuffer(value *DataBuffer) {
 // BindUniformBlock calls the BindUniformBlock method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#binduniformblock
-func (n *NullEngine) BindUniformBlock(pipelineContext *IPipelineContext, blockName string, index float64) {
+func (n *NullEngine) BindUniformBlock(pipelineContext js.Value, blockName string, index float64) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, pipelineContext.JSObject())
+	args = append(args, pipelineContext)
 	args = append(args, blockName)
 	args = append(args, index)
 
@@ -250,9 +255,7 @@ func (n *NullEngine) BindUniformBufferBase(buffer *DataBuffer, location float64)
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#cachestencilstate
 func (n *NullEngine) CacheStencilState() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("cacheStencilState", args...)
+	n.p.Call("cacheStencilState")
 }
 
 // NullEngineClearOpts contains optional parameters for NullEngine.Clear.
@@ -263,14 +266,14 @@ type NullEngineClearOpts struct {
 // Clear calls the Clear method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#clear
-func (n *NullEngine) Clear(color *IColor4Like, backBuffer bool, depth bool, opts *NullEngineClearOpts) {
+func (n *NullEngine) Clear(color js.Value, backBuffer bool, depth bool, opts *NullEngineClearOpts) {
 	if opts == nil {
 		opts = &NullEngineClearOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, color.JSObject())
+	args = append(args, color)
 	args = append(args, backBuffer)
 	args = append(args, depth)
 
@@ -394,12 +397,10 @@ func (n *NullEngine) CreateMultiviewRenderTargetTexture(width float64, height fl
 // CreateQuery calls the CreateQuery method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#createquery
-func (n *NullEngine) CreateQuery() *WebGLQuery {
+func (n *NullEngine) CreateQuery() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("createQuery", args...)
-	return WebGLQueryFromJSObject(retVal, n.ctx)
+	retVal := n.p.Call("createQuery")
+	return retVal
 }
 
 // CreateRawCubeTexture calls the CreateRawCubeTexture method on the NullEngine object.
@@ -435,10 +436,10 @@ func (n *NullEngine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size 
 	args = append(args, format)
 	args = append(args, jsType)
 	args = append(args, noMipmap)
-	args = append(args, callback)
-	args = append(args, mipmapGenerator)
-	args = append(args, onLoad)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { mipmapGenerator(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLoad(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 	args = append(args, samplingMode)
 	args = append(args, invertY)
 
@@ -533,14 +534,14 @@ type NullEngineCreateShaderProgramOpts struct {
 // CreateShaderProgram calls the CreateShaderProgram method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#createshaderprogram
-func (n *NullEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCode string, fragmentCode string, defines string, opts *NullEngineCreateShaderProgramOpts) *WebGLProgram {
+func (n *NullEngine) CreateShaderProgram(pipelineContext js.Value, vertexCode string, fragmentCode string, defines string, opts *NullEngineCreateShaderProgramOpts) js.Value {
 	if opts == nil {
 		opts = &NullEngineCreateShaderProgramOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+1)
 
-	args = append(args, pipelineContext.JSObject())
+	args = append(args, pipelineContext)
 	args = append(args, vertexCode)
 	args = append(args, fragmentCode)
 	args = append(args, defines)
@@ -552,7 +553,7 @@ func (n *NullEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vert
 	}
 
 	retVal := n.p.Call("createShaderProgram", args...)
-	return WebGLProgramFromJSObject(retVal, n.ctx)
+	return retVal
 }
 
 // NullEngineCreateTextureOpts contains optional parameters for NullEngine.CreateTexture.
@@ -618,12 +619,10 @@ func (n *NullEngine) CreateTexture(urlArg string, noMipmap bool, invertY bool, s
 // CreateTransformFeedback calls the CreateTransformFeedback method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#createtransformfeedback
-func (n *NullEngine) CreateTransformFeedback() *WebGLTransformFeedback {
+func (n *NullEngine) CreateTransformFeedback() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("createTransformFeedback", args...)
-	return WebGLTransformFeedbackFromJSObject(retVal, n.ctx)
+	retVal := n.p.Call("createTransformFeedback")
+	return retVal
 }
 
 // CreateUniformBuffer calls the CreateUniformBuffer method on the NullEngine object.
@@ -655,24 +654,24 @@ func (n *NullEngine) CreateVertexBuffer(vertices js.Value) *DataBuffer {
 // DefaultLoadingScreenFactory calls the DefaultLoadingScreenFactory method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#defaultloadingscreenfactory
-func (n *NullEngine) DefaultLoadingScreenFactory(canvas js.Value) *ILoadingScreen {
+func (n *NullEngine) DefaultLoadingScreenFactory(canvas js.Value) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, canvas)
 
 	retVal := n.p.Call("DefaultLoadingScreenFactory", args...)
-	return ILoadingScreenFromJSObject(retVal, n.ctx)
+	return retVal
 }
 
 // DeleteInstancesBuffer calls the DeleteInstancesBuffer method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#deleteinstancesbuffer
-func (n *NullEngine) DeleteInstancesBuffer(buffer *WebGLBuffer) {
+func (n *NullEngine) DeleteInstancesBuffer(buffer js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, buffer.JSObject())
+	args = append(args, buffer)
 
 	n.p.Call("deleteInstancesBuffer", args...)
 }
@@ -680,11 +679,11 @@ func (n *NullEngine) DeleteInstancesBuffer(buffer *WebGLBuffer) {
 // DeleteQuery calls the DeleteQuery method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#deletequery
-func (n *NullEngine) DeleteQuery(query *WebGLQuery) *Engine {
+func (n *NullEngine) DeleteQuery(query js.Value) *Engine {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, query.JSObject())
+	args = append(args, query)
 
 	retVal := n.p.Call("deleteQuery", args...)
 	return EngineFromJSObject(retVal, n.ctx)
@@ -693,11 +692,11 @@ func (n *NullEngine) DeleteQuery(query *WebGLQuery) *Engine {
 // DeleteTransformFeedback calls the DeleteTransformFeedback method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#deletetransformfeedback
-func (n *NullEngine) DeleteTransformFeedback(value *WebGLTransformFeedback) {
+func (n *NullEngine) DeleteTransformFeedback(value js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	args = append(args, value)
 
 	n.p.Call("deleteTransformFeedback", args...)
 }
@@ -707,9 +706,7 @@ func (n *NullEngine) DeleteTransformFeedback(value *WebGLTransformFeedback) {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#disablescissor
 func (n *NullEngine) DisableScissor() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("disableScissor", args...)
+	n.p.Call("disableScissor")
 }
 
 // DisableVR calls the DisableVR method on the NullEngine object.
@@ -717,9 +714,7 @@ func (n *NullEngine) DisableScissor() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#disablevr
 func (n *NullEngine) DisableVR() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("disableVR", args...)
+	n.p.Call("disableVR")
 }
 
 // DisplayLoadingUI calls the DisplayLoadingUI method on the NullEngine object.
@@ -727,9 +722,7 @@ func (n *NullEngine) DisableVR() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#displayloadingui
 func (n *NullEngine) DisplayLoadingUI() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("displayLoadingUI", args...)
+	n.p.Call("displayLoadingUI")
 }
 
 // Dispose calls the Dispose method on the NullEngine object.
@@ -737,9 +730,7 @@ func (n *NullEngine) DisplayLoadingUI() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#dispose
 func (n *NullEngine) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("dispose", args...)
+	n.p.Call("dispose")
 }
 
 // NullEngineDrawOpts contains optional parameters for NullEngine.Draw.
@@ -856,11 +847,11 @@ func (n *NullEngine) EnableScissor(x float64, y float64, width float64, height f
 // EnableVR calls the EnableVR method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#enablevr
-func (n *NullEngine) EnableVR(options *WebVROptions) {
+func (n *NullEngine) EnableVR(options js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, options.JSObject())
+	args = append(args, options)
 
 	n.p.Call("enableVR", args...)
 }
@@ -870,9 +861,7 @@ func (n *NullEngine) EnableVR(options *WebVROptions) {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#endframe
 func (n *NullEngine) EndFrame() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("endFrame", args...)
+	n.p.Call("endFrame")
 }
 
 // EndOcclusionQuery calls the EndOcclusionQuery method on the NullEngine object.
@@ -891,11 +880,11 @@ func (n *NullEngine) EndOcclusionQuery(algorithmType float64) *Engine {
 // EndTimeQuery calls the EndTimeQuery method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#endtimequery
-func (n *NullEngine) EndTimeQuery(token *_TimeToken) *int {
+func (n *NullEngine) EndTimeQuery(token js.Value) *int {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, token.JSObject())
+	args = append(args, token)
 
 	retVal := n.p.Call("endTimeQuery", args...)
 	return intFromJSObject(retVal, n.ctx)
@@ -906,9 +895,7 @@ func (n *NullEngine) EndTimeQuery(token *_TimeToken) *int {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#endtransformfeedback
 func (n *NullEngine) EndTransformFeedback() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("endTransformFeedback", args...)
+	n.p.Call("endTransformFeedback")
 }
 
 // EnterFullscreen calls the EnterFullscreen method on the NullEngine object.
@@ -928,9 +915,7 @@ func (n *NullEngine) EnterFullscreen(requestPointerLock bool) {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#enterpointerlock
 func (n *NullEngine) EnterPointerlock() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("enterPointerlock", args...)
+	n.p.Call("enterPointerlock")
 }
 
 // ExitFullscreen calls the ExitFullscreen method on the NullEngine object.
@@ -938,9 +923,7 @@ func (n *NullEngine) EnterPointerlock() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#exitfullscreen
 func (n *NullEngine) ExitFullscreen() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("exitFullscreen", args...)
+	n.p.Call("exitFullscreen")
 }
 
 // ExitPointerlock calls the ExitPointerlock method on the NullEngine object.
@@ -948,9 +931,7 @@ func (n *NullEngine) ExitFullscreen() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#exitpointerlock
 func (n *NullEngine) ExitPointerlock() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("exitPointerlock", args...)
+	n.p.Call("exitPointerlock")
 }
 
 // GenerateMipMapsForCubemap calls the GenerateMipMapsForCubemap method on the NullEngine object.
@@ -970,9 +951,7 @@ func (n *NullEngine) GenerateMipMapsForCubemap(texture *InternalTexture) {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getalphaequation
 func (n *NullEngine) GetAlphaEquation() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getAlphaEquation", args...)
+	retVal := n.p.Call("getAlphaEquation")
 	return retVal.Float()
 }
 
@@ -981,9 +960,7 @@ func (n *NullEngine) GetAlphaEquation() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getalphamode
 func (n *NullEngine) GetAlphaMode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getAlphaMode", args...)
+	retVal := n.p.Call("getAlphaMode")
 	return retVal.Float()
 }
 
@@ -995,14 +972,14 @@ type NullEngineGetAspectRatioOpts struct {
 // GetAspectRatio calls the GetAspectRatio method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getaspectratio
-func (n *NullEngine) GetAspectRatio(viewportOwner *IViewportOwnerLike, opts *NullEngineGetAspectRatioOpts) float64 {
+func (n *NullEngine) GetAspectRatio(viewportOwner js.Value, opts *NullEngineGetAspectRatioOpts) float64 {
 	if opts == nil {
 		opts = &NullEngineGetAspectRatioOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, viewportOwner.JSObject())
+	args = append(args, viewportOwner)
 
 	if opts.UseScreen == nil {
 		args = append(args, js.Undefined())
@@ -1017,11 +994,11 @@ func (n *NullEngine) GetAspectRatio(viewportOwner *IViewportOwnerLike, opts *Nul
 // GetAttributes calls the GetAttributes method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getattributes
-func (n *NullEngine) GetAttributes(pipelineContext *IPipelineContext, attributesNames string) float64 {
+func (n *NullEngine) GetAttributes(pipelineContext js.Value, attributesNames string) float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext.JSObject())
+	args = append(args, pipelineContext)
 	args = append(args, attributesNames)
 
 	retVal := n.p.Call("getAttributes", args...)
@@ -1033,9 +1010,7 @@ func (n *NullEngine) GetAttributes(pipelineContext *IPipelineContext, attributes
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getcolorwrite
 func (n *NullEngine) GetColorWrite() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getColorWrite", args...)
+	retVal := n.p.Call("getColorWrite")
 	return retVal.Bool()
 }
 
@@ -1044,9 +1019,7 @@ func (n *NullEngine) GetColorWrite() bool {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getdeltatime
 func (n *NullEngine) GetDeltaTime() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getDeltaTime", args...)
+	retVal := n.p.Call("getDeltaTime")
 	return retVal.Float()
 }
 
@@ -1055,9 +1028,7 @@ func (n *NullEngine) GetDeltaTime() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getdepthfunction
 func (n *NullEngine) GetDepthFunction() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getDepthFunction", args...)
+	retVal := n.p.Call("getDepthFunction")
 	return retVal.Float()
 }
 
@@ -1066,9 +1037,7 @@ func (n *NullEngine) GetDepthFunction() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getdepthwrite
 func (n *NullEngine) GetDepthWrite() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getDepthWrite", args...)
+	retVal := n.p.Call("getDepthWrite")
 	return retVal.Bool()
 }
 
@@ -1077,20 +1046,18 @@ func (n *NullEngine) GetDepthWrite() bool {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getfps
 func (n *NullEngine) GetFps() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getFps", args...)
+	retVal := n.p.Call("getFps")
 	return retVal.Float()
 }
 
 // GetFragmentShaderSource calls the GetFragmentShaderSource method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getfragmentshadersource
-func (n *NullEngine) GetFragmentShaderSource(program *WebGLProgram) string {
+func (n *NullEngine) GetFragmentShaderSource(program js.Value) string {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, program.JSObject())
+	args = append(args, program)
 
 	retVal := n.p.Call("getFragmentShaderSource", args...)
 	return retVal.String()
@@ -1101,9 +1068,7 @@ func (n *NullEngine) GetFragmentShaderSource(program *WebGLProgram) string {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#gethardwarescalinglevel
 func (n *NullEngine) GetHardwareScalingLevel() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getHardwareScalingLevel", args...)
+	retVal := n.p.Call("getHardwareScalingLevel")
 	return retVal.Float()
 }
 
@@ -1112,21 +1077,17 @@ func (n *NullEngine) GetHardwareScalingLevel() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getinputelement
 func (n *NullEngine) GetInputElement() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getInputElement", args...)
+	retVal := n.p.Call("getInputElement")
 	return retVal
 }
 
 // GetInputElementClientRect calls the GetInputElementClientRect method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getinputelementclientrect
-func (n *NullEngine) GetInputElementClientRect() *ClientRect {
+func (n *NullEngine) GetInputElementClientRect() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getInputElementClientRect", args...)
-	return ClientRectFromJSObject(retVal, n.ctx)
+	retVal := n.p.Call("getInputElementClientRect")
+	return retVal
 }
 
 // GetLockstepMaxSteps calls the GetLockstepMaxSteps method on the NullEngine object.
@@ -1134,20 +1095,18 @@ func (n *NullEngine) GetInputElementClientRect() *ClientRect {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getlockstepmaxsteps
 func (n *NullEngine) GetLockstepMaxSteps() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getLockstepMaxSteps", args...)
+	retVal := n.p.Call("getLockstepMaxSteps")
 	return retVal.Float()
 }
 
 // GetQueryResult calls the GetQueryResult method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getqueryresult
-func (n *NullEngine) GetQueryResult(query *WebGLQuery) float64 {
+func (n *NullEngine) GetQueryResult(query js.Value) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, query.JSObject())
+	args = append(args, query)
 
 	retVal := n.p.Call("getQueryResult", args...)
 	return retVal.Float()
@@ -1206,12 +1165,10 @@ func (n *NullEngine) GetRenderWidth(opts *NullEngineGetRenderWidthOpts) float64 
 // GetRenderingCanvasClientRect calls the GetRenderingCanvasClientRect method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getrenderingcanvasclientrect
-func (n *NullEngine) GetRenderingCanvasClientRect() *ClientRect {
+func (n *NullEngine) GetRenderingCanvasClientRect() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getRenderingCanvasClientRect", args...)
-	return ClientRectFromJSObject(retVal, n.ctx)
+	retVal := n.p.Call("getRenderingCanvasClientRect")
+	return retVal
 }
 
 // GetScreenAspectRatio calls the GetScreenAspectRatio method on the NullEngine object.
@@ -1219,9 +1176,7 @@ func (n *NullEngine) GetRenderingCanvasClientRect() *ClientRect {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getscreenaspectratio
 func (n *NullEngine) GetScreenAspectRatio() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getScreenAspectRatio", args...)
+	retVal := n.p.Call("getScreenAspectRatio")
 	return retVal.Float()
 }
 
@@ -1230,9 +1185,7 @@ func (n *NullEngine) GetScreenAspectRatio() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getstencilbuffer
 func (n *NullEngine) GetStencilBuffer() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getStencilBuffer", args...)
+	retVal := n.p.Call("getStencilBuffer")
 	return retVal.Bool()
 }
 
@@ -1241,9 +1194,7 @@ func (n *NullEngine) GetStencilBuffer() bool {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getstencilfunction
 func (n *NullEngine) GetStencilFunction() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getStencilFunction", args...)
+	retVal := n.p.Call("getStencilFunction")
 	return retVal.Float()
 }
 
@@ -1252,9 +1203,7 @@ func (n *NullEngine) GetStencilFunction() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getstencilfunctionmask
 func (n *NullEngine) GetStencilFunctionMask() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getStencilFunctionMask", args...)
+	retVal := n.p.Call("getStencilFunctionMask")
 	return retVal.Float()
 }
 
@@ -1263,9 +1212,7 @@ func (n *NullEngine) GetStencilFunctionMask() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getstencilfunctionreference
 func (n *NullEngine) GetStencilFunctionReference() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getStencilFunctionReference", args...)
+	retVal := n.p.Call("getStencilFunctionReference")
 	return retVal.Float()
 }
 
@@ -1274,9 +1221,7 @@ func (n *NullEngine) GetStencilFunctionReference() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getstencilmask
 func (n *NullEngine) GetStencilMask() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getStencilMask", args...)
+	retVal := n.p.Call("getStencilMask")
 	return retVal.Float()
 }
 
@@ -1285,9 +1230,7 @@ func (n *NullEngine) GetStencilMask() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getstenciloperationdepthfail
 func (n *NullEngine) GetStencilOperationDepthFail() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getStencilOperationDepthFail", args...)
+	retVal := n.p.Call("getStencilOperationDepthFail")
 	return retVal.Float()
 }
 
@@ -1296,9 +1239,7 @@ func (n *NullEngine) GetStencilOperationDepthFail() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getstenciloperationfail
 func (n *NullEngine) GetStencilOperationFail() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getStencilOperationFail", args...)
+	retVal := n.p.Call("getStencilOperationFail")
 	return retVal.Float()
 }
 
@@ -1307,9 +1248,7 @@ func (n *NullEngine) GetStencilOperationFail() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getstenciloperationpass
 func (n *NullEngine) GetStencilOperationPass() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getStencilOperationPass", args...)
+	retVal := n.p.Call("getStencilOperationPass")
 	return retVal.Float()
 }
 
@@ -1318,24 +1257,22 @@ func (n *NullEngine) GetStencilOperationPass() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#gettimestep
 func (n *NullEngine) GetTimeStep() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getTimeStep", args...)
+	retVal := n.p.Call("getTimeStep")
 	return retVal.Float()
 }
 
 // GetUniforms calls the GetUniforms method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getuniforms
-func (n *NullEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames string) *WebGLUniformLocation {
+func (n *NullEngine) GetUniforms(pipelineContext js.Value, uniformsNames string) js.Value {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext.JSObject())
+	args = append(args, pipelineContext)
 	args = append(args, uniformsNames)
 
 	retVal := n.p.Call("getUniforms", args...)
-	return WebGLUniformLocationFromJSObject(retVal, n.ctx)
+	return retVal
 }
 
 // GetVRDevice calls the GetVRDevice method on the NullEngine object.
@@ -1343,20 +1280,18 @@ func (n *NullEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsName
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getvrdevice
 func (n *NullEngine) GetVRDevice() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getVRDevice", args...)
+	retVal := n.p.Call("getVRDevice")
 	return retVal
 }
 
 // GetVertexShaderSource calls the GetVertexShaderSource method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getvertexshadersource
-func (n *NullEngine) GetVertexShaderSource(program *WebGLProgram) string {
+func (n *NullEngine) GetVertexShaderSource(program js.Value) string {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, program.JSObject())
+	args = append(args, program)
 
 	retVal := n.p.Call("getVertexShaderSource", args...)
 	return retVal.String()
@@ -1367,9 +1302,7 @@ func (n *NullEngine) GetVertexShaderSource(program *WebGLProgram) string {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getzoffset
 func (n *NullEngine) GetZOffset() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getZOffset", args...)
+	retVal := n.p.Call("getZOffset")
 	return retVal.Float()
 }
 
@@ -1378,31 +1311,25 @@ func (n *NullEngine) GetZOffset() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#hideloadingui
 func (n *NullEngine) HideLoadingUI() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("hideLoadingUI", args...)
+	n.p.Call("hideLoadingUI")
 }
 
 // InitWebVR calls the InitWebVR method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#initwebvr
-func (n *NullEngine) InitWebVR() *IDisplayChangedEventArgs {
+func (n *NullEngine) InitWebVR() *Observable {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("initWebVR", args...)
-	return IDisplayChangedEventArgsFromJSObject(retVal, n.ctx)
+	retVal := n.p.Call("initWebVR")
+	return ObservableFromJSObject(retVal, n.ctx)
 }
 
 // InitWebVRAsync calls the InitWebVRAsync method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#initwebvrasync
-func (n *NullEngine) InitWebVRAsync() *IDisplayChangedEventArgs {
+func (n *NullEngine) InitWebVRAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("initWebVRAsync", args...)
-	return IDisplayChangedEventArgsFromJSObject(retVal, n.ctx)
+	retVal := n.p.Call("initWebVRAsync")
+	return PromiseFromJSObject(retVal, n.ctx)
 }
 
 // IsDeterministicLockStep calls the IsDeterministicLockStep method on the NullEngine object.
@@ -1410,20 +1337,18 @@ func (n *NullEngine) InitWebVRAsync() *IDisplayChangedEventArgs {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#isdeterministiclockstep
 func (n *NullEngine) IsDeterministicLockStep() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("isDeterministicLockStep", args...)
+	retVal := n.p.Call("isDeterministicLockStep")
 	return retVal.Bool()
 }
 
 // IsQueryResultAvailable calls the IsQueryResultAvailable method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#isqueryresultavailable
-func (n *NullEngine) IsQueryResultAvailable(query *WebGLQuery) bool {
+func (n *NullEngine) IsQueryResultAvailable(query js.Value) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, query.JSObject())
+	args = append(args, query)
 
 	retVal := n.p.Call("isQueryResultAvailable", args...)
 	return retVal.Bool()
@@ -1434,9 +1359,7 @@ func (n *NullEngine) IsQueryResultAvailable(query *WebGLQuery) bool {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#isvrdevicepresent
 func (n *NullEngine) IsVRDevicePresent() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("isVRDevicePresent", args...)
+	retVal := n.p.Call("isVRDevicePresent")
 	return retVal.Bool()
 }
 
@@ -1445,9 +1368,7 @@ func (n *NullEngine) IsVRDevicePresent() bool {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#isvrpresenting
 func (n *NullEngine) IsVRPresenting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("isVRPresenting", args...)
+	retVal := n.p.Call("isVRPresenting")
 	return retVal.Bool()
 }
 
@@ -1525,9 +1446,7 @@ func (n *NullEngine) RegisterView(canvas js.Value, opts *NullEngineRegisterViewO
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#releaseeffects
 func (n *NullEngine) ReleaseEffects() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("releaseEffects", args...)
+	n.p.Call("releaseEffects")
 }
 
 // Resize calls the Resize method on the NullEngine object.
@@ -1535,9 +1454,7 @@ func (n *NullEngine) ReleaseEffects() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#resize
 func (n *NullEngine) Resize() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("resize", args...)
+	n.p.Call("resize")
 }
 
 // RestoreStencilState calls the RestoreStencilState method on the NullEngine object.
@@ -1545,15 +1462,13 @@ func (n *NullEngine) Resize() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#restorestencilstate
 func (n *NullEngine) RestoreStencilState() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("restoreStencilState", args...)
+	n.p.Call("restoreStencilState")
 }
 
 // ScissorClear calls the ScissorClear method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#scissorclear
-func (n *NullEngine) ScissorClear(x float64, y float64, width float64, height float64, clearColor *IColor4Like) {
+func (n *NullEngine) ScissorClear(x float64, y float64, width float64, height float64, clearColor js.Value) {
 
 	args := make([]interface{}, 0, 5+0)
 
@@ -1561,7 +1476,7 @@ func (n *NullEngine) ScissorClear(x float64, y float64, width float64, height fl
 	args = append(args, y)
 	args = append(args, width)
 	args = append(args, height)
-	args = append(args, clearColor.JSObject())
+	args = append(args, clearColor)
 
 	n.p.Call("scissorClear", args...)
 }
@@ -1622,11 +1537,11 @@ func (n *NullEngine) SetAlphaMode(mode float64, opts *NullEngineSetAlphaModeOpts
 // SetArray calls the SetArray method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray
-func (n *NullEngine) SetArray(uniform *WebGLUniformLocation, array float64) {
+func (n *NullEngine) SetArray(uniform js.Value, array float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, array)
 
 	n.p.Call("setArray", args...)
@@ -1635,11 +1550,11 @@ func (n *NullEngine) SetArray(uniform *WebGLUniformLocation, array float64) {
 // SetArray2 calls the SetArray2 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray2
-func (n *NullEngine) SetArray2(uniform *WebGLUniformLocation, array float64) {
+func (n *NullEngine) SetArray2(uniform js.Value, array float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, array)
 
 	n.p.Call("setArray2", args...)
@@ -1648,11 +1563,11 @@ func (n *NullEngine) SetArray2(uniform *WebGLUniformLocation, array float64) {
 // SetArray3 calls the SetArray3 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray3
-func (n *NullEngine) SetArray3(uniform *WebGLUniformLocation, array float64) {
+func (n *NullEngine) SetArray3(uniform js.Value, array float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, array)
 
 	n.p.Call("setArray3", args...)
@@ -1661,11 +1576,11 @@ func (n *NullEngine) SetArray3(uniform *WebGLUniformLocation, array float64) {
 // SetArray4 calls the SetArray4 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray4
-func (n *NullEngine) SetArray4(uniform *WebGLUniformLocation, array float64) {
+func (n *NullEngine) SetArray4(uniform js.Value, array float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, array)
 
 	n.p.Call("setArray4", args...)
@@ -1674,11 +1589,11 @@ func (n *NullEngine) SetArray4(uniform *WebGLUniformLocation, array float64) {
 // SetBool calls the SetBool method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setbool
-func (n *NullEngine) SetBool(uniform *WebGLUniformLocation, bool float64) {
+func (n *NullEngine) SetBool(uniform js.Value, bool float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, bool)
 
 	n.p.Call("setBool", args...)
@@ -1725,9 +1640,7 @@ func (n *NullEngine) SetDepthFunction(depthFunc float64) {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthfunctiontogreater
 func (n *NullEngine) SetDepthFunctionToGreater() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("setDepthFunctionToGreater", args...)
+	n.p.Call("setDepthFunctionToGreater")
 }
 
 // SetDepthFunctionToGreaterOrEqual calls the SetDepthFunctionToGreaterOrEqual method on the NullEngine object.
@@ -1735,9 +1648,7 @@ func (n *NullEngine) SetDepthFunctionToGreater() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthfunctiontogreaterorequal
 func (n *NullEngine) SetDepthFunctionToGreaterOrEqual() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("setDepthFunctionToGreaterOrEqual", args...)
+	n.p.Call("setDepthFunctionToGreaterOrEqual")
 }
 
 // SetDepthFunctionToLess calls the SetDepthFunctionToLess method on the NullEngine object.
@@ -1745,9 +1656,7 @@ func (n *NullEngine) SetDepthFunctionToGreaterOrEqual() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthfunctiontoless
 func (n *NullEngine) SetDepthFunctionToLess() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("setDepthFunctionToLess", args...)
+	n.p.Call("setDepthFunctionToLess")
 }
 
 // SetDepthFunctionToLessOrEqual calls the SetDepthFunctionToLessOrEqual method on the NullEngine object.
@@ -1755,20 +1664,18 @@ func (n *NullEngine) SetDepthFunctionToLess() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthfunctiontolessorequal
 func (n *NullEngine) SetDepthFunctionToLessOrEqual() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("setDepthFunctionToLessOrEqual", args...)
+	n.p.Call("setDepthFunctionToLessOrEqual")
 }
 
 // SetDepthStencilTexture calls the SetDepthStencilTexture method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthstenciltexture
-func (n *NullEngine) SetDepthStencilTexture(channel float64, uniform *WebGLUniformLocation, texture *RenderTargetTexture) {
+func (n *NullEngine) SetDepthStencilTexture(channel float64, uniform js.Value, texture *RenderTargetTexture) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, channel)
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, texture.JSObject())
 
 	n.p.Call("setDepthStencilTexture", args...)
@@ -1789,7 +1696,7 @@ func (n *NullEngine) SetDepthWrite(enable bool) {
 // SetDirectViewport calls the SetDirectViewport method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setdirectviewport
-func (n *NullEngine) SetDirectViewport(x float64, y float64, width float64, height float64) *IViewportLike {
+func (n *NullEngine) SetDirectViewport(x float64, y float64, width float64, height float64) js.Value {
 
 	args := make([]interface{}, 0, 4+0)
 
@@ -1799,7 +1706,7 @@ func (n *NullEngine) SetDirectViewport(x float64, y float64, width float64, heig
 	args = append(args, height)
 
 	retVal := n.p.Call("setDirectViewport", args...)
-	return IViewportLikeFromJSObject(retVal, n.ctx)
+	return retVal
 }
 
 // SetDitheringState calls the SetDitheringState method on the NullEngine object.
@@ -1817,11 +1724,11 @@ func (n *NullEngine) SetDitheringState(value bool) {
 // SetFloat calls the SetFloat method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloat
-func (n *NullEngine) SetFloat(uniform *WebGLUniformLocation, value float64) {
+func (n *NullEngine) SetFloat(uniform js.Value, value float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, value)
 
 	n.p.Call("setFloat", args...)
@@ -1830,11 +1737,11 @@ func (n *NullEngine) SetFloat(uniform *WebGLUniformLocation, value float64) {
 // SetFloat2 calls the SetFloat2 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloat2
-func (n *NullEngine) SetFloat2(uniform *WebGLUniformLocation, x float64, y float64) {
+func (n *NullEngine) SetFloat2(uniform js.Value, x float64, y float64) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, x)
 	args = append(args, y)
 
@@ -1844,11 +1751,11 @@ func (n *NullEngine) SetFloat2(uniform *WebGLUniformLocation, x float64, y float
 // SetFloat3 calls the SetFloat3 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloat3
-func (n *NullEngine) SetFloat3(uniform *WebGLUniformLocation, x float64, y float64, z float64) {
+func (n *NullEngine) SetFloat3(uniform js.Value, x float64, y float64, z float64) {
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, x)
 	args = append(args, y)
 	args = append(args, z)
@@ -1859,11 +1766,11 @@ func (n *NullEngine) SetFloat3(uniform *WebGLUniformLocation, x float64, y float
 // SetFloat4 calls the SetFloat4 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloat4
-func (n *NullEngine) SetFloat4(uniform *WebGLUniformLocation, x float64, y float64, z float64, w float64) {
+func (n *NullEngine) SetFloat4(uniform js.Value, x float64, y float64, z float64, w float64) {
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, x)
 	args = append(args, y)
 	args = append(args, z)
@@ -1875,11 +1782,11 @@ func (n *NullEngine) SetFloat4(uniform *WebGLUniformLocation, x float64, y float
 // SetFloatArray calls the SetFloatArray method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloatarray
-func (n *NullEngine) SetFloatArray(uniform *WebGLUniformLocation, array js.Value) {
+func (n *NullEngine) SetFloatArray(uniform js.Value, array js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, array)
 
 	n.p.Call("setFloatArray", args...)
@@ -1888,11 +1795,11 @@ func (n *NullEngine) SetFloatArray(uniform *WebGLUniformLocation, array js.Value
 // SetFloatArray2 calls the SetFloatArray2 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloatarray2
-func (n *NullEngine) SetFloatArray2(uniform *WebGLUniformLocation, array js.Value) {
+func (n *NullEngine) SetFloatArray2(uniform js.Value, array js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, array)
 
 	n.p.Call("setFloatArray2", args...)
@@ -1901,11 +1808,11 @@ func (n *NullEngine) SetFloatArray2(uniform *WebGLUniformLocation, array js.Valu
 // SetFloatArray3 calls the SetFloatArray3 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloatarray3
-func (n *NullEngine) SetFloatArray3(uniform *WebGLUniformLocation, array js.Value) {
+func (n *NullEngine) SetFloatArray3(uniform js.Value, array js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, array)
 
 	n.p.Call("setFloatArray3", args...)
@@ -1914,11 +1821,11 @@ func (n *NullEngine) SetFloatArray3(uniform *WebGLUniformLocation, array js.Valu
 // SetFloatArray4 calls the SetFloatArray4 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloatarray4
-func (n *NullEngine) SetFloatArray4(uniform *WebGLUniformLocation, array js.Value) {
+func (n *NullEngine) SetFloatArray4(uniform js.Value, array js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, array)
 
 	n.p.Call("setFloatArray4", args...)
@@ -1939,12 +1846,12 @@ func (n *NullEngine) SetFrameBufferDepthStencilTexture(renderTarget *RenderTarge
 // SetIntArray calls the SetIntArray method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setintarray
-func (n *NullEngine) SetIntArray(uniform *WebGLUniformLocation, array *Int32Array) {
+func (n *NullEngine) SetIntArray(uniform js.Value, array js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
-	args = append(args, array.JSObject())
+	args = append(args, uniform)
+	args = append(args, array)
 
 	n.p.Call("setIntArray", args...)
 }
@@ -1952,12 +1859,12 @@ func (n *NullEngine) SetIntArray(uniform *WebGLUniformLocation, array *Int32Arra
 // SetIntArray2 calls the SetIntArray2 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setintarray2
-func (n *NullEngine) SetIntArray2(uniform *WebGLUniformLocation, array *Int32Array) {
+func (n *NullEngine) SetIntArray2(uniform js.Value, array js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
-	args = append(args, array.JSObject())
+	args = append(args, uniform)
+	args = append(args, array)
 
 	n.p.Call("setIntArray2", args...)
 }
@@ -1965,12 +1872,12 @@ func (n *NullEngine) SetIntArray2(uniform *WebGLUniformLocation, array *Int32Arr
 // SetIntArray3 calls the SetIntArray3 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setintarray3
-func (n *NullEngine) SetIntArray3(uniform *WebGLUniformLocation, array *Int32Array) {
+func (n *NullEngine) SetIntArray3(uniform js.Value, array js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
-	args = append(args, array.JSObject())
+	args = append(args, uniform)
+	args = append(args, array)
 
 	n.p.Call("setIntArray3", args...)
 }
@@ -1978,12 +1885,12 @@ func (n *NullEngine) SetIntArray3(uniform *WebGLUniformLocation, array *Int32Arr
 // SetIntArray4 calls the SetIntArray4 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setintarray4
-func (n *NullEngine) SetIntArray4(uniform *WebGLUniformLocation, array *Int32Array) {
+func (n *NullEngine) SetIntArray4(uniform js.Value, array js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
-	args = append(args, array.JSObject())
+	args = append(args, uniform)
+	args = append(args, array)
 
 	n.p.Call("setIntArray4", args...)
 }
@@ -1991,11 +1898,11 @@ func (n *NullEngine) SetIntArray4(uniform *WebGLUniformLocation, array *Int32Arr
 // SetMatrices calls the SetMatrices method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setmatrices
-func (n *NullEngine) SetMatrices(uniform *WebGLUniformLocation, matrices js.Value) {
+func (n *NullEngine) SetMatrices(uniform js.Value, matrices js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, matrices)
 
 	n.p.Call("setMatrices", args...)
@@ -2004,11 +1911,11 @@ func (n *NullEngine) SetMatrices(uniform *WebGLUniformLocation, matrices js.Valu
 // SetMatrix2x2 calls the SetMatrix2x2 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setmatrix2x2
-func (n *NullEngine) SetMatrix2x2(uniform *WebGLUniformLocation, matrix js.Value) {
+func (n *NullEngine) SetMatrix2x2(uniform js.Value, matrix js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, matrix)
 
 	n.p.Call("setMatrix2x2", args...)
@@ -2017,11 +1924,11 @@ func (n *NullEngine) SetMatrix2x2(uniform *WebGLUniformLocation, matrix js.Value
 // SetMatrix3x3 calls the SetMatrix3x3 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setmatrix3x3
-func (n *NullEngine) SetMatrix3x3(uniform *WebGLUniformLocation, matrix js.Value) {
+func (n *NullEngine) SetMatrix3x3(uniform js.Value, matrix js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, uniform.JSObject())
+	args = append(args, uniform)
 	args = append(args, matrix)
 
 	n.p.Call("setMatrix3x3", args...)
@@ -2189,11 +2096,11 @@ func (n *NullEngine) SetStencilOperationPass(operation float64) {
 // SetTextureFormatToUse calls the SetTextureFormatToUse method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#settextureformattouse
-func (n *NullEngine) SetTextureFormatToUse(formatsAvailable []string) string {
+func (n *NullEngine) SetTextureFormatToUse(formatsAvailable []*string) string {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, formatsAvailable)
+	args = append(args, stringArrayToJSArray(formatsAvailable))
 
 	retVal := n.p.Call("setTextureFormatToUse", args...)
 	return retVal.String()
@@ -2228,11 +2135,11 @@ func (n *NullEngine) SetTextureFromPostProcessOutput(channel float64, postProces
 // SetTranformFeedbackVaryings calls the SetTranformFeedbackVaryings method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#settranformfeedbackvaryings
-func (n *NullEngine) SetTranformFeedbackVaryings(program *WebGLProgram, value string) {
+func (n *NullEngine) SetTranformFeedbackVaryings(program js.Value, value string) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, program.JSObject())
+	args = append(args, program)
 	args = append(args, value)
 
 	n.p.Call("setTranformFeedbackVaryings", args...)
@@ -2247,14 +2154,14 @@ type NullEngineSetViewportOpts struct {
 // SetViewport calls the SetViewport method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setviewport
-func (n *NullEngine) SetViewport(viewport *IViewportLike, opts *NullEngineSetViewportOpts) {
+func (n *NullEngine) SetViewport(viewport js.Value, opts *NullEngineSetViewportOpts) {
 	if opts == nil {
 		opts = &NullEngineSetViewportOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, viewport.JSObject())
+	args = append(args, viewport)
 
 	if opts.RequiredWidth == nil {
 		args = append(args, js.Undefined())
@@ -2285,12 +2192,10 @@ func (n *NullEngine) SetZOffset(value float64) {
 // StartTimeQuery calls the StartTimeQuery method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#starttimequery
-func (n *NullEngine) StartTimeQuery() *_TimeToken {
+func (n *NullEngine) StartTimeQuery() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("startTimeQuery", args...)
-	return _TimeTokenFromJSObject(retVal, n.ctx)
+	retVal := n.p.Call("startTimeQuery")
+	return retVal
 }
 
 // SwitchFullscreen calls the SwitchFullscreen method on the NullEngine object.
@@ -2358,14 +2263,14 @@ type NullEngineUpdateDynamicIndexBufferOpts struct {
 // UpdateDynamicIndexBuffer calls the UpdateDynamicIndexBuffer method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#updatedynamicindexbuffer
-func (n *NullEngine) UpdateDynamicIndexBuffer(indexBuffer *WebGLBuffer, indices js.Value, opts *NullEngineUpdateDynamicIndexBufferOpts) {
+func (n *NullEngine) UpdateDynamicIndexBuffer(indexBuffer js.Value, indices js.Value, opts *NullEngineUpdateDynamicIndexBufferOpts) {
 	if opts == nil {
 		opts = &NullEngineUpdateDynamicIndexBufferOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, indexBuffer.JSObject())
+	args = append(args, indexBuffer)
 	args = append(args, indices)
 
 	if opts.Offset == nil {
@@ -2420,14 +2325,14 @@ type NullEngineUpdateDynamicVertexBufferOpts struct {
 // UpdateDynamicVertexBuffer calls the UpdateDynamicVertexBuffer method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#updatedynamicvertexbuffer
-func (n *NullEngine) UpdateDynamicVertexBuffer(vertexBuffer *WebGLBuffer, vertices js.Value, opts *NullEngineUpdateDynamicVertexBufferOpts) {
+func (n *NullEngine) UpdateDynamicVertexBuffer(vertexBuffer js.Value, vertices js.Value, opts *NullEngineUpdateDynamicVertexBufferOpts) {
 	if opts == nil {
 		opts = &NullEngineUpdateDynamicVertexBufferOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, vertexBuffer.JSObject())
+	args = append(args, vertexBuffer)
 	args = append(args, vertices)
 
 	if opts.ByteOffset == nil {
@@ -2615,9 +2520,7 @@ func (n *NullEngine) WipeCaches(opts *NullEngineWipeCachesOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#_exitfullscreen
 func (n *NullEngine) _ExitFullscreen() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("_ExitFullscreen", args...)
+	n.p.Call("_ExitFullscreen")
 }
 
 // _ExitPointerlock calls the _ExitPointerlock method on the NullEngine object.
@@ -2625,9 +2528,7 @@ func (n *NullEngine) _ExitFullscreen() {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#_exitpointerlock
 func (n *NullEngine) _ExitPointerlock() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("_ExitPointerlock", args...)
+	n.p.Call("_ExitPointerlock")
 }
 
 // _RequestFullscreen calls the _RequestFullscreen method on the NullEngine object.
@@ -2657,11 +2558,11 @@ func (n *NullEngine) _RequestPointerlock(element js.Value) {
 // _deletePipelineContext calls the _deletePipelineContext method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#_deletepipelinecontext
-func (n *NullEngine) _deletePipelineContext(pipelineContext *IPipelineContext) {
+func (n *NullEngine) _deletePipelineContext(pipelineContext js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, pipelineContext.JSObject())
+	args = append(args, pipelineContext)
 
 	n.p.Call("_deletePipelineContext", args...)
 }
@@ -2671,9 +2572,7 @@ func (n *NullEngine) _deletePipelineContext(pipelineContext *IPipelineContext) {
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#_renderloop
 func (n *NullEngine) _renderLoop() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("_renderLoop", args...)
+	n.p.Call("_renderLoop")
 }
 
 /*
@@ -2906,7 +2805,7 @@ func (n *NullEngine) SetAudioEngine(audioEngine *IAudioEngine) *NullEngine {
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#audioenginefactory
 func (n *NullEngine) AudioEngineFactory(AudioEngineFactory func()) *NullEngine {
-	p := ba.ctx.Get("NullEngine").New(AudioEngineFactory)
+	p := ba.ctx.Get("NullEngine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {AudioEngineFactory(); return nil}))
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 
@@ -2914,7 +2813,7 @@ func (n *NullEngine) AudioEngineFactory(AudioEngineFactory func()) *NullEngine {
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#audioenginefactory
 func (n *NullEngine) SetAudioEngineFactory(AudioEngineFactory func()) *NullEngine {
-	p := ba.ctx.Get("NullEngine").New(AudioEngineFactory)
+	p := ba.ctx.Get("NullEngine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {AudioEngineFactory(); return nil}))
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 
@@ -3321,16 +3220,16 @@ func (n *NullEngine) SetLastCreatedScene(LastCreatedScene *Scene) *NullEngine {
 // LoadingScreen returns the LoadingScreen property of class NullEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#loadingscreen
-func (n *NullEngine) LoadingScreen(loadingScreen *ILoadingScreen) *NullEngine {
-	p := ba.ctx.Get("NullEngine").New(loadingScreen.JSObject())
+func (n *NullEngine) LoadingScreen(loadingScreen js.Value) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(loadingScreen)
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 
 // SetLoadingScreen sets the LoadingScreen property of class NullEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#loadingscreen
-func (n *NullEngine) SetLoadingScreen(loadingScreen *ILoadingScreen) *NullEngine {
-	p := ba.ctx.Get("NullEngine").New(loadingScreen.JSObject())
+func (n *NullEngine) SetLoadingScreen(loadingScreen js.Value) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(loadingScreen)
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 
@@ -3418,7 +3317,7 @@ func (n *NullEngine) SetNpmPackage(NpmPackage string) *NullEngine {
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#offlineproviderfactory
 func (n *NullEngine) OfflineProviderFactory(OfflineProviderFactory func()) *NullEngine {
-	p := ba.ctx.Get("NullEngine").New(OfflineProviderFactory)
+	p := ba.ctx.Get("NullEngine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {OfflineProviderFactory(); return nil}))
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 
@@ -3426,7 +3325,7 @@ func (n *NullEngine) OfflineProviderFactory(OfflineProviderFactory func()) *Null
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#offlineproviderfactory
 func (n *NullEngine) SetOfflineProviderFactory(OfflineProviderFactory func()) *NullEngine {
-	p := ba.ctx.Get("NullEngine").New(OfflineProviderFactory)
+	p := ba.ctx.Get("NullEngine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {OfflineProviderFactory(); return nil}))
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 
@@ -4714,7 +4613,7 @@ func (n *NullEngine) SetVrPresentationAttributes(vrPresentationAttributes *IVRPr
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#_rescalepostprocessfactory
 func (n *NullEngine) _RescalePostProcessFactory(_RescalePostProcessFactory func()) *NullEngine {
-	p := ba.ctx.Get("NullEngine").New(_RescalePostProcessFactory)
+	p := ba.ctx.Get("NullEngine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {_RescalePostProcessFactory(); return nil}))
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 
@@ -4722,7 +4621,7 @@ func (n *NullEngine) _RescalePostProcessFactory(_RescalePostProcessFactory func(
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#_rescalepostprocessfactory
 func (n *NullEngine) Set_RescalePostProcessFactory(_RescalePostProcessFactory func()) *NullEngine {
-	p := ba.ctx.Get("NullEngine").New(_RescalePostProcessFactory)
+	p := ba.ctx.Get("NullEngine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {_RescalePostProcessFactory(); return nil}))
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 

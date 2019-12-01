@@ -27,6 +27,15 @@ func DivideBlockFromJSObject(p js.Value, ctx js.Value) *DivideBlock {
 	return &DivideBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DivideBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DivideBlockArrayToJSArray(array []*DivideBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDivideBlock returns a new DivideBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.divideblock
@@ -152,9 +161,7 @@ func (d *DivideBlock) ConnectTo(other *NodeMaterialBlock, opts *DivideBlockConne
 // https://doc.babylonjs.com/api/classes/babylon.divideblock#dispose
 func (d *DivideBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the DivideBlock object.
@@ -162,9 +169,7 @@ func (d *DivideBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.divideblock#getclassname
 func (d *DivideBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (d *DivideBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBu
 // https://doc.babylonjs.com/api/classes/babylon.divideblock#serialize
 func (d *DivideBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("serialize", args...)
+	retVal := d.p.Call("serialize")
 	return retVal
 }
 

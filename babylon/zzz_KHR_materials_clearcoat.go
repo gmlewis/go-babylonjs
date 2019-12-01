@@ -29,6 +29,15 @@ func KHR_materials_clearcoatFromJSObject(p js.Value, ctx js.Value) *KHR_material
 	return &KHR_materials_clearcoat{p: p, ctx: ctx}
 }
 
+// KHR_materials_clearcoatArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KHR_materials_clearcoatArrayToJSArray(array []*KHR_materials_clearcoat) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class KHR_materials_clearcoat.

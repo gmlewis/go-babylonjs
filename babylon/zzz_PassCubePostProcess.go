@@ -27,6 +27,15 @@ func PassCubePostProcessFromJSObject(p js.Value, ctx js.Value) *PassCubePostProc
 	return &PassCubePostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PassCubePostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PassCubePostProcessArrayToJSArray(array []*PassCubePostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPassCubePostProcessOpts contains optional parameters for NewPassCubePostProcess.
 type NewPassCubePostProcessOpts struct {
 	Camera           *Camera
@@ -123,9 +132,7 @@ func (p *PassCubePostProcess) Activate(camera *Camera, opts *PassCubePostProcess
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#apply
 func (p *PassCubePostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("apply", args...)
+	retVal := p.p.Call("apply")
 	return EffectFromJSObject(retVal, p.ctx)
 }
 
@@ -158,9 +165,7 @@ func (p *PassCubePostProcess) Dispose(opts *PassCubePostProcessDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#getcamera
 func (p *PassCubePostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getCamera", args...)
+	retVal := p.p.Call("getCamera")
 	return CameraFromJSObject(retVal, p.ctx)
 }
 
@@ -169,9 +174,7 @@ func (p *PassCubePostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#getclassname
 func (p *PassCubePostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -180,9 +183,7 @@ func (p *PassCubePostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#geteffect
 func (p *PassCubePostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEffect", args...)
+	retVal := p.p.Call("getEffect")
 	return EffectFromJSObject(retVal, p.ctx)
 }
 
@@ -191,9 +192,7 @@ func (p *PassCubePostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#geteffectname
 func (p *PassCubePostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEffectName", args...)
+	retVal := p.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -202,9 +201,7 @@ func (p *PassCubePostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#getengine
 func (p *PassCubePostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEngine", args...)
+	retVal := p.p.Call("getEngine")
 	return EngineFromJSObject(retVal, p.ctx)
 }
 
@@ -213,9 +210,7 @@ func (p *PassCubePostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#isready
 func (p *PassCubePostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isReady", args...)
+	retVal := p.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -224,9 +219,7 @@ func (p *PassCubePostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#isreusable
 func (p *PassCubePostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isReusable", args...)
+	retVal := p.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -235,9 +228,7 @@ func (p *PassCubePostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#marktexturedirty
 func (p *PassCubePostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("markTextureDirty", args...)
+	p.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the PassCubePostProcess object.
@@ -312,9 +303,7 @@ func (p *PassCubePostProcess) UpdateEffect(opts *PassCubePostProcessUpdateEffect
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#useownoutput
 func (p *PassCubePostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("useOwnOutput", args...)
+	p.p.Call("useOwnOutput")
 }
 
 /*
@@ -579,7 +568,7 @@ func (p *PassCubePostProcess) SetName(name string) *PassCubePostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#onactivate
 func (p *PassCubePostProcess) OnActivate(onActivate func()) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(onActivate)
+	p := ba.ctx.Get("PassCubePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -587,7 +576,7 @@ func (p *PassCubePostProcess) OnActivate(onActivate func()) *PassCubePostProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#onactivate
 func (p *PassCubePostProcess) SetOnActivate(onActivate func()) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(onActivate)
+	p := ba.ctx.Get("PassCubePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -611,7 +600,7 @@ func (p *PassCubePostProcess) SetOnActivateObservable(onActivateObservable *Obse
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#onafterrender
 func (p *PassCubePostProcess) OnAfterRender(onAfterRender func()) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(onAfterRender)
+	p := ba.ctx.Get("PassCubePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -619,7 +608,7 @@ func (p *PassCubePostProcess) OnAfterRender(onAfterRender func()) *PassCubePostP
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#onafterrender
 func (p *PassCubePostProcess) SetOnAfterRender(onAfterRender func()) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(onAfterRender)
+	p := ba.ctx.Get("PassCubePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -643,7 +632,7 @@ func (p *PassCubePostProcess) SetOnAfterRenderObservable(onAfterRenderObservable
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#onapply
 func (p *PassCubePostProcess) OnApply(onApply func()) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(onApply)
+	p := ba.ctx.Get("PassCubePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -651,7 +640,7 @@ func (p *PassCubePostProcess) OnApply(onApply func()) *PassCubePostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#onapply
 func (p *PassCubePostProcess) SetOnApply(onApply func()) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(onApply)
+	p := ba.ctx.Get("PassCubePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -675,7 +664,7 @@ func (p *PassCubePostProcess) SetOnApplyObservable(onApplyObservable *Observable
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#onbeforerender
 func (p *PassCubePostProcess) OnBeforeRender(onBeforeRender func()) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("PassCubePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -683,7 +672,7 @@ func (p *PassCubePostProcess) OnBeforeRender(onBeforeRender func()) *PassCubePos
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#onbeforerender
 func (p *PassCubePostProcess) SetOnBeforeRender(onBeforeRender func()) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("PassCubePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -707,7 +696,7 @@ func (p *PassCubePostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservab
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#onsizechanged
 func (p *PassCubePostProcess) OnSizeChanged(onSizeChanged func()) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("PassCubePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -715,7 +704,7 @@ func (p *PassCubePostProcess) OnSizeChanged(onSizeChanged func()) *PassCubePostP
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#onsizechanged
 func (p *PassCubePostProcess) SetOnSizeChanged(onSizeChanged func()) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("PassCubePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 

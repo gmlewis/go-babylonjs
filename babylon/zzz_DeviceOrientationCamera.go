@@ -28,6 +28,15 @@ func DeviceOrientationCameraFromJSObject(p js.Value, ctx js.Value) *DeviceOrient
 	return &DeviceOrientationCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DeviceOrientationCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DeviceOrientationCameraArrayToJSArray(array []*DeviceOrientationCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDeviceOrientationCamera returns a new DeviceOrientationCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera
@@ -86,9 +95,7 @@ func (d *DeviceOrientationCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera#dispose
 func (d *DeviceOrientationCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // DeviceOrientationCameraEnableHorizontalDraggingOpts contains optional parameters for DeviceOrientationCamera.EnableHorizontalDragging.
@@ -120,9 +127,7 @@ func (d *DeviceOrientationCamera) EnableHorizontalDragging(opts *DeviceOrientati
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera#getclassname
 func (d *DeviceOrientationCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -144,9 +149,7 @@ func (d *DeviceOrientationCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera#gettarget
 func (d *DeviceOrientationCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getTarget", args...)
+	retVal := d.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, d.ctx)
 }
 
@@ -191,9 +194,7 @@ func (d *DeviceOrientationCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera#storestate
 func (d *DeviceOrientationCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("storeState", args...)
+	retVal := d.p.Call("storeState")
 	return CameraFromJSObject(retVal, d.ctx)
 }
 
@@ -459,7 +460,7 @@ func (d *DeviceOrientationCamera) SetNoRotationConstraint(noRotationConstraint b
 //
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera#oncollide
 func (d *DeviceOrientationCamera) OnCollide(onCollide func()) *DeviceOrientationCamera {
-	p := ba.ctx.Get("DeviceOrientationCamera").New(onCollide)
+	p := ba.ctx.Get("DeviceOrientationCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return DeviceOrientationCameraFromJSObject(p, ba.ctx)
 }
 
@@ -467,7 +468,7 @@ func (d *DeviceOrientationCamera) OnCollide(onCollide func()) *DeviceOrientation
 //
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera#oncollide
 func (d *DeviceOrientationCamera) SetOnCollide(onCollide func()) *DeviceOrientationCamera {
-	p := ba.ctx.Get("DeviceOrientationCamera").New(onCollide)
+	p := ba.ctx.Get("DeviceOrientationCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return DeviceOrientationCameraFromJSObject(p, ba.ctx)
 }
 

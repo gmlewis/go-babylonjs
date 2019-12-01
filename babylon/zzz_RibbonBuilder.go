@@ -27,6 +27,15 @@ func RibbonBuilderFromJSObject(p js.Value, ctx js.Value) *RibbonBuilder {
 	return &RibbonBuilder{p: p, ctx: ctx}
 }
 
+// RibbonBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RibbonBuilderArrayToJSArray(array []*RibbonBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // RibbonBuilderCreateRibbonOpts contains optional parameters for RibbonBuilder.CreateRibbon.
 type RibbonBuilderCreateRibbonOpts struct {
 	Scene *Scene

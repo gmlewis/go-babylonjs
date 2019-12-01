@@ -29,6 +29,15 @@ func PhysicsEngineFromJSObject(p js.Value, ctx js.Value) *PhysicsEngine {
 	return &PhysicsEngine{p: p, ctx: ctx}
 }
 
+// PhysicsEngineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsEngineArrayToJSArray(array []*PhysicsEngine) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhysicsEngineOpts contains optional parameters for NewPhysicsEngine.
 type NewPhysicsEngineOpts struct {
 	_physicsPlugin js.Value
@@ -87,9 +96,7 @@ func (p *PhysicsEngine) AddJoint(mainImpostor *PhysicsImpostor, connectedImposto
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#defaultpluginfactory
 func (p *PhysicsEngine) DefaultPluginFactory() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("DefaultPluginFactory", args...)
+	retVal := p.p.Call("DefaultPluginFactory")
 	return retVal
 }
 
@@ -98,19 +105,17 @@ func (p *PhysicsEngine) DefaultPluginFactory() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#dispose
 func (p *PhysicsEngine) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // GetImpostorForPhysicsObject calls the GetImpostorForPhysicsObject method on the PhysicsEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#getimpostorforphysicsobject
-func (p *PhysicsEngine) GetImpostorForPhysicsObject(object *IPhysicsEnabledObject) *PhysicsImpostor {
+func (p *PhysicsEngine) GetImpostorForPhysicsObject(object js.Value) *PhysicsImpostor {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, object.JSObject())
+	args = append(args, object)
 
 	retVal := p.p.Call("getImpostorForPhysicsObject", args...)
 	return PhysicsImpostorFromJSObject(retVal, p.ctx)
@@ -132,12 +137,10 @@ func (p *PhysicsEngine) GetImpostorWithPhysicsBody(body interface{}) *PhysicsImp
 // GetImpostors calls the GetImpostors method on the PhysicsEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#getimpostors
-func (p *PhysicsEngine) GetImpostors() *[]PhysicsImpostor {
+func (p *PhysicsEngine) GetImpostors() []*PhysicsImpostor {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getImpostors", args...)
-	return []PhysicsImpostorFromJSObject(retVal, p.ctx)
+	retVal := p.p.Call("getImpostors")
+	return retVal
 }
 
 // GetPhysicsPlugin calls the GetPhysicsPlugin method on the PhysicsEngine object.
@@ -145,9 +148,7 @@ func (p *PhysicsEngine) GetImpostors() *[]PhysicsImpostor {
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#getphysicsplugin
 func (p *PhysicsEngine) GetPhysicsPlugin() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getPhysicsPlugin", args...)
+	retVal := p.p.Call("getPhysicsPlugin")
 	return retVal
 }
 
@@ -156,9 +157,7 @@ func (p *PhysicsEngine) GetPhysicsPlugin() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#getphysicspluginname
 func (p *PhysicsEngine) GetPhysicsPluginName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getPhysicsPluginName", args...)
+	retVal := p.p.Call("getPhysicsPluginName")
 	return retVal.String()
 }
 
@@ -167,9 +166,7 @@ func (p *PhysicsEngine) GetPhysicsPluginName() string {
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#getsubtimestep
 func (p *PhysicsEngine) GetSubTimeStep() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getSubTimeStep", args...)
+	retVal := p.p.Call("getSubTimeStep")
 	return retVal.Float()
 }
 
@@ -178,9 +175,7 @@ func (p *PhysicsEngine) GetSubTimeStep() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#gettimestep
 func (p *PhysicsEngine) GetTimeStep() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getTimeStep", args...)
+	retVal := p.p.Call("getTimeStep")
 	return retVal.Float()
 }
 

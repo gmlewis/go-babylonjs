@@ -30,6 +30,15 @@ func ProceduralTextureFromJSObject(p js.Value, ctx js.Value) *ProceduralTexture 
 	return &ProceduralTexture{Texture: TextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ProceduralTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ProceduralTextureArrayToJSArray(array []*ProceduralTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewProceduralTextureOpts contains optional parameters for NewProceduralTexture.
 type NewProceduralTextureOpts struct {
 	FallbackTexture *Texture
@@ -77,9 +86,7 @@ func (ba *Babylon) NewProceduralTexture(name string, size interface{}, fragment 
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#clone
 func (p *ProceduralTexture) Clone() *ProceduralTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("clone", args...)
+	retVal := p.p.Call("clone")
 	return ProceduralTextureFromJSObject(retVal, p.ctx)
 }
 
@@ -147,9 +154,7 @@ func (p *ProceduralTexture) CreateFromBase64String(data string, name string, sce
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#dispose
 func (p *ProceduralTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the ProceduralTexture object.
@@ -157,9 +162,7 @@ func (p *ProceduralTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getbasesize
 func (p *ProceduralTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getBaseSize", args...)
+	retVal := p.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -168,9 +171,7 @@ func (p *ProceduralTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getclassname
 func (p *ProceduralTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -179,9 +180,7 @@ func (p *ProceduralTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getcontent
 func (p *ProceduralTexture) GetContent() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getContent", args...)
+	retVal := p.p.Call("getContent")
 	return retVal
 }
 
@@ -190,9 +189,7 @@ func (p *ProceduralTexture) GetContent() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#geteffect
 func (p *ProceduralTexture) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEffect", args...)
+	retVal := p.p.Call("getEffect")
 	return EffectFromJSObject(retVal, p.ctx)
 }
 
@@ -201,9 +198,7 @@ func (p *ProceduralTexture) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getinternaltexture
 func (p *ProceduralTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getInternalTexture", args...)
+	retVal := p.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, p.ctx)
 }
 
@@ -212,9 +207,7 @@ func (p *ProceduralTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getreflectiontexturematrix
 func (p *ProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getReflectionTextureMatrix", args...)
+	retVal := p.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, p.ctx)
 }
 
@@ -223,9 +216,7 @@ func (p *ProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getrendersize
 func (p *ProceduralTexture) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getRenderSize", args...)
+	retVal := p.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -234,9 +225,7 @@ func (p *ProceduralTexture) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getscene
 func (p *ProceduralTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getScene", args...)
+	retVal := p.p.Call("getScene")
 	return SceneFromJSObject(retVal, p.ctx)
 }
 
@@ -245,9 +234,7 @@ func (p *ProceduralTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getsize
 func (p *ProceduralTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getSize", args...)
+	retVal := p.p.Call("getSize")
 	return retVal
 }
 
@@ -281,9 +268,7 @@ func (p *ProceduralTexture) GetTextureMatrix(opts *ProceduralTextureGetTextureMa
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isready
 func (p *ProceduralTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isReady", args...)
+	retVal := p.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -292,9 +277,7 @@ func (p *ProceduralTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isreadyornotblocking
 func (p *ProceduralTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isReadyOrNotBlocking", args...)
+	retVal := p.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -420,9 +403,7 @@ func (p *ProceduralTexture) ReadPixels(opts *ProceduralTextureReadPixelsOpts) js
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#releaseinternaltexture
 func (p *ProceduralTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("releaseInternalTexture", args...)
+	p.p.Call("releaseInternalTexture")
 }
 
 // ProceduralTextureRenderOpts contains optional parameters for ProceduralTexture.Render.
@@ -454,9 +435,7 @@ func (p *ProceduralTexture) Render(opts *ProceduralTextureRenderOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#reset
 func (p *ProceduralTexture) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("reset", args...)
+	p.p.Call("reset")
 }
 
 // ResetRefreshCounter calls the ResetRefreshCounter method on the ProceduralTexture object.
@@ -464,9 +443,7 @@ func (p *ProceduralTexture) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#resetrefreshcounter
 func (p *ProceduralTexture) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("resetRefreshCounter", args...)
+	p.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the ProceduralTexture object.
@@ -499,9 +476,7 @@ func (p *ProceduralTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#serialize
 func (p *ProceduralTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 
@@ -648,9 +623,7 @@ func (p *ProceduralTexture) SetVector3(name string, value *Vector3) *ProceduralT
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#tostring
 func (p *ProceduralTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("toString", args...)
+	retVal := p.p.Call("toString")
 	return retVal.String()
 }
 
@@ -706,7 +679,7 @@ func (p *ProceduralTexture) WhenAllReady(textures *BaseTexture, callback func())
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	p.p.Call("WhenAllReady", args...)
 }
@@ -1533,7 +1506,7 @@ func (p *ProceduralTexture) SetNoMipmap(noMipmap bool) *ProceduralTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ondispose
 func (p *ProceduralTexture) OnDispose(onDispose func()) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("ProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return ProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1541,7 +1514,7 @@ func (p *ProceduralTexture) OnDispose(onDispose func()) *ProceduralTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ondispose
 func (p *ProceduralTexture) SetOnDispose(onDispose func()) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("ProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return ProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1565,7 +1538,7 @@ func (p *ProceduralTexture) SetOnDisposeObservable(onDisposeObservable *Observab
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongenerated
 func (p *ProceduralTexture) OnGenerated(onGenerated func()) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("ProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return ProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1573,7 +1546,7 @@ func (p *ProceduralTexture) OnGenerated(onGenerated func()) *ProceduralTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongenerated
 func (p *ProceduralTexture) SetOnGenerated(onGenerated func()) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("ProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return ProceduralTextureFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func SphericalHarmonicsFromJSObject(p js.Value, ctx js.Value) *SphericalHarmonic
 	return &SphericalHarmonics{p: p, ctx: ctx}
 }
 
+// SphericalHarmonicsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SphericalHarmonicsArrayToJSArray(array []*SphericalHarmonics) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // AddLight calls the AddLight method on the SphericalHarmonics object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#addlight
@@ -46,9 +55,7 @@ func (s *SphericalHarmonics) AddLight(direction *Vector3, color *Color3, deltaSo
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#convertincidentradiancetoirradiance
 func (s *SphericalHarmonics) ConvertIncidentRadianceToIrradiance() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("convertIncidentRadianceToIrradiance", args...)
+	s.p.Call("convertIncidentRadianceToIrradiance")
 }
 
 // ConvertIrradianceToLambertianRadiance calls the ConvertIrradianceToLambertianRadiance method on the SphericalHarmonics object.
@@ -56,9 +63,7 @@ func (s *SphericalHarmonics) ConvertIncidentRadianceToIrradiance() {
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#convertirradiancetolambertianradiance
 func (s *SphericalHarmonics) ConvertIrradianceToLambertianRadiance() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("convertIrradianceToLambertianRadiance", args...)
+	s.p.Call("convertIrradianceToLambertianRadiance")
 }
 
 // FromArray calls the FromArray method on the SphericalHarmonics object.
@@ -92,9 +97,7 @@ func (s *SphericalHarmonics) FromPolynomial(polynomial *SphericalPolynomial) *Sp
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#prescaleforrendering
 func (s *SphericalHarmonics) PreScaleForRendering() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("preScaleForRendering", args...)
+	s.p.Call("preScaleForRendering")
 }
 
 // ScaleInPlace calls the ScaleInPlace method on the SphericalHarmonics object.

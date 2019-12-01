@@ -27,6 +27,15 @@ func EventStateFromJSObject(p js.Value, ctx js.Value) *EventState {
 	return &EventState{p: p, ctx: ctx}
 }
 
+// EventStateArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EventStateArrayToJSArray(array []*EventState) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewEventStateOpts contains optional parameters for NewEventState.
 type NewEventStateOpts struct {
 	SkipNextObservers *bool

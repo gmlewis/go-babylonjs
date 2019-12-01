@@ -27,6 +27,15 @@ func PlaneRotationGizmoFromJSObject(p js.Value, ctx js.Value) *PlaneRotationGizm
 	return &PlaneRotationGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PlaneRotationGizmoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PlaneRotationGizmoArrayToJSArray(array []*PlaneRotationGizmo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPlaneRotationGizmoOpts contains optional parameters for NewPlaneRotationGizmo.
 type NewPlaneRotationGizmoOpts struct {
 	Color            *Color3
@@ -83,9 +92,7 @@ func (ba *Babylon) NewPlaneRotationGizmo(planeNormal *Vector3, opts *NewPlaneRot
 // https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#dispose
 func (p *PlaneRotationGizmo) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // SetCustomMesh calls the SetCustomMesh method on the PlaneRotationGizmo object.

@@ -27,6 +27,15 @@ func MeshExploderFromJSObject(p js.Value, ctx js.Value) *MeshExploder {
 	return &MeshExploder{p: p, ctx: ctx}
 }
 
+// MeshExploderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MeshExploderArrayToJSArray(array []*MeshExploder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMeshExploderOpts contains optional parameters for NewMeshExploder.
 type NewMeshExploderOpts struct {
 	CenterMesh *Mesh
@@ -35,7 +44,7 @@ type NewMeshExploderOpts struct {
 // NewMeshExploder returns a new MeshExploder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshexploder
-func (ba *Babylon) NewMeshExploder(meshes []js.Value, opts *NewMeshExploderOpts) *MeshExploder {
+func (ba *Babylon) NewMeshExploder(meshes []*Mesh, opts *NewMeshExploderOpts) *MeshExploder {
 	if opts == nil {
 		opts = &NewMeshExploderOpts{}
 	}
@@ -83,20 +92,16 @@ func (m *MeshExploder) Explode(opts *MeshExploderExplodeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.meshexploder#getclassname
 func (m *MeshExploder) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
 // GetMeshes calls the GetMeshes method on the MeshExploder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshexploder#getmeshes
-func (m *MeshExploder) GetMeshes() []js.Value {
+func (m *MeshExploder) GetMeshes() []*Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getMeshes", args...)
+	retVal := m.p.Call("getMeshes")
 	return retVal
 }
 

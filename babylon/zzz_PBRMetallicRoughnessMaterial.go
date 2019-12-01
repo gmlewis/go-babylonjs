@@ -30,6 +30,15 @@ func PBRMetallicRoughnessMaterialFromJSObject(p js.Value, ctx js.Value) *PBRMeta
 	return &PBRMetallicRoughnessMaterial{PBRBaseSimpleMaterial: PBRBaseSimpleMaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PBRMetallicRoughnessMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PBRMetallicRoughnessMaterialArrayToJSArray(array []*PBRMetallicRoughnessMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPBRMetallicRoughnessMaterial returns a new PBRMetallicRoughnessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial
@@ -150,9 +159,7 @@ func (p *PBRMetallicRoughnessMaterial) BindViewProjection(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#builduniformlayout
 func (p *PBRMetallicRoughnessMaterial) BuildUniformLayout() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("buildUniformLayout", args...)
+	p.p.Call("buildUniformLayout")
 }
 
 // Clone calls the Clone method on the PBRMetallicRoughnessMaterial object.
@@ -238,7 +245,7 @@ type PBRMetallicRoughnessMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the PBRMetallicRoughnessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#forcecompilationasync
-func (p *PBRMetallicRoughnessMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *PBRMetallicRoughnessMaterialForceCompilationAsyncOpts) {
+func (p *PBRMetallicRoughnessMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *PBRMetallicRoughnessMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &PBRMetallicRoughnessMaterialForceCompilationAsyncOpts{}
 	}
@@ -253,7 +260,8 @@ func (p *PBRMetallicRoughnessMaterial) ForceCompilationAsync(mesh *AbstractMesh,
 		args = append(args, opts.Options)
 	}
 
-	p.p.Call("forceCompilationAsync", args...)
+	retVal := p.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, p.ctx)
 }
 
 // Freeze calls the Freeze method on the PBRMetallicRoughnessMaterial object.
@@ -261,9 +269,7 @@ func (p *PBRMetallicRoughnessMaterial) ForceCompilationAsync(mesh *AbstractMesh,
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#freeze
 func (p *PBRMetallicRoughnessMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("freeze", args...)
+	p.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the PBRMetallicRoughnessMaterial object.
@@ -271,9 +277,7 @@ func (p *PBRMetallicRoughnessMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#getactivetextures
 func (p *PBRMetallicRoughnessMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getActiveTextures", args...)
+	retVal := p.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
@@ -282,9 +286,7 @@ func (p *PBRMetallicRoughnessMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#getalphatesttexture
 func (p *PBRMetallicRoughnessMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAlphaTestTexture", args...)
+	retVal := p.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
@@ -293,9 +295,7 @@ func (p *PBRMetallicRoughnessMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#getanimatables
 func (p *PBRMetallicRoughnessMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAnimatables", args...)
+	retVal := p.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -304,9 +304,7 @@ func (p *PBRMetallicRoughnessMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#getbindedmeshes
 func (p *PBRMetallicRoughnessMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getBindedMeshes", args...)
+	retVal := p.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, p.ctx)
 }
 
@@ -315,9 +313,7 @@ func (p *PBRMetallicRoughnessMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#getclassname
 func (p *PBRMetallicRoughnessMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -326,9 +322,7 @@ func (p *PBRMetallicRoughnessMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#geteffect
 func (p *PBRMetallicRoughnessMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEffect", args...)
+	retVal := p.p.Call("getEffect")
 	return EffectFromJSObject(retVal, p.ctx)
 }
 
@@ -337,9 +331,7 @@ func (p *PBRMetallicRoughnessMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#getscene
 func (p *PBRMetallicRoughnessMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getScene", args...)
+	retVal := p.p.Call("getScene")
 	return SceneFromJSObject(retVal, p.ctx)
 }
 
@@ -361,9 +353,7 @@ func (p *PBRMetallicRoughnessMaterial) HasTexture(texture *BaseTexture) bool {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#ismetallicworkflow
 func (p *PBRMetallicRoughnessMaterial) IsMetallicWorkflow() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isMetallicWorkflow", args...)
+	retVal := p.p.Call("isMetallicWorkflow")
 	return retVal.Bool()
 }
 
@@ -443,9 +433,7 @@ func (p *PBRMetallicRoughnessMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#markdirty
 func (p *PBRMetallicRoughnessMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("markDirty", args...)
+	p.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the PBRMetallicRoughnessMaterial object.
@@ -453,9 +441,7 @@ func (p *PBRMetallicRoughnessMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#needalphablending
 func (p *PBRMetallicRoughnessMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("needAlphaBlending", args...)
+	retVal := p.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -477,9 +463,7 @@ func (p *PBRMetallicRoughnessMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMe
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#needalphatesting
 func (p *PBRMetallicRoughnessMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("needAlphaTesting", args...)
+	retVal := p.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -503,9 +487,7 @@ func (p *PBRMetallicRoughnessMaterial) Parse(source interface{}, scene *Scene, r
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#serialize
 func (p *PBRMetallicRoughnessMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 
@@ -539,9 +521,7 @@ func (p *PBRMetallicRoughnessMaterial) ToString(opts *PBRMetallicRoughnessMateri
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#unbind
 func (p *PBRMetallicRoughnessMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("unbind", args...)
+	p.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the PBRMetallicRoughnessMaterial object.
@@ -549,9 +529,7 @@ func (p *PBRMetallicRoughnessMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#unfreeze
 func (p *PBRMetallicRoughnessMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("unfreeze", args...)
+	p.p.Call("unfreeze")
 }
 
 /*
@@ -639,16 +617,16 @@ func (p *PBRMetallicRoughnessMaterial) SetAlphaMode(alphaMode float64) *PBRMetal
 // Animations returns the Animations property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#animations
-func (p *PBRMetallicRoughnessMaterial) Animations(animations []Animation) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(animations.JSObject())
+func (p *PBRMetallicRoughnessMaterial) Animations(animations []*Animation) *PBRMetallicRoughnessMaterial {
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(animations)
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#animations
-func (p *PBRMetallicRoughnessMaterial) SetAnimations(animations []Animation) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(animations.JSObject())
+func (p *PBRMetallicRoughnessMaterial) SetAnimations(animations []*Animation) *PBRMetallicRoughnessMaterial {
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(animations)
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -832,7 +810,7 @@ func (p *PBRMetallicRoughnessMaterial) SetCounterClockWiseSideOrientation(Counte
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#customshadernameresolve
 func (p *PBRMetallicRoughnessMaterial) CustomShaderNameResolve(customShaderNameResolve func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(customShaderNameResolve)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customShaderNameResolve(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -840,7 +818,7 @@ func (p *PBRMetallicRoughnessMaterial) CustomShaderNameResolve(customShaderNameR
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#customshadernameresolve
 func (p *PBRMetallicRoughnessMaterial) SetCustomShaderNameResolve(customShaderNameResolve func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(customShaderNameResolve)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customShaderNameResolve(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1056,7 +1034,7 @@ func (p *PBRMetallicRoughnessMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag floa
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#getrendertargettextures
 func (p *PBRMetallicRoughnessMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1064,7 +1042,7 @@ func (p *PBRMetallicRoughnessMaterial) GetRenderTargetTextures(getRenderTargetTe
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#getrendertargettextures
 func (p *PBRMetallicRoughnessMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1456,7 +1434,7 @@ func (p *PBRMetallicRoughnessMaterial) SetOcclusionTexture(occlusionTexture *Bas
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#onbind
 func (p *PBRMetallicRoughnessMaterial) OnBind(onBind func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(onBind)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1464,7 +1442,7 @@ func (p *PBRMetallicRoughnessMaterial) OnBind(onBind func()) *PBRMetallicRoughne
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#onbind
 func (p *PBRMetallicRoughnessMaterial) SetOnBind(onBind func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(onBind)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1488,7 +1466,7 @@ func (p *PBRMetallicRoughnessMaterial) SetOnBindObservable(onBindObservable *Obs
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#oncompiled
 func (p *PBRMetallicRoughnessMaterial) OnCompiled(onCompiled func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(onCompiled)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1496,7 +1474,7 @@ func (p *PBRMetallicRoughnessMaterial) OnCompiled(onCompiled func()) *PBRMetalli
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#oncompiled
 func (p *PBRMetallicRoughnessMaterial) SetOnCompiled(onCompiled func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(onCompiled)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1504,7 +1482,7 @@ func (p *PBRMetallicRoughnessMaterial) SetOnCompiled(onCompiled func()) *PBRMeta
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#ondispose
 func (p *PBRMetallicRoughnessMaterial) OnDispose(onDispose func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(onDispose)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1512,7 +1490,7 @@ func (p *PBRMetallicRoughnessMaterial) OnDispose(onDispose func()) *PBRMetallicR
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#ondispose
 func (p *PBRMetallicRoughnessMaterial) SetOnDispose(onDispose func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(onDispose)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1536,7 +1514,7 @@ func (p *PBRMetallicRoughnessMaterial) SetOnDisposeObservable(onDisposeObservabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#onerror
 func (p *PBRMetallicRoughnessMaterial) OnError(onError func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(onError)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1544,7 +1522,7 @@ func (p *PBRMetallicRoughnessMaterial) OnError(onError func()) *PBRMetallicRough
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#onerror
 func (p *PBRMetallicRoughnessMaterial) SetOnError(onError func()) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(onError)
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
 }
 

@@ -29,6 +29,15 @@ func KHR_materials_sheenFromJSObject(p js.Value, ctx js.Value) *KHR_materials_sh
 	return &KHR_materials_sheen{p: p, ctx: ctx}
 }
 
+// KHR_materials_sheenArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KHR_materials_sheenArrayToJSArray(array []*KHR_materials_sheen) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class KHR_materials_sheen.

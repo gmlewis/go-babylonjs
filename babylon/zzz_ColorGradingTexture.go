@@ -32,6 +32,15 @@ func ColorGradingTextureFromJSObject(p js.Value, ctx js.Value) *ColorGradingText
 	return &ColorGradingTexture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ColorGradingTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ColorGradingTextureArrayToJSArray(array []*ColorGradingTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewColorGradingTexture returns a new ColorGradingTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture
@@ -51,9 +60,7 @@ func (ba *Babylon) NewColorGradingTexture(url string, scene *Scene) *ColorGradin
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#clone
 func (c *ColorGradingTexture) Clone() *ColorGradingTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("clone", args...)
+	retVal := c.p.Call("clone")
 	return ColorGradingTextureFromJSObject(retVal, c.ctx)
 }
 
@@ -62,9 +69,7 @@ func (c *ColorGradingTexture) Clone() *ColorGradingTexture {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#delayload
 func (c *ColorGradingTexture) DelayLoad() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("delayLoad", args...)
+	c.p.Call("delayLoad")
 }
 
 // Dispose calls the Dispose method on the ColorGradingTexture object.
@@ -72,9 +77,7 @@ func (c *ColorGradingTexture) DelayLoad() {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#dispose
 func (c *ColorGradingTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the ColorGradingTexture object.
@@ -82,9 +85,7 @@ func (c *ColorGradingTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#getbasesize
 func (c *ColorGradingTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getBaseSize", args...)
+	retVal := c.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -93,9 +94,7 @@ func (c *ColorGradingTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#getclassname
 func (c *ColorGradingTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -104,9 +103,7 @@ func (c *ColorGradingTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#getinternaltexture
 func (c *ColorGradingTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getInternalTexture", args...)
+	retVal := c.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, c.ctx)
 }
 
@@ -115,9 +112,7 @@ func (c *ColorGradingTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#getreflectiontexturematrix
 func (c *ColorGradingTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getReflectionTextureMatrix", args...)
+	retVal := c.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, c.ctx)
 }
 
@@ -126,9 +121,7 @@ func (c *ColorGradingTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#getscene
 func (c *ColorGradingTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getScene", args...)
+	retVal := c.p.Call("getScene")
 	return SceneFromJSObject(retVal, c.ctx)
 }
 
@@ -137,9 +130,7 @@ func (c *ColorGradingTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#getsize
 func (c *ColorGradingTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getSize", args...)
+	retVal := c.p.Call("getSize")
 	return retVal
 }
 
@@ -148,9 +139,7 @@ func (c *ColorGradingTexture) GetSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#gettexturematrix
 func (c *ColorGradingTexture) GetTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getTextureMatrix", args...)
+	retVal := c.p.Call("getTextureMatrix")
 	return MatrixFromJSObject(retVal, c.ctx)
 }
 
@@ -159,9 +148,7 @@ func (c *ColorGradingTexture) GetTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#isready
 func (c *ColorGradingTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReady", args...)
+	retVal := c.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -170,9 +157,7 @@ func (c *ColorGradingTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#isreadyornotblocking
 func (c *ColorGradingTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isReadyOrNotBlocking", args...)
+	retVal := c.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -232,9 +217,7 @@ func (c *ColorGradingTexture) ReadPixels(opts *ColorGradingTextureReadPixelsOpts
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#releaseinternaltexture
 func (c *ColorGradingTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("releaseInternalTexture", args...)
+	c.p.Call("releaseInternalTexture")
 }
 
 // Scale calls the Scale method on the ColorGradingTexture object.
@@ -254,9 +237,7 @@ func (c *ColorGradingTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#serialize
 func (c *ColorGradingTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 
@@ -265,9 +246,7 @@ func (c *ColorGradingTexture) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#tostring
 func (c *ColorGradingTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toString", args...)
+	retVal := c.p.Call("toString")
 	return retVal.String()
 }
 
@@ -291,7 +270,7 @@ func (c *ColorGradingTexture) WhenAllReady(textures *BaseTexture, callback func(
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	c.p.Call("WhenAllReady", args...)
 }
@@ -702,7 +681,7 @@ func (c *ColorGradingTexture) SetNoMipmap(noMipmap bool) *ColorGradingTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#ondispose
 func (c *ColorGradingTexture) OnDispose(onDispose func()) *ColorGradingTexture {
-	p := ba.ctx.Get("ColorGradingTexture").New(onDispose)
+	p := ba.ctx.Get("ColorGradingTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return ColorGradingTextureFromJSObject(p, ba.ctx)
 }
 
@@ -710,7 +689,7 @@ func (c *ColorGradingTexture) OnDispose(onDispose func()) *ColorGradingTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#ondispose
 func (c *ColorGradingTexture) SetOnDispose(onDispose func()) *ColorGradingTexture {
-	p := ba.ctx.Get("ColorGradingTexture").New(onDispose)
+	p := ba.ctx.Get("ColorGradingTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return ColorGradingTextureFromJSObject(p, ba.ctx)
 }
 

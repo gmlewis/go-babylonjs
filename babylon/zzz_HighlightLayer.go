@@ -29,9 +29,18 @@ func HighlightLayerFromJSObject(p js.Value, ctx js.Value) *HighlightLayer {
 	return &HighlightLayer{EffectLayer: EffectLayerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// HighlightLayerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HighlightLayerArrayToJSArray(array []*HighlightLayer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewHighlightLayerOpts contains optional parameters for NewHighlightLayer.
 type NewHighlightLayerOpts struct {
-	Options *IHighlightLayerOptions
+	Options js.Value
 }
 
 // NewHighlightLayer returns a new HighlightLayer object.
@@ -50,7 +59,7 @@ func (ba *Babylon) NewHighlightLayer(name string, scene *Scene, opts *NewHighlig
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	p := ba.ctx.Get("HighlightLayer").New(args...)
@@ -101,9 +110,7 @@ func (h *HighlightLayer) AddMesh(mesh *Mesh, color *Color3, opts *HighlightLayer
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#dispose
 func (h *HighlightLayer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("dispose", args...)
+	h.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the HighlightLayer object.
@@ -111,9 +118,7 @@ func (h *HighlightLayer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#getclassname
 func (h *HighlightLayer) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getClassName", args...)
+	retVal := h.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -122,9 +127,7 @@ func (h *HighlightLayer) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#geteffectname
 func (h *HighlightLayer) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getEffectName", args...)
+	retVal := h.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -160,9 +163,7 @@ func (h *HighlightLayer) IsReady(subMesh *SubMesh, useInstances bool) bool {
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#needstencil
 func (h *HighlightLayer) NeedStencil() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("needStencil", args...)
+	retVal := h.p.Call("needStencil")
 	return retVal.Bool()
 }
 
@@ -210,9 +211,7 @@ func (h *HighlightLayer) RemoveMesh(mesh *Mesh) {
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#render
 func (h *HighlightLayer) Render() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("render", args...)
+	h.p.Call("render")
 }
 
 // Serialize calls the Serialize method on the HighlightLayer object.
@@ -220,9 +219,7 @@ func (h *HighlightLayer) Render() {
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#serialize
 func (h *HighlightLayer) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("serialize", args...)
+	retVal := h.p.Call("serialize")
 	return retVal
 }
 
@@ -231,9 +228,7 @@ func (h *HighlightLayer) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#shouldrender
 func (h *HighlightLayer) ShouldRender() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("shouldRender", args...)
+	retVal := h.p.Call("shouldRender")
 	return retVal.Bool()
 }
 

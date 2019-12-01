@@ -27,6 +27,15 @@ func BloomMergePostProcessFromJSObject(p js.Value, ctx js.Value) *BloomMergePost
 	return &BloomMergePostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// BloomMergePostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BloomMergePostProcessArrayToJSArray(array []*BloomMergePostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBloomMergePostProcessOpts contains optional parameters for NewBloomMergePostProcess.
 type NewBloomMergePostProcessOpts struct {
 	SamplingMode     *float64
@@ -121,9 +130,7 @@ func (b *BloomMergePostProcess) Activate(camera *Camera, opts *BloomMergePostPro
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#apply
 func (b *BloomMergePostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("apply", args...)
+	retVal := b.p.Call("apply")
 	return EffectFromJSObject(retVal, b.ctx)
 }
 
@@ -156,9 +163,7 @@ func (b *BloomMergePostProcess) Dispose(opts *BloomMergePostProcessDisposeOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#getcamera
 func (b *BloomMergePostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getCamera", args...)
+	retVal := b.p.Call("getCamera")
 	return CameraFromJSObject(retVal, b.ctx)
 }
 
@@ -167,9 +172,7 @@ func (b *BloomMergePostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#getclassname
 func (b *BloomMergePostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getClassName", args...)
+	retVal := b.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -178,9 +181,7 @@ func (b *BloomMergePostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#geteffect
 func (b *BloomMergePostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEffect", args...)
+	retVal := b.p.Call("getEffect")
 	return EffectFromJSObject(retVal, b.ctx)
 }
 
@@ -189,9 +190,7 @@ func (b *BloomMergePostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#geteffectname
 func (b *BloomMergePostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEffectName", args...)
+	retVal := b.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -200,9 +199,7 @@ func (b *BloomMergePostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#getengine
 func (b *BloomMergePostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEngine", args...)
+	retVal := b.p.Call("getEngine")
 	return EngineFromJSObject(retVal, b.ctx)
 }
 
@@ -211,9 +208,7 @@ func (b *BloomMergePostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#isready
 func (b *BloomMergePostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("isReady", args...)
+	retVal := b.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -222,9 +217,7 @@ func (b *BloomMergePostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#isreusable
 func (b *BloomMergePostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("isReusable", args...)
+	retVal := b.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -233,9 +226,7 @@ func (b *BloomMergePostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#marktexturedirty
 func (b *BloomMergePostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("markTextureDirty", args...)
+	b.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the BloomMergePostProcess object.
@@ -310,9 +301,7 @@ func (b *BloomMergePostProcess) UpdateEffect(opts *BloomMergePostProcessUpdateEf
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#useownoutput
 func (b *BloomMergePostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("useOwnOutput", args...)
+	b.p.Call("useOwnOutput")
 }
 
 /*
@@ -561,7 +550,7 @@ func (b *BloomMergePostProcess) SetName(name string) *BloomMergePostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onactivate
 func (b *BloomMergePostProcess) OnActivate(onActivate func()) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(onActivate)
+	p := ba.ctx.Get("BloomMergePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -569,7 +558,7 @@ func (b *BloomMergePostProcess) OnActivate(onActivate func()) *BloomMergePostPro
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onactivate
 func (b *BloomMergePostProcess) SetOnActivate(onActivate func()) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(onActivate)
+	p := ba.ctx.Get("BloomMergePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -593,7 +582,7 @@ func (b *BloomMergePostProcess) SetOnActivateObservable(onActivateObservable *Ob
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onafterrender
 func (b *BloomMergePostProcess) OnAfterRender(onAfterRender func()) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(onAfterRender)
+	p := ba.ctx.Get("BloomMergePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -601,7 +590,7 @@ func (b *BloomMergePostProcess) OnAfterRender(onAfterRender func()) *BloomMergeP
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onafterrender
 func (b *BloomMergePostProcess) SetOnAfterRender(onAfterRender func()) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(onAfterRender)
+	p := ba.ctx.Get("BloomMergePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -625,7 +614,7 @@ func (b *BloomMergePostProcess) SetOnAfterRenderObservable(onAfterRenderObservab
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onapply
 func (b *BloomMergePostProcess) OnApply(onApply func()) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(onApply)
+	p := ba.ctx.Get("BloomMergePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -633,7 +622,7 @@ func (b *BloomMergePostProcess) OnApply(onApply func()) *BloomMergePostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onapply
 func (b *BloomMergePostProcess) SetOnApply(onApply func()) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(onApply)
+	p := ba.ctx.Get("BloomMergePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -657,7 +646,7 @@ func (b *BloomMergePostProcess) SetOnApplyObservable(onApplyObservable *Observab
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onbeforerender
 func (b *BloomMergePostProcess) OnBeforeRender(onBeforeRender func()) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("BloomMergePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -665,7 +654,7 @@ func (b *BloomMergePostProcess) OnBeforeRender(onBeforeRender func()) *BloomMerg
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onbeforerender
 func (b *BloomMergePostProcess) SetOnBeforeRender(onBeforeRender func()) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("BloomMergePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -689,7 +678,7 @@ func (b *BloomMergePostProcess) SetOnBeforeRenderObservable(onBeforeRenderObserv
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onsizechanged
 func (b *BloomMergePostProcess) OnSizeChanged(onSizeChanged func()) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("BloomMergePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -697,7 +686,7 @@ func (b *BloomMergePostProcess) OnSizeChanged(onSizeChanged func()) *BloomMergeP
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onsizechanged
 func (b *BloomMergePostProcess) SetOnSizeChanged(onSizeChanged func()) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("BloomMergePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 

@@ -29,6 +29,15 @@ func ActionFromJSObject(p js.Value, ctx js.Value) *Action {
 	return &Action{p: p, ctx: ctx}
 }
 
+// ActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ActionArrayToJSArray(array []*Action) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewActionOpts contains optional parameters for NewAction.
 type NewActionOpts struct {
 	Condition *Condition
@@ -85,9 +94,7 @@ func (a *Action) Execute(opts *ActionExecuteOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.action#gettriggerparameter
 func (a *Action) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTriggerParameter", args...)
+	retVal := a.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -109,9 +116,7 @@ func (a *Action) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.action#skiptonextactiveaction
 func (a *Action) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("skipToNextActiveAction", args...)
+	a.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the Action object.

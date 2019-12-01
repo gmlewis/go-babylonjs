@@ -27,6 +27,15 @@ func NormalBlendBlockFromJSObject(p js.Value, ctx js.Value) *NormalBlendBlock {
 	return &NormalBlendBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// NormalBlendBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NormalBlendBlockArrayToJSArray(array []*NormalBlendBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewNormalBlendBlock returns a new NormalBlendBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock
@@ -152,9 +161,7 @@ func (n *NormalBlendBlock) ConnectTo(other *NodeMaterialBlock, opts *NormalBlend
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock#dispose
 func (n *NormalBlendBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("dispose", args...)
+	n.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the NormalBlendBlock object.
@@ -162,9 +169,7 @@ func (n *NormalBlendBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock#getclassname
 func (n *NormalBlendBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getClassName", args...)
+	retVal := n.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (n *NormalBlendBlock) ReplaceRepeatableContent(vertexShaderState *NodeMater
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock#serialize
 func (n *NormalBlendBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("serialize", args...)
+	retVal := n.p.Call("serialize")
 	return retVal
 }
 

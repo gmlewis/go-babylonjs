@@ -29,14 +29,23 @@ func DistanceJointFromJSObject(p js.Value, ctx js.Value) *DistanceJoint {
 	return &DistanceJoint{PhysicsJoint: PhysicsJointFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DistanceJointArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DistanceJointArrayToJSArray(array []*DistanceJoint) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDistanceJoint returns a new DistanceJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distancejoint
-func (ba *Babylon) NewDistanceJoint(jointData *DistanceJointData) *DistanceJoint {
+func (ba *Babylon) NewDistanceJoint(jointData js.Value) *DistanceJoint {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jointData.JSObject())
+	args = append(args, jointData)
 
 	p := ba.ctx.Get("DistanceJoint").New(args...)
 	return DistanceJointFromJSObject(p, ba.ctx)
@@ -49,7 +58,7 @@ func (d *DistanceJoint) ExecuteNativeFunction(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	d.p.Call("executeNativeFunction", args...)
 }
@@ -149,16 +158,16 @@ func (d *DistanceJoint) SetHingeJoint(HingeJoint float64) *DistanceJoint {
 // JointData returns the JointData property of class DistanceJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distancejoint#jointdata
-func (d *DistanceJoint) JointData(jointData *PhysicsJointData) *DistanceJoint {
-	p := ba.ctx.Get("DistanceJoint").New(jointData.JSObject())
+func (d *DistanceJoint) JointData(jointData js.Value) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(jointData)
 	return DistanceJointFromJSObject(p, ba.ctx)
 }
 
 // SetJointData sets the JointData property of class DistanceJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distancejoint#jointdata
-func (d *DistanceJoint) SetJointData(jointData *PhysicsJointData) *DistanceJoint {
-	p := ba.ctx.Get("DistanceJoint").New(jointData.JSObject())
+func (d *DistanceJoint) SetJointData(jointData js.Value) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(jointData)
 	return DistanceJointFromJSObject(p, ba.ctx)
 }
 

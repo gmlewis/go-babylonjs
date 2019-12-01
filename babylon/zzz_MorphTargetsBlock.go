@@ -27,6 +27,15 @@ func MorphTargetsBlockFromJSObject(p js.Value, ctx js.Value) *MorphTargetsBlock 
 	return &MorphTargetsBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// MorphTargetsBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MorphTargetsBlockArrayToJSArray(array []*MorphTargetsBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMorphTargetsBlock returns a new MorphTargetsBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock
@@ -152,9 +161,7 @@ func (m *MorphTargetsBlock) ConnectTo(other *NodeMaterialBlock, opts *MorphTarge
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#dispose
 func (m *MorphTargetsBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("dispose", args...)
+	m.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the MorphTargetsBlock object.
@@ -162,9 +169,7 @@ func (m *MorphTargetsBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#getclassname
 func (m *MorphTargetsBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -435,9 +440,7 @@ func (m *MorphTargetsBlock) ReplaceRepeatableContent(vertexShaderState *NodeMate
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#serialize
 func (m *MorphTargetsBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("serialize", args...)
+	retVal := m.p.Call("serialize")
 	return retVal
 }
 

@@ -27,6 +27,15 @@ func GamepadSystemSceneComponentFromJSObject(p js.Value, ctx js.Value) *GamepadS
 	return &GamepadSystemSceneComponent{p: p, ctx: ctx}
 }
 
+// GamepadSystemSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GamepadSystemSceneComponentArrayToJSArray(array []*GamepadSystemSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGamepadSystemSceneComponent returns a new GamepadSystemSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent
@@ -45,9 +54,7 @@ func (ba *Babylon) NewGamepadSystemSceneComponent(scene *Scene) *GamepadSystemSc
 // https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent#dispose
 func (g *GamepadSystemSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the GamepadSystemSceneComponent object.
@@ -55,9 +62,7 @@ func (g *GamepadSystemSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent#rebuild
 func (g *GamepadSystemSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("rebuild", args...)
+	g.p.Call("rebuild")
 }
 
 // Register calls the Register method on the GamepadSystemSceneComponent object.
@@ -65,9 +70,7 @@ func (g *GamepadSystemSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent#register
 func (g *GamepadSystemSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("register", args...)
+	g.p.Call("register")
 }
 
 /*

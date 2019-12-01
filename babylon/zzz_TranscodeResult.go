@@ -27,6 +27,15 @@ func TranscodeResultFromJSObject(p js.Value, ctx js.Value) *TranscodeResult {
 	return &TranscodeResult{p: p, ctx: ctx}
 }
 
+// TranscodeResultArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TranscodeResultArrayToJSArray(array []*TranscodeResult) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // FileInfo returns the FileInfo property of class TranscodeResult.

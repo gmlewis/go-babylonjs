@@ -29,9 +29,18 @@ func GlowLayerFromJSObject(p js.Value, ctx js.Value) *GlowLayer {
 	return &GlowLayer{EffectLayer: EffectLayerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// GlowLayerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GlowLayerArrayToJSArray(array []*GlowLayer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGlowLayerOpts contains optional parameters for NewGlowLayer.
 type NewGlowLayerOpts struct {
-	Options *IGlowLayerOptions
+	Options js.Value
 }
 
 // NewGlowLayer returns a new GlowLayer object.
@@ -50,7 +59,7 @@ func (ba *Babylon) NewGlowLayer(name string, scene *Scene, opts *NewGlowLayerOpt
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	p := ba.ctx.Get("GlowLayer").New(args...)
@@ -86,9 +95,7 @@ func (g *GlowLayer) AddIncludedOnlyMesh(mesh *Mesh) {
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#dispose
 func (g *GlowLayer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the GlowLayer object.
@@ -96,9 +103,7 @@ func (g *GlowLayer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#getclassname
 func (g *GlowLayer) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getClassName", args...)
+	retVal := g.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -107,9 +112,7 @@ func (g *GlowLayer) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#geteffectname
 func (g *GlowLayer) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getEffectName", args...)
+	retVal := g.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -145,9 +148,7 @@ func (g *GlowLayer) IsReady(subMesh *SubMesh, useInstances bool) bool {
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#needstencil
 func (g *GlowLayer) NeedStencil() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("needStencil", args...)
+	retVal := g.p.Call("needStencil")
 	return retVal.Bool()
 }
 
@@ -207,9 +208,7 @@ func (g *GlowLayer) RemoveIncludedOnlyMesh(mesh *Mesh) {
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#render
 func (g *GlowLayer) Render() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("render", args...)
+	g.p.Call("render")
 }
 
 // Serialize calls the Serialize method on the GlowLayer object.
@@ -217,9 +216,7 @@ func (g *GlowLayer) Render() {
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#serialize
 func (g *GlowLayer) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("serialize", args...)
+	retVal := g.p.Call("serialize")
 	return retVal
 }
 
@@ -228,9 +225,7 @@ func (g *GlowLayer) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#shouldrender
 func (g *GlowLayer) ShouldRender() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("shouldRender", args...)
+	retVal := g.p.Call("shouldRender")
 	return retVal.Bool()
 }
 
@@ -284,7 +279,7 @@ func (g *GlowLayer) SetCamera(camera *Camera) *GlowLayer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#customemissivecolorselector
 func (g *GlowLayer) CustomEmissiveColorSelector(customEmissiveColorSelector func()) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(customEmissiveColorSelector)
+	p := ba.ctx.Get("GlowLayer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customEmissiveColorSelector(); return nil}))
 	return GlowLayerFromJSObject(p, ba.ctx)
 }
 
@@ -292,7 +287,7 @@ func (g *GlowLayer) CustomEmissiveColorSelector(customEmissiveColorSelector func
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#customemissivecolorselector
 func (g *GlowLayer) SetCustomEmissiveColorSelector(customEmissiveColorSelector func()) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(customEmissiveColorSelector)
+	p := ba.ctx.Get("GlowLayer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customEmissiveColorSelector(); return nil}))
 	return GlowLayerFromJSObject(p, ba.ctx)
 }
 
@@ -300,7 +295,7 @@ func (g *GlowLayer) SetCustomEmissiveColorSelector(customEmissiveColorSelector f
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#customemissivetextureselector
 func (g *GlowLayer) CustomEmissiveTextureSelector(customEmissiveTextureSelector func()) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(customEmissiveTextureSelector)
+	p := ba.ctx.Get("GlowLayer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customEmissiveTextureSelector(); return nil}))
 	return GlowLayerFromJSObject(p, ba.ctx)
 }
 
@@ -308,7 +303,7 @@ func (g *GlowLayer) CustomEmissiveTextureSelector(customEmissiveTextureSelector 
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#customemissivetextureselector
 func (g *GlowLayer) SetCustomEmissiveTextureSelector(customEmissiveTextureSelector func()) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(customEmissiveTextureSelector)
+	p := ba.ctx.Get("GlowLayer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customEmissiveTextureSelector(); return nil}))
 	return GlowLayerFromJSObject(p, ba.ctx)
 }
 

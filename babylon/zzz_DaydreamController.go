@@ -27,6 +27,15 @@ func DaydreamControllerFromJSObject(p js.Value, ctx js.Value) *DaydreamControlle
 	return &DaydreamController{WebVRController: WebVRControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DaydreamControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DaydreamControllerArrayToJSArray(array []*DaydreamController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDaydreamController returns a new DaydreamController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller
@@ -69,9 +78,7 @@ func (d *DaydreamController) AttachToPoseControlledCamera(camera *TargetCamera) 
 // https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#dispose
 func (d *DaydreamController) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // DaydreamControllerGetForwardRayOpts contains optional parameters for DaydreamController.GetForwardRay.
@@ -132,7 +139,7 @@ func (d *DaydreamController) OnButtonStateChange(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	d.p.Call("onButtonStateChange", args...)
 }
@@ -144,7 +151,7 @@ func (d *DaydreamController) Onleftstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	d.p.Call("onleftstickchanged", args...)
 }
@@ -156,7 +163,7 @@ func (d *DaydreamController) Onrightstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	d.p.Call("onrightstickchanged", args...)
 }
@@ -166,9 +173,7 @@ func (d *DaydreamController) Onrightstickchanged(callback func()) {
 // https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#update
 func (d *DaydreamController) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("update", args...)
+	d.p.Call("update")
 }
 
 // UpdateFromDevice calls the UpdateFromDevice method on the DaydreamController object.

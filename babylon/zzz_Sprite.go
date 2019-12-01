@@ -29,15 +29,24 @@ func SpriteFromJSObject(p js.Value, ctx js.Value) *Sprite {
 	return &Sprite{p: p, ctx: ctx}
 }
 
+// SpriteArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SpriteArrayToJSArray(array []*Sprite) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSprite returns a new Sprite object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite
-func (ba *Babylon) NewSprite(name string, manager *ISpriteManager) *Sprite {
+func (ba *Babylon) NewSprite(name string, manager js.Value) *Sprite {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, manager.JSObject())
+	args = append(args, manager)
 
 	p := ba.ctx.Get("Sprite").New(args...)
 	return SpriteFromJSObject(p, ba.ctx)
@@ -48,9 +57,7 @@ func (ba *Babylon) NewSprite(name string, manager *ISpriteManager) *Sprite {
 // https://doc.babylonjs.com/api/classes/babylon.sprite#dispose
 func (s *Sprite) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // PlayAnimation calls the PlayAnimation method on the Sprite object.
@@ -64,7 +71,7 @@ func (s *Sprite) PlayAnimation(from float64, to float64, loop bool, delay float6
 	args = append(args, to)
 	args = append(args, loop)
 	args = append(args, delay)
-	args = append(args, onAnimationEnd)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAnimationEnd(); return nil }))
 
 	s.p.Call("playAnimation", args...)
 }
@@ -74,9 +81,7 @@ func (s *Sprite) PlayAnimation(from float64, to float64, loop bool, delay float6
 // https://doc.babylonjs.com/api/classes/babylon.sprite#stopanimation
 func (s *Sprite) StopAnimation() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("stopAnimation", args...)
+	s.p.Call("stopAnimation")
 }
 
 /*

@@ -27,6 +27,15 @@ func BezierCurveFromJSObject(p js.Value, ctx js.Value) *BezierCurve {
 	return &BezierCurve{p: p, ctx: ctx}
 }
 
+// BezierCurveArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BezierCurveArrayToJSArray(array []*BezierCurve) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Interpolate calls the Interpolate method on the BezierCurve object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.beziercurve#interpolate

@@ -27,6 +27,15 @@ func ViewDirectionBlockFromJSObject(p js.Value, ctx js.Value) *ViewDirectionBloc
 	return &ViewDirectionBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ViewDirectionBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ViewDirectionBlockArrayToJSArray(array []*ViewDirectionBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewViewDirectionBlock returns a new ViewDirectionBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock
@@ -152,9 +161,7 @@ func (v *ViewDirectionBlock) ConnectTo(other *NodeMaterialBlock, opts *ViewDirec
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock#dispose
 func (v *ViewDirectionBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ViewDirectionBlock object.
@@ -162,9 +169,7 @@ func (v *ViewDirectionBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock#getclassname
 func (v *ViewDirectionBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (v *ViewDirectionBlock) ReplaceRepeatableContent(vertexShaderState *NodeMat
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock#serialize
 func (v *ViewDirectionBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("serialize", args...)
+	retVal := v.p.Call("serialize")
 	return retVal
 }
 

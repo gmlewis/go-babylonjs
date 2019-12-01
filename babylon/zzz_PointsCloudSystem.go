@@ -32,6 +32,15 @@ func PointsCloudSystemFromJSObject(p js.Value, ctx js.Value) *PointsCloudSystem 
 	return &PointsCloudSystem{p: p, ctx: ctx}
 }
 
+// PointsCloudSystemArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PointsCloudSystemArrayToJSArray(array []*PointsCloudSystem) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPointsCloudSystemOpts contains optional parameters for NewPointsCloudSystem.
 type NewPointsCloudSystemOpts struct {
 	Options js.Value
@@ -243,12 +252,10 @@ func (p *PointsCloudSystem) BeforeUpdateParticles(opts *PointsCloudSystemBeforeU
 // BuildMeshAsync calls the BuildMeshAsync method on the PointsCloudSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#buildmeshasync
-func (p *PointsCloudSystem) BuildMeshAsync() *Mesh {
+func (p *PointsCloudSystem) BuildMeshAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("buildMeshAsync", args...)
-	return MeshFromJSObject(retVal, p.ctx)
+	retVal := p.p.Call("buildMeshAsync")
+	return PromiseFromJSObject(retVal, p.ctx)
 }
 
 // Dispose calls the Dispose method on the PointsCloudSystem object.
@@ -256,9 +263,7 @@ func (p *PointsCloudSystem) BuildMeshAsync() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#dispose
 func (p *PointsCloudSystem) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // InitParticles calls the InitParticles method on the PointsCloudSystem object.
@@ -266,9 +271,7 @@ func (p *PointsCloudSystem) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#initparticles
 func (p *PointsCloudSystem) InitParticles() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("initParticles", args...)
+	p.p.Call("initParticles")
 }
 
 // RecycleParticle calls the RecycleParticle method on the PointsCloudSystem object.
@@ -289,9 +292,7 @@ func (p *PointsCloudSystem) RecycleParticle(particle *CloudPoint) *CloudPoint {
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#refreshvisiblesize
 func (p *PointsCloudSystem) RefreshVisibleSize() *PointsCloudSystem {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("refreshVisibleSize", args...)
+	retVal := p.p.Call("refreshVisibleSize")
 	return PointsCloudSystemFromJSObject(retVal, p.ctx)
 }
 

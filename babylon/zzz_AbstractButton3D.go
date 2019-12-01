@@ -27,6 +27,15 @@ func AbstractButton3DFromJSObject(p js.Value, ctx js.Value) *AbstractButton3D {
 	return &AbstractButton3D{Control3D: Control3DFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AbstractButton3DArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AbstractButton3DArrayToJSArray(array []*AbstractButton3D) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAbstractButton3DOpts contains optional parameters for NewAbstractButton3D.
 type NewAbstractButton3DOpts struct {
 	Name *string
@@ -70,22 +79,20 @@ func (a *AbstractButton3D) AddBehavior(behavior js.Value) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#dispose
 func (a *AbstractButton3D) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the AbstractButton3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#getbehaviorbyname
-func (a *AbstractButton3D) GetBehaviorByName(name string) *Control3D {
+func (a *AbstractButton3D) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := a.p.Call("getBehaviorByName", args...)
-	return Control3DFromJSObject(retVal, a.ctx)
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the AbstractButton3D object.
@@ -93,9 +100,7 @@ func (a *AbstractButton3D) GetBehaviorByName(name string) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#getclassname
 func (a *AbstractButton3D) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -323,7 +328,7 @@ func (a *AbstractButton3D) SetParent(parent *Container3D) *AbstractButton3D {
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#pointerdownanimation
 func (a *AbstractButton3D) PointerDownAnimation(pointerDownAnimation func()) *AbstractButton3D {
-	p := ba.ctx.Get("AbstractButton3D").New(pointerDownAnimation)
+	p := ba.ctx.Get("AbstractButton3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return AbstractButton3DFromJSObject(p, ba.ctx)
 }
 
@@ -331,7 +336,7 @@ func (a *AbstractButton3D) PointerDownAnimation(pointerDownAnimation func()) *Ab
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#pointerdownanimation
 func (a *AbstractButton3D) SetPointerDownAnimation(pointerDownAnimation func()) *AbstractButton3D {
-	p := ba.ctx.Get("AbstractButton3D").New(pointerDownAnimation)
+	p := ba.ctx.Get("AbstractButton3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return AbstractButton3DFromJSObject(p, ba.ctx)
 }
 
@@ -339,7 +344,7 @@ func (a *AbstractButton3D) SetPointerDownAnimation(pointerDownAnimation func()) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#pointerenteranimation
 func (a *AbstractButton3D) PointerEnterAnimation(pointerEnterAnimation func()) *AbstractButton3D {
-	p := ba.ctx.Get("AbstractButton3D").New(pointerEnterAnimation)
+	p := ba.ctx.Get("AbstractButton3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return AbstractButton3DFromJSObject(p, ba.ctx)
 }
 
@@ -347,7 +352,7 @@ func (a *AbstractButton3D) PointerEnterAnimation(pointerEnterAnimation func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#pointerenteranimation
 func (a *AbstractButton3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *AbstractButton3D {
-	p := ba.ctx.Get("AbstractButton3D").New(pointerEnterAnimation)
+	p := ba.ctx.Get("AbstractButton3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return AbstractButton3DFromJSObject(p, ba.ctx)
 }
 
@@ -355,7 +360,7 @@ func (a *AbstractButton3D) SetPointerEnterAnimation(pointerEnterAnimation func()
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#pointeroutanimation
 func (a *AbstractButton3D) PointerOutAnimation(pointerOutAnimation func()) *AbstractButton3D {
-	p := ba.ctx.Get("AbstractButton3D").New(pointerOutAnimation)
+	p := ba.ctx.Get("AbstractButton3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return AbstractButton3DFromJSObject(p, ba.ctx)
 }
 
@@ -363,7 +368,7 @@ func (a *AbstractButton3D) PointerOutAnimation(pointerOutAnimation func()) *Abst
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#pointeroutanimation
 func (a *AbstractButton3D) SetPointerOutAnimation(pointerOutAnimation func()) *AbstractButton3D {
-	p := ba.ctx.Get("AbstractButton3D").New(pointerOutAnimation)
+	p := ba.ctx.Get("AbstractButton3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return AbstractButton3DFromJSObject(p, ba.ctx)
 }
 
@@ -371,7 +376,7 @@ func (a *AbstractButton3D) SetPointerOutAnimation(pointerOutAnimation func()) *A
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#pointerupanimation
 func (a *AbstractButton3D) PointerUpAnimation(pointerUpAnimation func()) *AbstractButton3D {
-	p := ba.ctx.Get("AbstractButton3D").New(pointerUpAnimation)
+	p := ba.ctx.Get("AbstractButton3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return AbstractButton3DFromJSObject(p, ba.ctx)
 }
 
@@ -379,7 +384,7 @@ func (a *AbstractButton3D) PointerUpAnimation(pointerUpAnimation func()) *Abstra
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d#pointerupanimation
 func (a *AbstractButton3D) SetPointerUpAnimation(pointerUpAnimation func()) *AbstractButton3D {
-	p := ba.ctx.Get("AbstractButton3D").New(pointerUpAnimation)
+	p := ba.ctx.Get("AbstractButton3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return AbstractButton3DFromJSObject(p, ba.ctx)
 }
 

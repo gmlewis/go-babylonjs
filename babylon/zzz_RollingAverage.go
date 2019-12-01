@@ -29,6 +29,15 @@ func RollingAverageFromJSObject(p js.Value, ctx js.Value) *RollingAverage {
 	return &RollingAverage{p: p, ctx: ctx}
 }
 
+// RollingAverageArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RollingAverageArrayToJSArray(array []*RollingAverage) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRollingAverage returns a new RollingAverage object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage
@@ -72,9 +81,7 @@ func (r *RollingAverage) History(i float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage#issaturated
 func (r *RollingAverage) IsSaturated() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isSaturated", args...)
+	retVal := r.p.Call("isSaturated")
 	return retVal.Bool()
 }
 
@@ -83,9 +90,7 @@ func (r *RollingAverage) IsSaturated() bool {
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage#reset
 func (r *RollingAverage) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("reset", args...)
+	r.p.Call("reset")
 }
 
 /*

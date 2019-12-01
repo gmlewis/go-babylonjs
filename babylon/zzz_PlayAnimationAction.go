@@ -29,6 +29,15 @@ func PlayAnimationActionFromJSObject(p js.Value, ctx js.Value) *PlayAnimationAct
 	return &PlayAnimationAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PlayAnimationActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PlayAnimationActionArrayToJSArray(array []*PlayAnimationAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPlayAnimationActionOpts contains optional parameters for NewPlayAnimationAction.
 type NewPlayAnimationActionOpts struct {
 	Loop      *bool
@@ -70,9 +79,7 @@ func (ba *Babylon) NewPlayAnimationAction(triggerOptions interface{}, target int
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#execute
 func (p *PlayAnimationAction) Execute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("execute", args...)
+	p.p.Call("execute")
 }
 
 // GetTriggerParameter calls the GetTriggerParameter method on the PlayAnimationAction object.
@@ -80,9 +87,7 @@ func (p *PlayAnimationAction) Execute() {
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#gettriggerparameter
 func (p *PlayAnimationAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getTriggerParameter", args...)
+	retVal := p.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -104,9 +109,7 @@ func (p *PlayAnimationAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#skiptonextactiveaction
 func (p *PlayAnimationAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("skipToNextActiveAction", args...)
+	p.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the PlayAnimationAction object.

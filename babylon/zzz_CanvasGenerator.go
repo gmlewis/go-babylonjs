@@ -27,6 +27,15 @@ func CanvasGeneratorFromJSObject(p js.Value, ctx js.Value) *CanvasGenerator {
 	return &CanvasGenerator{p: p, ctx: ctx}
 }
 
+// CanvasGeneratorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CanvasGeneratorArrayToJSArray(array []*CanvasGenerator) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CreateCanvas calls the CreateCanvas method on the CanvasGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.canvasgenerator#createcanvas

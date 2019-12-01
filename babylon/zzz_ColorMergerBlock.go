@@ -27,6 +27,15 @@ func ColorMergerBlockFromJSObject(p js.Value, ctx js.Value) *ColorMergerBlock {
 	return &ColorMergerBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ColorMergerBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ColorMergerBlockArrayToJSArray(array []*ColorMergerBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewColorMergerBlock returns a new ColorMergerBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock
@@ -152,9 +161,7 @@ func (c *ColorMergerBlock) ConnectTo(other *NodeMaterialBlock, opts *ColorMerger
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#dispose
 func (c *ColorMergerBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ColorMergerBlock object.
@@ -162,9 +169,7 @@ func (c *ColorMergerBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#getclassname
 func (c *ColorMergerBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (c *ColorMergerBlock) ReplaceRepeatableContent(vertexShaderState *NodeMater
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#serialize
 func (c *ColorMergerBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 

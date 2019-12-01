@@ -29,6 +29,15 @@ func LightFromJSObject(p js.Value, ctx js.Value) *Light {
 	return &Light{Node: NodeFromJSObject(p, ctx), ctx: ctx}
 }
 
+// LightArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LightArrayToJSArray(array []*Light) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLight returns a new Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light
@@ -45,7 +54,7 @@ func (ba *Babylon) NewLight(name string, scene *Scene) *Light {
 
 // LightAddBehaviorOpts contains optional parameters for Light.AddBehavior.
 type LightAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the Light object.
@@ -63,7 +72,7 @@ func (l *Light) AddBehavior(behavior js.Value, opts *LightAddBehaviorOpts) *Node
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := l.p.Call("addBehavior", args...)
@@ -326,9 +335,7 @@ func (l *Light) Dispose(opts *LightDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.light#getabsoluteposition
 func (l *Light) GetAbsolutePosition() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getAbsolutePosition", args...)
+	retVal := l.p.Call("getAbsolutePosition")
 	return Vector3FromJSObject(retVal, l.ctx)
 }
 
@@ -363,23 +370,21 @@ func (l *Light) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.light#getanimationranges
 func (l *Light) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getAnimationRanges", args...)
+	retVal := l.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, l.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#getbehaviorbyname
-func (l *Light) GetBehaviorByName(name string) *Node {
+func (l *Light) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := l.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, l.ctx)
+	return retVal
 }
 
 // LightGetChildMeshesOpts contains optional parameters for Light.GetChildMeshes.
@@ -449,9 +454,7 @@ func (l *Light) GetChildren(opts *LightGetChildrenOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.light#getclassname
 func (l *Light) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getClassName", args...)
+	retVal := l.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -506,9 +509,7 @@ func (l *Light) GetDescendants(opts *LightGetDescendantsOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.light#getengine
 func (l *Light) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getEngine", args...)
+	retVal := l.p.Call("getEngine")
 	return EngineFromJSObject(retVal, l.ctx)
 }
 
@@ -548,9 +549,7 @@ func (l *Light) GetHierarchyBoundingVectors(opts *LightGetHierarchyBoundingVecto
 // https://doc.babylonjs.com/api/classes/babylon.light#getscaledintensity
 func (l *Light) GetScaledIntensity() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getScaledIntensity", args...)
+	retVal := l.p.Call("getScaledIntensity")
 	return retVal.Float()
 }
 
@@ -559,21 +558,17 @@ func (l *Light) GetScaledIntensity() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.light#getscene
 func (l *Light) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getScene", args...)
+	retVal := l.p.Call("getScene")
 	return SceneFromJSObject(retVal, l.ctx)
 }
 
 // GetShadowGenerator calls the GetShadowGenerator method on the Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#getshadowgenerator
-func (l *Light) GetShadowGenerator() *IShadowGenerator {
+func (l *Light) GetShadowGenerator() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getShadowGenerator", args...)
-	return IShadowGeneratorFromJSObject(retVal, l.ctx)
+	retVal := l.p.Call("getShadowGenerator")
+	return retVal
 }
 
 // GetTypeID calls the GetTypeID method on the Light object.
@@ -581,9 +576,7 @@ func (l *Light) GetShadowGenerator() *IShadowGenerator {
 // https://doc.babylonjs.com/api/classes/babylon.light#gettypeid
 func (l *Light) GetTypeID() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getTypeID", args...)
+	retVal := l.p.Call("getTypeID")
 	return retVal.Float()
 }
 
@@ -592,9 +585,7 @@ func (l *Light) GetTypeID() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.light#getworldmatrix
 func (l *Light) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getWorldMatrix", args...)
+	retVal := l.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, l.ctx)
 }
 
@@ -616,9 +607,7 @@ func (l *Light) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.light#isdisposed
 func (l *Light) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("isDisposed", args...)
+	retVal := l.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -731,9 +720,7 @@ func (l *Light) RemoveBehavior(behavior js.Value) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.light#serialize
 func (l *Light) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("serialize", args...)
+	retVal := l.p.Call("serialize")
 	return retVal
 }
 
@@ -742,9 +729,7 @@ func (l *Light) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.light#serializeanimationranges
 func (l *Light) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("serializeAnimationRanges", args...)
+	retVal := l.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -1361,7 +1346,7 @@ func (l *Light) SetName(name string) *Light {
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#ondispose
 func (l *Light) OnDispose(onDispose func()) *Light {
-	p := ba.ctx.Get("Light").New(onDispose)
+	p := ba.ctx.Get("Light").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return LightFromJSObject(p, ba.ctx)
 }
 
@@ -1369,7 +1354,7 @@ func (l *Light) OnDispose(onDispose func()) *Light {
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#ondispose
 func (l *Light) SetOnDispose(onDispose func()) *Light {
-	p := ba.ctx.Get("Light").New(onDispose)
+	p := ba.ctx.Get("Light").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return LightFromJSObject(p, ba.ctx)
 }
 
@@ -1393,7 +1378,7 @@ func (l *Light) SetOnDisposeObservable(onDisposeObservable *Observable) *Light {
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#onready
 func (l *Light) OnReady(onReady func()) *Light {
-	p := ba.ctx.Get("Light").New(onReady)
+	p := ba.ctx.Get("Light").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return LightFromJSObject(p, ba.ctx)
 }
 
@@ -1401,7 +1386,7 @@ func (l *Light) OnReady(onReady func()) *Light {
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#onready
 func (l *Light) SetOnReady(onReady func()) *Light {
-	p := ba.ctx.Get("Light").New(onReady)
+	p := ba.ctx.Get("Light").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return LightFromJSObject(p, ba.ctx)
 }
 

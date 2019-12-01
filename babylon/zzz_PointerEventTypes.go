@@ -27,6 +27,15 @@ func PointerEventTypesFromJSObject(p js.Value, ctx js.Value) *PointerEventTypes 
 	return &PointerEventTypes{p: p, ctx: ctx}
 }
 
+// PointerEventTypesArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PointerEventTypesArrayToJSArray(array []*PointerEventTypes) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // POINTERDOUBLETAP returns the POINTERDOUBLETAP property of class PointerEventTypes.

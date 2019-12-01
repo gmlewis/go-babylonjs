@@ -27,6 +27,15 @@ func VRDistortionCorrectionPostProcessFromJSObject(p js.Value, ctx js.Value) *VR
 	return &VRDistortionCorrectionPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VRDistortionCorrectionPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VRDistortionCorrectionPostProcessArrayToJSArray(array []*VRDistortionCorrectionPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVRDistortionCorrectionPostProcess returns a new VRDistortionCorrectionPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess
@@ -81,9 +90,7 @@ func (v *VRDistortionCorrectionPostProcess) Activate(camera *Camera, opts *VRDis
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#apply
 func (v *VRDistortionCorrectionPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("apply", args...)
+	retVal := v.p.Call("apply")
 	return EffectFromJSObject(retVal, v.ctx)
 }
 
@@ -116,9 +123,7 @@ func (v *VRDistortionCorrectionPostProcess) Dispose(opts *VRDistortionCorrection
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#getcamera
 func (v *VRDistortionCorrectionPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getCamera", args...)
+	retVal := v.p.Call("getCamera")
 	return CameraFromJSObject(retVal, v.ctx)
 }
 
@@ -127,9 +132,7 @@ func (v *VRDistortionCorrectionPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#getclassname
 func (v *VRDistortionCorrectionPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -138,9 +141,7 @@ func (v *VRDistortionCorrectionPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#geteffect
 func (v *VRDistortionCorrectionPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getEffect", args...)
+	retVal := v.p.Call("getEffect")
 	return EffectFromJSObject(retVal, v.ctx)
 }
 
@@ -149,9 +150,7 @@ func (v *VRDistortionCorrectionPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#geteffectname
 func (v *VRDistortionCorrectionPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getEffectName", args...)
+	retVal := v.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -160,9 +159,7 @@ func (v *VRDistortionCorrectionPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#getengine
 func (v *VRDistortionCorrectionPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getEngine", args...)
+	retVal := v.p.Call("getEngine")
 	return EngineFromJSObject(retVal, v.ctx)
 }
 
@@ -171,9 +168,7 @@ func (v *VRDistortionCorrectionPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#isready
 func (v *VRDistortionCorrectionPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("isReady", args...)
+	retVal := v.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -182,9 +177,7 @@ func (v *VRDistortionCorrectionPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#isreusable
 func (v *VRDistortionCorrectionPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("isReusable", args...)
+	retVal := v.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -193,9 +186,7 @@ func (v *VRDistortionCorrectionPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#marktexturedirty
 func (v *VRDistortionCorrectionPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("markTextureDirty", args...)
+	v.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the VRDistortionCorrectionPostProcess object.
@@ -270,9 +261,7 @@ func (v *VRDistortionCorrectionPostProcess) UpdateEffect(opts *VRDistortionCorre
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#useownoutput
 func (v *VRDistortionCorrectionPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("useOwnOutput", args...)
+	v.p.Call("useOwnOutput")
 }
 
 /*
@@ -521,7 +510,7 @@ func (v *VRDistortionCorrectionPostProcess) SetName(name string) *VRDistortionCo
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#onactivate
 func (v *VRDistortionCorrectionPostProcess) OnActivate(onActivate func()) *VRDistortionCorrectionPostProcess {
-	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(onActivate)
+	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -529,7 +518,7 @@ func (v *VRDistortionCorrectionPostProcess) OnActivate(onActivate func()) *VRDis
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#onactivate
 func (v *VRDistortionCorrectionPostProcess) SetOnActivate(onActivate func()) *VRDistortionCorrectionPostProcess {
-	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(onActivate)
+	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -553,7 +542,7 @@ func (v *VRDistortionCorrectionPostProcess) SetOnActivateObservable(onActivateOb
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#onafterrender
 func (v *VRDistortionCorrectionPostProcess) OnAfterRender(onAfterRender func()) *VRDistortionCorrectionPostProcess {
-	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -561,7 +550,7 @@ func (v *VRDistortionCorrectionPostProcess) OnAfterRender(onAfterRender func()) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#onafterrender
 func (v *VRDistortionCorrectionPostProcess) SetOnAfterRender(onAfterRender func()) *VRDistortionCorrectionPostProcess {
-	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -585,7 +574,7 @@ func (v *VRDistortionCorrectionPostProcess) SetOnAfterRenderObservable(onAfterRe
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#onapply
 func (v *VRDistortionCorrectionPostProcess) OnApply(onApply func()) *VRDistortionCorrectionPostProcess {
-	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(onApply)
+	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -593,7 +582,7 @@ func (v *VRDistortionCorrectionPostProcess) OnApply(onApply func()) *VRDistortio
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#onapply
 func (v *VRDistortionCorrectionPostProcess) SetOnApply(onApply func()) *VRDistortionCorrectionPostProcess {
-	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(onApply)
+	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -617,7 +606,7 @@ func (v *VRDistortionCorrectionPostProcess) SetOnApplyObservable(onApplyObservab
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#onbeforerender
 func (v *VRDistortionCorrectionPostProcess) OnBeforeRender(onBeforeRender func()) *VRDistortionCorrectionPostProcess {
-	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -625,7 +614,7 @@ func (v *VRDistortionCorrectionPostProcess) OnBeforeRender(onBeforeRender func()
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#onbeforerender
 func (v *VRDistortionCorrectionPostProcess) SetOnBeforeRender(onBeforeRender func()) *VRDistortionCorrectionPostProcess {
-	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -649,7 +638,7 @@ func (v *VRDistortionCorrectionPostProcess) SetOnBeforeRenderObservable(onBefore
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#onsizechanged
 func (v *VRDistortionCorrectionPostProcess) OnSizeChanged(onSizeChanged func()) *VRDistortionCorrectionPostProcess {
-	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -657,7 +646,7 @@ func (v *VRDistortionCorrectionPostProcess) OnSizeChanged(onSizeChanged func()) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#onsizechanged
 func (v *VRDistortionCorrectionPostProcess) SetOnSizeChanged(onSizeChanged func()) *VRDistortionCorrectionPostProcess {
-	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 

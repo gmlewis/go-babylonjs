@@ -27,6 +27,15 @@ func ArcTan2BlockFromJSObject(p js.Value, ctx js.Value) *ArcTan2Block {
 	return &ArcTan2Block{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ArcTan2BlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArcTan2BlockArrayToJSArray(array []*ArcTan2Block) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewArcTan2Block returns a new ArcTan2Block object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block
@@ -152,9 +161,7 @@ func (a *ArcTan2Block) ConnectTo(other *NodeMaterialBlock, opts *ArcTan2BlockCon
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block#dispose
 func (a *ArcTan2Block) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ArcTan2Block object.
@@ -162,9 +169,7 @@ func (a *ArcTan2Block) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block#getclassname
 func (a *ArcTan2Block) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (a *ArcTan2Block) ReplaceRepeatableContent(vertexShaderState *NodeMaterialB
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block#serialize
 func (a *ArcTan2Block) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("serialize", args...)
+	retVal := a.p.Call("serialize")
 	return retVal
 }
 

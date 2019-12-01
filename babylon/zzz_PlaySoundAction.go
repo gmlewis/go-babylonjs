@@ -27,6 +27,15 @@ func PlaySoundActionFromJSObject(p js.Value, ctx js.Value) *PlaySoundAction {
 	return &PlaySoundAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PlaySoundActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PlaySoundActionArrayToJSArray(array []*PlaySoundAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPlaySoundActionOpts contains optional parameters for NewPlaySoundAction.
 type NewPlaySoundActionOpts struct {
 	Condition *Condition
@@ -60,9 +69,7 @@ func (ba *Babylon) NewPlaySoundAction(triggerOptions interface{}, sound *Sound, 
 // https://doc.babylonjs.com/api/classes/babylon.playsoundaction#execute
 func (p *PlaySoundAction) Execute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("execute", args...)
+	p.p.Call("execute")
 }
 
 // GetTriggerParameter calls the GetTriggerParameter method on the PlaySoundAction object.
@@ -70,9 +77,7 @@ func (p *PlaySoundAction) Execute() {
 // https://doc.babylonjs.com/api/classes/babylon.playsoundaction#gettriggerparameter
 func (p *PlaySoundAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getTriggerParameter", args...)
+	retVal := p.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -94,9 +99,7 @@ func (p *PlaySoundAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.playsoundaction#skiptonextactiveaction
 func (p *PlaySoundAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("skipToNextActiveAction", args...)
+	p.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the PlaySoundAction object.

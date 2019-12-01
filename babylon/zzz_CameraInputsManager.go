@@ -30,6 +30,15 @@ func CameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *CameraInputsMana
 	return &CameraInputsManager{p: p, ctx: ctx}
 }
 
+// CameraInputsManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CameraInputsManagerArrayToJSArray(array []*CameraInputsManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCameraInputsManager returns a new CameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager
@@ -98,9 +107,7 @@ func (c *CameraInputsManager) AttachInput(input js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#clear
 func (c *CameraInputsManager) Clear() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("clear", args...)
+	c.p.Call("clear")
 }
 
 // CameraInputsManagerDetachElementOpts contains optional parameters for CameraInputsManager.DetachElement.
@@ -146,9 +153,7 @@ func (c *CameraInputsManager) Parse(parsedCamera interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#rebuildinputcheck
 func (c *CameraInputsManager) RebuildInputCheck() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("rebuildInputCheck", args...)
+	c.p.Call("rebuildInputCheck")
 }
 
 // Remove calls the Remove method on the CameraInputsManager object.
@@ -241,7 +246,7 @@ func (c *CameraInputsManager) SetCamera(camera *Camera) *CameraInputsManager {
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#checkinputs
 func (c *CameraInputsManager) CheckInputs(checkInputs func()) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(checkInputs)
+	p := ba.ctx.Get("CameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
 	return CameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -249,7 +254,7 @@ func (c *CameraInputsManager) CheckInputs(checkInputs func()) *CameraInputsManag
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#checkinputs
 func (c *CameraInputsManager) SetCheckInputs(checkInputs func()) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(checkInputs)
+	p := ba.ctx.Get("CameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
 	return CameraInputsManagerFromJSObject(p, ba.ctx)
 }
 

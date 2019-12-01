@@ -28,6 +28,15 @@ func ParticleFromJSObject(p js.Value, ctx js.Value) *Particle {
 	return &Particle{p: p, ctx: ctx}
 }
 
+// ParticleArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ParticleArrayToJSArray(array []*Particle) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewParticle returns a new Particle object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particle
@@ -58,9 +67,7 @@ func (p *Particle) CopyTo(other *Particle) {
 // https://doc.babylonjs.com/api/classes/babylon.particle#updatecellindex
 func (p *Particle) UpdateCellIndex() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("updateCellIndex", args...)
+	p.p.Call("updateCellIndex")
 }
 
 /*

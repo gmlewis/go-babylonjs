@@ -27,6 +27,15 @@ func FilterPostProcessFromJSObject(p js.Value, ctx js.Value) *FilterPostProcess 
 	return &FilterPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FilterPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FilterPostProcessArrayToJSArray(array []*FilterPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFilterPostProcessOpts contains optional parameters for NewFilterPostProcess.
 type NewFilterPostProcessOpts struct {
 	SamplingMode *float64
@@ -107,9 +116,7 @@ func (f *FilterPostProcess) Activate(camera *Camera, opts *FilterPostProcessActi
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#apply
 func (f *FilterPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("apply", args...)
+	retVal := f.p.Call("apply")
 	return EffectFromJSObject(retVal, f.ctx)
 }
 
@@ -142,9 +149,7 @@ func (f *FilterPostProcess) Dispose(opts *FilterPostProcessDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#getcamera
 func (f *FilterPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getCamera", args...)
+	retVal := f.p.Call("getCamera")
 	return CameraFromJSObject(retVal, f.ctx)
 }
 
@@ -153,9 +158,7 @@ func (f *FilterPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#getclassname
 func (f *FilterPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -164,9 +167,7 @@ func (f *FilterPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#geteffect
 func (f *FilterPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getEffect", args...)
+	retVal := f.p.Call("getEffect")
 	return EffectFromJSObject(retVal, f.ctx)
 }
 
@@ -175,9 +176,7 @@ func (f *FilterPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#geteffectname
 func (f *FilterPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getEffectName", args...)
+	retVal := f.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -186,9 +185,7 @@ func (f *FilterPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#getengine
 func (f *FilterPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getEngine", args...)
+	retVal := f.p.Call("getEngine")
 	return EngineFromJSObject(retVal, f.ctx)
 }
 
@@ -197,9 +194,7 @@ func (f *FilterPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#isready
 func (f *FilterPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("isReady", args...)
+	retVal := f.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -208,9 +203,7 @@ func (f *FilterPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#isreusable
 func (f *FilterPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("isReusable", args...)
+	retVal := f.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -219,9 +212,7 @@ func (f *FilterPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#marktexturedirty
 func (f *FilterPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("markTextureDirty", args...)
+	f.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the FilterPostProcess object.
@@ -296,9 +287,7 @@ func (f *FilterPostProcess) UpdateEffect(opts *FilterPostProcessUpdateEffectOpts
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#useownoutput
 func (f *FilterPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("useOwnOutput", args...)
+	f.p.Call("useOwnOutput")
 }
 
 /*
@@ -563,7 +552,7 @@ func (f *FilterPostProcess) SetName(name string) *FilterPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#onactivate
 func (f *FilterPostProcess) OnActivate(onActivate func()) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(onActivate)
+	p := ba.ctx.Get("FilterPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -571,7 +560,7 @@ func (f *FilterPostProcess) OnActivate(onActivate func()) *FilterPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#onactivate
 func (f *FilterPostProcess) SetOnActivate(onActivate func()) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(onActivate)
+	p := ba.ctx.Get("FilterPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -595,7 +584,7 @@ func (f *FilterPostProcess) SetOnActivateObservable(onActivateObservable *Observ
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#onafterrender
 func (f *FilterPostProcess) OnAfterRender(onAfterRender func()) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("FilterPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -603,7 +592,7 @@ func (f *FilterPostProcess) OnAfterRender(onAfterRender func()) *FilterPostProce
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#onafterrender
 func (f *FilterPostProcess) SetOnAfterRender(onAfterRender func()) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("FilterPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -627,7 +616,7 @@ func (f *FilterPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#onapply
 func (f *FilterPostProcess) OnApply(onApply func()) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(onApply)
+	p := ba.ctx.Get("FilterPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -635,7 +624,7 @@ func (f *FilterPostProcess) OnApply(onApply func()) *FilterPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#onapply
 func (f *FilterPostProcess) SetOnApply(onApply func()) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(onApply)
+	p := ba.ctx.Get("FilterPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -659,7 +648,7 @@ func (f *FilterPostProcess) SetOnApplyObservable(onApplyObservable *Observable) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#onbeforerender
 func (f *FilterPostProcess) OnBeforeRender(onBeforeRender func()) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("FilterPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -667,7 +656,7 @@ func (f *FilterPostProcess) OnBeforeRender(onBeforeRender func()) *FilterPostPro
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#onbeforerender
 func (f *FilterPostProcess) SetOnBeforeRender(onBeforeRender func()) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("FilterPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -691,7 +680,7 @@ func (f *FilterPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#onsizechanged
 func (f *FilterPostProcess) OnSizeChanged(onSizeChanged func()) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("FilterPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -699,7 +688,7 @@ func (f *FilterPostProcess) OnSizeChanged(onSizeChanged func()) *FilterPostProce
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#onsizechanged
 func (f *FilterPostProcess) SetOnSizeChanged(onSizeChanged func()) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("FilterPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 

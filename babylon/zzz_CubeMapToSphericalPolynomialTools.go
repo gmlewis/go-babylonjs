@@ -28,6 +28,15 @@ func CubeMapToSphericalPolynomialToolsFromJSObject(p js.Value, ctx js.Value) *Cu
 	return &CubeMapToSphericalPolynomialTools{p: p, ctx: ctx}
 }
 
+// CubeMapToSphericalPolynomialToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CubeMapToSphericalPolynomialToolsArrayToJSArray(array []*CubeMapToSphericalPolynomialTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ConvertCubeMapTextureToSphericalPolynomial calls the ConvertCubeMapTextureToSphericalPolynomial method on the CubeMapToSphericalPolynomialTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemaptosphericalpolynomialtools#convertcubemaptexturetosphericalpolynomial

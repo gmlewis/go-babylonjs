@@ -27,6 +27,15 @@ func OBJExportFromJSObject(p js.Value, ctx js.Value) *OBJExport {
 	return &OBJExport{p: p, ctx: ctx}
 }
 
+// OBJExportArrayToJSArray returns a JavaScript Array for the wrapped array.
+func OBJExportArrayToJSArray(array []*OBJExport) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // MTL calls the MTL method on the OBJExport object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objexport#mtl

@@ -30,6 +30,15 @@ func MaterialHelperFromJSObject(p js.Value, ctx js.Value) *MaterialHelper {
 	return &MaterialHelper{p: p, ctx: ctx}
 }
 
+// MaterialHelperArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MaterialHelperArrayToJSArray(array []*MaterialHelper) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // MaterialHelperBindBonesParametersOpts contains optional parameters for MaterialHelper.BindBonesParameters.
 type MaterialHelperBindBonesParametersOpts struct {
 	Mesh   *AbstractMesh

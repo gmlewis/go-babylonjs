@@ -32,6 +32,15 @@ func SolidParticleSystemFromJSObject(p js.Value, ctx js.Value) *SolidParticleSys
 	return &SolidParticleSystem{p: p, ctx: ctx}
 }
 
+// SolidParticleSystemArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SolidParticleSystemArrayToJSArray(array []*SolidParticleSystem) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSolidParticleSystemOpts contains optional parameters for NewSolidParticleSystem.
 type NewSolidParticleSystemOpts struct {
 	Options js.Value
@@ -165,9 +174,7 @@ func (s *SolidParticleSystem) BeforeUpdateParticles(opts *SolidParticleSystemBef
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#buildmesh
 func (s *SolidParticleSystem) BuildMesh() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("buildMesh", args...)
+	retVal := s.p.Call("buildMesh")
 	return MeshFromJSObject(retVal, s.ctx)
 }
 
@@ -176,9 +183,7 @@ func (s *SolidParticleSystem) BuildMesh() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computesubmeshes
 func (s *SolidParticleSystem) ComputeSubMeshes() *SolidParticleSystem {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("computeSubMeshes", args...)
+	retVal := s.p.Call("computeSubMeshes")
 	return SolidParticleSystemFromJSObject(retVal, s.ctx)
 }
 
@@ -214,9 +219,7 @@ func (s *SolidParticleSystem) Digest(mesh *Mesh, opts *SolidParticleSystemDigest
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#dispose
 func (s *SolidParticleSystem) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetParticleById calls the GetParticleById method on the SolidParticleSystem object.
@@ -264,9 +267,7 @@ func (s *SolidParticleSystem) GetParticlesByShapeIdToRef(shapeId float64, ref *S
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#initparticles
 func (s *SolidParticleSystem) InitParticles() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("initParticles", args...)
+	s.p.Call("initParticles")
 }
 
 // InsertParticlesFromArray calls the InsertParticlesFromArray method on the SolidParticleSystem object.
@@ -325,9 +326,7 @@ func (s *SolidParticleSystem) RecycleParticle(particle *SolidParticle) *SolidPar
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#refreshvisiblesize
 func (s *SolidParticleSystem) RefreshVisibleSize() *SolidParticleSystem {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("refreshVisibleSize", args...)
+	retVal := s.p.Call("refreshVisibleSize")
 	return SolidParticleSystemFromJSObject(retVal, s.ctx)
 }
 

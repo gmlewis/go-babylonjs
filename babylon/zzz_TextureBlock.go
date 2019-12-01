@@ -27,6 +27,15 @@ func TextureBlockFromJSObject(p js.Value, ctx js.Value) *TextureBlock {
 	return &TextureBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// TextureBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TextureBlockArrayToJSArray(array []*TextureBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTextureBlock returns a new TextureBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock
@@ -152,9 +161,7 @@ func (t *TextureBlock) ConnectTo(other *NodeMaterialBlock, opts *TextureBlockCon
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#dispose
 func (t *TextureBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("dispose", args...)
+	t.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the TextureBlock object.
@@ -162,9 +169,7 @@ func (t *TextureBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#getclassname
 func (t *TextureBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getClassName", args...)
+	retVal := t.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -302,9 +307,7 @@ func (t *TextureBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeM
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#isready
 func (t *TextureBlock) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("isReady", args...)
+	retVal := t.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -417,9 +420,7 @@ func (t *TextureBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialB
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#serialize
 func (t *TextureBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("serialize", args...)
+	retVal := t.p.Call("serialize")
 	return retVal
 }
 

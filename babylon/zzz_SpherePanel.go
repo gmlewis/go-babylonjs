@@ -27,6 +27,15 @@ func SpherePanelFromJSObject(p js.Value, ctx js.Value) *SpherePanel {
 	return &SpherePanel{VolumeBasedPanel: VolumeBasedPanelFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SpherePanelArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SpherePanelArrayToJSArray(array []*SpherePanel) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSpherePanel returns a new SpherePanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel
@@ -82,22 +91,20 @@ func (s *SpherePanel) ContainsControl(control *Control3D) bool {
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#dispose
 func (s *SpherePanel) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the SpherePanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#getbehaviorbyname
-func (s *SpherePanel) GetBehaviorByName(name string) *Control3D {
+func (s *SpherePanel) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := s.p.Call("getBehaviorByName", args...)
-	return Control3DFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the SpherePanel object.
@@ -105,9 +112,7 @@ func (s *SpherePanel) GetBehaviorByName(name string) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#getclassname
 func (s *SpherePanel) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -155,9 +160,7 @@ func (s *SpherePanel) RemoveControl(control *Control3D) *Container3D {
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#updatelayout
 func (s *SpherePanel) UpdateLayout() *Container3D {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("updateLayout", args...)
+	retVal := s.p.Call("updateLayout")
 	return Container3DFromJSObject(retVal, s.ctx)
 }
 
@@ -198,16 +201,16 @@ func (s *SpherePanel) SetBlockLayout(blockLayout bool) *SpherePanel {
 // Children returns the Children property of class SpherePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#children
-func (s *SpherePanel) Children(children []Control3D) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(children.JSObject())
+func (s *SpherePanel) Children(children []*Control3D) *SpherePanel {
+	p := ba.ctx.Get("SpherePanel").New(children)
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
 // SetChildren sets the Children property of class SpherePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#children
-func (s *SpherePanel) SetChildren(children []Control3D) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(children.JSObject())
+func (s *SpherePanel) SetChildren(children []*Control3D) *SpherePanel {
+	p := ba.ctx.Get("SpherePanel").New(children)
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
@@ -503,7 +506,7 @@ func (s *SpherePanel) SetParent(parent *Container3D) *SpherePanel {
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#pointerdownanimation
 func (s *SpherePanel) PointerDownAnimation(pointerDownAnimation func()) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(pointerDownAnimation)
+	p := ba.ctx.Get("SpherePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
@@ -511,7 +514,7 @@ func (s *SpherePanel) PointerDownAnimation(pointerDownAnimation func()) *SphereP
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#pointerdownanimation
 func (s *SpherePanel) SetPointerDownAnimation(pointerDownAnimation func()) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(pointerDownAnimation)
+	p := ba.ctx.Get("SpherePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
@@ -519,7 +522,7 @@ func (s *SpherePanel) SetPointerDownAnimation(pointerDownAnimation func()) *Sphe
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#pointerenteranimation
 func (s *SpherePanel) PointerEnterAnimation(pointerEnterAnimation func()) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(pointerEnterAnimation)
+	p := ba.ctx.Get("SpherePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
@@ -527,7 +530,7 @@ func (s *SpherePanel) PointerEnterAnimation(pointerEnterAnimation func()) *Spher
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#pointerenteranimation
 func (s *SpherePanel) SetPointerEnterAnimation(pointerEnterAnimation func()) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(pointerEnterAnimation)
+	p := ba.ctx.Get("SpherePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
@@ -535,7 +538,7 @@ func (s *SpherePanel) SetPointerEnterAnimation(pointerEnterAnimation func()) *Sp
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#pointeroutanimation
 func (s *SpherePanel) PointerOutAnimation(pointerOutAnimation func()) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(pointerOutAnimation)
+	p := ba.ctx.Get("SpherePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
@@ -543,7 +546,7 @@ func (s *SpherePanel) PointerOutAnimation(pointerOutAnimation func()) *SpherePan
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#pointeroutanimation
 func (s *SpherePanel) SetPointerOutAnimation(pointerOutAnimation func()) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(pointerOutAnimation)
+	p := ba.ctx.Get("SpherePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
@@ -551,7 +554,7 @@ func (s *SpherePanel) SetPointerOutAnimation(pointerOutAnimation func()) *Sphere
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#pointerupanimation
 func (s *SpherePanel) PointerUpAnimation(pointerUpAnimation func()) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(pointerUpAnimation)
+	p := ba.ctx.Get("SpherePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
@@ -559,7 +562,7 @@ func (s *SpherePanel) PointerUpAnimation(pointerUpAnimation func()) *SpherePanel
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#pointerupanimation
 func (s *SpherePanel) SetPointerUpAnimation(pointerUpAnimation func()) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(pointerUpAnimation)
+	p := ba.ctx.Get("SpherePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 

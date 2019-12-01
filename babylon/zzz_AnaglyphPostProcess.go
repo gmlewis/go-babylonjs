@@ -27,6 +27,15 @@ func AnaglyphPostProcessFromJSObject(p js.Value, ctx js.Value) *AnaglyphPostProc
 	return &AnaglyphPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AnaglyphPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnaglyphPostProcessArrayToJSArray(array []*AnaglyphPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnaglyphPostProcessOpts contains optional parameters for NewAnaglyphPostProcess.
 type NewAnaglyphPostProcessOpts struct {
 	SamplingMode *float64
@@ -106,9 +115,7 @@ func (a *AnaglyphPostProcess) Activate(camera *Camera, opts *AnaglyphPostProcess
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#apply
 func (a *AnaglyphPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("apply", args...)
+	retVal := a.p.Call("apply")
 	return EffectFromJSObject(retVal, a.ctx)
 }
 
@@ -141,9 +148,7 @@ func (a *AnaglyphPostProcess) Dispose(opts *AnaglyphPostProcessDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#getcamera
 func (a *AnaglyphPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getCamera", args...)
+	retVal := a.p.Call("getCamera")
 	return CameraFromJSObject(retVal, a.ctx)
 }
 
@@ -152,9 +157,7 @@ func (a *AnaglyphPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#getclassname
 func (a *AnaglyphPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -163,9 +166,7 @@ func (a *AnaglyphPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#geteffect
 func (a *AnaglyphPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getEffect", args...)
+	retVal := a.p.Call("getEffect")
 	return EffectFromJSObject(retVal, a.ctx)
 }
 
@@ -174,9 +175,7 @@ func (a *AnaglyphPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#geteffectname
 func (a *AnaglyphPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getEffectName", args...)
+	retVal := a.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -185,9 +184,7 @@ func (a *AnaglyphPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#getengine
 func (a *AnaglyphPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getEngine", args...)
+	retVal := a.p.Call("getEngine")
 	return EngineFromJSObject(retVal, a.ctx)
 }
 
@@ -196,9 +193,7 @@ func (a *AnaglyphPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#isready
 func (a *AnaglyphPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("isReady", args...)
+	retVal := a.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -207,9 +202,7 @@ func (a *AnaglyphPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#isreusable
 func (a *AnaglyphPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("isReusable", args...)
+	retVal := a.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -218,9 +211,7 @@ func (a *AnaglyphPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#marktexturedirty
 func (a *AnaglyphPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("markTextureDirty", args...)
+	a.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the AnaglyphPostProcess object.
@@ -295,9 +286,7 @@ func (a *AnaglyphPostProcess) UpdateEffect(opts *AnaglyphPostProcessUpdateEffect
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#useownoutput
 func (a *AnaglyphPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("useOwnOutput", args...)
+	a.p.Call("useOwnOutput")
 }
 
 /*
@@ -546,7 +535,7 @@ func (a *AnaglyphPostProcess) SetName(name string) *AnaglyphPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#onactivate
 func (a *AnaglyphPostProcess) OnActivate(onActivate func()) *AnaglyphPostProcess {
-	p := ba.ctx.Get("AnaglyphPostProcess").New(onActivate)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -554,7 +543,7 @@ func (a *AnaglyphPostProcess) OnActivate(onActivate func()) *AnaglyphPostProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#onactivate
 func (a *AnaglyphPostProcess) SetOnActivate(onActivate func()) *AnaglyphPostProcess {
-	p := ba.ctx.Get("AnaglyphPostProcess").New(onActivate)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -578,7 +567,7 @@ func (a *AnaglyphPostProcess) SetOnActivateObservable(onActivateObservable *Obse
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#onafterrender
 func (a *AnaglyphPostProcess) OnAfterRender(onAfterRender func()) *AnaglyphPostProcess {
-	p := ba.ctx.Get("AnaglyphPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -586,7 +575,7 @@ func (a *AnaglyphPostProcess) OnAfterRender(onAfterRender func()) *AnaglyphPostP
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#onafterrender
 func (a *AnaglyphPostProcess) SetOnAfterRender(onAfterRender func()) *AnaglyphPostProcess {
-	p := ba.ctx.Get("AnaglyphPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -610,7 +599,7 @@ func (a *AnaglyphPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#onapply
 func (a *AnaglyphPostProcess) OnApply(onApply func()) *AnaglyphPostProcess {
-	p := ba.ctx.Get("AnaglyphPostProcess").New(onApply)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -618,7 +607,7 @@ func (a *AnaglyphPostProcess) OnApply(onApply func()) *AnaglyphPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#onapply
 func (a *AnaglyphPostProcess) SetOnApply(onApply func()) *AnaglyphPostProcess {
-	p := ba.ctx.Get("AnaglyphPostProcess").New(onApply)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -642,7 +631,7 @@ func (a *AnaglyphPostProcess) SetOnApplyObservable(onApplyObservable *Observable
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#onbeforerender
 func (a *AnaglyphPostProcess) OnBeforeRender(onBeforeRender func()) *AnaglyphPostProcess {
-	p := ba.ctx.Get("AnaglyphPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -650,7 +639,7 @@ func (a *AnaglyphPostProcess) OnBeforeRender(onBeforeRender func()) *AnaglyphPos
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#onbeforerender
 func (a *AnaglyphPostProcess) SetOnBeforeRender(onBeforeRender func()) *AnaglyphPostProcess {
-	p := ba.ctx.Get("AnaglyphPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -674,7 +663,7 @@ func (a *AnaglyphPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservab
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#onsizechanged
 func (a *AnaglyphPostProcess) OnSizeChanged(onSizeChanged func()) *AnaglyphPostProcess {
-	p := ba.ctx.Get("AnaglyphPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -682,7 +671,7 @@ func (a *AnaglyphPostProcess) OnSizeChanged(onSizeChanged func()) *AnaglyphPostP
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess#onsizechanged
 func (a *AnaglyphPostProcess) SetOnSizeChanged(onSizeChanged func()) *AnaglyphPostProcess {
-	p := ba.ctx.Get("AnaglyphPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func BRDFTextureToolsFromJSObject(p js.Value, ctx js.Value) *BRDFTextureTools {
 	return &BRDFTextureTools{p: p, ctx: ctx}
 }
 
+// BRDFTextureToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BRDFTextureToolsArrayToJSArray(array []*BRDFTextureTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // GetEnvironmentBRDFTexture calls the GetEnvironmentBRDFTexture method on the BRDFTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brdftexturetools#getenvironmentbrdftexture

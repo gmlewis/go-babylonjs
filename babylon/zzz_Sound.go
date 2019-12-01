@@ -30,10 +30,19 @@ func SoundFromJSObject(p js.Value, ctx js.Value) *Sound {
 	return &Sound{p: p, ctx: ctx}
 }
 
+// SoundArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SoundArrayToJSArray(array []*Sound) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSoundOpts contains optional parameters for NewSound.
 type NewSoundOpts struct {
 	ReadyToPlayCallback *func()
-	Options             *ISoundOptions
+	Options             js.Value
 }
 
 // NewSound returns a new Sound object.
@@ -58,7 +67,7 @@ func (ba *Babylon) NewSound(name string, urlOrArrayBuffer interface{}, scene *Sc
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	p := ba.ctx.Get("Sound").New(args...)
@@ -82,9 +91,7 @@ func (s *Sound) AttachToMesh(transformNode *TransformNode) {
 // https://doc.babylonjs.com/api/classes/babylon.sound#clone
 func (s *Sound) Clone() *Sound {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("clone", args...)
+	retVal := s.p.Call("clone")
 	return SoundFromJSObject(retVal, s.ctx)
 }
 
@@ -105,9 +112,7 @@ func (s *Sound) ConnectToSoundTrackAudioNode(soundTrackAudioNode js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.sound#detachfrommesh
 func (s *Sound) DetachFromMesh() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("detachFromMesh", args...)
+	s.p.Call("detachFromMesh")
 }
 
 // Dispose calls the Dispose method on the Sound object.
@@ -115,9 +120,7 @@ func (s *Sound) DetachFromMesh() {
 // https://doc.babylonjs.com/api/classes/babylon.sound#dispose
 func (s *Sound) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetAudioBuffer calls the GetAudioBuffer method on the Sound object.
@@ -125,9 +128,7 @@ func (s *Sound) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.sound#getaudiobuffer
 func (s *Sound) GetAudioBuffer() *AudioBuffer {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAudioBuffer", args...)
+	retVal := s.p.Call("getAudioBuffer")
 	return AudioBufferFromJSObject(retVal, s.ctx)
 }
 
@@ -136,9 +137,7 @@ func (s *Sound) GetAudioBuffer() *AudioBuffer {
 // https://doc.babylonjs.com/api/classes/babylon.sound#getvolume
 func (s *Sound) GetVolume() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getVolume", args...)
+	retVal := s.p.Call("getVolume")
 	return retVal.Float()
 }
 
@@ -147,9 +146,7 @@ func (s *Sound) GetVolume() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.sound#isready
 func (s *Sound) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isReady", args...)
+	retVal := s.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -187,9 +184,7 @@ func (s *Sound) Parse(parsedSound interface{}, scene *Scene, rootUrl string, opt
 // https://doc.babylonjs.com/api/classes/babylon.sound#pause
 func (s *Sound) Pause() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("pause", args...)
+	s.p.Call("pause")
 }
 
 // SoundPlayOpts contains optional parameters for Sound.Play.
@@ -233,9 +228,7 @@ func (s *Sound) Play(opts *SoundPlayOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.sound#serialize
 func (s *Sound) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 
@@ -246,7 +239,7 @@ func (s *Sound) SetAttenuationFunction(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	s.p.Call("setAttenuationFunction", args...)
 }
@@ -368,9 +361,7 @@ func (s *Sound) Stop(opts *SoundStopOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.sound#switchpanningmodeltoequalpower
 func (s *Sound) SwitchPanningModelToEqualPower() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("switchPanningModelToEqualPower", args...)
+	s.p.Call("switchPanningModelToEqualPower")
 }
 
 // SwitchPanningModelToHRTF calls the SwitchPanningModelToHRTF method on the Sound object.
@@ -378,19 +369,17 @@ func (s *Sound) SwitchPanningModelToEqualPower() {
 // https://doc.babylonjs.com/api/classes/babylon.sound#switchpanningmodeltohrtf
 func (s *Sound) SwitchPanningModelToHRTF() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("switchPanningModelToHRTF", args...)
+	s.p.Call("switchPanningModelToHRTF")
 }
 
 // UpdateOptions calls the UpdateOptions method on the Sound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#updateoptions
-func (s *Sound) UpdateOptions(options *ISoundOptions) {
+func (s *Sound) UpdateOptions(options js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, options.JSObject())
+	args = append(args, options)
 
 	s.p.Call("updateOptions", args...)
 }

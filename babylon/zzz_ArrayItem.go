@@ -27,6 +27,15 @@ func ArrayItemFromJSObject(p js.Value, ctx js.Value) *ArrayItem {
 	return &ArrayItem{p: p, ctx: ctx}
 }
 
+// ArrayItemArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArrayItemArrayToJSArray(array []*ArrayItem) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ArrayItemAssignOpts contains optional parameters for ArrayItem.Assign.
 type ArrayItemAssignOpts struct {
 	Array js.Value

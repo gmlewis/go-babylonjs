@@ -27,6 +27,15 @@ func CSGFromJSObject(p js.Value, ctx js.Value) *CSG {
 	return &CSG{p: p, ctx: ctx}
 }
 
+// CSGArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CSGArrayToJSArray(array []*CSG) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CSGBuildMeshGeometryOpts contains optional parameters for CSG.BuildMeshGeometry.
 type CSGBuildMeshGeometryOpts struct {
 	Scene         *Scene
@@ -65,9 +74,7 @@ func (c *CSG) BuildMeshGeometry(name string, opts *CSGBuildMeshGeometryOpts) *Me
 // https://doc.babylonjs.com/api/classes/babylon.csg#clone
 func (c *CSG) Clone() *CSG {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("clone", args...)
+	retVal := c.p.Call("clone")
 	return CSGFromJSObject(retVal, c.ctx)
 }
 
@@ -127,9 +134,7 @@ func (c *CSG) IntersectInPlace(csg *CSG) {
 // https://doc.babylonjs.com/api/classes/babylon.csg#inverse
 func (c *CSG) Inverse() *CSG {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("inverse", args...)
+	retVal := c.p.Call("inverse")
 	return CSGFromJSObject(retVal, c.ctx)
 }
 
@@ -138,9 +143,7 @@ func (c *CSG) Inverse() *CSG {
 // https://doc.babylonjs.com/api/classes/babylon.csg#inverseinplace
 func (c *CSG) InverseInPlace() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("inverseInPlace", args...)
+	c.p.Call("inverseInPlace")
 }
 
 // Subtract calls the Subtract method on the CSG object.

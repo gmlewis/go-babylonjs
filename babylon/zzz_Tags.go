@@ -27,6 +27,15 @@ func TagsFromJSObject(p js.Value, ctx js.Value) *Tags {
 	return &Tags{p: p, ctx: ctx}
 }
 
+// TagsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TagsArrayToJSArray(array []*Tags) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // AddTagsTo calls the AddTagsTo method on the Tags object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tags#addtagsto

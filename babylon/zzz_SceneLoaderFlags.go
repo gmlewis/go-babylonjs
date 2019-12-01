@@ -27,6 +27,15 @@ func SceneLoaderFlagsFromJSObject(p js.Value, ctx js.Value) *SceneLoaderFlags {
 	return &SceneLoaderFlags{p: p, ctx: ctx}
 }
 
+// SceneLoaderFlagsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SceneLoaderFlagsArrayToJSArray(array []*SceneLoaderFlags) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // CleanBoneMatrixWeights returns the CleanBoneMatrixWeights property of class SceneLoaderFlags.

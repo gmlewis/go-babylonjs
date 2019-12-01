@@ -27,6 +27,15 @@ func MSFT_audio_emitterFromJSObject(p js.Value, ctx js.Value) *MSFT_audio_emitte
 	return &MSFT_audio_emitter{p: p, ctx: ctx}
 }
 
+// MSFT_audio_emitterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MSFT_audio_emitterArrayToJSArray(array []*MSFT_audio_emitter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class MSFT_audio_emitter.

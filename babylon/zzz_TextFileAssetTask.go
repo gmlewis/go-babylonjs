@@ -27,6 +27,15 @@ func TextFileAssetTaskFromJSObject(p js.Value, ctx js.Value) *TextFileAssetTask 
 	return &TextFileAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
+// TextFileAssetTaskArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TextFileAssetTaskArrayToJSArray(array []*TextFileAssetTask) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTextFileAssetTask returns a new TextFileAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask
@@ -46,9 +55,7 @@ func (ba *Babylon) NewTextFileAssetTask(name string, url string) *TextFileAssetT
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#reset
 func (t *TextFileAssetTask) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("reset", args...)
+	t.p.Call("reset")
 }
 
 // Run calls the Run method on the TextFileAssetTask object.
@@ -59,8 +66,8 @@ func (t *TextFileAssetTask) Run(scene *Scene, onSuccess func(), onError func()) 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	t.p.Call("run", args...)
 }
@@ -73,8 +80,8 @@ func (t *TextFileAssetTask) RunTask(scene *Scene, onSuccess func(), onError func
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	t.p.Call("runTask", args...)
 }
@@ -133,7 +140,7 @@ func (t *TextFileAssetTask) SetName(name string) *TextFileAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onerror
 func (t *TextFileAssetTask) OnError(onError func()) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(onError)
+	p := ba.ctx.Get("TextFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return TextFileAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -141,7 +148,7 @@ func (t *TextFileAssetTask) OnError(onError func()) *TextFileAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onerror
 func (t *TextFileAssetTask) SetOnError(onError func()) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(onError)
+	p := ba.ctx.Get("TextFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return TextFileAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -149,7 +156,7 @@ func (t *TextFileAssetTask) SetOnError(onError func()) *TextFileAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onsuccess
 func (t *TextFileAssetTask) OnSuccess(onSuccess func()) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(onSuccess)
+	p := ba.ctx.Get("TextFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return TextFileAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -157,7 +164,7 @@ func (t *TextFileAssetTask) OnSuccess(onSuccess func()) *TextFileAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onsuccess
 func (t *TextFileAssetTask) SetOnSuccess(onSuccess func()) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(onSuccess)
+	p := ba.ctx.Get("TextFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return TextFileAssetTaskFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func LineFromJSObject(p js.Value, ctx js.Value) *Line {
 	return &Line{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
+// LineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LineArrayToJSArray(array []*Line) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLineOpts contains optional parameters for NewLine.
 type NewLineOpts struct {
 	Name *string
@@ -71,9 +80,7 @@ func (l *Line) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.line#dispose
 func (l *Line) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("dispose", args...)
+	l.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the Line object.
@@ -94,9 +101,7 @@ func (l *Line) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.line#getclassname
 func (l *Line) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getClassName", args...)
+	retVal := l.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -272,9 +277,7 @@ func (l *Line) _draw(context js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.line#_measure
 func (l *Line) _measure() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("_measure", args...)
+	l.p.Call("_measure")
 }
 
 // Line_moveToProjectedPositionOpts contains optional parameters for Line._moveToProjectedPosition.
@@ -436,16 +439,16 @@ func (l *Line) SetConnectedControl(connectedControl *Control) *Line {
 // Dash returns the Dash property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#dash
-func (l *Line) Dash(dash []number) *Line {
-	p := ba.ctx.Get("Line").New(dash.JSObject())
+func (l *Line) Dash(dash []*float64) *Line {
+	p := ba.ctx.Get("Line").New(dash)
 	return LineFromJSObject(p, ba.ctx)
 }
 
 // SetDash sets the Dash property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#dash
-func (l *Line) SetDash(dash []number) *Line {
-	p := ba.ctx.Get("Line").New(dash.JSObject())
+func (l *Line) SetDash(dash []*float64) *Line {
+	p := ba.ctx.Get("Line").New(dash)
 	return LineFromJSObject(p, ba.ctx)
 }
 

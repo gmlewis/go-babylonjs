@@ -27,14 +27,21 @@ func FactorGradientFromJSObject(p js.Value, ctx js.Value) *FactorGradient {
 	return &FactorGradient{p: p, ctx: ctx}
 }
 
+// FactorGradientArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FactorGradientArrayToJSArray(array []*FactorGradient) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // GetFactor calls the GetFactor method on the FactorGradient object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.factorgradient#getfactor
 func (f *FactorGradient) GetFactor() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getFactor", args...)
+	retVal := f.p.Call("getFactor")
 	return retVal.Float()
 }
 

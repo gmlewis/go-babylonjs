@@ -27,6 +27,15 @@ func PhysicsGravitationalFieldEventFromJSObject(p js.Value, ctx js.Value) *Physi
 	return &PhysicsGravitationalFieldEvent{p: p, ctx: ctx}
 }
 
+// PhysicsGravitationalFieldEventArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsGravitationalFieldEventArrayToJSArray(array []*PhysicsGravitationalFieldEvent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhysicsGravitationalFieldEvent returns a new PhysicsGravitationalFieldEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent
@@ -48,9 +57,7 @@ func (ba *Babylon) NewPhysicsGravitationalFieldEvent(_physicsHelper *PhysicsHelp
 // https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent#disable
 func (p *PhysicsGravitationalFieldEvent) Disable() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("disable", args...)
+	p.p.Call("disable")
 }
 
 // PhysicsGravitationalFieldEventDisposeOpts contains optional parameters for PhysicsGravitationalFieldEvent.Dispose.
@@ -82,20 +89,16 @@ func (p *PhysicsGravitationalFieldEvent) Dispose(opts *PhysicsGravitationalField
 // https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent#enable
 func (p *PhysicsGravitationalFieldEvent) Enable() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("enable", args...)
+	p.p.Call("enable")
 }
 
 // GetData calls the GetData method on the PhysicsGravitationalFieldEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent#getdata
-func (p *PhysicsGravitationalFieldEvent) GetData() *PhysicsGravitationalFieldEventData {
+func (p *PhysicsGravitationalFieldEvent) GetData() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getData", args...)
-	return PhysicsGravitationalFieldEventDataFromJSObject(retVal, p.ctx)
+	retVal := p.p.Call("getData")
+	return retVal
 }
 
 /*

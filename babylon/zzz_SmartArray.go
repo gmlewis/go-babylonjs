@@ -27,6 +27,15 @@ func SmartArrayFromJSObject(p js.Value, ctx js.Value) *SmartArray {
 	return &SmartArray{p: p, ctx: ctx}
 }
 
+// SmartArrayArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SmartArrayArrayToJSArray(array []*SmartArray) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSmartArray returns a new SmartArray object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray
@@ -70,9 +79,7 @@ func (s *SmartArray) Contains(value *T) bool {
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#dispose
 func (s *SmartArray) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // ForEach calls the ForEach method on the SmartArray object.
@@ -82,7 +89,7 @@ func (s *SmartArray) ForEach(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	s.p.Call("forEach", args...)
 }
@@ -117,9 +124,7 @@ func (s *SmartArray) Push(value *T) {
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#reset
 func (s *SmartArray) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("reset", args...)
+	s.p.Call("reset")
 }
 
 // Sort calls the Sort method on the SmartArray object.
@@ -129,7 +134,7 @@ func (s *SmartArray) Sort(compareFn func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, compareFn)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { compareFn(); return nil }))
 
 	s.p.Call("sort", args...)
 }
@@ -139,16 +144,16 @@ func (s *SmartArray) Sort(compareFn func()) {
 // Data returns the Data property of class SmartArray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#data
-func (s *SmartArray) Data(data []T) *SmartArray {
-	p := ba.ctx.Get("SmartArray").New(data.JSObject())
+func (s *SmartArray) Data(data []*T) *SmartArray {
+	p := ba.ctx.Get("SmartArray").New(data)
 	return SmartArrayFromJSObject(p, ba.ctx)
 }
 
 // SetData sets the Data property of class SmartArray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#data
-func (s *SmartArray) SetData(data []T) *SmartArray {
-	p := ba.ctx.Get("SmartArray").New(data.JSObject())
+func (s *SmartArray) SetData(data []*T) *SmartArray {
+	p := ba.ctx.Get("SmartArray").New(data)
 	return SmartArrayFromJSObject(p, ba.ctx)
 }
 

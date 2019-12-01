@@ -29,6 +29,15 @@ func OctreeFromJSObject(p js.Value, ctx js.Value) *Octree {
 	return &Octree{p: p, ctx: ctx}
 }
 
+// OctreeArrayToJSArray returns a JavaScript Array for the wrapped array.
+func OctreeArrayToJSArray(array []*Octree) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewOctreeOpts contains optional parameters for NewOctree.
 type NewOctreeOpts struct {
 	MaxBlockCapacity *float64
@@ -45,7 +54,7 @@ func (ba *Babylon) NewOctree(creationFunc func(), opts *NewOctreeOpts) *Octree {
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, creationFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { creationFunc(); return nil }))
 
 	if opts.MaxBlockCapacity == nil {
 		args = append(args, js.Undefined())
@@ -82,7 +91,7 @@ type OctreeIntersectsOpts struct {
 // Intersects calls the Intersects method on the Octree object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#intersects
-func (o *Octree) Intersects(sphereCenter *Vector3, sphereRadius float64, opts *OctreeIntersectsOpts) *T {
+func (o *Octree) Intersects(sphereCenter *Vector3, sphereRadius float64, opts *OctreeIntersectsOpts) *SmartArray {
 	if opts == nil {
 		opts = &OctreeIntersectsOpts{}
 	}
@@ -99,20 +108,20 @@ func (o *Octree) Intersects(sphereCenter *Vector3, sphereRadius float64, opts *O
 	}
 
 	retVal := o.p.Call("intersects", args...)
-	return TFromJSObject(retVal, o.ctx)
+	return SmartArrayFromJSObject(retVal, o.ctx)
 }
 
 // IntersectsRay calls the IntersectsRay method on the Octree object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#intersectsray
-func (o *Octree) IntersectsRay(ray *Ray) *T {
+func (o *Octree) IntersectsRay(ray *Ray) *SmartArray {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, ray.JSObject())
 
 	retVal := o.p.Call("intersectsRay", args...)
-	return TFromJSObject(retVal, o.ctx)
+	return SmartArrayFromJSObject(retVal, o.ctx)
 }
 
 // RemoveMesh calls the RemoveMesh method on the Octree object.
@@ -135,7 +144,7 @@ type OctreeSelectOpts struct {
 // Select calls the Select method on the Octree object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#select
-func (o *Octree) Select(frustumPlanes *Plane, opts *OctreeSelectOpts) *T {
+func (o *Octree) Select(frustumPlanes *Plane, opts *OctreeSelectOpts) *SmartArray {
 	if opts == nil {
 		opts = &OctreeSelectOpts{}
 	}
@@ -151,7 +160,7 @@ func (o *Octree) Select(frustumPlanes *Plane, opts *OctreeSelectOpts) *T {
 	}
 
 	retVal := o.p.Call("select", args...)
-	return TFromJSObject(retVal, o.ctx)
+	return SmartArrayFromJSObject(retVal, o.ctx)
 }
 
 // Update calls the Update method on the Octree object.
@@ -173,16 +182,16 @@ func (o *Octree) Update(worldMin *Vector3, worldMax *Vector3, entries *T) {
 // Blocks returns the Blocks property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#blocks
-func (o *Octree) Blocks(blocks []OctreeBlock) *Octree {
-	p := ba.ctx.Get("Octree").New(blocks.JSObject())
+func (o *Octree) Blocks(blocks []*OctreeBlock) *Octree {
+	p := ba.ctx.Get("Octree").New(blocks)
 	return OctreeFromJSObject(p, ba.ctx)
 }
 
 // SetBlocks sets the Blocks property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#blocks
-func (o *Octree) SetBlocks(blocks []OctreeBlock) *Octree {
-	p := ba.ctx.Get("Octree").New(blocks.JSObject())
+func (o *Octree) SetBlocks(blocks []*OctreeBlock) *Octree {
+	p := ba.ctx.Get("Octree").New(blocks)
 	return OctreeFromJSObject(p, ba.ctx)
 }
 
@@ -190,7 +199,7 @@ func (o *Octree) SetBlocks(blocks []OctreeBlock) *Octree {
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#creationfuncformeshes
 func (o *Octree) CreationFuncForMeshes(CreationFuncForMeshes func()) *Octree {
-	p := ba.ctx.Get("Octree").New(CreationFuncForMeshes)
+	p := ba.ctx.Get("Octree").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {CreationFuncForMeshes(); return nil}))
 	return OctreeFromJSObject(p, ba.ctx)
 }
 
@@ -198,7 +207,7 @@ func (o *Octree) CreationFuncForMeshes(CreationFuncForMeshes func()) *Octree {
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#creationfuncformeshes
 func (o *Octree) SetCreationFuncForMeshes(CreationFuncForMeshes func()) *Octree {
-	p := ba.ctx.Get("Octree").New(CreationFuncForMeshes)
+	p := ba.ctx.Get("Octree").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {CreationFuncForMeshes(); return nil}))
 	return OctreeFromJSObject(p, ba.ctx)
 }
 
@@ -206,7 +215,7 @@ func (o *Octree) SetCreationFuncForMeshes(CreationFuncForMeshes func()) *Octree 
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#creationfuncforsubmeshes
 func (o *Octree) CreationFuncForSubMeshes(CreationFuncForSubMeshes func()) *Octree {
-	p := ba.ctx.Get("Octree").New(CreationFuncForSubMeshes)
+	p := ba.ctx.Get("Octree").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {CreationFuncForSubMeshes(); return nil}))
 	return OctreeFromJSObject(p, ba.ctx)
 }
 
@@ -214,7 +223,7 @@ func (o *Octree) CreationFuncForSubMeshes(CreationFuncForSubMeshes func()) *Octr
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#creationfuncforsubmeshes
 func (o *Octree) SetCreationFuncForSubMeshes(CreationFuncForSubMeshes func()) *Octree {
-	p := ba.ctx.Get("Octree").New(CreationFuncForSubMeshes)
+	p := ba.ctx.Get("Octree").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {CreationFuncForSubMeshes(); return nil}))
 	return OctreeFromJSObject(p, ba.ctx)
 }
 

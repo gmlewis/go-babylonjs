@@ -27,6 +27,15 @@ func DerivativeBlockFromJSObject(p js.Value, ctx js.Value) *DerivativeBlock {
 	return &DerivativeBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DerivativeBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DerivativeBlockArrayToJSArray(array []*DerivativeBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDerivativeBlock returns a new DerivativeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock
@@ -152,9 +161,7 @@ func (d *DerivativeBlock) ConnectTo(other *NodeMaterialBlock, opts *DerivativeBl
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock#dispose
 func (d *DerivativeBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the DerivativeBlock object.
@@ -162,9 +169,7 @@ func (d *DerivativeBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock#getclassname
 func (d *DerivativeBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (d *DerivativeBlock) ReplaceRepeatableContent(vertexShaderState *NodeMateri
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock#serialize
 func (d *DerivativeBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("serialize", args...)
+	retVal := d.p.Call("serialize")
 	return retVal
 }
 

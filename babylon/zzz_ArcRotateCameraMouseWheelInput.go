@@ -29,6 +29,15 @@ func ArcRotateCameraMouseWheelInputFromJSObject(p js.Value, ctx js.Value) *ArcRo
 	return &ArcRotateCameraMouseWheelInput{p: p, ctx: ctx}
 }
 
+// ArcRotateCameraMouseWheelInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArcRotateCameraMouseWheelInputArrayToJSArray(array []*ArcRotateCameraMouseWheelInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ArcRotateCameraMouseWheelInputAttachControlOpts contains optional parameters for ArcRotateCameraMouseWheelInput.AttachControl.
 type ArcRotateCameraMouseWheelInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -72,9 +81,7 @@ func (a *ArcRotateCameraMouseWheelInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#getclassname
 func (a *ArcRotateCameraMouseWheelInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -83,9 +90,7 @@ func (a *ArcRotateCameraMouseWheelInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#getsimplename
 func (a *ArcRotateCameraMouseWheelInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getSimpleName", args...)
+	retVal := a.p.Call("getSimpleName")
 	return retVal.String()
 }
 

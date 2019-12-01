@@ -27,6 +27,15 @@ func NodeMaterialBuildStateSharedDataFromJSObject(p js.Value, ctx js.Value) *Nod
 	return &NodeMaterialBuildStateSharedData{p: p, ctx: ctx}
 }
 
+// NodeMaterialBuildStateSharedDataArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NodeMaterialBuildStateSharedDataArrayToJSArray(array []*NodeMaterialBuildStateSharedData) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewNodeMaterialBuildStateSharedData returns a new NodeMaterialBuildStateSharedData object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata
@@ -43,9 +52,7 @@ func (ba *Babylon) NewNodeMaterialBuildStateSharedData() *NodeMaterialBuildState
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#emiterrors
 func (n *NodeMaterialBuildStateSharedData) EmitErrors() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("emitErrors", args...)
+	n.p.Call("emitErrors")
 }
 
 /*

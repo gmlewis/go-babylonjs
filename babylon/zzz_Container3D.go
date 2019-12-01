@@ -27,6 +27,15 @@ func Container3DFromJSObject(p js.Value, ctx js.Value) *Container3D {
 	return &Container3D{Control3D: Control3DFromJSObject(p, ctx), ctx: ctx}
 }
 
+// Container3DArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Container3DArrayToJSArray(array []*Container3D) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewContainer3DOpts contains optional parameters for NewContainer3D.
 type NewContainer3DOpts struct {
 	Name *string
@@ -96,22 +105,20 @@ func (c *Container3D) ContainsControl(control *Control3D) bool {
 // https://doc.babylonjs.com/api/classes/babylon.container3d#dispose
 func (c *Container3D) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the Container3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#getbehaviorbyname
-func (c *Container3D) GetBehaviorByName(name string) *Control3D {
+func (c *Container3D) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := c.p.Call("getBehaviorByName", args...)
-	return Control3DFromJSObject(retVal, c.ctx)
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the Container3D object.
@@ -119,9 +126,7 @@ func (c *Container3D) GetBehaviorByName(name string) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.container3d#getclassname
 func (c *Container3D) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -169,9 +174,7 @@ func (c *Container3D) RemoveControl(control *Control3D) *Container3D {
 // https://doc.babylonjs.com/api/classes/babylon.container3d#updatelayout
 func (c *Container3D) UpdateLayout() *Container3D {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("updateLayout", args...)
+	retVal := c.p.Call("updateLayout")
 	return Container3DFromJSObject(retVal, c.ctx)
 }
 
@@ -212,16 +215,16 @@ func (c *Container3D) SetBlockLayout(blockLayout bool) *Container3D {
 // Children returns the Children property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#children
-func (c *Container3D) Children(children []Control3D) *Container3D {
-	p := ba.ctx.Get("Container3D").New(children.JSObject())
+func (c *Container3D) Children(children []*Control3D) *Container3D {
+	p := ba.ctx.Get("Container3D").New(children)
 	return Container3DFromJSObject(p, ba.ctx)
 }
 
 // SetChildren sets the Children property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#children
-func (c *Container3D) SetChildren(children []Control3D) *Container3D {
-	p := ba.ctx.Get("Container3D").New(children.JSObject())
+func (c *Container3D) SetChildren(children []*Control3D) *Container3D {
+	p := ba.ctx.Get("Container3D").New(children)
 	return Container3DFromJSObject(p, ba.ctx)
 }
 
@@ -469,7 +472,7 @@ func (c *Container3D) SetParent(parent *Container3D) *Container3D {
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#pointerdownanimation
 func (c *Container3D) PointerDownAnimation(pointerDownAnimation func()) *Container3D {
-	p := ba.ctx.Get("Container3D").New(pointerDownAnimation)
+	p := ba.ctx.Get("Container3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return Container3DFromJSObject(p, ba.ctx)
 }
 
@@ -477,7 +480,7 @@ func (c *Container3D) PointerDownAnimation(pointerDownAnimation func()) *Contain
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#pointerdownanimation
 func (c *Container3D) SetPointerDownAnimation(pointerDownAnimation func()) *Container3D {
-	p := ba.ctx.Get("Container3D").New(pointerDownAnimation)
+	p := ba.ctx.Get("Container3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return Container3DFromJSObject(p, ba.ctx)
 }
 
@@ -485,7 +488,7 @@ func (c *Container3D) SetPointerDownAnimation(pointerDownAnimation func()) *Cont
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#pointerenteranimation
 func (c *Container3D) PointerEnterAnimation(pointerEnterAnimation func()) *Container3D {
-	p := ba.ctx.Get("Container3D").New(pointerEnterAnimation)
+	p := ba.ctx.Get("Container3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return Container3DFromJSObject(p, ba.ctx)
 }
 
@@ -493,7 +496,7 @@ func (c *Container3D) PointerEnterAnimation(pointerEnterAnimation func()) *Conta
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#pointerenteranimation
 func (c *Container3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *Container3D {
-	p := ba.ctx.Get("Container3D").New(pointerEnterAnimation)
+	p := ba.ctx.Get("Container3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return Container3DFromJSObject(p, ba.ctx)
 }
 
@@ -501,7 +504,7 @@ func (c *Container3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *Co
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#pointeroutanimation
 func (c *Container3D) PointerOutAnimation(pointerOutAnimation func()) *Container3D {
-	p := ba.ctx.Get("Container3D").New(pointerOutAnimation)
+	p := ba.ctx.Get("Container3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return Container3DFromJSObject(p, ba.ctx)
 }
 
@@ -509,7 +512,7 @@ func (c *Container3D) PointerOutAnimation(pointerOutAnimation func()) *Container
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#pointeroutanimation
 func (c *Container3D) SetPointerOutAnimation(pointerOutAnimation func()) *Container3D {
-	p := ba.ctx.Get("Container3D").New(pointerOutAnimation)
+	p := ba.ctx.Get("Container3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return Container3DFromJSObject(p, ba.ctx)
 }
 
@@ -517,7 +520,7 @@ func (c *Container3D) SetPointerOutAnimation(pointerOutAnimation func()) *Contai
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#pointerupanimation
 func (c *Container3D) PointerUpAnimation(pointerUpAnimation func()) *Container3D {
-	p := ba.ctx.Get("Container3D").New(pointerUpAnimation)
+	p := ba.ctx.Get("Container3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return Container3DFromJSObject(p, ba.ctx)
 }
 
@@ -525,7 +528,7 @@ func (c *Container3D) PointerUpAnimation(pointerUpAnimation func()) *Container3D
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#pointerupanimation
 func (c *Container3D) SetPointerUpAnimation(pointerUpAnimation func()) *Container3D {
-	p := ba.ctx.Get("Container3D").New(pointerUpAnimation)
+	p := ba.ctx.Get("Container3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return Container3DFromJSObject(p, ba.ctx)
 }
 

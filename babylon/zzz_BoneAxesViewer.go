@@ -29,6 +29,15 @@ func BoneAxesViewerFromJSObject(p js.Value, ctx js.Value) *BoneAxesViewer {
 	return &BoneAxesViewer{AxesViewer: AxesViewerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// BoneAxesViewerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoneAxesViewerArrayToJSArray(array []*BoneAxesViewer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBoneAxesViewerOpts contains optional parameters for NewBoneAxesViewer.
 type NewBoneAxesViewerOpts struct {
 	ScaleLines *float64
@@ -63,9 +72,7 @@ func (ba *Babylon) NewBoneAxesViewer(scene *Scene, bone *Bone, mesh *Mesh, opts 
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#createinstance
 func (b *BoneAxesViewer) CreateInstance() *AxesViewer {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("createInstance", args...)
+	retVal := b.p.Call("createInstance")
 	return AxesViewerFromJSObject(retVal, b.ctx)
 }
 
@@ -74,9 +81,7 @@ func (b *BoneAxesViewer) CreateInstance() *AxesViewer {
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#dispose
 func (b *BoneAxesViewer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("dispose", args...)
+	b.p.Call("dispose")
 }
 
 // Update calls the Update method on the BoneAxesViewer object.
@@ -84,9 +89,7 @@ func (b *BoneAxesViewer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#update
 func (b *BoneAxesViewer) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("update", args...)
+	b.p.Call("update")
 }
 
 /*

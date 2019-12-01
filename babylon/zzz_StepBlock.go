@@ -27,6 +27,15 @@ func StepBlockFromJSObject(p js.Value, ctx js.Value) *StepBlock {
 	return &StepBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StepBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StepBlockArrayToJSArray(array []*StepBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStepBlock returns a new StepBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stepblock
@@ -152,9 +161,7 @@ func (s *StepBlock) ConnectTo(other *NodeMaterialBlock, opts *StepBlockConnectTo
 // https://doc.babylonjs.com/api/classes/babylon.stepblock#dispose
 func (s *StepBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the StepBlock object.
@@ -162,9 +169,7 @@ func (s *StepBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.stepblock#getclassname
 func (s *StepBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (s *StepBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuil
 // https://doc.babylonjs.com/api/classes/babylon.stepblock#serialize
 func (s *StepBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

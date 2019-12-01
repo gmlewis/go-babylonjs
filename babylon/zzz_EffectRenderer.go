@@ -27,9 +27,18 @@ func EffectRendererFromJSObject(p js.Value, ctx js.Value) *EffectRenderer {
 	return &EffectRenderer{p: p, ctx: ctx}
 }
 
+// EffectRendererArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EffectRendererArrayToJSArray(array []*EffectRenderer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewEffectRendererOpts contains optional parameters for NewEffectRenderer.
 type NewEffectRendererOpts struct {
-	Options *IEffectRendererOptions
+	Options js.Value
 }
 
 // NewEffectRenderer returns a new EffectRenderer object.
@@ -47,7 +56,7 @@ func (ba *Babylon) NewEffectRenderer(engine *ThinEngine, opts *NewEffectRenderer
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	p := ba.ctx.Get("EffectRenderer").New(args...)
@@ -83,9 +92,7 @@ func (e *EffectRenderer) BindBuffers(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.effectrenderer#dispose
 func (e *EffectRenderer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("dispose", args...)
+	e.p.Call("dispose")
 }
 
 // Draw calls the Draw method on the EffectRenderer object.
@@ -93,9 +100,7 @@ func (e *EffectRenderer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.effectrenderer#draw
 func (e *EffectRenderer) Draw() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("draw", args...)
+	e.p.Call("draw")
 }
 
 // EffectRendererRenderOpts contains optional parameters for EffectRenderer.Render.
@@ -106,14 +111,14 @@ type EffectRendererRenderOpts struct {
 // Render calls the Render method on the EffectRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectrenderer#render
-func (e *EffectRenderer) Render(effectWrappers []EffectWrapper, opts *EffectRendererRenderOpts) {
+func (e *EffectRenderer) Render(effectWrappers []*EffectWrapper, opts *EffectRendererRenderOpts) {
 	if opts == nil {
 		opts = &EffectRendererRenderOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, effectWrappers.JSObject())
+	args = append(args, EffectWrapperArrayToJSArray(effectWrappers))
 
 	if opts.OutputTexture == nil {
 		args = append(args, js.Undefined())

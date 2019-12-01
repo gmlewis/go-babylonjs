@@ -27,6 +27,15 @@ func NoiseProceduralTextureFromJSObject(p js.Value, ctx js.Value) *NoiseProcedur
 	return &NoiseProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// NoiseProceduralTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NoiseProceduralTextureArrayToJSArray(array []*NoiseProceduralTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewNoiseProceduralTextureOpts contains optional parameters for NewNoiseProceduralTexture.
 type NewNoiseProceduralTextureOpts struct {
 	Size            *float64
@@ -77,9 +86,7 @@ func (ba *Babylon) NewNoiseProceduralTexture(name string, opts *NewNoiseProcedur
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#clone
 func (n *NoiseProceduralTexture) Clone() *ProceduralTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("clone", args...)
+	retVal := n.p.Call("clone")
 	return ProceduralTextureFromJSObject(retVal, n.ctx)
 }
 
@@ -147,9 +154,7 @@ func (n *NoiseProceduralTexture) CreateFromBase64String(data string, name string
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#dispose
 func (n *NoiseProceduralTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("dispose", args...)
+	n.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the NoiseProceduralTexture object.
@@ -157,9 +162,7 @@ func (n *NoiseProceduralTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getbasesize
 func (n *NoiseProceduralTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getBaseSize", args...)
+	retVal := n.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -168,9 +171,7 @@ func (n *NoiseProceduralTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getclassname
 func (n *NoiseProceduralTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getClassName", args...)
+	retVal := n.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -179,9 +180,7 @@ func (n *NoiseProceduralTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getcontent
 func (n *NoiseProceduralTexture) GetContent() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getContent", args...)
+	retVal := n.p.Call("getContent")
 	return retVal
 }
 
@@ -190,9 +189,7 @@ func (n *NoiseProceduralTexture) GetContent() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#geteffect
 func (n *NoiseProceduralTexture) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getEffect", args...)
+	retVal := n.p.Call("getEffect")
 	return EffectFromJSObject(retVal, n.ctx)
 }
 
@@ -201,9 +198,7 @@ func (n *NoiseProceduralTexture) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getinternaltexture
 func (n *NoiseProceduralTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getInternalTexture", args...)
+	retVal := n.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, n.ctx)
 }
 
@@ -212,9 +207,7 @@ func (n *NoiseProceduralTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getreflectiontexturematrix
 func (n *NoiseProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getReflectionTextureMatrix", args...)
+	retVal := n.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, n.ctx)
 }
 
@@ -223,9 +216,7 @@ func (n *NoiseProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getrendersize
 func (n *NoiseProceduralTexture) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getRenderSize", args...)
+	retVal := n.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -234,9 +225,7 @@ func (n *NoiseProceduralTexture) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getscene
 func (n *NoiseProceduralTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getScene", args...)
+	retVal := n.p.Call("getScene")
 	return SceneFromJSObject(retVal, n.ctx)
 }
 
@@ -245,9 +234,7 @@ func (n *NoiseProceduralTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getsize
 func (n *NoiseProceduralTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getSize", args...)
+	retVal := n.p.Call("getSize")
 	return retVal
 }
 
@@ -281,9 +268,7 @@ func (n *NoiseProceduralTexture) GetTextureMatrix(opts *NoiseProceduralTextureGe
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isready
 func (n *NoiseProceduralTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("isReady", args...)
+	retVal := n.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -292,9 +277,7 @@ func (n *NoiseProceduralTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isreadyornotblocking
 func (n *NoiseProceduralTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("isReadyOrNotBlocking", args...)
+	retVal := n.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -419,9 +402,7 @@ func (n *NoiseProceduralTexture) ReadPixels(opts *NoiseProceduralTextureReadPixe
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#releaseinternaltexture
 func (n *NoiseProceduralTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("releaseInternalTexture", args...)
+	n.p.Call("releaseInternalTexture")
 }
 
 // NoiseProceduralTextureRenderOpts contains optional parameters for NoiseProceduralTexture.Render.
@@ -453,9 +434,7 @@ func (n *NoiseProceduralTexture) Render(opts *NoiseProceduralTextureRenderOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#reset
 func (n *NoiseProceduralTexture) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("reset", args...)
+	n.p.Call("reset")
 }
 
 // ResetRefreshCounter calls the ResetRefreshCounter method on the NoiseProceduralTexture object.
@@ -463,9 +442,7 @@ func (n *NoiseProceduralTexture) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#resetrefreshcounter
 func (n *NoiseProceduralTexture) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("resetRefreshCounter", args...)
+	n.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the NoiseProceduralTexture object.
@@ -498,9 +475,7 @@ func (n *NoiseProceduralTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#serialize
 func (n *NoiseProceduralTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("serialize", args...)
+	retVal := n.p.Call("serialize")
 	return retVal
 }
 
@@ -647,9 +622,7 @@ func (n *NoiseProceduralTexture) SetVector3(name string, value *Vector3) *Proced
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#tostring
 func (n *NoiseProceduralTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("toString", args...)
+	retVal := n.p.Call("toString")
 	return retVal.String()
 }
 
@@ -705,7 +678,7 @@ func (n *NoiseProceduralTexture) WhenAllReady(textures *BaseTexture, callback fu
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	n.p.Call("WhenAllReady", args...)
 }
@@ -1580,7 +1553,7 @@ func (n *NoiseProceduralTexture) SetOctaves(octaves float64) *NoiseProceduralTex
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ondispose
 func (n *NoiseProceduralTexture) OnDispose(onDispose func()) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("NoiseProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1588,7 +1561,7 @@ func (n *NoiseProceduralTexture) OnDispose(onDispose func()) *NoiseProceduralTex
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ondispose
 func (n *NoiseProceduralTexture) SetOnDispose(onDispose func()) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("NoiseProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1612,7 +1585,7 @@ func (n *NoiseProceduralTexture) SetOnDisposeObservable(onDisposeObservable *Obs
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ongenerated
 func (n *NoiseProceduralTexture) OnGenerated(onGenerated func()) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("NoiseProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1620,7 +1593,7 @@ func (n *NoiseProceduralTexture) OnGenerated(onGenerated func()) *NoiseProcedura
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ongenerated
 func (n *NoiseProceduralTexture) SetOnGenerated(onGenerated func()) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("NoiseProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
 }
 

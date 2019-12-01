@@ -27,6 +27,15 @@ func RuntimeAnimationFromJSObject(p js.Value, ctx js.Value) *RuntimeAnimation {
 	return &RuntimeAnimation{p: p, ctx: ctx}
 }
 
+// RuntimeAnimationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RuntimeAnimationArrayToJSArray(array []*RuntimeAnimation) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRuntimeAnimation returns a new RuntimeAnimation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation
@@ -79,9 +88,7 @@ func (r *RuntimeAnimation) Animate(delay float64, from float64, to float64, loop
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#dispose
 func (r *RuntimeAnimation) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GoToFrame calls the GoToFrame method on the RuntimeAnimation object.
@@ -101,9 +108,7 @@ func (r *RuntimeAnimation) GoToFrame(frame float64) {
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#isstopped
 func (r *RuntimeAnimation) IsStopped() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isStopped", args...)
+	retVal := r.p.Call("isStopped")
 	return retVal.Bool()
 }
 

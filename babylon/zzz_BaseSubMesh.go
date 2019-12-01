@@ -27,6 +27,15 @@ func BaseSubMeshFromJSObject(p js.Value, ctx js.Value) *BaseSubMesh {
 	return &BaseSubMesh{p: p, ctx: ctx}
 }
 
+// BaseSubMeshArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BaseSubMeshArrayToJSArray(array []*BaseSubMesh) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // BaseSubMeshSetEffectOpts contains optional parameters for BaseSubMesh.SetEffect.
 type BaseSubMeshSetEffectOpts struct {
 	Defines *MaterialDefines

@@ -30,6 +30,15 @@ func Vector3FromJSObject(p js.Value, ctx js.Value) *Vector3 {
 	return &Vector3{p: p, ctx: ctx}
 }
 
+// Vector3ArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Vector3ArrayToJSArray(array []*Vector3) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVector3 returns a new Vector3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3
@@ -105,9 +114,7 @@ func (v *Vector3) AddToRef(otherVector *Vector3, result *Vector3) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#asarray
 func (v *Vector3) AsArray() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("asArray", args...)
+	retVal := v.p.Call("asArray")
 	return retVal.Float()
 }
 
@@ -116,9 +123,7 @@ func (v *Vector3) AsArray() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#backward
 func (v *Vector3) Backward() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("Backward", args...)
+	retVal := v.p.Call("Backward")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -202,9 +207,7 @@ func (v *Vector3) ClampToRef(value *Vector3, min *Vector3, max *Vector3, result 
 // https://doc.babylonjs.com/api/classes/babylon.vector3#clone
 func (v *Vector3) Clone() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("clone", args...)
+	retVal := v.p.Call("clone")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -351,9 +354,7 @@ func (v *Vector3) Dot(left *Vector3, right *Vector3) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#down
 func (v *Vector3) Down() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("Down", args...)
+	retVal := v.p.Call("Down")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -417,9 +418,7 @@ func (v *Vector3) EqualsWithEpsilon(otherVector *Vector3, opts *Vector3EqualsWit
 // https://doc.babylonjs.com/api/classes/babylon.vector3#floor
 func (v *Vector3) Floor() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("floor", args...)
+	retVal := v.p.Call("floor")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -428,9 +427,7 @@ func (v *Vector3) Floor() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#forward
 func (v *Vector3) Forward() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("Forward", args...)
+	retVal := v.p.Call("Forward")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -439,9 +436,7 @@ func (v *Vector3) Forward() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#fract
 func (v *Vector3) Fract() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("fract", args...)
+	retVal := v.p.Call("fract")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -475,13 +470,13 @@ func (v *Vector3) FromArray(array js.Value, opts *Vector3FromArrayOpts) *Vector3
 // FromArrayToRef calls the FromArrayToRef method on the Vector3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#fromarraytoref
-func (v *Vector3) FromArrayToRef(array js.Value, offset float64, result float64) {
+func (v *Vector3) FromArrayToRef(array js.Value, offset float64, result *Vector3) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, array)
 	args = append(args, offset)
-	args = append(args, result)
+	args = append(args, result.JSObject())
 
 	v.p.Call("FromArrayToRef", args...)
 }
@@ -562,9 +557,7 @@ func (v *Vector3) GetAngleBetweenVectors(vector0 *Vector3, vector1 *Vector3, nor
 // https://doc.babylonjs.com/api/classes/babylon.vector3#getclassname
 func (v *Vector3) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -589,9 +582,7 @@ func (v *Vector3) GetClipFactor(vector0 *Vector3, vector1 *Vector3, axis *Vector
 // https://doc.babylonjs.com/api/classes/babylon.vector3#gethashcode
 func (v *Vector3) GetHashCode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getHashCode", args...)
+	retVal := v.p.Call("getHashCode")
 	return retVal.Float()
 }
 
@@ -630,9 +621,7 @@ func (v *Vector3) IsNonUniformWithinEpsilon(epsilon float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#left
 func (v *Vector3) Left() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("Left", args...)
+	retVal := v.p.Call("Left")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -641,9 +630,7 @@ func (v *Vector3) Left() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#length
 func (v *Vector3) Length() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("length", args...)
+	retVal := v.p.Call("length")
 	return retVal.Float()
 }
 
@@ -652,9 +639,7 @@ func (v *Vector3) Length() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#lengthsquared
 func (v *Vector3) LengthSquared() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("lengthSquared", args...)
+	retVal := v.p.Call("lengthSquared")
 	return retVal.Float()
 }
 
@@ -832,9 +817,7 @@ func (v *Vector3) MultiplyToRef(otherVector *Vector3, result *Vector3) *Vector3 
 // https://doc.babylonjs.com/api/classes/babylon.vector3#negate
 func (v *Vector3) Negate() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("negate", args...)
+	retVal := v.p.Call("negate")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -869,9 +852,7 @@ func (v *Vector3) NormalizeFromLength(len float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#normalizetonew
 func (v *Vector3) NormalizeToNew() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("normalizeToNew", args...)
+	retVal := v.p.Call("normalizeToNew")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -893,9 +874,7 @@ func (v *Vector3) NormalizeToRef(vector *Vector3, result *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#one
 func (v *Vector3) One() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("One", args...)
+	retVal := v.p.Call("One")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -933,9 +912,7 @@ func (v *Vector3) ReorderInPlace(order string) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#right
 func (v *Vector3) Right() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("Right", args...)
+	retVal := v.p.Call("Right")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -1183,9 +1160,7 @@ func (v *Vector3) ToArray(array js.Value, opts *Vector3ToArrayOpts) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#toquaternion
 func (v *Vector3) ToQuaternion() *Quaternion {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("toQuaternion", args...)
+	retVal := v.p.Call("toQuaternion")
 	return QuaternionFromJSObject(retVal, v.ctx)
 }
 
@@ -1194,9 +1169,7 @@ func (v *Vector3) ToQuaternion() *Quaternion {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#tostring
 func (v *Vector3) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("toString", args...)
+	retVal := v.p.Call("toString")
 	return retVal.String()
 }
 
@@ -1366,9 +1339,7 @@ func (v *Vector3) UnprojectToRef(source *Vector3, viewportWidth float64, viewpor
 // https://doc.babylonjs.com/api/classes/babylon.vector3#up
 func (v *Vector3) Up() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("Up", args...)
+	retVal := v.p.Call("Up")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -1377,9 +1348,7 @@ func (v *Vector3) Up() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3#zero
 func (v *Vector3) Zero() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("Zero", args...)
+	retVal := v.p.Call("Zero")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 

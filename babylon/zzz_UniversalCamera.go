@@ -30,6 +30,15 @@ func UniversalCameraFromJSObject(p js.Value, ctx js.Value) *UniversalCamera {
 	return &UniversalCamera{TouchCamera: TouchCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// UniversalCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func UniversalCameraArrayToJSArray(array []*UniversalCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewUniversalCamera returns a new UniversalCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera
@@ -88,9 +97,7 @@ func (u *UniversalCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera#dispose
 func (u *UniversalCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	u.p.Call("dispose", args...)
+	u.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the UniversalCamera object.
@@ -98,9 +105,7 @@ func (u *UniversalCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera#getclassname
 func (u *UniversalCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := u.p.Call("getClassName", args...)
+	retVal := u.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -122,9 +127,7 @@ func (u *UniversalCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera#gettarget
 func (u *UniversalCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := u.p.Call("getTarget", args...)
+	retVal := u.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, u.ctx)
 }
 
@@ -145,9 +148,7 @@ func (u *UniversalCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera#storestate
 func (u *UniversalCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := u.p.Call("storeState", args...)
+	retVal := u.p.Call("storeState")
 	return CameraFromJSObject(retVal, u.ctx)
 }
 
@@ -429,7 +430,7 @@ func (u *UniversalCamera) SetNoRotationConstraint(noRotationConstraint bool) *Un
 //
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera#oncollide
 func (u *UniversalCamera) OnCollide(onCollide func()) *UniversalCamera {
-	p := ba.ctx.Get("UniversalCamera").New(onCollide)
+	p := ba.ctx.Get("UniversalCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return UniversalCameraFromJSObject(p, ba.ctx)
 }
 
@@ -437,7 +438,7 @@ func (u *UniversalCamera) OnCollide(onCollide func()) *UniversalCamera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera#oncollide
 func (u *UniversalCamera) SetOnCollide(onCollide func()) *UniversalCamera {
-	p := ba.ctx.Get("UniversalCamera").New(onCollide)
+	p := ba.ctx.Get("UniversalCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return UniversalCameraFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func BabylonFileLoaderConfigurationFromJSObject(p js.Value, ctx js.Value) *Babyl
 	return &BabylonFileLoaderConfiguration{p: p, ctx: ctx}
 }
 
+// BabylonFileLoaderConfigurationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BabylonFileLoaderConfigurationArrayToJSArray(array []*BabylonFileLoaderConfiguration) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // LoaderInjectedPhysicsEngine returns the LoaderInjectedPhysicsEngine property of class BabylonFileLoaderConfiguration.

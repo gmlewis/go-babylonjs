@@ -27,6 +27,15 @@ func FluentMaterialFromJSObject(p js.Value, ctx js.Value) *FluentMaterial {
 	return &FluentMaterial{p: p, ctx: ctx}
 }
 
+// FluentMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FluentMaterialArrayToJSArray(array []*FluentMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFluentMaterial returns a new FluentMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial
@@ -225,7 +234,7 @@ type FluentMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the FluentMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#forcecompilationasync
-func (f *FluentMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FluentMaterialForceCompilationAsyncOpts) {
+func (f *FluentMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FluentMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &FluentMaterialForceCompilationAsyncOpts{}
 	}
@@ -240,7 +249,8 @@ func (f *FluentMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FluentM
 		args = append(args, opts.Options)
 	}
 
-	f.p.Call("forceCompilationAsync", args...)
+	retVal := f.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, f.ctx)
 }
 
 // Freeze calls the Freeze method on the FluentMaterial object.
@@ -248,9 +258,7 @@ func (f *FluentMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FluentM
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#freeze
 func (f *FluentMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("freeze", args...)
+	f.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the FluentMaterial object.
@@ -258,9 +266,7 @@ func (f *FluentMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getactivetextures
 func (f *FluentMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getActiveTextures", args...)
+	retVal := f.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, f.ctx)
 }
 
@@ -269,9 +275,7 @@ func (f *FluentMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getalphatesttexture
 func (f *FluentMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getAlphaTestTexture", args...)
+	retVal := f.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, f.ctx)
 }
 
@@ -280,9 +284,7 @@ func (f *FluentMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getbindedmeshes
 func (f *FluentMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getBindedMeshes", args...)
+	retVal := f.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, f.ctx)
 }
 
@@ -291,9 +293,7 @@ func (f *FluentMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getclassname
 func (f *FluentMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -302,9 +302,7 @@ func (f *FluentMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#geteffect
 func (f *FluentMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getEffect", args...)
+	retVal := f.p.Call("getEffect")
 	return EffectFromJSObject(retVal, f.ctx)
 }
 
@@ -313,9 +311,7 @@ func (f *FluentMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getscene
 func (f *FluentMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getScene", args...)
+	retVal := f.p.Call("getScene")
 	return SceneFromJSObject(retVal, f.ctx)
 }
 
@@ -408,9 +404,7 @@ func (f *FluentMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#markdirty
 func (f *FluentMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("markDirty", args...)
+	f.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the FluentMaterial object.
@@ -418,9 +412,7 @@ func (f *FluentMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#needalphablending
 func (f *FluentMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("needAlphaBlending", args...)
+	retVal := f.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -442,9 +434,7 @@ func (f *FluentMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#needalphatesting
 func (f *FluentMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("needAlphaTesting", args...)
+	retVal := f.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -468,9 +458,7 @@ func (f *FluentMaterial) Parse(source interface{}, scene *Scene, rootUrl string)
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#serialize
 func (f *FluentMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("serialize", args...)
+	retVal := f.p.Call("serialize")
 	return retVal
 }
 
@@ -504,9 +492,7 @@ func (f *FluentMaterial) ToString(opts *FluentMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#unbind
 func (f *FluentMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("unbind", args...)
+	f.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the FluentMaterial object.
@@ -514,9 +500,7 @@ func (f *FluentMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#unfreeze
 func (f *FluentMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("unfreeze", args...)
+	f.p.Call("unfreeze")
 }
 
 /*
@@ -620,16 +604,16 @@ func (f *FluentMaterial) SetAlphaMode(alphaMode float64) *FluentMaterial {
 // Animations returns the Animations property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#animations
-func (f *FluentMaterial) Animations(animations []Animation) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(animations.JSObject())
+func (f *FluentMaterial) Animations(animations []*Animation) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(animations)
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#animations
-func (f *FluentMaterial) SetAnimations(animations []Animation) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(animations.JSObject())
+func (f *FluentMaterial) SetAnimations(animations []*Animation) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(animations)
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -893,7 +877,7 @@ func (f *FluentMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *FluentMa
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getrendertargettextures
 func (f *FluentMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("FluentMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -901,7 +885,7 @@ func (f *FluentMaterial) GetRenderTargetTextures(getRenderTargetTextures func())
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getrendertargettextures
 func (f *FluentMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("FluentMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1181,7 +1165,7 @@ func (f *FluentMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *FluentMater
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onbind
 func (f *FluentMaterial) OnBind(onBind func()) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(onBind)
+	p := ba.ctx.Get("FluentMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1189,7 +1173,7 @@ func (f *FluentMaterial) OnBind(onBind func()) *FluentMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onbind
 func (f *FluentMaterial) SetOnBind(onBind func()) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(onBind)
+	p := ba.ctx.Get("FluentMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1213,7 +1197,7 @@ func (f *FluentMaterial) SetOnBindObservable(onBindObservable *Observable) *Flue
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#oncompiled
 func (f *FluentMaterial) OnCompiled(onCompiled func()) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(onCompiled)
+	p := ba.ctx.Get("FluentMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1221,7 +1205,7 @@ func (f *FluentMaterial) OnCompiled(onCompiled func()) *FluentMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#oncompiled
 func (f *FluentMaterial) SetOnCompiled(onCompiled func()) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(onCompiled)
+	p := ba.ctx.Get("FluentMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1229,7 +1213,7 @@ func (f *FluentMaterial) SetOnCompiled(onCompiled func()) *FluentMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#ondispose
 func (f *FluentMaterial) OnDispose(onDispose func()) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(onDispose)
+	p := ba.ctx.Get("FluentMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1237,7 +1221,7 @@ func (f *FluentMaterial) OnDispose(onDispose func()) *FluentMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#ondispose
 func (f *FluentMaterial) SetOnDispose(onDispose func()) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(onDispose)
+	p := ba.ctx.Get("FluentMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1261,7 +1245,7 @@ func (f *FluentMaterial) SetOnDisposeObservable(onDisposeObservable *Observable)
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onerror
 func (f *FluentMaterial) OnError(onError func()) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(onError)
+	p := ba.ctx.Get("FluentMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1269,7 +1253,7 @@ func (f *FluentMaterial) OnError(onError func()) *FluentMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onerror
 func (f *FluentMaterial) SetOnError(onError func()) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(onError)
+	p := ba.ctx.Get("FluentMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 

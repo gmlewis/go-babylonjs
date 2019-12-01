@@ -30,6 +30,15 @@ func ArcFollowCameraFromJSObject(p js.Value, ctx js.Value) *ArcFollowCamera {
 	return &ArcFollowCamera{TargetCamera: TargetCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ArcFollowCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArcFollowCameraArrayToJSArray(array []*ArcFollowCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewArcFollowCamera returns a new ArcFollowCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera
@@ -53,9 +62,7 @@ func (ba *Babylon) NewArcFollowCamera(name string, alpha float64, beta float64, 
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#getclassname
 func (a *ArcFollowCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -77,9 +84,7 @@ func (a *ArcFollowCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#gettarget
 func (a *ArcFollowCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTarget", args...)
+	retVal := a.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -100,9 +105,7 @@ func (a *ArcFollowCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#storestate
 func (a *ArcFollowCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("storeState", args...)
+	retVal := a.p.Call("storeState")
 	return CameraFromJSObject(retVal, a.ctx)
 }
 

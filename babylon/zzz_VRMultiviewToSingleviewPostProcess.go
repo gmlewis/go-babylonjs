@@ -28,6 +28,15 @@ func VRMultiviewToSingleviewPostProcessFromJSObject(p js.Value, ctx js.Value) *V
 	return &VRMultiviewToSingleviewPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VRMultiviewToSingleviewPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VRMultiviewToSingleviewPostProcessArrayToJSArray(array []*VRMultiviewToSingleviewPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVRMultiviewToSingleviewPostProcess returns a new VRMultiviewToSingleviewPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess
@@ -81,9 +90,7 @@ func (v *VRMultiviewToSingleviewPostProcess) Activate(camera *Camera, opts *VRMu
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#apply
 func (v *VRMultiviewToSingleviewPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("apply", args...)
+	retVal := v.p.Call("apply")
 	return EffectFromJSObject(retVal, v.ctx)
 }
 
@@ -116,9 +123,7 @@ func (v *VRMultiviewToSingleviewPostProcess) Dispose(opts *VRMultiviewToSinglevi
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#getcamera
 func (v *VRMultiviewToSingleviewPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getCamera", args...)
+	retVal := v.p.Call("getCamera")
 	return CameraFromJSObject(retVal, v.ctx)
 }
 
@@ -127,9 +132,7 @@ func (v *VRMultiviewToSingleviewPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#getclassname
 func (v *VRMultiviewToSingleviewPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -138,9 +141,7 @@ func (v *VRMultiviewToSingleviewPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#geteffect
 func (v *VRMultiviewToSingleviewPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getEffect", args...)
+	retVal := v.p.Call("getEffect")
 	return EffectFromJSObject(retVal, v.ctx)
 }
 
@@ -149,9 +150,7 @@ func (v *VRMultiviewToSingleviewPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#geteffectname
 func (v *VRMultiviewToSingleviewPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getEffectName", args...)
+	retVal := v.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -160,9 +159,7 @@ func (v *VRMultiviewToSingleviewPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#getengine
 func (v *VRMultiviewToSingleviewPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getEngine", args...)
+	retVal := v.p.Call("getEngine")
 	return EngineFromJSObject(retVal, v.ctx)
 }
 
@@ -171,9 +168,7 @@ func (v *VRMultiviewToSingleviewPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#isready
 func (v *VRMultiviewToSingleviewPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("isReady", args...)
+	retVal := v.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -182,9 +177,7 @@ func (v *VRMultiviewToSingleviewPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#isreusable
 func (v *VRMultiviewToSingleviewPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("isReusable", args...)
+	retVal := v.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -193,9 +186,7 @@ func (v *VRMultiviewToSingleviewPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#marktexturedirty
 func (v *VRMultiviewToSingleviewPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("markTextureDirty", args...)
+	v.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the VRMultiviewToSingleviewPostProcess object.
@@ -270,9 +261,7 @@ func (v *VRMultiviewToSingleviewPostProcess) UpdateEffect(opts *VRMultiviewToSin
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#useownoutput
 func (v *VRMultiviewToSingleviewPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("useOwnOutput", args...)
+	v.p.Call("useOwnOutput")
 }
 
 /*
@@ -521,7 +510,7 @@ func (v *VRMultiviewToSingleviewPostProcess) SetName(name string) *VRMultiviewTo
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#onactivate
 func (v *VRMultiviewToSingleviewPostProcess) OnActivate(onActivate func()) *VRMultiviewToSingleviewPostProcess {
-	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(onActivate)
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -529,7 +518,7 @@ func (v *VRMultiviewToSingleviewPostProcess) OnActivate(onActivate func()) *VRMu
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#onactivate
 func (v *VRMultiviewToSingleviewPostProcess) SetOnActivate(onActivate func()) *VRMultiviewToSingleviewPostProcess {
-	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(onActivate)
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -553,7 +542,7 @@ func (v *VRMultiviewToSingleviewPostProcess) SetOnActivateObservable(onActivateO
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#onafterrender
 func (v *VRMultiviewToSingleviewPostProcess) OnAfterRender(onAfterRender func()) *VRMultiviewToSingleviewPostProcess {
-	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -561,7 +550,7 @@ func (v *VRMultiviewToSingleviewPostProcess) OnAfterRender(onAfterRender func())
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#onafterrender
 func (v *VRMultiviewToSingleviewPostProcess) SetOnAfterRender(onAfterRender func()) *VRMultiviewToSingleviewPostProcess {
-	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -585,7 +574,7 @@ func (v *VRMultiviewToSingleviewPostProcess) SetOnAfterRenderObservable(onAfterR
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#onapply
 func (v *VRMultiviewToSingleviewPostProcess) OnApply(onApply func()) *VRMultiviewToSingleviewPostProcess {
-	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(onApply)
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -593,7 +582,7 @@ func (v *VRMultiviewToSingleviewPostProcess) OnApply(onApply func()) *VRMultivie
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#onapply
 func (v *VRMultiviewToSingleviewPostProcess) SetOnApply(onApply func()) *VRMultiviewToSingleviewPostProcess {
-	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(onApply)
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -617,7 +606,7 @@ func (v *VRMultiviewToSingleviewPostProcess) SetOnApplyObservable(onApplyObserva
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#onbeforerender
 func (v *VRMultiviewToSingleviewPostProcess) OnBeforeRender(onBeforeRender func()) *VRMultiviewToSingleviewPostProcess {
-	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -625,7 +614,7 @@ func (v *VRMultiviewToSingleviewPostProcess) OnBeforeRender(onBeforeRender func(
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#onbeforerender
 func (v *VRMultiviewToSingleviewPostProcess) SetOnBeforeRender(onBeforeRender func()) *VRMultiviewToSingleviewPostProcess {
-	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -649,7 +638,7 @@ func (v *VRMultiviewToSingleviewPostProcess) SetOnBeforeRenderObservable(onBefor
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#onsizechanged
 func (v *VRMultiviewToSingleviewPostProcess) OnSizeChanged(onSizeChanged func()) *VRMultiviewToSingleviewPostProcess {
-	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -657,7 +646,7 @@ func (v *VRMultiviewToSingleviewPostProcess) OnSizeChanged(onSizeChanged func())
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#onsizechanged
 func (v *VRMultiviewToSingleviewPostProcess) SetOnSizeChanged(onSizeChanged func()) *VRMultiviewToSingleviewPostProcess {
-	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 

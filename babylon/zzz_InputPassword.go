@@ -27,6 +27,15 @@ func InputPasswordFromJSObject(p js.Value, ctx js.Value) *InputPassword {
 	return &InputPassword{InputText: InputTextFromJSObject(p, ctx), ctx: ctx}
 }
 
+// InputPasswordArrayToJSArray returns a JavaScript Array for the wrapped array.
+func InputPasswordArrayToJSArray(array []*InputPassword) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewInputPasswordOpts contains optional parameters for NewInputPassword.
 type NewInputPasswordOpts struct {
 	Name *string
@@ -77,9 +86,7 @@ func (i *InputPassword) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.inputpassword#dispose
 func (i *InputPassword) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("dispose", args...)
+	i.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the InputPassword object.
@@ -100,9 +107,7 @@ func (i *InputPassword) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.inputpassword#getclassname
 func (i *InputPassword) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -227,9 +232,7 @@ func (i *InputPassword) IsAscendant(container *Control) bool {
 // https://doc.babylonjs.com/api/classes/babylon.inputpassword#keepsfocuswith
 func (i *InputPassword) KeepsFocusWith() *Control {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("keepsFocusWith", args...)
+	retVal := i.p.Call("keepsFocusWith")
 	return ControlFromJSObject(retVal, i.ctx)
 }
 

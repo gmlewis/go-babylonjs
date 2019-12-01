@@ -28,6 +28,15 @@ func MultiLinePointFromJSObject(p js.Value, ctx js.Value) *MultiLinePoint {
 	return &MultiLinePoint{p: p, ctx: ctx}
 }
 
+// MultiLinePointArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MultiLinePointArrayToJSArray(array []*MultiLinePoint) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMultiLinePoint returns a new MultiLinePoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multilinepoint
@@ -46,9 +55,7 @@ func (ba *Babylon) NewMultiLinePoint(multiLine *MultiLine) *MultiLinePoint {
 // https://doc.babylonjs.com/api/classes/babylon.multilinepoint#dispose
 func (m *MultiLinePoint) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("dispose", args...)
+	m.p.Call("dispose")
 }
 
 // ResetLinks calls the ResetLinks method on the MultiLinePoint object.
@@ -56,9 +63,7 @@ func (m *MultiLinePoint) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.multilinepoint#resetlinks
 func (m *MultiLinePoint) ResetLinks() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("resetLinks", args...)
+	m.p.Call("resetLinks")
 }
 
 // Translate calls the Translate method on the MultiLinePoint object.
@@ -66,9 +71,7 @@ func (m *MultiLinePoint) ResetLinks() {
 // https://doc.babylonjs.com/api/classes/babylon.multilinepoint#translate
 func (m *MultiLinePoint) Translate() *Vector2 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("translate", args...)
+	retVal := m.p.Call("translate")
 	return Vector2FromJSObject(retVal, m.ctx)
 }
 

@@ -29,6 +29,15 @@ func RefractionPostProcessFromJSObject(p js.Value, ctx js.Value) *RefractionPost
 	return &RefractionPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RefractionPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RefractionPostProcessArrayToJSArray(array []*RefractionPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRefractionPostProcessOpts contains optional parameters for NewRefractionPostProcess.
 type NewRefractionPostProcessOpts struct {
 	SamplingMode *float64
@@ -112,9 +121,7 @@ func (r *RefractionPostProcess) Activate(camera *Camera, opts *RefractionPostPro
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#apply
 func (r *RefractionPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("apply", args...)
+	retVal := r.p.Call("apply")
 	return EffectFromJSObject(retVal, r.ctx)
 }
 
@@ -135,9 +142,7 @@ func (r *RefractionPostProcess) Dispose(camera *Camera) {
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#getcamera
 func (r *RefractionPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getCamera", args...)
+	retVal := r.p.Call("getCamera")
 	return CameraFromJSObject(retVal, r.ctx)
 }
 
@@ -146,9 +151,7 @@ func (r *RefractionPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#getclassname
 func (r *RefractionPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -157,9 +160,7 @@ func (r *RefractionPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#geteffect
 func (r *RefractionPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getEffect", args...)
+	retVal := r.p.Call("getEffect")
 	return EffectFromJSObject(retVal, r.ctx)
 }
 
@@ -168,9 +169,7 @@ func (r *RefractionPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#geteffectname
 func (r *RefractionPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getEffectName", args...)
+	retVal := r.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -179,9 +178,7 @@ func (r *RefractionPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#getengine
 func (r *RefractionPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getEngine", args...)
+	retVal := r.p.Call("getEngine")
 	return EngineFromJSObject(retVal, r.ctx)
 }
 
@@ -190,9 +187,7 @@ func (r *RefractionPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#isready
 func (r *RefractionPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isReady", args...)
+	retVal := r.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -201,9 +196,7 @@ func (r *RefractionPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#isreusable
 func (r *RefractionPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isReusable", args...)
+	retVal := r.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -212,9 +205,7 @@ func (r *RefractionPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#marktexturedirty
 func (r *RefractionPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("markTextureDirty", args...)
+	r.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the RefractionPostProcess object.
@@ -289,9 +280,7 @@ func (r *RefractionPostProcess) UpdateEffect(opts *RefractionPostProcessUpdateEf
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#useownoutput
 func (r *RefractionPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("useOwnOutput", args...)
+	r.p.Call("useOwnOutput")
 }
 
 /*
@@ -588,7 +577,7 @@ func (r *RefractionPostProcess) SetName(name string) *RefractionPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onactivate
 func (r *RefractionPostProcess) OnActivate(onActivate func()) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(onActivate)
+	p := ba.ctx.Get("RefractionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -596,7 +585,7 @@ func (r *RefractionPostProcess) OnActivate(onActivate func()) *RefractionPostPro
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onactivate
 func (r *RefractionPostProcess) SetOnActivate(onActivate func()) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(onActivate)
+	p := ba.ctx.Get("RefractionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -620,7 +609,7 @@ func (r *RefractionPostProcess) SetOnActivateObservable(onActivateObservable *Ob
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onafterrender
 func (r *RefractionPostProcess) OnAfterRender(onAfterRender func()) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("RefractionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -628,7 +617,7 @@ func (r *RefractionPostProcess) OnAfterRender(onAfterRender func()) *RefractionP
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onafterrender
 func (r *RefractionPostProcess) SetOnAfterRender(onAfterRender func()) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("RefractionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -652,7 +641,7 @@ func (r *RefractionPostProcess) SetOnAfterRenderObservable(onAfterRenderObservab
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onapply
 func (r *RefractionPostProcess) OnApply(onApply func()) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(onApply)
+	p := ba.ctx.Get("RefractionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -660,7 +649,7 @@ func (r *RefractionPostProcess) OnApply(onApply func()) *RefractionPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onapply
 func (r *RefractionPostProcess) SetOnApply(onApply func()) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(onApply)
+	p := ba.ctx.Get("RefractionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -684,7 +673,7 @@ func (r *RefractionPostProcess) SetOnApplyObservable(onApplyObservable *Observab
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onbeforerender
 func (r *RefractionPostProcess) OnBeforeRender(onBeforeRender func()) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("RefractionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -692,7 +681,7 @@ func (r *RefractionPostProcess) OnBeforeRender(onBeforeRender func()) *Refractio
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onbeforerender
 func (r *RefractionPostProcess) SetOnBeforeRender(onBeforeRender func()) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("RefractionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -716,7 +705,7 @@ func (r *RefractionPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObserv
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onsizechanged
 func (r *RefractionPostProcess) OnSizeChanged(onSizeChanged func()) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("RefractionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -724,7 +713,7 @@ func (r *RefractionPostProcess) OnSizeChanged(onSizeChanged func()) *RefractionP
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onsizechanged
 func (r *RefractionPostProcess) SetOnSizeChanged(onSizeChanged func()) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("RefractionPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 

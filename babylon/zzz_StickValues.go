@@ -27,6 +27,15 @@ func StickValuesFromJSObject(p js.Value, ctx js.Value) *StickValues {
 	return &StickValues{p: p, ctx: ctx}
 }
 
+// StickValuesArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StickValuesArrayToJSArray(array []*StickValues) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStickValues returns a new StickValues object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stickvalues

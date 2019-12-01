@@ -33,9 +33,18 @@ func OceanPostProcessFromJSObject(p js.Value, ctx js.Value) *OceanPostProcess {
 	return &OceanPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// OceanPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func OceanPostProcessArrayToJSArray(array []*OceanPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewOceanPostProcessOpts contains optional parameters for NewOceanPostProcess.
 type NewOceanPostProcessOpts struct {
-	Options *IOceanPostProcessOptions
+	Options js.Value
 }
 
 // NewOceanPostProcess returns a new OceanPostProcess object.
@@ -54,7 +63,7 @@ func (ba *Babylon) NewOceanPostProcess(name string, camera *TargetCamera, opts *
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	p := ba.ctx.Get("OceanPostProcess").New(args...)
@@ -99,9 +108,7 @@ func (o *OceanPostProcess) Activate(camera *Camera, opts *OceanPostProcessActiva
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#apply
 func (o *OceanPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("apply", args...)
+	retVal := o.p.Call("apply")
 	return EffectFromJSObject(retVal, o.ctx)
 }
 
@@ -134,9 +141,7 @@ func (o *OceanPostProcess) Dispose(opts *OceanPostProcessDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#getcamera
 func (o *OceanPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("getCamera", args...)
+	retVal := o.p.Call("getCamera")
 	return CameraFromJSObject(retVal, o.ctx)
 }
 
@@ -145,9 +150,7 @@ func (o *OceanPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#getclassname
 func (o *OceanPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("getClassName", args...)
+	retVal := o.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -156,9 +159,7 @@ func (o *OceanPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#geteffect
 func (o *OceanPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("getEffect", args...)
+	retVal := o.p.Call("getEffect")
 	return EffectFromJSObject(retVal, o.ctx)
 }
 
@@ -167,9 +168,7 @@ func (o *OceanPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#geteffectname
 func (o *OceanPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("getEffectName", args...)
+	retVal := o.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -178,9 +177,7 @@ func (o *OceanPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#getengine
 func (o *OceanPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("getEngine", args...)
+	retVal := o.p.Call("getEngine")
 	return EngineFromJSObject(retVal, o.ctx)
 }
 
@@ -189,9 +186,7 @@ func (o *OceanPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#isready
 func (o *OceanPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("isReady", args...)
+	retVal := o.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -200,9 +195,7 @@ func (o *OceanPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#isreusable
 func (o *OceanPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("isReusable", args...)
+	retVal := o.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -211,9 +204,7 @@ func (o *OceanPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#marktexturedirty
 func (o *OceanPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("markTextureDirty", args...)
+	o.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the OceanPostProcess object.
@@ -288,9 +279,7 @@ func (o *OceanPostProcess) UpdateEffect(opts *OceanPostProcessUpdateEffectOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#useownoutput
 func (o *OceanPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("useOwnOutput", args...)
+	o.p.Call("useOwnOutput")
 }
 
 /*
@@ -539,7 +528,7 @@ func (o *OceanPostProcess) SetName(name string) *OceanPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onactivate
 func (o *OceanPostProcess) OnActivate(onActivate func()) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(onActivate)
+	p := ba.ctx.Get("OceanPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -547,7 +536,7 @@ func (o *OceanPostProcess) OnActivate(onActivate func()) *OceanPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onactivate
 func (o *OceanPostProcess) SetOnActivate(onActivate func()) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(onActivate)
+	p := ba.ctx.Get("OceanPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -571,7 +560,7 @@ func (o *OceanPostProcess) SetOnActivateObservable(onActivateObservable *Observa
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onafterrender
 func (o *OceanPostProcess) OnAfterRender(onAfterRender func()) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("OceanPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -579,7 +568,7 @@ func (o *OceanPostProcess) OnAfterRender(onAfterRender func()) *OceanPostProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onafterrender
 func (o *OceanPostProcess) SetOnAfterRender(onAfterRender func()) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("OceanPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -603,7 +592,7 @@ func (o *OceanPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *O
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onapply
 func (o *OceanPostProcess) OnApply(onApply func()) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(onApply)
+	p := ba.ctx.Get("OceanPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -611,7 +600,7 @@ func (o *OceanPostProcess) OnApply(onApply func()) *OceanPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onapply
 func (o *OceanPostProcess) SetOnApply(onApply func()) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(onApply)
+	p := ba.ctx.Get("OceanPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -635,7 +624,7 @@ func (o *OceanPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onbeforerender
 func (o *OceanPostProcess) OnBeforeRender(onBeforeRender func()) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("OceanPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -643,7 +632,7 @@ func (o *OceanPostProcess) OnBeforeRender(onBeforeRender func()) *OceanPostProce
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onbeforerender
 func (o *OceanPostProcess) SetOnBeforeRender(onBeforeRender func()) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("OceanPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -667,7 +656,7 @@ func (o *OceanPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable 
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onsizechanged
 func (o *OceanPostProcess) OnSizeChanged(onSizeChanged func()) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("OceanPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -675,7 +664,7 @@ func (o *OceanPostProcess) OnSizeChanged(onSizeChanged func()) *OceanPostProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onsizechanged
 func (o *OceanPostProcess) SetOnSizeChanged(onSizeChanged func()) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("OceanPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 

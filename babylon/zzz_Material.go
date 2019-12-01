@@ -27,6 +27,15 @@ func MaterialFromJSObject(p js.Value, ctx js.Value) *Material {
 	return &Material{p: p, ctx: ctx}
 }
 
+// MaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MaterialArrayToJSArray(array []*Material) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMaterialOpts contains optional parameters for NewMaterial.
 type NewMaterialOpts struct {
 	DoNotAdd *bool
@@ -239,7 +248,7 @@ type MaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the Material object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#forcecompilationasync
-func (m *Material) ForceCompilationAsync(mesh *AbstractMesh, opts *MaterialForceCompilationAsyncOpts) {
+func (m *Material) ForceCompilationAsync(mesh *AbstractMesh, opts *MaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &MaterialForceCompilationAsyncOpts{}
 	}
@@ -254,7 +263,8 @@ func (m *Material) ForceCompilationAsync(mesh *AbstractMesh, opts *MaterialForce
 		args = append(args, opts.Options)
 	}
 
-	m.p.Call("forceCompilationAsync", args...)
+	retVal := m.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, m.ctx)
 }
 
 // Freeze calls the Freeze method on the Material object.
@@ -262,9 +272,7 @@ func (m *Material) ForceCompilationAsync(mesh *AbstractMesh, opts *MaterialForce
 // https://doc.babylonjs.com/api/classes/babylon.material#freeze
 func (m *Material) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("freeze", args...)
+	m.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the Material object.
@@ -272,9 +280,7 @@ func (m *Material) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.material#getactivetextures
 func (m *Material) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getActiveTextures", args...)
+	retVal := m.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -283,9 +289,7 @@ func (m *Material) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.material#getalphatesttexture
 func (m *Material) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getAlphaTestTexture", args...)
+	retVal := m.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -294,9 +298,7 @@ func (m *Material) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.material#getbindedmeshes
 func (m *Material) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getBindedMeshes", args...)
+	retVal := m.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, m.ctx)
 }
 
@@ -305,9 +307,7 @@ func (m *Material) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.material#getclassname
 func (m *Material) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -316,9 +316,7 @@ func (m *Material) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.material#geteffect
 func (m *Material) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getEffect", args...)
+	retVal := m.p.Call("getEffect")
 	return EffectFromJSObject(retVal, m.ctx)
 }
 
@@ -327,9 +325,7 @@ func (m *Material) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.material#getscene
 func (m *Material) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getScene", args...)
+	retVal := m.p.Call("getScene")
 	return SceneFromJSObject(retVal, m.ctx)
 }
 
@@ -422,9 +418,7 @@ func (m *Material) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.material#markdirty
 func (m *Material) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markDirty", args...)
+	m.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the Material object.
@@ -432,9 +426,7 @@ func (m *Material) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.material#needalphablending
 func (m *Material) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("needAlphaBlending", args...)
+	retVal := m.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -456,9 +448,7 @@ func (m *Material) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.material#needalphatesting
 func (m *Material) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("needAlphaTesting", args...)
+	retVal := m.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -482,9 +472,7 @@ func (m *Material) Parse(parsedMaterial interface{}, scene *Scene, rootUrl strin
 // https://doc.babylonjs.com/api/classes/babylon.material#serialize
 func (m *Material) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("serialize", args...)
+	retVal := m.p.Call("serialize")
 	return retVal
 }
 
@@ -518,9 +506,7 @@ func (m *Material) ToString(opts *MaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.material#unbind
 func (m *Material) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("unbind", args...)
+	m.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the Material object.
@@ -528,9 +514,7 @@ func (m *Material) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.material#unfreeze
 func (m *Material) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("unfreeze", args...)
+	m.p.Call("unfreeze")
 }
 
 /*
@@ -586,16 +570,16 @@ func (m *Material) SetAlphaMode(alphaMode float64) *Material {
 // Animations returns the Animations property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#animations
-func (m *Material) Animations(animations []Animation) *Material {
-	p := ba.ctx.Get("Material").New(animations.JSObject())
+func (m *Material) Animations(animations []*Animation) *Material {
+	p := ba.ctx.Get("Material").New(animations)
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#animations
-func (m *Material) SetAnimations(animations []Animation) *Material {
-	p := ba.ctx.Get("Material").New(animations.JSObject())
+func (m *Material) SetAnimations(animations []*Animation) *Material {
+	p := ba.ctx.Get("Material").New(animations)
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
@@ -811,7 +795,7 @@ func (m *Material) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *Material {
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#getrendertargettextures
 func (m *Material) GetRenderTargetTextures(getRenderTargetTextures func()) *Material {
-	p := ba.ctx.Get("Material").New(getRenderTargetTextures)
+	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
@@ -819,7 +803,7 @@ func (m *Material) GetRenderTargetTextures(getRenderTargetTextures func()) *Mate
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#getrendertargettextures
 func (m *Material) SetGetRenderTargetTextures(getRenderTargetTextures func()) *Material {
-	p := ba.ctx.Get("Material").New(getRenderTargetTextures)
+	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1019,7 +1003,7 @@ func (m *Material) SetNeedDepthPrePass(needDepthPrePass bool) *Material {
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onbind
 func (m *Material) OnBind(onBind func()) *Material {
-	p := ba.ctx.Get("Material").New(onBind)
+	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1027,7 +1011,7 @@ func (m *Material) OnBind(onBind func()) *Material {
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onbind
 func (m *Material) SetOnBind(onBind func()) *Material {
-	p := ba.ctx.Get("Material").New(onBind)
+	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1051,7 +1035,7 @@ func (m *Material) SetOnBindObservable(onBindObservable *Observable) *Material {
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#oncompiled
 func (m *Material) OnCompiled(onCompiled func()) *Material {
-	p := ba.ctx.Get("Material").New(onCompiled)
+	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1059,7 +1043,7 @@ func (m *Material) OnCompiled(onCompiled func()) *Material {
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#oncompiled
 func (m *Material) SetOnCompiled(onCompiled func()) *Material {
-	p := ba.ctx.Get("Material").New(onCompiled)
+	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1067,7 +1051,7 @@ func (m *Material) SetOnCompiled(onCompiled func()) *Material {
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#ondispose
 func (m *Material) OnDispose(onDispose func()) *Material {
-	p := ba.ctx.Get("Material").New(onDispose)
+	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1075,7 +1059,7 @@ func (m *Material) OnDispose(onDispose func()) *Material {
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#ondispose
 func (m *Material) SetOnDispose(onDispose func()) *Material {
-	p := ba.ctx.Get("Material").New(onDispose)
+	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1099,7 +1083,7 @@ func (m *Material) SetOnDisposeObservable(onDisposeObservable *Observable) *Mate
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onerror
 func (m *Material) OnError(onError func()) *Material {
-	p := ba.ctx.Get("Material").New(onError)
+	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return MaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1107,7 +1091,7 @@ func (m *Material) OnError(onError func()) *Material {
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onerror
 func (m *Material) SetOnError(onError func()) *Material {
-	p := ba.ctx.Get("Material").New(onError)
+	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return MaterialFromJSObject(p, ba.ctx)
 }
 

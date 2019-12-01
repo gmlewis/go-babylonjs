@@ -29,6 +29,15 @@ func ImageProcessingPostProcessFromJSObject(p js.Value, ctx js.Value) *ImageProc
 	return &ImageProcessingPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ImageProcessingPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ImageProcessingPostProcessArrayToJSArray(array []*ImageProcessingPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewImageProcessingPostProcessOpts contains optional parameters for NewImageProcessingPostProcess.
 type NewImageProcessingPostProcessOpts struct {
 	Camera                       *Camera
@@ -125,9 +134,7 @@ func (i *ImageProcessingPostProcess) Activate(camera *Camera, opts *ImageProcess
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#apply
 func (i *ImageProcessingPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("apply", args...)
+	retVal := i.p.Call("apply")
 	return EffectFromJSObject(retVal, i.ctx)
 }
 
@@ -160,9 +167,7 @@ func (i *ImageProcessingPostProcess) Dispose(opts *ImageProcessingPostProcessDis
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#getcamera
 func (i *ImageProcessingPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getCamera", args...)
+	retVal := i.p.Call("getCamera")
 	return CameraFromJSObject(retVal, i.ctx)
 }
 
@@ -171,9 +176,7 @@ func (i *ImageProcessingPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#getclassname
 func (i *ImageProcessingPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -182,9 +185,7 @@ func (i *ImageProcessingPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#geteffect
 func (i *ImageProcessingPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getEffect", args...)
+	retVal := i.p.Call("getEffect")
 	return EffectFromJSObject(retVal, i.ctx)
 }
 
@@ -193,9 +194,7 @@ func (i *ImageProcessingPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#geteffectname
 func (i *ImageProcessingPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getEffectName", args...)
+	retVal := i.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -204,9 +203,7 @@ func (i *ImageProcessingPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#getengine
 func (i *ImageProcessingPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getEngine", args...)
+	retVal := i.p.Call("getEngine")
 	return EngineFromJSObject(retVal, i.ctx)
 }
 
@@ -215,9 +212,7 @@ func (i *ImageProcessingPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#isready
 func (i *ImageProcessingPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("isReady", args...)
+	retVal := i.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -226,9 +221,7 @@ func (i *ImageProcessingPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#isreusable
 func (i *ImageProcessingPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("isReusable", args...)
+	retVal := i.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -237,9 +230,7 @@ func (i *ImageProcessingPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#marktexturedirty
 func (i *ImageProcessingPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("markTextureDirty", args...)
+	i.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the ImageProcessingPostProcess object.
@@ -314,9 +305,7 @@ func (i *ImageProcessingPostProcess) UpdateEffect(opts *ImageProcessingPostProce
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#useownoutput
 func (i *ImageProcessingPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("useOwnOutput", args...)
+	i.p.Call("useOwnOutput")
 }
 
 /*
@@ -693,7 +682,7 @@ func (i *ImageProcessingPostProcess) SetName(name string) *ImageProcessingPostPr
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onactivate
 func (i *ImageProcessingPostProcess) OnActivate(onActivate func()) *ImageProcessingPostProcess {
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(onActivate)
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -701,7 +690,7 @@ func (i *ImageProcessingPostProcess) OnActivate(onActivate func()) *ImageProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onactivate
 func (i *ImageProcessingPostProcess) SetOnActivate(onActivate func()) *ImageProcessingPostProcess {
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(onActivate)
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -725,7 +714,7 @@ func (i *ImageProcessingPostProcess) SetOnActivateObservable(onActivateObservabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onafterrender
 func (i *ImageProcessingPostProcess) OnAfterRender(onAfterRender func()) *ImageProcessingPostProcess {
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -733,7 +722,7 @@ func (i *ImageProcessingPostProcess) OnAfterRender(onAfterRender func()) *ImageP
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onafterrender
 func (i *ImageProcessingPostProcess) SetOnAfterRender(onAfterRender func()) *ImageProcessingPostProcess {
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -757,7 +746,7 @@ func (i *ImageProcessingPostProcess) SetOnAfterRenderObservable(onAfterRenderObs
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onapply
 func (i *ImageProcessingPostProcess) OnApply(onApply func()) *ImageProcessingPostProcess {
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(onApply)
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -765,7 +754,7 @@ func (i *ImageProcessingPostProcess) OnApply(onApply func()) *ImageProcessingPos
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onapply
 func (i *ImageProcessingPostProcess) SetOnApply(onApply func()) *ImageProcessingPostProcess {
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(onApply)
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -789,7 +778,7 @@ func (i *ImageProcessingPostProcess) SetOnApplyObservable(onApplyObservable *Obs
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onbeforerender
 func (i *ImageProcessingPostProcess) OnBeforeRender(onBeforeRender func()) *ImageProcessingPostProcess {
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -797,7 +786,7 @@ func (i *ImageProcessingPostProcess) OnBeforeRender(onBeforeRender func()) *Imag
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onbeforerender
 func (i *ImageProcessingPostProcess) SetOnBeforeRender(onBeforeRender func()) *ImageProcessingPostProcess {
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -821,7 +810,7 @@ func (i *ImageProcessingPostProcess) SetOnBeforeRenderObservable(onBeforeRenderO
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onsizechanged
 func (i *ImageProcessingPostProcess) OnSizeChanged(onSizeChanged func()) *ImageProcessingPostProcess {
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -829,7 +818,7 @@ func (i *ImageProcessingPostProcess) OnSizeChanged(onSizeChanged func()) *ImageP
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onsizechanged
 func (i *ImageProcessingPostProcess) SetOnSizeChanged(onSizeChanged func()) *ImageProcessingPostProcess {
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 

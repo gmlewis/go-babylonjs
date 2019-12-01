@@ -27,6 +27,15 @@ func GearVRControllerFromJSObject(p js.Value, ctx js.Value) *GearVRController {
 	return &GearVRController{WebVRController: WebVRControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// GearVRControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GearVRControllerArrayToJSArray(array []*GearVRController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGearVRController returns a new GearVRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller
@@ -69,9 +78,7 @@ func (g *GearVRController) AttachToPoseControlledCamera(camera *TargetCamera) {
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#dispose
 func (g *GearVRController) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // GearVRControllerGetForwardRayOpts contains optional parameters for GearVRController.GetForwardRay.
@@ -132,7 +139,7 @@ func (g *GearVRController) OnButtonStateChange(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	g.p.Call("onButtonStateChange", args...)
 }
@@ -144,7 +151,7 @@ func (g *GearVRController) Onleftstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	g.p.Call("onleftstickchanged", args...)
 }
@@ -156,7 +163,7 @@ func (g *GearVRController) Onrightstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	g.p.Call("onrightstickchanged", args...)
 }
@@ -166,9 +173,7 @@ func (g *GearVRController) Onrightstickchanged(callback func()) {
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#update
 func (g *GearVRController) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("update", args...)
+	g.p.Call("update")
 }
 
 // UpdateFromDevice calls the UpdateFromDevice method on the GearVRController object.

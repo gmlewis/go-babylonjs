@@ -27,6 +27,15 @@ func ConditionFromJSObject(p js.Value, ctx js.Value) *Condition {
 	return &Condition{p: p, ctx: ctx}
 }
 
+// ConditionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ConditionArrayToJSArray(array []*Condition) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCondition returns a new Condition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.condition
@@ -45,9 +54,7 @@ func (ba *Babylon) NewCondition(actionManager *ActionManager) *Condition {
 // https://doc.babylonjs.com/api/classes/babylon.condition#isvalid
 func (c *Condition) IsValid() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isValid", args...)
+	retVal := c.p.Call("isValid")
 	return retVal.Bool()
 }
 
@@ -56,9 +63,7 @@ func (c *Condition) IsValid() bool {
 // https://doc.babylonjs.com/api/classes/babylon.condition#serialize
 func (c *Condition) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 

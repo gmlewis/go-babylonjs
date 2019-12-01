@@ -29,6 +29,15 @@ func DatabaseFromJSObject(p js.Value, ctx js.Value) *Database {
 	return &Database{p: p, ctx: ctx}
 }
 
+// DatabaseArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DatabaseArrayToJSArray(array []*Database) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDatabaseOpts contains optional parameters for NewDatabase.
 type NewDatabaseOpts struct {
 	DisableManifestCheck *bool
@@ -45,7 +54,7 @@ func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func()
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, urlToScene)
-	args = append(args, callbackManifestChecked)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callbackManifestChecked(); return nil }))
 
 	if opts.DisableManifestCheck == nil {
 		args = append(args, js.Undefined())
@@ -75,7 +84,7 @@ func (d *Database) LoadFile(url string, sceneLoaded func(), opts *DatabaseLoadFi
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, url)
-	args = append(args, sceneLoaded)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { sceneLoaded(); return nil }))
 
 	if opts.ProgressCallBack == nil {
 		args = append(args, js.Undefined())
@@ -116,8 +125,8 @@ func (d *Database) Open(successCallback func(), errorCallback func()) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, successCallback)
-	args = append(args, errorCallback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { errorCallback(); return nil }))
 
 	d.p.Call("open", args...)
 }

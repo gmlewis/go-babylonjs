@@ -29,6 +29,15 @@ func PhysicsVortexEventOptionsFromJSObject(p js.Value, ctx js.Value) *PhysicsVor
 	return &PhysicsVortexEventOptions{p: p, ctx: ctx}
 }
 
+// PhysicsVortexEventOptionsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsVortexEventOptionsArrayToJSArray(array []*PhysicsVortexEventOptions) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // CentrifugalForceMultiplier returns the CentrifugalForceMultiplier property of class PhysicsVortexEventOptions.

@@ -29,6 +29,15 @@ func BoneLookControllerFromJSObject(p js.Value, ctx js.Value) *BoneLookControlle
 	return &BoneLookController{p: p, ctx: ctx}
 }
 
+// BoneLookControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoneLookControllerArrayToJSArray(array []*BoneLookController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBoneLookControllerOpts contains optional parameters for NewBoneLookController.
 type NewBoneLookControllerOpts struct {
 	Options js.Value
@@ -63,9 +72,7 @@ func (ba *Babylon) NewBoneLookController(mesh *AbstractMesh, bone *Bone, target 
 // https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#update
 func (b *BoneLookController) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("update", args...)
+	b.p.Call("update")
 }
 
 /*

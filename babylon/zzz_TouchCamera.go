@@ -30,6 +30,15 @@ func TouchCameraFromJSObject(p js.Value, ctx js.Value) *TouchCamera {
 	return &TouchCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// TouchCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TouchCameraArrayToJSArray(array []*TouchCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTouchCamera returns a new TouchCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera
@@ -88,9 +97,7 @@ func (t *TouchCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera#dispose
 func (t *TouchCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("dispose", args...)
+	t.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the TouchCamera object.
@@ -98,9 +105,7 @@ func (t *TouchCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera#getclassname
 func (t *TouchCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getClassName", args...)
+	retVal := t.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -122,9 +127,7 @@ func (t *TouchCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera#gettarget
 func (t *TouchCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getTarget", args...)
+	retVal := t.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, t.ctx)
 }
 
@@ -145,9 +148,7 @@ func (t *TouchCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera#storestate
 func (t *TouchCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("storeState", args...)
+	retVal := t.p.Call("storeState")
 	return CameraFromJSObject(retVal, t.ctx)
 }
 
@@ -397,7 +398,7 @@ func (t *TouchCamera) SetNoRotationConstraint(noRotationConstraint bool) *TouchC
 //
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera#oncollide
 func (t *TouchCamera) OnCollide(onCollide func()) *TouchCamera {
-	p := ba.ctx.Get("TouchCamera").New(onCollide)
+	p := ba.ctx.Get("TouchCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return TouchCameraFromJSObject(p, ba.ctx)
 }
 
@@ -405,7 +406,7 @@ func (t *TouchCamera) OnCollide(onCollide func()) *TouchCamera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera#oncollide
 func (t *TouchCamera) SetOnCollide(onCollide func()) *TouchCamera {
-	p := ba.ctx.Get("TouchCamera").New(onCollide)
+	p := ba.ctx.Get("TouchCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return TouchCameraFromJSObject(p, ba.ctx)
 }
 

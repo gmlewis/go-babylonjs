@@ -29,6 +29,15 @@ func FxaaPostProcessFromJSObject(p js.Value, ctx js.Value) *FxaaPostProcess {
 	return &FxaaPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FxaaPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FxaaPostProcessArrayToJSArray(array []*FxaaPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFxaaPostProcessOpts contains optional parameters for NewFxaaPostProcess.
 type NewFxaaPostProcessOpts struct {
 	Camera       *Camera
@@ -119,9 +128,7 @@ func (f *FxaaPostProcess) Activate(camera *Camera, opts *FxaaPostProcessActivate
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#apply
 func (f *FxaaPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("apply", args...)
+	retVal := f.p.Call("apply")
 	return EffectFromJSObject(retVal, f.ctx)
 }
 
@@ -154,9 +161,7 @@ func (f *FxaaPostProcess) Dispose(opts *FxaaPostProcessDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#getcamera
 func (f *FxaaPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getCamera", args...)
+	retVal := f.p.Call("getCamera")
 	return CameraFromJSObject(retVal, f.ctx)
 }
 
@@ -165,9 +170,7 @@ func (f *FxaaPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#getclassname
 func (f *FxaaPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -176,9 +179,7 @@ func (f *FxaaPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#geteffect
 func (f *FxaaPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getEffect", args...)
+	retVal := f.p.Call("getEffect")
 	return EffectFromJSObject(retVal, f.ctx)
 }
 
@@ -187,9 +188,7 @@ func (f *FxaaPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#geteffectname
 func (f *FxaaPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getEffectName", args...)
+	retVal := f.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -198,9 +197,7 @@ func (f *FxaaPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#getengine
 func (f *FxaaPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getEngine", args...)
+	retVal := f.p.Call("getEngine")
 	return EngineFromJSObject(retVal, f.ctx)
 }
 
@@ -209,9 +206,7 @@ func (f *FxaaPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#isready
 func (f *FxaaPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("isReady", args...)
+	retVal := f.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -220,9 +215,7 @@ func (f *FxaaPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#isreusable
 func (f *FxaaPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("isReusable", args...)
+	retVal := f.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -231,9 +224,7 @@ func (f *FxaaPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#marktexturedirty
 func (f *FxaaPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("markTextureDirty", args...)
+	f.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the FxaaPostProcess object.
@@ -308,9 +299,7 @@ func (f *FxaaPostProcess) UpdateEffect(opts *FxaaPostProcessUpdateEffectOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#useownoutput
 func (f *FxaaPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("useOwnOutput", args...)
+	f.p.Call("useOwnOutput")
 }
 
 /*
@@ -559,7 +548,7 @@ func (f *FxaaPostProcess) SetName(name string) *FxaaPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onactivate
 func (f *FxaaPostProcess) OnActivate(onActivate func()) *FxaaPostProcess {
-	p := ba.ctx.Get("FxaaPostProcess").New(onActivate)
+	p := ba.ctx.Get("FxaaPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -567,7 +556,7 @@ func (f *FxaaPostProcess) OnActivate(onActivate func()) *FxaaPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onactivate
 func (f *FxaaPostProcess) SetOnActivate(onActivate func()) *FxaaPostProcess {
-	p := ba.ctx.Get("FxaaPostProcess").New(onActivate)
+	p := ba.ctx.Get("FxaaPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -591,7 +580,7 @@ func (f *FxaaPostProcess) SetOnActivateObservable(onActivateObservable *Observab
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onafterrender
 func (f *FxaaPostProcess) OnAfterRender(onAfterRender func()) *FxaaPostProcess {
-	p := ba.ctx.Get("FxaaPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("FxaaPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -599,7 +588,7 @@ func (f *FxaaPostProcess) OnAfterRender(onAfterRender func()) *FxaaPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onafterrender
 func (f *FxaaPostProcess) SetOnAfterRender(onAfterRender func()) *FxaaPostProcess {
-	p := ba.ctx.Get("FxaaPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("FxaaPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -623,7 +612,7 @@ func (f *FxaaPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Ob
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onapply
 func (f *FxaaPostProcess) OnApply(onApply func()) *FxaaPostProcess {
-	p := ba.ctx.Get("FxaaPostProcess").New(onApply)
+	p := ba.ctx.Get("FxaaPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -631,7 +620,7 @@ func (f *FxaaPostProcess) OnApply(onApply func()) *FxaaPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onapply
 func (f *FxaaPostProcess) SetOnApply(onApply func()) *FxaaPostProcess {
-	p := ba.ctx.Get("FxaaPostProcess").New(onApply)
+	p := ba.ctx.Get("FxaaPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -655,7 +644,7 @@ func (f *FxaaPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *F
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onbeforerender
 func (f *FxaaPostProcess) OnBeforeRender(onBeforeRender func()) *FxaaPostProcess {
-	p := ba.ctx.Get("FxaaPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("FxaaPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -663,7 +652,7 @@ func (f *FxaaPostProcess) OnBeforeRender(onBeforeRender func()) *FxaaPostProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onbeforerender
 func (f *FxaaPostProcess) SetOnBeforeRender(onBeforeRender func()) *FxaaPostProcess {
-	p := ba.ctx.Get("FxaaPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("FxaaPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -687,7 +676,7 @@ func (f *FxaaPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onsizechanged
 func (f *FxaaPostProcess) OnSizeChanged(onSizeChanged func()) *FxaaPostProcess {
-	p := ba.ctx.Get("FxaaPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("FxaaPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -695,7 +684,7 @@ func (f *FxaaPostProcess) OnSizeChanged(onSizeChanged func()) *FxaaPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onsizechanged
 func (f *FxaaPostProcess) SetOnSizeChanged(onSizeChanged func()) *FxaaPostProcess {
-	p := ba.ctx.Get("FxaaPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("FxaaPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 

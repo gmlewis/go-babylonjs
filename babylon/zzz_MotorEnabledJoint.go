@@ -29,15 +29,24 @@ func MotorEnabledJointFromJSObject(p js.Value, ctx js.Value) *MotorEnabledJoint 
 	return &MotorEnabledJoint{PhysicsJoint: PhysicsJointFromJSObject(p, ctx), ctx: ctx}
 }
 
+// MotorEnabledJointArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MotorEnabledJointArrayToJSArray(array []*MotorEnabledJoint) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMotorEnabledJoint returns a new MotorEnabledJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.motorenabledjoint
-func (ba *Babylon) NewMotorEnabledJoint(jsType float64, jointData *PhysicsJointData) *MotorEnabledJoint {
+func (ba *Babylon) NewMotorEnabledJoint(jsType float64, jointData js.Value) *MotorEnabledJoint {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, jsType)
-	args = append(args, jointData.JSObject())
+	args = append(args, jointData)
 
 	p := ba.ctx.Get("MotorEnabledJoint").New(args...)
 	return MotorEnabledJointFromJSObject(p, ba.ctx)
@@ -50,7 +59,7 @@ func (m *MotorEnabledJoint) ExecuteNativeFunction(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	m.p.Call("executeNativeFunction", args...)
 }
@@ -180,16 +189,16 @@ func (m *MotorEnabledJoint) SetHingeJoint(HingeJoint float64) *MotorEnabledJoint
 // JointData returns the JointData property of class MotorEnabledJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.motorenabledjoint#jointdata
-func (m *MotorEnabledJoint) JointData(jointData *PhysicsJointData) *MotorEnabledJoint {
-	p := ba.ctx.Get("MotorEnabledJoint").New(jointData.JSObject())
+func (m *MotorEnabledJoint) JointData(jointData js.Value) *MotorEnabledJoint {
+	p := ba.ctx.Get("MotorEnabledJoint").New(jointData)
 	return MotorEnabledJointFromJSObject(p, ba.ctx)
 }
 
 // SetJointData sets the JointData property of class MotorEnabledJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.motorenabledjoint#jointdata
-func (m *MotorEnabledJoint) SetJointData(jointData *PhysicsJointData) *MotorEnabledJoint {
-	p := ba.ctx.Get("MotorEnabledJoint").New(jointData.JSObject())
+func (m *MotorEnabledJoint) SetJointData(jointData js.Value) *MotorEnabledJoint {
+	p := ba.ctx.Get("MotorEnabledJoint").New(jointData)
 	return MotorEnabledJointFromJSObject(p, ba.ctx)
 }
 

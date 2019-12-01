@@ -27,6 +27,15 @@ func FrontFacingBlockFromJSObject(p js.Value, ctx js.Value) *FrontFacingBlock {
 	return &FrontFacingBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FrontFacingBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FrontFacingBlockArrayToJSArray(array []*FrontFacingBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFrontFacingBlock returns a new FrontFacingBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.frontfacingblock
@@ -152,9 +161,7 @@ func (f *FrontFacingBlock) ConnectTo(other *NodeMaterialBlock, opts *FrontFacing
 // https://doc.babylonjs.com/api/classes/babylon.frontfacingblock#dispose
 func (f *FrontFacingBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("dispose", args...)
+	f.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the FrontFacingBlock object.
@@ -162,9 +169,7 @@ func (f *FrontFacingBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.frontfacingblock#getclassname
 func (f *FrontFacingBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (f *FrontFacingBlock) ReplaceRepeatableContent(vertexShaderState *NodeMater
 // https://doc.babylonjs.com/api/classes/babylon.frontfacingblock#serialize
 func (f *FrontFacingBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("serialize", args...)
+	retVal := f.p.Call("serialize")
 	return retVal
 }
 

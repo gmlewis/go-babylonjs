@@ -27,6 +27,15 @@ func ScreenshotToolsFromJSObject(p js.Value, ctx js.Value) *ScreenshotTools {
 	return &ScreenshotTools{p: p, ctx: ctx}
 }
 
+// ScreenshotToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ScreenshotToolsArrayToJSArray(array []*ScreenshotTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ScreenshotToolsCreateScreenshotOpts contains optional parameters for ScreenshotTools.CreateScreenshot.
 type ScreenshotToolsCreateScreenshotOpts struct {
 	SuccessCallback *func()
@@ -69,7 +78,7 @@ type ScreenshotToolsCreateScreenshotAsyncOpts struct {
 // CreateScreenshotAsync calls the CreateScreenshotAsync method on the ScreenshotTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.screenshottools#createscreenshotasync
-func (s *ScreenshotTools) CreateScreenshotAsync(engine *Engine, camera *Camera, size interface{}, opts *ScreenshotToolsCreateScreenshotAsyncOpts) string {
+func (s *ScreenshotTools) CreateScreenshotAsync(engine *Engine, camera *Camera, size interface{}, opts *ScreenshotToolsCreateScreenshotAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ScreenshotToolsCreateScreenshotAsyncOpts{}
 	}
@@ -87,7 +96,7 @@ func (s *ScreenshotTools) CreateScreenshotAsync(engine *Engine, camera *Camera, 
 	}
 
 	retVal := s.p.Call("CreateScreenshotAsync", args...)
-	return retVal.String()
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 // ScreenshotToolsCreateScreenshotUsingRenderTargetOpts contains optional parameters for ScreenshotTools.CreateScreenshotUsingRenderTarget.
@@ -153,7 +162,7 @@ type ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts struct {
 // CreateScreenshotUsingRenderTargetAsync calls the CreateScreenshotUsingRenderTargetAsync method on the ScreenshotTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.screenshottools#createscreenshotusingrendertargetasync
-func (s *ScreenshotTools) CreateScreenshotUsingRenderTargetAsync(engine *Engine, camera *Camera, size interface{}, opts *ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts) string {
+func (s *ScreenshotTools) CreateScreenshotUsingRenderTargetAsync(engine *Engine, camera *Camera, size interface{}, opts *ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts{}
 	}
@@ -186,7 +195,7 @@ func (s *ScreenshotTools) CreateScreenshotUsingRenderTargetAsync(engine *Engine,
 	}
 
 	retVal := s.p.Call("CreateScreenshotUsingRenderTargetAsync", args...)
-	return retVal.String()
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 /*

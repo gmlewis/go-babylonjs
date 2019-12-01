@@ -27,6 +27,15 @@ func PBRSubSurfaceConfigurationFromJSObject(p js.Value, ctx js.Value) *PBRSubSur
 	return &PBRSubSurfaceConfiguration{p: p, ctx: ctx}
 }
 
+// PBRSubSurfaceConfigurationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PBRSubSurfaceConfigurationArrayToJSArray(array []*PBRSubSurfaceConfiguration) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPBRSubSurfaceConfiguration returns a new PBRSubSurfaceConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration
@@ -34,7 +43,7 @@ func (ba *Babylon) NewPBRSubSurfaceConfiguration(markAllSubMeshesAsTexturesDirty
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, markAllSubMeshesAsTexturesDirty)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { markAllSubMeshesAsTexturesDirty(); return nil }))
 
 	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(args...)
 	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
@@ -43,11 +52,11 @@ func (ba *Babylon) NewPBRSubSurfaceConfiguration(markAllSubMeshesAsTexturesDirty
 // AddFallbacks calls the AddFallbacks method on the PBRSubSurfaceConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#addfallbacks
-func (p *PBRSubSurfaceConfiguration) AddFallbacks(defines *IMaterialSubSurfaceDefines, fallbacks *EffectFallbacks, currentRank float64) float64 {
+func (p *PBRSubSurfaceConfiguration) AddFallbacks(defines js.Value, fallbacks *EffectFallbacks, currentRank float64) float64 {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, fallbacks.JSObject())
 	args = append(args, currentRank)
 
@@ -172,9 +181,7 @@ func (p *PBRSubSurfaceConfiguration) GetAnimatables(animatables js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#getclassname
 func (p *PBRSubSurfaceConfiguration) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -183,9 +190,7 @@ func (p *PBRSubSurfaceConfiguration) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#hasrendertargettextures
 func (p *PBRSubSurfaceConfiguration) HasRenderTargetTextures() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("hasRenderTargetTextures", args...)
+	retVal := p.p.Call("hasRenderTargetTextures")
 	return retVal.Bool()
 }
 
@@ -205,11 +210,11 @@ func (p *PBRSubSurfaceConfiguration) HasTexture(texture *BaseTexture) bool {
 // IsReadyForSubMesh calls the IsReadyForSubMesh method on the PBRSubSurfaceConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#isreadyforsubmesh
-func (p *PBRSubSurfaceConfiguration) IsReadyForSubMesh(defines *IMaterialSubSurfaceDefines, scene *Scene) bool {
+func (p *PBRSubSurfaceConfiguration) IsReadyForSubMesh(defines js.Value, scene *Scene) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, scene.JSObject())
 
 	retVal := p.p.Call("isReadyForSubMesh", args...)
@@ -233,11 +238,11 @@ func (p *PBRSubSurfaceConfiguration) Parse(source interface{}, scene *Scene, roo
 // PrepareDefines calls the PrepareDefines method on the PBRSubSurfaceConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#preparedefines
-func (p *PBRSubSurfaceConfiguration) PrepareDefines(defines *IMaterialSubSurfaceDefines, scene *Scene) {
+func (p *PBRSubSurfaceConfiguration) PrepareDefines(defines js.Value, scene *Scene) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, scene.JSObject())
 
 	p.p.Call("prepareDefines", args...)
@@ -260,9 +265,7 @@ func (p *PBRSubSurfaceConfiguration) PrepareUniformBuffer(uniformBuffer *Uniform
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#serialize
 func (p *PBRSubSurfaceConfiguration) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 

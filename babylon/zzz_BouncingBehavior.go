@@ -29,6 +29,15 @@ func BouncingBehaviorFromJSObject(p js.Value, ctx js.Value) *BouncingBehavior {
 	return &BouncingBehavior{p: p, ctx: ctx}
 }
 
+// BouncingBehaviorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BouncingBehaviorArrayToJSArray(array []*BouncingBehavior) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Attach calls the Attach method on the BouncingBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#attach
@@ -46,9 +55,7 @@ func (b *BouncingBehavior) Attach(camera *ArcRotateCamera) {
 // https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#detach
 func (b *BouncingBehavior) Detach() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("detach", args...)
+	b.p.Call("detach")
 }
 
 // Init calls the Init method on the BouncingBehavior object.
@@ -56,9 +63,7 @@ func (b *BouncingBehavior) Detach() {
 // https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#init
 func (b *BouncingBehavior) Init() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("init", args...)
+	b.p.Call("init")
 }
 
 // StopAllAnimations calls the StopAllAnimations method on the BouncingBehavior object.
@@ -66,9 +71,7 @@ func (b *BouncingBehavior) Init() {
 // https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#stopallanimations
 func (b *BouncingBehavior) StopAllAnimations() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("stopAllAnimations", args...)
+	b.p.Call("stopAllAnimations")
 }
 
 /*

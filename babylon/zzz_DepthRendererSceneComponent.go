@@ -28,6 +28,15 @@ func DepthRendererSceneComponentFromJSObject(p js.Value, ctx js.Value) *DepthRen
 	return &DepthRendererSceneComponent{p: p, ctx: ctx}
 }
 
+// DepthRendererSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DepthRendererSceneComponentArrayToJSArray(array []*DepthRendererSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDepthRendererSceneComponent returns a new DepthRendererSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent
@@ -46,9 +55,7 @@ func (ba *Babylon) NewDepthRendererSceneComponent(scene *Scene) *DepthRendererSc
 // https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent#dispose
 func (d *DepthRendererSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the DepthRendererSceneComponent object.
@@ -56,9 +63,7 @@ func (d *DepthRendererSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent#rebuild
 func (d *DepthRendererSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("rebuild", args...)
+	d.p.Call("rebuild")
 }
 
 // Register calls the Register method on the DepthRendererSceneComponent object.
@@ -66,9 +71,7 @@ func (d *DepthRendererSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent#register
 func (d *DepthRendererSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("register", args...)
+	d.p.Call("register")
 }
 
 /*

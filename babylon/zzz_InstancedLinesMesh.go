@@ -27,6 +27,15 @@ func InstancedLinesMeshFromJSObject(p js.Value, ctx js.Value) *InstancedLinesMes
 	return &InstancedLinesMesh{InstancedMesh: InstancedMeshFromJSObject(p, ctx), ctx: ctx}
 }
 
+// InstancedLinesMeshArrayToJSArray returns a JavaScript Array for the wrapped array.
+func InstancedLinesMeshArrayToJSArray(array []*InstancedLinesMesh) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewInstancedLinesMesh returns a new InstancedLinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh
@@ -140,9 +149,7 @@ func (i *InstancedLinesMesh) EnableEdgesRendering(opts *InstancedLinesMeshEnable
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#getclassname
 func (i *InstancedLinesMesh) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -151,9 +158,7 @@ func (i *InstancedLinesMesh) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#getindices
 func (i *InstancedLinesMesh) GetIndices() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getIndices", args...)
+	retVal := i.p.Call("getIndices")
 	return retVal
 }
 
@@ -175,9 +180,7 @@ func (i *InstancedLinesMesh) GetLOD(camera *Camera) *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#gettotalindices
 func (i *InstancedLinesMesh) GetTotalIndices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getTotalIndices", args...)
+	retVal := i.p.Call("getTotalIndices")
 	return retVal.Float()
 }
 
@@ -186,9 +189,7 @@ func (i *InstancedLinesMesh) GetTotalIndices() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#gettotalvertices
 func (i *InstancedLinesMesh) GetTotalVertices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getTotalVertices", args...)
+	retVal := i.p.Call("getTotalVertices")
 	return retVal.Float()
 }
 
@@ -224,9 +225,7 @@ func (i *InstancedLinesMesh) GetVerticesData(kind string, opts *InstancedLinesMe
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#getworldmatrix
 func (i *InstancedLinesMesh) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getWorldMatrix", args...)
+	retVal := i.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, i.ctx)
 }
 
@@ -418,9 +417,7 @@ func (i *InstancedLinesMesh) _resyncLightSource(light *Light) {
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#_resynclightsources
 func (i *InstancedLinesMesh) _resyncLightSources() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("_resyncLightSources", args...)
+	i.p.Call("_resyncLightSources")
 }
 
 /*

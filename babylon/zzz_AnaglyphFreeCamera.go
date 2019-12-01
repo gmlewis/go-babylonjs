@@ -29,6 +29,15 @@ func AnaglyphFreeCameraFromJSObject(p js.Value, ctx js.Value) *AnaglyphFreeCamer
 	return &AnaglyphFreeCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AnaglyphFreeCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnaglyphFreeCameraArrayToJSArray(array []*AnaglyphFreeCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnaglyphFreeCamera returns a new AnaglyphFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphfreecamera
@@ -88,9 +97,7 @@ func (a *AnaglyphFreeCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphfreecamera#dispose
 func (a *AnaglyphFreeCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the AnaglyphFreeCamera object.
@@ -98,9 +105,7 @@ func (a *AnaglyphFreeCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphfreecamera#getclassname
 func (a *AnaglyphFreeCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -122,9 +127,7 @@ func (a *AnaglyphFreeCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphfreecamera#gettarget
 func (a *AnaglyphFreeCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTarget", args...)
+	retVal := a.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -145,9 +148,7 @@ func (a *AnaglyphFreeCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphfreecamera#storestate
 func (a *AnaglyphFreeCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("storeState", args...)
+	retVal := a.p.Call("storeState")
 	return CameraFromJSObject(retVal, a.ctx)
 }
 
@@ -397,7 +398,7 @@ func (a *AnaglyphFreeCamera) SetNoRotationConstraint(noRotationConstraint bool) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphfreecamera#oncollide
 func (a *AnaglyphFreeCamera) OnCollide(onCollide func()) *AnaglyphFreeCamera {
-	p := ba.ctx.Get("AnaglyphFreeCamera").New(onCollide)
+	p := ba.ctx.Get("AnaglyphFreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return AnaglyphFreeCameraFromJSObject(p, ba.ctx)
 }
 
@@ -405,7 +406,7 @@ func (a *AnaglyphFreeCamera) OnCollide(onCollide func()) *AnaglyphFreeCamera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphfreecamera#oncollide
 func (a *AnaglyphFreeCamera) SetOnCollide(onCollide func()) *AnaglyphFreeCamera {
-	p := ba.ctx.Get("AnaglyphFreeCamera").New(onCollide)
+	p := ba.ctx.Get("AnaglyphFreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return AnaglyphFreeCameraFromJSObject(p, ba.ctx)
 }
 

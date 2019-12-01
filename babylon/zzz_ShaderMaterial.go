@@ -31,9 +31,18 @@ func ShaderMaterialFromJSObject(p js.Value, ctx js.Value) *ShaderMaterial {
 	return &ShaderMaterial{Material: MaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ShaderMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ShaderMaterialArrayToJSArray(array []*ShaderMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewShaderMaterialOpts contains optional parameters for NewShaderMaterial.
 type NewShaderMaterialOpts struct {
-	Options *IShaderMaterialOptions
+	Options js.Value
 }
 
 // NewShaderMaterial returns a new ShaderMaterial object.
@@ -53,7 +62,7 @@ func (ba *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath inter
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	p := ba.ctx.Get("ShaderMaterial").New(args...)
@@ -244,7 +253,7 @@ type ShaderMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#forcecompilationasync
-func (s *ShaderMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *ShaderMaterialForceCompilationAsyncOpts) {
+func (s *ShaderMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *ShaderMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ShaderMaterialForceCompilationAsyncOpts{}
 	}
@@ -259,7 +268,8 @@ func (s *ShaderMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *ShaderM
 		args = append(args, opts.Options)
 	}
 
-	s.p.Call("forceCompilationAsync", args...)
+	retVal := s.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 // Freeze calls the Freeze method on the ShaderMaterial object.
@@ -267,9 +277,7 @@ func (s *ShaderMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *ShaderM
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#freeze
 func (s *ShaderMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("freeze", args...)
+	s.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the ShaderMaterial object.
@@ -277,9 +285,7 @@ func (s *ShaderMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getactivetextures
 func (s *ShaderMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getActiveTextures", args...)
+	retVal := s.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, s.ctx)
 }
 
@@ -288,9 +294,7 @@ func (s *ShaderMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getalphatesttexture
 func (s *ShaderMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAlphaTestTexture", args...)
+	retVal := s.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, s.ctx)
 }
 
@@ -299,9 +303,7 @@ func (s *ShaderMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getbindedmeshes
 func (s *ShaderMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getBindedMeshes", args...)
+	retVal := s.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, s.ctx)
 }
 
@@ -310,9 +312,7 @@ func (s *ShaderMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getclassname
 func (s *ShaderMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -321,9 +321,7 @@ func (s *ShaderMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#geteffect
 func (s *ShaderMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEffect", args...)
+	retVal := s.p.Call("getEffect")
 	return EffectFromJSObject(retVal, s.ctx)
 }
 
@@ -332,9 +330,7 @@ func (s *ShaderMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getscene
 func (s *ShaderMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getScene", args...)
+	retVal := s.p.Call("getScene")
 	return SceneFromJSObject(retVal, s.ctx)
 }
 
@@ -427,9 +423,7 @@ func (s *ShaderMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#markdirty
 func (s *ShaderMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("markDirty", args...)
+	s.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the ShaderMaterial object.
@@ -437,9 +431,7 @@ func (s *ShaderMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#needalphablending
 func (s *ShaderMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("needAlphaBlending", args...)
+	retVal := s.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -461,9 +453,7 @@ func (s *ShaderMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#needalphatesting
 func (s *ShaderMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("needAlphaTesting", args...)
+	retVal := s.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -487,9 +477,7 @@ func (s *ShaderMaterial) Parse(source interface{}, scene *Scene, rootUrl string)
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#serialize
 func (s *ShaderMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 
@@ -789,9 +777,7 @@ func (s *ShaderMaterial) ToString(opts *ShaderMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#unbind
 func (s *ShaderMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("unbind", args...)
+	s.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the ShaderMaterial object.
@@ -799,9 +785,7 @@ func (s *ShaderMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#unfreeze
 func (s *ShaderMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("unfreeze", args...)
+	s.p.Call("unfreeze")
 }
 
 /*
@@ -857,16 +841,16 @@ func (s *ShaderMaterial) SetAlphaMode(alphaMode float64) *ShaderMaterial {
 // Animations returns the Animations property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#animations
-func (s *ShaderMaterial) Animations(animations []Animation) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(animations.JSObject())
+func (s *ShaderMaterial) Animations(animations []*Animation) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(animations)
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#animations
-func (s *ShaderMaterial) SetAnimations(animations []Animation) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(animations.JSObject())
+func (s *ShaderMaterial) SetAnimations(animations []*Animation) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(animations)
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1082,7 +1066,7 @@ func (s *ShaderMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *ShaderMa
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getrendertargettextures
 func (s *ShaderMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("ShaderMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1090,7 +1074,7 @@ func (s *ShaderMaterial) GetRenderTargetTextures(getRenderTargetTextures func())
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getrendertargettextures
 func (s *ShaderMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("ShaderMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1290,7 +1274,7 @@ func (s *ShaderMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *ShaderMater
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onbind
 func (s *ShaderMaterial) OnBind(onBind func()) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(onBind)
+	p := ba.ctx.Get("ShaderMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1298,7 +1282,7 @@ func (s *ShaderMaterial) OnBind(onBind func()) *ShaderMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onbind
 func (s *ShaderMaterial) SetOnBind(onBind func()) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(onBind)
+	p := ba.ctx.Get("ShaderMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1322,7 +1306,7 @@ func (s *ShaderMaterial) SetOnBindObservable(onBindObservable *Observable) *Shad
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#oncompiled
 func (s *ShaderMaterial) OnCompiled(onCompiled func()) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(onCompiled)
+	p := ba.ctx.Get("ShaderMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1330,7 +1314,7 @@ func (s *ShaderMaterial) OnCompiled(onCompiled func()) *ShaderMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#oncompiled
 func (s *ShaderMaterial) SetOnCompiled(onCompiled func()) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(onCompiled)
+	p := ba.ctx.Get("ShaderMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1338,7 +1322,7 @@ func (s *ShaderMaterial) SetOnCompiled(onCompiled func()) *ShaderMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#ondispose
 func (s *ShaderMaterial) OnDispose(onDispose func()) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(onDispose)
+	p := ba.ctx.Get("ShaderMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1346,7 +1330,7 @@ func (s *ShaderMaterial) OnDispose(onDispose func()) *ShaderMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#ondispose
 func (s *ShaderMaterial) SetOnDispose(onDispose func()) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(onDispose)
+	p := ba.ctx.Get("ShaderMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1370,7 +1354,7 @@ func (s *ShaderMaterial) SetOnDisposeObservable(onDisposeObservable *Observable)
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onerror
 func (s *ShaderMaterial) OnError(onError func()) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(onError)
+	p := ba.ctx.Get("ShaderMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1378,7 +1362,7 @@ func (s *ShaderMaterial) OnError(onError func()) *ShaderMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onerror
 func (s *ShaderMaterial) SetOnError(onError func()) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(onError)
+	p := ba.ctx.Get("ShaderMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1401,16 +1385,16 @@ func (s *ShaderMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *
 // Options returns the Options property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#options
-func (s *ShaderMaterial) Options(options *IShaderMaterialOptions) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(options.JSObject())
+func (s *ShaderMaterial) Options(options js.Value) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(options)
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetOptions sets the Options property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#options
-func (s *ShaderMaterial) SetOptions(options *IShaderMaterialOptions) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(options.JSObject())
+func (s *ShaderMaterial) SetOptions(options js.Value) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(options)
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 

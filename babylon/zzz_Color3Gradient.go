@@ -27,6 +27,15 @@ func Color3GradientFromJSObject(p js.Value, ctx js.Value) *Color3Gradient {
 	return &Color3Gradient{p: p, ctx: ctx}
 }
 
+// Color3GradientArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Color3GradientArrayToJSArray(array []*Color3Gradient) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Color returns the Color property of class Color3Gradient.

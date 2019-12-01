@@ -32,6 +32,15 @@ func FreeCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *FreeCameraIn
 	return &FreeCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FreeCameraInputsManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FreeCameraInputsManagerArrayToJSArray(array []*FreeCameraInputsManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFreeCameraInputsManager returns a new FreeCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager
@@ -62,9 +71,7 @@ func (f *FreeCameraInputsManager) Add(input js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#adddeviceorientation
 func (f *FreeCameraInputsManager) AddDeviceOrientation() *FreeCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("addDeviceOrientation", args...)
+	retVal := f.p.Call("addDeviceOrientation")
 	return FreeCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
@@ -73,9 +80,7 @@ func (f *FreeCameraInputsManager) AddDeviceOrientation() *FreeCameraInputsManage
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#addgamepad
 func (f *FreeCameraInputsManager) AddGamepad() *FreeCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("addGamepad", args...)
+	retVal := f.p.Call("addGamepad")
 	return FreeCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
@@ -84,9 +89,7 @@ func (f *FreeCameraInputsManager) AddGamepad() *FreeCameraInputsManager {
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#addkeyboard
 func (f *FreeCameraInputsManager) AddKeyboard() *FreeCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("addKeyboard", args...)
+	retVal := f.p.Call("addKeyboard")
 	return FreeCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
@@ -120,9 +123,7 @@ func (f *FreeCameraInputsManager) AddMouse(opts *FreeCameraInputsManagerAddMouse
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#addtouch
 func (f *FreeCameraInputsManager) AddTouch() *FreeCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("addTouch", args...)
+	retVal := f.p.Call("addTouch")
 	return FreeCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
@@ -131,9 +132,7 @@ func (f *FreeCameraInputsManager) AddTouch() *FreeCameraInputsManager {
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#addvirtualjoystick
 func (f *FreeCameraInputsManager) AddVirtualJoystick() *FreeCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("addVirtualJoystick", args...)
+	retVal := f.p.Call("addVirtualJoystick")
 	return FreeCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
@@ -180,9 +179,7 @@ func (f *FreeCameraInputsManager) AttachInput(input js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#clear
 func (f *FreeCameraInputsManager) Clear() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("clear", args...)
+	f.p.Call("clear")
 }
 
 // FreeCameraInputsManagerDetachElementOpts contains optional parameters for FreeCameraInputsManager.DetachElement.
@@ -228,9 +225,7 @@ func (f *FreeCameraInputsManager) Parse(parsedCamera interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#rebuildinputcheck
 func (f *FreeCameraInputsManager) RebuildInputCheck() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("rebuildInputCheck", args...)
+	f.p.Call("rebuildInputCheck")
 }
 
 // Remove calls the Remove method on the FreeCameraInputsManager object.
@@ -262,9 +257,7 @@ func (f *FreeCameraInputsManager) RemoveByType(inputType string) {
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#removemouse
 func (f *FreeCameraInputsManager) RemoveMouse() *FreeCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("removeMouse", args...)
+	retVal := f.p.Call("removeMouse")
 	return FreeCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
@@ -334,7 +327,7 @@ func (f *FreeCameraInputsManager) SetCamera(camera *FreeCamera) *FreeCameraInput
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#checkinputs
 func (f *FreeCameraInputsManager) CheckInputs(checkInputs func()) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(checkInputs)
+	p := ba.ctx.Get("FreeCameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
 	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -342,7 +335,7 @@ func (f *FreeCameraInputsManager) CheckInputs(checkInputs func()) *FreeCameraInp
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#checkinputs
 func (f *FreeCameraInputsManager) SetCheckInputs(checkInputs func()) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(checkInputs)
+	p := ba.ctx.Get("FreeCameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
 	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 

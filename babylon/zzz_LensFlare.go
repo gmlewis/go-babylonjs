@@ -30,6 +30,15 @@ func LensFlareFromJSObject(p js.Value, ctx js.Value) *LensFlare {
 	return &LensFlare{p: p, ctx: ctx}
 }
 
+// LensFlareArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LensFlareArrayToJSArray(array []*LensFlare) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLensFlare returns a new LensFlare object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare
@@ -69,9 +78,7 @@ func (l *LensFlare) AddFlare(size float64, position float64, color *Color3, imgU
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#dispose
 func (l *LensFlare) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("dispose", args...)
+	l.p.Call("dispose")
 }
 
 /*

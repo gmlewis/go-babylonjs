@@ -29,6 +29,15 @@ func AbstractSceneFromJSObject(p js.Value, ctx js.Value) *AbstractScene {
 	return &AbstractScene{p: p, ctx: ctx}
 }
 
+// AbstractSceneArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AbstractSceneArrayToJSArray(array []*AbstractScene) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // AddEffectLayer calls the AddEffectLayer method on the AbstractScene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#addeffectlayer
@@ -292,16 +301,16 @@ func (a *AbstractScene) SetCameras(cameras *Camera) *AbstractScene {
 // EffectLayers returns the EffectLayers property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#effectlayers
-func (a *AbstractScene) EffectLayers(effectLayers []EffectLayer) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(effectLayers.JSObject())
+func (a *AbstractScene) EffectLayers(effectLayers []*EffectLayer) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(effectLayers)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // SetEffectLayers sets the EffectLayers property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#effectlayers
-func (a *AbstractScene) SetEffectLayers(effectLayers []EffectLayer) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(effectLayers.JSObject())
+func (a *AbstractScene) SetEffectLayers(effectLayers []*EffectLayer) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(effectLayers)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
@@ -340,32 +349,32 @@ func (a *AbstractScene) SetGeometries(geometries *Geometry) *AbstractScene {
 // Layers returns the Layers property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#layers
-func (a *AbstractScene) Layers(layers []Layer) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(layers.JSObject())
+func (a *AbstractScene) Layers(layers []*Layer) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(layers)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // SetLayers sets the Layers property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#layers
-func (a *AbstractScene) SetLayers(layers []Layer) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(layers.JSObject())
+func (a *AbstractScene) SetLayers(layers []*Layer) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(layers)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // LensFlareSystems returns the LensFlareSystems property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#lensflaresystems
-func (a *AbstractScene) LensFlareSystems(lensFlareSystems []LensFlareSystem) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(lensFlareSystems.JSObject())
+func (a *AbstractScene) LensFlareSystems(lensFlareSystems []*LensFlareSystem) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(lensFlareSystems)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // SetLensFlareSystems sets the LensFlareSystems property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#lensflaresystems
-func (a *AbstractScene) SetLensFlareSystems(lensFlareSystems []LensFlareSystem) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(lensFlareSystems.JSObject())
+func (a *AbstractScene) SetLensFlareSystems(lensFlareSystems []*LensFlareSystem) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(lensFlareSystems)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
@@ -452,48 +461,48 @@ func (a *AbstractScene) SetMultiMaterials(multiMaterials *MultiMaterial) *Abstra
 // ParticleSystems returns the ParticleSystems property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#particlesystems
-func (a *AbstractScene) ParticleSystems(particleSystems *IParticleSystem) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(particleSystems.JSObject())
+func (a *AbstractScene) ParticleSystems(particleSystems js.Value) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(particleSystems)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // SetParticleSystems sets the ParticleSystems property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#particlesystems
-func (a *AbstractScene) SetParticleSystems(particleSystems *IParticleSystem) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(particleSystems.JSObject())
+func (a *AbstractScene) SetParticleSystems(particleSystems js.Value) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(particleSystems)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // ProceduralTextures returns the ProceduralTextures property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#proceduraltextures
-func (a *AbstractScene) ProceduralTextures(proceduralTextures []ProceduralTexture) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(proceduralTextures.JSObject())
+func (a *AbstractScene) ProceduralTextures(proceduralTextures []*ProceduralTexture) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(proceduralTextures)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // SetProceduralTextures sets the ProceduralTextures property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#proceduraltextures
-func (a *AbstractScene) SetProceduralTextures(proceduralTextures []ProceduralTexture) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(proceduralTextures.JSObject())
+func (a *AbstractScene) SetProceduralTextures(proceduralTextures []*ProceduralTexture) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(proceduralTextures)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // ReflectionProbes returns the ReflectionProbes property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#reflectionprobes
-func (a *AbstractScene) ReflectionProbes(reflectionProbes []ReflectionProbe) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(reflectionProbes.JSObject())
+func (a *AbstractScene) ReflectionProbes(reflectionProbes []*ReflectionProbe) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(reflectionProbes)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // SetReflectionProbes sets the ReflectionProbes property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#reflectionprobes
-func (a *AbstractScene) SetReflectionProbes(reflectionProbes []ReflectionProbe) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(reflectionProbes.JSObject())
+func (a *AbstractScene) SetReflectionProbes(reflectionProbes []*ReflectionProbe) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(reflectionProbes)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
@@ -532,16 +541,16 @@ func (a *AbstractScene) SetSkeletons(skeletons *Skeleton) *AbstractScene {
 // Sounds returns the Sounds property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#sounds
-func (a *AbstractScene) Sounds(sounds []Sound) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(sounds.JSObject())
+func (a *AbstractScene) Sounds(sounds []*Sound) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(sounds)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // SetSounds sets the Sounds property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#sounds
-func (a *AbstractScene) SetSounds(sounds []Sound) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(sounds.JSObject())
+func (a *AbstractScene) SetSounds(sounds []*Sound) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(sounds)
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 

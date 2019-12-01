@@ -27,6 +27,15 @@ func LineEdgesRendererFromJSObject(p js.Value, ctx js.Value) *LineEdgesRenderer 
 	return &LineEdgesRenderer{EdgesRenderer: EdgesRendererFromJSObject(p, ctx), ctx: ctx}
 }
 
+// LineEdgesRendererArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LineEdgesRendererArrayToJSArray(array []*LineEdgesRenderer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLineEdgesRendererOpts contains optional parameters for NewLineEdgesRenderer.
 type NewLineEdgesRendererOpts struct {
 	Epsilon                       *float64
@@ -65,9 +74,7 @@ func (ba *Babylon) NewLineEdgesRenderer(source *AbstractMesh, opts *NewLineEdges
 // https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#dispose
 func (l *LineEdgesRenderer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("dispose", args...)
+	l.p.Call("dispose")
 }
 
 // IsReady calls the IsReady method on the LineEdgesRenderer object.
@@ -75,9 +82,7 @@ func (l *LineEdgesRenderer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#isready
 func (l *LineEdgesRenderer) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("isReady", args...)
+	retVal := l.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -86,9 +91,7 @@ func (l *LineEdgesRenderer) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#render
 func (l *LineEdgesRenderer) Render() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("render", args...)
+	l.p.Call("render")
 }
 
 // _generateEdgesLines calls the _generateEdgesLines method on the LineEdgesRenderer object.
@@ -96,9 +99,7 @@ func (l *LineEdgesRenderer) Render() {
 // https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#_generateedgeslines
 func (l *LineEdgesRenderer) _generateEdgesLines() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("_generateEdgesLines", args...)
+	l.p.Call("_generateEdgesLines")
 }
 
 /*

@@ -29,6 +29,15 @@ func StopAnimationActionFromJSObject(p js.Value, ctx js.Value) *StopAnimationAct
 	return &StopAnimationAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StopAnimationActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StopAnimationActionArrayToJSArray(array []*StopAnimationAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStopAnimationActionOpts contains optional parameters for NewStopAnimationAction.
 type NewStopAnimationActionOpts struct {
 	Condition *Condition
@@ -62,9 +71,7 @@ func (ba *Babylon) NewStopAnimationAction(triggerOptions interface{}, target int
 // https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#execute
 func (s *StopAnimationAction) Execute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("execute", args...)
+	s.p.Call("execute")
 }
 
 // GetTriggerParameter calls the GetTriggerParameter method on the StopAnimationAction object.
@@ -72,9 +79,7 @@ func (s *StopAnimationAction) Execute() {
 // https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#gettriggerparameter
 func (s *StopAnimationAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTriggerParameter", args...)
+	retVal := s.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -96,9 +101,7 @@ func (s *StopAnimationAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#skiptonextactiveaction
 func (s *StopAnimationAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("skipToNextActiveAction", args...)
+	s.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the StopAnimationAction object.

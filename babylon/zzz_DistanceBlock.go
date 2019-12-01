@@ -27,6 +27,15 @@ func DistanceBlockFromJSObject(p js.Value, ctx js.Value) *DistanceBlock {
 	return &DistanceBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DistanceBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DistanceBlockArrayToJSArray(array []*DistanceBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDistanceBlock returns a new DistanceBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock
@@ -152,9 +161,7 @@ func (d *DistanceBlock) ConnectTo(other *NodeMaterialBlock, opts *DistanceBlockC
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock#dispose
 func (d *DistanceBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the DistanceBlock object.
@@ -162,9 +169,7 @@ func (d *DistanceBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock#getclassname
 func (d *DistanceBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (d *DistanceBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterial
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock#serialize
 func (d *DistanceBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("serialize", args...)
+	retVal := d.p.Call("serialize")
 	return retVal
 }
 

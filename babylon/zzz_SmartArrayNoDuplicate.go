@@ -28,6 +28,15 @@ func SmartArrayNoDuplicateFromJSObject(p js.Value, ctx js.Value) *SmartArrayNoDu
 	return &SmartArrayNoDuplicate{SmartArray: SmartArrayFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SmartArrayNoDuplicateArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SmartArrayNoDuplicateArrayToJSArray(array []*SmartArrayNoDuplicate) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSmartArrayNoDuplicate returns a new SmartArrayNoDuplicate object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate
@@ -83,9 +92,7 @@ func (s *SmartArrayNoDuplicate) Contains(value *T) bool {
 // https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#dispose
 func (s *SmartArrayNoDuplicate) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // ForEach calls the ForEach method on the SmartArrayNoDuplicate object.
@@ -95,7 +102,7 @@ func (s *SmartArrayNoDuplicate) ForEach(jsFunc func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	s.p.Call("forEach", args...)
 }
@@ -143,9 +150,7 @@ func (s *SmartArrayNoDuplicate) PushNoDuplicate(value *T) bool {
 // https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#reset
 func (s *SmartArrayNoDuplicate) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("reset", args...)
+	s.p.Call("reset")
 }
 
 // Sort calls the Sort method on the SmartArrayNoDuplicate object.
@@ -155,7 +160,7 @@ func (s *SmartArrayNoDuplicate) Sort(compareFn func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, compareFn)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { compareFn(); return nil }))
 
 	s.p.Call("sort", args...)
 }
@@ -165,16 +170,16 @@ func (s *SmartArrayNoDuplicate) Sort(compareFn func()) {
 // Data returns the Data property of class SmartArrayNoDuplicate.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#data
-func (s *SmartArrayNoDuplicate) Data(data []T) *SmartArrayNoDuplicate {
-	p := ba.ctx.Get("SmartArrayNoDuplicate").New(data.JSObject())
+func (s *SmartArrayNoDuplicate) Data(data []*T) *SmartArrayNoDuplicate {
+	p := ba.ctx.Get("SmartArrayNoDuplicate").New(data)
 	return SmartArrayNoDuplicateFromJSObject(p, ba.ctx)
 }
 
 // SetData sets the Data property of class SmartArrayNoDuplicate.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#data
-func (s *SmartArrayNoDuplicate) SetData(data []T) *SmartArrayNoDuplicate {
-	p := ba.ctx.Get("SmartArrayNoDuplicate").New(data.JSObject())
+func (s *SmartArrayNoDuplicate) SetData(data []*T) *SmartArrayNoDuplicate {
+	p := ba.ctx.Get("SmartArrayNoDuplicate").New(data)
 	return SmartArrayNoDuplicateFromJSObject(p, ba.ctx)
 }
 

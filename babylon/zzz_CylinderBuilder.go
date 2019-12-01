@@ -27,6 +27,15 @@ func CylinderBuilderFromJSObject(p js.Value, ctx js.Value) *CylinderBuilder {
 	return &CylinderBuilder{p: p, ctx: ctx}
 }
 
+// CylinderBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CylinderBuilderArrayToJSArray(array []*CylinderBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CreateCylinder calls the CreateCylinder method on the CylinderBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderbuilder#createcylinder

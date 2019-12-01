@@ -27,6 +27,15 @@ func DiscBuilderFromJSObject(p js.Value, ctx js.Value) *DiscBuilder {
 	return &DiscBuilder{p: p, ctx: ctx}
 }
 
+// DiscBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DiscBuilderArrayToJSArray(array []*DiscBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // DiscBuilderCreateDiscOpts contains optional parameters for DiscBuilder.CreateDisc.
 type DiscBuilderCreateDiscOpts struct {
 	Scene *Scene

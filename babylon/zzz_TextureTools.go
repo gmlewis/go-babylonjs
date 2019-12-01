@@ -27,6 +27,15 @@ func TextureToolsFromJSObject(p js.Value, ctx js.Value) *TextureTools {
 	return &TextureTools{p: p, ctx: ctx}
 }
 
+// TextureToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TextureToolsArrayToJSArray(array []*TextureTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // TextureToolsCreateResizedCopyOpts contains optional parameters for TextureTools.CreateResizedCopy.
 type TextureToolsCreateResizedCopyOpts struct {
 	UseBilinearMode *bool

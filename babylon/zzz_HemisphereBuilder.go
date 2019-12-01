@@ -27,6 +27,15 @@ func HemisphereBuilderFromJSObject(p js.Value, ctx js.Value) *HemisphereBuilder 
 	return &HemisphereBuilder{p: p, ctx: ctx}
 }
 
+// HemisphereBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HemisphereBuilderArrayToJSArray(array []*HemisphereBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CreateHemisphere calls the CreateHemisphere method on the HemisphereBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemispherebuilder#createhemisphere

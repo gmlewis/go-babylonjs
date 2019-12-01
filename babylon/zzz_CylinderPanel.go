@@ -27,6 +27,15 @@ func CylinderPanelFromJSObject(p js.Value, ctx js.Value) *CylinderPanel {
 	return &CylinderPanel{VolumeBasedPanel: VolumeBasedPanelFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CylinderPanelArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CylinderPanelArrayToJSArray(array []*CylinderPanel) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCylinderPanel returns a new CylinderPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel
@@ -82,22 +91,20 @@ func (c *CylinderPanel) ContainsControl(control *Control3D) bool {
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#dispose
 func (c *CylinderPanel) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the CylinderPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#getbehaviorbyname
-func (c *CylinderPanel) GetBehaviorByName(name string) *Control3D {
+func (c *CylinderPanel) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := c.p.Call("getBehaviorByName", args...)
-	return Control3DFromJSObject(retVal, c.ctx)
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the CylinderPanel object.
@@ -105,9 +112,7 @@ func (c *CylinderPanel) GetBehaviorByName(name string) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#getclassname
 func (c *CylinderPanel) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -155,9 +160,7 @@ func (c *CylinderPanel) RemoveControl(control *Control3D) *Container3D {
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#updatelayout
 func (c *CylinderPanel) UpdateLayout() *Container3D {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("updateLayout", args...)
+	retVal := c.p.Call("updateLayout")
 	return Container3DFromJSObject(retVal, c.ctx)
 }
 
@@ -198,16 +201,16 @@ func (c *CylinderPanel) SetBlockLayout(blockLayout bool) *CylinderPanel {
 // Children returns the Children property of class CylinderPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#children
-func (c *CylinderPanel) Children(children []Control3D) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(children.JSObject())
+func (c *CylinderPanel) Children(children []*Control3D) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(children)
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
 // SetChildren sets the Children property of class CylinderPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#children
-func (c *CylinderPanel) SetChildren(children []Control3D) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(children.JSObject())
+func (c *CylinderPanel) SetChildren(children []*Control3D) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(children)
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
@@ -503,7 +506,7 @@ func (c *CylinderPanel) SetParent(parent *Container3D) *CylinderPanel {
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerdownanimation
 func (c *CylinderPanel) PointerDownAnimation(pointerDownAnimation func()) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(pointerDownAnimation)
+	p := ba.ctx.Get("CylinderPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
@@ -511,7 +514,7 @@ func (c *CylinderPanel) PointerDownAnimation(pointerDownAnimation func()) *Cylin
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerdownanimation
 func (c *CylinderPanel) SetPointerDownAnimation(pointerDownAnimation func()) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(pointerDownAnimation)
+	p := ba.ctx.Get("CylinderPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
@@ -519,7 +522,7 @@ func (c *CylinderPanel) SetPointerDownAnimation(pointerDownAnimation func()) *Cy
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerenteranimation
 func (c *CylinderPanel) PointerEnterAnimation(pointerEnterAnimation func()) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(pointerEnterAnimation)
+	p := ba.ctx.Get("CylinderPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
@@ -527,7 +530,7 @@ func (c *CylinderPanel) PointerEnterAnimation(pointerEnterAnimation func()) *Cyl
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerenteranimation
 func (c *CylinderPanel) SetPointerEnterAnimation(pointerEnterAnimation func()) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(pointerEnterAnimation)
+	p := ba.ctx.Get("CylinderPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
@@ -535,7 +538,7 @@ func (c *CylinderPanel) SetPointerEnterAnimation(pointerEnterAnimation func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointeroutanimation
 func (c *CylinderPanel) PointerOutAnimation(pointerOutAnimation func()) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(pointerOutAnimation)
+	p := ba.ctx.Get("CylinderPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
@@ -543,7 +546,7 @@ func (c *CylinderPanel) PointerOutAnimation(pointerOutAnimation func()) *Cylinde
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointeroutanimation
 func (c *CylinderPanel) SetPointerOutAnimation(pointerOutAnimation func()) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(pointerOutAnimation)
+	p := ba.ctx.Get("CylinderPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
@@ -551,7 +554,7 @@ func (c *CylinderPanel) SetPointerOutAnimation(pointerOutAnimation func()) *Cyli
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerupanimation
 func (c *CylinderPanel) PointerUpAnimation(pointerUpAnimation func()) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(pointerUpAnimation)
+	p := ba.ctx.Get("CylinderPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
@@ -559,7 +562,7 @@ func (c *CylinderPanel) PointerUpAnimation(pointerUpAnimation func()) *CylinderP
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerupanimation
 func (c *CylinderPanel) SetPointerUpAnimation(pointerUpAnimation func()) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(pointerUpAnimation)
+	p := ba.ctx.Get("CylinderPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func Matrix2DFromJSObject(p js.Value, ctx js.Value) *Matrix2D {
 	return &Matrix2D{p: p, ctx: ctx}
 }
 
+// Matrix2DArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Matrix2DArrayToJSArray(array []*Matrix2D) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMatrix2D returns a new Matrix2D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix2d
@@ -68,9 +77,7 @@ func (m *Matrix2D) ComposeToRef(tx float64, ty float64, angle float64, scaleX fl
 // https://doc.babylonjs.com/api/classes/babylon.matrix2d#determinant
 func (m *Matrix2D) Determinant() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("determinant", args...)
+	retVal := m.p.Call("determinant")
 	return retVal.Float()
 }
 
@@ -97,9 +104,7 @@ func (m *Matrix2D) FromValues(m00 float64, m01 float64, m10 float64, m11 float64
 // https://doc.babylonjs.com/api/classes/babylon.matrix2d#identity
 func (m *Matrix2D) Identity() *Matrix2D {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("Identity", args...)
+	retVal := m.p.Call("Identity")
 	return Matrix2DFromJSObject(retVal, m.ctx)
 }
 

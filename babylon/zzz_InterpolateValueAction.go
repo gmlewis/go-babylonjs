@@ -30,6 +30,15 @@ func InterpolateValueActionFromJSObject(p js.Value, ctx js.Value) *InterpolateVa
 	return &InterpolateValueAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// InterpolateValueActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func InterpolateValueActionArrayToJSArray(array []*InterpolateValueAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewInterpolateValueActionOpts contains optional parameters for NewInterpolateValueAction.
 type NewInterpolateValueActionOpts struct {
 	Duration            *float64
@@ -83,9 +92,7 @@ func (ba *Babylon) NewInterpolateValueAction(triggerOptions interface{}, target 
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#execute
 func (i *InterpolateValueAction) Execute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("execute", args...)
+	i.p.Call("execute")
 }
 
 // GetTriggerParameter calls the GetTriggerParameter method on the InterpolateValueAction object.
@@ -93,9 +100,7 @@ func (i *InterpolateValueAction) Execute() {
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#gettriggerparameter
 func (i *InterpolateValueAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getTriggerParameter", args...)
+	retVal := i.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -117,9 +122,7 @@ func (i *InterpolateValueAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#skiptonextactiveaction
 func (i *InterpolateValueAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("skipToNextActiveAction", args...)
+	i.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the InterpolateValueAction object.
@@ -173,7 +176,7 @@ func (i *InterpolateValueAction) SetOnBeforeExecuteObservable(onBeforeExecuteObs
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#oninterpolationdone
 func (i *InterpolateValueAction) OnInterpolationDone(onInterpolationDone func()) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(onInterpolationDone)
+	p := ba.ctx.Get("InterpolateValueAction").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onInterpolationDone(); return nil}))
 	return InterpolateValueActionFromJSObject(p, ba.ctx)
 }
 
@@ -181,7 +184,7 @@ func (i *InterpolateValueAction) OnInterpolationDone(onInterpolationDone func())
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#oninterpolationdone
 func (i *InterpolateValueAction) SetOnInterpolationDone(onInterpolationDone func()) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(onInterpolationDone)
+	p := ba.ctx.Get("InterpolateValueAction").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onInterpolationDone(); return nil}))
 	return InterpolateValueActionFromJSObject(p, ba.ctx)
 }
 

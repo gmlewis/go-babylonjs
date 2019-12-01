@@ -28,6 +28,15 @@ func GridMaterialFromJSObject(p js.Value, ctx js.Value) *GridMaterial {
 	return &GridMaterial{p: p, ctx: ctx}
 }
 
+// GridMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GridMaterialArrayToJSArray(array []*GridMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGridMaterial returns a new GridMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial
@@ -226,7 +235,7 @@ type GridMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the GridMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#forcecompilationasync
-func (g *GridMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *GridMaterialForceCompilationAsyncOpts) {
+func (g *GridMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *GridMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &GridMaterialForceCompilationAsyncOpts{}
 	}
@@ -241,7 +250,8 @@ func (g *GridMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *GridMater
 		args = append(args, opts.Options)
 	}
 
-	g.p.Call("forceCompilationAsync", args...)
+	retVal := g.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, g.ctx)
 }
 
 // Freeze calls the Freeze method on the GridMaterial object.
@@ -249,9 +259,7 @@ func (g *GridMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *GridMater
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#freeze
 func (g *GridMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("freeze", args...)
+	g.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the GridMaterial object.
@@ -259,9 +267,7 @@ func (g *GridMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getactivetextures
 func (g *GridMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getActiveTextures", args...)
+	retVal := g.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, g.ctx)
 }
 
@@ -270,9 +276,7 @@ func (g *GridMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getalphatesttexture
 func (g *GridMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getAlphaTestTexture", args...)
+	retVal := g.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, g.ctx)
 }
 
@@ -281,9 +285,7 @@ func (g *GridMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getbindedmeshes
 func (g *GridMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getBindedMeshes", args...)
+	retVal := g.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, g.ctx)
 }
 
@@ -292,9 +294,7 @@ func (g *GridMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getclassname
 func (g *GridMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getClassName", args...)
+	retVal := g.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -303,9 +303,7 @@ func (g *GridMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#geteffect
 func (g *GridMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getEffect", args...)
+	retVal := g.p.Call("getEffect")
 	return EffectFromJSObject(retVal, g.ctx)
 }
 
@@ -314,9 +312,7 @@ func (g *GridMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getscene
 func (g *GridMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getScene", args...)
+	retVal := g.p.Call("getScene")
 	return SceneFromJSObject(retVal, g.ctx)
 }
 
@@ -409,9 +405,7 @@ func (g *GridMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#markdirty
 func (g *GridMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("markDirty", args...)
+	g.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the GridMaterial object.
@@ -419,9 +413,7 @@ func (g *GridMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#needalphablending
 func (g *GridMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("needAlphaBlending", args...)
+	retVal := g.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -443,9 +435,7 @@ func (g *GridMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#needalphatesting
 func (g *GridMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("needAlphaTesting", args...)
+	retVal := g.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -469,9 +459,7 @@ func (g *GridMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#serialize
 func (g *GridMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("serialize", args...)
+	retVal := g.p.Call("serialize")
 	return retVal
 }
 
@@ -505,9 +493,7 @@ func (g *GridMaterial) ToString(opts *GridMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#unbind
 func (g *GridMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("unbind", args...)
+	g.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the GridMaterial object.
@@ -515,9 +501,7 @@ func (g *GridMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#unfreeze
 func (g *GridMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("unfreeze", args...)
+	g.p.Call("unfreeze")
 }
 
 /*
@@ -589,16 +573,16 @@ func (g *GridMaterial) SetAlphaMode(alphaMode float64) *GridMaterial {
 // Animations returns the Animations property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#animations
-func (g *GridMaterial) Animations(animations []Animation) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(animations.JSObject())
+func (g *GridMaterial) Animations(animations []*Animation) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(animations)
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#animations
-func (g *GridMaterial) SetAnimations(animations []Animation) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(animations.JSObject())
+func (g *GridMaterial) SetAnimations(animations []*Animation) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(animations)
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -814,7 +798,7 @@ func (g *GridMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *GridMateri
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getrendertargettextures
 func (g *GridMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("GridMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -822,7 +806,7 @@ func (g *GridMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getrendertargettextures
 func (g *GridMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("GridMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1118,7 +1102,7 @@ func (g *GridMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *GridMaterial 
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onbind
 func (g *GridMaterial) OnBind(onBind func()) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(onBind)
+	p := ba.ctx.Get("GridMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1126,7 +1110,7 @@ func (g *GridMaterial) OnBind(onBind func()) *GridMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onbind
 func (g *GridMaterial) SetOnBind(onBind func()) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(onBind)
+	p := ba.ctx.Get("GridMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1150,7 +1134,7 @@ func (g *GridMaterial) SetOnBindObservable(onBindObservable *Observable) *GridMa
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#oncompiled
 func (g *GridMaterial) OnCompiled(onCompiled func()) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(onCompiled)
+	p := ba.ctx.Get("GridMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1158,7 +1142,7 @@ func (g *GridMaterial) OnCompiled(onCompiled func()) *GridMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#oncompiled
 func (g *GridMaterial) SetOnCompiled(onCompiled func()) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(onCompiled)
+	p := ba.ctx.Get("GridMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1166,7 +1150,7 @@ func (g *GridMaterial) SetOnCompiled(onCompiled func()) *GridMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#ondispose
 func (g *GridMaterial) OnDispose(onDispose func()) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(onDispose)
+	p := ba.ctx.Get("GridMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1174,7 +1158,7 @@ func (g *GridMaterial) OnDispose(onDispose func()) *GridMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#ondispose
 func (g *GridMaterial) SetOnDispose(onDispose func()) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(onDispose)
+	p := ba.ctx.Get("GridMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1198,7 +1182,7 @@ func (g *GridMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onerror
 func (g *GridMaterial) OnError(onError func()) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(onError)
+	p := ba.ctx.Get("GridMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1206,7 +1190,7 @@ func (g *GridMaterial) OnError(onError func()) *GridMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onerror
 func (g *GridMaterial) SetOnError(onError func()) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(onError)
+	p := ba.ctx.Get("GridMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 

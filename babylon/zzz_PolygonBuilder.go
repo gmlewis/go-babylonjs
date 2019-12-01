@@ -27,6 +27,15 @@ func PolygonBuilderFromJSObject(p js.Value, ctx js.Value) *PolygonBuilder {
 	return &PolygonBuilder{p: p, ctx: ctx}
 }
 
+// PolygonBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PolygonBuilderArrayToJSArray(array []*PolygonBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // PolygonBuilderCreatePolygonOpts contains optional parameters for PolygonBuilder.CreatePolygon.
 type PolygonBuilderCreatePolygonOpts struct {
 	Scene           *Scene

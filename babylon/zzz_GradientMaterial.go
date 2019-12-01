@@ -27,6 +27,15 @@ func GradientMaterialFromJSObject(p js.Value, ctx js.Value) *GradientMaterial {
 	return &GradientMaterial{p: p, ctx: ctx}
 }
 
+// GradientMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GradientMaterialArrayToJSArray(array []*GradientMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGradientMaterial returns a new GradientMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial
@@ -225,7 +234,7 @@ type GradientMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the GradientMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#forcecompilationasync
-func (g *GradientMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *GradientMaterialForceCompilationAsyncOpts) {
+func (g *GradientMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *GradientMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &GradientMaterialForceCompilationAsyncOpts{}
 	}
@@ -240,7 +249,8 @@ func (g *GradientMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *Gradi
 		args = append(args, opts.Options)
 	}
 
-	g.p.Call("forceCompilationAsync", args...)
+	retVal := g.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, g.ctx)
 }
 
 // Freeze calls the Freeze method on the GradientMaterial object.
@@ -248,9 +258,7 @@ func (g *GradientMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *Gradi
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#freeze
 func (g *GradientMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("freeze", args...)
+	g.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the GradientMaterial object.
@@ -258,9 +266,7 @@ func (g *GradientMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getactivetextures
 func (g *GradientMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getActiveTextures", args...)
+	retVal := g.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, g.ctx)
 }
 
@@ -269,9 +275,7 @@ func (g *GradientMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getalphatesttexture
 func (g *GradientMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getAlphaTestTexture", args...)
+	retVal := g.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, g.ctx)
 }
 
@@ -280,9 +284,7 @@ func (g *GradientMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getanimatables
 func (g *GradientMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getAnimatables", args...)
+	retVal := g.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -291,9 +293,7 @@ func (g *GradientMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getbindedmeshes
 func (g *GradientMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getBindedMeshes", args...)
+	retVal := g.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, g.ctx)
 }
 
@@ -302,9 +302,7 @@ func (g *GradientMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getclassname
 func (g *GradientMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getClassName", args...)
+	retVal := g.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -313,9 +311,7 @@ func (g *GradientMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#geteffect
 func (g *GradientMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getEffect", args...)
+	retVal := g.p.Call("getEffect")
 	return EffectFromJSObject(retVal, g.ctx)
 }
 
@@ -324,9 +320,7 @@ func (g *GradientMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getscene
 func (g *GradientMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getScene", args...)
+	retVal := g.p.Call("getScene")
 	return SceneFromJSObject(retVal, g.ctx)
 }
 
@@ -419,9 +413,7 @@ func (g *GradientMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#markdirty
 func (g *GradientMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("markDirty", args...)
+	g.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the GradientMaterial object.
@@ -429,9 +421,7 @@ func (g *GradientMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#needalphablending
 func (g *GradientMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("needAlphaBlending", args...)
+	retVal := g.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -453,9 +443,7 @@ func (g *GradientMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#needalphatesting
 func (g *GradientMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("needAlphaTesting", args...)
+	retVal := g.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -479,9 +467,7 @@ func (g *GradientMaterial) Parse(source interface{}, scene *Scene, rootUrl strin
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#serialize
 func (g *GradientMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("serialize", args...)
+	retVal := g.p.Call("serialize")
 	return retVal
 }
 
@@ -515,9 +501,7 @@ func (g *GradientMaterial) ToString(opts *GradientMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#unbind
 func (g *GradientMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("unbind", args...)
+	g.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the GradientMaterial object.
@@ -525,9 +509,7 @@ func (g *GradientMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#unfreeze
 func (g *GradientMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("unfreeze", args...)
+	g.p.Call("unfreeze")
 }
 
 /*
@@ -599,16 +581,16 @@ func (g *GradientMaterial) SetAlphaMode(alphaMode float64) *GradientMaterial {
 // Animations returns the Animations property of class GradientMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#animations
-func (g *GradientMaterial) Animations(animations []Animation) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(animations.JSObject())
+func (g *GradientMaterial) Animations(animations []*Animation) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(animations)
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class GradientMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#animations
-func (g *GradientMaterial) SetAnimations(animations []Animation) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(animations.JSObject())
+func (g *GradientMaterial) SetAnimations(animations []*Animation) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(animations)
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -872,7 +854,7 @@ func (g *GradientMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *Gradie
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getrendertargettextures
 func (g *GradientMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("GradientMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -880,7 +862,7 @@ func (g *GradientMaterial) GetRenderTargetTextures(getRenderTargetTextures func(
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getrendertargettextures
 func (g *GradientMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("GradientMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1112,7 +1094,7 @@ func (g *GradientMaterial) SetOffset(offset float64) *GradientMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onbind
 func (g *GradientMaterial) OnBind(onBind func()) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(onBind)
+	p := ba.ctx.Get("GradientMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1120,7 +1102,7 @@ func (g *GradientMaterial) OnBind(onBind func()) *GradientMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onbind
 func (g *GradientMaterial) SetOnBind(onBind func()) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(onBind)
+	p := ba.ctx.Get("GradientMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1144,7 +1126,7 @@ func (g *GradientMaterial) SetOnBindObservable(onBindObservable *Observable) *Gr
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#oncompiled
 func (g *GradientMaterial) OnCompiled(onCompiled func()) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(onCompiled)
+	p := ba.ctx.Get("GradientMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1152,7 +1134,7 @@ func (g *GradientMaterial) OnCompiled(onCompiled func()) *GradientMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#oncompiled
 func (g *GradientMaterial) SetOnCompiled(onCompiled func()) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(onCompiled)
+	p := ba.ctx.Get("GradientMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1160,7 +1142,7 @@ func (g *GradientMaterial) SetOnCompiled(onCompiled func()) *GradientMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#ondispose
 func (g *GradientMaterial) OnDispose(onDispose func()) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(onDispose)
+	p := ba.ctx.Get("GradientMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1168,7 +1150,7 @@ func (g *GradientMaterial) OnDispose(onDispose func()) *GradientMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#ondispose
 func (g *GradientMaterial) SetOnDispose(onDispose func()) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(onDispose)
+	p := ba.ctx.Get("GradientMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1192,7 +1174,7 @@ func (g *GradientMaterial) SetOnDisposeObservable(onDisposeObservable *Observabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onerror
 func (g *GradientMaterial) OnError(onError func()) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(onError)
+	p := ba.ctx.Get("GradientMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1200,7 +1182,7 @@ func (g *GradientMaterial) OnError(onError func()) *GradientMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onerror
 func (g *GradientMaterial) SetOnError(onError func()) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(onError)
+	p := ba.ctx.Get("GradientMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 

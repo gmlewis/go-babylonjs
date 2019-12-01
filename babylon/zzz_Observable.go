@@ -32,6 +32,15 @@ func ObservableFromJSObject(p js.Value, ctx js.Value) *Observable {
 	return &Observable{p: p, ctx: ctx}
 }
 
+// ObservableArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ObservableArrayToJSArray(array []*Observable) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewObservableOpts contains optional parameters for NewObservable.
 type NewObservableOpts struct {
 	OnObserverAdded *func()
@@ -68,14 +77,14 @@ type ObservableAddOpts struct {
 // Add calls the Add method on the Observable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#add
-func (o *Observable) Add(callback func(), opts *ObservableAddOpts) *T {
+func (o *Observable) Add(callback func(), opts *ObservableAddOpts) *Observer {
 	if opts == nil {
 		opts = &ObservableAddOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+4)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	if opts.Mask == nil {
 		args = append(args, js.Undefined())
@@ -99,20 +108,20 @@ func (o *Observable) Add(callback func(), opts *ObservableAddOpts) *T {
 	}
 
 	retVal := o.p.Call("add", args...)
-	return TFromJSObject(retVal, o.ctx)
+	return ObserverFromJSObject(retVal, o.ctx)
 }
 
 // AddOnce calls the AddOnce method on the Observable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#addonce
-func (o *Observable) AddOnce(callback func()) *T {
+func (o *Observable) AddOnce(callback func()) *Observer {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	retVal := o.p.Call("addOnce", args...)
-	return TFromJSObject(retVal, o.ctx)
+	return ObserverFromJSObject(retVal, o.ctx)
 }
 
 // Clear calls the Clear method on the Observable object.
@@ -120,20 +129,16 @@ func (o *Observable) AddOnce(callback func()) *T {
 // https://doc.babylonjs.com/api/classes/babylon.observable#clear
 func (o *Observable) Clear() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("clear", args...)
+	o.p.Call("clear")
 }
 
 // Clone calls the Clone method on the Observable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#clone
-func (o *Observable) Clone() *T {
+func (o *Observable) Clone() *Observable {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("clone", args...)
-	return TFromJSObject(retVal, o.ctx)
+	retVal := o.p.Call("clone")
+	return ObservableFromJSObject(retVal, o.ctx)
 }
 
 // HasObservers calls the HasObservers method on the Observable object.
@@ -141,9 +146,7 @@ func (o *Observable) Clone() *T {
 // https://doc.babylonjs.com/api/classes/babylon.observable#hasobservers
 func (o *Observable) HasObservers() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("hasObservers", args...)
+	retVal := o.p.Call("hasObservers")
 	return retVal.Bool()
 }
 
@@ -198,7 +201,7 @@ func (o *Observable) MakeObserverTopPriority(observer *Observer) {
 
 // ObservableNotifyObserverOpts contains optional parameters for Observable.NotifyObserver.
 type ObservableNotifyObserverOpts struct {
-	Mask *T
+	Mask *float64
 }
 
 // NotifyObserver calls the NotifyObserver method on the Observable object.
@@ -217,7 +220,7 @@ func (o *Observable) NotifyObserver(observer *Observer, eventData *T, opts *Obse
 	if opts.Mask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Mask.JSObject())
+		args = append(args, *opts.Mask)
 	}
 
 	o.p.Call("notifyObserver", args...)
@@ -272,7 +275,7 @@ type ObservableNotifyObserversWithPromiseOpts struct {
 // NotifyObserversWithPromise calls the NotifyObserversWithPromise method on the Observable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#notifyobserverswithpromise
-func (o *Observable) NotifyObserversWithPromise(eventData *T, opts *ObservableNotifyObserversWithPromiseOpts) *T {
+func (o *Observable) NotifyObserversWithPromise(eventData *T, opts *ObservableNotifyObserversWithPromiseOpts) *Promise {
 	if opts == nil {
 		opts = &ObservableNotifyObserversWithPromiseOpts{}
 	}
@@ -298,7 +301,7 @@ func (o *Observable) NotifyObserversWithPromise(eventData *T, opts *ObservableNo
 	}
 
 	retVal := o.p.Call("notifyObserversWithPromise", args...)
-	return TFromJSObject(retVal, o.ctx)
+	return PromiseFromJSObject(retVal, o.ctx)
 }
 
 // Remove calls the Remove method on the Observable object.
@@ -329,7 +332,7 @@ func (o *Observable) RemoveCallback(callback func(), opts *ObservableRemoveCallb
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	if opts.Scope == nil {
 		args = append(args, js.Undefined())
@@ -346,16 +349,16 @@ func (o *Observable) RemoveCallback(callback func(), opts *ObservableRemoveCallb
 // Observers returns the Observers property of class Observable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#observers
-func (o *Observable) Observers(observers []Observer) *Observable {
-	p := ba.ctx.Get("Observable").New(observers.JSObject())
+func (o *Observable) Observers(observers []*Observer) *Observable {
+	p := ba.ctx.Get("Observable").New(observers)
 	return ObservableFromJSObject(p, ba.ctx)
 }
 
 // SetObservers sets the Observers property of class Observable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#observers
-func (o *Observable) SetObservers(observers []Observer) *Observable {
-	p := ba.ctx.Get("Observable").New(observers.JSObject())
+func (o *Observable) SetObservers(observers []*Observer) *Observable {
+	p := ba.ctx.Get("Observable").New(observers)
 	return ObservableFromJSObject(p, ba.ctx)
 }
 

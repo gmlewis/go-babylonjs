@@ -27,6 +27,15 @@ func MultiPointerScaleBehaviorFromJSObject(p js.Value, ctx js.Value) *MultiPoint
 	return &MultiPointerScaleBehavior{p: p, ctx: ctx}
 }
 
+// MultiPointerScaleBehaviorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MultiPointerScaleBehaviorArrayToJSArray(array []*MultiPointerScaleBehavior) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMultiPointerScaleBehavior returns a new MultiPointerScaleBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior
@@ -55,9 +64,7 @@ func (m *MultiPointerScaleBehavior) Attach(ownerNode *Mesh) {
 // https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior#detach
 func (m *MultiPointerScaleBehavior) Detach() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("detach", args...)
+	m.p.Call("detach")
 }
 
 // Init calls the Init method on the MultiPointerScaleBehavior object.
@@ -65,9 +72,7 @@ func (m *MultiPointerScaleBehavior) Detach() {
 // https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior#init
 func (m *MultiPointerScaleBehavior) Init() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("init", args...)
+	m.p.Call("init")
 }
 
 /*

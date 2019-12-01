@@ -27,6 +27,15 @@ func ScatterPanelFromJSObject(p js.Value, ctx js.Value) *ScatterPanel {
 	return &ScatterPanel{VolumeBasedPanel: VolumeBasedPanelFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ScatterPanelArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ScatterPanelArrayToJSArray(array []*ScatterPanel) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewScatterPanel returns a new ScatterPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel
@@ -82,22 +91,20 @@ func (s *ScatterPanel) ContainsControl(control *Control3D) bool {
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#dispose
 func (s *ScatterPanel) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the ScatterPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#getbehaviorbyname
-func (s *ScatterPanel) GetBehaviorByName(name string) *Control3D {
+func (s *ScatterPanel) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := s.p.Call("getBehaviorByName", args...)
-	return Control3DFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the ScatterPanel object.
@@ -105,9 +112,7 @@ func (s *ScatterPanel) GetBehaviorByName(name string) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#getclassname
 func (s *ScatterPanel) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -155,9 +160,7 @@ func (s *ScatterPanel) RemoveControl(control *Control3D) *Container3D {
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#updatelayout
 func (s *ScatterPanel) UpdateLayout() *Container3D {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("updateLayout", args...)
+	retVal := s.p.Call("updateLayout")
 	return Container3DFromJSObject(retVal, s.ctx)
 }
 
@@ -198,16 +201,16 @@ func (s *ScatterPanel) SetBlockLayout(blockLayout bool) *ScatterPanel {
 // Children returns the Children property of class ScatterPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#children
-func (s *ScatterPanel) Children(children []Control3D) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(children.JSObject())
+func (s *ScatterPanel) Children(children []*Control3D) *ScatterPanel {
+	p := ba.ctx.Get("ScatterPanel").New(children)
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
 // SetChildren sets the Children property of class ScatterPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#children
-func (s *ScatterPanel) SetChildren(children []Control3D) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(children.JSObject())
+func (s *ScatterPanel) SetChildren(children []*Control3D) *ScatterPanel {
+	p := ba.ctx.Get("ScatterPanel").New(children)
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
@@ -519,7 +522,7 @@ func (s *ScatterPanel) SetParent(parent *Container3D) *ScatterPanel {
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#pointerdownanimation
 func (s *ScatterPanel) PointerDownAnimation(pointerDownAnimation func()) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(pointerDownAnimation)
+	p := ba.ctx.Get("ScatterPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
@@ -527,7 +530,7 @@ func (s *ScatterPanel) PointerDownAnimation(pointerDownAnimation func()) *Scatte
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#pointerdownanimation
 func (s *ScatterPanel) SetPointerDownAnimation(pointerDownAnimation func()) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(pointerDownAnimation)
+	p := ba.ctx.Get("ScatterPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
@@ -535,7 +538,7 @@ func (s *ScatterPanel) SetPointerDownAnimation(pointerDownAnimation func()) *Sca
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#pointerenteranimation
 func (s *ScatterPanel) PointerEnterAnimation(pointerEnterAnimation func()) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(pointerEnterAnimation)
+	p := ba.ctx.Get("ScatterPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
@@ -543,7 +546,7 @@ func (s *ScatterPanel) PointerEnterAnimation(pointerEnterAnimation func()) *Scat
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#pointerenteranimation
 func (s *ScatterPanel) SetPointerEnterAnimation(pointerEnterAnimation func()) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(pointerEnterAnimation)
+	p := ba.ctx.Get("ScatterPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
@@ -551,7 +554,7 @@ func (s *ScatterPanel) SetPointerEnterAnimation(pointerEnterAnimation func()) *S
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#pointeroutanimation
 func (s *ScatterPanel) PointerOutAnimation(pointerOutAnimation func()) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(pointerOutAnimation)
+	p := ba.ctx.Get("ScatterPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
@@ -559,7 +562,7 @@ func (s *ScatterPanel) PointerOutAnimation(pointerOutAnimation func()) *ScatterP
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#pointeroutanimation
 func (s *ScatterPanel) SetPointerOutAnimation(pointerOutAnimation func()) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(pointerOutAnimation)
+	p := ba.ctx.Get("ScatterPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
@@ -567,7 +570,7 @@ func (s *ScatterPanel) SetPointerOutAnimation(pointerOutAnimation func()) *Scatt
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#pointerupanimation
 func (s *ScatterPanel) PointerUpAnimation(pointerUpAnimation func()) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(pointerUpAnimation)
+	p := ba.ctx.Get("ScatterPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
@@ -575,7 +578,7 @@ func (s *ScatterPanel) PointerUpAnimation(pointerUpAnimation func()) *ScatterPan
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#pointerupanimation
 func (s *ScatterPanel) SetPointerUpAnimation(pointerUpAnimation func()) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(pointerUpAnimation)
+	p := ba.ctx.Get("ScatterPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 

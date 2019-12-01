@@ -27,6 +27,15 @@ func CubeTextureAssetTaskFromJSObject(p js.Value, ctx js.Value) *CubeTextureAsse
 	return &CubeTextureAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CubeTextureAssetTaskArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CubeTextureAssetTaskArrayToJSArray(array []*CubeTextureAssetTask) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCubeTextureAssetTaskOpts contains optional parameters for NewCubeTextureAssetTask.
 type NewCubeTextureAssetTaskOpts struct {
 	Extensions *string
@@ -72,9 +81,7 @@ func (ba *Babylon) NewCubeTextureAssetTask(name string, url string, opts *NewCub
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#reset
 func (c *CubeTextureAssetTask) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("reset", args...)
+	c.p.Call("reset")
 }
 
 // Run calls the Run method on the CubeTextureAssetTask object.
@@ -85,8 +92,8 @@ func (c *CubeTextureAssetTask) Run(scene *Scene, onSuccess func(), onError func(
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	c.p.Call("run", args...)
 }
@@ -99,8 +106,8 @@ func (c *CubeTextureAssetTask) RunTask(scene *Scene, onSuccess func(), onError f
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	c.p.Call("runTask", args...)
 }
@@ -207,7 +214,7 @@ func (c *CubeTextureAssetTask) SetNoMipmap(noMipmap bool) *CubeTextureAssetTask 
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#onerror
 func (c *CubeTextureAssetTask) OnError(onError func()) *CubeTextureAssetTask {
-	p := ba.ctx.Get("CubeTextureAssetTask").New(onError)
+	p := ba.ctx.Get("CubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -215,7 +222,7 @@ func (c *CubeTextureAssetTask) OnError(onError func()) *CubeTextureAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#onerror
 func (c *CubeTextureAssetTask) SetOnError(onError func()) *CubeTextureAssetTask {
-	p := ba.ctx.Get("CubeTextureAssetTask").New(onError)
+	p := ba.ctx.Get("CubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -223,7 +230,7 @@ func (c *CubeTextureAssetTask) SetOnError(onError func()) *CubeTextureAssetTask 
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#onsuccess
 func (c *CubeTextureAssetTask) OnSuccess(onSuccess func()) *CubeTextureAssetTask {
-	p := ba.ctx.Get("CubeTextureAssetTask").New(onSuccess)
+	p := ba.ctx.Get("CubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -231,7 +238,7 @@ func (c *CubeTextureAssetTask) OnSuccess(onSuccess func()) *CubeTextureAssetTask
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#onsuccess
 func (c *CubeTextureAssetTask) SetOnSuccess(onSuccess func()) *CubeTextureAssetTask {
-	p := ba.ctx.Get("CubeTextureAssetTask").New(onSuccess)
+	p := ba.ctx.Get("CubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 

@@ -29,14 +29,23 @@ func EnvironmentHelperFromJSObject(p js.Value, ctx js.Value) *EnvironmentHelper 
 	return &EnvironmentHelper{p: p, ctx: ctx}
 }
 
+// EnvironmentHelperArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EnvironmentHelperArrayToJSArray(array []*EnvironmentHelper) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewEnvironmentHelper returns a new EnvironmentHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper
-func (ba *Babylon) NewEnvironmentHelper(options *IEnvironmentHelperOptions, scene *Scene) *EnvironmentHelper {
+func (ba *Babylon) NewEnvironmentHelper(options js.Value, scene *Scene) *EnvironmentHelper {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, options.JSObject())
+	args = append(args, options)
 	args = append(args, scene.JSObject())
 
 	p := ba.ctx.Get("EnvironmentHelper").New(args...)
@@ -48,9 +57,7 @@ func (ba *Babylon) NewEnvironmentHelper(options *IEnvironmentHelperOptions, scen
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#dispose
 func (e *EnvironmentHelper) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("dispose", args...)
+	e.p.Call("dispose")
 }
 
 // SetMainColor calls the SetMainColor method on the EnvironmentHelper object.
@@ -68,11 +75,11 @@ func (e *EnvironmentHelper) SetMainColor(color *Color3) {
 // UpdateOptions calls the UpdateOptions method on the EnvironmentHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#updateoptions
-func (e *EnvironmentHelper) UpdateOptions(options *IEnvironmentHelperOptions) {
+func (e *EnvironmentHelper) UpdateOptions(options js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, options.JSObject())
+	args = append(args, options)
 
 	e.p.Call("updateOptions", args...)
 }

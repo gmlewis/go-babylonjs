@@ -29,6 +29,15 @@ func MorphTargetManagerFromJSObject(p js.Value, ctx js.Value) *MorphTargetManage
 	return &MorphTargetManager{p: p, ctx: ctx}
 }
 
+// MorphTargetManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MorphTargetManagerArrayToJSArray(array []*MorphTargetManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMorphTargetManagerOpts contains optional parameters for NewMorphTargetManager.
 type NewMorphTargetManagerOpts struct {
 	Scene *Scene
@@ -71,9 +80,7 @@ func (m *MorphTargetManager) AddTarget(target *MorphTarget) {
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#clone
 func (m *MorphTargetManager) Clone() *MorphTargetManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("clone", args...)
+	retVal := m.p.Call("clone")
 	return MorphTargetManagerFromJSObject(retVal, m.ctx)
 }
 
@@ -134,9 +141,7 @@ func (m *MorphTargetManager) RemoveTarget(target *MorphTarget) {
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#serialize
 func (m *MorphTargetManager) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("serialize", args...)
+	retVal := m.p.Call("serialize")
 	return retVal
 }
 
@@ -145,9 +150,7 @@ func (m *MorphTargetManager) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#synchronize
 func (m *MorphTargetManager) Synchronize() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("synchronize", args...)
+	m.p.Call("synchronize")
 }
 
 /*

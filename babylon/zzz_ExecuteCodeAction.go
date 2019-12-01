@@ -29,6 +29,15 @@ func ExecuteCodeActionFromJSObject(p js.Value, ctx js.Value) *ExecuteCodeAction 
 	return &ExecuteCodeAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ExecuteCodeActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ExecuteCodeActionArrayToJSArray(array []*ExecuteCodeAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewExecuteCodeActionOpts contains optional parameters for NewExecuteCodeAction.
 type NewExecuteCodeActionOpts struct {
 	Condition *Condition
@@ -45,7 +54,7 @@ func (ba *Babylon) NewExecuteCodeAction(triggerOptions interface{}, jsFunc func(
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, triggerOptions)
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	if opts.Condition == nil {
 		args = append(args, js.Undefined())
@@ -74,9 +83,7 @@ func (e *ExecuteCodeAction) Execute(evt *ActionEvent) {
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction#gettriggerparameter
 func (e *ExecuteCodeAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("getTriggerParameter", args...)
+	retVal := e.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -98,9 +105,7 @@ func (e *ExecuteCodeAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction#skiptonextactiveaction
 func (e *ExecuteCodeAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("skipToNextActiveAction", args...)
+	e.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the ExecuteCodeAction object.
@@ -122,7 +127,7 @@ func (e *ExecuteCodeAction) Then(action *Action) *Action {
 //
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction#func
 func (e *ExecuteCodeAction) Func(jsFunc func()) *ExecuteCodeAction {
-	p := ba.ctx.Get("ExecuteCodeAction").New(jsFunc)
+	p := ba.ctx.Get("ExecuteCodeAction").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {jsFunc(); return nil}))
 	return ExecuteCodeActionFromJSObject(p, ba.ctx)
 }
 
@@ -130,7 +135,7 @@ func (e *ExecuteCodeAction) Func(jsFunc func()) *ExecuteCodeAction {
 //
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction#func
 func (e *ExecuteCodeAction) SetFunc(jsFunc func()) *ExecuteCodeAction {
-	p := ba.ctx.Get("ExecuteCodeAction").New(jsFunc)
+	p := ba.ctx.Get("ExecuteCodeAction").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {jsFunc(); return nil}))
 	return ExecuteCodeActionFromJSObject(p, ba.ctx)
 }
 

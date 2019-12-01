@@ -27,6 +27,15 @@ func DataBufferFromJSObject(p js.Value, ctx js.Value) *DataBuffer {
 	return &DataBuffer{p: p, ctx: ctx}
 }
 
+// DataBufferArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DataBufferArrayToJSArray(array []*DataBuffer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Capacity returns the Capacity property of class DataBuffer.

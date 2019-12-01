@@ -27,6 +27,15 @@ func PBRAnisotropicConfigurationFromJSObject(p js.Value, ctx js.Value) *PBRAniso
 	return &PBRAnisotropicConfiguration{p: p, ctx: ctx}
 }
 
+// PBRAnisotropicConfigurationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PBRAnisotropicConfigurationArrayToJSArray(array []*PBRAnisotropicConfiguration) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPBRAnisotropicConfiguration returns a new PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration
@@ -34,7 +43,7 @@ func (ba *Babylon) NewPBRAnisotropicConfiguration(markAllSubMeshesAsTexturesDirt
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, markAllSubMeshesAsTexturesDirty)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { markAllSubMeshesAsTexturesDirty(); return nil }))
 
 	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(args...)
 	return PBRAnisotropicConfigurationFromJSObject(p, ba.ctx)
@@ -43,11 +52,11 @@ func (ba *Babylon) NewPBRAnisotropicConfiguration(markAllSubMeshesAsTexturesDirt
 // AddFallbacks calls the AddFallbacks method on the PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#addfallbacks
-func (p *PBRAnisotropicConfiguration) AddFallbacks(defines *IMaterialAnisotropicDefines, fallbacks *EffectFallbacks, currentRank float64) float64 {
+func (p *PBRAnisotropicConfiguration) AddFallbacks(defines js.Value, fallbacks *EffectFallbacks, currentRank float64) float64 {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, fallbacks.JSObject())
 	args = append(args, currentRank)
 
@@ -158,9 +167,7 @@ func (p *PBRAnisotropicConfiguration) GetAnimatables(animatables js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#getclassname
 func (p *PBRAnisotropicConfiguration) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -180,11 +187,11 @@ func (p *PBRAnisotropicConfiguration) HasTexture(texture *BaseTexture) bool {
 // IsReadyForSubMesh calls the IsReadyForSubMesh method on the PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#isreadyforsubmesh
-func (p *PBRAnisotropicConfiguration) IsReadyForSubMesh(defines *IMaterialAnisotropicDefines, scene *Scene) bool {
+func (p *PBRAnisotropicConfiguration) IsReadyForSubMesh(defines js.Value, scene *Scene) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, scene.JSObject())
 
 	retVal := p.p.Call("isReadyForSubMesh", args...)
@@ -208,11 +215,11 @@ func (p *PBRAnisotropicConfiguration) Parse(source interface{}, scene *Scene, ro
 // PrepareDefines calls the PrepareDefines method on the PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#preparedefines
-func (p *PBRAnisotropicConfiguration) PrepareDefines(defines *IMaterialAnisotropicDefines, mesh *AbstractMesh, scene *Scene) {
+func (p *PBRAnisotropicConfiguration) PrepareDefines(defines js.Value, mesh *AbstractMesh, scene *Scene) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, mesh.JSObject())
 	args = append(args, scene.JSObject())
 
@@ -236,9 +243,7 @@ func (p *PBRAnisotropicConfiguration) PrepareUniformBuffer(uniformBuffer *Unifor
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#serialize
 func (p *PBRAnisotropicConfiguration) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 

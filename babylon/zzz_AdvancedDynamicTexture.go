@@ -29,6 +29,15 @@ func AdvancedDynamicTextureFromJSObject(p js.Value, ctx js.Value) *AdvancedDynam
 	return &AdvancedDynamicTexture{DynamicTexture: DynamicTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AdvancedDynamicTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AdvancedDynamicTextureArrayToJSArray(array []*AdvancedDynamicTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAdvancedDynamicTextureOpts contains optional parameters for NewAdvancedDynamicTexture.
 type NewAdvancedDynamicTextureOpts struct {
 	GenerateMipMaps *bool
@@ -83,9 +92,7 @@ func (a *AdvancedDynamicTexture) AddControl(control *Control) *AdvancedDynamicTe
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#attach
 func (a *AdvancedDynamicTexture) Attach() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("attach", args...)
+	a.p.Call("attach")
 }
 
 // AdvancedDynamicTextureAttachToMeshOpts contains optional parameters for AdvancedDynamicTexture.AttachToMesh.
@@ -119,9 +126,7 @@ func (a *AdvancedDynamicTexture) AttachToMesh(mesh *AbstractMesh, opts *Advanced
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#clear
 func (a *AdvancedDynamicTexture) Clear() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("clear", args...)
+	a.p.Call("clear")
 }
 
 // Clone calls the Clone method on the AdvancedDynamicTexture object.
@@ -129,9 +134,7 @@ func (a *AdvancedDynamicTexture) Clear() {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#clone
 func (a *AdvancedDynamicTexture) Clone() *DynamicTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("clone", args...)
+	retVal := a.p.Call("clone")
 	return DynamicTextureFromJSObject(retVal, a.ctx)
 }
 
@@ -283,9 +286,7 @@ func (a *AdvancedDynamicTexture) CreateFullscreenUI(name string, opts *AdvancedD
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#createstyle
 func (a *AdvancedDynamicTexture) CreateStyle() *Style {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("createStyle", args...)
+	retVal := a.p.Call("createStyle")
 	return StyleFromJSObject(retVal, a.ctx)
 }
 
@@ -294,9 +295,7 @@ func (a *AdvancedDynamicTexture) CreateStyle() *Style {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#dispose
 func (a *AdvancedDynamicTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // AdvancedDynamicTextureDrawTextOpts contains optional parameters for AdvancedDynamicTexture.DrawText.
@@ -351,7 +350,7 @@ func (a *AdvancedDynamicTexture) ExecuteOnAllControls(jsFunc func(), opts *Advan
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	if opts.Container == nil {
 		args = append(args, js.Undefined())
@@ -367,21 +366,17 @@ func (a *AdvancedDynamicTexture) ExecuteOnAllControls(jsFunc func(), opts *Advan
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getbasesize
 func (a *AdvancedDynamicTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getBaseSize", args...)
+	retVal := a.p.Call("getBaseSize")
 	return retVal
 }
 
 // GetChildren calls the GetChildren method on the AdvancedDynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getchildren
-func (a *AdvancedDynamicTexture) GetChildren() *[]Container {
+func (a *AdvancedDynamicTexture) GetChildren() []*Container {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getChildren", args...)
-	return []ContainerFromJSObject(retVal, a.ctx)
+	retVal := a.p.Call("getChildren")
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the AdvancedDynamicTexture object.
@@ -389,9 +384,7 @@ func (a *AdvancedDynamicTexture) GetChildren() *[]Container {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getclassname
 func (a *AdvancedDynamicTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -400,9 +393,7 @@ func (a *AdvancedDynamicTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getcontext
 func (a *AdvancedDynamicTexture) GetContext() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getContext", args...)
+	retVal := a.p.Call("getContext")
 	return retVal
 }
 
@@ -442,9 +433,7 @@ func (a *AdvancedDynamicTexture) GetDescendants(opts *AdvancedDynamicTextureGetD
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getinternaltexture
 func (a *AdvancedDynamicTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getInternalTexture", args...)
+	retVal := a.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, a.ctx)
 }
 
@@ -467,9 +456,7 @@ func (a *AdvancedDynamicTexture) GetProjectedPosition(position *Vector3, worldMa
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getreflectiontexturematrix
 func (a *AdvancedDynamicTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getReflectionTextureMatrix", args...)
+	retVal := a.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, a.ctx)
 }
 
@@ -478,9 +465,7 @@ func (a *AdvancedDynamicTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getscene
 func (a *AdvancedDynamicTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getScene", args...)
+	retVal := a.p.Call("getScene")
 	return SceneFromJSObject(retVal, a.ctx)
 }
 
@@ -489,9 +474,7 @@ func (a *AdvancedDynamicTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getsize
 func (a *AdvancedDynamicTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getSize", args...)
+	retVal := a.p.Call("getSize")
 	return retVal
 }
 
@@ -540,9 +523,7 @@ func (a *AdvancedDynamicTexture) InvalidateRect(invalidMinX float64, invalidMinY
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isready
 func (a *AdvancedDynamicTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("isReady", args...)
+	retVal := a.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -551,9 +532,7 @@ func (a *AdvancedDynamicTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isreadyornotblocking
 func (a *AdvancedDynamicTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("isReadyOrNotBlocking", args...)
+	retVal := a.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -627,9 +606,7 @@ func (a *AdvancedDynamicTexture) LoadFromDataString(name string, buffer interfac
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#markasdirty
 func (a *AdvancedDynamicTexture) MarkAsDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("markAsDirty", args...)
+	a.p.Call("markAsDirty")
 }
 
 // MoveFocusToControl calls the MoveFocusToControl method on the AdvancedDynamicTexture object.
@@ -701,9 +678,7 @@ func (a *AdvancedDynamicTexture) ReadPixels(opts *AdvancedDynamicTextureReadPixe
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#registerclipboardevents
 func (a *AdvancedDynamicTexture) RegisterClipboardEvents() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("registerClipboardEvents", args...)
+	a.p.Call("registerClipboardEvents")
 }
 
 // ReleaseInternalTexture calls the ReleaseInternalTexture method on the AdvancedDynamicTexture object.
@@ -711,9 +686,7 @@ func (a *AdvancedDynamicTexture) RegisterClipboardEvents() {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#releaseinternaltexture
 func (a *AdvancedDynamicTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("releaseInternalTexture", args...)
+	a.p.Call("releaseInternalTexture")
 }
 
 // RemoveControl calls the RemoveControl method on the AdvancedDynamicTexture object.
@@ -759,9 +732,7 @@ func (a *AdvancedDynamicTexture) ScaleTo(width float64, height float64) {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#serialize
 func (a *AdvancedDynamicTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("serialize", args...)
+	retVal := a.p.Call("serialize")
 	return retVal
 }
 
@@ -770,9 +741,7 @@ func (a *AdvancedDynamicTexture) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#tostring
 func (a *AdvancedDynamicTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("toString", args...)
+	retVal := a.p.Call("toString")
 	return retVal.String()
 }
 
@@ -781,9 +750,7 @@ func (a *AdvancedDynamicTexture) ToString() string {
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#unregisterclipboardevents
 func (a *AdvancedDynamicTexture) UnRegisterClipboardEvents() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("unRegisterClipboardEvents", args...)
+	a.p.Call("unRegisterClipboardEvents")
 }
 
 // AdvancedDynamicTextureUpdateOpts contains optional parameters for AdvancedDynamicTexture.Update.
@@ -868,7 +835,7 @@ func (a *AdvancedDynamicTexture) WhenAllReady(textures *BaseTexture, callback fu
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	a.p.Call("WhenAllReady", args...)
 }
@@ -1839,7 +1806,7 @@ func (a *AdvancedDynamicTexture) SetOnControlPickedObservable(onControlPickedObs
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#ondispose
 func (a *AdvancedDynamicTexture) OnDispose(onDispose func()) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onDispose)
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1847,7 +1814,7 @@ func (a *AdvancedDynamicTexture) OnDispose(onDispose func()) *AdvancedDynamicTex
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#ondispose
 func (a *AdvancedDynamicTexture) SetOnDispose(onDispose func()) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onDispose)
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
 }
 

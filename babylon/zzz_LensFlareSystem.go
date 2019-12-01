@@ -30,6 +30,15 @@ func LensFlareSystemFromJSObject(p js.Value, ctx js.Value) *LensFlareSystem {
 	return &LensFlareSystem{p: p, ctx: ctx}
 }
 
+// LensFlareSystemArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LensFlareSystemArrayToJSArray(array []*LensFlareSystem) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLensFlareSystem returns a new LensFlareSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem
@@ -50,9 +59,7 @@ func (ba *Babylon) NewLensFlareSystem(name string, emitter interface{}, scene *S
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#dispose
 func (l *LensFlareSystem) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("dispose", args...)
+	l.p.Call("dispose")
 }
 
 // GetEmitter calls the GetEmitter method on the LensFlareSystem object.
@@ -60,9 +67,7 @@ func (l *LensFlareSystem) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#getemitter
 func (l *LensFlareSystem) GetEmitter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getEmitter", args...)
+	retVal := l.p.Call("getEmitter")
 	return retVal
 }
 
@@ -71,9 +76,7 @@ func (l *LensFlareSystem) GetEmitter() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#getemitterposition
 func (l *LensFlareSystem) GetEmitterPosition() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getEmitterPosition", args...)
+	retVal := l.p.Call("getEmitterPosition")
 	return Vector3FromJSObject(retVal, l.ctx)
 }
 
@@ -82,9 +85,7 @@ func (l *LensFlareSystem) GetEmitterPosition() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#getscene
 func (l *LensFlareSystem) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getScene", args...)
+	retVal := l.p.Call("getScene")
 	return SceneFromJSObject(retVal, l.ctx)
 }
 
@@ -108,9 +109,7 @@ func (l *LensFlareSystem) Parse(parsedLensFlareSystem interface{}, scene *Scene,
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#serialize
 func (l *LensFlareSystem) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("serialize", args...)
+	retVal := l.p.Call("serialize")
 	return retVal
 }
 
@@ -212,7 +211,7 @@ func (l *LensFlareSystem) SetLensFlares(lensFlares *LensFlare) *LensFlareSystem 
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#meshesselectionpredicate
 func (l *LensFlareSystem) MeshesSelectionPredicate(meshesSelectionPredicate func()) *LensFlareSystem {
-	p := ba.ctx.Get("LensFlareSystem").New(meshesSelectionPredicate)
+	p := ba.ctx.Get("LensFlareSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {meshesSelectionPredicate(); return nil}))
 	return LensFlareSystemFromJSObject(p, ba.ctx)
 }
 
@@ -220,7 +219,7 @@ func (l *LensFlareSystem) MeshesSelectionPredicate(meshesSelectionPredicate func
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#meshesselectionpredicate
 func (l *LensFlareSystem) SetMeshesSelectionPredicate(meshesSelectionPredicate func()) *LensFlareSystem {
-	p := ba.ctx.Get("LensFlareSystem").New(meshesSelectionPredicate)
+	p := ba.ctx.Get("LensFlareSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {meshesSelectionPredicate(); return nil}))
 	return LensFlareSystemFromJSObject(p, ba.ctx)
 }
 

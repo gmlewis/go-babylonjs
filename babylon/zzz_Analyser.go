@@ -29,6 +29,15 @@ func AnalyserFromJSObject(p js.Value, ctx js.Value) *Analyser {
 	return &Analyser{p: p, ctx: ctx}
 }
 
+// AnalyserArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnalyserArrayToJSArray(array []*Analyser) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnalyser returns a new Analyser object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser
@@ -60,9 +69,7 @@ func (a *Analyser) ConnectAudioNodes(inputAudioNode js.Value, outputAudioNode js
 // https://doc.babylonjs.com/api/classes/babylon.analyser#dispose
 func (a *Analyser) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // DrawDebugCanvas calls the DrawDebugCanvas method on the Analyser object.
@@ -70,9 +77,7 @@ func (a *Analyser) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.analyser#drawdebugcanvas
 func (a *Analyser) DrawDebugCanvas() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("drawDebugCanvas", args...)
+	a.p.Call("drawDebugCanvas")
 }
 
 // GetByteFrequencyData calls the GetByteFrequencyData method on the Analyser object.
@@ -80,9 +85,7 @@ func (a *Analyser) DrawDebugCanvas() {
 // https://doc.babylonjs.com/api/classes/babylon.analyser#getbytefrequencydata
 func (a *Analyser) GetByteFrequencyData() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getByteFrequencyData", args...)
+	retVal := a.p.Call("getByteFrequencyData")
 	return retVal
 }
 
@@ -91,9 +94,7 @@ func (a *Analyser) GetByteFrequencyData() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.analyser#getbytetimedomaindata
 func (a *Analyser) GetByteTimeDomainData() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getByteTimeDomainData", args...)
+	retVal := a.p.Call("getByteTimeDomainData")
 	return retVal
 }
 
@@ -102,9 +103,7 @@ func (a *Analyser) GetByteTimeDomainData() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.analyser#getfloatfrequencydata
 func (a *Analyser) GetFloatFrequencyData() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getFloatFrequencyData", args...)
+	retVal := a.p.Call("getFloatFrequencyData")
 	return retVal
 }
 
@@ -113,9 +112,7 @@ func (a *Analyser) GetFloatFrequencyData() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.analyser#getfrequencybincount
 func (a *Analyser) GetFrequencyBinCount() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getFrequencyBinCount", args...)
+	retVal := a.p.Call("getFrequencyBinCount")
 	return retVal.Float()
 }
 
@@ -124,9 +121,7 @@ func (a *Analyser) GetFrequencyBinCount() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.analyser#stopdebugcanvas
 func (a *Analyser) StopDebugCanvas() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("stopDebugCanvas", args...)
+	a.p.Call("stopDebugCanvas")
 }
 
 /*

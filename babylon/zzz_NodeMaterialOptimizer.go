@@ -27,6 +27,15 @@ func NodeMaterialOptimizerFromJSObject(p js.Value, ctx js.Value) *NodeMaterialOp
 	return &NodeMaterialOptimizer{p: p, ctx: ctx}
 }
 
+// NodeMaterialOptimizerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NodeMaterialOptimizerArrayToJSArray(array []*NodeMaterialOptimizer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Optimize calls the Optimize method on the NodeMaterialOptimizer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialoptimizer#optimize

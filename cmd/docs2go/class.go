@@ -229,13 +229,14 @@ type Signature struct {
 	GoReturnType      string `xml:"-"`
 	GoReturnStatement string `xml:"-"`
 
-	GoParams   []string `xml:"-"`
-	GoOpts     []string `xml:"-"`
-	GoOptsName []string `xml:"-"`
-	HasOpts    bool     `xml:"-"`
+	HasOpts bool `xml:"-"`
 
-	JSParams []string `xml:"-"`
-	JSOpts   []string `xml:"-"`
+	GoParams         []string `xml:"-"`
+	GoOpts           []string `xml:"-"`
+	GoOptsName       []string `xml:"-"`
+	NeedsArrayHelper []string `xml:"-"`
+	JSParams         []string `xml:"-"`
+	JSOpts           []string `xml:"-"`
 }
 
 type processOverrider func(className string, s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string)
@@ -263,6 +264,8 @@ func processMethodOverrides(className string, s *Signature, names []string, opti
 	switch className + "." + s.GoName {
 	case "Angle.BetweenTwoPoints":
 		names[0] = "av"
+	case "InstancedMesh.GetFacetNormal", "InstancedMesh.GetFacetNormalToRef", "InstancedMesh.GetFacetPosition", "InstancedMesh.GetFacetPositionToRef":
+		names[0] = "index"
 	default:
 		override = false
 	}
@@ -312,23 +315,34 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 		}
 		keyword := v[0:index]
 		v = v[index+len(m[0]):]
-		logf("SEARCHING for '%v'\nm[1]=`%v`\nm[2]=`%v`\nignoreNextType=%v\nAFTER removing '%v': '%v'\n\n", m[0], m[1], m[2], ignoreNextType, keyword, v)
+		logf("SEARCHING for '%v'\nm[1]=`%v`\nm[2]=`%v`\nignoreNextType=%v\nlastWasLessThan=%v\nAFTER removing keyword='%v': '%v'\n\n", m[0], m[1], m[2], ignoreNextType, lastWasLessThan, keyword, v)
 
 		addType := func() {
 			if ignoreNextType {
 				ignoreNextType = false
 			} else {
+				var arrayPrefix string
 				if i := len(types); i > 0 && types[i-1] == "Array" {
-					types[i-1] = "[]" + m[2]
-					// } else if i > 0 && types[i-1] == "*Nullable" {
-					// 	types[i-1] = "*" + m[2] // Override last type
-				} else {
-					if lastWasLessThan && len(types) > 0 {
-						switch types[len(types)-1] {
-						case "Nullable", "DeepImmutable", "Partial": // replace property
-							types = types[0 : len(types)-1]
-						}
+					types = types[0 : len(types)-1]
+					arrayPrefix = "[]"
+					lastWasLessThan = false
+				} else if i := len(types); i > 0 && types[i-1] == "[]Array" {
+					types = types[0 : len(types)-1]
+					arrayPrefix = "[][]"
+					lastWasLessThan = false
+				} else if lastWasLessThan && len(types) > 0 {
+					switch types[len(types)-1] {
+					case "Nullable", "DeepImmutable", "Partial": // replace property
+						types = types[0 : len(types)-1]
+						lastWasLessThan = false
+					case "[]Nullable", "[]DeepImmutable", "[]Partial": // replace property
+						types = types[0 : len(types)-1]
+						arrayPrefix = "[]"
+						lastWasLessThan = false
 					}
+				}
+
+				if !lastWasLessThan {
 					switch m[2] {
 					case "boolean":
 						types = append(types, "bool")
@@ -340,6 +354,10 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 						types = append(types, "[]float64")
 					default:
 						types = append(types, m[2])
+					}
+
+					if arrayPrefix != "" {
+						types[len(types)-1] = arrayPrefix + types[len(types)-1]
 					}
 				}
 				lastWasLessThan = false
@@ -400,9 +418,12 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 					switch paramType {
 					case "any":
 						paramType = "interface{}"
-					case "function":
+					case "function", "Function":
 						paramType = "func()"
-					case "[]AbstractMesh", "[]IAnimationKey", "[]Worker":
+					case
+						"[]AbstractMesh",
+						"[]IInternalTextureLoader",
+						"[]Worker":
 						paramType = "[]js.Value"
 					case "string":
 						paramType = "*string"
@@ -434,16 +455,27 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 				name = "jsFunc"
 			}
 			jsName := name
+			var needsArrayHelper bool
 			if i < len(types) {
 				paramType = types[i]
 				var needsJSObject bool
-				paramType, needsJSObject = jsTypeToGoType(paramType)
+				paramType, needsJSObject, needsArrayHelper = jsTypeToGoType(paramType)
 				if needsJSObject {
 					if !strings.HasPrefix(paramType, "*") && paramType != "js.Value" && !strings.HasPrefix(paramType, "[]") {
 						paramType = "*" + paramType
 					}
 					jsName += ".JSObject()"
 				}
+
+				// special case - function callback
+				if paramType == "func()" {
+					jsName = fmt.Sprintf(`js.FuncOf(func(this js.Value, args []js.Value) interface{} {%v(); return nil})`, name)
+				}
+			}
+			if needsArrayHelper {
+				s.NeedsArrayHelper = append(s.NeedsArrayHelper, fmt.Sprintf("%vArrayToJSArray(%v)", paramType[3:], name))
+			} else {
+				s.NeedsArrayHelper = append(s.NeedsArrayHelper, "")
 			}
 			s.GoParams = append(s.GoParams, fmt.Sprintf("%v %v", name, paramType))
 			s.JSParams = append(s.JSParams, jsName)
@@ -452,7 +484,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 
 	if len(types) > len(names) {
 		var needsJSObject bool
-		s.GoReturnType, needsJSObject = jsTypeToGoType(types[len(types)-1])
+		s.GoReturnType, needsJSObject, _ = jsTypeToGoType(types[len(types)-1])
 
 		if s.GoReturnType == "this" {
 			s.GoReturnType = className
@@ -480,22 +512,24 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 	return true
 }
 
-func jsTypeToGoType(paramType string) (goType string, needsJSObject bool) {
+func jsTypeToGoType(paramType string) (goType string, needsJSObject, needsArrayHelper bool) {
 	if unhandledType[paramType] {
-		return "js.Value", false
+		return "js.Value", false, false
+	}
+
+	if strings.HasPrefix(paramType, "[]*") {
+		return paramType, false, true
+	}
+
+	if strings.HasPrefix(paramType, "[]") {
+		return "[]*" + paramType[2:], false, true
 	}
 
 	switch paramType {
 	case "any":
 		paramType = "interface{}"
-	case "function":
+	case "function", "Function":
 		paramType = "func()"
-	case
-		"[]IAnimationKey",
-		"[]Mesh",
-		"[]PostProcess",
-		"[]Worker":
-		paramType = "[]js.Value"
 	case "string", "float64", "bool", "[]string", "[]float64", "[]bool":
 	case "void":
 		paramType = ""
@@ -505,7 +539,7 @@ func jsTypeToGoType(paramType string) (goType string, needsJSObject bool) {
 		needsJSObject = true
 	}
 
-	return paramType, needsJSObject
+	return paramType, needsJSObject, false
 }
 
 // Type returns the JavaScript type of the class in this section.
@@ -540,7 +574,6 @@ var unhandledTypes = []string{
 	"*IHighlightLayerOptions",
 	"*IHtmlElementTextureOptions",
 	"*IMultiRenderTargetOptions",
-	"*INodeMaterialOptions",
 	"*IOceanPostProcessOptions",
 	"*IPhysicsEnabledObject",
 	"*IShaderMaterialOptions",
@@ -573,14 +606,26 @@ var unhandledTypes = []string{
 	"BabylonFileParser",
 	"Behavior",
 	"CanvasRenderingContext2D",
+	"ClientRect",
 	"ClipboardEvent",
+	"Collider",
 	"CubeMapInfo",
 	"DDSInfo",
 	"DeepImmutable",
 	"DevicePose",
+	"DistanceJointData",
+	"DistanceJointData",
+	"Document",
+	"EffectWrapperCreationOptions",
+	"EffectWrapperCreationOptions",
+	"EngineCapabilities",
+	"EngineOptions",
+	"EngineOptions",
+	"EnvironmentTextureInfo",
 	"Event",
 	"Float32Array",
 	"FloatArray",
+	"HDRInfo",
 	"HTMLCanvasElement",
 	"HTMLElement",
 	"HTMLImageElement",
@@ -588,33 +633,135 @@ var unhandledTypes = []string{
 	"IAction",
 	"IActionEvent",
 	"IAnimatable",
-	"IAnimationKey",
+	"IAnimation",
 	"IArrayItem",
+	"IBufferView",
+	"ICamera",
 	"ICameraInput",
+	"IColor3Like",
+	"IColor3Like",
+	"IColor4Like",
 	"ICullable",
 	"IDataBuffer",
+	"IDataBuffer",
+	"IDisplayChangedEventArgs",
 	"IEasingFunction",
+	"IEffectFallbacks",
+	"IEffectFallbacks",
+	"IEffectRendererOptions",
+	"IEffectRendererOptions",
+	"IEnvironmentHelperOptions",
+	"IEnvironmentHelperOptions",
+	"IExportOptions",
 	"IFocusableControl",
+	"IGlowLayerOptions",
+	"IGlowLayerOptions",
+	"IHighlightLayerOptions",
+	"IHighlightLayerOptions",
+	"IHtmlElementTextureOptions",
+	"IHtmlElementTextureOptions",
+	"IImage",
+	"IImageProcessingConfigurationDefines",
 	"IInspectorOptions",
+	"IInternalTextureLoader",
+	"ILoadingScreen",
+	"IMaterial",
+	"IMaterialAnisotropicDefines",
+	"IMaterialBRDFDefines",
+	"IMaterialClearCoatDefines",
 	"IMaterialCompilationOptions",
+	"IMaterialSheenDefines",
+	"IMaterialSubSurfaceDefines",
+	"IMatrixLike",
 	"IMotorEnabledJoint",
+	"IMultiRenderTargetOptions",
+	"IMultiRenderTargetOptions",
+	"INode",
+	"INodeMaterialEditorOptions",
+	"INodeMaterialOptions",
+	"IOceanPostProcessOptions",
+	"IOceanPostProcessOptions",
+	"IParticleSystem",
+	"IPhysicsEnabledObject",
 	"IPhysicsEnginePlugin",
+	"IPipelineContext",
+	"IPlaneLike",
+	"IProperty",
+	"IScene",
+	"ISceneLike",
+	"IShaderMaterialOptions",
+	"IShadowGenerator",
+	"IShadowLight",
+	"IShadowLight",
 	"ISize",
+	"ISmartArrayLike",
+	"ISoundOptions",
+	"ISoundTrackOptions",
+	"ISpriteManager",
+	"ITextureInfo",
+	"IValueGradient",
+	"IVector2Like",
+	"IVector3Like",
+	"IVector4Like",
+	"IViewportLike",
+	"IViewportOwnerLike",
 	"IndicesArray",
 	"IndividualBabylonFileParser",
+	"Int32Array",
+	"InternalTextureSource",
+	"InternalTextureSource",
 	"KeyboardEvent",
+	"MeshLoadOptions",
+	"MeshLoadOptions",
 	"NodeConstructor",
 	"NodeMaterialBlockConnectionPointTypes",
+	"NodeMaterialBlockConnectionPointTypes",
 	"NodeMaterialBlockTargets",
+	"NodeMaterialBlockTargets",
+	"NodeMaterialConnectionPointCompatibilityStates",
+	"NodeMaterialConnectionPointDirection",
+	"NodeMaterialConnectionPointDirection",
 	"NodeMaterialDefines",
+	"NodeMaterialSystemValues",
+	"PBRMaterialDefines",
+	"PhysicsGravitationalFieldEventData",
 	"PhysicsImpostorJoint",
+	"PhysicsImpostorParameters",
+	"PhysicsJointData",
+	"PhysicsJointData",
+	"PhysicsRadialImpulseFalloff",
+	"PhysicsUpdraftMode",
 	"PointerEvent",
+	"PointerEventInit",
+	"SceneOptions",
+	"SimplificationType",
 	"Space",
+	"SpringJointData",
 	"StandardMaterialDefines",
+	"TonemappingOperator",
 	"TrianglePickingPredicate",
 	"Uint8Array",
+	"VRExperienceHelperOptions",
+	"VideoRecorderOptions",
+	"VideoTextureSettings",
+	"WebGLBuffer",
+	"WebGLProgram",
+	"WebGLQuery",
 	"WebGLRenderingContext",
+	"WebGLTransformFeedback",
+	"WebGLUniformLocation",
+	"WebGLVertexArrayObject",
+	"WebVROptions",
+	"WebVROptions",
+	"WebXRState",
+	"Window",
 	"Worker",
+	"XRInputSource",
+	"XRReferenceSpaceType",
+	"XRSessionMode",
+	"_InstancesBatch",
+	"_TimeToken",
 	"null",
 	"object",
+	"unknown",
 }

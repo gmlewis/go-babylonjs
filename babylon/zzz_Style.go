@@ -28,6 +28,15 @@ func StyleFromJSObject(p js.Value, ctx js.Value) *Style {
 	return &Style{p: p, ctx: ctx}
 }
 
+// StyleArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StyleArrayToJSArray(array []*Style) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStyle returns a new Style object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style
@@ -46,9 +55,7 @@ func (ba *Babylon) NewStyle(host *AdvancedDynamicTexture) *Style {
 // https://doc.babylonjs.com/api/classes/babylon.style#dispose
 func (s *Style) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 /*

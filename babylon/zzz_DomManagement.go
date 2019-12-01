@@ -28,6 +28,15 @@ func DomManagementFromJSObject(p js.Value, ctx js.Value) *DomManagement {
 	return &DomManagement{p: p, ctx: ctx}
 }
 
+// DomManagementArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DomManagementArrayToJSArray(array []*DomManagement) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // GetDOMTextContent calls the GetDOMTextContent method on the DomManagement object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dommanagement#getdomtextcontent
@@ -46,9 +55,7 @@ func (d *DomManagement) GetDOMTextContent(element js.Value) string {
 // https://doc.babylonjs.com/api/classes/babylon.dommanagement#isnavigatoravailable
 func (d *DomManagement) IsNavigatorAvailable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("IsNavigatorAvailable", args...)
+	retVal := d.p.Call("IsNavigatorAvailable")
 	return retVal.Bool()
 }
 
@@ -57,9 +64,7 @@ func (d *DomManagement) IsNavigatorAvailable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.dommanagement#iswindowobjectexist
 func (d *DomManagement) IsWindowObjectExist() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("IsWindowObjectExist", args...)
+	retVal := d.p.Call("IsWindowObjectExist")
 	return retVal.Bool()
 }
 

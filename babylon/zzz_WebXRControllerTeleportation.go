@@ -27,6 +27,15 @@ func WebXRControllerTeleportationFromJSObject(p js.Value, ctx js.Value) *WebXRCo
 	return &WebXRControllerTeleportation{p: p, ctx: ctx}
 }
 
+// WebXRControllerTeleportationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRControllerTeleportationArrayToJSArray(array []*WebXRControllerTeleportation) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWebXRControllerTeleportationOpts contains optional parameters for NewWebXRControllerTeleportation.
 type NewWebXRControllerTeleportationOpts struct {
 	FloorMeshes []js.Value

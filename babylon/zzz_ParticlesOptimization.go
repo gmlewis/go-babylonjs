@@ -29,6 +29,15 @@ func ParticlesOptimizationFromJSObject(p js.Value, ctx js.Value) *ParticlesOptim
 	return &ParticlesOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ParticlesOptimizationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ParticlesOptimizationArrayToJSArray(array []*ParticlesOptimization) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewParticlesOptimizationOpts contains optional parameters for NewParticlesOptimization.
 type NewParticlesOptimizationOpts struct {
 	Priority *float64
@@ -73,9 +82,7 @@ func (p *ParticlesOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) b
 // https://doc.babylonjs.com/api/classes/babylon.particlesoptimization#getdescription
 func (p *ParticlesOptimization) GetDescription() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getDescription", args...)
+	retVal := p.p.Call("getDescription")
 	return retVal.String()
 }
 

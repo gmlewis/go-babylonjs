@@ -27,6 +27,15 @@ func SolidParticleFromJSObject(p js.Value, ctx js.Value) *SolidParticle {
 	return &SolidParticle{p: p, ctx: ctx}
 }
 
+// SolidParticleArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SolidParticleArrayToJSArray(array []*SolidParticle) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSolidParticleOpts contains optional parameters for NewSolidParticle.
 type NewSolidParticleOpts struct {
 	ModelBoundingInfo *BoundingInfo

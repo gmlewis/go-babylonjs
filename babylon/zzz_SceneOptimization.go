@@ -29,6 +29,15 @@ func SceneOptimizationFromJSObject(p js.Value, ctx js.Value) *SceneOptimization 
 	return &SceneOptimization{p: p, ctx: ctx}
 }
 
+// SceneOptimizationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SceneOptimizationArrayToJSArray(array []*SceneOptimization) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSceneOptimizationOpts contains optional parameters for NewSceneOptimization.
 type NewSceneOptimizationOpts struct {
 	Priority *float64
@@ -73,9 +82,7 @@ func (s *SceneOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) bool 
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimization#getdescription
 func (s *SceneOptimization) GetDescription() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getDescription", args...)
+	retVal := s.p.Call("getDescription")
 	return retVal.String()
 }
 

@@ -29,6 +29,15 @@ func EasingFunctionFromJSObject(p js.Value, ctx js.Value) *EasingFunction {
 	return &EasingFunction{p: p, ctx: ctx}
 }
 
+// EasingFunctionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EasingFunctionArrayToJSArray(array []*EasingFunction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Ease calls the Ease method on the EasingFunction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.easingfunction#ease
@@ -47,9 +56,7 @@ func (e *EasingFunction) Ease(gradient float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.easingfunction#geteasingmode
 func (e *EasingFunction) GetEasingMode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("getEasingMode", args...)
+	retVal := e.p.Call("getEasingMode")
 	return retVal.Float()
 }
 

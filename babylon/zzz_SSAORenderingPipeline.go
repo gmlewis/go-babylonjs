@@ -27,6 +27,15 @@ func SSAORenderingPipelineFromJSObject(p js.Value, ctx js.Value) *SSAORenderingP
 	return &SSAORenderingPipeline{PostProcessRenderPipeline: PostProcessRenderPipelineFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SSAORenderingPipelineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SSAORenderingPipelineArrayToJSArray(array []*SSAORenderingPipeline) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSSAORenderingPipelineOpts contains optional parameters for NewSSAORenderingPipeline.
 type NewSSAORenderingPipelineOpts struct {
 	Cameras *Camera
@@ -97,9 +106,7 @@ func (s *SSAORenderingPipeline) Dispose(opts *SSAORenderingPipelineDisposeOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#getclassname
 func (s *SSAORenderingPipeline) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 

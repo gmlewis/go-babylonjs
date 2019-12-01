@@ -30,6 +30,15 @@ func TGAToolsFromJSObject(p js.Value, ctx js.Value) *TGATools {
 	return &TGATools{p: p, ctx: ctx}
 }
 
+// TGAToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TGAToolsArrayToJSArray(array []*TGATools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // GetTGAHeader calls the GetTGAHeader method on the TGATools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tgatools#gettgaheader

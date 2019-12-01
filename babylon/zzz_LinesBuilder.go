@@ -27,6 +27,15 @@ func LinesBuilderFromJSObject(p js.Value, ctx js.Value) *LinesBuilder {
 	return &LinesBuilder{p: p, ctx: ctx}
 }
 
+// LinesBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LinesBuilderArrayToJSArray(array []*LinesBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // LinesBuilderCreateDashedLinesOpts contains optional parameters for LinesBuilder.CreateDashedLines.
 type LinesBuilderCreateDashedLinesOpts struct {
 	Scene *Scene

@@ -30,12 +30,21 @@ func VideoTextureFromJSObject(p js.Value, ctx js.Value) *VideoTexture {
 	return &VideoTexture{Texture: TextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VideoTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VideoTextureArrayToJSArray(array []*VideoTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVideoTextureOpts contains optional parameters for NewVideoTexture.
 type NewVideoTextureOpts struct {
 	GenerateMipMaps *bool
 	InvertY         *bool
 	SamplingMode    *float64
-	Settings        *VideoTextureSettings
+	Settings        js.Value
 }
 
 // NewVideoTexture returns a new VideoTexture object.
@@ -70,7 +79,7 @@ func (ba *Babylon) NewVideoTexture(name string, src string, scene *Scene, opts *
 	if opts.Settings == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Settings.JSObject())
+		args = append(args, opts.Settings)
 	}
 
 	p := ba.ctx.Get("VideoTexture").New(args...)
@@ -82,9 +91,7 @@ func (ba *Babylon) NewVideoTexture(name string, src string, scene *Scene, opts *
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#clone
 func (v *VideoTexture) Clone() *Texture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("clone", args...)
+	retVal := v.p.Call("clone")
 	return TextureFromJSObject(retVal, v.ctx)
 }
 
@@ -150,7 +157,7 @@ func (v *VideoTexture) CreateFromBase64String(data string, name string, scene *S
 // CreateFromStreamAsync calls the CreateFromStreamAsync method on the VideoTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#createfromstreamasync
-func (v *VideoTexture) CreateFromStreamAsync(scene *Scene, stream *MediaStream) *VideoTexture {
+func (v *VideoTexture) CreateFromStreamAsync(scene *Scene, stream *MediaStream) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -158,7 +165,7 @@ func (v *VideoTexture) CreateFromStreamAsync(scene *Scene, stream *MediaStream) 
 	args = append(args, stream.JSObject())
 
 	retVal := v.p.Call("CreateFromStreamAsync", args...)
-	return VideoTextureFromJSObject(retVal, v.ctx)
+	return PromiseFromJSObject(retVal, v.ctx)
 }
 
 // VideoTextureCreateFromWebCamOpts contains optional parameters for VideoTexture.CreateFromWebCam.
@@ -177,7 +184,7 @@ func (v *VideoTexture) CreateFromWebCam(scene *Scene, onReady func(), constraint
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onReady)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onReady(); return nil }))
 	args = append(args, constraints)
 
 	if opts.AudioConstaints == nil {
@@ -197,7 +204,7 @@ type VideoTextureCreateFromWebCamAsyncOpts struct {
 // CreateFromWebCamAsync calls the CreateFromWebCamAsync method on the VideoTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#createfromwebcamasync
-func (v *VideoTexture) CreateFromWebCamAsync(scene *Scene, constraints js.Value, opts *VideoTextureCreateFromWebCamAsyncOpts) *VideoTexture {
+func (v *VideoTexture) CreateFromWebCamAsync(scene *Scene, constraints js.Value, opts *VideoTextureCreateFromWebCamAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &VideoTextureCreateFromWebCamAsyncOpts{}
 	}
@@ -214,7 +221,7 @@ func (v *VideoTexture) CreateFromWebCamAsync(scene *Scene, constraints js.Value,
 	}
 
 	retVal := v.p.Call("CreateFromWebCamAsync", args...)
-	return VideoTextureFromJSObject(retVal, v.ctx)
+	return PromiseFromJSObject(retVal, v.ctx)
 }
 
 // Dispose calls the Dispose method on the VideoTexture object.
@@ -222,9 +229,7 @@ func (v *VideoTexture) CreateFromWebCamAsync(scene *Scene, constraints js.Value,
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#dispose
 func (v *VideoTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the VideoTexture object.
@@ -232,9 +237,7 @@ func (v *VideoTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#getbasesize
 func (v *VideoTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getBaseSize", args...)
+	retVal := v.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -243,9 +246,7 @@ func (v *VideoTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#getclassname
 func (v *VideoTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -254,9 +255,7 @@ func (v *VideoTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#getinternaltexture
 func (v *VideoTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getInternalTexture", args...)
+	retVal := v.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, v.ctx)
 }
 
@@ -265,9 +264,7 @@ func (v *VideoTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#getreflectiontexturematrix
 func (v *VideoTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getReflectionTextureMatrix", args...)
+	retVal := v.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, v.ctx)
 }
 
@@ -276,9 +273,7 @@ func (v *VideoTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#getscene
 func (v *VideoTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getScene", args...)
+	retVal := v.p.Call("getScene")
 	return SceneFromJSObject(retVal, v.ctx)
 }
 
@@ -287,9 +282,7 @@ func (v *VideoTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#getsize
 func (v *VideoTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getSize", args...)
+	retVal := v.p.Call("getSize")
 	return retVal
 }
 
@@ -323,9 +316,7 @@ func (v *VideoTexture) GetTextureMatrix(opts *VideoTextureGetTextureMatrixOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#isready
 func (v *VideoTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("isReady", args...)
+	retVal := v.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -334,9 +325,7 @@ func (v *VideoTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#isreadyornotblocking
 func (v *VideoTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("isReadyOrNotBlocking", args...)
+	retVal := v.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -462,9 +451,7 @@ func (v *VideoTexture) ReadPixels(opts *VideoTextureReadPixelsOpts) js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#releaseinternaltexture
 func (v *VideoTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("releaseInternalTexture", args...)
+	v.p.Call("releaseInternalTexture")
 }
 
 // Scale calls the Scale method on the VideoTexture object.
@@ -484,9 +471,7 @@ func (v *VideoTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#serialize
 func (v *VideoTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("serialize", args...)
+	retVal := v.p.Call("serialize")
 	return retVal
 }
 
@@ -495,9 +480,7 @@ func (v *VideoTexture) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#tostring
 func (v *VideoTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("toString", args...)
+	retVal := v.p.Call("toString")
 	return retVal.String()
 }
 
@@ -506,9 +489,7 @@ func (v *VideoTexture) ToString() string {
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#update
 func (v *VideoTexture) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("update", args...)
+	v.p.Call("update")
 }
 
 // UpdateSamplingMode calls the UpdateSamplingMode method on the VideoTexture object.
@@ -555,7 +536,7 @@ func (v *VideoTexture) WhenAllReady(textures *BaseTexture, callback func()) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	v.p.Call("WhenAllReady", args...)
 }
@@ -1366,7 +1347,7 @@ func (v *VideoTexture) SetNoMipmap(noMipmap bool) *VideoTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#ondispose
 func (v *VideoTexture) OnDispose(onDispose func()) *VideoTexture {
-	p := ba.ctx.Get("VideoTexture").New(onDispose)
+	p := ba.ctx.Get("VideoTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return VideoTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1374,7 +1355,7 @@ func (v *VideoTexture) OnDispose(onDispose func()) *VideoTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#ondispose
 func (v *VideoTexture) SetOnDispose(onDispose func()) *VideoTexture {
-	p := ba.ctx.Get("VideoTexture").New(onDispose)
+	p := ba.ctx.Get("VideoTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return VideoTextureFromJSObject(p, ba.ctx)
 }
 

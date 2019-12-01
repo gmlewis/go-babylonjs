@@ -27,6 +27,15 @@ func AbstractMeshFromJSObject(p js.Value, ctx js.Value) *AbstractMesh {
 	return &AbstractMesh{TransformNode: TransformNodeFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AbstractMeshArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AbstractMeshArrayToJSArray(array []*AbstractMesh) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAbstractMeshOpts contains optional parameters for NewAbstractMesh.
 type NewAbstractMeshOpts struct {
 	Scene *Scene
@@ -56,7 +65,7 @@ func (ba *Babylon) NewAbstractMesh(name string, opts *NewAbstractMeshOpts) *Abst
 
 // AbstractMeshAddBehaviorOpts contains optional parameters for AbstractMesh.AddBehavior.
 type AbstractMeshAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the AbstractMesh object.
@@ -74,7 +83,7 @@ func (a *AbstractMesh) AddBehavior(behavior js.Value, opts *AbstractMeshAddBehav
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := a.p.Call("addBehavior", args...)
@@ -364,7 +373,7 @@ type AbstractMeshCreateOrUpdateSubmeshesOctreeOpts struct {
 // CreateOrUpdateSubmeshesOctree calls the CreateOrUpdateSubmeshesOctree method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#createorupdatesubmeshesoctree
-func (a *AbstractMesh) CreateOrUpdateSubmeshesOctree(opts *AbstractMeshCreateOrUpdateSubmeshesOctreeOpts) *SubMesh {
+func (a *AbstractMesh) CreateOrUpdateSubmeshesOctree(opts *AbstractMeshCreateOrUpdateSubmeshesOctreeOpts) *Octree {
 	if opts == nil {
 		opts = &AbstractMeshCreateOrUpdateSubmeshesOctreeOpts{}
 	}
@@ -383,7 +392,7 @@ func (a *AbstractMesh) CreateOrUpdateSubmeshesOctree(opts *AbstractMeshCreateOrU
 	}
 
 	retVal := a.p.Call("createOrUpdateSubmeshesOctree", args...)
-	return SubMeshFromJSObject(retVal, a.ctx)
+	return OctreeFromJSObject(retVal, a.ctx)
 }
 
 // AbstractMeshDeleteAnimationRangeOpts contains optional parameters for AbstractMesh.DeleteAnimationRange.
@@ -417,9 +426,7 @@ func (a *AbstractMesh) DeleteAnimationRange(name string, opts *AbstractMeshDelet
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#detachfrombone
 func (a *AbstractMesh) DetachFromBone() *TransformNode {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("detachFromBone", args...)
+	retVal := a.p.Call("detachFromBone")
 	return TransformNodeFromJSObject(retVal, a.ctx)
 }
 
@@ -428,9 +435,7 @@ func (a *AbstractMesh) DetachFromBone() *TransformNode {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#disableedgesrendering
 func (a *AbstractMesh) DisableEdgesRendering() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("disableEdgesRendering", args...)
+	retVal := a.p.Call("disableEdgesRendering")
 	return AbstractMeshFromJSObject(retVal, a.ctx)
 }
 
@@ -439,9 +444,7 @@ func (a *AbstractMesh) DisableEdgesRendering() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#disablefacetdata
 func (a *AbstractMesh) DisableFacetData() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("disableFacetData", args...)
+	retVal := a.p.Call("disableFacetData")
 	return AbstractMeshFromJSObject(retVal, a.ctx)
 }
 
@@ -536,9 +539,7 @@ func (a *AbstractMesh) FreezeWorldMatrix(opts *AbstractMeshFreezeWorldMatrixOpts
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getabsolutepivotpoint
 func (a *AbstractMesh) GetAbsolutePivotPoint() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getAbsolutePivotPoint", args...)
+	retVal := a.p.Call("getAbsolutePivotPoint")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -560,9 +561,7 @@ func (a *AbstractMesh) GetAbsolutePivotPointToRef(result *Vector3) *TransformNod
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getabsoluteposition
 func (a *AbstractMesh) GetAbsolutePosition() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getAbsolutePosition", args...)
+	retVal := a.p.Call("getAbsolutePosition")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -597,23 +596,21 @@ func (a *AbstractMesh) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getanimationranges
 func (a *AbstractMesh) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getAnimationRanges", args...)
+	retVal := a.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, a.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getbehaviorbyname
-func (a *AbstractMesh) GetBehaviorByName(name string) *Node {
+func (a *AbstractMesh) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := a.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, a.ctx)
+	return retVal
 }
 
 // GetBoundingInfo calls the GetBoundingInfo method on the AbstractMesh object.
@@ -621,9 +618,7 @@ func (a *AbstractMesh) GetBehaviorByName(name string) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getboundinginfo
 func (a *AbstractMesh) GetBoundingInfo() *BoundingInfo {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getBoundingInfo", args...)
+	retVal := a.p.Call("getBoundingInfo")
 	return BoundingInfoFromJSObject(retVal, a.ctx)
 }
 
@@ -725,9 +720,7 @@ func (a *AbstractMesh) GetChildren(opts *AbstractMeshGetChildrenOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getclassname
 func (a *AbstractMesh) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -901,9 +894,7 @@ func (a *AbstractMesh) GetDistanceToCamera(opts *AbstractMeshGetDistanceToCamera
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getengine
 func (a *AbstractMesh) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getEngine", args...)
+	retVal := a.p.Call("getEngine")
 	return EngineFromJSObject(retVal, a.ctx)
 }
 
@@ -912,9 +903,7 @@ func (a *AbstractMesh) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getfacetdataparameters
 func (a *AbstractMesh) GetFacetDataParameters() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getFacetDataParameters", args...)
+	retVal := a.p.Call("getFacetDataParameters")
 	return retVal
 }
 
@@ -923,9 +912,7 @@ func (a *AbstractMesh) GetFacetDataParameters() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getfacetlocalnormals
 func (a *AbstractMesh) GetFacetLocalNormals() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getFacetLocalNormals", args...)
+	retVal := a.p.Call("getFacetLocalNormals")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -934,9 +921,7 @@ func (a *AbstractMesh) GetFacetLocalNormals() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getfacetlocalpartitioning
 func (a *AbstractMesh) GetFacetLocalPartitioning() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getFacetLocalPartitioning", args...)
+	retVal := a.p.Call("getFacetLocalPartitioning")
 	return retVal.Float()
 }
 
@@ -945,9 +930,7 @@ func (a *AbstractMesh) GetFacetLocalPartitioning() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getfacetlocalpositions
 func (a *AbstractMesh) GetFacetLocalPositions() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getFacetLocalPositions", args...)
+	retVal := a.p.Call("getFacetLocalPositions")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -1056,9 +1039,7 @@ func (a *AbstractMesh) GetHierarchyBoundingVectors(opts *AbstractMeshGetHierarch
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getindices
 func (a *AbstractMesh) GetIndices() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getIndices", args...)
+	retVal := a.p.Call("getIndices")
 	return retVal
 }
 
@@ -1080,9 +1061,7 @@ func (a *AbstractMesh) GetLOD(camera *Camera) *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getphysicsimpostor
 func (a *AbstractMesh) GetPhysicsImpostor() *PhysicsImpostor {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getPhysicsImpostor", args...)
+	retVal := a.p.Call("getPhysicsImpostor")
 	return PhysicsImpostorFromJSObject(retVal, a.ctx)
 }
 
@@ -1091,9 +1070,7 @@ func (a *AbstractMesh) GetPhysicsImpostor() *PhysicsImpostor {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getpivotmatrix
 func (a *AbstractMesh) GetPivotMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getPivotMatrix", args...)
+	retVal := a.p.Call("getPivotMatrix")
 	return MatrixFromJSObject(retVal, a.ctx)
 }
 
@@ -1102,9 +1079,7 @@ func (a *AbstractMesh) GetPivotMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getpivotpoint
 func (a *AbstractMesh) GetPivotPoint() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getPivotPoint", args...)
+	retVal := a.p.Call("getPivotPoint")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -1126,9 +1101,7 @@ func (a *AbstractMesh) GetPivotPointToRef(result *Vector3) *TransformNode {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getposematrix
 func (a *AbstractMesh) GetPoseMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getPoseMatrix", args...)
+	retVal := a.p.Call("getPoseMatrix")
 	return MatrixFromJSObject(retVal, a.ctx)
 }
 
@@ -1137,9 +1110,7 @@ func (a *AbstractMesh) GetPoseMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getpositionexpressedinlocalspace
 func (a *AbstractMesh) GetPositionExpressedInLocalSpace() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getPositionExpressedInLocalSpace", args...)
+	retVal := a.p.Call("getPositionExpressedInLocalSpace")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -1173,9 +1144,7 @@ func (a *AbstractMesh) GetPositionInCameraSpace(opts *AbstractMeshGetPositionInC
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getscene
 func (a *AbstractMesh) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getScene", args...)
+	retVal := a.p.Call("getScene")
 	return SceneFromJSObject(retVal, a.ctx)
 }
 
@@ -1184,9 +1153,7 @@ func (a *AbstractMesh) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#gettotalindices
 func (a *AbstractMesh) GetTotalIndices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTotalIndices", args...)
+	retVal := a.p.Call("getTotalIndices")
 	return retVal.Float()
 }
 
@@ -1195,9 +1162,7 @@ func (a *AbstractMesh) GetTotalIndices() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#gettotalvertices
 func (a *AbstractMesh) GetTotalVertices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTotalVertices", args...)
+	retVal := a.p.Call("getTotalVertices")
 	return retVal.Float()
 }
 
@@ -1219,9 +1184,7 @@ func (a *AbstractMesh) GetVerticesData(kind string) js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getworldmatrix
 func (a *AbstractMesh) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getWorldMatrix", args...)
+	retVal := a.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, a.ctx)
 }
 
@@ -1372,9 +1335,7 @@ func (a *AbstractMesh) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isdisposed
 func (a *AbstractMesh) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("isDisposed", args...)
+	retVal := a.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -1651,7 +1612,7 @@ func (a *AbstractMesh) RegisterAfterWorldMatrixUpdate(jsFunc func()) *TransformN
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := a.p.Call("registerAfterWorldMatrixUpdate", args...)
 	return TransformNodeFromJSObject(retVal, a.ctx)
@@ -1662,9 +1623,7 @@ func (a *AbstractMesh) RegisterAfterWorldMatrixUpdate(jsFunc func()) *TransformN
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#releasesubmeshes
 func (a *AbstractMesh) ReleaseSubMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("releaseSubMeshes", args...)
+	retVal := a.p.Call("releaseSubMeshes")
 	return AbstractMeshFromJSObject(retVal, a.ctx)
 }
 
@@ -1782,9 +1741,7 @@ func (a *AbstractMesh) Serialize(opts *AbstractMeshSerializeOpts) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#serializeanimationranges
 func (a *AbstractMesh) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("serializeAnimationRanges", args...)
+	retVal := a.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -2093,9 +2050,7 @@ func (a *AbstractMesh) Translate(axis *Vector3, distance float64, opts *Abstract
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#unfreezeworldmatrix
 func (a *AbstractMesh) UnfreezeWorldMatrix() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("unfreezeWorldMatrix", args...)
+	retVal := a.p.Call("unfreezeWorldMatrix")
 	return AbstractMeshFromJSObject(retVal, a.ctx)
 }
 
@@ -2106,7 +2061,7 @@ func (a *AbstractMesh) UnregisterAfterWorldMatrixUpdate(jsFunc func()) *Transfor
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := a.p.Call("unregisterAfterWorldMatrixUpdate", args...)
 	return TransformNodeFromJSObject(retVal, a.ctx)
@@ -2117,9 +2072,7 @@ func (a *AbstractMesh) UnregisterAfterWorldMatrixUpdate(jsFunc func()) *Transfor
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#updatefacetdata
 func (a *AbstractMesh) UpdateFacetData() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("updateFacetData", args...)
+	retVal := a.p.Call("updateFacetData")
 	return AbstractMeshFromJSObject(retVal, a.ctx)
 }
 
@@ -2560,16 +2513,16 @@ func (a *AbstractMesh) SetCheckCollisions(checkCollisions bool) *AbstractMesh {
 // Collider returns the Collider property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#collider
-func (a *AbstractMesh) Collider(collider *Collider) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(collider.JSObject())
+func (a *AbstractMesh) Collider(collider js.Value) *AbstractMesh {
+	p := ba.ctx.Get("AbstractMesh").New(collider)
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
 // SetCollider sets the Collider property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#collider
-func (a *AbstractMesh) SetCollider(collider *Collider) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(collider.JSObject())
+func (a *AbstractMesh) SetCollider(collider js.Value) *AbstractMesh {
+	p := ba.ctx.Get("AbstractMesh").New(collider)
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
@@ -3361,7 +3314,7 @@ func (a *AbstractMesh) SetOnAfterWorldMatrixUpdateObservable(onAfterWorldMatrixU
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollide
 func (a *AbstractMesh) OnCollide(onCollide func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onCollide)
+	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
@@ -3369,7 +3322,7 @@ func (a *AbstractMesh) OnCollide(onCollide func()) *AbstractMesh {
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollide
 func (a *AbstractMesh) SetOnCollide(onCollide func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onCollide)
+	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
@@ -3393,7 +3346,7 @@ func (a *AbstractMesh) SetOnCollideObservable(onCollideObservable *Observable) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollisionpositionchange
 func (a *AbstractMesh) OnCollisionPositionChange(onCollisionPositionChange func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onCollisionPositionChange)
+	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollisionPositionChange(); return nil}))
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
@@ -3401,7 +3354,7 @@ func (a *AbstractMesh) OnCollisionPositionChange(onCollisionPositionChange func(
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollisionpositionchange
 func (a *AbstractMesh) SetOnCollisionPositionChange(onCollisionPositionChange func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onCollisionPositionChange)
+	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollisionPositionChange(); return nil}))
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
@@ -3425,7 +3378,7 @@ func (a *AbstractMesh) SetOnCollisionPositionChangeObservable(onCollisionPositio
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#ondispose
 func (a *AbstractMesh) OnDispose(onDispose func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onDispose)
+	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
@@ -3433,7 +3386,7 @@ func (a *AbstractMesh) OnDispose(onDispose func()) *AbstractMesh {
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#ondispose
 func (a *AbstractMesh) SetOnDispose(onDispose func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onDispose)
+	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
@@ -3473,7 +3426,7 @@ func (a *AbstractMesh) SetOnMaterialChangedObservable(onMaterialChangedObservabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#onready
 func (a *AbstractMesh) OnReady(onReady func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onReady)
+	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
@@ -3481,7 +3434,7 @@ func (a *AbstractMesh) OnReady(onReady func()) *AbstractMesh {
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#onready
 func (a *AbstractMesh) SetOnReady(onReady func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onReady)
+	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 

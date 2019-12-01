@@ -29,6 +29,15 @@ func PostProcessRenderPipelineFromJSObject(p js.Value, ctx js.Value) *PostProces
 	return &PostProcessRenderPipeline{p: p, ctx: ctx}
 }
 
+// PostProcessRenderPipelineArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PostProcessRenderPipelineArrayToJSArray(array []*PostProcessRenderPipeline) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPostProcessRenderPipeline returns a new PostProcessRenderPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline
@@ -60,9 +69,7 @@ func (p *PostProcessRenderPipeline) AddEffect(renderEffect *PostProcessRenderEff
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#dispose
 func (p *PostProcessRenderPipeline) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the PostProcessRenderPipeline object.
@@ -70,9 +77,7 @@ func (p *PostProcessRenderPipeline) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#getclassname
 func (p *PostProcessRenderPipeline) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 

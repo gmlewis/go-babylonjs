@@ -27,6 +27,15 @@ func WebXRControllerFromJSObject(p js.Value, ctx js.Value) *WebXRController {
 	return &WebXRController{p: p, ctx: ctx}
 }
 
+// WebXRControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRControllerArrayToJSArray(array []*WebXRController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWebXRControllerOpts contains optional parameters for NewWebXRController.
 type NewWebXRControllerOpts struct {
 	ParentContainer *AbstractMesh
@@ -35,7 +44,7 @@ type NewWebXRControllerOpts struct {
 // NewWebXRController returns a new WebXRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller
-func (ba *Babylon) NewWebXRController(scene *Scene, inputSource *XRInputSource, opts *NewWebXRControllerOpts) *WebXRController {
+func (ba *Babylon) NewWebXRController(scene *Scene, inputSource js.Value, opts *NewWebXRControllerOpts) *WebXRController {
 	if opts == nil {
 		opts = &NewWebXRControllerOpts{}
 	}
@@ -43,7 +52,7 @@ func (ba *Babylon) NewWebXRController(scene *Scene, inputSource *XRInputSource, 
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, scene.JSObject())
-	args = append(args, inputSource.JSObject())
+	args = append(args, inputSource)
 
 	if opts.ParentContainer == nil {
 		args = append(args, js.Undefined())
@@ -60,9 +69,7 @@ func (ba *Babylon) NewWebXRController(scene *Scene, inputSource *XRInputSource, 
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#dispose
 func (w *WebXRController) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 // GetScene calls the GetScene method on the WebXRController object.
@@ -70,9 +77,7 @@ func (w *WebXRController) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#getscene
 func (w *WebXRController) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("getScene", args...)
+	retVal := w.p.Call("getScene")
 	return SceneFromJSObject(retVal, w.ctx)
 }
 
@@ -138,16 +143,16 @@ func (w *WebXRController) SetGrip(grip *AbstractMesh) *WebXRController {
 // InputSource returns the InputSource property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#inputsource
-func (w *WebXRController) InputSource(inputSource *XRInputSource) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(inputSource.JSObject())
+func (w *WebXRController) InputSource(inputSource js.Value) *WebXRController {
+	p := ba.ctx.Get("WebXRController").New(inputSource)
 	return WebXRControllerFromJSObject(p, ba.ctx)
 }
 
 // SetInputSource sets the InputSource property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#inputsource
-func (w *WebXRController) SetInputSource(inputSource *XRInputSource) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(inputSource.JSObject())
+func (w *WebXRController) SetInputSource(inputSource js.Value) *WebXRController {
+	p := ba.ctx.Get("WebXRController").New(inputSource)
 	return WebXRControllerFromJSObject(p, ba.ctx)
 }
 

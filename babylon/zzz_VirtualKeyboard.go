@@ -27,6 +27,15 @@ func VirtualKeyboardFromJSObject(p js.Value, ctx js.Value) *VirtualKeyboard {
 	return &VirtualKeyboard{StackPanel: StackPanelFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VirtualKeyboardArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VirtualKeyboardArrayToJSArray(array []*VirtualKeyboard) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVirtualKeyboardOpts contains optional parameters for NewVirtualKeyboard.
 type NewVirtualKeyboardOpts struct {
 	Name *string
@@ -73,14 +82,14 @@ type VirtualKeyboardAddKeysRowOpts struct {
 // AddKeysRow calls the AddKeysRow method on the VirtualKeyboard object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#addkeysrow
-func (v *VirtualKeyboard) AddKeysRow(keys []string, opts *VirtualKeyboardAddKeysRowOpts) {
+func (v *VirtualKeyboard) AddKeysRow(keys []*string, opts *VirtualKeyboardAddKeysRowOpts) {
 	if opts == nil {
 		opts = &VirtualKeyboardAddKeysRowOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, keys)
+	args = append(args, stringArrayToJSArray(keys))
 
 	if opts.PropertySets == nil {
 		args = append(args, js.Undefined())
@@ -108,9 +117,7 @@ func (v *VirtualKeyboard) ApplyShiftState(shiftState float64) {
 // https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#clearcontrols
 func (v *VirtualKeyboard) ClearControls() *Container {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("clearControls", args...)
+	retVal := v.p.Call("clearControls")
 	return ContainerFromJSObject(retVal, v.ctx)
 }
 
@@ -207,9 +214,7 @@ func (v *VirtualKeyboard) Disconnect(opts *VirtualKeyboardDisconnectOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#dispose
 func (v *VirtualKeyboard) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the VirtualKeyboard object.
@@ -257,9 +262,7 @@ func (v *VirtualKeyboard) GetChildByType(name string, jsType string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#getclassname
 func (v *VirtualKeyboard) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -422,9 +425,7 @@ func (v *VirtualKeyboard) RemoveControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#_flagdescendantsasmatrixdirty
 func (v *VirtualKeyboard) _flagDescendantsAsMatrixDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("_flagDescendantsAsMatrixDirty", args...)
+	v.p.Call("_flagDescendantsAsMatrixDirty")
 }
 
 /*

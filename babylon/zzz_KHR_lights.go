@@ -27,6 +27,15 @@ func KHR_lightsFromJSObject(p js.Value, ctx js.Value) *KHR_lights {
 	return &KHR_lights{p: p, ctx: ctx}
 }
 
+// KHR_lightsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KHR_lightsArrayToJSArray(array []*KHR_lights) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class KHR_lights.

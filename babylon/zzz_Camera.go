@@ -29,6 +29,15 @@ func CameraFromJSObject(p js.Value, ctx js.Value) *Camera {
 	return &Camera{Node: NodeFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CameraArrayToJSArray(array []*Camera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCameraOpts contains optional parameters for NewCamera.
 type NewCameraOpts struct {
 	SetActiveOnSceneIfNoneActive *bool
@@ -60,7 +69,7 @@ func (ba *Babylon) NewCamera(name string, position *Vector3, scene *Scene, opts 
 
 // CameraAddBehaviorOpts contains optional parameters for Camera.AddBehavior.
 type CameraAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the Camera object.
@@ -78,7 +87,7 @@ func (c *Camera) AddBehavior(behavior js.Value, opts *CameraAddBehaviorOpts) *No
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := c.p.Call("addBehavior", args...)
@@ -208,9 +217,7 @@ func (c *Camera) Clone(name string) *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.camera#computeworldmatrix
 func (c *Camera) ComputeWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("computeWorldMatrix", args...)
+	retVal := c.p.Call("computeWorldMatrix")
 	return MatrixFromJSObject(retVal, c.ctx)
 }
 
@@ -364,12 +371,10 @@ func (c *Camera) FreezeProjectionMatrix(opts *CameraFreezeProjectionMatrixOpts) 
 // GetActiveMeshes calls the GetActiveMeshes method on the Camera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#getactivemeshes
-func (c *Camera) GetActiveMeshes() *AbstractMesh {
+func (c *Camera) GetActiveMeshes() *SmartArray {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getActiveMeshes", args...)
-	return AbstractMeshFromJSObject(retVal, c.ctx)
+	retVal := c.p.Call("getActiveMeshes")
+	return SmartArrayFromJSObject(retVal, c.ctx)
 }
 
 // GetAnimationByName calls the GetAnimationByName method on the Camera object.
@@ -403,23 +408,21 @@ func (c *Camera) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.camera#getanimationranges
 func (c *Camera) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getAnimationRanges", args...)
+	retVal := c.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, c.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the Camera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#getbehaviorbyname
-func (c *Camera) GetBehaviorByName(name string) *Node {
+func (c *Camera) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := c.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, c.ctx)
+	return retVal
 }
 
 // CameraGetChildMeshesOpts contains optional parameters for Camera.GetChildMeshes.
@@ -489,9 +492,7 @@ func (c *Camera) GetChildren(opts *CameraGetChildrenOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.camera#getclassname
 func (c *Camera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -592,9 +593,7 @@ func (c *Camera) GetDirectionToRef(localAxis *Vector3, result *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.camera#getengine
 func (c *Camera) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEngine", args...)
+	retVal := c.p.Call("getEngine")
 	return EngineFromJSObject(retVal, c.ctx)
 }
 
@@ -671,9 +670,7 @@ func (c *Camera) GetHierarchyBoundingVectors(opts *CameraGetHierarchyBoundingVec
 // https://doc.babylonjs.com/api/classes/babylon.camera#getlefttarget
 func (c *Camera) GetLeftTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getLeftTarget", args...)
+	retVal := c.p.Call("getLeftTarget")
 	return Vector3FromJSObject(retVal, c.ctx)
 }
 
@@ -707,9 +704,7 @@ func (c *Camera) GetProjectionMatrix(opts *CameraGetProjectionMatrixOpts) *Matri
 // https://doc.babylonjs.com/api/classes/babylon.camera#getrighttarget
 func (c *Camera) GetRightTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getRightTarget", args...)
+	retVal := c.p.Call("getRightTarget")
 	return Vector3FromJSObject(retVal, c.ctx)
 }
 
@@ -718,9 +713,7 @@ func (c *Camera) GetRightTarget() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.camera#getscene
 func (c *Camera) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getScene", args...)
+	retVal := c.p.Call("getScene")
 	return SceneFromJSObject(retVal, c.ctx)
 }
 
@@ -729,9 +722,7 @@ func (c *Camera) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.camera#gettransformationmatrix
 func (c *Camera) GetTransformationMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getTransformationMatrix", args...)
+	retVal := c.p.Call("getTransformationMatrix")
 	return MatrixFromJSObject(retVal, c.ctx)
 }
 
@@ -765,9 +756,7 @@ func (c *Camera) GetViewMatrix(opts *CameraGetViewMatrixOpts) *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.camera#getworldmatrix
 func (c *Camera) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getWorldMatrix", args...)
+	retVal := c.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, c.ctx)
 }
 
@@ -815,9 +804,7 @@ func (c *Camera) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.camera#isdisposed
 func (c *Camera) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("isDisposed", args...)
+	retVal := c.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -944,9 +931,7 @@ func (c *Camera) RemoveBehavior(behavior js.Value) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.camera#restorestate
 func (c *Camera) RestoreState() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("restoreState", args...)
+	retVal := c.p.Call("restoreState")
 	return retVal.Bool()
 }
 
@@ -955,9 +940,7 @@ func (c *Camera) RestoreState() bool {
 // https://doc.babylonjs.com/api/classes/babylon.camera#serialize
 func (c *Camera) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 
@@ -966,9 +949,7 @@ func (c *Camera) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.camera#serializeanimationranges
 func (c *Camera) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serializeAnimationRanges", args...)
+	retVal := c.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -989,9 +970,7 @@ func (c *Camera) SetEnabled(value bool) {
 // https://doc.babylonjs.com/api/classes/babylon.camera#storestate
 func (c *Camera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("storeState", args...)
+	retVal := c.p.Call("storeState")
 	return CameraFromJSObject(retVal, c.ctx)
 }
 
@@ -1025,9 +1004,7 @@ func (c *Camera) ToString(opts *CameraToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.camera#unfreezeprojectionmatrix
 func (c *Camera) UnfreezeProjectionMatrix() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("unfreezeProjectionMatrix", args...)
+	c.p.Call("unfreezeProjectionMatrix")
 }
 
 // Update calls the Update method on the Camera object.
@@ -1035,9 +1012,7 @@ func (c *Camera) UnfreezeProjectionMatrix() {
 // https://doc.babylonjs.com/api/classes/babylon.camera#update
 func (c *Camera) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("update", args...)
+	c.p.Call("update")
 }
 
 // _getFirstPostProcess calls the _getFirstPostProcess method on the Camera object.
@@ -1045,9 +1020,7 @@ func (c *Camera) Update() {
 // https://doc.babylonjs.com/api/classes/babylon.camera#_getfirstpostprocess
 func (c *Camera) _getFirstPostProcess() *PostProcess {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("_getFirstPostProcess", args...)
+	retVal := c.p.Call("_getFirstPostProcess")
 	return PostProcessFromJSObject(retVal, c.ctx)
 }
 
@@ -1553,7 +1526,7 @@ func (c *Camera) SetOnAfterCheckInputsObservable(onAfterCheckInputsObservable *O
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#ondispose
 func (c *Camera) OnDispose(onDispose func()) *Camera {
-	p := ba.ctx.Get("Camera").New(onDispose)
+	p := ba.ctx.Get("Camera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return CameraFromJSObject(p, ba.ctx)
 }
 
@@ -1561,7 +1534,7 @@ func (c *Camera) OnDispose(onDispose func()) *Camera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#ondispose
 func (c *Camera) SetOnDispose(onDispose func()) *Camera {
-	p := ba.ctx.Get("Camera").New(onDispose)
+	p := ba.ctx.Get("Camera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return CameraFromJSObject(p, ba.ctx)
 }
 
@@ -1601,7 +1574,7 @@ func (c *Camera) SetOnProjectionMatrixChangedObservable(onProjectionMatrixChange
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#onready
 func (c *Camera) OnReady(onReady func()) *Camera {
-	p := ba.ctx.Get("Camera").New(onReady)
+	p := ba.ctx.Get("Camera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return CameraFromJSObject(p, ba.ctx)
 }
 
@@ -1609,7 +1582,7 @@ func (c *Camera) OnReady(onReady func()) *Camera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#onready
 func (c *Camera) SetOnReady(onReady func()) *Camera {
-	p := ba.ctx.Get("Camera").New(onReady)
+	p := ba.ctx.Get("Camera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return CameraFromJSObject(p, ba.ctx)
 }
 

@@ -30,6 +30,15 @@ func DigitalRainFontTextureFromJSObject(p js.Value, ctx js.Value) *DigitalRainFo
 	return &DigitalRainFontTexture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DigitalRainFontTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DigitalRainFontTextureArrayToJSArray(array []*DigitalRainFontTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDigitalRainFontTextureOpts contains optional parameters for NewDigitalRainFontTexture.
 type NewDigitalRainFontTextureOpts struct {
 	Scene *Scene
@@ -64,9 +73,7 @@ func (ba *Babylon) NewDigitalRainFontTexture(name string, font string, text stri
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#clone
 func (d *DigitalRainFontTexture) Clone() *DigitalRainFontTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("clone", args...)
+	retVal := d.p.Call("clone")
 	return DigitalRainFontTextureFromJSObject(retVal, d.ctx)
 }
 
@@ -75,9 +82,7 @@ func (d *DigitalRainFontTexture) Clone() *DigitalRainFontTexture {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#delayload
 func (d *DigitalRainFontTexture) DelayLoad() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("delayLoad", args...)
+	d.p.Call("delayLoad")
 }
 
 // Dispose calls the Dispose method on the DigitalRainFontTexture object.
@@ -85,9 +90,7 @@ func (d *DigitalRainFontTexture) DelayLoad() {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#dispose
 func (d *DigitalRainFontTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the DigitalRainFontTexture object.
@@ -95,9 +98,7 @@ func (d *DigitalRainFontTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#getbasesize
 func (d *DigitalRainFontTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getBaseSize", args...)
+	retVal := d.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -106,9 +107,7 @@ func (d *DigitalRainFontTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#getclassname
 func (d *DigitalRainFontTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -117,9 +116,7 @@ func (d *DigitalRainFontTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#getinternaltexture
 func (d *DigitalRainFontTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getInternalTexture", args...)
+	retVal := d.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, d.ctx)
 }
 
@@ -128,9 +125,7 @@ func (d *DigitalRainFontTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#getreflectiontexturematrix
 func (d *DigitalRainFontTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getReflectionTextureMatrix", args...)
+	retVal := d.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, d.ctx)
 }
 
@@ -139,9 +134,7 @@ func (d *DigitalRainFontTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#getscene
 func (d *DigitalRainFontTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getScene", args...)
+	retVal := d.p.Call("getScene")
 	return SceneFromJSObject(retVal, d.ctx)
 }
 
@@ -150,9 +143,7 @@ func (d *DigitalRainFontTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#getsize
 func (d *DigitalRainFontTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getSize", args...)
+	retVal := d.p.Call("getSize")
 	return retVal
 }
 
@@ -161,9 +152,7 @@ func (d *DigitalRainFontTexture) GetSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#gettexturematrix
 func (d *DigitalRainFontTexture) GetTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getTextureMatrix", args...)
+	retVal := d.p.Call("getTextureMatrix")
 	return MatrixFromJSObject(retVal, d.ctx)
 }
 
@@ -172,9 +161,7 @@ func (d *DigitalRainFontTexture) GetTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#isready
 func (d *DigitalRainFontTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isReady", args...)
+	retVal := d.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -183,9 +170,7 @@ func (d *DigitalRainFontTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#isreadyornotblocking
 func (d *DigitalRainFontTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isReadyOrNotBlocking", args...)
+	retVal := d.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -245,9 +230,7 @@ func (d *DigitalRainFontTexture) ReadPixels(opts *DigitalRainFontTextureReadPixe
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#releaseinternaltexture
 func (d *DigitalRainFontTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("releaseInternalTexture", args...)
+	d.p.Call("releaseInternalTexture")
 }
 
 // Scale calls the Scale method on the DigitalRainFontTexture object.
@@ -267,9 +250,7 @@ func (d *DigitalRainFontTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#serialize
 func (d *DigitalRainFontTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("serialize", args...)
+	retVal := d.p.Call("serialize")
 	return retVal
 }
 
@@ -278,9 +259,7 @@ func (d *DigitalRainFontTexture) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#tostring
 func (d *DigitalRainFontTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("toString", args...)
+	retVal := d.p.Call("toString")
 	return retVal.String()
 }
 
@@ -304,7 +283,7 @@ func (d *DigitalRainFontTexture) WhenAllReady(textures *BaseTexture, callback fu
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	d.p.Call("WhenAllReady", args...)
 }
@@ -731,7 +710,7 @@ func (d *DigitalRainFontTexture) SetNoMipmap(noMipmap bool) *DigitalRainFontText
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#ondispose
 func (d *DigitalRainFontTexture) OnDispose(onDispose func()) *DigitalRainFontTexture {
-	p := ba.ctx.Get("DigitalRainFontTexture").New(onDispose)
+	p := ba.ctx.Get("DigitalRainFontTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return DigitalRainFontTextureFromJSObject(p, ba.ctx)
 }
 
@@ -739,7 +718,7 @@ func (d *DigitalRainFontTexture) OnDispose(onDispose func()) *DigitalRainFontTex
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#ondispose
 func (d *DigitalRainFontTexture) SetOnDispose(onDispose func()) *DigitalRainFontTexture {
-	p := ba.ctx.Get("DigitalRainFontTexture").New(onDispose)
+	p := ba.ctx.Get("DigitalRainFontTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return DigitalRainFontTextureFromJSObject(p, ba.ctx)
 }
 

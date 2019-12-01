@@ -27,6 +27,15 @@ func PerturbNormalBlockFromJSObject(p js.Value, ctx js.Value) *PerturbNormalBloc
 	return &PerturbNormalBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PerturbNormalBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PerturbNormalBlockArrayToJSArray(array []*PerturbNormalBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPerturbNormalBlock returns a new PerturbNormalBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock
@@ -152,9 +161,7 @@ func (p *PerturbNormalBlock) ConnectTo(other *NodeMaterialBlock, opts *PerturbNo
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#dispose
 func (p *PerturbNormalBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the PerturbNormalBlock object.
@@ -162,9 +169,7 @@ func (p *PerturbNormalBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#getclassname
 func (p *PerturbNormalBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -435,9 +440,7 @@ func (p *PerturbNormalBlock) ReplaceRepeatableContent(vertexShaderState *NodeMat
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#serialize
 func (p *PerturbNormalBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 

@@ -27,6 +27,15 @@ func GradientBlockFromJSObject(p js.Value, ctx js.Value) *GradientBlock {
 	return &GradientBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// GradientBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GradientBlockArrayToJSArray(array []*GradientBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGradientBlock returns a new GradientBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock
@@ -152,9 +161,7 @@ func (g *GradientBlock) ConnectTo(other *NodeMaterialBlock, opts *GradientBlockC
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#dispose
 func (g *GradientBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the GradientBlock object.
@@ -162,9 +169,7 @@ func (g *GradientBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#getclassname
 func (g *GradientBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getClassName", args...)
+	retVal := g.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (g *GradientBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterial
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#serialize
 func (g *GradientBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("serialize", args...)
+	retVal := g.p.Call("serialize")
 	return retVal
 }
 

@@ -29,6 +29,15 @@ func FreeCameraKeyboardMoveInputFromJSObject(p js.Value, ctx js.Value) *FreeCame
 	return &FreeCameraKeyboardMoveInput{p: p, ctx: ctx}
 }
 
+// FreeCameraKeyboardMoveInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FreeCameraKeyboardMoveInputArrayToJSArray(array []*FreeCameraKeyboardMoveInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // FreeCameraKeyboardMoveInputAttachControlOpts contains optional parameters for FreeCameraKeyboardMoveInput.AttachControl.
 type FreeCameraKeyboardMoveInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -60,9 +69,7 @@ func (f *FreeCameraKeyboardMoveInput) AttachControl(element js.Value, opts *Free
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#checkinputs
 func (f *FreeCameraKeyboardMoveInput) CheckInputs() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("checkInputs", args...)
+	f.p.Call("checkInputs")
 }
 
 // DetachControl calls the DetachControl method on the FreeCameraKeyboardMoveInput object.
@@ -82,9 +89,7 @@ func (f *FreeCameraKeyboardMoveInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#getclassname
 func (f *FreeCameraKeyboardMoveInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -93,9 +98,7 @@ func (f *FreeCameraKeyboardMoveInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#getsimplename
 func (f *FreeCameraKeyboardMoveInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getSimpleName", args...)
+	retVal := f.p.Call("getSimpleName")
 	return retVal.String()
 }
 

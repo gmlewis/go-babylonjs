@@ -27,6 +27,15 @@ func EllipseFromJSObject(p js.Value, ctx js.Value) *Ellipse {
 	return &Ellipse{Container: ContainerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// EllipseArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EllipseArrayToJSArray(array []*Ellipse) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewEllipseOpts contains optional parameters for NewEllipse.
 type NewEllipseOpts struct {
 	Name *string
@@ -70,9 +79,7 @@ func (e *Ellipse) AddControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.ellipse#clearcontrols
 func (e *Ellipse) ClearControls() *Container {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("clearControls", args...)
+	retVal := e.p.Call("clearControls")
 	return ContainerFromJSObject(retVal, e.ctx)
 }
 
@@ -108,9 +115,7 @@ func (e *Ellipse) ContainsControl(control *Control) bool {
 // https://doc.babylonjs.com/api/classes/babylon.ellipse#dispose
 func (e *Ellipse) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("dispose", args...)
+	e.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the Ellipse object.
@@ -158,9 +163,7 @@ func (e *Ellipse) GetChildByType(name string, jsType string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.ellipse#getclassname
 func (e *Ellipse) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := e.p.Call("getClassName", args...)
+	retVal := e.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -323,9 +326,7 @@ func (e *Ellipse) RemoveControl(control *Control) *Container {
 // https://doc.babylonjs.com/api/classes/babylon.ellipse#_flagdescendantsasmatrixdirty
 func (e *Ellipse) _flagDescendantsAsMatrixDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("_flagDescendantsAsMatrixDirty", args...)
+	e.p.Call("_flagDescendantsAsMatrixDirty")
 }
 
 /*

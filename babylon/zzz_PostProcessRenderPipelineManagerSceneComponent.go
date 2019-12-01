@@ -27,6 +27,15 @@ func PostProcessRenderPipelineManagerSceneComponentFromJSObject(p js.Value, ctx 
 	return &PostProcessRenderPipelineManagerSceneComponent{p: p, ctx: ctx}
 }
 
+// PostProcessRenderPipelineManagerSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PostProcessRenderPipelineManagerSceneComponentArrayToJSArray(array []*PostProcessRenderPipelineManagerSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPostProcessRenderPipelineManagerSceneComponent returns a new PostProcessRenderPipelineManagerSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent
@@ -45,9 +54,7 @@ func (ba *Babylon) NewPostProcessRenderPipelineManagerSceneComponent(scene *Scen
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#dispose
 func (p *PostProcessRenderPipelineManagerSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the PostProcessRenderPipelineManagerSceneComponent object.
@@ -55,9 +62,7 @@ func (p *PostProcessRenderPipelineManagerSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#rebuild
 func (p *PostProcessRenderPipelineManagerSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("rebuild", args...)
+	p.p.Call("rebuild")
 }
 
 // Register calls the Register method on the PostProcessRenderPipelineManagerSceneComponent object.
@@ -65,9 +70,7 @@ func (p *PostProcessRenderPipelineManagerSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#register
 func (p *PostProcessRenderPipelineManagerSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("register", args...)
+	p.p.Call("register")
 }
 
 /*

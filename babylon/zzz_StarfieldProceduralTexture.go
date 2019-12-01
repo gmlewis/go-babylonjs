@@ -27,6 +27,15 @@ func StarfieldProceduralTextureFromJSObject(p js.Value, ctx js.Value) *Starfield
 	return &StarfieldProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StarfieldProceduralTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StarfieldProceduralTextureArrayToJSArray(array []*StarfieldProceduralTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStarfieldProceduralTextureOpts contains optional parameters for NewStarfieldProceduralTexture.
 type NewStarfieldProceduralTextureOpts struct {
 	FallbackTexture *Texture
@@ -67,9 +76,7 @@ func (ba *Babylon) NewStarfieldProceduralTexture(name string, size float64, scen
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#clone
 func (s *StarfieldProceduralTexture) Clone() *ProceduralTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("clone", args...)
+	retVal := s.p.Call("clone")
 	return ProceduralTextureFromJSObject(retVal, s.ctx)
 }
 
@@ -137,9 +144,7 @@ func (s *StarfieldProceduralTexture) CreateFromBase64String(data string, name st
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#dispose
 func (s *StarfieldProceduralTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the StarfieldProceduralTexture object.
@@ -147,9 +152,7 @@ func (s *StarfieldProceduralTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#getbasesize
 func (s *StarfieldProceduralTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getBaseSize", args...)
+	retVal := s.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -158,9 +161,7 @@ func (s *StarfieldProceduralTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#getclassname
 func (s *StarfieldProceduralTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -169,9 +170,7 @@ func (s *StarfieldProceduralTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#getcontent
 func (s *StarfieldProceduralTexture) GetContent() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getContent", args...)
+	retVal := s.p.Call("getContent")
 	return retVal
 }
 
@@ -180,9 +179,7 @@ func (s *StarfieldProceduralTexture) GetContent() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#geteffect
 func (s *StarfieldProceduralTexture) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEffect", args...)
+	retVal := s.p.Call("getEffect")
 	return EffectFromJSObject(retVal, s.ctx)
 }
 
@@ -191,9 +188,7 @@ func (s *StarfieldProceduralTexture) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#getinternaltexture
 func (s *StarfieldProceduralTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getInternalTexture", args...)
+	retVal := s.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, s.ctx)
 }
 
@@ -202,9 +197,7 @@ func (s *StarfieldProceduralTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#getreflectiontexturematrix
 func (s *StarfieldProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getReflectionTextureMatrix", args...)
+	retVal := s.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, s.ctx)
 }
 
@@ -213,9 +206,7 @@ func (s *StarfieldProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#getrendersize
 func (s *StarfieldProceduralTexture) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getRenderSize", args...)
+	retVal := s.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -224,9 +215,7 @@ func (s *StarfieldProceduralTexture) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#getscene
 func (s *StarfieldProceduralTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getScene", args...)
+	retVal := s.p.Call("getScene")
 	return SceneFromJSObject(retVal, s.ctx)
 }
 
@@ -235,9 +224,7 @@ func (s *StarfieldProceduralTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#getsize
 func (s *StarfieldProceduralTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getSize", args...)
+	retVal := s.p.Call("getSize")
 	return retVal
 }
 
@@ -271,9 +258,7 @@ func (s *StarfieldProceduralTexture) GetTextureMatrix(opts *StarfieldProceduralT
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#isready
 func (s *StarfieldProceduralTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isReady", args...)
+	retVal := s.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -282,9 +267,7 @@ func (s *StarfieldProceduralTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#isreadyornotblocking
 func (s *StarfieldProceduralTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isReadyOrNotBlocking", args...)
+	retVal := s.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -410,9 +393,7 @@ func (s *StarfieldProceduralTexture) ReadPixels(opts *StarfieldProceduralTexture
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#releaseinternaltexture
 func (s *StarfieldProceduralTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("releaseInternalTexture", args...)
+	s.p.Call("releaseInternalTexture")
 }
 
 // StarfieldProceduralTextureRenderOpts contains optional parameters for StarfieldProceduralTexture.Render.
@@ -444,9 +425,7 @@ func (s *StarfieldProceduralTexture) Render(opts *StarfieldProceduralTextureRend
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#reset
 func (s *StarfieldProceduralTexture) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("reset", args...)
+	s.p.Call("reset")
 }
 
 // ResetRefreshCounter calls the ResetRefreshCounter method on the StarfieldProceduralTexture object.
@@ -454,9 +433,7 @@ func (s *StarfieldProceduralTexture) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#resetrefreshcounter
 func (s *StarfieldProceduralTexture) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("resetRefreshCounter", args...)
+	s.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the StarfieldProceduralTexture object.
@@ -489,9 +466,7 @@ func (s *StarfieldProceduralTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#serialize
 func (s *StarfieldProceduralTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 
@@ -638,9 +613,7 @@ func (s *StarfieldProceduralTexture) SetVector3(name string, value *Vector3) *Pr
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#tostring
 func (s *StarfieldProceduralTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("toString", args...)
+	retVal := s.p.Call("toString")
 	return retVal.String()
 }
 
@@ -661,9 +634,7 @@ func (s *StarfieldProceduralTexture) UpdateSamplingMode(samplingMode float64) {
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#updateshaderuniforms
 func (s *StarfieldProceduralTexture) UpdateShaderUniforms() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("updateShaderUniforms", args...)
+	s.p.Call("updateShaderUniforms")
 }
 
 // StarfieldProceduralTextureUpdateURLOpts contains optional parameters for StarfieldProceduralTexture.UpdateURL.
@@ -706,7 +677,7 @@ func (s *StarfieldProceduralTexture) WhenAllReady(textures *BaseTexture, callbac
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	s.p.Call("WhenAllReady", args...)
 }
@@ -1629,7 +1600,7 @@ func (s *StarfieldProceduralTexture) SetNoMipmap(noMipmap bool) *StarfieldProced
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#ondispose
 func (s *StarfieldProceduralTexture) OnDispose(onDispose func()) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("StarfieldProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1637,7 +1608,7 @@ func (s *StarfieldProceduralTexture) OnDispose(onDispose func()) *StarfieldProce
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#ondispose
 func (s *StarfieldProceduralTexture) SetOnDispose(onDispose func()) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("StarfieldProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1661,7 +1632,7 @@ func (s *StarfieldProceduralTexture) SetOnDisposeObservable(onDisposeObservable 
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#ongenerated
 func (s *StarfieldProceduralTexture) OnGenerated(onGenerated func()) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("StarfieldProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1669,7 +1640,7 @@ func (s *StarfieldProceduralTexture) OnGenerated(onGenerated func()) *StarfieldP
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#ongenerated
 func (s *StarfieldProceduralTexture) SetOnGenerated(onGenerated func()) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("StarfieldProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
 }
 

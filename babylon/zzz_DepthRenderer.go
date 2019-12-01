@@ -28,6 +28,15 @@ func DepthRendererFromJSObject(p js.Value, ctx js.Value) *DepthRenderer {
 	return &DepthRenderer{p: p, ctx: ctx}
 }
 
+// DepthRendererArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DepthRendererArrayToJSArray(array []*DepthRenderer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDepthRendererOpts contains optional parameters for NewDepthRenderer.
 type NewDepthRendererOpts struct {
 	Type                *float64
@@ -72,9 +81,7 @@ func (ba *Babylon) NewDepthRenderer(scene *Scene, opts *NewDepthRendererOpts) *D
 // https://doc.babylonjs.com/api/classes/babylon.depthrenderer#dispose
 func (d *DepthRenderer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // GetDepthMap calls the GetDepthMap method on the DepthRenderer object.
@@ -82,9 +89,7 @@ func (d *DepthRenderer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.depthrenderer#getdepthmap
 func (d *DepthRenderer) GetDepthMap() *RenderTargetTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getDepthMap", args...)
+	retVal := d.p.Call("getDepthMap")
 	return RenderTargetTextureFromJSObject(retVal, d.ctx)
 }
 

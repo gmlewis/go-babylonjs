@@ -29,6 +29,15 @@ func PostProcessRenderPipelineManagerFromJSObject(p js.Value, ctx js.Value) *Pos
 	return &PostProcessRenderPipelineManager{p: p, ctx: ctx}
 }
 
+// PostProcessRenderPipelineManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PostProcessRenderPipelineManagerArrayToJSArray(array []*PostProcessRenderPipelineManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPostProcessRenderPipelineManager returns a new PostProcessRenderPipelineManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager
@@ -111,9 +120,7 @@ func (p *PostProcessRenderPipelineManager) DisableEffectInPipeline(renderPipelin
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#dispose
 func (p *PostProcessRenderPipelineManager) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // EnableEffectInPipeline calls the EnableEffectInPipeline method on the PostProcessRenderPipelineManager object.
@@ -135,9 +142,7 @@ func (p *PostProcessRenderPipelineManager) EnableEffectInPipeline(renderPipeline
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#update
 func (p *PostProcessRenderPipelineManager) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("update", args...)
+	p.p.Call("update")
 }
 
 /*

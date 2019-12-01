@@ -29,6 +29,15 @@ func LinesMeshFromJSObject(p js.Value, ctx js.Value) *LinesMesh {
 	return &LinesMesh{Mesh: MeshFromJSObject(p, ctx), ctx: ctx}
 }
 
+// LinesMeshArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LinesMeshArrayToJSArray(array []*LinesMesh) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLinesMeshOpts contains optional parameters for NewLinesMesh.
 type NewLinesMeshOpts struct {
 	Scene              *Scene
@@ -208,9 +217,7 @@ func (l *LinesMesh) ApplySkeleton(skeleton *Skeleton) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#bakecurrenttransformintovertices
 func (l *LinesMesh) BakeCurrentTransformIntoVertices() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("bakeCurrentTransformIntoVertices", args...)
+	retVal := l.p.Call("bakeCurrentTransformIntoVertices")
 	return MeshFromJSObject(retVal, l.ctx)
 }
 
@@ -245,9 +252,7 @@ func (l *LinesMesh) Center(meshesOrMinMaxVector js.Value) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#cleanmatrixweights
 func (l *LinesMesh) CleanMatrixWeights() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("cleanMatrixWeights", args...)
+	l.p.Call("cleanMatrixWeights")
 }
 
 // LinesMeshCloneOpts contains optional parameters for LinesMesh.Clone.
@@ -288,9 +293,7 @@ func (l *LinesMesh) Clone(name string, opts *LinesMeshCloneOpts) *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#converttoflatshadedmesh
 func (l *LinesMesh) ConvertToFlatShadedMesh() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("convertToFlatShadedMesh", args...)
+	retVal := l.p.Call("convertToFlatShadedMesh")
 	return MeshFromJSObject(retVal, l.ctx)
 }
 
@@ -299,9 +302,7 @@ func (l *LinesMesh) ConvertToFlatShadedMesh() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#converttounindexedmesh
 func (l *LinesMesh) ConvertToUnIndexedMesh() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("convertToUnIndexedMesh", args...)
+	retVal := l.p.Call("convertToUnIndexedMesh")
 	return MeshFromJSObject(retVal, l.ctx)
 }
 
@@ -1036,7 +1037,7 @@ func (l *LinesMesh) CreateTube(name string, path *Vector3, radius float64, tesse
 	args = append(args, path.JSObject())
 	args = append(args, radius)
 	args = append(args, tessellation)
-	args = append(args, radiusFunction)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { radiusFunction(); return nil }))
 	args = append(args, cap)
 	args = append(args, scene.JSObject())
 
@@ -1223,7 +1224,7 @@ type LinesMeshExtrudeShapeCustomOpts struct {
 // ExtrudeShapeCustom calls the ExtrudeShapeCustom method on the LinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#extrudeshapecustom
-func (l *LinesMesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector3, scaleFunction *Function, rotationFunction *Function, ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *LinesMeshExtrudeShapeCustomOpts) *Mesh {
+func (l *LinesMesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector3, scaleFunction func(), rotationFunction func(), ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *LinesMeshExtrudeShapeCustomOpts) *Mesh {
 	if opts == nil {
 		opts = &LinesMeshExtrudeShapeCustomOpts{}
 	}
@@ -1233,8 +1234,8 @@ func (l *LinesMesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector
 	args = append(args, name)
 	args = append(args, shape.JSObject())
 	args = append(args, path.JSObject())
-	args = append(args, scaleFunction.JSObject())
-	args = append(args, rotationFunction.JSObject())
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { scaleFunction(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { rotationFunction(); return nil }))
 	args = append(args, ribbonCloseArray)
 	args = append(args, ribbonClosePath)
 	args = append(args, cap)
@@ -1290,9 +1291,7 @@ func (l *LinesMesh) FlipFaces(opts *LinesMeshFlipFacesOpts) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#forcesharedvertices
 func (l *LinesMesh) ForceSharedVertices() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("forceSharedVertices", args...)
+	l.p.Call("forceSharedVertices")
 }
 
 // FreezeNormals calls the FreezeNormals method on the LinesMesh object.
@@ -1300,9 +1299,7 @@ func (l *LinesMesh) ForceSharedVertices() {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#freezenormals
 func (l *LinesMesh) FreezeNormals() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("freezeNormals", args...)
+	retVal := l.p.Call("freezeNormals")
 	return MeshFromJSObject(retVal, l.ctx)
 }
 
@@ -1311,9 +1308,7 @@ func (l *LinesMesh) FreezeNormals() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#getanimatables
 func (l *LinesMesh) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getAnimatables", args...)
+	retVal := l.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -1322,32 +1317,26 @@ func (l *LinesMesh) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#getclassname
 func (l *LinesMesh) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getClassName", args...)
+	retVal := l.p.Call("getClassName")
 	return retVal.String()
 }
 
 // GetEmittedParticleSystems calls the GetEmittedParticleSystems method on the LinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#getemittedparticlesystems
-func (l *LinesMesh) GetEmittedParticleSystems() *IParticleSystem {
+func (l *LinesMesh) GetEmittedParticleSystems() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getEmittedParticleSystems", args...)
-	return IParticleSystemFromJSObject(retVal, l.ctx)
+	retVal := l.p.Call("getEmittedParticleSystems")
+	return retVal
 }
 
 // GetHierarchyEmittedParticleSystems calls the GetHierarchyEmittedParticleSystems method on the LinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#gethierarchyemittedparticlesystems
-func (l *LinesMesh) GetHierarchyEmittedParticleSystems() *IParticleSystem {
+func (l *LinesMesh) GetHierarchyEmittedParticleSystems() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getHierarchyEmittedParticleSystems", args...)
-	return IParticleSystemFromJSObject(retVal, l.ctx)
+	retVal := l.p.Call("getHierarchyEmittedParticleSystems")
+	return retVal
 }
 
 // LinesMeshGetIndicesOpts contains optional parameters for LinesMesh.GetIndices.
@@ -1426,9 +1415,7 @@ func (l *LinesMesh) GetLODLevelAtDistance(distance float64) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#getlodlevels
 func (l *LinesMesh) GetLODLevels() *MeshLODLevel {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getLODLevels", args...)
+	retVal := l.p.Call("getLODLevels")
 	return MeshLODLevelFromJSObject(retVal, l.ctx)
 }
 
@@ -1437,9 +1424,7 @@ func (l *LinesMesh) GetLODLevels() *MeshLODLevel {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#gettotalindices
 func (l *LinesMesh) GetTotalIndices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getTotalIndices", args...)
+	retVal := l.p.Call("getTotalIndices")
 	return retVal.Float()
 }
 
@@ -1448,9 +1433,7 @@ func (l *LinesMesh) GetTotalIndices() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#gettotalvertices
 func (l *LinesMesh) GetTotalVertices() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getTotalVertices", args...)
+	retVal := l.p.Call("getTotalVertices")
 	return retVal.Float()
 }
 
@@ -1505,9 +1488,7 @@ func (l *LinesMesh) GetVerticesData(kind string, opts *LinesMeshGetVerticesDataO
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#getverticesdatakinds
 func (l *LinesMesh) GetVerticesDataKinds() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getVerticesDataKinds", args...)
+	retVal := l.p.Call("getVerticesDataKinds")
 	return retVal.String()
 }
 
@@ -1578,9 +1559,7 @@ func (l *LinesMesh) IsInFrustum(frustumPlanes *Plane) bool {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#isready
 func (l *LinesMesh) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("isReady", args...)
+	retVal := l.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -1615,9 +1594,7 @@ func (l *LinesMesh) IsVerticesDataPresent(kind string) bool {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#makegeometryunique
 func (l *LinesMesh) MakeGeometryUnique() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("makeGeometryUnique", args...)
+	retVal := l.p.Call("makeGeometryUnique")
 	return MeshFromJSObject(retVal, l.ctx)
 }
 
@@ -1659,14 +1636,14 @@ type LinesMeshMergeMeshesOpts struct {
 // MergeMeshes calls the MergeMeshes method on the LinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#mergemeshes
-func (l *LinesMesh) MergeMeshes(meshes []js.Value, opts *LinesMeshMergeMeshesOpts) *Mesh {
+func (l *LinesMesh) MergeMeshes(meshes []*Mesh, opts *LinesMeshMergeMeshesOpts) *Mesh {
 	if opts == nil {
 		opts = &LinesMeshMergeMeshesOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+5)
 
-	args = append(args, meshes)
+	args = append(args, MeshArrayToJSArray(meshes))
 
 	if opts.DisposeSource == nil {
 		args = append(args, js.Undefined())
@@ -1783,7 +1760,7 @@ func (l *LinesMesh) RegisterAfterRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := l.p.Call("registerAfterRender", args...)
 	return MeshFromJSObject(retVal, l.ctx)
@@ -1796,7 +1773,7 @@ func (l *LinesMesh) RegisterBeforeRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := l.p.Call("registerBeforeRender", args...)
 	return MeshFromJSObject(retVal, l.ctx)
@@ -1931,9 +1908,7 @@ func (l *LinesMesh) SetMaterialByID(id string) *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#setnormalsforcpuskinning
 func (l *LinesMesh) SetNormalsForCPUSkinning() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("setNormalsForCPUSkinning", args...)
+	retVal := l.p.Call("setNormalsForCPUSkinning")
 	return retVal
 }
 
@@ -1942,9 +1917,7 @@ func (l *LinesMesh) SetNormalsForCPUSkinning() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#setpositionsforcpuskinning
 func (l *LinesMesh) SetPositionsForCPUSkinning() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("setPositionsForCPUSkinning", args...)
+	retVal := l.p.Call("setPositionsForCPUSkinning")
 	return retVal
 }
 
@@ -1998,21 +1971,21 @@ func (l *LinesMesh) SetVerticesData(kind string, data js.Value, opts *LinesMeshS
 // LinesMeshSimplifyOpts contains optional parameters for LinesMesh.Simplify.
 type LinesMeshSimplifyOpts struct {
 	ParallelProcessing *bool
-	SimplificationType *SimplificationType
+	SimplificationType js.Value
 	SuccessCallback    *func()
 }
 
 // Simplify calls the Simplify method on the LinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#simplify
-func (l *LinesMesh) Simplify(settings []ISimplificationSettings, opts *LinesMeshSimplifyOpts) *Mesh {
+func (l *LinesMesh) Simplify(settings []*ISimplificationSettings, opts *LinesMeshSimplifyOpts) *Mesh {
 	if opts == nil {
 		opts = &LinesMeshSimplifyOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, settings.JSObject())
+	args = append(args, ISimplificationSettingsArrayToJSArray(settings))
 
 	if opts.ParallelProcessing == nil {
 		args = append(args, js.Undefined())
@@ -2022,7 +1995,7 @@ func (l *LinesMesh) Simplify(settings []ISimplificationSettings, opts *LinesMesh
 	if opts.SimplificationType == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SimplificationType.JSObject())
+		args = append(args, opts.SimplificationType)
 	}
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
@@ -2051,9 +2024,7 @@ func (l *LinesMesh) Subdivide(count float64) {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#synchronizeinstances
 func (l *LinesMesh) SynchronizeInstances() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("synchronizeInstances", args...)
+	retVal := l.p.Call("synchronizeInstances")
 	return MeshFromJSObject(retVal, l.ctx)
 }
 
@@ -2062,9 +2033,7 @@ func (l *LinesMesh) SynchronizeInstances() *Mesh {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#tolefthanded
 func (l *LinesMesh) ToLeftHanded() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("toLeftHanded", args...)
+	retVal := l.p.Call("toLeftHanded")
 	return MeshFromJSObject(retVal, l.ctx)
 }
 
@@ -2098,9 +2067,7 @@ func (l *LinesMesh) ToString(opts *LinesMeshToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#unfreezenormals
 func (l *LinesMesh) UnfreezeNormals() *Mesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("unfreezeNormals", args...)
+	retVal := l.p.Call("unfreezeNormals")
 	return MeshFromJSObject(retVal, l.ctx)
 }
 
@@ -2111,7 +2078,7 @@ func (l *LinesMesh) UnregisterAfterRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := l.p.Call("unregisterAfterRender", args...)
 	return MeshFromJSObject(retVal, l.ctx)
@@ -2124,7 +2091,7 @@ func (l *LinesMesh) UnregisterBeforeRender(jsFunc func()) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := l.p.Call("unregisterBeforeRender", args...)
 	return MeshFromJSObject(retVal, l.ctx)
@@ -2178,7 +2145,7 @@ func (l *LinesMesh) UpdateMeshPositions(positionFunction func(), opts *LinesMesh
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, positionFunction)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { positionFunction(); return nil }))
 
 	if opts.ComputeNormals == nil {
 		args = append(args, js.Undefined())
@@ -2229,9 +2196,7 @@ func (l *LinesMesh) UpdateVerticesData(kind string, data js.Value, opts *LinesMe
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#validateskinning
 func (l *LinesMesh) ValidateSkinning() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("validateSkinning", args...)
+	retVal := l.p.Call("validateSkinning")
 	return retVal
 }
 
@@ -2769,7 +2734,7 @@ func (l *LinesMesh) SetOnBeforeBindObservable(onBeforeBindObservable *Observable
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#onbeforedraw
 func (l *LinesMesh) OnBeforeDraw(onBeforeDraw func()) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(onBeforeDraw)
+	p := ba.ctx.Get("LinesMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeDraw(); return nil}))
 	return LinesMeshFromJSObject(p, ba.ctx)
 }
 
@@ -2777,7 +2742,7 @@ func (l *LinesMesh) OnBeforeDraw(onBeforeDraw func()) *LinesMesh {
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#onbeforedraw
 func (l *LinesMesh) SetOnBeforeDraw(onBeforeDraw func()) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(onBeforeDraw)
+	p := ba.ctx.Get("LinesMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeDraw(); return nil}))
 	return LinesMeshFromJSObject(p, ba.ctx)
 }
 
@@ -2817,7 +2782,7 @@ func (l *LinesMesh) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observ
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#onlodlevelselection
 func (l *LinesMesh) OnLODLevelSelection(onLODLevelSelection func()) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(onLODLevelSelection)
+	p := ba.ctx.Get("LinesMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onLODLevelSelection(); return nil}))
 	return LinesMeshFromJSObject(p, ba.ctx)
 }
 
@@ -2825,7 +2790,7 @@ func (l *LinesMesh) OnLODLevelSelection(onLODLevelSelection func()) *LinesMesh {
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#onlodlevelselection
 func (l *LinesMesh) SetOnLODLevelSelection(onLODLevelSelection func()) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(onLODLevelSelection)
+	p := ba.ctx.Get("LinesMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onLODLevelSelection(); return nil}))
 	return LinesMeshFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func AnimationFromJSObject(p js.Value, ctx js.Value) *Animation {
 	return &Animation{p: p, ctx: ctx}
 }
 
+// AnimationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnimationArrayToJSArray(array []*Animation) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnimationOpts contains optional parameters for NewAnimation.
 type NewAnimationOpts struct {
 	LoopMode       *float64
@@ -93,9 +102,7 @@ func (a *Animation) AppendSerializedAnimations(source js.Value, destination inte
 // https://doc.babylonjs.com/api/classes/babylon.animation#clone
 func (a *Animation) Clone() *Animation {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("clone", args...)
+	retVal := a.p.Call("clone")
 	return AnimationFromJSObject(retVal, a.ctx)
 }
 
@@ -358,9 +365,7 @@ func (a *Animation) FloatInterpolateFunctionWithTangents(startValue float64, out
 // https://doc.babylonjs.com/api/classes/babylon.animation#geteasingfunction
 func (a *Animation) GetEasingFunction() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getEasingFunction", args...)
+	retVal := a.p.Call("getEasingFunction")
 	return retVal
 }
 
@@ -369,9 +374,7 @@ func (a *Animation) GetEasingFunction() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.animation#getevents
 func (a *Animation) GetEvents() *AnimationEvent {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getEvents", args...)
+	retVal := a.p.Call("getEvents")
 	return AnimationEventFromJSObject(retVal, a.ctx)
 }
 
@@ -380,20 +383,16 @@ func (a *Animation) GetEvents() *AnimationEvent {
 // https://doc.babylonjs.com/api/classes/babylon.animation#gethighestframe
 func (a *Animation) GetHighestFrame() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getHighestFrame", args...)
+	retVal := a.p.Call("getHighestFrame")
 	return retVal.Float()
 }
 
 // GetKeys calls the GetKeys method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#getkeys
-func (a *Animation) GetKeys() []js.Value {
+func (a *Animation) GetKeys() []*IAnimationKey {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getKeys", args...)
+	retVal := a.p.Call("getKeys")
 	return retVal
 }
 
@@ -501,9 +500,7 @@ func (a *Animation) RemoveEvents(frame float64) {
 // https://doc.babylonjs.com/api/classes/babylon.animation#serialize
 func (a *Animation) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("serialize", args...)
+	retVal := a.p.Call("serialize")
 	return retVal
 }
 
@@ -522,11 +519,11 @@ func (a *Animation) SetEasingFunction(easingFunction *EasingFunction) {
 // SetKeys calls the SetKeys method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#setkeys
-func (a *Animation) SetKeys(values []js.Value) {
+func (a *Animation) SetKeys(values []*IAnimationKey) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, values)
+	args = append(args, IAnimationKeyArrayToJSArray(values))
 
 	a.p.Call("setKeys", args...)
 }

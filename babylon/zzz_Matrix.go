@@ -27,6 +27,15 @@ func MatrixFromJSObject(p js.Value, ctx js.Value) *Matrix {
 	return &Matrix{p: p, ctx: ctx}
 }
 
+// MatrixArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MatrixArrayToJSArray(array []*Matrix) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMatrix returns a new Matrix object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix
@@ -112,9 +121,7 @@ func (m *Matrix) AddTranslationFromFloats(x float64, y float64, z float64) *Matr
 // https://doc.babylonjs.com/api/classes/babylon.matrix#asarray
 func (m *Matrix) AsArray() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("asArray", args...)
+	retVal := m.p.Call("asArray")
 	return retVal
 }
 
@@ -123,9 +130,7 @@ func (m *Matrix) AsArray() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#clone
 func (m *Matrix) Clone() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("clone", args...)
+	retVal := m.p.Call("clone")
 	return MatrixFromJSObject(retVal, m.ctx)
 }
 
@@ -271,9 +276,7 @@ func (m *Matrix) DecomposeLerpToRef(startValue *Matrix, endValue *Matrix, gradie
 // https://doc.babylonjs.com/api/classes/babylon.matrix#determinant
 func (m *Matrix) Determinant() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("determinant", args...)
+	retVal := m.p.Call("determinant")
 	return retVal.Float()
 }
 
@@ -320,13 +323,13 @@ func (m *Matrix) FromArray(array js.Value, opts *MatrixFromArrayOpts) *Matrix {
 // FromArrayToRef calls the FromArrayToRef method on the Matrix object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix#fromarraytoref
-func (m *Matrix) FromArrayToRef(array js.Value, offset float64, result float64) {
+func (m *Matrix) FromArrayToRef(array js.Value, offset float64, result *Matrix) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, array)
 	args = append(args, offset)
-	args = append(args, result)
+	args = append(args, result.JSObject())
 
 	m.p.Call("FromArrayToRef", args...)
 }
@@ -461,9 +464,7 @@ func (m *Matrix) GetAsMatrix3x3(matrix *Matrix) js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#getclassname
 func (m *Matrix) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -490,9 +491,7 @@ func (m *Matrix) GetFinalMatrix(viewport *Viewport, world *Matrix, view *Matrix,
 // https://doc.babylonjs.com/api/classes/babylon.matrix#gethashcode
 func (m *Matrix) GetHashCode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getHashCode", args...)
+	retVal := m.p.Call("getHashCode")
 	return retVal.Float()
 }
 
@@ -501,9 +500,7 @@ func (m *Matrix) GetHashCode() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#getrotationmatrix
 func (m *Matrix) GetRotationMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getRotationMatrix", args...)
+	retVal := m.p.Call("getRotationMatrix")
 	return MatrixFromJSObject(retVal, m.ctx)
 }
 
@@ -538,9 +535,7 @@ func (m *Matrix) GetRow(index float64) *Vector4 {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#gettranslation
 func (m *Matrix) GetTranslation() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getTranslation", args...)
+	retVal := m.p.Call("getTranslation")
 	return Vector3FromJSObject(retVal, m.ctx)
 }
 
@@ -562,9 +557,7 @@ func (m *Matrix) GetTranslationToRef(result *Vector3) *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#identity
 func (m *Matrix) Identity() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("Identity", args...)
+	retVal := m.p.Call("Identity")
 	return MatrixFromJSObject(retVal, m.ctx)
 }
 
@@ -611,9 +604,7 @@ func (m *Matrix) InvertToRef(other *Matrix) *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#isidentity
 func (m *Matrix) IsIdentity() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("isIdentity", args...)
+	retVal := m.p.Call("isIdentity")
 	return retVal.Bool()
 }
 
@@ -622,9 +613,7 @@ func (m *Matrix) IsIdentity() bool {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#isidentityas3x2
 func (m *Matrix) IsIdentityAs3x2() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("isIdentityAs3x2", args...)
+	retVal := m.p.Call("isIdentityAs3x2")
 	return retVal.Bool()
 }
 
@@ -1078,11 +1067,11 @@ func (m *Matrix) PerspectiveLH(width float64, height float64, znear float64, zfa
 // Reflection calls the Reflection method on the Matrix object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix#reflection
-func (m *Matrix) Reflection(plane *IPlaneLike) *Matrix {
+func (m *Matrix) Reflection(plane js.Value) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, plane.JSObject())
+	args = append(args, plane)
 
 	retVal := m.p.Call("Reflection", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -1091,11 +1080,11 @@ func (m *Matrix) Reflection(plane *IPlaneLike) *Matrix {
 // ReflectionToRef calls the ReflectionToRef method on the Matrix object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix#reflectiontoref
-func (m *Matrix) ReflectionToRef(plane *IPlaneLike, result *Matrix) {
+func (m *Matrix) ReflectionToRef(plane js.Value, result *Matrix) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, plane.JSObject())
+	args = append(args, plane)
 	args = append(args, result.JSObject())
 
 	m.p.Call("ReflectionToRef", args...)
@@ -1106,9 +1095,7 @@ func (m *Matrix) ReflectionToRef(plane *IPlaneLike, result *Matrix) {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#removerotationandscaling
 func (m *Matrix) RemoveRotationAndScaling() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("removeRotationAndScaling", args...)
+	retVal := m.p.Call("removeRotationAndScaling")
 	return MatrixFromJSObject(retVal, m.ctx)
 }
 
@@ -1117,9 +1104,7 @@ func (m *Matrix) RemoveRotationAndScaling() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#reset
 func (m *Matrix) Reset() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("reset", args...)
+	retVal := m.p.Call("reset")
 	return MatrixFromJSObject(retVal, m.ctx)
 }
 
@@ -1408,9 +1393,7 @@ func (m *Matrix) SetTranslationFromFloats(x float64, y float64, z float64) *Matr
 // https://doc.babylonjs.com/api/classes/babylon.matrix#toarray
 func (m *Matrix) ToArray() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("toArray", args...)
+	retVal := m.p.Call("toArray")
 	return retVal
 }
 
@@ -1431,9 +1414,7 @@ func (m *Matrix) ToNormalMatrix(ref *Matrix) {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#togglemodelmatrixhandinplace
 func (m *Matrix) ToggleModelMatrixHandInPlace() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("toggleModelMatrixHandInPlace", args...)
+	m.p.Call("toggleModelMatrixHandInPlace")
 }
 
 // ToggleProjectionMatrixHandInPlace calls the ToggleProjectionMatrixHandInPlace method on the Matrix object.
@@ -1441,9 +1422,7 @@ func (m *Matrix) ToggleModelMatrixHandInPlace() {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#toggleprojectionmatrixhandinplace
 func (m *Matrix) ToggleProjectionMatrixHandInPlace() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("toggleProjectionMatrixHandInPlace", args...)
+	m.p.Call("toggleProjectionMatrixHandInPlace")
 }
 
 // Translation calls the Translation method on the Matrix object.
@@ -1507,9 +1486,7 @@ func (m *Matrix) TransposeToRef(matrix *Matrix, result *Matrix) {
 // https://doc.babylonjs.com/api/classes/babylon.matrix#zero
 func (m *Matrix) Zero() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("Zero", args...)
+	retVal := m.p.Call("Zero")
 	return MatrixFromJSObject(retVal, m.ctx)
 }
 

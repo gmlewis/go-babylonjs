@@ -27,6 +27,15 @@ func FurMaterialFromJSObject(p js.Value, ctx js.Value) *FurMaterial {
 	return &FurMaterial{p: p, ctx: ctx}
 }
 
+// FurMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FurMaterialArrayToJSArray(array []*FurMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFurMaterial returns a new FurMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial
@@ -225,7 +234,7 @@ type FurMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the FurMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#forcecompilationasync
-func (f *FurMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FurMaterialForceCompilationAsyncOpts) {
+func (f *FurMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FurMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &FurMaterialForceCompilationAsyncOpts{}
 	}
@@ -240,7 +249,8 @@ func (f *FurMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FurMateria
 		args = append(args, opts.Options)
 	}
 
-	f.p.Call("forceCompilationAsync", args...)
+	retVal := f.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, f.ctx)
 }
 
 // Freeze calls the Freeze method on the FurMaterial object.
@@ -248,9 +258,7 @@ func (f *FurMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FurMateria
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#freeze
 func (f *FurMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("freeze", args...)
+	f.p.Call("freeze")
 }
 
 // FurifyMesh calls the FurifyMesh method on the FurMaterial object.
@@ -286,9 +294,7 @@ func (f *FurMaterial) GenerateTexture(name string, scene *Scene) *DynamicTexture
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#getactivetextures
 func (f *FurMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getActiveTextures", args...)
+	retVal := f.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, f.ctx)
 }
 
@@ -297,9 +303,7 @@ func (f *FurMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#getalphatesttexture
 func (f *FurMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getAlphaTestTexture", args...)
+	retVal := f.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, f.ctx)
 }
 
@@ -308,9 +312,7 @@ func (f *FurMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#getanimatables
 func (f *FurMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getAnimatables", args...)
+	retVal := f.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -319,9 +321,7 @@ func (f *FurMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#getbindedmeshes
 func (f *FurMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getBindedMeshes", args...)
+	retVal := f.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, f.ctx)
 }
 
@@ -330,9 +330,7 @@ func (f *FurMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#getclassname
 func (f *FurMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -341,9 +339,7 @@ func (f *FurMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#geteffect
 func (f *FurMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getEffect", args...)
+	retVal := f.p.Call("getEffect")
 	return EffectFromJSObject(retVal, f.ctx)
 }
 
@@ -352,9 +348,7 @@ func (f *FurMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#getscene
 func (f *FurMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getScene", args...)
+	retVal := f.p.Call("getScene")
 	return SceneFromJSObject(retVal, f.ctx)
 }
 
@@ -447,9 +441,7 @@ func (f *FurMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#markdirty
 func (f *FurMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("markDirty", args...)
+	f.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the FurMaterial object.
@@ -457,9 +449,7 @@ func (f *FurMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#needalphablending
 func (f *FurMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("needAlphaBlending", args...)
+	retVal := f.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -481,9 +471,7 @@ func (f *FurMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#needalphatesting
 func (f *FurMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("needAlphaTesting", args...)
+	retVal := f.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -507,9 +495,7 @@ func (f *FurMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *F
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#serialize
 func (f *FurMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("serialize", args...)
+	retVal := f.p.Call("serialize")
 	return retVal
 }
 
@@ -543,9 +529,7 @@ func (f *FurMaterial) ToString(opts *FurMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#unbind
 func (f *FurMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("unbind", args...)
+	f.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the FurMaterial object.
@@ -553,9 +537,7 @@ func (f *FurMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#unfreeze
 func (f *FurMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("unfreeze", args...)
+	f.p.Call("unfreeze")
 }
 
 // UpdateFur calls the UpdateFur method on the FurMaterial object.
@@ -563,9 +545,7 @@ func (f *FurMaterial) Unfreeze() {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#updatefur
 func (f *FurMaterial) UpdateFur() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("updateFur", args...)
+	f.p.Call("updateFur")
 }
 
 /*
@@ -637,16 +617,16 @@ func (f *FurMaterial) SetAlphaMode(alphaMode float64) *FurMaterial {
 // Animations returns the Animations property of class FurMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#animations
-func (f *FurMaterial) Animations(animations []Animation) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(animations.JSObject())
+func (f *FurMaterial) Animations(animations []*Animation) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(animations)
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class FurMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#animations
-func (f *FurMaterial) SetAnimations(animations []Animation) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(animations.JSObject())
+func (f *FurMaterial) SetAnimations(animations []*Animation) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(animations)
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1086,7 +1066,7 @@ func (f *FurMaterial) SetFurTime(furTime float64) *FurMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#getrendertargettextures
 func (f *FurMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("FurMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1094,7 +1074,7 @@ func (f *FurMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *F
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#getrendertargettextures
 func (f *FurMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("FurMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1342,7 +1322,7 @@ func (f *FurMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *FurMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#onbind
 func (f *FurMaterial) OnBind(onBind func()) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(onBind)
+	p := ba.ctx.Get("FurMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1350,7 +1330,7 @@ func (f *FurMaterial) OnBind(onBind func()) *FurMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#onbind
 func (f *FurMaterial) SetOnBind(onBind func()) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(onBind)
+	p := ba.ctx.Get("FurMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1374,7 +1354,7 @@ func (f *FurMaterial) SetOnBindObservable(onBindObservable *Observable) *FurMate
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#oncompiled
 func (f *FurMaterial) OnCompiled(onCompiled func()) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(onCompiled)
+	p := ba.ctx.Get("FurMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1382,7 +1362,7 @@ func (f *FurMaterial) OnCompiled(onCompiled func()) *FurMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#oncompiled
 func (f *FurMaterial) SetOnCompiled(onCompiled func()) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(onCompiled)
+	p := ba.ctx.Get("FurMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1390,7 +1370,7 @@ func (f *FurMaterial) SetOnCompiled(onCompiled func()) *FurMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#ondispose
 func (f *FurMaterial) OnDispose(onDispose func()) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(onDispose)
+	p := ba.ctx.Get("FurMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1398,7 +1378,7 @@ func (f *FurMaterial) OnDispose(onDispose func()) *FurMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#ondispose
 func (f *FurMaterial) SetOnDispose(onDispose func()) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(onDispose)
+	p := ba.ctx.Get("FurMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1422,7 +1402,7 @@ func (f *FurMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *F
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#onerror
 func (f *FurMaterial) OnError(onError func()) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(onError)
+	p := ba.ctx.Get("FurMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1430,7 +1410,7 @@ func (f *FurMaterial) OnError(onError func()) *FurMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#onerror
 func (f *FurMaterial) SetOnError(onError func()) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(onError)
+	p := ba.ctx.Get("FurMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 

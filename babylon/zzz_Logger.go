@@ -28,14 +28,21 @@ func LoggerFromJSObject(p js.Value, ctx js.Value) *Logger {
 	return &Logger{p: p, ctx: ctx}
 }
 
+// LoggerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LoggerArrayToJSArray(array []*Logger) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ClearLogCache calls the ClearLogCache method on the Logger object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#clearlogcache
 func (l *Logger) ClearLogCache() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("ClearLogCache", args...)
+	l.p.Call("ClearLogCache")
 }
 
 /*
@@ -60,7 +67,7 @@ func (l *Logger) SetAllLogLevel(AllLogLevel float64) *Logger {
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#error
 func (l *Logger) Error(Error func()) *Logger {
-	p := ba.ctx.Get("Logger").New(Error)
+	p := ba.ctx.Get("Logger").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {Error(); return nil}))
 	return LoggerFromJSObject(p, ba.ctx)
 }
 
@@ -68,7 +75,7 @@ func (l *Logger) Error(Error func()) *Logger {
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#error
 func (l *Logger) SetError(Error func()) *Logger {
-	p := ba.ctx.Get("Logger").New(Error)
+	p := ba.ctx.Get("Logger").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {Error(); return nil}))
 	return LoggerFromJSObject(p, ba.ctx)
 }
 
@@ -108,7 +115,7 @@ func (l *Logger) SetErrorsCount(errorsCount float64) *Logger {
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#log
 func (l *Logger) Log(Log func()) *Logger {
-	p := ba.ctx.Get("Logger").New(Log)
+	p := ba.ctx.Get("Logger").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {Log(); return nil}))
 	return LoggerFromJSObject(p, ba.ctx)
 }
 
@@ -116,7 +123,7 @@ func (l *Logger) Log(Log func()) *Logger {
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#log
 func (l *Logger) SetLog(Log func()) *Logger {
-	p := ba.ctx.Get("Logger").New(Log)
+	p := ba.ctx.Get("Logger").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {Log(); return nil}))
 	return LoggerFromJSObject(p, ba.ctx)
 }
 
@@ -188,7 +195,7 @@ func (l *Logger) SetNoneLogLevel(NoneLogLevel float64) *Logger {
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#onnewcacheentry
 func (l *Logger) OnNewCacheEntry(OnNewCacheEntry func()) *Logger {
-	p := ba.ctx.Get("Logger").New(OnNewCacheEntry)
+	p := ba.ctx.Get("Logger").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {OnNewCacheEntry(); return nil}))
 	return LoggerFromJSObject(p, ba.ctx)
 }
 
@@ -196,7 +203,7 @@ func (l *Logger) OnNewCacheEntry(OnNewCacheEntry func()) *Logger {
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#onnewcacheentry
 func (l *Logger) SetOnNewCacheEntry(OnNewCacheEntry func()) *Logger {
-	p := ba.ctx.Get("Logger").New(OnNewCacheEntry)
+	p := ba.ctx.Get("Logger").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {OnNewCacheEntry(); return nil}))
 	return LoggerFromJSObject(p, ba.ctx)
 }
 
@@ -204,7 +211,7 @@ func (l *Logger) SetOnNewCacheEntry(OnNewCacheEntry func()) *Logger {
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#warn
 func (l *Logger) Warn(Warn func()) *Logger {
-	p := ba.ctx.Get("Logger").New(Warn)
+	p := ba.ctx.Get("Logger").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {Warn(); return nil}))
 	return LoggerFromJSObject(p, ba.ctx)
 }
 
@@ -212,7 +219,7 @@ func (l *Logger) Warn(Warn func()) *Logger {
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#warn
 func (l *Logger) SetWarn(Warn func()) *Logger {
-	p := ba.ctx.Get("Logger").New(Warn)
+	p := ba.ctx.Get("Logger").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {Warn(); return nil}))
 	return LoggerFromJSObject(p, ba.ctx)
 }
 

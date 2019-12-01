@@ -27,6 +27,15 @@ func StateConditionFromJSObject(p js.Value, ctx js.Value) *StateCondition {
 	return &StateCondition{Condition: ConditionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StateConditionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StateConditionArrayToJSArray(array []*StateCondition) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStateCondition returns a new StateCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.statecondition
@@ -47,9 +56,7 @@ func (ba *Babylon) NewStateCondition(actionManager *ActionManager, target interf
 // https://doc.babylonjs.com/api/classes/babylon.statecondition#isvalid
 func (s *StateCondition) IsValid() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isValid", args...)
+	retVal := s.p.Call("isValid")
 	return retVal.Bool()
 }
 
@@ -58,9 +65,7 @@ func (s *StateCondition) IsValid() bool {
 // https://doc.babylonjs.com/api/classes/babylon.statecondition#serialize
 func (s *StateCondition) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

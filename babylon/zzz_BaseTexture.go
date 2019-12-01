@@ -29,6 +29,15 @@ func BaseTextureFromJSObject(p js.Value, ctx js.Value) *BaseTexture {
 	return &BaseTexture{p: p, ctx: ctx}
 }
 
+// BaseTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BaseTextureArrayToJSArray(array []*BaseTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBaseTexture returns a new BaseTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture
@@ -47,9 +56,7 @@ func (ba *Babylon) NewBaseTexture(scene *Scene) *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#clone
 func (b *BaseTexture) Clone() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("clone", args...)
+	retVal := b.p.Call("clone")
 	return BaseTextureFromJSObject(retVal, b.ctx)
 }
 
@@ -58,9 +65,7 @@ func (b *BaseTexture) Clone() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#delayload
 func (b *BaseTexture) DelayLoad() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("delayLoad", args...)
+	b.p.Call("delayLoad")
 }
 
 // Dispose calls the Dispose method on the BaseTexture object.
@@ -68,9 +73,7 @@ func (b *BaseTexture) DelayLoad() {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#dispose
 func (b *BaseTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("dispose", args...)
+	b.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the BaseTexture object.
@@ -78,9 +81,7 @@ func (b *BaseTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#getbasesize
 func (b *BaseTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getBaseSize", args...)
+	retVal := b.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -89,9 +90,7 @@ func (b *BaseTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#getclassname
 func (b *BaseTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getClassName", args...)
+	retVal := b.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -100,9 +99,7 @@ func (b *BaseTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#getinternaltexture
 func (b *BaseTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getInternalTexture", args...)
+	retVal := b.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, b.ctx)
 }
 
@@ -111,9 +108,7 @@ func (b *BaseTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#getreflectiontexturematrix
 func (b *BaseTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getReflectionTextureMatrix", args...)
+	retVal := b.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, b.ctx)
 }
 
@@ -122,9 +117,7 @@ func (b *BaseTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#getscene
 func (b *BaseTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getScene", args...)
+	retVal := b.p.Call("getScene")
 	return SceneFromJSObject(retVal, b.ctx)
 }
 
@@ -133,9 +126,7 @@ func (b *BaseTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#getsize
 func (b *BaseTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getSize", args...)
+	retVal := b.p.Call("getSize")
 	return retVal
 }
 
@@ -144,9 +135,7 @@ func (b *BaseTexture) GetSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#gettexturematrix
 func (b *BaseTexture) GetTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getTextureMatrix", args...)
+	retVal := b.p.Call("getTextureMatrix")
 	return MatrixFromJSObject(retVal, b.ctx)
 }
 
@@ -155,9 +144,7 @@ func (b *BaseTexture) GetTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#isready
 func (b *BaseTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("isReady", args...)
+	retVal := b.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -166,9 +153,7 @@ func (b *BaseTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#isreadyornotblocking
 func (b *BaseTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("isReadyOrNotBlocking", args...)
+	retVal := b.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -214,9 +199,7 @@ func (b *BaseTexture) ReadPixels(opts *BaseTextureReadPixelsOpts) js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#releaseinternaltexture
 func (b *BaseTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("releaseInternalTexture", args...)
+	b.p.Call("releaseInternalTexture")
 }
 
 // Scale calls the Scale method on the BaseTexture object.
@@ -236,9 +219,7 @@ func (b *BaseTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#serialize
 func (b *BaseTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("serialize", args...)
+	retVal := b.p.Call("serialize")
 	return retVal
 }
 
@@ -247,9 +228,7 @@ func (b *BaseTexture) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#tostring
 func (b *BaseTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("toString", args...)
+	retVal := b.p.Call("toString")
 	return retVal.String()
 }
 
@@ -273,7 +252,7 @@ func (b *BaseTexture) WhenAllReady(textures *BaseTexture, callback func()) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	b.p.Call("WhenAllReady", args...)
 }
@@ -684,7 +663,7 @@ func (b *BaseTexture) SetNoMipmap(noMipmap bool) *BaseTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#ondispose
 func (b *BaseTexture) OnDispose(onDispose func()) *BaseTexture {
-	p := ba.ctx.Get("BaseTexture").New(onDispose)
+	p := ba.ctx.Get("BaseTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return BaseTextureFromJSObject(p, ba.ctx)
 }
 
@@ -692,7 +671,7 @@ func (b *BaseTexture) OnDispose(onDispose func()) *BaseTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#ondispose
 func (b *BaseTexture) SetOnDispose(onDispose func()) *BaseTexture {
-	p := ba.ctx.Get("BaseTexture").New(onDispose)
+	p := ba.ctx.Get("BaseTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return BaseTextureFromJSObject(p, ba.ctx)
 }
 

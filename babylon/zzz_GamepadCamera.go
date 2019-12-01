@@ -30,6 +30,15 @@ func GamepadCameraFromJSObject(p js.Value, ctx js.Value) *GamepadCamera {
 	return &GamepadCamera{UniversalCamera: UniversalCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// GamepadCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GamepadCameraArrayToJSArray(array []*GamepadCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGamepadCamera returns a new GamepadCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadcamera
@@ -88,9 +97,7 @@ func (g *GamepadCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.gamepadcamera#dispose
 func (g *GamepadCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the GamepadCamera object.
@@ -98,9 +105,7 @@ func (g *GamepadCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.gamepadcamera#getclassname
 func (g *GamepadCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getClassName", args...)
+	retVal := g.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -122,9 +127,7 @@ func (g *GamepadCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.gamepadcamera#gettarget
 func (g *GamepadCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getTarget", args...)
+	retVal := g.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, g.ctx)
 }
 
@@ -145,9 +148,7 @@ func (g *GamepadCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.gamepadcamera#storestate
 func (g *GamepadCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("storeState", args...)
+	retVal := g.p.Call("storeState")
 	return CameraFromJSObject(retVal, g.ctx)
 }
 
@@ -429,7 +430,7 @@ func (g *GamepadCamera) SetNoRotationConstraint(noRotationConstraint bool) *Game
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadcamera#oncollide
 func (g *GamepadCamera) OnCollide(onCollide func()) *GamepadCamera {
-	p := ba.ctx.Get("GamepadCamera").New(onCollide)
+	p := ba.ctx.Get("GamepadCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return GamepadCameraFromJSObject(p, ba.ctx)
 }
 
@@ -437,7 +438,7 @@ func (g *GamepadCamera) OnCollide(onCollide func()) *GamepadCamera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadcamera#oncollide
 func (g *GamepadCamera) SetOnCollide(onCollide func()) *GamepadCamera {
-	p := ba.ctx.Get("GamepadCamera").New(onCollide)
+	p := ba.ctx.Get("GamepadCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return GamepadCameraFromJSObject(p, ba.ctx)
 }
 

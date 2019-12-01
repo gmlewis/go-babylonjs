@@ -27,6 +27,15 @@ func ImageBasedSliderFromJSObject(p js.Value, ctx js.Value) *ImageBasedSlider {
 	return &ImageBasedSlider{BaseSlider: BaseSliderFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ImageBasedSliderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ImageBasedSliderArrayToJSArray(array []*ImageBasedSlider) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewImageBasedSliderOpts contains optional parameters for NewImageBasedSlider.
 type NewImageBasedSliderOpts struct {
 	Name *string
@@ -71,9 +80,7 @@ func (i *ImageBasedSlider) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#dispose
 func (i *ImageBasedSlider) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("dispose", args...)
+	i.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the ImageBasedSlider object.
@@ -94,9 +101,7 @@ func (i *ImageBasedSlider) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#getclassname
 func (i *ImageBasedSlider) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 

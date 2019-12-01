@@ -30,6 +30,15 @@ func PhotoDomeFromJSObject(p js.Value, ctx js.Value) *PhotoDome {
 	return &PhotoDome{TransformNode: TransformNodeFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PhotoDomeArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhotoDomeArrayToJSArray(array []*PhotoDome) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhotoDomeOpts contains optional parameters for NewPhotoDome.
 type NewPhotoDomeOpts struct {
 	OnError *func()
@@ -62,7 +71,7 @@ func (ba *Babylon) NewPhotoDome(name string, urlOfPhoto string, options js.Value
 
 // PhotoDomeAddBehaviorOpts contains optional parameters for PhotoDome.AddBehavior.
 type PhotoDomeAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the PhotoDome object.
@@ -80,7 +89,7 @@ func (p *PhotoDome) AddBehavior(behavior js.Value, opts *PhotoDomeAddBehaviorOpt
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := p.p.Call("addBehavior", args...)
@@ -295,9 +304,7 @@ func (p *PhotoDome) DeleteAnimationRange(name string, opts *PhotoDomeDeleteAnima
 // https://doc.babylonjs.com/api/classes/babylon.photodome#detachfrombone
 func (p *PhotoDome) DetachFromBone() *TransformNode {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("detachFromBone", args...)
+	retVal := p.p.Call("detachFromBone")
 	return TransformNodeFromJSObject(retVal, p.ctx)
 }
 
@@ -361,9 +368,7 @@ func (p *PhotoDome) FreezeWorldMatrix(opts *PhotoDomeFreezeWorldMatrixOpts) *Tra
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getabsolutepivotpoint
 func (p *PhotoDome) GetAbsolutePivotPoint() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAbsolutePivotPoint", args...)
+	retVal := p.p.Call("getAbsolutePivotPoint")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -385,9 +390,7 @@ func (p *PhotoDome) GetAbsolutePivotPointToRef(result *Vector3) *TransformNode {
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getabsoluteposition
 func (p *PhotoDome) GetAbsolutePosition() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAbsolutePosition", args...)
+	retVal := p.p.Call("getAbsolutePosition")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -422,23 +425,21 @@ func (p *PhotoDome) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getanimationranges
 func (p *PhotoDome) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAnimationRanges", args...)
+	retVal := p.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, p.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the PhotoDome object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getbehaviorbyname
-func (p *PhotoDome) GetBehaviorByName(name string) *Node {
+func (p *PhotoDome) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := p.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, p.ctx)
+	return retVal
 }
 
 // PhotoDomeGetChildMeshesOpts contains optional parameters for PhotoDome.GetChildMeshes.
@@ -539,9 +540,7 @@ func (p *PhotoDome) GetChildren(opts *PhotoDomeGetChildrenOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getclassname
 func (p *PhotoDome) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -633,9 +632,7 @@ func (p *PhotoDome) GetDistanceToCamera(opts *PhotoDomeGetDistanceToCameraOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getengine
 func (p *PhotoDome) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEngine", args...)
+	retVal := p.p.Call("getEngine")
 	return EngineFromJSObject(retVal, p.ctx)
 }
 
@@ -675,9 +672,7 @@ func (p *PhotoDome) GetHierarchyBoundingVectors(opts *PhotoDomeGetHierarchyBound
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getpivotmatrix
 func (p *PhotoDome) GetPivotMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getPivotMatrix", args...)
+	retVal := p.p.Call("getPivotMatrix")
 	return MatrixFromJSObject(retVal, p.ctx)
 }
 
@@ -686,9 +681,7 @@ func (p *PhotoDome) GetPivotMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getpivotpoint
 func (p *PhotoDome) GetPivotPoint() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getPivotPoint", args...)
+	retVal := p.p.Call("getPivotPoint")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -710,9 +703,7 @@ func (p *PhotoDome) GetPivotPointToRef(result *Vector3) *TransformNode {
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getposematrix
 func (p *PhotoDome) GetPoseMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getPoseMatrix", args...)
+	retVal := p.p.Call("getPoseMatrix")
 	return MatrixFromJSObject(retVal, p.ctx)
 }
 
@@ -721,9 +712,7 @@ func (p *PhotoDome) GetPoseMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getpositionexpressedinlocalspace
 func (p *PhotoDome) GetPositionExpressedInLocalSpace() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getPositionExpressedInLocalSpace", args...)
+	retVal := p.p.Call("getPositionExpressedInLocalSpace")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -757,9 +746,7 @@ func (p *PhotoDome) GetPositionInCameraSpace(opts *PhotoDomeGetPositionInCameraS
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getscene
 func (p *PhotoDome) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getScene", args...)
+	retVal := p.p.Call("getScene")
 	return SceneFromJSObject(retVal, p.ctx)
 }
 
@@ -768,9 +755,7 @@ func (p *PhotoDome) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.photodome#getworldmatrix
 func (p *PhotoDome) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getWorldMatrix", args...)
+	retVal := p.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, p.ctx)
 }
 
@@ -829,9 +814,7 @@ func (p *PhotoDome) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.photodome#isdisposed
 func (p *PhotoDome) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isDisposed", args...)
+	retVal := p.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -1029,7 +1012,7 @@ func (p *PhotoDome) RegisterAfterWorldMatrixUpdate(jsFunc func()) *TransformNode
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := p.p.Call("registerAfterWorldMatrixUpdate", args...)
 	return TransformNodeFromJSObject(retVal, p.ctx)
@@ -1121,9 +1104,7 @@ func (p *PhotoDome) Serialize(opts *PhotoDomeSerializeOpts) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.photodome#serializeanimationranges
 func (p *PhotoDome) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serializeAnimationRanges", args...)
+	retVal := p.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -1317,9 +1298,7 @@ func (p *PhotoDome) Translate(axis *Vector3, distance float64, opts *PhotoDomeTr
 // https://doc.babylonjs.com/api/classes/babylon.photodome#unfreezeworldmatrix
 func (p *PhotoDome) UnfreezeWorldMatrix() *PhotoDome {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("unfreezeWorldMatrix", args...)
+	retVal := p.p.Call("unfreezeWorldMatrix")
 	return PhotoDomeFromJSObject(retVal, p.ctx)
 }
 
@@ -1330,7 +1309,7 @@ func (p *PhotoDome) UnregisterAfterWorldMatrixUpdate(jsFunc func()) *TransformNo
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, jsFunc)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
 
 	retVal := p.p.Call("unregisterAfterWorldMatrixUpdate", args...)
 	return TransformNodeFromJSObject(retVal, p.ctx)
@@ -1835,7 +1814,7 @@ func (p *PhotoDome) SetOnAfterWorldMatrixUpdateObservable(onAfterWorldMatrixUpda
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#ondispose
 func (p *PhotoDome) OnDispose(onDispose func()) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(onDispose)
+	p := ba.ctx.Get("PhotoDome").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return PhotoDomeFromJSObject(p, ba.ctx)
 }
 
@@ -1843,7 +1822,7 @@ func (p *PhotoDome) OnDispose(onDispose func()) *PhotoDome {
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#ondispose
 func (p *PhotoDome) SetOnDispose(onDispose func()) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(onDispose)
+	p := ba.ctx.Get("PhotoDome").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return PhotoDomeFromJSObject(p, ba.ctx)
 }
 
@@ -1883,7 +1862,7 @@ func (p *PhotoDome) SetOnLoadErrorObservable(onLoadErrorObservable *Observable) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#onready
 func (p *PhotoDome) OnReady(onReady func()) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(onReady)
+	p := ba.ctx.Get("PhotoDome").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return PhotoDomeFromJSObject(p, ba.ctx)
 }
 
@@ -1891,7 +1870,7 @@ func (p *PhotoDome) OnReady(onReady func()) *PhotoDome {
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#onready
 func (p *PhotoDome) SetOnReady(onReady func()) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(onReady)
+	p := ba.ctx.Get("PhotoDome").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return PhotoDomeFromJSObject(p, ba.ctx)
 }
 

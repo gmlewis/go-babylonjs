@@ -27,6 +27,15 @@ func NodeMaterialBuildStateFromJSObject(p js.Value, ctx js.Value) *NodeMaterialB
 	return &NodeMaterialBuildState{p: p, ctx: ctx}
 }
 
+// NodeMaterialBuildStateArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NodeMaterialBuildStateArrayToJSArray(array []*NodeMaterialBuildState) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Finalize calls the Finalize method on the NodeMaterialBuildState object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#finalize

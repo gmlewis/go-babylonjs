@@ -27,6 +27,15 @@ func DisplayPassPostProcessFromJSObject(p js.Value, ctx js.Value) *DisplayPassPo
 	return &DisplayPassPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DisplayPassPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DisplayPassPostProcessArrayToJSArray(array []*DisplayPassPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDisplayPassPostProcessOpts contains optional parameters for NewDisplayPassPostProcess.
 type NewDisplayPassPostProcessOpts struct {
 	SamplingMode *float64
@@ -106,9 +115,7 @@ func (d *DisplayPassPostProcess) Activate(camera *Camera, opts *DisplayPassPostP
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#apply
 func (d *DisplayPassPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("apply", args...)
+	retVal := d.p.Call("apply")
 	return EffectFromJSObject(retVal, d.ctx)
 }
 
@@ -141,9 +148,7 @@ func (d *DisplayPassPostProcess) Dispose(opts *DisplayPassPostProcessDisposeOpts
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#getcamera
 func (d *DisplayPassPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getCamera", args...)
+	retVal := d.p.Call("getCamera")
 	return CameraFromJSObject(retVal, d.ctx)
 }
 
@@ -152,9 +157,7 @@ func (d *DisplayPassPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#getclassname
 func (d *DisplayPassPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -163,9 +166,7 @@ func (d *DisplayPassPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#geteffect
 func (d *DisplayPassPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getEffect", args...)
+	retVal := d.p.Call("getEffect")
 	return EffectFromJSObject(retVal, d.ctx)
 }
 
@@ -174,9 +175,7 @@ func (d *DisplayPassPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#geteffectname
 func (d *DisplayPassPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getEffectName", args...)
+	retVal := d.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -185,9 +184,7 @@ func (d *DisplayPassPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#getengine
 func (d *DisplayPassPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getEngine", args...)
+	retVal := d.p.Call("getEngine")
 	return EngineFromJSObject(retVal, d.ctx)
 }
 
@@ -196,9 +193,7 @@ func (d *DisplayPassPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#isready
 func (d *DisplayPassPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isReady", args...)
+	retVal := d.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -207,9 +202,7 @@ func (d *DisplayPassPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#isreusable
 func (d *DisplayPassPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isReusable", args...)
+	retVal := d.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -218,9 +211,7 @@ func (d *DisplayPassPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#marktexturedirty
 func (d *DisplayPassPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("markTextureDirty", args...)
+	d.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the DisplayPassPostProcess object.
@@ -295,9 +286,7 @@ func (d *DisplayPassPostProcess) UpdateEffect(opts *DisplayPassPostProcessUpdate
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#useownoutput
 func (d *DisplayPassPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("useOwnOutput", args...)
+	d.p.Call("useOwnOutput")
 }
 
 /*
@@ -546,7 +535,7 @@ func (d *DisplayPassPostProcess) SetName(name string) *DisplayPassPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#onactivate
 func (d *DisplayPassPostProcess) OnActivate(onActivate func()) *DisplayPassPostProcess {
-	p := ba.ctx.Get("DisplayPassPostProcess").New(onActivate)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -554,7 +543,7 @@ func (d *DisplayPassPostProcess) OnActivate(onActivate func()) *DisplayPassPostP
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#onactivate
 func (d *DisplayPassPostProcess) SetOnActivate(onActivate func()) *DisplayPassPostProcess {
-	p := ba.ctx.Get("DisplayPassPostProcess").New(onActivate)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -578,7 +567,7 @@ func (d *DisplayPassPostProcess) SetOnActivateObservable(onActivateObservable *O
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#onafterrender
 func (d *DisplayPassPostProcess) OnAfterRender(onAfterRender func()) *DisplayPassPostProcess {
-	p := ba.ctx.Get("DisplayPassPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -586,7 +575,7 @@ func (d *DisplayPassPostProcess) OnAfterRender(onAfterRender func()) *DisplayPas
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#onafterrender
 func (d *DisplayPassPostProcess) SetOnAfterRender(onAfterRender func()) *DisplayPassPostProcess {
-	p := ba.ctx.Get("DisplayPassPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -610,7 +599,7 @@ func (d *DisplayPassPostProcess) SetOnAfterRenderObservable(onAfterRenderObserva
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#onapply
 func (d *DisplayPassPostProcess) OnApply(onApply func()) *DisplayPassPostProcess {
-	p := ba.ctx.Get("DisplayPassPostProcess").New(onApply)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -618,7 +607,7 @@ func (d *DisplayPassPostProcess) OnApply(onApply func()) *DisplayPassPostProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#onapply
 func (d *DisplayPassPostProcess) SetOnApply(onApply func()) *DisplayPassPostProcess {
-	p := ba.ctx.Get("DisplayPassPostProcess").New(onApply)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -642,7 +631,7 @@ func (d *DisplayPassPostProcess) SetOnApplyObservable(onApplyObservable *Observa
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#onbeforerender
 func (d *DisplayPassPostProcess) OnBeforeRender(onBeforeRender func()) *DisplayPassPostProcess {
-	p := ba.ctx.Get("DisplayPassPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -650,7 +639,7 @@ func (d *DisplayPassPostProcess) OnBeforeRender(onBeforeRender func()) *DisplayP
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#onbeforerender
 func (d *DisplayPassPostProcess) SetOnBeforeRender(onBeforeRender func()) *DisplayPassPostProcess {
-	p := ba.ctx.Get("DisplayPassPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -674,7 +663,7 @@ func (d *DisplayPassPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObser
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#onsizechanged
 func (d *DisplayPassPostProcess) OnSizeChanged(onSizeChanged func()) *DisplayPassPostProcess {
-	p := ba.ctx.Get("DisplayPassPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -682,7 +671,7 @@ func (d *DisplayPassPostProcess) OnSizeChanged(onSizeChanged func()) *DisplayPas
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#onsizechanged
 func (d *DisplayPassPostProcess) SetOnSizeChanged(onSizeChanged func()) *DisplayPassPostProcess {
-	p := ba.ctx.Get("DisplayPassPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
 

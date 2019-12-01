@@ -31,6 +31,15 @@ func FlyCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *FlyCameraInpu
 	return &FlyCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), FlyCamera: FlyCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FlyCameraInputsManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FlyCameraInputsManagerArrayToJSArray(array []*FlyCameraInputsManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFlyCameraInputsManager returns a new FlyCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager
@@ -61,9 +70,7 @@ func (f *FlyCameraInputsManager) Add(input js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#addkeyboard
 func (f *FlyCameraInputsManager) AddKeyboard() *FlyCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("addKeyboard", args...)
+	retVal := f.p.Call("addKeyboard")
 	return FlyCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
@@ -135,9 +142,7 @@ func (f *FlyCameraInputsManager) AttachInput(input js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#clear
 func (f *FlyCameraInputsManager) Clear() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("clear", args...)
+	f.p.Call("clear")
 }
 
 // FlyCameraInputsManagerDetachElementOpts contains optional parameters for FlyCameraInputsManager.DetachElement.
@@ -183,9 +188,7 @@ func (f *FlyCameraInputsManager) Parse(parsedCamera interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#rebuildinputcheck
 func (f *FlyCameraInputsManager) RebuildInputCheck() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("rebuildInputCheck", args...)
+	f.p.Call("rebuildInputCheck")
 }
 
 // Remove calls the Remove method on the FlyCameraInputsManager object.
@@ -278,7 +281,7 @@ func (f *FlyCameraInputsManager) SetCamera(camera *FlyCamera) *FlyCameraInputsMa
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#checkinputs
 func (f *FlyCameraInputsManager) CheckInputs(checkInputs func()) *FlyCameraInputsManager {
-	p := ba.ctx.Get("FlyCameraInputsManager").New(checkInputs)
+	p := ba.ctx.Get("FlyCameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
 	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -286,7 +289,7 @@ func (f *FlyCameraInputsManager) CheckInputs(checkInputs func()) *FlyCameraInput
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#checkinputs
 func (f *FlyCameraInputsManager) SetCheckInputs(checkInputs func()) *FlyCameraInputsManager {
-	p := ba.ctx.Get("FlyCameraInputsManager").New(checkInputs)
+	p := ba.ctx.Get("FlyCameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
 	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 

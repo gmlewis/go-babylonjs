@@ -29,6 +29,15 @@ func FollowCameraKeyboardMoveInputFromJSObject(p js.Value, ctx js.Value) *Follow
 	return &FollowCameraKeyboardMoveInput{p: p, ctx: ctx}
 }
 
+// FollowCameraKeyboardMoveInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FollowCameraKeyboardMoveInputArrayToJSArray(array []*FollowCameraKeyboardMoveInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // FollowCameraKeyboardMoveInputAttachControlOpts contains optional parameters for FollowCameraKeyboardMoveInput.AttachControl.
 type FollowCameraKeyboardMoveInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -60,9 +69,7 @@ func (f *FollowCameraKeyboardMoveInput) AttachControl(element js.Value, opts *Fo
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#checkinputs
 func (f *FollowCameraKeyboardMoveInput) CheckInputs() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("checkInputs", args...)
+	f.p.Call("checkInputs")
 }
 
 // DetachControl calls the DetachControl method on the FollowCameraKeyboardMoveInput object.
@@ -82,9 +89,7 @@ func (f *FollowCameraKeyboardMoveInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#getclassname
 func (f *FollowCameraKeyboardMoveInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -93,9 +98,7 @@ func (f *FollowCameraKeyboardMoveInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#getsimplename
 func (f *FollowCameraKeyboardMoveInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getSimpleName", args...)
+	retVal := f.p.Call("getSimpleName")
 	return retVal.String()
 }
 

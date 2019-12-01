@@ -27,6 +27,15 @@ func NegateBlockFromJSObject(p js.Value, ctx js.Value) *NegateBlock {
 	return &NegateBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// NegateBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NegateBlockArrayToJSArray(array []*NegateBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewNegateBlock returns a new NegateBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.negateblock
@@ -152,9 +161,7 @@ func (n *NegateBlock) ConnectTo(other *NodeMaterialBlock, opts *NegateBlockConne
 // https://doc.babylonjs.com/api/classes/babylon.negateblock#dispose
 func (n *NegateBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("dispose", args...)
+	n.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the NegateBlock object.
@@ -162,9 +169,7 @@ func (n *NegateBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.negateblock#getclassname
 func (n *NegateBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getClassName", args...)
+	retVal := n.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (n *NegateBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBu
 // https://doc.babylonjs.com/api/classes/babylon.negateblock#serialize
 func (n *NegateBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("serialize", args...)
+	retVal := n.p.Call("serialize")
 	return retVal
 }
 

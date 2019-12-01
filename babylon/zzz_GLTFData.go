@@ -27,6 +27,15 @@ func GLTFDataFromJSObject(p js.Value, ctx js.Value) *GLTFData {
 	return &GLTFData{p: p, ctx: ctx}
 }
 
+// GLTFDataArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GLTFDataArrayToJSArray(array []*GLTFData) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGLTFData returns a new GLTFData object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfdata
@@ -43,9 +52,7 @@ func (ba *Babylon) NewGLTFData() *GLTFData {
 // https://doc.babylonjs.com/api/classes/babylon.gltfdata#downloadfiles
 func (g *GLTFData) DownloadFiles() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("downloadFiles", args...)
+	g.p.Call("downloadFiles")
 }
 
 /*

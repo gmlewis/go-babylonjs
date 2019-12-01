@@ -29,6 +29,15 @@ func SelectionPanelFromJSObject(p js.Value, ctx js.Value) *SelectionPanel {
 	return &SelectionPanel{Rectangle: RectangleFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SelectionPanelArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SelectionPanelArrayToJSArray(array []*SelectionPanel) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSelectionPanelOpts contains optional parameters for NewSelectionPanel.
 type NewSelectionPanelOpts struct {
 	Groups *SelectorGroup
@@ -209,9 +218,7 @@ func (s *SelectionPanel) AddToGroupSlider(groupNb float64, label string, opts *S
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#clearcontrols
 func (s *SelectionPanel) ClearControls() *Container {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("clearControls", args...)
+	retVal := s.p.Call("clearControls")
 	return ContainerFromJSObject(retVal, s.ctx)
 }
 
@@ -247,9 +254,7 @@ func (s *SelectionPanel) ContainsControl(control *Control) bool {
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#dispose
 func (s *SelectionPanel) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the SelectionPanel object.
@@ -297,9 +302,7 @@ func (s *SelectionPanel) GetChildByType(name string, jsType string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#getclassname
 func (s *SelectionPanel) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -514,9 +517,7 @@ func (s *SelectionPanel) SetHeaderName(label string, groupNb float64) {
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#_flagdescendantsasmatrixdirty
 func (s *SelectionPanel) _flagDescendantsAsMatrixDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("_flagDescendantsAsMatrixDirty", args...)
+	s.p.Call("_flagDescendantsAsMatrixDirty")
 }
 
 /*

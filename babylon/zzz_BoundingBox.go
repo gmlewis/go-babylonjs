@@ -27,6 +27,15 @@ func BoundingBoxFromJSObject(p js.Value, ctx js.Value) *BoundingBox {
 	return &BoundingBox{p: p, ctx: ctx}
 }
 
+// BoundingBoxArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoundingBoxArrayToJSArray(array []*BoundingBox) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBoundingBoxOpts contains optional parameters for NewBoundingBox.
 type NewBoundingBoxOpts struct {
 	WorldMatrix *Matrix
@@ -60,9 +69,7 @@ func (ba *Babylon) NewBoundingBox(min *Vector3, max *Vector3, opts *NewBoundingB
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#getworldmatrix
 func (b *BoundingBox) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getWorldMatrix", args...)
+	retVal := b.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, b.ctx)
 }
 
@@ -126,12 +133,12 @@ func (b *BoundingBox) IntersectsSphere(minPoint *Vector3, maxPoint *Vector3, sph
 // IsCompletelyInFrustum calls the IsCompletelyInFrustum method on the BoundingBox object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#iscompletelyinfrustum
-func (b *BoundingBox) IsCompletelyInFrustum(boundingVectors []DeepImmutable, frustumPlanes *Vector3) bool {
+func (b *BoundingBox) IsCompletelyInFrustum(boundingVectors []*Vector3, frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, boundingVectors.JSObject())
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, Vector3ArrayToJSArray(boundingVectors))
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := b.p.Call("IsCompletelyInFrustum", args...)
 	return retVal.Bool()
@@ -140,12 +147,12 @@ func (b *BoundingBox) IsCompletelyInFrustum(boundingVectors []DeepImmutable, fru
 // IsInFrustum calls the IsInFrustum method on the BoundingBox object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#isinfrustum
-func (b *BoundingBox) IsInFrustum(boundingVectors []DeepImmutable, frustumPlanes *Vector3) bool {
+func (b *BoundingBox) IsInFrustum(boundingVectors []*Vector3, frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, boundingVectors.JSObject())
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, Vector3ArrayToJSArray(boundingVectors))
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := b.p.Call("IsInFrustum", args...)
 	return retVal.Bool()

@@ -29,6 +29,15 @@ func DoNothingActionFromJSObject(p js.Value, ctx js.Value) *DoNothingAction {
 	return &DoNothingAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DoNothingActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DoNothingActionArrayToJSArray(array []*DoNothingAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDoNothingActionOpts contains optional parameters for NewDoNothingAction.
 type NewDoNothingActionOpts struct {
 	TriggerOptions *interface{}
@@ -65,9 +74,7 @@ func (ba *Babylon) NewDoNothingAction(opts *NewDoNothingActionOpts) *DoNothingAc
 // https://doc.babylonjs.com/api/classes/babylon.donothingaction#execute
 func (d *DoNothingAction) Execute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("execute", args...)
+	d.p.Call("execute")
 }
 
 // GetTriggerParameter calls the GetTriggerParameter method on the DoNothingAction object.
@@ -75,9 +82,7 @@ func (d *DoNothingAction) Execute() {
 // https://doc.babylonjs.com/api/classes/babylon.donothingaction#gettriggerparameter
 func (d *DoNothingAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getTriggerParameter", args...)
+	retVal := d.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -99,9 +104,7 @@ func (d *DoNothingAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.donothingaction#skiptonextactiveaction
 func (d *DoNothingAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("skipToNextActiveAction", args...)
+	d.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the DoNothingAction object.

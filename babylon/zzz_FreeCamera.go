@@ -30,6 +30,15 @@ func FreeCameraFromJSObject(p js.Value, ctx js.Value) *FreeCamera {
 	return &FreeCamera{TargetCamera: TargetCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FreeCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FreeCameraArrayToJSArray(array []*FreeCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFreeCameraOpts contains optional parameters for NewFreeCamera.
 type NewFreeCameraOpts struct {
 	SetActiveOnSceneIfNoneActive *bool
@@ -102,9 +111,7 @@ func (f *FreeCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#dispose
 func (f *FreeCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("dispose", args...)
+	f.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the FreeCamera object.
@@ -112,9 +119,7 @@ func (f *FreeCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#getclassname
 func (f *FreeCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -136,9 +141,7 @@ func (f *FreeCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#gettarget
 func (f *FreeCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getTarget", args...)
+	retVal := f.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, f.ctx)
 }
 
@@ -159,9 +162,7 @@ func (f *FreeCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#storestate
 func (f *FreeCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("storeState", args...)
+	retVal := f.p.Call("storeState")
 	return CameraFromJSObject(retVal, f.ctx)
 }
 
@@ -411,7 +412,7 @@ func (f *FreeCamera) SetNoRotationConstraint(noRotationConstraint bool) *FreeCam
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#oncollide
 func (f *FreeCamera) OnCollide(onCollide func()) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(onCollide)
+	p := ba.ctx.Get("FreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return FreeCameraFromJSObject(p, ba.ctx)
 }
 
@@ -419,7 +420,7 @@ func (f *FreeCamera) OnCollide(onCollide func()) *FreeCamera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#oncollide
 func (f *FreeCamera) SetOnCollide(onCollide func()) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(onCollide)
+	p := ba.ctx.Get("FreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return FreeCameraFromJSObject(p, ba.ctx)
 }
 

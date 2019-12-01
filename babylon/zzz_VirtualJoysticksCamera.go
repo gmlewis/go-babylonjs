@@ -31,6 +31,15 @@ func VirtualJoysticksCameraFromJSObject(p js.Value, ctx js.Value) *VirtualJoysti
 	return &VirtualJoysticksCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VirtualJoysticksCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VirtualJoysticksCameraArrayToJSArray(array []*VirtualJoysticksCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVirtualJoysticksCamera returns a new VirtualJoysticksCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera
@@ -89,9 +98,7 @@ func (v *VirtualJoysticksCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera#dispose
 func (v *VirtualJoysticksCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the VirtualJoysticksCamera object.
@@ -99,9 +106,7 @@ func (v *VirtualJoysticksCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera#getclassname
 func (v *VirtualJoysticksCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -123,9 +128,7 @@ func (v *VirtualJoysticksCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera#gettarget
 func (v *VirtualJoysticksCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getTarget", args...)
+	retVal := v.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -146,9 +149,7 @@ func (v *VirtualJoysticksCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera#storestate
 func (v *VirtualJoysticksCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("storeState", args...)
+	retVal := v.p.Call("storeState")
 	return CameraFromJSObject(retVal, v.ctx)
 }
 
@@ -398,7 +399,7 @@ func (v *VirtualJoysticksCamera) SetNoRotationConstraint(noRotationConstraint bo
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera#oncollide
 func (v *VirtualJoysticksCamera) OnCollide(onCollide func()) *VirtualJoysticksCamera {
-	p := ba.ctx.Get("VirtualJoysticksCamera").New(onCollide)
+	p := ba.ctx.Get("VirtualJoysticksCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return VirtualJoysticksCameraFromJSObject(p, ba.ctx)
 }
 
@@ -406,7 +407,7 @@ func (v *VirtualJoysticksCamera) OnCollide(onCollide func()) *VirtualJoysticksCa
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera#oncollide
 func (v *VirtualJoysticksCamera) SetOnCollide(onCollide func()) *VirtualJoysticksCamera {
-	p := ba.ctx.Get("VirtualJoysticksCamera").New(onCollide)
+	p := ba.ctx.Get("VirtualJoysticksCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return VirtualJoysticksCameraFromJSObject(p, ba.ctx)
 }
 

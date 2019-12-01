@@ -27,6 +27,15 @@ func PerformanceMonitorFromJSObject(p js.Value, ctx js.Value) *PerformanceMonito
 	return &PerformanceMonitor{p: p, ctx: ctx}
 }
 
+// PerformanceMonitorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PerformanceMonitorArrayToJSArray(array []*PerformanceMonitor) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPerformanceMonitorOpts contains optional parameters for NewPerformanceMonitor.
 type NewPerformanceMonitorOpts struct {
 	FrameSampleSize *float64
@@ -57,9 +66,7 @@ func (ba *Babylon) NewPerformanceMonitor(opts *NewPerformanceMonitorOpts) *Perfo
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#disable
 func (p *PerformanceMonitor) Disable() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("disable", args...)
+	p.p.Call("disable")
 }
 
 // Enable calls the Enable method on the PerformanceMonitor object.
@@ -67,9 +74,7 @@ func (p *PerformanceMonitor) Disable() {
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#enable
 func (p *PerformanceMonitor) Enable() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("enable", args...)
+	p.p.Call("enable")
 }
 
 // Reset calls the Reset method on the PerformanceMonitor object.
@@ -77,9 +82,7 @@ func (p *PerformanceMonitor) Enable() {
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#reset
 func (p *PerformanceMonitor) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("reset", args...)
+	p.p.Call("reset")
 }
 
 // PerformanceMonitorSampleFrameOpts contains optional parameters for PerformanceMonitor.SampleFrame.

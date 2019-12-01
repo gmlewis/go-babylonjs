@@ -29,6 +29,15 @@ func AmmoJSPluginFromJSObject(p js.Value, ctx js.Value) *AmmoJSPlugin {
 	return &AmmoJSPlugin{p: p, ctx: ctx}
 }
 
+// AmmoJSPluginArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AmmoJSPluginArrayToJSArray(array []*AmmoJSPlugin) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAmmoJSPluginOpts contains optional parameters for NewAmmoJSPlugin.
 type NewAmmoJSPluginOpts struct {
 	_useDeltaForWorldStep *bool
@@ -168,20 +177,18 @@ func (a *AmmoJSPlugin) ApplyImpulse(impostor *PhysicsImpostor, force *Vector3, c
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#dispose
 func (a *AmmoJSPlugin) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // ExecuteStep calls the ExecuteStep method on the AmmoJSPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#executestep
-func (a *AmmoJSPlugin) ExecuteStep(delta float64, impostors []PhysicsImpostor) {
+func (a *AmmoJSPlugin) ExecuteStep(delta float64, impostors []*PhysicsImpostor) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, delta)
-	args = append(args, impostors.JSObject())
+	args = append(args, PhysicsImpostorArrayToJSArray(impostors))
 
 	a.p.Call("executeStep", args...)
 }
@@ -358,9 +365,7 @@ func (a *AmmoJSPlugin) GetRadius(impostor *PhysicsImpostor) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#gettimestep
 func (a *AmmoJSPlugin) GetTimeStep() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTimeStep", args...)
+	retVal := a.p.Call("getTimeStep")
 	return retVal.Float()
 }
 
@@ -369,9 +374,7 @@ func (a *AmmoJSPlugin) GetTimeStep() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#issupported
 func (a *AmmoJSPlugin) IsSupported() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("isSupported", args...)
+	retVal := a.p.Call("isSupported")
 	return retVal.Bool()
 }
 
@@ -771,7 +774,7 @@ func (a *AmmoJSPlugin) SetName(name string) *AmmoJSPlugin {
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#oncreatecustomshape
 func (a *AmmoJSPlugin) OnCreateCustomShape(onCreateCustomShape func()) *AmmoJSPlugin {
-	p := ba.ctx.Get("AmmoJSPlugin").New(onCreateCustomShape)
+	p := ba.ctx.Get("AmmoJSPlugin").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCreateCustomShape(); return nil}))
 	return AmmoJSPluginFromJSObject(p, ba.ctx)
 }
 
@@ -779,7 +782,7 @@ func (a *AmmoJSPlugin) OnCreateCustomShape(onCreateCustomShape func()) *AmmoJSPl
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#oncreatecustomshape
 func (a *AmmoJSPlugin) SetOnCreateCustomShape(onCreateCustomShape func()) *AmmoJSPlugin {
-	p := ba.ctx.Get("AmmoJSPlugin").New(onCreateCustomShape)
+	p := ba.ctx.Get("AmmoJSPlugin").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCreateCustomShape(); return nil}))
 	return AmmoJSPluginFromJSObject(p, ba.ctx)
 }
 

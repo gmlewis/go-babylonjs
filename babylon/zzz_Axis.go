@@ -27,6 +27,15 @@ func AxisFromJSObject(p js.Value, ctx js.Value) *Axis {
 	return &Axis{p: p, ctx: ctx}
 }
 
+// AxisArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AxisArrayToJSArray(array []*Axis) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // X returns the X property of class Axis.

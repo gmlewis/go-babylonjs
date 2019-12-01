@@ -27,6 +27,15 @@ func AnimatableFromJSObject(p js.Value, ctx js.Value) *Animatable {
 	return &Animatable{p: p, ctx: ctx}
 }
 
+// AnimatableArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnimatableArrayToJSArray(array []*Animatable) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnimatableOpts contains optional parameters for NewAnimatable.
 type NewAnimatableOpts struct {
 	FromFrame       *float64
@@ -109,9 +118,7 @@ func (a *Animatable) AppendAnimations(target interface{}, animations *Animation)
 // https://doc.babylonjs.com/api/classes/babylon.animatable#disableblending
 func (a *Animatable) DisableBlending() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("disableBlending", args...)
+	a.p.Call("disableBlending")
 }
 
 // EnableBlending calls the EnableBlending method on the Animatable object.
@@ -144,9 +151,7 @@ func (a *Animatable) GetAnimationByTargetProperty(property string) *Animation {
 // https://doc.babylonjs.com/api/classes/babylon.animatable#getanimations
 func (a *Animatable) GetAnimations() *RuntimeAnimation {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getAnimations", args...)
+	retVal := a.p.Call("getAnimations")
 	return RuntimeAnimationFromJSObject(retVal, a.ctx)
 }
 
@@ -180,9 +185,7 @@ func (a *Animatable) GoToFrame(frame float64) {
 // https://doc.babylonjs.com/api/classes/babylon.animatable#pause
 func (a *Animatable) Pause() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("pause", args...)
+	a.p.Call("pause")
 }
 
 // Reset calls the Reset method on the Animatable object.
@@ -190,9 +193,7 @@ func (a *Animatable) Pause() {
 // https://doc.babylonjs.com/api/classes/babylon.animatable#reset
 func (a *Animatable) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("reset", args...)
+	a.p.Call("reset")
 }
 
 // Restart calls the Restart method on the Animatable object.
@@ -200,9 +201,7 @@ func (a *Animatable) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.animatable#restart
 func (a *Animatable) Restart() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("restart", args...)
+	a.p.Call("restart")
 }
 
 // AnimatableStopOpts contains optional parameters for Animatable.Stop.
@@ -251,12 +250,10 @@ func (a *Animatable) SyncWith(root *Animatable) *Animatable {
 // WaitAsync calls the WaitAsync method on the Animatable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#waitasync
-func (a *Animatable) WaitAsync() *Animatable {
+func (a *Animatable) WaitAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("waitAsync", args...)
-	return AnimatableFromJSObject(retVal, a.ctx)
+	retVal := a.p.Call("waitAsync")
+	return PromiseFromJSObject(retVal, a.ctx)
 }
 
 /*
@@ -345,7 +342,7 @@ func (a *Animatable) SetMasterFrame(masterFrame float64) *Animatable {
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationend
 func (a *Animatable) OnAnimationEnd(onAnimationEnd func()) *Animatable {
-	p := ba.ctx.Get("Animatable").New(onAnimationEnd)
+	p := ba.ctx.Get("Animatable").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAnimationEnd(); return nil}))
 	return AnimatableFromJSObject(p, ba.ctx)
 }
 
@@ -353,7 +350,7 @@ func (a *Animatable) OnAnimationEnd(onAnimationEnd func()) *Animatable {
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationend
 func (a *Animatable) SetOnAnimationEnd(onAnimationEnd func()) *Animatable {
-	p := ba.ctx.Get("Animatable").New(onAnimationEnd)
+	p := ba.ctx.Get("Animatable").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAnimationEnd(); return nil}))
 	return AnimatableFromJSObject(p, ba.ctx)
 }
 
@@ -377,7 +374,7 @@ func (a *Animatable) SetOnAnimationEndObservable(onAnimationEndObservable *Obser
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationloop
 func (a *Animatable) OnAnimationLoop(onAnimationLoop func()) *Animatable {
-	p := ba.ctx.Get("Animatable").New(onAnimationLoop)
+	p := ba.ctx.Get("Animatable").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAnimationLoop(); return nil}))
 	return AnimatableFromJSObject(p, ba.ctx)
 }
 
@@ -385,7 +382,7 @@ func (a *Animatable) OnAnimationLoop(onAnimationLoop func()) *Animatable {
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationloop
 func (a *Animatable) SetOnAnimationLoop(onAnimationLoop func()) *Animatable {
-	p := ba.ctx.Get("Animatable").New(onAnimationLoop)
+	p := ba.ctx.Get("Animatable").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAnimationLoop(); return nil}))
 	return AnimatableFromJSObject(p, ba.ctx)
 }
 

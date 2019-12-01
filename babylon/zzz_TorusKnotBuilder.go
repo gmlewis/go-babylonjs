@@ -27,6 +27,15 @@ func TorusKnotBuilderFromJSObject(p js.Value, ctx js.Value) *TorusKnotBuilder {
 	return &TorusKnotBuilder{p: p, ctx: ctx}
 }
 
+// TorusKnotBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TorusKnotBuilderArrayToJSArray(array []*TorusKnotBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CreateTorusKnot calls the CreateTorusKnot method on the TorusKnotBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.torusknotbuilder#createtorusknot

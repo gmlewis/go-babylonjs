@@ -29,6 +29,15 @@ func HardwareScalingOptimizationFromJSObject(p js.Value, ctx js.Value) *Hardware
 	return &HardwareScalingOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
+// HardwareScalingOptimizationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HardwareScalingOptimizationArrayToJSArray(array []*HardwareScalingOptimization) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewHardwareScalingOptimizationOpts contains optional parameters for NewHardwareScalingOptimization.
 type NewHardwareScalingOptimizationOpts struct {
 	Priority     *float64
@@ -85,9 +94,7 @@ func (h *HardwareScalingOptimization) Apply(scene *Scene, optimizer *SceneOptimi
 // https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization#getdescription
 func (h *HardwareScalingOptimization) GetDescription() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getDescription", args...)
+	retVal := h.p.Call("getDescription")
 	return retVal.String()
 }
 

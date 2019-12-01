@@ -27,6 +27,15 @@ func ViewportFromJSObject(p js.Value, ctx js.Value) *Viewport {
 	return &Viewport{p: p, ctx: ctx}
 }
 
+// ViewportArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ViewportArrayToJSArray(array []*Viewport) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewViewport returns a new Viewport object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport
@@ -48,9 +57,7 @@ func (ba *Babylon) NewViewport(x float64, y float64, width float64, height float
 // https://doc.babylonjs.com/api/classes/babylon.viewport#clone
 func (v *Viewport) Clone() *Viewport {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("clone", args...)
+	retVal := v.p.Call("clone")
 	return ViewportFromJSObject(retVal, v.ctx)
 }
 

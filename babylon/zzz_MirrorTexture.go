@@ -32,6 +32,15 @@ func MirrorTextureFromJSObject(p js.Value, ctx js.Value) *MirrorTexture {
 	return &MirrorTexture{RenderTargetTexture: RenderTargetTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// MirrorTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MirrorTextureArrayToJSArray(array []*MirrorTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMirrorTextureOpts contains optional parameters for NewMirrorTexture.
 type NewMirrorTextureOpts struct {
 	GenerateMipMaps     *bool
@@ -120,9 +129,7 @@ func (m *MirrorTexture) ClearPostProcesses(opts *MirrorTextureClearPostProcesses
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#clone
 func (m *MirrorTexture) Clone() *MirrorTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("clone", args...)
+	retVal := m.p.Call("clone")
 	return MirrorTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -226,9 +233,7 @@ func (m *MirrorTexture) CreateFromBase64String(data string, name string, scene *
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#dispose
 func (m *MirrorTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("dispose", args...)
+	m.p.Call("dispose")
 }
 
 // DisposeFramebufferObjects calls the DisposeFramebufferObjects method on the MirrorTexture object.
@@ -236,9 +241,7 @@ func (m *MirrorTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#disposeframebufferobjects
 func (m *MirrorTexture) DisposeFramebufferObjects() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("disposeFramebufferObjects", args...)
+	m.p.Call("disposeFramebufferObjects")
 }
 
 // FreeRenderingGroups calls the FreeRenderingGroups method on the MirrorTexture object.
@@ -246,9 +249,7 @@ func (m *MirrorTexture) DisposeFramebufferObjects() {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#freerenderinggroups
 func (m *MirrorTexture) FreeRenderingGroups() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("freeRenderingGroups", args...)
+	m.p.Call("freeRenderingGroups")
 }
 
 // GetBaseSize calls the GetBaseSize method on the MirrorTexture object.
@@ -256,9 +257,7 @@ func (m *MirrorTexture) FreeRenderingGroups() {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getbasesize
 func (m *MirrorTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getBaseSize", args...)
+	retVal := m.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -267,9 +266,7 @@ func (m *MirrorTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getclassname
 func (m *MirrorTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -278,9 +275,7 @@ func (m *MirrorTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getinternaltexture
 func (m *MirrorTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getInternalTexture", args...)
+	retVal := m.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -289,9 +284,7 @@ func (m *MirrorTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getreflectiontexturematrix
 func (m *MirrorTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getReflectionTextureMatrix", args...)
+	retVal := m.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, m.ctx)
 }
 
@@ -300,9 +293,7 @@ func (m *MirrorTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getrenderheight
 func (m *MirrorTexture) GetRenderHeight() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getRenderHeight", args...)
+	retVal := m.p.Call("getRenderHeight")
 	return retVal.Float()
 }
 
@@ -311,9 +302,7 @@ func (m *MirrorTexture) GetRenderHeight() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getrendersize
 func (m *MirrorTexture) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getRenderSize", args...)
+	retVal := m.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -322,9 +311,7 @@ func (m *MirrorTexture) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getrenderwidth
 func (m *MirrorTexture) GetRenderWidth() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getRenderWidth", args...)
+	retVal := m.p.Call("getRenderWidth")
 	return retVal.Float()
 }
 
@@ -333,9 +320,7 @@ func (m *MirrorTexture) GetRenderWidth() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getscene
 func (m *MirrorTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getScene", args...)
+	retVal := m.p.Call("getScene")
 	return SceneFromJSObject(retVal, m.ctx)
 }
 
@@ -344,9 +329,7 @@ func (m *MirrorTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getsize
 func (m *MirrorTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getSize", args...)
+	retVal := m.p.Call("getSize")
 	return retVal
 }
 
@@ -380,9 +363,7 @@ func (m *MirrorTexture) GetTextureMatrix(opts *MirrorTextureGetTextureMatrixOpts
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getviewcount
 func (m *MirrorTexture) GetViewCount() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getViewCount", args...)
+	retVal := m.p.Call("getViewCount")
 	return retVal.Float()
 }
 
@@ -391,9 +372,7 @@ func (m *MirrorTexture) GetViewCount() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#isready
 func (m *MirrorTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("isReady", args...)
+	retVal := m.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -402,9 +381,7 @@ func (m *MirrorTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#isreadyornotblocking
 func (m *MirrorTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("isReadyOrNotBlocking", args...)
+	retVal := m.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -530,9 +507,7 @@ func (m *MirrorTexture) ReadPixels(opts *MirrorTextureReadPixelsOpts) js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#releaseinternaltexture
 func (m *MirrorTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("releaseInternalTexture", args...)
+	m.p.Call("releaseInternalTexture")
 }
 
 // RemovePostProcess calls the RemovePostProcess method on the MirrorTexture object.
@@ -582,9 +557,7 @@ func (m *MirrorTexture) Render(opts *MirrorTextureRenderOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#resetrefreshcounter
 func (m *MirrorTexture) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("resetRefreshCounter", args...)
+	m.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the MirrorTexture object.
@@ -616,9 +589,7 @@ func (m *MirrorTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#serialize
 func (m *MirrorTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("serialize", args...)
+	retVal := m.p.Call("serialize")
 	return retVal
 }
 
@@ -678,9 +649,7 @@ func (m *MirrorTexture) SetRenderingOrder(renderingGroupId float64, opts *Mirror
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#tostring
 func (m *MirrorTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("toString", args...)
+	retVal := m.p.Call("toString")
 	return retVal.String()
 }
 
@@ -736,7 +705,7 @@ func (m *MirrorTexture) WhenAllReady(textures *BaseTexture, callback func()) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	m.p.Call("WhenAllReady", args...)
 }
@@ -1019,7 +988,7 @@ func (m *MirrorTexture) SetCoordinatesMode(coordinatesMode float64) *MirrorTextu
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#customrenderfunction
 func (m *MirrorTexture) CustomRenderFunction(customRenderFunction func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(customRenderFunction)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customRenderFunction(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1027,7 +996,7 @@ func (m *MirrorTexture) CustomRenderFunction(customRenderFunction func()) *Mirro
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#customrenderfunction
 func (m *MirrorTexture) SetCustomRenderFunction(customRenderFunction func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(customRenderFunction)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customRenderFunction(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1739,7 +1708,7 @@ func (m *MirrorTexture) SetNoMipmap(noMipmap bool) *MirrorTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#onafterrender
 func (m *MirrorTexture) OnAfterRender(onAfterRender func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(onAfterRender)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1747,7 +1716,7 @@ func (m *MirrorTexture) OnAfterRender(onAfterRender func()) *MirrorTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#onafterrender
 func (m *MirrorTexture) SetOnAfterRender(onAfterRender func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(onAfterRender)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1771,7 +1740,7 @@ func (m *MirrorTexture) SetOnAfterRenderObservable(onAfterRenderObservable *Obse
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#onafterunbind
 func (m *MirrorTexture) OnAfterUnbind(onAfterUnbind func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(onAfterUnbind)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterUnbind(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1779,7 +1748,7 @@ func (m *MirrorTexture) OnAfterUnbind(onAfterUnbind func()) *MirrorTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#onafterunbind
 func (m *MirrorTexture) SetOnAfterUnbind(onAfterUnbind func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(onAfterUnbind)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterUnbind(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1819,7 +1788,7 @@ func (m *MirrorTexture) SetOnBeforeBindObservable(onBeforeBindObservable *Observ
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#onbeforerender
 func (m *MirrorTexture) OnBeforeRender(onBeforeRender func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(onBeforeRender)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1827,7 +1796,7 @@ func (m *MirrorTexture) OnBeforeRender(onBeforeRender func()) *MirrorTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#onbeforerender
 func (m *MirrorTexture) SetOnBeforeRender(onBeforeRender func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(onBeforeRender)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1851,7 +1820,7 @@ func (m *MirrorTexture) SetOnBeforeRenderObservable(onBeforeRenderObservable *Ob
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#onclear
 func (m *MirrorTexture) OnClear(onClear func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(onClear)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onClear(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1859,7 +1828,7 @@ func (m *MirrorTexture) OnClear(onClear func()) *MirrorTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#onclear
 func (m *MirrorTexture) SetOnClear(onClear func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(onClear)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onClear(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1883,7 +1852,7 @@ func (m *MirrorTexture) SetOnClearObservable(onClearObservable *Observable) *Mir
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#ondispose
 func (m *MirrorTexture) OnDispose(onDispose func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(onDispose)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1891,7 +1860,7 @@ func (m *MirrorTexture) OnDispose(onDispose func()) *MirrorTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#ondispose
 func (m *MirrorTexture) SetOnDispose(onDispose func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(onDispose)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -2042,16 +2011,16 @@ func (m *MirrorTexture) SetRefreshRate(refreshRate float64) *MirrorTexture {
 // RenderList returns the RenderList property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#renderlist
-func (m *MirrorTexture) RenderList(renderList []AbstractMesh) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(renderList.JSObject())
+func (m *MirrorTexture) RenderList(renderList []*AbstractMesh) *MirrorTexture {
+	p := ba.ctx.Get("MirrorTexture").New(renderList)
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
 // SetRenderList sets the RenderList property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#renderlist
-func (m *MirrorTexture) SetRenderList(renderList []AbstractMesh) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(renderList.JSObject())
+func (m *MirrorTexture) SetRenderList(renderList []*AbstractMesh) *MirrorTexture {
+	p := ba.ctx.Get("MirrorTexture").New(renderList)
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -2059,7 +2028,7 @@ func (m *MirrorTexture) SetRenderList(renderList []AbstractMesh) *MirrorTexture 
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#renderlistpredicate
 func (m *MirrorTexture) RenderListPredicate(renderListPredicate func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(renderListPredicate)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {renderListPredicate(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 
@@ -2067,7 +2036,7 @@ func (m *MirrorTexture) RenderListPredicate(renderListPredicate func()) *MirrorT
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#renderlistpredicate
 func (m *MirrorTexture) SetRenderListPredicate(renderListPredicate func()) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(renderListPredicate)
+	p := ba.ctx.Get("MirrorTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {renderListPredicate(); return nil}))
 	return MirrorTextureFromJSObject(p, ba.ctx)
 }
 

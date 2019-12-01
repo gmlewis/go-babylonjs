@@ -27,6 +27,15 @@ func VolumeBasedPanelFromJSObject(p js.Value, ctx js.Value) *VolumeBasedPanel {
 	return &VolumeBasedPanel{Container3D: Container3DFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VolumeBasedPanelArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VolumeBasedPanelArrayToJSArray(array []*VolumeBasedPanel) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVolumeBasedPanel returns a new VolumeBasedPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel
@@ -82,22 +91,20 @@ func (v *VolumeBasedPanel) ContainsControl(control *Control3D) bool {
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#dispose
 func (v *VolumeBasedPanel) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the VolumeBasedPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#getbehaviorbyname
-func (v *VolumeBasedPanel) GetBehaviorByName(name string) *Control3D {
+func (v *VolumeBasedPanel) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := v.p.Call("getBehaviorByName", args...)
-	return Control3DFromJSObject(retVal, v.ctx)
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the VolumeBasedPanel object.
@@ -105,9 +112,7 @@ func (v *VolumeBasedPanel) GetBehaviorByName(name string) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#getclassname
 func (v *VolumeBasedPanel) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -155,9 +160,7 @@ func (v *VolumeBasedPanel) RemoveControl(control *Control3D) *Container3D {
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#updatelayout
 func (v *VolumeBasedPanel) UpdateLayout() *Container3D {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("updateLayout", args...)
+	retVal := v.p.Call("updateLayout")
 	return Container3DFromJSObject(retVal, v.ctx)
 }
 
@@ -198,16 +201,16 @@ func (v *VolumeBasedPanel) SetBlockLayout(blockLayout bool) *VolumeBasedPanel {
 // Children returns the Children property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#children
-func (v *VolumeBasedPanel) Children(children []Control3D) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(children.JSObject())
+func (v *VolumeBasedPanel) Children(children []*Control3D) *VolumeBasedPanel {
+	p := ba.ctx.Get("VolumeBasedPanel").New(children)
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
 // SetChildren sets the Children property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#children
-func (v *VolumeBasedPanel) SetChildren(children []Control3D) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(children.JSObject())
+func (v *VolumeBasedPanel) SetChildren(children []*Control3D) *VolumeBasedPanel {
+	p := ba.ctx.Get("VolumeBasedPanel").New(children)
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
@@ -503,7 +506,7 @@ func (v *VolumeBasedPanel) SetParent(parent *Container3D) *VolumeBasedPanel {
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#pointerdownanimation
 func (v *VolumeBasedPanel) PointerDownAnimation(pointerDownAnimation func()) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(pointerDownAnimation)
+	p := ba.ctx.Get("VolumeBasedPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
@@ -511,7 +514,7 @@ func (v *VolumeBasedPanel) PointerDownAnimation(pointerDownAnimation func()) *Vo
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#pointerdownanimation
 func (v *VolumeBasedPanel) SetPointerDownAnimation(pointerDownAnimation func()) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(pointerDownAnimation)
+	p := ba.ctx.Get("VolumeBasedPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
@@ -519,7 +522,7 @@ func (v *VolumeBasedPanel) SetPointerDownAnimation(pointerDownAnimation func()) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#pointerenteranimation
 func (v *VolumeBasedPanel) PointerEnterAnimation(pointerEnterAnimation func()) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(pointerEnterAnimation)
+	p := ba.ctx.Get("VolumeBasedPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
@@ -527,7 +530,7 @@ func (v *VolumeBasedPanel) PointerEnterAnimation(pointerEnterAnimation func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#pointerenteranimation
 func (v *VolumeBasedPanel) SetPointerEnterAnimation(pointerEnterAnimation func()) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(pointerEnterAnimation)
+	p := ba.ctx.Get("VolumeBasedPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
@@ -535,7 +538,7 @@ func (v *VolumeBasedPanel) SetPointerEnterAnimation(pointerEnterAnimation func()
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#pointeroutanimation
 func (v *VolumeBasedPanel) PointerOutAnimation(pointerOutAnimation func()) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(pointerOutAnimation)
+	p := ba.ctx.Get("VolumeBasedPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
@@ -543,7 +546,7 @@ func (v *VolumeBasedPanel) PointerOutAnimation(pointerOutAnimation func()) *Volu
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#pointeroutanimation
 func (v *VolumeBasedPanel) SetPointerOutAnimation(pointerOutAnimation func()) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(pointerOutAnimation)
+	p := ba.ctx.Get("VolumeBasedPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
@@ -551,7 +554,7 @@ func (v *VolumeBasedPanel) SetPointerOutAnimation(pointerOutAnimation func()) *V
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#pointerupanimation
 func (v *VolumeBasedPanel) PointerUpAnimation(pointerUpAnimation func()) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(pointerUpAnimation)
+	p := ba.ctx.Get("VolumeBasedPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
@@ -559,7 +562,7 @@ func (v *VolumeBasedPanel) PointerUpAnimation(pointerUpAnimation func()) *Volume
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#pointerupanimation
 func (v *VolumeBasedPanel) SetPointerUpAnimation(pointerUpAnimation func()) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(pointerUpAnimation)
+	p := ba.ctx.Get("VolumeBasedPanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 

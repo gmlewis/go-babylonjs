@@ -29,6 +29,15 @@ func PolygonMeshBuilderFromJSObject(p js.Value, ctx js.Value) *PolygonMeshBuilde
 	return &PolygonMeshBuilder{p: p, ctx: ctx}
 }
 
+// PolygonMeshBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PolygonMeshBuilderArrayToJSArray(array []*PolygonMeshBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPolygonMeshBuilderOpts contains optional parameters for NewPolygonMeshBuilder.
 type NewPolygonMeshBuilderOpts struct {
 	Scene           *Scene

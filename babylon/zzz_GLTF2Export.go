@@ -27,15 +27,24 @@ func GLTF2ExportFromJSObject(p js.Value, ctx js.Value) *GLTF2Export {
 	return &GLTF2Export{p: p, ctx: ctx}
 }
 
+// GLTF2ExportArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GLTF2ExportArrayToJSArray(array []*GLTF2Export) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // GLTF2ExportGLBAsyncOpts contains optional parameters for GLTF2Export.GLBAsync.
 type GLTF2ExportGLBAsyncOpts struct {
-	Options *IExportOptions
+	Options js.Value
 }
 
 // GLBAsync calls the GLBAsync method on the GLTF2Export object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltf2export#glbasync
-func (g *GLTF2Export) GLBAsync(scene *Scene, filePrefix string, opts *GLTF2ExportGLBAsyncOpts) *GLTFData {
+func (g *GLTF2Export) GLBAsync(scene *Scene, filePrefix string, opts *GLTF2ExportGLBAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &GLTF2ExportGLBAsyncOpts{}
 	}
@@ -48,22 +57,22 @@ func (g *GLTF2Export) GLBAsync(scene *Scene, filePrefix string, opts *GLTF2Expor
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	retVal := g.p.Call("GLBAsync", args...)
-	return GLTFDataFromJSObject(retVal, g.ctx)
+	return PromiseFromJSObject(retVal, g.ctx)
 }
 
 // GLTF2ExportGLTFAsyncOpts contains optional parameters for GLTF2Export.GLTFAsync.
 type GLTF2ExportGLTFAsyncOpts struct {
-	Options *IExportOptions
+	Options js.Value
 }
 
 // GLTFAsync calls the GLTFAsync method on the GLTF2Export object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltf2export#gltfasync
-func (g *GLTF2Export) GLTFAsync(scene *Scene, filePrefix string, opts *GLTF2ExportGLTFAsyncOpts) *GLTFData {
+func (g *GLTF2Export) GLTFAsync(scene *Scene, filePrefix string, opts *GLTF2ExportGLTFAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &GLTF2ExportGLTFAsyncOpts{}
 	}
@@ -76,11 +85,11 @@ func (g *GLTF2Export) GLTFAsync(scene *Scene, filePrefix string, opts *GLTF2Expo
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options.JSObject())
+		args = append(args, opts.Options)
 	}
 
 	retVal := g.p.Call("GLTFAsync", args...)
-	return GLTFDataFromJSObject(retVal, g.ctx)
+	return PromiseFromJSObject(retVal, g.ctx)
 }
 
 /*

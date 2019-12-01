@@ -27,14 +27,21 @@ func GUIDFromJSObject(p js.Value, ctx js.Value) *GUID {
 	return &GUID{p: p, ctx: ctx}
 }
 
+// GUIDArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GUIDArrayToJSArray(array []*GUID) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // RandomId calls the RandomId method on the GUID object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.guid#randomid
 func (g *GUID) RandomId() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("RandomId", args...)
+	retVal := g.p.Call("RandomId")
 	return retVal.String()
 }
 

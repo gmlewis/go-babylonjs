@@ -27,6 +27,15 @@ func ConstantsFromJSObject(p js.Value, ctx js.Value) *Constants {
 	return &Constants{p: p, ctx: ctx}
 }
 
+// ConstantsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ConstantsArrayToJSArray(array []*Constants) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // ACTION_NothingTrigger returns the ACTION_NothingTrigger property of class Constants.

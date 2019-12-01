@@ -28,6 +28,15 @@ func SharpenPostProcessFromJSObject(p js.Value, ctx js.Value) *SharpenPostProces
 	return &SharpenPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SharpenPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SharpenPostProcessArrayToJSArray(array []*SharpenPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSharpenPostProcessOpts contains optional parameters for NewSharpenPostProcess.
 type NewSharpenPostProcessOpts struct {
 	SamplingMode     *float64
@@ -119,9 +128,7 @@ func (s *SharpenPostProcess) Activate(camera *Camera, opts *SharpenPostProcessAc
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#apply
 func (s *SharpenPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("apply", args...)
+	retVal := s.p.Call("apply")
 	return EffectFromJSObject(retVal, s.ctx)
 }
 
@@ -154,9 +161,7 @@ func (s *SharpenPostProcess) Dispose(opts *SharpenPostProcessDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#getcamera
 func (s *SharpenPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getCamera", args...)
+	retVal := s.p.Call("getCamera")
 	return CameraFromJSObject(retVal, s.ctx)
 }
 
@@ -165,9 +170,7 @@ func (s *SharpenPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#getclassname
 func (s *SharpenPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -176,9 +179,7 @@ func (s *SharpenPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#geteffect
 func (s *SharpenPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEffect", args...)
+	retVal := s.p.Call("getEffect")
 	return EffectFromJSObject(retVal, s.ctx)
 }
 
@@ -187,9 +188,7 @@ func (s *SharpenPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#geteffectname
 func (s *SharpenPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEffectName", args...)
+	retVal := s.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -198,9 +197,7 @@ func (s *SharpenPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#getengine
 func (s *SharpenPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEngine", args...)
+	retVal := s.p.Call("getEngine")
 	return EngineFromJSObject(retVal, s.ctx)
 }
 
@@ -209,9 +206,7 @@ func (s *SharpenPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#isready
 func (s *SharpenPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isReady", args...)
+	retVal := s.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -220,9 +215,7 @@ func (s *SharpenPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#isreusable
 func (s *SharpenPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isReusable", args...)
+	retVal := s.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -231,9 +224,7 @@ func (s *SharpenPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#marktexturedirty
 func (s *SharpenPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("markTextureDirty", args...)
+	s.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the SharpenPostProcess object.
@@ -308,9 +299,7 @@ func (s *SharpenPostProcess) UpdateEffect(opts *SharpenPostProcessUpdateEffectOp
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#useownoutput
 func (s *SharpenPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("useOwnOutput", args...)
+	s.p.Call("useOwnOutput")
 }
 
 /*
@@ -591,7 +580,7 @@ func (s *SharpenPostProcess) SetName(name string) *SharpenPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onactivate
 func (s *SharpenPostProcess) OnActivate(onActivate func()) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(onActivate)
+	p := ba.ctx.Get("SharpenPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -599,7 +588,7 @@ func (s *SharpenPostProcess) OnActivate(onActivate func()) *SharpenPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onactivate
 func (s *SharpenPostProcess) SetOnActivate(onActivate func()) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(onActivate)
+	p := ba.ctx.Get("SharpenPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -623,7 +612,7 @@ func (s *SharpenPostProcess) SetOnActivateObservable(onActivateObservable *Obser
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onafterrender
 func (s *SharpenPostProcess) OnAfterRender(onAfterRender func()) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("SharpenPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -631,7 +620,7 @@ func (s *SharpenPostProcess) OnAfterRender(onAfterRender func()) *SharpenPostPro
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onafterrender
 func (s *SharpenPostProcess) SetOnAfterRender(onAfterRender func()) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("SharpenPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -655,7 +644,7 @@ func (s *SharpenPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable 
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onapply
 func (s *SharpenPostProcess) OnApply(onApply func()) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(onApply)
+	p := ba.ctx.Get("SharpenPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -663,7 +652,7 @@ func (s *SharpenPostProcess) OnApply(onApply func()) *SharpenPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onapply
 func (s *SharpenPostProcess) SetOnApply(onApply func()) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(onApply)
+	p := ba.ctx.Get("SharpenPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -687,7 +676,7 @@ func (s *SharpenPostProcess) SetOnApplyObservable(onApplyObservable *Observable)
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onbeforerender
 func (s *SharpenPostProcess) OnBeforeRender(onBeforeRender func()) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("SharpenPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -695,7 +684,7 @@ func (s *SharpenPostProcess) OnBeforeRender(onBeforeRender func()) *SharpenPostP
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onbeforerender
 func (s *SharpenPostProcess) SetOnBeforeRender(onBeforeRender func()) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("SharpenPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -719,7 +708,7 @@ func (s *SharpenPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onsizechanged
 func (s *SharpenPostProcess) OnSizeChanged(onSizeChanged func()) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("SharpenPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -727,7 +716,7 @@ func (s *SharpenPostProcess) OnSizeChanged(onSizeChanged func()) *SharpenPostPro
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onsizechanged
 func (s *SharpenPostProcess) SetOnSizeChanged(onSizeChanged func()) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("SharpenPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 

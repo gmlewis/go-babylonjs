@@ -28,6 +28,15 @@ func SelectorGroupFromJSObject(p js.Value, ctx js.Value) *SelectorGroup {
 	return &SelectorGroup{p: p, ctx: ctx}
 }
 
+// SelectorGroupArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SelectorGroupArrayToJSArray(array []*SelectorGroup) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSelectorGroup returns a new SelectorGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup

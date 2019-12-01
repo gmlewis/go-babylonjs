@@ -29,17 +29,26 @@ func WebXRExperienceHelperFromJSObject(p js.Value, ctx js.Value) *WebXRExperienc
 	return &WebXRExperienceHelper{p: p, ctx: ctx}
 }
 
+// WebXRExperienceHelperArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRExperienceHelperArrayToJSArray(array []*WebXRExperienceHelper) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CreateAsync calls the CreateAsync method on the WebXRExperienceHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#createasync
-func (w *WebXRExperienceHelper) CreateAsync(scene *Scene) *WebXRExperienceHelper {
+func (w *WebXRExperienceHelper) CreateAsync(scene *Scene) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, scene.JSObject())
 
 	retVal := w.p.Call("CreateAsync", args...)
-	return WebXRExperienceHelperFromJSObject(retVal, w.ctx)
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // Dispose calls the Dispose method on the WebXRExperienceHelper object.
@@ -47,34 +56,31 @@ func (w *WebXRExperienceHelper) CreateAsync(scene *Scene) *WebXRExperienceHelper
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#dispose
 func (w *WebXRExperienceHelper) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("dispose", args...)
+	w.p.Call("dispose")
 }
 
 // EnterXRAsync calls the EnterXRAsync method on the WebXRExperienceHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#enterxrasync
-func (w *WebXRExperienceHelper) EnterXRAsync(sessionMode *XRSessionMode, referenceSpaceType *XRReferenceSpaceType, renderTarget *WebXRRenderTarget) *WebXRSessionManager {
+func (w *WebXRExperienceHelper) EnterXRAsync(sessionMode js.Value, referenceSpaceType js.Value, renderTarget *WebXRRenderTarget) *Promise {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, sessionMode.JSObject())
-	args = append(args, referenceSpaceType.JSObject())
+	args = append(args, sessionMode)
+	args = append(args, referenceSpaceType)
 	args = append(args, renderTarget.JSObject())
 
 	retVal := w.p.Call("enterXRAsync", args...)
-	return WebXRSessionManagerFromJSObject(retVal, w.ctx)
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // ExitXRAsync calls the ExitXRAsync method on the WebXRExperienceHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#exitxrasync
-func (w *WebXRExperienceHelper) ExitXRAsync() {
+func (w *WebXRExperienceHelper) ExitXRAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("exitXRAsync", args...)
+	retVal := w.p.Call("exitXRAsync")
+	return PromiseFromJSObject(retVal, w.ctx)
 }
 
 // RotateCameraByQuaternionUsingContainer calls the RotateCameraByQuaternionUsingContainer method on the WebXRExperienceHelper object.
@@ -170,16 +176,16 @@ func (w *WebXRExperienceHelper) SetSessionManager(sessionManager *WebXRSessionMa
 // State returns the State property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#state
-func (w *WebXRExperienceHelper) State(state *WebXRState) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(state.JSObject())
+func (w *WebXRExperienceHelper) State(state js.Value) *WebXRExperienceHelper {
+	p := ba.ctx.Get("WebXRExperienceHelper").New(state)
 	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
 }
 
 // SetState sets the State property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#state
-func (w *WebXRExperienceHelper) SetState(state *WebXRState) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(state.JSObject())
+func (w *WebXRExperienceHelper) SetState(state js.Value) *WebXRExperienceHelper {
+	p := ba.ctx.Get("WebXRExperienceHelper").New(state)
 	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
 }
 

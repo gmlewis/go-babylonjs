@@ -27,6 +27,15 @@ func MaterialDefinesFromJSObject(p js.Value, ctx js.Value) *MaterialDefines {
 	return &MaterialDefines{p: p, ctx: ctx}
 }
 
+// MaterialDefinesArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MaterialDefinesArrayToJSArray(array []*MaterialDefines) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CloneTo calls the CloneTo method on the MaterialDefines object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#cloneto
@@ -57,9 +66,7 @@ func (m *MaterialDefines) IsEqual(other *MaterialDefines) bool {
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#markallasdirty
 func (m *MaterialDefines) MarkAllAsDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markAllAsDirty", args...)
+	m.p.Call("markAllAsDirty")
 }
 
 // MarkAsAttributesDirty calls the MarkAsAttributesDirty method on the MaterialDefines object.
@@ -67,9 +74,7 @@ func (m *MaterialDefines) MarkAllAsDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#markasattributesdirty
 func (m *MaterialDefines) MarkAsAttributesDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markAsAttributesDirty", args...)
+	m.p.Call("markAsAttributesDirty")
 }
 
 // MarkAsFresnelDirty calls the MarkAsFresnelDirty method on the MaterialDefines object.
@@ -77,9 +82,7 @@ func (m *MaterialDefines) MarkAsAttributesDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#markasfresneldirty
 func (m *MaterialDefines) MarkAsFresnelDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markAsFresnelDirty", args...)
+	m.p.Call("markAsFresnelDirty")
 }
 
 // MarkAsImageProcessingDirty calls the MarkAsImageProcessingDirty method on the MaterialDefines object.
@@ -87,9 +90,7 @@ func (m *MaterialDefines) MarkAsFresnelDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#markasimageprocessingdirty
 func (m *MaterialDefines) MarkAsImageProcessingDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markAsImageProcessingDirty", args...)
+	m.p.Call("markAsImageProcessingDirty")
 }
 
 // MaterialDefinesMarkAsLightDirtyOpts contains optional parameters for MaterialDefines.MarkAsLightDirty.
@@ -121,9 +122,7 @@ func (m *MaterialDefines) MarkAsLightDirty(opts *MaterialDefinesMarkAsLightDirty
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#markasmiscdirty
 func (m *MaterialDefines) MarkAsMiscDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markAsMiscDirty", args...)
+	m.p.Call("markAsMiscDirty")
 }
 
 // MarkAsProcessed calls the MarkAsProcessed method on the MaterialDefines object.
@@ -131,9 +130,7 @@ func (m *MaterialDefines) MarkAsMiscDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#markasprocessed
 func (m *MaterialDefines) MarkAsProcessed() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markAsProcessed", args...)
+	m.p.Call("markAsProcessed")
 }
 
 // MarkAsTexturesDirty calls the MarkAsTexturesDirty method on the MaterialDefines object.
@@ -141,9 +138,7 @@ func (m *MaterialDefines) MarkAsProcessed() {
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#markastexturesdirty
 func (m *MaterialDefines) MarkAsTexturesDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markAsTexturesDirty", args...)
+	m.p.Call("markAsTexturesDirty")
 }
 
 // MarkAsUnprocessed calls the MarkAsUnprocessed method on the MaterialDefines object.
@@ -151,9 +146,7 @@ func (m *MaterialDefines) MarkAsTexturesDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#markasunprocessed
 func (m *MaterialDefines) MarkAsUnprocessed() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("markAsUnprocessed", args...)
+	m.p.Call("markAsUnprocessed")
 }
 
 // Rebuild calls the Rebuild method on the MaterialDefines object.
@@ -161,9 +154,7 @@ func (m *MaterialDefines) MarkAsUnprocessed() {
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#rebuild
 func (m *MaterialDefines) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("rebuild", args...)
+	m.p.Call("rebuild")
 }
 
 // Reset calls the Reset method on the MaterialDefines object.
@@ -171,9 +162,7 @@ func (m *MaterialDefines) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#reset
 func (m *MaterialDefines) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("reset", args...)
+	m.p.Call("reset")
 }
 
 // ToString calls the ToString method on the MaterialDefines object.
@@ -181,9 +170,7 @@ func (m *MaterialDefines) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#tostring
 func (m *MaterialDefines) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("toString", args...)
+	retVal := m.p.Call("toString")
 	return retVal.String()
 }
 

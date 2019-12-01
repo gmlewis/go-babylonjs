@@ -30,6 +30,15 @@ func DepthOfFieldBlurPostProcessFromJSObject(p js.Value, ctx js.Value) *DepthOfF
 	return &DepthOfFieldBlurPostProcess{BlurPostProcess: BlurPostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DepthOfFieldBlurPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DepthOfFieldBlurPostProcessArrayToJSArray(array []*DepthOfFieldBlurPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDepthOfFieldBlurPostProcessOpts contains optional parameters for NewDepthOfFieldBlurPostProcess.
 type NewDepthOfFieldBlurPostProcessOpts struct {
 	ImageToBlur      *PostProcess
@@ -131,9 +140,7 @@ func (d *DepthOfFieldBlurPostProcess) Activate(camera *Camera, opts *DepthOfFiel
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#apply
 func (d *DepthOfFieldBlurPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("apply", args...)
+	retVal := d.p.Call("apply")
 	return EffectFromJSObject(retVal, d.ctx)
 }
 
@@ -166,9 +173,7 @@ func (d *DepthOfFieldBlurPostProcess) Dispose(opts *DepthOfFieldBlurPostProcessD
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#getcamera
 func (d *DepthOfFieldBlurPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getCamera", args...)
+	retVal := d.p.Call("getCamera")
 	return CameraFromJSObject(retVal, d.ctx)
 }
 
@@ -177,9 +182,7 @@ func (d *DepthOfFieldBlurPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#getclassname
 func (d *DepthOfFieldBlurPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -188,9 +191,7 @@ func (d *DepthOfFieldBlurPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#geteffect
 func (d *DepthOfFieldBlurPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getEffect", args...)
+	retVal := d.p.Call("getEffect")
 	return EffectFromJSObject(retVal, d.ctx)
 }
 
@@ -199,9 +200,7 @@ func (d *DepthOfFieldBlurPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#geteffectname
 func (d *DepthOfFieldBlurPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getEffectName", args...)
+	retVal := d.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -210,9 +209,7 @@ func (d *DepthOfFieldBlurPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#getengine
 func (d *DepthOfFieldBlurPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getEngine", args...)
+	retVal := d.p.Call("getEngine")
 	return EngineFromJSObject(retVal, d.ctx)
 }
 
@@ -221,9 +218,7 @@ func (d *DepthOfFieldBlurPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#isready
 func (d *DepthOfFieldBlurPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isReady", args...)
+	retVal := d.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -232,9 +227,7 @@ func (d *DepthOfFieldBlurPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#isreusable
 func (d *DepthOfFieldBlurPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isReusable", args...)
+	retVal := d.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -243,9 +236,7 @@ func (d *DepthOfFieldBlurPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#marktexturedirty
 func (d *DepthOfFieldBlurPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("markTextureDirty", args...)
+	d.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the DepthOfFieldBlurPostProcess object.
@@ -320,9 +311,7 @@ func (d *DepthOfFieldBlurPostProcess) UpdateEffect(opts *DepthOfFieldBlurPostPro
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#useownoutput
 func (d *DepthOfFieldBlurPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("useOwnOutput", args...)
+	d.p.Call("useOwnOutput")
 }
 
 /*
@@ -603,7 +592,7 @@ func (d *DepthOfFieldBlurPostProcess) SetName(name string) *DepthOfFieldBlurPost
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#onactivate
 func (d *DepthOfFieldBlurPostProcess) OnActivate(onActivate func()) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(onActivate)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -611,7 +600,7 @@ func (d *DepthOfFieldBlurPostProcess) OnActivate(onActivate func()) *DepthOfFiel
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#onactivate
 func (d *DepthOfFieldBlurPostProcess) SetOnActivate(onActivate func()) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(onActivate)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -635,7 +624,7 @@ func (d *DepthOfFieldBlurPostProcess) SetOnActivateObservable(onActivateObservab
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#onafterrender
 func (d *DepthOfFieldBlurPostProcess) OnAfterRender(onAfterRender func()) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -643,7 +632,7 @@ func (d *DepthOfFieldBlurPostProcess) OnAfterRender(onAfterRender func()) *Depth
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#onafterrender
 func (d *DepthOfFieldBlurPostProcess) SetOnAfterRender(onAfterRender func()) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -667,7 +656,7 @@ func (d *DepthOfFieldBlurPostProcess) SetOnAfterRenderObservable(onAfterRenderOb
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#onapply
 func (d *DepthOfFieldBlurPostProcess) OnApply(onApply func()) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(onApply)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -675,7 +664,7 @@ func (d *DepthOfFieldBlurPostProcess) OnApply(onApply func()) *DepthOfFieldBlurP
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#onapply
 func (d *DepthOfFieldBlurPostProcess) SetOnApply(onApply func()) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(onApply)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -699,7 +688,7 @@ func (d *DepthOfFieldBlurPostProcess) SetOnApplyObservable(onApplyObservable *Ob
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#onbeforerender
 func (d *DepthOfFieldBlurPostProcess) OnBeforeRender(onBeforeRender func()) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -707,7 +696,7 @@ func (d *DepthOfFieldBlurPostProcess) OnBeforeRender(onBeforeRender func()) *Dep
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#onbeforerender
 func (d *DepthOfFieldBlurPostProcess) SetOnBeforeRender(onBeforeRender func()) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -731,7 +720,7 @@ func (d *DepthOfFieldBlurPostProcess) SetOnBeforeRenderObservable(onBeforeRender
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#onsizechanged
 func (d *DepthOfFieldBlurPostProcess) OnSizeChanged(onSizeChanged func()) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -739,7 +728,7 @@ func (d *DepthOfFieldBlurPostProcess) OnSizeChanged(onSizeChanged func()) *Depth
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#onsizechanged
 func (d *DepthOfFieldBlurPostProcess) SetOnSizeChanged(onSizeChanged func()) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 

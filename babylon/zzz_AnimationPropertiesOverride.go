@@ -27,6 +27,15 @@ func AnimationPropertiesOverrideFromJSObject(p js.Value, ctx js.Value) *Animatio
 	return &AnimationPropertiesOverride{p: p, ctx: ctx}
 }
 
+// AnimationPropertiesOverrideArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnimationPropertiesOverrideArrayToJSArray(array []*AnimationPropertiesOverride) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // BlendingSpeed returns the BlendingSpeed property of class AnimationPropertiesOverride.

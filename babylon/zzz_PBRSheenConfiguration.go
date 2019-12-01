@@ -27,6 +27,15 @@ func PBRSheenConfigurationFromJSObject(p js.Value, ctx js.Value) *PBRSheenConfig
 	return &PBRSheenConfiguration{p: p, ctx: ctx}
 }
 
+// PBRSheenConfigurationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PBRSheenConfigurationArrayToJSArray(array []*PBRSheenConfiguration) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPBRSheenConfiguration returns a new PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration
@@ -34,7 +43,7 @@ func (ba *Babylon) NewPBRSheenConfiguration(markAllSubMeshesAsTexturesDirty func
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, markAllSubMeshesAsTexturesDirty)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { markAllSubMeshesAsTexturesDirty(); return nil }))
 
 	p := ba.ctx.Get("PBRSheenConfiguration").New(args...)
 	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
@@ -43,11 +52,11 @@ func (ba *Babylon) NewPBRSheenConfiguration(markAllSubMeshesAsTexturesDirty func
 // AddFallbacks calls the AddFallbacks method on the PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#addfallbacks
-func (p *PBRSheenConfiguration) AddFallbacks(defines *IMaterialSheenDefines, fallbacks *EffectFallbacks, currentRank float64) float64 {
+func (p *PBRSheenConfiguration) AddFallbacks(defines js.Value, fallbacks *EffectFallbacks, currentRank float64) float64 {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, fallbacks.JSObject())
 	args = append(args, currentRank)
 
@@ -158,9 +167,7 @@ func (p *PBRSheenConfiguration) GetAnimatables(animatables js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#getclassname
 func (p *PBRSheenConfiguration) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -180,11 +187,11 @@ func (p *PBRSheenConfiguration) HasTexture(texture *BaseTexture) bool {
 // IsReadyForSubMesh calls the IsReadyForSubMesh method on the PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#isreadyforsubmesh
-func (p *PBRSheenConfiguration) IsReadyForSubMesh(defines *IMaterialSheenDefines, scene *Scene) bool {
+func (p *PBRSheenConfiguration) IsReadyForSubMesh(defines js.Value, scene *Scene) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, scene.JSObject())
 
 	retVal := p.p.Call("isReadyForSubMesh", args...)
@@ -208,11 +215,11 @@ func (p *PBRSheenConfiguration) Parse(source interface{}, scene *Scene, rootUrl 
 // PrepareDefines calls the PrepareDefines method on the PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#preparedefines
-func (p *PBRSheenConfiguration) PrepareDefines(defines *IMaterialSheenDefines, scene *Scene) {
+func (p *PBRSheenConfiguration) PrepareDefines(defines js.Value, scene *Scene) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 	args = append(args, scene.JSObject())
 
 	p.p.Call("prepareDefines", args...)
@@ -235,9 +242,7 @@ func (p *PBRSheenConfiguration) PrepareUniformBuffer(uniformBuffer *UniformBuffe
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#serialize
 func (p *PBRSheenConfiguration) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 

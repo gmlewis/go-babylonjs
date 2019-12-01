@@ -29,6 +29,15 @@ func CombineActionFromJSObject(p js.Value, ctx js.Value) *CombineAction {
 	return &CombineAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CombineActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CombineActionArrayToJSArray(array []*CombineAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCombineActionOpts contains optional parameters for NewCombineAction.
 type NewCombineActionOpts struct {
 	Condition *Condition
@@ -74,9 +83,7 @@ func (c *CombineAction) Execute(evt *ActionEvent) {
 // https://doc.babylonjs.com/api/classes/babylon.combineaction#gettriggerparameter
 func (c *CombineAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getTriggerParameter", args...)
+	retVal := c.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -98,9 +105,7 @@ func (c *CombineAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.combineaction#skiptonextactiveaction
 func (c *CombineAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("skipToNextActiveAction", args...)
+	c.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the CombineAction object.

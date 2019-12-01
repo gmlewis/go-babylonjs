@@ -27,6 +27,15 @@ func NormalizeBlockFromJSObject(p js.Value, ctx js.Value) *NormalizeBlock {
 	return &NormalizeBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// NormalizeBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NormalizeBlockArrayToJSArray(array []*NormalizeBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewNormalizeBlock returns a new NormalizeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock
@@ -152,9 +161,7 @@ func (n *NormalizeBlock) ConnectTo(other *NodeMaterialBlock, opts *NormalizeBloc
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock#dispose
 func (n *NormalizeBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	n.p.Call("dispose", args...)
+	n.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the NormalizeBlock object.
@@ -162,9 +169,7 @@ func (n *NormalizeBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock#getclassname
 func (n *NormalizeBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getClassName", args...)
+	retVal := n.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (n *NormalizeBlock) ReplaceRepeatableContent(vertexShaderState *NodeMateria
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock#serialize
 func (n *NormalizeBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("serialize", args...)
+	retVal := n.p.Call("serialize")
 	return retVal
 }
 

@@ -27,6 +27,15 @@ func FragmentOutputBlockFromJSObject(p js.Value, ctx js.Value) *FragmentOutputBl
 	return &FragmentOutputBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FragmentOutputBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FragmentOutputBlockArrayToJSArray(array []*FragmentOutputBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFragmentOutputBlock returns a new FragmentOutputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock
@@ -152,9 +161,7 @@ func (f *FragmentOutputBlock) ConnectTo(other *NodeMaterialBlock, opts *Fragment
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#dispose
 func (f *FragmentOutputBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("dispose", args...)
+	f.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the FragmentOutputBlock object.
@@ -162,9 +169,7 @@ func (f *FragmentOutputBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#getclassname
 func (f *FragmentOutputBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (f *FragmentOutputBlock) ReplaceRepeatableContent(vertexShaderState *NodeMa
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#serialize
 func (f *FragmentOutputBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("serialize", args...)
+	retVal := f.p.Call("serialize")
 	return retVal
 }
 

@@ -29,6 +29,15 @@ func MorphTargetFromJSObject(p js.Value, ctx js.Value) *MorphTarget {
 	return &MorphTarget{p: p, ctx: ctx}
 }
 
+// MorphTargetArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MorphTargetArrayToJSArray(array []*MorphTarget) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMorphTargetOpts contains optional parameters for NewMorphTarget.
 type NewMorphTargetOpts struct {
 	Influence *float64
@@ -67,9 +76,7 @@ func (ba *Babylon) NewMorphTarget(name string, opts *NewMorphTargetOpts) *MorphT
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#clone
 func (m *MorphTarget) Clone() *MorphTarget {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("clone", args...)
+	retVal := m.p.Call("clone")
 	return MorphTargetFromJSObject(retVal, m.ctx)
 }
 
@@ -111,9 +118,7 @@ func (m *MorphTarget) FromMesh(mesh *AbstractMesh, opts *MorphTargetFromMeshOpts
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#getclassname
 func (m *MorphTarget) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -122,9 +127,7 @@ func (m *MorphTarget) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#getnormals
 func (m *MorphTarget) GetNormals() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getNormals", args...)
+	retVal := m.p.Call("getNormals")
 	return retVal
 }
 
@@ -133,9 +136,7 @@ func (m *MorphTarget) GetNormals() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#getpositions
 func (m *MorphTarget) GetPositions() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getPositions", args...)
+	retVal := m.p.Call("getPositions")
 	return retVal
 }
 
@@ -144,9 +145,7 @@ func (m *MorphTarget) GetPositions() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#gettangents
 func (m *MorphTarget) GetTangents() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getTangents", args...)
+	retVal := m.p.Call("getTangents")
 	return retVal
 }
 
@@ -155,9 +154,7 @@ func (m *MorphTarget) GetTangents() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#getuvs
 func (m *MorphTarget) GetUVs() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getUVs", args...)
+	retVal := m.p.Call("getUVs")
 	return retVal
 }
 
@@ -179,9 +176,7 @@ func (m *MorphTarget) Parse(serializationObject interface{}) *MorphTarget {
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#serialize
 func (m *MorphTarget) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("serialize", args...)
+	retVal := m.p.Call("serialize")
 	return retVal
 }
 

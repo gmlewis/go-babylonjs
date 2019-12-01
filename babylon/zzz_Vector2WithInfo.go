@@ -27,6 +27,15 @@ func Vector2WithInfoFromJSObject(p js.Value, ctx js.Value) *Vector2WithInfo {
 	return &Vector2WithInfo{Vector2: Vector2FromJSObject(p, ctx), ctx: ctx}
 }
 
+// Vector2WithInfoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Vector2WithInfoArrayToJSArray(array []*Vector2WithInfo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVector2WithInfoOpts contains optional parameters for NewVector2WithInfo.
 type NewVector2WithInfoOpts struct {
 	ButtonIndex *float64
@@ -112,9 +121,7 @@ func (v *Vector2WithInfo) AddVector3(otherVector *Vector3) *Vector2 {
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#asarray
 func (v *Vector2WithInfo) AsArray() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("asArray", args...)
+	retVal := v.p.Call("asArray")
 	return retVal.Float()
 }
 
@@ -169,9 +176,7 @@ func (v *Vector2WithInfo) Clamp(value *Vector2, min *Vector2, max *Vector2) *Vec
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#clone
 func (v *Vector2WithInfo) Clone() *Vector2 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("clone", args...)
+	retVal := v.p.Call("clone")
 	return Vector2FromJSObject(retVal, v.ctx)
 }
 
@@ -344,9 +349,7 @@ func (v *Vector2WithInfo) EqualsWithEpsilon(otherVector *Vector2, opts *Vector2W
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#floor
 func (v *Vector2WithInfo) Floor() *Vector2 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("floor", args...)
+	retVal := v.p.Call("floor")
 	return Vector2FromJSObject(retVal, v.ctx)
 }
 
@@ -355,9 +358,7 @@ func (v *Vector2WithInfo) Floor() *Vector2 {
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#fract
 func (v *Vector2WithInfo) Fract() *Vector2 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("fract", args...)
+	retVal := v.p.Call("fract")
 	return Vector2FromJSObject(retVal, v.ctx)
 }
 
@@ -391,13 +392,13 @@ func (v *Vector2WithInfo) FromArray(array js.Value, opts *Vector2WithInfoFromArr
 // FromArrayToRef calls the FromArrayToRef method on the Vector2WithInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#fromarraytoref
-func (v *Vector2WithInfo) FromArrayToRef(array js.Value, offset float64, result float64) {
+func (v *Vector2WithInfo) FromArrayToRef(array js.Value, offset float64, result *Vector2) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, array)
 	args = append(args, offset)
-	args = append(args, result)
+	args = append(args, result.JSObject())
 
 	v.p.Call("FromArrayToRef", args...)
 }
@@ -407,9 +408,7 @@ func (v *Vector2WithInfo) FromArrayToRef(array js.Value, offset float64, result 
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#getclassname
 func (v *Vector2WithInfo) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -418,9 +417,7 @@ func (v *Vector2WithInfo) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#gethashcode
 func (v *Vector2WithInfo) GetHashCode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getHashCode", args...)
+	retVal := v.p.Call("getHashCode")
 	return retVal.Float()
 }
 
@@ -446,9 +443,7 @@ func (v *Vector2WithInfo) Hermite(value1 *Vector2, tangent1 *Vector2, value2 *Ve
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#length
 func (v *Vector2WithInfo) Length() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("length", args...)
+	retVal := v.p.Call("length")
 	return retVal.Float()
 }
 
@@ -457,9 +452,7 @@ func (v *Vector2WithInfo) Length() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#lengthsquared
 func (v *Vector2WithInfo) LengthSquared() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("lengthSquared", args...)
+	retVal := v.p.Call("lengthSquared")
 	return retVal.Float()
 }
 
@@ -565,9 +558,7 @@ func (v *Vector2WithInfo) MultiplyToRef(otherVector *Vector2, result *Vector2) *
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#negate
 func (v *Vector2WithInfo) Negate() *Vector2 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("negate", args...)
+	retVal := v.p.Call("negate")
 	return Vector2FromJSObject(retVal, v.ctx)
 }
 
@@ -589,9 +580,7 @@ func (v *Vector2WithInfo) Normalize(vector *Vector2) *Vector2 {
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#one
 func (v *Vector2WithInfo) One() *Vector2 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("One", args...)
+	retVal := v.p.Call("One")
 	return Vector2FromJSObject(retVal, v.ctx)
 }
 
@@ -751,9 +740,7 @@ func (v *Vector2WithInfo) ToArray(array js.Value, opts *Vector2WithInfoToArrayOp
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#tostring
 func (v *Vector2WithInfo) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("toString", args...)
+	retVal := v.p.Call("toString")
 	return retVal.String()
 }
 
@@ -790,9 +777,7 @@ func (v *Vector2WithInfo) TransformToRef(vector *Vector2, transformation *Matrix
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#zero
 func (v *Vector2WithInfo) Zero() *Vector2 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("Zero", args...)
+	retVal := v.p.Call("Zero")
 	return Vector2FromJSObject(retVal, v.ctx)
 }
 

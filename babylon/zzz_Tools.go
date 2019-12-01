@@ -27,6 +27,15 @@ func ToolsFromJSObject(p js.Value, ctx js.Value) *Tools {
 	return &Tools{p: p, ctx: ctx}
 }
 
+// ToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ToolsArrayToJSArray(array []*Tools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // CleanUrl calls the CleanUrl method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#cleanurl
@@ -45,9 +54,7 @@ func (t *Tools) CleanUrl(url string) string {
 // https://doc.babylonjs.com/api/classes/babylon.tools#clearlogcache
 func (t *Tools) ClearLogCache() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("ClearLogCache", args...)
+	t.p.Call("ClearLogCache")
 }
 
 // ToolsCreateScreenshotOpts contains optional parameters for Tools.CreateScreenshot.
@@ -92,7 +99,7 @@ type ToolsCreateScreenshotAsyncOpts struct {
 // CreateScreenshotAsync calls the CreateScreenshotAsync method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#createscreenshotasync
-func (t *Tools) CreateScreenshotAsync(engine *Engine, camera *Camera, size *IScreenshotSize, opts *ToolsCreateScreenshotAsyncOpts) string {
+func (t *Tools) CreateScreenshotAsync(engine *Engine, camera *Camera, size *IScreenshotSize, opts *ToolsCreateScreenshotAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ToolsCreateScreenshotAsyncOpts{}
 	}
@@ -110,7 +117,7 @@ func (t *Tools) CreateScreenshotAsync(engine *Engine, camera *Camera, size *IScr
 	}
 
 	retVal := t.p.Call("CreateScreenshotAsync", args...)
-	return retVal.String()
+	return PromiseFromJSObject(retVal, t.ctx)
 }
 
 // ToolsCreateScreenshotUsingRenderTargetOpts contains optional parameters for Tools.CreateScreenshotUsingRenderTarget.
@@ -176,7 +183,7 @@ type ToolsCreateScreenshotUsingRenderTargetAsyncOpts struct {
 // CreateScreenshotUsingRenderTargetAsync calls the CreateScreenshotUsingRenderTargetAsync method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#createscreenshotusingrendertargetasync
-func (t *Tools) CreateScreenshotUsingRenderTargetAsync(engine *Engine, camera *Camera, size *IScreenshotSize, opts *ToolsCreateScreenshotUsingRenderTargetAsyncOpts) string {
+func (t *Tools) CreateScreenshotUsingRenderTargetAsync(engine *Engine, camera *Camera, size *IScreenshotSize, opts *ToolsCreateScreenshotUsingRenderTargetAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ToolsCreateScreenshotUsingRenderTargetAsyncOpts{}
 	}
@@ -209,7 +216,7 @@ func (t *Tools) CreateScreenshotUsingRenderTargetAsync(engine *Engine, camera *C
 	}
 
 	retVal := t.p.Call("CreateScreenshotUsingRenderTargetAsync", args...)
-	return retVal.String()
+	return PromiseFromJSObject(retVal, t.ctx)
 }
 
 // DecodeBase64 calls the DecodeBase64 method on the Tools object.
@@ -261,13 +268,14 @@ func (t *Tools) DeepCopy(source interface{}, destination interface{}, opts *Tool
 // DelayAsync calls the DelayAsync method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#delayasync
-func (t *Tools) DelayAsync(delay float64) {
+func (t *Tools) DelayAsync(delay float64) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, delay)
 
-	t.p.Call("DelayAsync", args...)
+	retVal := t.p.Call("DelayAsync", args...)
+	return PromiseFromJSObject(retVal, t.ctx)
 }
 
 // Download calls the Download method on the Tools object.
@@ -374,7 +382,7 @@ func (t *Tools) Error(message string) {
 // FetchToRef calls the FetchToRef method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#fetchtoref
-func (t *Tools) FetchToRef(u float64, v float64, width float64, height float64, pixels js.Value, color *IColor4Like) {
+func (t *Tools) FetchToRef(u float64, v float64, width float64, height float64, pixels js.Value, color js.Value) {
 
 	args := make([]interface{}, 0, 6+0)
 
@@ -383,7 +391,7 @@ func (t *Tools) FetchToRef(u float64, v float64, width float64, height float64, 
 	args = append(args, width)
 	args = append(args, height)
 	args = append(args, pixels)
-	args = append(args, color.JSObject())
+	args = append(args, color)
 
 	t.p.Call("FetchToRef", args...)
 }
@@ -553,9 +561,7 @@ func (t *Tools) GetFullClassName(object interface{}, opts *ToolsGetFullClassName
 // https://doc.babylonjs.com/api/classes/babylon.tools#getpointerprefix
 func (t *Tools) GetPointerPrefix() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("GetPointerPrefix", args...)
+	retVal := t.p.Call("GetPointerPrefix")
 	return retVal.String()
 }
 
@@ -630,7 +636,7 @@ func (t *Tools) LoadFile(url string, onSuccess func(), opts *ToolsLoadFileOpts) 
 	args := make([]interface{}, 0, 2+4)
 
 	args = append(args, url)
-	args = append(args, onSuccess)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
 
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
@@ -660,14 +666,14 @@ func (t *Tools) LoadFile(url string, onSuccess func(), opts *ToolsLoadFileOpts) 
 // LoadFileAsync calls the LoadFileAsync method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#loadfileasync
-func (t *Tools) LoadFileAsync(url string) js.Value {
+func (t *Tools) LoadFileAsync(url string) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, url)
 
 	retVal := t.p.Call("LoadFileAsync", args...)
-	return retVal
+	return PromiseFromJSObject(retVal, t.ctx)
 }
 
 // ToolsLoadImageOpts contains optional parameters for Tools.LoadImage.
@@ -686,8 +692,8 @@ func (t *Tools) LoadImage(input string, onLoad func(), onError func(), offlinePr
 	args := make([]interface{}, 0, 4+1)
 
 	args = append(args, input)
-	args = append(args, onLoad)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLoad(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 	args = append(args, offlineProvider.JSObject())
 
 	if opts.MimeType == nil {
@@ -717,7 +723,7 @@ func (t *Tools) LoadScript(scriptUrl string, onSuccess func(), opts *ToolsLoadSc
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, scriptUrl)
-	args = append(args, onSuccess)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
 
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
@@ -741,7 +747,7 @@ type ToolsLoadScriptAsyncOpts struct {
 // LoadScriptAsync calls the LoadScriptAsync method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#loadscriptasync
-func (t *Tools) LoadScriptAsync(scriptUrl string, opts *ToolsLoadScriptAsyncOpts) bool {
+func (t *Tools) LoadScriptAsync(scriptUrl string, opts *ToolsLoadScriptAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ToolsLoadScriptAsyncOpts{}
 	}
@@ -757,7 +763,7 @@ func (t *Tools) LoadScriptAsync(scriptUrl string, opts *ToolsLoadScriptAsyncOpts
 	}
 
 	retVal := t.p.Call("LoadScriptAsync", args...)
-	return retVal.Bool()
+	return PromiseFromJSObject(retVal, t.ctx)
 }
 
 // Log calls the Log method on the Tools object.
@@ -780,7 +786,7 @@ type ToolsMakeArrayOpts struct {
 // MakeArray calls the MakeArray method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#makearray
-func (t *Tools) MakeArray(obj interface{}, opts *ToolsMakeArrayOpts) *[]any {
+func (t *Tools) MakeArray(obj interface{}, opts *ToolsMakeArrayOpts) []*any {
 	if opts == nil {
 		opts = &ToolsMakeArrayOpts{}
 	}
@@ -796,7 +802,7 @@ func (t *Tools) MakeArray(obj interface{}, opts *ToolsMakeArrayOpts) *[]any {
 	}
 
 	retVal := t.p.Call("MakeArray", args...)
-	return []anyFromJSObject(retVal, t.ctx)
+	return retVal
 }
 
 // Mix calls the Mix method on the Tools object.
@@ -819,9 +825,7 @@ func (t *Tools) Mix(a float64, b float64, alpha float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.tools#randomid
 func (t *Tools) RandomId() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("RandomId", args...)
+	retVal := t.p.Call("RandomId")
 	return retVal.String()
 }
 
@@ -843,7 +847,7 @@ func (t *Tools) ReadFile(file *File, onSuccess func(), opts *ToolsReadFileOpts) 
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, file.JSObject())
-	args = append(args, onSuccess)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
 
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
@@ -873,8 +877,8 @@ func (t *Tools) ReadFileAsDataURL(fileToLoad *Blob, callback func(), progressCal
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, fileToLoad.JSObject())
-	args = append(args, callback)
-	args = append(args, progressCallback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { progressCallback(); return nil }))
 
 	retVal := t.p.Call("ReadFileAsDataURL", args...)
 	return IFileRequestFromJSObject(retVal, t.ctx)
@@ -883,11 +887,11 @@ func (t *Tools) ReadFileAsDataURL(fileToLoad *Blob, callback func(), progressCal
 // RegisterTopRootEvents calls the RegisterTopRootEvents method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#registertoprootevents
-func (t *Tools) RegisterTopRootEvents(windowElement *Window, events js.Value) {
+func (t *Tools) RegisterTopRootEvents(windowElement js.Value, events js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, windowElement.JSObject())
+	args = append(args, windowElement)
 	args = append(args, events)
 
 	t.p.Call("RegisterTopRootEvents", args...)
@@ -913,7 +917,7 @@ func (t *Tools) SetImmediate(action func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
 
 	t.p.Call("SetImmediate", args...)
 }
@@ -934,7 +938,7 @@ func (t *Tools) ToBlob(canvas js.Value, successCallback func(), opts *ToolsToBlo
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, canvas)
-	args = append(args, successCallback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
 
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -974,11 +978,11 @@ func (t *Tools) ToRadians(angle float64) float64 {
 // UnregisterTopRootEvents calls the UnregisterTopRootEvents method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#unregistertoprootevents
-func (t *Tools) UnregisterTopRootEvents(windowElement *Window, events js.Value) {
+func (t *Tools) UnregisterTopRootEvents(windowElement js.Value, events js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, windowElement.JSObject())
+	args = append(args, windowElement)
 	args = append(args, events)
 
 	t.p.Call("UnregisterTopRootEvents", args...)
@@ -1066,7 +1070,7 @@ func (t *Tools) SetCustomRequestHeaders(CustomRequestHeaders js.Value) *Tools {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#defaultretrystrategy
 func (t *Tools) DefaultRetryStrategy(DefaultRetryStrategy func()) *Tools {
-	p := ba.ctx.Get("Tools").New(DefaultRetryStrategy)
+	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {DefaultRetryStrategy(); return nil}))
 	return ToolsFromJSObject(p, ba.ctx)
 }
 
@@ -1074,7 +1078,7 @@ func (t *Tools) DefaultRetryStrategy(DefaultRetryStrategy func()) *Tools {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#defaultretrystrategy
 func (t *Tools) SetDefaultRetryStrategy(DefaultRetryStrategy func()) *Tools {
-	p := ba.ctx.Get("Tools").New(DefaultRetryStrategy)
+	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {DefaultRetryStrategy(); return nil}))
 	return ToolsFromJSObject(p, ba.ctx)
 }
 
@@ -1082,7 +1086,7 @@ func (t *Tools) SetDefaultRetryStrategy(DefaultRetryStrategy func()) *Tools {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#endperformancecounter
 func (t *Tools) EndPerformanceCounter(EndPerformanceCounter func()) *Tools {
-	p := ba.ctx.Get("Tools").New(EndPerformanceCounter)
+	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {EndPerformanceCounter(); return nil}))
 	return ToolsFromJSObject(p, ba.ctx)
 }
 
@@ -1090,7 +1094,7 @@ func (t *Tools) EndPerformanceCounter(EndPerformanceCounter func()) *Tools {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#endperformancecounter
 func (t *Tools) SetEndPerformanceCounter(EndPerformanceCounter func()) *Tools {
-	p := ba.ctx.Get("Tools").New(EndPerformanceCounter)
+	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {EndPerformanceCounter(); return nil}))
 	return ToolsFromJSObject(p, ba.ctx)
 }
 
@@ -1258,7 +1262,7 @@ func (t *Tools) SetNow(Now float64) *Tools {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#onnewcacheentry
 func (t *Tools) OnNewCacheEntry(OnNewCacheEntry func()) *Tools {
-	p := ba.ctx.Get("Tools").New(OnNewCacheEntry)
+	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {OnNewCacheEntry(); return nil}))
 	return ToolsFromJSObject(p, ba.ctx)
 }
 
@@ -1266,7 +1270,7 @@ func (t *Tools) OnNewCacheEntry(OnNewCacheEntry func()) *Tools {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#onnewcacheentry
 func (t *Tools) SetOnNewCacheEntry(OnNewCacheEntry func()) *Tools {
-	p := ba.ctx.Get("Tools").New(OnNewCacheEntry)
+	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {OnNewCacheEntry(); return nil}))
 	return ToolsFromJSObject(p, ba.ctx)
 }
 
@@ -1338,7 +1342,7 @@ func (t *Tools) SetPerformanceUserMarkLogLevel(PerformanceUserMarkLogLevel float
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#preprocessurl
 func (t *Tools) PreprocessUrl(PreprocessUrl func()) *Tools {
-	p := ba.ctx.Get("Tools").New(PreprocessUrl)
+	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {PreprocessUrl(); return nil}))
 	return ToolsFromJSObject(p, ba.ctx)
 }
 
@@ -1346,7 +1350,7 @@ func (t *Tools) PreprocessUrl(PreprocessUrl func()) *Tools {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#preprocessurl
 func (t *Tools) SetPreprocessUrl(PreprocessUrl func()) *Tools {
-	p := ba.ctx.Get("Tools").New(PreprocessUrl)
+	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {PreprocessUrl(); return nil}))
 	return ToolsFromJSObject(p, ba.ctx)
 }
 
@@ -1370,7 +1374,7 @@ func (t *Tools) SetRegisteredExternalClasses(RegisteredExternalClasses js.Value)
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#startperformancecounter
 func (t *Tools) StartPerformanceCounter(StartPerformanceCounter func()) *Tools {
-	p := ba.ctx.Get("Tools").New(StartPerformanceCounter)
+	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {StartPerformanceCounter(); return nil}))
 	return ToolsFromJSObject(p, ba.ctx)
 }
 
@@ -1378,7 +1382,7 @@ func (t *Tools) StartPerformanceCounter(StartPerformanceCounter func()) *Tools {
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#startperformancecounter
 func (t *Tools) SetStartPerformanceCounter(StartPerformanceCounter func()) *Tools {
-	p := ba.ctx.Get("Tools").New(StartPerformanceCounter)
+	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {StartPerformanceCounter(); return nil}))
 	return ToolsFromJSObject(p, ba.ctx)
 }
 

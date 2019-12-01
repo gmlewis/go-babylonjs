@@ -27,6 +27,15 @@ func PhysicsEngineSceneComponentFromJSObject(p js.Value, ctx js.Value) *PhysicsE
 	return &PhysicsEngineSceneComponent{p: p, ctx: ctx}
 }
 
+// PhysicsEngineSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsEngineSceneComponentArrayToJSArray(array []*PhysicsEngineSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhysicsEngineSceneComponent returns a new PhysicsEngineSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent
@@ -45,9 +54,7 @@ func (ba *Babylon) NewPhysicsEngineSceneComponent(scene *Scene) *PhysicsEngineSc
 // https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#dispose
 func (p *PhysicsEngineSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the PhysicsEngineSceneComponent object.
@@ -55,9 +62,7 @@ func (p *PhysicsEngineSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#rebuild
 func (p *PhysicsEngineSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("rebuild", args...)
+	p.p.Call("rebuild")
 }
 
 // Register calls the Register method on the PhysicsEngineSceneComponent object.
@@ -65,9 +70,7 @@ func (p *PhysicsEngineSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#register
 func (p *PhysicsEngineSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("register", args...)
+	p.p.Call("register")
 }
 
 /*

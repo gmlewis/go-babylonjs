@@ -28,6 +28,15 @@ func OctreeSceneComponentFromJSObject(p js.Value, ctx js.Value) *OctreeSceneComp
 	return &OctreeSceneComponent{p: p, ctx: ctx}
 }
 
+// OctreeSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func OctreeSceneComponentArrayToJSArray(array []*OctreeSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewOctreeSceneComponent returns a new OctreeSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent
@@ -46,53 +55,49 @@ func (ba *Babylon) NewOctreeSceneComponent(scene *Scene) *OctreeSceneComponent {
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#dispose
 func (o *OctreeSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("dispose", args...)
+	o.p.Call("dispose")
 }
 
 // GetActiveMeshCandidates calls the GetActiveMeshCandidates method on the OctreeSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#getactivemeshcandidates
-func (o *OctreeSceneComponent) GetActiveMeshCandidates() *AbstractMesh {
+func (o *OctreeSceneComponent) GetActiveMeshCandidates() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := o.p.Call("getActiveMeshCandidates", args...)
-	return AbstractMeshFromJSObject(retVal, o.ctx)
+	retVal := o.p.Call("getActiveMeshCandidates")
+	return retVal
 }
 
 // GetActiveSubMeshCandidates calls the GetActiveSubMeshCandidates method on the OctreeSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#getactivesubmeshcandidates
-func (o *OctreeSceneComponent) GetActiveSubMeshCandidates(mesh *AbstractMesh) *SubMesh {
+func (o *OctreeSceneComponent) GetActiveSubMeshCandidates(mesh *AbstractMesh) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, mesh.JSObject())
 
 	retVal := o.p.Call("getActiveSubMeshCandidates", args...)
-	return SubMeshFromJSObject(retVal, o.ctx)
+	return retVal
 }
 
 // GetCollidingSubMeshCandidates calls the GetCollidingSubMeshCandidates method on the OctreeSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#getcollidingsubmeshcandidates
-func (o *OctreeSceneComponent) GetCollidingSubMeshCandidates(mesh *AbstractMesh, collider *Collider) *SubMesh {
+func (o *OctreeSceneComponent) GetCollidingSubMeshCandidates(mesh *AbstractMesh, collider js.Value) js.Value {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, mesh.JSObject())
-	args = append(args, collider.JSObject())
+	args = append(args, collider)
 
 	retVal := o.p.Call("getCollidingSubMeshCandidates", args...)
-	return SubMeshFromJSObject(retVal, o.ctx)
+	return retVal
 }
 
 // GetIntersectingSubMeshCandidates calls the GetIntersectingSubMeshCandidates method on the OctreeSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#getintersectingsubmeshcandidates
-func (o *OctreeSceneComponent) GetIntersectingSubMeshCandidates(mesh *AbstractMesh, localRay *Ray) *SubMesh {
+func (o *OctreeSceneComponent) GetIntersectingSubMeshCandidates(mesh *AbstractMesh, localRay *Ray) js.Value {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -100,7 +105,7 @@ func (o *OctreeSceneComponent) GetIntersectingSubMeshCandidates(mesh *AbstractMe
 	args = append(args, localRay.JSObject())
 
 	retVal := o.p.Call("getIntersectingSubMeshCandidates", args...)
-	return SubMeshFromJSObject(retVal, o.ctx)
+	return retVal
 }
 
 // Rebuild calls the Rebuild method on the OctreeSceneComponent object.
@@ -108,9 +113,7 @@ func (o *OctreeSceneComponent) GetIntersectingSubMeshCandidates(mesh *AbstractMe
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#rebuild
 func (o *OctreeSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("rebuild", args...)
+	o.p.Call("rebuild")
 }
 
 // Register calls the Register method on the OctreeSceneComponent object.
@@ -118,9 +121,7 @@ func (o *OctreeSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#register
 func (o *OctreeSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("register", args...)
+	o.p.Call("register")
 }
 
 /*

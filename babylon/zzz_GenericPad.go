@@ -27,6 +27,15 @@ func GenericPadFromJSObject(p js.Value, ctx js.Value) *GenericPad {
 	return &GenericPad{Gamepad: GamepadFromJSObject(p, ctx), ctx: ctx}
 }
 
+// GenericPadArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GenericPadArrayToJSArray(array []*GenericPad) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGenericPad returns a new GenericPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad
@@ -47,9 +56,7 @@ func (ba *Babylon) NewGenericPad(id string, index float64, browserGamepad interf
 // https://doc.babylonjs.com/api/classes/babylon.genericpad#dispose
 func (g *GenericPad) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // Onbuttondown calls the Onbuttondown method on the GenericPad object.
@@ -59,7 +66,7 @@ func (g *GenericPad) Onbuttondown(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	g.p.Call("onbuttondown", args...)
 }
@@ -71,7 +78,7 @@ func (g *GenericPad) Onbuttonup(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	g.p.Call("onbuttonup", args...)
 }
@@ -83,7 +90,7 @@ func (g *GenericPad) Onleftstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	g.p.Call("onleftstickchanged", args...)
 }
@@ -95,7 +102,7 @@ func (g *GenericPad) Onrightstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	g.p.Call("onrightstickchanged", args...)
 }
@@ -105,9 +112,7 @@ func (g *GenericPad) Onrightstickchanged(callback func()) {
 // https://doc.babylonjs.com/api/classes/babylon.genericpad#update
 func (g *GenericPad) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("update", args...)
+	g.p.Call("update")
 }
 
 /*

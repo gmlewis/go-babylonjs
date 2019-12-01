@@ -27,6 +27,15 @@ func RenderTargetCreationOptionsFromJSObject(p js.Value, ctx js.Value) *RenderTa
 	return &RenderTargetCreationOptions{p: p, ctx: ctx}
 }
 
+// RenderTargetCreationOptionsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RenderTargetCreationOptionsArrayToJSArray(array []*RenderTargetCreationOptions) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Format returns the Format property of class RenderTargetCreationOptions.

@@ -29,6 +29,15 @@ func ArcRotateCameraPointersInputFromJSObject(p js.Value, ctx js.Value) *ArcRota
 	return &ArcRotateCameraPointersInput{BaseCameraPointersInput: BaseCameraPointersInputFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ArcRotateCameraPointersInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArcRotateCameraPointersInputArrayToJSArray(array []*ArcRotateCameraPointersInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ArcRotateCameraPointersInputAttachControlOpts contains optional parameters for ArcRotateCameraPointersInput.AttachControl.
 type ArcRotateCameraPointersInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -72,9 +81,7 @@ func (a *ArcRotateCameraPointersInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#getclassname
 func (a *ArcRotateCameraPointersInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -83,9 +90,7 @@ func (a *ArcRotateCameraPointersInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#getsimplename
 func (a *ArcRotateCameraPointersInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getSimpleName", args...)
+	retVal := a.p.Call("getSimpleName")
 	return retVal.String()
 }
 

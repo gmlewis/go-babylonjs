@@ -29,6 +29,15 @@ func ArcRotateCameraVRDeviceOrientationInputFromJSObject(p js.Value, ctx js.Valu
 	return &ArcRotateCameraVRDeviceOrientationInput{p: p, ctx: ctx}
 }
 
+// ArcRotateCameraVRDeviceOrientationInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArcRotateCameraVRDeviceOrientationInputArrayToJSArray(array []*ArcRotateCameraVRDeviceOrientationInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewArcRotateCameraVRDeviceOrientationInput returns a new ArcRotateCameraVRDeviceOrientationInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput
@@ -71,9 +80,7 @@ func (a *ArcRotateCameraVRDeviceOrientationInput) AttachControl(element js.Value
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput#checkinputs
 func (a *ArcRotateCameraVRDeviceOrientationInput) CheckInputs() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("checkInputs", args...)
+	a.p.Call("checkInputs")
 }
 
 // DetachControl calls the DetachControl method on the ArcRotateCameraVRDeviceOrientationInput object.
@@ -93,9 +100,7 @@ func (a *ArcRotateCameraVRDeviceOrientationInput) DetachControl(element js.Value
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput#getclassname
 func (a *ArcRotateCameraVRDeviceOrientationInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -104,9 +109,7 @@ func (a *ArcRotateCameraVRDeviceOrientationInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput#getsimplename
 func (a *ArcRotateCameraVRDeviceOrientationInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getSimpleName", args...)
+	retVal := a.p.Call("getSimpleName")
 	return retVal.String()
 }
 

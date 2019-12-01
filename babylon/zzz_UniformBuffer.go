@@ -30,6 +30,15 @@ func UniformBufferFromJSObject(p js.Value, ctx js.Value) *UniformBuffer {
 	return &UniformBuffer{p: p, ctx: ctx}
 }
 
+// UniformBufferArrayToJSArray returns a JavaScript Array for the wrapped array.
+func UniformBufferArrayToJSArray(array []*UniformBuffer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewUniformBufferOpts contains optional parameters for NewUniformBuffer.
 type NewUniformBufferOpts struct {
 	Data    *float64
@@ -200,9 +209,7 @@ func (u *UniformBuffer) BindToEffect(effect *Effect, name string) {
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#create
 func (u *UniformBuffer) Create() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	u.p.Call("create", args...)
+	u.p.Call("create")
 }
 
 // Dispose calls the Dispose method on the UniformBuffer object.
@@ -210,9 +217,7 @@ func (u *UniformBuffer) Create() {
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#dispose
 func (u *UniformBuffer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	u.p.Call("dispose", args...)
+	u.p.Call("dispose")
 }
 
 // GetBuffer calls the GetBuffer method on the UniformBuffer object.
@@ -220,9 +225,7 @@ func (u *UniformBuffer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#getbuffer
 func (u *UniformBuffer) GetBuffer() *DataBuffer {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := u.p.Call("getBuffer", args...)
+	retVal := u.p.Call("getBuffer")
 	return DataBufferFromJSObject(retVal, u.ctx)
 }
 
@@ -231,9 +234,7 @@ func (u *UniformBuffer) GetBuffer() *DataBuffer {
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#getdata
 func (u *UniformBuffer) GetData() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := u.p.Call("getData", args...)
+	retVal := u.p.Call("getData")
 	return retVal
 }
 
@@ -242,9 +243,7 @@ func (u *UniformBuffer) GetData() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#isdynamic
 func (u *UniformBuffer) IsDynamic() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := u.p.Call("isDynamic", args...)
+	retVal := u.p.Call("isDynamic")
 	return retVal.Bool()
 }
 
@@ -266,9 +265,7 @@ func (u *UniformBuffer) SetTexture(name string, texture *BaseTexture) {
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#update
 func (u *UniformBuffer) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	u.p.Call("update", args...)
+	u.p.Call("update")
 }
 
 // UpdateUniform calls the UpdateUniform method on the UniformBuffer object.
@@ -320,7 +317,7 @@ func (u *UniformBuffer) SetIsSync(isSync bool) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatecolor3
 func (u *UniformBuffer) UpdateColor3(updateColor3 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateColor3)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateColor3(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -328,7 +325,7 @@ func (u *UniformBuffer) UpdateColor3(updateColor3 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatecolor3
 func (u *UniformBuffer) SetUpdateColor3(updateColor3 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateColor3)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateColor3(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -336,7 +333,7 @@ func (u *UniformBuffer) SetUpdateColor3(updateColor3 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatecolor4
 func (u *UniformBuffer) UpdateColor4(updateColor4 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateColor4)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateColor4(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -344,7 +341,7 @@ func (u *UniformBuffer) UpdateColor4(updateColor4 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatecolor4
 func (u *UniformBuffer) SetUpdateColor4(updateColor4 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateColor4)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateColor4(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -352,7 +349,7 @@ func (u *UniformBuffer) SetUpdateColor4(updateColor4 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat
 func (u *UniformBuffer) UpdateFloat(updateFloat func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateFloat)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateFloat(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -360,7 +357,7 @@ func (u *UniformBuffer) UpdateFloat(updateFloat func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat
 func (u *UniformBuffer) SetUpdateFloat(updateFloat func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateFloat)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateFloat(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -368,7 +365,7 @@ func (u *UniformBuffer) SetUpdateFloat(updateFloat func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat2
 func (u *UniformBuffer) UpdateFloat2(updateFloat2 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateFloat2)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateFloat2(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -376,7 +373,7 @@ func (u *UniformBuffer) UpdateFloat2(updateFloat2 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat2
 func (u *UniformBuffer) SetUpdateFloat2(updateFloat2 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateFloat2)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateFloat2(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -384,7 +381,7 @@ func (u *UniformBuffer) SetUpdateFloat2(updateFloat2 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat3
 func (u *UniformBuffer) UpdateFloat3(updateFloat3 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateFloat3)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateFloat3(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -392,7 +389,7 @@ func (u *UniformBuffer) UpdateFloat3(updateFloat3 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat3
 func (u *UniformBuffer) SetUpdateFloat3(updateFloat3 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateFloat3)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateFloat3(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -400,7 +397,7 @@ func (u *UniformBuffer) SetUpdateFloat3(updateFloat3 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat4
 func (u *UniformBuffer) UpdateFloat4(updateFloat4 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateFloat4)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateFloat4(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -408,7 +405,7 @@ func (u *UniformBuffer) UpdateFloat4(updateFloat4 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat4
 func (u *UniformBuffer) SetUpdateFloat4(updateFloat4 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateFloat4)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateFloat4(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -416,7 +413,7 @@ func (u *UniformBuffer) SetUpdateFloat4(updateFloat4 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix
 func (u *UniformBuffer) UpdateMatrix(updateMatrix func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateMatrix)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateMatrix(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -424,7 +421,7 @@ func (u *UniformBuffer) UpdateMatrix(updateMatrix func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix
 func (u *UniformBuffer) SetUpdateMatrix(updateMatrix func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateMatrix)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateMatrix(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -432,7 +429,7 @@ func (u *UniformBuffer) SetUpdateMatrix(updateMatrix func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix2x2
 func (u *UniformBuffer) UpdateMatrix2x2(updateMatrix2x2 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateMatrix2x2)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateMatrix2x2(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -440,7 +437,7 @@ func (u *UniformBuffer) UpdateMatrix2x2(updateMatrix2x2 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix2x2
 func (u *UniformBuffer) SetUpdateMatrix2x2(updateMatrix2x2 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateMatrix2x2)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateMatrix2x2(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -448,7 +445,7 @@ func (u *UniformBuffer) SetUpdateMatrix2x2(updateMatrix2x2 func()) *UniformBuffe
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix3x3
 func (u *UniformBuffer) UpdateMatrix3x3(updateMatrix3x3 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateMatrix3x3)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateMatrix3x3(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -456,7 +453,7 @@ func (u *UniformBuffer) UpdateMatrix3x3(updateMatrix3x3 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix3x3
 func (u *UniformBuffer) SetUpdateMatrix3x3(updateMatrix3x3 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateMatrix3x3)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateMatrix3x3(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -464,7 +461,7 @@ func (u *UniformBuffer) SetUpdateMatrix3x3(updateMatrix3x3 func()) *UniformBuffe
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatevector3
 func (u *UniformBuffer) UpdateVector3(updateVector3 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateVector3)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateVector3(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -472,7 +469,7 @@ func (u *UniformBuffer) UpdateVector3(updateVector3 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatevector3
 func (u *UniformBuffer) SetUpdateVector3(updateVector3 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateVector3)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateVector3(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -480,7 +477,7 @@ func (u *UniformBuffer) SetUpdateVector3(updateVector3 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatevector4
 func (u *UniformBuffer) UpdateVector4(updateVector4 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateVector4)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateVector4(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
@@ -488,7 +485,7 @@ func (u *UniformBuffer) UpdateVector4(updateVector4 func()) *UniformBuffer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatevector4
 func (u *UniformBuffer) SetUpdateVector4(updateVector4 func()) *UniformBuffer {
-	p := ba.ctx.Get("UniformBuffer").New(updateVector4)
+	p := ba.ctx.Get("UniformBuffer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateVector4(); return nil}))
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 

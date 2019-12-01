@@ -27,6 +27,15 @@ func DeepCopierFromJSObject(p js.Value, ctx js.Value) *DeepCopier {
 	return &DeepCopier{p: p, ctx: ctx}
 }
 
+// DeepCopierArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DeepCopierArrayToJSArray(array []*DeepCopier) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // DeepCopierDeepCopyOpts contains optional parameters for DeepCopier.DeepCopy.
 type DeepCopierDeepCopyOpts struct {
 	DoNotCopyList *string

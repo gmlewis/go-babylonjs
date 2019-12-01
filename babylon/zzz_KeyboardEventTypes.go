@@ -27,6 +27,15 @@ func KeyboardEventTypesFromJSObject(p js.Value, ctx js.Value) *KeyboardEventType
 	return &KeyboardEventTypes{p: p, ctx: ctx}
 }
 
+// KeyboardEventTypesArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KeyboardEventTypesArrayToJSArray(array []*KeyboardEventTypes) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // KEYDOWN returns the KEYDOWN property of class KeyboardEventTypes.

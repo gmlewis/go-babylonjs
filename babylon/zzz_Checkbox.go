@@ -27,6 +27,15 @@ func CheckboxFromJSObject(p js.Value, ctx js.Value) *Checkbox {
 	return &Checkbox{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CheckboxArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CheckboxArrayToJSArray(array []*Checkbox) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCheckboxOpts contains optional parameters for NewCheckbox.
 type NewCheckboxOpts struct {
 	Name *string
@@ -60,7 +69,7 @@ func (c *Checkbox) AddCheckBoxWithHeader(title string, onValueChanged func()) *S
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, title)
-	args = append(args, onValueChanged)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onValueChanged(); return nil }))
 
 	retVal := c.p.Call("AddCheckBoxWithHeader", args...)
 	return StackPanelFromJSObject(retVal, c.ctx)
@@ -85,9 +94,7 @@ func (c *Checkbox) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.checkbox#dispose
 func (c *Checkbox) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the Checkbox object.
@@ -108,9 +115,7 @@ func (c *Checkbox) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.checkbox#getclassname
 func (c *Checkbox) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 

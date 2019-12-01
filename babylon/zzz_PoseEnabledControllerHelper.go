@@ -27,6 +27,15 @@ func PoseEnabledControllerHelperFromJSObject(p js.Value, ctx js.Value) *PoseEnab
 	return &PoseEnabledControllerHelper{p: p, ctx: ctx}
 }
 
+// PoseEnabledControllerHelperArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PoseEnabledControllerHelperArrayToJSArray(array []*PoseEnabledControllerHelper) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // InitiateController calls the InitiateController method on the PoseEnabledControllerHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontrollerhelper#initiatecontroller

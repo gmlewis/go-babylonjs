@@ -27,6 +27,15 @@ func TiledBoxBuilderFromJSObject(p js.Value, ctx js.Value) *TiledBoxBuilder {
 	return &TiledBoxBuilder{p: p, ctx: ctx}
 }
 
+// TiledBoxBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TiledBoxBuilderArrayToJSArray(array []*TiledBoxBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // TiledBoxBuilderCreateTiledBoxOpts contains optional parameters for TiledBoxBuilder.CreateTiledBox.
 type TiledBoxBuilderCreateTiledBoxOpts struct {
 	Scene *Scene

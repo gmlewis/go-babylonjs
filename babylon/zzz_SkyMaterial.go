@@ -29,6 +29,15 @@ func SkyMaterialFromJSObject(p js.Value, ctx js.Value) *SkyMaterial {
 	return &SkyMaterial{p: p, ctx: ctx}
 }
 
+// SkyMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SkyMaterialArrayToJSArray(array []*SkyMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSkyMaterial returns a new SkyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial
@@ -227,7 +236,7 @@ type SkyMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the SkyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#forcecompilationasync
-func (s *SkyMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *SkyMaterialForceCompilationAsyncOpts) {
+func (s *SkyMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *SkyMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &SkyMaterialForceCompilationAsyncOpts{}
 	}
@@ -242,7 +251,8 @@ func (s *SkyMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *SkyMateria
 		args = append(args, opts.Options)
 	}
 
-	s.p.Call("forceCompilationAsync", args...)
+	retVal := s.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, s.ctx)
 }
 
 // Freeze calls the Freeze method on the SkyMaterial object.
@@ -250,9 +260,7 @@ func (s *SkyMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *SkyMateria
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#freeze
 func (s *SkyMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("freeze", args...)
+	s.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the SkyMaterial object.
@@ -260,9 +268,7 @@ func (s *SkyMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#getactivetextures
 func (s *SkyMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getActiveTextures", args...)
+	retVal := s.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, s.ctx)
 }
 
@@ -271,9 +277,7 @@ func (s *SkyMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#getalphatesttexture
 func (s *SkyMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAlphaTestTexture", args...)
+	retVal := s.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, s.ctx)
 }
 
@@ -282,9 +286,7 @@ func (s *SkyMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#getanimatables
 func (s *SkyMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAnimatables", args...)
+	retVal := s.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -293,9 +295,7 @@ func (s *SkyMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#getbindedmeshes
 func (s *SkyMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getBindedMeshes", args...)
+	retVal := s.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, s.ctx)
 }
 
@@ -304,9 +304,7 @@ func (s *SkyMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#getclassname
 func (s *SkyMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -315,9 +313,7 @@ func (s *SkyMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#geteffect
 func (s *SkyMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEffect", args...)
+	retVal := s.p.Call("getEffect")
 	return EffectFromJSObject(retVal, s.ctx)
 }
 
@@ -326,9 +322,7 @@ func (s *SkyMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#getscene
 func (s *SkyMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getScene", args...)
+	retVal := s.p.Call("getScene")
 	return SceneFromJSObject(retVal, s.ctx)
 }
 
@@ -421,9 +415,7 @@ func (s *SkyMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#markdirty
 func (s *SkyMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("markDirty", args...)
+	s.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the SkyMaterial object.
@@ -431,9 +423,7 @@ func (s *SkyMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#needalphablending
 func (s *SkyMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("needAlphaBlending", args...)
+	retVal := s.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -455,9 +445,7 @@ func (s *SkyMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#needalphatesting
 func (s *SkyMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("needAlphaTesting", args...)
+	retVal := s.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -481,9 +469,7 @@ func (s *SkyMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *S
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#serialize
 func (s *SkyMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 
@@ -517,9 +503,7 @@ func (s *SkyMaterial) ToString(opts *SkyMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#unbind
 func (s *SkyMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("unbind", args...)
+	s.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the SkyMaterial object.
@@ -527,9 +511,7 @@ func (s *SkyMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#unfreeze
 func (s *SkyMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("unfreeze", args...)
+	s.p.Call("unfreeze")
 }
 
 /*
@@ -601,16 +583,16 @@ func (s *SkyMaterial) SetAlphaMode(alphaMode float64) *SkyMaterial {
 // Animations returns the Animations property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#animations
-func (s *SkyMaterial) Animations(animations []Animation) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(animations.JSObject())
+func (s *SkyMaterial) Animations(animations []*Animation) *SkyMaterial {
+	p := ba.ctx.Get("SkyMaterial").New(animations)
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#animations
-func (s *SkyMaterial) SetAnimations(animations []Animation) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(animations.JSObject())
+func (s *SkyMaterial) SetAnimations(animations []*Animation) *SkyMaterial {
+	p := ba.ctx.Get("SkyMaterial").New(animations)
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -874,7 +856,7 @@ func (s *SkyMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *SkyMaterial
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#getrendertargettextures
 func (s *SkyMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("SkyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -882,7 +864,7 @@ func (s *SkyMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *S
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#getrendertargettextures
 func (s *SkyMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("SkyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1146,7 +1128,7 @@ func (s *SkyMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *SkyMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#onbind
 func (s *SkyMaterial) OnBind(onBind func()) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(onBind)
+	p := ba.ctx.Get("SkyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1154,7 +1136,7 @@ func (s *SkyMaterial) OnBind(onBind func()) *SkyMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#onbind
 func (s *SkyMaterial) SetOnBind(onBind func()) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(onBind)
+	p := ba.ctx.Get("SkyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1178,7 +1160,7 @@ func (s *SkyMaterial) SetOnBindObservable(onBindObservable *Observable) *SkyMate
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#oncompiled
 func (s *SkyMaterial) OnCompiled(onCompiled func()) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(onCompiled)
+	p := ba.ctx.Get("SkyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1186,7 +1168,7 @@ func (s *SkyMaterial) OnCompiled(onCompiled func()) *SkyMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#oncompiled
 func (s *SkyMaterial) SetOnCompiled(onCompiled func()) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(onCompiled)
+	p := ba.ctx.Get("SkyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1194,7 +1176,7 @@ func (s *SkyMaterial) SetOnCompiled(onCompiled func()) *SkyMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#ondispose
 func (s *SkyMaterial) OnDispose(onDispose func()) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(onDispose)
+	p := ba.ctx.Get("SkyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1202,7 +1184,7 @@ func (s *SkyMaterial) OnDispose(onDispose func()) *SkyMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#ondispose
 func (s *SkyMaterial) SetOnDispose(onDispose func()) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(onDispose)
+	p := ba.ctx.Get("SkyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1226,7 +1208,7 @@ func (s *SkyMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *S
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#onerror
 func (s *SkyMaterial) OnError(onError func()) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(onError)
+	p := ba.ctx.Get("SkyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1234,7 +1216,7 @@ func (s *SkyMaterial) OnError(onError func()) *SkyMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#onerror
 func (s *SkyMaterial) SetOnError(onError func()) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(onError)
+	p := ba.ctx.Get("SkyMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 

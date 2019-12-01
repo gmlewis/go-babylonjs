@@ -27,6 +27,15 @@ func WeightedSoundFromJSObject(p js.Value, ctx js.Value) *WeightedSound {
 	return &WeightedSound{p: p, ctx: ctx}
 }
 
+// WeightedSoundArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WeightedSoundArrayToJSArray(array []*WeightedSound) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWeightedSound returns a new WeightedSound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound
@@ -47,9 +56,7 @@ func (ba *Babylon) NewWeightedSound(loop bool, sounds *Sound, weights float64) *
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#pause
 func (w *WeightedSound) Pause() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("pause", args...)
+	w.p.Call("pause")
 }
 
 // WeightedSoundPlayOpts contains optional parameters for WeightedSound.Play.
@@ -81,9 +88,7 @@ func (w *WeightedSound) Play(opts *WeightedSoundPlayOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#stop
 func (w *WeightedSound) Stop() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	w.p.Call("stop", args...)
+	w.p.Call("stop")
 }
 
 /*

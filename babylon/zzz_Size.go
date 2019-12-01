@@ -27,6 +27,15 @@ func SizeFromJSObject(p js.Value, ctx js.Value) *Size {
 	return &Size{p: p, ctx: ctx}
 }
 
+// SizeArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SizeArrayToJSArray(array []*Size) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSize returns a new Size object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.size
@@ -59,9 +68,7 @@ func (s *Size) Add(otherSize *Size) *Size {
 // https://doc.babylonjs.com/api/classes/babylon.size#clone
 func (s *Size) Clone() *Size {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("clone", args...)
+	retVal := s.p.Call("clone")
 	return SizeFromJSObject(retVal, s.ctx)
 }
 
@@ -109,9 +116,7 @@ func (s *Size) Equals(other *Size) bool {
 // https://doc.babylonjs.com/api/classes/babylon.size#getclassname
 func (s *Size) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -120,9 +125,7 @@ func (s *Size) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.size#gethashcode
 func (s *Size) GetHashCode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getHashCode", args...)
+	retVal := s.p.Call("getHashCode")
 	return retVal.Float()
 }
 
@@ -187,9 +190,7 @@ func (s *Size) Subtract(otherSize *Size) *Size {
 // https://doc.babylonjs.com/api/classes/babylon.size#tostring
 func (s *Size) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("toString", args...)
+	retVal := s.p.Call("toString")
 	return retVal.String()
 }
 
@@ -198,9 +199,7 @@ func (s *Size) ToString() string {
 // https://doc.babylonjs.com/api/classes/babylon.size#zero
 func (s *Size) Zero() *Size {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("Zero", args...)
+	retVal := s.p.Call("Zero")
 	return SizeFromJSObject(retVal, s.ctx)
 }
 

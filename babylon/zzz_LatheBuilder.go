@@ -27,6 +27,15 @@ func LatheBuilderFromJSObject(p js.Value, ctx js.Value) *LatheBuilder {
 	return &LatheBuilder{p: p, ctx: ctx}
 }
 
+// LatheBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LatheBuilderArrayToJSArray(array []*LatheBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // LatheBuilderCreateLatheOpts contains optional parameters for LatheBuilder.CreateLathe.
 type LatheBuilderCreateLatheOpts struct {
 	Scene *Scene

@@ -29,6 +29,15 @@ func DefaultLoadingScreenFromJSObject(p js.Value, ctx js.Value) *DefaultLoadingS
 	return &DefaultLoadingScreen{p: p, ctx: ctx}
 }
 
+// DefaultLoadingScreenArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DefaultLoadingScreenArrayToJSArray(array []*DefaultLoadingScreen) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDefaultLoadingScreenOpts contains optional parameters for NewDefaultLoadingScreen.
 type NewDefaultLoadingScreenOpts struct {
 	_loadingText               *string
@@ -67,9 +76,7 @@ func (ba *Babylon) NewDefaultLoadingScreen(_renderingCanvas js.Value, opts *NewD
 // https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#displayloadingui
 func (d *DefaultLoadingScreen) DisplayLoadingUI() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("displayLoadingUI", args...)
+	d.p.Call("displayLoadingUI")
 }
 
 // HideLoadingUI calls the HideLoadingUI method on the DefaultLoadingScreen object.
@@ -77,9 +84,7 @@ func (d *DefaultLoadingScreen) DisplayLoadingUI() {
 // https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#hideloadingui
 func (d *DefaultLoadingScreen) HideLoadingUI() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("hideLoadingUI", args...)
+	d.p.Call("hideLoadingUI")
 }
 
 /*

@@ -27,6 +27,15 @@ func CrossBlockFromJSObject(p js.Value, ctx js.Value) *CrossBlock {
 	return &CrossBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CrossBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CrossBlockArrayToJSArray(array []*CrossBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCrossBlock returns a new CrossBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.crossblock
@@ -152,9 +161,7 @@ func (c *CrossBlock) ConnectTo(other *NodeMaterialBlock, opts *CrossBlockConnect
 // https://doc.babylonjs.com/api/classes/babylon.crossblock#dispose
 func (c *CrossBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the CrossBlock object.
@@ -162,9 +169,7 @@ func (c *CrossBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.crossblock#getclassname
 func (c *CrossBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (c *CrossBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBui
 // https://doc.babylonjs.com/api/classes/babylon.crossblock#serialize
 func (c *CrossBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 

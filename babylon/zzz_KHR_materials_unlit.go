@@ -27,6 +27,15 @@ func KHR_materials_unlitFromJSObject(p js.Value, ctx js.Value) *KHR_materials_un
 	return &KHR_materials_unlit{p: p, ctx: ctx}
 }
 
+// KHR_materials_unlitArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KHR_materials_unlitArrayToJSArray(array []*KHR_materials_unlit) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class KHR_materials_unlit.

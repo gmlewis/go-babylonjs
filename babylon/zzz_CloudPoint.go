@@ -27,6 +27,15 @@ func CloudPointFromJSObject(p js.Value, ctx js.Value) *CloudPoint {
 	return &CloudPoint{p: p, ctx: ctx}
 }
 
+// CloudPointArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CloudPointArrayToJSArray(array []*CloudPoint) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCloudPoint returns a new CloudPoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudpoint

@@ -27,6 +27,15 @@ func InputTextFromJSObject(p js.Value, ctx js.Value) *InputText {
 	return &InputText{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
+// InputTextArrayToJSArray returns a JavaScript Array for the wrapped array.
+func InputTextArrayToJSArray(array []*InputText) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewInputTextOpts contains optional parameters for NewInputText.
 type NewInputTextOpts struct {
 	Name *string
@@ -77,9 +86,7 @@ func (i *InputText) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.inputtext#dispose
 func (i *InputText) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("dispose", args...)
+	i.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the InputText object.
@@ -100,9 +107,7 @@ func (i *InputText) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.inputtext#getclassname
 func (i *InputText) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -227,9 +232,7 @@ func (i *InputText) IsAscendant(container *Control) bool {
 // https://doc.babylonjs.com/api/classes/babylon.inputtext#keepsfocuswith
 func (i *InputText) KeepsFocusWith() *Control {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("keepsFocusWith", args...)
+	retVal := i.p.Call("keepsFocusWith")
 	return ControlFromJSObject(retVal, i.ctx)
 }
 

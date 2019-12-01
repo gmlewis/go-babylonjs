@@ -29,6 +29,15 @@ func MeshLODLevelFromJSObject(p js.Value, ctx js.Value) *MeshLODLevel {
 	return &MeshLODLevel{p: p, ctx: ctx}
 }
 
+// MeshLODLevelArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MeshLODLevelArrayToJSArray(array []*MeshLODLevel) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMeshLODLevel returns a new MeshLODLevel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshlodlevel

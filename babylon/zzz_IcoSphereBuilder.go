@@ -27,6 +27,15 @@ func IcoSphereBuilderFromJSObject(p js.Value, ctx js.Value) *IcoSphereBuilder {
 	return &IcoSphereBuilder{p: p, ctx: ctx}
 }
 
+// IcoSphereBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func IcoSphereBuilderArrayToJSArray(array []*IcoSphereBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // IcoSphereBuilderCreateIcoSphereOpts contains optional parameters for IcoSphereBuilder.CreateIcoSphere.
 type IcoSphereBuilderCreateIcoSphereOpts struct {
 	Scene *Scene

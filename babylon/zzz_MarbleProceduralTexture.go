@@ -27,6 +27,15 @@ func MarbleProceduralTextureFromJSObject(p js.Value, ctx js.Value) *MarbleProced
 	return &MarbleProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// MarbleProceduralTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MarbleProceduralTextureArrayToJSArray(array []*MarbleProceduralTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMarbleProceduralTextureOpts contains optional parameters for NewMarbleProceduralTexture.
 type NewMarbleProceduralTextureOpts struct {
 	FallbackTexture *Texture
@@ -67,9 +76,7 @@ func (ba *Babylon) NewMarbleProceduralTexture(name string, size float64, scene *
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#clone
 func (m *MarbleProceduralTexture) Clone() *ProceduralTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("clone", args...)
+	retVal := m.p.Call("clone")
 	return ProceduralTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -137,9 +144,7 @@ func (m *MarbleProceduralTexture) CreateFromBase64String(data string, name strin
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#dispose
 func (m *MarbleProceduralTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("dispose", args...)
+	m.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the MarbleProceduralTexture object.
@@ -147,9 +152,7 @@ func (m *MarbleProceduralTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#getbasesize
 func (m *MarbleProceduralTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getBaseSize", args...)
+	retVal := m.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -158,9 +161,7 @@ func (m *MarbleProceduralTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#getclassname
 func (m *MarbleProceduralTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -169,9 +170,7 @@ func (m *MarbleProceduralTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#getcontent
 func (m *MarbleProceduralTexture) GetContent() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getContent", args...)
+	retVal := m.p.Call("getContent")
 	return retVal
 }
 
@@ -180,9 +179,7 @@ func (m *MarbleProceduralTexture) GetContent() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#geteffect
 func (m *MarbleProceduralTexture) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getEffect", args...)
+	retVal := m.p.Call("getEffect")
 	return EffectFromJSObject(retVal, m.ctx)
 }
 
@@ -191,9 +188,7 @@ func (m *MarbleProceduralTexture) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#getinternaltexture
 func (m *MarbleProceduralTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getInternalTexture", args...)
+	retVal := m.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -202,9 +197,7 @@ func (m *MarbleProceduralTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#getreflectiontexturematrix
 func (m *MarbleProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getReflectionTextureMatrix", args...)
+	retVal := m.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, m.ctx)
 }
 
@@ -213,9 +206,7 @@ func (m *MarbleProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#getrendersize
 func (m *MarbleProceduralTexture) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getRenderSize", args...)
+	retVal := m.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -224,9 +215,7 @@ func (m *MarbleProceduralTexture) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#getscene
 func (m *MarbleProceduralTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getScene", args...)
+	retVal := m.p.Call("getScene")
 	return SceneFromJSObject(retVal, m.ctx)
 }
 
@@ -235,9 +224,7 @@ func (m *MarbleProceduralTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#getsize
 func (m *MarbleProceduralTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getSize", args...)
+	retVal := m.p.Call("getSize")
 	return retVal
 }
 
@@ -271,9 +258,7 @@ func (m *MarbleProceduralTexture) GetTextureMatrix(opts *MarbleProceduralTexture
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#isready
 func (m *MarbleProceduralTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("isReady", args...)
+	retVal := m.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -282,9 +267,7 @@ func (m *MarbleProceduralTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#isreadyornotblocking
 func (m *MarbleProceduralTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("isReadyOrNotBlocking", args...)
+	retVal := m.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -410,9 +393,7 @@ func (m *MarbleProceduralTexture) ReadPixels(opts *MarbleProceduralTextureReadPi
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#releaseinternaltexture
 func (m *MarbleProceduralTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("releaseInternalTexture", args...)
+	m.p.Call("releaseInternalTexture")
 }
 
 // MarbleProceduralTextureRenderOpts contains optional parameters for MarbleProceduralTexture.Render.
@@ -444,9 +425,7 @@ func (m *MarbleProceduralTexture) Render(opts *MarbleProceduralTextureRenderOpts
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#reset
 func (m *MarbleProceduralTexture) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("reset", args...)
+	m.p.Call("reset")
 }
 
 // ResetRefreshCounter calls the ResetRefreshCounter method on the MarbleProceduralTexture object.
@@ -454,9 +433,7 @@ func (m *MarbleProceduralTexture) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#resetrefreshcounter
 func (m *MarbleProceduralTexture) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("resetRefreshCounter", args...)
+	m.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the MarbleProceduralTexture object.
@@ -489,9 +466,7 @@ func (m *MarbleProceduralTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#serialize
 func (m *MarbleProceduralTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("serialize", args...)
+	retVal := m.p.Call("serialize")
 	return retVal
 }
 
@@ -638,9 +613,7 @@ func (m *MarbleProceduralTexture) SetVector3(name string, value *Vector3) *Proce
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#tostring
 func (m *MarbleProceduralTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("toString", args...)
+	retVal := m.p.Call("toString")
 	return retVal.String()
 }
 
@@ -661,9 +634,7 @@ func (m *MarbleProceduralTexture) UpdateSamplingMode(samplingMode float64) {
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#updateshaderuniforms
 func (m *MarbleProceduralTexture) UpdateShaderUniforms() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("updateShaderUniforms", args...)
+	m.p.Call("updateShaderUniforms")
 }
 
 // MarbleProceduralTextureUpdateURLOpts contains optional parameters for MarbleProceduralTexture.UpdateURL.
@@ -706,7 +677,7 @@ func (m *MarbleProceduralTexture) WhenAllReady(textures *BaseTexture, callback f
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	m.p.Call("WhenAllReady", args...)
 }
@@ -1597,7 +1568,7 @@ func (m *MarbleProceduralTexture) SetNumberOfTilesWidth(numberOfTilesWidth float
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#ondispose
 func (m *MarbleProceduralTexture) OnDispose(onDispose func()) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("MarbleProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1605,7 +1576,7 @@ func (m *MarbleProceduralTexture) OnDispose(onDispose func()) *MarbleProceduralT
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#ondispose
 func (m *MarbleProceduralTexture) SetOnDispose(onDispose func()) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("MarbleProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1629,7 +1600,7 @@ func (m *MarbleProceduralTexture) SetOnDisposeObservable(onDisposeObservable *Ob
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#ongenerated
 func (m *MarbleProceduralTexture) OnGenerated(onGenerated func()) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("MarbleProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1637,7 +1608,7 @@ func (m *MarbleProceduralTexture) OnGenerated(onGenerated func()) *MarbleProcedu
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#ongenerated
 func (m *MarbleProceduralTexture) SetOnGenerated(onGenerated func()) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("MarbleProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func PromisePolyfillFromJSObject(p js.Value, ctx js.Value) *PromisePolyfill {
 	return &PromisePolyfill{p: p, ctx: ctx}
 }
 
+// PromisePolyfillArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PromisePolyfillArrayToJSArray(array []*PromisePolyfill) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // PromisePolyfillApplyOpts contains optional parameters for PromisePolyfill.Apply.
 type PromisePolyfillApplyOpts struct {
 	Force *bool

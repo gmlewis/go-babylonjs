@@ -28,6 +28,15 @@ func SphereDirectedParticleEmitterFromJSObject(p js.Value, ctx js.Value) *Sphere
 	return &SphereDirectedParticleEmitter{SphereParticleEmitter: SphereParticleEmitterFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SphereDirectedParticleEmitterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SphereDirectedParticleEmitterArrayToJSArray(array []*SphereDirectedParticleEmitter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSphereDirectedParticleEmitterOpts contains optional parameters for NewSphereDirectedParticleEmitter.
 type NewSphereDirectedParticleEmitterOpts struct {
 	Radius     *float64
@@ -82,9 +91,7 @@ func (s *SphereDirectedParticleEmitter) ApplyToShader(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#clone
 func (s *SphereDirectedParticleEmitter) Clone() *SphereDirectedParticleEmitter {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("clone", args...)
+	retVal := s.p.Call("clone")
 	return SphereDirectedParticleEmitterFromJSObject(retVal, s.ctx)
 }
 
@@ -93,9 +100,7 @@ func (s *SphereDirectedParticleEmitter) Clone() *SphereDirectedParticleEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#getclassname
 func (s *SphereDirectedParticleEmitter) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -104,9 +109,7 @@ func (s *SphereDirectedParticleEmitter) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#geteffectdefines
 func (s *SphereDirectedParticleEmitter) GetEffectDefines() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEffectDefines", args...)
+	retVal := s.p.Call("getEffectDefines")
 	return retVal.String()
 }
 
@@ -127,9 +130,7 @@ func (s *SphereDirectedParticleEmitter) Parse(serializationObject interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#serialize
 func (s *SphereDirectedParticleEmitter) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

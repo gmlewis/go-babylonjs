@@ -27,6 +27,15 @@ func RayFromJSObject(p js.Value, ctx js.Value) *Ray {
 	return &Ray{p: p, ctx: ctx}
 }
 
+// RayArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RayArrayToJSArray(array []*Ray) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRayOpts contains optional parameters for NewRay.
 type NewRayOpts struct {
 	Length *float64
@@ -228,35 +237,35 @@ func (r *Ray) IntersectsMesh(mesh *AbstractMesh, opts *RayIntersectsMeshOpts) *P
 
 // RayIntersectsMeshesOpts contains optional parameters for Ray.IntersectsMeshes.
 type RayIntersectsMeshesOpts struct {
-	FastCheck *AbstractMesh
-	Results   *bool
+	FastCheck *bool
+	Results   []PickingInfo
 }
 
 // IntersectsMeshes calls the IntersectsMeshes method on the Ray object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ray#intersectsmeshes
-func (r *Ray) IntersectsMeshes(meshes []DeepImmutable, opts *RayIntersectsMeshesOpts) *[]PickingInfo {
+func (r *Ray) IntersectsMeshes(meshes []*AbstractMesh, opts *RayIntersectsMeshesOpts) []*PickingInfo {
 	if opts == nil {
 		opts = &RayIntersectsMeshesOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, meshes.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(meshes))
 
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.FastCheck.JSObject())
+		args = append(args, *opts.FastCheck)
 	}
 	if opts.Results == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Results)
+		args = append(args, opts.Results.JSObject())
 	}
 
 	retVal := r.p.Call("intersectsMeshes", args...)
-	return []PickingInfoFromJSObject(retVal, r.ctx)
+	return retVal
 }
 
 // IntersectsPlane calls the IntersectsPlane method on the Ray object.
@@ -384,9 +393,7 @@ func (r *Ray) Update(x float64, y float64, viewportWidth float64, viewportHeight
 // https://doc.babylonjs.com/api/classes/babylon.ray#zero
 func (r *Ray) Zero() *Ray {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("Zero", args...)
+	retVal := r.p.Call("Zero")
 	return RayFromJSObject(retVal, r.ctx)
 }
 

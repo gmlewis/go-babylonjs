@@ -27,6 +27,15 @@ func PredicateConditionFromJSObject(p js.Value, ctx js.Value) *PredicateConditio
 	return &PredicateCondition{Condition: ConditionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PredicateConditionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PredicateConditionArrayToJSArray(array []*PredicateCondition) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPredicateCondition returns a new PredicateCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition
@@ -35,7 +44,7 @@ func (ba *Babylon) NewPredicateCondition(actionManager *ActionManager, predicate
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, actionManager.JSObject())
-	args = append(args, predicate)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
 
 	p := ba.ctx.Get("PredicateCondition").New(args...)
 	return PredicateConditionFromJSObject(p, ba.ctx)
@@ -46,9 +55,7 @@ func (ba *Babylon) NewPredicateCondition(actionManager *ActionManager, predicate
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition#isvalid
 func (p *PredicateCondition) IsValid() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isValid", args...)
+	retVal := p.p.Call("isValid")
 	return retVal.Bool()
 }
 
@@ -57,9 +64,7 @@ func (p *PredicateCondition) IsValid() bool {
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition#serialize
 func (p *PredicateCondition) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 
@@ -69,7 +74,7 @@ func (p *PredicateCondition) Serialize() interface{} {
 //
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition#predicate
 func (p *PredicateCondition) Predicate(predicate func()) *PredicateCondition {
-	p := ba.ctx.Get("PredicateCondition").New(predicate)
+	p := ba.ctx.Get("PredicateCondition").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {predicate(); return nil}))
 	return PredicateConditionFromJSObject(p, ba.ctx)
 }
 
@@ -77,7 +82,7 @@ func (p *PredicateCondition) Predicate(predicate func()) *PredicateCondition {
 //
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition#predicate
 func (p *PredicateCondition) SetPredicate(predicate func()) *PredicateCondition {
-	p := ba.ctx.Get("PredicateCondition").New(predicate)
+	p := ba.ctx.Get("PredicateCondition").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {predicate(); return nil}))
 	return PredicateConditionFromJSObject(p, ba.ctx)
 }
 

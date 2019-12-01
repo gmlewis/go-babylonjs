@@ -27,6 +27,15 @@ func OculusTouchControllerFromJSObject(p js.Value, ctx js.Value) *OculusTouchCon
 	return &OculusTouchController{WebVRController: WebVRControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// OculusTouchControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func OculusTouchControllerArrayToJSArray(array []*OculusTouchController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewOculusTouchController returns a new OculusTouchController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller
@@ -69,9 +78,7 @@ func (o *OculusTouchController) AttachToPoseControlledCamera(camera *TargetCamer
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#dispose
 func (o *OculusTouchController) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("dispose", args...)
+	o.p.Call("dispose")
 }
 
 // OculusTouchControllerGetForwardRayOpts contains optional parameters for OculusTouchController.GetForwardRay.
@@ -132,7 +139,7 @@ func (o *OculusTouchController) OnButtonStateChange(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	o.p.Call("onButtonStateChange", args...)
 }
@@ -144,7 +151,7 @@ func (o *OculusTouchController) Onleftstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	o.p.Call("onleftstickchanged", args...)
 }
@@ -156,7 +163,7 @@ func (o *OculusTouchController) Onrightstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	o.p.Call("onrightstickchanged", args...)
 }
@@ -166,9 +173,7 @@ func (o *OculusTouchController) Onrightstickchanged(callback func()) {
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#update
 func (o *OculusTouchController) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	o.p.Call("update", args...)
+	o.p.Call("update")
 }
 
 // UpdateFromDevice calls the UpdateFromDevice method on the OculusTouchController object.

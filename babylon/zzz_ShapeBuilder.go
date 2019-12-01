@@ -27,6 +27,15 @@ func ShapeBuilderFromJSObject(p js.Value, ctx js.Value) *ShapeBuilder {
 	return &ShapeBuilder{p: p, ctx: ctx}
 }
 
+// ShapeBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ShapeBuilderArrayToJSArray(array []*ShapeBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ShapeBuilderExtrudeShapeOpts contains optional parameters for ShapeBuilder.ExtrudeShape.
 type ShapeBuilderExtrudeShapeOpts struct {
 	Scene *Scene

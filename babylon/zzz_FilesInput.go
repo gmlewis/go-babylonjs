@@ -27,6 +27,15 @@ func FilesInputFromJSObject(p js.Value, ctx js.Value) *FilesInput {
 	return &FilesInput{p: p, ctx: ctx}
 }
 
+// FilesInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FilesInputArrayToJSArray(array []*FilesInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFilesInput returns a new FilesInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinput
@@ -36,13 +45,13 @@ func (ba *Babylon) NewFilesInput(engine *Engine, scene *Scene, sceneLoadedCallba
 
 	args = append(args, engine.JSObject())
 	args = append(args, scene.JSObject())
-	args = append(args, sceneLoadedCallback)
-	args = append(args, progressCallback)
-	args = append(args, additionalRenderLoopLogicCallback)
-	args = append(args, textureLoadingCallback)
-	args = append(args, startingProcessingFilesCallback)
-	args = append(args, onReloadCallback)
-	args = append(args, errorCallback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { sceneLoadedCallback(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { progressCallback(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { additionalRenderLoopLogicCallback(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { textureLoadingCallback(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { startingProcessingFilesCallback(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onReloadCallback(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { errorCallback(); return nil }))
 
 	p := ba.ctx.Get("FilesInput").New(args...)
 	return FilesInputFromJSObject(p, ba.ctx)
@@ -53,9 +62,7 @@ func (ba *Babylon) NewFilesInput(engine *Engine, scene *Scene, sceneLoadedCallba
 // https://doc.babylonjs.com/api/classes/babylon.filesinput#dispose
 func (f *FilesInput) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("dispose", args...)
+	f.p.Call("dispose")
 }
 
 // LoadFiles calls the LoadFiles method on the FilesInput object.
@@ -87,9 +94,7 @@ func (f *FilesInput) MonitorElementForDragNDrop(elementToMonitor js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.filesinput#reload
 func (f *FilesInput) Reload() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("reload", args...)
+	f.p.Call("reload")
 }
 
 /*
@@ -114,7 +119,7 @@ func (f *FilesInput) SetFilesToLoad(FilesToLoad js.Value) *FilesInput {
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinput#onprocessfilecallback
 func (f *FilesInput) OnProcessFileCallback(onProcessFileCallback func()) *FilesInput {
-	p := ba.ctx.Get("FilesInput").New(onProcessFileCallback)
+	p := ba.ctx.Get("FilesInput").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onProcessFileCallback(); return nil}))
 	return FilesInputFromJSObject(p, ba.ctx)
 }
 
@@ -122,7 +127,7 @@ func (f *FilesInput) OnProcessFileCallback(onProcessFileCallback func()) *FilesI
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinput#onprocessfilecallback
 func (f *FilesInput) SetOnProcessFileCallback(onProcessFileCallback func()) *FilesInput {
-	p := ba.ctx.Get("FilesInput").New(onProcessFileCallback)
+	p := ba.ctx.Get("FilesInput").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onProcessFileCallback(); return nil}))
 	return FilesInputFromJSObject(p, ba.ctx)
 }
 

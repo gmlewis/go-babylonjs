@@ -29,6 +29,15 @@ func FreeCameraVirtualJoystickInputFromJSObject(p js.Value, ctx js.Value) *FreeC
 	return &FreeCameraVirtualJoystickInput{p: p, ctx: ctx}
 }
 
+// FreeCameraVirtualJoystickInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FreeCameraVirtualJoystickInputArrayToJSArray(array []*FreeCameraVirtualJoystickInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // FreeCameraVirtualJoystickInputAttachControlOpts contains optional parameters for FreeCameraVirtualJoystickInput.AttachControl.
 type FreeCameraVirtualJoystickInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -60,9 +69,7 @@ func (f *FreeCameraVirtualJoystickInput) AttachControl(element js.Value, opts *F
 // https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#checkinputs
 func (f *FreeCameraVirtualJoystickInput) CheckInputs() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("checkInputs", args...)
+	f.p.Call("checkInputs")
 }
 
 // DetachControl calls the DetachControl method on the FreeCameraVirtualJoystickInput object.
@@ -82,9 +89,7 @@ func (f *FreeCameraVirtualJoystickInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#getclassname
 func (f *FreeCameraVirtualJoystickInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -93,9 +98,7 @@ func (f *FreeCameraVirtualJoystickInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#getleftjoystick
 func (f *FreeCameraVirtualJoystickInput) GetLeftJoystick() *VirtualJoystick {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getLeftJoystick", args...)
+	retVal := f.p.Call("getLeftJoystick")
 	return VirtualJoystickFromJSObject(retVal, f.ctx)
 }
 
@@ -104,9 +107,7 @@ func (f *FreeCameraVirtualJoystickInput) GetLeftJoystick() *VirtualJoystick {
 // https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#getrightjoystick
 func (f *FreeCameraVirtualJoystickInput) GetRightJoystick() *VirtualJoystick {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getRightJoystick", args...)
+	retVal := f.p.Call("getRightJoystick")
 	return VirtualJoystickFromJSObject(retVal, f.ctx)
 }
 
@@ -115,9 +116,7 @@ func (f *FreeCameraVirtualJoystickInput) GetRightJoystick() *VirtualJoystick {
 // https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#getsimplename
 func (f *FreeCameraVirtualJoystickInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getSimpleName", args...)
+	retVal := f.p.Call("getSimpleName")
 	return retVal.String()
 }
 

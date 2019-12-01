@@ -27,6 +27,15 @@ func VirtualJoystickFromJSObject(p js.Value, ctx js.Value) *VirtualJoystick {
 	return &VirtualJoystick{p: p, ctx: ctx}
 }
 
+// VirtualJoystickArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VirtualJoystickArrayToJSArray(array []*VirtualJoystick) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVirtualJoystickOpts contains optional parameters for NewVirtualJoystick.
 type NewVirtualJoystickOpts struct {
 	LeftJoystick *bool
@@ -57,9 +66,7 @@ func (ba *Babylon) NewVirtualJoystick(opts *NewVirtualJoystickOpts) *VirtualJoys
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#releasecanvas
 func (v *VirtualJoystick) ReleaseCanvas() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("releaseCanvas", args...)
+	v.p.Call("releaseCanvas")
 }
 
 // SetActionOnTouch calls the SetActionOnTouch method on the VirtualJoystick object.
@@ -69,7 +76,7 @@ func (v *VirtualJoystick) SetActionOnTouch(action func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
 
 	v.p.Call("setActionOnTouch", args...)
 }

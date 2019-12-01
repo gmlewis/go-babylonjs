@@ -29,6 +29,15 @@ func CubicEaseFromJSObject(p js.Value, ctx js.Value) *CubicEase {
 	return &CubicEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CubicEaseArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CubicEaseArrayToJSArray(array []*CubicEase) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Ease calls the Ease method on the CubicEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubicease#ease
@@ -47,9 +56,7 @@ func (c *CubicEase) Ease(gradient float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.cubicease#geteasingmode
 func (c *CubicEase) GetEasingMode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEasingMode", args...)
+	retVal := c.p.Call("getEasingMode")
 	return retVal.Float()
 }
 

@@ -27,6 +27,15 @@ func ReflectBlockFromJSObject(p js.Value, ctx js.Value) *ReflectBlock {
 	return &ReflectBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ReflectBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ReflectBlockArrayToJSArray(array []*ReflectBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewReflectBlock returns a new ReflectBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock
@@ -152,9 +161,7 @@ func (r *ReflectBlock) ConnectTo(other *NodeMaterialBlock, opts *ReflectBlockCon
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock#dispose
 func (r *ReflectBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ReflectBlock object.
@@ -162,9 +169,7 @@ func (r *ReflectBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock#getclassname
 func (r *ReflectBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (r *ReflectBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialB
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock#serialize
 func (r *ReflectBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 

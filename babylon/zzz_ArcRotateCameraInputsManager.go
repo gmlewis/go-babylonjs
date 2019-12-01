@@ -32,6 +32,15 @@ func ArcRotateCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *ArcRota
 	return &ArcRotateCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), ArcRotateCamera: ArcRotateCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ArcRotateCameraInputsManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArcRotateCameraInputsManagerArrayToJSArray(array []*ArcRotateCameraInputsManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewArcRotateCameraInputsManager returns a new ArcRotateCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager
@@ -62,9 +71,7 @@ func (a *ArcRotateCameraInputsManager) Add(input js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#addgamepad
 func (a *ArcRotateCameraInputsManager) AddGamepad() *ArcRotateCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("addGamepad", args...)
+	retVal := a.p.Call("addGamepad")
 	return ArcRotateCameraInputsManagerFromJSObject(retVal, a.ctx)
 }
 
@@ -73,9 +80,7 @@ func (a *ArcRotateCameraInputsManager) AddGamepad() *ArcRotateCameraInputsManage
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#addkeyboard
 func (a *ArcRotateCameraInputsManager) AddKeyboard() *ArcRotateCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("addKeyboard", args...)
+	retVal := a.p.Call("addKeyboard")
 	return ArcRotateCameraInputsManagerFromJSObject(retVal, a.ctx)
 }
 
@@ -84,9 +89,7 @@ func (a *ArcRotateCameraInputsManager) AddKeyboard() *ArcRotateCameraInputsManag
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#addmousewheel
 func (a *ArcRotateCameraInputsManager) AddMouseWheel() *ArcRotateCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("addMouseWheel", args...)
+	retVal := a.p.Call("addMouseWheel")
 	return ArcRotateCameraInputsManagerFromJSObject(retVal, a.ctx)
 }
 
@@ -95,9 +98,7 @@ func (a *ArcRotateCameraInputsManager) AddMouseWheel() *ArcRotateCameraInputsMan
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#addpointers
 func (a *ArcRotateCameraInputsManager) AddPointers() *ArcRotateCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("addPointers", args...)
+	retVal := a.p.Call("addPointers")
 	return ArcRotateCameraInputsManagerFromJSObject(retVal, a.ctx)
 }
 
@@ -106,9 +107,7 @@ func (a *ArcRotateCameraInputsManager) AddPointers() *ArcRotateCameraInputsManag
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#addvrdeviceorientation
 func (a *ArcRotateCameraInputsManager) AddVRDeviceOrientation() *ArcRotateCameraInputsManager {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("addVRDeviceOrientation", args...)
+	retVal := a.p.Call("addVRDeviceOrientation")
 	return ArcRotateCameraInputsManagerFromJSObject(retVal, a.ctx)
 }
 
@@ -155,9 +154,7 @@ func (a *ArcRotateCameraInputsManager) AttachInput(input js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#clear
 func (a *ArcRotateCameraInputsManager) Clear() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("clear", args...)
+	a.p.Call("clear")
 }
 
 // ArcRotateCameraInputsManagerDetachElementOpts contains optional parameters for ArcRotateCameraInputsManager.DetachElement.
@@ -203,9 +200,7 @@ func (a *ArcRotateCameraInputsManager) Parse(parsedCamera interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#rebuildinputcheck
 func (a *ArcRotateCameraInputsManager) RebuildInputCheck() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("rebuildInputCheck", args...)
+	a.p.Call("rebuildInputCheck")
 }
 
 // Remove calls the Remove method on the ArcRotateCameraInputsManager object.
@@ -298,7 +293,7 @@ func (a *ArcRotateCameraInputsManager) SetCamera(camera *ArcRotateCamera) *ArcRo
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#checkinputs
 func (a *ArcRotateCameraInputsManager) CheckInputs(checkInputs func()) *ArcRotateCameraInputsManager {
-	p := ba.ctx.Get("ArcRotateCameraInputsManager").New(checkInputs)
+	p := ba.ctx.Get("ArcRotateCameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
 	return ArcRotateCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
@@ -306,7 +301,7 @@ func (a *ArcRotateCameraInputsManager) CheckInputs(checkInputs func()) *ArcRotat
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#checkinputs
 func (a *ArcRotateCameraInputsManager) SetCheckInputs(checkInputs func()) *ArcRotateCameraInputsManager {
-	p := ba.ctx.Get("ArcRotateCameraInputsManager").New(checkInputs)
+	p := ba.ctx.Get("ArcRotateCameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
 	return ArcRotateCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 

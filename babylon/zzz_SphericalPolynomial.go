@@ -27,6 +27,15 @@ func SphericalPolynomialFromJSObject(p js.Value, ctx js.Value) *SphericalPolynom
 	return &SphericalPolynomial{p: p, ctx: ctx}
 }
 
+// SphericalPolynomialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SphericalPolynomialArrayToJSArray(array []*SphericalPolynomial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // AddAmbient calls the AddAmbient method on the SphericalPolynomial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#addambient

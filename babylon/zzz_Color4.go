@@ -27,6 +27,15 @@ func Color4FromJSObject(p js.Value, ctx js.Value) *Color4 {
 	return &Color4{p: p, ctx: ctx}
 }
 
+// Color4ArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Color4ArrayToJSArray(array []*Color4) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewColor4Opts contains optional parameters for NewColor4.
 type NewColor4Opts struct {
 	R *float64
@@ -101,9 +110,7 @@ func (c *Color4) AddInPlace(right *Color4) *Color4 {
 // https://doc.babylonjs.com/api/classes/babylon.color4#asarray
 func (c *Color4) AsArray() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("asArray", args...)
+	retVal := c.p.Call("asArray")
 	return retVal.Float()
 }
 
@@ -141,9 +148,7 @@ func (c *Color4) ClampToRef(min float64, max float64, result *Color4) *Color4 {
 // https://doc.babylonjs.com/api/classes/babylon.color4#clone
 func (c *Color4) Clone() *Color4 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("clone", args...)
+	retVal := c.p.Call("clone")
 	return Color4FromJSObject(retVal, c.ctx)
 }
 
@@ -277,9 +282,7 @@ func (c *Color4) FromInts(r float64, g float64, b float64, a float64) *Color4 {
 // https://doc.babylonjs.com/api/classes/babylon.color4#getclassname
 func (c *Color4) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -288,9 +291,7 @@ func (c *Color4) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.color4#gethashcode
 func (c *Color4) GetHashCode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getHashCode", args...)
+	retVal := c.p.Call("getHashCode")
 	return retVal.Float()
 }
 
@@ -467,9 +468,7 @@ func (c *Color4) ToArray(array float64, opts *Color4ToArrayOpts) *Color4 {
 // https://doc.babylonjs.com/api/classes/babylon.color4#togammaspace
 func (c *Color4) ToGammaSpace() *Color4 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toGammaSpace", args...)
+	retVal := c.p.Call("toGammaSpace")
 	return Color4FromJSObject(retVal, c.ctx)
 }
 
@@ -491,9 +490,7 @@ func (c *Color4) ToGammaSpaceToRef(convertedColor *Color4) *Color4 {
 // https://doc.babylonjs.com/api/classes/babylon.color4#tohexstring
 func (c *Color4) ToHexString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toHexString", args...)
+	retVal := c.p.Call("toHexString")
 	return retVal.String()
 }
 
@@ -502,9 +499,7 @@ func (c *Color4) ToHexString() string {
 // https://doc.babylonjs.com/api/classes/babylon.color4#tolinearspace
 func (c *Color4) ToLinearSpace() *Color4 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toLinearSpace", args...)
+	retVal := c.p.Call("toLinearSpace")
 	return Color4FromJSObject(retVal, c.ctx)
 }
 
@@ -526,9 +521,7 @@ func (c *Color4) ToLinearSpaceToRef(convertedColor *Color4) *Color4 {
 // https://doc.babylonjs.com/api/classes/babylon.color4#tostring
 func (c *Color4) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("toString", args...)
+	retVal := c.p.Call("toString")
 	return retVal.String()
 }
 

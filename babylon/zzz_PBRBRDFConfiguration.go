@@ -27,6 +27,15 @@ func PBRBRDFConfigurationFromJSObject(p js.Value, ctx js.Value) *PBRBRDFConfigur
 	return &PBRBRDFConfiguration{p: p, ctx: ctx}
 }
 
+// PBRBRDFConfigurationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PBRBRDFConfigurationArrayToJSArray(array []*PBRBRDFConfiguration) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPBRBRDFConfiguration returns a new PBRBRDFConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration
@@ -34,7 +43,7 @@ func (ba *Babylon) NewPBRBRDFConfiguration(markAllSubMeshesAsMiscDirty func()) *
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, markAllSubMeshesAsMiscDirty)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { markAllSubMeshesAsMiscDirty(); return nil }))
 
 	p := ba.ctx.Get("PBRBRDFConfiguration").New(args...)
 	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
@@ -57,9 +66,7 @@ func (p *PBRBRDFConfiguration) CopyTo(brdfConfiguration *PBRBRDFConfiguration) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#getclassname
 func (p *PBRBRDFConfiguration) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -80,11 +87,11 @@ func (p *PBRBRDFConfiguration) Parse(source interface{}, scene *Scene, rootUrl s
 // PrepareDefines calls the PrepareDefines method on the PBRBRDFConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#preparedefines
-func (p *PBRBRDFConfiguration) PrepareDefines(defines *IMaterialBRDFDefines) {
+func (p *PBRBRDFConfiguration) PrepareDefines(defines js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 
 	p.p.Call("prepareDefines", args...)
 }
@@ -94,9 +101,7 @@ func (p *PBRBRDFConfiguration) PrepareDefines(defines *IMaterialBRDFDefines) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#serialize
 func (p *PBRBRDFConfiguration) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 

@@ -27,6 +27,15 @@ func RecastJSPluginFromJSObject(p js.Value, ctx js.Value) *RecastJSPlugin {
 	return &RecastJSPlugin{p: p, ctx: ctx}
 }
 
+// RecastJSPluginArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RecastJSPluginArrayToJSArray(array []*RecastJSPlugin) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRecastJSPluginOpts contains optional parameters for NewRecastJSPlugin.
 type NewRecastJSPluginOpts struct {
 	RecastInjection *interface{}
@@ -97,11 +106,11 @@ func (r *RecastJSPlugin) CreateDebugNavMesh(scene *Scene) *Mesh {
 // CreateMavMesh calls the CreateMavMesh method on the RecastJSPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#createmavmesh
-func (r *RecastJSPlugin) CreateMavMesh(meshes []js.Value, parameters *INavMeshParameters) {
+func (r *RecastJSPlugin) CreateMavMesh(meshes []*Mesh, parameters *INavMeshParameters) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, meshes)
+	args = append(args, MeshArrayToJSArray(meshes))
 	args = append(args, parameters.JSObject())
 
 	r.p.Call("createMavMesh", args...)
@@ -112,9 +121,7 @@ func (r *RecastJSPlugin) CreateMavMesh(meshes []js.Value, parameters *INavMeshPa
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#dispose
 func (r *RecastJSPlugin) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetClosestPoint calls the GetClosestPoint method on the RecastJSPlugin object.
@@ -135,9 +142,7 @@ func (r *RecastJSPlugin) GetClosestPoint(position *Vector3) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#getdefaultqueryextent
 func (r *RecastJSPlugin) GetDefaultQueryExtent() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getDefaultQueryExtent", args...)
+	retVal := r.p.Call("getDefaultQueryExtent")
 	return Vector3FromJSObject(retVal, r.ctx)
 }
 
@@ -160,9 +165,7 @@ func (r *RecastJSPlugin) GetRandomPointAround(position *Vector3, maxRadius float
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#issupported
 func (r *RecastJSPlugin) IsSupported() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isSupported", args...)
+	retVal := r.p.Call("isSupported")
 	return retVal.Bool()
 }
 

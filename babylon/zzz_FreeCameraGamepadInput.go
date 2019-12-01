@@ -29,6 +29,15 @@ func FreeCameraGamepadInputFromJSObject(p js.Value, ctx js.Value) *FreeCameraGam
 	return &FreeCameraGamepadInput{p: p, ctx: ctx}
 }
 
+// FreeCameraGamepadInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FreeCameraGamepadInputArrayToJSArray(array []*FreeCameraGamepadInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // FreeCameraGamepadInputAttachControlOpts contains optional parameters for FreeCameraGamepadInput.AttachControl.
 type FreeCameraGamepadInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -60,9 +69,7 @@ func (f *FreeCameraGamepadInput) AttachControl(element js.Value, opts *FreeCamer
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#checkinputs
 func (f *FreeCameraGamepadInput) CheckInputs() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("checkInputs", args...)
+	f.p.Call("checkInputs")
 }
 
 // DetachControl calls the DetachControl method on the FreeCameraGamepadInput object.
@@ -82,9 +89,7 @@ func (f *FreeCameraGamepadInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#getclassname
 func (f *FreeCameraGamepadInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -93,9 +98,7 @@ func (f *FreeCameraGamepadInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#getsimplename
 func (f *FreeCameraGamepadInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getSimpleName", args...)
+	retVal := f.p.Call("getSimpleName")
 	return retVal.String()
 }
 

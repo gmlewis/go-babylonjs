@@ -27,6 +27,15 @@ func TextBlockFromJSObject(p js.Value, ctx js.Value) *TextBlock {
 	return &TextBlock{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
+// TextBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TextBlockArrayToJSArray(array []*TextBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTextBlockOpts contains optional parameters for NewTextBlock.
 type NewTextBlockOpts struct {
 	Name *string
@@ -63,9 +72,7 @@ func (ba *Babylon) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
 // https://doc.babylonjs.com/api/classes/babylon.textblock#computeexpectedheight
 func (t *TextBlock) ComputeExpectedHeight() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("computeExpectedHeight", args...)
+	retVal := t.p.Call("computeExpectedHeight")
 	return retVal.Float()
 }
 
@@ -88,9 +95,7 @@ func (t *TextBlock) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.textblock#dispose
 func (t *TextBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("dispose", args...)
+	t.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the TextBlock object.
@@ -111,9 +116,7 @@ func (t *TextBlock) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.textblock#getclassname
 func (t *TextBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getClassName", args...)
+	retVal := t.p.Call("getClassName")
 	return retVal.String()
 }
 

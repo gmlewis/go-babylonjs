@@ -28,9 +28,18 @@ func VRExperienceHelperFromJSObject(p js.Value, ctx js.Value) *VRExperienceHelpe
 	return &VRExperienceHelper{p: p, ctx: ctx}
 }
 
+// VRExperienceHelperArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VRExperienceHelperArrayToJSArray(array []*VRExperienceHelper) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVRExperienceHelperOpts contains optional parameters for NewVRExperienceHelper.
 type NewVRExperienceHelperOpts struct {
-	WebVROptions *VRExperienceHelperOptions
+	WebVROptions js.Value
 }
 
 // NewVRExperienceHelper returns a new VRExperienceHelper object.
@@ -48,7 +57,7 @@ func (ba *Babylon) NewVRExperienceHelper(scene *Scene, opts *NewVRExperienceHelp
 	if opts.WebVROptions == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.WebVROptions.JSObject())
+		args = append(args, opts.WebVROptions)
 	}
 
 	p := ba.ctx.Get("VRExperienceHelper").New(args...)
@@ -96,9 +105,7 @@ func (v *VRExperienceHelper) ChangeLaserColor(color *Color3) {
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#dispose
 func (v *VRExperienceHelper) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // EnableInteractions calls the EnableInteractions method on the VRExperienceHelper object.
@@ -106,9 +113,7 @@ func (v *VRExperienceHelper) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#enableinteractions
 func (v *VRExperienceHelper) EnableInteractions() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("enableInteractions", args...)
+	v.p.Call("enableInteractions")
 }
 
 // VRExperienceHelperEnableTeleportationOpts contains optional parameters for VRExperienceHelper.EnableTeleportation.
@@ -140,9 +145,7 @@ func (v *VRExperienceHelper) EnableTeleportation(opts *VRExperienceHelperEnableT
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#entervr
 func (v *VRExperienceHelper) EnterVR() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("enterVR", args...)
+	v.p.Call("enterVR")
 }
 
 // ExitVR calls the ExitVR method on the VRExperienceHelper object.
@@ -150,9 +153,7 @@ func (v *VRExperienceHelper) EnterVR() {
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#exitvr
 func (v *VRExperienceHelper) ExitVR() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("exitVR", args...)
+	v.p.Call("exitVR")
 }
 
 // GetClassName calls the GetClassName method on the VRExperienceHelper object.
@@ -160,9 +161,7 @@ func (v *VRExperienceHelper) ExitVR() {
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#getclassname
 func (v *VRExperienceHelper) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -340,7 +339,7 @@ func (v *VRExperienceHelper) SetLeftControllerGazeTrackerMesh(leftControllerGaze
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#meshselectionpredicate
 func (v *VRExperienceHelper) MeshSelectionPredicate(meshSelectionPredicate func()) *VRExperienceHelper {
-	p := ba.ctx.Get("VRExperienceHelper").New(meshSelectionPredicate)
+	p := ba.ctx.Get("VRExperienceHelper").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {meshSelectionPredicate(); return nil}))
 	return VRExperienceHelperFromJSObject(p, ba.ctx)
 }
 
@@ -348,7 +347,7 @@ func (v *VRExperienceHelper) MeshSelectionPredicate(meshSelectionPredicate func(
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#meshselectionpredicate
 func (v *VRExperienceHelper) SetMeshSelectionPredicate(meshSelectionPredicate func()) *VRExperienceHelper {
-	p := ba.ctx.Get("VRExperienceHelper").New(meshSelectionPredicate)
+	p := ba.ctx.Get("VRExperienceHelper").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {meshSelectionPredicate(); return nil}))
 	return VRExperienceHelperFromJSObject(p, ba.ctx)
 }
 
@@ -580,7 +579,7 @@ func (v *VRExperienceHelper) SetPosition(position *Vector3) *VRExperienceHelper 
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#rayselectionpredicate
 func (v *VRExperienceHelper) RaySelectionPredicate(raySelectionPredicate func()) *VRExperienceHelper {
-	p := ba.ctx.Get("VRExperienceHelper").New(raySelectionPredicate)
+	p := ba.ctx.Get("VRExperienceHelper").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {raySelectionPredicate(); return nil}))
 	return VRExperienceHelperFromJSObject(p, ba.ctx)
 }
 
@@ -588,7 +587,7 @@ func (v *VRExperienceHelper) RaySelectionPredicate(raySelectionPredicate func())
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#rayselectionpredicate
 func (v *VRExperienceHelper) SetRaySelectionPredicate(raySelectionPredicate func()) *VRExperienceHelper {
-	p := ba.ctx.Get("VRExperienceHelper").New(raySelectionPredicate)
+	p := ba.ctx.Get("VRExperienceHelper").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {raySelectionPredicate(); return nil}))
 	return VRExperienceHelperFromJSObject(p, ba.ctx)
 }
 
@@ -787,16 +786,16 @@ func (v *VRExperienceHelper) SetWebVRCamera(webVRCamera *WebVRFreeCamera) *VRExp
 // WebVROptions returns the WebVROptions property of class VRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#webvroptions
-func (v *VRExperienceHelper) WebVROptions(webVROptions *VRExperienceHelperOptions) *VRExperienceHelper {
-	p := ba.ctx.Get("VRExperienceHelper").New(webVROptions.JSObject())
+func (v *VRExperienceHelper) WebVROptions(webVROptions js.Value) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(webVROptions)
 	return VRExperienceHelperFromJSObject(p, ba.ctx)
 }
 
 // SetWebVROptions sets the WebVROptions property of class VRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#webvroptions
-func (v *VRExperienceHelper) SetWebVROptions(webVROptions *VRExperienceHelperOptions) *VRExperienceHelper {
-	p := ba.ctx.Get("VRExperienceHelper").New(webVROptions.JSObject())
+func (v *VRExperienceHelper) SetWebVROptions(webVROptions js.Value) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(webVROptions)
 	return VRExperienceHelperFromJSObject(p, ba.ctx)
 }
 

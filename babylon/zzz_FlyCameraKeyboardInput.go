@@ -29,6 +29,15 @@ func FlyCameraKeyboardInputFromJSObject(p js.Value, ctx js.Value) *FlyCameraKeyb
 	return &FlyCameraKeyboardInput{p: p, ctx: ctx}
 }
 
+// FlyCameraKeyboardInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FlyCameraKeyboardInputArrayToJSArray(array []*FlyCameraKeyboardInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // FlyCameraKeyboardInputAttachControlOpts contains optional parameters for FlyCameraKeyboardInput.AttachControl.
 type FlyCameraKeyboardInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -60,9 +69,7 @@ func (f *FlyCameraKeyboardInput) AttachControl(element js.Value, opts *FlyCamera
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#checkinputs
 func (f *FlyCameraKeyboardInput) CheckInputs() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("checkInputs", args...)
+	f.p.Call("checkInputs")
 }
 
 // DetachControl calls the DetachControl method on the FlyCameraKeyboardInput object.
@@ -82,9 +89,7 @@ func (f *FlyCameraKeyboardInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#getclassname
 func (f *FlyCameraKeyboardInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -93,9 +98,7 @@ func (f *FlyCameraKeyboardInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#getsimplename
 func (f *FlyCameraKeyboardInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getSimpleName", args...)
+	retVal := f.p.Call("getSimpleName")
 	return retVal.String()
 }
 

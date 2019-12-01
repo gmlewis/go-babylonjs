@@ -27,6 +27,15 @@ func SubEmitterFromJSObject(p js.Value, ctx js.Value) *SubEmitter {
 	return &SubEmitter{p: p, ctx: ctx}
 }
 
+// SubEmitterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SubEmitterArrayToJSArray(array []*SubEmitter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSubEmitter returns a new SubEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subemitter
@@ -45,9 +54,7 @@ func (ba *Babylon) NewSubEmitter(particleSystem *ParticleSystem) *SubEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.subemitter#clone
 func (s *SubEmitter) Clone() *SubEmitter {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("clone", args...)
+	retVal := s.p.Call("clone")
 	return SubEmitterFromJSObject(retVal, s.ctx)
 }
 
@@ -56,9 +63,7 @@ func (s *SubEmitter) Clone() *SubEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.subemitter#dispose
 func (s *SubEmitter) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // Parse calls the Parse method on the SubEmitter object.
@@ -81,9 +86,7 @@ func (s *SubEmitter) Parse(serializationObject interface{}, scene *Scene, rootUr
 // https://doc.babylonjs.com/api/classes/babylon.subemitter#serialize
 func (s *SubEmitter) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

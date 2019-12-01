@@ -27,6 +27,15 @@ func ReflectionTextureBlockFromJSObject(p js.Value, ctx js.Value) *ReflectionTex
 	return &ReflectionTextureBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ReflectionTextureBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ReflectionTextureBlockArrayToJSArray(array []*ReflectionTextureBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewReflectionTextureBlock returns a new ReflectionTextureBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock
@@ -152,9 +161,7 @@ func (r *ReflectionTextureBlock) ConnectTo(other *NodeMaterialBlock, opts *Refle
 // https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#dispose
 func (r *ReflectionTextureBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ReflectionTextureBlock object.
@@ -162,9 +169,7 @@ func (r *ReflectionTextureBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#getclassname
 func (r *ReflectionTextureBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -302,9 +307,7 @@ func (r *ReflectionTextureBlock) InitializeDefines(mesh *AbstractMesh, nodeMater
 // https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#isready
 func (r *ReflectionTextureBlock) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isReady", args...)
+	retVal := r.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -417,9 +420,7 @@ func (r *ReflectionTextureBlock) ReplaceRepeatableContent(vertexShaderState *Nod
 // https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#serialize
 func (r *ReflectionTextureBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 

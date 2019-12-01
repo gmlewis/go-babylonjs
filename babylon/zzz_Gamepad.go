@@ -27,6 +27,15 @@ func GamepadFromJSObject(p js.Value, ctx js.Value) *Gamepad {
 	return &Gamepad{p: p, ctx: ctx}
 }
 
+// GamepadArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GamepadArrayToJSArray(array []*Gamepad) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGamepadOpts contains optional parameters for NewGamepad.
 type NewGamepadOpts struct {
 	LeftStickX  *float64
@@ -79,9 +88,7 @@ func (ba *Babylon) NewGamepad(id string, index float64, browserGamepad interface
 // https://doc.babylonjs.com/api/classes/babylon.gamepad#dispose
 func (g *Gamepad) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // Onleftstickchanged calls the Onleftstickchanged method on the Gamepad object.
@@ -91,7 +98,7 @@ func (g *Gamepad) Onleftstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	g.p.Call("onleftstickchanged", args...)
 }
@@ -103,7 +110,7 @@ func (g *Gamepad) Onrightstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	g.p.Call("onrightstickchanged", args...)
 }
@@ -113,9 +120,7 @@ func (g *Gamepad) Onrightstickchanged(callback func()) {
 // https://doc.babylonjs.com/api/classes/babylon.gamepad#update
 func (g *Gamepad) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("update", args...)
+	g.p.Call("update")
 }
 
 /*

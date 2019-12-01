@@ -27,6 +27,15 @@ func KHR_texture_transformFromJSObject(p js.Value, ctx js.Value) *KHR_texture_tr
 	return &KHR_texture_transform{p: p, ctx: ctx}
 }
 
+// KHR_texture_transformArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KHR_texture_transformArrayToJSArray(array []*KHR_texture_transform) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class KHR_texture_transform.

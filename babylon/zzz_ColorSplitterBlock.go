@@ -27,6 +27,15 @@ func ColorSplitterBlockFromJSObject(p js.Value, ctx js.Value) *ColorSplitterBloc
 	return &ColorSplitterBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ColorSplitterBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ColorSplitterBlockArrayToJSArray(array []*ColorSplitterBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewColorSplitterBlock returns a new ColorSplitterBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock
@@ -152,9 +161,7 @@ func (c *ColorSplitterBlock) ConnectTo(other *NodeMaterialBlock, opts *ColorSpli
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#dispose
 func (c *ColorSplitterBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("dispose", args...)
+	c.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ColorSplitterBlock object.
@@ -162,9 +169,7 @@ func (c *ColorSplitterBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#getclassname
 func (c *ColorSplitterBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (c *ColorSplitterBlock) ReplaceRepeatableContent(vertexShaderState *NodeMat
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#serialize
 func (c *ColorSplitterBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 

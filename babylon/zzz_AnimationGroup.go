@@ -27,6 +27,15 @@ func AnimationGroupFromJSObject(p js.Value, ctx js.Value) *AnimationGroup {
 	return &AnimationGroup{p: p, ctx: ctx}
 }
 
+// AnimationGroupArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnimationGroupArrayToJSArray(array []*AnimationGroup) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnimationGroupOpts contains optional parameters for NewAnimationGroup.
 type NewAnimationGroupOpts struct {
 	Scene *Scene
@@ -100,9 +109,7 @@ func (a *AnimationGroup) Clone(newName string, opts *AnimationGroupCloneOpts) *A
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#dispose
 func (a *AnimationGroup) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the AnimationGroup object.
@@ -110,9 +117,7 @@ func (a *AnimationGroup) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#getclassname
 func (a *AnimationGroup) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -179,9 +184,7 @@ func (a *AnimationGroup) Parse(parsedAnimationGroup interface{}, scene *Scene) *
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#pause
 func (a *AnimationGroup) Pause() *AnimationGroup {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("pause", args...)
+	retVal := a.p.Call("pause")
 	return AnimationGroupFromJSObject(retVal, a.ctx)
 }
 
@@ -215,9 +218,7 @@ func (a *AnimationGroup) Play(opts *AnimationGroupPlayOpts) *AnimationGroup {
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#reset
 func (a *AnimationGroup) Reset() *AnimationGroup {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("reset", args...)
+	retVal := a.p.Call("reset")
 	return AnimationGroupFromJSObject(retVal, a.ctx)
 }
 
@@ -226,9 +227,7 @@ func (a *AnimationGroup) Reset() *AnimationGroup {
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#restart
 func (a *AnimationGroup) Restart() *AnimationGroup {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("restart", args...)
+	retVal := a.p.Call("restart")
 	return AnimationGroupFromJSObject(retVal, a.ctx)
 }
 
@@ -237,9 +236,7 @@ func (a *AnimationGroup) Restart() *AnimationGroup {
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#serialize
 func (a *AnimationGroup) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("serialize", args...)
+	retVal := a.p.Call("serialize")
 	return retVal
 }
 
@@ -304,9 +301,7 @@ func (a *AnimationGroup) Start(opts *AnimationGroupStartOpts) *AnimationGroup {
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#stop
 func (a *AnimationGroup) Stop() *AnimationGroup {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("stop", args...)
+	retVal := a.p.Call("stop")
 	return AnimationGroupFromJSObject(retVal, a.ctx)
 }
 
@@ -353,16 +348,16 @@ func (a *AnimationGroup) ToString(opts *AnimationGroupToStringOpts) string {
 // Animatables returns the Animatables property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#animatables
-func (a *AnimationGroup) Animatables(animatables []Animatable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(animatables.JSObject())
+func (a *AnimationGroup) Animatables(animatables []*Animatable) *AnimationGroup {
+	p := ba.ctx.Get("AnimationGroup").New(animatables)
 	return AnimationGroupFromJSObject(p, ba.ctx)
 }
 
 // SetAnimatables sets the Animatables property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#animatables
-func (a *AnimationGroup) SetAnimatables(animatables []Animatable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(animatables.JSObject())
+func (a *AnimationGroup) SetAnimatables(animatables []*Animatable) *AnimationGroup {
+	p := ba.ctx.Get("AnimationGroup").New(animatables)
 	return AnimationGroupFromJSObject(p, ba.ctx)
 }
 
@@ -561,16 +556,16 @@ func (a *AnimationGroup) SetSpeedRatio(speedRatio float64) *AnimationGroup {
 // TargetedAnimations returns the TargetedAnimations property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#targetedanimations
-func (a *AnimationGroup) TargetedAnimations(targetedAnimations []TargetedAnimation) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(targetedAnimations.JSObject())
+func (a *AnimationGroup) TargetedAnimations(targetedAnimations []*TargetedAnimation) *AnimationGroup {
+	p := ba.ctx.Get("AnimationGroup").New(targetedAnimations)
 	return AnimationGroupFromJSObject(p, ba.ctx)
 }
 
 // SetTargetedAnimations sets the TargetedAnimations property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#targetedanimations
-func (a *AnimationGroup) SetTargetedAnimations(targetedAnimations []TargetedAnimation) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(targetedAnimations.JSObject())
+func (a *AnimationGroup) SetTargetedAnimations(targetedAnimations []*TargetedAnimation) *AnimationGroup {
+	p := ba.ctx.Get("AnimationGroup").New(targetedAnimations)
 	return AnimationGroupFromJSObject(p, ba.ctx)
 }
 

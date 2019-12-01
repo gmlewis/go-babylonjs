@@ -27,6 +27,15 @@ func BoxBuilderFromJSObject(p js.Value, ctx js.Value) *BoxBuilder {
 	return &BoxBuilder{p: p, ctx: ctx}
 }
 
+// BoxBuilderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoxBuilderArrayToJSArray(array []*BoxBuilder) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // BoxBuilderCreateBoxOpts contains optional parameters for BoxBuilder.CreateBox.
 type BoxBuilderCreateBoxOpts struct {
 	Scene *Scene

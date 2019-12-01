@@ -30,14 +30,21 @@ func AbstractActionManagerFromJSObject(p js.Value, ctx js.Value) *AbstractAction
 	return &AbstractActionManager{p: p, ctx: ctx}
 }
 
+// AbstractActionManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AbstractActionManagerArrayToJSArray(array []*AbstractActionManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Dispose calls the Dispose method on the AbstractActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#dispose
 func (a *AbstractActionManager) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // HasSpecificTrigger calls the HasSpecificTrigger method on the AbstractActionManager object.

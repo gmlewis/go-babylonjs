@@ -27,6 +27,15 @@ func GridFromJSObject(p js.Value, ctx js.Value) *Grid {
 	return &Grid{Container: ContainerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// GridArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GridArrayToJSArray(array []*Grid) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGridOpts contains optional parameters for NewGrid.
 type NewGridOpts struct {
 	Name *string
@@ -144,9 +153,7 @@ func (g *Grid) AddRowDefinition(height float64, opts *GridAddRowDefinitionOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.grid#clearcontrols
 func (g *Grid) ClearControls() *Container {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("clearControls", args...)
+	retVal := g.p.Call("clearControls")
 	return ContainerFromJSObject(retVal, g.ctx)
 }
 
@@ -182,9 +189,7 @@ func (g *Grid) ContainsControl(control *Control) bool {
 // https://doc.babylonjs.com/api/classes/babylon.grid#dispose
 func (g *Grid) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the Grid object.
@@ -243,7 +248,7 @@ func (g *Grid) GetChildCellInfo(child *Control) string {
 // GetChildrenAt calls the GetChildrenAt method on the Grid object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#getchildrenat
-func (g *Grid) GetChildrenAt(row float64, column float64) *[]Control {
+func (g *Grid) GetChildrenAt(row float64, column float64) []*Control {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -251,7 +256,7 @@ func (g *Grid) GetChildrenAt(row float64, column float64) *[]Control {
 	args = append(args, column)
 
 	retVal := g.p.Call("getChildrenAt", args...)
-	return []ControlFromJSObject(retVal, g.ctx)
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the Grid object.
@@ -259,9 +264,7 @@ func (g *Grid) GetChildrenAt(row float64, column float64) *[]Control {
 // https://doc.babylonjs.com/api/classes/babylon.grid#getclassname
 func (g *Grid) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getClassName", args...)
+	retVal := g.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -532,9 +535,7 @@ func (g *Grid) SetRowDefinition(index float64, height float64, opts *GridSetRowD
 // https://doc.babylonjs.com/api/classes/babylon.grid#_flagdescendantsasmatrixdirty
 func (g *Grid) _flagDescendantsAsMatrixDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("_flagDescendantsAsMatrixDirty", args...)
+	g.p.Call("_flagDescendantsAsMatrixDirty")
 }
 
 // _renderHighlightSpecific calls the _renderHighlightSpecific method on the Grid object.

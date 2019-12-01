@@ -27,6 +27,15 @@ func ShaderAlebdoPartsFromJSObject(p js.Value, ctx js.Value) *ShaderAlebdoParts 
 	return &ShaderAlebdoParts{p: p, ctx: ctx}
 }
 
+// ShaderAlebdoPartsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ShaderAlebdoPartsArrayToJSArray(array []*ShaderAlebdoParts) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewShaderAlebdoParts returns a new ShaderAlebdoParts object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderalebdoparts

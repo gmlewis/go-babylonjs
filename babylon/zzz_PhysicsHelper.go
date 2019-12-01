@@ -29,6 +29,15 @@ func PhysicsHelperFromJSObject(p js.Value, ctx js.Value) *PhysicsHelper {
 	return &PhysicsHelper{p: p, ctx: ctx}
 }
 
+// PhysicsHelperArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsHelperArrayToJSArray(array []*PhysicsHelper) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPhysicsHelper returns a new PhysicsHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicshelper
@@ -45,7 +54,7 @@ func (ba *Babylon) NewPhysicsHelper(scene *Scene) *PhysicsHelper {
 // PhysicsHelperApplyRadialExplosionForceOpts contains optional parameters for PhysicsHelper.ApplyRadialExplosionForce.
 type PhysicsHelperApplyRadialExplosionForceOpts struct {
 	Strength *float64
-	Falloff  *PhysicsRadialImpulseFalloff
+	Falloff  js.Value
 }
 
 // ApplyRadialExplosionForce calls the ApplyRadialExplosionForce method on the PhysicsHelper object.
@@ -69,7 +78,7 @@ func (p *PhysicsHelper) ApplyRadialExplosionForce(origin *Vector3, radiusOrEvent
 	if opts.Falloff == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Falloff.JSObject())
+		args = append(args, opts.Falloff)
 	}
 
 	retVal := p.p.Call("applyRadialExplosionForce", args...)
@@ -79,7 +88,7 @@ func (p *PhysicsHelper) ApplyRadialExplosionForce(origin *Vector3, radiusOrEvent
 // PhysicsHelperApplyRadialExplosionImpulseOpts contains optional parameters for PhysicsHelper.ApplyRadialExplosionImpulse.
 type PhysicsHelperApplyRadialExplosionImpulseOpts struct {
 	Strength *float64
-	Falloff  *PhysicsRadialImpulseFalloff
+	Falloff  js.Value
 }
 
 // ApplyRadialExplosionImpulse calls the ApplyRadialExplosionImpulse method on the PhysicsHelper object.
@@ -103,7 +112,7 @@ func (p *PhysicsHelper) ApplyRadialExplosionImpulse(origin *Vector3, radiusOrEve
 	if opts.Falloff == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Falloff.JSObject())
+		args = append(args, opts.Falloff)
 	}
 
 	retVal := p.p.Call("applyRadialExplosionImpulse", args...)
@@ -113,7 +122,7 @@ func (p *PhysicsHelper) ApplyRadialExplosionImpulse(origin *Vector3, radiusOrEve
 // PhysicsHelperGravitationalFieldOpts contains optional parameters for PhysicsHelper.GravitationalField.
 type PhysicsHelperGravitationalFieldOpts struct {
 	Strength *float64
-	Falloff  *PhysicsRadialImpulseFalloff
+	Falloff  js.Value
 }
 
 // GravitationalField calls the GravitationalField method on the PhysicsHelper object.
@@ -137,7 +146,7 @@ func (p *PhysicsHelper) GravitationalField(origin *Vector3, radiusOrEventOptions
 	if opts.Falloff == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Falloff.JSObject())
+		args = append(args, opts.Falloff)
 	}
 
 	retVal := p.p.Call("gravitationalField", args...)
@@ -148,7 +157,7 @@ func (p *PhysicsHelper) GravitationalField(origin *Vector3, radiusOrEventOptions
 type PhysicsHelperUpdraftOpts struct {
 	Strength    *float64
 	Height      *float64
-	UpdraftMode *PhysicsUpdraftMode
+	UpdraftMode js.Value
 }
 
 // Updraft calls the Updraft method on the PhysicsHelper object.
@@ -177,7 +186,7 @@ func (p *PhysicsHelper) Updraft(origin *Vector3, radiusOrEventOptions float64, o
 	if opts.UpdraftMode == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.UpdraftMode.JSObject())
+		args = append(args, opts.UpdraftMode)
 	}
 
 	retVal := p.p.Call("updraft", args...)

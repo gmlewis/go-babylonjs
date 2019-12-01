@@ -27,6 +27,15 @@ func StopSoundActionFromJSObject(p js.Value, ctx js.Value) *StopSoundAction {
 	return &StopSoundAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StopSoundActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StopSoundActionArrayToJSArray(array []*StopSoundAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStopSoundActionOpts contains optional parameters for NewStopSoundAction.
 type NewStopSoundActionOpts struct {
 	Condition *Condition
@@ -60,9 +69,7 @@ func (ba *Babylon) NewStopSoundAction(triggerOptions interface{}, sound *Sound, 
 // https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#execute
 func (s *StopSoundAction) Execute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("execute", args...)
+	s.p.Call("execute")
 }
 
 // GetTriggerParameter calls the GetTriggerParameter method on the StopSoundAction object.
@@ -70,9 +77,7 @@ func (s *StopSoundAction) Execute() {
 // https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#gettriggerparameter
 func (s *StopSoundAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTriggerParameter", args...)
+	retVal := s.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -94,9 +99,7 @@ func (s *StopSoundAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#skiptonextactiveaction
 func (s *StopSoundAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("skipToNextActiveAction", args...)
+	s.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the StopSoundAction object.

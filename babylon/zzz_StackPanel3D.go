@@ -27,6 +27,15 @@ func StackPanel3DFromJSObject(p js.Value, ctx js.Value) *StackPanel3D {
 	return &StackPanel3D{Container3D: Container3DFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StackPanel3DArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StackPanel3DArrayToJSArray(array []*StackPanel3D) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStackPanel3DOpts contains optional parameters for NewStackPanel3D.
 type NewStackPanel3DOpts struct {
 	IsVertical *bool
@@ -96,22 +105,20 @@ func (s *StackPanel3D) ContainsControl(control *Control3D) bool {
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#dispose
 func (s *StackPanel3D) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the StackPanel3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#getbehaviorbyname
-func (s *StackPanel3D) GetBehaviorByName(name string) *Control3D {
+func (s *StackPanel3D) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := s.p.Call("getBehaviorByName", args...)
-	return Control3DFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the StackPanel3D object.
@@ -119,9 +126,7 @@ func (s *StackPanel3D) GetBehaviorByName(name string) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#getclassname
 func (s *StackPanel3D) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -169,9 +174,7 @@ func (s *StackPanel3D) RemoveControl(control *Control3D) *Container3D {
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#updatelayout
 func (s *StackPanel3D) UpdateLayout() *Container3D {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("updateLayout", args...)
+	retVal := s.p.Call("updateLayout")
 	return Container3DFromJSObject(retVal, s.ctx)
 }
 
@@ -212,16 +215,16 @@ func (s *StackPanel3D) SetBlockLayout(blockLayout bool) *StackPanel3D {
 // Children returns the Children property of class StackPanel3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#children
-func (s *StackPanel3D) Children(children []Control3D) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(children.JSObject())
+func (s *StackPanel3D) Children(children []*Control3D) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(children)
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
 // SetChildren sets the Children property of class StackPanel3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#children
-func (s *StackPanel3D) SetChildren(children []Control3D) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(children.JSObject())
+func (s *StackPanel3D) SetChildren(children []*Control3D) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(children)
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
@@ -501,7 +504,7 @@ func (s *StackPanel3D) SetParent(parent *Container3D) *StackPanel3D {
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerdownanimation
 func (s *StackPanel3D) PointerDownAnimation(pointerDownAnimation func()) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(pointerDownAnimation)
+	p := ba.ctx.Get("StackPanel3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
@@ -509,7 +512,7 @@ func (s *StackPanel3D) PointerDownAnimation(pointerDownAnimation func()) *StackP
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerdownanimation
 func (s *StackPanel3D) SetPointerDownAnimation(pointerDownAnimation func()) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(pointerDownAnimation)
+	p := ba.ctx.Get("StackPanel3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
@@ -517,7 +520,7 @@ func (s *StackPanel3D) SetPointerDownAnimation(pointerDownAnimation func()) *Sta
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerenteranimation
 func (s *StackPanel3D) PointerEnterAnimation(pointerEnterAnimation func()) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(pointerEnterAnimation)
+	p := ba.ctx.Get("StackPanel3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
@@ -525,7 +528,7 @@ func (s *StackPanel3D) PointerEnterAnimation(pointerEnterAnimation func()) *Stac
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerenteranimation
 func (s *StackPanel3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(pointerEnterAnimation)
+	p := ba.ctx.Get("StackPanel3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
@@ -533,7 +536,7 @@ func (s *StackPanel3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *S
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointeroutanimation
 func (s *StackPanel3D) PointerOutAnimation(pointerOutAnimation func()) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(pointerOutAnimation)
+	p := ba.ctx.Get("StackPanel3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
@@ -541,7 +544,7 @@ func (s *StackPanel3D) PointerOutAnimation(pointerOutAnimation func()) *StackPan
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointeroutanimation
 func (s *StackPanel3D) SetPointerOutAnimation(pointerOutAnimation func()) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(pointerOutAnimation)
+	p := ba.ctx.Get("StackPanel3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
@@ -549,7 +552,7 @@ func (s *StackPanel3D) SetPointerOutAnimation(pointerOutAnimation func()) *Stack
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerupanimation
 func (s *StackPanel3D) PointerUpAnimation(pointerUpAnimation func()) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(pointerUpAnimation)
+	p := ba.ctx.Get("StackPanel3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
@@ -557,7 +560,7 @@ func (s *StackPanel3D) PointerUpAnimation(pointerUpAnimation func()) *StackPanel
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerupanimation
 func (s *StackPanel3D) SetPointerUpAnimation(pointerUpAnimation func()) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(pointerUpAnimation)
+	p := ba.ctx.Get("StackPanel3D").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 

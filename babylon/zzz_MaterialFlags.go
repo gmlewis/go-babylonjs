@@ -27,6 +27,15 @@ func MaterialFlagsFromJSObject(p js.Value, ctx js.Value) *MaterialFlags {
 	return &MaterialFlags{p: p, ctx: ctx}
 }
 
+// MaterialFlagsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MaterialFlagsArrayToJSArray(array []*MaterialFlags) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // AmbientTextureEnabled returns the AmbientTextureEnabled property of class MaterialFlags.

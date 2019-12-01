@@ -29,6 +29,15 @@ func MergeMeshesOptimizationFromJSObject(p js.Value, ctx js.Value) *MergeMeshesO
 	return &MergeMeshesOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
+// MergeMeshesOptimizationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MergeMeshesOptimizationArrayToJSArray(array []*MergeMeshesOptimization) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMergeMeshesOptimizationOpts contains optional parameters for NewMergeMeshesOptimization.
 type NewMergeMeshesOptimizationOpts struct {
 	Priority *float64
@@ -87,9 +96,7 @@ func (m *MergeMeshesOptimization) Apply(scene *Scene, optimizer *SceneOptimizer,
 // https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#getdescription
 func (m *MergeMeshesOptimization) GetDescription() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getDescription", args...)
+	retVal := m.p.Call("getDescription")
 	return retVal.String()
 }
 

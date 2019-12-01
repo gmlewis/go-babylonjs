@@ -27,6 +27,15 @@ func TrigonometryBlockFromJSObject(p js.Value, ctx js.Value) *TrigonometryBlock 
 	return &TrigonometryBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// TrigonometryBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TrigonometryBlockArrayToJSArray(array []*TrigonometryBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTrigonometryBlock returns a new TrigonometryBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock
@@ -152,9 +161,7 @@ func (t *TrigonometryBlock) ConnectTo(other *NodeMaterialBlock, opts *Trigonomet
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#dispose
 func (t *TrigonometryBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("dispose", args...)
+	t.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the TrigonometryBlock object.
@@ -162,9 +169,7 @@ func (t *TrigonometryBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#getclassname
 func (t *TrigonometryBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getClassName", args...)
+	retVal := t.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (t *TrigonometryBlock) ReplaceRepeatableContent(vertexShaderState *NodeMate
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#serialize
 func (t *TrigonometryBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("serialize", args...)
+	retVal := t.p.Call("serialize")
 	return retVal
 }
 

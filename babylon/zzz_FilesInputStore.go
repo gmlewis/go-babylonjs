@@ -28,6 +28,15 @@ func FilesInputStoreFromJSObject(p js.Value, ctx js.Value) *FilesInputStore {
 	return &FilesInputStore{p: p, ctx: ctx}
 }
 
+// FilesInputStoreArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FilesInputStoreArrayToJSArray(array []*FilesInputStore) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // FilesToLoad returns the FilesToLoad property of class FilesInputStore.

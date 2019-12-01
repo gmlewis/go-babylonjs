@@ -29,6 +29,15 @@ func SceneOptimizerFromJSObject(p js.Value, ctx js.Value) *SceneOptimizer {
 	return &SceneOptimizer{p: p, ctx: ctx}
 }
 
+// SceneOptimizerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SceneOptimizerArrayToJSArray(array []*SceneOptimizer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSceneOptimizerOpts contains optional parameters for NewSceneOptimizer.
 type NewSceneOptimizerOpts struct {
 	Options                *SceneOptimizerOptions
@@ -73,9 +82,7 @@ func (ba *Babylon) NewSceneOptimizer(scene *Scene, opts *NewSceneOptimizerOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#dispose
 func (s *SceneOptimizer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // SceneOptimizerOptimizeAsyncOpts contains optional parameters for SceneOptimizer.OptimizeAsync.
@@ -122,9 +129,7 @@ func (s *SceneOptimizer) OptimizeAsync(scene *Scene, opts *SceneOptimizerOptimiz
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#reset
 func (s *SceneOptimizer) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("reset", args...)
+	s.p.Call("reset")
 }
 
 // Start calls the Start method on the SceneOptimizer object.
@@ -132,9 +137,7 @@ func (s *SceneOptimizer) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#start
 func (s *SceneOptimizer) Start() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("start", args...)
+	s.p.Call("start")
 }
 
 // Stop calls the Stop method on the SceneOptimizer object.
@@ -142,9 +145,7 @@ func (s *SceneOptimizer) Start() {
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#stop
 func (s *SceneOptimizer) Stop() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("stop", args...)
+	s.p.Call("stop")
 }
 
 /*

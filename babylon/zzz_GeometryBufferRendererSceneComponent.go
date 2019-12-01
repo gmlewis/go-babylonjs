@@ -28,6 +28,15 @@ func GeometryBufferRendererSceneComponentFromJSObject(p js.Value, ctx js.Value) 
 	return &GeometryBufferRendererSceneComponent{p: p, ctx: ctx}
 }
 
+// GeometryBufferRendererSceneComponentArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GeometryBufferRendererSceneComponentArrayToJSArray(array []*GeometryBufferRendererSceneComponent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGeometryBufferRendererSceneComponent returns a new GeometryBufferRendererSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent
@@ -46,9 +55,7 @@ func (ba *Babylon) NewGeometryBufferRendererSceneComponent(scene *Scene) *Geomet
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#dispose
 func (g *GeometryBufferRendererSceneComponent) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // Rebuild calls the Rebuild method on the GeometryBufferRendererSceneComponent object.
@@ -56,9 +63,7 @@ func (g *GeometryBufferRendererSceneComponent) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#rebuild
 func (g *GeometryBufferRendererSceneComponent) Rebuild() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("rebuild", args...)
+	g.p.Call("rebuild")
 }
 
 // Register calls the Register method on the GeometryBufferRendererSceneComponent object.
@@ -66,9 +71,7 @@ func (g *GeometryBufferRendererSceneComponent) Rebuild() {
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#register
 func (g *GeometryBufferRendererSceneComponent) Register() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("register", args...)
+	g.p.Call("register")
 }
 
 /*

@@ -30,6 +30,15 @@ func DirectionalLightFromJSObject(p js.Value, ctx js.Value) *DirectionalLight {
 	return &DirectionalLight{ShadowLight: ShadowLightFromJSObject(p, ctx), ctx: ctx}
 }
 
+// DirectionalLightArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DirectionalLightArrayToJSArray(array []*DirectionalLight) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDirectionalLight returns a new DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight
@@ -47,7 +56,7 @@ func (ba *Babylon) NewDirectionalLight(name string, direction *Vector3, scene *S
 
 // DirectionalLightAddBehaviorOpts contains optional parameters for DirectionalLight.AddBehavior.
 type DirectionalLightAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the DirectionalLight object.
@@ -65,7 +74,7 @@ func (d *DirectionalLight) AddBehavior(behavior js.Value, opts *DirectionalLight
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := d.p.Call("addBehavior", args...)
@@ -204,9 +213,7 @@ func (d *DirectionalLight) CompareLightsPriority(a *Light, b *Light) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#computetransformedinformation
 func (d *DirectionalLight) ComputeTransformedInformation() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("computeTransformedInformation", args...)
+	retVal := d.p.Call("computeTransformedInformation")
 	return retVal.Bool()
 }
 
@@ -339,9 +346,7 @@ func (d *DirectionalLight) Dispose(opts *DirectionalLightDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#forceprojectionmatrixcompute
 func (d *DirectionalLight) ForceProjectionMatrixCompute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("forceProjectionMatrixCompute", args...)
+	d.p.Call("forceProjectionMatrixCompute")
 }
 
 // GetAbsolutePosition calls the GetAbsolutePosition method on the DirectionalLight object.
@@ -349,9 +354,7 @@ func (d *DirectionalLight) ForceProjectionMatrixCompute() {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getabsoluteposition
 func (d *DirectionalLight) GetAbsolutePosition() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getAbsolutePosition", args...)
+	retVal := d.p.Call("getAbsolutePosition")
 	return Vector3FromJSObject(retVal, d.ctx)
 }
 
@@ -386,23 +389,21 @@ func (d *DirectionalLight) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getanimationranges
 func (d *DirectionalLight) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getAnimationRanges", args...)
+	retVal := d.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, d.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getbehaviorbyname
-func (d *DirectionalLight) GetBehaviorByName(name string) *Node {
+func (d *DirectionalLight) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := d.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, d.ctx)
+	return retVal
 }
 
 // DirectionalLightGetChildMeshesOpts contains optional parameters for DirectionalLight.GetChildMeshes.
@@ -472,9 +473,7 @@ func (d *DirectionalLight) GetChildren(opts *DirectionalLightGetChildrenOpts) *N
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getclassname
 func (d *DirectionalLight) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getClassName", args...)
+	retVal := d.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -524,9 +523,7 @@ func (d *DirectionalLight) GetDepthMinZ(activeCamera *Camera) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getdepthscale
 func (d *DirectionalLight) GetDepthScale() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getDepthScale", args...)
+	retVal := d.p.Call("getDepthScale")
 	return retVal.Float()
 }
 
@@ -566,9 +563,7 @@ func (d *DirectionalLight) GetDescendants(opts *DirectionalLightGetDescendantsOp
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getengine
 func (d *DirectionalLight) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getEngine", args...)
+	retVal := d.p.Call("getEngine")
 	return EngineFromJSObject(retVal, d.ctx)
 }
 
@@ -608,9 +603,7 @@ func (d *DirectionalLight) GetHierarchyBoundingVectors(opts *DirectionalLightGet
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getrotation
 func (d *DirectionalLight) GetRotation() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getRotation", args...)
+	retVal := d.p.Call("getRotation")
 	return Vector3FromJSObject(retVal, d.ctx)
 }
 
@@ -619,9 +612,7 @@ func (d *DirectionalLight) GetRotation() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getscaledintensity
 func (d *DirectionalLight) GetScaledIntensity() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getScaledIntensity", args...)
+	retVal := d.p.Call("getScaledIntensity")
 	return retVal.Float()
 }
 
@@ -630,9 +621,7 @@ func (d *DirectionalLight) GetScaledIntensity() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getscene
 func (d *DirectionalLight) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getScene", args...)
+	retVal := d.p.Call("getScene")
 	return SceneFromJSObject(retVal, d.ctx)
 }
 
@@ -664,12 +653,10 @@ func (d *DirectionalLight) GetShadowDirection(opts *DirectionalLightGetShadowDir
 // GetShadowGenerator calls the GetShadowGenerator method on the DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getshadowgenerator
-func (d *DirectionalLight) GetShadowGenerator() *IShadowGenerator {
+func (d *DirectionalLight) GetShadowGenerator() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getShadowGenerator", args...)
-	return IShadowGeneratorFromJSObject(retVal, d.ctx)
+	retVal := d.p.Call("getShadowGenerator")
+	return retVal
 }
 
 // GetTypeID calls the GetTypeID method on the DirectionalLight object.
@@ -677,9 +664,7 @@ func (d *DirectionalLight) GetShadowGenerator() *IShadowGenerator {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#gettypeid
 func (d *DirectionalLight) GetTypeID() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getTypeID", args...)
+	retVal := d.p.Call("getTypeID")
 	return retVal.Float()
 }
 
@@ -688,9 +673,7 @@ func (d *DirectionalLight) GetTypeID() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getworldmatrix
 func (d *DirectionalLight) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("getWorldMatrix", args...)
+	retVal := d.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, d.ctx)
 }
 
@@ -712,9 +695,7 @@ func (d *DirectionalLight) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#isdisposed
 func (d *DirectionalLight) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("isDisposed", args...)
+	retVal := d.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -773,9 +754,7 @@ func (d *DirectionalLight) IsReady(opts *DirectionalLightIsReadyOpts) bool {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#needcube
 func (d *DirectionalLight) NeedCube() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("needCube", args...)
+	retVal := d.p.Call("needCube")
 	return retVal.Bool()
 }
 
@@ -784,9 +763,7 @@ func (d *DirectionalLight) NeedCube() bool {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#needprojectionmatrixcompute
 func (d *DirectionalLight) NeedProjectionMatrixCompute() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("needProjectionMatrixCompute", args...)
+	retVal := d.p.Call("needProjectionMatrixCompute")
 	return retVal.Bool()
 }
 
@@ -849,9 +826,7 @@ func (d *DirectionalLight) RemoveBehavior(behavior js.Value) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#serialize
 func (d *DirectionalLight) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("serialize", args...)
+	retVal := d.p.Call("serialize")
 	return retVal
 }
 
@@ -860,9 +835,7 @@ func (d *DirectionalLight) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#serializeanimationranges
 func (d *DirectionalLight) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := d.p.Call("serializeAnimationRanges", args...)
+	retVal := d.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -894,16 +867,16 @@ func (d *DirectionalLight) SetEnabled(value bool) {
 // SetShadowProjectionMatrix calls the SetShadowProjectionMatrix method on the DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#setshadowprojectionmatrix
-func (d *DirectionalLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []AbstractMesh) *IShadowLight {
+func (d *DirectionalLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []*AbstractMesh) js.Value {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, matrix.JSObject())
 	args = append(args, viewMatrix.JSObject())
-	args = append(args, renderList.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(renderList))
 
 	retVal := d.p.Call("setShadowProjectionMatrix", args...)
-	return IShadowLightFromJSObject(retVal, d.ctx)
+	return retVal
 }
 
 // DirectionalLightToStringOpts contains optional parameters for DirectionalLight.ToString.
@@ -1043,7 +1016,7 @@ func (d *DirectionalLight) SetBehaviors(behaviors js.Value) *DirectionalLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#customprojectionmatrixbuilder
 func (d *DirectionalLight) CustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(customProjectionMatrixBuilder)
+	p := ba.ctx.Get("DirectionalLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customProjectionMatrixBuilder(); return nil}))
 	return DirectionalLightFromJSObject(p, ba.ctx)
 }
 
@@ -1051,7 +1024,7 @@ func (d *DirectionalLight) CustomProjectionMatrixBuilder(customProjectionMatrixB
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#customprojectionmatrixbuilder
 func (d *DirectionalLight) SetCustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(customProjectionMatrixBuilder)
+	p := ba.ctx.Get("DirectionalLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customProjectionMatrixBuilder(); return nil}))
 	return DirectionalLightFromJSObject(p, ba.ctx)
 }
 
@@ -1555,7 +1528,7 @@ func (d *DirectionalLight) SetName(name string) *DirectionalLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#ondispose
 func (d *DirectionalLight) OnDispose(onDispose func()) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(onDispose)
+	p := ba.ctx.Get("DirectionalLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return DirectionalLightFromJSObject(p, ba.ctx)
 }
 
@@ -1563,7 +1536,7 @@ func (d *DirectionalLight) OnDispose(onDispose func()) *DirectionalLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#ondispose
 func (d *DirectionalLight) SetOnDispose(onDispose func()) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(onDispose)
+	p := ba.ctx.Get("DirectionalLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return DirectionalLightFromJSObject(p, ba.ctx)
 }
 
@@ -1587,7 +1560,7 @@ func (d *DirectionalLight) SetOnDisposeObservable(onDisposeObservable *Observabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#onready
 func (d *DirectionalLight) OnReady(onReady func()) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(onReady)
+	p := ba.ctx.Get("DirectionalLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return DirectionalLightFromJSObject(p, ba.ctx)
 }
 
@@ -1595,7 +1568,7 @@ func (d *DirectionalLight) OnReady(onReady func()) *DirectionalLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#onready
 func (d *DirectionalLight) SetOnReady(onReady func()) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(onReady)
+	p := ba.ctx.Get("DirectionalLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return DirectionalLightFromJSObject(p, ba.ctx)
 }
 

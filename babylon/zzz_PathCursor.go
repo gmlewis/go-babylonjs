@@ -27,6 +27,15 @@ func PathCursorFromJSObject(p js.Value, ctx js.Value) *PathCursor {
 	return &PathCursor{p: p, ctx: ctx}
 }
 
+// PathCursorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PathCursorArrayToJSArray(array []*PathCursor) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPathCursor returns a new PathCursor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor
@@ -45,9 +54,7 @@ func (ba *Babylon) NewPathCursor(path *Path2) *PathCursor {
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor#getpoint
 func (p *PathCursor) GetPoint() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getPoint", args...)
+	retVal := p.p.Call("getPoint")
 	return Vector3FromJSObject(retVal, p.ctx)
 }
 
@@ -121,7 +128,7 @@ func (p *PathCursor) Onchange(f func()) *PathCursor {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, f)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { f(); return nil }))
 
 	retVal := p.p.Call("onchange", args...)
 	return PathCursorFromJSObject(retVal, p.ctx)

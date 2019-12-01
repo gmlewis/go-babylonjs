@@ -30,6 +30,15 @@ func RayHelperFromJSObject(p js.Value, ctx js.Value) *RayHelper {
 	return &RayHelper{p: p, ctx: ctx}
 }
 
+// RayHelperArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RayHelperArrayToJSArray(array []*RayHelper) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRayHelper returns a new RayHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rayhelper
@@ -101,9 +110,7 @@ func (r *RayHelper) CreateAndShow(ray *Ray, scene *Scene, color *Color3) *RayHel
 // https://doc.babylonjs.com/api/classes/babylon.rayhelper#detachfrommesh
 func (r *RayHelper) DetachFromMesh() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("detachFromMesh", args...)
+	r.p.Call("detachFromMesh")
 }
 
 // Dispose calls the Dispose method on the RayHelper object.
@@ -111,9 +118,7 @@ func (r *RayHelper) DetachFromMesh() {
 // https://doc.babylonjs.com/api/classes/babylon.rayhelper#dispose
 func (r *RayHelper) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // Hide calls the Hide method on the RayHelper object.
@@ -121,9 +126,7 @@ func (r *RayHelper) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.rayhelper#hide
 func (r *RayHelper) Hide() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("hide", args...)
+	r.p.Call("hide")
 }
 
 // RayHelperShowOpts contains optional parameters for RayHelper.Show.

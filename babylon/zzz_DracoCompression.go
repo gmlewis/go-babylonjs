@@ -31,6 +31,15 @@ func DracoCompressionFromJSObject(p js.Value, ctx js.Value) *DracoCompression {
 	return &DracoCompression{p: p, ctx: ctx}
 }
 
+// DracoCompressionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func DracoCompressionArrayToJSArray(array []*DracoCompression) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewDracoCompressionOpts contains optional parameters for NewDracoCompression.
 type NewDracoCompressionOpts struct {
 	NumWorkers *float64
@@ -64,7 +73,7 @@ type DracoCompressionDecodeMeshAsyncOpts struct {
 // DecodeMeshAsync calls the DecodeMeshAsync method on the DracoCompression object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#decodemeshasync
-func (d *DracoCompression) DecodeMeshAsync(data js.Value, opts *DracoCompressionDecodeMeshAsyncOpts) *VertexData {
+func (d *DracoCompression) DecodeMeshAsync(data js.Value, opts *DracoCompressionDecodeMeshAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &DracoCompressionDecodeMeshAsyncOpts{}
 	}
@@ -80,7 +89,7 @@ func (d *DracoCompression) DecodeMeshAsync(data js.Value, opts *DracoCompression
 	}
 
 	retVal := d.p.Call("decodeMeshAsync", args...)
-	return VertexDataFromJSObject(retVal, d.ctx)
+	return PromiseFromJSObject(retVal, d.ctx)
 }
 
 // Dispose calls the Dispose method on the DracoCompression object.
@@ -88,19 +97,16 @@ func (d *DracoCompression) DecodeMeshAsync(data js.Value, opts *DracoCompression
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#dispose
 func (d *DracoCompression) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("dispose", args...)
+	d.p.Call("dispose")
 }
 
 // WhenReadyAsync calls the WhenReadyAsync method on the DracoCompression object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#whenreadyasync
-func (d *DracoCompression) WhenReadyAsync() {
+func (d *DracoCompression) WhenReadyAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	d.p.Call("whenReadyAsync", args...)
+	retVal := d.p.Call("whenReadyAsync")
+	return PromiseFromJSObject(retVal, d.ctx)
 }
 
 /*

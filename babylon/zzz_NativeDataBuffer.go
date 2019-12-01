@@ -27,6 +27,15 @@ func NativeDataBufferFromJSObject(p js.Value, ctx js.Value) *NativeDataBuffer {
 	return &NativeDataBuffer{DataBuffer: DataBufferFromJSObject(p, ctx), ctx: ctx}
 }
 
+// NativeDataBufferArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NativeDataBufferArrayToJSArray(array []*NativeDataBuffer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Capacity returns the Capacity property of class NativeDataBuffer.

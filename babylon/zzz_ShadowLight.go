@@ -28,6 +28,15 @@ func ShadowLightFromJSObject(p js.Value, ctx js.Value) *ShadowLight {
 	return &ShadowLight{Light: LightFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ShadowLightArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ShadowLightArrayToJSArray(array []*ShadowLight) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewShadowLight returns a new ShadowLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight
@@ -44,7 +53,7 @@ func (ba *Babylon) NewShadowLight(name string, scene *Scene) *ShadowLight {
 
 // ShadowLightAddBehaviorOpts contains optional parameters for ShadowLight.AddBehavior.
 type ShadowLightAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the ShadowLight object.
@@ -62,7 +71,7 @@ func (s *ShadowLight) AddBehavior(behavior js.Value, opts *ShadowLightAddBehavio
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := s.p.Call("addBehavior", args...)
@@ -201,9 +210,7 @@ func (s *ShadowLight) CompareLightsPriority(a *Light, b *Light) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#computetransformedinformation
 func (s *ShadowLight) ComputeTransformedInformation() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("computeTransformedInformation", args...)
+	retVal := s.p.Call("computeTransformedInformation")
 	return retVal.Bool()
 }
 
@@ -336,9 +343,7 @@ func (s *ShadowLight) Dispose(opts *ShadowLightDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#forceprojectionmatrixcompute
 func (s *ShadowLight) ForceProjectionMatrixCompute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("forceProjectionMatrixCompute", args...)
+	s.p.Call("forceProjectionMatrixCompute")
 }
 
 // GetAbsolutePosition calls the GetAbsolutePosition method on the ShadowLight object.
@@ -346,9 +351,7 @@ func (s *ShadowLight) ForceProjectionMatrixCompute() {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getabsoluteposition
 func (s *ShadowLight) GetAbsolutePosition() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAbsolutePosition", args...)
+	retVal := s.p.Call("getAbsolutePosition")
 	return Vector3FromJSObject(retVal, s.ctx)
 }
 
@@ -383,23 +386,21 @@ func (s *ShadowLight) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getanimationranges
 func (s *ShadowLight) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getAnimationRanges", args...)
+	retVal := s.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, s.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the ShadowLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getbehaviorbyname
-func (s *ShadowLight) GetBehaviorByName(name string) *Node {
+func (s *ShadowLight) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := s.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // ShadowLightGetChildMeshesOpts contains optional parameters for ShadowLight.GetChildMeshes.
@@ -469,9 +470,7 @@ func (s *ShadowLight) GetChildren(opts *ShadowLightGetChildrenOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getclassname
 func (s *ShadowLight) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -521,9 +520,7 @@ func (s *ShadowLight) GetDepthMinZ(activeCamera *Camera) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getdepthscale
 func (s *ShadowLight) GetDepthScale() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getDepthScale", args...)
+	retVal := s.p.Call("getDepthScale")
 	return retVal.Float()
 }
 
@@ -563,9 +560,7 @@ func (s *ShadowLight) GetDescendants(opts *ShadowLightGetDescendantsOpts) *Node 
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getengine
 func (s *ShadowLight) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getEngine", args...)
+	retVal := s.p.Call("getEngine")
 	return EngineFromJSObject(retVal, s.ctx)
 }
 
@@ -605,9 +600,7 @@ func (s *ShadowLight) GetHierarchyBoundingVectors(opts *ShadowLightGetHierarchyB
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getrotation
 func (s *ShadowLight) GetRotation() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getRotation", args...)
+	retVal := s.p.Call("getRotation")
 	return Vector3FromJSObject(retVal, s.ctx)
 }
 
@@ -616,9 +609,7 @@ func (s *ShadowLight) GetRotation() *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getscaledintensity
 func (s *ShadowLight) GetScaledIntensity() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getScaledIntensity", args...)
+	retVal := s.p.Call("getScaledIntensity")
 	return retVal.Float()
 }
 
@@ -627,9 +618,7 @@ func (s *ShadowLight) GetScaledIntensity() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getscene
 func (s *ShadowLight) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getScene", args...)
+	retVal := s.p.Call("getScene")
 	return SceneFromJSObject(retVal, s.ctx)
 }
 
@@ -661,12 +650,10 @@ func (s *ShadowLight) GetShadowDirection(opts *ShadowLightGetShadowDirectionOpts
 // GetShadowGenerator calls the GetShadowGenerator method on the ShadowLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getshadowgenerator
-func (s *ShadowLight) GetShadowGenerator() *IShadowGenerator {
+func (s *ShadowLight) GetShadowGenerator() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getShadowGenerator", args...)
-	return IShadowGeneratorFromJSObject(retVal, s.ctx)
+	retVal := s.p.Call("getShadowGenerator")
+	return retVal
 }
 
 // GetTypeID calls the GetTypeID method on the ShadowLight object.
@@ -674,9 +661,7 @@ func (s *ShadowLight) GetShadowGenerator() *IShadowGenerator {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#gettypeid
 func (s *ShadowLight) GetTypeID() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTypeID", args...)
+	retVal := s.p.Call("getTypeID")
 	return retVal.Float()
 }
 
@@ -685,9 +670,7 @@ func (s *ShadowLight) GetTypeID() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getworldmatrix
 func (s *ShadowLight) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getWorldMatrix", args...)
+	retVal := s.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, s.ctx)
 }
 
@@ -709,9 +692,7 @@ func (s *ShadowLight) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#isdisposed
 func (s *ShadowLight) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("isDisposed", args...)
+	retVal := s.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -770,9 +751,7 @@ func (s *ShadowLight) IsReady(opts *ShadowLightIsReadyOpts) bool {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#needcube
 func (s *ShadowLight) NeedCube() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("needCube", args...)
+	retVal := s.p.Call("needCube")
 	return retVal.Bool()
 }
 
@@ -781,9 +760,7 @@ func (s *ShadowLight) NeedCube() bool {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#needprojectionmatrixcompute
 func (s *ShadowLight) NeedProjectionMatrixCompute() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("needProjectionMatrixCompute", args...)
+	retVal := s.p.Call("needProjectionMatrixCompute")
 	return retVal.Bool()
 }
 
@@ -846,9 +823,7 @@ func (s *ShadowLight) RemoveBehavior(behavior js.Value) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#serialize
 func (s *ShadowLight) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 
@@ -857,9 +832,7 @@ func (s *ShadowLight) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#serializeanimationranges
 func (s *ShadowLight) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serializeAnimationRanges", args...)
+	retVal := s.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -891,16 +864,16 @@ func (s *ShadowLight) SetEnabled(value bool) {
 // SetShadowProjectionMatrix calls the SetShadowProjectionMatrix method on the ShadowLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#setshadowprojectionmatrix
-func (s *ShadowLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []AbstractMesh) *IShadowLight {
+func (s *ShadowLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []*AbstractMesh) js.Value {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, matrix.JSObject())
 	args = append(args, viewMatrix.JSObject())
-	args = append(args, renderList.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(renderList))
 
 	retVal := s.p.Call("setShadowProjectionMatrix", args...)
-	return IShadowLightFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // ShadowLightToStringOpts contains optional parameters for ShadowLight.ToString.
@@ -1024,7 +997,7 @@ func (s *ShadowLight) SetBehaviors(behaviors js.Value) *ShadowLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#customprojectionmatrixbuilder
 func (s *ShadowLight) CustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(customProjectionMatrixBuilder)
+	p := ba.ctx.Get("ShadowLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customProjectionMatrixBuilder(); return nil}))
 	return ShadowLightFromJSObject(p, ba.ctx)
 }
 
@@ -1032,7 +1005,7 @@ func (s *ShadowLight) CustomProjectionMatrixBuilder(customProjectionMatrixBuilde
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#customprojectionmatrixbuilder
 func (s *ShadowLight) SetCustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(customProjectionMatrixBuilder)
+	p := ba.ctx.Get("ShadowLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customProjectionMatrixBuilder(); return nil}))
 	return ShadowLightFromJSObject(p, ba.ctx)
 }
 
@@ -1536,7 +1509,7 @@ func (s *ShadowLight) SetName(name string) *ShadowLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#ondispose
 func (s *ShadowLight) OnDispose(onDispose func()) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(onDispose)
+	p := ba.ctx.Get("ShadowLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return ShadowLightFromJSObject(p, ba.ctx)
 }
 
@@ -1544,7 +1517,7 @@ func (s *ShadowLight) OnDispose(onDispose func()) *ShadowLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#ondispose
 func (s *ShadowLight) SetOnDispose(onDispose func()) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(onDispose)
+	p := ba.ctx.Get("ShadowLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return ShadowLightFromJSObject(p, ba.ctx)
 }
 
@@ -1568,7 +1541,7 @@ func (s *ShadowLight) SetOnDisposeObservable(onDisposeObservable *Observable) *S
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#onready
 func (s *ShadowLight) OnReady(onReady func()) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(onReady)
+	p := ba.ctx.Get("ShadowLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return ShadowLightFromJSObject(p, ba.ctx)
 }
 
@@ -1576,7 +1549,7 @@ func (s *ShadowLight) OnReady(onReady func()) *ShadowLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#onready
 func (s *ShadowLight) SetOnReady(onReady func()) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(onReady)
+	p := ba.ctx.Get("ShadowLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return ShadowLightFromJSObject(p, ba.ctx)
 }
 

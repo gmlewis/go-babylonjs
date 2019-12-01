@@ -27,6 +27,15 @@ func BufferFromJSObject(p js.Value, ctx js.Value) *Buffer {
 	return &Buffer{p: p, ctx: ctx}
 }
 
+// BufferArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BufferArrayToJSArray(array []*Buffer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBufferOpts contains optional parameters for NewBuffer.
 type NewBufferOpts struct {
 	Stride                   *float64
@@ -39,7 +48,7 @@ type NewBufferOpts struct {
 // NewBuffer returns a new Buffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer
-func (ba *Babylon) NewBuffer(engine interface{}, data []float64, updatable bool, opts *NewBufferOpts) *Buffer {
+func (ba *Babylon) NewBuffer(engine interface{}, data []*float64, updatable bool, opts *NewBufferOpts) *Buffer {
 	if opts == nil {
 		opts = &NewBufferOpts{}
 	}
@@ -156,9 +165,7 @@ func (b *Buffer) CreateVertexBuffer(kind string, offset float64, size float64, o
 // https://doc.babylonjs.com/api/classes/babylon.buffer#dispose
 func (b *Buffer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("dispose", args...)
+	b.p.Call("dispose")
 }
 
 // GetBuffer calls the GetBuffer method on the Buffer object.
@@ -166,20 +173,16 @@ func (b *Buffer) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.buffer#getbuffer
 func (b *Buffer) GetBuffer() *DataBuffer {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getBuffer", args...)
+	retVal := b.p.Call("getBuffer")
 	return DataBufferFromJSObject(retVal, b.ctx)
 }
 
 // GetData calls the GetData method on the Buffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer#getdata
-func (b *Buffer) GetData() []float64 {
+func (b *Buffer) GetData() []*float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getData", args...)
+	retVal := b.p.Call("getData")
 	return retVal
 }
 
@@ -188,9 +191,7 @@ func (b *Buffer) GetData() []float64 {
 // https://doc.babylonjs.com/api/classes/babylon.buffer#getstridesize
 func (b *Buffer) GetStrideSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getStrideSize", args...)
+	retVal := b.p.Call("getStrideSize")
 	return retVal.Float()
 }
 
@@ -199,20 +200,18 @@ func (b *Buffer) GetStrideSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.buffer#isupdatable
 func (b *Buffer) IsUpdatable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("isUpdatable", args...)
+	retVal := b.p.Call("isUpdatable")
 	return retVal.Bool()
 }
 
 // Update calls the Update method on the Buffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer#update
-func (b *Buffer) Update(data []float64) {
+func (b *Buffer) Update(data []*float64) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, data)
+	args = append(args, float64ArrayToJSArray(data))
 
 	b.p.Call("update", args...)
 }
@@ -226,14 +225,14 @@ type BufferUpdateDirectlyOpts struct {
 // UpdateDirectly calls the UpdateDirectly method on the Buffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer#updatedirectly
-func (b *Buffer) UpdateDirectly(data []float64, offset float64, opts *BufferUpdateDirectlyOpts) {
+func (b *Buffer) UpdateDirectly(data []*float64, offset float64, opts *BufferUpdateDirectlyOpts) {
 	if opts == nil {
 		opts = &BufferUpdateDirectlyOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, data)
+	args = append(args, float64ArrayToJSArray(data))
 	args = append(args, offset)
 
 	if opts.VertexCount == nil {

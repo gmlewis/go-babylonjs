@@ -28,6 +28,15 @@ func EffectFallbacksFromJSObject(p js.Value, ctx js.Value) *EffectFallbacks {
 	return &EffectFallbacks{p: p, ctx: ctx}
 }
 
+// EffectFallbacksArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EffectFallbacksArrayToJSArray(array []*EffectFallbacks) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // AddCPUSkinningFallback calls the AddCPUSkinningFallback method on the EffectFallbacks object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectfallbacks#addcpuskinningfallback
@@ -73,9 +82,7 @@ func (e *EffectFallbacks) Reduce(currentDefines string, effect *Effect) string {
 // https://doc.babylonjs.com/api/classes/babylon.effectfallbacks#unbindmesh
 func (e *EffectFallbacks) UnBindMesh() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("unBindMesh", args...)
+	e.p.Call("unBindMesh")
 }
 
 /*

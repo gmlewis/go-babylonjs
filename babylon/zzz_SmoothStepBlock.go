@@ -27,6 +27,15 @@ func SmoothStepBlockFromJSObject(p js.Value, ctx js.Value) *SmoothStepBlock {
 	return &SmoothStepBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// SmoothStepBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SmoothStepBlockArrayToJSArray(array []*SmoothStepBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewSmoothStepBlock returns a new SmoothStepBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock
@@ -152,9 +161,7 @@ func (s *SmoothStepBlock) ConnectTo(other *NodeMaterialBlock, opts *SmoothStepBl
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#dispose
 func (s *SmoothStepBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the SmoothStepBlock object.
@@ -162,9 +169,7 @@ func (s *SmoothStepBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#getclassname
 func (s *SmoothStepBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (s *SmoothStepBlock) ReplaceRepeatableContent(vertexShaderState *NodeMateri
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#serialize
 func (s *SmoothStepBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

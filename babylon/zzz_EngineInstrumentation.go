@@ -29,6 +29,15 @@ func EngineInstrumentationFromJSObject(p js.Value, ctx js.Value) *EngineInstrume
 	return &EngineInstrumentation{p: p, ctx: ctx}
 }
 
+// EngineInstrumentationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EngineInstrumentationArrayToJSArray(array []*EngineInstrumentation) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewEngineInstrumentation returns a new EngineInstrumentation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation
@@ -47,9 +56,7 @@ func (ba *Babylon) NewEngineInstrumentation(engine *Engine) *EngineInstrumentati
 // https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#dispose
 func (e *EngineInstrumentation) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	e.p.Call("dispose", args...)
+	e.p.Call("dispose")
 }
 
 /*

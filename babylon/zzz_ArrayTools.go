@@ -27,6 +27,15 @@ func ArrayToolsFromJSObject(p js.Value, ctx js.Value) *ArrayTools {
 	return &ArrayTools{p: p, ctx: ctx}
 }
 
+// ArrayToolsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArrayToolsArrayToJSArray(array []*ArrayTools) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
  */

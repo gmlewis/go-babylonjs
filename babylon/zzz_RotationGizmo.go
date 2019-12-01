@@ -27,6 +27,15 @@ func RotationGizmoFromJSObject(p js.Value, ctx js.Value) *RotationGizmo {
 	return &RotationGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RotationGizmoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RotationGizmoArrayToJSArray(array []*RotationGizmo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRotationGizmoOpts contains optional parameters for NewRotationGizmo.
 type NewRotationGizmoOpts struct {
 	GizmoLayer       *UtilityLayerRenderer
@@ -69,9 +78,7 @@ func (ba *Babylon) NewRotationGizmo(opts *NewRotationGizmoOpts) *RotationGizmo {
 // https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#dispose
 func (r *RotationGizmo) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // SetCustomMesh calls the SetCustomMesh method on the RotationGizmo object.

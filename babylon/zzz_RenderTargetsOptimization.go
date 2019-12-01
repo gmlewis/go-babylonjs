@@ -29,6 +29,15 @@ func RenderTargetsOptimizationFromJSObject(p js.Value, ctx js.Value) *RenderTarg
 	return &RenderTargetsOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RenderTargetsOptimizationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RenderTargetsOptimizationArrayToJSArray(array []*RenderTargetsOptimization) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRenderTargetsOptimizationOpts contains optional parameters for NewRenderTargetsOptimization.
 type NewRenderTargetsOptimizationOpts struct {
 	Priority *float64
@@ -73,9 +82,7 @@ func (r *RenderTargetsOptimization) Apply(scene *Scene, optimizer *SceneOptimize
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetsoptimization#getdescription
 func (r *RenderTargetsOptimization) GetDescription() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getDescription", args...)
+	retVal := r.p.Call("getDescription")
 	return retVal.String()
 }
 

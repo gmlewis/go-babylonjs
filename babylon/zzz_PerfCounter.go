@@ -32,6 +32,15 @@ func PerfCounterFromJSObject(p js.Value, ctx js.Value) *PerfCounter {
 	return &PerfCounter{p: p, ctx: ctx}
 }
 
+// PerfCounterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PerfCounterArrayToJSArray(array []*PerfCounter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPerfCounter returns a new PerfCounter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perfcounter
@@ -61,9 +70,7 @@ func (p *PerfCounter) AddCount(newCount float64, fetchResult bool) {
 // https://doc.babylonjs.com/api/classes/babylon.perfcounter#beginmonitoring
 func (p *PerfCounter) BeginMonitoring() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("beginMonitoring", args...)
+	p.p.Call("beginMonitoring")
 }
 
 // PerfCounterEndMonitoringOpts contains optional parameters for PerfCounter.EndMonitoring.
@@ -95,9 +102,7 @@ func (p *PerfCounter) EndMonitoring(opts *PerfCounterEndMonitoringOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.perfcounter#fetchnewframe
 func (p *PerfCounter) FetchNewFrame() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("fetchNewFrame", args...)
+	p.p.Call("fetchNewFrame")
 }
 
 /*

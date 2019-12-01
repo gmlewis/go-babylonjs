@@ -27,6 +27,15 @@ func BoundingSphereFromJSObject(p js.Value, ctx js.Value) *BoundingSphere {
 	return &BoundingSphere{p: p, ctx: ctx}
 }
 
+// BoundingSphereArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoundingSphereArrayToJSArray(array []*BoundingSphere) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBoundingSphereOpts contains optional parameters for NewBoundingSphere.
 type NewBoundingSphereOpts struct {
 	WorldMatrix *Matrix
@@ -60,9 +69,7 @@ func (ba *Babylon) NewBoundingSphere(min *Vector3, max *Vector3, opts *NewBoundi
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#getworldmatrix
 func (b *BoundingSphere) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getWorldMatrix", args...)
+	retVal := b.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, b.ctx)
 }
 
@@ -96,11 +103,11 @@ func (b *BoundingSphere) IntersectsPoint(point *Vector3) bool {
 // IsCenterInFrustum calls the IsCenterInFrustum method on the BoundingSphere object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#iscenterinfrustum
-func (b *BoundingSphere) IsCenterInFrustum(frustumPlanes []DeepImmutable) bool {
+func (b *BoundingSphere) IsCenterInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := b.p.Call("isCenterInFrustum", args...)
 	return retVal.Bool()
@@ -109,11 +116,11 @@ func (b *BoundingSphere) IsCenterInFrustum(frustumPlanes []DeepImmutable) bool {
 // IsInFrustum calls the IsInFrustum method on the BoundingSphere object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#isinfrustum
-func (b *BoundingSphere) IsInFrustum(frustumPlanes []DeepImmutable) bool {
+func (b *BoundingSphere) IsInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := b.p.Call("isInFrustum", args...)
 	return retVal.Bool()

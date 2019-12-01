@@ -27,6 +27,15 @@ func BlackAndWhitePostProcessFromJSObject(p js.Value, ctx js.Value) *BlackAndWhi
 	return &BlackAndWhitePostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// BlackAndWhitePostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BlackAndWhitePostProcessArrayToJSArray(array []*BlackAndWhitePostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBlackAndWhitePostProcessOpts contains optional parameters for NewBlackAndWhitePostProcess.
 type NewBlackAndWhitePostProcessOpts struct {
 	SamplingMode *float64
@@ -106,9 +115,7 @@ func (b *BlackAndWhitePostProcess) Activate(camera *Camera, opts *BlackAndWhiteP
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#apply
 func (b *BlackAndWhitePostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("apply", args...)
+	retVal := b.p.Call("apply")
 	return EffectFromJSObject(retVal, b.ctx)
 }
 
@@ -141,9 +148,7 @@ func (b *BlackAndWhitePostProcess) Dispose(opts *BlackAndWhitePostProcessDispose
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#getcamera
 func (b *BlackAndWhitePostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getCamera", args...)
+	retVal := b.p.Call("getCamera")
 	return CameraFromJSObject(retVal, b.ctx)
 }
 
@@ -152,9 +157,7 @@ func (b *BlackAndWhitePostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#getclassname
 func (b *BlackAndWhitePostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getClassName", args...)
+	retVal := b.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -163,9 +166,7 @@ func (b *BlackAndWhitePostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#geteffect
 func (b *BlackAndWhitePostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEffect", args...)
+	retVal := b.p.Call("getEffect")
 	return EffectFromJSObject(retVal, b.ctx)
 }
 
@@ -174,9 +175,7 @@ func (b *BlackAndWhitePostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#geteffectname
 func (b *BlackAndWhitePostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEffectName", args...)
+	retVal := b.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -185,9 +184,7 @@ func (b *BlackAndWhitePostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#getengine
 func (b *BlackAndWhitePostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEngine", args...)
+	retVal := b.p.Call("getEngine")
 	return EngineFromJSObject(retVal, b.ctx)
 }
 
@@ -196,9 +193,7 @@ func (b *BlackAndWhitePostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#isready
 func (b *BlackAndWhitePostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("isReady", args...)
+	retVal := b.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -207,9 +202,7 @@ func (b *BlackAndWhitePostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#isreusable
 func (b *BlackAndWhitePostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("isReusable", args...)
+	retVal := b.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -218,9 +211,7 @@ func (b *BlackAndWhitePostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#marktexturedirty
 func (b *BlackAndWhitePostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("markTextureDirty", args...)
+	b.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the BlackAndWhitePostProcess object.
@@ -295,9 +286,7 @@ func (b *BlackAndWhitePostProcess) UpdateEffect(opts *BlackAndWhitePostProcessUp
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#useownoutput
 func (b *BlackAndWhitePostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	b.p.Call("useOwnOutput", args...)
+	b.p.Call("useOwnOutput")
 }
 
 /*
@@ -562,7 +551,7 @@ func (b *BlackAndWhitePostProcess) SetName(name string) *BlackAndWhitePostProces
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#onactivate
 func (b *BlackAndWhitePostProcess) OnActivate(onActivate func()) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(onActivate)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -570,7 +559,7 @@ func (b *BlackAndWhitePostProcess) OnActivate(onActivate func()) *BlackAndWhiteP
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#onactivate
 func (b *BlackAndWhitePostProcess) SetOnActivate(onActivate func()) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(onActivate)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -594,7 +583,7 @@ func (b *BlackAndWhitePostProcess) SetOnActivateObservable(onActivateObservable 
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#onafterrender
 func (b *BlackAndWhitePostProcess) OnAfterRender(onAfterRender func()) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(onAfterRender)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -602,7 +591,7 @@ func (b *BlackAndWhitePostProcess) OnAfterRender(onAfterRender func()) *BlackAnd
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#onafterrender
 func (b *BlackAndWhitePostProcess) SetOnAfterRender(onAfterRender func()) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(onAfterRender)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -626,7 +615,7 @@ func (b *BlackAndWhitePostProcess) SetOnAfterRenderObservable(onAfterRenderObser
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#onapply
 func (b *BlackAndWhitePostProcess) OnApply(onApply func()) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(onApply)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -634,7 +623,7 @@ func (b *BlackAndWhitePostProcess) OnApply(onApply func()) *BlackAndWhitePostPro
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#onapply
 func (b *BlackAndWhitePostProcess) SetOnApply(onApply func()) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(onApply)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -658,7 +647,7 @@ func (b *BlackAndWhitePostProcess) SetOnApplyObservable(onApplyObservable *Obser
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#onbeforerender
 func (b *BlackAndWhitePostProcess) OnBeforeRender(onBeforeRender func()) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -666,7 +655,7 @@ func (b *BlackAndWhitePostProcess) OnBeforeRender(onBeforeRender func()) *BlackA
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#onbeforerender
 func (b *BlackAndWhitePostProcess) SetOnBeforeRender(onBeforeRender func()) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -690,7 +679,7 @@ func (b *BlackAndWhitePostProcess) SetOnBeforeRenderObservable(onBeforeRenderObs
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#onsizechanged
 func (b *BlackAndWhitePostProcess) OnSizeChanged(onSizeChanged func()) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -698,7 +687,7 @@ func (b *BlackAndWhitePostProcess) OnSizeChanged(onSizeChanged func()) *BlackAnd
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#onsizechanged
 func (b *BlackAndWhitePostProcess) SetOnSizeChanged(onSizeChanged func()) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 

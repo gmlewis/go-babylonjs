@@ -27,6 +27,15 @@ func InstantiatedEntriesFromJSObject(p js.Value, ctx js.Value) *InstantiatedEntr
 	return &InstantiatedEntries{p: p, ctx: ctx}
 }
 
+// InstantiatedEntriesArrayToJSArray returns a JavaScript Array for the wrapped array.
+func InstantiatedEntriesArrayToJSArray(array []*InstantiatedEntries) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // AnimationGroups returns the AnimationGroups property of class InstantiatedEntries.

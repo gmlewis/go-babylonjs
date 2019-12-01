@@ -29,6 +29,15 @@ func VRDeviceOrientationGamepadCameraFromJSObject(p js.Value, ctx js.Value) *VRD
 	return &VRDeviceOrientationGamepadCamera{VRDeviceOrientationFreeCamera: VRDeviceOrientationFreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VRDeviceOrientationGamepadCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VRDeviceOrientationGamepadCameraArrayToJSArray(array []*VRDeviceOrientationGamepadCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVRDeviceOrientationGamepadCameraOpts contains optional parameters for NewVRDeviceOrientationGamepadCamera.
 type NewVRDeviceOrientationGamepadCameraOpts struct {
 	CompensateDistortion *bool
@@ -107,9 +116,7 @@ func (v *VRDeviceOrientationGamepadCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationgamepadcamera#dispose
 func (v *VRDeviceOrientationGamepadCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // VRDeviceOrientationGamepadCameraEnableHorizontalDraggingOpts contains optional parameters for VRDeviceOrientationGamepadCamera.EnableHorizontalDragging.
@@ -141,9 +148,7 @@ func (v *VRDeviceOrientationGamepadCamera) EnableHorizontalDragging(opts *VRDevi
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationgamepadcamera#getclassname
 func (v *VRDeviceOrientationGamepadCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -165,9 +170,7 @@ func (v *VRDeviceOrientationGamepadCamera) GetFrontPosition(distance float64) *V
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationgamepadcamera#gettarget
 func (v *VRDeviceOrientationGamepadCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getTarget", args...)
+	retVal := v.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
@@ -212,9 +215,7 @@ func (v *VRDeviceOrientationGamepadCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationgamepadcamera#storestate
 func (v *VRDeviceOrientationGamepadCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("storeState", args...)
+	retVal := v.p.Call("storeState")
 	return CameraFromJSObject(retVal, v.ctx)
 }
 
@@ -480,7 +481,7 @@ func (v *VRDeviceOrientationGamepadCamera) SetNoRotationConstraint(noRotationCon
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationgamepadcamera#oncollide
 func (v *VRDeviceOrientationGamepadCamera) OnCollide(onCollide func()) *VRDeviceOrientationGamepadCamera {
-	p := ba.ctx.Get("VRDeviceOrientationGamepadCamera").New(onCollide)
+	p := ba.ctx.Get("VRDeviceOrientationGamepadCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return VRDeviceOrientationGamepadCameraFromJSObject(p, ba.ctx)
 }
 
@@ -488,7 +489,7 @@ func (v *VRDeviceOrientationGamepadCamera) OnCollide(onCollide func()) *VRDevice
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationgamepadcamera#oncollide
 func (v *VRDeviceOrientationGamepadCamera) SetOnCollide(onCollide func()) *VRDeviceOrientationGamepadCamera {
-	p := ba.ctx.Get("VRDeviceOrientationGamepadCamera").New(onCollide)
+	p := ba.ctx.Get("VRDeviceOrientationGamepadCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return VRDeviceOrientationGamepadCameraFromJSObject(p, ba.ctx)
 }
 

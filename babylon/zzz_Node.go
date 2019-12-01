@@ -27,6 +27,15 @@ func NodeFromJSObject(p js.Value, ctx js.Value) *Node {
 	return &Node{p: p, ctx: ctx}
 }
 
+// NodeArrayToJSArray returns a JavaScript Array for the wrapped array.
+func NodeArrayToJSArray(array []*Node) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewNodeOpts contains optional parameters for NewNode.
 type NewNodeOpts struct {
 	Scene *Scene
@@ -56,7 +65,7 @@ func (ba *Babylon) NewNode(name string, opts *NewNodeOpts) *Node {
 
 // NodeAddBehaviorOpts contains optional parameters for Node.AddBehavior.
 type NodeAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the Node object.
@@ -74,7 +83,7 @@ func (n *Node) AddBehavior(behavior js.Value, opts *NodeAddBehaviorOpts) *Node {
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := n.p.Call("addBehavior", args...)
@@ -288,23 +297,21 @@ func (n *Node) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.node#getanimationranges
 func (n *Node) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getAnimationRanges", args...)
+	retVal := n.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, n.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the Node object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#getbehaviorbyname
-func (n *Node) GetBehaviorByName(name string) *Node {
+func (n *Node) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := n.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, n.ctx)
+	return retVal
 }
 
 // NodeGetChildMeshesOpts contains optional parameters for Node.GetChildMeshes.
@@ -374,9 +381,7 @@ func (n *Node) GetChildren(opts *NodeGetChildrenOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.node#getclassname
 func (n *Node) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getClassName", args...)
+	retVal := n.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -416,9 +421,7 @@ func (n *Node) GetDescendants(opts *NodeGetDescendantsOpts) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.node#getengine
 func (n *Node) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getEngine", args...)
+	retVal := n.p.Call("getEngine")
 	return EngineFromJSObject(retVal, n.ctx)
 }
 
@@ -458,9 +461,7 @@ func (n *Node) GetHierarchyBoundingVectors(opts *NodeGetHierarchyBoundingVectors
 // https://doc.babylonjs.com/api/classes/babylon.node#getscene
 func (n *Node) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getScene", args...)
+	retVal := n.p.Call("getScene")
 	return SceneFromJSObject(retVal, n.ctx)
 }
 
@@ -469,9 +470,7 @@ func (n *Node) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.node#getworldmatrix
 func (n *Node) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("getWorldMatrix", args...)
+	retVal := n.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, n.ctx)
 }
 
@@ -493,9 +492,7 @@ func (n *Node) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.node#isdisposed
 func (n *Node) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("isDisposed", args...)
+	retVal := n.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -581,9 +578,7 @@ func (n *Node) RemoveBehavior(behavior js.Value) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.node#serializeanimationranges
 func (n *Node) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := n.p.Call("serializeAnimationRanges", args...)
+	retVal := n.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -733,7 +728,7 @@ func (n *Node) SetName(name string) *Node {
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#ondispose
 func (n *Node) OnDispose(onDispose func()) *Node {
-	p := ba.ctx.Get("Node").New(onDispose)
+	p := ba.ctx.Get("Node").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return NodeFromJSObject(p, ba.ctx)
 }
 
@@ -741,7 +736,7 @@ func (n *Node) OnDispose(onDispose func()) *Node {
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#ondispose
 func (n *Node) SetOnDispose(onDispose func()) *Node {
-	p := ba.ctx.Get("Node").New(onDispose)
+	p := ba.ctx.Get("Node").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return NodeFromJSObject(p, ba.ctx)
 }
 
@@ -765,7 +760,7 @@ func (n *Node) SetOnDisposeObservable(onDisposeObservable *Observable) *Node {
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#onready
 func (n *Node) OnReady(onReady func()) *Node {
-	p := ba.ctx.Get("Node").New(onReady)
+	p := ba.ctx.Get("Node").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return NodeFromJSObject(p, ba.ctx)
 }
 
@@ -773,7 +768,7 @@ func (n *Node) OnReady(onReady func()) *Node {
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#onready
 func (n *Node) SetOnReady(onReady func()) *Node {
-	p := ba.ctx.Get("Node").New(onReady)
+	p := ba.ctx.Get("Node").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return NodeFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func VectorSplitterBlockFromJSObject(p js.Value, ctx js.Value) *VectorSplitterBl
 	return &VectorSplitterBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// VectorSplitterBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VectorSplitterBlockArrayToJSArray(array []*VectorSplitterBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVectorSplitterBlock returns a new VectorSplitterBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock
@@ -152,9 +161,7 @@ func (v *VectorSplitterBlock) ConnectTo(other *NodeMaterialBlock, opts *VectorSp
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#dispose
 func (v *VectorSplitterBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the VectorSplitterBlock object.
@@ -162,9 +169,7 @@ func (v *VectorSplitterBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#getclassname
 func (v *VectorSplitterBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getClassName", args...)
+	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (v *VectorSplitterBlock) ReplaceRepeatableContent(vertexShaderState *NodeMa
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#serialize
 func (v *VectorSplitterBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("serialize", args...)
+	retVal := v.p.Call("serialize")
 	return retVal
 }
 

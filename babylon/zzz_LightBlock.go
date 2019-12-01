@@ -27,6 +27,15 @@ func LightBlockFromJSObject(p js.Value, ctx js.Value) *LightBlock {
 	return &LightBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// LightBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func LightBlockArrayToJSArray(array []*LightBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewLightBlock returns a new LightBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock
@@ -152,9 +161,7 @@ func (l *LightBlock) ConnectTo(other *NodeMaterialBlock, opts *LightBlockConnect
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#dispose
 func (l *LightBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	l.p.Call("dispose", args...)
+	l.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the LightBlock object.
@@ -162,9 +169,7 @@ func (l *LightBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#getclassname
 func (l *LightBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("getClassName", args...)
+	retVal := l.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -435,9 +440,7 @@ func (l *LightBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBui
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#serialize
 func (l *LightBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := l.p.Call("serialize", args...)
+	retVal := l.p.Call("serialize")
 	return retVal
 }
 

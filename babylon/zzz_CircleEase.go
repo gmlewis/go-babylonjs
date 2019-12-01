@@ -29,6 +29,15 @@ func CircleEaseFromJSObject(p js.Value, ctx js.Value) *CircleEase {
 	return &CircleEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CircleEaseArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CircleEaseArrayToJSArray(array []*CircleEase) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Ease calls the Ease method on the CircleEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleease#ease
@@ -47,9 +56,7 @@ func (c *CircleEase) Ease(gradient float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.circleease#geteasingmode
 func (c *CircleEase) GetEasingMode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEasingMode", args...)
+	retVal := c.p.Call("getEasingMode")
 	return retVal.Float()
 }
 

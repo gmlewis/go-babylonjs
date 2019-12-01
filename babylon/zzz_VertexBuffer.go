@@ -27,6 +27,15 @@ func VertexBufferFromJSObject(p js.Value, ctx js.Value) *VertexBuffer {
 	return &VertexBuffer{p: p, ctx: ctx}
 }
 
+// VertexBufferArrayToJSArray returns a JavaScript Array for the wrapped array.
+func VertexBufferArrayToJSArray(array []*VertexBuffer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewVertexBufferOpts contains optional parameters for NewVertexBuffer.
 type NewVertexBufferOpts struct {
 	PostponeInternalCreation *bool
@@ -43,7 +52,7 @@ type NewVertexBufferOpts struct {
 // NewVertexBuffer returns a new VertexBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer
-func (ba *Babylon) NewVertexBuffer(engine interface{}, data []float64, kind string, updatable bool, opts *NewVertexBufferOpts) *VertexBuffer {
+func (ba *Babylon) NewVertexBuffer(engine interface{}, data []*float64, kind string, updatable bool, opts *NewVertexBufferOpts) *VertexBuffer {
 	if opts == nil {
 		opts = &NewVertexBufferOpts{}
 	}
@@ -147,26 +156,24 @@ func (v *VertexBuffer) DeduceStride(kind string) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#dispose
 func (v *VertexBuffer) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	v.p.Call("dispose", args...)
+	v.p.Call("dispose")
 }
 
 // ForEach calls the ForEach method on the VertexBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#foreach
-func (v *VertexBuffer) ForEach(data []float64, byteOffset float64, byteStride float64, componentCount float64, componentType float64, count float64, normalized bool, callback func()) {
+func (v *VertexBuffer) ForEach(data []*float64, byteOffset float64, byteStride float64, componentCount float64, componentType float64, count float64, normalized bool, callback func()) {
 
 	args := make([]interface{}, 0, 8+0)
 
-	args = append(args, data)
+	args = append(args, float64ArrayToJSArray(data))
 	args = append(args, byteOffset)
 	args = append(args, byteStride)
 	args = append(args, componentCount)
 	args = append(args, componentType)
 	args = append(args, count)
 	args = append(args, normalized)
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	v.p.Call("ForEach", args...)
 }
@@ -176,20 +183,16 @@ func (v *VertexBuffer) ForEach(data []float64, byteOffset float64, byteStride fl
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#getbuffer
 func (v *VertexBuffer) GetBuffer() *DataBuffer {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getBuffer", args...)
+	retVal := v.p.Call("getBuffer")
 	return DataBufferFromJSObject(retVal, v.ctx)
 }
 
 // GetData calls the GetData method on the VertexBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#getdata
-func (v *VertexBuffer) GetData() []float64 {
+func (v *VertexBuffer) GetData() []*float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getData", args...)
+	retVal := v.p.Call("getData")
 	return retVal
 }
 
@@ -198,9 +201,7 @@ func (v *VertexBuffer) GetData() []float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#getinstancedivisor
 func (v *VertexBuffer) GetInstanceDivisor() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getInstanceDivisor", args...)
+	retVal := v.p.Call("getInstanceDivisor")
 	return retVal.Float()
 }
 
@@ -209,9 +210,7 @@ func (v *VertexBuffer) GetInstanceDivisor() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#getisinstanced
 func (v *VertexBuffer) GetIsInstanced() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getIsInstanced", args...)
+	retVal := v.p.Call("getIsInstanced")
 	return retVal.Bool()
 }
 
@@ -220,9 +219,7 @@ func (v *VertexBuffer) GetIsInstanced() bool {
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#getkind
 func (v *VertexBuffer) GetKind() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getKind", args...)
+	retVal := v.p.Call("getKind")
 	return retVal.String()
 }
 
@@ -231,9 +228,7 @@ func (v *VertexBuffer) GetKind() string {
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#getoffset
 func (v *VertexBuffer) GetOffset() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getOffset", args...)
+	retVal := v.p.Call("getOffset")
 	return retVal.Float()
 }
 
@@ -242,9 +237,7 @@ func (v *VertexBuffer) GetOffset() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#getsize
 func (v *VertexBuffer) GetSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getSize", args...)
+	retVal := v.p.Call("getSize")
 	return retVal.Float()
 }
 
@@ -253,9 +246,7 @@ func (v *VertexBuffer) GetSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#getstridesize
 func (v *VertexBuffer) GetStrideSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("getStrideSize", args...)
+	retVal := v.p.Call("getStrideSize")
 	return retVal.Float()
 }
 
@@ -277,20 +268,18 @@ func (v *VertexBuffer) GetTypeByteLength(jsType float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#isupdatable
 func (v *VertexBuffer) IsUpdatable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := v.p.Call("isUpdatable", args...)
+	retVal := v.p.Call("isUpdatable")
 	return retVal.Bool()
 }
 
 // Update calls the Update method on the VertexBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#update
-func (v *VertexBuffer) Update(data []float64) {
+func (v *VertexBuffer) Update(data []*float64) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, data)
+	args = append(args, float64ArrayToJSArray(data))
 
 	v.p.Call("update", args...)
 }
@@ -303,14 +292,14 @@ type VertexBufferUpdateDirectlyOpts struct {
 // UpdateDirectly calls the UpdateDirectly method on the VertexBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#updatedirectly
-func (v *VertexBuffer) UpdateDirectly(data []float64, offset float64, opts *VertexBufferUpdateDirectlyOpts) {
+func (v *VertexBuffer) UpdateDirectly(data []*float64, offset float64, opts *VertexBufferUpdateDirectlyOpts) {
 	if opts == nil {
 		opts = &VertexBufferUpdateDirectlyOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, data)
+	args = append(args, float64ArrayToJSArray(data))
 	args = append(args, offset)
 
 	if opts.UseBytes == nil {

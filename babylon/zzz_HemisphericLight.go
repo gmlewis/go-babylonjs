@@ -28,6 +28,15 @@ func HemisphericLightFromJSObject(p js.Value, ctx js.Value) *HemisphericLight {
 	return &HemisphericLight{Light: LightFromJSObject(p, ctx), ctx: ctx}
 }
 
+// HemisphericLightArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HemisphericLightArrayToJSArray(array []*HemisphericLight) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewHemisphericLight returns a new HemisphericLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight
@@ -45,7 +54,7 @@ func (ba *Babylon) NewHemisphericLight(name string, direction *Vector3, scene *S
 
 // HemisphericLightAddBehaviorOpts contains optional parameters for HemisphericLight.AddBehavior.
 type HemisphericLightAddBehaviorOpts struct {
-	AttachImmediately *Node
+	AttachImmediately *bool
 }
 
 // AddBehavior calls the AddBehavior method on the HemisphericLight object.
@@ -63,7 +72,7 @@ func (h *HemisphericLight) AddBehavior(behavior js.Value, opts *HemisphericLight
 	if opts.AttachImmediately == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AttachImmediately.JSObject())
+		args = append(args, *opts.AttachImmediately)
 	}
 
 	retVal := h.p.Call("addBehavior", args...)
@@ -202,9 +211,7 @@ func (h *HemisphericLight) CompareLightsPriority(a *Light, b *Light) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#computeworldmatrix
 func (h *HemisphericLight) ComputeWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("computeWorldMatrix", args...)
+	retVal := h.p.Call("computeWorldMatrix")
 	return MatrixFromJSObject(retVal, h.ctx)
 }
 
@@ -312,9 +319,7 @@ func (h *HemisphericLight) Dispose(opts *HemisphericLightDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getabsoluteposition
 func (h *HemisphericLight) GetAbsolutePosition() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getAbsolutePosition", args...)
+	retVal := h.p.Call("getAbsolutePosition")
 	return Vector3FromJSObject(retVal, h.ctx)
 }
 
@@ -349,23 +354,21 @@ func (h *HemisphericLight) GetAnimationRange(name string) *AnimationRange {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getanimationranges
 func (h *HemisphericLight) GetAnimationRanges() *AnimationRange {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getAnimationRanges", args...)
+	retVal := h.p.Call("getAnimationRanges")
 	return AnimationRangeFromJSObject(retVal, h.ctx)
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the HemisphericLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getbehaviorbyname
-func (h *HemisphericLight) GetBehaviorByName(name string) *Node {
+func (h *HemisphericLight) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := h.p.Call("getBehaviorByName", args...)
-	return NodeFromJSObject(retVal, h.ctx)
+	return retVal
 }
 
 // HemisphericLightGetChildMeshesOpts contains optional parameters for HemisphericLight.GetChildMeshes.
@@ -435,9 +438,7 @@ func (h *HemisphericLight) GetChildren(opts *HemisphericLightGetChildrenOpts) *N
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getclassname
 func (h *HemisphericLight) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getClassName", args...)
+	retVal := h.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -492,9 +493,7 @@ func (h *HemisphericLight) GetDescendants(opts *HemisphericLightGetDescendantsOp
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getengine
 func (h *HemisphericLight) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getEngine", args...)
+	retVal := h.p.Call("getEngine")
 	return EngineFromJSObject(retVal, h.ctx)
 }
 
@@ -534,9 +533,7 @@ func (h *HemisphericLight) GetHierarchyBoundingVectors(opts *HemisphericLightGet
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getscaledintensity
 func (h *HemisphericLight) GetScaledIntensity() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getScaledIntensity", args...)
+	retVal := h.p.Call("getScaledIntensity")
 	return retVal.Float()
 }
 
@@ -545,21 +542,17 @@ func (h *HemisphericLight) GetScaledIntensity() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getscene
 func (h *HemisphericLight) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getScene", args...)
+	retVal := h.p.Call("getScene")
 	return SceneFromJSObject(retVal, h.ctx)
 }
 
 // GetShadowGenerator calls the GetShadowGenerator method on the HemisphericLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getshadowgenerator
-func (h *HemisphericLight) GetShadowGenerator() *IShadowGenerator {
+func (h *HemisphericLight) GetShadowGenerator() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getShadowGenerator", args...)
-	return IShadowGeneratorFromJSObject(retVal, h.ctx)
+	retVal := h.p.Call("getShadowGenerator")
+	return retVal
 }
 
 // GetTypeID calls the GetTypeID method on the HemisphericLight object.
@@ -567,9 +560,7 @@ func (h *HemisphericLight) GetShadowGenerator() *IShadowGenerator {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#gettypeid
 func (h *HemisphericLight) GetTypeID() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getTypeID", args...)
+	retVal := h.p.Call("getTypeID")
 	return retVal.Float()
 }
 
@@ -578,9 +569,7 @@ func (h *HemisphericLight) GetTypeID() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getworldmatrix
 func (h *HemisphericLight) GetWorldMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getWorldMatrix", args...)
+	retVal := h.p.Call("getWorldMatrix")
 	return MatrixFromJSObject(retVal, h.ctx)
 }
 
@@ -602,9 +591,7 @@ func (h *HemisphericLight) IsDescendantOf(ancestor *Node) bool {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#isdisposed
 func (h *HemisphericLight) IsDisposed() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("isDisposed", args...)
+	retVal := h.p.Call("isDisposed")
 	return retVal.Bool()
 }
 
@@ -717,9 +704,7 @@ func (h *HemisphericLight) RemoveBehavior(behavior js.Value) *Node {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#serialize
 func (h *HemisphericLight) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("serialize", args...)
+	retVal := h.p.Call("serialize")
 	return retVal
 }
 
@@ -728,9 +713,7 @@ func (h *HemisphericLight) Serialize() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#serializeanimationranges
 func (h *HemisphericLight) SerializeAnimationRanges() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("serializeAnimationRanges", args...)
+	retVal := h.p.Call("serializeAnimationRanges")
 	return retVal
 }
 
@@ -1392,7 +1375,7 @@ func (h *HemisphericLight) SetName(name string) *HemisphericLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#ondispose
 func (h *HemisphericLight) OnDispose(onDispose func()) *HemisphericLight {
-	p := ba.ctx.Get("HemisphericLight").New(onDispose)
+	p := ba.ctx.Get("HemisphericLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return HemisphericLightFromJSObject(p, ba.ctx)
 }
 
@@ -1400,7 +1383,7 @@ func (h *HemisphericLight) OnDispose(onDispose func()) *HemisphericLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#ondispose
 func (h *HemisphericLight) SetOnDispose(onDispose func()) *HemisphericLight {
-	p := ba.ctx.Get("HemisphericLight").New(onDispose)
+	p := ba.ctx.Get("HemisphericLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return HemisphericLightFromJSObject(p, ba.ctx)
 }
 
@@ -1424,7 +1407,7 @@ func (h *HemisphericLight) SetOnDisposeObservable(onDisposeObservable *Observabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#onready
 func (h *HemisphericLight) OnReady(onReady func()) *HemisphericLight {
-	p := ba.ctx.Get("HemisphericLight").New(onReady)
+	p := ba.ctx.Get("HemisphericLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return HemisphericLightFromJSObject(p, ba.ctx)
 }
 
@@ -1432,7 +1415,7 @@ func (h *HemisphericLight) OnReady(onReady func()) *HemisphericLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#onready
 func (h *HemisphericLight) SetOnReady(onReady func()) *HemisphericLight {
-	p := ba.ctx.Get("HemisphericLight").New(onReady)
+	p := ba.ctx.Get("HemisphericLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
 	return HemisphericLightFromJSObject(p, ba.ctx)
 }
 

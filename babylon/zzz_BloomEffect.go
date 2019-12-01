@@ -27,6 +27,15 @@ func BloomEffectFromJSObject(p js.Value, ctx js.Value) *BloomEffect {
 	return &BloomEffect{PostProcessRenderEffect: PostProcessRenderEffectFromJSObject(p, ctx), ctx: ctx}
 }
 
+// BloomEffectArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BloomEffectArrayToJSArray(array []*BloomEffect) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBloomEffectOpts contains optional parameters for NewBloomEffect.
 type NewBloomEffectOpts struct {
 	PipelineTextureType *float64
@@ -83,7 +92,7 @@ type BloomEffectGetPostProcessesOpts struct {
 // GetPostProcesses calls the GetPostProcesses method on the BloomEffect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloomeffect#getpostprocesses
-func (b *BloomEffect) GetPostProcesses(opts *BloomEffectGetPostProcessesOpts) []js.Value {
+func (b *BloomEffect) GetPostProcesses(opts *BloomEffectGetPostProcessesOpts) []*PostProcess {
 	if opts == nil {
 		opts = &BloomEffectGetPostProcessesOpts{}
 	}

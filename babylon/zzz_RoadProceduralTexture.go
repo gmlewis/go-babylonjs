@@ -27,6 +27,15 @@ func RoadProceduralTextureFromJSObject(p js.Value, ctx js.Value) *RoadProcedural
 	return &RoadProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RoadProceduralTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RoadProceduralTextureArrayToJSArray(array []*RoadProceduralTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRoadProceduralTextureOpts contains optional parameters for NewRoadProceduralTexture.
 type NewRoadProceduralTextureOpts struct {
 	FallbackTexture *Texture
@@ -67,9 +76,7 @@ func (ba *Babylon) NewRoadProceduralTexture(name string, size float64, scene *Sc
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#clone
 func (r *RoadProceduralTexture) Clone() *ProceduralTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("clone", args...)
+	retVal := r.p.Call("clone")
 	return ProceduralTextureFromJSObject(retVal, r.ctx)
 }
 
@@ -137,9 +144,7 @@ func (r *RoadProceduralTexture) CreateFromBase64String(data string, name string,
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#dispose
 func (r *RoadProceduralTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the RoadProceduralTexture object.
@@ -147,9 +152,7 @@ func (r *RoadProceduralTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#getbasesize
 func (r *RoadProceduralTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getBaseSize", args...)
+	retVal := r.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -158,9 +161,7 @@ func (r *RoadProceduralTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#getclassname
 func (r *RoadProceduralTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -169,9 +170,7 @@ func (r *RoadProceduralTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#getcontent
 func (r *RoadProceduralTexture) GetContent() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getContent", args...)
+	retVal := r.p.Call("getContent")
 	return retVal
 }
 
@@ -180,9 +179,7 @@ func (r *RoadProceduralTexture) GetContent() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#geteffect
 func (r *RoadProceduralTexture) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getEffect", args...)
+	retVal := r.p.Call("getEffect")
 	return EffectFromJSObject(retVal, r.ctx)
 }
 
@@ -191,9 +188,7 @@ func (r *RoadProceduralTexture) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#getinternaltexture
 func (r *RoadProceduralTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getInternalTexture", args...)
+	retVal := r.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, r.ctx)
 }
 
@@ -202,9 +197,7 @@ func (r *RoadProceduralTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#getreflectiontexturematrix
 func (r *RoadProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getReflectionTextureMatrix", args...)
+	retVal := r.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, r.ctx)
 }
 
@@ -213,9 +206,7 @@ func (r *RoadProceduralTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#getrendersize
 func (r *RoadProceduralTexture) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getRenderSize", args...)
+	retVal := r.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -224,9 +215,7 @@ func (r *RoadProceduralTexture) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#getscene
 func (r *RoadProceduralTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getScene", args...)
+	retVal := r.p.Call("getScene")
 	return SceneFromJSObject(retVal, r.ctx)
 }
 
@@ -235,9 +224,7 @@ func (r *RoadProceduralTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#getsize
 func (r *RoadProceduralTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getSize", args...)
+	retVal := r.p.Call("getSize")
 	return retVal
 }
 
@@ -271,9 +258,7 @@ func (r *RoadProceduralTexture) GetTextureMatrix(opts *RoadProceduralTextureGetT
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#isready
 func (r *RoadProceduralTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isReady", args...)
+	retVal := r.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -282,9 +267,7 @@ func (r *RoadProceduralTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#isreadyornotblocking
 func (r *RoadProceduralTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("isReadyOrNotBlocking", args...)
+	retVal := r.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -410,9 +393,7 @@ func (r *RoadProceduralTexture) ReadPixels(opts *RoadProceduralTextureReadPixels
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#releaseinternaltexture
 func (r *RoadProceduralTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("releaseInternalTexture", args...)
+	r.p.Call("releaseInternalTexture")
 }
 
 // RoadProceduralTextureRenderOpts contains optional parameters for RoadProceduralTexture.Render.
@@ -444,9 +425,7 @@ func (r *RoadProceduralTexture) Render(opts *RoadProceduralTextureRenderOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#reset
 func (r *RoadProceduralTexture) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("reset", args...)
+	r.p.Call("reset")
 }
 
 // ResetRefreshCounter calls the ResetRefreshCounter method on the RoadProceduralTexture object.
@@ -454,9 +433,7 @@ func (r *RoadProceduralTexture) Reset() {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#resetrefreshcounter
 func (r *RoadProceduralTexture) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("resetRefreshCounter", args...)
+	r.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the RoadProceduralTexture object.
@@ -489,9 +466,7 @@ func (r *RoadProceduralTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#serialize
 func (r *RoadProceduralTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("serialize", args...)
+	retVal := r.p.Call("serialize")
 	return retVal
 }
 
@@ -638,9 +613,7 @@ func (r *RoadProceduralTexture) SetVector3(name string, value *Vector3) *Procedu
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#tostring
 func (r *RoadProceduralTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("toString", args...)
+	retVal := r.p.Call("toString")
 	return retVal.String()
 }
 
@@ -661,9 +634,7 @@ func (r *RoadProceduralTexture) UpdateSamplingMode(samplingMode float64) {
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#updateshaderuniforms
 func (r *RoadProceduralTexture) UpdateShaderUniforms() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("updateShaderUniforms", args...)
+	r.p.Call("updateShaderUniforms")
 }
 
 // RoadProceduralTextureUpdateURLOpts contains optional parameters for RoadProceduralTexture.UpdateURL.
@@ -706,7 +677,7 @@ func (r *RoadProceduralTexture) WhenAllReady(textures *BaseTexture, callback fun
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	r.p.Call("WhenAllReady", args...)
 }
@@ -1533,7 +1504,7 @@ func (r *RoadProceduralTexture) SetNoMipmap(noMipmap bool) *RoadProceduralTextur
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#ondispose
 func (r *RoadProceduralTexture) OnDispose(onDispose func()) *RoadProceduralTexture {
-	p := ba.ctx.Get("RoadProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("RoadProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return RoadProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1541,7 +1512,7 @@ func (r *RoadProceduralTexture) OnDispose(onDispose func()) *RoadProceduralTextu
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#ondispose
 func (r *RoadProceduralTexture) SetOnDispose(onDispose func()) *RoadProceduralTexture {
-	p := ba.ctx.Get("RoadProceduralTexture").New(onDispose)
+	p := ba.ctx.Get("RoadProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return RoadProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1565,7 +1536,7 @@ func (r *RoadProceduralTexture) SetOnDisposeObservable(onDisposeObservable *Obse
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#ongenerated
 func (r *RoadProceduralTexture) OnGenerated(onGenerated func()) *RoadProceduralTexture {
-	p := ba.ctx.Get("RoadProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("RoadProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return RoadProceduralTextureFromJSObject(p, ba.ctx)
 }
 
@@ -1573,7 +1544,7 @@ func (r *RoadProceduralTexture) OnGenerated(onGenerated func()) *RoadProceduralT
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#ongenerated
 func (r *RoadProceduralTexture) SetOnGenerated(onGenerated func()) *RoadProceduralTexture {
-	p := ba.ctx.Get("RoadProceduralTexture").New(onGenerated)
+	p := ba.ctx.Get("RoadProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
 	return RoadProceduralTextureFromJSObject(p, ba.ctx)
 }
 

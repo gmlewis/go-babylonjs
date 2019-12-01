@@ -28,6 +28,15 @@ func CheckboxGroupFromJSObject(p js.Value, ctx js.Value) *CheckboxGroup {
 	return &CheckboxGroup{SelectorGroup: SelectorGroupFromJSObject(p, ctx), ctx: ctx}
 }
 
+// CheckboxGroupArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CheckboxGroupArrayToJSArray(array []*CheckboxGroup) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCheckboxGroup returns a new CheckboxGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.checkboxgroup

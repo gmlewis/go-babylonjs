@@ -27,6 +27,15 @@ func ScaleBlockFromJSObject(p js.Value, ctx js.Value) *ScaleBlock {
 	return &ScaleBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ScaleBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ScaleBlockArrayToJSArray(array []*ScaleBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewScaleBlock returns a new ScaleBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock
@@ -152,9 +161,7 @@ func (s *ScaleBlock) ConnectTo(other *NodeMaterialBlock, opts *ScaleBlockConnect
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock#dispose
 func (s *ScaleBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the ScaleBlock object.
@@ -162,9 +169,7 @@ func (s *ScaleBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock#getclassname
 func (s *ScaleBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -449,9 +454,7 @@ func (s *ScaleBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBui
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock#serialize
 func (s *ScaleBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("serialize", args...)
+	retVal := s.p.Call("serialize")
 	return retVal
 }
 

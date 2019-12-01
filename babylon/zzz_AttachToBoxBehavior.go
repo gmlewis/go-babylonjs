@@ -27,6 +27,15 @@ func AttachToBoxBehaviorFromJSObject(p js.Value, ctx js.Value) *AttachToBoxBehav
 	return &AttachToBoxBehavior{p: p, ctx: ctx}
 }
 
+// AttachToBoxBehaviorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AttachToBoxBehaviorArrayToJSArray(array []*AttachToBoxBehavior) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAttachToBoxBehavior returns a new AttachToBoxBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior
@@ -57,9 +66,7 @@ func (a *AttachToBoxBehavior) Attach(target *Mesh) {
 // https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#detach
 func (a *AttachToBoxBehavior) Detach() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("detach", args...)
+	a.p.Call("detach")
 }
 
 // Init calls the Init method on the AttachToBoxBehavior object.
@@ -67,9 +74,7 @@ func (a *AttachToBoxBehavior) Detach() {
 // https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#init
 func (a *AttachToBoxBehavior) Init() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("init", args...)
+	a.p.Call("init")
 }
 
 /*

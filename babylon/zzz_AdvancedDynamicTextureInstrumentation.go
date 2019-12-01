@@ -27,6 +27,15 @@ func AdvancedDynamicTextureInstrumentationFromJSObject(p js.Value, ctx js.Value)
 	return &AdvancedDynamicTextureInstrumentation{p: p, ctx: ctx}
 }
 
+// AdvancedDynamicTextureInstrumentationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AdvancedDynamicTextureInstrumentationArrayToJSArray(array []*AdvancedDynamicTextureInstrumentation) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAdvancedDynamicTextureInstrumentation returns a new AdvancedDynamicTextureInstrumentation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation
@@ -45,9 +54,7 @@ func (ba *Babylon) NewAdvancedDynamicTextureInstrumentation(texture *AdvancedDyn
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#dispose
 func (a *AdvancedDynamicTextureInstrumentation) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 /*

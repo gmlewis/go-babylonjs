@@ -29,6 +29,15 @@ func ImageProcessingConfigurationFromJSObject(p js.Value, ctx js.Value) *ImagePr
 	return &ImageProcessingConfiguration{p: p, ctx: ctx}
 }
 
+// ImageProcessingConfigurationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ImageProcessingConfigurationArrayToJSArray(array []*ImageProcessingConfiguration) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ImageProcessingConfigurationBindOpts contains optional parameters for ImageProcessingConfiguration.Bind.
 type ImageProcessingConfigurationBindOpts struct {
 	OverrideAspectRatio *float64
@@ -60,9 +69,7 @@ func (i *ImageProcessingConfiguration) Bind(effect *Effect, opts *ImageProcessin
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#clone
 func (i *ImageProcessingConfiguration) Clone() *ImageProcessingConfiguration {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("clone", args...)
+	retVal := i.p.Call("clone")
 	return ImageProcessingConfigurationFromJSObject(retVal, i.ctx)
 }
 
@@ -71,9 +78,7 @@ func (i *ImageProcessingConfiguration) Clone() *ImageProcessingConfiguration {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#getclassname
 func (i *ImageProcessingConfiguration) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -82,9 +87,7 @@ func (i *ImageProcessingConfiguration) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#isready
 func (i *ImageProcessingConfiguration) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("isReady", args...)
+	retVal := i.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -109,14 +112,14 @@ type ImageProcessingConfigurationPrepareDefinesOpts struct {
 // PrepareDefines calls the PrepareDefines method on the ImageProcessingConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#preparedefines
-func (i *ImageProcessingConfiguration) PrepareDefines(defines *IImageProcessingConfigurationDefines, opts *ImageProcessingConfigurationPrepareDefinesOpts) {
+func (i *ImageProcessingConfiguration) PrepareDefines(defines js.Value, opts *ImageProcessingConfigurationPrepareDefinesOpts) {
 	if opts == nil {
 		opts = &ImageProcessingConfigurationPrepareDefinesOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 
 	if opts.ForPostProcess == nil {
 		args = append(args, js.Undefined())
@@ -130,12 +133,12 @@ func (i *ImageProcessingConfiguration) PrepareDefines(defines *IImageProcessingC
 // PrepareSamplers calls the PrepareSamplers method on the ImageProcessingConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#preparesamplers
-func (i *ImageProcessingConfiguration) PrepareSamplers(samplersList string, defines *IImageProcessingConfigurationDefines) {
+func (i *ImageProcessingConfiguration) PrepareSamplers(samplersList string, defines js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, samplersList)
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 
 	i.p.Call("PrepareSamplers", args...)
 }
@@ -143,12 +146,12 @@ func (i *ImageProcessingConfiguration) PrepareSamplers(samplersList string, defi
 // PrepareUniforms calls the PrepareUniforms method on the ImageProcessingConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#prepareuniforms
-func (i *ImageProcessingConfiguration) PrepareUniforms(uniforms string, defines *IImageProcessingConfigurationDefines) {
+func (i *ImageProcessingConfiguration) PrepareUniforms(uniforms string, defines js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniforms)
-	args = append(args, defines.JSObject())
+	args = append(args, defines)
 
 	i.p.Call("PrepareUniforms", args...)
 }
@@ -158,9 +161,7 @@ func (i *ImageProcessingConfiguration) PrepareUniforms(uniforms string, defines 
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#serialize
 func (i *ImageProcessingConfiguration) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("serialize", args...)
+	retVal := i.p.Call("serialize")
 	return retVal
 }
 

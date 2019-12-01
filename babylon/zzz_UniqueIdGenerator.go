@@ -27,6 +27,15 @@ func UniqueIdGeneratorFromJSObject(p js.Value, ctx js.Value) *UniqueIdGenerator 
 	return &UniqueIdGenerator{p: p, ctx: ctx}
 }
 
+// UniqueIdGeneratorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func UniqueIdGeneratorArrayToJSArray(array []*UniqueIdGenerator) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // UniqueId returns the UniqueId property of class UniqueIdGenerator.

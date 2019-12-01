@@ -27,14 +27,21 @@ func GLTFFileLoaderFromJSObject(p js.Value, ctx js.Value) *GLTFFileLoader {
 	return &GLTFFileLoader{p: p, ctx: ctx}
 }
 
+// GLTFFileLoaderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GLTFFileLoaderArrayToJSArray(array []*GLTFFileLoader) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // Dispose calls the Dispose method on the GLTFFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#dispose
 func (g *GLTFFileLoader) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // GLTFFileLoaderRewriteRootURLOpts contains optional parameters for GLTFFileLoader.RewriteRootURL.
@@ -67,11 +74,10 @@ func (g *GLTFFileLoader) RewriteRootURL(rootUrl string, opts *GLTFFileLoaderRewr
 // WhenCompleteAsync calls the WhenCompleteAsync method on the GLTFFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#whencompleteasync
-func (g *GLTFFileLoader) WhenCompleteAsync() {
+func (g *GLTFFileLoader) WhenCompleteAsync() *Promise {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("whenCompleteAsync", args...)
+	retVal := g.p.Call("whenCompleteAsync")
+	return PromiseFromJSObject(retVal, g.ctx)
 }
 
 /*
@@ -224,7 +230,7 @@ func (g *GLTFFileLoader) SetName(name string) *GLTFFileLoader {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncameraloaded
 func (g *GLTFFileLoader) OnCameraLoaded(onCameraLoaded func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onCameraLoaded)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCameraLoaded(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -232,7 +238,7 @@ func (g *GLTFFileLoader) OnCameraLoaded(onCameraLoaded func()) *GLTFFileLoader {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncameraloaded
 func (g *GLTFFileLoader) SetOnCameraLoaded(onCameraLoaded func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onCameraLoaded)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCameraLoaded(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -256,7 +262,7 @@ func (g *GLTFFileLoader) SetOnCameraLoadedObservable(onCameraLoadedObservable *O
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncomplete
 func (g *GLTFFileLoader) OnComplete(onComplete func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onComplete)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onComplete(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -264,7 +270,7 @@ func (g *GLTFFileLoader) OnComplete(onComplete func()) *GLTFFileLoader {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncomplete
 func (g *GLTFFileLoader) SetOnComplete(onComplete func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onComplete)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onComplete(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -288,7 +294,7 @@ func (g *GLTFFileLoader) SetOnCompleteObservable(onCompleteObservable *Observabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ondispose
 func (g *GLTFFileLoader) OnDispose(onDispose func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onDispose)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -296,7 +302,7 @@ func (g *GLTFFileLoader) OnDispose(onDispose func()) *GLTFFileLoader {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ondispose
 func (g *GLTFFileLoader) SetOnDispose(onDispose func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onDispose)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -320,7 +326,7 @@ func (g *GLTFFileLoader) SetOnDisposeObservable(onDisposeObservable *Observable)
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onerror
 func (g *GLTFFileLoader) OnError(onError func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onError)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -328,7 +334,7 @@ func (g *GLTFFileLoader) OnError(onError func()) *GLTFFileLoader {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onerror
 func (g *GLTFFileLoader) SetOnError(onError func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onError)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -352,7 +358,7 @@ func (g *GLTFFileLoader) SetOnErrorObservable(onErrorObservable *Observable) *GL
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onextensionloaded
 func (g *GLTFFileLoader) OnExtensionLoaded(onExtensionLoaded func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onExtensionLoaded)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onExtensionLoaded(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -360,7 +366,7 @@ func (g *GLTFFileLoader) OnExtensionLoaded(onExtensionLoaded func()) *GLTFFileLo
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onextensionloaded
 func (g *GLTFFileLoader) SetOnExtensionLoaded(onExtensionLoaded func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onExtensionLoaded)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onExtensionLoaded(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -384,7 +390,7 @@ func (g *GLTFFileLoader) SetOnExtensionLoadedObservable(onExtensionLoadedObserva
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmaterialloaded
 func (g *GLTFFileLoader) OnMaterialLoaded(onMaterialLoaded func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onMaterialLoaded)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onMaterialLoaded(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -392,7 +398,7 @@ func (g *GLTFFileLoader) OnMaterialLoaded(onMaterialLoaded func()) *GLTFFileLoad
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmaterialloaded
 func (g *GLTFFileLoader) SetOnMaterialLoaded(onMaterialLoaded func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onMaterialLoaded)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onMaterialLoaded(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -416,7 +422,7 @@ func (g *GLTFFileLoader) SetOnMaterialLoadedObservable(onMaterialLoadedObservabl
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmeshloaded
 func (g *GLTFFileLoader) OnMeshLoaded(onMeshLoaded func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onMeshLoaded)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onMeshLoaded(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -424,7 +430,7 @@ func (g *GLTFFileLoader) OnMeshLoaded(onMeshLoaded func()) *GLTFFileLoader {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmeshloaded
 func (g *GLTFFileLoader) SetOnMeshLoaded(onMeshLoaded func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onMeshLoaded)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onMeshLoaded(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -448,7 +454,7 @@ func (g *GLTFFileLoader) SetOnMeshLoadedObservable(onMeshLoadedObservable *Obser
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onparsed
 func (g *GLTFFileLoader) OnParsed(onParsed func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onParsed)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onParsed(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -456,7 +462,7 @@ func (g *GLTFFileLoader) OnParsed(onParsed func()) *GLTFFileLoader {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onparsed
 func (g *GLTFFileLoader) SetOnParsed(onParsed func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onParsed)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onParsed(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -480,7 +486,7 @@ func (g *GLTFFileLoader) SetOnParsedObservable(onParsedObservable *Observable) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ontextureloaded
 func (g *GLTFFileLoader) OnTextureLoaded(onTextureLoaded func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onTextureLoaded)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onTextureLoaded(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -488,7 +494,7 @@ func (g *GLTFFileLoader) OnTextureLoaded(onTextureLoaded func()) *GLTFFileLoader
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ontextureloaded
 func (g *GLTFFileLoader) SetOnTextureLoaded(onTextureLoaded func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onTextureLoaded)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onTextureLoaded(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -512,7 +518,7 @@ func (g *GLTFFileLoader) SetOnTextureLoadedObservable(onTextureLoadedObservable 
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onvalidated
 func (g *GLTFFileLoader) OnValidated(onValidated func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onValidated)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onValidated(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -520,7 +526,7 @@ func (g *GLTFFileLoader) OnValidated(onValidated func()) *GLTFFileLoader {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onvalidated
 func (g *GLTFFileLoader) SetOnValidated(onValidated func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(onValidated)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onValidated(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -544,7 +550,7 @@ func (g *GLTFFileLoader) SetOnValidatedObservable(onValidatedObservable *Observa
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#preprocessurlasync
 func (g *GLTFFileLoader) PreprocessUrlAsync(preprocessUrlAsync func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(preprocessUrlAsync)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {preprocessUrlAsync(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
@@ -552,7 +558,7 @@ func (g *GLTFFileLoader) PreprocessUrlAsync(preprocessUrlAsync func()) *GLTFFile
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#preprocessurlasync
 func (g *GLTFFileLoader) SetPreprocessUrlAsync(preprocessUrlAsync func()) *GLTFFileLoader {
-	p := ba.ctx.Get("GLTFFileLoader").New(preprocessUrlAsync)
+	p := ba.ctx.Get("GLTFFileLoader").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {preprocessUrlAsync(); return nil}))
 	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 

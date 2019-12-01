@@ -27,6 +27,15 @@ func EXT_lights_image_basedFromJSObject(p js.Value, ctx js.Value) *EXT_lights_im
 	return &EXT_lights_image_based{p: p, ctx: ctx}
 }
 
+// EXT_lights_image_basedArrayToJSArray returns a JavaScript Array for the wrapped array.
+func EXT_lights_image_basedArrayToJSArray(array []*EXT_lights_image_based) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Enabled returns the Enabled property of class EXT_lights_image_based.

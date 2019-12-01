@@ -173,6 +173,15 @@ func {{$name}}FromJSObject(p js.Value, ctx js.Value) *{{$name}} {
 	return &{{$name}}{ {{.Parents | fromJSObject}} }
 }
 
+// {{$name}}ArrayToJSArray returns a JavaScript Array for the wrapped array.
+func {{$name}}ArrayToJSArray(array []*{{$name}}) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 {{range $key, $value := .ConstructorNames}}{{if $value.HasOpts}}
 // {{$key}}Opts contains optional parameters for {{$key}}.
 type {{$key}}Opts struct {
@@ -228,10 +237,10 @@ opts = &{{$name}}{{$key}}Opts{}
 }
 {{end}}
 
-  args := make([]interface{}, 0, {{$value.JSParams | len}} + {{$value.JSOpts | len}})
+  {{if or $value.JSParams $value.JSOpts}}args := make([]interface{}, 0, {{$value.JSParams | len}} + {{$value.JSOpts | len}}){{end}}
 
   {{range $index, $element := $value.JSParams -}}
-  args = append(args, {{$element}})
+  args = append(args, {{if index $value.NeedsArrayHelper $index}}{{index $value.NeedsArrayHelper $index}}{{else}}{{$element}}{{end}})
   {{end}}
 
   {{range $index, $element := $value.JSOpts -}}
@@ -242,7 +251,7 @@ opts = &{{$name}}{{$key}}Opts{}
   }
   {{end}}
 
-	{{if $value.GoReturnType}}retVal := {{end}}{{$name | receiver}}.p.Call("{{$value.JSName}}", args...){{if $value.GoReturnType}}
+	{{if $value.GoReturnType}}retVal := {{end}}{{$name | receiver}}.p.Call("{{$value.JSName}}"{{if or $value.JSParams $value.JSOpts}}, args...{{end}}){{if $value.GoReturnType}}
   return {{$value.GoReturnStatement}}{{end}}
 }
 {{end}}

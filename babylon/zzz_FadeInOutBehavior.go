@@ -27,6 +27,15 @@ func FadeInOutBehaviorFromJSObject(p js.Value, ctx js.Value) *FadeInOutBehavior 
 	return &FadeInOutBehavior{p: p, ctx: ctx}
 }
 
+// FadeInOutBehaviorArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FadeInOutBehaviorArrayToJSArray(array []*FadeInOutBehavior) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFadeInOutBehavior returns a new FadeInOutBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior
@@ -55,9 +64,7 @@ func (f *FadeInOutBehavior) Attach(ownerNode *Mesh) {
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#detach
 func (f *FadeInOutBehavior) Detach() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("detach", args...)
+	f.p.Call("detach")
 }
 
 // FadeIn calls the FadeIn method on the FadeInOutBehavior object.
@@ -77,9 +84,7 @@ func (f *FadeInOutBehavior) FadeIn(value bool) {
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#init
 func (f *FadeInOutBehavior) Init() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("init", args...)
+	f.p.Call("init")
 }
 
 /*

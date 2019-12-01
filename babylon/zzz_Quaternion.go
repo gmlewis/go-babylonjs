@@ -29,6 +29,15 @@ func QuaternionFromJSObject(p js.Value, ctx js.Value) *Quaternion {
 	return &Quaternion{p: p, ctx: ctx}
 }
 
+// QuaternionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func QuaternionArrayToJSArray(array []*Quaternion) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewQuaternionOpts contains optional parameters for NewQuaternion.
 type NewQuaternionOpts struct {
 	X *float64
@@ -117,9 +126,7 @@ func (q *Quaternion) AreClose(quat0 *Quaternion, quat1 *Quaternion) bool {
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#asarray
 func (q *Quaternion) AsArray() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("asArray", args...)
+	retVal := q.p.Call("asArray")
 	return retVal.Float()
 }
 
@@ -128,9 +135,7 @@ func (q *Quaternion) AsArray() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#clone
 func (q *Quaternion) Clone() *Quaternion {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("clone", args...)
+	retVal := q.p.Call("clone")
 	return QuaternionFromJSObject(retVal, q.ctx)
 }
 
@@ -139,9 +144,7 @@ func (q *Quaternion) Clone() *Quaternion {
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#conjugate
 func (q *Quaternion) Conjugate() *Quaternion {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("conjugate", args...)
+	retVal := q.p.Call("conjugate")
 	return QuaternionFromJSObject(retVal, q.ctx)
 }
 
@@ -150,9 +153,7 @@ func (q *Quaternion) Conjugate() *Quaternion {
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#conjugateinplace
 func (q *Quaternion) ConjugateInPlace() *Quaternion {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("conjugateInPlace", args...)
+	retVal := q.p.Call("conjugateInPlace")
 	return QuaternionFromJSObject(retVal, q.ctx)
 }
 
@@ -341,9 +342,7 @@ func (q *Quaternion) FromRotationMatrixToRef(matrix *Matrix, result *Quaternion)
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#getclassname
 func (q *Quaternion) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("getClassName", args...)
+	retVal := q.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -352,9 +351,7 @@ func (q *Quaternion) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#gethashcode
 func (q *Quaternion) GetHashCode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("getHashCode", args...)
+	retVal := q.p.Call("getHashCode")
 	return retVal.Float()
 }
 
@@ -380,9 +377,7 @@ func (q *Quaternion) Hermite(value1 *Quaternion, tangent1 *Quaternion, value2 *Q
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#identity
 func (q *Quaternion) Identity() *Quaternion {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("Identity", args...)
+	retVal := q.p.Call("Identity")
 	return QuaternionFromJSObject(retVal, q.ctx)
 }
 
@@ -431,9 +426,7 @@ func (q *Quaternion) IsIdentity(quaternion *Quaternion) bool {
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#length
 func (q *Quaternion) Length() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("length", args...)
+	retVal := q.p.Call("length")
 	return retVal.Float()
 }
 
@@ -482,9 +475,7 @@ func (q *Quaternion) MultiplyToRef(q1 *Quaternion, result *Quaternion) *Quaterni
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#normalize
 func (q *Quaternion) Normalize() *Quaternion {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("normalize", args...)
+	retVal := q.p.Call("normalize")
 	return QuaternionFromJSObject(retVal, q.ctx)
 }
 
@@ -776,9 +767,7 @@ func (q *Quaternion) ToRotationMatrix(result *Matrix) *Quaternion {
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#tostring
 func (q *Quaternion) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("toString", args...)
+	retVal := q.p.Call("toString")
 	return retVal.String()
 }
 
@@ -787,9 +776,7 @@ func (q *Quaternion) ToString() string {
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#zero
 func (q *Quaternion) Zero() *Quaternion {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := q.p.Call("Zero", args...)
+	retVal := q.p.Call("Zero")
 	return QuaternionFromJSObject(retVal, q.ctx)
 }
 

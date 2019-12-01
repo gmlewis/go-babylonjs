@@ -29,6 +29,15 @@ func ArcRotateCameraGamepadInputFromJSObject(p js.Value, ctx js.Value) *ArcRotat
 	return &ArcRotateCameraGamepadInput{p: p, ctx: ctx}
 }
 
+// ArcRotateCameraGamepadInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ArcRotateCameraGamepadInputArrayToJSArray(array []*ArcRotateCameraGamepadInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ArcRotateCameraGamepadInputAttachControlOpts contains optional parameters for ArcRotateCameraGamepadInput.AttachControl.
 type ArcRotateCameraGamepadInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -60,9 +69,7 @@ func (a *ArcRotateCameraGamepadInput) AttachControl(element js.Value, opts *ArcR
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#checkinputs
 func (a *ArcRotateCameraGamepadInput) CheckInputs() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("checkInputs", args...)
+	a.p.Call("checkInputs")
 }
 
 // DetachControl calls the DetachControl method on the ArcRotateCameraGamepadInput object.
@@ -82,9 +89,7 @@ func (a *ArcRotateCameraGamepadInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#getclassname
 func (a *ArcRotateCameraGamepadInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -93,9 +98,7 @@ func (a *ArcRotateCameraGamepadInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#getsimplename
 func (a *ArcRotateCameraGamepadInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getSimpleName", args...)
+	retVal := a.p.Call("getSimpleName")
 	return retVal.String()
 }
 

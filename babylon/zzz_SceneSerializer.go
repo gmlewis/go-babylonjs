@@ -27,14 +27,21 @@ func SceneSerializerFromJSObject(p js.Value, ctx js.Value) *SceneSerializer {
 	return &SceneSerializer{p: p, ctx: ctx}
 }
 
+// SceneSerializerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func SceneSerializerArrayToJSArray(array []*SceneSerializer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ClearCache calls the ClearCache method on the SceneSerializer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneserializer#clearcache
 func (s *SceneSerializer) ClearCache() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("ClearCache", args...)
+	s.p.Call("ClearCache")
 }
 
 // Serialize calls the Serialize method on the SceneSerializer object.

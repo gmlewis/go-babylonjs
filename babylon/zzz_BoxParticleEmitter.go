@@ -28,6 +28,15 @@ func BoxParticleEmitterFromJSObject(p js.Value, ctx js.Value) *BoxParticleEmitte
 	return &BoxParticleEmitter{p: p, ctx: ctx}
 }
 
+// BoxParticleEmitterArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BoxParticleEmitterArrayToJSArray(array []*BoxParticleEmitter) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBoxParticleEmitter returns a new BoxParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter
@@ -56,9 +65,7 @@ func (b *BoxParticleEmitter) ApplyToShader(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#clone
 func (b *BoxParticleEmitter) Clone() *BoxParticleEmitter {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("clone", args...)
+	retVal := b.p.Call("clone")
 	return BoxParticleEmitterFromJSObject(retVal, b.ctx)
 }
 
@@ -67,9 +74,7 @@ func (b *BoxParticleEmitter) Clone() *BoxParticleEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#getclassname
 func (b *BoxParticleEmitter) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getClassName", args...)
+	retVal := b.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -78,9 +83,7 @@ func (b *BoxParticleEmitter) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#geteffectdefines
 func (b *BoxParticleEmitter) GetEffectDefines() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEffectDefines", args...)
+	retVal := b.p.Call("getEffectDefines")
 	return retVal.String()
 }
 
@@ -101,9 +104,7 @@ func (b *BoxParticleEmitter) Parse(serializationObject interface{}) {
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#serialize
 func (b *BoxParticleEmitter) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("serialize", args...)
+	retVal := b.p.Call("serialize")
 	return retVal
 }
 

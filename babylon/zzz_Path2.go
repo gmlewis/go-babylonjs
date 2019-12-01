@@ -27,6 +27,15 @@ func Path2FromJSObject(p js.Value, ctx js.Value) *Path2 {
 	return &Path2{p: p, ctx: ctx}
 }
 
+// Path2ArrayToJSArray returns a JavaScript Array for the wrapped array.
+func Path2ArrayToJSArray(array []*Path2) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPath2 returns a new Path2 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path2
@@ -90,9 +99,7 @@ func (p *Path2) AddLineTo(x float64, y float64) *Path2 {
 // https://doc.babylonjs.com/api/classes/babylon.path2#close
 func (p *Path2) Close() *Path2 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("close", args...)
+	retVal := p.p.Call("close")
 	return Path2FromJSObject(retVal, p.ctx)
 }
 
@@ -114,9 +121,7 @@ func (p *Path2) GetPointAtLengthPosition(normalizedLengthPosition float64) *Vect
 // https://doc.babylonjs.com/api/classes/babylon.path2#getpoints
 func (p *Path2) GetPoints() *Vector2 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getPoints", args...)
+	retVal := p.p.Call("getPoints")
 	return Vector2FromJSObject(retVal, p.ctx)
 }
 
@@ -125,9 +130,7 @@ func (p *Path2) GetPoints() *Vector2 {
 // https://doc.babylonjs.com/api/classes/babylon.path2#length
 func (p *Path2) Length() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("length", args...)
+	retVal := p.p.Call("length")
 	return retVal.Float()
 }
 

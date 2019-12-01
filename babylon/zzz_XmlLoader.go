@@ -27,6 +27,15 @@ func XmlLoaderFromJSObject(p js.Value, ctx js.Value) *XmlLoader {
 	return &XmlLoader{p: p, ctx: ctx}
 }
 
+// XmlLoaderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func XmlLoaderArrayToJSArray(array []*XmlLoader) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewXmlLoaderOpts contains optional parameters for NewXmlLoader.
 type NewXmlLoaderOpts struct {
 	ParentClass js.Value
@@ -70,9 +79,7 @@ func (x *XmlLoader) GetNodeById(id string) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.xmlloader#getnodes
 func (x *XmlLoader) GetNodes() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := x.p.Call("getNodes", args...)
+	retVal := x.p.Call("getNodes")
 	return retVal
 }
 
@@ -81,9 +88,7 @@ func (x *XmlLoader) GetNodes() interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.xmlloader#isloaded
 func (x *XmlLoader) IsLoaded() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := x.p.Call("isLoaded", args...)
+	retVal := x.p.Call("isLoaded")
 	return retVal.Bool()
 }
 

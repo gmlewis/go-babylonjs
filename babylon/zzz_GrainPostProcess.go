@@ -27,6 +27,15 @@ func GrainPostProcessFromJSObject(p js.Value, ctx js.Value) *GrainPostProcess {
 	return &GrainPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// GrainPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GrainPostProcessArrayToJSArray(array []*GrainPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGrainPostProcessOpts contains optional parameters for NewGrainPostProcess.
 type NewGrainPostProcessOpts struct {
 	SamplingMode     *float64
@@ -118,9 +127,7 @@ func (g *GrainPostProcess) Activate(camera *Camera, opts *GrainPostProcessActiva
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#apply
 func (g *GrainPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("apply", args...)
+	retVal := g.p.Call("apply")
 	return EffectFromJSObject(retVal, g.ctx)
 }
 
@@ -153,9 +160,7 @@ func (g *GrainPostProcess) Dispose(opts *GrainPostProcessDisposeOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#getcamera
 func (g *GrainPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getCamera", args...)
+	retVal := g.p.Call("getCamera")
 	return CameraFromJSObject(retVal, g.ctx)
 }
 
@@ -164,9 +169,7 @@ func (g *GrainPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#getclassname
 func (g *GrainPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getClassName", args...)
+	retVal := g.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -175,9 +178,7 @@ func (g *GrainPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#geteffect
 func (g *GrainPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getEffect", args...)
+	retVal := g.p.Call("getEffect")
 	return EffectFromJSObject(retVal, g.ctx)
 }
 
@@ -186,9 +187,7 @@ func (g *GrainPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#geteffectname
 func (g *GrainPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getEffectName", args...)
+	retVal := g.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -197,9 +196,7 @@ func (g *GrainPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#getengine
 func (g *GrainPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("getEngine", args...)
+	retVal := g.p.Call("getEngine")
 	return EngineFromJSObject(retVal, g.ctx)
 }
 
@@ -208,9 +205,7 @@ func (g *GrainPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#isready
 func (g *GrainPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("isReady", args...)
+	retVal := g.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -219,9 +214,7 @@ func (g *GrainPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#isreusable
 func (g *GrainPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := g.p.Call("isReusable", args...)
+	retVal := g.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -230,9 +223,7 @@ func (g *GrainPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#marktexturedirty
 func (g *GrainPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("markTextureDirty", args...)
+	g.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the GrainPostProcess object.
@@ -307,9 +298,7 @@ func (g *GrainPostProcess) UpdateEffect(opts *GrainPostProcessUpdateEffectOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#useownoutput
 func (g *GrainPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("useOwnOutput", args...)
+	g.p.Call("useOwnOutput")
 }
 
 /*
@@ -590,7 +579,7 @@ func (g *GrainPostProcess) SetName(name string) *GrainPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#onactivate
 func (g *GrainPostProcess) OnActivate(onActivate func()) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(onActivate)
+	p := ba.ctx.Get("GrainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -598,7 +587,7 @@ func (g *GrainPostProcess) OnActivate(onActivate func()) *GrainPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#onactivate
 func (g *GrainPostProcess) SetOnActivate(onActivate func()) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(onActivate)
+	p := ba.ctx.Get("GrainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -622,7 +611,7 @@ func (g *GrainPostProcess) SetOnActivateObservable(onActivateObservable *Observa
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#onafterrender
 func (g *GrainPostProcess) OnAfterRender(onAfterRender func()) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("GrainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -630,7 +619,7 @@ func (g *GrainPostProcess) OnAfterRender(onAfterRender func()) *GrainPostProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#onafterrender
 func (g *GrainPostProcess) SetOnAfterRender(onAfterRender func()) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("GrainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -654,7 +643,7 @@ func (g *GrainPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *O
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#onapply
 func (g *GrainPostProcess) OnApply(onApply func()) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(onApply)
+	p := ba.ctx.Get("GrainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -662,7 +651,7 @@ func (g *GrainPostProcess) OnApply(onApply func()) *GrainPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#onapply
 func (g *GrainPostProcess) SetOnApply(onApply func()) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(onApply)
+	p := ba.ctx.Get("GrainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -686,7 +675,7 @@ func (g *GrainPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#onbeforerender
 func (g *GrainPostProcess) OnBeforeRender(onBeforeRender func()) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("GrainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -694,7 +683,7 @@ func (g *GrainPostProcess) OnBeforeRender(onBeforeRender func()) *GrainPostProce
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#onbeforerender
 func (g *GrainPostProcess) SetOnBeforeRender(onBeforeRender func()) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("GrainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -718,7 +707,7 @@ func (g *GrainPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable 
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#onsizechanged
 func (g *GrainPostProcess) OnSizeChanged(onSizeChanged func()) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("GrainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -726,7 +715,7 @@ func (g *GrainPostProcess) OnSizeChanged(onSizeChanged func()) *GrainPostProcess
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#onsizechanged
 func (g *GrainPostProcess) SetOnSizeChanged(onSizeChanged func()) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("GrainPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 

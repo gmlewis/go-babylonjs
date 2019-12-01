@@ -30,6 +30,15 @@ func HDRCubeTextureFromJSObject(p js.Value, ctx js.Value) *HDRCubeTexture {
 	return &HDRCubeTexture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// HDRCubeTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HDRCubeTextureArrayToJSArray(array []*HDRCubeTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewHDRCubeTextureOpts contains optional parameters for NewHDRCubeTexture.
 type NewHDRCubeTextureOpts struct {
 	NoMipmap          *bool
@@ -94,9 +103,7 @@ func (ba *Babylon) NewHDRCubeTexture(url string, scene *Scene, size float64, opt
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#clone
 func (h *HDRCubeTexture) Clone() *HDRCubeTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("clone", args...)
+	retVal := h.p.Call("clone")
 	return HDRCubeTextureFromJSObject(retVal, h.ctx)
 }
 
@@ -105,9 +112,7 @@ func (h *HDRCubeTexture) Clone() *HDRCubeTexture {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#delayload
 func (h *HDRCubeTexture) DelayLoad() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("delayLoad", args...)
+	h.p.Call("delayLoad")
 }
 
 // Dispose calls the Dispose method on the HDRCubeTexture object.
@@ -115,9 +120,7 @@ func (h *HDRCubeTexture) DelayLoad() {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#dispose
 func (h *HDRCubeTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("dispose", args...)
+	h.p.Call("dispose")
 }
 
 // GetBaseSize calls the GetBaseSize method on the HDRCubeTexture object.
@@ -125,9 +128,7 @@ func (h *HDRCubeTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#getbasesize
 func (h *HDRCubeTexture) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getBaseSize", args...)
+	retVal := h.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -136,9 +137,7 @@ func (h *HDRCubeTexture) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#getclassname
 func (h *HDRCubeTexture) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getClassName", args...)
+	retVal := h.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -147,9 +146,7 @@ func (h *HDRCubeTexture) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#getinternaltexture
 func (h *HDRCubeTexture) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getInternalTexture", args...)
+	retVal := h.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, h.ctx)
 }
 
@@ -158,9 +155,7 @@ func (h *HDRCubeTexture) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#getreflectiontexturematrix
 func (h *HDRCubeTexture) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getReflectionTextureMatrix", args...)
+	retVal := h.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, h.ctx)
 }
 
@@ -169,9 +164,7 @@ func (h *HDRCubeTexture) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#getscene
 func (h *HDRCubeTexture) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getScene", args...)
+	retVal := h.p.Call("getScene")
 	return SceneFromJSObject(retVal, h.ctx)
 }
 
@@ -180,9 +173,7 @@ func (h *HDRCubeTexture) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#getsize
 func (h *HDRCubeTexture) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getSize", args...)
+	retVal := h.p.Call("getSize")
 	return retVal
 }
 
@@ -191,9 +182,7 @@ func (h *HDRCubeTexture) GetSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#gettexturematrix
 func (h *HDRCubeTexture) GetTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getTextureMatrix", args...)
+	retVal := h.p.Call("getTextureMatrix")
 	return MatrixFromJSObject(retVal, h.ctx)
 }
 
@@ -202,9 +191,7 @@ func (h *HDRCubeTexture) GetTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#isready
 func (h *HDRCubeTexture) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("isReady", args...)
+	retVal := h.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -213,9 +200,7 @@ func (h *HDRCubeTexture) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#isreadyornotblocking
 func (h *HDRCubeTexture) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("isReadyOrNotBlocking", args...)
+	retVal := h.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -276,9 +261,7 @@ func (h *HDRCubeTexture) ReadPixels(opts *HDRCubeTextureReadPixelsOpts) js.Value
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#releaseinternaltexture
 func (h *HDRCubeTexture) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("releaseInternalTexture", args...)
+	h.p.Call("releaseInternalTexture")
 }
 
 // Scale calls the Scale method on the HDRCubeTexture object.
@@ -298,9 +281,7 @@ func (h *HDRCubeTexture) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#serialize
 func (h *HDRCubeTexture) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("serialize", args...)
+	retVal := h.p.Call("serialize")
 	return retVal
 }
 
@@ -321,9 +302,7 @@ func (h *HDRCubeTexture) SetReflectionTextureMatrix(value *Matrix) {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#tostring
 func (h *HDRCubeTexture) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("toString", args...)
+	retVal := h.p.Call("toString")
 	return retVal.String()
 }
 
@@ -347,7 +326,7 @@ func (h *HDRCubeTexture) WhenAllReady(textures *BaseTexture, callback func()) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	h.p.Call("WhenAllReady", args...)
 }
@@ -790,7 +769,7 @@ func (h *HDRCubeTexture) SetNoMipmap(noMipmap bool) *HDRCubeTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#ondispose
 func (h *HDRCubeTexture) OnDispose(onDispose func()) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(onDispose)
+	p := ba.ctx.Get("HDRCubeTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return HDRCubeTextureFromJSObject(p, ba.ctx)
 }
 
@@ -798,7 +777,7 @@ func (h *HDRCubeTexture) OnDispose(onDispose func()) *HDRCubeTexture {
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#ondispose
 func (h *HDRCubeTexture) SetOnDispose(onDispose func()) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(onDispose)
+	p := ba.ctx.Get("HDRCubeTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return HDRCubeTextureFromJSObject(p, ba.ctx)
 }
 

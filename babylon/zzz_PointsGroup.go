@@ -27,6 +27,15 @@ func PointsGroupFromJSObject(p js.Value, ctx js.Value) *PointsGroup {
 	return &PointsGroup{p: p, ctx: ctx}
 }
 
+// PointsGroupArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PointsGroupArrayToJSArray(array []*PointsGroup) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
  */

@@ -28,6 +28,15 @@ func KhronosTextureContainerFromJSObject(p js.Value, ctx js.Value) *KhronosTextu
 	return &KhronosTextureContainer{p: p, ctx: ctx}
 }
 
+// KhronosTextureContainerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KhronosTextureContainerArrayToJSArray(array []*KhronosTextureContainer) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewKhronosTextureContainerOpts contains optional parameters for NewKhronosTextureContainer.
 type NewKhronosTextureContainerOpts struct {
 	ThreeDExpected       *bool

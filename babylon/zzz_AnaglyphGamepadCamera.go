@@ -29,6 +29,15 @@ func AnaglyphGamepadCameraFromJSObject(p js.Value, ctx js.Value) *AnaglyphGamepa
 	return &AnaglyphGamepadCamera{GamepadCamera: GamepadCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// AnaglyphGamepadCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AnaglyphGamepadCameraArrayToJSArray(array []*AnaglyphGamepadCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAnaglyphGamepadCamera returns a new AnaglyphGamepadCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera
@@ -88,9 +97,7 @@ func (a *AnaglyphGamepadCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera#dispose
 func (a *AnaglyphGamepadCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("dispose", args...)
+	a.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the AnaglyphGamepadCamera object.
@@ -98,9 +105,7 @@ func (a *AnaglyphGamepadCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera#getclassname
 func (a *AnaglyphGamepadCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getClassName", args...)
+	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -122,9 +127,7 @@ func (a *AnaglyphGamepadCamera) GetFrontPosition(distance float64) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera#gettarget
 func (a *AnaglyphGamepadCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("getTarget", args...)
+	retVal := a.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
@@ -145,9 +148,7 @@ func (a *AnaglyphGamepadCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera#storestate
 func (a *AnaglyphGamepadCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := a.p.Call("storeState", args...)
+	retVal := a.p.Call("storeState")
 	return CameraFromJSObject(retVal, a.ctx)
 }
 
@@ -429,7 +430,7 @@ func (a *AnaglyphGamepadCamera) SetNoRotationConstraint(noRotationConstraint boo
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera#oncollide
 func (a *AnaglyphGamepadCamera) OnCollide(onCollide func()) *AnaglyphGamepadCamera {
-	p := ba.ctx.Get("AnaglyphGamepadCamera").New(onCollide)
+	p := ba.ctx.Get("AnaglyphGamepadCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return AnaglyphGamepadCameraFromJSObject(p, ba.ctx)
 }
 
@@ -437,7 +438,7 @@ func (a *AnaglyphGamepadCamera) OnCollide(onCollide func()) *AnaglyphGamepadCame
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera#oncollide
 func (a *AnaglyphGamepadCamera) SetOnCollide(onCollide func()) *AnaglyphGamepadCamera {
-	p := ba.ctx.Get("AnaglyphGamepadCamera").New(onCollide)
+	p := ba.ctx.Get("AnaglyphGamepadCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return AnaglyphGamepadCameraFromJSObject(p, ba.ctx)
 }
 

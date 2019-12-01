@@ -27,6 +27,15 @@ func ScaleGizmoFromJSObject(p js.Value, ctx js.Value) *ScaleGizmo {
 	return &ScaleGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
+// ScaleGizmoArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ScaleGizmoArrayToJSArray(array []*ScaleGizmo) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewScaleGizmoOpts contains optional parameters for NewScaleGizmo.
 type NewScaleGizmoOpts struct {
 	GizmoLayer *UtilityLayerRenderer
@@ -57,9 +66,7 @@ func (ba *Babylon) NewScaleGizmo(opts *NewScaleGizmoOpts) *ScaleGizmo {
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#dispose
 func (s *ScaleGizmo) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // SetCustomMesh calls the SetCustomMesh method on the ScaleGizmo object.

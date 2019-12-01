@@ -27,14 +27,21 @@ func WebXRManagedOutputCanvasOptionsFromJSObject(p js.Value, ctx js.Value) *WebX
 	return &WebXRManagedOutputCanvasOptions{p: p, ctx: ctx}
 }
 
+// WebXRManagedOutputCanvasOptionsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRManagedOutputCanvasOptionsArrayToJSArray(array []*WebXRManagedOutputCanvasOptions) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // GetDefaults calls the GetDefaults method on the WebXRManagedOutputCanvasOptions object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvasoptions#getdefaults
 func (w *WebXRManagedOutputCanvasOptions) GetDefaults() *WebXRManagedOutputCanvasOptions {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := w.p.Call("GetDefaults", args...)
+	retVal := w.p.Call("GetDefaults")
 	return WebXRManagedOutputCanvasOptionsFromJSObject(retVal, w.ctx)
 }
 

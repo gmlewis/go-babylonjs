@@ -29,6 +29,15 @@ func FollowCameraPointersInputFromJSObject(p js.Value, ctx js.Value) *FollowCame
 	return &FollowCameraPointersInput{BaseCameraPointersInput: BaseCameraPointersInputFromJSObject(p, ctx), ctx: ctx}
 }
 
+// FollowCameraPointersInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FollowCameraPointersInputArrayToJSArray(array []*FollowCameraPointersInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // FollowCameraPointersInputAttachControlOpts contains optional parameters for FollowCameraPointersInput.AttachControl.
 type FollowCameraPointersInputAttachControlOpts struct {
 	NoPreventDefault *bool
@@ -72,9 +81,7 @@ func (f *FollowCameraPointersInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.followcamerapointersinput#getclassname
 func (f *FollowCameraPointersInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -83,9 +90,7 @@ func (f *FollowCameraPointersInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.followcamerapointersinput#getsimplename
 func (f *FollowCameraPointersInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getSimpleName", args...)
+	retVal := f.p.Call("getSimpleName")
 	return retVal.String()
 }
 

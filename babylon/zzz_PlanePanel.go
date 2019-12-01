@@ -27,6 +27,15 @@ func PlanePanelFromJSObject(p js.Value, ctx js.Value) *PlanePanel {
 	return &PlanePanel{VolumeBasedPanel: VolumeBasedPanelFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PlanePanelArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PlanePanelArrayToJSArray(array []*PlanePanel) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPlanePanel returns a new PlanePanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel
@@ -82,22 +91,20 @@ func (p *PlanePanel) ContainsControl(control *Control3D) bool {
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#dispose
 func (p *PlanePanel) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the PlanePanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#getbehaviorbyname
-func (p *PlanePanel) GetBehaviorByName(name string) *Control3D {
+func (p *PlanePanel) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
 	retVal := p.p.Call("getBehaviorByName", args...)
-	return Control3DFromJSObject(retVal, p.ctx)
+	return retVal
 }
 
 // GetClassName calls the GetClassName method on the PlanePanel object.
@@ -105,9 +112,7 @@ func (p *PlanePanel) GetBehaviorByName(name string) *Control3D {
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#getclassname
 func (p *PlanePanel) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -155,9 +160,7 @@ func (p *PlanePanel) RemoveControl(control *Control3D) *Container3D {
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#updatelayout
 func (p *PlanePanel) UpdateLayout() *Container3D {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("updateLayout", args...)
+	retVal := p.p.Call("updateLayout")
 	return Container3DFromJSObject(retVal, p.ctx)
 }
 
@@ -198,16 +201,16 @@ func (p *PlanePanel) SetBlockLayout(blockLayout bool) *PlanePanel {
 // Children returns the Children property of class PlanePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#children
-func (p *PlanePanel) Children(children []Control3D) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(children.JSObject())
+func (p *PlanePanel) Children(children []*Control3D) *PlanePanel {
+	p := ba.ctx.Get("PlanePanel").New(children)
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
 // SetChildren sets the Children property of class PlanePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#children
-func (p *PlanePanel) SetChildren(children []Control3D) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(children.JSObject())
+func (p *PlanePanel) SetChildren(children []*Control3D) *PlanePanel {
+	p := ba.ctx.Get("PlanePanel").New(children)
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
@@ -503,7 +506,7 @@ func (p *PlanePanel) SetParent(parent *Container3D) *PlanePanel {
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#pointerdownanimation
 func (p *PlanePanel) PointerDownAnimation(pointerDownAnimation func()) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(pointerDownAnimation)
+	p := ba.ctx.Get("PlanePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
@@ -511,7 +514,7 @@ func (p *PlanePanel) PointerDownAnimation(pointerDownAnimation func()) *PlanePan
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#pointerdownanimation
 func (p *PlanePanel) SetPointerDownAnimation(pointerDownAnimation func()) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(pointerDownAnimation)
+	p := ba.ctx.Get("PlanePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownAnimation(); return nil}))
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
@@ -519,7 +522,7 @@ func (p *PlanePanel) SetPointerDownAnimation(pointerDownAnimation func()) *Plane
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#pointerenteranimation
 func (p *PlanePanel) PointerEnterAnimation(pointerEnterAnimation func()) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(pointerEnterAnimation)
+	p := ba.ctx.Get("PlanePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
@@ -527,7 +530,7 @@ func (p *PlanePanel) PointerEnterAnimation(pointerEnterAnimation func()) *PlaneP
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#pointerenteranimation
 func (p *PlanePanel) SetPointerEnterAnimation(pointerEnterAnimation func()) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(pointerEnterAnimation)
+	p := ba.ctx.Get("PlanePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerEnterAnimation(); return nil}))
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
@@ -535,7 +538,7 @@ func (p *PlanePanel) SetPointerEnterAnimation(pointerEnterAnimation func()) *Pla
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#pointeroutanimation
 func (p *PlanePanel) PointerOutAnimation(pointerOutAnimation func()) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(pointerOutAnimation)
+	p := ba.ctx.Get("PlanePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
@@ -543,7 +546,7 @@ func (p *PlanePanel) PointerOutAnimation(pointerOutAnimation func()) *PlanePanel
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#pointeroutanimation
 func (p *PlanePanel) SetPointerOutAnimation(pointerOutAnimation func()) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(pointerOutAnimation)
+	p := ba.ctx.Get("PlanePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerOutAnimation(); return nil}))
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
@@ -551,7 +554,7 @@ func (p *PlanePanel) SetPointerOutAnimation(pointerOutAnimation func()) *PlanePa
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#pointerupanimation
 func (p *PlanePanel) PointerUpAnimation(pointerUpAnimation func()) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(pointerUpAnimation)
+	p := ba.ctx.Get("PlanePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
@@ -559,7 +562,7 @@ func (p *PlanePanel) PointerUpAnimation(pointerUpAnimation func()) *PlanePanel {
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#pointerupanimation
 func (p *PlanePanel) SetPointerUpAnimation(pointerUpAnimation func()) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(pointerUpAnimation)
+	p := ba.ctx.Get("PlanePanel").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpAnimation(); return nil}))
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 

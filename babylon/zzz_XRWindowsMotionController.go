@@ -27,6 +27,15 @@ func XRWindowsMotionControllerFromJSObject(p js.Value, ctx js.Value) *XRWindowsM
 	return &XRWindowsMotionController{WindowsMotionController: WindowsMotionControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
+// XRWindowsMotionControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func XRWindowsMotionControllerArrayToJSArray(array []*XRWindowsMotionController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewXRWindowsMotionController returns a new XRWindowsMotionController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller
@@ -69,9 +78,7 @@ func (x *XRWindowsMotionController) AttachToPoseControlledCamera(camera *TargetC
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#dispose
 func (x *XRWindowsMotionController) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	x.p.Call("dispose", args...)
+	x.p.Call("dispose")
 }
 
 // XRWindowsMotionControllerGetForwardRayOpts contains optional parameters for XRWindowsMotionController.GetForwardRay.
@@ -138,7 +145,7 @@ func (x *XRWindowsMotionController) OnButtonStateChange(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	x.p.Call("onButtonStateChange", args...)
 }
@@ -150,7 +157,7 @@ func (x *XRWindowsMotionController) Onleftstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	x.p.Call("onleftstickchanged", args...)
 }
@@ -162,7 +169,7 @@ func (x *XRWindowsMotionController) Onrightstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	x.p.Call("onrightstickchanged", args...)
 }
@@ -172,9 +179,7 @@ func (x *XRWindowsMotionController) Onrightstickchanged(callback func()) {
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#update
 func (x *XRWindowsMotionController) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	x.p.Call("update", args...)
+	x.p.Call("update")
 }
 
 // UpdateFromDevice calls the UpdateFromDevice method on the XRWindowsMotionController object.

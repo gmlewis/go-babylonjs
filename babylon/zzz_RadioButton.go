@@ -27,6 +27,15 @@ func RadioButtonFromJSObject(p js.Value, ctx js.Value) *RadioButton {
 	return &RadioButton{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
+// RadioButtonArrayToJSArray returns a JavaScript Array for the wrapped array.
+func RadioButtonArrayToJSArray(array []*RadioButton) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewRadioButtonOpts contains optional parameters for NewRadioButton.
 type NewRadioButtonOpts struct {
 	Name *string
@@ -62,7 +71,7 @@ func (r *RadioButton) AddRadioButtonWithHeader(title string, group string, isChe
 	args = append(args, title)
 	args = append(args, group)
 	args = append(args, isChecked)
-	args = append(args, onValueChanged)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onValueChanged(); return nil }))
 
 	retVal := r.p.Call("AddRadioButtonWithHeader", args...)
 	return StackPanelFromJSObject(retVal, r.ctx)
@@ -87,9 +96,7 @@ func (r *RadioButton) Contains(x float64, y float64) bool {
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#dispose
 func (r *RadioButton) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	r.p.Call("dispose", args...)
+	r.p.Call("dispose")
 }
 
 // GetAscendantOfClass calls the GetAscendantOfClass method on the RadioButton object.
@@ -110,9 +117,7 @@ func (r *RadioButton) GetAscendantOfClass(className string) *Control {
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#getclassname
 func (r *RadioButton) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := r.p.Call("getClassName", args...)
+	retVal := r.p.Call("getClassName")
 	return retVal.String()
 }
 

@@ -27,6 +27,15 @@ func CellMaterialFromJSObject(p js.Value, ctx js.Value) *CellMaterial {
 	return &CellMaterial{p: p, ctx: ctx}
 }
 
+// CellMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CellMaterialArrayToJSArray(array []*CellMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCellMaterial returns a new CellMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial
@@ -225,7 +234,7 @@ type CellMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the CellMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#forcecompilationasync
-func (c *CellMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *CellMaterialForceCompilationAsyncOpts) {
+func (c *CellMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *CellMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &CellMaterialForceCompilationAsyncOpts{}
 	}
@@ -240,7 +249,8 @@ func (c *CellMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *CellMater
 		args = append(args, opts.Options)
 	}
 
-	c.p.Call("forceCompilationAsync", args...)
+	retVal := c.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, c.ctx)
 }
 
 // Freeze calls the Freeze method on the CellMaterial object.
@@ -248,9 +258,7 @@ func (c *CellMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *CellMater
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#freeze
 func (c *CellMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("freeze", args...)
+	c.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the CellMaterial object.
@@ -258,9 +266,7 @@ func (c *CellMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getactivetextures
 func (c *CellMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getActiveTextures", args...)
+	retVal := c.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, c.ctx)
 }
 
@@ -269,9 +275,7 @@ func (c *CellMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getalphatesttexture
 func (c *CellMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getAlphaTestTexture", args...)
+	retVal := c.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, c.ctx)
 }
 
@@ -280,9 +284,7 @@ func (c *CellMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getanimatables
 func (c *CellMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getAnimatables", args...)
+	retVal := c.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -291,9 +293,7 @@ func (c *CellMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getbindedmeshes
 func (c *CellMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getBindedMeshes", args...)
+	retVal := c.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, c.ctx)
 }
 
@@ -302,9 +302,7 @@ func (c *CellMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getclassname
 func (c *CellMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getClassName", args...)
+	retVal := c.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -313,9 +311,7 @@ func (c *CellMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#geteffect
 func (c *CellMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getEffect", args...)
+	retVal := c.p.Call("getEffect")
 	return EffectFromJSObject(retVal, c.ctx)
 }
 
@@ -324,9 +320,7 @@ func (c *CellMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getscene
 func (c *CellMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("getScene", args...)
+	retVal := c.p.Call("getScene")
 	return SceneFromJSObject(retVal, c.ctx)
 }
 
@@ -419,9 +413,7 @@ func (c *CellMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#markdirty
 func (c *CellMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("markDirty", args...)
+	c.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the CellMaterial object.
@@ -429,9 +421,7 @@ func (c *CellMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#needalphablending
 func (c *CellMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("needAlphaBlending", args...)
+	retVal := c.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -453,9 +443,7 @@ func (c *CellMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#needalphatesting
 func (c *CellMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("needAlphaTesting", args...)
+	retVal := c.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -479,9 +467,7 @@ func (c *CellMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#serialize
 func (c *CellMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := c.p.Call("serialize", args...)
+	retVal := c.p.Call("serialize")
 	return retVal
 }
 
@@ -515,9 +501,7 @@ func (c *CellMaterial) ToString(opts *CellMaterialToStringOpts) string {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#unbind
 func (c *CellMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("unbind", args...)
+	c.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the CellMaterial object.
@@ -525,9 +509,7 @@ func (c *CellMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#unfreeze
 func (c *CellMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	c.p.Call("unfreeze", args...)
+	c.p.Call("unfreeze")
 }
 
 /*
@@ -599,16 +581,16 @@ func (c *CellMaterial) SetAlphaMode(alphaMode float64) *CellMaterial {
 // Animations returns the Animations property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#animations
-func (c *CellMaterial) Animations(animations []Animation) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(animations.JSObject())
+func (c *CellMaterial) Animations(animations []*Animation) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(animations)
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#animations
-func (c *CellMaterial) SetAnimations(animations []Animation) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(animations.JSObject())
+func (c *CellMaterial) SetAnimations(animations []*Animation) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(animations)
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -888,7 +870,7 @@ func (c *CellMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *CellMateri
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getrendertargettextures
 func (c *CellMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("CellMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -896,7 +878,7 @@ func (c *CellMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getrendertargettextures
 func (c *CellMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("CellMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1112,7 +1094,7 @@ func (c *CellMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *CellMaterial 
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onbind
 func (c *CellMaterial) OnBind(onBind func()) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(onBind)
+	p := ba.ctx.Get("CellMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1120,7 +1102,7 @@ func (c *CellMaterial) OnBind(onBind func()) *CellMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onbind
 func (c *CellMaterial) SetOnBind(onBind func()) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(onBind)
+	p := ba.ctx.Get("CellMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1144,7 +1126,7 @@ func (c *CellMaterial) SetOnBindObservable(onBindObservable *Observable) *CellMa
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#oncompiled
 func (c *CellMaterial) OnCompiled(onCompiled func()) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(onCompiled)
+	p := ba.ctx.Get("CellMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1152,7 +1134,7 @@ func (c *CellMaterial) OnCompiled(onCompiled func()) *CellMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#oncompiled
 func (c *CellMaterial) SetOnCompiled(onCompiled func()) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(onCompiled)
+	p := ba.ctx.Get("CellMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1160,7 +1142,7 @@ func (c *CellMaterial) SetOnCompiled(onCompiled func()) *CellMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#ondispose
 func (c *CellMaterial) OnDispose(onDispose func()) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(onDispose)
+	p := ba.ctx.Get("CellMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1168,7 +1150,7 @@ func (c *CellMaterial) OnDispose(onDispose func()) *CellMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#ondispose
 func (c *CellMaterial) SetOnDispose(onDispose func()) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(onDispose)
+	p := ba.ctx.Get("CellMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1192,7 +1174,7 @@ func (c *CellMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onerror
 func (c *CellMaterial) OnError(onError func()) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(onError)
+	p := ba.ctx.Get("CellMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1200,7 +1182,7 @@ func (c *CellMaterial) OnError(onError func()) *CellMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onerror
 func (c *CellMaterial) SetOnError(onError func()) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(onError)
+	p := ba.ctx.Get("CellMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 

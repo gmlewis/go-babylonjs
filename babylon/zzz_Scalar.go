@@ -27,6 +27,15 @@ func ScalarFromJSObject(p js.Value, ctx js.Value) *Scalar {
 	return &Scalar{p: p, ctx: ctx}
 }
 
+// ScalarArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ScalarArrayToJSArray(array []*Scalar) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ScalarClampOpts contains optional parameters for Scalar.Clamp.
 type ScalarClampOpts struct {
 	Min *float64

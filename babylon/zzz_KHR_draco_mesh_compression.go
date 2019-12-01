@@ -27,6 +27,15 @@ func KHR_draco_mesh_compressionFromJSObject(p js.Value, ctx js.Value) *KHR_draco
 	return &KHR_draco_mesh_compression{p: p, ctx: ctx}
 }
 
+// KHR_draco_mesh_compressionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func KHR_draco_mesh_compressionArrayToJSArray(array []*KHR_draco_mesh_compression) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // DracoCompression returns the DracoCompression property of class KHR_draco_mesh_compression.

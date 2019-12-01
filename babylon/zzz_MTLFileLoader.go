@@ -27,6 +27,15 @@ func MTLFileLoaderFromJSObject(p js.Value, ctx js.Value) *MTLFileLoader {
 	return &MTLFileLoader{p: p, ctx: ctx}
 }
 
+// MTLFileLoaderArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MTLFileLoaderArrayToJSArray(array []*MTLFileLoader) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // ParseMTL calls the ParseMTL method on the MTLFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mtlfileloader#parsemtl

@@ -29,6 +29,15 @@ func InstancesBlockFromJSObject(p js.Value, ctx js.Value) *InstancesBlock {
 	return &InstancesBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
+// InstancesBlockArrayToJSArray returns a JavaScript Array for the wrapped array.
+func InstancesBlockArrayToJSArray(array []*InstancesBlock) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewInstancesBlock returns a new InstancesBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock
@@ -154,9 +163,7 @@ func (i *InstancesBlock) ConnectTo(other *NodeMaterialBlock, opts *InstancesBloc
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#dispose
 func (i *InstancesBlock) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("dispose", args...)
+	i.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the InstancesBlock object.
@@ -164,9 +171,7 @@ func (i *InstancesBlock) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#getclassname
 func (i *InstancesBlock) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getClassName", args...)
+	retVal := i.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -451,9 +456,7 @@ func (i *InstancesBlock) ReplaceRepeatableContent(vertexShaderState *NodeMateria
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#serialize
 func (i *InstancesBlock) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("serialize", args...)
+	retVal := i.p.Call("serialize")
 	return retVal
 }
 

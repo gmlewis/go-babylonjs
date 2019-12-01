@@ -27,6 +27,15 @@ func GamepadManagerFromJSObject(p js.Value, ctx js.Value) *GamepadManager {
 	return &GamepadManager{p: p, ctx: ctx}
 }
 
+// GamepadManagerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func GamepadManagerArrayToJSArray(array []*GamepadManager) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewGamepadManagerOpts contains optional parameters for NewGamepadManager.
 type NewGamepadManagerOpts struct {
 	_scene *Scene
@@ -57,9 +66,7 @@ func (ba *Babylon) NewGamepadManager(opts *NewGamepadManagerOpts) *GamepadManage
 // https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#dispose
 func (g *GamepadManager) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	g.p.Call("dispose", args...)
+	g.p.Call("dispose")
 }
 
 // GamepadManagerGetGamepadByTypeOpts contains optional parameters for GamepadManager.GetGamepadByType.

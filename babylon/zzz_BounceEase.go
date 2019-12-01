@@ -29,6 +29,15 @@ func BounceEaseFromJSObject(p js.Value, ctx js.Value) *BounceEase {
 	return &BounceEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// BounceEaseArrayToJSArray returns a JavaScript Array for the wrapped array.
+func BounceEaseArrayToJSArray(array []*BounceEase) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewBounceEaseOpts contains optional parameters for NewBounceEase.
 type NewBounceEaseOpts struct {
 	Bounces    *float64
@@ -78,9 +87,7 @@ func (b *BounceEase) Ease(gradient float64) float64 {
 // https://doc.babylonjs.com/api/classes/babylon.bounceease#geteasingmode
 func (b *BounceEase) GetEasingMode() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := b.p.Call("getEasingMode", args...)
+	retVal := b.p.Call("getEasingMode")
 	return retVal.Float()
 }
 

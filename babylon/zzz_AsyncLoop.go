@@ -27,6 +27,15 @@ func AsyncLoopFromJSObject(p js.Value, ctx js.Value) *AsyncLoop {
 	return &AsyncLoop{p: p, ctx: ctx}
 }
 
+// AsyncLoopArrayToJSArray returns a JavaScript Array for the wrapped array.
+func AsyncLoopArrayToJSArray(array []*AsyncLoop) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewAsyncLoopOpts contains optional parameters for NewAsyncLoop.
 type NewAsyncLoopOpts struct {
 	Offset *float64
@@ -43,8 +52,8 @@ func (ba *Babylon) NewAsyncLoop(iterations float64, jsFunc func(), successCallba
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, iterations)
-	args = append(args, jsFunc)
-	args = append(args, successCallback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
 
 	if opts.Offset == nil {
 		args = append(args, js.Undefined())
@@ -61,9 +70,7 @@ func (ba *Babylon) NewAsyncLoop(iterations float64, jsFunc func(), successCallba
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop#breakloop
 func (a *AsyncLoop) BreakLoop() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("breakLoop", args...)
+	a.p.Call("breakLoop")
 }
 
 // ExecuteNext calls the ExecuteNext method on the AsyncLoop object.
@@ -71,9 +78,7 @@ func (a *AsyncLoop) BreakLoop() {
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop#executenext
 func (a *AsyncLoop) ExecuteNext() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	a.p.Call("executeNext", args...)
+	a.p.Call("executeNext")
 }
 
 // AsyncLoopRunOpts contains optional parameters for AsyncLoop.Run.
@@ -92,8 +97,8 @@ func (a *AsyncLoop) Run(iterations float64, fn func(), successCallback func(), o
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, iterations)
-	args = append(args, fn)
-	args = append(args, successCallback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { fn(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
 
 	if opts.Offset == nil {
 		args = append(args, js.Undefined())
@@ -123,8 +128,8 @@ func (a *AsyncLoop) SyncAsyncForLoop(iterations float64, syncedIterations float6
 
 	args = append(args, iterations)
 	args = append(args, syncedIterations)
-	args = append(args, fn)
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { fn(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	if opts.BreakFunction == nil {
 		args = append(args, js.Undefined())

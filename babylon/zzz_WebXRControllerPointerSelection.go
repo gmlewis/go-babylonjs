@@ -27,6 +27,15 @@ func WebXRControllerPointerSelectionFromJSObject(p js.Value, ctx js.Value) *WebX
 	return &WebXRControllerPointerSelection{p: p, ctx: ctx}
 }
 
+// WebXRControllerPointerSelectionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func WebXRControllerPointerSelectionArrayToJSArray(array []*WebXRControllerPointerSelection) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewWebXRControllerPointerSelection returns a new WebXRControllerPointerSelection object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontrollerpointerselection

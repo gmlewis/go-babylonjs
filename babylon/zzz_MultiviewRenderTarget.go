@@ -29,6 +29,15 @@ func MultiviewRenderTargetFromJSObject(p js.Value, ctx js.Value) *MultiviewRende
 	return &MultiviewRenderTarget{RenderTargetTexture: RenderTargetTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
+// MultiviewRenderTargetArrayToJSArray returns a JavaScript Array for the wrapped array.
+func MultiviewRenderTargetArrayToJSArray(array []*MultiviewRenderTarget) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewMultiviewRenderTargetOpts contains optional parameters for NewMultiviewRenderTarget.
 type NewMultiviewRenderTargetOpts struct {
 	Size *float64
@@ -97,9 +106,7 @@ func (m *MultiviewRenderTarget) ClearPostProcesses(opts *MultiviewRenderTargetCl
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#clone
 func (m *MultiviewRenderTarget) Clone() *RenderTargetTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("clone", args...)
+	retVal := m.p.Call("clone")
 	return RenderTargetTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -203,9 +210,7 @@ func (m *MultiviewRenderTarget) CreateFromBase64String(data string, name string,
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#dispose
 func (m *MultiviewRenderTarget) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("dispose", args...)
+	m.p.Call("dispose")
 }
 
 // DisposeFramebufferObjects calls the DisposeFramebufferObjects method on the MultiviewRenderTarget object.
@@ -213,9 +218,7 @@ func (m *MultiviewRenderTarget) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#disposeframebufferobjects
 func (m *MultiviewRenderTarget) DisposeFramebufferObjects() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("disposeFramebufferObjects", args...)
+	m.p.Call("disposeFramebufferObjects")
 }
 
 // FreeRenderingGroups calls the FreeRenderingGroups method on the MultiviewRenderTarget object.
@@ -223,9 +226,7 @@ func (m *MultiviewRenderTarget) DisposeFramebufferObjects() {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#freerenderinggroups
 func (m *MultiviewRenderTarget) FreeRenderingGroups() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("freeRenderingGroups", args...)
+	m.p.Call("freeRenderingGroups")
 }
 
 // GetBaseSize calls the GetBaseSize method on the MultiviewRenderTarget object.
@@ -233,9 +234,7 @@ func (m *MultiviewRenderTarget) FreeRenderingGroups() {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getbasesize
 func (m *MultiviewRenderTarget) GetBaseSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getBaseSize", args...)
+	retVal := m.p.Call("getBaseSize")
 	return retVal
 }
 
@@ -244,9 +243,7 @@ func (m *MultiviewRenderTarget) GetBaseSize() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getclassname
 func (m *MultiviewRenderTarget) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getClassName", args...)
+	retVal := m.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -255,9 +252,7 @@ func (m *MultiviewRenderTarget) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getinternaltexture
 func (m *MultiviewRenderTarget) GetInternalTexture() *InternalTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getInternalTexture", args...)
+	retVal := m.p.Call("getInternalTexture")
 	return InternalTextureFromJSObject(retVal, m.ctx)
 }
 
@@ -266,9 +261,7 @@ func (m *MultiviewRenderTarget) GetInternalTexture() *InternalTexture {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getreflectiontexturematrix
 func (m *MultiviewRenderTarget) GetReflectionTextureMatrix() *Matrix {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getReflectionTextureMatrix", args...)
+	retVal := m.p.Call("getReflectionTextureMatrix")
 	return MatrixFromJSObject(retVal, m.ctx)
 }
 
@@ -277,9 +270,7 @@ func (m *MultiviewRenderTarget) GetReflectionTextureMatrix() *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getrenderheight
 func (m *MultiviewRenderTarget) GetRenderHeight() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getRenderHeight", args...)
+	retVal := m.p.Call("getRenderHeight")
 	return retVal.Float()
 }
 
@@ -288,9 +279,7 @@ func (m *MultiviewRenderTarget) GetRenderHeight() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getrendersize
 func (m *MultiviewRenderTarget) GetRenderSize() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getRenderSize", args...)
+	retVal := m.p.Call("getRenderSize")
 	return retVal.Float()
 }
 
@@ -299,9 +288,7 @@ func (m *MultiviewRenderTarget) GetRenderSize() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getrenderwidth
 func (m *MultiviewRenderTarget) GetRenderWidth() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getRenderWidth", args...)
+	retVal := m.p.Call("getRenderWidth")
 	return retVal.Float()
 }
 
@@ -310,9 +297,7 @@ func (m *MultiviewRenderTarget) GetRenderWidth() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getscene
 func (m *MultiviewRenderTarget) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getScene", args...)
+	retVal := m.p.Call("getScene")
 	return SceneFromJSObject(retVal, m.ctx)
 }
 
@@ -321,9 +306,7 @@ func (m *MultiviewRenderTarget) GetScene() *Scene {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getsize
 func (m *MultiviewRenderTarget) GetSize() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getSize", args...)
+	retVal := m.p.Call("getSize")
 	return retVal
 }
 
@@ -357,9 +340,7 @@ func (m *MultiviewRenderTarget) GetTextureMatrix(opts *MultiviewRenderTargetGetT
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getviewcount
 func (m *MultiviewRenderTarget) GetViewCount() float64 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("getViewCount", args...)
+	retVal := m.p.Call("getViewCount")
 	return retVal.Float()
 }
 
@@ -368,9 +349,7 @@ func (m *MultiviewRenderTarget) GetViewCount() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#isready
 func (m *MultiviewRenderTarget) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("isReady", args...)
+	retVal := m.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -379,9 +358,7 @@ func (m *MultiviewRenderTarget) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#isreadyornotblocking
 func (m *MultiviewRenderTarget) IsReadyOrNotBlocking() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("isReadyOrNotBlocking", args...)
+	retVal := m.p.Call("isReadyOrNotBlocking")
 	return retVal.Bool()
 }
 
@@ -507,9 +484,7 @@ func (m *MultiviewRenderTarget) ReadPixels(opts *MultiviewRenderTargetReadPixels
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#releaseinternaltexture
 func (m *MultiviewRenderTarget) ReleaseInternalTexture() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("releaseInternalTexture", args...)
+	m.p.Call("releaseInternalTexture")
 }
 
 // RemovePostProcess calls the RemovePostProcess method on the MultiviewRenderTarget object.
@@ -559,9 +534,7 @@ func (m *MultiviewRenderTarget) Render(opts *MultiviewRenderTargetRenderOpts) {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#resetrefreshcounter
 func (m *MultiviewRenderTarget) ResetRefreshCounter() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	m.p.Call("resetRefreshCounter", args...)
+	m.p.Call("resetRefreshCounter")
 }
 
 // Resize calls the Resize method on the MultiviewRenderTarget object.
@@ -593,9 +566,7 @@ func (m *MultiviewRenderTarget) Scale(ratio float64) {
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#serialize
 func (m *MultiviewRenderTarget) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("serialize", args...)
+	retVal := m.p.Call("serialize")
 	return retVal
 }
 
@@ -655,9 +626,7 @@ func (m *MultiviewRenderTarget) SetRenderingOrder(renderingGroupId float64, opts
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#tostring
 func (m *MultiviewRenderTarget) ToString() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := m.p.Call("toString", args...)
+	retVal := m.p.Call("toString")
 	return retVal.String()
 }
 
@@ -713,7 +682,7 @@ func (m *MultiviewRenderTarget) WhenAllReady(textures *BaseTexture, callback fun
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, textures.JSObject())
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	m.p.Call("WhenAllReady", args...)
 }
@@ -916,7 +885,7 @@ func (m *MultiviewRenderTarget) SetCoordinatesMode(coordinatesMode float64) *Mul
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#customrenderfunction
 func (m *MultiviewRenderTarget) CustomRenderFunction(customRenderFunction func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(customRenderFunction)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customRenderFunction(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -924,7 +893,7 @@ func (m *MultiviewRenderTarget) CustomRenderFunction(customRenderFunction func()
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#customrenderfunction
 func (m *MultiviewRenderTarget) SetCustomRenderFunction(customRenderFunction func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(customRenderFunction)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customRenderFunction(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1620,7 +1589,7 @@ func (m *MultiviewRenderTarget) SetNoMipmap(noMipmap bool) *MultiviewRenderTarge
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#onafterrender
 func (m *MultiviewRenderTarget) OnAfterRender(onAfterRender func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(onAfterRender)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1628,7 +1597,7 @@ func (m *MultiviewRenderTarget) OnAfterRender(onAfterRender func()) *MultiviewRe
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#onafterrender
 func (m *MultiviewRenderTarget) SetOnAfterRender(onAfterRender func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(onAfterRender)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1652,7 +1621,7 @@ func (m *MultiviewRenderTarget) SetOnAfterRenderObservable(onAfterRenderObservab
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#onafterunbind
 func (m *MultiviewRenderTarget) OnAfterUnbind(onAfterUnbind func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(onAfterUnbind)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterUnbind(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1660,7 +1629,7 @@ func (m *MultiviewRenderTarget) OnAfterUnbind(onAfterUnbind func()) *MultiviewRe
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#onafterunbind
 func (m *MultiviewRenderTarget) SetOnAfterUnbind(onAfterUnbind func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(onAfterUnbind)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterUnbind(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1700,7 +1669,7 @@ func (m *MultiviewRenderTarget) SetOnBeforeBindObservable(onBeforeBindObservable
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#onbeforerender
 func (m *MultiviewRenderTarget) OnBeforeRender(onBeforeRender func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(onBeforeRender)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1708,7 +1677,7 @@ func (m *MultiviewRenderTarget) OnBeforeRender(onBeforeRender func()) *Multiview
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#onbeforerender
 func (m *MultiviewRenderTarget) SetOnBeforeRender(onBeforeRender func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(onBeforeRender)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1732,7 +1701,7 @@ func (m *MultiviewRenderTarget) SetOnBeforeRenderObservable(onBeforeRenderObserv
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#onclear
 func (m *MultiviewRenderTarget) OnClear(onClear func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(onClear)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onClear(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1740,7 +1709,7 @@ func (m *MultiviewRenderTarget) OnClear(onClear func()) *MultiviewRenderTarget {
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#onclear
 func (m *MultiviewRenderTarget) SetOnClear(onClear func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(onClear)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onClear(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1764,7 +1733,7 @@ func (m *MultiviewRenderTarget) SetOnClearObservable(onClearObservable *Observab
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#ondispose
 func (m *MultiviewRenderTarget) OnDispose(onDispose func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(onDispose)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1772,7 +1741,7 @@ func (m *MultiviewRenderTarget) OnDispose(onDispose func()) *MultiviewRenderTarg
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#ondispose
 func (m *MultiviewRenderTarget) SetOnDispose(onDispose func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(onDispose)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1923,16 +1892,16 @@ func (m *MultiviewRenderTarget) SetRefreshRate(refreshRate float64) *MultiviewRe
 // RenderList returns the RenderList property of class MultiviewRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#renderlist
-func (m *MultiviewRenderTarget) RenderList(renderList []AbstractMesh) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(renderList.JSObject())
+func (m *MultiviewRenderTarget) RenderList(renderList []*AbstractMesh) *MultiviewRenderTarget {
+	p := ba.ctx.Get("MultiviewRenderTarget").New(renderList)
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
 // SetRenderList sets the RenderList property of class MultiviewRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#renderlist
-func (m *MultiviewRenderTarget) SetRenderList(renderList []AbstractMesh) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(renderList.JSObject())
+func (m *MultiviewRenderTarget) SetRenderList(renderList []*AbstractMesh) *MultiviewRenderTarget {
+	p := ba.ctx.Get("MultiviewRenderTarget").New(renderList)
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1940,7 +1909,7 @@ func (m *MultiviewRenderTarget) SetRenderList(renderList []AbstractMesh) *Multiv
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#renderlistpredicate
 func (m *MultiviewRenderTarget) RenderListPredicate(renderListPredicate func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(renderListPredicate)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {renderListPredicate(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
@@ -1948,7 +1917,7 @@ func (m *MultiviewRenderTarget) RenderListPredicate(renderListPredicate func()) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#renderlistpredicate
 func (m *MultiviewRenderTarget) SetRenderListPredicate(renderListPredicate func()) *MultiviewRenderTarget {
-	p := ba.ctx.Get("MultiviewRenderTarget").New(renderListPredicate)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {renderListPredicate(); return nil}))
 	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 

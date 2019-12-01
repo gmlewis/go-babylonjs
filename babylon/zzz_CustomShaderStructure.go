@@ -27,6 +27,15 @@ func CustomShaderStructureFromJSObject(p js.Value, ctx js.Value) *CustomShaderSt
 	return &CustomShaderStructure{p: p, ctx: ctx}
 }
 
+// CustomShaderStructureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func CustomShaderStructureArrayToJSArray(array []*CustomShaderStructure) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewCustomShaderStructure returns a new CustomShaderStructure object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customshaderstructure

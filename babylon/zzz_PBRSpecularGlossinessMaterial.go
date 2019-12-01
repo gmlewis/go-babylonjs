@@ -30,6 +30,15 @@ func PBRSpecularGlossinessMaterialFromJSObject(p js.Value, ctx js.Value) *PBRSpe
 	return &PBRSpecularGlossinessMaterial{PBRBaseSimpleMaterial: PBRBaseSimpleMaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PBRSpecularGlossinessMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PBRSpecularGlossinessMaterialArrayToJSArray(array []*PBRSpecularGlossinessMaterial) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPBRSpecularGlossinessMaterial returns a new PBRSpecularGlossinessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial
@@ -150,9 +159,7 @@ func (p *PBRSpecularGlossinessMaterial) BindViewProjection(effect *Effect) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#builduniformlayout
 func (p *PBRSpecularGlossinessMaterial) BuildUniformLayout() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("buildUniformLayout", args...)
+	p.p.Call("buildUniformLayout")
 }
 
 // Clone calls the Clone method on the PBRSpecularGlossinessMaterial object.
@@ -238,7 +245,7 @@ type PBRSpecularGlossinessMaterialForceCompilationAsyncOpts struct {
 // ForceCompilationAsync calls the ForceCompilationAsync method on the PBRSpecularGlossinessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#forcecompilationasync
-func (p *PBRSpecularGlossinessMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *PBRSpecularGlossinessMaterialForceCompilationAsyncOpts) {
+func (p *PBRSpecularGlossinessMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *PBRSpecularGlossinessMaterialForceCompilationAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &PBRSpecularGlossinessMaterialForceCompilationAsyncOpts{}
 	}
@@ -253,7 +260,8 @@ func (p *PBRSpecularGlossinessMaterial) ForceCompilationAsync(mesh *AbstractMesh
 		args = append(args, opts.Options)
 	}
 
-	p.p.Call("forceCompilationAsync", args...)
+	retVal := p.p.Call("forceCompilationAsync", args...)
+	return PromiseFromJSObject(retVal, p.ctx)
 }
 
 // Freeze calls the Freeze method on the PBRSpecularGlossinessMaterial object.
@@ -261,9 +269,7 @@ func (p *PBRSpecularGlossinessMaterial) ForceCompilationAsync(mesh *AbstractMesh
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#freeze
 func (p *PBRSpecularGlossinessMaterial) Freeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("freeze", args...)
+	p.p.Call("freeze")
 }
 
 // GetActiveTextures calls the GetActiveTextures method on the PBRSpecularGlossinessMaterial object.
@@ -271,9 +277,7 @@ func (p *PBRSpecularGlossinessMaterial) Freeze() {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#getactivetextures
 func (p *PBRSpecularGlossinessMaterial) GetActiveTextures() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getActiveTextures", args...)
+	retVal := p.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
@@ -282,9 +286,7 @@ func (p *PBRSpecularGlossinessMaterial) GetActiveTextures() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#getalphatesttexture
 func (p *PBRSpecularGlossinessMaterial) GetAlphaTestTexture() *BaseTexture {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAlphaTestTexture", args...)
+	retVal := p.p.Call("getAlphaTestTexture")
 	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
@@ -293,9 +295,7 @@ func (p *PBRSpecularGlossinessMaterial) GetAlphaTestTexture() *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#getanimatables
 func (p *PBRSpecularGlossinessMaterial) GetAnimatables() js.Value {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getAnimatables", args...)
+	retVal := p.p.Call("getAnimatables")
 	return retVal
 }
 
@@ -304,9 +304,7 @@ func (p *PBRSpecularGlossinessMaterial) GetAnimatables() js.Value {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#getbindedmeshes
 func (p *PBRSpecularGlossinessMaterial) GetBindedMeshes() *AbstractMesh {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getBindedMeshes", args...)
+	retVal := p.p.Call("getBindedMeshes")
 	return AbstractMeshFromJSObject(retVal, p.ctx)
 }
 
@@ -315,9 +313,7 @@ func (p *PBRSpecularGlossinessMaterial) GetBindedMeshes() *AbstractMesh {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#getclassname
 func (p *PBRSpecularGlossinessMaterial) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getClassName", args...)
+	retVal := p.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -326,9 +322,7 @@ func (p *PBRSpecularGlossinessMaterial) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#geteffect
 func (p *PBRSpecularGlossinessMaterial) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getEffect", args...)
+	retVal := p.p.Call("getEffect")
 	return EffectFromJSObject(retVal, p.ctx)
 }
 
@@ -337,9 +331,7 @@ func (p *PBRSpecularGlossinessMaterial) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#getscene
 func (p *PBRSpecularGlossinessMaterial) GetScene() *Scene {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("getScene", args...)
+	retVal := p.p.Call("getScene")
 	return SceneFromJSObject(retVal, p.ctx)
 }
 
@@ -361,9 +353,7 @@ func (p *PBRSpecularGlossinessMaterial) HasTexture(texture *BaseTexture) bool {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#ismetallicworkflow
 func (p *PBRSpecularGlossinessMaterial) IsMetallicWorkflow() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("isMetallicWorkflow", args...)
+	retVal := p.p.Call("isMetallicWorkflow")
 	return retVal.Bool()
 }
 
@@ -443,9 +433,7 @@ func (p *PBRSpecularGlossinessMaterial) MarkAsDirty(flag float64) {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#markdirty
 func (p *PBRSpecularGlossinessMaterial) MarkDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("markDirty", args...)
+	p.p.Call("markDirty")
 }
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the PBRSpecularGlossinessMaterial object.
@@ -453,9 +441,7 @@ func (p *PBRSpecularGlossinessMaterial) MarkDirty() {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#needalphablending
 func (p *PBRSpecularGlossinessMaterial) NeedAlphaBlending() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("needAlphaBlending", args...)
+	retVal := p.p.Call("needAlphaBlending")
 	return retVal.Bool()
 }
 
@@ -477,9 +463,7 @@ func (p *PBRSpecularGlossinessMaterial) NeedAlphaBlendingForMesh(mesh *AbstractM
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#needalphatesting
 func (p *PBRSpecularGlossinessMaterial) NeedAlphaTesting() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("needAlphaTesting", args...)
+	retVal := p.p.Call("needAlphaTesting")
 	return retVal.Bool()
 }
 
@@ -503,9 +487,7 @@ func (p *PBRSpecularGlossinessMaterial) Parse(source interface{}, scene *Scene, 
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#serialize
 func (p *PBRSpecularGlossinessMaterial) Serialize() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := p.p.Call("serialize", args...)
+	retVal := p.p.Call("serialize")
 	return retVal
 }
 
@@ -539,9 +521,7 @@ func (p *PBRSpecularGlossinessMaterial) ToString(opts *PBRSpecularGlossinessMate
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#unbind
 func (p *PBRSpecularGlossinessMaterial) Unbind() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("unbind", args...)
+	p.p.Call("unbind")
 }
 
 // Unfreeze calls the Unfreeze method on the PBRSpecularGlossinessMaterial object.
@@ -549,9 +529,7 @@ func (p *PBRSpecularGlossinessMaterial) Unbind() {
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#unfreeze
 func (p *PBRSpecularGlossinessMaterial) Unfreeze() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("unfreeze", args...)
+	p.p.Call("unfreeze")
 }
 
 /*
@@ -639,16 +617,16 @@ func (p *PBRSpecularGlossinessMaterial) SetAlphaMode(alphaMode float64) *PBRSpec
 // Animations returns the Animations property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#animations
-func (p *PBRSpecularGlossinessMaterial) Animations(animations []Animation) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(animations.JSObject())
+func (p *PBRSpecularGlossinessMaterial) Animations(animations []*Animation) *PBRSpecularGlossinessMaterial {
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(animations)
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetAnimations sets the Animations property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#animations
-func (p *PBRSpecularGlossinessMaterial) SetAnimations(animations []Animation) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(animations.JSObject())
+func (p *PBRSpecularGlossinessMaterial) SetAnimations(animations []*Animation) *PBRSpecularGlossinessMaterial {
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(animations)
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -800,7 +778,7 @@ func (p *PBRSpecularGlossinessMaterial) SetCounterClockWiseSideOrientation(Count
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#customshadernameresolve
 func (p *PBRSpecularGlossinessMaterial) CustomShaderNameResolve(customShaderNameResolve func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(customShaderNameResolve)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customShaderNameResolve(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -808,7 +786,7 @@ func (p *PBRSpecularGlossinessMaterial) CustomShaderNameResolve(customShaderName
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#customshadernameresolve
 func (p *PBRSpecularGlossinessMaterial) SetCustomShaderNameResolve(customShaderNameResolve func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(customShaderNameResolve)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customShaderNameResolve(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1056,7 +1034,7 @@ func (p *PBRSpecularGlossinessMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag flo
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#getrendertargettextures
 func (p *PBRSpecularGlossinessMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1064,7 +1042,7 @@ func (p *PBRSpecularGlossinessMaterial) GetRenderTargetTextures(getRenderTargetT
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#getrendertargettextures
 func (p *PBRSpecularGlossinessMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(getRenderTargetTextures)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1440,7 +1418,7 @@ func (p *PBRSpecularGlossinessMaterial) SetOcclusionTexture(occlusionTexture *Ba
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#onbind
 func (p *PBRSpecularGlossinessMaterial) OnBind(onBind func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(onBind)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1448,7 +1426,7 @@ func (p *PBRSpecularGlossinessMaterial) OnBind(onBind func()) *PBRSpecularGlossi
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#onbind
 func (p *PBRSpecularGlossinessMaterial) SetOnBind(onBind func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(onBind)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1472,7 +1450,7 @@ func (p *PBRSpecularGlossinessMaterial) SetOnBindObservable(onBindObservable *Ob
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#oncompiled
 func (p *PBRSpecularGlossinessMaterial) OnCompiled(onCompiled func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(onCompiled)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1480,7 +1458,7 @@ func (p *PBRSpecularGlossinessMaterial) OnCompiled(onCompiled func()) *PBRSpecul
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#oncompiled
 func (p *PBRSpecularGlossinessMaterial) SetOnCompiled(onCompiled func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(onCompiled)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1488,7 +1466,7 @@ func (p *PBRSpecularGlossinessMaterial) SetOnCompiled(onCompiled func()) *PBRSpe
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#ondispose
 func (p *PBRSpecularGlossinessMaterial) OnDispose(onDispose func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(onDispose)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1496,7 +1474,7 @@ func (p *PBRSpecularGlossinessMaterial) OnDispose(onDispose func()) *PBRSpecular
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#ondispose
 func (p *PBRSpecularGlossinessMaterial) SetOnDispose(onDispose func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(onDispose)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1520,7 +1498,7 @@ func (p *PBRSpecularGlossinessMaterial) SetOnDisposeObservable(onDisposeObservab
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#onerror
 func (p *PBRSpecularGlossinessMaterial) OnError(onError func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(onError)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1528,7 +1506,7 @@ func (p *PBRSpecularGlossinessMaterial) OnError(onError func()) *PBRSpecularGlos
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#onerror
 func (p *PBRSpecularGlossinessMaterial) SetOnError(onError func()) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(onError)
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 

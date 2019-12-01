@@ -29,6 +29,15 @@ func HighlightsPostProcessFromJSObject(p js.Value, ctx js.Value) *HighlightsPost
 	return &HighlightsPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
+// HighlightsPostProcessArrayToJSArray returns a JavaScript Array for the wrapped array.
+func HighlightsPostProcessArrayToJSArray(array []*HighlightsPostProcess) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewHighlightsPostProcessOpts contains optional parameters for NewHighlightsPostProcess.
 type NewHighlightsPostProcessOpts struct {
 	SamplingMode *float64
@@ -114,9 +123,7 @@ func (h *HighlightsPostProcess) Activate(camera *Camera, opts *HighlightsPostPro
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#apply
 func (h *HighlightsPostProcess) Apply() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("apply", args...)
+	retVal := h.p.Call("apply")
 	return EffectFromJSObject(retVal, h.ctx)
 }
 
@@ -149,9 +156,7 @@ func (h *HighlightsPostProcess) Dispose(opts *HighlightsPostProcessDisposeOpts) 
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#getcamera
 func (h *HighlightsPostProcess) GetCamera() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getCamera", args...)
+	retVal := h.p.Call("getCamera")
 	return CameraFromJSObject(retVal, h.ctx)
 }
 
@@ -160,9 +165,7 @@ func (h *HighlightsPostProcess) GetCamera() *Camera {
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#getclassname
 func (h *HighlightsPostProcess) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getClassName", args...)
+	retVal := h.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -171,9 +174,7 @@ func (h *HighlightsPostProcess) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#geteffect
 func (h *HighlightsPostProcess) GetEffect() *Effect {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getEffect", args...)
+	retVal := h.p.Call("getEffect")
 	return EffectFromJSObject(retVal, h.ctx)
 }
 
@@ -182,9 +183,7 @@ func (h *HighlightsPostProcess) GetEffect() *Effect {
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#geteffectname
 func (h *HighlightsPostProcess) GetEffectName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getEffectName", args...)
+	retVal := h.p.Call("getEffectName")
 	return retVal.String()
 }
 
@@ -193,9 +192,7 @@ func (h *HighlightsPostProcess) GetEffectName() string {
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#getengine
 func (h *HighlightsPostProcess) GetEngine() *Engine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("getEngine", args...)
+	retVal := h.p.Call("getEngine")
 	return EngineFromJSObject(retVal, h.ctx)
 }
 
@@ -204,9 +201,7 @@ func (h *HighlightsPostProcess) GetEngine() *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#isready
 func (h *HighlightsPostProcess) IsReady() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("isReady", args...)
+	retVal := h.p.Call("isReady")
 	return retVal.Bool()
 }
 
@@ -215,9 +210,7 @@ func (h *HighlightsPostProcess) IsReady() bool {
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#isreusable
 func (h *HighlightsPostProcess) IsReusable() bool {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := h.p.Call("isReusable", args...)
+	retVal := h.p.Call("isReusable")
 	return retVal.Bool()
 }
 
@@ -226,9 +219,7 @@ func (h *HighlightsPostProcess) IsReusable() bool {
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#marktexturedirty
 func (h *HighlightsPostProcess) MarkTextureDirty() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("markTextureDirty", args...)
+	h.p.Call("markTextureDirty")
 }
 
 // ShareOutputWith calls the ShareOutputWith method on the HighlightsPostProcess object.
@@ -303,9 +294,7 @@ func (h *HighlightsPostProcess) UpdateEffect(opts *HighlightsPostProcessUpdateEf
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#useownoutput
 func (h *HighlightsPostProcess) UseOwnOutput() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	h.p.Call("useOwnOutput", args...)
+	h.p.Call("useOwnOutput")
 }
 
 /*
@@ -554,7 +543,7 @@ func (h *HighlightsPostProcess) SetName(name string) *HighlightsPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#onactivate
 func (h *HighlightsPostProcess) OnActivate(onActivate func()) *HighlightsPostProcess {
-	p := ba.ctx.Get("HighlightsPostProcess").New(onActivate)
+	p := ba.ctx.Get("HighlightsPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -562,7 +551,7 @@ func (h *HighlightsPostProcess) OnActivate(onActivate func()) *HighlightsPostPro
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#onactivate
 func (h *HighlightsPostProcess) SetOnActivate(onActivate func()) *HighlightsPostProcess {
-	p := ba.ctx.Get("HighlightsPostProcess").New(onActivate)
+	p := ba.ctx.Get("HighlightsPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -586,7 +575,7 @@ func (h *HighlightsPostProcess) SetOnActivateObservable(onActivateObservable *Ob
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#onafterrender
 func (h *HighlightsPostProcess) OnAfterRender(onAfterRender func()) *HighlightsPostProcess {
-	p := ba.ctx.Get("HighlightsPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("HighlightsPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -594,7 +583,7 @@ func (h *HighlightsPostProcess) OnAfterRender(onAfterRender func()) *HighlightsP
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#onafterrender
 func (h *HighlightsPostProcess) SetOnAfterRender(onAfterRender func()) *HighlightsPostProcess {
-	p := ba.ctx.Get("HighlightsPostProcess").New(onAfterRender)
+	p := ba.ctx.Get("HighlightsPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -618,7 +607,7 @@ func (h *HighlightsPostProcess) SetOnAfterRenderObservable(onAfterRenderObservab
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#onapply
 func (h *HighlightsPostProcess) OnApply(onApply func()) *HighlightsPostProcess {
-	p := ba.ctx.Get("HighlightsPostProcess").New(onApply)
+	p := ba.ctx.Get("HighlightsPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -626,7 +615,7 @@ func (h *HighlightsPostProcess) OnApply(onApply func()) *HighlightsPostProcess {
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#onapply
 func (h *HighlightsPostProcess) SetOnApply(onApply func()) *HighlightsPostProcess {
-	p := ba.ctx.Get("HighlightsPostProcess").New(onApply)
+	p := ba.ctx.Get("HighlightsPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -650,7 +639,7 @@ func (h *HighlightsPostProcess) SetOnApplyObservable(onApplyObservable *Observab
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#onbeforerender
 func (h *HighlightsPostProcess) OnBeforeRender(onBeforeRender func()) *HighlightsPostProcess {
-	p := ba.ctx.Get("HighlightsPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("HighlightsPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -658,7 +647,7 @@ func (h *HighlightsPostProcess) OnBeforeRender(onBeforeRender func()) *Highlight
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#onbeforerender
 func (h *HighlightsPostProcess) SetOnBeforeRender(onBeforeRender func()) *HighlightsPostProcess {
-	p := ba.ctx.Get("HighlightsPostProcess").New(onBeforeRender)
+	p := ba.ctx.Get("HighlightsPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -682,7 +671,7 @@ func (h *HighlightsPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObserv
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#onsizechanged
 func (h *HighlightsPostProcess) OnSizeChanged(onSizeChanged func()) *HighlightsPostProcess {
-	p := ba.ctx.Get("HighlightsPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("HighlightsPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
@@ -690,7 +679,7 @@ func (h *HighlightsPostProcess) OnSizeChanged(onSizeChanged func()) *HighlightsP
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#onsizechanged
 func (h *HighlightsPostProcess) SetOnSizeChanged(onSizeChanged func()) *HighlightsPostProcess {
-	p := ba.ctx.Get("HighlightsPostProcess").New(onSizeChanged)
+	p := ba.ctx.Get("HighlightsPostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 

@@ -29,13 +29,22 @@ func PhysicsRadialExplosionEventOptionsFromJSObject(p js.Value, ctx js.Value) *P
 	return &PhysicsRadialExplosionEventOptions{p: p, ctx: ctx}
 }
 
+// PhysicsRadialExplosionEventOptionsArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PhysicsRadialExplosionEventOptionsArrayToJSArray(array []*PhysicsRadialExplosionEventOptions) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // AffectedImpostorsCallback returns the AffectedImpostorsCallback property of class PhysicsRadialExplosionEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#affectedimpostorscallback
 func (p *PhysicsRadialExplosionEventOptions) AffectedImpostorsCallback(affectedImpostorsCallback func()) *PhysicsRadialExplosionEventOptions {
-	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(affectedImpostorsCallback)
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {affectedImpostorsCallback(); return nil}))
 	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
 }
 
@@ -43,23 +52,23 @@ func (p *PhysicsRadialExplosionEventOptions) AffectedImpostorsCallback(affectedI
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#affectedimpostorscallback
 func (p *PhysicsRadialExplosionEventOptions) SetAffectedImpostorsCallback(affectedImpostorsCallback func()) *PhysicsRadialExplosionEventOptions {
-	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(affectedImpostorsCallback)
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {affectedImpostorsCallback(); return nil}))
 	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
 }
 
 // Falloff returns the Falloff property of class PhysicsRadialExplosionEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#falloff
-func (p *PhysicsRadialExplosionEventOptions) Falloff(falloff *PhysicsRadialImpulseFalloff) *PhysicsRadialExplosionEventOptions {
-	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(falloff.JSObject())
+func (p *PhysicsRadialExplosionEventOptions) Falloff(falloff js.Value) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(falloff)
 	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
 }
 
 // SetFalloff sets the Falloff property of class PhysicsRadialExplosionEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#falloff
-func (p *PhysicsRadialExplosionEventOptions) SetFalloff(falloff *PhysicsRadialImpulseFalloff) *PhysicsRadialExplosionEventOptions {
-	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(falloff.JSObject())
+func (p *PhysicsRadialExplosionEventOptions) SetFalloff(falloff js.Value) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(falloff)
 	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
 }
 

@@ -27,6 +27,15 @@ func OnAfterEnteringVRObservableEventFromJSObject(p js.Value, ctx js.Value) *OnA
 	return &OnAfterEnteringVRObservableEvent{p: p, ctx: ctx}
 }
 
+// OnAfterEnteringVRObservableEventArrayToJSArray returns a JavaScript Array for the wrapped array.
+func OnAfterEnteringVRObservableEventArrayToJSArray(array []*OnAfterEnteringVRObservableEvent) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // Success returns the Success property of class OnAfterEnteringVRObservableEvent.

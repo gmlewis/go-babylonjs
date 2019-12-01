@@ -27,6 +27,15 @@ func ClipboardEventTypesFromJSObject(p js.Value, ctx js.Value) *ClipboardEventTy
 	return &ClipboardEventTypes{p: p, ctx: ctx}
 }
 
+// ClipboardEventTypesArrayToJSArray returns a JavaScript Array for the wrapped array.
+func ClipboardEventTypesArrayToJSArray(array []*ClipboardEventTypes) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 /*
 
 // COPY returns the COPY property of class ClipboardEventTypes.

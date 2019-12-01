@@ -27,6 +27,15 @@ func PoseEnabledControllerFromJSObject(p js.Value, ctx js.Value) *PoseEnabledCon
 	return &PoseEnabledController{Gamepad: GamepadFromJSObject(p, ctx), ctx: ctx}
 }
 
+// PoseEnabledControllerArrayToJSArray returns a JavaScript Array for the wrapped array.
+func PoseEnabledControllerArrayToJSArray(array []*PoseEnabledController) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewPoseEnabledController returns a new PoseEnabledController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller
@@ -69,9 +78,7 @@ func (p *PoseEnabledController) AttachToPoseControlledCamera(camera *TargetCamer
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#dispose
 func (p *PoseEnabledController) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("dispose", args...)
+	p.p.Call("dispose")
 }
 
 // PoseEnabledControllerGetForwardRayOpts contains optional parameters for PoseEnabledController.GetForwardRay.
@@ -106,7 +113,7 @@ func (p *PoseEnabledController) Onleftstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	p.p.Call("onleftstickchanged", args...)
 }
@@ -118,7 +125,7 @@ func (p *PoseEnabledController) Onrightstickchanged(callback func()) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, callback)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	p.p.Call("onrightstickchanged", args...)
 }
@@ -128,9 +135,7 @@ func (p *PoseEnabledController) Onrightstickchanged(callback func()) {
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#update
 func (p *PoseEnabledController) Update() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	p.p.Call("update", args...)
+	p.p.Call("update")
 }
 
 // UpdateFromDevice calls the UpdateFromDevice method on the PoseEnabledController object.

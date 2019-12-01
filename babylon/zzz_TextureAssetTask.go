@@ -27,6 +27,15 @@ func TextureAssetTaskFromJSObject(p js.Value, ctx js.Value) *TextureAssetTask {
 	return &TextureAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
+// TextureAssetTaskArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TextureAssetTaskArrayToJSArray(array []*TextureAssetTask) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTextureAssetTaskOpts contains optional parameters for NewTextureAssetTask.
 type NewTextureAssetTaskOpts struct {
 	NoMipmap     *bool
@@ -72,9 +81,7 @@ func (ba *Babylon) NewTextureAssetTask(name string, url string, opts *NewTexture
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#reset
 func (t *TextureAssetTask) Reset() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	t.p.Call("reset", args...)
+	t.p.Call("reset")
 }
 
 // Run calls the Run method on the TextureAssetTask object.
@@ -85,8 +92,8 @@ func (t *TextureAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	t.p.Call("run", args...)
 }
@@ -99,8 +106,8 @@ func (t *TextureAssetTask) RunTask(scene *Scene, onSuccess func(), onError func(
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, onSuccess)
-	args = append(args, onError)
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
 
 	t.p.Call("runTask", args...)
 }
@@ -191,7 +198,7 @@ func (t *TextureAssetTask) SetNoMipmap(noMipmap bool) *TextureAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#onerror
 func (t *TextureAssetTask) OnError(onError func()) *TextureAssetTask {
-	p := ba.ctx.Get("TextureAssetTask").New(onError)
+	p := ba.ctx.Get("TextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return TextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -199,7 +206,7 @@ func (t *TextureAssetTask) OnError(onError func()) *TextureAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#onerror
 func (t *TextureAssetTask) SetOnError(onError func()) *TextureAssetTask {
-	p := ba.ctx.Get("TextureAssetTask").New(onError)
+	p := ba.ctx.Get("TextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
 	return TextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -207,7 +214,7 @@ func (t *TextureAssetTask) SetOnError(onError func()) *TextureAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#onsuccess
 func (t *TextureAssetTask) OnSuccess(onSuccess func()) *TextureAssetTask {
-	p := ba.ctx.Get("TextureAssetTask").New(onSuccess)
+	p := ba.ctx.Get("TextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return TextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -215,7 +222,7 @@ func (t *TextureAssetTask) OnSuccess(onSuccess func()) *TextureAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#onsuccess
 func (t *TextureAssetTask) SetOnSuccess(onSuccess func()) *TextureAssetTask {
-	p := ba.ctx.Get("TextureAssetTask").New(onSuccess)
+	p := ba.ctx.Get("TextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
 	return TextureAssetTaskFromJSObject(p, ba.ctx)
 }
 

@@ -29,6 +29,15 @@ func StereoscopicUniversalCameraFromJSObject(p js.Value, ctx js.Value) *Stereosc
 	return &StereoscopicUniversalCamera{UniversalCamera: UniversalCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
+// StereoscopicUniversalCameraArrayToJSArray returns a JavaScript Array for the wrapped array.
+func StereoscopicUniversalCameraArrayToJSArray(array []*StereoscopicUniversalCamera) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewStereoscopicUniversalCamera returns a new StereoscopicUniversalCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera
@@ -89,9 +98,7 @@ func (s *StereoscopicUniversalCamera) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#dispose
 func (s *StereoscopicUniversalCamera) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	s.p.Call("dispose", args...)
+	s.p.Call("dispose")
 }
 
 // GetClassName calls the GetClassName method on the StereoscopicUniversalCamera object.
@@ -99,9 +106,7 @@ func (s *StereoscopicUniversalCamera) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#getclassname
 func (s *StereoscopicUniversalCamera) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getClassName", args...)
+	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -123,9 +128,7 @@ func (s *StereoscopicUniversalCamera) GetFrontPosition(distance float64) *Vector
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#gettarget
 func (s *StereoscopicUniversalCamera) GetTarget() *Vector3 {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("getTarget", args...)
+	retVal := s.p.Call("getTarget")
 	return Vector3FromJSObject(retVal, s.ctx)
 }
 
@@ -146,9 +149,7 @@ func (s *StereoscopicUniversalCamera) SetTarget(target *Vector3) {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#storestate
 func (s *StereoscopicUniversalCamera) StoreState() *Camera {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := s.p.Call("storeState", args...)
+	retVal := s.p.Call("storeState")
 	return CameraFromJSObject(retVal, s.ctx)
 }
 
@@ -430,7 +431,7 @@ func (s *StereoscopicUniversalCamera) SetNoRotationConstraint(noRotationConstrai
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#oncollide
 func (s *StereoscopicUniversalCamera) OnCollide(onCollide func()) *StereoscopicUniversalCamera {
-	p := ba.ctx.Get("StereoscopicUniversalCamera").New(onCollide)
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
 }
 
@@ -438,7 +439,7 @@ func (s *StereoscopicUniversalCamera) OnCollide(onCollide func()) *StereoscopicU
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#oncollide
 func (s *StereoscopicUniversalCamera) SetOnCollide(onCollide func()) *StereoscopicUniversalCamera {
-	p := ba.ctx.Get("StereoscopicUniversalCamera").New(onCollide)
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
 }
 

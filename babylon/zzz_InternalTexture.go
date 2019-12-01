@@ -28,6 +28,15 @@ func InternalTextureFromJSObject(p js.Value, ctx js.Value) *InternalTexture {
 	return &InternalTexture{p: p, ctx: ctx}
 }
 
+// InternalTextureArrayToJSArray returns a JavaScript Array for the wrapped array.
+func InternalTextureArrayToJSArray(array []*InternalTexture) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewInternalTextureOpts contains optional parameters for NewInternalTexture.
 type NewInternalTextureOpts struct {
 	DelayAllocation *bool
@@ -36,7 +45,7 @@ type NewInternalTextureOpts struct {
 // NewInternalTexture returns a new InternalTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture
-func (ba *Babylon) NewInternalTexture(engine *ThinEngine, source *InternalTextureSource, opts *NewInternalTextureOpts) *InternalTexture {
+func (ba *Babylon) NewInternalTexture(engine *ThinEngine, source js.Value, opts *NewInternalTextureOpts) *InternalTexture {
 	if opts == nil {
 		opts = &NewInternalTextureOpts{}
 	}
@@ -44,7 +53,7 @@ func (ba *Babylon) NewInternalTexture(engine *ThinEngine, source *InternalTextur
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, engine.JSObject())
-	args = append(args, source.JSObject())
+	args = append(args, source)
 
 	if opts.DelayAllocation == nil {
 		args = append(args, js.Undefined())
@@ -61,9 +70,7 @@ func (ba *Babylon) NewInternalTexture(engine *ThinEngine, source *InternalTextur
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#dispose
 func (i *InternalTexture) Dispose() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("dispose", args...)
+	i.p.Call("dispose")
 }
 
 // GetEngine calls the GetEngine method on the InternalTexture object.
@@ -71,9 +78,7 @@ func (i *InternalTexture) Dispose() {
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#getengine
 func (i *InternalTexture) GetEngine() *ThinEngine {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getEngine", args...)
+	retVal := i.p.Call("getEngine")
 	return ThinEngineFromJSObject(retVal, i.ctx)
 }
 
@@ -82,9 +87,7 @@ func (i *InternalTexture) GetEngine() *ThinEngine {
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#incrementreferences
 func (i *InternalTexture) IncrementReferences() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("incrementReferences", args...)
+	i.p.Call("incrementReferences")
 }
 
 // InternalTextureUpdateSizeOpts contains optional parameters for InternalTexture.UpdateSize.
@@ -375,16 +378,16 @@ func (i *InternalTexture) SetSamplingMode(samplingMode float64) *InternalTexture
 // Source returns the Source property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#source
-func (i *InternalTexture) Source(source *InternalTextureSource) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(source.JSObject())
+func (i *InternalTexture) Source(source js.Value) *InternalTexture {
+	p := ba.ctx.Get("InternalTexture").New(source)
 	return InternalTextureFromJSObject(p, ba.ctx)
 }
 
 // SetSource sets the Source property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#source
-func (i *InternalTexture) SetSource(source *InternalTextureSource) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(source.JSObject())
+func (i *InternalTexture) SetSource(source js.Value) *InternalTexture {
+	p := ba.ctx.Get("InternalTexture").New(source)
 	return InternalTextureFromJSObject(p, ba.ctx)
 }
 

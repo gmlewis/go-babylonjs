@@ -29,6 +29,15 @@ func TextureOptimizationFromJSObject(p js.Value, ctx js.Value) *TextureOptimizat
 	return &TextureOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
+// TextureOptimizationArrayToJSArray returns a JavaScript Array for the wrapped array.
+func TextureOptimizationArrayToJSArray(array []*TextureOptimization) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewTextureOptimizationOpts contains optional parameters for NewTextureOptimization.
 type NewTextureOptimizationOpts struct {
 	Priority    *float64
@@ -85,9 +94,7 @@ func (t *TextureOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) boo
 // https://doc.babylonjs.com/api/classes/babylon.textureoptimization#getdescription
 func (t *TextureOptimization) GetDescription() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := t.p.Call("getDescription", args...)
+	retVal := t.p.Call("getDescription")
 	return retVal.String()
 }
 

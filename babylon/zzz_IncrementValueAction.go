@@ -30,6 +30,15 @@ func IncrementValueActionFromJSObject(p js.Value, ctx js.Value) *IncrementValueA
 	return &IncrementValueAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
+// IncrementValueActionArrayToJSArray returns a JavaScript Array for the wrapped array.
+func IncrementValueActionArrayToJSArray(array []*IncrementValueAction) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewIncrementValueActionOpts contains optional parameters for NewIncrementValueAction.
 type NewIncrementValueActionOpts struct {
 	Condition *Condition
@@ -65,9 +74,7 @@ func (ba *Babylon) NewIncrementValueAction(triggerOptions interface{}, target in
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#execute
 func (i *IncrementValueAction) Execute() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("execute", args...)
+	i.p.Call("execute")
 }
 
 // GetTriggerParameter calls the GetTriggerParameter method on the IncrementValueAction object.
@@ -75,9 +82,7 @@ func (i *IncrementValueAction) Execute() {
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#gettriggerparameter
 func (i *IncrementValueAction) GetTriggerParameter() interface{} {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := i.p.Call("getTriggerParameter", args...)
+	retVal := i.p.Call("getTriggerParameter")
 	return retVal
 }
 
@@ -99,9 +104,7 @@ func (i *IncrementValueAction) Serialize(parent interface{}) interface{} {
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#skiptonextactiveaction
 func (i *IncrementValueAction) SkipToNextActiveAction() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	i.p.Call("skipToNextActiveAction", args...)
+	i.p.Call("skipToNextActiveAction")
 }
 
 // Then calls the Then method on the IncrementValueAction object.

@@ -30,6 +30,15 @@ func FreeCameraDeviceOrientationInputFromJSObject(p js.Value, ctx js.Value) *Fre
 	return &FreeCameraDeviceOrientationInput{p: p, ctx: ctx}
 }
 
+// FreeCameraDeviceOrientationInputArrayToJSArray returns a JavaScript Array for the wrapped array.
+func FreeCameraDeviceOrientationInputArrayToJSArray(array []*FreeCameraDeviceOrientationInput) []interface{} {
+	var result []interface{}
+	for _, v := range array {
+		result = append(result, v.JSObject())
+	}
+	return result
+}
+
 // NewFreeCameraDeviceOrientationInput returns a new FreeCameraDeviceOrientationInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput
@@ -72,9 +81,7 @@ func (f *FreeCameraDeviceOrientationInput) AttachControl(element js.Value, opts 
 // https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#checkinputs
 func (f *FreeCameraDeviceOrientationInput) CheckInputs() {
 
-	args := make([]interface{}, 0, 0+0)
-
-	f.p.Call("checkInputs", args...)
+	f.p.Call("checkInputs")
 }
 
 // DetachControl calls the DetachControl method on the FreeCameraDeviceOrientationInput object.
@@ -94,9 +101,7 @@ func (f *FreeCameraDeviceOrientationInput) DetachControl(element js.Value) {
 // https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#getclassname
 func (f *FreeCameraDeviceOrientationInput) GetClassName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getClassName", args...)
+	retVal := f.p.Call("getClassName")
 	return retVal.String()
 }
 
@@ -105,9 +110,7 @@ func (f *FreeCameraDeviceOrientationInput) GetClassName() string {
 // https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#getsimplename
 func (f *FreeCameraDeviceOrientationInput) GetSimpleName() string {
 
-	args := make([]interface{}, 0, 0+0)
-
-	retVal := f.p.Call("getSimpleName", args...)
+	retVal := f.p.Call("getSimpleName")
 	return retVal.String()
 }
 
@@ -119,7 +122,7 @@ type FreeCameraDeviceOrientationInputWaitForOrientationChangeAsyncOpts struct {
 // WaitForOrientationChangeAsync calls the WaitForOrientationChangeAsync method on the FreeCameraDeviceOrientationInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#waitfororientationchangeasync
-func (f *FreeCameraDeviceOrientationInput) WaitForOrientationChangeAsync(opts *FreeCameraDeviceOrientationInputWaitForOrientationChangeAsyncOpts) *unknown {
+func (f *FreeCameraDeviceOrientationInput) WaitForOrientationChangeAsync(opts *FreeCameraDeviceOrientationInputWaitForOrientationChangeAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &FreeCameraDeviceOrientationInputWaitForOrientationChangeAsyncOpts{}
 	}
@@ -133,7 +136,7 @@ func (f *FreeCameraDeviceOrientationInput) WaitForOrientationChangeAsync(opts *F
 	}
 
 	retVal := f.p.Call("WaitForOrientationChangeAsync", args...)
-	return unknownFromJSObject(retVal, f.ctx)
+	return PromiseFromJSObject(retVal, f.ctx)
 }
 
 /*
