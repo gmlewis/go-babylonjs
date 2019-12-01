@@ -37,7 +37,7 @@ func (c *classes) walker() filepath.WalkFunc {
 		}
 
 		parentDir := filepath.Base(filepath.Dir(path))
-		if parentDir != "classes" {
+		if parentDir != "classes" && parentDir != "interfaces" {
 			return nil
 		}
 
@@ -57,7 +57,7 @@ func (c *classes) walker() filepath.WalkFunc {
 			}
 		}
 
-		logf("\n\nProcessing %v ...", filename)
+		logf("Processing %v/%v ...", parentDir, filename)
 
 		buf, err := ioutil.ReadFile(path)
 		check("ReadFile: %v", err)

@@ -20,9 +20,8 @@ var (
 func main() {
 	flag.Parse()
 
-	dir := filepath.Join(*apiDir, "classes")
 	c := &classes{m: map[string]*ClassHTML{}}
-	check("Walk: %v", filepath.Walk(dir, c.walker()))
+	check("Walk: %v", filepath.Walk(*apiDir, c.walker()))
 
 	check("writeGo: %v", c.writeGo(*destDir))
 
