@@ -39,7 +39,7 @@ func WorkerPoolArrayToJSArray(array []*WorkerPool) []interface{} {
 // NewWorkerPool returns a new WorkerPool object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.workerpool
-func (ba *Babylon) NewWorkerPool(workers []*Worker) *WorkerPool {
+func (ba *Babylon) NewWorkerPool(workers []js.Value) *WorkerPool {
 
 	args := make([]interface{}, 0, 1+0)
 

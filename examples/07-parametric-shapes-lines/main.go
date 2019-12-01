@@ -24,7 +24,7 @@ func main() {
 
 		camera := b.NewArcRotateCamera("Camera", 0, 0, 0, b.Vector3().Zero(), scene, nil)
 		camera.SetPosition(b.NewVector3(1, -1, -1))
-		camera.AttachControl(canvas, true)
+		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: babylon.Bool(true)})
 
 		b.NewHemisphericLight("hemi", b.NewVector3(0, 1, 0), scene)
 
@@ -46,7 +46,7 @@ func main() {
 
 	// Register a render loop to repeatedly render the scene
 	engine.RunRenderLoop(func() {
-		scene.Render()
+		scene.Render(nil)
 	})
 
 	// Watch for browser/canvas resize events

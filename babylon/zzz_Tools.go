@@ -786,7 +786,7 @@ type ToolsMakeArrayOpts struct {
 // MakeArray calls the MakeArray method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#makearray
-func (t *Tools) MakeArray(obj interface{}, opts *ToolsMakeArrayOpts) []interface{} {
+func (t *Tools) MakeArray(obj interface{}, opts *ToolsMakeArrayOpts) js.Value {
 	if opts == nil {
 		opts = &ToolsMakeArrayOpts{}
 	}

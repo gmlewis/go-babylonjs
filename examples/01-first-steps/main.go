@@ -27,7 +27,7 @@ func main() {
 
 		// Add a camera to the scene and attach it to the canvas
 		camera := b.NewArcRotateCamera("Camera", math.Pi/2, math.Pi/2, 2, b.NewVector3(0, 0, 5), scene, nil)
-		camera.AttachControl(canvas, true)
+		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: Bool(true)})
 
 		// Add lights to the scene
 		b.NewHemisphericLight("light1", b.NewVector3(1, 1, 0), scene)
@@ -44,7 +44,7 @@ func main() {
 
 	// Register a render loop to repeatedly render the scene
 	engine.RunRenderLoop(func() {
-		scene.Render()
+		scene.Render(nil)
 	})
 
 	// Watch for browser/canvas resize events
@@ -59,6 +59,11 @@ func main() {
 	// prevent program from terminating
 	c := make(chan struct{}, 0)
 	<-c
+}
+
+// Bool returns the pointer to the provided bool.
+func Bool(v bool) *bool {
+	return &v
 }
 
 // Float64 returns the pointer to the provided float64.

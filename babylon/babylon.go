@@ -19,3 +19,13 @@ func New() *Babylon { return &Babylon{ctx: js.Global().Get("BABYLON")} }
 
 // JSObject returns the underlying *js.JavaScript class.
 func (t *Babylon) JSObject() js.Value { return t.ctx }
+
+// Bool returns the pointer to the provided bool.
+func Bool(v bool) *bool {
+	return &v
+}
+
+// Float64 returns the pointer to the provided float64.
+func Float64(v float64) *float64 {
+	return &v
+}

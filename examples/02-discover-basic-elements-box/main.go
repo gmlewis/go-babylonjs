@@ -27,7 +27,7 @@ func main() {
 
 		// Add a camera to the scene and attach it to the canvas
 		camera := b.NewArcRotateCamera("Camera", 3*math.Pi/4, math.Pi/4, 4, b.Vector3().Zero(), scene, nil)
-		camera.AttachControl(canvas, true)
+		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: babylon.Bool(true)})
 
 		// Add lights to the scene
 		b.NewHemisphericLight("light1", b.NewVector3(1, 1, 0), scene)
@@ -44,7 +44,7 @@ func main() {
 
 	// Register a render loop to repeatedly render the scene
 	engine.RunRenderLoop(func() {
-		scene.Render()
+		scene.Render(nil)
 	})
 
 	// Watch for browser/canvas resize events

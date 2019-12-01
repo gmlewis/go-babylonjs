@@ -902,8 +902,15 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 				var needsJSObject bool
 				paramType, needsJSObject, needsArrayHelper = jsTypeToGoType(paramType)
 
-				if paramType == "object" {
+				switch paramType {
+				case "object":
 					paramType = "js.Value"
+					needsJSObject = false
+				case "func()": // special case - function callback
+					jsName = fmt.Sprintf(`js.FuncOf(func(this js.Value, args []js.Value) interface{} {%v(); return nil})`, name)
+					needsJSObject = false
+				case "[]*Worker":
+					paramType = "[]js.Value"
 					needsJSObject = false
 				}
 
@@ -912,11 +919,6 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 						paramType = "*" + paramType
 					}
 					jsName += ".JSObject()"
-				}
-
-				// special case - function callback
-				if paramType == "func()" {
-					jsName = fmt.Sprintf(`js.FuncOf(func(this js.Value, args []js.Value) interface{} {%v(); return nil})`, name)
 				}
 			}
 			if needsArrayHelper {
@@ -938,7 +940,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 			s.GoReturnType = className
 			needsJSObject = true
 		case "[]*any":
-			s.GoReturnType = "[]interface{}"
+			s.GoReturnType = "js.Value" // "[]interface{}"
 			needsJSObject = false
 		case "object":
 			// s.GoReturnType = "map[string]interface{}"
