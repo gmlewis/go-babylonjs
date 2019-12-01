@@ -217,16 +217,16 @@ func (v *VolumeBasedPanel) SetChildren(children []*Control3D) *VolumeBasedPanel 
 // Columns returns the Columns property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#columns
-func (v *VolumeBasedPanel) Columns(columns *int) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(columns.JSObject())
+func (v *VolumeBasedPanel) Columns(columns int) *VolumeBasedPanel {
+	p := ba.ctx.Get("VolumeBasedPanel").New(columns)
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
 // SetColumns sets the Columns property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#columns
-func (v *VolumeBasedPanel) SetColumns(columns *int) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(columns.JSObject())
+func (v *VolumeBasedPanel) SetColumns(columns int) *VolumeBasedPanel {
+	p := ba.ctx.Get("VolumeBasedPanel").New(columns)
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
@@ -585,16 +585,16 @@ func (v *VolumeBasedPanel) SetPosition(position *Vector3) *VolumeBasedPanel {
 // Rows returns the Rows property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#rows
-func (v *VolumeBasedPanel) Rows(rows *int) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(rows.JSObject())
+func (v *VolumeBasedPanel) Rows(rows int) *VolumeBasedPanel {
+	p := ba.ctx.Get("VolumeBasedPanel").New(rows)
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
 // SetRows sets the Rows property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#rows
-func (v *VolumeBasedPanel) SetRows(rows *int) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(rows.JSObject())
+func (v *VolumeBasedPanel) SetRows(rows int) *VolumeBasedPanel {
+	p := ba.ctx.Get("VolumeBasedPanel").New(rows)
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 

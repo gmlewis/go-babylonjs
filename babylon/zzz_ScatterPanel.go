@@ -217,16 +217,16 @@ func (s *ScatterPanel) SetChildren(children []*Control3D) *ScatterPanel {
 // Columns returns the Columns property of class ScatterPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#columns
-func (s *ScatterPanel) Columns(columns *int) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(columns.JSObject())
+func (s *ScatterPanel) Columns(columns int) *ScatterPanel {
+	p := ba.ctx.Get("ScatterPanel").New(columns)
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
 // SetColumns sets the Columns property of class ScatterPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#columns
-func (s *ScatterPanel) SetColumns(columns *int) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(columns.JSObject())
+func (s *ScatterPanel) SetColumns(columns int) *ScatterPanel {
+	p := ba.ctx.Get("ScatterPanel").New(columns)
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
@@ -601,16 +601,16 @@ func (s *ScatterPanel) SetPosition(position *Vector3) *ScatterPanel {
 // Rows returns the Rows property of class ScatterPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#rows
-func (s *ScatterPanel) Rows(rows *int) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(rows.JSObject())
+func (s *ScatterPanel) Rows(rows int) *ScatterPanel {
+	p := ba.ctx.Get("ScatterPanel").New(rows)
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
 // SetRows sets the Rows property of class ScatterPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#rows
-func (s *ScatterPanel) SetRows(rows *int) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(rows.JSObject())
+func (s *ScatterPanel) SetRows(rows int) *ScatterPanel {
+	p := ba.ctx.Get("ScatterPanel").New(rows)
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 

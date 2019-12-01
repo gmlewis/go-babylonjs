@@ -48,7 +48,7 @@ type NewBufferOpts struct {
 // NewBuffer returns a new Buffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer
-func (ba *Babylon) NewBuffer(engine interface{}, data []*float64, updatable bool, opts *NewBufferOpts) *Buffer {
+func (ba *Babylon) NewBuffer(engine interface{}, data []float64, updatable bool, opts *NewBufferOpts) *Buffer {
 	if opts == nil {
 		opts = &NewBufferOpts{}
 	}
@@ -107,7 +107,7 @@ func (b *Buffer) Create(opts *BufferCreateOpts) {
 	if opts.Data == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Data.JSObject())
+		args = append(args, opts.Data)
 	}
 
 	b.p.Call("create", args...)
@@ -180,12 +180,12 @@ func (b *Buffer) GetBuffer() *DataBuffer {
 // GetData calls the GetData method on the Buffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer#getdata
-func (b *Buffer) GetData() []*float64 {
+func (b *Buffer) GetData() []float64 {
 
 	retVal := b.p.Call("getData")
-	result := []*float64{}
+	result := []float64{}
 	for ri := 0; ri < retVal.Length(); ri++ {
-		result = append(result, float64FromJSObject(retVal.Index(ri), b.ctx))
+		result = append(result, retVal.Index(ri).Float())
 	}
 	return result
 }
@@ -211,11 +211,11 @@ func (b *Buffer) IsUpdatable() bool {
 // Update calls the Update method on the Buffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer#update
-func (b *Buffer) Update(data []*float64) {
+func (b *Buffer) Update(data []float64) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, float64ArrayToJSArray(data))
+	args = append(args, data)
 
 	b.p.Call("update", args...)
 }
@@ -229,14 +229,14 @@ type BufferUpdateDirectlyOpts struct {
 // UpdateDirectly calls the UpdateDirectly method on the Buffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer#updatedirectly
-func (b *Buffer) UpdateDirectly(data []*float64, offset float64, opts *BufferUpdateDirectlyOpts) {
+func (b *Buffer) UpdateDirectly(data []float64, offset float64, opts *BufferUpdateDirectlyOpts) {
 	if opts == nil {
 		opts = &BufferUpdateDirectlyOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, float64ArrayToJSArray(data))
+	args = append(args, data)
 	args = append(args, offset)
 
 	if opts.VertexCount == nil {

@@ -9,7 +9,7 @@ import (
 // IAccessor represents a babylon.js IAccessor.
 // Loader interface with additional members.
 type IAccessor struct {
-	*IAccessor
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IAccessor() *IAccessor {
 
 // IAccessorFromJSObject returns a wrapped IAccessor JavaScript class.
 func IAccessorFromJSObject(p js.Value, ctx js.Value) *IAccessor {
-	return &IAccessor{IAccessor: IAccessorFromJSObject(p, ctx), ctx: ctx}
+	return &IAccessor{p: p, ctx: ctx}
 }
 
 // IAccessorArrayToJSArray returns a JavaScript Array for the wrapped array.

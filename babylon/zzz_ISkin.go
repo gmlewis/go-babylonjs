@@ -9,7 +9,7 @@ import (
 // ISkin represents a babylon.js ISkin.
 // Loader interface with additional members.
 type ISkin struct {
-	*ISkin
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) ISkin() *ISkin {
 
 // ISkinFromJSObject returns a wrapped ISkin JavaScript class.
 func ISkinFromJSObject(p js.Value, ctx js.Value) *ISkin {
-	return &ISkin{ISkin: ISkinFromJSObject(p, ctx), ctx: ctx}
+	return &ISkin{p: p, ctx: ctx}
 }
 
 // ISkinArrayToJSArray returns a JavaScript Array for the wrapped array.

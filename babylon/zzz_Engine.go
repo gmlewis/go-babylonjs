@@ -472,11 +472,11 @@ func (e *Engine) CreateDynamicUniformBuffer(elements js.Value) *DataBuffer {
 // CreateDynamicVertexBuffer calls the CreateDynamicVertexBuffer method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createdynamicvertexbuffer
-func (e *Engine) CreateDynamicVertexBuffer(data []*float64) *DataBuffer {
+func (e *Engine) CreateDynamicVertexBuffer(data []float64) *DataBuffer {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, float64ArrayToJSArray(data))
+	args = append(args, data)
 
 	retVal := e.p.Call("createDynamicVertexBuffer", args...)
 	return DataBufferFromJSObject(retVal, e.ctx)
@@ -1037,11 +1037,11 @@ func (e *Engine) CreateUniformBuffer(elements js.Value) *DataBuffer {
 // CreateVertexBuffer calls the CreateVertexBuffer method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createvertexbuffer
-func (e *Engine) CreateVertexBuffer(data []*float64) *DataBuffer {
+func (e *Engine) CreateVertexBuffer(data []float64) *DataBuffer {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, float64ArrayToJSArray(data))
+	args = append(args, data)
 
 	retVal := e.p.Call("createVertexBuffer", args...)
 	return DataBufferFromJSObject(retVal, e.ctx)
@@ -1331,14 +1331,14 @@ func (e *Engine) EndOcclusionQuery(algorithmType float64) *Engine {
 // EndTimeQuery calls the EndTimeQuery method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#endtimequery
-func (e *Engine) EndTimeQuery(token js.Value) *int {
+func (e *Engine) EndTimeQuery(token js.Value) int {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, token)
 
 	retVal := e.p.Call("endTimeQuery", args...)
-	return intFromJSObject(retVal, e.ctx)
+	return retVal.Int()
 }
 
 // EndTransformFeedback calls the EndTransformFeedback method on the Engine object.
@@ -2760,11 +2760,11 @@ func (e *Engine) SetTextureArray(channel float64, uniform js.Value, textures *Ba
 // SetTextureFormatToUse calls the SetTextureFormatToUse method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#settextureformattouse
-func (e *Engine) SetTextureFormatToUse(formatsAvailable []*string) string {
+func (e *Engine) SetTextureFormatToUse(formatsAvailable []string) string {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, stringArrayToJSArray(formatsAvailable))
+	args = append(args, formatsAvailable)
 
 	retVal := e.p.Call("setTextureFormatToUse", args...)
 	return retVal.String()
@@ -3096,7 +3096,7 @@ type EngineUpdateDynamicVertexBufferOpts struct {
 // UpdateDynamicVertexBuffer calls the UpdateDynamicVertexBuffer method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#updatedynamicvertexbuffer
-func (e *Engine) UpdateDynamicVertexBuffer(vertexBuffer *DataBuffer, data []*float64, opts *EngineUpdateDynamicVertexBufferOpts) {
+func (e *Engine) UpdateDynamicVertexBuffer(vertexBuffer *DataBuffer, data []float64, opts *EngineUpdateDynamicVertexBufferOpts) {
 	if opts == nil {
 		opts = &EngineUpdateDynamicVertexBufferOpts{}
 	}
@@ -3104,7 +3104,7 @@ func (e *Engine) UpdateDynamicVertexBuffer(vertexBuffer *DataBuffer, data []*flo
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, vertexBuffer.JSObject())
-	args = append(args, float64ArrayToJSArray(data))
+	args = append(args, data)
 
 	if opts.ByteOffset == nil {
 		args = append(args, js.Undefined())
@@ -5845,7 +5845,7 @@ func (e *Engine) SetTextureFormatInUse(textureFormatInUse string) *Engine {
 // TexturesSupported returns the TexturesSupported property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturessupported
-func (e *Engine) TexturesSupported(texturesSupported []*string) *Engine {
+func (e *Engine) TexturesSupported(texturesSupported []string) *Engine {
 	p := ba.ctx.Get("Engine").New(texturesSupported)
 	return EngineFromJSObject(p, ba.ctx)
 }
@@ -5853,7 +5853,7 @@ func (e *Engine) TexturesSupported(texturesSupported []*string) *Engine {
 // SetTexturesSupported sets the TexturesSupported property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturessupported
-func (e *Engine) SetTexturesSupported(texturesSupported []*string) *Engine {
+func (e *Engine) SetTexturesSupported(texturesSupported []string) *Engine {
 	p := ba.ctx.Get("Engine").New(texturesSupported)
 	return EngineFromJSObject(p, ba.ctx)
 }

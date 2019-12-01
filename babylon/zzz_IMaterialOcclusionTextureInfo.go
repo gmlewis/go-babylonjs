@@ -9,7 +9,7 @@ import (
 // IMaterialOcclusionTextureInfo represents a babylon.js IMaterialOcclusionTextureInfo.
 // Loader interface with additional members.
 type IMaterialOcclusionTextureInfo struct {
-	*IMaterialOcclusionTextureInfo
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IMaterialOcclusionTextureInfo() *IMaterialOcclusionTextureInf
 
 // IMaterialOcclusionTextureInfoFromJSObject returns a wrapped IMaterialOcclusionTextureInfo JavaScript class.
 func IMaterialOcclusionTextureInfoFromJSObject(p js.Value, ctx js.Value) *IMaterialOcclusionTextureInfo {
-	return &IMaterialOcclusionTextureInfo{IMaterialOcclusionTextureInfo: IMaterialOcclusionTextureInfoFromJSObject(p, ctx), ctx: ctx}
+	return &IMaterialOcclusionTextureInfo{p: p, ctx: ctx}
 }
 
 // IMaterialOcclusionTextureInfoArrayToJSArray returns a JavaScript Array for the wrapped array.

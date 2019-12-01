@@ -167,16 +167,16 @@ func (b *Button3D) SetContent(content *Control) *Button3D {
 // ContentResolution returns the ContentResolution property of class Button3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button3d#contentresolution
-func (b *Button3D) ContentResolution(contentResolution *int) *Button3D {
-	p := ba.ctx.Get("Button3D").New(contentResolution.JSObject())
+func (b *Button3D) ContentResolution(contentResolution int) *Button3D {
+	p := ba.ctx.Get("Button3D").New(contentResolution)
 	return Button3DFromJSObject(p, ba.ctx)
 }
 
 // SetContentResolution sets the ContentResolution property of class Button3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button3d#contentresolution
-func (b *Button3D) SetContentResolution(contentResolution *int) *Button3D {
-	p := ba.ctx.Get("Button3D").New(contentResolution.JSObject())
+func (b *Button3D) SetContentResolution(contentResolution int) *Button3D {
+	p := ba.ctx.Get("Button3D").New(contentResolution)
 	return Button3DFromJSObject(p, ba.ctx)
 }
 

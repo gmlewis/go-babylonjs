@@ -9,7 +9,7 @@ import (
 // IBuffer represents a babylon.js IBuffer.
 // Loader interface with additional members.
 type IBuffer struct {
-	*IBuffer
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IBuffer() *IBuffer {
 
 // IBufferFromJSObject returns a wrapped IBuffer JavaScript class.
 func IBufferFromJSObject(p js.Value, ctx js.Value) *IBuffer {
-	return &IBuffer{IBuffer: IBufferFromJSObject(p, ctx), ctx: ctx}
+	return &IBuffer{p: p, ctx: ctx}
 }
 
 // IBufferArrayToJSArray returns a JavaScript Array for the wrapped array.

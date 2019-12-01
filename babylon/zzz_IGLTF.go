@@ -9,7 +9,7 @@ import (
 // IGLTF represents a babylon.js IGLTF.
 // Loader interface with additional members.
 type IGLTF struct {
-	*IGLTF
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IGLTF() *IGLTF {
 
 // IGLTFFromJSObject returns a wrapped IGLTF JavaScript class.
 func IGLTFFromJSObject(p js.Value, ctx js.Value) *IGLTF {
-	return &IGLTF{IGLTF: IGLTFFromJSObject(p, ctx), ctx: ctx}
+	return &IGLTF{p: p, ctx: ctx}
 }
 
 // IGLTFArrayToJSArray returns a JavaScript Array for the wrapped array.

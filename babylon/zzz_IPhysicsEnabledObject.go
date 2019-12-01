@@ -137,16 +137,16 @@ func (i *IPhysicsEnabledObject) GetScene() *Scene {
 // GetVerticesData calls the GetVerticesData method on the IPhysicsEnabledObject object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#getverticesdata
-func (i *IPhysicsEnabledObject) GetVerticesData(kind string) []*float64 {
+func (i *IPhysicsEnabledObject) GetVerticesData(kind string) []float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, kind)
 
 	retVal := i.p.Call("getVerticesData", args...)
-	result := []*float64{}
+	result := []float64{}
 	for ri := 0; ri < retVal.Length(); ri++ {
-		result = append(result, float64FromJSObject(retVal.Index(ri), i.ctx))
+		result = append(result, retVal.Index(ri).Float())
 	}
 	return result
 }

@@ -9,7 +9,7 @@ import (
 // IAnimation represents a babylon.js IAnimation.
 // Loader interface with additional members.
 type IAnimation struct {
-	*IAnimation
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IAnimation() *IAnimation {
 
 // IAnimationFromJSObject returns a wrapped IAnimation JavaScript class.
 func IAnimationFromJSObject(p js.Value, ctx js.Value) *IAnimation {
-	return &IAnimation{IAnimation: IAnimationFromJSObject(p, ctx), ctx: ctx}
+	return &IAnimation{p: p, ctx: ctx}
 }
 
 // IAnimationArrayToJSArray returns a JavaScript Array for the wrapped array.

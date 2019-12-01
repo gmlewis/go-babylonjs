@@ -9,7 +9,7 @@ import (
 // IMeshPrimitive represents a babylon.js IMeshPrimitive.
 // Loader interface with additional members.
 type IMeshPrimitive struct {
-	*IMeshPrimitive
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IMeshPrimitive() *IMeshPrimitive {
 
 // IMeshPrimitiveFromJSObject returns a wrapped IMeshPrimitive JavaScript class.
 func IMeshPrimitiveFromJSObject(p js.Value, ctx js.Value) *IMeshPrimitive {
-	return &IMeshPrimitive{IMeshPrimitive: IMeshPrimitiveFromJSObject(p, ctx), ctx: ctx}
+	return &IMeshPrimitive{p: p, ctx: ctx}
 }
 
 // IMeshPrimitiveArrayToJSArray returns a JavaScript Array for the wrapped array.

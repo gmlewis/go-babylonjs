@@ -476,7 +476,7 @@ func (m *MultiLine) SetColor(color string) *MultiLine {
 // Dash returns the Dash property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#dash
-func (m *MultiLine) Dash(dash []*float64) *MultiLine {
+func (m *MultiLine) Dash(dash []float64) *MultiLine {
 	p := ba.ctx.Get("MultiLine").New(dash)
 	return MultiLineFromJSObject(p, ba.ctx)
 }
@@ -484,7 +484,7 @@ func (m *MultiLine) Dash(dash []*float64) *MultiLine {
 // SetDash sets the Dash property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#dash
-func (m *MultiLine) SetDash(dash []*float64) *MultiLine {
+func (m *MultiLine) SetDash(dash []float64) *MultiLine {
 	p := ba.ctx.Get("MultiLine").New(dash)
 	return MultiLineFromJSObject(p, ba.ctx)
 }

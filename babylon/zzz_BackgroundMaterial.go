@@ -1122,16 +1122,16 @@ func (b *BackgroundMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *Ba
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#maxsimultaneouslights
-func (b *BackgroundMaterial) MaxSimultaneousLights(maxSimultaneousLights *int) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(maxSimultaneousLights.JSObject())
+func (b *BackgroundMaterial) MaxSimultaneousLights(maxSimultaneousLights int) *BackgroundMaterial {
+	p := ba.ctx.Get("BackgroundMaterial").New(maxSimultaneousLights)
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#maxsimultaneouslights
-func (b *BackgroundMaterial) SetMaxSimultaneousLights(maxSimultaneousLights *int) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(maxSimultaneousLights.JSObject())
+func (b *BackgroundMaterial) SetMaxSimultaneousLights(maxSimultaneousLights int) *BackgroundMaterial {
+	p := ba.ctx.Get("BackgroundMaterial").New(maxSimultaneousLights)
 	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 

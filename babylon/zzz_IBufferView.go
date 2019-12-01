@@ -9,7 +9,7 @@ import (
 // IBufferView represents a babylon.js IBufferView.
 // Loader interface with additional members.
 type IBufferView struct {
-	*IBufferView
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IBufferView() *IBufferView {
 
 // IBufferViewFromJSObject returns a wrapped IBufferView JavaScript class.
 func IBufferViewFromJSObject(p js.Value, ctx js.Value) *IBufferView {
-	return &IBufferView{IBufferView: IBufferViewFromJSObject(p, ctx), ctx: ctx}
+	return &IBufferView{p: p, ctx: ctx}
 }
 
 // IBufferViewArrayToJSArray returns a JavaScript Array for the wrapped array.

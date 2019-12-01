@@ -9,7 +9,7 @@ import (
 // IMaterial represents a babylon.js IMaterial.
 // Loader interface with additional members.
 type IMaterial struct {
-	*IMaterial
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IMaterial() *IMaterial {
 
 // IMaterialFromJSObject returns a wrapped IMaterial JavaScript class.
 func IMaterialFromJSObject(p js.Value, ctx js.Value) *IMaterial {
-	return &IMaterial{IMaterial: IMaterialFromJSObject(p, ctx), ctx: ctx}
+	return &IMaterial{p: p, ctx: ctx}
 }
 
 // IMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.

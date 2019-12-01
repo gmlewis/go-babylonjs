@@ -9,7 +9,7 @@ import (
 // ITextureInfo represents a babylon.js ITextureInfo.
 // Loader interface with additional members.
 type ITextureInfo struct {
-	*ITextureInfo
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) ITextureInfo() *ITextureInfo {
 
 // ITextureInfoFromJSObject returns a wrapped ITextureInfo JavaScript class.
 func ITextureInfoFromJSObject(p js.Value, ctx js.Value) *ITextureInfo {
-	return &ITextureInfo{ITextureInfo: ITextureInfoFromJSObject(p, ctx), ctx: ctx}
+	return &ITextureInfo{p: p, ctx: ctx}
 }
 
 // ITextureInfoArrayToJSArray returns a JavaScript Array for the wrapped array.

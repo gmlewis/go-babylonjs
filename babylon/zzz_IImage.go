@@ -9,7 +9,7 @@ import (
 // IImage represents a babylon.js IImage.
 // Loader interface with additional members.
 type IImage struct {
-	*IImage
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IImage() *IImage {
 
 // IImageFromJSObject returns a wrapped IImage JavaScript class.
 func IImageFromJSObject(p js.Value, ctx js.Value) *IImage {
-	return &IImage{IImage: IImageFromJSObject(p, ctx), ctx: ctx}
+	return &IImage{p: p, ctx: ctx}
 }
 
 // IImageArrayToJSArray returns a JavaScript Array for the wrapped array.

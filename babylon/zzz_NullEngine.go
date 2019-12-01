@@ -870,14 +870,14 @@ func (n *NullEngine) EndOcclusionQuery(algorithmType float64) *Engine {
 // EndTimeQuery calls the EndTimeQuery method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#endtimequery
-func (n *NullEngine) EndTimeQuery(token js.Value) *int {
+func (n *NullEngine) EndTimeQuery(token js.Value) int {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, token)
 
 	retVal := n.p.Call("endTimeQuery", args...)
-	return intFromJSObject(retVal, n.ctx)
+	return retVal.Int()
 }
 
 // EndTransformFeedback calls the EndTransformFeedback method on the NullEngine object.
@@ -2086,11 +2086,11 @@ func (n *NullEngine) SetStencilOperationPass(operation float64) {
 // SetTextureFormatToUse calls the SetTextureFormatToUse method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#settextureformattouse
-func (n *NullEngine) SetTextureFormatToUse(formatsAvailable []*string) string {
+func (n *NullEngine) SetTextureFormatToUse(formatsAvailable []string) string {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, stringArrayToJSArray(formatsAvailable))
+	args = append(args, formatsAvailable)
 
 	retVal := n.p.Call("setTextureFormatToUse", args...)
 	return retVal.String()

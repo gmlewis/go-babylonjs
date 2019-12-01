@@ -57,7 +57,7 @@ func (i *IGLTFValidationOptions) SetExternalResourceFunction(externalResourceFun
 // IgnoredIssues returns the IgnoredIssues property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#ignoredissues
-func (i *IGLTFValidationOptions) IgnoredIssues(ignoredIssues []*string) *IGLTFValidationOptions {
+func (i *IGLTFValidationOptions) IgnoredIssues(ignoredIssues []string) *IGLTFValidationOptions {
 	p := ba.ctx.Get("IGLTFValidationOptions").New(ignoredIssues)
 	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
 }
@@ -65,7 +65,7 @@ func (i *IGLTFValidationOptions) IgnoredIssues(ignoredIssues []*string) *IGLTFVa
 // SetIgnoredIssues sets the IgnoredIssues property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#ignoredissues
-func (i *IGLTFValidationOptions) SetIgnoredIssues(ignoredIssues []*string) *IGLTFValidationOptions {
+func (i *IGLTFValidationOptions) SetIgnoredIssues(ignoredIssues []string) *IGLTFValidationOptions {
 	p := ba.ctx.Get("IGLTFValidationOptions").New(ignoredIssues)
 	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
 }

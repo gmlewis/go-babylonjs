@@ -656,10 +656,10 @@ func (s *Scene) ClearCachedVertexData() {
 // CollisionCoordinatorFactory calls the CollisionCoordinatorFactory method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#collisioncoordinatorfactory
-func (s *Scene) CollisionCoordinatorFactory() *ICollisionCoordinator {
+func (s *Scene) CollisionCoordinatorFactory() js.Value {
 
 	retVal := s.p.Call("CollisionCoordinatorFactory")
-	return ICollisionCoordinatorFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // SceneCreateDefaultCameraOpts contains optional parameters for Scene.CreateDefaultCamera.

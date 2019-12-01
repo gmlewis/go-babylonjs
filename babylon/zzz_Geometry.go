@@ -618,7 +618,7 @@ type GeometryUpdateVerticesDataDirectlyOpts struct {
 // UpdateVerticesDataDirectly calls the UpdateVerticesDataDirectly method on the Geometry object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#updateverticesdatadirectly
-func (g *Geometry) UpdateVerticesDataDirectly(kind string, data []*float64, offset float64, opts *GeometryUpdateVerticesDataDirectlyOpts) {
+func (g *Geometry) UpdateVerticesDataDirectly(kind string, data []float64, offset float64, opts *GeometryUpdateVerticesDataDirectlyOpts) {
 	if opts == nil {
 		opts = &GeometryUpdateVerticesDataDirectlyOpts{}
 	}
@@ -626,7 +626,7 @@ func (g *Geometry) UpdateVerticesDataDirectly(kind string, data []*float64, offs
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, kind)
-	args = append(args, float64ArrayToJSArray(data))
+	args = append(args, data)
 	args = append(args, offset)
 
 	if opts.UseBytes == nil {

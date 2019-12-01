@@ -217,16 +217,16 @@ func (p *PlanePanel) SetChildren(children []*Control3D) *PlanePanel {
 // Columns returns the Columns property of class PlanePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#columns
-func (p *PlanePanel) Columns(columns *int) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(columns.JSObject())
+func (p *PlanePanel) Columns(columns int) *PlanePanel {
+	p := ba.ctx.Get("PlanePanel").New(columns)
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
 // SetColumns sets the Columns property of class PlanePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#columns
-func (p *PlanePanel) SetColumns(columns *int) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(columns.JSObject())
+func (p *PlanePanel) SetColumns(columns int) *PlanePanel {
+	p := ba.ctx.Get("PlanePanel").New(columns)
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
@@ -585,16 +585,16 @@ func (p *PlanePanel) SetPosition(position *Vector3) *PlanePanel {
 // Rows returns the Rows property of class PlanePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#rows
-func (p *PlanePanel) Rows(rows *int) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(rows.JSObject())
+func (p *PlanePanel) Rows(rows int) *PlanePanel {
+	p := ba.ctx.Get("PlanePanel").New(rows)
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 
 // SetRows sets the Rows property of class PlanePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel#rows
-func (p *PlanePanel) SetRows(rows *int) *PlanePanel {
-	p := ba.ctx.Get("PlanePanel").New(rows.JSObject())
+func (p *PlanePanel) SetRows(rows int) *PlanePanel {
+	p := ba.ctx.Get("PlanePanel").New(rows)
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
 

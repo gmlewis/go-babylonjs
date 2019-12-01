@@ -54,7 +54,7 @@ func (e *EnvironmentTextureTools) CreateEnvTextureAsync(texture *CubeTexture) *P
 // CreateImageDataArrayBufferViews calls the CreateImageDataArrayBufferViews method on the EnvironmentTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#createimagedataarraybufferviews
-func (e *EnvironmentTextureTools) CreateImageDataArrayBufferViews(arrayBuffer interface{}, info js.Value) []*[]ArrayBufferView {
+func (e *EnvironmentTextureTools) CreateImageDataArrayBufferViews(arrayBuffer interface{}, info js.Value) js.Value /* [][]ArrayBufferView */ {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -62,11 +62,7 @@ func (e *EnvironmentTextureTools) CreateImageDataArrayBufferViews(arrayBuffer in
 	args = append(args, info)
 
 	retVal := e.p.Call("CreateImageDataArrayBufferViews", args...)
-	result := []*[]ArrayBufferView{}
-	for ri := 0; ri < retVal.Length(); ri++ {
-		result = append(result, []ArrayBufferViewFromJSObject(retVal.Index(ri), e.ctx))
-	}
-	return result
+	return retVal
 }
 
 // GetEnvInfo calls the GetEnvInfo method on the EnvironmentTextureTools object.

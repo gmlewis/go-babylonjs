@@ -96,12 +96,12 @@ func (w *WebXRController) GetWorldPointerRayToRef(result *Ray) {
 // UpdateFromXRFrame calls the UpdateFromXRFrame method on the WebXRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#updatefromxrframe
-func (w *WebXRController) UpdateFromXRFrame(xrFrame *XRFrame, referenceSpace *XRReferenceSpace) {
+func (w *WebXRController) UpdateFromXRFrame(xrFrame js.Value, referenceSpace js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, xrFrame.JSObject())
-	args = append(args, referenceSpace.JSObject())
+	args = append(args, xrFrame)
+	args = append(args, referenceSpace)
 
 	w.p.Call("updateFromXRFrame", args...)
 }

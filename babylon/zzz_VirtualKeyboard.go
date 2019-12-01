@@ -76,25 +76,25 @@ func (v *VirtualKeyboard) AddControl(control *Control) *Container {
 
 // VirtualKeyboardAddKeysRowOpts contains optional parameters for VirtualKeyboard.AddKeysRow.
 type VirtualKeyboardAddKeysRowOpts struct {
-	PropertySets []KeyPropertySet
+	PropertySets []js.Value
 }
 
 // AddKeysRow calls the AddKeysRow method on the VirtualKeyboard object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#addkeysrow
-func (v *VirtualKeyboard) AddKeysRow(keys []*string, opts *VirtualKeyboardAddKeysRowOpts) {
+func (v *VirtualKeyboard) AddKeysRow(keys []string, opts *VirtualKeyboardAddKeysRowOpts) {
 	if opts == nil {
 		opts = &VirtualKeyboardAddKeysRowOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, stringArrayToJSArray(keys))
+	args = append(args, keys)
 
 	if opts.PropertySets == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.PropertySets.JSObject())
+		args = append(args, opts.PropertySets)
 	}
 
 	v.p.Call("addKeysRow", args...)

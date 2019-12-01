@@ -189,16 +189,16 @@ func (h *HolographicButton) SetContent(content *Control) *HolographicButton {
 // ContentResolution returns the ContentResolution property of class HolographicButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#contentresolution
-func (h *HolographicButton) ContentResolution(contentResolution *int) *HolographicButton {
-	p := ba.ctx.Get("HolographicButton").New(contentResolution.JSObject())
+func (h *HolographicButton) ContentResolution(contentResolution int) *HolographicButton {
+	p := ba.ctx.Get("HolographicButton").New(contentResolution)
 	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 
 // SetContentResolution sets the ContentResolution property of class HolographicButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton#contentresolution
-func (h *HolographicButton) SetContentResolution(contentResolution *int) *HolographicButton {
-	p := ba.ctx.Get("HolographicButton").New(contentResolution.JSObject())
+func (h *HolographicButton) SetContentResolution(contentResolution int) *HolographicButton {
+	p := ba.ctx.Get("HolographicButton").New(contentResolution)
 	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 

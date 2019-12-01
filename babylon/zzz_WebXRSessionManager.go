@@ -71,11 +71,11 @@ func (w *WebXRSessionManager) ExitXRAsync() *Promise {
 // GetRenderTargetTextureForEye calls the GetRenderTargetTextureForEye method on the WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#getrendertargettextureforeye
-func (w *WebXRSessionManager) GetRenderTargetTextureForEye(eye *XREye) *RenderTargetTexture {
+func (w *WebXRSessionManager) GetRenderTargetTextureForEye(eye js.Value) *RenderTargetTexture {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, eye.JSObject())
+	args = append(args, eye)
 
 	retVal := w.p.Call("getRenderTargetTextureForEye", args...)
 	return RenderTargetTextureFromJSObject(retVal, w.ctx)
@@ -199,11 +199,11 @@ func (w *WebXRSessionManager) SupportsSessionAsync(sessionMode js.Value) *Promis
 // UpdateRenderStateAsync calls the UpdateRenderStateAsync method on the WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#updaterenderstateasync
-func (w *WebXRSessionManager) UpdateRenderStateAsync(state *XRRenderState) *Promise {
+func (w *WebXRSessionManager) UpdateRenderStateAsync(state js.Value) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, state.JSObject())
+	args = append(args, state)
 
 	retVal := w.p.Call("updateRenderStateAsync", args...)
 	return PromiseFromJSObject(retVal, w.ctx)
@@ -214,16 +214,16 @@ func (w *WebXRSessionManager) UpdateRenderStateAsync(state *XRRenderState) *Prom
 // CurrentFrame returns the CurrentFrame property of class WebXRSessionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#currentframe
-func (w *WebXRSessionManager) CurrentFrame(currentFrame *XRFrame) *WebXRSessionManager {
-	p := ba.ctx.Get("WebXRSessionManager").New(currentFrame.JSObject())
+func (w *WebXRSessionManager) CurrentFrame(currentFrame js.Value) *WebXRSessionManager {
+	p := ba.ctx.Get("WebXRSessionManager").New(currentFrame)
 	return WebXRSessionManagerFromJSObject(p, ba.ctx)
 }
 
 // SetCurrentFrame sets the CurrentFrame property of class WebXRSessionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#currentframe
-func (w *WebXRSessionManager) SetCurrentFrame(currentFrame *XRFrame) *WebXRSessionManager {
-	p := ba.ctx.Get("WebXRSessionManager").New(currentFrame.JSObject())
+func (w *WebXRSessionManager) SetCurrentFrame(currentFrame js.Value) *WebXRSessionManager {
+	p := ba.ctx.Get("WebXRSessionManager").New(currentFrame)
 	return WebXRSessionManagerFromJSObject(p, ba.ctx)
 }
 
@@ -262,32 +262,32 @@ func (w *WebXRSessionManager) SetOnXRSessionEnded(onXRSessionEnded *Observable) 
 // ReferenceSpace returns the ReferenceSpace property of class WebXRSessionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#referencespace
-func (w *WebXRSessionManager) ReferenceSpace(referenceSpace *XRReferenceSpace) *WebXRSessionManager {
-	p := ba.ctx.Get("WebXRSessionManager").New(referenceSpace.JSObject())
+func (w *WebXRSessionManager) ReferenceSpace(referenceSpace js.Value) *WebXRSessionManager {
+	p := ba.ctx.Get("WebXRSessionManager").New(referenceSpace)
 	return WebXRSessionManagerFromJSObject(p, ba.ctx)
 }
 
 // SetReferenceSpace sets the ReferenceSpace property of class WebXRSessionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#referencespace
-func (w *WebXRSessionManager) SetReferenceSpace(referenceSpace *XRReferenceSpace) *WebXRSessionManager {
-	p := ba.ctx.Get("WebXRSessionManager").New(referenceSpace.JSObject())
+func (w *WebXRSessionManager) SetReferenceSpace(referenceSpace js.Value) *WebXRSessionManager {
+	p := ba.ctx.Get("WebXRSessionManager").New(referenceSpace)
 	return WebXRSessionManagerFromJSObject(p, ba.ctx)
 }
 
 // Session returns the Session property of class WebXRSessionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#session
-func (w *WebXRSessionManager) Session(session *XRSession) *WebXRSessionManager {
-	p := ba.ctx.Get("WebXRSessionManager").New(session.JSObject())
+func (w *WebXRSessionManager) Session(session js.Value) *WebXRSessionManager {
+	p := ba.ctx.Get("WebXRSessionManager").New(session)
 	return WebXRSessionManagerFromJSObject(p, ba.ctx)
 }
 
 // SetSession sets the Session property of class WebXRSessionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#session
-func (w *WebXRSessionManager) SetSession(session *XRSession) *WebXRSessionManager {
-	p := ba.ctx.Get("WebXRSessionManager").New(session.JSObject())
+func (w *WebXRSessionManager) SetSession(session js.Value) *WebXRSessionManager {
+	p := ba.ctx.Get("WebXRSessionManager").New(session)
 	return WebXRSessionManagerFromJSObject(p, ba.ctx)
 }
 

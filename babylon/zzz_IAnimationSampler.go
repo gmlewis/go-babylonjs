@@ -9,7 +9,7 @@ import (
 // IAnimationSampler represents a babylon.js IAnimationSampler.
 // Loader interface with additional members.
 type IAnimationSampler struct {
-	*IAnimationSampler
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IAnimationSampler() *IAnimationSampler {
 
 // IAnimationSamplerFromJSObject returns a wrapped IAnimationSampler JavaScript class.
 func IAnimationSamplerFromJSObject(p js.Value, ctx js.Value) *IAnimationSampler {
-	return &IAnimationSampler{IAnimationSampler: IAnimationSamplerFromJSObject(p, ctx), ctx: ctx}
+	return &IAnimationSampler{p: p, ctx: ctx}
 }
 
 // IAnimationSamplerArrayToJSArray returns a JavaScript Array for the wrapped array.

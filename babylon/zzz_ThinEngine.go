@@ -402,11 +402,11 @@ func (t *ThinEngine) CreateDynamicUniformBuffer(elements js.Value) *DataBuffer {
 // CreateDynamicVertexBuffer calls the CreateDynamicVertexBuffer method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createdynamicvertexbuffer
-func (t *ThinEngine) CreateDynamicVertexBuffer(data []*float64) *DataBuffer {
+func (t *ThinEngine) CreateDynamicVertexBuffer(data []float64) *DataBuffer {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, float64ArrayToJSArray(data))
+	args = append(args, data)
 
 	retVal := t.p.Call("createDynamicVertexBuffer", args...)
 	return DataBufferFromJSObject(retVal, t.ctx)
@@ -925,11 +925,11 @@ func (t *ThinEngine) CreateUniformBuffer(elements js.Value) *DataBuffer {
 // CreateVertexBuffer calls the CreateVertexBuffer method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createvertexbuffer
-func (t *ThinEngine) CreateVertexBuffer(data []*float64) *DataBuffer {
+func (t *ThinEngine) CreateVertexBuffer(data []float64) *DataBuffer {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, float64ArrayToJSArray(data))
+	args = append(args, data)
 
 	retVal := t.p.Call("createVertexBuffer", args...)
 	return DataBufferFromJSObject(retVal, t.ctx)
@@ -2499,7 +2499,7 @@ func (t *ThinEngine) SetTextureFormatInUse(textureFormatInUse string) *ThinEngin
 // TexturesSupported returns the TexturesSupported property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#texturessupported
-func (t *ThinEngine) TexturesSupported(texturesSupported []*string) *ThinEngine {
+func (t *ThinEngine) TexturesSupported(texturesSupported []string) *ThinEngine {
 	p := ba.ctx.Get("ThinEngine").New(texturesSupported)
 	return ThinEngineFromJSObject(p, ba.ctx)
 }
@@ -2507,7 +2507,7 @@ func (t *ThinEngine) TexturesSupported(texturesSupported []*string) *ThinEngine 
 // SetTexturesSupported sets the TexturesSupported property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#texturessupported
-func (t *ThinEngine) SetTexturesSupported(texturesSupported []*string) *ThinEngine {
+func (t *ThinEngine) SetTexturesSupported(texturesSupported []string) *ThinEngine {
 	p := ba.ctx.Get("ThinEngine").New(texturesSupported)
 	return ThinEngineFromJSObject(p, ba.ctx)
 }

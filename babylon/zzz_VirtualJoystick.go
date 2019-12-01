@@ -84,11 +84,11 @@ func (v *VirtualJoystick) SetActionOnTouch(action func()) {
 // SetAxisForLeftRight calls the SetAxisForLeftRight method on the VirtualJoystick object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#setaxisforleftright
-func (v *VirtualJoystick) SetAxisForLeftRight(axis *JoystickAxis) {
+func (v *VirtualJoystick) SetAxisForLeftRight(axis js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, axis.JSObject())
+	args = append(args, axis)
 
 	v.p.Call("setAxisForLeftRight", args...)
 }
@@ -96,11 +96,11 @@ func (v *VirtualJoystick) SetAxisForLeftRight(axis *JoystickAxis) {
 // SetAxisForUpDown calls the SetAxisForUpDown method on the VirtualJoystick object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#setaxisforupdown
-func (v *VirtualJoystick) SetAxisForUpDown(axis *JoystickAxis) {
+func (v *VirtualJoystick) SetAxisForUpDown(axis js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, axis.JSObject())
+	args = append(args, axis)
 
 	v.p.Call("setAxisForUpDown", args...)
 }

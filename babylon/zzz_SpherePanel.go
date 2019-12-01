@@ -217,16 +217,16 @@ func (s *SpherePanel) SetChildren(children []*Control3D) *SpherePanel {
 // Columns returns the Columns property of class SpherePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#columns
-func (s *SpherePanel) Columns(columns *int) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(columns.JSObject())
+func (s *SpherePanel) Columns(columns int) *SpherePanel {
+	p := ba.ctx.Get("SpherePanel").New(columns)
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
 // SetColumns sets the Columns property of class SpherePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#columns
-func (s *SpherePanel) SetColumns(columns *int) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(columns.JSObject())
+func (s *SpherePanel) SetColumns(columns int) *SpherePanel {
+	p := ba.ctx.Get("SpherePanel").New(columns)
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
@@ -601,16 +601,16 @@ func (s *SpherePanel) SetRadius(radius float64) *SpherePanel {
 // Rows returns the Rows property of class SpherePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#rows
-func (s *SpherePanel) Rows(rows *int) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(rows.JSObject())
+func (s *SpherePanel) Rows(rows int) *SpherePanel {
+	p := ba.ctx.Get("SpherePanel").New(rows)
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
 // SetRows sets the Rows property of class SpherePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#rows
-func (s *SpherePanel) SetRows(rows *int) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(rows.JSObject())
+func (s *SpherePanel) SetRows(rows int) *SpherePanel {
+	p := ba.ctx.Get("SpherePanel").New(rows)
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 

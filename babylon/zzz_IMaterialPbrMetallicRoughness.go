@@ -9,7 +9,7 @@ import (
 // IMaterialPbrMetallicRoughness represents a babylon.js IMaterialPbrMetallicRoughness.
 // Loader interface with additional members.
 type IMaterialPbrMetallicRoughness struct {
-	*IMaterialPbrMetallicRoughness
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IMaterialPbrMetallicRoughness() *IMaterialPbrMetallicRoughnes
 
 // IMaterialPbrMetallicRoughnessFromJSObject returns a wrapped IMaterialPbrMetallicRoughness JavaScript class.
 func IMaterialPbrMetallicRoughnessFromJSObject(p js.Value, ctx js.Value) *IMaterialPbrMetallicRoughness {
-	return &IMaterialPbrMetallicRoughness{IMaterialPbrMetallicRoughness: IMaterialPbrMetallicRoughnessFromJSObject(p, ctx), ctx: ctx}
+	return &IMaterialPbrMetallicRoughness{p: p, ctx: ctx}
 }
 
 // IMaterialPbrMetallicRoughnessArrayToJSArray returns a JavaScript Array for the wrapped array.

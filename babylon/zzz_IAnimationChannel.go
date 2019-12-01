@@ -9,7 +9,7 @@ import (
 // IAnimationChannel represents a babylon.js IAnimationChannel.
 // Loader interface with additional members.
 type IAnimationChannel struct {
-	*IAnimationChannel
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IAnimationChannel() *IAnimationChannel {
 
 // IAnimationChannelFromJSObject returns a wrapped IAnimationChannel JavaScript class.
 func IAnimationChannelFromJSObject(p js.Value, ctx js.Value) *IAnimationChannel {
-	return &IAnimationChannel{IAnimationChannel: IAnimationChannelFromJSObject(p, ctx), ctx: ctx}
+	return &IAnimationChannel{p: p, ctx: ctx}
 }
 
 // IAnimationChannelArrayToJSArray returns a JavaScript Array for the wrapped array.

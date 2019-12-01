@@ -9,7 +9,7 @@ import (
 // ICamera represents a babylon.js ICamera.
 // Loader interface with additional members.
 type ICamera struct {
-	*ICamera
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) ICamera() *ICamera {
 
 // ICameraFromJSObject returns a wrapped ICamera JavaScript class.
 func ICameraFromJSObject(p js.Value, ctx js.Value) *ICamera {
-	return &ICamera{ICamera: ICameraFromJSObject(p, ctx), ctx: ctx}
+	return &ICamera{p: p, ctx: ctx}
 }
 
 // ICameraArrayToJSArray returns a JavaScript Array for the wrapped array.

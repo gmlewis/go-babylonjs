@@ -9,7 +9,7 @@ import (
 // IMesh represents a babylon.js IMesh.
 // Loader interface with additional members.
 type IMesh struct {
-	*IMesh
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IMesh() *IMesh {
 
 // IMeshFromJSObject returns a wrapped IMesh JavaScript class.
 func IMeshFromJSObject(p js.Value, ctx js.Value) *IMesh {
-	return &IMesh{IMesh: IMeshFromJSObject(p, ctx), ctx: ctx}
+	return &IMesh{p: p, ctx: ctx}
 }
 
 // IMeshArrayToJSArray returns a JavaScript Array for the wrapped array.

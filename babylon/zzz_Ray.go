@@ -238,7 +238,7 @@ func (r *Ray) IntersectsMesh(mesh *AbstractMesh, opts *RayIntersectsMeshOpts) *P
 // RayIntersectsMeshesOpts contains optional parameters for Ray.IntersectsMeshes.
 type RayIntersectsMeshesOpts struct {
 	FastCheck *bool
-	Results   []PickingInfo
+	Results   []js.Value
 }
 
 // IntersectsMeshes calls the IntersectsMeshes method on the Ray object.
@@ -261,7 +261,7 @@ func (r *Ray) IntersectsMeshes(meshes []*AbstractMesh, opts *RayIntersectsMeshes
 	if opts.Results == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Results.JSObject())
+		args = append(args, opts.Results)
 	}
 
 	retVal := r.p.Call("intersectsMeshes", args...)

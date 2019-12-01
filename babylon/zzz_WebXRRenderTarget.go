@@ -47,11 +47,11 @@ func (w *WebXRRenderTarget) Dispose() {
 // InitializeXRLayerAsync calls the InitializeXRLayerAsync method on the WebXRRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrrendertarget#initializexrlayerasync
-func (w *WebXRRenderTarget) InitializeXRLayerAsync(xrSession *XRSession) *Promise {
+func (w *WebXRRenderTarget) InitializeXRLayerAsync(xrSession js.Value) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, xrSession.JSObject())
+	args = append(args, xrSession)
 
 	retVal := w.p.Call("initializeXRLayerAsync", args...)
 	return PromiseFromJSObject(retVal, w.ctx)

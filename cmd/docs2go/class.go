@@ -132,7 +132,7 @@ func (c *classes) walker() filepath.WalkFunc {
 				log.Fatalf("%v: found %v tsd-hierarchy sections, want 1", filename, len(hierarchySection))
 			}
 			for _, ul := range hierarchySection[0].ULs {
-				if s := ul.GetLI(0).GetA(0).GetInnerXML(); s != "" { // optional
+				if s := ul.GetLI(0).GetA(0).GetInnerXML(); s != "" && s != html.Name { // optional
 					html.Parents = append(html.Parents, s)
 				}
 				if s := ul.GetLI(0).GetUL(0).GetLI(0).GetUL(0).GetLI(0).GetA(0).GetInnerXML(); s != "" { // optional
@@ -858,10 +858,15 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 					case
 						"[]AbstractMesh",
 						"[]IInternalTextureLoader",
+						"[]KeyPropertySet",
+						"[]PickingInfo",
 						"[]Worker":
 						paramType = "[]js.Value"
 					case "string":
 						paramType = "*string"
+						jsName = "*" + jsName
+					case "int":
+						paramType = "*int"
 						jsName = "*" + jsName
 					case "float64":
 						paramType = "*float64"
@@ -869,6 +874,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 					case "bool":
 						paramType = "*bool"
 						jsName = "*" + jsName
+					case "[]float64", "[]string": // leave unmodified, no .JSObject()
 					default:
 						jsName += ".JSObject()"
 					}
@@ -943,7 +949,14 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 			needsJSObject = false
 		}
 
-		if strings.HasPrefix(s.GoReturnType, "[]*") {
+		if strings.HasPrefix(s.GoReturnType, "[]float64") {
+			lines := []string{fmt.Sprintf("result := %v{}", s.GoReturnType)}
+			lines = append(lines, "for ri := 0; ri < retVal.Length(); ri++ {")
+			lines = append(lines, "  result = append(result, retVal.Index(ri).Float())")
+			lines = append(lines, "}")
+			lines = append(lines, "return result")
+			s.GoReturnStatement = strings.Join(lines, "\n")
+		} else if strings.HasPrefix(s.GoReturnType, "[]*") {
 			lines := []string{fmt.Sprintf("result := %v{}", s.GoReturnType)}
 			lines = append(lines, "for ri := 0; ri < retVal.Length(); ri++ {")
 			lines = append(lines, fmt.Sprintf("  result = append(result, %vFromJSObject(retVal.Index(ri), %v.ctx))", s.GoReturnType[3:], receiver(className)))
@@ -954,9 +967,15 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 			s.GoReturnStatement = fmt.Sprintf("return %vFromJSObject(retVal, %v.ctx)", s.GoReturnType, receiver(className))
 			s.GoReturnType = "*" + s.GoReturnType
 		} else {
+			if strings.HasPrefix(s.GoReturnType, "[][]") {
+				s.GoReturnType = fmt.Sprintf("js.Value /* %v */", s.GoReturnType) // Not yet supported
+			}
+
 			switch s.GoReturnType {
 			case "bool":
 				s.GoReturnStatement = "return retVal.Bool()"
+			case "int":
+				s.GoReturnStatement = "return retVal.Int()"
 			case "float64":
 				s.GoReturnStatement = "return retVal.Float()"
 			case "string":
@@ -980,26 +999,38 @@ func jsTypeToGoType(paramType string) (goType string, needsJSObject, needsArrayH
 		return "js.Value", false, false
 	}
 
-	if strings.HasPrefix(paramType, "[]*") {
-		return paramType, false, true
-	}
-
-	if strings.HasPrefix(paramType, "[]") {
-		return "[]*" + paramType[2:], false, true
-	}
-
 	switch paramType {
 	case "any":
 		paramType = "interface{}"
 	case "function", "Function":
 		paramType = "func()"
 	case "string", "float64", "bool", "[]string", "[]float64", "[]bool":
+	case "[]*string":
+		paramType = "[]string"
+	case "[]*float64":
+		paramType = "[]float64"
+	case "[]*bool":
+		paramType = "[]bool"
 	case "void":
 		paramType = ""
 	case "Boolean":
 		paramType = "bool"
+	case "*int", "int":
+		paramType = "int"
 	default:
 		needsJSObject = true
+	}
+
+	if strings.HasPrefix(paramType, "[]*") {
+		return paramType, false, true
+	}
+
+	if strings.HasPrefix(paramType, "[]") && !strings.HasPrefix(paramType, "[][]") && paramType != "[]string" && paramType != "[]float64" && paramType != "[]bool" {
+		return "[]*" + paramType[2:], false, true
+	}
+
+	if strings.HasPrefix(paramType, "[]") {
+		needsJSObject = false
 	}
 
 	return paramType, needsJSObject, false
@@ -1167,9 +1198,7 @@ var unhandledTypes = []string{
 	"DeepImmutable",
 	"DevicePose",
 	"DistanceJointData",
-	"DistanceJointData",
 	"Document",
-	"EffectWrapperCreationOptions",
 	"EffectWrapperCreationOptions",
 	"EngineCapabilities",
 	"EngineOptions",
@@ -1184,42 +1213,11 @@ var unhandledTypes = []string{
 	"HTMLElement",
 	"HTMLImageElement",
 	"HTMLVideoElement",
-	// "IAction",
-	// "IActionEvent",
-	// "IAnimatable",
-	// "IAnimation",
-	// "IArrayItem",
-	// "IBufferView",
-	// "ICamera",
-	// "ICameraInput",
-	// "ICollisionCoordinator",
+	"ICollisionCoordinator",
+	"ICollisionCoordinatorFromJSObject",
 	"IColor3Like",
 	"IColor4Like",
-	// "ICullable",
-	// "IDataBuffer",
-	// "IDataBuffer",
-	// "IDisplayChangedEventArgs",
-	// "IEasingFunction",
-	// "IEffectFallbacks",
-	// "IEffectFallbacks",
-	// "IEffectRendererOptions",
-	// "IEffectRendererOptions",
-	// "IEnvironmentHelperOptions",
-	// "IEnvironmentHelperOptions",
-	// "IExportOptions",
-	// "IFocusableControl",
-	// "IGlowLayerOptions",
-	// "IGlowLayerOptions",
-	// "IHighlightLayerOptions",
-	// "IHighlightLayerOptions",
-	// "IHtmlElementTextureOptions",
-	// "IHtmlElementTextureOptions",
-	// "IImage",
 	"IImageProcessingConfigurationDefines",
-	// "IInspectorOptions",
-	// "IInternalTextureLoader",
-	// "ILoadingScreen",
-	// "IMaterial",
 	"IMaterialAnisotropicDefines",
 	"IMaterialBRDFDefines",
 	"IMaterialClearCoatDefines",
@@ -1227,33 +1225,10 @@ var unhandledTypes = []string{
 	"IMaterialSheenDefines",
 	"IMaterialSubSurfaceDefines",
 	"IMatrixLike",
-	// "IMotorEnabledJoint",
-	// "IMultiRenderTargetOptions",
-	// "IMultiRenderTargetOptions",
-	// "INode",
-	// "INodeMaterialEditorOptions",
-	// "INodeMaterialOptions",
-	// "IOceanPostProcessOptions",
-	// "IOceanPostProcessOptions",
-	// "IParticleSystem",
-	// "IPhysicsEnabledObject",
 	"IPhysicsEnginePlugin",
-	// "IPipelineContext",
 	"IPlaneLike",
-	// "IProperty",
-	// "IScene",
 	"ISceneLike",
-	// "IShaderMaterialOptions",
-	// "IShadowGenerator",
-	// "IShadowLight",
-	// "IShadowLight",
-	// "ISize",
 	"ISmartArrayLike",
-	// "ISoundOptions",
-	// "ISoundTrackOptions",
-	// "ISpriteManager",
-	// "ITextureInfo",
-	// "IValueGradient",
 	"IVector2Like",
 	"IVector3Like",
 	"IVector4Like",
@@ -1263,8 +1238,8 @@ var unhandledTypes = []string{
 	"IndividualBabylonFileParser",
 	"Int32Array",
 	"InternalTextureSource",
-	"InternalTextureSource",
 	"IntersectionInfo",
+	"JoystickAxis",
 	"KeyboardEvent",
 	"MediaStream",
 	"MediaTrackConstraints",
@@ -1272,11 +1247,8 @@ var unhandledTypes = []string{
 	"MeshLoadOptions",
 	"NodeConstructor",
 	"NodeMaterialBlockConnectionPointTypes",
-	"NodeMaterialBlockConnectionPointTypes",
-	"NodeMaterialBlockTargets",
 	"NodeMaterialBlockTargets",
 	"NodeMaterialConnectionPointCompatibilityStates",
-	"NodeMaterialConnectionPointDirection",
 	"NodeMaterialConnectionPointDirection",
 	"NodeMaterialDefines",
 	"NodeMaterialSystemValues",
@@ -1284,7 +1256,6 @@ var unhandledTypes = []string{
 	"PhysicsGravitationalFieldEventData",
 	"PhysicsImpostorJoint",
 	"PhysicsImpostorParameters",
-	"PhysicsJointData",
 	"PhysicsJointData",
 	"PhysicsRadialImpulseFalloff",
 	"PhysicsUpdraftMode",
@@ -1310,15 +1281,67 @@ var unhandledTypes = []string{
 	"WebGLUniformLocation",
 	"WebGLVertexArrayObject",
 	"WebVROptions",
-	"WebVROptions",
 	"WebXRState",
 	"Window",
 	"Worker",
+	"XREye",
+	"XRFrame",
 	"XRInputSource",
+	"XRReferenceSpace",
 	"XRReferenceSpaceType",
+	"XRRenderState",
+	"XRSession",
 	"XRSessionMode",
 	"_InstancesBatch",
 	"_TimeToken",
 	"null",
 	"unknown",
+	// "IAction",
+	// "IActionEvent",
+	// "IAnimatable",
+	// "IAnimation",
+	// "IArrayItem",
+	// "IBufferView",
+	// "ICamera",
+	// "ICameraInput",
+	// "ICollisionCoordinator",
+	// "ICullable",
+	// "IDataBuffer",
+	// "IDisplayChangedEventArgs",
+	// "IEasingFunction",
+	// "IEffectFallbacks",
+	// "IEffectRendererOptions",
+	// "IEnvironmentHelperOptions",
+	// "IExportOptions",
+	// "IFocusableControl",
+	// "IGlowLayerOptions",
+	// "IGlowLayerOptions",
+	// "IHighlightLayerOptions",
+	// "IHighlightLayerOptions",
+	// "IHtmlElementTextureOptions",
+	// "IImage",
+	// "IInspectorOptions",
+	// "IInternalTextureLoader",
+	// "ILoadingScreen",
+	// "IMaterial",
+	// "IMotorEnabledJoint",
+	// "IMultiRenderTargetOptions",
+	// "INode",
+	// "INodeMaterialEditorOptions",
+	// "INodeMaterialOptions",
+	// "IOceanPostProcessOptions",
+	// "IParticleSystem",
+	// "IPhysicsEnabledObject",
+	// "IPipelineContext",
+	// "IProperty",
+	// "IScene",
+	// "IShaderMaterialOptions",
+	// "IShadowGenerator",
+	// "IShadowLight",
+	// "ISize",
+	// "ISoundOptions",
+	// "ISoundTrackOptions",
+	// "ISpriteManager",
+	// "ITextureInfo",
+	// "IValueGradient",
 }

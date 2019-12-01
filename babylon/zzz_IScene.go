@@ -9,7 +9,7 @@ import (
 // IScene represents a babylon.js IScene.
 // Loader interface with additional members.
 type IScene struct {
-	*IScene
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IScene() *IScene {
 
 // ISceneFromJSObject returns a wrapped IScene JavaScript class.
 func ISceneFromJSObject(p js.Value, ctx js.Value) *IScene {
-	return &IScene{IScene: ISceneFromJSObject(p, ctx), ctx: ctx}
+	return &IScene{p: p, ctx: ctx}
 }
 
 // ISceneArrayToJSArray returns a JavaScript Array for the wrapped array.

@@ -439,7 +439,7 @@ func (l *Line) SetConnectedControl(connectedControl *Control) *Line {
 // Dash returns the Dash property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#dash
-func (l *Line) Dash(dash []*float64) *Line {
+func (l *Line) Dash(dash []float64) *Line {
 	p := ba.ctx.Get("Line").New(dash)
 	return LineFromJSObject(p, ba.ctx)
 }
@@ -447,7 +447,7 @@ func (l *Line) Dash(dash []*float64) *Line {
 // SetDash sets the Dash property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#dash
-func (l *Line) SetDash(dash []*float64) *Line {
+func (l *Line) SetDash(dash []float64) *Line {
 	p := ba.ctx.Get("Line").New(dash)
 	return LineFromJSObject(p, ba.ctx)
 }

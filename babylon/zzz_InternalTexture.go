@@ -98,20 +98,20 @@ type InternalTextureUpdateSizeOpts struct {
 // UpdateSize calls the UpdateSize method on the InternalTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#updatesize
-func (i *InternalTexture) UpdateSize(width *int, height *int, opts *InternalTextureUpdateSizeOpts) {
+func (i *InternalTexture) UpdateSize(width int, height int, opts *InternalTextureUpdateSizeOpts) {
 	if opts == nil {
 		opts = &InternalTextureUpdateSizeOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, width.JSObject())
-	args = append(args, height.JSObject())
+	args = append(args, width)
+	args = append(args, height)
 
 	if opts.Depth == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Depth.JSObject())
+		args = append(args, *opts.Depth)
 	}
 
 	i.p.Call("updateSize", args...)

@@ -9,7 +9,7 @@ import (
 // IMaterialNormalTextureInfo represents a babylon.js IMaterialNormalTextureInfo.
 // Loader interface with additional members.
 type IMaterialNormalTextureInfo struct {
-	*IMaterialNormalTextureInfo
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) IMaterialNormalTextureInfo() *IMaterialNormalTextureInfo {
 
 // IMaterialNormalTextureInfoFromJSObject returns a wrapped IMaterialNormalTextureInfo JavaScript class.
 func IMaterialNormalTextureInfoFromJSObject(p js.Value, ctx js.Value) *IMaterialNormalTextureInfo {
-	return &IMaterialNormalTextureInfo{IMaterialNormalTextureInfo: IMaterialNormalTextureInfoFromJSObject(p, ctx), ctx: ctx}
+	return &IMaterialNormalTextureInfo{p: p, ctx: ctx}
 }
 
 // IMaterialNormalTextureInfoArrayToJSArray returns a JavaScript Array for the wrapped array.

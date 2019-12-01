@@ -217,16 +217,16 @@ func (c *CylinderPanel) SetChildren(children []*Control3D) *CylinderPanel {
 // Columns returns the Columns property of class CylinderPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#columns
-func (c *CylinderPanel) Columns(columns *int) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(columns.JSObject())
+func (c *CylinderPanel) Columns(columns int) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(columns)
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
 // SetColumns sets the Columns property of class CylinderPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#columns
-func (c *CylinderPanel) SetColumns(columns *int) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(columns.JSObject())
+func (c *CylinderPanel) SetColumns(columns int) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(columns)
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
@@ -601,16 +601,16 @@ func (c *CylinderPanel) SetRadius(radius float64) *CylinderPanel {
 // Rows returns the Rows property of class CylinderPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#rows
-func (c *CylinderPanel) Rows(rows *int) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(rows.JSObject())
+func (c *CylinderPanel) Rows(rows int) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(rows)
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
 // SetRows sets the Rows property of class CylinderPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#rows
-func (c *CylinderPanel) SetRows(rows *int) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(rows.JSObject())
+func (c *CylinderPanel) SetRows(rows int) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(rows)
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 

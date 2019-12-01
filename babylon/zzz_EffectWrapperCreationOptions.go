@@ -41,7 +41,7 @@ func EffectWrapperCreationOptionsArrayToJSArray(array []*EffectWrapperCreationOp
 // AttributeNames returns the AttributeNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#attributenames
-func (e *EffectWrapperCreationOptions) AttributeNames(attributeNames []*string) *EffectWrapperCreationOptions {
+func (e *EffectWrapperCreationOptions) AttributeNames(attributeNames []string) *EffectWrapperCreationOptions {
 	p := ba.ctx.Get("EffectWrapperCreationOptions").New(attributeNames)
 	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
 }
@@ -49,7 +49,7 @@ func (e *EffectWrapperCreationOptions) AttributeNames(attributeNames []*string) 
 // SetAttributeNames sets the AttributeNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#attributenames
-func (e *EffectWrapperCreationOptions) SetAttributeNames(attributeNames []*string) *EffectWrapperCreationOptions {
+func (e *EffectWrapperCreationOptions) SetAttributeNames(attributeNames []string) *EffectWrapperCreationOptions {
 	p := ba.ctx.Get("EffectWrapperCreationOptions").New(attributeNames)
 	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
 }
@@ -105,7 +105,7 @@ func (e *EffectWrapperCreationOptions) SetName(name string) *EffectWrapperCreati
 // SamplerNames returns the SamplerNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#samplernames
-func (e *EffectWrapperCreationOptions) SamplerNames(samplerNames []*string) *EffectWrapperCreationOptions {
+func (e *EffectWrapperCreationOptions) SamplerNames(samplerNames []string) *EffectWrapperCreationOptions {
 	p := ba.ctx.Get("EffectWrapperCreationOptions").New(samplerNames)
 	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
 }
@@ -113,7 +113,7 @@ func (e *EffectWrapperCreationOptions) SamplerNames(samplerNames []*string) *Eff
 // SetSamplerNames sets the SamplerNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#samplernames
-func (e *EffectWrapperCreationOptions) SetSamplerNames(samplerNames []*string) *EffectWrapperCreationOptions {
+func (e *EffectWrapperCreationOptions) SetSamplerNames(samplerNames []string) *EffectWrapperCreationOptions {
 	p := ba.ctx.Get("EffectWrapperCreationOptions").New(samplerNames)
 	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
 }
@@ -121,7 +121,7 @@ func (e *EffectWrapperCreationOptions) SetSamplerNames(samplerNames []*string) *
 // UniformNames returns the UniformNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#uniformnames
-func (e *EffectWrapperCreationOptions) UniformNames(uniformNames []*string) *EffectWrapperCreationOptions {
+func (e *EffectWrapperCreationOptions) UniformNames(uniformNames []string) *EffectWrapperCreationOptions {
 	p := ba.ctx.Get("EffectWrapperCreationOptions").New(uniformNames)
 	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
 }
@@ -129,7 +129,7 @@ func (e *EffectWrapperCreationOptions) UniformNames(uniformNames []*string) *Eff
 // SetUniformNames sets the UniformNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#uniformnames
-func (e *EffectWrapperCreationOptions) SetUniformNames(uniformNames []*string) *EffectWrapperCreationOptions {
+func (e *EffectWrapperCreationOptions) SetUniformNames(uniformNames []string) *EffectWrapperCreationOptions {
 	p := ba.ctx.Get("EffectWrapperCreationOptions").New(uniformNames)
 	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
 }

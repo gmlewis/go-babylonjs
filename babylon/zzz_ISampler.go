@@ -9,7 +9,7 @@ import (
 // ISampler represents a babylon.js ISampler.
 // Loader interface with additional members.
 type ISampler struct {
-	*ISampler
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) ISampler() *ISampler {
 
 // ISamplerFromJSObject returns a wrapped ISampler JavaScript class.
 func ISamplerFromJSObject(p js.Value, ctx js.Value) *ISampler {
-	return &ISampler{ISampler: ISamplerFromJSObject(p, ctx), ctx: ctx}
+	return &ISampler{p: p, ctx: ctx}
 }
 
 // ISamplerArrayToJSArray returns a JavaScript Array for the wrapped array.

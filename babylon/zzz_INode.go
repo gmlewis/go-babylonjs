@@ -9,7 +9,7 @@ import (
 // INode represents a babylon.js INode.
 // Loader interface with additional members.
 type INode struct {
-	*INode
+	p   js.Value
 	ctx js.Value
 }
 
@@ -24,7 +24,7 @@ func (ba *Babylon) INode() *INode {
 
 // INodeFromJSObject returns a wrapped INode JavaScript class.
 func INodeFromJSObject(p js.Value, ctx js.Value) *INode {
-	return &INode{INode: INodeFromJSObject(p, ctx), ctx: ctx}
+	return &INode{p: p, ctx: ctx}
 }
 
 // INodeArrayToJSArray returns a JavaScript Array for the wrapped array.
