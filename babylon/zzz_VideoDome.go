@@ -224,7 +224,7 @@ type VideoDomeConstructOpts struct {
 // Construct calls the Construct method on the VideoDome object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#construct
-func (v *VideoDome) Construct(jsType string, name string, scene *Scene, opts *VideoDomeConstructOpts) func() {
+func (v *VideoDome) Construct(jsType string, name string, scene *Scene, opts *VideoDomeConstructOpts) js.Value {
 	if opts == nil {
 		opts = &VideoDomeConstructOpts{}
 	}

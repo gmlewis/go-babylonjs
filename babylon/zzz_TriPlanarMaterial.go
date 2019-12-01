@@ -282,10 +282,10 @@ func (t *TriPlanarMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the TriPlanarMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getanimatables
-func (t *TriPlanarMaterial) GetAnimatables() js.Value {
+func (t *TriPlanarMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := t.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, t.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the TriPlanarMaterial object.

@@ -157,12 +157,12 @@ func (v *VideoTexture) CreateFromBase64String(data string, name string, scene *S
 // CreateFromStreamAsync calls the CreateFromStreamAsync method on the VideoTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#createfromstreamasync
-func (v *VideoTexture) CreateFromStreamAsync(scene *Scene, stream *MediaStream) *Promise {
+func (v *VideoTexture) CreateFromStreamAsync(scene *Scene, stream js.Value) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, stream.JSObject())
+	args = append(args, stream)
 
 	retVal := v.p.Call("CreateFromStreamAsync", args...)
 	return PromiseFromJSObject(retVal, v.ctx)
@@ -170,7 +170,7 @@ func (v *VideoTexture) CreateFromStreamAsync(scene *Scene, stream *MediaStream) 
 
 // VideoTextureCreateFromWebCamOpts contains optional parameters for VideoTexture.CreateFromWebCam.
 type VideoTextureCreateFromWebCamOpts struct {
-	AudioConstaints *MediaTrackConstraints
+	AudioConstaints js.Value
 }
 
 // CreateFromWebCam calls the CreateFromWebCam method on the VideoTexture object.
@@ -190,7 +190,7 @@ func (v *VideoTexture) CreateFromWebCam(scene *Scene, onReady func(), constraint
 	if opts.AudioConstaints == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AudioConstaints.JSObject())
+		args = append(args, opts.AudioConstaints)
 	}
 
 	v.p.Call("CreateFromWebCam", args...)
@@ -198,7 +198,7 @@ func (v *VideoTexture) CreateFromWebCam(scene *Scene, onReady func(), constraint
 
 // VideoTextureCreateFromWebCamAsyncOpts contains optional parameters for VideoTexture.CreateFromWebCamAsync.
 type VideoTextureCreateFromWebCamAsyncOpts struct {
-	AudioConstaints *MediaTrackConstraints
+	AudioConstaints js.Value
 }
 
 // CreateFromWebCamAsync calls the CreateFromWebCamAsync method on the VideoTexture object.
@@ -217,7 +217,7 @@ func (v *VideoTexture) CreateFromWebCamAsync(scene *Scene, constraints js.Value,
 	if opts.AudioConstaints == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AudioConstaints.JSObject())
+		args = append(args, opts.AudioConstaints)
 	}
 
 	retVal := v.p.Call("CreateFromWebCamAsync", args...)
@@ -235,10 +235,10 @@ func (v *VideoTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the VideoTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#getbasesize
-func (v *VideoTexture) GetBaseSize() js.Value {
+func (v *VideoTexture) GetBaseSize() *ISize {
 
 	retVal := v.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, v.ctx)
 }
 
 // GetClassName calls the GetClassName method on the VideoTexture object.
@@ -280,10 +280,10 @@ func (v *VideoTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the VideoTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#getsize
-func (v *VideoTexture) GetSize() js.Value {
+func (v *VideoTexture) GetSize() *ISize {
 
 	retVal := v.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, v.ctx)
 }
 
 // VideoTextureGetTextureMatrixOpts contains optional parameters for VideoTexture.GetTextureMatrix.

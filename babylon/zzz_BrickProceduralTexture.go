@@ -150,10 +150,10 @@ func (b *BrickProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the BrickProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#getbasesize
-func (b *BrickProceduralTexture) GetBaseSize() js.Value {
+func (b *BrickProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := b.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, b.ctx)
 }
 
 // GetClassName calls the GetClassName method on the BrickProceduralTexture object.
@@ -222,10 +222,10 @@ func (b *BrickProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the BrickProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#getsize
-func (b *BrickProceduralTexture) GetSize() js.Value {
+func (b *BrickProceduralTexture) GetSize() *ISize {
 
 	retVal := b.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, b.ctx)
 }
 
 // BrickProceduralTextureGetTextureMatrixOpts contains optional parameters for BrickProceduralTexture.GetTextureMatrix.

@@ -334,10 +334,10 @@ func (w *WaterMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the WaterMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getanimatables
-func (w *WaterMaterial) GetAnimatables() js.Value {
+func (w *WaterMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := w.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, w.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the WaterMaterial object.

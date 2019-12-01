@@ -150,10 +150,10 @@ func (g *GrassProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the GrassProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getbasesize
-func (g *GrassProceduralTexture) GetBaseSize() js.Value {
+func (g *GrassProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := g.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, g.ctx)
 }
 
 // GetClassName calls the GetClassName method on the GrassProceduralTexture object.
@@ -222,10 +222,10 @@ func (g *GrassProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the GrassProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getsize
-func (g *GrassProceduralTexture) GetSize() js.Value {
+func (g *GrassProceduralTexture) GetSize() *ISize {
 
 	retVal := g.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, g.ctx)
 }
 
 // GrassProceduralTextureGetTextureMatrixOpts contains optional parameters for GrassProceduralTexture.GetTextureMatrix.

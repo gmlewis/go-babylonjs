@@ -239,7 +239,7 @@ type LightConstructOpts struct {
 // Construct calls the Construct method on the Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#construct
-func (l *Light) Construct(jsType string, name string, scene *Scene, opts *LightConstructOpts) func() {
+func (l *Light) Construct(jsType string, name string, scene *Scene, opts *LightConstructOpts) js.Value {
 	if opts == nil {
 		opts = &LightConstructOpts{}
 	}
@@ -461,7 +461,7 @@ func (l *Light) GetClassName() string {
 // GetConstructorFromName calls the GetConstructorFromName method on the Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#getconstructorfromname
-func (l *Light) GetConstructorFromName(jsType float64, name string, scene *Scene) func() {
+func (l *Light) GetConstructorFromName(jsType float64, name string, scene *Scene) js.Value {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -565,10 +565,10 @@ func (l *Light) GetScene() *Scene {
 // GetShadowGenerator calls the GetShadowGenerator method on the Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#getshadowgenerator
-func (l *Light) GetShadowGenerator() js.Value {
+func (l *Light) GetShadowGenerator() *IShadowGenerator {
 
 	retVal := l.p.Call("getShadowGenerator")
-	return retVal
+	return IShadowGeneratorFromJSObject(retVal, l.ctx)
 }
 
 // GetTypeID calls the GetTypeID method on the Light object.

@@ -47,14 +47,14 @@ type NewPhysicsImpostorOpts struct {
 // NewPhysicsImpostor returns a new PhysicsImpostor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor
-func (ba *Babylon) NewPhysicsImpostor(object js.Value, jsType float64, opts *NewPhysicsImpostorOpts) *PhysicsImpostor {
+func (ba *Babylon) NewPhysicsImpostor(object *IPhysicsEnabledObject, jsType float64, opts *NewPhysicsImpostorOpts) *PhysicsImpostor {
 	if opts == nil {
 		opts = &NewPhysicsImpostorOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, object)
+	args = append(args, object.JSObject())
 	args = append(args, jsType)
 
 	if opts._options == nil {
@@ -150,11 +150,11 @@ func (p *PhysicsImpostor) ApplyImpulse(force *Vector3, contactPoint *Vector3) *P
 // Clone calls the Clone method on the PhysicsImpostor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#clone
-func (p *PhysicsImpostor) Clone(newObject js.Value) *PhysicsImpostor {
+func (p *PhysicsImpostor) Clone(newObject *IPhysicsEnabledObject) *PhysicsImpostor {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newObject)
+	args = append(args, newObject.JSObject())
 
 	retVal := p.p.Call("clone", args...)
 	return PhysicsImpostorFromJSObject(retVal, p.ctx)
@@ -808,16 +808,16 @@ func (p *PhysicsImpostor) SetNoImpostor(NoImpostor float64) *PhysicsImpostor {
 // Object returns the Object property of class PhysicsImpostor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#object
-func (p *PhysicsImpostor) Object(object js.Value) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(object)
+func (p *PhysicsImpostor) Object(object *IPhysicsEnabledObject) *PhysicsImpostor {
+	p := ba.ctx.Get("PhysicsImpostor").New(object.JSObject())
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 
 // SetObject sets the Object property of class PhysicsImpostor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#object
-func (p *PhysicsImpostor) SetObject(object js.Value) *PhysicsImpostor {
-	p := ba.ctx.Get("PhysicsImpostor").New(object)
+func (p *PhysicsImpostor) SetObject(object *IPhysicsEnabledObject) *PhysicsImpostor {
+	p := ba.ctx.Get("PhysicsImpostor").New(object.JSObject())
 	return PhysicsImpostorFromJSObject(p, ba.ctx)
 }
 

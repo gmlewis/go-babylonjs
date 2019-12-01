@@ -150,10 +150,10 @@ func (s *StarfieldProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the StarfieldProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#getbasesize
-func (s *StarfieldProceduralTexture) GetBaseSize() js.Value {
+func (s *StarfieldProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := s.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, s.ctx)
 }
 
 // GetClassName calls the GetClassName method on the StarfieldProceduralTexture object.
@@ -222,10 +222,10 @@ func (s *StarfieldProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the StarfieldProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#getsize
-func (s *StarfieldProceduralTexture) GetSize() js.Value {
+func (s *StarfieldProceduralTexture) GetSize() *ISize {
 
 	retVal := s.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, s.ctx)
 }
 
 // StarfieldProceduralTextureGetTextureMatrixOpts contains optional parameters for StarfieldProceduralTexture.GetTextureMatrix.

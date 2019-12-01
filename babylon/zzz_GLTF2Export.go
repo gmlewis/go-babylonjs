@@ -38,7 +38,7 @@ func GLTF2ExportArrayToJSArray(array []*GLTF2Export) []interface{} {
 
 // GLTF2ExportGLBAsyncOpts contains optional parameters for GLTF2Export.GLBAsync.
 type GLTF2ExportGLBAsyncOpts struct {
-	Options js.Value
+	Options *IExportOptions
 }
 
 // GLBAsync calls the GLBAsync method on the GLTF2Export object.
@@ -57,7 +57,7 @@ func (g *GLTF2Export) GLBAsync(scene *Scene, filePrefix string, opts *GLTF2Expor
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	retVal := g.p.Call("GLBAsync", args...)
@@ -66,7 +66,7 @@ func (g *GLTF2Export) GLBAsync(scene *Scene, filePrefix string, opts *GLTF2Expor
 
 // GLTF2ExportGLTFAsyncOpts contains optional parameters for GLTF2Export.GLTFAsync.
 type GLTF2ExportGLTFAsyncOpts struct {
-	Options js.Value
+	Options *IExportOptions
 }
 
 // GLTFAsync calls the GLTFAsync method on the GLTF2Export object.
@@ -85,7 +85,7 @@ func (g *GLTF2Export) GLTFAsync(scene *Scene, filePrefix string, opts *GLTF2Expo
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	retVal := g.p.Call("GLTFAsync", args...)

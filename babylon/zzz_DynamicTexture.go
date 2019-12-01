@@ -198,10 +198,10 @@ func (d *DynamicTexture) DrawText(text string, x float64, y float64, font string
 // GetBaseSize calls the GetBaseSize method on the DynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#getbasesize
-func (d *DynamicTexture) GetBaseSize() js.Value {
+func (d *DynamicTexture) GetBaseSize() *ISize {
 
 	retVal := d.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, d.ctx)
 }
 
 // GetClassName calls the GetClassName method on the DynamicTexture object.
@@ -252,10 +252,10 @@ func (d *DynamicTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the DynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#getsize
-func (d *DynamicTexture) GetSize() js.Value {
+func (d *DynamicTexture) GetSize() *ISize {
 
 	retVal := d.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, d.ctx)
 }
 
 // DynamicTextureGetTextureMatrixOpts contains optional parameters for DynamicTexture.GetTextureMatrix.

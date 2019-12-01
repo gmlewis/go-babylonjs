@@ -71,7 +71,7 @@ func (ba *Babylon) NewGPUParticleSystem(name string, options js.Value, scene *Sc
 // AddAlphaRemapGradient calls the AddAlphaRemapGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addalpharemapgradient
-func (g *GPUParticleSystem) AddAlphaRemapGradient(gradient float64, min float64, max float64) js.Value {
+func (g *GPUParticleSystem) AddAlphaRemapGradient(gradient float64, min float64, max float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -80,7 +80,7 @@ func (g *GPUParticleSystem) AddAlphaRemapGradient(gradient float64, min float64,
 	args = append(args, max)
 
 	retVal := g.p.Call("addAlphaRemapGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // AddAngularSpeedGradient calls the AddAngularSpeedGradient method on the GPUParticleSystem object.
@@ -128,7 +128,7 @@ func (g *GPUParticleSystem) AddColorGradient(gradient float64, color1 *Color4, o
 // AddColorRemapGradient calls the AddColorRemapGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addcolorremapgradient
-func (g *GPUParticleSystem) AddColorRemapGradient(gradient float64, min float64, max float64) js.Value {
+func (g *GPUParticleSystem) AddColorRemapGradient(gradient float64, min float64, max float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -137,7 +137,7 @@ func (g *GPUParticleSystem) AddColorRemapGradient(gradient float64, min float64,
 	args = append(args, max)
 
 	retVal := g.p.Call("addColorRemapGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // AddDragGradient calls the AddDragGradient method on the GPUParticleSystem object.
@@ -162,7 +162,7 @@ type GPUParticleSystemAddEmitRateGradientOpts struct {
 // AddEmitRateGradient calls the AddEmitRateGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addemitrategradient
-func (g *GPUParticleSystem) AddEmitRateGradient(gradient float64, factor float64, opts *GPUParticleSystemAddEmitRateGradientOpts) js.Value {
+func (g *GPUParticleSystem) AddEmitRateGradient(gradient float64, factor float64, opts *GPUParticleSystemAddEmitRateGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &GPUParticleSystemAddEmitRateGradientOpts{}
 	}
@@ -179,7 +179,7 @@ func (g *GPUParticleSystem) AddEmitRateGradient(gradient float64, factor float64
 	}
 
 	retVal := g.p.Call("addEmitRateGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // GPUParticleSystemAddLifeTimeGradientOpts contains optional parameters for GPUParticleSystem.AddLifeTimeGradient.
@@ -190,7 +190,7 @@ type GPUParticleSystemAddLifeTimeGradientOpts struct {
 // AddLifeTimeGradient calls the AddLifeTimeGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addlifetimegradient
-func (g *GPUParticleSystem) AddLifeTimeGradient(gradient float64, factor float64, opts *GPUParticleSystemAddLifeTimeGradientOpts) js.Value {
+func (g *GPUParticleSystem) AddLifeTimeGradient(gradient float64, factor float64, opts *GPUParticleSystemAddLifeTimeGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &GPUParticleSystemAddLifeTimeGradientOpts{}
 	}
@@ -207,7 +207,7 @@ func (g *GPUParticleSystem) AddLifeTimeGradient(gradient float64, factor float64
 	}
 
 	retVal := g.p.Call("addLifeTimeGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // AddLimitVelocityGradient calls the AddLimitVelocityGradient method on the GPUParticleSystem object.
@@ -227,7 +227,7 @@ func (g *GPUParticleSystem) AddLimitVelocityGradient(gradient float64, factor fl
 // AddRampGradient calls the AddRampGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addrampgradient
-func (g *GPUParticleSystem) AddRampGradient(gradient float64, color *Color3) js.Value {
+func (g *GPUParticleSystem) AddRampGradient(gradient float64, color *Color3) *IParticleSystem {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -235,7 +235,7 @@ func (g *GPUParticleSystem) AddRampGradient(gradient float64, color *Color3) js.
 	args = append(args, color.JSObject())
 
 	retVal := g.p.Call("addRampGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // AddSizeGradient calls the AddSizeGradient method on the GPUParticleSystem object.
@@ -260,7 +260,7 @@ type GPUParticleSystemAddStartSizeGradientOpts struct {
 // AddStartSizeGradient calls the AddStartSizeGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addstartsizegradient
-func (g *GPUParticleSystem) AddStartSizeGradient(gradient float64, factor float64, opts *GPUParticleSystemAddStartSizeGradientOpts) js.Value {
+func (g *GPUParticleSystem) AddStartSizeGradient(gradient float64, factor float64, opts *GPUParticleSystemAddStartSizeGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &GPUParticleSystemAddStartSizeGradientOpts{}
 	}
@@ -277,7 +277,7 @@ func (g *GPUParticleSystem) AddStartSizeGradient(gradient float64, factor float6
 	}
 
 	retVal := g.p.Call("addStartSizeGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // AddVelocityGradient calls the AddVelocityGradient method on the GPUParticleSystem object.
@@ -801,10 +801,10 @@ func (g *GPUParticleSystem) Rebuild() {
 // RemoveAlphaRemapGradient calls the RemoveAlphaRemapGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removealpharemapgradient
-func (g *GPUParticleSystem) RemoveAlphaRemapGradient() js.Value {
+func (g *GPUParticleSystem) RemoveAlphaRemapGradient() *IParticleSystem {
 
 	retVal := g.p.Call("removeAlphaRemapGradient")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // RemoveAngularSpeedGradient calls the RemoveAngularSpeedGradient method on the GPUParticleSystem object.
@@ -836,10 +836,10 @@ func (g *GPUParticleSystem) RemoveColorGradient(gradient float64) *GPUParticleSy
 // RemoveColorRemapGradient calls the RemoveColorRemapGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removecolorremapgradient
-func (g *GPUParticleSystem) RemoveColorRemapGradient() js.Value {
+func (g *GPUParticleSystem) RemoveColorRemapGradient() *IParticleSystem {
 
 	retVal := g.p.Call("removeColorRemapGradient")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // RemoveDragGradient calls the RemoveDragGradient method on the GPUParticleSystem object.
@@ -858,27 +858,27 @@ func (g *GPUParticleSystem) RemoveDragGradient(gradient float64) *GPUParticleSys
 // RemoveEmitRateGradient calls the RemoveEmitRateGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removeemitrategradient
-func (g *GPUParticleSystem) RemoveEmitRateGradient(gradient float64) js.Value {
+func (g *GPUParticleSystem) RemoveEmitRateGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := g.p.Call("removeEmitRateGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // RemoveLifeTimeGradient calls the RemoveLifeTimeGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removelifetimegradient
-func (g *GPUParticleSystem) RemoveLifeTimeGradient(gradient float64) js.Value {
+func (g *GPUParticleSystem) RemoveLifeTimeGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := g.p.Call("removeLifeTimeGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // RemoveLimitVelocityGradient calls the RemoveLimitVelocityGradient method on the GPUParticleSystem object.
@@ -897,10 +897,10 @@ func (g *GPUParticleSystem) RemoveLimitVelocityGradient(gradient float64) *GPUPa
 // RemoveRampGradient calls the RemoveRampGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removerampgradient
-func (g *GPUParticleSystem) RemoveRampGradient() js.Value {
+func (g *GPUParticleSystem) RemoveRampGradient() *IParticleSystem {
 
 	retVal := g.p.Call("removeRampGradient")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // RemoveSizeGradient calls the RemoveSizeGradient method on the GPUParticleSystem object.
@@ -919,14 +919,14 @@ func (g *GPUParticleSystem) RemoveSizeGradient(gradient float64) *GPUParticleSys
 // RemoveStartSizeGradient calls the RemoveStartSizeGradient method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removestartsizegradient
-func (g *GPUParticleSystem) RemoveStartSizeGradient(gradient float64) js.Value {
+func (g *GPUParticleSystem) RemoveStartSizeGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := g.p.Call("removeStartSizeGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // RemoveVelocityGradient calls the RemoveVelocityGradient method on the GPUParticleSystem object.

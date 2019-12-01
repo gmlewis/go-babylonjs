@@ -89,7 +89,7 @@ func (a *AbstractActionManager) HasSpecificTriggers2(triggerA float64, triggerB 
 
 // AbstractActionManagerProcessTriggerOpts contains optional parameters for AbstractActionManager.ProcessTrigger.
 type AbstractActionManagerProcessTriggerOpts struct {
-	Evt js.Value
+	Evt *IActionEvent
 }
 
 // ProcessTrigger calls the ProcessTrigger method on the AbstractActionManager object.
@@ -107,7 +107,7 @@ func (a *AbstractActionManager) ProcessTrigger(trigger float64, opts *AbstractAc
 	if opts.Evt == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Evt)
+		args = append(args, opts.Evt.JSObject())
 	}
 
 	a.p.Call("processTrigger", args...)
@@ -116,14 +116,14 @@ func (a *AbstractActionManager) ProcessTrigger(trigger float64, opts *AbstractAc
 // RegisterAction calls the RegisterAction method on the AbstractActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#registeraction
-func (a *AbstractActionManager) RegisterAction(action js.Value) js.Value {
+func (a *AbstractActionManager) RegisterAction(action *IAction) *IAction {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action)
+	args = append(args, action.JSObject())
 
 	retVal := a.p.Call("registerAction", args...)
-	return retVal
+	return IActionFromJSObject(retVal, a.ctx)
 }
 
 // Serialize calls the Serialize method on the AbstractActionManager object.
@@ -142,11 +142,11 @@ func (a *AbstractActionManager) Serialize(name string) interface{} {
 // UnregisterAction calls the UnregisterAction method on the AbstractActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#unregisteraction
-func (a *AbstractActionManager) UnregisterAction(action js.Value) bool {
+func (a *AbstractActionManager) UnregisterAction(action *IAction) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action)
+	args = append(args, action.JSObject())
 
 	retVal := a.p.Call("unregisterAction", args...)
 	return retVal.Bool()
@@ -157,16 +157,16 @@ func (a *AbstractActionManager) UnregisterAction(action js.Value) bool {
 // Actions returns the Actions property of class AbstractActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#actions
-func (a *AbstractActionManager) Actions(actions js.Value) *AbstractActionManager {
-	p := ba.ctx.Get("AbstractActionManager").New(actions)
+func (a *AbstractActionManager) Actions(actions *IAction) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(actions.JSObject())
 	return AbstractActionManagerFromJSObject(p, ba.ctx)
 }
 
 // SetActions sets the Actions property of class AbstractActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#actions
-func (a *AbstractActionManager) SetActions(actions js.Value) *AbstractActionManager {
-	p := ba.ctx.Get("AbstractActionManager").New(actions)
+func (a *AbstractActionManager) SetActions(actions *IAction) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(actions.JSObject())
 	return AbstractActionManagerFromJSObject(p, ba.ctx)
 }
 

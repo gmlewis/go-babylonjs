@@ -150,10 +150,10 @@ func (w *WoodProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the WoodProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#getbasesize
-func (w *WoodProceduralTexture) GetBaseSize() js.Value {
+func (w *WoodProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := w.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, w.ctx)
 }
 
 // GetClassName calls the GetClassName method on the WoodProceduralTexture object.
@@ -222,10 +222,10 @@ func (w *WoodProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the WoodProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#getsize
-func (w *WoodProceduralTexture) GetSize() js.Value {
+func (w *WoodProceduralTexture) GetSize() *ISize {
 
 	retVal := w.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, w.ctx)
 }
 
 // WoodProceduralTextureGetTextureMatrixOpts contains optional parameters for WoodProceduralTexture.GetTextureMatrix.

@@ -244,7 +244,7 @@ type SubMeshIntersectsOpts struct {
 // Intersects calls the Intersects method on the SubMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#intersects
-func (s *SubMesh) Intersects(ray *Ray, positions *Vector3, indices js.Value, opts *SubMeshIntersectsOpts) *IntersectionInfo {
+func (s *SubMesh) Intersects(ray *Ray, positions *Vector3, indices js.Value, opts *SubMeshIntersectsOpts) js.Value {
 	if opts == nil {
 		opts = &SubMeshIntersectsOpts{}
 	}
@@ -267,7 +267,7 @@ func (s *SubMesh) Intersects(ray *Ray, positions *Vector3, indices js.Value, opt
 	}
 
 	retVal := s.p.Call("intersects", args...)
-	return IntersectionInfoFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // IsCompletelyInFrustum calls the IsCompletelyInFrustum method on the SubMesh object.

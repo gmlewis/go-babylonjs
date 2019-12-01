@@ -156,16 +156,16 @@ func (p *ParticleSystemSet) SetEmitterNode(emitterNode *TransformNode) *Particle
 // Systems returns the Systems property of class ParticleSystemSet.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#systems
-func (p *ParticleSystemSet) Systems(systems js.Value) *ParticleSystemSet {
-	p := ba.ctx.Get("ParticleSystemSet").New(systems)
+func (p *ParticleSystemSet) Systems(systems *IParticleSystem) *ParticleSystemSet {
+	p := ba.ctx.Get("ParticleSystemSet").New(systems.JSObject())
 	return ParticleSystemSetFromJSObject(p, ba.ctx)
 }
 
 // SetSystems sets the Systems property of class ParticleSystemSet.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#systems
-func (p *ParticleSystemSet) SetSystems(systems js.Value) *ParticleSystemSet {
-	p := ba.ctx.Get("ParticleSystemSet").New(systems)
+func (p *ParticleSystemSet) SetSystems(systems *IParticleSystem) *ParticleSystemSet {
+	p := ba.ctx.Get("ParticleSystemSet").New(systems.JSObject())
 	return ParticleSystemSetFromJSObject(p, ba.ctx)
 }
 

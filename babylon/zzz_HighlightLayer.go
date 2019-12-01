@@ -41,7 +41,7 @@ func HighlightLayerArrayToJSArray(array []*HighlightLayer) []interface{} {
 
 // NewHighlightLayerOpts contains optional parameters for NewHighlightLayer.
 type NewHighlightLayerOpts struct {
-	Options js.Value
+	Options *IHighlightLayerOptions
 }
 
 // NewHighlightLayer returns a new HighlightLayer object.
@@ -60,7 +60,7 @@ func (ba *Babylon) NewHighlightLayer(name string, scene *Scene, opts *NewHighlig
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	p := ba.ctx.Get("HighlightLayer").New(args...)

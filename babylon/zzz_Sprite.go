@@ -41,12 +41,12 @@ func SpriteArrayToJSArray(array []*Sprite) []interface{} {
 // NewSprite returns a new Sprite object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite
-func (ba *Babylon) NewSprite(name string, manager js.Value) *Sprite {
+func (ba *Babylon) NewSprite(name string, manager *ISpriteManager) *Sprite {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, manager)
+	args = append(args, manager.JSObject())
 
 	p := ba.ctx.Get("Sprite").New(args...)
 	return SpriteFromJSObject(p, ba.ctx)

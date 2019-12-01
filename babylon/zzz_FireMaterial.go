@@ -282,10 +282,10 @@ func (f *FireMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the FireMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getanimatables
-func (f *FireMaterial) GetAnimatables() js.Value {
+func (f *FireMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := f.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, f.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the FireMaterial object.

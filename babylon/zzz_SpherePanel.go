@@ -585,16 +585,16 @@ func (s *SpherePanel) SetPosition(position *Vector3) *SpherePanel {
 // Radius returns the Radius property of class SpherePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#radius
-func (s *SpherePanel) Radius(radius *float) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(radius.JSObject())
+func (s *SpherePanel) Radius(radius float64) *SpherePanel {
+	p := ba.ctx.Get("SpherePanel").New(radius)
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
 // SetRadius sets the Radius property of class SpherePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#radius
-func (s *SpherePanel) SetRadius(radius *float) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(radius.JSObject())
+func (s *SpherePanel) SetRadius(radius float64) *SpherePanel {
+	p := ba.ctx.Get("SpherePanel").New(radius)
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 

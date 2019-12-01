@@ -288,10 +288,10 @@ func (r *RenderTargetTexture) FreeRenderingGroups() {
 // GetBaseSize calls the GetBaseSize method on the RenderTargetTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getbasesize
-func (r *RenderTargetTexture) GetBaseSize() js.Value {
+func (r *RenderTargetTexture) GetBaseSize() *ISize {
 
 	retVal := r.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, r.ctx)
 }
 
 // GetClassName calls the GetClassName method on the RenderTargetTexture object.
@@ -360,10 +360,10 @@ func (r *RenderTargetTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the RenderTargetTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getsize
-func (r *RenderTargetTexture) GetSize() js.Value {
+func (r *RenderTargetTexture) GetSize() *ISize {
 
 	retVal := r.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, r.ctx)
 }
 
 // RenderTargetTextureGetTextureMatrixOpts contains optional parameters for RenderTargetTexture.GetTextureMatrix.

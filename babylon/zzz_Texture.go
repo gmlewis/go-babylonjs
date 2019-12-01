@@ -193,10 +193,10 @@ func (t *Texture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the Texture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#getbasesize
-func (t *Texture) GetBaseSize() js.Value {
+func (t *Texture) GetBaseSize() *ISize {
 
 	retVal := t.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, t.ctx)
 }
 
 // GetClassName calls the GetClassName method on the Texture object.
@@ -238,10 +238,10 @@ func (t *Texture) GetScene() *Scene {
 // GetSize calls the GetSize method on the Texture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#getsize
-func (t *Texture) GetSize() js.Value {
+func (t *Texture) GetSize() *ISize {
 
 	retVal := t.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, t.ctx)
 }
 
 // TextureGetTextureMatrixOpts contains optional parameters for Texture.GetTextureMatrix.

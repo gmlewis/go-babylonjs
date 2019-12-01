@@ -138,7 +138,7 @@ func (a *ActionManager) Parse(parsedActions interface{}, object *AbstractMesh, s
 
 // ActionManagerProcessTriggerOpts contains optional parameters for ActionManager.ProcessTrigger.
 type ActionManagerProcessTriggerOpts struct {
-	Evt js.Value
+	Evt *IActionEvent
 }
 
 // ProcessTrigger calls the ProcessTrigger method on the ActionManager object.
@@ -156,7 +156,7 @@ func (a *ActionManager) ProcessTrigger(trigger float64, opts *ActionManagerProce
 	if opts.Evt == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Evt)
+		args = append(args, opts.Evt.JSObject())
 	}
 
 	a.p.Call("processTrigger", args...)
@@ -165,14 +165,14 @@ func (a *ActionManager) ProcessTrigger(trigger float64, opts *ActionManagerProce
 // RegisterAction calls the RegisterAction method on the ActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#registeraction
-func (a *ActionManager) RegisterAction(action js.Value) js.Value {
+func (a *ActionManager) RegisterAction(action *IAction) *IAction {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action)
+	args = append(args, action.JSObject())
 
 	retVal := a.p.Call("registerAction", args...)
-	return retVal
+	return IActionFromJSObject(retVal, a.ctx)
 }
 
 // Serialize calls the Serialize method on the ActionManager object.
@@ -191,11 +191,11 @@ func (a *ActionManager) Serialize(name string) interface{} {
 // UnregisterAction calls the UnregisterAction method on the ActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#unregisteraction
-func (a *ActionManager) UnregisterAction(action js.Value) bool {
+func (a *ActionManager) UnregisterAction(action *IAction) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action)
+	args = append(args, action.JSObject())
 
 	retVal := a.p.Call("unregisterAction", args...)
 	return retVal.Bool()
@@ -206,16 +206,16 @@ func (a *ActionManager) UnregisterAction(action js.Value) bool {
 // Actions returns the Actions property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#actions
-func (a *ActionManager) Actions(actions js.Value) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(actions)
+func (a *ActionManager) Actions(actions *IAction) *ActionManager {
+	p := ba.ctx.Get("ActionManager").New(actions.JSObject())
 	return ActionManagerFromJSObject(p, ba.ctx)
 }
 
 // SetActions sets the Actions property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#actions
-func (a *ActionManager) SetActions(actions js.Value) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(actions)
+func (a *ActionManager) SetActions(actions *IAction) *ActionManager {
+	p := ba.ctx.Get("ActionManager").New(actions.JSObject())
 	return ActionManagerFromJSObject(p, ba.ctx)
 }
 

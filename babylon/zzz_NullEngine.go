@@ -214,11 +214,11 @@ func (n *NullEngine) BindTransformFeedbackBuffer(value *DataBuffer) {
 // BindUniformBlock calls the BindUniformBlock method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#binduniformblock
-func (n *NullEngine) BindUniformBlock(pipelineContext js.Value, blockName string, index float64) {
+func (n *NullEngine) BindUniformBlock(pipelineContext *IPipelineContext, blockName string, index float64) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, blockName)
 	args = append(args, index)
 
@@ -532,14 +532,14 @@ type NullEngineCreateShaderProgramOpts struct {
 // CreateShaderProgram calls the CreateShaderProgram method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#createshaderprogram
-func (n *NullEngine) CreateShaderProgram(pipelineContext js.Value, vertexCode string, fragmentCode string, defines string, opts *NullEngineCreateShaderProgramOpts) js.Value {
+func (n *NullEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCode string, fragmentCode string, defines string, opts *NullEngineCreateShaderProgramOpts) js.Value {
 	if opts == nil {
 		opts = &NullEngineCreateShaderProgramOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+1)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, vertexCode)
 	args = append(args, fragmentCode)
 	args = append(args, defines)
@@ -652,14 +652,14 @@ func (n *NullEngine) CreateVertexBuffer(vertices js.Value) *DataBuffer {
 // DefaultLoadingScreenFactory calls the DefaultLoadingScreenFactory method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#defaultloadingscreenfactory
-func (n *NullEngine) DefaultLoadingScreenFactory(canvas js.Value) js.Value {
+func (n *NullEngine) DefaultLoadingScreenFactory(canvas js.Value) *ILoadingScreen {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, canvas)
 
 	retVal := n.p.Call("DefaultLoadingScreenFactory", args...)
-	return retVal
+	return ILoadingScreenFromJSObject(retVal, n.ctx)
 }
 
 // DeleteInstancesBuffer calls the DeleteInstancesBuffer method on the NullEngine object.
@@ -992,11 +992,11 @@ func (n *NullEngine) GetAspectRatio(viewportOwner js.Value, opts *NullEngineGetA
 // GetAttributes calls the GetAttributes method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getattributes
-func (n *NullEngine) GetAttributes(pipelineContext js.Value, attributesNames string) float64 {
+func (n *NullEngine) GetAttributes(pipelineContext *IPipelineContext, attributesNames string) float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, attributesNames)
 
 	retVal := n.p.Call("getAttributes", args...)
@@ -1262,11 +1262,11 @@ func (n *NullEngine) GetTimeStep() float64 {
 // GetUniforms calls the GetUniforms method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getuniforms
-func (n *NullEngine) GetUniforms(pipelineContext js.Value, uniformsNames string) js.Value {
+func (n *NullEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames string) js.Value {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, uniformsNames)
 
 	retVal := n.p.Call("getUniforms", args...)
@@ -2548,11 +2548,11 @@ func (n *NullEngine) _RequestPointerlock(element js.Value) {
 // _deletePipelineContext calls the _deletePipelineContext method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#_deletepipelinecontext
-func (n *NullEngine) _deletePipelineContext(pipelineContext js.Value) {
+func (n *NullEngine) _deletePipelineContext(pipelineContext *IPipelineContext) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 
 	n.p.Call("_deletePipelineContext", args...)
 }
@@ -3210,16 +3210,16 @@ func (n *NullEngine) SetLastCreatedScene(LastCreatedScene *Scene) *NullEngine {
 // LoadingScreen returns the LoadingScreen property of class NullEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#loadingscreen
-func (n *NullEngine) LoadingScreen(loadingScreen js.Value) *NullEngine {
-	p := ba.ctx.Get("NullEngine").New(loadingScreen)
+func (n *NullEngine) LoadingScreen(loadingScreen *ILoadingScreen) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(loadingScreen.JSObject())
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 
 // SetLoadingScreen sets the LoadingScreen property of class NullEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#loadingscreen
-func (n *NullEngine) SetLoadingScreen(loadingScreen js.Value) *NullEngine {
-	p := ba.ctx.Get("NullEngine").New(loadingScreen)
+func (n *NullEngine) SetLoadingScreen(loadingScreen *ILoadingScreen) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(loadingScreen.JSObject())
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 

@@ -87,11 +87,11 @@ func (a *Animation) AddEvent(event *AnimationEvent) {
 // AppendSerializedAnimations calls the AppendSerializedAnimations method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#appendserializedanimations
-func (a *Animation) AppendSerializedAnimations(source js.Value, destination interface{}) {
+func (a *Animation) AppendSerializedAnimations(source *IAnimatable, destination interface{}) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, source)
+	args = append(args, source.JSObject())
 	args = append(args, destination)
 
 	a.p.Call("AppendSerializedAnimations", args...)
@@ -363,10 +363,10 @@ func (a *Animation) FloatInterpolateFunctionWithTangents(startValue float64, out
 // GetEasingFunction calls the GetEasingFunction method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#geteasingfunction
-func (a *Animation) GetEasingFunction() js.Value {
+func (a *Animation) GetEasingFunction() *IEasingFunction {
 
 	retVal := a.p.Call("getEasingFunction")
-	return retVal
+	return IEasingFunctionFromJSObject(retVal, a.ctx)
 }
 
 // GetEvents calls the GetEvents method on the Animation object.

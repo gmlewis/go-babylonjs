@@ -42,7 +42,7 @@ func SoundArrayToJSArray(array []*Sound) []interface{} {
 // NewSoundOpts contains optional parameters for NewSound.
 type NewSoundOpts struct {
 	ReadyToPlayCallback *func()
-	Options             js.Value
+	Options             *ISoundOptions
 }
 
 // NewSound returns a new Sound object.
@@ -67,7 +67,7 @@ func (ba *Babylon) NewSound(name string, urlOrArrayBuffer interface{}, scene *Sc
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	p := ba.ctx.Get("Sound").New(args...)
@@ -126,10 +126,10 @@ func (s *Sound) Dispose() {
 // GetAudioBuffer calls the GetAudioBuffer method on the Sound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#getaudiobuffer
-func (s *Sound) GetAudioBuffer() *AudioBuffer {
+func (s *Sound) GetAudioBuffer() js.Value {
 
 	retVal := s.p.Call("getAudioBuffer")
-	return AudioBufferFromJSObject(retVal, s.ctx)
+	return retVal
 }
 
 // GetVolume calls the GetVolume method on the Sound object.
@@ -247,11 +247,11 @@ func (s *Sound) SetAttenuationFunction(callback func()) {
 // SetAudioBuffer calls the SetAudioBuffer method on the Sound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#setaudiobuffer
-func (s *Sound) SetAudioBuffer(audioBuffer *AudioBuffer) {
+func (s *Sound) SetAudioBuffer(audioBuffer js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, audioBuffer.JSObject())
+	args = append(args, audioBuffer)
 
 	s.p.Call("setAudioBuffer", args...)
 }
@@ -375,11 +375,11 @@ func (s *Sound) SwitchPanningModelToHRTF() {
 // UpdateOptions calls the UpdateOptions method on the Sound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#updateoptions
-func (s *Sound) UpdateOptions(options js.Value) {
+func (s *Sound) UpdateOptions(options *ISoundOptions) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, options)
+	args = append(args, options.JSObject())
 
 	s.p.Call("updateOptions", args...)
 }

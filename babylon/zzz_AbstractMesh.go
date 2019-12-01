@@ -190,7 +190,7 @@ func (a *AbstractMesh) AttachToBone(bone *Bone, affectedTransformNode *Transform
 type AbstractMeshBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the AbstractMesh object.
@@ -316,7 +316,7 @@ type AbstractMeshConstructOpts struct {
 // Construct calls the Construct method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#construct
-func (a *AbstractMesh) Construct(jsType string, name string, scene *Scene, opts *AbstractMeshConstructOpts) func() {
+func (a *AbstractMesh) Construct(jsType string, name string, scene *Scene, opts *AbstractMeshConstructOpts) js.Value {
 	if opts == nil {
 		opts = &AbstractMeshConstructOpts{}
 	}
@@ -625,7 +625,7 @@ func (a *AbstractMesh) GetBoundingInfo() *BoundingInfo {
 // AbstractMeshGetChildMeshesOpts contains optional parameters for AbstractMesh.GetChildMeshes.
 type AbstractMeshGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the AbstractMesh object.
@@ -656,7 +656,7 @@ func (a *AbstractMesh) GetChildMeshes(opts *AbstractMeshGetChildMeshesOpts) *Abs
 // AbstractMeshGetChildTransformNodesOpts contains optional parameters for AbstractMesh.GetChildTransformNodes.
 type AbstractMeshGetChildTransformNodesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildTransformNodes calls the GetChildTransformNodes method on the AbstractMesh object.
@@ -686,7 +686,7 @@ func (a *AbstractMesh) GetChildTransformNodes(opts *AbstractMeshGetChildTransfor
 
 // AbstractMeshGetChildrenOpts contains optional parameters for AbstractMesh.GetChildren.
 type AbstractMeshGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -809,7 +809,7 @@ func (a *AbstractMesh) GetClosestFacetAtLocalCoordinates(x float64, y float64, z
 // AbstractMeshGetDescendantsOpts contains optional parameters for AbstractMesh.GetDescendants.
 type AbstractMeshGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the AbstractMesh object.
@@ -1006,7 +1006,7 @@ func (a *AbstractMesh) GetFacetsAtLocalCoordinates(x float64, y float64, z float
 // AbstractMeshGetHierarchyBoundingVectorsOpts contains optional parameters for AbstractMesh.GetHierarchyBoundingVectors.
 type AbstractMeshGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the AbstractMesh object.
@@ -1191,8 +1191,8 @@ func (a *AbstractMesh) GetWorldMatrix() *Matrix {
 // AbstractMeshInstantiateHierarchyOpts contains optional parameters for AbstractMesh.InstantiateHierarchy.
 type AbstractMeshInstantiateHierarchyOpts struct {
 	NewParent        *TransformNode
-	Options          js.Value
-	OnNewNodeCreated *func()
+	Options          map[string]interface{}
+	OnNewNodeCreated func()
 }
 
 // InstantiateHierarchy calls the InstantiateHierarchy method on the AbstractMesh object.
@@ -1518,7 +1518,7 @@ func (a *AbstractMesh) MoveWithCollisions(displacement *Vector3) *AbstractMesh {
 type AbstractMeshNormalizeToUnitCubeOpts struct {
 	IncludeDescendants *bool
 	IgnoreRotation     *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // NormalizeToUnitCube calls the NormalizeToUnitCube method on the AbstractMesh object.
@@ -2881,16 +2881,16 @@ func (a *AbstractMesh) SetInspectableCustomProperties(inspectableCustomPropertie
 // InstancedBuffers returns the InstancedBuffers property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#instancedbuffers
-func (a *AbstractMesh) InstancedBuffers(instancedBuffers js.Value) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(instancedBuffers)
+func (a *AbstractMesh) InstancedBuffers(instancedBuffers *object) *AbstractMesh {
+	p := ba.ctx.Get("AbstractMesh").New(instancedBuffers.JSObject())
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
 // SetInstancedBuffers sets the InstancedBuffers property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#instancedbuffers
-func (a *AbstractMesh) SetInstancedBuffers(instancedBuffers js.Value) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(instancedBuffers)
+func (a *AbstractMesh) SetInstancedBuffers(instancedBuffers *object) *AbstractMesh {
+	p := ba.ctx.Get("AbstractMesh").New(instancedBuffers.JSObject())
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 

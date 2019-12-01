@@ -299,10 +299,10 @@ func (s *StandardMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the StandardMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getanimatables
-func (s *StandardMaterial) GetAnimatables() js.Value {
+func (s *StandardMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := s.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, s.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the StandardMaterial object.

@@ -56,11 +56,11 @@ func (ba *Babylon) NewArcRotateCameraInputsManager(camera *ArcRotateCamera) *Arc
 // Add calls the Add method on the ArcRotateCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#add
-func (a *ArcRotateCameraInputsManager) Add(input js.Value) {
+func (a *ArcRotateCameraInputsManager) Add(input *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, input)
+	args = append(args, input.JSObject())
 
 	a.p.Call("add", args...)
 }
@@ -139,11 +139,11 @@ func (a *ArcRotateCameraInputsManager) AttachElement(element js.Value, opts *Arc
 // AttachInput calls the AttachInput method on the ArcRotateCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#attachinput
-func (a *ArcRotateCameraInputsManager) AttachInput(input js.Value) {
+func (a *ArcRotateCameraInputsManager) AttachInput(input *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, input)
+	args = append(args, input.JSObject())
 
 	a.p.Call("attachInput", args...)
 }
@@ -205,11 +205,11 @@ func (a *ArcRotateCameraInputsManager) RebuildInputCheck() {
 // Remove calls the Remove method on the ArcRotateCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#remove
-func (a *ArcRotateCameraInputsManager) Remove(inputToRemove js.Value) {
+func (a *ArcRotateCameraInputsManager) Remove(inputToRemove *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, inputToRemove)
+	args = append(args, inputToRemove.JSObject())
 
 	a.p.Call("remove", args...)
 }

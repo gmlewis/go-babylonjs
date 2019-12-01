@@ -235,10 +235,10 @@ func (r *RefractionTexture) FreeRenderingGroups() {
 // GetBaseSize calls the GetBaseSize method on the RefractionTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getbasesize
-func (r *RefractionTexture) GetBaseSize() js.Value {
+func (r *RefractionTexture) GetBaseSize() *ISize {
 
 	retVal := r.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, r.ctx)
 }
 
 // GetClassName calls the GetClassName method on the RefractionTexture object.
@@ -307,10 +307,10 @@ func (r *RefractionTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the RefractionTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getsize
-func (r *RefractionTexture) GetSize() js.Value {
+func (r *RefractionTexture) GetSize() *ISize {
 
 	retVal := r.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, r.ctx)
 }
 
 // RefractionTextureGetTextureMatrixOpts contains optional parameters for RefractionTexture.GetTextureMatrix.

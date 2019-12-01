@@ -55,11 +55,11 @@ func (ba *Babylon) NewCameraInputsManager(camera *Camera) *CameraInputsManager {
 // Add calls the Add method on the CameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#add
-func (c *CameraInputsManager) Add(input js.Value) {
+func (c *CameraInputsManager) Add(input *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, input)
+	args = append(args, input.JSObject())
 
 	c.p.Call("add", args...)
 }
@@ -93,11 +93,11 @@ func (c *CameraInputsManager) AttachElement(element js.Value, opts *CameraInputs
 // AttachInput calls the AttachInput method on the CameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#attachinput
-func (c *CameraInputsManager) AttachInput(input js.Value) {
+func (c *CameraInputsManager) AttachInput(input *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, input)
+	args = append(args, input.JSObject())
 
 	c.p.Call("attachInput", args...)
 }
@@ -159,11 +159,11 @@ func (c *CameraInputsManager) RebuildInputCheck() {
 // Remove calls the Remove method on the CameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#remove
-func (c *CameraInputsManager) Remove(inputToRemove js.Value) {
+func (c *CameraInputsManager) Remove(inputToRemove *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, inputToRemove)
+	args = append(args, inputToRemove.JSObject())
 
 	c.p.Call("remove", args...)
 }

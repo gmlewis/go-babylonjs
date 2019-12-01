@@ -52,12 +52,12 @@ func (g *GLTFLoader) AddPointerMetadata(babylonObject js.Value, pointer string) 
 // CreateMaterial calls the CreateMaterial method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#creatematerial
-func (g *GLTFLoader) CreateMaterial(context string, material js.Value, babylonDrawMode float64) *Material {
+func (g *GLTFLoader) CreateMaterial(context string, material *IMaterial, babylonDrawMode float64) *Material {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, context)
-	args = append(args, material)
+	args = append(args, material.JSObject())
 	args = append(args, babylonDrawMode)
 
 	retVal := g.p.Call("createMaterial", args...)
@@ -92,12 +92,12 @@ func (g *GLTFLoader) IsExtensionUsed(name string) bool {
 // LoadAnimationAsync calls the LoadAnimationAsync method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loadanimationasync
-func (g *GLTFLoader) LoadAnimationAsync(context string, animation js.Value) *Promise {
+func (g *GLTFLoader) LoadAnimationAsync(context string, animation *IAnimation) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, context)
-	args = append(args, animation)
+	args = append(args, animation.JSObject())
 
 	retVal := g.p.Call("loadAnimationAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
@@ -106,12 +106,12 @@ func (g *GLTFLoader) LoadAnimationAsync(context string, animation js.Value) *Pro
 // LoadBufferViewAsync calls the LoadBufferViewAsync method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loadbufferviewasync
-func (g *GLTFLoader) LoadBufferViewAsync(context string, bufferView js.Value) *Promise {
+func (g *GLTFLoader) LoadBufferViewAsync(context string, bufferView *IBufferView) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, context)
-	args = append(args, bufferView)
+	args = append(args, bufferView.JSObject())
 
 	retVal := g.p.Call("loadBufferViewAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
@@ -125,7 +125,7 @@ type GLTFLoaderLoadCameraAsyncOpts struct {
 // LoadCameraAsync calls the LoadCameraAsync method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loadcameraasync
-func (g *GLTFLoader) LoadCameraAsync(context string, camera js.Value, opts *GLTFLoaderLoadCameraAsyncOpts) *Promise {
+func (g *GLTFLoader) LoadCameraAsync(context string, camera *ICamera, opts *GLTFLoaderLoadCameraAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &GLTFLoaderLoadCameraAsyncOpts{}
 	}
@@ -133,7 +133,7 @@ func (g *GLTFLoader) LoadCameraAsync(context string, camera js.Value, opts *GLTF
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, context)
-	args = append(args, camera)
+	args = append(args, camera.JSObject())
 
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
@@ -148,12 +148,12 @@ func (g *GLTFLoader) LoadCameraAsync(context string, camera js.Value, opts *GLTF
 // LoadImageAsync calls the LoadImageAsync method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loadimageasync
-func (g *GLTFLoader) LoadImageAsync(context string, image js.Value) *Promise {
+func (g *GLTFLoader) LoadImageAsync(context string, image *IImage) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, context)
-	args = append(args, image)
+	args = append(args, image.JSObject())
 
 	retVal := g.p.Call("loadImageAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
@@ -162,12 +162,12 @@ func (g *GLTFLoader) LoadImageAsync(context string, image js.Value) *Promise {
 // LoadMaterialAlphaProperties calls the LoadMaterialAlphaProperties method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loadmaterialalphaproperties
-func (g *GLTFLoader) LoadMaterialAlphaProperties(context string, material js.Value, babylonMaterial *Material) {
+func (g *GLTFLoader) LoadMaterialAlphaProperties(context string, material *IMaterial, babylonMaterial *Material) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, context)
-	args = append(args, material)
+	args = append(args, material.JSObject())
 	args = append(args, babylonMaterial.JSObject())
 
 	g.p.Call("loadMaterialAlphaProperties", args...)
@@ -176,12 +176,12 @@ func (g *GLTFLoader) LoadMaterialAlphaProperties(context string, material js.Val
 // LoadMaterialBasePropertiesAsync calls the LoadMaterialBasePropertiesAsync method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loadmaterialbasepropertiesasync
-func (g *GLTFLoader) LoadMaterialBasePropertiesAsync(context string, material js.Value, babylonMaterial *Material) *Promise {
+func (g *GLTFLoader) LoadMaterialBasePropertiesAsync(context string, material *IMaterial, babylonMaterial *Material) *Promise {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, context)
-	args = append(args, material)
+	args = append(args, material.JSObject())
 	args = append(args, babylonMaterial.JSObject())
 
 	retVal := g.p.Call("loadMaterialBasePropertiesAsync", args...)
@@ -191,12 +191,12 @@ func (g *GLTFLoader) LoadMaterialBasePropertiesAsync(context string, material js
 // LoadMaterialPropertiesAsync calls the LoadMaterialPropertiesAsync method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loadmaterialpropertiesasync
-func (g *GLTFLoader) LoadMaterialPropertiesAsync(context string, material js.Value, babylonMaterial *Material) *Promise {
+func (g *GLTFLoader) LoadMaterialPropertiesAsync(context string, material *IMaterial, babylonMaterial *Material) *Promise {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, context)
-	args = append(args, material)
+	args = append(args, material.JSObject())
 	args = append(args, babylonMaterial.JSObject())
 
 	retVal := g.p.Call("loadMaterialPropertiesAsync", args...)
@@ -211,7 +211,7 @@ type GLTFLoaderLoadNodeAsyncOpts struct {
 // LoadNodeAsync calls the LoadNodeAsync method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loadnodeasync
-func (g *GLTFLoader) LoadNodeAsync(context string, node js.Value, opts *GLTFLoaderLoadNodeAsyncOpts) *Promise {
+func (g *GLTFLoader) LoadNodeAsync(context string, node *INode, opts *GLTFLoaderLoadNodeAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &GLTFLoaderLoadNodeAsyncOpts{}
 	}
@@ -219,7 +219,7 @@ func (g *GLTFLoader) LoadNodeAsync(context string, node js.Value, opts *GLTFLoad
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, context)
-	args = append(args, node)
+	args = append(args, node.JSObject())
 
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
@@ -234,12 +234,12 @@ func (g *GLTFLoader) LoadNodeAsync(context string, node js.Value, opts *GLTFLoad
 // LoadSceneAsync calls the LoadSceneAsync method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loadsceneasync
-func (g *GLTFLoader) LoadSceneAsync(context string, scene js.Value) *Promise {
+func (g *GLTFLoader) LoadSceneAsync(context string, scene *IScene) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, context)
-	args = append(args, scene)
+	args = append(args, scene.JSObject())
 
 	retVal := g.p.Call("loadSceneAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
@@ -253,7 +253,7 @@ type GLTFLoaderLoadTextureInfoAsyncOpts struct {
 // LoadTextureInfoAsync calls the LoadTextureInfoAsync method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loadtextureinfoasync
-func (g *GLTFLoader) LoadTextureInfoAsync(context string, textureInfo js.Value, opts *GLTFLoaderLoadTextureInfoAsyncOpts) *Promise {
+func (g *GLTFLoader) LoadTextureInfoAsync(context string, textureInfo *ITextureInfo, opts *GLTFLoaderLoadTextureInfoAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &GLTFLoaderLoadTextureInfoAsyncOpts{}
 	}
@@ -261,7 +261,7 @@ func (g *GLTFLoader) LoadTextureInfoAsync(context string, textureInfo js.Value, 
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, context)
-	args = append(args, textureInfo)
+	args = append(args, textureInfo.JSObject())
 
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
@@ -276,12 +276,12 @@ func (g *GLTFLoader) LoadTextureInfoAsync(context string, textureInfo js.Value, 
 // LoadUriAsync calls the LoadUriAsync method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#loaduriasync
-func (g *GLTFLoader) LoadUriAsync(context string, property js.Value, uri string) *Promise {
+func (g *GLTFLoader) LoadUriAsync(context string, property *IProperty, uri string) *Promise {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, context)
-	args = append(args, property)
+	args = append(args, property.JSObject())
 	args = append(args, uri)
 
 	retVal := g.p.Call("loadUriAsync", args...)
@@ -379,16 +379,16 @@ func (g *GLTFLoader) SetBabylonScene(babylonScene *Scene) *GLTFLoader {
 // Bin returns the Bin property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#bin
-func (g *GLTFLoader) Bin(bin js.Value) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(bin)
+func (g *GLTFLoader) Bin(bin *IDataBuffer) *GLTFLoader {
+	p := ba.ctx.Get("GLTFLoader").New(bin.JSObject())
 	return GLTFLoaderFromJSObject(p, ba.ctx)
 }
 
 // SetBin sets the Bin property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#bin
-func (g *GLTFLoader) SetBin(bin js.Value) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(bin)
+func (g *GLTFLoader) SetBin(bin *IDataBuffer) *GLTFLoader {
+	p := ba.ctx.Get("GLTFLoader").New(bin.JSObject())
 	return GLTFLoaderFromJSObject(p, ba.ctx)
 }
 

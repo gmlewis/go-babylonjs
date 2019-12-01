@@ -515,7 +515,7 @@ type MeshConstructOpts struct {
 // Construct calls the Construct method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#construct
-func (m *Mesh) Construct(jsType string, name string, scene *Scene, opts *MeshConstructOpts) func() {
+func (m *Mesh) Construct(jsType string, name string, scene *Scene, opts *MeshConstructOpts) js.Value {
 	if opts == nil {
 		opts = &MeshConstructOpts{}
 	}
@@ -1727,10 +1727,10 @@ func (m *Mesh) GetAbsolutePosition() *Vector3 {
 // GetAnimatables calls the GetAnimatables method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#getanimatables
-func (m *Mesh) GetAnimatables() js.Value {
+func (m *Mesh) GetAnimatables() *IAnimatable {
 
 	retVal := m.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, m.ctx)
 }
 
 // GetAnimationByName calls the GetAnimationByName method on the Mesh object.
@@ -2060,10 +2060,10 @@ func (m *Mesh) GetDistanceToCamera(opts *MeshGetDistanceToCameraOpts) float64 {
 // GetEmittedParticleSystems calls the GetEmittedParticleSystems method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#getemittedparticlesystems
-func (m *Mesh) GetEmittedParticleSystems() js.Value {
+func (m *Mesh) GetEmittedParticleSystems() *IParticleSystem {
 
 	retVal := m.p.Call("getEmittedParticleSystems")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, m.ctx)
 }
 
 // GetEngine calls the GetEngine method on the Mesh object.
@@ -2214,10 +2214,10 @@ func (m *Mesh) GetHierarchyBoundingVectors(opts *MeshGetHierarchyBoundingVectors
 // GetHierarchyEmittedParticleSystems calls the GetHierarchyEmittedParticleSystems method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#gethierarchyemittedparticlesystems
-func (m *Mesh) GetHierarchyEmittedParticleSystems() js.Value {
+func (m *Mesh) GetHierarchyEmittedParticleSystems() *IParticleSystem {
 
 	retVal := m.p.Call("getHierarchyEmittedParticleSystems")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, m.ctx)
 }
 
 // MeshGetIndicesOpts contains optional parameters for Mesh.GetIndices.

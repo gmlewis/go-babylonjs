@@ -73,7 +73,7 @@ type ISceneLoaderPluginBaseReadFileOpts struct {
 // ReadFile calls the ReadFile method on the ISceneLoaderPluginBase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginbase#readfile
-func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file *File, onSuccess func(), opts *ISceneLoaderPluginBaseReadFileOpts) *IFileRequest {
+func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file js.Value, onSuccess func(), opts *ISceneLoaderPluginBaseReadFileOpts) *IFileRequest {
 	if opts == nil {
 		opts = &ISceneLoaderPluginBaseReadFileOpts{}
 	}
@@ -81,7 +81,7 @@ func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file *File, onSuccess fu
 	args := make([]interface{}, 0, 3+3)
 
 	args = append(args, scene.JSObject())
-	args = append(args, file.JSObject())
+	args = append(args, file)
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
 
 	if opts.OnProgress == nil {

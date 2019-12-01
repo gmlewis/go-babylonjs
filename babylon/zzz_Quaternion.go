@@ -385,11 +385,11 @@ func (q *Quaternion) Identity() *Quaternion {
 // Inverse calls the Inverse method on the Quaternion object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#inverse
-func (q *Quaternion) Inverse(q *Quaternion) *Quaternion {
+func (q *Quaternion) Inverse(v *Quaternion) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, q.JSObject())
+	args = append(args, v.JSObject())
 
 	retVal := q.p.Call("Inverse", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -398,11 +398,11 @@ func (q *Quaternion) Inverse(q *Quaternion) *Quaternion {
 // InverseToRef calls the InverseToRef method on the Quaternion object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#inversetoref
-func (q *Quaternion) InverseToRef(q *Quaternion, result *Quaternion) *Quaternion {
+func (q *Quaternion) InverseToRef(v *Quaternion, result *Quaternion) *Quaternion {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, q.JSObject())
+	args = append(args, v.JSObject())
 	args = append(args, result.JSObject())
 
 	retVal := q.p.Call("InverseToRef", args...)

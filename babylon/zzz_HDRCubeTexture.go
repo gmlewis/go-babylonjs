@@ -126,10 +126,10 @@ func (h *HDRCubeTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the HDRCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#getbasesize
-func (h *HDRCubeTexture) GetBaseSize() js.Value {
+func (h *HDRCubeTexture) GetBaseSize() *ISize {
 
 	retVal := h.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, h.ctx)
 }
 
 // GetClassName calls the GetClassName method on the HDRCubeTexture object.
@@ -171,10 +171,10 @@ func (h *HDRCubeTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the HDRCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#getsize
-func (h *HDRCubeTexture) GetSize() js.Value {
+func (h *HDRCubeTexture) GetSize() *ISize {
 
 	retVal := h.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, h.ctx)
 }
 
 // GetTextureMatrix calls the GetTextureMatrix method on the HDRCubeTexture object.

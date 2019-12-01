@@ -1244,10 +1244,10 @@ func (t *TrailMesh) FreezeNormals() *Mesh {
 // GetAnimatables calls the GetAnimatables method on the TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#getanimatables
-func (t *TrailMesh) GetAnimatables() js.Value {
+func (t *TrailMesh) GetAnimatables() *IAnimatable {
 
 	retVal := t.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, t.ctx)
 }
 
 // GetClassName calls the GetClassName method on the TrailMesh object.
@@ -1262,19 +1262,19 @@ func (t *TrailMesh) GetClassName() string {
 // GetEmittedParticleSystems calls the GetEmittedParticleSystems method on the TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#getemittedparticlesystems
-func (t *TrailMesh) GetEmittedParticleSystems() js.Value {
+func (t *TrailMesh) GetEmittedParticleSystems() *IParticleSystem {
 
 	retVal := t.p.Call("getEmittedParticleSystems")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, t.ctx)
 }
 
 // GetHierarchyEmittedParticleSystems calls the GetHierarchyEmittedParticleSystems method on the TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#gethierarchyemittedparticlesystems
-func (t *TrailMesh) GetHierarchyEmittedParticleSystems() js.Value {
+func (t *TrailMesh) GetHierarchyEmittedParticleSystems() *IParticleSystem {
 
 	retVal := t.p.Call("getHierarchyEmittedParticleSystems")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, t.ctx)
 }
 
 // TrailMeshGetIndicesOpts contains optional parameters for TrailMesh.GetIndices.

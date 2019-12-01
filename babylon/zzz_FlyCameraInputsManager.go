@@ -55,11 +55,11 @@ func (ba *Babylon) NewFlyCameraInputsManager(camera *FlyCamera) *FlyCameraInputs
 // Add calls the Add method on the FlyCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#add
-func (f *FlyCameraInputsManager) Add(input js.Value) {
+func (f *FlyCameraInputsManager) Add(input *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, input)
+	args = append(args, input.JSObject())
 
 	f.p.Call("add", args...)
 }
@@ -127,11 +127,11 @@ func (f *FlyCameraInputsManager) AttachElement(element js.Value, opts *FlyCamera
 // AttachInput calls the AttachInput method on the FlyCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#attachinput
-func (f *FlyCameraInputsManager) AttachInput(input js.Value) {
+func (f *FlyCameraInputsManager) AttachInput(input *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, input)
+	args = append(args, input.JSObject())
 
 	f.p.Call("attachInput", args...)
 }
@@ -193,11 +193,11 @@ func (f *FlyCameraInputsManager) RebuildInputCheck() {
 // Remove calls the Remove method on the FlyCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#remove
-func (f *FlyCameraInputsManager) Remove(inputToRemove js.Value) {
+func (f *FlyCameraInputsManager) Remove(inputToRemove *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, inputToRemove)
+	args = append(args, inputToRemove.JSObject())
 
 	f.p.Call("remove", args...)
 }

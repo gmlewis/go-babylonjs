@@ -299,11 +299,11 @@ func (e *Engine) BindTransformFeedbackBuffer(value *DataBuffer) {
 // BindUniformBlock calls the BindUniformBlock method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#binduniformblock
-func (e *Engine) BindUniformBlock(pipelineContext js.Value, blockName string, index float64) {
+func (e *Engine) BindUniformBlock(pipelineContext *IPipelineContext, blockName string, index float64) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, blockName)
 	args = append(args, index)
 
@@ -490,7 +490,7 @@ func (e *Engine) CreateDynamicVertexBuffer(data []*float64) *DataBuffer {
 type EngineCreateEffectOpts struct {
 	Samplers        *string
 	Defines         *string
-	Fallbacks       js.Value
+	Fallbacks       *IEffectFallbacks
 	OnCompiled      *func()
 	OnError         *func()
 	IndexParameters *interface{}
@@ -523,7 +523,7 @@ func (e *Engine) CreateEffect(baseName interface{}, attributesNamesOrOptions str
 	if opts.Fallbacks == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Fallbacks)
+		args = append(args, opts.Fallbacks.JSObject())
 	}
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
@@ -630,12 +630,12 @@ func (e *Engine) CreateInstancesBuffer(capacity float64) *DataBuffer {
 // CreateMultipleRenderTarget calls the CreateMultipleRenderTarget method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createmultiplerendertarget
-func (e *Engine) CreateMultipleRenderTarget(size interface{}, options js.Value) *InternalTexture {
+func (e *Engine) CreateMultipleRenderTarget(size interface{}, options *IMultiRenderTargetOptions) *InternalTexture {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, size)
-	args = append(args, options)
+	args = append(args, options.JSObject())
 
 	retVal := e.p.Call("createMultipleRenderTarget", args...)
 	return InternalTextureFromJSObject(retVal, e.ctx)
@@ -658,10 +658,10 @@ func (e *Engine) CreateMultiviewRenderTargetTexture(width float64, height float6
 // CreatePipelineContext calls the CreatePipelineContext method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createpipelinecontext
-func (e *Engine) CreatePipelineContext() js.Value {
+func (e *Engine) CreatePipelineContext() *IPipelineContext {
 
 	retVal := e.p.Call("createPipelineContext")
-	return retVal
+	return IPipelineContextFromJSObject(retVal, e.ctx)
 }
 
 // EngineCreatePrefilteredCubeTextureOpts contains optional parameters for Engine.CreatePrefilteredCubeTexture.
@@ -778,14 +778,14 @@ type EngineCreateRawShaderProgramOpts struct {
 // CreateRawShaderProgram calls the CreateRawShaderProgram method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createrawshaderprogram
-func (e *Engine) CreateRawShaderProgram(pipelineContext js.Value, vertexCode string, fragmentCode string, opts *EngineCreateRawShaderProgramOpts) js.Value {
+func (e *Engine) CreateRawShaderProgram(pipelineContext *IPipelineContext, vertexCode string, fragmentCode string, opts *EngineCreateRawShaderProgramOpts) js.Value {
 	if opts == nil {
 		opts = &EngineCreateRawShaderProgramOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, vertexCode)
 	args = append(args, fragmentCode)
 
@@ -919,14 +919,14 @@ type EngineCreateShaderProgramOpts struct {
 // CreateShaderProgram calls the CreateShaderProgram method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createshaderprogram
-func (e *Engine) CreateShaderProgram(pipelineContext js.Value, vertexCode string, fragmentCode string, defines string, opts *EngineCreateShaderProgramOpts) js.Value {
+func (e *Engine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCode string, fragmentCode string, defines string, opts *EngineCreateShaderProgramOpts) js.Value {
 	if opts == nil {
 		opts = &EngineCreateShaderProgramOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, vertexCode)
 	args = append(args, fragmentCode)
 	args = append(args, defines)
@@ -1062,14 +1062,14 @@ func (e *Engine) CreateVertexBuffer(data []*float64) *DataBuffer {
 // DefaultLoadingScreenFactory calls the DefaultLoadingScreenFactory method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#defaultloadingscreenfactory
-func (e *Engine) DefaultLoadingScreenFactory(canvas js.Value) js.Value {
+func (e *Engine) DefaultLoadingScreenFactory(canvas js.Value) *ILoadingScreen {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, canvas)
 
 	retVal := e.p.Call("DefaultLoadingScreenFactory", args...)
-	return retVal
+	return ILoadingScreenFromJSObject(retVal, e.ctx)
 }
 
 // DeleteInstancesBuffer calls the DeleteInstancesBuffer method on the Engine object.
@@ -1478,11 +1478,11 @@ func (e *Engine) GetAspectRatio(viewportOwner js.Value, opts *EngineGetAspectRat
 // GetAttributes calls the GetAttributes method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#getattributes
-func (e *Engine) GetAttributes(pipelineContext js.Value, attributesNames string) float64 {
+func (e *Engine) GetAttributes(pipelineContext *IPipelineContext, attributesNames string) float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, attributesNames)
 
 	retVal := e.p.Call("getAttributes", args...)
@@ -1848,11 +1848,11 @@ func (e *Engine) GetTimeStep() float64 {
 // GetUniforms calls the GetUniforms method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#getuniforms
-func (e *Engine) GetUniforms(pipelineContext js.Value, uniformsNames string) js.Value {
+func (e *Engine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames string) js.Value {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, uniformsNames)
 
 	retVal := e.p.Call("getUniforms", args...)
@@ -3375,11 +3375,11 @@ func (e *Engine) _createDepthStencilCubeTexture(size float64, options *DepthText
 // _deletePipelineContext calls the _deletePipelineContext method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#_deletepipelinecontext
-func (e *Engine) _deletePipelineContext(pipelineContext js.Value) {
+func (e *Engine) _deletePipelineContext(pipelineContext *IPipelineContext) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 
 	e.p.Call("_deletePipelineContext", args...)
 }
@@ -4337,16 +4337,16 @@ func (e *Engine) SetLastCreatedScene(LastCreatedScene *Scene) *Engine {
 // LoadingScreen returns the LoadingScreen property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#loadingscreen
-func (e *Engine) LoadingScreen(loadingScreen js.Value) *Engine {
-	p := ba.ctx.Get("Engine").New(loadingScreen)
+func (e *Engine) LoadingScreen(loadingScreen *ILoadingScreen) *Engine {
+	p := ba.ctx.Get("Engine").New(loadingScreen.JSObject())
 	return EngineFromJSObject(p, ba.ctx)
 }
 
 // SetLoadingScreen sets the LoadingScreen property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#loadingscreen
-func (e *Engine) SetLoadingScreen(loadingScreen js.Value) *Engine {
-	p := ba.ctx.Get("Engine").New(loadingScreen)
+func (e *Engine) SetLoadingScreen(loadingScreen *ILoadingScreen) *Engine {
+	p := ba.ctx.Get("Engine").New(loadingScreen.JSObject())
 	return EngineFromJSObject(p, ba.ctx)
 }
 

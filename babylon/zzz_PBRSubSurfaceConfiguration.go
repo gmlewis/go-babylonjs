@@ -167,11 +167,11 @@ func (p *PBRSubSurfaceConfiguration) GetActiveTextures(activeTextures *BaseTextu
 // GetAnimatables calls the GetAnimatables method on the PBRSubSurfaceConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#getanimatables
-func (p *PBRSubSurfaceConfiguration) GetAnimatables(animatables js.Value) {
+func (p *PBRSubSurfaceConfiguration) GetAnimatables(animatables *IAnimatable) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, animatables)
+	args = append(args, animatables.JSObject())
 
 	p.p.Call("getAnimatables", args...)
 }

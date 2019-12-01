@@ -74,7 +74,7 @@ type ParticleHelperCreateDefaultOpts struct {
 // CreateDefault calls the CreateDefault method on the ParticleHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlehelper#createdefault
-func (p *ParticleHelper) CreateDefault(emitter *AbstractMesh, opts *ParticleHelperCreateDefaultOpts) js.Value {
+func (p *ParticleHelper) CreateDefault(emitter *AbstractMesh, opts *ParticleHelperCreateDefaultOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &ParticleHelperCreateDefaultOpts{}
 	}
@@ -100,17 +100,17 @@ func (p *ParticleHelper) CreateDefault(emitter *AbstractMesh, opts *ParticleHelp
 	}
 
 	retVal := p.p.Call("CreateDefault", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, p.ctx)
 }
 
 // ExportSet calls the ExportSet method on the ParticleHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlehelper#exportset
-func (p *ParticleHelper) ExportSet(systems js.Value) *ParticleSystemSet {
+func (p *ParticleHelper) ExportSet(systems *IParticleSystem) *ParticleSystemSet {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, systems)
+	args = append(args, systems.JSObject())
 
 	retVal := p.p.Call("ExportSet", args...)
 	return ParticleSystemSetFromJSObject(retVal, p.ctx)

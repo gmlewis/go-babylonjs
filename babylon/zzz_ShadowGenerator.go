@@ -46,7 +46,7 @@ type NewShadowGeneratorOpts struct {
 // NewShadowGenerator returns a new ShadowGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator
-func (ba *Babylon) NewShadowGenerator(mapSize float64, light js.Value, opts *NewShadowGeneratorOpts) *ShadowGenerator {
+func (ba *Babylon) NewShadowGenerator(mapSize float64, light *IShadowLight, opts *NewShadowGeneratorOpts) *ShadowGenerator {
 	if opts == nil {
 		opts = &NewShadowGeneratorOpts{}
 	}
@@ -54,7 +54,7 @@ func (ba *Babylon) NewShadowGenerator(mapSize float64, light js.Value, opts *New
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, mapSize)
-	args = append(args, light)
+	args = append(args, light.JSObject())
 
 	if opts.UsefulFloatFirst == nil {
 		args = append(args, js.Undefined())
@@ -190,10 +190,10 @@ func (s *ShadowGenerator) GetDarkness() float64 {
 // GetLight calls the GetLight method on the ShadowGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#getlight
-func (s *ShadowGenerator) GetLight() js.Value {
+func (s *ShadowGenerator) GetLight() *IShadowLight {
 
 	retVal := s.p.Call("getLight")
-	return retVal
+	return IShadowLightFromJSObject(retVal, s.ctx)
 }
 
 // GetShadowMap calls the GetShadowMap method on the ShadowGenerator object.

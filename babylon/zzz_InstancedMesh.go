@@ -308,7 +308,7 @@ type InstancedMeshConstructOpts struct {
 // Construct calls the Construct method on the InstancedMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#construct
-func (i *InstancedMesh) Construct(jsType string, name string, scene *Scene, opts *InstancedMeshConstructOpts) func() {
+func (i *InstancedMesh) Construct(jsType string, name string, scene *Scene, opts *InstancedMeshConstructOpts) js.Value {
 	if opts == nil {
 		opts = &InstancedMeshConstructOpts{}
 	}

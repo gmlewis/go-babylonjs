@@ -38,7 +38,7 @@ func ArrayItemArrayToJSArray(array []*ArrayItem) []interface{} {
 
 // ArrayItemAssignOpts contains optional parameters for ArrayItem.Assign.
 type ArrayItemAssignOpts struct {
-	Array js.Value
+	Array *IArrayItem
 }
 
 // Assign calls the Assign method on the ArrayItem object.
@@ -54,7 +54,7 @@ func (a *ArrayItem) Assign(opts *ArrayItemAssignOpts) {
 	if opts.Array == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Array)
+		args = append(args, opts.Array.JSObject())
 	}
 
 	a.p.Call("Assign", args...)

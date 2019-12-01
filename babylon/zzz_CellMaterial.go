@@ -282,10 +282,10 @@ func (c *CellMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the CellMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getanimatables
-func (c *CellMaterial) GetAnimatables() js.Value {
+func (c *CellMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := c.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, c.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the CellMaterial object.

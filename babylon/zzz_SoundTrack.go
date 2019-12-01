@@ -41,7 +41,7 @@ func SoundTrackArrayToJSArray(array []*SoundTrack) []interface{} {
 
 // NewSoundTrackOpts contains optional parameters for NewSoundTrack.
 type NewSoundTrackOpts struct {
-	Options js.Value
+	Options *ISoundTrackOptions
 }
 
 // NewSoundTrack returns a new SoundTrack object.
@@ -59,7 +59,7 @@ func (ba *Babylon) NewSoundTrack(scene *Scene, opts *NewSoundTrackOpts) *SoundTr
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	p := ba.ctx.Get("SoundTrack").New(args...)

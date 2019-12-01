@@ -54,11 +54,11 @@ func (ba *Babylon) NewSceneLoaderProgressEvent(lengthComputable bool, loaded flo
 // FromProgressEvent calls the FromProgressEvent method on the SceneLoaderProgressEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent#fromprogressevent
-func (s *SceneLoaderProgressEvent) FromProgressEvent(event *ProgressEvent) *SceneLoaderProgressEvent {
+func (s *SceneLoaderProgressEvent) FromProgressEvent(event js.Value) *SceneLoaderProgressEvent {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, event.JSObject())
+	args = append(args, event)
 
 	retVal := s.p.Call("FromProgressEvent", args...)
 	return SceneLoaderProgressEventFromJSObject(retVal, s.ctx)

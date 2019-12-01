@@ -313,16 +313,16 @@ func (s *ScatterPanel) SetIsVisible(isVisible bool) *ScatterPanel {
 // Iteration returns the Iteration property of class ScatterPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#iteration
-func (s *ScatterPanel) Iteration(iteration *float) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(iteration.JSObject())
+func (s *ScatterPanel) Iteration(iteration float64) *ScatterPanel {
+	p := ba.ctx.Get("ScatterPanel").New(iteration)
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
 // SetIteration sets the Iteration property of class ScatterPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#iteration
-func (s *ScatterPanel) SetIteration(iteration *float) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(iteration.JSObject())
+func (s *ScatterPanel) SetIteration(iteration float64) *ScatterPanel {
+	p := ba.ctx.Get("ScatterPanel").New(iteration)
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 

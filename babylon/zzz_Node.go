@@ -175,7 +175,7 @@ type NodeConstructOpts struct {
 // Construct calls the Construct method on the Node object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#construct
-func (n *Node) Construct(jsType string, name string, scene *Scene, opts *NodeConstructOpts) func() {
+func (n *Node) Construct(jsType string, name string, scene *Scene, opts *NodeConstructOpts) js.Value {
 	if opts == nil {
 		opts = &NodeConstructOpts{}
 	}

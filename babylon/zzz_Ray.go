@@ -311,7 +311,7 @@ func (r *Ray) IntersectsSphere(sphere *BoundingSphere, opts *RayIntersectsSphere
 // IntersectsTriangle calls the IntersectsTriangle method on the Ray object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ray#intersectstriangle
-func (r *Ray) IntersectsTriangle(vertex0 *Vector3, vertex1 *Vector3, vertex2 *Vector3) *IntersectionInfo {
+func (r *Ray) IntersectsTriangle(vertex0 *Vector3, vertex1 *Vector3, vertex2 *Vector3) js.Value {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -320,7 +320,7 @@ func (r *Ray) IntersectsTriangle(vertex0 *Vector3, vertex1 *Vector3, vertex2 *Ve
 	args = append(args, vertex2.JSObject())
 
 	retVal := r.p.Call("intersectsTriangle", args...)
-	return IntersectionInfoFromJSObject(retVal, r.ctx)
+	return retVal
 }
 
 // Transform calls the Transform method on the Ray object.
@@ -354,12 +354,12 @@ func (r *Ray) TransformToRef(ray *Ray, matrix *Matrix, result *Ray) {
 // UnprojectRayToRef calls the UnprojectRayToRef method on the Ray object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ray#unprojectraytoref
-func (r *Ray) UnprojectRayToRef(sourceX *float, sourceY *float, viewportWidth float64, viewportHeight float64, world *Matrix, view *Matrix, projection *Matrix) {
+func (r *Ray) UnprojectRayToRef(sourceX float64, sourceY float64, viewportWidth float64, viewportHeight float64, world *Matrix, view *Matrix, projection *Matrix) {
 
 	args := make([]interface{}, 0, 7+0)
 
-	args = append(args, sourceX.JSObject())
-	args = append(args, sourceY.JSObject())
+	args = append(args, sourceX)
+	args = append(args, sourceY)
 	args = append(args, viewportWidth)
 	args = append(args, viewportHeight)
 	args = append(args, world.JSObject())

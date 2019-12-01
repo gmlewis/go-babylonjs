@@ -240,7 +240,7 @@ type TransformNodeConstructOpts struct {
 // Construct calls the Construct method on the TransformNode object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#construct
-func (t *TransformNode) Construct(jsType string, name string, scene *Scene, opts *TransformNodeConstructOpts) func() {
+func (t *TransformNode) Construct(jsType string, name string, scene *Scene, opts *TransformNodeConstructOpts) js.Value {
 	if opts == nil {
 		opts = &TransformNodeConstructOpts{}
 	}

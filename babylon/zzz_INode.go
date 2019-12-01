@@ -169,16 +169,16 @@ func (i *INode) SetName(name string) *INode {
 // Parent returns the Parent property of class INode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inode#parent
-func (i *INode) Parent(parent js.Value) *INode {
-	p := ba.ctx.Get("INode").New(parent)
+func (i *INode) Parent(parent *INode) *INode {
+	p := ba.ctx.Get("INode").New(parent.JSObject())
 	return INodeFromJSObject(p, ba.ctx)
 }
 
 // SetParent sets the Parent property of class INode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inode#parent
-func (i *INode) SetParent(parent js.Value) *INode {
-	p := ba.ctx.Get("INode").New(parent)
+func (i *INode) SetParent(parent *INode) *INode {
+	p := ba.ctx.Get("INode").New(parent.JSObject())
 	return INodeFromJSObject(p, ba.ctx)
 }
 

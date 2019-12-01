@@ -229,7 +229,7 @@ type CameraConstructOpts struct {
 // Construct calls the Construct method on the Camera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#construct
-func (c *Camera) Construct(jsType string, name string, scene *Scene, opts *CameraConstructOpts) func() {
+func (c *Camera) Construct(jsType string, name string, scene *Scene, opts *CameraConstructOpts) js.Value {
 	if opts == nil {
 		opts = &CameraConstructOpts{}
 	}
@@ -505,7 +505,7 @@ type CameraGetConstructorFromNameOpts struct {
 // GetConstructorFromName calls the GetConstructorFromName method on the Camera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#getconstructorfromname
-func (c *Camera) GetConstructorFromName(jsType string, name string, scene *Scene, opts *CameraGetConstructorFromNameOpts) func() {
+func (c *Camera) GetConstructorFromName(jsType string, name string, scene *Scene, opts *CameraGetConstructorFromNameOpts) js.Value {
 	if opts == nil {
 		opts = &CameraGetConstructorFromNameOpts{}
 	}
@@ -776,11 +776,11 @@ func (c *Camera) IsActiveMesh(mesh *Mesh) bool {
 // IsCompletelyInFrustum calls the IsCompletelyInFrustum method on the Camera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#iscompletelyinfrustum
-func (c *Camera) IsCompletelyInFrustum(target js.Value) bool {
+func (c *Camera) IsCompletelyInFrustum(target *ICullable) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target)
+	args = append(args, target.JSObject())
 
 	retVal := c.p.Call("isCompletelyInFrustum", args...)
 	return retVal.Bool()
@@ -841,14 +841,14 @@ type CameraIsInFrustumOpts struct {
 // IsInFrustum calls the IsInFrustum method on the Camera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#isinfrustum
-func (c *Camera) IsInFrustum(target js.Value, opts *CameraIsInFrustumOpts) bool {
+func (c *Camera) IsInFrustum(target *ICullable, opts *CameraIsInFrustumOpts) bool {
 	if opts == nil {
 		opts = &CameraIsInFrustumOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, target)
+	args = append(args, target.JSObject())
 
 	if opts.CheckRigCameras == nil {
 		args = append(args, js.Undefined())

@@ -247,7 +247,7 @@ type ShadowLightConstructOpts struct {
 // Construct calls the Construct method on the ShadowLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#construct
-func (s *ShadowLight) Construct(jsType string, name string, scene *Scene, opts *ShadowLightConstructOpts) func() {
+func (s *ShadowLight) Construct(jsType string, name string, scene *Scene, opts *ShadowLightConstructOpts) js.Value {
 	if opts == nil {
 		opts = &ShadowLightConstructOpts{}
 	}
@@ -477,7 +477,7 @@ func (s *ShadowLight) GetClassName() string {
 // GetConstructorFromName calls the GetConstructorFromName method on the ShadowLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getconstructorfromname
-func (s *ShadowLight) GetConstructorFromName(jsType float64, name string, scene *Scene) func() {
+func (s *ShadowLight) GetConstructorFromName(jsType float64, name string, scene *Scene) js.Value {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -650,10 +650,10 @@ func (s *ShadowLight) GetShadowDirection(opts *ShadowLightGetShadowDirectionOpts
 // GetShadowGenerator calls the GetShadowGenerator method on the ShadowLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#getshadowgenerator
-func (s *ShadowLight) GetShadowGenerator() js.Value {
+func (s *ShadowLight) GetShadowGenerator() *IShadowGenerator {
 
 	retVal := s.p.Call("getShadowGenerator")
-	return retVal
+	return IShadowGeneratorFromJSObject(retVal, s.ctx)
 }
 
 // GetTypeID calls the GetTypeID method on the ShadowLight object.
@@ -864,7 +864,7 @@ func (s *ShadowLight) SetEnabled(value bool) {
 // SetShadowProjectionMatrix calls the SetShadowProjectionMatrix method on the ShadowLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#setshadowprojectionmatrix
-func (s *ShadowLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []*AbstractMesh) js.Value {
+func (s *ShadowLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []*AbstractMesh) *IShadowLight {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -873,7 +873,7 @@ func (s *ShadowLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matr
 	args = append(args, AbstractMeshArrayToJSArray(renderList))
 
 	retVal := s.p.Call("setShadowProjectionMatrix", args...)
-	return retVal
+	return IShadowLightFromJSObject(retVal, s.ctx)
 }
 
 // ShadowLightToStringOpts contains optional parameters for ShadowLight.ToString.

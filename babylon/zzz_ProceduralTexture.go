@@ -160,10 +160,10 @@ func (p *ProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the ProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getbasesize
-func (p *ProceduralTexture) GetBaseSize() js.Value {
+func (p *ProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := p.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, p.ctx)
 }
 
 // GetClassName calls the GetClassName method on the ProceduralTexture object.
@@ -232,10 +232,10 @@ func (p *ProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the ProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getsize
-func (p *ProceduralTexture) GetSize() js.Value {
+func (p *ProceduralTexture) GetSize() *ISize {
 
 	retVal := p.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, p.ctx)
 }
 
 // ProceduralTextureGetTextureMatrixOpts contains optional parameters for ProceduralTexture.GetTextureMatrix.

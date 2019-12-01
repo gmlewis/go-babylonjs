@@ -61,14 +61,14 @@ func (i *IAction) Serialize(parent interface{}) interface{} {
 // Then calls the Then method on the IAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaction#then
-func (i *IAction) Then(action js.Value) js.Value {
+func (i *IAction) Then(action *IAction) *IAction {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action)
+	args = append(args, action.JSObject())
 
 	retVal := i.p.Call("then", args...)
-	return retVal
+	return IActionFromJSObject(retVal, i.ctx)
 }
 
 /*

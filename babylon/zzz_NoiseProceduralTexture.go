@@ -160,10 +160,10 @@ func (n *NoiseProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the NoiseProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getbasesize
-func (n *NoiseProceduralTexture) GetBaseSize() js.Value {
+func (n *NoiseProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := n.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, n.ctx)
 }
 
 // GetClassName calls the GetClassName method on the NoiseProceduralTexture object.
@@ -232,10 +232,10 @@ func (n *NoiseProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the NoiseProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getsize
-func (n *NoiseProceduralTexture) GetSize() js.Value {
+func (n *NoiseProceduralTexture) GetSize() *ISize {
 
 	retVal := n.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, n.ctx)
 }
 
 // NoiseProceduralTextureGetTextureMatrixOpts contains optional parameters for NoiseProceduralTexture.GetTextureMatrix.

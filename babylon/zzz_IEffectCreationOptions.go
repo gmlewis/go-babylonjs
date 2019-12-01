@@ -73,16 +73,16 @@ func (i *IEffectCreationOptions) SetDefines(defines interface{}) *IEffectCreatio
 // Fallbacks returns the Fallbacks property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#fallbacks
-func (i *IEffectCreationOptions) Fallbacks(fallbacks js.Value) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(fallbacks)
+func (i *IEffectCreationOptions) Fallbacks(fallbacks *IEffectFallbacks) *IEffectCreationOptions {
+	p := ba.ctx.Get("IEffectCreationOptions").New(fallbacks.JSObject())
 	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
 }
 
 // SetFallbacks sets the Fallbacks property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#fallbacks
-func (i *IEffectCreationOptions) SetFallbacks(fallbacks js.Value) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(fallbacks)
+func (i *IEffectCreationOptions) SetFallbacks(fallbacks *IEffectFallbacks) *IEffectCreationOptions {
+	p := ba.ctx.Get("IEffectCreationOptions").New(fallbacks.JSObject())
 	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
 }
 

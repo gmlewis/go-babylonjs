@@ -45,13 +45,13 @@ func HtmlElementTextureArrayToJSArray(array []*HtmlElementTexture) []interface{}
 // NewHtmlElementTexture returns a new HtmlElementTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture
-func (ba *Babylon) NewHtmlElementTexture(name string, element js.Value, options js.Value) *HtmlElementTexture {
+func (ba *Babylon) NewHtmlElementTexture(name string, element js.Value, options *IHtmlElementTextureOptions) *HtmlElementTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
 	args = append(args, element)
-	args = append(args, options)
+	args = append(args, options.JSObject())
 
 	p := ba.ctx.Get("HtmlElementTexture").New(args...)
 	return HtmlElementTextureFromJSObject(p, ba.ctx)
@@ -85,10 +85,10 @@ func (h *HtmlElementTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the HtmlElementTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#getbasesize
-func (h *HtmlElementTexture) GetBaseSize() js.Value {
+func (h *HtmlElementTexture) GetBaseSize() *ISize {
 
 	retVal := h.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, h.ctx)
 }
 
 // GetClassName calls the GetClassName method on the HtmlElementTexture object.
@@ -130,10 +130,10 @@ func (h *HtmlElementTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the HtmlElementTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#getsize
-func (h *HtmlElementTexture) GetSize() js.Value {
+func (h *HtmlElementTexture) GetSize() *ISize {
 
 	retVal := h.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, h.ctx)
 }
 
 // GetTextureMatrix calls the GetTextureMatrix method on the HtmlElementTexture object.

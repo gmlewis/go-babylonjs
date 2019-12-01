@@ -105,16 +105,16 @@ func (i *IMaterial) SetEmissiveFactor(emissiveFactor float64) *IMaterial {
 // EmissiveTexture returns the EmissiveTexture property of class IMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterial#emissivetexture
-func (i *IMaterial) EmissiveTexture(emissiveTexture js.Value) *IMaterial {
-	p := ba.ctx.Get("IMaterial").New(emissiveTexture)
+func (i *IMaterial) EmissiveTexture(emissiveTexture *ITextureInfo) *IMaterial {
+	p := ba.ctx.Get("IMaterial").New(emissiveTexture.JSObject())
 	return IMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetEmissiveTexture sets the EmissiveTexture property of class IMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterial#emissivetexture
-func (i *IMaterial) SetEmissiveTexture(emissiveTexture js.Value) *IMaterial {
-	p := ba.ctx.Get("IMaterial").New(emissiveTexture)
+func (i *IMaterial) SetEmissiveTexture(emissiveTexture *ITextureInfo) *IMaterial {
+	p := ba.ctx.Get("IMaterial").New(emissiveTexture.JSObject())
 	return IMaterialFromJSObject(p, ba.ctx)
 }
 

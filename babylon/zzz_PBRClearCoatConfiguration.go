@@ -157,11 +157,11 @@ func (p *PBRClearCoatConfiguration) GetActiveTextures(activeTextures *BaseTextur
 // GetAnimatables calls the GetAnimatables method on the PBRClearCoatConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#getanimatables
-func (p *PBRClearCoatConfiguration) GetAnimatables(animatables js.Value) {
+func (p *PBRClearCoatConfiguration) GetAnimatables(animatables *IAnimatable) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, animatables)
+	args = append(args, animatables.JSObject())
 
 	p.p.Call("getAnimatables", args...)
 }

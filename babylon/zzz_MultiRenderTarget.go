@@ -41,7 +41,7 @@ func MultiRenderTargetArrayToJSArray(array []*MultiRenderTarget) []interface{} {
 
 // NewMultiRenderTargetOpts contains optional parameters for NewMultiRenderTarget.
 type NewMultiRenderTargetOpts struct {
-	Options js.Value
+	Options *IMultiRenderTargetOptions
 }
 
 // NewMultiRenderTarget returns a new MultiRenderTarget object.
@@ -62,7 +62,7 @@ func (ba *Babylon) NewMultiRenderTarget(name string, size interface{}, count flo
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	p := ba.ctx.Get("MultiRenderTarget").New(args...)
@@ -236,10 +236,10 @@ func (m *MultiRenderTarget) FreeRenderingGroups() {
 // GetBaseSize calls the GetBaseSize method on the MultiRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getbasesize
-func (m *MultiRenderTarget) GetBaseSize() js.Value {
+func (m *MultiRenderTarget) GetBaseSize() *ISize {
 
 	retVal := m.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, m.ctx)
 }
 
 // GetClassName calls the GetClassName method on the MultiRenderTarget object.
@@ -308,10 +308,10 @@ func (m *MultiRenderTarget) GetScene() *Scene {
 // GetSize calls the GetSize method on the MultiRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getsize
-func (m *MultiRenderTarget) GetSize() js.Value {
+func (m *MultiRenderTarget) GetSize() *ISize {
 
 	retVal := m.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, m.ctx)
 }
 
 // MultiRenderTargetGetTextureMatrixOpts contains optional parameters for MultiRenderTarget.GetTextureMatrix.

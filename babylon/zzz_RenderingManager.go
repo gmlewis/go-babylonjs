@@ -86,11 +86,11 @@ func (r *RenderingManager) Dispatch(subMesh *SubMesh, opts *RenderingManagerDisp
 // DispatchParticles calls the DispatchParticles method on the RenderingManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#dispatchparticles
-func (r *RenderingManager) DispatchParticles(particleSystem js.Value) {
+func (r *RenderingManager) DispatchParticles(particleSystem *IParticleSystem) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, particleSystem)
+	args = append(args, particleSystem.JSObject())
 
 	r.p.Call("dispatchParticles", args...)
 }
@@ -98,11 +98,11 @@ func (r *RenderingManager) DispatchParticles(particleSystem js.Value) {
 // DispatchSprites calls the DispatchSprites method on the RenderingManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#dispatchsprites
-func (r *RenderingManager) DispatchSprites(spriteManager js.Value) {
+func (r *RenderingManager) DispatchSprites(spriteManager *ISpriteManager) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, spriteManager)
+	args = append(args, spriteManager.JSObject())
 
 	r.p.Call("dispatchSprites", args...)
 }

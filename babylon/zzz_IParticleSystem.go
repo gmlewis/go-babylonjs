@@ -41,7 +41,7 @@ func IParticleSystemArrayToJSArray(array []*IParticleSystem) []interface{} {
 // AddAlphaRemapGradient calls the AddAlphaRemapGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addalpharemapgradient
-func (i *IParticleSystem) AddAlphaRemapGradient(gradient float64, min float64, max float64) js.Value {
+func (i *IParticleSystem) AddAlphaRemapGradient(gradient float64, min float64, max float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -50,7 +50,7 @@ func (i *IParticleSystem) AddAlphaRemapGradient(gradient float64, min float64, m
 	args = append(args, max)
 
 	retVal := i.p.Call("addAlphaRemapGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // IParticleSystemAddAngularSpeedGradientOpts contains optional parameters for IParticleSystem.AddAngularSpeedGradient.
@@ -61,7 +61,7 @@ type IParticleSystemAddAngularSpeedGradientOpts struct {
 // AddAngularSpeedGradient calls the AddAngularSpeedGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addangularspeedgradient
-func (i *IParticleSystem) AddAngularSpeedGradient(gradient float64, factor float64, opts *IParticleSystemAddAngularSpeedGradientOpts) js.Value {
+func (i *IParticleSystem) AddAngularSpeedGradient(gradient float64, factor float64, opts *IParticleSystemAddAngularSpeedGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &IParticleSystemAddAngularSpeedGradientOpts{}
 	}
@@ -78,7 +78,7 @@ func (i *IParticleSystem) AddAngularSpeedGradient(gradient float64, factor float
 	}
 
 	retVal := i.p.Call("addAngularSpeedGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // IParticleSystemAddColorGradientOpts contains optional parameters for IParticleSystem.AddColorGradient.
@@ -89,7 +89,7 @@ type IParticleSystemAddColorGradientOpts struct {
 // AddColorGradient calls the AddColorGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addcolorgradient
-func (i *IParticleSystem) AddColorGradient(gradient float64, color1 *Color4, opts *IParticleSystemAddColorGradientOpts) js.Value {
+func (i *IParticleSystem) AddColorGradient(gradient float64, color1 *Color4, opts *IParticleSystemAddColorGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &IParticleSystemAddColorGradientOpts{}
 	}
@@ -106,13 +106,13 @@ func (i *IParticleSystem) AddColorGradient(gradient float64, color1 *Color4, opt
 	}
 
 	retVal := i.p.Call("addColorGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // AddColorRemapGradient calls the AddColorRemapGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addcolorremapgradient
-func (i *IParticleSystem) AddColorRemapGradient(gradient float64, min float64, max float64) js.Value {
+func (i *IParticleSystem) AddColorRemapGradient(gradient float64, min float64, max float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -121,7 +121,7 @@ func (i *IParticleSystem) AddColorRemapGradient(gradient float64, min float64, m
 	args = append(args, max)
 
 	retVal := i.p.Call("addColorRemapGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // IParticleSystemAddDragGradientOpts contains optional parameters for IParticleSystem.AddDragGradient.
@@ -132,7 +132,7 @@ type IParticleSystemAddDragGradientOpts struct {
 // AddDragGradient calls the AddDragGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#adddraggradient
-func (i *IParticleSystem) AddDragGradient(gradient float64, factor float64, opts *IParticleSystemAddDragGradientOpts) js.Value {
+func (i *IParticleSystem) AddDragGradient(gradient float64, factor float64, opts *IParticleSystemAddDragGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &IParticleSystemAddDragGradientOpts{}
 	}
@@ -149,7 +149,7 @@ func (i *IParticleSystem) AddDragGradient(gradient float64, factor float64, opts
 	}
 
 	retVal := i.p.Call("addDragGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // IParticleSystemAddEmitRateGradientOpts contains optional parameters for IParticleSystem.AddEmitRateGradient.
@@ -160,7 +160,7 @@ type IParticleSystemAddEmitRateGradientOpts struct {
 // AddEmitRateGradient calls the AddEmitRateGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addemitrategradient
-func (i *IParticleSystem) AddEmitRateGradient(gradient float64, factor float64, opts *IParticleSystemAddEmitRateGradientOpts) js.Value {
+func (i *IParticleSystem) AddEmitRateGradient(gradient float64, factor float64, opts *IParticleSystemAddEmitRateGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &IParticleSystemAddEmitRateGradientOpts{}
 	}
@@ -177,7 +177,7 @@ func (i *IParticleSystem) AddEmitRateGradient(gradient float64, factor float64, 
 	}
 
 	retVal := i.p.Call("addEmitRateGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // IParticleSystemAddLifeTimeGradientOpts contains optional parameters for IParticleSystem.AddLifeTimeGradient.
@@ -188,7 +188,7 @@ type IParticleSystemAddLifeTimeGradientOpts struct {
 // AddLifeTimeGradient calls the AddLifeTimeGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addlifetimegradient
-func (i *IParticleSystem) AddLifeTimeGradient(gradient float64, factor float64, opts *IParticleSystemAddLifeTimeGradientOpts) js.Value {
+func (i *IParticleSystem) AddLifeTimeGradient(gradient float64, factor float64, opts *IParticleSystemAddLifeTimeGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &IParticleSystemAddLifeTimeGradientOpts{}
 	}
@@ -205,7 +205,7 @@ func (i *IParticleSystem) AddLifeTimeGradient(gradient float64, factor float64, 
 	}
 
 	retVal := i.p.Call("addLifeTimeGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // IParticleSystemAddLimitVelocityGradientOpts contains optional parameters for IParticleSystem.AddLimitVelocityGradient.
@@ -216,7 +216,7 @@ type IParticleSystemAddLimitVelocityGradientOpts struct {
 // AddLimitVelocityGradient calls the AddLimitVelocityGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addlimitvelocitygradient
-func (i *IParticleSystem) AddLimitVelocityGradient(gradient float64, factor float64, opts *IParticleSystemAddLimitVelocityGradientOpts) js.Value {
+func (i *IParticleSystem) AddLimitVelocityGradient(gradient float64, factor float64, opts *IParticleSystemAddLimitVelocityGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &IParticleSystemAddLimitVelocityGradientOpts{}
 	}
@@ -233,13 +233,13 @@ func (i *IParticleSystem) AddLimitVelocityGradient(gradient float64, factor floa
 	}
 
 	retVal := i.p.Call("addLimitVelocityGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // AddRampGradient calls the AddRampGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addrampgradient
-func (i *IParticleSystem) AddRampGradient(gradient float64, color *Color3) js.Value {
+func (i *IParticleSystem) AddRampGradient(gradient float64, color *Color3) *IParticleSystem {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -247,7 +247,7 @@ func (i *IParticleSystem) AddRampGradient(gradient float64, color *Color3) js.Va
 	args = append(args, color.JSObject())
 
 	retVal := i.p.Call("addRampGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // IParticleSystemAddSizeGradientOpts contains optional parameters for IParticleSystem.AddSizeGradient.
@@ -258,7 +258,7 @@ type IParticleSystemAddSizeGradientOpts struct {
 // AddSizeGradient calls the AddSizeGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addsizegradient
-func (i *IParticleSystem) AddSizeGradient(gradient float64, factor float64, opts *IParticleSystemAddSizeGradientOpts) js.Value {
+func (i *IParticleSystem) AddSizeGradient(gradient float64, factor float64, opts *IParticleSystemAddSizeGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &IParticleSystemAddSizeGradientOpts{}
 	}
@@ -275,7 +275,7 @@ func (i *IParticleSystem) AddSizeGradient(gradient float64, factor float64, opts
 	}
 
 	retVal := i.p.Call("addSizeGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // IParticleSystemAddStartSizeGradientOpts contains optional parameters for IParticleSystem.AddStartSizeGradient.
@@ -286,7 +286,7 @@ type IParticleSystemAddStartSizeGradientOpts struct {
 // AddStartSizeGradient calls the AddStartSizeGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addstartsizegradient
-func (i *IParticleSystem) AddStartSizeGradient(gradient float64, factor float64, opts *IParticleSystemAddStartSizeGradientOpts) js.Value {
+func (i *IParticleSystem) AddStartSizeGradient(gradient float64, factor float64, opts *IParticleSystemAddStartSizeGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &IParticleSystemAddStartSizeGradientOpts{}
 	}
@@ -303,7 +303,7 @@ func (i *IParticleSystem) AddStartSizeGradient(gradient float64, factor float64,
 	}
 
 	retVal := i.p.Call("addStartSizeGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // IParticleSystemAddVelocityGradientOpts contains optional parameters for IParticleSystem.AddVelocityGradient.
@@ -314,7 +314,7 @@ type IParticleSystemAddVelocityGradientOpts struct {
 // AddVelocityGradient calls the AddVelocityGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#addvelocitygradient
-func (i *IParticleSystem) AddVelocityGradient(gradient float64, factor float64, opts *IParticleSystemAddVelocityGradientOpts) js.Value {
+func (i *IParticleSystem) AddVelocityGradient(gradient float64, factor float64, opts *IParticleSystemAddVelocityGradientOpts) *IParticleSystem {
 	if opts == nil {
 		opts = &IParticleSystemAddVelocityGradientOpts{}
 	}
@@ -331,7 +331,7 @@ func (i *IParticleSystem) AddVelocityGradient(gradient float64, factor float64, 
 	}
 
 	retVal := i.p.Call("addVelocityGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // Animate calls the Animate method on the IParticleSystem object.
@@ -345,7 +345,7 @@ func (i *IParticleSystem) Animate() {
 // Clone calls the Clone method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#clone
-func (i *IParticleSystem) Clone(name string, newEmitter interface{}) js.Value {
+func (i *IParticleSystem) Clone(name string, newEmitter interface{}) *IParticleSystem {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -353,7 +353,7 @@ func (i *IParticleSystem) Clone(name string, newEmitter interface{}) js.Value {
 	args = append(args, newEmitter)
 
 	retVal := i.p.Call("clone", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // CreateBoxEmitter calls the CreateBoxEmitter method on the IParticleSystem object.
@@ -655,118 +655,118 @@ func (i *IParticleSystem) Rebuild() {
 // RemoveAngularSpeedGradient calls the RemoveAngularSpeedGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#removeangularspeedgradient
-func (i *IParticleSystem) RemoveAngularSpeedGradient(gradient float64) js.Value {
+func (i *IParticleSystem) RemoveAngularSpeedGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := i.p.Call("removeAngularSpeedGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // RemoveColorGradient calls the RemoveColorGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#removecolorgradient
-func (i *IParticleSystem) RemoveColorGradient(gradient float64) js.Value {
+func (i *IParticleSystem) RemoveColorGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := i.p.Call("removeColorGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // RemoveDragGradient calls the RemoveDragGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#removedraggradient
-func (i *IParticleSystem) RemoveDragGradient(gradient float64) js.Value {
+func (i *IParticleSystem) RemoveDragGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := i.p.Call("removeDragGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // RemoveEmitRateGradient calls the RemoveEmitRateGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#removeemitrategradient
-func (i *IParticleSystem) RemoveEmitRateGradient(gradient float64) js.Value {
+func (i *IParticleSystem) RemoveEmitRateGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := i.p.Call("removeEmitRateGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // RemoveLifeTimeGradient calls the RemoveLifeTimeGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#removelifetimegradient
-func (i *IParticleSystem) RemoveLifeTimeGradient(gradient float64) js.Value {
+func (i *IParticleSystem) RemoveLifeTimeGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := i.p.Call("removeLifeTimeGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // RemoveLimitVelocityGradient calls the RemoveLimitVelocityGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#removelimitvelocitygradient
-func (i *IParticleSystem) RemoveLimitVelocityGradient(gradient float64) js.Value {
+func (i *IParticleSystem) RemoveLimitVelocityGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := i.p.Call("removeLimitVelocityGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // RemoveSizeGradient calls the RemoveSizeGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#removesizegradient
-func (i *IParticleSystem) RemoveSizeGradient(gradient float64) js.Value {
+func (i *IParticleSystem) RemoveSizeGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := i.p.Call("removeSizeGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // RemoveStartSizeGradient calls the RemoveStartSizeGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#removestartsizegradient
-func (i *IParticleSystem) RemoveStartSizeGradient(gradient float64) js.Value {
+func (i *IParticleSystem) RemoveStartSizeGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := i.p.Call("removeStartSizeGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // RemoveVelocityGradient calls the RemoveVelocityGradient method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#removevelocitygradient
-func (i *IParticleSystem) RemoveVelocityGradient(gradient float64) js.Value {
+func (i *IParticleSystem) RemoveVelocityGradient(gradient float64) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, gradient)
 
 	retVal := i.p.Call("removeVelocityGradient", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, i.ctx)
 }
 
 // Render calls the Render method on the IParticleSystem object.

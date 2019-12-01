@@ -238,7 +238,7 @@ type PhotoDomeConstructOpts struct {
 // Construct calls the Construct method on the PhotoDome object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#construct
-func (p *PhotoDome) Construct(jsType string, name string, scene *Scene, opts *PhotoDomeConstructOpts) func() {
+func (p *PhotoDome) Construct(jsType string, name string, scene *Scene, opts *PhotoDomeConstructOpts) js.Value {
 	if opts == nil {
 		opts = &PhotoDomeConstructOpts{}
 	}

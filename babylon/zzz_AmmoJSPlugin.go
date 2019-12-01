@@ -553,14 +553,14 @@ type AmmoJSPluginSetLimitOpts struct {
 // SetLimit calls the SetLimit method on the AmmoJSPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setlimit
-func (a *AmmoJSPlugin) SetLimit(joint js.Value, upperLimit float64, opts *AmmoJSPluginSetLimitOpts) {
+func (a *AmmoJSPlugin) SetLimit(joint *IMotorEnabledJoint, upperLimit float64, opts *AmmoJSPluginSetLimitOpts) {
 	if opts == nil {
 		opts = &AmmoJSPluginSetLimitOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, joint)
+	args = append(args, joint.JSObject())
 	args = append(args, upperLimit)
 
 	if opts.LowerLimit == nil {
@@ -607,14 +607,14 @@ type AmmoJSPluginSetMotorOpts struct {
 // SetMotor calls the SetMotor method on the AmmoJSPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setmotor
-func (a *AmmoJSPlugin) SetMotor(joint js.Value, opts *AmmoJSPluginSetMotorOpts) {
+func (a *AmmoJSPlugin) SetMotor(joint *IMotorEnabledJoint, opts *AmmoJSPluginSetMotorOpts) {
 	if opts == nil {
 		opts = &AmmoJSPluginSetMotorOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, joint)
+	args = append(args, joint.JSObject())
 
 	if opts.Speed == nil {
 		args = append(args, js.Undefined())

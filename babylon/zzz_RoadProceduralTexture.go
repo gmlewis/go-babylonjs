@@ -150,10 +150,10 @@ func (r *RoadProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the RoadProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#getbasesize
-func (r *RoadProceduralTexture) GetBaseSize() js.Value {
+func (r *RoadProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := r.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, r.ctx)
 }
 
 // GetClassName calls the GetClassName method on the RoadProceduralTexture object.
@@ -222,10 +222,10 @@ func (r *RoadProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the RoadProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#getsize
-func (r *RoadProceduralTexture) GetSize() js.Value {
+func (r *RoadProceduralTexture) GetSize() *ISize {
 
 	retVal := r.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, r.ctx)
 }
 
 // RoadProceduralTextureGetTextureMatrixOpts contains optional parameters for RoadProceduralTexture.GetTextureMatrix.

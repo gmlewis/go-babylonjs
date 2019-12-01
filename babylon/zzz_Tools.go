@@ -281,11 +281,11 @@ func (t *Tools) DelayAsync(delay float64) *Promise {
 // Download calls the Download method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#download
-func (t *Tools) Download(blob *Blob, fileName string) {
+func (t *Tools) Download(blob js.Value, fileName string) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, blob.JSObject())
+	args = append(args, blob)
 	args = append(args, fileName)
 
 	t.p.Call("Download", args...)
@@ -786,7 +786,7 @@ type ToolsMakeArrayOpts struct {
 // MakeArray calls the MakeArray method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#makearray
-func (t *Tools) MakeArray(obj interface{}, opts *ToolsMakeArrayOpts) []*any {
+func (t *Tools) MakeArray(obj interface{}, opts *ToolsMakeArrayOpts) []interface{} {
 	if opts == nil {
 		opts = &ToolsMakeArrayOpts{}
 	}
@@ -839,14 +839,14 @@ type ToolsReadFileOpts struct {
 // ReadFile calls the ReadFile method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#readfile
-func (t *Tools) ReadFile(file *File, onSuccess func(), opts *ToolsReadFileOpts) *IFileRequest {
+func (t *Tools) ReadFile(file js.Value, onSuccess func(), opts *ToolsReadFileOpts) *IFileRequest {
 	if opts == nil {
 		opts = &ToolsReadFileOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+3)
 
-	args = append(args, file.JSObject())
+	args = append(args, file)
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
 
 	if opts.OnProgress == nil {
@@ -872,11 +872,11 @@ func (t *Tools) ReadFile(file *File, onSuccess func(), opts *ToolsReadFileOpts) 
 // ReadFileAsDataURL calls the ReadFileAsDataURL method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#readfileasdataurl
-func (t *Tools) ReadFileAsDataURL(fileToLoad *Blob, callback func(), progressCallback func()) *IFileRequest {
+func (t *Tools) ReadFileAsDataURL(fileToLoad js.Value, callback func(), progressCallback func()) *IFileRequest {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, fileToLoad.JSObject())
+	args = append(args, fileToLoad)
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { progressCallback(); return nil }))
 

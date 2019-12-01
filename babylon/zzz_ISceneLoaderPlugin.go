@@ -71,7 +71,7 @@ type ISceneLoaderPluginImportMeshOpts struct {
 // ImportMesh calls the ImportMesh method on the ISceneLoaderPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderplugin#importmesh
-func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, meshes *AbstractMesh, particleSystems js.Value, skeletons *Skeleton, opts *ISceneLoaderPluginImportMeshOpts) bool {
+func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, meshes *AbstractMesh, particleSystems *IParticleSystem, skeletons *Skeleton, opts *ISceneLoaderPluginImportMeshOpts) bool {
 	if opts == nil {
 		opts = &ISceneLoaderPluginImportMeshOpts{}
 	}
@@ -83,7 +83,7 @@ func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, d
 	args = append(args, data)
 	args = append(args, rootUrl)
 	args = append(args, meshes.JSObject())
-	args = append(args, particleSystems)
+	args = append(args, particleSystems.JSObject())
 	args = append(args, skeletons.JSObject())
 
 	if opts.OnError == nil {
@@ -164,7 +164,7 @@ type ISceneLoaderPluginReadFileOpts struct {
 // ReadFile calls the ReadFile method on the ISceneLoaderPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderplugin#readfile
-func (i *ISceneLoaderPlugin) ReadFile(scene *Scene, file *File, onSuccess func(), opts *ISceneLoaderPluginReadFileOpts) *IFileRequest {
+func (i *ISceneLoaderPlugin) ReadFile(scene *Scene, file js.Value, onSuccess func(), opts *ISceneLoaderPluginReadFileOpts) *IFileRequest {
 	if opts == nil {
 		opts = &ISceneLoaderPluginReadFileOpts{}
 	}
@@ -172,7 +172,7 @@ func (i *ISceneLoaderPlugin) ReadFile(scene *Scene, file *File, onSuccess func()
 	args := make([]interface{}, 0, 3+3)
 
 	args = append(args, scene.JSObject())
-	args = append(args, file.JSObject())
+	args = append(args, file)
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
 
 	if opts.OnProgress == nil {

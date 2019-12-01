@@ -96,10 +96,10 @@ func (d *DigitalRainFontTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the DigitalRainFontTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#getbasesize
-func (d *DigitalRainFontTexture) GetBaseSize() js.Value {
+func (d *DigitalRainFontTexture) GetBaseSize() *ISize {
 
 	retVal := d.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, d.ctx)
 }
 
 // GetClassName calls the GetClassName method on the DigitalRainFontTexture object.
@@ -141,10 +141,10 @@ func (d *DigitalRainFontTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the DigitalRainFontTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#getsize
-func (d *DigitalRainFontTexture) GetSize() js.Value {
+func (d *DigitalRainFontTexture) GetSize() *ISize {
 
 	retVal := d.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, d.ctx)
 }
 
 // GetTextureMatrix calls the GetTextureMatrix method on the DigitalRainFontTexture object.

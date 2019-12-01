@@ -232,10 +232,10 @@ func (m *MultiviewRenderTarget) FreeRenderingGroups() {
 // GetBaseSize calls the GetBaseSize method on the MultiviewRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getbasesize
-func (m *MultiviewRenderTarget) GetBaseSize() js.Value {
+func (m *MultiviewRenderTarget) GetBaseSize() *ISize {
 
 	retVal := m.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, m.ctx)
 }
 
 // GetClassName calls the GetClassName method on the MultiviewRenderTarget object.
@@ -304,10 +304,10 @@ func (m *MultiviewRenderTarget) GetScene() *Scene {
 // GetSize calls the GetSize method on the MultiviewRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#getsize
-func (m *MultiviewRenderTarget) GetSize() js.Value {
+func (m *MultiviewRenderTarget) GetSize() *ISize {
 
 	retVal := m.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, m.ctx)
 }
 
 // MultiviewRenderTargetGetTextureMatrixOpts contains optional parameters for MultiviewRenderTarget.GetTextureMatrix.

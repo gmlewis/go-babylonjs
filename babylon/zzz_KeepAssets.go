@@ -459,16 +459,16 @@ func (k *KeepAssets) SetMultiMaterials(multiMaterials *MultiMaterial) *KeepAsset
 // ParticleSystems returns the ParticleSystems property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#particlesystems
-func (k *KeepAssets) ParticleSystems(particleSystems js.Value) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(particleSystems)
+func (k *KeepAssets) ParticleSystems(particleSystems *IParticleSystem) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(particleSystems.JSObject())
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 
 // SetParticleSystems sets the ParticleSystems property of class KeepAssets.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keepassets#particlesystems
-func (k *KeepAssets) SetParticleSystems(particleSystems js.Value) *KeepAssets {
-	p := ba.ctx.Get("KeepAssets").New(particleSystems)
+func (k *KeepAssets) SetParticleSystems(particleSystems *IParticleSystem) *KeepAssets {
+	p := ba.ctx.Get("KeepAssets").New(particleSystems.JSObject())
 	return KeepAssetsFromJSObject(p, ba.ctx)
 }
 

@@ -255,10 +255,10 @@ func (m *MirrorTexture) FreeRenderingGroups() {
 // GetBaseSize calls the GetBaseSize method on the MirrorTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getbasesize
-func (m *MirrorTexture) GetBaseSize() js.Value {
+func (m *MirrorTexture) GetBaseSize() *ISize {
 
 	retVal := m.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, m.ctx)
 }
 
 // GetClassName calls the GetClassName method on the MirrorTexture object.
@@ -327,10 +327,10 @@ func (m *MirrorTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the MirrorTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#getsize
-func (m *MirrorTexture) GetSize() js.Value {
+func (m *MirrorTexture) GetSize() *ISize {
 
 	retVal := m.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, m.ctx)
 }
 
 // MirrorTextureGetTextureMatrixOpts contains optional parameters for MirrorTexture.GetTextureMatrix.

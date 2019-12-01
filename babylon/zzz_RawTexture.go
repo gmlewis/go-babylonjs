@@ -436,10 +436,10 @@ func (r *RawTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the RawTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture#getbasesize
-func (r *RawTexture) GetBaseSize() js.Value {
+func (r *RawTexture) GetBaseSize() *ISize {
 
 	retVal := r.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, r.ctx)
 }
 
 // GetClassName calls the GetClassName method on the RawTexture object.
@@ -481,10 +481,10 @@ func (r *RawTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the RawTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture#getsize
-func (r *RawTexture) GetSize() js.Value {
+func (r *RawTexture) GetSize() *ISize {
 
 	retVal := r.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, r.ctx)
 }
 
 // RawTextureGetTextureMatrixOpts contains optional parameters for RawTexture.GetTextureMatrix.

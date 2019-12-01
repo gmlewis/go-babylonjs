@@ -1246,10 +1246,10 @@ func (g *GroundMesh) FreezeNormals() *Mesh {
 // GetAnimatables calls the GetAnimatables method on the GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#getanimatables
-func (g *GroundMesh) GetAnimatables() js.Value {
+func (g *GroundMesh) GetAnimatables() *IAnimatable {
 
 	retVal := g.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, g.ctx)
 }
 
 // GetClassName calls the GetClassName method on the GroundMesh object.
@@ -1264,10 +1264,10 @@ func (g *GroundMesh) GetClassName() string {
 // GetEmittedParticleSystems calls the GetEmittedParticleSystems method on the GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#getemittedparticlesystems
-func (g *GroundMesh) GetEmittedParticleSystems() js.Value {
+func (g *GroundMesh) GetEmittedParticleSystems() *IParticleSystem {
 
 	retVal := g.p.Call("getEmittedParticleSystems")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // GetHeightAtCoordinates calls the GetHeightAtCoordinates method on the GroundMesh object.
@@ -1287,10 +1287,10 @@ func (g *GroundMesh) GetHeightAtCoordinates(x float64, z float64) float64 {
 // GetHierarchyEmittedParticleSystems calls the GetHierarchyEmittedParticleSystems method on the GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#gethierarchyemittedparticlesystems
-func (g *GroundMesh) GetHierarchyEmittedParticleSystems() js.Value {
+func (g *GroundMesh) GetHierarchyEmittedParticleSystems() *IParticleSystem {
 
 	retVal := g.p.Call("getHierarchyEmittedParticleSystems")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, g.ctx)
 }
 
 // GroundMeshGetIndicesOpts contains optional parameters for GroundMesh.GetIndices.

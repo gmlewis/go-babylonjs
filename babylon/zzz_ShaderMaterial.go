@@ -42,7 +42,7 @@ func ShaderMaterialArrayToJSArray(array []*ShaderMaterial) []interface{} {
 
 // NewShaderMaterialOpts contains optional parameters for NewShaderMaterial.
 type NewShaderMaterialOpts struct {
-	Options js.Value
+	Options *IShaderMaterialOptions
 }
 
 // NewShaderMaterial returns a new ShaderMaterial object.
@@ -62,7 +62,7 @@ func (ba *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath inter
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	p := ba.ctx.Get("ShaderMaterial").New(args...)
@@ -1385,16 +1385,16 @@ func (s *ShaderMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *
 // Options returns the Options property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#options
-func (s *ShaderMaterial) Options(options js.Value) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(options)
+func (s *ShaderMaterial) Options(options *IShaderMaterialOptions) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(options.JSObject())
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetOptions sets the Options property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#options
-func (s *ShaderMaterial) SetOptions(options js.Value) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(options)
+func (s *ShaderMaterial) SetOptions(options *IShaderMaterialOptions) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(options.JSObject())
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 

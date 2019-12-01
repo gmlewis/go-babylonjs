@@ -161,11 +161,11 @@ func (v *Vector3) Center(value1 *Vector3, value2 *Vector3) *Vector3 {
 // CheckExtends calls the CheckExtends method on the Vector3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#checkextends
-func (v *Vector3) CheckExtends(v *Vector3, min *Vector3, max *Vector3) {
+func (v *Vector3) CheckExtends(vec *Vector3, min *Vector3, max *Vector3) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, v.JSObject())
+	args = append(args, vec.JSObject())
 	args = append(args, min.JSObject())
 	args = append(args, max.JSObject())
 
@@ -1047,11 +1047,11 @@ func (v *Vector3) Set(x float64, y float64, z float64) *Vector3 {
 // SetAll calls the SetAll method on the Vector3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#setall
-func (v *Vector3) SetAll(v float64) *Vector3 {
+func (v *Vector3) SetAll(f float64) *Vector3 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, v)
+	args = append(args, f)
 
 	retVal := v.p.Call("setAll", args...)
 	return Vector3FromJSObject(retVal, v.ctx)
@@ -1282,13 +1282,13 @@ func (v *Vector3) Unproject(source *Vector3, viewportWidth float64, viewportHeig
 // UnprojectFloatsToRef calls the UnprojectFloatsToRef method on the Vector3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#unprojectfloatstoref
-func (v *Vector3) UnprojectFloatsToRef(sourceX *float, sourceY *float, sourceZ *float, viewportWidth float64, viewportHeight float64, world *Matrix, view *Matrix, projection *Matrix, result *Vector3) {
+func (v *Vector3) UnprojectFloatsToRef(sourceX float64, sourceY float64, sourceZ float64, viewportWidth float64, viewportHeight float64, world *Matrix, view *Matrix, projection *Matrix, result *Vector3) {
 
 	args := make([]interface{}, 0, 9+0)
 
-	args = append(args, sourceX.JSObject())
-	args = append(args, sourceY.JSObject())
-	args = append(args, sourceZ.JSObject())
+	args = append(args, sourceX)
+	args = append(args, sourceY)
+	args = append(args, sourceZ)
 	args = append(args, viewportWidth)
 	args = append(args, viewportHeight)
 	args = append(args, world.JSObject())

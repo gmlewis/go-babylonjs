@@ -1306,10 +1306,10 @@ func (l *LinesMesh) FreezeNormals() *Mesh {
 // GetAnimatables calls the GetAnimatables method on the LinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#getanimatables
-func (l *LinesMesh) GetAnimatables() js.Value {
+func (l *LinesMesh) GetAnimatables() *IAnimatable {
 
 	retVal := l.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, l.ctx)
 }
 
 // GetClassName calls the GetClassName method on the LinesMesh object.
@@ -1324,19 +1324,19 @@ func (l *LinesMesh) GetClassName() string {
 // GetEmittedParticleSystems calls the GetEmittedParticleSystems method on the LinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#getemittedparticlesystems
-func (l *LinesMesh) GetEmittedParticleSystems() js.Value {
+func (l *LinesMesh) GetEmittedParticleSystems() *IParticleSystem {
 
 	retVal := l.p.Call("getEmittedParticleSystems")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, l.ctx)
 }
 
 // GetHierarchyEmittedParticleSystems calls the GetHierarchyEmittedParticleSystems method on the LinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#gethierarchyemittedparticlesystems
-func (l *LinesMesh) GetHierarchyEmittedParticleSystems() js.Value {
+func (l *LinesMesh) GetHierarchyEmittedParticleSystems() *IParticleSystem {
 
 	retVal := l.p.Call("getHierarchyEmittedParticleSystems")
-	return retVal
+	return IParticleSystemFromJSObject(retVal, l.ctx)
 }
 
 // LinesMeshGetIndicesOpts contains optional parameters for LinesMesh.GetIndices.

@@ -252,11 +252,11 @@ func (s *Scene) AddParser(name string, parser js.Value) {
 // AddParticleSystem calls the AddParticleSystem method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#addparticlesystem
-func (s *Scene) AddParticleSystem(newParticleSystem js.Value) {
+func (s *Scene) AddParticleSystem(newParticleSystem *IParticleSystem) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newParticleSystem)
+	args = append(args, newParticleSystem.JSObject())
 
 	s.p.Call("addParticleSystem", args...)
 }
@@ -740,7 +740,7 @@ func (s *Scene) CreateDefaultCameraOrLight(opts *SceneCreateDefaultCameraOrLight
 
 // SceneCreateDefaultEnvironmentOpts contains optional parameters for Scene.CreateDefaultEnvironment.
 type SceneCreateDefaultEnvironmentOpts struct {
-	Options js.Value
+	Options *IEnvironmentHelperOptions
 }
 
 // CreateDefaultEnvironment calls the CreateDefaultEnvironment method on the Scene object.
@@ -756,7 +756,7 @@ func (s *Scene) CreateDefaultEnvironment(opts *SceneCreateDefaultEnvironmentOpts
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	retVal := s.p.Call("createDefaultEnvironment", args...)
@@ -1970,14 +1970,14 @@ func (s *Scene) GetParser(name string) js.Value {
 // GetParticleSystemByID calls the GetParticleSystemByID method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getparticlesystembyid
-func (s *Scene) GetParticleSystemByID(id string) js.Value {
+func (s *Scene) GetParticleSystemByID(id string) *IParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, id)
 
 	retVal := s.p.Call("getParticleSystemByID", args...)
-	return retVal
+	return IParticleSystemFromJSObject(retVal, s.ctx)
 }
 
 // GetPhysicsEngine calls the GetPhysicsEngine method on the Scene object.
@@ -2899,11 +2899,11 @@ func (s *Scene) RemoveMultiMaterial(toRemove *MultiMaterial) float64 {
 // RemoveParticleSystem calls the RemoveParticleSystem method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#removeparticlesystem
-func (s *Scene) RemoveParticleSystem(toRemove js.Value) float64 {
+func (s *Scene) RemoveParticleSystem(toRemove *IParticleSystem) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove)
+	args = append(args, toRemove.JSObject())
 
 	retVal := s.p.Call("removeParticleSystem", args...)
 	return retVal.Float()
@@ -5805,16 +5805,16 @@ func (s *Scene) SetOnTransformNodeRemovedObservable(onTransformNodeRemovedObserv
 // ParticleSystems returns the ParticleSystems property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#particlesystems
-func (s *Scene) ParticleSystems(particleSystems js.Value) *Scene {
-	p := ba.ctx.Get("Scene").New(particleSystems)
+func (s *Scene) ParticleSystems(particleSystems *IParticleSystem) *Scene {
+	p := ba.ctx.Get("Scene").New(particleSystems.JSObject())
 	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SetParticleSystems sets the ParticleSystems property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#particlesystems
-func (s *Scene) SetParticleSystems(particleSystems js.Value) *Scene {
-	p := ba.ctx.Get("Scene").New(particleSystems)
+func (s *Scene) SetParticleSystems(particleSystems *IParticleSystem) *Scene {
+	p := ba.ctx.Get("Scene").New(particleSystems.JSObject())
 	return SceneFromJSObject(p, ba.ctx)
 }
 

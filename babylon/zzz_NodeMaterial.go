@@ -39,7 +39,7 @@ func NodeMaterialArrayToJSArray(array []*NodeMaterial) []interface{} {
 // NewNodeMaterialOpts contains optional parameters for NewNodeMaterial.
 type NewNodeMaterialOpts struct {
 	Scene   *Scene
-	Options js.Value
+	Options *INodeMaterialOptions
 }
 
 // NewNodeMaterial returns a new NodeMaterial object.
@@ -62,7 +62,7 @@ func (ba *Babylon) NewNodeMaterial(name string, opts *NewNodeMaterialOpts) *Node
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	p := ba.ctx.Get("NodeMaterial").New(args...)
@@ -293,7 +293,7 @@ func (n *NodeMaterial) Dispose(opts *NodeMaterialDisposeOpts) {
 
 // NodeMaterialEditOpts contains optional parameters for NodeMaterial.Edit.
 type NodeMaterialEditOpts struct {
-	Config js.Value
+	Config *INodeMaterialEditorOptions
 }
 
 // Edit calls the Edit method on the NodeMaterial object.
@@ -309,7 +309,7 @@ func (n *NodeMaterial) Edit(opts *NodeMaterialEditOpts) *Promise {
 	if opts.Config == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Config)
+		args = append(args, opts.Config.JSObject())
 	}
 
 	retVal := n.p.Call("edit", args...)
@@ -1557,16 +1557,16 @@ func (n *NodeMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *No
 // Options returns the Options property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#options
-func (n *NodeMaterial) Options(options js.Value) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(options)
+func (n *NodeMaterial) Options(options *INodeMaterialOptions) *NodeMaterial {
+	p := ba.ctx.Get("NodeMaterial").New(options.JSObject())
 	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetOptions sets the Options property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#options
-func (n *NodeMaterial) SetOptions(options js.Value) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(options)
+func (n *NodeMaterial) SetOptions(options *INodeMaterialOptions) *NodeMaterial {
+	p := ba.ctx.Get("NodeMaterial").New(options.JSObject())
 	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 

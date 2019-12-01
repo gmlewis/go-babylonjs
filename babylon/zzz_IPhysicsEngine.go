@@ -75,11 +75,11 @@ func (i *IPhysicsEngine) Dispose() {
 // GetImpostorForPhysicsObject calls the GetImpostorForPhysicsObject method on the IPhysicsEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsengine#getimpostorforphysicsobject
-func (i *IPhysicsEngine) GetImpostorForPhysicsObject(object js.Value) *PhysicsImpostor {
+func (i *IPhysicsEngine) GetImpostorForPhysicsObject(object *IPhysicsEnabledObject) *PhysicsImpostor {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, object)
+	args = append(args, object.JSObject())
 
 	retVal := i.p.Call("getImpostorForPhysicsObject", args...)
 	return PhysicsImpostorFromJSObject(retVal, i.ctx)

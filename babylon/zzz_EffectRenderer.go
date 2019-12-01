@@ -38,7 +38,7 @@ func EffectRendererArrayToJSArray(array []*EffectRenderer) []interface{} {
 
 // NewEffectRendererOpts contains optional parameters for NewEffectRenderer.
 type NewEffectRendererOpts struct {
-	Options js.Value
+	Options *IEffectRendererOptions
 }
 
 // NewEffectRenderer returns a new EffectRenderer object.
@@ -56,7 +56,7 @@ func (ba *Babylon) NewEffectRenderer(engine *ThinEngine, opts *NewEffectRenderer
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	p := ba.ctx.Get("EffectRenderer").New(args...)

@@ -246,10 +246,10 @@ func (s *Skeleton) EnableBlending(opts *SkeletonEnableBlendingOpts) {
 // GetAnimatables calls the GetAnimatables method on the Skeleton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#getanimatables
-func (s *Skeleton) GetAnimatables() js.Value {
+func (s *Skeleton) GetAnimatables() *IAnimatable {
 
 	retVal := s.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, s.ctx)
 }
 
 // GetAnimationRange calls the GetAnimationRange method on the Skeleton object.

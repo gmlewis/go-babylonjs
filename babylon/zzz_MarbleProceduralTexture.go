@@ -150,10 +150,10 @@ func (m *MarbleProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the MarbleProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#getbasesize
-func (m *MarbleProceduralTexture) GetBaseSize() js.Value {
+func (m *MarbleProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := m.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, m.ctx)
 }
 
 // GetClassName calls the GetClassName method on the MarbleProceduralTexture object.
@@ -222,10 +222,10 @@ func (m *MarbleProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the MarbleProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#getsize
-func (m *MarbleProceduralTexture) GetSize() js.Value {
+func (m *MarbleProceduralTexture) GetSize() *ISize {
 
 	retVal := m.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, m.ctx)
 }
 
 // MarbleProceduralTextureGetTextureMatrixOpts contains optional parameters for MarbleProceduralTexture.GetTextureMatrix.

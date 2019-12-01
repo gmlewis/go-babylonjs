@@ -41,11 +41,11 @@ func EnvironmentHelperArrayToJSArray(array []*EnvironmentHelper) []interface{} {
 // NewEnvironmentHelper returns a new EnvironmentHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper
-func (ba *Babylon) NewEnvironmentHelper(options js.Value, scene *Scene) *EnvironmentHelper {
+func (ba *Babylon) NewEnvironmentHelper(options *IEnvironmentHelperOptions, scene *Scene) *EnvironmentHelper {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, options)
+	args = append(args, options.JSObject())
 	args = append(args, scene.JSObject())
 
 	p := ba.ctx.Get("EnvironmentHelper").New(args...)
@@ -75,11 +75,11 @@ func (e *EnvironmentHelper) SetMainColor(color *Color3) {
 // UpdateOptions calls the UpdateOptions method on the EnvironmentHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#updateoptions
-func (e *EnvironmentHelper) UpdateOptions(options js.Value) {
+func (e *EnvironmentHelper) UpdateOptions(options *IEnvironmentHelperOptions) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, options)
+	args = append(args, options.JSObject())
 
 	e.p.Call("updateOptions", args...)
 }

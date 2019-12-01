@@ -111,10 +111,10 @@ func (e *EquiRectangularCubeTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the EquiRectangularCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#getbasesize
-func (e *EquiRectangularCubeTexture) GetBaseSize() js.Value {
+func (e *EquiRectangularCubeTexture) GetBaseSize() *ISize {
 
 	retVal := e.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, e.ctx)
 }
 
 // GetClassName calls the GetClassName method on the EquiRectangularCubeTexture object.
@@ -156,10 +156,10 @@ func (e *EquiRectangularCubeTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the EquiRectangularCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#getsize
-func (e *EquiRectangularCubeTexture) GetSize() js.Value {
+func (e *EquiRectangularCubeTexture) GetSize() *ISize {
 
 	retVal := e.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, e.ctx)
 }
 
 // GetTextureMatrix calls the GetTextureMatrix method on the EquiRectangularCubeTexture object.

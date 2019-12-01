@@ -44,7 +44,7 @@ func OceanPostProcessArrayToJSArray(array []*OceanPostProcess) []interface{} {
 
 // NewOceanPostProcessOpts contains optional parameters for NewOceanPostProcess.
 type NewOceanPostProcessOpts struct {
-	Options js.Value
+	Options *IOceanPostProcessOptions
 }
 
 // NewOceanPostProcess returns a new OceanPostProcess object.
@@ -63,7 +63,7 @@ func (ba *Babylon) NewOceanPostProcess(name string, camera *TargetCamera, opts *
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	p := ba.ctx.Get("OceanPostProcess").New(args...)

@@ -656,11 +656,11 @@ func (v *Vector4) Set(x float64, y float64, z float64, w float64) *Vector4 {
 // SetAll calls the SetAll method on the Vector4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#setall
-func (v *Vector4) SetAll(v float64) *Vector4 {
+func (v *Vector4) SetAll(f float64) *Vector4 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, v)
+	args = append(args, f)
 
 	retVal := v.p.Call("setAll", args...)
 	return Vector4FromJSObject(retVal, v.ctx)

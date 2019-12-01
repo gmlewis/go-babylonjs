@@ -293,10 +293,10 @@ func (p *PBRMetallicRoughnessMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the PBRMetallicRoughnessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#getanimatables
-func (p *PBRMetallicRoughnessMaterial) GetAnimatables() js.Value {
+func (p *PBRMetallicRoughnessMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := p.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, p.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the PBRMetallicRoughnessMaterial object.

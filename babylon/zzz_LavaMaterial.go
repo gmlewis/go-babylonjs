@@ -282,10 +282,10 @@ func (l *LavaMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the LavaMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getanimatables
-func (l *LavaMaterial) GetAnimatables() js.Value {
+func (l *LavaMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := l.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, l.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the LavaMaterial object.

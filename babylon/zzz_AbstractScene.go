@@ -461,16 +461,16 @@ func (a *AbstractScene) SetMultiMaterials(multiMaterials *MultiMaterial) *Abstra
 // ParticleSystems returns the ParticleSystems property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#particlesystems
-func (a *AbstractScene) ParticleSystems(particleSystems js.Value) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(particleSystems)
+func (a *AbstractScene) ParticleSystems(particleSystems *IParticleSystem) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(particleSystems.JSObject())
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 
 // SetParticleSystems sets the ParticleSystems property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#particlesystems
-func (a *AbstractScene) SetParticleSystems(particleSystems js.Value) *AbstractScene {
-	p := ba.ctx.Get("AbstractScene").New(particleSystems)
+func (a *AbstractScene) SetParticleSystems(particleSystems *IParticleSystem) *AbstractScene {
+	p := ba.ctx.Get("AbstractScene").New(particleSystems.JSObject())
 	return AbstractSceneFromJSObject(p, ba.ctx)
 }
 

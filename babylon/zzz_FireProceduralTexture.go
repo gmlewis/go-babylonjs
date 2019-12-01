@@ -150,10 +150,10 @@ func (f *FireProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the FireProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#getbasesize
-func (f *FireProceduralTexture) GetBaseSize() js.Value {
+func (f *FireProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := f.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, f.ctx)
 }
 
 // GetClassName calls the GetClassName method on the FireProceduralTexture object.
@@ -222,10 +222,10 @@ func (f *FireProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the FireProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#getsize
-func (f *FireProceduralTexture) GetSize() js.Value {
+func (f *FireProceduralTexture) GetSize() *ISize {
 
 	retVal := f.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, f.ctx)
 }
 
 // FireProceduralTextureGetTextureMatrixOpts contains optional parameters for FireProceduralTexture.GetTextureMatrix.

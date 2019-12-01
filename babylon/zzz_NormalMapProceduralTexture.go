@@ -150,10 +150,10 @@ func (n *NormalMapProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the NormalMapProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#getbasesize
-func (n *NormalMapProceduralTexture) GetBaseSize() js.Value {
+func (n *NormalMapProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := n.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, n.ctx)
 }
 
 // GetClassName calls the GetClassName method on the NormalMapProceduralTexture object.
@@ -222,10 +222,10 @@ func (n *NormalMapProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the NormalMapProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#getsize
-func (n *NormalMapProceduralTexture) GetSize() js.Value {
+func (n *NormalMapProceduralTexture) GetSize() *ISize {
 
 	retVal := n.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, n.ctx)
 }
 
 // NormalMapProceduralTextureGetTextureMatrixOpts contains optional parameters for NormalMapProceduralTexture.GetTextureMatrix.

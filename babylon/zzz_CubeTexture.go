@@ -230,10 +230,10 @@ func (c *CubeTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the CubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#getbasesize
-func (c *CubeTexture) GetBaseSize() js.Value {
+func (c *CubeTexture) GetBaseSize() *ISize {
 
 	retVal := c.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, c.ctx)
 }
 
 // GetClassName calls the GetClassName method on the CubeTexture object.
@@ -275,10 +275,10 @@ func (c *CubeTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the CubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#getsize
-func (c *CubeTexture) GetSize() js.Value {
+func (c *CubeTexture) GetSize() *ISize {
 
 	retVal := c.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, c.ctx)
 }
 
 // GetTextureMatrix calls the GetTextureMatrix method on the CubeTexture object.

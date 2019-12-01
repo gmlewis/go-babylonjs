@@ -41,16 +41,16 @@ func IGLTFLoaderDataArrayToJSArray(array []*IGLTFLoaderData) []interface{} {
 // Bin returns the Bin property of class IGLTFLoaderData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderdata#bin
-func (i *IGLTFLoaderData) Bin(bin js.Value) *IGLTFLoaderData {
-	p := ba.ctx.Get("IGLTFLoaderData").New(bin)
+func (i *IGLTFLoaderData) Bin(bin *IDataBuffer) *IGLTFLoaderData {
+	p := ba.ctx.Get("IGLTFLoaderData").New(bin.JSObject())
 	return IGLTFLoaderDataFromJSObject(p, ba.ctx)
 }
 
 // SetBin sets the Bin property of class IGLTFLoaderData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderdata#bin
-func (i *IGLTFLoaderData) SetBin(bin js.Value) *IGLTFLoaderData {
-	p := ba.ctx.Get("IGLTFLoaderData").New(bin)
+func (i *IGLTFLoaderData) SetBin(bin *IDataBuffer) *IGLTFLoaderData {
+	p := ba.ctx.Get("IGLTFLoaderData").New(bin.JSObject())
 	return IGLTFLoaderDataFromJSObject(p, ba.ctx)
 }
 

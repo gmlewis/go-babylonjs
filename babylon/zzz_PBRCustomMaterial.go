@@ -465,10 +465,10 @@ func (p *PBRCustomMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the PBRCustomMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#getanimatables
-func (p *PBRCustomMaterial) GetAnimatables() js.Value {
+func (p *PBRCustomMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := p.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, p.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the PBRCustomMaterial object.

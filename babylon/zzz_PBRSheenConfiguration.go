@@ -153,11 +153,11 @@ func (p *PBRSheenConfiguration) GetActiveTextures(activeTextures *BaseTexture) {
 // GetAnimatables calls the GetAnimatables method on the PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#getanimatables
-func (p *PBRSheenConfiguration) GetAnimatables(animatables js.Value) {
+func (p *PBRSheenConfiguration) GetAnimatables(animatables *IAnimatable) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, animatables)
+	args = append(args, animatables.JSObject())
 
 	p.p.Call("getAnimatables", args...)
 }

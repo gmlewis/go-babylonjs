@@ -284,10 +284,10 @@ func (s *SkyMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the SkyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#getanimatables
-func (s *SkyMaterial) GetAnimatables() js.Value {
+func (s *SkyMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := s.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, s.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the SkyMaterial object.

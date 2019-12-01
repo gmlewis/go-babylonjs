@@ -293,10 +293,10 @@ func (p *PBRBaseSimpleMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the PBRBaseSimpleMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#getanimatables
-func (p *PBRBaseSimpleMaterial) GetAnimatables() js.Value {
+func (p *PBRBaseSimpleMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := p.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, p.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the PBRBaseSimpleMaterial object.

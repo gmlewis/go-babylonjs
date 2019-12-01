@@ -41,7 +41,7 @@ type NewEffectOpts struct {
 	Samplers        *string
 	Engine          *ThinEngine
 	Defines         *string
-	Fallbacks       js.Value
+	Fallbacks       *IEffectFallbacks
 	OnCompiled      *func()
 	OnError         *func()
 	IndexParameters *interface{}
@@ -79,7 +79,7 @@ func (ba *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions stri
 	if opts.Fallbacks == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Fallbacks)
+		args = append(args, opts.Fallbacks.JSObject())
 	}
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
@@ -221,10 +221,10 @@ func (e *Effect) GetEngine() *Engine {
 // GetPipelineContext calls the GetPipelineContext method on the Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#getpipelinecontext
-func (e *Effect) GetPipelineContext() js.Value {
+func (e *Effect) GetPipelineContext() *IPipelineContext {
 
 	retVal := e.p.Call("getPipelineContext")
-	return retVal
+	return IPipelineContextFromJSObject(retVal, e.ctx)
 }
 
 // GetSamplers calls the GetSamplers method on the Effect object.

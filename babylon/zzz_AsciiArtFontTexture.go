@@ -96,10 +96,10 @@ func (a *AsciiArtFontTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the AsciiArtFontTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#getbasesize
-func (a *AsciiArtFontTexture) GetBaseSize() js.Value {
+func (a *AsciiArtFontTexture) GetBaseSize() *ISize {
 
 	retVal := a.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, a.ctx)
 }
 
 // GetClassName calls the GetClassName method on the AsciiArtFontTexture object.
@@ -141,10 +141,10 @@ func (a *AsciiArtFontTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the AsciiArtFontTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#getsize
-func (a *AsciiArtFontTexture) GetSize() js.Value {
+func (a *AsciiArtFontTexture) GetSize() *ISize {
 
 	retVal := a.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, a.ctx)
 }
 
 // GetTextureMatrix calls the GetTextureMatrix method on the AsciiArtFontTexture object.

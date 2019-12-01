@@ -250,7 +250,7 @@ type DirectionalLightConstructOpts struct {
 // Construct calls the Construct method on the DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#construct
-func (d *DirectionalLight) Construct(jsType string, name string, scene *Scene, opts *DirectionalLightConstructOpts) func() {
+func (d *DirectionalLight) Construct(jsType string, name string, scene *Scene, opts *DirectionalLightConstructOpts) js.Value {
 	if opts == nil {
 		opts = &DirectionalLightConstructOpts{}
 	}
@@ -480,7 +480,7 @@ func (d *DirectionalLight) GetClassName() string {
 // GetConstructorFromName calls the GetConstructorFromName method on the DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getconstructorfromname
-func (d *DirectionalLight) GetConstructorFromName(jsType float64, name string, scene *Scene) func() {
+func (d *DirectionalLight) GetConstructorFromName(jsType float64, name string, scene *Scene) js.Value {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -653,10 +653,10 @@ func (d *DirectionalLight) GetShadowDirection(opts *DirectionalLightGetShadowDir
 // GetShadowGenerator calls the GetShadowGenerator method on the DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#getshadowgenerator
-func (d *DirectionalLight) GetShadowGenerator() js.Value {
+func (d *DirectionalLight) GetShadowGenerator() *IShadowGenerator {
 
 	retVal := d.p.Call("getShadowGenerator")
-	return retVal
+	return IShadowGeneratorFromJSObject(retVal, d.ctx)
 }
 
 // GetTypeID calls the GetTypeID method on the DirectionalLight object.
@@ -867,7 +867,7 @@ func (d *DirectionalLight) SetEnabled(value bool) {
 // SetShadowProjectionMatrix calls the SetShadowProjectionMatrix method on the DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#setshadowprojectionmatrix
-func (d *DirectionalLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []*AbstractMesh) js.Value {
+func (d *DirectionalLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []*AbstractMesh) *IShadowLight {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -876,7 +876,7 @@ func (d *DirectionalLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix 
 	args = append(args, AbstractMeshArrayToJSArray(renderList))
 
 	retVal := d.p.Call("setShadowProjectionMatrix", args...)
-	return retVal
+	return IShadowLightFromJSObject(retVal, d.ctx)
 }
 
 // DirectionalLightToStringOpts contains optional parameters for DirectionalLight.ToString.

@@ -282,10 +282,10 @@ func (t *TerrainMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the TerrainMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getanimatables
-func (t *TerrainMaterial) GetAnimatables() js.Value {
+func (t *TerrainMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := t.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, t.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the TerrainMaterial object.

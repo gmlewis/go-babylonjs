@@ -150,10 +150,10 @@ func (c *CloudProceduralTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the CloudProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#getbasesize
-func (c *CloudProceduralTexture) GetBaseSize() js.Value {
+func (c *CloudProceduralTexture) GetBaseSize() *ISize {
 
 	retVal := c.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, c.ctx)
 }
 
 // GetClassName calls the GetClassName method on the CloudProceduralTexture object.
@@ -222,10 +222,10 @@ func (c *CloudProceduralTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the CloudProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#getsize
-func (c *CloudProceduralTexture) GetSize() js.Value {
+func (c *CloudProceduralTexture) GetSize() *ISize {
 
 	retVal := c.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, c.ctx)
 }
 
 // CloudProceduralTextureGetTextureMatrixOpts contains optional parameters for CloudProceduralTexture.GetTextureMatrix.

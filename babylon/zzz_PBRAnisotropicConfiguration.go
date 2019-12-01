@@ -153,11 +153,11 @@ func (p *PBRAnisotropicConfiguration) GetActiveTextures(activeTextures *BaseText
 // GetAnimatables calls the GetAnimatables method on the PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#getanimatables
-func (p *PBRAnisotropicConfiguration) GetAnimatables(animatables js.Value) {
+func (p *PBRAnisotropicConfiguration) GetAnimatables(animatables *IAnimatable) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, animatables)
+	args = append(args, animatables.JSObject())
 
 	p.p.Call("getAnimatables", args...)
 }

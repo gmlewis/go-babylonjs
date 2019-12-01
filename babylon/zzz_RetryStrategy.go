@@ -45,7 +45,7 @@ type RetryStrategyExponentialBackoffOpts struct {
 // ExponentialBackoff calls the ExponentialBackoff method on the RetryStrategy object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.retrystrategy#exponentialbackoff
-func (r *RetryStrategy) ExponentialBackoff(opts *RetryStrategyExponentialBackoffOpts) func() {
+func (r *RetryStrategy) ExponentialBackoff(opts *RetryStrategyExponentialBackoffOpts) js.Value {
 	if opts == nil {
 		opts = &RetryStrategyExponentialBackoffOpts{}
 	}

@@ -223,7 +223,7 @@ type HemisphericLightConstructOpts struct {
 // Construct calls the Construct method on the HemisphericLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#construct
-func (h *HemisphericLight) Construct(jsType string, name string, scene *Scene, opts *HemisphericLightConstructOpts) func() {
+func (h *HemisphericLight) Construct(jsType string, name string, scene *Scene, opts *HemisphericLightConstructOpts) js.Value {
 	if opts == nil {
 		opts = &HemisphericLightConstructOpts{}
 	}
@@ -445,7 +445,7 @@ func (h *HemisphericLight) GetClassName() string {
 // GetConstructorFromName calls the GetConstructorFromName method on the HemisphericLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getconstructorfromname
-func (h *HemisphericLight) GetConstructorFromName(jsType float64, name string, scene *Scene) func() {
+func (h *HemisphericLight) GetConstructorFromName(jsType float64, name string, scene *Scene) js.Value {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -549,10 +549,10 @@ func (h *HemisphericLight) GetScene() *Scene {
 // GetShadowGenerator calls the GetShadowGenerator method on the HemisphericLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#getshadowgenerator
-func (h *HemisphericLight) GetShadowGenerator() js.Value {
+func (h *HemisphericLight) GetShadowGenerator() *IShadowGenerator {
 
 	retVal := h.p.Call("getShadowGenerator")
-	return retVal
+	return IShadowGeneratorFromJSObject(retVal, h.ctx)
 }
 
 // GetTypeID calls the GetTypeID method on the HemisphericLight object.

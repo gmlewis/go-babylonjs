@@ -364,10 +364,10 @@ func (a *AdvancedDynamicTexture) ExecuteOnAllControls(jsFunc func(), opts *Advan
 // GetBaseSize calls the GetBaseSize method on the AdvancedDynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getbasesize
-func (a *AdvancedDynamicTexture) GetBaseSize() js.Value {
+func (a *AdvancedDynamicTexture) GetBaseSize() *ISize {
 
 	retVal := a.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, a.ctx)
 }
 
 // GetChildren calls the GetChildren method on the AdvancedDynamicTexture object.
@@ -472,10 +472,10 @@ func (a *AdvancedDynamicTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the AdvancedDynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getsize
-func (a *AdvancedDynamicTexture) GetSize() js.Value {
+func (a *AdvancedDynamicTexture) GetSize() *ISize {
 
 	retVal := a.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, a.ctx)
 }
 
 // AdvancedDynamicTextureGetTextureMatrixOpts contains optional parameters for AdvancedDynamicTexture.GetTextureMatrix.
@@ -612,11 +612,11 @@ func (a *AdvancedDynamicTexture) MarkAsDirty() {
 // MoveFocusToControl calls the MoveFocusToControl method on the AdvancedDynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#movefocustocontrol
-func (a *AdvancedDynamicTexture) MoveFocusToControl(control js.Value) {
+func (a *AdvancedDynamicTexture) MoveFocusToControl(control *IFocusableControl) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control)
+	args = append(args, control.JSObject())
 
 	a.p.Call("moveFocusToControl", args...)
 }
@@ -1101,16 +1101,16 @@ func (a *AdvancedDynamicTexture) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANG
 // FocusedControl returns the FocusedControl property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#focusedcontrol
-func (a *AdvancedDynamicTexture) FocusedControl(focusedControl js.Value) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(focusedControl)
+func (a *AdvancedDynamicTexture) FocusedControl(focusedControl *IFocusableControl) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(focusedControl.JSObject())
 	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
 }
 
 // SetFocusedControl sets the FocusedControl property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#focusedcontrol
-func (a *AdvancedDynamicTexture) SetFocusedControl(focusedControl js.Value) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(focusedControl)
+func (a *AdvancedDynamicTexture) SetFocusedControl(focusedControl *IFocusableControl) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(focusedControl.JSObject())
 	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
 }
 

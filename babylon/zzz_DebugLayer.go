@@ -97,7 +97,7 @@ func (d *DebugLayer) Select(entity interface{}, opts *DebugLayerSelectOpts) {
 
 // DebugLayerShowOpts contains optional parameters for DebugLayer.Show.
 type DebugLayerShowOpts struct {
-	Config js.Value
+	Config *IInspectorOptions
 }
 
 // Show calls the Show method on the DebugLayer object.
@@ -113,7 +113,7 @@ func (d *DebugLayer) Show(opts *DebugLayerShowOpts) *Promise {
 	if opts.Config == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Config)
+		args = append(args, opts.Config.JSObject())
 	}
 
 	retVal := d.p.Call("show", args...)

@@ -83,10 +83,10 @@ func (c *ColorGradingTexture) Dispose() {
 // GetBaseSize calls the GetBaseSize method on the ColorGradingTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#getbasesize
-func (c *ColorGradingTexture) GetBaseSize() js.Value {
+func (c *ColorGradingTexture) GetBaseSize() *ISize {
 
 	retVal := c.p.Call("getBaseSize")
-	return retVal
+	return ISizeFromJSObject(retVal, c.ctx)
 }
 
 // GetClassName calls the GetClassName method on the ColorGradingTexture object.
@@ -128,10 +128,10 @@ func (c *ColorGradingTexture) GetScene() *Scene {
 // GetSize calls the GetSize method on the ColorGradingTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#getsize
-func (c *ColorGradingTexture) GetSize() js.Value {
+func (c *ColorGradingTexture) GetSize() *ISize {
 
 	retVal := c.p.Call("getSize")
-	return retVal
+	return ISizeFromJSObject(retVal, c.ctx)
 }
 
 // GetTextureMatrix calls the GetTextureMatrix method on the ColorGradingTexture object.

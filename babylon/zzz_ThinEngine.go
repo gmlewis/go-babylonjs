@@ -237,11 +237,11 @@ func (t *ThinEngine) BindSamplers(effect *Effect) {
 // BindUniformBlock calls the BindUniformBlock method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#binduniformblock
-func (t *ThinEngine) BindUniformBlock(pipelineContext js.Value, blockName string, index float64) {
+func (t *ThinEngine) BindUniformBlock(pipelineContext *IPipelineContext, blockName string, index float64) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, blockName)
 	args = append(args, index)
 
@@ -420,7 +420,7 @@ func (t *ThinEngine) CreateDynamicVertexBuffer(data []*float64) *DataBuffer {
 type ThinEngineCreateEffectOpts struct {
 	Samplers        *string
 	Defines         *string
-	Fallbacks       js.Value
+	Fallbacks       *IEffectFallbacks
 	OnCompiled      *func()
 	OnError         *func()
 	IndexParameters *interface{}
@@ -453,7 +453,7 @@ func (t *ThinEngine) CreateEffect(baseName interface{}, attributesNamesOrOptions
 	if opts.Fallbacks == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Fallbacks)
+		args = append(args, opts.Fallbacks.JSObject())
 	}
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
@@ -505,12 +505,12 @@ func (t *ThinEngine) CreateIndexBuffer(indices js.Value, opts *ThinEngineCreateI
 // CreateMultipleRenderTarget calls the CreateMultipleRenderTarget method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createmultiplerendertarget
-func (t *ThinEngine) CreateMultipleRenderTarget(size interface{}, options js.Value) *InternalTexture {
+func (t *ThinEngine) CreateMultipleRenderTarget(size interface{}, options *IMultiRenderTargetOptions) *InternalTexture {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, size)
-	args = append(args, options)
+	args = append(args, options.JSObject())
 
 	retVal := t.p.Call("createMultipleRenderTarget", args...)
 	return InternalTextureFromJSObject(retVal, t.ctx)
@@ -519,10 +519,10 @@ func (t *ThinEngine) CreateMultipleRenderTarget(size interface{}, options js.Val
 // CreatePipelineContext calls the CreatePipelineContext method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createpipelinecontext
-func (t *ThinEngine) CreatePipelineContext() js.Value {
+func (t *ThinEngine) CreatePipelineContext() *IPipelineContext {
 
 	retVal := t.p.Call("createPipelineContext")
-	return retVal
+	return IPipelineContextFromJSObject(retVal, t.ctx)
 }
 
 // ThinEngineCreatePrefilteredCubeTextureOpts contains optional parameters for ThinEngine.CreatePrefilteredCubeTexture.
@@ -621,14 +621,14 @@ type ThinEngineCreateRawShaderProgramOpts struct {
 // CreateRawShaderProgram calls the CreateRawShaderProgram method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createrawshaderprogram
-func (t *ThinEngine) CreateRawShaderProgram(pipelineContext js.Value, vertexCode string, fragmentCode string, opts *ThinEngineCreateRawShaderProgramOpts) js.Value {
+func (t *ThinEngine) CreateRawShaderProgram(pipelineContext *IPipelineContext, vertexCode string, fragmentCode string, opts *ThinEngineCreateRawShaderProgramOpts) js.Value {
 	if opts == nil {
 		opts = &ThinEngineCreateRawShaderProgramOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, vertexCode)
 	args = append(args, fragmentCode)
 
@@ -816,14 +816,14 @@ type ThinEngineCreateShaderProgramOpts struct {
 // CreateShaderProgram calls the CreateShaderProgram method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createshaderprogram
-func (t *ThinEngine) CreateShaderProgram(pipelineContext js.Value, vertexCode string, fragmentCode string, defines string, opts *ThinEngineCreateShaderProgramOpts) js.Value {
+func (t *ThinEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCode string, fragmentCode string, defines string, opts *ThinEngineCreateShaderProgramOpts) js.Value {
 	if opts == nil {
 		opts = &ThinEngineCreateShaderProgramOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, vertexCode)
 	args = append(args, fragmentCode)
 	args = append(args, defines)
@@ -1138,11 +1138,11 @@ func (t *ThinEngine) FlushFramebuffer() {
 // GetAttributes calls the GetAttributes method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#getattributes
-func (t *ThinEngine) GetAttributes(pipelineContext js.Value, attributesNames string) float64 {
+func (t *ThinEngine) GetAttributes(pipelineContext *IPipelineContext, attributesNames string) float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, attributesNames)
 
 	retVal := t.p.Call("getAttributes", args...)
@@ -1311,11 +1311,11 @@ func (t *ThinEngine) GetRenderingCanvas() js.Value {
 // GetUniforms calls the GetUniforms method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#getuniforms
-func (t *ThinEngine) GetUniforms(pipelineContext js.Value, uniformsNames string) js.Value {
+func (t *ThinEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames string) js.Value {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext)
+	args = append(args, pipelineContext.JSObject())
 	args = append(args, uniformsNames)
 
 	retVal := t.p.Call("getUniforms", args...)

@@ -693,6 +693,12 @@ func processMethodOverrides(className string, s *Signature, names []string, opti
 		names[0] = "av"
 	case "InstancedMesh.GetFacetNormal", "InstancedMesh.GetFacetNormalToRef", "InstancedMesh.GetFacetPosition", "InstancedMesh.GetFacetPositionToRef":
 		names[0] = "index"
+	case "Quaternion.Inverse", "Quaternion.InverseToRef":
+		names[0] = "v"
+	case "Vector3.CheckExtends", "Vector3WithInfo.CheckExtends":
+		names[0] = "vec"
+	case "Vector3.SetAll", "Vector3WithInfo.SetAll", "Vector4.SetAll":
+		names[0] = "f"
 	default:
 		override = false
 	}
@@ -773,7 +779,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 					switch m[2] {
 					case "boolean":
 						types = append(types, "bool")
-					case "number":
+					case "number", "float":
 						types = append(types, "float64")
 					case "TCamera": // special case
 						types = append(types, "*Camera")
@@ -845,6 +851,8 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 					switch paramType {
 					case "any":
 						paramType = "interface{}"
+					case "object":
+						paramType = "map[string]interface{}"
 					case "function", "Function":
 						paramType = "func()"
 					case
@@ -865,7 +873,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 						jsName += ".JSObject()"
 					}
 				}
-				if !strings.HasPrefix(paramType, "*") && paramType != "js.Value" && !strings.HasPrefix(paramType, "[]") {
+				if !isReferenceType(paramType) {
 					paramType = "*" + paramType
 				}
 			}
@@ -888,7 +896,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 				var needsJSObject bool
 				paramType, needsJSObject, needsArrayHelper = jsTypeToGoType(paramType)
 				if needsJSObject {
-					if !strings.HasPrefix(paramType, "*") && paramType != "js.Value" && !strings.HasPrefix(paramType, "[]") {
+					if !isReferenceType(paramType) {
 						paramType = "*" + paramType
 					}
 					jsName += ".JSObject()"
@@ -913,9 +921,20 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 		var needsJSObject bool
 		s.GoReturnType, needsJSObject, _ = jsTypeToGoType(types[len(types)-1])
 
-		if s.GoReturnType == "this" {
+		switch s.GoReturnType {
+		case "this":
 			s.GoReturnType = className
 			needsJSObject = true
+		case "[]*any":
+			s.GoReturnType = "[]interface{}"
+			needsJSObject = false
+		case "object":
+			// s.GoReturnType = "map[string]interface{}"
+			s.GoReturnType = "js.Value"
+			needsJSObject = false
+		case "func()":
+			s.GoReturnType = "js.Value"
+			needsJSObject = false
 		}
 
 		if needsJSObject {
@@ -937,6 +956,10 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 
 	logf("parseParameters[%v]: final params: HasOpts=%v, GoParams=%#v, GoOptsName=%#v, GoOpts=%#v, JSParams=%#v, JSOpts=%#v, GoReturnType=%v\n\n", s.GoName, s.HasOpts, s.GoParams, s.GoOptsName, s.GoOpts, s.JSParams, s.JSOpts, s.GoReturnType)
 	return true
+}
+
+func isReferenceType(s string) bool {
+	return strings.HasPrefix(s, "*") || s == "js.Value" || strings.HasPrefix(s, "[]") || strings.HasPrefix(s, "map[") || strings.HasPrefix(s, "func(")
 }
 
 func jsTypeToGoType(paramType string) (goType string, needsJSObject, needsArrayHelper bool) {
@@ -1117,9 +1140,11 @@ var unhandledTypes = []string{
 	"ArrayBuffer",
 	"ArrayBufferView",
 	"ArrayLike",
+	"AudioBuffer",
 	"AudioNode",
 	"BabylonFileParser",
 	"Behavior",
+	"Blob",
 	"CanvasRenderingContext2D",
 	"ClientRect",
 	"ClipboardEvent",
@@ -1138,6 +1163,7 @@ var unhandledTypes = []string{
 	"EngineOptions",
 	"EnvironmentTextureInfo",
 	"Event",
+	"File",
 	"Float32Array",
 	"FloatArray",
 	"HDRInfo",
@@ -1145,42 +1171,42 @@ var unhandledTypes = []string{
 	"HTMLElement",
 	"HTMLImageElement",
 	"HTMLVideoElement",
-	"IAction",
-	"IActionEvent",
-	"IAnimatable",
-	"IAnimation",
-	"IArrayItem",
-	"IBufferView",
-	"ICamera",
-	"ICameraInput",
-	"IColor3Like",
+	// "IAction",
+	// "IActionEvent",
+	// "IAnimatable",
+	// "IAnimation",
+	// "IArrayItem",
+	// "IBufferView",
+	// "ICamera",
+	// "ICameraInput",
+	// "ICollisionCoordinator",
 	"IColor3Like",
 	"IColor4Like",
-	"ICullable",
-	"IDataBuffer",
-	"IDataBuffer",
-	"IDisplayChangedEventArgs",
-	"IEasingFunction",
-	"IEffectFallbacks",
-	"IEffectFallbacks",
-	"IEffectRendererOptions",
-	"IEffectRendererOptions",
-	"IEnvironmentHelperOptions",
-	"IEnvironmentHelperOptions",
-	"IExportOptions",
-	"IFocusableControl",
-	"IGlowLayerOptions",
-	"IGlowLayerOptions",
-	"IHighlightLayerOptions",
-	"IHighlightLayerOptions",
-	"IHtmlElementTextureOptions",
-	"IHtmlElementTextureOptions",
-	"IImage",
+	// "ICullable",
+	// "IDataBuffer",
+	// "IDataBuffer",
+	// "IDisplayChangedEventArgs",
+	// "IEasingFunction",
+	// "IEffectFallbacks",
+	// "IEffectFallbacks",
+	// "IEffectRendererOptions",
+	// "IEffectRendererOptions",
+	// "IEnvironmentHelperOptions",
+	// "IEnvironmentHelperOptions",
+	// "IExportOptions",
+	// "IFocusableControl",
+	// "IGlowLayerOptions",
+	// "IGlowLayerOptions",
+	// "IHighlightLayerOptions",
+	// "IHighlightLayerOptions",
+	// "IHtmlElementTextureOptions",
+	// "IHtmlElementTextureOptions",
+	// "IImage",
 	"IImageProcessingConfigurationDefines",
-	"IInspectorOptions",
-	"IInternalTextureLoader",
-	"ILoadingScreen",
-	"IMaterial",
+	// "IInspectorOptions",
+	// "IInternalTextureLoader",
+	// "ILoadingScreen",
+	// "IMaterial",
 	"IMaterialAnisotropicDefines",
 	"IMaterialBRDFDefines",
 	"IMaterialClearCoatDefines",
@@ -1188,33 +1214,33 @@ var unhandledTypes = []string{
 	"IMaterialSheenDefines",
 	"IMaterialSubSurfaceDefines",
 	"IMatrixLike",
-	"IMotorEnabledJoint",
-	"IMultiRenderTargetOptions",
-	"IMultiRenderTargetOptions",
-	"INode",
-	"INodeMaterialEditorOptions",
-	"INodeMaterialOptions",
-	"IOceanPostProcessOptions",
-	"IOceanPostProcessOptions",
-	"IParticleSystem",
-	"IPhysicsEnabledObject",
+	// "IMotorEnabledJoint",
+	// "IMultiRenderTargetOptions",
+	// "IMultiRenderTargetOptions",
+	// "INode",
+	// "INodeMaterialEditorOptions",
+	// "INodeMaterialOptions",
+	// "IOceanPostProcessOptions",
+	// "IOceanPostProcessOptions",
+	// "IParticleSystem",
+	// "IPhysicsEnabledObject",
 	"IPhysicsEnginePlugin",
-	"IPipelineContext",
+	// "IPipelineContext",
 	"IPlaneLike",
-	"IProperty",
-	"IScene",
+	// "IProperty",
+	// "IScene",
 	"ISceneLike",
-	"IShaderMaterialOptions",
-	"IShadowGenerator",
-	"IShadowLight",
-	"IShadowLight",
-	"ISize",
+	// "IShaderMaterialOptions",
+	// "IShadowGenerator",
+	// "IShadowLight",
+	// "IShadowLight",
+	// "ISize",
 	"ISmartArrayLike",
-	"ISoundOptions",
-	"ISoundTrackOptions",
-	"ISpriteManager",
-	"ITextureInfo",
-	"IValueGradient",
+	// "ISoundOptions",
+	// "ISoundTrackOptions",
+	// "ISpriteManager",
+	// "ITextureInfo",
+	// "IValueGradient",
 	"IVector2Like",
 	"IVector3Like",
 	"IVector4Like",
@@ -1225,7 +1251,10 @@ var unhandledTypes = []string{
 	"Int32Array",
 	"InternalTextureSource",
 	"InternalTextureSource",
+	"IntersectionInfo",
 	"KeyboardEvent",
+	"MediaStream",
+	"MediaTrackConstraints",
 	"MeshLoadOptions",
 	"MeshLoadOptions",
 	"NodeConstructor",
@@ -1248,6 +1277,7 @@ var unhandledTypes = []string{
 	"PhysicsUpdraftMode",
 	"PointerEvent",
 	"PointerEventInit",
+	"ProgressEvent",
 	"SceneOptions",
 	"SimplificationType",
 	"Space",
@@ -1277,6 +1307,5 @@ var unhandledTypes = []string{
 	"_InstancesBatch",
 	"_TimeToken",
 	"null",
-	"object",
 	"unknown",
 }

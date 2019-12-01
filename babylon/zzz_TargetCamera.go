@@ -230,7 +230,7 @@ type TargetCameraConstructOpts struct {
 // Construct calls the Construct method on the TargetCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#construct
-func (t *TargetCamera) Construct(jsType string, name string, scene *Scene, opts *TargetCameraConstructOpts) func() {
+func (t *TargetCamera) Construct(jsType string, name string, scene *Scene, opts *TargetCameraConstructOpts) js.Value {
 	if opts == nil {
 		opts = &TargetCameraConstructOpts{}
 	}
@@ -506,7 +506,7 @@ type TargetCameraGetConstructorFromNameOpts struct {
 // GetConstructorFromName calls the GetConstructorFromName method on the TargetCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#getconstructorfromname
-func (t *TargetCamera) GetConstructorFromName(jsType string, name string, scene *Scene, opts *TargetCameraGetConstructorFromNameOpts) func() {
+func (t *TargetCamera) GetConstructorFromName(jsType string, name string, scene *Scene, opts *TargetCameraGetConstructorFromNameOpts) js.Value {
 	if opts == nil {
 		opts = &TargetCameraGetConstructorFromNameOpts{}
 	}
@@ -799,11 +799,11 @@ func (t *TargetCamera) IsActiveMesh(mesh *Mesh) bool {
 // IsCompletelyInFrustum calls the IsCompletelyInFrustum method on the TargetCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#iscompletelyinfrustum
-func (t *TargetCamera) IsCompletelyInFrustum(target js.Value) bool {
+func (t *TargetCamera) IsCompletelyInFrustum(target *ICullable) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target)
+	args = append(args, target.JSObject())
 
 	retVal := t.p.Call("isCompletelyInFrustum", args...)
 	return retVal.Bool()
@@ -864,14 +864,14 @@ type TargetCameraIsInFrustumOpts struct {
 // IsInFrustum calls the IsInFrustum method on the TargetCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#isinfrustum
-func (t *TargetCamera) IsInFrustum(target js.Value, opts *TargetCameraIsInFrustumOpts) bool {
+func (t *TargetCamera) IsInFrustum(target *ICullable, opts *TargetCameraIsInFrustumOpts) bool {
 	if opts == nil {
 		opts = &TargetCameraIsInFrustumOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, target)
+	args = append(args, target.JSObject())
 
 	if opts.CheckRigCameras == nil {
 		args = append(args, js.Undefined())

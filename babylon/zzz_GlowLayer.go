@@ -40,7 +40,7 @@ func GlowLayerArrayToJSArray(array []*GlowLayer) []interface{} {
 
 // NewGlowLayerOpts contains optional parameters for NewGlowLayer.
 type NewGlowLayerOpts struct {
-	Options js.Value
+	Options *IGlowLayerOptions
 }
 
 // NewGlowLayer returns a new GlowLayer object.
@@ -59,7 +59,7 @@ func (ba *Babylon) NewGlowLayer(name string, scene *Scene, opts *NewGlowLayerOpt
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Options)
+		args = append(args, opts.Options.JSObject())
 	}
 
 	p := ba.ctx.Get("GlowLayer").New(args...)

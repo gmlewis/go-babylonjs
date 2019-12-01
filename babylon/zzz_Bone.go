@@ -210,7 +210,7 @@ type BoneConstructOpts struct {
 // Construct calls the Construct method on the Bone object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#construct
-func (b *Bone) Construct(jsType string, name string, scene *Scene, opts *BoneConstructOpts) func() {
+func (b *Bone) Construct(jsType string, name string, scene *Scene, opts *BoneConstructOpts) js.Value {
 	if opts == nil {
 		opts = &BoneConstructOpts{}
 	}

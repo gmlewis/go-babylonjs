@@ -282,10 +282,10 @@ func (m *MixMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the MixMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getanimatables
-func (m *MixMaterial) GetAnimatables() js.Value {
+func (m *MixMaterial) GetAnimatables() *IAnimatable {
 
 	retVal := m.p.Call("getAnimatables")
-	return retVal
+	return IAnimatableFromJSObject(retVal, m.ctx)
 }
 
 // GetBindedMeshes calls the GetBindedMeshes method on the MixMaterial object.

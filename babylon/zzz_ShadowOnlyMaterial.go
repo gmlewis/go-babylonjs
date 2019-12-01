@@ -520,16 +520,16 @@ func (s *ShadowOnlyMaterial) Unfreeze() {
 // ActiveLight returns the ActiveLight property of class ShadowOnlyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#activelight
-func (s *ShadowOnlyMaterial) ActiveLight(activeLight js.Value) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(activeLight)
+func (s *ShadowOnlyMaterial) ActiveLight(activeLight *IShadowLight) *ShadowOnlyMaterial {
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(activeLight.JSObject())
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
 // SetActiveLight sets the ActiveLight property of class ShadowOnlyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#activelight
-func (s *ShadowOnlyMaterial) SetActiveLight(activeLight js.Value) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(activeLight)
+func (s *ShadowOnlyMaterial) SetActiveLight(activeLight *IShadowLight) *ShadowOnlyMaterial {
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(activeLight.JSObject())
 	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
 }
 
