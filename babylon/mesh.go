@@ -2,7 +2,7 @@ package babylon
 
 import "syscall/js"
 
-// DOUBLESIDE calls the JavaScript method of the same name.
+// DOUBLESIDE gets the JavaScript property of the same name.
 func (m *Mesh) DOUBLESIDE() *float64 {
 	v := m.p.Get("DOUBLESIDE")
 	f := v.Float()
