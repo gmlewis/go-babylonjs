@@ -14,7 +14,6 @@ import (
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
 type FreeCameraInputsManager struct {
 	*CameraInputsManager
-	*FreeCamera
 	ctx js.Value
 }
 
@@ -29,7 +28,7 @@ func (ba *Babylon) FreeCameraInputsManager() *FreeCameraInputsManager {
 
 // FreeCameraInputsManagerFromJSObject returns a wrapped FreeCameraInputsManager JavaScript class.
 func FreeCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *FreeCameraInputsManager {
-	return &FreeCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
+	return &FreeCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // FreeCameraInputsManagerArrayToJSArray returns a JavaScript Array for the wrapped array.

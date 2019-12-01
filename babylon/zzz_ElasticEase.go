@@ -9,6 +9,7 @@ import (
 // ElasticEase represents a babylon.js ElasticEase.
 // Easing function with an elastic shape (see link below).
 //
+// See: https://easings.net/#easeInElastic
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type ElasticEase struct {
 	*EasingFunction

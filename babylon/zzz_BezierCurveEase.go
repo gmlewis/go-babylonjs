@@ -9,6 +9,7 @@ import (
 // BezierCurveEase represents a babylon.js BezierCurveEase.
 // Easing function with a bezier shape (see link below).
 //
+// See: http://cubic-bezier.com/#.17,.67,.83,.67
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type BezierCurveEase struct {
 	*EasingFunction

@@ -9,6 +9,7 @@ import (
 // ExponentialEase represents a babylon.js ExponentialEase.
 // Easing function with an exponential shape (see link below).
 //
+// See: https://easings.net/#easeInExpo
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type ExponentialEase struct {
 	*EasingFunction

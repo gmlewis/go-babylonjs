@@ -9,6 +9,7 @@ import (
 // BounceEase represents a babylon.js BounceEase.
 // Easing function with a bouncing shape (see link below).
 //
+// See: https://easings.net/#easeInBounce
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type BounceEase struct {
 	*EasingFunction

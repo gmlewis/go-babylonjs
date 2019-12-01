@@ -9,6 +9,7 @@ import (
 // QuarticEase represents a babylon.js QuarticEase.
 // Easing function with a power of 4 shape (see link below).
 //
+// See: https://easings.net/#easeInQuart
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type QuarticEase struct {
 	*EasingFunction

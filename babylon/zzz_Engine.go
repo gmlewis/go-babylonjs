@@ -408,9 +408,9 @@ func (e *Engine) ClearInternalTexturesCache() {
 // CreateCubeTexture calls the CreateCubeTexture method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createcubetexture
-func (e *Engine) CreateCubeTexture(rootUrl string, scene *Scene, files string, noMipmap bool, onLoad func(), onError func(), format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64) *InternalTexture {
+func (e *Engine) CreateCubeTexture(rootUrl string, scene *Scene, files string, noMipmap bool, onLoad func(), onError func(), format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64, fallback *InternalTexture, excludeLoaders []*IInternalTextureLoader) *InternalTexture {
 
-	args := make([]interface{}, 0, 11+0)
+	args := make([]interface{}, 0, 13+0)
 
 	args = append(args, rootUrl)
 	args = append(args, scene.JSObject())
@@ -423,6 +423,8 @@ func (e *Engine) CreateCubeTexture(rootUrl string, scene *Scene, files string, n
 	args = append(args, createPolynomials)
 	args = append(args, lodScale)
 	args = append(args, lodOffset)
+	args = append(args, fallback.JSObject())
+	args = append(args, IInternalTextureLoaderArrayToJSArray(excludeLoaders))
 
 	retVal := e.p.Call("createCubeTexture", args...)
 	return InternalTextureFromJSObject(retVal, e.ctx)
@@ -748,9 +750,9 @@ func (e *Engine) CreateRawCubeTexture(data js.Value, size float64, format float6
 // CreateRawCubeTextureFromUrl calls the CreateRawCubeTextureFromUrl method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createrawcubetexturefromurl
-func (e *Engine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size float64, format float64, jsType float64, noMipmap bool, callback func(), mipmapGenerator func(), onLoad func(), onError func(), samplingMode float64, invertY bool) *InternalTexture {
+func (e *Engine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size float64, format float64, jsType float64, noMipmap bool, callback func(), mipmapGenerator func(), onLoad func(), onError func()) *InternalTexture {
 
-	args := make([]interface{}, 0, 12+0)
+	args := make([]interface{}, 0, 10+0)
 
 	args = append(args, url)
 	args = append(args, scene.JSObject())
@@ -762,8 +764,6 @@ func (e *Engine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size floa
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { mipmapGenerator(); return nil }))
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLoad(); return nil }))
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
-	args = append(args, samplingMode)
-	args = append(args, invertY)
 
 	retVal := e.p.Call("createRawCubeTextureFromUrl", args...)
 	return InternalTextureFromJSObject(retVal, e.ctx)
@@ -3149,17 +3149,15 @@ func (e *Engine) UpdateMultipleRenderTargetTextureSampleCount(textures *Internal
 // UpdateRawCubeTexture calls the UpdateRawCubeTexture method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#updaterawcubetexture
-func (e *Engine) UpdateRawCubeTexture(texture *InternalTexture, data js.Value, format float64, jsType float64, invertY bool, compression string, level float64) {
+func (e *Engine) UpdateRawCubeTexture(texture *InternalTexture, data js.Value, format float64, jsType float64, invertY bool) {
 
-	args := make([]interface{}, 0, 7+0)
+	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, texture.JSObject())
 	args = append(args, data)
 	args = append(args, format)
 	args = append(args, jsType)
 	args = append(args, invertY)
-	args = append(args, compression)
-	args = append(args, level)
 
 	e.p.Call("updateRawCubeTexture", args...)
 }
@@ -3167,16 +3165,14 @@ func (e *Engine) UpdateRawCubeTexture(texture *InternalTexture, data js.Value, f
 // UpdateRawTexture calls the UpdateRawTexture method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#updaterawtexture
-func (e *Engine) UpdateRawTexture(texture *InternalTexture, data js.Value, format float64, invertY bool, compression string, jsType float64) {
+func (e *Engine) UpdateRawTexture(texture *InternalTexture, data js.Value, format float64, invertY bool) {
 
-	args := make([]interface{}, 0, 6+0)
+	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, texture.JSObject())
 	args = append(args, data)
 	args = append(args, format)
 	args = append(args, invertY)
-	args = append(args, compression)
-	args = append(args, jsType)
 
 	e.p.Call("updateRawTexture", args...)
 }
@@ -3184,16 +3180,14 @@ func (e *Engine) UpdateRawTexture(texture *InternalTexture, data js.Value, forma
 // UpdateRawTexture2DArray calls the UpdateRawTexture2DArray method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#updaterawtexture2darray
-func (e *Engine) UpdateRawTexture2DArray(texture *InternalTexture, data js.Value, format float64, invertY bool, compression string, textureType float64) {
+func (e *Engine) UpdateRawTexture2DArray(texture *InternalTexture, data js.Value, format float64, invertY bool) {
 
-	args := make([]interface{}, 0, 6+0)
+	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, texture.JSObject())
 	args = append(args, data)
 	args = append(args, format)
 	args = append(args, invertY)
-	args = append(args, compression)
-	args = append(args, textureType)
 
 	e.p.Call("updateRawTexture2DArray", args...)
 }
@@ -3201,16 +3195,14 @@ func (e *Engine) UpdateRawTexture2DArray(texture *InternalTexture, data js.Value
 // UpdateRawTexture3D calls the UpdateRawTexture3D method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#updaterawtexture3d
-func (e *Engine) UpdateRawTexture3D(texture *InternalTexture, data js.Value, format float64, invertY bool, compression string, textureType float64) {
+func (e *Engine) UpdateRawTexture3D(texture *InternalTexture, data js.Value, format float64, invertY bool) {
 
-	args := make([]interface{}, 0, 6+0)
+	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, texture.JSObject())
 	args = append(args, data)
 	args = append(args, format)
 	args = append(args, invertY)
-	args = append(args, compression)
-	args = append(args, textureType)
 
 	e.p.Call("updateRawTexture3D", args...)
 }

@@ -9,6 +9,7 @@ import (
 // CircleEase represents a babylon.js CircleEase.
 // Easing function with a circle shape (see link below).
 //
+// See: https://easings.net/#easeInCirc
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type CircleEase struct {
 	*EasingFunction

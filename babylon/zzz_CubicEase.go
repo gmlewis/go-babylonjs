@@ -9,6 +9,7 @@ import (
 // CubicEase represents a babylon.js CubicEase.
 // Easing function with a power of 3 shape (see link below).
 //
+// See: https://easings.net/#easeInCubic
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type CubicEase struct {
 	*EasingFunction

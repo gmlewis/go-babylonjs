@@ -13,7 +13,6 @@ import (
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
 type FlyCameraInputsManager struct {
 	*CameraInputsManager
-	*FlyCamera
 	ctx js.Value
 }
 
@@ -28,7 +27,7 @@ func (ba *Babylon) FlyCameraInputsManager() *FlyCameraInputsManager {
 
 // FlyCameraInputsManagerFromJSObject returns a wrapped FlyCameraInputsManager JavaScript class.
 func FlyCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *FlyCameraInputsManager {
-	return &FlyCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), FlyCamera: FlyCameraFromJSObject(p, ctx), ctx: ctx}
+	return &FlyCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // FlyCameraInputsManagerArrayToJSArray returns a JavaScript Array for the wrapped array.

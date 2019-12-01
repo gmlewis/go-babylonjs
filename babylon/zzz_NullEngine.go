@@ -426,9 +426,9 @@ func (n *NullEngine) CreateRawCubeTexture(data js.Value, size float64, format fl
 // CreateRawCubeTextureFromUrl calls the CreateRawCubeTextureFromUrl method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#createrawcubetexturefromurl
-func (n *NullEngine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size float64, format float64, jsType float64, noMipmap bool, callback func(), mipmapGenerator func(), onLoad func(), onError func(), samplingMode float64, invertY bool) *InternalTexture {
+func (n *NullEngine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size float64, format float64, jsType float64, noMipmap bool, callback func(), mipmapGenerator func(), onLoad func(), onError func()) *InternalTexture {
 
-	args := make([]interface{}, 0, 12+0)
+	args := make([]interface{}, 0, 10+0)
 
 	args = append(args, url)
 	args = append(args, scene.JSObject())
@@ -440,8 +440,6 @@ func (n *NullEngine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size 
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { mipmapGenerator(); return nil }))
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLoad(); return nil }))
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
-	args = append(args, samplingMode)
-	args = append(args, invertY)
 
 	retVal := n.p.Call("createRawCubeTextureFromUrl", args...)
 	return InternalTextureFromJSObject(retVal, n.ctx)
@@ -2352,17 +2350,15 @@ func (n *NullEngine) UpdateDynamicVertexBuffer(vertexBuffer js.Value, vertices j
 // UpdateRawCubeTexture calls the UpdateRawCubeTexture method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#updaterawcubetexture
-func (n *NullEngine) UpdateRawCubeTexture(texture *InternalTexture, data js.Value, format float64, jsType float64, invertY bool, compression string, level float64) {
+func (n *NullEngine) UpdateRawCubeTexture(texture *InternalTexture, data js.Value, format float64, jsType float64, invertY bool) {
 
-	args := make([]interface{}, 0, 7+0)
+	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, texture.JSObject())
 	args = append(args, data)
 	args = append(args, format)
 	args = append(args, jsType)
 	args = append(args, invertY)
-	args = append(args, compression)
-	args = append(args, level)
 
 	n.p.Call("updateRawCubeTexture", args...)
 }
@@ -2370,16 +2366,14 @@ func (n *NullEngine) UpdateRawCubeTexture(texture *InternalTexture, data js.Valu
 // UpdateRawTexture calls the UpdateRawTexture method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#updaterawtexture
-func (n *NullEngine) UpdateRawTexture(texture *InternalTexture, data js.Value, format float64, invertY bool, compression string, jsType float64) {
+func (n *NullEngine) UpdateRawTexture(texture *InternalTexture, data js.Value, format float64, invertY bool) {
 
-	args := make([]interface{}, 0, 6+0)
+	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, texture.JSObject())
 	args = append(args, data)
 	args = append(args, format)
 	args = append(args, invertY)
-	args = append(args, compression)
-	args = append(args, jsType)
 
 	n.p.Call("updateRawTexture", args...)
 }
@@ -2387,16 +2381,14 @@ func (n *NullEngine) UpdateRawTexture(texture *InternalTexture, data js.Value, f
 // UpdateRawTexture2DArray calls the UpdateRawTexture2DArray method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#updaterawtexture2darray
-func (n *NullEngine) UpdateRawTexture2DArray(texture *InternalTexture, data js.Value, format float64, invertY bool, compression string, textureType float64) {
+func (n *NullEngine) UpdateRawTexture2DArray(texture *InternalTexture, data js.Value, format float64, invertY bool) {
 
-	args := make([]interface{}, 0, 6+0)
+	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, texture.JSObject())
 	args = append(args, data)
 	args = append(args, format)
 	args = append(args, invertY)
-	args = append(args, compression)
-	args = append(args, textureType)
 
 	n.p.Call("updateRawTexture2DArray", args...)
 }
@@ -2404,16 +2396,14 @@ func (n *NullEngine) UpdateRawTexture2DArray(texture *InternalTexture, data js.V
 // UpdateRawTexture3D calls the UpdateRawTexture3D method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#updaterawtexture3d
-func (n *NullEngine) UpdateRawTexture3D(texture *InternalTexture, data js.Value, format float64, invertY bool, compression string, textureType float64) {
+func (n *NullEngine) UpdateRawTexture3D(texture *InternalTexture, data js.Value, format float64, invertY bool) {
 
-	args := make([]interface{}, 0, 6+0)
+	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, texture.JSObject())
 	args = append(args, data)
 	args = append(args, format)
 	args = append(args, invertY)
-	args = append(args, compression)
-	args = append(args, textureType)
 
 	n.p.Call("updateRawTexture3D", args...)
 }

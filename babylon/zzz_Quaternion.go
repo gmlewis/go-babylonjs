@@ -9,6 +9,7 @@ import (
 // Quaternion represents a babylon.js Quaternion.
 // Class used to store quaternion data
 //
+// See: https://en.wikipedia.org/wiki/Quaternion
 // See: http://doc.babylonjs.com/features/position,_rotation,_scaling
 type Quaternion struct {
 	p   js.Value

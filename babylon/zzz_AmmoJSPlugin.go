@@ -9,6 +9,7 @@ import (
 // AmmoJSPlugin represents a babylon.js AmmoJSPlugin.
 // AmmoJS Physics plugin
 //
+// See: https://doc.babylonjs.com/how_to/using_the_physics_engine
 // See: https://github.com/kripken/ammo.js/
 type AmmoJSPlugin struct {
 	p   js.Value

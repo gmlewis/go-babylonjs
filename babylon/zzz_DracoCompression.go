@@ -9,7 +9,7 @@ import (
 // DracoCompression represents a babylon.js DracoCompression.
 // Draco compression (&lt;a href=&#34;https://google.github.io/draco/&#34;&gt;https://google.github.io/draco/&lt;/a&gt;)
 //
-// To decode Draco compressed data, get the default DracoCompression object and call decodeMeshAsync:
+// This class wraps the Draco module.
 //
 // See: https://www.babylonjs-playground.com/#N3EK4B#0
 type DracoCompression struct {

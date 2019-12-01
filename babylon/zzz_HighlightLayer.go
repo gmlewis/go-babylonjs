@@ -9,7 +9,8 @@ import (
 // HighlightLayer represents a babylon.js HighlightLayer.
 // The highlight layer Helps adding a glow effect around a mesh.
 //
-// !!! THIS REQUIRES AN ACTIVE STENCIL BUFFER ON THE CANVAS !!!
+// Once instantiated in a scene, simply use the addMesh or removeMesh method to add or remove
+// glowy meshes to your scene.
 type HighlightLayer struct {
 	*EffectLayer
 	ctx js.Value

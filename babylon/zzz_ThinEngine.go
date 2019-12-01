@@ -338,9 +338,9 @@ func (t *ThinEngine) ClearInternalTexturesCache() {
 // CreateCubeTexture calls the CreateCubeTexture method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createcubetexture
-func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files string, noMipmap bool, onLoad func(), onError func(), format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64) *InternalTexture {
+func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files string, noMipmap bool, onLoad func(), onError func(), format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64, fallback *InternalTexture, excludeLoaders []*IInternalTextureLoader) *InternalTexture {
 
-	args := make([]interface{}, 0, 11+0)
+	args := make([]interface{}, 0, 13+0)
 
 	args = append(args, rootUrl)
 	args = append(args, scene.JSObject())
@@ -353,6 +353,8 @@ func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files strin
 	args = append(args, createPolynomials)
 	args = append(args, lodScale)
 	args = append(args, lodOffset)
+	args = append(args, fallback.JSObject())
+	args = append(args, IInternalTextureLoaderArrayToJSArray(excludeLoaders))
 
 	retVal := t.p.Call("createCubeTexture", args...)
 	return InternalTextureFromJSObject(retVal, t.ctx)

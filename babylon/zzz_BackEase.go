@@ -9,6 +9,7 @@ import (
 // BackEase represents a babylon.js BackEase.
 // Easing function with a ease back shape (see link below).
 //
+// See: https://easings.net/#easeInBack
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type BackEase struct {
 	*EasingFunction

@@ -9,6 +9,7 @@ import (
 // QuinticEase represents a babylon.js QuinticEase.
 // Easing function with a power of 5 shape (see link below).
 //
+// See: https://easings.net/#easeInQuint
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type QuinticEase struct {
 	*EasingFunction

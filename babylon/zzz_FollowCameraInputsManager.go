@@ -13,7 +13,6 @@ import (
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
 type FollowCameraInputsManager struct {
 	*CameraInputsManager
-	*FollowCamera
 	ctx js.Value
 }
 
@@ -28,7 +27,7 @@ func (ba *Babylon) FollowCameraInputsManager() *FollowCameraInputsManager {
 
 // FollowCameraInputsManagerFromJSObject returns a wrapped FollowCameraInputsManager JavaScript class.
 func FollowCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *FollowCameraInputsManager {
-	return &FollowCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), FollowCamera: FollowCameraFromJSObject(p, ctx), ctx: ctx}
+	return &FollowCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // FollowCameraInputsManagerArrayToJSArray returns a JavaScript Array for the wrapped array.

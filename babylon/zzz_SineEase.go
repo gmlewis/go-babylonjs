@@ -9,6 +9,7 @@ import (
 // SineEase represents a babylon.js SineEase.
 // Easing function with a sin shape (see link below).
 //
+// See: https://easings.net/#easeInSine
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type SineEase struct {
 	*EasingFunction

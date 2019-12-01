@@ -10,8 +10,11 @@ import (
 // This post-process allows the modification of rendered colors by using
 // a &amp;#39;look-up table&amp;#39; (LUT). This effect is also called Color Grading.
 //
-// For an example of a color LUT, see here:
+// The object needs to be provided an url to a texture containing the color
+// look-up table: the texture must be 256 pixels wide and 16 pixels high.
+// Use an image editing software to tweak the LUT to match your needs.
 //
+// See: http://udn.epicgames.com/Three/rsrc/Three/ColorGrading/RGBTable16x1.png
 // See: http://udn.epicgames.com/Three/ColorGrading.html
 type ColorCorrectionPostProcess struct {
 	*PostProcess

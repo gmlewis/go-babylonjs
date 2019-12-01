@@ -9,8 +9,7 @@ import (
 // UniformBuffer represents a babylon.js UniformBuffer.
 // Uniform buffer objects.
 //
-// For more information, please refer to :
-// &lt;a href=&#34;https://www.khronos.org/opengl/wiki/Uniform_Buffer_Object&#34;&gt;https://www.khronos.org/opengl/wiki/Uniform_Buffer_Object&lt;/a&gt;
+// Handles blocks of uniform on the GPU.
 type UniformBuffer struct {
 	p   js.Value
 	ctx js.Value

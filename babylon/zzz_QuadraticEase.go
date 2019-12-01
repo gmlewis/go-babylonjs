@@ -9,6 +9,7 @@ import (
 // QuadraticEase represents a babylon.js QuadraticEase.
 // Easing function with a power of 2 shape (see link below).
 //
+// See: https://easings.net/#easeInQuad
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type QuadraticEase struct {
 	*EasingFunction

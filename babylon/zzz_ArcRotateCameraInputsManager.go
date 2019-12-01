@@ -14,7 +14,6 @@ import (
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
 type ArcRotateCameraInputsManager struct {
 	*CameraInputsManager
-	*ArcRotateCamera
 	ctx js.Value
 }
 
@@ -29,7 +28,7 @@ func (ba *Babylon) ArcRotateCameraInputsManager() *ArcRotateCameraInputsManager 
 
 // ArcRotateCameraInputsManagerFromJSObject returns a wrapped ArcRotateCameraInputsManager JavaScript class.
 func ArcRotateCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *ArcRotateCameraInputsManager {
-	return &ArcRotateCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), ArcRotateCamera: ArcRotateCameraFromJSObject(p, ctx), ctx: ctx}
+	return &ArcRotateCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // ArcRotateCameraInputsManagerArrayToJSArray returns a JavaScript Array for the wrapped array.

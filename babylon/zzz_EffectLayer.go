@@ -9,8 +9,7 @@ import (
 // EffectLayer represents a babylon.js EffectLayer.
 // The effect layer Helps adding post process effect blended with the main pass.
 //
-// The effect layer class can not be used directly and is intented to inherited from to be
-// customized per effects.
+// This can be for instance use to generate glow or higlight effects on the scene.
 type EffectLayer struct {
 	p   js.Value
 	ctx js.Value

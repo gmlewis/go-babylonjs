@@ -9,7 +9,7 @@ import (
 // GlowLayer represents a babylon.js GlowLayer.
 // The glow layer Helps adding a glow effect around the emissive parts of a mesh.
 //
-// Documentation: &lt;a href=&#34;https://doc.babylonjs.com/how_to/glow_layer&#34;&gt;https://doc.babylonjs.com/how_to/glow_layer&lt;/a&gt;
+// Once instantiated in a scene, by default, all the emissive meshes will glow.
 type GlowLayer struct {
 	*EffectLayer
 	ctx js.Value

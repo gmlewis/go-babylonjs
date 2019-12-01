@@ -10,7 +10,7 @@ import (
 // &amp;quot;Static Class&amp;quot; containing the most commonly used helper while dealing with material for
 // rendering purpose.
 //
-// This works by convention in BabylonJS but is meant to be use only with shader following the in place naming rules and conventions.
+// It contains the basic tools to help defining defines, binding uniform for the common part of the materials.
 type MaterialHelper struct {
 	p   js.Value
 	ctx js.Value

@@ -81,75 +81,161 @@ func (c *classes) walker() filepath.WalkFunc {
 			if div.ID != "wrapper" {
 				continue
 			}
-			html.Name = div.H1.InnerXML
-			if i := strings.Index(html.Name, "&lt;"); i >= 0 {
-				html.Name = html.Name[0:i]
+
+			if s := div.GetHeaderDiv(0).GetDiv(0).GetH1().GetInnerXML(); s != "" {
+				html.Name = s
+				if i := strings.Index(html.Name, "&lt;"); i >= 0 {
+					html.Name = html.Name[0:i]
+				}
+			} else {
+				log.Fatalf("%v: unable to find class name.", filename)
+			}
+			logf("html.Name=%v", html.Name)
+
+			mainDiv := div.GetDiv(0).GetDiv(0).GetDiv(0)
+			if mainDiv == nil {
+				log.Fatalf("%v: unable to find class name.", filename)
 			}
 
-			for _, section := range div.Sections {
-				switch t := section.Type(); t {
-				case "tsd-comment":
-					lines := strings.Split(section.Lead.InnerXML, "\n")
+			commentSection := mainDiv.FindSections(func(s *Section) bool { return s.HasClass("tsd-comment") })
+			if len(commentSection) > 0 { // A summary and description are optional.
+				if len(commentSection) > 1 {
+					log.Fatalf("%v: found %v tsd-comment sections, want 1", filename, len(commentSection))
+				}
+				if s := commentSection[0].GetDiv(0).GetDiv(0).GetP(0).GetInnerXML(); s != "" {
+					lines := strings.Split(s, "\n")
 					for i, v := range lines {
 						lines[i] = strings.TrimSpace(v)
 					}
 					html.Summary = strings.Join(lines, "\n// ")
-
-					lines = strings.Split(section.Description.InnerXML, "\n")
+				} else {
+					log.Fatalf("%v: unable to find html.Summary.", filename)
+				}
+				if s := commentSection[0].GetDiv(0).GetP(0).GetInnerXML(); s != "" { // optional
+					lines := strings.Split(s, "\n")
 					for i, v := range lines {
 						lines[i] = strings.TrimSpace(v)
 					}
 					html.Description = strings.Join(lines, "\n// ")
+				}
+				var seeLines []string
+				for _, dd := range commentSection[0].GetDiv(0).GetDL(0).GetDDs() {
+					if s := dd.GetP(0).GetA(0).GetInnerXML(); s != "" { // optional
+						seeLines = append(seeLines, s)
+					}
+				}
+				html.SeeURL = strings.Join(seeLines, "\n// See: ")
+			}
 
-					html.SeeURL = section.SeeURL.InnerXML
-				case "tsd-hierarchy":
-					for _, v := range section.ListItems {
-						html.Parents = append(html.Parents, v.InnerXML)
+			hierarchySection := mainDiv.FindSections(func(s *Section) bool { return s.HasClass("tsd-hierarchy") })
+			if len(hierarchySection) != 1 {
+				log.Fatalf("%v: found %v tsd-hierarchy sections, want 1", filename, len(hierarchySection))
+			}
+			for _, ul := range hierarchySection[0].ULs {
+				if s := ul.GetLI(0).GetA(0).GetInnerXML(); s != "" { // optional
+					html.Parents = append(html.Parents, s)
+				}
+				if s := ul.GetLI(0).GetUL(0).GetLI(0).GetUL(0).GetLI(0).GetA(0).GetInnerXML(); s != "" { // optional
+					html.Children = append(html.Children, s)
+				}
+			}
+
+			implementsSection := mainDiv.FindSections(func(s *Section) bool { return s.H3.GetInnerXML() == "Implements" })
+			if len(implementsSection) > 0 { // optional
+				for _, ul := range implementsSection[0].ULs {
+					if s := ul.GetLI(0).GetA(0).GetInnerXML(); s != "" {
+						html.Implements = append(html.Implements, s)
+					} else if s := ul.GetLI(0).GetSpan(0).GetInnerXML(); s != "" {
+						html.Implements = append(html.Implements, s)
+					} else {
+						log.Fatalf("%v: unable to find Implements.", filename)
 					}
-					for _, v := range section.Children {
-						html.Children = append(html.Children, v.InnerXML)
-					}
-				case "Implements":
-					for _, v := range section.ListItems {
-						html.Implements = append(html.Implements, v.InnerXML)
-					}
-				case "tsd-index-group":
-					// for _, indexSection := range section.IndexSections {
-					// 	logf("%v: indexSection=%v: %v", t, indexSection.Type(), indexSection.ListItems)
-					// }
-				case "tsd-member-group", "tsd-is-not-exported", "tsd-is-inherited": // Parse this for Constructors, Properties, and Methods
-					for _, v := range section.ConstructorsAndMethods {
-						if !strings.Contains(v.Class, "tsd-signature") {
-							continue
-						}
-						switch section.H2.InnerXML {
-						case "Constructors":
-							if ok := v.parseParameters(html.Name, processConstructorOverrides); ok {
-								html.ConstructorNames[v.GoName] = v
-							}
-						case "Methods":
-							if ok := v.parseParameters(html.Name, processMethodOverrides); ok {
-								html.MethodNames[v.GoName] = v
-							}
-						default:
-							log.Fatalf("%v: unknown ConstructorsAndMethods: h2=%v", filename, section.H2)
-						}
-					}
-					for _, v := range section.Properties {
-						if !strings.Contains(v.Class, "tsd-signature") {
-							continue
-						}
-						if ok := v.parseParameters(html.Name, nil); ok {
-							html.PropertyNames[v.GoName] = v
-						}
-					}
-				case "tsd-type-parameters": // ignore
-				case "tsd-parent-kind-module": // ignore
-				default:
-					log.Fatalf("Unknown section type: %v", t)
 				}
 			}
 		}
+
+		if err := html.parseConstructors(); err != nil {
+			log.Fatalf("%v: %v", filename, err)
+		}
+		if err := html.parseMethods(); err != nil {
+			log.Fatalf("%v: %v", filename, err)
+		}
+		if err := html.parseProperties(); err != nil {
+			log.Fatalf("%v: %v", filename, err)
+		}
+
+		/*
+			for _, div := range html.Div {
+				if div.ID != "wrapper" {
+					continue
+				}
+				html.Name = div.H1.InnerXML
+				if i := strings.Index(html.Name, "&lt;"); i >= 0 {
+					html.Name = html.Name[0:i]
+				}
+
+				for _, section := range div.Sections {
+						switch t := section.Type(); t {
+						case "tsd-comment":
+							lines := strings.Split(section.Lead.InnerXML, "\n")
+							for i, v := range lines {
+								lines[i] = strings.TrimSpace(v)
+							}
+							html.Summary = strings.Join(lines, "\n// ")
+
+							lines = strings.Split(section.Description.InnerXML, "\n")
+							for i, v := range lines {
+								lines[i] = strings.TrimSpace(v)
+							}
+							html.Description = strings.Join(lines, "\n// ")
+
+							html.SeeURL = section.SeeURL.InnerXML
+						case "tsd-hierarchy":
+							for _, v := range section.ListItems {
+								html.Parents = append(html.Parents, v.InnerXML)
+							}
+							for _, v := range section.Children {
+								html.Children = append(html.Children, v.InnerXML)
+							}
+						case "Implements":
+							for _, v := range section.ListItems {
+								html.Implements = append(html.Implements, v.InnerXML)
+							}
+						case "tsd-index-group":
+						case "tsd-member-group", "tsd-is-not-exported", "tsd-is-inherited": // Parse this for Constructors, Properties, and Methods
+							for _, v := range section.ConstructorsAndMethods {
+								if !strings.Contains(v.Class, "tsd-signature") {
+									continue
+								}
+								switch section.H2.InnerXML {
+								case "Constructors":
+									if ok := v.parseParameters(html.Name, processConstructorOverrides); ok {
+										html.ConstructorNames[v.GoName] = v
+									}
+								case "Methods":
+									if ok := v.parseParameters(html.Name, processMethodOverrides); ok {
+										html.MethodNames[v.GoName] = v
+									}
+								default:
+									log.Fatalf("%v: unknown ConstructorsAndMethods: h2=%v", filename, section.H2)
+								}
+							}
+							for _, v := range section.Properties {
+								if !strings.Contains(v.Class, "tsd-signature") {
+									continue
+								}
+								if ok := v.parseParameters(html.Name, nil); ok {
+									html.PropertyNames[v.GoName] = v
+								}
+							}
+						case "tsd-type-parameters": // ignore
+						case "tsd-parent-kind-module": // ignore
+						default:
+							log.Fatalf("Unknown section type: %v", t)
+						}
+				}
+			}
+		*/
 
 		logf("html.Name=%v", html.Name)
 		logf("html.Summary=%v", html.Summary)
@@ -187,56 +273,397 @@ type ClassHTML struct {
 
 // Div represents an HTML div
 type Div struct {
-	ID       string     `xml:"id,attr"`
-	H1       InnerXML   `xml:"header>div>div>h1"`
-	Sections []*Section `xml:"div>div>div>section"`
+	Class    string          `xml:"class,attr"`
+	Classes  map[string]bool `xml:"-"`
+	InnerXML string          `xml:",innerxml"`
+
+	HeaderDivs []*Div `xml:"header>div"`
+
+	ID   string  `xml:"id,attr"`
+	Name string  `xml:"name,attr"`
+	H1   *Header `xml:"h1"`
+	H2   *Header `xml:"h2"`
+	H3   *Header `xml:"h3"`
+	H4   *Header `xml:"h4"`
+	H5   *Header `xml:"h5"`
+
+	Divs []*Div `xml:"div"`
+
+	Ps []*P `xml:"p"`
+
+	DLs []*DL `xml:"dl"`
+	ULs []*UL `xml:"ul"`
+
+	Sections []*Section `xml:"section"`
+}
+
+func (d *Div) GetSignature() *Signature {
+	return &Signature{
+		Class:    d.Class,
+		Classes:  d.Classes,
+		InnerXML: d.InnerXML,
+	}
+}
+
+type FindSectionFunc func(*Section) bool
+
+func (d *Div) FindSections(f FindSectionFunc) []*Section {
+	if d != nil {
+		var result []*Section
+		for _, section := range d.Sections {
+			if f(section) {
+				result = append(result, section)
+			}
+		}
+		return result
+	}
+	return nil
+}
+
+func (d *Div) GetHeaderDiv(i int) *Div {
+	if d != nil && i < len(d.HeaderDivs) {
+		return d.HeaderDivs[i]
+	}
+	return nil
+}
+
+func (d *Div) GetDiv(i int) *Div {
+	if d != nil && i < len(d.Divs) {
+		return d.Divs[i]
+	}
+	return nil
+}
+
+func (d *Div) GetSection(i int) *Section {
+	if d != nil && i < len(d.Sections) {
+		return d.Sections[i]
+	}
+	return nil
+}
+
+func (d *Div) GetP(i int) *P {
+	if d != nil && i < len(d.Ps) {
+		return d.Ps[i]
+	}
+	return nil
+}
+
+func (d *Div) GetDL(i int) *DL {
+	if d != nil && i < len(d.DLs) {
+		return d.DLs[i]
+	}
+	return nil
+}
+
+func (d *Div) GetH1() *Header {
+	if d != nil && d.H1 != nil {
+		return d.H1
+	}
+	return nil
+}
+
+func (d *Div) GetInnerXML() string {
+	if d != nil {
+		return d.InnerXML
+	}
+	return ""
 }
 
 // Section represents an HTML section.
 type Section struct {
-	Class string   `xml:"class,attr"`
-	H2    InnerXML `xml:"h2"`
-	H3    InnerXML `xml:"h3"`
+	Class   string          `xml:"class,attr"`
+	Classes map[string]bool `xml:"-"`
 
-	// class: tsd-comment
-	Lead        InnerXML `xml:"div>div>p"`
-	Description InnerXML `xml:"div>p"`
-	SeeURL      InnerXML `xml:"div>dl>dd>p>a"`
+	InnerXML string  `xml:",innerxml"`
+	H1       *Header `xml:"h1"`
+	H2       *Header `xml:"h2"`
+	H3       *Header `xml:"h3"`
+	H4       *Header `xml:"h4"`
+	H5       *Header `xml:"h5"`
 
-	// class: tsd-hierarchy
-	// class Implements
-	ListItems []InnerXML `xml:"ul>li>a"`
+	// // class: tsd-comment
+	// Lead        InnerXML `xml:"div>div>p"`
+	// Description InnerXML `xml:"div>p"`
+	// SeeURL      InnerXML `xml:"div>dl>dd>p>a"`
+	//
+	// // class: tsd-hierarchy
+	// // class Implements
+	// ListItems []InnerXML `xml:"ul>li>a"`
+	//
+	// // class: tsd-hierarchy
+	// Children []InnerXML `xml:"ul>li>ul>li>ul>li>a"`
+	//
+	// // class: tsd-index-group
+	// // IndexSections []*Section `xml:"section>div>section"`
+	//
+	// // class: tsd-is-not-exported
+	// ConstructorsAndMethods []*Signature `xml:"section>ul>li"`
+	// Properties             []*Signature `xml:"section>div"`
 
-	// class: tsd-hierarchy
-	Children []InnerXML `xml:"ul>li>ul>li>ul>li>a"`
+	Divs []*Div `xml:"div"`
 
-	// class: tsd-index-group
-	// IndexSections []*Section `xml:"section>div>section"`
+	ULs []*UL `xml:"ul"`
 
-	// class: tsd-is-not-exported
-	ConstructorsAndMethods []*Signature `xml:"section>ul>li"`
-	Properties             []*Signature `xml:"section>div"`
+	Sections []*Section `xml:"section"`
+}
+
+func (s *Section) GetSection(i int) *Section {
+	if s != nil && i < len(s.Sections) {
+		return s.Sections[i]
+	}
+	return nil
+}
+
+func (s *Section) GetH2() *Header {
+	if s != nil && s.H2 != nil {
+		return s.H2
+	}
+	return nil
+}
+
+func (s *Section) GetDiv(i int) *Div {
+	if s != nil && i < len(s.Divs) {
+		return s.Divs[i]
+	}
+	return nil
+}
+
+func (s *Section) GetDivs() []*Div {
+	if s != nil {
+		return s.Divs
+	}
+	return nil
+}
+
+func (s *Section) GetUL(i int) *UL {
+	if s != nil && i < len(s.ULs) {
+		return s.ULs[i]
+	}
+	return nil
+}
+
+func (s *Section) GetULs() []*UL {
+	if s != nil {
+		return s.ULs
+	}
+	return nil
+}
+
+// DL represents an HTML dl.
+type DL struct {
+	Class   string          `xml:"class,attr"`
+	Classes map[string]bool `xml:"-"`
+
+	InnerXML string `xml:",innerxml"`
+
+	DTs []*DT `xml:"dt"`
+	DDs []*DD `xml:"dd"`
+}
+
+func (d *DL) GetDDs() []*DD {
+	if d != nil {
+		return d.DDs
+	}
+	return nil
+}
+
+// DD represents an HTML dd.
+type DD struct {
+	Class   string          `xml:"class,attr"`
+	Classes map[string]bool `xml:"-"`
+
+	InnerXML string `xml:",innerxml"`
+
+	Ps []*P `xml:"p"`
+}
+
+func (d *DD) GetP(i int) *P {
+	if d != nil && i < len(d.Ps) {
+		return d.Ps[i]
+	}
+	return nil
+}
+
+// DT represents an HTML dt.
+type DT struct {
+	Class   string          `xml:"class,attr"`
+	Classes map[string]bool `xml:"-"`
+
+	InnerXML string `xml:",innerxml"`
+}
+
+// UL represents an HTML unsigned list.
+type UL struct {
+	Class   string          `xml:"class,attr"`
+	Classes map[string]bool `xml:"-"`
+
+	InnerXML string `xml:",innerxml"`
+
+	LIs []*LI `xml:"li"`
+}
+
+func (u *UL) GetLI(i int) *LI {
+	if u != nil && i < len(u.LIs) {
+		return u.LIs[i]
+	}
+	return nil
+}
+
+func (u *UL) GetLIs() []*LI {
+	if u != nil {
+		return u.LIs
+	}
+	return nil
+}
+
+// Span represents an HTML span.
+type Span struct {
+	Class   string          `xml:"class,attr"`
+	Classes map[string]bool `xml:"-"`
+
+	InnerXML string `xml:",innerxml"`
+}
+
+func (s *Span) GetInnerXML() string {
+	if s != nil {
+		return s.InnerXML
+	}
+	return ""
+}
+
+// LI represents an HTML list item.
+type LI struct {
+	Class   string          `xml:"class,attr"`
+	Classes map[string]bool `xml:"-"`
+
+	InnerXML string  `xml:",innerxml"`
+	H2       *Header `xml:"h2"`
+	H3       *Header `xml:"h3"`
+	H4       *Header `xml:"h4"`
+	H5       *Header `xml:"h5"`
+
+	As []*Anchor `xml:"a"`
+
+	Divs []*Div `xml:"div"`
+
+	Spans []*Span `xml:"span"`
+
+	ULs []*UL `xml:"ul"`
+}
+
+func (l *LI) GetSignature() *Signature {
+	return &Signature{
+		Class:    l.Class,
+		Classes:  l.Classes,
+		InnerXML: l.InnerXML,
+	}
+}
+
+func (l *LI) GetA(i int) *Anchor {
+	if l != nil && i < len(l.As) {
+		return l.As[i]
+	}
+	return nil
+}
+
+func (l *LI) GetSpan(i int) *Span {
+	if l != nil && i < len(l.Spans) {
+		return l.Spans[i]
+	}
+	return nil
+}
+
+func (l *LI) GetUL(i int) *UL {
+	if l != nil && i < len(l.ULs) {
+		return l.ULs[i]
+	}
+	return nil
+}
+
+// P represents an HTML paragraph.
+type P struct {
+	Class   string          `xml:"class,attr"`
+	Classes map[string]bool `xml:"-"`
+
+	InnerXML string  `xml:",innerxml"`
+	H2       *Header `xml:"h2"`
+	H3       *Header `xml:"h3"`
+	H4       *Header `xml:"h4"`
+	H5       *Header `xml:"h5"`
+
+	As []*Anchor `xml:"a"`
+
+	Divs []*Div `xml:"div"`
+}
+
+func (p *P) GetA(i int) *Anchor {
+	if p != nil && i < len(p.As) {
+		return p.As[i]
+	}
+	return nil
+}
+
+func (p *P) GetInnerXML() string {
+	if p != nil {
+		return p.InnerXML
+	}
+	return ""
+}
+
+// Header represents an HTML header.
+type Header struct {
+	Class   string          `xml:"class,attr"`
+	Classes map[string]bool `xml:"-"`
+
+	InnerXML string `xml:",innerxml"`
+}
+
+func (h *Header) GetInnerXML() string {
+	if h != nil {
+		return h.InnerXML
+	}
+	return ""
+}
+
+// Anchor represents an HTML anchor.
+type Anchor struct {
+	Class   string          `xml:"class,attr"`
+	Classes map[string]bool `xml:"-"`
+
+	HRef     string `xml:"href,attr"`
+	Name     string `xml:"name,attr"`
+	InnerXML string `xml:",innerxml"`
+}
+
+func (a *Anchor) GetInnerXML() string {
+	if a != nil {
+		return a.InnerXML
+	}
+	return ""
 }
 
 // Signature represents the signature of a constructor, method, or property.
+// It can be copied from an LI or DIV.
 type Signature struct {
-	Class    string `xml:"class,attr"`
-	InnerXML string `xml:",innerxml"`
+	Class   string
+	Classes map[string]bool
 
-	GoName string `xml:"-"`
-	JSName string `xml:"-"`
+	InnerXML string
 
-	GoReturnType      string `xml:"-"`
-	GoReturnStatement string `xml:"-"`
+	GoName string
+	JSName string
 
-	HasOpts bool `xml:"-"`
+	GoReturnType      string
+	GoReturnStatement string
 
-	GoParams         []string `xml:"-"`
-	GoOpts           []string `xml:"-"`
-	GoOptsName       []string `xml:"-"`
-	NeedsArrayHelper []string `xml:"-"`
-	JSParams         []string `xml:"-"`
-	JSOpts           []string `xml:"-"`
+	HasOpts bool
+
+	GoParams         []string
+	GoOpts           []string
+	GoOptsName       []string
+	NeedsArrayHelper []string
+	JSParams         []string
+	JSOpts           []string
 }
 
 type processOverrider func(className string, s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string)
@@ -542,19 +969,107 @@ func jsTypeToGoType(paramType string) (goType string, needsJSObject, needsArrayH
 	return paramType, needsJSObject, false
 }
 
-// Type returns the JavaScript type of the class in this section.
-func (s *Section) Type() string {
-	classes := strings.Split(strings.TrimSpace(s.Class), " ")
-	class := classes[len(classes)-1]
-	if class == "tsd-panel" {
-		if s.H2.InnerXML != "" {
-			return s.H2.InnerXML
-		}
-		if s.H3.InnerXML != "" {
-			return s.H3.InnerXML
-		}
+// HasClass checks if this HTML element has the named class.
+func (el *Div) HasClass(className string) bool {
+	if el.Classes != nil {
+		return el.Classes[className]
 	}
-	return class
+
+	el.Classes = map[string]bool{}
+	classes := strings.Split(strings.TrimSpace(el.Class), " ")
+	for _, class := range classes {
+		el.Classes[strings.ToLower(class)] = true
+	}
+	return el.Classes[className]
+}
+
+// HasClass checks if this HTML element has the named class.
+func (el *Section) HasClass(className string) bool {
+	if el == nil {
+		log.Printf("HasClass operated on null Section!")
+		return false
+	}
+
+	if el.Classes != nil {
+		return el.Classes[className]
+	}
+
+	el.Classes = map[string]bool{}
+	classes := strings.Split(strings.TrimSpace(el.Class), " ")
+	for _, class := range classes {
+		el.Classes[strings.ToLower(class)] = true
+	}
+	return el.Classes[className]
+}
+
+// HasClass checks if this HTML element has the named class.
+func (el *UL) HasClass(className string) bool {
+	if el.Classes != nil {
+		return el.Classes[className]
+	}
+
+	el.Classes = map[string]bool{}
+	classes := strings.Split(strings.TrimSpace(el.Class), " ")
+	for _, class := range classes {
+		el.Classes[strings.ToLower(class)] = true
+	}
+	return el.Classes[className]
+}
+
+// HasClass checks if this HTML element has the named class.
+func (el *LI) HasClass(className string) bool {
+	if el.Classes != nil {
+		return el.Classes[className]
+	}
+
+	el.Classes = map[string]bool{}
+	classes := strings.Split(strings.TrimSpace(el.Class), " ")
+	for _, class := range classes {
+		el.Classes[strings.ToLower(class)] = true
+	}
+	return el.Classes[className]
+}
+
+// HasClass checks if this HTML element has the named class.
+func (el *Header) HasClass(className string) bool {
+	if el.Classes != nil {
+		return el.Classes[className]
+	}
+
+	el.Classes = map[string]bool{}
+	classes := strings.Split(strings.TrimSpace(el.Class), " ")
+	for _, class := range classes {
+		el.Classes[strings.ToLower(class)] = true
+	}
+	return el.Classes[className]
+}
+
+// HasClass checks if this HTML element has the named class.
+func (el *Anchor) HasClass(className string) bool {
+	if el.Classes != nil {
+		return el.Classes[className]
+	}
+
+	el.Classes = map[string]bool{}
+	classes := strings.Split(strings.TrimSpace(el.Class), " ")
+	for _, class := range classes {
+		el.Classes[strings.ToLower(class)] = true
+	}
+	return el.Classes[className]
+}
+
+// HasClass checks if this HTML element has the named class.
+func (el *Signature) HasClass(className string) bool {
+	if el.Classes != nil {
+		return el.Classes[className]
+	}
+
+	el.Classes = map[string]bool{}
+	classes := strings.Split(strings.TrimSpace(el.Class), " ")
+	for _, class := range classes {
+		el.Classes[strings.ToLower(class)] = true
+	}
+	return el.Classes[className]
 }
 
 // InnerXML represents the inner text of an XML block.

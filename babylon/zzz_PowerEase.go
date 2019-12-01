@@ -9,6 +9,7 @@ import (
 // PowerEase represents a babylon.js PowerEase.
 // Easing function with a power shape (see link below).
 //
+// See: https://easings.net/#easeInQuad
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type PowerEase struct {
 	*EasingFunction
