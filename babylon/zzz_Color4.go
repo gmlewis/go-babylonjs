@@ -36,44 +36,17 @@ func Color4ArrayToJSArray(array []*Color4) []interface{} {
 	return result
 }
 
-// NewColor4Opts contains optional parameters for NewColor4.
-type NewColor4Opts struct {
-	R *float64
-	G *float64
-	B *float64
-	A *float64
-}
-
 // NewColor4 returns a new Color4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4
-func (ba *Babylon) NewColor4(opts *NewColor4Opts) *Color4 {
-	if opts == nil {
-		opts = &NewColor4Opts{}
-	}
+func (ba *Babylon) NewColor4(r float64, g float64, b float64, a float64) *Color4 {
 
-	args := make([]interface{}, 0, 0+4)
+	args := make([]interface{}, 0, 4+0)
 
-	if opts.R == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.R)
-	}
-	if opts.G == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.G)
-	}
-	if opts.B == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.B)
-	}
-	if opts.A == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.A)
-	}
+	args = append(args, r)
+	args = append(args, g)
+	args = append(args, b)
+	args = append(args, a)
 
 	p := ba.ctx.Get("Color4").New(args...)
 	return Color4FromJSObject(p, ba.ctx)

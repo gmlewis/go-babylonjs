@@ -673,6 +673,8 @@ func processConstructorOverrides(className string, s *Signature, names []string,
 	switch s.GoName {
 	case "NewColor3":
 		optional = []bool{false, false, false}
+	case "NewColor4":
+		optional = []bool{false, false, false, false}
 	case "NewVector2":
 		optional = []bool{false, false}
 	case "NewVector3":

@@ -27,6 +27,9 @@ func (html *ClassHTML) parseMethods() error {
 			return fmt.Errorf("methods: found %v method sections, want 1", len(methodSection))
 		}
 		for _, section := range methodSection[0].Sections {
+			if section.HasClass("tsd-is-inherited") {
+				continue
+			}
 			li := section.GetUL(0).GetLI(0)
 			if li == nil || !li.HasClass("tsd-signature") {
 				return errors.New("methods: unable to find tsd-signature")

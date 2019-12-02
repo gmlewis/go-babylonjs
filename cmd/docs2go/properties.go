@@ -27,6 +27,9 @@ func (html *ClassHTML) parseProperties() error {
 			return fmt.Errorf("properties: found %v properties sections, want 1", len(propertiesSection))
 		}
 		for _, section := range propertiesSection[0].Sections {
+			if section.HasClass("tsd-is-inherited") {
+				continue
+			}
 			div := section.GetDiv(0)
 			if div == nil || !div.HasClass("tsd-signature") {
 				return errors.New("properties: unable to find tsd-signature")
