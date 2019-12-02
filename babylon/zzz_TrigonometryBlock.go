@@ -81,54 +81,50 @@ func (t *TrigonometryBlock) _deserialize(serializationObject interface{}, scene 
 	t.p.Call("_deserialize", args...)
 }
 
-/*
-
 // Input returns the Input property of class TrigonometryBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#input
-func (t *TrigonometryBlock) Input(input *NodeMaterialConnectionPoint) *TrigonometryBlock {
-	p := ba.ctx.Get("TrigonometryBlock").New(input.JSObject())
-	return TrigonometryBlockFromJSObject(p, ba.ctx)
+func (t *TrigonometryBlock) Input() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("input")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetInput sets the Input property of class TrigonometryBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#input
 func (t *TrigonometryBlock) SetInput(input *NodeMaterialConnectionPoint) *TrigonometryBlock {
-	p := ba.ctx.Get("TrigonometryBlock").New(input.JSObject())
-	return TrigonometryBlockFromJSObject(p, ba.ctx)
+	t.p.Set("input", input.JSObject())
+	return t
 }
 
 // Operation returns the Operation property of class TrigonometryBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#operation
-func (t *TrigonometryBlock) Operation(operation *TrigonometryBlockOperations) *TrigonometryBlock {
-	p := ba.ctx.Get("TrigonometryBlock").New(operation.JSObject())
-	return TrigonometryBlockFromJSObject(p, ba.ctx)
+func (t *TrigonometryBlock) Operation() js.Value {
+	retVal := t.p.Get("operation")
+	return retVal
 }
 
 // SetOperation sets the Operation property of class TrigonometryBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#operation
-func (t *TrigonometryBlock) SetOperation(operation *TrigonometryBlockOperations) *TrigonometryBlock {
-	p := ba.ctx.Get("TrigonometryBlock").New(operation.JSObject())
-	return TrigonometryBlockFromJSObject(p, ba.ctx)
+func (t *TrigonometryBlock) SetOperation(operation js.Value) *TrigonometryBlock {
+	t.p.Set("operation", operation)
+	return t
 }
 
 // Output returns the Output property of class TrigonometryBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#output
-func (t *TrigonometryBlock) Output(output *NodeMaterialConnectionPoint) *TrigonometryBlock {
-	p := ba.ctx.Get("TrigonometryBlock").New(output.JSObject())
-	return TrigonometryBlockFromJSObject(p, ba.ctx)
+func (t *TrigonometryBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetOutput sets the Output property of class TrigonometryBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#output
 func (t *TrigonometryBlock) SetOutput(output *NodeMaterialConnectionPoint) *TrigonometryBlock {
-	p := ba.ctx.Get("TrigonometryBlock").New(output.JSObject())
-	return TrigonometryBlockFromJSObject(p, ba.ctx)
+	t.p.Set("output", output.JSObject())
+	return t
 }
-
-*/

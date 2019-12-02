@@ -35,7 +35,3 @@ func PointsGroupArrayToJSArray(array []*PointsGroup) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

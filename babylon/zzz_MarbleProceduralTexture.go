@@ -103,70 +103,66 @@ func (m *MarbleProceduralTexture) UpdateShaderUniforms() {
 	m.p.Call("updateShaderUniforms")
 }
 
-/*
-
 // Amplitude returns the Amplitude property of class MarbleProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#amplitude
-func (m *MarbleProceduralTexture) Amplitude(amplitude float64) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(amplitude)
-	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
+func (m *MarbleProceduralTexture) Amplitude() float64 {
+	retVal := m.p.Get("amplitude")
+	return retVal.Float()
 }
 
 // SetAmplitude sets the Amplitude property of class MarbleProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#amplitude
 func (m *MarbleProceduralTexture) SetAmplitude(amplitude float64) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(amplitude)
-	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
+	m.p.Set("amplitude", amplitude)
+	return m
 }
 
 // JointColor returns the JointColor property of class MarbleProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#jointcolor
-func (m *MarbleProceduralTexture) JointColor(jointColor *Color3) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(jointColor.JSObject())
-	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
+func (m *MarbleProceduralTexture) JointColor() *Color3 {
+	retVal := m.p.Get("jointColor")
+	return Color3FromJSObject(retVal, m.ctx)
 }
 
 // SetJointColor sets the JointColor property of class MarbleProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#jointcolor
 func (m *MarbleProceduralTexture) SetJointColor(jointColor *Color3) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(jointColor.JSObject())
-	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
+	m.p.Set("jointColor", jointColor.JSObject())
+	return m
 }
 
 // NumberOfTilesHeight returns the NumberOfTilesHeight property of class MarbleProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#numberoftilesheight
-func (m *MarbleProceduralTexture) NumberOfTilesHeight(numberOfTilesHeight float64) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(numberOfTilesHeight)
-	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
+func (m *MarbleProceduralTexture) NumberOfTilesHeight() float64 {
+	retVal := m.p.Get("numberOfTilesHeight")
+	return retVal.Float()
 }
 
 // SetNumberOfTilesHeight sets the NumberOfTilesHeight property of class MarbleProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#numberoftilesheight
 func (m *MarbleProceduralTexture) SetNumberOfTilesHeight(numberOfTilesHeight float64) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(numberOfTilesHeight)
-	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
+	m.p.Set("numberOfTilesHeight", numberOfTilesHeight)
+	return m
 }
 
 // NumberOfTilesWidth returns the NumberOfTilesWidth property of class MarbleProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#numberoftileswidth
-func (m *MarbleProceduralTexture) NumberOfTilesWidth(numberOfTilesWidth float64) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(numberOfTilesWidth)
-	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
+func (m *MarbleProceduralTexture) NumberOfTilesWidth() float64 {
+	retVal := m.p.Get("numberOfTilesWidth")
+	return retVal.Float()
 }
 
 // SetNumberOfTilesWidth sets the NumberOfTilesWidth property of class MarbleProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#numberoftileswidth
 func (m *MarbleProceduralTexture) SetNumberOfTilesWidth(numberOfTilesWidth float64) *MarbleProceduralTexture {
-	p := ba.ctx.Get("MarbleProceduralTexture").New(numberOfTilesWidth)
-	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
+	m.p.Set("numberOfTilesWidth", numberOfTilesWidth)
+	return m
 }
-
-*/

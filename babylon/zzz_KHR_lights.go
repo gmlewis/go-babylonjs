@@ -36,38 +36,34 @@ func KHR_lightsArrayToJSArray(array []*KHR_lights) []interface{} {
 	return result
 }
 
-/*
-
 // Enabled returns the Enabled property of class KHR_lights.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_lights#enabled
-func (k *KHR_lights) Enabled(enabled bool) *KHR_lights {
-	p := ba.ctx.Get("KHR_lights").New(enabled)
-	return KHR_lightsFromJSObject(p, ba.ctx)
+func (k *KHR_lights) Enabled() bool {
+	retVal := k.p.Get("enabled")
+	return retVal.Bool()
 }
 
 // SetEnabled sets the Enabled property of class KHR_lights.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_lights#enabled
 func (k *KHR_lights) SetEnabled(enabled bool) *KHR_lights {
-	p := ba.ctx.Get("KHR_lights").New(enabled)
-	return KHR_lightsFromJSObject(p, ba.ctx)
+	k.p.Set("enabled", enabled)
+	return k
 }
 
 // Name returns the Name property of class KHR_lights.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_lights#name
-func (k *KHR_lights) Name(name string) *KHR_lights {
-	p := ba.ctx.Get("KHR_lights").New(name)
-	return KHR_lightsFromJSObject(p, ba.ctx)
+func (k *KHR_lights) Name() string {
+	retVal := k.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class KHR_lights.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_lights#name
 func (k *KHR_lights) SetName(name string) *KHR_lights {
-	p := ba.ctx.Get("KHR_lights").New(name)
-	return KHR_lightsFromJSObject(p, ba.ctx)
+	k.p.Set("name", name)
+	return k
 }
-
-*/

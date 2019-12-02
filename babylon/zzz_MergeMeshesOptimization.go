@@ -100,22 +100,18 @@ func (m *MergeMeshesOptimization) GetDescription() string {
 	return retVal.String()
 }
 
-/*
-
 // UpdateSelectionTree returns the UpdateSelectionTree property of class MergeMeshesOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#updateselectiontree
-func (m *MergeMeshesOptimization) UpdateSelectionTree(UpdateSelectionTree bool) *MergeMeshesOptimization {
-	p := ba.ctx.Get("MergeMeshesOptimization").New(UpdateSelectionTree)
-	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
+func (m *MergeMeshesOptimization) UpdateSelectionTree() bool {
+	retVal := m.p.Get("UpdateSelectionTree")
+	return retVal.Bool()
 }
 
 // SetUpdateSelectionTree sets the UpdateSelectionTree property of class MergeMeshesOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#updateselectiontree
 func (m *MergeMeshesOptimization) SetUpdateSelectionTree(UpdateSelectionTree bool) *MergeMeshesOptimization {
-	p := ba.ctx.Get("MergeMeshesOptimization").New(UpdateSelectionTree)
-	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
+	m.p.Set("UpdateSelectionTree", UpdateSelectionTree)
+	return m
 }
-
-*/

@@ -123,198 +123,194 @@ func (f *FreeCamera) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // AngularSensibility returns the AngularSensibility property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#angularsensibility
-func (f *FreeCamera) AngularSensibility(angularSensibility float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(angularSensibility)
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) AngularSensibility() float64 {
+	retVal := f.p.Get("angularSensibility")
+	return retVal.Float()
 }
 
 // SetAngularSensibility sets the AngularSensibility property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#angularsensibility
 func (f *FreeCamera) SetAngularSensibility(angularSensibility float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(angularSensibility)
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("angularSensibility", angularSensibility)
+	return f
 }
 
 // ApplyGravity returns the ApplyGravity property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#applygravity
-func (f *FreeCamera) ApplyGravity(applyGravity bool) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(applyGravity)
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) ApplyGravity() bool {
+	retVal := f.p.Get("applyGravity")
+	return retVal.Bool()
 }
 
 // SetApplyGravity sets the ApplyGravity property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#applygravity
 func (f *FreeCamera) SetApplyGravity(applyGravity bool) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(applyGravity)
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("applyGravity", applyGravity)
+	return f
 }
 
 // CheckCollisions returns the CheckCollisions property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#checkcollisions
-func (f *FreeCamera) CheckCollisions(checkCollisions bool) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(checkCollisions)
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) CheckCollisions() bool {
+	retVal := f.p.Get("checkCollisions")
+	return retVal.Bool()
 }
 
 // SetCheckCollisions sets the CheckCollisions property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#checkcollisions
 func (f *FreeCamera) SetCheckCollisions(checkCollisions bool) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(checkCollisions)
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("checkCollisions", checkCollisions)
+	return f
 }
 
 // CollisionMask returns the CollisionMask property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#collisionmask
-func (f *FreeCamera) CollisionMask(collisionMask float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(collisionMask)
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) CollisionMask() float64 {
+	retVal := f.p.Get("collisionMask")
+	return retVal.Float()
 }
 
 // SetCollisionMask sets the CollisionMask property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#collisionmask
 func (f *FreeCamera) SetCollisionMask(collisionMask float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(collisionMask)
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("collisionMask", collisionMask)
+	return f
 }
 
 // Ellipsoid returns the Ellipsoid property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#ellipsoid
-func (f *FreeCamera) Ellipsoid(ellipsoid *Vector3) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(ellipsoid.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) Ellipsoid() *Vector3 {
+	retVal := f.p.Get("ellipsoid")
+	return Vector3FromJSObject(retVal, f.ctx)
 }
 
 // SetEllipsoid sets the Ellipsoid property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#ellipsoid
 func (f *FreeCamera) SetEllipsoid(ellipsoid *Vector3) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(ellipsoid.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("ellipsoid", ellipsoid.JSObject())
+	return f
 }
 
 // EllipsoidOffset returns the EllipsoidOffset property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#ellipsoidoffset
-func (f *FreeCamera) EllipsoidOffset(ellipsoidOffset *Vector3) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(ellipsoidOffset.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) EllipsoidOffset() *Vector3 {
+	retVal := f.p.Get("ellipsoidOffset")
+	return Vector3FromJSObject(retVal, f.ctx)
 }
 
 // SetEllipsoidOffset sets the EllipsoidOffset property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#ellipsoidoffset
 func (f *FreeCamera) SetEllipsoidOffset(ellipsoidOffset *Vector3) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(ellipsoidOffset.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("ellipsoidOffset", ellipsoidOffset.JSObject())
+	return f
 }
 
 // Inputs returns the Inputs property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#inputs
-func (f *FreeCamera) Inputs(inputs *FreeCameraInputsManager) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(inputs.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) Inputs() *FreeCameraInputsManager {
+	retVal := f.p.Get("inputs")
+	return FreeCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
 // SetInputs sets the Inputs property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#inputs
 func (f *FreeCamera) SetInputs(inputs *FreeCameraInputsManager) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(inputs.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("inputs", inputs.JSObject())
+	return f
 }
 
 // KeysDown returns the KeysDown property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#keysdown
-func (f *FreeCamera) KeysDown(keysDown float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(keysDown)
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) KeysDown() float64 {
+	retVal := f.p.Get("keysDown")
+	return retVal.Float()
 }
 
 // SetKeysDown sets the KeysDown property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#keysdown
 func (f *FreeCamera) SetKeysDown(keysDown float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(keysDown)
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("keysDown", keysDown)
+	return f
 }
 
 // KeysLeft returns the KeysLeft property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#keysleft
-func (f *FreeCamera) KeysLeft(keysLeft float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(keysLeft)
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) KeysLeft() float64 {
+	retVal := f.p.Get("keysLeft")
+	return retVal.Float()
 }
 
 // SetKeysLeft sets the KeysLeft property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#keysleft
 func (f *FreeCamera) SetKeysLeft(keysLeft float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(keysLeft)
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("keysLeft", keysLeft)
+	return f
 }
 
 // KeysRight returns the KeysRight property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#keysright
-func (f *FreeCamera) KeysRight(keysRight float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(keysRight)
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) KeysRight() float64 {
+	retVal := f.p.Get("keysRight")
+	return retVal.Float()
 }
 
 // SetKeysRight sets the KeysRight property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#keysright
 func (f *FreeCamera) SetKeysRight(keysRight float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(keysRight)
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("keysRight", keysRight)
+	return f
 }
 
 // KeysUp returns the KeysUp property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#keysup
-func (f *FreeCamera) KeysUp(keysUp float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(keysUp)
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) KeysUp() float64 {
+	retVal := f.p.Get("keysUp")
+	return retVal.Float()
 }
 
 // SetKeysUp sets the KeysUp property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#keysup
 func (f *FreeCamera) SetKeysUp(keysUp float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(keysUp)
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("keysUp", keysUp)
+	return f
 }
 
 // OnCollide returns the OnCollide property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#oncollide
-func (f *FreeCamera) OnCollide(onCollide func()) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
-	return FreeCameraFromJSObject(p, ba.ctx)
+func (f *FreeCamera) OnCollide() js.Value {
+	retVal := f.p.Get("onCollide")
+	return retVal
 }
 
 // SetOnCollide sets the OnCollide property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#oncollide
 func (f *FreeCamera) SetOnCollide(onCollide func()) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
-	return FreeCameraFromJSObject(p, ba.ctx)
+	f.p.Set("onCollide", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCollide(); return nil }))
+	return f
 }
-
-*/

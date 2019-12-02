@@ -140,54 +140,50 @@ func (p *PerlinNoiseProceduralTexture) UpdateShaderUniforms() {
 	p.p.Call("updateShaderUniforms")
 }
 
-/*
-
 // Time returns the Time property of class PerlinNoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture#time
-func (p *PerlinNoiseProceduralTexture) Time(time float64) *PerlinNoiseProceduralTexture {
-	p := ba.ctx.Get("PerlinNoiseProceduralTexture").New(time)
-	return PerlinNoiseProceduralTextureFromJSObject(p, ba.ctx)
+func (p *PerlinNoiseProceduralTexture) Time() float64 {
+	retVal := p.p.Get("time")
+	return retVal.Float()
 }
 
 // SetTime sets the Time property of class PerlinNoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture#time
 func (p *PerlinNoiseProceduralTexture) SetTime(time float64) *PerlinNoiseProceduralTexture {
-	p := ba.ctx.Get("PerlinNoiseProceduralTexture").New(time)
-	return PerlinNoiseProceduralTextureFromJSObject(p, ba.ctx)
+	p.p.Set("time", time)
+	return p
 }
 
 // TimeScale returns the TimeScale property of class PerlinNoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture#timescale
-func (p *PerlinNoiseProceduralTexture) TimeScale(timeScale float64) *PerlinNoiseProceduralTexture {
-	p := ba.ctx.Get("PerlinNoiseProceduralTexture").New(timeScale)
-	return PerlinNoiseProceduralTextureFromJSObject(p, ba.ctx)
+func (p *PerlinNoiseProceduralTexture) TimeScale() float64 {
+	retVal := p.p.Get("timeScale")
+	return retVal.Float()
 }
 
 // SetTimeScale sets the TimeScale property of class PerlinNoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture#timescale
 func (p *PerlinNoiseProceduralTexture) SetTimeScale(timeScale float64) *PerlinNoiseProceduralTexture {
-	p := ba.ctx.Get("PerlinNoiseProceduralTexture").New(timeScale)
-	return PerlinNoiseProceduralTextureFromJSObject(p, ba.ctx)
+	p.p.Set("timeScale", timeScale)
+	return p
 }
 
 // TranslationSpeed returns the TranslationSpeed property of class PerlinNoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture#translationspeed
-func (p *PerlinNoiseProceduralTexture) TranslationSpeed(translationSpeed float64) *PerlinNoiseProceduralTexture {
-	p := ba.ctx.Get("PerlinNoiseProceduralTexture").New(translationSpeed)
-	return PerlinNoiseProceduralTextureFromJSObject(p, ba.ctx)
+func (p *PerlinNoiseProceduralTexture) TranslationSpeed() float64 {
+	retVal := p.p.Get("translationSpeed")
+	return retVal.Float()
 }
 
 // SetTranslationSpeed sets the TranslationSpeed property of class PerlinNoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture#translationspeed
 func (p *PerlinNoiseProceduralTexture) SetTranslationSpeed(translationSpeed float64) *PerlinNoiseProceduralTexture {
-	p := ba.ctx.Get("PerlinNoiseProceduralTexture").New(translationSpeed)
-	return PerlinNoiseProceduralTextureFromJSObject(p, ba.ctx)
+	p.p.Set("translationSpeed", translationSpeed)
+	return p
 }
-
-*/

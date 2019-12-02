@@ -65,22 +65,18 @@ func (w *WebXRCamera) UpdateFromXRSessionManager(xrSessionManager *WebXRSessionM
 	return retVal.Bool()
 }
 
-/*
-
 // DebugMode returns the DebugMode property of class WebXRCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera#debugmode
-func (w *WebXRCamera) DebugMode(debugMode bool) *WebXRCamera {
-	p := ba.ctx.Get("WebXRCamera").New(debugMode)
-	return WebXRCameraFromJSObject(p, ba.ctx)
+func (w *WebXRCamera) DebugMode() bool {
+	retVal := w.p.Get("debugMode")
+	return retVal.Bool()
 }
 
 // SetDebugMode sets the DebugMode property of class WebXRCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera#debugmode
 func (w *WebXRCamera) SetDebugMode(debugMode bool) *WebXRCamera {
-	p := ba.ctx.Get("WebXRCamera").New(debugMode)
-	return WebXRCameraFromJSObject(p, ba.ctx)
+	w.p.Set("debugMode", debugMode)
+	return w
 }
-
-*/

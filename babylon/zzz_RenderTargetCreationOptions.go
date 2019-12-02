@@ -36,102 +36,98 @@ func RenderTargetCreationOptionsArrayToJSArray(array []*RenderTargetCreationOpti
 	return result
 }
 
-/*
-
 // Format returns the Format property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#format
-func (r *RenderTargetCreationOptions) Format(format float64) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(format)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+func (r *RenderTargetCreationOptions) Format() float64 {
+	retVal := r.p.Get("format")
+	return retVal.Float()
 }
 
 // SetFormat sets the Format property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#format
 func (r *RenderTargetCreationOptions) SetFormat(format float64) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(format)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+	r.p.Set("format", format)
+	return r
 }
 
 // GenerateDepthBuffer returns the GenerateDepthBuffer property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#generatedepthbuffer
-func (r *RenderTargetCreationOptions) GenerateDepthBuffer(generateDepthBuffer bool) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(generateDepthBuffer)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+func (r *RenderTargetCreationOptions) GenerateDepthBuffer() bool {
+	retVal := r.p.Get("generateDepthBuffer")
+	return retVal.Bool()
 }
 
 // SetGenerateDepthBuffer sets the GenerateDepthBuffer property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#generatedepthbuffer
 func (r *RenderTargetCreationOptions) SetGenerateDepthBuffer(generateDepthBuffer bool) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(generateDepthBuffer)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+	r.p.Set("generateDepthBuffer", generateDepthBuffer)
+	return r
 }
 
 // GenerateMipMaps returns the GenerateMipMaps property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#generatemipmaps
-func (r *RenderTargetCreationOptions) GenerateMipMaps(generateMipMaps bool) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(generateMipMaps)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+func (r *RenderTargetCreationOptions) GenerateMipMaps() bool {
+	retVal := r.p.Get("generateMipMaps")
+	return retVal.Bool()
 }
 
 // SetGenerateMipMaps sets the GenerateMipMaps property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#generatemipmaps
 func (r *RenderTargetCreationOptions) SetGenerateMipMaps(generateMipMaps bool) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(generateMipMaps)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+	r.p.Set("generateMipMaps", generateMipMaps)
+	return r
 }
 
 // GenerateStencilBuffer returns the GenerateStencilBuffer property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#generatestencilbuffer
-func (r *RenderTargetCreationOptions) GenerateStencilBuffer(generateStencilBuffer bool) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(generateStencilBuffer)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+func (r *RenderTargetCreationOptions) GenerateStencilBuffer() bool {
+	retVal := r.p.Get("generateStencilBuffer")
+	return retVal.Bool()
 }
 
 // SetGenerateStencilBuffer sets the GenerateStencilBuffer property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#generatestencilbuffer
 func (r *RenderTargetCreationOptions) SetGenerateStencilBuffer(generateStencilBuffer bool) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(generateStencilBuffer)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+	r.p.Set("generateStencilBuffer", generateStencilBuffer)
+	return r
 }
 
 // SamplingMode returns the SamplingMode property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#samplingmode
-func (r *RenderTargetCreationOptions) SamplingMode(samplingMode float64) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(samplingMode)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+func (r *RenderTargetCreationOptions) SamplingMode() float64 {
+	retVal := r.p.Get("samplingMode")
+	return retVal.Float()
 }
 
 // SetSamplingMode sets the SamplingMode property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#samplingmode
 func (r *RenderTargetCreationOptions) SetSamplingMode(samplingMode float64) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(samplingMode)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+	r.p.Set("samplingMode", samplingMode)
+	return r
 }
 
 // Type returns the Type property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#type
-func (r *RenderTargetCreationOptions) Type(jsType float64) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(jsType)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+func (r *RenderTargetCreationOptions) Type() float64 {
+	retVal := r.p.Get("type")
+	return retVal.Float()
 }
 
 // SetType sets the Type property of class RenderTargetCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargetcreationoptions#type
 func (r *RenderTargetCreationOptions) SetType(jsType float64) *RenderTargetCreationOptions {
-	p := ba.ctx.Get("RenderTargetCreationOptions").New(jsType)
-	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
+	r.p.Set("type", jsType)
+	return r
 }
-
-*/

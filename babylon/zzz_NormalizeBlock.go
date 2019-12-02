@@ -58,38 +58,34 @@ func (n *NormalizeBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Input returns the Input property of class NormalizeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock#input
-func (n *NormalizeBlock) Input(input *NodeMaterialConnectionPoint) *NormalizeBlock {
-	p := ba.ctx.Get("NormalizeBlock").New(input.JSObject())
-	return NormalizeBlockFromJSObject(p, ba.ctx)
+func (n *NormalizeBlock) Input() *NodeMaterialConnectionPoint {
+	retVal := n.p.Get("input")
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
 }
 
 // SetInput sets the Input property of class NormalizeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock#input
 func (n *NormalizeBlock) SetInput(input *NodeMaterialConnectionPoint) *NormalizeBlock {
-	p := ba.ctx.Get("NormalizeBlock").New(input.JSObject())
-	return NormalizeBlockFromJSObject(p, ba.ctx)
+	n.p.Set("input", input.JSObject())
+	return n
 }
 
 // Output returns the Output property of class NormalizeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock#output
-func (n *NormalizeBlock) Output(output *NodeMaterialConnectionPoint) *NormalizeBlock {
-	p := ba.ctx.Get("NormalizeBlock").New(output.JSObject())
-	return NormalizeBlockFromJSObject(p, ba.ctx)
+func (n *NormalizeBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := n.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
 }
 
 // SetOutput sets the Output property of class NormalizeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock#output
 func (n *NormalizeBlock) SetOutput(output *NodeMaterialConnectionPoint) *NormalizeBlock {
-	p := ba.ctx.Get("NormalizeBlock").New(output.JSObject())
-	return NormalizeBlockFromJSObject(p, ba.ctx)
+	n.p.Set("output", output.JSObject())
+	return n
 }
-
-*/

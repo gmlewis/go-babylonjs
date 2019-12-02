@@ -36,182 +36,178 @@ func IEffectCreationOptionsArrayToJSArray(array []*IEffectCreationOptions) []int
 	return result
 }
 
-/*
-
 // Attributes returns the Attributes property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#attributes
-func (i *IEffectCreationOptions) Attributes(attributes string) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(attributes)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) Attributes() string {
+	retVal := i.p.Get("attributes")
+	return retVal.String()
 }
 
 // SetAttributes sets the Attributes property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#attributes
 func (i *IEffectCreationOptions) SetAttributes(attributes string) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(attributes)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("attributes", attributes)
+	return i
 }
 
 // Defines returns the Defines property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#defines
-func (i *IEffectCreationOptions) Defines(defines interface{}) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(defines)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) Defines() interface{} {
+	retVal := i.p.Get("defines")
+	return retVal
 }
 
 // SetDefines sets the Defines property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#defines
 func (i *IEffectCreationOptions) SetDefines(defines interface{}) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(defines)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("defines", defines)
+	return i
 }
 
 // Fallbacks returns the Fallbacks property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#fallbacks
-func (i *IEffectCreationOptions) Fallbacks(fallbacks *IEffectFallbacks) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(fallbacks.JSObject())
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) Fallbacks() *IEffectFallbacks {
+	retVal := i.p.Get("fallbacks")
+	return IEffectFallbacksFromJSObject(retVal, i.ctx)
 }
 
 // SetFallbacks sets the Fallbacks property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#fallbacks
 func (i *IEffectCreationOptions) SetFallbacks(fallbacks *IEffectFallbacks) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(fallbacks.JSObject())
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("fallbacks", fallbacks.JSObject())
+	return i
 }
 
 // IndexParameters returns the IndexParameters property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#indexparameters
-func (i *IEffectCreationOptions) IndexParameters(indexParameters interface{}) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(indexParameters)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) IndexParameters() interface{} {
+	retVal := i.p.Get("indexParameters")
+	return retVal
 }
 
 // SetIndexParameters sets the IndexParameters property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#indexparameters
 func (i *IEffectCreationOptions) SetIndexParameters(indexParameters interface{}) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(indexParameters)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("indexParameters", indexParameters)
+	return i
 }
 
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#maxsimultaneouslights
-func (i *IEffectCreationOptions) MaxSimultaneousLights(maxSimultaneousLights float64) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(maxSimultaneousLights)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) MaxSimultaneousLights() float64 {
+	retVal := i.p.Get("maxSimultaneousLights")
+	return retVal.Float()
 }
 
 // SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#maxsimultaneouslights
 func (i *IEffectCreationOptions) SetMaxSimultaneousLights(maxSimultaneousLights float64) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(maxSimultaneousLights)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("maxSimultaneousLights", maxSimultaneousLights)
+	return i
 }
 
 // OnCompiled returns the OnCompiled property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#oncompiled
-func (i *IEffectCreationOptions) OnCompiled(onCompiled func()) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) OnCompiled() js.Value {
+	retVal := i.p.Get("onCompiled")
+	return retVal
 }
 
 // SetOnCompiled sets the OnCompiled property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#oncompiled
 func (i *IEffectCreationOptions) SetOnCompiled(onCompiled func()) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("onCompiled", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCompiled(); return nil }))
+	return i
 }
 
 // OnError returns the OnError property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#onerror
-func (i *IEffectCreationOptions) OnError(onError func()) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) OnError() js.Value {
+	retVal := i.p.Get("onError")
+	return retVal
 }
 
 // SetOnError sets the OnError property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#onerror
 func (i *IEffectCreationOptions) SetOnError(onError func()) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	return i
 }
 
 // Samplers returns the Samplers property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#samplers
-func (i *IEffectCreationOptions) Samplers(samplers string) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(samplers)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) Samplers() string {
+	retVal := i.p.Get("samplers")
+	return retVal.String()
 }
 
 // SetSamplers sets the Samplers property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#samplers
 func (i *IEffectCreationOptions) SetSamplers(samplers string) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(samplers)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("samplers", samplers)
+	return i
 }
 
 // TransformFeedbackVaryings returns the TransformFeedbackVaryings property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#transformfeedbackvaryings
-func (i *IEffectCreationOptions) TransformFeedbackVaryings(transformFeedbackVaryings string) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(transformFeedbackVaryings)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) TransformFeedbackVaryings() string {
+	retVal := i.p.Get("transformFeedbackVaryings")
+	return retVal.String()
 }
 
 // SetTransformFeedbackVaryings sets the TransformFeedbackVaryings property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#transformfeedbackvaryings
 func (i *IEffectCreationOptions) SetTransformFeedbackVaryings(transformFeedbackVaryings string) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(transformFeedbackVaryings)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("transformFeedbackVaryings", transformFeedbackVaryings)
+	return i
 }
 
 // UniformBuffersNames returns the UniformBuffersNames property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#uniformbuffersnames
-func (i *IEffectCreationOptions) UniformBuffersNames(uniformBuffersNames string) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(uniformBuffersNames)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) UniformBuffersNames() string {
+	retVal := i.p.Get("uniformBuffersNames")
+	return retVal.String()
 }
 
 // SetUniformBuffersNames sets the UniformBuffersNames property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#uniformbuffersnames
 func (i *IEffectCreationOptions) SetUniformBuffersNames(uniformBuffersNames string) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(uniformBuffersNames)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("uniformBuffersNames", uniformBuffersNames)
+	return i
 }
 
 // UniformsNames returns the UniformsNames property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#uniformsnames
-func (i *IEffectCreationOptions) UniformsNames(uniformsNames string) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(uniformsNames)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectCreationOptions) UniformsNames() string {
+	retVal := i.p.Get("uniformsNames")
+	return retVal.String()
 }
 
 // SetUniformsNames sets the UniformsNames property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#uniformsnames
 func (i *IEffectCreationOptions) SetUniformsNames(uniformsNames string) *IEffectCreationOptions {
-	p := ba.ctx.Get("IEffectCreationOptions").New(uniformsNames)
-	return IEffectCreationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("uniformsNames", uniformsNames)
+	return i
 }
-
-*/

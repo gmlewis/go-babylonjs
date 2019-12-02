@@ -91,7 +91,3 @@ func (g *GLTF2Export) GLTFAsync(scene *Scene, filePrefix string, opts *GLTF2Expo
 	retVal := g.p.Call("GLTFAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
 }
-
-/*
-
- */

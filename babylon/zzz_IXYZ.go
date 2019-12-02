@@ -36,54 +36,50 @@ func IXYZArrayToJSArray(array []*IXYZ) []interface{} {
 	return result
 }
 
-/*
-
 // X returns the X property of class IXYZ.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ixyz#x
-func (i *IXYZ) X(x float64) *IXYZ {
-	p := ba.ctx.Get("IXYZ").New(x)
-	return IXYZFromJSObject(p, ba.ctx)
+func (i *IXYZ) X() float64 {
+	retVal := i.p.Get("x")
+	return retVal.Float()
 }
 
 // SetX sets the X property of class IXYZ.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ixyz#x
 func (i *IXYZ) SetX(x float64) *IXYZ {
-	p := ba.ctx.Get("IXYZ").New(x)
-	return IXYZFromJSObject(p, ba.ctx)
+	i.p.Set("x", x)
+	return i
 }
 
 // Y returns the Y property of class IXYZ.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ixyz#y
-func (i *IXYZ) Y(y float64) *IXYZ {
-	p := ba.ctx.Get("IXYZ").New(y)
-	return IXYZFromJSObject(p, ba.ctx)
+func (i *IXYZ) Y() float64 {
+	retVal := i.p.Get("y")
+	return retVal.Float()
 }
 
 // SetY sets the Y property of class IXYZ.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ixyz#y
 func (i *IXYZ) SetY(y float64) *IXYZ {
-	p := ba.ctx.Get("IXYZ").New(y)
-	return IXYZFromJSObject(p, ba.ctx)
+	i.p.Set("y", y)
+	return i
 }
 
 // Z returns the Z property of class IXYZ.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ixyz#z
-func (i *IXYZ) Z(z float64) *IXYZ {
-	p := ba.ctx.Get("IXYZ").New(z)
-	return IXYZFromJSObject(p, ba.ctx)
+func (i *IXYZ) Z() float64 {
+	retVal := i.p.Get("z")
+	return retVal.Float()
 }
 
 // SetZ sets the Z property of class IXYZ.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ixyz#z
 func (i *IXYZ) SetZ(z float64) *IXYZ {
-	p := ba.ctx.Get("IXYZ").New(z)
-	return IXYZFromJSObject(p, ba.ctx)
+	i.p.Set("z", z)
+	return i
 }
-
-*/

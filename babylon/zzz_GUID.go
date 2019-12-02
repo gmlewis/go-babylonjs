@@ -44,7 +44,3 @@ func (g *GUID) RandomId() string {
 	retVal := g.p.Call("RandomId")
 	return retVal.String()
 }
-
-/*
-
- */

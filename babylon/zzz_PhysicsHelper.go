@@ -210,7 +210,3 @@ func (p *PhysicsHelper) Vortex(origin *Vector3, radiusOrEventOptions float64, op
 	retVal := p.p.Call("vortex", args...)
 	return PhysicsVortexEventFromJSObject(retVal, p.ctx)
 }
-
-/*
-
- */

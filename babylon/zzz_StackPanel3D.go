@@ -61,38 +61,34 @@ func (ba *Babylon) NewStackPanel3D(opts *NewStackPanel3DOpts) *StackPanel3D {
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // IsVertical returns the IsVertical property of class StackPanel3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#isvertical
-func (s *StackPanel3D) IsVertical(isVertical bool) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(isVertical)
-	return StackPanel3DFromJSObject(p, ba.ctx)
+func (s *StackPanel3D) IsVertical() bool {
+	retVal := s.p.Get("isVertical")
+	return retVal.Bool()
 }
 
 // SetIsVertical sets the IsVertical property of class StackPanel3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#isvertical
 func (s *StackPanel3D) SetIsVertical(isVertical bool) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(isVertical)
-	return StackPanel3DFromJSObject(p, ba.ctx)
+	s.p.Set("isVertical", isVertical)
+	return s
 }
 
 // Margin returns the Margin property of class StackPanel3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#margin
-func (s *StackPanel3D) Margin(margin float64) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(margin)
-	return StackPanel3DFromJSObject(p, ba.ctx)
+func (s *StackPanel3D) Margin() float64 {
+	retVal := s.p.Get("margin")
+	return retVal.Float()
 }
 
 // SetMargin sets the Margin property of class StackPanel3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#margin
 func (s *StackPanel3D) SetMargin(margin float64) *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D").New(margin)
-	return StackPanel3DFromJSObject(p, ba.ctx)
+	s.p.Set("margin", margin)
+	return s
 }
-
-*/

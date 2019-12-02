@@ -50,7 +50,3 @@ func (t *TorusKnotBuilder) CreateTorusKnot(name string, options js.Value, scene 
 	retVal := t.p.Call("CreateTorusKnot", args...)
 	return MeshFromJSObject(retVal, t.ctx)
 }
-
-/*
-
- */

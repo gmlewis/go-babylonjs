@@ -122,214 +122,210 @@ func (w *WindowsMotionController) Update() {
 	w.p.Call("update")
 }
 
-/*
-
 // GAMEPAD_ID_PREFIX returns the GAMEPAD_ID_PREFIX property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#gamepad_id_prefix
-func (w *WindowsMotionController) GAMEPAD_ID_PREFIX(GAMEPAD_ID_PREFIX string) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(GAMEPAD_ID_PREFIX)
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) GAMEPAD_ID_PREFIX() string {
+	retVal := w.p.Get("GAMEPAD_ID_PREFIX")
+	return retVal.String()
 }
 
 // SetGAMEPAD_ID_PREFIX sets the GAMEPAD_ID_PREFIX property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#gamepad_id_prefix
 func (w *WindowsMotionController) SetGAMEPAD_ID_PREFIX(GAMEPAD_ID_PREFIX string) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(GAMEPAD_ID_PREFIX)
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("GAMEPAD_ID_PREFIX", GAMEPAD_ID_PREFIX)
+	return w
 }
 
 // MODEL_BASE_URL returns the MODEL_BASE_URL property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#model_base_url
-func (w *WindowsMotionController) MODEL_BASE_URL(MODEL_BASE_URL string) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(MODEL_BASE_URL)
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) MODEL_BASE_URL() string {
+	retVal := w.p.Get("MODEL_BASE_URL")
+	return retVal.String()
 }
 
 // SetMODEL_BASE_URL sets the MODEL_BASE_URL property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#model_base_url
 func (w *WindowsMotionController) SetMODEL_BASE_URL(MODEL_BASE_URL string) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(MODEL_BASE_URL)
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("MODEL_BASE_URL", MODEL_BASE_URL)
+	return w
 }
 
 // MODEL_LEFT_FILENAME returns the MODEL_LEFT_FILENAME property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#model_left_filename
-func (w *WindowsMotionController) MODEL_LEFT_FILENAME(MODEL_LEFT_FILENAME string) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(MODEL_LEFT_FILENAME)
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) MODEL_LEFT_FILENAME() string {
+	retVal := w.p.Get("MODEL_LEFT_FILENAME")
+	return retVal.String()
 }
 
 // SetMODEL_LEFT_FILENAME sets the MODEL_LEFT_FILENAME property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#model_left_filename
 func (w *WindowsMotionController) SetMODEL_LEFT_FILENAME(MODEL_LEFT_FILENAME string) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(MODEL_LEFT_FILENAME)
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("MODEL_LEFT_FILENAME", MODEL_LEFT_FILENAME)
+	return w
 }
 
 // MODEL_RIGHT_FILENAME returns the MODEL_RIGHT_FILENAME property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#model_right_filename
-func (w *WindowsMotionController) MODEL_RIGHT_FILENAME(MODEL_RIGHT_FILENAME string) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(MODEL_RIGHT_FILENAME)
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) MODEL_RIGHT_FILENAME() string {
+	retVal := w.p.Get("MODEL_RIGHT_FILENAME")
+	return retVal.String()
 }
 
 // SetMODEL_RIGHT_FILENAME sets the MODEL_RIGHT_FILENAME property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#model_right_filename
 func (w *WindowsMotionController) SetMODEL_RIGHT_FILENAME(MODEL_RIGHT_FILENAME string) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(MODEL_RIGHT_FILENAME)
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("MODEL_RIGHT_FILENAME", MODEL_RIGHT_FILENAME)
+	return w
 }
 
 // OnGripButtonStateChangedObservable returns the OnGripButtonStateChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ongripbuttonstatechangedobservable
-func (w *WindowsMotionController) OnGripButtonStateChangedObservable(onGripButtonStateChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onGripButtonStateChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) OnGripButtonStateChangedObservable() *Observable {
+	retVal := w.p.Get("onGripButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnGripButtonStateChangedObservable sets the OnGripButtonStateChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ongripbuttonstatechangedobservable
 func (w *WindowsMotionController) SetOnGripButtonStateChangedObservable(onGripButtonStateChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onGripButtonStateChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onGripButtonStateChangedObservable", onGripButtonStateChangedObservable.JSObject())
+	return w
 }
 
 // OnMenuButtonStateChangedObservable returns the OnMenuButtonStateChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#onmenubuttonstatechangedobservable
-func (w *WindowsMotionController) OnMenuButtonStateChangedObservable(onMenuButtonStateChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onMenuButtonStateChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) OnMenuButtonStateChangedObservable() *Observable {
+	retVal := w.p.Get("onMenuButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnMenuButtonStateChangedObservable sets the OnMenuButtonStateChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#onmenubuttonstatechangedobservable
 func (w *WindowsMotionController) SetOnMenuButtonStateChangedObservable(onMenuButtonStateChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onMenuButtonStateChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onMenuButtonStateChangedObservable", onMenuButtonStateChangedObservable.JSObject())
+	return w
 }
 
 // OnThumbstickButtonStateChangedObservable returns the OnThumbstickButtonStateChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#onthumbstickbuttonstatechangedobservable
-func (w *WindowsMotionController) OnThumbstickButtonStateChangedObservable(onThumbstickButtonStateChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onThumbstickButtonStateChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) OnThumbstickButtonStateChangedObservable() *Observable {
+	retVal := w.p.Get("onThumbstickButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnThumbstickButtonStateChangedObservable sets the OnThumbstickButtonStateChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#onthumbstickbuttonstatechangedobservable
 func (w *WindowsMotionController) SetOnThumbstickButtonStateChangedObservable(onThumbstickButtonStateChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onThumbstickButtonStateChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onThumbstickButtonStateChangedObservable", onThumbstickButtonStateChangedObservable.JSObject())
+	return w
 }
 
 // OnTouchpadButtonStateChangedObservable returns the OnTouchpadButtonStateChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ontouchpadbuttonstatechangedobservable
-func (w *WindowsMotionController) OnTouchpadButtonStateChangedObservable(onTouchpadButtonStateChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onTouchpadButtonStateChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) OnTouchpadButtonStateChangedObservable() *Observable {
+	retVal := w.p.Get("onTouchpadButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnTouchpadButtonStateChangedObservable sets the OnTouchpadButtonStateChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ontouchpadbuttonstatechangedobservable
 func (w *WindowsMotionController) SetOnTouchpadButtonStateChangedObservable(onTouchpadButtonStateChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onTouchpadButtonStateChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onTouchpadButtonStateChangedObservable", onTouchpadButtonStateChangedObservable.JSObject())
+	return w
 }
 
 // OnTouchpadValuesChangedObservable returns the OnTouchpadValuesChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ontouchpadvalueschangedobservable
-func (w *WindowsMotionController) OnTouchpadValuesChangedObservable(onTouchpadValuesChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onTouchpadValuesChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) OnTouchpadValuesChangedObservable() *Observable {
+	retVal := w.p.Get("onTouchpadValuesChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnTouchpadValuesChangedObservable sets the OnTouchpadValuesChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ontouchpadvalueschangedobservable
 func (w *WindowsMotionController) SetOnTouchpadValuesChangedObservable(onTouchpadValuesChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onTouchpadValuesChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onTouchpadValuesChangedObservable", onTouchpadValuesChangedObservable.JSObject())
+	return w
 }
 
 // OnTrackpadChangedObservable returns the OnTrackpadChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ontrackpadchangedobservable
-func (w *WindowsMotionController) OnTrackpadChangedObservable(onTrackpadChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onTrackpadChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) OnTrackpadChangedObservable() *Observable {
+	retVal := w.p.Get("onTrackpadChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnTrackpadChangedObservable sets the OnTrackpadChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ontrackpadchangedobservable
 func (w *WindowsMotionController) SetOnTrackpadChangedObservable(onTrackpadChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onTrackpadChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onTrackpadChangedObservable", onTrackpadChangedObservable.JSObject())
+	return w
 }
 
 // OnTrackpadValuesChangedObservable returns the OnTrackpadValuesChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ontrackpadvalueschangedobservable
-func (w *WindowsMotionController) OnTrackpadValuesChangedObservable(onTrackpadValuesChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onTrackpadValuesChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) OnTrackpadValuesChangedObservable() *Observable {
+	retVal := w.p.Get("onTrackpadValuesChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnTrackpadValuesChangedObservable sets the OnTrackpadValuesChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ontrackpadvalueschangedobservable
 func (w *WindowsMotionController) SetOnTrackpadValuesChangedObservable(onTrackpadValuesChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onTrackpadValuesChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onTrackpadValuesChangedObservable", onTrackpadValuesChangedObservable.JSObject())
+	return w
 }
 
 // OnTriggerButtonStateChangedObservable returns the OnTriggerButtonStateChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ontriggerbuttonstatechangedobservable
-func (w *WindowsMotionController) OnTriggerButtonStateChangedObservable(onTriggerButtonStateChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onTriggerButtonStateChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) OnTriggerButtonStateChangedObservable() *Observable {
+	retVal := w.p.Get("onTriggerButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnTriggerButtonStateChangedObservable sets the OnTriggerButtonStateChangedObservable property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#ontriggerbuttonstatechangedobservable
 func (w *WindowsMotionController) SetOnTriggerButtonStateChangedObservable(onTriggerButtonStateChangedObservable *Observable) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(onTriggerButtonStateChangedObservable.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onTriggerButtonStateChangedObservable", onTriggerButtonStateChangedObservable.JSObject())
+	return w
 }
 
 // Trackpad returns the Trackpad property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#trackpad
-func (w *WindowsMotionController) Trackpad(trackpad *StickValues) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(trackpad.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+func (w *WindowsMotionController) Trackpad() *StickValues {
+	retVal := w.p.Get("trackpad")
+	return StickValuesFromJSObject(retVal, w.ctx)
 }
 
 // SetTrackpad sets the Trackpad property of class WindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#trackpad
 func (w *WindowsMotionController) SetTrackpad(trackpad *StickValues) *WindowsMotionController {
-	p := ba.ctx.Get("WindowsMotionController").New(trackpad.JSObject())
-	return WindowsMotionControllerFromJSObject(p, ba.ctx)
+	w.p.Set("trackpad", trackpad.JSObject())
+	return w
 }
-
-*/

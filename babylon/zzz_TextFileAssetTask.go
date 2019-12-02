@@ -64,86 +64,82 @@ func (t *TextFileAssetTask) RunTask(scene *Scene, onSuccess func(), onError func
 	t.p.Call("runTask", args...)
 }
 
-/*
-
 // Name returns the Name property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#name
-func (t *TextFileAssetTask) Name(name string) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(name)
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
+func (t *TextFileAssetTask) Name() string {
+	retVal := t.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#name
 func (t *TextFileAssetTask) SetName(name string) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(name)
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
+	t.p.Set("name", name)
+	return t
 }
 
 // OnError returns the OnError property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onerror
-func (t *TextFileAssetTask) OnError(onError func()) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
+func (t *TextFileAssetTask) OnError() js.Value {
+	retVal := t.p.Get("onError")
+	return retVal
 }
 
 // SetOnError sets the OnError property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onerror
 func (t *TextFileAssetTask) SetOnError(onError func()) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
+	t.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	return t
 }
 
 // OnSuccess returns the OnSuccess property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onsuccess
-func (t *TextFileAssetTask) OnSuccess(onSuccess func()) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
+func (t *TextFileAssetTask) OnSuccess() js.Value {
+	retVal := t.p.Get("onSuccess")
+	return retVal
 }
 
 // SetOnSuccess sets the OnSuccess property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onsuccess
 func (t *TextFileAssetTask) SetOnSuccess(onSuccess func()) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
+	t.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	return t
 }
 
 // Text returns the Text property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#text
-func (t *TextFileAssetTask) Text(text string) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(text)
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
+func (t *TextFileAssetTask) Text() string {
+	retVal := t.p.Get("text")
+	return retVal.String()
 }
 
 // SetText sets the Text property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#text
 func (t *TextFileAssetTask) SetText(text string) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(text)
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
+	t.p.Set("text", text)
+	return t
 }
 
 // Url returns the Url property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#url
-func (t *TextFileAssetTask) Url(url string) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(url)
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
+func (t *TextFileAssetTask) Url() string {
+	retVal := t.p.Get("url")
+	return retVal.String()
 }
 
 // SetUrl sets the Url property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#url
 func (t *TextFileAssetTask) SetUrl(url string) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(url)
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
+	t.p.Set("url", url)
+	return t
 }
-
-*/

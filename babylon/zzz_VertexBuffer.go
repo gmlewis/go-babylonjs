@@ -315,422 +315,418 @@ func (v *VertexBuffer) UpdateDirectly(data []float64, offset float64, opts *Vert
 	v.p.Call("updateDirectly", args...)
 }
 
-/*
-
 // BYTE returns the BYTE property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#byte
-func (v *VertexBuffer) BYTE(BYTE float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(BYTE)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) BYTE() float64 {
+	retVal := v.p.Get("BYTE")
+	return retVal.Float()
 }
 
 // SetBYTE sets the BYTE property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#byte
 func (v *VertexBuffer) SetBYTE(BYTE float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(BYTE)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("BYTE", BYTE)
+	return v
 }
 
 // ByteOffset returns the ByteOffset property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#byteoffset
-func (v *VertexBuffer) ByteOffset(byteOffset float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(byteOffset)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) ByteOffset() float64 {
+	retVal := v.p.Get("byteOffset")
+	return retVal.Float()
 }
 
 // SetByteOffset sets the ByteOffset property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#byteoffset
 func (v *VertexBuffer) SetByteOffset(byteOffset float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(byteOffset)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("byteOffset", byteOffset)
+	return v
 }
 
 // ByteStride returns the ByteStride property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#bytestride
-func (v *VertexBuffer) ByteStride(byteStride float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(byteStride)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) ByteStride() float64 {
+	retVal := v.p.Get("byteStride")
+	return retVal.Float()
 }
 
 // SetByteStride sets the ByteStride property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#bytestride
 func (v *VertexBuffer) SetByteStride(byteStride float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(byteStride)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("byteStride", byteStride)
+	return v
 }
 
 // ColorKind returns the ColorKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#colorkind
-func (v *VertexBuffer) ColorKind(ColorKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(ColorKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) ColorKind() string {
+	retVal := v.p.Get("ColorKind")
+	return retVal.String()
 }
 
 // SetColorKind sets the ColorKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#colorkind
 func (v *VertexBuffer) SetColorKind(ColorKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(ColorKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("ColorKind", ColorKind)
+	return v
 }
 
 // FLOAT returns the FLOAT property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#float
-func (v *VertexBuffer) FLOAT(FLOAT float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(FLOAT)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) FLOAT() float64 {
+	retVal := v.p.Get("FLOAT")
+	return retVal.Float()
 }
 
 // SetFLOAT sets the FLOAT property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#float
 func (v *VertexBuffer) SetFLOAT(FLOAT float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(FLOAT)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("FLOAT", FLOAT)
+	return v
 }
 
 // INT returns the INT property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#int
-func (v *VertexBuffer) INT(INT float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(INT)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) INT() float64 {
+	retVal := v.p.Get("INT")
+	return retVal.Float()
 }
 
 // SetINT sets the INT property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#int
 func (v *VertexBuffer) SetINT(INT float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(INT)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("INT", INT)
+	return v
 }
 
 // InstanceDivisor returns the InstanceDivisor property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#instancedivisor
-func (v *VertexBuffer) InstanceDivisor(instanceDivisor float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(instanceDivisor)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) InstanceDivisor() float64 {
+	retVal := v.p.Get("instanceDivisor")
+	return retVal.Float()
 }
 
 // SetInstanceDivisor sets the InstanceDivisor property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#instancedivisor
 func (v *VertexBuffer) SetInstanceDivisor(instanceDivisor float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(instanceDivisor)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("instanceDivisor", instanceDivisor)
+	return v
 }
 
 // MatricesIndicesExtraKind returns the MatricesIndicesExtraKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#matricesindicesextrakind
-func (v *VertexBuffer) MatricesIndicesExtraKind(MatricesIndicesExtraKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(MatricesIndicesExtraKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) MatricesIndicesExtraKind() string {
+	retVal := v.p.Get("MatricesIndicesExtraKind")
+	return retVal.String()
 }
 
 // SetMatricesIndicesExtraKind sets the MatricesIndicesExtraKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#matricesindicesextrakind
 func (v *VertexBuffer) SetMatricesIndicesExtraKind(MatricesIndicesExtraKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(MatricesIndicesExtraKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("MatricesIndicesExtraKind", MatricesIndicesExtraKind)
+	return v
 }
 
 // MatricesIndicesKind returns the MatricesIndicesKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#matricesindiceskind
-func (v *VertexBuffer) MatricesIndicesKind(MatricesIndicesKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(MatricesIndicesKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) MatricesIndicesKind() string {
+	retVal := v.p.Get("MatricesIndicesKind")
+	return retVal.String()
 }
 
 // SetMatricesIndicesKind sets the MatricesIndicesKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#matricesindiceskind
 func (v *VertexBuffer) SetMatricesIndicesKind(MatricesIndicesKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(MatricesIndicesKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("MatricesIndicesKind", MatricesIndicesKind)
+	return v
 }
 
 // MatricesWeightsExtraKind returns the MatricesWeightsExtraKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#matricesweightsextrakind
-func (v *VertexBuffer) MatricesWeightsExtraKind(MatricesWeightsExtraKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(MatricesWeightsExtraKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) MatricesWeightsExtraKind() string {
+	retVal := v.p.Get("MatricesWeightsExtraKind")
+	return retVal.String()
 }
 
 // SetMatricesWeightsExtraKind sets the MatricesWeightsExtraKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#matricesweightsextrakind
 func (v *VertexBuffer) SetMatricesWeightsExtraKind(MatricesWeightsExtraKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(MatricesWeightsExtraKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("MatricesWeightsExtraKind", MatricesWeightsExtraKind)
+	return v
 }
 
 // MatricesWeightsKind returns the MatricesWeightsKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#matricesweightskind
-func (v *VertexBuffer) MatricesWeightsKind(MatricesWeightsKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(MatricesWeightsKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) MatricesWeightsKind() string {
+	retVal := v.p.Get("MatricesWeightsKind")
+	return retVal.String()
 }
 
 // SetMatricesWeightsKind sets the MatricesWeightsKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#matricesweightskind
 func (v *VertexBuffer) SetMatricesWeightsKind(MatricesWeightsKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(MatricesWeightsKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("MatricesWeightsKind", MatricesWeightsKind)
+	return v
 }
 
 // NormalKind returns the NormalKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#normalkind
-func (v *VertexBuffer) NormalKind(NormalKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(NormalKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) NormalKind() string {
+	retVal := v.p.Get("NormalKind")
+	return retVal.String()
 }
 
 // SetNormalKind sets the NormalKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#normalkind
 func (v *VertexBuffer) SetNormalKind(NormalKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(NormalKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("NormalKind", NormalKind)
+	return v
 }
 
 // Normalized returns the Normalized property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#normalized
-func (v *VertexBuffer) Normalized(normalized bool) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(normalized)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) Normalized() bool {
+	retVal := v.p.Get("normalized")
+	return retVal.Bool()
 }
 
 // SetNormalized sets the Normalized property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#normalized
 func (v *VertexBuffer) SetNormalized(normalized bool) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(normalized)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("normalized", normalized)
+	return v
 }
 
 // PositionKind returns the PositionKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#positionkind
-func (v *VertexBuffer) PositionKind(PositionKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(PositionKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) PositionKind() string {
+	retVal := v.p.Get("PositionKind")
+	return retVal.String()
 }
 
 // SetPositionKind sets the PositionKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#positionkind
 func (v *VertexBuffer) SetPositionKind(PositionKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(PositionKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("PositionKind", PositionKind)
+	return v
 }
 
 // SHORT returns the SHORT property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#short
-func (v *VertexBuffer) SHORT(SHORT float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(SHORT)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) SHORT() float64 {
+	retVal := v.p.Get("SHORT")
+	return retVal.Float()
 }
 
 // SetSHORT sets the SHORT property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#short
 func (v *VertexBuffer) SetSHORT(SHORT float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(SHORT)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("SHORT", SHORT)
+	return v
 }
 
 // TangentKind returns the TangentKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#tangentkind
-func (v *VertexBuffer) TangentKind(TangentKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(TangentKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) TangentKind() string {
+	retVal := v.p.Get("TangentKind")
+	return retVal.String()
 }
 
 // SetTangentKind sets the TangentKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#tangentkind
 func (v *VertexBuffer) SetTangentKind(TangentKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(TangentKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("TangentKind", TangentKind)
+	return v
 }
 
 // Type returns the Type property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#type
-func (v *VertexBuffer) Type(jsType float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(jsType)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) Type() float64 {
+	retVal := v.p.Get("type")
+	return retVal.Float()
 }
 
 // SetType sets the Type property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#type
 func (v *VertexBuffer) SetType(jsType float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(jsType)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("type", jsType)
+	return v
 }
 
 // UNSIGNED_BYTE returns the UNSIGNED_BYTE property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#unsigned_byte
-func (v *VertexBuffer) UNSIGNED_BYTE(UNSIGNED_BYTE float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UNSIGNED_BYTE)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) UNSIGNED_BYTE() float64 {
+	retVal := v.p.Get("UNSIGNED_BYTE")
+	return retVal.Float()
 }
 
 // SetUNSIGNED_BYTE sets the UNSIGNED_BYTE property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#unsigned_byte
 func (v *VertexBuffer) SetUNSIGNED_BYTE(UNSIGNED_BYTE float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UNSIGNED_BYTE)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("UNSIGNED_BYTE", UNSIGNED_BYTE)
+	return v
 }
 
 // UNSIGNED_INT returns the UNSIGNED_INT property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#unsigned_int
-func (v *VertexBuffer) UNSIGNED_INT(UNSIGNED_INT float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UNSIGNED_INT)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) UNSIGNED_INT() float64 {
+	retVal := v.p.Get("UNSIGNED_INT")
+	return retVal.Float()
 }
 
 // SetUNSIGNED_INT sets the UNSIGNED_INT property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#unsigned_int
 func (v *VertexBuffer) SetUNSIGNED_INT(UNSIGNED_INT float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UNSIGNED_INT)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("UNSIGNED_INT", UNSIGNED_INT)
+	return v
 }
 
 // UNSIGNED_SHORT returns the UNSIGNED_SHORT property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#unsigned_short
-func (v *VertexBuffer) UNSIGNED_SHORT(UNSIGNED_SHORT float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UNSIGNED_SHORT)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) UNSIGNED_SHORT() float64 {
+	retVal := v.p.Get("UNSIGNED_SHORT")
+	return retVal.Float()
 }
 
 // SetUNSIGNED_SHORT sets the UNSIGNED_SHORT property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#unsigned_short
 func (v *VertexBuffer) SetUNSIGNED_SHORT(UNSIGNED_SHORT float64) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UNSIGNED_SHORT)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("UNSIGNED_SHORT", UNSIGNED_SHORT)
+	return v
 }
 
 // UV2Kind returns the UV2Kind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uv2kind
-func (v *VertexBuffer) UV2Kind(UV2Kind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UV2Kind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) UV2Kind() string {
+	retVal := v.p.Get("UV2Kind")
+	return retVal.String()
 }
 
 // SetUV2Kind sets the UV2Kind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uv2kind
 func (v *VertexBuffer) SetUV2Kind(UV2Kind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UV2Kind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("UV2Kind", UV2Kind)
+	return v
 }
 
 // UV3Kind returns the UV3Kind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uv3kind
-func (v *VertexBuffer) UV3Kind(UV3Kind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UV3Kind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) UV3Kind() string {
+	retVal := v.p.Get("UV3Kind")
+	return retVal.String()
 }
 
 // SetUV3Kind sets the UV3Kind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uv3kind
 func (v *VertexBuffer) SetUV3Kind(UV3Kind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UV3Kind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("UV3Kind", UV3Kind)
+	return v
 }
 
 // UV4Kind returns the UV4Kind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uv4kind
-func (v *VertexBuffer) UV4Kind(UV4Kind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UV4Kind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) UV4Kind() string {
+	retVal := v.p.Get("UV4Kind")
+	return retVal.String()
 }
 
 // SetUV4Kind sets the UV4Kind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uv4kind
 func (v *VertexBuffer) SetUV4Kind(UV4Kind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UV4Kind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("UV4Kind", UV4Kind)
+	return v
 }
 
 // UV5Kind returns the UV5Kind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uv5kind
-func (v *VertexBuffer) UV5Kind(UV5Kind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UV5Kind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) UV5Kind() string {
+	retVal := v.p.Get("UV5Kind")
+	return retVal.String()
 }
 
 // SetUV5Kind sets the UV5Kind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uv5kind
 func (v *VertexBuffer) SetUV5Kind(UV5Kind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UV5Kind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("UV5Kind", UV5Kind)
+	return v
 }
 
 // UV6Kind returns the UV6Kind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uv6kind
-func (v *VertexBuffer) UV6Kind(UV6Kind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UV6Kind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) UV6Kind() string {
+	retVal := v.p.Get("UV6Kind")
+	return retVal.String()
 }
 
 // SetUV6Kind sets the UV6Kind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uv6kind
 func (v *VertexBuffer) SetUV6Kind(UV6Kind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UV6Kind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("UV6Kind", UV6Kind)
+	return v
 }
 
 // UVKind returns the UVKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uvkind
-func (v *VertexBuffer) UVKind(UVKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UVKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+func (v *VertexBuffer) UVKind() string {
+	retVal := v.p.Get("UVKind")
+	return retVal.String()
 }
 
 // SetUVKind sets the UVKind property of class VertexBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#uvkind
 func (v *VertexBuffer) SetUVKind(UVKind string) *VertexBuffer {
-	p := ba.ctx.Get("VertexBuffer").New(UVKind)
-	return VertexBufferFromJSObject(p, ba.ctx)
+	v.p.Set("UVKind", UVKind)
+	return v
 }
-
-*/

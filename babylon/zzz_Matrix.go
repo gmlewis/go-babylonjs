@@ -1490,54 +1490,50 @@ func (m *Matrix) Zero() *Matrix {
 	return MatrixFromJSObject(retVal, m.ctx)
 }
 
-/*
-
 // IdentityReadOnly returns the IdentityReadOnly property of class Matrix.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix#identityreadonly
-func (m *Matrix) IdentityReadOnly(IdentityReadOnly *Matrix) *Matrix {
-	p := ba.ctx.Get("Matrix").New(IdentityReadOnly.JSObject())
-	return MatrixFromJSObject(p, ba.ctx)
+func (m *Matrix) IdentityReadOnly() *Matrix {
+	retVal := m.p.Get("IdentityReadOnly")
+	return MatrixFromJSObject(retVal, m.ctx)
 }
 
 // SetIdentityReadOnly sets the IdentityReadOnly property of class Matrix.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix#identityreadonly
 func (m *Matrix) SetIdentityReadOnly(IdentityReadOnly *Matrix) *Matrix {
-	p := ba.ctx.Get("Matrix").New(IdentityReadOnly.JSObject())
-	return MatrixFromJSObject(p, ba.ctx)
+	m.p.Set("IdentityReadOnly", IdentityReadOnly.JSObject())
+	return m
 }
 
 // M returns the M property of class Matrix.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix#m
-func (m *Matrix) M(m js.Value) *Matrix {
-	p := ba.ctx.Get("Matrix").New(m)
-	return MatrixFromJSObject(p, ba.ctx)
+func (m *Matrix) M() js.Value {
+	retVal := m.p.Get("m")
+	return retVal
 }
 
 // SetM sets the M property of class Matrix.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix#m
-func (m *Matrix) SetM(m js.Value) *Matrix {
-	p := ba.ctx.Get("Matrix").New(m)
-	return MatrixFromJSObject(p, ba.ctx)
+func (m *Matrix) SetM(mm js.Value) *Matrix {
+	m.p.Set("m", mm)
+	return m
 }
 
 // UpdateFlag returns the UpdateFlag property of class Matrix.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix#updateflag
-func (m *Matrix) UpdateFlag(updateFlag float64) *Matrix {
-	p := ba.ctx.Get("Matrix").New(updateFlag)
-	return MatrixFromJSObject(p, ba.ctx)
+func (m *Matrix) UpdateFlag() float64 {
+	retVal := m.p.Get("updateFlag")
+	return retVal.Float()
 }
 
 // SetUpdateFlag sets the UpdateFlag property of class Matrix.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix#updateflag
 func (m *Matrix) SetUpdateFlag(updateFlag float64) *Matrix {
-	p := ba.ctx.Get("Matrix").New(updateFlag)
-	return MatrixFromJSObject(p, ba.ctx)
+	m.p.Set("updateFlag", updateFlag)
+	return m
 }
-
-*/

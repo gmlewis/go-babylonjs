@@ -38,70 +38,66 @@ func PhysicsUpdraftEventOptionsArrayToJSArray(array []*PhysicsUpdraftEventOption
 	return result
 }
 
-/*
-
 // Height returns the Height property of class PhysicsUpdraftEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventoptions#height
-func (p *PhysicsUpdraftEventOptions) Height(height float64) *PhysicsUpdraftEventOptions {
-	p := ba.ctx.Get("PhysicsUpdraftEventOptions").New(height)
-	return PhysicsUpdraftEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsUpdraftEventOptions) Height() float64 {
+	retVal := p.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class PhysicsUpdraftEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventoptions#height
 func (p *PhysicsUpdraftEventOptions) SetHeight(height float64) *PhysicsUpdraftEventOptions {
-	p := ba.ctx.Get("PhysicsUpdraftEventOptions").New(height)
-	return PhysicsUpdraftEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("height", height)
+	return p
 }
 
 // Radius returns the Radius property of class PhysicsUpdraftEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventoptions#radius
-func (p *PhysicsUpdraftEventOptions) Radius(radius float64) *PhysicsUpdraftEventOptions {
-	p := ba.ctx.Get("PhysicsUpdraftEventOptions").New(radius)
-	return PhysicsUpdraftEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsUpdraftEventOptions) Radius() float64 {
+	retVal := p.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class PhysicsUpdraftEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventoptions#radius
 func (p *PhysicsUpdraftEventOptions) SetRadius(radius float64) *PhysicsUpdraftEventOptions {
-	p := ba.ctx.Get("PhysicsUpdraftEventOptions").New(radius)
-	return PhysicsUpdraftEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("radius", radius)
+	return p
 }
 
 // Strength returns the Strength property of class PhysicsUpdraftEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventoptions#strength
-func (p *PhysicsUpdraftEventOptions) Strength(strength float64) *PhysicsUpdraftEventOptions {
-	p := ba.ctx.Get("PhysicsUpdraftEventOptions").New(strength)
-	return PhysicsUpdraftEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsUpdraftEventOptions) Strength() float64 {
+	retVal := p.p.Get("strength")
+	return retVal.Float()
 }
 
 // SetStrength sets the Strength property of class PhysicsUpdraftEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventoptions#strength
 func (p *PhysicsUpdraftEventOptions) SetStrength(strength float64) *PhysicsUpdraftEventOptions {
-	p := ba.ctx.Get("PhysicsUpdraftEventOptions").New(strength)
-	return PhysicsUpdraftEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("strength", strength)
+	return p
 }
 
 // UpdraftMode returns the UpdraftMode property of class PhysicsUpdraftEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventoptions#updraftmode
-func (p *PhysicsUpdraftEventOptions) UpdraftMode(updraftMode js.Value) *PhysicsUpdraftEventOptions {
-	p := ba.ctx.Get("PhysicsUpdraftEventOptions").New(updraftMode)
-	return PhysicsUpdraftEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsUpdraftEventOptions) UpdraftMode() js.Value {
+	retVal := p.p.Get("updraftMode")
+	return retVal
 }
 
 // SetUpdraftMode sets the UpdraftMode property of class PhysicsUpdraftEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventoptions#updraftmode
 func (p *PhysicsUpdraftEventOptions) SetUpdraftMode(updraftMode js.Value) *PhysicsUpdraftEventOptions {
-	p := ba.ctx.Get("PhysicsUpdraftEventOptions").New(updraftMode)
-	return PhysicsUpdraftEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("updraftMode", updraftMode)
+	return p
 }
-
-*/

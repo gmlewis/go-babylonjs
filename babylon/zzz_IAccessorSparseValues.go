@@ -36,38 +36,34 @@ func IAccessorSparseValuesArrayToJSArray(array []*IAccessorSparseValues) []inter
 	return result
 }
 
-/*
-
 // BufferView returns the BufferView property of class IAccessorSparseValues.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparsevalues#bufferview
-func (i *IAccessorSparseValues) BufferView(bufferView float64) *IAccessorSparseValues {
-	p := ba.ctx.Get("IAccessorSparseValues").New(bufferView)
-	return IAccessorSparseValuesFromJSObject(p, ba.ctx)
+func (i *IAccessorSparseValues) BufferView() float64 {
+	retVal := i.p.Get("bufferView")
+	return retVal.Float()
 }
 
 // SetBufferView sets the BufferView property of class IAccessorSparseValues.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparsevalues#bufferview
 func (i *IAccessorSparseValues) SetBufferView(bufferView float64) *IAccessorSparseValues {
-	p := ba.ctx.Get("IAccessorSparseValues").New(bufferView)
-	return IAccessorSparseValuesFromJSObject(p, ba.ctx)
+	i.p.Set("bufferView", bufferView)
+	return i
 }
 
 // ByteOffset returns the ByteOffset property of class IAccessorSparseValues.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparsevalues#byteoffset
-func (i *IAccessorSparseValues) ByteOffset(byteOffset float64) *IAccessorSparseValues {
-	p := ba.ctx.Get("IAccessorSparseValues").New(byteOffset)
-	return IAccessorSparseValuesFromJSObject(p, ba.ctx)
+func (i *IAccessorSparseValues) ByteOffset() float64 {
+	retVal := i.p.Get("byteOffset")
+	return retVal.Float()
 }
 
 // SetByteOffset sets the ByteOffset property of class IAccessorSparseValues.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparsevalues#byteoffset
 func (i *IAccessorSparseValues) SetByteOffset(byteOffset float64) *IAccessorSparseValues {
-	p := ba.ctx.Get("IAccessorSparseValues").New(byteOffset)
-	return IAccessorSparseValuesFromJSObject(p, ba.ctx)
+	i.p.Set("byteOffset", byteOffset)
+	return i
 }
-
-*/

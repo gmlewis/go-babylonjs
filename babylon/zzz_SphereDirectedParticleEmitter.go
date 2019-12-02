@@ -148,38 +148,34 @@ func (s *SphereDirectedParticleEmitter) StartDirectionFunction(worldMatrix *Matr
 	s.p.Call("startDirectionFunction", args...)
 }
 
-/*
-
 // Direction1 returns the Direction1 property of class SphereDirectedParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#direction1
-func (s *SphereDirectedParticleEmitter) Direction1(direction1 *Vector3) *SphereDirectedParticleEmitter {
-	p := ba.ctx.Get("SphereDirectedParticleEmitter").New(direction1.JSObject())
-	return SphereDirectedParticleEmitterFromJSObject(p, ba.ctx)
+func (s *SphereDirectedParticleEmitter) Direction1() *Vector3 {
+	retVal := s.p.Get("direction1")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetDirection1 sets the Direction1 property of class SphereDirectedParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#direction1
 func (s *SphereDirectedParticleEmitter) SetDirection1(direction1 *Vector3) *SphereDirectedParticleEmitter {
-	p := ba.ctx.Get("SphereDirectedParticleEmitter").New(direction1.JSObject())
-	return SphereDirectedParticleEmitterFromJSObject(p, ba.ctx)
+	s.p.Set("direction1", direction1.JSObject())
+	return s
 }
 
 // Direction2 returns the Direction2 property of class SphereDirectedParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#direction2
-func (s *SphereDirectedParticleEmitter) Direction2(direction2 *Vector3) *SphereDirectedParticleEmitter {
-	p := ba.ctx.Get("SphereDirectedParticleEmitter").New(direction2.JSObject())
-	return SphereDirectedParticleEmitterFromJSObject(p, ba.ctx)
+func (s *SphereDirectedParticleEmitter) Direction2() *Vector3 {
+	retVal := s.p.Get("direction2")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetDirection2 sets the Direction2 property of class SphereDirectedParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#direction2
 func (s *SphereDirectedParticleEmitter) SetDirection2(direction2 *Vector3) *SphereDirectedParticleEmitter {
-	p := ba.ctx.Get("SphereDirectedParticleEmitter").New(direction2.JSObject())
-	return SphereDirectedParticleEmitterFromJSObject(p, ba.ctx)
+	s.p.Set("direction2", direction2.JSObject())
+	return s
 }
-
-*/

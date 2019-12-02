@@ -58,54 +58,50 @@ func (d *DesaturateBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Color returns the Color property of class DesaturateBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock#color
-func (d *DesaturateBlock) Color(color *NodeMaterialConnectionPoint) *DesaturateBlock {
-	p := ba.ctx.Get("DesaturateBlock").New(color.JSObject())
-	return DesaturateBlockFromJSObject(p, ba.ctx)
+func (d *DesaturateBlock) Color() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("color")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetColor sets the Color property of class DesaturateBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock#color
 func (d *DesaturateBlock) SetColor(color *NodeMaterialConnectionPoint) *DesaturateBlock {
-	p := ba.ctx.Get("DesaturateBlock").New(color.JSObject())
-	return DesaturateBlockFromJSObject(p, ba.ctx)
+	d.p.Set("color", color.JSObject())
+	return d
 }
 
 // Level returns the Level property of class DesaturateBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock#level
-func (d *DesaturateBlock) Level(level *NodeMaterialConnectionPoint) *DesaturateBlock {
-	p := ba.ctx.Get("DesaturateBlock").New(level.JSObject())
-	return DesaturateBlockFromJSObject(p, ba.ctx)
+func (d *DesaturateBlock) Level() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("level")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetLevel sets the Level property of class DesaturateBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock#level
 func (d *DesaturateBlock) SetLevel(level *NodeMaterialConnectionPoint) *DesaturateBlock {
-	p := ba.ctx.Get("DesaturateBlock").New(level.JSObject())
-	return DesaturateBlockFromJSObject(p, ba.ctx)
+	d.p.Set("level", level.JSObject())
+	return d
 }
 
 // Output returns the Output property of class DesaturateBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock#output
-func (d *DesaturateBlock) Output(output *NodeMaterialConnectionPoint) *DesaturateBlock {
-	p := ba.ctx.Get("DesaturateBlock").New(output.JSObject())
-	return DesaturateBlockFromJSObject(p, ba.ctx)
+func (d *DesaturateBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetOutput sets the Output property of class DesaturateBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock#output
 func (d *DesaturateBlock) SetOutput(output *NodeMaterialConnectionPoint) *DesaturateBlock {
-	p := ba.ctx.Get("DesaturateBlock").New(output.JSObject())
-	return DesaturateBlockFromJSObject(p, ba.ctx)
+	d.p.Set("output", output.JSObject())
+	return d
 }
-
-*/

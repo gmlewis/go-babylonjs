@@ -332,486 +332,474 @@ func (l *Light) TransferToNodeMaterialEffect(effect *Effect, lightDataUniformNam
 	return LightFromJSObject(retVal, l.ctx)
 }
 
-/*
-
 // Diffuse returns the Diffuse property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#diffuse
-func (l *Light) Diffuse(diffuse *Color3) *Light {
-	p := ba.ctx.Get("Light").New(diffuse.JSObject())
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) Diffuse() *Color3 {
+	retVal := l.p.Get("diffuse")
+	return Color3FromJSObject(retVal, l.ctx)
 }
 
 // SetDiffuse sets the Diffuse property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#diffuse
 func (l *Light) SetDiffuse(diffuse *Color3) *Light {
-	p := ba.ctx.Get("Light").New(diffuse.JSObject())
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("diffuse", diffuse.JSObject())
+	return l
 }
 
 // ExcludeWithLayerMask returns the ExcludeWithLayerMask property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#excludewithlayermask
-func (l *Light) ExcludeWithLayerMask(excludeWithLayerMask float64) *Light {
-	p := ba.ctx.Get("Light").New(excludeWithLayerMask)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) ExcludeWithLayerMask() float64 {
+	retVal := l.p.Get("excludeWithLayerMask")
+	return retVal.Float()
 }
 
 // SetExcludeWithLayerMask sets the ExcludeWithLayerMask property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#excludewithlayermask
 func (l *Light) SetExcludeWithLayerMask(excludeWithLayerMask float64) *Light {
-	p := ba.ctx.Get("Light").New(excludeWithLayerMask)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("excludeWithLayerMask", excludeWithLayerMask)
+	return l
 }
 
 // ExcludedMeshes returns the ExcludedMeshes property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#excludedmeshes
-func (l *Light) ExcludedMeshes(excludedMeshes *AbstractMesh) *Light {
-	p := ba.ctx.Get("Light").New(excludedMeshes.JSObject())
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) ExcludedMeshes() *AbstractMesh {
+	retVal := l.p.Get("excludedMeshes")
+	return AbstractMeshFromJSObject(retVal, l.ctx)
 }
 
 // SetExcludedMeshes sets the ExcludedMeshes property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#excludedmeshes
 func (l *Light) SetExcludedMeshes(excludedMeshes *AbstractMesh) *Light {
-	p := ba.ctx.Get("Light").New(excludedMeshes.JSObject())
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("excludedMeshes", excludedMeshes.JSObject())
+	return l
 }
 
 // FALLOFF_DEFAULT returns the FALLOFF_DEFAULT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#falloff_default
-func (l *Light) FALLOFF_DEFAULT(FALLOFF_DEFAULT float64) *Light {
-	p := ba.ctx.Get("Light").New(FALLOFF_DEFAULT)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) FALLOFF_DEFAULT() float64 {
+	retVal := l.p.Get("FALLOFF_DEFAULT")
+	return retVal.Float()
 }
 
 // SetFALLOFF_DEFAULT sets the FALLOFF_DEFAULT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#falloff_default
 func (l *Light) SetFALLOFF_DEFAULT(FALLOFF_DEFAULT float64) *Light {
-	p := ba.ctx.Get("Light").New(FALLOFF_DEFAULT)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("FALLOFF_DEFAULT", FALLOFF_DEFAULT)
+	return l
 }
 
 // FALLOFF_GLTF returns the FALLOFF_GLTF property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#falloff_gltf
-func (l *Light) FALLOFF_GLTF(FALLOFF_GLTF float64) *Light {
-	p := ba.ctx.Get("Light").New(FALLOFF_GLTF)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) FALLOFF_GLTF() float64 {
+	retVal := l.p.Get("FALLOFF_GLTF")
+	return retVal.Float()
 }
 
 // SetFALLOFF_GLTF sets the FALLOFF_GLTF property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#falloff_gltf
 func (l *Light) SetFALLOFF_GLTF(FALLOFF_GLTF float64) *Light {
-	p := ba.ctx.Get("Light").New(FALLOFF_GLTF)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("FALLOFF_GLTF", FALLOFF_GLTF)
+	return l
 }
 
 // FALLOFF_PHYSICAL returns the FALLOFF_PHYSICAL property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#falloff_physical
-func (l *Light) FALLOFF_PHYSICAL(FALLOFF_PHYSICAL float64) *Light {
-	p := ba.ctx.Get("Light").New(FALLOFF_PHYSICAL)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) FALLOFF_PHYSICAL() float64 {
+	retVal := l.p.Get("FALLOFF_PHYSICAL")
+	return retVal.Float()
 }
 
 // SetFALLOFF_PHYSICAL sets the FALLOFF_PHYSICAL property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#falloff_physical
 func (l *Light) SetFALLOFF_PHYSICAL(FALLOFF_PHYSICAL float64) *Light {
-	p := ba.ctx.Get("Light").New(FALLOFF_PHYSICAL)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("FALLOFF_PHYSICAL", FALLOFF_PHYSICAL)
+	return l
 }
 
 // FALLOFF_STANDARD returns the FALLOFF_STANDARD property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#falloff_standard
-func (l *Light) FALLOFF_STANDARD(FALLOFF_STANDARD float64) *Light {
-	p := ba.ctx.Get("Light").New(FALLOFF_STANDARD)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) FALLOFF_STANDARD() float64 {
+	retVal := l.p.Get("FALLOFF_STANDARD")
+	return retVal.Float()
 }
 
 // SetFALLOFF_STANDARD sets the FALLOFF_STANDARD property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#falloff_standard
 func (l *Light) SetFALLOFF_STANDARD(FALLOFF_STANDARD float64) *Light {
-	p := ba.ctx.Get("Light").New(FALLOFF_STANDARD)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("FALLOFF_STANDARD", FALLOFF_STANDARD)
+	return l
 }
 
 // FalloffType returns the FalloffType property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#fallofftype
-func (l *Light) FalloffType(falloffType float64) *Light {
-	p := ba.ctx.Get("Light").New(falloffType)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) FalloffType() float64 {
+	retVal := l.p.Get("falloffType")
+	return retVal.Float()
 }
 
 // SetFalloffType sets the FalloffType property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#fallofftype
 func (l *Light) SetFalloffType(falloffType float64) *Light {
-	p := ba.ctx.Get("Light").New(falloffType)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("falloffType", falloffType)
+	return l
 }
 
 // INTENSITYMODE_AUTOMATIC returns the INTENSITYMODE_AUTOMATIC property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_automatic
-func (l *Light) INTENSITYMODE_AUTOMATIC(INTENSITYMODE_AUTOMATIC float64) *Light {
-	p := ba.ctx.Get("Light").New(INTENSITYMODE_AUTOMATIC)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) INTENSITYMODE_AUTOMATIC() float64 {
+	retVal := l.p.Get("INTENSITYMODE_AUTOMATIC")
+	return retVal.Float()
 }
 
 // SetINTENSITYMODE_AUTOMATIC sets the INTENSITYMODE_AUTOMATIC property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_automatic
 func (l *Light) SetINTENSITYMODE_AUTOMATIC(INTENSITYMODE_AUTOMATIC float64) *Light {
-	p := ba.ctx.Get("Light").New(INTENSITYMODE_AUTOMATIC)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("INTENSITYMODE_AUTOMATIC", INTENSITYMODE_AUTOMATIC)
+	return l
 }
 
 // INTENSITYMODE_ILLUMINANCE returns the INTENSITYMODE_ILLUMINANCE property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_illuminance
-func (l *Light) INTENSITYMODE_ILLUMINANCE(INTENSITYMODE_ILLUMINANCE float64) *Light {
-	p := ba.ctx.Get("Light").New(INTENSITYMODE_ILLUMINANCE)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) INTENSITYMODE_ILLUMINANCE() float64 {
+	retVal := l.p.Get("INTENSITYMODE_ILLUMINANCE")
+	return retVal.Float()
 }
 
 // SetINTENSITYMODE_ILLUMINANCE sets the INTENSITYMODE_ILLUMINANCE property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_illuminance
 func (l *Light) SetINTENSITYMODE_ILLUMINANCE(INTENSITYMODE_ILLUMINANCE float64) *Light {
-	p := ba.ctx.Get("Light").New(INTENSITYMODE_ILLUMINANCE)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("INTENSITYMODE_ILLUMINANCE", INTENSITYMODE_ILLUMINANCE)
+	return l
 }
 
 // INTENSITYMODE_LUMINANCE returns the INTENSITYMODE_LUMINANCE property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminance
-func (l *Light) INTENSITYMODE_LUMINANCE(INTENSITYMODE_LUMINANCE float64) *Light {
-	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINANCE)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) INTENSITYMODE_LUMINANCE() float64 {
+	retVal := l.p.Get("INTENSITYMODE_LUMINANCE")
+	return retVal.Float()
 }
 
 // SetINTENSITYMODE_LUMINANCE sets the INTENSITYMODE_LUMINANCE property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminance
 func (l *Light) SetINTENSITYMODE_LUMINANCE(INTENSITYMODE_LUMINANCE float64) *Light {
-	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINANCE)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("INTENSITYMODE_LUMINANCE", INTENSITYMODE_LUMINANCE)
+	return l
 }
 
 // INTENSITYMODE_LUMINOUSINTENSITY returns the INTENSITYMODE_LUMINOUSINTENSITY property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminousintensity
-func (l *Light) INTENSITYMODE_LUMINOUSINTENSITY(INTENSITYMODE_LUMINOUSINTENSITY float64) *Light {
-	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINOUSINTENSITY)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) INTENSITYMODE_LUMINOUSINTENSITY() float64 {
+	retVal := l.p.Get("INTENSITYMODE_LUMINOUSINTENSITY")
+	return retVal.Float()
 }
 
 // SetINTENSITYMODE_LUMINOUSINTENSITY sets the INTENSITYMODE_LUMINOUSINTENSITY property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminousintensity
 func (l *Light) SetINTENSITYMODE_LUMINOUSINTENSITY(INTENSITYMODE_LUMINOUSINTENSITY float64) *Light {
-	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINOUSINTENSITY)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("INTENSITYMODE_LUMINOUSINTENSITY", INTENSITYMODE_LUMINOUSINTENSITY)
+	return l
 }
 
 // INTENSITYMODE_LUMINOUSPOWER returns the INTENSITYMODE_LUMINOUSPOWER property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminouspower
-func (l *Light) INTENSITYMODE_LUMINOUSPOWER(INTENSITYMODE_LUMINOUSPOWER float64) *Light {
-	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINOUSPOWER)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) INTENSITYMODE_LUMINOUSPOWER() float64 {
+	retVal := l.p.Get("INTENSITYMODE_LUMINOUSPOWER")
+	return retVal.Float()
 }
 
 // SetINTENSITYMODE_LUMINOUSPOWER sets the INTENSITYMODE_LUMINOUSPOWER property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminouspower
 func (l *Light) SetINTENSITYMODE_LUMINOUSPOWER(INTENSITYMODE_LUMINOUSPOWER float64) *Light {
-	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINOUSPOWER)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("INTENSITYMODE_LUMINOUSPOWER", INTENSITYMODE_LUMINOUSPOWER)
+	return l
 }
 
 // IncludeOnlyWithLayerMask returns the IncludeOnlyWithLayerMask property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#includeonlywithlayermask
-func (l *Light) IncludeOnlyWithLayerMask(includeOnlyWithLayerMask float64) *Light {
-	p := ba.ctx.Get("Light").New(includeOnlyWithLayerMask)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) IncludeOnlyWithLayerMask() float64 {
+	retVal := l.p.Get("includeOnlyWithLayerMask")
+	return retVal.Float()
 }
 
 // SetIncludeOnlyWithLayerMask sets the IncludeOnlyWithLayerMask property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#includeonlywithlayermask
 func (l *Light) SetIncludeOnlyWithLayerMask(includeOnlyWithLayerMask float64) *Light {
-	p := ba.ctx.Get("Light").New(includeOnlyWithLayerMask)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("includeOnlyWithLayerMask", includeOnlyWithLayerMask)
+	return l
 }
 
 // IncludedOnlyMeshes returns the IncludedOnlyMeshes property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#includedonlymeshes
-func (l *Light) IncludedOnlyMeshes(includedOnlyMeshes *AbstractMesh) *Light {
-	p := ba.ctx.Get("Light").New(includedOnlyMeshes.JSObject())
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) IncludedOnlyMeshes() *AbstractMesh {
+	retVal := l.p.Get("includedOnlyMeshes")
+	return AbstractMeshFromJSObject(retVal, l.ctx)
 }
 
 // SetIncludedOnlyMeshes sets the IncludedOnlyMeshes property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#includedonlymeshes
 func (l *Light) SetIncludedOnlyMeshes(includedOnlyMeshes *AbstractMesh) *Light {
-	p := ba.ctx.Get("Light").New(includedOnlyMeshes.JSObject())
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("includedOnlyMeshes", includedOnlyMeshes.JSObject())
+	return l
 }
 
 // Intensity returns the Intensity property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensity
-func (l *Light) Intensity(intensity float64) *Light {
-	p := ba.ctx.Get("Light").New(intensity)
-	return LightFromJSObject(p, ba.ctx)
-}
-
-// SetIntensity sets the Intensity property of class Light.
-//
-// https://doc.babylonjs.com/api/classes/babylon.light#intensity
-func (l *Light) SetIntensity(intensity float64) *Light {
-	p := ba.ctx.Get("Light").New(intensity)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) Intensity() float64 {
+	retVal := l.p.Get("intensity")
+	return retVal.Float()
 }
 
 // IntensityMode returns the IntensityMode property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode
-func (l *Light) IntensityMode(intensityMode float64) *Light {
-	p := ba.ctx.Get("Light").New(intensityMode)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) IntensityMode() float64 {
+	retVal := l.p.Get("intensityMode")
+	return retVal.Float()
 }
 
 // SetIntensityMode sets the IntensityMode property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#intensitymode
 func (l *Light) SetIntensityMode(intensityMode float64) *Light {
-	p := ba.ctx.Get("Light").New(intensityMode)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("intensityMode", intensityMode)
+	return l
 }
 
 // LIGHTMAP_DEFAULT returns the LIGHTMAP_DEFAULT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lightmap_default
-func (l *Light) LIGHTMAP_DEFAULT(LIGHTMAP_DEFAULT float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTMAP_DEFAULT)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) LIGHTMAP_DEFAULT() float64 {
+	retVal := l.p.Get("LIGHTMAP_DEFAULT")
+	return retVal.Float()
 }
 
 // SetLIGHTMAP_DEFAULT sets the LIGHTMAP_DEFAULT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lightmap_default
 func (l *Light) SetLIGHTMAP_DEFAULT(LIGHTMAP_DEFAULT float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTMAP_DEFAULT)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("LIGHTMAP_DEFAULT", LIGHTMAP_DEFAULT)
+	return l
 }
 
 // LIGHTMAP_SHADOWSONLY returns the LIGHTMAP_SHADOWSONLY property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lightmap_shadowsonly
-func (l *Light) LIGHTMAP_SHADOWSONLY(LIGHTMAP_SHADOWSONLY float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTMAP_SHADOWSONLY)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) LIGHTMAP_SHADOWSONLY() float64 {
+	retVal := l.p.Get("LIGHTMAP_SHADOWSONLY")
+	return retVal.Float()
 }
 
 // SetLIGHTMAP_SHADOWSONLY sets the LIGHTMAP_SHADOWSONLY property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lightmap_shadowsonly
 func (l *Light) SetLIGHTMAP_SHADOWSONLY(LIGHTMAP_SHADOWSONLY float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTMAP_SHADOWSONLY)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("LIGHTMAP_SHADOWSONLY", LIGHTMAP_SHADOWSONLY)
+	return l
 }
 
 // LIGHTMAP_SPECULAR returns the LIGHTMAP_SPECULAR property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lightmap_specular
-func (l *Light) LIGHTMAP_SPECULAR(LIGHTMAP_SPECULAR float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTMAP_SPECULAR)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) LIGHTMAP_SPECULAR() float64 {
+	retVal := l.p.Get("LIGHTMAP_SPECULAR")
+	return retVal.Float()
 }
 
 // SetLIGHTMAP_SPECULAR sets the LIGHTMAP_SPECULAR property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lightmap_specular
 func (l *Light) SetLIGHTMAP_SPECULAR(LIGHTMAP_SPECULAR float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTMAP_SPECULAR)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("LIGHTMAP_SPECULAR", LIGHTMAP_SPECULAR)
+	return l
 }
 
 // LIGHTTYPEID_DIRECTIONALLIGHT returns the LIGHTTYPEID_DIRECTIONALLIGHT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_directionallight
-func (l *Light) LIGHTTYPEID_DIRECTIONALLIGHT(LIGHTTYPEID_DIRECTIONALLIGHT float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTTYPEID_DIRECTIONALLIGHT)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) LIGHTTYPEID_DIRECTIONALLIGHT() float64 {
+	retVal := l.p.Get("LIGHTTYPEID_DIRECTIONALLIGHT")
+	return retVal.Float()
 }
 
 // SetLIGHTTYPEID_DIRECTIONALLIGHT sets the LIGHTTYPEID_DIRECTIONALLIGHT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_directionallight
 func (l *Light) SetLIGHTTYPEID_DIRECTIONALLIGHT(LIGHTTYPEID_DIRECTIONALLIGHT float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTTYPEID_DIRECTIONALLIGHT)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("LIGHTTYPEID_DIRECTIONALLIGHT", LIGHTTYPEID_DIRECTIONALLIGHT)
+	return l
 }
 
 // LIGHTTYPEID_HEMISPHERICLIGHT returns the LIGHTTYPEID_HEMISPHERICLIGHT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_hemisphericlight
-func (l *Light) LIGHTTYPEID_HEMISPHERICLIGHT(LIGHTTYPEID_HEMISPHERICLIGHT float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTTYPEID_HEMISPHERICLIGHT)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) LIGHTTYPEID_HEMISPHERICLIGHT() float64 {
+	retVal := l.p.Get("LIGHTTYPEID_HEMISPHERICLIGHT")
+	return retVal.Float()
 }
 
 // SetLIGHTTYPEID_HEMISPHERICLIGHT sets the LIGHTTYPEID_HEMISPHERICLIGHT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_hemisphericlight
 func (l *Light) SetLIGHTTYPEID_HEMISPHERICLIGHT(LIGHTTYPEID_HEMISPHERICLIGHT float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTTYPEID_HEMISPHERICLIGHT)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("LIGHTTYPEID_HEMISPHERICLIGHT", LIGHTTYPEID_HEMISPHERICLIGHT)
+	return l
 }
 
 // LIGHTTYPEID_POINTLIGHT returns the LIGHTTYPEID_POINTLIGHT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_pointlight
-func (l *Light) LIGHTTYPEID_POINTLIGHT(LIGHTTYPEID_POINTLIGHT float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTTYPEID_POINTLIGHT)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) LIGHTTYPEID_POINTLIGHT() float64 {
+	retVal := l.p.Get("LIGHTTYPEID_POINTLIGHT")
+	return retVal.Float()
 }
 
 // SetLIGHTTYPEID_POINTLIGHT sets the LIGHTTYPEID_POINTLIGHT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_pointlight
 func (l *Light) SetLIGHTTYPEID_POINTLIGHT(LIGHTTYPEID_POINTLIGHT float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTTYPEID_POINTLIGHT)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("LIGHTTYPEID_POINTLIGHT", LIGHTTYPEID_POINTLIGHT)
+	return l
 }
 
 // LIGHTTYPEID_SPOTLIGHT returns the LIGHTTYPEID_SPOTLIGHT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_spotlight
-func (l *Light) LIGHTTYPEID_SPOTLIGHT(LIGHTTYPEID_SPOTLIGHT float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTTYPEID_SPOTLIGHT)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) LIGHTTYPEID_SPOTLIGHT() float64 {
+	retVal := l.p.Get("LIGHTTYPEID_SPOTLIGHT")
+	return retVal.Float()
 }
 
 // SetLIGHTTYPEID_SPOTLIGHT sets the LIGHTTYPEID_SPOTLIGHT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_spotlight
 func (l *Light) SetLIGHTTYPEID_SPOTLIGHT(LIGHTTYPEID_SPOTLIGHT float64) *Light {
-	p := ba.ctx.Get("Light").New(LIGHTTYPEID_SPOTLIGHT)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("LIGHTTYPEID_SPOTLIGHT", LIGHTTYPEID_SPOTLIGHT)
+	return l
 }
 
 // LightmapMode returns the LightmapMode property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lightmapmode
-func (l *Light) LightmapMode(lightmapMode float64) *Light {
-	p := ba.ctx.Get("Light").New(lightmapMode)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) LightmapMode() float64 {
+	retVal := l.p.Get("lightmapMode")
+	return retVal.Float()
 }
 
 // SetLightmapMode sets the LightmapMode property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#lightmapmode
 func (l *Light) SetLightmapMode(lightmapMode float64) *Light {
-	p := ba.ctx.Get("Light").New(lightmapMode)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("lightmapMode", lightmapMode)
+	return l
 }
 
 // Radius returns the Radius property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#radius
-func (l *Light) Radius(radius float64) *Light {
-	p := ba.ctx.Get("Light").New(radius)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) Radius() float64 {
+	retVal := l.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#radius
 func (l *Light) SetRadius(radius float64) *Light {
-	p := ba.ctx.Get("Light").New(radius)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("radius", radius)
+	return l
 }
 
 // Range returns the Range property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#range
-func (l *Light) Range(range float64) *Light {
-	p := ba.ctx.Get("Light").New(range)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) Range() float64 {
+	retVal := l.p.Get("range")
+	return retVal.Float()
 }
 
 // SetRange sets the Range property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#range
-func (l *Light) SetRange(range float64) *Light {
-	p := ba.ctx.Get("Light").New(range)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) SetRange(r float64) *Light {
+	l.p.Set("range", r)
+	return l
 }
 
 // RenderPriority returns the RenderPriority property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#renderpriority
-func (l *Light) RenderPriority(renderPriority float64) *Light {
-	p := ba.ctx.Get("Light").New(renderPriority)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) RenderPriority() float64 {
+	retVal := l.p.Get("renderPriority")
+	return retVal.Float()
 }
 
 // SetRenderPriority sets the RenderPriority property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#renderpriority
 func (l *Light) SetRenderPriority(renderPriority float64) *Light {
-	p := ba.ctx.Get("Light").New(renderPriority)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("renderPriority", renderPriority)
+	return l
 }
 
 // ShadowEnabled returns the ShadowEnabled property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#shadowenabled
-func (l *Light) ShadowEnabled(shadowEnabled bool) *Light {
-	p := ba.ctx.Get("Light").New(shadowEnabled)
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) ShadowEnabled() bool {
+	retVal := l.p.Get("shadowEnabled")
+	return retVal.Bool()
 }
 
 // SetShadowEnabled sets the ShadowEnabled property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#shadowenabled
 func (l *Light) SetShadowEnabled(shadowEnabled bool) *Light {
-	p := ba.ctx.Get("Light").New(shadowEnabled)
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("shadowEnabled", shadowEnabled)
+	return l
 }
 
 // Specular returns the Specular property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#specular
-func (l *Light) Specular(specular *Color3) *Light {
-	p := ba.ctx.Get("Light").New(specular.JSObject())
-	return LightFromJSObject(p, ba.ctx)
+func (l *Light) Specular() *Color3 {
+	retVal := l.p.Get("specular")
+	return Color3FromJSObject(retVal, l.ctx)
 }
 
 // SetSpecular sets the Specular property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#specular
 func (l *Light) SetSpecular(specular *Color3) *Light {
-	p := ba.ctx.Get("Light").New(specular.JSObject())
-	return LightFromJSObject(p, ba.ctx)
+	l.p.Set("specular", specular.JSObject())
+	return l
 }
-
-*/

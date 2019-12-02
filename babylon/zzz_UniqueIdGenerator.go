@@ -36,22 +36,18 @@ func UniqueIdGeneratorArrayToJSArray(array []*UniqueIdGenerator) []interface{} {
 	return result
 }
 
-/*
-
 // UniqueId returns the UniqueId property of class UniqueIdGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniqueidgenerator#uniqueid
-func (u *UniqueIdGenerator) UniqueId(UniqueId float64) *UniqueIdGenerator {
-	p := ba.ctx.Get("UniqueIdGenerator").New(UniqueId)
-	return UniqueIdGeneratorFromJSObject(p, ba.ctx)
+func (u *UniqueIdGenerator) UniqueId() float64 {
+	retVal := u.p.Get("UniqueId")
+	return retVal.Float()
 }
 
 // SetUniqueId sets the UniqueId property of class UniqueIdGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniqueidgenerator#uniqueid
 func (u *UniqueIdGenerator) SetUniqueId(UniqueId float64) *UniqueIdGenerator {
-	p := ba.ctx.Get("UniqueIdGenerator").New(UniqueId)
-	return UniqueIdGeneratorFromJSObject(p, ba.ctx)
+	u.p.Set("UniqueId", UniqueId)
+	return u
 }
-
-*/

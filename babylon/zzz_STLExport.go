@@ -80,7 +80,3 @@ func (s *STLExport) CreateSTL(meshes *Mesh, opts *STLExportCreateSTLOpts) interf
 	retVal := s.p.Call("CreateSTL", args...)
 	return retVal
 }
-
-/*
-
- */

@@ -36,22 +36,18 @@ func IArrayItemArrayToJSArray(array []*IArrayItem) []interface{} {
 	return result
 }
 
-/*
-
 // Index returns the Index property of class IArrayItem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iarrayitem#index
-func (i *IArrayItem) Index(index float64) *IArrayItem {
-	p := ba.ctx.Get("IArrayItem").New(index)
-	return IArrayItemFromJSObject(p, ba.ctx)
+func (i *IArrayItem) Index() float64 {
+	retVal := i.p.Get("index")
+	return retVal.Float()
 }
 
 // SetIndex sets the Index property of class IArrayItem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iarrayitem#index
 func (i *IArrayItem) SetIndex(index float64) *IArrayItem {
-	p := ba.ctx.Get("IArrayItem").New(index)
-	return IArrayItemFromJSObject(p, ba.ctx)
+	i.p.Set("index", index)
+	return i
 }
-
-*/

@@ -106,86 +106,82 @@ func (w *WebXRController) UpdateFromXRFrame(xrFrame js.Value, referenceSpace js.
 	w.p.Call("updateFromXRFrame", args...)
 }
 
-/*
-
 // GamepadController returns the GamepadController property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#gamepadcontroller
-func (w *WebXRController) GamepadController(gamepadController *WebVRController) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(gamepadController.JSObject())
-	return WebXRControllerFromJSObject(p, ba.ctx)
+func (w *WebXRController) GamepadController() *WebVRController {
+	retVal := w.p.Get("gamepadController")
+	return WebVRControllerFromJSObject(retVal, w.ctx)
 }
 
 // SetGamepadController sets the GamepadController property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#gamepadcontroller
 func (w *WebXRController) SetGamepadController(gamepadController *WebVRController) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(gamepadController.JSObject())
-	return WebXRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("gamepadController", gamepadController.JSObject())
+	return w
 }
 
 // Grip returns the Grip property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#grip
-func (w *WebXRController) Grip(grip *AbstractMesh) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(grip.JSObject())
-	return WebXRControllerFromJSObject(p, ba.ctx)
+func (w *WebXRController) Grip() *AbstractMesh {
+	retVal := w.p.Get("grip")
+	return AbstractMeshFromJSObject(retVal, w.ctx)
 }
 
 // SetGrip sets the Grip property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#grip
 func (w *WebXRController) SetGrip(grip *AbstractMesh) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(grip.JSObject())
-	return WebXRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("grip", grip.JSObject())
+	return w
 }
 
 // InputSource returns the InputSource property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#inputsource
-func (w *WebXRController) InputSource(inputSource js.Value) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(inputSource)
-	return WebXRControllerFromJSObject(p, ba.ctx)
+func (w *WebXRController) InputSource() js.Value {
+	retVal := w.p.Get("inputSource")
+	return retVal
 }
 
 // SetInputSource sets the InputSource property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#inputsource
 func (w *WebXRController) SetInputSource(inputSource js.Value) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(inputSource)
-	return WebXRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("inputSource", inputSource)
+	return w
 }
 
 // OnDisposeObservable returns the OnDisposeObservable property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#ondisposeobservable
-func (w *WebXRController) OnDisposeObservable(onDisposeObservable *Observable) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(onDisposeObservable.JSObject())
-	return WebXRControllerFromJSObject(p, ba.ctx)
+func (w *WebXRController) OnDisposeObservable() *Observable {
+	retVal := w.p.Get("onDisposeObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnDisposeObservable sets the OnDisposeObservable property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#ondisposeobservable
 func (w *WebXRController) SetOnDisposeObservable(onDisposeObservable *Observable) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(onDisposeObservable.JSObject())
-	return WebXRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onDisposeObservable", onDisposeObservable.JSObject())
+	return w
 }
 
 // Pointer returns the Pointer property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#pointer
-func (w *WebXRController) Pointer(pointer *AbstractMesh) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(pointer.JSObject())
-	return WebXRControllerFromJSObject(p, ba.ctx)
+func (w *WebXRController) Pointer() *AbstractMesh {
+	retVal := w.p.Get("pointer")
+	return AbstractMeshFromJSObject(retVal, w.ctx)
 }
 
 // SetPointer sets the Pointer property of class WebXRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#pointer
 func (w *WebXRController) SetPointer(pointer *AbstractMesh) *WebXRController {
-	p := ba.ctx.Get("WebXRController").New(pointer.JSObject())
-	return WebXRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("pointer", pointer.JSObject())
+	return w
 }
-
-*/

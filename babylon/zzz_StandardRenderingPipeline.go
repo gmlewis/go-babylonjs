@@ -106,854 +106,850 @@ func (s *StandardRenderingPipeline) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // Animations returns the Animations property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#animations
-func (s *StandardRenderingPipeline) Animations(animations *Animation) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(animations.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) Animations() *Animation {
+	retVal := s.p.Get("animations")
+	return AnimationFromJSObject(retVal, s.ctx)
 }
 
 // SetAnimations sets the Animations property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#animations
 func (s *StandardRenderingPipeline) SetAnimations(animations *Animation) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(animations.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("animations", animations.JSObject())
+	return s
 }
 
 // BlurHPostProcesses returns the BlurHPostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#blurhpostprocesses
-func (s *StandardRenderingPipeline) BlurHPostProcesses(blurHPostProcesses *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(blurHPostProcesses.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) BlurHPostProcesses() *PostProcess {
+	retVal := s.p.Get("blurHPostProcesses")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetBlurHPostProcesses sets the BlurHPostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#blurhpostprocesses
 func (s *StandardRenderingPipeline) SetBlurHPostProcesses(blurHPostProcesses *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(blurHPostProcesses.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("blurHPostProcesses", blurHPostProcesses.JSObject())
+	return s
 }
 
 // BlurVPostProcesses returns the BlurVPostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#blurvpostprocesses
-func (s *StandardRenderingPipeline) BlurVPostProcesses(blurVPostProcesses *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(blurVPostProcesses.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) BlurVPostProcesses() *PostProcess {
+	retVal := s.p.Get("blurVPostProcesses")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetBlurVPostProcesses sets the BlurVPostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#blurvpostprocesses
 func (s *StandardRenderingPipeline) SetBlurVPostProcesses(blurVPostProcesses *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(blurVPostProcesses.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("blurVPostProcesses", blurVPostProcesses.JSObject())
+	return s
 }
 
 // BlurWidth returns the BlurWidth property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#blurwidth
-func (s *StandardRenderingPipeline) BlurWidth(blurWidth float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(blurWidth)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) BlurWidth() float64 {
+	retVal := s.p.Get("blurWidth")
+	return retVal.Float()
 }
 
 // SetBlurWidth sets the BlurWidth property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#blurwidth
 func (s *StandardRenderingPipeline) SetBlurWidth(blurWidth float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(blurWidth)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("blurWidth", blurWidth)
+	return s
 }
 
 // BrightPassPostProcess returns the BrightPassPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#brightpasspostprocess
-func (s *StandardRenderingPipeline) BrightPassPostProcess(brightPassPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(brightPassPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) BrightPassPostProcess() *PostProcess {
+	retVal := s.p.Get("brightPassPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetBrightPassPostProcess sets the BrightPassPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#brightpasspostprocess
 func (s *StandardRenderingPipeline) SetBrightPassPostProcess(brightPassPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(brightPassPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("brightPassPostProcess", brightPassPostProcess.JSObject())
+	return s
 }
 
 // BrightThreshold returns the BrightThreshold property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#brightthreshold
-func (s *StandardRenderingPipeline) BrightThreshold(brightThreshold float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(brightThreshold)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) BrightThreshold() float64 {
+	retVal := s.p.Get("brightThreshold")
+	return retVal.Float()
 }
 
 // SetBrightThreshold sets the BrightThreshold property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#brightthreshold
 func (s *StandardRenderingPipeline) SetBrightThreshold(brightThreshold float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(brightThreshold)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("brightThreshold", brightThreshold)
+	return s
 }
 
 // DepthOfFieldBlurWidth returns the DepthOfFieldBlurWidth property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#depthoffieldblurwidth
-func (s *StandardRenderingPipeline) DepthOfFieldBlurWidth(depthOfFieldBlurWidth float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(depthOfFieldBlurWidth)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) DepthOfFieldBlurWidth() float64 {
+	retVal := s.p.Get("depthOfFieldBlurWidth")
+	return retVal.Float()
 }
 
 // SetDepthOfFieldBlurWidth sets the DepthOfFieldBlurWidth property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#depthoffieldblurwidth
 func (s *StandardRenderingPipeline) SetDepthOfFieldBlurWidth(depthOfFieldBlurWidth float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(depthOfFieldBlurWidth)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("depthOfFieldBlurWidth", depthOfFieldBlurWidth)
+	return s
 }
 
 // DepthOfFieldDistance returns the DepthOfFieldDistance property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#depthoffielddistance
-func (s *StandardRenderingPipeline) DepthOfFieldDistance(depthOfFieldDistance float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(depthOfFieldDistance)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) DepthOfFieldDistance() float64 {
+	retVal := s.p.Get("depthOfFieldDistance")
+	return retVal.Float()
 }
 
 // SetDepthOfFieldDistance sets the DepthOfFieldDistance property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#depthoffielddistance
 func (s *StandardRenderingPipeline) SetDepthOfFieldDistance(depthOfFieldDistance float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(depthOfFieldDistance)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("depthOfFieldDistance", depthOfFieldDistance)
+	return s
 }
 
 // DepthOfFieldPostProcess returns the DepthOfFieldPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#depthoffieldpostprocess
-func (s *StandardRenderingPipeline) DepthOfFieldPostProcess(depthOfFieldPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(depthOfFieldPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) DepthOfFieldPostProcess() *PostProcess {
+	retVal := s.p.Get("depthOfFieldPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetDepthOfFieldPostProcess sets the DepthOfFieldPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#depthoffieldpostprocess
 func (s *StandardRenderingPipeline) SetDepthOfFieldPostProcess(depthOfFieldPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(depthOfFieldPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("depthOfFieldPostProcess", depthOfFieldPostProcess.JSObject())
+	return s
 }
 
 // DownSampleX4PostProcess returns the DownSampleX4PostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#downsamplex4postprocess
-func (s *StandardRenderingPipeline) DownSampleX4PostProcess(downSampleX4PostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(downSampleX4PostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) DownSampleX4PostProcess() *PostProcess {
+	retVal := s.p.Get("downSampleX4PostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetDownSampleX4PostProcess sets the DownSampleX4PostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#downsamplex4postprocess
 func (s *StandardRenderingPipeline) SetDownSampleX4PostProcess(downSampleX4PostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(downSampleX4PostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("downSampleX4PostProcess", downSampleX4PostProcess.JSObject())
+	return s
 }
 
 // Exposure returns the Exposure property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#exposure
-func (s *StandardRenderingPipeline) Exposure(exposure float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(exposure)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) Exposure() float64 {
+	retVal := s.p.Get("exposure")
+	return retVal.Float()
 }
 
 // SetExposure sets the Exposure property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#exposure
 func (s *StandardRenderingPipeline) SetExposure(exposure float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(exposure)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("exposure", exposure)
+	return s
 }
 
 // FxaaEnabled returns the FxaaEnabled property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#fxaaenabled
-func (s *StandardRenderingPipeline) FxaaEnabled(fxaaEnabled bool) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(fxaaEnabled)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) FxaaEnabled() bool {
+	retVal := s.p.Get("fxaaEnabled")
+	return retVal.Bool()
 }
 
 // SetFxaaEnabled sets the FxaaEnabled property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#fxaaenabled
 func (s *StandardRenderingPipeline) SetFxaaEnabled(fxaaEnabled bool) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(fxaaEnabled)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("fxaaEnabled", fxaaEnabled)
+	return s
 }
 
 // FxaaPostProcess returns the FxaaPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#fxaapostprocess
-func (s *StandardRenderingPipeline) FxaaPostProcess(fxaaPostProcess *FxaaPostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(fxaaPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) FxaaPostProcess() *FxaaPostProcess {
+	retVal := s.p.Get("fxaaPostProcess")
+	return FxaaPostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetFxaaPostProcess sets the FxaaPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#fxaapostprocess
 func (s *StandardRenderingPipeline) SetFxaaPostProcess(fxaaPostProcess *FxaaPostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(fxaaPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("fxaaPostProcess", fxaaPostProcess.JSObject())
+	return s
 }
 
 // HdrAutoExposure returns the HdrAutoExposure property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrautoexposure
-func (s *StandardRenderingPipeline) HdrAutoExposure(hdrAutoExposure bool) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrAutoExposure)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) HdrAutoExposure() bool {
+	retVal := s.p.Get("hdrAutoExposure")
+	return retVal.Bool()
 }
 
 // SetHdrAutoExposure sets the HdrAutoExposure property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrautoexposure
 func (s *StandardRenderingPipeline) SetHdrAutoExposure(hdrAutoExposure bool) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrAutoExposure)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("hdrAutoExposure", hdrAutoExposure)
+	return s
 }
 
 // HdrDecreaseRate returns the HdrDecreaseRate property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrdecreaserate
-func (s *StandardRenderingPipeline) HdrDecreaseRate(hdrDecreaseRate float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrDecreaseRate)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) HdrDecreaseRate() float64 {
+	retVal := s.p.Get("hdrDecreaseRate")
+	return retVal.Float()
 }
 
 // SetHdrDecreaseRate sets the HdrDecreaseRate property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrdecreaserate
 func (s *StandardRenderingPipeline) SetHdrDecreaseRate(hdrDecreaseRate float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrDecreaseRate)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("hdrDecreaseRate", hdrDecreaseRate)
+	return s
 }
 
 // HdrFinalPostProcess returns the HdrFinalPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrfinalpostprocess
-func (s *StandardRenderingPipeline) HdrFinalPostProcess(hdrFinalPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrFinalPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) HdrFinalPostProcess() *PostProcess {
+	retVal := s.p.Get("hdrFinalPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetHdrFinalPostProcess sets the HdrFinalPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrfinalpostprocess
 func (s *StandardRenderingPipeline) SetHdrFinalPostProcess(hdrFinalPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrFinalPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("hdrFinalPostProcess", hdrFinalPostProcess.JSObject())
+	return s
 }
 
 // HdrIncreaseRate returns the HdrIncreaseRate property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrincreaserate
-func (s *StandardRenderingPipeline) HdrIncreaseRate(hdrIncreaseRate float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrIncreaseRate)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) HdrIncreaseRate() float64 {
+	retVal := s.p.Get("hdrIncreaseRate")
+	return retVal.Float()
 }
 
 // SetHdrIncreaseRate sets the HdrIncreaseRate property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrincreaserate
 func (s *StandardRenderingPipeline) SetHdrIncreaseRate(hdrIncreaseRate float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrIncreaseRate)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("hdrIncreaseRate", hdrIncreaseRate)
+	return s
 }
 
 // HdrMinimumLuminance returns the HdrMinimumLuminance property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrminimumluminance
-func (s *StandardRenderingPipeline) HdrMinimumLuminance(hdrMinimumLuminance float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrMinimumLuminance)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) HdrMinimumLuminance() float64 {
+	retVal := s.p.Get("hdrMinimumLuminance")
+	return retVal.Float()
 }
 
 // SetHdrMinimumLuminance sets the HdrMinimumLuminance property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrminimumluminance
 func (s *StandardRenderingPipeline) SetHdrMinimumLuminance(hdrMinimumLuminance float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrMinimumLuminance)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("hdrMinimumLuminance", hdrMinimumLuminance)
+	return s
 }
 
 // HdrPostProcess returns the HdrPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrpostprocess
-func (s *StandardRenderingPipeline) HdrPostProcess(hdrPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) HdrPostProcess() *PostProcess {
+	retVal := s.p.Get("hdrPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetHdrPostProcess sets the HdrPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#hdrpostprocess
 func (s *StandardRenderingPipeline) SetHdrPostProcess(hdrPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(hdrPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("hdrPostProcess", hdrPostProcess.JSObject())
+	return s
 }
 
 // HorizontalBlur returns the HorizontalBlur property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#horizontalblur
-func (s *StandardRenderingPipeline) HorizontalBlur(horizontalBlur bool) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(horizontalBlur)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) HorizontalBlur() bool {
+	retVal := s.p.Get("horizontalBlur")
+	return retVal.Bool()
 }
 
 // SetHorizontalBlur sets the HorizontalBlur property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#horizontalblur
 func (s *StandardRenderingPipeline) SetHorizontalBlur(horizontalBlur bool) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(horizontalBlur)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("horizontalBlur", horizontalBlur)
+	return s
 }
 
 // LensColorTexture returns the LensColorTexture property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lenscolortexture
-func (s *StandardRenderingPipeline) LensColorTexture(lensColorTexture *Texture) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensColorTexture.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensColorTexture() *Texture {
+	retVal := s.p.Get("lensColorTexture")
+	return TextureFromJSObject(retVal, s.ctx)
 }
 
 // SetLensColorTexture sets the LensColorTexture property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lenscolortexture
 func (s *StandardRenderingPipeline) SetLensColorTexture(lensColorTexture *Texture) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensColorTexture.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensColorTexture", lensColorTexture.JSObject())
+	return s
 }
 
 // LensFlareBlurWidth returns the LensFlareBlurWidth property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflareblurwidth
-func (s *StandardRenderingPipeline) LensFlareBlurWidth(lensFlareBlurWidth float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareBlurWidth)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensFlareBlurWidth() float64 {
+	retVal := s.p.Get("lensFlareBlurWidth")
+	return retVal.Float()
 }
 
 // SetLensFlareBlurWidth sets the LensFlareBlurWidth property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflareblurwidth
 func (s *StandardRenderingPipeline) SetLensFlareBlurWidth(lensFlareBlurWidth float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareBlurWidth)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensFlareBlurWidth", lensFlareBlurWidth)
+	return s
 }
 
 // LensFlareComposePostProcess returns the LensFlareComposePostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflarecomposepostprocess
-func (s *StandardRenderingPipeline) LensFlareComposePostProcess(lensFlareComposePostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareComposePostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensFlareComposePostProcess() *PostProcess {
+	retVal := s.p.Get("lensFlareComposePostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetLensFlareComposePostProcess sets the LensFlareComposePostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflarecomposepostprocess
 func (s *StandardRenderingPipeline) SetLensFlareComposePostProcess(lensFlareComposePostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareComposePostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensFlareComposePostProcess", lensFlareComposePostProcess.JSObject())
+	return s
 }
 
 // LensFlareDirtTexture returns the LensFlareDirtTexture property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflaredirttexture
-func (s *StandardRenderingPipeline) LensFlareDirtTexture(lensFlareDirtTexture *Texture) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareDirtTexture.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensFlareDirtTexture() *Texture {
+	retVal := s.p.Get("lensFlareDirtTexture")
+	return TextureFromJSObject(retVal, s.ctx)
 }
 
 // SetLensFlareDirtTexture sets the LensFlareDirtTexture property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflaredirttexture
 func (s *StandardRenderingPipeline) SetLensFlareDirtTexture(lensFlareDirtTexture *Texture) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareDirtTexture.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensFlareDirtTexture", lensFlareDirtTexture.JSObject())
+	return s
 }
 
 // LensFlareDistortionStrength returns the LensFlareDistortionStrength property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflaredistortionstrength
-func (s *StandardRenderingPipeline) LensFlareDistortionStrength(lensFlareDistortionStrength float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareDistortionStrength)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensFlareDistortionStrength() float64 {
+	retVal := s.p.Get("lensFlareDistortionStrength")
+	return retVal.Float()
 }
 
 // SetLensFlareDistortionStrength sets the LensFlareDistortionStrength property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflaredistortionstrength
 func (s *StandardRenderingPipeline) SetLensFlareDistortionStrength(lensFlareDistortionStrength float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareDistortionStrength)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensFlareDistortionStrength", lensFlareDistortionStrength)
+	return s
 }
 
 // LensFlareFinalPostProcess returns the LensFlareFinalPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflarefinalpostprocess
-func (s *StandardRenderingPipeline) LensFlareFinalPostProcess(lensFlareFinalPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareFinalPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensFlareFinalPostProcess() *PostProcess {
+	retVal := s.p.Get("lensFlareFinalPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetLensFlareFinalPostProcess sets the LensFlareFinalPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflarefinalpostprocess
 func (s *StandardRenderingPipeline) SetLensFlareFinalPostProcess(lensFlareFinalPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareFinalPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensFlareFinalPostProcess", lensFlareFinalPostProcess.JSObject())
+	return s
 }
 
 // LensFlareGhostDispersal returns the LensFlareGhostDispersal property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflareghostdispersal
-func (s *StandardRenderingPipeline) LensFlareGhostDispersal(lensFlareGhostDispersal float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareGhostDispersal)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensFlareGhostDispersal() float64 {
+	retVal := s.p.Get("lensFlareGhostDispersal")
+	return retVal.Float()
 }
 
 // SetLensFlareGhostDispersal sets the LensFlareGhostDispersal property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflareghostdispersal
 func (s *StandardRenderingPipeline) SetLensFlareGhostDispersal(lensFlareGhostDispersal float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareGhostDispersal)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensFlareGhostDispersal", lensFlareGhostDispersal)
+	return s
 }
 
 // LensFlareHaloWidth returns the LensFlareHaloWidth property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflarehalowidth
-func (s *StandardRenderingPipeline) LensFlareHaloWidth(lensFlareHaloWidth float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareHaloWidth)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensFlareHaloWidth() float64 {
+	retVal := s.p.Get("lensFlareHaloWidth")
+	return retVal.Float()
 }
 
 // SetLensFlareHaloWidth sets the LensFlareHaloWidth property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflarehalowidth
 func (s *StandardRenderingPipeline) SetLensFlareHaloWidth(lensFlareHaloWidth float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareHaloWidth)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensFlareHaloWidth", lensFlareHaloWidth)
+	return s
 }
 
 // LensFlarePostProcess returns the LensFlarePostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflarepostprocess
-func (s *StandardRenderingPipeline) LensFlarePostProcess(lensFlarePostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlarePostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensFlarePostProcess() *PostProcess {
+	retVal := s.p.Get("lensFlarePostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetLensFlarePostProcess sets the LensFlarePostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflarepostprocess
 func (s *StandardRenderingPipeline) SetLensFlarePostProcess(lensFlarePostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlarePostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensFlarePostProcess", lensFlarePostProcess.JSObject())
+	return s
 }
 
 // LensFlareStrength returns the LensFlareStrength property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflarestrength
-func (s *StandardRenderingPipeline) LensFlareStrength(lensFlareStrength float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareStrength)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensFlareStrength() float64 {
+	retVal := s.p.Get("lensFlareStrength")
+	return retVal.Float()
 }
 
 // SetLensFlareStrength sets the LensFlareStrength property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensflarestrength
 func (s *StandardRenderingPipeline) SetLensFlareStrength(lensFlareStrength float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensFlareStrength)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensFlareStrength", lensFlareStrength)
+	return s
 }
 
 // LensStarTexture returns the LensStarTexture property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensstartexture
-func (s *StandardRenderingPipeline) LensStarTexture(lensStarTexture *Texture) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensStarTexture.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensStarTexture() *Texture {
+	retVal := s.p.Get("lensStarTexture")
+	return TextureFromJSObject(retVal, s.ctx)
 }
 
 // SetLensStarTexture sets the LensStarTexture property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lensstartexture
 func (s *StandardRenderingPipeline) SetLensStarTexture(lensStarTexture *Texture) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensStarTexture.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensStarTexture", lensStarTexture.JSObject())
+	return s
 }
 
 // LensTexture returns the LensTexture property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lenstexture
-func (s *StandardRenderingPipeline) LensTexture(lensTexture *Texture) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensTexture.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LensTexture() *Texture {
+	retVal := s.p.Get("lensTexture")
+	return TextureFromJSObject(retVal, s.ctx)
 }
 
 // SetLensTexture sets the LensTexture property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#lenstexture
 func (s *StandardRenderingPipeline) SetLensTexture(lensTexture *Texture) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(lensTexture.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("lensTexture", lensTexture.JSObject())
+	return s
 }
 
 // LuminanceDownSamplePostProcesses returns the LuminanceDownSamplePostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#luminancedownsamplepostprocesses
-func (s *StandardRenderingPipeline) LuminanceDownSamplePostProcesses(luminanceDownSamplePostProcesses *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(luminanceDownSamplePostProcesses.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LuminanceDownSamplePostProcesses() *PostProcess {
+	retVal := s.p.Get("luminanceDownSamplePostProcesses")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetLuminanceDownSamplePostProcesses sets the LuminanceDownSamplePostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#luminancedownsamplepostprocesses
 func (s *StandardRenderingPipeline) SetLuminanceDownSamplePostProcesses(luminanceDownSamplePostProcesses *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(luminanceDownSamplePostProcesses.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("luminanceDownSamplePostProcesses", luminanceDownSamplePostProcesses.JSObject())
+	return s
 }
 
 // LuminancePostProcess returns the LuminancePostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#luminancepostprocess
-func (s *StandardRenderingPipeline) LuminancePostProcess(luminancePostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(luminancePostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LuminancePostProcess() *PostProcess {
+	retVal := s.p.Get("luminancePostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetLuminancePostProcess sets the LuminancePostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#luminancepostprocess
 func (s *StandardRenderingPipeline) SetLuminancePostProcess(luminancePostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(luminancePostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("luminancePostProcess", luminancePostProcess.JSObject())
+	return s
 }
 
 // LuminanceSteps returns the LuminanceSteps property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#luminancesteps
-func (s *StandardRenderingPipeline) LuminanceSteps(LuminanceSteps float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(LuminanceSteps)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) LuminanceSteps() float64 {
+	retVal := s.p.Get("LuminanceSteps")
+	return retVal.Float()
 }
 
 // SetLuminanceSteps sets the LuminanceSteps property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#luminancesteps
 func (s *StandardRenderingPipeline) SetLuminanceSteps(LuminanceSteps float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(LuminanceSteps)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("LuminanceSteps", LuminanceSteps)
+	return s
 }
 
 // MotionBlurPostProcess returns the MotionBlurPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#motionblurpostprocess
-func (s *StandardRenderingPipeline) MotionBlurPostProcess(motionBlurPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(motionBlurPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) MotionBlurPostProcess() *PostProcess {
+	retVal := s.p.Get("motionBlurPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetMotionBlurPostProcess sets the MotionBlurPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#motionblurpostprocess
 func (s *StandardRenderingPipeline) SetMotionBlurPostProcess(motionBlurPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(motionBlurPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("motionBlurPostProcess", motionBlurPostProcess.JSObject())
+	return s
 }
 
 // MotionBlurSamples returns the MotionBlurSamples property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#motionblursamples
-func (s *StandardRenderingPipeline) MotionBlurSamples(motionBlurSamples float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(motionBlurSamples)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) MotionBlurSamples() float64 {
+	retVal := s.p.Get("motionBlurSamples")
+	return retVal.Float()
 }
 
 // SetMotionBlurSamples sets the MotionBlurSamples property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#motionblursamples
 func (s *StandardRenderingPipeline) SetMotionBlurSamples(motionBlurSamples float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(motionBlurSamples)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("motionBlurSamples", motionBlurSamples)
+	return s
 }
 
 // MotionStrength returns the MotionStrength property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#motionstrength
-func (s *StandardRenderingPipeline) MotionStrength(motionStrength float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(motionStrength)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) MotionStrength() float64 {
+	retVal := s.p.Get("motionStrength")
+	return retVal.Float()
 }
 
 // SetMotionStrength sets the MotionStrength property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#motionstrength
 func (s *StandardRenderingPipeline) SetMotionStrength(motionStrength float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(motionStrength)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("motionStrength", motionStrength)
+	return s
 }
 
 // ObjectBasedMotionBlur returns the ObjectBasedMotionBlur property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#objectbasedmotionblur
-func (s *StandardRenderingPipeline) ObjectBasedMotionBlur(objectBasedMotionBlur bool) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(objectBasedMotionBlur)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) ObjectBasedMotionBlur() bool {
+	retVal := s.p.Get("objectBasedMotionBlur")
+	return retVal.Bool()
 }
 
 // SetObjectBasedMotionBlur sets the ObjectBasedMotionBlur property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#objectbasedmotionblur
 func (s *StandardRenderingPipeline) SetObjectBasedMotionBlur(objectBasedMotionBlur bool) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(objectBasedMotionBlur)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("objectBasedMotionBlur", objectBasedMotionBlur)
+	return s
 }
 
 // OriginalPostProcess returns the OriginalPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#originalpostprocess
-func (s *StandardRenderingPipeline) OriginalPostProcess(originalPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(originalPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) OriginalPostProcess() *PostProcess {
+	retVal := s.p.Get("originalPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetOriginalPostProcess sets the OriginalPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#originalpostprocess
 func (s *StandardRenderingPipeline) SetOriginalPostProcess(originalPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(originalPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("originalPostProcess", originalPostProcess.JSObject())
+	return s
 }
 
 // Samples returns the Samples property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#samples
-func (s *StandardRenderingPipeline) Samples(samples float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(samples)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) Samples() float64 {
+	retVal := s.p.Get("samples")
+	return retVal.Float()
 }
 
 // SetSamples sets the Samples property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#samples
 func (s *StandardRenderingPipeline) SetSamples(samples float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(samples)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("samples", samples)
+	return s
 }
 
 // SourceLight returns the SourceLight property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#sourcelight
-func (s *StandardRenderingPipeline) SourceLight(sourceLight *SpotLight) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(sourceLight.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) SourceLight() *SpotLight {
+	retVal := s.p.Get("sourceLight")
+	return SpotLightFromJSObject(retVal, s.ctx)
 }
 
 // SetSourceLight sets the SourceLight property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#sourcelight
 func (s *StandardRenderingPipeline) SetSourceLight(sourceLight *SpotLight) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(sourceLight.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("sourceLight", sourceLight.JSObject())
+	return s
 }
 
 // TextureAdderFinalPostProcess returns the TextureAdderFinalPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#textureadderfinalpostprocess
-func (s *StandardRenderingPipeline) TextureAdderFinalPostProcess(textureAdderFinalPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(textureAdderFinalPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) TextureAdderFinalPostProcess() *PostProcess {
+	retVal := s.p.Get("textureAdderFinalPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetTextureAdderFinalPostProcess sets the TextureAdderFinalPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#textureadderfinalpostprocess
 func (s *StandardRenderingPipeline) SetTextureAdderFinalPostProcess(textureAdderFinalPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(textureAdderFinalPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("textureAdderFinalPostProcess", textureAdderFinalPostProcess.JSObject())
+	return s
 }
 
 // TextureAdderPostProcess returns the TextureAdderPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#textureadderpostprocess
-func (s *StandardRenderingPipeline) TextureAdderPostProcess(textureAdderPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(textureAdderPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) TextureAdderPostProcess() *PostProcess {
+	retVal := s.p.Get("textureAdderPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetTextureAdderPostProcess sets the TextureAdderPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#textureadderpostprocess
 func (s *StandardRenderingPipeline) SetTextureAdderPostProcess(textureAdderPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(textureAdderPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("textureAdderPostProcess", textureAdderPostProcess.JSObject())
+	return s
 }
 
 // VolumetricLightBlurScale returns the VolumetricLightBlurScale property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightblurscale
-func (s *StandardRenderingPipeline) VolumetricLightBlurScale(volumetricLightBlurScale float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightBlurScale)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) VolumetricLightBlurScale() float64 {
+	retVal := s.p.Get("volumetricLightBlurScale")
+	return retVal.Float()
 }
 
 // SetVolumetricLightBlurScale sets the VolumetricLightBlurScale property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightblurscale
 func (s *StandardRenderingPipeline) SetVolumetricLightBlurScale(volumetricLightBlurScale float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightBlurScale)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("volumetricLightBlurScale", volumetricLightBlurScale)
+	return s
 }
 
 // VolumetricLightCoefficient returns the VolumetricLightCoefficient property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightcoefficient
-func (s *StandardRenderingPipeline) VolumetricLightCoefficient(volumetricLightCoefficient float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightCoefficient)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) VolumetricLightCoefficient() float64 {
+	retVal := s.p.Get("volumetricLightCoefficient")
+	return retVal.Float()
 }
 
 // SetVolumetricLightCoefficient sets the VolumetricLightCoefficient property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightcoefficient
 func (s *StandardRenderingPipeline) SetVolumetricLightCoefficient(volumetricLightCoefficient float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightCoefficient)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("volumetricLightCoefficient", volumetricLightCoefficient)
+	return s
 }
 
 // VolumetricLightFinalPostProcess returns the VolumetricLightFinalPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightfinalpostprocess
-func (s *StandardRenderingPipeline) VolumetricLightFinalPostProcess(volumetricLightFinalPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightFinalPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) VolumetricLightFinalPostProcess() *PostProcess {
+	retVal := s.p.Get("volumetricLightFinalPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetVolumetricLightFinalPostProcess sets the VolumetricLightFinalPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightfinalpostprocess
 func (s *StandardRenderingPipeline) SetVolumetricLightFinalPostProcess(volumetricLightFinalPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightFinalPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("volumetricLightFinalPostProcess", volumetricLightFinalPostProcess.JSObject())
+	return s
 }
 
 // VolumetricLightMergePostProces returns the VolumetricLightMergePostProces property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightmergepostproces
-func (s *StandardRenderingPipeline) VolumetricLightMergePostProces(volumetricLightMergePostProces *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightMergePostProces.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) VolumetricLightMergePostProces() *PostProcess {
+	retVal := s.p.Get("volumetricLightMergePostProces")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetVolumetricLightMergePostProces sets the VolumetricLightMergePostProces property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightmergepostproces
 func (s *StandardRenderingPipeline) SetVolumetricLightMergePostProces(volumetricLightMergePostProces *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightMergePostProces.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("volumetricLightMergePostProces", volumetricLightMergePostProces.JSObject())
+	return s
 }
 
 // VolumetricLightPostProcess returns the VolumetricLightPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightpostprocess
-func (s *StandardRenderingPipeline) VolumetricLightPostProcess(volumetricLightPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) VolumetricLightPostProcess() *PostProcess {
+	retVal := s.p.Get("volumetricLightPostProcess")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetVolumetricLightPostProcess sets the VolumetricLightPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightpostprocess
 func (s *StandardRenderingPipeline) SetVolumetricLightPostProcess(volumetricLightPostProcess *PostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("volumetricLightPostProcess", volumetricLightPostProcess.JSObject())
+	return s
 }
 
 // VolumetricLightPower returns the VolumetricLightPower property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightpower
-func (s *StandardRenderingPipeline) VolumetricLightPower(volumetricLightPower float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightPower)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) VolumetricLightPower() float64 {
+	retVal := s.p.Get("volumetricLightPower")
+	return retVal.Float()
 }
 
 // SetVolumetricLightPower sets the VolumetricLightPower property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightpower
 func (s *StandardRenderingPipeline) SetVolumetricLightPower(volumetricLightPower float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightPower)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("volumetricLightPower", volumetricLightPower)
+	return s
 }
 
 // VolumetricLightSmoothXPostProcess returns the VolumetricLightSmoothXPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightsmoothxpostprocess
-func (s *StandardRenderingPipeline) VolumetricLightSmoothXPostProcess(volumetricLightSmoothXPostProcess *BlurPostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightSmoothXPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) VolumetricLightSmoothXPostProcess() *BlurPostProcess {
+	retVal := s.p.Get("volumetricLightSmoothXPostProcess")
+	return BlurPostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetVolumetricLightSmoothXPostProcess sets the VolumetricLightSmoothXPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightsmoothxpostprocess
 func (s *StandardRenderingPipeline) SetVolumetricLightSmoothXPostProcess(volumetricLightSmoothXPostProcess *BlurPostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightSmoothXPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("volumetricLightSmoothXPostProcess", volumetricLightSmoothXPostProcess.JSObject())
+	return s
 }
 
 // VolumetricLightSmoothYPostProcess returns the VolumetricLightSmoothYPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightsmoothypostprocess
-func (s *StandardRenderingPipeline) VolumetricLightSmoothYPostProcess(volumetricLightSmoothYPostProcess *BlurPostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightSmoothYPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) VolumetricLightSmoothYPostProcess() *BlurPostProcess {
+	retVal := s.p.Get("volumetricLightSmoothYPostProcess")
+	return BlurPostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetVolumetricLightSmoothYPostProcess sets the VolumetricLightSmoothYPostProcess property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightsmoothypostprocess
 func (s *StandardRenderingPipeline) SetVolumetricLightSmoothYPostProcess(volumetricLightSmoothYPostProcess *BlurPostProcess) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightSmoothYPostProcess.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("volumetricLightSmoothYPostProcess", volumetricLightSmoothYPostProcess.JSObject())
+	return s
 }
 
 // VolumetricLightStepsCount returns the VolumetricLightStepsCount property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightstepscount
-func (s *StandardRenderingPipeline) VolumetricLightStepsCount(volumetricLightStepsCount float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightStepsCount)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+func (s *StandardRenderingPipeline) VolumetricLightStepsCount() float64 {
+	retVal := s.p.Get("volumetricLightStepsCount")
+	return retVal.Float()
 }
 
 // SetVolumetricLightStepsCount sets the VolumetricLightStepsCount property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#volumetriclightstepscount
 func (s *StandardRenderingPipeline) SetVolumetricLightStepsCount(volumetricLightStepsCount float64) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(volumetricLightStepsCount)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("volumetricLightStepsCount", volumetricLightStepsCount)
+	return s
 }
-
-*/

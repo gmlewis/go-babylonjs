@@ -124,54 +124,50 @@ func (o *OctreeSceneComponent) Register() {
 	o.p.Call("register")
 }
 
-/*
-
 // ChecksIsEnabled returns the ChecksIsEnabled property of class OctreeSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#checksisenabled
-func (o *OctreeSceneComponent) ChecksIsEnabled(checksIsEnabled bool) *OctreeSceneComponent {
-	p := ba.ctx.Get("OctreeSceneComponent").New(checksIsEnabled)
-	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+func (o *OctreeSceneComponent) ChecksIsEnabled() bool {
+	retVal := o.p.Get("checksIsEnabled")
+	return retVal.Bool()
 }
 
 // SetChecksIsEnabled sets the ChecksIsEnabled property of class OctreeSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#checksisenabled
 func (o *OctreeSceneComponent) SetChecksIsEnabled(checksIsEnabled bool) *OctreeSceneComponent {
-	p := ba.ctx.Get("OctreeSceneComponent").New(checksIsEnabled)
-	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+	o.p.Set("checksIsEnabled", checksIsEnabled)
+	return o
 }
 
 // Name returns the Name property of class OctreeSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#name
-func (o *OctreeSceneComponent) Name(name string) *OctreeSceneComponent {
-	p := ba.ctx.Get("OctreeSceneComponent").New(name)
-	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+func (o *OctreeSceneComponent) Name() string {
+	retVal := o.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class OctreeSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#name
 func (o *OctreeSceneComponent) SetName(name string) *OctreeSceneComponent {
-	p := ba.ctx.Get("OctreeSceneComponent").New(name)
-	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+	o.p.Set("name", name)
+	return o
 }
 
 // Scene returns the Scene property of class OctreeSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#scene
-func (o *OctreeSceneComponent) Scene(scene *Scene) *OctreeSceneComponent {
-	p := ba.ctx.Get("OctreeSceneComponent").New(scene.JSObject())
-	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+func (o *OctreeSceneComponent) Scene() *Scene {
+	retVal := o.p.Get("scene")
+	return SceneFromJSObject(retVal, o.ctx)
 }
 
 // SetScene sets the Scene property of class OctreeSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#scene
 func (o *OctreeSceneComponent) SetScene(scene *Scene) *OctreeSceneComponent {
-	p := ba.ctx.Get("OctreeSceneComponent").New(scene.JSObject())
-	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+	o.p.Set("scene", scene.JSObject())
+	return o
 }
-
-*/

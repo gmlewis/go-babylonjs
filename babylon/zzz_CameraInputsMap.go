@@ -35,7 +35,3 @@ func CameraInputsMapArrayToJSArray(array []*CameraInputsMap) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

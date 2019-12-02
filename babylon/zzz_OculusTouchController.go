@@ -75,166 +75,162 @@ func (o *OculusTouchController) InitControllerMesh(scene *Scene, opts *OculusTou
 	o.p.Call("initControllerMesh", args...)
 }
 
-/*
-
 // MODEL_BASE_URL returns the MODEL_BASE_URL property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#model_base_url
-func (o *OculusTouchController) MODEL_BASE_URL(MODEL_BASE_URL string) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(MODEL_BASE_URL)
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+func (o *OculusTouchController) MODEL_BASE_URL() string {
+	retVal := o.p.Get("MODEL_BASE_URL")
+	return retVal.String()
 }
 
 // SetMODEL_BASE_URL sets the MODEL_BASE_URL property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#model_base_url
 func (o *OculusTouchController) SetMODEL_BASE_URL(MODEL_BASE_URL string) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(MODEL_BASE_URL)
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+	o.p.Set("MODEL_BASE_URL", MODEL_BASE_URL)
+	return o
 }
 
 // MODEL_LEFT_FILENAME returns the MODEL_LEFT_FILENAME property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#model_left_filename
-func (o *OculusTouchController) MODEL_LEFT_FILENAME(MODEL_LEFT_FILENAME string) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(MODEL_LEFT_FILENAME)
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+func (o *OculusTouchController) MODEL_LEFT_FILENAME() string {
+	retVal := o.p.Get("MODEL_LEFT_FILENAME")
+	return retVal.String()
 }
 
 // SetMODEL_LEFT_FILENAME sets the MODEL_LEFT_FILENAME property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#model_left_filename
 func (o *OculusTouchController) SetMODEL_LEFT_FILENAME(MODEL_LEFT_FILENAME string) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(MODEL_LEFT_FILENAME)
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+	o.p.Set("MODEL_LEFT_FILENAME", MODEL_LEFT_FILENAME)
+	return o
 }
 
 // MODEL_RIGHT_FILENAME returns the MODEL_RIGHT_FILENAME property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#model_right_filename
-func (o *OculusTouchController) MODEL_RIGHT_FILENAME(MODEL_RIGHT_FILENAME string) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(MODEL_RIGHT_FILENAME)
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+func (o *OculusTouchController) MODEL_RIGHT_FILENAME() string {
+	retVal := o.p.Get("MODEL_RIGHT_FILENAME")
+	return retVal.String()
 }
 
 // SetMODEL_RIGHT_FILENAME sets the MODEL_RIGHT_FILENAME property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#model_right_filename
 func (o *OculusTouchController) SetMODEL_RIGHT_FILENAME(MODEL_RIGHT_FILENAME string) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(MODEL_RIGHT_FILENAME)
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+	o.p.Set("MODEL_RIGHT_FILENAME", MODEL_RIGHT_FILENAME)
+	return o
 }
 
 // OnAButtonStateChangedObservable returns the OnAButtonStateChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onabuttonstatechangedobservable
-func (o *OculusTouchController) OnAButtonStateChangedObservable(onAButtonStateChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onAButtonStateChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+func (o *OculusTouchController) OnAButtonStateChangedObservable() *Observable {
+	retVal := o.p.Get("onAButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, o.ctx)
 }
 
 // SetOnAButtonStateChangedObservable sets the OnAButtonStateChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onabuttonstatechangedobservable
 func (o *OculusTouchController) SetOnAButtonStateChangedObservable(onAButtonStateChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onAButtonStateChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+	o.p.Set("onAButtonStateChangedObservable", onAButtonStateChangedObservable.JSObject())
+	return o
 }
 
 // OnBButtonStateChangedObservable returns the OnBButtonStateChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onbbuttonstatechangedobservable
-func (o *OculusTouchController) OnBButtonStateChangedObservable(onBButtonStateChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onBButtonStateChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+func (o *OculusTouchController) OnBButtonStateChangedObservable() *Observable {
+	retVal := o.p.Get("onBButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, o.ctx)
 }
 
 // SetOnBButtonStateChangedObservable sets the OnBButtonStateChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onbbuttonstatechangedobservable
 func (o *OculusTouchController) SetOnBButtonStateChangedObservable(onBButtonStateChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onBButtonStateChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+	o.p.Set("onBButtonStateChangedObservable", onBButtonStateChangedObservable.JSObject())
+	return o
 }
 
 // OnSecondaryTriggerStateChangedObservable returns the OnSecondaryTriggerStateChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onsecondarytriggerstatechangedobservable
-func (o *OculusTouchController) OnSecondaryTriggerStateChangedObservable(onSecondaryTriggerStateChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onSecondaryTriggerStateChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+func (o *OculusTouchController) OnSecondaryTriggerStateChangedObservable() *Observable {
+	retVal := o.p.Get("onSecondaryTriggerStateChangedObservable")
+	return ObservableFromJSObject(retVal, o.ctx)
 }
 
 // SetOnSecondaryTriggerStateChangedObservable sets the OnSecondaryTriggerStateChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onsecondarytriggerstatechangedobservable
 func (o *OculusTouchController) SetOnSecondaryTriggerStateChangedObservable(onSecondaryTriggerStateChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onSecondaryTriggerStateChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+	o.p.Set("onSecondaryTriggerStateChangedObservable", onSecondaryTriggerStateChangedObservable.JSObject())
+	return o
 }
 
 // OnThumbRestChangedObservable returns the OnThumbRestChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onthumbrestchangedobservable
-func (o *OculusTouchController) OnThumbRestChangedObservable(onThumbRestChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onThumbRestChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+func (o *OculusTouchController) OnThumbRestChangedObservable() *Observable {
+	retVal := o.p.Get("onThumbRestChangedObservable")
+	return ObservableFromJSObject(retVal, o.ctx)
 }
 
 // SetOnThumbRestChangedObservable sets the OnThumbRestChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onthumbrestchangedobservable
 func (o *OculusTouchController) SetOnThumbRestChangedObservable(onThumbRestChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onThumbRestChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+	o.p.Set("onThumbRestChangedObservable", onThumbRestChangedObservable.JSObject())
+	return o
 }
 
 // OnXButtonStateChangedObservable returns the OnXButtonStateChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onxbuttonstatechangedobservable
-func (o *OculusTouchController) OnXButtonStateChangedObservable(onXButtonStateChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onXButtonStateChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+func (o *OculusTouchController) OnXButtonStateChangedObservable() *Observable {
+	retVal := o.p.Get("onXButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, o.ctx)
 }
 
 // SetOnXButtonStateChangedObservable sets the OnXButtonStateChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onxbuttonstatechangedobservable
 func (o *OculusTouchController) SetOnXButtonStateChangedObservable(onXButtonStateChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onXButtonStateChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+	o.p.Set("onXButtonStateChangedObservable", onXButtonStateChangedObservable.JSObject())
+	return o
 }
 
 // OnYButtonStateChangedObservable returns the OnYButtonStateChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onybuttonstatechangedobservable
-func (o *OculusTouchController) OnYButtonStateChangedObservable(onYButtonStateChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onYButtonStateChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+func (o *OculusTouchController) OnYButtonStateChangedObservable() *Observable {
+	retVal := o.p.Get("onYButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, o.ctx)
 }
 
 // SetOnYButtonStateChangedObservable sets the OnYButtonStateChangedObservable property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#onybuttonstatechangedobservable
 func (o *OculusTouchController) SetOnYButtonStateChangedObservable(onYButtonStateChangedObservable *Observable) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(onYButtonStateChangedObservable.JSObject())
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+	o.p.Set("onYButtonStateChangedObservable", onYButtonStateChangedObservable.JSObject())
+	return o
 }
 
 // QUEST_MODEL_BASE_URL returns the QUEST_MODEL_BASE_URL property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#quest_model_base_url
-func (o *OculusTouchController) QUEST_MODEL_BASE_URL(QUEST_MODEL_BASE_URL string) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(QUEST_MODEL_BASE_URL)
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+func (o *OculusTouchController) QUEST_MODEL_BASE_URL() string {
+	retVal := o.p.Get("QUEST_MODEL_BASE_URL")
+	return retVal.String()
 }
 
 // SetQUEST_MODEL_BASE_URL sets the QUEST_MODEL_BASE_URL property of class OculusTouchController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#quest_model_base_url
 func (o *OculusTouchController) SetQUEST_MODEL_BASE_URL(QUEST_MODEL_BASE_URL string) *OculusTouchController {
-	p := ba.ctx.Get("OculusTouchController").New(QUEST_MODEL_BASE_URL)
-	return OculusTouchControllerFromJSObject(p, ba.ctx)
+	o.p.Set("QUEST_MODEL_BASE_URL", QUEST_MODEL_BASE_URL)
+	return o
 }
-
-*/

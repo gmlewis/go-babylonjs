@@ -36,38 +36,34 @@ func TranscodeResultArrayToJSArray(array []*TranscodeResult) []interface{} {
 	return result
 }
 
-/*
-
 // FileInfo returns the FileInfo property of class TranscodeResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transcoderesult#fileinfo
-func (t *TranscodeResult) FileInfo(fileInfo *BasisFileInfo) *TranscodeResult {
-	p := ba.ctx.Get("TranscodeResult").New(fileInfo.JSObject())
-	return TranscodeResultFromJSObject(p, ba.ctx)
+func (t *TranscodeResult) FileInfo() *BasisFileInfo {
+	retVal := t.p.Get("fileInfo")
+	return BasisFileInfoFromJSObject(retVal, t.ctx)
 }
 
 // SetFileInfo sets the FileInfo property of class TranscodeResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transcoderesult#fileinfo
 func (t *TranscodeResult) SetFileInfo(fileInfo *BasisFileInfo) *TranscodeResult {
-	p := ba.ctx.Get("TranscodeResult").New(fileInfo.JSObject())
-	return TranscodeResultFromJSObject(p, ba.ctx)
+	t.p.Set("fileInfo", fileInfo.JSObject())
+	return t
 }
 
 // Format returns the Format property of class TranscodeResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transcoderesult#format
-func (t *TranscodeResult) Format(format float64) *TranscodeResult {
-	p := ba.ctx.Get("TranscodeResult").New(format)
-	return TranscodeResultFromJSObject(p, ba.ctx)
+func (t *TranscodeResult) Format() float64 {
+	retVal := t.p.Get("format")
+	return retVal.Float()
 }
 
 // SetFormat sets the Format property of class TranscodeResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transcoderesult#format
 func (t *TranscodeResult) SetFormat(format float64) *TranscodeResult {
-	p := ba.ctx.Get("TranscodeResult").New(format)
-	return TranscodeResultFromJSObject(p, ba.ctx)
+	t.p.Set("format", format)
+	return t
 }
-
-*/

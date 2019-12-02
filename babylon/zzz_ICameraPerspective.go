@@ -36,70 +36,66 @@ func ICameraPerspectiveArrayToJSArray(array []*ICameraPerspective) []interface{}
 	return result
 }
 
-/*
-
 // AspectRatio returns the AspectRatio property of class ICameraPerspective.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraperspective#aspectratio
-func (i *ICameraPerspective) AspectRatio(aspectRatio float64) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(aspectRatio)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
+func (i *ICameraPerspective) AspectRatio() float64 {
+	retVal := i.p.Get("aspectRatio")
+	return retVal.Float()
 }
 
 // SetAspectRatio sets the AspectRatio property of class ICameraPerspective.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraperspective#aspectratio
 func (i *ICameraPerspective) SetAspectRatio(aspectRatio float64) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(aspectRatio)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
+	i.p.Set("aspectRatio", aspectRatio)
+	return i
 }
 
 // Yfov returns the Yfov property of class ICameraPerspective.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraperspective#yfov
-func (i *ICameraPerspective) Yfov(yfov float64) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(yfov)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
+func (i *ICameraPerspective) Yfov() float64 {
+	retVal := i.p.Get("yfov")
+	return retVal.Float()
 }
 
 // SetYfov sets the Yfov property of class ICameraPerspective.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraperspective#yfov
 func (i *ICameraPerspective) SetYfov(yfov float64) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(yfov)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
+	i.p.Set("yfov", yfov)
+	return i
 }
 
 // Zfar returns the Zfar property of class ICameraPerspective.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraperspective#zfar
-func (i *ICameraPerspective) Zfar(zfar float64) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(zfar)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
+func (i *ICameraPerspective) Zfar() float64 {
+	retVal := i.p.Get("zfar")
+	return retVal.Float()
 }
 
 // SetZfar sets the Zfar property of class ICameraPerspective.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraperspective#zfar
 func (i *ICameraPerspective) SetZfar(zfar float64) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(zfar)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
+	i.p.Set("zfar", zfar)
+	return i
 }
 
 // Znear returns the Znear property of class ICameraPerspective.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraperspective#znear
-func (i *ICameraPerspective) Znear(znear float64) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(znear)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
+func (i *ICameraPerspective) Znear() float64 {
+	retVal := i.p.Get("znear")
+	return retVal.Float()
 }
 
 // SetZnear sets the Znear property of class ICameraPerspective.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraperspective#znear
 func (i *ICameraPerspective) SetZnear(znear float64) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(znear)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
+	i.p.Set("znear", znear)
+	return i
 }
-
-*/

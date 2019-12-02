@@ -85,7 +85,3 @@ func (r *RenderTargetsOptimization) GetDescription() string {
 	retVal := r.p.Call("getDescription")
 	return retVal.String()
 }
-
-/*
-
- */

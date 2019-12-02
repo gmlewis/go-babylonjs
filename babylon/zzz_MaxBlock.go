@@ -58,54 +58,50 @@ func (m *MaxBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Left returns the Left property of class MaxBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.maxblock#left
-func (m *MaxBlock) Left(left *NodeMaterialConnectionPoint) *MaxBlock {
-	p := ba.ctx.Get("MaxBlock").New(left.JSObject())
-	return MaxBlockFromJSObject(p, ba.ctx)
+func (m *MaxBlock) Left() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("left")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetLeft sets the Left property of class MaxBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.maxblock#left
 func (m *MaxBlock) SetLeft(left *NodeMaterialConnectionPoint) *MaxBlock {
-	p := ba.ctx.Get("MaxBlock").New(left.JSObject())
-	return MaxBlockFromJSObject(p, ba.ctx)
+	m.p.Set("left", left.JSObject())
+	return m
 }
 
 // Output returns the Output property of class MaxBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.maxblock#output
-func (m *MaxBlock) Output(output *NodeMaterialConnectionPoint) *MaxBlock {
-	p := ba.ctx.Get("MaxBlock").New(output.JSObject())
-	return MaxBlockFromJSObject(p, ba.ctx)
+func (m *MaxBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetOutput sets the Output property of class MaxBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.maxblock#output
 func (m *MaxBlock) SetOutput(output *NodeMaterialConnectionPoint) *MaxBlock {
-	p := ba.ctx.Get("MaxBlock").New(output.JSObject())
-	return MaxBlockFromJSObject(p, ba.ctx)
+	m.p.Set("output", output.JSObject())
+	return m
 }
 
 // Right returns the Right property of class MaxBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.maxblock#right
-func (m *MaxBlock) Right(right *NodeMaterialConnectionPoint) *MaxBlock {
-	p := ba.ctx.Get("MaxBlock").New(right.JSObject())
-	return MaxBlockFromJSObject(p, ba.ctx)
+func (m *MaxBlock) Right() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("right")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetRight sets the Right property of class MaxBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.maxblock#right
 func (m *MaxBlock) SetRight(right *NodeMaterialConnectionPoint) *MaxBlock {
-	p := ba.ctx.Get("MaxBlock").New(right.JSObject())
-	return MaxBlockFromJSObject(p, ba.ctx)
+	m.p.Set("right", right.JSObject())
+	return m
 }
-
-*/

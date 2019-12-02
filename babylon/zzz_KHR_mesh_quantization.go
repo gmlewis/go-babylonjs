@@ -36,38 +36,34 @@ func KHR_mesh_quantizationArrayToJSArray(array []*KHR_mesh_quantization) []inter
 	return result
 }
 
-/*
-
 // Enabled returns the Enabled property of class KHR_mesh_quantization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_mesh_quantization#enabled
-func (k *KHR_mesh_quantization) Enabled(enabled bool) *KHR_mesh_quantization {
-	p := ba.ctx.Get("KHR_mesh_quantization").New(enabled)
-	return KHR_mesh_quantizationFromJSObject(p, ba.ctx)
+func (k *KHR_mesh_quantization) Enabled() bool {
+	retVal := k.p.Get("enabled")
+	return retVal.Bool()
 }
 
 // SetEnabled sets the Enabled property of class KHR_mesh_quantization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_mesh_quantization#enabled
 func (k *KHR_mesh_quantization) SetEnabled(enabled bool) *KHR_mesh_quantization {
-	p := ba.ctx.Get("KHR_mesh_quantization").New(enabled)
-	return KHR_mesh_quantizationFromJSObject(p, ba.ctx)
+	k.p.Set("enabled", enabled)
+	return k
 }
 
 // Name returns the Name property of class KHR_mesh_quantization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_mesh_quantization#name
-func (k *KHR_mesh_quantization) Name(name string) *KHR_mesh_quantization {
-	p := ba.ctx.Get("KHR_mesh_quantization").New(name)
-	return KHR_mesh_quantizationFromJSObject(p, ba.ctx)
+func (k *KHR_mesh_quantization) Name() string {
+	retVal := k.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class KHR_mesh_quantization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_mesh_quantization#name
 func (k *KHR_mesh_quantization) SetName(name string) *KHR_mesh_quantization {
-	p := ba.ctx.Get("KHR_mesh_quantization").New(name)
-	return KHR_mesh_quantizationFromJSObject(p, ba.ctx)
+	k.p.Set("name", name)
+	return k
 }
-
-*/

@@ -106,7 +106,3 @@ func (l *LinesBuilder) CreateLines(name string, options js.Value, opts *LinesBui
 	retVal := l.p.Call("CreateLines", args...)
 	return LinesMeshFromJSObject(retVal, l.ctx)
 }
-
-/*
-
- */

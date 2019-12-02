@@ -58,38 +58,34 @@ func (s *SimplexPerlin3DBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Output returns the Output property of class SimplexPerlin3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock#output
-func (s *SimplexPerlin3DBlock) Output(output *NodeMaterialConnectionPoint) *SimplexPerlin3DBlock {
-	p := ba.ctx.Get("SimplexPerlin3DBlock").New(output.JSObject())
-	return SimplexPerlin3DBlockFromJSObject(p, ba.ctx)
+func (s *SimplexPerlin3DBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetOutput sets the Output property of class SimplexPerlin3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock#output
 func (s *SimplexPerlin3DBlock) SetOutput(output *NodeMaterialConnectionPoint) *SimplexPerlin3DBlock {
-	p := ba.ctx.Get("SimplexPerlin3DBlock").New(output.JSObject())
-	return SimplexPerlin3DBlockFromJSObject(p, ba.ctx)
+	s.p.Set("output", output.JSObject())
+	return s
 }
 
 // Seed returns the Seed property of class SimplexPerlin3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock#seed
-func (s *SimplexPerlin3DBlock) Seed(seed *NodeMaterialConnectionPoint) *SimplexPerlin3DBlock {
-	p := ba.ctx.Get("SimplexPerlin3DBlock").New(seed.JSObject())
-	return SimplexPerlin3DBlockFromJSObject(p, ba.ctx)
+func (s *SimplexPerlin3DBlock) Seed() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("seed")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetSeed sets the Seed property of class SimplexPerlin3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock#seed
 func (s *SimplexPerlin3DBlock) SetSeed(seed *NodeMaterialConnectionPoint) *SimplexPerlin3DBlock {
-	p := ba.ctx.Get("SimplexPerlin3DBlock").New(seed.JSObject())
-	return SimplexPerlin3DBlockFromJSObject(p, ba.ctx)
+	s.p.Set("seed", seed.JSObject())
+	return s
 }
-
-*/

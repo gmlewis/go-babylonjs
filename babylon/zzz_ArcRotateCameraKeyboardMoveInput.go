@@ -102,166 +102,162 @@ func (a *ArcRotateCameraKeyboardMoveInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // AngularSpeed returns the AngularSpeed property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#angularspeed
-func (a *ArcRotateCameraKeyboardMoveInput) AngularSpeed(angularSpeed float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(angularSpeed)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraKeyboardMoveInput) AngularSpeed() float64 {
+	retVal := a.p.Get("angularSpeed")
+	return retVal.Float()
 }
 
 // SetAngularSpeed sets the AngularSpeed property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#angularspeed
 func (a *ArcRotateCameraKeyboardMoveInput) SetAngularSpeed(angularSpeed float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(angularSpeed)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+	a.p.Set("angularSpeed", angularSpeed)
+	return a
 }
 
 // Camera returns the Camera property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#camera
-func (a *ArcRotateCameraKeyboardMoveInput) Camera(camera *ArcRotateCamera) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(camera.JSObject())
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraKeyboardMoveInput) Camera() *ArcRotateCamera {
+	retVal := a.p.Get("camera")
+	return ArcRotateCameraFromJSObject(retVal, a.ctx)
 }
 
 // SetCamera sets the Camera property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#camera
 func (a *ArcRotateCameraKeyboardMoveInput) SetCamera(camera *ArcRotateCamera) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(camera.JSObject())
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+	a.p.Set("camera", camera.JSObject())
+	return a
 }
 
 // KeysDown returns the KeysDown property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysdown
-func (a *ArcRotateCameraKeyboardMoveInput) KeysDown(keysDown float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(keysDown)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraKeyboardMoveInput) KeysDown() float64 {
+	retVal := a.p.Get("keysDown")
+	return retVal.Float()
 }
 
 // SetKeysDown sets the KeysDown property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysdown
 func (a *ArcRotateCameraKeyboardMoveInput) SetKeysDown(keysDown float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(keysDown)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+	a.p.Set("keysDown", keysDown)
+	return a
 }
 
 // KeysLeft returns the KeysLeft property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysleft
-func (a *ArcRotateCameraKeyboardMoveInput) KeysLeft(keysLeft float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(keysLeft)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraKeyboardMoveInput) KeysLeft() float64 {
+	retVal := a.p.Get("keysLeft")
+	return retVal.Float()
 }
 
 // SetKeysLeft sets the KeysLeft property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysleft
 func (a *ArcRotateCameraKeyboardMoveInput) SetKeysLeft(keysLeft float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(keysLeft)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+	a.p.Set("keysLeft", keysLeft)
+	return a
 }
 
 // KeysReset returns the KeysReset property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysreset
-func (a *ArcRotateCameraKeyboardMoveInput) KeysReset(keysReset float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(keysReset)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraKeyboardMoveInput) KeysReset() float64 {
+	retVal := a.p.Get("keysReset")
+	return retVal.Float()
 }
 
 // SetKeysReset sets the KeysReset property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysreset
 func (a *ArcRotateCameraKeyboardMoveInput) SetKeysReset(keysReset float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(keysReset)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+	a.p.Set("keysReset", keysReset)
+	return a
 }
 
 // KeysRight returns the KeysRight property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysright
-func (a *ArcRotateCameraKeyboardMoveInput) KeysRight(keysRight float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(keysRight)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraKeyboardMoveInput) KeysRight() float64 {
+	retVal := a.p.Get("keysRight")
+	return retVal.Float()
 }
 
 // SetKeysRight sets the KeysRight property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysright
 func (a *ArcRotateCameraKeyboardMoveInput) SetKeysRight(keysRight float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(keysRight)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+	a.p.Set("keysRight", keysRight)
+	return a
 }
 
 // KeysUp returns the KeysUp property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysup
-func (a *ArcRotateCameraKeyboardMoveInput) KeysUp(keysUp float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(keysUp)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraKeyboardMoveInput) KeysUp() float64 {
+	retVal := a.p.Get("keysUp")
+	return retVal.Float()
 }
 
 // SetKeysUp sets the KeysUp property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysup
 func (a *ArcRotateCameraKeyboardMoveInput) SetKeysUp(keysUp float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(keysUp)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+	a.p.Set("keysUp", keysUp)
+	return a
 }
 
 // PanningSensibility returns the PanningSensibility property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#panningsensibility
-func (a *ArcRotateCameraKeyboardMoveInput) PanningSensibility(panningSensibility float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(panningSensibility)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraKeyboardMoveInput) PanningSensibility() float64 {
+	retVal := a.p.Get("panningSensibility")
+	return retVal.Float()
 }
 
 // SetPanningSensibility sets the PanningSensibility property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#panningsensibility
 func (a *ArcRotateCameraKeyboardMoveInput) SetPanningSensibility(panningSensibility float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(panningSensibility)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+	a.p.Set("panningSensibility", panningSensibility)
+	return a
 }
 
 // UseAltToZoom returns the UseAltToZoom property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#usealttozoom
-func (a *ArcRotateCameraKeyboardMoveInput) UseAltToZoom(useAltToZoom bool) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(useAltToZoom)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraKeyboardMoveInput) UseAltToZoom() bool {
+	retVal := a.p.Get("useAltToZoom")
+	return retVal.Bool()
 }
 
 // SetUseAltToZoom sets the UseAltToZoom property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#usealttozoom
 func (a *ArcRotateCameraKeyboardMoveInput) SetUseAltToZoom(useAltToZoom bool) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(useAltToZoom)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+	a.p.Set("useAltToZoom", useAltToZoom)
+	return a
 }
 
 // ZoomingSensibility returns the ZoomingSensibility property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#zoomingsensibility
-func (a *ArcRotateCameraKeyboardMoveInput) ZoomingSensibility(zoomingSensibility float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(zoomingSensibility)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraKeyboardMoveInput) ZoomingSensibility() float64 {
+	retVal := a.p.Get("zoomingSensibility")
+	return retVal.Float()
 }
 
 // SetZoomingSensibility sets the ZoomingSensibility property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#zoomingsensibility
 func (a *ArcRotateCameraKeyboardMoveInput) SetZoomingSensibility(zoomingSensibility float64) *ArcRotateCameraKeyboardMoveInput {
-	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput").New(zoomingSensibility)
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
+	a.p.Set("zoomingSensibility", zoomingSensibility)
+	return a
 }
-
-*/

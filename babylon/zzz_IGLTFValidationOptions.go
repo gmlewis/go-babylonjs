@@ -36,102 +36,102 @@ func IGLTFValidationOptionsArrayToJSArray(array []*IGLTFValidationOptions) []int
 	return result
 }
 
-/*
-
 // ExternalResourceFunction returns the ExternalResourceFunction property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#externalresourcefunction
-func (i *IGLTFValidationOptions) ExternalResourceFunction(externalResourceFunction func()) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {externalResourceFunction(); return nil}))
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+func (i *IGLTFValidationOptions) ExternalResourceFunction() js.Value {
+	retVal := i.p.Get("externalResourceFunction")
+	return retVal
 }
 
 // SetExternalResourceFunction sets the ExternalResourceFunction property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#externalresourcefunction
 func (i *IGLTFValidationOptions) SetExternalResourceFunction(externalResourceFunction func()) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {externalResourceFunction(); return nil}))
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("externalResourceFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { externalResourceFunction(); return nil }))
+	return i
 }
 
 // IgnoredIssues returns the IgnoredIssues property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#ignoredissues
-func (i *IGLTFValidationOptions) IgnoredIssues(ignoredIssues []string) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(ignoredIssues)
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+func (i *IGLTFValidationOptions) IgnoredIssues() []string {
+	retVal := i.p.Get("ignoredIssues")
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetIgnoredIssues sets the IgnoredIssues property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#ignoredissues
 func (i *IGLTFValidationOptions) SetIgnoredIssues(ignoredIssues []string) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(ignoredIssues)
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("ignoredIssues", ignoredIssues)
+	return i
 }
 
 // MaxIssues returns the MaxIssues property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#maxissues
-func (i *IGLTFValidationOptions) MaxIssues(maxIssues float64) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(maxIssues)
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+func (i *IGLTFValidationOptions) MaxIssues() float64 {
+	retVal := i.p.Get("maxIssues")
+	return retVal.Float()
 }
 
 // SetMaxIssues sets the MaxIssues property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#maxissues
 func (i *IGLTFValidationOptions) SetMaxIssues(maxIssues float64) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(maxIssues)
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("maxIssues", maxIssues)
+	return i
 }
 
 // SeverityOverrides returns the SeverityOverrides property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#severityoverrides
-func (i *IGLTFValidationOptions) SeverityOverrides(severityOverrides *Object) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(severityOverrides.JSObject())
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+func (i *IGLTFValidationOptions) SeverityOverrides() js.Value {
+	retVal := i.p.Get("severityOverrides")
+	return retVal
 }
 
 // SetSeverityOverrides sets the SeverityOverrides property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#severityoverrides
-func (i *IGLTFValidationOptions) SetSeverityOverrides(severityOverrides *Object) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(severityOverrides.JSObject())
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+func (i *IGLTFValidationOptions) SetSeverityOverrides(severityOverrides js.Value) *IGLTFValidationOptions {
+	i.p.Set("severityOverrides", severityOverrides)
+	return i
 }
 
 // Uri returns the Uri property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#uri
-func (i *IGLTFValidationOptions) Uri(uri string) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(uri)
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+func (i *IGLTFValidationOptions) Uri() string {
+	retVal := i.p.Get("uri")
+	return retVal.String()
 }
 
 // SetUri sets the Uri property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#uri
 func (i *IGLTFValidationOptions) SetUri(uri string) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(uri)
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("uri", uri)
+	return i
 }
 
 // ValidateAccessorData returns the ValidateAccessorData property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#validateaccessordata
-func (i *IGLTFValidationOptions) ValidateAccessorData(validateAccessorData bool) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(validateAccessorData)
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+func (i *IGLTFValidationOptions) ValidateAccessorData() bool {
+	retVal := i.p.Get("validateAccessorData")
+	return retVal.Bool()
 }
 
 // SetValidateAccessorData sets the ValidateAccessorData property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#validateaccessordata
 func (i *IGLTFValidationOptions) SetValidateAccessorData(validateAccessorData bool) *IGLTFValidationOptions {
-	p := ba.ctx.Get("IGLTFValidationOptions").New(validateAccessorData)
-	return IGLTFValidationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("validateAccessorData", validateAccessorData)
+	return i
 }
-
-*/

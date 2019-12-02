@@ -35,7 +35,3 @@ func IAccessorArrayToJSArray(array []*IAccessor) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

@@ -49,7 +49,3 @@ func (a *AndOrNotEvaluator) Eval(query string, evaluateCallback func()) bool {
 	retVal := a.p.Call("Eval", args...)
 	return retVal.Bool()
 }
-
-/*
-
- */

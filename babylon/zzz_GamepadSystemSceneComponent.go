@@ -73,38 +73,34 @@ func (g *GamepadSystemSceneComponent) Register() {
 	g.p.Call("register")
 }
 
-/*
-
 // Name returns the Name property of class GamepadSystemSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent#name
-func (g *GamepadSystemSceneComponent) Name(name string) *GamepadSystemSceneComponent {
-	p := ba.ctx.Get("GamepadSystemSceneComponent").New(name)
-	return GamepadSystemSceneComponentFromJSObject(p, ba.ctx)
+func (g *GamepadSystemSceneComponent) Name() string {
+	retVal := g.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class GamepadSystemSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent#name
 func (g *GamepadSystemSceneComponent) SetName(name string) *GamepadSystemSceneComponent {
-	p := ba.ctx.Get("GamepadSystemSceneComponent").New(name)
-	return GamepadSystemSceneComponentFromJSObject(p, ba.ctx)
+	g.p.Set("name", name)
+	return g
 }
 
 // Scene returns the Scene property of class GamepadSystemSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent#scene
-func (g *GamepadSystemSceneComponent) Scene(scene *Scene) *GamepadSystemSceneComponent {
-	p := ba.ctx.Get("GamepadSystemSceneComponent").New(scene.JSObject())
-	return GamepadSystemSceneComponentFromJSObject(p, ba.ctx)
+func (g *GamepadSystemSceneComponent) Scene() *Scene {
+	retVal := g.p.Get("scene")
+	return SceneFromJSObject(retVal, g.ctx)
 }
 
 // SetScene sets the Scene property of class GamepadSystemSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent#scene
 func (g *GamepadSystemSceneComponent) SetScene(scene *Scene) *GamepadSystemSceneComponent {
-	p := ba.ctx.Get("GamepadSystemSceneComponent").New(scene.JSObject())
-	return GamepadSystemSceneComponentFromJSObject(p, ba.ctx)
+	g.p.Set("scene", scene.JSObject())
+	return g
 }
-
-*/

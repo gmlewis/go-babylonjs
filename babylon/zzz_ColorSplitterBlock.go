@@ -58,118 +58,114 @@ func (c *ColorSplitterBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // A returns the A property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#a
-func (c *ColorSplitterBlock) A(a *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(a.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+func (c *ColorSplitterBlock) A() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("a")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetA sets the A property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#a
 func (c *ColorSplitterBlock) SetA(a *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(a.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+	c.p.Set("a", a.JSObject())
+	return c
 }
 
 // B returns the B property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#b
-func (c *ColorSplitterBlock) B(b *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(b.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+func (c *ColorSplitterBlock) B() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("b")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetB sets the B property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#b
 func (c *ColorSplitterBlock) SetB(b *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(b.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+	c.p.Set("b", b.JSObject())
+	return c
 }
 
 // G returns the G property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#g
-func (c *ColorSplitterBlock) G(g *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(g.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+func (c *ColorSplitterBlock) G() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("g")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetG sets the G property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#g
 func (c *ColorSplitterBlock) SetG(g *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(g.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+	c.p.Set("g", g.JSObject())
+	return c
 }
 
 // R returns the R property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#r
-func (c *ColorSplitterBlock) R(r *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(r.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+func (c *ColorSplitterBlock) R() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("r")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetR sets the R property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#r
 func (c *ColorSplitterBlock) SetR(r *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(r.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+	c.p.Set("r", r.JSObject())
+	return c
 }
 
 // RgbIn returns the RgbIn property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgbin
-func (c *ColorSplitterBlock) RgbIn(rgbIn *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(rgbIn.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+func (c *ColorSplitterBlock) RgbIn() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("rgbIn")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetRgbIn sets the RgbIn property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgbin
 func (c *ColorSplitterBlock) SetRgbIn(rgbIn *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(rgbIn.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+	c.p.Set("rgbIn", rgbIn.JSObject())
+	return c
 }
 
 // RgbOut returns the RgbOut property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgbout
-func (c *ColorSplitterBlock) RgbOut(rgbOut *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(rgbOut.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+func (c *ColorSplitterBlock) RgbOut() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("rgbOut")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetRgbOut sets the RgbOut property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgbout
 func (c *ColorSplitterBlock) SetRgbOut(rgbOut *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(rgbOut.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+	c.p.Set("rgbOut", rgbOut.JSObject())
+	return c
 }
 
 // Rgba returns the Rgba property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgba
-func (c *ColorSplitterBlock) Rgba(rgba *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(rgba.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+func (c *ColorSplitterBlock) Rgba() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("rgba")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetRgba sets the Rgba property of class ColorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgba
 func (c *ColorSplitterBlock) SetRgba(rgba *NodeMaterialConnectionPoint) *ColorSplitterBlock {
-	p := ba.ctx.Get("ColorSplitterBlock").New(rgba.JSObject())
-	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+	c.p.Set("rgba", rgba.JSObject())
+	return c
 }
-
-*/

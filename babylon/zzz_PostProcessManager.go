@@ -101,7 +101,3 @@ func (p *PostProcessManager) Dispose() {
 
 	p.p.Call("dispose")
 }
-
-/*
-
- */

@@ -148,22 +148,18 @@ func (p *Path2) StartingAt(x float64, y float64) *Path2 {
 	return Path2FromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // Closed returns the Closed property of class Path2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path2#closed
-func (p *Path2) Closed(closed bool) *Path2 {
-	p := ba.ctx.Get("Path2").New(closed)
-	return Path2FromJSObject(p, ba.ctx)
+func (p *Path2) Closed() bool {
+	retVal := p.p.Get("closed")
+	return retVal.Bool()
 }
 
 // SetClosed sets the Closed property of class Path2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path2#closed
 func (p *Path2) SetClosed(closed bool) *Path2 {
-	p := ba.ctx.Get("Path2").New(closed)
-	return Path2FromJSObject(p, ba.ctx)
+	p.p.Set("closed", closed)
+	return p
 }
-
-*/

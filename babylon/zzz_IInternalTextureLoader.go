@@ -111,22 +111,18 @@ func (i *IInternalTextureLoader) TransformUrl(rootUrl string, textureFormatInUse
 	return retVal.String()
 }
 
-/*
-
 // SupportCascades returns the SupportCascades property of class IInternalTextureLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinternaltextureloader#supportcascades
-func (i *IInternalTextureLoader) SupportCascades(supportCascades bool) *IInternalTextureLoader {
-	p := ba.ctx.Get("IInternalTextureLoader").New(supportCascades)
-	return IInternalTextureLoaderFromJSObject(p, ba.ctx)
+func (i *IInternalTextureLoader) SupportCascades() bool {
+	retVal := i.p.Get("supportCascades")
+	return retVal.Bool()
 }
 
 // SetSupportCascades sets the SupportCascades property of class IInternalTextureLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinternaltextureloader#supportcascades
 func (i *IInternalTextureLoader) SetSupportCascades(supportCascades bool) *IInternalTextureLoader {
-	p := ba.ctx.Get("IInternalTextureLoader").New(supportCascades)
-	return IInternalTextureLoaderFromJSObject(p, ba.ctx)
+	i.p.Set("supportCascades", supportCascades)
+	return i
 }
-
-*/

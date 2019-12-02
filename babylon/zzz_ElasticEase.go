@@ -70,38 +70,34 @@ func (ba *Babylon) NewElasticEase(opts *NewElasticEaseOpts) *ElasticEase {
 	return ElasticEaseFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Oscillations returns the Oscillations property of class ElasticEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.elasticease#oscillations
-func (e *ElasticEase) Oscillations(oscillations float64) *ElasticEase {
-	p := ba.ctx.Get("ElasticEase").New(oscillations)
-	return ElasticEaseFromJSObject(p, ba.ctx)
+func (e *ElasticEase) Oscillations() float64 {
+	retVal := e.p.Get("oscillations")
+	return retVal.Float()
 }
 
 // SetOscillations sets the Oscillations property of class ElasticEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.elasticease#oscillations
 func (e *ElasticEase) SetOscillations(oscillations float64) *ElasticEase {
-	p := ba.ctx.Get("ElasticEase").New(oscillations)
-	return ElasticEaseFromJSObject(p, ba.ctx)
+	e.p.Set("oscillations", oscillations)
+	return e
 }
 
 // Springiness returns the Springiness property of class ElasticEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.elasticease#springiness
-func (e *ElasticEase) Springiness(springiness float64) *ElasticEase {
-	p := ba.ctx.Get("ElasticEase").New(springiness)
-	return ElasticEaseFromJSObject(p, ba.ctx)
+func (e *ElasticEase) Springiness() float64 {
+	retVal := e.p.Get("springiness")
+	return retVal.Float()
 }
 
 // SetSpringiness sets the Springiness property of class ElasticEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.elasticease#springiness
 func (e *ElasticEase) SetSpringiness(springiness float64) *ElasticEase {
-	p := ba.ctx.Get("ElasticEase").New(springiness)
-	return ElasticEaseFromJSObject(p, ba.ctx)
+	e.p.Set("springiness", springiness)
+	return e
 }
-
-*/

@@ -112,166 +112,162 @@ func (s *SphericalHarmonics) ScaleInPlace(scale float64) {
 	s.p.Call("scaleInPlace", args...)
 }
 
-/*
-
 // L00 returns the L00 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l00
-func (s *SphericalHarmonics) L00(l00 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l00.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+func (s *SphericalHarmonics) L00() *Vector3 {
+	retVal := s.p.Get("l00")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetL00 sets the L00 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l00
 func (s *SphericalHarmonics) SetL00(l00 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l00.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+	s.p.Set("l00", l00.JSObject())
+	return s
 }
 
 // L10 returns the L10 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l10
-func (s *SphericalHarmonics) L10(l10 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l10.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+func (s *SphericalHarmonics) L10() *Vector3 {
+	retVal := s.p.Get("l10")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetL10 sets the L10 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l10
 func (s *SphericalHarmonics) SetL10(l10 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l10.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+	s.p.Set("l10", l10.JSObject())
+	return s
 }
 
 // L11 returns the L11 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l11
-func (s *SphericalHarmonics) L11(l11 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l11.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+func (s *SphericalHarmonics) L11() *Vector3 {
+	retVal := s.p.Get("l11")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetL11 sets the L11 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l11
 func (s *SphericalHarmonics) SetL11(l11 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l11.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+	s.p.Set("l11", l11.JSObject())
+	return s
 }
 
 // L1_1 returns the L1_1 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l1_1
-func (s *SphericalHarmonics) L1_1(l1_1 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l1_1.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+func (s *SphericalHarmonics) L1_1() *Vector3 {
+	retVal := s.p.Get("l1_1")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetL1_1 sets the L1_1 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l1_1
 func (s *SphericalHarmonics) SetL1_1(l1_1 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l1_1.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+	s.p.Set("l1_1", l1_1.JSObject())
+	return s
 }
 
 // L20 returns the L20 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l20
-func (s *SphericalHarmonics) L20(l20 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l20.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+func (s *SphericalHarmonics) L20() *Vector3 {
+	retVal := s.p.Get("l20")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetL20 sets the L20 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l20
 func (s *SphericalHarmonics) SetL20(l20 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l20.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+	s.p.Set("l20", l20.JSObject())
+	return s
 }
 
 // L21 returns the L21 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l21
-func (s *SphericalHarmonics) L21(l21 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l21.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+func (s *SphericalHarmonics) L21() *Vector3 {
+	retVal := s.p.Get("l21")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetL21 sets the L21 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l21
 func (s *SphericalHarmonics) SetL21(l21 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l21.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+	s.p.Set("l21", l21.JSObject())
+	return s
 }
 
 // L22 returns the L22 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l22
-func (s *SphericalHarmonics) L22(l22 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l22.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+func (s *SphericalHarmonics) L22() *Vector3 {
+	retVal := s.p.Get("l22")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetL22 sets the L22 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l22
 func (s *SphericalHarmonics) SetL22(l22 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l22.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+	s.p.Set("l22", l22.JSObject())
+	return s
 }
 
 // L2_1 returns the L2_1 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l2_1
-func (s *SphericalHarmonics) L2_1(l2_1 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l2_1.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+func (s *SphericalHarmonics) L2_1() *Vector3 {
+	retVal := s.p.Get("l2_1")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetL2_1 sets the L2_1 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l2_1
 func (s *SphericalHarmonics) SetL2_1(l2_1 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l2_1.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+	s.p.Set("l2_1", l2_1.JSObject())
+	return s
 }
 
 // L2_2 returns the L2_2 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l2_2
-func (s *SphericalHarmonics) L2_2(l2_2 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l2_2.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+func (s *SphericalHarmonics) L2_2() *Vector3 {
+	retVal := s.p.Get("l2_2")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetL2_2 sets the L2_2 property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#l2_2
 func (s *SphericalHarmonics) SetL2_2(l2_2 *Vector3) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(l2_2.JSObject())
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+	s.p.Set("l2_2", l2_2.JSObject())
+	return s
 }
 
 // PreScaled returns the PreScaled property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#prescaled
-func (s *SphericalHarmonics) PreScaled(preScaled bool) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(preScaled)
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+func (s *SphericalHarmonics) PreScaled() bool {
+	retVal := s.p.Get("preScaled")
+	return retVal.Bool()
 }
 
 // SetPreScaled sets the PreScaled property of class SphericalHarmonics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics#prescaled
 func (s *SphericalHarmonics) SetPreScaled(preScaled bool) *SphericalHarmonics {
-	p := ba.ctx.Get("SphericalHarmonics").New(preScaled)
-	return SphericalHarmonicsFromJSObject(p, ba.ctx)
+	s.p.Set("preScaled", preScaled)
+	return s
 }
-
-*/

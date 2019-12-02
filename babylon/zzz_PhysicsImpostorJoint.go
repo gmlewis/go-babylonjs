@@ -36,54 +36,50 @@ func PhysicsImpostorJointArrayToJSArray(array []*PhysicsImpostorJoint) []interfa
 	return result
 }
 
-/*
-
 // ConnectedImpostor returns the ConnectedImpostor property of class PhysicsImpostorJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorjoint#connectedimpostor
-func (p *PhysicsImpostorJoint) ConnectedImpostor(connectedImpostor *PhysicsImpostor) *PhysicsImpostorJoint {
-	p := ba.ctx.Get("PhysicsImpostorJoint").New(connectedImpostor.JSObject())
-	return PhysicsImpostorJointFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorJoint) ConnectedImpostor() *PhysicsImpostor {
+	retVal := p.p.Get("connectedImpostor")
+	return PhysicsImpostorFromJSObject(retVal, p.ctx)
 }
 
 // SetConnectedImpostor sets the ConnectedImpostor property of class PhysicsImpostorJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorjoint#connectedimpostor
 func (p *PhysicsImpostorJoint) SetConnectedImpostor(connectedImpostor *PhysicsImpostor) *PhysicsImpostorJoint {
-	p := ba.ctx.Get("PhysicsImpostorJoint").New(connectedImpostor.JSObject())
-	return PhysicsImpostorJointFromJSObject(p, ba.ctx)
+	p.p.Set("connectedImpostor", connectedImpostor.JSObject())
+	return p
 }
 
 // Joint returns the Joint property of class PhysicsImpostorJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorjoint#joint
-func (p *PhysicsImpostorJoint) Joint(joint *PhysicsJoint) *PhysicsImpostorJoint {
-	p := ba.ctx.Get("PhysicsImpostorJoint").New(joint.JSObject())
-	return PhysicsImpostorJointFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorJoint) Joint() *PhysicsJoint {
+	retVal := p.p.Get("joint")
+	return PhysicsJointFromJSObject(retVal, p.ctx)
 }
 
 // SetJoint sets the Joint property of class PhysicsImpostorJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorjoint#joint
 func (p *PhysicsImpostorJoint) SetJoint(joint *PhysicsJoint) *PhysicsImpostorJoint {
-	p := ba.ctx.Get("PhysicsImpostorJoint").New(joint.JSObject())
-	return PhysicsImpostorJointFromJSObject(p, ba.ctx)
+	p.p.Set("joint", joint.JSObject())
+	return p
 }
 
 // MainImpostor returns the MainImpostor property of class PhysicsImpostorJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorjoint#mainimpostor
-func (p *PhysicsImpostorJoint) MainImpostor(mainImpostor *PhysicsImpostor) *PhysicsImpostorJoint {
-	p := ba.ctx.Get("PhysicsImpostorJoint").New(mainImpostor.JSObject())
-	return PhysicsImpostorJointFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorJoint) MainImpostor() *PhysicsImpostor {
+	retVal := p.p.Get("mainImpostor")
+	return PhysicsImpostorFromJSObject(retVal, p.ctx)
 }
 
 // SetMainImpostor sets the MainImpostor property of class PhysicsImpostorJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorjoint#mainimpostor
 func (p *PhysicsImpostorJoint) SetMainImpostor(mainImpostor *PhysicsImpostor) *PhysicsImpostorJoint {
-	p := ba.ctx.Get("PhysicsImpostorJoint").New(mainImpostor.JSObject())
-	return PhysicsImpostorJointFromJSObject(p, ba.ctx)
+	p.p.Set("mainImpostor", mainImpostor.JSObject())
+	return p
 }
-
-*/

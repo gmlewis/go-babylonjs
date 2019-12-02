@@ -64,22 +64,18 @@ func (ba *Babylon) NewExponentialEase(opts *NewExponentialEaseOpts) *Exponential
 	return ExponentialEaseFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Exponent returns the Exponent property of class ExponentialEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.exponentialease#exponent
-func (e *ExponentialEase) Exponent(exponent float64) *ExponentialEase {
-	p := ba.ctx.Get("ExponentialEase").New(exponent)
-	return ExponentialEaseFromJSObject(p, ba.ctx)
+func (e *ExponentialEase) Exponent() float64 {
+	retVal := e.p.Get("exponent")
+	return retVal.Float()
 }
 
 // SetExponent sets the Exponent property of class ExponentialEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.exponentialease#exponent
 func (e *ExponentialEase) SetExponent(exponent float64) *ExponentialEase {
-	p := ba.ctx.Get("ExponentialEase").New(exponent)
-	return ExponentialEaseFromJSObject(p, ba.ctx)
+	e.p.Set("exponent", exponent)
+	return e
 }
-
-*/

@@ -94,38 +94,34 @@ func (b *BaseCameraPointersInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // Buttons returns the Buttons property of class BaseCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basecamerapointersinput#buttons
-func (b *BaseCameraPointersInput) Buttons(buttons float64) *BaseCameraPointersInput {
-	p := ba.ctx.Get("BaseCameraPointersInput").New(buttons)
-	return BaseCameraPointersInputFromJSObject(p, ba.ctx)
+func (b *BaseCameraPointersInput) Buttons() float64 {
+	retVal := b.p.Get("buttons")
+	return retVal.Float()
 }
 
 // SetButtons sets the Buttons property of class BaseCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basecamerapointersinput#buttons
 func (b *BaseCameraPointersInput) SetButtons(buttons float64) *BaseCameraPointersInput {
-	p := ba.ctx.Get("BaseCameraPointersInput").New(buttons)
-	return BaseCameraPointersInputFromJSObject(p, ba.ctx)
+	b.p.Set("buttons", buttons)
+	return b
 }
 
 // Camera returns the Camera property of class BaseCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basecamerapointersinput#camera
-func (b *BaseCameraPointersInput) Camera(camera *Camera) *BaseCameraPointersInput {
-	p := ba.ctx.Get("BaseCameraPointersInput").New(camera.JSObject())
-	return BaseCameraPointersInputFromJSObject(p, ba.ctx)
+func (b *BaseCameraPointersInput) Camera() *Camera {
+	retVal := b.p.Get("camera")
+	return CameraFromJSObject(retVal, b.ctx)
 }
 
 // SetCamera sets the Camera property of class BaseCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basecamerapointersinput#camera
 func (b *BaseCameraPointersInput) SetCamera(camera *Camera) *BaseCameraPointersInput {
-	p := ba.ctx.Get("BaseCameraPointersInput").New(camera.JSObject())
-	return BaseCameraPointersInputFromJSObject(p, ba.ctx)
+	b.p.Set("camera", camera.JSObject())
+	return b
 }
-
-*/

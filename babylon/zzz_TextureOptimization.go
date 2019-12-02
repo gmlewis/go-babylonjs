@@ -98,54 +98,50 @@ func (t *TextureOptimization) GetDescription() string {
 	return retVal.String()
 }
 
-/*
-
 // MaximumSize returns the MaximumSize property of class TextureOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureoptimization#maximumsize
-func (t *TextureOptimization) MaximumSize(maximumSize float64) *TextureOptimization {
-	p := ba.ctx.Get("TextureOptimization").New(maximumSize)
-	return TextureOptimizationFromJSObject(p, ba.ctx)
+func (t *TextureOptimization) MaximumSize() float64 {
+	retVal := t.p.Get("maximumSize")
+	return retVal.Float()
 }
 
 // SetMaximumSize sets the MaximumSize property of class TextureOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureoptimization#maximumsize
 func (t *TextureOptimization) SetMaximumSize(maximumSize float64) *TextureOptimization {
-	p := ba.ctx.Get("TextureOptimization").New(maximumSize)
-	return TextureOptimizationFromJSObject(p, ba.ctx)
+	t.p.Set("maximumSize", maximumSize)
+	return t
 }
 
 // Priority returns the Priority property of class TextureOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureoptimization#priority
-func (t *TextureOptimization) Priority(priority float64) *TextureOptimization {
-	p := ba.ctx.Get("TextureOptimization").New(priority)
-	return TextureOptimizationFromJSObject(p, ba.ctx)
+func (t *TextureOptimization) Priority() float64 {
+	retVal := t.p.Get("priority")
+	return retVal.Float()
 }
 
 // SetPriority sets the Priority property of class TextureOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureoptimization#priority
 func (t *TextureOptimization) SetPriority(priority float64) *TextureOptimization {
-	p := ba.ctx.Get("TextureOptimization").New(priority)
-	return TextureOptimizationFromJSObject(p, ba.ctx)
+	t.p.Set("priority", priority)
+	return t
 }
 
 // Step returns the Step property of class TextureOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureoptimization#step
-func (t *TextureOptimization) Step(step float64) *TextureOptimization {
-	p := ba.ctx.Get("TextureOptimization").New(step)
-	return TextureOptimizationFromJSObject(p, ba.ctx)
+func (t *TextureOptimization) Step() float64 {
+	retVal := t.p.Get("step")
+	return retVal.Float()
 }
 
 // SetStep sets the Step property of class TextureOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureoptimization#step
 func (t *TextureOptimization) SetStep(step float64) *TextureOptimization {
-	p := ba.ctx.Get("TextureOptimization").New(step)
-	return TextureOptimizationFromJSObject(p, ba.ctx)
+	t.p.Set("step", step)
+	return t
 }
-
-*/

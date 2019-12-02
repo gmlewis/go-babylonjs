@@ -77,22 +77,18 @@ func (ba *Babylon) NewBlackAndWhitePostProcess(name string, options float64, cam
 	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Degree returns the Degree property of class BlackAndWhitePostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#degree
-func (b *BlackAndWhitePostProcess) Degree(degree float64) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(degree)
-	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
+func (b *BlackAndWhitePostProcess) Degree() float64 {
+	retVal := b.p.Get("degree")
+	return retVal.Float()
 }
 
 // SetDegree sets the Degree property of class BlackAndWhitePostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#degree
 func (b *BlackAndWhitePostProcess) SetDegree(degree float64) *BlackAndWhitePostProcess {
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(degree)
-	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
+	b.p.Set("degree", degree)
+	return b
 }
-
-*/

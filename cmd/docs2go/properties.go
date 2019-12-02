@@ -35,7 +35,7 @@ func (html *ClassHTML) parseProperties() error {
 				return errors.New("properties: unable to find tsd-signature")
 			}
 			v := div.GetSignature()
-			if ok := v.parseParameters(html.Name, nil); ok {
+			if ok := v.parseParameters(html.Name, processPropertiesOverrides); ok {
 				html.PropertyNames[v.GoName] = v
 			}
 		}

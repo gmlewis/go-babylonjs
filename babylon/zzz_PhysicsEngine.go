@@ -291,38 +291,26 @@ func (p *PhysicsEngine) _step(delta float64) {
 	p.p.Call("_step", args...)
 }
 
-/*
-
 // Epsilon returns the Epsilon property of class PhysicsEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#epsilon
-func (p *PhysicsEngine) Epsilon(Epsilon float64) *PhysicsEngine {
-	p := ba.ctx.Get("PhysicsEngine").New(Epsilon)
-	return PhysicsEngineFromJSObject(p, ba.ctx)
+func (p *PhysicsEngine) Epsilon() float64 {
+	retVal := p.p.Get("Epsilon")
+	return retVal.Float()
 }
 
 // SetEpsilon sets the Epsilon property of class PhysicsEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#epsilon
 func (p *PhysicsEngine) SetEpsilon(Epsilon float64) *PhysicsEngine {
-	p := ba.ctx.Get("PhysicsEngine").New(Epsilon)
-	return PhysicsEngineFromJSObject(p, ba.ctx)
+	p.p.Set("Epsilon", Epsilon)
+	return p
 }
 
 // Gravity returns the Gravity property of class PhysicsEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine#gravity
-func (p *PhysicsEngine) Gravity(gravity *Vector3) *PhysicsEngine {
-	p := ba.ctx.Get("PhysicsEngine").New(gravity.JSObject())
-	return PhysicsEngineFromJSObject(p, ba.ctx)
+func (p *PhysicsEngine) Gravity() *Vector3 {
+	retVal := p.p.Get("gravity")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
-
-// SetGravity sets the Gravity property of class PhysicsEngine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.physicsengine#gravity
-func (p *PhysicsEngine) SetGravity(gravity *Vector3) *PhysicsEngine {
-	p := ba.ctx.Get("PhysicsEngine").New(gravity.JSObject())
-	return PhysicsEngineFromJSObject(p, ba.ctx)
-}
-
-*/

@@ -401,54 +401,50 @@ func (r *Ray) Zero() *Ray {
 	return RayFromJSObject(retVal, r.ctx)
 }
 
-/*
-
 // Direction returns the Direction property of class Ray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ray#direction
-func (r *Ray) Direction(direction *Vector3) *Ray {
-	p := ba.ctx.Get("Ray").New(direction.JSObject())
-	return RayFromJSObject(p, ba.ctx)
+func (r *Ray) Direction() *Vector3 {
+	retVal := r.p.Get("direction")
+	return Vector3FromJSObject(retVal, r.ctx)
 }
 
 // SetDirection sets the Direction property of class Ray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ray#direction
 func (r *Ray) SetDirection(direction *Vector3) *Ray {
-	p := ba.ctx.Get("Ray").New(direction.JSObject())
-	return RayFromJSObject(p, ba.ctx)
+	r.p.Set("direction", direction.JSObject())
+	return r
 }
 
 // Length returns the Length property of class Ray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ray#length
-func (r *Ray) Length(length float64) *Ray {
-	p := ba.ctx.Get("Ray").New(length)
-	return RayFromJSObject(p, ba.ctx)
+func (r *Ray) Length() float64 {
+	retVal := r.p.Get("length")
+	return retVal.Float()
 }
 
 // SetLength sets the Length property of class Ray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ray#length
 func (r *Ray) SetLength(length float64) *Ray {
-	p := ba.ctx.Get("Ray").New(length)
-	return RayFromJSObject(p, ba.ctx)
+	r.p.Set("length", length)
+	return r
 }
 
 // Origin returns the Origin property of class Ray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ray#origin
-func (r *Ray) Origin(origin *Vector3) *Ray {
-	p := ba.ctx.Get("Ray").New(origin.JSObject())
-	return RayFromJSObject(p, ba.ctx)
+func (r *Ray) Origin() *Vector3 {
+	retVal := r.p.Get("origin")
+	return Vector3FromJSObject(retVal, r.ctx)
 }
 
 // SetOrigin sets the Origin property of class Ray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ray#origin
 func (r *Ray) SetOrigin(origin *Vector3) *Ray {
-	p := ba.ctx.Get("Ray").New(origin.JSObject())
-	return RayFromJSObject(p, ba.ctx)
+	r.p.Set("origin", origin.JSObject())
+	return r
 }
-
-*/

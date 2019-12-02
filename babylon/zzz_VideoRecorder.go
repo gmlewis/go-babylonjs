@@ -122,22 +122,18 @@ func (v *VideoRecorder) StopRecording() {
 	v.p.Call("stopRecording")
 }
 
-/*
-
 // IsRecording returns the IsRecording property of class VideoRecorder.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorder#isrecording
-func (v *VideoRecorder) IsRecording(isRecording bool) *VideoRecorder {
-	p := ba.ctx.Get("VideoRecorder").New(isRecording)
-	return VideoRecorderFromJSObject(p, ba.ctx)
+func (v *VideoRecorder) IsRecording() bool {
+	retVal := v.p.Get("isRecording")
+	return retVal.Bool()
 }
 
 // SetIsRecording sets the IsRecording property of class VideoRecorder.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorder#isrecording
 func (v *VideoRecorder) SetIsRecording(isRecording bool) *VideoRecorder {
-	p := ba.ctx.Get("VideoRecorder").New(isRecording)
-	return VideoRecorderFromJSObject(p, ba.ctx)
+	v.p.Set("isRecording", isRecording)
+	return v
 }
-
-*/

@@ -838,70 +838,66 @@ func (v *Vector4) Zero() *Vector4 {
 	return Vector4FromJSObject(retVal, v.ctx)
 }
 
-/*
-
 // W returns the W property of class Vector4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#w
-func (v *Vector4) W(w float64) *Vector4 {
-	p := ba.ctx.Get("Vector4").New(w)
-	return Vector4FromJSObject(p, ba.ctx)
+func (v *Vector4) W() float64 {
+	retVal := v.p.Get("w")
+	return retVal.Float()
 }
 
 // SetW sets the W property of class Vector4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#w
 func (v *Vector4) SetW(w float64) *Vector4 {
-	p := ba.ctx.Get("Vector4").New(w)
-	return Vector4FromJSObject(p, ba.ctx)
+	v.p.Set("w", w)
+	return v
 }
 
 // X returns the X property of class Vector4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#x
-func (v *Vector4) X(x float64) *Vector4 {
-	p := ba.ctx.Get("Vector4").New(x)
-	return Vector4FromJSObject(p, ba.ctx)
+func (v *Vector4) X() float64 {
+	retVal := v.p.Get("x")
+	return retVal.Float()
 }
 
 // SetX sets the X property of class Vector4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#x
 func (v *Vector4) SetX(x float64) *Vector4 {
-	p := ba.ctx.Get("Vector4").New(x)
-	return Vector4FromJSObject(p, ba.ctx)
+	v.p.Set("x", x)
+	return v
 }
 
 // Y returns the Y property of class Vector4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#y
-func (v *Vector4) Y(y float64) *Vector4 {
-	p := ba.ctx.Get("Vector4").New(y)
-	return Vector4FromJSObject(p, ba.ctx)
+func (v *Vector4) Y() float64 {
+	retVal := v.p.Get("y")
+	return retVal.Float()
 }
 
 // SetY sets the Y property of class Vector4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#y
 func (v *Vector4) SetY(y float64) *Vector4 {
-	p := ba.ctx.Get("Vector4").New(y)
-	return Vector4FromJSObject(p, ba.ctx)
+	v.p.Set("y", y)
+	return v
 }
 
 // Z returns the Z property of class Vector4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#z
-func (v *Vector4) Z(z float64) *Vector4 {
-	p := ba.ctx.Get("Vector4").New(z)
-	return Vector4FromJSObject(p, ba.ctx)
+func (v *Vector4) Z() float64 {
+	retVal := v.p.Get("z")
+	return retVal.Float()
 }
 
 // SetZ sets the Z property of class Vector4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#z
 func (v *Vector4) SetZ(z float64) *Vector4 {
-	p := ba.ctx.Get("Vector4").New(z)
-	return Vector4FromJSObject(p, ba.ctx)
+	v.p.Set("z", z)
+	return v
 }
-
-*/

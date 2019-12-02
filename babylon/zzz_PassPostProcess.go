@@ -93,7 +93,3 @@ func (ba *Babylon) NewPassPostProcess(name string, options float64, opts *NewPas
 	p := ba.ctx.Get("PassPostProcess").New(args...)
 	return PassPostProcessFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

@@ -74,38 +74,34 @@ func (p *ProceduralTextureSceneComponent) Register() {
 	p.p.Call("register")
 }
 
-/*
-
 // Name returns the Name property of class ProceduralTextureSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#name
-func (p *ProceduralTextureSceneComponent) Name(name string) *ProceduralTextureSceneComponent {
-	p := ba.ctx.Get("ProceduralTextureSceneComponent").New(name)
-	return ProceduralTextureSceneComponentFromJSObject(p, ba.ctx)
+func (p *ProceduralTextureSceneComponent) Name() string {
+	retVal := p.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ProceduralTextureSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#name
 func (p *ProceduralTextureSceneComponent) SetName(name string) *ProceduralTextureSceneComponent {
-	p := ba.ctx.Get("ProceduralTextureSceneComponent").New(name)
-	return ProceduralTextureSceneComponentFromJSObject(p, ba.ctx)
+	p.p.Set("name", name)
+	return p
 }
 
 // Scene returns the Scene property of class ProceduralTextureSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#scene
-func (p *ProceduralTextureSceneComponent) Scene(scene *Scene) *ProceduralTextureSceneComponent {
-	p := ba.ctx.Get("ProceduralTextureSceneComponent").New(scene.JSObject())
-	return ProceduralTextureSceneComponentFromJSObject(p, ba.ctx)
+func (p *ProceduralTextureSceneComponent) Scene() *Scene {
+	retVal := p.p.Get("scene")
+	return SceneFromJSObject(retVal, p.ctx)
 }
 
 // SetScene sets the Scene property of class ProceduralTextureSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#scene
 func (p *ProceduralTextureSceneComponent) SetScene(scene *Scene) *ProceduralTextureSceneComponent {
-	p := ba.ctx.Get("ProceduralTextureSceneComponent").New(scene.JSObject())
-	return ProceduralTextureSceneComponentFromJSObject(p, ba.ctx)
+	p.p.Set("scene", scene.JSObject())
+	return p
 }
-
-*/

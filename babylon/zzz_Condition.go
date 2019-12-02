@@ -66,7 +66,3 @@ func (c *Condition) Serialize() interface{} {
 	retVal := c.p.Call("serialize")
 	return retVal
 }
-
-/*
-
- */

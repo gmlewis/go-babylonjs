@@ -99,86 +99,82 @@ func (p *PBRSpecularGlossinessMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // DiffuseColor returns the DiffuseColor property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#diffusecolor
-func (p *PBRSpecularGlossinessMaterial) DiffuseColor(diffuseColor *Color3) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(diffuseColor.JSObject())
-	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
+func (p *PBRSpecularGlossinessMaterial) DiffuseColor() *Color3 {
+	retVal := p.p.Get("diffuseColor")
+	return Color3FromJSObject(retVal, p.ctx)
 }
 
 // SetDiffuseColor sets the DiffuseColor property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#diffusecolor
 func (p *PBRSpecularGlossinessMaterial) SetDiffuseColor(diffuseColor *Color3) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(diffuseColor.JSObject())
-	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("diffuseColor", diffuseColor.JSObject())
+	return p
 }
 
 // DiffuseTexture returns the DiffuseTexture property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#diffusetexture
-func (p *PBRSpecularGlossinessMaterial) DiffuseTexture(diffuseTexture *BaseTexture) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(diffuseTexture.JSObject())
-	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
+func (p *PBRSpecularGlossinessMaterial) DiffuseTexture() *BaseTexture {
+	retVal := p.p.Get("diffuseTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetDiffuseTexture sets the DiffuseTexture property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#diffusetexture
 func (p *PBRSpecularGlossinessMaterial) SetDiffuseTexture(diffuseTexture *BaseTexture) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(diffuseTexture.JSObject())
-	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("diffuseTexture", diffuseTexture.JSObject())
+	return p
 }
 
 // Glossiness returns the Glossiness property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#glossiness
-func (p *PBRSpecularGlossinessMaterial) Glossiness(glossiness float64) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(glossiness)
-	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
+func (p *PBRSpecularGlossinessMaterial) Glossiness() float64 {
+	retVal := p.p.Get("glossiness")
+	return retVal.Float()
 }
 
 // SetGlossiness sets the Glossiness property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#glossiness
 func (p *PBRSpecularGlossinessMaterial) SetGlossiness(glossiness float64) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(glossiness)
-	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("glossiness", glossiness)
+	return p
 }
 
 // SpecularColor returns the SpecularColor property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#specularcolor
-func (p *PBRSpecularGlossinessMaterial) SpecularColor(specularColor *Color3) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(specularColor.JSObject())
-	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
+func (p *PBRSpecularGlossinessMaterial) SpecularColor() *Color3 {
+	retVal := p.p.Get("specularColor")
+	return Color3FromJSObject(retVal, p.ctx)
 }
 
 // SetSpecularColor sets the SpecularColor property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#specularcolor
 func (p *PBRSpecularGlossinessMaterial) SetSpecularColor(specularColor *Color3) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(specularColor.JSObject())
-	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("specularColor", specularColor.JSObject())
+	return p
 }
 
 // SpecularGlossinessTexture returns the SpecularGlossinessTexture property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#specularglossinesstexture
-func (p *PBRSpecularGlossinessMaterial) SpecularGlossinessTexture(specularGlossinessTexture *BaseTexture) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(specularGlossinessTexture.JSObject())
-	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
+func (p *PBRSpecularGlossinessMaterial) SpecularGlossinessTexture() *BaseTexture {
+	retVal := p.p.Get("specularGlossinessTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetSpecularGlossinessTexture sets the SpecularGlossinessTexture property of class PBRSpecularGlossinessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#specularglossinesstexture
 func (p *PBRSpecularGlossinessMaterial) SetSpecularGlossinessTexture(specularGlossinessTexture *BaseTexture) *PBRSpecularGlossinessMaterial {
-	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(specularGlossinessTexture.JSObject())
-	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("specularGlossinessTexture", specularGlossinessTexture.JSObject())
+	return p
 }
-
-*/

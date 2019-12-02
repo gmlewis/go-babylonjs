@@ -36,86 +36,86 @@ func ISimplificationTaskArrayToJSArray(array []*ISimplificationTask) []interface
 	return result
 }
 
-/*
-
 // Mesh returns the Mesh property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#mesh
-func (i *ISimplificationTask) Mesh(mesh *Mesh) *ISimplificationTask {
-	p := ba.ctx.Get("ISimplificationTask").New(mesh.JSObject())
-	return ISimplificationTaskFromJSObject(p, ba.ctx)
+func (i *ISimplificationTask) Mesh() *Mesh {
+	retVal := i.p.Get("mesh")
+	return MeshFromJSObject(retVal, i.ctx)
 }
 
 // SetMesh sets the Mesh property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#mesh
 func (i *ISimplificationTask) SetMesh(mesh *Mesh) *ISimplificationTask {
-	p := ba.ctx.Get("ISimplificationTask").New(mesh.JSObject())
-	return ISimplificationTaskFromJSObject(p, ba.ctx)
+	i.p.Set("mesh", mesh.JSObject())
+	return i
 }
 
 // ParallelProcessing returns the ParallelProcessing property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#parallelprocessing
-func (i *ISimplificationTask) ParallelProcessing(parallelProcessing bool) *ISimplificationTask {
-	p := ba.ctx.Get("ISimplificationTask").New(parallelProcessing)
-	return ISimplificationTaskFromJSObject(p, ba.ctx)
+func (i *ISimplificationTask) ParallelProcessing() bool {
+	retVal := i.p.Get("parallelProcessing")
+	return retVal.Bool()
 }
 
 // SetParallelProcessing sets the ParallelProcessing property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#parallelprocessing
 func (i *ISimplificationTask) SetParallelProcessing(parallelProcessing bool) *ISimplificationTask {
-	p := ba.ctx.Get("ISimplificationTask").New(parallelProcessing)
-	return ISimplificationTaskFromJSObject(p, ba.ctx)
+	i.p.Set("parallelProcessing", parallelProcessing)
+	return i
 }
 
 // Settings returns the Settings property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#settings
-func (i *ISimplificationTask) Settings(settings []*ISimplificationSettings) *ISimplificationTask {
-	p := ba.ctx.Get("ISimplificationTask").New(settings)
-	return ISimplificationTaskFromJSObject(p, ba.ctx)
+func (i *ISimplificationTask) Settings() []*ISimplificationSettings {
+	retVal := i.p.Get("settings")
+	result := []*ISimplificationSettings{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ISimplificationSettingsFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetSettings sets the Settings property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#settings
 func (i *ISimplificationTask) SetSettings(settings []*ISimplificationSettings) *ISimplificationTask {
-	p := ba.ctx.Get("ISimplificationTask").New(settings)
-	return ISimplificationTaskFromJSObject(p, ba.ctx)
+	i.p.Set("settings", settings)
+	return i
 }
 
 // SimplificationType returns the SimplificationType property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#simplificationtype
-func (i *ISimplificationTask) SimplificationType(simplificationType js.Value) *ISimplificationTask {
-	p := ba.ctx.Get("ISimplificationTask").New(simplificationType)
-	return ISimplificationTaskFromJSObject(p, ba.ctx)
+func (i *ISimplificationTask) SimplificationType() js.Value {
+	retVal := i.p.Get("simplificationType")
+	return retVal
 }
 
 // SetSimplificationType sets the SimplificationType property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#simplificationtype
 func (i *ISimplificationTask) SetSimplificationType(simplificationType js.Value) *ISimplificationTask {
-	p := ba.ctx.Get("ISimplificationTask").New(simplificationType)
-	return ISimplificationTaskFromJSObject(p, ba.ctx)
+	i.p.Set("simplificationType", simplificationType)
+	return i
 }
 
 // SuccessCallback returns the SuccessCallback property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#successcallback
-func (i *ISimplificationTask) SuccessCallback(successCallback func()) *ISimplificationTask {
-	p := ba.ctx.Get("ISimplificationTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {successCallback(); return nil}))
-	return ISimplificationTaskFromJSObject(p, ba.ctx)
+func (i *ISimplificationTask) SuccessCallback() js.Value {
+	retVal := i.p.Get("successCallback")
+	return retVal
 }
 
 // SetSuccessCallback sets the SuccessCallback property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#successcallback
 func (i *ISimplificationTask) SetSuccessCallback(successCallback func()) *ISimplificationTask {
-	p := ba.ctx.Get("ISimplificationTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {successCallback(); return nil}))
-	return ISimplificationTaskFromJSObject(p, ba.ctx)
+	i.p.Set("successCallback", js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
+	return i
 }
-
-*/

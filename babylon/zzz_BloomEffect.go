@@ -84,54 +84,50 @@ func (b *BloomEffect) DisposeEffects(camera *Camera) {
 	b.p.Call("disposeEffects", args...)
 }
 
-/*
-
 // Kernel returns the Kernel property of class BloomEffect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloomeffect#kernel
-func (b *BloomEffect) Kernel(kernel float64) *BloomEffect {
-	p := ba.ctx.Get("BloomEffect").New(kernel)
-	return BloomEffectFromJSObject(p, ba.ctx)
+func (b *BloomEffect) Kernel() float64 {
+	retVal := b.p.Get("kernel")
+	return retVal.Float()
 }
 
 // SetKernel sets the Kernel property of class BloomEffect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloomeffect#kernel
 func (b *BloomEffect) SetKernel(kernel float64) *BloomEffect {
-	p := ba.ctx.Get("BloomEffect").New(kernel)
-	return BloomEffectFromJSObject(p, ba.ctx)
+	b.p.Set("kernel", kernel)
+	return b
 }
 
 // Threshold returns the Threshold property of class BloomEffect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloomeffect#threshold
-func (b *BloomEffect) Threshold(threshold float64) *BloomEffect {
-	p := ba.ctx.Get("BloomEffect").New(threshold)
-	return BloomEffectFromJSObject(p, ba.ctx)
+func (b *BloomEffect) Threshold() float64 {
+	retVal := b.p.Get("threshold")
+	return retVal.Float()
 }
 
 // SetThreshold sets the Threshold property of class BloomEffect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloomeffect#threshold
 func (b *BloomEffect) SetThreshold(threshold float64) *BloomEffect {
-	p := ba.ctx.Get("BloomEffect").New(threshold)
-	return BloomEffectFromJSObject(p, ba.ctx)
+	b.p.Set("threshold", threshold)
+	return b
 }
 
 // Weight returns the Weight property of class BloomEffect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloomeffect#weight
-func (b *BloomEffect) Weight(weight float64) *BloomEffect {
-	p := ba.ctx.Get("BloomEffect").New(weight)
-	return BloomEffectFromJSObject(p, ba.ctx)
+func (b *BloomEffect) Weight() float64 {
+	retVal := b.p.Get("weight")
+	return retVal.Float()
 }
 
 // SetWeight sets the Weight property of class BloomEffect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloomeffect#weight
 func (b *BloomEffect) SetWeight(weight float64) *BloomEffect {
-	p := ba.ctx.Get("BloomEffect").New(weight)
-	return BloomEffectFromJSObject(p, ba.ctx)
+	b.p.Set("weight", weight)
+	return b
 }
-
-*/

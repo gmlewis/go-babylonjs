@@ -69,86 +69,82 @@ func (f *FresnelParameters) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // Bias returns the Bias property of class FresnelParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#bias
-func (f *FresnelParameters) Bias(bias float64) *FresnelParameters {
-	p := ba.ctx.Get("FresnelParameters").New(bias)
-	return FresnelParametersFromJSObject(p, ba.ctx)
+func (f *FresnelParameters) Bias() float64 {
+	retVal := f.p.Get("bias")
+	return retVal.Float()
 }
 
 // SetBias sets the Bias property of class FresnelParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#bias
 func (f *FresnelParameters) SetBias(bias float64) *FresnelParameters {
-	p := ba.ctx.Get("FresnelParameters").New(bias)
-	return FresnelParametersFromJSObject(p, ba.ctx)
+	f.p.Set("bias", bias)
+	return f
 }
 
 // IsEnabled returns the IsEnabled property of class FresnelParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#isenabled
-func (f *FresnelParameters) IsEnabled(isEnabled bool) *FresnelParameters {
-	p := ba.ctx.Get("FresnelParameters").New(isEnabled)
-	return FresnelParametersFromJSObject(p, ba.ctx)
+func (f *FresnelParameters) IsEnabled() bool {
+	retVal := f.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class FresnelParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#isenabled
 func (f *FresnelParameters) SetIsEnabled(isEnabled bool) *FresnelParameters {
-	p := ba.ctx.Get("FresnelParameters").New(isEnabled)
-	return FresnelParametersFromJSObject(p, ba.ctx)
+	f.p.Set("isEnabled", isEnabled)
+	return f
 }
 
 // LeftColor returns the LeftColor property of class FresnelParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#leftcolor
-func (f *FresnelParameters) LeftColor(leftColor *Color3) *FresnelParameters {
-	p := ba.ctx.Get("FresnelParameters").New(leftColor.JSObject())
-	return FresnelParametersFromJSObject(p, ba.ctx)
+func (f *FresnelParameters) LeftColor() *Color3 {
+	retVal := f.p.Get("leftColor")
+	return Color3FromJSObject(retVal, f.ctx)
 }
 
 // SetLeftColor sets the LeftColor property of class FresnelParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#leftcolor
 func (f *FresnelParameters) SetLeftColor(leftColor *Color3) *FresnelParameters {
-	p := ba.ctx.Get("FresnelParameters").New(leftColor.JSObject())
-	return FresnelParametersFromJSObject(p, ba.ctx)
+	f.p.Set("leftColor", leftColor.JSObject())
+	return f
 }
 
 // Power returns the Power property of class FresnelParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#power
-func (f *FresnelParameters) Power(power float64) *FresnelParameters {
-	p := ba.ctx.Get("FresnelParameters").New(power)
-	return FresnelParametersFromJSObject(p, ba.ctx)
+func (f *FresnelParameters) Power() float64 {
+	retVal := f.p.Get("power")
+	return retVal.Float()
 }
 
 // SetPower sets the Power property of class FresnelParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#power
 func (f *FresnelParameters) SetPower(power float64) *FresnelParameters {
-	p := ba.ctx.Get("FresnelParameters").New(power)
-	return FresnelParametersFromJSObject(p, ba.ctx)
+	f.p.Set("power", power)
+	return f
 }
 
 // RightColor returns the RightColor property of class FresnelParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#rightcolor
-func (f *FresnelParameters) RightColor(rightColor *Color3) *FresnelParameters {
-	p := ba.ctx.Get("FresnelParameters").New(rightColor.JSObject())
-	return FresnelParametersFromJSObject(p, ba.ctx)
+func (f *FresnelParameters) RightColor() *Color3 {
+	retVal := f.p.Get("rightColor")
+	return Color3FromJSObject(retVal, f.ctx)
 }
 
 // SetRightColor sets the RightColor property of class FresnelParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#rightcolor
 func (f *FresnelParameters) SetRightColor(rightColor *Color3) *FresnelParameters {
-	p := ba.ctx.Get("FresnelParameters").New(rightColor.JSObject())
-	return FresnelParametersFromJSObject(p, ba.ctx)
+	f.p.Set("rightColor", rightColor.JSObject())
+	return f
 }
-
-*/

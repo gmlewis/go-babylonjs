@@ -90,22 +90,18 @@ func (i *InstancedLinesMesh) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // IntersectionThreshold returns the IntersectionThreshold property of class InstancedLinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#intersectionthreshold
-func (i *InstancedLinesMesh) IntersectionThreshold(intersectionThreshold float64) *InstancedLinesMesh {
-	p := ba.ctx.Get("InstancedLinesMesh").New(intersectionThreshold)
-	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+func (i *InstancedLinesMesh) IntersectionThreshold() float64 {
+	retVal := i.p.Get("intersectionThreshold")
+	return retVal.Float()
 }
 
 // SetIntersectionThreshold sets the IntersectionThreshold property of class InstancedLinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#intersectionthreshold
 func (i *InstancedLinesMesh) SetIntersectionThreshold(intersectionThreshold float64) *InstancedLinesMesh {
-	p := ba.ctx.Get("InstancedLinesMesh").New(intersectionThreshold)
-	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+	i.p.Set("intersectionThreshold", intersectionThreshold)
+	return i
 }
-
-*/

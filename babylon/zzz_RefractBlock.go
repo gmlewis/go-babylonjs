@@ -58,70 +58,66 @@ func (r *RefractBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Incident returns the Incident property of class RefractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractblock#incident
-func (r *RefractBlock) Incident(incident *NodeMaterialConnectionPoint) *RefractBlock {
-	p := ba.ctx.Get("RefractBlock").New(incident.JSObject())
-	return RefractBlockFromJSObject(p, ba.ctx)
+func (r *RefractBlock) Incident() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("incident")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetIncident sets the Incident property of class RefractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractblock#incident
 func (r *RefractBlock) SetIncident(incident *NodeMaterialConnectionPoint) *RefractBlock {
-	p := ba.ctx.Get("RefractBlock").New(incident.JSObject())
-	return RefractBlockFromJSObject(p, ba.ctx)
+	r.p.Set("incident", incident.JSObject())
+	return r
 }
 
 // Ior returns the Ior property of class RefractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractblock#ior
-func (r *RefractBlock) Ior(ior *NodeMaterialConnectionPoint) *RefractBlock {
-	p := ba.ctx.Get("RefractBlock").New(ior.JSObject())
-	return RefractBlockFromJSObject(p, ba.ctx)
+func (r *RefractBlock) Ior() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("ior")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetIor sets the Ior property of class RefractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractblock#ior
 func (r *RefractBlock) SetIor(ior *NodeMaterialConnectionPoint) *RefractBlock {
-	p := ba.ctx.Get("RefractBlock").New(ior.JSObject())
-	return RefractBlockFromJSObject(p, ba.ctx)
+	r.p.Set("ior", ior.JSObject())
+	return r
 }
 
 // Normal returns the Normal property of class RefractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractblock#normal
-func (r *RefractBlock) Normal(normal *NodeMaterialConnectionPoint) *RefractBlock {
-	p := ba.ctx.Get("RefractBlock").New(normal.JSObject())
-	return RefractBlockFromJSObject(p, ba.ctx)
+func (r *RefractBlock) Normal() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("normal")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetNormal sets the Normal property of class RefractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractblock#normal
 func (r *RefractBlock) SetNormal(normal *NodeMaterialConnectionPoint) *RefractBlock {
-	p := ba.ctx.Get("RefractBlock").New(normal.JSObject())
-	return RefractBlockFromJSObject(p, ba.ctx)
+	r.p.Set("normal", normal.JSObject())
+	return r
 }
 
 // Output returns the Output property of class RefractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractblock#output
-func (r *RefractBlock) Output(output *NodeMaterialConnectionPoint) *RefractBlock {
-	p := ba.ctx.Get("RefractBlock").New(output.JSObject())
-	return RefractBlockFromJSObject(p, ba.ctx)
+func (r *RefractBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetOutput sets the Output property of class RefractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractblock#output
 func (r *RefractBlock) SetOutput(output *NodeMaterialConnectionPoint) *RefractBlock {
-	p := ba.ctx.Get("RefractBlock").New(output.JSObject())
-	return RefractBlockFromJSObject(p, ba.ctx)
+	r.p.Set("output", output.JSObject())
+	return r
 }
-
-*/

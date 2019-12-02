@@ -36,102 +36,98 @@ func VRTeleportationOptionsArrayToJSArray(array []*VRTeleportationOptions) []int
 	return result
 }
 
-/*
-
 // EasingFunction returns the EasingFunction property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#easingfunction
-func (v *VRTeleportationOptions) EasingFunction(easingFunction *EasingFunction) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(easingFunction.JSObject())
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+func (v *VRTeleportationOptions) EasingFunction() *EasingFunction {
+	retVal := v.p.Get("easingFunction")
+	return EasingFunctionFromJSObject(retVal, v.ctx)
 }
 
 // SetEasingFunction sets the EasingFunction property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#easingfunction
 func (v *VRTeleportationOptions) SetEasingFunction(easingFunction *EasingFunction) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(easingFunction.JSObject())
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("easingFunction", easingFunction.JSObject())
+	return v
 }
 
 // FloorMeshName returns the FloorMeshName property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#floormeshname
-func (v *VRTeleportationOptions) FloorMeshName(floorMeshName string) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(floorMeshName)
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+func (v *VRTeleportationOptions) FloorMeshName() string {
+	retVal := v.p.Get("floorMeshName")
+	return retVal.String()
 }
 
 // SetFloorMeshName sets the FloorMeshName property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#floormeshname
 func (v *VRTeleportationOptions) SetFloorMeshName(floorMeshName string) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(floorMeshName)
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("floorMeshName", floorMeshName)
+	return v
 }
 
 // FloorMeshes returns the FloorMeshes property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#floormeshes
-func (v *VRTeleportationOptions) FloorMeshes(floorMeshes *Mesh) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(floorMeshes.JSObject())
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+func (v *VRTeleportationOptions) FloorMeshes() *Mesh {
+	retVal := v.p.Get("floorMeshes")
+	return MeshFromJSObject(retVal, v.ctx)
 }
 
 // SetFloorMeshes sets the FloorMeshes property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#floormeshes
 func (v *VRTeleportationOptions) SetFloorMeshes(floorMeshes *Mesh) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(floorMeshes.JSObject())
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("floorMeshes", floorMeshes.JSObject())
+	return v
 }
 
 // TeleportationMode returns the TeleportationMode property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#teleportationmode
-func (v *VRTeleportationOptions) TeleportationMode(teleportationMode float64) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(teleportationMode)
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+func (v *VRTeleportationOptions) TeleportationMode() float64 {
+	retVal := v.p.Get("teleportationMode")
+	return retVal.Float()
 }
 
 // SetTeleportationMode sets the TeleportationMode property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#teleportationmode
 func (v *VRTeleportationOptions) SetTeleportationMode(teleportationMode float64) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(teleportationMode)
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("teleportationMode", teleportationMode)
+	return v
 }
 
 // TeleportationSpeed returns the TeleportationSpeed property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#teleportationspeed
-func (v *VRTeleportationOptions) TeleportationSpeed(teleportationSpeed float64) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(teleportationSpeed)
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+func (v *VRTeleportationOptions) TeleportationSpeed() float64 {
+	retVal := v.p.Get("teleportationSpeed")
+	return retVal.Float()
 }
 
 // SetTeleportationSpeed sets the TeleportationSpeed property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#teleportationspeed
 func (v *VRTeleportationOptions) SetTeleportationSpeed(teleportationSpeed float64) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(teleportationSpeed)
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("teleportationSpeed", teleportationSpeed)
+	return v
 }
 
 // TeleportationTime returns the TeleportationTime property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#teleportationtime
-func (v *VRTeleportationOptions) TeleportationTime(teleportationTime float64) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(teleportationTime)
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+func (v *VRTeleportationOptions) TeleportationTime() float64 {
+	retVal := v.p.Get("teleportationTime")
+	return retVal.Float()
 }
 
 // SetTeleportationTime sets the TeleportationTime property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#teleportationtime
 func (v *VRTeleportationOptions) SetTeleportationTime(teleportationTime float64) *VRTeleportationOptions {
-	p := ba.ctx.Get("VRTeleportationOptions").New(teleportationTime)
-	return VRTeleportationOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("teleportationTime", teleportationTime)
+	return v
 }
-
-*/

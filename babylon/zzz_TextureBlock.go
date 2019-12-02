@@ -171,150 +171,146 @@ func (t *TextureBlock) _deserialize(serializationObject interface{}, scene *Scen
 	t.p.Call("_deserialize", args...)
 }
 
-/*
-
 // A returns the A property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#a
-func (t *TextureBlock) A(a *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(a.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+func (t *TextureBlock) A() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("a")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetA sets the A property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#a
 func (t *TextureBlock) SetA(a *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(a.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+	t.p.Set("a", a.JSObject())
+	return t
 }
 
 // B returns the B property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#b
-func (t *TextureBlock) B(b *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(b.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+func (t *TextureBlock) B() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("b")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetB sets the B property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#b
 func (t *TextureBlock) SetB(b *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(b.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+	t.p.Set("b", b.JSObject())
+	return t
 }
 
 // G returns the G property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#g
-func (t *TextureBlock) G(g *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(g.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+func (t *TextureBlock) G() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("g")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetG sets the G property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#g
 func (t *TextureBlock) SetG(g *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(g.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+	t.p.Set("g", g.JSObject())
+	return t
 }
 
 // R returns the R property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#r
-func (t *TextureBlock) R(r *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(r.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+func (t *TextureBlock) R() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("r")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetR sets the R property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#r
 func (t *TextureBlock) SetR(r *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(r.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+	t.p.Set("r", r.JSObject())
+	return t
 }
 
 // Rgb returns the Rgb property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#rgb
-func (t *TextureBlock) Rgb(rgb *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(rgb.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+func (t *TextureBlock) Rgb() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("rgb")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetRgb sets the Rgb property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#rgb
 func (t *TextureBlock) SetRgb(rgb *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(rgb.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+	t.p.Set("rgb", rgb.JSObject())
+	return t
 }
 
 // Rgba returns the Rgba property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#rgba
-func (t *TextureBlock) Rgba(rgba *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(rgba.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+func (t *TextureBlock) Rgba() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("rgba")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetRgba sets the Rgba property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#rgba
 func (t *TextureBlock) SetRgba(rgba *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(rgba.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+	t.p.Set("rgba", rgba.JSObject())
+	return t
 }
 
 // Target returns the Target property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#target
-func (t *TextureBlock) Target(target js.Value) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(target)
-	return TextureBlockFromJSObject(p, ba.ctx)
+func (t *TextureBlock) Target() js.Value {
+	retVal := t.p.Get("target")
+	return retVal
 }
 
 // SetTarget sets the Target property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#target
 func (t *TextureBlock) SetTarget(target js.Value) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(target)
-	return TextureBlockFromJSObject(p, ba.ctx)
+	t.p.Set("target", target)
+	return t
 }
 
 // Texture returns the Texture property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#texture
-func (t *TextureBlock) Texture(texture *Texture) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(texture.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+func (t *TextureBlock) Texture() *Texture {
+	retVal := t.p.Get("texture")
+	return TextureFromJSObject(retVal, t.ctx)
 }
 
 // SetTexture sets the Texture property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#texture
 func (t *TextureBlock) SetTexture(texture *Texture) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(texture.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+	t.p.Set("texture", texture.JSObject())
+	return t
 }
 
 // Uv returns the Uv property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#uv
-func (t *TextureBlock) Uv(uv *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(uv.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+func (t *TextureBlock) Uv() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("uv")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetUv sets the Uv property of class TextureBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureblock#uv
 func (t *TextureBlock) SetUv(uv *NodeMaterialConnectionPoint) *TextureBlock {
-	p := ba.ctx.Get("TextureBlock").New(uv.JSObject())
-	return TextureBlockFromJSObject(p, ba.ctx)
+	t.p.Set("uv", uv.JSObject())
+	return t
 }
-
-*/

@@ -49,7 +49,3 @@ func (c *CanvasGenerator) CreateCanvas(width float64, height float64) js.Value {
 	retVal := c.p.Call("CreateCanvas", args...)
 	return retVal
 }
-
-/*
-
- */

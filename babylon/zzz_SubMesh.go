@@ -352,102 +352,98 @@ func (s *SubMesh) UpdateBoundingInfo(world *Matrix) *SubMesh {
 	return SubMeshFromJSObject(retVal, s.ctx)
 }
 
-/*
-
 // IndexCount returns the IndexCount property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#indexcount
-func (s *SubMesh) IndexCount(indexCount float64) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(indexCount)
-	return SubMeshFromJSObject(p, ba.ctx)
+func (s *SubMesh) IndexCount() float64 {
+	retVal := s.p.Get("indexCount")
+	return retVal.Float()
 }
 
 // SetIndexCount sets the IndexCount property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#indexcount
 func (s *SubMesh) SetIndexCount(indexCount float64) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(indexCount)
-	return SubMeshFromJSObject(p, ba.ctx)
+	s.p.Set("indexCount", indexCount)
+	return s
 }
 
 // IndexStart returns the IndexStart property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#indexstart
-func (s *SubMesh) IndexStart(indexStart float64) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(indexStart)
-	return SubMeshFromJSObject(p, ba.ctx)
+func (s *SubMesh) IndexStart() float64 {
+	retVal := s.p.Get("indexStart")
+	return retVal.Float()
 }
 
 // SetIndexStart sets the IndexStart property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#indexstart
 func (s *SubMesh) SetIndexStart(indexStart float64) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(indexStart)
-	return SubMeshFromJSObject(p, ba.ctx)
+	s.p.Set("indexStart", indexStart)
+	return s
 }
 
 // IsGlobal returns the IsGlobal property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#isglobal
-func (s *SubMesh) IsGlobal(IsGlobal bool) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(IsGlobal)
-	return SubMeshFromJSObject(p, ba.ctx)
+func (s *SubMesh) IsGlobal() bool {
+	retVal := s.p.Get("IsGlobal")
+	return retVal.Bool()
 }
 
 // SetIsGlobal sets the IsGlobal property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#isglobal
 func (s *SubMesh) SetIsGlobal(IsGlobal bool) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(IsGlobal)
-	return SubMeshFromJSObject(p, ba.ctx)
+	s.p.Set("IsGlobal", IsGlobal)
+	return s
 }
 
 // MaterialIndex returns the MaterialIndex property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#materialindex
-func (s *SubMesh) MaterialIndex(materialIndex float64) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(materialIndex)
-	return SubMeshFromJSObject(p, ba.ctx)
+func (s *SubMesh) MaterialIndex() float64 {
+	retVal := s.p.Get("materialIndex")
+	return retVal.Float()
 }
 
 // SetMaterialIndex sets the MaterialIndex property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#materialindex
 func (s *SubMesh) SetMaterialIndex(materialIndex float64) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(materialIndex)
-	return SubMeshFromJSObject(p, ba.ctx)
+	s.p.Set("materialIndex", materialIndex)
+	return s
 }
 
 // VerticesCount returns the VerticesCount property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#verticescount
-func (s *SubMesh) VerticesCount(verticesCount float64) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(verticesCount)
-	return SubMeshFromJSObject(p, ba.ctx)
+func (s *SubMesh) VerticesCount() float64 {
+	retVal := s.p.Get("verticesCount")
+	return retVal.Float()
 }
 
 // SetVerticesCount sets the VerticesCount property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#verticescount
 func (s *SubMesh) SetVerticesCount(verticesCount float64) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(verticesCount)
-	return SubMeshFromJSObject(p, ba.ctx)
+	s.p.Set("verticesCount", verticesCount)
+	return s
 }
 
 // VerticesStart returns the VerticesStart property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#verticesstart
-func (s *SubMesh) VerticesStart(verticesStart float64) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(verticesStart)
-	return SubMeshFromJSObject(p, ba.ctx)
+func (s *SubMesh) VerticesStart() float64 {
+	retVal := s.p.Get("verticesStart")
+	return retVal.Float()
 }
 
 // SetVerticesStart sets the VerticesStart property of class SubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#verticesstart
 func (s *SubMesh) SetVerticesStart(verticesStart float64) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(verticesStart)
-	return SubMeshFromJSObject(p, ba.ctx)
+	s.p.Set("verticesStart", verticesStart)
+	return s
 }
-
-*/

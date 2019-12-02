@@ -163,70 +163,66 @@ func (g *GroundMesh) UpdateCoordinateHeights() *GroundMesh {
 	return GroundMeshFromJSObject(retVal, g.ctx)
 }
 
-/*
-
 // GenerateOctree returns the GenerateOctree property of class GroundMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#generateoctree
-func (g *GroundMesh) GenerateOctree(generateOctree bool) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(generateOctree)
-	return GroundMeshFromJSObject(p, ba.ctx)
+func (g *GroundMesh) GenerateOctree() bool {
+	retVal := g.p.Get("generateOctree")
+	return retVal.Bool()
 }
 
 // SetGenerateOctree sets the GenerateOctree property of class GroundMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#generateoctree
 func (g *GroundMesh) SetGenerateOctree(generateOctree bool) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(generateOctree)
-	return GroundMeshFromJSObject(p, ba.ctx)
+	g.p.Set("generateOctree", generateOctree)
+	return g
 }
 
 // Subdivisions returns the Subdivisions property of class GroundMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisions
-func (g *GroundMesh) Subdivisions(subdivisions float64) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(subdivisions)
-	return GroundMeshFromJSObject(p, ba.ctx)
+func (g *GroundMesh) Subdivisions() float64 {
+	retVal := g.p.Get("subdivisions")
+	return retVal.Float()
 }
 
 // SetSubdivisions sets the Subdivisions property of class GroundMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisions
 func (g *GroundMesh) SetSubdivisions(subdivisions float64) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(subdivisions)
-	return GroundMeshFromJSObject(p, ba.ctx)
+	g.p.Set("subdivisions", subdivisions)
+	return g
 }
 
 // SubdivisionsX returns the SubdivisionsX property of class GroundMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisionsx
-func (g *GroundMesh) SubdivisionsX(subdivisionsX float64) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(subdivisionsX)
-	return GroundMeshFromJSObject(p, ba.ctx)
+func (g *GroundMesh) SubdivisionsX() float64 {
+	retVal := g.p.Get("subdivisionsX")
+	return retVal.Float()
 }
 
 // SetSubdivisionsX sets the SubdivisionsX property of class GroundMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisionsx
 func (g *GroundMesh) SetSubdivisionsX(subdivisionsX float64) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(subdivisionsX)
-	return GroundMeshFromJSObject(p, ba.ctx)
+	g.p.Set("subdivisionsX", subdivisionsX)
+	return g
 }
 
 // SubdivisionsY returns the SubdivisionsY property of class GroundMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisionsy
-func (g *GroundMesh) SubdivisionsY(subdivisionsY float64) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(subdivisionsY)
-	return GroundMeshFromJSObject(p, ba.ctx)
+func (g *GroundMesh) SubdivisionsY() float64 {
+	retVal := g.p.Get("subdivisionsY")
+	return retVal.Float()
 }
 
 // SetSubdivisionsY sets the SubdivisionsY property of class GroundMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisionsy
 func (g *GroundMesh) SetSubdivisionsY(subdivisionsY float64) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(subdivisionsY)
-	return GroundMeshFromJSObject(p, ba.ctx)
+	g.p.Set("subdivisionsY", subdivisionsY)
+	return g
 }
-
-*/

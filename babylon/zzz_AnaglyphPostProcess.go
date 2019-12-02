@@ -76,7 +76,3 @@ func (ba *Babylon) NewAnaglyphPostProcess(name string, options float64, rigCamer
 	p := ba.ctx.Get("AnaglyphPostProcess").New(args...)
 	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

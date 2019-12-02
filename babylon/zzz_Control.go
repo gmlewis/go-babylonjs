@@ -248,1270 +248,1266 @@ func (c *Control) MoveToVector3(position *Vector3, scene *Scene) {
 	c.p.Call("moveToVector3", args...)
 }
 
-/*
-
 // AllowAlphaInheritance returns the AllowAlphaInheritance property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#allowalphainheritance
-func (c *Control) AllowAlphaInheritance(AllowAlphaInheritance bool) *Control {
-	p := ba.ctx.Get("Control").New(AllowAlphaInheritance)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) AllowAlphaInheritance() bool {
+	retVal := c.p.Get("AllowAlphaInheritance")
+	return retVal.Bool()
 }
 
 // SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#allowalphainheritance
 func (c *Control) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *Control {
-	p := ba.ctx.Get("Control").New(AllowAlphaInheritance)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("AllowAlphaInheritance", AllowAlphaInheritance)
+	return c
 }
 
 // Alpha returns the Alpha property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#alpha
-func (c *Control) Alpha(alpha float64) *Control {
-	p := ba.ctx.Get("Control").New(alpha)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Alpha() float64 {
+	retVal := c.p.Get("alpha")
+	return retVal.Float()
 }
 
 // SetAlpha sets the Alpha property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#alpha
 func (c *Control) SetAlpha(alpha float64) *Control {
-	p := ba.ctx.Get("Control").New(alpha)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("alpha", alpha)
+	return c
 }
 
 // CenterX returns the CenterX property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#centerx
-func (c *Control) CenterX(centerX float64) *Control {
-	p := ba.ctx.Get("Control").New(centerX)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) CenterX() float64 {
+	retVal := c.p.Get("centerX")
+	return retVal.Float()
 }
 
 // SetCenterX sets the CenterX property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#centerx
 func (c *Control) SetCenterX(centerX float64) *Control {
-	p := ba.ctx.Get("Control").New(centerX)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("centerX", centerX)
+	return c
 }
 
 // CenterY returns the CenterY property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#centery
-func (c *Control) CenterY(centerY float64) *Control {
-	p := ba.ctx.Get("Control").New(centerY)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) CenterY() float64 {
+	retVal := c.p.Get("centerY")
+	return retVal.Float()
 }
 
 // SetCenterY sets the CenterY property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#centery
 func (c *Control) SetCenterY(centerY float64) *Control {
-	p := ba.ctx.Get("Control").New(centerY)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("centerY", centerY)
+	return c
 }
 
 // ClipChildren returns the ClipChildren property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#clipchildren
-func (c *Control) ClipChildren(clipChildren bool) *Control {
-	p := ba.ctx.Get("Control").New(clipChildren)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) ClipChildren() bool {
+	retVal := c.p.Get("clipChildren")
+	return retVal.Bool()
 }
 
 // SetClipChildren sets the ClipChildren property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#clipchildren
 func (c *Control) SetClipChildren(clipChildren bool) *Control {
-	p := ba.ctx.Get("Control").New(clipChildren)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("clipChildren", clipChildren)
+	return c
 }
 
 // ClipContent returns the ClipContent property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#clipcontent
-func (c *Control) ClipContent(clipContent bool) *Control {
-	p := ba.ctx.Get("Control").New(clipContent)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) ClipContent() bool {
+	retVal := c.p.Get("clipContent")
+	return retVal.Bool()
 }
 
 // SetClipContent sets the ClipContent property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#clipcontent
 func (c *Control) SetClipContent(clipContent bool) *Control {
-	p := ba.ctx.Get("Control").New(clipContent)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("clipContent", clipContent)
+	return c
 }
 
 // Color returns the Color property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#color
-func (c *Control) Color(color string) *Control {
-	p := ba.ctx.Get("Control").New(color)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Color() string {
+	retVal := c.p.Get("color")
+	return retVal.String()
 }
 
 // SetColor sets the Color property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#color
 func (c *Control) SetColor(color string) *Control {
-	p := ba.ctx.Get("Control").New(color)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("color", color)
+	return c
 }
 
 // DisabledColor returns the DisabledColor property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#disabledcolor
-func (c *Control) DisabledColor(disabledColor string) *Control {
-	p := ba.ctx.Get("Control").New(disabledColor)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) DisabledColor() string {
+	retVal := c.p.Get("disabledColor")
+	return retVal.String()
 }
 
 // SetDisabledColor sets the DisabledColor property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#disabledcolor
 func (c *Control) SetDisabledColor(disabledColor string) *Control {
-	p := ba.ctx.Get("Control").New(disabledColor)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("disabledColor", disabledColor)
+	return c
 }
 
 // FontFamily returns the FontFamily property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontfamily
-func (c *Control) FontFamily(fontFamily string) *Control {
-	p := ba.ctx.Get("Control").New(fontFamily)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) FontFamily() string {
+	retVal := c.p.Get("fontFamily")
+	return retVal.String()
 }
 
 // SetFontFamily sets the FontFamily property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontfamily
 func (c *Control) SetFontFamily(fontFamily string) *Control {
-	p := ba.ctx.Get("Control").New(fontFamily)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("fontFamily", fontFamily)
+	return c
 }
 
 // FontOffset returns the FontOffset property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontoffset
-func (c *Control) FontOffset(fontOffset js.Value) *Control {
-	p := ba.ctx.Get("Control").New(fontOffset)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) FontOffset() js.Value {
+	retVal := c.p.Get("fontOffset")
+	return retVal
 }
 
 // SetFontOffset sets the FontOffset property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontoffset
 func (c *Control) SetFontOffset(fontOffset js.Value) *Control {
-	p := ba.ctx.Get("Control").New(fontOffset)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("fontOffset", fontOffset)
+	return c
 }
 
 // FontSize returns the FontSize property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontsize
-func (c *Control) FontSize(fontSize string) *Control {
-	p := ba.ctx.Get("Control").New(fontSize)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) FontSize() string {
+	retVal := c.p.Get("fontSize")
+	return retVal.String()
 }
 
 // SetFontSize sets the FontSize property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontsize
 func (c *Control) SetFontSize(fontSize string) *Control {
-	p := ba.ctx.Get("Control").New(fontSize)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("fontSize", fontSize)
+	return c
 }
 
 // FontSizeInPixels returns the FontSizeInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontsizeinpixels
-func (c *Control) FontSizeInPixels(fontSizeInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(fontSizeInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) FontSizeInPixels() float64 {
+	retVal := c.p.Get("fontSizeInPixels")
+	return retVal.Float()
 }
 
 // SetFontSizeInPixels sets the FontSizeInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontsizeinpixels
 func (c *Control) SetFontSizeInPixels(fontSizeInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(fontSizeInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("fontSizeInPixels", fontSizeInPixels)
+	return c
 }
 
 // FontStyle returns the FontStyle property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontstyle
-func (c *Control) FontStyle(fontStyle string) *Control {
-	p := ba.ctx.Get("Control").New(fontStyle)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) FontStyle() string {
+	retVal := c.p.Get("fontStyle")
+	return retVal.String()
 }
 
 // SetFontStyle sets the FontStyle property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontstyle
 func (c *Control) SetFontStyle(fontStyle string) *Control {
-	p := ba.ctx.Get("Control").New(fontStyle)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("fontStyle", fontStyle)
+	return c
 }
 
 // FontWeight returns the FontWeight property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontweight
-func (c *Control) FontWeight(fontWeight string) *Control {
-	p := ba.ctx.Get("Control").New(fontWeight)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) FontWeight() string {
+	retVal := c.p.Get("fontWeight")
+	return retVal.String()
 }
 
 // SetFontWeight sets the FontWeight property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#fontweight
 func (c *Control) SetFontWeight(fontWeight string) *Control {
-	p := ba.ctx.Get("Control").New(fontWeight)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("fontWeight", fontWeight)
+	return c
 }
 
 // HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#horizontal_alignment_center
-func (c *Control) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *Control {
-	p := ba.ctx.Get("Control").New(HORIZONTAL_ALIGNMENT_CENTER)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) HORIZONTAL_ALIGNMENT_CENTER() float64 {
+	retVal := c.p.Get("HORIZONTAL_ALIGNMENT_CENTER")
+	return retVal.Float()
 }
 
 // SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#horizontal_alignment_center
 func (c *Control) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *Control {
-	p := ba.ctx.Get("Control").New(HORIZONTAL_ALIGNMENT_CENTER)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("HORIZONTAL_ALIGNMENT_CENTER", HORIZONTAL_ALIGNMENT_CENTER)
+	return c
 }
 
 // HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#horizontal_alignment_left
-func (c *Control) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *Control {
-	p := ba.ctx.Get("Control").New(HORIZONTAL_ALIGNMENT_LEFT)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) HORIZONTAL_ALIGNMENT_LEFT() float64 {
+	retVal := c.p.Get("HORIZONTAL_ALIGNMENT_LEFT")
+	return retVal.Float()
 }
 
 // SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#horizontal_alignment_left
 func (c *Control) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *Control {
-	p := ba.ctx.Get("Control").New(HORIZONTAL_ALIGNMENT_LEFT)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("HORIZONTAL_ALIGNMENT_LEFT", HORIZONTAL_ALIGNMENT_LEFT)
+	return c
 }
 
 // HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#horizontal_alignment_right
-func (c *Control) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *Control {
-	p := ba.ctx.Get("Control").New(HORIZONTAL_ALIGNMENT_RIGHT)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) HORIZONTAL_ALIGNMENT_RIGHT() float64 {
+	retVal := c.p.Get("HORIZONTAL_ALIGNMENT_RIGHT")
+	return retVal.Float()
 }
 
 // SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#horizontal_alignment_right
 func (c *Control) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *Control {
-	p := ba.ctx.Get("Control").New(HORIZONTAL_ALIGNMENT_RIGHT)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("HORIZONTAL_ALIGNMENT_RIGHT", HORIZONTAL_ALIGNMENT_RIGHT)
+	return c
 }
 
 // Height returns the Height property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#height
-func (c *Control) Height(height string) *Control {
-	p := ba.ctx.Get("Control").New(height)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Height() string {
+	retVal := c.p.Get("height")
+	return retVal.String()
 }
 
 // SetHeight sets the Height property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#height
 func (c *Control) SetHeight(height string) *Control {
-	p := ba.ctx.Get("Control").New(height)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("height", height)
+	return c
 }
 
 // HeightInPixels returns the HeightInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#heightinpixels
-func (c *Control) HeightInPixels(heightInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(heightInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) HeightInPixels() float64 {
+	retVal := c.p.Get("heightInPixels")
+	return retVal.Float()
 }
 
 // SetHeightInPixels sets the HeightInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#heightinpixels
 func (c *Control) SetHeightInPixels(heightInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(heightInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("heightInPixels", heightInPixels)
+	return c
 }
 
 // HorizontalAlignment returns the HorizontalAlignment property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#horizontalalignment
-func (c *Control) HorizontalAlignment(horizontalAlignment float64) *Control {
-	p := ba.ctx.Get("Control").New(horizontalAlignment)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) HorizontalAlignment() float64 {
+	retVal := c.p.Get("horizontalAlignment")
+	return retVal.Float()
 }
 
 // SetHorizontalAlignment sets the HorizontalAlignment property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#horizontalalignment
 func (c *Control) SetHorizontalAlignment(horizontalAlignment float64) *Control {
-	p := ba.ctx.Get("Control").New(horizontalAlignment)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("horizontalAlignment", horizontalAlignment)
+	return c
 }
 
 // Host returns the Host property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#host
-func (c *Control) Host(host *AdvancedDynamicTexture) *Control {
-	p := ba.ctx.Get("Control").New(host.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Host() *AdvancedDynamicTexture {
+	retVal := c.p.Get("host")
+	return AdvancedDynamicTextureFromJSObject(retVal, c.ctx)
 }
 
 // SetHost sets the Host property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#host
 func (c *Control) SetHost(host *AdvancedDynamicTexture) *Control {
-	p := ba.ctx.Get("Control").New(host.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("host", host.JSObject())
+	return c
 }
 
 // HoverCursor returns the HoverCursor property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#hovercursor
-func (c *Control) HoverCursor(hoverCursor string) *Control {
-	p := ba.ctx.Get("Control").New(hoverCursor)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) HoverCursor() string {
+	retVal := c.p.Get("hoverCursor")
+	return retVal.String()
 }
 
 // SetHoverCursor sets the HoverCursor property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#hovercursor
 func (c *Control) SetHoverCursor(hoverCursor string) *Control {
-	p := ba.ctx.Get("Control").New(hoverCursor)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("hoverCursor", hoverCursor)
+	return c
 }
 
 // IsDirty returns the IsDirty property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#isdirty
-func (c *Control) IsDirty(isDirty bool) *Control {
-	p := ba.ctx.Get("Control").New(isDirty)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) IsDirty() bool {
+	retVal := c.p.Get("isDirty")
+	return retVal.Bool()
 }
 
 // SetIsDirty sets the IsDirty property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#isdirty
 func (c *Control) SetIsDirty(isDirty bool) *Control {
-	p := ba.ctx.Get("Control").New(isDirty)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("isDirty", isDirty)
+	return c
 }
 
 // IsEnabled returns the IsEnabled property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#isenabled
-func (c *Control) IsEnabled(isEnabled bool) *Control {
-	p := ba.ctx.Get("Control").New(isEnabled)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) IsEnabled() bool {
+	retVal := c.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#isenabled
 func (c *Control) SetIsEnabled(isEnabled bool) *Control {
-	p := ba.ctx.Get("Control").New(isEnabled)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("isEnabled", isEnabled)
+	return c
 }
 
 // IsFocusInvisible returns the IsFocusInvisible property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#isfocusinvisible
-func (c *Control) IsFocusInvisible(isFocusInvisible bool) *Control {
-	p := ba.ctx.Get("Control").New(isFocusInvisible)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) IsFocusInvisible() bool {
+	retVal := c.p.Get("isFocusInvisible")
+	return retVal.Bool()
 }
 
 // SetIsFocusInvisible sets the IsFocusInvisible property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#isfocusinvisible
 func (c *Control) SetIsFocusInvisible(isFocusInvisible bool) *Control {
-	p := ba.ctx.Get("Control").New(isFocusInvisible)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("isFocusInvisible", isFocusInvisible)
+	return c
 }
 
 // IsHighlighted returns the IsHighlighted property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#ishighlighted
-func (c *Control) IsHighlighted(isHighlighted bool) *Control {
-	p := ba.ctx.Get("Control").New(isHighlighted)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) IsHighlighted() bool {
+	retVal := c.p.Get("isHighlighted")
+	return retVal.Bool()
 }
 
 // SetIsHighlighted sets the IsHighlighted property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#ishighlighted
 func (c *Control) SetIsHighlighted(isHighlighted bool) *Control {
-	p := ba.ctx.Get("Control").New(isHighlighted)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("isHighlighted", isHighlighted)
+	return c
 }
 
 // IsHitTestVisible returns the IsHitTestVisible property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#ishittestvisible
-func (c *Control) IsHitTestVisible(isHitTestVisible bool) *Control {
-	p := ba.ctx.Get("Control").New(isHitTestVisible)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) IsHitTestVisible() bool {
+	retVal := c.p.Get("isHitTestVisible")
+	return retVal.Bool()
 }
 
 // SetIsHitTestVisible sets the IsHitTestVisible property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#ishittestvisible
 func (c *Control) SetIsHitTestVisible(isHitTestVisible bool) *Control {
-	p := ba.ctx.Get("Control").New(isHitTestVisible)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("isHitTestVisible", isHitTestVisible)
+	return c
 }
 
 // IsPointerBlocker returns the IsPointerBlocker property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#ispointerblocker
-func (c *Control) IsPointerBlocker(isPointerBlocker bool) *Control {
-	p := ba.ctx.Get("Control").New(isPointerBlocker)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) IsPointerBlocker() bool {
+	retVal := c.p.Get("isPointerBlocker")
+	return retVal.Bool()
 }
 
 // SetIsPointerBlocker sets the IsPointerBlocker property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#ispointerblocker
 func (c *Control) SetIsPointerBlocker(isPointerBlocker bool) *Control {
-	p := ba.ctx.Get("Control").New(isPointerBlocker)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("isPointerBlocker", isPointerBlocker)
+	return c
 }
 
 // IsVisible returns the IsVisible property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#isvisible
-func (c *Control) IsVisible(isVisible bool) *Control {
-	p := ba.ctx.Get("Control").New(isVisible)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) IsVisible() bool {
+	retVal := c.p.Get("isVisible")
+	return retVal.Bool()
 }
 
 // SetIsVisible sets the IsVisible property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#isvisible
 func (c *Control) SetIsVisible(isVisible bool) *Control {
-	p := ba.ctx.Get("Control").New(isVisible)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("isVisible", isVisible)
+	return c
 }
 
 // Left returns the Left property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#left
-func (c *Control) Left(left string) *Control {
-	p := ba.ctx.Get("Control").New(left)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Left() string {
+	retVal := c.p.Get("left")
+	return retVal.String()
 }
 
 // SetLeft sets the Left property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#left
 func (c *Control) SetLeft(left string) *Control {
-	p := ba.ctx.Get("Control").New(left)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("left", left)
+	return c
 }
 
 // LeftInPixels returns the LeftInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#leftinpixels
-func (c *Control) LeftInPixels(leftInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(leftInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) LeftInPixels() float64 {
+	retVal := c.p.Get("leftInPixels")
+	return retVal.Float()
 }
 
 // SetLeftInPixels sets the LeftInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#leftinpixels
 func (c *Control) SetLeftInPixels(leftInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(leftInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("leftInPixels", leftInPixels)
+	return c
 }
 
 // LinkOffsetX returns the LinkOffsetX property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#linkoffsetx
-func (c *Control) LinkOffsetX(linkOffsetX string) *Control {
-	p := ba.ctx.Get("Control").New(linkOffsetX)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) LinkOffsetX() string {
+	retVal := c.p.Get("linkOffsetX")
+	return retVal.String()
 }
 
 // SetLinkOffsetX sets the LinkOffsetX property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#linkoffsetx
 func (c *Control) SetLinkOffsetX(linkOffsetX string) *Control {
-	p := ba.ctx.Get("Control").New(linkOffsetX)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("linkOffsetX", linkOffsetX)
+	return c
 }
 
 // LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#linkoffsetxinpixels
-func (c *Control) LinkOffsetXInPixels(linkOffsetXInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(linkOffsetXInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) LinkOffsetXInPixels() float64 {
+	retVal := c.p.Get("linkOffsetXInPixels")
+	return retVal.Float()
 }
 
 // SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#linkoffsetxinpixels
 func (c *Control) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(linkOffsetXInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("linkOffsetXInPixels", linkOffsetXInPixels)
+	return c
 }
 
 // LinkOffsetY returns the LinkOffsetY property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#linkoffsety
-func (c *Control) LinkOffsetY(linkOffsetY string) *Control {
-	p := ba.ctx.Get("Control").New(linkOffsetY)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) LinkOffsetY() string {
+	retVal := c.p.Get("linkOffsetY")
+	return retVal.String()
 }
 
 // SetLinkOffsetY sets the LinkOffsetY property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#linkoffsety
 func (c *Control) SetLinkOffsetY(linkOffsetY string) *Control {
-	p := ba.ctx.Get("Control").New(linkOffsetY)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("linkOffsetY", linkOffsetY)
+	return c
 }
 
 // LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#linkoffsetyinpixels
-func (c *Control) LinkOffsetYInPixels(linkOffsetYInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(linkOffsetYInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) LinkOffsetYInPixels() float64 {
+	retVal := c.p.Get("linkOffsetYInPixels")
+	return retVal.Float()
 }
 
 // SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#linkoffsetyinpixels
 func (c *Control) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(linkOffsetYInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("linkOffsetYInPixels", linkOffsetYInPixels)
+	return c
 }
 
 // LinkedMesh returns the LinkedMesh property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#linkedmesh
-func (c *Control) LinkedMesh(linkedMesh *AbstractMesh) *Control {
-	p := ba.ctx.Get("Control").New(linkedMesh.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) LinkedMesh() *AbstractMesh {
+	retVal := c.p.Get("linkedMesh")
+	return AbstractMeshFromJSObject(retVal, c.ctx)
 }
 
 // SetLinkedMesh sets the LinkedMesh property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#linkedmesh
 func (c *Control) SetLinkedMesh(linkedMesh *AbstractMesh) *Control {
-	p := ba.ctx.Get("Control").New(linkedMesh.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("linkedMesh", linkedMesh.JSObject())
+	return c
 }
 
 // Metadata returns the Metadata property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#metadata
-func (c *Control) Metadata(metadata interface{}) *Control {
-	p := ba.ctx.Get("Control").New(metadata)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Metadata() interface{} {
+	retVal := c.p.Get("metadata")
+	return retVal
 }
 
 // SetMetadata sets the Metadata property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#metadata
 func (c *Control) SetMetadata(metadata interface{}) *Control {
-	p := ba.ctx.Get("Control").New(metadata)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("metadata", metadata)
+	return c
 }
 
 // Name returns the Name property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#name
-func (c *Control) Name(name string) *Control {
-	p := ba.ctx.Get("Control").New(name)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Name() string {
+	retVal := c.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#name
 func (c *Control) SetName(name string) *Control {
-	p := ba.ctx.Get("Control").New(name)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("name", name)
+	return c
 }
 
 // NotRenderable returns the NotRenderable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#notrenderable
-func (c *Control) NotRenderable(notRenderable bool) *Control {
-	p := ba.ctx.Get("Control").New(notRenderable)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) NotRenderable() bool {
+	retVal := c.p.Get("notRenderable")
+	return retVal.Bool()
 }
 
 // SetNotRenderable sets the NotRenderable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#notrenderable
 func (c *Control) SetNotRenderable(notRenderable bool) *Control {
-	p := ba.ctx.Get("Control").New(notRenderable)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("notRenderable", notRenderable)
+	return c
 }
 
 // OnAfterDrawObservable returns the OnAfterDrawObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onafterdrawobservable
-func (c *Control) OnAfterDrawObservable(onAfterDrawObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onAfterDrawObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) OnAfterDrawObservable() *Observable {
+	retVal := c.p.Get("onAfterDrawObservable")
+	return ObservableFromJSObject(retVal, c.ctx)
 }
 
 // SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onafterdrawobservable
 func (c *Control) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onAfterDrawObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("onAfterDrawObservable", onAfterDrawObservable.JSObject())
+	return c
 }
 
 // OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onbeforedrawobservable
-func (c *Control) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onBeforeDrawObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) OnBeforeDrawObservable() *Observable {
+	retVal := c.p.Get("onBeforeDrawObservable")
+	return ObservableFromJSObject(retVal, c.ctx)
 }
 
 // SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onbeforedrawobservable
 func (c *Control) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onBeforeDrawObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("onBeforeDrawObservable", onBeforeDrawObservable.JSObject())
+	return c
 }
 
 // OnDirtyObservable returns the OnDirtyObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#ondirtyobservable
-func (c *Control) OnDirtyObservable(onDirtyObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onDirtyObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) OnDirtyObservable() *Observable {
+	retVal := c.p.Get("onDirtyObservable")
+	return ObservableFromJSObject(retVal, c.ctx)
 }
 
 // SetOnDirtyObservable sets the OnDirtyObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#ondirtyobservable
 func (c *Control) SetOnDirtyObservable(onDirtyObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onDirtyObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("onDirtyObservable", onDirtyObservable.JSObject())
+	return c
 }
 
 // OnPointerClickObservable returns the OnPointerClickObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointerclickobservable
-func (c *Control) OnPointerClickObservable(onPointerClickObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerClickObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) OnPointerClickObservable() *Observable {
+	retVal := c.p.Get("onPointerClickObservable")
+	return ObservableFromJSObject(retVal, c.ctx)
 }
 
 // SetOnPointerClickObservable sets the OnPointerClickObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointerclickobservable
 func (c *Control) SetOnPointerClickObservable(onPointerClickObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerClickObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("onPointerClickObservable", onPointerClickObservable.JSObject())
+	return c
 }
 
 // OnPointerDownObservable returns the OnPointerDownObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointerdownobservable
-func (c *Control) OnPointerDownObservable(onPointerDownObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerDownObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) OnPointerDownObservable() *Observable {
+	retVal := c.p.Get("onPointerDownObservable")
+	return ObservableFromJSObject(retVal, c.ctx)
 }
 
 // SetOnPointerDownObservable sets the OnPointerDownObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointerdownobservable
 func (c *Control) SetOnPointerDownObservable(onPointerDownObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerDownObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("onPointerDownObservable", onPointerDownObservable.JSObject())
+	return c
 }
 
 // OnPointerEnterObservable returns the OnPointerEnterObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointerenterobservable
-func (c *Control) OnPointerEnterObservable(onPointerEnterObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerEnterObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) OnPointerEnterObservable() *Observable {
+	retVal := c.p.Get("onPointerEnterObservable")
+	return ObservableFromJSObject(retVal, c.ctx)
 }
 
 // SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointerenterobservable
 func (c *Control) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerEnterObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("onPointerEnterObservable", onPointerEnterObservable.JSObject())
+	return c
 }
 
 // OnPointerMoveObservable returns the OnPointerMoveObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointermoveobservable
-func (c *Control) OnPointerMoveObservable(onPointerMoveObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerMoveObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) OnPointerMoveObservable() *Observable {
+	retVal := c.p.Get("onPointerMoveObservable")
+	return ObservableFromJSObject(retVal, c.ctx)
 }
 
 // SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointermoveobservable
 func (c *Control) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerMoveObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("onPointerMoveObservable", onPointerMoveObservable.JSObject())
+	return c
 }
 
 // OnPointerOutObservable returns the OnPointerOutObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointeroutobservable
-func (c *Control) OnPointerOutObservable(onPointerOutObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerOutObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) OnPointerOutObservable() *Observable {
+	retVal := c.p.Get("onPointerOutObservable")
+	return ObservableFromJSObject(retVal, c.ctx)
 }
 
 // SetOnPointerOutObservable sets the OnPointerOutObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointeroutobservable
 func (c *Control) SetOnPointerOutObservable(onPointerOutObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerOutObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("onPointerOutObservable", onPointerOutObservable.JSObject())
+	return c
 }
 
 // OnPointerUpObservable returns the OnPointerUpObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointerupobservable
-func (c *Control) OnPointerUpObservable(onPointerUpObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerUpObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) OnPointerUpObservable() *Observable {
+	retVal := c.p.Get("onPointerUpObservable")
+	return ObservableFromJSObject(retVal, c.ctx)
 }
 
 // SetOnPointerUpObservable sets the OnPointerUpObservable property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#onpointerupobservable
 func (c *Control) SetOnPointerUpObservable(onPointerUpObservable *Observable) *Control {
-	p := ba.ctx.Get("Control").New(onPointerUpObservable.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("onPointerUpObservable", onPointerUpObservable.JSObject())
+	return c
 }
 
 // PaddingBottom returns the PaddingBottom property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingbottom
-func (c *Control) PaddingBottom(paddingBottom string) *Control {
-	p := ba.ctx.Get("Control").New(paddingBottom)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) PaddingBottom() string {
+	retVal := c.p.Get("paddingBottom")
+	return retVal.String()
 }
 
 // SetPaddingBottom sets the PaddingBottom property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingbottom
 func (c *Control) SetPaddingBottom(paddingBottom string) *Control {
-	p := ba.ctx.Get("Control").New(paddingBottom)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("paddingBottom", paddingBottom)
+	return c
 }
 
 // PaddingBottomInPixels returns the PaddingBottomInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingbottominpixels
-func (c *Control) PaddingBottomInPixels(paddingBottomInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(paddingBottomInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) PaddingBottomInPixels() float64 {
+	retVal := c.p.Get("paddingBottomInPixels")
+	return retVal.Float()
 }
 
 // SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingbottominpixels
 func (c *Control) SetPaddingBottomInPixels(paddingBottomInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(paddingBottomInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("paddingBottomInPixels", paddingBottomInPixels)
+	return c
 }
 
 // PaddingLeft returns the PaddingLeft property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingleft
-func (c *Control) PaddingLeft(paddingLeft string) *Control {
-	p := ba.ctx.Get("Control").New(paddingLeft)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) PaddingLeft() string {
+	retVal := c.p.Get("paddingLeft")
+	return retVal.String()
 }
 
 // SetPaddingLeft sets the PaddingLeft property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingleft
 func (c *Control) SetPaddingLeft(paddingLeft string) *Control {
-	p := ba.ctx.Get("Control").New(paddingLeft)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("paddingLeft", paddingLeft)
+	return c
 }
 
 // PaddingLeftInPixels returns the PaddingLeftInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingleftinpixels
-func (c *Control) PaddingLeftInPixels(paddingLeftInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(paddingLeftInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) PaddingLeftInPixels() float64 {
+	retVal := c.p.Get("paddingLeftInPixels")
+	return retVal.Float()
 }
 
 // SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingleftinpixels
 func (c *Control) SetPaddingLeftInPixels(paddingLeftInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(paddingLeftInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("paddingLeftInPixels", paddingLeftInPixels)
+	return c
 }
 
 // PaddingRight returns the PaddingRight property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingright
-func (c *Control) PaddingRight(paddingRight string) *Control {
-	p := ba.ctx.Get("Control").New(paddingRight)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) PaddingRight() string {
+	retVal := c.p.Get("paddingRight")
+	return retVal.String()
 }
 
 // SetPaddingRight sets the PaddingRight property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingright
 func (c *Control) SetPaddingRight(paddingRight string) *Control {
-	p := ba.ctx.Get("Control").New(paddingRight)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("paddingRight", paddingRight)
+	return c
 }
 
 // PaddingRightInPixels returns the PaddingRightInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingrightinpixels
-func (c *Control) PaddingRightInPixels(paddingRightInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(paddingRightInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) PaddingRightInPixels() float64 {
+	retVal := c.p.Get("paddingRightInPixels")
+	return retVal.Float()
 }
 
 // SetPaddingRightInPixels sets the PaddingRightInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingrightinpixels
 func (c *Control) SetPaddingRightInPixels(paddingRightInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(paddingRightInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("paddingRightInPixels", paddingRightInPixels)
+	return c
 }
 
 // PaddingTop returns the PaddingTop property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingtop
-func (c *Control) PaddingTop(paddingTop string) *Control {
-	p := ba.ctx.Get("Control").New(paddingTop)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) PaddingTop() string {
+	retVal := c.p.Get("paddingTop")
+	return retVal.String()
 }
 
 // SetPaddingTop sets the PaddingTop property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingtop
 func (c *Control) SetPaddingTop(paddingTop string) *Control {
-	p := ba.ctx.Get("Control").New(paddingTop)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("paddingTop", paddingTop)
+	return c
 }
 
 // PaddingTopInPixels returns the PaddingTopInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingtopinpixels
-func (c *Control) PaddingTopInPixels(paddingTopInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(paddingTopInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) PaddingTopInPixels() float64 {
+	retVal := c.p.Get("paddingTopInPixels")
+	return retVal.Float()
 }
 
 // SetPaddingTopInPixels sets the PaddingTopInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#paddingtopinpixels
 func (c *Control) SetPaddingTopInPixels(paddingTopInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(paddingTopInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("paddingTopInPixels", paddingTopInPixels)
+	return c
 }
 
 // Parent returns the Parent property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#parent
-func (c *Control) Parent(parent *Container) *Control {
-	p := ba.ctx.Get("Control").New(parent.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Parent() *Container {
+	retVal := c.p.Get("parent")
+	return ContainerFromJSObject(retVal, c.ctx)
 }
 
 // SetParent sets the Parent property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#parent
 func (c *Control) SetParent(parent *Container) *Control {
-	p := ba.ctx.Get("Control").New(parent.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("parent", parent.JSObject())
+	return c
 }
 
 // Rotation returns the Rotation property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#rotation
-func (c *Control) Rotation(rotation float64) *Control {
-	p := ba.ctx.Get("Control").New(rotation)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Rotation() float64 {
+	retVal := c.p.Get("rotation")
+	return retVal.Float()
 }
 
 // SetRotation sets the Rotation property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#rotation
 func (c *Control) SetRotation(rotation float64) *Control {
-	p := ba.ctx.Get("Control").New(rotation)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("rotation", rotation)
+	return c
 }
 
 // ScaleX returns the ScaleX property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#scalex
-func (c *Control) ScaleX(scaleX float64) *Control {
-	p := ba.ctx.Get("Control").New(scaleX)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) ScaleX() float64 {
+	retVal := c.p.Get("scaleX")
+	return retVal.Float()
 }
 
 // SetScaleX sets the ScaleX property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#scalex
 func (c *Control) SetScaleX(scaleX float64) *Control {
-	p := ba.ctx.Get("Control").New(scaleX)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("scaleX", scaleX)
+	return c
 }
 
 // ScaleY returns the ScaleY property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#scaley
-func (c *Control) ScaleY(scaleY float64) *Control {
-	p := ba.ctx.Get("Control").New(scaleY)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) ScaleY() float64 {
+	retVal := c.p.Get("scaleY")
+	return retVal.Float()
 }
 
 // SetScaleY sets the ScaleY property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#scaley
 func (c *Control) SetScaleY(scaleY float64) *Control {
-	p := ba.ctx.Get("Control").New(scaleY)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("scaleY", scaleY)
+	return c
 }
 
 // ShadowBlur returns the ShadowBlur property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#shadowblur
-func (c *Control) ShadowBlur(shadowBlur float64) *Control {
-	p := ba.ctx.Get("Control").New(shadowBlur)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) ShadowBlur() float64 {
+	retVal := c.p.Get("shadowBlur")
+	return retVal.Float()
 }
 
 // SetShadowBlur sets the ShadowBlur property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#shadowblur
 func (c *Control) SetShadowBlur(shadowBlur float64) *Control {
-	p := ba.ctx.Get("Control").New(shadowBlur)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("shadowBlur", shadowBlur)
+	return c
 }
 
 // ShadowColor returns the ShadowColor property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#shadowcolor
-func (c *Control) ShadowColor(shadowColor string) *Control {
-	p := ba.ctx.Get("Control").New(shadowColor)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) ShadowColor() string {
+	retVal := c.p.Get("shadowColor")
+	return retVal.String()
 }
 
 // SetShadowColor sets the ShadowColor property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#shadowcolor
 func (c *Control) SetShadowColor(shadowColor string) *Control {
-	p := ba.ctx.Get("Control").New(shadowColor)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("shadowColor", shadowColor)
+	return c
 }
 
 // ShadowOffsetX returns the ShadowOffsetX property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#shadowoffsetx
-func (c *Control) ShadowOffsetX(shadowOffsetX float64) *Control {
-	p := ba.ctx.Get("Control").New(shadowOffsetX)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) ShadowOffsetX() float64 {
+	retVal := c.p.Get("shadowOffsetX")
+	return retVal.Float()
 }
 
 // SetShadowOffsetX sets the ShadowOffsetX property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#shadowoffsetx
 func (c *Control) SetShadowOffsetX(shadowOffsetX float64) *Control {
-	p := ba.ctx.Get("Control").New(shadowOffsetX)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("shadowOffsetX", shadowOffsetX)
+	return c
 }
 
 // ShadowOffsetY returns the ShadowOffsetY property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#shadowoffsety
-func (c *Control) ShadowOffsetY(shadowOffsetY float64) *Control {
-	p := ba.ctx.Get("Control").New(shadowOffsetY)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) ShadowOffsetY() float64 {
+	retVal := c.p.Get("shadowOffsetY")
+	return retVal.Float()
 }
 
 // SetShadowOffsetY sets the ShadowOffsetY property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#shadowoffsety
 func (c *Control) SetShadowOffsetY(shadowOffsetY float64) *Control {
-	p := ba.ctx.Get("Control").New(shadowOffsetY)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("shadowOffsetY", shadowOffsetY)
+	return c
 }
 
 // Style returns the Style property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#style
-func (c *Control) Style(style *Style) *Control {
-	p := ba.ctx.Get("Control").New(style.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Style() *Style {
+	retVal := c.p.Get("style")
+	return StyleFromJSObject(retVal, c.ctx)
 }
 
 // SetStyle sets the Style property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#style
 func (c *Control) SetStyle(style *Style) *Control {
-	p := ba.ctx.Get("Control").New(style.JSObject())
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("style", style.JSObject())
+	return c
 }
 
 // Top returns the Top property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#top
-func (c *Control) Top(top string) *Control {
-	p := ba.ctx.Get("Control").New(top)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Top() string {
+	retVal := c.p.Get("top")
+	return retVal.String()
 }
 
 // SetTop sets the Top property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#top
 func (c *Control) SetTop(top string) *Control {
-	p := ba.ctx.Get("Control").New(top)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("top", top)
+	return c
 }
 
 // TopInPixels returns the TopInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#topinpixels
-func (c *Control) TopInPixels(topInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(topInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) TopInPixels() float64 {
+	retVal := c.p.Get("topInPixels")
+	return retVal.Float()
 }
 
 // SetTopInPixels sets the TopInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#topinpixels
 func (c *Control) SetTopInPixels(topInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(topInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("topInPixels", topInPixels)
+	return c
 }
 
 // TransformCenterX returns the TransformCenterX property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#transformcenterx
-func (c *Control) TransformCenterX(transformCenterX float64) *Control {
-	p := ba.ctx.Get("Control").New(transformCenterX)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) TransformCenterX() float64 {
+	retVal := c.p.Get("transformCenterX")
+	return retVal.Float()
 }
 
 // SetTransformCenterX sets the TransformCenterX property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#transformcenterx
 func (c *Control) SetTransformCenterX(transformCenterX float64) *Control {
-	p := ba.ctx.Get("Control").New(transformCenterX)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("transformCenterX", transformCenterX)
+	return c
 }
 
 // TransformCenterY returns the TransformCenterY property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#transformcentery
-func (c *Control) TransformCenterY(transformCenterY float64) *Control {
-	p := ba.ctx.Get("Control").New(transformCenterY)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) TransformCenterY() float64 {
+	retVal := c.p.Get("transformCenterY")
+	return retVal.Float()
 }
 
 // SetTransformCenterY sets the TransformCenterY property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#transformcentery
 func (c *Control) SetTransformCenterY(transformCenterY float64) *Control {
-	p := ba.ctx.Get("Control").New(transformCenterY)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("transformCenterY", transformCenterY)
+	return c
 }
 
 // TypeName returns the TypeName property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#typename
-func (c *Control) TypeName(typeName string) *Control {
-	p := ba.ctx.Get("Control").New(typeName)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) TypeName() string {
+	retVal := c.p.Get("typeName")
+	return retVal.String()
 }
 
 // SetTypeName sets the TypeName property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#typename
 func (c *Control) SetTypeName(typeName string) *Control {
-	p := ba.ctx.Get("Control").New(typeName)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("typeName", typeName)
+	return c
 }
 
 // UniqueId returns the UniqueId property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#uniqueid
-func (c *Control) UniqueId(uniqueId float64) *Control {
-	p := ba.ctx.Get("Control").New(uniqueId)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) UniqueId() float64 {
+	retVal := c.p.Get("uniqueId")
+	return retVal.Float()
 }
 
 // SetUniqueId sets the UniqueId property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#uniqueid
 func (c *Control) SetUniqueId(uniqueId float64) *Control {
-	p := ba.ctx.Get("Control").New(uniqueId)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("uniqueId", uniqueId)
+	return c
 }
 
 // UseBitmapCache returns the UseBitmapCache property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#usebitmapcache
-func (c *Control) UseBitmapCache(useBitmapCache bool) *Control {
-	p := ba.ctx.Get("Control").New(useBitmapCache)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) UseBitmapCache() bool {
+	retVal := c.p.Get("useBitmapCache")
+	return retVal.Bool()
 }
 
 // SetUseBitmapCache sets the UseBitmapCache property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#usebitmapcache
 func (c *Control) SetUseBitmapCache(useBitmapCache bool) *Control {
-	p := ba.ctx.Get("Control").New(useBitmapCache)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("useBitmapCache", useBitmapCache)
+	return c
 }
 
 // VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#vertical_alignment_bottom
-func (c *Control) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *Control {
-	p := ba.ctx.Get("Control").New(VERTICAL_ALIGNMENT_BOTTOM)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) VERTICAL_ALIGNMENT_BOTTOM() float64 {
+	retVal := c.p.Get("VERTICAL_ALIGNMENT_BOTTOM")
+	return retVal.Float()
 }
 
 // SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#vertical_alignment_bottom
 func (c *Control) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *Control {
-	p := ba.ctx.Get("Control").New(VERTICAL_ALIGNMENT_BOTTOM)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("VERTICAL_ALIGNMENT_BOTTOM", VERTICAL_ALIGNMENT_BOTTOM)
+	return c
 }
 
 // VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#vertical_alignment_center
-func (c *Control) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *Control {
-	p := ba.ctx.Get("Control").New(VERTICAL_ALIGNMENT_CENTER)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) VERTICAL_ALIGNMENT_CENTER() float64 {
+	retVal := c.p.Get("VERTICAL_ALIGNMENT_CENTER")
+	return retVal.Float()
 }
 
 // SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#vertical_alignment_center
 func (c *Control) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *Control {
-	p := ba.ctx.Get("Control").New(VERTICAL_ALIGNMENT_CENTER)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("VERTICAL_ALIGNMENT_CENTER", VERTICAL_ALIGNMENT_CENTER)
+	return c
 }
 
 // VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#vertical_alignment_top
-func (c *Control) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *Control {
-	p := ba.ctx.Get("Control").New(VERTICAL_ALIGNMENT_TOP)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) VERTICAL_ALIGNMENT_TOP() float64 {
+	retVal := c.p.Get("VERTICAL_ALIGNMENT_TOP")
+	return retVal.Float()
 }
 
 // SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#vertical_alignment_top
 func (c *Control) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *Control {
-	p := ba.ctx.Get("Control").New(VERTICAL_ALIGNMENT_TOP)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("VERTICAL_ALIGNMENT_TOP", VERTICAL_ALIGNMENT_TOP)
+	return c
 }
 
 // VerticalAlignment returns the VerticalAlignment property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#verticalalignment
-func (c *Control) VerticalAlignment(verticalAlignment float64) *Control {
-	p := ba.ctx.Get("Control").New(verticalAlignment)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) VerticalAlignment() float64 {
+	retVal := c.p.Get("verticalAlignment")
+	return retVal.Float()
 }
 
 // SetVerticalAlignment sets the VerticalAlignment property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#verticalalignment
 func (c *Control) SetVerticalAlignment(verticalAlignment float64) *Control {
-	p := ba.ctx.Get("Control").New(verticalAlignment)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("verticalAlignment", verticalAlignment)
+	return c
 }
 
 // Width returns the Width property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#width
-func (c *Control) Width(width string) *Control {
-	p := ba.ctx.Get("Control").New(width)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) Width() string {
+	retVal := c.p.Get("width")
+	return retVal.String()
 }
 
 // SetWidth sets the Width property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#width
 func (c *Control) SetWidth(width string) *Control {
-	p := ba.ctx.Get("Control").New(width)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("width", width)
+	return c
 }
 
 // WidthInPixels returns the WidthInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#widthinpixels
-func (c *Control) WidthInPixels(widthInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(widthInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) WidthInPixels() float64 {
+	retVal := c.p.Get("widthInPixels")
+	return retVal.Float()
 }
 
 // SetWidthInPixels sets the WidthInPixels property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#widthinpixels
 func (c *Control) SetWidthInPixels(widthInPixels float64) *Control {
-	p := ba.ctx.Get("Control").New(widthInPixels)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("widthInPixels", widthInPixels)
+	return c
 }
 
 // ZIndex returns the ZIndex property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#zindex
-func (c *Control) ZIndex(zIndex float64) *Control {
-	p := ba.ctx.Get("Control").New(zIndex)
-	return ControlFromJSObject(p, ba.ctx)
+func (c *Control) ZIndex() float64 {
+	retVal := c.p.Get("zIndex")
+	return retVal.Float()
 }
 
 // SetZIndex sets the ZIndex property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#zindex
 func (c *Control) SetZIndex(zIndex float64) *Control {
-	p := ba.ctx.Get("Control").New(zIndex)
-	return ControlFromJSObject(p, ba.ctx)
+	c.p.Set("zIndex", zIndex)
+	return c
 }
-
-*/

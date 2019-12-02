@@ -36,166 +36,162 @@ func EngineOptionsArrayToJSArray(array []*EngineOptions) []interface{} {
 	return result
 }
 
-/*
-
 // AudioEngine returns the AudioEngine property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#audioengine
-func (e *EngineOptions) AudioEngine(audioEngine bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(audioEngine)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+func (e *EngineOptions) AudioEngine() bool {
+	retVal := e.p.Get("audioEngine")
+	return retVal.Bool()
 }
 
 // SetAudioEngine sets the AudioEngine property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#audioengine
 func (e *EngineOptions) SetAudioEngine(audioEngine bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(audioEngine)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("audioEngine", audioEngine)
+	return e
 }
 
 // AutoEnableWebVR returns the AutoEnableWebVR property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#autoenablewebvr
-func (e *EngineOptions) AutoEnableWebVR(autoEnableWebVR bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(autoEnableWebVR)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+func (e *EngineOptions) AutoEnableWebVR() bool {
+	retVal := e.p.Get("autoEnableWebVR")
+	return retVal.Bool()
 }
 
 // SetAutoEnableWebVR sets the AutoEnableWebVR property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#autoenablewebvr
 func (e *EngineOptions) SetAutoEnableWebVR(autoEnableWebVR bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(autoEnableWebVR)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("autoEnableWebVR", autoEnableWebVR)
+	return e
 }
 
 // DeterministicLockstep returns the DeterministicLockstep property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#deterministiclockstep
-func (e *EngineOptions) DeterministicLockstep(deterministicLockstep bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(deterministicLockstep)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+func (e *EngineOptions) DeterministicLockstep() bool {
+	retVal := e.p.Get("deterministicLockstep")
+	return retVal.Bool()
 }
 
 // SetDeterministicLockstep sets the DeterministicLockstep property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#deterministiclockstep
 func (e *EngineOptions) SetDeterministicLockstep(deterministicLockstep bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(deterministicLockstep)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("deterministicLockstep", deterministicLockstep)
+	return e
 }
 
 // DisableWebGL2Support returns the DisableWebGL2Support property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#disablewebgl2support
-func (e *EngineOptions) DisableWebGL2Support(disableWebGL2Support bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(disableWebGL2Support)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+func (e *EngineOptions) DisableWebGL2Support() bool {
+	retVal := e.p.Get("disableWebGL2Support")
+	return retVal.Bool()
 }
 
 // SetDisableWebGL2Support sets the DisableWebGL2Support property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#disablewebgl2support
 func (e *EngineOptions) SetDisableWebGL2Support(disableWebGL2Support bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(disableWebGL2Support)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("disableWebGL2Support", disableWebGL2Support)
+	return e
 }
 
 // DoNotHandleContextLost returns the DoNotHandleContextLost property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#donothandlecontextlost
-func (e *EngineOptions) DoNotHandleContextLost(doNotHandleContextLost bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(doNotHandleContextLost)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+func (e *EngineOptions) DoNotHandleContextLost() bool {
+	retVal := e.p.Get("doNotHandleContextLost")
+	return retVal.Bool()
 }
 
 // SetDoNotHandleContextLost sets the DoNotHandleContextLost property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#donothandlecontextlost
 func (e *EngineOptions) SetDoNotHandleContextLost(doNotHandleContextLost bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(doNotHandleContextLost)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("doNotHandleContextLost", doNotHandleContextLost)
+	return e
 }
 
 // DoNotHandleTouchAction returns the DoNotHandleTouchAction property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#donothandletouchaction
-func (e *EngineOptions) DoNotHandleTouchAction(doNotHandleTouchAction bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(doNotHandleTouchAction)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+func (e *EngineOptions) DoNotHandleTouchAction() bool {
+	retVal := e.p.Get("doNotHandleTouchAction")
+	return retVal.Bool()
 }
 
 // SetDoNotHandleTouchAction sets the DoNotHandleTouchAction property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#donothandletouchaction
 func (e *EngineOptions) SetDoNotHandleTouchAction(doNotHandleTouchAction bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(doNotHandleTouchAction)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("doNotHandleTouchAction", doNotHandleTouchAction)
+	return e
 }
 
 // LimitDeviceRatio returns the LimitDeviceRatio property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#limitdeviceratio
-func (e *EngineOptions) LimitDeviceRatio(limitDeviceRatio float64) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(limitDeviceRatio)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+func (e *EngineOptions) LimitDeviceRatio() float64 {
+	retVal := e.p.Get("limitDeviceRatio")
+	return retVal.Float()
 }
 
 // SetLimitDeviceRatio sets the LimitDeviceRatio property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#limitdeviceratio
 func (e *EngineOptions) SetLimitDeviceRatio(limitDeviceRatio float64) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(limitDeviceRatio)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("limitDeviceRatio", limitDeviceRatio)
+	return e
 }
 
 // LockstepMaxSteps returns the LockstepMaxSteps property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#lockstepmaxsteps
-func (e *EngineOptions) LockstepMaxSteps(lockstepMaxSteps float64) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(lockstepMaxSteps)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+func (e *EngineOptions) LockstepMaxSteps() float64 {
+	retVal := e.p.Get("lockstepMaxSteps")
+	return retVal.Float()
 }
 
 // SetLockstepMaxSteps sets the LockstepMaxSteps property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#lockstepmaxsteps
 func (e *EngineOptions) SetLockstepMaxSteps(lockstepMaxSteps float64) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(lockstepMaxSteps)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("lockstepMaxSteps", lockstepMaxSteps)
+	return e
 }
 
 // TimeStep returns the TimeStep property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#timestep
-func (e *EngineOptions) TimeStep(timeStep float64) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(timeStep)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+func (e *EngineOptions) TimeStep() float64 {
+	retVal := e.p.Get("timeStep")
+	return retVal.Float()
 }
 
 // SetTimeStep sets the TimeStep property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#timestep
 func (e *EngineOptions) SetTimeStep(timeStep float64) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(timeStep)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("timeStep", timeStep)
+	return e
 }
 
 // UseHighPrecisionFloats returns the UseHighPrecisionFloats property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#usehighprecisionfloats
-func (e *EngineOptions) UseHighPrecisionFloats(useHighPrecisionFloats bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(useHighPrecisionFloats)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+func (e *EngineOptions) UseHighPrecisionFloats() bool {
+	retVal := e.p.Get("useHighPrecisionFloats")
+	return retVal.Bool()
 }
 
 // SetUseHighPrecisionFloats sets the UseHighPrecisionFloats property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#usehighprecisionfloats
 func (e *EngineOptions) SetUseHighPrecisionFloats(useHighPrecisionFloats bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(useHighPrecisionFloats)
-	return EngineOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("useHighPrecisionFloats", useHighPrecisionFloats)
+	return e
 }
-
-*/

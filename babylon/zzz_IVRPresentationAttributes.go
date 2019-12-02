@@ -36,38 +36,34 @@ func IVRPresentationAttributesArrayToJSArray(array []*IVRPresentationAttributes)
 	return result
 }
 
-/*
-
 // FoveationLevel returns the FoveationLevel property of class IVRPresentationAttributes.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ivrpresentationattributes#foveationlevel
-func (i *IVRPresentationAttributes) FoveationLevel(foveationLevel float64) *IVRPresentationAttributes {
-	p := ba.ctx.Get("IVRPresentationAttributes").New(foveationLevel)
-	return IVRPresentationAttributesFromJSObject(p, ba.ctx)
+func (i *IVRPresentationAttributes) FoveationLevel() float64 {
+	retVal := i.p.Get("foveationLevel")
+	return retVal.Float()
 }
 
 // SetFoveationLevel sets the FoveationLevel property of class IVRPresentationAttributes.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ivrpresentationattributes#foveationlevel
 func (i *IVRPresentationAttributes) SetFoveationLevel(foveationLevel float64) *IVRPresentationAttributes {
-	p := ba.ctx.Get("IVRPresentationAttributes").New(foveationLevel)
-	return IVRPresentationAttributesFromJSObject(p, ba.ctx)
+	i.p.Set("foveationLevel", foveationLevel)
+	return i
 }
 
 // HighRefreshRate returns the HighRefreshRate property of class IVRPresentationAttributes.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ivrpresentationattributes#highrefreshrate
-func (i *IVRPresentationAttributes) HighRefreshRate(highRefreshRate bool) *IVRPresentationAttributes {
-	p := ba.ctx.Get("IVRPresentationAttributes").New(highRefreshRate)
-	return IVRPresentationAttributesFromJSObject(p, ba.ctx)
+func (i *IVRPresentationAttributes) HighRefreshRate() bool {
+	retVal := i.p.Get("highRefreshRate")
+	return retVal.Bool()
 }
 
 // SetHighRefreshRate sets the HighRefreshRate property of class IVRPresentationAttributes.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ivrpresentationattributes#highrefreshrate
 func (i *IVRPresentationAttributes) SetHighRefreshRate(highRefreshRate bool) *IVRPresentationAttributes {
-	p := ba.ctx.Get("IVRPresentationAttributes").New(highRefreshRate)
-	return IVRPresentationAttributesFromJSObject(p, ba.ctx)
+	i.p.Set("highRefreshRate", highRefreshRate)
+	return i
 }
-
-*/

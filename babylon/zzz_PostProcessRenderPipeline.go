@@ -81,70 +81,66 @@ func (p *PostProcessRenderPipeline) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Cameras returns the Cameras property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#cameras
-func (p *PostProcessRenderPipeline) Cameras(cameras *Camera) *PostProcessRenderPipeline {
-	p := ba.ctx.Get("PostProcessRenderPipeline").New(cameras.JSObject())
-	return PostProcessRenderPipelineFromJSObject(p, ba.ctx)
+func (p *PostProcessRenderPipeline) Cameras() *Camera {
+	retVal := p.p.Get("cameras")
+	return CameraFromJSObject(retVal, p.ctx)
 }
 
 // SetCameras sets the Cameras property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#cameras
 func (p *PostProcessRenderPipeline) SetCameras(cameras *Camera) *PostProcessRenderPipeline {
-	p := ba.ctx.Get("PostProcessRenderPipeline").New(cameras.JSObject())
-	return PostProcessRenderPipelineFromJSObject(p, ba.ctx)
+	p.p.Set("cameras", cameras.JSObject())
+	return p
 }
 
 // InspectableCustomProperties returns the InspectableCustomProperties property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#inspectablecustomproperties
-func (p *PostProcessRenderPipeline) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *PostProcessRenderPipeline {
-	p := ba.ctx.Get("PostProcessRenderPipeline").New(inspectableCustomProperties.JSObject())
-	return PostProcessRenderPipelineFromJSObject(p, ba.ctx)
+func (p *PostProcessRenderPipeline) InspectableCustomProperties() *IInspectable {
+	retVal := p.p.Get("inspectableCustomProperties")
+	return IInspectableFromJSObject(retVal, p.ctx)
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#inspectablecustomproperties
 func (p *PostProcessRenderPipeline) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *PostProcessRenderPipeline {
-	p := ba.ctx.Get("PostProcessRenderPipeline").New(inspectableCustomProperties.JSObject())
-	return PostProcessRenderPipelineFromJSObject(p, ba.ctx)
+	p.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+	return p
 }
 
 // IsSupported returns the IsSupported property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#issupported
-func (p *PostProcessRenderPipeline) IsSupported(isSupported bool) *PostProcessRenderPipeline {
-	p := ba.ctx.Get("PostProcessRenderPipeline").New(isSupported)
-	return PostProcessRenderPipelineFromJSObject(p, ba.ctx)
+func (p *PostProcessRenderPipeline) IsSupported() bool {
+	retVal := p.p.Get("isSupported")
+	return retVal.Bool()
 }
 
 // SetIsSupported sets the IsSupported property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#issupported
 func (p *PostProcessRenderPipeline) SetIsSupported(isSupported bool) *PostProcessRenderPipeline {
-	p := ba.ctx.Get("PostProcessRenderPipeline").New(isSupported)
-	return PostProcessRenderPipelineFromJSObject(p, ba.ctx)
+	p.p.Set("isSupported", isSupported)
+	return p
 }
 
 // Name returns the Name property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#name
-func (p *PostProcessRenderPipeline) Name(name string) *PostProcessRenderPipeline {
-	p := ba.ctx.Get("PostProcessRenderPipeline").New(name)
-	return PostProcessRenderPipelineFromJSObject(p, ba.ctx)
+func (p *PostProcessRenderPipeline) Name() string {
+	retVal := p.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#name
 func (p *PostProcessRenderPipeline) SetName(name string) *PostProcessRenderPipeline {
-	p := ba.ctx.Get("PostProcessRenderPipeline").New(name)
-	return PostProcessRenderPipelineFromJSObject(p, ba.ctx)
+	p.p.Set("name", name)
+	return p
 }
-
-*/

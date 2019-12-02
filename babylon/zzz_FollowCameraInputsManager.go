@@ -87,7 +87,3 @@ func (f *FollowCameraInputsManager) AddVRDeviceOrientation() *FollowCameraInputs
 	retVal := f.p.Call("addVRDeviceOrientation")
 	return FollowCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
-
-/*
-
- */

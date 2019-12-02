@@ -58,38 +58,34 @@ func (r *RandomNumberBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Output returns the Output property of class RandomNumberBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock#output
-func (r *RandomNumberBlock) Output(output *NodeMaterialConnectionPoint) *RandomNumberBlock {
-	p := ba.ctx.Get("RandomNumberBlock").New(output.JSObject())
-	return RandomNumberBlockFromJSObject(p, ba.ctx)
+func (r *RandomNumberBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetOutput sets the Output property of class RandomNumberBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock#output
 func (r *RandomNumberBlock) SetOutput(output *NodeMaterialConnectionPoint) *RandomNumberBlock {
-	p := ba.ctx.Get("RandomNumberBlock").New(output.JSObject())
-	return RandomNumberBlockFromJSObject(p, ba.ctx)
+	r.p.Set("output", output.JSObject())
+	return r
 }
 
 // Seed returns the Seed property of class RandomNumberBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock#seed
-func (r *RandomNumberBlock) Seed(seed *NodeMaterialConnectionPoint) *RandomNumberBlock {
-	p := ba.ctx.Get("RandomNumberBlock").New(seed.JSObject())
-	return RandomNumberBlockFromJSObject(p, ba.ctx)
+func (r *RandomNumberBlock) Seed() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("seed")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetSeed sets the Seed property of class RandomNumberBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock#seed
 func (r *RandomNumberBlock) SetSeed(seed *NodeMaterialConnectionPoint) *RandomNumberBlock {
-	p := ba.ctx.Get("RandomNumberBlock").New(seed.JSObject())
-	return RandomNumberBlockFromJSObject(p, ba.ctx)
+	r.p.Set("seed", seed.JSObject())
+	return r
 }
-
-*/

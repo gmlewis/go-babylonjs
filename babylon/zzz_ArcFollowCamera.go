@@ -66,70 +66,66 @@ func (a *ArcFollowCamera) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Alpha returns the Alpha property of class ArcFollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#alpha
-func (a *ArcFollowCamera) Alpha(alpha float64) *ArcFollowCamera {
-	p := ba.ctx.Get("ArcFollowCamera").New(alpha)
-	return ArcFollowCameraFromJSObject(p, ba.ctx)
+func (a *ArcFollowCamera) Alpha() float64 {
+	retVal := a.p.Get("alpha")
+	return retVal.Float()
 }
 
 // SetAlpha sets the Alpha property of class ArcFollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#alpha
 func (a *ArcFollowCamera) SetAlpha(alpha float64) *ArcFollowCamera {
-	p := ba.ctx.Get("ArcFollowCamera").New(alpha)
-	return ArcFollowCameraFromJSObject(p, ba.ctx)
+	a.p.Set("alpha", alpha)
+	return a
 }
 
 // Beta returns the Beta property of class ArcFollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#beta
-func (a *ArcFollowCamera) Beta(beta float64) *ArcFollowCamera {
-	p := ba.ctx.Get("ArcFollowCamera").New(beta)
-	return ArcFollowCameraFromJSObject(p, ba.ctx)
+func (a *ArcFollowCamera) Beta() float64 {
+	retVal := a.p.Get("beta")
+	return retVal.Float()
 }
 
 // SetBeta sets the Beta property of class ArcFollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#beta
 func (a *ArcFollowCamera) SetBeta(beta float64) *ArcFollowCamera {
-	p := ba.ctx.Get("ArcFollowCamera").New(beta)
-	return ArcFollowCameraFromJSObject(p, ba.ctx)
+	a.p.Set("beta", beta)
+	return a
 }
 
 // Radius returns the Radius property of class ArcFollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#radius
-func (a *ArcFollowCamera) Radius(radius float64) *ArcFollowCamera {
-	p := ba.ctx.Get("ArcFollowCamera").New(radius)
-	return ArcFollowCameraFromJSObject(p, ba.ctx)
+func (a *ArcFollowCamera) Radius() float64 {
+	retVal := a.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class ArcFollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#radius
 func (a *ArcFollowCamera) SetRadius(radius float64) *ArcFollowCamera {
-	p := ba.ctx.Get("ArcFollowCamera").New(radius)
-	return ArcFollowCameraFromJSObject(p, ba.ctx)
+	a.p.Set("radius", radius)
+	return a
 }
 
 // Target returns the Target property of class ArcFollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#target
-func (a *ArcFollowCamera) Target(target *AbstractMesh) *ArcFollowCamera {
-	p := ba.ctx.Get("ArcFollowCamera").New(target.JSObject())
-	return ArcFollowCameraFromJSObject(p, ba.ctx)
+func (a *ArcFollowCamera) Target() *AbstractMesh {
+	retVal := a.p.Get("target")
+	return AbstractMeshFromJSObject(retVal, a.ctx)
 }
 
 // SetTarget sets the Target property of class ArcFollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#target
 func (a *ArcFollowCamera) SetTarget(target *AbstractMesh) *ArcFollowCamera {
-	p := ba.ctx.Get("ArcFollowCamera").New(target.JSObject())
-	return ArcFollowCameraFromJSObject(p, ba.ctx)
+	a.p.Set("target", target.JSObject())
+	return a
 }
-
-*/

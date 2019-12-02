@@ -1053,7 +1053,3 @@ func (n *NullEngine) WipeCaches(opts *NullEngineWipeCachesOpts) {
 
 	n.p.Call("wipeCaches", args...)
 }
-
-/*
-
- */

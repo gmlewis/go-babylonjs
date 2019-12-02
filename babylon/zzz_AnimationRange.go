@@ -60,54 +60,50 @@ func (a *AnimationRange) Clone() *AnimationRange {
 	return AnimationRangeFromJSObject(retVal, a.ctx)
 }
 
-/*
-
 // From returns the From property of class AnimationRange.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationrange#from
-func (a *AnimationRange) From(from float64) *AnimationRange {
-	p := ba.ctx.Get("AnimationRange").New(from)
-	return AnimationRangeFromJSObject(p, ba.ctx)
+func (a *AnimationRange) From() float64 {
+	retVal := a.p.Get("from")
+	return retVal.Float()
 }
 
 // SetFrom sets the From property of class AnimationRange.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationrange#from
 func (a *AnimationRange) SetFrom(from float64) *AnimationRange {
-	p := ba.ctx.Get("AnimationRange").New(from)
-	return AnimationRangeFromJSObject(p, ba.ctx)
+	a.p.Set("from", from)
+	return a
 }
 
 // Name returns the Name property of class AnimationRange.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationrange#name
-func (a *AnimationRange) Name(name string) *AnimationRange {
-	p := ba.ctx.Get("AnimationRange").New(name)
-	return AnimationRangeFromJSObject(p, ba.ctx)
+func (a *AnimationRange) Name() string {
+	retVal := a.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class AnimationRange.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationrange#name
 func (a *AnimationRange) SetName(name string) *AnimationRange {
-	p := ba.ctx.Get("AnimationRange").New(name)
-	return AnimationRangeFromJSObject(p, ba.ctx)
+	a.p.Set("name", name)
+	return a
 }
 
 // To returns the To property of class AnimationRange.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationrange#to
-func (a *AnimationRange) To(to float64) *AnimationRange {
-	p := ba.ctx.Get("AnimationRange").New(to)
-	return AnimationRangeFromJSObject(p, ba.ctx)
+func (a *AnimationRange) To() float64 {
+	retVal := a.p.Get("to")
+	return retVal.Float()
 }
 
 // SetTo sets the To property of class AnimationRange.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationrange#to
 func (a *AnimationRange) SetTo(to float64) *AnimationRange {
-	p := ba.ctx.Get("AnimationRange").New(to)
-	return AnimationRangeFromJSObject(p, ba.ctx)
+	a.p.Set("to", to)
+	return a
 }
-
-*/

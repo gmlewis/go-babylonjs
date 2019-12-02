@@ -58,54 +58,50 @@ func (s *StepBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Edge returns the Edge property of class StepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stepblock#edge
-func (s *StepBlock) Edge(edge *NodeMaterialConnectionPoint) *StepBlock {
-	p := ba.ctx.Get("StepBlock").New(edge.JSObject())
-	return StepBlockFromJSObject(p, ba.ctx)
+func (s *StepBlock) Edge() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("edge")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetEdge sets the Edge property of class StepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stepblock#edge
 func (s *StepBlock) SetEdge(edge *NodeMaterialConnectionPoint) *StepBlock {
-	p := ba.ctx.Get("StepBlock").New(edge.JSObject())
-	return StepBlockFromJSObject(p, ba.ctx)
+	s.p.Set("edge", edge.JSObject())
+	return s
 }
 
 // Output returns the Output property of class StepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stepblock#output
-func (s *StepBlock) Output(output *NodeMaterialConnectionPoint) *StepBlock {
-	p := ba.ctx.Get("StepBlock").New(output.JSObject())
-	return StepBlockFromJSObject(p, ba.ctx)
+func (s *StepBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetOutput sets the Output property of class StepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stepblock#output
 func (s *StepBlock) SetOutput(output *NodeMaterialConnectionPoint) *StepBlock {
-	p := ba.ctx.Get("StepBlock").New(output.JSObject())
-	return StepBlockFromJSObject(p, ba.ctx)
+	s.p.Set("output", output.JSObject())
+	return s
 }
 
 // Value returns the Value property of class StepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stepblock#value
-func (s *StepBlock) Value(value *NodeMaterialConnectionPoint) *StepBlock {
-	p := ba.ctx.Get("StepBlock").New(value.JSObject())
-	return StepBlockFromJSObject(p, ba.ctx)
+func (s *StepBlock) Value() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("value")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetValue sets the Value property of class StepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stepblock#value
 func (s *StepBlock) SetValue(value *NodeMaterialConnectionPoint) *StepBlock {
-	p := ba.ctx.Get("StepBlock").New(value.JSObject())
-	return StepBlockFromJSObject(p, ba.ctx)
+	s.p.Set("value", value.JSObject())
+	return s
 }
-
-*/

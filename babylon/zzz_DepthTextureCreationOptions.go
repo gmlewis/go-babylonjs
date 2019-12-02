@@ -36,70 +36,66 @@ func DepthTextureCreationOptionsArrayToJSArray(array []*DepthTextureCreationOpti
 	return result
 }
 
-/*
-
 // BilinearFiltering returns the BilinearFiltering property of class DepthTextureCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthtexturecreationoptions#bilinearfiltering
-func (d *DepthTextureCreationOptions) BilinearFiltering(bilinearFiltering bool) *DepthTextureCreationOptions {
-	p := ba.ctx.Get("DepthTextureCreationOptions").New(bilinearFiltering)
-	return DepthTextureCreationOptionsFromJSObject(p, ba.ctx)
+func (d *DepthTextureCreationOptions) BilinearFiltering() bool {
+	retVal := d.p.Get("bilinearFiltering")
+	return retVal.Bool()
 }
 
 // SetBilinearFiltering sets the BilinearFiltering property of class DepthTextureCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthtexturecreationoptions#bilinearfiltering
 func (d *DepthTextureCreationOptions) SetBilinearFiltering(bilinearFiltering bool) *DepthTextureCreationOptions {
-	p := ba.ctx.Get("DepthTextureCreationOptions").New(bilinearFiltering)
-	return DepthTextureCreationOptionsFromJSObject(p, ba.ctx)
+	d.p.Set("bilinearFiltering", bilinearFiltering)
+	return d
 }
 
 // ComparisonFunction returns the ComparisonFunction property of class DepthTextureCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthtexturecreationoptions#comparisonfunction
-func (d *DepthTextureCreationOptions) ComparisonFunction(comparisonFunction float64) *DepthTextureCreationOptions {
-	p := ba.ctx.Get("DepthTextureCreationOptions").New(comparisonFunction)
-	return DepthTextureCreationOptionsFromJSObject(p, ba.ctx)
+func (d *DepthTextureCreationOptions) ComparisonFunction() float64 {
+	retVal := d.p.Get("comparisonFunction")
+	return retVal.Float()
 }
 
 // SetComparisonFunction sets the ComparisonFunction property of class DepthTextureCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthtexturecreationoptions#comparisonfunction
 func (d *DepthTextureCreationOptions) SetComparisonFunction(comparisonFunction float64) *DepthTextureCreationOptions {
-	p := ba.ctx.Get("DepthTextureCreationOptions").New(comparisonFunction)
-	return DepthTextureCreationOptionsFromJSObject(p, ba.ctx)
+	d.p.Set("comparisonFunction", comparisonFunction)
+	return d
 }
 
 // GenerateStencil returns the GenerateStencil property of class DepthTextureCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthtexturecreationoptions#generatestencil
-func (d *DepthTextureCreationOptions) GenerateStencil(generateStencil bool) *DepthTextureCreationOptions {
-	p := ba.ctx.Get("DepthTextureCreationOptions").New(generateStencil)
-	return DepthTextureCreationOptionsFromJSObject(p, ba.ctx)
+func (d *DepthTextureCreationOptions) GenerateStencil() bool {
+	retVal := d.p.Get("generateStencil")
+	return retVal.Bool()
 }
 
 // SetGenerateStencil sets the GenerateStencil property of class DepthTextureCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthtexturecreationoptions#generatestencil
 func (d *DepthTextureCreationOptions) SetGenerateStencil(generateStencil bool) *DepthTextureCreationOptions {
-	p := ba.ctx.Get("DepthTextureCreationOptions").New(generateStencil)
-	return DepthTextureCreationOptionsFromJSObject(p, ba.ctx)
+	d.p.Set("generateStencil", generateStencil)
+	return d
 }
 
 // IsCube returns the IsCube property of class DepthTextureCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthtexturecreationoptions#iscube
-func (d *DepthTextureCreationOptions) IsCube(isCube bool) *DepthTextureCreationOptions {
-	p := ba.ctx.Get("DepthTextureCreationOptions").New(isCube)
-	return DepthTextureCreationOptionsFromJSObject(p, ba.ctx)
+func (d *DepthTextureCreationOptions) IsCube() bool {
+	retVal := d.p.Get("isCube")
+	return retVal.Bool()
 }
 
 // SetIsCube sets the IsCube property of class DepthTextureCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthtexturecreationoptions#iscube
 func (d *DepthTextureCreationOptions) SetIsCube(isCube bool) *DepthTextureCreationOptions {
-	p := ba.ctx.Get("DepthTextureCreationOptions").New(isCube)
-	return DepthTextureCreationOptionsFromJSObject(p, ba.ctx)
+	d.p.Set("isCube", isCube)
+	return d
 }
-
-*/

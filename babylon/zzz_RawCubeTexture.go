@@ -171,7 +171,3 @@ func (r *RawCubeTexture) UpdateRGBDAsync(data js.Value, opts *RawCubeTextureUpda
 	retVal := r.p.Call("updateRGBDAsync", args...)
 	return PromiseFromJSObject(retVal, r.ctx)
 }
-
-/*
-
- */

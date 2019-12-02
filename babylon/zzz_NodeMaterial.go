@@ -514,182 +514,178 @@ func (n *NodeMaterial) UnregisterOptimizer(optimizer *NodeMaterialOptimizer) *No
 	return NodeMaterialFromJSObject(retVal, n.ctx)
 }
 
-/*
-
 // AttachedBlocks returns the AttachedBlocks property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#attachedblocks
-func (n *NodeMaterial) AttachedBlocks(attachedBlocks *NodeMaterialBlock) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(attachedBlocks.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) AttachedBlocks() *NodeMaterialBlock {
+	retVal := n.p.Get("attachedBlocks")
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
 }
 
 // SetAttachedBlocks sets the AttachedBlocks property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#attachedblocks
 func (n *NodeMaterial) SetAttachedBlocks(attachedBlocks *NodeMaterialBlock) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(attachedBlocks.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("attachedBlocks", attachedBlocks.JSObject())
+	return n
 }
 
 // CompiledShaders returns the CompiledShaders property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#compiledshaders
-func (n *NodeMaterial) CompiledShaders(compiledShaders string) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(compiledShaders)
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) CompiledShaders() string {
+	retVal := n.p.Get("compiledShaders")
+	return retVal.String()
 }
 
 // SetCompiledShaders sets the CompiledShaders property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#compiledshaders
 func (n *NodeMaterial) SetCompiledShaders(compiledShaders string) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(compiledShaders)
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("compiledShaders", compiledShaders)
+	return n
 }
 
 // EditorData returns the EditorData property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#editordata
-func (n *NodeMaterial) EditorData(editorData interface{}) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(editorData)
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) EditorData() interface{} {
+	retVal := n.p.Get("editorData")
+	return retVal
 }
 
 // SetEditorData sets the EditorData property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#editordata
 func (n *NodeMaterial) SetEditorData(editorData interface{}) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(editorData)
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("editorData", editorData)
+	return n
 }
 
 // EditorURL returns the EditorURL property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#editorurl
-func (n *NodeMaterial) EditorURL(EditorURL string) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(EditorURL)
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) EditorURL() string {
+	retVal := n.p.Get("EditorURL")
+	return retVal.String()
 }
 
 // SetEditorURL sets the EditorURL property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#editorurl
 func (n *NodeMaterial) SetEditorURL(EditorURL string) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(EditorURL)
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("EditorURL", EditorURL)
+	return n
 }
 
 // IgnoreAlpha returns the IgnoreAlpha property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#ignorealpha
-func (n *NodeMaterial) IgnoreAlpha(ignoreAlpha bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(ignoreAlpha)
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) IgnoreAlpha() bool {
+	retVal := n.p.Get("ignoreAlpha")
+	return retVal.Bool()
 }
 
 // SetIgnoreAlpha sets the IgnoreAlpha property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#ignorealpha
 func (n *NodeMaterial) SetIgnoreAlpha(ignoreAlpha bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(ignoreAlpha)
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("ignoreAlpha", ignoreAlpha)
+	return n
 }
 
 // ImageProcessingConfiguration returns the ImageProcessingConfiguration property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#imageprocessingconfiguration
-func (n *NodeMaterial) ImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(imageProcessingConfiguration.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) ImageProcessingConfiguration() *ImageProcessingConfiguration {
+	retVal := n.p.Get("imageProcessingConfiguration")
+	return ImageProcessingConfigurationFromJSObject(retVal, n.ctx)
 }
 
 // SetImageProcessingConfiguration sets the ImageProcessingConfiguration property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#imageprocessingconfiguration
 func (n *NodeMaterial) SetImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(imageProcessingConfiguration.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("imageProcessingConfiguration", imageProcessingConfiguration.JSObject())
+	return n
 }
 
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#maxsimultaneouslights
-func (n *NodeMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(maxSimultaneousLights)
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) MaxSimultaneousLights() float64 {
+	retVal := n.p.Get("maxSimultaneousLights")
+	return retVal.Float()
 }
 
 // SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#maxsimultaneouslights
 func (n *NodeMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(maxSimultaneousLights)
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("maxSimultaneousLights", maxSimultaneousLights)
+	return n
 }
 
 // OnBuildObservable returns the OnBuildObservable property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#onbuildobservable
-func (n *NodeMaterial) OnBuildObservable(onBuildObservable *Observable) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(onBuildObservable.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) OnBuildObservable() *Observable {
+	retVal := n.p.Get("onBuildObservable")
+	return ObservableFromJSObject(retVal, n.ctx)
 }
 
 // SetOnBuildObservable sets the OnBuildObservable property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#onbuildobservable
 func (n *NodeMaterial) SetOnBuildObservable(onBuildObservable *Observable) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(onBuildObservable.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("onBuildObservable", onBuildObservable.JSObject())
+	return n
 }
 
 // Options returns the Options property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#options
-func (n *NodeMaterial) Options(options *INodeMaterialOptions) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(options.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) Options() *INodeMaterialOptions {
+	retVal := n.p.Get("options")
+	return INodeMaterialOptionsFromJSObject(retVal, n.ctx)
 }
 
 // SetOptions sets the Options property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#options
 func (n *NodeMaterial) SetOptions(options *INodeMaterialOptions) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(options.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("options", options.JSObject())
+	return n
 }
 
 // _fragmentOutputNodes returns the _fragmentOutputNodes property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#_fragmentoutputnodes
-func (n *NodeMaterial) _fragmentOutputNodes(_fragmentOutputNodes *NodeMaterialBlock) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(_fragmentOutputNodes.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) _fragmentOutputNodes() *NodeMaterialBlock {
+	retVal := n.p.Get("_fragmentOutputNodes")
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
 }
 
 // Set_fragmentOutputNodes sets the _fragmentOutputNodes property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#_fragmentoutputnodes
 func (n *NodeMaterial) Set_fragmentOutputNodes(_fragmentOutputNodes *NodeMaterialBlock) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(_fragmentOutputNodes.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("_fragmentOutputNodes", _fragmentOutputNodes.JSObject())
+	return n
 }
 
 // _vertexOutputNodes returns the _vertexOutputNodes property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#_vertexoutputnodes
-func (n *NodeMaterial) _vertexOutputNodes(_vertexOutputNodes *NodeMaterialBlock) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(_vertexOutputNodes.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+func (n *NodeMaterial) _vertexOutputNodes() *NodeMaterialBlock {
+	retVal := n.p.Get("_vertexOutputNodes")
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
 }
 
 // Set_vertexOutputNodes sets the _vertexOutputNodes property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#_vertexoutputnodes
 func (n *NodeMaterial) Set_vertexOutputNodes(_vertexOutputNodes *NodeMaterialBlock) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(_vertexOutputNodes.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
+	n.p.Set("_vertexOutputNodes", _vertexOutputNodes.JSObject())
+	return n
 }
-
-*/

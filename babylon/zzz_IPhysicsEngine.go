@@ -235,22 +235,10 @@ func (i *IPhysicsEngine) _step(delta float64) {
 	i.p.Call("_step", args...)
 }
 
-/*
-
 // Gravity returns the Gravity property of class IPhysicsEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsengine#gravity
-func (i *IPhysicsEngine) Gravity(gravity *Vector3) *IPhysicsEngine {
-	p := ba.ctx.Get("IPhysicsEngine").New(gravity.JSObject())
-	return IPhysicsEngineFromJSObject(p, ba.ctx)
+func (i *IPhysicsEngine) Gravity() *Vector3 {
+	retVal := i.p.Get("gravity")
+	return Vector3FromJSObject(retVal, i.ctx)
 }
-
-// SetGravity sets the Gravity property of class IPhysicsEngine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iphysicsengine#gravity
-func (i *IPhysicsEngine) SetGravity(gravity *Vector3) *IPhysicsEngine {
-	p := ba.ctx.Get("IPhysicsEngine").New(gravity.JSObject())
-	return IPhysicsEngineFromJSObject(p, ba.ctx)
-}
-
-*/

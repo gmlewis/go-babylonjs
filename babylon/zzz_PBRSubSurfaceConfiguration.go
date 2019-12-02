@@ -282,278 +282,274 @@ func (p *PBRSubSurfaceConfiguration) Unbind(activeEffect *Effect) bool {
 	return retVal.Bool()
 }
 
-/*
-
 // DiffusionDistance returns the DiffusionDistance property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#diffusiondistance
-func (p *PBRSubSurfaceConfiguration) DiffusionDistance(diffusionDistance *Color3) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(diffusionDistance.JSObject())
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) DiffusionDistance() *Color3 {
+	retVal := p.p.Get("diffusionDistance")
+	return Color3FromJSObject(retVal, p.ctx)
 }
 
 // SetDiffusionDistance sets the DiffusionDistance property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#diffusiondistance
 func (p *PBRSubSurfaceConfiguration) SetDiffusionDistance(diffusionDistance *Color3) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(diffusionDistance.JSObject())
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("diffusionDistance", diffusionDistance.JSObject())
+	return p
 }
 
 // DisableAlphaBlending returns the DisableAlphaBlending property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#disablealphablending
-func (p *PBRSubSurfaceConfiguration) DisableAlphaBlending(disableAlphaBlending bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(disableAlphaBlending)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) DisableAlphaBlending() bool {
+	retVal := p.p.Get("disableAlphaBlending")
+	return retVal.Bool()
 }
 
 // SetDisableAlphaBlending sets the DisableAlphaBlending property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#disablealphablending
 func (p *PBRSubSurfaceConfiguration) SetDisableAlphaBlending(disableAlphaBlending bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(disableAlphaBlending)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("disableAlphaBlending", disableAlphaBlending)
+	return p
 }
 
 // IndexOfRefraction returns the IndexOfRefraction property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#indexofrefraction
-func (p *PBRSubSurfaceConfiguration) IndexOfRefraction(indexOfRefraction float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(indexOfRefraction)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) IndexOfRefraction() float64 {
+	retVal := p.p.Get("indexOfRefraction")
+	return retVal.Float()
 }
 
 // SetIndexOfRefraction sets the IndexOfRefraction property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#indexofrefraction
 func (p *PBRSubSurfaceConfiguration) SetIndexOfRefraction(indexOfRefraction float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(indexOfRefraction)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("indexOfRefraction", indexOfRefraction)
+	return p
 }
 
 // InvertRefractionY returns the InvertRefractionY property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#invertrefractiony
-func (p *PBRSubSurfaceConfiguration) InvertRefractionY(invertRefractionY bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(invertRefractionY)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) InvertRefractionY() bool {
+	retVal := p.p.Get("invertRefractionY")
+	return retVal.Bool()
 }
 
 // SetInvertRefractionY sets the InvertRefractionY property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#invertrefractiony
 func (p *PBRSubSurfaceConfiguration) SetInvertRefractionY(invertRefractionY bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(invertRefractionY)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("invertRefractionY", invertRefractionY)
+	return p
 }
 
 // IsRefractionEnabled returns the IsRefractionEnabled property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#isrefractionenabled
-func (p *PBRSubSurfaceConfiguration) IsRefractionEnabled(isRefractionEnabled bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(isRefractionEnabled)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) IsRefractionEnabled() bool {
+	retVal := p.p.Get("isRefractionEnabled")
+	return retVal.Bool()
 }
 
 // SetIsRefractionEnabled sets the IsRefractionEnabled property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#isrefractionenabled
 func (p *PBRSubSurfaceConfiguration) SetIsRefractionEnabled(isRefractionEnabled bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(isRefractionEnabled)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("isRefractionEnabled", isRefractionEnabled)
+	return p
 }
 
 // IsTranslucencyEnabled returns the IsTranslucencyEnabled property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#istranslucencyenabled
-func (p *PBRSubSurfaceConfiguration) IsTranslucencyEnabled(isTranslucencyEnabled bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(isTranslucencyEnabled)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) IsTranslucencyEnabled() bool {
+	retVal := p.p.Get("isTranslucencyEnabled")
+	return retVal.Bool()
 }
 
 // SetIsTranslucencyEnabled sets the IsTranslucencyEnabled property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#istranslucencyenabled
 func (p *PBRSubSurfaceConfiguration) SetIsTranslucencyEnabled(isTranslucencyEnabled bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(isTranslucencyEnabled)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("isTranslucencyEnabled", isTranslucencyEnabled)
+	return p
 }
 
 // LinkRefractionWithTransparency returns the LinkRefractionWithTransparency property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#linkrefractionwithtransparency
-func (p *PBRSubSurfaceConfiguration) LinkRefractionWithTransparency(linkRefractionWithTransparency bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(linkRefractionWithTransparency)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) LinkRefractionWithTransparency() bool {
+	retVal := p.p.Get("linkRefractionWithTransparency")
+	return retVal.Bool()
 }
 
 // SetLinkRefractionWithTransparency sets the LinkRefractionWithTransparency property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#linkrefractionwithtransparency
 func (p *PBRSubSurfaceConfiguration) SetLinkRefractionWithTransparency(linkRefractionWithTransparency bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(linkRefractionWithTransparency)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("linkRefractionWithTransparency", linkRefractionWithTransparency)
+	return p
 }
 
 // MaximumThickness returns the MaximumThickness property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#maximumthickness
-func (p *PBRSubSurfaceConfiguration) MaximumThickness(maximumThickness float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(maximumThickness)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) MaximumThickness() float64 {
+	retVal := p.p.Get("maximumThickness")
+	return retVal.Float()
 }
 
 // SetMaximumThickness sets the MaximumThickness property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#maximumthickness
 func (p *PBRSubSurfaceConfiguration) SetMaximumThickness(maximumThickness float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(maximumThickness)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("maximumThickness", maximumThickness)
+	return p
 }
 
 // MinimumThickness returns the MinimumThickness property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#minimumthickness
-func (p *PBRSubSurfaceConfiguration) MinimumThickness(minimumThickness float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(minimumThickness)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) MinimumThickness() float64 {
+	retVal := p.p.Get("minimumThickness")
+	return retVal.Float()
 }
 
 // SetMinimumThickness sets the MinimumThickness property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#minimumthickness
 func (p *PBRSubSurfaceConfiguration) SetMinimumThickness(minimumThickness float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(minimumThickness)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("minimumThickness", minimumThickness)
+	return p
 }
 
 // RefractionIntensity returns the RefractionIntensity property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#refractionintensity
-func (p *PBRSubSurfaceConfiguration) RefractionIntensity(refractionIntensity float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(refractionIntensity)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) RefractionIntensity() float64 {
+	retVal := p.p.Get("refractionIntensity")
+	return retVal.Float()
 }
 
 // SetRefractionIntensity sets the RefractionIntensity property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#refractionintensity
 func (p *PBRSubSurfaceConfiguration) SetRefractionIntensity(refractionIntensity float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(refractionIntensity)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("refractionIntensity", refractionIntensity)
+	return p
 }
 
 // RefractionTexture returns the RefractionTexture property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#refractiontexture
-func (p *PBRSubSurfaceConfiguration) RefractionTexture(refractionTexture *BaseTexture) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(refractionTexture.JSObject())
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) RefractionTexture() *BaseTexture {
+	retVal := p.p.Get("refractionTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetRefractionTexture sets the RefractionTexture property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#refractiontexture
 func (p *PBRSubSurfaceConfiguration) SetRefractionTexture(refractionTexture *BaseTexture) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(refractionTexture.JSObject())
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("refractionTexture", refractionTexture.JSObject())
+	return p
 }
 
 // ScatteringIntensity returns the ScatteringIntensity property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#scatteringintensity
-func (p *PBRSubSurfaceConfiguration) ScatteringIntensity(scatteringIntensity float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(scatteringIntensity)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) ScatteringIntensity() float64 {
+	retVal := p.p.Get("scatteringIntensity")
+	return retVal.Float()
 }
 
 // SetScatteringIntensity sets the ScatteringIntensity property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#scatteringintensity
 func (p *PBRSubSurfaceConfiguration) SetScatteringIntensity(scatteringIntensity float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(scatteringIntensity)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("scatteringIntensity", scatteringIntensity)
+	return p
 }
 
 // ThicknessTexture returns the ThicknessTexture property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#thicknesstexture
-func (p *PBRSubSurfaceConfiguration) ThicknessTexture(thicknessTexture *BaseTexture) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(thicknessTexture.JSObject())
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) ThicknessTexture() *BaseTexture {
+	retVal := p.p.Get("thicknessTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetThicknessTexture sets the ThicknessTexture property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#thicknesstexture
 func (p *PBRSubSurfaceConfiguration) SetThicknessTexture(thicknessTexture *BaseTexture) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(thicknessTexture.JSObject())
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("thicknessTexture", thicknessTexture.JSObject())
+	return p
 }
 
 // TintColor returns the TintColor property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#tintcolor
-func (p *PBRSubSurfaceConfiguration) TintColor(tintColor *Color3) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(tintColor.JSObject())
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) TintColor() *Color3 {
+	retVal := p.p.Get("tintColor")
+	return Color3FromJSObject(retVal, p.ctx)
 }
 
 // SetTintColor sets the TintColor property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#tintcolor
 func (p *PBRSubSurfaceConfiguration) SetTintColor(tintColor *Color3) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(tintColor.JSObject())
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("tintColor", tintColor.JSObject())
+	return p
 }
 
 // TintColorAtDistance returns the TintColorAtDistance property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#tintcoloratdistance
-func (p *PBRSubSurfaceConfiguration) TintColorAtDistance(tintColorAtDistance float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(tintColorAtDistance)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) TintColorAtDistance() float64 {
+	retVal := p.p.Get("tintColorAtDistance")
+	return retVal.Float()
 }
 
 // SetTintColorAtDistance sets the TintColorAtDistance property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#tintcoloratdistance
 func (p *PBRSubSurfaceConfiguration) SetTintColorAtDistance(tintColorAtDistance float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(tintColorAtDistance)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("tintColorAtDistance", tintColorAtDistance)
+	return p
 }
 
 // TranslucencyIntensity returns the TranslucencyIntensity property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#translucencyintensity
-func (p *PBRSubSurfaceConfiguration) TranslucencyIntensity(translucencyIntensity float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(translucencyIntensity)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) TranslucencyIntensity() float64 {
+	retVal := p.p.Get("translucencyIntensity")
+	return retVal.Float()
 }
 
 // SetTranslucencyIntensity sets the TranslucencyIntensity property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#translucencyintensity
 func (p *PBRSubSurfaceConfiguration) SetTranslucencyIntensity(translucencyIntensity float64) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(translucencyIntensity)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("translucencyIntensity", translucencyIntensity)
+	return p
 }
 
 // UseMaskFromThicknessTexture returns the UseMaskFromThicknessTexture property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#usemaskfromthicknesstexture
-func (p *PBRSubSurfaceConfiguration) UseMaskFromThicknessTexture(useMaskFromThicknessTexture bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(useMaskFromThicknessTexture)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSubSurfaceConfiguration) UseMaskFromThicknessTexture() bool {
+	retVal := p.p.Get("useMaskFromThicknessTexture")
+	return retVal.Bool()
 }
 
 // SetUseMaskFromThicknessTexture sets the UseMaskFromThicknessTexture property of class PBRSubSurfaceConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#usemaskfromthicknesstexture
 func (p *PBRSubSurfaceConfiguration) SetUseMaskFromThicknessTexture(useMaskFromThicknessTexture bool) *PBRSubSurfaceConfiguration {
-	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(useMaskFromThicknessTexture)
-	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("useMaskFromThicknessTexture", useMaskFromThicknessTexture)
+	return p
 }
-
-*/

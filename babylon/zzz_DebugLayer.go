@@ -120,38 +120,34 @@ func (d *DebugLayer) Show(opts *DebugLayerShowOpts) *Promise {
 	return PromiseFromJSObject(retVal, d.ctx)
 }
 
-/*
-
 // InspectorURL returns the InspectorURL property of class DebugLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer#inspectorurl
-func (d *DebugLayer) InspectorURL(InspectorURL string) *DebugLayer {
-	p := ba.ctx.Get("DebugLayer").New(InspectorURL)
-	return DebugLayerFromJSObject(p, ba.ctx)
+func (d *DebugLayer) InspectorURL() string {
+	retVal := d.p.Get("InspectorURL")
+	return retVal.String()
 }
 
 // SetInspectorURL sets the InspectorURL property of class DebugLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer#inspectorurl
 func (d *DebugLayer) SetInspectorURL(InspectorURL string) *DebugLayer {
-	p := ba.ctx.Get("DebugLayer").New(InspectorURL)
-	return DebugLayerFromJSObject(p, ba.ctx)
+	d.p.Set("InspectorURL", InspectorURL)
+	return d
 }
 
 // OnPropertyChangedObservable returns the OnPropertyChangedObservable property of class DebugLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer#onpropertychangedobservable
-func (d *DebugLayer) OnPropertyChangedObservable(onPropertyChangedObservable interface{}) *DebugLayer {
-	p := ba.ctx.Get("DebugLayer").New(onPropertyChangedObservable)
-	return DebugLayerFromJSObject(p, ba.ctx)
+func (d *DebugLayer) OnPropertyChangedObservable() interface{} {
+	retVal := d.p.Get("onPropertyChangedObservable")
+	return retVal
 }
 
 // SetOnPropertyChangedObservable sets the OnPropertyChangedObservable property of class DebugLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer#onpropertychangedobservable
 func (d *DebugLayer) SetOnPropertyChangedObservable(onPropertyChangedObservable interface{}) *DebugLayer {
-	p := ba.ctx.Get("DebugLayer").New(onPropertyChangedObservable)
-	return DebugLayerFromJSObject(p, ba.ctx)
+	d.p.Set("onPropertyChangedObservable", onPropertyChangedObservable)
+	return d
 }
-
-*/

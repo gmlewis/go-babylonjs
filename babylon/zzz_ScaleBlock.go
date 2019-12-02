@@ -58,54 +58,50 @@ func (s *ScaleBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Factor returns the Factor property of class ScaleBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock#factor
-func (s *ScaleBlock) Factor(factor *NodeMaterialConnectionPoint) *ScaleBlock {
-	p := ba.ctx.Get("ScaleBlock").New(factor.JSObject())
-	return ScaleBlockFromJSObject(p, ba.ctx)
+func (s *ScaleBlock) Factor() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("factor")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetFactor sets the Factor property of class ScaleBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock#factor
 func (s *ScaleBlock) SetFactor(factor *NodeMaterialConnectionPoint) *ScaleBlock {
-	p := ba.ctx.Get("ScaleBlock").New(factor.JSObject())
-	return ScaleBlockFromJSObject(p, ba.ctx)
+	s.p.Set("factor", factor.JSObject())
+	return s
 }
 
 // Input returns the Input property of class ScaleBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock#input
-func (s *ScaleBlock) Input(input *NodeMaterialConnectionPoint) *ScaleBlock {
-	p := ba.ctx.Get("ScaleBlock").New(input.JSObject())
-	return ScaleBlockFromJSObject(p, ba.ctx)
+func (s *ScaleBlock) Input() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("input")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetInput sets the Input property of class ScaleBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock#input
 func (s *ScaleBlock) SetInput(input *NodeMaterialConnectionPoint) *ScaleBlock {
-	p := ba.ctx.Get("ScaleBlock").New(input.JSObject())
-	return ScaleBlockFromJSObject(p, ba.ctx)
+	s.p.Set("input", input.JSObject())
+	return s
 }
 
 // Output returns the Output property of class ScaleBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock#output
-func (s *ScaleBlock) Output(output *NodeMaterialConnectionPoint) *ScaleBlock {
-	p := ba.ctx.Get("ScaleBlock").New(output.JSObject())
-	return ScaleBlockFromJSObject(p, ba.ctx)
+func (s *ScaleBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetOutput sets the Output property of class ScaleBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock#output
 func (s *ScaleBlock) SetOutput(output *NodeMaterialConnectionPoint) *ScaleBlock {
-	p := ba.ctx.Get("ScaleBlock").New(output.JSObject())
-	return ScaleBlockFromJSObject(p, ba.ctx)
+	s.p.Set("output", output.JSObject())
+	return s
 }
-
-*/

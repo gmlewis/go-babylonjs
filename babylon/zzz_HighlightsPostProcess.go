@@ -84,7 +84,3 @@ func (ba *Babylon) NewHighlightsPostProcess(name string, options float64, camera
 	p := ba.ctx.Get("HighlightsPostProcess").New(args...)
 	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

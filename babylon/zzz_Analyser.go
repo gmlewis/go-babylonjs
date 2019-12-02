@@ -124,86 +124,82 @@ func (a *Analyser) StopDebugCanvas() {
 	a.p.Call("stopDebugCanvas")
 }
 
-/*
-
 // BARGRAPHAMPLITUDE returns the BARGRAPHAMPLITUDE property of class Analyser.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser#bargraphamplitude
-func (a *Analyser) BARGRAPHAMPLITUDE(BARGRAPHAMPLITUDE float64) *Analyser {
-	p := ba.ctx.Get("Analyser").New(BARGRAPHAMPLITUDE)
-	return AnalyserFromJSObject(p, ba.ctx)
+func (a *Analyser) BARGRAPHAMPLITUDE() float64 {
+	retVal := a.p.Get("BARGRAPHAMPLITUDE")
+	return retVal.Float()
 }
 
 // SetBARGRAPHAMPLITUDE sets the BARGRAPHAMPLITUDE property of class Analyser.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser#bargraphamplitude
 func (a *Analyser) SetBARGRAPHAMPLITUDE(BARGRAPHAMPLITUDE float64) *Analyser {
-	p := ba.ctx.Get("Analyser").New(BARGRAPHAMPLITUDE)
-	return AnalyserFromJSObject(p, ba.ctx)
+	a.p.Set("BARGRAPHAMPLITUDE", BARGRAPHAMPLITUDE)
+	return a
 }
 
 // DEBUGCANVASPOS returns the DEBUGCANVASPOS property of class Analyser.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser#debugcanvaspos
-func (a *Analyser) DEBUGCANVASPOS(DEBUGCANVASPOS js.Value) *Analyser {
-	p := ba.ctx.Get("Analyser").New(DEBUGCANVASPOS)
-	return AnalyserFromJSObject(p, ba.ctx)
+func (a *Analyser) DEBUGCANVASPOS() js.Value {
+	retVal := a.p.Get("DEBUGCANVASPOS")
+	return retVal
 }
 
 // SetDEBUGCANVASPOS sets the DEBUGCANVASPOS property of class Analyser.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser#debugcanvaspos
 func (a *Analyser) SetDEBUGCANVASPOS(DEBUGCANVASPOS js.Value) *Analyser {
-	p := ba.ctx.Get("Analyser").New(DEBUGCANVASPOS)
-	return AnalyserFromJSObject(p, ba.ctx)
+	a.p.Set("DEBUGCANVASPOS", DEBUGCANVASPOS)
+	return a
 }
 
 // DEBUGCANVASSIZE returns the DEBUGCANVASSIZE property of class Analyser.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser#debugcanvassize
-func (a *Analyser) DEBUGCANVASSIZE(DEBUGCANVASSIZE js.Value) *Analyser {
-	p := ba.ctx.Get("Analyser").New(DEBUGCANVASSIZE)
-	return AnalyserFromJSObject(p, ba.ctx)
+func (a *Analyser) DEBUGCANVASSIZE() js.Value {
+	retVal := a.p.Get("DEBUGCANVASSIZE")
+	return retVal
 }
 
 // SetDEBUGCANVASSIZE sets the DEBUGCANVASSIZE property of class Analyser.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser#debugcanvassize
 func (a *Analyser) SetDEBUGCANVASSIZE(DEBUGCANVASSIZE js.Value) *Analyser {
-	p := ba.ctx.Get("Analyser").New(DEBUGCANVASSIZE)
-	return AnalyserFromJSObject(p, ba.ctx)
+	a.p.Set("DEBUGCANVASSIZE", DEBUGCANVASSIZE)
+	return a
 }
 
 // FFT_SIZE returns the FFT_SIZE property of class Analyser.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser#fft_size
-func (a *Analyser) FFT_SIZE(FFT_SIZE float64) *Analyser {
-	p := ba.ctx.Get("Analyser").New(FFT_SIZE)
-	return AnalyserFromJSObject(p, ba.ctx)
+func (a *Analyser) FFT_SIZE() float64 {
+	retVal := a.p.Get("FFT_SIZE")
+	return retVal.Float()
 }
 
 // SetFFT_SIZE sets the FFT_SIZE property of class Analyser.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser#fft_size
 func (a *Analyser) SetFFT_SIZE(FFT_SIZE float64) *Analyser {
-	p := ba.ctx.Get("Analyser").New(FFT_SIZE)
-	return AnalyserFromJSObject(p, ba.ctx)
+	a.p.Set("FFT_SIZE", FFT_SIZE)
+	return a
 }
 
 // SMOOTHING returns the SMOOTHING property of class Analyser.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser#smoothing
-func (a *Analyser) SMOOTHING(SMOOTHING float64) *Analyser {
-	p := ba.ctx.Get("Analyser").New(SMOOTHING)
-	return AnalyserFromJSObject(p, ba.ctx)
+func (a *Analyser) SMOOTHING() float64 {
+	retVal := a.p.Get("SMOOTHING")
+	return retVal.Float()
 }
 
 // SetSMOOTHING sets the SMOOTHING property of class Analyser.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser#smoothing
 func (a *Analyser) SetSMOOTHING(SMOOTHING float64) *Analyser {
-	p := ba.ctx.Get("Analyser").New(SMOOTHING)
-	return AnalyserFromJSObject(p, ba.ctx)
+	a.p.Set("SMOOTHING", SMOOTHING)
+	return a
 }
-
-*/

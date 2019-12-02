@@ -84,262 +84,258 @@ func (s *Sprite) StopAnimation() {
 	s.p.Call("stopAnimation")
 }
 
-/*
-
 // ActionManager returns the ActionManager property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#actionmanager
-func (s *Sprite) ActionManager(actionManager *ActionManager) *Sprite {
-	p := ba.ctx.Get("Sprite").New(actionManager.JSObject())
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) ActionManager() *ActionManager {
+	retVal := s.p.Get("actionManager")
+	return ActionManagerFromJSObject(retVal, s.ctx)
 }
 
 // SetActionManager sets the ActionManager property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#actionmanager
 func (s *Sprite) SetActionManager(actionManager *ActionManager) *Sprite {
-	p := ba.ctx.Get("Sprite").New(actionManager.JSObject())
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("actionManager", actionManager.JSObject())
+	return s
 }
 
 // Angle returns the Angle property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#angle
-func (s *Sprite) Angle(angle float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(angle)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) Angle() float64 {
+	retVal := s.p.Get("angle")
+	return retVal.Float()
 }
 
 // SetAngle sets the Angle property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#angle
 func (s *Sprite) SetAngle(angle float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(angle)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("angle", angle)
+	return s
 }
 
 // Animations returns the Animations property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#animations
-func (s *Sprite) Animations(animations *Animation) *Sprite {
-	p := ba.ctx.Get("Sprite").New(animations.JSObject())
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) Animations() *Animation {
+	retVal := s.p.Get("animations")
+	return AnimationFromJSObject(retVal, s.ctx)
 }
 
 // SetAnimations sets the Animations property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#animations
 func (s *Sprite) SetAnimations(animations *Animation) *Sprite {
-	p := ba.ctx.Get("Sprite").New(animations.JSObject())
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("animations", animations.JSObject())
+	return s
 }
 
 // CellIndex returns the CellIndex property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#cellindex
-func (s *Sprite) CellIndex(cellIndex float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(cellIndex)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) CellIndex() float64 {
+	retVal := s.p.Get("cellIndex")
+	return retVal.Float()
 }
 
 // SetCellIndex sets the CellIndex property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#cellindex
 func (s *Sprite) SetCellIndex(cellIndex float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(cellIndex)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("cellIndex", cellIndex)
+	return s
 }
 
 // CellRef returns the CellRef property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#cellref
-func (s *Sprite) CellRef(cellRef string) *Sprite {
-	p := ba.ctx.Get("Sprite").New(cellRef)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) CellRef() string {
+	retVal := s.p.Get("cellRef")
+	return retVal.String()
 }
 
 // SetCellRef sets the CellRef property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#cellref
 func (s *Sprite) SetCellRef(cellRef string) *Sprite {
-	p := ba.ctx.Get("Sprite").New(cellRef)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("cellRef", cellRef)
+	return s
 }
 
 // Color returns the Color property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#color
-func (s *Sprite) Color(color *Color4) *Sprite {
-	p := ba.ctx.Get("Sprite").New(color.JSObject())
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) Color() *Color4 {
+	retVal := s.p.Get("color")
+	return Color4FromJSObject(retVal, s.ctx)
 }
 
 // SetColor sets the Color property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#color
 func (s *Sprite) SetColor(color *Color4) *Sprite {
-	p := ba.ctx.Get("Sprite").New(color.JSObject())
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("color", color.JSObject())
+	return s
 }
 
 // DisposeWhenFinishedAnimating returns the DisposeWhenFinishedAnimating property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#disposewhenfinishedanimating
-func (s *Sprite) DisposeWhenFinishedAnimating(disposeWhenFinishedAnimating bool) *Sprite {
-	p := ba.ctx.Get("Sprite").New(disposeWhenFinishedAnimating)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) DisposeWhenFinishedAnimating() bool {
+	retVal := s.p.Get("disposeWhenFinishedAnimating")
+	return retVal.Bool()
 }
 
 // SetDisposeWhenFinishedAnimating sets the DisposeWhenFinishedAnimating property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#disposewhenfinishedanimating
 func (s *Sprite) SetDisposeWhenFinishedAnimating(disposeWhenFinishedAnimating bool) *Sprite {
-	p := ba.ctx.Get("Sprite").New(disposeWhenFinishedAnimating)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("disposeWhenFinishedAnimating", disposeWhenFinishedAnimating)
+	return s
 }
 
 // Height returns the Height property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#height
-func (s *Sprite) Height(height float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(height)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) Height() float64 {
+	retVal := s.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#height
 func (s *Sprite) SetHeight(height float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(height)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("height", height)
+	return s
 }
 
 // InvertU returns the InvertU property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#invertu
-func (s *Sprite) InvertU(invertU float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(invertU)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) InvertU() float64 {
+	retVal := s.p.Get("invertU")
+	return retVal.Float()
 }
 
 // SetInvertU sets the InvertU property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#invertu
 func (s *Sprite) SetInvertU(invertU float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(invertU)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("invertU", invertU)
+	return s
 }
 
 // InvertV returns the InvertV property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#invertv
-func (s *Sprite) InvertV(invertV float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(invertV)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) InvertV() float64 {
+	retVal := s.p.Get("invertV")
+	return retVal.Float()
 }
 
 // SetInvertV sets the InvertV property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#invertv
 func (s *Sprite) SetInvertV(invertV float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(invertV)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("invertV", invertV)
+	return s
 }
 
 // IsPickable returns the IsPickable property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#ispickable
-func (s *Sprite) IsPickable(isPickable bool) *Sprite {
-	p := ba.ctx.Get("Sprite").New(isPickable)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) IsPickable() bool {
+	retVal := s.p.Get("isPickable")
+	return retVal.Bool()
 }
 
 // SetIsPickable sets the IsPickable property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#ispickable
 func (s *Sprite) SetIsPickable(isPickable bool) *Sprite {
-	p := ba.ctx.Get("Sprite").New(isPickable)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("isPickable", isPickable)
+	return s
 }
 
 // IsVisible returns the IsVisible property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#isvisible
-func (s *Sprite) IsVisible(isVisible bool) *Sprite {
-	p := ba.ctx.Get("Sprite").New(isVisible)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) IsVisible() bool {
+	retVal := s.p.Get("isVisible")
+	return retVal.Bool()
 }
 
 // SetIsVisible sets the IsVisible property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#isvisible
 func (s *Sprite) SetIsVisible(isVisible bool) *Sprite {
-	p := ba.ctx.Get("Sprite").New(isVisible)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("isVisible", isVisible)
+	return s
 }
 
 // Name returns the Name property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#name
-func (s *Sprite) Name(name string) *Sprite {
-	p := ba.ctx.Get("Sprite").New(name)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#name
 func (s *Sprite) SetName(name string) *Sprite {
-	p := ba.ctx.Get("Sprite").New(name)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
 
 // Position returns the Position property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#position
-func (s *Sprite) Position(position *Vector3) *Sprite {
-	p := ba.ctx.Get("Sprite").New(position.JSObject())
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) Position() *Vector3 {
+	retVal := s.p.Get("position")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetPosition sets the Position property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#position
 func (s *Sprite) SetPosition(position *Vector3) *Sprite {
-	p := ba.ctx.Get("Sprite").New(position.JSObject())
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("position", position.JSObject())
+	return s
 }
 
 // Size returns the Size property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#size
-func (s *Sprite) Size(size float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(size)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) Size() float64 {
+	retVal := s.p.Get("size")
+	return retVal.Float()
 }
 
 // SetSize sets the Size property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#size
 func (s *Sprite) SetSize(size float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(size)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("size", size)
+	return s
 }
 
 // Width returns the Width property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#width
-func (s *Sprite) Width(width float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(width)
-	return SpriteFromJSObject(p, ba.ctx)
+func (s *Sprite) Width() float64 {
+	retVal := s.p.Get("width")
+	return retVal.Float()
 }
 
 // SetWidth sets the Width property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#width
 func (s *Sprite) SetWidth(width float64) *Sprite {
-	p := ba.ctx.Get("Sprite").New(width)
-	return SpriteFromJSObject(p, ba.ctx)
+	s.p.Set("width", width)
+	return s
 }
-
-*/

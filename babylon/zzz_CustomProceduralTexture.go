@@ -124,22 +124,18 @@ func (c *CustomProceduralTexture) UpdateTextures() {
 	c.p.Call("updateTextures")
 }
 
-/*
-
 // Animate returns the Animate property of class CustomProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customproceduraltexture#animate
-func (c *CustomProceduralTexture) Animate(animate bool) *CustomProceduralTexture {
-	p := ba.ctx.Get("CustomProceduralTexture").New(animate)
-	return CustomProceduralTextureFromJSObject(p, ba.ctx)
+func (c *CustomProceduralTexture) Animate() bool {
+	retVal := c.p.Get("animate")
+	return retVal.Bool()
 }
 
 // SetAnimate sets the Animate property of class CustomProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customproceduraltexture#animate
 func (c *CustomProceduralTexture) SetAnimate(animate bool) *CustomProceduralTexture {
-	p := ba.ctx.Get("CustomProceduralTexture").New(animate)
-	return CustomProceduralTextureFromJSObject(p, ba.ctx)
+	c.p.Set("animate", animate)
+	return c
 }
-
-*/

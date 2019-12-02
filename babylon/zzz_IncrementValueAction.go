@@ -90,38 +90,34 @@ func (i *IncrementValueAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-/*
-
 // PropertyPath returns the PropertyPath property of class IncrementValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#propertypath
-func (i *IncrementValueAction) PropertyPath(propertyPath string) *IncrementValueAction {
-	p := ba.ctx.Get("IncrementValueAction").New(propertyPath)
-	return IncrementValueActionFromJSObject(p, ba.ctx)
+func (i *IncrementValueAction) PropertyPath() string {
+	retVal := i.p.Get("propertyPath")
+	return retVal.String()
 }
 
 // SetPropertyPath sets the PropertyPath property of class IncrementValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#propertypath
 func (i *IncrementValueAction) SetPropertyPath(propertyPath string) *IncrementValueAction {
-	p := ba.ctx.Get("IncrementValueAction").New(propertyPath)
-	return IncrementValueActionFromJSObject(p, ba.ctx)
+	i.p.Set("propertyPath", propertyPath)
+	return i
 }
 
 // Value returns the Value property of class IncrementValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#value
-func (i *IncrementValueAction) Value(value interface{}) *IncrementValueAction {
-	p := ba.ctx.Get("IncrementValueAction").New(value)
-	return IncrementValueActionFromJSObject(p, ba.ctx)
+func (i *IncrementValueAction) Value() interface{} {
+	retVal := i.p.Get("value")
+	return retVal
 }
 
 // SetValue sets the Value property of class IncrementValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#value
 func (i *IncrementValueAction) SetValue(value interface{}) *IncrementValueAction {
-	p := ba.ctx.Get("IncrementValueAction").New(value)
-	return IncrementValueActionFromJSObject(p, ba.ctx)
+	i.p.Set("value", value)
+	return i
 }
-
-*/

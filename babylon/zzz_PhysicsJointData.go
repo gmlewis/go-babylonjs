@@ -38,102 +38,98 @@ func PhysicsJointDataArrayToJSArray(array []*PhysicsJointData) []interface{} {
 	return result
 }
 
-/*
-
 // Collision returns the Collision property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#collision
-func (p *PhysicsJointData) Collision(collision bool) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(collision)
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+func (p *PhysicsJointData) Collision() bool {
+	retVal := p.p.Get("collision")
+	return retVal.Bool()
 }
 
 // SetCollision sets the Collision property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#collision
 func (p *PhysicsJointData) SetCollision(collision bool) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(collision)
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+	p.p.Set("collision", collision)
+	return p
 }
 
 // ConnectedAxis returns the ConnectedAxis property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#connectedaxis
-func (p *PhysicsJointData) ConnectedAxis(connectedAxis *Vector3) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(connectedAxis.JSObject())
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+func (p *PhysicsJointData) ConnectedAxis() *Vector3 {
+	retVal := p.p.Get("connectedAxis")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetConnectedAxis sets the ConnectedAxis property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#connectedaxis
 func (p *PhysicsJointData) SetConnectedAxis(connectedAxis *Vector3) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(connectedAxis.JSObject())
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+	p.p.Set("connectedAxis", connectedAxis.JSObject())
+	return p
 }
 
 // ConnectedPivot returns the ConnectedPivot property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#connectedpivot
-func (p *PhysicsJointData) ConnectedPivot(connectedPivot *Vector3) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(connectedPivot.JSObject())
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+func (p *PhysicsJointData) ConnectedPivot() *Vector3 {
+	retVal := p.p.Get("connectedPivot")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetConnectedPivot sets the ConnectedPivot property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#connectedpivot
 func (p *PhysicsJointData) SetConnectedPivot(connectedPivot *Vector3) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(connectedPivot.JSObject())
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+	p.p.Set("connectedPivot", connectedPivot.JSObject())
+	return p
 }
 
 // MainAxis returns the MainAxis property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#mainaxis
-func (p *PhysicsJointData) MainAxis(mainAxis *Vector3) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(mainAxis.JSObject())
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+func (p *PhysicsJointData) MainAxis() *Vector3 {
+	retVal := p.p.Get("mainAxis")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetMainAxis sets the MainAxis property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#mainaxis
 func (p *PhysicsJointData) SetMainAxis(mainAxis *Vector3) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(mainAxis.JSObject())
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+	p.p.Set("mainAxis", mainAxis.JSObject())
+	return p
 }
 
 // MainPivot returns the MainPivot property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#mainpivot
-func (p *PhysicsJointData) MainPivot(mainPivot *Vector3) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(mainPivot.JSObject())
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+func (p *PhysicsJointData) MainPivot() *Vector3 {
+	retVal := p.p.Get("mainPivot")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetMainPivot sets the MainPivot property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#mainpivot
 func (p *PhysicsJointData) SetMainPivot(mainPivot *Vector3) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(mainPivot.JSObject())
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+	p.p.Set("mainPivot", mainPivot.JSObject())
+	return p
 }
 
 // NativeParams returns the NativeParams property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#nativeparams
-func (p *PhysicsJointData) NativeParams(nativeParams interface{}) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(nativeParams)
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+func (p *PhysicsJointData) NativeParams() interface{} {
+	retVal := p.p.Get("nativeParams")
+	return retVal
 }
 
 // SetNativeParams sets the NativeParams property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#nativeparams
 func (p *PhysicsJointData) SetNativeParams(nativeParams interface{}) *PhysicsJointData {
-	p := ba.ctx.Get("PhysicsJointData").New(nativeParams)
-	return PhysicsJointDataFromJSObject(p, ba.ctx)
+	p.p.Set("nativeParams", nativeParams)
+	return p
 }
-
-*/

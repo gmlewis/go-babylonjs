@@ -90,38 +90,34 @@ func (ba *Babylon) NewSharpenPostProcess(name string, options float64, camera *C
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // ColorAmount returns the ColorAmount property of class SharpenPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#coloramount
-func (s *SharpenPostProcess) ColorAmount(colorAmount float64) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(colorAmount)
-	return SharpenPostProcessFromJSObject(p, ba.ctx)
+func (s *SharpenPostProcess) ColorAmount() float64 {
+	retVal := s.p.Get("colorAmount")
+	return retVal.Float()
 }
 
 // SetColorAmount sets the ColorAmount property of class SharpenPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#coloramount
 func (s *SharpenPostProcess) SetColorAmount(colorAmount float64) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(colorAmount)
-	return SharpenPostProcessFromJSObject(p, ba.ctx)
+	s.p.Set("colorAmount", colorAmount)
+	return s
 }
 
 // EdgeAmount returns the EdgeAmount property of class SharpenPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#edgeamount
-func (s *SharpenPostProcess) EdgeAmount(edgeAmount float64) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(edgeAmount)
-	return SharpenPostProcessFromJSObject(p, ba.ctx)
+func (s *SharpenPostProcess) EdgeAmount() float64 {
+	retVal := s.p.Get("edgeAmount")
+	return retVal.Float()
 }
 
 // SetEdgeAmount sets the EdgeAmount property of class SharpenPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#edgeamount
 func (s *SharpenPostProcess) SetEdgeAmount(edgeAmount float64) *SharpenPostProcess {
-	p := ba.ctx.Get("SharpenPostProcess").New(edgeAmount)
-	return SharpenPostProcessFromJSObject(p, ba.ctx)
+	s.p.Set("edgeAmount", edgeAmount)
+	return s
 }
-
-*/

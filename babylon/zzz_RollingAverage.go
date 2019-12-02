@@ -93,38 +93,34 @@ func (r *RollingAverage) Reset() {
 	r.p.Call("reset")
 }
 
-/*
-
 // Average returns the Average property of class RollingAverage.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage#average
-func (r *RollingAverage) Average(average float64) *RollingAverage {
-	p := ba.ctx.Get("RollingAverage").New(average)
-	return RollingAverageFromJSObject(p, ba.ctx)
+func (r *RollingAverage) Average() float64 {
+	retVal := r.p.Get("average")
+	return retVal.Float()
 }
 
 // SetAverage sets the Average property of class RollingAverage.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage#average
 func (r *RollingAverage) SetAverage(average float64) *RollingAverage {
-	p := ba.ctx.Get("RollingAverage").New(average)
-	return RollingAverageFromJSObject(p, ba.ctx)
+	r.p.Set("average", average)
+	return r
 }
 
 // Variance returns the Variance property of class RollingAverage.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage#variance
-func (r *RollingAverage) Variance(variance float64) *RollingAverage {
-	p := ba.ctx.Get("RollingAverage").New(variance)
-	return RollingAverageFromJSObject(p, ba.ctx)
+func (r *RollingAverage) Variance() float64 {
+	retVal := r.p.Get("variance")
+	return retVal.Float()
 }
 
 // SetVariance sets the Variance property of class RollingAverage.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage#variance
 func (r *RollingAverage) SetVariance(variance float64) *RollingAverage {
-	p := ba.ctx.Get("RollingAverage").New(variance)
-	return RollingAverageFromJSObject(p, ba.ctx)
+	r.p.Set("variance", variance)
+	return r
 }
-
-*/

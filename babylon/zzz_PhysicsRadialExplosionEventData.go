@@ -38,22 +38,18 @@ func PhysicsRadialExplosionEventDataArrayToJSArray(array []*PhysicsRadialExplosi
 	return result
 }
 
-/*
-
 // Sphere returns the Sphere property of class PhysicsRadialExplosionEventData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventdata#sphere
-func (p *PhysicsRadialExplosionEventData) Sphere(sphere *Mesh) *PhysicsRadialExplosionEventData {
-	p := ba.ctx.Get("PhysicsRadialExplosionEventData").New(sphere.JSObject())
-	return PhysicsRadialExplosionEventDataFromJSObject(p, ba.ctx)
+func (p *PhysicsRadialExplosionEventData) Sphere() *Mesh {
+	retVal := p.p.Get("sphere")
+	return MeshFromJSObject(retVal, p.ctx)
 }
 
 // SetSphere sets the Sphere property of class PhysicsRadialExplosionEventData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventdata#sphere
 func (p *PhysicsRadialExplosionEventData) SetSphere(sphere *Mesh) *PhysicsRadialExplosionEventData {
-	p := ba.ctx.Get("PhysicsRadialExplosionEventData").New(sphere.JSObject())
-	return PhysicsRadialExplosionEventDataFromJSObject(p, ba.ctx)
+	p.p.Set("sphere", sphere.JSObject())
+	return p
 }
-
-*/

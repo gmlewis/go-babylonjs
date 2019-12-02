@@ -47,7 +47,3 @@ func (r *RGBDTextureTools) ExpandRGBDTexture(texture *Texture) {
 
 	r.p.Call("ExpandRGBDTexture", args...)
 }
-
-/*
-
- */

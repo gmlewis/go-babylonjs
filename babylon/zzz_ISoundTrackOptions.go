@@ -36,38 +36,34 @@ func ISoundTrackOptionsArrayToJSArray(array []*ISoundTrackOptions) []interface{}
 	return result
 }
 
-/*
-
 // MainTrack returns the MainTrack property of class ISoundTrackOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundtrackoptions#maintrack
-func (i *ISoundTrackOptions) MainTrack(mainTrack bool) *ISoundTrackOptions {
-	p := ba.ctx.Get("ISoundTrackOptions").New(mainTrack)
-	return ISoundTrackOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundTrackOptions) MainTrack() bool {
+	retVal := i.p.Get("mainTrack")
+	return retVal.Bool()
 }
 
 // SetMainTrack sets the MainTrack property of class ISoundTrackOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundtrackoptions#maintrack
 func (i *ISoundTrackOptions) SetMainTrack(mainTrack bool) *ISoundTrackOptions {
-	p := ba.ctx.Get("ISoundTrackOptions").New(mainTrack)
-	return ISoundTrackOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mainTrack", mainTrack)
+	return i
 }
 
 // Volume returns the Volume property of class ISoundTrackOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundtrackoptions#volume
-func (i *ISoundTrackOptions) Volume(volume float64) *ISoundTrackOptions {
-	p := ba.ctx.Get("ISoundTrackOptions").New(volume)
-	return ISoundTrackOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundTrackOptions) Volume() float64 {
+	retVal := i.p.Get("volume")
+	return retVal.Float()
 }
 
 // SetVolume sets the Volume property of class ISoundTrackOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundtrackoptions#volume
 func (i *ISoundTrackOptions) SetVolume(volume float64) *ISoundTrackOptions {
-	p := ba.ctx.Get("ISoundTrackOptions").New(volume)
-	return ISoundTrackOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("volume", volume)
+	return i
 }
-
-*/

@@ -36,38 +36,34 @@ func IFileRequestArrayToJSArray(array []*IFileRequest) []interface{} {
 	return result
 }
 
-/*
-
 // Abort returns the Abort property of class IFileRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ifilerequest#abort
-func (i *IFileRequest) Abort(abort func()) *IFileRequest {
-	p := ba.ctx.Get("IFileRequest").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {abort(); return nil}))
-	return IFileRequestFromJSObject(p, ba.ctx)
+func (i *IFileRequest) Abort() js.Value {
+	retVal := i.p.Get("abort")
+	return retVal
 }
 
 // SetAbort sets the Abort property of class IFileRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ifilerequest#abort
 func (i *IFileRequest) SetAbort(abort func()) *IFileRequest {
-	p := ba.ctx.Get("IFileRequest").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {abort(); return nil}))
-	return IFileRequestFromJSObject(p, ba.ctx)
+	i.p.Set("abort", js.FuncOf(func(this js.Value, args []js.Value) interface{} { abort(); return nil }))
+	return i
 }
 
 // OnCompleteObservable returns the OnCompleteObservable property of class IFileRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ifilerequest#oncompleteobservable
-func (i *IFileRequest) OnCompleteObservable(onCompleteObservable *Observable) *IFileRequest {
-	p := ba.ctx.Get("IFileRequest").New(onCompleteObservable.JSObject())
-	return IFileRequestFromJSObject(p, ba.ctx)
+func (i *IFileRequest) OnCompleteObservable() *Observable {
+	retVal := i.p.Get("onCompleteObservable")
+	return ObservableFromJSObject(retVal, i.ctx)
 }
 
 // SetOnCompleteObservable sets the OnCompleteObservable property of class IFileRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ifilerequest#oncompleteobservable
 func (i *IFileRequest) SetOnCompleteObservable(onCompleteObservable *Observable) *IFileRequest {
-	p := ba.ctx.Get("IFileRequest").New(onCompleteObservable.JSObject())
-	return IFileRequestFromJSObject(p, ba.ctx)
+	i.p.Set("onCompleteObservable", onCompleteObservable.JSObject())
+	return i
 }
-
-*/

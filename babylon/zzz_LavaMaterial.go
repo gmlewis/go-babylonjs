@@ -220,182 +220,178 @@ func (l *LavaMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // DiffuseColor returns the DiffuseColor property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#diffusecolor
-func (l *LavaMaterial) DiffuseColor(diffuseColor *Color3) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(diffuseColor.JSObject())
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) DiffuseColor() *Color3 {
+	retVal := l.p.Get("diffuseColor")
+	return Color3FromJSObject(retVal, l.ctx)
 }
 
 // SetDiffuseColor sets the DiffuseColor property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#diffusecolor
 func (l *LavaMaterial) SetDiffuseColor(diffuseColor *Color3) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(diffuseColor.JSObject())
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("diffuseColor", diffuseColor.JSObject())
+	return l
 }
 
 // DiffuseTexture returns the DiffuseTexture property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#diffusetexture
-func (l *LavaMaterial) DiffuseTexture(diffuseTexture *BaseTexture) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(diffuseTexture.JSObject())
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) DiffuseTexture() *BaseTexture {
+	retVal := l.p.Get("diffuseTexture")
+	return BaseTextureFromJSObject(retVal, l.ctx)
 }
 
 // SetDiffuseTexture sets the DiffuseTexture property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#diffusetexture
 func (l *LavaMaterial) SetDiffuseTexture(diffuseTexture *BaseTexture) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(diffuseTexture.JSObject())
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("diffuseTexture", diffuseTexture.JSObject())
+	return l
 }
 
 // DisableLighting returns the DisableLighting property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#disablelighting
-func (l *LavaMaterial) DisableLighting(disableLighting bool) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(disableLighting)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) DisableLighting() bool {
+	retVal := l.p.Get("disableLighting")
+	return retVal.Bool()
 }
 
 // SetDisableLighting sets the DisableLighting property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#disablelighting
 func (l *LavaMaterial) SetDisableLighting(disableLighting bool) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(disableLighting)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("disableLighting", disableLighting)
+	return l
 }
 
 // FogColor returns the FogColor property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fogcolor
-func (l *LavaMaterial) FogColor(fogColor *Color3) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(fogColor.JSObject())
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) FogColor() *Color3 {
+	retVal := l.p.Get("fogColor")
+	return Color3FromJSObject(retVal, l.ctx)
 }
 
 // SetFogColor sets the FogColor property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fogcolor
 func (l *LavaMaterial) SetFogColor(fogColor *Color3) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(fogColor.JSObject())
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("fogColor", fogColor.JSObject())
+	return l
 }
 
 // FogDensity returns the FogDensity property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fogdensity
-func (l *LavaMaterial) FogDensity(fogDensity float64) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(fogDensity)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) FogDensity() float64 {
+	retVal := l.p.Get("fogDensity")
+	return retVal.Float()
 }
 
 // SetFogDensity sets the FogDensity property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fogdensity
 func (l *LavaMaterial) SetFogDensity(fogDensity float64) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(fogDensity)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("fogDensity", fogDensity)
+	return l
 }
 
 // LowFrequencySpeed returns the LowFrequencySpeed property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#lowfrequencyspeed
-func (l *LavaMaterial) LowFrequencySpeed(lowFrequencySpeed float64) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(lowFrequencySpeed)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) LowFrequencySpeed() float64 {
+	retVal := l.p.Get("lowFrequencySpeed")
+	return retVal.Float()
 }
 
 // SetLowFrequencySpeed sets the LowFrequencySpeed property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#lowfrequencyspeed
 func (l *LavaMaterial) SetLowFrequencySpeed(lowFrequencySpeed float64) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(lowFrequencySpeed)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("lowFrequencySpeed", lowFrequencySpeed)
+	return l
 }
 
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#maxsimultaneouslights
-func (l *LavaMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(maxSimultaneousLights)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) MaxSimultaneousLights() float64 {
+	retVal := l.p.Get("maxSimultaneousLights")
+	return retVal.Float()
 }
 
 // SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#maxsimultaneouslights
 func (l *LavaMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(maxSimultaneousLights)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("maxSimultaneousLights", maxSimultaneousLights)
+	return l
 }
 
 // MovingSpeed returns the MovingSpeed property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#movingspeed
-func (l *LavaMaterial) MovingSpeed(movingSpeed float64) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(movingSpeed)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) MovingSpeed() float64 {
+	retVal := l.p.Get("movingSpeed")
+	return retVal.Float()
 }
 
 // SetMovingSpeed sets the MovingSpeed property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#movingspeed
 func (l *LavaMaterial) SetMovingSpeed(movingSpeed float64) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(movingSpeed)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("movingSpeed", movingSpeed)
+	return l
 }
 
 // NoiseTexture returns the NoiseTexture property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#noisetexture
-func (l *LavaMaterial) NoiseTexture(noiseTexture *BaseTexture) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(noiseTexture.JSObject())
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) NoiseTexture() *BaseTexture {
+	retVal := l.p.Get("noiseTexture")
+	return BaseTextureFromJSObject(retVal, l.ctx)
 }
 
 // SetNoiseTexture sets the NoiseTexture property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#noisetexture
 func (l *LavaMaterial) SetNoiseTexture(noiseTexture *BaseTexture) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(noiseTexture.JSObject())
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("noiseTexture", noiseTexture.JSObject())
+	return l
 }
 
 // Speed returns the Speed property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#speed
-func (l *LavaMaterial) Speed(speed float64) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(speed)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) Speed() float64 {
+	retVal := l.p.Get("speed")
+	return retVal.Float()
 }
 
 // SetSpeed sets the Speed property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#speed
 func (l *LavaMaterial) SetSpeed(speed float64) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(speed)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("speed", speed)
+	return l
 }
 
 // Unlit returns the Unlit property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#unlit
-func (l *LavaMaterial) Unlit(unlit bool) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(unlit)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+func (l *LavaMaterial) Unlit() bool {
+	retVal := l.p.Get("unlit")
+	return retVal.Bool()
 }
 
 // SetUnlit sets the Unlit property of class LavaMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#unlit
 func (l *LavaMaterial) SetUnlit(unlit bool) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(unlit)
-	return LavaMaterialFromJSObject(p, ba.ctx)
+	l.p.Set("unlit", unlit)
+	return l
 }
-
-*/

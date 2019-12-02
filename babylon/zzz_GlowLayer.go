@@ -216,118 +216,114 @@ func (g *GlowLayer) UnReferenceMeshFromUsingItsOwnMaterial(mesh *AbstractMesh) {
 	g.p.Call("unReferenceMeshFromUsingItsOwnMaterial", args...)
 }
 
-/*
-
 // BlurKernelSize returns the BlurKernelSize property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#blurkernelsize
-func (g *GlowLayer) BlurKernelSize(blurKernelSize float64) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(blurKernelSize)
-	return GlowLayerFromJSObject(p, ba.ctx)
+func (g *GlowLayer) BlurKernelSize() float64 {
+	retVal := g.p.Get("blurKernelSize")
+	return retVal.Float()
 }
 
 // SetBlurKernelSize sets the BlurKernelSize property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#blurkernelsize
 func (g *GlowLayer) SetBlurKernelSize(blurKernelSize float64) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(blurKernelSize)
-	return GlowLayerFromJSObject(p, ba.ctx)
+	g.p.Set("blurKernelSize", blurKernelSize)
+	return g
 }
 
 // CustomEmissiveColorSelector returns the CustomEmissiveColorSelector property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#customemissivecolorselector
-func (g *GlowLayer) CustomEmissiveColorSelector(customEmissiveColorSelector func()) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customEmissiveColorSelector(); return nil}))
-	return GlowLayerFromJSObject(p, ba.ctx)
+func (g *GlowLayer) CustomEmissiveColorSelector() js.Value {
+	retVal := g.p.Get("customEmissiveColorSelector")
+	return retVal
 }
 
 // SetCustomEmissiveColorSelector sets the CustomEmissiveColorSelector property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#customemissivecolorselector
 func (g *GlowLayer) SetCustomEmissiveColorSelector(customEmissiveColorSelector func()) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customEmissiveColorSelector(); return nil}))
-	return GlowLayerFromJSObject(p, ba.ctx)
+	g.p.Set("customEmissiveColorSelector", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customEmissiveColorSelector(); return nil }))
+	return g
 }
 
 // CustomEmissiveTextureSelector returns the CustomEmissiveTextureSelector property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#customemissivetextureselector
-func (g *GlowLayer) CustomEmissiveTextureSelector(customEmissiveTextureSelector func()) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customEmissiveTextureSelector(); return nil}))
-	return GlowLayerFromJSObject(p, ba.ctx)
+func (g *GlowLayer) CustomEmissiveTextureSelector() js.Value {
+	retVal := g.p.Get("customEmissiveTextureSelector")
+	return retVal
 }
 
 // SetCustomEmissiveTextureSelector sets the CustomEmissiveTextureSelector property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#customemissivetextureselector
 func (g *GlowLayer) SetCustomEmissiveTextureSelector(customEmissiveTextureSelector func()) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customEmissiveTextureSelector(); return nil}))
-	return GlowLayerFromJSObject(p, ba.ctx)
+	g.p.Set("customEmissiveTextureSelector", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customEmissiveTextureSelector(); return nil }))
+	return g
 }
 
 // DefaultBlurKernelSize returns the DefaultBlurKernelSize property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#defaultblurkernelsize
-func (g *GlowLayer) DefaultBlurKernelSize(DefaultBlurKernelSize float64) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(DefaultBlurKernelSize)
-	return GlowLayerFromJSObject(p, ba.ctx)
+func (g *GlowLayer) DefaultBlurKernelSize() float64 {
+	retVal := g.p.Get("DefaultBlurKernelSize")
+	return retVal.Float()
 }
 
 // SetDefaultBlurKernelSize sets the DefaultBlurKernelSize property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#defaultblurkernelsize
 func (g *GlowLayer) SetDefaultBlurKernelSize(DefaultBlurKernelSize float64) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(DefaultBlurKernelSize)
-	return GlowLayerFromJSObject(p, ba.ctx)
+	g.p.Set("DefaultBlurKernelSize", DefaultBlurKernelSize)
+	return g
 }
 
 // DefaultTextureRatio returns the DefaultTextureRatio property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#defaulttextureratio
-func (g *GlowLayer) DefaultTextureRatio(DefaultTextureRatio float64) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(DefaultTextureRatio)
-	return GlowLayerFromJSObject(p, ba.ctx)
+func (g *GlowLayer) DefaultTextureRatio() float64 {
+	retVal := g.p.Get("DefaultTextureRatio")
+	return retVal.Float()
 }
 
 // SetDefaultTextureRatio sets the DefaultTextureRatio property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#defaulttextureratio
 func (g *GlowLayer) SetDefaultTextureRatio(DefaultTextureRatio float64) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(DefaultTextureRatio)
-	return GlowLayerFromJSObject(p, ba.ctx)
+	g.p.Set("DefaultTextureRatio", DefaultTextureRatio)
+	return g
 }
 
 // EffectName returns the EffectName property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#effectname
-func (g *GlowLayer) EffectName(EffectName string) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(EffectName)
-	return GlowLayerFromJSObject(p, ba.ctx)
+func (g *GlowLayer) EffectName() string {
+	retVal := g.p.Get("EffectName")
+	return retVal.String()
 }
 
 // SetEffectName sets the EffectName property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#effectname
 func (g *GlowLayer) SetEffectName(EffectName string) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(EffectName)
-	return GlowLayerFromJSObject(p, ba.ctx)
+	g.p.Set("EffectName", EffectName)
+	return g
 }
 
 // Intensity returns the Intensity property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#intensity
-func (g *GlowLayer) Intensity(intensity float64) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(intensity)
-	return GlowLayerFromJSObject(p, ba.ctx)
+func (g *GlowLayer) Intensity() float64 {
+	retVal := g.p.Get("intensity")
+	return retVal.Float()
 }
 
 // SetIntensity sets the Intensity property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#intensity
 func (g *GlowLayer) SetIntensity(intensity float64) *GlowLayer {
-	p := ba.ctx.Get("GlowLayer").New(intensity)
-	return GlowLayerFromJSObject(p, ba.ctx)
+	g.p.Set("intensity", intensity)
+	return g
 }
-
-*/

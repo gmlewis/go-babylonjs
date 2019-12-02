@@ -62,7 +62,3 @@ func (ba *Babylon) NewWebXRControllerTeleportation(input *WebXRInput, opts *NewW
 	p := ba.ctx.Get("WebXRControllerTeleportation").New(args...)
 	return WebXRControllerTeleportationFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

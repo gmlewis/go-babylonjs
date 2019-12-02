@@ -84,7 +84,3 @@ func (p *PlaySoundAction) Serialize(parent interface{}) interface{} {
 	retVal := p.p.Call("serialize", args...)
 	return retVal
 }
-
-/*
-
- */

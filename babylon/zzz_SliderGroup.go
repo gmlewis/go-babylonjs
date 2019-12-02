@@ -105,7 +105,3 @@ func (s *SliderGroup) AddSlider(label string, opts *SliderGroupAddSliderOpts) {
 
 	s.p.Call("addSlider", args...)
 }
-
-/*
-
- */

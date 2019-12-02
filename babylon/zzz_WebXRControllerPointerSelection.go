@@ -48,7 +48,3 @@ func (ba *Babylon) NewWebXRControllerPointerSelection(input *WebXRInput) *WebXRC
 	p := ba.ctx.Get("WebXRControllerPointerSelection").New(args...)
 	return WebXRControllerPointerSelectionFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

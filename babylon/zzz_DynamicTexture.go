@@ -210,22 +210,18 @@ func (d *DynamicTexture) Update(opts *DynamicTextureUpdateOpts) {
 	d.p.Call("update", args...)
 }
 
-/*
-
 // CanRescale returns the CanRescale property of class DynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#canrescale
-func (d *DynamicTexture) CanRescale(canRescale bool) *DynamicTexture {
-	p := ba.ctx.Get("DynamicTexture").New(canRescale)
-	return DynamicTextureFromJSObject(p, ba.ctx)
+func (d *DynamicTexture) CanRescale() bool {
+	retVal := d.p.Get("canRescale")
+	return retVal.Bool()
 }
 
 // SetCanRescale sets the CanRescale property of class DynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#canrescale
 func (d *DynamicTexture) SetCanRescale(canRescale bool) *DynamicTexture {
-	p := ba.ctx.Get("DynamicTexture").New(canRescale)
-	return DynamicTextureFromJSObject(p, ba.ctx)
+	d.p.Set("canRescale", canRescale)
+	return d
 }
-
-*/

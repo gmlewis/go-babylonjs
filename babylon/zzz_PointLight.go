@@ -147,38 +147,34 @@ func (p *PointLight) TransferToNodeMaterialEffect(effect *Effect, lightDataUnifo
 	return PointLightFromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // Direction returns the Direction property of class PointLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#direction
-func (p *PointLight) Direction(direction *Vector3) *PointLight {
-	p := ba.ctx.Get("PointLight").New(direction.JSObject())
-	return PointLightFromJSObject(p, ba.ctx)
+func (p *PointLight) Direction() *Vector3 {
+	retVal := p.p.Get("direction")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetDirection sets the Direction property of class PointLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#direction
 func (p *PointLight) SetDirection(direction *Vector3) *PointLight {
-	p := ba.ctx.Get("PointLight").New(direction.JSObject())
-	return PointLightFromJSObject(p, ba.ctx)
+	p.p.Set("direction", direction.JSObject())
+	return p
 }
 
 // ShadowAngle returns the ShadowAngle property of class PointLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#shadowangle
-func (p *PointLight) ShadowAngle(shadowAngle float64) *PointLight {
-	p := ba.ctx.Get("PointLight").New(shadowAngle)
-	return PointLightFromJSObject(p, ba.ctx)
+func (p *PointLight) ShadowAngle() float64 {
+	retVal := p.p.Get("shadowAngle")
+	return retVal.Float()
 }
 
 // SetShadowAngle sets the ShadowAngle property of class PointLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#shadowangle
 func (p *PointLight) SetShadowAngle(shadowAngle float64) *PointLight {
-	p := ba.ctx.Get("PointLight").New(shadowAngle)
-	return PointLightFromJSObject(p, ba.ctx)
+	p.p.Set("shadowAngle", shadowAngle)
+	return p
 }
-
-*/

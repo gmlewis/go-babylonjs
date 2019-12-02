@@ -35,7 +35,3 @@ func ITextureInfoArrayToJSArray(array []*ITextureInfo) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

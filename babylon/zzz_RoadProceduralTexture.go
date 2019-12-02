@@ -103,22 +103,18 @@ func (r *RoadProceduralTexture) UpdateShaderUniforms() {
 	r.p.Call("updateShaderUniforms")
 }
 
-/*
-
 // RoadColor returns the RoadColor property of class RoadProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#roadcolor
-func (r *RoadProceduralTexture) RoadColor(roadColor *Color3) *RoadProceduralTexture {
-	p := ba.ctx.Get("RoadProceduralTexture").New(roadColor.JSObject())
-	return RoadProceduralTextureFromJSObject(p, ba.ctx)
+func (r *RoadProceduralTexture) RoadColor() *Color3 {
+	retVal := r.p.Get("roadColor")
+	return Color3FromJSObject(retVal, r.ctx)
 }
 
 // SetRoadColor sets the RoadColor property of class RoadProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#roadcolor
 func (r *RoadProceduralTexture) SetRoadColor(roadColor *Color3) *RoadProceduralTexture {
-	p := ba.ctx.Get("RoadProceduralTexture").New(roadColor.JSObject())
-	return RoadProceduralTextureFromJSObject(p, ba.ctx)
+	r.p.Set("roadColor", roadColor.JSObject())
+	return r
 }
-
-*/

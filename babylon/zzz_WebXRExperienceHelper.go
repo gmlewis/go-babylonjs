@@ -107,86 +107,82 @@ func (w *WebXRExperienceHelper) SetPositionOfCameraUsingContainer(position *Vect
 	w.p.Call("setPositionOfCameraUsingContainer", args...)
 }
 
-/*
-
 // Camera returns the Camera property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#camera
-func (w *WebXRExperienceHelper) Camera(camera *WebXRCamera) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(camera.JSObject())
-	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
+func (w *WebXRExperienceHelper) Camera() *WebXRCamera {
+	retVal := w.p.Get("camera")
+	return WebXRCameraFromJSObject(retVal, w.ctx)
 }
 
 // SetCamera sets the Camera property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#camera
 func (w *WebXRExperienceHelper) SetCamera(camera *WebXRCamera) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(camera.JSObject())
-	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
+	w.p.Set("camera", camera.JSObject())
+	return w
 }
 
 // Container returns the Container property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#container
-func (w *WebXRExperienceHelper) Container(container *AbstractMesh) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(container.JSObject())
-	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
+func (w *WebXRExperienceHelper) Container() *AbstractMesh {
+	retVal := w.p.Get("container")
+	return AbstractMeshFromJSObject(retVal, w.ctx)
 }
 
 // SetContainer sets the Container property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#container
 func (w *WebXRExperienceHelper) SetContainer(container *AbstractMesh) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(container.JSObject())
-	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
+	w.p.Set("container", container.JSObject())
+	return w
 }
 
 // OnStateChangedObservable returns the OnStateChangedObservable property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#onstatechangedobservable
-func (w *WebXRExperienceHelper) OnStateChangedObservable(onStateChangedObservable *Observable) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(onStateChangedObservable.JSObject())
-	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
+func (w *WebXRExperienceHelper) OnStateChangedObservable() *Observable {
+	retVal := w.p.Get("onStateChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnStateChangedObservable sets the OnStateChangedObservable property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#onstatechangedobservable
 func (w *WebXRExperienceHelper) SetOnStateChangedObservable(onStateChangedObservable *Observable) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(onStateChangedObservable.JSObject())
-	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
+	w.p.Set("onStateChangedObservable", onStateChangedObservable.JSObject())
+	return w
 }
 
 // SessionManager returns the SessionManager property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#sessionmanager
-func (w *WebXRExperienceHelper) SessionManager(sessionManager *WebXRSessionManager) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(sessionManager.JSObject())
-	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
+func (w *WebXRExperienceHelper) SessionManager() *WebXRSessionManager {
+	retVal := w.p.Get("sessionManager")
+	return WebXRSessionManagerFromJSObject(retVal, w.ctx)
 }
 
 // SetSessionManager sets the SessionManager property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#sessionmanager
 func (w *WebXRExperienceHelper) SetSessionManager(sessionManager *WebXRSessionManager) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(sessionManager.JSObject())
-	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
+	w.p.Set("sessionManager", sessionManager.JSObject())
+	return w
 }
 
 // State returns the State property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#state
-func (w *WebXRExperienceHelper) State(state js.Value) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(state)
-	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
+func (w *WebXRExperienceHelper) State() js.Value {
+	retVal := w.p.Get("state")
+	return retVal
 }
 
 // SetState sets the State property of class WebXRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrexperiencehelper#state
 func (w *WebXRExperienceHelper) SetState(state js.Value) *WebXRExperienceHelper {
-	p := ba.ctx.Get("WebXRExperienceHelper").New(state)
-	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
+	w.p.Set("state", state)
+	return w
 }
-
-*/

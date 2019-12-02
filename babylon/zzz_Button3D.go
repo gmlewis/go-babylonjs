@@ -69,54 +69,50 @@ func (b *Button3D) Dispose() {
 	b.p.Call("dispose")
 }
 
-/*
-
 // Content returns the Content property of class Button3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button3d#content
-func (b *Button3D) Content(content *Control) *Button3D {
-	p := ba.ctx.Get("Button3D").New(content.JSObject())
-	return Button3DFromJSObject(p, ba.ctx)
+func (b *Button3D) Content() *Control {
+	retVal := b.p.Get("content")
+	return ControlFromJSObject(retVal, b.ctx)
 }
 
 // SetContent sets the Content property of class Button3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button3d#content
 func (b *Button3D) SetContent(content *Control) *Button3D {
-	p := ba.ctx.Get("Button3D").New(content.JSObject())
-	return Button3DFromJSObject(p, ba.ctx)
+	b.p.Set("content", content.JSObject())
+	return b
 }
 
 // ContentResolution returns the ContentResolution property of class Button3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button3d#contentresolution
-func (b *Button3D) ContentResolution(contentResolution int) *Button3D {
-	p := ba.ctx.Get("Button3D").New(contentResolution)
-	return Button3DFromJSObject(p, ba.ctx)
+func (b *Button3D) ContentResolution() int {
+	retVal := b.p.Get("contentResolution")
+	return retVal.Int()
 }
 
 // SetContentResolution sets the ContentResolution property of class Button3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button3d#contentresolution
 func (b *Button3D) SetContentResolution(contentResolution int) *Button3D {
-	p := ba.ctx.Get("Button3D").New(contentResolution)
-	return Button3DFromJSObject(p, ba.ctx)
+	b.p.Set("contentResolution", contentResolution)
+	return b
 }
 
 // ContentScaleRatio returns the ContentScaleRatio property of class Button3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button3d#contentscaleratio
-func (b *Button3D) ContentScaleRatio(contentScaleRatio float64) *Button3D {
-	p := ba.ctx.Get("Button3D").New(contentScaleRatio)
-	return Button3DFromJSObject(p, ba.ctx)
+func (b *Button3D) ContentScaleRatio() float64 {
+	retVal := b.p.Get("contentScaleRatio")
+	return retVal.Float()
 }
 
 // SetContentScaleRatio sets the ContentScaleRatio property of class Button3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button3d#contentscaleratio
 func (b *Button3D) SetContentScaleRatio(contentScaleRatio float64) *Button3D {
-	p := ba.ctx.Get("Button3D").New(contentScaleRatio)
-	return Button3DFromJSObject(p, ba.ctx)
+	b.p.Set("contentScaleRatio", contentScaleRatio)
+	return b
 }
-
-*/

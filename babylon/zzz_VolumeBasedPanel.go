@@ -47,70 +47,66 @@ func (ba *Babylon) NewVolumeBasedPanel() *VolumeBasedPanel {
 	return VolumeBasedPanelFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Columns returns the Columns property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#columns
-func (v *VolumeBasedPanel) Columns(columns int) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(columns)
-	return VolumeBasedPanelFromJSObject(p, ba.ctx)
+func (v *VolumeBasedPanel) Columns() int {
+	retVal := v.p.Get("columns")
+	return retVal.Int()
 }
 
 // SetColumns sets the Columns property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#columns
 func (v *VolumeBasedPanel) SetColumns(columns int) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(columns)
-	return VolumeBasedPanelFromJSObject(p, ba.ctx)
+	v.p.Set("columns", columns)
+	return v
 }
 
 // Margin returns the Margin property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#margin
-func (v *VolumeBasedPanel) Margin(margin float64) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(margin)
-	return VolumeBasedPanelFromJSObject(p, ba.ctx)
+func (v *VolumeBasedPanel) Margin() float64 {
+	retVal := v.p.Get("margin")
+	return retVal.Float()
 }
 
 // SetMargin sets the Margin property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#margin
 func (v *VolumeBasedPanel) SetMargin(margin float64) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(margin)
-	return VolumeBasedPanelFromJSObject(p, ba.ctx)
+	v.p.Set("margin", margin)
+	return v
 }
 
 // Orientation returns the Orientation property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#orientation
-func (v *VolumeBasedPanel) Orientation(orientation float64) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(orientation)
-	return VolumeBasedPanelFromJSObject(p, ba.ctx)
+func (v *VolumeBasedPanel) Orientation() float64 {
+	retVal := v.p.Get("orientation")
+	return retVal.Float()
 }
 
 // SetOrientation sets the Orientation property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#orientation
 func (v *VolumeBasedPanel) SetOrientation(orientation float64) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(orientation)
-	return VolumeBasedPanelFromJSObject(p, ba.ctx)
+	v.p.Set("orientation", orientation)
+	return v
 }
 
 // Rows returns the Rows property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#rows
-func (v *VolumeBasedPanel) Rows(rows int) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(rows)
-	return VolumeBasedPanelFromJSObject(p, ba.ctx)
+func (v *VolumeBasedPanel) Rows() int {
+	retVal := v.p.Get("rows")
+	return retVal.Int()
 }
 
 // SetRows sets the Rows property of class VolumeBasedPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#rows
 func (v *VolumeBasedPanel) SetRows(rows int) *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel").New(rows)
-	return VolumeBasedPanelFromJSObject(p, ba.ctx)
+	v.p.Set("rows", rows)
+	return v
 }
-
-*/

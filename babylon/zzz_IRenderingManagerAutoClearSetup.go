@@ -37,54 +37,50 @@ func IRenderingManagerAutoClearSetupArrayToJSArray(array []*IRenderingManagerAut
 	return result
 }
 
-/*
-
 // AutoClear returns the AutoClear property of class IRenderingManagerAutoClearSetup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.irenderingmanagerautoclearsetup#autoclear
-func (i *IRenderingManagerAutoClearSetup) AutoClear(autoClear bool) *IRenderingManagerAutoClearSetup {
-	p := ba.ctx.Get("IRenderingManagerAutoClearSetup").New(autoClear)
-	return IRenderingManagerAutoClearSetupFromJSObject(p, ba.ctx)
+func (i *IRenderingManagerAutoClearSetup) AutoClear() bool {
+	retVal := i.p.Get("autoClear")
+	return retVal.Bool()
 }
 
 // SetAutoClear sets the AutoClear property of class IRenderingManagerAutoClearSetup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.irenderingmanagerautoclearsetup#autoclear
 func (i *IRenderingManagerAutoClearSetup) SetAutoClear(autoClear bool) *IRenderingManagerAutoClearSetup {
-	p := ba.ctx.Get("IRenderingManagerAutoClearSetup").New(autoClear)
-	return IRenderingManagerAutoClearSetupFromJSObject(p, ba.ctx)
+	i.p.Set("autoClear", autoClear)
+	return i
 }
 
 // Depth returns the Depth property of class IRenderingManagerAutoClearSetup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.irenderingmanagerautoclearsetup#depth
-func (i *IRenderingManagerAutoClearSetup) Depth(depth bool) *IRenderingManagerAutoClearSetup {
-	p := ba.ctx.Get("IRenderingManagerAutoClearSetup").New(depth)
-	return IRenderingManagerAutoClearSetupFromJSObject(p, ba.ctx)
+func (i *IRenderingManagerAutoClearSetup) Depth() bool {
+	retVal := i.p.Get("depth")
+	return retVal.Bool()
 }
 
 // SetDepth sets the Depth property of class IRenderingManagerAutoClearSetup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.irenderingmanagerautoclearsetup#depth
 func (i *IRenderingManagerAutoClearSetup) SetDepth(depth bool) *IRenderingManagerAutoClearSetup {
-	p := ba.ctx.Get("IRenderingManagerAutoClearSetup").New(depth)
-	return IRenderingManagerAutoClearSetupFromJSObject(p, ba.ctx)
+	i.p.Set("depth", depth)
+	return i
 }
 
 // Stencil returns the Stencil property of class IRenderingManagerAutoClearSetup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.irenderingmanagerautoclearsetup#stencil
-func (i *IRenderingManagerAutoClearSetup) Stencil(stencil bool) *IRenderingManagerAutoClearSetup {
-	p := ba.ctx.Get("IRenderingManagerAutoClearSetup").New(stencil)
-	return IRenderingManagerAutoClearSetupFromJSObject(p, ba.ctx)
+func (i *IRenderingManagerAutoClearSetup) Stencil() bool {
+	retVal := i.p.Get("stencil")
+	return retVal.Bool()
 }
 
 // SetStencil sets the Stencil property of class IRenderingManagerAutoClearSetup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.irenderingmanagerautoclearsetup#stencil
 func (i *IRenderingManagerAutoClearSetup) SetStencil(stencil bool) *IRenderingManagerAutoClearSetup {
-	p := ba.ctx.Get("IRenderingManagerAutoClearSetup").New(stencil)
-	return IRenderingManagerAutoClearSetupFromJSObject(p, ba.ctx)
+	i.p.Set("stencil", stencil)
+	return i
 }
-
-*/

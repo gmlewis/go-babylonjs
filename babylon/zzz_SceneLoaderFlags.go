@@ -36,70 +36,66 @@ func SceneLoaderFlagsArrayToJSArray(array []*SceneLoaderFlags) []interface{} {
 	return result
 }
 
-/*
-
 // CleanBoneMatrixWeights returns the CleanBoneMatrixWeights property of class SceneLoaderFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderflags#cleanbonematrixweights
-func (s *SceneLoaderFlags) CleanBoneMatrixWeights(CleanBoneMatrixWeights bool) *SceneLoaderFlags {
-	p := ba.ctx.Get("SceneLoaderFlags").New(CleanBoneMatrixWeights)
-	return SceneLoaderFlagsFromJSObject(p, ba.ctx)
+func (s *SceneLoaderFlags) CleanBoneMatrixWeights() bool {
+	retVal := s.p.Get("CleanBoneMatrixWeights")
+	return retVal.Bool()
 }
 
 // SetCleanBoneMatrixWeights sets the CleanBoneMatrixWeights property of class SceneLoaderFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderflags#cleanbonematrixweights
 func (s *SceneLoaderFlags) SetCleanBoneMatrixWeights(CleanBoneMatrixWeights bool) *SceneLoaderFlags {
-	p := ba.ctx.Get("SceneLoaderFlags").New(CleanBoneMatrixWeights)
-	return SceneLoaderFlagsFromJSObject(p, ba.ctx)
+	s.p.Set("CleanBoneMatrixWeights", CleanBoneMatrixWeights)
+	return s
 }
 
 // ForceFullSceneLoadingForIncremental returns the ForceFullSceneLoadingForIncremental property of class SceneLoaderFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderflags#forcefullsceneloadingforincremental
-func (s *SceneLoaderFlags) ForceFullSceneLoadingForIncremental(ForceFullSceneLoadingForIncremental bool) *SceneLoaderFlags {
-	p := ba.ctx.Get("SceneLoaderFlags").New(ForceFullSceneLoadingForIncremental)
-	return SceneLoaderFlagsFromJSObject(p, ba.ctx)
+func (s *SceneLoaderFlags) ForceFullSceneLoadingForIncremental() bool {
+	retVal := s.p.Get("ForceFullSceneLoadingForIncremental")
+	return retVal.Bool()
 }
 
 // SetForceFullSceneLoadingForIncremental sets the ForceFullSceneLoadingForIncremental property of class SceneLoaderFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderflags#forcefullsceneloadingforincremental
 func (s *SceneLoaderFlags) SetForceFullSceneLoadingForIncremental(ForceFullSceneLoadingForIncremental bool) *SceneLoaderFlags {
-	p := ba.ctx.Get("SceneLoaderFlags").New(ForceFullSceneLoadingForIncremental)
-	return SceneLoaderFlagsFromJSObject(p, ba.ctx)
+	s.p.Set("ForceFullSceneLoadingForIncremental", ForceFullSceneLoadingForIncremental)
+	return s
 }
 
 // LoggingLevel returns the LoggingLevel property of class SceneLoaderFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderflags#logginglevel
-func (s *SceneLoaderFlags) LoggingLevel(loggingLevel float64) *SceneLoaderFlags {
-	p := ba.ctx.Get("SceneLoaderFlags").New(loggingLevel)
-	return SceneLoaderFlagsFromJSObject(p, ba.ctx)
+func (s *SceneLoaderFlags) LoggingLevel() float64 {
+	retVal := s.p.Get("loggingLevel")
+	return retVal.Float()
 }
 
 // SetLoggingLevel sets the LoggingLevel property of class SceneLoaderFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderflags#logginglevel
 func (s *SceneLoaderFlags) SetLoggingLevel(loggingLevel float64) *SceneLoaderFlags {
-	p := ba.ctx.Get("SceneLoaderFlags").New(loggingLevel)
-	return SceneLoaderFlagsFromJSObject(p, ba.ctx)
+	s.p.Set("loggingLevel", loggingLevel)
+	return s
 }
 
 // ShowLoadingScreen returns the ShowLoadingScreen property of class SceneLoaderFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderflags#showloadingscreen
-func (s *SceneLoaderFlags) ShowLoadingScreen(ShowLoadingScreen bool) *SceneLoaderFlags {
-	p := ba.ctx.Get("SceneLoaderFlags").New(ShowLoadingScreen)
-	return SceneLoaderFlagsFromJSObject(p, ba.ctx)
+func (s *SceneLoaderFlags) ShowLoadingScreen() bool {
+	retVal := s.p.Get("ShowLoadingScreen")
+	return retVal.Bool()
 }
 
 // SetShowLoadingScreen sets the ShowLoadingScreen property of class SceneLoaderFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderflags#showloadingscreen
 func (s *SceneLoaderFlags) SetShowLoadingScreen(ShowLoadingScreen bool) *SceneLoaderFlags {
-	p := ba.ctx.Get("SceneLoaderFlags").New(ShowLoadingScreen)
-	return SceneLoaderFlagsFromJSObject(p, ba.ctx)
+	s.p.Set("ShowLoadingScreen", ShowLoadingScreen)
+	return s
 }
-
-*/

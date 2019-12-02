@@ -211,134 +211,130 @@ func (i *InputManager) SimulatePointerUp(pickResult *PickingInfo, opts *InputMan
 	i.p.Call("simulatePointerUp", args...)
 }
 
-/*
-
 // DoubleClickDelay returns the DoubleClickDelay property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#doubleclickdelay
-func (i *InputManager) DoubleClickDelay(DoubleClickDelay float64) *InputManager {
-	p := ba.ctx.Get("InputManager").New(DoubleClickDelay)
-	return InputManagerFromJSObject(p, ba.ctx)
+func (i *InputManager) DoubleClickDelay() float64 {
+	retVal := i.p.Get("DoubleClickDelay")
+	return retVal.Float()
 }
 
 // SetDoubleClickDelay sets the DoubleClickDelay property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#doubleclickdelay
 func (i *InputManager) SetDoubleClickDelay(DoubleClickDelay float64) *InputManager {
-	p := ba.ctx.Get("InputManager").New(DoubleClickDelay)
-	return InputManagerFromJSObject(p, ba.ctx)
+	i.p.Set("DoubleClickDelay", DoubleClickDelay)
+	return i
 }
 
 // DragMovementThreshold returns the DragMovementThreshold property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#dragmovementthreshold
-func (i *InputManager) DragMovementThreshold(DragMovementThreshold float64) *InputManager {
-	p := ba.ctx.Get("InputManager").New(DragMovementThreshold)
-	return InputManagerFromJSObject(p, ba.ctx)
+func (i *InputManager) DragMovementThreshold() float64 {
+	retVal := i.p.Get("DragMovementThreshold")
+	return retVal.Float()
 }
 
 // SetDragMovementThreshold sets the DragMovementThreshold property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#dragmovementthreshold
 func (i *InputManager) SetDragMovementThreshold(DragMovementThreshold float64) *InputManager {
-	p := ba.ctx.Get("InputManager").New(DragMovementThreshold)
-	return InputManagerFromJSObject(p, ba.ctx)
+	i.p.Set("DragMovementThreshold", DragMovementThreshold)
+	return i
 }
 
 // ExclusiveDoubleClickMode returns the ExclusiveDoubleClickMode property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#exclusivedoubleclickmode
-func (i *InputManager) ExclusiveDoubleClickMode(ExclusiveDoubleClickMode bool) *InputManager {
-	p := ba.ctx.Get("InputManager").New(ExclusiveDoubleClickMode)
-	return InputManagerFromJSObject(p, ba.ctx)
+func (i *InputManager) ExclusiveDoubleClickMode() bool {
+	retVal := i.p.Get("ExclusiveDoubleClickMode")
+	return retVal.Bool()
 }
 
 // SetExclusiveDoubleClickMode sets the ExclusiveDoubleClickMode property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#exclusivedoubleclickmode
 func (i *InputManager) SetExclusiveDoubleClickMode(ExclusiveDoubleClickMode bool) *InputManager {
-	p := ba.ctx.Get("InputManager").New(ExclusiveDoubleClickMode)
-	return InputManagerFromJSObject(p, ba.ctx)
+	i.p.Set("ExclusiveDoubleClickMode", ExclusiveDoubleClickMode)
+	return i
 }
 
 // LongPressDelay returns the LongPressDelay property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#longpressdelay
-func (i *InputManager) LongPressDelay(LongPressDelay float64) *InputManager {
-	p := ba.ctx.Get("InputManager").New(LongPressDelay)
-	return InputManagerFromJSObject(p, ba.ctx)
+func (i *InputManager) LongPressDelay() float64 {
+	retVal := i.p.Get("LongPressDelay")
+	return retVal.Float()
 }
 
 // SetLongPressDelay sets the LongPressDelay property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#longpressdelay
 func (i *InputManager) SetLongPressDelay(LongPressDelay float64) *InputManager {
-	p := ba.ctx.Get("InputManager").New(LongPressDelay)
-	return InputManagerFromJSObject(p, ba.ctx)
+	i.p.Set("LongPressDelay", LongPressDelay)
+	return i
 }
 
 // MeshUnderPointer returns the MeshUnderPointer property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#meshunderpointer
-func (i *InputManager) MeshUnderPointer(meshUnderPointer *AbstractMesh) *InputManager {
-	p := ba.ctx.Get("InputManager").New(meshUnderPointer.JSObject())
-	return InputManagerFromJSObject(p, ba.ctx)
+func (i *InputManager) MeshUnderPointer() *AbstractMesh {
+	retVal := i.p.Get("meshUnderPointer")
+	return AbstractMeshFromJSObject(retVal, i.ctx)
 }
 
 // SetMeshUnderPointer sets the MeshUnderPointer property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#meshunderpointer
 func (i *InputManager) SetMeshUnderPointer(meshUnderPointer *AbstractMesh) *InputManager {
-	p := ba.ctx.Get("InputManager").New(meshUnderPointer.JSObject())
-	return InputManagerFromJSObject(p, ba.ctx)
+	i.p.Set("meshUnderPointer", meshUnderPointer.JSObject())
+	return i
 }
 
 // PointerX returns the PointerX property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#pointerx
-func (i *InputManager) PointerX(pointerX float64) *InputManager {
-	p := ba.ctx.Get("InputManager").New(pointerX)
-	return InputManagerFromJSObject(p, ba.ctx)
+func (i *InputManager) PointerX() float64 {
+	retVal := i.p.Get("pointerX")
+	return retVal.Float()
 }
 
 // SetPointerX sets the PointerX property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#pointerx
 func (i *InputManager) SetPointerX(pointerX float64) *InputManager {
-	p := ba.ctx.Get("InputManager").New(pointerX)
-	return InputManagerFromJSObject(p, ba.ctx)
+	i.p.Set("pointerX", pointerX)
+	return i
 }
 
 // PointerY returns the PointerY property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#pointery
-func (i *InputManager) PointerY(pointerY float64) *InputManager {
-	p := ba.ctx.Get("InputManager").New(pointerY)
-	return InputManagerFromJSObject(p, ba.ctx)
+func (i *InputManager) PointerY() float64 {
+	retVal := i.p.Get("pointerY")
+	return retVal.Float()
 }
 
 // SetPointerY sets the PointerY property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#pointery
 func (i *InputManager) SetPointerY(pointerY float64) *InputManager {
-	p := ba.ctx.Get("InputManager").New(pointerY)
-	return InputManagerFromJSObject(p, ba.ctx)
+	i.p.Set("pointerY", pointerY)
+	return i
 }
 
 // UnTranslatedPointer returns the UnTranslatedPointer property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#untranslatedpointer
-func (i *InputManager) UnTranslatedPointer(unTranslatedPointer *Vector2) *InputManager {
-	p := ba.ctx.Get("InputManager").New(unTranslatedPointer.JSObject())
-	return InputManagerFromJSObject(p, ba.ctx)
+func (i *InputManager) UnTranslatedPointer() *Vector2 {
+	retVal := i.p.Get("unTranslatedPointer")
+	return Vector2FromJSObject(retVal, i.ctx)
 }
 
 // SetUnTranslatedPointer sets the UnTranslatedPointer property of class InputManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager#untranslatedpointer
 func (i *InputManager) SetUnTranslatedPointer(unTranslatedPointer *Vector2) *InputManager {
-	p := ba.ctx.Get("InputManager").New(unTranslatedPointer.JSObject())
-	return InputManagerFromJSObject(p, ba.ctx)
+	i.p.Set("unTranslatedPointer", unTranslatedPointer.JSObject())
+	return i
 }
-
-*/

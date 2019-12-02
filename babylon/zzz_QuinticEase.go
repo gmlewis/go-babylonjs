@@ -38,7 +38,3 @@ func QuinticEaseArrayToJSArray(array []*QuinticEase) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

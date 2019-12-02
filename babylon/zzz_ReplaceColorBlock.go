@@ -58,86 +58,82 @@ func (r *ReplaceColorBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Distance returns the Distance property of class ReplaceColorBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#distance
-func (r *ReplaceColorBlock) Distance(distance *NodeMaterialConnectionPoint) *ReplaceColorBlock {
-	p := ba.ctx.Get("ReplaceColorBlock").New(distance.JSObject())
-	return ReplaceColorBlockFromJSObject(p, ba.ctx)
+func (r *ReplaceColorBlock) Distance() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("distance")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetDistance sets the Distance property of class ReplaceColorBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#distance
 func (r *ReplaceColorBlock) SetDistance(distance *NodeMaterialConnectionPoint) *ReplaceColorBlock {
-	p := ba.ctx.Get("ReplaceColorBlock").New(distance.JSObject())
-	return ReplaceColorBlockFromJSObject(p, ba.ctx)
+	r.p.Set("distance", distance.JSObject())
+	return r
 }
 
 // Output returns the Output property of class ReplaceColorBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#output
-func (r *ReplaceColorBlock) Output(output *NodeMaterialConnectionPoint) *ReplaceColorBlock {
-	p := ba.ctx.Get("ReplaceColorBlock").New(output.JSObject())
-	return ReplaceColorBlockFromJSObject(p, ba.ctx)
+func (r *ReplaceColorBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetOutput sets the Output property of class ReplaceColorBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#output
 func (r *ReplaceColorBlock) SetOutput(output *NodeMaterialConnectionPoint) *ReplaceColorBlock {
-	p := ba.ctx.Get("ReplaceColorBlock").New(output.JSObject())
-	return ReplaceColorBlockFromJSObject(p, ba.ctx)
+	r.p.Set("output", output.JSObject())
+	return r
 }
 
 // Reference returns the Reference property of class ReplaceColorBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#reference
-func (r *ReplaceColorBlock) Reference(reference *NodeMaterialConnectionPoint) *ReplaceColorBlock {
-	p := ba.ctx.Get("ReplaceColorBlock").New(reference.JSObject())
-	return ReplaceColorBlockFromJSObject(p, ba.ctx)
+func (r *ReplaceColorBlock) Reference() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("reference")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetReference sets the Reference property of class ReplaceColorBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#reference
 func (r *ReplaceColorBlock) SetReference(reference *NodeMaterialConnectionPoint) *ReplaceColorBlock {
-	p := ba.ctx.Get("ReplaceColorBlock").New(reference.JSObject())
-	return ReplaceColorBlockFromJSObject(p, ba.ctx)
+	r.p.Set("reference", reference.JSObject())
+	return r
 }
 
 // Replacement returns the Replacement property of class ReplaceColorBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#replacement
-func (r *ReplaceColorBlock) Replacement(replacement *NodeMaterialConnectionPoint) *ReplaceColorBlock {
-	p := ba.ctx.Get("ReplaceColorBlock").New(replacement.JSObject())
-	return ReplaceColorBlockFromJSObject(p, ba.ctx)
+func (r *ReplaceColorBlock) Replacement() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("replacement")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetReplacement sets the Replacement property of class ReplaceColorBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#replacement
 func (r *ReplaceColorBlock) SetReplacement(replacement *NodeMaterialConnectionPoint) *ReplaceColorBlock {
-	p := ba.ctx.Get("ReplaceColorBlock").New(replacement.JSObject())
-	return ReplaceColorBlockFromJSObject(p, ba.ctx)
+	r.p.Set("replacement", replacement.JSObject())
+	return r
 }
 
 // Value returns the Value property of class ReplaceColorBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#value
-func (r *ReplaceColorBlock) Value(value *NodeMaterialConnectionPoint) *ReplaceColorBlock {
-	p := ba.ctx.Get("ReplaceColorBlock").New(value.JSObject())
-	return ReplaceColorBlockFromJSObject(p, ba.ctx)
+func (r *ReplaceColorBlock) Value() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("value")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetValue sets the Value property of class ReplaceColorBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#value
 func (r *ReplaceColorBlock) SetValue(value *NodeMaterialConnectionPoint) *ReplaceColorBlock {
-	p := ba.ctx.Get("ReplaceColorBlock").New(value.JSObject())
-	return ReplaceColorBlockFromJSObject(p, ba.ctx)
+	r.p.Set("value", value.JSObject())
+	return r
 }
-
-*/

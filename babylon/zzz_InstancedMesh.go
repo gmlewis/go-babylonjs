@@ -389,150 +389,146 @@ func (i *InstancedMesh) _resyncLightSources() {
 	i.p.Call("_resyncLightSources")
 }
 
-/*
-
 // IsAnInstance returns the IsAnInstance property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#isaninstance
-func (i *InstancedMesh) IsAnInstance(isAnInstance bool) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(isAnInstance)
-	return InstancedMeshFromJSObject(p, ba.ctx)
+func (i *InstancedMesh) IsAnInstance() bool {
+	retVal := i.p.Get("isAnInstance")
+	return retVal.Bool()
 }
 
 // SetIsAnInstance sets the IsAnInstance property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#isaninstance
 func (i *InstancedMesh) SetIsAnInstance(isAnInstance bool) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(isAnInstance)
-	return InstancedMeshFromJSObject(p, ba.ctx)
+	i.p.Set("isAnInstance", isAnInstance)
+	return i
 }
 
 // LightSources returns the LightSources property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#lightsources
-func (i *InstancedMesh) LightSources(lightSources *Light) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(lightSources.JSObject())
-	return InstancedMeshFromJSObject(p, ba.ctx)
+func (i *InstancedMesh) LightSources() *Light {
+	retVal := i.p.Get("lightSources")
+	return LightFromJSObject(retVal, i.ctx)
 }
 
 // SetLightSources sets the LightSources property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#lightsources
 func (i *InstancedMesh) SetLightSources(lightSources *Light) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(lightSources.JSObject())
-	return InstancedMeshFromJSObject(p, ba.ctx)
+	i.p.Set("lightSources", lightSources.JSObject())
+	return i
 }
 
 // Material returns the Material property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#material
-func (i *InstancedMesh) Material(material *Material) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(material.JSObject())
-	return InstancedMeshFromJSObject(p, ba.ctx)
+func (i *InstancedMesh) Material() *Material {
+	retVal := i.p.Get("material")
+	return MaterialFromJSObject(retVal, i.ctx)
 }
 
 // SetMaterial sets the Material property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#material
 func (i *InstancedMesh) SetMaterial(material *Material) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(material.JSObject())
-	return InstancedMeshFromJSObject(p, ba.ctx)
+	i.p.Set("material", material.JSObject())
+	return i
 }
 
 // ReceiveShadows returns the ReceiveShadows property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#receiveshadows
-func (i *InstancedMesh) ReceiveShadows(receiveShadows bool) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(receiveShadows)
-	return InstancedMeshFromJSObject(p, ba.ctx)
+func (i *InstancedMesh) ReceiveShadows() bool {
+	retVal := i.p.Get("receiveShadows")
+	return retVal.Bool()
 }
 
 // SetReceiveShadows sets the ReceiveShadows property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#receiveshadows
 func (i *InstancedMesh) SetReceiveShadows(receiveShadows bool) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(receiveShadows)
-	return InstancedMeshFromJSObject(p, ba.ctx)
+	i.p.Set("receiveShadows", receiveShadows)
+	return i
 }
 
 // RenderingGroupId returns the RenderingGroupId property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#renderinggroupid
-func (i *InstancedMesh) RenderingGroupId(renderingGroupId float64) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(renderingGroupId)
-	return InstancedMeshFromJSObject(p, ba.ctx)
+func (i *InstancedMesh) RenderingGroupId() float64 {
+	retVal := i.p.Get("renderingGroupId")
+	return retVal.Float()
 }
 
 // SetRenderingGroupId sets the RenderingGroupId property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#renderinggroupid
 func (i *InstancedMesh) SetRenderingGroupId(renderingGroupId float64) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(renderingGroupId)
-	return InstancedMeshFromJSObject(p, ba.ctx)
+	i.p.Set("renderingGroupId", renderingGroupId)
+	return i
 }
 
 // Skeleton returns the Skeleton property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#skeleton
-func (i *InstancedMesh) Skeleton(skeleton *Skeleton) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(skeleton.JSObject())
-	return InstancedMeshFromJSObject(p, ba.ctx)
+func (i *InstancedMesh) Skeleton() *Skeleton {
+	retVal := i.p.Get("skeleton")
+	return SkeletonFromJSObject(retVal, i.ctx)
 }
 
 // SetSkeleton sets the Skeleton property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#skeleton
 func (i *InstancedMesh) SetSkeleton(skeleton *Skeleton) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(skeleton.JSObject())
-	return InstancedMeshFromJSObject(p, ba.ctx)
+	i.p.Set("skeleton", skeleton.JSObject())
+	return i
 }
 
 // SourceMesh returns the SourceMesh property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#sourcemesh
-func (i *InstancedMesh) SourceMesh(sourceMesh *Mesh) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(sourceMesh.JSObject())
-	return InstancedMeshFromJSObject(p, ba.ctx)
+func (i *InstancedMesh) SourceMesh() *Mesh {
+	retVal := i.p.Get("sourceMesh")
+	return MeshFromJSObject(retVal, i.ctx)
 }
 
 // SetSourceMesh sets the SourceMesh property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#sourcemesh
 func (i *InstancedMesh) SetSourceMesh(sourceMesh *Mesh) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(sourceMesh.JSObject())
-	return InstancedMeshFromJSObject(p, ba.ctx)
+	i.p.Set("sourceMesh", sourceMesh.JSObject())
+	return i
 }
 
 // Visibility returns the Visibility property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#visibility
-func (i *InstancedMesh) Visibility(visibility float64) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(visibility)
-	return InstancedMeshFromJSObject(p, ba.ctx)
+func (i *InstancedMesh) Visibility() float64 {
+	retVal := i.p.Get("visibility")
+	return retVal.Float()
 }
 
 // SetVisibility sets the Visibility property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#visibility
 func (i *InstancedMesh) SetVisibility(visibility float64) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(visibility)
-	return InstancedMeshFromJSObject(p, ba.ctx)
+	i.p.Set("visibility", visibility)
+	return i
 }
 
 // _positions returns the _positions property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#_positions
-func (i *InstancedMesh) _positions(_positions *Vector3) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(_positions.JSObject())
-	return InstancedMeshFromJSObject(p, ba.ctx)
+func (i *InstancedMesh) _positions() *Vector3 {
+	retVal := i.p.Get("_positions")
+	return Vector3FromJSObject(retVal, i.ctx)
 }
 
 // Set_positions sets the _positions property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#_positions
 func (i *InstancedMesh) Set_positions(_positions *Vector3) *InstancedMesh {
-	p := ba.ctx.Get("InstancedMesh").New(_positions.JSObject())
-	return InstancedMeshFromJSObject(p, ba.ctx)
+	i.p.Set("_positions", _positions.JSObject())
+	return i
 }
-
-*/

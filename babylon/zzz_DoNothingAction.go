@@ -89,7 +89,3 @@ func (d *DoNothingAction) Serialize(parent interface{}) interface{} {
 	retVal := d.p.Call("serialize", args...)
 	return retVal
 }
-
-/*
-
- */

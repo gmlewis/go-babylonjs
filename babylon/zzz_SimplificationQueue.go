@@ -81,22 +81,18 @@ func (s *SimplificationQueue) RunSimplification(task *ISimplificationTask) {
 	s.p.Call("runSimplification", args...)
 }
 
-/*
-
 // Running returns the Running property of class SimplificationQueue.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationqueue#running
-func (s *SimplificationQueue) Running(running bool) *SimplificationQueue {
-	p := ba.ctx.Get("SimplificationQueue").New(running)
-	return SimplificationQueueFromJSObject(p, ba.ctx)
+func (s *SimplificationQueue) Running() bool {
+	retVal := s.p.Get("running")
+	return retVal.Bool()
 }
 
 // SetRunning sets the Running property of class SimplificationQueue.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationqueue#running
 func (s *SimplificationQueue) SetRunning(running bool) *SimplificationQueue {
-	p := ba.ctx.Get("SimplificationQueue").New(running)
-	return SimplificationQueueFromJSObject(p, ba.ctx)
+	s.p.Set("running", running)
+	return s
 }
-
-*/

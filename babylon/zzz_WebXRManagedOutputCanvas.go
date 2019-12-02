@@ -92,38 +92,34 @@ func (w *WebXRManagedOutputCanvas) InitializeXRLayerAsync(xrSession interface{})
 	return retVal
 }
 
-/*
-
 // CanvasContext returns the CanvasContext property of class WebXRManagedOutputCanvas.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#canvascontext
-func (w *WebXRManagedOutputCanvas) CanvasContext(canvasContext js.Value) *WebXRManagedOutputCanvas {
-	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(canvasContext)
-	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
+func (w *WebXRManagedOutputCanvas) CanvasContext() js.Value {
+	retVal := w.p.Get("canvasContext")
+	return retVal
 }
 
 // SetCanvasContext sets the CanvasContext property of class WebXRManagedOutputCanvas.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#canvascontext
 func (w *WebXRManagedOutputCanvas) SetCanvasContext(canvasContext js.Value) *WebXRManagedOutputCanvas {
-	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(canvasContext)
-	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
+	w.p.Set("canvasContext", canvasContext)
+	return w
 }
 
 // XrLayer returns the XrLayer property of class WebXRManagedOutputCanvas.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#xrlayer
-func (w *WebXRManagedOutputCanvas) XrLayer(xrLayer *XRWebGLLayer) *WebXRManagedOutputCanvas {
-	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(xrLayer.JSObject())
-	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
+func (w *WebXRManagedOutputCanvas) XrLayer() js.Value {
+	retVal := w.p.Get("xrLayer")
+	return retVal
 }
 
 // SetXrLayer sets the XrLayer property of class WebXRManagedOutputCanvas.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#xrlayer
-func (w *WebXRManagedOutputCanvas) SetXrLayer(xrLayer *XRWebGLLayer) *WebXRManagedOutputCanvas {
-	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(xrLayer.JSObject())
-	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
+func (w *WebXRManagedOutputCanvas) SetXrLayer(xrLayer js.Value) *WebXRManagedOutputCanvas {
+	w.p.Set("xrLayer", xrLayer)
+	return w
 }
-
-*/

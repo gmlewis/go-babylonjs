@@ -781,70 +781,66 @@ func (q *Quaternion) Zero() *Quaternion {
 	return QuaternionFromJSObject(retVal, q.ctx)
 }
 
-/*
-
 // W returns the W property of class Quaternion.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#w
-func (q *Quaternion) W(w float64) *Quaternion {
-	p := ba.ctx.Get("Quaternion").New(w)
-	return QuaternionFromJSObject(p, ba.ctx)
+func (q *Quaternion) W() float64 {
+	retVal := q.p.Get("w")
+	return retVal.Float()
 }
 
 // SetW sets the W property of class Quaternion.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#w
 func (q *Quaternion) SetW(w float64) *Quaternion {
-	p := ba.ctx.Get("Quaternion").New(w)
-	return QuaternionFromJSObject(p, ba.ctx)
+	q.p.Set("w", w)
+	return q
 }
 
 // X returns the X property of class Quaternion.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#x
-func (q *Quaternion) X(x float64) *Quaternion {
-	p := ba.ctx.Get("Quaternion").New(x)
-	return QuaternionFromJSObject(p, ba.ctx)
+func (q *Quaternion) X() float64 {
+	retVal := q.p.Get("x")
+	return retVal.Float()
 }
 
 // SetX sets the X property of class Quaternion.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#x
 func (q *Quaternion) SetX(x float64) *Quaternion {
-	p := ba.ctx.Get("Quaternion").New(x)
-	return QuaternionFromJSObject(p, ba.ctx)
+	q.p.Set("x", x)
+	return q
 }
 
 // Y returns the Y property of class Quaternion.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#y
-func (q *Quaternion) Y(y float64) *Quaternion {
-	p := ba.ctx.Get("Quaternion").New(y)
-	return QuaternionFromJSObject(p, ba.ctx)
+func (q *Quaternion) Y() float64 {
+	retVal := q.p.Get("y")
+	return retVal.Float()
 }
 
 // SetY sets the Y property of class Quaternion.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#y
 func (q *Quaternion) SetY(y float64) *Quaternion {
-	p := ba.ctx.Get("Quaternion").New(y)
-	return QuaternionFromJSObject(p, ba.ctx)
+	q.p.Set("y", y)
+	return q
 }
 
 // Z returns the Z property of class Quaternion.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#z
-func (q *Quaternion) Z(z float64) *Quaternion {
-	p := ba.ctx.Get("Quaternion").New(z)
-	return QuaternionFromJSObject(p, ba.ctx)
+func (q *Quaternion) Z() float64 {
+	retVal := q.p.Get("z")
+	return retVal.Float()
 }
 
 // SetZ sets the Z property of class Quaternion.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#z
 func (q *Quaternion) SetZ(z float64) *Quaternion {
-	p := ba.ctx.Get("Quaternion").New(z)
-	return QuaternionFromJSObject(p, ba.ctx)
+	q.p.Set("z", z)
+	return q
 }
-
-*/

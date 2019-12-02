@@ -69,198 +69,198 @@ func (g *GizmoManager) Dispose() {
 	g.p.Call("dispose")
 }
 
-/*
-
 // AttachableMeshes returns the AttachableMeshes property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#attachablemeshes
-func (g *GizmoManager) AttachableMeshes(attachableMeshes []*AbstractMesh) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(attachableMeshes)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) AttachableMeshes() []*AbstractMesh {
+	retVal := g.p.Get("attachableMeshes")
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), g.ctx))
+	}
+	return result
 }
 
 // SetAttachableMeshes sets the AttachableMeshes property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#attachablemeshes
 func (g *GizmoManager) SetAttachableMeshes(attachableMeshes []*AbstractMesh) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(attachableMeshes)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("attachableMeshes", attachableMeshes)
+	return g
 }
 
 // BoundingBoxDragBehavior returns the BoundingBoxDragBehavior property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#boundingboxdragbehavior
-func (g *GizmoManager) BoundingBoxDragBehavior(boundingBoxDragBehavior *SixDofDragBehavior) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(boundingBoxDragBehavior.JSObject())
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) BoundingBoxDragBehavior() *SixDofDragBehavior {
+	retVal := g.p.Get("boundingBoxDragBehavior")
+	return SixDofDragBehaviorFromJSObject(retVal, g.ctx)
 }
 
 // SetBoundingBoxDragBehavior sets the BoundingBoxDragBehavior property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#boundingboxdragbehavior
 func (g *GizmoManager) SetBoundingBoxDragBehavior(boundingBoxDragBehavior *SixDofDragBehavior) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(boundingBoxDragBehavior.JSObject())
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("boundingBoxDragBehavior", boundingBoxDragBehavior.JSObject())
+	return g
 }
 
 // BoundingBoxGizmoEnabled returns the BoundingBoxGizmoEnabled property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#boundingboxgizmoenabled
-func (g *GizmoManager) BoundingBoxGizmoEnabled(boundingBoxGizmoEnabled bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(boundingBoxGizmoEnabled)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) BoundingBoxGizmoEnabled() bool {
+	retVal := g.p.Get("boundingBoxGizmoEnabled")
+	return retVal.Bool()
 }
 
 // SetBoundingBoxGizmoEnabled sets the BoundingBoxGizmoEnabled property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#boundingboxgizmoenabled
 func (g *GizmoManager) SetBoundingBoxGizmoEnabled(boundingBoxGizmoEnabled bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(boundingBoxGizmoEnabled)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("boundingBoxGizmoEnabled", boundingBoxGizmoEnabled)
+	return g
 }
 
 // ClearGizmoOnEmptyPointerEvent returns the ClearGizmoOnEmptyPointerEvent property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#cleargizmoonemptypointerevent
-func (g *GizmoManager) ClearGizmoOnEmptyPointerEvent(clearGizmoOnEmptyPointerEvent bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(clearGizmoOnEmptyPointerEvent)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) ClearGizmoOnEmptyPointerEvent() bool {
+	retVal := g.p.Get("clearGizmoOnEmptyPointerEvent")
+	return retVal.Bool()
 }
 
 // SetClearGizmoOnEmptyPointerEvent sets the ClearGizmoOnEmptyPointerEvent property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#cleargizmoonemptypointerevent
 func (g *GizmoManager) SetClearGizmoOnEmptyPointerEvent(clearGizmoOnEmptyPointerEvent bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(clearGizmoOnEmptyPointerEvent)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("clearGizmoOnEmptyPointerEvent", clearGizmoOnEmptyPointerEvent)
+	return g
 }
 
 // Gizmos returns the Gizmos property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#gizmos
-func (g *GizmoManager) Gizmos(gizmos js.Value) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(gizmos)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) Gizmos() js.Value {
+	retVal := g.p.Get("gizmos")
+	return retVal
 }
 
 // SetGizmos sets the Gizmos property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#gizmos
 func (g *GizmoManager) SetGizmos(gizmos js.Value) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(gizmos)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("gizmos", gizmos)
+	return g
 }
 
 // KeepDepthUtilityLayer returns the KeepDepthUtilityLayer property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#keepdepthutilitylayer
-func (g *GizmoManager) KeepDepthUtilityLayer(keepDepthUtilityLayer *UtilityLayerRenderer) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(keepDepthUtilityLayer.JSObject())
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) KeepDepthUtilityLayer() *UtilityLayerRenderer {
+	retVal := g.p.Get("keepDepthUtilityLayer")
+	return UtilityLayerRendererFromJSObject(retVal, g.ctx)
 }
 
 // SetKeepDepthUtilityLayer sets the KeepDepthUtilityLayer property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#keepdepthutilitylayer
 func (g *GizmoManager) SetKeepDepthUtilityLayer(keepDepthUtilityLayer *UtilityLayerRenderer) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(keepDepthUtilityLayer.JSObject())
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("keepDepthUtilityLayer", keepDepthUtilityLayer.JSObject())
+	return g
 }
 
 // OnAttachedToMeshObservable returns the OnAttachedToMeshObservable property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#onattachedtomeshobservable
-func (g *GizmoManager) OnAttachedToMeshObservable(onAttachedToMeshObservable *Observable) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(onAttachedToMeshObservable.JSObject())
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) OnAttachedToMeshObservable() *Observable {
+	retVal := g.p.Get("onAttachedToMeshObservable")
+	return ObservableFromJSObject(retVal, g.ctx)
 }
 
 // SetOnAttachedToMeshObservable sets the OnAttachedToMeshObservable property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#onattachedtomeshobservable
 func (g *GizmoManager) SetOnAttachedToMeshObservable(onAttachedToMeshObservable *Observable) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(onAttachedToMeshObservable.JSObject())
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("onAttachedToMeshObservable", onAttachedToMeshObservable.JSObject())
+	return g
 }
 
 // PositionGizmoEnabled returns the PositionGizmoEnabled property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#positiongizmoenabled
-func (g *GizmoManager) PositionGizmoEnabled(positionGizmoEnabled bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(positionGizmoEnabled)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) PositionGizmoEnabled() bool {
+	retVal := g.p.Get("positionGizmoEnabled")
+	return retVal.Bool()
 }
 
 // SetPositionGizmoEnabled sets the PositionGizmoEnabled property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#positiongizmoenabled
 func (g *GizmoManager) SetPositionGizmoEnabled(positionGizmoEnabled bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(positionGizmoEnabled)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("positionGizmoEnabled", positionGizmoEnabled)
+	return g
 }
 
 // RotationGizmoEnabled returns the RotationGizmoEnabled property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#rotationgizmoenabled
-func (g *GizmoManager) RotationGizmoEnabled(rotationGizmoEnabled bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(rotationGizmoEnabled)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) RotationGizmoEnabled() bool {
+	retVal := g.p.Get("rotationGizmoEnabled")
+	return retVal.Bool()
 }
 
 // SetRotationGizmoEnabled sets the RotationGizmoEnabled property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#rotationgizmoenabled
 func (g *GizmoManager) SetRotationGizmoEnabled(rotationGizmoEnabled bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(rotationGizmoEnabled)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("rotationGizmoEnabled", rotationGizmoEnabled)
+	return g
 }
 
 // ScaleGizmoEnabled returns the ScaleGizmoEnabled property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#scalegizmoenabled
-func (g *GizmoManager) ScaleGizmoEnabled(scaleGizmoEnabled bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(scaleGizmoEnabled)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) ScaleGizmoEnabled() bool {
+	retVal := g.p.Get("scaleGizmoEnabled")
+	return retVal.Bool()
 }
 
 // SetScaleGizmoEnabled sets the ScaleGizmoEnabled property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#scalegizmoenabled
 func (g *GizmoManager) SetScaleGizmoEnabled(scaleGizmoEnabled bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(scaleGizmoEnabled)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("scaleGizmoEnabled", scaleGizmoEnabled)
+	return g
 }
 
 // UsePointerToAttachGizmos returns the UsePointerToAttachGizmos property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#usepointertoattachgizmos
-func (g *GizmoManager) UsePointerToAttachGizmos(usePointerToAttachGizmos bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(usePointerToAttachGizmos)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) UsePointerToAttachGizmos() bool {
+	retVal := g.p.Get("usePointerToAttachGizmos")
+	return retVal.Bool()
 }
 
 // SetUsePointerToAttachGizmos sets the UsePointerToAttachGizmos property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#usepointertoattachgizmos
 func (g *GizmoManager) SetUsePointerToAttachGizmos(usePointerToAttachGizmos bool) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(usePointerToAttachGizmos)
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("usePointerToAttachGizmos", usePointerToAttachGizmos)
+	return g
 }
 
 // UtilityLayer returns the UtilityLayer property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#utilitylayer
-func (g *GizmoManager) UtilityLayer(utilityLayer *UtilityLayerRenderer) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(utilityLayer.JSObject())
-	return GizmoManagerFromJSObject(p, ba.ctx)
+func (g *GizmoManager) UtilityLayer() *UtilityLayerRenderer {
+	retVal := g.p.Get("utilityLayer")
+	return UtilityLayerRendererFromJSObject(retVal, g.ctx)
 }
 
 // SetUtilityLayer sets the UtilityLayer property of class GizmoManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager#utilitylayer
 func (g *GizmoManager) SetUtilityLayer(utilityLayer *UtilityLayerRenderer) *GizmoManager {
-	p := ba.ctx.Get("GizmoManager").New(utilityLayer.JSObject())
-	return GizmoManagerFromJSObject(p, ba.ctx)
+	g.p.Set("utilityLayer", utilityLayer.JSObject())
+	return g
 }
-
-*/

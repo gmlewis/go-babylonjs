@@ -141,7 +141,3 @@ func (i *ISceneLoaderPluginAsync) LoadAsync(scene *Scene, data interface{}, root
 	retVal := i.p.Call("loadAsync", args...)
 	return PromiseFromJSObject(retVal, i.ctx)
 }
-
-/*
-
- */

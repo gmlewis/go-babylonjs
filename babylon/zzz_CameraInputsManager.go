@@ -192,86 +192,82 @@ func (c *CameraInputsManager) Serialize(serializedCamera interface{}) {
 	c.p.Call("serialize", args...)
 }
 
-/*
-
 // Attached returns the Attached property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#attached
-func (c *CameraInputsManager) Attached(attached *CameraInputsMap) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(attached.JSObject())
-	return CameraInputsManagerFromJSObject(p, ba.ctx)
+func (c *CameraInputsManager) Attached() *CameraInputsMap {
+	retVal := c.p.Get("attached")
+	return CameraInputsMapFromJSObject(retVal, c.ctx)
 }
 
 // SetAttached sets the Attached property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#attached
 func (c *CameraInputsManager) SetAttached(attached *CameraInputsMap) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(attached.JSObject())
-	return CameraInputsManagerFromJSObject(p, ba.ctx)
+	c.p.Set("attached", attached.JSObject())
+	return c
 }
 
 // AttachedElement returns the AttachedElement property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#attachedelement
-func (c *CameraInputsManager) AttachedElement(attachedElement js.Value) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(attachedElement)
-	return CameraInputsManagerFromJSObject(p, ba.ctx)
+func (c *CameraInputsManager) AttachedElement() js.Value {
+	retVal := c.p.Get("attachedElement")
+	return retVal
 }
 
 // SetAttachedElement sets the AttachedElement property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#attachedelement
 func (c *CameraInputsManager) SetAttachedElement(attachedElement js.Value) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(attachedElement)
-	return CameraInputsManagerFromJSObject(p, ba.ctx)
+	c.p.Set("attachedElement", attachedElement)
+	return c
 }
 
 // Camera returns the Camera property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#camera
-func (c *CameraInputsManager) Camera(camera *Camera) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(camera.JSObject())
-	return CameraInputsManagerFromJSObject(p, ba.ctx)
+func (c *CameraInputsManager) Camera() *Camera {
+	retVal := c.p.Get("camera")
+	return CameraFromJSObject(retVal, c.ctx)
 }
 
 // SetCamera sets the Camera property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#camera
 func (c *CameraInputsManager) SetCamera(camera *Camera) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(camera.JSObject())
-	return CameraInputsManagerFromJSObject(p, ba.ctx)
+	c.p.Set("camera", camera.JSObject())
+	return c
 }
 
 // CheckInputs returns the CheckInputs property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#checkinputs
-func (c *CameraInputsManager) CheckInputs(checkInputs func()) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
-	return CameraInputsManagerFromJSObject(p, ba.ctx)
+func (c *CameraInputsManager) CheckInputs() js.Value {
+	retVal := c.p.Get("checkInputs")
+	return retVal
 }
 
 // SetCheckInputs sets the CheckInputs property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#checkinputs
 func (c *CameraInputsManager) SetCheckInputs(checkInputs func()) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
-	return CameraInputsManagerFromJSObject(p, ba.ctx)
+	c.p.Set("checkInputs", js.FuncOf(func(this js.Value, args []js.Value) interface{} { checkInputs(); return nil }))
+	return c
 }
 
 // NoPreventDefault returns the NoPreventDefault property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#nopreventdefault
-func (c *CameraInputsManager) NoPreventDefault(noPreventDefault bool) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(noPreventDefault)
-	return CameraInputsManagerFromJSObject(p, ba.ctx)
+func (c *CameraInputsManager) NoPreventDefault() bool {
+	retVal := c.p.Get("noPreventDefault")
+	return retVal.Bool()
 }
 
 // SetNoPreventDefault sets the NoPreventDefault property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#nopreventdefault
 func (c *CameraInputsManager) SetNoPreventDefault(noPreventDefault bool) *CameraInputsManager {
-	p := ba.ctx.Get("CameraInputsManager").New(noPreventDefault)
-	return CameraInputsManagerFromJSObject(p, ba.ctx)
+	c.p.Set("noPreventDefault", noPreventDefault)
+	return c
 }
-
-*/

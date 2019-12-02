@@ -115,326 +115,322 @@ func (s *SolidParticle) IsInFrustum(frustumPlanes *Plane) bool {
 	return retVal.Bool()
 }
 
-/*
-
 // Alive returns the Alive property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#alive
-func (s *SolidParticle) Alive(alive bool) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(alive)
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Alive() bool {
+	retVal := s.p.Get("alive")
+	return retVal.Bool()
 }
 
 // SetAlive sets the Alive property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#alive
 func (s *SolidParticle) SetAlive(alive bool) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(alive)
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("alive", alive)
+	return s
 }
 
 // Color returns the Color property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#color
-func (s *SolidParticle) Color(color *Color4) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(color.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Color() *Color4 {
+	retVal := s.p.Get("color")
+	return Color4FromJSObject(retVal, s.ctx)
 }
 
 // SetColor sets the Color property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#color
 func (s *SolidParticle) SetColor(color *Color4) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(color.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("color", color.JSObject())
+	return s
 }
 
 // CullingStrategy returns the CullingStrategy property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#cullingstrategy
-func (s *SolidParticle) CullingStrategy(cullingStrategy float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(cullingStrategy)
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) CullingStrategy() float64 {
+	retVal := s.p.Get("cullingStrategy")
+	return retVal.Float()
 }
 
 // SetCullingStrategy sets the CullingStrategy property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#cullingstrategy
 func (s *SolidParticle) SetCullingStrategy(cullingStrategy float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(cullingStrategy)
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("cullingStrategy", cullingStrategy)
+	return s
 }
 
 // Id returns the Id property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#id
-func (s *SolidParticle) Id(id float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(id)
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Id() float64 {
+	retVal := s.p.Get("id")
+	return retVal.Float()
 }
 
 // SetId sets the Id property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#id
 func (s *SolidParticle) SetId(id float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(id)
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("id", id)
+	return s
 }
 
 // Idx returns the Idx property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#idx
-func (s *SolidParticle) Idx(idx float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(idx)
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Idx() float64 {
+	retVal := s.p.Get("idx")
+	return retVal.Float()
 }
 
 // SetIdx sets the Idx property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#idx
 func (s *SolidParticle) SetIdx(idx float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(idx)
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("idx", idx)
+	return s
 }
 
 // IdxInShape returns the IdxInShape property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#idxinshape
-func (s *SolidParticle) IdxInShape(idxInShape float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(idxInShape)
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) IdxInShape() float64 {
+	retVal := s.p.Get("idxInShape")
+	return retVal.Float()
 }
 
 // SetIdxInShape sets the IdxInShape property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#idxinshape
 func (s *SolidParticle) SetIdxInShape(idxInShape float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(idxInShape)
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("idxInShape", idxInShape)
+	return s
 }
 
 // IsVisible returns the IsVisible property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#isvisible
-func (s *SolidParticle) IsVisible(isVisible bool) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(isVisible)
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) IsVisible() bool {
+	retVal := s.p.Get("isVisible")
+	return retVal.Bool()
 }
 
 // SetIsVisible sets the IsVisible property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#isvisible
 func (s *SolidParticle) SetIsVisible(isVisible bool) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(isVisible)
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("isVisible", isVisible)
+	return s
 }
 
 // MaterialIndex returns the MaterialIndex property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#materialindex
-func (s *SolidParticle) MaterialIndex(materialIndex float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(materialIndex)
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) MaterialIndex() float64 {
+	retVal := s.p.Get("materialIndex")
+	return retVal.Float()
 }
 
 // SetMaterialIndex sets the MaterialIndex property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#materialindex
 func (s *SolidParticle) SetMaterialIndex(materialIndex float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(materialIndex)
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("materialIndex", materialIndex)
+	return s
 }
 
 // ParentId returns the ParentId property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#parentid
-func (s *SolidParticle) ParentId(parentId float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(parentId)
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) ParentId() float64 {
+	retVal := s.p.Get("parentId")
+	return retVal.Float()
 }
 
 // SetParentId sets the ParentId property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#parentid
 func (s *SolidParticle) SetParentId(parentId float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(parentId)
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("parentId", parentId)
+	return s
 }
 
 // Pivot returns the Pivot property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#pivot
-func (s *SolidParticle) Pivot(pivot *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(pivot.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Pivot() *Vector3 {
+	retVal := s.p.Get("pivot")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetPivot sets the Pivot property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#pivot
 func (s *SolidParticle) SetPivot(pivot *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(pivot.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("pivot", pivot.JSObject())
+	return s
 }
 
 // Position returns the Position property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#position
-func (s *SolidParticle) Position(position *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(position.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Position() *Vector3 {
+	retVal := s.p.Get("position")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetPosition sets the Position property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#position
 func (s *SolidParticle) SetPosition(position *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(position.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("position", position.JSObject())
+	return s
 }
 
 // Quaternion returns the Quaternion property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#quaternion
-func (s *SolidParticle) Quaternion(quaternion *Quaternion) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(quaternion.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Quaternion() *Quaternion {
+	retVal := s.p.Get("quaternion")
+	return QuaternionFromJSObject(retVal, s.ctx)
 }
 
 // SetQuaternion sets the Quaternion property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#quaternion
 func (s *SolidParticle) SetQuaternion(quaternion *Quaternion) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(quaternion.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("quaternion", quaternion.JSObject())
+	return s
 }
 
 // Rotation returns the Rotation property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#rotation
-func (s *SolidParticle) Rotation(rotation *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(rotation.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Rotation() *Vector3 {
+	retVal := s.p.Get("rotation")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetRotation sets the Rotation property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#rotation
 func (s *SolidParticle) SetRotation(rotation *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(rotation.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("rotation", rotation.JSObject())
+	return s
 }
 
 // RotationQuaternion returns the RotationQuaternion property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#rotationquaternion
-func (s *SolidParticle) RotationQuaternion(rotationQuaternion *Quaternion) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(rotationQuaternion.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) RotationQuaternion() *Quaternion {
+	retVal := s.p.Get("rotationQuaternion")
+	return QuaternionFromJSObject(retVal, s.ctx)
 }
 
 // SetRotationQuaternion sets the RotationQuaternion property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#rotationquaternion
 func (s *SolidParticle) SetRotationQuaternion(rotationQuaternion *Quaternion) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(rotationQuaternion.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("rotationQuaternion", rotationQuaternion.JSObject())
+	return s
 }
 
 // Scale returns the Scale property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#scale
-func (s *SolidParticle) Scale(scale *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(scale.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Scale() *Vector3 {
+	retVal := s.p.Get("scale")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetScale sets the Scale property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#scale
 func (s *SolidParticle) SetScale(scale *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(scale.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("scale", scale.JSObject())
+	return s
 }
 
 // Scaling returns the Scaling property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#scaling
-func (s *SolidParticle) Scaling(scaling *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(scaling.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Scaling() *Vector3 {
+	retVal := s.p.Get("scaling")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetScaling sets the Scaling property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#scaling
 func (s *SolidParticle) SetScaling(scaling *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(scaling.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("scaling", scaling.JSObject())
+	return s
 }
 
 // ShapeId returns the ShapeId property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#shapeid
-func (s *SolidParticle) ShapeId(shapeId float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(shapeId)
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) ShapeId() float64 {
+	retVal := s.p.Get("shapeId")
+	return retVal.Float()
 }
 
 // SetShapeId sets the ShapeId property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#shapeid
 func (s *SolidParticle) SetShapeId(shapeId float64) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(shapeId)
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("shapeId", shapeId)
+	return s
 }
 
 // TranslateFromPivot returns the TranslateFromPivot property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#translatefrompivot
-func (s *SolidParticle) TranslateFromPivot(translateFromPivot bool) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(translateFromPivot)
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) TranslateFromPivot() bool {
+	retVal := s.p.Get("translateFromPivot")
+	return retVal.Bool()
 }
 
 // SetTranslateFromPivot sets the TranslateFromPivot property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#translatefrompivot
 func (s *SolidParticle) SetTranslateFromPivot(translateFromPivot bool) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(translateFromPivot)
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("translateFromPivot", translateFromPivot)
+	return s
 }
 
 // Uvs returns the Uvs property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#uvs
-func (s *SolidParticle) Uvs(uvs *Vector4) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(uvs.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Uvs() *Vector4 {
+	retVal := s.p.Get("uvs")
+	return Vector4FromJSObject(retVal, s.ctx)
 }
 
 // SetUvs sets the Uvs property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#uvs
 func (s *SolidParticle) SetUvs(uvs *Vector4) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(uvs.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("uvs", uvs.JSObject())
+	return s
 }
 
 // Velocity returns the Velocity property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#velocity
-func (s *SolidParticle) Velocity(velocity *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(velocity.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+func (s *SolidParticle) Velocity() *Vector3 {
+	retVal := s.p.Get("velocity")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetVelocity sets the Velocity property of class SolidParticle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#velocity
 func (s *SolidParticle) SetVelocity(velocity *Vector3) *SolidParticle {
-	p := ba.ctx.Get("SolidParticle").New(velocity.JSObject())
-	return SolidParticleFromJSObject(p, ba.ctx)
+	s.p.Set("velocity", velocity.JSObject())
+	return s
 }
-
-*/

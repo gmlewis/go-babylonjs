@@ -36,22 +36,18 @@ func INodeMaterialEditorOptionsArrayToJSArray(array []*INodeMaterialEditorOption
 	return result
 }
 
-/*
-
 // EditorURL returns the EditorURL property of class INodeMaterialEditorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inodematerialeditoroptions#editorurl
-func (i *INodeMaterialEditorOptions) EditorURL(editorURL string) *INodeMaterialEditorOptions {
-	p := ba.ctx.Get("INodeMaterialEditorOptions").New(editorURL)
-	return INodeMaterialEditorOptionsFromJSObject(p, ba.ctx)
+func (i *INodeMaterialEditorOptions) EditorURL() string {
+	retVal := i.p.Get("editorURL")
+	return retVal.String()
 }
 
 // SetEditorURL sets the EditorURL property of class INodeMaterialEditorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inodematerialeditoroptions#editorurl
 func (i *INodeMaterialEditorOptions) SetEditorURL(editorURL string) *INodeMaterialEditorOptions {
-	p := ba.ctx.Get("INodeMaterialEditorOptions").New(editorURL)
-	return INodeMaterialEditorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("editorURL", editorURL)
+	return i
 }
-
-*/

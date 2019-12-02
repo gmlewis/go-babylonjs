@@ -768,38 +768,34 @@ func (v *Vector2) Zero() *Vector2 {
 	return Vector2FromJSObject(retVal, v.ctx)
 }
 
-/*
-
 // X returns the X property of class Vector2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2#x
-func (v *Vector2) X(x float64) *Vector2 {
-	p := ba.ctx.Get("Vector2").New(x)
-	return Vector2FromJSObject(p, ba.ctx)
+func (v *Vector2) X() float64 {
+	retVal := v.p.Get("x")
+	return retVal.Float()
 }
 
 // SetX sets the X property of class Vector2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2#x
 func (v *Vector2) SetX(x float64) *Vector2 {
-	p := ba.ctx.Get("Vector2").New(x)
-	return Vector2FromJSObject(p, ba.ctx)
+	v.p.Set("x", x)
+	return v
 }
 
 // Y returns the Y property of class Vector2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2#y
-func (v *Vector2) Y(y float64) *Vector2 {
-	p := ba.ctx.Get("Vector2").New(y)
-	return Vector2FromJSObject(p, ba.ctx)
+func (v *Vector2) Y() float64 {
+	retVal := v.p.Get("y")
+	return retVal.Float()
 }
 
 // SetY sets the Y property of class Vector2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2#y
 func (v *Vector2) SetY(y float64) *Vector2 {
-	p := ba.ctx.Get("Vector2").New(y)
-	return Vector2FromJSObject(p, ba.ctx)
+	v.p.Set("y", y)
+	return v
 }
-
-*/

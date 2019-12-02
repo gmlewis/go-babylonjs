@@ -36,38 +36,34 @@ func IAnimationChannelTargetArrayToJSArray(array []*IAnimationChannelTarget) []i
 	return result
 }
 
-/*
-
 // Node returns the Node property of class IAnimationChannelTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationchanneltarget#node
-func (i *IAnimationChannelTarget) Node(node float64) *IAnimationChannelTarget {
-	p := ba.ctx.Get("IAnimationChannelTarget").New(node)
-	return IAnimationChannelTargetFromJSObject(p, ba.ctx)
+func (i *IAnimationChannelTarget) Node() float64 {
+	retVal := i.p.Get("node")
+	return retVal.Float()
 }
 
 // SetNode sets the Node property of class IAnimationChannelTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationchanneltarget#node
 func (i *IAnimationChannelTarget) SetNode(node float64) *IAnimationChannelTarget {
-	p := ba.ctx.Get("IAnimationChannelTarget").New(node)
-	return IAnimationChannelTargetFromJSObject(p, ba.ctx)
+	i.p.Set("node", node)
+	return i
 }
 
 // Path returns the Path property of class IAnimationChannelTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationchanneltarget#path
-func (i *IAnimationChannelTarget) Path(path *AnimationChannelTargetPath) *IAnimationChannelTarget {
-	p := ba.ctx.Get("IAnimationChannelTarget").New(path.JSObject())
-	return IAnimationChannelTargetFromJSObject(p, ba.ctx)
+func (i *IAnimationChannelTarget) Path() js.Value {
+	retVal := i.p.Get("path")
+	return retVal
 }
 
 // SetPath sets the Path property of class IAnimationChannelTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationchanneltarget#path
-func (i *IAnimationChannelTarget) SetPath(path *AnimationChannelTargetPath) *IAnimationChannelTarget {
-	p := ba.ctx.Get("IAnimationChannelTarget").New(path.JSObject())
-	return IAnimationChannelTargetFromJSObject(p, ba.ctx)
+func (i *IAnimationChannelTarget) SetPath(path js.Value) *IAnimationChannelTarget {
+	i.p.Set("path", path)
+	return i
 }
-
-*/

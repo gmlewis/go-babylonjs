@@ -149,7 +149,3 @@ func (t *TrailMesh) Update() {
 
 	t.p.Call("update")
 }
-
-/*
-
- */

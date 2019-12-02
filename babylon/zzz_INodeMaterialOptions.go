@@ -36,22 +36,18 @@ func INodeMaterialOptionsArrayToJSArray(array []*INodeMaterialOptions) []interfa
 	return result
 }
 
-/*
-
 // EmitComments returns the EmitComments property of class INodeMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inodematerialoptions#emitcomments
-func (i *INodeMaterialOptions) EmitComments(emitComments bool) *INodeMaterialOptions {
-	p := ba.ctx.Get("INodeMaterialOptions").New(emitComments)
-	return INodeMaterialOptionsFromJSObject(p, ba.ctx)
+func (i *INodeMaterialOptions) EmitComments() bool {
+	retVal := i.p.Get("emitComments")
+	return retVal.Bool()
 }
 
 // SetEmitComments sets the EmitComments property of class INodeMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inodematerialoptions#emitcomments
 func (i *INodeMaterialOptions) SetEmitComments(emitComments bool) *INodeMaterialOptions {
-	p := ba.ctx.Get("INodeMaterialOptions").New(emitComments)
-	return INodeMaterialOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("emitComments", emitComments)
+	return i
 }
-
-*/

@@ -91,7 +91,3 @@ func (s *ShapeBuilder) ExtrudeShapeCustom(name string, options js.Value, opts *S
 	retVal := s.p.Call("ExtrudeShapeCustom", args...)
 	return MeshFromJSObject(retVal, s.ctx)
 }
-
-/*
-
- */

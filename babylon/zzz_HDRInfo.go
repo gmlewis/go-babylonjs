@@ -36,54 +36,50 @@ func HDRInfoArrayToJSArray(array []*HDRInfo) []interface{} {
 	return result
 }
 
-/*
-
 // DataPosition returns the DataPosition property of class HDRInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrinfo#dataposition
-func (h *HDRInfo) DataPosition(dataPosition float64) *HDRInfo {
-	p := ba.ctx.Get("HDRInfo").New(dataPosition)
-	return HDRInfoFromJSObject(p, ba.ctx)
+func (h *HDRInfo) DataPosition() float64 {
+	retVal := h.p.Get("dataPosition")
+	return retVal.Float()
 }
 
 // SetDataPosition sets the DataPosition property of class HDRInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrinfo#dataposition
 func (h *HDRInfo) SetDataPosition(dataPosition float64) *HDRInfo {
-	p := ba.ctx.Get("HDRInfo").New(dataPosition)
-	return HDRInfoFromJSObject(p, ba.ctx)
+	h.p.Set("dataPosition", dataPosition)
+	return h
 }
 
 // Height returns the Height property of class HDRInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrinfo#height
-func (h *HDRInfo) Height(height float64) *HDRInfo {
-	p := ba.ctx.Get("HDRInfo").New(height)
-	return HDRInfoFromJSObject(p, ba.ctx)
+func (h *HDRInfo) Height() float64 {
+	retVal := h.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class HDRInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrinfo#height
 func (h *HDRInfo) SetHeight(height float64) *HDRInfo {
-	p := ba.ctx.Get("HDRInfo").New(height)
-	return HDRInfoFromJSObject(p, ba.ctx)
+	h.p.Set("height", height)
+	return h
 }
 
 // Width returns the Width property of class HDRInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrinfo#width
-func (h *HDRInfo) Width(width float64) *HDRInfo {
-	p := ba.ctx.Get("HDRInfo").New(width)
-	return HDRInfoFromJSObject(p, ba.ctx)
+func (h *HDRInfo) Width() float64 {
+	retVal := h.p.Get("width")
+	return retVal.Float()
 }
 
 // SetWidth sets the Width property of class HDRInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrinfo#width
 func (h *HDRInfo) SetWidth(width float64) *HDRInfo {
-	p := ba.ctx.Get("HDRInfo").New(width)
-	return HDRInfoFromJSObject(p, ba.ctx)
+	h.p.Set("width", width)
+	return h
 }
-
-*/

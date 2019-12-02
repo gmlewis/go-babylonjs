@@ -35,7 +35,3 @@ func IMeshPrimitiveArrayToJSArray(array []*IMeshPrimitive) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

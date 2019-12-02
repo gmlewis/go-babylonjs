@@ -48,7 +48,3 @@ func (n *NodeMaterialOptimizer) Optimize(vertexOutputNodes *NodeMaterialBlock, f
 
 	n.p.Call("optimize", args...)
 }
-
-/*
-
- */

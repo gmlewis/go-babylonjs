@@ -632,7 +632,3 @@ func (m *MaterialHelper) PushAttributesForInstances(attribs string) {
 
 	m.p.Call("PushAttributesForInstances", args...)
 }
-
-/*
-
- */

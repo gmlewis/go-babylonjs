@@ -35,7 +35,3 @@ func IAnimationSamplerArrayToJSArray(array []*IAnimationSampler) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

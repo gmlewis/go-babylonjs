@@ -97,22 +97,18 @@ func (p *PostProcessRenderEffect) GetPostProcesses(opts *PostProcessRenderEffect
 	return result
 }
 
-/*
-
 // IsSupported returns the IsSupported property of class PostProcessRenderEffect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect#issupported
-func (p *PostProcessRenderEffect) IsSupported(isSupported bool) *PostProcessRenderEffect {
-	p := ba.ctx.Get("PostProcessRenderEffect").New(isSupported)
-	return PostProcessRenderEffectFromJSObject(p, ba.ctx)
+func (p *PostProcessRenderEffect) IsSupported() bool {
+	retVal := p.p.Get("isSupported")
+	return retVal.Bool()
 }
 
 // SetIsSupported sets the IsSupported property of class PostProcessRenderEffect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect#issupported
 func (p *PostProcessRenderEffect) SetIsSupported(isSupported bool) *PostProcessRenderEffect {
-	p := ba.ctx.Get("PostProcessRenderEffect").New(isSupported)
-	return PostProcessRenderEffectFromJSObject(p, ba.ctx)
+	p.p.Set("isSupported", isSupported)
+	return p
 }
-
-*/

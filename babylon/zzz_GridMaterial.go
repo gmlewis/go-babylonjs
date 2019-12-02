@@ -185,150 +185,146 @@ func (g *GridMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // GridOffset returns the GridOffset property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#gridoffset
-func (g *GridMaterial) GridOffset(gridOffset *Vector3) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(gridOffset.JSObject())
-	return GridMaterialFromJSObject(p, ba.ctx)
+func (g *GridMaterial) GridOffset() *Vector3 {
+	retVal := g.p.Get("gridOffset")
+	return Vector3FromJSObject(retVal, g.ctx)
 }
 
 // SetGridOffset sets the GridOffset property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#gridoffset
 func (g *GridMaterial) SetGridOffset(gridOffset *Vector3) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(gridOffset.JSObject())
-	return GridMaterialFromJSObject(p, ba.ctx)
+	g.p.Set("gridOffset", gridOffset.JSObject())
+	return g
 }
 
 // GridRatio returns the GridRatio property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#gridratio
-func (g *GridMaterial) GridRatio(gridRatio float64) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(gridRatio)
-	return GridMaterialFromJSObject(p, ba.ctx)
+func (g *GridMaterial) GridRatio() float64 {
+	retVal := g.p.Get("gridRatio")
+	return retVal.Float()
 }
 
 // SetGridRatio sets the GridRatio property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#gridratio
 func (g *GridMaterial) SetGridRatio(gridRatio float64) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(gridRatio)
-	return GridMaterialFromJSObject(p, ba.ctx)
+	g.p.Set("gridRatio", gridRatio)
+	return g
 }
 
 // LineColor returns the LineColor property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#linecolor
-func (g *GridMaterial) LineColor(lineColor *Color3) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(lineColor.JSObject())
-	return GridMaterialFromJSObject(p, ba.ctx)
+func (g *GridMaterial) LineColor() *Color3 {
+	retVal := g.p.Get("lineColor")
+	return Color3FromJSObject(retVal, g.ctx)
 }
 
 // SetLineColor sets the LineColor property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#linecolor
 func (g *GridMaterial) SetLineColor(lineColor *Color3) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(lineColor.JSObject())
-	return GridMaterialFromJSObject(p, ba.ctx)
+	g.p.Set("lineColor", lineColor.JSObject())
+	return g
 }
 
 // MainColor returns the MainColor property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#maincolor
-func (g *GridMaterial) MainColor(mainColor *Color3) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(mainColor.JSObject())
-	return GridMaterialFromJSObject(p, ba.ctx)
+func (g *GridMaterial) MainColor() *Color3 {
+	retVal := g.p.Get("mainColor")
+	return Color3FromJSObject(retVal, g.ctx)
 }
 
 // SetMainColor sets the MainColor property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#maincolor
 func (g *GridMaterial) SetMainColor(mainColor *Color3) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(mainColor.JSObject())
-	return GridMaterialFromJSObject(p, ba.ctx)
+	g.p.Set("mainColor", mainColor.JSObject())
+	return g
 }
 
 // MajorUnitFrequency returns the MajorUnitFrequency property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#majorunitfrequency
-func (g *GridMaterial) MajorUnitFrequency(majorUnitFrequency float64) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(majorUnitFrequency)
-	return GridMaterialFromJSObject(p, ba.ctx)
+func (g *GridMaterial) MajorUnitFrequency() float64 {
+	retVal := g.p.Get("majorUnitFrequency")
+	return retVal.Float()
 }
 
 // SetMajorUnitFrequency sets the MajorUnitFrequency property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#majorunitfrequency
 func (g *GridMaterial) SetMajorUnitFrequency(majorUnitFrequency float64) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(majorUnitFrequency)
-	return GridMaterialFromJSObject(p, ba.ctx)
+	g.p.Set("majorUnitFrequency", majorUnitFrequency)
+	return g
 }
 
 // MinorUnitVisibility returns the MinorUnitVisibility property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#minorunitvisibility
-func (g *GridMaterial) MinorUnitVisibility(minorUnitVisibility float64) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(minorUnitVisibility)
-	return GridMaterialFromJSObject(p, ba.ctx)
+func (g *GridMaterial) MinorUnitVisibility() float64 {
+	retVal := g.p.Get("minorUnitVisibility")
+	return retVal.Float()
 }
 
 // SetMinorUnitVisibility sets the MinorUnitVisibility property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#minorunitvisibility
 func (g *GridMaterial) SetMinorUnitVisibility(minorUnitVisibility float64) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(minorUnitVisibility)
-	return GridMaterialFromJSObject(p, ba.ctx)
+	g.p.Set("minorUnitVisibility", minorUnitVisibility)
+	return g
 }
 
 // Opacity returns the Opacity property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#opacity
-func (g *GridMaterial) Opacity(opacity float64) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(opacity)
-	return GridMaterialFromJSObject(p, ba.ctx)
+func (g *GridMaterial) Opacity() float64 {
+	retVal := g.p.Get("opacity")
+	return retVal.Float()
 }
 
 // SetOpacity sets the Opacity property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#opacity
 func (g *GridMaterial) SetOpacity(opacity float64) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(opacity)
-	return GridMaterialFromJSObject(p, ba.ctx)
+	g.p.Set("opacity", opacity)
+	return g
 }
 
 // OpacityTexture returns the OpacityTexture property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#opacitytexture
-func (g *GridMaterial) OpacityTexture(opacityTexture *BaseTexture) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(opacityTexture.JSObject())
-	return GridMaterialFromJSObject(p, ba.ctx)
+func (g *GridMaterial) OpacityTexture() *BaseTexture {
+	retVal := g.p.Get("opacityTexture")
+	return BaseTextureFromJSObject(retVal, g.ctx)
 }
 
 // SetOpacityTexture sets the OpacityTexture property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#opacitytexture
 func (g *GridMaterial) SetOpacityTexture(opacityTexture *BaseTexture) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(opacityTexture.JSObject())
-	return GridMaterialFromJSObject(p, ba.ctx)
+	g.p.Set("opacityTexture", opacityTexture.JSObject())
+	return g
 }
 
 // PreMultiplyAlpha returns the PreMultiplyAlpha property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#premultiplyalpha
-func (g *GridMaterial) PreMultiplyAlpha(preMultiplyAlpha bool) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(preMultiplyAlpha)
-	return GridMaterialFromJSObject(p, ba.ctx)
+func (g *GridMaterial) PreMultiplyAlpha() bool {
+	retVal := g.p.Get("preMultiplyAlpha")
+	return retVal.Bool()
 }
 
 // SetPreMultiplyAlpha sets the PreMultiplyAlpha property of class GridMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#premultiplyalpha
 func (g *GridMaterial) SetPreMultiplyAlpha(preMultiplyAlpha bool) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(preMultiplyAlpha)
-	return GridMaterialFromJSObject(p, ba.ctx)
+	g.p.Set("preMultiplyAlpha", preMultiplyAlpha)
+	return g
 }
-
-*/

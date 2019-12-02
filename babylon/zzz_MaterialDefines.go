@@ -174,22 +174,18 @@ func (m *MaterialDefines) ToString() string {
 	return retVal.String()
 }
 
-/*
-
 // IsDirty returns the IsDirty property of class MaterialDefines.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#isdirty
-func (m *MaterialDefines) IsDirty(isDirty bool) *MaterialDefines {
-	p := ba.ctx.Get("MaterialDefines").New(isDirty)
-	return MaterialDefinesFromJSObject(p, ba.ctx)
+func (m *MaterialDefines) IsDirty() bool {
+	retVal := m.p.Get("isDirty")
+	return retVal.Bool()
 }
 
 // SetIsDirty sets the IsDirty property of class MaterialDefines.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialdefines#isdirty
 func (m *MaterialDefines) SetIsDirty(isDirty bool) *MaterialDefines {
-	p := ba.ctx.Get("MaterialDefines").New(isDirty)
-	return MaterialDefinesFromJSObject(p, ba.ctx)
+	m.p.Set("isDirty", isDirty)
+	return m
 }
-
-*/

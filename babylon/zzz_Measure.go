@@ -128,70 +128,66 @@ func (m *Measure) TransformToRef(transform *Matrix2D, result *Measure) {
 	m.p.Call("transformToRef", args...)
 }
 
-/*
-
 // Height returns the Height property of class Measure.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure#height
-func (m *Measure) Height(height float64) *Measure {
-	p := ba.ctx.Get("Measure").New(height)
-	return MeasureFromJSObject(p, ba.ctx)
+func (m *Measure) Height() float64 {
+	retVal := m.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class Measure.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure#height
 func (m *Measure) SetHeight(height float64) *Measure {
-	p := ba.ctx.Get("Measure").New(height)
-	return MeasureFromJSObject(p, ba.ctx)
+	m.p.Set("height", height)
+	return m
 }
 
 // Left returns the Left property of class Measure.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure#left
-func (m *Measure) Left(left float64) *Measure {
-	p := ba.ctx.Get("Measure").New(left)
-	return MeasureFromJSObject(p, ba.ctx)
+func (m *Measure) Left() float64 {
+	retVal := m.p.Get("left")
+	return retVal.Float()
 }
 
 // SetLeft sets the Left property of class Measure.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure#left
 func (m *Measure) SetLeft(left float64) *Measure {
-	p := ba.ctx.Get("Measure").New(left)
-	return MeasureFromJSObject(p, ba.ctx)
+	m.p.Set("left", left)
+	return m
 }
 
 // Top returns the Top property of class Measure.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure#top
-func (m *Measure) Top(top float64) *Measure {
-	p := ba.ctx.Get("Measure").New(top)
-	return MeasureFromJSObject(p, ba.ctx)
+func (m *Measure) Top() float64 {
+	retVal := m.p.Get("top")
+	return retVal.Float()
 }
 
 // SetTop sets the Top property of class Measure.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure#top
 func (m *Measure) SetTop(top float64) *Measure {
-	p := ba.ctx.Get("Measure").New(top)
-	return MeasureFromJSObject(p, ba.ctx)
+	m.p.Set("top", top)
+	return m
 }
 
 // Width returns the Width property of class Measure.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure#width
-func (m *Measure) Width(width float64) *Measure {
-	p := ba.ctx.Get("Measure").New(width)
-	return MeasureFromJSObject(p, ba.ctx)
+func (m *Measure) Width() float64 {
+	retVal := m.p.Get("width")
+	return retVal.Float()
 }
 
 // SetWidth sets the Width property of class Measure.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure#width
 func (m *Measure) SetWidth(width float64) *Measure {
-	p := ba.ctx.Get("Measure").New(width)
-	return MeasureFromJSObject(p, ba.ctx)
+	m.p.Set("width", width)
+	return m
 }
-
-*/

@@ -134,166 +134,166 @@ func (l *Line) _moveToProjectedPosition(projectedPosition *Vector3, opts *Line_m
 	l.p.Call("_moveToProjectedPosition", args...)
 }
 
-/*
-
 // ConnectedControl returns the ConnectedControl property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#connectedcontrol
-func (l *Line) ConnectedControl(connectedControl *Control) *Line {
-	p := ba.ctx.Get("Line").New(connectedControl.JSObject())
-	return LineFromJSObject(p, ba.ctx)
+func (l *Line) ConnectedControl() *Control {
+	retVal := l.p.Get("connectedControl")
+	return ControlFromJSObject(retVal, l.ctx)
 }
 
 // SetConnectedControl sets the ConnectedControl property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#connectedcontrol
 func (l *Line) SetConnectedControl(connectedControl *Control) *Line {
-	p := ba.ctx.Get("Line").New(connectedControl.JSObject())
-	return LineFromJSObject(p, ba.ctx)
+	l.p.Set("connectedControl", connectedControl.JSObject())
+	return l
 }
 
 // Dash returns the Dash property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#dash
-func (l *Line) Dash(dash []float64) *Line {
-	p := ba.ctx.Get("Line").New(dash)
-	return LineFromJSObject(p, ba.ctx)
+func (l *Line) Dash() []float64 {
+	retVal := l.p.Get("dash")
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetDash sets the Dash property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#dash
 func (l *Line) SetDash(dash []float64) *Line {
-	p := ba.ctx.Get("Line").New(dash)
-	return LineFromJSObject(p, ba.ctx)
+	l.p.Set("dash", dash)
+	return l
 }
 
 // HorizontalAlignment returns the HorizontalAlignment property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#horizontalalignment
-func (l *Line) HorizontalAlignment(horizontalAlignment float64) *Line {
-	p := ba.ctx.Get("Line").New(horizontalAlignment)
-	return LineFromJSObject(p, ba.ctx)
+func (l *Line) HorizontalAlignment() float64 {
+	retVal := l.p.Get("horizontalAlignment")
+	return retVal.Float()
 }
 
 // SetHorizontalAlignment sets the HorizontalAlignment property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#horizontalalignment
 func (l *Line) SetHorizontalAlignment(horizontalAlignment float64) *Line {
-	p := ba.ctx.Get("Line").New(horizontalAlignment)
-	return LineFromJSObject(p, ba.ctx)
+	l.p.Set("horizontalAlignment", horizontalAlignment)
+	return l
 }
 
 // LineWidth returns the LineWidth property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#linewidth
-func (l *Line) LineWidth(lineWidth float64) *Line {
-	p := ba.ctx.Get("Line").New(lineWidth)
-	return LineFromJSObject(p, ba.ctx)
+func (l *Line) LineWidth() float64 {
+	retVal := l.p.Get("lineWidth")
+	return retVal.Float()
 }
 
 // SetLineWidth sets the LineWidth property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#linewidth
 func (l *Line) SetLineWidth(lineWidth float64) *Line {
-	p := ba.ctx.Get("Line").New(lineWidth)
-	return LineFromJSObject(p, ba.ctx)
+	l.p.Set("lineWidth", lineWidth)
+	return l
 }
 
 // Name returns the Name property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#name
-func (l *Line) Name(name string) *Line {
-	p := ba.ctx.Get("Line").New(name)
-	return LineFromJSObject(p, ba.ctx)
+func (l *Line) Name() string {
+	retVal := l.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#name
 func (l *Line) SetName(name string) *Line {
-	p := ba.ctx.Get("Line").New(name)
-	return LineFromJSObject(p, ba.ctx)
+	l.p.Set("name", name)
+	return l
 }
 
 // VerticalAlignment returns the VerticalAlignment property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#verticalalignment
-func (l *Line) VerticalAlignment(verticalAlignment float64) *Line {
-	p := ba.ctx.Get("Line").New(verticalAlignment)
-	return LineFromJSObject(p, ba.ctx)
+func (l *Line) VerticalAlignment() float64 {
+	retVal := l.p.Get("verticalAlignment")
+	return retVal.Float()
 }
 
 // SetVerticalAlignment sets the VerticalAlignment property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#verticalalignment
 func (l *Line) SetVerticalAlignment(verticalAlignment float64) *Line {
-	p := ba.ctx.Get("Line").New(verticalAlignment)
-	return LineFromJSObject(p, ba.ctx)
+	l.p.Set("verticalAlignment", verticalAlignment)
+	return l
 }
 
 // X1 returns the X1 property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#x1
-func (l *Line) X1(x1 string) *Line {
-	p := ba.ctx.Get("Line").New(x1)
-	return LineFromJSObject(p, ba.ctx)
+func (l *Line) X1() string {
+	retVal := l.p.Get("x1")
+	return retVal.String()
 }
 
 // SetX1 sets the X1 property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#x1
 func (l *Line) SetX1(x1 string) *Line {
-	p := ba.ctx.Get("Line").New(x1)
-	return LineFromJSObject(p, ba.ctx)
+	l.p.Set("x1", x1)
+	return l
 }
 
 // X2 returns the X2 property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#x2
-func (l *Line) X2(x2 string) *Line {
-	p := ba.ctx.Get("Line").New(x2)
-	return LineFromJSObject(p, ba.ctx)
+func (l *Line) X2() string {
+	retVal := l.p.Get("x2")
+	return retVal.String()
 }
 
 // SetX2 sets the X2 property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#x2
 func (l *Line) SetX2(x2 string) *Line {
-	p := ba.ctx.Get("Line").New(x2)
-	return LineFromJSObject(p, ba.ctx)
+	l.p.Set("x2", x2)
+	return l
 }
 
 // Y1 returns the Y1 property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#y1
-func (l *Line) Y1(y1 string) *Line {
-	p := ba.ctx.Get("Line").New(y1)
-	return LineFromJSObject(p, ba.ctx)
+func (l *Line) Y1() string {
+	retVal := l.p.Get("y1")
+	return retVal.String()
 }
 
 // SetY1 sets the Y1 property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#y1
 func (l *Line) SetY1(y1 string) *Line {
-	p := ba.ctx.Get("Line").New(y1)
-	return LineFromJSObject(p, ba.ctx)
+	l.p.Set("y1", y1)
+	return l
 }
 
 // Y2 returns the Y2 property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#y2
-func (l *Line) Y2(y2 string) *Line {
-	p := ba.ctx.Get("Line").New(y2)
-	return LineFromJSObject(p, ba.ctx)
+func (l *Line) Y2() string {
+	retVal := l.p.Get("y2")
+	return retVal.String()
 }
 
 // SetY2 sets the Y2 property of class Line.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line#y2
 func (l *Line) SetY2(y2 string) *Line {
-	p := ba.ctx.Get("Line").New(y2)
-	return LineFromJSObject(p, ba.ctx)
+	l.p.Set("y2", y2)
+	return l
 }
-
-*/

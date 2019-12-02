@@ -36,54 +36,50 @@ func MutableGamepadButtonArrayToJSArray(array []*MutableGamepadButton) []interfa
 	return result
 }
 
-/*
-
 // Pressed returns the Pressed property of class MutableGamepadButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mutablegamepadbutton#pressed
-func (m *MutableGamepadButton) Pressed(pressed bool) *MutableGamepadButton {
-	p := ba.ctx.Get("MutableGamepadButton").New(pressed)
-	return MutableGamepadButtonFromJSObject(p, ba.ctx)
+func (m *MutableGamepadButton) Pressed() bool {
+	retVal := m.p.Get("pressed")
+	return retVal.Bool()
 }
 
 // SetPressed sets the Pressed property of class MutableGamepadButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mutablegamepadbutton#pressed
 func (m *MutableGamepadButton) SetPressed(pressed bool) *MutableGamepadButton {
-	p := ba.ctx.Get("MutableGamepadButton").New(pressed)
-	return MutableGamepadButtonFromJSObject(p, ba.ctx)
+	m.p.Set("pressed", pressed)
+	return m
 }
 
 // Touched returns the Touched property of class MutableGamepadButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mutablegamepadbutton#touched
-func (m *MutableGamepadButton) Touched(touched bool) *MutableGamepadButton {
-	p := ba.ctx.Get("MutableGamepadButton").New(touched)
-	return MutableGamepadButtonFromJSObject(p, ba.ctx)
+func (m *MutableGamepadButton) Touched() bool {
+	retVal := m.p.Get("touched")
+	return retVal.Bool()
 }
 
 // SetTouched sets the Touched property of class MutableGamepadButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mutablegamepadbutton#touched
 func (m *MutableGamepadButton) SetTouched(touched bool) *MutableGamepadButton {
-	p := ba.ctx.Get("MutableGamepadButton").New(touched)
-	return MutableGamepadButtonFromJSObject(p, ba.ctx)
+	m.p.Set("touched", touched)
+	return m
 }
 
 // Value returns the Value property of class MutableGamepadButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mutablegamepadbutton#value
-func (m *MutableGamepadButton) Value(value float64) *MutableGamepadButton {
-	p := ba.ctx.Get("MutableGamepadButton").New(value)
-	return MutableGamepadButtonFromJSObject(p, ba.ctx)
+func (m *MutableGamepadButton) Value() float64 {
+	retVal := m.p.Get("value")
+	return retVal.Float()
 }
 
 // SetValue sets the Value property of class MutableGamepadButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mutablegamepadbutton#value
 func (m *MutableGamepadButton) SetValue(value float64) *MutableGamepadButton {
-	p := ba.ctx.Get("MutableGamepadButton").New(value)
-	return MutableGamepadButtonFromJSObject(p, ba.ctx)
+	m.p.Set("value", value)
+	return m
 }
-
-*/

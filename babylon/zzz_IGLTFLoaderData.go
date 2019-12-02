@@ -36,38 +36,34 @@ func IGLTFLoaderDataArrayToJSArray(array []*IGLTFLoaderData) []interface{} {
 	return result
 }
 
-/*
-
 // Bin returns the Bin property of class IGLTFLoaderData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderdata#bin
-func (i *IGLTFLoaderData) Bin(bin *IDataBuffer) *IGLTFLoaderData {
-	p := ba.ctx.Get("IGLTFLoaderData").New(bin.JSObject())
-	return IGLTFLoaderDataFromJSObject(p, ba.ctx)
+func (i *IGLTFLoaderData) Bin() *IDataBuffer {
+	retVal := i.p.Get("bin")
+	return IDataBufferFromJSObject(retVal, i.ctx)
 }
 
 // SetBin sets the Bin property of class IGLTFLoaderData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderdata#bin
 func (i *IGLTFLoaderData) SetBin(bin *IDataBuffer) *IGLTFLoaderData {
-	p := ba.ctx.Get("IGLTFLoaderData").New(bin.JSObject())
-	return IGLTFLoaderDataFromJSObject(p, ba.ctx)
+	i.p.Set("bin", bin.JSObject())
+	return i
 }
 
 // Json returns the Json property of class IGLTFLoaderData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderdata#json
-func (i *IGLTFLoaderData) Json(json *Object) *IGLTFLoaderData {
-	p := ba.ctx.Get("IGLTFLoaderData").New(json.JSObject())
-	return IGLTFLoaderDataFromJSObject(p, ba.ctx)
+func (i *IGLTFLoaderData) Json() js.Value {
+	retVal := i.p.Get("json")
+	return retVal
 }
 
 // SetJson sets the Json property of class IGLTFLoaderData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderdata#json
-func (i *IGLTFLoaderData) SetJson(json *Object) *IGLTFLoaderData {
-	p := ba.ctx.Get("IGLTFLoaderData").New(json.JSObject())
-	return IGLTFLoaderDataFromJSObject(p, ba.ctx)
+func (i *IGLTFLoaderData) SetJson(json js.Value) *IGLTFLoaderData {
+	i.p.Set("json", json)
+	return i
 }
-
-*/

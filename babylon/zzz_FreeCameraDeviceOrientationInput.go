@@ -139,22 +139,18 @@ func (f *FreeCameraDeviceOrientationInput) WaitForOrientationChangeAsync(opts *F
 	return PromiseFromJSObject(retVal, f.ctx)
 }
 
-/*
-
 // Camera returns the Camera property of class FreeCameraDeviceOrientationInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#camera
-func (f *FreeCameraDeviceOrientationInput) Camera(camera *FreeCamera) *FreeCameraDeviceOrientationInput {
-	p := ba.ctx.Get("FreeCameraDeviceOrientationInput").New(camera.JSObject())
-	return FreeCameraDeviceOrientationInputFromJSObject(p, ba.ctx)
+func (f *FreeCameraDeviceOrientationInput) Camera() *FreeCamera {
+	retVal := f.p.Get("camera")
+	return FreeCameraFromJSObject(retVal, f.ctx)
 }
 
 // SetCamera sets the Camera property of class FreeCameraDeviceOrientationInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#camera
 func (f *FreeCameraDeviceOrientationInput) SetCamera(camera *FreeCamera) *FreeCameraDeviceOrientationInput {
-	p := ba.ctx.Get("FreeCameraDeviceOrientationInput").New(camera.JSObject())
-	return FreeCameraDeviceOrientationInputFromJSObject(p, ba.ctx)
+	f.p.Set("camera", camera.JSObject())
+	return f
 }
-
-*/

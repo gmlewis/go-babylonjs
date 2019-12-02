@@ -87,7 +87,3 @@ func (i *ISceneSerializableComponent) Serialize(serializationObject interface{})
 
 	i.p.Call("serialize", args...)
 }
-
-/*
-
- */

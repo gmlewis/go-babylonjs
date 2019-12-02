@@ -63,7 +63,3 @@ func (r *RibbonBuilder) CreateRibbon(name string, options js.Value, opts *Ribbon
 	retVal := r.p.Call("CreateRibbon", args...)
 	return MeshFromJSObject(retVal, r.ctx)
 }
-
-/*
-
- */

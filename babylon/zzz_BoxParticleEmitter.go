@@ -136,70 +136,66 @@ func (b *BoxParticleEmitter) StartPositionFunction(worldMatrix *Matrix, position
 	b.p.Call("startPositionFunction", args...)
 }
 
-/*
-
 // Direction1 returns the Direction1 property of class BoxParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#direction1
-func (b *BoxParticleEmitter) Direction1(direction1 *Vector3) *BoxParticleEmitter {
-	p := ba.ctx.Get("BoxParticleEmitter").New(direction1.JSObject())
-	return BoxParticleEmitterFromJSObject(p, ba.ctx)
+func (b *BoxParticleEmitter) Direction1() *Vector3 {
+	retVal := b.p.Get("direction1")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetDirection1 sets the Direction1 property of class BoxParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#direction1
 func (b *BoxParticleEmitter) SetDirection1(direction1 *Vector3) *BoxParticleEmitter {
-	p := ba.ctx.Get("BoxParticleEmitter").New(direction1.JSObject())
-	return BoxParticleEmitterFromJSObject(p, ba.ctx)
+	b.p.Set("direction1", direction1.JSObject())
+	return b
 }
 
 // Direction2 returns the Direction2 property of class BoxParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#direction2
-func (b *BoxParticleEmitter) Direction2(direction2 *Vector3) *BoxParticleEmitter {
-	p := ba.ctx.Get("BoxParticleEmitter").New(direction2.JSObject())
-	return BoxParticleEmitterFromJSObject(p, ba.ctx)
+func (b *BoxParticleEmitter) Direction2() *Vector3 {
+	retVal := b.p.Get("direction2")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetDirection2 sets the Direction2 property of class BoxParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#direction2
 func (b *BoxParticleEmitter) SetDirection2(direction2 *Vector3) *BoxParticleEmitter {
-	p := ba.ctx.Get("BoxParticleEmitter").New(direction2.JSObject())
-	return BoxParticleEmitterFromJSObject(p, ba.ctx)
+	b.p.Set("direction2", direction2.JSObject())
+	return b
 }
 
 // MaxEmitBox returns the MaxEmitBox property of class BoxParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#maxemitbox
-func (b *BoxParticleEmitter) MaxEmitBox(maxEmitBox *Vector3) *BoxParticleEmitter {
-	p := ba.ctx.Get("BoxParticleEmitter").New(maxEmitBox.JSObject())
-	return BoxParticleEmitterFromJSObject(p, ba.ctx)
+func (b *BoxParticleEmitter) MaxEmitBox() *Vector3 {
+	retVal := b.p.Get("maxEmitBox")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetMaxEmitBox sets the MaxEmitBox property of class BoxParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#maxemitbox
 func (b *BoxParticleEmitter) SetMaxEmitBox(maxEmitBox *Vector3) *BoxParticleEmitter {
-	p := ba.ctx.Get("BoxParticleEmitter").New(maxEmitBox.JSObject())
-	return BoxParticleEmitterFromJSObject(p, ba.ctx)
+	b.p.Set("maxEmitBox", maxEmitBox.JSObject())
+	return b
 }
 
 // MinEmitBox returns the MinEmitBox property of class BoxParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#minemitbox
-func (b *BoxParticleEmitter) MinEmitBox(minEmitBox *Vector3) *BoxParticleEmitter {
-	p := ba.ctx.Get("BoxParticleEmitter").New(minEmitBox.JSObject())
-	return BoxParticleEmitterFromJSObject(p, ba.ctx)
+func (b *BoxParticleEmitter) MinEmitBox() *Vector3 {
+	retVal := b.p.Get("minEmitBox")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetMinEmitBox sets the MinEmitBox property of class BoxParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#minemitbox
 func (b *BoxParticleEmitter) SetMinEmitBox(minEmitBox *Vector3) *BoxParticleEmitter {
-	p := ba.ctx.Get("BoxParticleEmitter").New(minEmitBox.JSObject())
-	return BoxParticleEmitterFromJSObject(p, ba.ctx)
+	b.p.Set("minEmitBox", minEmitBox.JSObject())
+	return b
 }
-
-*/

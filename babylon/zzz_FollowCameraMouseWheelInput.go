@@ -94,102 +94,98 @@ func (f *FollowCameraMouseWheelInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // AxisControlHeight returns the AxisControlHeight property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#axiscontrolheight
-func (f *FollowCameraMouseWheelInput) AxisControlHeight(axisControlHeight bool) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(axisControlHeight)
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+func (f *FollowCameraMouseWheelInput) AxisControlHeight() bool {
+	retVal := f.p.Get("axisControlHeight")
+	return retVal.Bool()
 }
 
 // SetAxisControlHeight sets the AxisControlHeight property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#axiscontrolheight
 func (f *FollowCameraMouseWheelInput) SetAxisControlHeight(axisControlHeight bool) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(axisControlHeight)
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+	f.p.Set("axisControlHeight", axisControlHeight)
+	return f
 }
 
 // AxisControlRadius returns the AxisControlRadius property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#axiscontrolradius
-func (f *FollowCameraMouseWheelInput) AxisControlRadius(axisControlRadius bool) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(axisControlRadius)
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+func (f *FollowCameraMouseWheelInput) AxisControlRadius() bool {
+	retVal := f.p.Get("axisControlRadius")
+	return retVal.Bool()
 }
 
 // SetAxisControlRadius sets the AxisControlRadius property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#axiscontrolradius
 func (f *FollowCameraMouseWheelInput) SetAxisControlRadius(axisControlRadius bool) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(axisControlRadius)
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+	f.p.Set("axisControlRadius", axisControlRadius)
+	return f
 }
 
 // AxisControlRotation returns the AxisControlRotation property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#axiscontrolrotation
-func (f *FollowCameraMouseWheelInput) AxisControlRotation(axisControlRotation bool) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(axisControlRotation)
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+func (f *FollowCameraMouseWheelInput) AxisControlRotation() bool {
+	retVal := f.p.Get("axisControlRotation")
+	return retVal.Bool()
 }
 
 // SetAxisControlRotation sets the AxisControlRotation property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#axiscontrolrotation
 func (f *FollowCameraMouseWheelInput) SetAxisControlRotation(axisControlRotation bool) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(axisControlRotation)
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+	f.p.Set("axisControlRotation", axisControlRotation)
+	return f
 }
 
 // Camera returns the Camera property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#camera
-func (f *FollowCameraMouseWheelInput) Camera(camera *FollowCamera) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(camera.JSObject())
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+func (f *FollowCameraMouseWheelInput) Camera() *FollowCamera {
+	retVal := f.p.Get("camera")
+	return FollowCameraFromJSObject(retVal, f.ctx)
 }
 
 // SetCamera sets the Camera property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#camera
 func (f *FollowCameraMouseWheelInput) SetCamera(camera *FollowCamera) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(camera.JSObject())
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+	f.p.Set("camera", camera.JSObject())
+	return f
 }
 
 // WheelDeltaPercentage returns the WheelDeltaPercentage property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#wheeldeltapercentage
-func (f *FollowCameraMouseWheelInput) WheelDeltaPercentage(wheelDeltaPercentage float64) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(wheelDeltaPercentage)
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+func (f *FollowCameraMouseWheelInput) WheelDeltaPercentage() float64 {
+	retVal := f.p.Get("wheelDeltaPercentage")
+	return retVal.Float()
 }
 
 // SetWheelDeltaPercentage sets the WheelDeltaPercentage property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#wheeldeltapercentage
 func (f *FollowCameraMouseWheelInput) SetWheelDeltaPercentage(wheelDeltaPercentage float64) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(wheelDeltaPercentage)
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+	f.p.Set("wheelDeltaPercentage", wheelDeltaPercentage)
+	return f
 }
 
 // WheelPrecision returns the WheelPrecision property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#wheelprecision
-func (f *FollowCameraMouseWheelInput) WheelPrecision(wheelPrecision float64) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(wheelPrecision)
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+func (f *FollowCameraMouseWheelInput) WheelPrecision() float64 {
+	retVal := f.p.Get("wheelPrecision")
+	return retVal.Float()
 }
 
 // SetWheelPrecision sets the WheelPrecision property of class FollowCameraMouseWheelInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput#wheelprecision
 func (f *FollowCameraMouseWheelInput) SetWheelPrecision(wheelPrecision float64) *FollowCameraMouseWheelInput {
-	p := ba.ctx.Get("FollowCameraMouseWheelInput").New(wheelPrecision)
-	return FollowCameraMouseWheelInputFromJSObject(p, ba.ctx)
+	f.p.Set("wheelPrecision", wheelPrecision)
+	return f
 }
-
-*/

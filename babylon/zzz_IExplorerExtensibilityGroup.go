@@ -36,38 +36,34 @@ func IExplorerExtensibilityGroupArrayToJSArray(array []*IExplorerExtensibilityGr
 	return result
 }
 
-/*
-
 // Entries returns the Entries property of class IExplorerExtensibilityGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilitygroup#entries
-func (i *IExplorerExtensibilityGroup) Entries(entries *IExplorerExtensibilityOption) *IExplorerExtensibilityGroup {
-	p := ba.ctx.Get("IExplorerExtensibilityGroup").New(entries.JSObject())
-	return IExplorerExtensibilityGroupFromJSObject(p, ba.ctx)
+func (i *IExplorerExtensibilityGroup) Entries() *IExplorerExtensibilityOption {
+	retVal := i.p.Get("entries")
+	return IExplorerExtensibilityOptionFromJSObject(retVal, i.ctx)
 }
 
 // SetEntries sets the Entries property of class IExplorerExtensibilityGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilitygroup#entries
 func (i *IExplorerExtensibilityGroup) SetEntries(entries *IExplorerExtensibilityOption) *IExplorerExtensibilityGroup {
-	p := ba.ctx.Get("IExplorerExtensibilityGroup").New(entries.JSObject())
-	return IExplorerExtensibilityGroupFromJSObject(p, ba.ctx)
+	i.p.Set("entries", entries.JSObject())
+	return i
 }
 
 // Predicate returns the Predicate property of class IExplorerExtensibilityGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilitygroup#predicate
-func (i *IExplorerExtensibilityGroup) Predicate(predicate func()) *IExplorerExtensibilityGroup {
-	p := ba.ctx.Get("IExplorerExtensibilityGroup").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {predicate(); return nil}))
-	return IExplorerExtensibilityGroupFromJSObject(p, ba.ctx)
+func (i *IExplorerExtensibilityGroup) Predicate() js.Value {
+	retVal := i.p.Get("predicate")
+	return retVal
 }
 
 // SetPredicate sets the Predicate property of class IExplorerExtensibilityGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilitygroup#predicate
 func (i *IExplorerExtensibilityGroup) SetPredicate(predicate func()) *IExplorerExtensibilityGroup {
-	p := ba.ctx.Get("IExplorerExtensibilityGroup").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {predicate(); return nil}))
-	return IExplorerExtensibilityGroupFromJSObject(p, ba.ctx)
+	i.p.Set("predicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
+	return i
 }
-
-*/

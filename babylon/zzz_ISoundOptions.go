@@ -36,230 +36,226 @@ func ISoundOptionsArrayToJSArray(array []*ISoundOptions) []interface{} {
 	return result
 }
 
-/*
-
 // Autoplay returns the Autoplay property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#autoplay
-func (i *ISoundOptions) Autoplay(autoplay bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(autoplay)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) Autoplay() bool {
+	retVal := i.p.Get("autoplay")
+	return retVal.Bool()
 }
 
 // SetAutoplay sets the Autoplay property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#autoplay
 func (i *ISoundOptions) SetAutoplay(autoplay bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(autoplay)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("autoplay", autoplay)
+	return i
 }
 
 // DistanceModel returns the DistanceModel property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#distancemodel
-func (i *ISoundOptions) DistanceModel(distanceModel string) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(distanceModel)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) DistanceModel() string {
+	retVal := i.p.Get("distanceModel")
+	return retVal.String()
 }
 
 // SetDistanceModel sets the DistanceModel property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#distancemodel
 func (i *ISoundOptions) SetDistanceModel(distanceModel string) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(distanceModel)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("distanceModel", distanceModel)
+	return i
 }
 
 // Length returns the Length property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#length
-func (i *ISoundOptions) Length(length float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(length)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) Length() float64 {
+	retVal := i.p.Get("length")
+	return retVal.Float()
 }
 
 // SetLength sets the Length property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#length
 func (i *ISoundOptions) SetLength(length float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(length)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("length", length)
+	return i
 }
 
 // Loop returns the Loop property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#loop
-func (i *ISoundOptions) Loop(loop bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(loop)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) Loop() bool {
+	retVal := i.p.Get("loop")
+	return retVal.Bool()
 }
 
 // SetLoop sets the Loop property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#loop
 func (i *ISoundOptions) SetLoop(loop bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(loop)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("loop", loop)
+	return i
 }
 
 // MaxDistance returns the MaxDistance property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#maxdistance
-func (i *ISoundOptions) MaxDistance(maxDistance float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(maxDistance)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) MaxDistance() float64 {
+	retVal := i.p.Get("maxDistance")
+	return retVal.Float()
 }
 
 // SetMaxDistance sets the MaxDistance property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#maxdistance
 func (i *ISoundOptions) SetMaxDistance(maxDistance float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(maxDistance)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("maxDistance", maxDistance)
+	return i
 }
 
 // Offset returns the Offset property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#offset
-func (i *ISoundOptions) Offset(offset float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(offset)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) Offset() float64 {
+	retVal := i.p.Get("offset")
+	return retVal.Float()
 }
 
 // SetOffset sets the Offset property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#offset
 func (i *ISoundOptions) SetOffset(offset float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(offset)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("offset", offset)
+	return i
 }
 
 // PlaybackRate returns the PlaybackRate property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#playbackrate
-func (i *ISoundOptions) PlaybackRate(playbackRate float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(playbackRate)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) PlaybackRate() float64 {
+	retVal := i.p.Get("playbackRate")
+	return retVal.Float()
 }
 
 // SetPlaybackRate sets the PlaybackRate property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#playbackrate
 func (i *ISoundOptions) SetPlaybackRate(playbackRate float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(playbackRate)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("playbackRate", playbackRate)
+	return i
 }
 
 // RefDistance returns the RefDistance property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#refdistance
-func (i *ISoundOptions) RefDistance(refDistance float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(refDistance)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) RefDistance() float64 {
+	retVal := i.p.Get("refDistance")
+	return retVal.Float()
 }
 
 // SetRefDistance sets the RefDistance property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#refdistance
 func (i *ISoundOptions) SetRefDistance(refDistance float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(refDistance)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("refDistance", refDistance)
+	return i
 }
 
 // RolloffFactor returns the RolloffFactor property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#rollofffactor
-func (i *ISoundOptions) RolloffFactor(rolloffFactor float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(rolloffFactor)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) RolloffFactor() float64 {
+	retVal := i.p.Get("rolloffFactor")
+	return retVal.Float()
 }
 
 // SetRolloffFactor sets the RolloffFactor property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#rollofffactor
 func (i *ISoundOptions) SetRolloffFactor(rolloffFactor float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(rolloffFactor)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("rolloffFactor", rolloffFactor)
+	return i
 }
 
 // SkipCodecCheck returns the SkipCodecCheck property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#skipcodeccheck
-func (i *ISoundOptions) SkipCodecCheck(skipCodecCheck bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(skipCodecCheck)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) SkipCodecCheck() bool {
+	retVal := i.p.Get("skipCodecCheck")
+	return retVal.Bool()
 }
 
 // SetSkipCodecCheck sets the SkipCodecCheck property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#skipcodeccheck
 func (i *ISoundOptions) SetSkipCodecCheck(skipCodecCheck bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(skipCodecCheck)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("skipCodecCheck", skipCodecCheck)
+	return i
 }
 
 // SpatialSound returns the SpatialSound property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#spatialsound
-func (i *ISoundOptions) SpatialSound(spatialSound bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(spatialSound)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) SpatialSound() bool {
+	retVal := i.p.Get("spatialSound")
+	return retVal.Bool()
 }
 
 // SetSpatialSound sets the SpatialSound property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#spatialsound
 func (i *ISoundOptions) SetSpatialSound(spatialSound bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(spatialSound)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("spatialSound", spatialSound)
+	return i
 }
 
 // Streaming returns the Streaming property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#streaming
-func (i *ISoundOptions) Streaming(streaming bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(streaming)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) Streaming() bool {
+	retVal := i.p.Get("streaming")
+	return retVal.Bool()
 }
 
 // SetStreaming sets the Streaming property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#streaming
 func (i *ISoundOptions) SetStreaming(streaming bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(streaming)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("streaming", streaming)
+	return i
 }
 
 // UseCustomAttenuation returns the UseCustomAttenuation property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#usecustomattenuation
-func (i *ISoundOptions) UseCustomAttenuation(useCustomAttenuation bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(useCustomAttenuation)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) UseCustomAttenuation() bool {
+	retVal := i.p.Get("useCustomAttenuation")
+	return retVal.Bool()
 }
 
 // SetUseCustomAttenuation sets the UseCustomAttenuation property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#usecustomattenuation
 func (i *ISoundOptions) SetUseCustomAttenuation(useCustomAttenuation bool) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(useCustomAttenuation)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("useCustomAttenuation", useCustomAttenuation)
+	return i
 }
 
 // Volume returns the Volume property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#volume
-func (i *ISoundOptions) Volume(volume float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(volume)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+func (i *ISoundOptions) Volume() float64 {
+	retVal := i.p.Get("volume")
+	return retVal.Float()
 }
 
 // SetVolume sets the Volume property of class ISoundOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isoundoptions#volume
 func (i *ISoundOptions) SetVolume(volume float64) *ISoundOptions {
-	p := ba.ctx.Get("ISoundOptions").New(volume)
-	return ISoundOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("volume", volume)
+	return i
 }
-
-*/

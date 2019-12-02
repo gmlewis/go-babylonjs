@@ -103,38 +103,34 @@ func (w *WoodProceduralTexture) UpdateShaderUniforms() {
 	w.p.Call("updateShaderUniforms")
 }
 
-/*
-
 // AmpScale returns the AmpScale property of class WoodProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#ampscale
-func (w *WoodProceduralTexture) AmpScale(ampScale float64) *WoodProceduralTexture {
-	p := ba.ctx.Get("WoodProceduralTexture").New(ampScale)
-	return WoodProceduralTextureFromJSObject(p, ba.ctx)
+func (w *WoodProceduralTexture) AmpScale() float64 {
+	retVal := w.p.Get("ampScale")
+	return retVal.Float()
 }
 
 // SetAmpScale sets the AmpScale property of class WoodProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#ampscale
 func (w *WoodProceduralTexture) SetAmpScale(ampScale float64) *WoodProceduralTexture {
-	p := ba.ctx.Get("WoodProceduralTexture").New(ampScale)
-	return WoodProceduralTextureFromJSObject(p, ba.ctx)
+	w.p.Set("ampScale", ampScale)
+	return w
 }
 
 // WoodColor returns the WoodColor property of class WoodProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#woodcolor
-func (w *WoodProceduralTexture) WoodColor(woodColor *Color3) *WoodProceduralTexture {
-	p := ba.ctx.Get("WoodProceduralTexture").New(woodColor.JSObject())
-	return WoodProceduralTextureFromJSObject(p, ba.ctx)
+func (w *WoodProceduralTexture) WoodColor() *Color3 {
+	retVal := w.p.Get("woodColor")
+	return Color3FromJSObject(retVal, w.ctx)
 }
 
 // SetWoodColor sets the WoodColor property of class WoodProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#woodcolor
 func (w *WoodProceduralTexture) SetWoodColor(woodColor *Color3) *WoodProceduralTexture {
-	p := ba.ctx.Get("WoodProceduralTexture").New(woodColor.JSObject())
-	return WoodProceduralTextureFromJSObject(p, ba.ctx)
+	w.p.Set("woodColor", woodColor.JSObject())
+	return w
 }
-
-*/

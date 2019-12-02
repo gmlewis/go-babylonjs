@@ -81,86 +81,82 @@ func (l *LensFlare) Dispose() {
 	l.p.Call("dispose")
 }
 
-/*
-
 // AlphaMode returns the AlphaMode property of class LensFlare.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#alphamode
-func (l *LensFlare) AlphaMode(alphaMode float64) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(alphaMode)
-	return LensFlareFromJSObject(p, ba.ctx)
+func (l *LensFlare) AlphaMode() float64 {
+	retVal := l.p.Get("alphaMode")
+	return retVal.Float()
 }
 
 // SetAlphaMode sets the AlphaMode property of class LensFlare.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#alphamode
 func (l *LensFlare) SetAlphaMode(alphaMode float64) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(alphaMode)
-	return LensFlareFromJSObject(p, ba.ctx)
+	l.p.Set("alphaMode", alphaMode)
+	return l
 }
 
 // Color returns the Color property of class LensFlare.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#color
-func (l *LensFlare) Color(color *Color3) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(color.JSObject())
-	return LensFlareFromJSObject(p, ba.ctx)
+func (l *LensFlare) Color() *Color3 {
+	retVal := l.p.Get("color")
+	return Color3FromJSObject(retVal, l.ctx)
 }
 
 // SetColor sets the Color property of class LensFlare.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#color
 func (l *LensFlare) SetColor(color *Color3) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(color.JSObject())
-	return LensFlareFromJSObject(p, ba.ctx)
+	l.p.Set("color", color.JSObject())
+	return l
 }
 
 // Position returns the Position property of class LensFlare.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#position
-func (l *LensFlare) Position(position float64) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(position)
-	return LensFlareFromJSObject(p, ba.ctx)
+func (l *LensFlare) Position() float64 {
+	retVal := l.p.Get("position")
+	return retVal.Float()
 }
 
 // SetPosition sets the Position property of class LensFlare.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#position
 func (l *LensFlare) SetPosition(position float64) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(position)
-	return LensFlareFromJSObject(p, ba.ctx)
+	l.p.Set("position", position)
+	return l
 }
 
 // Size returns the Size property of class LensFlare.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#size
-func (l *LensFlare) Size(size float64) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(size)
-	return LensFlareFromJSObject(p, ba.ctx)
+func (l *LensFlare) Size() float64 {
+	retVal := l.p.Get("size")
+	return retVal.Float()
 }
 
 // SetSize sets the Size property of class LensFlare.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#size
 func (l *LensFlare) SetSize(size float64) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(size)
-	return LensFlareFromJSObject(p, ba.ctx)
+	l.p.Set("size", size)
+	return l
 }
 
 // Texture returns the Texture property of class LensFlare.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#texture
-func (l *LensFlare) Texture(texture *Texture) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(texture.JSObject())
-	return LensFlareFromJSObject(p, ba.ctx)
+func (l *LensFlare) Texture() *Texture {
+	retVal := l.p.Get("texture")
+	return TextureFromJSObject(retVal, l.ctx)
 }
 
 // SetTexture sets the Texture property of class LensFlare.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare#texture
 func (l *LensFlare) SetTexture(texture *Texture) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(texture.JSObject())
-	return LensFlareFromJSObject(p, ba.ctx)
+	l.p.Set("texture", texture.JSObject())
+	return l
 }
-
-*/

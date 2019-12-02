@@ -58,54 +58,50 @@ func (d *DotBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Left returns the Left property of class DotBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dotblock#left
-func (d *DotBlock) Left(left *NodeMaterialConnectionPoint) *DotBlock {
-	p := ba.ctx.Get("DotBlock").New(left.JSObject())
-	return DotBlockFromJSObject(p, ba.ctx)
+func (d *DotBlock) Left() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("left")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetLeft sets the Left property of class DotBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dotblock#left
 func (d *DotBlock) SetLeft(left *NodeMaterialConnectionPoint) *DotBlock {
-	p := ba.ctx.Get("DotBlock").New(left.JSObject())
-	return DotBlockFromJSObject(p, ba.ctx)
+	d.p.Set("left", left.JSObject())
+	return d
 }
 
 // Output returns the Output property of class DotBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dotblock#output
-func (d *DotBlock) Output(output *NodeMaterialConnectionPoint) *DotBlock {
-	p := ba.ctx.Get("DotBlock").New(output.JSObject())
-	return DotBlockFromJSObject(p, ba.ctx)
+func (d *DotBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetOutput sets the Output property of class DotBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dotblock#output
 func (d *DotBlock) SetOutput(output *NodeMaterialConnectionPoint) *DotBlock {
-	p := ba.ctx.Get("DotBlock").New(output.JSObject())
-	return DotBlockFromJSObject(p, ba.ctx)
+	d.p.Set("output", output.JSObject())
+	return d
 }
 
 // Right returns the Right property of class DotBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dotblock#right
-func (d *DotBlock) Right(right *NodeMaterialConnectionPoint) *DotBlock {
-	p := ba.ctx.Get("DotBlock").New(right.JSObject())
-	return DotBlockFromJSObject(p, ba.ctx)
+func (d *DotBlock) Right() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("right")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetRight sets the Right property of class DotBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dotblock#right
 func (d *DotBlock) SetRight(right *NodeMaterialConnectionPoint) *DotBlock {
-	p := ba.ctx.Get("DotBlock").New(right.JSObject())
-	return DotBlockFromJSObject(p, ba.ctx)
+	d.p.Set("right", right.JSObject())
+	return d
 }
-
-*/

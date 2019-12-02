@@ -66,7 +66,3 @@ func (ba *Babylon) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
 	p := ba.ctx.Get("InputPassword").New(args...)
 	return InputPasswordFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

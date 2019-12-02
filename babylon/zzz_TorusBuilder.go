@@ -50,7 +50,3 @@ func (t *TorusBuilder) CreateTorus(name string, options js.Value, scene interfac
 	retVal := t.p.Call("CreateTorus", args...)
 	return MeshFromJSObject(retVal, t.ctx)
 }
-
-/*
-
- */

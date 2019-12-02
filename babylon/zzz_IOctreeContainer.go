@@ -36,22 +36,22 @@ func IOctreeContainerArrayToJSArray(array []*IOctreeContainer) []interface{} {
 	return result
 }
 
-/*
-
 // Blocks returns the Blocks property of class IOctreeContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ioctreecontainer#blocks
-func (i *IOctreeContainer) Blocks(blocks []*OctreeBlock) *IOctreeContainer {
-	p := ba.ctx.Get("IOctreeContainer").New(blocks)
-	return IOctreeContainerFromJSObject(p, ba.ctx)
+func (i *IOctreeContainer) Blocks() []*OctreeBlock {
+	retVal := i.p.Get("blocks")
+	result := []*OctreeBlock{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, OctreeBlockFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetBlocks sets the Blocks property of class IOctreeContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ioctreecontainer#blocks
 func (i *IOctreeContainer) SetBlocks(blocks []*OctreeBlock) *IOctreeContainer {
-	p := ba.ctx.Get("IOctreeContainer").New(blocks)
-	return IOctreeContainerFromJSObject(p, ba.ctx)
+	i.p.Set("blocks", blocks)
+	return i
 }
-
-*/

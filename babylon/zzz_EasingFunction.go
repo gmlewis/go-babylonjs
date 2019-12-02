@@ -72,54 +72,50 @@ func (e *EasingFunction) SetEasingMode(easingMode float64) {
 	e.p.Call("setEasingMode", args...)
 }
 
-/*
-
 // EASINGMODE_EASEIN returns the EASINGMODE_EASEIN property of class EasingFunction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.easingfunction#easingmode_easein
-func (e *EasingFunction) EASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *EasingFunction {
-	p := ba.ctx.Get("EasingFunction").New(EASINGMODE_EASEIN)
-	return EasingFunctionFromJSObject(p, ba.ctx)
+func (e *EasingFunction) EASINGMODE_EASEIN() float64 {
+	retVal := e.p.Get("EASINGMODE_EASEIN")
+	return retVal.Float()
 }
 
 // SetEASINGMODE_EASEIN sets the EASINGMODE_EASEIN property of class EasingFunction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.easingfunction#easingmode_easein
 func (e *EasingFunction) SetEASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *EasingFunction {
-	p := ba.ctx.Get("EasingFunction").New(EASINGMODE_EASEIN)
-	return EasingFunctionFromJSObject(p, ba.ctx)
+	e.p.Set("EASINGMODE_EASEIN", EASINGMODE_EASEIN)
+	return e
 }
 
 // EASINGMODE_EASEINOUT returns the EASINGMODE_EASEINOUT property of class EasingFunction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.easingfunction#easingmode_easeinout
-func (e *EasingFunction) EASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *EasingFunction {
-	p := ba.ctx.Get("EasingFunction").New(EASINGMODE_EASEINOUT)
-	return EasingFunctionFromJSObject(p, ba.ctx)
+func (e *EasingFunction) EASINGMODE_EASEINOUT() float64 {
+	retVal := e.p.Get("EASINGMODE_EASEINOUT")
+	return retVal.Float()
 }
 
 // SetEASINGMODE_EASEINOUT sets the EASINGMODE_EASEINOUT property of class EasingFunction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.easingfunction#easingmode_easeinout
 func (e *EasingFunction) SetEASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *EasingFunction {
-	p := ba.ctx.Get("EasingFunction").New(EASINGMODE_EASEINOUT)
-	return EasingFunctionFromJSObject(p, ba.ctx)
+	e.p.Set("EASINGMODE_EASEINOUT", EASINGMODE_EASEINOUT)
+	return e
 }
 
 // EASINGMODE_EASEOUT returns the EASINGMODE_EASEOUT property of class EasingFunction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.easingfunction#easingmode_easeout
-func (e *EasingFunction) EASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *EasingFunction {
-	p := ba.ctx.Get("EasingFunction").New(EASINGMODE_EASEOUT)
-	return EasingFunctionFromJSObject(p, ba.ctx)
+func (e *EasingFunction) EASINGMODE_EASEOUT() float64 {
+	retVal := e.p.Get("EASINGMODE_EASEOUT")
+	return retVal.Float()
 }
 
 // SetEASINGMODE_EASEOUT sets the EASINGMODE_EASEOUT property of class EasingFunction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.easingfunction#easingmode_easeout
 func (e *EasingFunction) SetEASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *EasingFunction {
-	p := ba.ctx.Get("EasingFunction").New(EASINGMODE_EASEOUT)
-	return EasingFunctionFromJSObject(p, ba.ctx)
+	e.p.Set("EASINGMODE_EASEOUT", EASINGMODE_EASEOUT)
+	return e
 }
-
-*/

@@ -87,54 +87,50 @@ func (f *FadeInOutBehavior) Init() {
 	f.p.Call("init")
 }
 
-/*
-
 // Delay returns the Delay property of class FadeInOutBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#delay
-func (f *FadeInOutBehavior) Delay(delay float64) *FadeInOutBehavior {
-	p := ba.ctx.Get("FadeInOutBehavior").New(delay)
-	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+func (f *FadeInOutBehavior) Delay() float64 {
+	retVal := f.p.Get("delay")
+	return retVal.Float()
 }
 
 // SetDelay sets the Delay property of class FadeInOutBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#delay
 func (f *FadeInOutBehavior) SetDelay(delay float64) *FadeInOutBehavior {
-	p := ba.ctx.Get("FadeInOutBehavior").New(delay)
-	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+	f.p.Set("delay", delay)
+	return f
 }
 
 // FadeInTime returns the FadeInTime property of class FadeInOutBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#fadeintime
-func (f *FadeInOutBehavior) FadeInTime(fadeInTime float64) *FadeInOutBehavior {
-	p := ba.ctx.Get("FadeInOutBehavior").New(fadeInTime)
-	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+func (f *FadeInOutBehavior) FadeInTime() float64 {
+	retVal := f.p.Get("fadeInTime")
+	return retVal.Float()
 }
 
 // SetFadeInTime sets the FadeInTime property of class FadeInOutBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#fadeintime
 func (f *FadeInOutBehavior) SetFadeInTime(fadeInTime float64) *FadeInOutBehavior {
-	p := ba.ctx.Get("FadeInOutBehavior").New(fadeInTime)
-	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+	f.p.Set("fadeInTime", fadeInTime)
+	return f
 }
 
 // Name returns the Name property of class FadeInOutBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#name
-func (f *FadeInOutBehavior) Name(name string) *FadeInOutBehavior {
-	p := ba.ctx.Get("FadeInOutBehavior").New(name)
-	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+func (f *FadeInOutBehavior) Name() string {
+	retVal := f.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class FadeInOutBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#name
 func (f *FadeInOutBehavior) SetName(name string) *FadeInOutBehavior {
-	p := ba.ctx.Get("FadeInOutBehavior").New(name)
-	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+	f.p.Set("name", name)
+	return f
 }
-
-*/

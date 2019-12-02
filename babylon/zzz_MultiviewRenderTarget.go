@@ -73,7 +73,3 @@ func (m *MultiviewRenderTarget) GetViewCount() float64 {
 	retVal := m.p.Call("getViewCount")
 	return retVal.Float()
 }
-
-/*
-
- */

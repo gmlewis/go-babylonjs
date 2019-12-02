@@ -36,54 +36,50 @@ func ClipboardEventTypesArrayToJSArray(array []*ClipboardEventTypes) []interface
 	return result
 }
 
-/*
-
 // COPY returns the COPY property of class ClipboardEventTypes.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#copy
-func (c *ClipboardEventTypes) COPY(COPY float64) *ClipboardEventTypes {
-	p := ba.ctx.Get("ClipboardEventTypes").New(COPY)
-	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+func (c *ClipboardEventTypes) COPY() float64 {
+	retVal := c.p.Get("COPY")
+	return retVal.Float()
 }
 
 // SetCOPY sets the COPY property of class ClipboardEventTypes.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#copy
 func (c *ClipboardEventTypes) SetCOPY(COPY float64) *ClipboardEventTypes {
-	p := ba.ctx.Get("ClipboardEventTypes").New(COPY)
-	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+	c.p.Set("COPY", COPY)
+	return c
 }
 
 // CUT returns the CUT property of class ClipboardEventTypes.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#cut
-func (c *ClipboardEventTypes) CUT(CUT float64) *ClipboardEventTypes {
-	p := ba.ctx.Get("ClipboardEventTypes").New(CUT)
-	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+func (c *ClipboardEventTypes) CUT() float64 {
+	retVal := c.p.Get("CUT")
+	return retVal.Float()
 }
 
 // SetCUT sets the CUT property of class ClipboardEventTypes.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#cut
 func (c *ClipboardEventTypes) SetCUT(CUT float64) *ClipboardEventTypes {
-	p := ba.ctx.Get("ClipboardEventTypes").New(CUT)
-	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+	c.p.Set("CUT", CUT)
+	return c
 }
 
 // PASTE returns the PASTE property of class ClipboardEventTypes.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#paste
-func (c *ClipboardEventTypes) PASTE(PASTE float64) *ClipboardEventTypes {
-	p := ba.ctx.Get("ClipboardEventTypes").New(PASTE)
-	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+func (c *ClipboardEventTypes) PASTE() float64 {
+	retVal := c.p.Get("PASTE")
+	return retVal.Float()
 }
 
 // SetPASTE sets the PASTE property of class ClipboardEventTypes.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#paste
 func (c *ClipboardEventTypes) SetPASTE(PASTE float64) *ClipboardEventTypes {
-	p := ba.ctx.Get("ClipboardEventTypes").New(PASTE)
-	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+	c.p.Set("PASTE", PASTE)
+	return c
 }
-
-*/

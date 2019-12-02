@@ -139,7 +139,3 @@ func (t *Tags) RemoveTagsFrom(obj interface{}, tagsString string) {
 
 	t.p.Call("RemoveTagsFrom", args...)
 }
-
-/*
-
- */

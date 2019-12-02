@@ -95,54 +95,50 @@ func (p *PlayAnimationAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-/*
-
 // From returns the From property of class PlayAnimationAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#from
-func (p *PlayAnimationAction) From(from float64) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(from)
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
+func (p *PlayAnimationAction) From() float64 {
+	retVal := p.p.Get("from")
+	return retVal.Float()
 }
 
 // SetFrom sets the From property of class PlayAnimationAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#from
 func (p *PlayAnimationAction) SetFrom(from float64) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(from)
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
+	p.p.Set("from", from)
+	return p
 }
 
 // Loop returns the Loop property of class PlayAnimationAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#loop
-func (p *PlayAnimationAction) Loop(loop bool) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(loop)
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
+func (p *PlayAnimationAction) Loop() bool {
+	retVal := p.p.Get("loop")
+	return retVal.Bool()
 }
 
 // SetLoop sets the Loop property of class PlayAnimationAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#loop
 func (p *PlayAnimationAction) SetLoop(loop bool) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(loop)
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
+	p.p.Set("loop", loop)
+	return p
 }
 
 // To returns the To property of class PlayAnimationAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#to
-func (p *PlayAnimationAction) To(to float64) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(to)
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
+func (p *PlayAnimationAction) To() float64 {
+	retVal := p.p.Get("to")
+	return retVal.Float()
 }
 
 // SetTo sets the To property of class PlayAnimationAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#to
 func (p *PlayAnimationAction) SetTo(to float64) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(to)
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
+	p.p.Set("to", to)
+	return p
 }
-
-*/

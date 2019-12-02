@@ -38,22 +38,18 @@ func PhysicsGravitationalFieldEventDataArrayToJSArray(array []*PhysicsGravitatio
 	return result
 }
 
-/*
-
 // Sphere returns the Sphere property of class PhysicsGravitationalFieldEventData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldeventdata#sphere
-func (p *PhysicsGravitationalFieldEventData) Sphere(sphere *Mesh) *PhysicsGravitationalFieldEventData {
-	p := ba.ctx.Get("PhysicsGravitationalFieldEventData").New(sphere.JSObject())
-	return PhysicsGravitationalFieldEventDataFromJSObject(p, ba.ctx)
+func (p *PhysicsGravitationalFieldEventData) Sphere() *Mesh {
+	retVal := p.p.Get("sphere")
+	return MeshFromJSObject(retVal, p.ctx)
 }
 
 // SetSphere sets the Sphere property of class PhysicsGravitationalFieldEventData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldeventdata#sphere
 func (p *PhysicsGravitationalFieldEventData) SetSphere(sphere *Mesh) *PhysicsGravitationalFieldEventData {
-	p := ba.ctx.Get("PhysicsGravitationalFieldEventData").New(sphere.JSObject())
-	return PhysicsGravitationalFieldEventDataFromJSObject(p, ba.ctx)
+	p.p.Set("sphere", sphere.JSObject())
+	return p
 }
-
-*/

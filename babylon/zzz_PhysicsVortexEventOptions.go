@@ -38,118 +38,114 @@ func PhysicsVortexEventOptionsArrayToJSArray(array []*PhysicsVortexEventOptions)
 	return result
 }
 
-/*
-
 // CentrifugalForceMultiplier returns the CentrifugalForceMultiplier property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#centrifugalforcemultiplier
-func (p *PhysicsVortexEventOptions) CentrifugalForceMultiplier(centrifugalForceMultiplier float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(centrifugalForceMultiplier)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsVortexEventOptions) CentrifugalForceMultiplier() float64 {
+	retVal := p.p.Get("centrifugalForceMultiplier")
+	return retVal.Float()
 }
 
 // SetCentrifugalForceMultiplier sets the CentrifugalForceMultiplier property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#centrifugalforcemultiplier
 func (p *PhysicsVortexEventOptions) SetCentrifugalForceMultiplier(centrifugalForceMultiplier float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(centrifugalForceMultiplier)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("centrifugalForceMultiplier", centrifugalForceMultiplier)
+	return p
 }
 
 // CentripetalForceMultiplier returns the CentripetalForceMultiplier property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#centripetalforcemultiplier
-func (p *PhysicsVortexEventOptions) CentripetalForceMultiplier(centripetalForceMultiplier float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(centripetalForceMultiplier)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsVortexEventOptions) CentripetalForceMultiplier() float64 {
+	retVal := p.p.Get("centripetalForceMultiplier")
+	return retVal.Float()
 }
 
 // SetCentripetalForceMultiplier sets the CentripetalForceMultiplier property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#centripetalforcemultiplier
 func (p *PhysicsVortexEventOptions) SetCentripetalForceMultiplier(centripetalForceMultiplier float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(centripetalForceMultiplier)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("centripetalForceMultiplier", centripetalForceMultiplier)
+	return p
 }
 
 // CentripetalForceThreshold returns the CentripetalForceThreshold property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#centripetalforcethreshold
-func (p *PhysicsVortexEventOptions) CentripetalForceThreshold(centripetalForceThreshold float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(centripetalForceThreshold)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsVortexEventOptions) CentripetalForceThreshold() float64 {
+	retVal := p.p.Get("centripetalForceThreshold")
+	return retVal.Float()
 }
 
 // SetCentripetalForceThreshold sets the CentripetalForceThreshold property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#centripetalforcethreshold
 func (p *PhysicsVortexEventOptions) SetCentripetalForceThreshold(centripetalForceThreshold float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(centripetalForceThreshold)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("centripetalForceThreshold", centripetalForceThreshold)
+	return p
 }
 
 // Height returns the Height property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#height
-func (p *PhysicsVortexEventOptions) Height(height float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(height)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsVortexEventOptions) Height() float64 {
+	retVal := p.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#height
 func (p *PhysicsVortexEventOptions) SetHeight(height float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(height)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("height", height)
+	return p
 }
 
 // Radius returns the Radius property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#radius
-func (p *PhysicsVortexEventOptions) Radius(radius float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(radius)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsVortexEventOptions) Radius() float64 {
+	retVal := p.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#radius
 func (p *PhysicsVortexEventOptions) SetRadius(radius float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(radius)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("radius", radius)
+	return p
 }
 
 // Strength returns the Strength property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#strength
-func (p *PhysicsVortexEventOptions) Strength(strength float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(strength)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsVortexEventOptions) Strength() float64 {
+	retVal := p.p.Get("strength")
+	return retVal.Float()
 }
 
 // SetStrength sets the Strength property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#strength
 func (p *PhysicsVortexEventOptions) SetStrength(strength float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(strength)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("strength", strength)
+	return p
 }
 
 // UpdraftForceMultiplier returns the UpdraftForceMultiplier property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#updraftforcemultiplier
-func (p *PhysicsVortexEventOptions) UpdraftForceMultiplier(updraftForceMultiplier float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(updraftForceMultiplier)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+func (p *PhysicsVortexEventOptions) UpdraftForceMultiplier() float64 {
+	retVal := p.p.Get("updraftForceMultiplier")
+	return retVal.Float()
 }
 
 // SetUpdraftForceMultiplier sets the UpdraftForceMultiplier property of class PhysicsVortexEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions#updraftforcemultiplier
 func (p *PhysicsVortexEventOptions) SetUpdraftForceMultiplier(updraftForceMultiplier float64) *PhysicsVortexEventOptions {
-	p := ba.ctx.Get("PhysicsVortexEventOptions").New(updraftForceMultiplier)
-	return PhysicsVortexEventOptionsFromJSObject(p, ba.ctx)
+	p.p.Set("updraftForceMultiplier", updraftForceMultiplier)
+	return p
 }
-
-*/

@@ -36,102 +36,98 @@ func VRExperienceHelperOptionsArrayToJSArray(array []*VRExperienceHelperOptions)
 	return result
 }
 
-/*
-
 // CreateDeviceOrientationCamera returns the CreateDeviceOrientationCamera property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#createdeviceorientationcamera
-func (v *VRExperienceHelperOptions) CreateDeviceOrientationCamera(createDeviceOrientationCamera bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(createDeviceOrientationCamera)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+func (v *VRExperienceHelperOptions) CreateDeviceOrientationCamera() bool {
+	retVal := v.p.Get("createDeviceOrientationCamera")
+	return retVal.Bool()
 }
 
 // SetCreateDeviceOrientationCamera sets the CreateDeviceOrientationCamera property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#createdeviceorientationcamera
 func (v *VRExperienceHelperOptions) SetCreateDeviceOrientationCamera(createDeviceOrientationCamera bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(createDeviceOrientationCamera)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("createDeviceOrientationCamera", createDeviceOrientationCamera)
+	return v
 }
 
 // CreateFallbackVRDeviceOrientationFreeCamera returns the CreateFallbackVRDeviceOrientationFreeCamera property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#createfallbackvrdeviceorientationfreecamera
-func (v *VRExperienceHelperOptions) CreateFallbackVRDeviceOrientationFreeCamera(createFallbackVRDeviceOrientationFreeCamera bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(createFallbackVRDeviceOrientationFreeCamera)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+func (v *VRExperienceHelperOptions) CreateFallbackVRDeviceOrientationFreeCamera() bool {
+	retVal := v.p.Get("createFallbackVRDeviceOrientationFreeCamera")
+	return retVal.Bool()
 }
 
 // SetCreateFallbackVRDeviceOrientationFreeCamera sets the CreateFallbackVRDeviceOrientationFreeCamera property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#createfallbackvrdeviceorientationfreecamera
 func (v *VRExperienceHelperOptions) SetCreateFallbackVRDeviceOrientationFreeCamera(createFallbackVRDeviceOrientationFreeCamera bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(createFallbackVRDeviceOrientationFreeCamera)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("createFallbackVRDeviceOrientationFreeCamera", createFallbackVRDeviceOrientationFreeCamera)
+	return v
 }
 
 // FloorMeshes returns the FloorMeshes property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#floormeshes
-func (v *VRExperienceHelperOptions) FloorMeshes(floorMeshes *Mesh) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(floorMeshes.JSObject())
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+func (v *VRExperienceHelperOptions) FloorMeshes() *Mesh {
+	retVal := v.p.Get("floorMeshes")
+	return MeshFromJSObject(retVal, v.ctx)
 }
 
 // SetFloorMeshes sets the FloorMeshes property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#floormeshes
 func (v *VRExperienceHelperOptions) SetFloorMeshes(floorMeshes *Mesh) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(floorMeshes.JSObject())
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("floorMeshes", floorMeshes.JSObject())
+	return v
 }
 
 // LaserToggle returns the LaserToggle property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#lasertoggle
-func (v *VRExperienceHelperOptions) LaserToggle(laserToggle bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(laserToggle)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+func (v *VRExperienceHelperOptions) LaserToggle() bool {
+	retVal := v.p.Get("laserToggle")
+	return retVal.Bool()
 }
 
 // SetLaserToggle sets the LaserToggle property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#lasertoggle
 func (v *VRExperienceHelperOptions) SetLaserToggle(laserToggle bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(laserToggle)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("laserToggle", laserToggle)
+	return v
 }
 
 // UseXR returns the UseXR property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#usexr
-func (v *VRExperienceHelperOptions) UseXR(useXR bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(useXR)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+func (v *VRExperienceHelperOptions) UseXR() bool {
+	retVal := v.p.Get("useXR")
+	return retVal.Bool()
 }
 
 // SetUseXR sets the UseXR property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#usexr
 func (v *VRExperienceHelperOptions) SetUseXR(useXR bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(useXR)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("useXR", useXR)
+	return v
 }
 
 // VrDeviceOrientationCameraMetrics returns the VrDeviceOrientationCameraMetrics property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#vrdeviceorientationcamerametrics
-func (v *VRExperienceHelperOptions) VrDeviceOrientationCameraMetrics(vrDeviceOrientationCameraMetrics *VRCameraMetrics) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(vrDeviceOrientationCameraMetrics.JSObject())
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+func (v *VRExperienceHelperOptions) VrDeviceOrientationCameraMetrics() *VRCameraMetrics {
+	retVal := v.p.Get("vrDeviceOrientationCameraMetrics")
+	return VRCameraMetricsFromJSObject(retVal, v.ctx)
 }
 
 // SetVrDeviceOrientationCameraMetrics sets the VrDeviceOrientationCameraMetrics property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#vrdeviceorientationcamerametrics
 func (v *VRExperienceHelperOptions) SetVrDeviceOrientationCameraMetrics(vrDeviceOrientationCameraMetrics *VRCameraMetrics) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(vrDeviceOrientationCameraMetrics.JSObject())
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("vrDeviceOrientationCameraMetrics", vrDeviceOrientationCameraMetrics.JSObject())
+	return v
 }
-
-*/

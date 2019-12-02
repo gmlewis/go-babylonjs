@@ -37,38 +37,38 @@ func ISmartArrayLikeArrayToJSArray(array []*ISmartArrayLike) []interface{} {
 	return result
 }
 
-/*
-
 // Data returns the Data property of class ISmartArrayLike.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ismartarraylike#data
-func (i *ISmartArrayLike) Data(data []*T) *ISmartArrayLike {
-	p := ba.ctx.Get("ISmartArrayLike").New(data)
-	return ISmartArrayLikeFromJSObject(p, ba.ctx)
+func (i *ISmartArrayLike) Data() []*T {
+	retVal := i.p.Get("data")
+	result := []*T{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetData sets the Data property of class ISmartArrayLike.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ismartarraylike#data
 func (i *ISmartArrayLike) SetData(data []*T) *ISmartArrayLike {
-	p := ba.ctx.Get("ISmartArrayLike").New(data)
-	return ISmartArrayLikeFromJSObject(p, ba.ctx)
+	i.p.Set("data", data)
+	return i
 }
 
 // Length returns the Length property of class ISmartArrayLike.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ismartarraylike#length
-func (i *ISmartArrayLike) Length(length float64) *ISmartArrayLike {
-	p := ba.ctx.Get("ISmartArrayLike").New(length)
-	return ISmartArrayLikeFromJSObject(p, ba.ctx)
+func (i *ISmartArrayLike) Length() float64 {
+	retVal := i.p.Get("length")
+	return retVal.Float()
 }
 
 // SetLength sets the Length property of class ISmartArrayLike.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ismartarraylike#length
 func (i *ISmartArrayLike) SetLength(length float64) *ISmartArrayLike {
-	p := ba.ctx.Get("ISmartArrayLike").New(length)
-	return ISmartArrayLikeFromJSObject(p, ba.ctx)
+	i.p.Set("length", length)
+	return i
 }
-
-*/

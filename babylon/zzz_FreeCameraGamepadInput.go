@@ -102,86 +102,82 @@ func (f *FreeCameraGamepadInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // Camera returns the Camera property of class FreeCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#camera
-func (f *FreeCameraGamepadInput) Camera(camera *FreeCamera) *FreeCameraGamepadInput {
-	p := ba.ctx.Get("FreeCameraGamepadInput").New(camera.JSObject())
-	return FreeCameraGamepadInputFromJSObject(p, ba.ctx)
+func (f *FreeCameraGamepadInput) Camera() *FreeCamera {
+	retVal := f.p.Get("camera")
+	return FreeCameraFromJSObject(retVal, f.ctx)
 }
 
 // SetCamera sets the Camera property of class FreeCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#camera
 func (f *FreeCameraGamepadInput) SetCamera(camera *FreeCamera) *FreeCameraGamepadInput {
-	p := ba.ctx.Get("FreeCameraGamepadInput").New(camera.JSObject())
-	return FreeCameraGamepadInputFromJSObject(p, ba.ctx)
+	f.p.Set("camera", camera.JSObject())
+	return f
 }
 
 // Gamepad returns the Gamepad property of class FreeCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#gamepad
-func (f *FreeCameraGamepadInput) Gamepad(gamepad *Gamepad) *FreeCameraGamepadInput {
-	p := ba.ctx.Get("FreeCameraGamepadInput").New(gamepad.JSObject())
-	return FreeCameraGamepadInputFromJSObject(p, ba.ctx)
+func (f *FreeCameraGamepadInput) Gamepad() *Gamepad {
+	retVal := f.p.Get("gamepad")
+	return GamepadFromJSObject(retVal, f.ctx)
 }
 
 // SetGamepad sets the Gamepad property of class FreeCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#gamepad
 func (f *FreeCameraGamepadInput) SetGamepad(gamepad *Gamepad) *FreeCameraGamepadInput {
-	p := ba.ctx.Get("FreeCameraGamepadInput").New(gamepad.JSObject())
-	return FreeCameraGamepadInputFromJSObject(p, ba.ctx)
+	f.p.Set("gamepad", gamepad.JSObject())
+	return f
 }
 
 // GamepadAngularSensibility returns the GamepadAngularSensibility property of class FreeCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#gamepadangularsensibility
-func (f *FreeCameraGamepadInput) GamepadAngularSensibility(gamepadAngularSensibility float64) *FreeCameraGamepadInput {
-	p := ba.ctx.Get("FreeCameraGamepadInput").New(gamepadAngularSensibility)
-	return FreeCameraGamepadInputFromJSObject(p, ba.ctx)
+func (f *FreeCameraGamepadInput) GamepadAngularSensibility() float64 {
+	retVal := f.p.Get("gamepadAngularSensibility")
+	return retVal.Float()
 }
 
 // SetGamepadAngularSensibility sets the GamepadAngularSensibility property of class FreeCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#gamepadangularsensibility
 func (f *FreeCameraGamepadInput) SetGamepadAngularSensibility(gamepadAngularSensibility float64) *FreeCameraGamepadInput {
-	p := ba.ctx.Get("FreeCameraGamepadInput").New(gamepadAngularSensibility)
-	return FreeCameraGamepadInputFromJSObject(p, ba.ctx)
+	f.p.Set("gamepadAngularSensibility", gamepadAngularSensibility)
+	return f
 }
 
 // GamepadMoveSensibility returns the GamepadMoveSensibility property of class FreeCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#gamepadmovesensibility
-func (f *FreeCameraGamepadInput) GamepadMoveSensibility(gamepadMoveSensibility float64) *FreeCameraGamepadInput {
-	p := ba.ctx.Get("FreeCameraGamepadInput").New(gamepadMoveSensibility)
-	return FreeCameraGamepadInputFromJSObject(p, ba.ctx)
+func (f *FreeCameraGamepadInput) GamepadMoveSensibility() float64 {
+	retVal := f.p.Get("gamepadMoveSensibility")
+	return retVal.Float()
 }
 
 // SetGamepadMoveSensibility sets the GamepadMoveSensibility property of class FreeCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#gamepadmovesensibility
 func (f *FreeCameraGamepadInput) SetGamepadMoveSensibility(gamepadMoveSensibility float64) *FreeCameraGamepadInput {
-	p := ba.ctx.Get("FreeCameraGamepadInput").New(gamepadMoveSensibility)
-	return FreeCameraGamepadInputFromJSObject(p, ba.ctx)
+	f.p.Set("gamepadMoveSensibility", gamepadMoveSensibility)
+	return f
 }
 
 // InvertYAxis returns the InvertYAxis property of class FreeCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#invertyaxis
-func (f *FreeCameraGamepadInput) InvertYAxis(invertYAxis bool) *FreeCameraGamepadInput {
-	p := ba.ctx.Get("FreeCameraGamepadInput").New(invertYAxis)
-	return FreeCameraGamepadInputFromJSObject(p, ba.ctx)
+func (f *FreeCameraGamepadInput) InvertYAxis() bool {
+	retVal := f.p.Get("invertYAxis")
+	return retVal.Bool()
 }
 
 // SetInvertYAxis sets the InvertYAxis property of class FreeCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput#invertyaxis
 func (f *FreeCameraGamepadInput) SetInvertYAxis(invertYAxis bool) *FreeCameraGamepadInput {
-	p := ba.ctx.Get("FreeCameraGamepadInput").New(invertYAxis)
-	return FreeCameraGamepadInputFromJSObject(p, ba.ctx)
+	f.p.Set("invertYAxis", invertYAxis)
+	return f
 }
-
-*/

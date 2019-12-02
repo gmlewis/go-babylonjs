@@ -59,22 +59,18 @@ func (p *PredicateCondition) IsValid() bool {
 	return retVal.Bool()
 }
 
-/*
-
 // Predicate returns the Predicate property of class PredicateCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition#predicate
-func (p *PredicateCondition) Predicate(predicate func()) *PredicateCondition {
-	p := ba.ctx.Get("PredicateCondition").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {predicate(); return nil}))
-	return PredicateConditionFromJSObject(p, ba.ctx)
+func (p *PredicateCondition) Predicate() js.Value {
+	retVal := p.p.Get("predicate")
+	return retVal
 }
 
 // SetPredicate sets the Predicate property of class PredicateCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition#predicate
 func (p *PredicateCondition) SetPredicate(predicate func()) *PredicateCondition {
-	p := ba.ctx.Get("PredicateCondition").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {predicate(); return nil}))
-	return PredicateConditionFromJSObject(p, ba.ctx)
+	p.p.Set("predicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
+	return p
 }
-
-*/

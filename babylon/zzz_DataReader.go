@@ -109,38 +109,34 @@ func (d *DataReader) SkipBytes(byteLength float64) {
 	d.p.Call("skipBytes", args...)
 }
 
-/*
-
 // Buffer returns the Buffer property of class DataReader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.datareader#buffer
-func (d *DataReader) Buffer(buffer *IDataBuffer) *DataReader {
-	p := ba.ctx.Get("DataReader").New(buffer.JSObject())
-	return DataReaderFromJSObject(p, ba.ctx)
+func (d *DataReader) Buffer() *IDataBuffer {
+	retVal := d.p.Get("buffer")
+	return IDataBufferFromJSObject(retVal, d.ctx)
 }
 
 // SetBuffer sets the Buffer property of class DataReader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.datareader#buffer
 func (d *DataReader) SetBuffer(buffer *IDataBuffer) *DataReader {
-	p := ba.ctx.Get("DataReader").New(buffer.JSObject())
-	return DataReaderFromJSObject(p, ba.ctx)
+	d.p.Set("buffer", buffer.JSObject())
+	return d
 }
 
 // ByteOffset returns the ByteOffset property of class DataReader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.datareader#byteoffset
-func (d *DataReader) ByteOffset(byteOffset float64) *DataReader {
-	p := ba.ctx.Get("DataReader").New(byteOffset)
-	return DataReaderFromJSObject(p, ba.ctx)
+func (d *DataReader) ByteOffset() float64 {
+	retVal := d.p.Get("byteOffset")
+	return retVal.Float()
 }
 
 // SetByteOffset sets the ByteOffset property of class DataReader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.datareader#byteoffset
 func (d *DataReader) SetByteOffset(byteOffset float64) *DataReader {
-	p := ba.ctx.Get("DataReader").New(byteOffset)
-	return DataReaderFromJSObject(p, ba.ctx)
+	d.p.Set("byteOffset", byteOffset)
+	return d
 }
-
-*/

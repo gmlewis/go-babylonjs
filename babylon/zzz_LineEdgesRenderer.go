@@ -76,7 +76,3 @@ func (l *LineEdgesRenderer) _generateEdgesLines() {
 
 	l.p.Call("_generateEdgesLines")
 }
-
-/*
-
- */

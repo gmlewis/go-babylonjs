@@ -638,134 +638,130 @@ func (g *Geometry) UpdateVerticesDataDirectly(kind string, data []float64, offse
 	g.p.Call("updateVerticesDataDirectly", args...)
 }
 
-/*
-
 // BoundingBias returns the BoundingBias property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#boundingbias
-func (g *Geometry) BoundingBias(boundingBias *Vector2) *Geometry {
-	p := ba.ctx.Get("Geometry").New(boundingBias.JSObject())
-	return GeometryFromJSObject(p, ba.ctx)
+func (g *Geometry) BoundingBias() *Vector2 {
+	retVal := g.p.Get("boundingBias")
+	return Vector2FromJSObject(retVal, g.ctx)
 }
 
 // SetBoundingBias sets the BoundingBias property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#boundingbias
 func (g *Geometry) SetBoundingBias(boundingBias *Vector2) *Geometry {
-	p := ba.ctx.Get("Geometry").New(boundingBias.JSObject())
-	return GeometryFromJSObject(p, ba.ctx)
+	g.p.Set("boundingBias", boundingBias.JSObject())
+	return g
 }
 
 // DelayLoadState returns the DelayLoadState property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#delayloadstate
-func (g *Geometry) DelayLoadState(delayLoadState float64) *Geometry {
-	p := ba.ctx.Get("Geometry").New(delayLoadState)
-	return GeometryFromJSObject(p, ba.ctx)
+func (g *Geometry) DelayLoadState() float64 {
+	retVal := g.p.Get("delayLoadState")
+	return retVal.Float()
 }
 
 // SetDelayLoadState sets the DelayLoadState property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#delayloadstate
 func (g *Geometry) SetDelayLoadState(delayLoadState float64) *Geometry {
-	p := ba.ctx.Get("Geometry").New(delayLoadState)
-	return GeometryFromJSObject(p, ba.ctx)
+	g.p.Set("delayLoadState", delayLoadState)
+	return g
 }
 
 // DelayLoadingFile returns the DelayLoadingFile property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#delayloadingfile
-func (g *Geometry) DelayLoadingFile(delayLoadingFile string) *Geometry {
-	p := ba.ctx.Get("Geometry").New(delayLoadingFile)
-	return GeometryFromJSObject(p, ba.ctx)
+func (g *Geometry) DelayLoadingFile() string {
+	retVal := g.p.Get("delayLoadingFile")
+	return retVal.String()
 }
 
 // SetDelayLoadingFile sets the DelayLoadingFile property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#delayloadingfile
 func (g *Geometry) SetDelayLoadingFile(delayLoadingFile string) *Geometry {
-	p := ba.ctx.Get("Geometry").New(delayLoadingFile)
-	return GeometryFromJSObject(p, ba.ctx)
+	g.p.Set("delayLoadingFile", delayLoadingFile)
+	return g
 }
 
 // DoNotSerialize returns the DoNotSerialize property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#donotserialize
-func (g *Geometry) DoNotSerialize(doNotSerialize bool) *Geometry {
-	p := ba.ctx.Get("Geometry").New(doNotSerialize)
-	return GeometryFromJSObject(p, ba.ctx)
+func (g *Geometry) DoNotSerialize() bool {
+	retVal := g.p.Get("doNotSerialize")
+	return retVal.Bool()
 }
 
 // SetDoNotSerialize sets the DoNotSerialize property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#donotserialize
 func (g *Geometry) SetDoNotSerialize(doNotSerialize bool) *Geometry {
-	p := ba.ctx.Get("Geometry").New(doNotSerialize)
-	return GeometryFromJSObject(p, ba.ctx)
+	g.p.Set("doNotSerialize", doNotSerialize)
+	return g
 }
 
 // Extend returns the Extend property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#extend
-func (g *Geometry) Extend(extend js.Value) *Geometry {
-	p := ba.ctx.Get("Geometry").New(extend)
-	return GeometryFromJSObject(p, ba.ctx)
+func (g *Geometry) Extend() js.Value {
+	retVal := g.p.Get("extend")
+	return retVal
 }
 
 // SetExtend sets the Extend property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#extend
 func (g *Geometry) SetExtend(extend js.Value) *Geometry {
-	p := ba.ctx.Get("Geometry").New(extend)
-	return GeometryFromJSObject(p, ba.ctx)
+	g.p.Set("extend", extend)
+	return g
 }
 
 // Id returns the Id property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#id
-func (g *Geometry) Id(id string) *Geometry {
-	p := ba.ctx.Get("Geometry").New(id)
-	return GeometryFromJSObject(p, ba.ctx)
+func (g *Geometry) Id() string {
+	retVal := g.p.Get("id")
+	return retVal.String()
 }
 
 // SetId sets the Id property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#id
 func (g *Geometry) SetId(id string) *Geometry {
-	p := ba.ctx.Get("Geometry").New(id)
-	return GeometryFromJSObject(p, ba.ctx)
+	g.p.Set("id", id)
+	return g
 }
 
 // OnGeometryUpdated returns the OnGeometryUpdated property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#ongeometryupdated
-func (g *Geometry) OnGeometryUpdated(onGeometryUpdated func()) *Geometry {
-	p := ba.ctx.Get("Geometry").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGeometryUpdated(); return nil}))
-	return GeometryFromJSObject(p, ba.ctx)
+func (g *Geometry) OnGeometryUpdated() js.Value {
+	retVal := g.p.Get("onGeometryUpdated")
+	return retVal
 }
 
 // SetOnGeometryUpdated sets the OnGeometryUpdated property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#ongeometryupdated
 func (g *Geometry) SetOnGeometryUpdated(onGeometryUpdated func()) *Geometry {
-	p := ba.ctx.Get("Geometry").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGeometryUpdated(); return nil}))
-	return GeometryFromJSObject(p, ba.ctx)
+	g.p.Set("onGeometryUpdated", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onGeometryUpdated(); return nil }))
+	return g
 }
 
 // UniqueId returns the UniqueId property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#uniqueid
-func (g *Geometry) UniqueId(uniqueId float64) *Geometry {
-	p := ba.ctx.Get("Geometry").New(uniqueId)
-	return GeometryFromJSObject(p, ba.ctx)
+func (g *Geometry) UniqueId() float64 {
+	retVal := g.p.Get("uniqueId")
+	return retVal.Float()
 }
 
 // SetUniqueId sets the UniqueId property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#uniqueid
 func (g *Geometry) SetUniqueId(uniqueId float64) *Geometry {
-	p := ba.ctx.Get("Geometry").New(uniqueId)
-	return GeometryFromJSObject(p, ba.ctx)
+	g.p.Set("uniqueId", uniqueId)
+	return g
 }
-
-*/

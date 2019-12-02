@@ -58,134 +58,130 @@ func (c *ColorMergerBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // A returns the A property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#a
-func (c *ColorMergerBlock) A(a *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(a.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+func (c *ColorMergerBlock) A() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("a")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetA sets the A property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#a
 func (c *ColorMergerBlock) SetA(a *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(a.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+	c.p.Set("a", a.JSObject())
+	return c
 }
 
 // B returns the B property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#b
-func (c *ColorMergerBlock) B(b *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(b.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+func (c *ColorMergerBlock) B() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("b")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetB sets the B property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#b
 func (c *ColorMergerBlock) SetB(b *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(b.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+	c.p.Set("b", b.JSObject())
+	return c
 }
 
 // G returns the G property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#g
-func (c *ColorMergerBlock) G(g *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(g.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+func (c *ColorMergerBlock) G() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("g")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetG sets the G property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#g
 func (c *ColorMergerBlock) SetG(g *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(g.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+	c.p.Set("g", g.JSObject())
+	return c
 }
 
 // R returns the R property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#r
-func (c *ColorMergerBlock) R(r *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(r.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+func (c *ColorMergerBlock) R() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("r")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetR sets the R property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#r
 func (c *ColorMergerBlock) SetR(r *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(r.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+	c.p.Set("r", r.JSObject())
+	return c
 }
 
 // Rgb returns the Rgb property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgb
-func (c *ColorMergerBlock) Rgb(rgb *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(rgb.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+func (c *ColorMergerBlock) Rgb() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("rgb")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetRgb sets the Rgb property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgb
 func (c *ColorMergerBlock) SetRgb(rgb *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(rgb.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+	c.p.Set("rgb", rgb.JSObject())
+	return c
 }
 
 // RgbIn returns the RgbIn property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgbin
-func (c *ColorMergerBlock) RgbIn(rgbIn *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(rgbIn.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+func (c *ColorMergerBlock) RgbIn() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("rgbIn")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetRgbIn sets the RgbIn property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgbin
 func (c *ColorMergerBlock) SetRgbIn(rgbIn *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(rgbIn.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+	c.p.Set("rgbIn", rgbIn.JSObject())
+	return c
 }
 
 // RgbOut returns the RgbOut property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgbout
-func (c *ColorMergerBlock) RgbOut(rgbOut *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(rgbOut.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+func (c *ColorMergerBlock) RgbOut() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("rgbOut")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetRgbOut sets the RgbOut property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgbout
 func (c *ColorMergerBlock) SetRgbOut(rgbOut *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(rgbOut.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+	c.p.Set("rgbOut", rgbOut.JSObject())
+	return c
 }
 
 // Rgba returns the Rgba property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgba
-func (c *ColorMergerBlock) Rgba(rgba *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(rgba.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+func (c *ColorMergerBlock) Rgba() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("rgba")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetRgba sets the Rgba property of class ColorMergerBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgba
 func (c *ColorMergerBlock) SetRgba(rgba *NodeMaterialConnectionPoint) *ColorMergerBlock {
-	p := ba.ctx.Get("ColorMergerBlock").New(rgba.JSObject())
-	return ColorMergerBlockFromJSObject(p, ba.ctx)
+	c.p.Set("rgba", rgba.JSObject())
+	return c
 }
-
-*/

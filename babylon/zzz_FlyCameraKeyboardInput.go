@@ -102,118 +102,114 @@ func (f *FlyCameraKeyboardInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // Camera returns the Camera property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#camera
-func (f *FlyCameraKeyboardInput) Camera(camera *FlyCamera) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(camera.JSObject())
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraKeyboardInput) Camera() *FlyCamera {
+	retVal := f.p.Get("camera")
+	return FlyCameraFromJSObject(retVal, f.ctx)
 }
 
 // SetCamera sets the Camera property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#camera
 func (f *FlyCameraKeyboardInput) SetCamera(camera *FlyCamera) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(camera.JSObject())
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+	f.p.Set("camera", camera.JSObject())
+	return f
 }
 
 // KeysBackward returns the KeysBackward property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysbackward
-func (f *FlyCameraKeyboardInput) KeysBackward(keysBackward float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysBackward)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraKeyboardInput) KeysBackward() float64 {
+	retVal := f.p.Get("keysBackward")
+	return retVal.Float()
 }
 
 // SetKeysBackward sets the KeysBackward property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysbackward
 func (f *FlyCameraKeyboardInput) SetKeysBackward(keysBackward float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysBackward)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+	f.p.Set("keysBackward", keysBackward)
+	return f
 }
 
 // KeysDown returns the KeysDown property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysdown
-func (f *FlyCameraKeyboardInput) KeysDown(keysDown float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysDown)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraKeyboardInput) KeysDown() float64 {
+	retVal := f.p.Get("keysDown")
+	return retVal.Float()
 }
 
 // SetKeysDown sets the KeysDown property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysdown
 func (f *FlyCameraKeyboardInput) SetKeysDown(keysDown float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysDown)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+	f.p.Set("keysDown", keysDown)
+	return f
 }
 
 // KeysForward returns the KeysForward property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysforward
-func (f *FlyCameraKeyboardInput) KeysForward(keysForward float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysForward)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraKeyboardInput) KeysForward() float64 {
+	retVal := f.p.Get("keysForward")
+	return retVal.Float()
 }
 
 // SetKeysForward sets the KeysForward property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysforward
 func (f *FlyCameraKeyboardInput) SetKeysForward(keysForward float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysForward)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+	f.p.Set("keysForward", keysForward)
+	return f
 }
 
 // KeysLeft returns the KeysLeft property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysleft
-func (f *FlyCameraKeyboardInput) KeysLeft(keysLeft float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysLeft)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraKeyboardInput) KeysLeft() float64 {
+	retVal := f.p.Get("keysLeft")
+	return retVal.Float()
 }
 
 // SetKeysLeft sets the KeysLeft property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysleft
 func (f *FlyCameraKeyboardInput) SetKeysLeft(keysLeft float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysLeft)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+	f.p.Set("keysLeft", keysLeft)
+	return f
 }
 
 // KeysRight returns the KeysRight property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysright
-func (f *FlyCameraKeyboardInput) KeysRight(keysRight float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysRight)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraKeyboardInput) KeysRight() float64 {
+	retVal := f.p.Get("keysRight")
+	return retVal.Float()
 }
 
 // SetKeysRight sets the KeysRight property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysright
 func (f *FlyCameraKeyboardInput) SetKeysRight(keysRight float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysRight)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+	f.p.Set("keysRight", keysRight)
+	return f
 }
 
 // KeysUp returns the KeysUp property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysup
-func (f *FlyCameraKeyboardInput) KeysUp(keysUp float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysUp)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraKeyboardInput) KeysUp() float64 {
+	retVal := f.p.Get("keysUp")
+	return retVal.Float()
 }
 
 // SetKeysUp sets the KeysUp property of class FlyCameraKeyboardInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput#keysup
 func (f *FlyCameraKeyboardInput) SetKeysUp(keysUp float64) *FlyCameraKeyboardInput {
-	p := ba.ctx.Get("FlyCameraKeyboardInput").New(keysUp)
-	return FlyCameraKeyboardInputFromJSObject(p, ba.ctx)
+	f.p.Set("keysUp", keysUp)
+	return f
 }
-
-*/

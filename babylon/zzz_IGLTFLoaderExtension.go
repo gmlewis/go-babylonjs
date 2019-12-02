@@ -36,54 +36,50 @@ func IGLTFLoaderExtensionArrayToJSArray(array []*IGLTFLoaderExtension) []interfa
 	return result
 }
 
-/*
-
 // Enabled returns the Enabled property of class IGLTFLoaderExtension.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderextension#enabled
-func (i *IGLTFLoaderExtension) Enabled(enabled bool) *IGLTFLoaderExtension {
-	p := ba.ctx.Get("IGLTFLoaderExtension").New(enabled)
-	return IGLTFLoaderExtensionFromJSObject(p, ba.ctx)
+func (i *IGLTFLoaderExtension) Enabled() bool {
+	retVal := i.p.Get("enabled")
+	return retVal.Bool()
 }
 
 // SetEnabled sets the Enabled property of class IGLTFLoaderExtension.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderextension#enabled
 func (i *IGLTFLoaderExtension) SetEnabled(enabled bool) *IGLTFLoaderExtension {
-	p := ba.ctx.Get("IGLTFLoaderExtension").New(enabled)
-	return IGLTFLoaderExtensionFromJSObject(p, ba.ctx)
+	i.p.Set("enabled", enabled)
+	return i
 }
 
 // Name returns the Name property of class IGLTFLoaderExtension.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderextension#name
-func (i *IGLTFLoaderExtension) Name(name string) *IGLTFLoaderExtension {
-	p := ba.ctx.Get("IGLTFLoaderExtension").New(name)
-	return IGLTFLoaderExtensionFromJSObject(p, ba.ctx)
+func (i *IGLTFLoaderExtension) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class IGLTFLoaderExtension.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderextension#name
 func (i *IGLTFLoaderExtension) SetName(name string) *IGLTFLoaderExtension {
-	p := ba.ctx.Get("IGLTFLoaderExtension").New(name)
-	return IGLTFLoaderExtensionFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
 
 // Order returns the Order property of class IGLTFLoaderExtension.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderextension#order
-func (i *IGLTFLoaderExtension) Order(order float64) *IGLTFLoaderExtension {
-	p := ba.ctx.Get("IGLTFLoaderExtension").New(order)
-	return IGLTFLoaderExtensionFromJSObject(p, ba.ctx)
+func (i *IGLTFLoaderExtension) Order() float64 {
+	retVal := i.p.Get("order")
+	return retVal.Float()
 }
 
 // SetOrder sets the Order property of class IGLTFLoaderExtension.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfloaderextension#order
 func (i *IGLTFLoaderExtension) SetOrder(order float64) *IGLTFLoaderExtension {
-	p := ba.ctx.Get("IGLTFLoaderExtension").New(order)
-	return IGLTFLoaderExtensionFromJSObject(p, ba.ctx)
+	i.p.Set("order", order)
+	return i
 }
-
-*/

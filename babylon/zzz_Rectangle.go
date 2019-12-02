@@ -61,54 +61,50 @@ func (ba *Babylon) NewRectangle(opts *NewRectangleOpts) *Rectangle {
 	return RectangleFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // CornerRadius returns the CornerRadius property of class Rectangle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rectangle#cornerradius
-func (r *Rectangle) CornerRadius(cornerRadius float64) *Rectangle {
-	p := ba.ctx.Get("Rectangle").New(cornerRadius)
-	return RectangleFromJSObject(p, ba.ctx)
+func (r *Rectangle) CornerRadius() float64 {
+	retVal := r.p.Get("cornerRadius")
+	return retVal.Float()
 }
 
 // SetCornerRadius sets the CornerRadius property of class Rectangle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rectangle#cornerradius
 func (r *Rectangle) SetCornerRadius(cornerRadius float64) *Rectangle {
-	p := ba.ctx.Get("Rectangle").New(cornerRadius)
-	return RectangleFromJSObject(p, ba.ctx)
+	r.p.Set("cornerRadius", cornerRadius)
+	return r
 }
 
 // Name returns the Name property of class Rectangle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rectangle#name
-func (r *Rectangle) Name(name string) *Rectangle {
-	p := ba.ctx.Get("Rectangle").New(name)
-	return RectangleFromJSObject(p, ba.ctx)
+func (r *Rectangle) Name() string {
+	retVal := r.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Rectangle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rectangle#name
 func (r *Rectangle) SetName(name string) *Rectangle {
-	p := ba.ctx.Get("Rectangle").New(name)
-	return RectangleFromJSObject(p, ba.ctx)
+	r.p.Set("name", name)
+	return r
 }
 
 // Thickness returns the Thickness property of class Rectangle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rectangle#thickness
-func (r *Rectangle) Thickness(thickness float64) *Rectangle {
-	p := ba.ctx.Get("Rectangle").New(thickness)
-	return RectangleFromJSObject(p, ba.ctx)
+func (r *Rectangle) Thickness() float64 {
+	retVal := r.p.Get("thickness")
+	return retVal.Float()
 }
 
 // SetThickness sets the Thickness property of class Rectangle.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rectangle#thickness
 func (r *Rectangle) SetThickness(thickness float64) *Rectangle {
-	p := ba.ctx.Get("Rectangle").New(thickness)
-	return RectangleFromJSObject(p, ba.ctx)
+	r.p.Set("thickness", thickness)
+	return r
 }
-
-*/

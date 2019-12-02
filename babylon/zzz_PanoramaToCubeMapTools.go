@@ -51,7 +51,3 @@ func (p *PanoramaToCubeMapTools) ConvertPanoramaToCubemap(float32Array js.Value,
 	retVal := p.p.Call("ConvertPanoramaToCubemap", args...)
 	return retVal
 }
-
-/*
-
- */

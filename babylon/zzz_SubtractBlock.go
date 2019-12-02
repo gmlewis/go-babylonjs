@@ -58,54 +58,50 @@ func (s *SubtractBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Left returns the Left property of class SubtractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock#left
-func (s *SubtractBlock) Left(left *NodeMaterialConnectionPoint) *SubtractBlock {
-	p := ba.ctx.Get("SubtractBlock").New(left.JSObject())
-	return SubtractBlockFromJSObject(p, ba.ctx)
+func (s *SubtractBlock) Left() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("left")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetLeft sets the Left property of class SubtractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock#left
 func (s *SubtractBlock) SetLeft(left *NodeMaterialConnectionPoint) *SubtractBlock {
-	p := ba.ctx.Get("SubtractBlock").New(left.JSObject())
-	return SubtractBlockFromJSObject(p, ba.ctx)
+	s.p.Set("left", left.JSObject())
+	return s
 }
 
 // Output returns the Output property of class SubtractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock#output
-func (s *SubtractBlock) Output(output *NodeMaterialConnectionPoint) *SubtractBlock {
-	p := ba.ctx.Get("SubtractBlock").New(output.JSObject())
-	return SubtractBlockFromJSObject(p, ba.ctx)
+func (s *SubtractBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetOutput sets the Output property of class SubtractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock#output
 func (s *SubtractBlock) SetOutput(output *NodeMaterialConnectionPoint) *SubtractBlock {
-	p := ba.ctx.Get("SubtractBlock").New(output.JSObject())
-	return SubtractBlockFromJSObject(p, ba.ctx)
+	s.p.Set("output", output.JSObject())
+	return s
 }
 
 // Right returns the Right property of class SubtractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock#right
-func (s *SubtractBlock) Right(right *NodeMaterialConnectionPoint) *SubtractBlock {
-	p := ba.ctx.Get("SubtractBlock").New(right.JSObject())
-	return SubtractBlockFromJSObject(p, ba.ctx)
+func (s *SubtractBlock) Right() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("right")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetRight sets the Right property of class SubtractBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock#right
 func (s *SubtractBlock) SetRight(right *NodeMaterialConnectionPoint) *SubtractBlock {
-	p := ba.ctx.Get("SubtractBlock").New(right.JSObject())
-	return SubtractBlockFromJSObject(p, ba.ctx)
+	s.p.Set("right", right.JSObject())
+	return s
 }
-
-*/

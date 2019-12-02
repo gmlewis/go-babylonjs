@@ -113,54 +113,50 @@ func (a *ArcRotateCameraVRDeviceOrientationInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // AlphaCorrection returns the AlphaCorrection property of class ArcRotateCameraVRDeviceOrientationInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput#alphacorrection
-func (a *ArcRotateCameraVRDeviceOrientationInput) AlphaCorrection(alphaCorrection float64) *ArcRotateCameraVRDeviceOrientationInput {
-	p := ba.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New(alphaCorrection)
-	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraVRDeviceOrientationInput) AlphaCorrection() float64 {
+	retVal := a.p.Get("alphaCorrection")
+	return retVal.Float()
 }
 
 // SetAlphaCorrection sets the AlphaCorrection property of class ArcRotateCameraVRDeviceOrientationInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput#alphacorrection
 func (a *ArcRotateCameraVRDeviceOrientationInput) SetAlphaCorrection(alphaCorrection float64) *ArcRotateCameraVRDeviceOrientationInput {
-	p := ba.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New(alphaCorrection)
-	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p, ba.ctx)
+	a.p.Set("alphaCorrection", alphaCorrection)
+	return a
 }
 
 // Camera returns the Camera property of class ArcRotateCameraVRDeviceOrientationInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput#camera
-func (a *ArcRotateCameraVRDeviceOrientationInput) Camera(camera *ArcRotateCamera) *ArcRotateCameraVRDeviceOrientationInput {
-	p := ba.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New(camera.JSObject())
-	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraVRDeviceOrientationInput) Camera() *ArcRotateCamera {
+	retVal := a.p.Get("camera")
+	return ArcRotateCameraFromJSObject(retVal, a.ctx)
 }
 
 // SetCamera sets the Camera property of class ArcRotateCameraVRDeviceOrientationInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput#camera
 func (a *ArcRotateCameraVRDeviceOrientationInput) SetCamera(camera *ArcRotateCamera) *ArcRotateCameraVRDeviceOrientationInput {
-	p := ba.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New(camera.JSObject())
-	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p, ba.ctx)
+	a.p.Set("camera", camera.JSObject())
+	return a
 }
 
 // GammaCorrection returns the GammaCorrection property of class ArcRotateCameraVRDeviceOrientationInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput#gammacorrection
-func (a *ArcRotateCameraVRDeviceOrientationInput) GammaCorrection(gammaCorrection float64) *ArcRotateCameraVRDeviceOrientationInput {
-	p := ba.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New(gammaCorrection)
-	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraVRDeviceOrientationInput) GammaCorrection() float64 {
+	retVal := a.p.Get("gammaCorrection")
+	return retVal.Float()
 }
 
 // SetGammaCorrection sets the GammaCorrection property of class ArcRotateCameraVRDeviceOrientationInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput#gammacorrection
 func (a *ArcRotateCameraVRDeviceOrientationInput) SetGammaCorrection(gammaCorrection float64) *ArcRotateCameraVRDeviceOrientationInput {
-	p := ba.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New(gammaCorrection)
-	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p, ba.ctx)
+	a.p.Set("gammaCorrection", gammaCorrection)
+	return a
 }
-
-*/

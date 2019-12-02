@@ -91,70 +91,66 @@ func (ba *Babylon) NewChromaticAberrationPostProcess(name string, screenWidth fl
 	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // AberrationAmount returns the AberrationAmount property of class ChromaticAberrationPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#aberrationamount
-func (c *ChromaticAberrationPostProcess) AberrationAmount(aberrationAmount float64) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(aberrationAmount)
-	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
+func (c *ChromaticAberrationPostProcess) AberrationAmount() float64 {
+	retVal := c.p.Get("aberrationAmount")
+	return retVal.Float()
 }
 
 // SetAberrationAmount sets the AberrationAmount property of class ChromaticAberrationPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#aberrationamount
 func (c *ChromaticAberrationPostProcess) SetAberrationAmount(aberrationAmount float64) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(aberrationAmount)
-	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("aberrationAmount", aberrationAmount)
+	return c
 }
 
 // CenterPosition returns the CenterPosition property of class ChromaticAberrationPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#centerposition
-func (c *ChromaticAberrationPostProcess) CenterPosition(centerPosition *Vector2) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(centerPosition.JSObject())
-	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
+func (c *ChromaticAberrationPostProcess) CenterPosition() *Vector2 {
+	retVal := c.p.Get("centerPosition")
+	return Vector2FromJSObject(retVal, c.ctx)
 }
 
 // SetCenterPosition sets the CenterPosition property of class ChromaticAberrationPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#centerposition
 func (c *ChromaticAberrationPostProcess) SetCenterPosition(centerPosition *Vector2) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(centerPosition.JSObject())
-	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("centerPosition", centerPosition.JSObject())
+	return c
 }
 
 // Direction returns the Direction property of class ChromaticAberrationPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#direction
-func (c *ChromaticAberrationPostProcess) Direction(direction *Vector2) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(direction.JSObject())
-	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
+func (c *ChromaticAberrationPostProcess) Direction() *Vector2 {
+	retVal := c.p.Get("direction")
+	return Vector2FromJSObject(retVal, c.ctx)
 }
 
 // SetDirection sets the Direction property of class ChromaticAberrationPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#direction
 func (c *ChromaticAberrationPostProcess) SetDirection(direction *Vector2) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(direction.JSObject())
-	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("direction", direction.JSObject())
+	return c
 }
 
 // RadialIntensity returns the RadialIntensity property of class ChromaticAberrationPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#radialintensity
-func (c *ChromaticAberrationPostProcess) RadialIntensity(radialIntensity float64) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(radialIntensity)
-	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
+func (c *ChromaticAberrationPostProcess) RadialIntensity() float64 {
+	retVal := c.p.Get("radialIntensity")
+	return retVal.Float()
 }
 
 // SetRadialIntensity sets the RadialIntensity property of class ChromaticAberrationPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#radialintensity
 func (c *ChromaticAberrationPostProcess) SetRadialIntensity(radialIntensity float64) *ChromaticAberrationPostProcess {
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(radialIntensity)
-	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("radialIntensity", radialIntensity)
+	return c
 }
-
-*/

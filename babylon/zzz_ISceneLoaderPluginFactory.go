@@ -58,22 +58,18 @@ func (i *ISceneLoaderPluginFactory) CreatePlugin() *ISceneLoaderPlugin {
 	return ISceneLoaderPluginFromJSObject(retVal, i.ctx)
 }
 
-/*
-
 // Name returns the Name property of class ISceneLoaderPluginFactory.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginfactory#name
-func (i *ISceneLoaderPluginFactory) Name(name string) *ISceneLoaderPluginFactory {
-	p := ba.ctx.Get("ISceneLoaderPluginFactory").New(name)
-	return ISceneLoaderPluginFactoryFromJSObject(p, ba.ctx)
+func (i *ISceneLoaderPluginFactory) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ISceneLoaderPluginFactory.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginfactory#name
 func (i *ISceneLoaderPluginFactory) SetName(name string) *ISceneLoaderPluginFactory {
-	p := ba.ctx.Get("ISceneLoaderPluginFactory").New(name)
-	return ISceneLoaderPluginFactoryFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
-
-*/

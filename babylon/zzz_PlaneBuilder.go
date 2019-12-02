@@ -63,7 +63,3 @@ func (p *PlaneBuilder) CreatePlane(name string, options js.Value, opts *PlaneBui
 	retVal := p.p.Call("CreatePlane", args...)
 	return MeshFromJSObject(retVal, p.ctx)
 }
-
-/*
-
- */

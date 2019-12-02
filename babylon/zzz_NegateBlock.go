@@ -58,38 +58,34 @@ func (n *NegateBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Output returns the Output property of class NegateBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.negateblock#output
-func (n *NegateBlock) Output(output *NodeMaterialConnectionPoint) *NegateBlock {
-	p := ba.ctx.Get("NegateBlock").New(output.JSObject())
-	return NegateBlockFromJSObject(p, ba.ctx)
+func (n *NegateBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := n.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
 }
 
 // SetOutput sets the Output property of class NegateBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.negateblock#output
 func (n *NegateBlock) SetOutput(output *NodeMaterialConnectionPoint) *NegateBlock {
-	p := ba.ctx.Get("NegateBlock").New(output.JSObject())
-	return NegateBlockFromJSObject(p, ba.ctx)
+	n.p.Set("output", output.JSObject())
+	return n
 }
 
 // Value returns the Value property of class NegateBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.negateblock#value
-func (n *NegateBlock) Value(value *NodeMaterialConnectionPoint) *NegateBlock {
-	p := ba.ctx.Get("NegateBlock").New(value.JSObject())
-	return NegateBlockFromJSObject(p, ba.ctx)
+func (n *NegateBlock) Value() *NodeMaterialConnectionPoint {
+	retVal := n.p.Get("value")
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
 }
 
 // SetValue sets the Value property of class NegateBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.negateblock#value
 func (n *NegateBlock) SetValue(value *NodeMaterialConnectionPoint) *NegateBlock {
-	p := ba.ctx.Get("NegateBlock").New(value.JSObject())
-	return NegateBlockFromJSObject(p, ba.ctx)
+	n.p.Set("value", value.JSObject())
+	return n
 }
-
-*/

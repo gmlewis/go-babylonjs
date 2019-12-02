@@ -119,7 +119,3 @@ func (p *Polygon) StartingAt(x float64, y float64) *Path2 {
 	retVal := p.p.Call("StartingAt", args...)
 	return Path2FromJSObject(retVal, p.ctx)
 }
-
-/*
-
- */

@@ -115,214 +115,210 @@ func (f *FollowCamera) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // CameraAcceleration returns the CameraAcceleration property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#cameraacceleration
-func (f *FollowCamera) CameraAcceleration(cameraAcceleration float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(cameraAcceleration)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) CameraAcceleration() float64 {
+	retVal := f.p.Get("cameraAcceleration")
+	return retVal.Float()
 }
 
 // SetCameraAcceleration sets the CameraAcceleration property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#cameraacceleration
 func (f *FollowCamera) SetCameraAcceleration(cameraAcceleration float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(cameraAcceleration)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("cameraAcceleration", cameraAcceleration)
+	return f
 }
 
 // HeightOffset returns the HeightOffset property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#heightoffset
-func (f *FollowCamera) HeightOffset(heightOffset float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(heightOffset)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) HeightOffset() float64 {
+	retVal := f.p.Get("heightOffset")
+	return retVal.Float()
 }
 
 // SetHeightOffset sets the HeightOffset property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#heightoffset
 func (f *FollowCamera) SetHeightOffset(heightOffset float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(heightOffset)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("heightOffset", heightOffset)
+	return f
 }
 
 // Inputs returns the Inputs property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#inputs
-func (f *FollowCamera) Inputs(inputs *FollowCameraInputsManager) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(inputs.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) Inputs() *FollowCameraInputsManager {
+	retVal := f.p.Get("inputs")
+	return FollowCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
 // SetInputs sets the Inputs property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#inputs
 func (f *FollowCamera) SetInputs(inputs *FollowCameraInputsManager) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(inputs.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("inputs", inputs.JSObject())
+	return f
 }
 
 // LockedTarget returns the LockedTarget property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#lockedtarget
-func (f *FollowCamera) LockedTarget(lockedTarget *AbstractMesh) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(lockedTarget.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) LockedTarget() *AbstractMesh {
+	retVal := f.p.Get("lockedTarget")
+	return AbstractMeshFromJSObject(retVal, f.ctx)
 }
 
 // SetLockedTarget sets the LockedTarget property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#lockedtarget
 func (f *FollowCamera) SetLockedTarget(lockedTarget *AbstractMesh) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(lockedTarget.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("lockedTarget", lockedTarget.JSObject())
+	return f
 }
 
 // LowerHeightOffsetLimit returns the LowerHeightOffsetLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#lowerheightoffsetlimit
-func (f *FollowCamera) LowerHeightOffsetLimit(lowerHeightOffsetLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(lowerHeightOffsetLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) LowerHeightOffsetLimit() float64 {
+	retVal := f.p.Get("lowerHeightOffsetLimit")
+	return retVal.Float()
 }
 
 // SetLowerHeightOffsetLimit sets the LowerHeightOffsetLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#lowerheightoffsetlimit
 func (f *FollowCamera) SetLowerHeightOffsetLimit(lowerHeightOffsetLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(lowerHeightOffsetLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("lowerHeightOffsetLimit", lowerHeightOffsetLimit)
+	return f
 }
 
 // LowerRadiusLimit returns the LowerRadiusLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#lowerradiuslimit
-func (f *FollowCamera) LowerRadiusLimit(lowerRadiusLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(lowerRadiusLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) LowerRadiusLimit() float64 {
+	retVal := f.p.Get("lowerRadiusLimit")
+	return retVal.Float()
 }
 
 // SetLowerRadiusLimit sets the LowerRadiusLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#lowerradiuslimit
 func (f *FollowCamera) SetLowerRadiusLimit(lowerRadiusLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(lowerRadiusLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("lowerRadiusLimit", lowerRadiusLimit)
+	return f
 }
 
 // LowerRotationOffsetLimit returns the LowerRotationOffsetLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#lowerrotationoffsetlimit
-func (f *FollowCamera) LowerRotationOffsetLimit(lowerRotationOffsetLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(lowerRotationOffsetLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) LowerRotationOffsetLimit() float64 {
+	retVal := f.p.Get("lowerRotationOffsetLimit")
+	return retVal.Float()
 }
 
 // SetLowerRotationOffsetLimit sets the LowerRotationOffsetLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#lowerrotationoffsetlimit
 func (f *FollowCamera) SetLowerRotationOffsetLimit(lowerRotationOffsetLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(lowerRotationOffsetLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("lowerRotationOffsetLimit", lowerRotationOffsetLimit)
+	return f
 }
 
 // MaxCameraSpeed returns the MaxCameraSpeed property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#maxcameraspeed
-func (f *FollowCamera) MaxCameraSpeed(maxCameraSpeed float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(maxCameraSpeed)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) MaxCameraSpeed() float64 {
+	retVal := f.p.Get("maxCameraSpeed")
+	return retVal.Float()
 }
 
 // SetMaxCameraSpeed sets the MaxCameraSpeed property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#maxcameraspeed
 func (f *FollowCamera) SetMaxCameraSpeed(maxCameraSpeed float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(maxCameraSpeed)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("maxCameraSpeed", maxCameraSpeed)
+	return f
 }
 
 // Radius returns the Radius property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#radius
-func (f *FollowCamera) Radius(radius float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(radius)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) Radius() float64 {
+	retVal := f.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#radius
 func (f *FollowCamera) SetRadius(radius float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(radius)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("radius", radius)
+	return f
 }
 
 // RotationOffset returns the RotationOffset property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#rotationoffset
-func (f *FollowCamera) RotationOffset(rotationOffset float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(rotationOffset)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) RotationOffset() float64 {
+	retVal := f.p.Get("rotationOffset")
+	return retVal.Float()
 }
 
 // SetRotationOffset sets the RotationOffset property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#rotationoffset
 func (f *FollowCamera) SetRotationOffset(rotationOffset float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(rotationOffset)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("rotationOffset", rotationOffset)
+	return f
 }
 
 // UpperHeightOffsetLimit returns the UpperHeightOffsetLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#upperheightoffsetlimit
-func (f *FollowCamera) UpperHeightOffsetLimit(upperHeightOffsetLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(upperHeightOffsetLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) UpperHeightOffsetLimit() float64 {
+	retVal := f.p.Get("upperHeightOffsetLimit")
+	return retVal.Float()
 }
 
 // SetUpperHeightOffsetLimit sets the UpperHeightOffsetLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#upperheightoffsetlimit
 func (f *FollowCamera) SetUpperHeightOffsetLimit(upperHeightOffsetLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(upperHeightOffsetLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("upperHeightOffsetLimit", upperHeightOffsetLimit)
+	return f
 }
 
 // UpperRadiusLimit returns the UpperRadiusLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#upperradiuslimit
-func (f *FollowCamera) UpperRadiusLimit(upperRadiusLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(upperRadiusLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) UpperRadiusLimit() float64 {
+	retVal := f.p.Get("upperRadiusLimit")
+	return retVal.Float()
 }
 
 // SetUpperRadiusLimit sets the UpperRadiusLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#upperradiuslimit
 func (f *FollowCamera) SetUpperRadiusLimit(upperRadiusLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(upperRadiusLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("upperRadiusLimit", upperRadiusLimit)
+	return f
 }
 
 // UpperRotationOffsetLimit returns the UpperRotationOffsetLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#upperrotationoffsetlimit
-func (f *FollowCamera) UpperRotationOffsetLimit(upperRotationOffsetLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(upperRotationOffsetLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+func (f *FollowCamera) UpperRotationOffsetLimit() float64 {
+	retVal := f.p.Get("upperRotationOffsetLimit")
+	return retVal.Float()
 }
 
 // SetUpperRotationOffsetLimit sets the UpperRotationOffsetLimit property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#upperrotationoffsetlimit
 func (f *FollowCamera) SetUpperRotationOffsetLimit(upperRotationOffsetLimit float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(upperRotationOffsetLimit)
-	return FollowCameraFromJSObject(p, ba.ctx)
+	f.p.Set("upperRotationOffsetLimit", upperRotationOffsetLimit)
+	return f
 }
-
-*/

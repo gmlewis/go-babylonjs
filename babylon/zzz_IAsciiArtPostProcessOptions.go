@@ -36,70 +36,66 @@ func IAsciiArtPostProcessOptionsArrayToJSArray(array []*IAsciiArtPostProcessOpti
 	return result
 }
 
-/*
-
 // CharacterSet returns the CharacterSet property of class IAsciiArtPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasciiartpostprocessoptions#characterset
-func (i *IAsciiArtPostProcessOptions) CharacterSet(characterSet string) *IAsciiArtPostProcessOptions {
-	p := ba.ctx.Get("IAsciiArtPostProcessOptions").New(characterSet)
-	return IAsciiArtPostProcessOptionsFromJSObject(p, ba.ctx)
+func (i *IAsciiArtPostProcessOptions) CharacterSet() string {
+	retVal := i.p.Get("characterSet")
+	return retVal.String()
 }
 
 // SetCharacterSet sets the CharacterSet property of class IAsciiArtPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasciiartpostprocessoptions#characterset
 func (i *IAsciiArtPostProcessOptions) SetCharacterSet(characterSet string) *IAsciiArtPostProcessOptions {
-	p := ba.ctx.Get("IAsciiArtPostProcessOptions").New(characterSet)
-	return IAsciiArtPostProcessOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("characterSet", characterSet)
+	return i
 }
 
 // Font returns the Font property of class IAsciiArtPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasciiartpostprocessoptions#font
-func (i *IAsciiArtPostProcessOptions) Font(font string) *IAsciiArtPostProcessOptions {
-	p := ba.ctx.Get("IAsciiArtPostProcessOptions").New(font)
-	return IAsciiArtPostProcessOptionsFromJSObject(p, ba.ctx)
+func (i *IAsciiArtPostProcessOptions) Font() string {
+	retVal := i.p.Get("font")
+	return retVal.String()
 }
 
 // SetFont sets the Font property of class IAsciiArtPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasciiartpostprocessoptions#font
 func (i *IAsciiArtPostProcessOptions) SetFont(font string) *IAsciiArtPostProcessOptions {
-	p := ba.ctx.Get("IAsciiArtPostProcessOptions").New(font)
-	return IAsciiArtPostProcessOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("font", font)
+	return i
 }
 
 // MixToNormal returns the MixToNormal property of class IAsciiArtPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasciiartpostprocessoptions#mixtonormal
-func (i *IAsciiArtPostProcessOptions) MixToNormal(mixToNormal float64) *IAsciiArtPostProcessOptions {
-	p := ba.ctx.Get("IAsciiArtPostProcessOptions").New(mixToNormal)
-	return IAsciiArtPostProcessOptionsFromJSObject(p, ba.ctx)
+func (i *IAsciiArtPostProcessOptions) MixToNormal() float64 {
+	retVal := i.p.Get("mixToNormal")
+	return retVal.Float()
 }
 
 // SetMixToNormal sets the MixToNormal property of class IAsciiArtPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasciiartpostprocessoptions#mixtonormal
 func (i *IAsciiArtPostProcessOptions) SetMixToNormal(mixToNormal float64) *IAsciiArtPostProcessOptions {
-	p := ba.ctx.Get("IAsciiArtPostProcessOptions").New(mixToNormal)
-	return IAsciiArtPostProcessOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mixToNormal", mixToNormal)
+	return i
 }
 
 // MixToTile returns the MixToTile property of class IAsciiArtPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasciiartpostprocessoptions#mixtotile
-func (i *IAsciiArtPostProcessOptions) MixToTile(mixToTile float64) *IAsciiArtPostProcessOptions {
-	p := ba.ctx.Get("IAsciiArtPostProcessOptions").New(mixToTile)
-	return IAsciiArtPostProcessOptionsFromJSObject(p, ba.ctx)
+func (i *IAsciiArtPostProcessOptions) MixToTile() float64 {
+	retVal := i.p.Get("mixToTile")
+	return retVal.Float()
 }
 
 // SetMixToTile sets the MixToTile property of class IAsciiArtPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasciiartpostprocessoptions#mixtotile
 func (i *IAsciiArtPostProcessOptions) SetMixToTile(mixToTile float64) *IAsciiArtPostProcessOptions {
-	p := ba.ctx.Get("IAsciiArtPostProcessOptions").New(mixToTile)
-	return IAsciiArtPostProcessOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mixToTile", mixToTile)
+	return i
 }
-
-*/

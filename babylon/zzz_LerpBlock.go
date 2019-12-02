@@ -58,70 +58,66 @@ func (l *LerpBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Gradient returns the Gradient property of class LerpBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock#gradient
-func (l *LerpBlock) Gradient(gradient *NodeMaterialConnectionPoint) *LerpBlock {
-	p := ba.ctx.Get("LerpBlock").New(gradient.JSObject())
-	return LerpBlockFromJSObject(p, ba.ctx)
+func (l *LerpBlock) Gradient() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("gradient")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetGradient sets the Gradient property of class LerpBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock#gradient
 func (l *LerpBlock) SetGradient(gradient *NodeMaterialConnectionPoint) *LerpBlock {
-	p := ba.ctx.Get("LerpBlock").New(gradient.JSObject())
-	return LerpBlockFromJSObject(p, ba.ctx)
+	l.p.Set("gradient", gradient.JSObject())
+	return l
 }
 
 // Left returns the Left property of class LerpBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock#left
-func (l *LerpBlock) Left(left *NodeMaterialConnectionPoint) *LerpBlock {
-	p := ba.ctx.Get("LerpBlock").New(left.JSObject())
-	return LerpBlockFromJSObject(p, ba.ctx)
+func (l *LerpBlock) Left() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("left")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetLeft sets the Left property of class LerpBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock#left
 func (l *LerpBlock) SetLeft(left *NodeMaterialConnectionPoint) *LerpBlock {
-	p := ba.ctx.Get("LerpBlock").New(left.JSObject())
-	return LerpBlockFromJSObject(p, ba.ctx)
+	l.p.Set("left", left.JSObject())
+	return l
 }
 
 // Output returns the Output property of class LerpBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock#output
-func (l *LerpBlock) Output(output *NodeMaterialConnectionPoint) *LerpBlock {
-	p := ba.ctx.Get("LerpBlock").New(output.JSObject())
-	return LerpBlockFromJSObject(p, ba.ctx)
+func (l *LerpBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetOutput sets the Output property of class LerpBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock#output
 func (l *LerpBlock) SetOutput(output *NodeMaterialConnectionPoint) *LerpBlock {
-	p := ba.ctx.Get("LerpBlock").New(output.JSObject())
-	return LerpBlockFromJSObject(p, ba.ctx)
+	l.p.Set("output", output.JSObject())
+	return l
 }
 
 // Right returns the Right property of class LerpBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock#right
-func (l *LerpBlock) Right(right *NodeMaterialConnectionPoint) *LerpBlock {
-	p := ba.ctx.Get("LerpBlock").New(right.JSObject())
-	return LerpBlockFromJSObject(p, ba.ctx)
+func (l *LerpBlock) Right() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("right")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetRight sets the Right property of class LerpBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock#right
 func (l *LerpBlock) SetRight(right *NodeMaterialConnectionPoint) *LerpBlock {
-	p := ba.ctx.Get("LerpBlock").New(right.JSObject())
-	return LerpBlockFromJSObject(p, ba.ctx)
+	l.p.Set("right", right.JSObject())
+	return l
 }
-
-*/

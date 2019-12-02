@@ -124,7 +124,3 @@ func (i *IParticleEmitterType) StartPositionFunction(worldMatrix *Matrix, positi
 
 	i.p.Call("startPositionFunction", args...)
 }
-
-/*
-
- */

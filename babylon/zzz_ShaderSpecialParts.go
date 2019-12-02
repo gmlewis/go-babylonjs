@@ -47,230 +47,226 @@ func (ba *Babylon) NewShaderSpecialParts() *ShaderSpecialParts {
 	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Fragment_Before_Fog returns the Fragment_Before_Fog property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_before_fog
-func (s *ShaderSpecialParts) Fragment_Before_Fog(Fragment_Before_Fog string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Before_Fog)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Fragment_Before_Fog() string {
+	retVal := s.p.Get("Fragment_Before_Fog")
+	return retVal.String()
 }
 
 // SetFragment_Before_Fog sets the Fragment_Before_Fog property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_before_fog
 func (s *ShaderSpecialParts) SetFragment_Before_Fog(Fragment_Before_Fog string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Before_Fog)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Fragment_Before_Fog", Fragment_Before_Fog)
+	return s
 }
 
 // Fragment_Before_FragColor returns the Fragment_Before_FragColor property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_before_fragcolor
-func (s *ShaderSpecialParts) Fragment_Before_FragColor(Fragment_Before_FragColor string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Before_FragColor)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Fragment_Before_FragColor() string {
+	retVal := s.p.Get("Fragment_Before_FragColor")
+	return retVal.String()
 }
 
 // SetFragment_Before_FragColor sets the Fragment_Before_FragColor property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_before_fragcolor
 func (s *ShaderSpecialParts) SetFragment_Before_FragColor(Fragment_Before_FragColor string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Before_FragColor)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Fragment_Before_FragColor", Fragment_Before_FragColor)
+	return s
 }
 
 // Fragment_Before_Lights returns the Fragment_Before_Lights property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_before_lights
-func (s *ShaderSpecialParts) Fragment_Before_Lights(Fragment_Before_Lights string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Before_Lights)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Fragment_Before_Lights() string {
+	retVal := s.p.Get("Fragment_Before_Lights")
+	return retVal.String()
 }
 
 // SetFragment_Before_Lights sets the Fragment_Before_Lights property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_before_lights
 func (s *ShaderSpecialParts) SetFragment_Before_Lights(Fragment_Before_Lights string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Before_Lights)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Fragment_Before_Lights", Fragment_Before_Lights)
+	return s
 }
 
 // Fragment_Begin returns the Fragment_Begin property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_begin
-func (s *ShaderSpecialParts) Fragment_Begin(Fragment_Begin string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Begin)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Fragment_Begin() string {
+	retVal := s.p.Get("Fragment_Begin")
+	return retVal.String()
 }
 
 // SetFragment_Begin sets the Fragment_Begin property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_begin
 func (s *ShaderSpecialParts) SetFragment_Begin(Fragment_Begin string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Begin)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Fragment_Begin", Fragment_Begin)
+	return s
 }
 
 // Fragment_Custom_Alpha returns the Fragment_Custom_Alpha property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_custom_alpha
-func (s *ShaderSpecialParts) Fragment_Custom_Alpha(Fragment_Custom_Alpha string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Custom_Alpha)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Fragment_Custom_Alpha() string {
+	retVal := s.p.Get("Fragment_Custom_Alpha")
+	return retVal.String()
 }
 
 // SetFragment_Custom_Alpha sets the Fragment_Custom_Alpha property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_custom_alpha
 func (s *ShaderSpecialParts) SetFragment_Custom_Alpha(Fragment_Custom_Alpha string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Custom_Alpha)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Fragment_Custom_Alpha", Fragment_Custom_Alpha)
+	return s
 }
 
 // Fragment_Custom_Diffuse returns the Fragment_Custom_Diffuse property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_custom_diffuse
-func (s *ShaderSpecialParts) Fragment_Custom_Diffuse(Fragment_Custom_Diffuse string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Custom_Diffuse)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Fragment_Custom_Diffuse() string {
+	retVal := s.p.Get("Fragment_Custom_Diffuse")
+	return retVal.String()
 }
 
 // SetFragment_Custom_Diffuse sets the Fragment_Custom_Diffuse property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_custom_diffuse
 func (s *ShaderSpecialParts) SetFragment_Custom_Diffuse(Fragment_Custom_Diffuse string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Custom_Diffuse)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Fragment_Custom_Diffuse", Fragment_Custom_Diffuse)
+	return s
 }
 
 // Fragment_Definitions returns the Fragment_Definitions property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_definitions
-func (s *ShaderSpecialParts) Fragment_Definitions(Fragment_Definitions string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Definitions)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Fragment_Definitions() string {
+	retVal := s.p.Get("Fragment_Definitions")
+	return retVal.String()
 }
 
 // SetFragment_Definitions sets the Fragment_Definitions property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_definitions
 func (s *ShaderSpecialParts) SetFragment_Definitions(Fragment_Definitions string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_Definitions)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Fragment_Definitions", Fragment_Definitions)
+	return s
 }
 
 // Fragment_MainBegin returns the Fragment_MainBegin property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_mainbegin
-func (s *ShaderSpecialParts) Fragment_MainBegin(Fragment_MainBegin string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_MainBegin)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Fragment_MainBegin() string {
+	retVal := s.p.Get("Fragment_MainBegin")
+	return retVal.String()
 }
 
 // SetFragment_MainBegin sets the Fragment_MainBegin property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#fragment_mainbegin
 func (s *ShaderSpecialParts) SetFragment_MainBegin(Fragment_MainBegin string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Fragment_MainBegin)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Fragment_MainBegin", Fragment_MainBegin)
+	return s
 }
 
 // Vertex_Before_NormalUpdated returns the Vertex_Before_NormalUpdated property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_before_normalupdated
-func (s *ShaderSpecialParts) Vertex_Before_NormalUpdated(Vertex_Before_NormalUpdated string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_Before_NormalUpdated)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Vertex_Before_NormalUpdated() string {
+	retVal := s.p.Get("Vertex_Before_NormalUpdated")
+	return retVal.String()
 }
 
 // SetVertex_Before_NormalUpdated sets the Vertex_Before_NormalUpdated property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_before_normalupdated
 func (s *ShaderSpecialParts) SetVertex_Before_NormalUpdated(Vertex_Before_NormalUpdated string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_Before_NormalUpdated)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Vertex_Before_NormalUpdated", Vertex_Before_NormalUpdated)
+	return s
 }
 
 // Vertex_Before_PositionUpdated returns the Vertex_Before_PositionUpdated property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_before_positionupdated
-func (s *ShaderSpecialParts) Vertex_Before_PositionUpdated(Vertex_Before_PositionUpdated string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_Before_PositionUpdated)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Vertex_Before_PositionUpdated() string {
+	retVal := s.p.Get("Vertex_Before_PositionUpdated")
+	return retVal.String()
 }
 
 // SetVertex_Before_PositionUpdated sets the Vertex_Before_PositionUpdated property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_before_positionupdated
 func (s *ShaderSpecialParts) SetVertex_Before_PositionUpdated(Vertex_Before_PositionUpdated string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_Before_PositionUpdated)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Vertex_Before_PositionUpdated", Vertex_Before_PositionUpdated)
+	return s
 }
 
 // Vertex_Begin returns the Vertex_Begin property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_begin
-func (s *ShaderSpecialParts) Vertex_Begin(Vertex_Begin string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_Begin)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Vertex_Begin() string {
+	retVal := s.p.Get("Vertex_Begin")
+	return retVal.String()
 }
 
 // SetVertex_Begin sets the Vertex_Begin property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_begin
 func (s *ShaderSpecialParts) SetVertex_Begin(Vertex_Begin string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_Begin)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Vertex_Begin", Vertex_Begin)
+	return s
 }
 
 // Vertex_Definitions returns the Vertex_Definitions property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_definitions
-func (s *ShaderSpecialParts) Vertex_Definitions(Vertex_Definitions string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_Definitions)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Vertex_Definitions() string {
+	retVal := s.p.Get("Vertex_Definitions")
+	return retVal.String()
 }
 
 // SetVertex_Definitions sets the Vertex_Definitions property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_definitions
 func (s *ShaderSpecialParts) SetVertex_Definitions(Vertex_Definitions string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_Definitions)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Vertex_Definitions", Vertex_Definitions)
+	return s
 }
 
 // Vertex_MainBegin returns the Vertex_MainBegin property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_mainbegin
-func (s *ShaderSpecialParts) Vertex_MainBegin(Vertex_MainBegin string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_MainBegin)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Vertex_MainBegin() string {
+	retVal := s.p.Get("Vertex_MainBegin")
+	return retVal.String()
 }
 
 // SetVertex_MainBegin sets the Vertex_MainBegin property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_mainbegin
 func (s *ShaderSpecialParts) SetVertex_MainBegin(Vertex_MainBegin string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_MainBegin)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Vertex_MainBegin", Vertex_MainBegin)
+	return s
 }
 
 // Vertex_MainEnd returns the Vertex_MainEnd property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_mainend
-func (s *ShaderSpecialParts) Vertex_MainEnd(Vertex_MainEnd string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_MainEnd)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+func (s *ShaderSpecialParts) Vertex_MainEnd() string {
+	retVal := s.p.Get("Vertex_MainEnd")
+	return retVal.String()
 }
 
 // SetVertex_MainEnd sets the Vertex_MainEnd property of class ShaderSpecialParts.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#vertex_mainend
 func (s *ShaderSpecialParts) SetVertex_MainEnd(Vertex_MainEnd string) *ShaderSpecialParts {
-	p := ba.ctx.Get("ShaderSpecialParts").New(Vertex_MainEnd)
-	return ShaderSpecialPartsFromJSObject(p, ba.ctx)
+	s.p.Set("Vertex_MainEnd", Vertex_MainEnd)
+	return s
 }
-
-*/

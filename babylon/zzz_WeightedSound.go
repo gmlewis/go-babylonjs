@@ -91,102 +91,98 @@ func (w *WeightedSound) Stop() {
 	w.p.Call("stop")
 }
 
-/*
-
 // DirectionalConeInnerAngle returns the DirectionalConeInnerAngle property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#directionalconeinnerangle
-func (w *WeightedSound) DirectionalConeInnerAngle(directionalConeInnerAngle float64) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(directionalConeInnerAngle)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+func (w *WeightedSound) DirectionalConeInnerAngle() float64 {
+	retVal := w.p.Get("directionalConeInnerAngle")
+	return retVal.Float()
 }
 
 // SetDirectionalConeInnerAngle sets the DirectionalConeInnerAngle property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#directionalconeinnerangle
 func (w *WeightedSound) SetDirectionalConeInnerAngle(directionalConeInnerAngle float64) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(directionalConeInnerAngle)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+	w.p.Set("directionalConeInnerAngle", directionalConeInnerAngle)
+	return w
 }
 
 // DirectionalConeOuterAngle returns the DirectionalConeOuterAngle property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#directionalconeouterangle
-func (w *WeightedSound) DirectionalConeOuterAngle(directionalConeOuterAngle float64) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(directionalConeOuterAngle)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+func (w *WeightedSound) DirectionalConeOuterAngle() float64 {
+	retVal := w.p.Get("directionalConeOuterAngle")
+	return retVal.Float()
 }
 
 // SetDirectionalConeOuterAngle sets the DirectionalConeOuterAngle property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#directionalconeouterangle
 func (w *WeightedSound) SetDirectionalConeOuterAngle(directionalConeOuterAngle float64) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(directionalConeOuterAngle)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+	w.p.Set("directionalConeOuterAngle", directionalConeOuterAngle)
+	return w
 }
 
 // IsPaused returns the IsPaused property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#ispaused
-func (w *WeightedSound) IsPaused(isPaused bool) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(isPaused)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+func (w *WeightedSound) IsPaused() bool {
+	retVal := w.p.Get("isPaused")
+	return retVal.Bool()
 }
 
 // SetIsPaused sets the IsPaused property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#ispaused
 func (w *WeightedSound) SetIsPaused(isPaused bool) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(isPaused)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+	w.p.Set("isPaused", isPaused)
+	return w
 }
 
 // IsPlaying returns the IsPlaying property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#isplaying
-func (w *WeightedSound) IsPlaying(isPlaying bool) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(isPlaying)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+func (w *WeightedSound) IsPlaying() bool {
+	retVal := w.p.Get("isPlaying")
+	return retVal.Bool()
 }
 
 // SetIsPlaying sets the IsPlaying property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#isplaying
 func (w *WeightedSound) SetIsPlaying(isPlaying bool) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(isPlaying)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+	w.p.Set("isPlaying", isPlaying)
+	return w
 }
 
 // Loop returns the Loop property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#loop
-func (w *WeightedSound) Loop(loop bool) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(loop)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+func (w *WeightedSound) Loop() bool {
+	retVal := w.p.Get("loop")
+	return retVal.Bool()
 }
 
 // SetLoop sets the Loop property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#loop
 func (w *WeightedSound) SetLoop(loop bool) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(loop)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+	w.p.Set("loop", loop)
+	return w
 }
 
 // Volume returns the Volume property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#volume
-func (w *WeightedSound) Volume(volume float64) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(volume)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+func (w *WeightedSound) Volume() float64 {
+	retVal := w.p.Get("volume")
+	return retVal.Float()
 }
 
 // SetVolume sets the Volume property of class WeightedSound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound#volume
 func (w *WeightedSound) SetVolume(volume float64) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(volume)
-	return WeightedSoundFromJSObject(p, ba.ctx)
+	w.p.Set("volume", volume)
+	return w
 }
-
-*/

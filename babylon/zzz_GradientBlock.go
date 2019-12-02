@@ -81,54 +81,50 @@ func (g *GradientBlock) _deserialize(serializationObject interface{}, scene *Sce
 	g.p.Call("_deserialize", args...)
 }
 
-/*
-
 // ColorSteps returns the ColorSteps property of class GradientBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#colorsteps
-func (g *GradientBlock) ColorSteps(colorSteps *GradientBlockColorStep) *GradientBlock {
-	p := ba.ctx.Get("GradientBlock").New(colorSteps.JSObject())
-	return GradientBlockFromJSObject(p, ba.ctx)
+func (g *GradientBlock) ColorSteps() *GradientBlockColorStep {
+	retVal := g.p.Get("colorSteps")
+	return GradientBlockColorStepFromJSObject(retVal, g.ctx)
 }
 
 // SetColorSteps sets the ColorSteps property of class GradientBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#colorsteps
 func (g *GradientBlock) SetColorSteps(colorSteps *GradientBlockColorStep) *GradientBlock {
-	p := ba.ctx.Get("GradientBlock").New(colorSteps.JSObject())
-	return GradientBlockFromJSObject(p, ba.ctx)
+	g.p.Set("colorSteps", colorSteps.JSObject())
+	return g
 }
 
 // Gradient returns the Gradient property of class GradientBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#gradient
-func (g *GradientBlock) Gradient(gradient *NodeMaterialConnectionPoint) *GradientBlock {
-	p := ba.ctx.Get("GradientBlock").New(gradient.JSObject())
-	return GradientBlockFromJSObject(p, ba.ctx)
+func (g *GradientBlock) Gradient() *NodeMaterialConnectionPoint {
+	retVal := g.p.Get("gradient")
+	return NodeMaterialConnectionPointFromJSObject(retVal, g.ctx)
 }
 
 // SetGradient sets the Gradient property of class GradientBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#gradient
 func (g *GradientBlock) SetGradient(gradient *NodeMaterialConnectionPoint) *GradientBlock {
-	p := ba.ctx.Get("GradientBlock").New(gradient.JSObject())
-	return GradientBlockFromJSObject(p, ba.ctx)
+	g.p.Set("gradient", gradient.JSObject())
+	return g
 }
 
 // Output returns the Output property of class GradientBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#output
-func (g *GradientBlock) Output(output *NodeMaterialConnectionPoint) *GradientBlock {
-	p := ba.ctx.Get("GradientBlock").New(output.JSObject())
-	return GradientBlockFromJSObject(p, ba.ctx)
+func (g *GradientBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := g.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, g.ctx)
 }
 
 // SetOutput sets the Output property of class GradientBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#output
 func (g *GradientBlock) SetOutput(output *NodeMaterialConnectionPoint) *GradientBlock {
-	p := ba.ctx.Get("GradientBlock").New(output.JSObject())
-	return GradientBlockFromJSObject(p, ba.ctx)
+	g.p.Set("output", output.JSObject())
+	return g
 }
-
-*/

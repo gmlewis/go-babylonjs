@@ -36,38 +36,34 @@ func IDisplayChangedEventArgsArrayToJSArray(array []*IDisplayChangedEventArgs) [
 	return result
 }
 
-/*
-
 // VrDisplay returns the VrDisplay property of class IDisplayChangedEventArgs.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idisplaychangedeventargs#vrdisplay
-func (i *IDisplayChangedEventArgs) VrDisplay(vrDisplay interface{}) *IDisplayChangedEventArgs {
-	p := ba.ctx.Get("IDisplayChangedEventArgs").New(vrDisplay)
-	return IDisplayChangedEventArgsFromJSObject(p, ba.ctx)
+func (i *IDisplayChangedEventArgs) VrDisplay() interface{} {
+	retVal := i.p.Get("vrDisplay")
+	return retVal
 }
 
 // SetVrDisplay sets the VrDisplay property of class IDisplayChangedEventArgs.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idisplaychangedeventargs#vrdisplay
 func (i *IDisplayChangedEventArgs) SetVrDisplay(vrDisplay interface{}) *IDisplayChangedEventArgs {
-	p := ba.ctx.Get("IDisplayChangedEventArgs").New(vrDisplay)
-	return IDisplayChangedEventArgsFromJSObject(p, ba.ctx)
+	i.p.Set("vrDisplay", vrDisplay)
+	return i
 }
 
 // VrSupported returns the VrSupported property of class IDisplayChangedEventArgs.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idisplaychangedeventargs#vrsupported
-func (i *IDisplayChangedEventArgs) VrSupported(vrSupported bool) *IDisplayChangedEventArgs {
-	p := ba.ctx.Get("IDisplayChangedEventArgs").New(vrSupported)
-	return IDisplayChangedEventArgsFromJSObject(p, ba.ctx)
+func (i *IDisplayChangedEventArgs) VrSupported() bool {
+	retVal := i.p.Get("vrSupported")
+	return retVal.Bool()
 }
 
 // SetVrSupported sets the VrSupported property of class IDisplayChangedEventArgs.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idisplaychangedeventargs#vrsupported
 func (i *IDisplayChangedEventArgs) SetVrSupported(vrSupported bool) *IDisplayChangedEventArgs {
-	p := ba.ctx.Get("IDisplayChangedEventArgs").New(vrSupported)
-	return IDisplayChangedEventArgsFromJSObject(p, ba.ctx)
+	i.p.Set("vrSupported", vrSupported)
+	return i
 }
-
-*/

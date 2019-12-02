@@ -165,182 +165,178 @@ func (s *SpriteManager) Render() {
 	s.p.Call("render")
 }
 
-/*
-
 // CellHeight returns the CellHeight property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#cellheight
-func (s *SpriteManager) CellHeight(cellHeight float64) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(cellHeight)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) CellHeight() float64 {
+	retVal := s.p.Get("cellHeight")
+	return retVal.Float()
 }
 
 // SetCellHeight sets the CellHeight property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#cellheight
 func (s *SpriteManager) SetCellHeight(cellHeight float64) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(cellHeight)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("cellHeight", cellHeight)
+	return s
 }
 
 // CellWidth returns the CellWidth property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#cellwidth
-func (s *SpriteManager) CellWidth(cellWidth float64) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(cellWidth)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) CellWidth() float64 {
+	retVal := s.p.Get("cellWidth")
+	return retVal.Float()
 }
 
 // SetCellWidth sets the CellWidth property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#cellwidth
 func (s *SpriteManager) SetCellWidth(cellWidth float64) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(cellWidth)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("cellWidth", cellWidth)
+	return s
 }
 
 // FogEnabled returns the FogEnabled property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#fogenabled
-func (s *SpriteManager) FogEnabled(fogEnabled bool) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(fogEnabled)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) FogEnabled() bool {
+	retVal := s.p.Get("fogEnabled")
+	return retVal.Bool()
 }
 
 // SetFogEnabled sets the FogEnabled property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#fogenabled
 func (s *SpriteManager) SetFogEnabled(fogEnabled bool) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(fogEnabled)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("fogEnabled", fogEnabled)
+	return s
 }
 
 // IsPickable returns the IsPickable property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#ispickable
-func (s *SpriteManager) IsPickable(isPickable bool) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(isPickable)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) IsPickable() bool {
+	retVal := s.p.Get("isPickable")
+	return retVal.Bool()
 }
 
 // SetIsPickable sets the IsPickable property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#ispickable
 func (s *SpriteManager) SetIsPickable(isPickable bool) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(isPickable)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("isPickable", isPickable)
+	return s
 }
 
 // LayerMask returns the LayerMask property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#layermask
-func (s *SpriteManager) LayerMask(layerMask float64) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(layerMask)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) LayerMask() float64 {
+	retVal := s.p.Get("layerMask")
+	return retVal.Float()
 }
 
 // SetLayerMask sets the LayerMask property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#layermask
 func (s *SpriteManager) SetLayerMask(layerMask float64) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(layerMask)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("layerMask", layerMask)
+	return s
 }
 
 // Name returns the Name property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#name
-func (s *SpriteManager) Name(name string) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(name)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#name
 func (s *SpriteManager) SetName(name string) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(name)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
 
 // OnDispose returns the OnDispose property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#ondispose
-func (s *SpriteManager) OnDispose(onDispose func()) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) OnDispose() js.Value {
+	retVal := s.p.Get("onDispose")
+	return retVal
 }
 
 // SetOnDispose sets the OnDispose property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#ondispose
 func (s *SpriteManager) SetOnDispose(onDispose func()) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+	return s
 }
 
 // OnDisposeObservable returns the OnDisposeObservable property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#ondisposeobservable
-func (s *SpriteManager) OnDisposeObservable(onDisposeObservable *Observable) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(onDisposeObservable.JSObject())
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) OnDisposeObservable() *Observable {
+	retVal := s.p.Get("onDisposeObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnDisposeObservable sets the OnDisposeObservable property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#ondisposeobservable
 func (s *SpriteManager) SetOnDisposeObservable(onDisposeObservable *Observable) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(onDisposeObservable.JSObject())
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("onDisposeObservable", onDisposeObservable.JSObject())
+	return s
 }
 
 // RenderingGroupId returns the RenderingGroupId property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#renderinggroupid
-func (s *SpriteManager) RenderingGroupId(renderingGroupId float64) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(renderingGroupId)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) RenderingGroupId() float64 {
+	retVal := s.p.Get("renderingGroupId")
+	return retVal.Float()
 }
 
 // SetRenderingGroupId sets the RenderingGroupId property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#renderinggroupid
 func (s *SpriteManager) SetRenderingGroupId(renderingGroupId float64) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(renderingGroupId)
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("renderingGroupId", renderingGroupId)
+	return s
 }
 
 // Sprites returns the Sprites property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#sprites
-func (s *SpriteManager) Sprites(sprites *Sprite) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(sprites.JSObject())
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) Sprites() *Sprite {
+	retVal := s.p.Get("sprites")
+	return SpriteFromJSObject(retVal, s.ctx)
 }
 
 // SetSprites sets the Sprites property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#sprites
 func (s *SpriteManager) SetSprites(sprites *Sprite) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(sprites.JSObject())
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("sprites", sprites.JSObject())
+	return s
 }
 
 // Texture returns the Texture property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#texture
-func (s *SpriteManager) Texture(texture *Texture) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(texture.JSObject())
-	return SpriteManagerFromJSObject(p, ba.ctx)
+func (s *SpriteManager) Texture() *Texture {
+	retVal := s.p.Get("texture")
+	return TextureFromJSObject(retVal, s.ctx)
 }
 
 // SetTexture sets the Texture property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#texture
 func (s *SpriteManager) SetTexture(texture *Texture) *SpriteManager {
-	p := ba.ctx.Get("SpriteManager").New(texture.JSObject())
-	return SpriteManagerFromJSObject(p, ba.ctx)
+	s.p.Set("texture", texture.JSObject())
+	return s
 }
-
-*/

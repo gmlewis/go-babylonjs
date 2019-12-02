@@ -36,118 +36,126 @@ func EffectWrapperCreationOptionsArrayToJSArray(array []*EffectWrapperCreationOp
 	return result
 }
 
-/*
-
 // AttributeNames returns the AttributeNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#attributenames
-func (e *EffectWrapperCreationOptions) AttributeNames(attributeNames []string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(attributeNames)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+func (e *EffectWrapperCreationOptions) AttributeNames() []string {
+	retVal := e.p.Get("attributeNames")
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetAttributeNames sets the AttributeNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#attributenames
 func (e *EffectWrapperCreationOptions) SetAttributeNames(attributeNames []string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(attributeNames)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("attributeNames", attributeNames)
+	return e
 }
 
 // Engine returns the Engine property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#engine
-func (e *EffectWrapperCreationOptions) Engine(engine *ThinEngine) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(engine.JSObject())
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+func (e *EffectWrapperCreationOptions) Engine() *ThinEngine {
+	retVal := e.p.Get("engine")
+	return ThinEngineFromJSObject(retVal, e.ctx)
 }
 
 // SetEngine sets the Engine property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#engine
 func (e *EffectWrapperCreationOptions) SetEngine(engine *ThinEngine) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(engine.JSObject())
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("engine", engine.JSObject())
+	return e
 }
 
 // FragmentShader returns the FragmentShader property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#fragmentshader
-func (e *EffectWrapperCreationOptions) FragmentShader(fragmentShader string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(fragmentShader)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+func (e *EffectWrapperCreationOptions) FragmentShader() string {
+	retVal := e.p.Get("fragmentShader")
+	return retVal.String()
 }
 
 // SetFragmentShader sets the FragmentShader property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#fragmentshader
 func (e *EffectWrapperCreationOptions) SetFragmentShader(fragmentShader string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(fragmentShader)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("fragmentShader", fragmentShader)
+	return e
 }
 
 // Name returns the Name property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#name
-func (e *EffectWrapperCreationOptions) Name(name string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(name)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+func (e *EffectWrapperCreationOptions) Name() string {
+	retVal := e.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#name
 func (e *EffectWrapperCreationOptions) SetName(name string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(name)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("name", name)
+	return e
 }
 
 // SamplerNames returns the SamplerNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#samplernames
-func (e *EffectWrapperCreationOptions) SamplerNames(samplerNames []string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(samplerNames)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+func (e *EffectWrapperCreationOptions) SamplerNames() []string {
+	retVal := e.p.Get("samplerNames")
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetSamplerNames sets the SamplerNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#samplernames
 func (e *EffectWrapperCreationOptions) SetSamplerNames(samplerNames []string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(samplerNames)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("samplerNames", samplerNames)
+	return e
 }
 
 // UniformNames returns the UniformNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#uniformnames
-func (e *EffectWrapperCreationOptions) UniformNames(uniformNames []string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(uniformNames)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+func (e *EffectWrapperCreationOptions) UniformNames() []string {
+	retVal := e.p.Get("uniformNames")
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetUniformNames sets the UniformNames property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#uniformnames
 func (e *EffectWrapperCreationOptions) SetUniformNames(uniformNames []string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(uniformNames)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("uniformNames", uniformNames)
+	return e
 }
 
 // VertexShader returns the VertexShader property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#vertexshader
-func (e *EffectWrapperCreationOptions) VertexShader(vertexShader string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(vertexShader)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+func (e *EffectWrapperCreationOptions) VertexShader() string {
+	retVal := e.p.Get("vertexShader")
+	return retVal.String()
 }
 
 // SetVertexShader sets the VertexShader property of class EffectWrapperCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrappercreationoptions#vertexshader
 func (e *EffectWrapperCreationOptions) SetVertexShader(vertexShader string) *EffectWrapperCreationOptions {
-	p := ba.ctx.Get("EffectWrapperCreationOptions").New(vertexShader)
-	return EffectWrapperCreationOptionsFromJSObject(p, ba.ctx)
+	e.p.Set("vertexShader", vertexShader)
+	return e
 }
-
-*/

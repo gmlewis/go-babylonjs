@@ -76,7 +76,3 @@ func (ba *Babylon) NewStereoscopicInterlacePostProcess(name string, rigCameras *
 	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(args...)
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

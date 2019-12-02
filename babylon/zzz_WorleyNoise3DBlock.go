@@ -81,70 +81,66 @@ func (w *WorleyNoise3DBlock) _deserialize(serializationObject interface{}, scene
 	w.p.Call("_deserialize", args...)
 }
 
-/*
-
 // Jitter returns the Jitter property of class WorleyNoise3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#jitter
-func (w *WorleyNoise3DBlock) Jitter(jitter *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
-	p := ba.ctx.Get("WorleyNoise3DBlock").New(jitter.JSObject())
-	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+func (w *WorleyNoise3DBlock) Jitter() *NodeMaterialConnectionPoint {
+	retVal := w.p.Get("jitter")
+	return NodeMaterialConnectionPointFromJSObject(retVal, w.ctx)
 }
 
 // SetJitter sets the Jitter property of class WorleyNoise3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#jitter
 func (w *WorleyNoise3DBlock) SetJitter(jitter *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
-	p := ba.ctx.Get("WorleyNoise3DBlock").New(jitter.JSObject())
-	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+	w.p.Set("jitter", jitter.JSObject())
+	return w
 }
 
 // ManhattanDistance returns the ManhattanDistance property of class WorleyNoise3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#manhattandistance
-func (w *WorleyNoise3DBlock) ManhattanDistance(manhattanDistance bool) *WorleyNoise3DBlock {
-	p := ba.ctx.Get("WorleyNoise3DBlock").New(manhattanDistance)
-	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+func (w *WorleyNoise3DBlock) ManhattanDistance() bool {
+	retVal := w.p.Get("manhattanDistance")
+	return retVal.Bool()
 }
 
 // SetManhattanDistance sets the ManhattanDistance property of class WorleyNoise3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#manhattandistance
 func (w *WorleyNoise3DBlock) SetManhattanDistance(manhattanDistance bool) *WorleyNoise3DBlock {
-	p := ba.ctx.Get("WorleyNoise3DBlock").New(manhattanDistance)
-	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+	w.p.Set("manhattanDistance", manhattanDistance)
+	return w
 }
 
 // Output returns the Output property of class WorleyNoise3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#output
-func (w *WorleyNoise3DBlock) Output(output *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
-	p := ba.ctx.Get("WorleyNoise3DBlock").New(output.JSObject())
-	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+func (w *WorleyNoise3DBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := w.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, w.ctx)
 }
 
 // SetOutput sets the Output property of class WorleyNoise3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#output
 func (w *WorleyNoise3DBlock) SetOutput(output *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
-	p := ba.ctx.Get("WorleyNoise3DBlock").New(output.JSObject())
-	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+	w.p.Set("output", output.JSObject())
+	return w
 }
 
 // Seed returns the Seed property of class WorleyNoise3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#seed
-func (w *WorleyNoise3DBlock) Seed(seed *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
-	p := ba.ctx.Get("WorleyNoise3DBlock").New(seed.JSObject())
-	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+func (w *WorleyNoise3DBlock) Seed() *NodeMaterialConnectionPoint {
+	retVal := w.p.Get("seed")
+	return NodeMaterialConnectionPointFromJSObject(retVal, w.ctx)
 }
 
 // SetSeed sets the Seed property of class WorleyNoise3DBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#seed
 func (w *WorleyNoise3DBlock) SetSeed(seed *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
-	p := ba.ctx.Get("WorleyNoise3DBlock").New(seed.JSObject())
-	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+	w.p.Set("seed", seed.JSObject())
+	return w
 }
-
-*/

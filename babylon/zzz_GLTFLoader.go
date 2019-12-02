@@ -358,102 +358,98 @@ func (g *GLTFLoader) UnregisterExtension(name string) bool {
 	return retVal.Bool()
 }
 
-/*
-
 // BabylonScene returns the BabylonScene property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#babylonscene
-func (g *GLTFLoader) BabylonScene(babylonScene *Scene) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(babylonScene.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+func (g *GLTFLoader) BabylonScene() *Scene {
+	retVal := g.p.Get("babylonScene")
+	return SceneFromJSObject(retVal, g.ctx)
 }
 
 // SetBabylonScene sets the BabylonScene property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#babylonscene
 func (g *GLTFLoader) SetBabylonScene(babylonScene *Scene) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(babylonScene.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+	g.p.Set("babylonScene", babylonScene.JSObject())
+	return g
 }
 
 // Bin returns the Bin property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#bin
-func (g *GLTFLoader) Bin(bin *IDataBuffer) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(bin.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+func (g *GLTFLoader) Bin() *IDataBuffer {
+	retVal := g.p.Get("bin")
+	return IDataBufferFromJSObject(retVal, g.ctx)
 }
 
 // SetBin sets the Bin property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#bin
 func (g *GLTFLoader) SetBin(bin *IDataBuffer) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(bin.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+	g.p.Set("bin", bin.JSObject())
+	return g
 }
 
 // Gltf returns the Gltf property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#gltf
-func (g *GLTFLoader) Gltf(gltf *IGLTF) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(gltf.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+func (g *GLTFLoader) Gltf() *IGLTF {
+	retVal := g.p.Get("gltf")
+	return IGLTFFromJSObject(retVal, g.ctx)
 }
 
 // SetGltf sets the Gltf property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#gltf
 func (g *GLTFLoader) SetGltf(gltf *IGLTF) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(gltf.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+	g.p.Set("gltf", gltf.JSObject())
+	return g
 }
 
 // Parent returns the Parent property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#parent
-func (g *GLTFLoader) Parent(parent *GLTFFileLoader) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(parent.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+func (g *GLTFLoader) Parent() *GLTFFileLoader {
+	retVal := g.p.Get("parent")
+	return GLTFFileLoaderFromJSObject(retVal, g.ctx)
 }
 
 // SetParent sets the Parent property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#parent
 func (g *GLTFLoader) SetParent(parent *GLTFFileLoader) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(parent.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+	g.p.Set("parent", parent.JSObject())
+	return g
 }
 
 // RootBabylonMesh returns the RootBabylonMesh property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#rootbabylonmesh
-func (g *GLTFLoader) RootBabylonMesh(rootBabylonMesh *Mesh) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(rootBabylonMesh.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+func (g *GLTFLoader) RootBabylonMesh() *Mesh {
+	retVal := g.p.Get("rootBabylonMesh")
+	return MeshFromJSObject(retVal, g.ctx)
 }
 
 // SetRootBabylonMesh sets the RootBabylonMesh property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#rootbabylonmesh
 func (g *GLTFLoader) SetRootBabylonMesh(rootBabylonMesh *Mesh) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(rootBabylonMesh.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+	g.p.Set("rootBabylonMesh", rootBabylonMesh.JSObject())
+	return g
 }
 
 // State returns the State property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#state
-func (g *GLTFLoader) State(state *GLTFLoaderState) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(state.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+func (g *GLTFLoader) State() js.Value {
+	retVal := g.p.Get("state")
+	return retVal
 }
 
 // SetState sets the State property of class GLTFLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#state
-func (g *GLTFLoader) SetState(state *GLTFLoaderState) *GLTFLoader {
-	p := ba.ctx.Get("GLTFLoader").New(state.JSObject())
-	return GLTFLoaderFromJSObject(p, ba.ctx)
+func (g *GLTFLoader) SetState(state js.Value) *GLTFLoader {
+	g.p.Set("state", state)
+	return g
 }
-
-*/

@@ -2195,662 +2195,658 @@ func (m *Mesh) ValidateSkinning() js.Value {
 	return retVal
 }
 
-/*
-
 // AreNormalsFrozen returns the AreNormalsFrozen property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#arenormalsfrozen
-func (m *Mesh) AreNormalsFrozen(areNormalsFrozen bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(areNormalsFrozen)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) AreNormalsFrozen() bool {
+	retVal := m.p.Get("areNormalsFrozen")
+	return retVal.Bool()
 }
 
 // SetAreNormalsFrozen sets the AreNormalsFrozen property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#arenormalsfrozen
 func (m *Mesh) SetAreNormalsFrozen(areNormalsFrozen bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(areNormalsFrozen)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("areNormalsFrozen", areNormalsFrozen)
+	return m
 }
 
 // BACKSIDE returns the BACKSIDE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#backside
-func (m *Mesh) BACKSIDE(BACKSIDE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(BACKSIDE)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) BACKSIDE() float64 {
+	retVal := m.p.Get("BACKSIDE")
+	return retVal.Float()
 }
 
 // SetBACKSIDE sets the BACKSIDE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#backside
 func (m *Mesh) SetBACKSIDE(BACKSIDE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(BACKSIDE)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("BACKSIDE", BACKSIDE)
+	return m
 }
 
 // BOTTOM returns the BOTTOM property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#bottom
-func (m *Mesh) BOTTOM(BOTTOM float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(BOTTOM)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) BOTTOM() float64 {
+	retVal := m.p.Get("BOTTOM")
+	return retVal.Float()
 }
 
 // SetBOTTOM sets the BOTTOM property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#bottom
 func (m *Mesh) SetBOTTOM(BOTTOM float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(BOTTOM)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("BOTTOM", BOTTOM)
+	return m
 }
 
 // CAP_ALL returns the CAP_ALL property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#cap_all
-func (m *Mesh) CAP_ALL(CAP_ALL float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(CAP_ALL)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) CAP_ALL() float64 {
+	retVal := m.p.Get("CAP_ALL")
+	return retVal.Float()
 }
 
 // SetCAP_ALL sets the CAP_ALL property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#cap_all
 func (m *Mesh) SetCAP_ALL(CAP_ALL float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(CAP_ALL)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("CAP_ALL", CAP_ALL)
+	return m
 }
 
 // CAP_END returns the CAP_END property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#cap_end
-func (m *Mesh) CAP_END(CAP_END float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(CAP_END)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) CAP_END() float64 {
+	retVal := m.p.Get("CAP_END")
+	return retVal.Float()
 }
 
 // SetCAP_END sets the CAP_END property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#cap_end
 func (m *Mesh) SetCAP_END(CAP_END float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(CAP_END)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("CAP_END", CAP_END)
+	return m
 }
 
 // CAP_START returns the CAP_START property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#cap_start
-func (m *Mesh) CAP_START(CAP_START float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(CAP_START)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) CAP_START() float64 {
+	retVal := m.p.Get("CAP_START")
+	return retVal.Float()
 }
 
 // SetCAP_START sets the CAP_START property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#cap_start
 func (m *Mesh) SetCAP_START(CAP_START float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(CAP_START)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("CAP_START", CAP_START)
+	return m
 }
 
 // CENTER returns the CENTER property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#center
-func (m *Mesh) CENTER(CENTER float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(CENTER)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) CENTER() float64 {
+	retVal := m.p.Get("CENTER")
+	return retVal.Float()
 }
 
 // SetCENTER sets the CENTER property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#center
 func (m *Mesh) SetCENTER(CENTER float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(CENTER)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("CENTER", CENTER)
+	return m
 }
 
 // DEFAULTSIDE returns the DEFAULTSIDE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#defaultside
-func (m *Mesh) DEFAULTSIDE(DEFAULTSIDE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(DEFAULTSIDE)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) DEFAULTSIDE() float64 {
+	retVal := m.p.Get("DEFAULTSIDE")
+	return retVal.Float()
 }
 
 // SetDEFAULTSIDE sets the DEFAULTSIDE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#defaultside
 func (m *Mesh) SetDEFAULTSIDE(DEFAULTSIDE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(DEFAULTSIDE)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("DEFAULTSIDE", DEFAULTSIDE)
+	return m
 }
 
 // DOUBLESIDE returns the DOUBLESIDE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#doubleside
-func (m *Mesh) DOUBLESIDE(DOUBLESIDE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(DOUBLESIDE)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) DOUBLESIDE() float64 {
+	retVal := m.p.Get("DOUBLESIDE")
+	return retVal.Float()
 }
 
 // SetDOUBLESIDE sets the DOUBLESIDE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#doubleside
 func (m *Mesh) SetDOUBLESIDE(DOUBLESIDE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(DOUBLESIDE)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("DOUBLESIDE", DOUBLESIDE)
+	return m
 }
 
 // DelayLoadState returns the DelayLoadState property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#delayloadstate
-func (m *Mesh) DelayLoadState(delayLoadState float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(delayLoadState)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) DelayLoadState() float64 {
+	retVal := m.p.Get("delayLoadState")
+	return retVal.Float()
 }
 
 // SetDelayLoadState sets the DelayLoadState property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#delayloadstate
 func (m *Mesh) SetDelayLoadState(delayLoadState float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(delayLoadState)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("delayLoadState", delayLoadState)
+	return m
 }
 
 // DelayLoadingFile returns the DelayLoadingFile property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#delayloadingfile
-func (m *Mesh) DelayLoadingFile(delayLoadingFile string) *Mesh {
-	p := ba.ctx.Get("Mesh").New(delayLoadingFile)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) DelayLoadingFile() string {
+	retVal := m.p.Get("delayLoadingFile")
+	return retVal.String()
 }
 
 // SetDelayLoadingFile sets the DelayLoadingFile property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#delayloadingfile
 func (m *Mesh) SetDelayLoadingFile(delayLoadingFile string) *Mesh {
-	p := ba.ctx.Get("Mesh").New(delayLoadingFile)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("delayLoadingFile", delayLoadingFile)
+	return m
 }
 
 // FLIP_N_ROTATE_ROW returns the FLIP_N_ROTATE_ROW property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#flip_n_rotate_row
-func (m *Mesh) FLIP_N_ROTATE_ROW(FLIP_N_ROTATE_ROW float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(FLIP_N_ROTATE_ROW)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) FLIP_N_ROTATE_ROW() float64 {
+	retVal := m.p.Get("FLIP_N_ROTATE_ROW")
+	return retVal.Float()
 }
 
 // SetFLIP_N_ROTATE_ROW sets the FLIP_N_ROTATE_ROW property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#flip_n_rotate_row
 func (m *Mesh) SetFLIP_N_ROTATE_ROW(FLIP_N_ROTATE_ROW float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(FLIP_N_ROTATE_ROW)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("FLIP_N_ROTATE_ROW", FLIP_N_ROTATE_ROW)
+	return m
 }
 
 // FLIP_N_ROTATE_TILE returns the FLIP_N_ROTATE_TILE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#flip_n_rotate_tile
-func (m *Mesh) FLIP_N_ROTATE_TILE(FLIP_N_ROTATE_TILE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(FLIP_N_ROTATE_TILE)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) FLIP_N_ROTATE_TILE() float64 {
+	retVal := m.p.Get("FLIP_N_ROTATE_TILE")
+	return retVal.Float()
 }
 
 // SetFLIP_N_ROTATE_TILE sets the FLIP_N_ROTATE_TILE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#flip_n_rotate_tile
 func (m *Mesh) SetFLIP_N_ROTATE_TILE(FLIP_N_ROTATE_TILE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(FLIP_N_ROTATE_TILE)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("FLIP_N_ROTATE_TILE", FLIP_N_ROTATE_TILE)
+	return m
 }
 
 // FLIP_ROW returns the FLIP_ROW property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#flip_row
-func (m *Mesh) FLIP_ROW(FLIP_ROW float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(FLIP_ROW)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) FLIP_ROW() float64 {
+	retVal := m.p.Get("FLIP_ROW")
+	return retVal.Float()
 }
 
 // SetFLIP_ROW sets the FLIP_ROW property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#flip_row
 func (m *Mesh) SetFLIP_ROW(FLIP_ROW float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(FLIP_ROW)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("FLIP_ROW", FLIP_ROW)
+	return m
 }
 
 // FLIP_TILE returns the FLIP_TILE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#flip_tile
-func (m *Mesh) FLIP_TILE(FLIP_TILE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(FLIP_TILE)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) FLIP_TILE() float64 {
+	retVal := m.p.Get("FLIP_TILE")
+	return retVal.Float()
 }
 
 // SetFLIP_TILE sets the FLIP_TILE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#flip_tile
 func (m *Mesh) SetFLIP_TILE(FLIP_TILE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(FLIP_TILE)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("FLIP_TILE", FLIP_TILE)
+	return m
 }
 
 // FRONTSIDE returns the FRONTSIDE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#frontside
-func (m *Mesh) FRONTSIDE(FRONTSIDE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(FRONTSIDE)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) FRONTSIDE() float64 {
+	retVal := m.p.Get("FRONTSIDE")
+	return retVal.Float()
 }
 
 // SetFRONTSIDE sets the FRONTSIDE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#frontside
 func (m *Mesh) SetFRONTSIDE(FRONTSIDE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(FRONTSIDE)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("FRONTSIDE", FRONTSIDE)
+	return m
 }
 
 // Geometry returns the Geometry property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#geometry
-func (m *Mesh) Geometry(geometry *Geometry) *Mesh {
-	p := ba.ctx.Get("Mesh").New(geometry.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) Geometry() *Geometry {
+	retVal := m.p.Get("geometry")
+	return GeometryFromJSObject(retVal, m.ctx)
 }
 
 // SetGeometry sets the Geometry property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#geometry
 func (m *Mesh) SetGeometry(geometry *Geometry) *Mesh {
-	p := ba.ctx.Get("Mesh").New(geometry.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("geometry", geometry.JSObject())
+	return m
 }
 
 // HasInstances returns the HasInstances property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#hasinstances
-func (m *Mesh) HasInstances(hasInstances bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(hasInstances)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) HasInstances() bool {
+	retVal := m.p.Get("hasInstances")
+	return retVal.Bool()
 }
 
 // SetHasInstances sets the HasInstances property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#hasinstances
 func (m *Mesh) SetHasInstances(hasInstances bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(hasInstances)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("hasInstances", hasInstances)
+	return m
 }
 
 // HasLODLevels returns the HasLODLevels property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#haslodlevels
-func (m *Mesh) HasLODLevels(hasLODLevels bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(hasLODLevels)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) HasLODLevels() bool {
+	retVal := m.p.Get("hasLODLevels")
+	return retVal.Bool()
 }
 
 // SetHasLODLevels sets the HasLODLevels property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#haslodlevels
 func (m *Mesh) SetHasLODLevels(hasLODLevels bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(hasLODLevels)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("hasLODLevels", hasLODLevels)
+	return m
 }
 
 // Instances returns the Instances property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#instances
-func (m *Mesh) Instances(instances *InstancedMesh) *Mesh {
-	p := ba.ctx.Get("Mesh").New(instances.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) Instances() *InstancedMesh {
+	retVal := m.p.Get("instances")
+	return InstancedMeshFromJSObject(retVal, m.ctx)
 }
 
 // SetInstances sets the Instances property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#instances
 func (m *Mesh) SetInstances(instances *InstancedMesh) *Mesh {
-	p := ba.ctx.Get("Mesh").New(instances.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("instances", instances.JSObject())
+	return m
 }
 
 // IsBlocked returns the IsBlocked property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#isblocked
-func (m *Mesh) IsBlocked(isBlocked bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(isBlocked)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) IsBlocked() bool {
+	retVal := m.p.Get("isBlocked")
+	return retVal.Bool()
 }
 
 // SetIsBlocked sets the IsBlocked property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#isblocked
 func (m *Mesh) SetIsBlocked(isBlocked bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(isBlocked)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("isBlocked", isBlocked)
+	return m
 }
 
 // IsUnIndexed returns the IsUnIndexed property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#isunindexed
-func (m *Mesh) IsUnIndexed(isUnIndexed bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(isUnIndexed)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) IsUnIndexed() bool {
+	retVal := m.p.Get("isUnIndexed")
+	return retVal.Bool()
 }
 
 // SetIsUnIndexed sets the IsUnIndexed property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#isunindexed
 func (m *Mesh) SetIsUnIndexed(isUnIndexed bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(isUnIndexed)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("isUnIndexed", isUnIndexed)
+	return m
 }
 
 // LEFT returns the LEFT property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#left
-func (m *Mesh) LEFT(LEFT float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(LEFT)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) LEFT() float64 {
+	retVal := m.p.Get("LEFT")
+	return retVal.Float()
 }
 
 // SetLEFT sets the LEFT property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#left
 func (m *Mesh) SetLEFT(LEFT float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(LEFT)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("LEFT", LEFT)
+	return m
 }
 
 // ManualUpdateOfWorldMatrixInstancedBuffer returns the ManualUpdateOfWorldMatrixInstancedBuffer property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#manualupdateofworldmatrixinstancedbuffer
-func (m *Mesh) ManualUpdateOfWorldMatrixInstancedBuffer(manualUpdateOfWorldMatrixInstancedBuffer bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(manualUpdateOfWorldMatrixInstancedBuffer)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) ManualUpdateOfWorldMatrixInstancedBuffer() bool {
+	retVal := m.p.Get("manualUpdateOfWorldMatrixInstancedBuffer")
+	return retVal.Bool()
 }
 
 // SetManualUpdateOfWorldMatrixInstancedBuffer sets the ManualUpdateOfWorldMatrixInstancedBuffer property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#manualupdateofworldmatrixinstancedbuffer
 func (m *Mesh) SetManualUpdateOfWorldMatrixInstancedBuffer(manualUpdateOfWorldMatrixInstancedBuffer bool) *Mesh {
-	p := ba.ctx.Get("Mesh").New(manualUpdateOfWorldMatrixInstancedBuffer)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("manualUpdateOfWorldMatrixInstancedBuffer", manualUpdateOfWorldMatrixInstancedBuffer)
+	return m
 }
 
 // MorphTargetManager returns the MorphTargetManager property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#morphtargetmanager
-func (m *Mesh) MorphTargetManager(morphTargetManager *MorphTargetManager) *Mesh {
-	p := ba.ctx.Get("Mesh").New(morphTargetManager.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) MorphTargetManager() *MorphTargetManager {
+	retVal := m.p.Get("morphTargetManager")
+	return MorphTargetManagerFromJSObject(retVal, m.ctx)
 }
 
 // SetMorphTargetManager sets the MorphTargetManager property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#morphtargetmanager
 func (m *Mesh) SetMorphTargetManager(morphTargetManager *MorphTargetManager) *Mesh {
-	p := ba.ctx.Get("Mesh").New(morphTargetManager.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("morphTargetManager", morphTargetManager.JSObject())
+	return m
 }
 
 // NO_CAP returns the NO_CAP property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#no_cap
-func (m *Mesh) NO_CAP(NO_CAP float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(NO_CAP)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) NO_CAP() float64 {
+	retVal := m.p.Get("NO_CAP")
+	return retVal.Float()
 }
 
 // SetNO_CAP sets the NO_CAP property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#no_cap
 func (m *Mesh) SetNO_CAP(NO_CAP float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(NO_CAP)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("NO_CAP", NO_CAP)
+	return m
 }
 
 // NO_FLIP returns the NO_FLIP property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#no_flip
-func (m *Mesh) NO_FLIP(NO_FLIP float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(NO_FLIP)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) NO_FLIP() float64 {
+	retVal := m.p.Get("NO_FLIP")
+	return retVal.Float()
 }
 
 // SetNO_FLIP sets the NO_FLIP property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#no_flip
 func (m *Mesh) SetNO_FLIP(NO_FLIP float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(NO_FLIP)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("NO_FLIP", NO_FLIP)
+	return m
 }
 
 // OnAfterRenderObservable returns the OnAfterRenderObservable property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onafterrenderobservable
-func (m *Mesh) OnAfterRenderObservable(onAfterRenderObservable *Observable) *Mesh {
-	p := ba.ctx.Get("Mesh").New(onAfterRenderObservable.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) OnAfterRenderObservable() *Observable {
+	retVal := m.p.Get("onAfterRenderObservable")
+	return ObservableFromJSObject(retVal, m.ctx)
 }
 
 // SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onafterrenderobservable
 func (m *Mesh) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *Mesh {
-	p := ba.ctx.Get("Mesh").New(onAfterRenderObservable.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("onAfterRenderObservable", onAfterRenderObservable.JSObject())
+	return m
 }
 
 // OnBeforeBindObservable returns the OnBeforeBindObservable property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onbeforebindobservable
-func (m *Mesh) OnBeforeBindObservable(onBeforeBindObservable *Observable) *Mesh {
-	p := ba.ctx.Get("Mesh").New(onBeforeBindObservable.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) OnBeforeBindObservable() *Observable {
+	retVal := m.p.Get("onBeforeBindObservable")
+	return ObservableFromJSObject(retVal, m.ctx)
 }
 
 // SetOnBeforeBindObservable sets the OnBeforeBindObservable property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onbeforebindobservable
 func (m *Mesh) SetOnBeforeBindObservable(onBeforeBindObservable *Observable) *Mesh {
-	p := ba.ctx.Get("Mesh").New(onBeforeBindObservable.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("onBeforeBindObservable", onBeforeBindObservable.JSObject())
+	return m
 }
 
 // OnBeforeDraw returns the OnBeforeDraw property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onbeforedraw
-func (m *Mesh) OnBeforeDraw(onBeforeDraw func()) *Mesh {
-	p := ba.ctx.Get("Mesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeDraw(); return nil}))
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) OnBeforeDraw() js.Value {
+	retVal := m.p.Get("onBeforeDraw")
+	return retVal
 }
 
 // SetOnBeforeDraw sets the OnBeforeDraw property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onbeforedraw
 func (m *Mesh) SetOnBeforeDraw(onBeforeDraw func()) *Mesh {
-	p := ba.ctx.Get("Mesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeDraw(); return nil}))
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("onBeforeDraw", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onBeforeDraw(); return nil }))
+	return m
 }
 
 // OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onbeforedrawobservable
-func (m *Mesh) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Mesh {
-	p := ba.ctx.Get("Mesh").New(onBeforeDrawObservable.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) OnBeforeDrawObservable() *Observable {
+	retVal := m.p.Get("onBeforeDrawObservable")
+	return ObservableFromJSObject(retVal, m.ctx)
 }
 
 // SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onbeforedrawobservable
 func (m *Mesh) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Mesh {
-	p := ba.ctx.Get("Mesh").New(onBeforeDrawObservable.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("onBeforeDrawObservable", onBeforeDrawObservable.JSObject())
+	return m
 }
 
 // OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onbeforerenderobservable
-func (m *Mesh) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *Mesh {
-	p := ba.ctx.Get("Mesh").New(onBeforeRenderObservable.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) OnBeforeRenderObservable() *Observable {
+	retVal := m.p.Get("onBeforeRenderObservable")
+	return ObservableFromJSObject(retVal, m.ctx)
 }
 
 // SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onbeforerenderobservable
 func (m *Mesh) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *Mesh {
-	p := ba.ctx.Get("Mesh").New(onBeforeRenderObservable.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("onBeforeRenderObservable", onBeforeRenderObservable.JSObject())
+	return m
 }
 
 // OnLODLevelSelection returns the OnLODLevelSelection property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onlodlevelselection
-func (m *Mesh) OnLODLevelSelection(onLODLevelSelection func()) *Mesh {
-	p := ba.ctx.Get("Mesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onLODLevelSelection(); return nil}))
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) OnLODLevelSelection() js.Value {
+	retVal := m.p.Get("onLODLevelSelection")
+	return retVal
 }
 
 // SetOnLODLevelSelection sets the OnLODLevelSelection property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onlodlevelselection
 func (m *Mesh) SetOnLODLevelSelection(onLODLevelSelection func()) *Mesh {
-	p := ba.ctx.Get("Mesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onLODLevelSelection(); return nil}))
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("onLODLevelSelection", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLODLevelSelection(); return nil }))
+	return m
 }
 
 // OverrideMaterialSideOrientation returns the OverrideMaterialSideOrientation property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#overridematerialsideorientation
-func (m *Mesh) OverrideMaterialSideOrientation(overrideMaterialSideOrientation float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(overrideMaterialSideOrientation)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) OverrideMaterialSideOrientation() float64 {
+	retVal := m.p.Get("overrideMaterialSideOrientation")
+	return retVal.Float()
 }
 
 // SetOverrideMaterialSideOrientation sets the OverrideMaterialSideOrientation property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#overridematerialsideorientation
 func (m *Mesh) SetOverrideMaterialSideOrientation(overrideMaterialSideOrientation float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(overrideMaterialSideOrientation)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("overrideMaterialSideOrientation", overrideMaterialSideOrientation)
+	return m
 }
 
 // OverridenInstanceCount returns the OverridenInstanceCount property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#overrideninstancecount
-func (m *Mesh) OverridenInstanceCount(overridenInstanceCount float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(overridenInstanceCount)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) OverridenInstanceCount() float64 {
+	retVal := m.p.Get("overridenInstanceCount")
+	return retVal.Float()
 }
 
 // SetOverridenInstanceCount sets the OverridenInstanceCount property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#overrideninstancecount
 func (m *Mesh) SetOverridenInstanceCount(overridenInstanceCount float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(overridenInstanceCount)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("overridenInstanceCount", overridenInstanceCount)
+	return m
 }
 
 // RIGHT returns the RIGHT property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#right
-func (m *Mesh) RIGHT(RIGHT float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(RIGHT)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) RIGHT() float64 {
+	retVal := m.p.Get("RIGHT")
+	return retVal.Float()
 }
 
 // SetRIGHT sets the RIGHT property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#right
 func (m *Mesh) SetRIGHT(RIGHT float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(RIGHT)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("RIGHT", RIGHT)
+	return m
 }
 
 // ROTATE_ROW returns the ROTATE_ROW property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#rotate_row
-func (m *Mesh) ROTATE_ROW(ROTATE_ROW float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(ROTATE_ROW)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) ROTATE_ROW() float64 {
+	retVal := m.p.Get("ROTATE_ROW")
+	return retVal.Float()
 }
 
 // SetROTATE_ROW sets the ROTATE_ROW property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#rotate_row
 func (m *Mesh) SetROTATE_ROW(ROTATE_ROW float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(ROTATE_ROW)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("ROTATE_ROW", ROTATE_ROW)
+	return m
 }
 
 // ROTATE_TILE returns the ROTATE_TILE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#rotate_tile
-func (m *Mesh) ROTATE_TILE(ROTATE_TILE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(ROTATE_TILE)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) ROTATE_TILE() float64 {
+	retVal := m.p.Get("ROTATE_TILE")
+	return retVal.Float()
 }
 
 // SetROTATE_TILE sets the ROTATE_TILE property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#rotate_tile
 func (m *Mesh) SetROTATE_TILE(ROTATE_TILE float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(ROTATE_TILE)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("ROTATE_TILE", ROTATE_TILE)
+	return m
 }
 
 // Source returns the Source property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#source
-func (m *Mesh) Source(source *Mesh) *Mesh {
-	p := ba.ctx.Get("Mesh").New(source.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) Source() *Mesh {
+	retVal := m.p.Get("source")
+	return MeshFromJSObject(retVal, m.ctx)
 }
 
 // SetSource sets the Source property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#source
 func (m *Mesh) SetSource(source *Mesh) *Mesh {
-	p := ba.ctx.Get("Mesh").New(source.JSObject())
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("source", source.JSObject())
+	return m
 }
 
 // TOP returns the TOP property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#top
-func (m *Mesh) TOP(TOP float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(TOP)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) TOP() float64 {
+	retVal := m.p.Get("TOP")
+	return retVal.Float()
 }
 
 // SetTOP sets the TOP property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#top
 func (m *Mesh) SetTOP(TOP float64) *Mesh {
-	p := ba.ctx.Get("Mesh").New(TOP)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("TOP", TOP)
+	return m
 }
 
 // WorldMatrixInstancedBuffer returns the WorldMatrixInstancedBuffer property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#worldmatrixinstancedbuffer
-func (m *Mesh) WorldMatrixInstancedBuffer(worldMatrixInstancedBuffer js.Value) *Mesh {
-	p := ba.ctx.Get("Mesh").New(worldMatrixInstancedBuffer)
-	return MeshFromJSObject(p, ba.ctx)
+func (m *Mesh) WorldMatrixInstancedBuffer() js.Value {
+	retVal := m.p.Get("worldMatrixInstancedBuffer")
+	return retVal
 }
 
 // SetWorldMatrixInstancedBuffer sets the WorldMatrixInstancedBuffer property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#worldmatrixinstancedbuffer
 func (m *Mesh) SetWorldMatrixInstancedBuffer(worldMatrixInstancedBuffer js.Value) *Mesh {
-	p := ba.ctx.Get("Mesh").New(worldMatrixInstancedBuffer)
-	return MeshFromJSObject(p, ba.ctx)
+	m.p.Set("worldMatrixInstancedBuffer", worldMatrixInstancedBuffer)
+	return m
 }
-
-*/

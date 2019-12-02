@@ -214,86 +214,82 @@ func (l *LinesMesh) IsReady() bool {
 	return retVal.Bool()
 }
 
-/*
-
 // Alpha returns the Alpha property of class LinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#alpha
-func (l *LinesMesh) Alpha(alpha float64) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(alpha)
-	return LinesMeshFromJSObject(p, ba.ctx)
+func (l *LinesMesh) Alpha() float64 {
+	retVal := l.p.Get("alpha")
+	return retVal.Float()
 }
 
 // SetAlpha sets the Alpha property of class LinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#alpha
 func (l *LinesMesh) SetAlpha(alpha float64) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(alpha)
-	return LinesMeshFromJSObject(p, ba.ctx)
+	l.p.Set("alpha", alpha)
+	return l
 }
 
 // Color returns the Color property of class LinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#color
-func (l *LinesMesh) Color(color *Color3) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(color.JSObject())
-	return LinesMeshFromJSObject(p, ba.ctx)
+func (l *LinesMesh) Color() *Color3 {
+	retVal := l.p.Get("color")
+	return Color3FromJSObject(retVal, l.ctx)
 }
 
 // SetColor sets the Color property of class LinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#color
 func (l *LinesMesh) SetColor(color *Color3) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(color.JSObject())
-	return LinesMeshFromJSObject(p, ba.ctx)
+	l.p.Set("color", color.JSObject())
+	return l
 }
 
 // IntersectionThreshold returns the IntersectionThreshold property of class LinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#intersectionthreshold
-func (l *LinesMesh) IntersectionThreshold(intersectionThreshold float64) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(intersectionThreshold)
-	return LinesMeshFromJSObject(p, ba.ctx)
+func (l *LinesMesh) IntersectionThreshold() float64 {
+	retVal := l.p.Get("intersectionThreshold")
+	return retVal.Float()
 }
 
 // SetIntersectionThreshold sets the IntersectionThreshold property of class LinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#intersectionthreshold
 func (l *LinesMesh) SetIntersectionThreshold(intersectionThreshold float64) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(intersectionThreshold)
-	return LinesMeshFromJSObject(p, ba.ctx)
+	l.p.Set("intersectionThreshold", intersectionThreshold)
+	return l
 }
 
 // UseVertexAlpha returns the UseVertexAlpha property of class LinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#usevertexalpha
-func (l *LinesMesh) UseVertexAlpha(useVertexAlpha bool) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(useVertexAlpha)
-	return LinesMeshFromJSObject(p, ba.ctx)
+func (l *LinesMesh) UseVertexAlpha() bool {
+	retVal := l.p.Get("useVertexAlpha")
+	return retVal.Bool()
 }
 
 // SetUseVertexAlpha sets the UseVertexAlpha property of class LinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#usevertexalpha
 func (l *LinesMesh) SetUseVertexAlpha(useVertexAlpha bool) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(useVertexAlpha)
-	return LinesMeshFromJSObject(p, ba.ctx)
+	l.p.Set("useVertexAlpha", useVertexAlpha)
+	return l
 }
 
 // UseVertexColor returns the UseVertexColor property of class LinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#usevertexcolor
-func (l *LinesMesh) UseVertexColor(useVertexColor bool) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(useVertexColor)
-	return LinesMeshFromJSObject(p, ba.ctx)
+func (l *LinesMesh) UseVertexColor() bool {
+	retVal := l.p.Get("useVertexColor")
+	return retVal.Bool()
 }
 
 // SetUseVertexColor sets the UseVertexColor property of class LinesMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh#usevertexcolor
 func (l *LinesMesh) SetUseVertexColor(useVertexColor bool) *LinesMesh {
-	p := ba.ctx.Get("LinesMesh").New(useVertexColor)
-	return LinesMeshFromJSObject(p, ba.ctx)
+	l.p.Set("useVertexColor", useVertexColor)
+	return l
 }
-
-*/

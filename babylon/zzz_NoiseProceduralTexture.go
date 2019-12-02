@@ -128,70 +128,66 @@ func (n *NoiseProceduralTexture) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // AnimationSpeedFactor returns the AnimationSpeedFactor property of class NoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#animationspeedfactor
-func (n *NoiseProceduralTexture) AnimationSpeedFactor(animationSpeedFactor float64) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(animationSpeedFactor)
-	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+func (n *NoiseProceduralTexture) AnimationSpeedFactor() float64 {
+	retVal := n.p.Get("animationSpeedFactor")
+	return retVal.Float()
 }
 
 // SetAnimationSpeedFactor sets the AnimationSpeedFactor property of class NoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#animationspeedfactor
 func (n *NoiseProceduralTexture) SetAnimationSpeedFactor(animationSpeedFactor float64) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(animationSpeedFactor)
-	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+	n.p.Set("animationSpeedFactor", animationSpeedFactor)
+	return n
 }
 
 // Brightness returns the Brightness property of class NoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#brightness
-func (n *NoiseProceduralTexture) Brightness(brightness float64) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(brightness)
-	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+func (n *NoiseProceduralTexture) Brightness() float64 {
+	retVal := n.p.Get("brightness")
+	return retVal.Float()
 }
 
 // SetBrightness sets the Brightness property of class NoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#brightness
 func (n *NoiseProceduralTexture) SetBrightness(brightness float64) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(brightness)
-	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+	n.p.Set("brightness", brightness)
+	return n
 }
 
 // Octaves returns the Octaves property of class NoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#octaves
-func (n *NoiseProceduralTexture) Octaves(octaves float64) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(octaves)
-	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+func (n *NoiseProceduralTexture) Octaves() float64 {
+	retVal := n.p.Get("octaves")
+	return retVal.Float()
 }
 
 // SetOctaves sets the Octaves property of class NoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#octaves
 func (n *NoiseProceduralTexture) SetOctaves(octaves float64) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(octaves)
-	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+	n.p.Set("octaves", octaves)
+	return n
 }
 
 // Persistence returns the Persistence property of class NoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#persistence
-func (n *NoiseProceduralTexture) Persistence(persistence float64) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(persistence)
-	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+func (n *NoiseProceduralTexture) Persistence() float64 {
+	retVal := n.p.Get("persistence")
+	return retVal.Float()
 }
 
 // SetPersistence sets the Persistence property of class NoiseProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#persistence
 func (n *NoiseProceduralTexture) SetPersistence(persistence float64) *NoiseProceduralTexture {
-	p := ba.ctx.Get("NoiseProceduralTexture").New(persistence)
-	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+	n.p.Set("persistence", persistence)
+	return n
 }
-
-*/

@@ -139,54 +139,50 @@ func (d *DirectionalLight) TransferToNodeMaterialEffect(effect *Effect, lightDat
 	return LightFromJSObject(retVal, d.ctx)
 }
 
-/*
-
 // AutoUpdateExtends returns the AutoUpdateExtends property of class DirectionalLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#autoupdateextends
-func (d *DirectionalLight) AutoUpdateExtends(autoUpdateExtends bool) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(autoUpdateExtends)
-	return DirectionalLightFromJSObject(p, ba.ctx)
+func (d *DirectionalLight) AutoUpdateExtends() bool {
+	retVal := d.p.Get("autoUpdateExtends")
+	return retVal.Bool()
 }
 
 // SetAutoUpdateExtends sets the AutoUpdateExtends property of class DirectionalLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#autoupdateextends
 func (d *DirectionalLight) SetAutoUpdateExtends(autoUpdateExtends bool) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(autoUpdateExtends)
-	return DirectionalLightFromJSObject(p, ba.ctx)
+	d.p.Set("autoUpdateExtends", autoUpdateExtends)
+	return d
 }
 
 // ShadowFrustumSize returns the ShadowFrustumSize property of class DirectionalLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#shadowfrustumsize
-func (d *DirectionalLight) ShadowFrustumSize(shadowFrustumSize float64) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(shadowFrustumSize)
-	return DirectionalLightFromJSObject(p, ba.ctx)
+func (d *DirectionalLight) ShadowFrustumSize() float64 {
+	retVal := d.p.Get("shadowFrustumSize")
+	return retVal.Float()
 }
 
 // SetShadowFrustumSize sets the ShadowFrustumSize property of class DirectionalLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#shadowfrustumsize
 func (d *DirectionalLight) SetShadowFrustumSize(shadowFrustumSize float64) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(shadowFrustumSize)
-	return DirectionalLightFromJSObject(p, ba.ctx)
+	d.p.Set("shadowFrustumSize", shadowFrustumSize)
+	return d
 }
 
 // ShadowOrthoScale returns the ShadowOrthoScale property of class DirectionalLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#shadoworthoscale
-func (d *DirectionalLight) ShadowOrthoScale(shadowOrthoScale float64) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(shadowOrthoScale)
-	return DirectionalLightFromJSObject(p, ba.ctx)
+func (d *DirectionalLight) ShadowOrthoScale() float64 {
+	retVal := d.p.Get("shadowOrthoScale")
+	return retVal.Float()
 }
 
 // SetShadowOrthoScale sets the ShadowOrthoScale property of class DirectionalLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#shadoworthoscale
 func (d *DirectionalLight) SetShadowOrthoScale(shadowOrthoScale float64) *DirectionalLight {
-	p := ba.ctx.Get("DirectionalLight").New(shadowOrthoScale)
-	return DirectionalLightFromJSObject(p, ba.ctx)
+	d.p.Set("shadowOrthoScale", shadowOrthoScale)
+	return d
 }
-
-*/

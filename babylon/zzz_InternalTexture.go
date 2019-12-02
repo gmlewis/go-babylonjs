@@ -117,326 +117,322 @@ func (i *InternalTexture) UpdateSize(width int, height int, opts *InternalTextur
 	i.p.Call("updateSize", args...)
 }
 
-/*
-
 // BaseDepth returns the BaseDepth property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#basedepth
-func (i *InternalTexture) BaseDepth(baseDepth float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(baseDepth)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) BaseDepth() float64 {
+	retVal := i.p.Get("baseDepth")
+	return retVal.Float()
 }
 
 // SetBaseDepth sets the BaseDepth property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#basedepth
 func (i *InternalTexture) SetBaseDepth(baseDepth float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(baseDepth)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("baseDepth", baseDepth)
+	return i
 }
 
 // BaseHeight returns the BaseHeight property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#baseheight
-func (i *InternalTexture) BaseHeight(baseHeight float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(baseHeight)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) BaseHeight() float64 {
+	retVal := i.p.Get("baseHeight")
+	return retVal.Float()
 }
 
 // SetBaseHeight sets the BaseHeight property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#baseheight
 func (i *InternalTexture) SetBaseHeight(baseHeight float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(baseHeight)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("baseHeight", baseHeight)
+	return i
 }
 
 // BaseWidth returns the BaseWidth property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#basewidth
-func (i *InternalTexture) BaseWidth(baseWidth float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(baseWidth)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) BaseWidth() float64 {
+	retVal := i.p.Get("baseWidth")
+	return retVal.Float()
 }
 
 // SetBaseWidth sets the BaseWidth property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#basewidth
 func (i *InternalTexture) SetBaseWidth(baseWidth float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(baseWidth)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("baseWidth", baseWidth)
+	return i
 }
 
 // Depth returns the Depth property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#depth
-func (i *InternalTexture) Depth(depth float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(depth)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) Depth() float64 {
+	retVal := i.p.Get("depth")
+	return retVal.Float()
 }
 
 // SetDepth sets the Depth property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#depth
 func (i *InternalTexture) SetDepth(depth float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(depth)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("depth", depth)
+	return i
 }
 
 // Format returns the Format property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#format
-func (i *InternalTexture) Format(format float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(format)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) Format() float64 {
+	retVal := i.p.Get("format")
+	return retVal.Float()
 }
 
 // SetFormat sets the Format property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#format
 func (i *InternalTexture) SetFormat(format float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(format)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("format", format)
+	return i
 }
 
 // GenerateMipMaps returns the GenerateMipMaps property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#generatemipmaps
-func (i *InternalTexture) GenerateMipMaps(generateMipMaps bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(generateMipMaps)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) GenerateMipMaps() bool {
+	retVal := i.p.Get("generateMipMaps")
+	return retVal.Bool()
 }
 
 // SetGenerateMipMaps sets the GenerateMipMaps property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#generatemipmaps
 func (i *InternalTexture) SetGenerateMipMaps(generateMipMaps bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(generateMipMaps)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("generateMipMaps", generateMipMaps)
+	return i
 }
 
 // Height returns the Height property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#height
-func (i *InternalTexture) Height(height float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(height)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) Height() float64 {
+	retVal := i.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#height
 func (i *InternalTexture) SetHeight(height float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(height)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("height", height)
+	return i
 }
 
 // InvertY returns the InvertY property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#inverty
-func (i *InternalTexture) InvertY(invertY bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(invertY)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) InvertY() bool {
+	retVal := i.p.Get("invertY")
+	return retVal.Bool()
 }
 
 // SetInvertY sets the InvertY property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#inverty
 func (i *InternalTexture) SetInvertY(invertY bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(invertY)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("invertY", invertY)
+	return i
 }
 
 // Is2DArray returns the Is2DArray property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#is2darray
-func (i *InternalTexture) Is2DArray(is2DArray bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(is2DArray)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) Is2DArray() bool {
+	retVal := i.p.Get("is2DArray")
+	return retVal.Bool()
 }
 
 // SetIs2DArray sets the Is2DArray property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#is2darray
 func (i *InternalTexture) SetIs2DArray(is2DArray bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(is2DArray)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("is2DArray", is2DArray)
+	return i
 }
 
 // Is3D returns the Is3D property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#is3d
-func (i *InternalTexture) Is3D(is3D bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(is3D)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) Is3D() bool {
+	retVal := i.p.Get("is3D")
+	return retVal.Bool()
 }
 
 // SetIs3D sets the Is3D property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#is3d
 func (i *InternalTexture) SetIs3D(is3D bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(is3D)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("is3D", is3D)
+	return i
 }
 
 // IsCube returns the IsCube property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#iscube
-func (i *InternalTexture) IsCube(isCube bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(isCube)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) IsCube() bool {
+	retVal := i.p.Get("isCube")
+	return retVal.Bool()
 }
 
 // SetIsCube sets the IsCube property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#iscube
 func (i *InternalTexture) SetIsCube(isCube bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(isCube)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("isCube", isCube)
+	return i
 }
 
 // IsMultiview returns the IsMultiview property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#ismultiview
-func (i *InternalTexture) IsMultiview(isMultiview bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(isMultiview)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) IsMultiview() bool {
+	retVal := i.p.Get("isMultiview")
+	return retVal.Bool()
 }
 
 // SetIsMultiview sets the IsMultiview property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#ismultiview
 func (i *InternalTexture) SetIsMultiview(isMultiview bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(isMultiview)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("isMultiview", isMultiview)
+	return i
 }
 
 // IsReady returns the IsReady property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#isready
-func (i *InternalTexture) IsReady(isReady bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(isReady)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) IsReady() bool {
+	retVal := i.p.Get("isReady")
+	return retVal.Bool()
 }
 
 // SetIsReady sets the IsReady property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#isready
 func (i *InternalTexture) SetIsReady(isReady bool) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(isReady)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("isReady", isReady)
+	return i
 }
 
 // OnLoadedObservable returns the OnLoadedObservable property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#onloadedobservable
-func (i *InternalTexture) OnLoadedObservable(onLoadedObservable *Observable) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(onLoadedObservable.JSObject())
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) OnLoadedObservable() *Observable {
+	retVal := i.p.Get("onLoadedObservable")
+	return ObservableFromJSObject(retVal, i.ctx)
 }
 
 // SetOnLoadedObservable sets the OnLoadedObservable property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#onloadedobservable
 func (i *InternalTexture) SetOnLoadedObservable(onLoadedObservable *Observable) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(onLoadedObservable.JSObject())
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("onLoadedObservable", onLoadedObservable.JSObject())
+	return i
 }
 
 // Samples returns the Samples property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#samples
-func (i *InternalTexture) Samples(samples float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(samples)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) Samples() float64 {
+	retVal := i.p.Get("samples")
+	return retVal.Float()
 }
 
 // SetSamples sets the Samples property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#samples
 func (i *InternalTexture) SetSamples(samples float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(samples)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("samples", samples)
+	return i
 }
 
 // SamplingMode returns the SamplingMode property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#samplingmode
-func (i *InternalTexture) SamplingMode(samplingMode float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(samplingMode)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) SamplingMode() float64 {
+	retVal := i.p.Get("samplingMode")
+	return retVal.Float()
 }
 
 // SetSamplingMode sets the SamplingMode property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#samplingmode
 func (i *InternalTexture) SetSamplingMode(samplingMode float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(samplingMode)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("samplingMode", samplingMode)
+	return i
 }
 
 // Source returns the Source property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#source
-func (i *InternalTexture) Source(source js.Value) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(source)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) Source() js.Value {
+	retVal := i.p.Get("source")
+	return retVal
 }
 
 // SetSource sets the Source property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#source
 func (i *InternalTexture) SetSource(source js.Value) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(source)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("source", source)
+	return i
 }
 
 // Type returns the Type property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#type
-func (i *InternalTexture) Type(jsType float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(jsType)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) Type() float64 {
+	retVal := i.p.Get("type")
+	return retVal.Float()
 }
 
 // SetType sets the Type property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#type
 func (i *InternalTexture) SetType(jsType float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(jsType)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("type", jsType)
+	return i
 }
 
 // Url returns the Url property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#url
-func (i *InternalTexture) Url(url string) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(url)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) Url() string {
+	retVal := i.p.Get("url")
+	return retVal.String()
 }
 
 // SetUrl sets the Url property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#url
 func (i *InternalTexture) SetUrl(url string) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(url)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("url", url)
+	return i
 }
 
 // Width returns the Width property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#width
-func (i *InternalTexture) Width(width float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(width)
-	return InternalTextureFromJSObject(p, ba.ctx)
+func (i *InternalTexture) Width() float64 {
+	retVal := i.p.Get("width")
+	return retVal.Float()
 }
 
 // SetWidth sets the Width property of class InternalTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture#width
 func (i *InternalTexture) SetWidth(width float64) *InternalTexture {
-	p := ba.ctx.Get("InternalTexture").New(width)
-	return InternalTextureFromJSObject(p, ba.ctx)
+	i.p.Set("width", width)
+	return i
 }
-
-*/

@@ -119,7 +119,3 @@ func (e *EnvironmentTextureTools) UploadLevelsAsync(texture *InternalTexture, im
 	retVal := e.p.Call("UploadLevelsAsync", args...)
 	return PromiseFromJSObject(retVal, e.ctx)
 }
-
-/*
-
- */

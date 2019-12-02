@@ -49,22 +49,18 @@ func (ba *Babylon) NewWebXRControllerModelLoader(input *WebXRInput) *WebXRContro
 	return WebXRControllerModelLoaderFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // OnControllerModelLoaded returns the OnControllerModelLoaded property of class WebXRControllerModelLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontrollermodelloader#oncontrollermodelloaded
-func (w *WebXRControllerModelLoader) OnControllerModelLoaded(onControllerModelLoaded *Observable) *WebXRControllerModelLoader {
-	p := ba.ctx.Get("WebXRControllerModelLoader").New(onControllerModelLoaded.JSObject())
-	return WebXRControllerModelLoaderFromJSObject(p, ba.ctx)
+func (w *WebXRControllerModelLoader) OnControllerModelLoaded() *Observable {
+	retVal := w.p.Get("onControllerModelLoaded")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnControllerModelLoaded sets the OnControllerModelLoaded property of class WebXRControllerModelLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontrollermodelloader#oncontrollermodelloaded
 func (w *WebXRControllerModelLoader) SetOnControllerModelLoaded(onControllerModelLoaded *Observable) *WebXRControllerModelLoader {
-	p := ba.ctx.Get("WebXRControllerModelLoader").New(onControllerModelLoaded.JSObject())
-	return WebXRControllerModelLoaderFromJSObject(p, ba.ctx)
+	w.p.Set("onControllerModelLoaded", onControllerModelLoaded.JSObject())
+	return w
 }
-
-*/

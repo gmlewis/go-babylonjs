@@ -38,38 +38,34 @@ func EngineViewArrayToJSArray(array []*EngineView) []interface{} {
 	return result
 }
 
-/*
-
 // Camera returns the Camera property of class EngineView.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineview#camera
-func (e *EngineView) Camera(camera *Camera) *EngineView {
-	p := ba.ctx.Get("EngineView").New(camera.JSObject())
-	return EngineViewFromJSObject(p, ba.ctx)
+func (e *EngineView) Camera() *Camera {
+	retVal := e.p.Get("camera")
+	return CameraFromJSObject(retVal, e.ctx)
 }
 
 // SetCamera sets the Camera property of class EngineView.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineview#camera
 func (e *EngineView) SetCamera(camera *Camera) *EngineView {
-	p := ba.ctx.Get("EngineView").New(camera.JSObject())
-	return EngineViewFromJSObject(p, ba.ctx)
+	e.p.Set("camera", camera.JSObject())
+	return e
 }
 
 // Target returns the Target property of class EngineView.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineview#target
-func (e *EngineView) Target(target js.Value) *EngineView {
-	p := ba.ctx.Get("EngineView").New(target)
-	return EngineViewFromJSObject(p, ba.ctx)
+func (e *EngineView) Target() js.Value {
+	retVal := e.p.Get("target")
+	return retVal
 }
 
 // SetTarget sets the Target property of class EngineView.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineview#target
 func (e *EngineView) SetTarget(target js.Value) *EngineView {
-	p := ba.ctx.Get("EngineView").New(target)
-	return EngineViewFromJSObject(p, ba.ctx)
+	e.p.Set("target", target)
+	return e
 }
-
-*/

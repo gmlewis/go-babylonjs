@@ -168,86 +168,86 @@ func (o *OctreeBlock) Select(frustumPlanes *Plane, selection *SmartArrayNoDuplic
 	o.p.Call("select", args...)
 }
 
-/*
-
 // Blocks returns the Blocks property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#blocks
-func (o *OctreeBlock) Blocks(blocks []*OctreeBlock) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(blocks)
-	return OctreeBlockFromJSObject(p, ba.ctx)
+func (o *OctreeBlock) Blocks() []*OctreeBlock {
+	retVal := o.p.Get("blocks")
+	result := []*OctreeBlock{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, OctreeBlockFromJSObject(retVal.Index(ri), o.ctx))
+	}
+	return result
 }
 
 // SetBlocks sets the Blocks property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#blocks
 func (o *OctreeBlock) SetBlocks(blocks []*OctreeBlock) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(blocks)
-	return OctreeBlockFromJSObject(p, ba.ctx)
+	o.p.Set("blocks", blocks)
+	return o
 }
 
 // Capacity returns the Capacity property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#capacity
-func (o *OctreeBlock) Capacity(capacity float64) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(capacity)
-	return OctreeBlockFromJSObject(p, ba.ctx)
+func (o *OctreeBlock) Capacity() float64 {
+	retVal := o.p.Get("capacity")
+	return retVal.Float()
 }
 
 // SetCapacity sets the Capacity property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#capacity
 func (o *OctreeBlock) SetCapacity(capacity float64) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(capacity)
-	return OctreeBlockFromJSObject(p, ba.ctx)
+	o.p.Set("capacity", capacity)
+	return o
 }
 
 // Entries returns the Entries property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#entries
-func (o *OctreeBlock) Entries(entries *T) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(entries.JSObject())
-	return OctreeBlockFromJSObject(p, ba.ctx)
+func (o *OctreeBlock) Entries() *T {
+	retVal := o.p.Get("entries")
+	return TFromJSObject(retVal, o.ctx)
 }
 
 // SetEntries sets the Entries property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#entries
 func (o *OctreeBlock) SetEntries(entries *T) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(entries.JSObject())
-	return OctreeBlockFromJSObject(p, ba.ctx)
+	o.p.Set("entries", entries.JSObject())
+	return o
 }
 
 // MaxPoint returns the MaxPoint property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#maxpoint
-func (o *OctreeBlock) MaxPoint(maxPoint *Vector3) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(maxPoint.JSObject())
-	return OctreeBlockFromJSObject(p, ba.ctx)
+func (o *OctreeBlock) MaxPoint() *Vector3 {
+	retVal := o.p.Get("maxPoint")
+	return Vector3FromJSObject(retVal, o.ctx)
 }
 
 // SetMaxPoint sets the MaxPoint property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#maxpoint
 func (o *OctreeBlock) SetMaxPoint(maxPoint *Vector3) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(maxPoint.JSObject())
-	return OctreeBlockFromJSObject(p, ba.ctx)
+	o.p.Set("maxPoint", maxPoint.JSObject())
+	return o
 }
 
 // MinPoint returns the MinPoint property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#minpoint
-func (o *OctreeBlock) MinPoint(minPoint *Vector3) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(minPoint.JSObject())
-	return OctreeBlockFromJSObject(p, ba.ctx)
+func (o *OctreeBlock) MinPoint() *Vector3 {
+	retVal := o.p.Get("minPoint")
+	return Vector3FromJSObject(retVal, o.ctx)
 }
 
 // SetMinPoint sets the MinPoint property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#minpoint
 func (o *OctreeBlock) SetMinPoint(minPoint *Vector3) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(minPoint.JSObject())
-	return OctreeBlockFromJSObject(p, ba.ctx)
+	o.p.Set("minPoint", minPoint.JSObject())
+	return o
 }
-
-*/

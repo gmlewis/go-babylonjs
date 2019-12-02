@@ -358,182 +358,170 @@ func (p *PointsCloudSystem) UpdateParticle(particle *CloudPoint) *CloudPoint {
 	return CloudPointFromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // ComputeBoundingBox returns the ComputeBoundingBox property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeboundingbox
-func (p *PointsCloudSystem) ComputeBoundingBox(computeBoundingBox bool) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(computeBoundingBox)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) ComputeBoundingBox() bool {
+	retVal := p.p.Get("computeBoundingBox")
+	return retVal.Bool()
 }
 
 // SetComputeBoundingBox sets the ComputeBoundingBox property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeboundingbox
 func (p *PointsCloudSystem) SetComputeBoundingBox(computeBoundingBox bool) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(computeBoundingBox)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+	p.p.Set("computeBoundingBox", computeBoundingBox)
+	return p
 }
 
 // ComputeParticleColor returns the ComputeParticleColor property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticlecolor
-func (p *PointsCloudSystem) ComputeParticleColor(computeParticleColor bool) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleColor)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) ComputeParticleColor() bool {
+	retVal := p.p.Get("computeParticleColor")
+	return retVal.Bool()
 }
 
 // SetComputeParticleColor sets the ComputeParticleColor property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticlecolor
 func (p *PointsCloudSystem) SetComputeParticleColor(computeParticleColor bool) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleColor)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+	p.p.Set("computeParticleColor", computeParticleColor)
+	return p
 }
 
 // ComputeParticleRotation returns the ComputeParticleRotation property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticlerotation
-func (p *PointsCloudSystem) ComputeParticleRotation(computeParticleRotation bool) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleRotation)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) ComputeParticleRotation() bool {
+	retVal := p.p.Get("computeParticleRotation")
+	return retVal.Bool()
 }
 
 // SetComputeParticleRotation sets the ComputeParticleRotation property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticlerotation
 func (p *PointsCloudSystem) SetComputeParticleRotation(computeParticleRotation bool) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleRotation)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+	p.p.Set("computeParticleRotation", computeParticleRotation)
+	return p
 }
 
 // ComputeParticleTexture returns the ComputeParticleTexture property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticletexture
-func (p *PointsCloudSystem) ComputeParticleTexture(computeParticleTexture bool) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleTexture)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) ComputeParticleTexture() bool {
+	retVal := p.p.Get("computeParticleTexture")
+	return retVal.Bool()
 }
 
 // SetComputeParticleTexture sets the ComputeParticleTexture property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticletexture
 func (p *PointsCloudSystem) SetComputeParticleTexture(computeParticleTexture bool) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleTexture)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+	p.p.Set("computeParticleTexture", computeParticleTexture)
+	return p
 }
 
 // Counter returns the Counter property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#counter
-func (p *PointsCloudSystem) Counter(counter float64) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(counter)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) Counter() float64 {
+	retVal := p.p.Get("counter")
+	return retVal.Float()
 }
 
 // SetCounter sets the Counter property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#counter
 func (p *PointsCloudSystem) SetCounter(counter float64) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(counter)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+	p.p.Set("counter", counter)
+	return p
 }
 
 // IsAlwaysVisible returns the IsAlwaysVisible property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#isalwaysvisible
-func (p *PointsCloudSystem) IsAlwaysVisible(isAlwaysVisible bool) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(isAlwaysVisible)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) IsAlwaysVisible() bool {
+	retVal := p.p.Get("isAlwaysVisible")
+	return retVal.Bool()
 }
 
 // SetIsAlwaysVisible sets the IsAlwaysVisible property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#isalwaysvisible
 func (p *PointsCloudSystem) SetIsAlwaysVisible(isAlwaysVisible bool) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(isAlwaysVisible)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+	p.p.Set("isAlwaysVisible", isAlwaysVisible)
+	return p
 }
 
 // Mesh returns the Mesh property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#mesh
-func (p *PointsCloudSystem) Mesh(mesh *Mesh) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(mesh.JSObject())
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) Mesh() *Mesh {
+	retVal := p.p.Get("mesh")
+	return MeshFromJSObject(retVal, p.ctx)
 }
 
 // SetMesh sets the Mesh property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#mesh
 func (p *PointsCloudSystem) SetMesh(mesh *Mesh) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(mesh.JSObject())
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+	p.p.Set("mesh", mesh.JSObject())
+	return p
 }
 
 // Name returns the Name property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#name
-func (p *PointsCloudSystem) Name(name string) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(name)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) Name() string {
+	retVal := p.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#name
 func (p *PointsCloudSystem) SetName(name string) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(name)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+	p.p.Set("name", name)
+	return p
 }
 
 // NbParticles returns the NbParticles property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#nbparticles
-func (p *PointsCloudSystem) NbParticles(nbParticles float64) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(nbParticles)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) NbParticles() float64 {
+	retVal := p.p.Get("nbParticles")
+	return retVal.Float()
 }
 
 // SetNbParticles sets the NbParticles property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#nbparticles
 func (p *PointsCloudSystem) SetNbParticles(nbParticles float64) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(nbParticles)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+	p.p.Set("nbParticles", nbParticles)
+	return p
 }
 
 // Particles returns the Particles property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#particles
-func (p *PointsCloudSystem) Particles(particles *CloudPoint) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(particles.JSObject())
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
-}
-
-// SetParticles sets the Particles property of class PointsCloudSystem.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#particles
-func (p *PointsCloudSystem) SetParticles(particles *CloudPoint) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(particles.JSObject())
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) Particles() *CloudPoint {
+	retVal := p.p.Get("particles")
+	return CloudPointFromJSObject(retVal, p.ctx)
 }
 
 // Vars returns the Vars property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#vars
-func (p *PointsCloudSystem) Vars(vars interface{}) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(vars)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+func (p *PointsCloudSystem) Vars() interface{} {
+	retVal := p.p.Get("vars")
+	return retVal
 }
 
 // SetVars sets the Vars property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#vars
 func (p *PointsCloudSystem) SetVars(vars interface{}) *PointsCloudSystem {
-	p := ba.ctx.Get("PointsCloudSystem").New(vars)
-	return PointsCloudSystemFromJSObject(p, ba.ctx)
+	p.p.Set("vars", vars)
+	return p
 }
-
-*/

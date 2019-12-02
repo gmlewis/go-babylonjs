@@ -58,54 +58,50 @@ func (d *DistanceBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Left returns the Left property of class DistanceBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock#left
-func (d *DistanceBlock) Left(left *NodeMaterialConnectionPoint) *DistanceBlock {
-	p := ba.ctx.Get("DistanceBlock").New(left.JSObject())
-	return DistanceBlockFromJSObject(p, ba.ctx)
+func (d *DistanceBlock) Left() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("left")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetLeft sets the Left property of class DistanceBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock#left
 func (d *DistanceBlock) SetLeft(left *NodeMaterialConnectionPoint) *DistanceBlock {
-	p := ba.ctx.Get("DistanceBlock").New(left.JSObject())
-	return DistanceBlockFromJSObject(p, ba.ctx)
+	d.p.Set("left", left.JSObject())
+	return d
 }
 
 // Output returns the Output property of class DistanceBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock#output
-func (d *DistanceBlock) Output(output *NodeMaterialConnectionPoint) *DistanceBlock {
-	p := ba.ctx.Get("DistanceBlock").New(output.JSObject())
-	return DistanceBlockFromJSObject(p, ba.ctx)
+func (d *DistanceBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetOutput sets the Output property of class DistanceBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock#output
 func (d *DistanceBlock) SetOutput(output *NodeMaterialConnectionPoint) *DistanceBlock {
-	p := ba.ctx.Get("DistanceBlock").New(output.JSObject())
-	return DistanceBlockFromJSObject(p, ba.ctx)
+	d.p.Set("output", output.JSObject())
+	return d
 }
 
 // Right returns the Right property of class DistanceBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock#right
-func (d *DistanceBlock) Right(right *NodeMaterialConnectionPoint) *DistanceBlock {
-	p := ba.ctx.Get("DistanceBlock").New(right.JSObject())
-	return DistanceBlockFromJSObject(p, ba.ctx)
+func (d *DistanceBlock) Right() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("right")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetRight sets the Right property of class DistanceBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock#right
 func (d *DistanceBlock) SetRight(right *NodeMaterialConnectionPoint) *DistanceBlock {
-	p := ba.ctx.Get("DistanceBlock").New(right.JSObject())
-	return DistanceBlockFromJSObject(p, ba.ctx)
+	d.p.Set("right", right.JSObject())
+	return d
 }
-
-*/

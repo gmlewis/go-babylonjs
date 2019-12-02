@@ -325,102 +325,98 @@ func (p *ProceduralTexture) SetVector3(name string, value *Vector3) *ProceduralT
 	return ProceduralTextureFromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // AutoClear returns the AutoClear property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#autoclear
-func (p *ProceduralTexture) AutoClear(autoClear bool) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(autoClear)
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+func (p *ProceduralTexture) AutoClear() bool {
+	retVal := p.p.Get("autoClear")
+	return retVal.Bool()
 }
 
 // SetAutoClear sets the AutoClear property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#autoclear
 func (p *ProceduralTexture) SetAutoClear(autoClear bool) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(autoClear)
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+	p.p.Set("autoClear", autoClear)
+	return p
 }
 
 // IsCube returns the IsCube property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#iscube
-func (p *ProceduralTexture) IsCube(isCube bool) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(isCube)
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+func (p *ProceduralTexture) IsCube() bool {
+	retVal := p.p.Get("isCube")
+	return retVal.Bool()
 }
 
 // SetIsCube sets the IsCube property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#iscube
 func (p *ProceduralTexture) SetIsCube(isCube bool) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(isCube)
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+	p.p.Set("isCube", isCube)
+	return p
 }
 
 // IsEnabled returns the IsEnabled property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isenabled
-func (p *ProceduralTexture) IsEnabled(isEnabled bool) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(isEnabled)
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+func (p *ProceduralTexture) IsEnabled() bool {
+	retVal := p.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isenabled
 func (p *ProceduralTexture) SetIsEnabled(isEnabled bool) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(isEnabled)
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+	p.p.Set("isEnabled", isEnabled)
+	return p
 }
 
 // OnGenerated returns the OnGenerated property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongenerated
-func (p *ProceduralTexture) OnGenerated(onGenerated func()) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+func (p *ProceduralTexture) OnGenerated() js.Value {
+	retVal := p.p.Get("onGenerated")
+	return retVal
 }
 
 // SetOnGenerated sets the OnGenerated property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongenerated
 func (p *ProceduralTexture) SetOnGenerated(onGenerated func()) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGenerated(); return nil}))
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+	p.p.Set("onGenerated", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onGenerated(); return nil }))
+	return p
 }
 
 // OnGeneratedObservable returns the OnGeneratedObservable property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongeneratedobservable
-func (p *ProceduralTexture) OnGeneratedObservable(onGeneratedObservable *Observable) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(onGeneratedObservable.JSObject())
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+func (p *ProceduralTexture) OnGeneratedObservable() *Observable {
+	retVal := p.p.Get("onGeneratedObservable")
+	return ObservableFromJSObject(retVal, p.ctx)
 }
 
 // SetOnGeneratedObservable sets the OnGeneratedObservable property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongeneratedobservable
 func (p *ProceduralTexture) SetOnGeneratedObservable(onGeneratedObservable *Observable) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(onGeneratedObservable.JSObject())
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+	p.p.Set("onGeneratedObservable", onGeneratedObservable.JSObject())
+	return p
 }
 
 // RefreshRate returns the RefreshRate property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#refreshrate
-func (p *ProceduralTexture) RefreshRate(refreshRate float64) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(refreshRate)
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+func (p *ProceduralTexture) RefreshRate() float64 {
+	retVal := p.p.Get("refreshRate")
+	return retVal.Float()
 }
 
 // SetRefreshRate sets the RefreshRate property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#refreshrate
 func (p *ProceduralTexture) SetRefreshRate(refreshRate float64) *ProceduralTexture {
-	p := ba.ctx.Get("ProceduralTexture").New(refreshRate)
-	return ProceduralTextureFromJSObject(p, ba.ctx)
+	p.p.Set("refreshRate", refreshRate)
+	return p
 }
-
-*/

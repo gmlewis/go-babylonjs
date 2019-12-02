@@ -39,54 +39,50 @@ func ISimplificationSettingsArrayToJSArray(array []*ISimplificationSettings) []i
 	return result
 }
 
-/*
-
 // Distance returns the Distance property of class ISimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationsettings#distance
-func (i *ISimplificationSettings) Distance(distance float64) *ISimplificationSettings {
-	p := ba.ctx.Get("ISimplificationSettings").New(distance)
-	return ISimplificationSettingsFromJSObject(p, ba.ctx)
+func (i *ISimplificationSettings) Distance() float64 {
+	retVal := i.p.Get("distance")
+	return retVal.Float()
 }
 
 // SetDistance sets the Distance property of class ISimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationsettings#distance
 func (i *ISimplificationSettings) SetDistance(distance float64) *ISimplificationSettings {
-	p := ba.ctx.Get("ISimplificationSettings").New(distance)
-	return ISimplificationSettingsFromJSObject(p, ba.ctx)
+	i.p.Set("distance", distance)
+	return i
 }
 
 // OptimizeMesh returns the OptimizeMesh property of class ISimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationsettings#optimizemesh
-func (i *ISimplificationSettings) OptimizeMesh(optimizeMesh bool) *ISimplificationSettings {
-	p := ba.ctx.Get("ISimplificationSettings").New(optimizeMesh)
-	return ISimplificationSettingsFromJSObject(p, ba.ctx)
+func (i *ISimplificationSettings) OptimizeMesh() bool {
+	retVal := i.p.Get("optimizeMesh")
+	return retVal.Bool()
 }
 
 // SetOptimizeMesh sets the OptimizeMesh property of class ISimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationsettings#optimizemesh
 func (i *ISimplificationSettings) SetOptimizeMesh(optimizeMesh bool) *ISimplificationSettings {
-	p := ba.ctx.Get("ISimplificationSettings").New(optimizeMesh)
-	return ISimplificationSettingsFromJSObject(p, ba.ctx)
+	i.p.Set("optimizeMesh", optimizeMesh)
+	return i
 }
 
 // Quality returns the Quality property of class ISimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationsettings#quality
-func (i *ISimplificationSettings) Quality(quality float64) *ISimplificationSettings {
-	p := ba.ctx.Get("ISimplificationSettings").New(quality)
-	return ISimplificationSettingsFromJSObject(p, ba.ctx)
+func (i *ISimplificationSettings) Quality() float64 {
+	retVal := i.p.Get("quality")
+	return retVal.Float()
 }
 
 // SetQuality sets the Quality property of class ISimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationsettings#quality
 func (i *ISimplificationSettings) SetQuality(quality float64) *ISimplificationSettings {
-	p := ba.ctx.Get("ISimplificationSettings").New(quality)
-	return ISimplificationSettingsFromJSObject(p, ba.ctx)
+	i.p.Set("quality", quality)
+	return i
 }
-
-*/

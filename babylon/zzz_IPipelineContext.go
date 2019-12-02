@@ -36,38 +36,34 @@ func IPipelineContextArrayToJSArray(array []*IPipelineContext) []interface{} {
 	return result
 }
 
-/*
-
 // IsAsync returns the IsAsync property of class IPipelineContext.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ipipelinecontext#isasync
-func (i *IPipelineContext) IsAsync(isAsync bool) *IPipelineContext {
-	p := ba.ctx.Get("IPipelineContext").New(isAsync)
-	return IPipelineContextFromJSObject(p, ba.ctx)
+func (i *IPipelineContext) IsAsync() bool {
+	retVal := i.p.Get("isAsync")
+	return retVal.Bool()
 }
 
 // SetIsAsync sets the IsAsync property of class IPipelineContext.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ipipelinecontext#isasync
 func (i *IPipelineContext) SetIsAsync(isAsync bool) *IPipelineContext {
-	p := ba.ctx.Get("IPipelineContext").New(isAsync)
-	return IPipelineContextFromJSObject(p, ba.ctx)
+	i.p.Set("isAsync", isAsync)
+	return i
 }
 
 // IsReady returns the IsReady property of class IPipelineContext.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ipipelinecontext#isready
-func (i *IPipelineContext) IsReady(isReady bool) *IPipelineContext {
-	p := ba.ctx.Get("IPipelineContext").New(isReady)
-	return IPipelineContextFromJSObject(p, ba.ctx)
+func (i *IPipelineContext) IsReady() bool {
+	retVal := i.p.Get("isReady")
+	return retVal.Bool()
 }
 
 // SetIsReady sets the IsReady property of class IPipelineContext.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ipipelinecontext#isready
 func (i *IPipelineContext) SetIsReady(isReady bool) *IPipelineContext {
-	p := ba.ctx.Get("IPipelineContext").New(isReady)
-	return IPipelineContextFromJSObject(p, ba.ctx)
+	i.p.Set("isReady", isReady)
+	return i
 }
-
-*/

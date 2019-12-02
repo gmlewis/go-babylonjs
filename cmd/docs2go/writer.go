@@ -92,7 +92,9 @@ func toLower(s string) string {
 
 func constructorParameterGoList(key string, s *Signature) string {
 	var params []string
-	params = append([]string{}, s.GoParams...)
+	for i, name := range s.GoParamsName {
+		params = append(params, fmt.Sprintf("%v %v", name, s.GoParamsType[i]))
+	}
 
 	if s.HasOpts {
 		params = append(params, fmt.Sprintf("opts *%vOpts", key))
@@ -103,7 +105,9 @@ func constructorParameterGoList(key string, s *Signature) string {
 
 func methodParameterGoList(name, key string, s *Signature) string {
 	var params []string
-	params = append([]string{}, s.GoParams...)
+	for i, name := range s.GoParamsName {
+		params = append(params, fmt.Sprintf("%v %v", name, s.GoParamsType[i]))
+	}
 
 	if s.HasOpts {
 		params = append(params, fmt.Sprintf("opts *%v%vOpts", name, key))
@@ -114,7 +118,9 @@ func methodParameterGoList(name, key string, s *Signature) string {
 
 func propertyParameterGoList(key string, s *Signature) string {
 	var params []string
-	params = append([]string{}, s.GoParams...)
+	for i, name := range s.GoParamsName {
+		params = append(params, fmt.Sprintf("%v %v", name, s.GoParamsType[i]))
+	}
 
 	if s.HasOpts {
 		params = append(params, fmt.Sprintf("opts *%vOpts", key))
@@ -258,31 +264,21 @@ opts = &{{$name}}{{$key}}Opts{}
 }
 {{end}}
 
-/*
 {{range $key, $value := .PropertyNames}}
 // {{$key}} returns the {{$key}} property of class {{$name}}.
 //
 // https://doc.babylonjs.com/api/classes/babylon.{{$name | toLower}}#{{$key | toLower}}
-func ({{$name | receiver}} *{{$name}}) {{$key}}({{propertyParameterGoList $key $value}}) *{{$name}} { {{if $value.HasOpts}}
-if opts == nil {
-opts = &{{$key}}Opts{}
-}
-{{end}}
-	p := ba.ctx.Get("{{$name}}").New({{propertyParameterJSList $key $value}})
-	return {{$name}}FromJSObject(p, ba.ctx)
+func ({{$name | receiver}} *{{$name}}) {{$key}}() {{$value.GoReturnType}} {
+	retVal := {{$name | receiver}}.p.Get("{{$value.JSName}}")
+	{{$value.GoReturnStatement}}
 }
 
-// Set{{$key}} sets the {{$key}} property of class {{$name}}.
+{{if $value.WriteSetter}}// Set{{$key}} sets the {{$key}} property of class {{$name}}.
 //
 // https://doc.babylonjs.com/api/classes/babylon.{{$name | toLower}}#{{$key | toLower}}
-func ({{$name | receiver}} *{{$name}}) Set{{$key}}({{propertyParameterGoList $key $value}}) *{{$name}} { {{if $value.HasOpts}}
-if opts == nil {
-opts = &{{$key}}Opts{}
+func ({{$name | receiver}} *{{$name}}) Set{{$key}}({{propertyParameterGoList $key $value}}) *{{$name}} {
+	{{$name | receiver}}.p.Set("{{$value.JSName}}", {{index $value.JSParams 0}})
+	return {{$name | receiver}}
 }
-{{end}}
-	p := ba.ctx.Get("{{$name}}").New({{propertyParameterJSList $key $value}})
-	return {{$name}}FromJSObject(p, ba.ctx)
-}
-{{end}}
-*/
+{{end}}{{end}}
 `

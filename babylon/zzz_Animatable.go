@@ -256,230 +256,226 @@ func (a *Animatable) WaitAsync() *Promise {
 	return PromiseFromJSObject(retVal, a.ctx)
 }
 
-/*
-
 // AnimationStarted returns the AnimationStarted property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#animationstarted
-func (a *Animatable) AnimationStarted(animationStarted bool) *Animatable {
-	p := ba.ctx.Get("Animatable").New(animationStarted)
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) AnimationStarted() bool {
+	retVal := a.p.Get("animationStarted")
+	return retVal.Bool()
 }
 
 // SetAnimationStarted sets the AnimationStarted property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#animationstarted
 func (a *Animatable) SetAnimationStarted(animationStarted bool) *Animatable {
-	p := ba.ctx.Get("Animatable").New(animationStarted)
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("animationStarted", animationStarted)
+	return a
 }
 
 // DisposeOnEnd returns the DisposeOnEnd property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#disposeonend
-func (a *Animatable) DisposeOnEnd(disposeOnEnd bool) *Animatable {
-	p := ba.ctx.Get("Animatable").New(disposeOnEnd)
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) DisposeOnEnd() bool {
+	retVal := a.p.Get("disposeOnEnd")
+	return retVal.Bool()
 }
 
 // SetDisposeOnEnd sets the DisposeOnEnd property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#disposeonend
 func (a *Animatable) SetDisposeOnEnd(disposeOnEnd bool) *Animatable {
-	p := ba.ctx.Get("Animatable").New(disposeOnEnd)
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("disposeOnEnd", disposeOnEnd)
+	return a
 }
 
 // FromFrame returns the FromFrame property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#fromframe
-func (a *Animatable) FromFrame(fromFrame float64) *Animatable {
-	p := ba.ctx.Get("Animatable").New(fromFrame)
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) FromFrame() float64 {
+	retVal := a.p.Get("fromFrame")
+	return retVal.Float()
 }
 
 // SetFromFrame sets the FromFrame property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#fromframe
 func (a *Animatable) SetFromFrame(fromFrame float64) *Animatable {
-	p := ba.ctx.Get("Animatable").New(fromFrame)
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("fromFrame", fromFrame)
+	return a
 }
 
 // LoopAnimation returns the LoopAnimation property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#loopanimation
-func (a *Animatable) LoopAnimation(loopAnimation bool) *Animatable {
-	p := ba.ctx.Get("Animatable").New(loopAnimation)
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) LoopAnimation() bool {
+	retVal := a.p.Get("loopAnimation")
+	return retVal.Bool()
 }
 
 // SetLoopAnimation sets the LoopAnimation property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#loopanimation
 func (a *Animatable) SetLoopAnimation(loopAnimation bool) *Animatable {
-	p := ba.ctx.Get("Animatable").New(loopAnimation)
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("loopAnimation", loopAnimation)
+	return a
 }
 
 // MasterFrame returns the MasterFrame property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#masterframe
-func (a *Animatable) MasterFrame(masterFrame float64) *Animatable {
-	p := ba.ctx.Get("Animatable").New(masterFrame)
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) MasterFrame() float64 {
+	retVal := a.p.Get("masterFrame")
+	return retVal.Float()
 }
 
 // SetMasterFrame sets the MasterFrame property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#masterframe
 func (a *Animatable) SetMasterFrame(masterFrame float64) *Animatable {
-	p := ba.ctx.Get("Animatable").New(masterFrame)
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("masterFrame", masterFrame)
+	return a
 }
 
 // OnAnimationEnd returns the OnAnimationEnd property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationend
-func (a *Animatable) OnAnimationEnd(onAnimationEnd func()) *Animatable {
-	p := ba.ctx.Get("Animatable").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAnimationEnd(); return nil}))
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) OnAnimationEnd() js.Value {
+	retVal := a.p.Get("onAnimationEnd")
+	return retVal
 }
 
 // SetOnAnimationEnd sets the OnAnimationEnd property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationend
 func (a *Animatable) SetOnAnimationEnd(onAnimationEnd func()) *Animatable {
-	p := ba.ctx.Get("Animatable").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAnimationEnd(); return nil}))
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("onAnimationEnd", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAnimationEnd(); return nil }))
+	return a
 }
 
 // OnAnimationEndObservable returns the OnAnimationEndObservable property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationendobservable
-func (a *Animatable) OnAnimationEndObservable(onAnimationEndObservable *Observable) *Animatable {
-	p := ba.ctx.Get("Animatable").New(onAnimationEndObservable.JSObject())
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) OnAnimationEndObservable() *Observable {
+	retVal := a.p.Get("onAnimationEndObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnAnimationEndObservable sets the OnAnimationEndObservable property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationendobservable
 func (a *Animatable) SetOnAnimationEndObservable(onAnimationEndObservable *Observable) *Animatable {
-	p := ba.ctx.Get("Animatable").New(onAnimationEndObservable.JSObject())
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("onAnimationEndObservable", onAnimationEndObservable.JSObject())
+	return a
 }
 
 // OnAnimationLoop returns the OnAnimationLoop property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationloop
-func (a *Animatable) OnAnimationLoop(onAnimationLoop func()) *Animatable {
-	p := ba.ctx.Get("Animatable").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAnimationLoop(); return nil}))
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) OnAnimationLoop() js.Value {
+	retVal := a.p.Get("onAnimationLoop")
+	return retVal
 }
 
 // SetOnAnimationLoop sets the OnAnimationLoop property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationloop
 func (a *Animatable) SetOnAnimationLoop(onAnimationLoop func()) *Animatable {
-	p := ba.ctx.Get("Animatable").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAnimationLoop(); return nil}))
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("onAnimationLoop", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAnimationLoop(); return nil }))
+	return a
 }
 
 // OnAnimationLoopObservable returns the OnAnimationLoopObservable property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationloopobservable
-func (a *Animatable) OnAnimationLoopObservable(onAnimationLoopObservable *Observable) *Animatable {
-	p := ba.ctx.Get("Animatable").New(onAnimationLoopObservable.JSObject())
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) OnAnimationLoopObservable() *Observable {
+	retVal := a.p.Get("onAnimationLoopObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnAnimationLoopObservable sets the OnAnimationLoopObservable property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationloopobservable
 func (a *Animatable) SetOnAnimationLoopObservable(onAnimationLoopObservable *Observable) *Animatable {
-	p := ba.ctx.Get("Animatable").New(onAnimationLoopObservable.JSObject())
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("onAnimationLoopObservable", onAnimationLoopObservable.JSObject())
+	return a
 }
 
 // SpeedRatio returns the SpeedRatio property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#speedratio
-func (a *Animatable) SpeedRatio(speedRatio float64) *Animatable {
-	p := ba.ctx.Get("Animatable").New(speedRatio)
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) SpeedRatio() float64 {
+	retVal := a.p.Get("speedRatio")
+	return retVal.Float()
 }
 
 // SetSpeedRatio sets the SpeedRatio property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#speedratio
 func (a *Animatable) SetSpeedRatio(speedRatio float64) *Animatable {
-	p := ba.ctx.Get("Animatable").New(speedRatio)
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("speedRatio", speedRatio)
+	return a
 }
 
 // SyncRoot returns the SyncRoot property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#syncroot
-func (a *Animatable) SyncRoot(syncRoot *Animatable) *Animatable {
-	p := ba.ctx.Get("Animatable").New(syncRoot.JSObject())
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) SyncRoot() *Animatable {
+	retVal := a.p.Get("syncRoot")
+	return AnimatableFromJSObject(retVal, a.ctx)
 }
 
 // SetSyncRoot sets the SyncRoot property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#syncroot
 func (a *Animatable) SetSyncRoot(syncRoot *Animatable) *Animatable {
-	p := ba.ctx.Get("Animatable").New(syncRoot.JSObject())
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("syncRoot", syncRoot.JSObject())
+	return a
 }
 
 // Target returns the Target property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#target
-func (a *Animatable) Target(target interface{}) *Animatable {
-	p := ba.ctx.Get("Animatable").New(target)
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) Target() interface{} {
+	retVal := a.p.Get("target")
+	return retVal
 }
 
 // SetTarget sets the Target property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#target
 func (a *Animatable) SetTarget(target interface{}) *Animatable {
-	p := ba.ctx.Get("Animatable").New(target)
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("target", target)
+	return a
 }
 
 // ToFrame returns the ToFrame property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#toframe
-func (a *Animatable) ToFrame(toFrame float64) *Animatable {
-	p := ba.ctx.Get("Animatable").New(toFrame)
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) ToFrame() float64 {
+	retVal := a.p.Get("toFrame")
+	return retVal.Float()
 }
 
 // SetToFrame sets the ToFrame property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#toframe
 func (a *Animatable) SetToFrame(toFrame float64) *Animatable {
-	p := ba.ctx.Get("Animatable").New(toFrame)
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("toFrame", toFrame)
+	return a
 }
 
 // Weight returns the Weight property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#weight
-func (a *Animatable) Weight(weight float64) *Animatable {
-	p := ba.ctx.Get("Animatable").New(weight)
-	return AnimatableFromJSObject(p, ba.ctx)
+func (a *Animatable) Weight() float64 {
+	retVal := a.p.Get("weight")
+	return retVal.Float()
 }
 
 // SetWeight sets the Weight property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#weight
 func (a *Animatable) SetWeight(weight float64) *Animatable {
-	p := ba.ctx.Get("Animatable").New(weight)
-	return AnimatableFromJSObject(p, ba.ctx)
+	a.p.Set("weight", weight)
+	return a
 }
-
-*/

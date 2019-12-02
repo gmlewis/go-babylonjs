@@ -68,7 +68,3 @@ func (w *WorkerPool) Push(action func()) {
 
 	w.p.Call("push", args...)
 }
-
-/*
-
- */

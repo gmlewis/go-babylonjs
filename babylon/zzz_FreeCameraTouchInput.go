@@ -102,54 +102,50 @@ func (f *FreeCameraTouchInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // Camera returns the Camera property of class FreeCameraTouchInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameratouchinput#camera
-func (f *FreeCameraTouchInput) Camera(camera *FreeCamera) *FreeCameraTouchInput {
-	p := ba.ctx.Get("FreeCameraTouchInput").New(camera.JSObject())
-	return FreeCameraTouchInputFromJSObject(p, ba.ctx)
+func (f *FreeCameraTouchInput) Camera() *FreeCamera {
+	retVal := f.p.Get("camera")
+	return FreeCameraFromJSObject(retVal, f.ctx)
 }
 
 // SetCamera sets the Camera property of class FreeCameraTouchInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameratouchinput#camera
 func (f *FreeCameraTouchInput) SetCamera(camera *FreeCamera) *FreeCameraTouchInput {
-	p := ba.ctx.Get("FreeCameraTouchInput").New(camera.JSObject())
-	return FreeCameraTouchInputFromJSObject(p, ba.ctx)
+	f.p.Set("camera", camera.JSObject())
+	return f
 }
 
 // TouchAngularSensibility returns the TouchAngularSensibility property of class FreeCameraTouchInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameratouchinput#touchangularsensibility
-func (f *FreeCameraTouchInput) TouchAngularSensibility(touchAngularSensibility float64) *FreeCameraTouchInput {
-	p := ba.ctx.Get("FreeCameraTouchInput").New(touchAngularSensibility)
-	return FreeCameraTouchInputFromJSObject(p, ba.ctx)
+func (f *FreeCameraTouchInput) TouchAngularSensibility() float64 {
+	retVal := f.p.Get("touchAngularSensibility")
+	return retVal.Float()
 }
 
 // SetTouchAngularSensibility sets the TouchAngularSensibility property of class FreeCameraTouchInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameratouchinput#touchangularsensibility
 func (f *FreeCameraTouchInput) SetTouchAngularSensibility(touchAngularSensibility float64) *FreeCameraTouchInput {
-	p := ba.ctx.Get("FreeCameraTouchInput").New(touchAngularSensibility)
-	return FreeCameraTouchInputFromJSObject(p, ba.ctx)
+	f.p.Set("touchAngularSensibility", touchAngularSensibility)
+	return f
 }
 
 // TouchMoveSensibility returns the TouchMoveSensibility property of class FreeCameraTouchInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameratouchinput#touchmovesensibility
-func (f *FreeCameraTouchInput) TouchMoveSensibility(touchMoveSensibility float64) *FreeCameraTouchInput {
-	p := ba.ctx.Get("FreeCameraTouchInput").New(touchMoveSensibility)
-	return FreeCameraTouchInputFromJSObject(p, ba.ctx)
+func (f *FreeCameraTouchInput) TouchMoveSensibility() float64 {
+	retVal := f.p.Get("touchMoveSensibility")
+	return retVal.Float()
 }
 
 // SetTouchMoveSensibility sets the TouchMoveSensibility property of class FreeCameraTouchInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameratouchinput#touchmovesensibility
 func (f *FreeCameraTouchInput) SetTouchMoveSensibility(touchMoveSensibility float64) *FreeCameraTouchInput {
-	p := ba.ctx.Get("FreeCameraTouchInput").New(touchMoveSensibility)
-	return FreeCameraTouchInputFromJSObject(p, ba.ctx)
+	f.p.Set("touchMoveSensibility", touchMoveSensibility)
+	return f
 }
-
-*/

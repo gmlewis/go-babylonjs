@@ -53,22 +53,18 @@ func (i *IEdgesRenderer) Render() {
 	i.p.Call("render")
 }
 
-/*
-
 // IsEnabled returns the IsEnabled property of class IEdgesRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iedgesrenderer#isenabled
-func (i *IEdgesRenderer) IsEnabled(isEnabled bool) *IEdgesRenderer {
-	p := ba.ctx.Get("IEdgesRenderer").New(isEnabled)
-	return IEdgesRendererFromJSObject(p, ba.ctx)
+func (i *IEdgesRenderer) IsEnabled() bool {
+	retVal := i.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class IEdgesRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iedgesrenderer#isenabled
 func (i *IEdgesRenderer) SetIsEnabled(isEnabled bool) *IEdgesRenderer {
-	p := ba.ctx.Get("IEdgesRenderer").New(isEnabled)
-	return IEdgesRendererFromJSObject(p, ba.ctx)
+	i.p.Set("isEnabled", isEnabled)
+	return i
 }
-
-*/

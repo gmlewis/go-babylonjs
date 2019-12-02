@@ -50,38 +50,34 @@ func (ba *Babylon) NewStickValues(x float64, y float64) *StickValues {
 	return StickValuesFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // X returns the X property of class StickValues.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stickvalues#x
-func (s *StickValues) X(x float64) *StickValues {
-	p := ba.ctx.Get("StickValues").New(x)
-	return StickValuesFromJSObject(p, ba.ctx)
+func (s *StickValues) X() float64 {
+	retVal := s.p.Get("x")
+	return retVal.Float()
 }
 
 // SetX sets the X property of class StickValues.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stickvalues#x
 func (s *StickValues) SetX(x float64) *StickValues {
-	p := ba.ctx.Get("StickValues").New(x)
-	return StickValuesFromJSObject(p, ba.ctx)
+	s.p.Set("x", x)
+	return s
 }
 
 // Y returns the Y property of class StickValues.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stickvalues#y
-func (s *StickValues) Y(y float64) *StickValues {
-	p := ba.ctx.Get("StickValues").New(y)
-	return StickValuesFromJSObject(p, ba.ctx)
+func (s *StickValues) Y() float64 {
+	retVal := s.p.Get("y")
+	return retVal.Float()
 }
 
 // SetY sets the Y property of class StickValues.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stickvalues#y
 func (s *StickValues) SetY(y float64) *StickValues {
-	p := ba.ctx.Get("StickValues").New(y)
-	return StickValuesFromJSObject(p, ba.ctx)
+	s.p.Set("y", y)
+	return s
 }
-
-*/

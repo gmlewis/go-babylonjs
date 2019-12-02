@@ -51,54 +51,50 @@ func (ba *Babylon) NewKeyboardInfoPre(jsType float64, event js.Value) *KeyboardI
 	return KeyboardInfoPreFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Event returns the Event property of class KeyboardInfoPre.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfopre#event
-func (k *KeyboardInfoPre) Event(event js.Value) *KeyboardInfoPre {
-	p := ba.ctx.Get("KeyboardInfoPre").New(event)
-	return KeyboardInfoPreFromJSObject(p, ba.ctx)
+func (k *KeyboardInfoPre) Event() js.Value {
+	retVal := k.p.Get("event")
+	return retVal
 }
 
 // SetEvent sets the Event property of class KeyboardInfoPre.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfopre#event
 func (k *KeyboardInfoPre) SetEvent(event js.Value) *KeyboardInfoPre {
-	p := ba.ctx.Get("KeyboardInfoPre").New(event)
-	return KeyboardInfoPreFromJSObject(p, ba.ctx)
+	k.p.Set("event", event)
+	return k
 }
 
 // SkipOnPointerObservable returns the SkipOnPointerObservable property of class KeyboardInfoPre.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfopre#skiponpointerobservable
-func (k *KeyboardInfoPre) SkipOnPointerObservable(skipOnPointerObservable bool) *KeyboardInfoPre {
-	p := ba.ctx.Get("KeyboardInfoPre").New(skipOnPointerObservable)
-	return KeyboardInfoPreFromJSObject(p, ba.ctx)
+func (k *KeyboardInfoPre) SkipOnPointerObservable() bool {
+	retVal := k.p.Get("skipOnPointerObservable")
+	return retVal.Bool()
 }
 
 // SetSkipOnPointerObservable sets the SkipOnPointerObservable property of class KeyboardInfoPre.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfopre#skiponpointerobservable
 func (k *KeyboardInfoPre) SetSkipOnPointerObservable(skipOnPointerObservable bool) *KeyboardInfoPre {
-	p := ba.ctx.Get("KeyboardInfoPre").New(skipOnPointerObservable)
-	return KeyboardInfoPreFromJSObject(p, ba.ctx)
+	k.p.Set("skipOnPointerObservable", skipOnPointerObservable)
+	return k
 }
 
 // Type returns the Type property of class KeyboardInfoPre.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfopre#type
-func (k *KeyboardInfoPre) Type(jsType float64) *KeyboardInfoPre {
-	p := ba.ctx.Get("KeyboardInfoPre").New(jsType)
-	return KeyboardInfoPreFromJSObject(p, ba.ctx)
+func (k *KeyboardInfoPre) Type() float64 {
+	retVal := k.p.Get("type")
+	return retVal.Float()
 }
 
 // SetType sets the Type property of class KeyboardInfoPre.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfopre#type
 func (k *KeyboardInfoPre) SetType(jsType float64) *KeyboardInfoPre {
-	p := ba.ctx.Get("KeyboardInfoPre").New(jsType)
-	return KeyboardInfoPreFromJSObject(p, ba.ctx)
+	k.p.Set("type", jsType)
+	return k
 }
-
-*/

@@ -38,70 +38,66 @@ func ILoadingScreenArrayToJSArray(array []*ILoadingScreen) []interface{} {
 	return result
 }
 
-/*
-
 // DisplayLoadingUI returns the DisplayLoadingUI property of class ILoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iloadingscreen#displayloadingui
-func (i *ILoadingScreen) DisplayLoadingUI(displayLoadingUI func()) *ILoadingScreen {
-	p := ba.ctx.Get("ILoadingScreen").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {displayLoadingUI(); return nil}))
-	return ILoadingScreenFromJSObject(p, ba.ctx)
+func (i *ILoadingScreen) DisplayLoadingUI() js.Value {
+	retVal := i.p.Get("displayLoadingUI")
+	return retVal
 }
 
 // SetDisplayLoadingUI sets the DisplayLoadingUI property of class ILoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iloadingscreen#displayloadingui
 func (i *ILoadingScreen) SetDisplayLoadingUI(displayLoadingUI func()) *ILoadingScreen {
-	p := ba.ctx.Get("ILoadingScreen").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {displayLoadingUI(); return nil}))
-	return ILoadingScreenFromJSObject(p, ba.ctx)
+	i.p.Set("displayLoadingUI", js.FuncOf(func(this js.Value, args []js.Value) interface{} { displayLoadingUI(); return nil }))
+	return i
 }
 
 // HideLoadingUI returns the HideLoadingUI property of class ILoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iloadingscreen#hideloadingui
-func (i *ILoadingScreen) HideLoadingUI(hideLoadingUI func()) *ILoadingScreen {
-	p := ba.ctx.Get("ILoadingScreen").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {hideLoadingUI(); return nil}))
-	return ILoadingScreenFromJSObject(p, ba.ctx)
+func (i *ILoadingScreen) HideLoadingUI() js.Value {
+	retVal := i.p.Get("hideLoadingUI")
+	return retVal
 }
 
 // SetHideLoadingUI sets the HideLoadingUI property of class ILoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iloadingscreen#hideloadingui
 func (i *ILoadingScreen) SetHideLoadingUI(hideLoadingUI func()) *ILoadingScreen {
-	p := ba.ctx.Get("ILoadingScreen").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {hideLoadingUI(); return nil}))
-	return ILoadingScreenFromJSObject(p, ba.ctx)
+	i.p.Set("hideLoadingUI", js.FuncOf(func(this js.Value, args []js.Value) interface{} { hideLoadingUI(); return nil }))
+	return i
 }
 
 // LoadingUIBackgroundColor returns the LoadingUIBackgroundColor property of class ILoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iloadingscreen#loadinguibackgroundcolor
-func (i *ILoadingScreen) LoadingUIBackgroundColor(loadingUIBackgroundColor string) *ILoadingScreen {
-	p := ba.ctx.Get("ILoadingScreen").New(loadingUIBackgroundColor)
-	return ILoadingScreenFromJSObject(p, ba.ctx)
+func (i *ILoadingScreen) LoadingUIBackgroundColor() string {
+	retVal := i.p.Get("loadingUIBackgroundColor")
+	return retVal.String()
 }
 
 // SetLoadingUIBackgroundColor sets the LoadingUIBackgroundColor property of class ILoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iloadingscreen#loadinguibackgroundcolor
 func (i *ILoadingScreen) SetLoadingUIBackgroundColor(loadingUIBackgroundColor string) *ILoadingScreen {
-	p := ba.ctx.Get("ILoadingScreen").New(loadingUIBackgroundColor)
-	return ILoadingScreenFromJSObject(p, ba.ctx)
+	i.p.Set("loadingUIBackgroundColor", loadingUIBackgroundColor)
+	return i
 }
 
 // LoadingUIText returns the LoadingUIText property of class ILoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iloadingscreen#loadinguitext
-func (i *ILoadingScreen) LoadingUIText(loadingUIText string) *ILoadingScreen {
-	p := ba.ctx.Get("ILoadingScreen").New(loadingUIText)
-	return ILoadingScreenFromJSObject(p, ba.ctx)
+func (i *ILoadingScreen) LoadingUIText() string {
+	retVal := i.p.Get("loadingUIText")
+	return retVal.String()
 }
 
 // SetLoadingUIText sets the LoadingUIText property of class ILoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iloadingscreen#loadinguitext
 func (i *ILoadingScreen) SetLoadingUIText(loadingUIText string) *ILoadingScreen {
-	p := ba.ctx.Get("ILoadingScreen").New(loadingUIText)
-	return ILoadingScreenFromJSObject(p, ba.ctx)
+	i.p.Set("loadingUIText", loadingUIText)
+	return i
 }
-
-*/

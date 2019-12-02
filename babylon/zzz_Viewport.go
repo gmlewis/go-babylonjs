@@ -90,70 +90,66 @@ func (v *Viewport) ToGlobalToRef(renderWidth float64, renderHeight float64, ref 
 	return ViewportFromJSObject(retVal, v.ctx)
 }
 
-/*
-
 // Height returns the Height property of class Viewport.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport#height
-func (v *Viewport) Height(height float64) *Viewport {
-	p := ba.ctx.Get("Viewport").New(height)
-	return ViewportFromJSObject(p, ba.ctx)
+func (v *Viewport) Height() float64 {
+	retVal := v.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class Viewport.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport#height
 func (v *Viewport) SetHeight(height float64) *Viewport {
-	p := ba.ctx.Get("Viewport").New(height)
-	return ViewportFromJSObject(p, ba.ctx)
+	v.p.Set("height", height)
+	return v
 }
 
 // Width returns the Width property of class Viewport.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport#width
-func (v *Viewport) Width(width float64) *Viewport {
-	p := ba.ctx.Get("Viewport").New(width)
-	return ViewportFromJSObject(p, ba.ctx)
+func (v *Viewport) Width() float64 {
+	retVal := v.p.Get("width")
+	return retVal.Float()
 }
 
 // SetWidth sets the Width property of class Viewport.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport#width
 func (v *Viewport) SetWidth(width float64) *Viewport {
-	p := ba.ctx.Get("Viewport").New(width)
-	return ViewportFromJSObject(p, ba.ctx)
+	v.p.Set("width", width)
+	return v
 }
 
 // X returns the X property of class Viewport.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport#x
-func (v *Viewport) X(x float64) *Viewport {
-	p := ba.ctx.Get("Viewport").New(x)
-	return ViewportFromJSObject(p, ba.ctx)
+func (v *Viewport) X() float64 {
+	retVal := v.p.Get("x")
+	return retVal.Float()
 }
 
 // SetX sets the X property of class Viewport.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport#x
 func (v *Viewport) SetX(x float64) *Viewport {
-	p := ba.ctx.Get("Viewport").New(x)
-	return ViewportFromJSObject(p, ba.ctx)
+	v.p.Set("x", x)
+	return v
 }
 
 // Y returns the Y property of class Viewport.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport#y
-func (v *Viewport) Y(y float64) *Viewport {
-	p := ba.ctx.Get("Viewport").New(y)
-	return ViewportFromJSObject(p, ba.ctx)
+func (v *Viewport) Y() float64 {
+	retVal := v.p.Get("y")
+	return retVal.Float()
 }
 
 // SetY sets the Y property of class Viewport.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport#y
 func (v *Viewport) SetY(y float64) *Viewport {
-	p := ba.ctx.Get("Viewport").New(y)
-	return ViewportFromJSObject(p, ba.ctx)
+	v.p.Set("y", y)
+	return v
 }
-
-*/

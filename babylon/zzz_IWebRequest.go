@@ -36,54 +36,50 @@ func IWebRequestArrayToJSArray(array []*IWebRequest) []interface{} {
 	return result
 }
 
-/*
-
 // ResponseURL returns the ResponseURL property of class IWebRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iwebrequest#responseurl
-func (i *IWebRequest) ResponseURL(responseURL string) *IWebRequest {
-	p := ba.ctx.Get("IWebRequest").New(responseURL)
-	return IWebRequestFromJSObject(p, ba.ctx)
+func (i *IWebRequest) ResponseURL() string {
+	retVal := i.p.Get("responseURL")
+	return retVal.String()
 }
 
 // SetResponseURL sets the ResponseURL property of class IWebRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iwebrequest#responseurl
 func (i *IWebRequest) SetResponseURL(responseURL string) *IWebRequest {
-	p := ba.ctx.Get("IWebRequest").New(responseURL)
-	return IWebRequestFromJSObject(p, ba.ctx)
+	i.p.Set("responseURL", responseURL)
+	return i
 }
 
 // Status returns the Status property of class IWebRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iwebrequest#status
-func (i *IWebRequest) Status(status float64) *IWebRequest {
-	p := ba.ctx.Get("IWebRequest").New(status)
-	return IWebRequestFromJSObject(p, ba.ctx)
+func (i *IWebRequest) Status() float64 {
+	retVal := i.p.Get("status")
+	return retVal.Float()
 }
 
 // SetStatus sets the Status property of class IWebRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iwebrequest#status
 func (i *IWebRequest) SetStatus(status float64) *IWebRequest {
-	p := ba.ctx.Get("IWebRequest").New(status)
-	return IWebRequestFromJSObject(p, ba.ctx)
+	i.p.Set("status", status)
+	return i
 }
 
 // StatusText returns the StatusText property of class IWebRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iwebrequest#statustext
-func (i *IWebRequest) StatusText(statusText string) *IWebRequest {
-	p := ba.ctx.Get("IWebRequest").New(statusText)
-	return IWebRequestFromJSObject(p, ba.ctx)
+func (i *IWebRequest) StatusText() string {
+	retVal := i.p.Get("statusText")
+	return retVal.String()
 }
 
 // SetStatusText sets the StatusText property of class IWebRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iwebrequest#statustext
 func (i *IWebRequest) SetStatusText(statusText string) *IWebRequest {
-	p := ba.ctx.Get("IWebRequest").New(statusText)
-	return IWebRequestFromJSObject(p, ba.ctx)
+	i.p.Set("statusText", statusText)
+	return i
 }
-
-*/

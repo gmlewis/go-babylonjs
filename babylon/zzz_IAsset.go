@@ -36,70 +36,66 @@ func IAssetArrayToJSArray(array []*IAsset) []interface{} {
 	return result
 }
 
-/*
-
 // Copyright returns the Copyright property of class IAsset.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasset#copyright
-func (i *IAsset) Copyright(copyright string) *IAsset {
-	p := ba.ctx.Get("IAsset").New(copyright)
-	return IAssetFromJSObject(p, ba.ctx)
+func (i *IAsset) Copyright() string {
+	retVal := i.p.Get("copyright")
+	return retVal.String()
 }
 
 // SetCopyright sets the Copyright property of class IAsset.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasset#copyright
 func (i *IAsset) SetCopyright(copyright string) *IAsset {
-	p := ba.ctx.Get("IAsset").New(copyright)
-	return IAssetFromJSObject(p, ba.ctx)
+	i.p.Set("copyright", copyright)
+	return i
 }
 
 // Generator returns the Generator property of class IAsset.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasset#generator
-func (i *IAsset) Generator(generator string) *IAsset {
-	p := ba.ctx.Get("IAsset").New(generator)
-	return IAssetFromJSObject(p, ba.ctx)
+func (i *IAsset) Generator() string {
+	retVal := i.p.Get("generator")
+	return retVal.String()
 }
 
 // SetGenerator sets the Generator property of class IAsset.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasset#generator
 func (i *IAsset) SetGenerator(generator string) *IAsset {
-	p := ba.ctx.Get("IAsset").New(generator)
-	return IAssetFromJSObject(p, ba.ctx)
+	i.p.Set("generator", generator)
+	return i
 }
 
 // MinVersion returns the MinVersion property of class IAsset.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasset#minversion
-func (i *IAsset) MinVersion(minVersion string) *IAsset {
-	p := ba.ctx.Get("IAsset").New(minVersion)
-	return IAssetFromJSObject(p, ba.ctx)
+func (i *IAsset) MinVersion() string {
+	retVal := i.p.Get("minVersion")
+	return retVal.String()
 }
 
 // SetMinVersion sets the MinVersion property of class IAsset.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasset#minversion
 func (i *IAsset) SetMinVersion(minVersion string) *IAsset {
-	p := ba.ctx.Get("IAsset").New(minVersion)
-	return IAssetFromJSObject(p, ba.ctx)
+	i.p.Set("minVersion", minVersion)
+	return i
 }
 
 // Version returns the Version property of class IAsset.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasset#version
-func (i *IAsset) Version(version string) *IAsset {
-	p := ba.ctx.Get("IAsset").New(version)
-	return IAssetFromJSObject(p, ba.ctx)
+func (i *IAsset) Version() string {
+	retVal := i.p.Get("version")
+	return retVal.String()
 }
 
 // SetVersion sets the Version property of class IAsset.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasset#version
 func (i *IAsset) SetVersion(version string) *IAsset {
-	p := ba.ctx.Get("IAsset").New(version)
-	return IAssetFromJSObject(p, ba.ctx)
+	i.p.Set("version", version)
+	return i
 }
-
-*/

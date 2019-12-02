@@ -58,22 +58,18 @@ func (v *VertexOutputBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Vector returns the Vector property of class VertexOutputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexoutputblock#vector
-func (v *VertexOutputBlock) Vector(vector *NodeMaterialConnectionPoint) *VertexOutputBlock {
-	p := ba.ctx.Get("VertexOutputBlock").New(vector.JSObject())
-	return VertexOutputBlockFromJSObject(p, ba.ctx)
+func (v *VertexOutputBlock) Vector() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("vector")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetVector sets the Vector property of class VertexOutputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexoutputblock#vector
 func (v *VertexOutputBlock) SetVector(vector *NodeMaterialConnectionPoint) *VertexOutputBlock {
-	p := ba.ctx.Get("VertexOutputBlock").New(vector.JSObject())
-	return VertexOutputBlockFromJSObject(p, ba.ctx)
+	v.p.Set("vector", vector.JSObject())
+	return v
 }
-
-*/

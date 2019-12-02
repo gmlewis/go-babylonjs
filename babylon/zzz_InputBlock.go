@@ -163,278 +163,274 @@ func (i *InputBlock) _deserialize(serializationObject interface{}, scene *Scene,
 	i.p.Call("_deserialize", args...)
 }
 
-/*
-
 // AnimationType returns the AnimationType property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#animationtype
-func (i *InputBlock) AnimationType(animationType *AnimatedInputBlockTypes) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(animationType.JSObject())
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) AnimationType() js.Value {
+	retVal := i.p.Get("animationType")
+	return retVal
 }
 
 // SetAnimationType sets the AnimationType property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#animationtype
-func (i *InputBlock) SetAnimationType(animationType *AnimatedInputBlockTypes) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(animationType.JSObject())
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) SetAnimationType(animationType js.Value) *InputBlock {
+	i.p.Set("animationType", animationType)
+	return i
 }
 
 // AssociatedVariableName returns the AssociatedVariableName property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#associatedvariablename
-func (i *InputBlock) AssociatedVariableName(associatedVariableName string) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(associatedVariableName)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) AssociatedVariableName() string {
+	retVal := i.p.Get("associatedVariableName")
+	return retVal.String()
 }
 
 // SetAssociatedVariableName sets the AssociatedVariableName property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#associatedvariablename
 func (i *InputBlock) SetAssociatedVariableName(associatedVariableName string) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(associatedVariableName)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("associatedVariableName", associatedVariableName)
+	return i
 }
 
 // IsAttribute returns the IsAttribute property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#isattribute
-func (i *InputBlock) IsAttribute(isAttribute bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isAttribute)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) IsAttribute() bool {
+	retVal := i.p.Get("isAttribute")
+	return retVal.Bool()
 }
 
 // SetIsAttribute sets the IsAttribute property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#isattribute
 func (i *InputBlock) SetIsAttribute(isAttribute bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isAttribute)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("isAttribute", isAttribute)
+	return i
 }
 
 // IsConstant returns the IsConstant property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#isconstant
-func (i *InputBlock) IsConstant(isConstant bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isConstant)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) IsConstant() bool {
+	retVal := i.p.Get("isConstant")
+	return retVal.Bool()
 }
 
 // SetIsConstant sets the IsConstant property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#isconstant
 func (i *InputBlock) SetIsConstant(isConstant bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isConstant)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("isConstant", isConstant)
+	return i
 }
 
 // IsSystemValue returns the IsSystemValue property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#issystemvalue
-func (i *InputBlock) IsSystemValue(isSystemValue bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isSystemValue)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) IsSystemValue() bool {
+	retVal := i.p.Get("isSystemValue")
+	return retVal.Bool()
 }
 
 // SetIsSystemValue sets the IsSystemValue property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#issystemvalue
 func (i *InputBlock) SetIsSystemValue(isSystemValue bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isSystemValue)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("isSystemValue", isSystemValue)
+	return i
 }
 
 // IsUndefined returns the IsUndefined property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#isundefined
-func (i *InputBlock) IsUndefined(isUndefined bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isUndefined)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) IsUndefined() bool {
+	retVal := i.p.Get("isUndefined")
+	return retVal.Bool()
 }
 
 // SetIsUndefined sets the IsUndefined property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#isundefined
 func (i *InputBlock) SetIsUndefined(isUndefined bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isUndefined)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("isUndefined", isUndefined)
+	return i
 }
 
 // IsUniform returns the IsUniform property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#isuniform
-func (i *InputBlock) IsUniform(isUniform bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isUniform)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) IsUniform() bool {
+	retVal := i.p.Get("isUniform")
+	return retVal.Bool()
 }
 
 // SetIsUniform sets the IsUniform property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#isuniform
 func (i *InputBlock) SetIsUniform(isUniform bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isUniform)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("isUniform", isUniform)
+	return i
 }
 
 // IsVarying returns the IsVarying property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#isvarying
-func (i *InputBlock) IsVarying(isVarying bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isVarying)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) IsVarying() bool {
+	retVal := i.p.Get("isVarying")
+	return retVal.Bool()
 }
 
 // SetIsVarying sets the IsVarying property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#isvarying
 func (i *InputBlock) SetIsVarying(isVarying bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(isVarying)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("isVarying", isVarying)
+	return i
 }
 
 // MatrixMode returns the MatrixMode property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#matrixmode
-func (i *InputBlock) MatrixMode(matrixMode float64) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(matrixMode)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) MatrixMode() float64 {
+	retVal := i.p.Get("matrixMode")
+	return retVal.Float()
 }
 
 // SetMatrixMode sets the MatrixMode property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#matrixmode
 func (i *InputBlock) SetMatrixMode(matrixMode float64) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(matrixMode)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("matrixMode", matrixMode)
+	return i
 }
 
 // Max returns the Max property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#max
-func (i *InputBlock) Max(max float64) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(max)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) Max() float64 {
+	retVal := i.p.Get("max")
+	return retVal.Float()
 }
 
 // SetMax sets the Max property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#max
 func (i *InputBlock) SetMax(max float64) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(max)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("max", max)
+	return i
 }
 
 // Min returns the Min property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#min
-func (i *InputBlock) Min(min float64) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(min)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) Min() float64 {
+	retVal := i.p.Get("min")
+	return retVal.Float()
 }
 
 // SetMin sets the Min property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#min
 func (i *InputBlock) SetMin(min float64) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(min)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("min", min)
+	return i
 }
 
 // Output returns the Output property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#output
-func (i *InputBlock) Output(output *NodeMaterialConnectionPoint) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(output.JSObject())
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := i.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, i.ctx)
 }
 
 // SetOutput sets the Output property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#output
 func (i *InputBlock) SetOutput(output *NodeMaterialConnectionPoint) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(output.JSObject())
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("output", output.JSObject())
+	return i
 }
 
 // SystemValue returns the SystemValue property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#systemvalue
-func (i *InputBlock) SystemValue(systemValue js.Value) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(systemValue)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) SystemValue() js.Value {
+	retVal := i.p.Get("systemValue")
+	return retVal
 }
 
 // SetSystemValue sets the SystemValue property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#systemvalue
 func (i *InputBlock) SetSystemValue(systemValue js.Value) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(systemValue)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("systemValue", systemValue)
+	return i
 }
 
 // Type returns the Type property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#type
-func (i *InputBlock) Type(jsType js.Value) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(jsType)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) Type() js.Value {
+	retVal := i.p.Get("type")
+	return retVal
 }
 
 // SetType sets the Type property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#type
 func (i *InputBlock) SetType(jsType js.Value) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(jsType)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("type", jsType)
+	return i
 }
 
 // Value returns the Value property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#value
-func (i *InputBlock) Value(value interface{}) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(value)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) Value() interface{} {
+	retVal := i.p.Get("value")
+	return retVal
 }
 
 // SetValue sets the Value property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#value
 func (i *InputBlock) SetValue(value interface{}) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(value)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("value", value)
+	return i
 }
 
 // ValueCallback returns the ValueCallback property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#valuecallback
-func (i *InputBlock) ValueCallback(valueCallback func()) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {valueCallback(); return nil}))
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) ValueCallback() js.Value {
+	retVal := i.p.Get("valueCallback")
+	return retVal
 }
 
 // SetValueCallback sets the ValueCallback property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#valuecallback
 func (i *InputBlock) SetValueCallback(valueCallback func()) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {valueCallback(); return nil}))
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("valueCallback", js.FuncOf(func(this js.Value, args []js.Value) interface{} { valueCallback(); return nil }))
+	return i
 }
 
 // VisibleInInspector returns the VisibleInInspector property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#visibleininspector
-func (i *InputBlock) VisibleInInspector(visibleInInspector bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(visibleInInspector)
-	return InputBlockFromJSObject(p, ba.ctx)
+func (i *InputBlock) VisibleInInspector() bool {
+	retVal := i.p.Get("visibleInInspector")
+	return retVal.Bool()
 }
 
 // SetVisibleInInspector sets the VisibleInInspector property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#visibleininspector
 func (i *InputBlock) SetVisibleInInspector(visibleInInspector bool) *InputBlock {
-	p := ba.ctx.Get("InputBlock").New(visibleInInspector)
-	return InputBlockFromJSObject(p, ba.ctx)
+	i.p.Set("visibleInInspector", visibleInInspector)
+	return i
 }
-
-*/

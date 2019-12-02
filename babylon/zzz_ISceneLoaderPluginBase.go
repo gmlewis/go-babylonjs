@@ -172,38 +172,34 @@ func (i *ISceneLoaderPluginBase) RewriteRootURL(rootUrl string, opts *ISceneLoad
 	return retVal.String()
 }
 
-/*
-
 // Extensions returns the Extensions property of class ISceneLoaderPluginBase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginbase#extensions
-func (i *ISceneLoaderPluginBase) Extensions(extensions string) *ISceneLoaderPluginBase {
-	p := ba.ctx.Get("ISceneLoaderPluginBase").New(extensions)
-	return ISceneLoaderPluginBaseFromJSObject(p, ba.ctx)
+func (i *ISceneLoaderPluginBase) Extensions() string {
+	retVal := i.p.Get("extensions")
+	return retVal.String()
 }
 
 // SetExtensions sets the Extensions property of class ISceneLoaderPluginBase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginbase#extensions
 func (i *ISceneLoaderPluginBase) SetExtensions(extensions string) *ISceneLoaderPluginBase {
-	p := ba.ctx.Get("ISceneLoaderPluginBase").New(extensions)
-	return ISceneLoaderPluginBaseFromJSObject(p, ba.ctx)
+	i.p.Set("extensions", extensions)
+	return i
 }
 
 // Name returns the Name property of class ISceneLoaderPluginBase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginbase#name
-func (i *ISceneLoaderPluginBase) Name(name string) *ISceneLoaderPluginBase {
-	p := ba.ctx.Get("ISceneLoaderPluginBase").New(name)
-	return ISceneLoaderPluginBaseFromJSObject(p, ba.ctx)
+func (i *ISceneLoaderPluginBase) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ISceneLoaderPluginBase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginbase#name
 func (i *ISceneLoaderPluginBase) SetName(name string) *ISceneLoaderPluginBase {
-	p := ba.ctx.Get("ISceneLoaderPluginBase").New(name)
-	return ISceneLoaderPluginBaseFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
-
-*/

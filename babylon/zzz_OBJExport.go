@@ -87,7 +87,3 @@ func (o *OBJExport) OBJ(mesh *Mesh, opts *OBJExportOBJOpts) string {
 	retVal := o.p.Call("OBJ", args...)
 	return retVal.String()
 }
-
-/*
-
- */

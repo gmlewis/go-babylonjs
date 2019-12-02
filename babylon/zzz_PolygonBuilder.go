@@ -103,7 +103,3 @@ func (p *PolygonBuilder) ExtrudePolygon(name string, options js.Value, opts *Pol
 	retVal := p.p.Call("ExtrudePolygon", args...)
 	return MeshFromJSObject(retVal, p.ctx)
 }
-
-/*
-
- */

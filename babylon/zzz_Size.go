@@ -203,54 +203,50 @@ func (s *Size) Zero() *Size {
 	return SizeFromJSObject(retVal, s.ctx)
 }
 
-/*
-
 // Height returns the Height property of class Size.
 //
 // https://doc.babylonjs.com/api/classes/babylon.size#height
-func (s *Size) Height(height float64) *Size {
-	p := ba.ctx.Get("Size").New(height)
-	return SizeFromJSObject(p, ba.ctx)
+func (s *Size) Height() float64 {
+	retVal := s.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class Size.
 //
 // https://doc.babylonjs.com/api/classes/babylon.size#height
 func (s *Size) SetHeight(height float64) *Size {
-	p := ba.ctx.Get("Size").New(height)
-	return SizeFromJSObject(p, ba.ctx)
+	s.p.Set("height", height)
+	return s
 }
 
 // Surface returns the Surface property of class Size.
 //
 // https://doc.babylonjs.com/api/classes/babylon.size#surface
-func (s *Size) Surface(surface float64) *Size {
-	p := ba.ctx.Get("Size").New(surface)
-	return SizeFromJSObject(p, ba.ctx)
+func (s *Size) Surface() float64 {
+	retVal := s.p.Get("surface")
+	return retVal.Float()
 }
 
 // SetSurface sets the Surface property of class Size.
 //
 // https://doc.babylonjs.com/api/classes/babylon.size#surface
 func (s *Size) SetSurface(surface float64) *Size {
-	p := ba.ctx.Get("Size").New(surface)
-	return SizeFromJSObject(p, ba.ctx)
+	s.p.Set("surface", surface)
+	return s
 }
 
 // Width returns the Width property of class Size.
 //
 // https://doc.babylonjs.com/api/classes/babylon.size#width
-func (s *Size) Width(width float64) *Size {
-	p := ba.ctx.Get("Size").New(width)
-	return SizeFromJSObject(p, ba.ctx)
+func (s *Size) Width() float64 {
+	retVal := s.p.Get("width")
+	return retVal.Float()
 }
 
 // SetWidth sets the Width property of class Size.
 //
 // https://doc.babylonjs.com/api/classes/babylon.size#width
 func (s *Size) SetWidth(width float64) *Size {
-	p := ba.ctx.Get("Size").New(width)
-	return SizeFromJSObject(p, ba.ctx)
+	s.p.Set("width", width)
+	return s
 }
-
-*/

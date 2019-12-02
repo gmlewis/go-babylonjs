@@ -36,54 +36,50 @@ func IAccessorSparseIndicesArrayToJSArray(array []*IAccessorSparseIndices) []int
 	return result
 }
 
-/*
-
 // BufferView returns the BufferView property of class IAccessorSparseIndices.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparseindices#bufferview
-func (i *IAccessorSparseIndices) BufferView(bufferView float64) *IAccessorSparseIndices {
-	p := ba.ctx.Get("IAccessorSparseIndices").New(bufferView)
-	return IAccessorSparseIndicesFromJSObject(p, ba.ctx)
+func (i *IAccessorSparseIndices) BufferView() float64 {
+	retVal := i.p.Get("bufferView")
+	return retVal.Float()
 }
 
 // SetBufferView sets the BufferView property of class IAccessorSparseIndices.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparseindices#bufferview
 func (i *IAccessorSparseIndices) SetBufferView(bufferView float64) *IAccessorSparseIndices {
-	p := ba.ctx.Get("IAccessorSparseIndices").New(bufferView)
-	return IAccessorSparseIndicesFromJSObject(p, ba.ctx)
+	i.p.Set("bufferView", bufferView)
+	return i
 }
 
 // ByteOffset returns the ByteOffset property of class IAccessorSparseIndices.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparseindices#byteoffset
-func (i *IAccessorSparseIndices) ByteOffset(byteOffset float64) *IAccessorSparseIndices {
-	p := ba.ctx.Get("IAccessorSparseIndices").New(byteOffset)
-	return IAccessorSparseIndicesFromJSObject(p, ba.ctx)
+func (i *IAccessorSparseIndices) ByteOffset() float64 {
+	retVal := i.p.Get("byteOffset")
+	return retVal.Float()
 }
 
 // SetByteOffset sets the ByteOffset property of class IAccessorSparseIndices.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparseindices#byteoffset
 func (i *IAccessorSparseIndices) SetByteOffset(byteOffset float64) *IAccessorSparseIndices {
-	p := ba.ctx.Get("IAccessorSparseIndices").New(byteOffset)
-	return IAccessorSparseIndicesFromJSObject(p, ba.ctx)
+	i.p.Set("byteOffset", byteOffset)
+	return i
 }
 
 // ComponentType returns the ComponentType property of class IAccessorSparseIndices.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparseindices#componenttype
-func (i *IAccessorSparseIndices) ComponentType(componentType *AccessorComponentType) *IAccessorSparseIndices {
-	p := ba.ctx.Get("IAccessorSparseIndices").New(componentType.JSObject())
-	return IAccessorSparseIndicesFromJSObject(p, ba.ctx)
+func (i *IAccessorSparseIndices) ComponentType() js.Value {
+	retVal := i.p.Get("componentType")
+	return retVal
 }
 
 // SetComponentType sets the ComponentType property of class IAccessorSparseIndices.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparseindices#componenttype
-func (i *IAccessorSparseIndices) SetComponentType(componentType *AccessorComponentType) *IAccessorSparseIndices {
-	p := ba.ctx.Get("IAccessorSparseIndices").New(componentType.JSObject())
-	return IAccessorSparseIndicesFromJSObject(p, ba.ctx)
+func (i *IAccessorSparseIndices) SetComponentType(componentType js.Value) *IAccessorSparseIndices {
+	i.p.Set("componentType", componentType)
+	return i
 }
-
-*/

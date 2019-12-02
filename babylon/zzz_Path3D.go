@@ -348,22 +348,18 @@ func (p *Path3D) Update(path *Vector3, opts *Path3DUpdateOpts) *Path3D {
 	return Path3DFromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // Path returns the Path property of class Path3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#path
-func (p *Path3D) Path(path *Vector3) *Path3D {
-	p := ba.ctx.Get("Path3D").New(path.JSObject())
-	return Path3DFromJSObject(p, ba.ctx)
+func (p *Path3D) Path() *Vector3 {
+	retVal := p.p.Get("path")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetPath sets the Path property of class Path3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#path
 func (p *Path3D) SetPath(path *Vector3) *Path3D {
-	p := ba.ctx.Get("Path3D").New(path.JSObject())
-	return Path3DFromJSObject(p, ba.ctx)
+	p.p.Set("path", path.JSObject())
+	return p
 }
-
-*/

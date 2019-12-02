@@ -182,102 +182,102 @@ func (m *MultiLine) _measure() {
 	m.p.Call("_measure")
 }
 
-/*
-
 // Dash returns the Dash property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#dash
-func (m *MultiLine) Dash(dash []float64) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(dash)
-	return MultiLineFromJSObject(p, ba.ctx)
+func (m *MultiLine) Dash() []float64 {
+	retVal := m.p.Get("dash")
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetDash sets the Dash property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#dash
 func (m *MultiLine) SetDash(dash []float64) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(dash)
-	return MultiLineFromJSObject(p, ba.ctx)
+	m.p.Set("dash", dash)
+	return m
 }
 
 // HorizontalAlignment returns the HorizontalAlignment property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#horizontalalignment
-func (m *MultiLine) HorizontalAlignment(horizontalAlignment float64) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(horizontalAlignment)
-	return MultiLineFromJSObject(p, ba.ctx)
+func (m *MultiLine) HorizontalAlignment() float64 {
+	retVal := m.p.Get("horizontalAlignment")
+	return retVal.Float()
 }
 
 // SetHorizontalAlignment sets the HorizontalAlignment property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#horizontalalignment
 func (m *MultiLine) SetHorizontalAlignment(horizontalAlignment float64) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(horizontalAlignment)
-	return MultiLineFromJSObject(p, ba.ctx)
+	m.p.Set("horizontalAlignment", horizontalAlignment)
+	return m
 }
 
 // LineWidth returns the LineWidth property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#linewidth
-func (m *MultiLine) LineWidth(lineWidth float64) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(lineWidth)
-	return MultiLineFromJSObject(p, ba.ctx)
+func (m *MultiLine) LineWidth() float64 {
+	retVal := m.p.Get("lineWidth")
+	return retVal.Float()
 }
 
 // SetLineWidth sets the LineWidth property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#linewidth
 func (m *MultiLine) SetLineWidth(lineWidth float64) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(lineWidth)
-	return MultiLineFromJSObject(p, ba.ctx)
+	m.p.Set("lineWidth", lineWidth)
+	return m
 }
 
 // Name returns the Name property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#name
-func (m *MultiLine) Name(name string) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(name)
-	return MultiLineFromJSObject(p, ba.ctx)
+func (m *MultiLine) Name() string {
+	retVal := m.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#name
 func (m *MultiLine) SetName(name string) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(name)
-	return MultiLineFromJSObject(p, ba.ctx)
+	m.p.Set("name", name)
+	return m
 }
 
 // OnPointUpdate returns the OnPointUpdate property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#onpointupdate
-func (m *MultiLine) OnPointUpdate(onPointUpdate func()) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointUpdate(); return nil}))
-	return MultiLineFromJSObject(p, ba.ctx)
+func (m *MultiLine) OnPointUpdate() js.Value {
+	retVal := m.p.Get("onPointUpdate")
+	return retVal
 }
 
 // SetOnPointUpdate sets the OnPointUpdate property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#onpointupdate
 func (m *MultiLine) SetOnPointUpdate(onPointUpdate func()) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointUpdate(); return nil}))
-	return MultiLineFromJSObject(p, ba.ctx)
+	m.p.Set("onPointUpdate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onPointUpdate(); return nil }))
+	return m
 }
 
 // VerticalAlignment returns the VerticalAlignment property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#verticalalignment
-func (m *MultiLine) VerticalAlignment(verticalAlignment float64) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(verticalAlignment)
-	return MultiLineFromJSObject(p, ba.ctx)
+func (m *MultiLine) VerticalAlignment() float64 {
+	retVal := m.p.Get("verticalAlignment")
+	return retVal.Float()
 }
 
 // SetVerticalAlignment sets the VerticalAlignment property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#verticalalignment
 func (m *MultiLine) SetVerticalAlignment(verticalAlignment float64) *MultiLine {
-	p := ba.ctx.Get("MultiLine").New(verticalAlignment)
-	return MultiLineFromJSObject(p, ba.ctx)
+	m.p.Set("verticalAlignment", verticalAlignment)
+	return m
 }
-
-*/

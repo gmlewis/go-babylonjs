@@ -38,246 +38,242 @@ func PhysicsImpostorParametersArrayToJSArray(array []*PhysicsImpostorParameters)
 	return result
 }
 
-/*
-
 // Damping returns the Damping property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#damping
-func (p *PhysicsImpostorParameters) Damping(damping float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(damping)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) Damping() float64 {
+	retVal := p.p.Get("damping")
+	return retVal.Float()
 }
 
 // SetDamping sets the Damping property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#damping
 func (p *PhysicsImpostorParameters) SetDamping(damping float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(damping)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("damping", damping)
+	return p
 }
 
 // DisableBidirectionalTransformation returns the DisableBidirectionalTransformation property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#disablebidirectionaltransformation
-func (p *PhysicsImpostorParameters) DisableBidirectionalTransformation(disableBidirectionalTransformation bool) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(disableBidirectionalTransformation)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) DisableBidirectionalTransformation() bool {
+	retVal := p.p.Get("disableBidirectionalTransformation")
+	return retVal.Bool()
 }
 
 // SetDisableBidirectionalTransformation sets the DisableBidirectionalTransformation property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#disablebidirectionaltransformation
 func (p *PhysicsImpostorParameters) SetDisableBidirectionalTransformation(disableBidirectionalTransformation bool) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(disableBidirectionalTransformation)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("disableBidirectionalTransformation", disableBidirectionalTransformation)
+	return p
 }
 
 // FixedPoints returns the FixedPoints property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#fixedpoints
-func (p *PhysicsImpostorParameters) FixedPoints(fixedPoints float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(fixedPoints)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) FixedPoints() float64 {
+	retVal := p.p.Get("fixedPoints")
+	return retVal.Float()
 }
 
 // SetFixedPoints sets the FixedPoints property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#fixedpoints
 func (p *PhysicsImpostorParameters) SetFixedPoints(fixedPoints float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(fixedPoints)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("fixedPoints", fixedPoints)
+	return p
 }
 
 // Friction returns the Friction property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#friction
-func (p *PhysicsImpostorParameters) Friction(friction float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(friction)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) Friction() float64 {
+	retVal := p.p.Get("friction")
+	return retVal.Float()
 }
 
 // SetFriction sets the Friction property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#friction
 func (p *PhysicsImpostorParameters) SetFriction(friction float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(friction)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("friction", friction)
+	return p
 }
 
 // IgnoreParent returns the IgnoreParent property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#ignoreparent
-func (p *PhysicsImpostorParameters) IgnoreParent(ignoreParent bool) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(ignoreParent)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) IgnoreParent() bool {
+	retVal := p.p.Get("ignoreParent")
+	return retVal.Bool()
 }
 
 // SetIgnoreParent sets the IgnoreParent property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#ignoreparent
 func (p *PhysicsImpostorParameters) SetIgnoreParent(ignoreParent bool) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(ignoreParent)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("ignoreParent", ignoreParent)
+	return p
 }
 
 // Margin returns the Margin property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#margin
-func (p *PhysicsImpostorParameters) Margin(margin float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(margin)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) Margin() float64 {
+	retVal := p.p.Get("margin")
+	return retVal.Float()
 }
 
 // SetMargin sets the Margin property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#margin
 func (p *PhysicsImpostorParameters) SetMargin(margin float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(margin)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("margin", margin)
+	return p
 }
 
 // Mass returns the Mass property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#mass
-func (p *PhysicsImpostorParameters) Mass(mass float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(mass)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) Mass() float64 {
+	retVal := p.p.Get("mass")
+	return retVal.Float()
 }
 
 // SetMass sets the Mass property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#mass
 func (p *PhysicsImpostorParameters) SetMass(mass float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(mass)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("mass", mass)
+	return p
 }
 
 // NativeOptions returns the NativeOptions property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#nativeoptions
-func (p *PhysicsImpostorParameters) NativeOptions(nativeOptions interface{}) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(nativeOptions)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) NativeOptions() interface{} {
+	retVal := p.p.Get("nativeOptions")
+	return retVal
 }
 
 // SetNativeOptions sets the NativeOptions property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#nativeoptions
 func (p *PhysicsImpostorParameters) SetNativeOptions(nativeOptions interface{}) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(nativeOptions)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("nativeOptions", nativeOptions)
+	return p
 }
 
 // Path returns the Path property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#path
-func (p *PhysicsImpostorParameters) Path(path interface{}) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(path)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) Path() interface{} {
+	retVal := p.p.Get("path")
+	return retVal
 }
 
 // SetPath sets the Path property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#path
 func (p *PhysicsImpostorParameters) SetPath(path interface{}) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(path)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("path", path)
+	return p
 }
 
 // PositionIterations returns the PositionIterations property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#positioniterations
-func (p *PhysicsImpostorParameters) PositionIterations(positionIterations float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(positionIterations)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) PositionIterations() float64 {
+	retVal := p.p.Get("positionIterations")
+	return retVal.Float()
 }
 
 // SetPositionIterations sets the PositionIterations property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#positioniterations
 func (p *PhysicsImpostorParameters) SetPositionIterations(positionIterations float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(positionIterations)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("positionIterations", positionIterations)
+	return p
 }
 
 // Pressure returns the Pressure property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#pressure
-func (p *PhysicsImpostorParameters) Pressure(pressure float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(pressure)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) Pressure() float64 {
+	retVal := p.p.Get("pressure")
+	return retVal.Float()
 }
 
 // SetPressure sets the Pressure property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#pressure
 func (p *PhysicsImpostorParameters) SetPressure(pressure float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(pressure)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("pressure", pressure)
+	return p
 }
 
 // Restitution returns the Restitution property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#restitution
-func (p *PhysicsImpostorParameters) Restitution(restitution float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(restitution)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) Restitution() float64 {
+	retVal := p.p.Get("restitution")
+	return retVal.Float()
 }
 
 // SetRestitution sets the Restitution property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#restitution
 func (p *PhysicsImpostorParameters) SetRestitution(restitution float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(restitution)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("restitution", restitution)
+	return p
 }
 
 // Shape returns the Shape property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#shape
-func (p *PhysicsImpostorParameters) Shape(shape interface{}) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(shape)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) Shape() interface{} {
+	retVal := p.p.Get("shape")
+	return retVal
 }
 
 // SetShape sets the Shape property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#shape
 func (p *PhysicsImpostorParameters) SetShape(shape interface{}) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(shape)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("shape", shape)
+	return p
 }
 
 // Stiffness returns the Stiffness property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#stiffness
-func (p *PhysicsImpostorParameters) Stiffness(stiffness float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(stiffness)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) Stiffness() float64 {
+	retVal := p.p.Get("stiffness")
+	return retVal.Float()
 }
 
 // SetStiffness sets the Stiffness property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#stiffness
 func (p *PhysicsImpostorParameters) SetStiffness(stiffness float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(stiffness)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("stiffness", stiffness)
+	return p
 }
 
 // VelocityIterations returns the VelocityIterations property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#velocityiterations
-func (p *PhysicsImpostorParameters) VelocityIterations(velocityIterations float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(velocityIterations)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+func (p *PhysicsImpostorParameters) VelocityIterations() float64 {
+	retVal := p.p.Get("velocityIterations")
+	return retVal.Float()
 }
 
 // SetVelocityIterations sets the VelocityIterations property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#velocityiterations
 func (p *PhysicsImpostorParameters) SetVelocityIterations(velocityIterations float64) *PhysicsImpostorParameters {
-	p := ba.ctx.Get("PhysicsImpostorParameters").New(velocityIterations)
-	return PhysicsImpostorParametersFromJSObject(p, ba.ctx)
+	p.p.Set("velocityIterations", velocityIterations)
+	return p
 }
-
-*/

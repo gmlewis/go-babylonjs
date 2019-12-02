@@ -81,70 +81,66 @@ func (c *ClampBlock) _deserialize(serializationObject interface{}, scene *Scene,
 	c.p.Call("_deserialize", args...)
 }
 
-/*
-
 // Maximum returns the Maximum property of class ClampBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock#maximum
-func (c *ClampBlock) Maximum(maximum float64) *ClampBlock {
-	p := ba.ctx.Get("ClampBlock").New(maximum)
-	return ClampBlockFromJSObject(p, ba.ctx)
+func (c *ClampBlock) Maximum() float64 {
+	retVal := c.p.Get("maximum")
+	return retVal.Float()
 }
 
 // SetMaximum sets the Maximum property of class ClampBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock#maximum
 func (c *ClampBlock) SetMaximum(maximum float64) *ClampBlock {
-	p := ba.ctx.Get("ClampBlock").New(maximum)
-	return ClampBlockFromJSObject(p, ba.ctx)
+	c.p.Set("maximum", maximum)
+	return c
 }
 
 // Minimum returns the Minimum property of class ClampBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock#minimum
-func (c *ClampBlock) Minimum(minimum float64) *ClampBlock {
-	p := ba.ctx.Get("ClampBlock").New(minimum)
-	return ClampBlockFromJSObject(p, ba.ctx)
+func (c *ClampBlock) Minimum() float64 {
+	retVal := c.p.Get("minimum")
+	return retVal.Float()
 }
 
 // SetMinimum sets the Minimum property of class ClampBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock#minimum
 func (c *ClampBlock) SetMinimum(minimum float64) *ClampBlock {
-	p := ba.ctx.Get("ClampBlock").New(minimum)
-	return ClampBlockFromJSObject(p, ba.ctx)
+	c.p.Set("minimum", minimum)
+	return c
 }
 
 // Output returns the Output property of class ClampBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock#output
-func (c *ClampBlock) Output(output *NodeMaterialConnectionPoint) *ClampBlock {
-	p := ba.ctx.Get("ClampBlock").New(output.JSObject())
-	return ClampBlockFromJSObject(p, ba.ctx)
+func (c *ClampBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetOutput sets the Output property of class ClampBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock#output
 func (c *ClampBlock) SetOutput(output *NodeMaterialConnectionPoint) *ClampBlock {
-	p := ba.ctx.Get("ClampBlock").New(output.JSObject())
-	return ClampBlockFromJSObject(p, ba.ctx)
+	c.p.Set("output", output.JSObject())
+	return c
 }
 
 // Value returns the Value property of class ClampBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock#value
-func (c *ClampBlock) Value(value *NodeMaterialConnectionPoint) *ClampBlock {
-	p := ba.ctx.Get("ClampBlock").New(value.JSObject())
-	return ClampBlockFromJSObject(p, ba.ctx)
+func (c *ClampBlock) Value() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("value")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetValue sets the Value property of class ClampBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock#value
 func (c *ClampBlock) SetValue(value *NodeMaterialConnectionPoint) *ClampBlock {
-	p := ba.ctx.Get("ClampBlock").New(value.JSObject())
-	return ClampBlockFromJSObject(p, ba.ctx)
+	c.p.Set("value", value.JSObject())
+	return c
 }
-
-*/

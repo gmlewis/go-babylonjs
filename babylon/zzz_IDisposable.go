@@ -43,7 +43,3 @@ func (i *IDisposable) Dispose() {
 
 	i.p.Call("dispose")
 }
-
-/*
-
- */

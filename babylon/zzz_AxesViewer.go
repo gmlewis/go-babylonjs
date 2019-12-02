@@ -119,86 +119,82 @@ func (a *AxesViewer) Update(position *Vector3, xaxis *Vector3, yaxis *Vector3, z
 	a.p.Call("update", args...)
 }
 
-/*
-
 // ScaleLines returns the ScaleLines property of class AxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#scalelines
-func (a *AxesViewer) ScaleLines(scaleLines float64) *AxesViewer {
-	p := ba.ctx.Get("AxesViewer").New(scaleLines)
-	return AxesViewerFromJSObject(p, ba.ctx)
+func (a *AxesViewer) ScaleLines() float64 {
+	retVal := a.p.Get("scaleLines")
+	return retVal.Float()
 }
 
 // SetScaleLines sets the ScaleLines property of class AxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#scalelines
 func (a *AxesViewer) SetScaleLines(scaleLines float64) *AxesViewer {
-	p := ba.ctx.Get("AxesViewer").New(scaleLines)
-	return AxesViewerFromJSObject(p, ba.ctx)
+	a.p.Set("scaleLines", scaleLines)
+	return a
 }
 
 // Scene returns the Scene property of class AxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#scene
-func (a *AxesViewer) Scene(scene *Scene) *AxesViewer {
-	p := ba.ctx.Get("AxesViewer").New(scene.JSObject())
-	return AxesViewerFromJSObject(p, ba.ctx)
+func (a *AxesViewer) Scene() *Scene {
+	retVal := a.p.Get("scene")
+	return SceneFromJSObject(retVal, a.ctx)
 }
 
 // SetScene sets the Scene property of class AxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#scene
 func (a *AxesViewer) SetScene(scene *Scene) *AxesViewer {
-	p := ba.ctx.Get("AxesViewer").New(scene.JSObject())
-	return AxesViewerFromJSObject(p, ba.ctx)
+	a.p.Set("scene", scene.JSObject())
+	return a
 }
 
 // XAxis returns the XAxis property of class AxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#xaxis
-func (a *AxesViewer) XAxis(xAxis *TransformNode) *AxesViewer {
-	p := ba.ctx.Get("AxesViewer").New(xAxis.JSObject())
-	return AxesViewerFromJSObject(p, ba.ctx)
+func (a *AxesViewer) XAxis() *TransformNode {
+	retVal := a.p.Get("xAxis")
+	return TransformNodeFromJSObject(retVal, a.ctx)
 }
 
 // SetXAxis sets the XAxis property of class AxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#xaxis
 func (a *AxesViewer) SetXAxis(xAxis *TransformNode) *AxesViewer {
-	p := ba.ctx.Get("AxesViewer").New(xAxis.JSObject())
-	return AxesViewerFromJSObject(p, ba.ctx)
+	a.p.Set("xAxis", xAxis.JSObject())
+	return a
 }
 
 // YAxis returns the YAxis property of class AxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#yaxis
-func (a *AxesViewer) YAxis(yAxis *TransformNode) *AxesViewer {
-	p := ba.ctx.Get("AxesViewer").New(yAxis.JSObject())
-	return AxesViewerFromJSObject(p, ba.ctx)
+func (a *AxesViewer) YAxis() *TransformNode {
+	retVal := a.p.Get("yAxis")
+	return TransformNodeFromJSObject(retVal, a.ctx)
 }
 
 // SetYAxis sets the YAxis property of class AxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#yaxis
 func (a *AxesViewer) SetYAxis(yAxis *TransformNode) *AxesViewer {
-	p := ba.ctx.Get("AxesViewer").New(yAxis.JSObject())
-	return AxesViewerFromJSObject(p, ba.ctx)
+	a.p.Set("yAxis", yAxis.JSObject())
+	return a
 }
 
 // ZAxis returns the ZAxis property of class AxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#zaxis
-func (a *AxesViewer) ZAxis(zAxis *TransformNode) *AxesViewer {
-	p := ba.ctx.Get("AxesViewer").New(zAxis.JSObject())
-	return AxesViewerFromJSObject(p, ba.ctx)
+func (a *AxesViewer) ZAxis() *TransformNode {
+	retVal := a.p.Get("zAxis")
+	return TransformNodeFromJSObject(retVal, a.ctx)
 }
 
 // SetZAxis sets the ZAxis property of class AxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer#zaxis
 func (a *AxesViewer) SetZAxis(zAxis *TransformNode) *AxesViewer {
-	p := ba.ctx.Get("AxesViewer").New(zAxis.JSObject())
-	return AxesViewerFromJSObject(p, ba.ctx)
+	a.p.Set("zAxis", zAxis.JSObject())
+	return a
 }
-
-*/

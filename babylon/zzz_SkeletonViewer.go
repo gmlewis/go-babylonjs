@@ -89,118 +89,114 @@ func (s *SkeletonViewer) Update() {
 	s.p.Call("update")
 }
 
-/*
-
 // AutoUpdateBonesMatrices returns the AutoUpdateBonesMatrices property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#autoupdatebonesmatrices
-func (s *SkeletonViewer) AutoUpdateBonesMatrices(autoUpdateBonesMatrices bool) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(autoUpdateBonesMatrices)
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+func (s *SkeletonViewer) AutoUpdateBonesMatrices() bool {
+	retVal := s.p.Get("autoUpdateBonesMatrices")
+	return retVal.Bool()
 }
 
 // SetAutoUpdateBonesMatrices sets the AutoUpdateBonesMatrices property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#autoupdatebonesmatrices
 func (s *SkeletonViewer) SetAutoUpdateBonesMatrices(autoUpdateBonesMatrices bool) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(autoUpdateBonesMatrices)
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+	s.p.Set("autoUpdateBonesMatrices", autoUpdateBonesMatrices)
+	return s
 }
 
 // Color returns the Color property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#color
-func (s *SkeletonViewer) Color(color *Color3) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(color.JSObject())
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+func (s *SkeletonViewer) Color() *Color3 {
+	retVal := s.p.Get("color")
+	return Color3FromJSObject(retVal, s.ctx)
 }
 
 // SetColor sets the Color property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#color
 func (s *SkeletonViewer) SetColor(color *Color3) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(color.JSObject())
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+	s.p.Set("color", color.JSObject())
+	return s
 }
 
 // DebugMesh returns the DebugMesh property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#debugmesh
-func (s *SkeletonViewer) DebugMesh(debugMesh *LinesMesh) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(debugMesh.JSObject())
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+func (s *SkeletonViewer) DebugMesh() *LinesMesh {
+	retVal := s.p.Get("debugMesh")
+	return LinesMeshFromJSObject(retVal, s.ctx)
 }
 
 // SetDebugMesh sets the DebugMesh property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#debugmesh
 func (s *SkeletonViewer) SetDebugMesh(debugMesh *LinesMesh) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(debugMesh.JSObject())
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+	s.p.Set("debugMesh", debugMesh.JSObject())
+	return s
 }
 
 // IsEnabled returns the IsEnabled property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#isenabled
-func (s *SkeletonViewer) IsEnabled(isEnabled bool) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(isEnabled)
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+func (s *SkeletonViewer) IsEnabled() bool {
+	retVal := s.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#isenabled
 func (s *SkeletonViewer) SetIsEnabled(isEnabled bool) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(isEnabled)
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+	s.p.Set("isEnabled", isEnabled)
+	return s
 }
 
 // Mesh returns the Mesh property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#mesh
-func (s *SkeletonViewer) Mesh(mesh *AbstractMesh) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(mesh.JSObject())
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+func (s *SkeletonViewer) Mesh() *AbstractMesh {
+	retVal := s.p.Get("mesh")
+	return AbstractMeshFromJSObject(retVal, s.ctx)
 }
 
 // SetMesh sets the Mesh property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#mesh
 func (s *SkeletonViewer) SetMesh(mesh *AbstractMesh) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(mesh.JSObject())
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+	s.p.Set("mesh", mesh.JSObject())
+	return s
 }
 
 // RenderingGroupId returns the RenderingGroupId property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#renderinggroupid
-func (s *SkeletonViewer) RenderingGroupId(renderingGroupId float64) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(renderingGroupId)
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+func (s *SkeletonViewer) RenderingGroupId() float64 {
+	retVal := s.p.Get("renderingGroupId")
+	return retVal.Float()
 }
 
 // SetRenderingGroupId sets the RenderingGroupId property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#renderinggroupid
 func (s *SkeletonViewer) SetRenderingGroupId(renderingGroupId float64) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(renderingGroupId)
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+	s.p.Set("renderingGroupId", renderingGroupId)
+	return s
 }
 
 // Skeleton returns the Skeleton property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#skeleton
-func (s *SkeletonViewer) Skeleton(skeleton *Skeleton) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(skeleton.JSObject())
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+func (s *SkeletonViewer) Skeleton() *Skeleton {
+	retVal := s.p.Get("skeleton")
+	return SkeletonFromJSObject(retVal, s.ctx)
 }
 
 // SetSkeleton sets the Skeleton property of class SkeletonViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#skeleton
 func (s *SkeletonViewer) SetSkeleton(skeleton *Skeleton) *SkeletonViewer {
-	p := ba.ctx.Get("SkeletonViewer").New(skeleton.JSObject())
-	return SkeletonViewerFromJSObject(p, ba.ctx)
+	s.p.Set("skeleton", skeleton.JSObject())
+	return s
 }
-
-*/

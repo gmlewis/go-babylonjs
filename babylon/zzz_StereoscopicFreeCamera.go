@@ -63,7 +63,3 @@ func (s *StereoscopicFreeCamera) GetClassName() string {
 	retVal := s.p.Call("getClassName")
 	return retVal.String()
 }
-
-/*
-
- */

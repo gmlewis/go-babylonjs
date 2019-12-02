@@ -76,7 +76,3 @@ func (ba *Babylon) NewDisplayPassPostProcess(name string, options float64, camer
 	p := ba.ctx.Get("DisplayPassPostProcess").New(args...)
 	return DisplayPassPostProcessFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

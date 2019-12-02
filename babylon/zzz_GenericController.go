@@ -75,38 +75,34 @@ func (g *GenericController) InitControllerMesh(scene *Scene, opts *GenericContro
 	g.p.Call("initControllerMesh", args...)
 }
 
-/*
-
 // MODEL_BASE_URL returns the MODEL_BASE_URL property of class GenericController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericcontroller#model_base_url
-func (g *GenericController) MODEL_BASE_URL(MODEL_BASE_URL string) *GenericController {
-	p := ba.ctx.Get("GenericController").New(MODEL_BASE_URL)
-	return GenericControllerFromJSObject(p, ba.ctx)
+func (g *GenericController) MODEL_BASE_URL() string {
+	retVal := g.p.Get("MODEL_BASE_URL")
+	return retVal.String()
 }
 
 // SetMODEL_BASE_URL sets the MODEL_BASE_URL property of class GenericController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericcontroller#model_base_url
 func (g *GenericController) SetMODEL_BASE_URL(MODEL_BASE_URL string) *GenericController {
-	p := ba.ctx.Get("GenericController").New(MODEL_BASE_URL)
-	return GenericControllerFromJSObject(p, ba.ctx)
+	g.p.Set("MODEL_BASE_URL", MODEL_BASE_URL)
+	return g
 }
 
 // MODEL_FILENAME returns the MODEL_FILENAME property of class GenericController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericcontroller#model_filename
-func (g *GenericController) MODEL_FILENAME(MODEL_FILENAME string) *GenericController {
-	p := ba.ctx.Get("GenericController").New(MODEL_FILENAME)
-	return GenericControllerFromJSObject(p, ba.ctx)
+func (g *GenericController) MODEL_FILENAME() string {
+	retVal := g.p.Get("MODEL_FILENAME")
+	return retVal.String()
 }
 
 // SetMODEL_FILENAME sets the MODEL_FILENAME property of class GenericController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericcontroller#model_filename
 func (g *GenericController) SetMODEL_FILENAME(MODEL_FILENAME string) *GenericController {
-	p := ba.ctx.Get("GenericController").New(MODEL_FILENAME)
-	return GenericControllerFromJSObject(p, ba.ctx)
+	g.p.Set("MODEL_FILENAME", MODEL_FILENAME)
+	return g
 }
-
-*/

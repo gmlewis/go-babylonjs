@@ -67,38 +67,34 @@ func (ba *Babylon) NewDigitalRainPostProcess(name string, camera *Camera, opts *
 	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // MixToNormal returns the MixToNormal property of class DigitalRainPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#mixtonormal
-func (d *DigitalRainPostProcess) MixToNormal(mixToNormal float64) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(mixToNormal)
-	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
+func (d *DigitalRainPostProcess) MixToNormal() float64 {
+	retVal := d.p.Get("mixToNormal")
+	return retVal.Float()
 }
 
 // SetMixToNormal sets the MixToNormal property of class DigitalRainPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#mixtonormal
 func (d *DigitalRainPostProcess) SetMixToNormal(mixToNormal float64) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(mixToNormal)
-	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
+	d.p.Set("mixToNormal", mixToNormal)
+	return d
 }
 
 // MixToTile returns the MixToTile property of class DigitalRainPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#mixtotile
-func (d *DigitalRainPostProcess) MixToTile(mixToTile float64) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(mixToTile)
-	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
+func (d *DigitalRainPostProcess) MixToTile() float64 {
+	retVal := d.p.Get("mixToTile")
+	return retVal.Float()
 }
 
 // SetMixToTile sets the MixToTile property of class DigitalRainPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#mixtotile
 func (d *DigitalRainPostProcess) SetMixToTile(mixToTile float64) *DigitalRainPostProcess {
-	p := ba.ctx.Get("DigitalRainPostProcess").New(mixToTile)
-	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
+	d.p.Set("mixToTile", mixToTile)
+	return d
 }
-
-*/

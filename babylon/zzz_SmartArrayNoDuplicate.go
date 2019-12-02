@@ -94,7 +94,3 @@ func (s *SmartArrayNoDuplicate) Reset() {
 
 	s.p.Call("reset")
 }
-
-/*
-
- */

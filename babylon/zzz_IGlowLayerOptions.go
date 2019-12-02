@@ -37,102 +37,98 @@ func IGlowLayerOptionsArrayToJSArray(array []*IGlowLayerOptions) []interface{} {
 	return result
 }
 
-/*
-
 // BlurKernelSize returns the BlurKernelSize property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#blurkernelsize
-func (i *IGlowLayerOptions) BlurKernelSize(blurKernelSize float64) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(blurKernelSize)
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IGlowLayerOptions) BlurKernelSize() float64 {
+	retVal := i.p.Get("blurKernelSize")
+	return retVal.Float()
 }
 
 // SetBlurKernelSize sets the BlurKernelSize property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#blurkernelsize
 func (i *IGlowLayerOptions) SetBlurKernelSize(blurKernelSize float64) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(blurKernelSize)
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("blurKernelSize", blurKernelSize)
+	return i
 }
 
 // Camera returns the Camera property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#camera
-func (i *IGlowLayerOptions) Camera(camera *Camera) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(camera.JSObject())
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IGlowLayerOptions) Camera() *Camera {
+	retVal := i.p.Get("camera")
+	return CameraFromJSObject(retVal, i.ctx)
 }
 
 // SetCamera sets the Camera property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#camera
 func (i *IGlowLayerOptions) SetCamera(camera *Camera) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(camera.JSObject())
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("camera", camera.JSObject())
+	return i
 }
 
 // MainTextureFixedSize returns the MainTextureFixedSize property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#maintexturefixedsize
-func (i *IGlowLayerOptions) MainTextureFixedSize(mainTextureFixedSize float64) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(mainTextureFixedSize)
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IGlowLayerOptions) MainTextureFixedSize() float64 {
+	retVal := i.p.Get("mainTextureFixedSize")
+	return retVal.Float()
 }
 
 // SetMainTextureFixedSize sets the MainTextureFixedSize property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#maintexturefixedsize
 func (i *IGlowLayerOptions) SetMainTextureFixedSize(mainTextureFixedSize float64) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(mainTextureFixedSize)
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mainTextureFixedSize", mainTextureFixedSize)
+	return i
 }
 
 // MainTextureRatio returns the MainTextureRatio property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#maintextureratio
-func (i *IGlowLayerOptions) MainTextureRatio(mainTextureRatio float64) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(mainTextureRatio)
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IGlowLayerOptions) MainTextureRatio() float64 {
+	retVal := i.p.Get("mainTextureRatio")
+	return retVal.Float()
 }
 
 // SetMainTextureRatio sets the MainTextureRatio property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#maintextureratio
 func (i *IGlowLayerOptions) SetMainTextureRatio(mainTextureRatio float64) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(mainTextureRatio)
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mainTextureRatio", mainTextureRatio)
+	return i
 }
 
 // MainTextureSamples returns the MainTextureSamples property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#maintexturesamples
-func (i *IGlowLayerOptions) MainTextureSamples(mainTextureSamples float64) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(mainTextureSamples)
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IGlowLayerOptions) MainTextureSamples() float64 {
+	retVal := i.p.Get("mainTextureSamples")
+	return retVal.Float()
 }
 
 // SetMainTextureSamples sets the MainTextureSamples property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#maintexturesamples
 func (i *IGlowLayerOptions) SetMainTextureSamples(mainTextureSamples float64) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(mainTextureSamples)
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mainTextureSamples", mainTextureSamples)
+	return i
 }
 
 // RenderingGroupId returns the RenderingGroupId property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#renderinggroupid
-func (i *IGlowLayerOptions) RenderingGroupId(renderingGroupId float64) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(renderingGroupId)
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IGlowLayerOptions) RenderingGroupId() float64 {
+	retVal := i.p.Get("renderingGroupId")
+	return retVal.Float()
 }
 
 // SetRenderingGroupId sets the RenderingGroupId property of class IGlowLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iglowlayeroptions#renderinggroupid
 func (i *IGlowLayerOptions) SetRenderingGroupId(renderingGroupId float64) *IGlowLayerOptions {
-	p := ba.ctx.Get("IGlowLayerOptions").New(renderingGroupId)
-	return IGlowLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("renderingGroupId", renderingGroupId)
+	return i
 }
-
-*/

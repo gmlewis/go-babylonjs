@@ -62,7 +62,3 @@ func (a *AnaglyphUniversalCamera) GetClassName() string {
 	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
-
-/*
-
- */

@@ -51,7 +51,3 @@ func (ba *Babylon) NewVRDistortionCorrectionPostProcess(name string, camera *Cam
 	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(args...)
 	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

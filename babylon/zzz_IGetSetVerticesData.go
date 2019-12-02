@@ -186,7 +186,3 @@ func (i *IGetSetVerticesData) UpdateVerticesData(kind string, data js.Value, opt
 
 	i.p.Call("updateVerticesData", args...)
 }
-
-/*
-
- */

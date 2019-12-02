@@ -36,166 +36,162 @@ func IInspectorOptionsArrayToJSArray(array []*IInspectorOptions) []interface{} {
 	return result
 }
 
-/*
-
 // EmbedMode returns the EmbedMode property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#embedmode
-func (i *IInspectorOptions) EmbedMode(embedMode bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(embedMode)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+func (i *IInspectorOptions) EmbedMode() bool {
+	retVal := i.p.Get("embedMode")
+	return retVal.Bool()
 }
 
 // SetEmbedMode sets the EmbedMode property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#embedmode
 func (i *IInspectorOptions) SetEmbedMode(embedMode bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(embedMode)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("embedMode", embedMode)
+	return i
 }
 
 // EnableClose returns the EnableClose property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#enableclose
-func (i *IInspectorOptions) EnableClose(enableClose bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(enableClose)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+func (i *IInspectorOptions) EnableClose() bool {
+	retVal := i.p.Get("enableClose")
+	return retVal.Bool()
 }
 
 // SetEnableClose sets the EnableClose property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#enableclose
 func (i *IInspectorOptions) SetEnableClose(enableClose bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(enableClose)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("enableClose", enableClose)
+	return i
 }
 
 // EnablePopup returns the EnablePopup property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#enablepopup
-func (i *IInspectorOptions) EnablePopup(enablePopup bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(enablePopup)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+func (i *IInspectorOptions) EnablePopup() bool {
+	retVal := i.p.Get("enablePopup")
+	return retVal.Bool()
 }
 
 // SetEnablePopup sets the EnablePopup property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#enablepopup
 func (i *IInspectorOptions) SetEnablePopup(enablePopup bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(enablePopup)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("enablePopup", enablePopup)
+	return i
 }
 
 // ExplorerExtensibility returns the ExplorerExtensibility property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#explorerextensibility
-func (i *IInspectorOptions) ExplorerExtensibility(explorerExtensibility *IExplorerExtensibilityGroup) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(explorerExtensibility.JSObject())
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+func (i *IInspectorOptions) ExplorerExtensibility() *IExplorerExtensibilityGroup {
+	retVal := i.p.Get("explorerExtensibility")
+	return IExplorerExtensibilityGroupFromJSObject(retVal, i.ctx)
 }
 
 // SetExplorerExtensibility sets the ExplorerExtensibility property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#explorerextensibility
 func (i *IInspectorOptions) SetExplorerExtensibility(explorerExtensibility *IExplorerExtensibilityGroup) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(explorerExtensibility.JSObject())
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("explorerExtensibility", explorerExtensibility.JSObject())
+	return i
 }
 
 // GlobalRoot returns the GlobalRoot property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#globalroot
-func (i *IInspectorOptions) GlobalRoot(globalRoot js.Value) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(globalRoot)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+func (i *IInspectorOptions) GlobalRoot() js.Value {
+	retVal := i.p.Get("globalRoot")
+	return retVal
 }
 
 // SetGlobalRoot sets the GlobalRoot property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#globalroot
 func (i *IInspectorOptions) SetGlobalRoot(globalRoot js.Value) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(globalRoot)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("globalRoot", globalRoot)
+	return i
 }
 
 // HandleResize returns the HandleResize property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#handleresize
-func (i *IInspectorOptions) HandleResize(handleResize bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(handleResize)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+func (i *IInspectorOptions) HandleResize() bool {
+	retVal := i.p.Get("handleResize")
+	return retVal.Bool()
 }
 
 // SetHandleResize sets the HandleResize property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#handleresize
 func (i *IInspectorOptions) SetHandleResize(handleResize bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(handleResize)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("handleResize", handleResize)
+	return i
 }
 
 // InspectorURL returns the InspectorURL property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#inspectorurl
-func (i *IInspectorOptions) InspectorURL(inspectorURL string) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(inspectorURL)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+func (i *IInspectorOptions) InspectorURL() string {
+	retVal := i.p.Get("inspectorURL")
+	return retVal.String()
 }
 
 // SetInspectorURL sets the InspectorURL property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#inspectorurl
 func (i *IInspectorOptions) SetInspectorURL(inspectorURL string) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(inspectorURL)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("inspectorURL", inspectorURL)
+	return i
 }
 
 // Overlay returns the Overlay property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#overlay
-func (i *IInspectorOptions) Overlay(overlay bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(overlay)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+func (i *IInspectorOptions) Overlay() bool {
+	retVal := i.p.Get("overlay")
+	return retVal.Bool()
 }
 
 // SetOverlay sets the Overlay property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#overlay
 func (i *IInspectorOptions) SetOverlay(overlay bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(overlay)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("overlay", overlay)
+	return i
 }
 
 // ShowExplorer returns the ShowExplorer property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#showexplorer
-func (i *IInspectorOptions) ShowExplorer(showExplorer bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(showExplorer)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+func (i *IInspectorOptions) ShowExplorer() bool {
+	retVal := i.p.Get("showExplorer")
+	return retVal.Bool()
 }
 
 // SetShowExplorer sets the ShowExplorer property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#showexplorer
 func (i *IInspectorOptions) SetShowExplorer(showExplorer bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(showExplorer)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("showExplorer", showExplorer)
+	return i
 }
 
 // ShowInspector returns the ShowInspector property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#showinspector
-func (i *IInspectorOptions) ShowInspector(showInspector bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(showInspector)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+func (i *IInspectorOptions) ShowInspector() bool {
+	retVal := i.p.Get("showInspector")
+	return retVal.Bool()
 }
 
 // SetShowInspector sets the ShowInspector property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#showinspector
 func (i *IInspectorOptions) SetShowInspector(showInspector bool) *IInspectorOptions {
-	p := ba.ctx.Get("IInspectorOptions").New(showInspector)
-	return IInspectorOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("showInspector", showInspector)
+	return i
 }
-
-*/

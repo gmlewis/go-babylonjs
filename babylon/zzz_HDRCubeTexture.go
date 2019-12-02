@@ -169,102 +169,98 @@ func (h *HDRCubeTexture) SetReflectionTextureMatrix(value *Matrix) {
 	h.p.Call("setReflectionTextureMatrix", args...)
 }
 
-/*
-
 // BoundingBoxPosition returns the BoundingBoxPosition property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#boundingboxposition
-func (h *HDRCubeTexture) BoundingBoxPosition(boundingBoxPosition *Vector3) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(boundingBoxPosition.JSObject())
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+func (h *HDRCubeTexture) BoundingBoxPosition() *Vector3 {
+	retVal := h.p.Get("boundingBoxPosition")
+	return Vector3FromJSObject(retVal, h.ctx)
 }
 
 // SetBoundingBoxPosition sets the BoundingBoxPosition property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#boundingboxposition
 func (h *HDRCubeTexture) SetBoundingBoxPosition(boundingBoxPosition *Vector3) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(boundingBoxPosition.JSObject())
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+	h.p.Set("boundingBoxPosition", boundingBoxPosition.JSObject())
+	return h
 }
 
 // BoundingBoxSize returns the BoundingBoxSize property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#boundingboxsize
-func (h *HDRCubeTexture) BoundingBoxSize(boundingBoxSize *Vector3) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(boundingBoxSize.JSObject())
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+func (h *HDRCubeTexture) BoundingBoxSize() *Vector3 {
+	retVal := h.p.Get("boundingBoxSize")
+	return Vector3FromJSObject(retVal, h.ctx)
 }
 
 // SetBoundingBoxSize sets the BoundingBoxSize property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#boundingboxsize
 func (h *HDRCubeTexture) SetBoundingBoxSize(boundingBoxSize *Vector3) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(boundingBoxSize.JSObject())
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+	h.p.Set("boundingBoxSize", boundingBoxSize.JSObject())
+	return h
 }
 
 // CoordinatesMode returns the CoordinatesMode property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#coordinatesmode
-func (h *HDRCubeTexture) CoordinatesMode(coordinatesMode float64) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(coordinatesMode)
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+func (h *HDRCubeTexture) CoordinatesMode() float64 {
+	retVal := h.p.Get("coordinatesMode")
+	return retVal.Float()
 }
 
 // SetCoordinatesMode sets the CoordinatesMode property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#coordinatesmode
 func (h *HDRCubeTexture) SetCoordinatesMode(coordinatesMode float64) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(coordinatesMode)
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+	h.p.Set("coordinatesMode", coordinatesMode)
+	return h
 }
 
 // IsBlocking returns the IsBlocking property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#isblocking
-func (h *HDRCubeTexture) IsBlocking(isBlocking bool) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(isBlocking)
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+func (h *HDRCubeTexture) IsBlocking() bool {
+	retVal := h.p.Get("isBlocking")
+	return retVal.Bool()
 }
 
 // SetIsBlocking sets the IsBlocking property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#isblocking
 func (h *HDRCubeTexture) SetIsBlocking(isBlocking bool) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(isBlocking)
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+	h.p.Set("isBlocking", isBlocking)
+	return h
 }
 
 // RotationY returns the RotationY property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#rotationy
-func (h *HDRCubeTexture) RotationY(rotationY float64) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(rotationY)
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+func (h *HDRCubeTexture) RotationY() float64 {
+	retVal := h.p.Get("rotationY")
+	return retVal.Float()
 }
 
 // SetRotationY sets the RotationY property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#rotationy
 func (h *HDRCubeTexture) SetRotationY(rotationY float64) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(rotationY)
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+	h.p.Set("rotationY", rotationY)
+	return h
 }
 
 // Url returns the Url property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#url
-func (h *HDRCubeTexture) Url(url string) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(url)
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+func (h *HDRCubeTexture) Url() string {
+	retVal := h.p.Get("url")
+	return retVal.String()
 }
 
 // SetUrl sets the Url property of class HDRCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#url
 func (h *HDRCubeTexture) SetUrl(url string) *HDRCubeTexture {
-	p := ba.ctx.Get("HDRCubeTexture").New(url)
-	return HDRCubeTextureFromJSObject(p, ba.ctx)
+	h.p.Set("url", url)
+	return h
 }
-
-*/

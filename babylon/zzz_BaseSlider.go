@@ -107,214 +107,210 @@ func (b *BaseSlider) _onPointerUp(target *Control, coordinates *Vector2, pointer
 	b.p.Call("_onPointerUp", args...)
 }
 
-/*
-
 // BarOffset returns the BarOffset property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#baroffset
-func (b *BaseSlider) BarOffset(barOffset string) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(barOffset)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) BarOffset() string {
+	retVal := b.p.Get("barOffset")
+	return retVal.String()
 }
 
 // SetBarOffset sets the BarOffset property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#baroffset
 func (b *BaseSlider) SetBarOffset(barOffset string) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(barOffset)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("barOffset", barOffset)
+	return b
 }
 
 // BarOffsetInPixels returns the BarOffsetInPixels property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#baroffsetinpixels
-func (b *BaseSlider) BarOffsetInPixels(barOffsetInPixels float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(barOffsetInPixels)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) BarOffsetInPixels() float64 {
+	retVal := b.p.Get("barOffsetInPixels")
+	return retVal.Float()
 }
 
 // SetBarOffsetInPixels sets the BarOffsetInPixels property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#baroffsetinpixels
 func (b *BaseSlider) SetBarOffsetInPixels(barOffsetInPixels float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(barOffsetInPixels)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("barOffsetInPixels", barOffsetInPixels)
+	return b
 }
 
 // DisplayThumb returns the DisplayThumb property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#displaythumb
-func (b *BaseSlider) DisplayThumb(displayThumb bool) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(displayThumb)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) DisplayThumb() bool {
+	retVal := b.p.Get("displayThumb")
+	return retVal.Bool()
 }
 
 // SetDisplayThumb sets the DisplayThumb property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#displaythumb
 func (b *BaseSlider) SetDisplayThumb(displayThumb bool) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(displayThumb)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("displayThumb", displayThumb)
+	return b
 }
 
 // IsThumbClamped returns the IsThumbClamped property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#isthumbclamped
-func (b *BaseSlider) IsThumbClamped(isThumbClamped bool) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(isThumbClamped)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) IsThumbClamped() bool {
+	retVal := b.p.Get("isThumbClamped")
+	return retVal.Bool()
 }
 
 // SetIsThumbClamped sets the IsThumbClamped property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#isthumbclamped
 func (b *BaseSlider) SetIsThumbClamped(isThumbClamped bool) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(isThumbClamped)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("isThumbClamped", isThumbClamped)
+	return b
 }
 
 // IsVertical returns the IsVertical property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#isvertical
-func (b *BaseSlider) IsVertical(isVertical bool) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(isVertical)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) IsVertical() bool {
+	retVal := b.p.Get("isVertical")
+	return retVal.Bool()
 }
 
 // SetIsVertical sets the IsVertical property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#isvertical
 func (b *BaseSlider) SetIsVertical(isVertical bool) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(isVertical)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("isVertical", isVertical)
+	return b
 }
 
 // Maximum returns the Maximum property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#maximum
-func (b *BaseSlider) Maximum(maximum float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(maximum)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) Maximum() float64 {
+	retVal := b.p.Get("maximum")
+	return retVal.Float()
 }
 
 // SetMaximum sets the Maximum property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#maximum
 func (b *BaseSlider) SetMaximum(maximum float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(maximum)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("maximum", maximum)
+	return b
 }
 
 // Minimum returns the Minimum property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#minimum
-func (b *BaseSlider) Minimum(minimum float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(minimum)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) Minimum() float64 {
+	retVal := b.p.Get("minimum")
+	return retVal.Float()
 }
 
 // SetMinimum sets the Minimum property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#minimum
 func (b *BaseSlider) SetMinimum(minimum float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(minimum)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("minimum", minimum)
+	return b
 }
 
 // Name returns the Name property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#name
-func (b *BaseSlider) Name(name string) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(name)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) Name() string {
+	retVal := b.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#name
 func (b *BaseSlider) SetName(name string) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(name)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("name", name)
+	return b
 }
 
 // OnValueChangedObservable returns the OnValueChangedObservable property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#onvaluechangedobservable
-func (b *BaseSlider) OnValueChangedObservable(onValueChangedObservable *Observable) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(onValueChangedObservable.JSObject())
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) OnValueChangedObservable() *Observable {
+	retVal := b.p.Get("onValueChangedObservable")
+	return ObservableFromJSObject(retVal, b.ctx)
 }
 
 // SetOnValueChangedObservable sets the OnValueChangedObservable property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#onvaluechangedobservable
 func (b *BaseSlider) SetOnValueChangedObservable(onValueChangedObservable *Observable) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(onValueChangedObservable.JSObject())
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("onValueChangedObservable", onValueChangedObservable.JSObject())
+	return b
 }
 
 // Step returns the Step property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#step
-func (b *BaseSlider) Step(step float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(step)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) Step() float64 {
+	retVal := b.p.Get("step")
+	return retVal.Float()
 }
 
 // SetStep sets the Step property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#step
 func (b *BaseSlider) SetStep(step float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(step)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("step", step)
+	return b
 }
 
 // ThumbWidth returns the ThumbWidth property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#thumbwidth
-func (b *BaseSlider) ThumbWidth(thumbWidth string) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(thumbWidth)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) ThumbWidth() string {
+	retVal := b.p.Get("thumbWidth")
+	return retVal.String()
 }
 
 // SetThumbWidth sets the ThumbWidth property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#thumbwidth
 func (b *BaseSlider) SetThumbWidth(thumbWidth string) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(thumbWidth)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("thumbWidth", thumbWidth)
+	return b
 }
 
 // ThumbWidthInPixels returns the ThumbWidthInPixels property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#thumbwidthinpixels
-func (b *BaseSlider) ThumbWidthInPixels(thumbWidthInPixels float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(thumbWidthInPixels)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) ThumbWidthInPixels() float64 {
+	retVal := b.p.Get("thumbWidthInPixels")
+	return retVal.Float()
 }
 
 // SetThumbWidthInPixels sets the ThumbWidthInPixels property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#thumbwidthinpixels
 func (b *BaseSlider) SetThumbWidthInPixels(thumbWidthInPixels float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(thumbWidthInPixels)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("thumbWidthInPixels", thumbWidthInPixels)
+	return b
 }
 
 // Value returns the Value property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#value
-func (b *BaseSlider) Value(value float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(value)
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (b *BaseSlider) Value() float64 {
+	retVal := b.p.Get("value")
+	return retVal.Float()
 }
 
 // SetValue sets the Value property of class BaseSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider#value
 func (b *BaseSlider) SetValue(value float64) *BaseSlider {
-	p := ba.ctx.Get("BaseSlider").New(value)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	b.p.Set("value", value)
+	return b
 }
-
-*/

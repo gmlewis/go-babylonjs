@@ -63,7 +63,3 @@ func (p *PolyhedronBuilder) CreatePolyhedron(name string, options js.Value, opts
 	retVal := p.p.Call("CreatePolyhedron", args...)
 	return MeshFromJSObject(retVal, p.ctx)
 }
-
-/*
-
- */

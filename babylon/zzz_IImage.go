@@ -35,7 +35,3 @@ func IImageArrayToJSArray(array []*IImage) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

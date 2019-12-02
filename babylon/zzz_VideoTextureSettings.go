@@ -36,70 +36,66 @@ func VideoTextureSettingsArrayToJSArray(array []*VideoTextureSettings) []interfa
 	return result
 }
 
-/*
-
 // AutoPlay returns the AutoPlay property of class VideoTextureSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexturesettings#autoplay
-func (v *VideoTextureSettings) AutoPlay(autoPlay bool) *VideoTextureSettings {
-	p := ba.ctx.Get("VideoTextureSettings").New(autoPlay)
-	return VideoTextureSettingsFromJSObject(p, ba.ctx)
+func (v *VideoTextureSettings) AutoPlay() bool {
+	retVal := v.p.Get("autoPlay")
+	return retVal.Bool()
 }
 
 // SetAutoPlay sets the AutoPlay property of class VideoTextureSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexturesettings#autoplay
 func (v *VideoTextureSettings) SetAutoPlay(autoPlay bool) *VideoTextureSettings {
-	p := ba.ctx.Get("VideoTextureSettings").New(autoPlay)
-	return VideoTextureSettingsFromJSObject(p, ba.ctx)
+	v.p.Set("autoPlay", autoPlay)
+	return v
 }
 
 // AutoUpdateTexture returns the AutoUpdateTexture property of class VideoTextureSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexturesettings#autoupdatetexture
-func (v *VideoTextureSettings) AutoUpdateTexture(autoUpdateTexture bool) *VideoTextureSettings {
-	p := ba.ctx.Get("VideoTextureSettings").New(autoUpdateTexture)
-	return VideoTextureSettingsFromJSObject(p, ba.ctx)
+func (v *VideoTextureSettings) AutoUpdateTexture() bool {
+	retVal := v.p.Get("autoUpdateTexture")
+	return retVal.Bool()
 }
 
 // SetAutoUpdateTexture sets the AutoUpdateTexture property of class VideoTextureSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexturesettings#autoupdatetexture
 func (v *VideoTextureSettings) SetAutoUpdateTexture(autoUpdateTexture bool) *VideoTextureSettings {
-	p := ba.ctx.Get("VideoTextureSettings").New(autoUpdateTexture)
-	return VideoTextureSettingsFromJSObject(p, ba.ctx)
+	v.p.Set("autoUpdateTexture", autoUpdateTexture)
+	return v
 }
 
 // Loop returns the Loop property of class VideoTextureSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexturesettings#loop
-func (v *VideoTextureSettings) Loop(loop bool) *VideoTextureSettings {
-	p := ba.ctx.Get("VideoTextureSettings").New(loop)
-	return VideoTextureSettingsFromJSObject(p, ba.ctx)
+func (v *VideoTextureSettings) Loop() bool {
+	retVal := v.p.Get("loop")
+	return retVal.Bool()
 }
 
 // SetLoop sets the Loop property of class VideoTextureSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexturesettings#loop
 func (v *VideoTextureSettings) SetLoop(loop bool) *VideoTextureSettings {
-	p := ba.ctx.Get("VideoTextureSettings").New(loop)
-	return VideoTextureSettingsFromJSObject(p, ba.ctx)
+	v.p.Set("loop", loop)
+	return v
 }
 
 // Poster returns the Poster property of class VideoTextureSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexturesettings#poster
-func (v *VideoTextureSettings) Poster(poster string) *VideoTextureSettings {
-	p := ba.ctx.Get("VideoTextureSettings").New(poster)
-	return VideoTextureSettingsFromJSObject(p, ba.ctx)
+func (v *VideoTextureSettings) Poster() string {
+	retVal := v.p.Get("poster")
+	return retVal.String()
 }
 
 // SetPoster sets the Poster property of class VideoTextureSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexturesettings#poster
 func (v *VideoTextureSettings) SetPoster(poster string) *VideoTextureSettings {
-	p := ba.ctx.Get("VideoTextureSettings").New(poster)
-	return VideoTextureSettingsFromJSObject(p, ba.ctx)
+	v.p.Set("poster", poster)
+	return v
 }
-
-*/

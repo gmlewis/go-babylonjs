@@ -36,70 +36,66 @@ func IHtmlElementTextureOptionsArrayToJSArray(array []*IHtmlElementTextureOption
 	return result
 }
 
-/*
-
 // Engine returns the Engine property of class IHtmlElementTextureOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihtmlelementtextureoptions#engine
-func (i *IHtmlElementTextureOptions) Engine(engine *ThinEngine) *IHtmlElementTextureOptions {
-	p := ba.ctx.Get("IHtmlElementTextureOptions").New(engine.JSObject())
-	return IHtmlElementTextureOptionsFromJSObject(p, ba.ctx)
+func (i *IHtmlElementTextureOptions) Engine() *ThinEngine {
+	retVal := i.p.Get("engine")
+	return ThinEngineFromJSObject(retVal, i.ctx)
 }
 
 // SetEngine sets the Engine property of class IHtmlElementTextureOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihtmlelementtextureoptions#engine
 func (i *IHtmlElementTextureOptions) SetEngine(engine *ThinEngine) *IHtmlElementTextureOptions {
-	p := ba.ctx.Get("IHtmlElementTextureOptions").New(engine.JSObject())
-	return IHtmlElementTextureOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("engine", engine.JSObject())
+	return i
 }
 
 // GenerateMipMaps returns the GenerateMipMaps property of class IHtmlElementTextureOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihtmlelementtextureoptions#generatemipmaps
-func (i *IHtmlElementTextureOptions) GenerateMipMaps(generateMipMaps bool) *IHtmlElementTextureOptions {
-	p := ba.ctx.Get("IHtmlElementTextureOptions").New(generateMipMaps)
-	return IHtmlElementTextureOptionsFromJSObject(p, ba.ctx)
+func (i *IHtmlElementTextureOptions) GenerateMipMaps() bool {
+	retVal := i.p.Get("generateMipMaps")
+	return retVal.Bool()
 }
 
 // SetGenerateMipMaps sets the GenerateMipMaps property of class IHtmlElementTextureOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihtmlelementtextureoptions#generatemipmaps
 func (i *IHtmlElementTextureOptions) SetGenerateMipMaps(generateMipMaps bool) *IHtmlElementTextureOptions {
-	p := ba.ctx.Get("IHtmlElementTextureOptions").New(generateMipMaps)
-	return IHtmlElementTextureOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("generateMipMaps", generateMipMaps)
+	return i
 }
 
 // SamplingMode returns the SamplingMode property of class IHtmlElementTextureOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihtmlelementtextureoptions#samplingmode
-func (i *IHtmlElementTextureOptions) SamplingMode(samplingMode float64) *IHtmlElementTextureOptions {
-	p := ba.ctx.Get("IHtmlElementTextureOptions").New(samplingMode)
-	return IHtmlElementTextureOptionsFromJSObject(p, ba.ctx)
+func (i *IHtmlElementTextureOptions) SamplingMode() float64 {
+	retVal := i.p.Get("samplingMode")
+	return retVal.Float()
 }
 
 // SetSamplingMode sets the SamplingMode property of class IHtmlElementTextureOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihtmlelementtextureoptions#samplingmode
 func (i *IHtmlElementTextureOptions) SetSamplingMode(samplingMode float64) *IHtmlElementTextureOptions {
-	p := ba.ctx.Get("IHtmlElementTextureOptions").New(samplingMode)
-	return IHtmlElementTextureOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("samplingMode", samplingMode)
+	return i
 }
 
 // Scene returns the Scene property of class IHtmlElementTextureOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihtmlelementtextureoptions#scene
-func (i *IHtmlElementTextureOptions) Scene(scene *Scene) *IHtmlElementTextureOptions {
-	p := ba.ctx.Get("IHtmlElementTextureOptions").New(scene.JSObject())
-	return IHtmlElementTextureOptionsFromJSObject(p, ba.ctx)
+func (i *IHtmlElementTextureOptions) Scene() *Scene {
+	retVal := i.p.Get("scene")
+	return SceneFromJSObject(retVal, i.ctx)
 }
 
 // SetScene sets the Scene property of class IHtmlElementTextureOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihtmlelementtextureoptions#scene
 func (i *IHtmlElementTextureOptions) SetScene(scene *Scene) *IHtmlElementTextureOptions {
-	p := ba.ctx.Get("IHtmlElementTextureOptions").New(scene.JSObject())
-	return IHtmlElementTextureOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("scene", scene.JSObject())
+	return i
 }
-
-*/

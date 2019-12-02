@@ -35,7 +35,3 @@ func KeepAssetsArrayToJSArray(array []*KeepAssets) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

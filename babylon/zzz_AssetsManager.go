@@ -310,166 +310,162 @@ func (a *AssetsManager) Reset() *AssetsManager {
 	return AssetsManagerFromJSObject(retVal, a.ctx)
 }
 
-/*
-
 // AutoHideLoadingUI returns the AutoHideLoadingUI property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#autohideloadingui
-func (a *AssetsManager) AutoHideLoadingUI(autoHideLoadingUI bool) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(autoHideLoadingUI)
-	return AssetsManagerFromJSObject(p, ba.ctx)
+func (a *AssetsManager) AutoHideLoadingUI() bool {
+	retVal := a.p.Get("autoHideLoadingUI")
+	return retVal.Bool()
 }
 
 // SetAutoHideLoadingUI sets the AutoHideLoadingUI property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#autohideloadingui
 func (a *AssetsManager) SetAutoHideLoadingUI(autoHideLoadingUI bool) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(autoHideLoadingUI)
-	return AssetsManagerFromJSObject(p, ba.ctx)
+	a.p.Set("autoHideLoadingUI", autoHideLoadingUI)
+	return a
 }
 
 // OnFinish returns the OnFinish property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onfinish
-func (a *AssetsManager) OnFinish(onFinish func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onFinish(); return nil}))
-	return AssetsManagerFromJSObject(p, ba.ctx)
+func (a *AssetsManager) OnFinish() js.Value {
+	retVal := a.p.Get("onFinish")
+	return retVal
 }
 
 // SetOnFinish sets the OnFinish property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onfinish
 func (a *AssetsManager) SetOnFinish(onFinish func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onFinish(); return nil}))
-	return AssetsManagerFromJSObject(p, ba.ctx)
+	a.p.Set("onFinish", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onFinish(); return nil }))
+	return a
 }
 
 // OnProgress returns the OnProgress property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onprogress
-func (a *AssetsManager) OnProgress(onProgress func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onProgress(); return nil}))
-	return AssetsManagerFromJSObject(p, ba.ctx)
+func (a *AssetsManager) OnProgress() js.Value {
+	retVal := a.p.Get("onProgress")
+	return retVal
 }
 
 // SetOnProgress sets the OnProgress property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onprogress
 func (a *AssetsManager) SetOnProgress(onProgress func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onProgress(); return nil}))
-	return AssetsManagerFromJSObject(p, ba.ctx)
+	a.p.Set("onProgress", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onProgress(); return nil }))
+	return a
 }
 
 // OnProgressObservable returns the OnProgressObservable property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onprogressobservable
-func (a *AssetsManager) OnProgressObservable(onProgressObservable *Observable) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onProgressObservable.JSObject())
-	return AssetsManagerFromJSObject(p, ba.ctx)
+func (a *AssetsManager) OnProgressObservable() *Observable {
+	retVal := a.p.Get("onProgressObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnProgressObservable sets the OnProgressObservable property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onprogressobservable
 func (a *AssetsManager) SetOnProgressObservable(onProgressObservable *Observable) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onProgressObservable.JSObject())
-	return AssetsManagerFromJSObject(p, ba.ctx)
+	a.p.Set("onProgressObservable", onProgressObservable.JSObject())
+	return a
 }
 
 // OnTaskError returns the OnTaskError property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontaskerror
-func (a *AssetsManager) OnTaskError(onTaskError func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onTaskError(); return nil}))
-	return AssetsManagerFromJSObject(p, ba.ctx)
+func (a *AssetsManager) OnTaskError() js.Value {
+	retVal := a.p.Get("onTaskError")
+	return retVal
 }
 
 // SetOnTaskError sets the OnTaskError property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontaskerror
 func (a *AssetsManager) SetOnTaskError(onTaskError func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onTaskError(); return nil}))
-	return AssetsManagerFromJSObject(p, ba.ctx)
+	a.p.Set("onTaskError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onTaskError(); return nil }))
+	return a
 }
 
 // OnTaskErrorObservable returns the OnTaskErrorObservable property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontaskerrorobservable
-func (a *AssetsManager) OnTaskErrorObservable(onTaskErrorObservable *Observable) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onTaskErrorObservable.JSObject())
-	return AssetsManagerFromJSObject(p, ba.ctx)
+func (a *AssetsManager) OnTaskErrorObservable() *Observable {
+	retVal := a.p.Get("onTaskErrorObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnTaskErrorObservable sets the OnTaskErrorObservable property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontaskerrorobservable
 func (a *AssetsManager) SetOnTaskErrorObservable(onTaskErrorObservable *Observable) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onTaskErrorObservable.JSObject())
-	return AssetsManagerFromJSObject(p, ba.ctx)
+	a.p.Set("onTaskErrorObservable", onTaskErrorObservable.JSObject())
+	return a
 }
 
 // OnTaskSuccess returns the OnTaskSuccess property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksuccess
-func (a *AssetsManager) OnTaskSuccess(onTaskSuccess func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onTaskSuccess(); return nil}))
-	return AssetsManagerFromJSObject(p, ba.ctx)
+func (a *AssetsManager) OnTaskSuccess() js.Value {
+	retVal := a.p.Get("onTaskSuccess")
+	return retVal
 }
 
 // SetOnTaskSuccess sets the OnTaskSuccess property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksuccess
 func (a *AssetsManager) SetOnTaskSuccess(onTaskSuccess func()) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onTaskSuccess(); return nil}))
-	return AssetsManagerFromJSObject(p, ba.ctx)
+	a.p.Set("onTaskSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onTaskSuccess(); return nil }))
+	return a
 }
 
 // OnTaskSuccessObservable returns the OnTaskSuccessObservable property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksuccessobservable
-func (a *AssetsManager) OnTaskSuccessObservable(onTaskSuccessObservable *Observable) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onTaskSuccessObservable.JSObject())
-	return AssetsManagerFromJSObject(p, ba.ctx)
+func (a *AssetsManager) OnTaskSuccessObservable() *Observable {
+	retVal := a.p.Get("onTaskSuccessObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnTaskSuccessObservable sets the OnTaskSuccessObservable property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksuccessobservable
 func (a *AssetsManager) SetOnTaskSuccessObservable(onTaskSuccessObservable *Observable) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onTaskSuccessObservable.JSObject())
-	return AssetsManagerFromJSObject(p, ba.ctx)
+	a.p.Set("onTaskSuccessObservable", onTaskSuccessObservable.JSObject())
+	return a
 }
 
 // OnTasksDoneObservable returns the OnTasksDoneObservable property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksdoneobservable
-func (a *AssetsManager) OnTasksDoneObservable(onTasksDoneObservable *Observable) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onTasksDoneObservable.JSObject())
-	return AssetsManagerFromJSObject(p, ba.ctx)
+func (a *AssetsManager) OnTasksDoneObservable() *Observable {
+	retVal := a.p.Get("onTasksDoneObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnTasksDoneObservable sets the OnTasksDoneObservable property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksdoneobservable
 func (a *AssetsManager) SetOnTasksDoneObservable(onTasksDoneObservable *Observable) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(onTasksDoneObservable.JSObject())
-	return AssetsManagerFromJSObject(p, ba.ctx)
+	a.p.Set("onTasksDoneObservable", onTasksDoneObservable.JSObject())
+	return a
 }
 
 // UseDefaultLoadingScreen returns the UseDefaultLoadingScreen property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#usedefaultloadingscreen
-func (a *AssetsManager) UseDefaultLoadingScreen(useDefaultLoadingScreen bool) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(useDefaultLoadingScreen)
-	return AssetsManagerFromJSObject(p, ba.ctx)
+func (a *AssetsManager) UseDefaultLoadingScreen() bool {
+	retVal := a.p.Get("useDefaultLoadingScreen")
+	return retVal.Bool()
 }
 
 // SetUseDefaultLoadingScreen sets the UseDefaultLoadingScreen property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#usedefaultloadingscreen
 func (a *AssetsManager) SetUseDefaultLoadingScreen(useDefaultLoadingScreen bool) *AssetsManager {
-	p := ba.ctx.Get("AssetsManager").New(useDefaultLoadingScreen)
-	return AssetsManagerFromJSObject(p, ba.ctx)
+	a.p.Set("useDefaultLoadingScreen", useDefaultLoadingScreen)
+	return a
 }
-
-*/

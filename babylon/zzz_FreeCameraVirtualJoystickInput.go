@@ -120,22 +120,18 @@ func (f *FreeCameraVirtualJoystickInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // Camera returns the Camera property of class FreeCameraVirtualJoystickInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#camera
-func (f *FreeCameraVirtualJoystickInput) Camera(camera *FreeCamera) *FreeCameraVirtualJoystickInput {
-	p := ba.ctx.Get("FreeCameraVirtualJoystickInput").New(camera.JSObject())
-	return FreeCameraVirtualJoystickInputFromJSObject(p, ba.ctx)
+func (f *FreeCameraVirtualJoystickInput) Camera() *FreeCamera {
+	retVal := f.p.Get("camera")
+	return FreeCameraFromJSObject(retVal, f.ctx)
 }
 
 // SetCamera sets the Camera property of class FreeCameraVirtualJoystickInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#camera
 func (f *FreeCameraVirtualJoystickInput) SetCamera(camera *FreeCamera) *FreeCameraVirtualJoystickInput {
-	p := ba.ctx.Get("FreeCameraVirtualJoystickInput").New(camera.JSObject())
-	return FreeCameraVirtualJoystickInputFromJSObject(p, ba.ctx)
+	f.p.Set("camera", camera.JSObject())
+	return f
 }
-
-*/

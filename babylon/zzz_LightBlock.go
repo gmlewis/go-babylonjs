@@ -149,166 +149,162 @@ func (l *LightBlock) _deserialize(serializationObject interface{}, scene *Scene,
 	l.p.Call("_deserialize", args...)
 }
 
-/*
-
 // CameraPosition returns the CameraPosition property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#cameraposition
-func (l *LightBlock) CameraPosition(cameraPosition *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(cameraPosition.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+func (l *LightBlock) CameraPosition() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("cameraPosition")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetCameraPosition sets the CameraPosition property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#cameraposition
 func (l *LightBlock) SetCameraPosition(cameraPosition *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(cameraPosition.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+	l.p.Set("cameraPosition", cameraPosition.JSObject())
+	return l
 }
 
 // DiffuseColor returns the DiffuseColor property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#diffusecolor
-func (l *LightBlock) DiffuseColor(diffuseColor *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(diffuseColor.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+func (l *LightBlock) DiffuseColor() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("diffuseColor")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetDiffuseColor sets the DiffuseColor property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#diffusecolor
 func (l *LightBlock) SetDiffuseColor(diffuseColor *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(diffuseColor.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+	l.p.Set("diffuseColor", diffuseColor.JSObject())
+	return l
 }
 
 // DiffuseOutput returns the DiffuseOutput property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#diffuseoutput
-func (l *LightBlock) DiffuseOutput(diffuseOutput *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(diffuseOutput.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+func (l *LightBlock) DiffuseOutput() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("diffuseOutput")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetDiffuseOutput sets the DiffuseOutput property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#diffuseoutput
 func (l *LightBlock) SetDiffuseOutput(diffuseOutput *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(diffuseOutput.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+	l.p.Set("diffuseOutput", diffuseOutput.JSObject())
+	return l
 }
 
 // GlossPower returns the GlossPower property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#glosspower
-func (l *LightBlock) GlossPower(glossPower *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(glossPower.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+func (l *LightBlock) GlossPower() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("glossPower")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetGlossPower sets the GlossPower property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#glosspower
 func (l *LightBlock) SetGlossPower(glossPower *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(glossPower.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+	l.p.Set("glossPower", glossPower.JSObject())
+	return l
 }
 
 // Glossiness returns the Glossiness property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#glossiness
-func (l *LightBlock) Glossiness(glossiness *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(glossiness.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+func (l *LightBlock) Glossiness() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("glossiness")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetGlossiness sets the Glossiness property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#glossiness
 func (l *LightBlock) SetGlossiness(glossiness *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(glossiness.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+	l.p.Set("glossiness", glossiness.JSObject())
+	return l
 }
 
 // Light returns the Light property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#light
-func (l *LightBlock) Light(light *Light) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(light.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+func (l *LightBlock) Light() *Light {
+	retVal := l.p.Get("light")
+	return LightFromJSObject(retVal, l.ctx)
 }
 
 // SetLight sets the Light property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#light
 func (l *LightBlock) SetLight(light *Light) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(light.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+	l.p.Set("light", light.JSObject())
+	return l
 }
 
 // SpecularColor returns the SpecularColor property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#specularcolor
-func (l *LightBlock) SpecularColor(specularColor *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(specularColor.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+func (l *LightBlock) SpecularColor() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("specularColor")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetSpecularColor sets the SpecularColor property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#specularcolor
 func (l *LightBlock) SetSpecularColor(specularColor *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(specularColor.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+	l.p.Set("specularColor", specularColor.JSObject())
+	return l
 }
 
 // SpecularOutput returns the SpecularOutput property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#specularoutput
-func (l *LightBlock) SpecularOutput(specularOutput *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(specularOutput.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+func (l *LightBlock) SpecularOutput() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("specularOutput")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetSpecularOutput sets the SpecularOutput property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#specularoutput
 func (l *LightBlock) SetSpecularOutput(specularOutput *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(specularOutput.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+	l.p.Set("specularOutput", specularOutput.JSObject())
+	return l
 }
 
 // WorldNormal returns the WorldNormal property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#worldnormal
-func (l *LightBlock) WorldNormal(worldNormal *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(worldNormal.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+func (l *LightBlock) WorldNormal() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("worldNormal")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetWorldNormal sets the WorldNormal property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#worldnormal
 func (l *LightBlock) SetWorldNormal(worldNormal *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(worldNormal.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+	l.p.Set("worldNormal", worldNormal.JSObject())
+	return l
 }
 
 // WorldPosition returns the WorldPosition property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#worldposition
-func (l *LightBlock) WorldPosition(worldPosition *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(worldPosition.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+func (l *LightBlock) WorldPosition() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("worldPosition")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetWorldPosition sets the WorldPosition property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#worldposition
 func (l *LightBlock) SetWorldPosition(worldPosition *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(worldPosition.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
+	l.p.Set("worldPosition", worldPosition.JSObject())
+	return l
 }
-
-*/

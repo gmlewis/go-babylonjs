@@ -36,38 +36,34 @@ func ExtrasAsMetadataArrayToJSArray(array []*ExtrasAsMetadata) []interface{} {
 	return result
 }
 
-/*
-
 // Enabled returns the Enabled property of class ExtrasAsMetadata.
 //
 // https://doc.babylonjs.com/api/classes/babylon.extrasasmetadata#enabled
-func (e *ExtrasAsMetadata) Enabled(enabled bool) *ExtrasAsMetadata {
-	p := ba.ctx.Get("ExtrasAsMetadata").New(enabled)
-	return ExtrasAsMetadataFromJSObject(p, ba.ctx)
+func (e *ExtrasAsMetadata) Enabled() bool {
+	retVal := e.p.Get("enabled")
+	return retVal.Bool()
 }
 
 // SetEnabled sets the Enabled property of class ExtrasAsMetadata.
 //
 // https://doc.babylonjs.com/api/classes/babylon.extrasasmetadata#enabled
 func (e *ExtrasAsMetadata) SetEnabled(enabled bool) *ExtrasAsMetadata {
-	p := ba.ctx.Get("ExtrasAsMetadata").New(enabled)
-	return ExtrasAsMetadataFromJSObject(p, ba.ctx)
+	e.p.Set("enabled", enabled)
+	return e
 }
 
 // Name returns the Name property of class ExtrasAsMetadata.
 //
 // https://doc.babylonjs.com/api/classes/babylon.extrasasmetadata#name
-func (e *ExtrasAsMetadata) Name(name string) *ExtrasAsMetadata {
-	p := ba.ctx.Get("ExtrasAsMetadata").New(name)
-	return ExtrasAsMetadataFromJSObject(p, ba.ctx)
+func (e *ExtrasAsMetadata) Name() string {
+	retVal := e.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ExtrasAsMetadata.
 //
 // https://doc.babylonjs.com/api/classes/babylon.extrasasmetadata#name
 func (e *ExtrasAsMetadata) SetName(name string) *ExtrasAsMetadata {
-	p := ba.ctx.Get("ExtrasAsMetadata").New(name)
-	return ExtrasAsMetadataFromJSObject(p, ba.ctx)
+	e.p.Set("name", name)
+	return e
 }
-
-*/

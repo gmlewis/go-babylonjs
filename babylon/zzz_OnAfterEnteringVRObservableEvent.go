@@ -36,22 +36,18 @@ func OnAfterEnteringVRObservableEventArrayToJSArray(array []*OnAfterEnteringVROb
 	return result
 }
 
-/*
-
 // Success returns the Success property of class OnAfterEnteringVRObservableEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.onafterenteringvrobservableevent#success
-func (o *OnAfterEnteringVRObservableEvent) Success(success bool) *OnAfterEnteringVRObservableEvent {
-	p := ba.ctx.Get("OnAfterEnteringVRObservableEvent").New(success)
-	return OnAfterEnteringVRObservableEventFromJSObject(p, ba.ctx)
+func (o *OnAfterEnteringVRObservableEvent) Success() bool {
+	retVal := o.p.Get("success")
+	return retVal.Bool()
 }
 
 // SetSuccess sets the Success property of class OnAfterEnteringVRObservableEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.onafterenteringvrobservableevent#success
 func (o *OnAfterEnteringVRObservableEvent) SetSuccess(success bool) *OnAfterEnteringVRObservableEvent {
-	p := ba.ctx.Get("OnAfterEnteringVRObservableEvent").New(success)
-	return OnAfterEnteringVRObservableEventFromJSObject(p, ba.ctx)
+	o.p.Set("success", success)
+	return o
 }
-
-*/

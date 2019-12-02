@@ -36,22 +36,18 @@ func IDracoCompressionConfigurationArrayToJSArray(array []*IDracoCompressionConf
 	return result
 }
 
-/*
-
 // Decoder returns the Decoder property of class IDracoCompressionConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idracocompressionconfiguration#decoder
-func (i *IDracoCompressionConfiguration) Decoder(decoder js.Value) *IDracoCompressionConfiguration {
-	p := ba.ctx.Get("IDracoCompressionConfiguration").New(decoder)
-	return IDracoCompressionConfigurationFromJSObject(p, ba.ctx)
+func (i *IDracoCompressionConfiguration) Decoder() js.Value {
+	retVal := i.p.Get("decoder")
+	return retVal
 }
 
 // SetDecoder sets the Decoder property of class IDracoCompressionConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idracocompressionconfiguration#decoder
 func (i *IDracoCompressionConfiguration) SetDecoder(decoder js.Value) *IDracoCompressionConfiguration {
-	p := ba.ctx.Get("IDracoCompressionConfiguration").New(decoder)
-	return IDracoCompressionConfigurationFromJSObject(p, ba.ctx)
+	i.p.Set("decoder", decoder)
+	return i
 }
-
-*/

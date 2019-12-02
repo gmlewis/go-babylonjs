@@ -61,86 +61,82 @@ func (ba *Babylon) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
 	return StackPanelFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Height returns the Height property of class StackPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#height
-func (s *StackPanel) Height(height string) *StackPanel {
-	p := ba.ctx.Get("StackPanel").New(height)
-	return StackPanelFromJSObject(p, ba.ctx)
+func (s *StackPanel) Height() string {
+	retVal := s.p.Get("height")
+	return retVal.String()
 }
 
 // SetHeight sets the Height property of class StackPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#height
 func (s *StackPanel) SetHeight(height string) *StackPanel {
-	p := ba.ctx.Get("StackPanel").New(height)
-	return StackPanelFromJSObject(p, ba.ctx)
+	s.p.Set("height", height)
+	return s
 }
 
 // IgnoreLayoutWarnings returns the IgnoreLayoutWarnings property of class StackPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#ignorelayoutwarnings
-func (s *StackPanel) IgnoreLayoutWarnings(ignoreLayoutWarnings bool) *StackPanel {
-	p := ba.ctx.Get("StackPanel").New(ignoreLayoutWarnings)
-	return StackPanelFromJSObject(p, ba.ctx)
+func (s *StackPanel) IgnoreLayoutWarnings() bool {
+	retVal := s.p.Get("ignoreLayoutWarnings")
+	return retVal.Bool()
 }
 
 // SetIgnoreLayoutWarnings sets the IgnoreLayoutWarnings property of class StackPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#ignorelayoutwarnings
 func (s *StackPanel) SetIgnoreLayoutWarnings(ignoreLayoutWarnings bool) *StackPanel {
-	p := ba.ctx.Get("StackPanel").New(ignoreLayoutWarnings)
-	return StackPanelFromJSObject(p, ba.ctx)
+	s.p.Set("ignoreLayoutWarnings", ignoreLayoutWarnings)
+	return s
 }
 
 // IsVertical returns the IsVertical property of class StackPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#isvertical
-func (s *StackPanel) IsVertical(isVertical bool) *StackPanel {
-	p := ba.ctx.Get("StackPanel").New(isVertical)
-	return StackPanelFromJSObject(p, ba.ctx)
+func (s *StackPanel) IsVertical() bool {
+	retVal := s.p.Get("isVertical")
+	return retVal.Bool()
 }
 
 // SetIsVertical sets the IsVertical property of class StackPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#isvertical
 func (s *StackPanel) SetIsVertical(isVertical bool) *StackPanel {
-	p := ba.ctx.Get("StackPanel").New(isVertical)
-	return StackPanelFromJSObject(p, ba.ctx)
+	s.p.Set("isVertical", isVertical)
+	return s
 }
 
 // Name returns the Name property of class StackPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#name
-func (s *StackPanel) Name(name string) *StackPanel {
-	p := ba.ctx.Get("StackPanel").New(name)
-	return StackPanelFromJSObject(p, ba.ctx)
+func (s *StackPanel) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class StackPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#name
 func (s *StackPanel) SetName(name string) *StackPanel {
-	p := ba.ctx.Get("StackPanel").New(name)
-	return StackPanelFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
 
 // Width returns the Width property of class StackPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#width
-func (s *StackPanel) Width(width string) *StackPanel {
-	p := ba.ctx.Get("StackPanel").New(width)
-	return StackPanelFromJSObject(p, ba.ctx)
+func (s *StackPanel) Width() string {
+	retVal := s.p.Get("width")
+	return retVal.String()
 }
 
 // SetWidth sets the Width property of class StackPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel#width
 func (s *StackPanel) SetWidth(width string) *StackPanel {
-	p := ba.ctx.Get("StackPanel").New(width)
-	return StackPanelFromJSObject(p, ba.ctx)
+	s.p.Set("width", width)
+	return s
 }
-
-*/

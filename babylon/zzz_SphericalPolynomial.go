@@ -86,166 +86,162 @@ func (s *SphericalPolynomial) ScaleInPlace(scale float64) {
 	s.p.Call("scaleInPlace", args...)
 }
 
-/*
-
 // PreScaledHarmonics returns the PreScaledHarmonics property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#prescaledharmonics
-func (s *SphericalPolynomial) PreScaledHarmonics(preScaledHarmonics *SphericalHarmonics) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(preScaledHarmonics.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+func (s *SphericalPolynomial) PreScaledHarmonics() *SphericalHarmonics {
+	retVal := s.p.Get("preScaledHarmonics")
+	return SphericalHarmonicsFromJSObject(retVal, s.ctx)
 }
 
 // SetPreScaledHarmonics sets the PreScaledHarmonics property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#prescaledharmonics
 func (s *SphericalPolynomial) SetPreScaledHarmonics(preScaledHarmonics *SphericalHarmonics) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(preScaledHarmonics.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+	s.p.Set("preScaledHarmonics", preScaledHarmonics.JSObject())
+	return s
 }
 
 // X returns the X property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#x
-func (s *SphericalPolynomial) X(x *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(x.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+func (s *SphericalPolynomial) X() *Vector3 {
+	retVal := s.p.Get("x")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetX sets the X property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#x
 func (s *SphericalPolynomial) SetX(x *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(x.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+	s.p.Set("x", x.JSObject())
+	return s
 }
 
 // Xx returns the Xx property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#xx
-func (s *SphericalPolynomial) Xx(xx *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(xx.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+func (s *SphericalPolynomial) Xx() *Vector3 {
+	retVal := s.p.Get("xx")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetXx sets the Xx property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#xx
 func (s *SphericalPolynomial) SetXx(xx *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(xx.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+	s.p.Set("xx", xx.JSObject())
+	return s
 }
 
 // Xy returns the Xy property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#xy
-func (s *SphericalPolynomial) Xy(xy *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(xy.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+func (s *SphericalPolynomial) Xy() *Vector3 {
+	retVal := s.p.Get("xy")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetXy sets the Xy property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#xy
 func (s *SphericalPolynomial) SetXy(xy *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(xy.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+	s.p.Set("xy", xy.JSObject())
+	return s
 }
 
 // Y returns the Y property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#y
-func (s *SphericalPolynomial) Y(y *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(y.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+func (s *SphericalPolynomial) Y() *Vector3 {
+	retVal := s.p.Get("y")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetY sets the Y property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#y
 func (s *SphericalPolynomial) SetY(y *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(y.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+	s.p.Set("y", y.JSObject())
+	return s
 }
 
 // Yy returns the Yy property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#yy
-func (s *SphericalPolynomial) Yy(yy *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(yy.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+func (s *SphericalPolynomial) Yy() *Vector3 {
+	retVal := s.p.Get("yy")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetYy sets the Yy property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#yy
 func (s *SphericalPolynomial) SetYy(yy *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(yy.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+	s.p.Set("yy", yy.JSObject())
+	return s
 }
 
 // Yz returns the Yz property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#yz
-func (s *SphericalPolynomial) Yz(yz *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(yz.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+func (s *SphericalPolynomial) Yz() *Vector3 {
+	retVal := s.p.Get("yz")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetYz sets the Yz property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#yz
 func (s *SphericalPolynomial) SetYz(yz *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(yz.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+	s.p.Set("yz", yz.JSObject())
+	return s
 }
 
 // Z returns the Z property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#z
-func (s *SphericalPolynomial) Z(z *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(z.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+func (s *SphericalPolynomial) Z() *Vector3 {
+	retVal := s.p.Get("z")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetZ sets the Z property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#z
 func (s *SphericalPolynomial) SetZ(z *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(z.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+	s.p.Set("z", z.JSObject())
+	return s
 }
 
 // Zx returns the Zx property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#zx
-func (s *SphericalPolynomial) Zx(zx *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(zx.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+func (s *SphericalPolynomial) Zx() *Vector3 {
+	retVal := s.p.Get("zx")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetZx sets the Zx property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#zx
 func (s *SphericalPolynomial) SetZx(zx *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(zx.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+	s.p.Set("zx", zx.JSObject())
+	return s
 }
 
 // Zz returns the Zz property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#zz
-func (s *SphericalPolynomial) Zz(zz *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(zz.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+func (s *SphericalPolynomial) Zz() *Vector3 {
+	retVal := s.p.Get("zz")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetZz sets the Zz property of class SphericalPolynomial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphericalpolynomial#zz
 func (s *SphericalPolynomial) SetZz(zz *Vector3) *SphericalPolynomial {
-	p := ba.ctx.Get("SphericalPolynomial").New(zz.JSObject())
-	return SphericalPolynomialFromJSObject(p, ba.ctx)
+	s.p.Set("zz", zz.JSObject())
+	return s
 }
-
-*/

@@ -89,7 +89,3 @@ func (s *SceneSerializer) SerializeMesh(toSerialize interface{}, opts *SceneSeri
 	retVal := s.p.Call("SerializeMesh", args...)
 	return retVal
 }
-
-/*
-
- */

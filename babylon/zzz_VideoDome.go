@@ -85,118 +85,114 @@ func (v *VideoDome) Dispose(opts *VideoDomeDisposeOpts) {
 	v.p.Call("dispose", args...)
 }
 
-/*
-
 // FovMultiplier returns the FovMultiplier property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#fovmultiplier
-func (v *VideoDome) FovMultiplier(fovMultiplier float64) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(fovMultiplier)
-	return VideoDomeFromJSObject(p, ba.ctx)
+func (v *VideoDome) FovMultiplier() float64 {
+	retVal := v.p.Get("fovMultiplier")
+	return retVal.Float()
 }
 
 // SetFovMultiplier sets the FovMultiplier property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#fovmultiplier
 func (v *VideoDome) SetFovMultiplier(fovMultiplier float64) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(fovMultiplier)
-	return VideoDomeFromJSObject(p, ba.ctx)
+	v.p.Set("fovMultiplier", fovMultiplier)
+	return v
 }
 
 // HalfDome returns the HalfDome property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#halfdome
-func (v *VideoDome) HalfDome(halfDome bool) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(halfDome)
-	return VideoDomeFromJSObject(p, ba.ctx)
+func (v *VideoDome) HalfDome() bool {
+	retVal := v.p.Get("halfDome")
+	return retVal.Bool()
 }
 
 // SetHalfDome sets the HalfDome property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#halfdome
 func (v *VideoDome) SetHalfDome(halfDome bool) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(halfDome)
-	return VideoDomeFromJSObject(p, ba.ctx)
+	v.p.Set("halfDome", halfDome)
+	return v
 }
 
 // MODE_MONOSCOPIC returns the MODE_MONOSCOPIC property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#mode_monoscopic
-func (v *VideoDome) MODE_MONOSCOPIC(MODE_MONOSCOPIC float64) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(MODE_MONOSCOPIC)
-	return VideoDomeFromJSObject(p, ba.ctx)
+func (v *VideoDome) MODE_MONOSCOPIC() float64 {
+	retVal := v.p.Get("MODE_MONOSCOPIC")
+	return retVal.Float()
 }
 
 // SetMODE_MONOSCOPIC sets the MODE_MONOSCOPIC property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#mode_monoscopic
 func (v *VideoDome) SetMODE_MONOSCOPIC(MODE_MONOSCOPIC float64) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(MODE_MONOSCOPIC)
-	return VideoDomeFromJSObject(p, ba.ctx)
+	v.p.Set("MODE_MONOSCOPIC", MODE_MONOSCOPIC)
+	return v
 }
 
 // MODE_SIDEBYSIDE returns the MODE_SIDEBYSIDE property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#mode_sidebyside
-func (v *VideoDome) MODE_SIDEBYSIDE(MODE_SIDEBYSIDE float64) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(MODE_SIDEBYSIDE)
-	return VideoDomeFromJSObject(p, ba.ctx)
+func (v *VideoDome) MODE_SIDEBYSIDE() float64 {
+	retVal := v.p.Get("MODE_SIDEBYSIDE")
+	return retVal.Float()
 }
 
 // SetMODE_SIDEBYSIDE sets the MODE_SIDEBYSIDE property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#mode_sidebyside
 func (v *VideoDome) SetMODE_SIDEBYSIDE(MODE_SIDEBYSIDE float64) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(MODE_SIDEBYSIDE)
-	return VideoDomeFromJSObject(p, ba.ctx)
+	v.p.Set("MODE_SIDEBYSIDE", MODE_SIDEBYSIDE)
+	return v
 }
 
 // MODE_TOPBOTTOM returns the MODE_TOPBOTTOM property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#mode_topbottom
-func (v *VideoDome) MODE_TOPBOTTOM(MODE_TOPBOTTOM float64) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(MODE_TOPBOTTOM)
-	return VideoDomeFromJSObject(p, ba.ctx)
+func (v *VideoDome) MODE_TOPBOTTOM() float64 {
+	retVal := v.p.Get("MODE_TOPBOTTOM")
+	return retVal.Float()
 }
 
 // SetMODE_TOPBOTTOM sets the MODE_TOPBOTTOM property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#mode_topbottom
 func (v *VideoDome) SetMODE_TOPBOTTOM(MODE_TOPBOTTOM float64) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(MODE_TOPBOTTOM)
-	return VideoDomeFromJSObject(p, ba.ctx)
+	v.p.Set("MODE_TOPBOTTOM", MODE_TOPBOTTOM)
+	return v
 }
 
 // VideoMode returns the VideoMode property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#videomode
-func (v *VideoDome) VideoMode(videoMode float64) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(videoMode)
-	return VideoDomeFromJSObject(p, ba.ctx)
+func (v *VideoDome) VideoMode() float64 {
+	retVal := v.p.Get("videoMode")
+	return retVal.Float()
 }
 
 // SetVideoMode sets the VideoMode property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#videomode
 func (v *VideoDome) SetVideoMode(videoMode float64) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(videoMode)
-	return VideoDomeFromJSObject(p, ba.ctx)
+	v.p.Set("videoMode", videoMode)
+	return v
 }
 
 // VideoTexture returns the VideoTexture property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#videotexture
-func (v *VideoDome) VideoTexture(videoTexture *VideoTexture) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(videoTexture.JSObject())
-	return VideoDomeFromJSObject(p, ba.ctx)
+func (v *VideoDome) VideoTexture() *VideoTexture {
+	retVal := v.p.Get("videoTexture")
+	return VideoTextureFromJSObject(retVal, v.ctx)
 }
 
 // SetVideoTexture sets the VideoTexture property of class VideoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome#videotexture
 func (v *VideoDome) SetVideoTexture(videoTexture *VideoTexture) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(videoTexture.JSObject())
-	return VideoDomeFromJSObject(p, ba.ctx)
+	v.p.Set("videoTexture", videoTexture.JSObject())
+	return v
 }
-
-*/

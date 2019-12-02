@@ -107,7 +107,3 @@ func (m *MotorEnabledJoint) SetMotor(opts *MotorEnabledJointSetMotorOpts) {
 
 	m.p.Call("setMotor", args...)
 }
-
-/*
-
- */

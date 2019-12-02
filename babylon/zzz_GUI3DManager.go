@@ -110,70 +110,66 @@ func (g *GUI3DManager) RemoveControl(control *Control3D) *GUI3DManager {
 	return GUI3DManagerFromJSObject(retVal, g.ctx)
 }
 
-/*
-
 // OnPickedPointChangedObservable returns the OnPickedPointChangedObservable property of class GUI3DManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager#onpickedpointchangedobservable
-func (g *GUI3DManager) OnPickedPointChangedObservable(onPickedPointChangedObservable *Observable) *GUI3DManager {
-	p := ba.ctx.Get("GUI3DManager").New(onPickedPointChangedObservable.JSObject())
-	return GUI3DManagerFromJSObject(p, ba.ctx)
+func (g *GUI3DManager) OnPickedPointChangedObservable() *Observable {
+	retVal := g.p.Get("onPickedPointChangedObservable")
+	return ObservableFromJSObject(retVal, g.ctx)
 }
 
 // SetOnPickedPointChangedObservable sets the OnPickedPointChangedObservable property of class GUI3DManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager#onpickedpointchangedobservable
 func (g *GUI3DManager) SetOnPickedPointChangedObservable(onPickedPointChangedObservable *Observable) *GUI3DManager {
-	p := ba.ctx.Get("GUI3DManager").New(onPickedPointChangedObservable.JSObject())
-	return GUI3DManagerFromJSObject(p, ba.ctx)
+	g.p.Set("onPickedPointChangedObservable", onPickedPointChangedObservable.JSObject())
+	return g
 }
 
 // RootContainer returns the RootContainer property of class GUI3DManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager#rootcontainer
-func (g *GUI3DManager) RootContainer(rootContainer *Container3D) *GUI3DManager {
-	p := ba.ctx.Get("GUI3DManager").New(rootContainer.JSObject())
-	return GUI3DManagerFromJSObject(p, ba.ctx)
+func (g *GUI3DManager) RootContainer() *Container3D {
+	retVal := g.p.Get("rootContainer")
+	return Container3DFromJSObject(retVal, g.ctx)
 }
 
 // SetRootContainer sets the RootContainer property of class GUI3DManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager#rootcontainer
 func (g *GUI3DManager) SetRootContainer(rootContainer *Container3D) *GUI3DManager {
-	p := ba.ctx.Get("GUI3DManager").New(rootContainer.JSObject())
-	return GUI3DManagerFromJSObject(p, ba.ctx)
+	g.p.Set("rootContainer", rootContainer.JSObject())
+	return g
 }
 
 // Scene returns the Scene property of class GUI3DManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager#scene
-func (g *GUI3DManager) Scene(scene *Scene) *GUI3DManager {
-	p := ba.ctx.Get("GUI3DManager").New(scene.JSObject())
-	return GUI3DManagerFromJSObject(p, ba.ctx)
+func (g *GUI3DManager) Scene() *Scene {
+	retVal := g.p.Get("scene")
+	return SceneFromJSObject(retVal, g.ctx)
 }
 
 // SetScene sets the Scene property of class GUI3DManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager#scene
 func (g *GUI3DManager) SetScene(scene *Scene) *GUI3DManager {
-	p := ba.ctx.Get("GUI3DManager").New(scene.JSObject())
-	return GUI3DManagerFromJSObject(p, ba.ctx)
+	g.p.Set("scene", scene.JSObject())
+	return g
 }
 
 // UtilityLayer returns the UtilityLayer property of class GUI3DManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager#utilitylayer
-func (g *GUI3DManager) UtilityLayer(utilityLayer *UtilityLayerRenderer) *GUI3DManager {
-	p := ba.ctx.Get("GUI3DManager").New(utilityLayer.JSObject())
-	return GUI3DManagerFromJSObject(p, ba.ctx)
+func (g *GUI3DManager) UtilityLayer() *UtilityLayerRenderer {
+	retVal := g.p.Get("utilityLayer")
+	return UtilityLayerRendererFromJSObject(retVal, g.ctx)
 }
 
 // SetUtilityLayer sets the UtilityLayer property of class GUI3DManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager#utilitylayer
 func (g *GUI3DManager) SetUtilityLayer(utilityLayer *UtilityLayerRenderer) *GUI3DManager {
-	p := ba.ctx.Get("GUI3DManager").New(utilityLayer.JSObject())
-	return GUI3DManagerFromJSObject(p, ba.ctx)
+	g.p.Set("utilityLayer", utilityLayer.JSObject())
+	return g
 }
-
-*/

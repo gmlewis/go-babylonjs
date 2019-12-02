@@ -63,7 +63,3 @@ func (i *ICullable) IsInFrustum(frustumPlanes *Plane) bool {
 	retVal := i.p.Call("isInFrustum", args...)
 	return retVal.Bool()
 }
-
-/*
-
- */

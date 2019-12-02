@@ -220,246 +220,242 @@ func (m *MixMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // DiffuseColor returns the DiffuseColor property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusecolor
-func (m *MixMaterial) DiffuseColor(diffuseColor *Color3) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseColor.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) DiffuseColor() *Color3 {
+	retVal := m.p.Get("diffuseColor")
+	return Color3FromJSObject(retVal, m.ctx)
 }
 
 // SetDiffuseColor sets the DiffuseColor property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusecolor
 func (m *MixMaterial) SetDiffuseColor(diffuseColor *Color3) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseColor.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("diffuseColor", diffuseColor.JSObject())
+	return m
 }
 
 // DiffuseTexture1 returns the DiffuseTexture1 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture1
-func (m *MixMaterial) DiffuseTexture1(diffuseTexture1 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture1.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) DiffuseTexture1() *Texture {
+	retVal := m.p.Get("diffuseTexture1")
+	return TextureFromJSObject(retVal, m.ctx)
 }
 
 // SetDiffuseTexture1 sets the DiffuseTexture1 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture1
 func (m *MixMaterial) SetDiffuseTexture1(diffuseTexture1 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture1.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("diffuseTexture1", diffuseTexture1.JSObject())
+	return m
 }
 
 // DiffuseTexture2 returns the DiffuseTexture2 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture2
-func (m *MixMaterial) DiffuseTexture2(diffuseTexture2 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture2.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) DiffuseTexture2() *Texture {
+	retVal := m.p.Get("diffuseTexture2")
+	return TextureFromJSObject(retVal, m.ctx)
 }
 
 // SetDiffuseTexture2 sets the DiffuseTexture2 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture2
 func (m *MixMaterial) SetDiffuseTexture2(diffuseTexture2 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture2.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("diffuseTexture2", diffuseTexture2.JSObject())
+	return m
 }
 
 // DiffuseTexture3 returns the DiffuseTexture3 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture3
-func (m *MixMaterial) DiffuseTexture3(diffuseTexture3 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture3.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) DiffuseTexture3() *Texture {
+	retVal := m.p.Get("diffuseTexture3")
+	return TextureFromJSObject(retVal, m.ctx)
 }
 
 // SetDiffuseTexture3 sets the DiffuseTexture3 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture3
 func (m *MixMaterial) SetDiffuseTexture3(diffuseTexture3 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture3.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("diffuseTexture3", diffuseTexture3.JSObject())
+	return m
 }
 
 // DiffuseTexture4 returns the DiffuseTexture4 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture4
-func (m *MixMaterial) DiffuseTexture4(diffuseTexture4 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture4.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) DiffuseTexture4() *Texture {
+	retVal := m.p.Get("diffuseTexture4")
+	return TextureFromJSObject(retVal, m.ctx)
 }
 
 // SetDiffuseTexture4 sets the DiffuseTexture4 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture4
 func (m *MixMaterial) SetDiffuseTexture4(diffuseTexture4 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture4.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("diffuseTexture4", diffuseTexture4.JSObject())
+	return m
 }
 
 // DiffuseTexture5 returns the DiffuseTexture5 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture5
-func (m *MixMaterial) DiffuseTexture5(diffuseTexture5 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture5.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) DiffuseTexture5() *Texture {
+	retVal := m.p.Get("diffuseTexture5")
+	return TextureFromJSObject(retVal, m.ctx)
 }
 
 // SetDiffuseTexture5 sets the DiffuseTexture5 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture5
 func (m *MixMaterial) SetDiffuseTexture5(diffuseTexture5 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture5.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("diffuseTexture5", diffuseTexture5.JSObject())
+	return m
 }
 
 // DiffuseTexture6 returns the DiffuseTexture6 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture6
-func (m *MixMaterial) DiffuseTexture6(diffuseTexture6 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture6.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) DiffuseTexture6() *Texture {
+	retVal := m.p.Get("diffuseTexture6")
+	return TextureFromJSObject(retVal, m.ctx)
 }
 
 // SetDiffuseTexture6 sets the DiffuseTexture6 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture6
 func (m *MixMaterial) SetDiffuseTexture6(diffuseTexture6 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture6.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("diffuseTexture6", diffuseTexture6.JSObject())
+	return m
 }
 
 // DiffuseTexture7 returns the DiffuseTexture7 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture7
-func (m *MixMaterial) DiffuseTexture7(diffuseTexture7 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture7.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) DiffuseTexture7() *Texture {
+	retVal := m.p.Get("diffuseTexture7")
+	return TextureFromJSObject(retVal, m.ctx)
 }
 
 // SetDiffuseTexture7 sets the DiffuseTexture7 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture7
 func (m *MixMaterial) SetDiffuseTexture7(diffuseTexture7 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture7.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("diffuseTexture7", diffuseTexture7.JSObject())
+	return m
 }
 
 // DiffuseTexture8 returns the DiffuseTexture8 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture8
-func (m *MixMaterial) DiffuseTexture8(diffuseTexture8 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture8.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) DiffuseTexture8() *Texture {
+	retVal := m.p.Get("diffuseTexture8")
+	return TextureFromJSObject(retVal, m.ctx)
 }
 
 // SetDiffuseTexture8 sets the DiffuseTexture8 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture8
 func (m *MixMaterial) SetDiffuseTexture8(diffuseTexture8 *Texture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(diffuseTexture8.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("diffuseTexture8", diffuseTexture8.JSObject())
+	return m
 }
 
 // DisableLighting returns the DisableLighting property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#disablelighting
-func (m *MixMaterial) DisableLighting(disableLighting bool) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(disableLighting)
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) DisableLighting() bool {
+	retVal := m.p.Get("disableLighting")
+	return retVal.Bool()
 }
 
 // SetDisableLighting sets the DisableLighting property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#disablelighting
 func (m *MixMaterial) SetDisableLighting(disableLighting bool) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(disableLighting)
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("disableLighting", disableLighting)
+	return m
 }
 
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#maxsimultaneouslights
-func (m *MixMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(maxSimultaneousLights)
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) MaxSimultaneousLights() float64 {
+	retVal := m.p.Get("maxSimultaneousLights")
+	return retVal.Float()
 }
 
 // SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#maxsimultaneouslights
 func (m *MixMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(maxSimultaneousLights)
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("maxSimultaneousLights", maxSimultaneousLights)
+	return m
 }
 
 // MixTexture1 returns the MixTexture1 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#mixtexture1
-func (m *MixMaterial) MixTexture1(mixTexture1 *BaseTexture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(mixTexture1.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) MixTexture1() *BaseTexture {
+	retVal := m.p.Get("mixTexture1")
+	return BaseTextureFromJSObject(retVal, m.ctx)
 }
 
 // SetMixTexture1 sets the MixTexture1 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#mixtexture1
 func (m *MixMaterial) SetMixTexture1(mixTexture1 *BaseTexture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(mixTexture1.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("mixTexture1", mixTexture1.JSObject())
+	return m
 }
 
 // MixTexture2 returns the MixTexture2 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#mixtexture2
-func (m *MixMaterial) MixTexture2(mixTexture2 *BaseTexture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(mixTexture2.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) MixTexture2() *BaseTexture {
+	retVal := m.p.Get("mixTexture2")
+	return BaseTextureFromJSObject(retVal, m.ctx)
 }
 
 // SetMixTexture2 sets the MixTexture2 property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#mixtexture2
 func (m *MixMaterial) SetMixTexture2(mixTexture2 *BaseTexture) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(mixTexture2.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("mixTexture2", mixTexture2.JSObject())
+	return m
 }
 
 // SpecularColor returns the SpecularColor property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#specularcolor
-func (m *MixMaterial) SpecularColor(specularColor *Color3) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(specularColor.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) SpecularColor() *Color3 {
+	retVal := m.p.Get("specularColor")
+	return Color3FromJSObject(retVal, m.ctx)
 }
 
 // SetSpecularColor sets the SpecularColor property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#specularcolor
 func (m *MixMaterial) SetSpecularColor(specularColor *Color3) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(specularColor.JSObject())
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("specularColor", specularColor.JSObject())
+	return m
 }
 
 // SpecularPower returns the SpecularPower property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#specularpower
-func (m *MixMaterial) SpecularPower(specularPower float64) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(specularPower)
-	return MixMaterialFromJSObject(p, ba.ctx)
+func (m *MixMaterial) SpecularPower() float64 {
+	retVal := m.p.Get("specularPower")
+	return retVal.Float()
 }
 
 // SetSpecularPower sets the SpecularPower property of class MixMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#specularpower
 func (m *MixMaterial) SetSpecularPower(specularPower float64) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(specularPower)
-	return MixMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("specularPower", specularPower)
+	return m
 }
-
-*/

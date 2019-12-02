@@ -102,22 +102,18 @@ func (ba *Babylon) NewDepthOfFieldBlurPostProcess(name string, scene *Scene, dir
 	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Direction returns the Direction property of class DepthOfFieldBlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#direction
-func (d *DepthOfFieldBlurPostProcess) Direction(direction *Vector2) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(direction.JSObject())
-	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
+func (d *DepthOfFieldBlurPostProcess) Direction() *Vector2 {
+	retVal := d.p.Get("direction")
+	return Vector2FromJSObject(retVal, d.ctx)
 }
 
 // SetDirection sets the Direction property of class DepthOfFieldBlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#direction
 func (d *DepthOfFieldBlurPostProcess) SetDirection(direction *Vector2) *DepthOfFieldBlurPostProcess {
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(direction.JSObject())
-	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
+	d.p.Set("direction", direction.JSObject())
+	return d
 }
-
-*/

@@ -48,7 +48,3 @@ func (p *PoseEnabledControllerHelper) InitiateController(vrGamepad interface{}) 
 	retVal := p.p.Call("InitiateController", args...)
 	return GamepadFromJSObject(retVal, p.ctx)
 }
-
-/*
-
- */

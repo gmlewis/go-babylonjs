@@ -124,38 +124,34 @@ func (l *LensFlareSystemSceneComponent) Serialize(serializationObject interface{
 	l.p.Call("serialize", args...)
 }
 
-/*
-
 // Name returns the Name property of class LensFlareSystemSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#name
-func (l *LensFlareSystemSceneComponent) Name(name string) *LensFlareSystemSceneComponent {
-	p := ba.ctx.Get("LensFlareSystemSceneComponent").New(name)
-	return LensFlareSystemSceneComponentFromJSObject(p, ba.ctx)
+func (l *LensFlareSystemSceneComponent) Name() string {
+	retVal := l.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class LensFlareSystemSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#name
 func (l *LensFlareSystemSceneComponent) SetName(name string) *LensFlareSystemSceneComponent {
-	p := ba.ctx.Get("LensFlareSystemSceneComponent").New(name)
-	return LensFlareSystemSceneComponentFromJSObject(p, ba.ctx)
+	l.p.Set("name", name)
+	return l
 }
 
 // Scene returns the Scene property of class LensFlareSystemSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#scene
-func (l *LensFlareSystemSceneComponent) Scene(scene *Scene) *LensFlareSystemSceneComponent {
-	p := ba.ctx.Get("LensFlareSystemSceneComponent").New(scene.JSObject())
-	return LensFlareSystemSceneComponentFromJSObject(p, ba.ctx)
+func (l *LensFlareSystemSceneComponent) Scene() *Scene {
+	retVal := l.p.Get("scene")
+	return SceneFromJSObject(retVal, l.ctx)
 }
 
 // SetScene sets the Scene property of class LensFlareSystemSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#scene
 func (l *LensFlareSystemSceneComponent) SetScene(scene *Scene) *LensFlareSystemSceneComponent {
-	p := ba.ctx.Get("LensFlareSystemSceneComponent").New(scene.JSObject())
-	return LensFlareSystemSceneComponentFromJSObject(p, ba.ctx)
+	l.p.Set("scene", scene.JSObject())
+	return l
 }
-
-*/

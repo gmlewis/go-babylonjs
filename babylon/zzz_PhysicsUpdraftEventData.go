@@ -38,22 +38,18 @@ func PhysicsUpdraftEventDataArrayToJSArray(array []*PhysicsUpdraftEventData) []i
 	return result
 }
 
-/*
-
 // Cylinder returns the Cylinder property of class PhysicsUpdraftEventData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventdata#cylinder
-func (p *PhysicsUpdraftEventData) Cylinder(cylinder *Mesh) *PhysicsUpdraftEventData {
-	p := ba.ctx.Get("PhysicsUpdraftEventData").New(cylinder.JSObject())
-	return PhysicsUpdraftEventDataFromJSObject(p, ba.ctx)
+func (p *PhysicsUpdraftEventData) Cylinder() *Mesh {
+	retVal := p.p.Get("cylinder")
+	return MeshFromJSObject(retVal, p.ctx)
 }
 
 // SetCylinder sets the Cylinder property of class PhysicsUpdraftEventData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventdata#cylinder
 func (p *PhysicsUpdraftEventData) SetCylinder(cylinder *Mesh) *PhysicsUpdraftEventData {
-	p := ba.ctx.Get("PhysicsUpdraftEventData").New(cylinder.JSObject())
-	return PhysicsUpdraftEventDataFromJSObject(p, ba.ctx)
+	p.p.Set("cylinder", cylinder.JSObject())
+	return p
 }
-
-*/

@@ -3194,2694 +3194,2690 @@ func (s *Scene) WhenReadyAsync() *Promise {
 	return PromiseFromJSObject(retVal, s.ctx)
 }
 
-/*
-
 // ActionManager returns the ActionManager property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#actionmanager
-func (s *Scene) ActionManager(actionManager *AbstractActionManager) *Scene {
-	p := ba.ctx.Get("Scene").New(actionManager.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ActionManager() *AbstractActionManager {
+	retVal := s.p.Get("actionManager")
+	return AbstractActionManagerFromJSObject(retVal, s.ctx)
 }
 
 // SetActionManager sets the ActionManager property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#actionmanager
 func (s *Scene) SetActionManager(actionManager *AbstractActionManager) *Scene {
-	p := ba.ctx.Get("Scene").New(actionManager.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("actionManager", actionManager.JSObject())
+	return s
 }
 
 // ActiveBonesPerfCounter returns the ActiveBonesPerfCounter property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#activebonesperfcounter
-func (s *Scene) ActiveBonesPerfCounter(activeBonesPerfCounter *PerfCounter) *Scene {
-	p := ba.ctx.Get("Scene").New(activeBonesPerfCounter.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ActiveBonesPerfCounter() *PerfCounter {
+	retVal := s.p.Get("activeBonesPerfCounter")
+	return PerfCounterFromJSObject(retVal, s.ctx)
 }
 
 // SetActiveBonesPerfCounter sets the ActiveBonesPerfCounter property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#activebonesperfcounter
 func (s *Scene) SetActiveBonesPerfCounter(activeBonesPerfCounter *PerfCounter) *Scene {
-	p := ba.ctx.Get("Scene").New(activeBonesPerfCounter.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("activeBonesPerfCounter", activeBonesPerfCounter.JSObject())
+	return s
 }
 
 // ActiveCamera returns the ActiveCamera property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#activecamera
-func (s *Scene) ActiveCamera(activeCamera *Camera) *Scene {
-	p := ba.ctx.Get("Scene").New(activeCamera.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ActiveCamera() *Camera {
+	retVal := s.p.Get("activeCamera")
+	return CameraFromJSObject(retVal, s.ctx)
 }
 
 // SetActiveCamera sets the ActiveCamera property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#activecamera
 func (s *Scene) SetActiveCamera(activeCamera *Camera) *Scene {
-	p := ba.ctx.Get("Scene").New(activeCamera.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("activeCamera", activeCamera.JSObject())
+	return s
 }
 
 // ActiveCameras returns the ActiveCameras property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#activecameras
-func (s *Scene) ActiveCameras(activeCameras *Camera) *Scene {
-	p := ba.ctx.Get("Scene").New(activeCameras.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ActiveCameras() *Camera {
+	retVal := s.p.Get("activeCameras")
+	return CameraFromJSObject(retVal, s.ctx)
 }
 
 // SetActiveCameras sets the ActiveCameras property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#activecameras
 func (s *Scene) SetActiveCameras(activeCameras *Camera) *Scene {
-	p := ba.ctx.Get("Scene").New(activeCameras.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("activeCameras", activeCameras.JSObject())
+	return s
 }
 
 // ActiveParticlesPerfCounter returns the ActiveParticlesPerfCounter property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#activeparticlesperfcounter
-func (s *Scene) ActiveParticlesPerfCounter(activeParticlesPerfCounter *PerfCounter) *Scene {
-	p := ba.ctx.Get("Scene").New(activeParticlesPerfCounter.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ActiveParticlesPerfCounter() *PerfCounter {
+	retVal := s.p.Get("activeParticlesPerfCounter")
+	return PerfCounterFromJSObject(retVal, s.ctx)
 }
 
 // SetActiveParticlesPerfCounter sets the ActiveParticlesPerfCounter property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#activeparticlesperfcounter
 func (s *Scene) SetActiveParticlesPerfCounter(activeParticlesPerfCounter *PerfCounter) *Scene {
-	p := ba.ctx.Get("Scene").New(activeParticlesPerfCounter.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("activeParticlesPerfCounter", activeParticlesPerfCounter.JSObject())
+	return s
 }
 
 // AfterCameraRender returns the AfterCameraRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#aftercamerarender
-func (s *Scene) AfterCameraRender(afterCameraRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {afterCameraRender(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AfterCameraRender() js.Value {
+	retVal := s.p.Get("afterCameraRender")
+	return retVal
 }
 
 // SetAfterCameraRender sets the AfterCameraRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#aftercamerarender
 func (s *Scene) SetAfterCameraRender(afterCameraRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {afterCameraRender(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("afterCameraRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { afterCameraRender(); return nil }))
+	return s
 }
 
 // AfterRender returns the AfterRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#afterrender
-func (s *Scene) AfterRender(afterRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {afterRender(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AfterRender() js.Value {
+	retVal := s.p.Get("afterRender")
+	return retVal
 }
 
 // SetAfterRender sets the AfterRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#afterrender
 func (s *Scene) SetAfterRender(afterRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {afterRender(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("afterRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { afterRender(); return nil }))
+	return s
 }
 
 // AmbientColor returns the AmbientColor property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ambientcolor
-func (s *Scene) AmbientColor(ambientColor *Color3) *Scene {
-	p := ba.ctx.Get("Scene").New(ambientColor.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AmbientColor() *Color3 {
+	retVal := s.p.Get("ambientColor")
+	return Color3FromJSObject(retVal, s.ctx)
 }
 
 // SetAmbientColor sets the AmbientColor property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ambientcolor
 func (s *Scene) SetAmbientColor(ambientColor *Color3) *Scene {
-	p := ba.ctx.Get("Scene").New(ambientColor.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("ambientColor", ambientColor.JSObject())
+	return s
 }
 
 // Animatables returns the Animatables property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#animatables
-func (s *Scene) Animatables(animatables *Animatable) *Scene {
-	p := ba.ctx.Get("Scene").New(animatables.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) Animatables() *Animatable {
+	retVal := s.p.Get("animatables")
+	return AnimatableFromJSObject(retVal, s.ctx)
 }
 
 // SetAnimatables sets the Animatables property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#animatables
 func (s *Scene) SetAnimatables(animatables *Animatable) *Scene {
-	p := ba.ctx.Get("Scene").New(animatables.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("animatables", animatables.JSObject())
+	return s
 }
 
 // AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#animationpropertiesoverride
-func (s *Scene) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Scene {
-	p := ba.ctx.Get("Scene").New(animationPropertiesOverride.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AnimationPropertiesOverride() *AnimationPropertiesOverride {
+	retVal := s.p.Get("animationPropertiesOverride")
+	return AnimationPropertiesOverrideFromJSObject(retVal, s.ctx)
 }
 
 // SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#animationpropertiesoverride
 func (s *Scene) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Scene {
-	p := ba.ctx.Get("Scene").New(animationPropertiesOverride.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("animationPropertiesOverride", animationPropertiesOverride.JSObject())
+	return s
 }
 
 // AnimationTimeScale returns the AnimationTimeScale property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#animationtimescale
-func (s *Scene) AnimationTimeScale(animationTimeScale float64) *Scene {
-	p := ba.ctx.Get("Scene").New(animationTimeScale)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AnimationTimeScale() float64 {
+	retVal := s.p.Get("animationTimeScale")
+	return retVal.Float()
 }
 
 // SetAnimationTimeScale sets the AnimationTimeScale property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#animationtimescale
 func (s *Scene) SetAnimationTimeScale(animationTimeScale float64) *Scene {
-	p := ba.ctx.Get("Scene").New(animationTimeScale)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("animationTimeScale", animationTimeScale)
+	return s
 }
 
 // AnimationsEnabled returns the AnimationsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#animationsenabled
-func (s *Scene) AnimationsEnabled(animationsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(animationsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AnimationsEnabled() bool {
+	retVal := s.p.Get("animationsEnabled")
+	return retVal.Bool()
 }
 
 // SetAnimationsEnabled sets the AnimationsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#animationsenabled
 func (s *Scene) SetAnimationsEnabled(animationsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(animationsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("animationsEnabled", animationsEnabled)
+	return s
 }
 
 // AudioEnabled returns the AudioEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#audioenabled
-func (s *Scene) AudioEnabled(audioEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(audioEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AudioEnabled() bool {
+	retVal := s.p.Get("audioEnabled")
+	return retVal.Bool()
 }
 
 // SetAudioEnabled sets the AudioEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#audioenabled
 func (s *Scene) SetAudioEnabled(audioEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(audioEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("audioEnabled", audioEnabled)
+	return s
 }
 
 // AudioListenerPositionProvider returns the AudioListenerPositionProvider property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#audiolistenerpositionprovider
-func (s *Scene) AudioListenerPositionProvider(audioListenerPositionProvider func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {audioListenerPositionProvider(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AudioListenerPositionProvider() js.Value {
+	retVal := s.p.Get("audioListenerPositionProvider")
+	return retVal
 }
 
 // SetAudioListenerPositionProvider sets the AudioListenerPositionProvider property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#audiolistenerpositionprovider
 func (s *Scene) SetAudioListenerPositionProvider(audioListenerPositionProvider func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {audioListenerPositionProvider(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("audioListenerPositionProvider", js.FuncOf(func(this js.Value, args []js.Value) interface{} { audioListenerPositionProvider(); return nil }))
+	return s
 }
 
 // AudioPositioningRefreshRate returns the AudioPositioningRefreshRate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#audiopositioningrefreshrate
-func (s *Scene) AudioPositioningRefreshRate(audioPositioningRefreshRate float64) *Scene {
-	p := ba.ctx.Get("Scene").New(audioPositioningRefreshRate)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AudioPositioningRefreshRate() float64 {
+	retVal := s.p.Get("audioPositioningRefreshRate")
+	return retVal.Float()
 }
 
 // SetAudioPositioningRefreshRate sets the AudioPositioningRefreshRate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#audiopositioningrefreshrate
 func (s *Scene) SetAudioPositioningRefreshRate(audioPositioningRefreshRate float64) *Scene {
-	p := ba.ctx.Get("Scene").New(audioPositioningRefreshRate)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("audioPositioningRefreshRate", audioPositioningRefreshRate)
+	return s
 }
 
 // AutoClear returns the AutoClear property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#autoclear
-func (s *Scene) AutoClear(autoClear bool) *Scene {
-	p := ba.ctx.Get("Scene").New(autoClear)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AutoClear() bool {
+	retVal := s.p.Get("autoClear")
+	return retVal.Bool()
 }
 
 // SetAutoClear sets the AutoClear property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#autoclear
 func (s *Scene) SetAutoClear(autoClear bool) *Scene {
-	p := ba.ctx.Get("Scene").New(autoClear)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("autoClear", autoClear)
+	return s
 }
 
 // AutoClearDepthAndStencil returns the AutoClearDepthAndStencil property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#autocleardepthandstencil
-func (s *Scene) AutoClearDepthAndStencil(autoClearDepthAndStencil bool) *Scene {
-	p := ba.ctx.Get("Scene").New(autoClearDepthAndStencil)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) AutoClearDepthAndStencil() bool {
+	retVal := s.p.Get("autoClearDepthAndStencil")
+	return retVal.Bool()
 }
 
 // SetAutoClearDepthAndStencil sets the AutoClearDepthAndStencil property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#autocleardepthandstencil
 func (s *Scene) SetAutoClearDepthAndStencil(autoClearDepthAndStencil bool) *Scene {
-	p := ba.ctx.Get("Scene").New(autoClearDepthAndStencil)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("autoClearDepthAndStencil", autoClearDepthAndStencil)
+	return s
 }
 
 // BeforeCameraRender returns the BeforeCameraRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beforecamerarender
-func (s *Scene) BeforeCameraRender(beforeCameraRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {beforeCameraRender(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) BeforeCameraRender() js.Value {
+	retVal := s.p.Get("beforeCameraRender")
+	return retVal
 }
 
 // SetBeforeCameraRender sets the BeforeCameraRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beforecamerarender
 func (s *Scene) SetBeforeCameraRender(beforeCameraRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {beforeCameraRender(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("beforeCameraRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { beforeCameraRender(); return nil }))
+	return s
 }
 
 // BeforeRender returns the BeforeRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beforerender
-func (s *Scene) BeforeRender(beforeRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {beforeRender(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) BeforeRender() js.Value {
+	retVal := s.p.Get("beforeRender")
+	return retVal
 }
 
 // SetBeforeRender sets the BeforeRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beforerender
 func (s *Scene) SetBeforeRender(beforeRender func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {beforeRender(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("beforeRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { beforeRender(); return nil }))
+	return s
 }
 
 // BlockMaterialDirtyMechanism returns the BlockMaterialDirtyMechanism property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#blockmaterialdirtymechanism
-func (s *Scene) BlockMaterialDirtyMechanism(blockMaterialDirtyMechanism bool) *Scene {
-	p := ba.ctx.Get("Scene").New(blockMaterialDirtyMechanism)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) BlockMaterialDirtyMechanism() bool {
+	retVal := s.p.Get("blockMaterialDirtyMechanism")
+	return retVal.Bool()
 }
 
 // SetBlockMaterialDirtyMechanism sets the BlockMaterialDirtyMechanism property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#blockmaterialdirtymechanism
 func (s *Scene) SetBlockMaterialDirtyMechanism(blockMaterialDirtyMechanism bool) *Scene {
-	p := ba.ctx.Get("Scene").New(blockMaterialDirtyMechanism)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("blockMaterialDirtyMechanism", blockMaterialDirtyMechanism)
+	return s
 }
 
 // BlockfreeActiveMeshesAndRenderingGroups returns the BlockfreeActiveMeshesAndRenderingGroups property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#blockfreeactivemeshesandrenderinggroups
-func (s *Scene) BlockfreeActiveMeshesAndRenderingGroups(blockfreeActiveMeshesAndRenderingGroups bool) *Scene {
-	p := ba.ctx.Get("Scene").New(blockfreeActiveMeshesAndRenderingGroups)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) BlockfreeActiveMeshesAndRenderingGroups() bool {
+	retVal := s.p.Get("blockfreeActiveMeshesAndRenderingGroups")
+	return retVal.Bool()
 }
 
 // SetBlockfreeActiveMeshesAndRenderingGroups sets the BlockfreeActiveMeshesAndRenderingGroups property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#blockfreeactivemeshesandrenderinggroups
 func (s *Scene) SetBlockfreeActiveMeshesAndRenderingGroups(blockfreeActiveMeshesAndRenderingGroups bool) *Scene {
-	p := ba.ctx.Get("Scene").New(blockfreeActiveMeshesAndRenderingGroups)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("blockfreeActiveMeshesAndRenderingGroups", blockfreeActiveMeshesAndRenderingGroups)
+	return s
 }
 
 // CameraToUseForPointers returns the CameraToUseForPointers property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#cameratouseforpointers
-func (s *Scene) CameraToUseForPointers(cameraToUseForPointers *Camera) *Scene {
-	p := ba.ctx.Get("Scene").New(cameraToUseForPointers.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) CameraToUseForPointers() *Camera {
+	retVal := s.p.Get("cameraToUseForPointers")
+	return CameraFromJSObject(retVal, s.ctx)
 }
 
 // SetCameraToUseForPointers sets the CameraToUseForPointers property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#cameratouseforpointers
 func (s *Scene) SetCameraToUseForPointers(cameraToUseForPointers *Camera) *Scene {
-	p := ba.ctx.Get("Scene").New(cameraToUseForPointers.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("cameraToUseForPointers", cameraToUseForPointers.JSObject())
+	return s
 }
 
 // ClearColor returns the ClearColor property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#clearcolor
-func (s *Scene) ClearColor(clearColor *Color4) *Scene {
-	p := ba.ctx.Get("Scene").New(clearColor.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
-}
-
-// SetClearColor sets the ClearColor property of class Scene.
-//
-// https://doc.babylonjs.com/api/classes/babylon.scene#clearcolor
-func (s *Scene) SetClearColor(clearColor *Color4) *Scene {
-	p := ba.ctx.Get("Scene").New(clearColor.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ClearColor() *Color4 {
+	retVal := s.p.Get("clearColor")
+	return Color4FromJSObject(retVal, s.ctx)
 }
 
 // ClipPlane returns the ClipPlane property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#clipplane
-func (s *Scene) ClipPlane(clipPlane *Plane) *Scene {
-	p := ba.ctx.Get("Scene").New(clipPlane.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ClipPlane() *Plane {
+	retVal := s.p.Get("clipPlane")
+	return PlaneFromJSObject(retVal, s.ctx)
 }
 
 // SetClipPlane sets the ClipPlane property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#clipplane
 func (s *Scene) SetClipPlane(clipPlane *Plane) *Scene {
-	p := ba.ctx.Get("Scene").New(clipPlane.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("clipPlane", clipPlane.JSObject())
+	return s
 }
 
 // ClipPlane2 returns the ClipPlane2 property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#clipplane2
-func (s *Scene) ClipPlane2(clipPlane2 *Plane) *Scene {
-	p := ba.ctx.Get("Scene").New(clipPlane2.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ClipPlane2() *Plane {
+	retVal := s.p.Get("clipPlane2")
+	return PlaneFromJSObject(retVal, s.ctx)
 }
 
 // SetClipPlane2 sets the ClipPlane2 property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#clipplane2
 func (s *Scene) SetClipPlane2(clipPlane2 *Plane) *Scene {
-	p := ba.ctx.Get("Scene").New(clipPlane2.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("clipPlane2", clipPlane2.JSObject())
+	return s
 }
 
 // ClipPlane3 returns the ClipPlane3 property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#clipplane3
-func (s *Scene) ClipPlane3(clipPlane3 *Plane) *Scene {
-	p := ba.ctx.Get("Scene").New(clipPlane3.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ClipPlane3() *Plane {
+	retVal := s.p.Get("clipPlane3")
+	return PlaneFromJSObject(retVal, s.ctx)
 }
 
 // SetClipPlane3 sets the ClipPlane3 property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#clipplane3
 func (s *Scene) SetClipPlane3(clipPlane3 *Plane) *Scene {
-	p := ba.ctx.Get("Scene").New(clipPlane3.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("clipPlane3", clipPlane3.JSObject())
+	return s
 }
 
 // ClipPlane4 returns the ClipPlane4 property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#clipplane4
-func (s *Scene) ClipPlane4(clipPlane4 *Plane) *Scene {
-	p := ba.ctx.Get("Scene").New(clipPlane4.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ClipPlane4() *Plane {
+	retVal := s.p.Get("clipPlane4")
+	return PlaneFromJSObject(retVal, s.ctx)
 }
 
 // SetClipPlane4 sets the ClipPlane4 property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#clipplane4
 func (s *Scene) SetClipPlane4(clipPlane4 *Plane) *Scene {
-	p := ba.ctx.Get("Scene").New(clipPlane4.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("clipPlane4", clipPlane4.JSObject())
+	return s
 }
 
 // CollisionsEnabled returns the CollisionsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#collisionsenabled
-func (s *Scene) CollisionsEnabled(collisionsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(collisionsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) CollisionsEnabled() bool {
+	retVal := s.p.Get("collisionsEnabled")
+	return retVal.Bool()
 }
 
 // SetCollisionsEnabled sets the CollisionsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#collisionsenabled
 func (s *Scene) SetCollisionsEnabled(collisionsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(collisionsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("collisionsEnabled", collisionsEnabled)
+	return s
 }
 
 // ConstantlyUpdateMeshUnderPointer returns the ConstantlyUpdateMeshUnderPointer property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#constantlyupdatemeshunderpointer
-func (s *Scene) ConstantlyUpdateMeshUnderPointer(constantlyUpdateMeshUnderPointer bool) *Scene {
-	p := ba.ctx.Get("Scene").New(constantlyUpdateMeshUnderPointer)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ConstantlyUpdateMeshUnderPointer() bool {
+	retVal := s.p.Get("constantlyUpdateMeshUnderPointer")
+	return retVal.Bool()
 }
 
 // SetConstantlyUpdateMeshUnderPointer sets the ConstantlyUpdateMeshUnderPointer property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#constantlyupdatemeshunderpointer
 func (s *Scene) SetConstantlyUpdateMeshUnderPointer(constantlyUpdateMeshUnderPointer bool) *Scene {
-	p := ba.ctx.Get("Scene").New(constantlyUpdateMeshUnderPointer)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("constantlyUpdateMeshUnderPointer", constantlyUpdateMeshUnderPointer)
+	return s
 }
 
 // CustomLODSelector returns the CustomLODSelector property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#customlodselector
-func (s *Scene) CustomLODSelector(customLODSelector func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customLODSelector(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) CustomLODSelector() js.Value {
+	retVal := s.p.Get("customLODSelector")
+	return retVal
 }
 
 // SetCustomLODSelector sets the CustomLODSelector property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#customlodselector
 func (s *Scene) SetCustomLODSelector(customLODSelector func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customLODSelector(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("customLODSelector", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customLODSelector(); return nil }))
+	return s
 }
 
 // CustomRenderTargets returns the CustomRenderTargets property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#customrendertargets
-func (s *Scene) CustomRenderTargets(customRenderTargets *RenderTargetTexture) *Scene {
-	p := ba.ctx.Get("Scene").New(customRenderTargets.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) CustomRenderTargets() *RenderTargetTexture {
+	retVal := s.p.Get("customRenderTargets")
+	return RenderTargetTextureFromJSObject(retVal, s.ctx)
 }
 
 // SetCustomRenderTargets sets the CustomRenderTargets property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#customrendertargets
 func (s *Scene) SetCustomRenderTargets(customRenderTargets *RenderTargetTexture) *Scene {
-	p := ba.ctx.Get("Scene").New(customRenderTargets.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("customRenderTargets", customRenderTargets.JSObject())
+	return s
 }
 
 // DebugLayer returns the DebugLayer property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#debuglayer
-func (s *Scene) DebugLayer(debugLayer *DebugLayer) *Scene {
-	p := ba.ctx.Get("Scene").New(debugLayer.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) DebugLayer() *DebugLayer {
+	retVal := s.p.Get("debugLayer")
+	return DebugLayerFromJSObject(retVal, s.ctx)
 }
 
 // SetDebugLayer sets the DebugLayer property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#debuglayer
 func (s *Scene) SetDebugLayer(debugLayer *DebugLayer) *Scene {
-	p := ba.ctx.Get("Scene").New(debugLayer.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("debugLayer", debugLayer.JSObject())
+	return s
 }
 
 // DefaultCursor returns the DefaultCursor property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#defaultcursor
-func (s *Scene) DefaultCursor(defaultCursor string) *Scene {
-	p := ba.ctx.Get("Scene").New(defaultCursor)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) DefaultCursor() string {
+	retVal := s.p.Get("defaultCursor")
+	return retVal.String()
 }
 
 // SetDefaultCursor sets the DefaultCursor property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#defaultcursor
 func (s *Scene) SetDefaultCursor(defaultCursor string) *Scene {
-	p := ba.ctx.Get("Scene").New(defaultCursor)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("defaultCursor", defaultCursor)
+	return s
 }
 
 // DefaultMaterial returns the DefaultMaterial property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#defaultmaterial
-func (s *Scene) DefaultMaterial(defaultMaterial *Material) *Scene {
-	p := ba.ctx.Get("Scene").New(defaultMaterial.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) DefaultMaterial() *Material {
+	retVal := s.p.Get("defaultMaterial")
+	return MaterialFromJSObject(retVal, s.ctx)
 }
 
 // SetDefaultMaterial sets the DefaultMaterial property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#defaultmaterial
 func (s *Scene) SetDefaultMaterial(defaultMaterial *Material) *Scene {
-	p := ba.ctx.Get("Scene").New(defaultMaterial.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("defaultMaterial", defaultMaterial.JSObject())
+	return s
 }
 
 // DeltaTime returns the DeltaTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#deltatime
-func (s *Scene) DeltaTime(deltaTime float64) *Scene {
-	p := ba.ctx.Get("Scene").New(deltaTime)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) DeltaTime() float64 {
+	retVal := s.p.Get("deltaTime")
+	return retVal.Float()
 }
 
 // SetDeltaTime sets the DeltaTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#deltatime
 func (s *Scene) SetDeltaTime(deltaTime float64) *Scene {
-	p := ba.ctx.Get("Scene").New(deltaTime)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("deltaTime", deltaTime)
+	return s
 }
 
 // DisableOfflineSupportExceptionRules returns the DisableOfflineSupportExceptionRules property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#disableofflinesupportexceptionrules
-func (s *Scene) DisableOfflineSupportExceptionRules(disableOfflineSupportExceptionRules *RegExp) *Scene {
-	p := ba.ctx.Get("Scene").New(disableOfflineSupportExceptionRules.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) DisableOfflineSupportExceptionRules() js.Value {
+	retVal := s.p.Get("disableOfflineSupportExceptionRules")
+	return retVal
 }
 
 // SetDisableOfflineSupportExceptionRules sets the DisableOfflineSupportExceptionRules property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#disableofflinesupportexceptionrules
-func (s *Scene) SetDisableOfflineSupportExceptionRules(disableOfflineSupportExceptionRules *RegExp) *Scene {
-	p := ba.ctx.Get("Scene").New(disableOfflineSupportExceptionRules.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) SetDisableOfflineSupportExceptionRules(disableOfflineSupportExceptionRules js.Value) *Scene {
+	s.p.Set("disableOfflineSupportExceptionRules", disableOfflineSupportExceptionRules)
+	return s
 }
 
 // DispatchAllSubMeshesOfActiveMeshes returns the DispatchAllSubMeshesOfActiveMeshes property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#dispatchallsubmeshesofactivemeshes
-func (s *Scene) DispatchAllSubMeshesOfActiveMeshes(dispatchAllSubMeshesOfActiveMeshes bool) *Scene {
-	p := ba.ctx.Get("Scene").New(dispatchAllSubMeshesOfActiveMeshes)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) DispatchAllSubMeshesOfActiveMeshes() bool {
+	retVal := s.p.Get("dispatchAllSubMeshesOfActiveMeshes")
+	return retVal.Bool()
 }
 
 // SetDispatchAllSubMeshesOfActiveMeshes sets the DispatchAllSubMeshesOfActiveMeshes property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#dispatchallsubmeshesofactivemeshes
 func (s *Scene) SetDispatchAllSubMeshesOfActiveMeshes(dispatchAllSubMeshesOfActiveMeshes bool) *Scene {
-	p := ba.ctx.Get("Scene").New(dispatchAllSubMeshesOfActiveMeshes)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("dispatchAllSubMeshesOfActiveMeshes", dispatchAllSubMeshesOfActiveMeshes)
+	return s
 }
 
 // DoNotHandleCursors returns the DoNotHandleCursors property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#donothandlecursors
-func (s *Scene) DoNotHandleCursors(doNotHandleCursors bool) *Scene {
-	p := ba.ctx.Get("Scene").New(doNotHandleCursors)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) DoNotHandleCursors() bool {
+	retVal := s.p.Get("doNotHandleCursors")
+	return retVal.Bool()
 }
 
 // SetDoNotHandleCursors sets the DoNotHandleCursors property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#donothandlecursors
 func (s *Scene) SetDoNotHandleCursors(doNotHandleCursors bool) *Scene {
-	p := ba.ctx.Get("Scene").New(doNotHandleCursors)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("doNotHandleCursors", doNotHandleCursors)
+	return s
 }
 
 // DoubleClickDelay returns the DoubleClickDelay property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#doubleclickdelay
-func (s *Scene) DoubleClickDelay(DoubleClickDelay float64) *Scene {
-	p := ba.ctx.Get("Scene").New(DoubleClickDelay)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) DoubleClickDelay() float64 {
+	retVal := s.p.Get("DoubleClickDelay")
+	return retVal.Float()
 }
 
 // SetDoubleClickDelay sets the DoubleClickDelay property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#doubleclickdelay
 func (s *Scene) SetDoubleClickDelay(DoubleClickDelay float64) *Scene {
-	p := ba.ctx.Get("Scene").New(DoubleClickDelay)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("DoubleClickDelay", DoubleClickDelay)
+	return s
 }
 
 // DragMovementThreshold returns the DragMovementThreshold property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#dragmovementthreshold
-func (s *Scene) DragMovementThreshold(DragMovementThreshold float64) *Scene {
-	p := ba.ctx.Get("Scene").New(DragMovementThreshold)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) DragMovementThreshold() float64 {
+	retVal := s.p.Get("DragMovementThreshold")
+	return retVal.Float()
 }
 
 // SetDragMovementThreshold sets the DragMovementThreshold property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#dragmovementthreshold
 func (s *Scene) SetDragMovementThreshold(DragMovementThreshold float64) *Scene {
-	p := ba.ctx.Get("Scene").New(DragMovementThreshold)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("DragMovementThreshold", DragMovementThreshold)
+	return s
 }
 
 // DumpNextRenderTargets returns the DumpNextRenderTargets property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#dumpnextrendertargets
-func (s *Scene) DumpNextRenderTargets(dumpNextRenderTargets bool) *Scene {
-	p := ba.ctx.Get("Scene").New(dumpNextRenderTargets)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) DumpNextRenderTargets() bool {
+	retVal := s.p.Get("dumpNextRenderTargets")
+	return retVal.Bool()
 }
 
 // SetDumpNextRenderTargets sets the DumpNextRenderTargets property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#dumpnextrendertargets
 func (s *Scene) SetDumpNextRenderTargets(dumpNextRenderTargets bool) *Scene {
-	p := ba.ctx.Get("Scene").New(dumpNextRenderTargets)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("dumpNextRenderTargets", dumpNextRenderTargets)
+	return s
 }
 
 // EnvironmentBRDFTexture returns the EnvironmentBRDFTexture property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#environmentbrdftexture
-func (s *Scene) EnvironmentBRDFTexture(environmentBRDFTexture *BaseTexture) *Scene {
-	p := ba.ctx.Get("Scene").New(environmentBRDFTexture.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) EnvironmentBRDFTexture() *BaseTexture {
+	retVal := s.p.Get("environmentBRDFTexture")
+	return BaseTextureFromJSObject(retVal, s.ctx)
 }
 
 // SetEnvironmentBRDFTexture sets the EnvironmentBRDFTexture property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#environmentbrdftexture
 func (s *Scene) SetEnvironmentBRDFTexture(environmentBRDFTexture *BaseTexture) *Scene {
-	p := ba.ctx.Get("Scene").New(environmentBRDFTexture.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("environmentBRDFTexture", environmentBRDFTexture.JSObject())
+	return s
 }
 
 // EnvironmentIntensity returns the EnvironmentIntensity property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#environmentintensity
-func (s *Scene) EnvironmentIntensity(environmentIntensity float64) *Scene {
-	p := ba.ctx.Get("Scene").New(environmentIntensity)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) EnvironmentIntensity() float64 {
+	retVal := s.p.Get("environmentIntensity")
+	return retVal.Float()
 }
 
 // SetEnvironmentIntensity sets the EnvironmentIntensity property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#environmentintensity
 func (s *Scene) SetEnvironmentIntensity(environmentIntensity float64) *Scene {
-	p := ba.ctx.Get("Scene").New(environmentIntensity)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("environmentIntensity", environmentIntensity)
+	return s
 }
 
 // EnvironmentTexture returns the EnvironmentTexture property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#environmenttexture
-func (s *Scene) EnvironmentTexture(environmentTexture *BaseTexture) *Scene {
-	p := ba.ctx.Get("Scene").New(environmentTexture.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) EnvironmentTexture() *BaseTexture {
+	retVal := s.p.Get("environmentTexture")
+	return BaseTextureFromJSObject(retVal, s.ctx)
 }
 
 // SetEnvironmentTexture sets the EnvironmentTexture property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#environmenttexture
 func (s *Scene) SetEnvironmentTexture(environmentTexture *BaseTexture) *Scene {
-	p := ba.ctx.Get("Scene").New(environmentTexture.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("environmentTexture", environmentTexture.JSObject())
+	return s
 }
 
 // ExclusiveDoubleClickMode returns the ExclusiveDoubleClickMode property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#exclusivedoubleclickmode
-func (s *Scene) ExclusiveDoubleClickMode(ExclusiveDoubleClickMode bool) *Scene {
-	p := ba.ctx.Get("Scene").New(ExclusiveDoubleClickMode)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ExclusiveDoubleClickMode() bool {
+	retVal := s.p.Get("ExclusiveDoubleClickMode")
+	return retVal.Bool()
 }
 
 // SetExclusiveDoubleClickMode sets the ExclusiveDoubleClickMode property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#exclusivedoubleclickmode
 func (s *Scene) SetExclusiveDoubleClickMode(ExclusiveDoubleClickMode bool) *Scene {
-	p := ba.ctx.Get("Scene").New(ExclusiveDoubleClickMode)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("ExclusiveDoubleClickMode", ExclusiveDoubleClickMode)
+	return s
 }
 
 // FOGMODE_EXP returns the FOGMODE_EXP property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogmode_exp
-func (s *Scene) FOGMODE_EXP(FOGMODE_EXP float64) *Scene {
-	p := ba.ctx.Get("Scene").New(FOGMODE_EXP)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FOGMODE_EXP() float64 {
+	retVal := s.p.Get("FOGMODE_EXP")
+	return retVal.Float()
 }
 
 // SetFOGMODE_EXP sets the FOGMODE_EXP property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogmode_exp
 func (s *Scene) SetFOGMODE_EXP(FOGMODE_EXP float64) *Scene {
-	p := ba.ctx.Get("Scene").New(FOGMODE_EXP)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("FOGMODE_EXP", FOGMODE_EXP)
+	return s
 }
 
 // FOGMODE_EXP2 returns the FOGMODE_EXP2 property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogmode_exp2
-func (s *Scene) FOGMODE_EXP2(FOGMODE_EXP2 float64) *Scene {
-	p := ba.ctx.Get("Scene").New(FOGMODE_EXP2)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FOGMODE_EXP2() float64 {
+	retVal := s.p.Get("FOGMODE_EXP2")
+	return retVal.Float()
 }
 
 // SetFOGMODE_EXP2 sets the FOGMODE_EXP2 property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogmode_exp2
 func (s *Scene) SetFOGMODE_EXP2(FOGMODE_EXP2 float64) *Scene {
-	p := ba.ctx.Get("Scene").New(FOGMODE_EXP2)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("FOGMODE_EXP2", FOGMODE_EXP2)
+	return s
 }
 
 // FOGMODE_LINEAR returns the FOGMODE_LINEAR property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogmode_linear
-func (s *Scene) FOGMODE_LINEAR(FOGMODE_LINEAR float64) *Scene {
-	p := ba.ctx.Get("Scene").New(FOGMODE_LINEAR)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FOGMODE_LINEAR() float64 {
+	retVal := s.p.Get("FOGMODE_LINEAR")
+	return retVal.Float()
 }
 
 // SetFOGMODE_LINEAR sets the FOGMODE_LINEAR property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogmode_linear
 func (s *Scene) SetFOGMODE_LINEAR(FOGMODE_LINEAR float64) *Scene {
-	p := ba.ctx.Get("Scene").New(FOGMODE_LINEAR)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("FOGMODE_LINEAR", FOGMODE_LINEAR)
+	return s
 }
 
 // FOGMODE_NONE returns the FOGMODE_NONE property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogmode_none
-func (s *Scene) FOGMODE_NONE(FOGMODE_NONE float64) *Scene {
-	p := ba.ctx.Get("Scene").New(FOGMODE_NONE)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FOGMODE_NONE() float64 {
+	retVal := s.p.Get("FOGMODE_NONE")
+	return retVal.Float()
 }
 
 // SetFOGMODE_NONE sets the FOGMODE_NONE property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogmode_none
 func (s *Scene) SetFOGMODE_NONE(FOGMODE_NONE float64) *Scene {
-	p := ba.ctx.Get("Scene").New(FOGMODE_NONE)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("FOGMODE_NONE", FOGMODE_NONE)
+	return s
 }
 
 // FogColor returns the FogColor property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogcolor
-func (s *Scene) FogColor(fogColor *Color3) *Scene {
-	p := ba.ctx.Get("Scene").New(fogColor.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FogColor() *Color3 {
+	retVal := s.p.Get("fogColor")
+	return Color3FromJSObject(retVal, s.ctx)
 }
 
 // SetFogColor sets the FogColor property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogcolor
 func (s *Scene) SetFogColor(fogColor *Color3) *Scene {
-	p := ba.ctx.Get("Scene").New(fogColor.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("fogColor", fogColor.JSObject())
+	return s
 }
 
 // FogDensity returns the FogDensity property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogdensity
-func (s *Scene) FogDensity(fogDensity float64) *Scene {
-	p := ba.ctx.Get("Scene").New(fogDensity)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FogDensity() float64 {
+	retVal := s.p.Get("fogDensity")
+	return retVal.Float()
 }
 
 // SetFogDensity sets the FogDensity property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogdensity
 func (s *Scene) SetFogDensity(fogDensity float64) *Scene {
-	p := ba.ctx.Get("Scene").New(fogDensity)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("fogDensity", fogDensity)
+	return s
 }
 
 // FogEnabled returns the FogEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogenabled
-func (s *Scene) FogEnabled(fogEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(fogEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FogEnabled() bool {
+	retVal := s.p.Get("fogEnabled")
+	return retVal.Bool()
 }
 
 // SetFogEnabled sets the FogEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogenabled
 func (s *Scene) SetFogEnabled(fogEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(fogEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("fogEnabled", fogEnabled)
+	return s
 }
 
 // FogEnd returns the FogEnd property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogend
-func (s *Scene) FogEnd(fogEnd float64) *Scene {
-	p := ba.ctx.Get("Scene").New(fogEnd)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FogEnd() float64 {
+	retVal := s.p.Get("fogEnd")
+	return retVal.Float()
 }
 
 // SetFogEnd sets the FogEnd property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogend
 func (s *Scene) SetFogEnd(fogEnd float64) *Scene {
-	p := ba.ctx.Get("Scene").New(fogEnd)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("fogEnd", fogEnd)
+	return s
 }
 
 // FogMode returns the FogMode property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogmode
-func (s *Scene) FogMode(fogMode float64) *Scene {
-	p := ba.ctx.Get("Scene").New(fogMode)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FogMode() float64 {
+	retVal := s.p.Get("fogMode")
+	return retVal.Float()
 }
 
 // SetFogMode sets the FogMode property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogmode
 func (s *Scene) SetFogMode(fogMode float64) *Scene {
-	p := ba.ctx.Get("Scene").New(fogMode)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("fogMode", fogMode)
+	return s
 }
 
 // FogStart returns the FogStart property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogstart
-func (s *Scene) FogStart(fogStart float64) *Scene {
-	p := ba.ctx.Get("Scene").New(fogStart)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FogStart() float64 {
+	retVal := s.p.Get("fogStart")
+	return retVal.Float()
 }
 
 // SetFogStart sets the FogStart property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#fogstart
 func (s *Scene) SetFogStart(fogStart float64) *Scene {
-	p := ba.ctx.Get("Scene").New(fogStart)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("fogStart", fogStart)
+	return s
 }
 
 // ForcePointsCloud returns the ForcePointsCloud property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#forcepointscloud
-func (s *Scene) ForcePointsCloud(forcePointsCloud bool) *Scene {
-	p := ba.ctx.Get("Scene").New(forcePointsCloud)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ForcePointsCloud() bool {
+	retVal := s.p.Get("forcePointsCloud")
+	return retVal.Bool()
 }
 
 // SetForcePointsCloud sets the ForcePointsCloud property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#forcepointscloud
 func (s *Scene) SetForcePointsCloud(forcePointsCloud bool) *Scene {
-	p := ba.ctx.Get("Scene").New(forcePointsCloud)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("forcePointsCloud", forcePointsCloud)
+	return s
 }
 
 // ForceShowBoundingBoxes returns the ForceShowBoundingBoxes property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#forceshowboundingboxes
-func (s *Scene) ForceShowBoundingBoxes(forceShowBoundingBoxes bool) *Scene {
-	p := ba.ctx.Get("Scene").New(forceShowBoundingBoxes)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ForceShowBoundingBoxes() bool {
+	retVal := s.p.Get("forceShowBoundingBoxes")
+	return retVal.Bool()
 }
 
 // SetForceShowBoundingBoxes sets the ForceShowBoundingBoxes property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#forceshowboundingboxes
 func (s *Scene) SetForceShowBoundingBoxes(forceShowBoundingBoxes bool) *Scene {
-	p := ba.ctx.Get("Scene").New(forceShowBoundingBoxes)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("forceShowBoundingBoxes", forceShowBoundingBoxes)
+	return s
 }
 
 // ForceWireframe returns the ForceWireframe property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#forcewireframe
-func (s *Scene) ForceWireframe(forceWireframe bool) *Scene {
-	p := ba.ctx.Get("Scene").New(forceWireframe)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ForceWireframe() bool {
+	retVal := s.p.Get("forceWireframe")
+	return retVal.Bool()
 }
 
 // SetForceWireframe sets the ForceWireframe property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#forcewireframe
 func (s *Scene) SetForceWireframe(forceWireframe bool) *Scene {
-	p := ba.ctx.Get("Scene").New(forceWireframe)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("forceWireframe", forceWireframe)
+	return s
 }
 
 // FrustumPlanes returns the FrustumPlanes property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#frustumplanes
-func (s *Scene) FrustumPlanes(frustumPlanes *Plane) *Scene {
-	p := ba.ctx.Get("Scene").New(frustumPlanes.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) FrustumPlanes() *Plane {
+	retVal := s.p.Get("frustumPlanes")
+	return PlaneFromJSObject(retVal, s.ctx)
 }
 
 // SetFrustumPlanes sets the FrustumPlanes property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#frustumplanes
 func (s *Scene) SetFrustumPlanes(frustumPlanes *Plane) *Scene {
-	p := ba.ctx.Get("Scene").New(frustumPlanes.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("frustumPlanes", frustumPlanes.JSObject())
+	return s
 }
 
 // GamepadManager returns the GamepadManager property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#gamepadmanager
-func (s *Scene) GamepadManager(gamepadManager *GamepadManager) *Scene {
-	p := ba.ctx.Get("Scene").New(gamepadManager.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) GamepadManager() *GamepadManager {
+	retVal := s.p.Get("gamepadManager")
+	return GamepadManagerFromJSObject(retVal, s.ctx)
 }
 
 // SetGamepadManager sets the GamepadManager property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#gamepadmanager
 func (s *Scene) SetGamepadManager(gamepadManager *GamepadManager) *Scene {
-	p := ba.ctx.Get("Scene").New(gamepadManager.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("gamepadManager", gamepadManager.JSObject())
+	return s
 }
 
 // GeometryBufferRenderer returns the GeometryBufferRenderer property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#geometrybufferrenderer
-func (s *Scene) GeometryBufferRenderer(geometryBufferRenderer *GeometryBufferRenderer) *Scene {
-	p := ba.ctx.Get("Scene").New(geometryBufferRenderer.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) GeometryBufferRenderer() *GeometryBufferRenderer {
+	retVal := s.p.Get("geometryBufferRenderer")
+	return GeometryBufferRendererFromJSObject(retVal, s.ctx)
 }
 
 // SetGeometryBufferRenderer sets the GeometryBufferRenderer property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#geometrybufferrenderer
 func (s *Scene) SetGeometryBufferRenderer(geometryBufferRenderer *GeometryBufferRenderer) *Scene {
-	p := ba.ctx.Get("Scene").New(geometryBufferRenderer.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("geometryBufferRenderer", geometryBufferRenderer.JSObject())
+	return s
 }
 
 // GetActiveMeshCandidates returns the GetActiveMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivemeshcandidates
-func (s *Scene) GetActiveMeshCandidates(getActiveMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getActiveMeshCandidates(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) GetActiveMeshCandidates() js.Value {
+	retVal := s.p.Get("getActiveMeshCandidates")
+	return retVal
 }
 
 // SetGetActiveMeshCandidates sets the GetActiveMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivemeshcandidates
 func (s *Scene) SetGetActiveMeshCandidates(getActiveMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getActiveMeshCandidates(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("getActiveMeshCandidates", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getActiveMeshCandidates(); return nil }))
+	return s
 }
 
 // GetActiveSubMeshCandidates returns the GetActiveSubMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivesubmeshcandidates
-func (s *Scene) GetActiveSubMeshCandidates(getActiveSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getActiveSubMeshCandidates(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) GetActiveSubMeshCandidates() js.Value {
+	retVal := s.p.Get("getActiveSubMeshCandidates")
+	return retVal
 }
 
 // SetGetActiveSubMeshCandidates sets the GetActiveSubMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivesubmeshcandidates
 func (s *Scene) SetGetActiveSubMeshCandidates(getActiveSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getActiveSubMeshCandidates(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("getActiveSubMeshCandidates", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getActiveSubMeshCandidates(); return nil }))
+	return s
 }
 
 // GetCollidingSubMeshCandidates returns the GetCollidingSubMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getcollidingsubmeshcandidates
-func (s *Scene) GetCollidingSubMeshCandidates(getCollidingSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getCollidingSubMeshCandidates(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) GetCollidingSubMeshCandidates() js.Value {
+	retVal := s.p.Get("getCollidingSubMeshCandidates")
+	return retVal
 }
 
 // SetGetCollidingSubMeshCandidates sets the GetCollidingSubMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getcollidingsubmeshcandidates
 func (s *Scene) SetGetCollidingSubMeshCandidates(getCollidingSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getCollidingSubMeshCandidates(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("getCollidingSubMeshCandidates", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getCollidingSubMeshCandidates(); return nil }))
+	return s
 }
 
 // GetDeterministicFrameTime returns the GetDeterministicFrameTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getdeterministicframetime
-func (s *Scene) GetDeterministicFrameTime(getDeterministicFrameTime func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getDeterministicFrameTime(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) GetDeterministicFrameTime() js.Value {
+	retVal := s.p.Get("getDeterministicFrameTime")
+	return retVal
 }
 
 // SetGetDeterministicFrameTime sets the GetDeterministicFrameTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getdeterministicframetime
 func (s *Scene) SetGetDeterministicFrameTime(getDeterministicFrameTime func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getDeterministicFrameTime(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("getDeterministicFrameTime", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getDeterministicFrameTime(); return nil }))
+	return s
 }
 
 // GetIntersectingSubMeshCandidates returns the GetIntersectingSubMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getintersectingsubmeshcandidates
-func (s *Scene) GetIntersectingSubMeshCandidates(getIntersectingSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getIntersectingSubMeshCandidates(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) GetIntersectingSubMeshCandidates() js.Value {
+	retVal := s.p.Get("getIntersectingSubMeshCandidates")
+	return retVal
 }
 
 // SetGetIntersectingSubMeshCandidates sets the GetIntersectingSubMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getintersectingsubmeshcandidates
 func (s *Scene) SetGetIntersectingSubMeshCandidates(getIntersectingSubMeshCandidates func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getIntersectingSubMeshCandidates(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("getIntersectingSubMeshCandidates", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getIntersectingSubMeshCandidates(); return nil }))
+	return s
 }
 
 // Gravity returns the Gravity property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#gravity
-func (s *Scene) Gravity(gravity *Vector3) *Scene {
-	p := ba.ctx.Get("Scene").New(gravity.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) Gravity() *Vector3 {
+	retVal := s.p.Get("gravity")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetGravity sets the Gravity property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#gravity
 func (s *Scene) SetGravity(gravity *Vector3) *Scene {
-	p := ba.ctx.Get("Scene").New(gravity.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("gravity", gravity.JSObject())
+	return s
 }
 
 // Headphone returns the Headphone property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#headphone
-func (s *Scene) Headphone(headphone bool) *Scene {
-	p := ba.ctx.Get("Scene").New(headphone)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) Headphone() bool {
+	retVal := s.p.Get("headphone")
+	return retVal.Bool()
 }
 
 // SetHeadphone sets the Headphone property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#headphone
 func (s *Scene) SetHeadphone(headphone bool) *Scene {
-	p := ba.ctx.Get("Scene").New(headphone)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("headphone", headphone)
+	return s
 }
 
 // HoverCursor returns the HoverCursor property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#hovercursor
-func (s *Scene) HoverCursor(hoverCursor string) *Scene {
-	p := ba.ctx.Get("Scene").New(hoverCursor)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) HoverCursor() string {
+	retVal := s.p.Get("hoverCursor")
+	return retVal.String()
 }
 
 // SetHoverCursor sets the HoverCursor property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#hovercursor
 func (s *Scene) SetHoverCursor(hoverCursor string) *Scene {
-	p := ba.ctx.Get("Scene").New(hoverCursor)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("hoverCursor", hoverCursor)
+	return s
 }
 
 // ImageProcessingConfiguration returns the ImageProcessingConfiguration property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#imageprocessingconfiguration
-func (s *Scene) ImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *Scene {
-	p := ba.ctx.Get("Scene").New(imageProcessingConfiguration.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ImageProcessingConfiguration() *ImageProcessingConfiguration {
+	retVal := s.p.Get("imageProcessingConfiguration")
+	return ImageProcessingConfigurationFromJSObject(retVal, s.ctx)
 }
 
 // SetImageProcessingConfiguration sets the ImageProcessingConfiguration property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#imageprocessingconfiguration
 func (s *Scene) SetImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *Scene {
-	p := ba.ctx.Get("Scene").New(imageProcessingConfiguration.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("imageProcessingConfiguration", imageProcessingConfiguration.JSObject())
+	return s
 }
 
 // ImportedMeshesFiles returns the ImportedMeshesFiles property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#importedmeshesfiles
-func (s *Scene) ImportedMeshesFiles(importedMeshesFiles *String) *Scene {
-	p := ba.ctx.Get("Scene").New(importedMeshesFiles.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ImportedMeshesFiles() string {
+	retVal := s.p.Get("importedMeshesFiles")
+	return retVal.String()
 }
 
 // SetImportedMeshesFiles sets the ImportedMeshesFiles property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#importedmeshesfiles
-func (s *Scene) SetImportedMeshesFiles(importedMeshesFiles *String) *Scene {
-	p := ba.ctx.Get("Scene").New(importedMeshesFiles.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) SetImportedMeshesFiles(importedMeshesFiles string) *Scene {
+	s.p.Set("importedMeshesFiles", importedMeshesFiles)
+	return s
 }
 
 // IsDisposed returns the IsDisposed property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#isdisposed
-func (s *Scene) IsDisposed(isDisposed bool) *Scene {
-	p := ba.ctx.Get("Scene").New(isDisposed)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) IsDisposed() bool {
+	retVal := s.p.Get("isDisposed")
+	return retVal.Bool()
 }
 
 // SetIsDisposed sets the IsDisposed property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#isdisposed
 func (s *Scene) SetIsDisposed(isDisposed bool) *Scene {
-	p := ba.ctx.Get("Scene").New(isDisposed)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("isDisposed", isDisposed)
+	return s
 }
 
 // IsLoading returns the IsLoading property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#isloading
-func (s *Scene) IsLoading(isLoading bool) *Scene {
-	p := ba.ctx.Get("Scene").New(isLoading)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) IsLoading() bool {
+	retVal := s.p.Get("isLoading")
+	return retVal.Bool()
 }
 
 // SetIsLoading sets the IsLoading property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#isloading
 func (s *Scene) SetIsLoading(isLoading bool) *Scene {
-	p := ba.ctx.Get("Scene").New(isLoading)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("isLoading", isLoading)
+	return s
 }
 
 // LensFlaresEnabled returns the LensFlaresEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#lensflaresenabled
-func (s *Scene) LensFlaresEnabled(lensFlaresEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(lensFlaresEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) LensFlaresEnabled() bool {
+	retVal := s.p.Get("lensFlaresEnabled")
+	return retVal.Bool()
 }
 
 // SetLensFlaresEnabled sets the LensFlaresEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#lensflaresenabled
 func (s *Scene) SetLensFlaresEnabled(lensFlaresEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(lensFlaresEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("lensFlaresEnabled", lensFlaresEnabled)
+	return s
 }
 
 // LightsEnabled returns the LightsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#lightsenabled
-func (s *Scene) LightsEnabled(lightsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(lightsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) LightsEnabled() bool {
+	retVal := s.p.Get("lightsEnabled")
+	return retVal.Bool()
 }
 
 // SetLightsEnabled sets the LightsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#lightsenabled
 func (s *Scene) SetLightsEnabled(lightsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(lightsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("lightsEnabled", lightsEnabled)
+	return s
 }
 
 // LoadingPluginName returns the LoadingPluginName property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#loadingpluginname
-func (s *Scene) LoadingPluginName(loadingPluginName string) *Scene {
-	p := ba.ctx.Get("Scene").New(loadingPluginName)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) LoadingPluginName() string {
+	retVal := s.p.Get("loadingPluginName")
+	return retVal.String()
 }
 
 // SetLoadingPluginName sets the LoadingPluginName property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#loadingpluginname
 func (s *Scene) SetLoadingPluginName(loadingPluginName string) *Scene {
-	p := ba.ctx.Get("Scene").New(loadingPluginName)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("loadingPluginName", loadingPluginName)
+	return s
 }
 
 // LongPressDelay returns the LongPressDelay property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#longpressdelay
-func (s *Scene) LongPressDelay(LongPressDelay float64) *Scene {
-	p := ba.ctx.Get("Scene").New(LongPressDelay)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) LongPressDelay() float64 {
+	retVal := s.p.Get("LongPressDelay")
+	return retVal.Float()
 }
 
 // SetLongPressDelay sets the LongPressDelay property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#longpressdelay
 func (s *Scene) SetLongPressDelay(LongPressDelay float64) *Scene {
-	p := ba.ctx.Get("Scene").New(LongPressDelay)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("LongPressDelay", LongPressDelay)
+	return s
 }
 
 // MainSoundTrack returns the MainSoundTrack property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#mainsoundtrack
-func (s *Scene) MainSoundTrack(mainSoundTrack *SoundTrack) *Scene {
-	p := ba.ctx.Get("Scene").New(mainSoundTrack.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) MainSoundTrack() *SoundTrack {
+	retVal := s.p.Get("mainSoundTrack")
+	return SoundTrackFromJSObject(retVal, s.ctx)
 }
 
 // SetMainSoundTrack sets the MainSoundTrack property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#mainsoundtrack
 func (s *Scene) SetMainSoundTrack(mainSoundTrack *SoundTrack) *Scene {
-	p := ba.ctx.Get("Scene").New(mainSoundTrack.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("mainSoundTrack", mainSoundTrack.JSObject())
+	return s
 }
 
 // MaxDeltaTime returns the MaxDeltaTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#maxdeltatime
-func (s *Scene) MaxDeltaTime(MaxDeltaTime float64) *Scene {
-	p := ba.ctx.Get("Scene").New(MaxDeltaTime)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) MaxDeltaTime() float64 {
+	retVal := s.p.Get("MaxDeltaTime")
+	return retVal.Float()
 }
 
 // SetMaxDeltaTime sets the MaxDeltaTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#maxdeltatime
 func (s *Scene) SetMaxDeltaTime(MaxDeltaTime float64) *Scene {
-	p := ba.ctx.Get("Scene").New(MaxDeltaTime)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("MaxDeltaTime", MaxDeltaTime)
+	return s
 }
 
 // MeshUnderPointer returns the MeshUnderPointer property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#meshunderpointer
-func (s *Scene) MeshUnderPointer(meshUnderPointer *AbstractMesh) *Scene {
-	p := ba.ctx.Get("Scene").New(meshUnderPointer.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) MeshUnderPointer() *AbstractMesh {
+	retVal := s.p.Get("meshUnderPointer")
+	return AbstractMeshFromJSObject(retVal, s.ctx)
 }
 
 // SetMeshUnderPointer sets the MeshUnderPointer property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#meshunderpointer
 func (s *Scene) SetMeshUnderPointer(meshUnderPointer *AbstractMesh) *Scene {
-	p := ba.ctx.Get("Scene").New(meshUnderPointer.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("meshUnderPointer", meshUnderPointer.JSObject())
+	return s
 }
 
 // Metadata returns the Metadata property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#metadata
-func (s *Scene) Metadata(metadata interface{}) *Scene {
-	p := ba.ctx.Get("Scene").New(metadata)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) Metadata() interface{} {
+	retVal := s.p.Get("metadata")
+	return retVal
 }
 
 // SetMetadata sets the Metadata property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#metadata
 func (s *Scene) SetMetadata(metadata interface{}) *Scene {
-	p := ba.ctx.Get("Scene").New(metadata)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("metadata", metadata)
+	return s
 }
 
 // MinDeltaTime returns the MinDeltaTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#mindeltatime
-func (s *Scene) MinDeltaTime(MinDeltaTime float64) *Scene {
-	p := ba.ctx.Get("Scene").New(MinDeltaTime)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) MinDeltaTime() float64 {
+	retVal := s.p.Get("MinDeltaTime")
+	return retVal.Float()
 }
 
 // SetMinDeltaTime sets the MinDeltaTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#mindeltatime
 func (s *Scene) SetMinDeltaTime(MinDeltaTime float64) *Scene {
-	p := ba.ctx.Get("Scene").New(MinDeltaTime)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("MinDeltaTime", MinDeltaTime)
+	return s
 }
 
 // OfflineProvider returns the OfflineProvider property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#offlineprovider
-func (s *Scene) OfflineProvider(offlineProvider *IOfflineProvider) *Scene {
-	p := ba.ctx.Get("Scene").New(offlineProvider.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OfflineProvider() *IOfflineProvider {
+	retVal := s.p.Get("offlineProvider")
+	return IOfflineProviderFromJSObject(retVal, s.ctx)
 }
 
 // SetOfflineProvider sets the OfflineProvider property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#offlineprovider
 func (s *Scene) SetOfflineProvider(offlineProvider *IOfflineProvider) *Scene {
-	p := ba.ctx.Get("Scene").New(offlineProvider.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("offlineProvider", offlineProvider.JSObject())
+	return s
 }
 
 // OnActiveCameraChanged returns the OnActiveCameraChanged property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onactivecamerachanged
-func (s *Scene) OnActiveCameraChanged(onActiveCameraChanged *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onActiveCameraChanged.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnActiveCameraChanged() *Observable {
+	retVal := s.p.Get("onActiveCameraChanged")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnActiveCameraChanged sets the OnActiveCameraChanged property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onactivecamerachanged
 func (s *Scene) SetOnActiveCameraChanged(onActiveCameraChanged *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onActiveCameraChanged.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onActiveCameraChanged", onActiveCameraChanged.JSObject())
+	return s
 }
 
 // OnAfterActiveMeshesEvaluationObservable returns the OnAfterActiveMeshesEvaluationObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafteractivemeshesevaluationobservable
-func (s *Scene) OnAfterActiveMeshesEvaluationObservable(onAfterActiveMeshesEvaluationObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterActiveMeshesEvaluationObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterActiveMeshesEvaluationObservable() *Observable {
+	retVal := s.p.Get("onAfterActiveMeshesEvaluationObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterActiveMeshesEvaluationObservable sets the OnAfterActiveMeshesEvaluationObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafteractivemeshesevaluationobservable
 func (s *Scene) SetOnAfterActiveMeshesEvaluationObservable(onAfterActiveMeshesEvaluationObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterActiveMeshesEvaluationObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterActiveMeshesEvaluationObservable", onAfterActiveMeshesEvaluationObservable.JSObject())
+	return s
 }
 
 // OnAfterAnimationsObservable returns the OnAfterAnimationsObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafteranimationsobservable
-func (s *Scene) OnAfterAnimationsObservable(onAfterAnimationsObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterAnimationsObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterAnimationsObservable() *Observable {
+	retVal := s.p.Get("onAfterAnimationsObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterAnimationsObservable sets the OnAfterAnimationsObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafteranimationsobservable
 func (s *Scene) SetOnAfterAnimationsObservable(onAfterAnimationsObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterAnimationsObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterAnimationsObservable", onAfterAnimationsObservable.JSObject())
+	return s
 }
 
 // OnAfterCameraRenderObservable returns the OnAfterCameraRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onaftercamerarenderobservable
-func (s *Scene) OnAfterCameraRenderObservable(onAfterCameraRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterCameraRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterCameraRenderObservable() *Observable {
+	retVal := s.p.Get("onAfterCameraRenderObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterCameraRenderObservable sets the OnAfterCameraRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onaftercamerarenderobservable
 func (s *Scene) SetOnAfterCameraRenderObservable(onAfterCameraRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterCameraRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterCameraRenderObservable", onAfterCameraRenderObservable.JSObject())
+	return s
 }
 
 // OnAfterDrawPhaseObservable returns the OnAfterDrawPhaseObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterdrawphaseobservable
-func (s *Scene) OnAfterDrawPhaseObservable(onAfterDrawPhaseObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterDrawPhaseObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterDrawPhaseObservable() *Observable {
+	retVal := s.p.Get("onAfterDrawPhaseObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterDrawPhaseObservable sets the OnAfterDrawPhaseObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterdrawphaseobservable
 func (s *Scene) SetOnAfterDrawPhaseObservable(onAfterDrawPhaseObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterDrawPhaseObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterDrawPhaseObservable", onAfterDrawPhaseObservable.JSObject())
+	return s
 }
 
 // OnAfterParticlesRenderingObservable returns the OnAfterParticlesRenderingObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterparticlesrenderingobservable
-func (s *Scene) OnAfterParticlesRenderingObservable(onAfterParticlesRenderingObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterParticlesRenderingObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterParticlesRenderingObservable() *Observable {
+	retVal := s.p.Get("onAfterParticlesRenderingObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterParticlesRenderingObservable sets the OnAfterParticlesRenderingObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterparticlesrenderingobservable
 func (s *Scene) SetOnAfterParticlesRenderingObservable(onAfterParticlesRenderingObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterParticlesRenderingObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterParticlesRenderingObservable", onAfterParticlesRenderingObservable.JSObject())
+	return s
 }
 
 // OnAfterPhysicsObservable returns the OnAfterPhysicsObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterphysicsobservable
-func (s *Scene) OnAfterPhysicsObservable(onAfterPhysicsObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterPhysicsObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterPhysicsObservable() *Observable {
+	retVal := s.p.Get("onAfterPhysicsObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterPhysicsObservable sets the OnAfterPhysicsObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterphysicsobservable
 func (s *Scene) SetOnAfterPhysicsObservable(onAfterPhysicsObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterPhysicsObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterPhysicsObservable", onAfterPhysicsObservable.JSObject())
+	return s
 }
 
 // OnAfterRenderCameraObservable returns the OnAfterRenderCameraObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterrendercameraobservable
-func (s *Scene) OnAfterRenderCameraObservable(onAfterRenderCameraObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterRenderCameraObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterRenderCameraObservable() *Observable {
+	retVal := s.p.Get("onAfterRenderCameraObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterRenderCameraObservable sets the OnAfterRenderCameraObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterrendercameraobservable
 func (s *Scene) SetOnAfterRenderCameraObservable(onAfterRenderCameraObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterRenderCameraObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterRenderCameraObservable", onAfterRenderCameraObservable.JSObject())
+	return s
 }
 
 // OnAfterRenderObservable returns the OnAfterRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterrenderobservable
-func (s *Scene) OnAfterRenderObservable(onAfterRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterRenderObservable() *Observable {
+	retVal := s.p.Get("onAfterRenderObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterrenderobservable
 func (s *Scene) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterRenderObservable", onAfterRenderObservable.JSObject())
+	return s
 }
 
 // OnAfterRenderTargetsRenderObservable returns the OnAfterRenderTargetsRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterrendertargetsrenderobservable
-func (s *Scene) OnAfterRenderTargetsRenderObservable(onAfterRenderTargetsRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterRenderTargetsRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterRenderTargetsRenderObservable() *Observable {
+	retVal := s.p.Get("onAfterRenderTargetsRenderObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterRenderTargetsRenderObservable sets the OnAfterRenderTargetsRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterrendertargetsrenderobservable
 func (s *Scene) SetOnAfterRenderTargetsRenderObservable(onAfterRenderTargetsRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterRenderTargetsRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterRenderTargetsRenderObservable", onAfterRenderTargetsRenderObservable.JSObject())
+	return s
 }
 
 // OnAfterRenderingGroupObservable returns the OnAfterRenderingGroupObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterrenderinggroupobservable
-func (s *Scene) OnAfterRenderingGroupObservable(onAfterRenderingGroupObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterRenderingGroupObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterRenderingGroupObservable() *Observable {
+	retVal := s.p.Get("onAfterRenderingGroupObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterRenderingGroupObservable sets the OnAfterRenderingGroupObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterrenderinggroupobservable
 func (s *Scene) SetOnAfterRenderingGroupObservable(onAfterRenderingGroupObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterRenderingGroupObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterRenderingGroupObservable", onAfterRenderingGroupObservable.JSObject())
+	return s
 }
 
 // OnAfterSpritesRenderingObservable returns the OnAfterSpritesRenderingObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterspritesrenderingobservable
-func (s *Scene) OnAfterSpritesRenderingObservable(onAfterSpritesRenderingObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterSpritesRenderingObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterSpritesRenderingObservable() *Observable {
+	retVal := s.p.Get("onAfterSpritesRenderingObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterSpritesRenderingObservable sets the OnAfterSpritesRenderingObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterspritesrenderingobservable
 func (s *Scene) SetOnAfterSpritesRenderingObservable(onAfterSpritesRenderingObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterSpritesRenderingObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterSpritesRenderingObservable", onAfterSpritesRenderingObservable.JSObject())
+	return s
 }
 
 // OnAfterStepObservable returns the OnAfterStepObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterstepobservable
-func (s *Scene) OnAfterStepObservable(onAfterStepObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterStepObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnAfterStepObservable() *Observable {
+	retVal := s.p.Get("onAfterStepObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterStepObservable sets the OnAfterStepObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onafterstepobservable
 func (s *Scene) SetOnAfterStepObservable(onAfterStepObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onAfterStepObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterStepObservable", onAfterStepObservable.JSObject())
+	return s
 }
 
 // OnBeforeActiveMeshesEvaluationObservable returns the OnBeforeActiveMeshesEvaluationObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforeactivemeshesevaluationobservable
-func (s *Scene) OnBeforeActiveMeshesEvaluationObservable(onBeforeActiveMeshesEvaluationObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeActiveMeshesEvaluationObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforeActiveMeshesEvaluationObservable() *Observable {
+	retVal := s.p.Get("onBeforeActiveMeshesEvaluationObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeActiveMeshesEvaluationObservable sets the OnBeforeActiveMeshesEvaluationObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforeactivemeshesevaluationobservable
 func (s *Scene) SetOnBeforeActiveMeshesEvaluationObservable(onBeforeActiveMeshesEvaluationObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeActiveMeshesEvaluationObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeActiveMeshesEvaluationObservable", onBeforeActiveMeshesEvaluationObservable.JSObject())
+	return s
 }
 
 // OnBeforeAnimationsObservable returns the OnBeforeAnimationsObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforeanimationsobservable
-func (s *Scene) OnBeforeAnimationsObservable(onBeforeAnimationsObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeAnimationsObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforeAnimationsObservable() *Observable {
+	retVal := s.p.Get("onBeforeAnimationsObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeAnimationsObservable sets the OnBeforeAnimationsObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforeanimationsobservable
 func (s *Scene) SetOnBeforeAnimationsObservable(onBeforeAnimationsObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeAnimationsObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeAnimationsObservable", onBeforeAnimationsObservable.JSObject())
+	return s
 }
 
 // OnBeforeCameraRenderObservable returns the OnBeforeCameraRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforecamerarenderobservable
-func (s *Scene) OnBeforeCameraRenderObservable(onBeforeCameraRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeCameraRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforeCameraRenderObservable() *Observable {
+	retVal := s.p.Get("onBeforeCameraRenderObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeCameraRenderObservable sets the OnBeforeCameraRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforecamerarenderobservable
 func (s *Scene) SetOnBeforeCameraRenderObservable(onBeforeCameraRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeCameraRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeCameraRenderObservable", onBeforeCameraRenderObservable.JSObject())
+	return s
 }
 
 // OnBeforeDrawPhaseObservable returns the OnBeforeDrawPhaseObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforedrawphaseobservable
-func (s *Scene) OnBeforeDrawPhaseObservable(onBeforeDrawPhaseObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeDrawPhaseObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforeDrawPhaseObservable() *Observable {
+	retVal := s.p.Get("onBeforeDrawPhaseObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeDrawPhaseObservable sets the OnBeforeDrawPhaseObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforedrawphaseobservable
 func (s *Scene) SetOnBeforeDrawPhaseObservable(onBeforeDrawPhaseObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeDrawPhaseObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeDrawPhaseObservable", onBeforeDrawPhaseObservable.JSObject())
+	return s
 }
 
 // OnBeforeParticlesRenderingObservable returns the OnBeforeParticlesRenderingObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforeparticlesrenderingobservable
-func (s *Scene) OnBeforeParticlesRenderingObservable(onBeforeParticlesRenderingObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeParticlesRenderingObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforeParticlesRenderingObservable() *Observable {
+	retVal := s.p.Get("onBeforeParticlesRenderingObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeParticlesRenderingObservable sets the OnBeforeParticlesRenderingObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforeparticlesrenderingobservable
 func (s *Scene) SetOnBeforeParticlesRenderingObservable(onBeforeParticlesRenderingObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeParticlesRenderingObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeParticlesRenderingObservable", onBeforeParticlesRenderingObservable.JSObject())
+	return s
 }
 
 // OnBeforePhysicsObservable returns the OnBeforePhysicsObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforephysicsobservable
-func (s *Scene) OnBeforePhysicsObservable(onBeforePhysicsObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforePhysicsObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforePhysicsObservable() *Observable {
+	retVal := s.p.Get("onBeforePhysicsObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforePhysicsObservable sets the OnBeforePhysicsObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforephysicsobservable
 func (s *Scene) SetOnBeforePhysicsObservable(onBeforePhysicsObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforePhysicsObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforePhysicsObservable", onBeforePhysicsObservable.JSObject())
+	return s
 }
 
 // OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforerenderobservable
-func (s *Scene) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforeRenderObservable() *Observable {
+	retVal := s.p.Get("onBeforeRenderObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforerenderobservable
 func (s *Scene) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeRenderObservable", onBeforeRenderObservable.JSObject())
+	return s
 }
 
 // OnBeforeRenderTargetsRenderObservable returns the OnBeforeRenderTargetsRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforerendertargetsrenderobservable
-func (s *Scene) OnBeforeRenderTargetsRenderObservable(onBeforeRenderTargetsRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeRenderTargetsRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforeRenderTargetsRenderObservable() *Observable {
+	retVal := s.p.Get("onBeforeRenderTargetsRenderObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeRenderTargetsRenderObservable sets the OnBeforeRenderTargetsRenderObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforerendertargetsrenderobservable
 func (s *Scene) SetOnBeforeRenderTargetsRenderObservable(onBeforeRenderTargetsRenderObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeRenderTargetsRenderObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeRenderTargetsRenderObservable", onBeforeRenderTargetsRenderObservable.JSObject())
+	return s
 }
 
 // OnBeforeRenderingGroupObservable returns the OnBeforeRenderingGroupObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforerenderinggroupobservable
-func (s *Scene) OnBeforeRenderingGroupObservable(onBeforeRenderingGroupObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeRenderingGroupObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforeRenderingGroupObservable() *Observable {
+	retVal := s.p.Get("onBeforeRenderingGroupObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeRenderingGroupObservable sets the OnBeforeRenderingGroupObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforerenderinggroupobservable
 func (s *Scene) SetOnBeforeRenderingGroupObservable(onBeforeRenderingGroupObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeRenderingGroupObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeRenderingGroupObservable", onBeforeRenderingGroupObservable.JSObject())
+	return s
 }
 
 // OnBeforeSpritesRenderingObservable returns the OnBeforeSpritesRenderingObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforespritesrenderingobservable
-func (s *Scene) OnBeforeSpritesRenderingObservable(onBeforeSpritesRenderingObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeSpritesRenderingObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforeSpritesRenderingObservable() *Observable {
+	retVal := s.p.Get("onBeforeSpritesRenderingObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeSpritesRenderingObservable sets the OnBeforeSpritesRenderingObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforespritesrenderingobservable
 func (s *Scene) SetOnBeforeSpritesRenderingObservable(onBeforeSpritesRenderingObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeSpritesRenderingObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeSpritesRenderingObservable", onBeforeSpritesRenderingObservable.JSObject())
+	return s
 }
 
 // OnBeforeStepObservable returns the OnBeforeStepObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforestepobservable
-func (s *Scene) OnBeforeStepObservable(onBeforeStepObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeStepObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnBeforeStepObservable() *Observable {
+	retVal := s.p.Get("onBeforeStepObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeStepObservable sets the OnBeforeStepObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onbeforestepobservable
 func (s *Scene) SetOnBeforeStepObservable(onBeforeStepObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onBeforeStepObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeStepObservable", onBeforeStepObservable.JSObject())
+	return s
 }
 
 // OnCameraRemovedObservable returns the OnCameraRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#oncameraremovedobservable
-func (s *Scene) OnCameraRemovedObservable(onCameraRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onCameraRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnCameraRemovedObservable() *Observable {
+	retVal := s.p.Get("onCameraRemovedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnCameraRemovedObservable sets the OnCameraRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#oncameraremovedobservable
 func (s *Scene) SetOnCameraRemovedObservable(onCameraRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onCameraRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onCameraRemovedObservable", onCameraRemovedObservable.JSObject())
+	return s
 }
 
 // OnDataLoadedObservable returns the OnDataLoadedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ondataloadedobservable
-func (s *Scene) OnDataLoadedObservable(onDataLoadedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onDataLoadedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnDataLoadedObservable() *Observable {
+	retVal := s.p.Get("onDataLoadedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnDataLoadedObservable sets the OnDataLoadedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ondataloadedobservable
 func (s *Scene) SetOnDataLoadedObservable(onDataLoadedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onDataLoadedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onDataLoadedObservable", onDataLoadedObservable.JSObject())
+	return s
 }
 
 // OnDispose returns the OnDispose property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ondispose
-func (s *Scene) OnDispose(onDispose func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnDispose() js.Value {
+	retVal := s.p.Get("onDispose")
+	return retVal
 }
 
 // SetOnDispose sets the OnDispose property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ondispose
 func (s *Scene) SetOnDispose(onDispose func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+	return s
 }
 
 // OnDisposeObservable returns the OnDisposeObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ondisposeobservable
-func (s *Scene) OnDisposeObservable(onDisposeObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onDisposeObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnDisposeObservable() *Observable {
+	retVal := s.p.Get("onDisposeObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnDisposeObservable sets the OnDisposeObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ondisposeobservable
 func (s *Scene) SetOnDisposeObservable(onDisposeObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onDisposeObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onDisposeObservable", onDisposeObservable.JSObject())
+	return s
 }
 
 // OnGeometryRemovedObservable returns the OnGeometryRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ongeometryremovedobservable
-func (s *Scene) OnGeometryRemovedObservable(onGeometryRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onGeometryRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnGeometryRemovedObservable() *Observable {
+	retVal := s.p.Get("onGeometryRemovedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnGeometryRemovedObservable sets the OnGeometryRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ongeometryremovedobservable
 func (s *Scene) SetOnGeometryRemovedObservable(onGeometryRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onGeometryRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onGeometryRemovedObservable", onGeometryRemovedObservable.JSObject())
+	return s
 }
 
 // OnKeyboardObservable returns the OnKeyboardObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onkeyboardobservable
-func (s *Scene) OnKeyboardObservable(onKeyboardObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onKeyboardObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnKeyboardObservable() *Observable {
+	retVal := s.p.Get("onKeyboardObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnKeyboardObservable sets the OnKeyboardObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onkeyboardobservable
 func (s *Scene) SetOnKeyboardObservable(onKeyboardObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onKeyboardObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onKeyboardObservable", onKeyboardObservable.JSObject())
+	return s
 }
 
 // OnLightRemovedObservable returns the OnLightRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onlightremovedobservable
-func (s *Scene) OnLightRemovedObservable(onLightRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onLightRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnLightRemovedObservable() *Observable {
+	retVal := s.p.Get("onLightRemovedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnLightRemovedObservable sets the OnLightRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onlightremovedobservable
 func (s *Scene) SetOnLightRemovedObservable(onLightRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onLightRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onLightRemovedObservable", onLightRemovedObservable.JSObject())
+	return s
 }
 
 // OnMaterialRemovedObservable returns the OnMaterialRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onmaterialremovedobservable
-func (s *Scene) OnMaterialRemovedObservable(onMaterialRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onMaterialRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnMaterialRemovedObservable() *Observable {
+	retVal := s.p.Get("onMaterialRemovedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnMaterialRemovedObservable sets the OnMaterialRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onmaterialremovedobservable
 func (s *Scene) SetOnMaterialRemovedObservable(onMaterialRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onMaterialRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onMaterialRemovedObservable", onMaterialRemovedObservable.JSObject())
+	return s
 }
 
 // OnMeshImportedObservable returns the OnMeshImportedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onmeshimportedobservable
-func (s *Scene) OnMeshImportedObservable(onMeshImportedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onMeshImportedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnMeshImportedObservable() *Observable {
+	retVal := s.p.Get("onMeshImportedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnMeshImportedObservable sets the OnMeshImportedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onmeshimportedobservable
 func (s *Scene) SetOnMeshImportedObservable(onMeshImportedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onMeshImportedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onMeshImportedObservable", onMeshImportedObservable.JSObject())
+	return s
 }
 
 // OnMeshRemovedObservable returns the OnMeshRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onmeshremovedobservable
-func (s *Scene) OnMeshRemovedObservable(onMeshRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onMeshRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnMeshRemovedObservable() *Observable {
+	retVal := s.p.Get("onMeshRemovedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnMeshRemovedObservable sets the OnMeshRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onmeshremovedobservable
 func (s *Scene) SetOnMeshRemovedObservable(onMeshRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onMeshRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onMeshRemovedObservable", onMeshRemovedObservable.JSObject())
+	return s
 }
 
 // OnNewCameraAddedObservable returns the OnNewCameraAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewcameraaddedobservable
-func (s *Scene) OnNewCameraAddedObservable(onNewCameraAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewCameraAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnNewCameraAddedObservable() *Observable {
+	retVal := s.p.Get("onNewCameraAddedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnNewCameraAddedObservable sets the OnNewCameraAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewcameraaddedobservable
 func (s *Scene) SetOnNewCameraAddedObservable(onNewCameraAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewCameraAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onNewCameraAddedObservable", onNewCameraAddedObservable.JSObject())
+	return s
 }
 
 // OnNewGeometryAddedObservable returns the OnNewGeometryAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewgeometryaddedobservable
-func (s *Scene) OnNewGeometryAddedObservable(onNewGeometryAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewGeometryAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnNewGeometryAddedObservable() *Observable {
+	retVal := s.p.Get("onNewGeometryAddedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnNewGeometryAddedObservable sets the OnNewGeometryAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewgeometryaddedobservable
 func (s *Scene) SetOnNewGeometryAddedObservable(onNewGeometryAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewGeometryAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onNewGeometryAddedObservable", onNewGeometryAddedObservable.JSObject())
+	return s
 }
 
 // OnNewLightAddedObservable returns the OnNewLightAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewlightaddedobservable
-func (s *Scene) OnNewLightAddedObservable(onNewLightAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewLightAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnNewLightAddedObservable() *Observable {
+	retVal := s.p.Get("onNewLightAddedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnNewLightAddedObservable sets the OnNewLightAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewlightaddedobservable
 func (s *Scene) SetOnNewLightAddedObservable(onNewLightAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewLightAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onNewLightAddedObservable", onNewLightAddedObservable.JSObject())
+	return s
 }
 
 // OnNewMaterialAddedObservable returns the OnNewMaterialAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewmaterialaddedobservable
-func (s *Scene) OnNewMaterialAddedObservable(onNewMaterialAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewMaterialAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnNewMaterialAddedObservable() *Observable {
+	retVal := s.p.Get("onNewMaterialAddedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnNewMaterialAddedObservable sets the OnNewMaterialAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewmaterialaddedobservable
 func (s *Scene) SetOnNewMaterialAddedObservable(onNewMaterialAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewMaterialAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onNewMaterialAddedObservable", onNewMaterialAddedObservable.JSObject())
+	return s
 }
 
 // OnNewMeshAddedObservable returns the OnNewMeshAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewmeshaddedobservable
-func (s *Scene) OnNewMeshAddedObservable(onNewMeshAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewMeshAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnNewMeshAddedObservable() *Observable {
+	retVal := s.p.Get("onNewMeshAddedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnNewMeshAddedObservable sets the OnNewMeshAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewmeshaddedobservable
 func (s *Scene) SetOnNewMeshAddedObservable(onNewMeshAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewMeshAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onNewMeshAddedObservable", onNewMeshAddedObservable.JSObject())
+	return s
 }
 
 // OnNewSkeletonAddedObservable returns the OnNewSkeletonAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewskeletonaddedobservable
-func (s *Scene) OnNewSkeletonAddedObservable(onNewSkeletonAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewSkeletonAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnNewSkeletonAddedObservable() *Observable {
+	retVal := s.p.Get("onNewSkeletonAddedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnNewSkeletonAddedObservable sets the OnNewSkeletonAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewskeletonaddedobservable
 func (s *Scene) SetOnNewSkeletonAddedObservable(onNewSkeletonAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewSkeletonAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onNewSkeletonAddedObservable", onNewSkeletonAddedObservable.JSObject())
+	return s
 }
 
 // OnNewTextureAddedObservable returns the OnNewTextureAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewtextureaddedobservable
-func (s *Scene) OnNewTextureAddedObservable(onNewTextureAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewTextureAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnNewTextureAddedObservable() *Observable {
+	retVal := s.p.Get("onNewTextureAddedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnNewTextureAddedObservable sets the OnNewTextureAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewtextureaddedobservable
 func (s *Scene) SetOnNewTextureAddedObservable(onNewTextureAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewTextureAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onNewTextureAddedObservable", onNewTextureAddedObservable.JSObject())
+	return s
 }
 
 // OnNewTransformNodeAddedObservable returns the OnNewTransformNodeAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewtransformnodeaddedobservable
-func (s *Scene) OnNewTransformNodeAddedObservable(onNewTransformNodeAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewTransformNodeAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnNewTransformNodeAddedObservable() *Observable {
+	retVal := s.p.Get("onNewTransformNodeAddedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnNewTransformNodeAddedObservable sets the OnNewTransformNodeAddedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onnewtransformnodeaddedobservable
 func (s *Scene) SetOnNewTransformNodeAddedObservable(onNewTransformNodeAddedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onNewTransformNodeAddedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onNewTransformNodeAddedObservable", onNewTransformNodeAddedObservable.JSObject())
+	return s
 }
 
 // OnPointerDown returns the OnPointerDown property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerdown
-func (s *Scene) OnPointerDown(onPointerDown func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerDown(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnPointerDown() js.Value {
+	retVal := s.p.Get("onPointerDown")
+	return retVal
 }
 
 // SetOnPointerDown sets the OnPointerDown property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerdown
 func (s *Scene) SetOnPointerDown(onPointerDown func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerDown(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onPointerDown", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onPointerDown(); return nil }))
+	return s
 }
 
 // OnPointerMove returns the OnPointerMove property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointermove
-func (s *Scene) OnPointerMove(onPointerMove func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerMove(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnPointerMove() js.Value {
+	retVal := s.p.Get("onPointerMove")
+	return retVal
 }
 
 // SetOnPointerMove sets the OnPointerMove property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointermove
 func (s *Scene) SetOnPointerMove(onPointerMove func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerMove(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onPointerMove", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onPointerMove(); return nil }))
+	return s
 }
 
 // OnPointerObservable returns the OnPointerObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerobservable
-func (s *Scene) OnPointerObservable(onPointerObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onPointerObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnPointerObservable() *Observable {
+	retVal := s.p.Get("onPointerObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnPointerObservable sets the OnPointerObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerobservable
 func (s *Scene) SetOnPointerObservable(onPointerObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onPointerObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onPointerObservable", onPointerObservable.JSObject())
+	return s
 }
 
 // OnPointerPick returns the OnPointerPick property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerpick
-func (s *Scene) OnPointerPick(onPointerPick func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerPick(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnPointerPick() js.Value {
+	retVal := s.p.Get("onPointerPick")
+	return retVal
 }
 
 // SetOnPointerPick sets the OnPointerPick property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerpick
 func (s *Scene) SetOnPointerPick(onPointerPick func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerPick(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onPointerPick", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onPointerPick(); return nil }))
+	return s
 }
 
 // OnPointerUp returns the OnPointerUp property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerup
-func (s *Scene) OnPointerUp(onPointerUp func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerUp(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnPointerUp() js.Value {
+	retVal := s.p.Get("onPointerUp")
+	return retVal
 }
 
 // SetOnPointerUp sets the OnPointerUp property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerup
 func (s *Scene) SetOnPointerUp(onPointerUp func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onPointerUp(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onPointerUp", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onPointerUp(); return nil }))
+	return s
 }
 
 // OnPreKeyboardObservable returns the OnPreKeyboardObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onprekeyboardobservable
-func (s *Scene) OnPreKeyboardObservable(onPreKeyboardObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onPreKeyboardObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnPreKeyboardObservable() *Observable {
+	retVal := s.p.Get("onPreKeyboardObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnPreKeyboardObservable sets the OnPreKeyboardObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onprekeyboardobservable
 func (s *Scene) SetOnPreKeyboardObservable(onPreKeyboardObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onPreKeyboardObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onPreKeyboardObservable", onPreKeyboardObservable.JSObject())
+	return s
 }
 
 // OnPrePointerObservable returns the OnPrePointerObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onprepointerobservable
-func (s *Scene) OnPrePointerObservable(onPrePointerObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onPrePointerObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnPrePointerObservable() *Observable {
+	retVal := s.p.Get("onPrePointerObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnPrePointerObservable sets the OnPrePointerObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onprepointerobservable
 func (s *Scene) SetOnPrePointerObservable(onPrePointerObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onPrePointerObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onPrePointerObservable", onPrePointerObservable.JSObject())
+	return s
 }
 
 // OnReadyObservable returns the OnReadyObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onreadyobservable
-func (s *Scene) OnReadyObservable(onReadyObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onReadyObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnReadyObservable() *Observable {
+	retVal := s.p.Get("onReadyObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnReadyObservable sets the OnReadyObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onreadyobservable
 func (s *Scene) SetOnReadyObservable(onReadyObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onReadyObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onReadyObservable", onReadyObservable.JSObject())
+	return s
 }
 
 // OnSkeletonRemovedObservable returns the OnSkeletonRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onskeletonremovedobservable
-func (s *Scene) OnSkeletonRemovedObservable(onSkeletonRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onSkeletonRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnSkeletonRemovedObservable() *Observable {
+	retVal := s.p.Get("onSkeletonRemovedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnSkeletonRemovedObservable sets the OnSkeletonRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onskeletonremovedobservable
 func (s *Scene) SetOnSkeletonRemovedObservable(onSkeletonRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onSkeletonRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onSkeletonRemovedObservable", onSkeletonRemovedObservable.JSObject())
+	return s
 }
 
 // OnTextureRemovedObservable returns the OnTextureRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ontextureremovedobservable
-func (s *Scene) OnTextureRemovedObservable(onTextureRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onTextureRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnTextureRemovedObservable() *Observable {
+	retVal := s.p.Get("onTextureRemovedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnTextureRemovedObservable sets the OnTextureRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ontextureremovedobservable
 func (s *Scene) SetOnTextureRemovedObservable(onTextureRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onTextureRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onTextureRemovedObservable", onTextureRemovedObservable.JSObject())
+	return s
 }
 
 // OnTransformNodeRemovedObservable returns the OnTransformNodeRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ontransformnoderemovedobservable
-func (s *Scene) OnTransformNodeRemovedObservable(onTransformNodeRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onTransformNodeRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) OnTransformNodeRemovedObservable() *Observable {
+	retVal := s.p.Get("onTransformNodeRemovedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnTransformNodeRemovedObservable sets the OnTransformNodeRemovedObservable property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ontransformnoderemovedobservable
 func (s *Scene) SetOnTransformNodeRemovedObservable(onTransformNodeRemovedObservable *Observable) *Scene {
-	p := ba.ctx.Get("Scene").New(onTransformNodeRemovedObservable.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("onTransformNodeRemovedObservable", onTransformNodeRemovedObservable.JSObject())
+	return s
 }
 
 // ParticlesEnabled returns the ParticlesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#particlesenabled
-func (s *Scene) ParticlesEnabled(particlesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(particlesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ParticlesEnabled() bool {
+	retVal := s.p.Get("particlesEnabled")
+	return retVal.Bool()
 }
 
 // SetParticlesEnabled sets the ParticlesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#particlesenabled
 func (s *Scene) SetParticlesEnabled(particlesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(particlesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("particlesEnabled", particlesEnabled)
+	return s
 }
 
 // PointerDownPredicate returns the PointerDownPredicate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointerdownpredicate
-func (s *Scene) PointerDownPredicate(pointerDownPredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownPredicate(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PointerDownPredicate() js.Value {
+	retVal := s.p.Get("pointerDownPredicate")
+	return retVal
 }
 
 // SetPointerDownPredicate sets the PointerDownPredicate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointerdownpredicate
 func (s *Scene) SetPointerDownPredicate(pointerDownPredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerDownPredicate(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("pointerDownPredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerDownPredicate(); return nil }))
+	return s
 }
 
 // PointerMovePredicate returns the PointerMovePredicate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointermovepredicate
-func (s *Scene) PointerMovePredicate(pointerMovePredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerMovePredicate(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PointerMovePredicate() js.Value {
+	retVal := s.p.Get("pointerMovePredicate")
+	return retVal
 }
 
 // SetPointerMovePredicate sets the PointerMovePredicate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointermovepredicate
 func (s *Scene) SetPointerMovePredicate(pointerMovePredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerMovePredicate(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("pointerMovePredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerMovePredicate(); return nil }))
+	return s
 }
 
 // PointerUpPredicate returns the PointerUpPredicate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointeruppredicate
-func (s *Scene) PointerUpPredicate(pointerUpPredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpPredicate(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PointerUpPredicate() js.Value {
+	retVal := s.p.Get("pointerUpPredicate")
+	return retVal
 }
 
 // SetPointerUpPredicate sets the PointerUpPredicate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointeruppredicate
 func (s *Scene) SetPointerUpPredicate(pointerUpPredicate func()) *Scene {
-	p := ba.ctx.Get("Scene").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {pointerUpPredicate(); return nil}))
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("pointerUpPredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerUpPredicate(); return nil }))
+	return s
 }
 
 // PointerX returns the PointerX property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointerx
-func (s *Scene) PointerX(pointerX float64) *Scene {
-	p := ba.ctx.Get("Scene").New(pointerX)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PointerX() float64 {
+	retVal := s.p.Get("pointerX")
+	return retVal.Float()
 }
 
 // SetPointerX sets the PointerX property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointerx
 func (s *Scene) SetPointerX(pointerX float64) *Scene {
-	p := ba.ctx.Get("Scene").New(pointerX)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("pointerX", pointerX)
+	return s
 }
 
 // PointerY returns the PointerY property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointery
-func (s *Scene) PointerY(pointerY float64) *Scene {
-	p := ba.ctx.Get("Scene").New(pointerY)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PointerY() float64 {
+	retVal := s.p.Get("pointerY")
+	return retVal.Float()
 }
 
 // SetPointerY sets the PointerY property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointery
 func (s *Scene) SetPointerY(pointerY float64) *Scene {
-	p := ba.ctx.Get("Scene").New(pointerY)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("pointerY", pointerY)
+	return s
 }
 
 // PostProcessManager returns the PostProcessManager property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#postprocessmanager
-func (s *Scene) PostProcessManager(postProcessManager *PostProcessManager) *Scene {
-	p := ba.ctx.Get("Scene").New(postProcessManager.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PostProcessManager() *PostProcessManager {
+	retVal := s.p.Get("postProcessManager")
+	return PostProcessManagerFromJSObject(retVal, s.ctx)
 }
 
 // SetPostProcessManager sets the PostProcessManager property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#postprocessmanager
 func (s *Scene) SetPostProcessManager(postProcessManager *PostProcessManager) *Scene {
-	p := ba.ctx.Get("Scene").New(postProcessManager.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("postProcessManager", postProcessManager.JSObject())
+	return s
 }
 
 // PostProcessRenderPipelineManager returns the PostProcessRenderPipelineManager property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#postprocessrenderpipelinemanager
-func (s *Scene) PostProcessRenderPipelineManager(postProcessRenderPipelineManager *PostProcessRenderPipelineManager) *Scene {
-	p := ba.ctx.Get("Scene").New(postProcessRenderPipelineManager.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PostProcessRenderPipelineManager() *PostProcessRenderPipelineManager {
+	retVal := s.p.Get("postProcessRenderPipelineManager")
+	return PostProcessRenderPipelineManagerFromJSObject(retVal, s.ctx)
 }
 
 // SetPostProcessRenderPipelineManager sets the PostProcessRenderPipelineManager property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#postprocessrenderpipelinemanager
 func (s *Scene) SetPostProcessRenderPipelineManager(postProcessRenderPipelineManager *PostProcessRenderPipelineManager) *Scene {
-	p := ba.ctx.Get("Scene").New(postProcessRenderPipelineManager.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("postProcessRenderPipelineManager", postProcessRenderPipelineManager.JSObject())
+	return s
 }
 
 // PostProcesses returns the PostProcesses property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#postprocesses
-func (s *Scene) PostProcesses(postProcesses *PostProcess) *Scene {
-	p := ba.ctx.Get("Scene").New(postProcesses.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PostProcesses() *PostProcess {
+	retVal := s.p.Get("postProcesses")
+	return PostProcessFromJSObject(retVal, s.ctx)
 }
 
 // SetPostProcesses sets the PostProcesses property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#postprocesses
 func (s *Scene) SetPostProcesses(postProcesses *PostProcess) *Scene {
-	p := ba.ctx.Get("Scene").New(postProcesses.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("postProcesses", postProcesses.JSObject())
+	return s
 }
 
 // PostProcessesEnabled returns the PostProcessesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#postprocessesenabled
-func (s *Scene) PostProcessesEnabled(postProcessesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(postProcessesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PostProcessesEnabled() bool {
+	retVal := s.p.Get("postProcessesEnabled")
+	return retVal.Bool()
 }
 
 // SetPostProcessesEnabled sets the PostProcessesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#postprocessesenabled
 func (s *Scene) SetPostProcessesEnabled(postProcessesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(postProcessesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("postProcessesEnabled", postProcessesEnabled)
+	return s
 }
 
 // PreventDefaultOnPointerDown returns the PreventDefaultOnPointerDown property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#preventdefaultonpointerdown
-func (s *Scene) PreventDefaultOnPointerDown(preventDefaultOnPointerDown bool) *Scene {
-	p := ba.ctx.Get("Scene").New(preventDefaultOnPointerDown)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PreventDefaultOnPointerDown() bool {
+	retVal := s.p.Get("preventDefaultOnPointerDown")
+	return retVal.Bool()
 }
 
 // SetPreventDefaultOnPointerDown sets the PreventDefaultOnPointerDown property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#preventdefaultonpointerdown
 func (s *Scene) SetPreventDefaultOnPointerDown(preventDefaultOnPointerDown bool) *Scene {
-	p := ba.ctx.Get("Scene").New(preventDefaultOnPointerDown)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("preventDefaultOnPointerDown", preventDefaultOnPointerDown)
+	return s
 }
 
 // PreventDefaultOnPointerUp returns the PreventDefaultOnPointerUp property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#preventdefaultonpointerup
-func (s *Scene) PreventDefaultOnPointerUp(preventDefaultOnPointerUp bool) *Scene {
-	p := ba.ctx.Get("Scene").New(preventDefaultOnPointerUp)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) PreventDefaultOnPointerUp() bool {
+	retVal := s.p.Get("preventDefaultOnPointerUp")
+	return retVal.Bool()
 }
 
 // SetPreventDefaultOnPointerUp sets the PreventDefaultOnPointerUp property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#preventdefaultonpointerup
 func (s *Scene) SetPreventDefaultOnPointerUp(preventDefaultOnPointerUp bool) *Scene {
-	p := ba.ctx.Get("Scene").New(preventDefaultOnPointerUp)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("preventDefaultOnPointerUp", preventDefaultOnPointerUp)
+	return s
 }
 
 // ProbesEnabled returns the ProbesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#probesenabled
-func (s *Scene) ProbesEnabled(probesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(probesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ProbesEnabled() bool {
+	retVal := s.p.Get("probesEnabled")
+	return retVal.Bool()
 }
 
 // SetProbesEnabled sets the ProbesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#probesenabled
 func (s *Scene) SetProbesEnabled(probesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(probesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("probesEnabled", probesEnabled)
+	return s
 }
 
 // ProceduralTexturesEnabled returns the ProceduralTexturesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#proceduraltexturesenabled
-func (s *Scene) ProceduralTexturesEnabled(proceduralTexturesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(proceduralTexturesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ProceduralTexturesEnabled() bool {
+	retVal := s.p.Get("proceduralTexturesEnabled")
+	return retVal.Bool()
 }
 
 // SetProceduralTexturesEnabled sets the ProceduralTexturesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#proceduraltexturesenabled
 func (s *Scene) SetProceduralTexturesEnabled(proceduralTexturesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(proceduralTexturesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("proceduralTexturesEnabled", proceduralTexturesEnabled)
+	return s
 }
 
 // RenderTargetsEnabled returns the RenderTargetsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#rendertargetsenabled
-func (s *Scene) RenderTargetsEnabled(renderTargetsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(renderTargetsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) RenderTargetsEnabled() bool {
+	retVal := s.p.Get("renderTargetsEnabled")
+	return retVal.Bool()
 }
 
 // SetRenderTargetsEnabled sets the RenderTargetsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#rendertargetsenabled
 func (s *Scene) SetRenderTargetsEnabled(renderTargetsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(renderTargetsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("renderTargetsEnabled", renderTargetsEnabled)
+	return s
 }
 
 // RequireLightSorting returns the RequireLightSorting property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#requirelightsorting
-func (s *Scene) RequireLightSorting(requireLightSorting bool) *Scene {
-	p := ba.ctx.Get("Scene").New(requireLightSorting)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) RequireLightSorting() bool {
+	retVal := s.p.Get("requireLightSorting")
+	return retVal.Bool()
 }
 
 // SetRequireLightSorting sets the RequireLightSorting property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#requirelightsorting
 func (s *Scene) SetRequireLightSorting(requireLightSorting bool) *Scene {
-	p := ba.ctx.Get("Scene").New(requireLightSorting)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("requireLightSorting", requireLightSorting)
+	return s
 }
 
 // ReservedDataStore returns the ReservedDataStore property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#reserveddatastore
-func (s *Scene) ReservedDataStore(reservedDataStore interface{}) *Scene {
-	p := ba.ctx.Get("Scene").New(reservedDataStore)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ReservedDataStore() interface{} {
+	retVal := s.p.Get("reservedDataStore")
+	return retVal
 }
 
 // SetReservedDataStore sets the ReservedDataStore property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#reserveddatastore
 func (s *Scene) SetReservedDataStore(reservedDataStore interface{}) *Scene {
-	p := ba.ctx.Get("Scene").New(reservedDataStore)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("reservedDataStore", reservedDataStore)
+	return s
 }
 
 // SelectionOctree returns the SelectionOctree property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#selectionoctree
-func (s *Scene) SelectionOctree(selectionOctree *Octree) *Scene {
-	p := ba.ctx.Get("Scene").New(selectionOctree.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) SelectionOctree() *Octree {
+	retVal := s.p.Get("selectionOctree")
+	return OctreeFromJSObject(retVal, s.ctx)
 }
 
 // SetSelectionOctree sets the SelectionOctree property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#selectionoctree
 func (s *Scene) SetSelectionOctree(selectionOctree *Octree) *Scene {
-	p := ba.ctx.Get("Scene").New(selectionOctree.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("selectionOctree", selectionOctree.JSObject())
+	return s
 }
 
 // ShadowsEnabled returns the ShadowsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#shadowsenabled
-func (s *Scene) ShadowsEnabled(shadowsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(shadowsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) ShadowsEnabled() bool {
+	retVal := s.p.Get("shadowsEnabled")
+	return retVal.Bool()
 }
 
 // SetShadowsEnabled sets the ShadowsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#shadowsenabled
 func (s *Scene) SetShadowsEnabled(shadowsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(shadowsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("shadowsEnabled", shadowsEnabled)
+	return s
 }
 
 // SimplificationQueue returns the SimplificationQueue property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#simplificationqueue
-func (s *Scene) SimplificationQueue(simplificationQueue *SimplificationQueue) *Scene {
-	p := ba.ctx.Get("Scene").New(simplificationQueue.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) SimplificationQueue() *SimplificationQueue {
+	retVal := s.p.Get("simplificationQueue")
+	return SimplificationQueueFromJSObject(retVal, s.ctx)
 }
 
 // SetSimplificationQueue sets the SimplificationQueue property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#simplificationqueue
 func (s *Scene) SetSimplificationQueue(simplificationQueue *SimplificationQueue) *Scene {
-	p := ba.ctx.Get("Scene").New(simplificationQueue.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("simplificationQueue", simplificationQueue.JSObject())
+	return s
 }
 
 // SkeletonsEnabled returns the SkeletonsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#skeletonsenabled
-func (s *Scene) SkeletonsEnabled(skeletonsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(skeletonsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) SkeletonsEnabled() bool {
+	retVal := s.p.Get("skeletonsEnabled")
+	return retVal.Bool()
 }
 
 // SetSkeletonsEnabled sets the SkeletonsEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#skeletonsenabled
 func (s *Scene) SetSkeletonsEnabled(skeletonsEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(skeletonsEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("skeletonsEnabled", skeletonsEnabled)
+	return s
 }
 
 // SoundTracks returns the SoundTracks property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#soundtracks
-func (s *Scene) SoundTracks(soundTracks []*SoundTrack) *Scene {
-	p := ba.ctx.Get("Scene").New(soundTracks)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) SoundTracks() []*SoundTrack {
+	retVal := s.p.Get("soundTracks")
+	result := []*SoundTrack{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SoundTrackFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetSoundTracks sets the SoundTracks property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#soundtracks
 func (s *Scene) SetSoundTracks(soundTracks []*SoundTrack) *Scene {
-	p := ba.ctx.Get("Scene").New(soundTracks)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("soundTracks", soundTracks)
+	return s
 }
 
 // SpriteManagers returns the SpriteManagers property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#spritemanagers
-func (s *Scene) SpriteManagers(spriteManagers []*ISpriteManager) *Scene {
-	p := ba.ctx.Get("Scene").New(spriteManagers)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) SpriteManagers() []*ISpriteManager {
+	retVal := s.p.Get("spriteManagers")
+	result := []*ISpriteManager{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ISpriteManagerFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetSpriteManagers sets the SpriteManagers property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#spritemanagers
 func (s *Scene) SetSpriteManagers(spriteManagers []*ISpriteManager) *Scene {
-	p := ba.ctx.Get("Scene").New(spriteManagers)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("spriteManagers", spriteManagers)
+	return s
 }
 
 // SpritesEnabled returns the SpritesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#spritesenabled
-func (s *Scene) SpritesEnabled(spritesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(spritesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) SpritesEnabled() bool {
+	retVal := s.p.Get("spritesEnabled")
+	return retVal.Bool()
 }
 
 // SetSpritesEnabled sets the SpritesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#spritesenabled
 func (s *Scene) SetSpritesEnabled(spritesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(spritesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("spritesEnabled", spritesEnabled)
+	return s
 }
 
 // TexturesEnabled returns the TexturesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#texturesenabled
-func (s *Scene) TexturesEnabled(texturesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(texturesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) TexturesEnabled() bool {
+	retVal := s.p.Get("texturesEnabled")
+	return retVal.Bool()
 }
 
 // SetTexturesEnabled sets the TexturesEnabled property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#texturesenabled
 func (s *Scene) SetTexturesEnabled(texturesEnabled bool) *Scene {
-	p := ba.ctx.Get("Scene").New(texturesEnabled)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("texturesEnabled", texturesEnabled)
+	return s
 }
 
 // TotalActiveIndicesPerfCounter returns the TotalActiveIndicesPerfCounter property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#totalactiveindicesperfcounter
-func (s *Scene) TotalActiveIndicesPerfCounter(totalActiveIndicesPerfCounter *PerfCounter) *Scene {
-	p := ba.ctx.Get("Scene").New(totalActiveIndicesPerfCounter.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) TotalActiveIndicesPerfCounter() *PerfCounter {
+	retVal := s.p.Get("totalActiveIndicesPerfCounter")
+	return PerfCounterFromJSObject(retVal, s.ctx)
 }
 
 // SetTotalActiveIndicesPerfCounter sets the TotalActiveIndicesPerfCounter property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#totalactiveindicesperfcounter
 func (s *Scene) SetTotalActiveIndicesPerfCounter(totalActiveIndicesPerfCounter *PerfCounter) *Scene {
-	p := ba.ctx.Get("Scene").New(totalActiveIndicesPerfCounter.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("totalActiveIndicesPerfCounter", totalActiveIndicesPerfCounter.JSObject())
+	return s
 }
 
 // TotalVerticesPerfCounter returns the TotalVerticesPerfCounter property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#totalverticesperfcounter
-func (s *Scene) TotalVerticesPerfCounter(totalVerticesPerfCounter *PerfCounter) *Scene {
-	p := ba.ctx.Get("Scene").New(totalVerticesPerfCounter.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) TotalVerticesPerfCounter() *PerfCounter {
+	retVal := s.p.Get("totalVerticesPerfCounter")
+	return PerfCounterFromJSObject(retVal, s.ctx)
 }
 
 // SetTotalVerticesPerfCounter sets the TotalVerticesPerfCounter property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#totalverticesperfcounter
 func (s *Scene) SetTotalVerticesPerfCounter(totalVerticesPerfCounter *PerfCounter) *Scene {
-	p := ba.ctx.Get("Scene").New(totalVerticesPerfCounter.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("totalVerticesPerfCounter", totalVerticesPerfCounter.JSObject())
+	return s
 }
 
 // Uid returns the Uid property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#uid
-func (s *Scene) Uid(uid string) *Scene {
-	p := ba.ctx.Get("Scene").New(uid)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) Uid() string {
+	retVal := s.p.Get("uid")
+	return retVal.String()
 }
 
 // SetUid sets the Uid property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#uid
 func (s *Scene) SetUid(uid string) *Scene {
-	p := ba.ctx.Get("Scene").New(uid)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("uid", uid)
+	return s
 }
 
 // UnTranslatedPointer returns the UnTranslatedPointer property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#untranslatedpointer
-func (s *Scene) UnTranslatedPointer(unTranslatedPointer *Vector2) *Scene {
-	p := ba.ctx.Get("Scene").New(unTranslatedPointer.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) UnTranslatedPointer() *Vector2 {
+	retVal := s.p.Get("unTranslatedPointer")
+	return Vector2FromJSObject(retVal, s.ctx)
 }
 
 // SetUnTranslatedPointer sets the UnTranslatedPointer property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#untranslatedpointer
 func (s *Scene) SetUnTranslatedPointer(unTranslatedPointer *Vector2) *Scene {
-	p := ba.ctx.Get("Scene").New(unTranslatedPointer.JSObject())
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("unTranslatedPointer", unTranslatedPointer.JSObject())
+	return s
 }
 
 // UseConstantAnimationDeltaTime returns the UseConstantAnimationDeltaTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#useconstantanimationdeltatime
-func (s *Scene) UseConstantAnimationDeltaTime(useConstantAnimationDeltaTime bool) *Scene {
-	p := ba.ctx.Get("Scene").New(useConstantAnimationDeltaTime)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) UseConstantAnimationDeltaTime() bool {
+	retVal := s.p.Get("useConstantAnimationDeltaTime")
+	return retVal.Bool()
 }
 
 // SetUseConstantAnimationDeltaTime sets the UseConstantAnimationDeltaTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#useconstantanimationdeltatime
 func (s *Scene) SetUseConstantAnimationDeltaTime(useConstantAnimationDeltaTime bool) *Scene {
-	p := ba.ctx.Get("Scene").New(useConstantAnimationDeltaTime)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("useConstantAnimationDeltaTime", useConstantAnimationDeltaTime)
+	return s
 }
 
 // UseDelayedTextureLoading returns the UseDelayedTextureLoading property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#usedelayedtextureloading
-func (s *Scene) UseDelayedTextureLoading(useDelayedTextureLoading bool) *Scene {
-	p := ba.ctx.Get("Scene").New(useDelayedTextureLoading)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) UseDelayedTextureLoading() bool {
+	retVal := s.p.Get("useDelayedTextureLoading")
+	return retVal.Bool()
 }
 
 // SetUseDelayedTextureLoading sets the UseDelayedTextureLoading property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#usedelayedtextureloading
 func (s *Scene) SetUseDelayedTextureLoading(useDelayedTextureLoading bool) *Scene {
-	p := ba.ctx.Get("Scene").New(useDelayedTextureLoading)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("useDelayedTextureLoading", useDelayedTextureLoading)
+	return s
 }
 
 // UseRightHandedSystem returns the UseRightHandedSystem property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#userighthandedsystem
-func (s *Scene) UseRightHandedSystem(useRightHandedSystem bool) *Scene {
-	p := ba.ctx.Get("Scene").New(useRightHandedSystem)
-	return SceneFromJSObject(p, ba.ctx)
+func (s *Scene) UseRightHandedSystem() bool {
+	retVal := s.p.Get("useRightHandedSystem")
+	return retVal.Bool()
 }
 
 // SetUseRightHandedSystem sets the UseRightHandedSystem property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#userighthandedsystem
 func (s *Scene) SetUseRightHandedSystem(useRightHandedSystem bool) *Scene {
-	p := ba.ctx.Get("Scene").New(useRightHandedSystem)
-	return SceneFromJSObject(p, ba.ctx)
+	s.p.Set("useRightHandedSystem", useRightHandedSystem)
+	return s
 }
-
-*/

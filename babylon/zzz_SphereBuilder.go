@@ -63,7 +63,3 @@ func (s *SphereBuilder) CreateSphere(name string, options js.Value, opts *Sphere
 	retVal := s.p.Call("CreateSphere", args...)
 	return MeshFromJSObject(retVal, s.ctx)
 }
-
-/*
-
- */

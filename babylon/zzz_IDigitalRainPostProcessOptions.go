@@ -36,54 +36,50 @@ func IDigitalRainPostProcessOptionsArrayToJSArray(array []*IDigitalRainPostProce
 	return result
 }
 
-/*
-
 // Font returns the Font property of class IDigitalRainPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idigitalrainpostprocessoptions#font
-func (i *IDigitalRainPostProcessOptions) Font(font string) *IDigitalRainPostProcessOptions {
-	p := ba.ctx.Get("IDigitalRainPostProcessOptions").New(font)
-	return IDigitalRainPostProcessOptionsFromJSObject(p, ba.ctx)
+func (i *IDigitalRainPostProcessOptions) Font() string {
+	retVal := i.p.Get("font")
+	return retVal.String()
 }
 
 // SetFont sets the Font property of class IDigitalRainPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idigitalrainpostprocessoptions#font
 func (i *IDigitalRainPostProcessOptions) SetFont(font string) *IDigitalRainPostProcessOptions {
-	p := ba.ctx.Get("IDigitalRainPostProcessOptions").New(font)
-	return IDigitalRainPostProcessOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("font", font)
+	return i
 }
 
 // MixToNormal returns the MixToNormal property of class IDigitalRainPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idigitalrainpostprocessoptions#mixtonormal
-func (i *IDigitalRainPostProcessOptions) MixToNormal(mixToNormal float64) *IDigitalRainPostProcessOptions {
-	p := ba.ctx.Get("IDigitalRainPostProcessOptions").New(mixToNormal)
-	return IDigitalRainPostProcessOptionsFromJSObject(p, ba.ctx)
+func (i *IDigitalRainPostProcessOptions) MixToNormal() float64 {
+	retVal := i.p.Get("mixToNormal")
+	return retVal.Float()
 }
 
 // SetMixToNormal sets the MixToNormal property of class IDigitalRainPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idigitalrainpostprocessoptions#mixtonormal
 func (i *IDigitalRainPostProcessOptions) SetMixToNormal(mixToNormal float64) *IDigitalRainPostProcessOptions {
-	p := ba.ctx.Get("IDigitalRainPostProcessOptions").New(mixToNormal)
-	return IDigitalRainPostProcessOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mixToNormal", mixToNormal)
+	return i
 }
 
 // MixToTile returns the MixToTile property of class IDigitalRainPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idigitalrainpostprocessoptions#mixtotile
-func (i *IDigitalRainPostProcessOptions) MixToTile(mixToTile float64) *IDigitalRainPostProcessOptions {
-	p := ba.ctx.Get("IDigitalRainPostProcessOptions").New(mixToTile)
-	return IDigitalRainPostProcessOptionsFromJSObject(p, ba.ctx)
+func (i *IDigitalRainPostProcessOptions) MixToTile() float64 {
+	retVal := i.p.Get("mixToTile")
+	return retVal.Float()
 }
 
 // SetMixToTile sets the MixToTile property of class IDigitalRainPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idigitalrainpostprocessoptions#mixtotile
 func (i *IDigitalRainPostProcessOptions) SetMixToTile(mixToTile float64) *IDigitalRainPostProcessOptions {
-	p := ba.ctx.Get("IDigitalRainPostProcessOptions").New(mixToTile)
-	return IDigitalRainPostProcessOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mixToTile", mixToTile)
+	return i
 }
-
-*/

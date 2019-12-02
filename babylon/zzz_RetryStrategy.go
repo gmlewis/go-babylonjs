@@ -66,7 +66,3 @@ func (r *RetryStrategy) ExponentialBackoff(opts *RetryStrategyExponentialBackoff
 	retVal := r.p.Call("ExponentialBackoff", args...)
 	return retVal
 }
-
-/*
-
- */

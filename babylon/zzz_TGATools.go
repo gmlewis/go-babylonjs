@@ -51,7 +51,3 @@ func (t *TGATools) GetTGAHeader(data js.Value) interface{} {
 	retVal := t.p.Call("GetTGAHeader", args...)
 	return retVal
 }
-
-/*
-
- */

@@ -81,7 +81,3 @@ func (v *VRDeviceOrientationFreeCamera) GetClassName() string {
 	retVal := v.p.Call("getClassName")
 	return retVal.String()
 }
-
-/*
-
- */

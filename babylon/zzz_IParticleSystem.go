@@ -875,838 +875,834 @@ func (i *IParticleSystem) Stop() {
 	i.p.Call("stop")
 }
 
-/*
-
 // Animations returns the Animations property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#animations
-func (i *IParticleSystem) Animations(animations *Animation) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(animations.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) Animations() *Animation {
+	retVal := i.p.Get("animations")
+	return AnimationFromJSObject(retVal, i.ctx)
 }
 
 // SetAnimations sets the Animations property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#animations
 func (i *IParticleSystem) SetAnimations(animations *Animation) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(animations.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("animations", animations.JSObject())
+	return i
 }
 
 // BeginAnimationFrom returns the BeginAnimationFrom property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#beginanimationfrom
-func (i *IParticleSystem) BeginAnimationFrom(beginAnimationFrom float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(beginAnimationFrom)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) BeginAnimationFrom() float64 {
+	retVal := i.p.Get("beginAnimationFrom")
+	return retVal.Float()
 }
 
 // SetBeginAnimationFrom sets the BeginAnimationFrom property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#beginanimationfrom
 func (i *IParticleSystem) SetBeginAnimationFrom(beginAnimationFrom float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(beginAnimationFrom)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("beginAnimationFrom", beginAnimationFrom)
+	return i
 }
 
 // BeginAnimationLoop returns the BeginAnimationLoop property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#beginanimationloop
-func (i *IParticleSystem) BeginAnimationLoop(beginAnimationLoop bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(beginAnimationLoop)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) BeginAnimationLoop() bool {
+	retVal := i.p.Get("beginAnimationLoop")
+	return retVal.Bool()
 }
 
 // SetBeginAnimationLoop sets the BeginAnimationLoop property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#beginanimationloop
 func (i *IParticleSystem) SetBeginAnimationLoop(beginAnimationLoop bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(beginAnimationLoop)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("beginAnimationLoop", beginAnimationLoop)
+	return i
 }
 
 // BeginAnimationOnStart returns the BeginAnimationOnStart property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#beginanimationonstart
-func (i *IParticleSystem) BeginAnimationOnStart(beginAnimationOnStart bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(beginAnimationOnStart)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) BeginAnimationOnStart() bool {
+	retVal := i.p.Get("beginAnimationOnStart")
+	return retVal.Bool()
 }
 
 // SetBeginAnimationOnStart sets the BeginAnimationOnStart property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#beginanimationonstart
 func (i *IParticleSystem) SetBeginAnimationOnStart(beginAnimationOnStart bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(beginAnimationOnStart)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("beginAnimationOnStart", beginAnimationOnStart)
+	return i
 }
 
 // BeginAnimationTo returns the BeginAnimationTo property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#beginanimationto
-func (i *IParticleSystem) BeginAnimationTo(beginAnimationTo float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(beginAnimationTo)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) BeginAnimationTo() float64 {
+	retVal := i.p.Get("beginAnimationTo")
+	return retVal.Float()
 }
 
 // SetBeginAnimationTo sets the BeginAnimationTo property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#beginanimationto
 func (i *IParticleSystem) SetBeginAnimationTo(beginAnimationTo float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(beginAnimationTo)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("beginAnimationTo", beginAnimationTo)
+	return i
 }
 
 // BillboardMode returns the BillboardMode property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#billboardmode
-func (i *IParticleSystem) BillboardMode(billboardMode float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(billboardMode)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) BillboardMode() float64 {
+	retVal := i.p.Get("billboardMode")
+	return retVal.Float()
 }
 
 // SetBillboardMode sets the BillboardMode property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#billboardmode
 func (i *IParticleSystem) SetBillboardMode(billboardMode float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(billboardMode)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("billboardMode", billboardMode)
+	return i
 }
 
 // BlendMode returns the BlendMode property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#blendmode
-func (i *IParticleSystem) BlendMode(blendMode float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(blendMode)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) BlendMode() float64 {
+	retVal := i.p.Get("blendMode")
+	return retVal.Float()
 }
 
 // SetBlendMode sets the BlendMode property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#blendmode
 func (i *IParticleSystem) SetBlendMode(blendMode float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(blendMode)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("blendMode", blendMode)
+	return i
 }
 
 // Color1 returns the Color1 property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#color1
-func (i *IParticleSystem) Color1(color1 *Color4) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(color1.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) Color1() *Color4 {
+	retVal := i.p.Get("color1")
+	return Color4FromJSObject(retVal, i.ctx)
 }
 
 // SetColor1 sets the Color1 property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#color1
 func (i *IParticleSystem) SetColor1(color1 *Color4) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(color1.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("color1", color1.JSObject())
+	return i
 }
 
 // Color2 returns the Color2 property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#color2
-func (i *IParticleSystem) Color2(color2 *Color4) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(color2.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) Color2() *Color4 {
+	retVal := i.p.Get("color2")
+	return Color4FromJSObject(retVal, i.ctx)
 }
 
 // SetColor2 sets the Color2 property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#color2
 func (i *IParticleSystem) SetColor2(color2 *Color4) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(color2.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("color2", color2.JSObject())
+	return i
 }
 
 // ColorDead returns the ColorDead property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#colordead
-func (i *IParticleSystem) ColorDead(colorDead *Color4) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(colorDead.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) ColorDead() *Color4 {
+	retVal := i.p.Get("colorDead")
+	return Color4FromJSObject(retVal, i.ctx)
 }
 
 // SetColorDead sets the ColorDead property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#colordead
 func (i *IParticleSystem) SetColorDead(colorDead *Color4) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(colorDead.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("colorDead", colorDead.JSObject())
+	return i
 }
 
 // DisposeOnStop returns the DisposeOnStop property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#disposeonstop
-func (i *IParticleSystem) DisposeOnStop(disposeOnStop bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(disposeOnStop)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) DisposeOnStop() bool {
+	retVal := i.p.Get("disposeOnStop")
+	return retVal.Bool()
 }
 
 // SetDisposeOnStop sets the DisposeOnStop property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#disposeonstop
 func (i *IParticleSystem) SetDisposeOnStop(disposeOnStop bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(disposeOnStop)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("disposeOnStop", disposeOnStop)
+	return i
 }
 
 // EmitRate returns the EmitRate property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#emitrate
-func (i *IParticleSystem) EmitRate(emitRate float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(emitRate)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) EmitRate() float64 {
+	retVal := i.p.Get("emitRate")
+	return retVal.Float()
 }
 
 // SetEmitRate sets the EmitRate property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#emitrate
 func (i *IParticleSystem) SetEmitRate(emitRate float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(emitRate)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("emitRate", emitRate)
+	return i
 }
 
 // Emitter returns the Emitter property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#emitter
-func (i *IParticleSystem) Emitter(emitter *AbstractMesh) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(emitter.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) Emitter() *AbstractMesh {
+	retVal := i.p.Get("emitter")
+	return AbstractMeshFromJSObject(retVal, i.ctx)
 }
 
 // SetEmitter sets the Emitter property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#emitter
 func (i *IParticleSystem) SetEmitter(emitter *AbstractMesh) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(emitter.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("emitter", emitter.JSObject())
+	return i
 }
 
 // EndSpriteCellID returns the EndSpriteCellID property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#endspritecellid
-func (i *IParticleSystem) EndSpriteCellID(endSpriteCellID float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(endSpriteCellID)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) EndSpriteCellID() float64 {
+	retVal := i.p.Get("endSpriteCellID")
+	return retVal.Float()
 }
 
 // SetEndSpriteCellID sets the EndSpriteCellID property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#endspritecellid
 func (i *IParticleSystem) SetEndSpriteCellID(endSpriteCellID float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(endSpriteCellID)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("endSpriteCellID", endSpriteCellID)
+	return i
 }
 
 // Gravity returns the Gravity property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#gravity
-func (i *IParticleSystem) Gravity(gravity *Vector3) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(gravity.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) Gravity() *Vector3 {
+	retVal := i.p.Get("gravity")
+	return Vector3FromJSObject(retVal, i.ctx)
 }
 
 // SetGravity sets the Gravity property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#gravity
 func (i *IParticleSystem) SetGravity(gravity *Vector3) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(gravity.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("gravity", gravity.JSObject())
+	return i
 }
 
 // Id returns the Id property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#id
-func (i *IParticleSystem) Id(id string) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(id)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) Id() string {
+	retVal := i.p.Get("id")
+	return retVal.String()
 }
 
 // SetId sets the Id property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#id
 func (i *IParticleSystem) SetId(id string) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(id)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("id", id)
+	return i
 }
 
 // IsAnimationSheetEnabled returns the IsAnimationSheetEnabled property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#isanimationsheetenabled
-func (i *IParticleSystem) IsAnimationSheetEnabled(isAnimationSheetEnabled bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(isAnimationSheetEnabled)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) IsAnimationSheetEnabled() bool {
+	retVal := i.p.Get("isAnimationSheetEnabled")
+	return retVal.Bool()
 }
 
 // SetIsAnimationSheetEnabled sets the IsAnimationSheetEnabled property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#isanimationsheetenabled
 func (i *IParticleSystem) SetIsAnimationSheetEnabled(isAnimationSheetEnabled bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(isAnimationSheetEnabled)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("isAnimationSheetEnabled", isAnimationSheetEnabled)
+	return i
 }
 
 // IsBillboardBased returns the IsBillboardBased property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#isbillboardbased
-func (i *IParticleSystem) IsBillboardBased(isBillboardBased bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(isBillboardBased)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) IsBillboardBased() bool {
+	retVal := i.p.Get("isBillboardBased")
+	return retVal.Bool()
 }
 
 // SetIsBillboardBased sets the IsBillboardBased property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#isbillboardbased
 func (i *IParticleSystem) SetIsBillboardBased(isBillboardBased bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(isBillboardBased)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("isBillboardBased", isBillboardBased)
+	return i
 }
 
 // LayerMask returns the LayerMask property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#layermask
-func (i *IParticleSystem) LayerMask(layerMask float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(layerMask)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) LayerMask() float64 {
+	retVal := i.p.Get("layerMask")
+	return retVal.Float()
 }
 
 // SetLayerMask sets the LayerMask property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#layermask
 func (i *IParticleSystem) SetLayerMask(layerMask float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(layerMask)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("layerMask", layerMask)
+	return i
 }
 
 // LimitVelocityDamping returns the LimitVelocityDamping property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#limitvelocitydamping
-func (i *IParticleSystem) LimitVelocityDamping(limitVelocityDamping float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(limitVelocityDamping)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) LimitVelocityDamping() float64 {
+	retVal := i.p.Get("limitVelocityDamping")
+	return retVal.Float()
 }
 
 // SetLimitVelocityDamping sets the LimitVelocityDamping property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#limitvelocitydamping
 func (i *IParticleSystem) SetLimitVelocityDamping(limitVelocityDamping float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(limitVelocityDamping)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("limitVelocityDamping", limitVelocityDamping)
+	return i
 }
 
 // MaxAngularSpeed returns the MaxAngularSpeed property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxangularspeed
-func (i *IParticleSystem) MaxAngularSpeed(maxAngularSpeed float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxAngularSpeed)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MaxAngularSpeed() float64 {
+	retVal := i.p.Get("maxAngularSpeed")
+	return retVal.Float()
 }
 
 // SetMaxAngularSpeed sets the MaxAngularSpeed property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxangularspeed
 func (i *IParticleSystem) SetMaxAngularSpeed(maxAngularSpeed float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxAngularSpeed)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("maxAngularSpeed", maxAngularSpeed)
+	return i
 }
 
 // MaxEmitPower returns the MaxEmitPower property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxemitpower
-func (i *IParticleSystem) MaxEmitPower(maxEmitPower float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxEmitPower)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MaxEmitPower() float64 {
+	retVal := i.p.Get("maxEmitPower")
+	return retVal.Float()
 }
 
 // SetMaxEmitPower sets the MaxEmitPower property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxemitpower
 func (i *IParticleSystem) SetMaxEmitPower(maxEmitPower float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxEmitPower)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("maxEmitPower", maxEmitPower)
+	return i
 }
 
 // MaxInitialRotation returns the MaxInitialRotation property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxinitialrotation
-func (i *IParticleSystem) MaxInitialRotation(maxInitialRotation float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxInitialRotation)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MaxInitialRotation() float64 {
+	retVal := i.p.Get("maxInitialRotation")
+	return retVal.Float()
 }
 
 // SetMaxInitialRotation sets the MaxInitialRotation property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxinitialrotation
 func (i *IParticleSystem) SetMaxInitialRotation(maxInitialRotation float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxInitialRotation)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("maxInitialRotation", maxInitialRotation)
+	return i
 }
 
 // MaxLifeTime returns the MaxLifeTime property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxlifetime
-func (i *IParticleSystem) MaxLifeTime(maxLifeTime float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxLifeTime)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MaxLifeTime() float64 {
+	retVal := i.p.Get("maxLifeTime")
+	return retVal.Float()
 }
 
 // SetMaxLifeTime sets the MaxLifeTime property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxlifetime
 func (i *IParticleSystem) SetMaxLifeTime(maxLifeTime float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxLifeTime)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("maxLifeTime", maxLifeTime)
+	return i
 }
 
 // MaxScaleX returns the MaxScaleX property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxscalex
-func (i *IParticleSystem) MaxScaleX(maxScaleX float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxScaleX)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MaxScaleX() float64 {
+	retVal := i.p.Get("maxScaleX")
+	return retVal.Float()
 }
 
 // SetMaxScaleX sets the MaxScaleX property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxscalex
 func (i *IParticleSystem) SetMaxScaleX(maxScaleX float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxScaleX)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("maxScaleX", maxScaleX)
+	return i
 }
 
 // MaxScaleY returns the MaxScaleY property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxscaley
-func (i *IParticleSystem) MaxScaleY(maxScaleY float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxScaleY)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MaxScaleY() float64 {
+	retVal := i.p.Get("maxScaleY")
+	return retVal.Float()
 }
 
 // SetMaxScaleY sets the MaxScaleY property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxscaley
 func (i *IParticleSystem) SetMaxScaleY(maxScaleY float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxScaleY)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("maxScaleY", maxScaleY)
+	return i
 }
 
 // MaxSize returns the MaxSize property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxsize
-func (i *IParticleSystem) MaxSize(maxSize float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxSize)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MaxSize() float64 {
+	retVal := i.p.Get("maxSize")
+	return retVal.Float()
 }
 
 // SetMaxSize sets the MaxSize property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#maxsize
 func (i *IParticleSystem) SetMaxSize(maxSize float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(maxSize)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("maxSize", maxSize)
+	return i
 }
 
 // MinAngularSpeed returns the MinAngularSpeed property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minangularspeed
-func (i *IParticleSystem) MinAngularSpeed(minAngularSpeed float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minAngularSpeed)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MinAngularSpeed() float64 {
+	retVal := i.p.Get("minAngularSpeed")
+	return retVal.Float()
 }
 
 // SetMinAngularSpeed sets the MinAngularSpeed property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minangularspeed
 func (i *IParticleSystem) SetMinAngularSpeed(minAngularSpeed float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minAngularSpeed)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("minAngularSpeed", minAngularSpeed)
+	return i
 }
 
 // MinEmitPower returns the MinEmitPower property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minemitpower
-func (i *IParticleSystem) MinEmitPower(minEmitPower float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minEmitPower)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MinEmitPower() float64 {
+	retVal := i.p.Get("minEmitPower")
+	return retVal.Float()
 }
 
 // SetMinEmitPower sets the MinEmitPower property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minemitpower
 func (i *IParticleSystem) SetMinEmitPower(minEmitPower float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minEmitPower)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("minEmitPower", minEmitPower)
+	return i
 }
 
 // MinInitialRotation returns the MinInitialRotation property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#mininitialrotation
-func (i *IParticleSystem) MinInitialRotation(minInitialRotation float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minInitialRotation)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MinInitialRotation() float64 {
+	retVal := i.p.Get("minInitialRotation")
+	return retVal.Float()
 }
 
 // SetMinInitialRotation sets the MinInitialRotation property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#mininitialrotation
 func (i *IParticleSystem) SetMinInitialRotation(minInitialRotation float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minInitialRotation)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("minInitialRotation", minInitialRotation)
+	return i
 }
 
 // MinLifeTime returns the MinLifeTime property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minlifetime
-func (i *IParticleSystem) MinLifeTime(minLifeTime float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minLifeTime)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MinLifeTime() float64 {
+	retVal := i.p.Get("minLifeTime")
+	return retVal.Float()
 }
 
 // SetMinLifeTime sets the MinLifeTime property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minlifetime
 func (i *IParticleSystem) SetMinLifeTime(minLifeTime float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minLifeTime)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("minLifeTime", minLifeTime)
+	return i
 }
 
 // MinScaleX returns the MinScaleX property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minscalex
-func (i *IParticleSystem) MinScaleX(minScaleX float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minScaleX)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MinScaleX() float64 {
+	retVal := i.p.Get("minScaleX")
+	return retVal.Float()
 }
 
 // SetMinScaleX sets the MinScaleX property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minscalex
 func (i *IParticleSystem) SetMinScaleX(minScaleX float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minScaleX)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("minScaleX", minScaleX)
+	return i
 }
 
 // MinScaleY returns the MinScaleY property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minscaley
-func (i *IParticleSystem) MinScaleY(minScaleY float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minScaleY)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MinScaleY() float64 {
+	retVal := i.p.Get("minScaleY")
+	return retVal.Float()
 }
 
 // SetMinScaleY sets the MinScaleY property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minscaley
 func (i *IParticleSystem) SetMinScaleY(minScaleY float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minScaleY)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("minScaleY", minScaleY)
+	return i
 }
 
 // MinSize returns the MinSize property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minsize
-func (i *IParticleSystem) MinSize(minSize float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minSize)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) MinSize() float64 {
+	retVal := i.p.Get("minSize")
+	return retVal.Float()
 }
 
 // SetMinSize sets the MinSize property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#minsize
 func (i *IParticleSystem) SetMinSize(minSize float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(minSize)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("minSize", minSize)
+	return i
 }
 
 // Name returns the Name property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#name
-func (i *IParticleSystem) Name(name string) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(name)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#name
 func (i *IParticleSystem) SetName(name string) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(name)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
 
 // NoiseStrength returns the NoiseStrength property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#noisestrength
-func (i *IParticleSystem) NoiseStrength(noiseStrength *Vector3) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(noiseStrength.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) NoiseStrength() *Vector3 {
+	retVal := i.p.Get("noiseStrength")
+	return Vector3FromJSObject(retVal, i.ctx)
 }
 
 // SetNoiseStrength sets the NoiseStrength property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#noisestrength
 func (i *IParticleSystem) SetNoiseStrength(noiseStrength *Vector3) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(noiseStrength.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("noiseStrength", noiseStrength.JSObject())
+	return i
 }
 
 // NoiseTexture returns the NoiseTexture property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#noisetexture
-func (i *IParticleSystem) NoiseTexture(noiseTexture *BaseTexture) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(noiseTexture.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) NoiseTexture() *BaseTexture {
+	retVal := i.p.Get("noiseTexture")
+	return BaseTextureFromJSObject(retVal, i.ctx)
 }
 
 // SetNoiseTexture sets the NoiseTexture property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#noisetexture
 func (i *IParticleSystem) SetNoiseTexture(noiseTexture *BaseTexture) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(noiseTexture.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("noiseTexture", noiseTexture.JSObject())
+	return i
 }
 
 // ParticleEmitterType returns the ParticleEmitterType property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#particleemittertype
-func (i *IParticleSystem) ParticleEmitterType(particleEmitterType *IParticleEmitterType) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(particleEmitterType.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) ParticleEmitterType() *IParticleEmitterType {
+	retVal := i.p.Get("particleEmitterType")
+	return IParticleEmitterTypeFromJSObject(retVal, i.ctx)
 }
 
 // SetParticleEmitterType sets the ParticleEmitterType property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#particleemittertype
 func (i *IParticleSystem) SetParticleEmitterType(particleEmitterType *IParticleEmitterType) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(particleEmitterType.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("particleEmitterType", particleEmitterType.JSObject())
+	return i
 }
 
 // ParticleTexture returns the ParticleTexture property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#particletexture
-func (i *IParticleSystem) ParticleTexture(particleTexture *Texture) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(particleTexture.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) ParticleTexture() *Texture {
+	retVal := i.p.Get("particleTexture")
+	return TextureFromJSObject(retVal, i.ctx)
 }
 
 // SetParticleTexture sets the ParticleTexture property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#particletexture
 func (i *IParticleSystem) SetParticleTexture(particleTexture *Texture) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(particleTexture.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("particleTexture", particleTexture.JSObject())
+	return i
 }
 
 // PreWarmCycles returns the PreWarmCycles property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#prewarmcycles
-func (i *IParticleSystem) PreWarmCycles(preWarmCycles float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(preWarmCycles)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) PreWarmCycles() float64 {
+	retVal := i.p.Get("preWarmCycles")
+	return retVal.Float()
 }
 
 // SetPreWarmCycles sets the PreWarmCycles property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#prewarmcycles
 func (i *IParticleSystem) SetPreWarmCycles(preWarmCycles float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(preWarmCycles)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("preWarmCycles", preWarmCycles)
+	return i
 }
 
 // PreWarmStepOffset returns the PreWarmStepOffset property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#prewarmstepoffset
-func (i *IParticleSystem) PreWarmStepOffset(preWarmStepOffset float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(preWarmStepOffset)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) PreWarmStepOffset() float64 {
+	retVal := i.p.Get("preWarmStepOffset")
+	return retVal.Float()
 }
 
 // SetPreWarmStepOffset sets the PreWarmStepOffset property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#prewarmstepoffset
 func (i *IParticleSystem) SetPreWarmStepOffset(preWarmStepOffset float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(preWarmStepOffset)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("preWarmStepOffset", preWarmStepOffset)
+	return i
 }
 
 // RenderingGroupId returns the RenderingGroupId property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#renderinggroupid
-func (i *IParticleSystem) RenderingGroupId(renderingGroupId float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(renderingGroupId)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) RenderingGroupId() float64 {
+	retVal := i.p.Get("renderingGroupId")
+	return retVal.Float()
 }
 
 // SetRenderingGroupId sets the RenderingGroupId property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#renderinggroupid
 func (i *IParticleSystem) SetRenderingGroupId(renderingGroupId float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(renderingGroupId)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("renderingGroupId", renderingGroupId)
+	return i
 }
 
 // SpriteCellChangeSpeed returns the SpriteCellChangeSpeed property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#spritecellchangespeed
-func (i *IParticleSystem) SpriteCellChangeSpeed(spriteCellChangeSpeed float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(spriteCellChangeSpeed)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) SpriteCellChangeSpeed() float64 {
+	retVal := i.p.Get("spriteCellChangeSpeed")
+	return retVal.Float()
 }
 
 // SetSpriteCellChangeSpeed sets the SpriteCellChangeSpeed property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#spritecellchangespeed
 func (i *IParticleSystem) SetSpriteCellChangeSpeed(spriteCellChangeSpeed float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(spriteCellChangeSpeed)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("spriteCellChangeSpeed", spriteCellChangeSpeed)
+	return i
 }
 
 // SpriteCellHeight returns the SpriteCellHeight property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#spritecellheight
-func (i *IParticleSystem) SpriteCellHeight(spriteCellHeight float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(spriteCellHeight)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) SpriteCellHeight() float64 {
+	retVal := i.p.Get("spriteCellHeight")
+	return retVal.Float()
 }
 
 // SetSpriteCellHeight sets the SpriteCellHeight property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#spritecellheight
 func (i *IParticleSystem) SetSpriteCellHeight(spriteCellHeight float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(spriteCellHeight)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("spriteCellHeight", spriteCellHeight)
+	return i
 }
 
 // SpriteCellWidth returns the SpriteCellWidth property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#spritecellwidth
-func (i *IParticleSystem) SpriteCellWidth(spriteCellWidth float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(spriteCellWidth)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) SpriteCellWidth() float64 {
+	retVal := i.p.Get("spriteCellWidth")
+	return retVal.Float()
 }
 
 // SetSpriteCellWidth sets the SpriteCellWidth property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#spritecellwidth
 func (i *IParticleSystem) SetSpriteCellWidth(spriteCellWidth float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(spriteCellWidth)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("spriteCellWidth", spriteCellWidth)
+	return i
 }
 
 // SpriteRandomStartCell returns the SpriteRandomStartCell property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#spriterandomstartcell
-func (i *IParticleSystem) SpriteRandomStartCell(spriteRandomStartCell bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(spriteRandomStartCell)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) SpriteRandomStartCell() bool {
+	retVal := i.p.Get("spriteRandomStartCell")
+	return retVal.Bool()
 }
 
 // SetSpriteRandomStartCell sets the SpriteRandomStartCell property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#spriterandomstartcell
 func (i *IParticleSystem) SetSpriteRandomStartCell(spriteRandomStartCell bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(spriteRandomStartCell)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("spriteRandomStartCell", spriteRandomStartCell)
+	return i
 }
 
 // StartDelay returns the StartDelay property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#startdelay
-func (i *IParticleSystem) StartDelay(startDelay float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(startDelay)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) StartDelay() float64 {
+	retVal := i.p.Get("startDelay")
+	return retVal.Float()
 }
 
 // SetStartDelay sets the StartDelay property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#startdelay
 func (i *IParticleSystem) SetStartDelay(startDelay float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(startDelay)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("startDelay", startDelay)
+	return i
 }
 
 // StartSpriteCellID returns the StartSpriteCellID property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#startspritecellid
-func (i *IParticleSystem) StartSpriteCellID(startSpriteCellID float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(startSpriteCellID)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) StartSpriteCellID() float64 {
+	retVal := i.p.Get("startSpriteCellID")
+	return retVal.Float()
 }
 
 // SetStartSpriteCellID sets the StartSpriteCellID property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#startspritecellid
 func (i *IParticleSystem) SetStartSpriteCellID(startSpriteCellID float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(startSpriteCellID)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("startSpriteCellID", startSpriteCellID)
+	return i
 }
 
 // TargetStopDuration returns the TargetStopDuration property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#targetstopduration
-func (i *IParticleSystem) TargetStopDuration(targetStopDuration float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(targetStopDuration)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) TargetStopDuration() float64 {
+	retVal := i.p.Get("targetStopDuration")
+	return retVal.Float()
 }
 
 // SetTargetStopDuration sets the TargetStopDuration property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#targetstopduration
 func (i *IParticleSystem) SetTargetStopDuration(targetStopDuration float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(targetStopDuration)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("targetStopDuration", targetStopDuration)
+	return i
 }
 
 // TranslationPivot returns the TranslationPivot property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#translationpivot
-func (i *IParticleSystem) TranslationPivot(translationPivot *Vector2) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(translationPivot.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) TranslationPivot() *Vector2 {
+	retVal := i.p.Get("translationPivot")
+	return Vector2FromJSObject(retVal, i.ctx)
 }
 
 // SetTranslationPivot sets the TranslationPivot property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#translationpivot
 func (i *IParticleSystem) SetTranslationPivot(translationPivot *Vector2) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(translationPivot.JSObject())
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("translationPivot", translationPivot.JSObject())
+	return i
 }
 
 // UpdateSpeed returns the UpdateSpeed property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#updatespeed
-func (i *IParticleSystem) UpdateSpeed(updateSpeed float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(updateSpeed)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) UpdateSpeed() float64 {
+	retVal := i.p.Get("updateSpeed")
+	return retVal.Float()
 }
 
 // SetUpdateSpeed sets the UpdateSpeed property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#updatespeed
 func (i *IParticleSystem) SetUpdateSpeed(updateSpeed float64) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(updateSpeed)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("updateSpeed", updateSpeed)
+	return i
 }
 
 // UseRampGradients returns the UseRampGradients property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#userampgradients
-func (i *IParticleSystem) UseRampGradients(useRampGradients bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(useRampGradients)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+func (i *IParticleSystem) UseRampGradients() bool {
+	retVal := i.p.Get("useRampGradients")
+	return retVal.Bool()
 }
 
 // SetUseRampGradients sets the UseRampGradients property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#userampgradients
 func (i *IParticleSystem) SetUseRampGradients(useRampGradients bool) *IParticleSystem {
-	p := ba.ctx.Get("IParticleSystem").New(useRampGradients)
-	return IParticleSystemFromJSObject(p, ba.ctx)
+	i.p.Set("useRampGradients", useRampGradients)
+	return i
 }
-
-*/

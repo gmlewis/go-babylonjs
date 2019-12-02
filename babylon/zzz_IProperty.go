@@ -36,38 +36,34 @@ func IPropertyArrayToJSArray(array []*IProperty) []interface{} {
 	return result
 }
 
-/*
-
 // Extensions returns the Extensions property of class IProperty.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iproperty#extensions
-func (i *IProperty) Extensions(extensions js.Value) *IProperty {
-	p := ba.ctx.Get("IProperty").New(extensions)
-	return IPropertyFromJSObject(p, ba.ctx)
+func (i *IProperty) Extensions() js.Value {
+	retVal := i.p.Get("extensions")
+	return retVal
 }
 
 // SetExtensions sets the Extensions property of class IProperty.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iproperty#extensions
 func (i *IProperty) SetExtensions(extensions js.Value) *IProperty {
-	p := ba.ctx.Get("IProperty").New(extensions)
-	return IPropertyFromJSObject(p, ba.ctx)
+	i.p.Set("extensions", extensions)
+	return i
 }
 
 // Extras returns the Extras property of class IProperty.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iproperty#extras
-func (i *IProperty) Extras(extras interface{}) *IProperty {
-	p := ba.ctx.Get("IProperty").New(extras)
-	return IPropertyFromJSObject(p, ba.ctx)
+func (i *IProperty) Extras() interface{} {
+	retVal := i.p.Get("extras")
+	return retVal
 }
 
 // SetExtras sets the Extras property of class IProperty.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iproperty#extras
 func (i *IProperty) SetExtras(extras interface{}) *IProperty {
-	p := ba.ctx.Get("IProperty").New(extras)
-	return IPropertyFromJSObject(p, ba.ctx)
+	i.p.Set("extras", extras)
+	return i
 }
-
-*/

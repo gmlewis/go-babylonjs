@@ -165,38 +165,34 @@ func (s *ShadowOnlyMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // ActiveLight returns the ActiveLight property of class ShadowOnlyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#activelight
-func (s *ShadowOnlyMaterial) ActiveLight(activeLight *IShadowLight) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(activeLight.JSObject())
-	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
+func (s *ShadowOnlyMaterial) ActiveLight() *IShadowLight {
+	retVal := s.p.Get("activeLight")
+	return IShadowLightFromJSObject(retVal, s.ctx)
 }
 
 // SetActiveLight sets the ActiveLight property of class ShadowOnlyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#activelight
 func (s *ShadowOnlyMaterial) SetActiveLight(activeLight *IShadowLight) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(activeLight.JSObject())
-	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("activeLight", activeLight.JSObject())
+	return s
 }
 
 // ShadowColor returns the ShadowColor property of class ShadowOnlyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#shadowcolor
-func (s *ShadowOnlyMaterial) ShadowColor(shadowColor *Color3) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(shadowColor.JSObject())
-	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
+func (s *ShadowOnlyMaterial) ShadowColor() *Color3 {
+	retVal := s.p.Get("shadowColor")
+	return Color3FromJSObject(retVal, s.ctx)
 }
 
 // SetShadowColor sets the ShadowColor property of class ShadowOnlyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#shadowcolor
 func (s *ShadowOnlyMaterial) SetShadowColor(shadowColor *Color3) *ShadowOnlyMaterial {
-	p := ba.ctx.Get("ShadowOnlyMaterial").New(shadowColor.JSObject())
-	return ShadowOnlyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("shadowColor", shadowColor.JSObject())
+	return s
 }
-
-*/

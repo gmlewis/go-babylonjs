@@ -84,7 +84,3 @@ func (s *StopSoundAction) Serialize(parent interface{}) interface{} {
 	retVal := s.p.Call("serialize", args...)
 	return retVal
 }
-
-/*
-
- */

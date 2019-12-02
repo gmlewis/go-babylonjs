@@ -61,38 +61,34 @@ func (ba *Babylon) NewEllipse(opts *NewEllipseOpts) *Ellipse {
 	return EllipseFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Name returns the Name property of class Ellipse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ellipse#name
-func (e *Ellipse) Name(name string) *Ellipse {
-	p := ba.ctx.Get("Ellipse").New(name)
-	return EllipseFromJSObject(p, ba.ctx)
+func (e *Ellipse) Name() string {
+	retVal := e.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Ellipse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ellipse#name
 func (e *Ellipse) SetName(name string) *Ellipse {
-	p := ba.ctx.Get("Ellipse").New(name)
-	return EllipseFromJSObject(p, ba.ctx)
+	e.p.Set("name", name)
+	return e
 }
 
 // Thickness returns the Thickness property of class Ellipse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ellipse#thickness
-func (e *Ellipse) Thickness(thickness float64) *Ellipse {
-	p := ba.ctx.Get("Ellipse").New(thickness)
-	return EllipseFromJSObject(p, ba.ctx)
+func (e *Ellipse) Thickness() float64 {
+	retVal := e.p.Get("thickness")
+	return retVal.Float()
 }
 
 // SetThickness sets the Thickness property of class Ellipse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ellipse#thickness
 func (e *Ellipse) SetThickness(thickness float64) *Ellipse {
-	p := ba.ctx.Get("Ellipse").New(thickness)
-	return EllipseFromJSObject(p, ba.ctx)
+	e.p.Set("thickness", thickness)
+	return e
 }
-
-*/

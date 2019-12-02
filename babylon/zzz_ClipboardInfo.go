@@ -63,38 +63,34 @@ func (c *ClipboardInfo) GetTypeFromCharacter(keyCode float64) float64 {
 	return retVal.Float()
 }
 
-/*
-
 // Event returns the Event property of class ClipboardInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardinfo#event
-func (c *ClipboardInfo) Event(event js.Value) *ClipboardInfo {
-	p := ba.ctx.Get("ClipboardInfo").New(event)
-	return ClipboardInfoFromJSObject(p, ba.ctx)
+func (c *ClipboardInfo) Event() js.Value {
+	retVal := c.p.Get("event")
+	return retVal
 }
 
 // SetEvent sets the Event property of class ClipboardInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardinfo#event
 func (c *ClipboardInfo) SetEvent(event js.Value) *ClipboardInfo {
-	p := ba.ctx.Get("ClipboardInfo").New(event)
-	return ClipboardInfoFromJSObject(p, ba.ctx)
+	c.p.Set("event", event)
+	return c
 }
 
 // Type returns the Type property of class ClipboardInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardinfo#type
-func (c *ClipboardInfo) Type(jsType float64) *ClipboardInfo {
-	p := ba.ctx.Get("ClipboardInfo").New(jsType)
-	return ClipboardInfoFromJSObject(p, ba.ctx)
+func (c *ClipboardInfo) Type() float64 {
+	retVal := c.p.Get("type")
+	return retVal.Float()
 }
 
 // SetType sets the Type property of class ClipboardInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardinfo#type
 func (c *ClipboardInfo) SetType(jsType float64) *ClipboardInfo {
-	p := ba.ctx.Get("ClipboardInfo").New(jsType)
-	return ClipboardInfoFromJSObject(p, ba.ctx)
+	c.p.Set("type", jsType)
+	return c
 }
-
-*/

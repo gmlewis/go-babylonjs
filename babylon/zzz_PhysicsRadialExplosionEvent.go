@@ -108,7 +108,3 @@ func (p *PhysicsRadialExplosionEvent) TriggerAffectedImpostorsCallback(affectedI
 
 	p.p.Call("triggerAffectedImpostorsCallback", args...)
 }
-
-/*
-
- */

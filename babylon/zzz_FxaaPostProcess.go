@@ -89,7 +89,3 @@ func (ba *Babylon) NewFxaaPostProcess(name string, options float64, opts *NewFxa
 	p := ba.ctx.Get("FxaaPostProcess").New(args...)
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

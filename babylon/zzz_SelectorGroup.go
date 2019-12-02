@@ -62,70 +62,66 @@ func (s *SelectorGroup) RemoveSelector(selectorNb float64) {
 	s.p.Call("removeSelector", args...)
 }
 
-/*
-
 // GroupPanel returns the GroupPanel property of class SelectorGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup#grouppanel
-func (s *SelectorGroup) GroupPanel(groupPanel *StackPanel) *SelectorGroup {
-	p := ba.ctx.Get("SelectorGroup").New(groupPanel.JSObject())
-	return SelectorGroupFromJSObject(p, ba.ctx)
+func (s *SelectorGroup) GroupPanel() *StackPanel {
+	retVal := s.p.Get("groupPanel")
+	return StackPanelFromJSObject(retVal, s.ctx)
 }
 
 // SetGroupPanel sets the GroupPanel property of class SelectorGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup#grouppanel
 func (s *SelectorGroup) SetGroupPanel(groupPanel *StackPanel) *SelectorGroup {
-	p := ba.ctx.Get("SelectorGroup").New(groupPanel.JSObject())
-	return SelectorGroupFromJSObject(p, ba.ctx)
+	s.p.Set("groupPanel", groupPanel.JSObject())
+	return s
 }
 
 // Header returns the Header property of class SelectorGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup#header
-func (s *SelectorGroup) Header(header string) *SelectorGroup {
-	p := ba.ctx.Get("SelectorGroup").New(header)
-	return SelectorGroupFromJSObject(p, ba.ctx)
+func (s *SelectorGroup) Header() string {
+	retVal := s.p.Get("header")
+	return retVal.String()
 }
 
 // SetHeader sets the Header property of class SelectorGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup#header
 func (s *SelectorGroup) SetHeader(header string) *SelectorGroup {
-	p := ba.ctx.Get("SelectorGroup").New(header)
-	return SelectorGroupFromJSObject(p, ba.ctx)
+	s.p.Set("header", header)
+	return s
 }
 
 // Name returns the Name property of class SelectorGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup#name
-func (s *SelectorGroup) Name(name string) *SelectorGroup {
-	p := ba.ctx.Get("SelectorGroup").New(name)
-	return SelectorGroupFromJSObject(p, ba.ctx)
+func (s *SelectorGroup) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class SelectorGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup#name
 func (s *SelectorGroup) SetName(name string) *SelectorGroup {
-	p := ba.ctx.Get("SelectorGroup").New(name)
-	return SelectorGroupFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
 
 // Selectors returns the Selectors property of class SelectorGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup#selectors
-func (s *SelectorGroup) Selectors(selectors *StackPanel) *SelectorGroup {
-	p := ba.ctx.Get("SelectorGroup").New(selectors.JSObject())
-	return SelectorGroupFromJSObject(p, ba.ctx)
+func (s *SelectorGroup) Selectors() *StackPanel {
+	retVal := s.p.Get("selectors")
+	return StackPanelFromJSObject(retVal, s.ctx)
 }
 
 // SetSelectors sets the Selectors property of class SelectorGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup#selectors
 func (s *SelectorGroup) SetSelectors(selectors *StackPanel) *SelectorGroup {
-	p := ba.ctx.Get("SelectorGroup").New(selectors.JSObject())
-	return SelectorGroupFromJSObject(p, ba.ctx)
+	s.p.Set("selectors", selectors.JSObject())
+	return s
 }
-
-*/

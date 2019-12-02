@@ -80,22 +80,18 @@ func (ba *Babylon) NewSpritePackedManager(name string, imgUrl string, capacity f
 	return SpritePackedManagerFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Name returns the Name property of class SpritePackedManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#name
-func (s *SpritePackedManager) Name(name string) *SpritePackedManager {
-	p := ba.ctx.Get("SpritePackedManager").New(name)
-	return SpritePackedManagerFromJSObject(p, ba.ctx)
+func (s *SpritePackedManager) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class SpritePackedManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#name
 func (s *SpritePackedManager) SetName(name string) *SpritePackedManager {
-	p := ba.ctx.Get("SpritePackedManager").New(name)
-	return SpritePackedManagerFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
-
-*/

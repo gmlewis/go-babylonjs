@@ -50,102 +50,98 @@ func (p *PoseControlled) UpdateFromDevice(poseData js.Value) {
 	p.p.Call("updateFromDevice", args...)
 }
 
-/*
-
 // DevicePosition returns the DevicePosition property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#deviceposition
-func (p *PoseControlled) DevicePosition(devicePosition *Vector3) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(devicePosition.JSObject())
-	return PoseControlledFromJSObject(p, ba.ctx)
+func (p *PoseControlled) DevicePosition() *Vector3 {
+	retVal := p.p.Get("devicePosition")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetDevicePosition sets the DevicePosition property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#deviceposition
 func (p *PoseControlled) SetDevicePosition(devicePosition *Vector3) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(devicePosition.JSObject())
-	return PoseControlledFromJSObject(p, ba.ctx)
+	p.p.Set("devicePosition", devicePosition.JSObject())
+	return p
 }
 
 // DeviceRotationQuaternion returns the DeviceRotationQuaternion property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#devicerotationquaternion
-func (p *PoseControlled) DeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(deviceRotationQuaternion.JSObject())
-	return PoseControlledFromJSObject(p, ba.ctx)
+func (p *PoseControlled) DeviceRotationQuaternion() *Quaternion {
+	retVal := p.p.Get("deviceRotationQuaternion")
+	return QuaternionFromJSObject(retVal, p.ctx)
 }
 
 // SetDeviceRotationQuaternion sets the DeviceRotationQuaternion property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#devicerotationquaternion
 func (p *PoseControlled) SetDeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(deviceRotationQuaternion.JSObject())
-	return PoseControlledFromJSObject(p, ba.ctx)
+	p.p.Set("deviceRotationQuaternion", deviceRotationQuaternion.JSObject())
+	return p
 }
 
 // DeviceScaleFactor returns the DeviceScaleFactor property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#devicescalefactor
-func (p *PoseControlled) DeviceScaleFactor(deviceScaleFactor float64) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(deviceScaleFactor)
-	return PoseControlledFromJSObject(p, ba.ctx)
+func (p *PoseControlled) DeviceScaleFactor() float64 {
+	retVal := p.p.Get("deviceScaleFactor")
+	return retVal.Float()
 }
 
 // SetDeviceScaleFactor sets the DeviceScaleFactor property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#devicescalefactor
 func (p *PoseControlled) SetDeviceScaleFactor(deviceScaleFactor float64) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(deviceScaleFactor)
-	return PoseControlledFromJSObject(p, ba.ctx)
+	p.p.Set("deviceScaleFactor", deviceScaleFactor)
+	return p
 }
 
 // Position returns the Position property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#position
-func (p *PoseControlled) Position(position *Vector3) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(position.JSObject())
-	return PoseControlledFromJSObject(p, ba.ctx)
+func (p *PoseControlled) Position() *Vector3 {
+	retVal := p.p.Get("position")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetPosition sets the Position property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#position
 func (p *PoseControlled) SetPosition(position *Vector3) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(position.JSObject())
-	return PoseControlledFromJSObject(p, ba.ctx)
+	p.p.Set("position", position.JSObject())
+	return p
 }
 
 // RawPose returns the RawPose property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#rawpose
-func (p *PoseControlled) RawPose(rawPose js.Value) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(rawPose)
-	return PoseControlledFromJSObject(p, ba.ctx)
+func (p *PoseControlled) RawPose() js.Value {
+	retVal := p.p.Get("rawPose")
+	return retVal
 }
 
 // SetRawPose sets the RawPose property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#rawpose
 func (p *PoseControlled) SetRawPose(rawPose js.Value) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(rawPose)
-	return PoseControlledFromJSObject(p, ba.ctx)
+	p.p.Set("rawPose", rawPose)
+	return p
 }
 
 // RotationQuaternion returns the RotationQuaternion property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#rotationquaternion
-func (p *PoseControlled) RotationQuaternion(rotationQuaternion *Quaternion) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(rotationQuaternion.JSObject())
-	return PoseControlledFromJSObject(p, ba.ctx)
+func (p *PoseControlled) RotationQuaternion() *Quaternion {
+	retVal := p.p.Get("rotationQuaternion")
+	return QuaternionFromJSObject(retVal, p.ctx)
 }
 
 // SetRotationQuaternion sets the RotationQuaternion property of class PoseControlled.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posecontrolled#rotationquaternion
 func (p *PoseControlled) SetRotationQuaternion(rotationQuaternion *Quaternion) *PoseControlled {
-	p := ba.ctx.Get("PoseControlled").New(rotationQuaternion.JSObject())
-	return PoseControlledFromJSObject(p, ba.ctx)
+	p.p.Set("rotationQuaternion", rotationQuaternion.JSObject())
+	return p
 }
-
-*/

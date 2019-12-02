@@ -38,70 +38,66 @@ func SpringJointDataArrayToJSArray(array []*SpringJointData) []interface{} {
 	return result
 }
 
-/*
-
 // Damping returns the Damping property of class SpringJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#damping
-func (s *SpringJointData) Damping(damping float64) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(damping)
-	return SpringJointDataFromJSObject(p, ba.ctx)
+func (s *SpringJointData) Damping() float64 {
+	retVal := s.p.Get("damping")
+	return retVal.Float()
 }
 
 // SetDamping sets the Damping property of class SpringJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#damping
 func (s *SpringJointData) SetDamping(damping float64) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(damping)
-	return SpringJointDataFromJSObject(p, ba.ctx)
+	s.p.Set("damping", damping)
+	return s
 }
 
 // ForceApplicationCallback returns the ForceApplicationCallback property of class SpringJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#forceapplicationcallback
-func (s *SpringJointData) ForceApplicationCallback(forceApplicationCallback func()) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {forceApplicationCallback(); return nil}))
-	return SpringJointDataFromJSObject(p, ba.ctx)
+func (s *SpringJointData) ForceApplicationCallback() js.Value {
+	retVal := s.p.Get("forceApplicationCallback")
+	return retVal
 }
 
 // SetForceApplicationCallback sets the ForceApplicationCallback property of class SpringJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#forceapplicationcallback
 func (s *SpringJointData) SetForceApplicationCallback(forceApplicationCallback func()) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {forceApplicationCallback(); return nil}))
-	return SpringJointDataFromJSObject(p, ba.ctx)
+	s.p.Set("forceApplicationCallback", js.FuncOf(func(this js.Value, args []js.Value) interface{} { forceApplicationCallback(); return nil }))
+	return s
 }
 
 // Length returns the Length property of class SpringJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#length
-func (s *SpringJointData) Length(length float64) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(length)
-	return SpringJointDataFromJSObject(p, ba.ctx)
+func (s *SpringJointData) Length() float64 {
+	retVal := s.p.Get("length")
+	return retVal.Float()
 }
 
 // SetLength sets the Length property of class SpringJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#length
 func (s *SpringJointData) SetLength(length float64) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(length)
-	return SpringJointDataFromJSObject(p, ba.ctx)
+	s.p.Set("length", length)
+	return s
 }
 
 // Stiffness returns the Stiffness property of class SpringJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#stiffness
-func (s *SpringJointData) Stiffness(stiffness float64) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(stiffness)
-	return SpringJointDataFromJSObject(p, ba.ctx)
+func (s *SpringJointData) Stiffness() float64 {
+	retVal := s.p.Get("stiffness")
+	return retVal.Float()
 }
 
 // SetStiffness sets the Stiffness property of class SpringJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#stiffness
 func (s *SpringJointData) SetStiffness(stiffness float64) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(stiffness)
-	return SpringJointDataFromJSObject(p, ba.ctx)
+	s.p.Set("stiffness", stiffness)
+	return s
 }
-
-*/

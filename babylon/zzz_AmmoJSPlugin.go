@@ -737,70 +737,66 @@ func (a *AmmoJSPlugin) WakeUpBody(impostor *PhysicsImpostor) {
 	a.p.Call("wakeUpBody", args...)
 }
 
-/*
-
 // BjsAMMO returns the BjsAMMO property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#bjsammo
-func (a *AmmoJSPlugin) BjsAMMO(bjsAMMO interface{}) *AmmoJSPlugin {
-	p := ba.ctx.Get("AmmoJSPlugin").New(bjsAMMO)
-	return AmmoJSPluginFromJSObject(p, ba.ctx)
+func (a *AmmoJSPlugin) BjsAMMO() interface{} {
+	retVal := a.p.Get("bjsAMMO")
+	return retVal
 }
 
 // SetBjsAMMO sets the BjsAMMO property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#bjsammo
 func (a *AmmoJSPlugin) SetBjsAMMO(bjsAMMO interface{}) *AmmoJSPlugin {
-	p := ba.ctx.Get("AmmoJSPlugin").New(bjsAMMO)
-	return AmmoJSPluginFromJSObject(p, ba.ctx)
+	a.p.Set("bjsAMMO", bjsAMMO)
+	return a
 }
 
 // Name returns the Name property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#name
-func (a *AmmoJSPlugin) Name(name string) *AmmoJSPlugin {
-	p := ba.ctx.Get("AmmoJSPlugin").New(name)
-	return AmmoJSPluginFromJSObject(p, ba.ctx)
+func (a *AmmoJSPlugin) Name() string {
+	retVal := a.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#name
 func (a *AmmoJSPlugin) SetName(name string) *AmmoJSPlugin {
-	p := ba.ctx.Get("AmmoJSPlugin").New(name)
-	return AmmoJSPluginFromJSObject(p, ba.ctx)
+	a.p.Set("name", name)
+	return a
 }
 
 // OnCreateCustomShape returns the OnCreateCustomShape property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#oncreatecustomshape
-func (a *AmmoJSPlugin) OnCreateCustomShape(onCreateCustomShape func()) *AmmoJSPlugin {
-	p := ba.ctx.Get("AmmoJSPlugin").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCreateCustomShape(); return nil}))
-	return AmmoJSPluginFromJSObject(p, ba.ctx)
+func (a *AmmoJSPlugin) OnCreateCustomShape() js.Value {
+	retVal := a.p.Get("onCreateCustomShape")
+	return retVal
 }
 
 // SetOnCreateCustomShape sets the OnCreateCustomShape property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#oncreatecustomshape
 func (a *AmmoJSPlugin) SetOnCreateCustomShape(onCreateCustomShape func()) *AmmoJSPlugin {
-	p := ba.ctx.Get("AmmoJSPlugin").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCreateCustomShape(); return nil}))
-	return AmmoJSPluginFromJSObject(p, ba.ctx)
+	a.p.Set("onCreateCustomShape", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCreateCustomShape(); return nil }))
+	return a
 }
 
 // World returns the World property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#world
-func (a *AmmoJSPlugin) World(world interface{}) *AmmoJSPlugin {
-	p := ba.ctx.Get("AmmoJSPlugin").New(world)
-	return AmmoJSPluginFromJSObject(p, ba.ctx)
+func (a *AmmoJSPlugin) World() interface{} {
+	retVal := a.p.Get("world")
+	return retVal
 }
 
 // SetWorld sets the World property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#world
 func (a *AmmoJSPlugin) SetWorld(world interface{}) *AmmoJSPlugin {
-	p := ba.ctx.Get("AmmoJSPlugin").New(world)
-	return AmmoJSPluginFromJSObject(p, ba.ctx)
+	a.p.Set("world", world)
+	return a
 }
-
-*/

@@ -101,7 +101,3 @@ func (x *XmlLoader) LoadLayout(xmlFile interface{}, rootNode interface{}, callba
 
 	x.p.Call("loadLayout", args...)
 }
-
-/*
-
- */

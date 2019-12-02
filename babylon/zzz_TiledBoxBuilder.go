@@ -63,7 +63,3 @@ func (t *TiledBoxBuilder) CreateTiledBox(name string, options js.Value, opts *Ti
 	retVal := t.p.Call("CreateTiledBox", args...)
 	return MeshFromJSObject(retVal, t.ctx)
 }
-
-/*
-
- */

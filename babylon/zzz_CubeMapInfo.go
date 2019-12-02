@@ -36,166 +36,162 @@ func CubeMapInfoArrayToJSArray(array []*CubeMapInfo) []interface{} {
 	return result
 }
 
-/*
-
 // Back returns the Back property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#back
-func (c *CubeMapInfo) Back(back js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(back)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+func (c *CubeMapInfo) Back() js.Value {
+	retVal := c.p.Get("back")
+	return retVal
 }
 
 // SetBack sets the Back property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#back
 func (c *CubeMapInfo) SetBack(back js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(back)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+	c.p.Set("back", back)
+	return c
 }
 
 // Down returns the Down property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#down
-func (c *CubeMapInfo) Down(down js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(down)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+func (c *CubeMapInfo) Down() js.Value {
+	retVal := c.p.Get("down")
+	return retVal
 }
 
 // SetDown sets the Down property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#down
 func (c *CubeMapInfo) SetDown(down js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(down)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+	c.p.Set("down", down)
+	return c
 }
 
 // Format returns the Format property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#format
-func (c *CubeMapInfo) Format(format float64) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(format)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+func (c *CubeMapInfo) Format() float64 {
+	retVal := c.p.Get("format")
+	return retVal.Float()
 }
 
 // SetFormat sets the Format property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#format
 func (c *CubeMapInfo) SetFormat(format float64) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(format)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+	c.p.Set("format", format)
+	return c
 }
 
 // Front returns the Front property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#front
-func (c *CubeMapInfo) Front(front js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(front)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+func (c *CubeMapInfo) Front() js.Value {
+	retVal := c.p.Get("front")
+	return retVal
 }
 
 // SetFront sets the Front property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#front
 func (c *CubeMapInfo) SetFront(front js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(front)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+	c.p.Set("front", front)
+	return c
 }
 
 // GammaSpace returns the GammaSpace property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#gammaspace
-func (c *CubeMapInfo) GammaSpace(gammaSpace bool) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(gammaSpace)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+func (c *CubeMapInfo) GammaSpace() bool {
+	retVal := c.p.Get("gammaSpace")
+	return retVal.Bool()
 }
 
 // SetGammaSpace sets the GammaSpace property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#gammaspace
 func (c *CubeMapInfo) SetGammaSpace(gammaSpace bool) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(gammaSpace)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+	c.p.Set("gammaSpace", gammaSpace)
+	return c
 }
 
 // Left returns the Left property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#left
-func (c *CubeMapInfo) Left(left js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(left)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+func (c *CubeMapInfo) Left() js.Value {
+	retVal := c.p.Get("left")
+	return retVal
 }
 
 // SetLeft sets the Left property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#left
 func (c *CubeMapInfo) SetLeft(left js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(left)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+	c.p.Set("left", left)
+	return c
 }
 
 // Right returns the Right property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#right
-func (c *CubeMapInfo) Right(right js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(right)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+func (c *CubeMapInfo) Right() js.Value {
+	retVal := c.p.Get("right")
+	return retVal
 }
 
 // SetRight sets the Right property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#right
 func (c *CubeMapInfo) SetRight(right js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(right)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+	c.p.Set("right", right)
+	return c
 }
 
 // Size returns the Size property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#size
-func (c *CubeMapInfo) Size(size float64) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(size)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+func (c *CubeMapInfo) Size() float64 {
+	retVal := c.p.Get("size")
+	return retVal.Float()
 }
 
 // SetSize sets the Size property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#size
 func (c *CubeMapInfo) SetSize(size float64) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(size)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+	c.p.Set("size", size)
+	return c
 }
 
 // Type returns the Type property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#type
-func (c *CubeMapInfo) Type(jsType float64) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(jsType)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+func (c *CubeMapInfo) Type() float64 {
+	retVal := c.p.Get("type")
+	return retVal.Float()
 }
 
 // SetType sets the Type property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#type
 func (c *CubeMapInfo) SetType(jsType float64) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(jsType)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+	c.p.Set("type", jsType)
+	return c
 }
 
 // Up returns the Up property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#up
-func (c *CubeMapInfo) Up(up js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(up)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+func (c *CubeMapInfo) Up() js.Value {
+	retVal := c.p.Get("up")
+	return retVal
 }
 
 // SetUp sets the Up property of class CubeMapInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubemapinfo#up
 func (c *CubeMapInfo) SetUp(up js.Value) *CubeMapInfo {
-	p := ba.ctx.Get("CubeMapInfo").New(up)
-	return CubeMapInfoFromJSObject(p, ba.ctx)
+	c.p.Set("up", up)
+	return c
 }
-
-*/

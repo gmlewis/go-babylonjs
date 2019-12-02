@@ -116,22 +116,18 @@ func (p *ParticleHelper) ExportSet(systems *IParticleSystem) *ParticleSystemSet 
 	return ParticleSystemSetFromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // BaseAssetsUrl returns the BaseAssetsUrl property of class ParticleHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlehelper#baseassetsurl
-func (p *ParticleHelper) BaseAssetsUrl(BaseAssetsUrl string) *ParticleHelper {
-	p := ba.ctx.Get("ParticleHelper").New(BaseAssetsUrl)
-	return ParticleHelperFromJSObject(p, ba.ctx)
+func (p *ParticleHelper) BaseAssetsUrl() string {
+	retVal := p.p.Get("BaseAssetsUrl")
+	return retVal.String()
 }
 
 // SetBaseAssetsUrl sets the BaseAssetsUrl property of class ParticleHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlehelper#baseassetsurl
 func (p *ParticleHelper) SetBaseAssetsUrl(BaseAssetsUrl string) *ParticleHelper {
-	p := ba.ctx.Get("ParticleHelper").New(BaseAssetsUrl)
-	return ParticleHelperFromJSObject(p, ba.ctx)
+	p.p.Set("BaseAssetsUrl", BaseAssetsUrl)
+	return p
 }
-
-*/

@@ -131,54 +131,50 @@ func (d *Database) Open(successCallback func(), errorCallback func()) {
 	d.p.Call("open", args...)
 }
 
-/*
-
 // EnableSceneOffline returns the EnableSceneOffline property of class Database.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database#enablesceneoffline
-func (d *Database) EnableSceneOffline(enableSceneOffline bool) *Database {
-	p := ba.ctx.Get("Database").New(enableSceneOffline)
-	return DatabaseFromJSObject(p, ba.ctx)
+func (d *Database) EnableSceneOffline() bool {
+	retVal := d.p.Get("enableSceneOffline")
+	return retVal.Bool()
 }
 
 // SetEnableSceneOffline sets the EnableSceneOffline property of class Database.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database#enablesceneoffline
 func (d *Database) SetEnableSceneOffline(enableSceneOffline bool) *Database {
-	p := ba.ctx.Get("Database").New(enableSceneOffline)
-	return DatabaseFromJSObject(p, ba.ctx)
+	d.p.Set("enableSceneOffline", enableSceneOffline)
+	return d
 }
 
 // EnableTexturesOffline returns the EnableTexturesOffline property of class Database.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database#enabletexturesoffline
-func (d *Database) EnableTexturesOffline(enableTexturesOffline bool) *Database {
-	p := ba.ctx.Get("Database").New(enableTexturesOffline)
-	return DatabaseFromJSObject(p, ba.ctx)
+func (d *Database) EnableTexturesOffline() bool {
+	retVal := d.p.Get("enableTexturesOffline")
+	return retVal.Bool()
 }
 
 // SetEnableTexturesOffline sets the EnableTexturesOffline property of class Database.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database#enabletexturesoffline
 func (d *Database) SetEnableTexturesOffline(enableTexturesOffline bool) *Database {
-	p := ba.ctx.Get("Database").New(enableTexturesOffline)
-	return DatabaseFromJSObject(p, ba.ctx)
+	d.p.Set("enableTexturesOffline", enableTexturesOffline)
+	return d
 }
 
 // IDBStorageEnabled returns the IDBStorageEnabled property of class Database.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database#idbstorageenabled
-func (d *Database) IDBStorageEnabled(IDBStorageEnabled bool) *Database {
-	p := ba.ctx.Get("Database").New(IDBStorageEnabled)
-	return DatabaseFromJSObject(p, ba.ctx)
+func (d *Database) IDBStorageEnabled() bool {
+	retVal := d.p.Get("IDBStorageEnabled")
+	return retVal.Bool()
 }
 
 // SetIDBStorageEnabled sets the IDBStorageEnabled property of class Database.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database#idbstorageenabled
 func (d *Database) SetIDBStorageEnabled(IDBStorageEnabled bool) *Database {
-	p := ba.ctx.Get("Database").New(IDBStorageEnabled)
-	return DatabaseFromJSObject(p, ba.ctx)
+	d.p.Set("IDBStorageEnabled", IDBStorageEnabled)
+	return d
 }
-
-*/

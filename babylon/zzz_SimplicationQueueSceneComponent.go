@@ -74,38 +74,34 @@ func (s *SimplicationQueueSceneComponent) Register() {
 	s.p.Call("register")
 }
 
-/*
-
 // Name returns the Name property of class SimplicationQueueSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#name
-func (s *SimplicationQueueSceneComponent) Name(name string) *SimplicationQueueSceneComponent {
-	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(name)
-	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
+func (s *SimplicationQueueSceneComponent) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class SimplicationQueueSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#name
 func (s *SimplicationQueueSceneComponent) SetName(name string) *SimplicationQueueSceneComponent {
-	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(name)
-	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
 
 // Scene returns the Scene property of class SimplicationQueueSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#scene
-func (s *SimplicationQueueSceneComponent) Scene(scene *Scene) *SimplicationQueueSceneComponent {
-	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(scene.JSObject())
-	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
+func (s *SimplicationQueueSceneComponent) Scene() *Scene {
+	retVal := s.p.Get("scene")
+	return SceneFromJSObject(retVal, s.ctx)
 }
 
 // SetScene sets the Scene property of class SimplicationQueueSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#scene
 func (s *SimplicationQueueSceneComponent) SetScene(scene *Scene) *SimplicationQueueSceneComponent {
-	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(scene.JSObject())
-	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
+	s.p.Set("scene", scene.JSObject())
+	return s
 }
-
-*/

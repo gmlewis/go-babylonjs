@@ -775,230 +775,226 @@ func (e *Effect) SetVector4(uniformName string, vector4 js.Value) *Effect {
 	return EffectFromJSObject(retVal, e.ctx)
 }
 
-/*
-
 // Defines returns the Defines property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#defines
-func (e *Effect) Defines(defines string) *Effect {
-	p := ba.ctx.Get("Effect").New(defines)
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) Defines() string {
+	retVal := e.p.Get("defines")
+	return retVal.String()
 }
 
 // SetDefines sets the Defines property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#defines
 func (e *Effect) SetDefines(defines string) *Effect {
-	p := ba.ctx.Get("Effect").New(defines)
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("defines", defines)
+	return e
 }
 
 // IncludesShadersStore returns the IncludesShadersStore property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#includesshadersstore
-func (e *Effect) IncludesShadersStore(IncludesShadersStore js.Value) *Effect {
-	p := ba.ctx.Get("Effect").New(IncludesShadersStore)
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) IncludesShadersStore() js.Value {
+	retVal := e.p.Get("IncludesShadersStore")
+	return retVal
 }
 
 // SetIncludesShadersStore sets the IncludesShadersStore property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#includesshadersstore
 func (e *Effect) SetIncludesShadersStore(IncludesShadersStore js.Value) *Effect {
-	p := ba.ctx.Get("Effect").New(IncludesShadersStore)
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("IncludesShadersStore", IncludesShadersStore)
+	return e
 }
 
 // IsSupported returns the IsSupported property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#issupported
-func (e *Effect) IsSupported(isSupported bool) *Effect {
-	p := ba.ctx.Get("Effect").New(isSupported)
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) IsSupported() bool {
+	retVal := e.p.Get("isSupported")
+	return retVal.Bool()
 }
 
 // SetIsSupported sets the IsSupported property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#issupported
 func (e *Effect) SetIsSupported(isSupported bool) *Effect {
-	p := ba.ctx.Get("Effect").New(isSupported)
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("isSupported", isSupported)
+	return e
 }
 
 // Key returns the Key property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#key
-func (e *Effect) Key(key string) *Effect {
-	p := ba.ctx.Get("Effect").New(key)
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) Key() string {
+	retVal := e.p.Get("key")
+	return retVal.String()
 }
 
 // SetKey sets the Key property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#key
 func (e *Effect) SetKey(key string) *Effect {
-	p := ba.ctx.Get("Effect").New(key)
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("key", key)
+	return e
 }
 
 // Name returns the Name property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#name
-func (e *Effect) Name(name interface{}) *Effect {
-	p := ba.ctx.Get("Effect").New(name)
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) Name() interface{} {
+	retVal := e.p.Get("name")
+	return retVal
 }
 
 // SetName sets the Name property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#name
 func (e *Effect) SetName(name interface{}) *Effect {
-	p := ba.ctx.Get("Effect").New(name)
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("name", name)
+	return e
 }
 
 // OnBind returns the OnBind property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#onbind
-func (e *Effect) OnBind(onBind func()) *Effect {
-	p := ba.ctx.Get("Effect").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) OnBind() js.Value {
+	retVal := e.p.Get("onBind")
+	return retVal
 }
 
 // SetOnBind sets the OnBind property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#onbind
 func (e *Effect) SetOnBind(onBind func()) *Effect {
-	p := ba.ctx.Get("Effect").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("onBind", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onBind(); return nil }))
+	return e
 }
 
 // OnBindObservable returns the OnBindObservable property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#onbindobservable
-func (e *Effect) OnBindObservable(onBindObservable *Observable) *Effect {
-	p := ba.ctx.Get("Effect").New(onBindObservable.JSObject())
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) OnBindObservable() *Observable {
+	retVal := e.p.Get("onBindObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnBindObservable sets the OnBindObservable property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#onbindobservable
 func (e *Effect) SetOnBindObservable(onBindObservable *Observable) *Effect {
-	p := ba.ctx.Get("Effect").New(onBindObservable.JSObject())
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("onBindObservable", onBindObservable.JSObject())
+	return e
 }
 
 // OnCompileObservable returns the OnCompileObservable property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#oncompileobservable
-func (e *Effect) OnCompileObservable(onCompileObservable *Observable) *Effect {
-	p := ba.ctx.Get("Effect").New(onCompileObservable.JSObject())
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) OnCompileObservable() *Observable {
+	retVal := e.p.Get("onCompileObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnCompileObservable sets the OnCompileObservable property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#oncompileobservable
 func (e *Effect) SetOnCompileObservable(onCompileObservable *Observable) *Effect {
-	p := ba.ctx.Get("Effect").New(onCompileObservable.JSObject())
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("onCompileObservable", onCompileObservable.JSObject())
+	return e
 }
 
 // OnCompiled returns the OnCompiled property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#oncompiled
-func (e *Effect) OnCompiled(onCompiled func()) *Effect {
-	p := ba.ctx.Get("Effect").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) OnCompiled() js.Value {
+	retVal := e.p.Get("onCompiled")
+	return retVal
 }
 
 // SetOnCompiled sets the OnCompiled property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#oncompiled
 func (e *Effect) SetOnCompiled(onCompiled func()) *Effect {
-	p := ba.ctx.Get("Effect").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("onCompiled", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCompiled(); return nil }))
+	return e
 }
 
 // OnError returns the OnError property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#onerror
-func (e *Effect) OnError(onError func()) *Effect {
-	p := ba.ctx.Get("Effect").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) OnError() js.Value {
+	retVal := e.p.Get("onError")
+	return retVal
 }
 
 // SetOnError sets the OnError property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#onerror
 func (e *Effect) SetOnError(onError func()) *Effect {
-	p := ba.ctx.Get("Effect").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	return e
 }
 
 // OnErrorObservable returns the OnErrorObservable property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#onerrorobservable
-func (e *Effect) OnErrorObservable(onErrorObservable *Observable) *Effect {
-	p := ba.ctx.Get("Effect").New(onErrorObservable.JSObject())
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) OnErrorObservable() *Observable {
+	retVal := e.p.Get("onErrorObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnErrorObservable sets the OnErrorObservable property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#onerrorobservable
 func (e *Effect) SetOnErrorObservable(onErrorObservable *Observable) *Effect {
-	p := ba.ctx.Get("Effect").New(onErrorObservable.JSObject())
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("onErrorObservable", onErrorObservable.JSObject())
+	return e
 }
 
 // ShadersRepository returns the ShadersRepository property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#shadersrepository
-func (e *Effect) ShadersRepository(ShadersRepository string) *Effect {
-	p := ba.ctx.Get("Effect").New(ShadersRepository)
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) ShadersRepository() string {
+	retVal := e.p.Get("ShadersRepository")
+	return retVal.String()
 }
 
 // SetShadersRepository sets the ShadersRepository property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#shadersrepository
 func (e *Effect) SetShadersRepository(ShadersRepository string) *Effect {
-	p := ba.ctx.Get("Effect").New(ShadersRepository)
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("ShadersRepository", ShadersRepository)
+	return e
 }
 
 // ShadersStore returns the ShadersStore property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#shadersstore
-func (e *Effect) ShadersStore(ShadersStore js.Value) *Effect {
-	p := ba.ctx.Get("Effect").New(ShadersStore)
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) ShadersStore() js.Value {
+	retVal := e.p.Get("ShadersStore")
+	return retVal
 }
 
 // SetShadersStore sets the ShadersStore property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#shadersstore
 func (e *Effect) SetShadersStore(ShadersStore js.Value) *Effect {
-	p := ba.ctx.Get("Effect").New(ShadersStore)
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("ShadersStore", ShadersStore)
+	return e
 }
 
 // UniqueId returns the UniqueId property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#uniqueid
-func (e *Effect) UniqueId(uniqueId float64) *Effect {
-	p := ba.ctx.Get("Effect").New(uniqueId)
-	return EffectFromJSObject(p, ba.ctx)
+func (e *Effect) UniqueId() float64 {
+	retVal := e.p.Get("uniqueId")
+	return retVal.Float()
 }
 
 // SetUniqueId sets the UniqueId property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#uniqueid
 func (e *Effect) SetUniqueId(uniqueId float64) *Effect {
-	p := ba.ctx.Get("Effect").New(uniqueId)
-	return EffectFromJSObject(p, ba.ctx)
+	e.p.Set("uniqueId", uniqueId)
+	return e
 }
-
-*/

@@ -36,22 +36,18 @@ func IChildRootPropertyArrayToJSArray(array []*IChildRootProperty) []interface{}
 	return result
 }
 
-/*
-
 // Name returns the Name property of class IChildRootProperty.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ichildrootproperty#name
-func (i *IChildRootProperty) Name(name string) *IChildRootProperty {
-	p := ba.ctx.Get("IChildRootProperty").New(name)
-	return IChildRootPropertyFromJSObject(p, ba.ctx)
+func (i *IChildRootProperty) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class IChildRootProperty.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ichildrootproperty#name
 func (i *IChildRootProperty) SetName(name string) *IChildRootProperty {
-	p := ba.ctx.Get("IChildRootProperty").New(name)
-	return IChildRootPropertyFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
-
-*/

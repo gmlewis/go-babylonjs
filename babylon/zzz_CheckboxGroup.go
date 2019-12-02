@@ -81,7 +81,3 @@ func (c *CheckboxGroup) AddCheckbox(text string, opts *CheckboxGroupAddCheckboxO
 
 	c.p.Call("addCheckbox", args...)
 }
-
-/*
-
- */

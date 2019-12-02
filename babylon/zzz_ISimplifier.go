@@ -64,7 +64,3 @@ func (i *ISimplifier) Simplify(settings *ISimplificationSettings, successCallbac
 
 	i.p.Call("simplify", args...)
 }
-
-/*
-
- */

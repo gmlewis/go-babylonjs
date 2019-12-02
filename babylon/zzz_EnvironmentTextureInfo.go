@@ -36,70 +36,66 @@ func EnvironmentTextureInfoArrayToJSArray(array []*EnvironmentTextureInfo) []int
 	return result
 }
 
-/*
-
 // Irradiance returns the Irradiance property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#irradiance
-func (e *EnvironmentTextureInfo) Irradiance(irradiance interface{}) *EnvironmentTextureInfo {
-	p := ba.ctx.Get("EnvironmentTextureInfo").New(irradiance)
-	return EnvironmentTextureInfoFromJSObject(p, ba.ctx)
+func (e *EnvironmentTextureInfo) Irradiance() interface{} {
+	retVal := e.p.Get("irradiance")
+	return retVal
 }
 
 // SetIrradiance sets the Irradiance property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#irradiance
 func (e *EnvironmentTextureInfo) SetIrradiance(irradiance interface{}) *EnvironmentTextureInfo {
-	p := ba.ctx.Get("EnvironmentTextureInfo").New(irradiance)
-	return EnvironmentTextureInfoFromJSObject(p, ba.ctx)
+	e.p.Set("irradiance", irradiance)
+	return e
 }
 
 // Specular returns the Specular property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#specular
-func (e *EnvironmentTextureInfo) Specular(specular interface{}) *EnvironmentTextureInfo {
-	p := ba.ctx.Get("EnvironmentTextureInfo").New(specular)
-	return EnvironmentTextureInfoFromJSObject(p, ba.ctx)
+func (e *EnvironmentTextureInfo) Specular() interface{} {
+	retVal := e.p.Get("specular")
+	return retVal
 }
 
 // SetSpecular sets the Specular property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#specular
 func (e *EnvironmentTextureInfo) SetSpecular(specular interface{}) *EnvironmentTextureInfo {
-	p := ba.ctx.Get("EnvironmentTextureInfo").New(specular)
-	return EnvironmentTextureInfoFromJSObject(p, ba.ctx)
+	e.p.Set("specular", specular)
+	return e
 }
 
 // Version returns the Version property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#version
-func (e *EnvironmentTextureInfo) Version(version float64) *EnvironmentTextureInfo {
-	p := ba.ctx.Get("EnvironmentTextureInfo").New(version)
-	return EnvironmentTextureInfoFromJSObject(p, ba.ctx)
+func (e *EnvironmentTextureInfo) Version() float64 {
+	retVal := e.p.Get("version")
+	return retVal.Float()
 }
 
 // SetVersion sets the Version property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#version
 func (e *EnvironmentTextureInfo) SetVersion(version float64) *EnvironmentTextureInfo {
-	p := ba.ctx.Get("EnvironmentTextureInfo").New(version)
-	return EnvironmentTextureInfoFromJSObject(p, ba.ctx)
+	e.p.Set("version", version)
+	return e
 }
 
 // Width returns the Width property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#width
-func (e *EnvironmentTextureInfo) Width(width float64) *EnvironmentTextureInfo {
-	p := ba.ctx.Get("EnvironmentTextureInfo").New(width)
-	return EnvironmentTextureInfoFromJSObject(p, ba.ctx)
+func (e *EnvironmentTextureInfo) Width() float64 {
+	retVal := e.p.Get("width")
+	return retVal.Float()
 }
 
 // SetWidth sets the Width property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#width
 func (e *EnvironmentTextureInfo) SetWidth(width float64) *EnvironmentTextureInfo {
-	p := ba.ctx.Get("EnvironmentTextureInfo").New(width)
-	return EnvironmentTextureInfoFromJSObject(p, ba.ctx)
+	e.p.Set("width", width)
+	return e
 }
-
-*/

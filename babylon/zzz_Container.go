@@ -186,118 +186,114 @@ func (c *Container) _flagDescendantsAsMatrixDirty() {
 	c.p.Call("_flagDescendantsAsMatrixDirty")
 }
 
-/*
-
 // AdaptHeightToChildren returns the AdaptHeightToChildren property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#adaptheighttochildren
-func (c *Container) AdaptHeightToChildren(adaptHeightToChildren bool) *Container {
-	p := ba.ctx.Get("Container").New(adaptHeightToChildren)
-	return ContainerFromJSObject(p, ba.ctx)
+func (c *Container) AdaptHeightToChildren() bool {
+	retVal := c.p.Get("adaptHeightToChildren")
+	return retVal.Bool()
 }
 
 // SetAdaptHeightToChildren sets the AdaptHeightToChildren property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#adaptheighttochildren
 func (c *Container) SetAdaptHeightToChildren(adaptHeightToChildren bool) *Container {
-	p := ba.ctx.Get("Container").New(adaptHeightToChildren)
-	return ContainerFromJSObject(p, ba.ctx)
+	c.p.Set("adaptHeightToChildren", adaptHeightToChildren)
+	return c
 }
 
 // AdaptWidthToChildren returns the AdaptWidthToChildren property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#adaptwidthtochildren
-func (c *Container) AdaptWidthToChildren(adaptWidthToChildren bool) *Container {
-	p := ba.ctx.Get("Container").New(adaptWidthToChildren)
-	return ContainerFromJSObject(p, ba.ctx)
+func (c *Container) AdaptWidthToChildren() bool {
+	retVal := c.p.Get("adaptWidthToChildren")
+	return retVal.Bool()
 }
 
 // SetAdaptWidthToChildren sets the AdaptWidthToChildren property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#adaptwidthtochildren
 func (c *Container) SetAdaptWidthToChildren(adaptWidthToChildren bool) *Container {
-	p := ba.ctx.Get("Container").New(adaptWidthToChildren)
-	return ContainerFromJSObject(p, ba.ctx)
+	c.p.Set("adaptWidthToChildren", adaptWidthToChildren)
+	return c
 }
 
 // Background returns the Background property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#background
-func (c *Container) Background(background string) *Container {
-	p := ba.ctx.Get("Container").New(background)
-	return ContainerFromJSObject(p, ba.ctx)
+func (c *Container) Background() string {
+	retVal := c.p.Get("background")
+	return retVal.String()
 }
 
 // SetBackground sets the Background property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#background
 func (c *Container) SetBackground(background string) *Container {
-	p := ba.ctx.Get("Container").New(background)
-	return ContainerFromJSObject(p, ba.ctx)
+	c.p.Set("background", background)
+	return c
 }
 
 // Children returns the Children property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#children
-func (c *Container) Children(children *Control) *Container {
-	p := ba.ctx.Get("Container").New(children.JSObject())
-	return ContainerFromJSObject(p, ba.ctx)
+func (c *Container) Children() *Control {
+	retVal := c.p.Get("children")
+	return ControlFromJSObject(retVal, c.ctx)
 }
 
 // SetChildren sets the Children property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#children
 func (c *Container) SetChildren(children *Control) *Container {
-	p := ba.ctx.Get("Container").New(children.JSObject())
-	return ContainerFromJSObject(p, ba.ctx)
+	c.p.Set("children", children.JSObject())
+	return c
 }
 
 // LogLayoutCycleErrors returns the LogLayoutCycleErrors property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#loglayoutcycleerrors
-func (c *Container) LogLayoutCycleErrors(logLayoutCycleErrors bool) *Container {
-	p := ba.ctx.Get("Container").New(logLayoutCycleErrors)
-	return ContainerFromJSObject(p, ba.ctx)
+func (c *Container) LogLayoutCycleErrors() bool {
+	retVal := c.p.Get("logLayoutCycleErrors")
+	return retVal.Bool()
 }
 
 // SetLogLayoutCycleErrors sets the LogLayoutCycleErrors property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#loglayoutcycleerrors
 func (c *Container) SetLogLayoutCycleErrors(logLayoutCycleErrors bool) *Container {
-	p := ba.ctx.Get("Container").New(logLayoutCycleErrors)
-	return ContainerFromJSObject(p, ba.ctx)
+	c.p.Set("logLayoutCycleErrors", logLayoutCycleErrors)
+	return c
 }
 
 // MaxLayoutCycle returns the MaxLayoutCycle property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#maxlayoutcycle
-func (c *Container) MaxLayoutCycle(maxLayoutCycle float64) *Container {
-	p := ba.ctx.Get("Container").New(maxLayoutCycle)
-	return ContainerFromJSObject(p, ba.ctx)
+func (c *Container) MaxLayoutCycle() float64 {
+	retVal := c.p.Get("maxLayoutCycle")
+	return retVal.Float()
 }
 
 // SetMaxLayoutCycle sets the MaxLayoutCycle property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#maxlayoutcycle
 func (c *Container) SetMaxLayoutCycle(maxLayoutCycle float64) *Container {
-	p := ba.ctx.Get("Container").New(maxLayoutCycle)
-	return ContainerFromJSObject(p, ba.ctx)
+	c.p.Set("maxLayoutCycle", maxLayoutCycle)
+	return c
 }
 
 // Name returns the Name property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#name
-func (c *Container) Name(name string) *Container {
-	p := ba.ctx.Get("Container").New(name)
-	return ContainerFromJSObject(p, ba.ctx)
+func (c *Container) Name() string {
+	retVal := c.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#name
 func (c *Container) SetName(name string) *Container {
-	p := ba.ctx.Get("Container").New(name)
-	return ContainerFromJSObject(p, ba.ctx)
+	c.p.Set("name", name)
+	return c
 }
-
-*/

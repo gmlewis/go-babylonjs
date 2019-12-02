@@ -36,22 +36,22 @@ func IAnimatableArrayToJSArray(array []*IAnimatable) []interface{} {
 	return result
 }
 
-/*
-
 // Animations returns the Animations property of class IAnimatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimatable#animations
-func (i *IAnimatable) Animations(animations []*Animation) *IAnimatable {
-	p := ba.ctx.Get("IAnimatable").New(animations)
-	return IAnimatableFromJSObject(p, ba.ctx)
+func (i *IAnimatable) Animations() []*Animation {
+	retVal := i.p.Get("animations")
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class IAnimatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimatable#animations
 func (i *IAnimatable) SetAnimations(animations []*Animation) *IAnimatable {
-	p := ba.ctx.Get("IAnimatable").New(animations)
-	return IAnimatableFromJSObject(p, ba.ctx)
+	i.p.Set("animations", animations)
+	return i
 }
-
-*/

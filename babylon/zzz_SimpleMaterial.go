@@ -220,70 +220,66 @@ func (s *SimpleMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // DiffuseColor returns the DiffuseColor property of class SimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplematerial#diffusecolor
-func (s *SimpleMaterial) DiffuseColor(diffuseColor *Color3) *SimpleMaterial {
-	p := ba.ctx.Get("SimpleMaterial").New(diffuseColor.JSObject())
-	return SimpleMaterialFromJSObject(p, ba.ctx)
+func (s *SimpleMaterial) DiffuseColor() *Color3 {
+	retVal := s.p.Get("diffuseColor")
+	return Color3FromJSObject(retVal, s.ctx)
 }
 
 // SetDiffuseColor sets the DiffuseColor property of class SimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplematerial#diffusecolor
 func (s *SimpleMaterial) SetDiffuseColor(diffuseColor *Color3) *SimpleMaterial {
-	p := ba.ctx.Get("SimpleMaterial").New(diffuseColor.JSObject())
-	return SimpleMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("diffuseColor", diffuseColor.JSObject())
+	return s
 }
 
 // DiffuseTexture returns the DiffuseTexture property of class SimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplematerial#diffusetexture
-func (s *SimpleMaterial) DiffuseTexture(diffuseTexture *BaseTexture) *SimpleMaterial {
-	p := ba.ctx.Get("SimpleMaterial").New(diffuseTexture.JSObject())
-	return SimpleMaterialFromJSObject(p, ba.ctx)
+func (s *SimpleMaterial) DiffuseTexture() *BaseTexture {
+	retVal := s.p.Get("diffuseTexture")
+	return BaseTextureFromJSObject(retVal, s.ctx)
 }
 
 // SetDiffuseTexture sets the DiffuseTexture property of class SimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplematerial#diffusetexture
 func (s *SimpleMaterial) SetDiffuseTexture(diffuseTexture *BaseTexture) *SimpleMaterial {
-	p := ba.ctx.Get("SimpleMaterial").New(diffuseTexture.JSObject())
-	return SimpleMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("diffuseTexture", diffuseTexture.JSObject())
+	return s
 }
 
 // DisableLighting returns the DisableLighting property of class SimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplematerial#disablelighting
-func (s *SimpleMaterial) DisableLighting(disableLighting bool) *SimpleMaterial {
-	p := ba.ctx.Get("SimpleMaterial").New(disableLighting)
-	return SimpleMaterialFromJSObject(p, ba.ctx)
+func (s *SimpleMaterial) DisableLighting() bool {
+	retVal := s.p.Get("disableLighting")
+	return retVal.Bool()
 }
 
 // SetDisableLighting sets the DisableLighting property of class SimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplematerial#disablelighting
 func (s *SimpleMaterial) SetDisableLighting(disableLighting bool) *SimpleMaterial {
-	p := ba.ctx.Get("SimpleMaterial").New(disableLighting)
-	return SimpleMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("disableLighting", disableLighting)
+	return s
 }
 
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class SimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplematerial#maxsimultaneouslights
-func (s *SimpleMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *SimpleMaterial {
-	p := ba.ctx.Get("SimpleMaterial").New(maxSimultaneousLights)
-	return SimpleMaterialFromJSObject(p, ba.ctx)
+func (s *SimpleMaterial) MaxSimultaneousLights() float64 {
+	retVal := s.p.Get("maxSimultaneousLights")
+	return retVal.Float()
 }
 
 // SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class SimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplematerial#maxsimultaneouslights
 func (s *SimpleMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *SimpleMaterial {
-	p := ba.ctx.Get("SimpleMaterial").New(maxSimultaneousLights)
-	return SimpleMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("maxSimultaneousLights", maxSimultaneousLights)
+	return s
 }
-
-*/

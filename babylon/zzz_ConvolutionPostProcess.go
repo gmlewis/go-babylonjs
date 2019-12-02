@@ -86,118 +86,114 @@ func (ba *Babylon) NewConvolutionPostProcess(name string, kernel float64, option
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // EdgeDetect0Kernel returns the EdgeDetect0Kernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect0kernel
-func (c *ConvolutionPostProcess) EdgeDetect0Kernel(EdgeDetect0Kernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect0Kernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+func (c *ConvolutionPostProcess) EdgeDetect0Kernel() float64 {
+	retVal := c.p.Get("EdgeDetect0Kernel")
+	return retVal.Float()
 }
 
 // SetEdgeDetect0Kernel sets the EdgeDetect0Kernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect0kernel
 func (c *ConvolutionPostProcess) SetEdgeDetect0Kernel(EdgeDetect0Kernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect0Kernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("EdgeDetect0Kernel", EdgeDetect0Kernel)
+	return c
 }
 
 // EdgeDetect1Kernel returns the EdgeDetect1Kernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect1kernel
-func (c *ConvolutionPostProcess) EdgeDetect1Kernel(EdgeDetect1Kernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect1Kernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+func (c *ConvolutionPostProcess) EdgeDetect1Kernel() float64 {
+	retVal := c.p.Get("EdgeDetect1Kernel")
+	return retVal.Float()
 }
 
 // SetEdgeDetect1Kernel sets the EdgeDetect1Kernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect1kernel
 func (c *ConvolutionPostProcess) SetEdgeDetect1Kernel(EdgeDetect1Kernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect1Kernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("EdgeDetect1Kernel", EdgeDetect1Kernel)
+	return c
 }
 
 // EdgeDetect2Kernel returns the EdgeDetect2Kernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect2kernel
-func (c *ConvolutionPostProcess) EdgeDetect2Kernel(EdgeDetect2Kernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect2Kernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+func (c *ConvolutionPostProcess) EdgeDetect2Kernel() float64 {
+	retVal := c.p.Get("EdgeDetect2Kernel")
+	return retVal.Float()
 }
 
 // SetEdgeDetect2Kernel sets the EdgeDetect2Kernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect2kernel
 func (c *ConvolutionPostProcess) SetEdgeDetect2Kernel(EdgeDetect2Kernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect2Kernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("EdgeDetect2Kernel", EdgeDetect2Kernel)
+	return c
 }
 
 // EmbossKernel returns the EmbossKernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#embosskernel
-func (c *ConvolutionPostProcess) EmbossKernel(EmbossKernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(EmbossKernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+func (c *ConvolutionPostProcess) EmbossKernel() float64 {
+	retVal := c.p.Get("EmbossKernel")
+	return retVal.Float()
 }
 
 // SetEmbossKernel sets the EmbossKernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#embosskernel
 func (c *ConvolutionPostProcess) SetEmbossKernel(EmbossKernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(EmbossKernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("EmbossKernel", EmbossKernel)
+	return c
 }
 
 // GaussianKernel returns the GaussianKernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#gaussiankernel
-func (c *ConvolutionPostProcess) GaussianKernel(GaussianKernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(GaussianKernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+func (c *ConvolutionPostProcess) GaussianKernel() float64 {
+	retVal := c.p.Get("GaussianKernel")
+	return retVal.Float()
 }
 
 // SetGaussianKernel sets the GaussianKernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#gaussiankernel
 func (c *ConvolutionPostProcess) SetGaussianKernel(GaussianKernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(GaussianKernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("GaussianKernel", GaussianKernel)
+	return c
 }
 
 // Kernel returns the Kernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#kernel
-func (c *ConvolutionPostProcess) Kernel(kernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(kernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+func (c *ConvolutionPostProcess) Kernel() float64 {
+	retVal := c.p.Get("kernel")
+	return retVal.Float()
 }
 
 // SetKernel sets the Kernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#kernel
 func (c *ConvolutionPostProcess) SetKernel(kernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(kernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("kernel", kernel)
+	return c
 }
 
 // SharpenKernel returns the SharpenKernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#sharpenkernel
-func (c *ConvolutionPostProcess) SharpenKernel(SharpenKernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(SharpenKernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+func (c *ConvolutionPostProcess) SharpenKernel() float64 {
+	retVal := c.p.Get("SharpenKernel")
+	return retVal.Float()
 }
 
 // SetSharpenKernel sets the SharpenKernel property of class ConvolutionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#sharpenkernel
 func (c *ConvolutionPostProcess) SetSharpenKernel(SharpenKernel float64) *ConvolutionPostProcess {
-	p := ba.ctx.Get("ConvolutionPostProcess").New(SharpenKernel)
-	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("SharpenKernel", SharpenKernel)
+	return c
 }
-
-*/

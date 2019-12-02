@@ -115,54 +115,50 @@ func (o *OutlineRenderer) Render(subMesh *SubMesh, batch js.Value, opts *Outline
 	o.p.Call("render", args...)
 }
 
-/*
-
 // Name returns the Name property of class OutlineRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#name
-func (o *OutlineRenderer) Name(name string) *OutlineRenderer {
-	p := ba.ctx.Get("OutlineRenderer").New(name)
-	return OutlineRendererFromJSObject(p, ba.ctx)
+func (o *OutlineRenderer) Name() string {
+	retVal := o.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class OutlineRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#name
 func (o *OutlineRenderer) SetName(name string) *OutlineRenderer {
-	p := ba.ctx.Get("OutlineRenderer").New(name)
-	return OutlineRendererFromJSObject(p, ba.ctx)
+	o.p.Set("name", name)
+	return o
 }
 
 // Scene returns the Scene property of class OutlineRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#scene
-func (o *OutlineRenderer) Scene(scene *Scene) *OutlineRenderer {
-	p := ba.ctx.Get("OutlineRenderer").New(scene.JSObject())
-	return OutlineRendererFromJSObject(p, ba.ctx)
+func (o *OutlineRenderer) Scene() *Scene {
+	retVal := o.p.Get("scene")
+	return SceneFromJSObject(retVal, o.ctx)
 }
 
 // SetScene sets the Scene property of class OutlineRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#scene
 func (o *OutlineRenderer) SetScene(scene *Scene) *OutlineRenderer {
-	p := ba.ctx.Get("OutlineRenderer").New(scene.JSObject())
-	return OutlineRendererFromJSObject(p, ba.ctx)
+	o.p.Set("scene", scene.JSObject())
+	return o
 }
 
 // ZOffset returns the ZOffset property of class OutlineRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#zoffset
-func (o *OutlineRenderer) ZOffset(zOffset float64) *OutlineRenderer {
-	p := ba.ctx.Get("OutlineRenderer").New(zOffset)
-	return OutlineRendererFromJSObject(p, ba.ctx)
+func (o *OutlineRenderer) ZOffset() float64 {
+	retVal := o.p.Get("zOffset")
+	return retVal.Float()
 }
 
 // SetZOffset sets the ZOffset property of class OutlineRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#zoffset
 func (o *OutlineRenderer) SetZOffset(zOffset float64) *OutlineRenderer {
-	p := ba.ctx.Get("OutlineRenderer").New(zOffset)
-	return OutlineRendererFromJSObject(p, ba.ctx)
+	o.p.Set("zOffset", zOffset)
+	return o
 }
-
-*/

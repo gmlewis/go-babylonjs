@@ -184,54 +184,50 @@ func (v *VideoTexture) UpdateURL(url string) {
 	v.p.Call("updateURL", args...)
 }
 
-/*
-
 // AutoUpdateTexture returns the AutoUpdateTexture property of class VideoTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#autoupdatetexture
-func (v *VideoTexture) AutoUpdateTexture(autoUpdateTexture bool) *VideoTexture {
-	p := ba.ctx.Get("VideoTexture").New(autoUpdateTexture)
-	return VideoTextureFromJSObject(p, ba.ctx)
+func (v *VideoTexture) AutoUpdateTexture() bool {
+	retVal := v.p.Get("autoUpdateTexture")
+	return retVal.Bool()
 }
 
 // SetAutoUpdateTexture sets the AutoUpdateTexture property of class VideoTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#autoupdatetexture
 func (v *VideoTexture) SetAutoUpdateTexture(autoUpdateTexture bool) *VideoTexture {
-	p := ba.ctx.Get("VideoTexture").New(autoUpdateTexture)
-	return VideoTextureFromJSObject(p, ba.ctx)
+	v.p.Set("autoUpdateTexture", autoUpdateTexture)
+	return v
 }
 
 // OnUserActionRequestedObservable returns the OnUserActionRequestedObservable property of class VideoTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#onuseractionrequestedobservable
-func (v *VideoTexture) OnUserActionRequestedObservable(onUserActionRequestedObservable *Observable) *VideoTexture {
-	p := ba.ctx.Get("VideoTexture").New(onUserActionRequestedObservable.JSObject())
-	return VideoTextureFromJSObject(p, ba.ctx)
+func (v *VideoTexture) OnUserActionRequestedObservable() *Observable {
+	retVal := v.p.Get("onUserActionRequestedObservable")
+	return ObservableFromJSObject(retVal, v.ctx)
 }
 
 // SetOnUserActionRequestedObservable sets the OnUserActionRequestedObservable property of class VideoTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#onuseractionrequestedobservable
 func (v *VideoTexture) SetOnUserActionRequestedObservable(onUserActionRequestedObservable *Observable) *VideoTexture {
-	p := ba.ctx.Get("VideoTexture").New(onUserActionRequestedObservable.JSObject())
-	return VideoTextureFromJSObject(p, ba.ctx)
+	v.p.Set("onUserActionRequestedObservable", onUserActionRequestedObservable.JSObject())
+	return v
 }
 
 // Video returns the Video property of class VideoTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#video
-func (v *VideoTexture) Video(video js.Value) *VideoTexture {
-	p := ba.ctx.Get("VideoTexture").New(video)
-	return VideoTextureFromJSObject(p, ba.ctx)
+func (v *VideoTexture) Video() js.Value {
+	retVal := v.p.Get("video")
+	return retVal
 }
 
 // SetVideo sets the Video property of class VideoTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#video
 func (v *VideoTexture) SetVideo(video js.Value) *VideoTexture {
-	p := ba.ctx.Get("VideoTexture").New(video)
-	return VideoTextureFromJSObject(p, ba.ctx)
+	v.p.Set("video", video)
+	return v
 }
-
-*/

@@ -52,22 +52,18 @@ func (ba *Babylon) NewPointerInfo(jsType float64, event js.Value, pickInfo *Pick
 	return PointerInfoFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // PickInfo returns the PickInfo property of class PointerInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfo#pickinfo
-func (p *PointerInfo) PickInfo(pickInfo *PickingInfo) *PointerInfo {
-	p := ba.ctx.Get("PointerInfo").New(pickInfo.JSObject())
-	return PointerInfoFromJSObject(p, ba.ctx)
+func (p *PointerInfo) PickInfo() *PickingInfo {
+	retVal := p.p.Get("pickInfo")
+	return PickingInfoFromJSObject(retVal, p.ctx)
 }
 
 // SetPickInfo sets the PickInfo property of class PointerInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfo#pickinfo
 func (p *PointerInfo) SetPickInfo(pickInfo *PickingInfo) *PointerInfo {
-	p := ba.ctx.Get("PointerInfo").New(pickInfo.JSObject())
-	return PointerInfoFromJSObject(p, ba.ctx)
+	p.p.Set("pickInfo", pickInfo.JSObject())
+	return p
 }
-
-*/

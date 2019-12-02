@@ -47,22 +47,18 @@ func (ba *Babylon) NewCylinderPanel() *CylinderPanel {
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Radius returns the Radius property of class CylinderPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#radius
-func (c *CylinderPanel) Radius(radius float64) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(radius)
-	return CylinderPanelFromJSObject(p, ba.ctx)
+func (c *CylinderPanel) Radius() float64 {
+	retVal := c.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class CylinderPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#radius
 func (c *CylinderPanel) SetRadius(radius float64) *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New(radius)
-	return CylinderPanelFromJSObject(p, ba.ctx)
+	c.p.Set("radius", radius)
+	return c
 }
-
-*/

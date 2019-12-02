@@ -722,7 +722,3 @@ func (m *MeshBuilder) ExtrudeShapeCustom(name string, options js.Value, opts *Me
 	retVal := m.p.Call("ExtrudeShapeCustom", args...)
 	return MeshFromJSObject(retVal, m.ctx)
 }
-
-/*
-
- */

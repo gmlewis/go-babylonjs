@@ -85,7 +85,3 @@ func (ba *Babylon) NewColorCorrectionPostProcess(name string, colorTableUrl stri
 	p := ba.ctx.Get("ColorCorrectionPostProcess").New(args...)
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

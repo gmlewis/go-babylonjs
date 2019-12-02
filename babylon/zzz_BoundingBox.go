@@ -198,182 +198,178 @@ func (b *BoundingBox) Scale(factor float64) *BoundingBox {
 	return BoundingBoxFromJSObject(retVal, b.ctx)
 }
 
-/*
-
 // Center returns the Center property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#center
-func (b *BoundingBox) Center(center *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(center.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) Center() *Vector3 {
+	retVal := b.p.Get("center")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetCenter sets the Center property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#center
 func (b *BoundingBox) SetCenter(center *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(center.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("center", center.JSObject())
+	return b
 }
 
 // CenterWorld returns the CenterWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#centerworld
-func (b *BoundingBox) CenterWorld(centerWorld *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(centerWorld.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) CenterWorld() *Vector3 {
+	retVal := b.p.Get("centerWorld")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetCenterWorld sets the CenterWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#centerworld
 func (b *BoundingBox) SetCenterWorld(centerWorld *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(centerWorld.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("centerWorld", centerWorld.JSObject())
+	return b
 }
 
 // Directions returns the Directions property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#directions
-func (b *BoundingBox) Directions(directions *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(directions.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) Directions() *Vector3 {
+	retVal := b.p.Get("directions")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetDirections sets the Directions property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#directions
 func (b *BoundingBox) SetDirections(directions *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(directions.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("directions", directions.JSObject())
+	return b
 }
 
 // ExtendSize returns the ExtendSize property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#extendsize
-func (b *BoundingBox) ExtendSize(extendSize *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(extendSize.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) ExtendSize() *Vector3 {
+	retVal := b.p.Get("extendSize")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetExtendSize sets the ExtendSize property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#extendsize
 func (b *BoundingBox) SetExtendSize(extendSize *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(extendSize.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("extendSize", extendSize.JSObject())
+	return b
 }
 
 // ExtendSizeWorld returns the ExtendSizeWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#extendsizeworld
-func (b *BoundingBox) ExtendSizeWorld(extendSizeWorld *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(extendSizeWorld.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) ExtendSizeWorld() *Vector3 {
+	retVal := b.p.Get("extendSizeWorld")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetExtendSizeWorld sets the ExtendSizeWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#extendsizeworld
 func (b *BoundingBox) SetExtendSizeWorld(extendSizeWorld *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(extendSizeWorld.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("extendSizeWorld", extendSizeWorld.JSObject())
+	return b
 }
 
 // Maximum returns the Maximum property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#maximum
-func (b *BoundingBox) Maximum(maximum *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(maximum.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) Maximum() *Vector3 {
+	retVal := b.p.Get("maximum")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetMaximum sets the Maximum property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#maximum
 func (b *BoundingBox) SetMaximum(maximum *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(maximum.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("maximum", maximum.JSObject())
+	return b
 }
 
 // MaximumWorld returns the MaximumWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#maximumworld
-func (b *BoundingBox) MaximumWorld(maximumWorld *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(maximumWorld.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) MaximumWorld() *Vector3 {
+	retVal := b.p.Get("maximumWorld")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetMaximumWorld sets the MaximumWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#maximumworld
 func (b *BoundingBox) SetMaximumWorld(maximumWorld *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(maximumWorld.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("maximumWorld", maximumWorld.JSObject())
+	return b
 }
 
 // Minimum returns the Minimum property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#minimum
-func (b *BoundingBox) Minimum(minimum *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(minimum.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) Minimum() *Vector3 {
+	retVal := b.p.Get("minimum")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetMinimum sets the Minimum property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#minimum
 func (b *BoundingBox) SetMinimum(minimum *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(minimum.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("minimum", minimum.JSObject())
+	return b
 }
 
 // MinimumWorld returns the MinimumWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#minimumworld
-func (b *BoundingBox) MinimumWorld(minimumWorld *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(minimumWorld.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) MinimumWorld() *Vector3 {
+	retVal := b.p.Get("minimumWorld")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetMinimumWorld sets the MinimumWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#minimumworld
 func (b *BoundingBox) SetMinimumWorld(minimumWorld *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(minimumWorld.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("minimumWorld", minimumWorld.JSObject())
+	return b
 }
 
 // Vectors returns the Vectors property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#vectors
-func (b *BoundingBox) Vectors(vectors *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(vectors.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) Vectors() *Vector3 {
+	retVal := b.p.Get("vectors")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetVectors sets the Vectors property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#vectors
 func (b *BoundingBox) SetVectors(vectors *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(vectors.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("vectors", vectors.JSObject())
+	return b
 }
 
 // VectorsWorld returns the VectorsWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#vectorsworld
-func (b *BoundingBox) VectorsWorld(vectorsWorld *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(vectorsWorld.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+func (b *BoundingBox) VectorsWorld() *Vector3 {
+	retVal := b.p.Get("vectorsWorld")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetVectorsWorld sets the VectorsWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#vectorsworld
 func (b *BoundingBox) SetVectorsWorld(vectorsWorld *Vector3) *BoundingBox {
-	p := ba.ctx.Get("BoundingBox").New(vectorsWorld.JSObject())
-	return BoundingBoxFromJSObject(p, ba.ctx)
+	b.p.Set("vectorsWorld", vectorsWorld.JSObject())
+	return b
 }
-
-*/

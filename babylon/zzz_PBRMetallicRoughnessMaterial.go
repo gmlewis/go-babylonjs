@@ -99,86 +99,82 @@ func (p *PBRMetallicRoughnessMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // BaseColor returns the BaseColor property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#basecolor
-func (p *PBRMetallicRoughnessMaterial) BaseColor(baseColor *Color3) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(baseColor.JSObject())
-	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
+func (p *PBRMetallicRoughnessMaterial) BaseColor() *Color3 {
+	retVal := p.p.Get("baseColor")
+	return Color3FromJSObject(retVal, p.ctx)
 }
 
 // SetBaseColor sets the BaseColor property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#basecolor
 func (p *PBRMetallicRoughnessMaterial) SetBaseColor(baseColor *Color3) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(baseColor.JSObject())
-	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("baseColor", baseColor.JSObject())
+	return p
 }
 
 // BaseTexture returns the BaseTexture property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#basetexture
-func (p *PBRMetallicRoughnessMaterial) BaseTexture(baseTexture *BaseTexture) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(baseTexture.JSObject())
-	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
+func (p *PBRMetallicRoughnessMaterial) BaseTexture() *BaseTexture {
+	retVal := p.p.Get("baseTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetBaseTexture sets the BaseTexture property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#basetexture
 func (p *PBRMetallicRoughnessMaterial) SetBaseTexture(baseTexture *BaseTexture) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(baseTexture.JSObject())
-	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("baseTexture", baseTexture.JSObject())
+	return p
 }
 
 // Metallic returns the Metallic property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#metallic
-func (p *PBRMetallicRoughnessMaterial) Metallic(metallic float64) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(metallic)
-	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
+func (p *PBRMetallicRoughnessMaterial) Metallic() float64 {
+	retVal := p.p.Get("metallic")
+	return retVal.Float()
 }
 
 // SetMetallic sets the Metallic property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#metallic
 func (p *PBRMetallicRoughnessMaterial) SetMetallic(metallic float64) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(metallic)
-	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("metallic", metallic)
+	return p
 }
 
 // MetallicRoughnessTexture returns the MetallicRoughnessTexture property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#metallicroughnesstexture
-func (p *PBRMetallicRoughnessMaterial) MetallicRoughnessTexture(metallicRoughnessTexture *BaseTexture) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(metallicRoughnessTexture.JSObject())
-	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
+func (p *PBRMetallicRoughnessMaterial) MetallicRoughnessTexture() *BaseTexture {
+	retVal := p.p.Get("metallicRoughnessTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetMetallicRoughnessTexture sets the MetallicRoughnessTexture property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#metallicroughnesstexture
 func (p *PBRMetallicRoughnessMaterial) SetMetallicRoughnessTexture(metallicRoughnessTexture *BaseTexture) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(metallicRoughnessTexture.JSObject())
-	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("metallicRoughnessTexture", metallicRoughnessTexture.JSObject())
+	return p
 }
 
 // Roughness returns the Roughness property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#roughness
-func (p *PBRMetallicRoughnessMaterial) Roughness(roughness float64) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(roughness)
-	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
+func (p *PBRMetallicRoughnessMaterial) Roughness() float64 {
+	retVal := p.p.Get("roughness")
+	return retVal.Float()
 }
 
 // SetRoughness sets the Roughness property of class PBRMetallicRoughnessMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#roughness
 func (p *PBRMetallicRoughnessMaterial) SetRoughness(roughness float64) *PBRMetallicRoughnessMaterial {
-	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(roughness)
-	return PBRMetallicRoughnessMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("roughness", roughness)
+	return p
 }
-
-*/

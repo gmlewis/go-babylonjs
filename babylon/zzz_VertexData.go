@@ -552,310 +552,306 @@ func (v *VertexData) UpdateMesh(mesh *Mesh) *VertexData {
 	return VertexDataFromJSObject(retVal, v.ctx)
 }
 
-/*
-
 // BACKSIDE returns the BACKSIDE property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#backside
-func (v *VertexData) BACKSIDE(BACKSIDE float64) *VertexData {
-	p := ba.ctx.Get("VertexData").New(BACKSIDE)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) BACKSIDE() float64 {
+	retVal := v.p.Get("BACKSIDE")
+	return retVal.Float()
 }
 
 // SetBACKSIDE sets the BACKSIDE property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#backside
 func (v *VertexData) SetBACKSIDE(BACKSIDE float64) *VertexData {
-	p := ba.ctx.Get("VertexData").New(BACKSIDE)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("BACKSIDE", BACKSIDE)
+	return v
 }
 
 // Colors returns the Colors property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#colors
-func (v *VertexData) Colors(colors js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(colors)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Colors() js.Value {
+	retVal := v.p.Get("colors")
+	return retVal
 }
 
 // SetColors sets the Colors property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#colors
 func (v *VertexData) SetColors(colors js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(colors)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("colors", colors)
+	return v
 }
 
 // DEFAULTSIDE returns the DEFAULTSIDE property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#defaultside
-func (v *VertexData) DEFAULTSIDE(DEFAULTSIDE float64) *VertexData {
-	p := ba.ctx.Get("VertexData").New(DEFAULTSIDE)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) DEFAULTSIDE() float64 {
+	retVal := v.p.Get("DEFAULTSIDE")
+	return retVal.Float()
 }
 
 // SetDEFAULTSIDE sets the DEFAULTSIDE property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#defaultside
 func (v *VertexData) SetDEFAULTSIDE(DEFAULTSIDE float64) *VertexData {
-	p := ba.ctx.Get("VertexData").New(DEFAULTSIDE)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("DEFAULTSIDE", DEFAULTSIDE)
+	return v
 }
 
 // DOUBLESIDE returns the DOUBLESIDE property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#doubleside
-func (v *VertexData) DOUBLESIDE(DOUBLESIDE float64) *VertexData {
-	p := ba.ctx.Get("VertexData").New(DOUBLESIDE)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) DOUBLESIDE() float64 {
+	retVal := v.p.Get("DOUBLESIDE")
+	return retVal.Float()
 }
 
 // SetDOUBLESIDE sets the DOUBLESIDE property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#doubleside
 func (v *VertexData) SetDOUBLESIDE(DOUBLESIDE float64) *VertexData {
-	p := ba.ctx.Get("VertexData").New(DOUBLESIDE)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("DOUBLESIDE", DOUBLESIDE)
+	return v
 }
 
 // FRONTSIDE returns the FRONTSIDE property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#frontside
-func (v *VertexData) FRONTSIDE(FRONTSIDE float64) *VertexData {
-	p := ba.ctx.Get("VertexData").New(FRONTSIDE)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) FRONTSIDE() float64 {
+	retVal := v.p.Get("FRONTSIDE")
+	return retVal.Float()
 }
 
 // SetFRONTSIDE sets the FRONTSIDE property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#frontside
 func (v *VertexData) SetFRONTSIDE(FRONTSIDE float64) *VertexData {
-	p := ba.ctx.Get("VertexData").New(FRONTSIDE)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("FRONTSIDE", FRONTSIDE)
+	return v
 }
 
 // Indices returns the Indices property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#indices
-func (v *VertexData) Indices(indices js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(indices)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Indices() js.Value {
+	retVal := v.p.Get("indices")
+	return retVal
 }
 
 // SetIndices sets the Indices property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#indices
 func (v *VertexData) SetIndices(indices js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(indices)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("indices", indices)
+	return v
 }
 
 // MatricesIndices returns the MatricesIndices property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#matricesindices
-func (v *VertexData) MatricesIndices(matricesIndices js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(matricesIndices)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) MatricesIndices() js.Value {
+	retVal := v.p.Get("matricesIndices")
+	return retVal
 }
 
 // SetMatricesIndices sets the MatricesIndices property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#matricesindices
 func (v *VertexData) SetMatricesIndices(matricesIndices js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(matricesIndices)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("matricesIndices", matricesIndices)
+	return v
 }
 
 // MatricesIndicesExtra returns the MatricesIndicesExtra property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#matricesindicesextra
-func (v *VertexData) MatricesIndicesExtra(matricesIndicesExtra js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(matricesIndicesExtra)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) MatricesIndicesExtra() js.Value {
+	retVal := v.p.Get("matricesIndicesExtra")
+	return retVal
 }
 
 // SetMatricesIndicesExtra sets the MatricesIndicesExtra property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#matricesindicesextra
 func (v *VertexData) SetMatricesIndicesExtra(matricesIndicesExtra js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(matricesIndicesExtra)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("matricesIndicesExtra", matricesIndicesExtra)
+	return v
 }
 
 // MatricesWeights returns the MatricesWeights property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#matricesweights
-func (v *VertexData) MatricesWeights(matricesWeights js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(matricesWeights)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) MatricesWeights() js.Value {
+	retVal := v.p.Get("matricesWeights")
+	return retVal
 }
 
 // SetMatricesWeights sets the MatricesWeights property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#matricesweights
 func (v *VertexData) SetMatricesWeights(matricesWeights js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(matricesWeights)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("matricesWeights", matricesWeights)
+	return v
 }
 
 // MatricesWeightsExtra returns the MatricesWeightsExtra property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#matricesweightsextra
-func (v *VertexData) MatricesWeightsExtra(matricesWeightsExtra js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(matricesWeightsExtra)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) MatricesWeightsExtra() js.Value {
+	retVal := v.p.Get("matricesWeightsExtra")
+	return retVal
 }
 
 // SetMatricesWeightsExtra sets the MatricesWeightsExtra property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#matricesweightsextra
 func (v *VertexData) SetMatricesWeightsExtra(matricesWeightsExtra js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(matricesWeightsExtra)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("matricesWeightsExtra", matricesWeightsExtra)
+	return v
 }
 
 // Normals returns the Normals property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#normals
-func (v *VertexData) Normals(normals js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(normals)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Normals() js.Value {
+	retVal := v.p.Get("normals")
+	return retVal
 }
 
 // SetNormals sets the Normals property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#normals
 func (v *VertexData) SetNormals(normals js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(normals)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("normals", normals)
+	return v
 }
 
 // Positions returns the Positions property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#positions
-func (v *VertexData) Positions(positions js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(positions)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Positions() js.Value {
+	retVal := v.p.Get("positions")
+	return retVal
 }
 
 // SetPositions sets the Positions property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#positions
 func (v *VertexData) SetPositions(positions js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(positions)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("positions", positions)
+	return v
 }
 
 // Tangents returns the Tangents property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#tangents
-func (v *VertexData) Tangents(tangents js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(tangents)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Tangents() js.Value {
+	retVal := v.p.Get("tangents")
+	return retVal
 }
 
 // SetTangents sets the Tangents property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#tangents
 func (v *VertexData) SetTangents(tangents js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(tangents)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("tangents", tangents)
+	return v
 }
 
 // Uvs returns the Uvs property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs
-func (v *VertexData) Uvs(uvs js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Uvs() js.Value {
+	retVal := v.p.Get("uvs")
+	return retVal
 }
 
 // SetUvs sets the Uvs property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs
 func (v *VertexData) SetUvs(uvs js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("uvs", uvs)
+	return v
 }
 
 // Uvs2 returns the Uvs2 property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs2
-func (v *VertexData) Uvs2(uvs2 js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs2)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Uvs2() js.Value {
+	retVal := v.p.Get("uvs2")
+	return retVal
 }
 
 // SetUvs2 sets the Uvs2 property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs2
 func (v *VertexData) SetUvs2(uvs2 js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs2)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("uvs2", uvs2)
+	return v
 }
 
 // Uvs3 returns the Uvs3 property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs3
-func (v *VertexData) Uvs3(uvs3 js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs3)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Uvs3() js.Value {
+	retVal := v.p.Get("uvs3")
+	return retVal
 }
 
 // SetUvs3 sets the Uvs3 property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs3
 func (v *VertexData) SetUvs3(uvs3 js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs3)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("uvs3", uvs3)
+	return v
 }
 
 // Uvs4 returns the Uvs4 property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs4
-func (v *VertexData) Uvs4(uvs4 js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs4)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Uvs4() js.Value {
+	retVal := v.p.Get("uvs4")
+	return retVal
 }
 
 // SetUvs4 sets the Uvs4 property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs4
 func (v *VertexData) SetUvs4(uvs4 js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs4)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("uvs4", uvs4)
+	return v
 }
 
 // Uvs5 returns the Uvs5 property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs5
-func (v *VertexData) Uvs5(uvs5 js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs5)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Uvs5() js.Value {
+	retVal := v.p.Get("uvs5")
+	return retVal
 }
 
 // SetUvs5 sets the Uvs5 property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs5
 func (v *VertexData) SetUvs5(uvs5 js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs5)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("uvs5", uvs5)
+	return v
 }
 
 // Uvs6 returns the Uvs6 property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs6
-func (v *VertexData) Uvs6(uvs6 js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs6)
-	return VertexDataFromJSObject(p, ba.ctx)
+func (v *VertexData) Uvs6() js.Value {
+	retVal := v.p.Get("uvs6")
+	return retVal
 }
 
 // SetUvs6 sets the Uvs6 property of class VertexData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#uvs6
 func (v *VertexData) SetUvs6(uvs6 js.Value) *VertexData {
-	p := ba.ctx.Get("VertexData").New(uvs6)
-	return VertexDataFromJSObject(p, ba.ctx)
+	v.p.Set("uvs6", uvs6)
+	return v
 }
-
-*/

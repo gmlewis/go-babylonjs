@@ -48,54 +48,50 @@ func (c *ColorGradient) GetColorToRef(result *Color4) {
 	c.p.Call("getColorToRef", args...)
 }
 
-/*
-
 // Color1 returns the Color1 property of class ColorGradient.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradient#color1
-func (c *ColorGradient) Color1(color1 *Color4) *ColorGradient {
-	p := ba.ctx.Get("ColorGradient").New(color1.JSObject())
-	return ColorGradientFromJSObject(p, ba.ctx)
+func (c *ColorGradient) Color1() *Color4 {
+	retVal := c.p.Get("color1")
+	return Color4FromJSObject(retVal, c.ctx)
 }
 
 // SetColor1 sets the Color1 property of class ColorGradient.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradient#color1
 func (c *ColorGradient) SetColor1(color1 *Color4) *ColorGradient {
-	p := ba.ctx.Get("ColorGradient").New(color1.JSObject())
-	return ColorGradientFromJSObject(p, ba.ctx)
+	c.p.Set("color1", color1.JSObject())
+	return c
 }
 
 // Color2 returns the Color2 property of class ColorGradient.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradient#color2
-func (c *ColorGradient) Color2(color2 *Color4) *ColorGradient {
-	p := ba.ctx.Get("ColorGradient").New(color2.JSObject())
-	return ColorGradientFromJSObject(p, ba.ctx)
+func (c *ColorGradient) Color2() *Color4 {
+	retVal := c.p.Get("color2")
+	return Color4FromJSObject(retVal, c.ctx)
 }
 
 // SetColor2 sets the Color2 property of class ColorGradient.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradient#color2
 func (c *ColorGradient) SetColor2(color2 *Color4) *ColorGradient {
-	p := ba.ctx.Get("ColorGradient").New(color2.JSObject())
-	return ColorGradientFromJSObject(p, ba.ctx)
+	c.p.Set("color2", color2.JSObject())
+	return c
 }
 
 // Gradient returns the Gradient property of class ColorGradient.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradient#gradient
-func (c *ColorGradient) Gradient(gradient float64) *ColorGradient {
-	p := ba.ctx.Get("ColorGradient").New(gradient)
-	return ColorGradientFromJSObject(p, ba.ctx)
+func (c *ColorGradient) Gradient() float64 {
+	retVal := c.p.Get("gradient")
+	return retVal.Float()
 }
 
 // SetGradient sets the Gradient property of class ColorGradient.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradient#gradient
 func (c *ColorGradient) SetGradient(gradient float64) *ColorGradient {
-	p := ba.ctx.Get("ColorGradient").New(gradient)
-	return ColorGradientFromJSObject(p, ba.ctx)
+	c.p.Set("gradient", gradient)
+	return c
 }
-
-*/

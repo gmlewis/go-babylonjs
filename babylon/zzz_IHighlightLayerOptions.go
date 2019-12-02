@@ -37,150 +37,146 @@ func IHighlightLayerOptionsArrayToJSArray(array []*IHighlightLayerOptions) []int
 	return result
 }
 
-/*
-
 // AlphaBlendingMode returns the AlphaBlendingMode property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#alphablendingmode
-func (i *IHighlightLayerOptions) AlphaBlendingMode(alphaBlendingMode float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(alphaBlendingMode)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IHighlightLayerOptions) AlphaBlendingMode() float64 {
+	retVal := i.p.Get("alphaBlendingMode")
+	return retVal.Float()
 }
 
 // SetAlphaBlendingMode sets the AlphaBlendingMode property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#alphablendingmode
 func (i *IHighlightLayerOptions) SetAlphaBlendingMode(alphaBlendingMode float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(alphaBlendingMode)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("alphaBlendingMode", alphaBlendingMode)
+	return i
 }
 
 // BlurHorizontalSize returns the BlurHorizontalSize property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#blurhorizontalsize
-func (i *IHighlightLayerOptions) BlurHorizontalSize(blurHorizontalSize float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(blurHorizontalSize)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IHighlightLayerOptions) BlurHorizontalSize() float64 {
+	retVal := i.p.Get("blurHorizontalSize")
+	return retVal.Float()
 }
 
 // SetBlurHorizontalSize sets the BlurHorizontalSize property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#blurhorizontalsize
 func (i *IHighlightLayerOptions) SetBlurHorizontalSize(blurHorizontalSize float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(blurHorizontalSize)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("blurHorizontalSize", blurHorizontalSize)
+	return i
 }
 
 // BlurTextureSizeRatio returns the BlurTextureSizeRatio property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#blurtexturesizeratio
-func (i *IHighlightLayerOptions) BlurTextureSizeRatio(blurTextureSizeRatio float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(blurTextureSizeRatio)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IHighlightLayerOptions) BlurTextureSizeRatio() float64 {
+	retVal := i.p.Get("blurTextureSizeRatio")
+	return retVal.Float()
 }
 
 // SetBlurTextureSizeRatio sets the BlurTextureSizeRatio property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#blurtexturesizeratio
 func (i *IHighlightLayerOptions) SetBlurTextureSizeRatio(blurTextureSizeRatio float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(blurTextureSizeRatio)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("blurTextureSizeRatio", blurTextureSizeRatio)
+	return i
 }
 
 // BlurVerticalSize returns the BlurVerticalSize property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#blurverticalsize
-func (i *IHighlightLayerOptions) BlurVerticalSize(blurVerticalSize float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(blurVerticalSize)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IHighlightLayerOptions) BlurVerticalSize() float64 {
+	retVal := i.p.Get("blurVerticalSize")
+	return retVal.Float()
 }
 
 // SetBlurVerticalSize sets the BlurVerticalSize property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#blurverticalsize
 func (i *IHighlightLayerOptions) SetBlurVerticalSize(blurVerticalSize float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(blurVerticalSize)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("blurVerticalSize", blurVerticalSize)
+	return i
 }
 
 // Camera returns the Camera property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#camera
-func (i *IHighlightLayerOptions) Camera(camera *Camera) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(camera.JSObject())
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IHighlightLayerOptions) Camera() *Camera {
+	retVal := i.p.Get("camera")
+	return CameraFromJSObject(retVal, i.ctx)
 }
 
 // SetCamera sets the Camera property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#camera
 func (i *IHighlightLayerOptions) SetCamera(camera *Camera) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(camera.JSObject())
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("camera", camera.JSObject())
+	return i
 }
 
 // IsStroke returns the IsStroke property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#isstroke
-func (i *IHighlightLayerOptions) IsStroke(isStroke bool) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(isStroke)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IHighlightLayerOptions) IsStroke() bool {
+	retVal := i.p.Get("isStroke")
+	return retVal.Bool()
 }
 
 // SetIsStroke sets the IsStroke property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#isstroke
 func (i *IHighlightLayerOptions) SetIsStroke(isStroke bool) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(isStroke)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("isStroke", isStroke)
+	return i
 }
 
 // MainTextureFixedSize returns the MainTextureFixedSize property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#maintexturefixedsize
-func (i *IHighlightLayerOptions) MainTextureFixedSize(mainTextureFixedSize float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(mainTextureFixedSize)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IHighlightLayerOptions) MainTextureFixedSize() float64 {
+	retVal := i.p.Get("mainTextureFixedSize")
+	return retVal.Float()
 }
 
 // SetMainTextureFixedSize sets the MainTextureFixedSize property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#maintexturefixedsize
 func (i *IHighlightLayerOptions) SetMainTextureFixedSize(mainTextureFixedSize float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(mainTextureFixedSize)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mainTextureFixedSize", mainTextureFixedSize)
+	return i
 }
 
 // MainTextureRatio returns the MainTextureRatio property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#maintextureratio
-func (i *IHighlightLayerOptions) MainTextureRatio(mainTextureRatio float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(mainTextureRatio)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IHighlightLayerOptions) MainTextureRatio() float64 {
+	retVal := i.p.Get("mainTextureRatio")
+	return retVal.Float()
 }
 
 // SetMainTextureRatio sets the MainTextureRatio property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#maintextureratio
 func (i *IHighlightLayerOptions) SetMainTextureRatio(mainTextureRatio float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(mainTextureRatio)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mainTextureRatio", mainTextureRatio)
+	return i
 }
 
 // RenderingGroupId returns the RenderingGroupId property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#renderinggroupid
-func (i *IHighlightLayerOptions) RenderingGroupId(renderingGroupId float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(renderingGroupId)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IHighlightLayerOptions) RenderingGroupId() float64 {
+	retVal := i.p.Get("renderingGroupId")
+	return retVal.Float()
 }
 
 // SetRenderingGroupId sets the RenderingGroupId property of class IHighlightLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ihighlightlayeroptions#renderinggroupid
 func (i *IHighlightLayerOptions) SetRenderingGroupId(renderingGroupId float64) *IHighlightLayerOptions {
-	p := ba.ctx.Get("IHighlightLayerOptions").New(renderingGroupId)
-	return IHighlightLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("renderingGroupId", renderingGroupId)
+	return i
 }
-
-*/

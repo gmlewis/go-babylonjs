@@ -235,182 +235,182 @@ func (w *WebVRFreeCamera) UseStandingMatrixAsync() *Promise {
 	return PromiseFromJSObject(retVal, w.ctx)
 }
 
-/*
-
 // Controllers returns the Controllers property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#controllers
-func (w *WebVRFreeCamera) Controllers(controllers []*WebVRController) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(controllers)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) Controllers() []*WebVRController {
+	retVal := w.p.Get("controllers")
+	result := []*WebVRController{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, WebVRControllerFromJSObject(retVal.Index(ri), w.ctx))
+	}
+	return result
 }
 
 // SetControllers sets the Controllers property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#controllers
 func (w *WebVRFreeCamera) SetControllers(controllers []*WebVRController) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(controllers)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("controllers", controllers)
+	return w
 }
 
 // DevicePosition returns the DevicePosition property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#deviceposition
-func (w *WebVRFreeCamera) DevicePosition(devicePosition *Vector3) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(devicePosition.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) DevicePosition() *Vector3 {
+	retVal := w.p.Get("devicePosition")
+	return Vector3FromJSObject(retVal, w.ctx)
 }
 
 // SetDevicePosition sets the DevicePosition property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#deviceposition
 func (w *WebVRFreeCamera) SetDevicePosition(devicePosition *Vector3) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(devicePosition.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("devicePosition", devicePosition.JSObject())
+	return w
 }
 
 // DeviceRotationQuaternion returns the DeviceRotationQuaternion property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#devicerotationquaternion
-func (w *WebVRFreeCamera) DeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(deviceRotationQuaternion.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) DeviceRotationQuaternion() *Quaternion {
+	retVal := w.p.Get("deviceRotationQuaternion")
+	return QuaternionFromJSObject(retVal, w.ctx)
 }
 
 // SetDeviceRotationQuaternion sets the DeviceRotationQuaternion property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#devicerotationquaternion
 func (w *WebVRFreeCamera) SetDeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(deviceRotationQuaternion.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("deviceRotationQuaternion", deviceRotationQuaternion.JSObject())
+	return w
 }
 
 // DeviceScaleFactor returns the DeviceScaleFactor property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#devicescalefactor
-func (w *WebVRFreeCamera) DeviceScaleFactor(deviceScaleFactor float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(deviceScaleFactor)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) DeviceScaleFactor() float64 {
+	retVal := w.p.Get("deviceScaleFactor")
+	return retVal.Float()
 }
 
 // SetDeviceScaleFactor sets the DeviceScaleFactor property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#devicescalefactor
 func (w *WebVRFreeCamera) SetDeviceScaleFactor(deviceScaleFactor float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(deviceScaleFactor)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("deviceScaleFactor", deviceScaleFactor)
+	return w
 }
 
 // LeftController returns the LeftController property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#leftcontroller
-func (w *WebVRFreeCamera) LeftController(leftController *WebVRController) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(leftController.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) LeftController() *WebVRController {
+	retVal := w.p.Get("leftController")
+	return WebVRControllerFromJSObject(retVal, w.ctx)
 }
 
 // SetLeftController sets the LeftController property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#leftcontroller
 func (w *WebVRFreeCamera) SetLeftController(leftController *WebVRController) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(leftController.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("leftController", leftController.JSObject())
+	return w
 }
 
 // OnControllerMeshLoadedObservable returns the OnControllerMeshLoadedObservable property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#oncontrollermeshloadedobservable
-func (w *WebVRFreeCamera) OnControllerMeshLoadedObservable(onControllerMeshLoadedObservable *Observable) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(onControllerMeshLoadedObservable.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) OnControllerMeshLoadedObservable() *Observable {
+	retVal := w.p.Get("onControllerMeshLoadedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnControllerMeshLoadedObservable sets the OnControllerMeshLoadedObservable property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#oncontrollermeshloadedobservable
 func (w *WebVRFreeCamera) SetOnControllerMeshLoadedObservable(onControllerMeshLoadedObservable *Observable) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(onControllerMeshLoadedObservable.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("onControllerMeshLoadedObservable", onControllerMeshLoadedObservable.JSObject())
+	return w
 }
 
 // OnControllersAttachedObservable returns the OnControllersAttachedObservable property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#oncontrollersattachedobservable
-func (w *WebVRFreeCamera) OnControllersAttachedObservable(onControllersAttachedObservable *Observable) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(onControllersAttachedObservable.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) OnControllersAttachedObservable() *Observable {
+	retVal := w.p.Get("onControllersAttachedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnControllersAttachedObservable sets the OnControllersAttachedObservable property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#oncontrollersattachedobservable
 func (w *WebVRFreeCamera) SetOnControllersAttachedObservable(onControllersAttachedObservable *Observable) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(onControllersAttachedObservable.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("onControllersAttachedObservable", onControllersAttachedObservable.JSObject())
+	return w
 }
 
 // OnPoseUpdatedFromDeviceObservable returns the OnPoseUpdatedFromDeviceObservable property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#onposeupdatedfromdeviceobservable
-func (w *WebVRFreeCamera) OnPoseUpdatedFromDeviceObservable(onPoseUpdatedFromDeviceObservable *Observable) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(onPoseUpdatedFromDeviceObservable.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) OnPoseUpdatedFromDeviceObservable() *Observable {
+	retVal := w.p.Get("onPoseUpdatedFromDeviceObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnPoseUpdatedFromDeviceObservable sets the OnPoseUpdatedFromDeviceObservable property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#onposeupdatedfromdeviceobservable
 func (w *WebVRFreeCamera) SetOnPoseUpdatedFromDeviceObservable(onPoseUpdatedFromDeviceObservable *Observable) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(onPoseUpdatedFromDeviceObservable.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("onPoseUpdatedFromDeviceObservable", onPoseUpdatedFromDeviceObservable.JSObject())
+	return w
 }
 
 // RawPose returns the RawPose property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rawpose
-func (w *WebVRFreeCamera) RawPose(rawPose js.Value) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(rawPose)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) RawPose() js.Value {
+	retVal := w.p.Get("rawPose")
+	return retVal
 }
 
 // SetRawPose sets the RawPose property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rawpose
 func (w *WebVRFreeCamera) SetRawPose(rawPose js.Value) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(rawPose)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("rawPose", rawPose)
+	return w
 }
 
 // RigParenting returns the RigParenting property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rigparenting
-func (w *WebVRFreeCamera) RigParenting(rigParenting bool) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(rigParenting)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) RigParenting() bool {
+	retVal := w.p.Get("rigParenting")
+	return retVal.Bool()
 }
 
 // SetRigParenting sets the RigParenting property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rigparenting
 func (w *WebVRFreeCamera) SetRigParenting(rigParenting bool) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(rigParenting)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("rigParenting", rigParenting)
+	return w
 }
 
 // RightController returns the RightController property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rightcontroller
-func (w *WebVRFreeCamera) RightController(rightController *WebVRController) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(rightController.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+func (w *WebVRFreeCamera) RightController() *WebVRController {
+	retVal := w.p.Get("rightController")
+	return WebVRControllerFromJSObject(retVal, w.ctx)
 }
 
 // SetRightController sets the RightController property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rightcontroller
 func (w *WebVRFreeCamera) SetRightController(rightController *WebVRController) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(rightController.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
+	w.p.Set("rightController", rightController.JSObject())
+	return w
 }
-
-*/

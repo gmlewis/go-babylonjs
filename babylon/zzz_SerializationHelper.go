@@ -48,7 +48,3 @@ func (s *SerializationHelper) AppendSerializedAnimations(source *IAnimatable, de
 
 	s.p.Call("AppendSerializedAnimations", args...)
 }
-
-/*
-
- */

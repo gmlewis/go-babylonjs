@@ -87,7 +87,3 @@ func (s *SetParentAction) Serialize(parent interface{}) interface{} {
 	retVal := s.p.Call("serialize", args...)
 	return retVal
 }
-
-/*
-
- */

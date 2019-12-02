@@ -85,7 +85,3 @@ func (f *FlyCameraInputsManager) AddMouse(opts *FlyCameraInputsManagerAddMouseOp
 	retVal := f.p.Call("addMouse", args...)
 	return FlyCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
-
-/*
-
- */

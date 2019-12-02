@@ -36,70 +36,66 @@ func VideoRecorderOptionsArrayToJSArray(array []*VideoRecorderOptions) []interfa
 	return result
 }
 
-/*
-
 // AudioTracks returns the AudioTracks property of class VideoRecorderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorderoptions#audiotracks
-func (v *VideoRecorderOptions) AudioTracks(audioTracks *MediaStreamTrack) *VideoRecorderOptions {
-	p := ba.ctx.Get("VideoRecorderOptions").New(audioTracks.JSObject())
-	return VideoRecorderOptionsFromJSObject(p, ba.ctx)
+func (v *VideoRecorderOptions) AudioTracks() js.Value {
+	retVal := v.p.Get("audioTracks")
+	return retVal
 }
 
 // SetAudioTracks sets the AudioTracks property of class VideoRecorderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorderoptions#audiotracks
-func (v *VideoRecorderOptions) SetAudioTracks(audioTracks *MediaStreamTrack) *VideoRecorderOptions {
-	p := ba.ctx.Get("VideoRecorderOptions").New(audioTracks.JSObject())
-	return VideoRecorderOptionsFromJSObject(p, ba.ctx)
+func (v *VideoRecorderOptions) SetAudioTracks(audioTracks js.Value) *VideoRecorderOptions {
+	v.p.Set("audioTracks", audioTracks)
+	return v
 }
 
 // Fps returns the Fps property of class VideoRecorderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorderoptions#fps
-func (v *VideoRecorderOptions) Fps(fps float64) *VideoRecorderOptions {
-	p := ba.ctx.Get("VideoRecorderOptions").New(fps)
-	return VideoRecorderOptionsFromJSObject(p, ba.ctx)
+func (v *VideoRecorderOptions) Fps() float64 {
+	retVal := v.p.Get("fps")
+	return retVal.Float()
 }
 
 // SetFps sets the Fps property of class VideoRecorderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorderoptions#fps
 func (v *VideoRecorderOptions) SetFps(fps float64) *VideoRecorderOptions {
-	p := ba.ctx.Get("VideoRecorderOptions").New(fps)
-	return VideoRecorderOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("fps", fps)
+	return v
 }
 
 // MimeType returns the MimeType property of class VideoRecorderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorderoptions#mimetype
-func (v *VideoRecorderOptions) MimeType(mimeType string) *VideoRecorderOptions {
-	p := ba.ctx.Get("VideoRecorderOptions").New(mimeType)
-	return VideoRecorderOptionsFromJSObject(p, ba.ctx)
+func (v *VideoRecorderOptions) MimeType() string {
+	retVal := v.p.Get("mimeType")
+	return retVal.String()
 }
 
 // SetMimeType sets the MimeType property of class VideoRecorderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorderoptions#mimetype
 func (v *VideoRecorderOptions) SetMimeType(mimeType string) *VideoRecorderOptions {
-	p := ba.ctx.Get("VideoRecorderOptions").New(mimeType)
-	return VideoRecorderOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("mimeType", mimeType)
+	return v
 }
 
 // RecordChunckSize returns the RecordChunckSize property of class VideoRecorderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorderoptions#recordchuncksize
-func (v *VideoRecorderOptions) RecordChunckSize(recordChunckSize float64) *VideoRecorderOptions {
-	p := ba.ctx.Get("VideoRecorderOptions").New(recordChunckSize)
-	return VideoRecorderOptionsFromJSObject(p, ba.ctx)
+func (v *VideoRecorderOptions) RecordChunckSize() float64 {
+	retVal := v.p.Get("recordChunckSize")
+	return retVal.Float()
 }
 
 // SetRecordChunckSize sets the RecordChunckSize property of class VideoRecorderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorderoptions#recordchuncksize
 func (v *VideoRecorderOptions) SetRecordChunckSize(recordChunckSize float64) *VideoRecorderOptions {
-	p := ba.ctx.Get("VideoRecorderOptions").New(recordChunckSize)
-	return VideoRecorderOptionsFromJSObject(p, ba.ctx)
+	v.p.Set("recordChunckSize", recordChunckSize)
+	return v
 }
-
-*/

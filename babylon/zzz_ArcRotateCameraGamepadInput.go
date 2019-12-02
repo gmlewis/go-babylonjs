@@ -102,86 +102,82 @@ func (a *ArcRotateCameraGamepadInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // Camera returns the Camera property of class ArcRotateCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#camera
-func (a *ArcRotateCameraGamepadInput) Camera(camera *ArcRotateCamera) *ArcRotateCameraGamepadInput {
-	p := ba.ctx.Get("ArcRotateCameraGamepadInput").New(camera.JSObject())
-	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraGamepadInput) Camera() *ArcRotateCamera {
+	retVal := a.p.Get("camera")
+	return ArcRotateCameraFromJSObject(retVal, a.ctx)
 }
 
 // SetCamera sets the Camera property of class ArcRotateCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#camera
 func (a *ArcRotateCameraGamepadInput) SetCamera(camera *ArcRotateCamera) *ArcRotateCameraGamepadInput {
-	p := ba.ctx.Get("ArcRotateCameraGamepadInput").New(camera.JSObject())
-	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
+	a.p.Set("camera", camera.JSObject())
+	return a
 }
 
 // Gamepad returns the Gamepad property of class ArcRotateCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#gamepad
-func (a *ArcRotateCameraGamepadInput) Gamepad(gamepad *Gamepad) *ArcRotateCameraGamepadInput {
-	p := ba.ctx.Get("ArcRotateCameraGamepadInput").New(gamepad.JSObject())
-	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraGamepadInput) Gamepad() *Gamepad {
+	retVal := a.p.Get("gamepad")
+	return GamepadFromJSObject(retVal, a.ctx)
 }
 
 // SetGamepad sets the Gamepad property of class ArcRotateCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#gamepad
 func (a *ArcRotateCameraGamepadInput) SetGamepad(gamepad *Gamepad) *ArcRotateCameraGamepadInput {
-	p := ba.ctx.Get("ArcRotateCameraGamepadInput").New(gamepad.JSObject())
-	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
+	a.p.Set("gamepad", gamepad.JSObject())
+	return a
 }
 
 // GamepadMoveSensibility returns the GamepadMoveSensibility property of class ArcRotateCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#gamepadmovesensibility
-func (a *ArcRotateCameraGamepadInput) GamepadMoveSensibility(gamepadMoveSensibility float64) *ArcRotateCameraGamepadInput {
-	p := ba.ctx.Get("ArcRotateCameraGamepadInput").New(gamepadMoveSensibility)
-	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraGamepadInput) GamepadMoveSensibility() float64 {
+	retVal := a.p.Get("gamepadMoveSensibility")
+	return retVal.Float()
 }
 
 // SetGamepadMoveSensibility sets the GamepadMoveSensibility property of class ArcRotateCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#gamepadmovesensibility
 func (a *ArcRotateCameraGamepadInput) SetGamepadMoveSensibility(gamepadMoveSensibility float64) *ArcRotateCameraGamepadInput {
-	p := ba.ctx.Get("ArcRotateCameraGamepadInput").New(gamepadMoveSensibility)
-	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
+	a.p.Set("gamepadMoveSensibility", gamepadMoveSensibility)
+	return a
 }
 
 // GamepadRotationSensibility returns the GamepadRotationSensibility property of class ArcRotateCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#gamepadrotationsensibility
-func (a *ArcRotateCameraGamepadInput) GamepadRotationSensibility(gamepadRotationSensibility float64) *ArcRotateCameraGamepadInput {
-	p := ba.ctx.Get("ArcRotateCameraGamepadInput").New(gamepadRotationSensibility)
-	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraGamepadInput) GamepadRotationSensibility() float64 {
+	retVal := a.p.Get("gamepadRotationSensibility")
+	return retVal.Float()
 }
 
 // SetGamepadRotationSensibility sets the GamepadRotationSensibility property of class ArcRotateCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#gamepadrotationsensibility
 func (a *ArcRotateCameraGamepadInput) SetGamepadRotationSensibility(gamepadRotationSensibility float64) *ArcRotateCameraGamepadInput {
-	p := ba.ctx.Get("ArcRotateCameraGamepadInput").New(gamepadRotationSensibility)
-	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
+	a.p.Set("gamepadRotationSensibility", gamepadRotationSensibility)
+	return a
 }
 
 // InvertYAxis returns the InvertYAxis property of class ArcRotateCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#invertyaxis
-func (a *ArcRotateCameraGamepadInput) InvertYAxis(invertYAxis bool) *ArcRotateCameraGamepadInput {
-	p := ba.ctx.Get("ArcRotateCameraGamepadInput").New(invertYAxis)
-	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraGamepadInput) InvertYAxis() bool {
+	retVal := a.p.Get("invertYAxis")
+	return retVal.Bool()
 }
 
 // SetInvertYAxis sets the InvertYAxis property of class ArcRotateCameraGamepadInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameragamepadinput#invertyaxis
 func (a *ArcRotateCameraGamepadInput) SetInvertYAxis(invertYAxis bool) *ArcRotateCameraGamepadInput {
-	p := ba.ctx.Get("ArcRotateCameraGamepadInput").New(invertYAxis)
-	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
+	a.p.Set("invertYAxis", invertYAxis)
+	return a
 }
-
-*/

@@ -97,102 +97,98 @@ func (m *MultiRenderTarget) Resize(size interface{}) {
 	m.p.Call("resize", args...)
 }
 
-/*
-
 // DepthTexture returns the DepthTexture property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#depthtexture
-func (m *MultiRenderTarget) DepthTexture(depthTexture *Texture) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(depthTexture.JSObject())
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+func (m *MultiRenderTarget) DepthTexture() *Texture {
+	retVal := m.p.Get("depthTexture")
+	return TextureFromJSObject(retVal, m.ctx)
 }
 
 // SetDepthTexture sets the DepthTexture property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#depthtexture
 func (m *MultiRenderTarget) SetDepthTexture(depthTexture *Texture) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(depthTexture.JSObject())
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+	m.p.Set("depthTexture", depthTexture.JSObject())
+	return m
 }
 
 // IsSupported returns the IsSupported property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#issupported
-func (m *MultiRenderTarget) IsSupported(isSupported bool) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(isSupported)
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+func (m *MultiRenderTarget) IsSupported() bool {
+	retVal := m.p.Get("isSupported")
+	return retVal.Bool()
 }
 
 // SetIsSupported sets the IsSupported property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#issupported
 func (m *MultiRenderTarget) SetIsSupported(isSupported bool) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(isSupported)
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+	m.p.Set("isSupported", isSupported)
+	return m
 }
 
 // Samples returns the Samples property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#samples
-func (m *MultiRenderTarget) Samples(samples float64) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(samples)
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+func (m *MultiRenderTarget) Samples() float64 {
+	retVal := m.p.Get("samples")
+	return retVal.Float()
 }
 
 // SetSamples sets the Samples property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#samples
 func (m *MultiRenderTarget) SetSamples(samples float64) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(samples)
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+	m.p.Set("samples", samples)
+	return m
 }
 
 // Textures returns the Textures property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#textures
-func (m *MultiRenderTarget) Textures(textures *Texture) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(textures.JSObject())
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+func (m *MultiRenderTarget) Textures() *Texture {
+	retVal := m.p.Get("textures")
+	return TextureFromJSObject(retVal, m.ctx)
 }
 
 // SetTextures sets the Textures property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#textures
 func (m *MultiRenderTarget) SetTextures(textures *Texture) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(textures.JSObject())
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+	m.p.Set("textures", textures.JSObject())
+	return m
 }
 
 // WrapU returns the WrapU property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrapu
-func (m *MultiRenderTarget) WrapU(wrapU float64) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(wrapU)
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+func (m *MultiRenderTarget) WrapU() float64 {
+	retVal := m.p.Get("wrapU")
+	return retVal.Float()
 }
 
 // SetWrapU sets the WrapU property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrapu
 func (m *MultiRenderTarget) SetWrapU(wrapU float64) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(wrapU)
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+	m.p.Set("wrapU", wrapU)
+	return m
 }
 
 // WrapV returns the WrapV property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrapv
-func (m *MultiRenderTarget) WrapV(wrapV float64) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(wrapV)
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+func (m *MultiRenderTarget) WrapV() float64 {
+	retVal := m.p.Get("wrapV")
+	return retVal.Float()
 }
 
 // SetWrapV sets the WrapV property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrapv
 func (m *MultiRenderTarget) SetWrapV(wrapV float64) *MultiRenderTarget {
-	p := ba.ctx.Get("MultiRenderTarget").New(wrapV)
-	return MultiRenderTargetFromJSObject(p, ba.ctx)
+	m.p.Set("wrapV", wrapV)
+	return m
 }
-
-*/

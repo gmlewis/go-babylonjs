@@ -222,38 +222,34 @@ func (p *Plane) Transform(transformation *Matrix) *Plane {
 	return PlaneFromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // D returns the D property of class Plane.
 //
 // https://doc.babylonjs.com/api/classes/babylon.plane#d
-func (p *Plane) D(d float64) *Plane {
-	p := ba.ctx.Get("Plane").New(d)
-	return PlaneFromJSObject(p, ba.ctx)
+func (p *Plane) D() float64 {
+	retVal := p.p.Get("d")
+	return retVal.Float()
 }
 
 // SetD sets the D property of class Plane.
 //
 // https://doc.babylonjs.com/api/classes/babylon.plane#d
 func (p *Plane) SetD(d float64) *Plane {
-	p := ba.ctx.Get("Plane").New(d)
-	return PlaneFromJSObject(p, ba.ctx)
+	p.p.Set("d", d)
+	return p
 }
 
 // Normal returns the Normal property of class Plane.
 //
 // https://doc.babylonjs.com/api/classes/babylon.plane#normal
-func (p *Plane) Normal(normal *Vector3) *Plane {
-	p := ba.ctx.Get("Plane").New(normal.JSObject())
-	return PlaneFromJSObject(p, ba.ctx)
+func (p *Plane) Normal() *Vector3 {
+	retVal := p.p.Get("normal")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetNormal sets the Normal property of class Plane.
 //
 // https://doc.babylonjs.com/api/classes/babylon.plane#normal
 func (p *Plane) SetNormal(normal *Vector3) *Plane {
-	p := ba.ctx.Get("Plane").New(normal.JSObject())
-	return PlaneFromJSObject(p, ba.ctx)
+	p.p.Set("normal", normal.JSObject())
+	return p
 }
-
-*/

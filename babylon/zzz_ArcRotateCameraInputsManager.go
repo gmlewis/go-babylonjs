@@ -97,7 +97,3 @@ func (a *ArcRotateCameraInputsManager) AddVRDeviceOrientation() *ArcRotateCamera
 	retVal := a.p.Call("addVRDeviceOrientation")
 	return ArcRotateCameraInputsManagerFromJSObject(retVal, a.ctx)
 }
-
-/*
-
- */

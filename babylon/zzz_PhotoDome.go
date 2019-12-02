@@ -99,134 +99,130 @@ func (p *PhotoDome) Dispose(opts *PhotoDomeDisposeOpts) {
 	p.p.Call("dispose", args...)
 }
 
-/*
-
 // FovMultiplier returns the FovMultiplier property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#fovmultiplier
-func (p *PhotoDome) FovMultiplier(fovMultiplier float64) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(fovMultiplier)
-	return PhotoDomeFromJSObject(p, ba.ctx)
+func (p *PhotoDome) FovMultiplier() float64 {
+	retVal := p.p.Get("fovMultiplier")
+	return retVal.Float()
 }
 
 // SetFovMultiplier sets the FovMultiplier property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#fovmultiplier
 func (p *PhotoDome) SetFovMultiplier(fovMultiplier float64) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(fovMultiplier)
-	return PhotoDomeFromJSObject(p, ba.ctx)
+	p.p.Set("fovMultiplier", fovMultiplier)
+	return p
 }
 
 // ImageMode returns the ImageMode property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#imagemode
-func (p *PhotoDome) ImageMode(imageMode float64) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(imageMode)
-	return PhotoDomeFromJSObject(p, ba.ctx)
+func (p *PhotoDome) ImageMode() float64 {
+	retVal := p.p.Get("imageMode")
+	return retVal.Float()
 }
 
 // SetImageMode sets the ImageMode property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#imagemode
 func (p *PhotoDome) SetImageMode(imageMode float64) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(imageMode)
-	return PhotoDomeFromJSObject(p, ba.ctx)
+	p.p.Set("imageMode", imageMode)
+	return p
 }
 
 // MODE_MONOSCOPIC returns the MODE_MONOSCOPIC property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#mode_monoscopic
-func (p *PhotoDome) MODE_MONOSCOPIC(MODE_MONOSCOPIC float64) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(MODE_MONOSCOPIC)
-	return PhotoDomeFromJSObject(p, ba.ctx)
+func (p *PhotoDome) MODE_MONOSCOPIC() float64 {
+	retVal := p.p.Get("MODE_MONOSCOPIC")
+	return retVal.Float()
 }
 
 // SetMODE_MONOSCOPIC sets the MODE_MONOSCOPIC property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#mode_monoscopic
 func (p *PhotoDome) SetMODE_MONOSCOPIC(MODE_MONOSCOPIC float64) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(MODE_MONOSCOPIC)
-	return PhotoDomeFromJSObject(p, ba.ctx)
+	p.p.Set("MODE_MONOSCOPIC", MODE_MONOSCOPIC)
+	return p
 }
 
 // MODE_SIDEBYSIDE returns the MODE_SIDEBYSIDE property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#mode_sidebyside
-func (p *PhotoDome) MODE_SIDEBYSIDE(MODE_SIDEBYSIDE float64) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(MODE_SIDEBYSIDE)
-	return PhotoDomeFromJSObject(p, ba.ctx)
+func (p *PhotoDome) MODE_SIDEBYSIDE() float64 {
+	retVal := p.p.Get("MODE_SIDEBYSIDE")
+	return retVal.Float()
 }
 
 // SetMODE_SIDEBYSIDE sets the MODE_SIDEBYSIDE property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#mode_sidebyside
 func (p *PhotoDome) SetMODE_SIDEBYSIDE(MODE_SIDEBYSIDE float64) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(MODE_SIDEBYSIDE)
-	return PhotoDomeFromJSObject(p, ba.ctx)
+	p.p.Set("MODE_SIDEBYSIDE", MODE_SIDEBYSIDE)
+	return p
 }
 
 // MODE_TOPBOTTOM returns the MODE_TOPBOTTOM property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#mode_topbottom
-func (p *PhotoDome) MODE_TOPBOTTOM(MODE_TOPBOTTOM float64) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(MODE_TOPBOTTOM)
-	return PhotoDomeFromJSObject(p, ba.ctx)
+func (p *PhotoDome) MODE_TOPBOTTOM() float64 {
+	retVal := p.p.Get("MODE_TOPBOTTOM")
+	return retVal.Float()
 }
 
 // SetMODE_TOPBOTTOM sets the MODE_TOPBOTTOM property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#mode_topbottom
 func (p *PhotoDome) SetMODE_TOPBOTTOM(MODE_TOPBOTTOM float64) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(MODE_TOPBOTTOM)
-	return PhotoDomeFromJSObject(p, ba.ctx)
+	p.p.Set("MODE_TOPBOTTOM", MODE_TOPBOTTOM)
+	return p
 }
 
 // Mesh returns the Mesh property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#mesh
-func (p *PhotoDome) Mesh(mesh *Mesh) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(mesh.JSObject())
-	return PhotoDomeFromJSObject(p, ba.ctx)
+func (p *PhotoDome) Mesh() *Mesh {
+	retVal := p.p.Get("mesh")
+	return MeshFromJSObject(retVal, p.ctx)
 }
 
 // SetMesh sets the Mesh property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#mesh
 func (p *PhotoDome) SetMesh(mesh *Mesh) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(mesh.JSObject())
-	return PhotoDomeFromJSObject(p, ba.ctx)
+	p.p.Set("mesh", mesh.JSObject())
+	return p
 }
 
 // OnLoadErrorObservable returns the OnLoadErrorObservable property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#onloaderrorobservable
-func (p *PhotoDome) OnLoadErrorObservable(onLoadErrorObservable *Observable) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(onLoadErrorObservable.JSObject())
-	return PhotoDomeFromJSObject(p, ba.ctx)
+func (p *PhotoDome) OnLoadErrorObservable() *Observable {
+	retVal := p.p.Get("onLoadErrorObservable")
+	return ObservableFromJSObject(retVal, p.ctx)
 }
 
 // SetOnLoadErrorObservable sets the OnLoadErrorObservable property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#onloaderrorobservable
 func (p *PhotoDome) SetOnLoadErrorObservable(onLoadErrorObservable *Observable) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(onLoadErrorObservable.JSObject())
-	return PhotoDomeFromJSObject(p, ba.ctx)
+	p.p.Set("onLoadErrorObservable", onLoadErrorObservable.JSObject())
+	return p
 }
 
 // PhotoTexture returns the PhotoTexture property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#phototexture
-func (p *PhotoDome) PhotoTexture(photoTexture *Texture) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(photoTexture.JSObject())
-	return PhotoDomeFromJSObject(p, ba.ctx)
+func (p *PhotoDome) PhotoTexture() *Texture {
+	retVal := p.p.Get("photoTexture")
+	return TextureFromJSObject(retVal, p.ctx)
 }
 
 // SetPhotoTexture sets the PhotoTexture property of class PhotoDome.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome#phototexture
 func (p *PhotoDome) SetPhotoTexture(photoTexture *Texture) *PhotoDome {
-	p := ba.ctx.Get("PhotoDome").New(photoTexture.JSObject())
-	return PhotoDomeFromJSObject(p, ba.ctx)
+	p.p.Set("photoTexture", photoTexture.JSObject())
+	return p
 }
-
-*/

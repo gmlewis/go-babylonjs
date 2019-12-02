@@ -100,7 +100,3 @@ func (p *PhysicsGravitationalFieldEvent) GetData() js.Value {
 	retVal := p.p.Call("getData")
 	return retVal
 }
-
-/*
-
- */

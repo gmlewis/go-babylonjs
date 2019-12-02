@@ -281,422 +281,418 @@ func (w *WaterMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // BumpAffectsReflection returns the BumpAffectsReflection property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#bumpaffectsreflection
-func (w *WaterMaterial) BumpAffectsReflection(bumpAffectsReflection bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(bumpAffectsReflection)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) BumpAffectsReflection() bool {
+	retVal := w.p.Get("bumpAffectsReflection")
+	return retVal.Bool()
 }
 
 // SetBumpAffectsReflection sets the BumpAffectsReflection property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#bumpaffectsreflection
 func (w *WaterMaterial) SetBumpAffectsReflection(bumpAffectsReflection bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(bumpAffectsReflection)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("bumpAffectsReflection", bumpAffectsReflection)
+	return w
 }
 
 // BumpHeight returns the BumpHeight property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#bumpheight
-func (w *WaterMaterial) BumpHeight(bumpHeight float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(bumpHeight)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) BumpHeight() float64 {
+	retVal := w.p.Get("bumpHeight")
+	return retVal.Float()
 }
 
 // SetBumpHeight sets the BumpHeight property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#bumpheight
 func (w *WaterMaterial) SetBumpHeight(bumpHeight float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(bumpHeight)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("bumpHeight", bumpHeight)
+	return w
 }
 
 // BumpSuperimpose returns the BumpSuperimpose property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#bumpsuperimpose
-func (w *WaterMaterial) BumpSuperimpose(bumpSuperimpose bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(bumpSuperimpose)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) BumpSuperimpose() bool {
+	retVal := w.p.Get("bumpSuperimpose")
+	return retVal.Bool()
 }
 
 // SetBumpSuperimpose sets the BumpSuperimpose property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#bumpsuperimpose
 func (w *WaterMaterial) SetBumpSuperimpose(bumpSuperimpose bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(bumpSuperimpose)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("bumpSuperimpose", bumpSuperimpose)
+	return w
 }
 
 // BumpTexture returns the BumpTexture property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#bumptexture
-func (w *WaterMaterial) BumpTexture(bumpTexture *BaseTexture) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(bumpTexture.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) BumpTexture() *BaseTexture {
+	retVal := w.p.Get("bumpTexture")
+	return BaseTextureFromJSObject(retVal, w.ctx)
 }
 
 // SetBumpTexture sets the BumpTexture property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#bumptexture
 func (w *WaterMaterial) SetBumpTexture(bumpTexture *BaseTexture) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(bumpTexture.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("bumpTexture", bumpTexture.JSObject())
+	return w
 }
 
 // ColorBlendFactor returns the ColorBlendFactor property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#colorblendfactor
-func (w *WaterMaterial) ColorBlendFactor(colorBlendFactor float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(colorBlendFactor)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) ColorBlendFactor() float64 {
+	retVal := w.p.Get("colorBlendFactor")
+	return retVal.Float()
 }
 
 // SetColorBlendFactor sets the ColorBlendFactor property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#colorblendfactor
 func (w *WaterMaterial) SetColorBlendFactor(colorBlendFactor float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(colorBlendFactor)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("colorBlendFactor", colorBlendFactor)
+	return w
 }
 
 // ColorBlendFactor2 returns the ColorBlendFactor2 property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#colorblendfactor2
-func (w *WaterMaterial) ColorBlendFactor2(colorBlendFactor2 float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(colorBlendFactor2)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) ColorBlendFactor2() float64 {
+	retVal := w.p.Get("colorBlendFactor2")
+	return retVal.Float()
 }
 
 // SetColorBlendFactor2 sets the ColorBlendFactor2 property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#colorblendfactor2
 func (w *WaterMaterial) SetColorBlendFactor2(colorBlendFactor2 float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(colorBlendFactor2)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("colorBlendFactor2", colorBlendFactor2)
+	return w
 }
 
 // DiffuseColor returns the DiffuseColor property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#diffusecolor
-func (w *WaterMaterial) DiffuseColor(diffuseColor *Color3) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(diffuseColor.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) DiffuseColor() *Color3 {
+	retVal := w.p.Get("diffuseColor")
+	return Color3FromJSObject(retVal, w.ctx)
 }
 
 // SetDiffuseColor sets the DiffuseColor property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#diffusecolor
 func (w *WaterMaterial) SetDiffuseColor(diffuseColor *Color3) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(diffuseColor.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("diffuseColor", diffuseColor.JSObject())
+	return w
 }
 
 // DisableClipPlane returns the DisableClipPlane property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#disableclipplane
-func (w *WaterMaterial) DisableClipPlane(disableClipPlane bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(disableClipPlane)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) DisableClipPlane() bool {
+	retVal := w.p.Get("disableClipPlane")
+	return retVal.Bool()
 }
 
 // SetDisableClipPlane sets the DisableClipPlane property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#disableclipplane
 func (w *WaterMaterial) SetDisableClipPlane(disableClipPlane bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(disableClipPlane)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("disableClipPlane", disableClipPlane)
+	return w
 }
 
 // DisableLighting returns the DisableLighting property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#disablelighting
-func (w *WaterMaterial) DisableLighting(disableLighting bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(disableLighting)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) DisableLighting() bool {
+	retVal := w.p.Get("disableLighting")
+	return retVal.Bool()
 }
 
 // SetDisableLighting sets the DisableLighting property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#disablelighting
 func (w *WaterMaterial) SetDisableLighting(disableLighting bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(disableLighting)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("disableLighting", disableLighting)
+	return w
 }
 
 // FresnelSeparate returns the FresnelSeparate property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#fresnelseparate
-func (w *WaterMaterial) FresnelSeparate(fresnelSeparate bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(fresnelSeparate)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) FresnelSeparate() bool {
+	retVal := w.p.Get("fresnelSeparate")
+	return retVal.Bool()
 }
 
 // SetFresnelSeparate sets the FresnelSeparate property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#fresnelseparate
 func (w *WaterMaterial) SetFresnelSeparate(fresnelSeparate bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(fresnelSeparate)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("fresnelSeparate", fresnelSeparate)
+	return w
 }
 
 // HasRenderTargetTextures returns the HasRenderTargetTextures property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#hasrendertargettextures
-func (w *WaterMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(hasRenderTargetTextures)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) HasRenderTargetTextures() bool {
+	retVal := w.p.Get("hasRenderTargetTextures")
+	return retVal.Bool()
 }
 
 // SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#hasrendertargettextures
 func (w *WaterMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(hasRenderTargetTextures)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("hasRenderTargetTextures", hasRenderTargetTextures)
+	return w
 }
 
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#maxsimultaneouslights
-func (w *WaterMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(maxSimultaneousLights)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) MaxSimultaneousLights() float64 {
+	retVal := w.p.Get("maxSimultaneousLights")
+	return retVal.Float()
 }
 
 // SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#maxsimultaneouslights
 func (w *WaterMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(maxSimultaneousLights)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("maxSimultaneousLights", maxSimultaneousLights)
+	return w
 }
 
 // ReflectionTexture returns the ReflectionTexture property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#reflectiontexture
-func (w *WaterMaterial) ReflectionTexture(reflectionTexture *RenderTargetTexture) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(reflectionTexture.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) ReflectionTexture() *RenderTargetTexture {
+	retVal := w.p.Get("reflectionTexture")
+	return RenderTargetTextureFromJSObject(retVal, w.ctx)
 }
 
 // SetReflectionTexture sets the ReflectionTexture property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#reflectiontexture
 func (w *WaterMaterial) SetReflectionTexture(reflectionTexture *RenderTargetTexture) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(reflectionTexture.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("reflectionTexture", reflectionTexture.JSObject())
+	return w
 }
 
 // RefractionTexture returns the RefractionTexture property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#refractiontexture
-func (w *WaterMaterial) RefractionTexture(refractionTexture *RenderTargetTexture) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(refractionTexture.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) RefractionTexture() *RenderTargetTexture {
+	retVal := w.p.Get("refractionTexture")
+	return RenderTargetTextureFromJSObject(retVal, w.ctx)
 }
 
 // SetRefractionTexture sets the RefractionTexture property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#refractiontexture
 func (w *WaterMaterial) SetRefractionTexture(refractionTexture *RenderTargetTexture) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(refractionTexture.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("refractionTexture", refractionTexture.JSObject())
+	return w
 }
 
 // RenderTargetSize returns the RenderTargetSize property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#rendertargetsize
-func (w *WaterMaterial) RenderTargetSize(renderTargetSize *Vector2) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(renderTargetSize.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) RenderTargetSize() *Vector2 {
+	retVal := w.p.Get("renderTargetSize")
+	return Vector2FromJSObject(retVal, w.ctx)
 }
 
 // SetRenderTargetSize sets the RenderTargetSize property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#rendertargetsize
 func (w *WaterMaterial) SetRenderTargetSize(renderTargetSize *Vector2) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(renderTargetSize.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("renderTargetSize", renderTargetSize.JSObject())
+	return w
 }
 
 // RenderTargetsEnabled returns the RenderTargetsEnabled property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#rendertargetsenabled
-func (w *WaterMaterial) RenderTargetsEnabled(renderTargetsEnabled bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(renderTargetsEnabled)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) RenderTargetsEnabled() bool {
+	retVal := w.p.Get("renderTargetsEnabled")
+	return retVal.Bool()
 }
 
 // SetRenderTargetsEnabled sets the RenderTargetsEnabled property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#rendertargetsenabled
 func (w *WaterMaterial) SetRenderTargetsEnabled(renderTargetsEnabled bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(renderTargetsEnabled)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("renderTargetsEnabled", renderTargetsEnabled)
+	return w
 }
 
 // SpecularColor returns the SpecularColor property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#specularcolor
-func (w *WaterMaterial) SpecularColor(specularColor *Color3) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(specularColor.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) SpecularColor() *Color3 {
+	retVal := w.p.Get("specularColor")
+	return Color3FromJSObject(retVal, w.ctx)
 }
 
 // SetSpecularColor sets the SpecularColor property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#specularcolor
 func (w *WaterMaterial) SetSpecularColor(specularColor *Color3) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(specularColor.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("specularColor", specularColor.JSObject())
+	return w
 }
 
 // SpecularPower returns the SpecularPower property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#specularpower
-func (w *WaterMaterial) SpecularPower(specularPower float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(specularPower)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) SpecularPower() float64 {
+	retVal := w.p.Get("specularPower")
+	return retVal.Float()
 }
 
 // SetSpecularPower sets the SpecularPower property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#specularpower
 func (w *WaterMaterial) SetSpecularPower(specularPower float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(specularPower)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("specularPower", specularPower)
+	return w
 }
 
 // UseLogarithmicDepth returns the UseLogarithmicDepth property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#uselogarithmicdepth
-func (w *WaterMaterial) UseLogarithmicDepth(useLogarithmicDepth bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(useLogarithmicDepth)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) UseLogarithmicDepth() bool {
+	retVal := w.p.Get("useLogarithmicDepth")
+	return retVal.Bool()
 }
 
 // SetUseLogarithmicDepth sets the UseLogarithmicDepth property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#uselogarithmicdepth
 func (w *WaterMaterial) SetUseLogarithmicDepth(useLogarithmicDepth bool) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(useLogarithmicDepth)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("useLogarithmicDepth", useLogarithmicDepth)
+	return w
 }
 
 // WaterColor returns the WaterColor property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#watercolor
-func (w *WaterMaterial) WaterColor(waterColor *Color3) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(waterColor.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) WaterColor() *Color3 {
+	retVal := w.p.Get("waterColor")
+	return Color3FromJSObject(retVal, w.ctx)
 }
 
 // SetWaterColor sets the WaterColor property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#watercolor
 func (w *WaterMaterial) SetWaterColor(waterColor *Color3) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(waterColor.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("waterColor", waterColor.JSObject())
+	return w
 }
 
 // WaterColor2 returns the WaterColor2 property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#watercolor2
-func (w *WaterMaterial) WaterColor2(waterColor2 *Color3) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(waterColor2.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) WaterColor2() *Color3 {
+	retVal := w.p.Get("waterColor2")
+	return Color3FromJSObject(retVal, w.ctx)
 }
 
 // SetWaterColor2 sets the WaterColor2 property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#watercolor2
 func (w *WaterMaterial) SetWaterColor2(waterColor2 *Color3) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(waterColor2.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("waterColor2", waterColor2.JSObject())
+	return w
 }
 
 // WaveHeight returns the WaveHeight property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#waveheight
-func (w *WaterMaterial) WaveHeight(waveHeight float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(waveHeight)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) WaveHeight() float64 {
+	retVal := w.p.Get("waveHeight")
+	return retVal.Float()
 }
 
 // SetWaveHeight sets the WaveHeight property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#waveheight
 func (w *WaterMaterial) SetWaveHeight(waveHeight float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(waveHeight)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("waveHeight", waveHeight)
+	return w
 }
 
 // WaveLength returns the WaveLength property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#wavelength
-func (w *WaterMaterial) WaveLength(waveLength float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(waveLength)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) WaveLength() float64 {
+	retVal := w.p.Get("waveLength")
+	return retVal.Float()
 }
 
 // SetWaveLength sets the WaveLength property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#wavelength
 func (w *WaterMaterial) SetWaveLength(waveLength float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(waveLength)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("waveLength", waveLength)
+	return w
 }
 
 // WaveSpeed returns the WaveSpeed property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#wavespeed
-func (w *WaterMaterial) WaveSpeed(waveSpeed float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(waveSpeed)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) WaveSpeed() float64 {
+	retVal := w.p.Get("waveSpeed")
+	return retVal.Float()
 }
 
 // SetWaveSpeed sets the WaveSpeed property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#wavespeed
 func (w *WaterMaterial) SetWaveSpeed(waveSpeed float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(waveSpeed)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("waveSpeed", waveSpeed)
+	return w
 }
 
 // WindDirection returns the WindDirection property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#winddirection
-func (w *WaterMaterial) WindDirection(windDirection *Vector2) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(windDirection.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) WindDirection() *Vector2 {
+	retVal := w.p.Get("windDirection")
+	return Vector2FromJSObject(retVal, w.ctx)
 }
 
 // SetWindDirection sets the WindDirection property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#winddirection
 func (w *WaterMaterial) SetWindDirection(windDirection *Vector2) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(windDirection.JSObject())
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("windDirection", windDirection.JSObject())
+	return w
 }
 
 // WindForce returns the WindForce property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#windforce
-func (w *WaterMaterial) WindForce(windForce float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(windForce)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+func (w *WaterMaterial) WindForce() float64 {
+	retVal := w.p.Get("windForce")
+	return retVal.Float()
 }
 
 // SetWindForce sets the WindForce property of class WaterMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#windforce
 func (w *WaterMaterial) SetWindForce(windForce float64) *WaterMaterial {
-	p := ba.ctx.Get("WaterMaterial").New(windForce)
-	return WaterMaterialFromJSObject(p, ba.ctx)
+	w.p.Set("windForce", windForce)
+	return w
 }
-
-*/

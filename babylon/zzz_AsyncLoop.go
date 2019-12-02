@@ -146,38 +146,34 @@ func (a *AsyncLoop) SyncAsyncForLoop(iterations float64, syncedIterations float6
 	return AsyncLoopFromJSObject(retVal, a.ctx)
 }
 
-/*
-
 // Index returns the Index property of class AsyncLoop.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop#index
-func (a *AsyncLoop) Index(index float64) *AsyncLoop {
-	p := ba.ctx.Get("AsyncLoop").New(index)
-	return AsyncLoopFromJSObject(p, ba.ctx)
+func (a *AsyncLoop) Index() float64 {
+	retVal := a.p.Get("index")
+	return retVal.Float()
 }
 
 // SetIndex sets the Index property of class AsyncLoop.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop#index
 func (a *AsyncLoop) SetIndex(index float64) *AsyncLoop {
-	p := ba.ctx.Get("AsyncLoop").New(index)
-	return AsyncLoopFromJSObject(p, ba.ctx)
+	a.p.Set("index", index)
+	return a
 }
 
 // Iterations returns the Iterations property of class AsyncLoop.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop#iterations
-func (a *AsyncLoop) Iterations(iterations float64) *AsyncLoop {
-	p := ba.ctx.Get("AsyncLoop").New(iterations)
-	return AsyncLoopFromJSObject(p, ba.ctx)
+func (a *AsyncLoop) Iterations() float64 {
+	retVal := a.p.Get("iterations")
+	return retVal.Float()
 }
 
 // SetIterations sets the Iterations property of class AsyncLoop.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop#iterations
 func (a *AsyncLoop) SetIterations(iterations float64) *AsyncLoop {
-	p := ba.ctx.Get("AsyncLoop").New(iterations)
-	return AsyncLoopFromJSObject(p, ba.ctx)
+	a.p.Set("iterations", iterations)
+	return a
 }
-
-*/

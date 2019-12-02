@@ -89,7 +89,3 @@ func (s *StringTools) StartsWith(str string, suffix string) bool {
 	retVal := s.p.Call("StartsWith", args...)
 	return retVal.Bool()
 }
-
-/*
-
- */

@@ -295,198 +295,138 @@ func (l *LensRenderingPipeline) SetHighlightsThreshold(amount float64) {
 	l.p.Call("setHighlightsThreshold", args...)
 }
 
-/*
-
 // BlurNoise returns the BlurNoise property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#blurnoise
-func (l *LensRenderingPipeline) BlurNoise(blurNoise bool) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(blurNoise)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) BlurNoise() bool {
+	retVal := l.p.Get("blurNoise")
+	return retVal.Bool()
 }
 
 // SetBlurNoise sets the BlurNoise property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#blurnoise
 func (l *LensRenderingPipeline) SetBlurNoise(blurNoise bool) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(blurNoise)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+	l.p.Set("blurNoise", blurNoise)
+	return l
 }
 
 // ChromaticAberration returns the ChromaticAberration property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#chromaticaberration
-func (l *LensRenderingPipeline) ChromaticAberration(chromaticAberration float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(chromaticAberration)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetChromaticAberration sets the ChromaticAberration property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#chromaticaberration
-func (l *LensRenderingPipeline) SetChromaticAberration(chromaticAberration float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(chromaticAberration)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) ChromaticAberration() float64 {
+	retVal := l.p.Get("chromaticAberration")
+	return retVal.Float()
 }
 
 // DarkenOutOfFocus returns the DarkenOutOfFocus property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#darkenoutoffocus
-func (l *LensRenderingPipeline) DarkenOutOfFocus(darkenOutOfFocus float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(darkenOutOfFocus)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetDarkenOutOfFocus sets the DarkenOutOfFocus property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#darkenoutoffocus
-func (l *LensRenderingPipeline) SetDarkenOutOfFocus(darkenOutOfFocus float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(darkenOutOfFocus)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) DarkenOutOfFocus() float64 {
+	retVal := l.p.Get("darkenOutOfFocus")
+	return retVal.Float()
 }
 
 // DofAperture returns the DofAperture property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#dofaperture
-func (l *LensRenderingPipeline) DofAperture(dofAperture float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(dofAperture)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) DofAperture() float64 {
+	retVal := l.p.Get("dofAperture")
+	return retVal.Float()
 }
 
 // SetDofAperture sets the DofAperture property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#dofaperture
 func (l *LensRenderingPipeline) SetDofAperture(dofAperture float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(dofAperture)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+	l.p.Set("dofAperture", dofAperture)
+	return l
 }
 
 // DofDistortion returns the DofDistortion property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#dofdistortion
-func (l *LensRenderingPipeline) DofDistortion(dofDistortion float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(dofDistortion)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) DofDistortion() float64 {
+	retVal := l.p.Get("dofDistortion")
+	return retVal.Float()
 }
 
 // SetDofDistortion sets the DofDistortion property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#dofdistortion
 func (l *LensRenderingPipeline) SetDofDistortion(dofDistortion float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(dofDistortion)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+	l.p.Set("dofDistortion", dofDistortion)
+	return l
 }
 
 // EdgeBlur returns the EdgeBlur property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#edgeblur
-func (l *LensRenderingPipeline) EdgeBlur(edgeBlur float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(edgeBlur)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetEdgeBlur sets the EdgeBlur property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#edgeblur
-func (l *LensRenderingPipeline) SetEdgeBlur(edgeBlur float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(edgeBlur)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) EdgeBlur() float64 {
+	retVal := l.p.Get("edgeBlur")
+	return retVal.Float()
 }
 
 // EdgeDistortion returns the EdgeDistortion property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#edgedistortion
-func (l *LensRenderingPipeline) EdgeDistortion(edgeDistortion float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(edgeDistortion)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetEdgeDistortion sets the EdgeDistortion property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#edgedistortion
-func (l *LensRenderingPipeline) SetEdgeDistortion(edgeDistortion float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(edgeDistortion)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) EdgeDistortion() float64 {
+	retVal := l.p.Get("edgeDistortion")
+	return retVal.Float()
 }
 
 // GrainAmount returns the GrainAmount property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#grainamount
-func (l *LensRenderingPipeline) GrainAmount(grainAmount float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(grainAmount)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetGrainAmount sets the GrainAmount property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#grainamount
-func (l *LensRenderingPipeline) SetGrainAmount(grainAmount float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(grainAmount)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) GrainAmount() float64 {
+	retVal := l.p.Get("grainAmount")
+	return retVal.Float()
 }
 
 // HighlightsGain returns the HighlightsGain property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#highlightsgain
-func (l *LensRenderingPipeline) HighlightsGain(highlightsGain float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(highlightsGain)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetHighlightsGain sets the HighlightsGain property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#highlightsgain
-func (l *LensRenderingPipeline) SetHighlightsGain(highlightsGain float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(highlightsGain)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) HighlightsGain() float64 {
+	retVal := l.p.Get("highlightsGain")
+	return retVal.Float()
 }
 
 // HighlightsThreshold returns the HighlightsThreshold property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#highlightsthreshold
-func (l *LensRenderingPipeline) HighlightsThreshold(highlightsThreshold float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(highlightsThreshold)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetHighlightsThreshold sets the HighlightsThreshold property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#highlightsthreshold
-func (l *LensRenderingPipeline) SetHighlightsThreshold(highlightsThreshold float64) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(highlightsThreshold)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) HighlightsThreshold() float64 {
+	retVal := l.p.Get("highlightsThreshold")
+	return retVal.Float()
 }
 
 // PentagonBokeh returns the PentagonBokeh property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#pentagonbokeh
-func (l *LensRenderingPipeline) PentagonBokeh(pentagonBokeh bool) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(pentagonBokeh)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) PentagonBokeh() bool {
+	retVal := l.p.Get("pentagonBokeh")
+	return retVal.Bool()
 }
 
 // SetPentagonBokeh sets the PentagonBokeh property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#pentagonbokeh
 func (l *LensRenderingPipeline) SetPentagonBokeh(pentagonBokeh bool) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(pentagonBokeh)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+	l.p.Set("pentagonBokeh", pentagonBokeh)
+	return l
 }
 
 // Scene returns the Scene property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#scene
-func (l *LensRenderingPipeline) Scene(scene *Scene) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(scene.JSObject())
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+func (l *LensRenderingPipeline) Scene() *Scene {
+	retVal := l.p.Get("scene")
+	return SceneFromJSObject(retVal, l.ctx)
 }
 
 // SetScene sets the Scene property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#scene
 func (l *LensRenderingPipeline) SetScene(scene *Scene) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(scene.JSObject())
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
+	l.p.Set("scene", scene.JSObject())
+	return l
 }
-
-*/

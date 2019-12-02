@@ -38,54 +38,50 @@ func IScreenshotSizeArrayToJSArray(array []*IScreenshotSize) []interface{} {
 	return result
 }
 
-/*
-
 // Height returns the Height property of class IScreenshotSize.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iscreenshotsize#height
-func (i *IScreenshotSize) Height(height float64) *IScreenshotSize {
-	p := ba.ctx.Get("IScreenshotSize").New(height)
-	return IScreenshotSizeFromJSObject(p, ba.ctx)
+func (i *IScreenshotSize) Height() float64 {
+	retVal := i.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class IScreenshotSize.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iscreenshotsize#height
 func (i *IScreenshotSize) SetHeight(height float64) *IScreenshotSize {
-	p := ba.ctx.Get("IScreenshotSize").New(height)
-	return IScreenshotSizeFromJSObject(p, ba.ctx)
+	i.p.Set("height", height)
+	return i
 }
 
 // Precision returns the Precision property of class IScreenshotSize.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iscreenshotsize#precision
-func (i *IScreenshotSize) Precision(precision float64) *IScreenshotSize {
-	p := ba.ctx.Get("IScreenshotSize").New(precision)
-	return IScreenshotSizeFromJSObject(p, ba.ctx)
+func (i *IScreenshotSize) Precision() float64 {
+	retVal := i.p.Get("precision")
+	return retVal.Float()
 }
 
 // SetPrecision sets the Precision property of class IScreenshotSize.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iscreenshotsize#precision
 func (i *IScreenshotSize) SetPrecision(precision float64) *IScreenshotSize {
-	p := ba.ctx.Get("IScreenshotSize").New(precision)
-	return IScreenshotSizeFromJSObject(p, ba.ctx)
+	i.p.Set("precision", precision)
+	return i
 }
 
 // Width returns the Width property of class IScreenshotSize.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iscreenshotsize#width
-func (i *IScreenshotSize) Width(width float64) *IScreenshotSize {
-	p := ba.ctx.Get("IScreenshotSize").New(width)
-	return IScreenshotSizeFromJSObject(p, ba.ctx)
+func (i *IScreenshotSize) Width() float64 {
+	retVal := i.p.Get("width")
+	return retVal.Float()
 }
 
 // SetWidth sets the Width property of class IScreenshotSize.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iscreenshotsize#width
 func (i *IScreenshotSize) SetWidth(width float64) *IScreenshotSize {
-	p := ba.ctx.Get("IScreenshotSize").New(width)
-	return IScreenshotSizeFromJSObject(p, ba.ctx)
+	i.p.Set("width", width)
+	return i
 }
-
-*/

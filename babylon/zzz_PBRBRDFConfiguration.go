@@ -105,134 +105,130 @@ func (p *PBRBRDFConfiguration) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // DEFAULT_USE_ENERGY_CONSERVATION returns the DEFAULT_USE_ENERGY_CONSERVATION property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#default_use_energy_conservation
-func (p *PBRBRDFConfiguration) DEFAULT_USE_ENERGY_CONSERVATION(DEFAULT_USE_ENERGY_CONSERVATION bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(DEFAULT_USE_ENERGY_CONSERVATION)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRBRDFConfiguration) DEFAULT_USE_ENERGY_CONSERVATION() bool {
+	retVal := p.p.Get("DEFAULT_USE_ENERGY_CONSERVATION")
+	return retVal.Bool()
 }
 
 // SetDEFAULT_USE_ENERGY_CONSERVATION sets the DEFAULT_USE_ENERGY_CONSERVATION property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#default_use_energy_conservation
 func (p *PBRBRDFConfiguration) SetDEFAULT_USE_ENERGY_CONSERVATION(DEFAULT_USE_ENERGY_CONSERVATION bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(DEFAULT_USE_ENERGY_CONSERVATION)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("DEFAULT_USE_ENERGY_CONSERVATION", DEFAULT_USE_ENERGY_CONSERVATION)
+	return p
 }
 
 // DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED returns the DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#default_use_smith_visibility_height_correlated
-func (p *PBRBRDFConfiguration) DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED(DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRBRDFConfiguration) DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED() bool {
+	retVal := p.p.Get("DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED")
+	return retVal.Bool()
 }
 
 // SetDEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED sets the DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#default_use_smith_visibility_height_correlated
 func (p *PBRBRDFConfiguration) SetDEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED(DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED", DEFAULT_USE_SMITH_VISIBILITY_HEIGHT_CORRELATED)
+	return p
 }
 
 // DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION returns the DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#default_use_specular_glossiness_input_energy_conservation
-func (p *PBRBRDFConfiguration) DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION(DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRBRDFConfiguration) DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION() bool {
+	retVal := p.p.Get("DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION")
+	return retVal.Bool()
 }
 
 // SetDEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION sets the DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#default_use_specular_glossiness_input_energy_conservation
 func (p *PBRBRDFConfiguration) SetDEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION(DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION", DEFAULT_USE_SPECULAR_GLOSSINESS_INPUT_ENERGY_CONSERVATION)
+	return p
 }
 
 // DEFAULT_USE_SPHERICAL_HARMONICS returns the DEFAULT_USE_SPHERICAL_HARMONICS property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#default_use_spherical_harmonics
-func (p *PBRBRDFConfiguration) DEFAULT_USE_SPHERICAL_HARMONICS(DEFAULT_USE_SPHERICAL_HARMONICS bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(DEFAULT_USE_SPHERICAL_HARMONICS)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRBRDFConfiguration) DEFAULT_USE_SPHERICAL_HARMONICS() bool {
+	retVal := p.p.Get("DEFAULT_USE_SPHERICAL_HARMONICS")
+	return retVal.Bool()
 }
 
 // SetDEFAULT_USE_SPHERICAL_HARMONICS sets the DEFAULT_USE_SPHERICAL_HARMONICS property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#default_use_spherical_harmonics
 func (p *PBRBRDFConfiguration) SetDEFAULT_USE_SPHERICAL_HARMONICS(DEFAULT_USE_SPHERICAL_HARMONICS bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(DEFAULT_USE_SPHERICAL_HARMONICS)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("DEFAULT_USE_SPHERICAL_HARMONICS", DEFAULT_USE_SPHERICAL_HARMONICS)
+	return p
 }
 
 // UseEnergyConservation returns the UseEnergyConservation property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#useenergyconservation
-func (p *PBRBRDFConfiguration) UseEnergyConservation(useEnergyConservation bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(useEnergyConservation)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRBRDFConfiguration) UseEnergyConservation() bool {
+	retVal := p.p.Get("useEnergyConservation")
+	return retVal.Bool()
 }
 
 // SetUseEnergyConservation sets the UseEnergyConservation property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#useenergyconservation
 func (p *PBRBRDFConfiguration) SetUseEnergyConservation(useEnergyConservation bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(useEnergyConservation)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("useEnergyConservation", useEnergyConservation)
+	return p
 }
 
 // UseSmithVisibilityHeightCorrelated returns the UseSmithVisibilityHeightCorrelated property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#usesmithvisibilityheightcorrelated
-func (p *PBRBRDFConfiguration) UseSmithVisibilityHeightCorrelated(useSmithVisibilityHeightCorrelated bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(useSmithVisibilityHeightCorrelated)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRBRDFConfiguration) UseSmithVisibilityHeightCorrelated() bool {
+	retVal := p.p.Get("useSmithVisibilityHeightCorrelated")
+	return retVal.Bool()
 }
 
 // SetUseSmithVisibilityHeightCorrelated sets the UseSmithVisibilityHeightCorrelated property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#usesmithvisibilityheightcorrelated
 func (p *PBRBRDFConfiguration) SetUseSmithVisibilityHeightCorrelated(useSmithVisibilityHeightCorrelated bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(useSmithVisibilityHeightCorrelated)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("useSmithVisibilityHeightCorrelated", useSmithVisibilityHeightCorrelated)
+	return p
 }
 
 // UseSpecularGlossinessInputEnergyConservation returns the UseSpecularGlossinessInputEnergyConservation property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#usespecularglossinessinputenergyconservation
-func (p *PBRBRDFConfiguration) UseSpecularGlossinessInputEnergyConservation(useSpecularGlossinessInputEnergyConservation bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(useSpecularGlossinessInputEnergyConservation)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRBRDFConfiguration) UseSpecularGlossinessInputEnergyConservation() bool {
+	retVal := p.p.Get("useSpecularGlossinessInputEnergyConservation")
+	return retVal.Bool()
 }
 
 // SetUseSpecularGlossinessInputEnergyConservation sets the UseSpecularGlossinessInputEnergyConservation property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#usespecularglossinessinputenergyconservation
 func (p *PBRBRDFConfiguration) SetUseSpecularGlossinessInputEnergyConservation(useSpecularGlossinessInputEnergyConservation bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(useSpecularGlossinessInputEnergyConservation)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("useSpecularGlossinessInputEnergyConservation", useSpecularGlossinessInputEnergyConservation)
+	return p
 }
 
 // UseSphericalHarmonics returns the UseSphericalHarmonics property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#usesphericalharmonics
-func (p *PBRBRDFConfiguration) UseSphericalHarmonics(useSphericalHarmonics bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(useSphericalHarmonics)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRBRDFConfiguration) UseSphericalHarmonics() bool {
+	retVal := p.p.Get("useSphericalHarmonics")
+	return retVal.Bool()
 }
 
 // SetUseSphericalHarmonics sets the UseSphericalHarmonics property of class PBRBRDFConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#usesphericalharmonics
 func (p *PBRBRDFConfiguration) SetUseSphericalHarmonics(useSphericalHarmonics bool) *PBRBRDFConfiguration {
-	p := ba.ctx.Get("PBRBRDFConfiguration").New(useSphericalHarmonics)
-	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("useSphericalHarmonics", useSphericalHarmonics)
+	return p
 }
-
-*/

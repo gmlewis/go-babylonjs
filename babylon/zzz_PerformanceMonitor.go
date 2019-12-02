@@ -109,118 +109,114 @@ func (p *PerformanceMonitor) SampleFrame(opts *PerformanceMonitorSampleFrameOpts
 	p.p.Call("sampleFrame", args...)
 }
 
-/*
-
 // AverageFPS returns the AverageFPS property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#averagefps
-func (p *PerformanceMonitor) AverageFPS(averageFPS float64) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(averageFPS)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+func (p *PerformanceMonitor) AverageFPS() float64 {
+	retVal := p.p.Get("averageFPS")
+	return retVal.Float()
 }
 
 // SetAverageFPS sets the AverageFPS property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#averagefps
 func (p *PerformanceMonitor) SetAverageFPS(averageFPS float64) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(averageFPS)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+	p.p.Set("averageFPS", averageFPS)
+	return p
 }
 
 // AverageFrameTime returns the AverageFrameTime property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#averageframetime
-func (p *PerformanceMonitor) AverageFrameTime(averageFrameTime float64) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(averageFrameTime)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+func (p *PerformanceMonitor) AverageFrameTime() float64 {
+	retVal := p.p.Get("averageFrameTime")
+	return retVal.Float()
 }
 
 // SetAverageFrameTime sets the AverageFrameTime property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#averageframetime
 func (p *PerformanceMonitor) SetAverageFrameTime(averageFrameTime float64) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(averageFrameTime)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+	p.p.Set("averageFrameTime", averageFrameTime)
+	return p
 }
 
 // AverageFrameTimeVariance returns the AverageFrameTimeVariance property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#averageframetimevariance
-func (p *PerformanceMonitor) AverageFrameTimeVariance(averageFrameTimeVariance float64) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(averageFrameTimeVariance)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+func (p *PerformanceMonitor) AverageFrameTimeVariance() float64 {
+	retVal := p.p.Get("averageFrameTimeVariance")
+	return retVal.Float()
 }
 
 // SetAverageFrameTimeVariance sets the AverageFrameTimeVariance property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#averageframetimevariance
 func (p *PerformanceMonitor) SetAverageFrameTimeVariance(averageFrameTimeVariance float64) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(averageFrameTimeVariance)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+	p.p.Set("averageFrameTimeVariance", averageFrameTimeVariance)
+	return p
 }
 
 // InstantaneousFPS returns the InstantaneousFPS property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#instantaneousfps
-func (p *PerformanceMonitor) InstantaneousFPS(instantaneousFPS float64) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(instantaneousFPS)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+func (p *PerformanceMonitor) InstantaneousFPS() float64 {
+	retVal := p.p.Get("instantaneousFPS")
+	return retVal.Float()
 }
 
 // SetInstantaneousFPS sets the InstantaneousFPS property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#instantaneousfps
 func (p *PerformanceMonitor) SetInstantaneousFPS(instantaneousFPS float64) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(instantaneousFPS)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+	p.p.Set("instantaneousFPS", instantaneousFPS)
+	return p
 }
 
 // InstantaneousFrameTime returns the InstantaneousFrameTime property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#instantaneousframetime
-func (p *PerformanceMonitor) InstantaneousFrameTime(instantaneousFrameTime float64) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(instantaneousFrameTime)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+func (p *PerformanceMonitor) InstantaneousFrameTime() float64 {
+	retVal := p.p.Get("instantaneousFrameTime")
+	return retVal.Float()
 }
 
 // SetInstantaneousFrameTime sets the InstantaneousFrameTime property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#instantaneousframetime
 func (p *PerformanceMonitor) SetInstantaneousFrameTime(instantaneousFrameTime float64) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(instantaneousFrameTime)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+	p.p.Set("instantaneousFrameTime", instantaneousFrameTime)
+	return p
 }
 
 // IsEnabled returns the IsEnabled property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#isenabled
-func (p *PerformanceMonitor) IsEnabled(isEnabled bool) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(isEnabled)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+func (p *PerformanceMonitor) IsEnabled() bool {
+	retVal := p.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#isenabled
 func (p *PerformanceMonitor) SetIsEnabled(isEnabled bool) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(isEnabled)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+	p.p.Set("isEnabled", isEnabled)
+	return p
 }
 
 // IsSaturated returns the IsSaturated property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#issaturated
-func (p *PerformanceMonitor) IsSaturated(isSaturated bool) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(isSaturated)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+func (p *PerformanceMonitor) IsSaturated() bool {
+	retVal := p.p.Get("isSaturated")
+	return retVal.Bool()
 }
 
 // SetIsSaturated sets the IsSaturated property of class PerformanceMonitor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor#issaturated
 func (p *PerformanceMonitor) SetIsSaturated(isSaturated bool) *PerformanceMonitor {
-	p := ba.ctx.Get("PerformanceMonitor").New(isSaturated)
-	return PerformanceMonitorFromJSObject(p, ba.ctx)
+	p.p.Set("isSaturated", isSaturated)
+	return p
 }
-
-*/

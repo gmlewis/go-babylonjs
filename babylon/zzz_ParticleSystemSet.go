@@ -119,54 +119,50 @@ func (p *ParticleSystemSet) Start(opts *ParticleSystemSetStartOpts) {
 	p.p.Call("start", args...)
 }
 
-/*
-
 // BaseAssetsUrl returns the BaseAssetsUrl property of class ParticleSystemSet.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#baseassetsurl
-func (p *ParticleSystemSet) BaseAssetsUrl(BaseAssetsUrl string) *ParticleSystemSet {
-	p := ba.ctx.Get("ParticleSystemSet").New(BaseAssetsUrl)
-	return ParticleSystemSetFromJSObject(p, ba.ctx)
+func (p *ParticleSystemSet) BaseAssetsUrl() string {
+	retVal := p.p.Get("BaseAssetsUrl")
+	return retVal.String()
 }
 
 // SetBaseAssetsUrl sets the BaseAssetsUrl property of class ParticleSystemSet.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#baseassetsurl
 func (p *ParticleSystemSet) SetBaseAssetsUrl(BaseAssetsUrl string) *ParticleSystemSet {
-	p := ba.ctx.Get("ParticleSystemSet").New(BaseAssetsUrl)
-	return ParticleSystemSetFromJSObject(p, ba.ctx)
+	p.p.Set("BaseAssetsUrl", BaseAssetsUrl)
+	return p
 }
 
 // EmitterNode returns the EmitterNode property of class ParticleSystemSet.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#emitternode
-func (p *ParticleSystemSet) EmitterNode(emitterNode *TransformNode) *ParticleSystemSet {
-	p := ba.ctx.Get("ParticleSystemSet").New(emitterNode.JSObject())
-	return ParticleSystemSetFromJSObject(p, ba.ctx)
+func (p *ParticleSystemSet) EmitterNode() *TransformNode {
+	retVal := p.p.Get("emitterNode")
+	return TransformNodeFromJSObject(retVal, p.ctx)
 }
 
 // SetEmitterNode sets the EmitterNode property of class ParticleSystemSet.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#emitternode
 func (p *ParticleSystemSet) SetEmitterNode(emitterNode *TransformNode) *ParticleSystemSet {
-	p := ba.ctx.Get("ParticleSystemSet").New(emitterNode.JSObject())
-	return ParticleSystemSetFromJSObject(p, ba.ctx)
+	p.p.Set("emitterNode", emitterNode.JSObject())
+	return p
 }
 
 // Systems returns the Systems property of class ParticleSystemSet.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#systems
-func (p *ParticleSystemSet) Systems(systems *IParticleSystem) *ParticleSystemSet {
-	p := ba.ctx.Get("ParticleSystemSet").New(systems.JSObject())
-	return ParticleSystemSetFromJSObject(p, ba.ctx)
+func (p *ParticleSystemSet) Systems() *IParticleSystem {
+	retVal := p.p.Get("systems")
+	return IParticleSystemFromJSObject(retVal, p.ctx)
 }
 
 // SetSystems sets the Systems property of class ParticleSystemSet.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#systems
 func (p *ParticleSystemSet) SetSystems(systems *IParticleSystem) *ParticleSystemSet {
-	p := ba.ctx.Get("ParticleSystemSet").New(systems.JSObject())
-	return ParticleSystemSetFromJSObject(p, ba.ctx)
+	p.p.Set("systems", systems.JSObject())
+	return p
 }
-
-*/

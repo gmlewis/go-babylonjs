@@ -38,7 +38,3 @@ func QuarticEaseArrayToJSArray(array []*QuarticEase) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

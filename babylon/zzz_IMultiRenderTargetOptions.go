@@ -36,150 +36,146 @@ func IMultiRenderTargetOptionsArrayToJSArray(array []*IMultiRenderTargetOptions)
 	return result
 }
 
-/*
-
 // DefaultType returns the DefaultType property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#defaulttype
-func (i *IMultiRenderTargetOptions) DefaultType(defaultType float64) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(defaultType)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+func (i *IMultiRenderTargetOptions) DefaultType() float64 {
+	retVal := i.p.Get("defaultType")
+	return retVal.Float()
 }
 
 // SetDefaultType sets the DefaultType property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#defaulttype
 func (i *IMultiRenderTargetOptions) SetDefaultType(defaultType float64) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(defaultType)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("defaultType", defaultType)
+	return i
 }
 
 // DoNotChangeAspectRatio returns the DoNotChangeAspectRatio property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#donotchangeaspectratio
-func (i *IMultiRenderTargetOptions) DoNotChangeAspectRatio(doNotChangeAspectRatio bool) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(doNotChangeAspectRatio)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+func (i *IMultiRenderTargetOptions) DoNotChangeAspectRatio() bool {
+	retVal := i.p.Get("doNotChangeAspectRatio")
+	return retVal.Bool()
 }
 
 // SetDoNotChangeAspectRatio sets the DoNotChangeAspectRatio property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#donotchangeaspectratio
 func (i *IMultiRenderTargetOptions) SetDoNotChangeAspectRatio(doNotChangeAspectRatio bool) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(doNotChangeAspectRatio)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("doNotChangeAspectRatio", doNotChangeAspectRatio)
+	return i
 }
 
 // GenerateDepthBuffer returns the GenerateDepthBuffer property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#generatedepthbuffer
-func (i *IMultiRenderTargetOptions) GenerateDepthBuffer(generateDepthBuffer bool) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(generateDepthBuffer)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+func (i *IMultiRenderTargetOptions) GenerateDepthBuffer() bool {
+	retVal := i.p.Get("generateDepthBuffer")
+	return retVal.Bool()
 }
 
 // SetGenerateDepthBuffer sets the GenerateDepthBuffer property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#generatedepthbuffer
 func (i *IMultiRenderTargetOptions) SetGenerateDepthBuffer(generateDepthBuffer bool) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(generateDepthBuffer)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("generateDepthBuffer", generateDepthBuffer)
+	return i
 }
 
 // GenerateDepthTexture returns the GenerateDepthTexture property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#generatedepthtexture
-func (i *IMultiRenderTargetOptions) GenerateDepthTexture(generateDepthTexture bool) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(generateDepthTexture)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+func (i *IMultiRenderTargetOptions) GenerateDepthTexture() bool {
+	retVal := i.p.Get("generateDepthTexture")
+	return retVal.Bool()
 }
 
 // SetGenerateDepthTexture sets the GenerateDepthTexture property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#generatedepthtexture
 func (i *IMultiRenderTargetOptions) SetGenerateDepthTexture(generateDepthTexture bool) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(generateDepthTexture)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("generateDepthTexture", generateDepthTexture)
+	return i
 }
 
 // GenerateMipMaps returns the GenerateMipMaps property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#generatemipmaps
-func (i *IMultiRenderTargetOptions) GenerateMipMaps(generateMipMaps bool) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(generateMipMaps)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+func (i *IMultiRenderTargetOptions) GenerateMipMaps() bool {
+	retVal := i.p.Get("generateMipMaps")
+	return retVal.Bool()
 }
 
 // SetGenerateMipMaps sets the GenerateMipMaps property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#generatemipmaps
 func (i *IMultiRenderTargetOptions) SetGenerateMipMaps(generateMipMaps bool) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(generateMipMaps)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("generateMipMaps", generateMipMaps)
+	return i
 }
 
 // GenerateStencilBuffer returns the GenerateStencilBuffer property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#generatestencilbuffer
-func (i *IMultiRenderTargetOptions) GenerateStencilBuffer(generateStencilBuffer bool) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(generateStencilBuffer)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+func (i *IMultiRenderTargetOptions) GenerateStencilBuffer() bool {
+	retVal := i.p.Get("generateStencilBuffer")
+	return retVal.Bool()
 }
 
 // SetGenerateStencilBuffer sets the GenerateStencilBuffer property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#generatestencilbuffer
 func (i *IMultiRenderTargetOptions) SetGenerateStencilBuffer(generateStencilBuffer bool) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(generateStencilBuffer)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("generateStencilBuffer", generateStencilBuffer)
+	return i
 }
 
 // SamplingModes returns the SamplingModes property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#samplingmodes
-func (i *IMultiRenderTargetOptions) SamplingModes(samplingModes float64) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(samplingModes)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+func (i *IMultiRenderTargetOptions) SamplingModes() float64 {
+	retVal := i.p.Get("samplingModes")
+	return retVal.Float()
 }
 
 // SetSamplingModes sets the SamplingModes property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#samplingmodes
 func (i *IMultiRenderTargetOptions) SetSamplingModes(samplingModes float64) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(samplingModes)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("samplingModes", samplingModes)
+	return i
 }
 
 // TextureCount returns the TextureCount property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#texturecount
-func (i *IMultiRenderTargetOptions) TextureCount(textureCount float64) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(textureCount)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+func (i *IMultiRenderTargetOptions) TextureCount() float64 {
+	retVal := i.p.Get("textureCount")
+	return retVal.Float()
 }
 
 // SetTextureCount sets the TextureCount property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#texturecount
 func (i *IMultiRenderTargetOptions) SetTextureCount(textureCount float64) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(textureCount)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("textureCount", textureCount)
+	return i
 }
 
 // Types returns the Types property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#types
-func (i *IMultiRenderTargetOptions) Types(types float64) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(types)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+func (i *IMultiRenderTargetOptions) Types() float64 {
+	retVal := i.p.Get("types")
+	return retVal.Float()
 }
 
 // SetTypes sets the Types property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#types
 func (i *IMultiRenderTargetOptions) SetTypes(types float64) *IMultiRenderTargetOptions {
-	p := ba.ctx.Get("IMultiRenderTargetOptions").New(types)
-	return IMultiRenderTargetOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("types", types)
+	return i
 }
-
-*/

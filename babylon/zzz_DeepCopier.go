@@ -68,7 +68,3 @@ func (d *DeepCopier) DeepCopy(source interface{}, destination interface{}, opts 
 
 	d.p.Call("DeepCopy", args...)
 }
-
-/*
-
- */

@@ -60,7 +60,3 @@ func (ba *Babylon) NewAbstractButton3D(opts *NewAbstractButton3DOpts) *AbstractB
 	p := ba.ctx.Get("AbstractButton3D").New(args...)
 	return AbstractButton3DFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

@@ -62,38 +62,34 @@ func (i *IExportOptions) ShouldExportNode(node *Node) bool {
 	return retVal.Bool()
 }
 
-/*
-
 // AnimationSampleRate returns the AnimationSampleRate property of class IExportOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexportoptions#animationsamplerate
-func (i *IExportOptions) AnimationSampleRate(animationSampleRate float64) *IExportOptions {
-	p := ba.ctx.Get("IExportOptions").New(animationSampleRate)
-	return IExportOptionsFromJSObject(p, ba.ctx)
+func (i *IExportOptions) AnimationSampleRate() float64 {
+	retVal := i.p.Get("animationSampleRate")
+	return retVal.Float()
 }
 
 // SetAnimationSampleRate sets the AnimationSampleRate property of class IExportOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexportoptions#animationsamplerate
 func (i *IExportOptions) SetAnimationSampleRate(animationSampleRate float64) *IExportOptions {
-	p := ba.ctx.Get("IExportOptions").New(animationSampleRate)
-	return IExportOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("animationSampleRate", animationSampleRate)
+	return i
 }
 
 // ExportWithoutWaitingForScene returns the ExportWithoutWaitingForScene property of class IExportOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexportoptions#exportwithoutwaitingforscene
-func (i *IExportOptions) ExportWithoutWaitingForScene(exportWithoutWaitingForScene bool) *IExportOptions {
-	p := ba.ctx.Get("IExportOptions").New(exportWithoutWaitingForScene)
-	return IExportOptionsFromJSObject(p, ba.ctx)
+func (i *IExportOptions) ExportWithoutWaitingForScene() bool {
+	retVal := i.p.Get("exportWithoutWaitingForScene")
+	return retVal.Bool()
 }
 
 // SetExportWithoutWaitingForScene sets the ExportWithoutWaitingForScene property of class IExportOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexportoptions#exportwithoutwaitingforscene
 func (i *IExportOptions) SetExportWithoutWaitingForScene(exportWithoutWaitingForScene bool) *IExportOptions {
-	p := ba.ctx.Get("IExportOptions").New(exportWithoutWaitingForScene)
-	return IExportOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("exportWithoutWaitingForScene", exportWithoutWaitingForScene)
+	return i
 }
-
-*/

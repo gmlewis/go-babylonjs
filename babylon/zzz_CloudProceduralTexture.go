@@ -103,38 +103,34 @@ func (c *CloudProceduralTexture) UpdateShaderUniforms() {
 	c.p.Call("updateShaderUniforms")
 }
 
-/*
-
 // CloudColor returns the CloudColor property of class CloudProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#cloudcolor
-func (c *CloudProceduralTexture) CloudColor(cloudColor *Color4) *CloudProceduralTexture {
-	p := ba.ctx.Get("CloudProceduralTexture").New(cloudColor.JSObject())
-	return CloudProceduralTextureFromJSObject(p, ba.ctx)
+func (c *CloudProceduralTexture) CloudColor() *Color4 {
+	retVal := c.p.Get("cloudColor")
+	return Color4FromJSObject(retVal, c.ctx)
 }
 
 // SetCloudColor sets the CloudColor property of class CloudProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#cloudcolor
 func (c *CloudProceduralTexture) SetCloudColor(cloudColor *Color4) *CloudProceduralTexture {
-	p := ba.ctx.Get("CloudProceduralTexture").New(cloudColor.JSObject())
-	return CloudProceduralTextureFromJSObject(p, ba.ctx)
+	c.p.Set("cloudColor", cloudColor.JSObject())
+	return c
 }
 
 // SkyColor returns the SkyColor property of class CloudProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#skycolor
-func (c *CloudProceduralTexture) SkyColor(skyColor *Color4) *CloudProceduralTexture {
-	p := ba.ctx.Get("CloudProceduralTexture").New(skyColor.JSObject())
-	return CloudProceduralTextureFromJSObject(p, ba.ctx)
+func (c *CloudProceduralTexture) SkyColor() *Color4 {
+	retVal := c.p.Get("skyColor")
+	return Color4FromJSObject(retVal, c.ctx)
 }
 
 // SetSkyColor sets the SkyColor property of class CloudProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#skycolor
 func (c *CloudProceduralTexture) SetSkyColor(skyColor *Color4) *CloudProceduralTexture {
-	p := ba.ctx.Get("CloudProceduralTexture").New(skyColor.JSObject())
-	return CloudProceduralTextureFromJSObject(p, ba.ctx)
+	c.p.Set("skyColor", skyColor.JSObject())
+	return c
 }
-
-*/

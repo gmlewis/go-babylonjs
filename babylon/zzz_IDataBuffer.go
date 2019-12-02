@@ -50,22 +50,18 @@ func (i *IDataBuffer) ReadAsync(byteOffset float64, byteLength float64) *Promise
 	return PromiseFromJSObject(retVal, i.ctx)
 }
 
-/*
-
 // ByteLength returns the ByteLength property of class IDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idatabuffer#bytelength
-func (i *IDataBuffer) ByteLength(byteLength float64) *IDataBuffer {
-	p := ba.ctx.Get("IDataBuffer").New(byteLength)
-	return IDataBufferFromJSObject(p, ba.ctx)
+func (i *IDataBuffer) ByteLength() float64 {
+	retVal := i.p.Get("byteLength")
+	return retVal.Float()
 }
 
 // SetByteLength sets the ByteLength property of class IDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idatabuffer#bytelength
 func (i *IDataBuffer) SetByteLength(byteLength float64) *IDataBuffer {
-	p := ba.ctx.Get("IDataBuffer").New(byteLength)
-	return IDataBufferFromJSObject(p, ba.ctx)
+	i.p.Set("byteLength", byteLength)
+	return i
 }
-
-*/

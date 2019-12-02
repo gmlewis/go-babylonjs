@@ -124,38 +124,34 @@ func (s *ShadowGeneratorSceneComponent) Serialize(serializationObject interface{
 	s.p.Call("serialize", args...)
 }
 
-/*
-
 // Name returns the Name property of class ShadowGeneratorSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#name
-func (s *ShadowGeneratorSceneComponent) Name(name string) *ShadowGeneratorSceneComponent {
-	p := ba.ctx.Get("ShadowGeneratorSceneComponent").New(name)
-	return ShadowGeneratorSceneComponentFromJSObject(p, ba.ctx)
+func (s *ShadowGeneratorSceneComponent) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ShadowGeneratorSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#name
 func (s *ShadowGeneratorSceneComponent) SetName(name string) *ShadowGeneratorSceneComponent {
-	p := ba.ctx.Get("ShadowGeneratorSceneComponent").New(name)
-	return ShadowGeneratorSceneComponentFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
 
 // Scene returns the Scene property of class ShadowGeneratorSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#scene
-func (s *ShadowGeneratorSceneComponent) Scene(scene *Scene) *ShadowGeneratorSceneComponent {
-	p := ba.ctx.Get("ShadowGeneratorSceneComponent").New(scene.JSObject())
-	return ShadowGeneratorSceneComponentFromJSObject(p, ba.ctx)
+func (s *ShadowGeneratorSceneComponent) Scene() *Scene {
+	retVal := s.p.Get("scene")
+	return SceneFromJSObject(retVal, s.ctx)
 }
 
 // SetScene sets the Scene property of class ShadowGeneratorSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#scene
 func (s *ShadowGeneratorSceneComponent) SetScene(scene *Scene) *ShadowGeneratorSceneComponent {
-	p := ba.ctx.Get("ShadowGeneratorSceneComponent").New(scene.JSObject())
-	return ShadowGeneratorSceneComponentFromJSObject(p, ba.ctx)
+	s.p.Set("scene", scene.JSObject())
+	return s
 }
-
-*/

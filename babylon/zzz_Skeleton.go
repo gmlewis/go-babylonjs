@@ -425,230 +425,230 @@ func (s *Skeleton) ToString(opts *SkeletonToStringOpts) string {
 	return retVal.String()
 }
 
-/*
-
 // AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#animationpropertiesoverride
-func (s *Skeleton) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(animationPropertiesOverride.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) AnimationPropertiesOverride() *AnimationPropertiesOverride {
+	retVal := s.p.Get("animationPropertiesOverride")
+	return AnimationPropertiesOverrideFromJSObject(retVal, s.ctx)
 }
 
 // SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#animationpropertiesoverride
 func (s *Skeleton) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(animationPropertiesOverride.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("animationPropertiesOverride", animationPropertiesOverride.JSObject())
+	return s
 }
 
 // Animations returns the Animations property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#animations
-func (s *Skeleton) Animations(animations []*Animation) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(animations)
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) Animations() []*Animation {
+	retVal := s.p.Get("animations")
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#animations
 func (s *Skeleton) SetAnimations(animations []*Animation) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(animations)
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("animations", animations)
+	return s
 }
 
 // Bones returns the Bones property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#bones
-func (s *Skeleton) Bones(bones *Bone) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(bones.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) Bones() *Bone {
+	retVal := s.p.Get("bones")
+	return BoneFromJSObject(retVal, s.ctx)
 }
 
 // SetBones sets the Bones property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#bones
 func (s *Skeleton) SetBones(bones *Bone) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(bones.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("bones", bones.JSObject())
+	return s
 }
 
 // DimensionsAtRest returns the DimensionsAtRest property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#dimensionsatrest
-func (s *Skeleton) DimensionsAtRest(dimensionsAtRest *Vector3) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(dimensionsAtRest.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) DimensionsAtRest() *Vector3 {
+	retVal := s.p.Get("dimensionsAtRest")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetDimensionsAtRest sets the DimensionsAtRest property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#dimensionsatrest
 func (s *Skeleton) SetDimensionsAtRest(dimensionsAtRest *Vector3) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(dimensionsAtRest.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("dimensionsAtRest", dimensionsAtRest.JSObject())
+	return s
 }
 
 // DoNotSerialize returns the DoNotSerialize property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#donotserialize
-func (s *Skeleton) DoNotSerialize(doNotSerialize bool) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(doNotSerialize)
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) DoNotSerialize() bool {
+	retVal := s.p.Get("doNotSerialize")
+	return retVal.Bool()
 }
 
 // SetDoNotSerialize sets the DoNotSerialize property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#donotserialize
 func (s *Skeleton) SetDoNotSerialize(doNotSerialize bool) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(doNotSerialize)
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("doNotSerialize", doNotSerialize)
+	return s
 }
 
 // Id returns the Id property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#id
-func (s *Skeleton) Id(id string) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(id)
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) Id() string {
+	retVal := s.p.Get("id")
+	return retVal.String()
 }
 
 // SetId sets the Id property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#id
 func (s *Skeleton) SetId(id string) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(id)
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("id", id)
+	return s
 }
 
 // InspectableCustomProperties returns the InspectableCustomProperties property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#inspectablecustomproperties
-func (s *Skeleton) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(inspectableCustomProperties.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) InspectableCustomProperties() *IInspectable {
+	retVal := s.p.Get("inspectableCustomProperties")
+	return IInspectableFromJSObject(retVal, s.ctx)
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#inspectablecustomproperties
 func (s *Skeleton) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(inspectableCustomProperties.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+	return s
 }
 
 // IsUsingTextureForMatrices returns the IsUsingTextureForMatrices property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#isusingtextureformatrices
-func (s *Skeleton) IsUsingTextureForMatrices(isUsingTextureForMatrices bool) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(isUsingTextureForMatrices)
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) IsUsingTextureForMatrices() bool {
+	retVal := s.p.Get("isUsingTextureForMatrices")
+	return retVal.Bool()
 }
 
 // SetIsUsingTextureForMatrices sets the IsUsingTextureForMatrices property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#isusingtextureformatrices
 func (s *Skeleton) SetIsUsingTextureForMatrices(isUsingTextureForMatrices bool) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(isUsingTextureForMatrices)
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("isUsingTextureForMatrices", isUsingTextureForMatrices)
+	return s
 }
 
 // Name returns the Name property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#name
-func (s *Skeleton) Name(name string) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(name)
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#name
 func (s *Skeleton) SetName(name string) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(name)
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
 
 // NeedInitialSkinMatrix returns the NeedInitialSkinMatrix property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#needinitialskinmatrix
-func (s *Skeleton) NeedInitialSkinMatrix(needInitialSkinMatrix bool) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(needInitialSkinMatrix)
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) NeedInitialSkinMatrix() bool {
+	retVal := s.p.Get("needInitialSkinMatrix")
+	return retVal.Bool()
 }
 
 // SetNeedInitialSkinMatrix sets the NeedInitialSkinMatrix property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#needinitialskinmatrix
 func (s *Skeleton) SetNeedInitialSkinMatrix(needInitialSkinMatrix bool) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(needInitialSkinMatrix)
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("needInitialSkinMatrix", needInitialSkinMatrix)
+	return s
 }
 
 // OnBeforeComputeObservable returns the OnBeforeComputeObservable property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#onbeforecomputeobservable
-func (s *Skeleton) OnBeforeComputeObservable(onBeforeComputeObservable *Observable) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(onBeforeComputeObservable.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) OnBeforeComputeObservable() *Observable {
+	retVal := s.p.Get("onBeforeComputeObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeComputeObservable sets the OnBeforeComputeObservable property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#onbeforecomputeobservable
 func (s *Skeleton) SetOnBeforeComputeObservable(onBeforeComputeObservable *Observable) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(onBeforeComputeObservable.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeComputeObservable", onBeforeComputeObservable.JSObject())
+	return s
 }
 
 // OverrideMesh returns the OverrideMesh property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#overridemesh
-func (s *Skeleton) OverrideMesh(overrideMesh *AbstractMesh) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(overrideMesh.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) OverrideMesh() *AbstractMesh {
+	retVal := s.p.Get("overrideMesh")
+	return AbstractMeshFromJSObject(retVal, s.ctx)
 }
 
 // SetOverrideMesh sets the OverrideMesh property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#overridemesh
 func (s *Skeleton) SetOverrideMesh(overrideMesh *AbstractMesh) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(overrideMesh.JSObject())
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("overrideMesh", overrideMesh.JSObject())
+	return s
 }
 
 // UniqueId returns the UniqueId property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#uniqueid
-func (s *Skeleton) UniqueId(uniqueId float64) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(uniqueId)
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) UniqueId() float64 {
+	retVal := s.p.Get("uniqueId")
+	return retVal.Float()
 }
 
 // SetUniqueId sets the UniqueId property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#uniqueid
 func (s *Skeleton) SetUniqueId(uniqueId float64) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(uniqueId)
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("uniqueId", uniqueId)
+	return s
 }
 
 // UseTextureToStoreBoneMatrices returns the UseTextureToStoreBoneMatrices property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#usetexturetostorebonematrices
-func (s *Skeleton) UseTextureToStoreBoneMatrices(useTextureToStoreBoneMatrices bool) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(useTextureToStoreBoneMatrices)
-	return SkeletonFromJSObject(p, ba.ctx)
+func (s *Skeleton) UseTextureToStoreBoneMatrices() bool {
+	retVal := s.p.Get("useTextureToStoreBoneMatrices")
+	return retVal.Bool()
 }
 
 // SetUseTextureToStoreBoneMatrices sets the UseTextureToStoreBoneMatrices property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#usetexturetostorebonematrices
 func (s *Skeleton) SetUseTextureToStoreBoneMatrices(useTextureToStoreBoneMatrices bool) *Skeleton {
-	p := ba.ctx.Get("Skeleton").New(useTextureToStoreBoneMatrices)
-	return SkeletonFromJSObject(p, ba.ctx)
+	s.p.Set("useTextureToStoreBoneMatrices", useTextureToStoreBoneMatrices)
+	return s
 }
-
-*/

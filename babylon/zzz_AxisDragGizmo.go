@@ -83,70 +83,66 @@ func (a *AxisDragGizmo) Dispose() {
 	a.p.Call("dispose")
 }
 
-/*
-
 // DragBehavior returns the DragBehavior property of class AxisDragGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#dragbehavior
-func (a *AxisDragGizmo) DragBehavior(dragBehavior *PointerDragBehavior) *AxisDragGizmo {
-	p := ba.ctx.Get("AxisDragGizmo").New(dragBehavior.JSObject())
-	return AxisDragGizmoFromJSObject(p, ba.ctx)
+func (a *AxisDragGizmo) DragBehavior() *PointerDragBehavior {
+	retVal := a.p.Get("dragBehavior")
+	return PointerDragBehaviorFromJSObject(retVal, a.ctx)
 }
 
 // SetDragBehavior sets the DragBehavior property of class AxisDragGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#dragbehavior
 func (a *AxisDragGizmo) SetDragBehavior(dragBehavior *PointerDragBehavior) *AxisDragGizmo {
-	p := ba.ctx.Get("AxisDragGizmo").New(dragBehavior.JSObject())
-	return AxisDragGizmoFromJSObject(p, ba.ctx)
+	a.p.Set("dragBehavior", dragBehavior.JSObject())
+	return a
 }
 
 // IsEnabled returns the IsEnabled property of class AxisDragGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#isenabled
-func (a *AxisDragGizmo) IsEnabled(isEnabled bool) *AxisDragGizmo {
-	p := ba.ctx.Get("AxisDragGizmo").New(isEnabled)
-	return AxisDragGizmoFromJSObject(p, ba.ctx)
+func (a *AxisDragGizmo) IsEnabled() bool {
+	retVal := a.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class AxisDragGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#isenabled
 func (a *AxisDragGizmo) SetIsEnabled(isEnabled bool) *AxisDragGizmo {
-	p := ba.ctx.Get("AxisDragGizmo").New(isEnabled)
-	return AxisDragGizmoFromJSObject(p, ba.ctx)
+	a.p.Set("isEnabled", isEnabled)
+	return a
 }
 
 // OnSnapObservable returns the OnSnapObservable property of class AxisDragGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#onsnapobservable
-func (a *AxisDragGizmo) OnSnapObservable(onSnapObservable *Observable) *AxisDragGizmo {
-	p := ba.ctx.Get("AxisDragGizmo").New(onSnapObservable.JSObject())
-	return AxisDragGizmoFromJSObject(p, ba.ctx)
+func (a *AxisDragGizmo) OnSnapObservable() *Observable {
+	retVal := a.p.Get("onSnapObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnSnapObservable sets the OnSnapObservable property of class AxisDragGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#onsnapobservable
 func (a *AxisDragGizmo) SetOnSnapObservable(onSnapObservable *Observable) *AxisDragGizmo {
-	p := ba.ctx.Get("AxisDragGizmo").New(onSnapObservable.JSObject())
-	return AxisDragGizmoFromJSObject(p, ba.ctx)
+	a.p.Set("onSnapObservable", onSnapObservable.JSObject())
+	return a
 }
 
 // SnapDistance returns the SnapDistance property of class AxisDragGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#snapdistance
-func (a *AxisDragGizmo) SnapDistance(snapDistance float64) *AxisDragGizmo {
-	p := ba.ctx.Get("AxisDragGizmo").New(snapDistance)
-	return AxisDragGizmoFromJSObject(p, ba.ctx)
+func (a *AxisDragGizmo) SnapDistance() float64 {
+	retVal := a.p.Get("snapDistance")
+	return retVal.Float()
 }
 
 // SetSnapDistance sets the SnapDistance property of class AxisDragGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#snapdistance
 func (a *AxisDragGizmo) SetSnapDistance(snapDistance float64) *AxisDragGizmo {
-	p := ba.ctx.Get("AxisDragGizmo").New(snapDistance)
-	return AxisDragGizmoFromJSObject(p, ba.ctx)
+	a.p.Set("snapDistance", snapDistance)
+	return a
 }
-
-*/

@@ -89,22 +89,18 @@ func (s *SetStateAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-/*
-
 // Value returns the Value property of class SetStateAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setstateaction#value
-func (s *SetStateAction) Value(value string) *SetStateAction {
-	p := ba.ctx.Get("SetStateAction").New(value)
-	return SetStateActionFromJSObject(p, ba.ctx)
+func (s *SetStateAction) Value() string {
+	retVal := s.p.Get("value")
+	return retVal.String()
 }
 
 // SetValue sets the Value property of class SetStateAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setstateaction#value
 func (s *SetStateAction) SetValue(value string) *SetStateAction {
-	p := ba.ctx.Get("SetStateAction").New(value)
-	return SetStateActionFromJSObject(p, ba.ctx)
+	s.p.Set("value", value)
+	return s
 }
-
-*/

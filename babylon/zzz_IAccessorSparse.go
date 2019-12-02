@@ -36,54 +36,50 @@ func IAccessorSparseArrayToJSArray(array []*IAccessorSparse) []interface{} {
 	return result
 }
 
-/*
-
 // Count returns the Count property of class IAccessorSparse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#count
-func (i *IAccessorSparse) Count(count float64) *IAccessorSparse {
-	p := ba.ctx.Get("IAccessorSparse").New(count)
-	return IAccessorSparseFromJSObject(p, ba.ctx)
+func (i *IAccessorSparse) Count() float64 {
+	retVal := i.p.Get("count")
+	return retVal.Float()
 }
 
 // SetCount sets the Count property of class IAccessorSparse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#count
 func (i *IAccessorSparse) SetCount(count float64) *IAccessorSparse {
-	p := ba.ctx.Get("IAccessorSparse").New(count)
-	return IAccessorSparseFromJSObject(p, ba.ctx)
+	i.p.Set("count", count)
+	return i
 }
 
 // Indices returns the Indices property of class IAccessorSparse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#indices
-func (i *IAccessorSparse) Indices(indices *IAccessorSparseIndices) *IAccessorSparse {
-	p := ba.ctx.Get("IAccessorSparse").New(indices.JSObject())
-	return IAccessorSparseFromJSObject(p, ba.ctx)
+func (i *IAccessorSparse) Indices() *IAccessorSparseIndices {
+	retVal := i.p.Get("indices")
+	return IAccessorSparseIndicesFromJSObject(retVal, i.ctx)
 }
 
 // SetIndices sets the Indices property of class IAccessorSparse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#indices
 func (i *IAccessorSparse) SetIndices(indices *IAccessorSparseIndices) *IAccessorSparse {
-	p := ba.ctx.Get("IAccessorSparse").New(indices.JSObject())
-	return IAccessorSparseFromJSObject(p, ba.ctx)
+	i.p.Set("indices", indices.JSObject())
+	return i
 }
 
 // Values returns the Values property of class IAccessorSparse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#values
-func (i *IAccessorSparse) Values(values *IAccessorSparseValues) *IAccessorSparse {
-	p := ba.ctx.Get("IAccessorSparse").New(values.JSObject())
-	return IAccessorSparseFromJSObject(p, ba.ctx)
+func (i *IAccessorSparse) Values() *IAccessorSparseValues {
+	retVal := i.p.Get("values")
+	return IAccessorSparseValuesFromJSObject(retVal, i.ctx)
 }
 
 // SetValues sets the Values property of class IAccessorSparse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#values
 func (i *IAccessorSparse) SetValues(values *IAccessorSparseValues) *IAccessorSparse {
-	p := ba.ctx.Get("IAccessorSparse").New(values.JSObject())
-	return IAccessorSparseFromJSObject(p, ba.ctx)
+	i.p.Set("values", values.JSObject())
+	return i
 }
-
-*/

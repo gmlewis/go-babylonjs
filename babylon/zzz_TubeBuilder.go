@@ -63,7 +63,3 @@ func (t *TubeBuilder) CreateTube(name string, options js.Value, opts *TubeBuilde
 	retVal := t.p.Call("CreateTube", args...)
 	return MeshFromJSObject(retVal, t.ctx)
 }
-
-/*
-
- */

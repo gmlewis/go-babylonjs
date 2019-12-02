@@ -36,22 +36,18 @@ func PrecisionDateArrayToJSArray(array []*PrecisionDate) []interface{} {
 	return result
 }
 
-/*
-
 // Now returns the Now property of class PrecisionDate.
 //
 // https://doc.babylonjs.com/api/classes/babylon.precisiondate#now
-func (p *PrecisionDate) Now(Now float64) *PrecisionDate {
-	p := ba.ctx.Get("PrecisionDate").New(Now)
-	return PrecisionDateFromJSObject(p, ba.ctx)
+func (p *PrecisionDate) Now() float64 {
+	retVal := p.p.Get("Now")
+	return retVal.Float()
 }
 
 // SetNow sets the Now property of class PrecisionDate.
 //
 // https://doc.babylonjs.com/api/classes/babylon.precisiondate#now
 func (p *PrecisionDate) SetNow(Now float64) *PrecisionDate {
-	p := ba.ctx.Get("PrecisionDate").New(Now)
-	return PrecisionDateFromJSObject(p, ba.ctx)
+	p.p.Set("Now", Now)
+	return p
 }
-
-*/

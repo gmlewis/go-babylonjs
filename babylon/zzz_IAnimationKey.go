@@ -36,86 +36,82 @@ func IAnimationKeyArrayToJSArray(array []*IAnimationKey) []interface{} {
 	return result
 }
 
-/*
-
 // Frame returns the Frame property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#frame
-func (i *IAnimationKey) Frame(frame float64) *IAnimationKey {
-	p := ba.ctx.Get("IAnimationKey").New(frame)
-	return IAnimationKeyFromJSObject(p, ba.ctx)
+func (i *IAnimationKey) Frame() float64 {
+	retVal := i.p.Get("frame")
+	return retVal.Float()
 }
 
 // SetFrame sets the Frame property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#frame
 func (i *IAnimationKey) SetFrame(frame float64) *IAnimationKey {
-	p := ba.ctx.Get("IAnimationKey").New(frame)
-	return IAnimationKeyFromJSObject(p, ba.ctx)
+	i.p.Set("frame", frame)
+	return i
 }
 
 // InTangent returns the InTangent property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#intangent
-func (i *IAnimationKey) InTangent(inTangent interface{}) *IAnimationKey {
-	p := ba.ctx.Get("IAnimationKey").New(inTangent)
-	return IAnimationKeyFromJSObject(p, ba.ctx)
+func (i *IAnimationKey) InTangent() interface{} {
+	retVal := i.p.Get("inTangent")
+	return retVal
 }
 
 // SetInTangent sets the InTangent property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#intangent
 func (i *IAnimationKey) SetInTangent(inTangent interface{}) *IAnimationKey {
-	p := ba.ctx.Get("IAnimationKey").New(inTangent)
-	return IAnimationKeyFromJSObject(p, ba.ctx)
+	i.p.Set("inTangent", inTangent)
+	return i
 }
 
 // Interpolation returns the Interpolation property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#interpolation
-func (i *IAnimationKey) Interpolation(interpolation *AnimationKeyInterpolation) *IAnimationKey {
-	p := ba.ctx.Get("IAnimationKey").New(interpolation.JSObject())
-	return IAnimationKeyFromJSObject(p, ba.ctx)
+func (i *IAnimationKey) Interpolation() js.Value {
+	retVal := i.p.Get("interpolation")
+	return retVal
 }
 
 // SetInterpolation sets the Interpolation property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#interpolation
-func (i *IAnimationKey) SetInterpolation(interpolation *AnimationKeyInterpolation) *IAnimationKey {
-	p := ba.ctx.Get("IAnimationKey").New(interpolation.JSObject())
-	return IAnimationKeyFromJSObject(p, ba.ctx)
+func (i *IAnimationKey) SetInterpolation(interpolation js.Value) *IAnimationKey {
+	i.p.Set("interpolation", interpolation)
+	return i
 }
 
 // OutTangent returns the OutTangent property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#outtangent
-func (i *IAnimationKey) OutTangent(outTangent interface{}) *IAnimationKey {
-	p := ba.ctx.Get("IAnimationKey").New(outTangent)
-	return IAnimationKeyFromJSObject(p, ba.ctx)
+func (i *IAnimationKey) OutTangent() interface{} {
+	retVal := i.p.Get("outTangent")
+	return retVal
 }
 
 // SetOutTangent sets the OutTangent property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#outtangent
 func (i *IAnimationKey) SetOutTangent(outTangent interface{}) *IAnimationKey {
-	p := ba.ctx.Get("IAnimationKey").New(outTangent)
-	return IAnimationKeyFromJSObject(p, ba.ctx)
+	i.p.Set("outTangent", outTangent)
+	return i
 }
 
 // Value returns the Value property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#value
-func (i *IAnimationKey) Value(value interface{}) *IAnimationKey {
-	p := ba.ctx.Get("IAnimationKey").New(value)
-	return IAnimationKeyFromJSObject(p, ba.ctx)
+func (i *IAnimationKey) Value() interface{} {
+	retVal := i.p.Get("value")
+	return retVal
 }
 
 // SetValue sets the Value property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#value
 func (i *IAnimationKey) SetValue(value interface{}) *IAnimationKey {
-	p := ba.ctx.Get("IAnimationKey").New(value)
-	return IAnimationKeyFromJSObject(p, ba.ctx)
+	i.p.Set("value", value)
+	return i
 }
-
-*/

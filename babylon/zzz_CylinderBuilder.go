@@ -50,7 +50,3 @@ func (c *CylinderBuilder) CreateCylinder(name string, options js.Value, scene in
 	retVal := c.p.Call("CreateCylinder", args...)
 	return MeshFromJSObject(retVal, c.ctx)
 }
-
-/*
-
- */

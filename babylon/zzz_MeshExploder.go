@@ -108,7 +108,3 @@ func (m *MeshExploder) GetMeshes() []*Mesh {
 	}
 	return result
 }
-
-/*
-
- */

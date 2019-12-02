@@ -70,86 +70,82 @@ func (f *FresnelBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Bias returns the Bias property of class FresnelBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock#bias
-func (f *FresnelBlock) Bias(bias *NodeMaterialConnectionPoint) *FresnelBlock {
-	p := ba.ctx.Get("FresnelBlock").New(bias.JSObject())
-	return FresnelBlockFromJSObject(p, ba.ctx)
+func (f *FresnelBlock) Bias() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("bias")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetBias sets the Bias property of class FresnelBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock#bias
 func (f *FresnelBlock) SetBias(bias *NodeMaterialConnectionPoint) *FresnelBlock {
-	p := ba.ctx.Get("FresnelBlock").New(bias.JSObject())
-	return FresnelBlockFromJSObject(p, ba.ctx)
+	f.p.Set("bias", bias.JSObject())
+	return f
 }
 
 // Fresnel returns the Fresnel property of class FresnelBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock#fresnel
-func (f *FresnelBlock) Fresnel(fresnel *NodeMaterialConnectionPoint) *FresnelBlock {
-	p := ba.ctx.Get("FresnelBlock").New(fresnel.JSObject())
-	return FresnelBlockFromJSObject(p, ba.ctx)
+func (f *FresnelBlock) Fresnel() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("fresnel")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetFresnel sets the Fresnel property of class FresnelBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock#fresnel
 func (f *FresnelBlock) SetFresnel(fresnel *NodeMaterialConnectionPoint) *FresnelBlock {
-	p := ba.ctx.Get("FresnelBlock").New(fresnel.JSObject())
-	return FresnelBlockFromJSObject(p, ba.ctx)
+	f.p.Set("fresnel", fresnel.JSObject())
+	return f
 }
 
 // Power returns the Power property of class FresnelBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock#power
-func (f *FresnelBlock) Power(power *NodeMaterialConnectionPoint) *FresnelBlock {
-	p := ba.ctx.Get("FresnelBlock").New(power.JSObject())
-	return FresnelBlockFromJSObject(p, ba.ctx)
+func (f *FresnelBlock) Power() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("power")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetPower sets the Power property of class FresnelBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock#power
 func (f *FresnelBlock) SetPower(power *NodeMaterialConnectionPoint) *FresnelBlock {
-	p := ba.ctx.Get("FresnelBlock").New(power.JSObject())
-	return FresnelBlockFromJSObject(p, ba.ctx)
+	f.p.Set("power", power.JSObject())
+	return f
 }
 
 // ViewDirection returns the ViewDirection property of class FresnelBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock#viewdirection
-func (f *FresnelBlock) ViewDirection(viewDirection *NodeMaterialConnectionPoint) *FresnelBlock {
-	p := ba.ctx.Get("FresnelBlock").New(viewDirection.JSObject())
-	return FresnelBlockFromJSObject(p, ba.ctx)
+func (f *FresnelBlock) ViewDirection() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("viewDirection")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetViewDirection sets the ViewDirection property of class FresnelBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock#viewdirection
 func (f *FresnelBlock) SetViewDirection(viewDirection *NodeMaterialConnectionPoint) *FresnelBlock {
-	p := ba.ctx.Get("FresnelBlock").New(viewDirection.JSObject())
-	return FresnelBlockFromJSObject(p, ba.ctx)
+	f.p.Set("viewDirection", viewDirection.JSObject())
+	return f
 }
 
 // WorldNormal returns the WorldNormal property of class FresnelBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock#worldnormal
-func (f *FresnelBlock) WorldNormal(worldNormal *NodeMaterialConnectionPoint) *FresnelBlock {
-	p := ba.ctx.Get("FresnelBlock").New(worldNormal.JSObject())
-	return FresnelBlockFromJSObject(p, ba.ctx)
+func (f *FresnelBlock) WorldNormal() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("worldNormal")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetWorldNormal sets the WorldNormal property of class FresnelBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock#worldnormal
 func (f *FresnelBlock) SetWorldNormal(worldNormal *NodeMaterialConnectionPoint) *FresnelBlock {
-	p := ba.ctx.Get("FresnelBlock").New(worldNormal.JSObject())
-	return FresnelBlockFromJSObject(p, ba.ctx)
+	f.p.Set("worldNormal", worldNormal.JSObject())
+	return f
 }
-
-*/

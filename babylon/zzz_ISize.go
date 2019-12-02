@@ -36,38 +36,34 @@ func ISizeArrayToJSArray(array []*ISize) []interface{} {
 	return result
 }
 
-/*
-
 // Height returns the Height property of class ISize.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isize#height
-func (i *ISize) Height(height float64) *ISize {
-	p := ba.ctx.Get("ISize").New(height)
-	return ISizeFromJSObject(p, ba.ctx)
+func (i *ISize) Height() float64 {
+	retVal := i.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class ISize.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isize#height
 func (i *ISize) SetHeight(height float64) *ISize {
-	p := ba.ctx.Get("ISize").New(height)
-	return ISizeFromJSObject(p, ba.ctx)
+	i.p.Set("height", height)
+	return i
 }
 
 // Width returns the Width property of class ISize.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isize#width
-func (i *ISize) Width(width float64) *ISize {
-	p := ba.ctx.Get("ISize").New(width)
-	return ISizeFromJSObject(p, ba.ctx)
+func (i *ISize) Width() float64 {
+	retVal := i.p.Get("width")
+	return retVal.Float()
 }
 
 // SetWidth sets the Width property of class ISize.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isize#width
 func (i *ISize) SetWidth(width float64) *ISize {
-	p := ba.ctx.Get("ISize").New(width)
-	return ISizeFromJSObject(p, ba.ctx)
+	i.p.Set("width", width)
+	return i
 }
-
-*/

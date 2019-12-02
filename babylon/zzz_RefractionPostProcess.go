@@ -95,70 +95,66 @@ func (r *RefractionPostProcess) Dispose(camera *Camera) {
 	r.p.Call("dispose", args...)
 }
 
-/*
-
 // Color returns the Color property of class RefractionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#color
-func (r *RefractionPostProcess) Color(color *Color3) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(color.JSObject())
-	return RefractionPostProcessFromJSObject(p, ba.ctx)
+func (r *RefractionPostProcess) Color() *Color3 {
+	retVal := r.p.Get("color")
+	return Color3FromJSObject(retVal, r.ctx)
 }
 
 // SetColor sets the Color property of class RefractionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#color
 func (r *RefractionPostProcess) SetColor(color *Color3) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(color.JSObject())
-	return RefractionPostProcessFromJSObject(p, ba.ctx)
+	r.p.Set("color", color.JSObject())
+	return r
 }
 
 // ColorLevel returns the ColorLevel property of class RefractionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#colorlevel
-func (r *RefractionPostProcess) ColorLevel(colorLevel float64) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(colorLevel)
-	return RefractionPostProcessFromJSObject(p, ba.ctx)
+func (r *RefractionPostProcess) ColorLevel() float64 {
+	retVal := r.p.Get("colorLevel")
+	return retVal.Float()
 }
 
 // SetColorLevel sets the ColorLevel property of class RefractionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#colorlevel
 func (r *RefractionPostProcess) SetColorLevel(colorLevel float64) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(colorLevel)
-	return RefractionPostProcessFromJSObject(p, ba.ctx)
+	r.p.Set("colorLevel", colorLevel)
+	return r
 }
 
 // Depth returns the Depth property of class RefractionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#depth
-func (r *RefractionPostProcess) Depth(depth float64) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(depth)
-	return RefractionPostProcessFromJSObject(p, ba.ctx)
+func (r *RefractionPostProcess) Depth() float64 {
+	retVal := r.p.Get("depth")
+	return retVal.Float()
 }
 
 // SetDepth sets the Depth property of class RefractionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#depth
 func (r *RefractionPostProcess) SetDepth(depth float64) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(depth)
-	return RefractionPostProcessFromJSObject(p, ba.ctx)
+	r.p.Set("depth", depth)
+	return r
 }
 
 // RefractionTexture returns the RefractionTexture property of class RefractionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#refractiontexture
-func (r *RefractionPostProcess) RefractionTexture(refractionTexture *Texture) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(refractionTexture.JSObject())
-	return RefractionPostProcessFromJSObject(p, ba.ctx)
+func (r *RefractionPostProcess) RefractionTexture() *Texture {
+	retVal := r.p.Get("refractionTexture")
+	return TextureFromJSObject(retVal, r.ctx)
 }
 
 // SetRefractionTexture sets the RefractionTexture property of class RefractionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#refractiontexture
 func (r *RefractionPostProcess) SetRefractionTexture(refractionTexture *Texture) *RefractionPostProcess {
-	p := ba.ctx.Get("RefractionPostProcess").New(refractionTexture.JSObject())
-	return RefractionPostProcessFromJSObject(p, ba.ctx)
+	r.p.Set("refractionTexture", refractionTexture.JSObject())
+	return r
 }
-
-*/

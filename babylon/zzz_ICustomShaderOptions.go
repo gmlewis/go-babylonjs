@@ -36,86 +36,82 @@ func ICustomShaderOptionsArrayToJSArray(array []*ICustomShaderOptions) []interfa
 	return result
 }
 
-/*
-
 // Attributes returns the Attributes property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#attributes
-func (i *ICustomShaderOptions) Attributes(attributes string) *ICustomShaderOptions {
-	p := ba.ctx.Get("ICustomShaderOptions").New(attributes)
-	return ICustomShaderOptionsFromJSObject(p, ba.ctx)
+func (i *ICustomShaderOptions) Attributes() string {
+	retVal := i.p.Get("attributes")
+	return retVal.String()
 }
 
 // SetAttributes sets the Attributes property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#attributes
 func (i *ICustomShaderOptions) SetAttributes(attributes string) *ICustomShaderOptions {
-	p := ba.ctx.Get("ICustomShaderOptions").New(attributes)
-	return ICustomShaderOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("attributes", attributes)
+	return i
 }
 
 // Defines returns the Defines property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#defines
-func (i *ICustomShaderOptions) Defines(defines string) *ICustomShaderOptions {
-	p := ba.ctx.Get("ICustomShaderOptions").New(defines)
-	return ICustomShaderOptionsFromJSObject(p, ba.ctx)
+func (i *ICustomShaderOptions) Defines() string {
+	retVal := i.p.Get("defines")
+	return retVal.String()
 }
 
 // SetDefines sets the Defines property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#defines
 func (i *ICustomShaderOptions) SetDefines(defines string) *ICustomShaderOptions {
-	p := ba.ctx.Get("ICustomShaderOptions").New(defines)
-	return ICustomShaderOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("defines", defines)
+	return i
 }
 
 // Samplers returns the Samplers property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#samplers
-func (i *ICustomShaderOptions) Samplers(samplers string) *ICustomShaderOptions {
-	p := ba.ctx.Get("ICustomShaderOptions").New(samplers)
-	return ICustomShaderOptionsFromJSObject(p, ba.ctx)
+func (i *ICustomShaderOptions) Samplers() string {
+	retVal := i.p.Get("samplers")
+	return retVal.String()
 }
 
 // SetSamplers sets the Samplers property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#samplers
 func (i *ICustomShaderOptions) SetSamplers(samplers string) *ICustomShaderOptions {
-	p := ba.ctx.Get("ICustomShaderOptions").New(samplers)
-	return ICustomShaderOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("samplers", samplers)
+	return i
 }
 
 // ShaderName returns the ShaderName property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#shadername
-func (i *ICustomShaderOptions) ShaderName(shaderName string) *ICustomShaderOptions {
-	p := ba.ctx.Get("ICustomShaderOptions").New(shaderName)
-	return ICustomShaderOptionsFromJSObject(p, ba.ctx)
+func (i *ICustomShaderOptions) ShaderName() string {
+	retVal := i.p.Get("shaderName")
+	return retVal.String()
 }
 
 // SetShaderName sets the ShaderName property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#shadername
 func (i *ICustomShaderOptions) SetShaderName(shaderName string) *ICustomShaderOptions {
-	p := ba.ctx.Get("ICustomShaderOptions").New(shaderName)
-	return ICustomShaderOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("shaderName", shaderName)
+	return i
 }
 
 // Uniforms returns the Uniforms property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#uniforms
-func (i *ICustomShaderOptions) Uniforms(uniforms string) *ICustomShaderOptions {
-	p := ba.ctx.Get("ICustomShaderOptions").New(uniforms)
-	return ICustomShaderOptionsFromJSObject(p, ba.ctx)
+func (i *ICustomShaderOptions) Uniforms() string {
+	retVal := i.p.Get("uniforms")
+	return retVal.String()
 }
 
 // SetUniforms sets the Uniforms property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#uniforms
 func (i *ICustomShaderOptions) SetUniforms(uniforms string) *ICustomShaderOptions {
-	p := ba.ctx.Get("ICustomShaderOptions").New(uniforms)
-	return ICustomShaderOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("uniforms", uniforms)
+	return i
 }
-
-*/

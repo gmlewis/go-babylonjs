@@ -91,22 +91,18 @@ func (d *DigitalRainFontTexture) Parse(source interface{}, scene *Scene) *Digita
 	return DigitalRainFontTextureFromJSObject(retVal, d.ctx)
 }
 
-/*
-
 // CharSize returns the CharSize property of class DigitalRainFontTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#charsize
-func (d *DigitalRainFontTexture) CharSize(charSize float64) *DigitalRainFontTexture {
-	p := ba.ctx.Get("DigitalRainFontTexture").New(charSize)
-	return DigitalRainFontTextureFromJSObject(p, ba.ctx)
+func (d *DigitalRainFontTexture) CharSize() float64 {
+	retVal := d.p.Get("charSize")
+	return retVal.Float()
 }
 
 // SetCharSize sets the CharSize property of class DigitalRainFontTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#charsize
 func (d *DigitalRainFontTexture) SetCharSize(charSize float64) *DigitalRainFontTexture {
-	p := ba.ctx.Get("DigitalRainFontTexture").New(charSize)
-	return DigitalRainFontTextureFromJSObject(p, ba.ctx)
+	d.p.Set("charSize", charSize)
+	return d
 }
-
-*/

@@ -152,54 +152,50 @@ func (b *BlurPostProcess) UpdateEffect(opts *BlurPostProcessUpdateEffectOpts) {
 	b.p.Call("updateEffect", args...)
 }
 
-/*
-
 // Direction returns the Direction property of class BlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.blurpostprocess#direction
-func (b *BlurPostProcess) Direction(direction *Vector2) *BlurPostProcess {
-	p := ba.ctx.Get("BlurPostProcess").New(direction.JSObject())
-	return BlurPostProcessFromJSObject(p, ba.ctx)
+func (b *BlurPostProcess) Direction() *Vector2 {
+	retVal := b.p.Get("direction")
+	return Vector2FromJSObject(retVal, b.ctx)
 }
 
 // SetDirection sets the Direction property of class BlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.blurpostprocess#direction
 func (b *BlurPostProcess) SetDirection(direction *Vector2) *BlurPostProcess {
-	p := ba.ctx.Get("BlurPostProcess").New(direction.JSObject())
-	return BlurPostProcessFromJSObject(p, ba.ctx)
+	b.p.Set("direction", direction.JSObject())
+	return b
 }
 
 // Kernel returns the Kernel property of class BlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.blurpostprocess#kernel
-func (b *BlurPostProcess) Kernel(kernel float64) *BlurPostProcess {
-	p := ba.ctx.Get("BlurPostProcess").New(kernel)
-	return BlurPostProcessFromJSObject(p, ba.ctx)
+func (b *BlurPostProcess) Kernel() float64 {
+	retVal := b.p.Get("kernel")
+	return retVal.Float()
 }
 
 // SetKernel sets the Kernel property of class BlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.blurpostprocess#kernel
 func (b *BlurPostProcess) SetKernel(kernel float64) *BlurPostProcess {
-	p := ba.ctx.Get("BlurPostProcess").New(kernel)
-	return BlurPostProcessFromJSObject(p, ba.ctx)
+	b.p.Set("kernel", kernel)
+	return b
 }
 
 // PackedFloat returns the PackedFloat property of class BlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.blurpostprocess#packedfloat
-func (b *BlurPostProcess) PackedFloat(packedFloat bool) *BlurPostProcess {
-	p := ba.ctx.Get("BlurPostProcess").New(packedFloat)
-	return BlurPostProcessFromJSObject(p, ba.ctx)
+func (b *BlurPostProcess) PackedFloat() bool {
+	retVal := b.p.Get("packedFloat")
+	return retVal.Bool()
 }
 
 // SetPackedFloat sets the PackedFloat property of class BlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.blurpostprocess#packedfloat
 func (b *BlurPostProcess) SetPackedFloat(packedFloat bool) *BlurPostProcess {
-	p := ba.ctx.Get("BlurPostProcess").New(packedFloat)
-	return BlurPostProcessFromJSObject(p, ba.ctx)
+	b.p.Set("packedFloat", packedFloat)
+	return b
 }
-
-*/

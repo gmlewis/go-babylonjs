@@ -99,7 +99,3 @@ func (p *PhysicsVortexEvent) GetData() *PhysicsVortexEventData {
 	retVal := p.p.Call("getData")
 	return PhysicsVortexEventDataFromJSObject(retVal, p.ctx)
 }
-
-/*
-
- */

@@ -89,54 +89,50 @@ func (s *ScrollBar) _onPointerDown(target *Control, coordinates *Vector2, pointe
 	return retVal.Bool()
 }
 
-/*
-
 // Background returns the Background property of class ScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollbar#background
-func (s *ScrollBar) Background(background string) *ScrollBar {
-	p := ba.ctx.Get("ScrollBar").New(background)
-	return ScrollBarFromJSObject(p, ba.ctx)
+func (s *ScrollBar) Background() string {
+	retVal := s.p.Get("background")
+	return retVal.String()
 }
 
 // SetBackground sets the Background property of class ScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollbar#background
 func (s *ScrollBar) SetBackground(background string) *ScrollBar {
-	p := ba.ctx.Get("ScrollBar").New(background)
-	return ScrollBarFromJSObject(p, ba.ctx)
+	s.p.Set("background", background)
+	return s
 }
 
 // BorderColor returns the BorderColor property of class ScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollbar#bordercolor
-func (s *ScrollBar) BorderColor(borderColor string) *ScrollBar {
-	p := ba.ctx.Get("ScrollBar").New(borderColor)
-	return ScrollBarFromJSObject(p, ba.ctx)
+func (s *ScrollBar) BorderColor() string {
+	retVal := s.p.Get("borderColor")
+	return retVal.String()
 }
 
 // SetBorderColor sets the BorderColor property of class ScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollbar#bordercolor
 func (s *ScrollBar) SetBorderColor(borderColor string) *ScrollBar {
-	p := ba.ctx.Get("ScrollBar").New(borderColor)
-	return ScrollBarFromJSObject(p, ba.ctx)
+	s.p.Set("borderColor", borderColor)
+	return s
 }
 
 // Name returns the Name property of class ScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollbar#name
-func (s *ScrollBar) Name(name string) *ScrollBar {
-	p := ba.ctx.Get("ScrollBar").New(name)
-	return ScrollBarFromJSObject(p, ba.ctx)
+func (s *ScrollBar) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollbar#name
 func (s *ScrollBar) SetName(name string) *ScrollBar {
-	p := ba.ctx.Get("ScrollBar").New(name)
-	return ScrollBarFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
-
-*/

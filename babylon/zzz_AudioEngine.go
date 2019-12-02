@@ -117,166 +117,162 @@ func (a *AudioEngine) Unlock() {
 	a.p.Call("unlock")
 }
 
-/*
-
 // AudioContext returns the AudioContext property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#audiocontext
-func (a *AudioEngine) AudioContext(audioContext *AudioContext) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(audioContext.JSObject())
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) AudioContext() js.Value {
+	retVal := a.p.Get("audioContext")
+	return retVal
 }
 
 // SetAudioContext sets the AudioContext property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#audiocontext
-func (a *AudioEngine) SetAudioContext(audioContext *AudioContext) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(audioContext.JSObject())
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) SetAudioContext(audioContext js.Value) *AudioEngine {
+	a.p.Set("audioContext", audioContext)
+	return a
 }
 
 // CanUseWebAudio returns the CanUseWebAudio property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#canusewebaudio
-func (a *AudioEngine) CanUseWebAudio(canUseWebAudio bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(canUseWebAudio)
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) CanUseWebAudio() bool {
+	retVal := a.p.Get("canUseWebAudio")
+	return retVal.Bool()
 }
 
 // SetCanUseWebAudio sets the CanUseWebAudio property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#canusewebaudio
 func (a *AudioEngine) SetCanUseWebAudio(canUseWebAudio bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(canUseWebAudio)
-	return AudioEngineFromJSObject(p, ba.ctx)
+	a.p.Set("canUseWebAudio", canUseWebAudio)
+	return a
 }
 
 // IsMP3supported returns the IsMP3supported property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#ismp3supported
-func (a *AudioEngine) IsMP3supported(isMP3supported bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(isMP3supported)
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) IsMP3supported() bool {
+	retVal := a.p.Get("isMP3supported")
+	return retVal.Bool()
 }
 
 // SetIsMP3supported sets the IsMP3supported property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#ismp3supported
 func (a *AudioEngine) SetIsMP3supported(isMP3supported bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(isMP3supported)
-	return AudioEngineFromJSObject(p, ba.ctx)
+	a.p.Set("isMP3supported", isMP3supported)
+	return a
 }
 
 // IsOGGsupported returns the IsOGGsupported property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#isoggsupported
-func (a *AudioEngine) IsOGGsupported(isOGGsupported bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(isOGGsupported)
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) IsOGGsupported() bool {
+	retVal := a.p.Get("isOGGsupported")
+	return retVal.Bool()
 }
 
 // SetIsOGGsupported sets the IsOGGsupported property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#isoggsupported
 func (a *AudioEngine) SetIsOGGsupported(isOGGsupported bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(isOGGsupported)
-	return AudioEngineFromJSObject(p, ba.ctx)
+	a.p.Set("isOGGsupported", isOGGsupported)
+	return a
 }
 
 // MasterGain returns the MasterGain property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#mastergain
-func (a *AudioEngine) MasterGain(masterGain *GainNode) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(masterGain.JSObject())
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) MasterGain() js.Value {
+	retVal := a.p.Get("masterGain")
+	return retVal
 }
 
 // SetMasterGain sets the MasterGain property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#mastergain
-func (a *AudioEngine) SetMasterGain(masterGain *GainNode) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(masterGain.JSObject())
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) SetMasterGain(masterGain js.Value) *AudioEngine {
+	a.p.Set("masterGain", masterGain)
+	return a
 }
 
 // OnAudioLockedObservable returns the OnAudioLockedObservable property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#onaudiolockedobservable
-func (a *AudioEngine) OnAudioLockedObservable(onAudioLockedObservable *Observable) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(onAudioLockedObservable.JSObject())
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) OnAudioLockedObservable() *Observable {
+	retVal := a.p.Get("onAudioLockedObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnAudioLockedObservable sets the OnAudioLockedObservable property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#onaudiolockedobservable
 func (a *AudioEngine) SetOnAudioLockedObservable(onAudioLockedObservable *Observable) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(onAudioLockedObservable.JSObject())
-	return AudioEngineFromJSObject(p, ba.ctx)
+	a.p.Set("onAudioLockedObservable", onAudioLockedObservable.JSObject())
+	return a
 }
 
 // OnAudioUnlockedObservable returns the OnAudioUnlockedObservable property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#onaudiounlockedobservable
-func (a *AudioEngine) OnAudioUnlockedObservable(onAudioUnlockedObservable *Observable) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(onAudioUnlockedObservable.JSObject())
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) OnAudioUnlockedObservable() *Observable {
+	retVal := a.p.Get("onAudioUnlockedObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnAudioUnlockedObservable sets the OnAudioUnlockedObservable property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#onaudiounlockedobservable
 func (a *AudioEngine) SetOnAudioUnlockedObservable(onAudioUnlockedObservable *Observable) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(onAudioUnlockedObservable.JSObject())
-	return AudioEngineFromJSObject(p, ba.ctx)
+	a.p.Set("onAudioUnlockedObservable", onAudioUnlockedObservable.JSObject())
+	return a
 }
 
 // Unlocked returns the Unlocked property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#unlocked
-func (a *AudioEngine) Unlocked(unlocked bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(unlocked)
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) Unlocked() bool {
+	retVal := a.p.Get("unlocked")
+	return retVal.Bool()
 }
 
 // SetUnlocked sets the Unlocked property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#unlocked
 func (a *AudioEngine) SetUnlocked(unlocked bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(unlocked)
-	return AudioEngineFromJSObject(p, ba.ctx)
+	a.p.Set("unlocked", unlocked)
+	return a
 }
 
 // UseCustomUnlockedButton returns the UseCustomUnlockedButton property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#usecustomunlockedbutton
-func (a *AudioEngine) UseCustomUnlockedButton(useCustomUnlockedButton bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(useCustomUnlockedButton)
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) UseCustomUnlockedButton() bool {
+	retVal := a.p.Get("useCustomUnlockedButton")
+	return retVal.Bool()
 }
 
 // SetUseCustomUnlockedButton sets the UseCustomUnlockedButton property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#usecustomunlockedbutton
 func (a *AudioEngine) SetUseCustomUnlockedButton(useCustomUnlockedButton bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(useCustomUnlockedButton)
-	return AudioEngineFromJSObject(p, ba.ctx)
+	a.p.Set("useCustomUnlockedButton", useCustomUnlockedButton)
+	return a
 }
 
 // WarnedWebAudioUnsupported returns the WarnedWebAudioUnsupported property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#warnedwebaudiounsupported
-func (a *AudioEngine) WarnedWebAudioUnsupported(WarnedWebAudioUnsupported bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(WarnedWebAudioUnsupported)
-	return AudioEngineFromJSObject(p, ba.ctx)
+func (a *AudioEngine) WarnedWebAudioUnsupported() bool {
+	retVal := a.p.Get("WarnedWebAudioUnsupported")
+	return retVal.Bool()
 }
 
 // SetWarnedWebAudioUnsupported sets the WarnedWebAudioUnsupported property of class AudioEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine#warnedwebaudiounsupported
 func (a *AudioEngine) SetWarnedWebAudioUnsupported(WarnedWebAudioUnsupported bool) *AudioEngine {
-	p := ba.ctx.Get("AudioEngine").New(WarnedWebAudioUnsupported)
-	return AudioEngineFromJSObject(p, ba.ctx)
+	a.p.Set("WarnedWebAudioUnsupported", WarnedWebAudioUnsupported)
+	return a
 }
-
-*/

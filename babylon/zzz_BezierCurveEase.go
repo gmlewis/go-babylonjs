@@ -82,70 +82,66 @@ func (ba *Babylon) NewBezierCurveEase(opts *NewBezierCurveEaseOpts) *BezierCurve
 	return BezierCurveEaseFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // X1 returns the X1 property of class BezierCurveEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.beziercurveease#x1
-func (b *BezierCurveEase) X1(x1 float64) *BezierCurveEase {
-	p := ba.ctx.Get("BezierCurveEase").New(x1)
-	return BezierCurveEaseFromJSObject(p, ba.ctx)
+func (b *BezierCurveEase) X1() float64 {
+	retVal := b.p.Get("x1")
+	return retVal.Float()
 }
 
 // SetX1 sets the X1 property of class BezierCurveEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.beziercurveease#x1
 func (b *BezierCurveEase) SetX1(x1 float64) *BezierCurveEase {
-	p := ba.ctx.Get("BezierCurveEase").New(x1)
-	return BezierCurveEaseFromJSObject(p, ba.ctx)
+	b.p.Set("x1", x1)
+	return b
 }
 
 // X2 returns the X2 property of class BezierCurveEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.beziercurveease#x2
-func (b *BezierCurveEase) X2(x2 float64) *BezierCurveEase {
-	p := ba.ctx.Get("BezierCurveEase").New(x2)
-	return BezierCurveEaseFromJSObject(p, ba.ctx)
+func (b *BezierCurveEase) X2() float64 {
+	retVal := b.p.Get("x2")
+	return retVal.Float()
 }
 
 // SetX2 sets the X2 property of class BezierCurveEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.beziercurveease#x2
 func (b *BezierCurveEase) SetX2(x2 float64) *BezierCurveEase {
-	p := ba.ctx.Get("BezierCurveEase").New(x2)
-	return BezierCurveEaseFromJSObject(p, ba.ctx)
+	b.p.Set("x2", x2)
+	return b
 }
 
 // Y1 returns the Y1 property of class BezierCurveEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.beziercurveease#y1
-func (b *BezierCurveEase) Y1(y1 float64) *BezierCurveEase {
-	p := ba.ctx.Get("BezierCurveEase").New(y1)
-	return BezierCurveEaseFromJSObject(p, ba.ctx)
+func (b *BezierCurveEase) Y1() float64 {
+	retVal := b.p.Get("y1")
+	return retVal.Float()
 }
 
 // SetY1 sets the Y1 property of class BezierCurveEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.beziercurveease#y1
 func (b *BezierCurveEase) SetY1(y1 float64) *BezierCurveEase {
-	p := ba.ctx.Get("BezierCurveEase").New(y1)
-	return BezierCurveEaseFromJSObject(p, ba.ctx)
+	b.p.Set("y1", y1)
+	return b
 }
 
 // Y2 returns the Y2 property of class BezierCurveEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.beziercurveease#y2
-func (b *BezierCurveEase) Y2(y2 float64) *BezierCurveEase {
-	p := ba.ctx.Get("BezierCurveEase").New(y2)
-	return BezierCurveEaseFromJSObject(p, ba.ctx)
+func (b *BezierCurveEase) Y2() float64 {
+	retVal := b.p.Get("y2")
+	return retVal.Float()
 }
 
 // SetY2 sets the Y2 property of class BezierCurveEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.beziercurveease#y2
 func (b *BezierCurveEase) SetY2(y2 float64) *BezierCurveEase {
-	p := ba.ctx.Get("BezierCurveEase").New(y2)
-	return BezierCurveEaseFromJSObject(p, ba.ctx)
+	b.p.Set("y2", y2)
+	return b
 }
-
-*/

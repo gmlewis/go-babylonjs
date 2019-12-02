@@ -149,102 +149,98 @@ func (r *RuntimeAnimation) SetValue(currentValue interface{}, weight float64) {
 	r.p.Call("setValue", args...)
 }
 
-/*
-
 // Animation returns the Animation property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#animation
-func (r *RuntimeAnimation) Animation(animation *Animation) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(animation.JSObject())
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+func (r *RuntimeAnimation) Animation() *Animation {
+	retVal := r.p.Get("animation")
+	return AnimationFromJSObject(retVal, r.ctx)
 }
 
 // SetAnimation sets the Animation property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#animation
 func (r *RuntimeAnimation) SetAnimation(animation *Animation) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(animation.JSObject())
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+	r.p.Set("animation", animation.JSObject())
+	return r
 }
 
 // CurrentFrame returns the CurrentFrame property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#currentframe
-func (r *RuntimeAnimation) CurrentFrame(currentFrame float64) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(currentFrame)
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+func (r *RuntimeAnimation) CurrentFrame() float64 {
+	retVal := r.p.Get("currentFrame")
+	return retVal.Float()
 }
 
 // SetCurrentFrame sets the CurrentFrame property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#currentframe
 func (r *RuntimeAnimation) SetCurrentFrame(currentFrame float64) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(currentFrame)
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+	r.p.Set("currentFrame", currentFrame)
+	return r
 }
 
 // CurrentValue returns the CurrentValue property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#currentvalue
-func (r *RuntimeAnimation) CurrentValue(currentValue interface{}) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(currentValue)
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+func (r *RuntimeAnimation) CurrentValue() interface{} {
+	retVal := r.p.Get("currentValue")
+	return retVal
 }
 
 // SetCurrentValue sets the CurrentValue property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#currentvalue
 func (r *RuntimeAnimation) SetCurrentValue(currentValue interface{}) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(currentValue)
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+	r.p.Set("currentValue", currentValue)
+	return r
 }
 
 // Target returns the Target property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#target
-func (r *RuntimeAnimation) Target(target interface{}) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(target)
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+func (r *RuntimeAnimation) Target() interface{} {
+	retVal := r.p.Get("target")
+	return retVal
 }
 
 // SetTarget sets the Target property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#target
 func (r *RuntimeAnimation) SetTarget(target interface{}) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(target)
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+	r.p.Set("target", target)
+	return r
 }
 
 // TargetPath returns the TargetPath property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#targetpath
-func (r *RuntimeAnimation) TargetPath(targetPath string) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(targetPath)
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+func (r *RuntimeAnimation) TargetPath() string {
+	retVal := r.p.Get("targetPath")
+	return retVal.String()
 }
 
 // SetTargetPath sets the TargetPath property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#targetpath
 func (r *RuntimeAnimation) SetTargetPath(targetPath string) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(targetPath)
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+	r.p.Set("targetPath", targetPath)
+	return r
 }
 
 // Weight returns the Weight property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#weight
-func (r *RuntimeAnimation) Weight(weight float64) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(weight)
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+func (r *RuntimeAnimation) Weight() float64 {
+	retVal := r.p.Get("weight")
+	return retVal.Float()
 }
 
 // SetWeight sets the Weight property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#weight
 func (r *RuntimeAnimation) SetWeight(weight float64) *RuntimeAnimation {
-	p := ba.ctx.Get("RuntimeAnimation").New(weight)
-	return RuntimeAnimationFromJSObject(p, ba.ctx)
+	r.p.Set("weight", weight)
+	return r
 }
-
-*/

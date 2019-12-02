@@ -35,7 +35,3 @@ func ISceneLoaderPluginExtensionsArrayToJSArray(array []*ISceneLoaderPluginExten
 	}
 	return result
 }
-
-/*
-
- */

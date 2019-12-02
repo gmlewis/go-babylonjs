@@ -64,86 +64,82 @@ func (i *ImageAssetTask) RunTask(scene *Scene, onSuccess func(), onError func())
 	i.p.Call("runTask", args...)
 }
 
-/*
-
 // Image returns the Image property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#image
-func (i *ImageAssetTask) Image(image js.Value) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(image)
-	return ImageAssetTaskFromJSObject(p, ba.ctx)
+func (i *ImageAssetTask) Image() js.Value {
+	retVal := i.p.Get("image")
+	return retVal
 }
 
 // SetImage sets the Image property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#image
 func (i *ImageAssetTask) SetImage(image js.Value) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(image)
-	return ImageAssetTaskFromJSObject(p, ba.ctx)
+	i.p.Set("image", image)
+	return i
 }
 
 // Name returns the Name property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#name
-func (i *ImageAssetTask) Name(name string) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(name)
-	return ImageAssetTaskFromJSObject(p, ba.ctx)
+func (i *ImageAssetTask) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#name
 func (i *ImageAssetTask) SetName(name string) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(name)
-	return ImageAssetTaskFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
 
 // OnError returns the OnError property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#onerror
-func (i *ImageAssetTask) OnError(onError func()) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return ImageAssetTaskFromJSObject(p, ba.ctx)
+func (i *ImageAssetTask) OnError() js.Value {
+	retVal := i.p.Get("onError")
+	return retVal
 }
 
 // SetOnError sets the OnError property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#onerror
 func (i *ImageAssetTask) SetOnError(onError func()) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return ImageAssetTaskFromJSObject(p, ba.ctx)
+	i.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	return i
 }
 
 // OnSuccess returns the OnSuccess property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#onsuccess
-func (i *ImageAssetTask) OnSuccess(onSuccess func()) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return ImageAssetTaskFromJSObject(p, ba.ctx)
+func (i *ImageAssetTask) OnSuccess() js.Value {
+	retVal := i.p.Get("onSuccess")
+	return retVal
 }
 
 // SetOnSuccess sets the OnSuccess property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#onsuccess
 func (i *ImageAssetTask) SetOnSuccess(onSuccess func()) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return ImageAssetTaskFromJSObject(p, ba.ctx)
+	i.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	return i
 }
 
 // Url returns the Url property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#url
-func (i *ImageAssetTask) Url(url string) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(url)
-	return ImageAssetTaskFromJSObject(p, ba.ctx)
+func (i *ImageAssetTask) Url() string {
+	retVal := i.p.Get("url")
+	return retVal.String()
 }
 
 // SetUrl sets the Url property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#url
 func (i *ImageAssetTask) SetUrl(url string) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(url)
-	return ImageAssetTaskFromJSObject(p, ba.ctx)
+	i.p.Set("url", url)
+	return i
 }
-
-*/

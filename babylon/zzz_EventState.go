@@ -114,86 +114,82 @@ func (e *EventState) Initalize(mask float64, opts *EventStateInitalizeOpts) *Eve
 	return EventStateFromJSObject(retVal, e.ctx)
 }
 
-/*
-
 // CurrentTarget returns the CurrentTarget property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#currenttarget
-func (e *EventState) CurrentTarget(currentTarget interface{}) *EventState {
-	p := ba.ctx.Get("EventState").New(currentTarget)
-	return EventStateFromJSObject(p, ba.ctx)
+func (e *EventState) CurrentTarget() interface{} {
+	retVal := e.p.Get("currentTarget")
+	return retVal
 }
 
 // SetCurrentTarget sets the CurrentTarget property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#currenttarget
 func (e *EventState) SetCurrentTarget(currentTarget interface{}) *EventState {
-	p := ba.ctx.Get("EventState").New(currentTarget)
-	return EventStateFromJSObject(p, ba.ctx)
+	e.p.Set("currentTarget", currentTarget)
+	return e
 }
 
 // LastReturnValue returns the LastReturnValue property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#lastreturnvalue
-func (e *EventState) LastReturnValue(lastReturnValue interface{}) *EventState {
-	p := ba.ctx.Get("EventState").New(lastReturnValue)
-	return EventStateFromJSObject(p, ba.ctx)
+func (e *EventState) LastReturnValue() interface{} {
+	retVal := e.p.Get("lastReturnValue")
+	return retVal
 }
 
 // SetLastReturnValue sets the LastReturnValue property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#lastreturnvalue
 func (e *EventState) SetLastReturnValue(lastReturnValue interface{}) *EventState {
-	p := ba.ctx.Get("EventState").New(lastReturnValue)
-	return EventStateFromJSObject(p, ba.ctx)
+	e.p.Set("lastReturnValue", lastReturnValue)
+	return e
 }
 
 // Mask returns the Mask property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#mask
-func (e *EventState) Mask(mask float64) *EventState {
-	p := ba.ctx.Get("EventState").New(mask)
-	return EventStateFromJSObject(p, ba.ctx)
+func (e *EventState) Mask() float64 {
+	retVal := e.p.Get("mask")
+	return retVal.Float()
 }
 
 // SetMask sets the Mask property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#mask
 func (e *EventState) SetMask(mask float64) *EventState {
-	p := ba.ctx.Get("EventState").New(mask)
-	return EventStateFromJSObject(p, ba.ctx)
+	e.p.Set("mask", mask)
+	return e
 }
 
 // SkipNextObservers returns the SkipNextObservers property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#skipnextobservers
-func (e *EventState) SkipNextObservers(skipNextObservers bool) *EventState {
-	p := ba.ctx.Get("EventState").New(skipNextObservers)
-	return EventStateFromJSObject(p, ba.ctx)
+func (e *EventState) SkipNextObservers() bool {
+	retVal := e.p.Get("skipNextObservers")
+	return retVal.Bool()
 }
 
 // SetSkipNextObservers sets the SkipNextObservers property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#skipnextobservers
 func (e *EventState) SetSkipNextObservers(skipNextObservers bool) *EventState {
-	p := ba.ctx.Get("EventState").New(skipNextObservers)
-	return EventStateFromJSObject(p, ba.ctx)
+	e.p.Set("skipNextObservers", skipNextObservers)
+	return e
 }
 
 // Target returns the Target property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#target
-func (e *EventState) Target(target interface{}) *EventState {
-	p := ba.ctx.Get("EventState").New(target)
-	return EventStateFromJSObject(p, ba.ctx)
+func (e *EventState) Target() interface{} {
+	retVal := e.p.Get("target")
+	return retVal
 }
 
 // SetTarget sets the Target property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#target
 func (e *EventState) SetTarget(target interface{}) *EventState {
-	p := ba.ctx.Get("EventState").New(target)
-	return EventStateFromJSObject(p, ba.ctx)
+	e.p.Set("target", target)
+	return e
 }
-
-*/

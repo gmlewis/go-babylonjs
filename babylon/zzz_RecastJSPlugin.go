@@ -195,54 +195,50 @@ func (r *RecastJSPlugin) SetDefaultQueryExtent(extent *Vector3) {
 	r.p.Call("setDefaultQueryExtent", args...)
 }
 
-/*
-
 // BjsRECAST returns the BjsRECAST property of class RecastJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#bjsrecast
-func (r *RecastJSPlugin) BjsRECAST(bjsRECAST interface{}) *RecastJSPlugin {
-	p := ba.ctx.Get("RecastJSPlugin").New(bjsRECAST)
-	return RecastJSPluginFromJSObject(p, ba.ctx)
+func (r *RecastJSPlugin) BjsRECAST() interface{} {
+	retVal := r.p.Get("bjsRECAST")
+	return retVal
 }
 
 // SetBjsRECAST sets the BjsRECAST property of class RecastJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#bjsrecast
 func (r *RecastJSPlugin) SetBjsRECAST(bjsRECAST interface{}) *RecastJSPlugin {
-	p := ba.ctx.Get("RecastJSPlugin").New(bjsRECAST)
-	return RecastJSPluginFromJSObject(p, ba.ctx)
+	r.p.Set("bjsRECAST", bjsRECAST)
+	return r
 }
 
 // Name returns the Name property of class RecastJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#name
-func (r *RecastJSPlugin) Name(name string) *RecastJSPlugin {
-	p := ba.ctx.Get("RecastJSPlugin").New(name)
-	return RecastJSPluginFromJSObject(p, ba.ctx)
+func (r *RecastJSPlugin) Name() string {
+	retVal := r.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class RecastJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#name
 func (r *RecastJSPlugin) SetName(name string) *RecastJSPlugin {
-	p := ba.ctx.Get("RecastJSPlugin").New(name)
-	return RecastJSPluginFromJSObject(p, ba.ctx)
+	r.p.Set("name", name)
+	return r
 }
 
 // NavMesh returns the NavMesh property of class RecastJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#navmesh
-func (r *RecastJSPlugin) NavMesh(navMesh interface{}) *RecastJSPlugin {
-	p := ba.ctx.Get("RecastJSPlugin").New(navMesh)
-	return RecastJSPluginFromJSObject(p, ba.ctx)
+func (r *RecastJSPlugin) NavMesh() interface{} {
+	retVal := r.p.Get("navMesh")
+	return retVal
 }
 
 // SetNavMesh sets the NavMesh property of class RecastJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#navmesh
 func (r *RecastJSPlugin) SetNavMesh(navMesh interface{}) *RecastJSPlugin {
-	p := ba.ctx.Get("RecastJSPlugin").New(navMesh)
-	return RecastJSPluginFromJSObject(p, ba.ctx)
+	r.p.Set("navMesh", navMesh)
+	return r
 }
-
-*/

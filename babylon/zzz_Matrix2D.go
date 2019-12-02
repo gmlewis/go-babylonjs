@@ -191,22 +191,18 @@ func (m *Matrix2D) TranslationToRef(x float64, y float64, result *Matrix2D) {
 	m.p.Call("TranslationToRef", args...)
 }
 
-/*
-
 // M returns the M property of class Matrix2D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix2d#m
-func (m *Matrix2D) M(m js.Value) *Matrix2D {
-	p := ba.ctx.Get("Matrix2D").New(m)
-	return Matrix2DFromJSObject(p, ba.ctx)
+func (m *Matrix2D) M() js.Value {
+	retVal := m.p.Get("m")
+	return retVal
 }
 
 // SetM sets the M property of class Matrix2D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix2d#m
-func (m *Matrix2D) SetM(m js.Value) *Matrix2D {
-	p := ba.ctx.Get("Matrix2D").New(m)
-	return Matrix2DFromJSObject(p, ba.ctx)
+func (m *Matrix2D) SetM(mm js.Value) *Matrix2D {
+	m.p.Set("m", mm)
+	return m
 }
-
-*/

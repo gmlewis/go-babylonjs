@@ -97,166 +97,162 @@ func (h *HDRCubeTextureAssetTask) RunTask(scene *Scene, onSuccess func(), onErro
 	h.p.Call("runTask", args...)
 }
 
-/*
-
 // GammaSpace returns the GammaSpace property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#gammaspace
-func (h *HDRCubeTextureAssetTask) GammaSpace(gammaSpace bool) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(gammaSpace)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+func (h *HDRCubeTextureAssetTask) GammaSpace() bool {
+	retVal := h.p.Get("gammaSpace")
+	return retVal.Bool()
 }
 
 // SetGammaSpace sets the GammaSpace property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#gammaspace
 func (h *HDRCubeTextureAssetTask) SetGammaSpace(gammaSpace bool) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(gammaSpace)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+	h.p.Set("gammaSpace", gammaSpace)
+	return h
 }
 
 // GenerateHarmonics returns the GenerateHarmonics property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#generateharmonics
-func (h *HDRCubeTextureAssetTask) GenerateHarmonics(generateHarmonics bool) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(generateHarmonics)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+func (h *HDRCubeTextureAssetTask) GenerateHarmonics() bool {
+	retVal := h.p.Get("generateHarmonics")
+	return retVal.Bool()
 }
 
 // SetGenerateHarmonics sets the GenerateHarmonics property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#generateharmonics
 func (h *HDRCubeTextureAssetTask) SetGenerateHarmonics(generateHarmonics bool) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(generateHarmonics)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+	h.p.Set("generateHarmonics", generateHarmonics)
+	return h
 }
 
 // Name returns the Name property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#name
-func (h *HDRCubeTextureAssetTask) Name(name string) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(name)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+func (h *HDRCubeTextureAssetTask) Name() string {
+	retVal := h.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#name
 func (h *HDRCubeTextureAssetTask) SetName(name string) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(name)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+	h.p.Set("name", name)
+	return h
 }
 
 // NoMipmap returns the NoMipmap property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#nomipmap
-func (h *HDRCubeTextureAssetTask) NoMipmap(noMipmap bool) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(noMipmap)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+func (h *HDRCubeTextureAssetTask) NoMipmap() bool {
+	retVal := h.p.Get("noMipmap")
+	return retVal.Bool()
 }
 
 // SetNoMipmap sets the NoMipmap property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#nomipmap
 func (h *HDRCubeTextureAssetTask) SetNoMipmap(noMipmap bool) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(noMipmap)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+	h.p.Set("noMipmap", noMipmap)
+	return h
 }
 
 // OnError returns the OnError property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#onerror
-func (h *HDRCubeTextureAssetTask) OnError(onError func()) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+func (h *HDRCubeTextureAssetTask) OnError() js.Value {
+	retVal := h.p.Get("onError")
+	return retVal
 }
 
 // SetOnError sets the OnError property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#onerror
 func (h *HDRCubeTextureAssetTask) SetOnError(onError func()) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+	h.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	return h
 }
 
 // OnSuccess returns the OnSuccess property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#onsuccess
-func (h *HDRCubeTextureAssetTask) OnSuccess(onSuccess func()) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+func (h *HDRCubeTextureAssetTask) OnSuccess() js.Value {
+	retVal := h.p.Get("onSuccess")
+	return retVal
 }
 
 // SetOnSuccess sets the OnSuccess property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#onsuccess
 func (h *HDRCubeTextureAssetTask) SetOnSuccess(onSuccess func()) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+	h.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	return h
 }
 
 // Reserved returns the Reserved property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#reserved
-func (h *HDRCubeTextureAssetTask) Reserved(reserved bool) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(reserved)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+func (h *HDRCubeTextureAssetTask) Reserved() bool {
+	retVal := h.p.Get("reserved")
+	return retVal.Bool()
 }
 
 // SetReserved sets the Reserved property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#reserved
 func (h *HDRCubeTextureAssetTask) SetReserved(reserved bool) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(reserved)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+	h.p.Set("reserved", reserved)
+	return h
 }
 
 // Size returns the Size property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#size
-func (h *HDRCubeTextureAssetTask) Size(size float64) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(size)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+func (h *HDRCubeTextureAssetTask) Size() float64 {
+	retVal := h.p.Get("size")
+	return retVal.Float()
 }
 
 // SetSize sets the Size property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#size
 func (h *HDRCubeTextureAssetTask) SetSize(size float64) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(size)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+	h.p.Set("size", size)
+	return h
 }
 
 // Texture returns the Texture property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#texture
-func (h *HDRCubeTextureAssetTask) Texture(texture *HDRCubeTexture) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(texture.JSObject())
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+func (h *HDRCubeTextureAssetTask) Texture() *HDRCubeTexture {
+	retVal := h.p.Get("texture")
+	return HDRCubeTextureFromJSObject(retVal, h.ctx)
 }
 
 // SetTexture sets the Texture property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#texture
 func (h *HDRCubeTextureAssetTask) SetTexture(texture *HDRCubeTexture) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(texture.JSObject())
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+	h.p.Set("texture", texture.JSObject())
+	return h
 }
 
 // Url returns the Url property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#url
-func (h *HDRCubeTextureAssetTask) Url(url string) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(url)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+func (h *HDRCubeTextureAssetTask) Url() string {
+	retVal := h.p.Get("url")
+	return retVal.String()
 }
 
 // SetUrl sets the Url property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#url
 func (h *HDRCubeTextureAssetTask) SetUrl(url string) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(url)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+	h.p.Set("url", url)
+	return h
 }
-
-*/

@@ -317,166 +317,162 @@ func (p *PBRCustomMaterial) Vertex_MainEnd(shaderPart string) *PBRCustomMaterial
 	return PBRCustomMaterialFromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // CustomParts returns the CustomParts property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#customparts
-func (p *PBRCustomMaterial) CustomParts(CustomParts *ShaderAlebdoParts) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(CustomParts.JSObject())
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+func (p *PBRCustomMaterial) CustomParts() *ShaderAlebdoParts {
+	retVal := p.p.Get("CustomParts")
+	return ShaderAlebdoPartsFromJSObject(retVal, p.ctx)
 }
 
 // SetCustomParts sets the CustomParts property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#customparts
 func (p *PBRCustomMaterial) SetCustomParts(CustomParts *ShaderAlebdoParts) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(CustomParts.JSObject())
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("CustomParts", CustomParts.JSObject())
+	return p
 }
 
 // FragmentShader returns the FragmentShader property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#fragmentshader
-func (p *PBRCustomMaterial) FragmentShader(FragmentShader string) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(FragmentShader)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+func (p *PBRCustomMaterial) FragmentShader() string {
+	retVal := p.p.Get("FragmentShader")
+	return retVal.String()
 }
 
 // SetFragmentShader sets the FragmentShader property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#fragmentshader
 func (p *PBRCustomMaterial) SetFragmentShader(FragmentShader string) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(FragmentShader)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("FragmentShader", FragmentShader)
+	return p
 }
 
 // ShaderIndexer returns the ShaderIndexer property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#shaderindexer
-func (p *PBRCustomMaterial) ShaderIndexer(ShaderIndexer float64) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(ShaderIndexer)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+func (p *PBRCustomMaterial) ShaderIndexer() float64 {
+	retVal := p.p.Get("ShaderIndexer")
+	return retVal.Float()
 }
 
 // SetShaderIndexer sets the ShaderIndexer property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#shaderindexer
 func (p *PBRCustomMaterial) SetShaderIndexer(ShaderIndexer float64) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(ShaderIndexer)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("ShaderIndexer", ShaderIndexer)
+	return p
 }
 
 // VertexShader returns the VertexShader property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#vertexshader
-func (p *PBRCustomMaterial) VertexShader(VertexShader string) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(VertexShader)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+func (p *PBRCustomMaterial) VertexShader() string {
+	retVal := p.p.Get("VertexShader")
+	return retVal.String()
 }
 
 // SetVertexShader sets the VertexShader property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#vertexshader
 func (p *PBRCustomMaterial) SetVertexShader(VertexShader string) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(VertexShader)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("VertexShader", VertexShader)
+	return p
 }
 
 // _createdShaderName returns the _createdShaderName property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_createdshadername
-func (p *PBRCustomMaterial) _createdShaderName(_createdShaderName string) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_createdShaderName)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+func (p *PBRCustomMaterial) _createdShaderName() string {
+	retVal := p.p.Get("_createdShaderName")
+	return retVal.String()
 }
 
 // Set_createdShaderName sets the _createdShaderName property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_createdshadername
 func (p *PBRCustomMaterial) Set_createdShaderName(_createdShaderName string) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_createdShaderName)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("_createdShaderName", _createdShaderName)
+	return p
 }
 
 // _customUniform returns the _customUniform property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_customuniform
-func (p *PBRCustomMaterial) _customUniform(_customUniform string) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_customUniform)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+func (p *PBRCustomMaterial) _customUniform() string {
+	retVal := p.p.Get("_customUniform")
+	return retVal.String()
 }
 
 // Set_customUniform sets the _customUniform property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_customuniform
 func (p *PBRCustomMaterial) Set_customUniform(_customUniform string) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_customUniform)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("_customUniform", _customUniform)
+	return p
 }
 
 // _isCreatedShader returns the _isCreatedShader property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_iscreatedshader
-func (p *PBRCustomMaterial) _isCreatedShader(_isCreatedShader bool) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_isCreatedShader)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+func (p *PBRCustomMaterial) _isCreatedShader() bool {
+	retVal := p.p.Get("_isCreatedShader")
+	return retVal.Bool()
 }
 
 // Set_isCreatedShader sets the _isCreatedShader property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_iscreatedshader
 func (p *PBRCustomMaterial) Set_isCreatedShader(_isCreatedShader bool) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_isCreatedShader)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("_isCreatedShader", _isCreatedShader)
+	return p
 }
 
 // _newSamplerInstances returns the _newSamplerInstances property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_newsamplerinstances
-func (p *PBRCustomMaterial) _newSamplerInstances(_newSamplerInstances *Texture) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_newSamplerInstances.JSObject())
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+func (p *PBRCustomMaterial) _newSamplerInstances() *Texture {
+	retVal := p.p.Get("_newSamplerInstances")
+	return TextureFromJSObject(retVal, p.ctx)
 }
 
 // Set_newSamplerInstances sets the _newSamplerInstances property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_newsamplerinstances
 func (p *PBRCustomMaterial) Set_newSamplerInstances(_newSamplerInstances *Texture) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_newSamplerInstances.JSObject())
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("_newSamplerInstances", _newSamplerInstances.JSObject())
+	return p
 }
 
 // _newUniformInstances returns the _newUniformInstances property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_newuniforminstances
-func (p *PBRCustomMaterial) _newUniformInstances(_newUniformInstances interface{}) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_newUniformInstances)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+func (p *PBRCustomMaterial) _newUniformInstances() interface{} {
+	retVal := p.p.Get("_newUniformInstances")
+	return retVal
 }
 
 // Set_newUniformInstances sets the _newUniformInstances property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_newuniforminstances
 func (p *PBRCustomMaterial) Set_newUniformInstances(_newUniformInstances interface{}) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_newUniformInstances)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("_newUniformInstances", _newUniformInstances)
+	return p
 }
 
 // _newUniforms returns the _newUniforms property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_newuniforms
-func (p *PBRCustomMaterial) _newUniforms(_newUniforms string) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_newUniforms)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+func (p *PBRCustomMaterial) _newUniforms() string {
+	retVal := p.p.Get("_newUniforms")
+	return retVal.String()
 }
 
 // Set_newUniforms sets the _newUniforms property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_newuniforms
 func (p *PBRCustomMaterial) Set_newUniforms(_newUniforms string) *PBRCustomMaterial {
-	p := ba.ctx.Get("PBRCustomMaterial").New(_newUniforms)
-	return PBRCustomMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("_newUniforms", _newUniforms)
+	return p
 }
-
-*/

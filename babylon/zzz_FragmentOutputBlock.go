@@ -58,54 +58,50 @@ func (f *FragmentOutputBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // A returns the A property of class FragmentOutputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#a
-func (f *FragmentOutputBlock) A(a *NodeMaterialConnectionPoint) *FragmentOutputBlock {
-	p := ba.ctx.Get("FragmentOutputBlock").New(a.JSObject())
-	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+func (f *FragmentOutputBlock) A() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("a")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetA sets the A property of class FragmentOutputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#a
 func (f *FragmentOutputBlock) SetA(a *NodeMaterialConnectionPoint) *FragmentOutputBlock {
-	p := ba.ctx.Get("FragmentOutputBlock").New(a.JSObject())
-	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+	f.p.Set("a", a.JSObject())
+	return f
 }
 
 // Rgb returns the Rgb property of class FragmentOutputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#rgb
-func (f *FragmentOutputBlock) Rgb(rgb *NodeMaterialConnectionPoint) *FragmentOutputBlock {
-	p := ba.ctx.Get("FragmentOutputBlock").New(rgb.JSObject())
-	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+func (f *FragmentOutputBlock) Rgb() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("rgb")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetRgb sets the Rgb property of class FragmentOutputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#rgb
 func (f *FragmentOutputBlock) SetRgb(rgb *NodeMaterialConnectionPoint) *FragmentOutputBlock {
-	p := ba.ctx.Get("FragmentOutputBlock").New(rgb.JSObject())
-	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+	f.p.Set("rgb", rgb.JSObject())
+	return f
 }
 
 // Rgba returns the Rgba property of class FragmentOutputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#rgba
-func (f *FragmentOutputBlock) Rgba(rgba *NodeMaterialConnectionPoint) *FragmentOutputBlock {
-	p := ba.ctx.Get("FragmentOutputBlock").New(rgba.JSObject())
-	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+func (f *FragmentOutputBlock) Rgba() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("rgba")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetRgba sets the Rgba property of class FragmentOutputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#rgba
 func (f *FragmentOutputBlock) SetRgba(rgba *NodeMaterialConnectionPoint) *FragmentOutputBlock {
-	p := ba.ctx.Get("FragmentOutputBlock").New(rgba.JSObject())
-	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+	f.p.Set("rgba", rgba.JSObject())
+	return f
 }
-
-*/

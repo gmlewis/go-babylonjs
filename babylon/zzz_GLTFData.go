@@ -55,22 +55,18 @@ func (g *GLTFData) DownloadFiles() {
 	g.p.Call("downloadFiles")
 }
 
-/*
-
 // GlTFFiles returns the GlTFFiles property of class GLTFData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfdata#gltffiles
-func (g *GLTFData) GlTFFiles(glTFFiles js.Value) *GLTFData {
-	p := ba.ctx.Get("GLTFData").New(glTFFiles)
-	return GLTFDataFromJSObject(p, ba.ctx)
+func (g *GLTFData) GlTFFiles() js.Value {
+	retVal := g.p.Get("glTFFiles")
+	return retVal
 }
 
 // SetGlTFFiles sets the GlTFFiles property of class GLTFData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfdata#gltffiles
 func (g *GLTFData) SetGlTFFiles(glTFFiles js.Value) *GLTFData {
-	p := ba.ctx.Get("GLTFData").New(glTFFiles)
-	return GLTFDataFromJSObject(p, ba.ctx)
+	g.p.Set("glTFFiles", glTFFiles)
+	return g
 }
-
-*/

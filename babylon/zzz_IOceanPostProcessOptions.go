@@ -36,38 +36,34 @@ func IOceanPostProcessOptionsArrayToJSArray(array []*IOceanPostProcessOptions) [
 	return result
 }
 
-/*
-
 // ReflectionSize returns the ReflectionSize property of class IOceanPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ioceanpostprocessoptions#reflectionsize
-func (i *IOceanPostProcessOptions) ReflectionSize(reflectionSize float64) *IOceanPostProcessOptions {
-	p := ba.ctx.Get("IOceanPostProcessOptions").New(reflectionSize)
-	return IOceanPostProcessOptionsFromJSObject(p, ba.ctx)
+func (i *IOceanPostProcessOptions) ReflectionSize() float64 {
+	retVal := i.p.Get("reflectionSize")
+	return retVal.Float()
 }
 
 // SetReflectionSize sets the ReflectionSize property of class IOceanPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ioceanpostprocessoptions#reflectionsize
 func (i *IOceanPostProcessOptions) SetReflectionSize(reflectionSize float64) *IOceanPostProcessOptions {
-	p := ba.ctx.Get("IOceanPostProcessOptions").New(reflectionSize)
-	return IOceanPostProcessOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("reflectionSize", reflectionSize)
+	return i
 }
 
 // RefractionSize returns the RefractionSize property of class IOceanPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ioceanpostprocessoptions#refractionsize
-func (i *IOceanPostProcessOptions) RefractionSize(refractionSize float64) *IOceanPostProcessOptions {
-	p := ba.ctx.Get("IOceanPostProcessOptions").New(refractionSize)
-	return IOceanPostProcessOptionsFromJSObject(p, ba.ctx)
+func (i *IOceanPostProcessOptions) RefractionSize() float64 {
+	retVal := i.p.Get("refractionSize")
+	return retVal.Float()
 }
 
 // SetRefractionSize sets the RefractionSize property of class IOceanPostProcessOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ioceanpostprocessoptions#refractionsize
 func (i *IOceanPostProcessOptions) SetRefractionSize(refractionSize float64) *IOceanPostProcessOptions {
-	p := ba.ctx.Get("IOceanPostProcessOptions").New(refractionSize)
-	return IOceanPostProcessOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("refractionSize", refractionSize)
+	return i
 }
-
-*/

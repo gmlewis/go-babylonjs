@@ -76,7 +76,3 @@ func (d *DistanceJoint) UpdateDistance(maxDistance float64, opts *DistanceJointU
 
 	d.p.Call("updateDistance", args...)
 }
-
-/*
-
- */

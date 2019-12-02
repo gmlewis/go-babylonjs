@@ -38,22 +38,18 @@ func PhysicsVortexEventDataArrayToJSArray(array []*PhysicsVortexEventData) []int
 	return result
 }
 
-/*
-
 // Cylinder returns the Cylinder property of class PhysicsVortexEventData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventdata#cylinder
-func (p *PhysicsVortexEventData) Cylinder(cylinder *Mesh) *PhysicsVortexEventData {
-	p := ba.ctx.Get("PhysicsVortexEventData").New(cylinder.JSObject())
-	return PhysicsVortexEventDataFromJSObject(p, ba.ctx)
+func (p *PhysicsVortexEventData) Cylinder() *Mesh {
+	retVal := p.p.Get("cylinder")
+	return MeshFromJSObject(retVal, p.ctx)
 }
 
 // SetCylinder sets the Cylinder property of class PhysicsVortexEventData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventdata#cylinder
 func (p *PhysicsVortexEventData) SetCylinder(cylinder *Mesh) *PhysicsVortexEventData {
-	p := ba.ctx.Get("PhysicsVortexEventData").New(cylinder.JSObject())
-	return PhysicsVortexEventDataFromJSObject(p, ba.ctx)
+	p.p.Set("cylinder", cylinder.JSObject())
+	return p
 }
-
-*/

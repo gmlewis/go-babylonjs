@@ -152,7 +152,3 @@ func (e *EffectRenderer) SetViewport(opts *EffectRendererSetViewportOpts) {
 
 	e.p.Call("setViewport", args...)
 }
-
-/*
-
- */

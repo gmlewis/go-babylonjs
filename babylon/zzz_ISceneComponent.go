@@ -63,38 +63,34 @@ func (i *ISceneComponent) Register() {
 	i.p.Call("register")
 }
 
-/*
-
 // Name returns the Name property of class ISceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iscenecomponent#name
-func (i *ISceneComponent) Name(name string) *ISceneComponent {
-	p := ba.ctx.Get("ISceneComponent").New(name)
-	return ISceneComponentFromJSObject(p, ba.ctx)
+func (i *ISceneComponent) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ISceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iscenecomponent#name
 func (i *ISceneComponent) SetName(name string) *ISceneComponent {
-	p := ba.ctx.Get("ISceneComponent").New(name)
-	return ISceneComponentFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
 
 // Scene returns the Scene property of class ISceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iscenecomponent#scene
-func (i *ISceneComponent) Scene(scene *Scene) *ISceneComponent {
-	p := ba.ctx.Get("ISceneComponent").New(scene.JSObject())
-	return ISceneComponentFromJSObject(p, ba.ctx)
+func (i *ISceneComponent) Scene() *Scene {
+	retVal := i.p.Get("scene")
+	return SceneFromJSObject(retVal, i.ctx)
 }
 
 // SetScene sets the Scene property of class ISceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iscenecomponent#scene
 func (i *ISceneComponent) SetScene(scene *Scene) *ISceneComponent {
-	p := ba.ctx.Get("ISceneComponent").New(scene.JSObject())
-	return ISceneComponentFromJSObject(p, ba.ctx)
+	i.p.Set("scene", scene.JSObject())
+	return i
 }
-
-*/

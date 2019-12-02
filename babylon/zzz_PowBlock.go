@@ -58,54 +58,50 @@ func (p *PowBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Output returns the Output property of class PowBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powblock#output
-func (p *PowBlock) Output(output *NodeMaterialConnectionPoint) *PowBlock {
-	p := ba.ctx.Get("PowBlock").New(output.JSObject())
-	return PowBlockFromJSObject(p, ba.ctx)
+func (p *PowBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetOutput sets the Output property of class PowBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powblock#output
 func (p *PowBlock) SetOutput(output *NodeMaterialConnectionPoint) *PowBlock {
-	p := ba.ctx.Get("PowBlock").New(output.JSObject())
-	return PowBlockFromJSObject(p, ba.ctx)
+	p.p.Set("output", output.JSObject())
+	return p
 }
 
 // Power returns the Power property of class PowBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powblock#power
-func (p *PowBlock) Power(power *NodeMaterialConnectionPoint) *PowBlock {
-	p := ba.ctx.Get("PowBlock").New(power.JSObject())
-	return PowBlockFromJSObject(p, ba.ctx)
+func (p *PowBlock) Power() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("power")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetPower sets the Power property of class PowBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powblock#power
 func (p *PowBlock) SetPower(power *NodeMaterialConnectionPoint) *PowBlock {
-	p := ba.ctx.Get("PowBlock").New(power.JSObject())
-	return PowBlockFromJSObject(p, ba.ctx)
+	p.p.Set("power", power.JSObject())
+	return p
 }
 
 // Value returns the Value property of class PowBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powblock#value
-func (p *PowBlock) Value(value *NodeMaterialConnectionPoint) *PowBlock {
-	p := ba.ctx.Get("PowBlock").New(value.JSObject())
-	return PowBlockFromJSObject(p, ba.ctx)
+func (p *PowBlock) Value() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("value")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetValue sets the Value property of class PowBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powblock#value
 func (p *PowBlock) SetValue(value *NodeMaterialConnectionPoint) *PowBlock {
-	p := ba.ctx.Get("PowBlock").New(value.JSObject())
-	return PowBlockFromJSObject(p, ba.ctx)
+	p.p.Set("value", value.JSObject())
+	return p
 }
-
-*/

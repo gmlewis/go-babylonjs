@@ -594,262 +594,258 @@ func (n *Node) SetEnabled(value bool) {
 	n.p.Call("setEnabled", args...)
 }
 
-/*
-
 // AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#animationpropertiesoverride
-func (n *Node) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Node {
-	p := ba.ctx.Get("Node").New(animationPropertiesOverride.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) AnimationPropertiesOverride() *AnimationPropertiesOverride {
+	retVal := n.p.Get("animationPropertiesOverride")
+	return AnimationPropertiesOverrideFromJSObject(retVal, n.ctx)
 }
 
 // SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#animationpropertiesoverride
 func (n *Node) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Node {
-	p := ba.ctx.Get("Node").New(animationPropertiesOverride.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("animationPropertiesOverride", animationPropertiesOverride.JSObject())
+	return n
 }
 
 // Animations returns the Animations property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#animations
-func (n *Node) Animations(animations *Animation) *Node {
-	p := ba.ctx.Get("Node").New(animations.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) Animations() *Animation {
+	retVal := n.p.Get("animations")
+	return AnimationFromJSObject(retVal, n.ctx)
 }
 
 // SetAnimations sets the Animations property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#animations
 func (n *Node) SetAnimations(animations *Animation) *Node {
-	p := ba.ctx.Get("Node").New(animations.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("animations", animations.JSObject())
+	return n
 }
 
 // Behaviors returns the Behaviors property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#behaviors
-func (n *Node) Behaviors(behaviors js.Value) *Node {
-	p := ba.ctx.Get("Node").New(behaviors)
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) Behaviors() js.Value {
+	retVal := n.p.Get("behaviors")
+	return retVal
 }
 
 // SetBehaviors sets the Behaviors property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#behaviors
 func (n *Node) SetBehaviors(behaviors js.Value) *Node {
-	p := ba.ctx.Get("Node").New(behaviors)
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("behaviors", behaviors)
+	return n
 }
 
 // DoNotSerialize returns the DoNotSerialize property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#donotserialize
-func (n *Node) DoNotSerialize(doNotSerialize bool) *Node {
-	p := ba.ctx.Get("Node").New(doNotSerialize)
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) DoNotSerialize() bool {
+	retVal := n.p.Get("doNotSerialize")
+	return retVal.Bool()
 }
 
 // SetDoNotSerialize sets the DoNotSerialize property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#donotserialize
 func (n *Node) SetDoNotSerialize(doNotSerialize bool) *Node {
-	p := ba.ctx.Get("Node").New(doNotSerialize)
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("doNotSerialize", doNotSerialize)
+	return n
 }
 
 // Id returns the Id property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#id
-func (n *Node) Id(id string) *Node {
-	p := ba.ctx.Get("Node").New(id)
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) Id() string {
+	retVal := n.p.Get("id")
+	return retVal.String()
 }
 
 // SetId sets the Id property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#id
 func (n *Node) SetId(id string) *Node {
-	p := ba.ctx.Get("Node").New(id)
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("id", id)
+	return n
 }
 
 // InspectableCustomProperties returns the InspectableCustomProperties property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#inspectablecustomproperties
-func (n *Node) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *Node {
-	p := ba.ctx.Get("Node").New(inspectableCustomProperties.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) InspectableCustomProperties() *IInspectable {
+	retVal := n.p.Get("inspectableCustomProperties")
+	return IInspectableFromJSObject(retVal, n.ctx)
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#inspectablecustomproperties
 func (n *Node) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Node {
-	p := ba.ctx.Get("Node").New(inspectableCustomProperties.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+	return n
 }
 
 // Metadata returns the Metadata property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#metadata
-func (n *Node) Metadata(metadata interface{}) *Node {
-	p := ba.ctx.Get("Node").New(metadata)
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) Metadata() interface{} {
+	retVal := n.p.Get("metadata")
+	return retVal
 }
 
 // SetMetadata sets the Metadata property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#metadata
 func (n *Node) SetMetadata(metadata interface{}) *Node {
-	p := ba.ctx.Get("Node").New(metadata)
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("metadata", metadata)
+	return n
 }
 
 // Name returns the Name property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#name
-func (n *Node) Name(name string) *Node {
-	p := ba.ctx.Get("Node").New(name)
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) Name() string {
+	retVal := n.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#name
 func (n *Node) SetName(name string) *Node {
-	p := ba.ctx.Get("Node").New(name)
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("name", name)
+	return n
 }
 
 // OnDispose returns the OnDispose property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#ondispose
-func (n *Node) OnDispose(onDispose func()) *Node {
-	p := ba.ctx.Get("Node").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) OnDispose() js.Value {
+	retVal := n.p.Get("onDispose")
+	return retVal
 }
 
 // SetOnDispose sets the OnDispose property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#ondispose
 func (n *Node) SetOnDispose(onDispose func()) *Node {
-	p := ba.ctx.Get("Node").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+	return n
 }
 
 // OnDisposeObservable returns the OnDisposeObservable property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#ondisposeobservable
-func (n *Node) OnDisposeObservable(onDisposeObservable *Observable) *Node {
-	p := ba.ctx.Get("Node").New(onDisposeObservable.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) OnDisposeObservable() *Observable {
+	retVal := n.p.Get("onDisposeObservable")
+	return ObservableFromJSObject(retVal, n.ctx)
 }
 
 // SetOnDisposeObservable sets the OnDisposeObservable property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#ondisposeobservable
 func (n *Node) SetOnDisposeObservable(onDisposeObservable *Observable) *Node {
-	p := ba.ctx.Get("Node").New(onDisposeObservable.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("onDisposeObservable", onDisposeObservable.JSObject())
+	return n
 }
 
 // OnReady returns the OnReady property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#onready
-func (n *Node) OnReady(onReady func()) *Node {
-	p := ba.ctx.Get("Node").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) OnReady() js.Value {
+	retVal := n.p.Get("onReady")
+	return retVal
 }
 
 // SetOnReady sets the OnReady property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#onready
 func (n *Node) SetOnReady(onReady func()) *Node {
-	p := ba.ctx.Get("Node").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onReady(); return nil}))
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("onReady", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onReady(); return nil }))
+	return n
 }
 
 // Parent returns the Parent property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#parent
-func (n *Node) Parent(parent *Node) *Node {
-	p := ba.ctx.Get("Node").New(parent.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) Parent() *Node {
+	retVal := n.p.Get("parent")
+	return NodeFromJSObject(retVal, n.ctx)
 }
 
 // SetParent sets the Parent property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#parent
 func (n *Node) SetParent(parent *Node) *Node {
-	p := ba.ctx.Get("Node").New(parent.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("parent", parent.JSObject())
+	return n
 }
 
 // ReservedDataStore returns the ReservedDataStore property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#reserveddatastore
-func (n *Node) ReservedDataStore(reservedDataStore interface{}) *Node {
-	p := ba.ctx.Get("Node").New(reservedDataStore)
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) ReservedDataStore() interface{} {
+	retVal := n.p.Get("reservedDataStore")
+	return retVal
 }
 
 // SetReservedDataStore sets the ReservedDataStore property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#reserveddatastore
 func (n *Node) SetReservedDataStore(reservedDataStore interface{}) *Node {
-	p := ba.ctx.Get("Node").New(reservedDataStore)
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("reservedDataStore", reservedDataStore)
+	return n
 }
 
 // State returns the State property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#state
-func (n *Node) State(state string) *Node {
-	p := ba.ctx.Get("Node").New(state)
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) State() string {
+	retVal := n.p.Get("state")
+	return retVal.String()
 }
 
 // SetState sets the State property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#state
 func (n *Node) SetState(state string) *Node {
-	p := ba.ctx.Get("Node").New(state)
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("state", state)
+	return n
 }
 
 // UniqueId returns the UniqueId property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#uniqueid
-func (n *Node) UniqueId(uniqueId float64) *Node {
-	p := ba.ctx.Get("Node").New(uniqueId)
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) UniqueId() float64 {
+	retVal := n.p.Get("uniqueId")
+	return retVal.Float()
 }
 
 // SetUniqueId sets the UniqueId property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#uniqueid
 func (n *Node) SetUniqueId(uniqueId float64) *Node {
-	p := ba.ctx.Get("Node").New(uniqueId)
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("uniqueId", uniqueId)
+	return n
 }
 
 // WorldMatrixFromCache returns the WorldMatrixFromCache property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#worldmatrixfromcache
-func (n *Node) WorldMatrixFromCache(worldMatrixFromCache *Matrix) *Node {
-	p := ba.ctx.Get("Node").New(worldMatrixFromCache.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+func (n *Node) WorldMatrixFromCache() *Matrix {
+	retVal := n.p.Get("worldMatrixFromCache")
+	return MatrixFromJSObject(retVal, n.ctx)
 }
 
 // SetWorldMatrixFromCache sets the WorldMatrixFromCache property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#worldmatrixfromcache
 func (n *Node) SetWorldMatrixFromCache(worldMatrixFromCache *Matrix) *Node {
-	p := ba.ctx.Get("Node").New(worldMatrixFromCache.JSObject())
-	return NodeFromJSObject(p, ba.ctx)
+	n.p.Set("worldMatrixFromCache", worldMatrixFromCache.JSObject())
+	return n
 }
-
-*/

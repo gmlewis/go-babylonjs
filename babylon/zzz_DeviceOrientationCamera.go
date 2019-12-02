@@ -109,22 +109,18 @@ func (d *DeviceOrientationCamera) ResetToCurrentRotation(opts *DeviceOrientation
 	d.p.Call("resetToCurrentRotation", args...)
 }
 
-/*
-
 // DisablePointerInputWhenUsingDeviceOrientation returns the DisablePointerInputWhenUsingDeviceOrientation property of class DeviceOrientationCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera#disablepointerinputwhenusingdeviceorientation
-func (d *DeviceOrientationCamera) DisablePointerInputWhenUsingDeviceOrientation(disablePointerInputWhenUsingDeviceOrientation bool) *DeviceOrientationCamera {
-	p := ba.ctx.Get("DeviceOrientationCamera").New(disablePointerInputWhenUsingDeviceOrientation)
-	return DeviceOrientationCameraFromJSObject(p, ba.ctx)
+func (d *DeviceOrientationCamera) DisablePointerInputWhenUsingDeviceOrientation() bool {
+	retVal := d.p.Get("disablePointerInputWhenUsingDeviceOrientation")
+	return retVal.Bool()
 }
 
 // SetDisablePointerInputWhenUsingDeviceOrientation sets the DisablePointerInputWhenUsingDeviceOrientation property of class DeviceOrientationCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera#disablepointerinputwhenusingdeviceorientation
 func (d *DeviceOrientationCamera) SetDisablePointerInputWhenUsingDeviceOrientation(disablePointerInputWhenUsingDeviceOrientation bool) *DeviceOrientationCamera {
-	p := ba.ctx.Get("DeviceOrientationCamera").New(disablePointerInputWhenUsingDeviceOrientation)
-	return DeviceOrientationCameraFromJSObject(p, ba.ctx)
+	d.p.Set("disablePointerInputWhenUsingDeviceOrientation", disablePointerInputWhenUsingDeviceOrientation)
+	return d
 }
-
-*/

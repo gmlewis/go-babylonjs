@@ -74,7 +74,3 @@ func (i *IBehaviorAware) RemoveBehavior(behavior js.Value) *T {
 	retVal := i.p.Call("removeBehavior", args...)
 	return TFromJSObject(retVal, i.ctx)
 }
-
-/*
-
- */

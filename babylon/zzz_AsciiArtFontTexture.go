@@ -91,22 +91,18 @@ func (a *AsciiArtFontTexture) Parse(source interface{}, scene *Scene) *AsciiArtF
 	return AsciiArtFontTextureFromJSObject(retVal, a.ctx)
 }
 
-/*
-
 // CharSize returns the CharSize property of class AsciiArtFontTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#charsize
-func (a *AsciiArtFontTexture) CharSize(charSize float64) *AsciiArtFontTexture {
-	p := ba.ctx.Get("AsciiArtFontTexture").New(charSize)
-	return AsciiArtFontTextureFromJSObject(p, ba.ctx)
+func (a *AsciiArtFontTexture) CharSize() float64 {
+	retVal := a.p.Get("charSize")
+	return retVal.Float()
 }
 
 // SetCharSize sets the CharSize property of class AsciiArtFontTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#charsize
 func (a *AsciiArtFontTexture) SetCharSize(charSize float64) *AsciiArtFontTexture {
-	p := ba.ctx.Get("AsciiArtFontTexture").New(charSize)
-	return AsciiArtFontTextureFromJSObject(p, ba.ctx)
+	a.p.Set("charSize", charSize)
+	return a
 }
-
-*/

@@ -51,7 +51,3 @@ func (ba *Babylon) NewVRMultiviewToSingleviewPostProcess(name string, camera *Ca
 	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(args...)
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

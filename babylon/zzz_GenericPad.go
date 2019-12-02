@@ -91,38 +91,34 @@ func (g *GenericPad) Update() {
 	g.p.Call("update")
 }
 
-/*
-
 // OnButtonDownObservable returns the OnButtonDownObservable property of class GenericPad.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttondownobservable
-func (g *GenericPad) OnButtonDownObservable(onButtonDownObservable *Observable) *GenericPad {
-	p := ba.ctx.Get("GenericPad").New(onButtonDownObservable.JSObject())
-	return GenericPadFromJSObject(p, ba.ctx)
+func (g *GenericPad) OnButtonDownObservable() *Observable {
+	retVal := g.p.Get("onButtonDownObservable")
+	return ObservableFromJSObject(retVal, g.ctx)
 }
 
 // SetOnButtonDownObservable sets the OnButtonDownObservable property of class GenericPad.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttondownobservable
 func (g *GenericPad) SetOnButtonDownObservable(onButtonDownObservable *Observable) *GenericPad {
-	p := ba.ctx.Get("GenericPad").New(onButtonDownObservable.JSObject())
-	return GenericPadFromJSObject(p, ba.ctx)
+	g.p.Set("onButtonDownObservable", onButtonDownObservable.JSObject())
+	return g
 }
 
 // OnButtonUpObservable returns the OnButtonUpObservable property of class GenericPad.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttonupobservable
-func (g *GenericPad) OnButtonUpObservable(onButtonUpObservable *Observable) *GenericPad {
-	p := ba.ctx.Get("GenericPad").New(onButtonUpObservable.JSObject())
-	return GenericPadFromJSObject(p, ba.ctx)
+func (g *GenericPad) OnButtonUpObservable() *Observable {
+	retVal := g.p.Get("onButtonUpObservable")
+	return ObservableFromJSObject(retVal, g.ctx)
 }
 
 // SetOnButtonUpObservable sets the OnButtonUpObservable property of class GenericPad.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttonupobservable
 func (g *GenericPad) SetOnButtonUpObservable(onButtonUpObservable *Observable) *GenericPad {
-	p := ba.ctx.Get("GenericPad").New(onButtonUpObservable.JSObject())
-	return GenericPadFromJSObject(p, ba.ctx)
+	g.p.Set("onButtonUpObservable", onButtonUpObservable.JSObject())
+	return g
 }
-
-*/

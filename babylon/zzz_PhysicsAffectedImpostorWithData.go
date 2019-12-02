@@ -38,38 +38,34 @@ func PhysicsAffectedImpostorWithDataArrayToJSArray(array []*PhysicsAffectedImpos
 	return result
 }
 
-/*
-
 // HitData returns the HitData property of class PhysicsAffectedImpostorWithData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsaffectedimpostorwithdata#hitdata
-func (p *PhysicsAffectedImpostorWithData) HitData(hitData *PhysicsHitData) *PhysicsAffectedImpostorWithData {
-	p := ba.ctx.Get("PhysicsAffectedImpostorWithData").New(hitData.JSObject())
-	return PhysicsAffectedImpostorWithDataFromJSObject(p, ba.ctx)
+func (p *PhysicsAffectedImpostorWithData) HitData() *PhysicsHitData {
+	retVal := p.p.Get("hitData")
+	return PhysicsHitDataFromJSObject(retVal, p.ctx)
 }
 
 // SetHitData sets the HitData property of class PhysicsAffectedImpostorWithData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsaffectedimpostorwithdata#hitdata
 func (p *PhysicsAffectedImpostorWithData) SetHitData(hitData *PhysicsHitData) *PhysicsAffectedImpostorWithData {
-	p := ba.ctx.Get("PhysicsAffectedImpostorWithData").New(hitData.JSObject())
-	return PhysicsAffectedImpostorWithDataFromJSObject(p, ba.ctx)
+	p.p.Set("hitData", hitData.JSObject())
+	return p
 }
 
 // Impostor returns the Impostor property of class PhysicsAffectedImpostorWithData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsaffectedimpostorwithdata#impostor
-func (p *PhysicsAffectedImpostorWithData) Impostor(impostor *PhysicsImpostor) *PhysicsAffectedImpostorWithData {
-	p := ba.ctx.Get("PhysicsAffectedImpostorWithData").New(impostor.JSObject())
-	return PhysicsAffectedImpostorWithDataFromJSObject(p, ba.ctx)
+func (p *PhysicsAffectedImpostorWithData) Impostor() *PhysicsImpostor {
+	retVal := p.p.Get("impostor")
+	return PhysicsImpostorFromJSObject(retVal, p.ctx)
 }
 
 // SetImpostor sets the Impostor property of class PhysicsAffectedImpostorWithData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsaffectedimpostorwithdata#impostor
 func (p *PhysicsAffectedImpostorWithData) SetImpostor(impostor *PhysicsImpostor) *PhysicsAffectedImpostorWithData {
-	p := ba.ctx.Get("PhysicsAffectedImpostorWithData").New(impostor.JSObject())
-	return PhysicsAffectedImpostorWithDataFromJSObject(p, ba.ctx)
+	p.p.Set("impostor", impostor.JSObject())
+	return p
 }
-
-*/

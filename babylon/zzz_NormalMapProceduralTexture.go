@@ -140,22 +140,18 @@ func (n *NormalMapProceduralTexture) UpdateShaderUniforms() {
 	n.p.Call("updateShaderUniforms")
 }
 
-/*
-
 // BaseTexture returns the BaseTexture property of class NormalMapProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#basetexture
-func (n *NormalMapProceduralTexture) BaseTexture(baseTexture *Texture) *NormalMapProceduralTexture {
-	p := ba.ctx.Get("NormalMapProceduralTexture").New(baseTexture.JSObject())
-	return NormalMapProceduralTextureFromJSObject(p, ba.ctx)
+func (n *NormalMapProceduralTexture) BaseTexture() *Texture {
+	retVal := n.p.Get("baseTexture")
+	return TextureFromJSObject(retVal, n.ctx)
 }
 
 // SetBaseTexture sets the BaseTexture property of class NormalMapProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#basetexture
 func (n *NormalMapProceduralTexture) SetBaseTexture(baseTexture *Texture) *NormalMapProceduralTexture {
-	p := ba.ctx.Get("NormalMapProceduralTexture").New(baseTexture.JSObject())
-	return NormalMapProceduralTextureFromJSObject(p, ba.ctx)
+	n.p.Set("baseTexture", baseTexture.JSObject())
+	return n
 }
-
-*/

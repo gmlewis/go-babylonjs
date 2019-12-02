@@ -36,54 +36,50 @@ func InstantiatedEntriesArrayToJSArray(array []*InstantiatedEntries) []interface
 	return result
 }
 
-/*
-
 // AnimationGroups returns the AnimationGroups property of class InstantiatedEntries.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instantiatedentries#animationgroups
-func (i *InstantiatedEntries) AnimationGroups(animationGroups *AnimationGroup) *InstantiatedEntries {
-	p := ba.ctx.Get("InstantiatedEntries").New(animationGroups.JSObject())
-	return InstantiatedEntriesFromJSObject(p, ba.ctx)
+func (i *InstantiatedEntries) AnimationGroups() *AnimationGroup {
+	retVal := i.p.Get("animationGroups")
+	return AnimationGroupFromJSObject(retVal, i.ctx)
 }
 
 // SetAnimationGroups sets the AnimationGroups property of class InstantiatedEntries.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instantiatedentries#animationgroups
 func (i *InstantiatedEntries) SetAnimationGroups(animationGroups *AnimationGroup) *InstantiatedEntries {
-	p := ba.ctx.Get("InstantiatedEntries").New(animationGroups.JSObject())
-	return InstantiatedEntriesFromJSObject(p, ba.ctx)
+	i.p.Set("animationGroups", animationGroups.JSObject())
+	return i
 }
 
 // RootNodes returns the RootNodes property of class InstantiatedEntries.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instantiatedentries#rootnodes
-func (i *InstantiatedEntries) RootNodes(rootNodes *TransformNode) *InstantiatedEntries {
-	p := ba.ctx.Get("InstantiatedEntries").New(rootNodes.JSObject())
-	return InstantiatedEntriesFromJSObject(p, ba.ctx)
+func (i *InstantiatedEntries) RootNodes() *TransformNode {
+	retVal := i.p.Get("rootNodes")
+	return TransformNodeFromJSObject(retVal, i.ctx)
 }
 
 // SetRootNodes sets the RootNodes property of class InstantiatedEntries.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instantiatedentries#rootnodes
 func (i *InstantiatedEntries) SetRootNodes(rootNodes *TransformNode) *InstantiatedEntries {
-	p := ba.ctx.Get("InstantiatedEntries").New(rootNodes.JSObject())
-	return InstantiatedEntriesFromJSObject(p, ba.ctx)
+	i.p.Set("rootNodes", rootNodes.JSObject())
+	return i
 }
 
 // Skeletons returns the Skeletons property of class InstantiatedEntries.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instantiatedentries#skeletons
-func (i *InstantiatedEntries) Skeletons(skeletons *Skeleton) *InstantiatedEntries {
-	p := ba.ctx.Get("InstantiatedEntries").New(skeletons.JSObject())
-	return InstantiatedEntriesFromJSObject(p, ba.ctx)
+func (i *InstantiatedEntries) Skeletons() *Skeleton {
+	retVal := i.p.Get("skeletons")
+	return SkeletonFromJSObject(retVal, i.ctx)
 }
 
 // SetSkeletons sets the Skeletons property of class InstantiatedEntries.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instantiatedentries#skeletons
 func (i *InstantiatedEntries) SetSkeletons(skeletons *Skeleton) *InstantiatedEntries {
-	p := ba.ctx.Get("InstantiatedEntries").New(skeletons.JSObject())
-	return InstantiatedEntriesFromJSObject(p, ba.ctx)
+	i.p.Set("skeletons", skeletons.JSObject())
+	return i
 }
-
-*/

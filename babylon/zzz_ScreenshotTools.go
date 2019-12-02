@@ -197,7 +197,3 @@ func (s *ScreenshotTools) CreateScreenshotUsingRenderTargetAsync(engine *Engine,
 	retVal := s.p.Call("CreateScreenshotUsingRenderTargetAsync", args...)
 	return PromiseFromJSObject(retVal, s.ctx)
 }
-
-/*
-
- */

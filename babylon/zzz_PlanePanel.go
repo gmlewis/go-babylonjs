@@ -46,7 +46,3 @@ func (ba *Babylon) NewPlanePanel() *PlanePanel {
 	p := ba.ctx.Get("PlanePanel").New(args...)
 	return PlanePanelFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

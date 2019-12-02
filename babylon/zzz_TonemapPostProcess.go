@@ -78,22 +78,18 @@ func (ba *Babylon) NewTonemapPostProcess(name string, _operator js.Value, exposu
 	return TonemapPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // ExposureAdjustment returns the ExposureAdjustment property of class TonemapPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#exposureadjustment
-func (t *TonemapPostProcess) ExposureAdjustment(exposureAdjustment float64) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(exposureAdjustment)
-	return TonemapPostProcessFromJSObject(p, ba.ctx)
+func (t *TonemapPostProcess) ExposureAdjustment() float64 {
+	retVal := t.p.Get("exposureAdjustment")
+	return retVal.Float()
 }
 
 // SetExposureAdjustment sets the ExposureAdjustment property of class TonemapPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#exposureadjustment
 func (t *TonemapPostProcess) SetExposureAdjustment(exposureAdjustment float64) *TonemapPostProcess {
-	p := ba.ctx.Get("TonemapPostProcess").New(exposureAdjustment)
-	return TonemapPostProcessFromJSObject(p, ba.ctx)
+	t.p.Set("exposureAdjustment", exposureAdjustment)
+	return t
 }
-
-*/

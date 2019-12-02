@@ -70,54 +70,50 @@ func (r *Rotate2dBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Angle returns the Angle property of class Rotate2dBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock#angle
-func (r *Rotate2dBlock) Angle(angle *NodeMaterialConnectionPoint) *Rotate2dBlock {
-	p := ba.ctx.Get("Rotate2dBlock").New(angle.JSObject())
-	return Rotate2dBlockFromJSObject(p, ba.ctx)
+func (r *Rotate2dBlock) Angle() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("angle")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetAngle sets the Angle property of class Rotate2dBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock#angle
 func (r *Rotate2dBlock) SetAngle(angle *NodeMaterialConnectionPoint) *Rotate2dBlock {
-	p := ba.ctx.Get("Rotate2dBlock").New(angle.JSObject())
-	return Rotate2dBlockFromJSObject(p, ba.ctx)
+	r.p.Set("angle", angle.JSObject())
+	return r
 }
 
 // Input returns the Input property of class Rotate2dBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock#input
-func (r *Rotate2dBlock) Input(input *NodeMaterialConnectionPoint) *Rotate2dBlock {
-	p := ba.ctx.Get("Rotate2dBlock").New(input.JSObject())
-	return Rotate2dBlockFromJSObject(p, ba.ctx)
+func (r *Rotate2dBlock) Input() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("input")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetInput sets the Input property of class Rotate2dBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock#input
 func (r *Rotate2dBlock) SetInput(input *NodeMaterialConnectionPoint) *Rotate2dBlock {
-	p := ba.ctx.Get("Rotate2dBlock").New(input.JSObject())
-	return Rotate2dBlockFromJSObject(p, ba.ctx)
+	r.p.Set("input", input.JSObject())
+	return r
 }
 
 // Output returns the Output property of class Rotate2dBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock#output
-func (r *Rotate2dBlock) Output(output *NodeMaterialConnectionPoint) *Rotate2dBlock {
-	p := ba.ctx.Get("Rotate2dBlock").New(output.JSObject())
-	return Rotate2dBlockFromJSObject(p, ba.ctx)
+func (r *Rotate2dBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetOutput sets the Output property of class Rotate2dBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock#output
 func (r *Rotate2dBlock) SetOutput(output *NodeMaterialConnectionPoint) *Rotate2dBlock {
-	p := ba.ctx.Get("Rotate2dBlock").New(output.JSObject())
-	return Rotate2dBlockFromJSObject(p, ba.ctx)
+	r.p.Set("output", output.JSObject())
+	return r
 }
-
-*/

@@ -58,38 +58,34 @@ func (o *OneMinusBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Input returns the Input property of class OneMinusBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock#input
-func (o *OneMinusBlock) Input(input *NodeMaterialConnectionPoint) *OneMinusBlock {
-	p := ba.ctx.Get("OneMinusBlock").New(input.JSObject())
-	return OneMinusBlockFromJSObject(p, ba.ctx)
+func (o *OneMinusBlock) Input() *NodeMaterialConnectionPoint {
+	retVal := o.p.Get("input")
+	return NodeMaterialConnectionPointFromJSObject(retVal, o.ctx)
 }
 
 // SetInput sets the Input property of class OneMinusBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock#input
 func (o *OneMinusBlock) SetInput(input *NodeMaterialConnectionPoint) *OneMinusBlock {
-	p := ba.ctx.Get("OneMinusBlock").New(input.JSObject())
-	return OneMinusBlockFromJSObject(p, ba.ctx)
+	o.p.Set("input", input.JSObject())
+	return o
 }
 
 // Output returns the Output property of class OneMinusBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock#output
-func (o *OneMinusBlock) Output(output *NodeMaterialConnectionPoint) *OneMinusBlock {
-	p := ba.ctx.Get("OneMinusBlock").New(output.JSObject())
-	return OneMinusBlockFromJSObject(p, ba.ctx)
+func (o *OneMinusBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := o.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, o.ctx)
 }
 
 // SetOutput sets the Output property of class OneMinusBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock#output
 func (o *OneMinusBlock) SetOutput(output *NodeMaterialConnectionPoint) *OneMinusBlock {
-	p := ba.ctx.Get("OneMinusBlock").New(output.JSObject())
-	return OneMinusBlockFromJSObject(p, ba.ctx)
+	o.p.Set("output", output.JSObject())
+	return o
 }
-
-*/

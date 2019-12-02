@@ -137,22 +137,18 @@ func (a *AssetContainer) RemoveAllFromScene() {
 	a.p.Call("removeAllFromScene")
 }
 
-/*
-
 // Scene returns the Scene property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#scene
-func (a *AssetContainer) Scene(scene *Scene) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(scene.JSObject())
-	return AssetContainerFromJSObject(p, ba.ctx)
+func (a *AssetContainer) Scene() *Scene {
+	retVal := a.p.Get("scene")
+	return SceneFromJSObject(retVal, a.ctx)
 }
 
 // SetScene sets the Scene property of class AssetContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer#scene
 func (a *AssetContainer) SetScene(scene *Scene) *AssetContainer {
-	p := ba.ctx.Get("AssetContainer").New(scene.JSObject())
-	return AssetContainerFromJSObject(p, ba.ctx)
+	a.p.Set("scene", scene.JSObject())
+	return a
 }
-
-*/

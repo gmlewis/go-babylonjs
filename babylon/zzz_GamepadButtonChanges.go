@@ -36,70 +36,66 @@ func GamepadButtonChangesArrayToJSArray(array []*GamepadButtonChanges) []interfa
 	return result
 }
 
-/*
-
 // Changed returns the Changed property of class GamepadButtonChanges.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadbuttonchanges#changed
-func (g *GamepadButtonChanges) Changed(changed bool) *GamepadButtonChanges {
-	p := ba.ctx.Get("GamepadButtonChanges").New(changed)
-	return GamepadButtonChangesFromJSObject(p, ba.ctx)
+func (g *GamepadButtonChanges) Changed() bool {
+	retVal := g.p.Get("changed")
+	return retVal.Bool()
 }
 
 // SetChanged sets the Changed property of class GamepadButtonChanges.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadbuttonchanges#changed
 func (g *GamepadButtonChanges) SetChanged(changed bool) *GamepadButtonChanges {
-	p := ba.ctx.Get("GamepadButtonChanges").New(changed)
-	return GamepadButtonChangesFromJSObject(p, ba.ctx)
+	g.p.Set("changed", changed)
+	return g
 }
 
 // PressChanged returns the PressChanged property of class GamepadButtonChanges.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadbuttonchanges#presschanged
-func (g *GamepadButtonChanges) PressChanged(pressChanged bool) *GamepadButtonChanges {
-	p := ba.ctx.Get("GamepadButtonChanges").New(pressChanged)
-	return GamepadButtonChangesFromJSObject(p, ba.ctx)
+func (g *GamepadButtonChanges) PressChanged() bool {
+	retVal := g.p.Get("pressChanged")
+	return retVal.Bool()
 }
 
 // SetPressChanged sets the PressChanged property of class GamepadButtonChanges.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadbuttonchanges#presschanged
 func (g *GamepadButtonChanges) SetPressChanged(pressChanged bool) *GamepadButtonChanges {
-	p := ba.ctx.Get("GamepadButtonChanges").New(pressChanged)
-	return GamepadButtonChangesFromJSObject(p, ba.ctx)
+	g.p.Set("pressChanged", pressChanged)
+	return g
 }
 
 // TouchChanged returns the TouchChanged property of class GamepadButtonChanges.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadbuttonchanges#touchchanged
-func (g *GamepadButtonChanges) TouchChanged(touchChanged bool) *GamepadButtonChanges {
-	p := ba.ctx.Get("GamepadButtonChanges").New(touchChanged)
-	return GamepadButtonChangesFromJSObject(p, ba.ctx)
+func (g *GamepadButtonChanges) TouchChanged() bool {
+	retVal := g.p.Get("touchChanged")
+	return retVal.Bool()
 }
 
 // SetTouchChanged sets the TouchChanged property of class GamepadButtonChanges.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadbuttonchanges#touchchanged
 func (g *GamepadButtonChanges) SetTouchChanged(touchChanged bool) *GamepadButtonChanges {
-	p := ba.ctx.Get("GamepadButtonChanges").New(touchChanged)
-	return GamepadButtonChangesFromJSObject(p, ba.ctx)
+	g.p.Set("touchChanged", touchChanged)
+	return g
 }
 
 // ValueChanged returns the ValueChanged property of class GamepadButtonChanges.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadbuttonchanges#valuechanged
-func (g *GamepadButtonChanges) ValueChanged(valueChanged bool) *GamepadButtonChanges {
-	p := ba.ctx.Get("GamepadButtonChanges").New(valueChanged)
-	return GamepadButtonChangesFromJSObject(p, ba.ctx)
+func (g *GamepadButtonChanges) ValueChanged() bool {
+	retVal := g.p.Get("valueChanged")
+	return retVal.Bool()
 }
 
 // SetValueChanged sets the ValueChanged property of class GamepadButtonChanges.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadbuttonchanges#valuechanged
 func (g *GamepadButtonChanges) SetValueChanged(valueChanged bool) *GamepadButtonChanges {
-	p := ba.ctx.Get("GamepadButtonChanges").New(valueChanged)
-	return GamepadButtonChangesFromJSObject(p, ba.ctx)
+	g.p.Set("valueChanged", valueChanged)
+	return g
 }
-
-*/

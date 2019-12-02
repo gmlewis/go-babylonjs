@@ -134,38 +134,34 @@ func (p *PathCursor) Onchange(f func()) *PathCursor {
 	return PathCursorFromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // Animations returns the Animations property of class PathCursor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor#animations
-func (p *PathCursor) Animations(animations *Animation) *PathCursor {
-	p := ba.ctx.Get("PathCursor").New(animations.JSObject())
-	return PathCursorFromJSObject(p, ba.ctx)
+func (p *PathCursor) Animations() *Animation {
+	retVal := p.p.Get("animations")
+	return AnimationFromJSObject(retVal, p.ctx)
 }
 
 // SetAnimations sets the Animations property of class PathCursor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor#animations
 func (p *PathCursor) SetAnimations(animations *Animation) *PathCursor {
-	p := ba.ctx.Get("PathCursor").New(animations.JSObject())
-	return PathCursorFromJSObject(p, ba.ctx)
+	p.p.Set("animations", animations.JSObject())
+	return p
 }
 
 // Value returns the Value property of class PathCursor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor#value
-func (p *PathCursor) Value(value float64) *PathCursor {
-	p := ba.ctx.Get("PathCursor").New(value)
-	return PathCursorFromJSObject(p, ba.ctx)
+func (p *PathCursor) Value() float64 {
+	retVal := p.p.Get("value")
+	return retVal.Float()
 }
 
 // SetValue sets the Value property of class PathCursor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor#value
 func (p *PathCursor) SetValue(value float64) *PathCursor {
-	p := ba.ctx.Get("PathCursor").New(value)
-	return PathCursorFromJSObject(p, ba.ctx)
+	p.p.Set("value", value)
+	return p
 }
-
-*/

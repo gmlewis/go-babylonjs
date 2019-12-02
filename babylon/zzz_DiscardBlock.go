@@ -58,38 +58,34 @@ func (d *DiscardBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Cutoff returns the Cutoff property of class DiscardBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.discardblock#cutoff
-func (d *DiscardBlock) Cutoff(cutoff *NodeMaterialConnectionPoint) *DiscardBlock {
-	p := ba.ctx.Get("DiscardBlock").New(cutoff.JSObject())
-	return DiscardBlockFromJSObject(p, ba.ctx)
+func (d *DiscardBlock) Cutoff() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("cutoff")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetCutoff sets the Cutoff property of class DiscardBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.discardblock#cutoff
 func (d *DiscardBlock) SetCutoff(cutoff *NodeMaterialConnectionPoint) *DiscardBlock {
-	p := ba.ctx.Get("DiscardBlock").New(cutoff.JSObject())
-	return DiscardBlockFromJSObject(p, ba.ctx)
+	d.p.Set("cutoff", cutoff.JSObject())
+	return d
 }
 
 // Value returns the Value property of class DiscardBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.discardblock#value
-func (d *DiscardBlock) Value(value *NodeMaterialConnectionPoint) *DiscardBlock {
-	p := ba.ctx.Get("DiscardBlock").New(value.JSObject())
-	return DiscardBlockFromJSObject(p, ba.ctx)
+func (d *DiscardBlock) Value() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("value")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetValue sets the Value property of class DiscardBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.discardblock#value
 func (d *DiscardBlock) SetValue(value *NodeMaterialConnectionPoint) *DiscardBlock {
-	p := ba.ctx.Get("DiscardBlock").New(value.JSObject())
-	return DiscardBlockFromJSObject(p, ba.ctx)
+	d.p.Set("value", value.JSObject())
+	return d
 }
-
-*/

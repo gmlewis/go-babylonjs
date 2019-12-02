@@ -60,54 +60,50 @@ func (p *PosterizeBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Output returns the Output property of class PosterizeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock#output
-func (p *PosterizeBlock) Output(output *NodeMaterialConnectionPoint) *PosterizeBlock {
-	p := ba.ctx.Get("PosterizeBlock").New(output.JSObject())
-	return PosterizeBlockFromJSObject(p, ba.ctx)
+func (p *PosterizeBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetOutput sets the Output property of class PosterizeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock#output
 func (p *PosterizeBlock) SetOutput(output *NodeMaterialConnectionPoint) *PosterizeBlock {
-	p := ba.ctx.Get("PosterizeBlock").New(output.JSObject())
-	return PosterizeBlockFromJSObject(p, ba.ctx)
+	p.p.Set("output", output.JSObject())
+	return p
 }
 
 // Steps returns the Steps property of class PosterizeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock#steps
-func (p *PosterizeBlock) Steps(steps *NodeMaterialConnectionPoint) *PosterizeBlock {
-	p := ba.ctx.Get("PosterizeBlock").New(steps.JSObject())
-	return PosterizeBlockFromJSObject(p, ba.ctx)
+func (p *PosterizeBlock) Steps() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("steps")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetSteps sets the Steps property of class PosterizeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock#steps
 func (p *PosterizeBlock) SetSteps(steps *NodeMaterialConnectionPoint) *PosterizeBlock {
-	p := ba.ctx.Get("PosterizeBlock").New(steps.JSObject())
-	return PosterizeBlockFromJSObject(p, ba.ctx)
+	p.p.Set("steps", steps.JSObject())
+	return p
 }
 
 // Value returns the Value property of class PosterizeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock#value
-func (p *PosterizeBlock) Value(value *NodeMaterialConnectionPoint) *PosterizeBlock {
-	p := ba.ctx.Get("PosterizeBlock").New(value.JSObject())
-	return PosterizeBlockFromJSObject(p, ba.ctx)
+func (p *PosterizeBlock) Value() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("value")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetValue sets the Value property of class PosterizeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock#value
 func (p *PosterizeBlock) SetValue(value *NodeMaterialConnectionPoint) *PosterizeBlock {
-	p := ba.ctx.Get("PosterizeBlock").New(value.JSObject())
-	return PosterizeBlockFromJSObject(p, ba.ctx)
+	p.p.Set("value", value.JSObject())
+	return p
 }
-
-*/

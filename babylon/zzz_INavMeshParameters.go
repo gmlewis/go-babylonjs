@@ -36,214 +36,210 @@ func INavMeshParametersArrayToJSArray(array []*INavMeshParameters) []interface{}
 	return result
 }
 
-/*
-
 // Ch returns the Ch property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#ch
-func (i *INavMeshParameters) Ch(ch float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(ch)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) Ch() float64 {
+	retVal := i.p.Get("ch")
+	return retVal.Float()
 }
 
 // SetCh sets the Ch property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#ch
 func (i *INavMeshParameters) SetCh(ch float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(ch)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("ch", ch)
+	return i
 }
 
 // Cs returns the Cs property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#cs
-func (i *INavMeshParameters) Cs(cs float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(cs)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) Cs() float64 {
+	retVal := i.p.Get("cs")
+	return retVal.Float()
 }
 
 // SetCs sets the Cs property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#cs
 func (i *INavMeshParameters) SetCs(cs float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(cs)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("cs", cs)
+	return i
 }
 
 // DetailSampleDist returns the DetailSampleDist property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#detailsampledist
-func (i *INavMeshParameters) DetailSampleDist(detailSampleDist float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(detailSampleDist)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) DetailSampleDist() float64 {
+	retVal := i.p.Get("detailSampleDist")
+	return retVal.Float()
 }
 
 // SetDetailSampleDist sets the DetailSampleDist property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#detailsampledist
 func (i *INavMeshParameters) SetDetailSampleDist(detailSampleDist float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(detailSampleDist)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("detailSampleDist", detailSampleDist)
+	return i
 }
 
 // DetailSampleMaxError returns the DetailSampleMaxError property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#detailsamplemaxerror
-func (i *INavMeshParameters) DetailSampleMaxError(detailSampleMaxError float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(detailSampleMaxError)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) DetailSampleMaxError() float64 {
+	retVal := i.p.Get("detailSampleMaxError")
+	return retVal.Float()
 }
 
 // SetDetailSampleMaxError sets the DetailSampleMaxError property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#detailsamplemaxerror
 func (i *INavMeshParameters) SetDetailSampleMaxError(detailSampleMaxError float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(detailSampleMaxError)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("detailSampleMaxError", detailSampleMaxError)
+	return i
 }
 
 // MaxEdgeLen returns the MaxEdgeLen property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#maxedgelen
-func (i *INavMeshParameters) MaxEdgeLen(maxEdgeLen float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(maxEdgeLen)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) MaxEdgeLen() float64 {
+	retVal := i.p.Get("maxEdgeLen")
+	return retVal.Float()
 }
 
 // SetMaxEdgeLen sets the MaxEdgeLen property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#maxedgelen
 func (i *INavMeshParameters) SetMaxEdgeLen(maxEdgeLen float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(maxEdgeLen)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("maxEdgeLen", maxEdgeLen)
+	return i
 }
 
 // MaxSimplificationError returns the MaxSimplificationError property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#maxsimplificationerror
-func (i *INavMeshParameters) MaxSimplificationError(maxSimplificationError float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(maxSimplificationError)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) MaxSimplificationError() float64 {
+	retVal := i.p.Get("maxSimplificationError")
+	return retVal.Float()
 }
 
 // SetMaxSimplificationError sets the MaxSimplificationError property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#maxsimplificationerror
 func (i *INavMeshParameters) SetMaxSimplificationError(maxSimplificationError float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(maxSimplificationError)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("maxSimplificationError", maxSimplificationError)
+	return i
 }
 
 // MaxVertsPerPoly returns the MaxVertsPerPoly property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#maxvertsperpoly
-func (i *INavMeshParameters) MaxVertsPerPoly(maxVertsPerPoly float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(maxVertsPerPoly)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) MaxVertsPerPoly() float64 {
+	retVal := i.p.Get("maxVertsPerPoly")
+	return retVal.Float()
 }
 
 // SetMaxVertsPerPoly sets the MaxVertsPerPoly property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#maxvertsperpoly
 func (i *INavMeshParameters) SetMaxVertsPerPoly(maxVertsPerPoly float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(maxVertsPerPoly)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("maxVertsPerPoly", maxVertsPerPoly)
+	return i
 }
 
 // MergeRegionArea returns the MergeRegionArea property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#mergeregionarea
-func (i *INavMeshParameters) MergeRegionArea(mergeRegionArea float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(mergeRegionArea)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) MergeRegionArea() float64 {
+	retVal := i.p.Get("mergeRegionArea")
+	return retVal.Float()
 }
 
 // SetMergeRegionArea sets the MergeRegionArea property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#mergeregionarea
 func (i *INavMeshParameters) SetMergeRegionArea(mergeRegionArea float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(mergeRegionArea)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("mergeRegionArea", mergeRegionArea)
+	return i
 }
 
 // MinRegionArea returns the MinRegionArea property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#minregionarea
-func (i *INavMeshParameters) MinRegionArea(minRegionArea float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(minRegionArea)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) MinRegionArea() float64 {
+	retVal := i.p.Get("minRegionArea")
+	return retVal.Float()
 }
 
 // SetMinRegionArea sets the MinRegionArea property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#minregionarea
 func (i *INavMeshParameters) SetMinRegionArea(minRegionArea float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(minRegionArea)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("minRegionArea", minRegionArea)
+	return i
 }
 
 // WalkableClimb returns the WalkableClimb property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#walkableclimb
-func (i *INavMeshParameters) WalkableClimb(walkableClimb float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(walkableClimb)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) WalkableClimb() float64 {
+	retVal := i.p.Get("walkableClimb")
+	return retVal.Float()
 }
 
 // SetWalkableClimb sets the WalkableClimb property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#walkableclimb
 func (i *INavMeshParameters) SetWalkableClimb(walkableClimb float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(walkableClimb)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("walkableClimb", walkableClimb)
+	return i
 }
 
 // WalkableHeight returns the WalkableHeight property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#walkableheight
-func (i *INavMeshParameters) WalkableHeight(walkableHeight float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(walkableHeight)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) WalkableHeight() float64 {
+	retVal := i.p.Get("walkableHeight")
+	return retVal.Float()
 }
 
 // SetWalkableHeight sets the WalkableHeight property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#walkableheight
 func (i *INavMeshParameters) SetWalkableHeight(walkableHeight float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(walkableHeight)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("walkableHeight", walkableHeight)
+	return i
 }
 
 // WalkableRadius returns the WalkableRadius property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#walkableradius
-func (i *INavMeshParameters) WalkableRadius(walkableRadius float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(walkableRadius)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) WalkableRadius() float64 {
+	retVal := i.p.Get("walkableRadius")
+	return retVal.Float()
 }
 
 // SetWalkableRadius sets the WalkableRadius property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#walkableradius
 func (i *INavMeshParameters) SetWalkableRadius(walkableRadius float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(walkableRadius)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("walkableRadius", walkableRadius)
+	return i
 }
 
 // WalkableSlopeAngle returns the WalkableSlopeAngle property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#walkableslopeangle
-func (i *INavMeshParameters) WalkableSlopeAngle(walkableSlopeAngle float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(walkableSlopeAngle)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+func (i *INavMeshParameters) WalkableSlopeAngle() float64 {
+	retVal := i.p.Get("walkableSlopeAngle")
+	return retVal.Float()
 }
 
 // SetWalkableSlopeAngle sets the WalkableSlopeAngle property of class INavMeshParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavmeshparameters#walkableslopeangle
 func (i *INavMeshParameters) SetWalkableSlopeAngle(walkableSlopeAngle float64) *INavMeshParameters {
-	p := ba.ctx.Get("INavMeshParameters").New(walkableSlopeAngle)
-	return INavMeshParametersFromJSObject(p, ba.ctx)
+	i.p.Set("walkableSlopeAngle", walkableSlopeAngle)
+	return i
 }
-
-*/

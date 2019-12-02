@@ -78,22 +78,18 @@ func (ba *Babylon) NewFilterPostProcess(name string, kernelMatrix *Matrix, optio
 	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // KernelMatrix returns the KernelMatrix property of class FilterPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#kernelmatrix
-func (f *FilterPostProcess) KernelMatrix(kernelMatrix *Matrix) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(kernelMatrix.JSObject())
-	return FilterPostProcessFromJSObject(p, ba.ctx)
+func (f *FilterPostProcess) KernelMatrix() *Matrix {
+	retVal := f.p.Get("kernelMatrix")
+	return MatrixFromJSObject(retVal, f.ctx)
 }
 
 // SetKernelMatrix sets the KernelMatrix property of class FilterPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#kernelmatrix
 func (f *FilterPostProcess) SetKernelMatrix(kernelMatrix *Matrix) *FilterPostProcess {
-	p := ba.ctx.Get("FilterPostProcess").New(kernelMatrix.JSObject())
-	return FilterPostProcessFromJSObject(p, ba.ctx)
+	f.p.Set("kernelMatrix", kernelMatrix.JSObject())
+	return f
 }
-
-*/

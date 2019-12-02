@@ -37,38 +37,34 @@ func BufferImageDataArrayToJSArray(array []*BufferImageData) []interface{} {
 	return result
 }
 
-/*
-
 // Length returns the Length property of class BufferImageData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bufferimagedata#length
-func (b *BufferImageData) Length(length float64) *BufferImageData {
-	p := ba.ctx.Get("BufferImageData").New(length)
-	return BufferImageDataFromJSObject(p, ba.ctx)
+func (b *BufferImageData) Length() float64 {
+	retVal := b.p.Get("length")
+	return retVal.Float()
 }
 
 // SetLength sets the Length property of class BufferImageData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bufferimagedata#length
 func (b *BufferImageData) SetLength(length float64) *BufferImageData {
-	p := ba.ctx.Get("BufferImageData").New(length)
-	return BufferImageDataFromJSObject(p, ba.ctx)
+	b.p.Set("length", length)
+	return b
 }
 
 // Position returns the Position property of class BufferImageData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bufferimagedata#position
-func (b *BufferImageData) Position(position float64) *BufferImageData {
-	p := ba.ctx.Get("BufferImageData").New(position)
-	return BufferImageDataFromJSObject(p, ba.ctx)
+func (b *BufferImageData) Position() float64 {
+	retVal := b.p.Get("position")
+	return retVal.Float()
 }
 
 // SetPosition sets the Position property of class BufferImageData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bufferimagedata#position
 func (b *BufferImageData) SetPosition(position float64) *BufferImageData {
-	p := ba.ctx.Get("BufferImageData").New(position)
-	return BufferImageDataFromJSObject(p, ba.ctx)
+	b.p.Set("position", position)
+	return b
 }
-
-*/

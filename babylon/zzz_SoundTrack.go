@@ -138,38 +138,38 @@ func (s *SoundTrack) SwitchPanningModelToHRTF() {
 	s.p.Call("switchPanningModelToHRTF")
 }
 
-/*
-
 // Id returns the Id property of class SoundTrack.
 //
 // https://doc.babylonjs.com/api/classes/babylon.soundtrack#id
-func (s *SoundTrack) Id(id float64) *SoundTrack {
-	p := ba.ctx.Get("SoundTrack").New(id)
-	return SoundTrackFromJSObject(p, ba.ctx)
+func (s *SoundTrack) Id() float64 {
+	retVal := s.p.Get("id")
+	return retVal.Float()
 }
 
 // SetId sets the Id property of class SoundTrack.
 //
 // https://doc.babylonjs.com/api/classes/babylon.soundtrack#id
 func (s *SoundTrack) SetId(id float64) *SoundTrack {
-	p := ba.ctx.Get("SoundTrack").New(id)
-	return SoundTrackFromJSObject(p, ba.ctx)
+	s.p.Set("id", id)
+	return s
 }
 
 // SoundCollection returns the SoundCollection property of class SoundTrack.
 //
 // https://doc.babylonjs.com/api/classes/babylon.soundtrack#soundcollection
-func (s *SoundTrack) SoundCollection(soundCollection []*Sound) *SoundTrack {
-	p := ba.ctx.Get("SoundTrack").New(soundCollection)
-	return SoundTrackFromJSObject(p, ba.ctx)
+func (s *SoundTrack) SoundCollection() []*Sound {
+	retVal := s.p.Get("soundCollection")
+	result := []*Sound{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SoundFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetSoundCollection sets the SoundCollection property of class SoundTrack.
 //
 // https://doc.babylonjs.com/api/classes/babylon.soundtrack#soundcollection
 func (s *SoundTrack) SetSoundCollection(soundCollection []*Sound) *SoundTrack {
-	p := ba.ctx.Get("SoundTrack").New(soundCollection)
-	return SoundTrackFromJSObject(p, ba.ctx)
+	s.p.Set("soundCollection", soundCollection)
+	return s
 }
-
-*/

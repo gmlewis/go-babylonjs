@@ -98,86 +98,82 @@ func (b *BoundingBoxRenderer) RenderOcclusionBoundingBox(mesh *AbstractMesh) {
 	b.p.Call("renderOcclusionBoundingBox", args...)
 }
 
-/*
-
 // BackColor returns the BackColor property of class BoundingBoxRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#backcolor
-func (b *BoundingBoxRenderer) BackColor(backColor *Color3) *BoundingBoxRenderer {
-	p := ba.ctx.Get("BoundingBoxRenderer").New(backColor.JSObject())
-	return BoundingBoxRendererFromJSObject(p, ba.ctx)
+func (b *BoundingBoxRenderer) BackColor() *Color3 {
+	retVal := b.p.Get("backColor")
+	return Color3FromJSObject(retVal, b.ctx)
 }
 
 // SetBackColor sets the BackColor property of class BoundingBoxRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#backcolor
 func (b *BoundingBoxRenderer) SetBackColor(backColor *Color3) *BoundingBoxRenderer {
-	p := ba.ctx.Get("BoundingBoxRenderer").New(backColor.JSObject())
-	return BoundingBoxRendererFromJSObject(p, ba.ctx)
+	b.p.Set("backColor", backColor.JSObject())
+	return b
 }
 
 // FrontColor returns the FrontColor property of class BoundingBoxRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#frontcolor
-func (b *BoundingBoxRenderer) FrontColor(frontColor *Color3) *BoundingBoxRenderer {
-	p := ba.ctx.Get("BoundingBoxRenderer").New(frontColor.JSObject())
-	return BoundingBoxRendererFromJSObject(p, ba.ctx)
+func (b *BoundingBoxRenderer) FrontColor() *Color3 {
+	retVal := b.p.Get("frontColor")
+	return Color3FromJSObject(retVal, b.ctx)
 }
 
 // SetFrontColor sets the FrontColor property of class BoundingBoxRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#frontcolor
 func (b *BoundingBoxRenderer) SetFrontColor(frontColor *Color3) *BoundingBoxRenderer {
-	p := ba.ctx.Get("BoundingBoxRenderer").New(frontColor.JSObject())
-	return BoundingBoxRendererFromJSObject(p, ba.ctx)
+	b.p.Set("frontColor", frontColor.JSObject())
+	return b
 }
 
 // Name returns the Name property of class BoundingBoxRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#name
-func (b *BoundingBoxRenderer) Name(name string) *BoundingBoxRenderer {
-	p := ba.ctx.Get("BoundingBoxRenderer").New(name)
-	return BoundingBoxRendererFromJSObject(p, ba.ctx)
+func (b *BoundingBoxRenderer) Name() string {
+	retVal := b.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class BoundingBoxRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#name
 func (b *BoundingBoxRenderer) SetName(name string) *BoundingBoxRenderer {
-	p := ba.ctx.Get("BoundingBoxRenderer").New(name)
-	return BoundingBoxRendererFromJSObject(p, ba.ctx)
+	b.p.Set("name", name)
+	return b
 }
 
 // Scene returns the Scene property of class BoundingBoxRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#scene
-func (b *BoundingBoxRenderer) Scene(scene *Scene) *BoundingBoxRenderer {
-	p := ba.ctx.Get("BoundingBoxRenderer").New(scene.JSObject())
-	return BoundingBoxRendererFromJSObject(p, ba.ctx)
+func (b *BoundingBoxRenderer) Scene() *Scene {
+	retVal := b.p.Get("scene")
+	return SceneFromJSObject(retVal, b.ctx)
 }
 
 // SetScene sets the Scene property of class BoundingBoxRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#scene
 func (b *BoundingBoxRenderer) SetScene(scene *Scene) *BoundingBoxRenderer {
-	p := ba.ctx.Get("BoundingBoxRenderer").New(scene.JSObject())
-	return BoundingBoxRendererFromJSObject(p, ba.ctx)
+	b.p.Set("scene", scene.JSObject())
+	return b
 }
 
 // ShowBackLines returns the ShowBackLines property of class BoundingBoxRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#showbacklines
-func (b *BoundingBoxRenderer) ShowBackLines(showBackLines bool) *BoundingBoxRenderer {
-	p := ba.ctx.Get("BoundingBoxRenderer").New(showBackLines)
-	return BoundingBoxRendererFromJSObject(p, ba.ctx)
+func (b *BoundingBoxRenderer) ShowBackLines() bool {
+	retVal := b.p.Get("showBackLines")
+	return retVal.Bool()
 }
 
 // SetShowBackLines sets the ShowBackLines property of class BoundingBoxRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#showbacklines
 func (b *BoundingBoxRenderer) SetShowBackLines(showBackLines bool) *BoundingBoxRenderer {
-	p := ba.ctx.Get("BoundingBoxRenderer").New(showBackLines)
-	return BoundingBoxRendererFromJSObject(p, ba.ctx)
+	b.p.Set("showBackLines", showBackLines)
+	return b
 }
-
-*/

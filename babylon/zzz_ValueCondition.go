@@ -97,118 +97,114 @@ func (v *ValueCondition) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // IsDifferent returns the IsDifferent property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#isdifferent
-func (v *ValueCondition) IsDifferent(IsDifferent float64) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(IsDifferent)
-	return ValueConditionFromJSObject(p, ba.ctx)
+func (v *ValueCondition) IsDifferent() float64 {
+	retVal := v.p.Get("IsDifferent")
+	return retVal.Float()
 }
 
 // SetIsDifferent sets the IsDifferent property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#isdifferent
 func (v *ValueCondition) SetIsDifferent(IsDifferent float64) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(IsDifferent)
-	return ValueConditionFromJSObject(p, ba.ctx)
+	v.p.Set("IsDifferent", IsDifferent)
+	return v
 }
 
 // IsEqual returns the IsEqual property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#isequal
-func (v *ValueCondition) IsEqual(IsEqual float64) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(IsEqual)
-	return ValueConditionFromJSObject(p, ba.ctx)
+func (v *ValueCondition) IsEqual() float64 {
+	retVal := v.p.Get("IsEqual")
+	return retVal.Float()
 }
 
 // SetIsEqual sets the IsEqual property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#isequal
 func (v *ValueCondition) SetIsEqual(IsEqual float64) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(IsEqual)
-	return ValueConditionFromJSObject(p, ba.ctx)
+	v.p.Set("IsEqual", IsEqual)
+	return v
 }
 
 // IsGreater returns the IsGreater property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#isgreater
-func (v *ValueCondition) IsGreater(IsGreater float64) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(IsGreater)
-	return ValueConditionFromJSObject(p, ba.ctx)
+func (v *ValueCondition) IsGreater() float64 {
+	retVal := v.p.Get("IsGreater")
+	return retVal.Float()
 }
 
 // SetIsGreater sets the IsGreater property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#isgreater
 func (v *ValueCondition) SetIsGreater(IsGreater float64) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(IsGreater)
-	return ValueConditionFromJSObject(p, ba.ctx)
+	v.p.Set("IsGreater", IsGreater)
+	return v
 }
 
 // IsLesser returns the IsLesser property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#islesser
-func (v *ValueCondition) IsLesser(IsLesser float64) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(IsLesser)
-	return ValueConditionFromJSObject(p, ba.ctx)
+func (v *ValueCondition) IsLesser() float64 {
+	retVal := v.p.Get("IsLesser")
+	return retVal.Float()
 }
 
 // SetIsLesser sets the IsLesser property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#islesser
 func (v *ValueCondition) SetIsLesser(IsLesser float64) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(IsLesser)
-	return ValueConditionFromJSObject(p, ba.ctx)
+	v.p.Set("IsLesser", IsLesser)
+	return v
 }
 
 // Operator returns the Operator property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#operator
-func (v *ValueCondition) Operator(operator float64) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(operator)
-	return ValueConditionFromJSObject(p, ba.ctx)
+func (v *ValueCondition) Operator() float64 {
+	retVal := v.p.Get("operator")
+	return retVal.Float()
 }
 
 // SetOperator sets the Operator property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#operator
 func (v *ValueCondition) SetOperator(operator float64) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(operator)
-	return ValueConditionFromJSObject(p, ba.ctx)
+	v.p.Set("operator", operator)
+	return v
 }
 
 // PropertyPath returns the PropertyPath property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#propertypath
-func (v *ValueCondition) PropertyPath(propertyPath string) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(propertyPath)
-	return ValueConditionFromJSObject(p, ba.ctx)
+func (v *ValueCondition) PropertyPath() string {
+	retVal := v.p.Get("propertyPath")
+	return retVal.String()
 }
 
 // SetPropertyPath sets the PropertyPath property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#propertypath
 func (v *ValueCondition) SetPropertyPath(propertyPath string) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(propertyPath)
-	return ValueConditionFromJSObject(p, ba.ctx)
+	v.p.Set("propertyPath", propertyPath)
+	return v
 }
 
 // Value returns the Value property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#value
-func (v *ValueCondition) Value(value interface{}) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(value)
-	return ValueConditionFromJSObject(p, ba.ctx)
+func (v *ValueCondition) Value() interface{} {
+	retVal := v.p.Get("value")
+	return retVal
 }
 
 // SetValue sets the Value property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#value
 func (v *ValueCondition) SetValue(value interface{}) *ValueCondition {
-	p := ba.ctx.Get("ValueCondition").New(value)
-	return ValueConditionFromJSObject(p, ba.ctx)
+	v.p.Set("value", value)
+	return v
 }
-
-*/

@@ -141,22 +141,18 @@ func (p *PolygonMeshBuilder) BuildVertexData(opts *PolygonMeshBuilderBuildVertex
 	return VertexDataFromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // BjsEarcut returns the BjsEarcut property of class PolygonMeshBuilder.
 //
 // https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#bjsearcut
-func (p *PolygonMeshBuilder) BjsEarcut(bjsEarcut interface{}) *PolygonMeshBuilder {
-	p := ba.ctx.Get("PolygonMeshBuilder").New(bjsEarcut)
-	return PolygonMeshBuilderFromJSObject(p, ba.ctx)
+func (p *PolygonMeshBuilder) BjsEarcut() interface{} {
+	retVal := p.p.Get("bjsEarcut")
+	return retVal
 }
 
 // SetBjsEarcut sets the BjsEarcut property of class PolygonMeshBuilder.
 //
 // https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#bjsearcut
 func (p *PolygonMeshBuilder) SetBjsEarcut(bjsEarcut interface{}) *PolygonMeshBuilder {
-	p := ba.ctx.Get("PolygonMeshBuilder").New(bjsEarcut)
-	return PolygonMeshBuilderFromJSObject(p, ba.ctx)
+	p.p.Set("bjsEarcut", bjsEarcut)
+	return p
 }
-
-*/

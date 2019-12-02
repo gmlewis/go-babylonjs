@@ -64,22 +64,18 @@ func (ba *Babylon) NewBackEase(opts *NewBackEaseOpts) *BackEase {
 	return BackEaseFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Amplitude returns the Amplitude property of class BackEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backease#amplitude
-func (b *BackEase) Amplitude(amplitude float64) *BackEase {
-	p := ba.ctx.Get("BackEase").New(amplitude)
-	return BackEaseFromJSObject(p, ba.ctx)
+func (b *BackEase) Amplitude() float64 {
+	retVal := b.p.Get("amplitude")
+	return retVal.Float()
 }
 
 // SetAmplitude sets the Amplitude property of class BackEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backease#amplitude
 func (b *BackEase) SetAmplitude(amplitude float64) *BackEase {
-	p := ba.ctx.Get("BackEase").New(amplitude)
-	return BackEaseFromJSObject(p, ba.ctx)
+	b.p.Set("amplitude", amplitude)
+	return b
 }
-
-*/

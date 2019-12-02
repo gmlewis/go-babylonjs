@@ -94,54 +94,50 @@ func (g *GamepadManager) GetGamepadByType(opts *GamepadManagerGetGamepadByTypeOp
 	return GamepadFromJSObject(retVal, g.ctx)
 }
 
-/*
-
 // Gamepads returns the Gamepads property of class GamepadManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#gamepads
-func (g *GamepadManager) Gamepads(gamepads *Gamepad) *GamepadManager {
-	p := ba.ctx.Get("GamepadManager").New(gamepads.JSObject())
-	return GamepadManagerFromJSObject(p, ba.ctx)
+func (g *GamepadManager) Gamepads() *Gamepad {
+	retVal := g.p.Get("gamepads")
+	return GamepadFromJSObject(retVal, g.ctx)
 }
 
 // SetGamepads sets the Gamepads property of class GamepadManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#gamepads
 func (g *GamepadManager) SetGamepads(gamepads *Gamepad) *GamepadManager {
-	p := ba.ctx.Get("GamepadManager").New(gamepads.JSObject())
-	return GamepadManagerFromJSObject(p, ba.ctx)
+	g.p.Set("gamepads", gamepads.JSObject())
+	return g
 }
 
 // OnGamepadConnectedObservable returns the OnGamepadConnectedObservable property of class GamepadManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#ongamepadconnectedobservable
-func (g *GamepadManager) OnGamepadConnectedObservable(onGamepadConnectedObservable *Observable) *GamepadManager {
-	p := ba.ctx.Get("GamepadManager").New(onGamepadConnectedObservable.JSObject())
-	return GamepadManagerFromJSObject(p, ba.ctx)
+func (g *GamepadManager) OnGamepadConnectedObservable() *Observable {
+	retVal := g.p.Get("onGamepadConnectedObservable")
+	return ObservableFromJSObject(retVal, g.ctx)
 }
 
 // SetOnGamepadConnectedObservable sets the OnGamepadConnectedObservable property of class GamepadManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#ongamepadconnectedobservable
 func (g *GamepadManager) SetOnGamepadConnectedObservable(onGamepadConnectedObservable *Observable) *GamepadManager {
-	p := ba.ctx.Get("GamepadManager").New(onGamepadConnectedObservable.JSObject())
-	return GamepadManagerFromJSObject(p, ba.ctx)
+	g.p.Set("onGamepadConnectedObservable", onGamepadConnectedObservable.JSObject())
+	return g
 }
 
 // OnGamepadDisconnectedObservable returns the OnGamepadDisconnectedObservable property of class GamepadManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#ongamepaddisconnectedobservable
-func (g *GamepadManager) OnGamepadDisconnectedObservable(onGamepadDisconnectedObservable *Observable) *GamepadManager {
-	p := ba.ctx.Get("GamepadManager").New(onGamepadDisconnectedObservable.JSObject())
-	return GamepadManagerFromJSObject(p, ba.ctx)
+func (g *GamepadManager) OnGamepadDisconnectedObservable() *Observable {
+	retVal := g.p.Get("onGamepadDisconnectedObservable")
+	return ObservableFromJSObject(retVal, g.ctx)
 }
 
 // SetOnGamepadDisconnectedObservable sets the OnGamepadDisconnectedObservable property of class GamepadManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#ongamepaddisconnectedobservable
 func (g *GamepadManager) SetOnGamepadDisconnectedObservable(onGamepadDisconnectedObservable *Observable) *GamepadManager {
-	p := ba.ctx.Get("GamepadManager").New(onGamepadDisconnectedObservable.JSObject())
-	return GamepadManagerFromJSObject(p, ba.ctx)
+	g.p.Set("onGamepadDisconnectedObservable", onGamepadDisconnectedObservable.JSObject())
+	return g
 }
-
-*/

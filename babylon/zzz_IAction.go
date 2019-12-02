@@ -71,38 +71,34 @@ func (i *IAction) Then(action *IAction) *IAction {
 	return IActionFromJSObject(retVal, i.ctx)
 }
 
-/*
-
 // Trigger returns the Trigger property of class IAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaction#trigger
-func (i *IAction) Trigger(trigger float64) *IAction {
-	p := ba.ctx.Get("IAction").New(trigger)
-	return IActionFromJSObject(p, ba.ctx)
+func (i *IAction) Trigger() float64 {
+	retVal := i.p.Get("trigger")
+	return retVal.Float()
 }
 
 // SetTrigger sets the Trigger property of class IAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaction#trigger
 func (i *IAction) SetTrigger(trigger float64) *IAction {
-	p := ba.ctx.Get("IAction").New(trigger)
-	return IActionFromJSObject(p, ba.ctx)
+	i.p.Set("trigger", trigger)
+	return i
 }
 
 // TriggerOptions returns the TriggerOptions property of class IAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaction#triggeroptions
-func (i *IAction) TriggerOptions(triggerOptions interface{}) *IAction {
-	p := ba.ctx.Get("IAction").New(triggerOptions)
-	return IActionFromJSObject(p, ba.ctx)
+func (i *IAction) TriggerOptions() interface{} {
+	retVal := i.p.Get("triggerOptions")
+	return retVal
 }
 
 // SetTriggerOptions sets the TriggerOptions property of class IAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaction#triggeroptions
 func (i *IAction) SetTriggerOptions(triggerOptions interface{}) *IAction {
-	p := ba.ctx.Get("IAction").New(triggerOptions)
-	return IActionFromJSObject(p, ba.ctx)
+	i.p.Set("triggerOptions", triggerOptions)
+	return i
 }
-
-*/

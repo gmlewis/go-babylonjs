@@ -58,22 +58,18 @@ func (f *FrontFacingBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Output returns the Output property of class FrontFacingBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.frontfacingblock#output
-func (f *FrontFacingBlock) Output(output *NodeMaterialConnectionPoint) *FrontFacingBlock {
-	p := ba.ctx.Get("FrontFacingBlock").New(output.JSObject())
-	return FrontFacingBlockFromJSObject(p, ba.ctx)
+func (f *FrontFacingBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetOutput sets the Output property of class FrontFacingBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.frontfacingblock#output
 func (f *FrontFacingBlock) SetOutput(output *NodeMaterialConnectionPoint) *FrontFacingBlock {
-	p := ba.ctx.Get("FrontFacingBlock").New(output.JSObject())
-	return FrontFacingBlockFromJSObject(p, ba.ctx)
+	f.p.Set("output", output.JSObject())
+	return f
 }
-
-*/

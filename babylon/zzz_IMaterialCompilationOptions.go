@@ -36,38 +36,34 @@ func IMaterialCompilationOptionsArrayToJSArray(array []*IMaterialCompilationOpti
 	return result
 }
 
-/*
-
 // ClipPlane returns the ClipPlane property of class IMaterialCompilationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterialcompilationoptions#clipplane
-func (i *IMaterialCompilationOptions) ClipPlane(clipPlane bool) *IMaterialCompilationOptions {
-	p := ba.ctx.Get("IMaterialCompilationOptions").New(clipPlane)
-	return IMaterialCompilationOptionsFromJSObject(p, ba.ctx)
+func (i *IMaterialCompilationOptions) ClipPlane() bool {
+	retVal := i.p.Get("clipPlane")
+	return retVal.Bool()
 }
 
 // SetClipPlane sets the ClipPlane property of class IMaterialCompilationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterialcompilationoptions#clipplane
 func (i *IMaterialCompilationOptions) SetClipPlane(clipPlane bool) *IMaterialCompilationOptions {
-	p := ba.ctx.Get("IMaterialCompilationOptions").New(clipPlane)
-	return IMaterialCompilationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("clipPlane", clipPlane)
+	return i
 }
 
 // UseInstances returns the UseInstances property of class IMaterialCompilationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterialcompilationoptions#useinstances
-func (i *IMaterialCompilationOptions) UseInstances(useInstances bool) *IMaterialCompilationOptions {
-	p := ba.ctx.Get("IMaterialCompilationOptions").New(useInstances)
-	return IMaterialCompilationOptionsFromJSObject(p, ba.ctx)
+func (i *IMaterialCompilationOptions) UseInstances() bool {
+	retVal := i.p.Get("useInstances")
+	return retVal.Bool()
 }
 
 // SetUseInstances sets the UseInstances property of class IMaterialCompilationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterialcompilationoptions#useinstances
 func (i *IMaterialCompilationOptions) SetUseInstances(useInstances bool) *IMaterialCompilationOptions {
-	p := ba.ctx.Get("IMaterialCompilationOptions").New(useInstances)
-	return IMaterialCompilationOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("useInstances", useInstances)
+	return i
 }
-
-*/

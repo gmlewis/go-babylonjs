@@ -103,134 +103,130 @@ func (w *WebVRController) Update() {
 	w.p.Call("update")
 }
 
-/*
-
 // DefaultModel returns the DefaultModel property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#defaultmodel
-func (w *WebVRController) DefaultModel(defaultModel *AbstractMesh) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(defaultModel.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+func (w *WebVRController) DefaultModel() *AbstractMesh {
+	retVal := w.p.Get("defaultModel")
+	return AbstractMeshFromJSObject(retVal, w.ctx)
 }
 
 // SetDefaultModel sets the DefaultModel property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#defaultmodel
 func (w *WebVRController) SetDefaultModel(defaultModel *AbstractMesh) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(defaultModel.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("defaultModel", defaultModel.JSObject())
+	return w
 }
 
 // Hand returns the Hand property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#hand
-func (w *WebVRController) Hand(hand string) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(hand)
-	return WebVRControllerFromJSObject(p, ba.ctx)
+func (w *WebVRController) Hand() string {
+	retVal := w.p.Get("hand")
+	return retVal.String()
 }
 
 // SetHand sets the Hand property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#hand
 func (w *WebVRController) SetHand(hand string) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(hand)
-	return WebVRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("hand", hand)
+	return w
 }
 
 // OnMainButtonStateChangedObservable returns the OnMainButtonStateChangedObservable property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onmainbuttonstatechangedobservable
-func (w *WebVRController) OnMainButtonStateChangedObservable(onMainButtonStateChangedObservable *Observable) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(onMainButtonStateChangedObservable.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+func (w *WebVRController) OnMainButtonStateChangedObservable() *Observable {
+	retVal := w.p.Get("onMainButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnMainButtonStateChangedObservable sets the OnMainButtonStateChangedObservable property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onmainbuttonstatechangedobservable
 func (w *WebVRController) SetOnMainButtonStateChangedObservable(onMainButtonStateChangedObservable *Observable) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(onMainButtonStateChangedObservable.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onMainButtonStateChangedObservable", onMainButtonStateChangedObservable.JSObject())
+	return w
 }
 
 // OnPadStateChangedObservable returns the OnPadStateChangedObservable property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onpadstatechangedobservable
-func (w *WebVRController) OnPadStateChangedObservable(onPadStateChangedObservable *Observable) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(onPadStateChangedObservable.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+func (w *WebVRController) OnPadStateChangedObservable() *Observable {
+	retVal := w.p.Get("onPadStateChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnPadStateChangedObservable sets the OnPadStateChangedObservable property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onpadstatechangedobservable
 func (w *WebVRController) SetOnPadStateChangedObservable(onPadStateChangedObservable *Observable) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(onPadStateChangedObservable.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onPadStateChangedObservable", onPadStateChangedObservable.JSObject())
+	return w
 }
 
 // OnPadValuesChangedObservable returns the OnPadValuesChangedObservable property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onpadvalueschangedobservable
-func (w *WebVRController) OnPadValuesChangedObservable(onPadValuesChangedObservable *Observable) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(onPadValuesChangedObservable.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+func (w *WebVRController) OnPadValuesChangedObservable() *Observable {
+	retVal := w.p.Get("onPadValuesChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnPadValuesChangedObservable sets the OnPadValuesChangedObservable property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onpadvalueschangedobservable
 func (w *WebVRController) SetOnPadValuesChangedObservable(onPadValuesChangedObservable *Observable) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(onPadValuesChangedObservable.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onPadValuesChangedObservable", onPadValuesChangedObservable.JSObject())
+	return w
 }
 
 // OnSecondaryButtonStateChangedObservable returns the OnSecondaryButtonStateChangedObservable property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onsecondarybuttonstatechangedobservable
-func (w *WebVRController) OnSecondaryButtonStateChangedObservable(onSecondaryButtonStateChangedObservable *Observable) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(onSecondaryButtonStateChangedObservable.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+func (w *WebVRController) OnSecondaryButtonStateChangedObservable() *Observable {
+	retVal := w.p.Get("onSecondaryButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnSecondaryButtonStateChangedObservable sets the OnSecondaryButtonStateChangedObservable property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onsecondarybuttonstatechangedobservable
 func (w *WebVRController) SetOnSecondaryButtonStateChangedObservable(onSecondaryButtonStateChangedObservable *Observable) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(onSecondaryButtonStateChangedObservable.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onSecondaryButtonStateChangedObservable", onSecondaryButtonStateChangedObservable.JSObject())
+	return w
 }
 
 // OnTriggerStateChangedObservable returns the OnTriggerStateChangedObservable property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#ontriggerstatechangedobservable
-func (w *WebVRController) OnTriggerStateChangedObservable(onTriggerStateChangedObservable *Observable) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(onTriggerStateChangedObservable.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+func (w *WebVRController) OnTriggerStateChangedObservable() *Observable {
+	retVal := w.p.Get("onTriggerStateChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetOnTriggerStateChangedObservable sets the OnTriggerStateChangedObservable property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#ontriggerstatechangedobservable
 func (w *WebVRController) SetOnTriggerStateChangedObservable(onTriggerStateChangedObservable *Observable) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(onTriggerStateChangedObservable.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("onTriggerStateChangedObservable", onTriggerStateChangedObservable.JSObject())
+	return w
 }
 
 // Pad returns the Pad property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#pad
-func (w *WebVRController) Pad(pad *StickValues) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(pad.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+func (w *WebVRController) Pad() *StickValues {
+	retVal := w.p.Get("pad")
+	return StickValuesFromJSObject(retVal, w.ctx)
 }
 
 // SetPad sets the Pad property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#pad
 func (w *WebVRController) SetPad(pad *StickValues) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(pad.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
+	w.p.Set("pad", pad.JSObject())
+	return w
 }
-
-*/

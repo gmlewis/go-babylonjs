@@ -86,22 +86,18 @@ func (s *SceneOptimization) GetDescription() string {
 	return retVal.String()
 }
 
-/*
-
 // Priority returns the Priority property of class SceneOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimization#priority
-func (s *SceneOptimization) Priority(priority float64) *SceneOptimization {
-	p := ba.ctx.Get("SceneOptimization").New(priority)
-	return SceneOptimizationFromJSObject(p, ba.ctx)
+func (s *SceneOptimization) Priority() float64 {
+	retVal := s.p.Get("priority")
+	return retVal.Float()
 }
 
 // SetPriority sets the Priority property of class SceneOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimization#priority
 func (s *SceneOptimization) SetPriority(priority float64) *SceneOptimization {
-	p := ba.ctx.Get("SceneOptimization").New(priority)
-	return SceneOptimizationFromJSObject(p, ba.ctx)
+	s.p.Set("priority", priority)
+	return s
 }
-
-*/

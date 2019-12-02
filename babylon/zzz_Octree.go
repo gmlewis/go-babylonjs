@@ -177,86 +177,86 @@ func (o *Octree) Update(worldMin *Vector3, worldMax *Vector3, entries *T) {
 	o.p.Call("update", args...)
 }
 
-/*
-
 // Blocks returns the Blocks property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#blocks
-func (o *Octree) Blocks(blocks []*OctreeBlock) *Octree {
-	p := ba.ctx.Get("Octree").New(blocks)
-	return OctreeFromJSObject(p, ba.ctx)
+func (o *Octree) Blocks() []*OctreeBlock {
+	retVal := o.p.Get("blocks")
+	result := []*OctreeBlock{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, OctreeBlockFromJSObject(retVal.Index(ri), o.ctx))
+	}
+	return result
 }
 
 // SetBlocks sets the Blocks property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#blocks
 func (o *Octree) SetBlocks(blocks []*OctreeBlock) *Octree {
-	p := ba.ctx.Get("Octree").New(blocks)
-	return OctreeFromJSObject(p, ba.ctx)
+	o.p.Set("blocks", blocks)
+	return o
 }
 
 // CreationFuncForMeshes returns the CreationFuncForMeshes property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#creationfuncformeshes
-func (o *Octree) CreationFuncForMeshes(CreationFuncForMeshes func()) *Octree {
-	p := ba.ctx.Get("Octree").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {CreationFuncForMeshes(); return nil}))
-	return OctreeFromJSObject(p, ba.ctx)
+func (o *Octree) CreationFuncForMeshes() js.Value {
+	retVal := o.p.Get("CreationFuncForMeshes")
+	return retVal
 }
 
 // SetCreationFuncForMeshes sets the CreationFuncForMeshes property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#creationfuncformeshes
 func (o *Octree) SetCreationFuncForMeshes(CreationFuncForMeshes func()) *Octree {
-	p := ba.ctx.Get("Octree").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {CreationFuncForMeshes(); return nil}))
-	return OctreeFromJSObject(p, ba.ctx)
+	o.p.Set("CreationFuncForMeshes", js.FuncOf(func(this js.Value, args []js.Value) interface{} { CreationFuncForMeshes(); return nil }))
+	return o
 }
 
 // CreationFuncForSubMeshes returns the CreationFuncForSubMeshes property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#creationfuncforsubmeshes
-func (o *Octree) CreationFuncForSubMeshes(CreationFuncForSubMeshes func()) *Octree {
-	p := ba.ctx.Get("Octree").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {CreationFuncForSubMeshes(); return nil}))
-	return OctreeFromJSObject(p, ba.ctx)
+func (o *Octree) CreationFuncForSubMeshes() js.Value {
+	retVal := o.p.Get("CreationFuncForSubMeshes")
+	return retVal
 }
 
 // SetCreationFuncForSubMeshes sets the CreationFuncForSubMeshes property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#creationfuncforsubmeshes
 func (o *Octree) SetCreationFuncForSubMeshes(CreationFuncForSubMeshes func()) *Octree {
-	p := ba.ctx.Get("Octree").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {CreationFuncForSubMeshes(); return nil}))
-	return OctreeFromJSObject(p, ba.ctx)
+	o.p.Set("CreationFuncForSubMeshes", js.FuncOf(func(this js.Value, args []js.Value) interface{} { CreationFuncForSubMeshes(); return nil }))
+	return o
 }
 
 // DynamicContent returns the DynamicContent property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#dynamiccontent
-func (o *Octree) DynamicContent(dynamicContent *T) *Octree {
-	p := ba.ctx.Get("Octree").New(dynamicContent.JSObject())
-	return OctreeFromJSObject(p, ba.ctx)
+func (o *Octree) DynamicContent() *T {
+	retVal := o.p.Get("dynamicContent")
+	return TFromJSObject(retVal, o.ctx)
 }
 
 // SetDynamicContent sets the DynamicContent property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#dynamiccontent
 func (o *Octree) SetDynamicContent(dynamicContent *T) *Octree {
-	p := ba.ctx.Get("Octree").New(dynamicContent.JSObject())
-	return OctreeFromJSObject(p, ba.ctx)
+	o.p.Set("dynamicContent", dynamicContent.JSObject())
+	return o
 }
 
 // MaxDepth returns the MaxDepth property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#maxdepth
-func (o *Octree) MaxDepth(maxDepth float64) *Octree {
-	p := ba.ctx.Get("Octree").New(maxDepth)
-	return OctreeFromJSObject(p, ba.ctx)
+func (o *Octree) MaxDepth() float64 {
+	retVal := o.p.Get("maxDepth")
+	return retVal.Float()
 }
 
 // SetMaxDepth sets the MaxDepth property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#maxdepth
 func (o *Octree) SetMaxDepth(maxDepth float64) *Octree {
-	p := ba.ctx.Get("Octree").New(maxDepth)
-	return OctreeFromJSObject(p, ba.ctx)
+	o.p.Set("maxDepth", maxDepth)
+	return o
 }
-
-*/

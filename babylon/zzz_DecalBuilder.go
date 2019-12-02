@@ -50,7 +50,3 @@ func (d *DecalBuilder) CreateDecal(name string, sourceMesh *AbstractMesh, option
 	retVal := d.p.Call("CreateDecal", args...)
 	return MeshFromJSObject(retVal, d.ctx)
 }
-
-/*
-
- */

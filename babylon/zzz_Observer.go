@@ -64,70 +64,66 @@ func (ba *Babylon) NewObserver(callback func(), mask float64, opts *NewObserverO
 	return ObserverFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Callback returns the Callback property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#callback
-func (o *Observer) Callback(callback func()) *Observer {
-	p := ba.ctx.Get("Observer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {callback(); return nil}))
-	return ObserverFromJSObject(p, ba.ctx)
+func (o *Observer) Callback() js.Value {
+	retVal := o.p.Get("callback")
+	return retVal
 }
 
 // SetCallback sets the Callback property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#callback
 func (o *Observer) SetCallback(callback func()) *Observer {
-	p := ba.ctx.Get("Observer").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {callback(); return nil}))
-	return ObserverFromJSObject(p, ba.ctx)
+	o.p.Set("callback", js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	return o
 }
 
 // Mask returns the Mask property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#mask
-func (o *Observer) Mask(mask float64) *Observer {
-	p := ba.ctx.Get("Observer").New(mask)
-	return ObserverFromJSObject(p, ba.ctx)
+func (o *Observer) Mask() float64 {
+	retVal := o.p.Get("mask")
+	return retVal.Float()
 }
 
 // SetMask sets the Mask property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#mask
 func (o *Observer) SetMask(mask float64) *Observer {
-	p := ba.ctx.Get("Observer").New(mask)
-	return ObserverFromJSObject(p, ba.ctx)
+	o.p.Set("mask", mask)
+	return o
 }
 
 // Scope returns the Scope property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#scope
-func (o *Observer) Scope(scope interface{}) *Observer {
-	p := ba.ctx.Get("Observer").New(scope)
-	return ObserverFromJSObject(p, ba.ctx)
+func (o *Observer) Scope() interface{} {
+	retVal := o.p.Get("scope")
+	return retVal
 }
 
 // SetScope sets the Scope property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#scope
 func (o *Observer) SetScope(scope interface{}) *Observer {
-	p := ba.ctx.Get("Observer").New(scope)
-	return ObserverFromJSObject(p, ba.ctx)
+	o.p.Set("scope", scope)
+	return o
 }
 
 // UnregisterOnNextCall returns the UnregisterOnNextCall property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#unregisteronnextcall
-func (o *Observer) UnregisterOnNextCall(unregisterOnNextCall bool) *Observer {
-	p := ba.ctx.Get("Observer").New(unregisterOnNextCall)
-	return ObserverFromJSObject(p, ba.ctx)
+func (o *Observer) UnregisterOnNextCall() bool {
+	retVal := o.p.Get("unregisterOnNextCall")
+	return retVal.Bool()
 }
 
 // SetUnregisterOnNextCall sets the UnregisterOnNextCall property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#unregisteronnextcall
 func (o *Observer) SetUnregisterOnNextCall(unregisterOnNextCall bool) *Observer {
-	p := ba.ctx.Get("Observer").New(unregisterOnNextCall)
-	return ObserverFromJSObject(p, ba.ctx)
+	o.p.Set("unregisterOnNextCall", unregisterOnNextCall)
+	return o
 }
-
-*/

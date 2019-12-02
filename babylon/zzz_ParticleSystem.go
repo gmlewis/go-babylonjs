@@ -764,214 +764,218 @@ func (p *ParticleSystem) Stop(opts *ParticleSystemStopOpts) {
 	p.p.Call("stop", args...)
 }
 
-/*
-
 // ActiveSubSystems returns the ActiveSubSystems property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#activesubsystems
-func (p *ParticleSystem) ActiveSubSystems(activeSubSystems []*ParticleSystem) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(activeSubSystems)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) ActiveSubSystems() []*ParticleSystem {
+	retVal := p.p.Get("activeSubSystems")
+	result := []*ParticleSystem{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ParticleSystemFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // SetActiveSubSystems sets the ActiveSubSystems property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#activesubsystems
 func (p *ParticleSystem) SetActiveSubSystems(activeSubSystems []*ParticleSystem) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(activeSubSystems)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("activeSubSystems", activeSubSystems)
+	return p
 }
 
 // BILLBOARDMODE_ALL returns the BILLBOARDMODE_ALL property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#billboardmode_all
-func (p *ParticleSystem) BILLBOARDMODE_ALL(BILLBOARDMODE_ALL float64) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(BILLBOARDMODE_ALL)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) BILLBOARDMODE_ALL() float64 {
+	retVal := p.p.Get("BILLBOARDMODE_ALL")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_ALL sets the BILLBOARDMODE_ALL property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#billboardmode_all
 func (p *ParticleSystem) SetBILLBOARDMODE_ALL(BILLBOARDMODE_ALL float64) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(BILLBOARDMODE_ALL)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("BILLBOARDMODE_ALL", BILLBOARDMODE_ALL)
+	return p
 }
 
 // BILLBOARDMODE_STRETCHED returns the BILLBOARDMODE_STRETCHED property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#billboardmode_stretched
-func (p *ParticleSystem) BILLBOARDMODE_STRETCHED(BILLBOARDMODE_STRETCHED float64) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(BILLBOARDMODE_STRETCHED)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) BILLBOARDMODE_STRETCHED() float64 {
+	retVal := p.p.Get("BILLBOARDMODE_STRETCHED")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_STRETCHED sets the BILLBOARDMODE_STRETCHED property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#billboardmode_stretched
 func (p *ParticleSystem) SetBILLBOARDMODE_STRETCHED(BILLBOARDMODE_STRETCHED float64) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(BILLBOARDMODE_STRETCHED)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("BILLBOARDMODE_STRETCHED", BILLBOARDMODE_STRETCHED)
+	return p
 }
 
 // BILLBOARDMODE_Y returns the BILLBOARDMODE_Y property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#billboardmode_y
-func (p *ParticleSystem) BILLBOARDMODE_Y(BILLBOARDMODE_Y float64) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(BILLBOARDMODE_Y)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) BILLBOARDMODE_Y() float64 {
+	retVal := p.p.Get("BILLBOARDMODE_Y")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_Y sets the BILLBOARDMODE_Y property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#billboardmode_y
 func (p *ParticleSystem) SetBILLBOARDMODE_Y(BILLBOARDMODE_Y float64) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(BILLBOARDMODE_Y)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("BILLBOARDMODE_Y", BILLBOARDMODE_Y)
+	return p
 }
 
 // OnDispose returns the OnDispose property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#ondispose
-func (p *ParticleSystem) OnDispose(onDispose func()) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) OnDispose() js.Value {
+	retVal := p.p.Get("onDispose")
+	return retVal
 }
 
 // SetOnDispose sets the OnDispose property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#ondispose
 func (p *ParticleSystem) SetOnDispose(onDispose func()) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+	return p
 }
 
 // OnDisposeObservable returns the OnDisposeObservable property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#ondisposeobservable
-func (p *ParticleSystem) OnDisposeObservable(onDisposeObservable *Observable) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(onDisposeObservable.JSObject())
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) OnDisposeObservable() *Observable {
+	retVal := p.p.Get("onDisposeObservable")
+	return ObservableFromJSObject(retVal, p.ctx)
 }
 
 // SetOnDisposeObservable sets the OnDisposeObservable property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#ondisposeobservable
 func (p *ParticleSystem) SetOnDisposeObservable(onDisposeObservable *Observable) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(onDisposeObservable.JSObject())
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("onDisposeObservable", onDisposeObservable.JSObject())
+	return p
 }
 
 // Particles returns the Particles property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#particles
-func (p *ParticleSystem) Particles(particles *Particle) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(particles.JSObject())
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) Particles() *Particle {
+	retVal := p.p.Get("particles")
+	return ParticleFromJSObject(retVal, p.ctx)
 }
 
 // SetParticles sets the Particles property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#particles
 func (p *ParticleSystem) SetParticles(particles *Particle) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(particles.JSObject())
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("particles", particles.JSObject())
+	return p
 }
 
 // RecycleParticle returns the RecycleParticle property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#recycleparticle
-func (p *ParticleSystem) RecycleParticle(recycleParticle func()) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {recycleParticle(); return nil}))
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) RecycleParticle() js.Value {
+	retVal := p.p.Get("recycleParticle")
+	return retVal
 }
 
 // SetRecycleParticle sets the RecycleParticle property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#recycleparticle
 func (p *ParticleSystem) SetRecycleParticle(recycleParticle func()) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {recycleParticle(); return nil}))
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("recycleParticle", js.FuncOf(func(this js.Value, args []js.Value) interface{} { recycleParticle(); return nil }))
+	return p
 }
 
 // StartDirectionFunction returns the StartDirectionFunction property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#startdirectionfunction
-func (p *ParticleSystem) StartDirectionFunction(startDirectionFunction func()) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {startDirectionFunction(); return nil}))
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) StartDirectionFunction() js.Value {
+	retVal := p.p.Get("startDirectionFunction")
+	return retVal
 }
 
 // SetStartDirectionFunction sets the StartDirectionFunction property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#startdirectionfunction
 func (p *ParticleSystem) SetStartDirectionFunction(startDirectionFunction func()) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {startDirectionFunction(); return nil}))
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("startDirectionFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { startDirectionFunction(); return nil }))
+	return p
 }
 
 // StartPositionFunction returns the StartPositionFunction property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#startpositionfunction
-func (p *ParticleSystem) StartPositionFunction(startPositionFunction func()) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {startPositionFunction(); return nil}))
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) StartPositionFunction() js.Value {
+	retVal := p.p.Get("startPositionFunction")
+	return retVal
 }
 
 // SetStartPositionFunction sets the StartPositionFunction property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#startpositionfunction
 func (p *ParticleSystem) SetStartPositionFunction(startPositionFunction func()) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {startPositionFunction(); return nil}))
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("startPositionFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { startPositionFunction(); return nil }))
+	return p
 }
 
 // SubEmitters returns the SubEmitters property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#subemitters
-func (p *ParticleSystem) SubEmitters(subEmitters []*ParticleSystem) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(subEmitters)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) SubEmitters() []*ParticleSystem {
+	retVal := p.p.Get("subEmitters")
+	result := []*ParticleSystem{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ParticleSystemFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // SetSubEmitters sets the SubEmitters property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#subemitters
 func (p *ParticleSystem) SetSubEmitters(subEmitters []*ParticleSystem) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(subEmitters)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("subEmitters", subEmitters)
+	return p
 }
 
 // UpdateFunction returns the UpdateFunction property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#updatefunction
-func (p *ParticleSystem) UpdateFunction(updateFunction func()) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateFunction(); return nil}))
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) UpdateFunction() js.Value {
+	retVal := p.p.Get("updateFunction")
+	return retVal
 }
 
 // SetUpdateFunction sets the UpdateFunction property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#updatefunction
 func (p *ParticleSystem) SetUpdateFunction(updateFunction func()) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {updateFunction(); return nil}))
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("updateFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateFunction(); return nil }))
+	return p
 }
 
 // UseRampGradients returns the UseRampGradients property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#userampgradients
-func (p *ParticleSystem) UseRampGradients(useRampGradients bool) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(useRampGradients)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+func (p *ParticleSystem) UseRampGradients() bool {
+	retVal := p.p.Get("useRampGradients")
+	return retVal.Bool()
 }
 
 // SetUseRampGradients sets the UseRampGradients property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#userampgradients
 func (p *ParticleSystem) SetUseRampGradients(useRampGradients bool) *ParticleSystem {
-	p := ba.ctx.Get("ParticleSystem").New(useRampGradients)
-	return ParticleSystemFromJSObject(p, ba.ctx)
+	p.p.Set("useRampGradients", useRampGradients)
+	return p
 }
-
-*/

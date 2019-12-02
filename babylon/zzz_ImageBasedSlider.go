@@ -87,86 +87,82 @@ func (i *ImageBasedSlider) _draw(context js.Value, opts *ImageBasedSlider_drawOp
 	i.p.Call("_draw", args...)
 }
 
-/*
-
 // BackgroundImage returns the BackgroundImage property of class ImageBasedSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#backgroundimage
-func (i *ImageBasedSlider) BackgroundImage(backgroundImage *Image) *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider").New(backgroundImage.JSObject())
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+func (i *ImageBasedSlider) BackgroundImage() *Image {
+	retVal := i.p.Get("backgroundImage")
+	return ImageFromJSObject(retVal, i.ctx)
 }
 
 // SetBackgroundImage sets the BackgroundImage property of class ImageBasedSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#backgroundimage
 func (i *ImageBasedSlider) SetBackgroundImage(backgroundImage *Image) *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider").New(backgroundImage.JSObject())
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+	i.p.Set("backgroundImage", backgroundImage.JSObject())
+	return i
 }
 
 // DisplayThumb returns the DisplayThumb property of class ImageBasedSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#displaythumb
-func (i *ImageBasedSlider) DisplayThumb(displayThumb bool) *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider").New(displayThumb)
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+func (i *ImageBasedSlider) DisplayThumb() bool {
+	retVal := i.p.Get("displayThumb")
+	return retVal.Bool()
 }
 
 // SetDisplayThumb sets the DisplayThumb property of class ImageBasedSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#displaythumb
 func (i *ImageBasedSlider) SetDisplayThumb(displayThumb bool) *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider").New(displayThumb)
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+	i.p.Set("displayThumb", displayThumb)
+	return i
 }
 
 // Name returns the Name property of class ImageBasedSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#name
-func (i *ImageBasedSlider) Name(name string) *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider").New(name)
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+func (i *ImageBasedSlider) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ImageBasedSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#name
 func (i *ImageBasedSlider) SetName(name string) *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider").New(name)
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
 
 // ThumbImage returns the ThumbImage property of class ImageBasedSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#thumbimage
-func (i *ImageBasedSlider) ThumbImage(thumbImage *Image) *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider").New(thumbImage.JSObject())
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+func (i *ImageBasedSlider) ThumbImage() *Image {
+	retVal := i.p.Get("thumbImage")
+	return ImageFromJSObject(retVal, i.ctx)
 }
 
 // SetThumbImage sets the ThumbImage property of class ImageBasedSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#thumbimage
 func (i *ImageBasedSlider) SetThumbImage(thumbImage *Image) *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider").New(thumbImage.JSObject())
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+	i.p.Set("thumbImage", thumbImage.JSObject())
+	return i
 }
 
 // ValueBarImage returns the ValueBarImage property of class ImageBasedSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#valuebarimage
-func (i *ImageBasedSlider) ValueBarImage(valueBarImage *Image) *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider").New(valueBarImage.JSObject())
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+func (i *ImageBasedSlider) ValueBarImage() *Image {
+	retVal := i.p.Get("valueBarImage")
+	return ImageFromJSObject(retVal, i.ctx)
 }
 
 // SetValueBarImage sets the ValueBarImage property of class ImageBasedSlider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#valuebarimage
 func (i *ImageBasedSlider) SetValueBarImage(valueBarImage *Image) *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider").New(valueBarImage.JSObject())
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+	i.p.Set("valueBarImage", valueBarImage.JSObject())
+	return i
 }
-
-*/

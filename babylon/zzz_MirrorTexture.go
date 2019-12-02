@@ -114,102 +114,98 @@ func (m *MirrorTexture) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // AdaptiveBlurKernel returns the AdaptiveBlurKernel property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#adaptiveblurkernel
-func (m *MirrorTexture) AdaptiveBlurKernel(adaptiveBlurKernel float64) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(adaptiveBlurKernel)
-	return MirrorTextureFromJSObject(p, ba.ctx)
+func (m *MirrorTexture) AdaptiveBlurKernel() float64 {
+	retVal := m.p.Get("adaptiveBlurKernel")
+	return retVal.Float()
 }
 
 // SetAdaptiveBlurKernel sets the AdaptiveBlurKernel property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#adaptiveblurkernel
 func (m *MirrorTexture) SetAdaptiveBlurKernel(adaptiveBlurKernel float64) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(adaptiveBlurKernel)
-	return MirrorTextureFromJSObject(p, ba.ctx)
+	m.p.Set("adaptiveBlurKernel", adaptiveBlurKernel)
+	return m
 }
 
 // BlurKernel returns the BlurKernel property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#blurkernel
-func (m *MirrorTexture) BlurKernel(blurKernel float64) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(blurKernel)
-	return MirrorTextureFromJSObject(p, ba.ctx)
+func (m *MirrorTexture) BlurKernel() float64 {
+	retVal := m.p.Get("blurKernel")
+	return retVal.Float()
 }
 
 // SetBlurKernel sets the BlurKernel property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#blurkernel
 func (m *MirrorTexture) SetBlurKernel(blurKernel float64) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(blurKernel)
-	return MirrorTextureFromJSObject(p, ba.ctx)
+	m.p.Set("blurKernel", blurKernel)
+	return m
 }
 
 // BlurKernelX returns the BlurKernelX property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#blurkernelx
-func (m *MirrorTexture) BlurKernelX(blurKernelX float64) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(blurKernelX)
-	return MirrorTextureFromJSObject(p, ba.ctx)
+func (m *MirrorTexture) BlurKernelX() float64 {
+	retVal := m.p.Get("blurKernelX")
+	return retVal.Float()
 }
 
 // SetBlurKernelX sets the BlurKernelX property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#blurkernelx
 func (m *MirrorTexture) SetBlurKernelX(blurKernelX float64) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(blurKernelX)
-	return MirrorTextureFromJSObject(p, ba.ctx)
+	m.p.Set("blurKernelX", blurKernelX)
+	return m
 }
 
 // BlurKernelY returns the BlurKernelY property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#blurkernely
-func (m *MirrorTexture) BlurKernelY(blurKernelY float64) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(blurKernelY)
-	return MirrorTextureFromJSObject(p, ba.ctx)
+func (m *MirrorTexture) BlurKernelY() float64 {
+	retVal := m.p.Get("blurKernelY")
+	return retVal.Float()
 }
 
 // SetBlurKernelY sets the BlurKernelY property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#blurkernely
 func (m *MirrorTexture) SetBlurKernelY(blurKernelY float64) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(blurKernelY)
-	return MirrorTextureFromJSObject(p, ba.ctx)
+	m.p.Set("blurKernelY", blurKernelY)
+	return m
 }
 
 // BlurRatio returns the BlurRatio property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#blurratio
-func (m *MirrorTexture) BlurRatio(blurRatio float64) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(blurRatio)
-	return MirrorTextureFromJSObject(p, ba.ctx)
+func (m *MirrorTexture) BlurRatio() float64 {
+	retVal := m.p.Get("blurRatio")
+	return retVal.Float()
 }
 
 // SetBlurRatio sets the BlurRatio property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#blurratio
 func (m *MirrorTexture) SetBlurRatio(blurRatio float64) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(blurRatio)
-	return MirrorTextureFromJSObject(p, ba.ctx)
+	m.p.Set("blurRatio", blurRatio)
+	return m
 }
 
 // MirrorPlane returns the MirrorPlane property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#mirrorplane
-func (m *MirrorTexture) MirrorPlane(mirrorPlane *Plane) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(mirrorPlane.JSObject())
-	return MirrorTextureFromJSObject(p, ba.ctx)
+func (m *MirrorTexture) MirrorPlane() *Plane {
+	retVal := m.p.Get("mirrorPlane")
+	return PlaneFromJSObject(retVal, m.ctx)
 }
 
 // SetMirrorPlane sets the MirrorPlane property of class MirrorTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#mirrorplane
 func (m *MirrorTexture) SetMirrorPlane(mirrorPlane *Plane) *MirrorTexture {
-	p := ba.ctx.Get("MirrorTexture").New(mirrorPlane.JSObject())
-	return MirrorTextureFromJSObject(p, ba.ctx)
+	m.p.Set("mirrorPlane", mirrorPlane.JSObject())
+	return m
 }
-
-*/

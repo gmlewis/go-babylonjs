@@ -70,86 +70,82 @@ func (ba *Babylon) NewOceanPostProcess(name string, camera *TargetCamera, opts *
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // IsSupported returns the IsSupported property of class OceanPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#issupported
-func (o *OceanPostProcess) IsSupported(isSupported bool) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(isSupported)
-	return OceanPostProcessFromJSObject(p, ba.ctx)
+func (o *OceanPostProcess) IsSupported() bool {
+	retVal := o.p.Get("isSupported")
+	return retVal.Bool()
 }
 
 // SetIsSupported sets the IsSupported property of class OceanPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#issupported
 func (o *OceanPostProcess) SetIsSupported(isSupported bool) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(isSupported)
-	return OceanPostProcessFromJSObject(p, ba.ctx)
+	o.p.Set("isSupported", isSupported)
+	return o
 }
 
 // ReflectionEnabled returns the ReflectionEnabled property of class OceanPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#reflectionenabled
-func (o *OceanPostProcess) ReflectionEnabled(reflectionEnabled bool) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(reflectionEnabled)
-	return OceanPostProcessFromJSObject(p, ba.ctx)
+func (o *OceanPostProcess) ReflectionEnabled() bool {
+	retVal := o.p.Get("reflectionEnabled")
+	return retVal.Bool()
 }
 
 // SetReflectionEnabled sets the ReflectionEnabled property of class OceanPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#reflectionenabled
 func (o *OceanPostProcess) SetReflectionEnabled(reflectionEnabled bool) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(reflectionEnabled)
-	return OceanPostProcessFromJSObject(p, ba.ctx)
+	o.p.Set("reflectionEnabled", reflectionEnabled)
+	return o
 }
 
 // ReflectionTexture returns the ReflectionTexture property of class OceanPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#reflectiontexture
-func (o *OceanPostProcess) ReflectionTexture(reflectionTexture *MirrorTexture) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(reflectionTexture.JSObject())
-	return OceanPostProcessFromJSObject(p, ba.ctx)
+func (o *OceanPostProcess) ReflectionTexture() *MirrorTexture {
+	retVal := o.p.Get("reflectionTexture")
+	return MirrorTextureFromJSObject(retVal, o.ctx)
 }
 
 // SetReflectionTexture sets the ReflectionTexture property of class OceanPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#reflectiontexture
 func (o *OceanPostProcess) SetReflectionTexture(reflectionTexture *MirrorTexture) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(reflectionTexture.JSObject())
-	return OceanPostProcessFromJSObject(p, ba.ctx)
+	o.p.Set("reflectionTexture", reflectionTexture.JSObject())
+	return o
 }
 
 // RefractionEnabled returns the RefractionEnabled property of class OceanPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#refractionenabled
-func (o *OceanPostProcess) RefractionEnabled(refractionEnabled bool) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(refractionEnabled)
-	return OceanPostProcessFromJSObject(p, ba.ctx)
+func (o *OceanPostProcess) RefractionEnabled() bool {
+	retVal := o.p.Get("refractionEnabled")
+	return retVal.Bool()
 }
 
 // SetRefractionEnabled sets the RefractionEnabled property of class OceanPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#refractionenabled
 func (o *OceanPostProcess) SetRefractionEnabled(refractionEnabled bool) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(refractionEnabled)
-	return OceanPostProcessFromJSObject(p, ba.ctx)
+	o.p.Set("refractionEnabled", refractionEnabled)
+	return o
 }
 
 // RefractionTexture returns the RefractionTexture property of class OceanPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#refractiontexture
-func (o *OceanPostProcess) RefractionTexture(refractionTexture *RenderTargetTexture) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(refractionTexture.JSObject())
-	return OceanPostProcessFromJSObject(p, ba.ctx)
+func (o *OceanPostProcess) RefractionTexture() *RenderTargetTexture {
+	retVal := o.p.Get("refractionTexture")
+	return RenderTargetTextureFromJSObject(retVal, o.ctx)
 }
 
 // SetRefractionTexture sets the RefractionTexture property of class OceanPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#refractiontexture
 func (o *OceanPostProcess) SetRefractionTexture(refractionTexture *RenderTargetTexture) *OceanPostProcess {
-	p := ba.ctx.Get("OceanPostProcess").New(refractionTexture.JSObject())
-	return OceanPostProcessFromJSObject(p, ba.ctx)
+	o.p.Set("refractionTexture", refractionTexture.JSObject())
+	return o
 }
-
-*/

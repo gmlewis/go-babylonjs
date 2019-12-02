@@ -36,22 +36,18 @@ func ITextureAssetTaskArrayToJSArray(array []*ITextureAssetTask) []interface{} {
 	return result
 }
 
-/*
-
 // Texture returns the Texture property of class ITextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.itextureassettask#texture
-func (i *ITextureAssetTask) Texture(texture *TEX) *ITextureAssetTask {
-	p := ba.ctx.Get("ITextureAssetTask").New(texture.JSObject())
-	return ITextureAssetTaskFromJSObject(p, ba.ctx)
+func (i *ITextureAssetTask) Texture() js.Value {
+	retVal := i.p.Get("texture")
+	return retVal
 }
 
 // SetTexture sets the Texture property of class ITextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.itextureassettask#texture
-func (i *ITextureAssetTask) SetTexture(texture *TEX) *ITextureAssetTask {
-	p := ba.ctx.Get("ITextureAssetTask").New(texture.JSObject())
-	return ITextureAssetTaskFromJSObject(p, ba.ctx)
+func (i *ITextureAssetTask) SetTexture(texture js.Value) *ITextureAssetTask {
+	i.p.Set("texture", texture)
+	return i
 }
-
-*/

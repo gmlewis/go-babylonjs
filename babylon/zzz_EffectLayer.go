@@ -167,198 +167,194 @@ func (e *EffectLayer) _disposeMesh(mesh *Mesh) {
 	e.p.Call("_disposeMesh", args...)
 }
 
-/*
-
 // Camera returns the Camera property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#camera
-func (e *EffectLayer) Camera(camera *Camera) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(camera.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) Camera() *Camera {
+	retVal := e.p.Get("camera")
+	return CameraFromJSObject(retVal, e.ctx)
 }
 
 // SetCamera sets the Camera property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#camera
 func (e *EffectLayer) SetCamera(camera *Camera) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(camera.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("camera", camera.JSObject())
+	return e
 }
 
 // IsEnabled returns the IsEnabled property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#isenabled
-func (e *EffectLayer) IsEnabled(isEnabled bool) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(isEnabled)
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) IsEnabled() bool {
+	retVal := e.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#isenabled
 func (e *EffectLayer) SetIsEnabled(isEnabled bool) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(isEnabled)
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("isEnabled", isEnabled)
+	return e
 }
 
 // Name returns the Name property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#name
-func (e *EffectLayer) Name(name string) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(name)
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) Name() string {
+	retVal := e.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#name
 func (e *EffectLayer) SetName(name string) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(name)
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("name", name)
+	return e
 }
 
 // NeutralColor returns the NeutralColor property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#neutralcolor
-func (e *EffectLayer) NeutralColor(neutralColor *Color4) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(neutralColor.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) NeutralColor() *Color4 {
+	retVal := e.p.Get("neutralColor")
+	return Color4FromJSObject(retVal, e.ctx)
 }
 
 // SetNeutralColor sets the NeutralColor property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#neutralcolor
 func (e *EffectLayer) SetNeutralColor(neutralColor *Color4) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(neutralColor.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("neutralColor", neutralColor.JSObject())
+	return e
 }
 
 // OnAfterComposeObservable returns the OnAfterComposeObservable property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onaftercomposeobservable
-func (e *EffectLayer) OnAfterComposeObservable(onAfterComposeObservable *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onAfterComposeObservable.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) OnAfterComposeObservable() *Observable {
+	retVal := e.p.Get("onAfterComposeObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnAfterComposeObservable sets the OnAfterComposeObservable property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onaftercomposeobservable
 func (e *EffectLayer) SetOnAfterComposeObservable(onAfterComposeObservable *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onAfterComposeObservable.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("onAfterComposeObservable", onAfterComposeObservable.JSObject())
+	return e
 }
 
 // OnAfterRenderMeshToEffect returns the OnAfterRenderMeshToEffect property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onafterrendermeshtoeffect
-func (e *EffectLayer) OnAfterRenderMeshToEffect(onAfterRenderMeshToEffect *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onAfterRenderMeshToEffect.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) OnAfterRenderMeshToEffect() *Observable {
+	retVal := e.p.Get("onAfterRenderMeshToEffect")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnAfterRenderMeshToEffect sets the OnAfterRenderMeshToEffect property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onafterrendermeshtoeffect
 func (e *EffectLayer) SetOnAfterRenderMeshToEffect(onAfterRenderMeshToEffect *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onAfterRenderMeshToEffect.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("onAfterRenderMeshToEffect", onAfterRenderMeshToEffect.JSObject())
+	return e
 }
 
 // OnBeforeComposeObservable returns the OnBeforeComposeObservable property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onbeforecomposeobservable
-func (e *EffectLayer) OnBeforeComposeObservable(onBeforeComposeObservable *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onBeforeComposeObservable.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) OnBeforeComposeObservable() *Observable {
+	retVal := e.p.Get("onBeforeComposeObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnBeforeComposeObservable sets the OnBeforeComposeObservable property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onbeforecomposeobservable
 func (e *EffectLayer) SetOnBeforeComposeObservable(onBeforeComposeObservable *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onBeforeComposeObservable.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("onBeforeComposeObservable", onBeforeComposeObservable.JSObject())
+	return e
 }
 
 // OnBeforeRenderMainTextureObservable returns the OnBeforeRenderMainTextureObservable property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onbeforerendermaintextureobservable
-func (e *EffectLayer) OnBeforeRenderMainTextureObservable(onBeforeRenderMainTextureObservable *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onBeforeRenderMainTextureObservable.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) OnBeforeRenderMainTextureObservable() *Observable {
+	retVal := e.p.Get("onBeforeRenderMainTextureObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnBeforeRenderMainTextureObservable sets the OnBeforeRenderMainTextureObservable property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onbeforerendermaintextureobservable
 func (e *EffectLayer) SetOnBeforeRenderMainTextureObservable(onBeforeRenderMainTextureObservable *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onBeforeRenderMainTextureObservable.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("onBeforeRenderMainTextureObservable", onBeforeRenderMainTextureObservable.JSObject())
+	return e
 }
 
 // OnBeforeRenderMeshToEffect returns the OnBeforeRenderMeshToEffect property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onbeforerendermeshtoeffect
-func (e *EffectLayer) OnBeforeRenderMeshToEffect(onBeforeRenderMeshToEffect *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onBeforeRenderMeshToEffect.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) OnBeforeRenderMeshToEffect() *Observable {
+	retVal := e.p.Get("onBeforeRenderMeshToEffect")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnBeforeRenderMeshToEffect sets the OnBeforeRenderMeshToEffect property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onbeforerendermeshtoeffect
 func (e *EffectLayer) SetOnBeforeRenderMeshToEffect(onBeforeRenderMeshToEffect *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onBeforeRenderMeshToEffect.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("onBeforeRenderMeshToEffect", onBeforeRenderMeshToEffect.JSObject())
+	return e
 }
 
 // OnDisposeObservable returns the OnDisposeObservable property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#ondisposeobservable
-func (e *EffectLayer) OnDisposeObservable(onDisposeObservable *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onDisposeObservable.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) OnDisposeObservable() *Observable {
+	retVal := e.p.Get("onDisposeObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnDisposeObservable sets the OnDisposeObservable property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#ondisposeobservable
 func (e *EffectLayer) SetOnDisposeObservable(onDisposeObservable *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onDisposeObservable.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("onDisposeObservable", onDisposeObservable.JSObject())
+	return e
 }
 
 // OnSizeChangedObservable returns the OnSizeChangedObservable property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onsizechangedobservable
-func (e *EffectLayer) OnSizeChangedObservable(onSizeChangedObservable *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onSizeChangedObservable.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) OnSizeChangedObservable() *Observable {
+	retVal := e.p.Get("onSizeChangedObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#onsizechangedobservable
 func (e *EffectLayer) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(onSizeChangedObservable.JSObject())
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("onSizeChangedObservable", onSizeChangedObservable.JSObject())
+	return e
 }
 
 // RenderingGroupId returns the RenderingGroupId property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#renderinggroupid
-func (e *EffectLayer) RenderingGroupId(renderingGroupId float64) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(renderingGroupId)
-	return EffectLayerFromJSObject(p, ba.ctx)
+func (e *EffectLayer) RenderingGroupId() float64 {
+	retVal := e.p.Get("renderingGroupId")
+	return retVal.Float()
 }
 
 // SetRenderingGroupId sets the RenderingGroupId property of class EffectLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#renderinggroupid
 func (e *EffectLayer) SetRenderingGroupId(renderingGroupId float64) *EffectLayer {
-	p := ba.ctx.Get("EffectLayer").New(renderingGroupId)
-	return EffectLayerFromJSObject(p, ba.ctx)
+	e.p.Set("renderingGroupId", renderingGroupId)
+	return e
 }
-
-*/

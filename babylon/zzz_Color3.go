@@ -638,70 +638,66 @@ func (c *Color3) Yellow() *Color3 {
 	return Color3FromJSObject(retVal, c.ctx)
 }
 
-/*
-
 // B returns the B property of class Color3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3#b
-func (c *Color3) B(b float64) *Color3 {
-	p := ba.ctx.Get("Color3").New(b)
-	return Color3FromJSObject(p, ba.ctx)
+func (c *Color3) B() float64 {
+	retVal := c.p.Get("b")
+	return retVal.Float()
 }
 
 // SetB sets the B property of class Color3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3#b
 func (c *Color3) SetB(b float64) *Color3 {
-	p := ba.ctx.Get("Color3").New(b)
-	return Color3FromJSObject(p, ba.ctx)
+	c.p.Set("b", b)
+	return c
 }
 
 // BlackReadOnly returns the BlackReadOnly property of class Color3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3#blackreadonly
-func (c *Color3) BlackReadOnly(BlackReadOnly *Color3) *Color3 {
-	p := ba.ctx.Get("Color3").New(BlackReadOnly.JSObject())
-	return Color3FromJSObject(p, ba.ctx)
+func (c *Color3) BlackReadOnly() *Color3 {
+	retVal := c.p.Get("BlackReadOnly")
+	return Color3FromJSObject(retVal, c.ctx)
 }
 
 // SetBlackReadOnly sets the BlackReadOnly property of class Color3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3#blackreadonly
 func (c *Color3) SetBlackReadOnly(BlackReadOnly *Color3) *Color3 {
-	p := ba.ctx.Get("Color3").New(BlackReadOnly.JSObject())
-	return Color3FromJSObject(p, ba.ctx)
+	c.p.Set("BlackReadOnly", BlackReadOnly.JSObject())
+	return c
 }
 
 // G returns the G property of class Color3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3#g
-func (c *Color3) G(g float64) *Color3 {
-	p := ba.ctx.Get("Color3").New(g)
-	return Color3FromJSObject(p, ba.ctx)
+func (c *Color3) G() float64 {
+	retVal := c.p.Get("g")
+	return retVal.Float()
 }
 
 // SetG sets the G property of class Color3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3#g
 func (c *Color3) SetG(g float64) *Color3 {
-	p := ba.ctx.Get("Color3").New(g)
-	return Color3FromJSObject(p, ba.ctx)
+	c.p.Set("g", g)
+	return c
 }
 
 // R returns the R property of class Color3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3#r
-func (c *Color3) R(r float64) *Color3 {
-	p := ba.ctx.Get("Color3").New(r)
-	return Color3FromJSObject(p, ba.ctx)
+func (c *Color3) R() float64 {
+	retVal := c.p.Get("r")
+	return retVal.Float()
 }
 
 // SetR sets the R property of class Color3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3#r
 func (c *Color3) SetR(r float64) *Color3 {
-	p := ba.ctx.Get("Color3").New(r)
-	return Color3FromJSObject(p, ba.ctx)
+	c.p.Set("r", r)
+	return c
 }
-
-*/

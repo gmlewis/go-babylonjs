@@ -138,134 +138,130 @@ func (m *MorphTargetsBlock) ReplaceRepeatableContent(vertexShaderState *NodeMate
 	m.p.Call("replaceRepeatableContent", args...)
 }
 
-/*
-
 // Normal returns the Normal property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#normal
-func (m *MorphTargetsBlock) Normal(normal *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(normal.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+func (m *MorphTargetsBlock) Normal() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("normal")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetNormal sets the Normal property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#normal
 func (m *MorphTargetsBlock) SetNormal(normal *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(normal.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+	m.p.Set("normal", normal.JSObject())
+	return m
 }
 
 // NormalOutput returns the NormalOutput property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#normaloutput
-func (m *MorphTargetsBlock) NormalOutput(normalOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(normalOutput.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+func (m *MorphTargetsBlock) NormalOutput() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("normalOutput")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetNormalOutput sets the NormalOutput property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#normaloutput
 func (m *MorphTargetsBlock) SetNormalOutput(normalOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(normalOutput.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+	m.p.Set("normalOutput", normalOutput.JSObject())
+	return m
 }
 
 // Position returns the Position property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#position
-func (m *MorphTargetsBlock) Position(position *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(position.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+func (m *MorphTargetsBlock) Position() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("position")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetPosition sets the Position property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#position
 func (m *MorphTargetsBlock) SetPosition(position *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(position.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+	m.p.Set("position", position.JSObject())
+	return m
 }
 
 // PositionOutput returns the PositionOutput property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#positionoutput
-func (m *MorphTargetsBlock) PositionOutput(positionOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(positionOutput.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+func (m *MorphTargetsBlock) PositionOutput() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("positionOutput")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetPositionOutput sets the PositionOutput property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#positionoutput
 func (m *MorphTargetsBlock) SetPositionOutput(positionOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(positionOutput.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+	m.p.Set("positionOutput", positionOutput.JSObject())
+	return m
 }
 
 // Tangent returns the Tangent property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#tangent
-func (m *MorphTargetsBlock) Tangent(tangent *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(tangent.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+func (m *MorphTargetsBlock) Tangent() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("tangent")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetTangent sets the Tangent property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#tangent
 func (m *MorphTargetsBlock) SetTangent(tangent *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(tangent.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+	m.p.Set("tangent", tangent.JSObject())
+	return m
 }
 
 // TangentOutput returns the TangentOutput property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#tangentoutput
-func (m *MorphTargetsBlock) TangentOutput(tangentOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(tangentOutput.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+func (m *MorphTargetsBlock) TangentOutput() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("tangentOutput")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetTangentOutput sets the TangentOutput property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#tangentoutput
 func (m *MorphTargetsBlock) SetTangentOutput(tangentOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(tangentOutput.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+	m.p.Set("tangentOutput", tangentOutput.JSObject())
+	return m
 }
 
 // Uv returns the Uv property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#uv
-func (m *MorphTargetsBlock) Uv(uv *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(uv.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+func (m *MorphTargetsBlock) Uv() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("uv")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetUv sets the Uv property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#uv
 func (m *MorphTargetsBlock) SetUv(uv *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(uv.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+	m.p.Set("uv", uv.JSObject())
+	return m
 }
 
 // UvOutput returns the UvOutput property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#uvoutput
-func (m *MorphTargetsBlock) UvOutput(uvOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(uvOutput.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+func (m *MorphTargetsBlock) UvOutput() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("uvOutput")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetUvOutput sets the UvOutput property of class MorphTargetsBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#uvoutput
 func (m *MorphTargetsBlock) SetUvOutput(uvOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
-	p := ba.ctx.Get("MorphTargetsBlock").New(uvOutput.JSObject())
-	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+	m.p.Set("uvOutput", uvOutput.JSObject())
+	return m
 }
-
-*/

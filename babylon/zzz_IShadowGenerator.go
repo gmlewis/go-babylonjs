@@ -182,7 +182,3 @@ func (i *IShadowGenerator) Serialize() interface{} {
 	retVal := i.p.Call("serialize")
 	return retVal
 }
-
-/*
-
- */

@@ -58,38 +58,34 @@ func (r *ReciprocalBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Input returns the Input property of class ReciprocalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#input
-func (r *ReciprocalBlock) Input(input *NodeMaterialConnectionPoint) *ReciprocalBlock {
-	p := ba.ctx.Get("ReciprocalBlock").New(input.JSObject())
-	return ReciprocalBlockFromJSObject(p, ba.ctx)
+func (r *ReciprocalBlock) Input() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("input")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetInput sets the Input property of class ReciprocalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#input
 func (r *ReciprocalBlock) SetInput(input *NodeMaterialConnectionPoint) *ReciprocalBlock {
-	p := ba.ctx.Get("ReciprocalBlock").New(input.JSObject())
-	return ReciprocalBlockFromJSObject(p, ba.ctx)
+	r.p.Set("input", input.JSObject())
+	return r
 }
 
 // Output returns the Output property of class ReciprocalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#output
-func (r *ReciprocalBlock) Output(output *NodeMaterialConnectionPoint) *ReciprocalBlock {
-	p := ba.ctx.Get("ReciprocalBlock").New(output.JSObject())
-	return ReciprocalBlockFromJSObject(p, ba.ctx)
+func (r *ReciprocalBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetOutput sets the Output property of class ReciprocalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#output
 func (r *ReciprocalBlock) SetOutput(output *NodeMaterialConnectionPoint) *ReciprocalBlock {
-	p := ba.ctx.Get("ReciprocalBlock").New(output.JSObject())
-	return ReciprocalBlockFromJSObject(p, ba.ctx)
+	r.p.Set("output", output.JSObject())
+	return r
 }
-
-*/

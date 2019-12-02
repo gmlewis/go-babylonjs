@@ -38,7 +38,3 @@ func CircleEaseArrayToJSArray(array []*CircleEase) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

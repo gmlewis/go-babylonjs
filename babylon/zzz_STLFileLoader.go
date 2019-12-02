@@ -100,38 +100,34 @@ func (s *STLFileLoader) LoadAssetContainer(scene *Scene, data string, rootUrl st
 	return AssetContainerFromJSObject(retVal, s.ctx)
 }
 
-/*
-
 // Extensions returns the Extensions property of class STLFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stlfileloader#extensions
-func (s *STLFileLoader) Extensions(extensions *ISceneLoaderPluginExtensions) *STLFileLoader {
-	p := ba.ctx.Get("STLFileLoader").New(extensions.JSObject())
-	return STLFileLoaderFromJSObject(p, ba.ctx)
+func (s *STLFileLoader) Extensions() *ISceneLoaderPluginExtensions {
+	retVal := s.p.Get("extensions")
+	return ISceneLoaderPluginExtensionsFromJSObject(retVal, s.ctx)
 }
 
 // SetExtensions sets the Extensions property of class STLFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stlfileloader#extensions
 func (s *STLFileLoader) SetExtensions(extensions *ISceneLoaderPluginExtensions) *STLFileLoader {
-	p := ba.ctx.Get("STLFileLoader").New(extensions.JSObject())
-	return STLFileLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("extensions", extensions.JSObject())
+	return s
 }
 
 // Name returns the Name property of class STLFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stlfileloader#name
-func (s *STLFileLoader) Name(name string) *STLFileLoader {
-	p := ba.ctx.Get("STLFileLoader").New(name)
-	return STLFileLoaderFromJSObject(p, ba.ctx)
+func (s *STLFileLoader) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class STLFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stlfileloader#name
 func (s *STLFileLoader) SetName(name string) *STLFileLoader {
-	p := ba.ctx.Get("STLFileLoader").New(name)
-	return STLFileLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
-
-*/

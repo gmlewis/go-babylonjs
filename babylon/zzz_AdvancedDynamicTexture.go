@@ -379,310 +379,306 @@ func (a *AdvancedDynamicTexture) UnRegisterClipboardEvents() {
 	a.p.Call("unRegisterClipboardEvents")
 }
 
-/*
-
 // Background returns the Background property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#background
-func (a *AdvancedDynamicTexture) Background(background string) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(background)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) Background() string {
+	retVal := a.p.Get("background")
+	return retVal.String()
 }
 
 // SetBackground sets the Background property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#background
 func (a *AdvancedDynamicTexture) SetBackground(background string) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(background)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("background", background)
+	return a
 }
 
 // ClipboardData returns the ClipboardData property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#clipboarddata
-func (a *AdvancedDynamicTexture) ClipboardData(clipboardData string) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(clipboardData)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) ClipboardData() string {
+	retVal := a.p.Get("clipboardData")
+	return retVal.String()
 }
 
 // SetClipboardData sets the ClipboardData property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#clipboarddata
 func (a *AdvancedDynamicTexture) SetClipboardData(clipboardData string) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(clipboardData)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("clipboardData", clipboardData)
+	return a
 }
 
 // FocusedControl returns the FocusedControl property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#focusedcontrol
-func (a *AdvancedDynamicTexture) FocusedControl(focusedControl *IFocusableControl) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(focusedControl.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) FocusedControl() *IFocusableControl {
+	retVal := a.p.Get("focusedControl")
+	return IFocusableControlFromJSObject(retVal, a.ctx)
 }
 
 // SetFocusedControl sets the FocusedControl property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#focusedcontrol
 func (a *AdvancedDynamicTexture) SetFocusedControl(focusedControl *IFocusableControl) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(focusedControl.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("focusedControl", focusedControl.JSObject())
+	return a
 }
 
 // IdealHeight returns the IdealHeight property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#idealheight
-func (a *AdvancedDynamicTexture) IdealHeight(idealHeight float64) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(idealHeight)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) IdealHeight() float64 {
+	retVal := a.p.Get("idealHeight")
+	return retVal.Float()
 }
 
 // SetIdealHeight sets the IdealHeight property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#idealheight
 func (a *AdvancedDynamicTexture) SetIdealHeight(idealHeight float64) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(idealHeight)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("idealHeight", idealHeight)
+	return a
 }
 
 // IdealWidth returns the IdealWidth property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#idealwidth
-func (a *AdvancedDynamicTexture) IdealWidth(idealWidth float64) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(idealWidth)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) IdealWidth() float64 {
+	retVal := a.p.Get("idealWidth")
+	return retVal.Float()
 }
 
 // SetIdealWidth sets the IdealWidth property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#idealwidth
 func (a *AdvancedDynamicTexture) SetIdealWidth(idealWidth float64) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(idealWidth)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("idealWidth", idealWidth)
+	return a
 }
 
 // IsForeground returns the IsForeground property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isforeground
-func (a *AdvancedDynamicTexture) IsForeground(isForeground bool) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(isForeground)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) IsForeground() bool {
+	retVal := a.p.Get("isForeground")
+	return retVal.Bool()
 }
 
 // SetIsForeground sets the IsForeground property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isforeground
 func (a *AdvancedDynamicTexture) SetIsForeground(isForeground bool) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(isForeground)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("isForeground", isForeground)
+	return a
 }
 
 // Layer returns the Layer property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#layer
-func (a *AdvancedDynamicTexture) Layer(layer *Layer) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(layer.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) Layer() *Layer {
+	retVal := a.p.Get("layer")
+	return LayerFromJSObject(retVal, a.ctx)
 }
 
 // SetLayer sets the Layer property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#layer
 func (a *AdvancedDynamicTexture) SetLayer(layer *Layer) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(layer.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("layer", layer.JSObject())
+	return a
 }
 
 // OnBeginLayoutObservable returns the OnBeginLayoutObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onbeginlayoutobservable
-func (a *AdvancedDynamicTexture) OnBeginLayoutObservable(onBeginLayoutObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onBeginLayoutObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) OnBeginLayoutObservable() *Observable {
+	retVal := a.p.Get("onBeginLayoutObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnBeginLayoutObservable sets the OnBeginLayoutObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onbeginlayoutobservable
 func (a *AdvancedDynamicTexture) SetOnBeginLayoutObservable(onBeginLayoutObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onBeginLayoutObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("onBeginLayoutObservable", onBeginLayoutObservable.JSObject())
+	return a
 }
 
 // OnBeginRenderObservable returns the OnBeginRenderObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onbeginrenderobservable
-func (a *AdvancedDynamicTexture) OnBeginRenderObservable(onBeginRenderObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onBeginRenderObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) OnBeginRenderObservable() *Observable {
+	retVal := a.p.Get("onBeginRenderObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnBeginRenderObservable sets the OnBeginRenderObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onbeginrenderobservable
 func (a *AdvancedDynamicTexture) SetOnBeginRenderObservable(onBeginRenderObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onBeginRenderObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("onBeginRenderObservable", onBeginRenderObservable.JSObject())
+	return a
 }
 
 // OnClipboardObservable returns the OnClipboardObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onclipboardobservable
-func (a *AdvancedDynamicTexture) OnClipboardObservable(onClipboardObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onClipboardObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) OnClipboardObservable() *Observable {
+	retVal := a.p.Get("onClipboardObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnClipboardObservable sets the OnClipboardObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onclipboardobservable
 func (a *AdvancedDynamicTexture) SetOnClipboardObservable(onClipboardObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onClipboardObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("onClipboardObservable", onClipboardObservable.JSObject())
+	return a
 }
 
 // OnControlPickedObservable returns the OnControlPickedObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#oncontrolpickedobservable
-func (a *AdvancedDynamicTexture) OnControlPickedObservable(onControlPickedObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onControlPickedObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) OnControlPickedObservable() *Observable {
+	retVal := a.p.Get("onControlPickedObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnControlPickedObservable sets the OnControlPickedObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#oncontrolpickedobservable
 func (a *AdvancedDynamicTexture) SetOnControlPickedObservable(onControlPickedObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onControlPickedObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("onControlPickedObservable", onControlPickedObservable.JSObject())
+	return a
 }
 
 // OnEndLayoutObservable returns the OnEndLayoutObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onendlayoutobservable
-func (a *AdvancedDynamicTexture) OnEndLayoutObservable(onEndLayoutObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onEndLayoutObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) OnEndLayoutObservable() *Observable {
+	retVal := a.p.Get("onEndLayoutObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnEndLayoutObservable sets the OnEndLayoutObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onendlayoutobservable
 func (a *AdvancedDynamicTexture) SetOnEndLayoutObservable(onEndLayoutObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onEndLayoutObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("onEndLayoutObservable", onEndLayoutObservable.JSObject())
+	return a
 }
 
 // OnEndRenderObservable returns the OnEndRenderObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onendrenderobservable
-func (a *AdvancedDynamicTexture) OnEndRenderObservable(onEndRenderObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onEndRenderObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) OnEndRenderObservable() *Observable {
+	retVal := a.p.Get("onEndRenderObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnEndRenderObservable sets the OnEndRenderObservable property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onendrenderobservable
 func (a *AdvancedDynamicTexture) SetOnEndRenderObservable(onEndRenderObservable *Observable) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(onEndRenderObservable.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("onEndRenderObservable", onEndRenderObservable.JSObject())
+	return a
 }
 
 // PremulAlpha returns the PremulAlpha property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#premulalpha
-func (a *AdvancedDynamicTexture) PremulAlpha(premulAlpha bool) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(premulAlpha)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) PremulAlpha() bool {
+	retVal := a.p.Get("premulAlpha")
+	return retVal.Bool()
 }
 
 // SetPremulAlpha sets the PremulAlpha property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#premulalpha
 func (a *AdvancedDynamicTexture) SetPremulAlpha(premulAlpha bool) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(premulAlpha)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("premulAlpha", premulAlpha)
+	return a
 }
 
 // RenderAtIdealSize returns the RenderAtIdealSize property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#renderatidealsize
-func (a *AdvancedDynamicTexture) RenderAtIdealSize(renderAtIdealSize bool) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(renderAtIdealSize)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) RenderAtIdealSize() bool {
+	retVal := a.p.Get("renderAtIdealSize")
+	return retVal.Bool()
 }
 
 // SetRenderAtIdealSize sets the RenderAtIdealSize property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#renderatidealsize
 func (a *AdvancedDynamicTexture) SetRenderAtIdealSize(renderAtIdealSize bool) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(renderAtIdealSize)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("renderAtIdealSize", renderAtIdealSize)
+	return a
 }
 
 // RenderScale returns the RenderScale property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#renderscale
-func (a *AdvancedDynamicTexture) RenderScale(renderScale float64) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(renderScale)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) RenderScale() float64 {
+	retVal := a.p.Get("renderScale")
+	return retVal.Float()
 }
 
 // SetRenderScale sets the RenderScale property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#renderscale
 func (a *AdvancedDynamicTexture) SetRenderScale(renderScale float64) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(renderScale)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("renderScale", renderScale)
+	return a
 }
 
 // RootContainer returns the RootContainer property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#rootcontainer
-func (a *AdvancedDynamicTexture) RootContainer(rootContainer *Container) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(rootContainer.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) RootContainer() *Container {
+	retVal := a.p.Get("rootContainer")
+	return ContainerFromJSObject(retVal, a.ctx)
 }
 
 // SetRootContainer sets the RootContainer property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#rootcontainer
 func (a *AdvancedDynamicTexture) SetRootContainer(rootContainer *Container) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(rootContainer.JSObject())
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("rootContainer", rootContainer.JSObject())
+	return a
 }
 
 // UseInvalidateRectOptimization returns the UseInvalidateRectOptimization property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#useinvalidaterectoptimization
-func (a *AdvancedDynamicTexture) UseInvalidateRectOptimization(useInvalidateRectOptimization bool) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(useInvalidateRectOptimization)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) UseInvalidateRectOptimization() bool {
+	retVal := a.p.Get("useInvalidateRectOptimization")
+	return retVal.Bool()
 }
 
 // SetUseInvalidateRectOptimization sets the UseInvalidateRectOptimization property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#useinvalidaterectoptimization
 func (a *AdvancedDynamicTexture) SetUseInvalidateRectOptimization(useInvalidateRectOptimization bool) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(useInvalidateRectOptimization)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("useInvalidateRectOptimization", useInvalidateRectOptimization)
+	return a
 }
 
 // UseSmallestIdeal returns the UseSmallestIdeal property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#usesmallestideal
-func (a *AdvancedDynamicTexture) UseSmallestIdeal(useSmallestIdeal bool) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(useSmallestIdeal)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTexture) UseSmallestIdeal() bool {
+	retVal := a.p.Get("useSmallestIdeal")
+	return retVal.Bool()
 }
 
 // SetUseSmallestIdeal sets the UseSmallestIdeal property of class AdvancedDynamicTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#usesmallestideal
 func (a *AdvancedDynamicTexture) SetUseSmallestIdeal(useSmallestIdeal bool) *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(useSmallestIdeal)
-	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+	a.p.Set("useSmallestIdeal", useSmallestIdeal)
+	return a
 }
-
-*/

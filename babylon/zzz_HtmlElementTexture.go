@@ -90,22 +90,18 @@ func (h *HtmlElementTexture) Update(opts *HtmlElementTextureUpdateOpts) {
 	h.p.Call("update", args...)
 }
 
-/*
-
 // Element returns the Element property of class HtmlElementTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#element
-func (h *HtmlElementTexture) Element(element js.Value) *HtmlElementTexture {
-	p := ba.ctx.Get("HtmlElementTexture").New(element)
-	return HtmlElementTextureFromJSObject(p, ba.ctx)
+func (h *HtmlElementTexture) Element() js.Value {
+	retVal := h.p.Get("element")
+	return retVal
 }
 
 // SetElement sets the Element property of class HtmlElementTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#element
 func (h *HtmlElementTexture) SetElement(element js.Value) *HtmlElementTexture {
-	p := ba.ctx.Get("HtmlElementTexture").New(element)
-	return HtmlElementTextureFromJSObject(p, ba.ctx)
+	h.p.Set("element", element)
+	return h
 }
-
-*/

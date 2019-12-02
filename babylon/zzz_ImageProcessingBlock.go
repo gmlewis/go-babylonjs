@@ -126,38 +126,34 @@ func (i *ImageProcessingBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *
 	i.p.Call("prepareDefines", args...)
 }
 
-/*
-
 // Color returns the Color property of class ImageProcessingBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock#color
-func (i *ImageProcessingBlock) Color(color *NodeMaterialConnectionPoint) *ImageProcessingBlock {
-	p := ba.ctx.Get("ImageProcessingBlock").New(color.JSObject())
-	return ImageProcessingBlockFromJSObject(p, ba.ctx)
+func (i *ImageProcessingBlock) Color() *NodeMaterialConnectionPoint {
+	retVal := i.p.Get("color")
+	return NodeMaterialConnectionPointFromJSObject(retVal, i.ctx)
 }
 
 // SetColor sets the Color property of class ImageProcessingBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock#color
 func (i *ImageProcessingBlock) SetColor(color *NodeMaterialConnectionPoint) *ImageProcessingBlock {
-	p := ba.ctx.Get("ImageProcessingBlock").New(color.JSObject())
-	return ImageProcessingBlockFromJSObject(p, ba.ctx)
+	i.p.Set("color", color.JSObject())
+	return i
 }
 
 // Output returns the Output property of class ImageProcessingBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock#output
-func (i *ImageProcessingBlock) Output(output *NodeMaterialConnectionPoint) *ImageProcessingBlock {
-	p := ba.ctx.Get("ImageProcessingBlock").New(output.JSObject())
-	return ImageProcessingBlockFromJSObject(p, ba.ctx)
+func (i *ImageProcessingBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := i.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, i.ctx)
 }
 
 // SetOutput sets the Output property of class ImageProcessingBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock#output
 func (i *ImageProcessingBlock) SetOutput(output *NodeMaterialConnectionPoint) *ImageProcessingBlock {
-	p := ba.ctx.Get("ImageProcessingBlock").New(output.JSObject())
-	return ImageProcessingBlockFromJSObject(p, ba.ctx)
+	i.p.Set("output", output.JSObject())
+	return i
 }
-
-*/

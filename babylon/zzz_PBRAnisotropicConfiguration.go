@@ -247,70 +247,66 @@ func (p *PBRAnisotropicConfiguration) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // Direction returns the Direction property of class PBRAnisotropicConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#direction
-func (p *PBRAnisotropicConfiguration) Direction(direction *Vector2) *PBRAnisotropicConfiguration {
-	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(direction.JSObject())
-	return PBRAnisotropicConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRAnisotropicConfiguration) Direction() *Vector2 {
+	retVal := p.p.Get("direction")
+	return Vector2FromJSObject(retVal, p.ctx)
 }
 
 // SetDirection sets the Direction property of class PBRAnisotropicConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#direction
 func (p *PBRAnisotropicConfiguration) SetDirection(direction *Vector2) *PBRAnisotropicConfiguration {
-	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(direction.JSObject())
-	return PBRAnisotropicConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("direction", direction.JSObject())
+	return p
 }
 
 // Intensity returns the Intensity property of class PBRAnisotropicConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#intensity
-func (p *PBRAnisotropicConfiguration) Intensity(intensity float64) *PBRAnisotropicConfiguration {
-	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(intensity)
-	return PBRAnisotropicConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRAnisotropicConfiguration) Intensity() float64 {
+	retVal := p.p.Get("intensity")
+	return retVal.Float()
 }
 
 // SetIntensity sets the Intensity property of class PBRAnisotropicConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#intensity
 func (p *PBRAnisotropicConfiguration) SetIntensity(intensity float64) *PBRAnisotropicConfiguration {
-	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(intensity)
-	return PBRAnisotropicConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("intensity", intensity)
+	return p
 }
 
 // IsEnabled returns the IsEnabled property of class PBRAnisotropicConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#isenabled
-func (p *PBRAnisotropicConfiguration) IsEnabled(isEnabled bool) *PBRAnisotropicConfiguration {
-	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(isEnabled)
-	return PBRAnisotropicConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRAnisotropicConfiguration) IsEnabled() bool {
+	retVal := p.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class PBRAnisotropicConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#isenabled
 func (p *PBRAnisotropicConfiguration) SetIsEnabled(isEnabled bool) *PBRAnisotropicConfiguration {
-	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(isEnabled)
-	return PBRAnisotropicConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("isEnabled", isEnabled)
+	return p
 }
 
 // Texture returns the Texture property of class PBRAnisotropicConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#texture
-func (p *PBRAnisotropicConfiguration) Texture(texture *BaseTexture) *PBRAnisotropicConfiguration {
-	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(texture.JSObject())
-	return PBRAnisotropicConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRAnisotropicConfiguration) Texture() *BaseTexture {
+	retVal := p.p.Get("texture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetTexture sets the Texture property of class PBRAnisotropicConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#texture
 func (p *PBRAnisotropicConfiguration) SetTexture(texture *BaseTexture) *PBRAnisotropicConfiguration {
-	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(texture.JSObject())
-	return PBRAnisotropicConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("texture", texture.JSObject())
+	return p
 }
-
-*/

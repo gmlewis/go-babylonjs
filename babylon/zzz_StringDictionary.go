@@ -178,22 +178,18 @@ func (s *StringDictionary) Set(key string, value *T) bool {
 	return retVal.Bool()
 }
 
-/*
-
 // Count returns the Count property of class StringDictionary.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stringdictionary#count
-func (s *StringDictionary) Count(count float64) *StringDictionary {
-	p := ba.ctx.Get("StringDictionary").New(count)
-	return StringDictionaryFromJSObject(p, ba.ctx)
+func (s *StringDictionary) Count() float64 {
+	retVal := s.p.Get("count")
+	return retVal.Float()
 }
 
 // SetCount sets the Count property of class StringDictionary.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stringdictionary#count
 func (s *StringDictionary) SetCount(count float64) *StringDictionary {
-	p := ba.ctx.Get("StringDictionary").New(count)
-	return StringDictionaryFromJSObject(p, ba.ctx)
+	s.p.Set("count", count)
+	return s
 }
-
-*/

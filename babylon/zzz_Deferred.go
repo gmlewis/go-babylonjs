@@ -47,54 +47,50 @@ func (ba *Babylon) NewDeferred() *Deferred {
 	return DeferredFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Promise returns the Promise property of class Deferred.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#promise
-func (d *Deferred) Promise(promise *Promise) *Deferred {
-	p := ba.ctx.Get("Deferred").New(promise.JSObject())
-	return DeferredFromJSObject(p, ba.ctx)
+func (d *Deferred) Promise() *Promise {
+	retVal := d.p.Get("promise")
+	return PromiseFromJSObject(retVal, d.ctx)
 }
 
 // SetPromise sets the Promise property of class Deferred.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#promise
 func (d *Deferred) SetPromise(promise *Promise) *Deferred {
-	p := ba.ctx.Get("Deferred").New(promise.JSObject())
-	return DeferredFromJSObject(p, ba.ctx)
+	d.p.Set("promise", promise.JSObject())
+	return d
 }
 
 // Reject returns the Reject property of class Deferred.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#reject
-func (d *Deferred) Reject(reject func()) *Deferred {
-	p := ba.ctx.Get("Deferred").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {reject(); return nil}))
-	return DeferredFromJSObject(p, ba.ctx)
+func (d *Deferred) Reject() js.Value {
+	retVal := d.p.Get("reject")
+	return retVal
 }
 
 // SetReject sets the Reject property of class Deferred.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#reject
 func (d *Deferred) SetReject(reject func()) *Deferred {
-	p := ba.ctx.Get("Deferred").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {reject(); return nil}))
-	return DeferredFromJSObject(p, ba.ctx)
+	d.p.Set("reject", js.FuncOf(func(this js.Value, args []js.Value) interface{} { reject(); return nil }))
+	return d
 }
 
 // Resolve returns the Resolve property of class Deferred.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#resolve
-func (d *Deferred) Resolve(resolve func()) *Deferred {
-	p := ba.ctx.Get("Deferred").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {resolve(); return nil}))
-	return DeferredFromJSObject(p, ba.ctx)
+func (d *Deferred) Resolve() js.Value {
+	retVal := d.p.Get("resolve")
+	return retVal
 }
 
 // SetResolve sets the Resolve property of class Deferred.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#resolve
 func (d *Deferred) SetResolve(resolve func()) *Deferred {
-	p := ba.ctx.Get("Deferred").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {resolve(); return nil}))
-	return DeferredFromJSObject(p, ba.ctx)
+	d.p.Set("resolve", js.FuncOf(func(this js.Value, args []js.Value) interface{} { resolve(); return nil }))
+	return d
 }
-
-*/

@@ -334,598 +334,578 @@ func (s *ShadowGenerator) SetTransparencyShadow(transparent bool) *ShadowGenerat
 	return ShadowGeneratorFromJSObject(retVal, s.ctx)
 }
 
-/*
-
 // Bias returns the Bias property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#bias
-func (s *ShadowGenerator) Bias(bias float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(bias)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) Bias() float64 {
+	retVal := s.p.Get("bias")
+	return retVal.Float()
 }
 
 // SetBias sets the Bias property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#bias
 func (s *ShadowGenerator) SetBias(bias float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(bias)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("bias", bias)
+	return s
 }
 
 // BlurBoxOffset returns the BlurBoxOffset property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#blurboxoffset
-func (s *ShadowGenerator) BlurBoxOffset(blurBoxOffset float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(blurBoxOffset)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) BlurBoxOffset() float64 {
+	retVal := s.p.Get("blurBoxOffset")
+	return retVal.Float()
 }
 
 // SetBlurBoxOffset sets the BlurBoxOffset property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#blurboxoffset
 func (s *ShadowGenerator) SetBlurBoxOffset(blurBoxOffset float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(blurBoxOffset)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("blurBoxOffset", blurBoxOffset)
+	return s
 }
 
 // BlurKernel returns the BlurKernel property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#blurkernel
-func (s *ShadowGenerator) BlurKernel(blurKernel float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(blurKernel)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) BlurKernel() float64 {
+	retVal := s.p.Get("blurKernel")
+	return retVal.Float()
 }
 
 // SetBlurKernel sets the BlurKernel property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#blurkernel
 func (s *ShadowGenerator) SetBlurKernel(blurKernel float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(blurKernel)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("blurKernel", blurKernel)
+	return s
 }
 
 // BlurScale returns the BlurScale property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#blurscale
-func (s *ShadowGenerator) BlurScale(blurScale float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(blurScale)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) BlurScale() float64 {
+	retVal := s.p.Get("blurScale")
+	return retVal.Float()
 }
 
 // SetBlurScale sets the BlurScale property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#blurscale
 func (s *ShadowGenerator) SetBlurScale(blurScale float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(blurScale)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("blurScale", blurScale)
+	return s
 }
 
 // ContactHardeningLightSizeUVRatio returns the ContactHardeningLightSizeUVRatio property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#contacthardeninglightsizeuvratio
-func (s *ShadowGenerator) ContactHardeningLightSizeUVRatio(contactHardeningLightSizeUVRatio float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(contactHardeningLightSizeUVRatio)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) ContactHardeningLightSizeUVRatio() float64 {
+	retVal := s.p.Get("contactHardeningLightSizeUVRatio")
+	return retVal.Float()
 }
 
 // SetContactHardeningLightSizeUVRatio sets the ContactHardeningLightSizeUVRatio property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#contacthardeninglightsizeuvratio
 func (s *ShadowGenerator) SetContactHardeningLightSizeUVRatio(contactHardeningLightSizeUVRatio float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(contactHardeningLightSizeUVRatio)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("contactHardeningLightSizeUVRatio", contactHardeningLightSizeUVRatio)
+	return s
 }
 
 // CustomShaderOptions returns the CustomShaderOptions property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#customshaderoptions
-func (s *ShadowGenerator) CustomShaderOptions(customShaderOptions *ICustomShaderOptions) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(customShaderOptions.JSObject())
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) CustomShaderOptions() *ICustomShaderOptions {
+	retVal := s.p.Get("customShaderOptions")
+	return ICustomShaderOptionsFromJSObject(retVal, s.ctx)
 }
 
 // SetCustomShaderOptions sets the CustomShaderOptions property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#customshaderoptions
 func (s *ShadowGenerator) SetCustomShaderOptions(customShaderOptions *ICustomShaderOptions) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(customShaderOptions.JSObject())
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("customShaderOptions", customShaderOptions.JSObject())
+	return s
 }
 
 // Darkness returns the Darkness property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#darkness
-func (s *ShadowGenerator) Darkness(darkness float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(darkness)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
-}
-
-// SetDarkness sets the Darkness property of class ShadowGenerator.
-//
-// https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#darkness
-func (s *ShadowGenerator) SetDarkness(darkness float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(darkness)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) Darkness() float64 {
+	retVal := s.p.Get("darkness")
+	return retVal.Float()
 }
 
 // DepthScale returns the DepthScale property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#depthscale
-func (s *ShadowGenerator) DepthScale(depthScale float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(depthScale)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) DepthScale() float64 {
+	retVal := s.p.Get("depthScale")
+	return retVal.Float()
 }
 
 // SetDepthScale sets the DepthScale property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#depthscale
 func (s *ShadowGenerator) SetDepthScale(depthScale float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(depthScale)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("depthScale", depthScale)
+	return s
 }
 
 // FILTER_BLURCLOSEEXPONENTIALSHADOWMAP returns the FILTER_BLURCLOSEEXPONENTIALSHADOWMAP property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_blurcloseexponentialshadowmap
-func (s *ShadowGenerator) FILTER_BLURCLOSEEXPONENTIALSHADOWMAP(FILTER_BLURCLOSEEXPONENTIALSHADOWMAP float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_BLURCLOSEEXPONENTIALSHADOWMAP)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) FILTER_BLURCLOSEEXPONENTIALSHADOWMAP() float64 {
+	retVal := s.p.Get("FILTER_BLURCLOSEEXPONENTIALSHADOWMAP")
+	return retVal.Float()
 }
 
 // SetFILTER_BLURCLOSEEXPONENTIALSHADOWMAP sets the FILTER_BLURCLOSEEXPONENTIALSHADOWMAP property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_blurcloseexponentialshadowmap
 func (s *ShadowGenerator) SetFILTER_BLURCLOSEEXPONENTIALSHADOWMAP(FILTER_BLURCLOSEEXPONENTIALSHADOWMAP float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_BLURCLOSEEXPONENTIALSHADOWMAP)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("FILTER_BLURCLOSEEXPONENTIALSHADOWMAP", FILTER_BLURCLOSEEXPONENTIALSHADOWMAP)
+	return s
 }
 
 // FILTER_BLUREXPONENTIALSHADOWMAP returns the FILTER_BLUREXPONENTIALSHADOWMAP property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_blurexponentialshadowmap
-func (s *ShadowGenerator) FILTER_BLUREXPONENTIALSHADOWMAP(FILTER_BLUREXPONENTIALSHADOWMAP float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_BLUREXPONENTIALSHADOWMAP)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) FILTER_BLUREXPONENTIALSHADOWMAP() float64 {
+	retVal := s.p.Get("FILTER_BLUREXPONENTIALSHADOWMAP")
+	return retVal.Float()
 }
 
 // SetFILTER_BLUREXPONENTIALSHADOWMAP sets the FILTER_BLUREXPONENTIALSHADOWMAP property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_blurexponentialshadowmap
 func (s *ShadowGenerator) SetFILTER_BLUREXPONENTIALSHADOWMAP(FILTER_BLUREXPONENTIALSHADOWMAP float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_BLUREXPONENTIALSHADOWMAP)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("FILTER_BLUREXPONENTIALSHADOWMAP", FILTER_BLUREXPONENTIALSHADOWMAP)
+	return s
 }
 
 // FILTER_CLOSEEXPONENTIALSHADOWMAP returns the FILTER_CLOSEEXPONENTIALSHADOWMAP property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_closeexponentialshadowmap
-func (s *ShadowGenerator) FILTER_CLOSEEXPONENTIALSHADOWMAP(FILTER_CLOSEEXPONENTIALSHADOWMAP float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_CLOSEEXPONENTIALSHADOWMAP)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) FILTER_CLOSEEXPONENTIALSHADOWMAP() float64 {
+	retVal := s.p.Get("FILTER_CLOSEEXPONENTIALSHADOWMAP")
+	return retVal.Float()
 }
 
 // SetFILTER_CLOSEEXPONENTIALSHADOWMAP sets the FILTER_CLOSEEXPONENTIALSHADOWMAP property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_closeexponentialshadowmap
 func (s *ShadowGenerator) SetFILTER_CLOSEEXPONENTIALSHADOWMAP(FILTER_CLOSEEXPONENTIALSHADOWMAP float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_CLOSEEXPONENTIALSHADOWMAP)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("FILTER_CLOSEEXPONENTIALSHADOWMAP", FILTER_CLOSEEXPONENTIALSHADOWMAP)
+	return s
 }
 
 // FILTER_EXPONENTIALSHADOWMAP returns the FILTER_EXPONENTIALSHADOWMAP property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_exponentialshadowmap
-func (s *ShadowGenerator) FILTER_EXPONENTIALSHADOWMAP(FILTER_EXPONENTIALSHADOWMAP float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_EXPONENTIALSHADOWMAP)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) FILTER_EXPONENTIALSHADOWMAP() float64 {
+	retVal := s.p.Get("FILTER_EXPONENTIALSHADOWMAP")
+	return retVal.Float()
 }
 
 // SetFILTER_EXPONENTIALSHADOWMAP sets the FILTER_EXPONENTIALSHADOWMAP property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_exponentialshadowmap
 func (s *ShadowGenerator) SetFILTER_EXPONENTIALSHADOWMAP(FILTER_EXPONENTIALSHADOWMAP float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_EXPONENTIALSHADOWMAP)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("FILTER_EXPONENTIALSHADOWMAP", FILTER_EXPONENTIALSHADOWMAP)
+	return s
 }
 
 // FILTER_NONE returns the FILTER_NONE property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_none
-func (s *ShadowGenerator) FILTER_NONE(FILTER_NONE float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_NONE)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) FILTER_NONE() float64 {
+	retVal := s.p.Get("FILTER_NONE")
+	return retVal.Float()
 }
 
 // SetFILTER_NONE sets the FILTER_NONE property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_none
 func (s *ShadowGenerator) SetFILTER_NONE(FILTER_NONE float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_NONE)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("FILTER_NONE", FILTER_NONE)
+	return s
 }
 
 // FILTER_PCF returns the FILTER_PCF property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_pcf
-func (s *ShadowGenerator) FILTER_PCF(FILTER_PCF float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_PCF)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) FILTER_PCF() float64 {
+	retVal := s.p.Get("FILTER_PCF")
+	return retVal.Float()
 }
 
 // SetFILTER_PCF sets the FILTER_PCF property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_pcf
 func (s *ShadowGenerator) SetFILTER_PCF(FILTER_PCF float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_PCF)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("FILTER_PCF", FILTER_PCF)
+	return s
 }
 
 // FILTER_PCSS returns the FILTER_PCSS property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_pcss
-func (s *ShadowGenerator) FILTER_PCSS(FILTER_PCSS float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_PCSS)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) FILTER_PCSS() float64 {
+	retVal := s.p.Get("FILTER_PCSS")
+	return retVal.Float()
 }
 
 // SetFILTER_PCSS sets the FILTER_PCSS property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_pcss
 func (s *ShadowGenerator) SetFILTER_PCSS(FILTER_PCSS float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_PCSS)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("FILTER_PCSS", FILTER_PCSS)
+	return s
 }
 
 // FILTER_POISSONSAMPLING returns the FILTER_POISSONSAMPLING property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_poissonsampling
-func (s *ShadowGenerator) FILTER_POISSONSAMPLING(FILTER_POISSONSAMPLING float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_POISSONSAMPLING)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) FILTER_POISSONSAMPLING() float64 {
+	retVal := s.p.Get("FILTER_POISSONSAMPLING")
+	return retVal.Float()
 }
 
 // SetFILTER_POISSONSAMPLING sets the FILTER_POISSONSAMPLING property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter_poissonsampling
 func (s *ShadowGenerator) SetFILTER_POISSONSAMPLING(FILTER_POISSONSAMPLING float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(FILTER_POISSONSAMPLING)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("FILTER_POISSONSAMPLING", FILTER_POISSONSAMPLING)
+	return s
 }
 
 // Filter returns the Filter property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter
-func (s *ShadowGenerator) Filter(filter float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(filter)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) Filter() float64 {
+	retVal := s.p.Get("filter")
+	return retVal.Float()
 }
 
 // SetFilter sets the Filter property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filter
 func (s *ShadowGenerator) SetFilter(filter float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(filter)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("filter", filter)
+	return s
 }
 
 // FilteringQuality returns the FilteringQuality property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filteringquality
-func (s *ShadowGenerator) FilteringQuality(filteringQuality float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(filteringQuality)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) FilteringQuality() float64 {
+	retVal := s.p.Get("filteringQuality")
+	return retVal.Float()
 }
 
 // SetFilteringQuality sets the FilteringQuality property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#filteringquality
 func (s *ShadowGenerator) SetFilteringQuality(filteringQuality float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(filteringQuality)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("filteringQuality", filteringQuality)
+	return s
 }
 
 // ForceBackFacesOnly returns the ForceBackFacesOnly property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#forcebackfacesonly
-func (s *ShadowGenerator) ForceBackFacesOnly(forceBackFacesOnly bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(forceBackFacesOnly)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) ForceBackFacesOnly() bool {
+	retVal := s.p.Get("forceBackFacesOnly")
+	return retVal.Bool()
 }
 
 // SetForceBackFacesOnly sets the ForceBackFacesOnly property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#forcebackfacesonly
 func (s *ShadowGenerator) SetForceBackFacesOnly(forceBackFacesOnly bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(forceBackFacesOnly)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("forceBackFacesOnly", forceBackFacesOnly)
+	return s
 }
 
 // FrustumEdgeFalloff returns the FrustumEdgeFalloff property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#frustumedgefalloff
-func (s *ShadowGenerator) FrustumEdgeFalloff(frustumEdgeFalloff float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(frustumEdgeFalloff)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) FrustumEdgeFalloff() float64 {
+	retVal := s.p.Get("frustumEdgeFalloff")
+	return retVal.Float()
 }
 
 // SetFrustumEdgeFalloff sets the FrustumEdgeFalloff property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#frustumedgefalloff
 func (s *ShadowGenerator) SetFrustumEdgeFalloff(frustumEdgeFalloff float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(frustumEdgeFalloff)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("frustumEdgeFalloff", frustumEdgeFalloff)
+	return s
 }
 
 // NormalBias returns the NormalBias property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#normalbias
-func (s *ShadowGenerator) NormalBias(normalBias float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(normalBias)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) NormalBias() float64 {
+	retVal := s.p.Get("normalBias")
+	return retVal.Float()
 }
 
 // SetNormalBias sets the NormalBias property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#normalbias
 func (s *ShadowGenerator) SetNormalBias(normalBias float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(normalBias)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("normalBias", normalBias)
+	return s
 }
 
 // OnAfterShadowMapRenderMeshObservable returns the OnAfterShadowMapRenderMeshObservable property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#onaftershadowmaprendermeshobservable
-func (s *ShadowGenerator) OnAfterShadowMapRenderMeshObservable(onAfterShadowMapRenderMeshObservable *Observable) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(onAfterShadowMapRenderMeshObservable.JSObject())
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) OnAfterShadowMapRenderMeshObservable() *Observable {
+	retVal := s.p.Get("onAfterShadowMapRenderMeshObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterShadowMapRenderMeshObservable sets the OnAfterShadowMapRenderMeshObservable property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#onaftershadowmaprendermeshobservable
 func (s *ShadowGenerator) SetOnAfterShadowMapRenderMeshObservable(onAfterShadowMapRenderMeshObservable *Observable) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(onAfterShadowMapRenderMeshObservable.JSObject())
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterShadowMapRenderMeshObservable", onAfterShadowMapRenderMeshObservable.JSObject())
+	return s
 }
 
 // OnAfterShadowMapRenderObservable returns the OnAfterShadowMapRenderObservable property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#onaftershadowmaprenderobservable
-func (s *ShadowGenerator) OnAfterShadowMapRenderObservable(onAfterShadowMapRenderObservable *Observable) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(onAfterShadowMapRenderObservable.JSObject())
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) OnAfterShadowMapRenderObservable() *Observable {
+	retVal := s.p.Get("onAfterShadowMapRenderObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnAfterShadowMapRenderObservable sets the OnAfterShadowMapRenderObservable property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#onaftershadowmaprenderobservable
 func (s *ShadowGenerator) SetOnAfterShadowMapRenderObservable(onAfterShadowMapRenderObservable *Observable) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(onAfterShadowMapRenderObservable.JSObject())
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("onAfterShadowMapRenderObservable", onAfterShadowMapRenderObservable.JSObject())
+	return s
 }
 
 // OnBeforeShadowMapRenderMeshObservable returns the OnBeforeShadowMapRenderMeshObservable property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#onbeforeshadowmaprendermeshobservable
-func (s *ShadowGenerator) OnBeforeShadowMapRenderMeshObservable(onBeforeShadowMapRenderMeshObservable *Observable) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(onBeforeShadowMapRenderMeshObservable.JSObject())
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) OnBeforeShadowMapRenderMeshObservable() *Observable {
+	retVal := s.p.Get("onBeforeShadowMapRenderMeshObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeShadowMapRenderMeshObservable sets the OnBeforeShadowMapRenderMeshObservable property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#onbeforeshadowmaprendermeshobservable
 func (s *ShadowGenerator) SetOnBeforeShadowMapRenderMeshObservable(onBeforeShadowMapRenderMeshObservable *Observable) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(onBeforeShadowMapRenderMeshObservable.JSObject())
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeShadowMapRenderMeshObservable", onBeforeShadowMapRenderMeshObservable.JSObject())
+	return s
 }
 
 // OnBeforeShadowMapRenderObservable returns the OnBeforeShadowMapRenderObservable property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#onbeforeshadowmaprenderobservable
-func (s *ShadowGenerator) OnBeforeShadowMapRenderObservable(onBeforeShadowMapRenderObservable *Observable) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(onBeforeShadowMapRenderObservable.JSObject())
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) OnBeforeShadowMapRenderObservable() *Observable {
+	retVal := s.p.Get("onBeforeShadowMapRenderObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnBeforeShadowMapRenderObservable sets the OnBeforeShadowMapRenderObservable property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#onbeforeshadowmaprenderobservable
 func (s *ShadowGenerator) SetOnBeforeShadowMapRenderObservable(onBeforeShadowMapRenderObservable *Observable) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(onBeforeShadowMapRenderObservable.JSObject())
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("onBeforeShadowMapRenderObservable", onBeforeShadowMapRenderObservable.JSObject())
+	return s
 }
 
 // QUALITY_HIGH returns the QUALITY_HIGH property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#quality_high
-func (s *ShadowGenerator) QUALITY_HIGH(QUALITY_HIGH float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(QUALITY_HIGH)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) QUALITY_HIGH() float64 {
+	retVal := s.p.Get("QUALITY_HIGH")
+	return retVal.Float()
 }
 
 // SetQUALITY_HIGH sets the QUALITY_HIGH property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#quality_high
 func (s *ShadowGenerator) SetQUALITY_HIGH(QUALITY_HIGH float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(QUALITY_HIGH)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("QUALITY_HIGH", QUALITY_HIGH)
+	return s
 }
 
 // QUALITY_LOW returns the QUALITY_LOW property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#quality_low
-func (s *ShadowGenerator) QUALITY_LOW(QUALITY_LOW float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(QUALITY_LOW)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) QUALITY_LOW() float64 {
+	retVal := s.p.Get("QUALITY_LOW")
+	return retVal.Float()
 }
 
 // SetQUALITY_LOW sets the QUALITY_LOW property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#quality_low
 func (s *ShadowGenerator) SetQUALITY_LOW(QUALITY_LOW float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(QUALITY_LOW)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("QUALITY_LOW", QUALITY_LOW)
+	return s
 }
 
 // QUALITY_MEDIUM returns the QUALITY_MEDIUM property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#quality_medium
-func (s *ShadowGenerator) QUALITY_MEDIUM(QUALITY_MEDIUM float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(QUALITY_MEDIUM)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) QUALITY_MEDIUM() float64 {
+	retVal := s.p.Get("QUALITY_MEDIUM")
+	return retVal.Float()
 }
 
 // SetQUALITY_MEDIUM sets the QUALITY_MEDIUM property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#quality_medium
 func (s *ShadowGenerator) SetQUALITY_MEDIUM(QUALITY_MEDIUM float64) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(QUALITY_MEDIUM)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("QUALITY_MEDIUM", QUALITY_MEDIUM)
+	return s
 }
 
 // TransparencyShadow returns the TransparencyShadow property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#transparencyshadow
-func (s *ShadowGenerator) TransparencyShadow(transparencyShadow bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(transparencyShadow)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
-}
-
-// SetTransparencyShadow sets the TransparencyShadow property of class ShadowGenerator.
-//
-// https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#transparencyshadow
-func (s *ShadowGenerator) SetTransparencyShadow(transparencyShadow bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(transparencyShadow)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) TransparencyShadow() bool {
+	retVal := s.p.Get("transparencyShadow")
+	return retVal.Bool()
 }
 
 // UseBlurCloseExponentialShadowMap returns the UseBlurCloseExponentialShadowMap property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#useblurcloseexponentialshadowmap
-func (s *ShadowGenerator) UseBlurCloseExponentialShadowMap(useBlurCloseExponentialShadowMap bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useBlurCloseExponentialShadowMap)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) UseBlurCloseExponentialShadowMap() bool {
+	retVal := s.p.Get("useBlurCloseExponentialShadowMap")
+	return retVal.Bool()
 }
 
 // SetUseBlurCloseExponentialShadowMap sets the UseBlurCloseExponentialShadowMap property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#useblurcloseexponentialshadowmap
 func (s *ShadowGenerator) SetUseBlurCloseExponentialShadowMap(useBlurCloseExponentialShadowMap bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useBlurCloseExponentialShadowMap)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("useBlurCloseExponentialShadowMap", useBlurCloseExponentialShadowMap)
+	return s
 }
 
 // UseBlurExponentialShadowMap returns the UseBlurExponentialShadowMap property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#useblurexponentialshadowmap
-func (s *ShadowGenerator) UseBlurExponentialShadowMap(useBlurExponentialShadowMap bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useBlurExponentialShadowMap)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) UseBlurExponentialShadowMap() bool {
+	retVal := s.p.Get("useBlurExponentialShadowMap")
+	return retVal.Bool()
 }
 
 // SetUseBlurExponentialShadowMap sets the UseBlurExponentialShadowMap property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#useblurexponentialshadowmap
 func (s *ShadowGenerator) SetUseBlurExponentialShadowMap(useBlurExponentialShadowMap bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useBlurExponentialShadowMap)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("useBlurExponentialShadowMap", useBlurExponentialShadowMap)
+	return s
 }
 
 // UseCloseExponentialShadowMap returns the UseCloseExponentialShadowMap property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#usecloseexponentialshadowmap
-func (s *ShadowGenerator) UseCloseExponentialShadowMap(useCloseExponentialShadowMap bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useCloseExponentialShadowMap)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) UseCloseExponentialShadowMap() bool {
+	retVal := s.p.Get("useCloseExponentialShadowMap")
+	return retVal.Bool()
 }
 
 // SetUseCloseExponentialShadowMap sets the UseCloseExponentialShadowMap property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#usecloseexponentialshadowmap
 func (s *ShadowGenerator) SetUseCloseExponentialShadowMap(useCloseExponentialShadowMap bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useCloseExponentialShadowMap)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("useCloseExponentialShadowMap", useCloseExponentialShadowMap)
+	return s
 }
 
 // UseContactHardeningShadow returns the UseContactHardeningShadow property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#usecontacthardeningshadow
-func (s *ShadowGenerator) UseContactHardeningShadow(useContactHardeningShadow bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useContactHardeningShadow)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) UseContactHardeningShadow() bool {
+	retVal := s.p.Get("useContactHardeningShadow")
+	return retVal.Bool()
 }
 
 // SetUseContactHardeningShadow sets the UseContactHardeningShadow property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#usecontacthardeningshadow
 func (s *ShadowGenerator) SetUseContactHardeningShadow(useContactHardeningShadow bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useContactHardeningShadow)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("useContactHardeningShadow", useContactHardeningShadow)
+	return s
 }
 
 // UseExponentialShadowMap returns the UseExponentialShadowMap property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#useexponentialshadowmap
-func (s *ShadowGenerator) UseExponentialShadowMap(useExponentialShadowMap bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useExponentialShadowMap)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) UseExponentialShadowMap() bool {
+	retVal := s.p.Get("useExponentialShadowMap")
+	return retVal.Bool()
 }
 
 // SetUseExponentialShadowMap sets the UseExponentialShadowMap property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#useexponentialshadowmap
 func (s *ShadowGenerator) SetUseExponentialShadowMap(useExponentialShadowMap bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useExponentialShadowMap)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("useExponentialShadowMap", useExponentialShadowMap)
+	return s
 }
 
 // UseKernelBlur returns the UseKernelBlur property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#usekernelblur
-func (s *ShadowGenerator) UseKernelBlur(useKernelBlur bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useKernelBlur)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) UseKernelBlur() bool {
+	retVal := s.p.Get("useKernelBlur")
+	return retVal.Bool()
 }
 
 // SetUseKernelBlur sets the UseKernelBlur property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#usekernelblur
 func (s *ShadowGenerator) SetUseKernelBlur(useKernelBlur bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(useKernelBlur)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("useKernelBlur", useKernelBlur)
+	return s
 }
 
 // UsePercentageCloserFiltering returns the UsePercentageCloserFiltering property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#usepercentagecloserfiltering
-func (s *ShadowGenerator) UsePercentageCloserFiltering(usePercentageCloserFiltering bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(usePercentageCloserFiltering)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) UsePercentageCloserFiltering() bool {
+	retVal := s.p.Get("usePercentageCloserFiltering")
+	return retVal.Bool()
 }
 
 // SetUsePercentageCloserFiltering sets the UsePercentageCloserFiltering property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#usepercentagecloserfiltering
 func (s *ShadowGenerator) SetUsePercentageCloserFiltering(usePercentageCloserFiltering bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(usePercentageCloserFiltering)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("usePercentageCloserFiltering", usePercentageCloserFiltering)
+	return s
 }
 
 // UsePoissonSampling returns the UsePoissonSampling property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#usepoissonsampling
-func (s *ShadowGenerator) UsePoissonSampling(usePoissonSampling bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(usePoissonSampling)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+func (s *ShadowGenerator) UsePoissonSampling() bool {
+	retVal := s.p.Get("usePoissonSampling")
+	return retVal.Bool()
 }
 
 // SetUsePoissonSampling sets the UsePoissonSampling property of class ShadowGenerator.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#usepoissonsampling
 func (s *ShadowGenerator) SetUsePoissonSampling(usePoissonSampling bool) *ShadowGenerator {
-	p := ba.ctx.Get("ShadowGenerator").New(usePoissonSampling)
-	return ShadowGeneratorFromJSObject(p, ba.ctx)
+	s.p.Set("usePoissonSampling", usePoissonSampling)
+	return s
 }
-
-*/

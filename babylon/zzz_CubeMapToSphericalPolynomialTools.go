@@ -62,7 +62,3 @@ func (c *CubeMapToSphericalPolynomialTools) ConvertCubeMapToSphericalPolynomial(
 	retVal := c.p.Call("ConvertCubeMapToSphericalPolynomial", args...)
 	return SphericalPolynomialFromJSObject(retVal, c.ctx)
 }
-
-/*
-
- */

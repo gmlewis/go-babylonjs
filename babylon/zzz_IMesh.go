@@ -36,22 +36,18 @@ func IMeshArrayToJSArray(array []*IMesh) []interface{} {
 	return result
 }
 
-/*
-
 // Primitives returns the Primitives property of class IMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imesh#primitives
-func (i *IMesh) Primitives(primitives *IMeshPrimitive) *IMesh {
-	p := ba.ctx.Get("IMesh").New(primitives.JSObject())
-	return IMeshFromJSObject(p, ba.ctx)
+func (i *IMesh) Primitives() *IMeshPrimitive {
+	retVal := i.p.Get("primitives")
+	return IMeshPrimitiveFromJSObject(retVal, i.ctx)
 }
 
 // SetPrimitives sets the Primitives property of class IMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imesh#primitives
 func (i *IMesh) SetPrimitives(primitives *IMeshPrimitive) *IMesh {
-	p := ba.ctx.Get("IMesh").New(primitives.JSObject())
-	return IMeshFromJSObject(p, ba.ctx)
+	i.p.Set("primitives", primitives.JSObject())
+	return i
 }
-
-*/

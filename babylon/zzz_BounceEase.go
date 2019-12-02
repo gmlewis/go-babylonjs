@@ -70,38 +70,34 @@ func (ba *Babylon) NewBounceEase(opts *NewBounceEaseOpts) *BounceEase {
 	return BounceEaseFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Bounces returns the Bounces property of class BounceEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bounceease#bounces
-func (b *BounceEase) Bounces(bounces float64) *BounceEase {
-	p := ba.ctx.Get("BounceEase").New(bounces)
-	return BounceEaseFromJSObject(p, ba.ctx)
+func (b *BounceEase) Bounces() float64 {
+	retVal := b.p.Get("bounces")
+	return retVal.Float()
 }
 
 // SetBounces sets the Bounces property of class BounceEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bounceease#bounces
 func (b *BounceEase) SetBounces(bounces float64) *BounceEase {
-	p := ba.ctx.Get("BounceEase").New(bounces)
-	return BounceEaseFromJSObject(p, ba.ctx)
+	b.p.Set("bounces", bounces)
+	return b
 }
 
 // Bounciness returns the Bounciness property of class BounceEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bounceease#bounciness
-func (b *BounceEase) Bounciness(bounciness float64) *BounceEase {
-	p := ba.ctx.Get("BounceEase").New(bounciness)
-	return BounceEaseFromJSObject(p, ba.ctx)
+func (b *BounceEase) Bounciness() float64 {
+	retVal := b.p.Get("bounciness")
+	return retVal.Float()
 }
 
 // SetBounciness sets the Bounciness property of class BounceEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bounceease#bounciness
 func (b *BounceEase) SetBounciness(bounciness float64) *BounceEase {
-	p := ba.ctx.Get("BounceEase").New(bounciness)
-	return BounceEaseFromJSObject(p, ba.ctx)
+	b.p.Set("bounciness", bounciness)
+	return b
 }
-
-*/

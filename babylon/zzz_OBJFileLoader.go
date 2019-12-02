@@ -186,166 +186,162 @@ func (o *OBJFileLoader) LoadAsync(scene *Scene, data string, rootUrl string, opt
 	return PromiseFromJSObject(retVal, o.ctx)
 }
 
-/*
-
 // COMPUTE_NORMALS returns the COMPUTE_NORMALS property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#compute_normals
-func (o *OBJFileLoader) COMPUTE_NORMALS(COMPUTE_NORMALS bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(COMPUTE_NORMALS)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+func (o *OBJFileLoader) COMPUTE_NORMALS() bool {
+	retVal := o.p.Get("COMPUTE_NORMALS")
+	return retVal.Bool()
 }
 
 // SetCOMPUTE_NORMALS sets the COMPUTE_NORMALS property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#compute_normals
 func (o *OBJFileLoader) SetCOMPUTE_NORMALS(COMPUTE_NORMALS bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(COMPUTE_NORMALS)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+	o.p.Set("COMPUTE_NORMALS", COMPUTE_NORMALS)
+	return o
 }
 
 // Extensions returns the Extensions property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#extensions
-func (o *OBJFileLoader) Extensions(extensions string) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(extensions)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+func (o *OBJFileLoader) Extensions() string {
+	retVal := o.p.Get("extensions")
+	return retVal.String()
 }
 
 // SetExtensions sets the Extensions property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#extensions
 func (o *OBJFileLoader) SetExtensions(extensions string) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(extensions)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+	o.p.Set("extensions", extensions)
+	return o
 }
 
 // IMPORT_VERTEX_COLORS returns the IMPORT_VERTEX_COLORS property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#import_vertex_colors
-func (o *OBJFileLoader) IMPORT_VERTEX_COLORS(IMPORT_VERTEX_COLORS bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(IMPORT_VERTEX_COLORS)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+func (o *OBJFileLoader) IMPORT_VERTEX_COLORS() bool {
+	retVal := o.p.Get("IMPORT_VERTEX_COLORS")
+	return retVal.Bool()
 }
 
 // SetIMPORT_VERTEX_COLORS sets the IMPORT_VERTEX_COLORS property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#import_vertex_colors
 func (o *OBJFileLoader) SetIMPORT_VERTEX_COLORS(IMPORT_VERTEX_COLORS bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(IMPORT_VERTEX_COLORS)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+	o.p.Set("IMPORT_VERTEX_COLORS", IMPORT_VERTEX_COLORS)
+	return o
 }
 
 // INVERT_TEXTURE_Y returns the INVERT_TEXTURE_Y property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#invert_texture_y
-func (o *OBJFileLoader) INVERT_TEXTURE_Y(INVERT_TEXTURE_Y bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(INVERT_TEXTURE_Y)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+func (o *OBJFileLoader) INVERT_TEXTURE_Y() bool {
+	retVal := o.p.Get("INVERT_TEXTURE_Y")
+	return retVal.Bool()
 }
 
 // SetINVERT_TEXTURE_Y sets the INVERT_TEXTURE_Y property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#invert_texture_y
 func (o *OBJFileLoader) SetINVERT_TEXTURE_Y(INVERT_TEXTURE_Y bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(INVERT_TEXTURE_Y)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+	o.p.Set("INVERT_TEXTURE_Y", INVERT_TEXTURE_Y)
+	return o
 }
 
 // INVERT_Y returns the INVERT_Y property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#invert_y
-func (o *OBJFileLoader) INVERT_Y(INVERT_Y bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(INVERT_Y)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+func (o *OBJFileLoader) INVERT_Y() bool {
+	retVal := o.p.Get("INVERT_Y")
+	return retVal.Bool()
 }
 
 // SetINVERT_Y sets the INVERT_Y property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#invert_y
 func (o *OBJFileLoader) SetINVERT_Y(INVERT_Y bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(INVERT_Y)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+	o.p.Set("INVERT_Y", INVERT_Y)
+	return o
 }
 
 // MATERIAL_LOADING_FAILS_SILENTLY returns the MATERIAL_LOADING_FAILS_SILENTLY property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#material_loading_fails_silently
-func (o *OBJFileLoader) MATERIAL_LOADING_FAILS_SILENTLY(MATERIAL_LOADING_FAILS_SILENTLY bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(MATERIAL_LOADING_FAILS_SILENTLY)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+func (o *OBJFileLoader) MATERIAL_LOADING_FAILS_SILENTLY() bool {
+	retVal := o.p.Get("MATERIAL_LOADING_FAILS_SILENTLY")
+	return retVal.Bool()
 }
 
 // SetMATERIAL_LOADING_FAILS_SILENTLY sets the MATERIAL_LOADING_FAILS_SILENTLY property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#material_loading_fails_silently
 func (o *OBJFileLoader) SetMATERIAL_LOADING_FAILS_SILENTLY(MATERIAL_LOADING_FAILS_SILENTLY bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(MATERIAL_LOADING_FAILS_SILENTLY)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+	o.p.Set("MATERIAL_LOADING_FAILS_SILENTLY", MATERIAL_LOADING_FAILS_SILENTLY)
+	return o
 }
 
 // Name returns the Name property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#name
-func (o *OBJFileLoader) Name(name string) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(name)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+func (o *OBJFileLoader) Name() string {
+	retVal := o.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#name
 func (o *OBJFileLoader) SetName(name string) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(name)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+	o.p.Set("name", name)
+	return o
 }
 
 // OPTIMIZE_WITH_UV returns the OPTIMIZE_WITH_UV property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#optimize_with_uv
-func (o *OBJFileLoader) OPTIMIZE_WITH_UV(OPTIMIZE_WITH_UV bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(OPTIMIZE_WITH_UV)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+func (o *OBJFileLoader) OPTIMIZE_WITH_UV() bool {
+	retVal := o.p.Get("OPTIMIZE_WITH_UV")
+	return retVal.Bool()
 }
 
 // SetOPTIMIZE_WITH_UV sets the OPTIMIZE_WITH_UV property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#optimize_with_uv
 func (o *OBJFileLoader) SetOPTIMIZE_WITH_UV(OPTIMIZE_WITH_UV bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(OPTIMIZE_WITH_UV)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+	o.p.Set("OPTIMIZE_WITH_UV", OPTIMIZE_WITH_UV)
+	return o
 }
 
 // SKIP_MATERIALS returns the SKIP_MATERIALS property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#skip_materials
-func (o *OBJFileLoader) SKIP_MATERIALS(SKIP_MATERIALS bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(SKIP_MATERIALS)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+func (o *OBJFileLoader) SKIP_MATERIALS() bool {
+	retVal := o.p.Get("SKIP_MATERIALS")
+	return retVal.Bool()
 }
 
 // SetSKIP_MATERIALS sets the SKIP_MATERIALS property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#skip_materials
 func (o *OBJFileLoader) SetSKIP_MATERIALS(SKIP_MATERIALS bool) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(SKIP_MATERIALS)
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+	o.p.Set("SKIP_MATERIALS", SKIP_MATERIALS)
+	return o
 }
 
 // UV_SCALING returns the UV_SCALING property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#uv_scaling
-func (o *OBJFileLoader) UV_SCALING(UV_SCALING *Vector2) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(UV_SCALING.JSObject())
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+func (o *OBJFileLoader) UV_SCALING() *Vector2 {
+	retVal := o.p.Get("UV_SCALING")
+	return Vector2FromJSObject(retVal, o.ctx)
 }
 
 // SetUV_SCALING sets the UV_SCALING property of class OBJFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#uv_scaling
 func (o *OBJFileLoader) SetUV_SCALING(UV_SCALING *Vector2) *OBJFileLoader {
-	p := ba.ctx.Get("OBJFileLoader").New(UV_SCALING.JSObject())
-	return OBJFileLoaderFromJSObject(p, ba.ctx)
+	o.p.Set("UV_SCALING", UV_SCALING.JSObject())
+	return o
 }
-
-*/

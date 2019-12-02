@@ -69,22 +69,18 @@ func (s *StateCondition) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // Value returns the Value property of class StateCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.statecondition#value
-func (s *StateCondition) Value(value string) *StateCondition {
-	p := ba.ctx.Get("StateCondition").New(value)
-	return StateConditionFromJSObject(p, ba.ctx)
+func (s *StateCondition) Value() string {
+	retVal := s.p.Get("value")
+	return retVal.String()
 }
 
 // SetValue sets the Value property of class StateCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.statecondition#value
 func (s *StateCondition) SetValue(value string) *StateCondition {
-	p := ba.ctx.Get("StateCondition").New(value)
-	return StateConditionFromJSObject(p, ba.ctx)
+	s.p.Set("value", value)
+	return s
 }
-
-*/

@@ -36,38 +36,34 @@ func IExplorerExtensibilityOptionArrayToJSArray(array []*IExplorerExtensibilityO
 	return result
 }
 
-/*
-
 // Action returns the Action property of class IExplorerExtensibilityOption.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilityoption#action
-func (i *IExplorerExtensibilityOption) Action(action func()) *IExplorerExtensibilityOption {
-	p := ba.ctx.Get("IExplorerExtensibilityOption").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {action(); return nil}))
-	return IExplorerExtensibilityOptionFromJSObject(p, ba.ctx)
+func (i *IExplorerExtensibilityOption) Action() js.Value {
+	retVal := i.p.Get("action")
+	return retVal
 }
 
 // SetAction sets the Action property of class IExplorerExtensibilityOption.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilityoption#action
 func (i *IExplorerExtensibilityOption) SetAction(action func()) *IExplorerExtensibilityOption {
-	p := ba.ctx.Get("IExplorerExtensibilityOption").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {action(); return nil}))
-	return IExplorerExtensibilityOptionFromJSObject(p, ba.ctx)
+	i.p.Set("action", js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
+	return i
 }
 
 // Label returns the Label property of class IExplorerExtensibilityOption.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilityoption#label
-func (i *IExplorerExtensibilityOption) Label(label string) *IExplorerExtensibilityOption {
-	p := ba.ctx.Get("IExplorerExtensibilityOption").New(label)
-	return IExplorerExtensibilityOptionFromJSObject(p, ba.ctx)
+func (i *IExplorerExtensibilityOption) Label() string {
+	retVal := i.p.Get("label")
+	return retVal.String()
 }
 
 // SetLabel sets the Label property of class IExplorerExtensibilityOption.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilityoption#label
 func (i *IExplorerExtensibilityOption) SetLabel(label string) *IExplorerExtensibilityOption {
-	p := ba.ctx.Get("IExplorerExtensibilityOption").New(label)
-	return IExplorerExtensibilityOptionFromJSObject(p, ba.ctx)
+	i.p.Set("label", label)
+	return i
 }
-
-*/

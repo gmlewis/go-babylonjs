@@ -85,7 +85,3 @@ func (p *ParticlesOptimization) GetDescription() string {
 	retVal := p.p.Call("getDescription")
 	return retVal.String()
 }
-
-/*
-
- */

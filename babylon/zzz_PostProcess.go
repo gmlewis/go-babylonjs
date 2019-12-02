@@ -323,502 +323,498 @@ func (p *PostProcess) UseOwnOutput() {
 	p.p.Call("useOwnOutput")
 }
 
-/*
-
 // AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#adaptscaletocurrentviewport
-func (p *PostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(adaptScaleToCurrentViewport)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) AdaptScaleToCurrentViewport() bool {
+	retVal := p.p.Get("adaptScaleToCurrentViewport")
+	return retVal.Bool()
 }
 
 // SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#adaptscaletocurrentviewport
 func (p *PostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(adaptScaleToCurrentViewport)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("adaptScaleToCurrentViewport", adaptScaleToCurrentViewport)
+	return p
 }
 
 // AlphaConstants returns the AlphaConstants property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#alphaconstants
-func (p *PostProcess) AlphaConstants(alphaConstants *Color4) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(alphaConstants.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) AlphaConstants() *Color4 {
+	retVal := p.p.Get("alphaConstants")
+	return Color4FromJSObject(retVal, p.ctx)
 }
 
 // SetAlphaConstants sets the AlphaConstants property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#alphaconstants
 func (p *PostProcess) SetAlphaConstants(alphaConstants *Color4) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(alphaConstants.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("alphaConstants", alphaConstants.JSObject())
+	return p
 }
 
 // AlphaMode returns the AlphaMode property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#alphamode
-func (p *PostProcess) AlphaMode(alphaMode float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(alphaMode)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) AlphaMode() float64 {
+	retVal := p.p.Get("alphaMode")
+	return retVal.Float()
 }
 
 // SetAlphaMode sets the AlphaMode property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#alphamode
 func (p *PostProcess) SetAlphaMode(alphaMode float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(alphaMode)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("alphaMode", alphaMode)
+	return p
 }
 
 // AlwaysForcePOT returns the AlwaysForcePOT property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#alwaysforcepot
-func (p *PostProcess) AlwaysForcePOT(alwaysForcePOT bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(alwaysForcePOT)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) AlwaysForcePOT() bool {
+	retVal := p.p.Get("alwaysForcePOT")
+	return retVal.Bool()
 }
 
 // SetAlwaysForcePOT sets the AlwaysForcePOT property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#alwaysforcepot
 func (p *PostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(alwaysForcePOT)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("alwaysForcePOT", alwaysForcePOT)
+	return p
 }
 
 // Animations returns the Animations property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#animations
-func (p *PostProcess) Animations(animations *Animation) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(animations.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) Animations() *Animation {
+	retVal := p.p.Get("animations")
+	return AnimationFromJSObject(retVal, p.ctx)
 }
 
 // SetAnimations sets the Animations property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#animations
 func (p *PostProcess) SetAnimations(animations *Animation) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(animations.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("animations", animations.JSObject())
+	return p
 }
 
 // AspectRatio returns the AspectRatio property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#aspectratio
-func (p *PostProcess) AspectRatio(aspectRatio float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(aspectRatio)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) AspectRatio() float64 {
+	retVal := p.p.Get("aspectRatio")
+	return retVal.Float()
 }
 
 // SetAspectRatio sets the AspectRatio property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#aspectratio
 func (p *PostProcess) SetAspectRatio(aspectRatio float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(aspectRatio)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("aspectRatio", aspectRatio)
+	return p
 }
 
 // AutoClear returns the AutoClear property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#autoclear
-func (p *PostProcess) AutoClear(autoClear bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(autoClear)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) AutoClear() bool {
+	retVal := p.p.Get("autoClear")
+	return retVal.Bool()
 }
 
 // SetAutoClear sets the AutoClear property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#autoclear
 func (p *PostProcess) SetAutoClear(autoClear bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(autoClear)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("autoClear", autoClear)
+	return p
 }
 
 // ClearColor returns the ClearColor property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#clearcolor
-func (p *PostProcess) ClearColor(clearColor *Color4) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(clearColor.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) ClearColor() *Color4 {
+	retVal := p.p.Get("clearColor")
+	return Color4FromJSObject(retVal, p.ctx)
 }
 
 // SetClearColor sets the ClearColor property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#clearcolor
 func (p *PostProcess) SetClearColor(clearColor *Color4) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(clearColor.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("clearColor", clearColor.JSObject())
+	return p
 }
 
 // EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#enablepixelperfectmode
-func (p *PostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(enablePixelPerfectMode)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) EnablePixelPerfectMode() bool {
+	retVal := p.p.Get("enablePixelPerfectMode")
+	return retVal.Bool()
 }
 
 // SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#enablepixelperfectmode
 func (p *PostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(enablePixelPerfectMode)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("enablePixelPerfectMode", enablePixelPerfectMode)
+	return p
 }
 
 // ForceFullscreenViewport returns the ForceFullscreenViewport property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#forcefullscreenviewport
-func (p *PostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(forceFullscreenViewport)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) ForceFullscreenViewport() bool {
+	retVal := p.p.Get("forceFullscreenViewport")
+	return retVal.Bool()
 }
 
 // SetForceFullscreenViewport sets the ForceFullscreenViewport property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#forcefullscreenviewport
 func (p *PostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(forceFullscreenViewport)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("forceFullscreenViewport", forceFullscreenViewport)
+	return p
 }
 
 // Height returns the Height property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#height
-func (p *PostProcess) Height(height float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(height)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) Height() float64 {
+	retVal := p.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#height
 func (p *PostProcess) SetHeight(height float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(height)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("height", height)
+	return p
 }
 
 // InputTexture returns the InputTexture property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#inputtexture
-func (p *PostProcess) InputTexture(inputTexture *InternalTexture) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(inputTexture.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) InputTexture() *InternalTexture {
+	retVal := p.p.Get("inputTexture")
+	return InternalTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetInputTexture sets the InputTexture property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#inputtexture
 func (p *PostProcess) SetInputTexture(inputTexture *InternalTexture) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(inputTexture.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("inputTexture", inputTexture.JSObject())
+	return p
 }
 
 // InspectableCustomProperties returns the InspectableCustomProperties property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#inspectablecustomproperties
-func (p *PostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(inspectableCustomProperties.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) InspectableCustomProperties() *IInspectable {
+	retVal := p.p.Get("inspectableCustomProperties")
+	return IInspectableFromJSObject(retVal, p.ctx)
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#inspectablecustomproperties
 func (p *PostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(inspectableCustomProperties.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+	return p
 }
 
 // IsSupported returns the IsSupported property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#issupported
-func (p *PostProcess) IsSupported(isSupported bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(isSupported)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) IsSupported() bool {
+	retVal := p.p.Get("isSupported")
+	return retVal.Bool()
 }
 
 // SetIsSupported sets the IsSupported property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#issupported
 func (p *PostProcess) SetIsSupported(isSupported bool) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(isSupported)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("isSupported", isSupported)
+	return p
 }
 
 // Name returns the Name property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#name
-func (p *PostProcess) Name(name string) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(name)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) Name() string {
+	retVal := p.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#name
 func (p *PostProcess) SetName(name string) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(name)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("name", name)
+	return p
 }
 
 // OnActivate returns the OnActivate property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onactivate
-func (p *PostProcess) OnActivate(onActivate func()) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) OnActivate() js.Value {
+	retVal := p.p.Get("onActivate")
+	return retVal
 }
 
 // SetOnActivate sets the OnActivate property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onactivate
 func (p *PostProcess) SetOnActivate(onActivate func()) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onActivate(); return nil}))
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("onActivate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onActivate(); return nil }))
+	return p
 }
 
 // OnActivateObservable returns the OnActivateObservable property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onactivateobservable
-func (p *PostProcess) OnActivateObservable(onActivateObservable *Observable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(onActivateObservable.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) OnActivateObservable() *Observable {
+	retVal := p.p.Get("onActivateObservable")
+	return ObservableFromJSObject(retVal, p.ctx)
 }
 
 // SetOnActivateObservable sets the OnActivateObservable property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onactivateobservable
 func (p *PostProcess) SetOnActivateObservable(onActivateObservable *Observable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(onActivateObservable.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("onActivateObservable", onActivateObservable.JSObject())
+	return p
 }
 
 // OnAfterRender returns the OnAfterRender property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onafterrender
-func (p *PostProcess) OnAfterRender(onAfterRender func()) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) OnAfterRender() js.Value {
+	retVal := p.p.Get("onAfterRender")
+	return retVal
 }
 
 // SetOnAfterRender sets the OnAfterRender property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onafterrender
 func (p *PostProcess) SetOnAfterRender(onAfterRender func()) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onAfterRender(); return nil}))
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("onAfterRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAfterRender(); return nil }))
+	return p
 }
 
 // OnAfterRenderObservable returns the OnAfterRenderObservable property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onafterrenderobservable
-func (p *PostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(onAfterRenderObservable.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) OnAfterRenderObservable() *Observable {
+	retVal := p.p.Get("onAfterRenderObservable")
+	return ObservableFromJSObject(retVal, p.ctx)
 }
 
 // SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onafterrenderobservable
 func (p *PostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(onAfterRenderObservable.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("onAfterRenderObservable", onAfterRenderObservable.JSObject())
+	return p
 }
 
 // OnApply returns the OnApply property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onapply
-func (p *PostProcess) OnApply(onApply func()) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) OnApply() js.Value {
+	retVal := p.p.Get("onApply")
+	return retVal
 }
 
 // SetOnApply sets the OnApply property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onapply
 func (p *PostProcess) SetOnApply(onApply func()) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("onApply", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onApply(); return nil }))
+	return p
 }
 
 // OnApplyObservable returns the OnApplyObservable property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onapplyobservable
-func (p *PostProcess) OnApplyObservable(onApplyObservable *Observable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(onApplyObservable.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) OnApplyObservable() *Observable {
+	retVal := p.p.Get("onApplyObservable")
+	return ObservableFromJSObject(retVal, p.ctx)
 }
 
 // SetOnApplyObservable sets the OnApplyObservable property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onapplyobservable
 func (p *PostProcess) SetOnApplyObservable(onApplyObservable *Observable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(onApplyObservable.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("onApplyObservable", onApplyObservable.JSObject())
+	return p
 }
 
 // OnBeforeRender returns the OnBeforeRender property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onbeforerender
-func (p *PostProcess) OnBeforeRender(onBeforeRender func()) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) OnBeforeRender() js.Value {
+	retVal := p.p.Get("onBeforeRender")
+	return retVal
 }
 
 // SetOnBeforeRender sets the OnBeforeRender property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onbeforerender
 func (p *PostProcess) SetOnBeforeRender(onBeforeRender func()) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBeforeRender(); return nil}))
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("onBeforeRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onBeforeRender(); return nil }))
+	return p
 }
 
 // OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onbeforerenderobservable
-func (p *PostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(onBeforeRenderObservable.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) OnBeforeRenderObservable() *Observable {
+	retVal := p.p.Get("onBeforeRenderObservable")
+	return ObservableFromJSObject(retVal, p.ctx)
 }
 
 // SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onbeforerenderobservable
 func (p *PostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(onBeforeRenderObservable.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("onBeforeRenderObservable", onBeforeRenderObservable.JSObject())
+	return p
 }
 
 // OnSizeChanged returns the OnSizeChanged property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onsizechanged
-func (p *PostProcess) OnSizeChanged(onSizeChanged func()) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) OnSizeChanged() js.Value {
+	retVal := p.p.Get("onSizeChanged")
+	return retVal
 }
 
 // SetOnSizeChanged sets the OnSizeChanged property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onsizechanged
 func (p *PostProcess) SetOnSizeChanged(onSizeChanged func()) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSizeChanged(); return nil}))
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("onSizeChanged", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSizeChanged(); return nil }))
+	return p
 }
 
 // OnSizeChangedObservable returns the OnSizeChangedObservable property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onsizechangedobservable
-func (p *PostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(onSizeChangedObservable.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) OnSizeChangedObservable() *Observable {
+	retVal := p.p.Get("onSizeChangedObservable")
+	return ObservableFromJSObject(retVal, p.ctx)
 }
 
 // SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onsizechangedobservable
 func (p *PostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(onSizeChangedObservable.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("onSizeChangedObservable", onSizeChangedObservable.JSObject())
+	return p
 }
 
 // RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#rendertargetsamplingmode
-func (p *PostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(renderTargetSamplingMode)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) RenderTargetSamplingMode() float64 {
+	retVal := p.p.Get("renderTargetSamplingMode")
+	return retVal.Float()
 }
 
 // SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#rendertargetsamplingmode
 func (p *PostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(renderTargetSamplingMode)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("renderTargetSamplingMode", renderTargetSamplingMode)
+	return p
 }
 
 // Samples returns the Samples property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#samples
-func (p *PostProcess) Samples(samples float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(samples)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) Samples() float64 {
+	retVal := p.p.Get("samples")
+	return retVal.Float()
 }
 
 // SetSamples sets the Samples property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#samples
 func (p *PostProcess) SetSamples(samples float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(samples)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("samples", samples)
+	return p
 }
 
 // ScaleMode returns the ScaleMode property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#scalemode
-func (p *PostProcess) ScaleMode(scaleMode float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(scaleMode)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) ScaleMode() float64 {
+	retVal := p.p.Get("scaleMode")
+	return retVal.Float()
 }
 
 // SetScaleMode sets the ScaleMode property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#scalemode
 func (p *PostProcess) SetScaleMode(scaleMode float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(scaleMode)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("scaleMode", scaleMode)
+	return p
 }
 
 // TexelSize returns the TexelSize property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#texelsize
-func (p *PostProcess) TexelSize(texelSize *Vector2) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(texelSize.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) TexelSize() *Vector2 {
+	retVal := p.p.Get("texelSize")
+	return Vector2FromJSObject(retVal, p.ctx)
 }
 
 // SetTexelSize sets the TexelSize property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#texelsize
 func (p *PostProcess) SetTexelSize(texelSize *Vector2) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(texelSize.JSObject())
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("texelSize", texelSize.JSObject())
+	return p
 }
 
 // UniqueId returns the UniqueId property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#uniqueid
-func (p *PostProcess) UniqueId(uniqueId float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(uniqueId)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) UniqueId() float64 {
+	retVal := p.p.Get("uniqueId")
+	return retVal.Float()
 }
 
 // SetUniqueId sets the UniqueId property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#uniqueid
 func (p *PostProcess) SetUniqueId(uniqueId float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(uniqueId)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("uniqueId", uniqueId)
+	return p
 }
 
 // Width returns the Width property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#width
-func (p *PostProcess) Width(width float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(width)
-	return PostProcessFromJSObject(p, ba.ctx)
+func (p *PostProcess) Width() float64 {
+	retVal := p.p.Get("width")
+	return retVal.Float()
 }
 
 // SetWidth sets the Width property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#width
 func (p *PostProcess) SetWidth(width float64) *PostProcess {
-	p := ba.ctx.Get("PostProcess").New(width)
-	return PostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("width", width)
+	return p
 }
-
-*/

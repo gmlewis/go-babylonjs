@@ -89,22 +89,18 @@ func (ba *Babylon) NewExtractHighlightsPostProcess(name string, options float64,
 	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Threshold returns the Threshold property of class ExtractHighlightsPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#threshold
-func (e *ExtractHighlightsPostProcess) Threshold(threshold float64) *ExtractHighlightsPostProcess {
-	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(threshold)
-	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+func (e *ExtractHighlightsPostProcess) Threshold() float64 {
+	retVal := e.p.Get("threshold")
+	return retVal.Float()
 }
 
 // SetThreshold sets the Threshold property of class ExtractHighlightsPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#threshold
 func (e *ExtractHighlightsPostProcess) SetThreshold(threshold float64) *ExtractHighlightsPostProcess {
-	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(threshold)
-	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+	e.p.Set("threshold", threshold)
+	return e
 }
-
-*/

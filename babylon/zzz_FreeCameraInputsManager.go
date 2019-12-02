@@ -139,7 +139,3 @@ func (f *FreeCameraInputsManager) RemoveMouse() *FreeCameraInputsManager {
 	retVal := f.p.Call("removeMouse")
 	return FreeCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
-
-/*
-
- */

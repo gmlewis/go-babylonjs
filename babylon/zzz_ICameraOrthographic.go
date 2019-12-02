@@ -36,70 +36,66 @@ func ICameraOrthographicArrayToJSArray(array []*ICameraOrthographic) []interface
 	return result
 }
 
-/*
-
 // Xmag returns the Xmag property of class ICameraOrthographic.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#xmag
-func (i *ICameraOrthographic) Xmag(xmag float64) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(xmag)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
+func (i *ICameraOrthographic) Xmag() float64 {
+	retVal := i.p.Get("xmag")
+	return retVal.Float()
 }
 
 // SetXmag sets the Xmag property of class ICameraOrthographic.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#xmag
 func (i *ICameraOrthographic) SetXmag(xmag float64) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(xmag)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
+	i.p.Set("xmag", xmag)
+	return i
 }
 
 // Ymag returns the Ymag property of class ICameraOrthographic.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#ymag
-func (i *ICameraOrthographic) Ymag(ymag float64) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(ymag)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
+func (i *ICameraOrthographic) Ymag() float64 {
+	retVal := i.p.Get("ymag")
+	return retVal.Float()
 }
 
 // SetYmag sets the Ymag property of class ICameraOrthographic.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#ymag
 func (i *ICameraOrthographic) SetYmag(ymag float64) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(ymag)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
+	i.p.Set("ymag", ymag)
+	return i
 }
 
 // Zfar returns the Zfar property of class ICameraOrthographic.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#zfar
-func (i *ICameraOrthographic) Zfar(zfar float64) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(zfar)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
+func (i *ICameraOrthographic) Zfar() float64 {
+	retVal := i.p.Get("zfar")
+	return retVal.Float()
 }
 
 // SetZfar sets the Zfar property of class ICameraOrthographic.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#zfar
 func (i *ICameraOrthographic) SetZfar(zfar float64) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(zfar)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
+	i.p.Set("zfar", zfar)
+	return i
 }
 
 // Znear returns the Znear property of class ICameraOrthographic.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#znear
-func (i *ICameraOrthographic) Znear(znear float64) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(znear)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
+func (i *ICameraOrthographic) Znear() float64 {
+	retVal := i.p.Get("znear")
+	return retVal.Float()
 }
 
 // SetZnear sets the Znear property of class ICameraOrthographic.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#znear
 func (i *ICameraOrthographic) SetZnear(znear float64) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(znear)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
+	i.p.Set("znear", znear)
+	return i
 }
-
-*/

@@ -101,102 +101,90 @@ func (p *PhysicsRaycastResult) SetHitDistance(distance float64) {
 	p.p.Call("setHitDistance", args...)
 }
 
-/*
-
 // HasHit returns the HasHit property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#hashit
-func (p *PhysicsRaycastResult) HasHit(hasHit bool) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(hasHit)
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+func (p *PhysicsRaycastResult) HasHit() bool {
+	retVal := p.p.Get("hasHit")
+	return retVal.Bool()
 }
 
 // SetHasHit sets the HasHit property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#hashit
 func (p *PhysicsRaycastResult) SetHasHit(hasHit bool) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(hasHit)
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+	p.p.Set("hasHit", hasHit)
+	return p
 }
 
 // HitDistance returns the HitDistance property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#hitdistance
-func (p *PhysicsRaycastResult) HitDistance(hitDistance float64) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(hitDistance)
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
-}
-
-// SetHitDistance sets the HitDistance property of class PhysicsRaycastResult.
-//
-// https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#hitdistance
-func (p *PhysicsRaycastResult) SetHitDistance(hitDistance float64) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(hitDistance)
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+func (p *PhysicsRaycastResult) HitDistance() float64 {
+	retVal := p.p.Get("hitDistance")
+	return retVal.Float()
 }
 
 // HitNormalWorld returns the HitNormalWorld property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#hitnormalworld
-func (p *PhysicsRaycastResult) HitNormalWorld(hitNormalWorld *Vector3) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(hitNormalWorld.JSObject())
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+func (p *PhysicsRaycastResult) HitNormalWorld() *Vector3 {
+	retVal := p.p.Get("hitNormalWorld")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetHitNormalWorld sets the HitNormalWorld property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#hitnormalworld
 func (p *PhysicsRaycastResult) SetHitNormalWorld(hitNormalWorld *Vector3) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(hitNormalWorld.JSObject())
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+	p.p.Set("hitNormalWorld", hitNormalWorld.JSObject())
+	return p
 }
 
 // HitPointWorld returns the HitPointWorld property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#hitpointworld
-func (p *PhysicsRaycastResult) HitPointWorld(hitPointWorld *Vector3) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(hitPointWorld.JSObject())
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+func (p *PhysicsRaycastResult) HitPointWorld() *Vector3 {
+	retVal := p.p.Get("hitPointWorld")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetHitPointWorld sets the HitPointWorld property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#hitpointworld
 func (p *PhysicsRaycastResult) SetHitPointWorld(hitPointWorld *Vector3) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(hitPointWorld.JSObject())
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+	p.p.Set("hitPointWorld", hitPointWorld.JSObject())
+	return p
 }
 
 // RayFromWorld returns the RayFromWorld property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#rayfromworld
-func (p *PhysicsRaycastResult) RayFromWorld(rayFromWorld *Vector3) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(rayFromWorld.JSObject())
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+func (p *PhysicsRaycastResult) RayFromWorld() *Vector3 {
+	retVal := p.p.Get("rayFromWorld")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetRayFromWorld sets the RayFromWorld property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#rayfromworld
 func (p *PhysicsRaycastResult) SetRayFromWorld(rayFromWorld *Vector3) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(rayFromWorld.JSObject())
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+	p.p.Set("rayFromWorld", rayFromWorld.JSObject())
+	return p
 }
 
 // RayToWorld returns the RayToWorld property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#raytoworld
-func (p *PhysicsRaycastResult) RayToWorld(rayToWorld *Vector3) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(rayToWorld.JSObject())
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+func (p *PhysicsRaycastResult) RayToWorld() *Vector3 {
+	retVal := p.p.Get("rayToWorld")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetRayToWorld sets the RayToWorld property of class PhysicsRaycastResult.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult#raytoworld
 func (p *PhysicsRaycastResult) SetRayToWorld(rayToWorld *Vector3) *PhysicsRaycastResult {
-	p := ba.ctx.Get("PhysicsRaycastResult").New(rayToWorld.JSObject())
-	return PhysicsRaycastResultFromJSObject(p, ba.ctx)
+	p.p.Set("rayToWorld", rayToWorld.JSObject())
+	return p
 }
-
-*/

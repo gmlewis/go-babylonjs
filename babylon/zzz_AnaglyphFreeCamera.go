@@ -62,7 +62,3 @@ func (a *AnaglyphFreeCamera) GetClassName() string {
 	retVal := a.p.Call("getClassName")
 	return retVal.String()
 }
-
-/*
-
- */

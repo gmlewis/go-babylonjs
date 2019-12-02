@@ -35,7 +35,3 @@ func IBufferArrayToJSArray(array []*IBuffer) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

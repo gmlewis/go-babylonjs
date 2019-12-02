@@ -225,182 +225,178 @@ func (h *HighlightLayer) ShouldRender() bool {
 	return retVal.Bool()
 }
 
-/*
-
 // BlurHorizontalSize returns the BlurHorizontalSize property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#blurhorizontalsize
-func (h *HighlightLayer) BlurHorizontalSize(blurHorizontalSize float64) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(blurHorizontalSize)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) BlurHorizontalSize() float64 {
+	retVal := h.p.Get("blurHorizontalSize")
+	return retVal.Float()
 }
 
 // SetBlurHorizontalSize sets the BlurHorizontalSize property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#blurhorizontalsize
 func (h *HighlightLayer) SetBlurHorizontalSize(blurHorizontalSize float64) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(blurHorizontalSize)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("blurHorizontalSize", blurHorizontalSize)
+	return h
 }
 
 // BlurVerticalSize returns the BlurVerticalSize property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#blurverticalsize
-func (h *HighlightLayer) BlurVerticalSize(blurVerticalSize float64) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(blurVerticalSize)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) BlurVerticalSize() float64 {
+	retVal := h.p.Get("blurVerticalSize")
+	return retVal.Float()
 }
 
 // SetBlurVerticalSize sets the BlurVerticalSize property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#blurverticalsize
 func (h *HighlightLayer) SetBlurVerticalSize(blurVerticalSize float64) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(blurVerticalSize)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("blurVerticalSize", blurVerticalSize)
+	return h
 }
 
 // EffectName returns the EffectName property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#effectname
-func (h *HighlightLayer) EffectName(EffectName string) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(EffectName)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) EffectName() string {
+	retVal := h.p.Get("EffectName")
+	return retVal.String()
 }
 
 // SetEffectName sets the EffectName property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#effectname
 func (h *HighlightLayer) SetEffectName(EffectName string) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(EffectName)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("EffectName", EffectName)
+	return h
 }
 
 // GlowingMeshStencilReference returns the GlowingMeshStencilReference property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#glowingmeshstencilreference
-func (h *HighlightLayer) GlowingMeshStencilReference(GlowingMeshStencilReference float64) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(GlowingMeshStencilReference)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) GlowingMeshStencilReference() float64 {
+	retVal := h.p.Get("GlowingMeshStencilReference")
+	return retVal.Float()
 }
 
 // SetGlowingMeshStencilReference sets the GlowingMeshStencilReference property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#glowingmeshstencilreference
 func (h *HighlightLayer) SetGlowingMeshStencilReference(GlowingMeshStencilReference float64) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(GlowingMeshStencilReference)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("GlowingMeshStencilReference", GlowingMeshStencilReference)
+	return h
 }
 
 // InnerGlow returns the InnerGlow property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#innerglow
-func (h *HighlightLayer) InnerGlow(innerGlow bool) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(innerGlow)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) InnerGlow() bool {
+	retVal := h.p.Get("innerGlow")
+	return retVal.Bool()
 }
 
 // SetInnerGlow sets the InnerGlow property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#innerglow
 func (h *HighlightLayer) SetInnerGlow(innerGlow bool) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(innerGlow)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("innerGlow", innerGlow)
+	return h
 }
 
 // Name returns the Name property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#name
-func (h *HighlightLayer) Name(name string) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(name)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) Name() string {
+	retVal := h.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#name
 func (h *HighlightLayer) SetName(name string) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(name)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("name", name)
+	return h
 }
 
 // NeutralColor returns the NeutralColor property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#neutralcolor
-func (h *HighlightLayer) NeutralColor(NeutralColor *Color4) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(NeutralColor.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) NeutralColor() *Color4 {
+	retVal := h.p.Get("NeutralColor")
+	return Color4FromJSObject(retVal, h.ctx)
 }
 
 // SetNeutralColor sets the NeutralColor property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#neutralcolor
 func (h *HighlightLayer) SetNeutralColor(NeutralColor *Color4) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(NeutralColor.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("NeutralColor", NeutralColor.JSObject())
+	return h
 }
 
 // NormalMeshStencilReference returns the NormalMeshStencilReference property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#normalmeshstencilreference
-func (h *HighlightLayer) NormalMeshStencilReference(NormalMeshStencilReference float64) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(NormalMeshStencilReference)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) NormalMeshStencilReference() float64 {
+	retVal := h.p.Get("NormalMeshStencilReference")
+	return retVal.Float()
 }
 
 // SetNormalMeshStencilReference sets the NormalMeshStencilReference property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#normalmeshstencilreference
 func (h *HighlightLayer) SetNormalMeshStencilReference(NormalMeshStencilReference float64) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(NormalMeshStencilReference)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("NormalMeshStencilReference", NormalMeshStencilReference)
+	return h
 }
 
 // OnAfterBlurObservable returns the OnAfterBlurObservable property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onafterblurobservable
-func (h *HighlightLayer) OnAfterBlurObservable(onAfterBlurObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onAfterBlurObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) OnAfterBlurObservable() *Observable {
+	retVal := h.p.Get("onAfterBlurObservable")
+	return ObservableFromJSObject(retVal, h.ctx)
 }
 
 // SetOnAfterBlurObservable sets the OnAfterBlurObservable property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onafterblurobservable
 func (h *HighlightLayer) SetOnAfterBlurObservable(onAfterBlurObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onAfterBlurObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("onAfterBlurObservable", onAfterBlurObservable.JSObject())
+	return h
 }
 
 // OnBeforeBlurObservable returns the OnBeforeBlurObservable property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onbeforeblurobservable
-func (h *HighlightLayer) OnBeforeBlurObservable(onBeforeBlurObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onBeforeBlurObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) OnBeforeBlurObservable() *Observable {
+	retVal := h.p.Get("onBeforeBlurObservable")
+	return ObservableFromJSObject(retVal, h.ctx)
 }
 
 // SetOnBeforeBlurObservable sets the OnBeforeBlurObservable property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onbeforeblurobservable
 func (h *HighlightLayer) SetOnBeforeBlurObservable(onBeforeBlurObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onBeforeBlurObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("onBeforeBlurObservable", onBeforeBlurObservable.JSObject())
+	return h
 }
 
 // OuterGlow returns the OuterGlow property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#outerglow
-func (h *HighlightLayer) OuterGlow(outerGlow bool) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(outerGlow)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+func (h *HighlightLayer) OuterGlow() bool {
+	retVal := h.p.Get("outerGlow")
+	return retVal.Bool()
 }
 
 // SetOuterGlow sets the OuterGlow property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#outerglow
 func (h *HighlightLayer) SetOuterGlow(outerGlow bool) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(outerGlow)
-	return HighlightLayerFromJSObject(p, ba.ctx)
+	h.p.Set("outerGlow", outerGlow)
+	return h
 }
-
-*/

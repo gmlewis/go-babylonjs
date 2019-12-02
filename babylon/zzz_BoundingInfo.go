@@ -197,102 +197,98 @@ func (b *BoundingInfo) Update(world *Matrix) {
 	b.p.Call("update", args...)
 }
 
-/*
-
 // BoundingBox returns the BoundingBox property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#boundingbox
-func (b *BoundingInfo) BoundingBox(boundingBox *BoundingBox) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(boundingBox.JSObject())
-	return BoundingInfoFromJSObject(p, ba.ctx)
+func (b *BoundingInfo) BoundingBox() *BoundingBox {
+	retVal := b.p.Get("boundingBox")
+	return BoundingBoxFromJSObject(retVal, b.ctx)
 }
 
 // SetBoundingBox sets the BoundingBox property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#boundingbox
 func (b *BoundingInfo) SetBoundingBox(boundingBox *BoundingBox) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(boundingBox.JSObject())
-	return BoundingInfoFromJSObject(p, ba.ctx)
+	b.p.Set("boundingBox", boundingBox.JSObject())
+	return b
 }
 
 // BoundingSphere returns the BoundingSphere property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#boundingsphere
-func (b *BoundingInfo) BoundingSphere(boundingSphere *BoundingSphere) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(boundingSphere.JSObject())
-	return BoundingInfoFromJSObject(p, ba.ctx)
+func (b *BoundingInfo) BoundingSphere() *BoundingSphere {
+	retVal := b.p.Get("boundingSphere")
+	return BoundingSphereFromJSObject(retVal, b.ctx)
 }
 
 // SetBoundingSphere sets the BoundingSphere property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#boundingsphere
 func (b *BoundingInfo) SetBoundingSphere(boundingSphere *BoundingSphere) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(boundingSphere.JSObject())
-	return BoundingInfoFromJSObject(p, ba.ctx)
+	b.p.Set("boundingSphere", boundingSphere.JSObject())
+	return b
 }
 
 // DiagonalLength returns the DiagonalLength property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#diagonallength
-func (b *BoundingInfo) DiagonalLength(diagonalLength float64) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(diagonalLength)
-	return BoundingInfoFromJSObject(p, ba.ctx)
+func (b *BoundingInfo) DiagonalLength() float64 {
+	retVal := b.p.Get("diagonalLength")
+	return retVal.Float()
 }
 
 // SetDiagonalLength sets the DiagonalLength property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#diagonallength
 func (b *BoundingInfo) SetDiagonalLength(diagonalLength float64) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(diagonalLength)
-	return BoundingInfoFromJSObject(p, ba.ctx)
+	b.p.Set("diagonalLength", diagonalLength)
+	return b
 }
 
 // IsLocked returns the IsLocked property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#islocked
-func (b *BoundingInfo) IsLocked(isLocked bool) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(isLocked)
-	return BoundingInfoFromJSObject(p, ba.ctx)
+func (b *BoundingInfo) IsLocked() bool {
+	retVal := b.p.Get("isLocked")
+	return retVal.Bool()
 }
 
 // SetIsLocked sets the IsLocked property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#islocked
 func (b *BoundingInfo) SetIsLocked(isLocked bool) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(isLocked)
-	return BoundingInfoFromJSObject(p, ba.ctx)
+	b.p.Set("isLocked", isLocked)
+	return b
 }
 
 // Maximum returns the Maximum property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#maximum
-func (b *BoundingInfo) Maximum(maximum *Vector3) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(maximum.JSObject())
-	return BoundingInfoFromJSObject(p, ba.ctx)
+func (b *BoundingInfo) Maximum() *Vector3 {
+	retVal := b.p.Get("maximum")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetMaximum sets the Maximum property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#maximum
 func (b *BoundingInfo) SetMaximum(maximum *Vector3) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(maximum.JSObject())
-	return BoundingInfoFromJSObject(p, ba.ctx)
+	b.p.Set("maximum", maximum.JSObject())
+	return b
 }
 
 // Minimum returns the Minimum property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#minimum
-func (b *BoundingInfo) Minimum(minimum *Vector3) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(minimum.JSObject())
-	return BoundingInfoFromJSObject(p, ba.ctx)
+func (b *BoundingInfo) Minimum() *Vector3 {
+	retVal := b.p.Get("minimum")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetMinimum sets the Minimum property of class BoundingInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo#minimum
 func (b *BoundingInfo) SetMinimum(minimum *Vector3) *BoundingInfo {
-	p := ba.ctx.Get("BoundingInfo").New(minimum.JSObject())
-	return BoundingInfoFromJSObject(p, ba.ctx)
+	b.p.Set("minimum", minimum.JSObject())
+	return b
 }
-
-*/

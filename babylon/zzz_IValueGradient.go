@@ -36,22 +36,18 @@ func IValueGradientArrayToJSArray(array []*IValueGradient) []interface{} {
 	return result
 }
 
-/*
-
 // Gradient returns the Gradient property of class IValueGradient.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ivaluegradient#gradient
-func (i *IValueGradient) Gradient(gradient float64) *IValueGradient {
-	p := ba.ctx.Get("IValueGradient").New(gradient)
-	return IValueGradientFromJSObject(p, ba.ctx)
+func (i *IValueGradient) Gradient() float64 {
+	retVal := i.p.Get("gradient")
+	return retVal.Float()
 }
 
 // SetGradient sets the Gradient property of class IValueGradient.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ivaluegradient#gradient
 func (i *IValueGradient) SetGradient(gradient float64) *IValueGradient {
-	p := ba.ctx.Get("IValueGradient").New(gradient)
-	return IValueGradientFromJSObject(p, ba.ctx)
+	i.p.Set("gradient", gradient)
+	return i
 }
-
-*/

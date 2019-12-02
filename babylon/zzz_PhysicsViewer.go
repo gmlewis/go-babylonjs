@@ -95,7 +95,3 @@ func (p *PhysicsViewer) ShowImpostor(impostor *PhysicsImpostor, opts *PhysicsVie
 	retVal := p.p.Call("showImpostor", args...)
 	return AbstractMeshFromJSObject(retVal, p.ctx)
 }
-
-/*
-
- */

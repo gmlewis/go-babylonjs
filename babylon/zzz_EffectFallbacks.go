@@ -85,22 +85,18 @@ func (e *EffectFallbacks) UnBindMesh() {
 	e.p.Call("unBindMesh")
 }
 
-/*
-
 // HasMoreFallbacks returns the HasMoreFallbacks property of class EffectFallbacks.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectfallbacks#hasmorefallbacks
-func (e *EffectFallbacks) HasMoreFallbacks(hasMoreFallbacks bool) *EffectFallbacks {
-	p := ba.ctx.Get("EffectFallbacks").New(hasMoreFallbacks)
-	return EffectFallbacksFromJSObject(p, ba.ctx)
+func (e *EffectFallbacks) HasMoreFallbacks() bool {
+	retVal := e.p.Get("hasMoreFallbacks")
+	return retVal.Bool()
 }
 
 // SetHasMoreFallbacks sets the HasMoreFallbacks property of class EffectFallbacks.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectfallbacks#hasmorefallbacks
 func (e *EffectFallbacks) SetHasMoreFallbacks(hasMoreFallbacks bool) *EffectFallbacks {
-	p := ba.ctx.Get("EffectFallbacks").New(hasMoreFallbacks)
-	return EffectFallbacksFromJSObject(p, ba.ctx)
+	e.p.Set("hasMoreFallbacks", hasMoreFallbacks)
+	return e
 }
-
-*/

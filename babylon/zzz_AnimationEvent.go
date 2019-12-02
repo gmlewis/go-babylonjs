@@ -64,70 +64,66 @@ func (ba *Babylon) NewAnimationEvent(frame float64, action func(), opts *NewAnim
 	return AnimationEventFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Action returns the Action property of class AnimationEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#action
-func (a *AnimationEvent) Action(action func()) *AnimationEvent {
-	p := ba.ctx.Get("AnimationEvent").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {action(); return nil}))
-	return AnimationEventFromJSObject(p, ba.ctx)
+func (a *AnimationEvent) Action() js.Value {
+	retVal := a.p.Get("action")
+	return retVal
 }
 
 // SetAction sets the Action property of class AnimationEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#action
 func (a *AnimationEvent) SetAction(action func()) *AnimationEvent {
-	p := ba.ctx.Get("AnimationEvent").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {action(); return nil}))
-	return AnimationEventFromJSObject(p, ba.ctx)
+	a.p.Set("action", js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
+	return a
 }
 
 // Frame returns the Frame property of class AnimationEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#frame
-func (a *AnimationEvent) Frame(frame float64) *AnimationEvent {
-	p := ba.ctx.Get("AnimationEvent").New(frame)
-	return AnimationEventFromJSObject(p, ba.ctx)
+func (a *AnimationEvent) Frame() float64 {
+	retVal := a.p.Get("frame")
+	return retVal.Float()
 }
 
 // SetFrame sets the Frame property of class AnimationEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#frame
 func (a *AnimationEvent) SetFrame(frame float64) *AnimationEvent {
-	p := ba.ctx.Get("AnimationEvent").New(frame)
-	return AnimationEventFromJSObject(p, ba.ctx)
+	a.p.Set("frame", frame)
+	return a
 }
 
 // IsDone returns the IsDone property of class AnimationEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#isdone
-func (a *AnimationEvent) IsDone(isDone bool) *AnimationEvent {
-	p := ba.ctx.Get("AnimationEvent").New(isDone)
-	return AnimationEventFromJSObject(p, ba.ctx)
+func (a *AnimationEvent) IsDone() bool {
+	retVal := a.p.Get("isDone")
+	return retVal.Bool()
 }
 
 // SetIsDone sets the IsDone property of class AnimationEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#isdone
 func (a *AnimationEvent) SetIsDone(isDone bool) *AnimationEvent {
-	p := ba.ctx.Get("AnimationEvent").New(isDone)
-	return AnimationEventFromJSObject(p, ba.ctx)
+	a.p.Set("isDone", isDone)
+	return a
 }
 
 // OnlyOnce returns the OnlyOnce property of class AnimationEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#onlyonce
-func (a *AnimationEvent) OnlyOnce(onlyOnce bool) *AnimationEvent {
-	p := ba.ctx.Get("AnimationEvent").New(onlyOnce)
-	return AnimationEventFromJSObject(p, ba.ctx)
+func (a *AnimationEvent) OnlyOnce() bool {
+	retVal := a.p.Get("onlyOnce")
+	return retVal.Bool()
 }
 
 // SetOnlyOnce sets the OnlyOnce property of class AnimationEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#onlyonce
 func (a *AnimationEvent) SetOnlyOnce(onlyOnce bool) *AnimationEvent {
-	p := ba.ctx.Get("AnimationEvent").New(onlyOnce)
-	return AnimationEventFromJSObject(p, ba.ctx)
+	a.p.Set("onlyOnce", onlyOnce)
+	return a
 }
-
-*/

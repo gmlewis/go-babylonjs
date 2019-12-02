@@ -36,86 +36,82 @@ func NullEngineOptionsArrayToJSArray(array []*NullEngineOptions) []interface{} {
 	return result
 }
 
-/*
-
 // DeterministicLockstep returns the DeterministicLockstep property of class NullEngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengineoptions#deterministiclockstep
-func (n *NullEngineOptions) DeterministicLockstep(deterministicLockstep bool) *NullEngineOptions {
-	p := ba.ctx.Get("NullEngineOptions").New(deterministicLockstep)
-	return NullEngineOptionsFromJSObject(p, ba.ctx)
+func (n *NullEngineOptions) DeterministicLockstep() bool {
+	retVal := n.p.Get("deterministicLockstep")
+	return retVal.Bool()
 }
 
 // SetDeterministicLockstep sets the DeterministicLockstep property of class NullEngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengineoptions#deterministiclockstep
 func (n *NullEngineOptions) SetDeterministicLockstep(deterministicLockstep bool) *NullEngineOptions {
-	p := ba.ctx.Get("NullEngineOptions").New(deterministicLockstep)
-	return NullEngineOptionsFromJSObject(p, ba.ctx)
+	n.p.Set("deterministicLockstep", deterministicLockstep)
+	return n
 }
 
 // LockstepMaxSteps returns the LockstepMaxSteps property of class NullEngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengineoptions#lockstepmaxsteps
-func (n *NullEngineOptions) LockstepMaxSteps(lockstepMaxSteps float64) *NullEngineOptions {
-	p := ba.ctx.Get("NullEngineOptions").New(lockstepMaxSteps)
-	return NullEngineOptionsFromJSObject(p, ba.ctx)
+func (n *NullEngineOptions) LockstepMaxSteps() float64 {
+	retVal := n.p.Get("lockstepMaxSteps")
+	return retVal.Float()
 }
 
 // SetLockstepMaxSteps sets the LockstepMaxSteps property of class NullEngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengineoptions#lockstepmaxsteps
 func (n *NullEngineOptions) SetLockstepMaxSteps(lockstepMaxSteps float64) *NullEngineOptions {
-	p := ba.ctx.Get("NullEngineOptions").New(lockstepMaxSteps)
-	return NullEngineOptionsFromJSObject(p, ba.ctx)
+	n.p.Set("lockstepMaxSteps", lockstepMaxSteps)
+	return n
 }
 
 // RenderHeight returns the RenderHeight property of class NullEngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengineoptions#renderheight
-func (n *NullEngineOptions) RenderHeight(renderHeight float64) *NullEngineOptions {
-	p := ba.ctx.Get("NullEngineOptions").New(renderHeight)
-	return NullEngineOptionsFromJSObject(p, ba.ctx)
+func (n *NullEngineOptions) RenderHeight() float64 {
+	retVal := n.p.Get("renderHeight")
+	return retVal.Float()
 }
 
 // SetRenderHeight sets the RenderHeight property of class NullEngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengineoptions#renderheight
 func (n *NullEngineOptions) SetRenderHeight(renderHeight float64) *NullEngineOptions {
-	p := ba.ctx.Get("NullEngineOptions").New(renderHeight)
-	return NullEngineOptionsFromJSObject(p, ba.ctx)
+	n.p.Set("renderHeight", renderHeight)
+	return n
 }
 
 // RenderWidth returns the RenderWidth property of class NullEngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengineoptions#renderwidth
-func (n *NullEngineOptions) RenderWidth(renderWidth float64) *NullEngineOptions {
-	p := ba.ctx.Get("NullEngineOptions").New(renderWidth)
-	return NullEngineOptionsFromJSObject(p, ba.ctx)
+func (n *NullEngineOptions) RenderWidth() float64 {
+	retVal := n.p.Get("renderWidth")
+	return retVal.Float()
 }
 
 // SetRenderWidth sets the RenderWidth property of class NullEngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengineoptions#renderwidth
 func (n *NullEngineOptions) SetRenderWidth(renderWidth float64) *NullEngineOptions {
-	p := ba.ctx.Get("NullEngineOptions").New(renderWidth)
-	return NullEngineOptionsFromJSObject(p, ba.ctx)
+	n.p.Set("renderWidth", renderWidth)
+	return n
 }
 
 // TextureSize returns the TextureSize property of class NullEngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengineoptions#texturesize
-func (n *NullEngineOptions) TextureSize(textureSize float64) *NullEngineOptions {
-	p := ba.ctx.Get("NullEngineOptions").New(textureSize)
-	return NullEngineOptionsFromJSObject(p, ba.ctx)
+func (n *NullEngineOptions) TextureSize() float64 {
+	retVal := n.p.Get("textureSize")
+	return retVal.Float()
 }
 
 // SetTextureSize sets the TextureSize property of class NullEngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengineoptions#texturesize
 func (n *NullEngineOptions) SetTextureSize(textureSize float64) *NullEngineOptions {
-	p := ba.ctx.Get("NullEngineOptions").New(textureSize)
-	return NullEngineOptionsFromJSObject(p, ba.ctx)
+	n.p.Set("textureSize", textureSize)
+	return n
 }
-
-*/

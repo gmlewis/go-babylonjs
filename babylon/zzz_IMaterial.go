@@ -36,70 +36,66 @@ func IMaterialArrayToJSArray(array []*IMaterial) []interface{} {
 	return result
 }
 
-/*
-
 // EmissiveTexture returns the EmissiveTexture property of class IMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterial#emissivetexture
-func (i *IMaterial) EmissiveTexture(emissiveTexture *ITextureInfo) *IMaterial {
-	p := ba.ctx.Get("IMaterial").New(emissiveTexture.JSObject())
-	return IMaterialFromJSObject(p, ba.ctx)
+func (i *IMaterial) EmissiveTexture() *ITextureInfo {
+	retVal := i.p.Get("emissiveTexture")
+	return ITextureInfoFromJSObject(retVal, i.ctx)
 }
 
 // SetEmissiveTexture sets the EmissiveTexture property of class IMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterial#emissivetexture
 func (i *IMaterial) SetEmissiveTexture(emissiveTexture *ITextureInfo) *IMaterial {
-	p := ba.ctx.Get("IMaterial").New(emissiveTexture.JSObject())
-	return IMaterialFromJSObject(p, ba.ctx)
+	i.p.Set("emissiveTexture", emissiveTexture.JSObject())
+	return i
 }
 
 // NormalTexture returns the NormalTexture property of class IMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterial#normaltexture
-func (i *IMaterial) NormalTexture(normalTexture *IMaterialNormalTextureInfo) *IMaterial {
-	p := ba.ctx.Get("IMaterial").New(normalTexture.JSObject())
-	return IMaterialFromJSObject(p, ba.ctx)
+func (i *IMaterial) NormalTexture() *IMaterialNormalTextureInfo {
+	retVal := i.p.Get("normalTexture")
+	return IMaterialNormalTextureInfoFromJSObject(retVal, i.ctx)
 }
 
 // SetNormalTexture sets the NormalTexture property of class IMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterial#normaltexture
 func (i *IMaterial) SetNormalTexture(normalTexture *IMaterialNormalTextureInfo) *IMaterial {
-	p := ba.ctx.Get("IMaterial").New(normalTexture.JSObject())
-	return IMaterialFromJSObject(p, ba.ctx)
+	i.p.Set("normalTexture", normalTexture.JSObject())
+	return i
 }
 
 // OcclusionTexture returns the OcclusionTexture property of class IMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterial#occlusiontexture
-func (i *IMaterial) OcclusionTexture(occlusionTexture *IMaterialOcclusionTextureInfo) *IMaterial {
-	p := ba.ctx.Get("IMaterial").New(occlusionTexture.JSObject())
-	return IMaterialFromJSObject(p, ba.ctx)
+func (i *IMaterial) OcclusionTexture() *IMaterialOcclusionTextureInfo {
+	retVal := i.p.Get("occlusionTexture")
+	return IMaterialOcclusionTextureInfoFromJSObject(retVal, i.ctx)
 }
 
 // SetOcclusionTexture sets the OcclusionTexture property of class IMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterial#occlusiontexture
 func (i *IMaterial) SetOcclusionTexture(occlusionTexture *IMaterialOcclusionTextureInfo) *IMaterial {
-	p := ba.ctx.Get("IMaterial").New(occlusionTexture.JSObject())
-	return IMaterialFromJSObject(p, ba.ctx)
+	i.p.Set("occlusionTexture", occlusionTexture.JSObject())
+	return i
 }
 
 // PbrMetallicRoughness returns the PbrMetallicRoughness property of class IMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterial#pbrmetallicroughness
-func (i *IMaterial) PbrMetallicRoughness(pbrMetallicRoughness *IMaterialPbrMetallicRoughness) *IMaterial {
-	p := ba.ctx.Get("IMaterial").New(pbrMetallicRoughness.JSObject())
-	return IMaterialFromJSObject(p, ba.ctx)
+func (i *IMaterial) PbrMetallicRoughness() *IMaterialPbrMetallicRoughness {
+	retVal := i.p.Get("pbrMetallicRoughness")
+	return IMaterialPbrMetallicRoughnessFromJSObject(retVal, i.ctx)
 }
 
 // SetPbrMetallicRoughness sets the PbrMetallicRoughness property of class IMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterial#pbrmetallicroughness
 func (i *IMaterial) SetPbrMetallicRoughness(pbrMetallicRoughness *IMaterialPbrMetallicRoughness) *IMaterial {
-	p := ba.ctx.Get("IMaterial").New(pbrMetallicRoughness.JSObject())
-	return IMaterialFromJSObject(p, ba.ctx)
+	i.p.Set("pbrMetallicRoughness", pbrMetallicRoughness.JSObject())
+	return i
 }
-
-*/

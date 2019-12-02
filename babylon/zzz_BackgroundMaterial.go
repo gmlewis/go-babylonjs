@@ -227,550 +227,546 @@ func (b *BackgroundMaterial) Unbind() {
 	b.p.Call("unbind")
 }
 
-/*
-
 // CameraColorCurves returns the CameraColorCurves property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameracolorcurves
-func (b *BackgroundMaterial) CameraColorCurves(cameraColorCurves *ColorCurves) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraColorCurves.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) CameraColorCurves() *ColorCurves {
+	retVal := b.p.Get("cameraColorCurves")
+	return ColorCurvesFromJSObject(retVal, b.ctx)
 }
 
 // SetCameraColorCurves sets the CameraColorCurves property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameracolorcurves
 func (b *BackgroundMaterial) SetCameraColorCurves(cameraColorCurves *ColorCurves) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraColorCurves.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("cameraColorCurves", cameraColorCurves.JSObject())
+	return b
 }
 
 // CameraColorCurvesEnabled returns the CameraColorCurvesEnabled property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameracolorcurvesenabled
-func (b *BackgroundMaterial) CameraColorCurvesEnabled(cameraColorCurvesEnabled bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraColorCurvesEnabled)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) CameraColorCurvesEnabled() bool {
+	retVal := b.p.Get("cameraColorCurvesEnabled")
+	return retVal.Bool()
 }
 
 // SetCameraColorCurvesEnabled sets the CameraColorCurvesEnabled property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameracolorcurvesenabled
 func (b *BackgroundMaterial) SetCameraColorCurvesEnabled(cameraColorCurvesEnabled bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraColorCurvesEnabled)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("cameraColorCurvesEnabled", cameraColorCurvesEnabled)
+	return b
 }
 
 // CameraColorGradingEnabled returns the CameraColorGradingEnabled property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameracolorgradingenabled
-func (b *BackgroundMaterial) CameraColorGradingEnabled(cameraColorGradingEnabled bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraColorGradingEnabled)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) CameraColorGradingEnabled() bool {
+	retVal := b.p.Get("cameraColorGradingEnabled")
+	return retVal.Bool()
 }
 
 // SetCameraColorGradingEnabled sets the CameraColorGradingEnabled property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameracolorgradingenabled
 func (b *BackgroundMaterial) SetCameraColorGradingEnabled(cameraColorGradingEnabled bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraColorGradingEnabled)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("cameraColorGradingEnabled", cameraColorGradingEnabled)
+	return b
 }
 
 // CameraColorGradingTexture returns the CameraColorGradingTexture property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameracolorgradingtexture
-func (b *BackgroundMaterial) CameraColorGradingTexture(cameraColorGradingTexture *BaseTexture) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraColorGradingTexture.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) CameraColorGradingTexture() *BaseTexture {
+	retVal := b.p.Get("cameraColorGradingTexture")
+	return BaseTextureFromJSObject(retVal, b.ctx)
 }
 
 // SetCameraColorGradingTexture sets the CameraColorGradingTexture property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameracolorgradingtexture
 func (b *BackgroundMaterial) SetCameraColorGradingTexture(cameraColorGradingTexture *BaseTexture) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraColorGradingTexture.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("cameraColorGradingTexture", cameraColorGradingTexture.JSObject())
+	return b
 }
 
 // CameraContrast returns the CameraContrast property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameracontrast
-func (b *BackgroundMaterial) CameraContrast(cameraContrast float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraContrast)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) CameraContrast() float64 {
+	retVal := b.p.Get("cameraContrast")
+	return retVal.Float()
 }
 
 // SetCameraContrast sets the CameraContrast property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameracontrast
 func (b *BackgroundMaterial) SetCameraContrast(cameraContrast float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraContrast)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("cameraContrast", cameraContrast)
+	return b
 }
 
 // CameraExposure returns the CameraExposure property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameraexposure
-func (b *BackgroundMaterial) CameraExposure(cameraExposure float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraExposure)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) CameraExposure() float64 {
+	retVal := b.p.Get("cameraExposure")
+	return retVal.Float()
 }
 
 // SetCameraExposure sets the CameraExposure property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameraexposure
 func (b *BackgroundMaterial) SetCameraExposure(cameraExposure float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraExposure)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("cameraExposure", cameraExposure)
+	return b
 }
 
 // CameraToneMappingEnabled returns the CameraToneMappingEnabled property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameratonemappingenabled
-func (b *BackgroundMaterial) CameraToneMappingEnabled(cameraToneMappingEnabled bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraToneMappingEnabled)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) CameraToneMappingEnabled() bool {
+	retVal := b.p.Get("cameraToneMappingEnabled")
+	return retVal.Bool()
 }
 
 // SetCameraToneMappingEnabled sets the CameraToneMappingEnabled property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#cameratonemappingenabled
 func (b *BackgroundMaterial) SetCameraToneMappingEnabled(cameraToneMappingEnabled bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(cameraToneMappingEnabled)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("cameraToneMappingEnabled", cameraToneMappingEnabled)
+	return b
 }
 
 // DiffuseTexture returns the DiffuseTexture property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#diffusetexture
-func (b *BackgroundMaterial) DiffuseTexture(diffuseTexture *BaseTexture) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(diffuseTexture.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) DiffuseTexture() *BaseTexture {
+	retVal := b.p.Get("diffuseTexture")
+	return BaseTextureFromJSObject(retVal, b.ctx)
 }
 
 // SetDiffuseTexture sets the DiffuseTexture property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#diffusetexture
 func (b *BackgroundMaterial) SetDiffuseTexture(diffuseTexture *BaseTexture) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(diffuseTexture.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("diffuseTexture", diffuseTexture.JSObject())
+	return b
 }
 
 // EnableNoise returns the EnableNoise property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#enablenoise
-func (b *BackgroundMaterial) EnableNoise(enableNoise bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(enableNoise)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) EnableNoise() bool {
+	retVal := b.p.Get("enableNoise")
+	return retVal.Bool()
 }
 
 // SetEnableNoise sets the EnableNoise property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#enablenoise
 func (b *BackgroundMaterial) SetEnableNoise(enableNoise bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(enableNoise)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("enableNoise", enableNoise)
+	return b
 }
 
 // FovMultiplier returns the FovMultiplier property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#fovmultiplier
-func (b *BackgroundMaterial) FovMultiplier(fovMultiplier float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(fovMultiplier)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) FovMultiplier() float64 {
+	retVal := b.p.Get("fovMultiplier")
+	return retVal.Float()
 }
 
 // SetFovMultiplier sets the FovMultiplier property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#fovmultiplier
 func (b *BackgroundMaterial) SetFovMultiplier(fovMultiplier float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(fovMultiplier)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("fovMultiplier", fovMultiplier)
+	return b
 }
 
 // HasRenderTargetTextures returns the HasRenderTargetTextures property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#hasrendertargettextures
-func (b *BackgroundMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(hasRenderTargetTextures)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) HasRenderTargetTextures() bool {
+	retVal := b.p.Get("hasRenderTargetTextures")
+	return retVal.Bool()
 }
 
 // SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#hasrendertargettextures
 func (b *BackgroundMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(hasRenderTargetTextures)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("hasRenderTargetTextures", hasRenderTargetTextures)
+	return b
 }
 
 // ImageProcessingConfiguration returns the ImageProcessingConfiguration property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#imageprocessingconfiguration
-func (b *BackgroundMaterial) ImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(imageProcessingConfiguration.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ImageProcessingConfiguration() *ImageProcessingConfiguration {
+	retVal := b.p.Get("imageProcessingConfiguration")
+	return ImageProcessingConfigurationFromJSObject(retVal, b.ctx)
 }
 
 // SetImageProcessingConfiguration sets the ImageProcessingConfiguration property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#imageprocessingconfiguration
 func (b *BackgroundMaterial) SetImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(imageProcessingConfiguration.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("imageProcessingConfiguration", imageProcessingConfiguration.JSObject())
+	return b
 }
 
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#maxsimultaneouslights
-func (b *BackgroundMaterial) MaxSimultaneousLights(maxSimultaneousLights int) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(maxSimultaneousLights)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) MaxSimultaneousLights() int {
+	retVal := b.p.Get("maxSimultaneousLights")
+	return retVal.Int()
 }
 
 // SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#maxsimultaneouslights
 func (b *BackgroundMaterial) SetMaxSimultaneousLights(maxSimultaneousLights int) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(maxSimultaneousLights)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("maxSimultaneousLights", maxSimultaneousLights)
+	return b
 }
 
 // OpacityFresnel returns the OpacityFresnel property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#opacityfresnel
-func (b *BackgroundMaterial) OpacityFresnel(opacityFresnel bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(opacityFresnel)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) OpacityFresnel() bool {
+	retVal := b.p.Get("opacityFresnel")
+	return retVal.Bool()
 }
 
 // SetOpacityFresnel sets the OpacityFresnel property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#opacityfresnel
 func (b *BackgroundMaterial) SetOpacityFresnel(opacityFresnel bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(opacityFresnel)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("opacityFresnel", opacityFresnel)
+	return b
 }
 
 // PrimaryColor returns the PrimaryColor property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#primarycolor
-func (b *BackgroundMaterial) PrimaryColor(primaryColor *Color3) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(primaryColor.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) PrimaryColor() *Color3 {
+	retVal := b.p.Get("primaryColor")
+	return Color3FromJSObject(retVal, b.ctx)
 }
 
 // SetPrimaryColor sets the PrimaryColor property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#primarycolor
 func (b *BackgroundMaterial) SetPrimaryColor(primaryColor *Color3) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(primaryColor.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("primaryColor", primaryColor.JSObject())
+	return b
 }
 
 // PrimaryColorHighlightLevel returns the PrimaryColorHighlightLevel property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#primarycolorhighlightlevel
-func (b *BackgroundMaterial) PrimaryColorHighlightLevel(primaryColorHighlightLevel float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(primaryColorHighlightLevel)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) PrimaryColorHighlightLevel() float64 {
+	retVal := b.p.Get("primaryColorHighlightLevel")
+	return retVal.Float()
 }
 
 // SetPrimaryColorHighlightLevel sets the PrimaryColorHighlightLevel property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#primarycolorhighlightlevel
 func (b *BackgroundMaterial) SetPrimaryColorHighlightLevel(primaryColorHighlightLevel float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(primaryColorHighlightLevel)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("primaryColorHighlightLevel", primaryColorHighlightLevel)
+	return b
 }
 
 // PrimaryColorShadowLevel returns the PrimaryColorShadowLevel property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#primarycolorshadowlevel
-func (b *BackgroundMaterial) PrimaryColorShadowLevel(primaryColorShadowLevel float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(primaryColorShadowLevel)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) PrimaryColorShadowLevel() float64 {
+	retVal := b.p.Get("primaryColorShadowLevel")
+	return retVal.Float()
 }
 
 // SetPrimaryColorShadowLevel sets the PrimaryColorShadowLevel property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#primarycolorshadowlevel
 func (b *BackgroundMaterial) SetPrimaryColorShadowLevel(primaryColorShadowLevel float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(primaryColorShadowLevel)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("primaryColorShadowLevel", primaryColorShadowLevel)
+	return b
 }
 
 // ReflectionAmount returns the ReflectionAmount property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionamount
-func (b *BackgroundMaterial) ReflectionAmount(reflectionAmount float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionAmount)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ReflectionAmount() float64 {
+	retVal := b.p.Get("reflectionAmount")
+	return retVal.Float()
 }
 
 // SetReflectionAmount sets the ReflectionAmount property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionamount
 func (b *BackgroundMaterial) SetReflectionAmount(reflectionAmount float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionAmount)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("reflectionAmount", reflectionAmount)
+	return b
 }
 
 // ReflectionBlur returns the ReflectionBlur property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionblur
-func (b *BackgroundMaterial) ReflectionBlur(reflectionBlur float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionBlur)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ReflectionBlur() float64 {
+	retVal := b.p.Get("reflectionBlur")
+	return retVal.Float()
 }
 
 // SetReflectionBlur sets the ReflectionBlur property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionblur
 func (b *BackgroundMaterial) SetReflectionBlur(reflectionBlur float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionBlur)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("reflectionBlur", reflectionBlur)
+	return b
 }
 
 // ReflectionFalloffDistance returns the ReflectionFalloffDistance property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionfalloffdistance
-func (b *BackgroundMaterial) ReflectionFalloffDistance(reflectionFalloffDistance float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionFalloffDistance)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ReflectionFalloffDistance() float64 {
+	retVal := b.p.Get("reflectionFalloffDistance")
+	return retVal.Float()
 }
 
 // SetReflectionFalloffDistance sets the ReflectionFalloffDistance property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionfalloffdistance
 func (b *BackgroundMaterial) SetReflectionFalloffDistance(reflectionFalloffDistance float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionFalloffDistance)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("reflectionFalloffDistance", reflectionFalloffDistance)
+	return b
 }
 
 // ReflectionFresnel returns the ReflectionFresnel property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionfresnel
-func (b *BackgroundMaterial) ReflectionFresnel(reflectionFresnel bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionFresnel)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ReflectionFresnel() bool {
+	retVal := b.p.Get("reflectionFresnel")
+	return retVal.Bool()
 }
 
 // SetReflectionFresnel sets the ReflectionFresnel property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionfresnel
 func (b *BackgroundMaterial) SetReflectionFresnel(reflectionFresnel bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionFresnel)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("reflectionFresnel", reflectionFresnel)
+	return b
 }
 
 // ReflectionReflectance0 returns the ReflectionReflectance0 property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionreflectance0
-func (b *BackgroundMaterial) ReflectionReflectance0(reflectionReflectance0 float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionReflectance0)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ReflectionReflectance0() float64 {
+	retVal := b.p.Get("reflectionReflectance0")
+	return retVal.Float()
 }
 
 // SetReflectionReflectance0 sets the ReflectionReflectance0 property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionreflectance0
 func (b *BackgroundMaterial) SetReflectionReflectance0(reflectionReflectance0 float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionReflectance0)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("reflectionReflectance0", reflectionReflectance0)
+	return b
 }
 
 // ReflectionReflectance90 returns the ReflectionReflectance90 property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionreflectance90
-func (b *BackgroundMaterial) ReflectionReflectance90(reflectionReflectance90 float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionReflectance90)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ReflectionReflectance90() float64 {
+	retVal := b.p.Get("reflectionReflectance90")
+	return retVal.Float()
 }
 
 // SetReflectionReflectance90 sets the ReflectionReflectance90 property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionreflectance90
 func (b *BackgroundMaterial) SetReflectionReflectance90(reflectionReflectance90 float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionReflectance90)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("reflectionReflectance90", reflectionReflectance90)
+	return b
 }
 
 // ReflectionStandardFresnelWeight returns the ReflectionStandardFresnelWeight property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionstandardfresnelweight
-func (b *BackgroundMaterial) ReflectionStandardFresnelWeight(reflectionStandardFresnelWeight float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionStandardFresnelWeight)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ReflectionStandardFresnelWeight() float64 {
+	retVal := b.p.Get("reflectionStandardFresnelWeight")
+	return retVal.Float()
 }
 
 // SetReflectionStandardFresnelWeight sets the ReflectionStandardFresnelWeight property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectionstandardfresnelweight
 func (b *BackgroundMaterial) SetReflectionStandardFresnelWeight(reflectionStandardFresnelWeight float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionStandardFresnelWeight)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("reflectionStandardFresnelWeight", reflectionStandardFresnelWeight)
+	return b
 }
 
 // ReflectionTexture returns the ReflectionTexture property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectiontexture
-func (b *BackgroundMaterial) ReflectionTexture(reflectionTexture *BaseTexture) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionTexture.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ReflectionTexture() *BaseTexture {
+	retVal := b.p.Get("reflectionTexture")
+	return BaseTextureFromJSObject(retVal, b.ctx)
 }
 
 // SetReflectionTexture sets the ReflectionTexture property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#reflectiontexture
 func (b *BackgroundMaterial) SetReflectionTexture(reflectionTexture *BaseTexture) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(reflectionTexture.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("reflectionTexture", reflectionTexture.JSObject())
+	return b
 }
 
 // SceneCenter returns the SceneCenter property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#scenecenter
-func (b *BackgroundMaterial) SceneCenter(sceneCenter *Vector3) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(sceneCenter.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) SceneCenter() *Vector3 {
+	retVal := b.p.Get("sceneCenter")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetSceneCenter sets the SceneCenter property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#scenecenter
 func (b *BackgroundMaterial) SetSceneCenter(sceneCenter *Vector3) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(sceneCenter.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("sceneCenter", sceneCenter.JSObject())
+	return b
 }
 
 // ShadowLevel returns the ShadowLevel property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#shadowlevel
-func (b *BackgroundMaterial) ShadowLevel(shadowLevel float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(shadowLevel)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ShadowLevel() float64 {
+	retVal := b.p.Get("shadowLevel")
+	return retVal.Float()
 }
 
 // SetShadowLevel sets the ShadowLevel property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#shadowlevel
 func (b *BackgroundMaterial) SetShadowLevel(shadowLevel float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(shadowLevel)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("shadowLevel", shadowLevel)
+	return b
 }
 
 // ShadowLights returns the ShadowLights property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#shadowlights
-func (b *BackgroundMaterial) ShadowLights(shadowLights *IShadowLight) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(shadowLights.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) ShadowLights() *IShadowLight {
+	retVal := b.p.Get("shadowLights")
+	return IShadowLightFromJSObject(retVal, b.ctx)
 }
 
 // SetShadowLights sets the ShadowLights property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#shadowlights
 func (b *BackgroundMaterial) SetShadowLights(shadowLights *IShadowLight) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(shadowLights.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("shadowLights", shadowLights.JSObject())
+	return b
 }
 
 // StandardReflectance0 returns the StandardReflectance0 property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#standardreflectance0
-func (b *BackgroundMaterial) StandardReflectance0(StandardReflectance0 float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(StandardReflectance0)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) StandardReflectance0() float64 {
+	retVal := b.p.Get("StandardReflectance0")
+	return retVal.Float()
 }
 
 // SetStandardReflectance0 sets the StandardReflectance0 property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#standardreflectance0
 func (b *BackgroundMaterial) SetStandardReflectance0(StandardReflectance0 float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(StandardReflectance0)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("StandardReflectance0", StandardReflectance0)
+	return b
 }
 
 // StandardReflectance90 returns the StandardReflectance90 property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#standardreflectance90
-func (b *BackgroundMaterial) StandardReflectance90(StandardReflectance90 float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(StandardReflectance90)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) StandardReflectance90() float64 {
+	retVal := b.p.Get("StandardReflectance90")
+	return retVal.Float()
 }
 
 // SetStandardReflectance90 sets the StandardReflectance90 property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#standardreflectance90
 func (b *BackgroundMaterial) SetStandardReflectance90(StandardReflectance90 float64) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(StandardReflectance90)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("StandardReflectance90", StandardReflectance90)
+	return b
 }
 
 // SwitchToBGR returns the SwitchToBGR property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#switchtobgr
-func (b *BackgroundMaterial) SwitchToBGR(switchToBGR bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(switchToBGR)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) SwitchToBGR() bool {
+	retVal := b.p.Get("switchToBGR")
+	return retVal.Bool()
 }
 
 // SetSwitchToBGR sets the SwitchToBGR property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#switchtobgr
 func (b *BackgroundMaterial) SetSwitchToBGR(switchToBGR bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(switchToBGR)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("switchToBGR", switchToBGR)
+	return b
 }
 
 // UseEquirectangularFOV returns the UseEquirectangularFOV property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#useequirectangularfov
-func (b *BackgroundMaterial) UseEquirectangularFOV(useEquirectangularFOV bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(useEquirectangularFOV)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) UseEquirectangularFOV() bool {
+	retVal := b.p.Get("useEquirectangularFOV")
+	return retVal.Bool()
 }
 
 // SetUseEquirectangularFOV sets the UseEquirectangularFOV property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#useequirectangularfov
 func (b *BackgroundMaterial) SetUseEquirectangularFOV(useEquirectangularFOV bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(useEquirectangularFOV)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("useEquirectangularFOV", useEquirectangularFOV)
+	return b
 }
 
 // UseRGBColor returns the UseRGBColor property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#usergbcolor
-func (b *BackgroundMaterial) UseRGBColor(useRGBColor bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(useRGBColor)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) UseRGBColor() bool {
+	retVal := b.p.Get("useRGBColor")
+	return retVal.Bool()
 }
 
 // SetUseRGBColor sets the UseRGBColor property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#usergbcolor
 func (b *BackgroundMaterial) SetUseRGBColor(useRGBColor bool) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(useRGBColor)
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("useRGBColor", useRGBColor)
+	return b
 }
 
 // _perceptualColor returns the _perceptualColor property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#_perceptualcolor
-func (b *BackgroundMaterial) _perceptualColor(_perceptualColor *Color3) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(_perceptualColor.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+func (b *BackgroundMaterial) _perceptualColor() *Color3 {
+	retVal := b.p.Get("_perceptualColor")
+	return Color3FromJSObject(retVal, b.ctx)
 }
 
 // Set_perceptualColor sets the _perceptualColor property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#_perceptualcolor
 func (b *BackgroundMaterial) Set_perceptualColor(_perceptualColor *Color3) *BackgroundMaterial {
-	p := ba.ctx.Get("BackgroundMaterial").New(_perceptualColor.JSObject())
-	return BackgroundMaterialFromJSObject(p, ba.ctx)
+	b.p.Set("_perceptualColor", _perceptualColor.JSObject())
+	return b
 }
-
-*/

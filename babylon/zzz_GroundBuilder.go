@@ -107,7 +107,3 @@ func (g *GroundBuilder) CreateTiledGround(name string, options js.Value, opts *G
 	retVal := g.p.Call("CreateTiledGround", args...)
 	return MeshFromJSObject(retVal, g.ctx)
 }
-
-/*
-
- */

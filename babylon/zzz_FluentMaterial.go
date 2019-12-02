@@ -211,214 +211,210 @@ func (f *FluentMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // AlbedoColor returns the AlbedoColor property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedocolor
-func (f *FluentMaterial) AlbedoColor(albedoColor *Color3) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(albedoColor.JSObject())
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) AlbedoColor() *Color3 {
+	retVal := f.p.Get("albedoColor")
+	return Color3FromJSObject(retVal, f.ctx)
 }
 
 // SetAlbedoColor sets the AlbedoColor property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedocolor
 func (f *FluentMaterial) SetAlbedoColor(albedoColor *Color3) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(albedoColor.JSObject())
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("albedoColor", albedoColor.JSObject())
+	return f
 }
 
 // AlbedoTexture returns the AlbedoTexture property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedotexture
-func (f *FluentMaterial) AlbedoTexture(albedoTexture *BaseTexture) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(albedoTexture.JSObject())
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) AlbedoTexture() *BaseTexture {
+	retVal := f.p.Get("albedoTexture")
+	return BaseTextureFromJSObject(retVal, f.ctx)
 }
 
 // SetAlbedoTexture sets the AlbedoTexture property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedotexture
 func (f *FluentMaterial) SetAlbedoTexture(albedoTexture *BaseTexture) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(albedoTexture.JSObject())
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("albedoTexture", albedoTexture.JSObject())
+	return f
 }
 
 // Alpha returns the Alpha property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#alpha
-func (f *FluentMaterial) Alpha(alpha float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(alpha)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) Alpha() float64 {
+	retVal := f.p.Get("alpha")
+	return retVal.Float()
 }
 
 // SetAlpha sets the Alpha property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#alpha
 func (f *FluentMaterial) SetAlpha(alpha float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(alpha)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("alpha", alpha)
+	return f
 }
 
 // BorderMinValue returns the BorderMinValue property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderminvalue
-func (f *FluentMaterial) BorderMinValue(borderMinValue float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(borderMinValue)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) BorderMinValue() float64 {
+	retVal := f.p.Get("borderMinValue")
+	return retVal.Float()
 }
 
 // SetBorderMinValue sets the BorderMinValue property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderminvalue
 func (f *FluentMaterial) SetBorderMinValue(borderMinValue float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(borderMinValue)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("borderMinValue", borderMinValue)
+	return f
 }
 
 // BorderWidth returns the BorderWidth property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderwidth
-func (f *FluentMaterial) BorderWidth(borderWidth float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(borderWidth)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) BorderWidth() float64 {
+	retVal := f.p.Get("borderWidth")
+	return retVal.Float()
 }
 
 // SetBorderWidth sets the BorderWidth property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderwidth
 func (f *FluentMaterial) SetBorderWidth(borderWidth float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(borderWidth)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("borderWidth", borderWidth)
+	return f
 }
 
 // EdgeSmoothingValue returns the EdgeSmoothingValue property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#edgesmoothingvalue
-func (f *FluentMaterial) EdgeSmoothingValue(edgeSmoothingValue float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(edgeSmoothingValue)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) EdgeSmoothingValue() float64 {
+	retVal := f.p.Get("edgeSmoothingValue")
+	return retVal.Float()
 }
 
 // SetEdgeSmoothingValue sets the EdgeSmoothingValue property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#edgesmoothingvalue
 func (f *FluentMaterial) SetEdgeSmoothingValue(edgeSmoothingValue float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(edgeSmoothingValue)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("edgeSmoothingValue", edgeSmoothingValue)
+	return f
 }
 
 // HoverColor returns the HoverColor property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hovercolor
-func (f *FluentMaterial) HoverColor(hoverColor *Color4) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(hoverColor.JSObject())
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) HoverColor() *Color4 {
+	retVal := f.p.Get("hoverColor")
+	return Color4FromJSObject(retVal, f.ctx)
 }
 
 // SetHoverColor sets the HoverColor property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hovercolor
 func (f *FluentMaterial) SetHoverColor(hoverColor *Color4) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(hoverColor.JSObject())
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("hoverColor", hoverColor.JSObject())
+	return f
 }
 
 // HoverPosition returns the HoverPosition property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverposition
-func (f *FluentMaterial) HoverPosition(hoverPosition *Vector3) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(hoverPosition.JSObject())
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) HoverPosition() *Vector3 {
+	retVal := f.p.Get("hoverPosition")
+	return Vector3FromJSObject(retVal, f.ctx)
 }
 
 // SetHoverPosition sets the HoverPosition property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverposition
 func (f *FluentMaterial) SetHoverPosition(hoverPosition *Vector3) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(hoverPosition.JSObject())
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("hoverPosition", hoverPosition.JSObject())
+	return f
 }
 
 // HoverRadius returns the HoverRadius property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverradius
-func (f *FluentMaterial) HoverRadius(hoverRadius float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(hoverRadius)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) HoverRadius() float64 {
+	retVal := f.p.Get("hoverRadius")
+	return retVal.Float()
 }
 
 // SetHoverRadius sets the HoverRadius property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverradius
 func (f *FluentMaterial) SetHoverRadius(hoverRadius float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(hoverRadius)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("hoverRadius", hoverRadius)
+	return f
 }
 
 // InnerGlowColor returns the InnerGlowColor property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolor
-func (f *FluentMaterial) InnerGlowColor(innerGlowColor *Color3) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(innerGlowColor.JSObject())
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) InnerGlowColor() *Color3 {
+	retVal := f.p.Get("innerGlowColor")
+	return Color3FromJSObject(retVal, f.ctx)
 }
 
 // SetInnerGlowColor sets the InnerGlowColor property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolor
 func (f *FluentMaterial) SetInnerGlowColor(innerGlowColor *Color3) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(innerGlowColor.JSObject())
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("innerGlowColor", innerGlowColor.JSObject())
+	return f
 }
 
 // InnerGlowColorIntensity returns the InnerGlowColorIntensity property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolorintensity
-func (f *FluentMaterial) InnerGlowColorIntensity(innerGlowColorIntensity float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(innerGlowColorIntensity)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) InnerGlowColorIntensity() float64 {
+	retVal := f.p.Get("innerGlowColorIntensity")
+	return retVal.Float()
 }
 
 // SetInnerGlowColorIntensity sets the InnerGlowColorIntensity property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolorintensity
 func (f *FluentMaterial) SetInnerGlowColorIntensity(innerGlowColorIntensity float64) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(innerGlowColorIntensity)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("innerGlowColorIntensity", innerGlowColorIntensity)
+	return f
 }
 
 // RenderBorders returns the RenderBorders property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderborders
-func (f *FluentMaterial) RenderBorders(renderBorders bool) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(renderBorders)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) RenderBorders() bool {
+	retVal := f.p.Get("renderBorders")
+	return retVal.Bool()
 }
 
 // SetRenderBorders sets the RenderBorders property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderborders
 func (f *FluentMaterial) SetRenderBorders(renderBorders bool) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(renderBorders)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("renderBorders", renderBorders)
+	return f
 }
 
 // RenderHoverLight returns the RenderHoverLight property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderhoverlight
-func (f *FluentMaterial) RenderHoverLight(renderHoverLight bool) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(renderHoverLight)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (f *FluentMaterial) RenderHoverLight() bool {
+	retVal := f.p.Get("renderHoverLight")
+	return retVal.Bool()
 }
 
 // SetRenderHoverLight sets the RenderHoverLight property of class FluentMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderhoverlight
 func (f *FluentMaterial) SetRenderHoverLight(renderHoverLight bool) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(renderHoverLight)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("renderHoverLight", renderHoverLight)
+	return f
 }
-
-*/

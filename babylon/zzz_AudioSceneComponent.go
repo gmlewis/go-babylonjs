@@ -156,102 +156,98 @@ func (a *AudioSceneComponent) SwitchAudioModeForNormalSpeakers() {
 	a.p.Call("switchAudioModeForNormalSpeakers")
 }
 
-/*
-
 // AudioEnabled returns the AudioEnabled property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#audioenabled
-func (a *AudioSceneComponent) AudioEnabled(audioEnabled bool) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(audioEnabled)
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+func (a *AudioSceneComponent) AudioEnabled() bool {
+	retVal := a.p.Get("audioEnabled")
+	return retVal.Bool()
 }
 
 // SetAudioEnabled sets the AudioEnabled property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#audioenabled
 func (a *AudioSceneComponent) SetAudioEnabled(audioEnabled bool) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(audioEnabled)
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+	a.p.Set("audioEnabled", audioEnabled)
+	return a
 }
 
 // AudioListenerPositionProvider returns the AudioListenerPositionProvider property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#audiolistenerpositionprovider
-func (a *AudioSceneComponent) AudioListenerPositionProvider(audioListenerPositionProvider func()) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {audioListenerPositionProvider(); return nil}))
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+func (a *AudioSceneComponent) AudioListenerPositionProvider() js.Value {
+	retVal := a.p.Get("audioListenerPositionProvider")
+	return retVal
 }
 
 // SetAudioListenerPositionProvider sets the AudioListenerPositionProvider property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#audiolistenerpositionprovider
 func (a *AudioSceneComponent) SetAudioListenerPositionProvider(audioListenerPositionProvider func()) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {audioListenerPositionProvider(); return nil}))
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+	a.p.Set("audioListenerPositionProvider", js.FuncOf(func(this js.Value, args []js.Value) interface{} { audioListenerPositionProvider(); return nil }))
+	return a
 }
 
 // AudioPositioningRefreshRate returns the AudioPositioningRefreshRate property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#audiopositioningrefreshrate
-func (a *AudioSceneComponent) AudioPositioningRefreshRate(audioPositioningRefreshRate float64) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(audioPositioningRefreshRate)
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+func (a *AudioSceneComponent) AudioPositioningRefreshRate() float64 {
+	retVal := a.p.Get("audioPositioningRefreshRate")
+	return retVal.Float()
 }
 
 // SetAudioPositioningRefreshRate sets the AudioPositioningRefreshRate property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#audiopositioningrefreshrate
 func (a *AudioSceneComponent) SetAudioPositioningRefreshRate(audioPositioningRefreshRate float64) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(audioPositioningRefreshRate)
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+	a.p.Set("audioPositioningRefreshRate", audioPositioningRefreshRate)
+	return a
 }
 
 // Headphone returns the Headphone property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#headphone
-func (a *AudioSceneComponent) Headphone(headphone bool) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(headphone)
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+func (a *AudioSceneComponent) Headphone() bool {
+	retVal := a.p.Get("headphone")
+	return retVal.Bool()
 }
 
 // SetHeadphone sets the Headphone property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#headphone
 func (a *AudioSceneComponent) SetHeadphone(headphone bool) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(headphone)
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+	a.p.Set("headphone", headphone)
+	return a
 }
 
 // Name returns the Name property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#name
-func (a *AudioSceneComponent) Name(name string) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(name)
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+func (a *AudioSceneComponent) Name() string {
+	retVal := a.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#name
 func (a *AudioSceneComponent) SetName(name string) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(name)
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+	a.p.Set("name", name)
+	return a
 }
 
 // Scene returns the Scene property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#scene
-func (a *AudioSceneComponent) Scene(scene *Scene) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(scene.JSObject())
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+func (a *AudioSceneComponent) Scene() *Scene {
+	retVal := a.p.Get("scene")
+	return SceneFromJSObject(retVal, a.ctx)
 }
 
 // SetScene sets the Scene property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#scene
 func (a *AudioSceneComponent) SetScene(scene *Scene) *AudioSceneComponent {
-	p := ba.ctx.Get("AudioSceneComponent").New(scene.JSObject())
-	return AudioSceneComponentFromJSObject(p, ba.ctx)
+	a.p.Set("scene", scene.JSObject())
+	return a
 }
-
-*/

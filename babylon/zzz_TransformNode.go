@@ -847,406 +847,394 @@ func (t *TransformNode) UpdatePoseMatrix(matrix *Matrix) *TransformNode {
 	return TransformNodeFromJSObject(retVal, t.ctx)
 }
 
-/*
-
 // AbsolutePosition returns the AbsolutePosition property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#absoluteposition
-func (t *TransformNode) AbsolutePosition(absolutePosition *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(absolutePosition.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
-}
-
-// SetAbsolutePosition sets the AbsolutePosition property of class TransformNode.
-//
-// https://doc.babylonjs.com/api/classes/babylon.transformnode#absoluteposition
-func (t *TransformNode) SetAbsolutePosition(absolutePosition *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(absolutePosition.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) AbsolutePosition() *Vector3 {
+	retVal := t.p.Get("absolutePosition")
+	return Vector3FromJSObject(retVal, t.ctx)
 }
 
 // AbsoluteRotationQuaternion returns the AbsoluteRotationQuaternion property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#absoluterotationquaternion
-func (t *TransformNode) AbsoluteRotationQuaternion(absoluteRotationQuaternion *Quaternion) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(absoluteRotationQuaternion.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) AbsoluteRotationQuaternion() *Quaternion {
+	retVal := t.p.Get("absoluteRotationQuaternion")
+	return QuaternionFromJSObject(retVal, t.ctx)
 }
 
 // SetAbsoluteRotationQuaternion sets the AbsoluteRotationQuaternion property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#absoluterotationquaternion
 func (t *TransformNode) SetAbsoluteRotationQuaternion(absoluteRotationQuaternion *Quaternion) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(absoluteRotationQuaternion.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("absoluteRotationQuaternion", absoluteRotationQuaternion.JSObject())
+	return t
 }
 
 // AbsoluteScaling returns the AbsoluteScaling property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#absolutescaling
-func (t *TransformNode) AbsoluteScaling(absoluteScaling *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(absoluteScaling.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) AbsoluteScaling() *Vector3 {
+	retVal := t.p.Get("absoluteScaling")
+	return Vector3FromJSObject(retVal, t.ctx)
 }
 
 // SetAbsoluteScaling sets the AbsoluteScaling property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#absolutescaling
 func (t *TransformNode) SetAbsoluteScaling(absoluteScaling *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(absoluteScaling.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("absoluteScaling", absoluteScaling.JSObject())
+	return t
 }
 
 // BILLBOARDMODE_ALL returns the BILLBOARDMODE_ALL property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_all
-func (t *TransformNode) BILLBOARDMODE_ALL(BILLBOARDMODE_ALL float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_ALL)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) BILLBOARDMODE_ALL() float64 {
+	retVal := t.p.Get("BILLBOARDMODE_ALL")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_ALL sets the BILLBOARDMODE_ALL property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_all
 func (t *TransformNode) SetBILLBOARDMODE_ALL(BILLBOARDMODE_ALL float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_ALL)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("BILLBOARDMODE_ALL", BILLBOARDMODE_ALL)
+	return t
 }
 
 // BILLBOARDMODE_NONE returns the BILLBOARDMODE_NONE property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_none
-func (t *TransformNode) BILLBOARDMODE_NONE(BILLBOARDMODE_NONE float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_NONE)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) BILLBOARDMODE_NONE() float64 {
+	retVal := t.p.Get("BILLBOARDMODE_NONE")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_NONE sets the BILLBOARDMODE_NONE property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_none
 func (t *TransformNode) SetBILLBOARDMODE_NONE(BILLBOARDMODE_NONE float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_NONE)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("BILLBOARDMODE_NONE", BILLBOARDMODE_NONE)
+	return t
 }
 
 // BILLBOARDMODE_USE_POSITION returns the BILLBOARDMODE_USE_POSITION property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_use_position
-func (t *TransformNode) BILLBOARDMODE_USE_POSITION(BILLBOARDMODE_USE_POSITION float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_USE_POSITION)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) BILLBOARDMODE_USE_POSITION() float64 {
+	retVal := t.p.Get("BILLBOARDMODE_USE_POSITION")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_USE_POSITION sets the BILLBOARDMODE_USE_POSITION property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_use_position
 func (t *TransformNode) SetBILLBOARDMODE_USE_POSITION(BILLBOARDMODE_USE_POSITION float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_USE_POSITION)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("BILLBOARDMODE_USE_POSITION", BILLBOARDMODE_USE_POSITION)
+	return t
 }
 
 // BILLBOARDMODE_X returns the BILLBOARDMODE_X property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_x
-func (t *TransformNode) BILLBOARDMODE_X(BILLBOARDMODE_X float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_X)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) BILLBOARDMODE_X() float64 {
+	retVal := t.p.Get("BILLBOARDMODE_X")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_X sets the BILLBOARDMODE_X property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_x
 func (t *TransformNode) SetBILLBOARDMODE_X(BILLBOARDMODE_X float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_X)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("BILLBOARDMODE_X", BILLBOARDMODE_X)
+	return t
 }
 
 // BILLBOARDMODE_Y returns the BILLBOARDMODE_Y property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_y
-func (t *TransformNode) BILLBOARDMODE_Y(BILLBOARDMODE_Y float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_Y)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) BILLBOARDMODE_Y() float64 {
+	retVal := t.p.Get("BILLBOARDMODE_Y")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_Y sets the BILLBOARDMODE_Y property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_y
 func (t *TransformNode) SetBILLBOARDMODE_Y(BILLBOARDMODE_Y float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_Y)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("BILLBOARDMODE_Y", BILLBOARDMODE_Y)
+	return t
 }
 
 // BILLBOARDMODE_Z returns the BILLBOARDMODE_Z property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_z
-func (t *TransformNode) BILLBOARDMODE_Z(BILLBOARDMODE_Z float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_Z)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) BILLBOARDMODE_Z() float64 {
+	retVal := t.p.Get("BILLBOARDMODE_Z")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_Z sets the BILLBOARDMODE_Z property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_z
 func (t *TransformNode) SetBILLBOARDMODE_Z(BILLBOARDMODE_Z float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_Z)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("BILLBOARDMODE_Z", BILLBOARDMODE_Z)
+	return t
 }
 
 // BillboardMode returns the BillboardMode property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode
-func (t *TransformNode) BillboardMode(billboardMode float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(billboardMode)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) BillboardMode() float64 {
+	retVal := t.p.Get("billboardMode")
+	return retVal.Float()
 }
 
 // SetBillboardMode sets the BillboardMode property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode
 func (t *TransformNode) SetBillboardMode(billboardMode float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(billboardMode)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("billboardMode", billboardMode)
+	return t
 }
 
 // Forward returns the Forward property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#forward
-func (t *TransformNode) Forward(forward *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(forward.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) Forward() *Vector3 {
+	retVal := t.p.Get("forward")
+	return Vector3FromJSObject(retVal, t.ctx)
 }
 
 // SetForward sets the Forward property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#forward
 func (t *TransformNode) SetForward(forward *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(forward.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("forward", forward.JSObject())
+	return t
 }
 
 // IgnoreNonUniformScaling returns the IgnoreNonUniformScaling property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#ignorenonuniformscaling
-func (t *TransformNode) IgnoreNonUniformScaling(ignoreNonUniformScaling bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(ignoreNonUniformScaling)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) IgnoreNonUniformScaling() bool {
+	retVal := t.p.Get("ignoreNonUniformScaling")
+	return retVal.Bool()
 }
 
 // SetIgnoreNonUniformScaling sets the IgnoreNonUniformScaling property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#ignorenonuniformscaling
 func (t *TransformNode) SetIgnoreNonUniformScaling(ignoreNonUniformScaling bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(ignoreNonUniformScaling)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("ignoreNonUniformScaling", ignoreNonUniformScaling)
+	return t
 }
 
 // InfiniteDistance returns the InfiniteDistance property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#infinitedistance
-func (t *TransformNode) InfiniteDistance(infiniteDistance bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(infiniteDistance)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) InfiniteDistance() bool {
+	retVal := t.p.Get("infiniteDistance")
+	return retVal.Bool()
 }
 
 // SetInfiniteDistance sets the InfiniteDistance property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#infinitedistance
 func (t *TransformNode) SetInfiniteDistance(infiniteDistance bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(infiniteDistance)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("infiniteDistance", infiniteDistance)
+	return t
 }
 
 // IsWorldMatrixFrozen returns the IsWorldMatrixFrozen property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#isworldmatrixfrozen
-func (t *TransformNode) IsWorldMatrixFrozen(isWorldMatrixFrozen bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(isWorldMatrixFrozen)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) IsWorldMatrixFrozen() bool {
+	retVal := t.p.Get("isWorldMatrixFrozen")
+	return retVal.Bool()
 }
 
 // SetIsWorldMatrixFrozen sets the IsWorldMatrixFrozen property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#isworldmatrixfrozen
 func (t *TransformNode) SetIsWorldMatrixFrozen(isWorldMatrixFrozen bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(isWorldMatrixFrozen)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("isWorldMatrixFrozen", isWorldMatrixFrozen)
+	return t
 }
 
 // NonUniformScaling returns the NonUniformScaling property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#nonuniformscaling
-func (t *TransformNode) NonUniformScaling(nonUniformScaling bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(nonUniformScaling)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) NonUniformScaling() bool {
+	retVal := t.p.Get("nonUniformScaling")
+	return retVal.Bool()
 }
 
 // SetNonUniformScaling sets the NonUniformScaling property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#nonuniformscaling
 func (t *TransformNode) SetNonUniformScaling(nonUniformScaling bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(nonUniformScaling)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("nonUniformScaling", nonUniformScaling)
+	return t
 }
 
 // OnAfterWorldMatrixUpdateObservable returns the OnAfterWorldMatrixUpdateObservable property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#onafterworldmatrixupdateobservable
-func (t *TransformNode) OnAfterWorldMatrixUpdateObservable(onAfterWorldMatrixUpdateObservable *Observable) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(onAfterWorldMatrixUpdateObservable.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) OnAfterWorldMatrixUpdateObservable() *Observable {
+	retVal := t.p.Get("onAfterWorldMatrixUpdateObservable")
+	return ObservableFromJSObject(retVal, t.ctx)
 }
 
 // SetOnAfterWorldMatrixUpdateObservable sets the OnAfterWorldMatrixUpdateObservable property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#onafterworldmatrixupdateobservable
 func (t *TransformNode) SetOnAfterWorldMatrixUpdateObservable(onAfterWorldMatrixUpdateObservable *Observable) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(onAfterWorldMatrixUpdateObservable.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("onAfterWorldMatrixUpdateObservable", onAfterWorldMatrixUpdateObservable.JSObject())
+	return t
 }
 
 // Position returns the Position property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#position
-func (t *TransformNode) Position(position *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(position.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) Position() *Vector3 {
+	retVal := t.p.Get("position")
+	return Vector3FromJSObject(retVal, t.ctx)
 }
 
 // SetPosition sets the Position property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#position
 func (t *TransformNode) SetPosition(position *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(position.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("position", position.JSObject())
+	return t
 }
 
 // PreserveParentRotationForBillboard returns the PreserveParentRotationForBillboard property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#preserveparentrotationforbillboard
-func (t *TransformNode) PreserveParentRotationForBillboard(preserveParentRotationForBillboard bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(preserveParentRotationForBillboard)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) PreserveParentRotationForBillboard() bool {
+	retVal := t.p.Get("preserveParentRotationForBillboard")
+	return retVal.Bool()
 }
 
 // SetPreserveParentRotationForBillboard sets the PreserveParentRotationForBillboard property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#preserveparentrotationforbillboard
 func (t *TransformNode) SetPreserveParentRotationForBillboard(preserveParentRotationForBillboard bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(preserveParentRotationForBillboard)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("preserveParentRotationForBillboard", preserveParentRotationForBillboard)
+	return t
 }
 
 // ReIntegrateRotationIntoRotationQuaternion returns the ReIntegrateRotationIntoRotationQuaternion property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#reintegraterotationintorotationquaternion
-func (t *TransformNode) ReIntegrateRotationIntoRotationQuaternion(reIntegrateRotationIntoRotationQuaternion bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(reIntegrateRotationIntoRotationQuaternion)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) ReIntegrateRotationIntoRotationQuaternion() bool {
+	retVal := t.p.Get("reIntegrateRotationIntoRotationQuaternion")
+	return retVal.Bool()
 }
 
 // SetReIntegrateRotationIntoRotationQuaternion sets the ReIntegrateRotationIntoRotationQuaternion property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#reintegraterotationintorotationquaternion
 func (t *TransformNode) SetReIntegrateRotationIntoRotationQuaternion(reIntegrateRotationIntoRotationQuaternion bool) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(reIntegrateRotationIntoRotationQuaternion)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("reIntegrateRotationIntoRotationQuaternion", reIntegrateRotationIntoRotationQuaternion)
+	return t
 }
 
 // Right returns the Right property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#right
-func (t *TransformNode) Right(right *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(right.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) Right() *Vector3 {
+	retVal := t.p.Get("right")
+	return Vector3FromJSObject(retVal, t.ctx)
 }
 
 // SetRight sets the Right property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#right
 func (t *TransformNode) SetRight(right *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(right.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("right", right.JSObject())
+	return t
 }
 
 // Rotation returns the Rotation property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#rotation
-func (t *TransformNode) Rotation(rotation *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(rotation.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) Rotation() *Vector3 {
+	retVal := t.p.Get("rotation")
+	return Vector3FromJSObject(retVal, t.ctx)
 }
 
 // SetRotation sets the Rotation property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#rotation
 func (t *TransformNode) SetRotation(rotation *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(rotation.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("rotation", rotation.JSObject())
+	return t
 }
 
 // RotationQuaternion returns the RotationQuaternion property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#rotationquaternion
-func (t *TransformNode) RotationQuaternion(rotationQuaternion *Quaternion) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(rotationQuaternion.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) RotationQuaternion() *Quaternion {
+	retVal := t.p.Get("rotationQuaternion")
+	return QuaternionFromJSObject(retVal, t.ctx)
 }
 
 // SetRotationQuaternion sets the RotationQuaternion property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#rotationquaternion
 func (t *TransformNode) SetRotationQuaternion(rotationQuaternion *Quaternion) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(rotationQuaternion.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("rotationQuaternion", rotationQuaternion.JSObject())
+	return t
 }
 
 // Scaling returns the Scaling property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#scaling
-func (t *TransformNode) Scaling(scaling *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(scaling.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) Scaling() *Vector3 {
+	retVal := t.p.Get("scaling")
+	return Vector3FromJSObject(retVal, t.ctx)
 }
 
 // SetScaling sets the Scaling property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#scaling
 func (t *TransformNode) SetScaling(scaling *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(scaling.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("scaling", scaling.JSObject())
+	return t
 }
 
 // ScalingDeterminant returns the ScalingDeterminant property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#scalingdeterminant
-func (t *TransformNode) ScalingDeterminant(scalingDeterminant float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(scalingDeterminant)
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) ScalingDeterminant() float64 {
+	retVal := t.p.Get("scalingDeterminant")
+	return retVal.Float()
 }
 
 // SetScalingDeterminant sets the ScalingDeterminant property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#scalingdeterminant
 func (t *TransformNode) SetScalingDeterminant(scalingDeterminant float64) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(scalingDeterminant)
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("scalingDeterminant", scalingDeterminant)
+	return t
 }
 
 // Up returns the Up property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#up
-func (t *TransformNode) Up(up *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(up.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+func (t *TransformNode) Up() *Vector3 {
+	retVal := t.p.Get("up")
+	return Vector3FromJSObject(retVal, t.ctx)
 }
 
 // SetUp sets the Up property of class TransformNode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#up
 func (t *TransformNode) SetUp(up *Vector3) *TransformNode {
-	p := ba.ctx.Get("TransformNode").New(up.JSObject())
-	return TransformNodeFromJSObject(p, ba.ctx)
+	t.p.Set("up", up.JSObject())
+	return t
 }
-
-*/

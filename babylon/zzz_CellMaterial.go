@@ -220,102 +220,98 @@ func (c *CellMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // ComputeHighLevel returns the ComputeHighLevel property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#computehighlevel
-func (c *CellMaterial) ComputeHighLevel(computeHighLevel bool) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(computeHighLevel)
-	return CellMaterialFromJSObject(p, ba.ctx)
+func (c *CellMaterial) ComputeHighLevel() bool {
+	retVal := c.p.Get("computeHighLevel")
+	return retVal.Bool()
 }
 
 // SetComputeHighLevel sets the ComputeHighLevel property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#computehighlevel
 func (c *CellMaterial) SetComputeHighLevel(computeHighLevel bool) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(computeHighLevel)
-	return CellMaterialFromJSObject(p, ba.ctx)
+	c.p.Set("computeHighLevel", computeHighLevel)
+	return c
 }
 
 // DiffuseColor returns the DiffuseColor property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#diffusecolor
-func (c *CellMaterial) DiffuseColor(diffuseColor *Color3) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(diffuseColor.JSObject())
-	return CellMaterialFromJSObject(p, ba.ctx)
+func (c *CellMaterial) DiffuseColor() *Color3 {
+	retVal := c.p.Get("diffuseColor")
+	return Color3FromJSObject(retVal, c.ctx)
 }
 
 // SetDiffuseColor sets the DiffuseColor property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#diffusecolor
 func (c *CellMaterial) SetDiffuseColor(diffuseColor *Color3) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(diffuseColor.JSObject())
-	return CellMaterialFromJSObject(p, ba.ctx)
+	c.p.Set("diffuseColor", diffuseColor.JSObject())
+	return c
 }
 
 // DiffuseTexture returns the DiffuseTexture property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#diffusetexture
-func (c *CellMaterial) DiffuseTexture(diffuseTexture *BaseTexture) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(diffuseTexture.JSObject())
-	return CellMaterialFromJSObject(p, ba.ctx)
+func (c *CellMaterial) DiffuseTexture() *BaseTexture {
+	retVal := c.p.Get("diffuseTexture")
+	return BaseTextureFromJSObject(retVal, c.ctx)
 }
 
 // SetDiffuseTexture sets the DiffuseTexture property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#diffusetexture
 func (c *CellMaterial) SetDiffuseTexture(diffuseTexture *BaseTexture) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(diffuseTexture.JSObject())
-	return CellMaterialFromJSObject(p, ba.ctx)
+	c.p.Set("diffuseTexture", diffuseTexture.JSObject())
+	return c
 }
 
 // DisableLighting returns the DisableLighting property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#disablelighting
-func (c *CellMaterial) DisableLighting(disableLighting bool) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(disableLighting)
-	return CellMaterialFromJSObject(p, ba.ctx)
+func (c *CellMaterial) DisableLighting() bool {
+	retVal := c.p.Get("disableLighting")
+	return retVal.Bool()
 }
 
 // SetDisableLighting sets the DisableLighting property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#disablelighting
 func (c *CellMaterial) SetDisableLighting(disableLighting bool) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(disableLighting)
-	return CellMaterialFromJSObject(p, ba.ctx)
+	c.p.Set("disableLighting", disableLighting)
+	return c
 }
 
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#maxsimultaneouslights
-func (c *CellMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(maxSimultaneousLights)
-	return CellMaterialFromJSObject(p, ba.ctx)
+func (c *CellMaterial) MaxSimultaneousLights() float64 {
+	retVal := c.p.Get("maxSimultaneousLights")
+	return retVal.Float()
 }
 
 // SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#maxsimultaneouslights
 func (c *CellMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(maxSimultaneousLights)
-	return CellMaterialFromJSObject(p, ba.ctx)
+	c.p.Set("maxSimultaneousLights", maxSimultaneousLights)
+	return c
 }
 
 // _computeHighLevel returns the _computeHighLevel property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#_computehighlevel
-func (c *CellMaterial) _computeHighLevel(_computeHighLevel bool) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(_computeHighLevel)
-	return CellMaterialFromJSObject(p, ba.ctx)
+func (c *CellMaterial) _computeHighLevel() bool {
+	retVal := c.p.Get("_computeHighLevel")
+	return retVal.Bool()
 }
 
 // Set_computeHighLevel sets the _computeHighLevel property of class CellMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#_computehighlevel
 func (c *CellMaterial) Set_computeHighLevel(_computeHighLevel bool) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(_computeHighLevel)
-	return CellMaterialFromJSObject(p, ba.ctx)
+	c.p.Set("_computeHighLevel", _computeHighLevel)
+	return c
 }
-
-*/

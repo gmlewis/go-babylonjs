@@ -81,214 +81,210 @@ func (p *PositionGizmo) SetCustomMesh(mesh *Mesh) {
 	p.p.Call("setCustomMesh", args...)
 }
 
-/*
-
 // AttachedMesh returns the AttachedMesh property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#attachedmesh
-func (p *PositionGizmo) AttachedMesh(attachedMesh *AbstractMesh) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(attachedMesh.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) AttachedMesh() *AbstractMesh {
+	retVal := p.p.Get("attachedMesh")
+	return AbstractMeshFromJSObject(retVal, p.ctx)
 }
 
 // SetAttachedMesh sets the AttachedMesh property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#attachedmesh
 func (p *PositionGizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(attachedMesh.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("attachedMesh", attachedMesh.JSObject())
+	return p
 }
 
 // OnDragEndObservable returns the OnDragEndObservable property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#ondragendobservable
-func (p *PositionGizmo) OnDragEndObservable(onDragEndObservable *Observable) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(onDragEndObservable.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) OnDragEndObservable() *Observable {
+	retVal := p.p.Get("onDragEndObservable")
+	return ObservableFromJSObject(retVal, p.ctx)
 }
 
 // SetOnDragEndObservable sets the OnDragEndObservable property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#ondragendobservable
 func (p *PositionGizmo) SetOnDragEndObservable(onDragEndObservable *Observable) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(onDragEndObservable.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("onDragEndObservable", onDragEndObservable.JSObject())
+	return p
 }
 
 // OnDragStartObservable returns the OnDragStartObservable property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#ondragstartobservable
-func (p *PositionGizmo) OnDragStartObservable(onDragStartObservable *Observable) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(onDragStartObservable.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) OnDragStartObservable() *Observable {
+	retVal := p.p.Get("onDragStartObservable")
+	return ObservableFromJSObject(retVal, p.ctx)
 }
 
 // SetOnDragStartObservable sets the OnDragStartObservable property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#ondragstartobservable
 func (p *PositionGizmo) SetOnDragStartObservable(onDragStartObservable *Observable) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(onDragStartObservable.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("onDragStartObservable", onDragStartObservable.JSObject())
+	return p
 }
 
 // PlanarGizmoEnabled returns the PlanarGizmoEnabled property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#planargizmoenabled
-func (p *PositionGizmo) PlanarGizmoEnabled(planarGizmoEnabled bool) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(planarGizmoEnabled)
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) PlanarGizmoEnabled() bool {
+	retVal := p.p.Get("planarGizmoEnabled")
+	return retVal.Bool()
 }
 
 // SetPlanarGizmoEnabled sets the PlanarGizmoEnabled property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#planargizmoenabled
 func (p *PositionGizmo) SetPlanarGizmoEnabled(planarGizmoEnabled bool) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(planarGizmoEnabled)
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("planarGizmoEnabled", planarGizmoEnabled)
+	return p
 }
 
 // ScaleRatio returns the ScaleRatio property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#scaleratio
-func (p *PositionGizmo) ScaleRatio(scaleRatio float64) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(scaleRatio)
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) ScaleRatio() float64 {
+	retVal := p.p.Get("scaleRatio")
+	return retVal.Float()
 }
 
 // SetScaleRatio sets the ScaleRatio property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#scaleratio
 func (p *PositionGizmo) SetScaleRatio(scaleRatio float64) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(scaleRatio)
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("scaleRatio", scaleRatio)
+	return p
 }
 
 // SnapDistance returns the SnapDistance property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#snapdistance
-func (p *PositionGizmo) SnapDistance(snapDistance float64) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(snapDistance)
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) SnapDistance() float64 {
+	retVal := p.p.Get("snapDistance")
+	return retVal.Float()
 }
 
 // SetSnapDistance sets the SnapDistance property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#snapdistance
 func (p *PositionGizmo) SetSnapDistance(snapDistance float64) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(snapDistance)
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("snapDistance", snapDistance)
+	return p
 }
 
 // UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#updategizmorotationtomatchattachedmesh
-func (p *PositionGizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) UpdateGizmoRotationToMatchAttachedMesh() bool {
+	retVal := p.p.Get("updateGizmoRotationToMatchAttachedMesh")
+	return retVal.Bool()
 }
 
 // SetUpdateGizmoRotationToMatchAttachedMesh sets the UpdateGizmoRotationToMatchAttachedMesh property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#updategizmorotationtomatchattachedmesh
 func (p *PositionGizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("updateGizmoRotationToMatchAttachedMesh", updateGizmoRotationToMatchAttachedMesh)
+	return p
 }
 
 // XGizmo returns the XGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#xgizmo
-func (p *PositionGizmo) XGizmo(xGizmo *AxisDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(xGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) XGizmo() *AxisDragGizmo {
+	retVal := p.p.Get("xGizmo")
+	return AxisDragGizmoFromJSObject(retVal, p.ctx)
 }
 
 // SetXGizmo sets the XGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#xgizmo
 func (p *PositionGizmo) SetXGizmo(xGizmo *AxisDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(xGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("xGizmo", xGizmo.JSObject())
+	return p
 }
 
 // XPlaneGizmo returns the XPlaneGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#xplanegizmo
-func (p *PositionGizmo) XPlaneGizmo(xPlaneGizmo *PlaneDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(xPlaneGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) XPlaneGizmo() *PlaneDragGizmo {
+	retVal := p.p.Get("xPlaneGizmo")
+	return PlaneDragGizmoFromJSObject(retVal, p.ctx)
 }
 
 // SetXPlaneGizmo sets the XPlaneGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#xplanegizmo
 func (p *PositionGizmo) SetXPlaneGizmo(xPlaneGizmo *PlaneDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(xPlaneGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("xPlaneGizmo", xPlaneGizmo.JSObject())
+	return p
 }
 
 // YGizmo returns the YGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#ygizmo
-func (p *PositionGizmo) YGizmo(yGizmo *AxisDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(yGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) YGizmo() *AxisDragGizmo {
+	retVal := p.p.Get("yGizmo")
+	return AxisDragGizmoFromJSObject(retVal, p.ctx)
 }
 
 // SetYGizmo sets the YGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#ygizmo
 func (p *PositionGizmo) SetYGizmo(yGizmo *AxisDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(yGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("yGizmo", yGizmo.JSObject())
+	return p
 }
 
 // YPlaneGizmo returns the YPlaneGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#yplanegizmo
-func (p *PositionGizmo) YPlaneGizmo(yPlaneGizmo *PlaneDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(yPlaneGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) YPlaneGizmo() *PlaneDragGizmo {
+	retVal := p.p.Get("yPlaneGizmo")
+	return PlaneDragGizmoFromJSObject(retVal, p.ctx)
 }
 
 // SetYPlaneGizmo sets the YPlaneGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#yplanegizmo
 func (p *PositionGizmo) SetYPlaneGizmo(yPlaneGizmo *PlaneDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(yPlaneGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("yPlaneGizmo", yPlaneGizmo.JSObject())
+	return p
 }
 
 // ZGizmo returns the ZGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#zgizmo
-func (p *PositionGizmo) ZGizmo(zGizmo *AxisDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(zGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) ZGizmo() *AxisDragGizmo {
+	retVal := p.p.Get("zGizmo")
+	return AxisDragGizmoFromJSObject(retVal, p.ctx)
 }
 
 // SetZGizmo sets the ZGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#zgizmo
 func (p *PositionGizmo) SetZGizmo(zGizmo *AxisDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(zGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("zGizmo", zGizmo.JSObject())
+	return p
 }
 
 // ZPlaneGizmo returns the ZPlaneGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#zplanegizmo
-func (p *PositionGizmo) ZPlaneGizmo(zPlaneGizmo *PlaneDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(zPlaneGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+func (p *PositionGizmo) ZPlaneGizmo() *PlaneDragGizmo {
+	retVal := p.p.Get("zPlaneGizmo")
+	return PlaneDragGizmoFromJSObject(retVal, p.ctx)
 }
 
 // SetZPlaneGizmo sets the ZPlaneGizmo property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#zplanegizmo
 func (p *PositionGizmo) SetZPlaneGizmo(zPlaneGizmo *PlaneDragGizmo) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(zPlaneGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
+	p.p.Set("zPlaneGizmo", zPlaneGizmo.JSObject())
+	return p
 }
-
-*/

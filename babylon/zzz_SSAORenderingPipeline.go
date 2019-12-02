@@ -98,102 +98,98 @@ func (s *SSAORenderingPipeline) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Area returns the Area property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#area
-func (s *SSAORenderingPipeline) Area(area float64) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(area)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+func (s *SSAORenderingPipeline) Area() float64 {
+	retVal := s.p.Get("area")
+	return retVal.Float()
 }
 
 // SetArea sets the Area property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#area
 func (s *SSAORenderingPipeline) SetArea(area float64) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(area)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("area", area)
+	return s
 }
 
 // Base returns the Base property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#base
-func (s *SSAORenderingPipeline) Base(base float64) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(base)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+func (s *SSAORenderingPipeline) Base() float64 {
+	retVal := s.p.Get("base")
+	return retVal.Float()
 }
 
 // SetBase sets the Base property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#base
 func (s *SSAORenderingPipeline) SetBase(base float64) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(base)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("base", base)
+	return s
 }
 
 // FallOff returns the FallOff property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#falloff
-func (s *SSAORenderingPipeline) FallOff(fallOff float64) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(fallOff)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+func (s *SSAORenderingPipeline) FallOff() float64 {
+	retVal := s.p.Get("fallOff")
+	return retVal.Float()
 }
 
 // SetFallOff sets the FallOff property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#falloff
 func (s *SSAORenderingPipeline) SetFallOff(fallOff float64) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(fallOff)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("fallOff", fallOff)
+	return s
 }
 
 // Radius returns the Radius property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#radius
-func (s *SSAORenderingPipeline) Radius(radius float64) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(radius)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+func (s *SSAORenderingPipeline) Radius() float64 {
+	retVal := s.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#radius
 func (s *SSAORenderingPipeline) SetRadius(radius float64) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(radius)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("radius", radius)
+	return s
 }
 
 // Scene returns the Scene property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#scene
-func (s *SSAORenderingPipeline) Scene(scene *Scene) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(scene.JSObject())
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+func (s *SSAORenderingPipeline) Scene() *Scene {
+	retVal := s.p.Get("scene")
+	return SceneFromJSObject(retVal, s.ctx)
 }
 
 // SetScene sets the Scene property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#scene
 func (s *SSAORenderingPipeline) SetScene(scene *Scene) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(scene.JSObject())
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("scene", scene.JSObject())
+	return s
 }
 
 // TotalStrength returns the TotalStrength property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#totalstrength
-func (s *SSAORenderingPipeline) TotalStrength(totalStrength float64) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(totalStrength)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+func (s *SSAORenderingPipeline) TotalStrength() float64 {
+	retVal := s.p.Get("totalStrength")
+	return retVal.Float()
 }
 
 // SetTotalStrength sets the TotalStrength property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#totalstrength
 func (s *SSAORenderingPipeline) SetTotalStrength(totalStrength float64) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(totalStrength)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
+	s.p.Set("totalStrength", totalStrength)
+	return s
 }
-
-*/

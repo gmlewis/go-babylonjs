@@ -50,7 +50,3 @@ func (h *HemisphereBuilder) CreateHemisphere(name string, options js.Value, scen
 	retVal := h.p.Call("CreateHemisphere", args...)
 	return MeshFromJSObject(retVal, h.ctx)
 }
-
-/*
-
- */

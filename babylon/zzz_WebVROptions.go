@@ -36,166 +36,162 @@ func WebVROptionsArrayToJSArray(array []*WebVROptions) []interface{} {
 	return result
 }
 
-/*
-
 // ControllerMeshes returns the ControllerMeshes property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#controllermeshes
-func (w *WebVROptions) ControllerMeshes(controllerMeshes bool) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(controllerMeshes)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) ControllerMeshes() bool {
+	retVal := w.p.Get("controllerMeshes")
+	return retVal.Bool()
 }
 
 // SetControllerMeshes sets the ControllerMeshes property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#controllermeshes
 func (w *WebVROptions) SetControllerMeshes(controllerMeshes bool) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(controllerMeshes)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+	w.p.Set("controllerMeshes", controllerMeshes)
+	return w
 }
 
 // CustomVRButton returns the CustomVRButton property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#customvrbutton
-func (w *WebVROptions) CustomVRButton(customVRButton *HTMLButtonElement) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(customVRButton.JSObject())
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) CustomVRButton() js.Value {
+	retVal := w.p.Get("customVRButton")
+	return retVal
 }
 
 // SetCustomVRButton sets the CustomVRButton property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#customvrbutton
-func (w *WebVROptions) SetCustomVRButton(customVRButton *HTMLButtonElement) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(customVRButton.JSObject())
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) SetCustomVRButton(customVRButton js.Value) *WebVROptions {
+	w.p.Set("customVRButton", customVRButton)
+	return w
 }
 
 // DefaultHeight returns the DefaultHeight property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#defaultheight
-func (w *WebVROptions) DefaultHeight(defaultHeight float64) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(defaultHeight)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) DefaultHeight() float64 {
+	retVal := w.p.Get("defaultHeight")
+	return retVal.Float()
 }
 
 // SetDefaultHeight sets the DefaultHeight property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#defaultheight
 func (w *WebVROptions) SetDefaultHeight(defaultHeight float64) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(defaultHeight)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+	w.p.Set("defaultHeight", defaultHeight)
+	return w
 }
 
 // DefaultLightingOnControllers returns the DefaultLightingOnControllers property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#defaultlightingoncontrollers
-func (w *WebVROptions) DefaultLightingOnControllers(defaultLightingOnControllers bool) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(defaultLightingOnControllers)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) DefaultLightingOnControllers() bool {
+	retVal := w.p.Get("defaultLightingOnControllers")
+	return retVal.Bool()
 }
 
 // SetDefaultLightingOnControllers sets the DefaultLightingOnControllers property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#defaultlightingoncontrollers
 func (w *WebVROptions) SetDefaultLightingOnControllers(defaultLightingOnControllers bool) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(defaultLightingOnControllers)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+	w.p.Set("defaultLightingOnControllers", defaultLightingOnControllers)
+	return w
 }
 
 // DisplayName returns the DisplayName property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#displayname
-func (w *WebVROptions) DisplayName(displayName string) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(displayName)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) DisplayName() string {
+	retVal := w.p.Get("displayName")
+	return retVal.String()
 }
 
 // SetDisplayName sets the DisplayName property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#displayname
 func (w *WebVROptions) SetDisplayName(displayName string) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(displayName)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+	w.p.Set("displayName", displayName)
+	return w
 }
 
 // PositionScale returns the PositionScale property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#positionscale
-func (w *WebVROptions) PositionScale(positionScale float64) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(positionScale)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) PositionScale() float64 {
+	retVal := w.p.Get("positionScale")
+	return retVal.Float()
 }
 
 // SetPositionScale sets the PositionScale property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#positionscale
 func (w *WebVROptions) SetPositionScale(positionScale float64) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(positionScale)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+	w.p.Set("positionScale", positionScale)
+	return w
 }
 
 // RayLength returns the RayLength property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#raylength
-func (w *WebVROptions) RayLength(rayLength float64) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(rayLength)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) RayLength() float64 {
+	retVal := w.p.Get("rayLength")
+	return retVal.Float()
 }
 
 // SetRayLength sets the RayLength property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#raylength
 func (w *WebVROptions) SetRayLength(rayLength float64) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(rayLength)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+	w.p.Set("rayLength", rayLength)
+	return w
 }
 
 // TrackPosition returns the TrackPosition property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#trackposition
-func (w *WebVROptions) TrackPosition(trackPosition bool) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(trackPosition)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) TrackPosition() bool {
+	retVal := w.p.Get("trackPosition")
+	return retVal.Bool()
 }
 
 // SetTrackPosition sets the TrackPosition property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#trackposition
 func (w *WebVROptions) SetTrackPosition(trackPosition bool) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(trackPosition)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+	w.p.Set("trackPosition", trackPosition)
+	return w
 }
 
 // UseCustomVRButton returns the UseCustomVRButton property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#usecustomvrbutton
-func (w *WebVROptions) UseCustomVRButton(useCustomVRButton bool) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(useCustomVRButton)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) UseCustomVRButton() bool {
+	retVal := w.p.Get("useCustomVRButton")
+	return retVal.Bool()
 }
 
 // SetUseCustomVRButton sets the UseCustomVRButton property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#usecustomvrbutton
 func (w *WebVROptions) SetUseCustomVRButton(useCustomVRButton bool) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(useCustomVRButton)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+	w.p.Set("useCustomVRButton", useCustomVRButton)
+	return w
 }
 
 // UseMultiview returns the UseMultiview property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#usemultiview
-func (w *WebVROptions) UseMultiview(useMultiview bool) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(useMultiview)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+func (w *WebVROptions) UseMultiview() bool {
+	retVal := w.p.Get("useMultiview")
+	return retVal.Bool()
 }
 
 // SetUseMultiview sets the UseMultiview property of class WebVROptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvroptions#usemultiview
 func (w *WebVROptions) SetUseMultiview(useMultiview bool) *WebVROptions {
-	p := ba.ctx.Get("WebVROptions").New(useMultiview)
-	return WebVROptionsFromJSObject(p, ba.ctx)
+	w.p.Set("useMultiview", useMultiview)
+	return w
 }
-
-*/

@@ -81,7 +81,3 @@ func (r *RadioGroup) AddRadio(label string, opts *RadioGroupAddRadioOpts) {
 
 	r.p.Call("addRadio", args...)
 }
-
-/*
-
- */

@@ -58,70 +58,66 @@ func (s *SmoothStepBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Edge0 returns the Edge0 property of class SmoothStepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#edge0
-func (s *SmoothStepBlock) Edge0(edge0 *NodeMaterialConnectionPoint) *SmoothStepBlock {
-	p := ba.ctx.Get("SmoothStepBlock").New(edge0.JSObject())
-	return SmoothStepBlockFromJSObject(p, ba.ctx)
+func (s *SmoothStepBlock) Edge0() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("edge0")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetEdge0 sets the Edge0 property of class SmoothStepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#edge0
 func (s *SmoothStepBlock) SetEdge0(edge0 *NodeMaterialConnectionPoint) *SmoothStepBlock {
-	p := ba.ctx.Get("SmoothStepBlock").New(edge0.JSObject())
-	return SmoothStepBlockFromJSObject(p, ba.ctx)
+	s.p.Set("edge0", edge0.JSObject())
+	return s
 }
 
 // Edge1 returns the Edge1 property of class SmoothStepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#edge1
-func (s *SmoothStepBlock) Edge1(edge1 *NodeMaterialConnectionPoint) *SmoothStepBlock {
-	p := ba.ctx.Get("SmoothStepBlock").New(edge1.JSObject())
-	return SmoothStepBlockFromJSObject(p, ba.ctx)
+func (s *SmoothStepBlock) Edge1() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("edge1")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetEdge1 sets the Edge1 property of class SmoothStepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#edge1
 func (s *SmoothStepBlock) SetEdge1(edge1 *NodeMaterialConnectionPoint) *SmoothStepBlock {
-	p := ba.ctx.Get("SmoothStepBlock").New(edge1.JSObject())
-	return SmoothStepBlockFromJSObject(p, ba.ctx)
+	s.p.Set("edge1", edge1.JSObject())
+	return s
 }
 
 // Output returns the Output property of class SmoothStepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#output
-func (s *SmoothStepBlock) Output(output *NodeMaterialConnectionPoint) *SmoothStepBlock {
-	p := ba.ctx.Get("SmoothStepBlock").New(output.JSObject())
-	return SmoothStepBlockFromJSObject(p, ba.ctx)
+func (s *SmoothStepBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetOutput sets the Output property of class SmoothStepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#output
 func (s *SmoothStepBlock) SetOutput(output *NodeMaterialConnectionPoint) *SmoothStepBlock {
-	p := ba.ctx.Get("SmoothStepBlock").New(output.JSObject())
-	return SmoothStepBlockFromJSObject(p, ba.ctx)
+	s.p.Set("output", output.JSObject())
+	return s
 }
 
 // Value returns the Value property of class SmoothStepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#value
-func (s *SmoothStepBlock) Value(value *NodeMaterialConnectionPoint) *SmoothStepBlock {
-	p := ba.ctx.Get("SmoothStepBlock").New(value.JSObject())
-	return SmoothStepBlockFromJSObject(p, ba.ctx)
+func (s *SmoothStepBlock) Value() *NodeMaterialConnectionPoint {
+	retVal := s.p.Get("value")
+	return NodeMaterialConnectionPointFromJSObject(retVal, s.ctx)
 }
 
 // SetValue sets the Value property of class SmoothStepBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#value
 func (s *SmoothStepBlock) SetValue(value *NodeMaterialConnectionPoint) *SmoothStepBlock {
-	p := ba.ctx.Get("SmoothStepBlock").New(value.JSObject())
-	return SmoothStepBlockFromJSObject(p, ba.ctx)
+	s.p.Set("value", value.JSObject())
+	return s
 }
-
-*/

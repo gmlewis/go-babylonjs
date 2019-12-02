@@ -98,22 +98,18 @@ func (r *RawTexture2DArray) Update(data js.Value) {
 	r.p.Call("update", args...)
 }
 
-/*
-
 // Format returns the Format property of class RawTexture2DArray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture2darray#format
-func (r *RawTexture2DArray) Format(format float64) *RawTexture2DArray {
-	p := ba.ctx.Get("RawTexture2DArray").New(format)
-	return RawTexture2DArrayFromJSObject(p, ba.ctx)
+func (r *RawTexture2DArray) Format() float64 {
+	retVal := r.p.Get("format")
+	return retVal.Float()
 }
 
 // SetFormat sets the Format property of class RawTexture2DArray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture2darray#format
 func (r *RawTexture2DArray) SetFormat(format float64) *RawTexture2DArray {
-	p := ba.ctx.Get("RawTexture2DArray").New(format)
-	return RawTexture2DArrayFromJSObject(p, ba.ctx)
+	r.p.Set("format", format)
+	return r
 }
-
-*/

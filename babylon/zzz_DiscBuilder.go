@@ -63,7 +63,3 @@ func (d *DiscBuilder) CreateDisc(name string, options js.Value, opts *DiscBuilde
 	retVal := d.p.Call("CreateDisc", args...)
 	return MeshFromJSObject(retVal, d.ctx)
 }
-
-/*
-
- */

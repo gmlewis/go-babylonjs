@@ -75,22 +75,18 @@ func (m *MultiPointerScaleBehavior) Init() {
 	m.p.Call("init")
 }
 
-/*
-
 // Name returns the Name property of class MultiPointerScaleBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior#name
-func (m *MultiPointerScaleBehavior) Name(name string) *MultiPointerScaleBehavior {
-	p := ba.ctx.Get("MultiPointerScaleBehavior").New(name)
-	return MultiPointerScaleBehaviorFromJSObject(p, ba.ctx)
+func (m *MultiPointerScaleBehavior) Name() string {
+	retVal := m.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class MultiPointerScaleBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior#name
 func (m *MultiPointerScaleBehavior) SetName(name string) *MultiPointerScaleBehavior {
-	p := ba.ctx.Get("MultiPointerScaleBehavior").New(name)
-	return MultiPointerScaleBehaviorFromJSObject(p, ba.ctx)
+	m.p.Set("name", name)
+	return m
 }
-
-*/

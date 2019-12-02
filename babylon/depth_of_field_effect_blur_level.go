@@ -21,3 +21,8 @@ func (d *DepthOfFieldEffectBlurLevel) JSObject() js.Value {
 	}
 	return js.ValueOf(*d)
 }
+
+func DepthOfFieldEffectBlurLevelFromJSObject(p, ctx js.Value) *DepthOfFieldEffectBlurLevel {
+	v := DepthOfFieldEffectBlurLevel(p.Int())
+	return &v
+}

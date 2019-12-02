@@ -136,38 +136,34 @@ func (p *PointParticleEmitter) StartPositionFunction(worldMatrix *Matrix, positi
 	p.p.Call("startPositionFunction", args...)
 }
 
-/*
-
 // Direction1 returns the Direction1 property of class PointParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter#direction1
-func (p *PointParticleEmitter) Direction1(direction1 *Vector3) *PointParticleEmitter {
-	p := ba.ctx.Get("PointParticleEmitter").New(direction1.JSObject())
-	return PointParticleEmitterFromJSObject(p, ba.ctx)
+func (p *PointParticleEmitter) Direction1() *Vector3 {
+	retVal := p.p.Get("direction1")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetDirection1 sets the Direction1 property of class PointParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter#direction1
 func (p *PointParticleEmitter) SetDirection1(direction1 *Vector3) *PointParticleEmitter {
-	p := ba.ctx.Get("PointParticleEmitter").New(direction1.JSObject())
-	return PointParticleEmitterFromJSObject(p, ba.ctx)
+	p.p.Set("direction1", direction1.JSObject())
+	return p
 }
 
 // Direction2 returns the Direction2 property of class PointParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter#direction2
-func (p *PointParticleEmitter) Direction2(direction2 *Vector3) *PointParticleEmitter {
-	p := ba.ctx.Get("PointParticleEmitter").New(direction2.JSObject())
-	return PointParticleEmitterFromJSObject(p, ba.ctx)
+func (p *PointParticleEmitter) Direction2() *Vector3 {
+	retVal := p.p.Get("direction2")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetDirection2 sets the Direction2 property of class PointParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter#direction2
 func (p *PointParticleEmitter) SetDirection2(direction2 *Vector3) *PointParticleEmitter {
-	p := ba.ctx.Get("PointParticleEmitter").New(direction2.JSObject())
-	return PointParticleEmitterFromJSObject(p, ba.ctx)
+	p.p.Set("direction2", direction2.JSObject())
+	return p
 }
-
-*/

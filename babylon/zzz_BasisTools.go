@@ -77,38 +77,34 @@ func (b *BasisTools) TranscodeAsync(imageData js.Value, config *BasisTranscodeCo
 	return PromiseFromJSObject(retVal, b.ctx)
 }
 
-/*
-
 // JSModuleURL returns the JSModuleURL property of class BasisTools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basistools#jsmoduleurl
-func (b *BasisTools) JSModuleURL(JSModuleURL string) *BasisTools {
-	p := ba.ctx.Get("BasisTools").New(JSModuleURL)
-	return BasisToolsFromJSObject(p, ba.ctx)
+func (b *BasisTools) JSModuleURL() string {
+	retVal := b.p.Get("JSModuleURL")
+	return retVal.String()
 }
 
 // SetJSModuleURL sets the JSModuleURL property of class BasisTools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basistools#jsmoduleurl
 func (b *BasisTools) SetJSModuleURL(JSModuleURL string) *BasisTools {
-	p := ba.ctx.Get("BasisTools").New(JSModuleURL)
-	return BasisToolsFromJSObject(p, ba.ctx)
+	b.p.Set("JSModuleURL", JSModuleURL)
+	return b
 }
 
 // WasmModuleURL returns the WasmModuleURL property of class BasisTools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basistools#wasmmoduleurl
-func (b *BasisTools) WasmModuleURL(WasmModuleURL string) *BasisTools {
-	p := ba.ctx.Get("BasisTools").New(WasmModuleURL)
-	return BasisToolsFromJSObject(p, ba.ctx)
+func (b *BasisTools) WasmModuleURL() string {
+	retVal := b.p.Get("WasmModuleURL")
+	return retVal.String()
 }
 
 // SetWasmModuleURL sets the WasmModuleURL property of class BasisTools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basistools#wasmmoduleurl
 func (b *BasisTools) SetWasmModuleURL(WasmModuleURL string) *BasisTools {
-	p := ba.ctx.Get("BasisTools").New(WasmModuleURL)
-	return BasisToolsFromJSObject(p, ba.ctx)
+	b.p.Set("WasmModuleURL", WasmModuleURL)
+	return b
 }
-
-*/

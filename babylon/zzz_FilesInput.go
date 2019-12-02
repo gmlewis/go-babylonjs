@@ -97,38 +97,34 @@ func (f *FilesInput) Reload() {
 	f.p.Call("reload")
 }
 
-/*
-
 // FilesToLoad returns the FilesToLoad property of class FilesInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinput#filestoload
-func (f *FilesInput) FilesToLoad(FilesToLoad js.Value) *FilesInput {
-	p := ba.ctx.Get("FilesInput").New(FilesToLoad)
-	return FilesInputFromJSObject(p, ba.ctx)
+func (f *FilesInput) FilesToLoad() js.Value {
+	retVal := f.p.Get("FilesToLoad")
+	return retVal
 }
 
 // SetFilesToLoad sets the FilesToLoad property of class FilesInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinput#filestoload
 func (f *FilesInput) SetFilesToLoad(FilesToLoad js.Value) *FilesInput {
-	p := ba.ctx.Get("FilesInput").New(FilesToLoad)
-	return FilesInputFromJSObject(p, ba.ctx)
+	f.p.Set("FilesToLoad", FilesToLoad)
+	return f
 }
 
 // OnProcessFileCallback returns the OnProcessFileCallback property of class FilesInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinput#onprocessfilecallback
-func (f *FilesInput) OnProcessFileCallback(onProcessFileCallback func()) *FilesInput {
-	p := ba.ctx.Get("FilesInput").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onProcessFileCallback(); return nil}))
-	return FilesInputFromJSObject(p, ba.ctx)
+func (f *FilesInput) OnProcessFileCallback() js.Value {
+	retVal := f.p.Get("onProcessFileCallback")
+	return retVal
 }
 
 // SetOnProcessFileCallback sets the OnProcessFileCallback property of class FilesInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinput#onprocessfilecallback
 func (f *FilesInput) SetOnProcessFileCallback(onProcessFileCallback func()) *FilesInput {
-	p := ba.ctx.Get("FilesInput").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onProcessFileCallback(); return nil}))
-	return FilesInputFromJSObject(p, ba.ctx)
+	f.p.Set("onProcessFileCallback", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onProcessFileCallback(); return nil }))
+	return f
 }
-
-*/

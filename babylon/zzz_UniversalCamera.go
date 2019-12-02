@@ -63,38 +63,34 @@ func (u *UniversalCamera) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // GamepadAngularSensibility returns the GamepadAngularSensibility property of class UniversalCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera#gamepadangularsensibility
-func (u *UniversalCamera) GamepadAngularSensibility(gamepadAngularSensibility float64) *UniversalCamera {
-	p := ba.ctx.Get("UniversalCamera").New(gamepadAngularSensibility)
-	return UniversalCameraFromJSObject(p, ba.ctx)
+func (u *UniversalCamera) GamepadAngularSensibility() float64 {
+	retVal := u.p.Get("gamepadAngularSensibility")
+	return retVal.Float()
 }
 
 // SetGamepadAngularSensibility sets the GamepadAngularSensibility property of class UniversalCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera#gamepadangularsensibility
 func (u *UniversalCamera) SetGamepadAngularSensibility(gamepadAngularSensibility float64) *UniversalCamera {
-	p := ba.ctx.Get("UniversalCamera").New(gamepadAngularSensibility)
-	return UniversalCameraFromJSObject(p, ba.ctx)
+	u.p.Set("gamepadAngularSensibility", gamepadAngularSensibility)
+	return u
 }
 
 // GamepadMoveSensibility returns the GamepadMoveSensibility property of class UniversalCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera#gamepadmovesensibility
-func (u *UniversalCamera) GamepadMoveSensibility(gamepadMoveSensibility float64) *UniversalCamera {
-	p := ba.ctx.Get("UniversalCamera").New(gamepadMoveSensibility)
-	return UniversalCameraFromJSObject(p, ba.ctx)
+func (u *UniversalCamera) GamepadMoveSensibility() float64 {
+	retVal := u.p.Get("gamepadMoveSensibility")
+	return retVal.Float()
 }
 
 // SetGamepadMoveSensibility sets the GamepadMoveSensibility property of class UniversalCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera#gamepadmovesensibility
 func (u *UniversalCamera) SetGamepadMoveSensibility(gamepadMoveSensibility float64) *UniversalCamera {
-	p := ba.ctx.Get("UniversalCamera").New(gamepadMoveSensibility)
-	return UniversalCameraFromJSObject(p, ba.ctx)
+	u.p.Set("gamepadMoveSensibility", gamepadMoveSensibility)
+	return u
 }
-
-*/

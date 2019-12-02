@@ -36,662 +36,658 @@ func EngineCapabilitiesArrayToJSArray(array []*EngineCapabilities) []interface{}
 	return result
 }
 
-/*
-
 // Astc returns the Astc property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#astc
-func (e *EngineCapabilities) Astc(astc interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(astc)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) Astc() interface{} {
+	retVal := e.p.Get("astc")
+	return retVal
 }
 
 // SetAstc sets the Astc property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#astc
 func (e *EngineCapabilities) SetAstc(astc interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(astc)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("astc", astc)
+	return e
 }
 
 // BlendMinMax returns the BlendMinMax property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#blendminmax
-func (e *EngineCapabilities) BlendMinMax(blendMinMax bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(blendMinMax)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) BlendMinMax() bool {
+	retVal := e.p.Get("blendMinMax")
+	return retVal.Bool()
 }
 
 // SetBlendMinMax sets the BlendMinMax property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#blendminmax
 func (e *EngineCapabilities) SetBlendMinMax(blendMinMax bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(blendMinMax)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("blendMinMax", blendMinMax)
+	return e
 }
 
 // CanUseTimestampForTimerQuery returns the CanUseTimestampForTimerQuery property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#canusetimestampfortimerquery
-func (e *EngineCapabilities) CanUseTimestampForTimerQuery(canUseTimestampForTimerQuery bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(canUseTimestampForTimerQuery)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) CanUseTimestampForTimerQuery() bool {
+	retVal := e.p.Get("canUseTimestampForTimerQuery")
+	return retVal.Bool()
 }
 
 // SetCanUseTimestampForTimerQuery sets the CanUseTimestampForTimerQuery property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#canusetimestampfortimerquery
 func (e *EngineCapabilities) SetCanUseTimestampForTimerQuery(canUseTimestampForTimerQuery bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(canUseTimestampForTimerQuery)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("canUseTimestampForTimerQuery", canUseTimestampForTimerQuery)
+	return e
 }
 
 // ColorBufferFloat returns the ColorBufferFloat property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#colorbufferfloat
-func (e *EngineCapabilities) ColorBufferFloat(colorBufferFloat bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(colorBufferFloat)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) ColorBufferFloat() bool {
+	retVal := e.p.Get("colorBufferFloat")
+	return retVal.Bool()
 }
 
 // SetColorBufferFloat sets the ColorBufferFloat property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#colorbufferfloat
 func (e *EngineCapabilities) SetColorBufferFloat(colorBufferFloat bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(colorBufferFloat)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("colorBufferFloat", colorBufferFloat)
+	return e
 }
 
 // DepthTextureExtension returns the DepthTextureExtension property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#depthtextureextension
-func (e *EngineCapabilities) DepthTextureExtension(depthTextureExtension bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(depthTextureExtension)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) DepthTextureExtension() bool {
+	retVal := e.p.Get("depthTextureExtension")
+	return retVal.Bool()
 }
 
 // SetDepthTextureExtension sets the DepthTextureExtension property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#depthtextureextension
 func (e *EngineCapabilities) SetDepthTextureExtension(depthTextureExtension bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(depthTextureExtension)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("depthTextureExtension", depthTextureExtension)
+	return e
 }
 
 // DrawBuffersExtension returns the DrawBuffersExtension property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#drawbuffersextension
-func (e *EngineCapabilities) DrawBuffersExtension(drawBuffersExtension bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(drawBuffersExtension)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) DrawBuffersExtension() bool {
+	retVal := e.p.Get("drawBuffersExtension")
+	return retVal.Bool()
 }
 
 // SetDrawBuffersExtension sets the DrawBuffersExtension property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#drawbuffersextension
 func (e *EngineCapabilities) SetDrawBuffersExtension(drawBuffersExtension bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(drawBuffersExtension)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("drawBuffersExtension", drawBuffersExtension)
+	return e
 }
 
 // Etc1 returns the Etc1 property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#etc1
-func (e *EngineCapabilities) Etc1(etc1 interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(etc1)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) Etc1() interface{} {
+	retVal := e.p.Get("etc1")
+	return retVal
 }
 
 // SetEtc1 sets the Etc1 property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#etc1
 func (e *EngineCapabilities) SetEtc1(etc1 interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(etc1)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("etc1", etc1)
+	return e
 }
 
 // Etc2 returns the Etc2 property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#etc2
-func (e *EngineCapabilities) Etc2(etc2 interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(etc2)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) Etc2() interface{} {
+	retVal := e.p.Get("etc2")
+	return retVal
 }
 
 // SetEtc2 sets the Etc2 property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#etc2
 func (e *EngineCapabilities) SetEtc2(etc2 interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(etc2)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("etc2", etc2)
+	return e
 }
 
 // FragmentDepthSupported returns the FragmentDepthSupported property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#fragmentdepthsupported
-func (e *EngineCapabilities) FragmentDepthSupported(fragmentDepthSupported bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(fragmentDepthSupported)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) FragmentDepthSupported() bool {
+	retVal := e.p.Get("fragmentDepthSupported")
+	return retVal.Bool()
 }
 
 // SetFragmentDepthSupported sets the FragmentDepthSupported property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#fragmentdepthsupported
 func (e *EngineCapabilities) SetFragmentDepthSupported(fragmentDepthSupported bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(fragmentDepthSupported)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("fragmentDepthSupported", fragmentDepthSupported)
+	return e
 }
 
 // HighPrecisionShaderSupported returns the HighPrecisionShaderSupported property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#highprecisionshadersupported
-func (e *EngineCapabilities) HighPrecisionShaderSupported(highPrecisionShaderSupported bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(highPrecisionShaderSupported)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) HighPrecisionShaderSupported() bool {
+	retVal := e.p.Get("highPrecisionShaderSupported")
+	return retVal.Bool()
 }
 
 // SetHighPrecisionShaderSupported sets the HighPrecisionShaderSupported property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#highprecisionshadersupported
 func (e *EngineCapabilities) SetHighPrecisionShaderSupported(highPrecisionShaderSupported bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(highPrecisionShaderSupported)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("highPrecisionShaderSupported", highPrecisionShaderSupported)
+	return e
 }
 
 // InstancedArrays returns the InstancedArrays property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#instancedarrays
-func (e *EngineCapabilities) InstancedArrays(instancedArrays bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(instancedArrays)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) InstancedArrays() bool {
+	retVal := e.p.Get("instancedArrays")
+	return retVal.Bool()
 }
 
 // SetInstancedArrays sets the InstancedArrays property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#instancedarrays
 func (e *EngineCapabilities) SetInstancedArrays(instancedArrays bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(instancedArrays)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("instancedArrays", instancedArrays)
+	return e
 }
 
 // MaxAnisotropy returns the MaxAnisotropy property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxanisotropy
-func (e *EngineCapabilities) MaxAnisotropy(maxAnisotropy float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxAnisotropy)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxAnisotropy() float64 {
+	retVal := e.p.Get("maxAnisotropy")
+	return retVal.Float()
 }
 
 // SetMaxAnisotropy sets the MaxAnisotropy property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxanisotropy
 func (e *EngineCapabilities) SetMaxAnisotropy(maxAnisotropy float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxAnisotropy)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxAnisotropy", maxAnisotropy)
+	return e
 }
 
 // MaxCombinedTexturesImageUnits returns the MaxCombinedTexturesImageUnits property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxcombinedtexturesimageunits
-func (e *EngineCapabilities) MaxCombinedTexturesImageUnits(maxCombinedTexturesImageUnits float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxCombinedTexturesImageUnits)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxCombinedTexturesImageUnits() float64 {
+	retVal := e.p.Get("maxCombinedTexturesImageUnits")
+	return retVal.Float()
 }
 
 // SetMaxCombinedTexturesImageUnits sets the MaxCombinedTexturesImageUnits property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxcombinedtexturesimageunits
 func (e *EngineCapabilities) SetMaxCombinedTexturesImageUnits(maxCombinedTexturesImageUnits float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxCombinedTexturesImageUnits)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxCombinedTexturesImageUnits", maxCombinedTexturesImageUnits)
+	return e
 }
 
 // MaxCubemapTextureSize returns the MaxCubemapTextureSize property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxcubemaptexturesize
-func (e *EngineCapabilities) MaxCubemapTextureSize(maxCubemapTextureSize float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxCubemapTextureSize)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxCubemapTextureSize() float64 {
+	retVal := e.p.Get("maxCubemapTextureSize")
+	return retVal.Float()
 }
 
 // SetMaxCubemapTextureSize sets the MaxCubemapTextureSize property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxcubemaptexturesize
 func (e *EngineCapabilities) SetMaxCubemapTextureSize(maxCubemapTextureSize float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxCubemapTextureSize)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxCubemapTextureSize", maxCubemapTextureSize)
+	return e
 }
 
 // MaxFragmentUniformVectors returns the MaxFragmentUniformVectors property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxfragmentuniformvectors
-func (e *EngineCapabilities) MaxFragmentUniformVectors(maxFragmentUniformVectors float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxFragmentUniformVectors)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxFragmentUniformVectors() float64 {
+	retVal := e.p.Get("maxFragmentUniformVectors")
+	return retVal.Float()
 }
 
 // SetMaxFragmentUniformVectors sets the MaxFragmentUniformVectors property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxfragmentuniformvectors
 func (e *EngineCapabilities) SetMaxFragmentUniformVectors(maxFragmentUniformVectors float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxFragmentUniformVectors)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxFragmentUniformVectors", maxFragmentUniformVectors)
+	return e
 }
 
 // MaxMSAASamples returns the MaxMSAASamples property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxmsaasamples
-func (e *EngineCapabilities) MaxMSAASamples(maxMSAASamples float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxMSAASamples)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxMSAASamples() float64 {
+	retVal := e.p.Get("maxMSAASamples")
+	return retVal.Float()
 }
 
 // SetMaxMSAASamples sets the MaxMSAASamples property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxmsaasamples
 func (e *EngineCapabilities) SetMaxMSAASamples(maxMSAASamples float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxMSAASamples)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxMSAASamples", maxMSAASamples)
+	return e
 }
 
 // MaxRenderTextureSize returns the MaxRenderTextureSize property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxrendertexturesize
-func (e *EngineCapabilities) MaxRenderTextureSize(maxRenderTextureSize float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxRenderTextureSize)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxRenderTextureSize() float64 {
+	retVal := e.p.Get("maxRenderTextureSize")
+	return retVal.Float()
 }
 
 // SetMaxRenderTextureSize sets the MaxRenderTextureSize property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxrendertexturesize
 func (e *EngineCapabilities) SetMaxRenderTextureSize(maxRenderTextureSize float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxRenderTextureSize)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxRenderTextureSize", maxRenderTextureSize)
+	return e
 }
 
 // MaxSamples returns the MaxSamples property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxsamples
-func (e *EngineCapabilities) MaxSamples(maxSamples float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxSamples)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxSamples() float64 {
+	retVal := e.p.Get("maxSamples")
+	return retVal.Float()
 }
 
 // SetMaxSamples sets the MaxSamples property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxsamples
 func (e *EngineCapabilities) SetMaxSamples(maxSamples float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxSamples)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxSamples", maxSamples)
+	return e
 }
 
 // MaxTextureSize returns the MaxTextureSize property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxtexturesize
-func (e *EngineCapabilities) MaxTextureSize(maxTextureSize float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxTextureSize)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxTextureSize() float64 {
+	retVal := e.p.Get("maxTextureSize")
+	return retVal.Float()
 }
 
 // SetMaxTextureSize sets the MaxTextureSize property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxtexturesize
 func (e *EngineCapabilities) SetMaxTextureSize(maxTextureSize float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxTextureSize)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxTextureSize", maxTextureSize)
+	return e
 }
 
 // MaxTexturesImageUnits returns the MaxTexturesImageUnits property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxtexturesimageunits
-func (e *EngineCapabilities) MaxTexturesImageUnits(maxTexturesImageUnits float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxTexturesImageUnits)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxTexturesImageUnits() float64 {
+	retVal := e.p.Get("maxTexturesImageUnits")
+	return retVal.Float()
 }
 
 // SetMaxTexturesImageUnits sets the MaxTexturesImageUnits property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxtexturesimageunits
 func (e *EngineCapabilities) SetMaxTexturesImageUnits(maxTexturesImageUnits float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxTexturesImageUnits)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxTexturesImageUnits", maxTexturesImageUnits)
+	return e
 }
 
 // MaxVaryingVectors returns the MaxVaryingVectors property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxvaryingvectors
-func (e *EngineCapabilities) MaxVaryingVectors(maxVaryingVectors float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxVaryingVectors)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxVaryingVectors() float64 {
+	retVal := e.p.Get("maxVaryingVectors")
+	return retVal.Float()
 }
 
 // SetMaxVaryingVectors sets the MaxVaryingVectors property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxvaryingvectors
 func (e *EngineCapabilities) SetMaxVaryingVectors(maxVaryingVectors float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxVaryingVectors)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxVaryingVectors", maxVaryingVectors)
+	return e
 }
 
 // MaxVertexAttribs returns the MaxVertexAttribs property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxvertexattribs
-func (e *EngineCapabilities) MaxVertexAttribs(maxVertexAttribs float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxVertexAttribs)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxVertexAttribs() float64 {
+	retVal := e.p.Get("maxVertexAttribs")
+	return retVal.Float()
 }
 
 // SetMaxVertexAttribs sets the MaxVertexAttribs property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxvertexattribs
 func (e *EngineCapabilities) SetMaxVertexAttribs(maxVertexAttribs float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxVertexAttribs)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxVertexAttribs", maxVertexAttribs)
+	return e
 }
 
 // MaxVertexTextureImageUnits returns the MaxVertexTextureImageUnits property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxvertextextureimageunits
-func (e *EngineCapabilities) MaxVertexTextureImageUnits(maxVertexTextureImageUnits float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxVertexTextureImageUnits)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxVertexTextureImageUnits() float64 {
+	retVal := e.p.Get("maxVertexTextureImageUnits")
+	return retVal.Float()
 }
 
 // SetMaxVertexTextureImageUnits sets the MaxVertexTextureImageUnits property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxvertextextureimageunits
 func (e *EngineCapabilities) SetMaxVertexTextureImageUnits(maxVertexTextureImageUnits float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxVertexTextureImageUnits)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxVertexTextureImageUnits", maxVertexTextureImageUnits)
+	return e
 }
 
 // MaxVertexUniformVectors returns the MaxVertexUniformVectors property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxvertexuniformvectors
-func (e *EngineCapabilities) MaxVertexUniformVectors(maxVertexUniformVectors float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxVertexUniformVectors)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) MaxVertexUniformVectors() float64 {
+	retVal := e.p.Get("maxVertexUniformVectors")
+	return retVal.Float()
 }
 
 // SetMaxVertexUniformVectors sets the MaxVertexUniformVectors property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#maxvertexuniformvectors
 func (e *EngineCapabilities) SetMaxVertexUniformVectors(maxVertexUniformVectors float64) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(maxVertexUniformVectors)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("maxVertexUniformVectors", maxVertexUniformVectors)
+	return e
 }
 
 // Multiview returns the Multiview property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#multiview
-func (e *EngineCapabilities) Multiview(multiview interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(multiview)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) Multiview() interface{} {
+	retVal := e.p.Get("multiview")
+	return retVal
 }
 
 // SetMultiview sets the Multiview property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#multiview
 func (e *EngineCapabilities) SetMultiview(multiview interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(multiview)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("multiview", multiview)
+	return e
 }
 
 // OculusMultiview returns the OculusMultiview property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#oculusmultiview
-func (e *EngineCapabilities) OculusMultiview(oculusMultiview interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(oculusMultiview)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) OculusMultiview() interface{} {
+	retVal := e.p.Get("oculusMultiview")
+	return retVal
 }
 
 // SetOculusMultiview sets the OculusMultiview property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#oculusmultiview
 func (e *EngineCapabilities) SetOculusMultiview(oculusMultiview interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(oculusMultiview)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("oculusMultiview", oculusMultiview)
+	return e
 }
 
 // ParallelShaderCompile returns the ParallelShaderCompile property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#parallelshadercompile
-func (e *EngineCapabilities) ParallelShaderCompile(parallelShaderCompile js.Value) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(parallelShaderCompile)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) ParallelShaderCompile() js.Value {
+	retVal := e.p.Get("parallelShaderCompile")
+	return retVal
 }
 
 // SetParallelShaderCompile sets the ParallelShaderCompile property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#parallelshadercompile
 func (e *EngineCapabilities) SetParallelShaderCompile(parallelShaderCompile js.Value) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(parallelShaderCompile)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("parallelShaderCompile", parallelShaderCompile)
+	return e
 }
 
 // Pvrtc returns the Pvrtc property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#pvrtc
-func (e *EngineCapabilities) Pvrtc(pvrtc interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(pvrtc)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) Pvrtc() interface{} {
+	retVal := e.p.Get("pvrtc")
+	return retVal
 }
 
 // SetPvrtc sets the Pvrtc property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#pvrtc
 func (e *EngineCapabilities) SetPvrtc(pvrtc interface{}) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(pvrtc)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("pvrtc", pvrtc)
+	return e
 }
 
 // S3tc returns the S3tc property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#s3tc
-func (e *EngineCapabilities) S3tc(s3tc *WEBGL_compressed_texture_s3tc) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(s3tc.JSObject())
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) S3tc() js.Value {
+	retVal := e.p.Get("s3tc")
+	return retVal
 }
 
 // SetS3tc sets the S3tc property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#s3tc
-func (e *EngineCapabilities) SetS3tc(s3tc *WEBGL_compressed_texture_s3tc) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(s3tc.JSObject())
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) SetS3tc(s3tc js.Value) *EngineCapabilities {
+	e.p.Set("s3tc", s3tc)
+	return e
 }
 
 // StandardDerivatives returns the StandardDerivatives property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#standardderivatives
-func (e *EngineCapabilities) StandardDerivatives(standardDerivatives bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(standardDerivatives)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) StandardDerivatives() bool {
+	retVal := e.p.Get("standardDerivatives")
+	return retVal.Bool()
 }
 
 // SetStandardDerivatives sets the StandardDerivatives property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#standardderivatives
 func (e *EngineCapabilities) SetStandardDerivatives(standardDerivatives bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(standardDerivatives)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("standardDerivatives", standardDerivatives)
+	return e
 }
 
 // TextureAnisotropicFilterExtension returns the TextureAnisotropicFilterExtension property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#textureanisotropicfilterextension
-func (e *EngineCapabilities) TextureAnisotropicFilterExtension(textureAnisotropicFilterExtension *EXT_texture_filter_anisotropic) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureAnisotropicFilterExtension.JSObject())
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) TextureAnisotropicFilterExtension() js.Value {
+	retVal := e.p.Get("textureAnisotropicFilterExtension")
+	return retVal
 }
 
 // SetTextureAnisotropicFilterExtension sets the TextureAnisotropicFilterExtension property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#textureanisotropicfilterextension
-func (e *EngineCapabilities) SetTextureAnisotropicFilterExtension(textureAnisotropicFilterExtension *EXT_texture_filter_anisotropic) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureAnisotropicFilterExtension.JSObject())
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) SetTextureAnisotropicFilterExtension(textureAnisotropicFilterExtension js.Value) *EngineCapabilities {
+	e.p.Set("textureAnisotropicFilterExtension", textureAnisotropicFilterExtension)
+	return e
 }
 
 // TextureFloat returns the TextureFloat property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturefloat
-func (e *EngineCapabilities) TextureFloat(textureFloat bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureFloat)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) TextureFloat() bool {
+	retVal := e.p.Get("textureFloat")
+	return retVal.Bool()
 }
 
 // SetTextureFloat sets the TextureFloat property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturefloat
 func (e *EngineCapabilities) SetTextureFloat(textureFloat bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureFloat)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("textureFloat", textureFloat)
+	return e
 }
 
 // TextureFloatLinearFiltering returns the TextureFloatLinearFiltering property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturefloatlinearfiltering
-func (e *EngineCapabilities) TextureFloatLinearFiltering(textureFloatLinearFiltering bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureFloatLinearFiltering)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) TextureFloatLinearFiltering() bool {
+	retVal := e.p.Get("textureFloatLinearFiltering")
+	return retVal.Bool()
 }
 
 // SetTextureFloatLinearFiltering sets the TextureFloatLinearFiltering property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturefloatlinearfiltering
 func (e *EngineCapabilities) SetTextureFloatLinearFiltering(textureFloatLinearFiltering bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureFloatLinearFiltering)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("textureFloatLinearFiltering", textureFloatLinearFiltering)
+	return e
 }
 
 // TextureFloatRender returns the TextureFloatRender property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturefloatrender
-func (e *EngineCapabilities) TextureFloatRender(textureFloatRender bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureFloatRender)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) TextureFloatRender() bool {
+	retVal := e.p.Get("textureFloatRender")
+	return retVal.Bool()
 }
 
 // SetTextureFloatRender sets the TextureFloatRender property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturefloatrender
 func (e *EngineCapabilities) SetTextureFloatRender(textureFloatRender bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureFloatRender)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("textureFloatRender", textureFloatRender)
+	return e
 }
 
 // TextureHalfFloat returns the TextureHalfFloat property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturehalffloat
-func (e *EngineCapabilities) TextureHalfFloat(textureHalfFloat bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureHalfFloat)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) TextureHalfFloat() bool {
+	retVal := e.p.Get("textureHalfFloat")
+	return retVal.Bool()
 }
 
 // SetTextureHalfFloat sets the TextureHalfFloat property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturehalffloat
 func (e *EngineCapabilities) SetTextureHalfFloat(textureHalfFloat bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureHalfFloat)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("textureHalfFloat", textureHalfFloat)
+	return e
 }
 
 // TextureHalfFloatLinearFiltering returns the TextureHalfFloatLinearFiltering property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturehalffloatlinearfiltering
-func (e *EngineCapabilities) TextureHalfFloatLinearFiltering(textureHalfFloatLinearFiltering bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureHalfFloatLinearFiltering)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) TextureHalfFloatLinearFiltering() bool {
+	retVal := e.p.Get("textureHalfFloatLinearFiltering")
+	return retVal.Bool()
 }
 
 // SetTextureHalfFloatLinearFiltering sets the TextureHalfFloatLinearFiltering property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturehalffloatlinearfiltering
 func (e *EngineCapabilities) SetTextureHalfFloatLinearFiltering(textureHalfFloatLinearFiltering bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureHalfFloatLinearFiltering)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("textureHalfFloatLinearFiltering", textureHalfFloatLinearFiltering)
+	return e
 }
 
 // TextureHalfFloatRender returns the TextureHalfFloatRender property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturehalffloatrender
-func (e *EngineCapabilities) TextureHalfFloatRender(textureHalfFloatRender bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureHalfFloatRender)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) TextureHalfFloatRender() bool {
+	retVal := e.p.Get("textureHalfFloatRender")
+	return retVal.Bool()
 }
 
 // SetTextureHalfFloatRender sets the TextureHalfFloatRender property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturehalffloatrender
 func (e *EngineCapabilities) SetTextureHalfFloatRender(textureHalfFloatRender bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureHalfFloatRender)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("textureHalfFloatRender", textureHalfFloatRender)
+	return e
 }
 
 // TextureLOD returns the TextureLOD property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturelod
-func (e *EngineCapabilities) TextureLOD(textureLOD bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureLOD)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) TextureLOD() bool {
+	retVal := e.p.Get("textureLOD")
+	return retVal.Bool()
 }
 
 // SetTextureLOD sets the TextureLOD property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#texturelod
 func (e *EngineCapabilities) SetTextureLOD(textureLOD bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(textureLOD)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("textureLOD", textureLOD)
+	return e
 }
 
 // TimerQuery returns the TimerQuery property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#timerquery
-func (e *EngineCapabilities) TimerQuery(timerQuery *EXT_disjoint_timer_query) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(timerQuery.JSObject())
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) TimerQuery() js.Value {
+	retVal := e.p.Get("timerQuery")
+	return retVal
 }
 
 // SetTimerQuery sets the TimerQuery property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#timerquery
-func (e *EngineCapabilities) SetTimerQuery(timerQuery *EXT_disjoint_timer_query) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(timerQuery.JSObject())
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) SetTimerQuery(timerQuery js.Value) *EngineCapabilities {
+	e.p.Set("timerQuery", timerQuery)
+	return e
 }
 
 // UintIndices returns the UintIndices property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#uintindices
-func (e *EngineCapabilities) UintIndices(uintIndices bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(uintIndices)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) UintIndices() bool {
+	retVal := e.p.Get("uintIndices")
+	return retVal.Bool()
 }
 
 // SetUintIndices sets the UintIndices property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#uintindices
 func (e *EngineCapabilities) SetUintIndices(uintIndices bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(uintIndices)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("uintIndices", uintIndices)
+	return e
 }
 
 // VertexArrayObject returns the VertexArrayObject property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#vertexarrayobject
-func (e *EngineCapabilities) VertexArrayObject(vertexArrayObject bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(vertexArrayObject)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+func (e *EngineCapabilities) VertexArrayObject() bool {
+	retVal := e.p.Get("vertexArrayObject")
+	return retVal.Bool()
 }
 
 // SetVertexArrayObject sets the VertexArrayObject property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#vertexarrayobject
 func (e *EngineCapabilities) SetVertexArrayObject(vertexArrayObject bool) *EngineCapabilities {
-	p := ba.ctx.Get("EngineCapabilities").New(vertexArrayObject)
-	return EngineCapabilitiesFromJSObject(p, ba.ctx)
+	e.p.Set("vertexArrayObject", vertexArrayObject)
+	return e
 }
-
-*/

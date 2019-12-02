@@ -91,22 +91,18 @@ func (c *CombineAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-/*
-
 // Children returns the Children property of class CombineAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.combineaction#children
-func (c *CombineAction) Children(children *Action) *CombineAction {
-	p := ba.ctx.Get("CombineAction").New(children.JSObject())
-	return CombineActionFromJSObject(p, ba.ctx)
+func (c *CombineAction) Children() *Action {
+	retVal := c.p.Get("children")
+	return ActionFromJSObject(retVal, c.ctx)
 }
 
 // SetChildren sets the Children property of class CombineAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.combineaction#children
 func (c *CombineAction) SetChildren(children *Action) *CombineAction {
-	p := ba.ctx.Get("CombineAction").New(children.JSObject())
-	return CombineActionFromJSObject(p, ba.ctx)
+	c.p.Set("children", children.JSObject())
+	return c
 }
-
-*/

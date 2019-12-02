@@ -199,54 +199,50 @@ func (r *RenderingManager) SetRenderingOrder(renderingGroupId float64, opts *Ren
 	r.p.Call("setRenderingOrder", args...)
 }
 
-/*
-
 // AUTOCLEAR returns the AUTOCLEAR property of class RenderingManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#autoclear
-func (r *RenderingManager) AUTOCLEAR(AUTOCLEAR bool) *RenderingManager {
-	p := ba.ctx.Get("RenderingManager").New(AUTOCLEAR)
-	return RenderingManagerFromJSObject(p, ba.ctx)
+func (r *RenderingManager) AUTOCLEAR() bool {
+	retVal := r.p.Get("AUTOCLEAR")
+	return retVal.Bool()
 }
 
 // SetAUTOCLEAR sets the AUTOCLEAR property of class RenderingManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#autoclear
 func (r *RenderingManager) SetAUTOCLEAR(AUTOCLEAR bool) *RenderingManager {
-	p := ba.ctx.Get("RenderingManager").New(AUTOCLEAR)
-	return RenderingManagerFromJSObject(p, ba.ctx)
+	r.p.Set("AUTOCLEAR", AUTOCLEAR)
+	return r
 }
 
 // MAX_RENDERINGGROUPS returns the MAX_RENDERINGGROUPS property of class RenderingManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#max_renderinggroups
-func (r *RenderingManager) MAX_RENDERINGGROUPS(MAX_RENDERINGGROUPS float64) *RenderingManager {
-	p := ba.ctx.Get("RenderingManager").New(MAX_RENDERINGGROUPS)
-	return RenderingManagerFromJSObject(p, ba.ctx)
+func (r *RenderingManager) MAX_RENDERINGGROUPS() float64 {
+	retVal := r.p.Get("MAX_RENDERINGGROUPS")
+	return retVal.Float()
 }
 
 // SetMAX_RENDERINGGROUPS sets the MAX_RENDERINGGROUPS property of class RenderingManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#max_renderinggroups
 func (r *RenderingManager) SetMAX_RENDERINGGROUPS(MAX_RENDERINGGROUPS float64) *RenderingManager {
-	p := ba.ctx.Get("RenderingManager").New(MAX_RENDERINGGROUPS)
-	return RenderingManagerFromJSObject(p, ba.ctx)
+	r.p.Set("MAX_RENDERINGGROUPS", MAX_RENDERINGGROUPS)
+	return r
 }
 
 // MIN_RENDERINGGROUPS returns the MIN_RENDERINGGROUPS property of class RenderingManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#min_renderinggroups
-func (r *RenderingManager) MIN_RENDERINGGROUPS(MIN_RENDERINGGROUPS float64) *RenderingManager {
-	p := ba.ctx.Get("RenderingManager").New(MIN_RENDERINGGROUPS)
-	return RenderingManagerFromJSObject(p, ba.ctx)
+func (r *RenderingManager) MIN_RENDERINGGROUPS() float64 {
+	retVal := r.p.Get("MIN_RENDERINGGROUPS")
+	return retVal.Float()
 }
 
 // SetMIN_RENDERINGGROUPS sets the MIN_RENDERINGGROUPS property of class RenderingManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager#min_renderinggroups
 func (r *RenderingManager) SetMIN_RENDERINGGROUPS(MIN_RENDERINGGROUPS float64) *RenderingManager {
-	p := ba.ctx.Get("RenderingManager").New(MIN_RENDERINGGROUPS)
-	return RenderingManagerFromJSObject(p, ba.ctx)
+	r.p.Set("MIN_RENDERINGGROUPS", MIN_RENDERINGGROUPS)
+	return r
 }
-
-*/

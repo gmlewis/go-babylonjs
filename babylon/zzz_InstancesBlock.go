@@ -100,102 +100,98 @@ func (i *InstancesBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMa
 	i.p.Call("prepareDefines", args...)
 }
 
-/*
-
 // Output returns the Output property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#output
-func (i *InstancesBlock) Output(output *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(output.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+func (i *InstancesBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := i.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, i.ctx)
 }
 
 // SetOutput sets the Output property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#output
 func (i *InstancesBlock) SetOutput(output *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(output.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+	i.p.Set("output", output.JSObject())
+	return i
 }
 
 // World returns the World property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#world
-func (i *InstancesBlock) World(world *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(world.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+func (i *InstancesBlock) World() *NodeMaterialConnectionPoint {
+	retVal := i.p.Get("world")
+	return NodeMaterialConnectionPointFromJSObject(retVal, i.ctx)
 }
 
 // SetWorld sets the World property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#world
 func (i *InstancesBlock) SetWorld(world *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(world.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+	i.p.Set("world", world.JSObject())
+	return i
 }
 
 // World0 returns the World0 property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#world0
-func (i *InstancesBlock) World0(world0 *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(world0.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+func (i *InstancesBlock) World0() *NodeMaterialConnectionPoint {
+	retVal := i.p.Get("world0")
+	return NodeMaterialConnectionPointFromJSObject(retVal, i.ctx)
 }
 
 // SetWorld0 sets the World0 property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#world0
 func (i *InstancesBlock) SetWorld0(world0 *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(world0.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+	i.p.Set("world0", world0.JSObject())
+	return i
 }
 
 // World1 returns the World1 property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#world1
-func (i *InstancesBlock) World1(world1 *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(world1.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+func (i *InstancesBlock) World1() *NodeMaterialConnectionPoint {
+	retVal := i.p.Get("world1")
+	return NodeMaterialConnectionPointFromJSObject(retVal, i.ctx)
 }
 
 // SetWorld1 sets the World1 property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#world1
 func (i *InstancesBlock) SetWorld1(world1 *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(world1.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+	i.p.Set("world1", world1.JSObject())
+	return i
 }
 
 // World2 returns the World2 property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#world2
-func (i *InstancesBlock) World2(world2 *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(world2.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+func (i *InstancesBlock) World2() *NodeMaterialConnectionPoint {
+	retVal := i.p.Get("world2")
+	return NodeMaterialConnectionPointFromJSObject(retVal, i.ctx)
 }
 
 // SetWorld2 sets the World2 property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#world2
 func (i *InstancesBlock) SetWorld2(world2 *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(world2.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+	i.p.Set("world2", world2.JSObject())
+	return i
 }
 
 // World3 returns the World3 property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#world3
-func (i *InstancesBlock) World3(world3 *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(world3.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+func (i *InstancesBlock) World3() *NodeMaterialConnectionPoint {
+	retVal := i.p.Get("world3")
+	return NodeMaterialConnectionPointFromJSObject(retVal, i.ctx)
 }
 
 // SetWorld3 sets the World3 property of class InstancesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock#world3
 func (i *InstancesBlock) SetWorld3(world3 *NodeMaterialConnectionPoint) *InstancesBlock {
-	p := ba.ctx.Get("InstancesBlock").New(world3.JSObject())
-	return InstancesBlockFromJSObject(p, ba.ctx)
+	i.p.Set("world3", world3.JSObject())
+	return i
 }
-
-*/

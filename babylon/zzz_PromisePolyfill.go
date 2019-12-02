@@ -59,7 +59,3 @@ func (p *PromisePolyfill) Apply(opts *PromisePolyfillApplyOpts) {
 
 	p.p.Call("Apply", args...)
 }
-
-/*
-
- */

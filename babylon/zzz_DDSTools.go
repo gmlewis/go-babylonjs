@@ -49,22 +49,18 @@ func (d *DDSTools) GetDDSInfo(arrayBuffer interface{}) js.Value {
 	return retVal
 }
 
-/*
-
 // StoreLODInAlphaChannel returns the StoreLODInAlphaChannel property of class DDSTools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ddstools#storelodinalphachannel
-func (d *DDSTools) StoreLODInAlphaChannel(StoreLODInAlphaChannel bool) *DDSTools {
-	p := ba.ctx.Get("DDSTools").New(StoreLODInAlphaChannel)
-	return DDSToolsFromJSObject(p, ba.ctx)
+func (d *DDSTools) StoreLODInAlphaChannel() bool {
+	retVal := d.p.Get("StoreLODInAlphaChannel")
+	return retVal.Bool()
 }
 
 // SetStoreLODInAlphaChannel sets the StoreLODInAlphaChannel property of class DDSTools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ddstools#storelodinalphachannel
 func (d *DDSTools) SetStoreLODInAlphaChannel(StoreLODInAlphaChannel bool) *DDSTools {
-	p := ba.ctx.Get("DDSTools").New(StoreLODInAlphaChannel)
-	return DDSToolsFromJSObject(p, ba.ctx)
+	d.p.Set("StoreLODInAlphaChannel", StoreLODInAlphaChannel)
+	return d
 }
-
-*/

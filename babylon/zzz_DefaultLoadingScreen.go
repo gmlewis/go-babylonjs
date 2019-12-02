@@ -87,70 +87,66 @@ func (d *DefaultLoadingScreen) HideLoadingUI() {
 	d.p.Call("hideLoadingUI")
 }
 
-/*
-
 // DefaultLogoUrl returns the DefaultLogoUrl property of class DefaultLoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#defaultlogourl
-func (d *DefaultLoadingScreen) DefaultLogoUrl(DefaultLogoUrl string) *DefaultLoadingScreen {
-	p := ba.ctx.Get("DefaultLoadingScreen").New(DefaultLogoUrl)
-	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+func (d *DefaultLoadingScreen) DefaultLogoUrl() string {
+	retVal := d.p.Get("DefaultLogoUrl")
+	return retVal.String()
 }
 
 // SetDefaultLogoUrl sets the DefaultLogoUrl property of class DefaultLoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#defaultlogourl
 func (d *DefaultLoadingScreen) SetDefaultLogoUrl(DefaultLogoUrl string) *DefaultLoadingScreen {
-	p := ba.ctx.Get("DefaultLoadingScreen").New(DefaultLogoUrl)
-	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+	d.p.Set("DefaultLogoUrl", DefaultLogoUrl)
+	return d
 }
 
 // DefaultSpinnerUrl returns the DefaultSpinnerUrl property of class DefaultLoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#defaultspinnerurl
-func (d *DefaultLoadingScreen) DefaultSpinnerUrl(DefaultSpinnerUrl string) *DefaultLoadingScreen {
-	p := ba.ctx.Get("DefaultLoadingScreen").New(DefaultSpinnerUrl)
-	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+func (d *DefaultLoadingScreen) DefaultSpinnerUrl() string {
+	retVal := d.p.Get("DefaultSpinnerUrl")
+	return retVal.String()
 }
 
 // SetDefaultSpinnerUrl sets the DefaultSpinnerUrl property of class DefaultLoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#defaultspinnerurl
 func (d *DefaultLoadingScreen) SetDefaultSpinnerUrl(DefaultSpinnerUrl string) *DefaultLoadingScreen {
-	p := ba.ctx.Get("DefaultLoadingScreen").New(DefaultSpinnerUrl)
-	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+	d.p.Set("DefaultSpinnerUrl", DefaultSpinnerUrl)
+	return d
 }
 
 // LoadingUIBackgroundColor returns the LoadingUIBackgroundColor property of class DefaultLoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#loadinguibackgroundcolor
-func (d *DefaultLoadingScreen) LoadingUIBackgroundColor(loadingUIBackgroundColor string) *DefaultLoadingScreen {
-	p := ba.ctx.Get("DefaultLoadingScreen").New(loadingUIBackgroundColor)
-	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+func (d *DefaultLoadingScreen) LoadingUIBackgroundColor() string {
+	retVal := d.p.Get("loadingUIBackgroundColor")
+	return retVal.String()
 }
 
 // SetLoadingUIBackgroundColor sets the LoadingUIBackgroundColor property of class DefaultLoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#loadinguibackgroundcolor
 func (d *DefaultLoadingScreen) SetLoadingUIBackgroundColor(loadingUIBackgroundColor string) *DefaultLoadingScreen {
-	p := ba.ctx.Get("DefaultLoadingScreen").New(loadingUIBackgroundColor)
-	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+	d.p.Set("loadingUIBackgroundColor", loadingUIBackgroundColor)
+	return d
 }
 
 // LoadingUIText returns the LoadingUIText property of class DefaultLoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#loadinguitext
-func (d *DefaultLoadingScreen) LoadingUIText(loadingUIText string) *DefaultLoadingScreen {
-	p := ba.ctx.Get("DefaultLoadingScreen").New(loadingUIText)
-	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+func (d *DefaultLoadingScreen) LoadingUIText() string {
+	retVal := d.p.Get("loadingUIText")
+	return retVal.String()
 }
 
 // SetLoadingUIText sets the LoadingUIText property of class DefaultLoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#loadinguitext
 func (d *DefaultLoadingScreen) SetLoadingUIText(loadingUIText string) *DefaultLoadingScreen {
-	p := ba.ctx.Get("DefaultLoadingScreen").New(loadingUIText)
-	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+	d.p.Set("loadingUIText", loadingUIText)
+	return d
 }
-
-*/

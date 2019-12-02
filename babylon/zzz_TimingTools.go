@@ -47,7 +47,3 @@ func (t *TimingTools) SetImmediate(action func()) {
 
 	t.p.Call("SetImmediate", args...)
 }
-
-/*
-
- */

@@ -57,86 +57,82 @@ func (a *AdvancedDynamicTextureInstrumentation) Dispose() {
 	a.p.Call("dispose")
 }
 
-/*
-
 // CaptureLayoutTime returns the CaptureLayoutTime property of class AdvancedDynamicTextureInstrumentation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#capturelayouttime
-func (a *AdvancedDynamicTextureInstrumentation) CaptureLayoutTime(captureLayoutTime bool) *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(captureLayoutTime)
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTextureInstrumentation) CaptureLayoutTime() bool {
+	retVal := a.p.Get("captureLayoutTime")
+	return retVal.Bool()
 }
 
 // SetCaptureLayoutTime sets the CaptureLayoutTime property of class AdvancedDynamicTextureInstrumentation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#capturelayouttime
 func (a *AdvancedDynamicTextureInstrumentation) SetCaptureLayoutTime(captureLayoutTime bool) *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(captureLayoutTime)
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+	a.p.Set("captureLayoutTime", captureLayoutTime)
+	return a
 }
 
 // CaptureRenderTime returns the CaptureRenderTime property of class AdvancedDynamicTextureInstrumentation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#capturerendertime
-func (a *AdvancedDynamicTextureInstrumentation) CaptureRenderTime(captureRenderTime bool) *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(captureRenderTime)
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTextureInstrumentation) CaptureRenderTime() bool {
+	retVal := a.p.Get("captureRenderTime")
+	return retVal.Bool()
 }
 
 // SetCaptureRenderTime sets the CaptureRenderTime property of class AdvancedDynamicTextureInstrumentation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#capturerendertime
 func (a *AdvancedDynamicTextureInstrumentation) SetCaptureRenderTime(captureRenderTime bool) *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(captureRenderTime)
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+	a.p.Set("captureRenderTime", captureRenderTime)
+	return a
 }
 
 // LayoutTimeCounter returns the LayoutTimeCounter property of class AdvancedDynamicTextureInstrumentation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#layouttimecounter
-func (a *AdvancedDynamicTextureInstrumentation) LayoutTimeCounter(layoutTimeCounter *PerfCounter) *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(layoutTimeCounter.JSObject())
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTextureInstrumentation) LayoutTimeCounter() *PerfCounter {
+	retVal := a.p.Get("layoutTimeCounter")
+	return PerfCounterFromJSObject(retVal, a.ctx)
 }
 
 // SetLayoutTimeCounter sets the LayoutTimeCounter property of class AdvancedDynamicTextureInstrumentation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#layouttimecounter
 func (a *AdvancedDynamicTextureInstrumentation) SetLayoutTimeCounter(layoutTimeCounter *PerfCounter) *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(layoutTimeCounter.JSObject())
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+	a.p.Set("layoutTimeCounter", layoutTimeCounter.JSObject())
+	return a
 }
 
 // RenderTimeCounter returns the RenderTimeCounter property of class AdvancedDynamicTextureInstrumentation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#rendertimecounter
-func (a *AdvancedDynamicTextureInstrumentation) RenderTimeCounter(renderTimeCounter *PerfCounter) *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(renderTimeCounter.JSObject())
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTextureInstrumentation) RenderTimeCounter() *PerfCounter {
+	retVal := a.p.Get("renderTimeCounter")
+	return PerfCounterFromJSObject(retVal, a.ctx)
 }
 
 // SetRenderTimeCounter sets the RenderTimeCounter property of class AdvancedDynamicTextureInstrumentation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#rendertimecounter
 func (a *AdvancedDynamicTextureInstrumentation) SetRenderTimeCounter(renderTimeCounter *PerfCounter) *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(renderTimeCounter.JSObject())
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+	a.p.Set("renderTimeCounter", renderTimeCounter.JSObject())
+	return a
 }
 
 // Texture returns the Texture property of class AdvancedDynamicTextureInstrumentation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#texture
-func (a *AdvancedDynamicTextureInstrumentation) Texture(texture *AdvancedDynamicTexture) *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(texture.JSObject())
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+func (a *AdvancedDynamicTextureInstrumentation) Texture() *AdvancedDynamicTexture {
+	retVal := a.p.Get("texture")
+	return AdvancedDynamicTextureFromJSObject(retVal, a.ctx)
 }
 
 // SetTexture sets the Texture property of class AdvancedDynamicTextureInstrumentation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation#texture
 func (a *AdvancedDynamicTextureInstrumentation) SetTexture(texture *AdvancedDynamicTexture) *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(texture.JSObject())
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+	a.p.Set("texture", texture.JSObject())
+	return a
 }
-
-*/

@@ -51,7 +51,3 @@ func (i *IEasingFunction) Ease(gradient float64) float64 {
 	retVal := i.p.Call("ease", args...)
 	return retVal.Float()
 }
-
-/*
-
- */

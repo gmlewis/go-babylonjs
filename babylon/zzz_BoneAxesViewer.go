@@ -83,102 +83,98 @@ func (b *BoneAxesViewer) Update() {
 	b.p.Call("update")
 }
 
-/*
-
 // Bone returns the Bone property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#bone
-func (b *BoneAxesViewer) Bone(bone *Bone) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(bone.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+func (b *BoneAxesViewer) Bone() *Bone {
+	retVal := b.p.Get("bone")
+	return BoneFromJSObject(retVal, b.ctx)
 }
 
 // SetBone sets the Bone property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#bone
 func (b *BoneAxesViewer) SetBone(bone *Bone) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(bone.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+	b.p.Set("bone", bone.JSObject())
+	return b
 }
 
 // Mesh returns the Mesh property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#mesh
-func (b *BoneAxesViewer) Mesh(mesh *Mesh) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(mesh.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+func (b *BoneAxesViewer) Mesh() *Mesh {
+	retVal := b.p.Get("mesh")
+	return MeshFromJSObject(retVal, b.ctx)
 }
 
 // SetMesh sets the Mesh property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#mesh
 func (b *BoneAxesViewer) SetMesh(mesh *Mesh) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(mesh.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+	b.p.Set("mesh", mesh.JSObject())
+	return b
 }
 
 // Pos returns the Pos property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#pos
-func (b *BoneAxesViewer) Pos(pos *Vector3) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(pos.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+func (b *BoneAxesViewer) Pos() *Vector3 {
+	retVal := b.p.Get("pos")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetPos sets the Pos property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#pos
 func (b *BoneAxesViewer) SetPos(pos *Vector3) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(pos.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+	b.p.Set("pos", pos.JSObject())
+	return b
 }
 
 // Xaxis returns the Xaxis property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#xaxis
-func (b *BoneAxesViewer) Xaxis(xaxis *Vector3) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(xaxis.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+func (b *BoneAxesViewer) Xaxis() *Vector3 {
+	retVal := b.p.Get("xaxis")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetXaxis sets the Xaxis property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#xaxis
 func (b *BoneAxesViewer) SetXaxis(xaxis *Vector3) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(xaxis.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+	b.p.Set("xaxis", xaxis.JSObject())
+	return b
 }
 
 // Yaxis returns the Yaxis property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#yaxis
-func (b *BoneAxesViewer) Yaxis(yaxis *Vector3) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(yaxis.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+func (b *BoneAxesViewer) Yaxis() *Vector3 {
+	retVal := b.p.Get("yaxis")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetYaxis sets the Yaxis property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#yaxis
 func (b *BoneAxesViewer) SetYaxis(yaxis *Vector3) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(yaxis.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+	b.p.Set("yaxis", yaxis.JSObject())
+	return b
 }
 
 // Zaxis returns the Zaxis property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#zaxis
-func (b *BoneAxesViewer) Zaxis(zaxis *Vector3) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(zaxis.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+func (b *BoneAxesViewer) Zaxis() *Vector3 {
+	retVal := b.p.Get("zaxis")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetZaxis sets the Zaxis property of class BoneAxesViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#zaxis
 func (b *BoneAxesViewer) SetZaxis(zaxis *Vector3) *BoneAxesViewer {
-	p := ba.ctx.Get("BoneAxesViewer").New(zaxis.JSObject())
-	return BoneAxesViewerFromJSObject(p, ba.ctx)
+	b.p.Set("zaxis", zaxis.JSObject())
+	return b
 }
-
-*/

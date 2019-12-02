@@ -38,7 +38,3 @@ func SineEaseArrayToJSArray(array []*SineEase) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

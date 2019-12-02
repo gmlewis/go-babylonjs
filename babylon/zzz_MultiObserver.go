@@ -43,7 +43,3 @@ func (m *MultiObserver) Dispose() {
 
 	m.p.Call("dispose")
 }
-
-/*
-
- */

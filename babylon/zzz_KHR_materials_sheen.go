@@ -38,54 +38,50 @@ func KHR_materials_sheenArrayToJSArray(array []*KHR_materials_sheen) []interface
 	return result
 }
 
-/*
-
 // Enabled returns the Enabled property of class KHR_materials_sheen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_materials_sheen#enabled
-func (k *KHR_materials_sheen) Enabled(enabled bool) *KHR_materials_sheen {
-	p := ba.ctx.Get("KHR_materials_sheen").New(enabled)
-	return KHR_materials_sheenFromJSObject(p, ba.ctx)
+func (k *KHR_materials_sheen) Enabled() bool {
+	retVal := k.p.Get("enabled")
+	return retVal.Bool()
 }
 
 // SetEnabled sets the Enabled property of class KHR_materials_sheen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_materials_sheen#enabled
 func (k *KHR_materials_sheen) SetEnabled(enabled bool) *KHR_materials_sheen {
-	p := ba.ctx.Get("KHR_materials_sheen").New(enabled)
-	return KHR_materials_sheenFromJSObject(p, ba.ctx)
+	k.p.Set("enabled", enabled)
+	return k
 }
 
 // Name returns the Name property of class KHR_materials_sheen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_materials_sheen#name
-func (k *KHR_materials_sheen) Name(name string) *KHR_materials_sheen {
-	p := ba.ctx.Get("KHR_materials_sheen").New(name)
-	return KHR_materials_sheenFromJSObject(p, ba.ctx)
+func (k *KHR_materials_sheen) Name() string {
+	retVal := k.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class KHR_materials_sheen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_materials_sheen#name
 func (k *KHR_materials_sheen) SetName(name string) *KHR_materials_sheen {
-	p := ba.ctx.Get("KHR_materials_sheen").New(name)
-	return KHR_materials_sheenFromJSObject(p, ba.ctx)
+	k.p.Set("name", name)
+	return k
 }
 
 // Order returns the Order property of class KHR_materials_sheen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_materials_sheen#order
-func (k *KHR_materials_sheen) Order(order float64) *KHR_materials_sheen {
-	p := ba.ctx.Get("KHR_materials_sheen").New(order)
-	return KHR_materials_sheenFromJSObject(p, ba.ctx)
+func (k *KHR_materials_sheen) Order() float64 {
+	retVal := k.p.Get("order")
+	return retVal.Float()
 }
 
 // SetOrder sets the Order property of class KHR_materials_sheen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khr_materials_sheen#order
 func (k *KHR_materials_sheen) SetOrder(order float64) *KHR_materials_sheen {
-	p := ba.ctx.Get("KHR_materials_sheen").New(order)
-	return KHR_materials_sheenFromJSObject(p, ba.ctx)
+	k.p.Set("order", order)
+	return k
 }
-
-*/

@@ -215,310 +215,306 @@ func (a *ActionManager) UnregisterAction(action *IAction) bool {
 	return retVal.Bool()
 }
 
-/*
-
 // HasPickTriggers returns the HasPickTriggers property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#haspicktriggers
-func (a *ActionManager) HasPickTriggers(hasPickTriggers bool) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(hasPickTriggers)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) HasPickTriggers() bool {
+	retVal := a.p.Get("hasPickTriggers")
+	return retVal.Bool()
 }
 
 // SetHasPickTriggers sets the HasPickTriggers property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#haspicktriggers
 func (a *ActionManager) SetHasPickTriggers(hasPickTriggers bool) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(hasPickTriggers)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("hasPickTriggers", hasPickTriggers)
+	return a
 }
 
 // HasPointerTriggers returns the HasPointerTriggers property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#haspointertriggers
-func (a *ActionManager) HasPointerTriggers(hasPointerTriggers bool) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(hasPointerTriggers)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) HasPointerTriggers() bool {
+	retVal := a.p.Get("hasPointerTriggers")
+	return retVal.Bool()
 }
 
 // SetHasPointerTriggers sets the HasPointerTriggers property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#haspointertriggers
 func (a *ActionManager) SetHasPointerTriggers(hasPointerTriggers bool) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(hasPointerTriggers)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("hasPointerTriggers", hasPointerTriggers)
+	return a
 }
 
 // NothingTrigger returns the NothingTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#nothingtrigger
-func (a *ActionManager) NothingTrigger(NothingTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(NothingTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) NothingTrigger() float64 {
+	retVal := a.p.Get("NothingTrigger")
+	return retVal.Float()
 }
 
 // SetNothingTrigger sets the NothingTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#nothingtrigger
 func (a *ActionManager) SetNothingTrigger(NothingTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(NothingTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("NothingTrigger", NothingTrigger)
+	return a
 }
 
 // OnCenterPickTrigger returns the OnCenterPickTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#oncenterpicktrigger
-func (a *ActionManager) OnCenterPickTrigger(OnCenterPickTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnCenterPickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnCenterPickTrigger() float64 {
+	retVal := a.p.Get("OnCenterPickTrigger")
+	return retVal.Float()
 }
 
 // SetOnCenterPickTrigger sets the OnCenterPickTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#oncenterpicktrigger
 func (a *ActionManager) SetOnCenterPickTrigger(OnCenterPickTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnCenterPickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnCenterPickTrigger", OnCenterPickTrigger)
+	return a
 }
 
 // OnDoublePickTrigger returns the OnDoublePickTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#ondoublepicktrigger
-func (a *ActionManager) OnDoublePickTrigger(OnDoublePickTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnDoublePickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnDoublePickTrigger() float64 {
+	retVal := a.p.Get("OnDoublePickTrigger")
+	return retVal.Float()
 }
 
 // SetOnDoublePickTrigger sets the OnDoublePickTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#ondoublepicktrigger
 func (a *ActionManager) SetOnDoublePickTrigger(OnDoublePickTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnDoublePickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnDoublePickTrigger", OnDoublePickTrigger)
+	return a
 }
 
 // OnEveryFrameTrigger returns the OnEveryFrameTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#oneveryframetrigger
-func (a *ActionManager) OnEveryFrameTrigger(OnEveryFrameTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnEveryFrameTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnEveryFrameTrigger() float64 {
+	retVal := a.p.Get("OnEveryFrameTrigger")
+	return retVal.Float()
 }
 
 // SetOnEveryFrameTrigger sets the OnEveryFrameTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#oneveryframetrigger
 func (a *ActionManager) SetOnEveryFrameTrigger(OnEveryFrameTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnEveryFrameTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnEveryFrameTrigger", OnEveryFrameTrigger)
+	return a
 }
 
 // OnIntersectionEnterTrigger returns the OnIntersectionEnterTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onintersectionentertrigger
-func (a *ActionManager) OnIntersectionEnterTrigger(OnIntersectionEnterTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnIntersectionEnterTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnIntersectionEnterTrigger() float64 {
+	retVal := a.p.Get("OnIntersectionEnterTrigger")
+	return retVal.Float()
 }
 
 // SetOnIntersectionEnterTrigger sets the OnIntersectionEnterTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onintersectionentertrigger
 func (a *ActionManager) SetOnIntersectionEnterTrigger(OnIntersectionEnterTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnIntersectionEnterTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnIntersectionEnterTrigger", OnIntersectionEnterTrigger)
+	return a
 }
 
 // OnIntersectionExitTrigger returns the OnIntersectionExitTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onintersectionexittrigger
-func (a *ActionManager) OnIntersectionExitTrigger(OnIntersectionExitTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnIntersectionExitTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnIntersectionExitTrigger() float64 {
+	retVal := a.p.Get("OnIntersectionExitTrigger")
+	return retVal.Float()
 }
 
 // SetOnIntersectionExitTrigger sets the OnIntersectionExitTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onintersectionexittrigger
 func (a *ActionManager) SetOnIntersectionExitTrigger(OnIntersectionExitTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnIntersectionExitTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnIntersectionExitTrigger", OnIntersectionExitTrigger)
+	return a
 }
 
 // OnKeyDownTrigger returns the OnKeyDownTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onkeydowntrigger
-func (a *ActionManager) OnKeyDownTrigger(OnKeyDownTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnKeyDownTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnKeyDownTrigger() float64 {
+	retVal := a.p.Get("OnKeyDownTrigger")
+	return retVal.Float()
 }
 
 // SetOnKeyDownTrigger sets the OnKeyDownTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onkeydowntrigger
 func (a *ActionManager) SetOnKeyDownTrigger(OnKeyDownTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnKeyDownTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnKeyDownTrigger", OnKeyDownTrigger)
+	return a
 }
 
 // OnKeyUpTrigger returns the OnKeyUpTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onkeyuptrigger
-func (a *ActionManager) OnKeyUpTrigger(OnKeyUpTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnKeyUpTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnKeyUpTrigger() float64 {
+	retVal := a.p.Get("OnKeyUpTrigger")
+	return retVal.Float()
 }
 
 // SetOnKeyUpTrigger sets the OnKeyUpTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onkeyuptrigger
 func (a *ActionManager) SetOnKeyUpTrigger(OnKeyUpTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnKeyUpTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnKeyUpTrigger", OnKeyUpTrigger)
+	return a
 }
 
 // OnLeftPickTrigger returns the OnLeftPickTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onleftpicktrigger
-func (a *ActionManager) OnLeftPickTrigger(OnLeftPickTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnLeftPickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnLeftPickTrigger() float64 {
+	retVal := a.p.Get("OnLeftPickTrigger")
+	return retVal.Float()
 }
 
 // SetOnLeftPickTrigger sets the OnLeftPickTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onleftpicktrigger
 func (a *ActionManager) SetOnLeftPickTrigger(OnLeftPickTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnLeftPickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnLeftPickTrigger", OnLeftPickTrigger)
+	return a
 }
 
 // OnLongPressTrigger returns the OnLongPressTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onlongpresstrigger
-func (a *ActionManager) OnLongPressTrigger(OnLongPressTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnLongPressTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnLongPressTrigger() float64 {
+	retVal := a.p.Get("OnLongPressTrigger")
+	return retVal.Float()
 }
 
 // SetOnLongPressTrigger sets the OnLongPressTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onlongpresstrigger
 func (a *ActionManager) SetOnLongPressTrigger(OnLongPressTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnLongPressTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnLongPressTrigger", OnLongPressTrigger)
+	return a
 }
 
 // OnPickDownTrigger returns the OnPickDownTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpickdowntrigger
-func (a *ActionManager) OnPickDownTrigger(OnPickDownTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPickDownTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnPickDownTrigger() float64 {
+	retVal := a.p.Get("OnPickDownTrigger")
+	return retVal.Float()
 }
 
 // SetOnPickDownTrigger sets the OnPickDownTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpickdowntrigger
 func (a *ActionManager) SetOnPickDownTrigger(OnPickDownTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPickDownTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnPickDownTrigger", OnPickDownTrigger)
+	return a
 }
 
 // OnPickOutTrigger returns the OnPickOutTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpickouttrigger
-func (a *ActionManager) OnPickOutTrigger(OnPickOutTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPickOutTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnPickOutTrigger() float64 {
+	retVal := a.p.Get("OnPickOutTrigger")
+	return retVal.Float()
 }
 
 // SetOnPickOutTrigger sets the OnPickOutTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpickouttrigger
 func (a *ActionManager) SetOnPickOutTrigger(OnPickOutTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPickOutTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnPickOutTrigger", OnPickOutTrigger)
+	return a
 }
 
 // OnPickTrigger returns the OnPickTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpicktrigger
-func (a *ActionManager) OnPickTrigger(OnPickTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnPickTrigger() float64 {
+	retVal := a.p.Get("OnPickTrigger")
+	return retVal.Float()
 }
 
 // SetOnPickTrigger sets the OnPickTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpicktrigger
 func (a *ActionManager) SetOnPickTrigger(OnPickTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnPickTrigger", OnPickTrigger)
+	return a
 }
 
 // OnPickUpTrigger returns the OnPickUpTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpickuptrigger
-func (a *ActionManager) OnPickUpTrigger(OnPickUpTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPickUpTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnPickUpTrigger() float64 {
+	retVal := a.p.Get("OnPickUpTrigger")
+	return retVal.Float()
 }
 
 // SetOnPickUpTrigger sets the OnPickUpTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpickuptrigger
 func (a *ActionManager) SetOnPickUpTrigger(OnPickUpTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPickUpTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnPickUpTrigger", OnPickUpTrigger)
+	return a
 }
 
 // OnPointerOutTrigger returns the OnPointerOutTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpointerouttrigger
-func (a *ActionManager) OnPointerOutTrigger(OnPointerOutTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPointerOutTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnPointerOutTrigger() float64 {
+	retVal := a.p.Get("OnPointerOutTrigger")
+	return retVal.Float()
 }
 
 // SetOnPointerOutTrigger sets the OnPointerOutTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpointerouttrigger
 func (a *ActionManager) SetOnPointerOutTrigger(OnPointerOutTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPointerOutTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnPointerOutTrigger", OnPointerOutTrigger)
+	return a
 }
 
 // OnPointerOverTrigger returns the OnPointerOverTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpointerovertrigger
-func (a *ActionManager) OnPointerOverTrigger(OnPointerOverTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPointerOverTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnPointerOverTrigger() float64 {
+	retVal := a.p.Get("OnPointerOverTrigger")
+	return retVal.Float()
 }
 
 // SetOnPointerOverTrigger sets the OnPointerOverTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onpointerovertrigger
 func (a *ActionManager) SetOnPointerOverTrigger(OnPointerOverTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnPointerOverTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnPointerOverTrigger", OnPointerOverTrigger)
+	return a
 }
 
 // OnRightPickTrigger returns the OnRightPickTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onrightpicktrigger
-func (a *ActionManager) OnRightPickTrigger(OnRightPickTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnRightPickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+func (a *ActionManager) OnRightPickTrigger() float64 {
+	retVal := a.p.Get("OnRightPickTrigger")
+	return retVal.Float()
 }
 
 // SetOnRightPickTrigger sets the OnRightPickTrigger property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onrightpicktrigger
 func (a *ActionManager) SetOnRightPickTrigger(OnRightPickTrigger float64) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(OnRightPickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
+	a.p.Set("OnRightPickTrigger", OnRightPickTrigger)
+	return a
 }
-
-*/

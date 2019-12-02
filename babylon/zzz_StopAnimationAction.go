@@ -86,7 +86,3 @@ func (s *StopAnimationAction) Serialize(parent interface{}) interface{} {
 	retVal := s.p.Call("serialize", args...)
 	return retVal
 }
-
-/*
-
- */

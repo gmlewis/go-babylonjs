@@ -58,38 +58,34 @@ func (l *LengthBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Output returns the Output property of class LengthBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock#output
-func (l *LengthBlock) Output(output *NodeMaterialConnectionPoint) *LengthBlock {
-	p := ba.ctx.Get("LengthBlock").New(output.JSObject())
-	return LengthBlockFromJSObject(p, ba.ctx)
+func (l *LengthBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetOutput sets the Output property of class LengthBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock#output
 func (l *LengthBlock) SetOutput(output *NodeMaterialConnectionPoint) *LengthBlock {
-	p := ba.ctx.Get("LengthBlock").New(output.JSObject())
-	return LengthBlockFromJSObject(p, ba.ctx)
+	l.p.Set("output", output.JSObject())
+	return l
 }
 
 // Value returns the Value property of class LengthBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock#value
-func (l *LengthBlock) Value(value *NodeMaterialConnectionPoint) *LengthBlock {
-	p := ba.ctx.Get("LengthBlock").New(value.JSObject())
-	return LengthBlockFromJSObject(p, ba.ctx)
+func (l *LengthBlock) Value() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("value")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetValue sets the Value property of class LengthBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock#value
 func (l *LengthBlock) SetValue(value *NodeMaterialConnectionPoint) *LengthBlock {
-	p := ba.ctx.Get("LengthBlock").New(value.JSObject())
-	return LengthBlockFromJSObject(p, ba.ctx)
+	l.p.Set("value", value.JSObject())
+	return l
 }
-
-*/

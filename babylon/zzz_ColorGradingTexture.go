@@ -104,22 +104,18 @@ func (c *ColorGradingTexture) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // Url returns the Url property of class ColorGradingTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#url
-func (c *ColorGradingTexture) Url(url string) *ColorGradingTexture {
-	p := ba.ctx.Get("ColorGradingTexture").New(url)
-	return ColorGradingTextureFromJSObject(p, ba.ctx)
+func (c *ColorGradingTexture) Url() string {
+	retVal := c.p.Get("url")
+	return retVal.String()
 }
 
 // SetUrl sets the Url property of class ColorGradingTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#url
 func (c *ColorGradingTexture) SetUrl(url string) *ColorGradingTexture {
-	p := ba.ctx.Get("ColorGradingTexture").New(url)
-	return ColorGradingTextureFromJSObject(p, ba.ctx)
+	c.p.Set("url", url)
+	return c
 }
-
-*/

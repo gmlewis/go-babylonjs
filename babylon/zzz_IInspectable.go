@@ -39,102 +39,98 @@ func IInspectableArrayToJSArray(array []*IInspectable) []interface{} {
 	return result
 }
 
-/*
-
 // Label returns the Label property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#label
-func (i *IInspectable) Label(label string) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(label)
-	return IInspectableFromJSObject(p, ba.ctx)
+func (i *IInspectable) Label() string {
+	retVal := i.p.Get("label")
+	return retVal.String()
 }
 
 // SetLabel sets the Label property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#label
 func (i *IInspectable) SetLabel(label string) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(label)
-	return IInspectableFromJSObject(p, ba.ctx)
+	i.p.Set("label", label)
+	return i
 }
 
 // Max returns the Max property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#max
-func (i *IInspectable) Max(max float64) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(max)
-	return IInspectableFromJSObject(p, ba.ctx)
+func (i *IInspectable) Max() float64 {
+	retVal := i.p.Get("max")
+	return retVal.Float()
 }
 
 // SetMax sets the Max property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#max
 func (i *IInspectable) SetMax(max float64) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(max)
-	return IInspectableFromJSObject(p, ba.ctx)
+	i.p.Set("max", max)
+	return i
 }
 
 // Min returns the Min property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#min
-func (i *IInspectable) Min(min float64) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(min)
-	return IInspectableFromJSObject(p, ba.ctx)
+func (i *IInspectable) Min() float64 {
+	retVal := i.p.Get("min")
+	return retVal.Float()
 }
 
 // SetMin sets the Min property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#min
 func (i *IInspectable) SetMin(min float64) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(min)
-	return IInspectableFromJSObject(p, ba.ctx)
+	i.p.Set("min", min)
+	return i
 }
 
 // PropertyName returns the PropertyName property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#propertyname
-func (i *IInspectable) PropertyName(propertyName string) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(propertyName)
-	return IInspectableFromJSObject(p, ba.ctx)
+func (i *IInspectable) PropertyName() string {
+	retVal := i.p.Get("propertyName")
+	return retVal.String()
 }
 
 // SetPropertyName sets the PropertyName property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#propertyname
 func (i *IInspectable) SetPropertyName(propertyName string) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(propertyName)
-	return IInspectableFromJSObject(p, ba.ctx)
+	i.p.Set("propertyName", propertyName)
+	return i
 }
 
 // Step returns the Step property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#step
-func (i *IInspectable) Step(step float64) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(step)
-	return IInspectableFromJSObject(p, ba.ctx)
+func (i *IInspectable) Step() float64 {
+	retVal := i.p.Get("step")
+	return retVal.Float()
 }
 
 // SetStep sets the Step property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#step
 func (i *IInspectable) SetStep(step float64) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(step)
-	return IInspectableFromJSObject(p, ba.ctx)
+	i.p.Set("step", step)
+	return i
 }
 
 // Type returns the Type property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#type
-func (i *IInspectable) Type(jsType *InspectableType) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(jsType.JSObject())
-	return IInspectableFromJSObject(p, ba.ctx)
+func (i *IInspectable) Type() js.Value {
+	retVal := i.p.Get("type")
+	return retVal
 }
 
 // SetType sets the Type property of class IInspectable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectable#type
-func (i *IInspectable) SetType(jsType *InspectableType) *IInspectable {
-	p := ba.ctx.Get("IInspectable").New(jsType.JSObject())
-	return IInspectableFromJSObject(p, ba.ctx)
+func (i *IInspectable) SetType(jsType js.Value) *IInspectable {
+	i.p.Set("type", jsType)
+	return i
 }
-
-*/

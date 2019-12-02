@@ -84,166 +84,162 @@ func (e *EnvironmentHelper) UpdateOptions(options *IEnvironmentHelperOptions) {
 	e.p.Call("updateOptions", args...)
 }
 
-/*
-
 // Ground returns the Ground property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#ground
-func (e *EnvironmentHelper) Ground(ground *Mesh) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(ground.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+func (e *EnvironmentHelper) Ground() *Mesh {
+	retVal := e.p.Get("ground")
+	return MeshFromJSObject(retVal, e.ctx)
 }
 
 // SetGround sets the Ground property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#ground
 func (e *EnvironmentHelper) SetGround(ground *Mesh) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(ground.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+	e.p.Set("ground", ground.JSObject())
+	return e
 }
 
 // GroundMaterial returns the GroundMaterial property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#groundmaterial
-func (e *EnvironmentHelper) GroundMaterial(groundMaterial *BackgroundMaterial) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(groundMaterial.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+func (e *EnvironmentHelper) GroundMaterial() *BackgroundMaterial {
+	retVal := e.p.Get("groundMaterial")
+	return BackgroundMaterialFromJSObject(retVal, e.ctx)
 }
 
 // SetGroundMaterial sets the GroundMaterial property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#groundmaterial
 func (e *EnvironmentHelper) SetGroundMaterial(groundMaterial *BackgroundMaterial) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(groundMaterial.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+	e.p.Set("groundMaterial", groundMaterial.JSObject())
+	return e
 }
 
 // GroundMirror returns the GroundMirror property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#groundmirror
-func (e *EnvironmentHelper) GroundMirror(groundMirror *MirrorTexture) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(groundMirror.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+func (e *EnvironmentHelper) GroundMirror() *MirrorTexture {
+	retVal := e.p.Get("groundMirror")
+	return MirrorTextureFromJSObject(retVal, e.ctx)
 }
 
 // SetGroundMirror sets the GroundMirror property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#groundmirror
 func (e *EnvironmentHelper) SetGroundMirror(groundMirror *MirrorTexture) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(groundMirror.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+	e.p.Set("groundMirror", groundMirror.JSObject())
+	return e
 }
 
 // GroundMirrorRenderList returns the GroundMirrorRenderList property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#groundmirrorrenderlist
-func (e *EnvironmentHelper) GroundMirrorRenderList(groundMirrorRenderList *AbstractMesh) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(groundMirrorRenderList.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+func (e *EnvironmentHelper) GroundMirrorRenderList() *AbstractMesh {
+	retVal := e.p.Get("groundMirrorRenderList")
+	return AbstractMeshFromJSObject(retVal, e.ctx)
 }
 
 // SetGroundMirrorRenderList sets the GroundMirrorRenderList property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#groundmirrorrenderlist
 func (e *EnvironmentHelper) SetGroundMirrorRenderList(groundMirrorRenderList *AbstractMesh) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(groundMirrorRenderList.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+	e.p.Set("groundMirrorRenderList", groundMirrorRenderList.JSObject())
+	return e
 }
 
 // GroundTexture returns the GroundTexture property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#groundtexture
-func (e *EnvironmentHelper) GroundTexture(groundTexture *BaseTexture) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(groundTexture.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+func (e *EnvironmentHelper) GroundTexture() *BaseTexture {
+	retVal := e.p.Get("groundTexture")
+	return BaseTextureFromJSObject(retVal, e.ctx)
 }
 
 // SetGroundTexture sets the GroundTexture property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#groundtexture
 func (e *EnvironmentHelper) SetGroundTexture(groundTexture *BaseTexture) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(groundTexture.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+	e.p.Set("groundTexture", groundTexture.JSObject())
+	return e
 }
 
 // OnErrorObservable returns the OnErrorObservable property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#onerrorobservable
-func (e *EnvironmentHelper) OnErrorObservable(onErrorObservable *Observable) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(onErrorObservable.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+func (e *EnvironmentHelper) OnErrorObservable() *Observable {
+	retVal := e.p.Get("onErrorObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnErrorObservable sets the OnErrorObservable property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#onerrorobservable
 func (e *EnvironmentHelper) SetOnErrorObservable(onErrorObservable *Observable) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(onErrorObservable.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+	e.p.Set("onErrorObservable", onErrorObservable.JSObject())
+	return e
 }
 
 // RootMesh returns the RootMesh property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#rootmesh
-func (e *EnvironmentHelper) RootMesh(rootMesh *Mesh) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(rootMesh.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+func (e *EnvironmentHelper) RootMesh() *Mesh {
+	retVal := e.p.Get("rootMesh")
+	return MeshFromJSObject(retVal, e.ctx)
 }
 
 // SetRootMesh sets the RootMesh property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#rootmesh
 func (e *EnvironmentHelper) SetRootMesh(rootMesh *Mesh) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(rootMesh.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+	e.p.Set("rootMesh", rootMesh.JSObject())
+	return e
 }
 
 // Skybox returns the Skybox property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#skybox
-func (e *EnvironmentHelper) Skybox(skybox *Mesh) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(skybox.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+func (e *EnvironmentHelper) Skybox() *Mesh {
+	retVal := e.p.Get("skybox")
+	return MeshFromJSObject(retVal, e.ctx)
 }
 
 // SetSkybox sets the Skybox property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#skybox
 func (e *EnvironmentHelper) SetSkybox(skybox *Mesh) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(skybox.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+	e.p.Set("skybox", skybox.JSObject())
+	return e
 }
 
 // SkyboxMaterial returns the SkyboxMaterial property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#skyboxmaterial
-func (e *EnvironmentHelper) SkyboxMaterial(skyboxMaterial *BackgroundMaterial) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(skyboxMaterial.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+func (e *EnvironmentHelper) SkyboxMaterial() *BackgroundMaterial {
+	retVal := e.p.Get("skyboxMaterial")
+	return BackgroundMaterialFromJSObject(retVal, e.ctx)
 }
 
 // SetSkyboxMaterial sets the SkyboxMaterial property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#skyboxmaterial
 func (e *EnvironmentHelper) SetSkyboxMaterial(skyboxMaterial *BackgroundMaterial) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(skyboxMaterial.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+	e.p.Set("skyboxMaterial", skyboxMaterial.JSObject())
+	return e
 }
 
 // SkyboxTexture returns the SkyboxTexture property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#skyboxtexture
-func (e *EnvironmentHelper) SkyboxTexture(skyboxTexture *BaseTexture) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(skyboxTexture.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+func (e *EnvironmentHelper) SkyboxTexture() *BaseTexture {
+	retVal := e.p.Get("skyboxTexture")
+	return BaseTextureFromJSObject(retVal, e.ctx)
 }
 
 // SetSkyboxTexture sets the SkyboxTexture property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#skyboxtexture
 func (e *EnvironmentHelper) SetSkyboxTexture(skyboxTexture *BaseTexture) *EnvironmentHelper {
-	p := ba.ctx.Get("EnvironmentHelper").New(skyboxTexture.JSObject())
-	return EnvironmentHelperFromJSObject(p, ba.ctx)
+	e.p.Set("skyboxTexture", skyboxTexture.JSObject())
+	return e
 }
-
-*/

@@ -1352,102 +1352,98 @@ func (v *Vector3) Zero() *Vector3 {
 	return Vector3FromJSObject(retVal, v.ctx)
 }
 
-/*
-
 // IsNonUniform returns the IsNonUniform property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#isnonuniform
-func (v *Vector3) IsNonUniform(isNonUniform bool) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(isNonUniform)
-	return Vector3FromJSObject(p, ba.ctx)
+func (v *Vector3) IsNonUniform() bool {
+	retVal := v.p.Get("isNonUniform")
+	return retVal.Bool()
 }
 
 // SetIsNonUniform sets the IsNonUniform property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#isnonuniform
 func (v *Vector3) SetIsNonUniform(isNonUniform bool) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(isNonUniform)
-	return Vector3FromJSObject(p, ba.ctx)
+	v.p.Set("isNonUniform", isNonUniform)
+	return v
 }
 
 // UpReadOnly returns the UpReadOnly property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#upreadonly
-func (v *Vector3) UpReadOnly(UpReadOnly *Vector3) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(UpReadOnly.JSObject())
-	return Vector3FromJSObject(p, ba.ctx)
+func (v *Vector3) UpReadOnly() *Vector3 {
+	retVal := v.p.Get("UpReadOnly")
+	return Vector3FromJSObject(retVal, v.ctx)
 }
 
 // SetUpReadOnly sets the UpReadOnly property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#upreadonly
 func (v *Vector3) SetUpReadOnly(UpReadOnly *Vector3) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(UpReadOnly.JSObject())
-	return Vector3FromJSObject(p, ba.ctx)
+	v.p.Set("UpReadOnly", UpReadOnly.JSObject())
+	return v
 }
 
 // X returns the X property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#x
-func (v *Vector3) X(x float64) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(x)
-	return Vector3FromJSObject(p, ba.ctx)
+func (v *Vector3) X() float64 {
+	retVal := v.p.Get("x")
+	return retVal.Float()
 }
 
 // SetX sets the X property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#x
 func (v *Vector3) SetX(x float64) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(x)
-	return Vector3FromJSObject(p, ba.ctx)
+	v.p.Set("x", x)
+	return v
 }
 
 // Y returns the Y property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#y
-func (v *Vector3) Y(y float64) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(y)
-	return Vector3FromJSObject(p, ba.ctx)
+func (v *Vector3) Y() float64 {
+	retVal := v.p.Get("y")
+	return retVal.Float()
 }
 
 // SetY sets the Y property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#y
 func (v *Vector3) SetY(y float64) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(y)
-	return Vector3FromJSObject(p, ba.ctx)
+	v.p.Set("y", y)
+	return v
 }
 
 // Z returns the Z property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#z
-func (v *Vector3) Z(z float64) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(z)
-	return Vector3FromJSObject(p, ba.ctx)
+func (v *Vector3) Z() float64 {
+	retVal := v.p.Get("z")
+	return retVal.Float()
 }
 
 // SetZ sets the Z property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#z
 func (v *Vector3) SetZ(z float64) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(z)
-	return Vector3FromJSObject(p, ba.ctx)
+	v.p.Set("z", z)
+	return v
 }
 
 // ZeroReadOnly returns the ZeroReadOnly property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#zeroreadonly
-func (v *Vector3) ZeroReadOnly(ZeroReadOnly *Vector3) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(ZeroReadOnly.JSObject())
-	return Vector3FromJSObject(p, ba.ctx)
+func (v *Vector3) ZeroReadOnly() *Vector3 {
+	retVal := v.p.Get("ZeroReadOnly")
+	return Vector3FromJSObject(retVal, v.ctx)
 }
 
 // SetZeroReadOnly sets the ZeroReadOnly property of class Vector3.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#zeroreadonly
 func (v *Vector3) SetZeroReadOnly(ZeroReadOnly *Vector3) *Vector3 {
-	p := ba.ctx.Get("Vector3").New(ZeroReadOnly.JSObject())
-	return Vector3FromJSObject(p, ba.ctx)
+	v.p.Set("ZeroReadOnly", ZeroReadOnly.JSObject())
+	return v
 }
-
-*/

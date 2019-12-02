@@ -170,22 +170,18 @@ func (i *INavigationEnginePlugin) SetDefaultQueryExtent(extent *Vector3) {
 	i.p.Call("setDefaultQueryExtent", args...)
 }
 
-/*
-
 // Name returns the Name property of class INavigationEnginePlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavigationengineplugin#name
-func (i *INavigationEnginePlugin) Name(name string) *INavigationEnginePlugin {
-	p := ba.ctx.Get("INavigationEnginePlugin").New(name)
-	return INavigationEnginePluginFromJSObject(p, ba.ctx)
+func (i *INavigationEnginePlugin) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class INavigationEnginePlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavigationengineplugin#name
 func (i *INavigationEnginePlugin) SetName(name string) *INavigationEnginePlugin {
-	p := ba.ctx.Get("INavigationEnginePlugin").New(name)
-	return INavigationEnginePluginFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
-
-*/

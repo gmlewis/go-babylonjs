@@ -109,102 +109,98 @@ func (a *AxisScaleGizmo) SetCustomMesh(mesh *Mesh, opts *AxisScaleGizmoSetCustom
 	a.p.Call("setCustomMesh", args...)
 }
 
-/*
-
 // DragBehavior returns the DragBehavior property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#dragbehavior
-func (a *AxisScaleGizmo) DragBehavior(dragBehavior *PointerDragBehavior) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(dragBehavior.JSObject())
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+func (a *AxisScaleGizmo) DragBehavior() *PointerDragBehavior {
+	retVal := a.p.Get("dragBehavior")
+	return PointerDragBehaviorFromJSObject(retVal, a.ctx)
 }
 
 // SetDragBehavior sets the DragBehavior property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#dragbehavior
 func (a *AxisScaleGizmo) SetDragBehavior(dragBehavior *PointerDragBehavior) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(dragBehavior.JSObject())
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+	a.p.Set("dragBehavior", dragBehavior.JSObject())
+	return a
 }
 
 // IsEnabled returns the IsEnabled property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#isenabled
-func (a *AxisScaleGizmo) IsEnabled(isEnabled bool) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(isEnabled)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+func (a *AxisScaleGizmo) IsEnabled() bool {
+	retVal := a.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#isenabled
 func (a *AxisScaleGizmo) SetIsEnabled(isEnabled bool) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(isEnabled)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+	a.p.Set("isEnabled", isEnabled)
+	return a
 }
 
 // OnSnapObservable returns the OnSnapObservable property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#onsnapobservable
-func (a *AxisScaleGizmo) OnSnapObservable(onSnapObservable *Observable) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(onSnapObservable.JSObject())
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+func (a *AxisScaleGizmo) OnSnapObservable() *Observable {
+	retVal := a.p.Get("onSnapObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnSnapObservable sets the OnSnapObservable property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#onsnapobservable
 func (a *AxisScaleGizmo) SetOnSnapObservable(onSnapObservable *Observable) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(onSnapObservable.JSObject())
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+	a.p.Set("onSnapObservable", onSnapObservable.JSObject())
+	return a
 }
 
 // Sensitivity returns the Sensitivity property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#sensitivity
-func (a *AxisScaleGizmo) Sensitivity(sensitivity float64) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(sensitivity)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+func (a *AxisScaleGizmo) Sensitivity() float64 {
+	retVal := a.p.Get("sensitivity")
+	return retVal.Float()
 }
 
 // SetSensitivity sets the Sensitivity property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#sensitivity
 func (a *AxisScaleGizmo) SetSensitivity(sensitivity float64) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(sensitivity)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+	a.p.Set("sensitivity", sensitivity)
+	return a
 }
 
 // SnapDistance returns the SnapDistance property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#snapdistance
-func (a *AxisScaleGizmo) SnapDistance(snapDistance float64) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(snapDistance)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+func (a *AxisScaleGizmo) SnapDistance() float64 {
+	retVal := a.p.Get("snapDistance")
+	return retVal.Float()
 }
 
 // SetSnapDistance sets the SnapDistance property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#snapdistance
 func (a *AxisScaleGizmo) SetSnapDistance(snapDistance float64) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(snapDistance)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+	a.p.Set("snapDistance", snapDistance)
+	return a
 }
 
 // UniformScaling returns the UniformScaling property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#uniformscaling
-func (a *AxisScaleGizmo) UniformScaling(uniformScaling bool) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(uniformScaling)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+func (a *AxisScaleGizmo) UniformScaling() bool {
+	retVal := a.p.Get("uniformScaling")
+	return retVal.Bool()
 }
 
 // SetUniformScaling sets the UniformScaling property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#uniformscaling
 func (a *AxisScaleGizmo) SetUniformScaling(uniformScaling bool) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(uniformScaling)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
+	a.p.Set("uniformScaling", uniformScaling)
+	return a
 }
-
-*/

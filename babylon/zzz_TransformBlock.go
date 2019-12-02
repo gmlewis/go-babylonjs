@@ -81,86 +81,82 @@ func (t *TransformBlock) _deserialize(serializationObject interface{}, scene *Sc
 	t.p.Call("_deserialize", args...)
 }
 
-/*
-
 // ComplementW returns the ComplementW property of class TransformBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#complementw
-func (t *TransformBlock) ComplementW(complementW float64) *TransformBlock {
-	p := ba.ctx.Get("TransformBlock").New(complementW)
-	return TransformBlockFromJSObject(p, ba.ctx)
+func (t *TransformBlock) ComplementW() float64 {
+	retVal := t.p.Get("complementW")
+	return retVal.Float()
 }
 
 // SetComplementW sets the ComplementW property of class TransformBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#complementw
 func (t *TransformBlock) SetComplementW(complementW float64) *TransformBlock {
-	p := ba.ctx.Get("TransformBlock").New(complementW)
-	return TransformBlockFromJSObject(p, ba.ctx)
+	t.p.Set("complementW", complementW)
+	return t
 }
 
 // ComplementZ returns the ComplementZ property of class TransformBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#complementz
-func (t *TransformBlock) ComplementZ(complementZ float64) *TransformBlock {
-	p := ba.ctx.Get("TransformBlock").New(complementZ)
-	return TransformBlockFromJSObject(p, ba.ctx)
+func (t *TransformBlock) ComplementZ() float64 {
+	retVal := t.p.Get("complementZ")
+	return retVal.Float()
 }
 
 // SetComplementZ sets the ComplementZ property of class TransformBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#complementz
 func (t *TransformBlock) SetComplementZ(complementZ float64) *TransformBlock {
-	p := ba.ctx.Get("TransformBlock").New(complementZ)
-	return TransformBlockFromJSObject(p, ba.ctx)
+	t.p.Set("complementZ", complementZ)
+	return t
 }
 
 // Output returns the Output property of class TransformBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#output
-func (t *TransformBlock) Output(output *NodeMaterialConnectionPoint) *TransformBlock {
-	p := ba.ctx.Get("TransformBlock").New(output.JSObject())
-	return TransformBlockFromJSObject(p, ba.ctx)
+func (t *TransformBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetOutput sets the Output property of class TransformBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#output
 func (t *TransformBlock) SetOutput(output *NodeMaterialConnectionPoint) *TransformBlock {
-	p := ba.ctx.Get("TransformBlock").New(output.JSObject())
-	return TransformBlockFromJSObject(p, ba.ctx)
+	t.p.Set("output", output.JSObject())
+	return t
 }
 
 // Transform returns the Transform property of class TransformBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#transform
-func (t *TransformBlock) Transform(transform *NodeMaterialConnectionPoint) *TransformBlock {
-	p := ba.ctx.Get("TransformBlock").New(transform.JSObject())
-	return TransformBlockFromJSObject(p, ba.ctx)
+func (t *TransformBlock) Transform() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("transform")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetTransform sets the Transform property of class TransformBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#transform
 func (t *TransformBlock) SetTransform(transform *NodeMaterialConnectionPoint) *TransformBlock {
-	p := ba.ctx.Get("TransformBlock").New(transform.JSObject())
-	return TransformBlockFromJSObject(p, ba.ctx)
+	t.p.Set("transform", transform.JSObject())
+	return t
 }
 
 // Vector returns the Vector property of class TransformBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#vector
-func (t *TransformBlock) Vector(vector *NodeMaterialConnectionPoint) *TransformBlock {
-	p := ba.ctx.Get("TransformBlock").New(vector.JSObject())
-	return TransformBlockFromJSObject(p, ba.ctx)
+func (t *TransformBlock) Vector() *NodeMaterialConnectionPoint {
+	retVal := t.p.Get("vector")
+	return NodeMaterialConnectionPointFromJSObject(retVal, t.ctx)
 }
 
 // SetVector sets the Vector property of class TransformBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#vector
 func (t *TransformBlock) SetVector(vector *NodeMaterialConnectionPoint) *TransformBlock {
-	p := ba.ctx.Get("TransformBlock").New(vector.JSObject())
-	return TransformBlockFromJSObject(p, ba.ctx)
+	t.p.Set("vector", vector.JSObject())
+	return t
 }
-
-*/

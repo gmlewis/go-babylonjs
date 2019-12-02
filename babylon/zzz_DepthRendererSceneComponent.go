@@ -74,38 +74,34 @@ func (d *DepthRendererSceneComponent) Register() {
 	d.p.Call("register")
 }
 
-/*
-
 // Name returns the Name property of class DepthRendererSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent#name
-func (d *DepthRendererSceneComponent) Name(name string) *DepthRendererSceneComponent {
-	p := ba.ctx.Get("DepthRendererSceneComponent").New(name)
-	return DepthRendererSceneComponentFromJSObject(p, ba.ctx)
+func (d *DepthRendererSceneComponent) Name() string {
+	retVal := d.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class DepthRendererSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent#name
 func (d *DepthRendererSceneComponent) SetName(name string) *DepthRendererSceneComponent {
-	p := ba.ctx.Get("DepthRendererSceneComponent").New(name)
-	return DepthRendererSceneComponentFromJSObject(p, ba.ctx)
+	d.p.Set("name", name)
+	return d
 }
 
 // Scene returns the Scene property of class DepthRendererSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent#scene
-func (d *DepthRendererSceneComponent) Scene(scene *Scene) *DepthRendererSceneComponent {
-	p := ba.ctx.Get("DepthRendererSceneComponent").New(scene.JSObject())
-	return DepthRendererSceneComponentFromJSObject(p, ba.ctx)
+func (d *DepthRendererSceneComponent) Scene() *Scene {
+	retVal := d.p.Get("scene")
+	return SceneFromJSObject(retVal, d.ctx)
 }
 
 // SetScene sets the Scene property of class DepthRendererSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent#scene
 func (d *DepthRendererSceneComponent) SetScene(scene *Scene) *DepthRendererSceneComponent {
-	p := ba.ctx.Get("DepthRendererSceneComponent").New(scene.JSObject())
-	return DepthRendererSceneComponentFromJSObject(p, ba.ctx)
+	d.p.Set("scene", scene.JSObject())
+	return d
 }
-
-*/

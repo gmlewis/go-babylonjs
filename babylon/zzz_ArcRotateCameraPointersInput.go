@@ -47,166 +47,162 @@ func (a *ArcRotateCameraPointersInput) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // AngularSensibilityX returns the AngularSensibilityX property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#angularsensibilityx
-func (a *ArcRotateCameraPointersInput) AngularSensibilityX(angularSensibilityX float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(angularSensibilityX)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraPointersInput) AngularSensibilityX() float64 {
+	retVal := a.p.Get("angularSensibilityX")
+	return retVal.Float()
 }
 
 // SetAngularSensibilityX sets the AngularSensibilityX property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#angularsensibilityx
 func (a *ArcRotateCameraPointersInput) SetAngularSensibilityX(angularSensibilityX float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(angularSensibilityX)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+	a.p.Set("angularSensibilityX", angularSensibilityX)
+	return a
 }
 
 // AngularSensibilityY returns the AngularSensibilityY property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#angularsensibilityy
-func (a *ArcRotateCameraPointersInput) AngularSensibilityY(angularSensibilityY float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(angularSensibilityY)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraPointersInput) AngularSensibilityY() float64 {
+	retVal := a.p.Get("angularSensibilityY")
+	return retVal.Float()
 }
 
 // SetAngularSensibilityY sets the AngularSensibilityY property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#angularsensibilityy
 func (a *ArcRotateCameraPointersInput) SetAngularSensibilityY(angularSensibilityY float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(angularSensibilityY)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+	a.p.Set("angularSensibilityY", angularSensibilityY)
+	return a
 }
 
 // Buttons returns the Buttons property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#buttons
-func (a *ArcRotateCameraPointersInput) Buttons(buttons float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(buttons)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraPointersInput) Buttons() float64 {
+	retVal := a.p.Get("buttons")
+	return retVal.Float()
 }
 
 // SetButtons sets the Buttons property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#buttons
 func (a *ArcRotateCameraPointersInput) SetButtons(buttons float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(buttons)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+	a.p.Set("buttons", buttons)
+	return a
 }
 
 // Camera returns the Camera property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#camera
-func (a *ArcRotateCameraPointersInput) Camera(camera *ArcRotateCamera) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(camera.JSObject())
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraPointersInput) Camera() *ArcRotateCamera {
+	retVal := a.p.Get("camera")
+	return ArcRotateCameraFromJSObject(retVal, a.ctx)
 }
 
 // SetCamera sets the Camera property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#camera
 func (a *ArcRotateCameraPointersInput) SetCamera(camera *ArcRotateCamera) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(camera.JSObject())
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+	a.p.Set("camera", camera.JSObject())
+	return a
 }
 
 // MultiTouchPanAndZoom returns the MultiTouchPanAndZoom property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#multitouchpanandzoom
-func (a *ArcRotateCameraPointersInput) MultiTouchPanAndZoom(multiTouchPanAndZoom bool) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(multiTouchPanAndZoom)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraPointersInput) MultiTouchPanAndZoom() bool {
+	retVal := a.p.Get("multiTouchPanAndZoom")
+	return retVal.Bool()
 }
 
 // SetMultiTouchPanAndZoom sets the MultiTouchPanAndZoom property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#multitouchpanandzoom
 func (a *ArcRotateCameraPointersInput) SetMultiTouchPanAndZoom(multiTouchPanAndZoom bool) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(multiTouchPanAndZoom)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+	a.p.Set("multiTouchPanAndZoom", multiTouchPanAndZoom)
+	return a
 }
 
 // MultiTouchPanning returns the MultiTouchPanning property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#multitouchpanning
-func (a *ArcRotateCameraPointersInput) MultiTouchPanning(multiTouchPanning bool) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(multiTouchPanning)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraPointersInput) MultiTouchPanning() bool {
+	retVal := a.p.Get("multiTouchPanning")
+	return retVal.Bool()
 }
 
 // SetMultiTouchPanning sets the MultiTouchPanning property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#multitouchpanning
 func (a *ArcRotateCameraPointersInput) SetMultiTouchPanning(multiTouchPanning bool) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(multiTouchPanning)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+	a.p.Set("multiTouchPanning", multiTouchPanning)
+	return a
 }
 
 // PanningSensibility returns the PanningSensibility property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#panningsensibility
-func (a *ArcRotateCameraPointersInput) PanningSensibility(panningSensibility float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(panningSensibility)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraPointersInput) PanningSensibility() float64 {
+	retVal := a.p.Get("panningSensibility")
+	return retVal.Float()
 }
 
 // SetPanningSensibility sets the PanningSensibility property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#panningsensibility
 func (a *ArcRotateCameraPointersInput) SetPanningSensibility(panningSensibility float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(panningSensibility)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+	a.p.Set("panningSensibility", panningSensibility)
+	return a
 }
 
 // PinchDeltaPercentage returns the PinchDeltaPercentage property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#pinchdeltapercentage
-func (a *ArcRotateCameraPointersInput) PinchDeltaPercentage(pinchDeltaPercentage float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(pinchDeltaPercentage)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraPointersInput) PinchDeltaPercentage() float64 {
+	retVal := a.p.Get("pinchDeltaPercentage")
+	return retVal.Float()
 }
 
 // SetPinchDeltaPercentage sets the PinchDeltaPercentage property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#pinchdeltapercentage
 func (a *ArcRotateCameraPointersInput) SetPinchDeltaPercentage(pinchDeltaPercentage float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(pinchDeltaPercentage)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+	a.p.Set("pinchDeltaPercentage", pinchDeltaPercentage)
+	return a
 }
 
 // PinchInwards returns the PinchInwards property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#pinchinwards
-func (a *ArcRotateCameraPointersInput) PinchInwards(pinchInwards bool) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(pinchInwards)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraPointersInput) PinchInwards() bool {
+	retVal := a.p.Get("pinchInwards")
+	return retVal.Bool()
 }
 
 // SetPinchInwards sets the PinchInwards property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#pinchinwards
 func (a *ArcRotateCameraPointersInput) SetPinchInwards(pinchInwards bool) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(pinchInwards)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+	a.p.Set("pinchInwards", pinchInwards)
+	return a
 }
 
 // PinchPrecision returns the PinchPrecision property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#pinchprecision
-func (a *ArcRotateCameraPointersInput) PinchPrecision(pinchPrecision float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(pinchPrecision)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+func (a *ArcRotateCameraPointersInput) PinchPrecision() float64 {
+	retVal := a.p.Get("pinchPrecision")
+	return retVal.Float()
 }
 
 // SetPinchPrecision sets the PinchPrecision property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#pinchprecision
 func (a *ArcRotateCameraPointersInput) SetPinchPrecision(pinchPrecision float64) *ArcRotateCameraPointersInput {
-	p := ba.ctx.Get("ArcRotateCameraPointersInput").New(pinchPrecision)
-	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
+	a.p.Set("pinchPrecision", pinchPrecision)
+	return a
 }
-
-*/

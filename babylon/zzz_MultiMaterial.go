@@ -207,22 +207,18 @@ func (m *MultiMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // SubMaterials returns the SubMaterials property of class MultiMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#submaterials
-func (m *MultiMaterial) SubMaterials(subMaterials *Material) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(subMaterials.JSObject())
-	return MultiMaterialFromJSObject(p, ba.ctx)
+func (m *MultiMaterial) SubMaterials() *Material {
+	retVal := m.p.Get("subMaterials")
+	return MaterialFromJSObject(retVal, m.ctx)
 }
 
 // SetSubMaterials sets the SubMaterials property of class MultiMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#submaterials
 func (m *MultiMaterial) SetSubMaterials(subMaterials *Material) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(subMaterials.JSObject())
-	return MultiMaterialFromJSObject(p, ba.ctx)
+	m.p.Set("subMaterials", subMaterials.JSObject())
+	return m
 }
-
-*/

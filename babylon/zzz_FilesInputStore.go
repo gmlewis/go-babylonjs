@@ -37,22 +37,18 @@ func FilesInputStoreArrayToJSArray(array []*FilesInputStore) []interface{} {
 	return result
 }
 
-/*
-
 // FilesToLoad returns the FilesToLoad property of class FilesInputStore.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinputstore#filestoload
-func (f *FilesInputStore) FilesToLoad(FilesToLoad js.Value) *FilesInputStore {
-	p := ba.ctx.Get("FilesInputStore").New(FilesToLoad)
-	return FilesInputStoreFromJSObject(p, ba.ctx)
+func (f *FilesInputStore) FilesToLoad() js.Value {
+	retVal := f.p.Get("FilesToLoad")
+	return retVal
 }
 
 // SetFilesToLoad sets the FilesToLoad property of class FilesInputStore.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinputstore#filestoload
 func (f *FilesInputStore) SetFilesToLoad(FilesToLoad js.Value) *FilesInputStore {
-	p := ba.ctx.Get("FilesInputStore").New(FilesToLoad)
-	return FilesInputStoreFromJSObject(p, ba.ctx)
+	f.p.Set("FilesToLoad", FilesToLoad)
+	return f
 }
-
-*/

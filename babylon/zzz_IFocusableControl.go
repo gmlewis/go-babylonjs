@@ -72,7 +72,3 @@ func (i *IFocusableControl) ProcessKeyboard(evt js.Value) {
 
 	i.p.Call("processKeyboard", args...)
 }
-
-/*
-
- */

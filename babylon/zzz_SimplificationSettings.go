@@ -66,54 +66,50 @@ func (ba *Babylon) NewSimplificationSettings(quality float64, distance float64, 
 	return SimplificationSettingsFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Distance returns the Distance property of class SimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationsettings#distance
-func (s *SimplificationSettings) Distance(distance float64) *SimplificationSettings {
-	p := ba.ctx.Get("SimplificationSettings").New(distance)
-	return SimplificationSettingsFromJSObject(p, ba.ctx)
+func (s *SimplificationSettings) Distance() float64 {
+	retVal := s.p.Get("distance")
+	return retVal.Float()
 }
 
 // SetDistance sets the Distance property of class SimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationsettings#distance
 func (s *SimplificationSettings) SetDistance(distance float64) *SimplificationSettings {
-	p := ba.ctx.Get("SimplificationSettings").New(distance)
-	return SimplificationSettingsFromJSObject(p, ba.ctx)
+	s.p.Set("distance", distance)
+	return s
 }
 
 // OptimizeMesh returns the OptimizeMesh property of class SimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationsettings#optimizemesh
-func (s *SimplificationSettings) OptimizeMesh(optimizeMesh bool) *SimplificationSettings {
-	p := ba.ctx.Get("SimplificationSettings").New(optimizeMesh)
-	return SimplificationSettingsFromJSObject(p, ba.ctx)
+func (s *SimplificationSettings) OptimizeMesh() bool {
+	retVal := s.p.Get("optimizeMesh")
+	return retVal.Bool()
 }
 
 // SetOptimizeMesh sets the OptimizeMesh property of class SimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationsettings#optimizemesh
 func (s *SimplificationSettings) SetOptimizeMesh(optimizeMesh bool) *SimplificationSettings {
-	p := ba.ctx.Get("SimplificationSettings").New(optimizeMesh)
-	return SimplificationSettingsFromJSObject(p, ba.ctx)
+	s.p.Set("optimizeMesh", optimizeMesh)
+	return s
 }
 
 // Quality returns the Quality property of class SimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationsettings#quality
-func (s *SimplificationSettings) Quality(quality float64) *SimplificationSettings {
-	p := ba.ctx.Get("SimplificationSettings").New(quality)
-	return SimplificationSettingsFromJSObject(p, ba.ctx)
+func (s *SimplificationSettings) Quality() float64 {
+	retVal := s.p.Get("quality")
+	return retVal.Float()
 }
 
 // SetQuality sets the Quality property of class SimplificationSettings.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationsettings#quality
 func (s *SimplificationSettings) SetQuality(quality float64) *SimplificationSettings {
-	p := ba.ctx.Get("SimplificationSettings").New(quality)
-	return SimplificationSettingsFromJSObject(p, ba.ctx)
+	s.p.Set("quality", quality)
+	return s
 }
-
-*/

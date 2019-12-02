@@ -89,102 +89,98 @@ func (i *ImageScrollBar) _onPointerDown(target *Control, coordinates *Vector2, p
 	return retVal.Bool()
 }
 
-/*
-
 // BackgroundImage returns the BackgroundImage property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#backgroundimage
-func (i *ImageScrollBar) BackgroundImage(backgroundImage *Image) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(backgroundImage.JSObject())
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+func (i *ImageScrollBar) BackgroundImage() *Image {
+	retVal := i.p.Get("backgroundImage")
+	return ImageFromJSObject(retVal, i.ctx)
 }
 
 // SetBackgroundImage sets the BackgroundImage property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#backgroundimage
 func (i *ImageScrollBar) SetBackgroundImage(backgroundImage *Image) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(backgroundImage.JSObject())
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+	i.p.Set("backgroundImage", backgroundImage.JSObject())
+	return i
 }
 
 // BarImageHeight returns the BarImageHeight property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#barimageheight
-func (i *ImageScrollBar) BarImageHeight(barImageHeight float64) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(barImageHeight)
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+func (i *ImageScrollBar) BarImageHeight() float64 {
+	retVal := i.p.Get("barImageHeight")
+	return retVal.Float()
 }
 
 // SetBarImageHeight sets the BarImageHeight property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#barimageheight
 func (i *ImageScrollBar) SetBarImageHeight(barImageHeight float64) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(barImageHeight)
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+	i.p.Set("barImageHeight", barImageHeight)
+	return i
 }
 
 // Name returns the Name property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#name
-func (i *ImageScrollBar) Name(name string) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(name)
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+func (i *ImageScrollBar) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#name
 func (i *ImageScrollBar) SetName(name string) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(name)
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
 
 // ThumbHeight returns the ThumbHeight property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbheight
-func (i *ImageScrollBar) ThumbHeight(thumbHeight float64) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(thumbHeight)
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+func (i *ImageScrollBar) ThumbHeight() float64 {
+	retVal := i.p.Get("thumbHeight")
+	return retVal.Float()
 }
 
 // SetThumbHeight sets the ThumbHeight property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbheight
 func (i *ImageScrollBar) SetThumbHeight(thumbHeight float64) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(thumbHeight)
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+	i.p.Set("thumbHeight", thumbHeight)
+	return i
 }
 
 // ThumbImage returns the ThumbImage property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbimage
-func (i *ImageScrollBar) ThumbImage(thumbImage *Image) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(thumbImage.JSObject())
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+func (i *ImageScrollBar) ThumbImage() *Image {
+	retVal := i.p.Get("thumbImage")
+	return ImageFromJSObject(retVal, i.ctx)
 }
 
 // SetThumbImage sets the ThumbImage property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbimage
 func (i *ImageScrollBar) SetThumbImage(thumbImage *Image) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(thumbImage.JSObject())
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+	i.p.Set("thumbImage", thumbImage.JSObject())
+	return i
 }
 
 // ThumbLength returns the ThumbLength property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumblength
-func (i *ImageScrollBar) ThumbLength(thumbLength float64) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(thumbLength)
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+func (i *ImageScrollBar) ThumbLength() float64 {
+	retVal := i.p.Get("thumbLength")
+	return retVal.Float()
 }
 
 // SetThumbLength sets the ThumbLength property of class ImageScrollBar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumblength
 func (i *ImageScrollBar) SetThumbLength(thumbLength float64) *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar").New(thumbLength)
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+	i.p.Set("thumbLength", thumbLength)
+	return i
 }
-
-*/

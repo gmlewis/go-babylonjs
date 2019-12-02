@@ -124,38 +124,34 @@ func (e *EffectLayerSceneComponent) Serialize(serializationObject interface{}) {
 	e.p.Call("serialize", args...)
 }
 
-/*
-
 // Name returns the Name property of class EffectLayerSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#name
-func (e *EffectLayerSceneComponent) Name(name string) *EffectLayerSceneComponent {
-	p := ba.ctx.Get("EffectLayerSceneComponent").New(name)
-	return EffectLayerSceneComponentFromJSObject(p, ba.ctx)
+func (e *EffectLayerSceneComponent) Name() string {
+	retVal := e.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class EffectLayerSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#name
 func (e *EffectLayerSceneComponent) SetName(name string) *EffectLayerSceneComponent {
-	p := ba.ctx.Get("EffectLayerSceneComponent").New(name)
-	return EffectLayerSceneComponentFromJSObject(p, ba.ctx)
+	e.p.Set("name", name)
+	return e
 }
 
 // Scene returns the Scene property of class EffectLayerSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#scene
-func (e *EffectLayerSceneComponent) Scene(scene *Scene) *EffectLayerSceneComponent {
-	p := ba.ctx.Get("EffectLayerSceneComponent").New(scene.JSObject())
-	return EffectLayerSceneComponentFromJSObject(p, ba.ctx)
+func (e *EffectLayerSceneComponent) Scene() *Scene {
+	retVal := e.p.Get("scene")
+	return SceneFromJSObject(retVal, e.ctx)
 }
 
 // SetScene sets the Scene property of class EffectLayerSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#scene
 func (e *EffectLayerSceneComponent) SetScene(scene *Scene) *EffectLayerSceneComponent {
-	p := ba.ctx.Get("EffectLayerSceneComponent").New(scene.JSObject())
-	return EffectLayerSceneComponentFromJSObject(p, ba.ctx)
+	e.p.Set("scene", scene.JSObject())
+	return e
 }
-
-*/

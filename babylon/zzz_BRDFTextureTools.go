@@ -48,7 +48,3 @@ func (b *BRDFTextureTools) GetEnvironmentBRDFTexture(scene *Scene) *BaseTexture 
 	retVal := b.p.Call("GetEnvironmentBRDFTexture", args...)
 	return BaseTextureFromJSObject(retVal, b.ctx)
 }
-
-/*
-
- */

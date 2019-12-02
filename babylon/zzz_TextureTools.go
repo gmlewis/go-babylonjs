@@ -64,7 +64,3 @@ func (t *TextureTools) CreateResizedCopy(texture *Texture, width float64, height
 	retVal := t.p.Call("CreateResizedCopy", args...)
 	return TextureFromJSObject(retVal, t.ctx)
 }
-
-/*
-
- */

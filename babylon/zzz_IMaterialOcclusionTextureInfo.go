@@ -35,7 +35,3 @@ func IMaterialOcclusionTextureInfoArrayToJSArray(array []*IMaterialOcclusionText
 	}
 	return result
 }
-
-/*
-
- */

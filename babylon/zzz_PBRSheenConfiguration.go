@@ -246,86 +246,82 @@ func (p *PBRSheenConfiguration) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // Color returns the Color property of class PBRSheenConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#color
-func (p *PBRSheenConfiguration) Color(color *Color3) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(color.JSObject())
-	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSheenConfiguration) Color() *Color3 {
+	retVal := p.p.Get("color")
+	return Color3FromJSObject(retVal, p.ctx)
 }
 
 // SetColor sets the Color property of class PBRSheenConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#color
 func (p *PBRSheenConfiguration) SetColor(color *Color3) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(color.JSObject())
-	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("color", color.JSObject())
+	return p
 }
 
 // Intensity returns the Intensity property of class PBRSheenConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#intensity
-func (p *PBRSheenConfiguration) Intensity(intensity float64) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(intensity)
-	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSheenConfiguration) Intensity() float64 {
+	retVal := p.p.Get("intensity")
+	return retVal.Float()
 }
 
 // SetIntensity sets the Intensity property of class PBRSheenConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#intensity
 func (p *PBRSheenConfiguration) SetIntensity(intensity float64) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(intensity)
-	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("intensity", intensity)
+	return p
 }
 
 // IsEnabled returns the IsEnabled property of class PBRSheenConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#isenabled
-func (p *PBRSheenConfiguration) IsEnabled(isEnabled bool) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(isEnabled)
-	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSheenConfiguration) IsEnabled() bool {
+	retVal := p.p.Get("isEnabled")
+	return retVal.Bool()
 }
 
 // SetIsEnabled sets the IsEnabled property of class PBRSheenConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#isenabled
 func (p *PBRSheenConfiguration) SetIsEnabled(isEnabled bool) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(isEnabled)
-	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("isEnabled", isEnabled)
+	return p
 }
 
 // LinkSheenWithAlbedo returns the LinkSheenWithAlbedo property of class PBRSheenConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#linksheenwithalbedo
-func (p *PBRSheenConfiguration) LinkSheenWithAlbedo(linkSheenWithAlbedo bool) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(linkSheenWithAlbedo)
-	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSheenConfiguration) LinkSheenWithAlbedo() bool {
+	retVal := p.p.Get("linkSheenWithAlbedo")
+	return retVal.Bool()
 }
 
 // SetLinkSheenWithAlbedo sets the LinkSheenWithAlbedo property of class PBRSheenConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#linksheenwithalbedo
 func (p *PBRSheenConfiguration) SetLinkSheenWithAlbedo(linkSheenWithAlbedo bool) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(linkSheenWithAlbedo)
-	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("linkSheenWithAlbedo", linkSheenWithAlbedo)
+	return p
 }
 
 // Texture returns the Texture property of class PBRSheenConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#texture
-func (p *PBRSheenConfiguration) Texture(texture *BaseTexture) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(texture.JSObject())
-	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+func (p *PBRSheenConfiguration) Texture() *BaseTexture {
+	retVal := p.p.Get("texture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetTexture sets the Texture property of class PBRSheenConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#texture
 func (p *PBRSheenConfiguration) SetTexture(texture *BaseTexture) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(texture.JSObject())
-	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+	p.p.Set("texture", texture.JSObject())
+	return p
 }
-
-*/

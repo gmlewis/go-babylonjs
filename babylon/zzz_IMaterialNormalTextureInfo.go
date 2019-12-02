@@ -35,7 +35,3 @@ func IMaterialNormalTextureInfoArrayToJSArray(array []*IMaterialNormalTextureInf
 	}
 	return result
 }
-
-/*
-
- */

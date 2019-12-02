@@ -58,86 +58,82 @@ func (s *Style) Dispose() {
 	s.p.Call("dispose")
 }
 
-/*
-
 // FontFamily returns the FontFamily property of class Style.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style#fontfamily
-func (s *Style) FontFamily(fontFamily string) *Style {
-	p := ba.ctx.Get("Style").New(fontFamily)
-	return StyleFromJSObject(p, ba.ctx)
+func (s *Style) FontFamily() string {
+	retVal := s.p.Get("fontFamily")
+	return retVal.String()
 }
 
 // SetFontFamily sets the FontFamily property of class Style.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style#fontfamily
 func (s *Style) SetFontFamily(fontFamily string) *Style {
-	p := ba.ctx.Get("Style").New(fontFamily)
-	return StyleFromJSObject(p, ba.ctx)
+	s.p.Set("fontFamily", fontFamily)
+	return s
 }
 
 // FontSize returns the FontSize property of class Style.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style#fontsize
-func (s *Style) FontSize(fontSize string) *Style {
-	p := ba.ctx.Get("Style").New(fontSize)
-	return StyleFromJSObject(p, ba.ctx)
+func (s *Style) FontSize() string {
+	retVal := s.p.Get("fontSize")
+	return retVal.String()
 }
 
 // SetFontSize sets the FontSize property of class Style.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style#fontsize
 func (s *Style) SetFontSize(fontSize string) *Style {
-	p := ba.ctx.Get("Style").New(fontSize)
-	return StyleFromJSObject(p, ba.ctx)
+	s.p.Set("fontSize", fontSize)
+	return s
 }
 
 // FontStyle returns the FontStyle property of class Style.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style#fontstyle
-func (s *Style) FontStyle(fontStyle string) *Style {
-	p := ba.ctx.Get("Style").New(fontStyle)
-	return StyleFromJSObject(p, ba.ctx)
+func (s *Style) FontStyle() string {
+	retVal := s.p.Get("fontStyle")
+	return retVal.String()
 }
 
 // SetFontStyle sets the FontStyle property of class Style.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style#fontstyle
 func (s *Style) SetFontStyle(fontStyle string) *Style {
-	p := ba.ctx.Get("Style").New(fontStyle)
-	return StyleFromJSObject(p, ba.ctx)
+	s.p.Set("fontStyle", fontStyle)
+	return s
 }
 
 // FontWeight returns the FontWeight property of class Style.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style#fontweight
-func (s *Style) FontWeight(fontWeight string) *Style {
-	p := ba.ctx.Get("Style").New(fontWeight)
-	return StyleFromJSObject(p, ba.ctx)
+func (s *Style) FontWeight() string {
+	retVal := s.p.Get("fontWeight")
+	return retVal.String()
 }
 
 // SetFontWeight sets the FontWeight property of class Style.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style#fontweight
 func (s *Style) SetFontWeight(fontWeight string) *Style {
-	p := ba.ctx.Get("Style").New(fontWeight)
-	return StyleFromJSObject(p, ba.ctx)
+	s.p.Set("fontWeight", fontWeight)
+	return s
 }
 
 // OnChangedObservable returns the OnChangedObservable property of class Style.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style#onchangedobservable
-func (s *Style) OnChangedObservable(onChangedObservable *Observable) *Style {
-	p := ba.ctx.Get("Style").New(onChangedObservable.JSObject())
-	return StyleFromJSObject(p, ba.ctx)
+func (s *Style) OnChangedObservable() *Observable {
+	retVal := s.p.Get("onChangedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnChangedObservable sets the OnChangedObservable property of class Style.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style#onchangedobservable
 func (s *Style) SetOnChangedObservable(onChangedObservable *Observable) *Style {
-	p := ba.ctx.Get("Style").New(onChangedObservable.JSObject())
-	return StyleFromJSObject(p, ba.ctx)
+	s.p.Set("onChangedObservable", onChangedObservable.JSObject())
+	return s
 }
-
-*/

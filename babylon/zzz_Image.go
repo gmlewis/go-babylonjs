@@ -109,422 +109,418 @@ func (i *Image) _draw(context js.Value) {
 	i.p.Call("_draw", args...)
 }
 
-/*
-
 // AutoScale returns the AutoScale property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#autoscale
-func (i *Image) AutoScale(autoScale bool) *Image {
-	p := ba.ctx.Get("Image").New(autoScale)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) AutoScale() bool {
+	retVal := i.p.Get("autoScale")
+	return retVal.Bool()
 }
 
 // SetAutoScale sets the AutoScale property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#autoscale
 func (i *Image) SetAutoScale(autoScale bool) *Image {
-	p := ba.ctx.Get("Image").New(autoScale)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("autoScale", autoScale)
+	return i
 }
 
 // CellHeight returns the CellHeight property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#cellheight
-func (i *Image) CellHeight(cellHeight float64) *Image {
-	p := ba.ctx.Get("Image").New(cellHeight)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) CellHeight() float64 {
+	retVal := i.p.Get("cellHeight")
+	return retVal.Float()
 }
 
 // SetCellHeight sets the CellHeight property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#cellheight
 func (i *Image) SetCellHeight(cellHeight float64) *Image {
-	p := ba.ctx.Get("Image").New(cellHeight)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("cellHeight", cellHeight)
+	return i
 }
 
 // CellId returns the CellId property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#cellid
-func (i *Image) CellId(cellId float64) *Image {
-	p := ba.ctx.Get("Image").New(cellId)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) CellId() float64 {
+	retVal := i.p.Get("cellId")
+	return retVal.Float()
 }
 
 // SetCellId sets the CellId property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#cellid
 func (i *Image) SetCellId(cellId float64) *Image {
-	p := ba.ctx.Get("Image").New(cellId)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("cellId", cellId)
+	return i
 }
 
 // CellWidth returns the CellWidth property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#cellwidth
-func (i *Image) CellWidth(cellWidth float64) *Image {
-	p := ba.ctx.Get("Image").New(cellWidth)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) CellWidth() float64 {
+	retVal := i.p.Get("cellWidth")
+	return retVal.Float()
 }
 
 // SetCellWidth sets the CellWidth property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#cellwidth
 func (i *Image) SetCellWidth(cellWidth float64) *Image {
-	p := ba.ctx.Get("Image").New(cellWidth)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("cellWidth", cellWidth)
+	return i
 }
 
 // DetectPointerOnOpaqueOnly returns the DetectPointerOnOpaqueOnly property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#detectpointeronopaqueonly
-func (i *Image) DetectPointerOnOpaqueOnly(detectPointerOnOpaqueOnly bool) *Image {
-	p := ba.ctx.Get("Image").New(detectPointerOnOpaqueOnly)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) DetectPointerOnOpaqueOnly() bool {
+	retVal := i.p.Get("detectPointerOnOpaqueOnly")
+	return retVal.Bool()
 }
 
 // SetDetectPointerOnOpaqueOnly sets the DetectPointerOnOpaqueOnly property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#detectpointeronopaqueonly
 func (i *Image) SetDetectPointerOnOpaqueOnly(detectPointerOnOpaqueOnly bool) *Image {
-	p := ba.ctx.Get("Image").New(detectPointerOnOpaqueOnly)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("detectPointerOnOpaqueOnly", detectPointerOnOpaqueOnly)
+	return i
 }
 
 // DomImage returns the DomImage property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#domimage
-func (i *Image) DomImage(domImage js.Value) *Image {
-	p := ba.ctx.Get("Image").New(domImage)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) DomImage() js.Value {
+	retVal := i.p.Get("domImage")
+	return retVal
 }
 
 // SetDomImage sets the DomImage property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#domimage
 func (i *Image) SetDomImage(domImage js.Value) *Image {
-	p := ba.ctx.Get("Image").New(domImage)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("domImage", domImage)
+	return i
 }
 
 // IsLoaded returns the IsLoaded property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#isloaded
-func (i *Image) IsLoaded(isLoaded bool) *Image {
-	p := ba.ctx.Get("Image").New(isLoaded)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) IsLoaded() bool {
+	retVal := i.p.Get("isLoaded")
+	return retVal.Bool()
 }
 
 // SetIsLoaded sets the IsLoaded property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#isloaded
 func (i *Image) SetIsLoaded(isLoaded bool) *Image {
-	p := ba.ctx.Get("Image").New(isLoaded)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("isLoaded", isLoaded)
+	return i
 }
 
 // Name returns the Name property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#name
-func (i *Image) Name(name string) *Image {
-	p := ba.ctx.Get("Image").New(name)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) Name() string {
+	retVal := i.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#name
 func (i *Image) SetName(name string) *Image {
-	p := ba.ctx.Get("Image").New(name)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("name", name)
+	return i
 }
 
 // OnImageLoadedObservable returns the OnImageLoadedObservable property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#onimageloadedobservable
-func (i *Image) OnImageLoadedObservable(onImageLoadedObservable *Observable) *Image {
-	p := ba.ctx.Get("Image").New(onImageLoadedObservable.JSObject())
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) OnImageLoadedObservable() *Observable {
+	retVal := i.p.Get("onImageLoadedObservable")
+	return ObservableFromJSObject(retVal, i.ctx)
 }
 
 // SetOnImageLoadedObservable sets the OnImageLoadedObservable property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#onimageloadedobservable
 func (i *Image) SetOnImageLoadedObservable(onImageLoadedObservable *Observable) *Image {
-	p := ba.ctx.Get("Image").New(onImageLoadedObservable.JSObject())
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("onImageLoadedObservable", onImageLoadedObservable.JSObject())
+	return i
 }
 
 // OnSVGAttributesComputedObservable returns the OnSVGAttributesComputedObservable property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#onsvgattributescomputedobservable
-func (i *Image) OnSVGAttributesComputedObservable(onSVGAttributesComputedObservable *Observable) *Image {
-	p := ba.ctx.Get("Image").New(onSVGAttributesComputedObservable.JSObject())
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) OnSVGAttributesComputedObservable() *Observable {
+	retVal := i.p.Get("onSVGAttributesComputedObservable")
+	return ObservableFromJSObject(retVal, i.ctx)
 }
 
 // SetOnSVGAttributesComputedObservable sets the OnSVGAttributesComputedObservable property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#onsvgattributescomputedobservable
 func (i *Image) SetOnSVGAttributesComputedObservable(onSVGAttributesComputedObservable *Observable) *Image {
-	p := ba.ctx.Get("Image").New(onSVGAttributesComputedObservable.JSObject())
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("onSVGAttributesComputedObservable", onSVGAttributesComputedObservable.JSObject())
+	return i
 }
 
 // PopulateNinePatchSlicesFromImage returns the PopulateNinePatchSlicesFromImage property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#populateninepatchslicesfromimage
-func (i *Image) PopulateNinePatchSlicesFromImage(populateNinePatchSlicesFromImage bool) *Image {
-	p := ba.ctx.Get("Image").New(populateNinePatchSlicesFromImage)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) PopulateNinePatchSlicesFromImage() bool {
+	retVal := i.p.Get("populateNinePatchSlicesFromImage")
+	return retVal.Bool()
 }
 
 // SetPopulateNinePatchSlicesFromImage sets the PopulateNinePatchSlicesFromImage property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#populateninepatchslicesfromimage
 func (i *Image) SetPopulateNinePatchSlicesFromImage(populateNinePatchSlicesFromImage bool) *Image {
-	p := ba.ctx.Get("Image").New(populateNinePatchSlicesFromImage)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("populateNinePatchSlicesFromImage", populateNinePatchSlicesFromImage)
+	return i
 }
 
 // STRETCH_EXTEND returns the STRETCH_EXTEND property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch_extend
-func (i *Image) STRETCH_EXTEND(STRETCH_EXTEND float64) *Image {
-	p := ba.ctx.Get("Image").New(STRETCH_EXTEND)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) STRETCH_EXTEND() float64 {
+	retVal := i.p.Get("STRETCH_EXTEND")
+	return retVal.Float()
 }
 
 // SetSTRETCH_EXTEND sets the STRETCH_EXTEND property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch_extend
 func (i *Image) SetSTRETCH_EXTEND(STRETCH_EXTEND float64) *Image {
-	p := ba.ctx.Get("Image").New(STRETCH_EXTEND)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("STRETCH_EXTEND", STRETCH_EXTEND)
+	return i
 }
 
 // STRETCH_FILL returns the STRETCH_FILL property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch_fill
-func (i *Image) STRETCH_FILL(STRETCH_FILL float64) *Image {
-	p := ba.ctx.Get("Image").New(STRETCH_FILL)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) STRETCH_FILL() float64 {
+	retVal := i.p.Get("STRETCH_FILL")
+	return retVal.Float()
 }
 
 // SetSTRETCH_FILL sets the STRETCH_FILL property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch_fill
 func (i *Image) SetSTRETCH_FILL(STRETCH_FILL float64) *Image {
-	p := ba.ctx.Get("Image").New(STRETCH_FILL)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("STRETCH_FILL", STRETCH_FILL)
+	return i
 }
 
 // STRETCH_NINE_PATCH returns the STRETCH_NINE_PATCH property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch_nine_patch
-func (i *Image) STRETCH_NINE_PATCH(STRETCH_NINE_PATCH float64) *Image {
-	p := ba.ctx.Get("Image").New(STRETCH_NINE_PATCH)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) STRETCH_NINE_PATCH() float64 {
+	retVal := i.p.Get("STRETCH_NINE_PATCH")
+	return retVal.Float()
 }
 
 // SetSTRETCH_NINE_PATCH sets the STRETCH_NINE_PATCH property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch_nine_patch
 func (i *Image) SetSTRETCH_NINE_PATCH(STRETCH_NINE_PATCH float64) *Image {
-	p := ba.ctx.Get("Image").New(STRETCH_NINE_PATCH)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("STRETCH_NINE_PATCH", STRETCH_NINE_PATCH)
+	return i
 }
 
 // STRETCH_NONE returns the STRETCH_NONE property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch_none
-func (i *Image) STRETCH_NONE(STRETCH_NONE float64) *Image {
-	p := ba.ctx.Get("Image").New(STRETCH_NONE)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) STRETCH_NONE() float64 {
+	retVal := i.p.Get("STRETCH_NONE")
+	return retVal.Float()
 }
 
 // SetSTRETCH_NONE sets the STRETCH_NONE property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch_none
 func (i *Image) SetSTRETCH_NONE(STRETCH_NONE float64) *Image {
-	p := ba.ctx.Get("Image").New(STRETCH_NONE)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("STRETCH_NONE", STRETCH_NONE)
+	return i
 }
 
 // STRETCH_UNIFORM returns the STRETCH_UNIFORM property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch_uniform
-func (i *Image) STRETCH_UNIFORM(STRETCH_UNIFORM float64) *Image {
-	p := ba.ctx.Get("Image").New(STRETCH_UNIFORM)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) STRETCH_UNIFORM() float64 {
+	retVal := i.p.Get("STRETCH_UNIFORM")
+	return retVal.Float()
 }
 
 // SetSTRETCH_UNIFORM sets the STRETCH_UNIFORM property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch_uniform
 func (i *Image) SetSTRETCH_UNIFORM(STRETCH_UNIFORM float64) *Image {
-	p := ba.ctx.Get("Image").New(STRETCH_UNIFORM)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("STRETCH_UNIFORM", STRETCH_UNIFORM)
+	return i
 }
 
 // SliceBottom returns the SliceBottom property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#slicebottom
-func (i *Image) SliceBottom(sliceBottom float64) *Image {
-	p := ba.ctx.Get("Image").New(sliceBottom)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) SliceBottom() float64 {
+	retVal := i.p.Get("sliceBottom")
+	return retVal.Float()
 }
 
 // SetSliceBottom sets the SliceBottom property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#slicebottom
 func (i *Image) SetSliceBottom(sliceBottom float64) *Image {
-	p := ba.ctx.Get("Image").New(sliceBottom)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("sliceBottom", sliceBottom)
+	return i
 }
 
 // SliceLeft returns the SliceLeft property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sliceleft
-func (i *Image) SliceLeft(sliceLeft float64) *Image {
-	p := ba.ctx.Get("Image").New(sliceLeft)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) SliceLeft() float64 {
+	retVal := i.p.Get("sliceLeft")
+	return retVal.Float()
 }
 
 // SetSliceLeft sets the SliceLeft property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sliceleft
 func (i *Image) SetSliceLeft(sliceLeft float64) *Image {
-	p := ba.ctx.Get("Image").New(sliceLeft)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("sliceLeft", sliceLeft)
+	return i
 }
 
 // SliceRight returns the SliceRight property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sliceright
-func (i *Image) SliceRight(sliceRight float64) *Image {
-	p := ba.ctx.Get("Image").New(sliceRight)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) SliceRight() float64 {
+	retVal := i.p.Get("sliceRight")
+	return retVal.Float()
 }
 
 // SetSliceRight sets the SliceRight property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sliceright
 func (i *Image) SetSliceRight(sliceRight float64) *Image {
-	p := ba.ctx.Get("Image").New(sliceRight)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("sliceRight", sliceRight)
+	return i
 }
 
 // SliceTop returns the SliceTop property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#slicetop
-func (i *Image) SliceTop(sliceTop float64) *Image {
-	p := ba.ctx.Get("Image").New(sliceTop)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) SliceTop() float64 {
+	retVal := i.p.Get("sliceTop")
+	return retVal.Float()
 }
 
 // SetSliceTop sets the SliceTop property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#slicetop
 func (i *Image) SetSliceTop(sliceTop float64) *Image {
-	p := ba.ctx.Get("Image").New(sliceTop)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("sliceTop", sliceTop)
+	return i
 }
 
 // Source returns the Source property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#source
-func (i *Image) Source(source string) *Image {
-	p := ba.ctx.Get("Image").New(source)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) Source() string {
+	retVal := i.p.Get("source")
+	return retVal.String()
 }
 
 // SetSource sets the Source property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#source
 func (i *Image) SetSource(source string) *Image {
-	p := ba.ctx.Get("Image").New(source)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("source", source)
+	return i
 }
 
 // SourceHeight returns the SourceHeight property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sourceheight
-func (i *Image) SourceHeight(sourceHeight float64) *Image {
-	p := ba.ctx.Get("Image").New(sourceHeight)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) SourceHeight() float64 {
+	retVal := i.p.Get("sourceHeight")
+	return retVal.Float()
 }
 
 // SetSourceHeight sets the SourceHeight property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sourceheight
 func (i *Image) SetSourceHeight(sourceHeight float64) *Image {
-	p := ba.ctx.Get("Image").New(sourceHeight)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("sourceHeight", sourceHeight)
+	return i
 }
 
 // SourceLeft returns the SourceLeft property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sourceleft
-func (i *Image) SourceLeft(sourceLeft float64) *Image {
-	p := ba.ctx.Get("Image").New(sourceLeft)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) SourceLeft() float64 {
+	retVal := i.p.Get("sourceLeft")
+	return retVal.Float()
 }
 
 // SetSourceLeft sets the SourceLeft property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sourceleft
 func (i *Image) SetSourceLeft(sourceLeft float64) *Image {
-	p := ba.ctx.Get("Image").New(sourceLeft)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("sourceLeft", sourceLeft)
+	return i
 }
 
 // SourceTop returns the SourceTop property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sourcetop
-func (i *Image) SourceTop(sourceTop float64) *Image {
-	p := ba.ctx.Get("Image").New(sourceTop)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) SourceTop() float64 {
+	retVal := i.p.Get("sourceTop")
+	return retVal.Float()
 }
 
 // SetSourceTop sets the SourceTop property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sourcetop
 func (i *Image) SetSourceTop(sourceTop float64) *Image {
-	p := ba.ctx.Get("Image").New(sourceTop)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("sourceTop", sourceTop)
+	return i
 }
 
 // SourceWidth returns the SourceWidth property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sourcewidth
-func (i *Image) SourceWidth(sourceWidth float64) *Image {
-	p := ba.ctx.Get("Image").New(sourceWidth)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) SourceWidth() float64 {
+	retVal := i.p.Get("sourceWidth")
+	return retVal.Float()
 }
 
 // SetSourceWidth sets the SourceWidth property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#sourcewidth
 func (i *Image) SetSourceWidth(sourceWidth float64) *Image {
-	p := ba.ctx.Get("Image").New(sourceWidth)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("sourceWidth", sourceWidth)
+	return i
 }
 
 // Stretch returns the Stretch property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch
-func (i *Image) Stretch(stretch float64) *Image {
-	p := ba.ctx.Get("Image").New(stretch)
-	return ImageFromJSObject(p, ba.ctx)
+func (i *Image) Stretch() float64 {
+	retVal := i.p.Get("stretch")
+	return retVal.Float()
 }
 
 // SetStretch sets the Stretch property of class Image.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image#stretch
 func (i *Image) SetStretch(stretch float64) *Image {
-	p := ba.ctx.Get("Image").New(stretch)
-	return ImageFromJSObject(p, ba.ctx)
+	i.p.Set("stretch", stretch)
+	return i
 }
-
-*/

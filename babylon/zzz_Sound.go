@@ -384,246 +384,242 @@ func (s *Sound) UpdateOptions(options *ISoundOptions) {
 	s.p.Call("updateOptions", args...)
 }
 
-/*
-
 // Autoplay returns the Autoplay property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#autoplay
-func (s *Sound) Autoplay(autoplay bool) *Sound {
-	p := ba.ctx.Get("Sound").New(autoplay)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) Autoplay() bool {
+	retVal := s.p.Get("autoplay")
+	return retVal.Bool()
 }
 
 // SetAutoplay sets the Autoplay property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#autoplay
 func (s *Sound) SetAutoplay(autoplay bool) *Sound {
-	p := ba.ctx.Get("Sound").New(autoplay)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("autoplay", autoplay)
+	return s
 }
 
 // DirectionalConeInnerAngle returns the DirectionalConeInnerAngle property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#directionalconeinnerangle
-func (s *Sound) DirectionalConeInnerAngle(directionalConeInnerAngle float64) *Sound {
-	p := ba.ctx.Get("Sound").New(directionalConeInnerAngle)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) DirectionalConeInnerAngle() float64 {
+	retVal := s.p.Get("directionalConeInnerAngle")
+	return retVal.Float()
 }
 
 // SetDirectionalConeInnerAngle sets the DirectionalConeInnerAngle property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#directionalconeinnerangle
 func (s *Sound) SetDirectionalConeInnerAngle(directionalConeInnerAngle float64) *Sound {
-	p := ba.ctx.Get("Sound").New(directionalConeInnerAngle)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("directionalConeInnerAngle", directionalConeInnerAngle)
+	return s
 }
 
 // DirectionalConeOuterAngle returns the DirectionalConeOuterAngle property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#directionalconeouterangle
-func (s *Sound) DirectionalConeOuterAngle(directionalConeOuterAngle float64) *Sound {
-	p := ba.ctx.Get("Sound").New(directionalConeOuterAngle)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) DirectionalConeOuterAngle() float64 {
+	retVal := s.p.Get("directionalConeOuterAngle")
+	return retVal.Float()
 }
 
 // SetDirectionalConeOuterAngle sets the DirectionalConeOuterAngle property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#directionalconeouterangle
 func (s *Sound) SetDirectionalConeOuterAngle(directionalConeOuterAngle float64) *Sound {
-	p := ba.ctx.Get("Sound").New(directionalConeOuterAngle)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("directionalConeOuterAngle", directionalConeOuterAngle)
+	return s
 }
 
 // DistanceModel returns the DistanceModel property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#distancemodel
-func (s *Sound) DistanceModel(distanceModel string) *Sound {
-	p := ba.ctx.Get("Sound").New(distanceModel)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) DistanceModel() string {
+	retVal := s.p.Get("distanceModel")
+	return retVal.String()
 }
 
 // SetDistanceModel sets the DistanceModel property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#distancemodel
 func (s *Sound) SetDistanceModel(distanceModel string) *Sound {
-	p := ba.ctx.Get("Sound").New(distanceModel)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("distanceModel", distanceModel)
+	return s
 }
 
 // IsPaused returns the IsPaused property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#ispaused
-func (s *Sound) IsPaused(isPaused bool) *Sound {
-	p := ba.ctx.Get("Sound").New(isPaused)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) IsPaused() bool {
+	retVal := s.p.Get("isPaused")
+	return retVal.Bool()
 }
 
 // SetIsPaused sets the IsPaused property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#ispaused
 func (s *Sound) SetIsPaused(isPaused bool) *Sound {
-	p := ba.ctx.Get("Sound").New(isPaused)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("isPaused", isPaused)
+	return s
 }
 
 // IsPlaying returns the IsPlaying property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#isplaying
-func (s *Sound) IsPlaying(isPlaying bool) *Sound {
-	p := ba.ctx.Get("Sound").New(isPlaying)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) IsPlaying() bool {
+	retVal := s.p.Get("isPlaying")
+	return retVal.Bool()
 }
 
 // SetIsPlaying sets the IsPlaying property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#isplaying
 func (s *Sound) SetIsPlaying(isPlaying bool) *Sound {
-	p := ba.ctx.Get("Sound").New(isPlaying)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("isPlaying", isPlaying)
+	return s
 }
 
 // Loop returns the Loop property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#loop
-func (s *Sound) Loop(loop bool) *Sound {
-	p := ba.ctx.Get("Sound").New(loop)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) Loop() bool {
+	retVal := s.p.Get("loop")
+	return retVal.Bool()
 }
 
 // SetLoop sets the Loop property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#loop
 func (s *Sound) SetLoop(loop bool) *Sound {
-	p := ba.ctx.Get("Sound").New(loop)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("loop", loop)
+	return s
 }
 
 // MaxDistance returns the MaxDistance property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#maxdistance
-func (s *Sound) MaxDistance(maxDistance float64) *Sound {
-	p := ba.ctx.Get("Sound").New(maxDistance)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) MaxDistance() float64 {
+	retVal := s.p.Get("maxDistance")
+	return retVal.Float()
 }
 
 // SetMaxDistance sets the MaxDistance property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#maxdistance
 func (s *Sound) SetMaxDistance(maxDistance float64) *Sound {
-	p := ba.ctx.Get("Sound").New(maxDistance)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("maxDistance", maxDistance)
+	return s
 }
 
 // Name returns the Name property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#name
-func (s *Sound) Name(name string) *Sound {
-	p := ba.ctx.Get("Sound").New(name)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#name
 func (s *Sound) SetName(name string) *Sound {
-	p := ba.ctx.Get("Sound").New(name)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
 
 // OnEndedObservable returns the OnEndedObservable property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#onendedobservable
-func (s *Sound) OnEndedObservable(onEndedObservable *Observable) *Sound {
-	p := ba.ctx.Get("Sound").New(onEndedObservable.JSObject())
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) OnEndedObservable() *Observable {
+	retVal := s.p.Get("onEndedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnEndedObservable sets the OnEndedObservable property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#onendedobservable
 func (s *Sound) SetOnEndedObservable(onEndedObservable *Observable) *Sound {
-	p := ba.ctx.Get("Sound").New(onEndedObservable.JSObject())
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("onEndedObservable", onEndedObservable.JSObject())
+	return s
 }
 
 // RefDistance returns the RefDistance property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#refdistance
-func (s *Sound) RefDistance(refDistance float64) *Sound {
-	p := ba.ctx.Get("Sound").New(refDistance)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) RefDistance() float64 {
+	retVal := s.p.Get("refDistance")
+	return retVal.Float()
 }
 
 // SetRefDistance sets the RefDistance property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#refdistance
 func (s *Sound) SetRefDistance(refDistance float64) *Sound {
-	p := ba.ctx.Get("Sound").New(refDistance)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("refDistance", refDistance)
+	return s
 }
 
 // RolloffFactor returns the RolloffFactor property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#rollofffactor
-func (s *Sound) RolloffFactor(rolloffFactor float64) *Sound {
-	p := ba.ctx.Get("Sound").New(rolloffFactor)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) RolloffFactor() float64 {
+	retVal := s.p.Get("rolloffFactor")
+	return retVal.Float()
 }
 
 // SetRolloffFactor sets the RolloffFactor property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#rollofffactor
 func (s *Sound) SetRolloffFactor(rolloffFactor float64) *Sound {
-	p := ba.ctx.Get("Sound").New(rolloffFactor)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("rolloffFactor", rolloffFactor)
+	return s
 }
 
 // SoundTrackId returns the SoundTrackId property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#soundtrackid
-func (s *Sound) SoundTrackId(soundTrackId float64) *Sound {
-	p := ba.ctx.Get("Sound").New(soundTrackId)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) SoundTrackId() float64 {
+	retVal := s.p.Get("soundTrackId")
+	return retVal.Float()
 }
 
 // SetSoundTrackId sets the SoundTrackId property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#soundtrackid
 func (s *Sound) SetSoundTrackId(soundTrackId float64) *Sound {
-	p := ba.ctx.Get("Sound").New(soundTrackId)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("soundTrackId", soundTrackId)
+	return s
 }
 
 // SpatialSound returns the SpatialSound property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#spatialsound
-func (s *Sound) SpatialSound(spatialSound bool) *Sound {
-	p := ba.ctx.Get("Sound").New(spatialSound)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) SpatialSound() bool {
+	retVal := s.p.Get("spatialSound")
+	return retVal.Bool()
 }
 
 // SetSpatialSound sets the SpatialSound property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#spatialsound
 func (s *Sound) SetSpatialSound(spatialSound bool) *Sound {
-	p := ba.ctx.Get("Sound").New(spatialSound)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("spatialSound", spatialSound)
+	return s
 }
 
 // UseCustomAttenuation returns the UseCustomAttenuation property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#usecustomattenuation
-func (s *Sound) UseCustomAttenuation(useCustomAttenuation bool) *Sound {
-	p := ba.ctx.Get("Sound").New(useCustomAttenuation)
-	return SoundFromJSObject(p, ba.ctx)
+func (s *Sound) UseCustomAttenuation() bool {
+	retVal := s.p.Get("useCustomAttenuation")
+	return retVal.Bool()
 }
 
 // SetUseCustomAttenuation sets the UseCustomAttenuation property of class Sound.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#usecustomattenuation
 func (s *Sound) SetUseCustomAttenuation(useCustomAttenuation bool) *Sound {
-	p := ba.ctx.Get("Sound").New(useCustomAttenuation)
-	return SoundFromJSObject(p, ba.ctx)
+	s.p.Set("useCustomAttenuation", useCustomAttenuation)
+	return s
 }
-
-*/

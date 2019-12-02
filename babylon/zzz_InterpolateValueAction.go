@@ -108,102 +108,98 @@ func (i *InterpolateValueAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-/*
-
 // Duration returns the Duration property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#duration
-func (i *InterpolateValueAction) Duration(duration float64) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(duration)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+func (i *InterpolateValueAction) Duration() float64 {
+	retVal := i.p.Get("duration")
+	return retVal.Float()
 }
 
 // SetDuration sets the Duration property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#duration
 func (i *InterpolateValueAction) SetDuration(duration float64) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(duration)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+	i.p.Set("duration", duration)
+	return i
 }
 
 // OnInterpolationDone returns the OnInterpolationDone property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#oninterpolationdone
-func (i *InterpolateValueAction) OnInterpolationDone(onInterpolationDone func()) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onInterpolationDone(); return nil}))
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+func (i *InterpolateValueAction) OnInterpolationDone() js.Value {
+	retVal := i.p.Get("onInterpolationDone")
+	return retVal
 }
 
 // SetOnInterpolationDone sets the OnInterpolationDone property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#oninterpolationdone
 func (i *InterpolateValueAction) SetOnInterpolationDone(onInterpolationDone func()) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onInterpolationDone(); return nil}))
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+	i.p.Set("onInterpolationDone", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onInterpolationDone(); return nil }))
+	return i
 }
 
 // OnInterpolationDoneObservable returns the OnInterpolationDoneObservable property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#oninterpolationdoneobservable
-func (i *InterpolateValueAction) OnInterpolationDoneObservable(onInterpolationDoneObservable *Observable) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(onInterpolationDoneObservable.JSObject())
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+func (i *InterpolateValueAction) OnInterpolationDoneObservable() *Observable {
+	retVal := i.p.Get("onInterpolationDoneObservable")
+	return ObservableFromJSObject(retVal, i.ctx)
 }
 
 // SetOnInterpolationDoneObservable sets the OnInterpolationDoneObservable property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#oninterpolationdoneobservable
 func (i *InterpolateValueAction) SetOnInterpolationDoneObservable(onInterpolationDoneObservable *Observable) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(onInterpolationDoneObservable.JSObject())
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+	i.p.Set("onInterpolationDoneObservable", onInterpolationDoneObservable.JSObject())
+	return i
 }
 
 // PropertyPath returns the PropertyPath property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#propertypath
-func (i *InterpolateValueAction) PropertyPath(propertyPath string) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(propertyPath)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+func (i *InterpolateValueAction) PropertyPath() string {
+	retVal := i.p.Get("propertyPath")
+	return retVal.String()
 }
 
 // SetPropertyPath sets the PropertyPath property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#propertypath
 func (i *InterpolateValueAction) SetPropertyPath(propertyPath string) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(propertyPath)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+	i.p.Set("propertyPath", propertyPath)
+	return i
 }
 
 // StopOtherAnimations returns the StopOtherAnimations property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#stopotheranimations
-func (i *InterpolateValueAction) StopOtherAnimations(stopOtherAnimations bool) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(stopOtherAnimations)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+func (i *InterpolateValueAction) StopOtherAnimations() bool {
+	retVal := i.p.Get("stopOtherAnimations")
+	return retVal.Bool()
 }
 
 // SetStopOtherAnimations sets the StopOtherAnimations property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#stopotheranimations
 func (i *InterpolateValueAction) SetStopOtherAnimations(stopOtherAnimations bool) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(stopOtherAnimations)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+	i.p.Set("stopOtherAnimations", stopOtherAnimations)
+	return i
 }
 
 // Value returns the Value property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#value
-func (i *InterpolateValueAction) Value(value interface{}) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(value)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+func (i *InterpolateValueAction) Value() interface{} {
+	retVal := i.p.Get("value")
+	return retVal
 }
 
 // SetValue sets the Value property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#value
 func (i *InterpolateValueAction) SetValue(value interface{}) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(value)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
+	i.p.Set("value", value)
+	return i
 }
-
-*/

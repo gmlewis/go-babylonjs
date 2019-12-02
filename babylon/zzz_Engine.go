@@ -1678,2054 +1678,2050 @@ func (e *Engine) _renderLoop() {
 	e.p.Call("_renderLoop")
 }
 
-/*
-
 // ALPHA_ADD returns the ALPHA_ADD property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_add
-func (e *Engine) ALPHA_ADD(ALPHA_ADD float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_ADD)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_ADD() float64 {
+	retVal := e.p.Get("ALPHA_ADD")
+	return retVal.Float()
 }
 
 // SetALPHA_ADD sets the ALPHA_ADD property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_add
 func (e *Engine) SetALPHA_ADD(ALPHA_ADD float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_ADD)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_ADD", ALPHA_ADD)
+	return e
 }
 
 // ALPHA_COMBINE returns the ALPHA_COMBINE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_combine
-func (e *Engine) ALPHA_COMBINE(ALPHA_COMBINE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_COMBINE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_COMBINE() float64 {
+	retVal := e.p.Get("ALPHA_COMBINE")
+	return retVal.Float()
 }
 
 // SetALPHA_COMBINE sets the ALPHA_COMBINE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_combine
 func (e *Engine) SetALPHA_COMBINE(ALPHA_COMBINE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_COMBINE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_COMBINE", ALPHA_COMBINE)
+	return e
 }
 
 // ALPHA_DISABLE returns the ALPHA_DISABLE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_disable
-func (e *Engine) ALPHA_DISABLE(ALPHA_DISABLE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_DISABLE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_DISABLE() float64 {
+	retVal := e.p.Get("ALPHA_DISABLE")
+	return retVal.Float()
 }
 
 // SetALPHA_DISABLE sets the ALPHA_DISABLE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_disable
 func (e *Engine) SetALPHA_DISABLE(ALPHA_DISABLE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_DISABLE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_DISABLE", ALPHA_DISABLE)
+	return e
 }
 
 // ALPHA_INTERPOLATE returns the ALPHA_INTERPOLATE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_interpolate
-func (e *Engine) ALPHA_INTERPOLATE(ALPHA_INTERPOLATE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_INTERPOLATE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_INTERPOLATE() float64 {
+	retVal := e.p.Get("ALPHA_INTERPOLATE")
+	return retVal.Float()
 }
 
 // SetALPHA_INTERPOLATE sets the ALPHA_INTERPOLATE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_interpolate
 func (e *Engine) SetALPHA_INTERPOLATE(ALPHA_INTERPOLATE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_INTERPOLATE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_INTERPOLATE", ALPHA_INTERPOLATE)
+	return e
 }
 
 // ALPHA_MAXIMIZED returns the ALPHA_MAXIMIZED property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_maximized
-func (e *Engine) ALPHA_MAXIMIZED(ALPHA_MAXIMIZED float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_MAXIMIZED)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_MAXIMIZED() float64 {
+	retVal := e.p.Get("ALPHA_MAXIMIZED")
+	return retVal.Float()
 }
 
 // SetALPHA_MAXIMIZED sets the ALPHA_MAXIMIZED property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_maximized
 func (e *Engine) SetALPHA_MAXIMIZED(ALPHA_MAXIMIZED float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_MAXIMIZED)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_MAXIMIZED", ALPHA_MAXIMIZED)
+	return e
 }
 
 // ALPHA_MULTIPLY returns the ALPHA_MULTIPLY property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_multiply
-func (e *Engine) ALPHA_MULTIPLY(ALPHA_MULTIPLY float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_MULTIPLY)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_MULTIPLY() float64 {
+	retVal := e.p.Get("ALPHA_MULTIPLY")
+	return retVal.Float()
 }
 
 // SetALPHA_MULTIPLY sets the ALPHA_MULTIPLY property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_multiply
 func (e *Engine) SetALPHA_MULTIPLY(ALPHA_MULTIPLY float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_MULTIPLY)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_MULTIPLY", ALPHA_MULTIPLY)
+	return e
 }
 
 // ALPHA_ONEONE returns the ALPHA_ONEONE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_oneone
-func (e *Engine) ALPHA_ONEONE(ALPHA_ONEONE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_ONEONE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_ONEONE() float64 {
+	retVal := e.p.Get("ALPHA_ONEONE")
+	return retVal.Float()
 }
 
 // SetALPHA_ONEONE sets the ALPHA_ONEONE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_oneone
 func (e *Engine) SetALPHA_ONEONE(ALPHA_ONEONE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_ONEONE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_ONEONE", ALPHA_ONEONE)
+	return e
 }
 
 // ALPHA_PREMULTIPLIED returns the ALPHA_PREMULTIPLIED property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_premultiplied
-func (e *Engine) ALPHA_PREMULTIPLIED(ALPHA_PREMULTIPLIED float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_PREMULTIPLIED)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_PREMULTIPLIED() float64 {
+	retVal := e.p.Get("ALPHA_PREMULTIPLIED")
+	return retVal.Float()
 }
 
 // SetALPHA_PREMULTIPLIED sets the ALPHA_PREMULTIPLIED property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_premultiplied
 func (e *Engine) SetALPHA_PREMULTIPLIED(ALPHA_PREMULTIPLIED float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_PREMULTIPLIED)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_PREMULTIPLIED", ALPHA_PREMULTIPLIED)
+	return e
 }
 
 // ALPHA_PREMULTIPLIED_PORTERDUFF returns the ALPHA_PREMULTIPLIED_PORTERDUFF property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_premultiplied_porterduff
-func (e *Engine) ALPHA_PREMULTIPLIED_PORTERDUFF(ALPHA_PREMULTIPLIED_PORTERDUFF float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_PREMULTIPLIED_PORTERDUFF)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_PREMULTIPLIED_PORTERDUFF() float64 {
+	retVal := e.p.Get("ALPHA_PREMULTIPLIED_PORTERDUFF")
+	return retVal.Float()
 }
 
 // SetALPHA_PREMULTIPLIED_PORTERDUFF sets the ALPHA_PREMULTIPLIED_PORTERDUFF property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_premultiplied_porterduff
 func (e *Engine) SetALPHA_PREMULTIPLIED_PORTERDUFF(ALPHA_PREMULTIPLIED_PORTERDUFF float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_PREMULTIPLIED_PORTERDUFF)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_PREMULTIPLIED_PORTERDUFF", ALPHA_PREMULTIPLIED_PORTERDUFF)
+	return e
 }
 
 // ALPHA_SCREENMODE returns the ALPHA_SCREENMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_screenmode
-func (e *Engine) ALPHA_SCREENMODE(ALPHA_SCREENMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_SCREENMODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_SCREENMODE() float64 {
+	retVal := e.p.Get("ALPHA_SCREENMODE")
+	return retVal.Float()
 }
 
 // SetALPHA_SCREENMODE sets the ALPHA_SCREENMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_screenmode
 func (e *Engine) SetALPHA_SCREENMODE(ALPHA_SCREENMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_SCREENMODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_SCREENMODE", ALPHA_SCREENMODE)
+	return e
 }
 
 // ALPHA_SUBTRACT returns the ALPHA_SUBTRACT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_subtract
-func (e *Engine) ALPHA_SUBTRACT(ALPHA_SUBTRACT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_SUBTRACT)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALPHA_SUBTRACT() float64 {
+	retVal := e.p.Get("ALPHA_SUBTRACT")
+	return retVal.Float()
 }
 
 // SetALPHA_SUBTRACT sets the ALPHA_SUBTRACT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#alpha_subtract
 func (e *Engine) SetALPHA_SUBTRACT(ALPHA_SUBTRACT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALPHA_SUBTRACT)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALPHA_SUBTRACT", ALPHA_SUBTRACT)
+	return e
 }
 
 // ALWAYS returns the ALWAYS property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#always
-func (e *Engine) ALWAYS(ALWAYS float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALWAYS)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ALWAYS() float64 {
+	retVal := e.p.Get("ALWAYS")
+	return retVal.Float()
 }
 
 // SetALWAYS sets the ALWAYS property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#always
 func (e *Engine) SetALWAYS(ALWAYS float64) *Engine {
-	p := ba.ctx.Get("Engine").New(ALWAYS)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("ALWAYS", ALWAYS)
+	return e
 }
 
 // ActiveView returns the ActiveView property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#activeview
-func (e *Engine) ActiveView(activeView *EngineView) *Engine {
-	p := ba.ctx.Get("Engine").New(activeView.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) ActiveView() *EngineView {
+	retVal := e.p.Get("activeView")
+	return EngineViewFromJSObject(retVal, e.ctx)
 }
 
 // SetActiveView sets the ActiveView property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#activeview
 func (e *Engine) SetActiveView(activeView *EngineView) *Engine {
-	p := ba.ctx.Get("Engine").New(activeView.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("activeView", activeView.JSObject())
+	return e
 }
 
 // AudioEngine returns the AudioEngine property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#audioengine
-func (e *Engine) AudioEngine(audioEngine *IAudioEngine) *Engine {
-	p := ba.ctx.Get("Engine").New(audioEngine.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) AudioEngine() *IAudioEngine {
+	retVal := e.p.Get("audioEngine")
+	return IAudioEngineFromJSObject(retVal, e.ctx)
 }
 
 // SetAudioEngine sets the AudioEngine property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#audioengine
 func (e *Engine) SetAudioEngine(audioEngine *IAudioEngine) *Engine {
-	p := ba.ctx.Get("Engine").New(audioEngine.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("audioEngine", audioEngine.JSObject())
+	return e
 }
 
 // AudioEngineFactory returns the AudioEngineFactory property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#audioenginefactory
-func (e *Engine) AudioEngineFactory(AudioEngineFactory func()) *Engine {
-	p := ba.ctx.Get("Engine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {AudioEngineFactory(); return nil}))
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) AudioEngineFactory() js.Value {
+	retVal := e.p.Get("AudioEngineFactory")
+	return retVal
 }
 
 // SetAudioEngineFactory sets the AudioEngineFactory property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#audioenginefactory
 func (e *Engine) SetAudioEngineFactory(AudioEngineFactory func()) *Engine {
-	p := ba.ctx.Get("Engine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {AudioEngineFactory(); return nil}))
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("AudioEngineFactory", js.FuncOf(func(this js.Value, args []js.Value) interface{} { AudioEngineFactory(); return nil }))
+	return e
 }
 
 // CustomAnimationFrameRequester returns the CustomAnimationFrameRequester property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#customanimationframerequester
-func (e *Engine) CustomAnimationFrameRequester(customAnimationFrameRequester *ICustomAnimationFrameRequester) *Engine {
-	p := ba.ctx.Get("Engine").New(customAnimationFrameRequester.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) CustomAnimationFrameRequester() *ICustomAnimationFrameRequester {
+	retVal := e.p.Get("customAnimationFrameRequester")
+	return ICustomAnimationFrameRequesterFromJSObject(retVal, e.ctx)
 }
 
 // SetCustomAnimationFrameRequester sets the CustomAnimationFrameRequester property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#customanimationframerequester
 func (e *Engine) SetCustomAnimationFrameRequester(customAnimationFrameRequester *ICustomAnimationFrameRequester) *Engine {
-	p := ba.ctx.Get("Engine").New(customAnimationFrameRequester.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("customAnimationFrameRequester", customAnimationFrameRequester.JSObject())
+	return e
 }
 
 // DECR returns the DECR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#decr
-func (e *Engine) DECR(DECR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DECR)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) DECR() float64 {
+	retVal := e.p.Get("DECR")
+	return retVal.Float()
 }
 
 // SetDECR sets the DECR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#decr
 func (e *Engine) SetDECR(DECR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DECR)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("DECR", DECR)
+	return e
 }
 
 // DECR_WRAP returns the DECR_WRAP property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#decr_wrap
-func (e *Engine) DECR_WRAP(DECR_WRAP float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DECR_WRAP)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) DECR_WRAP() float64 {
+	retVal := e.p.Get("DECR_WRAP")
+	return retVal.Float()
 }
 
 // SetDECR_WRAP sets the DECR_WRAP property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#decr_wrap
 func (e *Engine) SetDECR_WRAP(DECR_WRAP float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DECR_WRAP)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("DECR_WRAP", DECR_WRAP)
+	return e
 }
 
 // DELAYLOADSTATE_LOADED returns the DELAYLOADSTATE_LOADED property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#delayloadstate_loaded
-func (e *Engine) DELAYLOADSTATE_LOADED(DELAYLOADSTATE_LOADED float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DELAYLOADSTATE_LOADED)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) DELAYLOADSTATE_LOADED() float64 {
+	retVal := e.p.Get("DELAYLOADSTATE_LOADED")
+	return retVal.Float()
 }
 
 // SetDELAYLOADSTATE_LOADED sets the DELAYLOADSTATE_LOADED property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#delayloadstate_loaded
 func (e *Engine) SetDELAYLOADSTATE_LOADED(DELAYLOADSTATE_LOADED float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DELAYLOADSTATE_LOADED)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("DELAYLOADSTATE_LOADED", DELAYLOADSTATE_LOADED)
+	return e
 }
 
 // DELAYLOADSTATE_LOADING returns the DELAYLOADSTATE_LOADING property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#delayloadstate_loading
-func (e *Engine) DELAYLOADSTATE_LOADING(DELAYLOADSTATE_LOADING float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DELAYLOADSTATE_LOADING)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) DELAYLOADSTATE_LOADING() float64 {
+	retVal := e.p.Get("DELAYLOADSTATE_LOADING")
+	return retVal.Float()
 }
 
 // SetDELAYLOADSTATE_LOADING sets the DELAYLOADSTATE_LOADING property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#delayloadstate_loading
 func (e *Engine) SetDELAYLOADSTATE_LOADING(DELAYLOADSTATE_LOADING float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DELAYLOADSTATE_LOADING)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("DELAYLOADSTATE_LOADING", DELAYLOADSTATE_LOADING)
+	return e
 }
 
 // DELAYLOADSTATE_NONE returns the DELAYLOADSTATE_NONE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#delayloadstate_none
-func (e *Engine) DELAYLOADSTATE_NONE(DELAYLOADSTATE_NONE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DELAYLOADSTATE_NONE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) DELAYLOADSTATE_NONE() float64 {
+	retVal := e.p.Get("DELAYLOADSTATE_NONE")
+	return retVal.Float()
 }
 
 // SetDELAYLOADSTATE_NONE sets the DELAYLOADSTATE_NONE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#delayloadstate_none
 func (e *Engine) SetDELAYLOADSTATE_NONE(DELAYLOADSTATE_NONE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DELAYLOADSTATE_NONE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("DELAYLOADSTATE_NONE", DELAYLOADSTATE_NONE)
+	return e
 }
 
 // DELAYLOADSTATE_NOTLOADED returns the DELAYLOADSTATE_NOTLOADED property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#delayloadstate_notloaded
-func (e *Engine) DELAYLOADSTATE_NOTLOADED(DELAYLOADSTATE_NOTLOADED float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DELAYLOADSTATE_NOTLOADED)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) DELAYLOADSTATE_NOTLOADED() float64 {
+	retVal := e.p.Get("DELAYLOADSTATE_NOTLOADED")
+	return retVal.Float()
 }
 
 // SetDELAYLOADSTATE_NOTLOADED sets the DELAYLOADSTATE_NOTLOADED property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#delayloadstate_notloaded
 func (e *Engine) SetDELAYLOADSTATE_NOTLOADED(DELAYLOADSTATE_NOTLOADED float64) *Engine {
-	p := ba.ctx.Get("Engine").New(DELAYLOADSTATE_NOTLOADED)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("DELAYLOADSTATE_NOTLOADED", DELAYLOADSTATE_NOTLOADED)
+	return e
 }
 
 // DisableManifestCheck returns the DisableManifestCheck property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#disablemanifestcheck
-func (e *Engine) DisableManifestCheck(disableManifestCheck bool) *Engine {
-	p := ba.ctx.Get("Engine").New(disableManifestCheck)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) DisableManifestCheck() bool {
+	retVal := e.p.Get("disableManifestCheck")
+	return retVal.Bool()
 }
 
 // SetDisableManifestCheck sets the DisableManifestCheck property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#disablemanifestcheck
 func (e *Engine) SetDisableManifestCheck(disableManifestCheck bool) *Engine {
-	p := ba.ctx.Get("Engine").New(disableManifestCheck)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("disableManifestCheck", disableManifestCheck)
+	return e
 }
 
 // DisablePerformanceMonitorInBackground returns the DisablePerformanceMonitorInBackground property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#disableperformancemonitorinbackground
-func (e *Engine) DisablePerformanceMonitorInBackground(disablePerformanceMonitorInBackground bool) *Engine {
-	p := ba.ctx.Get("Engine").New(disablePerformanceMonitorInBackground)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) DisablePerformanceMonitorInBackground() bool {
+	retVal := e.p.Get("disablePerformanceMonitorInBackground")
+	return retVal.Bool()
 }
 
 // SetDisablePerformanceMonitorInBackground sets the DisablePerformanceMonitorInBackground property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#disableperformancemonitorinbackground
 func (e *Engine) SetDisablePerformanceMonitorInBackground(disablePerformanceMonitorInBackground bool) *Engine {
-	p := ba.ctx.Get("Engine").New(disablePerformanceMonitorInBackground)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("disablePerformanceMonitorInBackground", disablePerformanceMonitorInBackground)
+	return e
 }
 
 // EQUAL returns the EQUAL property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#equal
-func (e *Engine) EQUAL(EQUAL float64) *Engine {
-	p := ba.ctx.Get("Engine").New(EQUAL)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) EQUAL() float64 {
+	retVal := e.p.Get("EQUAL")
+	return retVal.Float()
 }
 
 // SetEQUAL sets the EQUAL property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#equal
 func (e *Engine) SetEQUAL(EQUAL float64) *Engine {
-	p := ba.ctx.Get("Engine").New(EQUAL)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("EQUAL", EQUAL)
+	return e
 }
 
 // EnableOfflineSupport returns the EnableOfflineSupport property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#enableofflinesupport
-func (e *Engine) EnableOfflineSupport(enableOfflineSupport bool) *Engine {
-	p := ba.ctx.Get("Engine").New(enableOfflineSupport)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) EnableOfflineSupport() bool {
+	retVal := e.p.Get("enableOfflineSupport")
+	return retVal.Bool()
 }
 
 // SetEnableOfflineSupport sets the EnableOfflineSupport property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#enableofflinesupport
 func (e *Engine) SetEnableOfflineSupport(enableOfflineSupport bool) *Engine {
-	p := ba.ctx.Get("Engine").New(enableOfflineSupport)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("enableOfflineSupport", enableOfflineSupport)
+	return e
 }
 
 // GEQUAL returns the GEQUAL property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#gequal
-func (e *Engine) GEQUAL(GEQUAL float64) *Engine {
-	p := ba.ctx.Get("Engine").New(GEQUAL)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) GEQUAL() float64 {
+	retVal := e.p.Get("GEQUAL")
+	return retVal.Float()
 }
 
 // SetGEQUAL sets the GEQUAL property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#gequal
 func (e *Engine) SetGEQUAL(GEQUAL float64) *Engine {
-	p := ba.ctx.Get("Engine").New(GEQUAL)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("GEQUAL", GEQUAL)
+	return e
 }
 
 // GREATER returns the GREATER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#greater
-func (e *Engine) GREATER(GREATER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(GREATER)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) GREATER() float64 {
+	retVal := e.p.Get("GREATER")
+	return retVal.Float()
 }
 
 // SetGREATER sets the GREATER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#greater
 func (e *Engine) SetGREATER(GREATER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(GREATER)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("GREATER", GREATER)
+	return e
 }
 
 // INCR returns the INCR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#incr
-func (e *Engine) INCR(INCR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(INCR)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) INCR() float64 {
+	retVal := e.p.Get("INCR")
+	return retVal.Float()
 }
 
 // SetINCR sets the INCR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#incr
 func (e *Engine) SetINCR(INCR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(INCR)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("INCR", INCR)
+	return e
 }
 
 // INCR_WRAP returns the INCR_WRAP property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#incr_wrap
-func (e *Engine) INCR_WRAP(INCR_WRAP float64) *Engine {
-	p := ba.ctx.Get("Engine").New(INCR_WRAP)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) INCR_WRAP() float64 {
+	retVal := e.p.Get("INCR_WRAP")
+	return retVal.Float()
 }
 
 // SetINCR_WRAP sets the INCR_WRAP property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#incr_wrap
 func (e *Engine) SetINCR_WRAP(INCR_WRAP float64) *Engine {
-	p := ba.ctx.Get("Engine").New(INCR_WRAP)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("INCR_WRAP", INCR_WRAP)
+	return e
 }
 
 // INVERT returns the INVERT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#invert
-func (e *Engine) INVERT(INVERT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(INVERT)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) INVERT() float64 {
+	retVal := e.p.Get("INVERT")
+	return retVal.Float()
 }
 
 // SetINVERT sets the INVERT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#invert
 func (e *Engine) SetINVERT(INVERT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(INVERT)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("INVERT", INVERT)
+	return e
 }
 
 // InputElement returns the InputElement property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#inputelement
-func (e *Engine) InputElement(inputElement js.Value) *Engine {
-	p := ba.ctx.Get("Engine").New(inputElement)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) InputElement() js.Value {
+	retVal := e.p.Get("inputElement")
+	return retVal
 }
 
 // SetInputElement sets the InputElement property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#inputelement
 func (e *Engine) SetInputElement(inputElement js.Value) *Engine {
-	p := ba.ctx.Get("Engine").New(inputElement)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("inputElement", inputElement)
+	return e
 }
 
 // Instances returns the Instances property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#instances
-func (e *Engine) Instances(Instances *Engine) *Engine {
-	p := ba.ctx.Get("Engine").New(Instances.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) Instances() *Engine {
+	retVal := e.p.Get("Instances")
+	return EngineFromJSObject(retVal, e.ctx)
 }
 
 // SetInstances sets the Instances property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#instances
 func (e *Engine) SetInstances(Instances *Engine) *Engine {
-	p := ba.ctx.Get("Engine").New(Instances.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("Instances", Instances.JSObject())
+	return e
 }
 
 // IsInVRExclusivePointerMode returns the IsInVRExclusivePointerMode property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#isinvrexclusivepointermode
-func (e *Engine) IsInVRExclusivePointerMode(isInVRExclusivePointerMode bool) *Engine {
-	p := ba.ctx.Get("Engine").New(isInVRExclusivePointerMode)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) IsInVRExclusivePointerMode() bool {
+	retVal := e.p.Get("isInVRExclusivePointerMode")
+	return retVal.Bool()
 }
 
 // SetIsInVRExclusivePointerMode sets the IsInVRExclusivePointerMode property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#isinvrexclusivepointermode
 func (e *Engine) SetIsInVRExclusivePointerMode(isInVRExclusivePointerMode bool) *Engine {
-	p := ba.ctx.Get("Engine").New(isInVRExclusivePointerMode)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("isInVRExclusivePointerMode", isInVRExclusivePointerMode)
+	return e
 }
 
 // IsPointerLock returns the IsPointerLock property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#ispointerlock
-func (e *Engine) IsPointerLock(isPointerLock bool) *Engine {
-	p := ba.ctx.Get("Engine").New(isPointerLock)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) IsPointerLock() bool {
+	retVal := e.p.Get("isPointerLock")
+	return retVal.Bool()
 }
 
 // SetIsPointerLock sets the IsPointerLock property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#ispointerlock
 func (e *Engine) SetIsPointerLock(isPointerLock bool) *Engine {
-	p := ba.ctx.Get("Engine").New(isPointerLock)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("isPointerLock", isPointerLock)
+	return e
 }
 
 // KEEP returns the KEEP property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#keep
-func (e *Engine) KEEP(KEEP float64) *Engine {
-	p := ba.ctx.Get("Engine").New(KEEP)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) KEEP() float64 {
+	retVal := e.p.Get("KEEP")
+	return retVal.Float()
 }
 
 // SetKEEP sets the KEEP property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#keep
 func (e *Engine) SetKEEP(KEEP float64) *Engine {
-	p := ba.ctx.Get("Engine").New(KEEP)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("KEEP", KEEP)
+	return e
 }
 
 // LEQUAL returns the LEQUAL property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#lequal
-func (e *Engine) LEQUAL(LEQUAL float64) *Engine {
-	p := ba.ctx.Get("Engine").New(LEQUAL)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) LEQUAL() float64 {
+	retVal := e.p.Get("LEQUAL")
+	return retVal.Float()
 }
 
 // SetLEQUAL sets the LEQUAL property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#lequal
 func (e *Engine) SetLEQUAL(LEQUAL float64) *Engine {
-	p := ba.ctx.Get("Engine").New(LEQUAL)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("LEQUAL", LEQUAL)
+	return e
 }
 
 // LESS returns the LESS property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#less
-func (e *Engine) LESS(LESS float64) *Engine {
-	p := ba.ctx.Get("Engine").New(LESS)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) LESS() float64 {
+	retVal := e.p.Get("LESS")
+	return retVal.Float()
 }
 
 // SetLESS sets the LESS property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#less
 func (e *Engine) SetLESS(LESS float64) *Engine {
-	p := ba.ctx.Get("Engine").New(LESS)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("LESS", LESS)
+	return e
 }
 
 // LastCreatedEngine returns the LastCreatedEngine property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#lastcreatedengine
-func (e *Engine) LastCreatedEngine(LastCreatedEngine *Engine) *Engine {
-	p := ba.ctx.Get("Engine").New(LastCreatedEngine.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) LastCreatedEngine() *Engine {
+	retVal := e.p.Get("LastCreatedEngine")
+	return EngineFromJSObject(retVal, e.ctx)
 }
 
 // SetLastCreatedEngine sets the LastCreatedEngine property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#lastcreatedengine
 func (e *Engine) SetLastCreatedEngine(LastCreatedEngine *Engine) *Engine {
-	p := ba.ctx.Get("Engine").New(LastCreatedEngine.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("LastCreatedEngine", LastCreatedEngine.JSObject())
+	return e
 }
 
 // LastCreatedScene returns the LastCreatedScene property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#lastcreatedscene
-func (e *Engine) LastCreatedScene(LastCreatedScene *Scene) *Engine {
-	p := ba.ctx.Get("Engine").New(LastCreatedScene.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) LastCreatedScene() *Scene {
+	retVal := e.p.Get("LastCreatedScene")
+	return SceneFromJSObject(retVal, e.ctx)
 }
 
 // SetLastCreatedScene sets the LastCreatedScene property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#lastcreatedscene
 func (e *Engine) SetLastCreatedScene(LastCreatedScene *Scene) *Engine {
-	p := ba.ctx.Get("Engine").New(LastCreatedScene.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("LastCreatedScene", LastCreatedScene.JSObject())
+	return e
 }
 
 // LoadingScreen returns the LoadingScreen property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#loadingscreen
-func (e *Engine) LoadingScreen(loadingScreen *ILoadingScreen) *Engine {
-	p := ba.ctx.Get("Engine").New(loadingScreen.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) LoadingScreen() *ILoadingScreen {
+	retVal := e.p.Get("loadingScreen")
+	return ILoadingScreenFromJSObject(retVal, e.ctx)
 }
 
 // SetLoadingScreen sets the LoadingScreen property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#loadingscreen
 func (e *Engine) SetLoadingScreen(loadingScreen *ILoadingScreen) *Engine {
-	p := ba.ctx.Get("Engine").New(loadingScreen.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("loadingScreen", loadingScreen.JSObject())
+	return e
 }
 
 // LoadingUIBackgroundColor returns the LoadingUIBackgroundColor property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#loadinguibackgroundcolor
-func (e *Engine) LoadingUIBackgroundColor(loadingUIBackgroundColor string) *Engine {
-	p := ba.ctx.Get("Engine").New(loadingUIBackgroundColor)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) LoadingUIBackgroundColor() string {
+	retVal := e.p.Get("loadingUIBackgroundColor")
+	return retVal.String()
 }
 
 // SetLoadingUIBackgroundColor sets the LoadingUIBackgroundColor property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#loadinguibackgroundcolor
 func (e *Engine) SetLoadingUIBackgroundColor(loadingUIBackgroundColor string) *Engine {
-	p := ba.ctx.Get("Engine").New(loadingUIBackgroundColor)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("loadingUIBackgroundColor", loadingUIBackgroundColor)
+	return e
 }
 
 // LoadingUIText returns the LoadingUIText property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#loadinguitext
-func (e *Engine) LoadingUIText(loadingUIText string) *Engine {
-	p := ba.ctx.Get("Engine").New(loadingUIText)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) LoadingUIText() string {
+	retVal := e.p.Get("loadingUIText")
+	return retVal.String()
 }
 
 // SetLoadingUIText sets the LoadingUIText property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#loadinguitext
 func (e *Engine) SetLoadingUIText(loadingUIText string) *Engine {
-	p := ba.ctx.Get("Engine").New(loadingUIText)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("loadingUIText", loadingUIText)
+	return e
 }
 
 // NEVER returns the NEVER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#never
-func (e *Engine) NEVER(NEVER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(NEVER)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) NEVER() float64 {
+	retVal := e.p.Get("NEVER")
+	return retVal.Float()
 }
 
 // SetNEVER sets the NEVER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#never
 func (e *Engine) SetNEVER(NEVER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(NEVER)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("NEVER", NEVER)
+	return e
 }
 
 // NOTEQUAL returns the NOTEQUAL property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#notequal
-func (e *Engine) NOTEQUAL(NOTEQUAL float64) *Engine {
-	p := ba.ctx.Get("Engine").New(NOTEQUAL)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) NOTEQUAL() float64 {
+	retVal := e.p.Get("NOTEQUAL")
+	return retVal.Float()
 }
 
 // SetNOTEQUAL sets the NOTEQUAL property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#notequal
 func (e *Engine) SetNOTEQUAL(NOTEQUAL float64) *Engine {
-	p := ba.ctx.Get("Engine").New(NOTEQUAL)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("NOTEQUAL", NOTEQUAL)
+	return e
 }
 
 // NpmPackage returns the NpmPackage property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#npmpackage
-func (e *Engine) NpmPackage(NpmPackage string) *Engine {
-	p := ba.ctx.Get("Engine").New(NpmPackage)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) NpmPackage() string {
+	retVal := e.p.Get("NpmPackage")
+	return retVal.String()
 }
 
 // SetNpmPackage sets the NpmPackage property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#npmpackage
 func (e *Engine) SetNpmPackage(NpmPackage string) *Engine {
-	p := ba.ctx.Get("Engine").New(NpmPackage)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("NpmPackage", NpmPackage)
+	return e
 }
 
 // OfflineProviderFactory returns the OfflineProviderFactory property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#offlineproviderfactory
-func (e *Engine) OfflineProviderFactory(OfflineProviderFactory func()) *Engine {
-	p := ba.ctx.Get("Engine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {OfflineProviderFactory(); return nil}))
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OfflineProviderFactory() js.Value {
+	retVal := e.p.Get("OfflineProviderFactory")
+	return retVal
 }
 
 // SetOfflineProviderFactory sets the OfflineProviderFactory property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#offlineproviderfactory
 func (e *Engine) SetOfflineProviderFactory(OfflineProviderFactory func()) *Engine {
-	p := ba.ctx.Get("Engine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {OfflineProviderFactory(); return nil}))
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("OfflineProviderFactory", js.FuncOf(func(this js.Value, args []js.Value) interface{} { OfflineProviderFactory(); return nil }))
+	return e
 }
 
 // OnAfterShaderCompilationObservable returns the OnAfterShaderCompilationObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onaftershadercompilationobservable
-func (e *Engine) OnAfterShaderCompilationObservable(onAfterShaderCompilationObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onAfterShaderCompilationObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnAfterShaderCompilationObservable() *Observable {
+	retVal := e.p.Get("onAfterShaderCompilationObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnAfterShaderCompilationObservable sets the OnAfterShaderCompilationObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onaftershadercompilationobservable
 func (e *Engine) SetOnAfterShaderCompilationObservable(onAfterShaderCompilationObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onAfterShaderCompilationObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onAfterShaderCompilationObservable", onAfterShaderCompilationObservable.JSObject())
+	return e
 }
 
 // OnBeforeShaderCompilationObservable returns the OnBeforeShaderCompilationObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onbeforeshadercompilationobservable
-func (e *Engine) OnBeforeShaderCompilationObservable(onBeforeShaderCompilationObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onBeforeShaderCompilationObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnBeforeShaderCompilationObservable() *Observable {
+	retVal := e.p.Get("onBeforeShaderCompilationObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnBeforeShaderCompilationObservable sets the OnBeforeShaderCompilationObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onbeforeshadercompilationobservable
 func (e *Engine) SetOnBeforeShaderCompilationObservable(onBeforeShaderCompilationObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onBeforeShaderCompilationObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onBeforeShaderCompilationObservable", onBeforeShaderCompilationObservable.JSObject())
+	return e
 }
 
 // OnBeginFrameObservable returns the OnBeginFrameObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onbeginframeobservable
-func (e *Engine) OnBeginFrameObservable(onBeginFrameObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onBeginFrameObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnBeginFrameObservable() *Observable {
+	retVal := e.p.Get("onBeginFrameObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnBeginFrameObservable sets the OnBeginFrameObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onbeginframeobservable
 func (e *Engine) SetOnBeginFrameObservable(onBeginFrameObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onBeginFrameObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onBeginFrameObservable", onBeginFrameObservable.JSObject())
+	return e
 }
 
 // OnCanvasBlurObservable returns the OnCanvasBlurObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#oncanvasblurobservable
-func (e *Engine) OnCanvasBlurObservable(onCanvasBlurObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onCanvasBlurObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnCanvasBlurObservable() *Observable {
+	retVal := e.p.Get("onCanvasBlurObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnCanvasBlurObservable sets the OnCanvasBlurObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#oncanvasblurobservable
 func (e *Engine) SetOnCanvasBlurObservable(onCanvasBlurObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onCanvasBlurObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onCanvasBlurObservable", onCanvasBlurObservable.JSObject())
+	return e
 }
 
 // OnCanvasFocusObservable returns the OnCanvasFocusObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#oncanvasfocusobservable
-func (e *Engine) OnCanvasFocusObservable(onCanvasFocusObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onCanvasFocusObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnCanvasFocusObservable() *Observable {
+	retVal := e.p.Get("onCanvasFocusObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnCanvasFocusObservable sets the OnCanvasFocusObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#oncanvasfocusobservable
 func (e *Engine) SetOnCanvasFocusObservable(onCanvasFocusObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onCanvasFocusObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onCanvasFocusObservable", onCanvasFocusObservable.JSObject())
+	return e
 }
 
 // OnCanvasPointerOutObservable returns the OnCanvasPointerOutObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#oncanvaspointeroutobservable
-func (e *Engine) OnCanvasPointerOutObservable(onCanvasPointerOutObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onCanvasPointerOutObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnCanvasPointerOutObservable() *Observable {
+	retVal := e.p.Get("onCanvasPointerOutObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnCanvasPointerOutObservable sets the OnCanvasPointerOutObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#oncanvaspointeroutobservable
 func (e *Engine) SetOnCanvasPointerOutObservable(onCanvasPointerOutObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onCanvasPointerOutObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onCanvasPointerOutObservable", onCanvasPointerOutObservable.JSObject())
+	return e
 }
 
 // OnEndFrameObservable returns the OnEndFrameObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onendframeobservable
-func (e *Engine) OnEndFrameObservable(onEndFrameObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onEndFrameObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnEndFrameObservable() *Observable {
+	retVal := e.p.Get("onEndFrameObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnEndFrameObservable sets the OnEndFrameObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onendframeobservable
 func (e *Engine) SetOnEndFrameObservable(onEndFrameObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onEndFrameObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onEndFrameObservable", onEndFrameObservable.JSObject())
+	return e
 }
 
 // OnNewSceneAddedObservable returns the OnNewSceneAddedObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onnewsceneaddedobservable
-func (e *Engine) OnNewSceneAddedObservable(onNewSceneAddedObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onNewSceneAddedObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnNewSceneAddedObservable() *Observable {
+	retVal := e.p.Get("onNewSceneAddedObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnNewSceneAddedObservable sets the OnNewSceneAddedObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onnewsceneaddedobservable
 func (e *Engine) SetOnNewSceneAddedObservable(onNewSceneAddedObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onNewSceneAddedObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onNewSceneAddedObservable", onNewSceneAddedObservable.JSObject())
+	return e
 }
 
 // OnResizeObservable returns the OnResizeObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onresizeobservable
-func (e *Engine) OnResizeObservable(onResizeObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onResizeObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnResizeObservable() *Observable {
+	retVal := e.p.Get("onResizeObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnResizeObservable sets the OnResizeObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onresizeobservable
 func (e *Engine) SetOnResizeObservable(onResizeObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onResizeObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onResizeObservable", onResizeObservable.JSObject())
+	return e
 }
 
 // OnVRDisplayChangedObservable returns the OnVRDisplayChangedObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onvrdisplaychangedobservable
-func (e *Engine) OnVRDisplayChangedObservable(onVRDisplayChangedObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onVRDisplayChangedObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnVRDisplayChangedObservable() *Observable {
+	retVal := e.p.Get("onVRDisplayChangedObservable")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnVRDisplayChangedObservable sets the OnVRDisplayChangedObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onvrdisplaychangedobservable
 func (e *Engine) SetOnVRDisplayChangedObservable(onVRDisplayChangedObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onVRDisplayChangedObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onVRDisplayChangedObservable", onVRDisplayChangedObservable.JSObject())
+	return e
 }
 
 // OnVRRequestPresentComplete returns the OnVRRequestPresentComplete property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onvrrequestpresentcomplete
-func (e *Engine) OnVRRequestPresentComplete(onVRRequestPresentComplete *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onVRRequestPresentComplete.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnVRRequestPresentComplete() *Observable {
+	retVal := e.p.Get("onVRRequestPresentComplete")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnVRRequestPresentComplete sets the OnVRRequestPresentComplete property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onvrrequestpresentcomplete
 func (e *Engine) SetOnVRRequestPresentComplete(onVRRequestPresentComplete *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onVRRequestPresentComplete.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onVRRequestPresentComplete", onVRRequestPresentComplete.JSObject())
+	return e
 }
 
 // OnVRRequestPresentStart returns the OnVRRequestPresentStart property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onvrrequestpresentstart
-func (e *Engine) OnVRRequestPresentStart(onVRRequestPresentStart *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onVRRequestPresentStart.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) OnVRRequestPresentStart() *Observable {
+	retVal := e.p.Get("onVRRequestPresentStart")
+	return ObservableFromJSObject(retVal, e.ctx)
 }
 
 // SetOnVRRequestPresentStart sets the OnVRRequestPresentStart property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onvrrequestpresentstart
 func (e *Engine) SetOnVRRequestPresentStart(onVRRequestPresentStart *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onVRRequestPresentStart.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("onVRRequestPresentStart", onVRRequestPresentStart.JSObject())
+	return e
 }
 
 // PerformanceMonitor returns the PerformanceMonitor property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#performancemonitor
-func (e *Engine) PerformanceMonitor(performanceMonitor *PerformanceMonitor) *Engine {
-	p := ba.ctx.Get("Engine").New(performanceMonitor.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) PerformanceMonitor() *PerformanceMonitor {
+	retVal := e.p.Get("performanceMonitor")
+	return PerformanceMonitorFromJSObject(retVal, e.ctx)
 }
 
 // SetPerformanceMonitor sets the PerformanceMonitor property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#performancemonitor
 func (e *Engine) SetPerformanceMonitor(performanceMonitor *PerformanceMonitor) *Engine {
-	p := ba.ctx.Get("Engine").New(performanceMonitor.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("performanceMonitor", performanceMonitor.JSObject())
+	return e
 }
 
 // PostProcesses returns the PostProcesses property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#postprocesses
-func (e *Engine) PostProcesses(postProcesses *PostProcess) *Engine {
-	p := ba.ctx.Get("Engine").New(postProcesses.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) PostProcesses() *PostProcess {
+	retVal := e.p.Get("postProcesses")
+	return PostProcessFromJSObject(retVal, e.ctx)
 }
 
 // SetPostProcesses sets the PostProcesses property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#postprocesses
 func (e *Engine) SetPostProcesses(postProcesses *PostProcess) *Engine {
-	p := ba.ctx.Get("Engine").New(postProcesses.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("postProcesses", postProcesses.JSObject())
+	return e
 }
 
 // REPLACE returns the REPLACE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#replace
-func (e *Engine) REPLACE(REPLACE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(REPLACE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) REPLACE() float64 {
+	retVal := e.p.Get("REPLACE")
+	return retVal.Float()
 }
 
 // SetREPLACE sets the REPLACE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#replace
 func (e *Engine) SetREPLACE(REPLACE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(REPLACE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("REPLACE", REPLACE)
+	return e
 }
 
 // SCALEMODE_CEILING returns the SCALEMODE_CEILING property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#scalemode_ceiling
-func (e *Engine) SCALEMODE_CEILING(SCALEMODE_CEILING float64) *Engine {
-	p := ba.ctx.Get("Engine").New(SCALEMODE_CEILING)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) SCALEMODE_CEILING() float64 {
+	retVal := e.p.Get("SCALEMODE_CEILING")
+	return retVal.Float()
 }
 
 // SetSCALEMODE_CEILING sets the SCALEMODE_CEILING property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#scalemode_ceiling
 func (e *Engine) SetSCALEMODE_CEILING(SCALEMODE_CEILING float64) *Engine {
-	p := ba.ctx.Get("Engine").New(SCALEMODE_CEILING)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("SCALEMODE_CEILING", SCALEMODE_CEILING)
+	return e
 }
 
 // SCALEMODE_FLOOR returns the SCALEMODE_FLOOR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#scalemode_floor
-func (e *Engine) SCALEMODE_FLOOR(SCALEMODE_FLOOR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(SCALEMODE_FLOOR)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) SCALEMODE_FLOOR() float64 {
+	retVal := e.p.Get("SCALEMODE_FLOOR")
+	return retVal.Float()
 }
 
 // SetSCALEMODE_FLOOR sets the SCALEMODE_FLOOR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#scalemode_floor
 func (e *Engine) SetSCALEMODE_FLOOR(SCALEMODE_FLOOR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(SCALEMODE_FLOOR)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("SCALEMODE_FLOOR", SCALEMODE_FLOOR)
+	return e
 }
 
 // SCALEMODE_NEAREST returns the SCALEMODE_NEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#scalemode_nearest
-func (e *Engine) SCALEMODE_NEAREST(SCALEMODE_NEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(SCALEMODE_NEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) SCALEMODE_NEAREST() float64 {
+	retVal := e.p.Get("SCALEMODE_NEAREST")
+	return retVal.Float()
 }
 
 // SetSCALEMODE_NEAREST sets the SCALEMODE_NEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#scalemode_nearest
 func (e *Engine) SetSCALEMODE_NEAREST(SCALEMODE_NEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(SCALEMODE_NEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("SCALEMODE_NEAREST", SCALEMODE_NEAREST)
+	return e
 }
 
 // Scenes returns the Scenes property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#scenes
-func (e *Engine) Scenes(scenes *Scene) *Engine {
-	p := ba.ctx.Get("Engine").New(scenes.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) Scenes() *Scene {
+	retVal := e.p.Get("scenes")
+	return SceneFromJSObject(retVal, e.ctx)
 }
 
 // SetScenes sets the Scenes property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#scenes
 func (e *Engine) SetScenes(scenes *Scene) *Engine {
-	p := ba.ctx.Get("Engine").New(scenes.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("scenes", scenes.JSObject())
+	return e
 }
 
 // TEXTUREFORMAT_ALPHA returns the TEXTUREFORMAT_ALPHA property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_alpha
-func (e *Engine) TEXTUREFORMAT_ALPHA(TEXTUREFORMAT_ALPHA float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_ALPHA)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_ALPHA() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_ALPHA")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_ALPHA sets the TEXTUREFORMAT_ALPHA property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_alpha
 func (e *Engine) SetTEXTUREFORMAT_ALPHA(TEXTUREFORMAT_ALPHA float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_ALPHA)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_ALPHA", TEXTUREFORMAT_ALPHA)
+	return e
 }
 
 // TEXTUREFORMAT_LUMINANCE returns the TEXTUREFORMAT_LUMINANCE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_luminance
-func (e *Engine) TEXTUREFORMAT_LUMINANCE(TEXTUREFORMAT_LUMINANCE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_LUMINANCE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_LUMINANCE() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_LUMINANCE")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_LUMINANCE sets the TEXTUREFORMAT_LUMINANCE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_luminance
 func (e *Engine) SetTEXTUREFORMAT_LUMINANCE(TEXTUREFORMAT_LUMINANCE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_LUMINANCE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_LUMINANCE", TEXTUREFORMAT_LUMINANCE)
+	return e
 }
 
 // TEXTUREFORMAT_LUMINANCE_ALPHA returns the TEXTUREFORMAT_LUMINANCE_ALPHA property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_luminance_alpha
-func (e *Engine) TEXTUREFORMAT_LUMINANCE_ALPHA(TEXTUREFORMAT_LUMINANCE_ALPHA float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_LUMINANCE_ALPHA)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_LUMINANCE_ALPHA() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_LUMINANCE_ALPHA")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_LUMINANCE_ALPHA sets the TEXTUREFORMAT_LUMINANCE_ALPHA property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_luminance_alpha
 func (e *Engine) SetTEXTUREFORMAT_LUMINANCE_ALPHA(TEXTUREFORMAT_LUMINANCE_ALPHA float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_LUMINANCE_ALPHA)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_LUMINANCE_ALPHA", TEXTUREFORMAT_LUMINANCE_ALPHA)
+	return e
 }
 
 // TEXTUREFORMAT_R returns the TEXTUREFORMAT_R property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_r
-func (e *Engine) TEXTUREFORMAT_R(TEXTUREFORMAT_R float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_R)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_R() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_R")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_R sets the TEXTUREFORMAT_R property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_r
 func (e *Engine) SetTEXTUREFORMAT_R(TEXTUREFORMAT_R float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_R)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_R", TEXTUREFORMAT_R)
+	return e
 }
 
 // TEXTUREFORMAT_RED returns the TEXTUREFORMAT_RED property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_red
-func (e *Engine) TEXTUREFORMAT_RED(TEXTUREFORMAT_RED float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RED)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_RED() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_RED")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_RED sets the TEXTUREFORMAT_RED property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_red
 func (e *Engine) SetTEXTUREFORMAT_RED(TEXTUREFORMAT_RED float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RED)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_RED", TEXTUREFORMAT_RED)
+	return e
 }
 
 // TEXTUREFORMAT_RED_INTEGER returns the TEXTUREFORMAT_RED_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_red_integer
-func (e *Engine) TEXTUREFORMAT_RED_INTEGER(TEXTUREFORMAT_RED_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RED_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_RED_INTEGER() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_RED_INTEGER")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_RED_INTEGER sets the TEXTUREFORMAT_RED_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_red_integer
 func (e *Engine) SetTEXTUREFORMAT_RED_INTEGER(TEXTUREFORMAT_RED_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RED_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_RED_INTEGER", TEXTUREFORMAT_RED_INTEGER)
+	return e
 }
 
 // TEXTUREFORMAT_RG returns the TEXTUREFORMAT_RG property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rg
-func (e *Engine) TEXTUREFORMAT_RG(TEXTUREFORMAT_RG float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RG)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_RG() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_RG")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_RG sets the TEXTUREFORMAT_RG property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rg
 func (e *Engine) SetTEXTUREFORMAT_RG(TEXTUREFORMAT_RG float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RG)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_RG", TEXTUREFORMAT_RG)
+	return e
 }
 
 // TEXTUREFORMAT_RGB returns the TEXTUREFORMAT_RGB property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rgb
-func (e *Engine) TEXTUREFORMAT_RGB(TEXTUREFORMAT_RGB float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RGB)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_RGB() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_RGB")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_RGB sets the TEXTUREFORMAT_RGB property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rgb
 func (e *Engine) SetTEXTUREFORMAT_RGB(TEXTUREFORMAT_RGB float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RGB)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_RGB", TEXTUREFORMAT_RGB)
+	return e
 }
 
 // TEXTUREFORMAT_RGBA returns the TEXTUREFORMAT_RGBA property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rgba
-func (e *Engine) TEXTUREFORMAT_RGBA(TEXTUREFORMAT_RGBA float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RGBA)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_RGBA() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_RGBA")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_RGBA sets the TEXTUREFORMAT_RGBA property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rgba
 func (e *Engine) SetTEXTUREFORMAT_RGBA(TEXTUREFORMAT_RGBA float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RGBA)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_RGBA", TEXTUREFORMAT_RGBA)
+	return e
 }
 
 // TEXTUREFORMAT_RGBA_INTEGER returns the TEXTUREFORMAT_RGBA_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rgba_integer
-func (e *Engine) TEXTUREFORMAT_RGBA_INTEGER(TEXTUREFORMAT_RGBA_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RGBA_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_RGBA_INTEGER() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_RGBA_INTEGER")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_RGBA_INTEGER sets the TEXTUREFORMAT_RGBA_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rgba_integer
 func (e *Engine) SetTEXTUREFORMAT_RGBA_INTEGER(TEXTUREFORMAT_RGBA_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RGBA_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_RGBA_INTEGER", TEXTUREFORMAT_RGBA_INTEGER)
+	return e
 }
 
 // TEXTUREFORMAT_RGB_INTEGER returns the TEXTUREFORMAT_RGB_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rgb_integer
-func (e *Engine) TEXTUREFORMAT_RGB_INTEGER(TEXTUREFORMAT_RGB_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RGB_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_RGB_INTEGER() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_RGB_INTEGER")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_RGB_INTEGER sets the TEXTUREFORMAT_RGB_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rgb_integer
 func (e *Engine) SetTEXTUREFORMAT_RGB_INTEGER(TEXTUREFORMAT_RGB_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RGB_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_RGB_INTEGER", TEXTUREFORMAT_RGB_INTEGER)
+	return e
 }
 
 // TEXTUREFORMAT_RG_INTEGER returns the TEXTUREFORMAT_RG_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rg_integer
-func (e *Engine) TEXTUREFORMAT_RG_INTEGER(TEXTUREFORMAT_RG_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RG_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_RG_INTEGER() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_RG_INTEGER")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_RG_INTEGER sets the TEXTUREFORMAT_RG_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_rg_integer
 func (e *Engine) SetTEXTUREFORMAT_RG_INTEGER(TEXTUREFORMAT_RG_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_RG_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_RG_INTEGER", TEXTUREFORMAT_RG_INTEGER)
+	return e
 }
 
 // TEXTUREFORMAT_R_INTEGER returns the TEXTUREFORMAT_R_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_r_integer
-func (e *Engine) TEXTUREFORMAT_R_INTEGER(TEXTUREFORMAT_R_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_R_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTUREFORMAT_R_INTEGER() float64 {
+	retVal := e.p.Get("TEXTUREFORMAT_R_INTEGER")
+	return retVal.Float()
 }
 
 // SetTEXTUREFORMAT_R_INTEGER sets the TEXTUREFORMAT_R_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#textureformat_r_integer
 func (e *Engine) SetTEXTUREFORMAT_R_INTEGER(TEXTUREFORMAT_R_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTUREFORMAT_R_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTUREFORMAT_R_INTEGER", TEXTUREFORMAT_R_INTEGER)
+	return e
 }
 
 // TEXTURETYPE_BYTE returns the TEXTURETYPE_BYTE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_byte
-func (e *Engine) TEXTURETYPE_BYTE(TEXTURETYPE_BYTE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_BYTE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_BYTE() float64 {
+	retVal := e.p.Get("TEXTURETYPE_BYTE")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_BYTE sets the TEXTURETYPE_BYTE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_byte
 func (e *Engine) SetTEXTURETYPE_BYTE(TEXTURETYPE_BYTE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_BYTE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_BYTE", TEXTURETYPE_BYTE)
+	return e
 }
 
 // TEXTURETYPE_FLOAT returns the TEXTURETYPE_FLOAT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_float
-func (e *Engine) TEXTURETYPE_FLOAT(TEXTURETYPE_FLOAT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_FLOAT)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_FLOAT() float64 {
+	retVal := e.p.Get("TEXTURETYPE_FLOAT")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_FLOAT sets the TEXTURETYPE_FLOAT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_float
 func (e *Engine) SetTEXTURETYPE_FLOAT(TEXTURETYPE_FLOAT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_FLOAT)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_FLOAT", TEXTURETYPE_FLOAT)
+	return e
 }
 
 // TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV returns the TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_float_32_unsigned_int_24_8_rev
-func (e *Engine) TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV() float64 {
+	retVal := e.p.Get("TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV sets the TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_float_32_unsigned_int_24_8_rev
 func (e *Engine) SetTEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV", TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV)
+	return e
 }
 
 // TEXTURETYPE_HALF_FLOAT returns the TEXTURETYPE_HALF_FLOAT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_half_float
-func (e *Engine) TEXTURETYPE_HALF_FLOAT(TEXTURETYPE_HALF_FLOAT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_HALF_FLOAT)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_HALF_FLOAT() float64 {
+	retVal := e.p.Get("TEXTURETYPE_HALF_FLOAT")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_HALF_FLOAT sets the TEXTURETYPE_HALF_FLOAT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_half_float
 func (e *Engine) SetTEXTURETYPE_HALF_FLOAT(TEXTURETYPE_HALF_FLOAT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_HALF_FLOAT)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_HALF_FLOAT", TEXTURETYPE_HALF_FLOAT)
+	return e
 }
 
 // TEXTURETYPE_INT returns the TEXTURETYPE_INT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_int
-func (e *Engine) TEXTURETYPE_INT(TEXTURETYPE_INT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_INT)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_INT() float64 {
+	retVal := e.p.Get("TEXTURETYPE_INT")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_INT sets the TEXTURETYPE_INT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_int
 func (e *Engine) SetTEXTURETYPE_INT(TEXTURETYPE_INT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_INT)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_INT", TEXTURETYPE_INT)
+	return e
 }
 
 // TEXTURETYPE_SHORT returns the TEXTURETYPE_SHORT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_short
-func (e *Engine) TEXTURETYPE_SHORT(TEXTURETYPE_SHORT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_SHORT)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_SHORT() float64 {
+	retVal := e.p.Get("TEXTURETYPE_SHORT")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_SHORT sets the TEXTURETYPE_SHORT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_short
 func (e *Engine) SetTEXTURETYPE_SHORT(TEXTURETYPE_SHORT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_SHORT)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_SHORT", TEXTURETYPE_SHORT)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_BYTE returns the TEXTURETYPE_UNSIGNED_BYTE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_byte
-func (e *Engine) TEXTURETYPE_UNSIGNED_BYTE(TEXTURETYPE_UNSIGNED_BYTE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_BYTE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_BYTE() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_BYTE")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_BYTE sets the TEXTURETYPE_UNSIGNED_BYTE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_byte
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_BYTE(TEXTURETYPE_UNSIGNED_BYTE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_BYTE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_BYTE", TEXTURETYPE_UNSIGNED_BYTE)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_INT returns the TEXTURETYPE_UNSIGNED_INT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_int
-func (e *Engine) TEXTURETYPE_UNSIGNED_INT(TEXTURETYPE_UNSIGNED_INT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INT)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_INT() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_INT")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_INT sets the TEXTURETYPE_UNSIGNED_INT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_int
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_INT(TEXTURETYPE_UNSIGNED_INT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INT)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_INT", TEXTURETYPE_UNSIGNED_INT)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_INTEGER returns the TEXTURETYPE_UNSIGNED_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_integer
-func (e *Engine) TEXTURETYPE_UNSIGNED_INTEGER(TEXTURETYPE_UNSIGNED_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_INTEGER() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_INTEGER")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_INTEGER sets the TEXTURETYPE_UNSIGNED_INTEGER property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_integer
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_INTEGER(TEXTURETYPE_UNSIGNED_INTEGER float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INTEGER)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_INTEGER", TEXTURETYPE_UNSIGNED_INTEGER)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV returns the TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_int_10f_11f_11f_rev
-func (e *Engine) TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV sets the TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_int_10f_11f_11f_rev
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV", TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_INT_24_8 returns the TEXTURETYPE_UNSIGNED_INT_24_8 property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_int_24_8
-func (e *Engine) TEXTURETYPE_UNSIGNED_INT_24_8(TEXTURETYPE_UNSIGNED_INT_24_8 float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INT_24_8)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_INT_24_8() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_INT_24_8")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_INT_24_8 sets the TEXTURETYPE_UNSIGNED_INT_24_8 property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_int_24_8
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_INT_24_8(TEXTURETYPE_UNSIGNED_INT_24_8 float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INT_24_8)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_INT_24_8", TEXTURETYPE_UNSIGNED_INT_24_8)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV returns the TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_int_2_10_10_10_rev
-func (e *Engine) TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV sets the TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_int_2_10_10_10_rev
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV", TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV returns the TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_int_5_9_9_9_rev
-func (e *Engine) TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV sets the TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_int_5_9_9_9_rev
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV", TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_SHORT returns the TEXTURETYPE_UNSIGNED_SHORT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_short
-func (e *Engine) TEXTURETYPE_UNSIGNED_SHORT(TEXTURETYPE_UNSIGNED_SHORT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_SHORT)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_SHORT() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_SHORT")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_SHORT sets the TEXTURETYPE_UNSIGNED_SHORT property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_short
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_SHORT(TEXTURETYPE_UNSIGNED_SHORT float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_SHORT)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_SHORT", TEXTURETYPE_UNSIGNED_SHORT)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 returns the TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_short_4_4_4_4
-func (e *Engine) TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 sets the TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_short_4_4_4_4
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_SHORT_4_4_4_4(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4", TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 returns the TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_short_5_5_5_1
-func (e *Engine) TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 sets the TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_short_5_5_5_1
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_SHORT_5_5_5_1(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1", TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1)
+	return e
 }
 
 // TEXTURETYPE_UNSIGNED_SHORT_5_6_5 returns the TEXTURETYPE_UNSIGNED_SHORT_5_6_5 property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_short_5_6_5
-func (e *Engine) TEXTURETYPE_UNSIGNED_SHORT_5_6_5(TEXTURETYPE_UNSIGNED_SHORT_5_6_5 float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_SHORT_5_6_5)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURETYPE_UNSIGNED_SHORT_5_6_5() float64 {
+	retVal := e.p.Get("TEXTURETYPE_UNSIGNED_SHORT_5_6_5")
+	return retVal.Float()
 }
 
 // SetTEXTURETYPE_UNSIGNED_SHORT_5_6_5 sets the TEXTURETYPE_UNSIGNED_SHORT_5_6_5 property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texturetype_unsigned_short_5_6_5
 func (e *Engine) SetTEXTURETYPE_UNSIGNED_SHORT_5_6_5(TEXTURETYPE_UNSIGNED_SHORT_5_6_5 float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURETYPE_UNSIGNED_SHORT_5_6_5)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURETYPE_UNSIGNED_SHORT_5_6_5", TEXTURETYPE_UNSIGNED_SHORT_5_6_5)
+	return e
 }
 
 // TEXTURE_BILINEAR_SAMPLINGMODE returns the TEXTURE_BILINEAR_SAMPLINGMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_bilinear_samplingmode
-func (e *Engine) TEXTURE_BILINEAR_SAMPLINGMODE(TEXTURE_BILINEAR_SAMPLINGMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_BILINEAR_SAMPLINGMODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_BILINEAR_SAMPLINGMODE() float64 {
+	retVal := e.p.Get("TEXTURE_BILINEAR_SAMPLINGMODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_BILINEAR_SAMPLINGMODE sets the TEXTURE_BILINEAR_SAMPLINGMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_bilinear_samplingmode
 func (e *Engine) SetTEXTURE_BILINEAR_SAMPLINGMODE(TEXTURE_BILINEAR_SAMPLINGMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_BILINEAR_SAMPLINGMODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_BILINEAR_SAMPLINGMODE", TEXTURE_BILINEAR_SAMPLINGMODE)
+	return e
 }
 
 // TEXTURE_CLAMP_ADDRESSMODE returns the TEXTURE_CLAMP_ADDRESSMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_clamp_addressmode
-func (e *Engine) TEXTURE_CLAMP_ADDRESSMODE(TEXTURE_CLAMP_ADDRESSMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_CLAMP_ADDRESSMODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_CLAMP_ADDRESSMODE() float64 {
+	retVal := e.p.Get("TEXTURE_CLAMP_ADDRESSMODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_CLAMP_ADDRESSMODE sets the TEXTURE_CLAMP_ADDRESSMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_clamp_addressmode
 func (e *Engine) SetTEXTURE_CLAMP_ADDRESSMODE(TEXTURE_CLAMP_ADDRESSMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_CLAMP_ADDRESSMODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_CLAMP_ADDRESSMODE", TEXTURE_CLAMP_ADDRESSMODE)
+	return e
 }
 
 // TEXTURE_CUBIC_MODE returns the TEXTURE_CUBIC_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_cubic_mode
-func (e *Engine) TEXTURE_CUBIC_MODE(TEXTURE_CUBIC_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_CUBIC_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_CUBIC_MODE() float64 {
+	retVal := e.p.Get("TEXTURE_CUBIC_MODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_CUBIC_MODE sets the TEXTURE_CUBIC_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_cubic_mode
 func (e *Engine) SetTEXTURE_CUBIC_MODE(TEXTURE_CUBIC_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_CUBIC_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_CUBIC_MODE", TEXTURE_CUBIC_MODE)
+	return e
 }
 
 // TEXTURE_EQUIRECTANGULAR_MODE returns the TEXTURE_EQUIRECTANGULAR_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_equirectangular_mode
-func (e *Engine) TEXTURE_EQUIRECTANGULAR_MODE(TEXTURE_EQUIRECTANGULAR_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_EQUIRECTANGULAR_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_EQUIRECTANGULAR_MODE() float64 {
+	retVal := e.p.Get("TEXTURE_EQUIRECTANGULAR_MODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_EQUIRECTANGULAR_MODE sets the TEXTURE_EQUIRECTANGULAR_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_equirectangular_mode
 func (e *Engine) SetTEXTURE_EQUIRECTANGULAR_MODE(TEXTURE_EQUIRECTANGULAR_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_EQUIRECTANGULAR_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_EQUIRECTANGULAR_MODE", TEXTURE_EQUIRECTANGULAR_MODE)
+	return e
 }
 
 // TEXTURE_EXPLICIT_MODE returns the TEXTURE_EXPLICIT_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_explicit_mode
-func (e *Engine) TEXTURE_EXPLICIT_MODE(TEXTURE_EXPLICIT_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_EXPLICIT_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_EXPLICIT_MODE() float64 {
+	retVal := e.p.Get("TEXTURE_EXPLICIT_MODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_EXPLICIT_MODE sets the TEXTURE_EXPLICIT_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_explicit_mode
 func (e *Engine) SetTEXTURE_EXPLICIT_MODE(TEXTURE_EXPLICIT_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_EXPLICIT_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_EXPLICIT_MODE", TEXTURE_EXPLICIT_MODE)
+	return e
 }
 
 // TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_fixed_equirectangular_mirrored_mode
-func (e *Engine) TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE() float64 {
+	retVal := e.p.Get("TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_fixed_equirectangular_mirrored_mode
 func (e *Engine) SetTEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE", TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return e
 }
 
 // TEXTURE_FIXED_EQUIRECTANGULAR_MODE returns the TEXTURE_FIXED_EQUIRECTANGULAR_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_fixed_equirectangular_mode
-func (e *Engine) TEXTURE_FIXED_EQUIRECTANGULAR_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_FIXED_EQUIRECTANGULAR_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_FIXED_EQUIRECTANGULAR_MODE() float64 {
+	retVal := e.p.Get("TEXTURE_FIXED_EQUIRECTANGULAR_MODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_FIXED_EQUIRECTANGULAR_MODE sets the TEXTURE_FIXED_EQUIRECTANGULAR_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_fixed_equirectangular_mode
 func (e *Engine) SetTEXTURE_FIXED_EQUIRECTANGULAR_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_FIXED_EQUIRECTANGULAR_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_FIXED_EQUIRECTANGULAR_MODE", TEXTURE_FIXED_EQUIRECTANGULAR_MODE)
+	return e
 }
 
 // TEXTURE_INVCUBIC_MODE returns the TEXTURE_INVCUBIC_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_invcubic_mode
-func (e *Engine) TEXTURE_INVCUBIC_MODE(TEXTURE_INVCUBIC_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_INVCUBIC_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_INVCUBIC_MODE() float64 {
+	retVal := e.p.Get("TEXTURE_INVCUBIC_MODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_INVCUBIC_MODE sets the TEXTURE_INVCUBIC_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_invcubic_mode
 func (e *Engine) SetTEXTURE_INVCUBIC_MODE(TEXTURE_INVCUBIC_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_INVCUBIC_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_INVCUBIC_MODE", TEXTURE_INVCUBIC_MODE)
+	return e
 }
 
 // TEXTURE_LINEAR_LINEAR returns the TEXTURE_LINEAR_LINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_linear
-func (e *Engine) TEXTURE_LINEAR_LINEAR(TEXTURE_LINEAR_LINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_LINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_LINEAR_LINEAR() float64 {
+	retVal := e.p.Get("TEXTURE_LINEAR_LINEAR")
+	return retVal.Float()
 }
 
 // SetTEXTURE_LINEAR_LINEAR sets the TEXTURE_LINEAR_LINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_linear
 func (e *Engine) SetTEXTURE_LINEAR_LINEAR(TEXTURE_LINEAR_LINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_LINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_LINEAR_LINEAR", TEXTURE_LINEAR_LINEAR)
+	return e
 }
 
 // TEXTURE_LINEAR_LINEAR_MIPLINEAR returns the TEXTURE_LINEAR_LINEAR_MIPLINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_linear_miplinear
-func (e *Engine) TEXTURE_LINEAR_LINEAR_MIPLINEAR(TEXTURE_LINEAR_LINEAR_MIPLINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_LINEAR_MIPLINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_LINEAR_LINEAR_MIPLINEAR() float64 {
+	retVal := e.p.Get("TEXTURE_LINEAR_LINEAR_MIPLINEAR")
+	return retVal.Float()
 }
 
 // SetTEXTURE_LINEAR_LINEAR_MIPLINEAR sets the TEXTURE_LINEAR_LINEAR_MIPLINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_linear_miplinear
 func (e *Engine) SetTEXTURE_LINEAR_LINEAR_MIPLINEAR(TEXTURE_LINEAR_LINEAR_MIPLINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_LINEAR_MIPLINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_LINEAR_LINEAR_MIPLINEAR", TEXTURE_LINEAR_LINEAR_MIPLINEAR)
+	return e
 }
 
 // TEXTURE_LINEAR_LINEAR_MIPNEAREST returns the TEXTURE_LINEAR_LINEAR_MIPNEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_linear_mipnearest
-func (e *Engine) TEXTURE_LINEAR_LINEAR_MIPNEAREST(TEXTURE_LINEAR_LINEAR_MIPNEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_LINEAR_MIPNEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_LINEAR_LINEAR_MIPNEAREST() float64 {
+	retVal := e.p.Get("TEXTURE_LINEAR_LINEAR_MIPNEAREST")
+	return retVal.Float()
 }
 
 // SetTEXTURE_LINEAR_LINEAR_MIPNEAREST sets the TEXTURE_LINEAR_LINEAR_MIPNEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_linear_mipnearest
 func (e *Engine) SetTEXTURE_LINEAR_LINEAR_MIPNEAREST(TEXTURE_LINEAR_LINEAR_MIPNEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_LINEAR_MIPNEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_LINEAR_LINEAR_MIPNEAREST", TEXTURE_LINEAR_LINEAR_MIPNEAREST)
+	return e
 }
 
 // TEXTURE_LINEAR_NEAREST returns the TEXTURE_LINEAR_NEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_nearest
-func (e *Engine) TEXTURE_LINEAR_NEAREST(TEXTURE_LINEAR_NEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_NEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_LINEAR_NEAREST() float64 {
+	retVal := e.p.Get("TEXTURE_LINEAR_NEAREST")
+	return retVal.Float()
 }
 
 // SetTEXTURE_LINEAR_NEAREST sets the TEXTURE_LINEAR_NEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_nearest
 func (e *Engine) SetTEXTURE_LINEAR_NEAREST(TEXTURE_LINEAR_NEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_NEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_LINEAR_NEAREST", TEXTURE_LINEAR_NEAREST)
+	return e
 }
 
 // TEXTURE_LINEAR_NEAREST_MIPLINEAR returns the TEXTURE_LINEAR_NEAREST_MIPLINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_nearest_miplinear
-func (e *Engine) TEXTURE_LINEAR_NEAREST_MIPLINEAR(TEXTURE_LINEAR_NEAREST_MIPLINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_NEAREST_MIPLINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_LINEAR_NEAREST_MIPLINEAR() float64 {
+	retVal := e.p.Get("TEXTURE_LINEAR_NEAREST_MIPLINEAR")
+	return retVal.Float()
 }
 
 // SetTEXTURE_LINEAR_NEAREST_MIPLINEAR sets the TEXTURE_LINEAR_NEAREST_MIPLINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_nearest_miplinear
 func (e *Engine) SetTEXTURE_LINEAR_NEAREST_MIPLINEAR(TEXTURE_LINEAR_NEAREST_MIPLINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_NEAREST_MIPLINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_LINEAR_NEAREST_MIPLINEAR", TEXTURE_LINEAR_NEAREST_MIPLINEAR)
+	return e
 }
 
 // TEXTURE_LINEAR_NEAREST_MIPNEAREST returns the TEXTURE_LINEAR_NEAREST_MIPNEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_nearest_mipnearest
-func (e *Engine) TEXTURE_LINEAR_NEAREST_MIPNEAREST(TEXTURE_LINEAR_NEAREST_MIPNEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_NEAREST_MIPNEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_LINEAR_NEAREST_MIPNEAREST() float64 {
+	retVal := e.p.Get("TEXTURE_LINEAR_NEAREST_MIPNEAREST")
+	return retVal.Float()
 }
 
 // SetTEXTURE_LINEAR_NEAREST_MIPNEAREST sets the TEXTURE_LINEAR_NEAREST_MIPNEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_linear_nearest_mipnearest
 func (e *Engine) SetTEXTURE_LINEAR_NEAREST_MIPNEAREST(TEXTURE_LINEAR_NEAREST_MIPNEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_LINEAR_NEAREST_MIPNEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_LINEAR_NEAREST_MIPNEAREST", TEXTURE_LINEAR_NEAREST_MIPNEAREST)
+	return e
 }
 
 // TEXTURE_MIRROR_ADDRESSMODE returns the TEXTURE_MIRROR_ADDRESSMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_mirror_addressmode
-func (e *Engine) TEXTURE_MIRROR_ADDRESSMODE(TEXTURE_MIRROR_ADDRESSMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_MIRROR_ADDRESSMODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_MIRROR_ADDRESSMODE() float64 {
+	retVal := e.p.Get("TEXTURE_MIRROR_ADDRESSMODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_MIRROR_ADDRESSMODE sets the TEXTURE_MIRROR_ADDRESSMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_mirror_addressmode
 func (e *Engine) SetTEXTURE_MIRROR_ADDRESSMODE(TEXTURE_MIRROR_ADDRESSMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_MIRROR_ADDRESSMODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_MIRROR_ADDRESSMODE", TEXTURE_MIRROR_ADDRESSMODE)
+	return e
 }
 
 // TEXTURE_NEAREST_LINEAR returns the TEXTURE_NEAREST_LINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_linear
-func (e *Engine) TEXTURE_NEAREST_LINEAR(TEXTURE_NEAREST_LINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_LINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_NEAREST_LINEAR() float64 {
+	retVal := e.p.Get("TEXTURE_NEAREST_LINEAR")
+	return retVal.Float()
 }
 
 // SetTEXTURE_NEAREST_LINEAR sets the TEXTURE_NEAREST_LINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_linear
 func (e *Engine) SetTEXTURE_NEAREST_LINEAR(TEXTURE_NEAREST_LINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_LINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_NEAREST_LINEAR", TEXTURE_NEAREST_LINEAR)
+	return e
 }
 
 // TEXTURE_NEAREST_LINEAR_MIPLINEAR returns the TEXTURE_NEAREST_LINEAR_MIPLINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_linear_miplinear
-func (e *Engine) TEXTURE_NEAREST_LINEAR_MIPLINEAR(TEXTURE_NEAREST_LINEAR_MIPLINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_LINEAR_MIPLINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_NEAREST_LINEAR_MIPLINEAR() float64 {
+	retVal := e.p.Get("TEXTURE_NEAREST_LINEAR_MIPLINEAR")
+	return retVal.Float()
 }
 
 // SetTEXTURE_NEAREST_LINEAR_MIPLINEAR sets the TEXTURE_NEAREST_LINEAR_MIPLINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_linear_miplinear
 func (e *Engine) SetTEXTURE_NEAREST_LINEAR_MIPLINEAR(TEXTURE_NEAREST_LINEAR_MIPLINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_LINEAR_MIPLINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_NEAREST_LINEAR_MIPLINEAR", TEXTURE_NEAREST_LINEAR_MIPLINEAR)
+	return e
 }
 
 // TEXTURE_NEAREST_LINEAR_MIPNEAREST returns the TEXTURE_NEAREST_LINEAR_MIPNEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_linear_mipnearest
-func (e *Engine) TEXTURE_NEAREST_LINEAR_MIPNEAREST(TEXTURE_NEAREST_LINEAR_MIPNEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_LINEAR_MIPNEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_NEAREST_LINEAR_MIPNEAREST() float64 {
+	retVal := e.p.Get("TEXTURE_NEAREST_LINEAR_MIPNEAREST")
+	return retVal.Float()
 }
 
 // SetTEXTURE_NEAREST_LINEAR_MIPNEAREST sets the TEXTURE_NEAREST_LINEAR_MIPNEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_linear_mipnearest
 func (e *Engine) SetTEXTURE_NEAREST_LINEAR_MIPNEAREST(TEXTURE_NEAREST_LINEAR_MIPNEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_LINEAR_MIPNEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_NEAREST_LINEAR_MIPNEAREST", TEXTURE_NEAREST_LINEAR_MIPNEAREST)
+	return e
 }
 
 // TEXTURE_NEAREST_NEAREST returns the TEXTURE_NEAREST_NEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_nearest
-func (e *Engine) TEXTURE_NEAREST_NEAREST(TEXTURE_NEAREST_NEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_NEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_NEAREST_NEAREST() float64 {
+	retVal := e.p.Get("TEXTURE_NEAREST_NEAREST")
+	return retVal.Float()
 }
 
 // SetTEXTURE_NEAREST_NEAREST sets the TEXTURE_NEAREST_NEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_nearest
 func (e *Engine) SetTEXTURE_NEAREST_NEAREST(TEXTURE_NEAREST_NEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_NEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_NEAREST_NEAREST", TEXTURE_NEAREST_NEAREST)
+	return e
 }
 
 // TEXTURE_NEAREST_NEAREST_MIPLINEAR returns the TEXTURE_NEAREST_NEAREST_MIPLINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_nearest_miplinear
-func (e *Engine) TEXTURE_NEAREST_NEAREST_MIPLINEAR(TEXTURE_NEAREST_NEAREST_MIPLINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_NEAREST_MIPLINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_NEAREST_NEAREST_MIPLINEAR() float64 {
+	retVal := e.p.Get("TEXTURE_NEAREST_NEAREST_MIPLINEAR")
+	return retVal.Float()
 }
 
 // SetTEXTURE_NEAREST_NEAREST_MIPLINEAR sets the TEXTURE_NEAREST_NEAREST_MIPLINEAR property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_nearest_miplinear
 func (e *Engine) SetTEXTURE_NEAREST_NEAREST_MIPLINEAR(TEXTURE_NEAREST_NEAREST_MIPLINEAR float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_NEAREST_MIPLINEAR)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_NEAREST_NEAREST_MIPLINEAR", TEXTURE_NEAREST_NEAREST_MIPLINEAR)
+	return e
 }
 
 // TEXTURE_NEAREST_NEAREST_MIPNEAREST returns the TEXTURE_NEAREST_NEAREST_MIPNEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_nearest_mipnearest
-func (e *Engine) TEXTURE_NEAREST_NEAREST_MIPNEAREST(TEXTURE_NEAREST_NEAREST_MIPNEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_NEAREST_MIPNEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_NEAREST_NEAREST_MIPNEAREST() float64 {
+	retVal := e.p.Get("TEXTURE_NEAREST_NEAREST_MIPNEAREST")
+	return retVal.Float()
 }
 
 // SetTEXTURE_NEAREST_NEAREST_MIPNEAREST sets the TEXTURE_NEAREST_NEAREST_MIPNEAREST property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_nearest_mipnearest
 func (e *Engine) SetTEXTURE_NEAREST_NEAREST_MIPNEAREST(TEXTURE_NEAREST_NEAREST_MIPNEAREST float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_NEAREST_MIPNEAREST)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_NEAREST_NEAREST_MIPNEAREST", TEXTURE_NEAREST_NEAREST_MIPNEAREST)
+	return e
 }
 
 // TEXTURE_NEAREST_SAMPLINGMODE returns the TEXTURE_NEAREST_SAMPLINGMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_samplingmode
-func (e *Engine) TEXTURE_NEAREST_SAMPLINGMODE(TEXTURE_NEAREST_SAMPLINGMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_SAMPLINGMODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_NEAREST_SAMPLINGMODE() float64 {
+	retVal := e.p.Get("TEXTURE_NEAREST_SAMPLINGMODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_NEAREST_SAMPLINGMODE sets the TEXTURE_NEAREST_SAMPLINGMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_nearest_samplingmode
 func (e *Engine) SetTEXTURE_NEAREST_SAMPLINGMODE(TEXTURE_NEAREST_SAMPLINGMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_NEAREST_SAMPLINGMODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_NEAREST_SAMPLINGMODE", TEXTURE_NEAREST_SAMPLINGMODE)
+	return e
 }
 
 // TEXTURE_PLANAR_MODE returns the TEXTURE_PLANAR_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_planar_mode
-func (e *Engine) TEXTURE_PLANAR_MODE(TEXTURE_PLANAR_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_PLANAR_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_PLANAR_MODE() float64 {
+	retVal := e.p.Get("TEXTURE_PLANAR_MODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_PLANAR_MODE sets the TEXTURE_PLANAR_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_planar_mode
 func (e *Engine) SetTEXTURE_PLANAR_MODE(TEXTURE_PLANAR_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_PLANAR_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_PLANAR_MODE", TEXTURE_PLANAR_MODE)
+	return e
 }
 
 // TEXTURE_PROJECTION_MODE returns the TEXTURE_PROJECTION_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_projection_mode
-func (e *Engine) TEXTURE_PROJECTION_MODE(TEXTURE_PROJECTION_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_PROJECTION_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_PROJECTION_MODE() float64 {
+	retVal := e.p.Get("TEXTURE_PROJECTION_MODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_PROJECTION_MODE sets the TEXTURE_PROJECTION_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_projection_mode
 func (e *Engine) SetTEXTURE_PROJECTION_MODE(TEXTURE_PROJECTION_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_PROJECTION_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_PROJECTION_MODE", TEXTURE_PROJECTION_MODE)
+	return e
 }
 
 // TEXTURE_SKYBOX_MODE returns the TEXTURE_SKYBOX_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_skybox_mode
-func (e *Engine) TEXTURE_SKYBOX_MODE(TEXTURE_SKYBOX_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_SKYBOX_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_SKYBOX_MODE() float64 {
+	retVal := e.p.Get("TEXTURE_SKYBOX_MODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_SKYBOX_MODE sets the TEXTURE_SKYBOX_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_skybox_mode
 func (e *Engine) SetTEXTURE_SKYBOX_MODE(TEXTURE_SKYBOX_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_SKYBOX_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_SKYBOX_MODE", TEXTURE_SKYBOX_MODE)
+	return e
 }
 
 // TEXTURE_SPHERICAL_MODE returns the TEXTURE_SPHERICAL_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_spherical_mode
-func (e *Engine) TEXTURE_SPHERICAL_MODE(TEXTURE_SPHERICAL_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_SPHERICAL_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_SPHERICAL_MODE() float64 {
+	retVal := e.p.Get("TEXTURE_SPHERICAL_MODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_SPHERICAL_MODE sets the TEXTURE_SPHERICAL_MODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_spherical_mode
 func (e *Engine) SetTEXTURE_SPHERICAL_MODE(TEXTURE_SPHERICAL_MODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_SPHERICAL_MODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_SPHERICAL_MODE", TEXTURE_SPHERICAL_MODE)
+	return e
 }
 
 // TEXTURE_TRILINEAR_SAMPLINGMODE returns the TEXTURE_TRILINEAR_SAMPLINGMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_trilinear_samplingmode
-func (e *Engine) TEXTURE_TRILINEAR_SAMPLINGMODE(TEXTURE_TRILINEAR_SAMPLINGMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_TRILINEAR_SAMPLINGMODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_TRILINEAR_SAMPLINGMODE() float64 {
+	retVal := e.p.Get("TEXTURE_TRILINEAR_SAMPLINGMODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_TRILINEAR_SAMPLINGMODE sets the TEXTURE_TRILINEAR_SAMPLINGMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_trilinear_samplingmode
 func (e *Engine) SetTEXTURE_TRILINEAR_SAMPLINGMODE(TEXTURE_TRILINEAR_SAMPLINGMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_TRILINEAR_SAMPLINGMODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_TRILINEAR_SAMPLINGMODE", TEXTURE_TRILINEAR_SAMPLINGMODE)
+	return e
 }
 
 // TEXTURE_WRAP_ADDRESSMODE returns the TEXTURE_WRAP_ADDRESSMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_wrap_addressmode
-func (e *Engine) TEXTURE_WRAP_ADDRESSMODE(TEXTURE_WRAP_ADDRESSMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_WRAP_ADDRESSMODE)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) TEXTURE_WRAP_ADDRESSMODE() float64 {
+	retVal := e.p.Get("TEXTURE_WRAP_ADDRESSMODE")
+	return retVal.Float()
 }
 
 // SetTEXTURE_WRAP_ADDRESSMODE sets the TEXTURE_WRAP_ADDRESSMODE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#texture_wrap_addressmode
 func (e *Engine) SetTEXTURE_WRAP_ADDRESSMODE(TEXTURE_WRAP_ADDRESSMODE float64) *Engine {
-	p := ba.ctx.Get("Engine").New(TEXTURE_WRAP_ADDRESSMODE)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("TEXTURE_WRAP_ADDRESSMODE", TEXTURE_WRAP_ADDRESSMODE)
+	return e
 }
 
 // Version returns the Version property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#version
-func (e *Engine) Version(Version string) *Engine {
-	p := ba.ctx.Get("Engine").New(Version)
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) Version() string {
+	retVal := e.p.Get("Version")
+	return retVal.String()
 }
 
 // SetVersion sets the Version property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#version
 func (e *Engine) SetVersion(Version string) *Engine {
-	p := ba.ctx.Get("Engine").New(Version)
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("Version", Version)
+	return e
 }
 
 // Views returns the Views property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#views
-func (e *Engine) Views(views *EngineView) *Engine {
-	p := ba.ctx.Get("Engine").New(views.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) Views() *EngineView {
+	retVal := e.p.Get("views")
+	return EngineViewFromJSObject(retVal, e.ctx)
 }
 
 // SetViews sets the Views property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#views
 func (e *Engine) SetViews(views *EngineView) *Engine {
-	p := ba.ctx.Get("Engine").New(views.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("views", views.JSObject())
+	return e
 }
 
 // VrPresentationAttributes returns the VrPresentationAttributes property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#vrpresentationattributes
-func (e *Engine) VrPresentationAttributes(vrPresentationAttributes *IVRPresentationAttributes) *Engine {
-	p := ba.ctx.Get("Engine").New(vrPresentationAttributes.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) VrPresentationAttributes() *IVRPresentationAttributes {
+	retVal := e.p.Get("vrPresentationAttributes")
+	return IVRPresentationAttributesFromJSObject(retVal, e.ctx)
 }
 
 // SetVrPresentationAttributes sets the VrPresentationAttributes property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#vrpresentationattributes
 func (e *Engine) SetVrPresentationAttributes(vrPresentationAttributes *IVRPresentationAttributes) *Engine {
-	p := ba.ctx.Get("Engine").New(vrPresentationAttributes.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("vrPresentationAttributes", vrPresentationAttributes.JSObject())
+	return e
 }
 
 // _RescalePostProcessFactory returns the _RescalePostProcessFactory property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#_rescalepostprocessfactory
-func (e *Engine) _RescalePostProcessFactory(_RescalePostProcessFactory func()) *Engine {
-	p := ba.ctx.Get("Engine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {_RescalePostProcessFactory(); return nil}))
-	return EngineFromJSObject(p, ba.ctx)
+func (e *Engine) _RescalePostProcessFactory() js.Value {
+	retVal := e.p.Get("_RescalePostProcessFactory")
+	return retVal
 }
 
 // Set_RescalePostProcessFactory sets the _RescalePostProcessFactory property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#_rescalepostprocessfactory
 func (e *Engine) Set_RescalePostProcessFactory(_RescalePostProcessFactory func()) *Engine {
-	p := ba.ctx.Get("Engine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {_RescalePostProcessFactory(); return nil}))
-	return EngineFromJSObject(p, ba.ctx)
+	e.p.Set("_RescalePostProcessFactory", js.FuncOf(func(this js.Value, args []js.Value) interface{} { _RescalePostProcessFactory(); return nil }))
+	return e
 }
-
-*/

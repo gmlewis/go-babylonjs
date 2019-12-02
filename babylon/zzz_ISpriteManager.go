@@ -106,70 +106,70 @@ func (i *ISpriteManager) Render() {
 	i.p.Call("render")
 }
 
-/*
-
 // IsPickable returns the IsPickable property of class ISpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ispritemanager#ispickable
-func (i *ISpriteManager) IsPickable(isPickable bool) *ISpriteManager {
-	p := ba.ctx.Get("ISpriteManager").New(isPickable)
-	return ISpriteManagerFromJSObject(p, ba.ctx)
+func (i *ISpriteManager) IsPickable() bool {
+	retVal := i.p.Get("isPickable")
+	return retVal.Bool()
 }
 
 // SetIsPickable sets the IsPickable property of class ISpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ispritemanager#ispickable
 func (i *ISpriteManager) SetIsPickable(isPickable bool) *ISpriteManager {
-	p := ba.ctx.Get("ISpriteManager").New(isPickable)
-	return ISpriteManagerFromJSObject(p, ba.ctx)
+	i.p.Set("isPickable", isPickable)
+	return i
 }
 
 // LayerMask returns the LayerMask property of class ISpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ispritemanager#layermask
-func (i *ISpriteManager) LayerMask(layerMask float64) *ISpriteManager {
-	p := ba.ctx.Get("ISpriteManager").New(layerMask)
-	return ISpriteManagerFromJSObject(p, ba.ctx)
+func (i *ISpriteManager) LayerMask() float64 {
+	retVal := i.p.Get("layerMask")
+	return retVal.Float()
 }
 
 // SetLayerMask sets the LayerMask property of class ISpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ispritemanager#layermask
 func (i *ISpriteManager) SetLayerMask(layerMask float64) *ISpriteManager {
-	p := ba.ctx.Get("ISpriteManager").New(layerMask)
-	return ISpriteManagerFromJSObject(p, ba.ctx)
+	i.p.Set("layerMask", layerMask)
+	return i
 }
 
 // RenderingGroupId returns the RenderingGroupId property of class ISpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ispritemanager#renderinggroupid
-func (i *ISpriteManager) RenderingGroupId(renderingGroupId float64) *ISpriteManager {
-	p := ba.ctx.Get("ISpriteManager").New(renderingGroupId)
-	return ISpriteManagerFromJSObject(p, ba.ctx)
+func (i *ISpriteManager) RenderingGroupId() float64 {
+	retVal := i.p.Get("renderingGroupId")
+	return retVal.Float()
 }
 
 // SetRenderingGroupId sets the RenderingGroupId property of class ISpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ispritemanager#renderinggroupid
 func (i *ISpriteManager) SetRenderingGroupId(renderingGroupId float64) *ISpriteManager {
-	p := ba.ctx.Get("ISpriteManager").New(renderingGroupId)
-	return ISpriteManagerFromJSObject(p, ba.ctx)
+	i.p.Set("renderingGroupId", renderingGroupId)
+	return i
 }
 
 // Sprites returns the Sprites property of class ISpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ispritemanager#sprites
-func (i *ISpriteManager) Sprites(sprites []*Sprite) *ISpriteManager {
-	p := ba.ctx.Get("ISpriteManager").New(sprites)
-	return ISpriteManagerFromJSObject(p, ba.ctx)
+func (i *ISpriteManager) Sprites() []*Sprite {
+	retVal := i.p.Get("sprites")
+	result := []*Sprite{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SpriteFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetSprites sets the Sprites property of class ISpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ispritemanager#sprites
 func (i *ISpriteManager) SetSprites(sprites []*Sprite) *ISpriteManager {
-	p := ba.ctx.Get("ISpriteManager").New(sprites)
-	return ISpriteManagerFromJSObject(p, ba.ctx)
+	i.p.Set("sprites", sprites)
+	return i
 }
-
-*/

@@ -487,166 +487,162 @@ func (n *NodeMaterialBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildSta
 	n.p.Call("updateUniformsAndSamples", args...)
 }
 
-/*
-
 // BuildId returns the BuildId property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#buildid
-func (n *NodeMaterialBlock) BuildId(buildId float64) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(buildId)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBlock) BuildId() float64 {
+	retVal := n.p.Get("buildId")
+	return retVal.Float()
 }
 
 // SetBuildId sets the BuildId property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#buildid
 func (n *NodeMaterialBlock) SetBuildId(buildId float64) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(buildId)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+	n.p.Set("buildId", buildId)
+	return n
 }
 
 // Comments returns the Comments property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#comments
-func (n *NodeMaterialBlock) Comments(comments string) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(comments)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBlock) Comments() string {
+	retVal := n.p.Get("comments")
+	return retVal.String()
 }
 
 // SetComments sets the Comments property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#comments
 func (n *NodeMaterialBlock) SetComments(comments string) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(comments)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+	n.p.Set("comments", comments)
+	return n
 }
 
 // Inputs returns the Inputs property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#inputs
-func (n *NodeMaterialBlock) Inputs(inputs *NodeMaterialConnectionPoint) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(inputs.JSObject())
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBlock) Inputs() *NodeMaterialConnectionPoint {
+	retVal := n.p.Get("inputs")
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
 }
 
 // SetInputs sets the Inputs property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#inputs
 func (n *NodeMaterialBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(inputs.JSObject())
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+	n.p.Set("inputs", inputs.JSObject())
+	return n
 }
 
 // IsFinalMerger returns the IsFinalMerger property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isfinalmerger
-func (n *NodeMaterialBlock) IsFinalMerger(isFinalMerger bool) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(isFinalMerger)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBlock) IsFinalMerger() bool {
+	retVal := n.p.Get("isFinalMerger")
+	return retVal.Bool()
 }
 
 // SetIsFinalMerger sets the IsFinalMerger property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isfinalmerger
 func (n *NodeMaterialBlock) SetIsFinalMerger(isFinalMerger bool) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(isFinalMerger)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+	n.p.Set("isFinalMerger", isFinalMerger)
+	return n
 }
 
 // IsInput returns the IsInput property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isinput
-func (n *NodeMaterialBlock) IsInput(isInput bool) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(isInput)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBlock) IsInput() bool {
+	retVal := n.p.Get("isInput")
+	return retVal.Bool()
 }
 
 // SetIsInput sets the IsInput property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isinput
 func (n *NodeMaterialBlock) SetIsInput(isInput bool) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(isInput)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+	n.p.Set("isInput", isInput)
+	return n
 }
 
 // IsUnique returns the IsUnique property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isunique
-func (n *NodeMaterialBlock) IsUnique(isUnique bool) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(isUnique)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBlock) IsUnique() bool {
+	retVal := n.p.Get("isUnique")
+	return retVal.Bool()
 }
 
 // SetIsUnique sets the IsUnique property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isunique
 func (n *NodeMaterialBlock) SetIsUnique(isUnique bool) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(isUnique)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+	n.p.Set("isUnique", isUnique)
+	return n
 }
 
 // Name returns the Name property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#name
-func (n *NodeMaterialBlock) Name(name string) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(name)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBlock) Name() string {
+	retVal := n.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#name
 func (n *NodeMaterialBlock) SetName(name string) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(name)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+	n.p.Set("name", name)
+	return n
 }
 
 // Outputs returns the Outputs property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#outputs
-func (n *NodeMaterialBlock) Outputs(outputs *NodeMaterialConnectionPoint) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(outputs.JSObject())
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBlock) Outputs() *NodeMaterialConnectionPoint {
+	retVal := n.p.Get("outputs")
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
 }
 
 // SetOutputs sets the Outputs property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#outputs
 func (n *NodeMaterialBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(outputs.JSObject())
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+	n.p.Set("outputs", outputs.JSObject())
+	return n
 }
 
 // Target returns the Target property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#target
-func (n *NodeMaterialBlock) Target(target js.Value) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(target)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBlock) Target() js.Value {
+	retVal := n.p.Get("target")
+	return retVal
 }
 
 // SetTarget sets the Target property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#target
 func (n *NodeMaterialBlock) SetTarget(target js.Value) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(target)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+	n.p.Set("target", target)
+	return n
 }
 
 // UniqueId returns the UniqueId property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#uniqueid
-func (n *NodeMaterialBlock) UniqueId(uniqueId float64) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(uniqueId)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBlock) UniqueId() float64 {
+	retVal := n.p.Get("uniqueId")
+	return retVal.Float()
 }
 
 // SetUniqueId sets the UniqueId property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#uniqueid
 func (n *NodeMaterialBlock) SetUniqueId(uniqueId float64) *NodeMaterialBlock {
-	p := ba.ctx.Get("NodeMaterialBlock").New(uniqueId)
-	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+	n.p.Set("uniqueId", uniqueId)
+	return n
 }
-
-*/

@@ -63,7 +63,3 @@ func (b *BoxBuilder) CreateBox(name string, options js.Value, opts *BoxBuilderCr
 	retVal := b.p.Call("CreateBox", args...)
 	return MeshFromJSObject(retVal, b.ctx)
 }
-
-/*
-
- */

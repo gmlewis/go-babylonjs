@@ -36,22 +36,18 @@ func IViewportOwnerLikeArrayToJSArray(array []*IViewportOwnerLike) []interface{}
 	return result
 }
 
-/*
-
 // Viewport returns the Viewport property of class IViewportOwnerLike.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iviewportownerlike#viewport
-func (i *IViewportOwnerLike) Viewport(viewport js.Value) *IViewportOwnerLike {
-	p := ba.ctx.Get("IViewportOwnerLike").New(viewport)
-	return IViewportOwnerLikeFromJSObject(p, ba.ctx)
+func (i *IViewportOwnerLike) Viewport() js.Value {
+	retVal := i.p.Get("viewport")
+	return retVal
 }
 
 // SetViewport sets the Viewport property of class IViewportOwnerLike.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iviewportownerlike#viewport
 func (i *IViewportOwnerLike) SetViewport(viewport js.Value) *IViewportOwnerLike {
-	p := ba.ctx.Get("IViewportOwnerLike").New(viewport)
-	return IViewportOwnerLikeFromJSObject(p, ba.ctx)
+	i.p.Set("viewport", viewport)
+	return i
 }
-
-*/

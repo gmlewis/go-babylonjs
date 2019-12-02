@@ -45,38 +45,34 @@ func (t *TargetedAnimation) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // Animation returns the Animation property of class TargetedAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetedanimation#animation
-func (t *TargetedAnimation) Animation(animation *Animation) *TargetedAnimation {
-	p := ba.ctx.Get("TargetedAnimation").New(animation.JSObject())
-	return TargetedAnimationFromJSObject(p, ba.ctx)
+func (t *TargetedAnimation) Animation() *Animation {
+	retVal := t.p.Get("animation")
+	return AnimationFromJSObject(retVal, t.ctx)
 }
 
 // SetAnimation sets the Animation property of class TargetedAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetedanimation#animation
 func (t *TargetedAnimation) SetAnimation(animation *Animation) *TargetedAnimation {
-	p := ba.ctx.Get("TargetedAnimation").New(animation.JSObject())
-	return TargetedAnimationFromJSObject(p, ba.ctx)
+	t.p.Set("animation", animation.JSObject())
+	return t
 }
 
 // Target returns the Target property of class TargetedAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetedanimation#target
-func (t *TargetedAnimation) Target(target interface{}) *TargetedAnimation {
-	p := ba.ctx.Get("TargetedAnimation").New(target)
-	return TargetedAnimationFromJSObject(p, ba.ctx)
+func (t *TargetedAnimation) Target() interface{} {
+	retVal := t.p.Get("target")
+	return retVal
 }
 
 // SetTarget sets the Target property of class TargetedAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetedanimation#target
 func (t *TargetedAnimation) SetTarget(target interface{}) *TargetedAnimation {
-	p := ba.ctx.Get("TargetedAnimation").New(target)
-	return TargetedAnimationFromJSObject(p, ba.ctx)
+	t.p.Set("target", target)
+	return t
 }
-
-*/

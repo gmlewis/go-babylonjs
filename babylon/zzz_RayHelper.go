@@ -155,22 +155,18 @@ func (r *RayHelper) Show(scene *Scene, opts *RayHelperShowOpts) {
 	r.p.Call("show", args...)
 }
 
-/*
-
 // Ray returns the Ray property of class RayHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rayhelper#ray
-func (r *RayHelper) Ray(ray *Ray) *RayHelper {
-	p := ba.ctx.Get("RayHelper").New(ray.JSObject())
-	return RayHelperFromJSObject(p, ba.ctx)
+func (r *RayHelper) Ray() *Ray {
+	retVal := r.p.Get("ray")
+	return RayFromJSObject(retVal, r.ctx)
 }
 
 // SetRay sets the Ray property of class RayHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rayhelper#ray
 func (r *RayHelper) SetRay(ray *Ray) *RayHelper {
-	p := ba.ctx.Get("RayHelper").New(ray.JSObject())
-	return RayHelperFromJSObject(p, ba.ctx)
+	r.p.Set("ray", ray.JSObject())
+	return r
 }
-
-*/

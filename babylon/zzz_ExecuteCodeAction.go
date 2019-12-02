@@ -78,22 +78,18 @@ func (e *ExecuteCodeAction) Execute(evt *ActionEvent) {
 	e.p.Call("execute", args...)
 }
 
-/*
-
 // Func returns the Func property of class ExecuteCodeAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction#func
-func (e *ExecuteCodeAction) Func(jsFunc func()) *ExecuteCodeAction {
-	p := ba.ctx.Get("ExecuteCodeAction").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {jsFunc(); return nil}))
-	return ExecuteCodeActionFromJSObject(p, ba.ctx)
+func (e *ExecuteCodeAction) Func() js.Value {
+	retVal := e.p.Get("func")
+	return retVal
 }
 
 // SetFunc sets the Func property of class ExecuteCodeAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction#func
 func (e *ExecuteCodeAction) SetFunc(jsFunc func()) *ExecuteCodeAction {
-	p := ba.ctx.Get("ExecuteCodeAction").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {jsFunc(); return nil}))
-	return ExecuteCodeActionFromJSObject(p, ba.ctx)
+	e.p.Set("func", js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	return e
 }
-
-*/

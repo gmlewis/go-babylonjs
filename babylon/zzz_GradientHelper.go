@@ -49,7 +49,3 @@ func (g *GradientHelper) GetCurrentGradient(ratio float64, gradients *IValueGrad
 
 	g.p.Call("GetCurrentGradient", args...)
 }
-
-/*
-
- */

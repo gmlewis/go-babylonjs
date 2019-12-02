@@ -64,22 +64,18 @@ func (b *Behavior) Init() {
 	b.p.Call("init")
 }
 
-/*
-
 // Name returns the Name property of class Behavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.behavior#name
-func (b *Behavior) Name(name string) *Behavior {
-	p := ba.ctx.Get("Behavior").New(name)
-	return BehaviorFromJSObject(p, ba.ctx)
+func (b *Behavior) Name() string {
+	retVal := b.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Behavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.behavior#name
 func (b *Behavior) SetName(name string) *Behavior {
-	p := ba.ctx.Get("Behavior").New(name)
-	return BehaviorFromJSObject(p, ba.ctx)
+	b.p.Set("name", name)
+	return b
 }
-
-*/

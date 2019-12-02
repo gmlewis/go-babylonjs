@@ -103,38 +103,34 @@ func (i *IOfflineProvider) Open(successCallback func(), errorCallback func()) {
 	i.p.Call("open", args...)
 }
 
-/*
-
 // EnableSceneOffline returns the EnableSceneOffline property of class IOfflineProvider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iofflineprovider#enablesceneoffline
-func (i *IOfflineProvider) EnableSceneOffline(enableSceneOffline bool) *IOfflineProvider {
-	p := ba.ctx.Get("IOfflineProvider").New(enableSceneOffline)
-	return IOfflineProviderFromJSObject(p, ba.ctx)
+func (i *IOfflineProvider) EnableSceneOffline() bool {
+	retVal := i.p.Get("enableSceneOffline")
+	return retVal.Bool()
 }
 
 // SetEnableSceneOffline sets the EnableSceneOffline property of class IOfflineProvider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iofflineprovider#enablesceneoffline
 func (i *IOfflineProvider) SetEnableSceneOffline(enableSceneOffline bool) *IOfflineProvider {
-	p := ba.ctx.Get("IOfflineProvider").New(enableSceneOffline)
-	return IOfflineProviderFromJSObject(p, ba.ctx)
+	i.p.Set("enableSceneOffline", enableSceneOffline)
+	return i
 }
 
 // EnableTexturesOffline returns the EnableTexturesOffline property of class IOfflineProvider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iofflineprovider#enabletexturesoffline
-func (i *IOfflineProvider) EnableTexturesOffline(enableTexturesOffline bool) *IOfflineProvider {
-	p := ba.ctx.Get("IOfflineProvider").New(enableTexturesOffline)
-	return IOfflineProviderFromJSObject(p, ba.ctx)
+func (i *IOfflineProvider) EnableTexturesOffline() bool {
+	retVal := i.p.Get("enableTexturesOffline")
+	return retVal.Bool()
 }
 
 // SetEnableTexturesOffline sets the EnableTexturesOffline property of class IOfflineProvider.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iofflineprovider#enabletexturesoffline
 func (i *IOfflineProvider) SetEnableTexturesOffline(enableTexturesOffline bool) *IOfflineProvider {
-	p := ba.ctx.Get("IOfflineProvider").New(enableTexturesOffline)
-	return IOfflineProviderFromJSObject(p, ba.ctx)
+	i.p.Set("enableTexturesOffline", enableTexturesOffline)
+	return i
 }
-
-*/

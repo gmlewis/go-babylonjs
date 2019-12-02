@@ -69,182 +69,178 @@ func (s *ScaleGizmo) Dispose() {
 	s.p.Call("dispose")
 }
 
-/*
-
 // AttachedMesh returns the AttachedMesh property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#attachedmesh
-func (s *ScaleGizmo) AttachedMesh(attachedMesh *AbstractMesh) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(attachedMesh.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) AttachedMesh() *AbstractMesh {
+	retVal := s.p.Get("attachedMesh")
+	return AbstractMeshFromJSObject(retVal, s.ctx)
 }
 
 // SetAttachedMesh sets the AttachedMesh property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#attachedmesh
 func (s *ScaleGizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(attachedMesh.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("attachedMesh", attachedMesh.JSObject())
+	return s
 }
 
 // OnDragEndObservable returns the OnDragEndObservable property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#ondragendobservable
-func (s *ScaleGizmo) OnDragEndObservable(onDragEndObservable *Observable) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(onDragEndObservable.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) OnDragEndObservable() *Observable {
+	retVal := s.p.Get("onDragEndObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnDragEndObservable sets the OnDragEndObservable property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#ondragendobservable
 func (s *ScaleGizmo) SetOnDragEndObservable(onDragEndObservable *Observable) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(onDragEndObservable.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("onDragEndObservable", onDragEndObservable.JSObject())
+	return s
 }
 
 // OnDragStartObservable returns the OnDragStartObservable property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#ondragstartobservable
-func (s *ScaleGizmo) OnDragStartObservable(onDragStartObservable *Observable) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(onDragStartObservable.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) OnDragStartObservable() *Observable {
+	retVal := s.p.Get("onDragStartObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnDragStartObservable sets the OnDragStartObservable property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#ondragstartobservable
 func (s *ScaleGizmo) SetOnDragStartObservable(onDragStartObservable *Observable) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(onDragStartObservable.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("onDragStartObservable", onDragStartObservable.JSObject())
+	return s
 }
 
 // ScaleRatio returns the ScaleRatio property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#scaleratio
-func (s *ScaleGizmo) ScaleRatio(scaleRatio float64) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(scaleRatio)
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) ScaleRatio() float64 {
+	retVal := s.p.Get("scaleRatio")
+	return retVal.Float()
 }
 
 // SetScaleRatio sets the ScaleRatio property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#scaleratio
 func (s *ScaleGizmo) SetScaleRatio(scaleRatio float64) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(scaleRatio)
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("scaleRatio", scaleRatio)
+	return s
 }
 
 // Sensitivity returns the Sensitivity property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#sensitivity
-func (s *ScaleGizmo) Sensitivity(sensitivity float64) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(sensitivity)
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) Sensitivity() float64 {
+	retVal := s.p.Get("sensitivity")
+	return retVal.Float()
 }
 
 // SetSensitivity sets the Sensitivity property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#sensitivity
 func (s *ScaleGizmo) SetSensitivity(sensitivity float64) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(sensitivity)
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("sensitivity", sensitivity)
+	return s
 }
 
 // SnapDistance returns the SnapDistance property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#snapdistance
-func (s *ScaleGizmo) SnapDistance(snapDistance float64) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(snapDistance)
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) SnapDistance() float64 {
+	retVal := s.p.Get("snapDistance")
+	return retVal.Float()
 }
 
 // SetSnapDistance sets the SnapDistance property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#snapdistance
 func (s *ScaleGizmo) SetSnapDistance(snapDistance float64) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(snapDistance)
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("snapDistance", snapDistance)
+	return s
 }
 
 // UniformScaleGizmo returns the UniformScaleGizmo property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#uniformscalegizmo
-func (s *ScaleGizmo) UniformScaleGizmo(uniformScaleGizmo *AxisScaleGizmo) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(uniformScaleGizmo.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) UniformScaleGizmo() *AxisScaleGizmo {
+	retVal := s.p.Get("uniformScaleGizmo")
+	return AxisScaleGizmoFromJSObject(retVal, s.ctx)
 }
 
 // SetUniformScaleGizmo sets the UniformScaleGizmo property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#uniformscalegizmo
 func (s *ScaleGizmo) SetUniformScaleGizmo(uniformScaleGizmo *AxisScaleGizmo) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(uniformScaleGizmo.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("uniformScaleGizmo", uniformScaleGizmo.JSObject())
+	return s
 }
 
 // UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#updategizmorotationtomatchattachedmesh
-func (s *ScaleGizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) UpdateGizmoRotationToMatchAttachedMesh() bool {
+	retVal := s.p.Get("updateGizmoRotationToMatchAttachedMesh")
+	return retVal.Bool()
 }
 
 // SetUpdateGizmoRotationToMatchAttachedMesh sets the UpdateGizmoRotationToMatchAttachedMesh property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#updategizmorotationtomatchattachedmesh
 func (s *ScaleGizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("updateGizmoRotationToMatchAttachedMesh", updateGizmoRotationToMatchAttachedMesh)
+	return s
 }
 
 // XGizmo returns the XGizmo property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#xgizmo
-func (s *ScaleGizmo) XGizmo(xGizmo *AxisScaleGizmo) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(xGizmo.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) XGizmo() *AxisScaleGizmo {
+	retVal := s.p.Get("xGizmo")
+	return AxisScaleGizmoFromJSObject(retVal, s.ctx)
 }
 
 // SetXGizmo sets the XGizmo property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#xgizmo
 func (s *ScaleGizmo) SetXGizmo(xGizmo *AxisScaleGizmo) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(xGizmo.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("xGizmo", xGizmo.JSObject())
+	return s
 }
 
 // YGizmo returns the YGizmo property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#ygizmo
-func (s *ScaleGizmo) YGizmo(yGizmo *AxisScaleGizmo) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(yGizmo.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) YGizmo() *AxisScaleGizmo {
+	retVal := s.p.Get("yGizmo")
+	return AxisScaleGizmoFromJSObject(retVal, s.ctx)
 }
 
 // SetYGizmo sets the YGizmo property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#ygizmo
 func (s *ScaleGizmo) SetYGizmo(yGizmo *AxisScaleGizmo) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(yGizmo.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("yGizmo", yGizmo.JSObject())
+	return s
 }
 
 // ZGizmo returns the ZGizmo property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#zgizmo
-func (s *ScaleGizmo) ZGizmo(zGizmo *AxisScaleGizmo) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(zGizmo.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+func (s *ScaleGizmo) ZGizmo() *AxisScaleGizmo {
+	retVal := s.p.Get("zGizmo")
+	return AxisScaleGizmoFromJSObject(retVal, s.ctx)
 }
 
 // SetZGizmo sets the ZGizmo property of class ScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo#zgizmo
 func (s *ScaleGizmo) SetZGizmo(zGizmo *AxisScaleGizmo) *ScaleGizmo {
-	p := ba.ctx.Get("ScaleGizmo").New(zGizmo.JSObject())
-	return ScaleGizmoFromJSObject(p, ba.ctx)
+	s.p.Set("zGizmo", zGizmo.JSObject())
+	return s
 }
-
-*/

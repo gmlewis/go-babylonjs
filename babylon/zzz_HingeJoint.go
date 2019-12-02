@@ -106,7 +106,3 @@ func (h *HingeJoint) SetMotor(opts *HingeJointSetMotorOpts) {
 
 	h.p.Call("setMotor", args...)
 }
-
-/*
-
- */

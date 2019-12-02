@@ -35,7 +35,3 @@ func IAnimationChannelArrayToJSArray(array []*IAnimationChannel) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

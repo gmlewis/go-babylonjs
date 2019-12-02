@@ -121,102 +121,98 @@ func (c *ColorPicker) _onPointerUp(target *Control, coordinates *Vector2, pointe
 	c.p.Call("_onPointerUp", args...)
 }
 
-/*
-
 // Height returns the Height property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#height
-func (c *ColorPicker) Height(height string) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(height)
-	return ColorPickerFromJSObject(p, ba.ctx)
+func (c *ColorPicker) Height() string {
+	retVal := c.p.Get("height")
+	return retVal.String()
 }
 
 // SetHeight sets the Height property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#height
 func (c *ColorPicker) SetHeight(height string) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(height)
-	return ColorPickerFromJSObject(p, ba.ctx)
+	c.p.Set("height", height)
+	return c
 }
 
 // Name returns the Name property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#name
-func (c *ColorPicker) Name(name string) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(name)
-	return ColorPickerFromJSObject(p, ba.ctx)
+func (c *ColorPicker) Name() string {
+	retVal := c.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#name
 func (c *ColorPicker) SetName(name string) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(name)
-	return ColorPickerFromJSObject(p, ba.ctx)
+	c.p.Set("name", name)
+	return c
 }
 
 // OnValueChangedObservable returns the OnValueChangedObservable property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#onvaluechangedobservable
-func (c *ColorPicker) OnValueChangedObservable(onValueChangedObservable *Observable) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(onValueChangedObservable.JSObject())
-	return ColorPickerFromJSObject(p, ba.ctx)
+func (c *ColorPicker) OnValueChangedObservable() *Observable {
+	retVal := c.p.Get("onValueChangedObservable")
+	return ObservableFromJSObject(retVal, c.ctx)
 }
 
 // SetOnValueChangedObservable sets the OnValueChangedObservable property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#onvaluechangedobservable
 func (c *ColorPicker) SetOnValueChangedObservable(onValueChangedObservable *Observable) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(onValueChangedObservable.JSObject())
-	return ColorPickerFromJSObject(p, ba.ctx)
+	c.p.Set("onValueChangedObservable", onValueChangedObservable.JSObject())
+	return c
 }
 
 // Size returns the Size property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#size
-func (c *ColorPicker) Size(size string) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(size)
-	return ColorPickerFromJSObject(p, ba.ctx)
+func (c *ColorPicker) Size() string {
+	retVal := c.p.Get("size")
+	return retVal.String()
 }
 
 // SetSize sets the Size property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#size
 func (c *ColorPicker) SetSize(size string) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(size)
-	return ColorPickerFromJSObject(p, ba.ctx)
+	c.p.Set("size", size)
+	return c
 }
 
 // Value returns the Value property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#value
-func (c *ColorPicker) Value(value *Color3) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(value.JSObject())
-	return ColorPickerFromJSObject(p, ba.ctx)
+func (c *ColorPicker) Value() *Color3 {
+	retVal := c.p.Get("value")
+	return Color3FromJSObject(retVal, c.ctx)
 }
 
 // SetValue sets the Value property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#value
 func (c *ColorPicker) SetValue(value *Color3) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(value.JSObject())
-	return ColorPickerFromJSObject(p, ba.ctx)
+	c.p.Set("value", value.JSObject())
+	return c
 }
 
 // Width returns the Width property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#width
-func (c *ColorPicker) Width(width string) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(width)
-	return ColorPickerFromJSObject(p, ba.ctx)
+func (c *ColorPicker) Width() string {
+	retVal := c.p.Get("width")
+	return retVal.String()
 }
 
 // SetWidth sets the Width property of class ColorPicker.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker#width
 func (c *ColorPicker) SetWidth(width string) *ColorPicker {
-	p := ba.ctx.Get("ColorPicker").New(width)
-	return ColorPickerFromJSObject(p, ba.ctx)
+	c.p.Set("width", width)
+	return c
 }
-
-*/

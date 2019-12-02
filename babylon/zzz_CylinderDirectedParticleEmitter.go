@@ -160,38 +160,34 @@ func (c *CylinderDirectedParticleEmitter) StartDirectionFunction(worldMatrix *Ma
 	c.p.Call("startDirectionFunction", args...)
 }
 
-/*
-
 // Direction1 returns the Direction1 property of class CylinderDirectedParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#direction1
-func (c *CylinderDirectedParticleEmitter) Direction1(direction1 *Vector3) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(direction1.JSObject())
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
+func (c *CylinderDirectedParticleEmitter) Direction1() *Vector3 {
+	retVal := c.p.Get("direction1")
+	return Vector3FromJSObject(retVal, c.ctx)
 }
 
 // SetDirection1 sets the Direction1 property of class CylinderDirectedParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#direction1
 func (c *CylinderDirectedParticleEmitter) SetDirection1(direction1 *Vector3) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(direction1.JSObject())
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
+	c.p.Set("direction1", direction1.JSObject())
+	return c
 }
 
 // Direction2 returns the Direction2 property of class CylinderDirectedParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#direction2
-func (c *CylinderDirectedParticleEmitter) Direction2(direction2 *Vector3) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(direction2.JSObject())
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
+func (c *CylinderDirectedParticleEmitter) Direction2() *Vector3 {
+	retVal := c.p.Get("direction2")
+	return Vector3FromJSObject(retVal, c.ctx)
 }
 
 // SetDirection2 sets the Direction2 property of class CylinderDirectedParticleEmitter.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#direction2
 func (c *CylinderDirectedParticleEmitter) SetDirection2(direction2 *Vector3) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(direction2.JSObject())
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
+	c.p.Set("direction2", direction2.JSObject())
+	return c
 }
-
-*/

@@ -86,38 +86,34 @@ func (c *CustomOptimization) GetDescription() string {
 	return retVal.String()
 }
 
-/*
-
 // OnApply returns the OnApply property of class CustomOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#onapply
-func (c *CustomOptimization) OnApply(onApply func()) *CustomOptimization {
-	p := ba.ctx.Get("CustomOptimization").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
-	return CustomOptimizationFromJSObject(p, ba.ctx)
+func (c *CustomOptimization) OnApply() js.Value {
+	retVal := c.p.Get("onApply")
+	return retVal
 }
 
 // SetOnApply sets the OnApply property of class CustomOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#onapply
 func (c *CustomOptimization) SetOnApply(onApply func()) *CustomOptimization {
-	p := ba.ctx.Get("CustomOptimization").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onApply(); return nil}))
-	return CustomOptimizationFromJSObject(p, ba.ctx)
+	c.p.Set("onApply", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onApply(); return nil }))
+	return c
 }
 
 // OnGetDescription returns the OnGetDescription property of class CustomOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#ongetdescription
-func (c *CustomOptimization) OnGetDescription(onGetDescription func()) *CustomOptimization {
-	p := ba.ctx.Get("CustomOptimization").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGetDescription(); return nil}))
-	return CustomOptimizationFromJSObject(p, ba.ctx)
+func (c *CustomOptimization) OnGetDescription() js.Value {
+	retVal := c.p.Get("onGetDescription")
+	return retVal
 }
 
 // SetOnGetDescription sets the OnGetDescription property of class CustomOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#ongetdescription
 func (c *CustomOptimization) SetOnGetDescription(onGetDescription func()) *CustomOptimization {
-	p := ba.ctx.Get("CustomOptimization").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onGetDescription(); return nil}))
-	return CustomOptimizationFromJSObject(p, ba.ctx)
+	c.p.Set("onGetDescription", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onGetDescription(); return nil }))
+	return c
 }
-
-*/

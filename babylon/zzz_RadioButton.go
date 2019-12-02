@@ -105,118 +105,114 @@ func (r *RadioButton) _onPointerDown(target *Control, coordinates *Vector2, poin
 	return retVal.Bool()
 }
 
-/*
-
 // Background returns the Background property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#background
-func (r *RadioButton) Background(background string) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(background)
-	return RadioButtonFromJSObject(p, ba.ctx)
+func (r *RadioButton) Background() string {
+	retVal := r.p.Get("background")
+	return retVal.String()
 }
 
 // SetBackground sets the Background property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#background
 func (r *RadioButton) SetBackground(background string) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(background)
-	return RadioButtonFromJSObject(p, ba.ctx)
+	r.p.Set("background", background)
+	return r
 }
 
 // CheckSizeRatio returns the CheckSizeRatio property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#checksizeratio
-func (r *RadioButton) CheckSizeRatio(checkSizeRatio float64) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(checkSizeRatio)
-	return RadioButtonFromJSObject(p, ba.ctx)
+func (r *RadioButton) CheckSizeRatio() float64 {
+	retVal := r.p.Get("checkSizeRatio")
+	return retVal.Float()
 }
 
 // SetCheckSizeRatio sets the CheckSizeRatio property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#checksizeratio
 func (r *RadioButton) SetCheckSizeRatio(checkSizeRatio float64) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(checkSizeRatio)
-	return RadioButtonFromJSObject(p, ba.ctx)
+	r.p.Set("checkSizeRatio", checkSizeRatio)
+	return r
 }
 
 // Group returns the Group property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#group
-func (r *RadioButton) Group(group string) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(group)
-	return RadioButtonFromJSObject(p, ba.ctx)
+func (r *RadioButton) Group() string {
+	retVal := r.p.Get("group")
+	return retVal.String()
 }
 
 // SetGroup sets the Group property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#group
 func (r *RadioButton) SetGroup(group string) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(group)
-	return RadioButtonFromJSObject(p, ba.ctx)
+	r.p.Set("group", group)
+	return r
 }
 
 // IsChecked returns the IsChecked property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#ischecked
-func (r *RadioButton) IsChecked(isChecked bool) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(isChecked)
-	return RadioButtonFromJSObject(p, ba.ctx)
+func (r *RadioButton) IsChecked() bool {
+	retVal := r.p.Get("isChecked")
+	return retVal.Bool()
 }
 
 // SetIsChecked sets the IsChecked property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#ischecked
 func (r *RadioButton) SetIsChecked(isChecked bool) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(isChecked)
-	return RadioButtonFromJSObject(p, ba.ctx)
+	r.p.Set("isChecked", isChecked)
+	return r
 }
 
 // Name returns the Name property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#name
-func (r *RadioButton) Name(name string) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(name)
-	return RadioButtonFromJSObject(p, ba.ctx)
+func (r *RadioButton) Name() string {
+	retVal := r.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#name
 func (r *RadioButton) SetName(name string) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(name)
-	return RadioButtonFromJSObject(p, ba.ctx)
+	r.p.Set("name", name)
+	return r
 }
 
 // OnIsCheckedChangedObservable returns the OnIsCheckedChangedObservable property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#onischeckedchangedobservable
-func (r *RadioButton) OnIsCheckedChangedObservable(onIsCheckedChangedObservable *Observable) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(onIsCheckedChangedObservable.JSObject())
-	return RadioButtonFromJSObject(p, ba.ctx)
+func (r *RadioButton) OnIsCheckedChangedObservable() *Observable {
+	retVal := r.p.Get("onIsCheckedChangedObservable")
+	return ObservableFromJSObject(retVal, r.ctx)
 }
 
 // SetOnIsCheckedChangedObservable sets the OnIsCheckedChangedObservable property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#onischeckedchangedobservable
 func (r *RadioButton) SetOnIsCheckedChangedObservable(onIsCheckedChangedObservable *Observable) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(onIsCheckedChangedObservable.JSObject())
-	return RadioButtonFromJSObject(p, ba.ctx)
+	r.p.Set("onIsCheckedChangedObservable", onIsCheckedChangedObservable.JSObject())
+	return r
 }
 
 // Thickness returns the Thickness property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#thickness
-func (r *RadioButton) Thickness(thickness float64) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(thickness)
-	return RadioButtonFromJSObject(p, ba.ctx)
+func (r *RadioButton) Thickness() float64 {
+	retVal := r.p.Get("thickness")
+	return retVal.Float()
 }
 
 // SetThickness sets the Thickness property of class RadioButton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#thickness
 func (r *RadioButton) SetThickness(thickness float64) *RadioButton {
-	p := ba.ctx.Get("RadioButton").New(thickness)
-	return RadioButtonFromJSObject(p, ba.ctx)
+	r.p.Set("thickness", thickness)
+	return r
 }
-
-*/

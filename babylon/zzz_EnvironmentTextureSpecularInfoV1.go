@@ -37,54 +37,54 @@ func EnvironmentTextureSpecularInfoV1ArrayToJSArray(array []*EnvironmentTextureS
 	return result
 }
 
-/*
-
 // LodGenerationScale returns the LodGenerationScale property of class EnvironmentTextureSpecularInfoV1.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturespecularinfov1#lodgenerationscale
-func (e *EnvironmentTextureSpecularInfoV1) LodGenerationScale(lodGenerationScale float64) *EnvironmentTextureSpecularInfoV1 {
-	p := ba.ctx.Get("EnvironmentTextureSpecularInfoV1").New(lodGenerationScale)
-	return EnvironmentTextureSpecularInfoV1FromJSObject(p, ba.ctx)
+func (e *EnvironmentTextureSpecularInfoV1) LodGenerationScale() float64 {
+	retVal := e.p.Get("lodGenerationScale")
+	return retVal.Float()
 }
 
 // SetLodGenerationScale sets the LodGenerationScale property of class EnvironmentTextureSpecularInfoV1.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturespecularinfov1#lodgenerationscale
 func (e *EnvironmentTextureSpecularInfoV1) SetLodGenerationScale(lodGenerationScale float64) *EnvironmentTextureSpecularInfoV1 {
-	p := ba.ctx.Get("EnvironmentTextureSpecularInfoV1").New(lodGenerationScale)
-	return EnvironmentTextureSpecularInfoV1FromJSObject(p, ba.ctx)
+	e.p.Set("lodGenerationScale", lodGenerationScale)
+	return e
 }
 
 // Mipmaps returns the Mipmaps property of class EnvironmentTextureSpecularInfoV1.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturespecularinfov1#mipmaps
-func (e *EnvironmentTextureSpecularInfoV1) Mipmaps(mipmaps []*BufferImageData) *EnvironmentTextureSpecularInfoV1 {
-	p := ba.ctx.Get("EnvironmentTextureSpecularInfoV1").New(mipmaps)
-	return EnvironmentTextureSpecularInfoV1FromJSObject(p, ba.ctx)
+func (e *EnvironmentTextureSpecularInfoV1) Mipmaps() []*BufferImageData {
+	retVal := e.p.Get("mipmaps")
+	result := []*BufferImageData{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BufferImageDataFromJSObject(retVal.Index(ri), e.ctx))
+	}
+	return result
 }
 
 // SetMipmaps sets the Mipmaps property of class EnvironmentTextureSpecularInfoV1.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturespecularinfov1#mipmaps
 func (e *EnvironmentTextureSpecularInfoV1) SetMipmaps(mipmaps []*BufferImageData) *EnvironmentTextureSpecularInfoV1 {
-	p := ba.ctx.Get("EnvironmentTextureSpecularInfoV1").New(mipmaps)
-	return EnvironmentTextureSpecularInfoV1FromJSObject(p, ba.ctx)
+	e.p.Set("mipmaps", mipmaps)
+	return e
 }
 
 // SpecularDataPosition returns the SpecularDataPosition property of class EnvironmentTextureSpecularInfoV1.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturespecularinfov1#speculardataposition
-func (e *EnvironmentTextureSpecularInfoV1) SpecularDataPosition(specularDataPosition float64) *EnvironmentTextureSpecularInfoV1 {
-	p := ba.ctx.Get("EnvironmentTextureSpecularInfoV1").New(specularDataPosition)
-	return EnvironmentTextureSpecularInfoV1FromJSObject(p, ba.ctx)
+func (e *EnvironmentTextureSpecularInfoV1) SpecularDataPosition() float64 {
+	retVal := e.p.Get("specularDataPosition")
+	return retVal.Float()
 }
 
 // SetSpecularDataPosition sets the SpecularDataPosition property of class EnvironmentTextureSpecularInfoV1.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturespecularinfov1#speculardataposition
 func (e *EnvironmentTextureSpecularInfoV1) SetSpecularDataPosition(specularDataPosition float64) *EnvironmentTextureSpecularInfoV1 {
-	p := ba.ctx.Get("EnvironmentTextureSpecularInfoV1").New(specularDataPosition)
-	return EnvironmentTextureSpecularInfoV1FromJSObject(p, ba.ctx)
+	e.p.Set("specularDataPosition", specularDataPosition)
+	return e
 }
-
-*/

@@ -354,758 +354,754 @@ func (t *Texture) UpdateURL(url string, opts *TextureUpdateURLOpts) {
 	t.p.Call("updateURL", args...)
 }
 
-/*
-
 // BILINEAR_SAMPLINGMODE returns the BILINEAR_SAMPLINGMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#bilinear_samplingmode
-func (t *Texture) BILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(BILINEAR_SAMPLINGMODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) BILINEAR_SAMPLINGMODE() float64 {
+	retVal := t.p.Get("BILINEAR_SAMPLINGMODE")
+	return retVal.Float()
 }
 
 // SetBILINEAR_SAMPLINGMODE sets the BILINEAR_SAMPLINGMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#bilinear_samplingmode
 func (t *Texture) SetBILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(BILINEAR_SAMPLINGMODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("BILINEAR_SAMPLINGMODE", BILINEAR_SAMPLINGMODE)
+	return t
 }
 
 // CLAMP_ADDRESSMODE returns the CLAMP_ADDRESSMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#clamp_addressmode
-func (t *Texture) CLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(CLAMP_ADDRESSMODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) CLAMP_ADDRESSMODE() float64 {
+	retVal := t.p.Get("CLAMP_ADDRESSMODE")
+	return retVal.Float()
 }
 
 // SetCLAMP_ADDRESSMODE sets the CLAMP_ADDRESSMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#clamp_addressmode
 func (t *Texture) SetCLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(CLAMP_ADDRESSMODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("CLAMP_ADDRESSMODE", CLAMP_ADDRESSMODE)
+	return t
 }
 
 // CUBIC_MODE returns the CUBIC_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#cubic_mode
-func (t *Texture) CUBIC_MODE(CUBIC_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(CUBIC_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) CUBIC_MODE() float64 {
+	retVal := t.p.Get("CUBIC_MODE")
+	return retVal.Float()
 }
 
 // SetCUBIC_MODE sets the CUBIC_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#cubic_mode
 func (t *Texture) SetCUBIC_MODE(CUBIC_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(CUBIC_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("CUBIC_MODE", CUBIC_MODE)
+	return t
 }
 
 // EQUIRECTANGULAR_MODE returns the EQUIRECTANGULAR_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#equirectangular_mode
-func (t *Texture) EQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(EQUIRECTANGULAR_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) EQUIRECTANGULAR_MODE() float64 {
+	retVal := t.p.Get("EQUIRECTANGULAR_MODE")
+	return retVal.Float()
 }
 
 // SetEQUIRECTANGULAR_MODE sets the EQUIRECTANGULAR_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#equirectangular_mode
 func (t *Texture) SetEQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(EQUIRECTANGULAR_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("EQUIRECTANGULAR_MODE", EQUIRECTANGULAR_MODE)
+	return t
 }
 
 // EXPLICIT_MODE returns the EXPLICIT_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#explicit_mode
-func (t *Texture) EXPLICIT_MODE(EXPLICIT_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(EXPLICIT_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) EXPLICIT_MODE() float64 {
+	retVal := t.p.Get("EXPLICIT_MODE")
+	return retVal.Float()
 }
 
 // SetEXPLICIT_MODE sets the EXPLICIT_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#explicit_mode
 func (t *Texture) SetEXPLICIT_MODE(EXPLICIT_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(EXPLICIT_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("EXPLICIT_MODE", EXPLICIT_MODE)
+	return t
 }
 
 // FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#fixed_equirectangular_mirrored_mode
-func (t *Texture) FIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) FIXED_EQUIRECTANGULAR_MIRRORED_MODE() float64 {
+	retVal := t.p.Get("FIXED_EQUIRECTANGULAR_MIRRORED_MODE")
+	return retVal.Float()
 }
 
 // SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#fixed_equirectangular_mirrored_mode
 func (t *Texture) SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("FIXED_EQUIRECTANGULAR_MIRRORED_MODE", FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return t
 }
 
 // FIXED_EQUIRECTANGULAR_MODE returns the FIXED_EQUIRECTANGULAR_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#fixed_equirectangular_mode
-func (t *Texture) FIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(FIXED_EQUIRECTANGULAR_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) FIXED_EQUIRECTANGULAR_MODE() float64 {
+	retVal := t.p.Get("FIXED_EQUIRECTANGULAR_MODE")
+	return retVal.Float()
 }
 
 // SetFIXED_EQUIRECTANGULAR_MODE sets the FIXED_EQUIRECTANGULAR_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#fixed_equirectangular_mode
 func (t *Texture) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(FIXED_EQUIRECTANGULAR_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("FIXED_EQUIRECTANGULAR_MODE", FIXED_EQUIRECTANGULAR_MODE)
+	return t
 }
 
 // INVCUBIC_MODE returns the INVCUBIC_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#invcubic_mode
-func (t *Texture) INVCUBIC_MODE(INVCUBIC_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(INVCUBIC_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) INVCUBIC_MODE() float64 {
+	retVal := t.p.Get("INVCUBIC_MODE")
+	return retVal.Float()
 }
 
 // SetINVCUBIC_MODE sets the INVCUBIC_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#invcubic_mode
 func (t *Texture) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(INVCUBIC_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("INVCUBIC_MODE", INVCUBIC_MODE)
+	return t
 }
 
 // InspectableCustomProperties returns the InspectableCustomProperties property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#inspectablecustomproperties
-func (t *Texture) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *Texture {
-	p := ba.ctx.Get("Texture").New(inspectableCustomProperties.JSObject())
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) InspectableCustomProperties() *IInspectable {
+	retVal := t.p.Get("inspectableCustomProperties")
+	return IInspectableFromJSObject(retVal, t.ctx)
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#inspectablecustomproperties
 func (t *Texture) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Texture {
-	p := ba.ctx.Get("Texture").New(inspectableCustomProperties.JSObject())
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+	return t
 }
 
 // InvertY returns the InvertY property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#inverty
-func (t *Texture) InvertY(invertY bool) *Texture {
-	p := ba.ctx.Get("Texture").New(invertY)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) InvertY() bool {
+	retVal := t.p.Get("invertY")
+	return retVal.Bool()
 }
 
 // SetInvertY sets the InvertY property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#inverty
 func (t *Texture) SetInvertY(invertY bool) *Texture {
-	p := ba.ctx.Get("Texture").New(invertY)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("invertY", invertY)
+	return t
 }
 
 // IsBlocking returns the IsBlocking property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#isblocking
-func (t *Texture) IsBlocking(isBlocking bool) *Texture {
-	p := ba.ctx.Get("Texture").New(isBlocking)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) IsBlocking() bool {
+	retVal := t.p.Get("isBlocking")
+	return retVal.Bool()
 }
 
 // SetIsBlocking sets the IsBlocking property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#isblocking
 func (t *Texture) SetIsBlocking(isBlocking bool) *Texture {
-	p := ba.ctx.Get("Texture").New(isBlocking)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("isBlocking", isBlocking)
+	return t
 }
 
 // LINEAR_LINEAR returns the LINEAR_LINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_linear
-func (t *Texture) LINEAR_LINEAR(LINEAR_LINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_LINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) LINEAR_LINEAR() float64 {
+	retVal := t.p.Get("LINEAR_LINEAR")
+	return retVal.Float()
 }
 
 // SetLINEAR_LINEAR sets the LINEAR_LINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_linear
 func (t *Texture) SetLINEAR_LINEAR(LINEAR_LINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_LINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("LINEAR_LINEAR", LINEAR_LINEAR)
+	return t
 }
 
 // LINEAR_LINEAR_MIPLINEAR returns the LINEAR_LINEAR_MIPLINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_linear_miplinear
-func (t *Texture) LINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_LINEAR_MIPLINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) LINEAR_LINEAR_MIPLINEAR() float64 {
+	retVal := t.p.Get("LINEAR_LINEAR_MIPLINEAR")
+	return retVal.Float()
 }
 
 // SetLINEAR_LINEAR_MIPLINEAR sets the LINEAR_LINEAR_MIPLINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_linear_miplinear
 func (t *Texture) SetLINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_LINEAR_MIPLINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("LINEAR_LINEAR_MIPLINEAR", LINEAR_LINEAR_MIPLINEAR)
+	return t
 }
 
 // LINEAR_LINEAR_MIPNEAREST returns the LINEAR_LINEAR_MIPNEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_linear_mipnearest
-func (t *Texture) LINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_LINEAR_MIPNEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) LINEAR_LINEAR_MIPNEAREST() float64 {
+	retVal := t.p.Get("LINEAR_LINEAR_MIPNEAREST")
+	return retVal.Float()
 }
 
 // SetLINEAR_LINEAR_MIPNEAREST sets the LINEAR_LINEAR_MIPNEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_linear_mipnearest
 func (t *Texture) SetLINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_LINEAR_MIPNEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("LINEAR_LINEAR_MIPNEAREST", LINEAR_LINEAR_MIPNEAREST)
+	return t
 }
 
 // LINEAR_NEAREST returns the LINEAR_NEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_nearest
-func (t *Texture) LINEAR_NEAREST(LINEAR_NEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_NEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) LINEAR_NEAREST() float64 {
+	retVal := t.p.Get("LINEAR_NEAREST")
+	return retVal.Float()
 }
 
 // SetLINEAR_NEAREST sets the LINEAR_NEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_nearest
 func (t *Texture) SetLINEAR_NEAREST(LINEAR_NEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_NEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("LINEAR_NEAREST", LINEAR_NEAREST)
+	return t
 }
 
 // LINEAR_NEAREST_MIPLINEAR returns the LINEAR_NEAREST_MIPLINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_nearest_miplinear
-func (t *Texture) LINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_NEAREST_MIPLINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) LINEAR_NEAREST_MIPLINEAR() float64 {
+	retVal := t.p.Get("LINEAR_NEAREST_MIPLINEAR")
+	return retVal.Float()
 }
 
 // SetLINEAR_NEAREST_MIPLINEAR sets the LINEAR_NEAREST_MIPLINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_nearest_miplinear
 func (t *Texture) SetLINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_NEAREST_MIPLINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("LINEAR_NEAREST_MIPLINEAR", LINEAR_NEAREST_MIPLINEAR)
+	return t
 }
 
 // LINEAR_NEAREST_MIPNEAREST returns the LINEAR_NEAREST_MIPNEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_nearest_mipnearest
-func (t *Texture) LINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_NEAREST_MIPNEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) LINEAR_NEAREST_MIPNEAREST() float64 {
+	retVal := t.p.Get("LINEAR_NEAREST_MIPNEAREST")
+	return retVal.Float()
 }
 
 // SetLINEAR_NEAREST_MIPNEAREST sets the LINEAR_NEAREST_MIPNEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#linear_nearest_mipnearest
 func (t *Texture) SetLINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(LINEAR_NEAREST_MIPNEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("LINEAR_NEAREST_MIPNEAREST", LINEAR_NEAREST_MIPNEAREST)
+	return t
 }
 
 // MIRROR_ADDRESSMODE returns the MIRROR_ADDRESSMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#mirror_addressmode
-func (t *Texture) MIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(MIRROR_ADDRESSMODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) MIRROR_ADDRESSMODE() float64 {
+	retVal := t.p.Get("MIRROR_ADDRESSMODE")
+	return retVal.Float()
 }
 
 // SetMIRROR_ADDRESSMODE sets the MIRROR_ADDRESSMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#mirror_addressmode
 func (t *Texture) SetMIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(MIRROR_ADDRESSMODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("MIRROR_ADDRESSMODE", MIRROR_ADDRESSMODE)
+	return t
 }
 
 // NEAREST_LINEAR returns the NEAREST_LINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_linear
-func (t *Texture) NEAREST_LINEAR(NEAREST_LINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_LINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) NEAREST_LINEAR() float64 {
+	retVal := t.p.Get("NEAREST_LINEAR")
+	return retVal.Float()
 }
 
 // SetNEAREST_LINEAR sets the NEAREST_LINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_linear
 func (t *Texture) SetNEAREST_LINEAR(NEAREST_LINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_LINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("NEAREST_LINEAR", NEAREST_LINEAR)
+	return t
 }
 
 // NEAREST_LINEAR_MIPLINEAR returns the NEAREST_LINEAR_MIPLINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_linear_miplinear
-func (t *Texture) NEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_LINEAR_MIPLINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) NEAREST_LINEAR_MIPLINEAR() float64 {
+	retVal := t.p.Get("NEAREST_LINEAR_MIPLINEAR")
+	return retVal.Float()
 }
 
 // SetNEAREST_LINEAR_MIPLINEAR sets the NEAREST_LINEAR_MIPLINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_linear_miplinear
 func (t *Texture) SetNEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_LINEAR_MIPLINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("NEAREST_LINEAR_MIPLINEAR", NEAREST_LINEAR_MIPLINEAR)
+	return t
 }
 
 // NEAREST_LINEAR_MIPNEAREST returns the NEAREST_LINEAR_MIPNEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_linear_mipnearest
-func (t *Texture) NEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_LINEAR_MIPNEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) NEAREST_LINEAR_MIPNEAREST() float64 {
+	retVal := t.p.Get("NEAREST_LINEAR_MIPNEAREST")
+	return retVal.Float()
 }
 
 // SetNEAREST_LINEAR_MIPNEAREST sets the NEAREST_LINEAR_MIPNEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_linear_mipnearest
 func (t *Texture) SetNEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_LINEAR_MIPNEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("NEAREST_LINEAR_MIPNEAREST", NEAREST_LINEAR_MIPNEAREST)
+	return t
 }
 
 // NEAREST_NEAREST returns the NEAREST_NEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_nearest
-func (t *Texture) NEAREST_NEAREST(NEAREST_NEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_NEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) NEAREST_NEAREST() float64 {
+	retVal := t.p.Get("NEAREST_NEAREST")
+	return retVal.Float()
 }
 
 // SetNEAREST_NEAREST sets the NEAREST_NEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_nearest
 func (t *Texture) SetNEAREST_NEAREST(NEAREST_NEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_NEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("NEAREST_NEAREST", NEAREST_NEAREST)
+	return t
 }
 
 // NEAREST_NEAREST_MIPLINEAR returns the NEAREST_NEAREST_MIPLINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_nearest_miplinear
-func (t *Texture) NEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_NEAREST_MIPLINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) NEAREST_NEAREST_MIPLINEAR() float64 {
+	retVal := t.p.Get("NEAREST_NEAREST_MIPLINEAR")
+	return retVal.Float()
 }
 
 // SetNEAREST_NEAREST_MIPLINEAR sets the NEAREST_NEAREST_MIPLINEAR property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_nearest_miplinear
 func (t *Texture) SetNEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_NEAREST_MIPLINEAR)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("NEAREST_NEAREST_MIPLINEAR", NEAREST_NEAREST_MIPLINEAR)
+	return t
 }
 
 // NEAREST_NEAREST_MIPNEAREST returns the NEAREST_NEAREST_MIPNEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_nearest_mipnearest
-func (t *Texture) NEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_NEAREST_MIPNEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) NEAREST_NEAREST_MIPNEAREST() float64 {
+	retVal := t.p.Get("NEAREST_NEAREST_MIPNEAREST")
+	return retVal.Float()
 }
 
 // SetNEAREST_NEAREST_MIPNEAREST sets the NEAREST_NEAREST_MIPNEAREST property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_nearest_mipnearest
 func (t *Texture) SetNEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_NEAREST_MIPNEAREST)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("NEAREST_NEAREST_MIPNEAREST", NEAREST_NEAREST_MIPNEAREST)
+	return t
 }
 
 // NEAREST_SAMPLINGMODE returns the NEAREST_SAMPLINGMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_samplingmode
-func (t *Texture) NEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_SAMPLINGMODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) NEAREST_SAMPLINGMODE() float64 {
+	retVal := t.p.Get("NEAREST_SAMPLINGMODE")
+	return retVal.Float()
 }
 
 // SetNEAREST_SAMPLINGMODE sets the NEAREST_SAMPLINGMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nearest_samplingmode
 func (t *Texture) SetNEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(NEAREST_SAMPLINGMODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("NEAREST_SAMPLINGMODE", NEAREST_SAMPLINGMODE)
+	return t
 }
 
 // NoMipmap returns the NoMipmap property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nomipmap
-func (t *Texture) NoMipmap(noMipmap bool) *Texture {
-	p := ba.ctx.Get("Texture").New(noMipmap)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) NoMipmap() bool {
+	retVal := t.p.Get("noMipmap")
+	return retVal.Bool()
 }
 
 // SetNoMipmap sets the NoMipmap property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#nomipmap
 func (t *Texture) SetNoMipmap(noMipmap bool) *Texture {
-	p := ba.ctx.Get("Texture").New(noMipmap)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("noMipmap", noMipmap)
+	return t
 }
 
 // OnLoadObservable returns the OnLoadObservable property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#onloadobservable
-func (t *Texture) OnLoadObservable(onLoadObservable *Observable) *Texture {
-	p := ba.ctx.Get("Texture").New(onLoadObservable.JSObject())
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) OnLoadObservable() *Observable {
+	retVal := t.p.Get("onLoadObservable")
+	return ObservableFromJSObject(retVal, t.ctx)
 }
 
 // SetOnLoadObservable sets the OnLoadObservable property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#onloadobservable
 func (t *Texture) SetOnLoadObservable(onLoadObservable *Observable) *Texture {
-	p := ba.ctx.Get("Texture").New(onLoadObservable.JSObject())
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("onLoadObservable", onLoadObservable.JSObject())
+	return t
 }
 
 // PLANAR_MODE returns the PLANAR_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#planar_mode
-func (t *Texture) PLANAR_MODE(PLANAR_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(PLANAR_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) PLANAR_MODE() float64 {
+	retVal := t.p.Get("PLANAR_MODE")
+	return retVal.Float()
 }
 
 // SetPLANAR_MODE sets the PLANAR_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#planar_mode
 func (t *Texture) SetPLANAR_MODE(PLANAR_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(PLANAR_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("PLANAR_MODE", PLANAR_MODE)
+	return t
 }
 
 // PROJECTION_MODE returns the PROJECTION_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#projection_mode
-func (t *Texture) PROJECTION_MODE(PROJECTION_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(PROJECTION_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) PROJECTION_MODE() float64 {
+	retVal := t.p.Get("PROJECTION_MODE")
+	return retVal.Float()
 }
 
 // SetPROJECTION_MODE sets the PROJECTION_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#projection_mode
 func (t *Texture) SetPROJECTION_MODE(PROJECTION_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(PROJECTION_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("PROJECTION_MODE", PROJECTION_MODE)
+	return t
 }
 
 // SKYBOX_MODE returns the SKYBOX_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#skybox_mode
-func (t *Texture) SKYBOX_MODE(SKYBOX_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(SKYBOX_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) SKYBOX_MODE() float64 {
+	retVal := t.p.Get("SKYBOX_MODE")
+	return retVal.Float()
 }
 
 // SetSKYBOX_MODE sets the SKYBOX_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#skybox_mode
 func (t *Texture) SetSKYBOX_MODE(SKYBOX_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(SKYBOX_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("SKYBOX_MODE", SKYBOX_MODE)
+	return t
 }
 
 // SPHERICAL_MODE returns the SPHERICAL_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#spherical_mode
-func (t *Texture) SPHERICAL_MODE(SPHERICAL_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(SPHERICAL_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) SPHERICAL_MODE() float64 {
+	retVal := t.p.Get("SPHERICAL_MODE")
+	return retVal.Float()
 }
 
 // SetSPHERICAL_MODE sets the SPHERICAL_MODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#spherical_mode
 func (t *Texture) SetSPHERICAL_MODE(SPHERICAL_MODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(SPHERICAL_MODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("SPHERICAL_MODE", SPHERICAL_MODE)
+	return t
 }
 
 // SamplingMode returns the SamplingMode property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#samplingmode
-func (t *Texture) SamplingMode(samplingMode float64) *Texture {
-	p := ba.ctx.Get("Texture").New(samplingMode)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) SamplingMode() float64 {
+	retVal := t.p.Get("samplingMode")
+	return retVal.Float()
 }
 
 // SetSamplingMode sets the SamplingMode property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#samplingmode
 func (t *Texture) SetSamplingMode(samplingMode float64) *Texture {
-	p := ba.ctx.Get("Texture").New(samplingMode)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("samplingMode", samplingMode)
+	return t
 }
 
 // SerializeBuffers returns the SerializeBuffers property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#serializebuffers
-func (t *Texture) SerializeBuffers(SerializeBuffers bool) *Texture {
-	p := ba.ctx.Get("Texture").New(SerializeBuffers)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) SerializeBuffers() bool {
+	retVal := t.p.Get("SerializeBuffers")
+	return retVal.Bool()
 }
 
 // SetSerializeBuffers sets the SerializeBuffers property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#serializebuffers
 func (t *Texture) SetSerializeBuffers(SerializeBuffers bool) *Texture {
-	p := ba.ctx.Get("Texture").New(SerializeBuffers)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("SerializeBuffers", SerializeBuffers)
+	return t
 }
 
 // TRILINEAR_SAMPLINGMODE returns the TRILINEAR_SAMPLINGMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#trilinear_samplingmode
-func (t *Texture) TRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(TRILINEAR_SAMPLINGMODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) TRILINEAR_SAMPLINGMODE() float64 {
+	retVal := t.p.Get("TRILINEAR_SAMPLINGMODE")
+	return retVal.Float()
 }
 
 // SetTRILINEAR_SAMPLINGMODE sets the TRILINEAR_SAMPLINGMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#trilinear_samplingmode
 func (t *Texture) SetTRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(TRILINEAR_SAMPLINGMODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("TRILINEAR_SAMPLINGMODE", TRILINEAR_SAMPLINGMODE)
+	return t
 }
 
 // UAng returns the UAng property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#uang
-func (t *Texture) UAng(uAng float64) *Texture {
-	p := ba.ctx.Get("Texture").New(uAng)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) UAng() float64 {
+	retVal := t.p.Get("uAng")
+	return retVal.Float()
 }
 
 // SetUAng sets the UAng property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#uang
 func (t *Texture) SetUAng(uAng float64) *Texture {
-	p := ba.ctx.Get("Texture").New(uAng)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("uAng", uAng)
+	return t
 }
 
 // UOffset returns the UOffset property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#uoffset
-func (t *Texture) UOffset(uOffset float64) *Texture {
-	p := ba.ctx.Get("Texture").New(uOffset)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) UOffset() float64 {
+	retVal := t.p.Get("uOffset")
+	return retVal.Float()
 }
 
 // SetUOffset sets the UOffset property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#uoffset
 func (t *Texture) SetUOffset(uOffset float64) *Texture {
-	p := ba.ctx.Get("Texture").New(uOffset)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("uOffset", uOffset)
+	return t
 }
 
 // URotationCenter returns the URotationCenter property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#urotationcenter
-func (t *Texture) URotationCenter(uRotationCenter float64) *Texture {
-	p := ba.ctx.Get("Texture").New(uRotationCenter)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) URotationCenter() float64 {
+	retVal := t.p.Get("uRotationCenter")
+	return retVal.Float()
 }
 
 // SetURotationCenter sets the URotationCenter property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#urotationcenter
 func (t *Texture) SetURotationCenter(uRotationCenter float64) *Texture {
-	p := ba.ctx.Get("Texture").New(uRotationCenter)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("uRotationCenter", uRotationCenter)
+	return t
 }
 
 // UScale returns the UScale property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#uscale
-func (t *Texture) UScale(uScale float64) *Texture {
-	p := ba.ctx.Get("Texture").New(uScale)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) UScale() float64 {
+	retVal := t.p.Get("uScale")
+	return retVal.Float()
 }
 
 // SetUScale sets the UScale property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#uscale
 func (t *Texture) SetUScale(uScale float64) *Texture {
-	p := ba.ctx.Get("Texture").New(uScale)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("uScale", uScale)
+	return t
 }
 
 // Url returns the Url property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#url
-func (t *Texture) Url(url string) *Texture {
-	p := ba.ctx.Get("Texture").New(url)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) Url() string {
+	retVal := t.p.Get("url")
+	return retVal.String()
 }
 
 // SetUrl sets the Url property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#url
 func (t *Texture) SetUrl(url string) *Texture {
-	p := ba.ctx.Get("Texture").New(url)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("url", url)
+	return t
 }
 
 // UseSerializedUrlIfAny returns the UseSerializedUrlIfAny property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#useserializedurlifany
-func (t *Texture) UseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *Texture {
-	p := ba.ctx.Get("Texture").New(UseSerializedUrlIfAny)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) UseSerializedUrlIfAny() bool {
+	retVal := t.p.Get("UseSerializedUrlIfAny")
+	return retVal.Bool()
 }
 
 // SetUseSerializedUrlIfAny sets the UseSerializedUrlIfAny property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#useserializedurlifany
 func (t *Texture) SetUseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *Texture {
-	p := ba.ctx.Get("Texture").New(UseSerializedUrlIfAny)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("UseSerializedUrlIfAny", UseSerializedUrlIfAny)
+	return t
 }
 
 // VAng returns the VAng property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#vang
-func (t *Texture) VAng(vAng float64) *Texture {
-	p := ba.ctx.Get("Texture").New(vAng)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) VAng() float64 {
+	retVal := t.p.Get("vAng")
+	return retVal.Float()
 }
 
 // SetVAng sets the VAng property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#vang
 func (t *Texture) SetVAng(vAng float64) *Texture {
-	p := ba.ctx.Get("Texture").New(vAng)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("vAng", vAng)
+	return t
 }
 
 // VOffset returns the VOffset property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#voffset
-func (t *Texture) VOffset(vOffset float64) *Texture {
-	p := ba.ctx.Get("Texture").New(vOffset)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) VOffset() float64 {
+	retVal := t.p.Get("vOffset")
+	return retVal.Float()
 }
 
 // SetVOffset sets the VOffset property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#voffset
 func (t *Texture) SetVOffset(vOffset float64) *Texture {
-	p := ba.ctx.Get("Texture").New(vOffset)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("vOffset", vOffset)
+	return t
 }
 
 // VRotationCenter returns the VRotationCenter property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#vrotationcenter
-func (t *Texture) VRotationCenter(vRotationCenter float64) *Texture {
-	p := ba.ctx.Get("Texture").New(vRotationCenter)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) VRotationCenter() float64 {
+	retVal := t.p.Get("vRotationCenter")
+	return retVal.Float()
 }
 
 // SetVRotationCenter sets the VRotationCenter property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#vrotationcenter
 func (t *Texture) SetVRotationCenter(vRotationCenter float64) *Texture {
-	p := ba.ctx.Get("Texture").New(vRotationCenter)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("vRotationCenter", vRotationCenter)
+	return t
 }
 
 // VScale returns the VScale property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#vscale
-func (t *Texture) VScale(vScale float64) *Texture {
-	p := ba.ctx.Get("Texture").New(vScale)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) VScale() float64 {
+	retVal := t.p.Get("vScale")
+	return retVal.Float()
 }
 
 // SetVScale sets the VScale property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#vscale
 func (t *Texture) SetVScale(vScale float64) *Texture {
-	p := ba.ctx.Get("Texture").New(vScale)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("vScale", vScale)
+	return t
 }
 
 // WAng returns the WAng property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#wang
-func (t *Texture) WAng(wAng float64) *Texture {
-	p := ba.ctx.Get("Texture").New(wAng)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) WAng() float64 {
+	retVal := t.p.Get("wAng")
+	return retVal.Float()
 }
 
 // SetWAng sets the WAng property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#wang
 func (t *Texture) SetWAng(wAng float64) *Texture {
-	p := ba.ctx.Get("Texture").New(wAng)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("wAng", wAng)
+	return t
 }
 
 // WRAP_ADDRESSMODE returns the WRAP_ADDRESSMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#wrap_addressmode
-func (t *Texture) WRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(WRAP_ADDRESSMODE)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) WRAP_ADDRESSMODE() float64 {
+	retVal := t.p.Get("WRAP_ADDRESSMODE")
+	return retVal.Float()
 }
 
 // SetWRAP_ADDRESSMODE sets the WRAP_ADDRESSMODE property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#wrap_addressmode
 func (t *Texture) SetWRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *Texture {
-	p := ba.ctx.Get("Texture").New(WRAP_ADDRESSMODE)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("WRAP_ADDRESSMODE", WRAP_ADDRESSMODE)
+	return t
 }
 
 // WRotationCenter returns the WRotationCenter property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#wrotationcenter
-func (t *Texture) WRotationCenter(wRotationCenter float64) *Texture {
-	p := ba.ctx.Get("Texture").New(wRotationCenter)
-	return TextureFromJSObject(p, ba.ctx)
+func (t *Texture) WRotationCenter() float64 {
+	retVal := t.p.Get("wRotationCenter")
+	return retVal.Float()
 }
 
 // SetWRotationCenter sets the WRotationCenter property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#wrotationcenter
 func (t *Texture) SetWRotationCenter(wRotationCenter float64) *Texture {
-	p := ba.ctx.Get("Texture").New(wRotationCenter)
-	return TextureFromJSObject(p, ba.ctx)
+	t.p.Set("wRotationCenter", wRotationCenter)
+	return t
 }
-
-*/

@@ -76,38 +76,34 @@ func (p *PositionNormalVertex) Clone() *PositionNormalVertex {
 	return PositionNormalVertexFromJSObject(retVal, p.ctx)
 }
 
-/*
-
 // Normal returns the Normal property of class PositionNormalVertex.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positionnormalvertex#normal
-func (p *PositionNormalVertex) Normal(normal *Vector3) *PositionNormalVertex {
-	p := ba.ctx.Get("PositionNormalVertex").New(normal.JSObject())
-	return PositionNormalVertexFromJSObject(p, ba.ctx)
+func (p *PositionNormalVertex) Normal() *Vector3 {
+	retVal := p.p.Get("normal")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetNormal sets the Normal property of class PositionNormalVertex.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positionnormalvertex#normal
 func (p *PositionNormalVertex) SetNormal(normal *Vector3) *PositionNormalVertex {
-	p := ba.ctx.Get("PositionNormalVertex").New(normal.JSObject())
-	return PositionNormalVertexFromJSObject(p, ba.ctx)
+	p.p.Set("normal", normal.JSObject())
+	return p
 }
 
 // Position returns the Position property of class PositionNormalVertex.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positionnormalvertex#position
-func (p *PositionNormalVertex) Position(position *Vector3) *PositionNormalVertex {
-	p := ba.ctx.Get("PositionNormalVertex").New(position.JSObject())
-	return PositionNormalVertexFromJSObject(p, ba.ctx)
+func (p *PositionNormalVertex) Position() *Vector3 {
+	retVal := p.p.Get("position")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetPosition sets the Position property of class PositionNormalVertex.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positionnormalvertex#position
 func (p *PositionNormalVertex) SetPosition(position *Vector3) *PositionNormalVertex {
-	p := ba.ctx.Get("PositionNormalVertex").New(position.JSObject())
-	return PositionNormalVertexFromJSObject(p, ba.ctx)
+	p.p.Set("position", position.JSObject())
+	return p
 }
-
-*/

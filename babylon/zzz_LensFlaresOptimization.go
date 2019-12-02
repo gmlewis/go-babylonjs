@@ -85,7 +85,3 @@ func (l *LensFlaresOptimization) GetDescription() string {
 	retVal := l.p.Call("getDescription")
 	return retVal.String()
 }
-
-/*
-
- */

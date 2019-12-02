@@ -139,38 +139,38 @@ func (s *SmartArray) Sort(compareFn func()) {
 	s.p.Call("sort", args...)
 }
 
-/*
-
 // Data returns the Data property of class SmartArray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#data
-func (s *SmartArray) Data(data []*T) *SmartArray {
-	p := ba.ctx.Get("SmartArray").New(data)
-	return SmartArrayFromJSObject(p, ba.ctx)
+func (s *SmartArray) Data() []*T {
+	retVal := s.p.Get("data")
+	result := []*T{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetData sets the Data property of class SmartArray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#data
 func (s *SmartArray) SetData(data []*T) *SmartArray {
-	p := ba.ctx.Get("SmartArray").New(data)
-	return SmartArrayFromJSObject(p, ba.ctx)
+	s.p.Set("data", data)
+	return s
 }
 
 // Length returns the Length property of class SmartArray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#length
-func (s *SmartArray) Length(length float64) *SmartArray {
-	p := ba.ctx.Get("SmartArray").New(length)
-	return SmartArrayFromJSObject(p, ba.ctx)
+func (s *SmartArray) Length() float64 {
+	retVal := s.p.Get("length")
+	return retVal.Float()
 }
 
 // SetLength sets the Length property of class SmartArray.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#length
 func (s *SmartArray) SetLength(length float64) *SmartArray {
-	p := ba.ctx.Get("SmartArray").New(length)
-	return SmartArrayFromJSObject(p, ba.ctx)
+	s.p.Set("length", length)
+	return s
 }
-
-*/

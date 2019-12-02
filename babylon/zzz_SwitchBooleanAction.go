@@ -88,22 +88,18 @@ func (s *SwitchBooleanAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-/*
-
 // PropertyPath returns the PropertyPath property of class SwitchBooleanAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#propertypath
-func (s *SwitchBooleanAction) PropertyPath(propertyPath string) *SwitchBooleanAction {
-	p := ba.ctx.Get("SwitchBooleanAction").New(propertyPath)
-	return SwitchBooleanActionFromJSObject(p, ba.ctx)
+func (s *SwitchBooleanAction) PropertyPath() string {
+	retVal := s.p.Get("propertyPath")
+	return retVal.String()
 }
 
 // SetPropertyPath sets the PropertyPath property of class SwitchBooleanAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#propertypath
 func (s *SwitchBooleanAction) SetPropertyPath(propertyPath string) *SwitchBooleanAction {
-	p := ba.ctx.Get("SwitchBooleanAction").New(propertyPath)
-	return SwitchBooleanActionFromJSObject(p, ba.ctx)
+	s.p.Set("propertyPath", propertyPath)
+	return s
 }
-
-*/

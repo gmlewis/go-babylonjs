@@ -220,86 +220,82 @@ func (f *FireMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // DiffuseColor returns the DiffuseColor property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#diffusecolor
-func (f *FireMaterial) DiffuseColor(diffuseColor *Color3) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(diffuseColor.JSObject())
-	return FireMaterialFromJSObject(p, ba.ctx)
+func (f *FireMaterial) DiffuseColor() *Color3 {
+	retVal := f.p.Get("diffuseColor")
+	return Color3FromJSObject(retVal, f.ctx)
 }
 
 // SetDiffuseColor sets the DiffuseColor property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#diffusecolor
 func (f *FireMaterial) SetDiffuseColor(diffuseColor *Color3) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(diffuseColor.JSObject())
-	return FireMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("diffuseColor", diffuseColor.JSObject())
+	return f
 }
 
 // DiffuseTexture returns the DiffuseTexture property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#diffusetexture
-func (f *FireMaterial) DiffuseTexture(diffuseTexture *BaseTexture) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(diffuseTexture.JSObject())
-	return FireMaterialFromJSObject(p, ba.ctx)
+func (f *FireMaterial) DiffuseTexture() *BaseTexture {
+	retVal := f.p.Get("diffuseTexture")
+	return BaseTextureFromJSObject(retVal, f.ctx)
 }
 
 // SetDiffuseTexture sets the DiffuseTexture property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#diffusetexture
 func (f *FireMaterial) SetDiffuseTexture(diffuseTexture *BaseTexture) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(diffuseTexture.JSObject())
-	return FireMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("diffuseTexture", diffuseTexture.JSObject())
+	return f
 }
 
 // DistortionTexture returns the DistortionTexture property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#distortiontexture
-func (f *FireMaterial) DistortionTexture(distortionTexture *BaseTexture) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(distortionTexture.JSObject())
-	return FireMaterialFromJSObject(p, ba.ctx)
+func (f *FireMaterial) DistortionTexture() *BaseTexture {
+	retVal := f.p.Get("distortionTexture")
+	return BaseTextureFromJSObject(retVal, f.ctx)
 }
 
 // SetDistortionTexture sets the DistortionTexture property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#distortiontexture
 func (f *FireMaterial) SetDistortionTexture(distortionTexture *BaseTexture) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(distortionTexture.JSObject())
-	return FireMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("distortionTexture", distortionTexture.JSObject())
+	return f
 }
 
 // OpacityTexture returns the OpacityTexture property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#opacitytexture
-func (f *FireMaterial) OpacityTexture(opacityTexture *BaseTexture) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(opacityTexture.JSObject())
-	return FireMaterialFromJSObject(p, ba.ctx)
+func (f *FireMaterial) OpacityTexture() *BaseTexture {
+	retVal := f.p.Get("opacityTexture")
+	return BaseTextureFromJSObject(retVal, f.ctx)
 }
 
 // SetOpacityTexture sets the OpacityTexture property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#opacitytexture
 func (f *FireMaterial) SetOpacityTexture(opacityTexture *BaseTexture) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(opacityTexture.JSObject())
-	return FireMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("opacityTexture", opacityTexture.JSObject())
+	return f
 }
 
 // Speed returns the Speed property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#speed
-func (f *FireMaterial) Speed(speed float64) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(speed)
-	return FireMaterialFromJSObject(p, ba.ctx)
+func (f *FireMaterial) Speed() float64 {
+	retVal := f.p.Get("speed")
+	return retVal.Float()
 }
 
 // SetSpeed sets the Speed property of class FireMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#speed
 func (f *FireMaterial) SetSpeed(speed float64) *FireMaterial {
-	p := ba.ctx.Get("FireMaterial").New(speed)
-	return FireMaterialFromJSObject(p, ba.ctx)
+	f.p.Set("speed", speed)
+	return f
 }
-
-*/

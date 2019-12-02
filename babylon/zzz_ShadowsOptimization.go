@@ -85,7 +85,3 @@ func (s *ShadowsOptimization) GetDescription() string {
 	retVal := s.p.Call("getDescription")
 	return retVal.String()
 }
-
-/*
-
- */

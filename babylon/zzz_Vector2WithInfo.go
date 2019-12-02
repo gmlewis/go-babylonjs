@@ -63,22 +63,18 @@ func (ba *Babylon) NewVector2WithInfo(source *Vector2, opts *NewVector2WithInfoO
 	return Vector2WithInfoFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // ButtonIndex returns the ButtonIndex property of class Vector2WithInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#buttonindex
-func (v *Vector2WithInfo) ButtonIndex(buttonIndex float64) *Vector2WithInfo {
-	p := ba.ctx.Get("Vector2WithInfo").New(buttonIndex)
-	return Vector2WithInfoFromJSObject(p, ba.ctx)
+func (v *Vector2WithInfo) ButtonIndex() float64 {
+	retVal := v.p.Get("buttonIndex")
+	return retVal.Float()
 }
 
 // SetButtonIndex sets the ButtonIndex property of class Vector2WithInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#buttonindex
 func (v *Vector2WithInfo) SetButtonIndex(buttonIndex float64) *Vector2WithInfo {
-	p := ba.ctx.Get("Vector2WithInfo").New(buttonIndex)
-	return Vector2WithInfoFromJSObject(p, ba.ctx)
+	v.p.Set("buttonIndex", buttonIndex)
+	return v
 }
-
-*/

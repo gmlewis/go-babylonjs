@@ -106,7 +106,3 @@ func (a *Angle) Radians() float64 {
 	retVal := a.p.Call("radians")
 	return retVal.Float()
 }
-
-/*
-
- */

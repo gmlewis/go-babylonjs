@@ -52,38 +52,34 @@ func (ba *Babylon) NewMeshLODLevel(distance float64, mesh *Mesh) *MeshLODLevel {
 	return MeshLODLevelFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Distance returns the Distance property of class MeshLODLevel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshlodlevel#distance
-func (m *MeshLODLevel) Distance(distance float64) *MeshLODLevel {
-	p := ba.ctx.Get("MeshLODLevel").New(distance)
-	return MeshLODLevelFromJSObject(p, ba.ctx)
+func (m *MeshLODLevel) Distance() float64 {
+	retVal := m.p.Get("distance")
+	return retVal.Float()
 }
 
 // SetDistance sets the Distance property of class MeshLODLevel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshlodlevel#distance
 func (m *MeshLODLevel) SetDistance(distance float64) *MeshLODLevel {
-	p := ba.ctx.Get("MeshLODLevel").New(distance)
-	return MeshLODLevelFromJSObject(p, ba.ctx)
+	m.p.Set("distance", distance)
+	return m
 }
 
 // Mesh returns the Mesh property of class MeshLODLevel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshlodlevel#mesh
-func (m *MeshLODLevel) Mesh(mesh *Mesh) *MeshLODLevel {
-	p := ba.ctx.Get("MeshLODLevel").New(mesh.JSObject())
-	return MeshLODLevelFromJSObject(p, ba.ctx)
+func (m *MeshLODLevel) Mesh() *Mesh {
+	retVal := m.p.Get("mesh")
+	return MeshFromJSObject(retVal, m.ctx)
 }
 
 // SetMesh sets the Mesh property of class MeshLODLevel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshlodlevel#mesh
 func (m *MeshLODLevel) SetMesh(mesh *Mesh) *MeshLODLevel {
-	p := ba.ctx.Get("MeshLODLevel").New(mesh.JSObject())
-	return MeshLODLevelFromJSObject(p, ba.ctx)
+	m.p.Set("mesh", mesh.JSObject())
+	return m
 }
-
-*/

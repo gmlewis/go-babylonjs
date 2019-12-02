@@ -38,7 +38,3 @@ func CubicEaseArrayToJSArray(array []*CubicEase) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

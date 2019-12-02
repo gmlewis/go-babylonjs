@@ -36,70 +36,66 @@ func SceneOptionsArrayToJSArray(array []*SceneOptions) []interface{} {
 	return result
 }
 
-/*
-
 // UseClonedMeshhMap returns the UseClonedMeshhMap property of class SceneOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptions#useclonedmeshhmap
-func (s *SceneOptions) UseClonedMeshhMap(useClonedMeshhMap bool) *SceneOptions {
-	p := ba.ctx.Get("SceneOptions").New(useClonedMeshhMap)
-	return SceneOptionsFromJSObject(p, ba.ctx)
+func (s *SceneOptions) UseClonedMeshhMap() bool {
+	retVal := s.p.Get("useClonedMeshhMap")
+	return retVal.Bool()
 }
 
 // SetUseClonedMeshhMap sets the UseClonedMeshhMap property of class SceneOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptions#useclonedmeshhmap
 func (s *SceneOptions) SetUseClonedMeshhMap(useClonedMeshhMap bool) *SceneOptions {
-	p := ba.ctx.Get("SceneOptions").New(useClonedMeshhMap)
-	return SceneOptionsFromJSObject(p, ba.ctx)
+	s.p.Set("useClonedMeshhMap", useClonedMeshhMap)
+	return s
 }
 
 // UseGeometryUniqueIdsMap returns the UseGeometryUniqueIdsMap property of class SceneOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptions#usegeometryuniqueidsmap
-func (s *SceneOptions) UseGeometryUniqueIdsMap(useGeometryUniqueIdsMap bool) *SceneOptions {
-	p := ba.ctx.Get("SceneOptions").New(useGeometryUniqueIdsMap)
-	return SceneOptionsFromJSObject(p, ba.ctx)
+func (s *SceneOptions) UseGeometryUniqueIdsMap() bool {
+	retVal := s.p.Get("useGeometryUniqueIdsMap")
+	return retVal.Bool()
 }
 
 // SetUseGeometryUniqueIdsMap sets the UseGeometryUniqueIdsMap property of class SceneOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptions#usegeometryuniqueidsmap
 func (s *SceneOptions) SetUseGeometryUniqueIdsMap(useGeometryUniqueIdsMap bool) *SceneOptions {
-	p := ba.ctx.Get("SceneOptions").New(useGeometryUniqueIdsMap)
-	return SceneOptionsFromJSObject(p, ba.ctx)
+	s.p.Set("useGeometryUniqueIdsMap", useGeometryUniqueIdsMap)
+	return s
 }
 
 // UseMaterialMeshMap returns the UseMaterialMeshMap property of class SceneOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptions#usematerialmeshmap
-func (s *SceneOptions) UseMaterialMeshMap(useMaterialMeshMap bool) *SceneOptions {
-	p := ba.ctx.Get("SceneOptions").New(useMaterialMeshMap)
-	return SceneOptionsFromJSObject(p, ba.ctx)
+func (s *SceneOptions) UseMaterialMeshMap() bool {
+	retVal := s.p.Get("useMaterialMeshMap")
+	return retVal.Bool()
 }
 
 // SetUseMaterialMeshMap sets the UseMaterialMeshMap property of class SceneOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptions#usematerialmeshmap
 func (s *SceneOptions) SetUseMaterialMeshMap(useMaterialMeshMap bool) *SceneOptions {
-	p := ba.ctx.Get("SceneOptions").New(useMaterialMeshMap)
-	return SceneOptionsFromJSObject(p, ba.ctx)
+	s.p.Set("useMaterialMeshMap", useMaterialMeshMap)
+	return s
 }
 
 // Virtual returns the Virtual property of class SceneOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptions#virtual
-func (s *SceneOptions) Virtual(virtual bool) *SceneOptions {
-	p := ba.ctx.Get("SceneOptions").New(virtual)
-	return SceneOptionsFromJSObject(p, ba.ctx)
+func (s *SceneOptions) Virtual() bool {
+	retVal := s.p.Get("virtual")
+	return retVal.Bool()
 }
 
 // SetVirtual sets the Virtual property of class SceneOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptions#virtual
 func (s *SceneOptions) SetVirtual(virtual bool) *SceneOptions {
-	p := ba.ctx.Get("SceneOptions").New(virtual)
-	return SceneOptionsFromJSObject(p, ba.ctx)
+	s.p.Set("virtual", virtual)
+	return s
 }
-
-*/

@@ -47,22 +47,18 @@ func (ba *Babylon) NewSpherePanel() *SpherePanel {
 	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Radius returns the Radius property of class SpherePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#radius
-func (s *SpherePanel) Radius(radius float64) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(radius)
-	return SpherePanelFromJSObject(p, ba.ctx)
+func (s *SpherePanel) Radius() float64 {
+	retVal := s.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class SpherePanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel#radius
 func (s *SpherePanel) SetRadius(radius float64) *SpherePanel {
-	p := ba.ctx.Get("SpherePanel").New(radius)
-	return SpherePanelFromJSObject(p, ba.ctx)
+	s.p.Set("radius", radius)
+	return s
 }
-
-*/

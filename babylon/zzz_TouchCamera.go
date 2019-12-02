@@ -63,38 +63,34 @@ func (t *TouchCamera) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // TouchAngularSensibility returns the TouchAngularSensibility property of class TouchCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera#touchangularsensibility
-func (t *TouchCamera) TouchAngularSensibility(touchAngularSensibility float64) *TouchCamera {
-	p := ba.ctx.Get("TouchCamera").New(touchAngularSensibility)
-	return TouchCameraFromJSObject(p, ba.ctx)
+func (t *TouchCamera) TouchAngularSensibility() float64 {
+	retVal := t.p.Get("touchAngularSensibility")
+	return retVal.Float()
 }
 
 // SetTouchAngularSensibility sets the TouchAngularSensibility property of class TouchCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera#touchangularsensibility
 func (t *TouchCamera) SetTouchAngularSensibility(touchAngularSensibility float64) *TouchCamera {
-	p := ba.ctx.Get("TouchCamera").New(touchAngularSensibility)
-	return TouchCameraFromJSObject(p, ba.ctx)
+	t.p.Set("touchAngularSensibility", touchAngularSensibility)
+	return t
 }
 
 // TouchMoveSensibility returns the TouchMoveSensibility property of class TouchCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera#touchmovesensibility
-func (t *TouchCamera) TouchMoveSensibility(touchMoveSensibility float64) *TouchCamera {
-	p := ba.ctx.Get("TouchCamera").New(touchMoveSensibility)
-	return TouchCameraFromJSObject(p, ba.ctx)
+func (t *TouchCamera) TouchMoveSensibility() float64 {
+	retVal := t.p.Get("touchMoveSensibility")
+	return retVal.Float()
 }
 
 // SetTouchMoveSensibility sets the TouchMoveSensibility property of class TouchCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera#touchmovesensibility
 func (t *TouchCamera) SetTouchMoveSensibility(touchMoveSensibility float64) *TouchCamera {
-	p := ba.ctx.Get("TouchCamera").New(touchMoveSensibility)
-	return TouchCameraFromJSObject(p, ba.ctx)
+	t.p.Set("touchMoveSensibility", touchMoveSensibility)
+	return t
 }
-
-*/

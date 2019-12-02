@@ -35,7 +35,3 @@ func ISceneArrayToJSArray(array []*IScene) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

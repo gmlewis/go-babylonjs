@@ -142,38 +142,34 @@ func (h *HemisphericLight) TransferToNodeMaterialEffect(effect *Effect, lightDat
 	return HemisphericLightFromJSObject(retVal, h.ctx)
 }
 
-/*
-
 // Direction returns the Direction property of class HemisphericLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#direction
-func (h *HemisphericLight) Direction(direction *Vector3) *HemisphericLight {
-	p := ba.ctx.Get("HemisphericLight").New(direction.JSObject())
-	return HemisphericLightFromJSObject(p, ba.ctx)
+func (h *HemisphericLight) Direction() *Vector3 {
+	retVal := h.p.Get("direction")
+	return Vector3FromJSObject(retVal, h.ctx)
 }
 
 // SetDirection sets the Direction property of class HemisphericLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#direction
 func (h *HemisphericLight) SetDirection(direction *Vector3) *HemisphericLight {
-	p := ba.ctx.Get("HemisphericLight").New(direction.JSObject())
-	return HemisphericLightFromJSObject(p, ba.ctx)
+	h.p.Set("direction", direction.JSObject())
+	return h
 }
 
 // GroundColor returns the GroundColor property of class HemisphericLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#groundcolor
-func (h *HemisphericLight) GroundColor(groundColor *Color3) *HemisphericLight {
-	p := ba.ctx.Get("HemisphericLight").New(groundColor.JSObject())
-	return HemisphericLightFromJSObject(p, ba.ctx)
+func (h *HemisphericLight) GroundColor() *Color3 {
+	retVal := h.p.Get("groundColor")
+	return Color3FromJSObject(retVal, h.ctx)
 }
 
 // SetGroundColor sets the GroundColor property of class HemisphericLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#groundcolor
 func (h *HemisphericLight) SetGroundColor(groundColor *Color3) *HemisphericLight {
-	p := ba.ctx.Get("HemisphericLight").New(groundColor.JSObject())
-	return HemisphericLightFromJSObject(p, ba.ctx)
+	h.p.Set("groundColor", groundColor.JSObject())
+	return h
 }
-
-*/

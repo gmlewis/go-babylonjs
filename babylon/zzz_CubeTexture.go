@@ -296,102 +296,98 @@ func (c *CubeTexture) UpdateURL(url string, opts *CubeTextureUpdateURLOpts) {
 	c.p.Call("updateURL", args...)
 }
 
-/*
-
 // BoundingBoxPosition returns the BoundingBoxPosition property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#boundingboxposition
-func (c *CubeTexture) BoundingBoxPosition(boundingBoxPosition *Vector3) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(boundingBoxPosition.JSObject())
-	return CubeTextureFromJSObject(p, ba.ctx)
+func (c *CubeTexture) BoundingBoxPosition() *Vector3 {
+	retVal := c.p.Get("boundingBoxPosition")
+	return Vector3FromJSObject(retVal, c.ctx)
 }
 
 // SetBoundingBoxPosition sets the BoundingBoxPosition property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#boundingboxposition
 func (c *CubeTexture) SetBoundingBoxPosition(boundingBoxPosition *Vector3) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(boundingBoxPosition.JSObject())
-	return CubeTextureFromJSObject(p, ba.ctx)
+	c.p.Set("boundingBoxPosition", boundingBoxPosition.JSObject())
+	return c
 }
 
 // BoundingBoxSize returns the BoundingBoxSize property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#boundingboxsize
-func (c *CubeTexture) BoundingBoxSize(boundingBoxSize *Vector3) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(boundingBoxSize.JSObject())
-	return CubeTextureFromJSObject(p, ba.ctx)
+func (c *CubeTexture) BoundingBoxSize() *Vector3 {
+	retVal := c.p.Get("boundingBoxSize")
+	return Vector3FromJSObject(retVal, c.ctx)
 }
 
 // SetBoundingBoxSize sets the BoundingBoxSize property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#boundingboxsize
 func (c *CubeTexture) SetBoundingBoxSize(boundingBoxSize *Vector3) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(boundingBoxSize.JSObject())
-	return CubeTextureFromJSObject(p, ba.ctx)
+	c.p.Set("boundingBoxSize", boundingBoxSize.JSObject())
+	return c
 }
 
 // IsPrefiltered returns the IsPrefiltered property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#isprefiltered
-func (c *CubeTexture) IsPrefiltered(isPrefiltered bool) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(isPrefiltered)
-	return CubeTextureFromJSObject(p, ba.ctx)
+func (c *CubeTexture) IsPrefiltered() bool {
+	retVal := c.p.Get("isPrefiltered")
+	return retVal.Bool()
 }
 
 // SetIsPrefiltered sets the IsPrefiltered property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#isprefiltered
 func (c *CubeTexture) SetIsPrefiltered(isPrefiltered bool) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(isPrefiltered)
-	return CubeTextureFromJSObject(p, ba.ctx)
+	c.p.Set("isPrefiltered", isPrefiltered)
+	return c
 }
 
 // NoMipmap returns the NoMipmap property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#nomipmap
-func (c *CubeTexture) NoMipmap(noMipmap bool) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(noMipmap)
-	return CubeTextureFromJSObject(p, ba.ctx)
+func (c *CubeTexture) NoMipmap() bool {
+	retVal := c.p.Get("noMipmap")
+	return retVal.Bool()
 }
 
 // SetNoMipmap sets the NoMipmap property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#nomipmap
 func (c *CubeTexture) SetNoMipmap(noMipmap bool) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(noMipmap)
-	return CubeTextureFromJSObject(p, ba.ctx)
+	c.p.Set("noMipmap", noMipmap)
+	return c
 }
 
 // RotationY returns the RotationY property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#rotationy
-func (c *CubeTexture) RotationY(rotationY float64) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(rotationY)
-	return CubeTextureFromJSObject(p, ba.ctx)
+func (c *CubeTexture) RotationY() float64 {
+	retVal := c.p.Get("rotationY")
+	return retVal.Float()
 }
 
 // SetRotationY sets the RotationY property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#rotationy
 func (c *CubeTexture) SetRotationY(rotationY float64) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(rotationY)
-	return CubeTextureFromJSObject(p, ba.ctx)
+	c.p.Set("rotationY", rotationY)
+	return c
 }
 
 // Url returns the Url property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#url
-func (c *CubeTexture) Url(url string) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(url)
-	return CubeTextureFromJSObject(p, ba.ctx)
+func (c *CubeTexture) Url() string {
+	retVal := c.p.Get("url")
+	return retVal.String()
 }
 
 // SetUrl sets the Url property of class CubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#url
 func (c *CubeTexture) SetUrl(url string) *CubeTexture {
-	p := ba.ctx.Get("CubeTexture").New(url)
-	return CubeTextureFromJSObject(p, ba.ctx)
+	c.p.Set("url", url)
+	return c
 }
-
-*/

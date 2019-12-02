@@ -166,102 +166,98 @@ func (b *BoundingSphere) Scale(factor float64) *BoundingSphere {
 	return BoundingSphereFromJSObject(retVal, b.ctx)
 }
 
-/*
-
 // Center returns the Center property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#center
-func (b *BoundingSphere) Center(center *Vector3) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(center.JSObject())
-	return BoundingSphereFromJSObject(p, ba.ctx)
+func (b *BoundingSphere) Center() *Vector3 {
+	retVal := b.p.Get("center")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetCenter sets the Center property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#center
 func (b *BoundingSphere) SetCenter(center *Vector3) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(center.JSObject())
-	return BoundingSphereFromJSObject(p, ba.ctx)
+	b.p.Set("center", center.JSObject())
+	return b
 }
 
 // CenterWorld returns the CenterWorld property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#centerworld
-func (b *BoundingSphere) CenterWorld(centerWorld *Vector3) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(centerWorld.JSObject())
-	return BoundingSphereFromJSObject(p, ba.ctx)
+func (b *BoundingSphere) CenterWorld() *Vector3 {
+	retVal := b.p.Get("centerWorld")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetCenterWorld sets the CenterWorld property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#centerworld
 func (b *BoundingSphere) SetCenterWorld(centerWorld *Vector3) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(centerWorld.JSObject())
-	return BoundingSphereFromJSObject(p, ba.ctx)
+	b.p.Set("centerWorld", centerWorld.JSObject())
+	return b
 }
 
 // Maximum returns the Maximum property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#maximum
-func (b *BoundingSphere) Maximum(maximum *Vector3) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(maximum.JSObject())
-	return BoundingSphereFromJSObject(p, ba.ctx)
+func (b *BoundingSphere) Maximum() *Vector3 {
+	retVal := b.p.Get("maximum")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetMaximum sets the Maximum property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#maximum
 func (b *BoundingSphere) SetMaximum(maximum *Vector3) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(maximum.JSObject())
-	return BoundingSphereFromJSObject(p, ba.ctx)
+	b.p.Set("maximum", maximum.JSObject())
+	return b
 }
 
 // Minimum returns the Minimum property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#minimum
-func (b *BoundingSphere) Minimum(minimum *Vector3) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(minimum.JSObject())
-	return BoundingSphereFromJSObject(p, ba.ctx)
+func (b *BoundingSphere) Minimum() *Vector3 {
+	retVal := b.p.Get("minimum")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetMinimum sets the Minimum property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#minimum
 func (b *BoundingSphere) SetMinimum(minimum *Vector3) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(minimum.JSObject())
-	return BoundingSphereFromJSObject(p, ba.ctx)
+	b.p.Set("minimum", minimum.JSObject())
+	return b
 }
 
 // Radius returns the Radius property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#radius
-func (b *BoundingSphere) Radius(radius float64) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(radius)
-	return BoundingSphereFromJSObject(p, ba.ctx)
+func (b *BoundingSphere) Radius() float64 {
+	retVal := b.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#radius
 func (b *BoundingSphere) SetRadius(radius float64) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(radius)
-	return BoundingSphereFromJSObject(p, ba.ctx)
+	b.p.Set("radius", radius)
+	return b
 }
 
 // RadiusWorld returns the RadiusWorld property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#radiusworld
-func (b *BoundingSphere) RadiusWorld(radiusWorld float64) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(radiusWorld)
-	return BoundingSphereFromJSObject(p, ba.ctx)
+func (b *BoundingSphere) RadiusWorld() float64 {
+	retVal := b.p.Get("radiusWorld")
+	return retVal.Float()
 }
 
 // SetRadiusWorld sets the RadiusWorld property of class BoundingSphere.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere#radiusworld
 func (b *BoundingSphere) SetRadiusWorld(radiusWorld float64) *BoundingSphere {
-	p := ba.ctx.Get("BoundingSphere").New(radiusWorld)
-	return BoundingSphereFromJSObject(p, ba.ctx)
+	b.p.Set("radiusWorld", radiusWorld)
+	return b
 }
-
-*/

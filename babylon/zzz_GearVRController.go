@@ -75,54 +75,50 @@ func (g *GearVRController) InitControllerMesh(scene *Scene, opts *GearVRControll
 	g.p.Call("initControllerMesh", args...)
 }
 
-/*
-
 // GAMEPAD_ID_PREFIX returns the GAMEPAD_ID_PREFIX property of class GearVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#gamepad_id_prefix
-func (g *GearVRController) GAMEPAD_ID_PREFIX(GAMEPAD_ID_PREFIX string) *GearVRController {
-	p := ba.ctx.Get("GearVRController").New(GAMEPAD_ID_PREFIX)
-	return GearVRControllerFromJSObject(p, ba.ctx)
+func (g *GearVRController) GAMEPAD_ID_PREFIX() string {
+	retVal := g.p.Get("GAMEPAD_ID_PREFIX")
+	return retVal.String()
 }
 
 // SetGAMEPAD_ID_PREFIX sets the GAMEPAD_ID_PREFIX property of class GearVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#gamepad_id_prefix
 func (g *GearVRController) SetGAMEPAD_ID_PREFIX(GAMEPAD_ID_PREFIX string) *GearVRController {
-	p := ba.ctx.Get("GearVRController").New(GAMEPAD_ID_PREFIX)
-	return GearVRControllerFromJSObject(p, ba.ctx)
+	g.p.Set("GAMEPAD_ID_PREFIX", GAMEPAD_ID_PREFIX)
+	return g
 }
 
 // MODEL_BASE_URL returns the MODEL_BASE_URL property of class GearVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#model_base_url
-func (g *GearVRController) MODEL_BASE_URL(MODEL_BASE_URL string) *GearVRController {
-	p := ba.ctx.Get("GearVRController").New(MODEL_BASE_URL)
-	return GearVRControllerFromJSObject(p, ba.ctx)
+func (g *GearVRController) MODEL_BASE_URL() string {
+	retVal := g.p.Get("MODEL_BASE_URL")
+	return retVal.String()
 }
 
 // SetMODEL_BASE_URL sets the MODEL_BASE_URL property of class GearVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#model_base_url
 func (g *GearVRController) SetMODEL_BASE_URL(MODEL_BASE_URL string) *GearVRController {
-	p := ba.ctx.Get("GearVRController").New(MODEL_BASE_URL)
-	return GearVRControllerFromJSObject(p, ba.ctx)
+	g.p.Set("MODEL_BASE_URL", MODEL_BASE_URL)
+	return g
 }
 
 // MODEL_FILENAME returns the MODEL_FILENAME property of class GearVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#model_filename
-func (g *GearVRController) MODEL_FILENAME(MODEL_FILENAME string) *GearVRController {
-	p := ba.ctx.Get("GearVRController").New(MODEL_FILENAME)
-	return GearVRControllerFromJSObject(p, ba.ctx)
+func (g *GearVRController) MODEL_FILENAME() string {
+	retVal := g.p.Get("MODEL_FILENAME")
+	return retVal.String()
 }
 
 // SetMODEL_FILENAME sets the MODEL_FILENAME property of class GearVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#model_filename
 func (g *GearVRController) SetMODEL_FILENAME(MODEL_FILENAME string) *GearVRController {
-	p := ba.ctx.Get("GearVRController").New(MODEL_FILENAME)
-	return GearVRControllerFromJSObject(p, ba.ctx)
+	g.p.Set("MODEL_FILENAME", MODEL_FILENAME)
+	return g
 }
-
-*/

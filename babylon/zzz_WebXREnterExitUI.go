@@ -59,22 +59,18 @@ func (w *WebXREnterExitUI) Dispose() {
 	w.p.Call("dispose")
 }
 
-/*
-
 // ActiveButtonChangedObservable returns the ActiveButtonChangedObservable property of class WebXREnterExitUI.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexitui#activebuttonchangedobservable
-func (w *WebXREnterExitUI) ActiveButtonChangedObservable(activeButtonChangedObservable *Observable) *WebXREnterExitUI {
-	p := ba.ctx.Get("WebXREnterExitUI").New(activeButtonChangedObservable.JSObject())
-	return WebXREnterExitUIFromJSObject(p, ba.ctx)
+func (w *WebXREnterExitUI) ActiveButtonChangedObservable() *Observable {
+	retVal := w.p.Get("activeButtonChangedObservable")
+	return ObservableFromJSObject(retVal, w.ctx)
 }
 
 // SetActiveButtonChangedObservable sets the ActiveButtonChangedObservable property of class WebXREnterExitUI.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexitui#activebuttonchangedobservable
 func (w *WebXREnterExitUI) SetActiveButtonChangedObservable(activeButtonChangedObservable *Observable) *WebXREnterExitUI {
-	p := ba.ctx.Get("WebXREnterExitUI").New(activeButtonChangedObservable.JSObject())
-	return WebXREnterExitUIFromJSObject(p, ba.ctx)
+	w.p.Set("activeButtonChangedObservable", activeButtonChangedObservable.JSObject())
+	return w
 }
-
-*/

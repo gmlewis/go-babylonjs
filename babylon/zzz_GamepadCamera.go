@@ -62,7 +62,3 @@ func (g *GamepadCamera) GetClassName() string {
 	retVal := g.p.Call("getClassName")
 	return retVal.String()
 }
-
-/*
-
- */

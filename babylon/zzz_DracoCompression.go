@@ -109,70 +109,66 @@ func (d *DracoCompression) WhenReadyAsync() *Promise {
 	return PromiseFromJSObject(retVal, d.ctx)
 }
 
-/*
-
 // Configuration returns the Configuration property of class DracoCompression.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#configuration
-func (d *DracoCompression) Configuration(Configuration *IDracoCompressionConfiguration) *DracoCompression {
-	p := ba.ctx.Get("DracoCompression").New(Configuration.JSObject())
-	return DracoCompressionFromJSObject(p, ba.ctx)
+func (d *DracoCompression) Configuration() *IDracoCompressionConfiguration {
+	retVal := d.p.Get("Configuration")
+	return IDracoCompressionConfigurationFromJSObject(retVal, d.ctx)
 }
 
 // SetConfiguration sets the Configuration property of class DracoCompression.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#configuration
 func (d *DracoCompression) SetConfiguration(Configuration *IDracoCompressionConfiguration) *DracoCompression {
-	p := ba.ctx.Get("DracoCompression").New(Configuration.JSObject())
-	return DracoCompressionFromJSObject(p, ba.ctx)
+	d.p.Set("Configuration", Configuration.JSObject())
+	return d
 }
 
 // DecoderAvailable returns the DecoderAvailable property of class DracoCompression.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#decoderavailable
-func (d *DracoCompression) DecoderAvailable(DecoderAvailable bool) *DracoCompression {
-	p := ba.ctx.Get("DracoCompression").New(DecoderAvailable)
-	return DracoCompressionFromJSObject(p, ba.ctx)
+func (d *DracoCompression) DecoderAvailable() bool {
+	retVal := d.p.Get("DecoderAvailable")
+	return retVal.Bool()
 }
 
 // SetDecoderAvailable sets the DecoderAvailable property of class DracoCompression.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#decoderavailable
 func (d *DracoCompression) SetDecoderAvailable(DecoderAvailable bool) *DracoCompression {
-	p := ba.ctx.Get("DracoCompression").New(DecoderAvailable)
-	return DracoCompressionFromJSObject(p, ba.ctx)
+	d.p.Set("DecoderAvailable", DecoderAvailable)
+	return d
 }
 
 // Default returns the Default property of class DracoCompression.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#default
-func (d *DracoCompression) Default(Default *DracoCompression) *DracoCompression {
-	p := ba.ctx.Get("DracoCompression").New(Default.JSObject())
-	return DracoCompressionFromJSObject(p, ba.ctx)
+func (d *DracoCompression) Default() *DracoCompression {
+	retVal := d.p.Get("Default")
+	return DracoCompressionFromJSObject(retVal, d.ctx)
 }
 
 // SetDefault sets the Default property of class DracoCompression.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#default
 func (d *DracoCompression) SetDefault(Default *DracoCompression) *DracoCompression {
-	p := ba.ctx.Get("DracoCompression").New(Default.JSObject())
-	return DracoCompressionFromJSObject(p, ba.ctx)
+	d.p.Set("Default", Default.JSObject())
+	return d
 }
 
 // DefaultNumWorkers returns the DefaultNumWorkers property of class DracoCompression.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#defaultnumworkers
-func (d *DracoCompression) DefaultNumWorkers(DefaultNumWorkers float64) *DracoCompression {
-	p := ba.ctx.Get("DracoCompression").New(DefaultNumWorkers)
-	return DracoCompressionFromJSObject(p, ba.ctx)
+func (d *DracoCompression) DefaultNumWorkers() float64 {
+	retVal := d.p.Get("DefaultNumWorkers")
+	return retVal.Float()
 }
 
 // SetDefaultNumWorkers sets the DefaultNumWorkers property of class DracoCompression.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression#defaultnumworkers
 func (d *DracoCompression) SetDefaultNumWorkers(DefaultNumWorkers float64) *DracoCompression {
-	p := ba.ctx.Get("DracoCompression").New(DefaultNumWorkers)
-	return DracoCompressionFromJSObject(p, ba.ctx)
+	d.p.Set("DefaultNumWorkers", DefaultNumWorkers)
+	return d
 }
-
-*/

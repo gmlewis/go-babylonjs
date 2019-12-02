@@ -63,7 +63,3 @@ func (i *IcoSphereBuilder) CreateIcoSphere(name string, options js.Value, opts *
 	retVal := i.p.Call("CreateIcoSphere", args...)
 	return MeshFromJSObject(retVal, i.ctx)
 }
-
-/*
-
- */

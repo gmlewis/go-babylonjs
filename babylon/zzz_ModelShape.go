@@ -36,7 +36,3 @@ func ModelShapeArrayToJSArray(array []*ModelShape) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

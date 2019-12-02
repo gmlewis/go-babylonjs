@@ -111,86 +111,82 @@ func (f *FogBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial
 	f.p.Call("prepareDefines", args...)
 }
 
-/*
-
 // FogColor returns the FogColor property of class FogBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#fogcolor
-func (f *FogBlock) FogColor(fogColor *NodeMaterialConnectionPoint) *FogBlock {
-	p := ba.ctx.Get("FogBlock").New(fogColor.JSObject())
-	return FogBlockFromJSObject(p, ba.ctx)
+func (f *FogBlock) FogColor() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("fogColor")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetFogColor sets the FogColor property of class FogBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#fogcolor
 func (f *FogBlock) SetFogColor(fogColor *NodeMaterialConnectionPoint) *FogBlock {
-	p := ba.ctx.Get("FogBlock").New(fogColor.JSObject())
-	return FogBlockFromJSObject(p, ba.ctx)
+	f.p.Set("fogColor", fogColor.JSObject())
+	return f
 }
 
 // Input returns the Input property of class FogBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#input
-func (f *FogBlock) Input(input *NodeMaterialConnectionPoint) *FogBlock {
-	p := ba.ctx.Get("FogBlock").New(input.JSObject())
-	return FogBlockFromJSObject(p, ba.ctx)
+func (f *FogBlock) Input() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("input")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetInput sets the Input property of class FogBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#input
 func (f *FogBlock) SetInput(input *NodeMaterialConnectionPoint) *FogBlock {
-	p := ba.ctx.Get("FogBlock").New(input.JSObject())
-	return FogBlockFromJSObject(p, ba.ctx)
+	f.p.Set("input", input.JSObject())
+	return f
 }
 
 // Output returns the Output property of class FogBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#output
-func (f *FogBlock) Output(output *NodeMaterialConnectionPoint) *FogBlock {
-	p := ba.ctx.Get("FogBlock").New(output.JSObject())
-	return FogBlockFromJSObject(p, ba.ctx)
+func (f *FogBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetOutput sets the Output property of class FogBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#output
 func (f *FogBlock) SetOutput(output *NodeMaterialConnectionPoint) *FogBlock {
-	p := ba.ctx.Get("FogBlock").New(output.JSObject())
-	return FogBlockFromJSObject(p, ba.ctx)
+	f.p.Set("output", output.JSObject())
+	return f
 }
 
 // View returns the View property of class FogBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#view
-func (f *FogBlock) View(view *NodeMaterialConnectionPoint) *FogBlock {
-	p := ba.ctx.Get("FogBlock").New(view.JSObject())
-	return FogBlockFromJSObject(p, ba.ctx)
+func (f *FogBlock) View() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("view")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetView sets the View property of class FogBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#view
 func (f *FogBlock) SetView(view *NodeMaterialConnectionPoint) *FogBlock {
-	p := ba.ctx.Get("FogBlock").New(view.JSObject())
-	return FogBlockFromJSObject(p, ba.ctx)
+	f.p.Set("view", view.JSObject())
+	return f
 }
 
 // WorldPosition returns the WorldPosition property of class FogBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#worldposition
-func (f *FogBlock) WorldPosition(worldPosition *NodeMaterialConnectionPoint) *FogBlock {
-	p := ba.ctx.Get("FogBlock").New(worldPosition.JSObject())
-	return FogBlockFromJSObject(p, ba.ctx)
+func (f *FogBlock) WorldPosition() *NodeMaterialConnectionPoint {
+	retVal := f.p.Get("worldPosition")
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
 }
 
 // SetWorldPosition sets the WorldPosition property of class FogBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock#worldposition
 func (f *FogBlock) SetWorldPosition(worldPosition *NodeMaterialConnectionPoint) *FogBlock {
-	p := ba.ctx.Get("FogBlock").New(worldPosition.JSObject())
-	return FogBlockFromJSObject(p, ba.ctx)
+	f.p.Set("worldPosition", worldPosition.JSObject())
+	return f
 }
-
-*/

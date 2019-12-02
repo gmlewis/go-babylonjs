@@ -64,22 +64,18 @@ func (ba *Babylon) NewPowerEase(opts *NewPowerEaseOpts) *PowerEase {
 	return PowerEaseFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Power returns the Power property of class PowerEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powerease#power
-func (p *PowerEase) Power(power float64) *PowerEase {
-	p := ba.ctx.Get("PowerEase").New(power)
-	return PowerEaseFromJSObject(p, ba.ctx)
+func (p *PowerEase) Power() float64 {
+	retVal := p.p.Get("power")
+	return retVal.Float()
 }
 
 // SetPower sets the Power property of class PowerEase.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powerease#power
 func (p *PowerEase) SetPower(power float64) *PowerEase {
-	p := ba.ctx.Get("PowerEase").New(power)
-	return PowerEaseFromJSObject(p, ba.ctx)
+	p.p.Set("power", power)
+	return p
 }
-
-*/

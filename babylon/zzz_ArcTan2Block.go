@@ -58,54 +58,50 @@ func (a *ArcTan2Block) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Output returns the Output property of class ArcTan2Block.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block#output
-func (a *ArcTan2Block) Output(output *NodeMaterialConnectionPoint) *ArcTan2Block {
-	p := ba.ctx.Get("ArcTan2Block").New(output.JSObject())
-	return ArcTan2BlockFromJSObject(p, ba.ctx)
+func (a *ArcTan2Block) Output() *NodeMaterialConnectionPoint {
+	retVal := a.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, a.ctx)
 }
 
 // SetOutput sets the Output property of class ArcTan2Block.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block#output
 func (a *ArcTan2Block) SetOutput(output *NodeMaterialConnectionPoint) *ArcTan2Block {
-	p := ba.ctx.Get("ArcTan2Block").New(output.JSObject())
-	return ArcTan2BlockFromJSObject(p, ba.ctx)
+	a.p.Set("output", output.JSObject())
+	return a
 }
 
 // X returns the X property of class ArcTan2Block.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block#x
-func (a *ArcTan2Block) X(x *NodeMaterialConnectionPoint) *ArcTan2Block {
-	p := ba.ctx.Get("ArcTan2Block").New(x.JSObject())
-	return ArcTan2BlockFromJSObject(p, ba.ctx)
+func (a *ArcTan2Block) X() *NodeMaterialConnectionPoint {
+	retVal := a.p.Get("x")
+	return NodeMaterialConnectionPointFromJSObject(retVal, a.ctx)
 }
 
 // SetX sets the X property of class ArcTan2Block.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block#x
 func (a *ArcTan2Block) SetX(x *NodeMaterialConnectionPoint) *ArcTan2Block {
-	p := ba.ctx.Get("ArcTan2Block").New(x.JSObject())
-	return ArcTan2BlockFromJSObject(p, ba.ctx)
+	a.p.Set("x", x.JSObject())
+	return a
 }
 
 // Y returns the Y property of class ArcTan2Block.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block#y
-func (a *ArcTan2Block) Y(y *NodeMaterialConnectionPoint) *ArcTan2Block {
-	p := ba.ctx.Get("ArcTan2Block").New(y.JSObject())
-	return ArcTan2BlockFromJSObject(p, ba.ctx)
+func (a *ArcTan2Block) Y() *NodeMaterialConnectionPoint {
+	retVal := a.p.Get("y")
+	return NodeMaterialConnectionPointFromJSObject(retVal, a.ctx)
 }
 
 // SetY sets the Y property of class ArcTan2Block.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block#y
 func (a *ArcTan2Block) SetY(y *NodeMaterialConnectionPoint) *ArcTan2Block {
-	p := ba.ctx.Get("ArcTan2Block").New(y.JSObject())
-	return ArcTan2BlockFromJSObject(p, ba.ctx)
+	a.p.Set("y", y.JSObject())
+	return a
 }
-
-*/

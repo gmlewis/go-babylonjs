@@ -122,86 +122,82 @@ func (l *LightInformationBlock) _deserialize(serializationObject interface{}, sc
 	l.p.Call("_deserialize", args...)
 }
 
-/*
-
 // Color returns the Color property of class LightInformationBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#color
-func (l *LightInformationBlock) Color(color *NodeMaterialConnectionPoint) *LightInformationBlock {
-	p := ba.ctx.Get("LightInformationBlock").New(color.JSObject())
-	return LightInformationBlockFromJSObject(p, ba.ctx)
+func (l *LightInformationBlock) Color() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("color")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetColor sets the Color property of class LightInformationBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#color
 func (l *LightInformationBlock) SetColor(color *NodeMaterialConnectionPoint) *LightInformationBlock {
-	p := ba.ctx.Get("LightInformationBlock").New(color.JSObject())
-	return LightInformationBlockFromJSObject(p, ba.ctx)
+	l.p.Set("color", color.JSObject())
+	return l
 }
 
 // Direction returns the Direction property of class LightInformationBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#direction
-func (l *LightInformationBlock) Direction(direction *NodeMaterialConnectionPoint) *LightInformationBlock {
-	p := ba.ctx.Get("LightInformationBlock").New(direction.JSObject())
-	return LightInformationBlockFromJSObject(p, ba.ctx)
+func (l *LightInformationBlock) Direction() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("direction")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetDirection sets the Direction property of class LightInformationBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#direction
 func (l *LightInformationBlock) SetDirection(direction *NodeMaterialConnectionPoint) *LightInformationBlock {
-	p := ba.ctx.Get("LightInformationBlock").New(direction.JSObject())
-	return LightInformationBlockFromJSObject(p, ba.ctx)
+	l.p.Set("direction", direction.JSObject())
+	return l
 }
 
 // Intensity returns the Intensity property of class LightInformationBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#intensity
-func (l *LightInformationBlock) Intensity(intensity *NodeMaterialConnectionPoint) *LightInformationBlock {
-	p := ba.ctx.Get("LightInformationBlock").New(intensity.JSObject())
-	return LightInformationBlockFromJSObject(p, ba.ctx)
+func (l *LightInformationBlock) Intensity() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("intensity")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetIntensity sets the Intensity property of class LightInformationBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#intensity
 func (l *LightInformationBlock) SetIntensity(intensity *NodeMaterialConnectionPoint) *LightInformationBlock {
-	p := ba.ctx.Get("LightInformationBlock").New(intensity.JSObject())
-	return LightInformationBlockFromJSObject(p, ba.ctx)
+	l.p.Set("intensity", intensity.JSObject())
+	return l
 }
 
 // Light returns the Light property of class LightInformationBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#light
-func (l *LightInformationBlock) Light(light *Light) *LightInformationBlock {
-	p := ba.ctx.Get("LightInformationBlock").New(light.JSObject())
-	return LightInformationBlockFromJSObject(p, ba.ctx)
+func (l *LightInformationBlock) Light() *Light {
+	retVal := l.p.Get("light")
+	return LightFromJSObject(retVal, l.ctx)
 }
 
 // SetLight sets the Light property of class LightInformationBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#light
 func (l *LightInformationBlock) SetLight(light *Light) *LightInformationBlock {
-	p := ba.ctx.Get("LightInformationBlock").New(light.JSObject())
-	return LightInformationBlockFromJSObject(p, ba.ctx)
+	l.p.Set("light", light.JSObject())
+	return l
 }
 
 // WorldPosition returns the WorldPosition property of class LightInformationBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#worldposition
-func (l *LightInformationBlock) WorldPosition(worldPosition *NodeMaterialConnectionPoint) *LightInformationBlock {
-	p := ba.ctx.Get("LightInformationBlock").New(worldPosition.JSObject())
-	return LightInformationBlockFromJSObject(p, ba.ctx)
+func (l *LightInformationBlock) WorldPosition() *NodeMaterialConnectionPoint {
+	retVal := l.p.Get("worldPosition")
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
 }
 
 // SetWorldPosition sets the WorldPosition property of class LightInformationBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#worldposition
 func (l *LightInformationBlock) SetWorldPosition(worldPosition *NodeMaterialConnectionPoint) *LightInformationBlock {
-	p := ba.ctx.Get("LightInformationBlock").New(worldPosition.JSObject())
-	return LightInformationBlockFromJSObject(p, ba.ctx)
+	l.p.Set("worldPosition", worldPosition.JSObject())
+	return l
 }
-
-*/

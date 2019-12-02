@@ -36,54 +36,50 @@ func AxisArrayToJSArray(array []*Axis) []interface{} {
 	return result
 }
 
-/*
-
 // X returns the X property of class Axis.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axis#x
-func (a *Axis) X(X *Vector3) *Axis {
-	p := ba.ctx.Get("Axis").New(X.JSObject())
-	return AxisFromJSObject(p, ba.ctx)
+func (a *Axis) X() *Vector3 {
+	retVal := a.p.Get("X")
+	return Vector3FromJSObject(retVal, a.ctx)
 }
 
 // SetX sets the X property of class Axis.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axis#x
 func (a *Axis) SetX(X *Vector3) *Axis {
-	p := ba.ctx.Get("Axis").New(X.JSObject())
-	return AxisFromJSObject(p, ba.ctx)
+	a.p.Set("X", X.JSObject())
+	return a
 }
 
 // Y returns the Y property of class Axis.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axis#y
-func (a *Axis) Y(Y *Vector3) *Axis {
-	p := ba.ctx.Get("Axis").New(Y.JSObject())
-	return AxisFromJSObject(p, ba.ctx)
+func (a *Axis) Y() *Vector3 {
+	retVal := a.p.Get("Y")
+	return Vector3FromJSObject(retVal, a.ctx)
 }
 
 // SetY sets the Y property of class Axis.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axis#y
 func (a *Axis) SetY(Y *Vector3) *Axis {
-	p := ba.ctx.Get("Axis").New(Y.JSObject())
-	return AxisFromJSObject(p, ba.ctx)
+	a.p.Set("Y", Y.JSObject())
+	return a
 }
 
 // Z returns the Z property of class Axis.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axis#z
-func (a *Axis) Z(Z *Vector3) *Axis {
-	p := ba.ctx.Get("Axis").New(Z.JSObject())
-	return AxisFromJSObject(p, ba.ctx)
+func (a *Axis) Z() *Vector3 {
+	retVal := a.p.Get("Z")
+	return Vector3FromJSObject(retVal, a.ctx)
 }
 
 // SetZ sets the Z property of class Axis.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axis#z
 func (a *Axis) SetZ(Z *Vector3) *Axis {
-	p := ba.ctx.Get("Axis").New(Z.JSObject())
-	return AxisFromJSObject(p, ba.ctx)
+	a.p.Set("Z", Z.JSObject())
+	return a
 }
-
-*/

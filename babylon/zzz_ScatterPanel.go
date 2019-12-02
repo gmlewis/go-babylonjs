@@ -47,22 +47,18 @@ func (ba *Babylon) NewScatterPanel() *ScatterPanel {
 	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Iteration returns the Iteration property of class ScatterPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#iteration
-func (s *ScatterPanel) Iteration(iteration float64) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(iteration)
-	return ScatterPanelFromJSObject(p, ba.ctx)
+func (s *ScatterPanel) Iteration() float64 {
+	retVal := s.p.Get("iteration")
+	return retVal.Float()
 }
 
 // SetIteration sets the Iteration property of class ScatterPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel#iteration
 func (s *ScatterPanel) SetIteration(iteration float64) *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel").New(iteration)
-	return ScatterPanelFromJSObject(p, ba.ctx)
+	s.p.Set("iteration", iteration)
+	return s
 }
-
-*/

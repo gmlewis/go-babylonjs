@@ -252,150 +252,146 @@ func (s *SelectionPanel) SetHeaderName(label string, groupNb float64) {
 	s.p.Call("setHeaderName", args...)
 }
 
-/*
-
 // BarColor returns the BarColor property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#barcolor
-func (s *SelectionPanel) BarColor(barColor string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(barColor)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+func (s *SelectionPanel) BarColor() string {
+	retVal := s.p.Get("barColor")
+	return retVal.String()
 }
 
 // SetBarColor sets the BarColor property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#barcolor
 func (s *SelectionPanel) SetBarColor(barColor string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(barColor)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+	s.p.Set("barColor", barColor)
+	return s
 }
 
 // BarHeight returns the BarHeight property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#barheight
-func (s *SelectionPanel) BarHeight(barHeight string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(barHeight)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+func (s *SelectionPanel) BarHeight() string {
+	retVal := s.p.Get("barHeight")
+	return retVal.String()
 }
 
 // SetBarHeight sets the BarHeight property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#barheight
 func (s *SelectionPanel) SetBarHeight(barHeight string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(barHeight)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+	s.p.Set("barHeight", barHeight)
+	return s
 }
 
 // ButtonBackground returns the ButtonBackground property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#buttonbackground
-func (s *SelectionPanel) ButtonBackground(buttonBackground string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(buttonBackground)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+func (s *SelectionPanel) ButtonBackground() string {
+	retVal := s.p.Get("buttonBackground")
+	return retVal.String()
 }
 
 // SetButtonBackground sets the ButtonBackground property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#buttonbackground
 func (s *SelectionPanel) SetButtonBackground(buttonBackground string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(buttonBackground)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+	s.p.Set("buttonBackground", buttonBackground)
+	return s
 }
 
 // ButtonColor returns the ButtonColor property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#buttoncolor
-func (s *SelectionPanel) ButtonColor(buttonColor string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(buttonColor)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+func (s *SelectionPanel) ButtonColor() string {
+	retVal := s.p.Get("buttonColor")
+	return retVal.String()
 }
 
 // SetButtonColor sets the ButtonColor property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#buttoncolor
 func (s *SelectionPanel) SetButtonColor(buttonColor string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(buttonColor)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+	s.p.Set("buttonColor", buttonColor)
+	return s
 }
 
 // Groups returns the Groups property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#groups
-func (s *SelectionPanel) Groups(groups *SelectorGroup) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(groups.JSObject())
-	return SelectionPanelFromJSObject(p, ba.ctx)
+func (s *SelectionPanel) Groups() *SelectorGroup {
+	retVal := s.p.Get("groups")
+	return SelectorGroupFromJSObject(retVal, s.ctx)
 }
 
 // SetGroups sets the Groups property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#groups
 func (s *SelectionPanel) SetGroups(groups *SelectorGroup) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(groups.JSObject())
-	return SelectionPanelFromJSObject(p, ba.ctx)
+	s.p.Set("groups", groups.JSObject())
+	return s
 }
 
 // HeaderColor returns the HeaderColor property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#headercolor
-func (s *SelectionPanel) HeaderColor(headerColor string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(headerColor)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+func (s *SelectionPanel) HeaderColor() string {
+	retVal := s.p.Get("headerColor")
+	return retVal.String()
 }
 
 // SetHeaderColor sets the HeaderColor property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#headercolor
 func (s *SelectionPanel) SetHeaderColor(headerColor string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(headerColor)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+	s.p.Set("headerColor", headerColor)
+	return s
 }
 
 // LabelColor returns the LabelColor property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#labelcolor
-func (s *SelectionPanel) LabelColor(labelColor string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(labelColor)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+func (s *SelectionPanel) LabelColor() string {
+	retVal := s.p.Get("labelColor")
+	return retVal.String()
 }
 
 // SetLabelColor sets the LabelColor property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#labelcolor
 func (s *SelectionPanel) SetLabelColor(labelColor string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(labelColor)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+	s.p.Set("labelColor", labelColor)
+	return s
 }
 
 // Name returns the Name property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#name
-func (s *SelectionPanel) Name(name string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(name)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+func (s *SelectionPanel) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#name
 func (s *SelectionPanel) SetName(name string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(name)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
 
 // SpacerHeight returns the SpacerHeight property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#spacerheight
-func (s *SelectionPanel) SpacerHeight(spacerHeight string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(spacerHeight)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+func (s *SelectionPanel) SpacerHeight() string {
+	retVal := s.p.Get("spacerHeight")
+	return retVal.String()
 }
 
 // SetSpacerHeight sets the SpacerHeight property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#spacerheight
 func (s *SelectionPanel) SetSpacerHeight(spacerHeight string) *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel").New(spacerHeight)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+	s.p.Set("spacerHeight", spacerHeight)
+	return s
 }
-
-*/

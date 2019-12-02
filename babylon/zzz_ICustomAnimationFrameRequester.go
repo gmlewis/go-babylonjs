@@ -36,54 +36,50 @@ func ICustomAnimationFrameRequesterArrayToJSArray(array []*ICustomAnimationFrame
 	return result
 }
 
-/*
-
 // RenderFunction returns the RenderFunction property of class ICustomAnimationFrameRequester.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomanimationframerequester#renderfunction
-func (i *ICustomAnimationFrameRequester) RenderFunction(renderFunction func()) *ICustomAnimationFrameRequester {
-	p := ba.ctx.Get("ICustomAnimationFrameRequester").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {renderFunction(); return nil}))
-	return ICustomAnimationFrameRequesterFromJSObject(p, ba.ctx)
+func (i *ICustomAnimationFrameRequester) RenderFunction() js.Value {
+	retVal := i.p.Get("renderFunction")
+	return retVal
 }
 
 // SetRenderFunction sets the RenderFunction property of class ICustomAnimationFrameRequester.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomanimationframerequester#renderfunction
 func (i *ICustomAnimationFrameRequester) SetRenderFunction(renderFunction func()) *ICustomAnimationFrameRequester {
-	p := ba.ctx.Get("ICustomAnimationFrameRequester").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {renderFunction(); return nil}))
-	return ICustomAnimationFrameRequesterFromJSObject(p, ba.ctx)
+	i.p.Set("renderFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { renderFunction(); return nil }))
+	return i
 }
 
 // RequestAnimationFrame returns the RequestAnimationFrame property of class ICustomAnimationFrameRequester.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomanimationframerequester#requestanimationframe
-func (i *ICustomAnimationFrameRequester) RequestAnimationFrame(requestAnimationFrame func()) *ICustomAnimationFrameRequester {
-	p := ba.ctx.Get("ICustomAnimationFrameRequester").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {requestAnimationFrame(); return nil}))
-	return ICustomAnimationFrameRequesterFromJSObject(p, ba.ctx)
+func (i *ICustomAnimationFrameRequester) RequestAnimationFrame() js.Value {
+	retVal := i.p.Get("requestAnimationFrame")
+	return retVal
 }
 
 // SetRequestAnimationFrame sets the RequestAnimationFrame property of class ICustomAnimationFrameRequester.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomanimationframerequester#requestanimationframe
 func (i *ICustomAnimationFrameRequester) SetRequestAnimationFrame(requestAnimationFrame func()) *ICustomAnimationFrameRequester {
-	p := ba.ctx.Get("ICustomAnimationFrameRequester").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {requestAnimationFrame(); return nil}))
-	return ICustomAnimationFrameRequesterFromJSObject(p, ba.ctx)
+	i.p.Set("requestAnimationFrame", js.FuncOf(func(this js.Value, args []js.Value) interface{} { requestAnimationFrame(); return nil }))
+	return i
 }
 
 // RequestID returns the RequestID property of class ICustomAnimationFrameRequester.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomanimationframerequester#requestid
-func (i *ICustomAnimationFrameRequester) RequestID(requestID float64) *ICustomAnimationFrameRequester {
-	p := ba.ctx.Get("ICustomAnimationFrameRequester").New(requestID)
-	return ICustomAnimationFrameRequesterFromJSObject(p, ba.ctx)
+func (i *ICustomAnimationFrameRequester) RequestID() float64 {
+	retVal := i.p.Get("requestID")
+	return retVal.Float()
 }
 
 // SetRequestID sets the RequestID property of class ICustomAnimationFrameRequester.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomanimationframerequester#requestid
 func (i *ICustomAnimationFrameRequester) SetRequestID(requestID float64) *ICustomAnimationFrameRequester {
-	p := ba.ctx.Get("ICustomAnimationFrameRequester").New(requestID)
-	return ICustomAnimationFrameRequesterFromJSObject(p, ba.ctx)
+	i.p.Set("requestID", requestID)
+	return i
 }
-
-*/

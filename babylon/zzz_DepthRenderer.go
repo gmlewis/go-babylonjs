@@ -107,38 +107,34 @@ func (d *DepthRenderer) IsReady(subMesh *SubMesh, useInstances bool) bool {
 	return retVal.Bool()
 }
 
-/*
-
 // IsPacked returns the IsPacked property of class DepthRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrenderer#ispacked
-func (d *DepthRenderer) IsPacked(isPacked bool) *DepthRenderer {
-	p := ba.ctx.Get("DepthRenderer").New(isPacked)
-	return DepthRendererFromJSObject(p, ba.ctx)
+func (d *DepthRenderer) IsPacked() bool {
+	retVal := d.p.Get("isPacked")
+	return retVal.Bool()
 }
 
 // SetIsPacked sets the IsPacked property of class DepthRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrenderer#ispacked
 func (d *DepthRenderer) SetIsPacked(isPacked bool) *DepthRenderer {
-	p := ba.ctx.Get("DepthRenderer").New(isPacked)
-	return DepthRendererFromJSObject(p, ba.ctx)
+	d.p.Set("isPacked", isPacked)
+	return d
 }
 
 // UseOnlyInActiveCamera returns the UseOnlyInActiveCamera property of class DepthRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrenderer#useonlyinactivecamera
-func (d *DepthRenderer) UseOnlyInActiveCamera(useOnlyInActiveCamera bool) *DepthRenderer {
-	p := ba.ctx.Get("DepthRenderer").New(useOnlyInActiveCamera)
-	return DepthRendererFromJSObject(p, ba.ctx)
+func (d *DepthRenderer) UseOnlyInActiveCamera() bool {
+	retVal := d.p.Get("useOnlyInActiveCamera")
+	return retVal.Bool()
 }
 
 // SetUseOnlyInActiveCamera sets the UseOnlyInActiveCamera property of class DepthRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrenderer#useonlyinactivecamera
 func (d *DepthRenderer) SetUseOnlyInActiveCamera(useOnlyInActiveCamera bool) *DepthRenderer {
-	p := ba.ctx.Get("DepthRenderer").New(useOnlyInActiveCamera)
-	return DepthRendererFromJSObject(p, ba.ctx)
+	d.p.Set("useOnlyInActiveCamera", useOnlyInActiveCamera)
+	return d
 }
-
-*/

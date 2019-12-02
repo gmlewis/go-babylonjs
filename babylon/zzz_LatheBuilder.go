@@ -63,7 +63,3 @@ func (l *LatheBuilder) CreateLathe(name string, options js.Value, opts *LatheBui
 	retVal := l.p.Call("CreateLathe", args...)
 	return MeshFromJSObject(retVal, l.ctx)
 }
-
-/*
-
- */

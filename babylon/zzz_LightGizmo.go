@@ -69,38 +69,34 @@ func (l *LightGizmo) Dispose() {
 	l.p.Call("dispose")
 }
 
-/*
-
 // Light returns the Light property of class LightGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightgizmo#light
-func (l *LightGizmo) Light(light *Light) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(light.JSObject())
-	return LightGizmoFromJSObject(p, ba.ctx)
+func (l *LightGizmo) Light() *Light {
+	retVal := l.p.Get("light")
+	return LightFromJSObject(retVal, l.ctx)
 }
 
 // SetLight sets the Light property of class LightGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightgizmo#light
 func (l *LightGizmo) SetLight(light *Light) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(light.JSObject())
-	return LightGizmoFromJSObject(p, ba.ctx)
+	l.p.Set("light", light.JSObject())
+	return l
 }
 
 // Material returns the Material property of class LightGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightgizmo#material
-func (l *LightGizmo) Material(material *StandardMaterial) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(material.JSObject())
-	return LightGizmoFromJSObject(p, ba.ctx)
+func (l *LightGizmo) Material() *StandardMaterial {
+	retVal := l.p.Get("material")
+	return StandardMaterialFromJSObject(retVal, l.ctx)
 }
 
 // SetMaterial sets the Material property of class LightGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightgizmo#material
 func (l *LightGizmo) SetMaterial(material *StandardMaterial) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(material.JSObject())
-	return LightGizmoFromJSObject(p, ba.ctx)
+	l.p.Set("material", material.JSObject())
+	return l
 }
-
-*/

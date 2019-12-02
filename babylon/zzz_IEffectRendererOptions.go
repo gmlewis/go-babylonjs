@@ -36,38 +36,34 @@ func IEffectRendererOptionsArrayToJSArray(array []*IEffectRendererOptions) []int
 	return result
 }
 
-/*
-
 // Indices returns the Indices property of class IEffectRendererOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectrendereroptions#indices
-func (i *IEffectRendererOptions) Indices(indices float64) *IEffectRendererOptions {
-	p := ba.ctx.Get("IEffectRendererOptions").New(indices)
-	return IEffectRendererOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectRendererOptions) Indices() float64 {
+	retVal := i.p.Get("indices")
+	return retVal.Float()
 }
 
 // SetIndices sets the Indices property of class IEffectRendererOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectrendereroptions#indices
 func (i *IEffectRendererOptions) SetIndices(indices float64) *IEffectRendererOptions {
-	p := ba.ctx.Get("IEffectRendererOptions").New(indices)
-	return IEffectRendererOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("indices", indices)
+	return i
 }
 
 // Positions returns the Positions property of class IEffectRendererOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectrendereroptions#positions
-func (i *IEffectRendererOptions) Positions(positions float64) *IEffectRendererOptions {
-	p := ba.ctx.Get("IEffectRendererOptions").New(positions)
-	return IEffectRendererOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectRendererOptions) Positions() float64 {
+	retVal := i.p.Get("positions")
+	return retVal.Float()
 }
 
 // SetPositions sets the Positions property of class IEffectRendererOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectrendereroptions#positions
 func (i *IEffectRendererOptions) SetPositions(positions float64) *IEffectRendererOptions {
-	p := ba.ctx.Get("IEffectRendererOptions").New(positions)
-	return IEffectRendererOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("positions", positions)
+	return i
 }
-
-*/

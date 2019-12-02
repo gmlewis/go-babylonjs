@@ -36,118 +36,114 @@ func IAgentParametersArrayToJSArray(array []*IAgentParameters) []interface{} {
 	return result
 }
 
-/*
-
 // CollisionQueryRange returns the CollisionQueryRange property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#collisionqueryrange
-func (i *IAgentParameters) CollisionQueryRange(collisionQueryRange float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(collisionQueryRange)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+func (i *IAgentParameters) CollisionQueryRange() float64 {
+	retVal := i.p.Get("collisionQueryRange")
+	return retVal.Float()
 }
 
 // SetCollisionQueryRange sets the CollisionQueryRange property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#collisionqueryrange
 func (i *IAgentParameters) SetCollisionQueryRange(collisionQueryRange float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(collisionQueryRange)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+	i.p.Set("collisionQueryRange", collisionQueryRange)
+	return i
 }
 
 // Height returns the Height property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#height
-func (i *IAgentParameters) Height(height float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(height)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+func (i *IAgentParameters) Height() float64 {
+	retVal := i.p.Get("height")
+	return retVal.Float()
 }
 
 // SetHeight sets the Height property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#height
 func (i *IAgentParameters) SetHeight(height float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(height)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+	i.p.Set("height", height)
+	return i
 }
 
 // MaxAcceleration returns the MaxAcceleration property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#maxacceleration
-func (i *IAgentParameters) MaxAcceleration(maxAcceleration float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(maxAcceleration)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+func (i *IAgentParameters) MaxAcceleration() float64 {
+	retVal := i.p.Get("maxAcceleration")
+	return retVal.Float()
 }
 
 // SetMaxAcceleration sets the MaxAcceleration property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#maxacceleration
 func (i *IAgentParameters) SetMaxAcceleration(maxAcceleration float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(maxAcceleration)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+	i.p.Set("maxAcceleration", maxAcceleration)
+	return i
 }
 
 // MaxSpeed returns the MaxSpeed property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#maxspeed
-func (i *IAgentParameters) MaxSpeed(maxSpeed float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(maxSpeed)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+func (i *IAgentParameters) MaxSpeed() float64 {
+	retVal := i.p.Get("maxSpeed")
+	return retVal.Float()
 }
 
 // SetMaxSpeed sets the MaxSpeed property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#maxspeed
 func (i *IAgentParameters) SetMaxSpeed(maxSpeed float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(maxSpeed)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+	i.p.Set("maxSpeed", maxSpeed)
+	return i
 }
 
 // PathOptimizationRange returns the PathOptimizationRange property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#pathoptimizationrange
-func (i *IAgentParameters) PathOptimizationRange(pathOptimizationRange float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(pathOptimizationRange)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+func (i *IAgentParameters) PathOptimizationRange() float64 {
+	retVal := i.p.Get("pathOptimizationRange")
+	return retVal.Float()
 }
 
 // SetPathOptimizationRange sets the PathOptimizationRange property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#pathoptimizationrange
 func (i *IAgentParameters) SetPathOptimizationRange(pathOptimizationRange float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(pathOptimizationRange)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+	i.p.Set("pathOptimizationRange", pathOptimizationRange)
+	return i
 }
 
 // Radius returns the Radius property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#radius
-func (i *IAgentParameters) Radius(radius float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(radius)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+func (i *IAgentParameters) Radius() float64 {
+	retVal := i.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#radius
 func (i *IAgentParameters) SetRadius(radius float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(radius)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+	i.p.Set("radius", radius)
+	return i
 }
 
 // SeparationWeight returns the SeparationWeight property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#separationweight
-func (i *IAgentParameters) SeparationWeight(separationWeight float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(separationWeight)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+func (i *IAgentParameters) SeparationWeight() float64 {
+	retVal := i.p.Get("separationWeight")
+	return retVal.Float()
 }
 
 // SetSeparationWeight sets the SeparationWeight property of class IAgentParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iagentparameters#separationweight
 func (i *IAgentParameters) SetSeparationWeight(separationWeight float64) *IAgentParameters {
-	p := ba.ctx.Get("IAgentParameters").New(separationWeight)
-	return IAgentParametersFromJSObject(p, ba.ctx)
+	i.p.Set("separationWeight", separationWeight)
+	return i
 }
-
-*/

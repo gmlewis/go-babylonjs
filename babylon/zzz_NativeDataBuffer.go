@@ -36,38 +36,34 @@ func NativeDataBufferArrayToJSArray(array []*NativeDataBuffer) []interface{} {
 	return result
 }
 
-/*
-
 // NativeIndexBuffer returns the NativeIndexBuffer property of class NativeDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#nativeindexbuffer
-func (n *NativeDataBuffer) NativeIndexBuffer(nativeIndexBuffer interface{}) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(nativeIndexBuffer)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
+func (n *NativeDataBuffer) NativeIndexBuffer() interface{} {
+	retVal := n.p.Get("nativeIndexBuffer")
+	return retVal
 }
 
 // SetNativeIndexBuffer sets the NativeIndexBuffer property of class NativeDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#nativeindexbuffer
 func (n *NativeDataBuffer) SetNativeIndexBuffer(nativeIndexBuffer interface{}) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(nativeIndexBuffer)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
+	n.p.Set("nativeIndexBuffer", nativeIndexBuffer)
+	return n
 }
 
 // NativeVertexBuffer returns the NativeVertexBuffer property of class NativeDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#nativevertexbuffer
-func (n *NativeDataBuffer) NativeVertexBuffer(nativeVertexBuffer interface{}) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(nativeVertexBuffer)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
+func (n *NativeDataBuffer) NativeVertexBuffer() interface{} {
+	retVal := n.p.Get("nativeVertexBuffer")
+	return retVal
 }
 
 // SetNativeVertexBuffer sets the NativeVertexBuffer property of class NativeDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#nativevertexbuffer
 func (n *NativeDataBuffer) SetNativeVertexBuffer(nativeVertexBuffer interface{}) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(nativeVertexBuffer)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
+	n.p.Set("nativeVertexBuffer", nativeVertexBuffer)
+	return n
 }
-
-*/

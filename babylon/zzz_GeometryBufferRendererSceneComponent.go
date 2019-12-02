@@ -74,38 +74,34 @@ func (g *GeometryBufferRendererSceneComponent) Register() {
 	g.p.Call("register")
 }
 
-/*
-
 // Name returns the Name property of class GeometryBufferRendererSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#name
-func (g *GeometryBufferRendererSceneComponent) Name(name string) *GeometryBufferRendererSceneComponent {
-	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(name)
-	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
+func (g *GeometryBufferRendererSceneComponent) Name() string {
+	retVal := g.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class GeometryBufferRendererSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#name
 func (g *GeometryBufferRendererSceneComponent) SetName(name string) *GeometryBufferRendererSceneComponent {
-	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(name)
-	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
+	g.p.Set("name", name)
+	return g
 }
 
 // Scene returns the Scene property of class GeometryBufferRendererSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#scene
-func (g *GeometryBufferRendererSceneComponent) Scene(scene *Scene) *GeometryBufferRendererSceneComponent {
-	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(scene.JSObject())
-	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
+func (g *GeometryBufferRendererSceneComponent) Scene() *Scene {
+	retVal := g.p.Get("scene")
+	return SceneFromJSObject(retVal, g.ctx)
 }
 
 // SetScene sets the Scene property of class GeometryBufferRendererSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#scene
 func (g *GeometryBufferRendererSceneComponent) SetScene(scene *Scene) *GeometryBufferRendererSceneComponent {
-	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(scene.JSObject())
-	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
+	g.p.Set("scene", scene.JSObject())
+	return g
 }
-
-*/

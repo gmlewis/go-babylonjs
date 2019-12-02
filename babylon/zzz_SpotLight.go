@@ -139,150 +139,146 @@ func (s *SpotLight) TransferToNodeMaterialEffect(effect *Effect, lightDataUnifor
 	return SpotLightFromJSObject(retVal, s.ctx)
 }
 
-/*
-
 // Angle returns the Angle property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#angle
-func (s *SpotLight) Angle(angle float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(angle)
-	return SpotLightFromJSObject(p, ba.ctx)
+func (s *SpotLight) Angle() float64 {
+	retVal := s.p.Get("angle")
+	return retVal.Float()
 }
 
 // SetAngle sets the Angle property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#angle
 func (s *SpotLight) SetAngle(angle float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(angle)
-	return SpotLightFromJSObject(p, ba.ctx)
+	s.p.Set("angle", angle)
+	return s
 }
 
 // Exponent returns the Exponent property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#exponent
-func (s *SpotLight) Exponent(exponent float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(exponent)
-	return SpotLightFromJSObject(p, ba.ctx)
+func (s *SpotLight) Exponent() float64 {
+	retVal := s.p.Get("exponent")
+	return retVal.Float()
 }
 
 // SetExponent sets the Exponent property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#exponent
 func (s *SpotLight) SetExponent(exponent float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(exponent)
-	return SpotLightFromJSObject(p, ba.ctx)
+	s.p.Set("exponent", exponent)
+	return s
 }
 
 // InnerAngle returns the InnerAngle property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#innerangle
-func (s *SpotLight) InnerAngle(innerAngle float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(innerAngle)
-	return SpotLightFromJSObject(p, ba.ctx)
+func (s *SpotLight) InnerAngle() float64 {
+	retVal := s.p.Get("innerAngle")
+	return retVal.Float()
 }
 
 // SetInnerAngle sets the InnerAngle property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#innerangle
 func (s *SpotLight) SetInnerAngle(innerAngle float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(innerAngle)
-	return SpotLightFromJSObject(p, ba.ctx)
+	s.p.Set("innerAngle", innerAngle)
+	return s
 }
 
 // ProjectionTexture returns the ProjectionTexture property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#projectiontexture
-func (s *SpotLight) ProjectionTexture(projectionTexture *BaseTexture) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(projectionTexture.JSObject())
-	return SpotLightFromJSObject(p, ba.ctx)
+func (s *SpotLight) ProjectionTexture() *BaseTexture {
+	retVal := s.p.Get("projectionTexture")
+	return BaseTextureFromJSObject(retVal, s.ctx)
 }
 
 // SetProjectionTexture sets the ProjectionTexture property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#projectiontexture
 func (s *SpotLight) SetProjectionTexture(projectionTexture *BaseTexture) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(projectionTexture.JSObject())
-	return SpotLightFromJSObject(p, ba.ctx)
+	s.p.Set("projectionTexture", projectionTexture.JSObject())
+	return s
 }
 
 // ProjectionTextureLightFar returns the ProjectionTextureLightFar property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#projectiontexturelightfar
-func (s *SpotLight) ProjectionTextureLightFar(projectionTextureLightFar float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(projectionTextureLightFar)
-	return SpotLightFromJSObject(p, ba.ctx)
+func (s *SpotLight) ProjectionTextureLightFar() float64 {
+	retVal := s.p.Get("projectionTextureLightFar")
+	return retVal.Float()
 }
 
 // SetProjectionTextureLightFar sets the ProjectionTextureLightFar property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#projectiontexturelightfar
 func (s *SpotLight) SetProjectionTextureLightFar(projectionTextureLightFar float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(projectionTextureLightFar)
-	return SpotLightFromJSObject(p, ba.ctx)
+	s.p.Set("projectionTextureLightFar", projectionTextureLightFar)
+	return s
 }
 
 // ProjectionTextureLightNear returns the ProjectionTextureLightNear property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#projectiontexturelightnear
-func (s *SpotLight) ProjectionTextureLightNear(projectionTextureLightNear float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(projectionTextureLightNear)
-	return SpotLightFromJSObject(p, ba.ctx)
+func (s *SpotLight) ProjectionTextureLightNear() float64 {
+	retVal := s.p.Get("projectionTextureLightNear")
+	return retVal.Float()
 }
 
 // SetProjectionTextureLightNear sets the ProjectionTextureLightNear property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#projectiontexturelightnear
 func (s *SpotLight) SetProjectionTextureLightNear(projectionTextureLightNear float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(projectionTextureLightNear)
-	return SpotLightFromJSObject(p, ba.ctx)
+	s.p.Set("projectionTextureLightNear", projectionTextureLightNear)
+	return s
 }
 
 // ProjectionTextureMatrix returns the ProjectionTextureMatrix property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#projectiontexturematrix
-func (s *SpotLight) ProjectionTextureMatrix(projectionTextureMatrix *Matrix) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(projectionTextureMatrix.JSObject())
-	return SpotLightFromJSObject(p, ba.ctx)
+func (s *SpotLight) ProjectionTextureMatrix() *Matrix {
+	retVal := s.p.Get("projectionTextureMatrix")
+	return MatrixFromJSObject(retVal, s.ctx)
 }
 
 // SetProjectionTextureMatrix sets the ProjectionTextureMatrix property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#projectiontexturematrix
 func (s *SpotLight) SetProjectionTextureMatrix(projectionTextureMatrix *Matrix) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(projectionTextureMatrix.JSObject())
-	return SpotLightFromJSObject(p, ba.ctx)
+	s.p.Set("projectionTextureMatrix", projectionTextureMatrix.JSObject())
+	return s
 }
 
 // ProjectionTextureUpDirection returns the ProjectionTextureUpDirection property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#projectiontextureupdirection
-func (s *SpotLight) ProjectionTextureUpDirection(projectionTextureUpDirection *Vector3) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(projectionTextureUpDirection.JSObject())
-	return SpotLightFromJSObject(p, ba.ctx)
+func (s *SpotLight) ProjectionTextureUpDirection() *Vector3 {
+	retVal := s.p.Get("projectionTextureUpDirection")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetProjectionTextureUpDirection sets the ProjectionTextureUpDirection property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#projectiontextureupdirection
 func (s *SpotLight) SetProjectionTextureUpDirection(projectionTextureUpDirection *Vector3) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(projectionTextureUpDirection.JSObject())
-	return SpotLightFromJSObject(p, ba.ctx)
+	s.p.Set("projectionTextureUpDirection", projectionTextureUpDirection.JSObject())
+	return s
 }
 
 // ShadowAngleScale returns the ShadowAngleScale property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#shadowanglescale
-func (s *SpotLight) ShadowAngleScale(shadowAngleScale float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(shadowAngleScale)
-	return SpotLightFromJSObject(p, ba.ctx)
+func (s *SpotLight) ShadowAngleScale() float64 {
+	retVal := s.p.Get("shadowAngleScale")
+	return retVal.Float()
 }
 
 // SetShadowAngleScale sets the ShadowAngleScale property of class SpotLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#shadowanglescale
 func (s *SpotLight) SetShadowAngleScale(shadowAngleScale float64) *SpotLight {
-	p := ba.ctx.Get("SpotLight").New(shadowAngleScale)
-	return SpotLightFromJSObject(p, ba.ctx)
+	s.p.Set("shadowAngleScale", shadowAngleScale)
+	return s
 }
-
-*/

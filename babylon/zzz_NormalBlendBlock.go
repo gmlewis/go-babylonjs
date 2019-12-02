@@ -58,54 +58,50 @@ func (n *NormalBlendBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // NormalMap0 returns the NormalMap0 property of class NormalBlendBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock#normalmap0
-func (n *NormalBlendBlock) NormalMap0(normalMap0 *NodeMaterialConnectionPoint) *NormalBlendBlock {
-	p := ba.ctx.Get("NormalBlendBlock").New(normalMap0.JSObject())
-	return NormalBlendBlockFromJSObject(p, ba.ctx)
+func (n *NormalBlendBlock) NormalMap0() *NodeMaterialConnectionPoint {
+	retVal := n.p.Get("normalMap0")
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
 }
 
 // SetNormalMap0 sets the NormalMap0 property of class NormalBlendBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock#normalmap0
 func (n *NormalBlendBlock) SetNormalMap0(normalMap0 *NodeMaterialConnectionPoint) *NormalBlendBlock {
-	p := ba.ctx.Get("NormalBlendBlock").New(normalMap0.JSObject())
-	return NormalBlendBlockFromJSObject(p, ba.ctx)
+	n.p.Set("normalMap0", normalMap0.JSObject())
+	return n
 }
 
 // NormalMap1 returns the NormalMap1 property of class NormalBlendBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock#normalmap1
-func (n *NormalBlendBlock) NormalMap1(normalMap1 *NodeMaterialConnectionPoint) *NormalBlendBlock {
-	p := ba.ctx.Get("NormalBlendBlock").New(normalMap1.JSObject())
-	return NormalBlendBlockFromJSObject(p, ba.ctx)
+func (n *NormalBlendBlock) NormalMap1() *NodeMaterialConnectionPoint {
+	retVal := n.p.Get("normalMap1")
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
 }
 
 // SetNormalMap1 sets the NormalMap1 property of class NormalBlendBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock#normalmap1
 func (n *NormalBlendBlock) SetNormalMap1(normalMap1 *NodeMaterialConnectionPoint) *NormalBlendBlock {
-	p := ba.ctx.Get("NormalBlendBlock").New(normalMap1.JSObject())
-	return NormalBlendBlockFromJSObject(p, ba.ctx)
+	n.p.Set("normalMap1", normalMap1.JSObject())
+	return n
 }
 
 // Output returns the Output property of class NormalBlendBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock#output
-func (n *NormalBlendBlock) Output(output *NodeMaterialConnectionPoint) *NormalBlendBlock {
-	p := ba.ctx.Get("NormalBlendBlock").New(output.JSObject())
-	return NormalBlendBlockFromJSObject(p, ba.ctx)
+func (n *NormalBlendBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := n.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
 }
 
 // SetOutput sets the Output property of class NormalBlendBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock#output
 func (n *NormalBlendBlock) SetOutput(output *NodeMaterialConnectionPoint) *NormalBlendBlock {
-	p := ba.ctx.Get("NormalBlendBlock").New(output.JSObject())
-	return NormalBlendBlockFromJSObject(p, ba.ctx)
+	n.p.Set("output", output.JSObject())
+	return n
 }
-
-*/

@@ -151,7 +151,3 @@ func (i *ICrowd) Update(deltaTime float64) {
 
 	i.p.Call("update", args...)
 }
-
-/*
-
- */

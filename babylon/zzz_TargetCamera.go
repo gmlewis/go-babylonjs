@@ -120,134 +120,130 @@ func (t *TargetCamera) StoreState() *Camera {
 	return CameraFromJSObject(retVal, t.ctx)
 }
 
-/*
-
 // CameraDirection returns the CameraDirection property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#cameradirection
-func (t *TargetCamera) CameraDirection(cameraDirection *Vector3) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(cameraDirection.JSObject())
-	return TargetCameraFromJSObject(p, ba.ctx)
+func (t *TargetCamera) CameraDirection() *Vector3 {
+	retVal := t.p.Get("cameraDirection")
+	return Vector3FromJSObject(retVal, t.ctx)
 }
 
 // SetCameraDirection sets the CameraDirection property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#cameradirection
 func (t *TargetCamera) SetCameraDirection(cameraDirection *Vector3) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(cameraDirection.JSObject())
-	return TargetCameraFromJSObject(p, ba.ctx)
+	t.p.Set("cameraDirection", cameraDirection.JSObject())
+	return t
 }
 
 // CameraRotation returns the CameraRotation property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#camerarotation
-func (t *TargetCamera) CameraRotation(cameraRotation *Vector2) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(cameraRotation.JSObject())
-	return TargetCameraFromJSObject(p, ba.ctx)
+func (t *TargetCamera) CameraRotation() *Vector2 {
+	retVal := t.p.Get("cameraRotation")
+	return Vector2FromJSObject(retVal, t.ctx)
 }
 
 // SetCameraRotation sets the CameraRotation property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#camerarotation
 func (t *TargetCamera) SetCameraRotation(cameraRotation *Vector2) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(cameraRotation.JSObject())
-	return TargetCameraFromJSObject(p, ba.ctx)
+	t.p.Set("cameraRotation", cameraRotation.JSObject())
+	return t
 }
 
 // LockedTarget returns the LockedTarget property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#lockedtarget
-func (t *TargetCamera) LockedTarget(lockedTarget interface{}) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(lockedTarget)
-	return TargetCameraFromJSObject(p, ba.ctx)
+func (t *TargetCamera) LockedTarget() interface{} {
+	retVal := t.p.Get("lockedTarget")
+	return retVal
 }
 
 // SetLockedTarget sets the LockedTarget property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#lockedtarget
 func (t *TargetCamera) SetLockedTarget(lockedTarget interface{}) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(lockedTarget)
-	return TargetCameraFromJSObject(p, ba.ctx)
+	t.p.Set("lockedTarget", lockedTarget)
+	return t
 }
 
 // NoRotationConstraint returns the NoRotationConstraint property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#norotationconstraint
-func (t *TargetCamera) NoRotationConstraint(noRotationConstraint bool) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(noRotationConstraint)
-	return TargetCameraFromJSObject(p, ba.ctx)
+func (t *TargetCamera) NoRotationConstraint() bool {
+	retVal := t.p.Get("noRotationConstraint")
+	return retVal.Bool()
 }
 
 // SetNoRotationConstraint sets the NoRotationConstraint property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#norotationconstraint
 func (t *TargetCamera) SetNoRotationConstraint(noRotationConstraint bool) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(noRotationConstraint)
-	return TargetCameraFromJSObject(p, ba.ctx)
+	t.p.Set("noRotationConstraint", noRotationConstraint)
+	return t
 }
 
 // Rotation returns the Rotation property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#rotation
-func (t *TargetCamera) Rotation(rotation *Vector3) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(rotation.JSObject())
-	return TargetCameraFromJSObject(p, ba.ctx)
+func (t *TargetCamera) Rotation() *Vector3 {
+	retVal := t.p.Get("rotation")
+	return Vector3FromJSObject(retVal, t.ctx)
 }
 
 // SetRotation sets the Rotation property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#rotation
 func (t *TargetCamera) SetRotation(rotation *Vector3) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(rotation.JSObject())
-	return TargetCameraFromJSObject(p, ba.ctx)
+	t.p.Set("rotation", rotation.JSObject())
+	return t
 }
 
 // RotationQuaternion returns the RotationQuaternion property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#rotationquaternion
-func (t *TargetCamera) RotationQuaternion(rotationQuaternion *Quaternion) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(rotationQuaternion.JSObject())
-	return TargetCameraFromJSObject(p, ba.ctx)
+func (t *TargetCamera) RotationQuaternion() *Quaternion {
+	retVal := t.p.Get("rotationQuaternion")
+	return QuaternionFromJSObject(retVal, t.ctx)
 }
 
 // SetRotationQuaternion sets the RotationQuaternion property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#rotationquaternion
 func (t *TargetCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(rotationQuaternion.JSObject())
-	return TargetCameraFromJSObject(p, ba.ctx)
+	t.p.Set("rotationQuaternion", rotationQuaternion.JSObject())
+	return t
 }
 
 // Speed returns the Speed property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#speed
-func (t *TargetCamera) Speed(speed float64) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(speed)
-	return TargetCameraFromJSObject(p, ba.ctx)
+func (t *TargetCamera) Speed() float64 {
+	retVal := t.p.Get("speed")
+	return retVal.Float()
 }
 
 // SetSpeed sets the Speed property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#speed
 func (t *TargetCamera) SetSpeed(speed float64) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(speed)
-	return TargetCameraFromJSObject(p, ba.ctx)
+	t.p.Set("speed", speed)
+	return t
 }
 
 // UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#updateupvectorfromrotation
-func (t *TargetCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(updateUpVectorFromRotation)
-	return TargetCameraFromJSObject(p, ba.ctx)
+func (t *TargetCamera) UpdateUpVectorFromRotation() bool {
+	retVal := t.p.Get("updateUpVectorFromRotation")
+	return retVal.Bool()
 }
 
 // SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#updateupvectorfromrotation
 func (t *TargetCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *TargetCamera {
-	p := ba.ctx.Get("TargetCamera").New(updateUpVectorFromRotation)
-	return TargetCameraFromJSObject(p, ba.ctx)
+	t.p.Set("updateUpVectorFromRotation", updateUpVectorFromRotation)
+	return t
 }
-
-*/

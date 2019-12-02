@@ -70,54 +70,50 @@ func (v *ViewDirectionBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // CameraPosition returns the CameraPosition property of class ViewDirectionBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock#cameraposition
-func (v *ViewDirectionBlock) CameraPosition(cameraPosition *NodeMaterialConnectionPoint) *ViewDirectionBlock {
-	p := ba.ctx.Get("ViewDirectionBlock").New(cameraPosition.JSObject())
-	return ViewDirectionBlockFromJSObject(p, ba.ctx)
+func (v *ViewDirectionBlock) CameraPosition() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("cameraPosition")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetCameraPosition sets the CameraPosition property of class ViewDirectionBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock#cameraposition
 func (v *ViewDirectionBlock) SetCameraPosition(cameraPosition *NodeMaterialConnectionPoint) *ViewDirectionBlock {
-	p := ba.ctx.Get("ViewDirectionBlock").New(cameraPosition.JSObject())
-	return ViewDirectionBlockFromJSObject(p, ba.ctx)
+	v.p.Set("cameraPosition", cameraPosition.JSObject())
+	return v
 }
 
 // Output returns the Output property of class ViewDirectionBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock#output
-func (v *ViewDirectionBlock) Output(output *NodeMaterialConnectionPoint) *ViewDirectionBlock {
-	p := ba.ctx.Get("ViewDirectionBlock").New(output.JSObject())
-	return ViewDirectionBlockFromJSObject(p, ba.ctx)
+func (v *ViewDirectionBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetOutput sets the Output property of class ViewDirectionBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock#output
 func (v *ViewDirectionBlock) SetOutput(output *NodeMaterialConnectionPoint) *ViewDirectionBlock {
-	p := ba.ctx.Get("ViewDirectionBlock").New(output.JSObject())
-	return ViewDirectionBlockFromJSObject(p, ba.ctx)
+	v.p.Set("output", output.JSObject())
+	return v
 }
 
 // WorldPosition returns the WorldPosition property of class ViewDirectionBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock#worldposition
-func (v *ViewDirectionBlock) WorldPosition(worldPosition *NodeMaterialConnectionPoint) *ViewDirectionBlock {
-	p := ba.ctx.Get("ViewDirectionBlock").New(worldPosition.JSObject())
-	return ViewDirectionBlockFromJSObject(p, ba.ctx)
+func (v *ViewDirectionBlock) WorldPosition() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("worldPosition")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetWorldPosition sets the WorldPosition property of class ViewDirectionBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock#worldposition
 func (v *ViewDirectionBlock) SetWorldPosition(worldPosition *NodeMaterialConnectionPoint) *ViewDirectionBlock {
-	p := ba.ctx.Get("ViewDirectionBlock").New(worldPosition.JSObject())
-	return ViewDirectionBlockFromJSObject(p, ba.ctx)
+	v.p.Set("worldPosition", worldPosition.JSObject())
+	return v
 }
-
-*/

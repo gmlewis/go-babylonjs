@@ -92,22 +92,18 @@ func (ba *Babylon) NewBloomMergePostProcess(name string, originalFromInput *Post
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Weight returns the Weight property of class BloomMergePostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#weight
-func (b *BloomMergePostProcess) Weight(weight float64) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(weight)
-	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+func (b *BloomMergePostProcess) Weight() float64 {
+	retVal := b.p.Get("weight")
+	return retVal.Float()
 }
 
 // SetWeight sets the Weight property of class BloomMergePostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#weight
 func (b *BloomMergePostProcess) SetWeight(weight float64) *BloomMergePostProcess {
-	p := ba.ctx.Get("BloomMergePostProcess").New(weight)
-	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+	b.p.Set("weight", weight)
+	return b
 }
-
-*/

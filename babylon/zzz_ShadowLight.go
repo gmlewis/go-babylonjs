@@ -217,118 +217,114 @@ func (s *ShadowLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matr
 	return IShadowLightFromJSObject(retVal, s.ctx)
 }
 
-/*
-
 // CustomProjectionMatrixBuilder returns the CustomProjectionMatrixBuilder property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#customprojectionmatrixbuilder
-func (s *ShadowLight) CustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customProjectionMatrixBuilder(); return nil}))
-	return ShadowLightFromJSObject(p, ba.ctx)
+func (s *ShadowLight) CustomProjectionMatrixBuilder() js.Value {
+	retVal := s.p.Get("customProjectionMatrixBuilder")
+	return retVal
 }
 
 // SetCustomProjectionMatrixBuilder sets the CustomProjectionMatrixBuilder property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#customprojectionmatrixbuilder
 func (s *ShadowLight) SetCustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {customProjectionMatrixBuilder(); return nil}))
-	return ShadowLightFromJSObject(p, ba.ctx)
+	s.p.Set("customProjectionMatrixBuilder", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customProjectionMatrixBuilder(); return nil }))
+	return s
 }
 
 // Direction returns the Direction property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#direction
-func (s *ShadowLight) Direction(direction *Vector3) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(direction.JSObject())
-	return ShadowLightFromJSObject(p, ba.ctx)
+func (s *ShadowLight) Direction() *Vector3 {
+	retVal := s.p.Get("direction")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetDirection sets the Direction property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#direction
 func (s *ShadowLight) SetDirection(direction *Vector3) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(direction.JSObject())
-	return ShadowLightFromJSObject(p, ba.ctx)
+	s.p.Set("direction", direction.JSObject())
+	return s
 }
 
 // Position returns the Position property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#position
-func (s *ShadowLight) Position(position *Vector3) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(position.JSObject())
-	return ShadowLightFromJSObject(p, ba.ctx)
+func (s *ShadowLight) Position() *Vector3 {
+	retVal := s.p.Get("position")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetPosition sets the Position property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#position
 func (s *ShadowLight) SetPosition(position *Vector3) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(position.JSObject())
-	return ShadowLightFromJSObject(p, ba.ctx)
+	s.p.Set("position", position.JSObject())
+	return s
 }
 
 // ShadowMaxZ returns the ShadowMaxZ property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#shadowmaxz
-func (s *ShadowLight) ShadowMaxZ(shadowMaxZ float64) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(shadowMaxZ)
-	return ShadowLightFromJSObject(p, ba.ctx)
+func (s *ShadowLight) ShadowMaxZ() float64 {
+	retVal := s.p.Get("shadowMaxZ")
+	return retVal.Float()
 }
 
 // SetShadowMaxZ sets the ShadowMaxZ property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#shadowmaxz
 func (s *ShadowLight) SetShadowMaxZ(shadowMaxZ float64) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(shadowMaxZ)
-	return ShadowLightFromJSObject(p, ba.ctx)
+	s.p.Set("shadowMaxZ", shadowMaxZ)
+	return s
 }
 
 // ShadowMinZ returns the ShadowMinZ property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#shadowminz
-func (s *ShadowLight) ShadowMinZ(shadowMinZ float64) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(shadowMinZ)
-	return ShadowLightFromJSObject(p, ba.ctx)
+func (s *ShadowLight) ShadowMinZ() float64 {
+	retVal := s.p.Get("shadowMinZ")
+	return retVal.Float()
 }
 
 // SetShadowMinZ sets the ShadowMinZ property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#shadowminz
 func (s *ShadowLight) SetShadowMinZ(shadowMinZ float64) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(shadowMinZ)
-	return ShadowLightFromJSObject(p, ba.ctx)
+	s.p.Set("shadowMinZ", shadowMinZ)
+	return s
 }
 
 // TransformedDirection returns the TransformedDirection property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#transformeddirection
-func (s *ShadowLight) TransformedDirection(transformedDirection *Vector3) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(transformedDirection.JSObject())
-	return ShadowLightFromJSObject(p, ba.ctx)
+func (s *ShadowLight) TransformedDirection() *Vector3 {
+	retVal := s.p.Get("transformedDirection")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetTransformedDirection sets the TransformedDirection property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#transformeddirection
 func (s *ShadowLight) SetTransformedDirection(transformedDirection *Vector3) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(transformedDirection.JSObject())
-	return ShadowLightFromJSObject(p, ba.ctx)
+	s.p.Set("transformedDirection", transformedDirection.JSObject())
+	return s
 }
 
 // TransformedPosition returns the TransformedPosition property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#transformedposition
-func (s *ShadowLight) TransformedPosition(transformedPosition *Vector3) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(transformedPosition.JSObject())
-	return ShadowLightFromJSObject(p, ba.ctx)
+func (s *ShadowLight) TransformedPosition() *Vector3 {
+	retVal := s.p.Get("transformedPosition")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetTransformedPosition sets the TransformedPosition property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#transformedposition
 func (s *ShadowLight) SetTransformedPosition(transformedPosition *Vector3) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(transformedPosition.JSObject())
-	return ShadowLightFromJSObject(p, ba.ctx)
+	s.p.Set("transformedPosition", transformedPosition.JSObject())
+	return s
 }
-
-*/

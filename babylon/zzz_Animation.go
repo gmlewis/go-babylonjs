@@ -669,374 +669,370 @@ func (a *Animation) Vector3InterpolateFunctionWithTangents(startValue *Vector3, 
 	return Vector3FromJSObject(retVal, a.ctx)
 }
 
-/*
-
 // ANIMATIONLOOPMODE_CONSTANT returns the ANIMATIONLOOPMODE_CONSTANT property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_constant
-func (a *Animation) ANIMATIONLOOPMODE_CONSTANT(ANIMATIONLOOPMODE_CONSTANT float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_CONSTANT)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONLOOPMODE_CONSTANT() float64 {
+	retVal := a.p.Get("ANIMATIONLOOPMODE_CONSTANT")
+	return retVal.Float()
 }
 
 // SetANIMATIONLOOPMODE_CONSTANT sets the ANIMATIONLOOPMODE_CONSTANT property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_constant
 func (a *Animation) SetANIMATIONLOOPMODE_CONSTANT(ANIMATIONLOOPMODE_CONSTANT float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_CONSTANT)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONLOOPMODE_CONSTANT", ANIMATIONLOOPMODE_CONSTANT)
+	return a
 }
 
 // ANIMATIONLOOPMODE_CYCLE returns the ANIMATIONLOOPMODE_CYCLE property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_cycle
-func (a *Animation) ANIMATIONLOOPMODE_CYCLE(ANIMATIONLOOPMODE_CYCLE float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_CYCLE)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONLOOPMODE_CYCLE() float64 {
+	retVal := a.p.Get("ANIMATIONLOOPMODE_CYCLE")
+	return retVal.Float()
 }
 
 // SetANIMATIONLOOPMODE_CYCLE sets the ANIMATIONLOOPMODE_CYCLE property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_cycle
 func (a *Animation) SetANIMATIONLOOPMODE_CYCLE(ANIMATIONLOOPMODE_CYCLE float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_CYCLE)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONLOOPMODE_CYCLE", ANIMATIONLOOPMODE_CYCLE)
+	return a
 }
 
 // ANIMATIONLOOPMODE_RELATIVE returns the ANIMATIONLOOPMODE_RELATIVE property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_relative
-func (a *Animation) ANIMATIONLOOPMODE_RELATIVE(ANIMATIONLOOPMODE_RELATIVE float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_RELATIVE)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONLOOPMODE_RELATIVE() float64 {
+	retVal := a.p.Get("ANIMATIONLOOPMODE_RELATIVE")
+	return retVal.Float()
 }
 
 // SetANIMATIONLOOPMODE_RELATIVE sets the ANIMATIONLOOPMODE_RELATIVE property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_relative
 func (a *Animation) SetANIMATIONLOOPMODE_RELATIVE(ANIMATIONLOOPMODE_RELATIVE float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_RELATIVE)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONLOOPMODE_RELATIVE", ANIMATIONLOOPMODE_RELATIVE)
+	return a
 }
 
 // ANIMATIONTYPE_COLOR3 returns the ANIMATIONTYPE_COLOR3 property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_color3
-func (a *Animation) ANIMATIONTYPE_COLOR3(ANIMATIONTYPE_COLOR3 float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_COLOR3)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONTYPE_COLOR3() float64 {
+	retVal := a.p.Get("ANIMATIONTYPE_COLOR3")
+	return retVal.Float()
 }
 
 // SetANIMATIONTYPE_COLOR3 sets the ANIMATIONTYPE_COLOR3 property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_color3
 func (a *Animation) SetANIMATIONTYPE_COLOR3(ANIMATIONTYPE_COLOR3 float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_COLOR3)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONTYPE_COLOR3", ANIMATIONTYPE_COLOR3)
+	return a
 }
 
 // ANIMATIONTYPE_COLOR4 returns the ANIMATIONTYPE_COLOR4 property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_color4
-func (a *Animation) ANIMATIONTYPE_COLOR4(ANIMATIONTYPE_COLOR4 float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_COLOR4)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONTYPE_COLOR4() float64 {
+	retVal := a.p.Get("ANIMATIONTYPE_COLOR4")
+	return retVal.Float()
 }
 
 // SetANIMATIONTYPE_COLOR4 sets the ANIMATIONTYPE_COLOR4 property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_color4
 func (a *Animation) SetANIMATIONTYPE_COLOR4(ANIMATIONTYPE_COLOR4 float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_COLOR4)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONTYPE_COLOR4", ANIMATIONTYPE_COLOR4)
+	return a
 }
 
 // ANIMATIONTYPE_FLOAT returns the ANIMATIONTYPE_FLOAT property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_float
-func (a *Animation) ANIMATIONTYPE_FLOAT(ANIMATIONTYPE_FLOAT float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_FLOAT)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONTYPE_FLOAT() float64 {
+	retVal := a.p.Get("ANIMATIONTYPE_FLOAT")
+	return retVal.Float()
 }
 
 // SetANIMATIONTYPE_FLOAT sets the ANIMATIONTYPE_FLOAT property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_float
 func (a *Animation) SetANIMATIONTYPE_FLOAT(ANIMATIONTYPE_FLOAT float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_FLOAT)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONTYPE_FLOAT", ANIMATIONTYPE_FLOAT)
+	return a
 }
 
 // ANIMATIONTYPE_MATRIX returns the ANIMATIONTYPE_MATRIX property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_matrix
-func (a *Animation) ANIMATIONTYPE_MATRIX(ANIMATIONTYPE_MATRIX float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_MATRIX)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONTYPE_MATRIX() float64 {
+	retVal := a.p.Get("ANIMATIONTYPE_MATRIX")
+	return retVal.Float()
 }
 
 // SetANIMATIONTYPE_MATRIX sets the ANIMATIONTYPE_MATRIX property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_matrix
 func (a *Animation) SetANIMATIONTYPE_MATRIX(ANIMATIONTYPE_MATRIX float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_MATRIX)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONTYPE_MATRIX", ANIMATIONTYPE_MATRIX)
+	return a
 }
 
 // ANIMATIONTYPE_QUATERNION returns the ANIMATIONTYPE_QUATERNION property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_quaternion
-func (a *Animation) ANIMATIONTYPE_QUATERNION(ANIMATIONTYPE_QUATERNION float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_QUATERNION)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONTYPE_QUATERNION() float64 {
+	retVal := a.p.Get("ANIMATIONTYPE_QUATERNION")
+	return retVal.Float()
 }
 
 // SetANIMATIONTYPE_QUATERNION sets the ANIMATIONTYPE_QUATERNION property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_quaternion
 func (a *Animation) SetANIMATIONTYPE_QUATERNION(ANIMATIONTYPE_QUATERNION float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_QUATERNION)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONTYPE_QUATERNION", ANIMATIONTYPE_QUATERNION)
+	return a
 }
 
 // ANIMATIONTYPE_SIZE returns the ANIMATIONTYPE_SIZE property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_size
-func (a *Animation) ANIMATIONTYPE_SIZE(ANIMATIONTYPE_SIZE float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_SIZE)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONTYPE_SIZE() float64 {
+	retVal := a.p.Get("ANIMATIONTYPE_SIZE")
+	return retVal.Float()
 }
 
 // SetANIMATIONTYPE_SIZE sets the ANIMATIONTYPE_SIZE property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_size
 func (a *Animation) SetANIMATIONTYPE_SIZE(ANIMATIONTYPE_SIZE float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_SIZE)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONTYPE_SIZE", ANIMATIONTYPE_SIZE)
+	return a
 }
 
 // ANIMATIONTYPE_VECTOR2 returns the ANIMATIONTYPE_VECTOR2 property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_vector2
-func (a *Animation) ANIMATIONTYPE_VECTOR2(ANIMATIONTYPE_VECTOR2 float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_VECTOR2)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONTYPE_VECTOR2() float64 {
+	retVal := a.p.Get("ANIMATIONTYPE_VECTOR2")
+	return retVal.Float()
 }
 
 // SetANIMATIONTYPE_VECTOR2 sets the ANIMATIONTYPE_VECTOR2 property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_vector2
 func (a *Animation) SetANIMATIONTYPE_VECTOR2(ANIMATIONTYPE_VECTOR2 float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_VECTOR2)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONTYPE_VECTOR2", ANIMATIONTYPE_VECTOR2)
+	return a
 }
 
 // ANIMATIONTYPE_VECTOR3 returns the ANIMATIONTYPE_VECTOR3 property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_vector3
-func (a *Animation) ANIMATIONTYPE_VECTOR3(ANIMATIONTYPE_VECTOR3 float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_VECTOR3)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) ANIMATIONTYPE_VECTOR3() float64 {
+	retVal := a.p.Get("ANIMATIONTYPE_VECTOR3")
+	return retVal.Float()
 }
 
 // SetANIMATIONTYPE_VECTOR3 sets the ANIMATIONTYPE_VECTOR3 property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_vector3
 func (a *Animation) SetANIMATIONTYPE_VECTOR3(ANIMATIONTYPE_VECTOR3 float64) *Animation {
-	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_VECTOR3)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("ANIMATIONTYPE_VECTOR3", ANIMATIONTYPE_VECTOR3)
+	return a
 }
 
 // AllowMatricesInterpolation returns the AllowMatricesInterpolation property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#allowmatricesinterpolation
-func (a *Animation) AllowMatricesInterpolation(AllowMatricesInterpolation bool) *Animation {
-	p := ba.ctx.Get("Animation").New(AllowMatricesInterpolation)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) AllowMatricesInterpolation() bool {
+	retVal := a.p.Get("AllowMatricesInterpolation")
+	return retVal.Bool()
 }
 
 // SetAllowMatricesInterpolation sets the AllowMatricesInterpolation property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#allowmatricesinterpolation
 func (a *Animation) SetAllowMatricesInterpolation(AllowMatricesInterpolation bool) *Animation {
-	p := ba.ctx.Get("Animation").New(AllowMatricesInterpolation)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("AllowMatricesInterpolation", AllowMatricesInterpolation)
+	return a
 }
 
 // AllowMatrixDecomposeForInterpolation returns the AllowMatrixDecomposeForInterpolation property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#allowmatrixdecomposeforinterpolation
-func (a *Animation) AllowMatrixDecomposeForInterpolation(AllowMatrixDecomposeForInterpolation bool) *Animation {
-	p := ba.ctx.Get("Animation").New(AllowMatrixDecomposeForInterpolation)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) AllowMatrixDecomposeForInterpolation() bool {
+	retVal := a.p.Get("AllowMatrixDecomposeForInterpolation")
+	return retVal.Bool()
 }
 
 // SetAllowMatrixDecomposeForInterpolation sets the AllowMatrixDecomposeForInterpolation property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#allowmatrixdecomposeforinterpolation
 func (a *Animation) SetAllowMatrixDecomposeForInterpolation(AllowMatrixDecomposeForInterpolation bool) *Animation {
-	p := ba.ctx.Get("Animation").New(AllowMatrixDecomposeForInterpolation)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("AllowMatrixDecomposeForInterpolation", AllowMatrixDecomposeForInterpolation)
+	return a
 }
 
 // BlendingSpeed returns the BlendingSpeed property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#blendingspeed
-func (a *Animation) BlendingSpeed(blendingSpeed float64) *Animation {
-	p := ba.ctx.Get("Animation").New(blendingSpeed)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) BlendingSpeed() float64 {
+	retVal := a.p.Get("blendingSpeed")
+	return retVal.Float()
 }
 
 // SetBlendingSpeed sets the BlendingSpeed property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#blendingspeed
 func (a *Animation) SetBlendingSpeed(blendingSpeed float64) *Animation {
-	p := ba.ctx.Get("Animation").New(blendingSpeed)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("blendingSpeed", blendingSpeed)
+	return a
 }
 
 // DataType returns the DataType property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#datatype
-func (a *Animation) DataType(dataType float64) *Animation {
-	p := ba.ctx.Get("Animation").New(dataType)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) DataType() float64 {
+	retVal := a.p.Get("dataType")
+	return retVal.Float()
 }
 
 // SetDataType sets the DataType property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#datatype
 func (a *Animation) SetDataType(dataType float64) *Animation {
-	p := ba.ctx.Get("Animation").New(dataType)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("dataType", dataType)
+	return a
 }
 
 // EnableBlending returns the EnableBlending property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#enableblending
-func (a *Animation) EnableBlending(enableBlending bool) *Animation {
-	p := ba.ctx.Get("Animation").New(enableBlending)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) EnableBlending() bool {
+	retVal := a.p.Get("enableBlending")
+	return retVal.Bool()
 }
 
 // SetEnableBlending sets the EnableBlending property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#enableblending
 func (a *Animation) SetEnableBlending(enableBlending bool) *Animation {
-	p := ba.ctx.Get("Animation").New(enableBlending)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("enableBlending", enableBlending)
+	return a
 }
 
 // FramePerSecond returns the FramePerSecond property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#framepersecond
-func (a *Animation) FramePerSecond(framePerSecond float64) *Animation {
-	p := ba.ctx.Get("Animation").New(framePerSecond)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) FramePerSecond() float64 {
+	retVal := a.p.Get("framePerSecond")
+	return retVal.Float()
 }
 
 // SetFramePerSecond sets the FramePerSecond property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#framepersecond
 func (a *Animation) SetFramePerSecond(framePerSecond float64) *Animation {
-	p := ba.ctx.Get("Animation").New(framePerSecond)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("framePerSecond", framePerSecond)
+	return a
 }
 
 // HasRunningRuntimeAnimations returns the HasRunningRuntimeAnimations property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#hasrunningruntimeanimations
-func (a *Animation) HasRunningRuntimeAnimations(hasRunningRuntimeAnimations bool) *Animation {
-	p := ba.ctx.Get("Animation").New(hasRunningRuntimeAnimations)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) HasRunningRuntimeAnimations() bool {
+	retVal := a.p.Get("hasRunningRuntimeAnimations")
+	return retVal.Bool()
 }
 
 // SetHasRunningRuntimeAnimations sets the HasRunningRuntimeAnimations property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#hasrunningruntimeanimations
 func (a *Animation) SetHasRunningRuntimeAnimations(hasRunningRuntimeAnimations bool) *Animation {
-	p := ba.ctx.Get("Animation").New(hasRunningRuntimeAnimations)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("hasRunningRuntimeAnimations", hasRunningRuntimeAnimations)
+	return a
 }
 
 // LoopMode returns the LoopMode property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#loopmode
-func (a *Animation) LoopMode(loopMode float64) *Animation {
-	p := ba.ctx.Get("Animation").New(loopMode)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) LoopMode() float64 {
+	retVal := a.p.Get("loopMode")
+	return retVal.Float()
 }
 
 // SetLoopMode sets the LoopMode property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#loopmode
 func (a *Animation) SetLoopMode(loopMode float64) *Animation {
-	p := ba.ctx.Get("Animation").New(loopMode)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("loopMode", loopMode)
+	return a
 }
 
 // Name returns the Name property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#name
-func (a *Animation) Name(name string) *Animation {
-	p := ba.ctx.Get("Animation").New(name)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) Name() string {
+	retVal := a.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#name
 func (a *Animation) SetName(name string) *Animation {
-	p := ba.ctx.Get("Animation").New(name)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("name", name)
+	return a
 }
 
 // RuntimeAnimations returns the RuntimeAnimations property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#runtimeanimations
-func (a *Animation) RuntimeAnimations(runtimeAnimations *RuntimeAnimation) *Animation {
-	p := ba.ctx.Get("Animation").New(runtimeAnimations.JSObject())
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) RuntimeAnimations() *RuntimeAnimation {
+	retVal := a.p.Get("runtimeAnimations")
+	return RuntimeAnimationFromJSObject(retVal, a.ctx)
 }
 
 // SetRuntimeAnimations sets the RuntimeAnimations property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#runtimeanimations
 func (a *Animation) SetRuntimeAnimations(runtimeAnimations *RuntimeAnimation) *Animation {
-	p := ba.ctx.Get("Animation").New(runtimeAnimations.JSObject())
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("runtimeAnimations", runtimeAnimations.JSObject())
+	return a
 }
 
 // TargetProperty returns the TargetProperty property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#targetproperty
-func (a *Animation) TargetProperty(targetProperty string) *Animation {
-	p := ba.ctx.Get("Animation").New(targetProperty)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) TargetProperty() string {
+	retVal := a.p.Get("targetProperty")
+	return retVal.String()
 }
 
 // SetTargetProperty sets the TargetProperty property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#targetproperty
 func (a *Animation) SetTargetProperty(targetProperty string) *Animation {
-	p := ba.ctx.Get("Animation").New(targetProperty)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("targetProperty", targetProperty)
+	return a
 }
 
 // TargetPropertyPath returns the TargetPropertyPath property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#targetpropertypath
-func (a *Animation) TargetPropertyPath(targetPropertyPath string) *Animation {
-	p := ba.ctx.Get("Animation").New(targetPropertyPath)
-	return AnimationFromJSObject(p, ba.ctx)
+func (a *Animation) TargetPropertyPath() string {
+	retVal := a.p.Get("targetPropertyPath")
+	return retVal.String()
 }
 
 // SetTargetPropertyPath sets the TargetPropertyPath property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#targetpropertypath
 func (a *Animation) SetTargetPropertyPath(targetPropertyPath string) *Animation {
-	p := ba.ctx.Get("Animation").New(targetPropertyPath)
-	return AnimationFromJSObject(p, ba.ctx)
+	a.p.Set("targetPropertyPath", targetPropertyPath)
+	return a
 }
-
-*/

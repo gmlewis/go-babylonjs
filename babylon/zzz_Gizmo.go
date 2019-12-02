@@ -81,118 +81,114 @@ func (g *Gizmo) SetCustomMesh(mesh *Mesh) {
 	g.p.Call("setCustomMesh", args...)
 }
 
-/*
-
 // AttachedMesh returns the AttachedMesh property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#attachedmesh
-func (g *Gizmo) AttachedMesh(attachedMesh *AbstractMesh) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(attachedMesh.JSObject())
-	return GizmoFromJSObject(p, ba.ctx)
+func (g *Gizmo) AttachedMesh() *AbstractMesh {
+	retVal := g.p.Get("attachedMesh")
+	return AbstractMeshFromJSObject(retVal, g.ctx)
 }
 
 // SetAttachedMesh sets the AttachedMesh property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#attachedmesh
 func (g *Gizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(attachedMesh.JSObject())
-	return GizmoFromJSObject(p, ba.ctx)
+	g.p.Set("attachedMesh", attachedMesh.JSObject())
+	return g
 }
 
 // GizmoLayer returns the GizmoLayer property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#gizmolayer
-func (g *Gizmo) GizmoLayer(gizmoLayer *UtilityLayerRenderer) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(gizmoLayer.JSObject())
-	return GizmoFromJSObject(p, ba.ctx)
+func (g *Gizmo) GizmoLayer() *UtilityLayerRenderer {
+	retVal := g.p.Get("gizmoLayer")
+	return UtilityLayerRendererFromJSObject(retVal, g.ctx)
 }
 
 // SetGizmoLayer sets the GizmoLayer property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#gizmolayer
 func (g *Gizmo) SetGizmoLayer(gizmoLayer *UtilityLayerRenderer) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(gizmoLayer.JSObject())
-	return GizmoFromJSObject(p, ba.ctx)
+	g.p.Set("gizmoLayer", gizmoLayer.JSObject())
+	return g
 }
 
 // ScaleRatio returns the ScaleRatio property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#scaleratio
-func (g *Gizmo) ScaleRatio(scaleRatio float64) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(scaleRatio)
-	return GizmoFromJSObject(p, ba.ctx)
+func (g *Gizmo) ScaleRatio() float64 {
+	retVal := g.p.Get("scaleRatio")
+	return retVal.Float()
 }
 
 // SetScaleRatio sets the ScaleRatio property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#scaleratio
 func (g *Gizmo) SetScaleRatio(scaleRatio float64) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(scaleRatio)
-	return GizmoFromJSObject(p, ba.ctx)
+	g.p.Set("scaleRatio", scaleRatio)
+	return g
 }
 
 // UpdateGizmoPositionToMatchAttachedMesh returns the UpdateGizmoPositionToMatchAttachedMesh property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#updategizmopositiontomatchattachedmesh
-func (g *Gizmo) UpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(updateGizmoPositionToMatchAttachedMesh)
-	return GizmoFromJSObject(p, ba.ctx)
+func (g *Gizmo) UpdateGizmoPositionToMatchAttachedMesh() bool {
+	retVal := g.p.Get("updateGizmoPositionToMatchAttachedMesh")
+	return retVal.Bool()
 }
 
 // SetUpdateGizmoPositionToMatchAttachedMesh sets the UpdateGizmoPositionToMatchAttachedMesh property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#updategizmopositiontomatchattachedmesh
 func (g *Gizmo) SetUpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(updateGizmoPositionToMatchAttachedMesh)
-	return GizmoFromJSObject(p, ba.ctx)
+	g.p.Set("updateGizmoPositionToMatchAttachedMesh", updateGizmoPositionToMatchAttachedMesh)
+	return g
 }
 
 // UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#updategizmorotationtomatchattachedmesh
-func (g *Gizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return GizmoFromJSObject(p, ba.ctx)
+func (g *Gizmo) UpdateGizmoRotationToMatchAttachedMesh() bool {
+	retVal := g.p.Get("updateGizmoRotationToMatchAttachedMesh")
+	return retVal.Bool()
 }
 
 // SetUpdateGizmoRotationToMatchAttachedMesh sets the UpdateGizmoRotationToMatchAttachedMesh property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#updategizmorotationtomatchattachedmesh
 func (g *Gizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return GizmoFromJSObject(p, ba.ctx)
+	g.p.Set("updateGizmoRotationToMatchAttachedMesh", updateGizmoRotationToMatchAttachedMesh)
+	return g
 }
 
 // UpdateScale returns the UpdateScale property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#updatescale
-func (g *Gizmo) UpdateScale(updateScale bool) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(updateScale)
-	return GizmoFromJSObject(p, ba.ctx)
+func (g *Gizmo) UpdateScale() bool {
+	retVal := g.p.Get("updateScale")
+	return retVal.Bool()
 }
 
 // SetUpdateScale sets the UpdateScale property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#updatescale
 func (g *Gizmo) SetUpdateScale(updateScale bool) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(updateScale)
-	return GizmoFromJSObject(p, ba.ctx)
+	g.p.Set("updateScale", updateScale)
+	return g
 }
 
 // _rootMesh returns the _rootMesh property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#_rootmesh
-func (g *Gizmo) _rootMesh(_rootMesh *Mesh) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(_rootMesh.JSObject())
-	return GizmoFromJSObject(p, ba.ctx)
+func (g *Gizmo) _rootMesh() *Mesh {
+	retVal := g.p.Get("_rootMesh")
+	return MeshFromJSObject(retVal, g.ctx)
 }
 
 // Set_rootMesh sets the _rootMesh property of class Gizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo#_rootmesh
 func (g *Gizmo) Set_rootMesh(_rootMesh *Mesh) *Gizmo {
-	p := ba.ctx.Get("Gizmo").New(_rootMesh.JSObject())
-	return GizmoFromJSObject(p, ba.ctx)
+	g.p.Set("_rootMesh", _rootMesh.JSObject())
+	return g
 }
-
-*/

@@ -509,854 +509,854 @@ func (m *Material) Unfreeze() {
 	m.p.Call("unfreeze")
 }
 
-/*
-
 // AllDirtyFlag returns the AllDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#alldirtyflag
-func (m *Material) AllDirtyFlag(AllDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(AllDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) AllDirtyFlag() float64 {
+	retVal := m.p.Get("AllDirtyFlag")
+	return retVal.Float()
 }
 
 // SetAllDirtyFlag sets the AllDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#alldirtyflag
 func (m *Material) SetAllDirtyFlag(AllDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(AllDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("AllDirtyFlag", AllDirtyFlag)
+	return m
 }
 
 // Alpha returns the Alpha property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#alpha
-func (m *Material) Alpha(alpha float64) *Material {
-	p := ba.ctx.Get("Material").New(alpha)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) Alpha() float64 {
+	retVal := m.p.Get("alpha")
+	return retVal.Float()
 }
 
 // SetAlpha sets the Alpha property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#alpha
 func (m *Material) SetAlpha(alpha float64) *Material {
-	p := ba.ctx.Get("Material").New(alpha)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("alpha", alpha)
+	return m
 }
 
 // AlphaMode returns the AlphaMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#alphamode
-func (m *Material) AlphaMode(alphaMode float64) *Material {
-	p := ba.ctx.Get("Material").New(alphaMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) AlphaMode() float64 {
+	retVal := m.p.Get("alphaMode")
+	return retVal.Float()
 }
 
 // SetAlphaMode sets the AlphaMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#alphamode
 func (m *Material) SetAlphaMode(alphaMode float64) *Material {
-	p := ba.ctx.Get("Material").New(alphaMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("alphaMode", alphaMode)
+	return m
 }
 
 // Animations returns the Animations property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#animations
-func (m *Material) Animations(animations []*Animation) *Material {
-	p := ba.ctx.Get("Material").New(animations)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) Animations() []*Animation {
+	retVal := m.p.Get("animations")
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#animations
 func (m *Material) SetAnimations(animations []*Animation) *Material {
-	p := ba.ctx.Get("Material").New(animations)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("animations", animations)
+	return m
 }
 
 // AttributesDirtyFlag returns the AttributesDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#attributesdirtyflag
-func (m *Material) AttributesDirtyFlag(AttributesDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(AttributesDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) AttributesDirtyFlag() float64 {
+	retVal := m.p.Get("AttributesDirtyFlag")
+	return retVal.Float()
 }
 
 // SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#attributesdirtyflag
 func (m *Material) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(AttributesDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("AttributesDirtyFlag", AttributesDirtyFlag)
+	return m
 }
 
 // BackFaceCulling returns the BackFaceCulling property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#backfaceculling
-func (m *Material) BackFaceCulling(backFaceCulling bool) *Material {
-	p := ba.ctx.Get("Material").New(backFaceCulling)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) BackFaceCulling() bool {
+	retVal := m.p.Get("backFaceCulling")
+	return retVal.Bool()
 }
 
 // SetBackFaceCulling sets the BackFaceCulling property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#backfaceculling
 func (m *Material) SetBackFaceCulling(backFaceCulling bool) *Material {
-	p := ba.ctx.Get("Material").New(backFaceCulling)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("backFaceCulling", backFaceCulling)
+	return m
 }
 
 // CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#checkreadyoneverycall
-func (m *Material) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *Material {
-	p := ba.ctx.Get("Material").New(checkReadyOnEveryCall)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) CheckReadyOnEveryCall() bool {
+	retVal := m.p.Get("checkReadyOnEveryCall")
+	return retVal.Bool()
 }
 
 // SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#checkreadyoneverycall
 func (m *Material) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *Material {
-	p := ba.ctx.Get("Material").New(checkReadyOnEveryCall)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("checkReadyOnEveryCall", checkReadyOnEveryCall)
+	return m
 }
 
 // CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#checkreadyonlyonce
-func (m *Material) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *Material {
-	p := ba.ctx.Get("Material").New(checkReadyOnlyOnce)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) CheckReadyOnlyOnce() bool {
+	retVal := m.p.Get("checkReadyOnlyOnce")
+	return retVal.Bool()
 }
 
 // SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#checkreadyonlyonce
 func (m *Material) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *Material {
-	p := ba.ctx.Get("Material").New(checkReadyOnlyOnce)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("checkReadyOnlyOnce", checkReadyOnlyOnce)
+	return m
 }
 
 // ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#clockwisesideorientation
-func (m *Material) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *Material {
-	p := ba.ctx.Get("Material").New(ClockWiseSideOrientation)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) ClockWiseSideOrientation() float64 {
+	retVal := m.p.Get("ClockWiseSideOrientation")
+	return retVal.Float()
 }
 
 // SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#clockwisesideorientation
 func (m *Material) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *Material {
-	p := ba.ctx.Get("Material").New(ClockWiseSideOrientation)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("ClockWiseSideOrientation", ClockWiseSideOrientation)
+	return m
 }
 
 // CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#counterclockwisesideorientation
-func (m *Material) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *Material {
-	p := ba.ctx.Get("Material").New(CounterClockWiseSideOrientation)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) CounterClockWiseSideOrientation() float64 {
+	retVal := m.p.Get("CounterClockWiseSideOrientation")
+	return retVal.Float()
 }
 
 // SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#counterclockwisesideorientation
 func (m *Material) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *Material {
-	p := ba.ctx.Get("Material").New(CounterClockWiseSideOrientation)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("CounterClockWiseSideOrientation", CounterClockWiseSideOrientation)
+	return m
 }
 
 // DepthFunction returns the DepthFunction property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#depthfunction
-func (m *Material) DepthFunction(depthFunction float64) *Material {
-	p := ba.ctx.Get("Material").New(depthFunction)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) DepthFunction() float64 {
+	retVal := m.p.Get("depthFunction")
+	return retVal.Float()
 }
 
 // SetDepthFunction sets the DepthFunction property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#depthfunction
 func (m *Material) SetDepthFunction(depthFunction float64) *Material {
-	p := ba.ctx.Get("Material").New(depthFunction)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("depthFunction", depthFunction)
+	return m
 }
 
 // DisableDepthWrite returns the DisableDepthWrite property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#disabledepthwrite
-func (m *Material) DisableDepthWrite(disableDepthWrite bool) *Material {
-	p := ba.ctx.Get("Material").New(disableDepthWrite)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) DisableDepthWrite() bool {
+	retVal := m.p.Get("disableDepthWrite")
+	return retVal.Bool()
 }
 
 // SetDisableDepthWrite sets the DisableDepthWrite property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#disabledepthwrite
 func (m *Material) SetDisableDepthWrite(disableDepthWrite bool) *Material {
-	p := ba.ctx.Get("Material").New(disableDepthWrite)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("disableDepthWrite", disableDepthWrite)
+	return m
 }
 
 // DoNotSerialize returns the DoNotSerialize property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#donotserialize
-func (m *Material) DoNotSerialize(doNotSerialize bool) *Material {
-	p := ba.ctx.Get("Material").New(doNotSerialize)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) DoNotSerialize() bool {
+	retVal := m.p.Get("doNotSerialize")
+	return retVal.Bool()
 }
 
 // SetDoNotSerialize sets the DoNotSerialize property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#donotserialize
 func (m *Material) SetDoNotSerialize(doNotSerialize bool) *Material {
-	p := ba.ctx.Get("Material").New(doNotSerialize)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("doNotSerialize", doNotSerialize)
+	return m
 }
 
 // FillMode returns the FillMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#fillmode
-func (m *Material) FillMode(fillMode float64) *Material {
-	p := ba.ctx.Get("Material").New(fillMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) FillMode() float64 {
+	retVal := m.p.Get("fillMode")
+	return retVal.Float()
 }
 
 // SetFillMode sets the FillMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#fillmode
 func (m *Material) SetFillMode(fillMode float64) *Material {
-	p := ba.ctx.Get("Material").New(fillMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("fillMode", fillMode)
+	return m
 }
 
 // FogEnabled returns the FogEnabled property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#fogenabled
-func (m *Material) FogEnabled(fogEnabled bool) *Material {
-	p := ba.ctx.Get("Material").New(fogEnabled)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) FogEnabled() bool {
+	retVal := m.p.Get("fogEnabled")
+	return retVal.Bool()
 }
 
 // SetFogEnabled sets the FogEnabled property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#fogenabled
 func (m *Material) SetFogEnabled(fogEnabled bool) *Material {
-	p := ba.ctx.Get("Material").New(fogEnabled)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("fogEnabled", fogEnabled)
+	return m
 }
 
 // ForceDepthWrite returns the ForceDepthWrite property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#forcedepthwrite
-func (m *Material) ForceDepthWrite(forceDepthWrite bool) *Material {
-	p := ba.ctx.Get("Material").New(forceDepthWrite)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) ForceDepthWrite() bool {
+	retVal := m.p.Get("forceDepthWrite")
+	return retVal.Bool()
 }
 
 // SetForceDepthWrite sets the ForceDepthWrite property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#forcedepthwrite
 func (m *Material) SetForceDepthWrite(forceDepthWrite bool) *Material {
-	p := ba.ctx.Get("Material").New(forceDepthWrite)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("forceDepthWrite", forceDepthWrite)
+	return m
 }
 
 // FresnelDirtyFlag returns the FresnelDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#fresneldirtyflag
-func (m *Material) FresnelDirtyFlag(FresnelDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(FresnelDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) FresnelDirtyFlag() float64 {
+	retVal := m.p.Get("FresnelDirtyFlag")
+	return retVal.Float()
 }
 
 // SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#fresneldirtyflag
 func (m *Material) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(FresnelDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("FresnelDirtyFlag", FresnelDirtyFlag)
+	return m
 }
 
 // GetRenderTargetTextures returns the GetRenderTargetTextures property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#getrendertargettextures
-func (m *Material) GetRenderTargetTextures(getRenderTargetTextures func()) *Material {
-	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) GetRenderTargetTextures() js.Value {
+	retVal := m.p.Get("getRenderTargetTextures")
+	return retVal
 }
 
 // SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#getrendertargettextures
 func (m *Material) SetGetRenderTargetTextures(getRenderTargetTextures func()) *Material {
-	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("getRenderTargetTextures", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getRenderTargetTextures(); return nil }))
+	return m
 }
 
 // HasRenderTargetTextures returns the HasRenderTargetTextures property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#hasrendertargettextures
-func (m *Material) HasRenderTargetTextures(hasRenderTargetTextures bool) *Material {
-	p := ba.ctx.Get("Material").New(hasRenderTargetTextures)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) HasRenderTargetTextures() bool {
+	retVal := m.p.Get("hasRenderTargetTextures")
+	return retVal.Bool()
 }
 
 // SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#hasrendertargettextures
 func (m *Material) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *Material {
-	p := ba.ctx.Get("Material").New(hasRenderTargetTextures)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("hasRenderTargetTextures", hasRenderTargetTextures)
+	return m
 }
 
 // Id returns the Id property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#id
-func (m *Material) Id(id string) *Material {
-	p := ba.ctx.Get("Material").New(id)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) Id() string {
+	retVal := m.p.Get("id")
+	return retVal.String()
 }
 
 // SetId sets the Id property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#id
 func (m *Material) SetId(id string) *Material {
-	p := ba.ctx.Get("Material").New(id)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("id", id)
+	return m
 }
 
 // InspectableCustomProperties returns the InspectableCustomProperties property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#inspectablecustomproperties
-func (m *Material) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *Material {
-	p := ba.ctx.Get("Material").New(inspectableCustomProperties.JSObject())
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) InspectableCustomProperties() *IInspectable {
+	retVal := m.p.Get("inspectableCustomProperties")
+	return IInspectableFromJSObject(retVal, m.ctx)
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#inspectablecustomproperties
 func (m *Material) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Material {
-	p := ba.ctx.Get("Material").New(inspectableCustomProperties.JSObject())
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+	return m
 }
 
 // IsFrozen returns the IsFrozen property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#isfrozen
-func (m *Material) IsFrozen(isFrozen bool) *Material {
-	p := ba.ctx.Get("Material").New(isFrozen)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) IsFrozen() bool {
+	retVal := m.p.Get("isFrozen")
+	return retVal.Bool()
 }
 
 // SetIsFrozen sets the IsFrozen property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#isfrozen
 func (m *Material) SetIsFrozen(isFrozen bool) *Material {
-	p := ba.ctx.Get("Material").New(isFrozen)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("isFrozen", isFrozen)
+	return m
 }
 
 // LightDirtyFlag returns the LightDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#lightdirtyflag
-func (m *Material) LightDirtyFlag(LightDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(LightDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) LightDirtyFlag() float64 {
+	retVal := m.p.Get("LightDirtyFlag")
+	return retVal.Float()
 }
 
 // SetLightDirtyFlag sets the LightDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#lightdirtyflag
 func (m *Material) SetLightDirtyFlag(LightDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(LightDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("LightDirtyFlag", LightDirtyFlag)
+	return m
 }
 
 // LineListDrawMode returns the LineListDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#linelistdrawmode
-func (m *Material) LineListDrawMode(LineListDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(LineListDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) LineListDrawMode() float64 {
+	retVal := m.p.Get("LineListDrawMode")
+	return retVal.Float()
 }
 
 // SetLineListDrawMode sets the LineListDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#linelistdrawmode
 func (m *Material) SetLineListDrawMode(LineListDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(LineListDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("LineListDrawMode", LineListDrawMode)
+	return m
 }
 
 // LineLoopDrawMode returns the LineLoopDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#lineloopdrawmode
-func (m *Material) LineLoopDrawMode(LineLoopDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(LineLoopDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) LineLoopDrawMode() float64 {
+	retVal := m.p.Get("LineLoopDrawMode")
+	return retVal.Float()
 }
 
 // SetLineLoopDrawMode sets the LineLoopDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#lineloopdrawmode
 func (m *Material) SetLineLoopDrawMode(LineLoopDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(LineLoopDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("LineLoopDrawMode", LineLoopDrawMode)
+	return m
 }
 
 // LineStripDrawMode returns the LineStripDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#linestripdrawmode
-func (m *Material) LineStripDrawMode(LineStripDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(LineStripDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) LineStripDrawMode() float64 {
+	retVal := m.p.Get("LineStripDrawMode")
+	return retVal.Float()
 }
 
 // SetLineStripDrawMode sets the LineStripDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#linestripdrawmode
 func (m *Material) SetLineStripDrawMode(LineStripDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(LineStripDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("LineStripDrawMode", LineStripDrawMode)
+	return m
 }
 
 // Metadata returns the Metadata property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#metadata
-func (m *Material) Metadata(metadata interface{}) *Material {
-	p := ba.ctx.Get("Material").New(metadata)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) Metadata() interface{} {
+	retVal := m.p.Get("metadata")
+	return retVal
 }
 
 // SetMetadata sets the Metadata property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#metadata
 func (m *Material) SetMetadata(metadata interface{}) *Material {
-	p := ba.ctx.Get("Material").New(metadata)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("metadata", metadata)
+	return m
 }
 
 // MiscDirtyFlag returns the MiscDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#miscdirtyflag
-func (m *Material) MiscDirtyFlag(MiscDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(MiscDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) MiscDirtyFlag() float64 {
+	retVal := m.p.Get("MiscDirtyFlag")
+	return retVal.Float()
 }
 
 // SetMiscDirtyFlag sets the MiscDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#miscdirtyflag
 func (m *Material) SetMiscDirtyFlag(MiscDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(MiscDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("MiscDirtyFlag", MiscDirtyFlag)
+	return m
 }
 
 // Name returns the Name property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#name
-func (m *Material) Name(name string) *Material {
-	p := ba.ctx.Get("Material").New(name)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) Name() string {
+	retVal := m.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#name
 func (m *Material) SetName(name string) *Material {
-	p := ba.ctx.Get("Material").New(name)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("name", name)
+	return m
 }
 
 // NeedDepthPrePass returns the NeedDepthPrePass property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#needdepthprepass
-func (m *Material) NeedDepthPrePass(needDepthPrePass bool) *Material {
-	p := ba.ctx.Get("Material").New(needDepthPrePass)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) NeedDepthPrePass() bool {
+	retVal := m.p.Get("needDepthPrePass")
+	return retVal.Bool()
 }
 
 // SetNeedDepthPrePass sets the NeedDepthPrePass property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#needdepthprepass
 func (m *Material) SetNeedDepthPrePass(needDepthPrePass bool) *Material {
-	p := ba.ctx.Get("Material").New(needDepthPrePass)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("needDepthPrePass", needDepthPrePass)
+	return m
 }
 
 // OnBind returns the OnBind property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onbind
-func (m *Material) OnBind(onBind func()) *Material {
-	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) OnBind() js.Value {
+	retVal := m.p.Get("onBind")
+	return retVal
 }
 
 // SetOnBind sets the OnBind property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onbind
 func (m *Material) SetOnBind(onBind func()) *Material {
-	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("onBind", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onBind(); return nil }))
+	return m
 }
 
 // OnBindObservable returns the OnBindObservable property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onbindobservable
-func (m *Material) OnBindObservable(onBindObservable *Observable) *Material {
-	p := ba.ctx.Get("Material").New(onBindObservable.JSObject())
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) OnBindObservable() *Observable {
+	retVal := m.p.Get("onBindObservable")
+	return ObservableFromJSObject(retVal, m.ctx)
 }
 
 // SetOnBindObservable sets the OnBindObservable property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onbindobservable
 func (m *Material) SetOnBindObservable(onBindObservable *Observable) *Material {
-	p := ba.ctx.Get("Material").New(onBindObservable.JSObject())
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("onBindObservable", onBindObservable.JSObject())
+	return m
 }
 
 // OnCompiled returns the OnCompiled property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#oncompiled
-func (m *Material) OnCompiled(onCompiled func()) *Material {
-	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) OnCompiled() js.Value {
+	retVal := m.p.Get("onCompiled")
+	return retVal
 }
 
 // SetOnCompiled sets the OnCompiled property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#oncompiled
 func (m *Material) SetOnCompiled(onCompiled func()) *Material {
-	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("onCompiled", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCompiled(); return nil }))
+	return m
 }
 
 // OnDispose returns the OnDispose property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#ondispose
-func (m *Material) OnDispose(onDispose func()) *Material {
-	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) OnDispose() js.Value {
+	retVal := m.p.Get("onDispose")
+	return retVal
 }
 
 // SetOnDispose sets the OnDispose property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#ondispose
 func (m *Material) SetOnDispose(onDispose func()) *Material {
-	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+	return m
 }
 
 // OnDisposeObservable returns the OnDisposeObservable property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#ondisposeobservable
-func (m *Material) OnDisposeObservable(onDisposeObservable *Observable) *Material {
-	p := ba.ctx.Get("Material").New(onDisposeObservable.JSObject())
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) OnDisposeObservable() *Observable {
+	retVal := m.p.Get("onDisposeObservable")
+	return ObservableFromJSObject(retVal, m.ctx)
 }
 
 // SetOnDisposeObservable sets the OnDisposeObservable property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#ondisposeobservable
 func (m *Material) SetOnDisposeObservable(onDisposeObservable *Observable) *Material {
-	p := ba.ctx.Get("Material").New(onDisposeObservable.JSObject())
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("onDisposeObservable", onDisposeObservable.JSObject())
+	return m
 }
 
 // OnError returns the OnError property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onerror
-func (m *Material) OnError(onError func()) *Material {
-	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) OnError() js.Value {
+	retVal := m.p.Get("onError")
+	return retVal
 }
 
 // SetOnError sets the OnError property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onerror
 func (m *Material) SetOnError(onError func()) *Material {
-	p := ba.ctx.Get("Material").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	return m
 }
 
 // OnUnBindObservable returns the OnUnBindObservable property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onunbindobservable
-func (m *Material) OnUnBindObservable(onUnBindObservable *Observable) *Material {
-	p := ba.ctx.Get("Material").New(onUnBindObservable.JSObject())
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) OnUnBindObservable() *Observable {
+	retVal := m.p.Get("onUnBindObservable")
+	return ObservableFromJSObject(retVal, m.ctx)
 }
 
 // SetOnUnBindObservable sets the OnUnBindObservable property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onunbindobservable
 func (m *Material) SetOnUnBindObservable(onUnBindObservable *Observable) *Material {
-	p := ba.ctx.Get("Material").New(onUnBindObservable.JSObject())
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("onUnBindObservable", onUnBindObservable.JSObject())
+	return m
 }
 
 // PointFillMode returns the PointFillMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#pointfillmode
-func (m *Material) PointFillMode(PointFillMode float64) *Material {
-	p := ba.ctx.Get("Material").New(PointFillMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) PointFillMode() float64 {
+	retVal := m.p.Get("PointFillMode")
+	return retVal.Float()
 }
 
 // SetPointFillMode sets the PointFillMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#pointfillmode
 func (m *Material) SetPointFillMode(PointFillMode float64) *Material {
-	p := ba.ctx.Get("Material").New(PointFillMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("PointFillMode", PointFillMode)
+	return m
 }
 
 // PointListDrawMode returns the PointListDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#pointlistdrawmode
-func (m *Material) PointListDrawMode(PointListDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(PointListDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) PointListDrawMode() float64 {
+	retVal := m.p.Get("PointListDrawMode")
+	return retVal.Float()
 }
 
 // SetPointListDrawMode sets the PointListDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#pointlistdrawmode
 func (m *Material) SetPointListDrawMode(PointListDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(PointListDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("PointListDrawMode", PointListDrawMode)
+	return m
 }
 
 // PointSize returns the PointSize property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#pointsize
-func (m *Material) PointSize(pointSize float64) *Material {
-	p := ba.ctx.Get("Material").New(pointSize)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) PointSize() float64 {
+	retVal := m.p.Get("pointSize")
+	return retVal.Float()
 }
 
 // SetPointSize sets the PointSize property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#pointsize
 func (m *Material) SetPointSize(pointSize float64) *Material {
-	p := ba.ctx.Get("Material").New(pointSize)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("pointSize", pointSize)
+	return m
 }
 
 // PointsCloud returns the PointsCloud property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#pointscloud
-func (m *Material) PointsCloud(pointsCloud bool) *Material {
-	p := ba.ctx.Get("Material").New(pointsCloud)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) PointsCloud() bool {
+	retVal := m.p.Get("pointsCloud")
+	return retVal.Bool()
 }
 
 // SetPointsCloud sets the PointsCloud property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#pointscloud
 func (m *Material) SetPointsCloud(pointsCloud bool) *Material {
-	p := ba.ctx.Get("Material").New(pointsCloud)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("pointsCloud", pointsCloud)
+	return m
 }
 
 // ReservedDataStore returns the ReservedDataStore property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#reserveddatastore
-func (m *Material) ReservedDataStore(reservedDataStore interface{}) *Material {
-	p := ba.ctx.Get("Material").New(reservedDataStore)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) ReservedDataStore() interface{} {
+	retVal := m.p.Get("reservedDataStore")
+	return retVal
 }
 
 // SetReservedDataStore sets the ReservedDataStore property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#reserveddatastore
 func (m *Material) SetReservedDataStore(reservedDataStore interface{}) *Material {
-	p := ba.ctx.Get("Material").New(reservedDataStore)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("reservedDataStore", reservedDataStore)
+	return m
 }
 
 // SeparateCullingPass returns the SeparateCullingPass property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#separatecullingpass
-func (m *Material) SeparateCullingPass(separateCullingPass bool) *Material {
-	p := ba.ctx.Get("Material").New(separateCullingPass)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) SeparateCullingPass() bool {
+	retVal := m.p.Get("separateCullingPass")
+	return retVal.Bool()
 }
 
 // SetSeparateCullingPass sets the SeparateCullingPass property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#separatecullingpass
 func (m *Material) SetSeparateCullingPass(separateCullingPass bool) *Material {
-	p := ba.ctx.Get("Material").New(separateCullingPass)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("separateCullingPass", separateCullingPass)
+	return m
 }
 
 // SideOrientation returns the SideOrientation property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#sideorientation
-func (m *Material) SideOrientation(sideOrientation float64) *Material {
-	p := ba.ctx.Get("Material").New(sideOrientation)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) SideOrientation() float64 {
+	retVal := m.p.Get("sideOrientation")
+	return retVal.Float()
 }
 
 // SetSideOrientation sets the SideOrientation property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#sideorientation
 func (m *Material) SetSideOrientation(sideOrientation float64) *Material {
-	p := ba.ctx.Get("Material").New(sideOrientation)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("sideOrientation", sideOrientation)
+	return m
 }
 
 // State returns the State property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#state
-func (m *Material) State(state string) *Material {
-	p := ba.ctx.Get("Material").New(state)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) State() string {
+	retVal := m.p.Get("state")
+	return retVal.String()
 }
 
 // SetState sets the State property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#state
 func (m *Material) SetState(state string) *Material {
-	p := ba.ctx.Get("Material").New(state)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("state", state)
+	return m
 }
 
 // TextureDirtyFlag returns the TextureDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#texturedirtyflag
-func (m *Material) TextureDirtyFlag(TextureDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(TextureDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) TextureDirtyFlag() float64 {
+	retVal := m.p.Get("TextureDirtyFlag")
+	return retVal.Float()
 }
 
 // SetTextureDirtyFlag sets the TextureDirtyFlag property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#texturedirtyflag
 func (m *Material) SetTextureDirtyFlag(TextureDirtyFlag float64) *Material {
-	p := ba.ctx.Get("Material").New(TextureDirtyFlag)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("TextureDirtyFlag", TextureDirtyFlag)
+	return m
 }
 
 // TriangleFanDrawMode returns the TriangleFanDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#trianglefandrawmode
-func (m *Material) TriangleFanDrawMode(TriangleFanDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(TriangleFanDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) TriangleFanDrawMode() float64 {
+	retVal := m.p.Get("TriangleFanDrawMode")
+	return retVal.Float()
 }
 
 // SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#trianglefandrawmode
 func (m *Material) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(TriangleFanDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("TriangleFanDrawMode", TriangleFanDrawMode)
+	return m
 }
 
 // TriangleFillMode returns the TriangleFillMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#trianglefillmode
-func (m *Material) TriangleFillMode(TriangleFillMode float64) *Material {
-	p := ba.ctx.Get("Material").New(TriangleFillMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) TriangleFillMode() float64 {
+	retVal := m.p.Get("TriangleFillMode")
+	return retVal.Float()
 }
 
 // SetTriangleFillMode sets the TriangleFillMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#trianglefillmode
 func (m *Material) SetTriangleFillMode(TriangleFillMode float64) *Material {
-	p := ba.ctx.Get("Material").New(TriangleFillMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("TriangleFillMode", TriangleFillMode)
+	return m
 }
 
 // TriangleStripDrawMode returns the TriangleStripDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#trianglestripdrawmode
-func (m *Material) TriangleStripDrawMode(TriangleStripDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(TriangleStripDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) TriangleStripDrawMode() float64 {
+	retVal := m.p.Get("TriangleStripDrawMode")
+	return retVal.Float()
 }
 
 // SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#trianglestripdrawmode
 func (m *Material) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *Material {
-	p := ba.ctx.Get("Material").New(TriangleStripDrawMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("TriangleStripDrawMode", TriangleStripDrawMode)
+	return m
 }
 
 // UniqueId returns the UniqueId property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#uniqueid
-func (m *Material) UniqueId(uniqueId float64) *Material {
-	p := ba.ctx.Get("Material").New(uniqueId)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) UniqueId() float64 {
+	retVal := m.p.Get("uniqueId")
+	return retVal.Float()
 }
 
 // SetUniqueId sets the UniqueId property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#uniqueid
 func (m *Material) SetUniqueId(uniqueId float64) *Material {
-	p := ba.ctx.Get("Material").New(uniqueId)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("uniqueId", uniqueId)
+	return m
 }
 
 // WireFrameFillMode returns the WireFrameFillMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#wireframefillmode
-func (m *Material) WireFrameFillMode(WireFrameFillMode float64) *Material {
-	p := ba.ctx.Get("Material").New(WireFrameFillMode)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) WireFrameFillMode() float64 {
+	retVal := m.p.Get("WireFrameFillMode")
+	return retVal.Float()
 }
 
 // SetWireFrameFillMode sets the WireFrameFillMode property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#wireframefillmode
 func (m *Material) SetWireFrameFillMode(WireFrameFillMode float64) *Material {
-	p := ba.ctx.Get("Material").New(WireFrameFillMode)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("WireFrameFillMode", WireFrameFillMode)
+	return m
 }
 
 // Wireframe returns the Wireframe property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#wireframe
-func (m *Material) Wireframe(wireframe bool) *Material {
-	p := ba.ctx.Get("Material").New(wireframe)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) Wireframe() bool {
+	retVal := m.p.Get("wireframe")
+	return retVal.Bool()
 }
 
 // SetWireframe sets the Wireframe property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#wireframe
 func (m *Material) SetWireframe(wireframe bool) *Material {
-	p := ba.ctx.Get("Material").New(wireframe)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("wireframe", wireframe)
+	return m
 }
 
 // ZOffset returns the ZOffset property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#zoffset
-func (m *Material) ZOffset(zOffset float64) *Material {
-	p := ba.ctx.Get("Material").New(zOffset)
-	return MaterialFromJSObject(p, ba.ctx)
+func (m *Material) ZOffset() float64 {
+	retVal := m.p.Get("zOffset")
+	return retVal.Float()
 }
 
 // SetZOffset sets the ZOffset property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#zoffset
 func (m *Material) SetZOffset(zOffset float64) *Material {
-	p := ba.ctx.Get("Material").New(zOffset)
-	return MaterialFromJSObject(p, ba.ctx)
+	m.p.Set("zOffset", zOffset)
+	return m
 }
-
-*/

@@ -67,7 +67,3 @@ func (d *DomManagement) IsWindowObjectExist() bool {
 	retVal := d.p.Call("IsWindowObjectExist")
 	return retVal.Bool()
 }
-
-/*
-
- */

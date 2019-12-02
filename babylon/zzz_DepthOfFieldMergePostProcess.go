@@ -145,7 +145,3 @@ func (d *DepthOfFieldMergePostProcess) UpdateEffect(opts *DepthOfFieldMergePostP
 
 	d.p.Call("updateEffect", args...)
 }
-
-/*
-
- */

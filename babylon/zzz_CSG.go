@@ -235,86 +235,82 @@ func (c *CSG) UnionInPlace(csg *CSG) {
 	c.p.Call("unionInPlace", args...)
 }
 
-/*
-
 // Matrix returns the Matrix property of class CSG.
 //
 // https://doc.babylonjs.com/api/classes/babylon.csg#matrix
-func (c *CSG) Matrix(matrix *Matrix) *CSG {
-	p := ba.ctx.Get("CSG").New(matrix.JSObject())
-	return CSGFromJSObject(p, ba.ctx)
+func (c *CSG) Matrix() *Matrix {
+	retVal := c.p.Get("matrix")
+	return MatrixFromJSObject(retVal, c.ctx)
 }
 
 // SetMatrix sets the Matrix property of class CSG.
 //
 // https://doc.babylonjs.com/api/classes/babylon.csg#matrix
 func (c *CSG) SetMatrix(matrix *Matrix) *CSG {
-	p := ba.ctx.Get("CSG").New(matrix.JSObject())
-	return CSGFromJSObject(p, ba.ctx)
+	c.p.Set("matrix", matrix.JSObject())
+	return c
 }
 
 // Position returns the Position property of class CSG.
 //
 // https://doc.babylonjs.com/api/classes/babylon.csg#position
-func (c *CSG) Position(position *Vector3) *CSG {
-	p := ba.ctx.Get("CSG").New(position.JSObject())
-	return CSGFromJSObject(p, ba.ctx)
+func (c *CSG) Position() *Vector3 {
+	retVal := c.p.Get("position")
+	return Vector3FromJSObject(retVal, c.ctx)
 }
 
 // SetPosition sets the Position property of class CSG.
 //
 // https://doc.babylonjs.com/api/classes/babylon.csg#position
 func (c *CSG) SetPosition(position *Vector3) *CSG {
-	p := ba.ctx.Get("CSG").New(position.JSObject())
-	return CSGFromJSObject(p, ba.ctx)
+	c.p.Set("position", position.JSObject())
+	return c
 }
 
 // Rotation returns the Rotation property of class CSG.
 //
 // https://doc.babylonjs.com/api/classes/babylon.csg#rotation
-func (c *CSG) Rotation(rotation *Vector3) *CSG {
-	p := ba.ctx.Get("CSG").New(rotation.JSObject())
-	return CSGFromJSObject(p, ba.ctx)
+func (c *CSG) Rotation() *Vector3 {
+	retVal := c.p.Get("rotation")
+	return Vector3FromJSObject(retVal, c.ctx)
 }
 
 // SetRotation sets the Rotation property of class CSG.
 //
 // https://doc.babylonjs.com/api/classes/babylon.csg#rotation
 func (c *CSG) SetRotation(rotation *Vector3) *CSG {
-	p := ba.ctx.Get("CSG").New(rotation.JSObject())
-	return CSGFromJSObject(p, ba.ctx)
+	c.p.Set("rotation", rotation.JSObject())
+	return c
 }
 
 // RotationQuaternion returns the RotationQuaternion property of class CSG.
 //
 // https://doc.babylonjs.com/api/classes/babylon.csg#rotationquaternion
-func (c *CSG) RotationQuaternion(rotationQuaternion *Quaternion) *CSG {
-	p := ba.ctx.Get("CSG").New(rotationQuaternion.JSObject())
-	return CSGFromJSObject(p, ba.ctx)
+func (c *CSG) RotationQuaternion() *Quaternion {
+	retVal := c.p.Get("rotationQuaternion")
+	return QuaternionFromJSObject(retVal, c.ctx)
 }
 
 // SetRotationQuaternion sets the RotationQuaternion property of class CSG.
 //
 // https://doc.babylonjs.com/api/classes/babylon.csg#rotationquaternion
 func (c *CSG) SetRotationQuaternion(rotationQuaternion *Quaternion) *CSG {
-	p := ba.ctx.Get("CSG").New(rotationQuaternion.JSObject())
-	return CSGFromJSObject(p, ba.ctx)
+	c.p.Set("rotationQuaternion", rotationQuaternion.JSObject())
+	return c
 }
 
 // Scaling returns the Scaling property of class CSG.
 //
 // https://doc.babylonjs.com/api/classes/babylon.csg#scaling
-func (c *CSG) Scaling(scaling *Vector3) *CSG {
-	p := ba.ctx.Get("CSG").New(scaling.JSObject())
-	return CSGFromJSObject(p, ba.ctx)
+func (c *CSG) Scaling() *Vector3 {
+	retVal := c.p.Get("scaling")
+	return Vector3FromJSObject(retVal, c.ctx)
 }
 
 // SetScaling sets the Scaling property of class CSG.
 //
 // https://doc.babylonjs.com/api/classes/babylon.csg#scaling
 func (c *CSG) SetScaling(scaling *Vector3) *CSG {
-	p := ba.ctx.Get("CSG").New(scaling.JSObject())
-	return CSGFromJSObject(p, ba.ctx)
+	c.p.Set("scaling", scaling.JSObject())
+	return c
 }
-
-*/

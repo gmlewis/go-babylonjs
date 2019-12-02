@@ -62,7 +62,3 @@ func (ba *Babylon) NewMeshButton3D(mesh *Mesh, opts *NewMeshButton3DOpts) *MeshB
 	p := ba.ctx.Get("MeshButton3D").New(args...)
 	return MeshButton3DFromJSObject(p, ba.ctx)
 }
-
-/*
-
- */

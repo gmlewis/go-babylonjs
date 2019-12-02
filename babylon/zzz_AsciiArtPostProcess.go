@@ -67,38 +67,34 @@ func (ba *Babylon) NewAsciiArtPostProcess(name string, camera *Camera, opts *New
 	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // MixToNormal returns the MixToNormal property of class AsciiArtPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#mixtonormal
-func (a *AsciiArtPostProcess) MixToNormal(mixToNormal float64) *AsciiArtPostProcess {
-	p := ba.ctx.Get("AsciiArtPostProcess").New(mixToNormal)
-	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+func (a *AsciiArtPostProcess) MixToNormal() float64 {
+	retVal := a.p.Get("mixToNormal")
+	return retVal.Float()
 }
 
 // SetMixToNormal sets the MixToNormal property of class AsciiArtPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#mixtonormal
 func (a *AsciiArtPostProcess) SetMixToNormal(mixToNormal float64) *AsciiArtPostProcess {
-	p := ba.ctx.Get("AsciiArtPostProcess").New(mixToNormal)
-	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+	a.p.Set("mixToNormal", mixToNormal)
+	return a
 }
 
 // MixToTile returns the MixToTile property of class AsciiArtPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#mixtotile
-func (a *AsciiArtPostProcess) MixToTile(mixToTile float64) *AsciiArtPostProcess {
-	p := ba.ctx.Get("AsciiArtPostProcess").New(mixToTile)
-	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+func (a *AsciiArtPostProcess) MixToTile() float64 {
+	retVal := a.p.Get("mixToTile")
+	return retVal.Float()
 }
 
 // SetMixToTile sets the MixToTile property of class AsciiArtPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#mixtotile
 func (a *AsciiArtPostProcess) SetMixToTile(mixToTile float64) *AsciiArtPostProcess {
-	p := ba.ctx.Get("AsciiArtPostProcess").New(mixToTile)
-	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+	a.p.Set("mixToTile", mixToTile)
+	return a
 }
-
-*/

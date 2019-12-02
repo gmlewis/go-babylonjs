@@ -2014,566 +2014,566 @@ func (t *ThinEngine) _createDepthStencilCubeTexture(size float64, options *Depth
 	return InternalTextureFromJSObject(retVal, t.ctx)
 }
 
-/*
-
 // AlphaState returns the AlphaState property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#alphastate
-func (t *ThinEngine) AlphaState(alphaState *AlphaState) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(alphaState.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) AlphaState() js.Value {
+	retVal := t.p.Get("alphaState")
+	return retVal
 }
 
 // SetAlphaState sets the AlphaState property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#alphastate
-func (t *ThinEngine) SetAlphaState(alphaState *AlphaState) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(alphaState.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) SetAlphaState(alphaState js.Value) *ThinEngine {
+	t.p.Set("alphaState", alphaState)
+	return t
 }
 
 // CollisionsEpsilon returns the CollisionsEpsilon property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#collisionsepsilon
-func (t *ThinEngine) CollisionsEpsilon(CollisionsEpsilon float64) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(CollisionsEpsilon)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) CollisionsEpsilon() float64 {
+	retVal := t.p.Get("CollisionsEpsilon")
+	return retVal.Float()
 }
 
 // SetCollisionsEpsilon sets the CollisionsEpsilon property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#collisionsepsilon
 func (t *ThinEngine) SetCollisionsEpsilon(CollisionsEpsilon float64) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(CollisionsEpsilon)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("CollisionsEpsilon", CollisionsEpsilon)
+	return t
 }
 
 // CullBackFaces returns the CullBackFaces property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#cullbackfaces
-func (t *ThinEngine) CullBackFaces(cullBackFaces bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(cullBackFaces)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) CullBackFaces() bool {
+	retVal := t.p.Get("cullBackFaces")
+	return retVal.Bool()
 }
 
 // SetCullBackFaces sets the CullBackFaces property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#cullbackfaces
 func (t *ThinEngine) SetCullBackFaces(cullBackFaces bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(cullBackFaces)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("cullBackFaces", cullBackFaces)
+	return t
 }
 
 // CurrentViewport returns the CurrentViewport property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#currentviewport
-func (t *ThinEngine) CurrentViewport(currentViewport js.Value) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(currentViewport)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) CurrentViewport() js.Value {
+	retVal := t.p.Get("currentViewport")
+	return retVal
 }
 
 // SetCurrentViewport sets the CurrentViewport property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#currentviewport
 func (t *ThinEngine) SetCurrentViewport(currentViewport js.Value) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(currentViewport)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("currentViewport", currentViewport)
+	return t
 }
 
 // DepthCullingState returns the DepthCullingState property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#depthcullingstate
-func (t *ThinEngine) DepthCullingState(depthCullingState *DepthCullingState) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(depthCullingState.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) DepthCullingState() js.Value {
+	retVal := t.p.Get("depthCullingState")
+	return retVal
 }
 
 // SetDepthCullingState sets the DepthCullingState property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#depthcullingstate
-func (t *ThinEngine) SetDepthCullingState(depthCullingState *DepthCullingState) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(depthCullingState.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) SetDepthCullingState(depthCullingState js.Value) *ThinEngine {
+	t.p.Set("depthCullingState", depthCullingState)
+	return t
 }
 
 // Description returns the Description property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#description
-func (t *ThinEngine) Description(description string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(description)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) Description() string {
+	retVal := t.p.Get("description")
+	return retVal.String()
 }
 
 // SetDescription sets the Description property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#description
 func (t *ThinEngine) SetDescription(description string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(description)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("description", description)
+	return t
 }
 
 // DisableUniformBuffers returns the DisableUniformBuffers property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#disableuniformbuffers
-func (t *ThinEngine) DisableUniformBuffers(disableUniformBuffers bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(disableUniformBuffers)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) DisableUniformBuffers() bool {
+	retVal := t.p.Get("disableUniformBuffers")
+	return retVal.Bool()
 }
 
 // SetDisableUniformBuffers sets the DisableUniformBuffers property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#disableuniformbuffers
 func (t *ThinEngine) SetDisableUniformBuffers(disableUniformBuffers bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(disableUniformBuffers)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("disableUniformBuffers", disableUniformBuffers)
+	return t
 }
 
 // DisableVertexArrayObjects returns the DisableVertexArrayObjects property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#disablevertexarrayobjects
-func (t *ThinEngine) DisableVertexArrayObjects(disableVertexArrayObjects bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(disableVertexArrayObjects)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) DisableVertexArrayObjects() bool {
+	retVal := t.p.Get("disableVertexArrayObjects")
+	return retVal.Bool()
 }
 
 // SetDisableVertexArrayObjects sets the DisableVertexArrayObjects property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#disablevertexarrayobjects
 func (t *ThinEngine) SetDisableVertexArrayObjects(disableVertexArrayObjects bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(disableVertexArrayObjects)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("disableVertexArrayObjects", disableVertexArrayObjects)
+	return t
 }
 
 // DoNotHandleContextLost returns the DoNotHandleContextLost property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#donothandlecontextlost
-func (t *ThinEngine) DoNotHandleContextLost(doNotHandleContextLost bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(doNotHandleContextLost)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) DoNotHandleContextLost() bool {
+	retVal := t.p.Get("doNotHandleContextLost")
+	return retVal.Bool()
 }
 
 // SetDoNotHandleContextLost sets the DoNotHandleContextLost property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#donothandlecontextlost
 func (t *ThinEngine) SetDoNotHandleContextLost(doNotHandleContextLost bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(doNotHandleContextLost)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("doNotHandleContextLost", doNotHandleContextLost)
+	return t
 }
 
 // EmptyCubeTexture returns the EmptyCubeTexture property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#emptycubetexture
-func (t *ThinEngine) EmptyCubeTexture(emptyCubeTexture *InternalTexture) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(emptyCubeTexture.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) EmptyCubeTexture() *InternalTexture {
+	retVal := t.p.Get("emptyCubeTexture")
+	return InternalTextureFromJSObject(retVal, t.ctx)
 }
 
 // SetEmptyCubeTexture sets the EmptyCubeTexture property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#emptycubetexture
 func (t *ThinEngine) SetEmptyCubeTexture(emptyCubeTexture *InternalTexture) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(emptyCubeTexture.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("emptyCubeTexture", emptyCubeTexture.JSObject())
+	return t
 }
 
 // EmptyTexture returns the EmptyTexture property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture
-func (t *ThinEngine) EmptyTexture(emptyTexture *InternalTexture) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(emptyTexture.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) EmptyTexture() *InternalTexture {
+	retVal := t.p.Get("emptyTexture")
+	return InternalTextureFromJSObject(retVal, t.ctx)
 }
 
 // SetEmptyTexture sets the EmptyTexture property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture
 func (t *ThinEngine) SetEmptyTexture(emptyTexture *InternalTexture) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(emptyTexture.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("emptyTexture", emptyTexture.JSObject())
+	return t
 }
 
 // EmptyTexture2DArray returns the EmptyTexture2DArray property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture2darray
-func (t *ThinEngine) EmptyTexture2DArray(emptyTexture2DArray *InternalTexture) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(emptyTexture2DArray.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) EmptyTexture2DArray() *InternalTexture {
+	retVal := t.p.Get("emptyTexture2DArray")
+	return InternalTextureFromJSObject(retVal, t.ctx)
 }
 
 // SetEmptyTexture2DArray sets the EmptyTexture2DArray property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture2darray
 func (t *ThinEngine) SetEmptyTexture2DArray(emptyTexture2DArray *InternalTexture) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(emptyTexture2DArray.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("emptyTexture2DArray", emptyTexture2DArray.JSObject())
+	return t
 }
 
 // EmptyTexture3D returns the EmptyTexture3D property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture3d
-func (t *ThinEngine) EmptyTexture3D(emptyTexture3D *InternalTexture) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(emptyTexture3D.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) EmptyTexture3D() *InternalTexture {
+	retVal := t.p.Get("emptyTexture3D")
+	return InternalTextureFromJSObject(retVal, t.ctx)
 }
 
 // SetEmptyTexture3D sets the EmptyTexture3D property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture3d
 func (t *ThinEngine) SetEmptyTexture3D(emptyTexture3D *InternalTexture) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(emptyTexture3D.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("emptyTexture3D", emptyTexture3D.JSObject())
+	return t
 }
 
 // EnableUnpackFlipYCached returns the EnableUnpackFlipYCached property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#enableunpackflipycached
-func (t *ThinEngine) EnableUnpackFlipYCached(enableUnpackFlipYCached bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(enableUnpackFlipYCached)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) EnableUnpackFlipYCached() bool {
+	retVal := t.p.Get("enableUnpackFlipYCached")
+	return retVal.Bool()
 }
 
 // SetEnableUnpackFlipYCached sets the EnableUnpackFlipYCached property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#enableunpackflipycached
 func (t *ThinEngine) SetEnableUnpackFlipYCached(enableUnpackFlipYCached bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(enableUnpackFlipYCached)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("enableUnpackFlipYCached", enableUnpackFlipYCached)
+	return t
 }
 
 // ExceptionList returns the ExceptionList property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#exceptionlist
-func (t *ThinEngine) ExceptionList(ExceptionList js.Value) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(ExceptionList)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) ExceptionList() js.Value {
+	retVal := t.p.Get("ExceptionList")
+	return retVal
 }
 
 // SetExceptionList sets the ExceptionList property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#exceptionlist
 func (t *ThinEngine) SetExceptionList(ExceptionList js.Value) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(ExceptionList)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("ExceptionList", ExceptionList)
+	return t
 }
 
 // ForcePOTTextures returns the ForcePOTTextures property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#forcepottextures
-func (t *ThinEngine) ForcePOTTextures(forcePOTTextures bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(forcePOTTextures)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) ForcePOTTextures() bool {
+	retVal := t.p.Get("forcePOTTextures")
+	return retVal.Bool()
 }
 
 // SetForcePOTTextures sets the ForcePOTTextures property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#forcepottextures
 func (t *ThinEngine) SetForcePOTTextures(forcePOTTextures bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(forcePOTTextures)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("forcePOTTextures", forcePOTTextures)
+	return t
 }
 
 // IsFullscreen returns the IsFullscreen property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#isfullscreen
-func (t *ThinEngine) IsFullscreen(isFullscreen bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(isFullscreen)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) IsFullscreen() bool {
+	retVal := t.p.Get("isFullscreen")
+	return retVal.Bool()
 }
 
 // SetIsFullscreen sets the IsFullscreen property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#isfullscreen
 func (t *ThinEngine) SetIsFullscreen(isFullscreen bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(isFullscreen)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("isFullscreen", isFullscreen)
+	return t
 }
 
 // IsStencilEnable returns the IsStencilEnable property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#isstencilenable
-func (t *ThinEngine) IsStencilEnable(isStencilEnable bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(isStencilEnable)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) IsStencilEnable() bool {
+	retVal := t.p.Get("isStencilEnable")
+	return retVal.Bool()
 }
 
 // SetIsStencilEnable sets the IsStencilEnable property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#isstencilenable
 func (t *ThinEngine) SetIsStencilEnable(isStencilEnable bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(isStencilEnable)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("isStencilEnable", isStencilEnable)
+	return t
 }
 
 // NeedPOTTextures returns the NeedPOTTextures property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#needpottextures
-func (t *ThinEngine) NeedPOTTextures(needPOTTextures bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(needPOTTextures)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) NeedPOTTextures() bool {
+	retVal := t.p.Get("needPOTTextures")
+	return retVal.Bool()
 }
 
 // SetNeedPOTTextures sets the NeedPOTTextures property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#needpottextures
 func (t *ThinEngine) SetNeedPOTTextures(needPOTTextures bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(needPOTTextures)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("needPOTTextures", needPOTTextures)
+	return t
 }
 
 // NpmPackage returns the NpmPackage property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#npmpackage
-func (t *ThinEngine) NpmPackage(NpmPackage string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(NpmPackage)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) NpmPackage() string {
+	retVal := t.p.Get("NpmPackage")
+	return retVal.String()
 }
 
 // SetNpmPackage sets the NpmPackage property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#npmpackage
 func (t *ThinEngine) SetNpmPackage(NpmPackage string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(NpmPackage)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("NpmPackage", NpmPackage)
+	return t
 }
 
 // OnBeforeTextureInitObservable returns the OnBeforeTextureInitObservable property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#onbeforetextureinitobservable
-func (t *ThinEngine) OnBeforeTextureInitObservable(onBeforeTextureInitObservable *Observable) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(onBeforeTextureInitObservable.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) OnBeforeTextureInitObservable() *Observable {
+	retVal := t.p.Get("onBeforeTextureInitObservable")
+	return ObservableFromJSObject(retVal, t.ctx)
 }
 
 // SetOnBeforeTextureInitObservable sets the OnBeforeTextureInitObservable property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#onbeforetextureinitobservable
 func (t *ThinEngine) SetOnBeforeTextureInitObservable(onBeforeTextureInitObservable *Observable) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(onBeforeTextureInitObservable.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("onBeforeTextureInitObservable", onBeforeTextureInitObservable.JSObject())
+	return t
 }
 
 // OnContextLostObservable returns the OnContextLostObservable property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#oncontextlostobservable
-func (t *ThinEngine) OnContextLostObservable(onContextLostObservable *Observable) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(onContextLostObservable.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) OnContextLostObservable() *Observable {
+	retVal := t.p.Get("onContextLostObservable")
+	return ObservableFromJSObject(retVal, t.ctx)
 }
 
 // SetOnContextLostObservable sets the OnContextLostObservable property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#oncontextlostobservable
 func (t *ThinEngine) SetOnContextLostObservable(onContextLostObservable *Observable) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(onContextLostObservable.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("onContextLostObservable", onContextLostObservable.JSObject())
+	return t
 }
 
 // OnContextRestoredObservable returns the OnContextRestoredObservable property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#oncontextrestoredobservable
-func (t *ThinEngine) OnContextRestoredObservable(onContextRestoredObservable *Observable) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(onContextRestoredObservable.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) OnContextRestoredObservable() *Observable {
+	retVal := t.p.Get("onContextRestoredObservable")
+	return ObservableFromJSObject(retVal, t.ctx)
 }
 
 // SetOnContextRestoredObservable sets the OnContextRestoredObservable property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#oncontextrestoredobservable
 func (t *ThinEngine) SetOnContextRestoredObservable(onContextRestoredObservable *Observable) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(onContextRestoredObservable.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("onContextRestoredObservable", onContextRestoredObservable.JSObject())
+	return t
 }
 
 // PremultipliedAlpha returns the PremultipliedAlpha property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#premultipliedalpha
-func (t *ThinEngine) PremultipliedAlpha(premultipliedAlpha bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(premultipliedAlpha)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) PremultipliedAlpha() bool {
+	retVal := t.p.Get("premultipliedAlpha")
+	return retVal.Bool()
 }
 
 // SetPremultipliedAlpha sets the PremultipliedAlpha property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#premultipliedalpha
 func (t *ThinEngine) SetPremultipliedAlpha(premultipliedAlpha bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(premultipliedAlpha)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("premultipliedAlpha", premultipliedAlpha)
+	return t
 }
 
 // PreventCacheWipeBetweenFrames returns the PreventCacheWipeBetweenFrames property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#preventcachewipebetweenframes
-func (t *ThinEngine) PreventCacheWipeBetweenFrames(preventCacheWipeBetweenFrames bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(preventCacheWipeBetweenFrames)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) PreventCacheWipeBetweenFrames() bool {
+	retVal := t.p.Get("preventCacheWipeBetweenFrames")
+	return retVal.Bool()
 }
 
 // SetPreventCacheWipeBetweenFrames sets the PreventCacheWipeBetweenFrames property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#preventcachewipebetweenframes
 func (t *ThinEngine) SetPreventCacheWipeBetweenFrames(preventCacheWipeBetweenFrames bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(preventCacheWipeBetweenFrames)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("preventCacheWipeBetweenFrames", preventCacheWipeBetweenFrames)
+	return t
 }
 
 // RenderEvenInBackground returns the RenderEvenInBackground property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#rendereveninbackground
-func (t *ThinEngine) RenderEvenInBackground(renderEvenInBackground bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(renderEvenInBackground)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) RenderEvenInBackground() bool {
+	retVal := t.p.Get("renderEvenInBackground")
+	return retVal.Bool()
 }
 
 // SetRenderEvenInBackground sets the RenderEvenInBackground property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#rendereveninbackground
 func (t *ThinEngine) SetRenderEvenInBackground(renderEvenInBackground bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(renderEvenInBackground)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("renderEvenInBackground", renderEvenInBackground)
+	return t
 }
 
 // ShadersRepository returns the ShadersRepository property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#shadersrepository
-func (t *ThinEngine) ShadersRepository(ShadersRepository string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(ShadersRepository)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) ShadersRepository() string {
+	retVal := t.p.Get("ShadersRepository")
+	return retVal.String()
 }
 
 // SetShadersRepository sets the ShadersRepository property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#shadersrepository
 func (t *ThinEngine) SetShadersRepository(ShadersRepository string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(ShadersRepository)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("ShadersRepository", ShadersRepository)
+	return t
 }
 
 // StencilState returns the StencilState property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#stencilstate
-func (t *ThinEngine) StencilState(stencilState *StencilState) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(stencilState.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) StencilState() js.Value {
+	retVal := t.p.Get("stencilState")
+	return retVal
 }
 
 // SetStencilState sets the StencilState property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#stencilstate
-func (t *ThinEngine) SetStencilState(stencilState *StencilState) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(stencilState.JSObject())
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) SetStencilState(stencilState js.Value) *ThinEngine {
+	t.p.Set("stencilState", stencilState)
+	return t
 }
 
 // SupportsUniformBuffers returns the SupportsUniformBuffers property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#supportsuniformbuffers
-func (t *ThinEngine) SupportsUniformBuffers(supportsUniformBuffers bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(supportsUniformBuffers)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) SupportsUniformBuffers() bool {
+	retVal := t.p.Get("supportsUniformBuffers")
+	return retVal.Bool()
 }
 
 // SetSupportsUniformBuffers sets the SupportsUniformBuffers property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#supportsuniformbuffers
 func (t *ThinEngine) SetSupportsUniformBuffers(supportsUniformBuffers bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(supportsUniformBuffers)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("supportsUniformBuffers", supportsUniformBuffers)
+	return t
 }
 
 // TextureFormatInUse returns the TextureFormatInUse property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#textureformatinuse
-func (t *ThinEngine) TextureFormatInUse(textureFormatInUse string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(textureFormatInUse)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) TextureFormatInUse() string {
+	retVal := t.p.Get("textureFormatInUse")
+	return retVal.String()
 }
 
 // SetTextureFormatInUse sets the TextureFormatInUse property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#textureformatinuse
 func (t *ThinEngine) SetTextureFormatInUse(textureFormatInUse string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(textureFormatInUse)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("textureFormatInUse", textureFormatInUse)
+	return t
 }
 
 // TexturesSupported returns the TexturesSupported property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#texturessupported
-func (t *ThinEngine) TexturesSupported(texturesSupported []string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(texturesSupported)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) TexturesSupported() []string {
+	retVal := t.p.Get("texturesSupported")
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetTexturesSupported sets the TexturesSupported property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#texturessupported
 func (t *ThinEngine) SetTexturesSupported(texturesSupported []string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(texturesSupported)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("texturesSupported", texturesSupported)
+	return t
 }
 
 // UseReverseDepthBuffer returns the UseReverseDepthBuffer property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#usereversedepthbuffer
-func (t *ThinEngine) UseReverseDepthBuffer(useReverseDepthBuffer bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(useReverseDepthBuffer)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) UseReverseDepthBuffer() bool {
+	retVal := t.p.Get("useReverseDepthBuffer")
+	return retVal.Bool()
 }
 
 // SetUseReverseDepthBuffer sets the UseReverseDepthBuffer property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#usereversedepthbuffer
 func (t *ThinEngine) SetUseReverseDepthBuffer(useReverseDepthBuffer bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(useReverseDepthBuffer)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("useReverseDepthBuffer", useReverseDepthBuffer)
+	return t
 }
 
 // ValidateShaderPrograms returns the ValidateShaderPrograms property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#validateshaderprograms
-func (t *ThinEngine) ValidateShaderPrograms(validateShaderPrograms bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(validateShaderPrograms)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) ValidateShaderPrograms() bool {
+	retVal := t.p.Get("validateShaderPrograms")
+	return retVal.Bool()
 }
 
 // SetValidateShaderPrograms sets the ValidateShaderPrograms property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#validateshaderprograms
 func (t *ThinEngine) SetValidateShaderPrograms(validateShaderPrograms bool) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(validateShaderPrograms)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("validateShaderPrograms", validateShaderPrograms)
+	return t
 }
 
 // Version returns the Version property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#version
-func (t *ThinEngine) Version(Version string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(Version)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) Version() string {
+	retVal := t.p.Get("Version")
+	return retVal.String()
 }
 
 // SetVersion sets the Version property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#version
 func (t *ThinEngine) SetVersion(Version string) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(Version)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("Version", Version)
+	return t
 }
 
 // WebGLVersion returns the WebGLVersion property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#webglversion
-func (t *ThinEngine) WebGLVersion(webGLVersion float64) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(webGLVersion)
-	return ThinEngineFromJSObject(p, ba.ctx)
+func (t *ThinEngine) WebGLVersion() float64 {
+	retVal := t.p.Get("webGLVersion")
+	return retVal.Float()
 }
 
 // SetWebGLVersion sets the WebGLVersion property of class ThinEngine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#webglversion
 func (t *ThinEngine) SetWebGLVersion(webGLVersion float64) *ThinEngine {
-	p := ba.ctx.Get("ThinEngine").New(webGLVersion)
-	return ThinEngineFromJSObject(p, ba.ctx)
+	t.p.Set("webGLVersion", webGLVersion)
+	return t
 }
-
-*/

@@ -940,150 +940,122 @@ func (b *Bone) UpdateMatrix(matrix *Matrix, opts *BoneUpdateMatrixOpts) {
 	b.p.Call("updateMatrix", args...)
 }
 
-/*
-
 // AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#animationpropertiesoverride
-func (b *Bone) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Bone {
-	p := ba.ctx.Get("Bone").New(animationPropertiesOverride.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+func (b *Bone) AnimationPropertiesOverride() *AnimationPropertiesOverride {
+	retVal := b.p.Get("animationPropertiesOverride")
+	return AnimationPropertiesOverrideFromJSObject(retVal, b.ctx)
 }
 
 // SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#animationpropertiesoverride
 func (b *Bone) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Bone {
-	p := ba.ctx.Get("Bone").New(animationPropertiesOverride.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+	b.p.Set("animationPropertiesOverride", animationPropertiesOverride.JSObject())
+	return b
 }
 
 // Animations returns the Animations property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#animations
-func (b *Bone) Animations(animations *Animation) *Bone {
-	p := ba.ctx.Get("Bone").New(animations.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+func (b *Bone) Animations() *Animation {
+	retVal := b.p.Get("animations")
+	return AnimationFromJSObject(retVal, b.ctx)
 }
 
 // SetAnimations sets the Animations property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#animations
 func (b *Bone) SetAnimations(animations *Animation) *Bone {
-	p := ba.ctx.Get("Bone").New(animations.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+	b.p.Set("animations", animations.JSObject())
+	return b
 }
 
 // Children returns the Children property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#children
-func (b *Bone) Children(children *Bone) *Bone {
-	p := ba.ctx.Get("Bone").New(children.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+func (b *Bone) Children() *Bone {
+	retVal := b.p.Get("children")
+	return BoneFromJSObject(retVal, b.ctx)
 }
 
 // SetChildren sets the Children property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#children
 func (b *Bone) SetChildren(children *Bone) *Bone {
-	p := ba.ctx.Get("Bone").New(children.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+	b.p.Set("children", children.JSObject())
+	return b
 }
 
 // Length returns the Length property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#length
-func (b *Bone) Length(length float64) *Bone {
-	p := ba.ctx.Get("Bone").New(length)
-	return BoneFromJSObject(p, ba.ctx)
+func (b *Bone) Length() float64 {
+	retVal := b.p.Get("length")
+	return retVal.Float()
 }
 
 // SetLength sets the Length property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#length
 func (b *Bone) SetLength(length float64) *Bone {
-	p := ba.ctx.Get("Bone").New(length)
-	return BoneFromJSObject(p, ba.ctx)
+	b.p.Set("length", length)
+	return b
 }
 
 // Name returns the Name property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#name
-func (b *Bone) Name(name string) *Bone {
-	p := ba.ctx.Get("Bone").New(name)
-	return BoneFromJSObject(p, ba.ctx)
+func (b *Bone) Name() string {
+	retVal := b.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#name
 func (b *Bone) SetName(name string) *Bone {
-	p := ba.ctx.Get("Bone").New(name)
-	return BoneFromJSObject(p, ba.ctx)
+	b.p.Set("name", name)
+	return b
 }
 
 // Position returns the Position property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#position
-func (b *Bone) Position(position *Vector3) *Bone {
-	p := ba.ctx.Get("Bone").New(position.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
-}
-
-// SetPosition sets the Position property of class Bone.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bone#position
-func (b *Bone) SetPosition(position *Vector3) *Bone {
-	p := ba.ctx.Get("Bone").New(position.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+func (b *Bone) Position() *Vector3 {
+	retVal := b.p.Get("position")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // Rotation returns the Rotation property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#rotation
-func (b *Bone) Rotation(rotation *Vector3) *Bone {
-	p := ba.ctx.Get("Bone").New(rotation.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
-}
-
-// SetRotation sets the Rotation property of class Bone.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bone#rotation
-func (b *Bone) SetRotation(rotation *Vector3) *Bone {
-	p := ba.ctx.Get("Bone").New(rotation.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+func (b *Bone) Rotation() *Vector3 {
+	retVal := b.p.Get("rotation")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // RotationQuaternion returns the RotationQuaternion property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#rotationquaternion
-func (b *Bone) RotationQuaternion(rotationQuaternion *Quaternion) *Bone {
-	p := ba.ctx.Get("Bone").New(rotationQuaternion.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
-}
-
-// SetRotationQuaternion sets the RotationQuaternion property of class Bone.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bone#rotationquaternion
-func (b *Bone) SetRotationQuaternion(rotationQuaternion *Quaternion) *Bone {
-	p := ba.ctx.Get("Bone").New(rotationQuaternion.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+func (b *Bone) RotationQuaternion() *Quaternion {
+	retVal := b.p.Get("rotationQuaternion")
+	return QuaternionFromJSObject(retVal, b.ctx)
 }
 
 // Scaling returns the Scaling property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#scaling
-func (b *Bone) Scaling(scaling *Vector3) *Bone {
-	p := ba.ctx.Get("Bone").New(scaling.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+func (b *Bone) Scaling() *Vector3 {
+	retVal := b.p.Get("scaling")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetScaling sets the Scaling property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#scaling
 func (b *Bone) SetScaling(scaling *Vector3) *Bone {
-	p := ba.ctx.Get("Bone").New(scaling.JSObject())
-	return BoneFromJSObject(p, ba.ctx)
+	b.p.Set("scaling", scaling.JSObject())
+	return b
 }
-
-*/

@@ -58,54 +58,50 @@ func (r *ReflectBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Incident returns the Incident property of class ReflectBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock#incident
-func (r *ReflectBlock) Incident(incident *NodeMaterialConnectionPoint) *ReflectBlock {
-	p := ba.ctx.Get("ReflectBlock").New(incident.JSObject())
-	return ReflectBlockFromJSObject(p, ba.ctx)
+func (r *ReflectBlock) Incident() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("incident")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetIncident sets the Incident property of class ReflectBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock#incident
 func (r *ReflectBlock) SetIncident(incident *NodeMaterialConnectionPoint) *ReflectBlock {
-	p := ba.ctx.Get("ReflectBlock").New(incident.JSObject())
-	return ReflectBlockFromJSObject(p, ba.ctx)
+	r.p.Set("incident", incident.JSObject())
+	return r
 }
 
 // Normal returns the Normal property of class ReflectBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock#normal
-func (r *ReflectBlock) Normal(normal *NodeMaterialConnectionPoint) *ReflectBlock {
-	p := ba.ctx.Get("ReflectBlock").New(normal.JSObject())
-	return ReflectBlockFromJSObject(p, ba.ctx)
+func (r *ReflectBlock) Normal() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("normal")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetNormal sets the Normal property of class ReflectBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock#normal
 func (r *ReflectBlock) SetNormal(normal *NodeMaterialConnectionPoint) *ReflectBlock {
-	p := ba.ctx.Get("ReflectBlock").New(normal.JSObject())
-	return ReflectBlockFromJSObject(p, ba.ctx)
+	r.p.Set("normal", normal.JSObject())
+	return r
 }
 
 // Output returns the Output property of class ReflectBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock#output
-func (r *ReflectBlock) Output(output *NodeMaterialConnectionPoint) *ReflectBlock {
-	p := ba.ctx.Get("ReflectBlock").New(output.JSObject())
-	return ReflectBlockFromJSObject(p, ba.ctx)
+func (r *ReflectBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetOutput sets the Output property of class ReflectBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock#output
 func (r *ReflectBlock) SetOutput(output *NodeMaterialConnectionPoint) *ReflectBlock {
-	p := ba.ctx.Get("ReflectBlock").New(output.JSObject())
-	return ReflectBlockFromJSObject(p, ba.ctx)
+	r.p.Set("output", output.JSObject())
+	return r
 }
-
-*/

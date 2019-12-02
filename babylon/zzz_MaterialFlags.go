@@ -36,278 +36,274 @@ func MaterialFlagsArrayToJSArray(array []*MaterialFlags) []interface{} {
 	return result
 }
 
-/*
-
 // AmbientTextureEnabled returns the AmbientTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#ambienttextureenabled
-func (m *MaterialFlags) AmbientTextureEnabled(AmbientTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(AmbientTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) AmbientTextureEnabled() bool {
+	retVal := m.p.Get("AmbientTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetAmbientTextureEnabled sets the AmbientTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#ambienttextureenabled
 func (m *MaterialFlags) SetAmbientTextureEnabled(AmbientTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(AmbientTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("AmbientTextureEnabled", AmbientTextureEnabled)
+	return m
 }
 
 // AnisotropicTextureEnabled returns the AnisotropicTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#anisotropictextureenabled
-func (m *MaterialFlags) AnisotropicTextureEnabled(AnisotropicTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(AnisotropicTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) AnisotropicTextureEnabled() bool {
+	retVal := m.p.Get("AnisotropicTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetAnisotropicTextureEnabled sets the AnisotropicTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#anisotropictextureenabled
 func (m *MaterialFlags) SetAnisotropicTextureEnabled(AnisotropicTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(AnisotropicTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("AnisotropicTextureEnabled", AnisotropicTextureEnabled)
+	return m
 }
 
 // BumpTextureEnabled returns the BumpTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#bumptextureenabled
-func (m *MaterialFlags) BumpTextureEnabled(BumpTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(BumpTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) BumpTextureEnabled() bool {
+	retVal := m.p.Get("BumpTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetBumpTextureEnabled sets the BumpTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#bumptextureenabled
 func (m *MaterialFlags) SetBumpTextureEnabled(BumpTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(BumpTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("BumpTextureEnabled", BumpTextureEnabled)
+	return m
 }
 
 // ClearCoatBumpTextureEnabled returns the ClearCoatBumpTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#clearcoatbumptextureenabled
-func (m *MaterialFlags) ClearCoatBumpTextureEnabled(ClearCoatBumpTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ClearCoatBumpTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) ClearCoatBumpTextureEnabled() bool {
+	retVal := m.p.Get("ClearCoatBumpTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetClearCoatBumpTextureEnabled sets the ClearCoatBumpTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#clearcoatbumptextureenabled
 func (m *MaterialFlags) SetClearCoatBumpTextureEnabled(ClearCoatBumpTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ClearCoatBumpTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("ClearCoatBumpTextureEnabled", ClearCoatBumpTextureEnabled)
+	return m
 }
 
 // ClearCoatTextureEnabled returns the ClearCoatTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#clearcoattextureenabled
-func (m *MaterialFlags) ClearCoatTextureEnabled(ClearCoatTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ClearCoatTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) ClearCoatTextureEnabled() bool {
+	retVal := m.p.Get("ClearCoatTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetClearCoatTextureEnabled sets the ClearCoatTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#clearcoattextureenabled
 func (m *MaterialFlags) SetClearCoatTextureEnabled(ClearCoatTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ClearCoatTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("ClearCoatTextureEnabled", ClearCoatTextureEnabled)
+	return m
 }
 
 // ClearCoatTintTextureEnabled returns the ClearCoatTintTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#clearcoattinttextureenabled
-func (m *MaterialFlags) ClearCoatTintTextureEnabled(ClearCoatTintTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ClearCoatTintTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) ClearCoatTintTextureEnabled() bool {
+	retVal := m.p.Get("ClearCoatTintTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetClearCoatTintTextureEnabled sets the ClearCoatTintTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#clearcoattinttextureenabled
 func (m *MaterialFlags) SetClearCoatTintTextureEnabled(ClearCoatTintTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ClearCoatTintTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("ClearCoatTintTextureEnabled", ClearCoatTintTextureEnabled)
+	return m
 }
 
 // ColorGradingTextureEnabled returns the ColorGradingTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#colorgradingtextureenabled
-func (m *MaterialFlags) ColorGradingTextureEnabled(ColorGradingTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ColorGradingTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) ColorGradingTextureEnabled() bool {
+	retVal := m.p.Get("ColorGradingTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetColorGradingTextureEnabled sets the ColorGradingTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#colorgradingtextureenabled
 func (m *MaterialFlags) SetColorGradingTextureEnabled(ColorGradingTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ColorGradingTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("ColorGradingTextureEnabled", ColorGradingTextureEnabled)
+	return m
 }
 
 // DiffuseTextureEnabled returns the DiffuseTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#diffusetextureenabled
-func (m *MaterialFlags) DiffuseTextureEnabled(DiffuseTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(DiffuseTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) DiffuseTextureEnabled() bool {
+	retVal := m.p.Get("DiffuseTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetDiffuseTextureEnabled sets the DiffuseTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#diffusetextureenabled
 func (m *MaterialFlags) SetDiffuseTextureEnabled(DiffuseTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(DiffuseTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("DiffuseTextureEnabled", DiffuseTextureEnabled)
+	return m
 }
 
 // EmissiveTextureEnabled returns the EmissiveTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#emissivetextureenabled
-func (m *MaterialFlags) EmissiveTextureEnabled(EmissiveTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(EmissiveTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) EmissiveTextureEnabled() bool {
+	retVal := m.p.Get("EmissiveTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetEmissiveTextureEnabled sets the EmissiveTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#emissivetextureenabled
 func (m *MaterialFlags) SetEmissiveTextureEnabled(EmissiveTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(EmissiveTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("EmissiveTextureEnabled", EmissiveTextureEnabled)
+	return m
 }
 
 // FresnelEnabled returns the FresnelEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#fresnelenabled
-func (m *MaterialFlags) FresnelEnabled(FresnelEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(FresnelEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) FresnelEnabled() bool {
+	retVal := m.p.Get("FresnelEnabled")
+	return retVal.Bool()
 }
 
 // SetFresnelEnabled sets the FresnelEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#fresnelenabled
 func (m *MaterialFlags) SetFresnelEnabled(FresnelEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(FresnelEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("FresnelEnabled", FresnelEnabled)
+	return m
 }
 
 // LightmapTextureEnabled returns the LightmapTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#lightmaptextureenabled
-func (m *MaterialFlags) LightmapTextureEnabled(LightmapTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(LightmapTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) LightmapTextureEnabled() bool {
+	retVal := m.p.Get("LightmapTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetLightmapTextureEnabled sets the LightmapTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#lightmaptextureenabled
 func (m *MaterialFlags) SetLightmapTextureEnabled(LightmapTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(LightmapTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("LightmapTextureEnabled", LightmapTextureEnabled)
+	return m
 }
 
 // OpacityTextureEnabled returns the OpacityTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#opacitytextureenabled
-func (m *MaterialFlags) OpacityTextureEnabled(OpacityTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(OpacityTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) OpacityTextureEnabled() bool {
+	retVal := m.p.Get("OpacityTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetOpacityTextureEnabled sets the OpacityTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#opacitytextureenabled
 func (m *MaterialFlags) SetOpacityTextureEnabled(OpacityTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(OpacityTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("OpacityTextureEnabled", OpacityTextureEnabled)
+	return m
 }
 
 // ReflectionTextureEnabled returns the ReflectionTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#reflectiontextureenabled
-func (m *MaterialFlags) ReflectionTextureEnabled(ReflectionTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ReflectionTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) ReflectionTextureEnabled() bool {
+	retVal := m.p.Get("ReflectionTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetReflectionTextureEnabled sets the ReflectionTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#reflectiontextureenabled
 func (m *MaterialFlags) SetReflectionTextureEnabled(ReflectionTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ReflectionTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("ReflectionTextureEnabled", ReflectionTextureEnabled)
+	return m
 }
 
 // RefractionTextureEnabled returns the RefractionTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#refractiontextureenabled
-func (m *MaterialFlags) RefractionTextureEnabled(RefractionTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(RefractionTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) RefractionTextureEnabled() bool {
+	retVal := m.p.Get("RefractionTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetRefractionTextureEnabled sets the RefractionTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#refractiontextureenabled
 func (m *MaterialFlags) SetRefractionTextureEnabled(RefractionTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(RefractionTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("RefractionTextureEnabled", RefractionTextureEnabled)
+	return m
 }
 
 // SheenTextureEnabled returns the SheenTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#sheentextureenabled
-func (m *MaterialFlags) SheenTextureEnabled(SheenTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(SheenTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) SheenTextureEnabled() bool {
+	retVal := m.p.Get("SheenTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetSheenTextureEnabled sets the SheenTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#sheentextureenabled
 func (m *MaterialFlags) SetSheenTextureEnabled(SheenTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(SheenTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("SheenTextureEnabled", SheenTextureEnabled)
+	return m
 }
 
 // SpecularTextureEnabled returns the SpecularTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#speculartextureenabled
-func (m *MaterialFlags) SpecularTextureEnabled(SpecularTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(SpecularTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) SpecularTextureEnabled() bool {
+	retVal := m.p.Get("SpecularTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetSpecularTextureEnabled sets the SpecularTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#speculartextureenabled
 func (m *MaterialFlags) SetSpecularTextureEnabled(SpecularTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(SpecularTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("SpecularTextureEnabled", SpecularTextureEnabled)
+	return m
 }
 
 // ThicknessTextureEnabled returns the ThicknessTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#thicknesstextureenabled
-func (m *MaterialFlags) ThicknessTextureEnabled(ThicknessTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ThicknessTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+func (m *MaterialFlags) ThicknessTextureEnabled() bool {
+	retVal := m.p.Get("ThicknessTextureEnabled")
+	return retVal.Bool()
 }
 
 // SetThicknessTextureEnabled sets the ThicknessTextureEnabled property of class MaterialFlags.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialflags#thicknesstextureenabled
 func (m *MaterialFlags) SetThicknessTextureEnabled(ThicknessTextureEnabled bool) *MaterialFlags {
-	p := ba.ctx.Get("MaterialFlags").New(ThicknessTextureEnabled)
-	return MaterialFlagsFromJSObject(p, ba.ctx)
+	m.p.Set("ThicknessTextureEnabled", ThicknessTextureEnabled)
+	return m
 }
-
-*/

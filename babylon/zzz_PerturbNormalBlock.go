@@ -134,134 +134,130 @@ func (p *PerturbNormalBlock) _deserialize(serializationObject interface{}, scene
 	p.p.Call("_deserialize", args...)
 }
 
-/*
-
 // InvertX returns the InvertX property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#invertx
-func (p *PerturbNormalBlock) InvertX(invertX bool) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(invertX)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+func (p *PerturbNormalBlock) InvertX() bool {
+	retVal := p.p.Get("invertX")
+	return retVal.Bool()
 }
 
 // SetInvertX sets the InvertX property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#invertx
 func (p *PerturbNormalBlock) SetInvertX(invertX bool) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(invertX)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+	p.p.Set("invertX", invertX)
+	return p
 }
 
 // InvertY returns the InvertY property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#inverty
-func (p *PerturbNormalBlock) InvertY(invertY bool) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(invertY)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+func (p *PerturbNormalBlock) InvertY() bool {
+	retVal := p.p.Get("invertY")
+	return retVal.Bool()
 }
 
 // SetInvertY sets the InvertY property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#inverty
 func (p *PerturbNormalBlock) SetInvertY(invertY bool) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(invertY)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+	p.p.Set("invertY", invertY)
+	return p
 }
 
 // NormalMapColor returns the NormalMapColor property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#normalmapcolor
-func (p *PerturbNormalBlock) NormalMapColor(normalMapColor *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(normalMapColor.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+func (p *PerturbNormalBlock) NormalMapColor() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("normalMapColor")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetNormalMapColor sets the NormalMapColor property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#normalmapcolor
 func (p *PerturbNormalBlock) SetNormalMapColor(normalMapColor *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(normalMapColor.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+	p.p.Set("normalMapColor", normalMapColor.JSObject())
+	return p
 }
 
 // Output returns the Output property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#output
-func (p *PerturbNormalBlock) Output(output *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(output.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+func (p *PerturbNormalBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetOutput sets the Output property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#output
 func (p *PerturbNormalBlock) SetOutput(output *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(output.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+	p.p.Set("output", output.JSObject())
+	return p
 }
 
 // Strength returns the Strength property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#strength
-func (p *PerturbNormalBlock) Strength(strength *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(strength.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+func (p *PerturbNormalBlock) Strength() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("strength")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetStrength sets the Strength property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#strength
 func (p *PerturbNormalBlock) SetStrength(strength *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(strength.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+	p.p.Set("strength", strength.JSObject())
+	return p
 }
 
 // Uv returns the Uv property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#uv
-func (p *PerturbNormalBlock) Uv(uv *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(uv.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+func (p *PerturbNormalBlock) Uv() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("uv")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetUv sets the Uv property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#uv
 func (p *PerturbNormalBlock) SetUv(uv *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(uv.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+	p.p.Set("uv", uv.JSObject())
+	return p
 }
 
 // WorldNormal returns the WorldNormal property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#worldnormal
-func (p *PerturbNormalBlock) WorldNormal(worldNormal *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(worldNormal.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+func (p *PerturbNormalBlock) WorldNormal() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("worldNormal")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetWorldNormal sets the WorldNormal property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#worldnormal
 func (p *PerturbNormalBlock) SetWorldNormal(worldNormal *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(worldNormal.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+	p.p.Set("worldNormal", worldNormal.JSObject())
+	return p
 }
 
 // WorldPosition returns the WorldPosition property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#worldposition
-func (p *PerturbNormalBlock) WorldPosition(worldPosition *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(worldPosition.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+func (p *PerturbNormalBlock) WorldPosition() *NodeMaterialConnectionPoint {
+	retVal := p.p.Get("worldPosition")
+	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
 }
 
 // SetWorldPosition sets the WorldPosition property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#worldposition
 func (p *PerturbNormalBlock) SetWorldPosition(worldPosition *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(worldPosition.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
+	p.p.Set("worldPosition", worldPosition.JSObject())
+	return p
 }
-
-*/

@@ -372,22 +372,18 @@ func (s *Scalar) WithinEpsilon(a float64, b float64, opts *ScalarWithinEpsilonOp
 	return retVal.Bool()
 }
 
-/*
-
 // TwoPi returns the TwoPi property of class Scalar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalar#twopi
-func (s *Scalar) TwoPi(TwoPi float64) *Scalar {
-	p := ba.ctx.Get("Scalar").New(TwoPi)
-	return ScalarFromJSObject(p, ba.ctx)
+func (s *Scalar) TwoPi() float64 {
+	retVal := s.p.Get("TwoPi")
+	return retVal.Float()
 }
 
 // SetTwoPi sets the TwoPi property of class Scalar.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalar#twopi
 func (s *Scalar) SetTwoPi(TwoPi float64) *Scalar {
-	p := ba.ctx.Get("Scalar").New(TwoPi)
-	return ScalarFromJSObject(p, ba.ctx)
+	s.p.Set("TwoPi", TwoPi)
+	return s
 }
-
-*/

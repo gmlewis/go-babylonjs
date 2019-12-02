@@ -59,7 +59,3 @@ func (a *ArrayItem) Assign(opts *ArrayItemAssignOpts) {
 
 	a.p.Call("Assign", args...)
 }
-
-/*
-
- */

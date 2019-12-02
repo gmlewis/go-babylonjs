@@ -37,86 +37,82 @@ func IEffectLayerOptionsArrayToJSArray(array []*IEffectLayerOptions) []interface
 	return result
 }
 
-/*
-
 // AlphaBlendingMode returns the AlphaBlendingMode property of class IEffectLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectlayeroptions#alphablendingmode
-func (i *IEffectLayerOptions) AlphaBlendingMode(alphaBlendingMode float64) *IEffectLayerOptions {
-	p := ba.ctx.Get("IEffectLayerOptions").New(alphaBlendingMode)
-	return IEffectLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectLayerOptions) AlphaBlendingMode() float64 {
+	retVal := i.p.Get("alphaBlendingMode")
+	return retVal.Float()
 }
 
 // SetAlphaBlendingMode sets the AlphaBlendingMode property of class IEffectLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectlayeroptions#alphablendingmode
 func (i *IEffectLayerOptions) SetAlphaBlendingMode(alphaBlendingMode float64) *IEffectLayerOptions {
-	p := ba.ctx.Get("IEffectLayerOptions").New(alphaBlendingMode)
-	return IEffectLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("alphaBlendingMode", alphaBlendingMode)
+	return i
 }
 
 // Camera returns the Camera property of class IEffectLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectlayeroptions#camera
-func (i *IEffectLayerOptions) Camera(camera *Camera) *IEffectLayerOptions {
-	p := ba.ctx.Get("IEffectLayerOptions").New(camera.JSObject())
-	return IEffectLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectLayerOptions) Camera() *Camera {
+	retVal := i.p.Get("camera")
+	return CameraFromJSObject(retVal, i.ctx)
 }
 
 // SetCamera sets the Camera property of class IEffectLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectlayeroptions#camera
 func (i *IEffectLayerOptions) SetCamera(camera *Camera) *IEffectLayerOptions {
-	p := ba.ctx.Get("IEffectLayerOptions").New(camera.JSObject())
-	return IEffectLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("camera", camera.JSObject())
+	return i
 }
 
 // MainTextureFixedSize returns the MainTextureFixedSize property of class IEffectLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectlayeroptions#maintexturefixedsize
-func (i *IEffectLayerOptions) MainTextureFixedSize(mainTextureFixedSize float64) *IEffectLayerOptions {
-	p := ba.ctx.Get("IEffectLayerOptions").New(mainTextureFixedSize)
-	return IEffectLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectLayerOptions) MainTextureFixedSize() float64 {
+	retVal := i.p.Get("mainTextureFixedSize")
+	return retVal.Float()
 }
 
 // SetMainTextureFixedSize sets the MainTextureFixedSize property of class IEffectLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectlayeroptions#maintexturefixedsize
 func (i *IEffectLayerOptions) SetMainTextureFixedSize(mainTextureFixedSize float64) *IEffectLayerOptions {
-	p := ba.ctx.Get("IEffectLayerOptions").New(mainTextureFixedSize)
-	return IEffectLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mainTextureFixedSize", mainTextureFixedSize)
+	return i
 }
 
 // MainTextureRatio returns the MainTextureRatio property of class IEffectLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectlayeroptions#maintextureratio
-func (i *IEffectLayerOptions) MainTextureRatio(mainTextureRatio float64) *IEffectLayerOptions {
-	p := ba.ctx.Get("IEffectLayerOptions").New(mainTextureRatio)
-	return IEffectLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectLayerOptions) MainTextureRatio() float64 {
+	retVal := i.p.Get("mainTextureRatio")
+	return retVal.Float()
 }
 
 // SetMainTextureRatio sets the MainTextureRatio property of class IEffectLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectlayeroptions#maintextureratio
 func (i *IEffectLayerOptions) SetMainTextureRatio(mainTextureRatio float64) *IEffectLayerOptions {
-	p := ba.ctx.Get("IEffectLayerOptions").New(mainTextureRatio)
-	return IEffectLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("mainTextureRatio", mainTextureRatio)
+	return i
 }
 
 // RenderingGroupId returns the RenderingGroupId property of class IEffectLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectlayeroptions#renderinggroupid
-func (i *IEffectLayerOptions) RenderingGroupId(renderingGroupId float64) *IEffectLayerOptions {
-	p := ba.ctx.Get("IEffectLayerOptions").New(renderingGroupId)
-	return IEffectLayerOptionsFromJSObject(p, ba.ctx)
+func (i *IEffectLayerOptions) RenderingGroupId() float64 {
+	retVal := i.p.Get("renderingGroupId")
+	return retVal.Float()
 }
 
 // SetRenderingGroupId sets the RenderingGroupId property of class IEffectLayerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectlayeroptions#renderinggroupid
 func (i *IEffectLayerOptions) SetRenderingGroupId(renderingGroupId float64) *IEffectLayerOptions {
-	p := ba.ctx.Get("IEffectLayerOptions").New(renderingGroupId)
-	return IEffectLayerOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("renderingGroupId", renderingGroupId)
+	return i
 }
-
-*/

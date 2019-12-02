@@ -486,150 +486,146 @@ func (s *SceneLoader) RegisterPlugin(plugin *ISceneLoaderPlugin) {
 	s.p.Call("RegisterPlugin", args...)
 }
 
-/*
-
 // CleanBoneMatrixWeights returns the CleanBoneMatrixWeights property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#cleanbonematrixweights
-func (s *SceneLoader) CleanBoneMatrixWeights(CleanBoneMatrixWeights bool) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(CleanBoneMatrixWeights)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+func (s *SceneLoader) CleanBoneMatrixWeights() bool {
+	retVal := s.p.Get("CleanBoneMatrixWeights")
+	return retVal.Bool()
 }
 
 // SetCleanBoneMatrixWeights sets the CleanBoneMatrixWeights property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#cleanbonematrixweights
 func (s *SceneLoader) SetCleanBoneMatrixWeights(CleanBoneMatrixWeights bool) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(CleanBoneMatrixWeights)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("CleanBoneMatrixWeights", CleanBoneMatrixWeights)
+	return s
 }
 
 // DETAILED_LOGGING returns the DETAILED_LOGGING property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#detailed_logging
-func (s *SceneLoader) DETAILED_LOGGING(DETAILED_LOGGING float64) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(DETAILED_LOGGING)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+func (s *SceneLoader) DETAILED_LOGGING() float64 {
+	retVal := s.p.Get("DETAILED_LOGGING")
+	return retVal.Float()
 }
 
 // SetDETAILED_LOGGING sets the DETAILED_LOGGING property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#detailed_logging
 func (s *SceneLoader) SetDETAILED_LOGGING(DETAILED_LOGGING float64) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(DETAILED_LOGGING)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("DETAILED_LOGGING", DETAILED_LOGGING)
+	return s
 }
 
 // ForceFullSceneLoadingForIncremental returns the ForceFullSceneLoadingForIncremental property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#forcefullsceneloadingforincremental
-func (s *SceneLoader) ForceFullSceneLoadingForIncremental(ForceFullSceneLoadingForIncremental bool) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(ForceFullSceneLoadingForIncremental)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+func (s *SceneLoader) ForceFullSceneLoadingForIncremental() bool {
+	retVal := s.p.Get("ForceFullSceneLoadingForIncremental")
+	return retVal.Bool()
 }
 
 // SetForceFullSceneLoadingForIncremental sets the ForceFullSceneLoadingForIncremental property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#forcefullsceneloadingforincremental
 func (s *SceneLoader) SetForceFullSceneLoadingForIncremental(ForceFullSceneLoadingForIncremental bool) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(ForceFullSceneLoadingForIncremental)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("ForceFullSceneLoadingForIncremental", ForceFullSceneLoadingForIncremental)
+	return s
 }
 
 // LoggingLevel returns the LoggingLevel property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#logginglevel
-func (s *SceneLoader) LoggingLevel(loggingLevel float64) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(loggingLevel)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+func (s *SceneLoader) LoggingLevel() float64 {
+	retVal := s.p.Get("loggingLevel")
+	return retVal.Float()
 }
 
 // SetLoggingLevel sets the LoggingLevel property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#logginglevel
 func (s *SceneLoader) SetLoggingLevel(loggingLevel float64) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(loggingLevel)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("loggingLevel", loggingLevel)
+	return s
 }
 
 // MINIMAL_LOGGING returns the MINIMAL_LOGGING property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#minimal_logging
-func (s *SceneLoader) MINIMAL_LOGGING(MINIMAL_LOGGING float64) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(MINIMAL_LOGGING)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+func (s *SceneLoader) MINIMAL_LOGGING() float64 {
+	retVal := s.p.Get("MINIMAL_LOGGING")
+	return retVal.Float()
 }
 
 // SetMINIMAL_LOGGING sets the MINIMAL_LOGGING property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#minimal_logging
 func (s *SceneLoader) SetMINIMAL_LOGGING(MINIMAL_LOGGING float64) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(MINIMAL_LOGGING)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("MINIMAL_LOGGING", MINIMAL_LOGGING)
+	return s
 }
 
 // NO_LOGGING returns the NO_LOGGING property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#no_logging
-func (s *SceneLoader) NO_LOGGING(NO_LOGGING float64) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(NO_LOGGING)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+func (s *SceneLoader) NO_LOGGING() float64 {
+	retVal := s.p.Get("NO_LOGGING")
+	return retVal.Float()
 }
 
 // SetNO_LOGGING sets the NO_LOGGING property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#no_logging
 func (s *SceneLoader) SetNO_LOGGING(NO_LOGGING float64) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(NO_LOGGING)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("NO_LOGGING", NO_LOGGING)
+	return s
 }
 
 // OnPluginActivatedObservable returns the OnPluginActivatedObservable property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#onpluginactivatedobservable
-func (s *SceneLoader) OnPluginActivatedObservable(OnPluginActivatedObservable *Observable) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(OnPluginActivatedObservable.JSObject())
-	return SceneLoaderFromJSObject(p, ba.ctx)
+func (s *SceneLoader) OnPluginActivatedObservable() *Observable {
+	retVal := s.p.Get("OnPluginActivatedObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnPluginActivatedObservable sets the OnPluginActivatedObservable property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#onpluginactivatedobservable
 func (s *SceneLoader) SetOnPluginActivatedObservable(OnPluginActivatedObservable *Observable) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(OnPluginActivatedObservable.JSObject())
-	return SceneLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("OnPluginActivatedObservable", OnPluginActivatedObservable.JSObject())
+	return s
 }
 
 // SUMMARY_LOGGING returns the SUMMARY_LOGGING property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#summary_logging
-func (s *SceneLoader) SUMMARY_LOGGING(SUMMARY_LOGGING float64) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(SUMMARY_LOGGING)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+func (s *SceneLoader) SUMMARY_LOGGING() float64 {
+	retVal := s.p.Get("SUMMARY_LOGGING")
+	return retVal.Float()
 }
 
 // SetSUMMARY_LOGGING sets the SUMMARY_LOGGING property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#summary_logging
 func (s *SceneLoader) SetSUMMARY_LOGGING(SUMMARY_LOGGING float64) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(SUMMARY_LOGGING)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("SUMMARY_LOGGING", SUMMARY_LOGGING)
+	return s
 }
 
 // ShowLoadingScreen returns the ShowLoadingScreen property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#showloadingscreen
-func (s *SceneLoader) ShowLoadingScreen(ShowLoadingScreen bool) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(ShowLoadingScreen)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+func (s *SceneLoader) ShowLoadingScreen() bool {
+	retVal := s.p.Get("ShowLoadingScreen")
+	return retVal.Bool()
 }
 
 // SetShowLoadingScreen sets the ShowLoadingScreen property of class SceneLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#showloadingscreen
 func (s *SceneLoader) SetShowLoadingScreen(ShowLoadingScreen bool) *SceneLoader {
-	p := ba.ctx.Get("SceneLoader").New(ShowLoadingScreen)
-	return SceneLoaderFromJSObject(p, ba.ctx)
+	s.p.Set("ShowLoadingScreen", ShowLoadingScreen)
+	return s
 }
-
-*/

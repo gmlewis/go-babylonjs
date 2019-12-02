@@ -38,54 +38,50 @@ func PhysicsHitDataArrayToJSArray(array []*PhysicsHitData) []interface{} {
 	return result
 }
 
-/*
-
 // ContactPoint returns the ContactPoint property of class PhysicsHitData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicshitdata#contactpoint
-func (p *PhysicsHitData) ContactPoint(contactPoint *Vector3) *PhysicsHitData {
-	p := ba.ctx.Get("PhysicsHitData").New(contactPoint.JSObject())
-	return PhysicsHitDataFromJSObject(p, ba.ctx)
+func (p *PhysicsHitData) ContactPoint() *Vector3 {
+	retVal := p.p.Get("contactPoint")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetContactPoint sets the ContactPoint property of class PhysicsHitData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicshitdata#contactpoint
 func (p *PhysicsHitData) SetContactPoint(contactPoint *Vector3) *PhysicsHitData {
-	p := ba.ctx.Get("PhysicsHitData").New(contactPoint.JSObject())
-	return PhysicsHitDataFromJSObject(p, ba.ctx)
+	p.p.Set("contactPoint", contactPoint.JSObject())
+	return p
 }
 
 // DistanceFromOrigin returns the DistanceFromOrigin property of class PhysicsHitData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicshitdata#distancefromorigin
-func (p *PhysicsHitData) DistanceFromOrigin(distanceFromOrigin float64) *PhysicsHitData {
-	p := ba.ctx.Get("PhysicsHitData").New(distanceFromOrigin)
-	return PhysicsHitDataFromJSObject(p, ba.ctx)
+func (p *PhysicsHitData) DistanceFromOrigin() float64 {
+	retVal := p.p.Get("distanceFromOrigin")
+	return retVal.Float()
 }
 
 // SetDistanceFromOrigin sets the DistanceFromOrigin property of class PhysicsHitData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicshitdata#distancefromorigin
 func (p *PhysicsHitData) SetDistanceFromOrigin(distanceFromOrigin float64) *PhysicsHitData {
-	p := ba.ctx.Get("PhysicsHitData").New(distanceFromOrigin)
-	return PhysicsHitDataFromJSObject(p, ba.ctx)
+	p.p.Set("distanceFromOrigin", distanceFromOrigin)
+	return p
 }
 
 // Force returns the Force property of class PhysicsHitData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicshitdata#force
-func (p *PhysicsHitData) Force(force *Vector3) *PhysicsHitData {
-	p := ba.ctx.Get("PhysicsHitData").New(force.JSObject())
-	return PhysicsHitDataFromJSObject(p, ba.ctx)
+func (p *PhysicsHitData) Force() *Vector3 {
+	retVal := p.p.Get("force")
+	return Vector3FromJSObject(retVal, p.ctx)
 }
 
 // SetForce sets the Force property of class PhysicsHitData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicshitdata#force
 func (p *PhysicsHitData) SetForce(force *Vector3) *PhysicsHitData {
-	p := ba.ctx.Get("PhysicsHitData").New(force.JSObject())
-	return PhysicsHitDataFromJSObject(p, ba.ctx)
+	p.p.Set("force", force.JSObject())
+	return p
 }
-
-*/

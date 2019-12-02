@@ -139,7 +139,3 @@ func (f *Frustum) GetTopPlaneToRef(transform *Matrix, frustumPlane *Plane) {
 
 	f.p.Call("GetTopPlaneToRef", args...)
 }
-
-/*
-
- */

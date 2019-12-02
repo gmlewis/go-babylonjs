@@ -75,86 +75,82 @@ func (v *ViveController) InitControllerMesh(scene *Scene, opts *ViveControllerIn
 	v.p.Call("initControllerMesh", args...)
 }
 
-/*
-
 // MODEL_BASE_URL returns the MODEL_BASE_URL property of class ViveController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#model_base_url
-func (v *ViveController) MODEL_BASE_URL(MODEL_BASE_URL string) *ViveController {
-	p := ba.ctx.Get("ViveController").New(MODEL_BASE_URL)
-	return ViveControllerFromJSObject(p, ba.ctx)
+func (v *ViveController) MODEL_BASE_URL() string {
+	retVal := v.p.Get("MODEL_BASE_URL")
+	return retVal.String()
 }
 
 // SetMODEL_BASE_URL sets the MODEL_BASE_URL property of class ViveController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#model_base_url
 func (v *ViveController) SetMODEL_BASE_URL(MODEL_BASE_URL string) *ViveController {
-	p := ba.ctx.Get("ViveController").New(MODEL_BASE_URL)
-	return ViveControllerFromJSObject(p, ba.ctx)
+	v.p.Set("MODEL_BASE_URL", MODEL_BASE_URL)
+	return v
 }
 
 // MODEL_FILENAME returns the MODEL_FILENAME property of class ViveController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#model_filename
-func (v *ViveController) MODEL_FILENAME(MODEL_FILENAME string) *ViveController {
-	p := ba.ctx.Get("ViveController").New(MODEL_FILENAME)
-	return ViveControllerFromJSObject(p, ba.ctx)
+func (v *ViveController) MODEL_FILENAME() string {
+	retVal := v.p.Get("MODEL_FILENAME")
+	return retVal.String()
 }
 
 // SetMODEL_FILENAME sets the MODEL_FILENAME property of class ViveController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#model_filename
 func (v *ViveController) SetMODEL_FILENAME(MODEL_FILENAME string) *ViveController {
-	p := ba.ctx.Get("ViveController").New(MODEL_FILENAME)
-	return ViveControllerFromJSObject(p, ba.ctx)
+	v.p.Set("MODEL_FILENAME", MODEL_FILENAME)
+	return v
 }
 
 // OnLeftButtonStateChangedObservable returns the OnLeftButtonStateChangedObservable property of class ViveController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onleftbuttonstatechangedobservable
-func (v *ViveController) OnLeftButtonStateChangedObservable(onLeftButtonStateChangedObservable *Observable) *ViveController {
-	p := ba.ctx.Get("ViveController").New(onLeftButtonStateChangedObservable.JSObject())
-	return ViveControllerFromJSObject(p, ba.ctx)
+func (v *ViveController) OnLeftButtonStateChangedObservable() *Observable {
+	retVal := v.p.Get("onLeftButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, v.ctx)
 }
 
 // SetOnLeftButtonStateChangedObservable sets the OnLeftButtonStateChangedObservable property of class ViveController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onleftbuttonstatechangedobservable
 func (v *ViveController) SetOnLeftButtonStateChangedObservable(onLeftButtonStateChangedObservable *Observable) *ViveController {
-	p := ba.ctx.Get("ViveController").New(onLeftButtonStateChangedObservable.JSObject())
-	return ViveControllerFromJSObject(p, ba.ctx)
+	v.p.Set("onLeftButtonStateChangedObservable", onLeftButtonStateChangedObservable.JSObject())
+	return v
 }
 
 // OnMenuButtonStateChangedObservable returns the OnMenuButtonStateChangedObservable property of class ViveController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onmenubuttonstatechangedobservable
-func (v *ViveController) OnMenuButtonStateChangedObservable(onMenuButtonStateChangedObservable *Observable) *ViveController {
-	p := ba.ctx.Get("ViveController").New(onMenuButtonStateChangedObservable.JSObject())
-	return ViveControllerFromJSObject(p, ba.ctx)
+func (v *ViveController) OnMenuButtonStateChangedObservable() *Observable {
+	retVal := v.p.Get("onMenuButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, v.ctx)
 }
 
 // SetOnMenuButtonStateChangedObservable sets the OnMenuButtonStateChangedObservable property of class ViveController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onmenubuttonstatechangedobservable
 func (v *ViveController) SetOnMenuButtonStateChangedObservable(onMenuButtonStateChangedObservable *Observable) *ViveController {
-	p := ba.ctx.Get("ViveController").New(onMenuButtonStateChangedObservable.JSObject())
-	return ViveControllerFromJSObject(p, ba.ctx)
+	v.p.Set("onMenuButtonStateChangedObservable", onMenuButtonStateChangedObservable.JSObject())
+	return v
 }
 
 // OnRightButtonStateChangedObservable returns the OnRightButtonStateChangedObservable property of class ViveController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onrightbuttonstatechangedobservable
-func (v *ViveController) OnRightButtonStateChangedObservable(onRightButtonStateChangedObservable *Observable) *ViveController {
-	p := ba.ctx.Get("ViveController").New(onRightButtonStateChangedObservable.JSObject())
-	return ViveControllerFromJSObject(p, ba.ctx)
+func (v *ViveController) OnRightButtonStateChangedObservable() *Observable {
+	retVal := v.p.Get("onRightButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, v.ctx)
 }
 
 // SetOnRightButtonStateChangedObservable sets the OnRightButtonStateChangedObservable property of class ViveController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onrightbuttonstatechangedobservable
 func (v *ViveController) SetOnRightButtonStateChangedObservable(onRightButtonStateChangedObservable *Observable) *ViveController {
-	p := ba.ctx.Get("ViveController").New(onRightButtonStateChangedObservable.JSObject())
-	return ViveControllerFromJSObject(p, ba.ctx)
+	v.p.Set("onRightButtonStateChangedObservable", onRightButtonStateChangedObservable.JSObject())
+	return v
 }
-
-*/

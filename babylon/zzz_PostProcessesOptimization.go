@@ -85,7 +85,3 @@ func (p *PostProcessesOptimization) GetDescription() string {
 	retVal := p.p.Call("getDescription")
 	return retVal.String()
 }
-
-/*
-
- */

@@ -99,7 +99,3 @@ func (p *PhysicsUpdraftEvent) GetData() *PhysicsUpdraftEventData {
 	retVal := p.p.Call("getData")
 	return PhysicsUpdraftEventDataFromJSObject(retVal, p.ctx)
 }
-
-/*
-
- */

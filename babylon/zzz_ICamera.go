@@ -35,7 +35,3 @@ func ICameraArrayToJSArray(array []*ICamera) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

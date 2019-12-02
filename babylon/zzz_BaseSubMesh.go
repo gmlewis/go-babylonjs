@@ -62,38 +62,26 @@ func (b *BaseSubMesh) SetEffect(effect *Effect, opts *BaseSubMeshSetEffectOpts) 
 	b.p.Call("setEffect", args...)
 }
 
-/*
-
 // Effect returns the Effect property of class BaseSubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basesubmesh#effect
-func (b *BaseSubMesh) Effect(effect *Effect) *BaseSubMesh {
-	p := ba.ctx.Get("BaseSubMesh").New(effect.JSObject())
-	return BaseSubMeshFromJSObject(p, ba.ctx)
-}
-
-// SetEffect sets the Effect property of class BaseSubMesh.
-//
-// https://doc.babylonjs.com/api/classes/babylon.basesubmesh#effect
-func (b *BaseSubMesh) SetEffect(effect *Effect) *BaseSubMesh {
-	p := ba.ctx.Get("BaseSubMesh").New(effect.JSObject())
-	return BaseSubMeshFromJSObject(p, ba.ctx)
+func (b *BaseSubMesh) Effect() *Effect {
+	retVal := b.p.Get("effect")
+	return EffectFromJSObject(retVal, b.ctx)
 }
 
 // MaterialDefines returns the MaterialDefines property of class BaseSubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basesubmesh#materialdefines
-func (b *BaseSubMesh) MaterialDefines(materialDefines *MaterialDefines) *BaseSubMesh {
-	p := ba.ctx.Get("BaseSubMesh").New(materialDefines.JSObject())
-	return BaseSubMeshFromJSObject(p, ba.ctx)
+func (b *BaseSubMesh) MaterialDefines() *MaterialDefines {
+	retVal := b.p.Get("materialDefines")
+	return MaterialDefinesFromJSObject(retVal, b.ctx)
 }
 
 // SetMaterialDefines sets the MaterialDefines property of class BaseSubMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basesubmesh#materialdefines
 func (b *BaseSubMesh) SetMaterialDefines(materialDefines *MaterialDefines) *BaseSubMesh {
-	p := ba.ctx.Get("BaseSubMesh").New(materialDefines.JSObject())
-	return BaseSubMeshFromJSObject(p, ba.ctx)
+	b.p.Set("materialDefines", materialDefines.JSObject())
+	return b
 }
-
-*/

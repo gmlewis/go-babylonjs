@@ -101,38 +101,34 @@ func (e *EquiRectangularCubeTexture) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // CoordinatesMode returns the CoordinatesMode property of class EquiRectangularCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#coordinatesmode
-func (e *EquiRectangularCubeTexture) CoordinatesMode(coordinatesMode float64) *EquiRectangularCubeTexture {
-	p := ba.ctx.Get("EquiRectangularCubeTexture").New(coordinatesMode)
-	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+func (e *EquiRectangularCubeTexture) CoordinatesMode() float64 {
+	retVal := e.p.Get("coordinatesMode")
+	return retVal.Float()
 }
 
 // SetCoordinatesMode sets the CoordinatesMode property of class EquiRectangularCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#coordinatesmode
 func (e *EquiRectangularCubeTexture) SetCoordinatesMode(coordinatesMode float64) *EquiRectangularCubeTexture {
-	p := ba.ctx.Get("EquiRectangularCubeTexture").New(coordinatesMode)
-	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+	e.p.Set("coordinatesMode", coordinatesMode)
+	return e
 }
 
 // Url returns the Url property of class EquiRectangularCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#url
-func (e *EquiRectangularCubeTexture) Url(url string) *EquiRectangularCubeTexture {
-	p := ba.ctx.Get("EquiRectangularCubeTexture").New(url)
-	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+func (e *EquiRectangularCubeTexture) Url() string {
+	retVal := e.p.Get("url")
+	return retVal.String()
 }
 
 // SetUrl sets the Url property of class EquiRectangularCubeTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#url
 func (e *EquiRectangularCubeTexture) SetUrl(url string) *EquiRectangularCubeTexture {
-	p := ba.ctx.Get("EquiRectangularCubeTexture").New(url)
-	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+	e.p.Set("url", url)
+	return e
 }
-
-*/

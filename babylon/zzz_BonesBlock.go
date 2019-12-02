@@ -136,102 +136,98 @@ func (b *BonesBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallb
 	b.p.Call("provideFallbacks", args...)
 }
 
-/*
-
 // MatricesIndices returns the MatricesIndices property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#matricesindices
-func (b *BonesBlock) MatricesIndices(matricesIndices *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(matricesIndices.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+func (b *BonesBlock) MatricesIndices() *NodeMaterialConnectionPoint {
+	retVal := b.p.Get("matricesIndices")
+	return NodeMaterialConnectionPointFromJSObject(retVal, b.ctx)
 }
 
 // SetMatricesIndices sets the MatricesIndices property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#matricesindices
 func (b *BonesBlock) SetMatricesIndices(matricesIndices *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(matricesIndices.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+	b.p.Set("matricesIndices", matricesIndices.JSObject())
+	return b
 }
 
 // MatricesIndicesExtra returns the MatricesIndicesExtra property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#matricesindicesextra
-func (b *BonesBlock) MatricesIndicesExtra(matricesIndicesExtra *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(matricesIndicesExtra.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+func (b *BonesBlock) MatricesIndicesExtra() *NodeMaterialConnectionPoint {
+	retVal := b.p.Get("matricesIndicesExtra")
+	return NodeMaterialConnectionPointFromJSObject(retVal, b.ctx)
 }
 
 // SetMatricesIndicesExtra sets the MatricesIndicesExtra property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#matricesindicesextra
 func (b *BonesBlock) SetMatricesIndicesExtra(matricesIndicesExtra *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(matricesIndicesExtra.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+	b.p.Set("matricesIndicesExtra", matricesIndicesExtra.JSObject())
+	return b
 }
 
 // MatricesWeights returns the MatricesWeights property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#matricesweights
-func (b *BonesBlock) MatricesWeights(matricesWeights *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(matricesWeights.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+func (b *BonesBlock) MatricesWeights() *NodeMaterialConnectionPoint {
+	retVal := b.p.Get("matricesWeights")
+	return NodeMaterialConnectionPointFromJSObject(retVal, b.ctx)
 }
 
 // SetMatricesWeights sets the MatricesWeights property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#matricesweights
 func (b *BonesBlock) SetMatricesWeights(matricesWeights *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(matricesWeights.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+	b.p.Set("matricesWeights", matricesWeights.JSObject())
+	return b
 }
 
 // MatricesWeightsExtra returns the MatricesWeightsExtra property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#matricesweightsextra
-func (b *BonesBlock) MatricesWeightsExtra(matricesWeightsExtra *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(matricesWeightsExtra.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+func (b *BonesBlock) MatricesWeightsExtra() *NodeMaterialConnectionPoint {
+	retVal := b.p.Get("matricesWeightsExtra")
+	return NodeMaterialConnectionPointFromJSObject(retVal, b.ctx)
 }
 
 // SetMatricesWeightsExtra sets the MatricesWeightsExtra property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#matricesweightsextra
 func (b *BonesBlock) SetMatricesWeightsExtra(matricesWeightsExtra *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(matricesWeightsExtra.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+	b.p.Set("matricesWeightsExtra", matricesWeightsExtra.JSObject())
+	return b
 }
 
 // Output returns the Output property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#output
-func (b *BonesBlock) Output(output *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(output.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+func (b *BonesBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := b.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, b.ctx)
 }
 
 // SetOutput sets the Output property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#output
 func (b *BonesBlock) SetOutput(output *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(output.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+	b.p.Set("output", output.JSObject())
+	return b
 }
 
 // World returns the World property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#world
-func (b *BonesBlock) World(world *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(world.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+func (b *BonesBlock) World() *NodeMaterialConnectionPoint {
+	retVal := b.p.Get("world")
+	return NodeMaterialConnectionPointFromJSObject(retVal, b.ctx)
 }
 
 // SetWorld sets the World property of class BonesBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock#world
 func (b *BonesBlock) SetWorld(world *NodeMaterialConnectionPoint) *BonesBlock {
-	p := ba.ctx.Get("BonesBlock").New(world.JSObject())
-	return BonesBlockFromJSObject(p, ba.ctx)
+	b.p.Set("world", world.JSObject())
+	return b
 }
-
-*/

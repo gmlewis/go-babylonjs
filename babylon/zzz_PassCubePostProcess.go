@@ -94,22 +94,18 @@ func (ba *Babylon) NewPassCubePostProcess(name string, options float64, opts *Ne
 	return PassCubePostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Face returns the Face property of class PassCubePostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#face
-func (p *PassCubePostProcess) Face(face float64) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(face)
-	return PassCubePostProcessFromJSObject(p, ba.ctx)
+func (p *PassCubePostProcess) Face() float64 {
+	retVal := p.p.Get("face")
+	return retVal.Float()
 }
 
 // SetFace sets the Face property of class PassCubePostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#face
 func (p *PassCubePostProcess) SetFace(face float64) *PassCubePostProcess {
-	p := ba.ctx.Get("PassCubePostProcess").New(face)
-	return PassCubePostProcessFromJSObject(p, ba.ctx)
+	p.p.Set("face", face)
+	return p
 }
-
-*/

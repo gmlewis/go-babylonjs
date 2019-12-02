@@ -36,22 +36,18 @@ func INodeArrayToJSArray(array []*INode) []interface{} {
 	return result
 }
 
-/*
-
 // Parent returns the Parent property of class INode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inode#parent
-func (i *INode) Parent(parent *INode) *INode {
-	p := ba.ctx.Get("INode").New(parent.JSObject())
-	return INodeFromJSObject(p, ba.ctx)
+func (i *INode) Parent() *INode {
+	retVal := i.p.Get("parent")
+	return INodeFromJSObject(retVal, i.ctx)
 }
 
 // SetParent sets the Parent property of class INode.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inode#parent
 func (i *INode) SetParent(parent *INode) *INode {
-	p := ba.ctx.Get("INode").New(parent.JSObject())
-	return INodeFromJSObject(p, ba.ctx)
+	i.p.Set("parent", parent.JSObject())
+	return i
 }
-
-*/

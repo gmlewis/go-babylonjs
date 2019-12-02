@@ -103,38 +103,34 @@ func (g *GrassProceduralTexture) UpdateShaderUniforms() {
 	g.p.Call("updateShaderUniforms")
 }
 
-/*
-
 // GrassColors returns the GrassColors property of class GrassProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#grasscolors
-func (g *GrassProceduralTexture) GrassColors(grassColors *Color3) *GrassProceduralTexture {
-	p := ba.ctx.Get("GrassProceduralTexture").New(grassColors.JSObject())
-	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+func (g *GrassProceduralTexture) GrassColors() *Color3 {
+	retVal := g.p.Get("grassColors")
+	return Color3FromJSObject(retVal, g.ctx)
 }
 
 // SetGrassColors sets the GrassColors property of class GrassProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#grasscolors
 func (g *GrassProceduralTexture) SetGrassColors(grassColors *Color3) *GrassProceduralTexture {
-	p := ba.ctx.Get("GrassProceduralTexture").New(grassColors.JSObject())
-	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+	g.p.Set("grassColors", grassColors.JSObject())
+	return g
 }
 
 // GroundColor returns the GroundColor property of class GrassProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#groundcolor
-func (g *GrassProceduralTexture) GroundColor(groundColor *Color3) *GrassProceduralTexture {
-	p := ba.ctx.Get("GrassProceduralTexture").New(groundColor.JSObject())
-	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+func (g *GrassProceduralTexture) GroundColor() *Color3 {
+	retVal := g.p.Get("groundColor")
+	return Color3FromJSObject(retVal, g.ctx)
 }
 
 // SetGroundColor sets the GroundColor property of class GrassProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#groundcolor
 func (g *GrassProceduralTexture) SetGroundColor(groundColor *Color3) *GrassProceduralTexture {
-	p := ba.ctx.Get("GrassProceduralTexture").New(groundColor.JSObject())
-	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+	g.p.Set("groundColor", groundColor.JSObject())
+	return g
 }
-
-*/

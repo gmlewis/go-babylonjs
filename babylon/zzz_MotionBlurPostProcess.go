@@ -147,38 +147,34 @@ func (m *MotionBlurPostProcess) RemoveExcludedSkinnedMesh(skinnedMesh *AbstractM
 	m.p.Call("removeExcludedSkinnedMesh", args...)
 }
 
-/*
-
 // MotionBlurSamples returns the MotionBlurSamples property of class MotionBlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#motionblursamples
-func (m *MotionBlurPostProcess) MotionBlurSamples(motionBlurSamples float64) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(motionBlurSamples)
-	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
+func (m *MotionBlurPostProcess) MotionBlurSamples() float64 {
+	retVal := m.p.Get("motionBlurSamples")
+	return retVal.Float()
 }
 
 // SetMotionBlurSamples sets the MotionBlurSamples property of class MotionBlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#motionblursamples
 func (m *MotionBlurPostProcess) SetMotionBlurSamples(motionBlurSamples float64) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(motionBlurSamples)
-	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
+	m.p.Set("motionBlurSamples", motionBlurSamples)
+	return m
 }
 
 // MotionStrength returns the MotionStrength property of class MotionBlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#motionstrength
-func (m *MotionBlurPostProcess) MotionStrength(motionStrength float64) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(motionStrength)
-	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
+func (m *MotionBlurPostProcess) MotionStrength() float64 {
+	retVal := m.p.Get("motionStrength")
+	return retVal.Float()
 }
 
 // SetMotionStrength sets the MotionStrength property of class MotionBlurPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#motionstrength
 func (m *MotionBlurPostProcess) SetMotionStrength(motionStrength float64) *MotionBlurPostProcess {
-	p := ba.ctx.Get("MotionBlurPostProcess").New(motionStrength)
-	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
+	m.p.Set("motionStrength", motionStrength)
+	return m
 }
-
-*/

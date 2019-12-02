@@ -660,102 +660,98 @@ func (g *GPUParticleSystem) Stop() {
 	g.p.Call("stop")
 }
 
-/*
-
 // ActiveParticleCount returns the ActiveParticleCount property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#activeparticlecount
-func (g *GPUParticleSystem) ActiveParticleCount(activeParticleCount float64) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(activeParticleCount)
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+func (g *GPUParticleSystem) ActiveParticleCount() float64 {
+	retVal := g.p.Get("activeParticleCount")
+	return retVal.Float()
 }
 
 // SetActiveParticleCount sets the ActiveParticleCount property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#activeparticlecount
 func (g *GPUParticleSystem) SetActiveParticleCount(activeParticleCount float64) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(activeParticleCount)
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+	g.p.Set("activeParticleCount", activeParticleCount)
+	return g
 }
 
 // ForceDepthWrite returns the ForceDepthWrite property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#forcedepthwrite
-func (g *GPUParticleSystem) ForceDepthWrite(forceDepthWrite bool) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(forceDepthWrite)
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+func (g *GPUParticleSystem) ForceDepthWrite() bool {
+	retVal := g.p.Get("forceDepthWrite")
+	return retVal.Bool()
 }
 
 // SetForceDepthWrite sets the ForceDepthWrite property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#forcedepthwrite
 func (g *GPUParticleSystem) SetForceDepthWrite(forceDepthWrite bool) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(forceDepthWrite)
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+	g.p.Set("forceDepthWrite", forceDepthWrite)
+	return g
 }
 
 // IsSupported returns the IsSupported property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#issupported
-func (g *GPUParticleSystem) IsSupported(IsSupported bool) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(IsSupported)
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+func (g *GPUParticleSystem) IsSupported() bool {
+	retVal := g.p.Get("IsSupported")
+	return retVal.Bool()
 }
 
 // SetIsSupported sets the IsSupported property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#issupported
 func (g *GPUParticleSystem) SetIsSupported(IsSupported bool) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(IsSupported)
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+	g.p.Set("IsSupported", IsSupported)
+	return g
 }
 
 // LayerMask returns the LayerMask property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#layermask
-func (g *GPUParticleSystem) LayerMask(layerMask float64) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(layerMask)
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+func (g *GPUParticleSystem) LayerMask() float64 {
+	retVal := g.p.Get("layerMask")
+	return retVal.Float()
 }
 
 // SetLayerMask sets the LayerMask property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#layermask
 func (g *GPUParticleSystem) SetLayerMask(layerMask float64) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(layerMask)
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+	g.p.Set("layerMask", layerMask)
+	return g
 }
 
 // OnDisposeObservable returns the OnDisposeObservable property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#ondisposeobservable
-func (g *GPUParticleSystem) OnDisposeObservable(onDisposeObservable *Observable) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(onDisposeObservable.JSObject())
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+func (g *GPUParticleSystem) OnDisposeObservable() *Observable {
+	retVal := g.p.Get("onDisposeObservable")
+	return ObservableFromJSObject(retVal, g.ctx)
 }
 
 // SetOnDisposeObservable sets the OnDisposeObservable property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#ondisposeobservable
 func (g *GPUParticleSystem) SetOnDisposeObservable(onDisposeObservable *Observable) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(onDisposeObservable.JSObject())
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+	g.p.Set("onDisposeObservable", onDisposeObservable.JSObject())
+	return g
 }
 
 // UseRampGradients returns the UseRampGradients property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#userampgradients
-func (g *GPUParticleSystem) UseRampGradients(useRampGradients bool) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(useRampGradients)
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+func (g *GPUParticleSystem) UseRampGradients() bool {
+	retVal := g.p.Get("useRampGradients")
+	return retVal.Bool()
 }
 
 // SetUseRampGradients sets the UseRampGradients property of class GPUParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#userampgradients
 func (g *GPUParticleSystem) SetUseRampGradients(useRampGradients bool) *GPUParticleSystem {
-	p := ba.ctx.Get("GPUParticleSystem").New(useRampGradients)
-	return GPUParticleSystemFromJSObject(p, ba.ctx)
+	g.p.Set("useRampGradients", useRampGradients)
+	return g
 }
-
-*/

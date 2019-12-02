@@ -343,262 +343,266 @@ func (a *AnimationGroup) ToString(opts *AnimationGroupToStringOpts) string {
 	return retVal.String()
 }
 
-/*
-
 // Animatables returns the Animatables property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#animatables
-func (a *AnimationGroup) Animatables(animatables []*Animatable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(animatables)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) Animatables() []*Animatable {
+	retVal := a.p.Get("animatables")
+	result := []*Animatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimatableFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetAnimatables sets the Animatables property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#animatables
 func (a *AnimationGroup) SetAnimatables(animatables []*Animatable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(animatables)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("animatables", animatables)
+	return a
 }
 
 // From returns the From property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#from
-func (a *AnimationGroup) From(from float64) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(from)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) From() float64 {
+	retVal := a.p.Get("from")
+	return retVal.Float()
 }
 
 // SetFrom sets the From property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#from
 func (a *AnimationGroup) SetFrom(from float64) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(from)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("from", from)
+	return a
 }
 
 // IsPlaying returns the IsPlaying property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#isplaying
-func (a *AnimationGroup) IsPlaying(isPlaying bool) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(isPlaying)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) IsPlaying() bool {
+	retVal := a.p.Get("isPlaying")
+	return retVal.Bool()
 }
 
 // SetIsPlaying sets the IsPlaying property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#isplaying
 func (a *AnimationGroup) SetIsPlaying(isPlaying bool) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(isPlaying)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("isPlaying", isPlaying)
+	return a
 }
 
 // IsStarted returns the IsStarted property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#isstarted
-func (a *AnimationGroup) IsStarted(isStarted bool) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(isStarted)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) IsStarted() bool {
+	retVal := a.p.Get("isStarted")
+	return retVal.Bool()
 }
 
 // SetIsStarted sets the IsStarted property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#isstarted
 func (a *AnimationGroup) SetIsStarted(isStarted bool) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(isStarted)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("isStarted", isStarted)
+	return a
 }
 
 // LoopAnimation returns the LoopAnimation property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#loopanimation
-func (a *AnimationGroup) LoopAnimation(loopAnimation bool) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(loopAnimation)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) LoopAnimation() bool {
+	retVal := a.p.Get("loopAnimation")
+	return retVal.Bool()
 }
 
 // SetLoopAnimation sets the LoopAnimation property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#loopanimation
 func (a *AnimationGroup) SetLoopAnimation(loopAnimation bool) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(loopAnimation)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("loopAnimation", loopAnimation)
+	return a
 }
 
 // Name returns the Name property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#name
-func (a *AnimationGroup) Name(name string) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(name)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) Name() string {
+	retVal := a.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#name
 func (a *AnimationGroup) SetName(name string) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(name)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("name", name)
+	return a
 }
 
 // OnAnimationEndObservable returns the OnAnimationEndObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationendobservable
-func (a *AnimationGroup) OnAnimationEndObservable(onAnimationEndObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationEndObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) OnAnimationEndObservable() *Observable {
+	retVal := a.p.Get("onAnimationEndObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnAnimationEndObservable sets the OnAnimationEndObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationendobservable
 func (a *AnimationGroup) SetOnAnimationEndObservable(onAnimationEndObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationEndObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("onAnimationEndObservable", onAnimationEndObservable.JSObject())
+	return a
 }
 
 // OnAnimationGroupEndObservable returns the OnAnimationGroupEndObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationgroupendobservable
-func (a *AnimationGroup) OnAnimationGroupEndObservable(onAnimationGroupEndObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationGroupEndObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) OnAnimationGroupEndObservable() *Observable {
+	retVal := a.p.Get("onAnimationGroupEndObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnAnimationGroupEndObservable sets the OnAnimationGroupEndObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationgroupendobservable
 func (a *AnimationGroup) SetOnAnimationGroupEndObservable(onAnimationGroupEndObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationGroupEndObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("onAnimationGroupEndObservable", onAnimationGroupEndObservable.JSObject())
+	return a
 }
 
 // OnAnimationGroupLoopObservable returns the OnAnimationGroupLoopObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationgrouploopobservable
-func (a *AnimationGroup) OnAnimationGroupLoopObservable(onAnimationGroupLoopObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationGroupLoopObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) OnAnimationGroupLoopObservable() *Observable {
+	retVal := a.p.Get("onAnimationGroupLoopObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnAnimationGroupLoopObservable sets the OnAnimationGroupLoopObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationgrouploopobservable
 func (a *AnimationGroup) SetOnAnimationGroupLoopObservable(onAnimationGroupLoopObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationGroupLoopObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("onAnimationGroupLoopObservable", onAnimationGroupLoopObservable.JSObject())
+	return a
 }
 
 // OnAnimationGroupPauseObservable returns the OnAnimationGroupPauseObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationgrouppauseobservable
-func (a *AnimationGroup) OnAnimationGroupPauseObservable(onAnimationGroupPauseObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationGroupPauseObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) OnAnimationGroupPauseObservable() *Observable {
+	retVal := a.p.Get("onAnimationGroupPauseObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnAnimationGroupPauseObservable sets the OnAnimationGroupPauseObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationgrouppauseobservable
 func (a *AnimationGroup) SetOnAnimationGroupPauseObservable(onAnimationGroupPauseObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationGroupPauseObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("onAnimationGroupPauseObservable", onAnimationGroupPauseObservable.JSObject())
+	return a
 }
 
 // OnAnimationGroupPlayObservable returns the OnAnimationGroupPlayObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationgroupplayobservable
-func (a *AnimationGroup) OnAnimationGroupPlayObservable(onAnimationGroupPlayObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationGroupPlayObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) OnAnimationGroupPlayObservable() *Observable {
+	retVal := a.p.Get("onAnimationGroupPlayObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnAnimationGroupPlayObservable sets the OnAnimationGroupPlayObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationgroupplayobservable
 func (a *AnimationGroup) SetOnAnimationGroupPlayObservable(onAnimationGroupPlayObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationGroupPlayObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("onAnimationGroupPlayObservable", onAnimationGroupPlayObservable.JSObject())
+	return a
 }
 
 // OnAnimationLoopObservable returns the OnAnimationLoopObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationloopobservable
-func (a *AnimationGroup) OnAnimationLoopObservable(onAnimationLoopObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationLoopObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) OnAnimationLoopObservable() *Observable {
+	retVal := a.p.Get("onAnimationLoopObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnAnimationLoopObservable sets the OnAnimationLoopObservable property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#onanimationloopobservable
 func (a *AnimationGroup) SetOnAnimationLoopObservable(onAnimationLoopObservable *Observable) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(onAnimationLoopObservable.JSObject())
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("onAnimationLoopObservable", onAnimationLoopObservable.JSObject())
+	return a
 }
 
 // SpeedRatio returns the SpeedRatio property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#speedratio
-func (a *AnimationGroup) SpeedRatio(speedRatio float64) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(speedRatio)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) SpeedRatio() float64 {
+	retVal := a.p.Get("speedRatio")
+	return retVal.Float()
 }
 
 // SetSpeedRatio sets the SpeedRatio property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#speedratio
 func (a *AnimationGroup) SetSpeedRatio(speedRatio float64) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(speedRatio)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("speedRatio", speedRatio)
+	return a
 }
 
 // TargetedAnimations returns the TargetedAnimations property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#targetedanimations
-func (a *AnimationGroup) TargetedAnimations(targetedAnimations []*TargetedAnimation) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(targetedAnimations)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) TargetedAnimations() []*TargetedAnimation {
+	retVal := a.p.Get("targetedAnimations")
+	result := []*TargetedAnimation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TargetedAnimationFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetTargetedAnimations sets the TargetedAnimations property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#targetedanimations
 func (a *AnimationGroup) SetTargetedAnimations(targetedAnimations []*TargetedAnimation) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(targetedAnimations)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("targetedAnimations", targetedAnimations)
+	return a
 }
 
 // To returns the To property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#to
-func (a *AnimationGroup) To(to float64) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(to)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) To() float64 {
+	retVal := a.p.Get("to")
+	return retVal.Float()
 }
 
 // SetTo sets the To property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#to
 func (a *AnimationGroup) SetTo(to float64) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(to)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("to", to)
+	return a
 }
 
 // UniqueId returns the UniqueId property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#uniqueid
-func (a *AnimationGroup) UniqueId(uniqueId float64) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(uniqueId)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+func (a *AnimationGroup) UniqueId() float64 {
+	retVal := a.p.Get("uniqueId")
+	return retVal.Float()
 }
 
 // SetUniqueId sets the UniqueId property of class AnimationGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#uniqueid
 func (a *AnimationGroup) SetUniqueId(uniqueId float64) *AnimationGroup {
-	p := ba.ctx.Get("AnimationGroup").New(uniqueId)
-	return AnimationGroupFromJSObject(p, ba.ctx)
+	a.p.Set("uniqueId", uniqueId)
+	return a
 }
-
-*/

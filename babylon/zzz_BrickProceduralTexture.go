@@ -103,70 +103,66 @@ func (b *BrickProceduralTexture) UpdateShaderUniforms() {
 	b.p.Call("updateShaderUniforms")
 }
 
-/*
-
 // BrickColor returns the BrickColor property of class BrickProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#brickcolor
-func (b *BrickProceduralTexture) BrickColor(brickColor *Color3) *BrickProceduralTexture {
-	p := ba.ctx.Get("BrickProceduralTexture").New(brickColor.JSObject())
-	return BrickProceduralTextureFromJSObject(p, ba.ctx)
+func (b *BrickProceduralTexture) BrickColor() *Color3 {
+	retVal := b.p.Get("brickColor")
+	return Color3FromJSObject(retVal, b.ctx)
 }
 
 // SetBrickColor sets the BrickColor property of class BrickProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#brickcolor
 func (b *BrickProceduralTexture) SetBrickColor(brickColor *Color3) *BrickProceduralTexture {
-	p := ba.ctx.Get("BrickProceduralTexture").New(brickColor.JSObject())
-	return BrickProceduralTextureFromJSObject(p, ba.ctx)
+	b.p.Set("brickColor", brickColor.JSObject())
+	return b
 }
 
 // JointColor returns the JointColor property of class BrickProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#jointcolor
-func (b *BrickProceduralTexture) JointColor(jointColor *Color3) *BrickProceduralTexture {
-	p := ba.ctx.Get("BrickProceduralTexture").New(jointColor.JSObject())
-	return BrickProceduralTextureFromJSObject(p, ba.ctx)
+func (b *BrickProceduralTexture) JointColor() *Color3 {
+	retVal := b.p.Get("jointColor")
+	return Color3FromJSObject(retVal, b.ctx)
 }
 
 // SetJointColor sets the JointColor property of class BrickProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#jointcolor
 func (b *BrickProceduralTexture) SetJointColor(jointColor *Color3) *BrickProceduralTexture {
-	p := ba.ctx.Get("BrickProceduralTexture").New(jointColor.JSObject())
-	return BrickProceduralTextureFromJSObject(p, ba.ctx)
+	b.p.Set("jointColor", jointColor.JSObject())
+	return b
 }
 
 // NumberOfBricksHeight returns the NumberOfBricksHeight property of class BrickProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#numberofbricksheight
-func (b *BrickProceduralTexture) NumberOfBricksHeight(numberOfBricksHeight float64) *BrickProceduralTexture {
-	p := ba.ctx.Get("BrickProceduralTexture").New(numberOfBricksHeight)
-	return BrickProceduralTextureFromJSObject(p, ba.ctx)
+func (b *BrickProceduralTexture) NumberOfBricksHeight() float64 {
+	retVal := b.p.Get("numberOfBricksHeight")
+	return retVal.Float()
 }
 
 // SetNumberOfBricksHeight sets the NumberOfBricksHeight property of class BrickProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#numberofbricksheight
 func (b *BrickProceduralTexture) SetNumberOfBricksHeight(numberOfBricksHeight float64) *BrickProceduralTexture {
-	p := ba.ctx.Get("BrickProceduralTexture").New(numberOfBricksHeight)
-	return BrickProceduralTextureFromJSObject(p, ba.ctx)
+	b.p.Set("numberOfBricksHeight", numberOfBricksHeight)
+	return b
 }
 
 // NumberOfBricksWidth returns the NumberOfBricksWidth property of class BrickProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#numberofbrickswidth
-func (b *BrickProceduralTexture) NumberOfBricksWidth(numberOfBricksWidth float64) *BrickProceduralTexture {
-	p := ba.ctx.Get("BrickProceduralTexture").New(numberOfBricksWidth)
-	return BrickProceduralTextureFromJSObject(p, ba.ctx)
+func (b *BrickProceduralTexture) NumberOfBricksWidth() float64 {
+	retVal := b.p.Get("numberOfBricksWidth")
+	return retVal.Float()
 }
 
 // SetNumberOfBricksWidth sets the NumberOfBricksWidth property of class BrickProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#numberofbrickswidth
 func (b *BrickProceduralTexture) SetNumberOfBricksWidth(numberOfBricksWidth float64) *BrickProceduralTexture {
-	p := ba.ctx.Get("BrickProceduralTexture").New(numberOfBricksWidth)
-	return BrickProceduralTextureFromJSObject(p, ba.ctx)
+	b.p.Set("numberOfBricksWidth", numberOfBricksWidth)
+	return b
 }
-
-*/

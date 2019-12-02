@@ -126,7 +126,3 @@ func (i *ISceneLoaderPlugin) LoadAssetContainer(scene *Scene, data interface{}, 
 	retVal := i.p.Call("loadAssetContainer", args...)
 	return AssetContainerFromJSObject(retVal, i.ctx)
 }
-
-/*
-
- */

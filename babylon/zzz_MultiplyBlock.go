@@ -58,54 +58,50 @@ func (m *MultiplyBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Left returns the Left property of class MultiplyBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiplyblock#left
-func (m *MultiplyBlock) Left(left *NodeMaterialConnectionPoint) *MultiplyBlock {
-	p := ba.ctx.Get("MultiplyBlock").New(left.JSObject())
-	return MultiplyBlockFromJSObject(p, ba.ctx)
+func (m *MultiplyBlock) Left() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("left")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetLeft sets the Left property of class MultiplyBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiplyblock#left
 func (m *MultiplyBlock) SetLeft(left *NodeMaterialConnectionPoint) *MultiplyBlock {
-	p := ba.ctx.Get("MultiplyBlock").New(left.JSObject())
-	return MultiplyBlockFromJSObject(p, ba.ctx)
+	m.p.Set("left", left.JSObject())
+	return m
 }
 
 // Output returns the Output property of class MultiplyBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiplyblock#output
-func (m *MultiplyBlock) Output(output *NodeMaterialConnectionPoint) *MultiplyBlock {
-	p := ba.ctx.Get("MultiplyBlock").New(output.JSObject())
-	return MultiplyBlockFromJSObject(p, ba.ctx)
+func (m *MultiplyBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetOutput sets the Output property of class MultiplyBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiplyblock#output
 func (m *MultiplyBlock) SetOutput(output *NodeMaterialConnectionPoint) *MultiplyBlock {
-	p := ba.ctx.Get("MultiplyBlock").New(output.JSObject())
-	return MultiplyBlockFromJSObject(p, ba.ctx)
+	m.p.Set("output", output.JSObject())
+	return m
 }
 
 // Right returns the Right property of class MultiplyBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiplyblock#right
-func (m *MultiplyBlock) Right(right *NodeMaterialConnectionPoint) *MultiplyBlock {
-	p := ba.ctx.Get("MultiplyBlock").New(right.JSObject())
-	return MultiplyBlockFromJSObject(p, ba.ctx)
+func (m *MultiplyBlock) Right() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("right")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetRight sets the Right property of class MultiplyBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiplyblock#right
 func (m *MultiplyBlock) SetRight(right *NodeMaterialConnectionPoint) *MultiplyBlock {
-	p := ba.ctx.Get("MultiplyBlock").New(right.JSObject())
-	return MultiplyBlockFromJSObject(p, ba.ctx)
+	m.p.Set("right", right.JSObject())
+	return m
 }
-
-*/

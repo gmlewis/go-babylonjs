@@ -35,7 +35,3 @@ func ISkinArrayToJSArray(array []*ISkin) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

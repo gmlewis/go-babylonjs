@@ -554,38 +554,34 @@ func (s *ShaderMaterial) SetVector4(name string, value *Vector4) *ShaderMaterial
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
 }
 
-/*
-
 // Options returns the Options property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#options
-func (s *ShaderMaterial) Options(options *IShaderMaterialOptions) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(options.JSObject())
-	return ShaderMaterialFromJSObject(p, ba.ctx)
+func (s *ShaderMaterial) Options() *IShaderMaterialOptions {
+	retVal := s.p.Get("options")
+	return IShaderMaterialOptionsFromJSObject(retVal, s.ctx)
 }
 
 // SetOptions sets the Options property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#options
 func (s *ShaderMaterial) SetOptions(options *IShaderMaterialOptions) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(options.JSObject())
-	return ShaderMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("options", options.JSObject())
+	return s
 }
 
 // ShaderPath returns the ShaderPath property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#shaderpath
-func (s *ShaderMaterial) ShaderPath(shaderPath interface{}) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(shaderPath)
-	return ShaderMaterialFromJSObject(p, ba.ctx)
+func (s *ShaderMaterial) ShaderPath() interface{} {
+	retVal := s.p.Get("shaderPath")
+	return retVal
 }
 
 // SetShaderPath sets the ShaderPath property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#shaderpath
 func (s *ShaderMaterial) SetShaderPath(shaderPath interface{}) *ShaderMaterial {
-	p := ba.ctx.Get("ShaderMaterial").New(shaderPath)
-	return ShaderMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("shaderPath", shaderPath)
+	return s
 }
-
-*/

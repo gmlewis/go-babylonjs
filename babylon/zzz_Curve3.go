@@ -160,7 +160,3 @@ func (c *Curve3) Length() float64 {
 	retVal := c.p.Call("length")
 	return retVal.Float()
 }
-
-/*
-
- */

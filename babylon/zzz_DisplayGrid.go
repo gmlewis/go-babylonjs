@@ -87,182 +87,178 @@ func (d *DisplayGrid) _draw(context js.Value, opts *DisplayGrid_drawOpts) {
 	d.p.Call("_draw", args...)
 }
 
-/*
-
 // Background returns the Background property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#background
-func (d *DisplayGrid) Background(background string) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(background)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) Background() string {
+	retVal := d.p.Get("background")
+	return retVal.String()
 }
 
 // SetBackground sets the Background property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#background
 func (d *DisplayGrid) SetBackground(background string) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(background)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("background", background)
+	return d
 }
 
 // CellHeight returns the CellHeight property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#cellheight
-func (d *DisplayGrid) CellHeight(cellHeight float64) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(cellHeight)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) CellHeight() float64 {
+	retVal := d.p.Get("cellHeight")
+	return retVal.Float()
 }
 
 // SetCellHeight sets the CellHeight property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#cellheight
 func (d *DisplayGrid) SetCellHeight(cellHeight float64) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(cellHeight)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("cellHeight", cellHeight)
+	return d
 }
 
 // CellWidth returns the CellWidth property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#cellwidth
-func (d *DisplayGrid) CellWidth(cellWidth float64) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(cellWidth)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) CellWidth() float64 {
+	retVal := d.p.Get("cellWidth")
+	return retVal.Float()
 }
 
 // SetCellWidth sets the CellWidth property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#cellwidth
 func (d *DisplayGrid) SetCellWidth(cellWidth float64) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(cellWidth)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("cellWidth", cellWidth)
+	return d
 }
 
 // DisplayMajorLines returns the DisplayMajorLines property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#displaymajorlines
-func (d *DisplayGrid) DisplayMajorLines(displayMajorLines bool) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(displayMajorLines)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) DisplayMajorLines() bool {
+	retVal := d.p.Get("displayMajorLines")
+	return retVal.Bool()
 }
 
 // SetDisplayMajorLines sets the DisplayMajorLines property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#displaymajorlines
 func (d *DisplayGrid) SetDisplayMajorLines(displayMajorLines bool) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(displayMajorLines)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("displayMajorLines", displayMajorLines)
+	return d
 }
 
 // DisplayMinorLines returns the DisplayMinorLines property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#displayminorlines
-func (d *DisplayGrid) DisplayMinorLines(displayMinorLines bool) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(displayMinorLines)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) DisplayMinorLines() bool {
+	retVal := d.p.Get("displayMinorLines")
+	return retVal.Bool()
 }
 
 // SetDisplayMinorLines sets the DisplayMinorLines property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#displayminorlines
 func (d *DisplayGrid) SetDisplayMinorLines(displayMinorLines bool) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(displayMinorLines)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("displayMinorLines", displayMinorLines)
+	return d
 }
 
 // MajorLineColor returns the MajorLineColor property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinecolor
-func (d *DisplayGrid) MajorLineColor(majorLineColor string) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(majorLineColor)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) MajorLineColor() string {
+	retVal := d.p.Get("majorLineColor")
+	return retVal.String()
 }
 
 // SetMajorLineColor sets the MajorLineColor property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinecolor
 func (d *DisplayGrid) SetMajorLineColor(majorLineColor string) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(majorLineColor)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("majorLineColor", majorLineColor)
+	return d
 }
 
 // MajorLineFrequency returns the MajorLineFrequency property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinefrequency
-func (d *DisplayGrid) MajorLineFrequency(majorLineFrequency float64) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(majorLineFrequency)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) MajorLineFrequency() float64 {
+	retVal := d.p.Get("majorLineFrequency")
+	return retVal.Float()
 }
 
 // SetMajorLineFrequency sets the MajorLineFrequency property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinefrequency
 func (d *DisplayGrid) SetMajorLineFrequency(majorLineFrequency float64) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(majorLineFrequency)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("majorLineFrequency", majorLineFrequency)
+	return d
 }
 
 // MajorLineTickness returns the MajorLineTickness property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinetickness
-func (d *DisplayGrid) MajorLineTickness(majorLineTickness float64) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(majorLineTickness)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) MajorLineTickness() float64 {
+	retVal := d.p.Get("majorLineTickness")
+	return retVal.Float()
 }
 
 // SetMajorLineTickness sets the MajorLineTickness property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinetickness
 func (d *DisplayGrid) SetMajorLineTickness(majorLineTickness float64) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(majorLineTickness)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("majorLineTickness", majorLineTickness)
+	return d
 }
 
 // MinorLineColor returns the MinorLineColor property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#minorlinecolor
-func (d *DisplayGrid) MinorLineColor(minorLineColor string) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(minorLineColor)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) MinorLineColor() string {
+	retVal := d.p.Get("minorLineColor")
+	return retVal.String()
 }
 
 // SetMinorLineColor sets the MinorLineColor property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#minorlinecolor
 func (d *DisplayGrid) SetMinorLineColor(minorLineColor string) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(minorLineColor)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("minorLineColor", minorLineColor)
+	return d
 }
 
 // MinorLineTickness returns the MinorLineTickness property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#minorlinetickness
-func (d *DisplayGrid) MinorLineTickness(minorLineTickness float64) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(minorLineTickness)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) MinorLineTickness() float64 {
+	retVal := d.p.Get("minorLineTickness")
+	return retVal.Float()
 }
 
 // SetMinorLineTickness sets the MinorLineTickness property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#minorlinetickness
 func (d *DisplayGrid) SetMinorLineTickness(minorLineTickness float64) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(minorLineTickness)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("minorLineTickness", minorLineTickness)
+	return d
 }
 
 // Name returns the Name property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#name
-func (d *DisplayGrid) Name(name string) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(name)
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (d *DisplayGrid) Name() string {
+	retVal := d.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class DisplayGrid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid#name
 func (d *DisplayGrid) SetName(name string) *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid").New(name)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	d.p.Set("name", name)
+	return d
 }
-
-*/

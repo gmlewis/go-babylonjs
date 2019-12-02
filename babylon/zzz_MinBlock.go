@@ -58,54 +58,50 @@ func (m *MinBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Left returns the Left property of class MinBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.minblock#left
-func (m *MinBlock) Left(left *NodeMaterialConnectionPoint) *MinBlock {
-	p := ba.ctx.Get("MinBlock").New(left.JSObject())
-	return MinBlockFromJSObject(p, ba.ctx)
+func (m *MinBlock) Left() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("left")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetLeft sets the Left property of class MinBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.minblock#left
 func (m *MinBlock) SetLeft(left *NodeMaterialConnectionPoint) *MinBlock {
-	p := ba.ctx.Get("MinBlock").New(left.JSObject())
-	return MinBlockFromJSObject(p, ba.ctx)
+	m.p.Set("left", left.JSObject())
+	return m
 }
 
 // Output returns the Output property of class MinBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.minblock#output
-func (m *MinBlock) Output(output *NodeMaterialConnectionPoint) *MinBlock {
-	p := ba.ctx.Get("MinBlock").New(output.JSObject())
-	return MinBlockFromJSObject(p, ba.ctx)
+func (m *MinBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetOutput sets the Output property of class MinBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.minblock#output
 func (m *MinBlock) SetOutput(output *NodeMaterialConnectionPoint) *MinBlock {
-	p := ba.ctx.Get("MinBlock").New(output.JSObject())
-	return MinBlockFromJSObject(p, ba.ctx)
+	m.p.Set("output", output.JSObject())
+	return m
 }
 
 // Right returns the Right property of class MinBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.minblock#right
-func (m *MinBlock) Right(right *NodeMaterialConnectionPoint) *MinBlock {
-	p := ba.ctx.Get("MinBlock").New(right.JSObject())
-	return MinBlockFromJSObject(p, ba.ctx)
+func (m *MinBlock) Right() *NodeMaterialConnectionPoint {
+	retVal := m.p.Get("right")
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
 }
 
 // SetRight sets the Right property of class MinBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.minblock#right
 func (m *MinBlock) SetRight(right *NodeMaterialConnectionPoint) *MinBlock {
-	p := ba.ctx.Get("MinBlock").New(right.JSObject())
-	return MinBlockFromJSObject(p, ba.ctx)
+	m.p.Set("right", right.JSObject())
+	return m
 }
-
-*/

@@ -344,22 +344,22 @@ func (o *Observable) RemoveCallback(callback func(), opts *ObservableRemoveCallb
 	return retVal.Bool()
 }
 
-/*
-
 // Observers returns the Observers property of class Observable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#observers
-func (o *Observable) Observers(observers []*Observer) *Observable {
-	p := ba.ctx.Get("Observable").New(observers)
-	return ObservableFromJSObject(p, ba.ctx)
+func (o *Observable) Observers() []*Observer {
+	retVal := o.p.Get("observers")
+	result := []*Observer{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ObserverFromJSObject(retVal.Index(ri), o.ctx))
+	}
+	return result
 }
 
 // SetObservers sets the Observers property of class Observable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#observers
 func (o *Observable) SetObservers(observers []*Observer) *Observable {
-	p := ba.ctx.Get("Observable").New(observers)
-	return ObservableFromJSObject(p, ba.ctx)
+	o.p.Set("observers", observers)
+	return o
 }
-
-*/

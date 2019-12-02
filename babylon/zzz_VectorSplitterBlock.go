@@ -58,150 +58,146 @@ func (v *VectorSplitterBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // W returns the W property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#w
-func (v *VectorSplitterBlock) W(w *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(w.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+func (v *VectorSplitterBlock) W() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("w")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetW sets the W property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#w
 func (v *VectorSplitterBlock) SetW(w *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(w.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+	v.p.Set("w", w.JSObject())
+	return v
 }
 
 // X returns the X property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#x
-func (v *VectorSplitterBlock) X(x *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(x.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+func (v *VectorSplitterBlock) X() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("x")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetX sets the X property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#x
 func (v *VectorSplitterBlock) SetX(x *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(x.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+	v.p.Set("x", x.JSObject())
+	return v
 }
 
 // XyIn returns the XyIn property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#xyin
-func (v *VectorSplitterBlock) XyIn(xyIn *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(xyIn.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+func (v *VectorSplitterBlock) XyIn() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("xyIn")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetXyIn sets the XyIn property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#xyin
 func (v *VectorSplitterBlock) SetXyIn(xyIn *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(xyIn.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+	v.p.Set("xyIn", xyIn.JSObject())
+	return v
 }
 
 // XyOut returns the XyOut property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#xyout
-func (v *VectorSplitterBlock) XyOut(xyOut *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(xyOut.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+func (v *VectorSplitterBlock) XyOut() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("xyOut")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetXyOut sets the XyOut property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#xyout
 func (v *VectorSplitterBlock) SetXyOut(xyOut *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(xyOut.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+	v.p.Set("xyOut", xyOut.JSObject())
+	return v
 }
 
 // XyzIn returns the XyzIn property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#xyzin
-func (v *VectorSplitterBlock) XyzIn(xyzIn *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(xyzIn.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+func (v *VectorSplitterBlock) XyzIn() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("xyzIn")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetXyzIn sets the XyzIn property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#xyzin
 func (v *VectorSplitterBlock) SetXyzIn(xyzIn *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(xyzIn.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+	v.p.Set("xyzIn", xyzIn.JSObject())
+	return v
 }
 
 // XyzOut returns the XyzOut property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#xyzout
-func (v *VectorSplitterBlock) XyzOut(xyzOut *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(xyzOut.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+func (v *VectorSplitterBlock) XyzOut() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("xyzOut")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetXyzOut sets the XyzOut property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#xyzout
 func (v *VectorSplitterBlock) SetXyzOut(xyzOut *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(xyzOut.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+	v.p.Set("xyzOut", xyzOut.JSObject())
+	return v
 }
 
 // Xyzw returns the Xyzw property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#xyzw
-func (v *VectorSplitterBlock) Xyzw(xyzw *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(xyzw.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+func (v *VectorSplitterBlock) Xyzw() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("xyzw")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetXyzw sets the Xyzw property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#xyzw
 func (v *VectorSplitterBlock) SetXyzw(xyzw *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(xyzw.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+	v.p.Set("xyzw", xyzw.JSObject())
+	return v
 }
 
 // Y returns the Y property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#y
-func (v *VectorSplitterBlock) Y(y *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(y.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+func (v *VectorSplitterBlock) Y() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("y")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetY sets the Y property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#y
 func (v *VectorSplitterBlock) SetY(y *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(y.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+	v.p.Set("y", y.JSObject())
+	return v
 }
 
 // Z returns the Z property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#z
-func (v *VectorSplitterBlock) Z(z *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(z.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+func (v *VectorSplitterBlock) Z() *NodeMaterialConnectionPoint {
+	retVal := v.p.Get("z")
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
 }
 
 // SetZ sets the Z property of class VectorSplitterBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#z
 func (v *VectorSplitterBlock) SetZ(z *NodeMaterialConnectionPoint) *VectorSplitterBlock {
-	p := ba.ctx.Get("VectorSplitterBlock").New(z.JSObject())
-	return VectorSplitterBlockFromJSObject(p, ba.ctx)
+	v.p.Set("z", z.JSObject())
+	return v
 }
-
-*/

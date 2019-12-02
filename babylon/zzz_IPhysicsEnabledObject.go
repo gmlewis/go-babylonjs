@@ -221,86 +221,82 @@ func (i *IPhysicsEnabledObject) Translate(axis *Vector3, distance float64, opts 
 	return TransformNodeFromJSObject(retVal, i.ctx)
 }
 
-/*
-
 // Parent returns the Parent property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#parent
-func (i *IPhysicsEnabledObject) Parent(parent interface{}) *IPhysicsEnabledObject {
-	p := ba.ctx.Get("IPhysicsEnabledObject").New(parent)
-	return IPhysicsEnabledObjectFromJSObject(p, ba.ctx)
+func (i *IPhysicsEnabledObject) Parent() interface{} {
+	retVal := i.p.Get("parent")
+	return retVal
 }
 
 // SetParent sets the Parent property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#parent
 func (i *IPhysicsEnabledObject) SetParent(parent interface{}) *IPhysicsEnabledObject {
-	p := ba.ctx.Get("IPhysicsEnabledObject").New(parent)
-	return IPhysicsEnabledObjectFromJSObject(p, ba.ctx)
+	i.p.Set("parent", parent)
+	return i
 }
 
 // Position returns the Position property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#position
-func (i *IPhysicsEnabledObject) Position(position *Vector3) *IPhysicsEnabledObject {
-	p := ba.ctx.Get("IPhysicsEnabledObject").New(position.JSObject())
-	return IPhysicsEnabledObjectFromJSObject(p, ba.ctx)
+func (i *IPhysicsEnabledObject) Position() *Vector3 {
+	retVal := i.p.Get("position")
+	return Vector3FromJSObject(retVal, i.ctx)
 }
 
 // SetPosition sets the Position property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#position
 func (i *IPhysicsEnabledObject) SetPosition(position *Vector3) *IPhysicsEnabledObject {
-	p := ba.ctx.Get("IPhysicsEnabledObject").New(position.JSObject())
-	return IPhysicsEnabledObjectFromJSObject(p, ba.ctx)
+	i.p.Set("position", position.JSObject())
+	return i
 }
 
 // Rotation returns the Rotation property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#rotation
-func (i *IPhysicsEnabledObject) Rotation(rotation *Vector3) *IPhysicsEnabledObject {
-	p := ba.ctx.Get("IPhysicsEnabledObject").New(rotation.JSObject())
-	return IPhysicsEnabledObjectFromJSObject(p, ba.ctx)
+func (i *IPhysicsEnabledObject) Rotation() *Vector3 {
+	retVal := i.p.Get("rotation")
+	return Vector3FromJSObject(retVal, i.ctx)
 }
 
 // SetRotation sets the Rotation property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#rotation
 func (i *IPhysicsEnabledObject) SetRotation(rotation *Vector3) *IPhysicsEnabledObject {
-	p := ba.ctx.Get("IPhysicsEnabledObject").New(rotation.JSObject())
-	return IPhysicsEnabledObjectFromJSObject(p, ba.ctx)
+	i.p.Set("rotation", rotation.JSObject())
+	return i
 }
 
 // RotationQuaternion returns the RotationQuaternion property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#rotationquaternion
-func (i *IPhysicsEnabledObject) RotationQuaternion(rotationQuaternion *Quaternion) *IPhysicsEnabledObject {
-	p := ba.ctx.Get("IPhysicsEnabledObject").New(rotationQuaternion.JSObject())
-	return IPhysicsEnabledObjectFromJSObject(p, ba.ctx)
+func (i *IPhysicsEnabledObject) RotationQuaternion() *Quaternion {
+	retVal := i.p.Get("rotationQuaternion")
+	return QuaternionFromJSObject(retVal, i.ctx)
 }
 
 // SetRotationQuaternion sets the RotationQuaternion property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#rotationquaternion
 func (i *IPhysicsEnabledObject) SetRotationQuaternion(rotationQuaternion *Quaternion) *IPhysicsEnabledObject {
-	p := ba.ctx.Get("IPhysicsEnabledObject").New(rotationQuaternion.JSObject())
-	return IPhysicsEnabledObjectFromJSObject(p, ba.ctx)
+	i.p.Set("rotationQuaternion", rotationQuaternion.JSObject())
+	return i
 }
 
 // Scaling returns the Scaling property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#scaling
-func (i *IPhysicsEnabledObject) Scaling(scaling *Vector3) *IPhysicsEnabledObject {
-	p := ba.ctx.Get("IPhysicsEnabledObject").New(scaling.JSObject())
-	return IPhysicsEnabledObjectFromJSObject(p, ba.ctx)
+func (i *IPhysicsEnabledObject) Scaling() *Vector3 {
+	retVal := i.p.Get("scaling")
+	return Vector3FromJSObject(retVal, i.ctx)
 }
 
 // SetScaling sets the Scaling property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#scaling
 func (i *IPhysicsEnabledObject) SetScaling(scaling *Vector3) *IPhysicsEnabledObject {
-	p := ba.ctx.Get("IPhysicsEnabledObject").New(scaling.JSObject())
-	return IPhysicsEnabledObjectFromJSObject(p, ba.ctx)
+	i.p.Set("scaling", scaling.JSObject())
+	return i
 }
-
-*/

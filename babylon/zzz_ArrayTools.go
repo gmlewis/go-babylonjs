@@ -35,7 +35,3 @@ func ArrayToolsArrayToJSArray(array []*ArrayTools) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

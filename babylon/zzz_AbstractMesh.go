@@ -1006,1318 +1006,1314 @@ func (a *AbstractMesh) UpdateVerticesData(kind string, data js.Value, opts *Abst
 	return AbstractMeshFromJSObject(retVal, a.ctx)
 }
 
-/*
-
 // ActionManager returns the ActionManager property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#actionmanager
-func (a *AbstractMesh) ActionManager(actionManager *AbstractActionManager) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(actionManager.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) ActionManager() *AbstractActionManager {
+	retVal := a.p.Get("actionManager")
+	return AbstractActionManagerFromJSObject(retVal, a.ctx)
 }
 
 // SetActionManager sets the ActionManager property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#actionmanager
 func (a *AbstractMesh) SetActionManager(actionManager *AbstractActionManager) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(actionManager.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("actionManager", actionManager.JSObject())
+	return a
 }
 
 // AlphaIndex returns the AlphaIndex property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#alphaindex
-func (a *AbstractMesh) AlphaIndex(alphaIndex float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(alphaIndex)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) AlphaIndex() float64 {
+	retVal := a.p.Get("alphaIndex")
+	return retVal.Float()
 }
 
 // SetAlphaIndex sets the AlphaIndex property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#alphaindex
 func (a *AbstractMesh) SetAlphaIndex(alphaIndex float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(alphaIndex)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("alphaIndex", alphaIndex)
+	return a
 }
 
 // AlwaysSelectAsActiveMesh returns the AlwaysSelectAsActiveMesh property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#alwaysselectasactivemesh
-func (a *AbstractMesh) AlwaysSelectAsActiveMesh(alwaysSelectAsActiveMesh bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(alwaysSelectAsActiveMesh)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) AlwaysSelectAsActiveMesh() bool {
+	retVal := a.p.Get("alwaysSelectAsActiveMesh")
+	return retVal.Bool()
 }
 
 // SetAlwaysSelectAsActiveMesh sets the AlwaysSelectAsActiveMesh property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#alwaysselectasactivemesh
 func (a *AbstractMesh) SetAlwaysSelectAsActiveMesh(alwaysSelectAsActiveMesh bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(alwaysSelectAsActiveMesh)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("alwaysSelectAsActiveMesh", alwaysSelectAsActiveMesh)
+	return a
 }
 
 // ApplyFog returns the ApplyFog property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#applyfog
-func (a *AbstractMesh) ApplyFog(applyFog bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(applyFog)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) ApplyFog() bool {
+	retVal := a.p.Get("applyFog")
+	return retVal.Bool()
 }
 
 // SetApplyFog sets the ApplyFog property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#applyfog
 func (a *AbstractMesh) SetApplyFog(applyFog bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(applyFog)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("applyFog", applyFog)
+	return a
 }
 
 // BILLBOARDMODE_ALL returns the BILLBOARDMODE_ALL property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_all
-func (a *AbstractMesh) BILLBOARDMODE_ALL(BILLBOARDMODE_ALL float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_ALL)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) BILLBOARDMODE_ALL() float64 {
+	retVal := a.p.Get("BILLBOARDMODE_ALL")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_ALL sets the BILLBOARDMODE_ALL property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_all
 func (a *AbstractMesh) SetBILLBOARDMODE_ALL(BILLBOARDMODE_ALL float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_ALL)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("BILLBOARDMODE_ALL", BILLBOARDMODE_ALL)
+	return a
 }
 
 // BILLBOARDMODE_NONE returns the BILLBOARDMODE_NONE property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_none
-func (a *AbstractMesh) BILLBOARDMODE_NONE(BILLBOARDMODE_NONE float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_NONE)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) BILLBOARDMODE_NONE() float64 {
+	retVal := a.p.Get("BILLBOARDMODE_NONE")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_NONE sets the BILLBOARDMODE_NONE property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_none
 func (a *AbstractMesh) SetBILLBOARDMODE_NONE(BILLBOARDMODE_NONE float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_NONE)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("BILLBOARDMODE_NONE", BILLBOARDMODE_NONE)
+	return a
 }
 
 // BILLBOARDMODE_USE_POSITION returns the BILLBOARDMODE_USE_POSITION property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_use_position
-func (a *AbstractMesh) BILLBOARDMODE_USE_POSITION(BILLBOARDMODE_USE_POSITION float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_USE_POSITION)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) BILLBOARDMODE_USE_POSITION() float64 {
+	retVal := a.p.Get("BILLBOARDMODE_USE_POSITION")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_USE_POSITION sets the BILLBOARDMODE_USE_POSITION property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_use_position
 func (a *AbstractMesh) SetBILLBOARDMODE_USE_POSITION(BILLBOARDMODE_USE_POSITION float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_USE_POSITION)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("BILLBOARDMODE_USE_POSITION", BILLBOARDMODE_USE_POSITION)
+	return a
 }
 
 // BILLBOARDMODE_X returns the BILLBOARDMODE_X property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_x
-func (a *AbstractMesh) BILLBOARDMODE_X(BILLBOARDMODE_X float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_X)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) BILLBOARDMODE_X() float64 {
+	retVal := a.p.Get("BILLBOARDMODE_X")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_X sets the BILLBOARDMODE_X property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_x
 func (a *AbstractMesh) SetBILLBOARDMODE_X(BILLBOARDMODE_X float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_X)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("BILLBOARDMODE_X", BILLBOARDMODE_X)
+	return a
 }
 
 // BILLBOARDMODE_Y returns the BILLBOARDMODE_Y property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_y
-func (a *AbstractMesh) BILLBOARDMODE_Y(BILLBOARDMODE_Y float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_Y)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) BILLBOARDMODE_Y() float64 {
+	retVal := a.p.Get("BILLBOARDMODE_Y")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_Y sets the BILLBOARDMODE_Y property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_y
 func (a *AbstractMesh) SetBILLBOARDMODE_Y(BILLBOARDMODE_Y float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_Y)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("BILLBOARDMODE_Y", BILLBOARDMODE_Y)
+	return a
 }
 
 // BILLBOARDMODE_Z returns the BILLBOARDMODE_Z property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_z
-func (a *AbstractMesh) BILLBOARDMODE_Z(BILLBOARDMODE_Z float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_Z)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) BILLBOARDMODE_Z() float64 {
+	retVal := a.p.Get("BILLBOARDMODE_Z")
+	return retVal.Float()
 }
 
 // SetBILLBOARDMODE_Z sets the BILLBOARDMODE_Z property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#billboardmode_z
 func (a *AbstractMesh) SetBILLBOARDMODE_Z(BILLBOARDMODE_Z float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(BILLBOARDMODE_Z)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("BILLBOARDMODE_Z", BILLBOARDMODE_Z)
+	return a
 }
 
 // CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY returns the CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#cullingstrategy_boundingsphere_only
-func (a *AbstractMesh) CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY(CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY() float64 {
+	retVal := a.p.Get("CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY")
+	return retVal.Float()
 }
 
 // SetCULLINGSTRATEGY_BOUNDINGSPHERE_ONLY sets the CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#cullingstrategy_boundingsphere_only
 func (a *AbstractMesh) SetCULLINGSTRATEGY_BOUNDINGSPHERE_ONLY(CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY", CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY)
+	return a
 }
 
 // CULLINGSTRATEGY_OPTIMISTIC_INCLUSION returns the CULLINGSTRATEGY_OPTIMISTIC_INCLUSION property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#cullingstrategy_optimistic_inclusion
-func (a *AbstractMesh) CULLINGSTRATEGY_OPTIMISTIC_INCLUSION(CULLINGSTRATEGY_OPTIMISTIC_INCLUSION float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(CULLINGSTRATEGY_OPTIMISTIC_INCLUSION)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) CULLINGSTRATEGY_OPTIMISTIC_INCLUSION() float64 {
+	retVal := a.p.Get("CULLINGSTRATEGY_OPTIMISTIC_INCLUSION")
+	return retVal.Float()
 }
 
 // SetCULLINGSTRATEGY_OPTIMISTIC_INCLUSION sets the CULLINGSTRATEGY_OPTIMISTIC_INCLUSION property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#cullingstrategy_optimistic_inclusion
 func (a *AbstractMesh) SetCULLINGSTRATEGY_OPTIMISTIC_INCLUSION(CULLINGSTRATEGY_OPTIMISTIC_INCLUSION float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(CULLINGSTRATEGY_OPTIMISTIC_INCLUSION)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("CULLINGSTRATEGY_OPTIMISTIC_INCLUSION", CULLINGSTRATEGY_OPTIMISTIC_INCLUSION)
+	return a
 }
 
 // CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY returns the CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#cullingstrategy_optimistic_inclusion_then_bsphere_only
-func (a *AbstractMesh) CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY(CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY() float64 {
+	retVal := a.p.Get("CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY")
+	return retVal.Float()
 }
 
 // SetCULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY sets the CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#cullingstrategy_optimistic_inclusion_then_bsphere_only
 func (a *AbstractMesh) SetCULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY(CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY", CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY)
+	return a
 }
 
 // CULLINGSTRATEGY_STANDARD returns the CULLINGSTRATEGY_STANDARD property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#cullingstrategy_standard
-func (a *AbstractMesh) CULLINGSTRATEGY_STANDARD(CULLINGSTRATEGY_STANDARD float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(CULLINGSTRATEGY_STANDARD)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) CULLINGSTRATEGY_STANDARD() float64 {
+	retVal := a.p.Get("CULLINGSTRATEGY_STANDARD")
+	return retVal.Float()
 }
 
 // SetCULLINGSTRATEGY_STANDARD sets the CULLINGSTRATEGY_STANDARD property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#cullingstrategy_standard
 func (a *AbstractMesh) SetCULLINGSTRATEGY_STANDARD(CULLINGSTRATEGY_STANDARD float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(CULLINGSTRATEGY_STANDARD)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("CULLINGSTRATEGY_STANDARD", CULLINGSTRATEGY_STANDARD)
+	return a
 }
 
 // CheckCollisions returns the CheckCollisions property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#checkcollisions
-func (a *AbstractMesh) CheckCollisions(checkCollisions bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(checkCollisions)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) CheckCollisions() bool {
+	retVal := a.p.Get("checkCollisions")
+	return retVal.Bool()
 }
 
 // SetCheckCollisions sets the CheckCollisions property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#checkcollisions
 func (a *AbstractMesh) SetCheckCollisions(checkCollisions bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(checkCollisions)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("checkCollisions", checkCollisions)
+	return a
 }
 
 // Collider returns the Collider property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#collider
-func (a *AbstractMesh) Collider(collider js.Value) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(collider)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) Collider() js.Value {
+	retVal := a.p.Get("collider")
+	return retVal
 }
 
 // SetCollider sets the Collider property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#collider
 func (a *AbstractMesh) SetCollider(collider js.Value) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(collider)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("collider", collider)
+	return a
 }
 
 // CollisionGroup returns the CollisionGroup property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#collisiongroup
-func (a *AbstractMesh) CollisionGroup(collisionGroup float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(collisionGroup)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) CollisionGroup() float64 {
+	retVal := a.p.Get("collisionGroup")
+	return retVal.Float()
 }
 
 // SetCollisionGroup sets the CollisionGroup property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#collisiongroup
 func (a *AbstractMesh) SetCollisionGroup(collisionGroup float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(collisionGroup)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("collisionGroup", collisionGroup)
+	return a
 }
 
 // CollisionMask returns the CollisionMask property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#collisionmask
-func (a *AbstractMesh) CollisionMask(collisionMask float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(collisionMask)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) CollisionMask() float64 {
+	retVal := a.p.Get("collisionMask")
+	return retVal.Float()
 }
 
 // SetCollisionMask sets the CollisionMask property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#collisionmask
 func (a *AbstractMesh) SetCollisionMask(collisionMask float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(collisionMask)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("collisionMask", collisionMask)
+	return a
 }
 
 // ComputeBonesUsingShaders returns the ComputeBonesUsingShaders property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#computebonesusingshaders
-func (a *AbstractMesh) ComputeBonesUsingShaders(computeBonesUsingShaders bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(computeBonesUsingShaders)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) ComputeBonesUsingShaders() bool {
+	retVal := a.p.Get("computeBonesUsingShaders")
+	return retVal.Bool()
 }
 
 // SetComputeBonesUsingShaders sets the ComputeBonesUsingShaders property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#computebonesusingshaders
 func (a *AbstractMesh) SetComputeBonesUsingShaders(computeBonesUsingShaders bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(computeBonesUsingShaders)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("computeBonesUsingShaders", computeBonesUsingShaders)
+	return a
 }
 
 // CullingStrategy returns the CullingStrategy property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#cullingstrategy
-func (a *AbstractMesh) CullingStrategy(cullingStrategy float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(cullingStrategy)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) CullingStrategy() float64 {
+	retVal := a.p.Get("cullingStrategy")
+	return retVal.Float()
 }
 
 // SetCullingStrategy sets the CullingStrategy property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#cullingstrategy
 func (a *AbstractMesh) SetCullingStrategy(cullingStrategy float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(cullingStrategy)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("cullingStrategy", cullingStrategy)
+	return a
 }
 
 // DefinedFacingForward returns the DefinedFacingForward property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#definedfacingforward
-func (a *AbstractMesh) DefinedFacingForward(definedFacingForward bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(definedFacingForward)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) DefinedFacingForward() bool {
+	retVal := a.p.Get("definedFacingForward")
+	return retVal.Bool()
 }
 
 // SetDefinedFacingForward sets the DefinedFacingForward property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#definedfacingforward
 func (a *AbstractMesh) SetDefinedFacingForward(definedFacingForward bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(definedFacingForward)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("definedFacingForward", definedFacingForward)
+	return a
 }
 
 // DoNotSyncBoundingInfo returns the DoNotSyncBoundingInfo property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#donotsyncboundinginfo
-func (a *AbstractMesh) DoNotSyncBoundingInfo(doNotSyncBoundingInfo bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(doNotSyncBoundingInfo)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) DoNotSyncBoundingInfo() bool {
+	retVal := a.p.Get("doNotSyncBoundingInfo")
+	return retVal.Bool()
 }
 
 // SetDoNotSyncBoundingInfo sets the DoNotSyncBoundingInfo property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#donotsyncboundinginfo
 func (a *AbstractMesh) SetDoNotSyncBoundingInfo(doNotSyncBoundingInfo bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(doNotSyncBoundingInfo)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("doNotSyncBoundingInfo", doNotSyncBoundingInfo)
+	return a
 }
 
 // EdgesColor returns the EdgesColor property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#edgescolor
-func (a *AbstractMesh) EdgesColor(edgesColor *Color4) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(edgesColor.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) EdgesColor() *Color4 {
+	retVal := a.p.Get("edgesColor")
+	return Color4FromJSObject(retVal, a.ctx)
 }
 
 // SetEdgesColor sets the EdgesColor property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#edgescolor
 func (a *AbstractMesh) SetEdgesColor(edgesColor *Color4) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(edgesColor.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("edgesColor", edgesColor.JSObject())
+	return a
 }
 
 // EdgesRenderer returns the EdgesRenderer property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#edgesrenderer
-func (a *AbstractMesh) EdgesRenderer(edgesRenderer *EdgesRenderer) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(edgesRenderer.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) EdgesRenderer() *EdgesRenderer {
+	retVal := a.p.Get("edgesRenderer")
+	return EdgesRendererFromJSObject(retVal, a.ctx)
 }
 
 // SetEdgesRenderer sets the EdgesRenderer property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#edgesrenderer
 func (a *AbstractMesh) SetEdgesRenderer(edgesRenderer *EdgesRenderer) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(edgesRenderer.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("edgesRenderer", edgesRenderer.JSObject())
+	return a
 }
 
 // EdgesWidth returns the EdgesWidth property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#edgeswidth
-func (a *AbstractMesh) EdgesWidth(edgesWidth float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(edgesWidth)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) EdgesWidth() float64 {
+	retVal := a.p.Get("edgesWidth")
+	return retVal.Float()
 }
 
 // SetEdgesWidth sets the EdgesWidth property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#edgeswidth
 func (a *AbstractMesh) SetEdgesWidth(edgesWidth float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(edgesWidth)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("edgesWidth", edgesWidth)
+	return a
 }
 
 // Ellipsoid returns the Ellipsoid property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#ellipsoid
-func (a *AbstractMesh) Ellipsoid(ellipsoid *Vector3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(ellipsoid.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) Ellipsoid() *Vector3 {
+	retVal := a.p.Get("ellipsoid")
+	return Vector3FromJSObject(retVal, a.ctx)
 }
 
 // SetEllipsoid sets the Ellipsoid property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#ellipsoid
 func (a *AbstractMesh) SetEllipsoid(ellipsoid *Vector3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(ellipsoid.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("ellipsoid", ellipsoid.JSObject())
+	return a
 }
 
 // EllipsoidOffset returns the EllipsoidOffset property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#ellipsoidoffset
-func (a *AbstractMesh) EllipsoidOffset(ellipsoidOffset *Vector3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(ellipsoidOffset.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) EllipsoidOffset() *Vector3 {
+	retVal := a.p.Get("ellipsoidOffset")
+	return Vector3FromJSObject(retVal, a.ctx)
 }
 
 // SetEllipsoidOffset sets the EllipsoidOffset property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#ellipsoidoffset
 func (a *AbstractMesh) SetEllipsoidOffset(ellipsoidOffset *Vector3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(ellipsoidOffset.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("ellipsoidOffset", ellipsoidOffset.JSObject())
+	return a
 }
 
 // EnablePointerMoveEvents returns the EnablePointerMoveEvents property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#enablepointermoveevents
-func (a *AbstractMesh) EnablePointerMoveEvents(enablePointerMoveEvents bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(enablePointerMoveEvents)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) EnablePointerMoveEvents() bool {
+	retVal := a.p.Get("enablePointerMoveEvents")
+	return retVal.Bool()
 }
 
 // SetEnablePointerMoveEvents sets the EnablePointerMoveEvents property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#enablepointermoveevents
 func (a *AbstractMesh) SetEnablePointerMoveEvents(enablePointerMoveEvents bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(enablePointerMoveEvents)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("enablePointerMoveEvents", enablePointerMoveEvents)
+	return a
 }
 
 // FacetDepthSortFrom returns the FacetDepthSortFrom property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#facetdepthsortfrom
-func (a *AbstractMesh) FacetDepthSortFrom(facetDepthSortFrom *Vector3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(facetDepthSortFrom.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) FacetDepthSortFrom() *Vector3 {
+	retVal := a.p.Get("facetDepthSortFrom")
+	return Vector3FromJSObject(retVal, a.ctx)
 }
 
 // SetFacetDepthSortFrom sets the FacetDepthSortFrom property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#facetdepthsortfrom
 func (a *AbstractMesh) SetFacetDepthSortFrom(facetDepthSortFrom *Vector3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(facetDepthSortFrom.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("facetDepthSortFrom", facetDepthSortFrom.JSObject())
+	return a
 }
 
 // FacetNb returns the FacetNb property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#facetnb
-func (a *AbstractMesh) FacetNb(facetNb float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(facetNb)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) FacetNb() float64 {
+	retVal := a.p.Get("facetNb")
+	return retVal.Float()
 }
 
 // SetFacetNb sets the FacetNb property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#facetnb
 func (a *AbstractMesh) SetFacetNb(facetNb float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(facetNb)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("facetNb", facetNb)
+	return a
 }
 
 // HasInstances returns the HasInstances property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#hasinstances
-func (a *AbstractMesh) HasInstances(hasInstances bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(hasInstances)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) HasInstances() bool {
+	retVal := a.p.Get("hasInstances")
+	return retVal.Bool()
 }
 
 // SetHasInstances sets the HasInstances property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#hasinstances
 func (a *AbstractMesh) SetHasInstances(hasInstances bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(hasInstances)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("hasInstances", hasInstances)
+	return a
 }
 
 // HasVertexAlpha returns the HasVertexAlpha property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#hasvertexalpha
-func (a *AbstractMesh) HasVertexAlpha(hasVertexAlpha bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(hasVertexAlpha)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) HasVertexAlpha() bool {
+	retVal := a.p.Get("hasVertexAlpha")
+	return retVal.Bool()
 }
 
 // SetHasVertexAlpha sets the HasVertexAlpha property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#hasvertexalpha
 func (a *AbstractMesh) SetHasVertexAlpha(hasVertexAlpha bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(hasVertexAlpha)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("hasVertexAlpha", hasVertexAlpha)
+	return a
 }
 
 // InstancedBuffers returns the InstancedBuffers property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#instancedbuffers
-func (a *AbstractMesh) InstancedBuffers(instancedBuffers js.Value) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(instancedBuffers)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) InstancedBuffers() js.Value {
+	retVal := a.p.Get("instancedBuffers")
+	return retVal
 }
 
 // SetInstancedBuffers sets the InstancedBuffers property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#instancedbuffers
 func (a *AbstractMesh) SetInstancedBuffers(instancedBuffers js.Value) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(instancedBuffers)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("instancedBuffers", instancedBuffers)
+	return a
 }
 
 // IsAnInstance returns the IsAnInstance property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isaninstance
-func (a *AbstractMesh) IsAnInstance(isAnInstance bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isAnInstance)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) IsAnInstance() bool {
+	retVal := a.p.Get("isAnInstance")
+	return retVal.Bool()
 }
 
 // SetIsAnInstance sets the IsAnInstance property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isaninstance
 func (a *AbstractMesh) SetIsAnInstance(isAnInstance bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isAnInstance)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("isAnInstance", isAnInstance)
+	return a
 }
 
 // IsBlocked returns the IsBlocked property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isblocked
-func (a *AbstractMesh) IsBlocked(isBlocked bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isBlocked)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) IsBlocked() bool {
+	retVal := a.p.Get("isBlocked")
+	return retVal.Bool()
 }
 
 // SetIsBlocked sets the IsBlocked property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isblocked
 func (a *AbstractMesh) SetIsBlocked(isBlocked bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isBlocked)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("isBlocked", isBlocked)
+	return a
 }
 
 // IsBlocker returns the IsBlocker property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isblocker
-func (a *AbstractMesh) IsBlocker(isBlocker bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isBlocker)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) IsBlocker() bool {
+	retVal := a.p.Get("isBlocker")
+	return retVal.Bool()
 }
 
 // SetIsBlocker sets the IsBlocker property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isblocker
 func (a *AbstractMesh) SetIsBlocker(isBlocker bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isBlocker)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("isBlocker", isBlocker)
+	return a
 }
 
 // IsFacetDataEnabled returns the IsFacetDataEnabled property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isfacetdataenabled
-func (a *AbstractMesh) IsFacetDataEnabled(isFacetDataEnabled bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isFacetDataEnabled)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) IsFacetDataEnabled() bool {
+	retVal := a.p.Get("isFacetDataEnabled")
+	return retVal.Bool()
 }
 
 // SetIsFacetDataEnabled sets the IsFacetDataEnabled property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isfacetdataenabled
 func (a *AbstractMesh) SetIsFacetDataEnabled(isFacetDataEnabled bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isFacetDataEnabled)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("isFacetDataEnabled", isFacetDataEnabled)
+	return a
 }
 
 // IsOccluded returns the IsOccluded property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isoccluded
-func (a *AbstractMesh) IsOccluded(isOccluded bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isOccluded)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) IsOccluded() bool {
+	retVal := a.p.Get("isOccluded")
+	return retVal.Bool()
 }
 
 // SetIsOccluded sets the IsOccluded property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isoccluded
 func (a *AbstractMesh) SetIsOccluded(isOccluded bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isOccluded)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("isOccluded", isOccluded)
+	return a
 }
 
 // IsOcclusionQueryInProgress returns the IsOcclusionQueryInProgress property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isocclusionqueryinprogress
-func (a *AbstractMesh) IsOcclusionQueryInProgress(isOcclusionQueryInProgress bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isOcclusionQueryInProgress)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) IsOcclusionQueryInProgress() bool {
+	retVal := a.p.Get("isOcclusionQueryInProgress")
+	return retVal.Bool()
 }
 
 // SetIsOcclusionQueryInProgress sets the IsOcclusionQueryInProgress property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isocclusionqueryinprogress
 func (a *AbstractMesh) SetIsOcclusionQueryInProgress(isOcclusionQueryInProgress bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isOcclusionQueryInProgress)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("isOcclusionQueryInProgress", isOcclusionQueryInProgress)
+	return a
 }
 
 // IsPickable returns the IsPickable property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#ispickable
-func (a *AbstractMesh) IsPickable(isPickable bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isPickable)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) IsPickable() bool {
+	retVal := a.p.Get("isPickable")
+	return retVal.Bool()
 }
 
 // SetIsPickable sets the IsPickable property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#ispickable
 func (a *AbstractMesh) SetIsPickable(isPickable bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isPickable)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("isPickable", isPickable)
+	return a
 }
 
 // IsVisible returns the IsVisible property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isvisible
-func (a *AbstractMesh) IsVisible(isVisible bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isVisible)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) IsVisible() bool {
+	retVal := a.p.Get("isVisible")
+	return retVal.Bool()
 }
 
 // SetIsVisible sets the IsVisible property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isvisible
 func (a *AbstractMesh) SetIsVisible(isVisible bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(isVisible)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("isVisible", isVisible)
+	return a
 }
 
 // LayerMask returns the LayerMask property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#layermask
-func (a *AbstractMesh) LayerMask(layerMask float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(layerMask)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) LayerMask() float64 {
+	retVal := a.p.Get("layerMask")
+	return retVal.Float()
 }
 
 // SetLayerMask sets the LayerMask property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#layermask
 func (a *AbstractMesh) SetLayerMask(layerMask float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(layerMask)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("layerMask", layerMask)
+	return a
 }
 
 // LightSources returns the LightSources property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#lightsources
-func (a *AbstractMesh) LightSources(lightSources *Light) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(lightSources.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) LightSources() *Light {
+	retVal := a.p.Get("lightSources")
+	return LightFromJSObject(retVal, a.ctx)
 }
 
 // SetLightSources sets the LightSources property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#lightsources
 func (a *AbstractMesh) SetLightSources(lightSources *Light) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(lightSources.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("lightSources", lightSources.JSObject())
+	return a
 }
 
 // Material returns the Material property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#material
-func (a *AbstractMesh) Material(material *Material) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(material.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) Material() *Material {
+	retVal := a.p.Get("material")
+	return MaterialFromJSObject(retVal, a.ctx)
 }
 
 // SetMaterial sets the Material property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#material
 func (a *AbstractMesh) SetMaterial(material *Material) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(material.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("material", material.JSObject())
+	return a
 }
 
 // MustDepthSortFacets returns the MustDepthSortFacets property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#mustdepthsortfacets
-func (a *AbstractMesh) MustDepthSortFacets(mustDepthSortFacets bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(mustDepthSortFacets)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) MustDepthSortFacets() bool {
+	retVal := a.p.Get("mustDepthSortFacets")
+	return retVal.Bool()
 }
 
 // SetMustDepthSortFacets sets the MustDepthSortFacets property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#mustdepthsortfacets
 func (a *AbstractMesh) SetMustDepthSortFacets(mustDepthSortFacets bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(mustDepthSortFacets)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("mustDepthSortFacets", mustDepthSortFacets)
+	return a
 }
 
 // NumBoneInfluencers returns the NumBoneInfluencers property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#numboneinfluencers
-func (a *AbstractMesh) NumBoneInfluencers(numBoneInfluencers float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(numBoneInfluencers)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) NumBoneInfluencers() float64 {
+	retVal := a.p.Get("numBoneInfluencers")
+	return retVal.Float()
 }
 
 // SetNumBoneInfluencers sets the NumBoneInfluencers property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#numboneinfluencers
 func (a *AbstractMesh) SetNumBoneInfluencers(numBoneInfluencers float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(numBoneInfluencers)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("numBoneInfluencers", numBoneInfluencers)
+	return a
 }
 
 // OCCLUSION_ALGORITHM_TYPE_ACCURATE returns the OCCLUSION_ALGORITHM_TYPE_ACCURATE property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusion_algorithm_type_accurate
-func (a *AbstractMesh) OCCLUSION_ALGORITHM_TYPE_ACCURATE(OCCLUSION_ALGORITHM_TYPE_ACCURATE float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(OCCLUSION_ALGORITHM_TYPE_ACCURATE)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OCCLUSION_ALGORITHM_TYPE_ACCURATE() float64 {
+	retVal := a.p.Get("OCCLUSION_ALGORITHM_TYPE_ACCURATE")
+	return retVal.Float()
 }
 
 // SetOCCLUSION_ALGORITHM_TYPE_ACCURATE sets the OCCLUSION_ALGORITHM_TYPE_ACCURATE property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusion_algorithm_type_accurate
 func (a *AbstractMesh) SetOCCLUSION_ALGORITHM_TYPE_ACCURATE(OCCLUSION_ALGORITHM_TYPE_ACCURATE float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(OCCLUSION_ALGORITHM_TYPE_ACCURATE)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("OCCLUSION_ALGORITHM_TYPE_ACCURATE", OCCLUSION_ALGORITHM_TYPE_ACCURATE)
+	return a
 }
 
 // OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE returns the OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusion_algorithm_type_conservative
-func (a *AbstractMesh) OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE(OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE() float64 {
+	retVal := a.p.Get("OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE")
+	return retVal.Float()
 }
 
 // SetOCCLUSION_ALGORITHM_TYPE_CONSERVATIVE sets the OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusion_algorithm_type_conservative
 func (a *AbstractMesh) SetOCCLUSION_ALGORITHM_TYPE_CONSERVATIVE(OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE", OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE)
+	return a
 }
 
 // OCCLUSION_TYPE_NONE returns the OCCLUSION_TYPE_NONE property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusion_type_none
-func (a *AbstractMesh) OCCLUSION_TYPE_NONE(OCCLUSION_TYPE_NONE float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(OCCLUSION_TYPE_NONE)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OCCLUSION_TYPE_NONE() float64 {
+	retVal := a.p.Get("OCCLUSION_TYPE_NONE")
+	return retVal.Float()
 }
 
 // SetOCCLUSION_TYPE_NONE sets the OCCLUSION_TYPE_NONE property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusion_type_none
 func (a *AbstractMesh) SetOCCLUSION_TYPE_NONE(OCCLUSION_TYPE_NONE float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(OCCLUSION_TYPE_NONE)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("OCCLUSION_TYPE_NONE", OCCLUSION_TYPE_NONE)
+	return a
 }
 
 // OCCLUSION_TYPE_OPTIMISTIC returns the OCCLUSION_TYPE_OPTIMISTIC property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusion_type_optimistic
-func (a *AbstractMesh) OCCLUSION_TYPE_OPTIMISTIC(OCCLUSION_TYPE_OPTIMISTIC float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(OCCLUSION_TYPE_OPTIMISTIC)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OCCLUSION_TYPE_OPTIMISTIC() float64 {
+	retVal := a.p.Get("OCCLUSION_TYPE_OPTIMISTIC")
+	return retVal.Float()
 }
 
 // SetOCCLUSION_TYPE_OPTIMISTIC sets the OCCLUSION_TYPE_OPTIMISTIC property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusion_type_optimistic
 func (a *AbstractMesh) SetOCCLUSION_TYPE_OPTIMISTIC(OCCLUSION_TYPE_OPTIMISTIC float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(OCCLUSION_TYPE_OPTIMISTIC)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("OCCLUSION_TYPE_OPTIMISTIC", OCCLUSION_TYPE_OPTIMISTIC)
+	return a
 }
 
 // OCCLUSION_TYPE_STRICT returns the OCCLUSION_TYPE_STRICT property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusion_type_strict
-func (a *AbstractMesh) OCCLUSION_TYPE_STRICT(OCCLUSION_TYPE_STRICT float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(OCCLUSION_TYPE_STRICT)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OCCLUSION_TYPE_STRICT() float64 {
+	retVal := a.p.Get("OCCLUSION_TYPE_STRICT")
+	return retVal.Float()
 }
 
 // SetOCCLUSION_TYPE_STRICT sets the OCCLUSION_TYPE_STRICT property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusion_type_strict
 func (a *AbstractMesh) SetOCCLUSION_TYPE_STRICT(OCCLUSION_TYPE_STRICT float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(OCCLUSION_TYPE_STRICT)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("OCCLUSION_TYPE_STRICT", OCCLUSION_TYPE_STRICT)
+	return a
 }
 
 // OcclusionQueryAlgorithmType returns the OcclusionQueryAlgorithmType property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusionqueryalgorithmtype
-func (a *AbstractMesh) OcclusionQueryAlgorithmType(occlusionQueryAlgorithmType float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(occlusionQueryAlgorithmType)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OcclusionQueryAlgorithmType() float64 {
+	retVal := a.p.Get("occlusionQueryAlgorithmType")
+	return retVal.Float()
 }
 
 // SetOcclusionQueryAlgorithmType sets the OcclusionQueryAlgorithmType property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusionqueryalgorithmtype
 func (a *AbstractMesh) SetOcclusionQueryAlgorithmType(occlusionQueryAlgorithmType float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(occlusionQueryAlgorithmType)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("occlusionQueryAlgorithmType", occlusionQueryAlgorithmType)
+	return a
 }
 
 // OcclusionRetryCount returns the OcclusionRetryCount property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusionretrycount
-func (a *AbstractMesh) OcclusionRetryCount(occlusionRetryCount float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(occlusionRetryCount)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OcclusionRetryCount() float64 {
+	retVal := a.p.Get("occlusionRetryCount")
+	return retVal.Float()
 }
 
 // SetOcclusionRetryCount sets the OcclusionRetryCount property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusionretrycount
 func (a *AbstractMesh) SetOcclusionRetryCount(occlusionRetryCount float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(occlusionRetryCount)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("occlusionRetryCount", occlusionRetryCount)
+	return a
 }
 
 // OcclusionType returns the OcclusionType property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusiontype
-func (a *AbstractMesh) OcclusionType(occlusionType float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(occlusionType)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OcclusionType() float64 {
+	retVal := a.p.Get("occlusionType")
+	return retVal.Float()
 }
 
 // SetOcclusionType sets the OcclusionType property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#occlusiontype
 func (a *AbstractMesh) SetOcclusionType(occlusionType float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(occlusionType)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("occlusionType", occlusionType)
+	return a
 }
 
 // OnCollide returns the OnCollide property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollide
-func (a *AbstractMesh) OnCollide(onCollide func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OnCollide() js.Value {
+	retVal := a.p.Get("onCollide")
+	return retVal
 }
 
 // SetOnCollide sets the OnCollide property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollide
 func (a *AbstractMesh) SetOnCollide(onCollide func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("onCollide", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCollide(); return nil }))
+	return a
 }
 
 // OnCollideObservable returns the OnCollideObservable property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollideobservable
-func (a *AbstractMesh) OnCollideObservable(onCollideObservable *Observable) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onCollideObservable.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OnCollideObservable() *Observable {
+	retVal := a.p.Get("onCollideObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnCollideObservable sets the OnCollideObservable property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollideobservable
 func (a *AbstractMesh) SetOnCollideObservable(onCollideObservable *Observable) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onCollideObservable.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("onCollideObservable", onCollideObservable.JSObject())
+	return a
 }
 
 // OnCollisionPositionChange returns the OnCollisionPositionChange property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollisionpositionchange
-func (a *AbstractMesh) OnCollisionPositionChange(onCollisionPositionChange func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollisionPositionChange(); return nil}))
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OnCollisionPositionChange() js.Value {
+	retVal := a.p.Get("onCollisionPositionChange")
+	return retVal
 }
 
 // SetOnCollisionPositionChange sets the OnCollisionPositionChange property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollisionpositionchange
 func (a *AbstractMesh) SetOnCollisionPositionChange(onCollisionPositionChange func()) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollisionPositionChange(); return nil}))
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("onCollisionPositionChange", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCollisionPositionChange(); return nil }))
+	return a
 }
 
 // OnCollisionPositionChangeObservable returns the OnCollisionPositionChangeObservable property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollisionpositionchangeobservable
-func (a *AbstractMesh) OnCollisionPositionChangeObservable(onCollisionPositionChangeObservable *Observable) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onCollisionPositionChangeObservable.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OnCollisionPositionChangeObservable() *Observable {
+	retVal := a.p.Get("onCollisionPositionChangeObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnCollisionPositionChangeObservable sets the OnCollisionPositionChangeObservable property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollisionpositionchangeobservable
 func (a *AbstractMesh) SetOnCollisionPositionChangeObservable(onCollisionPositionChangeObservable *Observable) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onCollisionPositionChangeObservable.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("onCollisionPositionChangeObservable", onCollisionPositionChangeObservable.JSObject())
+	return a
 }
 
 // OnMaterialChangedObservable returns the OnMaterialChangedObservable property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#onmaterialchangedobservable
-func (a *AbstractMesh) OnMaterialChangedObservable(onMaterialChangedObservable *Observable) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onMaterialChangedObservable.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OnMaterialChangedObservable() *Observable {
+	retVal := a.p.Get("onMaterialChangedObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnMaterialChangedObservable sets the OnMaterialChangedObservable property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#onmaterialchangedobservable
 func (a *AbstractMesh) SetOnMaterialChangedObservable(onMaterialChangedObservable *Observable) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onMaterialChangedObservable.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("onMaterialChangedObservable", onMaterialChangedObservable.JSObject())
+	return a
 }
 
 // OnRebuildObservable returns the OnRebuildObservable property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#onrebuildobservable
-func (a *AbstractMesh) OnRebuildObservable(onRebuildObservable *Observable) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onRebuildObservable.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OnRebuildObservable() *Observable {
+	retVal := a.p.Get("onRebuildObservable")
+	return ObservableFromJSObject(retVal, a.ctx)
 }
 
 // SetOnRebuildObservable sets the OnRebuildObservable property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#onrebuildobservable
 func (a *AbstractMesh) SetOnRebuildObservable(onRebuildObservable *Observable) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(onRebuildObservable.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("onRebuildObservable", onRebuildObservable.JSObject())
+	return a
 }
 
 // OutlineColor returns the OutlineColor property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#outlinecolor
-func (a *AbstractMesh) OutlineColor(outlineColor *Color3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(outlineColor.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OutlineColor() *Color3 {
+	retVal := a.p.Get("outlineColor")
+	return Color3FromJSObject(retVal, a.ctx)
 }
 
 // SetOutlineColor sets the OutlineColor property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#outlinecolor
 func (a *AbstractMesh) SetOutlineColor(outlineColor *Color3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(outlineColor.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("outlineColor", outlineColor.JSObject())
+	return a
 }
 
 // OutlineWidth returns the OutlineWidth property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#outlinewidth
-func (a *AbstractMesh) OutlineWidth(outlineWidth float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(outlineWidth)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OutlineWidth() float64 {
+	retVal := a.p.Get("outlineWidth")
+	return retVal.Float()
 }
 
 // SetOutlineWidth sets the OutlineWidth property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#outlinewidth
 func (a *AbstractMesh) SetOutlineWidth(outlineWidth float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(outlineWidth)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("outlineWidth", outlineWidth)
+	return a
 }
 
 // OverlayAlpha returns the OverlayAlpha property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#overlayalpha
-func (a *AbstractMesh) OverlayAlpha(overlayAlpha float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(overlayAlpha)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OverlayAlpha() float64 {
+	retVal := a.p.Get("overlayAlpha")
+	return retVal.Float()
 }
 
 // SetOverlayAlpha sets the OverlayAlpha property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#overlayalpha
 func (a *AbstractMesh) SetOverlayAlpha(overlayAlpha float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(overlayAlpha)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("overlayAlpha", overlayAlpha)
+	return a
 }
 
 // OverlayColor returns the OverlayColor property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#overlaycolor
-func (a *AbstractMesh) OverlayColor(overlayColor *Color3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(overlayColor.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) OverlayColor() *Color3 {
+	retVal := a.p.Get("overlayColor")
+	return Color3FromJSObject(retVal, a.ctx)
 }
 
 // SetOverlayColor sets the OverlayColor property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#overlaycolor
 func (a *AbstractMesh) SetOverlayColor(overlayColor *Color3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(overlayColor.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("overlayColor", overlayColor.JSObject())
+	return a
 }
 
 // PartitioningBBoxRatio returns the PartitioningBBoxRatio property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#partitioningbboxratio
-func (a *AbstractMesh) PartitioningBBoxRatio(partitioningBBoxRatio float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(partitioningBBoxRatio)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) PartitioningBBoxRatio() float64 {
+	retVal := a.p.Get("partitioningBBoxRatio")
+	return retVal.Float()
 }
 
 // SetPartitioningBBoxRatio sets the PartitioningBBoxRatio property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#partitioningbboxratio
 func (a *AbstractMesh) SetPartitioningBBoxRatio(partitioningBBoxRatio float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(partitioningBBoxRatio)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("partitioningBBoxRatio", partitioningBBoxRatio)
+	return a
 }
 
 // PartitioningSubdivisions returns the PartitioningSubdivisions property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#partitioningsubdivisions
-func (a *AbstractMesh) PartitioningSubdivisions(partitioningSubdivisions float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(partitioningSubdivisions)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) PartitioningSubdivisions() float64 {
+	retVal := a.p.Get("partitioningSubdivisions")
+	return retVal.Float()
 }
 
 // SetPartitioningSubdivisions sets the PartitioningSubdivisions property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#partitioningsubdivisions
 func (a *AbstractMesh) SetPartitioningSubdivisions(partitioningSubdivisions float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(partitioningSubdivisions)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("partitioningSubdivisions", partitioningSubdivisions)
+	return a
 }
 
 // PhysicsImpostor returns the PhysicsImpostor property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#physicsimpostor
-func (a *AbstractMesh) PhysicsImpostor(physicsImpostor *PhysicsImpostor) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(physicsImpostor.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) PhysicsImpostor() *PhysicsImpostor {
+	retVal := a.p.Get("physicsImpostor")
+	return PhysicsImpostorFromJSObject(retVal, a.ctx)
 }
 
 // SetPhysicsImpostor sets the PhysicsImpostor property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#physicsimpostor
 func (a *AbstractMesh) SetPhysicsImpostor(physicsImpostor *PhysicsImpostor) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(physicsImpostor.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("physicsImpostor", physicsImpostor.JSObject())
+	return a
 }
 
 // ReceiveShadows returns the ReceiveShadows property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#receiveshadows
-func (a *AbstractMesh) ReceiveShadows(receiveShadows bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(receiveShadows)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) ReceiveShadows() bool {
+	retVal := a.p.Get("receiveShadows")
+	return retVal.Bool()
 }
 
 // SetReceiveShadows sets the ReceiveShadows property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#receiveshadows
 func (a *AbstractMesh) SetReceiveShadows(receiveShadows bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(receiveShadows)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("receiveShadows", receiveShadows)
+	return a
 }
 
 // RenderOutline returns the RenderOutline property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#renderoutline
-func (a *AbstractMesh) RenderOutline(renderOutline bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(renderOutline)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) RenderOutline() bool {
+	retVal := a.p.Get("renderOutline")
+	return retVal.Bool()
 }
 
 // SetRenderOutline sets the RenderOutline property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#renderoutline
 func (a *AbstractMesh) SetRenderOutline(renderOutline bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(renderOutline)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("renderOutline", renderOutline)
+	return a
 }
 
 // RenderOverlay returns the RenderOverlay property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#renderoverlay
-func (a *AbstractMesh) RenderOverlay(renderOverlay bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(renderOverlay)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) RenderOverlay() bool {
+	retVal := a.p.Get("renderOverlay")
+	return retVal.Bool()
 }
 
 // SetRenderOverlay sets the RenderOverlay property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#renderoverlay
 func (a *AbstractMesh) SetRenderOverlay(renderOverlay bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(renderOverlay)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("renderOverlay", renderOverlay)
+	return a
 }
 
 // RenderingGroupId returns the RenderingGroupId property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#renderinggroupid
-func (a *AbstractMesh) RenderingGroupId(renderingGroupId float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(renderingGroupId)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) RenderingGroupId() float64 {
+	retVal := a.p.Get("renderingGroupId")
+	return retVal.Float()
 }
 
 // SetRenderingGroupId sets the RenderingGroupId property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#renderinggroupid
 func (a *AbstractMesh) SetRenderingGroupId(renderingGroupId float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(renderingGroupId)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("renderingGroupId", renderingGroupId)
+	return a
 }
 
 // Scaling returns the Scaling property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#scaling
-func (a *AbstractMesh) Scaling(scaling *Vector3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(scaling.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) Scaling() *Vector3 {
+	retVal := a.p.Get("scaling")
+	return Vector3FromJSObject(retVal, a.ctx)
 }
 
 // SetScaling sets the Scaling property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#scaling
 func (a *AbstractMesh) SetScaling(scaling *Vector3) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(scaling.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("scaling", scaling.JSObject())
+	return a
 }
 
 // ShowBoundingBox returns the ShowBoundingBox property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#showboundingbox
-func (a *AbstractMesh) ShowBoundingBox(showBoundingBox bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(showBoundingBox)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) ShowBoundingBox() bool {
+	retVal := a.p.Get("showBoundingBox")
+	return retVal.Bool()
 }
 
 // SetShowBoundingBox sets the ShowBoundingBox property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#showboundingbox
 func (a *AbstractMesh) SetShowBoundingBox(showBoundingBox bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(showBoundingBox)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("showBoundingBox", showBoundingBox)
+	return a
 }
 
 // ShowSubMeshesBoundingBox returns the ShowSubMeshesBoundingBox property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#showsubmeshesboundingbox
-func (a *AbstractMesh) ShowSubMeshesBoundingBox(showSubMeshesBoundingBox bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(showSubMeshesBoundingBox)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) ShowSubMeshesBoundingBox() bool {
+	retVal := a.p.Get("showSubMeshesBoundingBox")
+	return retVal.Bool()
 }
 
 // SetShowSubMeshesBoundingBox sets the ShowSubMeshesBoundingBox property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#showsubmeshesboundingbox
 func (a *AbstractMesh) SetShowSubMeshesBoundingBox(showSubMeshesBoundingBox bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(showSubMeshesBoundingBox)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("showSubMeshesBoundingBox", showSubMeshesBoundingBox)
+	return a
 }
 
 // Skeleton returns the Skeleton property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#skeleton
-func (a *AbstractMesh) Skeleton(skeleton *Skeleton) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(skeleton.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) Skeleton() *Skeleton {
+	retVal := a.p.Get("skeleton")
+	return SkeletonFromJSObject(retVal, a.ctx)
 }
 
 // SetSkeleton sets the Skeleton property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#skeleton
 func (a *AbstractMesh) SetSkeleton(skeleton *Skeleton) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(skeleton.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("skeleton", skeleton.JSObject())
+	return a
 }
 
 // SubMeshes returns the SubMeshes property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#submeshes
-func (a *AbstractMesh) SubMeshes(subMeshes *SubMesh) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(subMeshes.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) SubMeshes() *SubMesh {
+	retVal := a.p.Get("subMeshes")
+	return SubMeshFromJSObject(retVal, a.ctx)
 }
 
 // SetSubMeshes sets the SubMeshes property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#submeshes
 func (a *AbstractMesh) SetSubMeshes(subMeshes *SubMesh) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(subMeshes.JSObject())
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("subMeshes", subMeshes.JSObject())
+	return a
 }
 
 // UseBones returns the UseBones property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#usebones
-func (a *AbstractMesh) UseBones(useBones bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(useBones)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) UseBones() bool {
+	retVal := a.p.Get("useBones")
+	return retVal.Bool()
 }
 
 // SetUseBones sets the UseBones property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#usebones
 func (a *AbstractMesh) SetUseBones(useBones bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(useBones)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("useBones", useBones)
+	return a
 }
 
 // UseOctreeForCollisions returns the UseOctreeForCollisions property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#useoctreeforcollisions
-func (a *AbstractMesh) UseOctreeForCollisions(useOctreeForCollisions bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(useOctreeForCollisions)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) UseOctreeForCollisions() bool {
+	retVal := a.p.Get("useOctreeForCollisions")
+	return retVal.Bool()
 }
 
 // SetUseOctreeForCollisions sets the UseOctreeForCollisions property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#useoctreeforcollisions
 func (a *AbstractMesh) SetUseOctreeForCollisions(useOctreeForCollisions bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(useOctreeForCollisions)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("useOctreeForCollisions", useOctreeForCollisions)
+	return a
 }
 
 // UseOctreeForPicking returns the UseOctreeForPicking property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#useoctreeforpicking
-func (a *AbstractMesh) UseOctreeForPicking(useOctreeForPicking bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(useOctreeForPicking)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) UseOctreeForPicking() bool {
+	retVal := a.p.Get("useOctreeForPicking")
+	return retVal.Bool()
 }
 
 // SetUseOctreeForPicking sets the UseOctreeForPicking property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#useoctreeforpicking
 func (a *AbstractMesh) SetUseOctreeForPicking(useOctreeForPicking bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(useOctreeForPicking)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("useOctreeForPicking", useOctreeForPicking)
+	return a
 }
 
 // UseOctreeForRenderingSelection returns the UseOctreeForRenderingSelection property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#useoctreeforrenderingselection
-func (a *AbstractMesh) UseOctreeForRenderingSelection(useOctreeForRenderingSelection bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(useOctreeForRenderingSelection)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) UseOctreeForRenderingSelection() bool {
+	retVal := a.p.Get("useOctreeForRenderingSelection")
+	return retVal.Bool()
 }
 
 // SetUseOctreeForRenderingSelection sets the UseOctreeForRenderingSelection property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#useoctreeforrenderingselection
 func (a *AbstractMesh) SetUseOctreeForRenderingSelection(useOctreeForRenderingSelection bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(useOctreeForRenderingSelection)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("useOctreeForRenderingSelection", useOctreeForRenderingSelection)
+	return a
 }
 
 // UseVertexColors returns the UseVertexColors property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#usevertexcolors
-func (a *AbstractMesh) UseVertexColors(useVertexColors bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(useVertexColors)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) UseVertexColors() bool {
+	retVal := a.p.Get("useVertexColors")
+	return retVal.Bool()
 }
 
 // SetUseVertexColors sets the UseVertexColors property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#usevertexcolors
 func (a *AbstractMesh) SetUseVertexColors(useVertexColors bool) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(useVertexColors)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("useVertexColors", useVertexColors)
+	return a
 }
 
 // Visibility returns the Visibility property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#visibility
-func (a *AbstractMesh) Visibility(visibility float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(visibility)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+func (a *AbstractMesh) Visibility() float64 {
+	retVal := a.p.Get("visibility")
+	return retVal.Float()
 }
 
 // SetVisibility sets the Visibility property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#visibility
 func (a *AbstractMesh) SetVisibility(visibility float64) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(visibility)
-	return AbstractMeshFromJSObject(p, ba.ctx)
+	a.p.Set("visibility", visibility)
+	return a
 }
-
-*/

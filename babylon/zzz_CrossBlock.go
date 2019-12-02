@@ -58,54 +58,50 @@ func (c *CrossBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Left returns the Left property of class CrossBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.crossblock#left
-func (c *CrossBlock) Left(left *NodeMaterialConnectionPoint) *CrossBlock {
-	p := ba.ctx.Get("CrossBlock").New(left.JSObject())
-	return CrossBlockFromJSObject(p, ba.ctx)
+func (c *CrossBlock) Left() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("left")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetLeft sets the Left property of class CrossBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.crossblock#left
 func (c *CrossBlock) SetLeft(left *NodeMaterialConnectionPoint) *CrossBlock {
-	p := ba.ctx.Get("CrossBlock").New(left.JSObject())
-	return CrossBlockFromJSObject(p, ba.ctx)
+	c.p.Set("left", left.JSObject())
+	return c
 }
 
 // Output returns the Output property of class CrossBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.crossblock#output
-func (c *CrossBlock) Output(output *NodeMaterialConnectionPoint) *CrossBlock {
-	p := ba.ctx.Get("CrossBlock").New(output.JSObject())
-	return CrossBlockFromJSObject(p, ba.ctx)
+func (c *CrossBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetOutput sets the Output property of class CrossBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.crossblock#output
 func (c *CrossBlock) SetOutput(output *NodeMaterialConnectionPoint) *CrossBlock {
-	p := ba.ctx.Get("CrossBlock").New(output.JSObject())
-	return CrossBlockFromJSObject(p, ba.ctx)
+	c.p.Set("output", output.JSObject())
+	return c
 }
 
 // Right returns the Right property of class CrossBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.crossblock#right
-func (c *CrossBlock) Right(right *NodeMaterialConnectionPoint) *CrossBlock {
-	p := ba.ctx.Get("CrossBlock").New(right.JSObject())
-	return CrossBlockFromJSObject(p, ba.ctx)
+func (c *CrossBlock) Right() *NodeMaterialConnectionPoint {
+	retVal := c.p.Get("right")
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
 }
 
 // SetRight sets the Right property of class CrossBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.crossblock#right
 func (c *CrossBlock) SetRight(right *NodeMaterialConnectionPoint) *CrossBlock {
-	p := ba.ctx.Get("CrossBlock").New(right.JSObject())
-	return CrossBlockFromJSObject(p, ba.ctx)
+	c.p.Set("right", right.JSObject())
+	return c
 }
-
-*/

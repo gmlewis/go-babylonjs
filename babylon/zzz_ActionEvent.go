@@ -175,102 +175,98 @@ func (a *ActionEvent) CreateNewFromSprite(source *Sprite, scene *Scene, opts *Ac
 	return ActionEventFromJSObject(retVal, a.ctx)
 }
 
-/*
-
 // AdditionalData returns the AdditionalData property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#additionaldata
-func (a *ActionEvent) AdditionalData(additionalData interface{}) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(additionalData)
-	return ActionEventFromJSObject(p, ba.ctx)
+func (a *ActionEvent) AdditionalData() interface{} {
+	retVal := a.p.Get("additionalData")
+	return retVal
 }
 
 // SetAdditionalData sets the AdditionalData property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#additionaldata
 func (a *ActionEvent) SetAdditionalData(additionalData interface{}) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(additionalData)
-	return ActionEventFromJSObject(p, ba.ctx)
+	a.p.Set("additionalData", additionalData)
+	return a
 }
 
 // MeshUnderPointer returns the MeshUnderPointer property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#meshunderpointer
-func (a *ActionEvent) MeshUnderPointer(meshUnderPointer *AbstractMesh) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(meshUnderPointer.JSObject())
-	return ActionEventFromJSObject(p, ba.ctx)
+func (a *ActionEvent) MeshUnderPointer() *AbstractMesh {
+	retVal := a.p.Get("meshUnderPointer")
+	return AbstractMeshFromJSObject(retVal, a.ctx)
 }
 
 // SetMeshUnderPointer sets the MeshUnderPointer property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#meshunderpointer
 func (a *ActionEvent) SetMeshUnderPointer(meshUnderPointer *AbstractMesh) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(meshUnderPointer.JSObject())
-	return ActionEventFromJSObject(p, ba.ctx)
+	a.p.Set("meshUnderPointer", meshUnderPointer.JSObject())
+	return a
 }
 
 // PointerX returns the PointerX property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#pointerx
-func (a *ActionEvent) PointerX(pointerX float64) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(pointerX)
-	return ActionEventFromJSObject(p, ba.ctx)
+func (a *ActionEvent) PointerX() float64 {
+	retVal := a.p.Get("pointerX")
+	return retVal.Float()
 }
 
 // SetPointerX sets the PointerX property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#pointerx
 func (a *ActionEvent) SetPointerX(pointerX float64) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(pointerX)
-	return ActionEventFromJSObject(p, ba.ctx)
+	a.p.Set("pointerX", pointerX)
+	return a
 }
 
 // PointerY returns the PointerY property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#pointery
-func (a *ActionEvent) PointerY(pointerY float64) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(pointerY)
-	return ActionEventFromJSObject(p, ba.ctx)
+func (a *ActionEvent) PointerY() float64 {
+	retVal := a.p.Get("pointerY")
+	return retVal.Float()
 }
 
 // SetPointerY sets the PointerY property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#pointery
 func (a *ActionEvent) SetPointerY(pointerY float64) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(pointerY)
-	return ActionEventFromJSObject(p, ba.ctx)
+	a.p.Set("pointerY", pointerY)
+	return a
 }
 
 // Source returns the Source property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#source
-func (a *ActionEvent) Source(source interface{}) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(source)
-	return ActionEventFromJSObject(p, ba.ctx)
+func (a *ActionEvent) Source() interface{} {
+	retVal := a.p.Get("source")
+	return retVal
 }
 
 // SetSource sets the Source property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#source
 func (a *ActionEvent) SetSource(source interface{}) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(source)
-	return ActionEventFromJSObject(p, ba.ctx)
+	a.p.Set("source", source)
+	return a
 }
 
 // SourceEvent returns the SourceEvent property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#sourceevent
-func (a *ActionEvent) SourceEvent(sourceEvent interface{}) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(sourceEvent)
-	return ActionEventFromJSObject(p, ba.ctx)
+func (a *ActionEvent) SourceEvent() interface{} {
+	retVal := a.p.Get("sourceEvent")
+	return retVal
 }
 
 // SetSourceEvent sets the SourceEvent property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#sourceevent
 func (a *ActionEvent) SetSourceEvent(sourceEvent interface{}) *ActionEvent {
-	p := ba.ctx.Get("ActionEvent").New(sourceEvent)
-	return ActionEventFromJSObject(p, ba.ctx)
+	a.p.Set("sourceEvent", sourceEvent)
+	return a
 }
-
-*/

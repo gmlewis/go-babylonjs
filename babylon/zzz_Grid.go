@@ -328,86 +328,82 @@ func (g *Grid) _renderHighlightSpecific(context js.Value) {
 	g.p.Call("_renderHighlightSpecific", args...)
 }
 
-/*
-
 // Cells returns the Cells property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#cells
-func (g *Grid) Cells(cells js.Value) *Grid {
-	p := ba.ctx.Get("Grid").New(cells)
-	return GridFromJSObject(p, ba.ctx)
+func (g *Grid) Cells() js.Value {
+	retVal := g.p.Get("cells")
+	return retVal
 }
 
 // SetCells sets the Cells property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#cells
 func (g *Grid) SetCells(cells js.Value) *Grid {
-	p := ba.ctx.Get("Grid").New(cells)
-	return GridFromJSObject(p, ba.ctx)
+	g.p.Set("cells", cells)
+	return g
 }
 
 // Children returns the Children property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#children
-func (g *Grid) Children(children *Control) *Grid {
-	p := ba.ctx.Get("Grid").New(children.JSObject())
-	return GridFromJSObject(p, ba.ctx)
+func (g *Grid) Children() *Control {
+	retVal := g.p.Get("children")
+	return ControlFromJSObject(retVal, g.ctx)
 }
 
 // SetChildren sets the Children property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#children
 func (g *Grid) SetChildren(children *Control) *Grid {
-	p := ba.ctx.Get("Grid").New(children.JSObject())
-	return GridFromJSObject(p, ba.ctx)
+	g.p.Set("children", children.JSObject())
+	return g
 }
 
 // ColumnCount returns the ColumnCount property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#columncount
-func (g *Grid) ColumnCount(columnCount float64) *Grid {
-	p := ba.ctx.Get("Grid").New(columnCount)
-	return GridFromJSObject(p, ba.ctx)
+func (g *Grid) ColumnCount() float64 {
+	retVal := g.p.Get("columnCount")
+	return retVal.Float()
 }
 
 // SetColumnCount sets the ColumnCount property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#columncount
 func (g *Grid) SetColumnCount(columnCount float64) *Grid {
-	p := ba.ctx.Get("Grid").New(columnCount)
-	return GridFromJSObject(p, ba.ctx)
+	g.p.Set("columnCount", columnCount)
+	return g
 }
 
 // Name returns the Name property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#name
-func (g *Grid) Name(name string) *Grid {
-	p := ba.ctx.Get("Grid").New(name)
-	return GridFromJSObject(p, ba.ctx)
+func (g *Grid) Name() string {
+	retVal := g.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#name
 func (g *Grid) SetName(name string) *Grid {
-	p := ba.ctx.Get("Grid").New(name)
-	return GridFromJSObject(p, ba.ctx)
+	g.p.Set("name", name)
+	return g
 }
 
 // RowCount returns the RowCount property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#rowcount
-func (g *Grid) RowCount(rowCount float64) *Grid {
-	p := ba.ctx.Get("Grid").New(rowCount)
-	return GridFromJSObject(p, ba.ctx)
+func (g *Grid) RowCount() float64 {
+	retVal := g.p.Get("rowCount")
+	return retVal.Float()
 }
 
 // SetRowCount sets the RowCount property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#rowcount
 func (g *Grid) SetRowCount(rowCount float64) *Grid {
-	p := ba.ctx.Get("Grid").New(rowCount)
-	return GridFromJSObject(p, ba.ctx)
+	g.p.Set("rowCount", rowCount)
+	return g
 }
-
-*/

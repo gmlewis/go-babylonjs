@@ -93,38 +93,34 @@ func (i *ICameraInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // Camera returns the Camera property of class ICameraInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icamerainput#camera
-func (i *ICameraInput) Camera(camera *Camera) *ICameraInput {
-	p := ba.ctx.Get("ICameraInput").New(camera.JSObject())
-	return ICameraInputFromJSObject(p, ba.ctx)
+func (i *ICameraInput) Camera() *Camera {
+	retVal := i.p.Get("camera")
+	return CameraFromJSObject(retVal, i.ctx)
 }
 
 // SetCamera sets the Camera property of class ICameraInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icamerainput#camera
 func (i *ICameraInput) SetCamera(camera *Camera) *ICameraInput {
-	p := ba.ctx.Get("ICameraInput").New(camera.JSObject())
-	return ICameraInputFromJSObject(p, ba.ctx)
+	i.p.Set("camera", camera.JSObject())
+	return i
 }
 
 // CheckInputs returns the CheckInputs property of class ICameraInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icamerainput#checkinputs
-func (i *ICameraInput) CheckInputs(checkInputs func()) *ICameraInput {
-	p := ba.ctx.Get("ICameraInput").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
-	return ICameraInputFromJSObject(p, ba.ctx)
+func (i *ICameraInput) CheckInputs() js.Value {
+	retVal := i.p.Get("checkInputs")
+	return retVal
 }
 
 // SetCheckInputs sets the CheckInputs property of class ICameraInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icamerainput#checkinputs
 func (i *ICameraInput) SetCheckInputs(checkInputs func()) *ICameraInput {
-	p := ba.ctx.Get("ICameraInput").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
-	return ICameraInputFromJSObject(p, ba.ctx)
+	i.p.Set("checkInputs", js.FuncOf(func(this js.Value, args []js.Value) interface{} { checkInputs(); return nil }))
+	return i
 }
-
-*/

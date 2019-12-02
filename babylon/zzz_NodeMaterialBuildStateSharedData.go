@@ -55,326 +55,322 @@ func (n *NodeMaterialBuildStateSharedData) EmitErrors() {
 	n.p.Call("emitErrors")
 }
 
-/*
-
 // AnimatedInputs returns the AnimatedInputs property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#animatedinputs
-func (n *NodeMaterialBuildStateSharedData) AnimatedInputs(animatedInputs *InputBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(animatedInputs.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) AnimatedInputs() *InputBlock {
+	retVal := n.p.Get("animatedInputs")
+	return InputBlockFromJSObject(retVal, n.ctx)
 }
 
 // SetAnimatedInputs sets the AnimatedInputs property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#animatedinputs
 func (n *NodeMaterialBuildStateSharedData) SetAnimatedInputs(animatedInputs *InputBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(animatedInputs.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("animatedInputs", animatedInputs.JSObject())
+	return n
 }
 
 // BindableBlocks returns the BindableBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#bindableblocks
-func (n *NodeMaterialBuildStateSharedData) BindableBlocks(bindableBlocks *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(bindableBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) BindableBlocks() *NodeMaterialBlock {
+	retVal := n.p.Get("bindableBlocks")
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
 }
 
 // SetBindableBlocks sets the BindableBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#bindableblocks
 func (n *NodeMaterialBuildStateSharedData) SetBindableBlocks(bindableBlocks *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(bindableBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("bindableBlocks", bindableBlocks.JSObject())
+	return n
 }
 
 // BlockingBlocks returns the BlockingBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#blockingblocks
-func (n *NodeMaterialBuildStateSharedData) BlockingBlocks(blockingBlocks *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(blockingBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) BlockingBlocks() *NodeMaterialBlock {
+	retVal := n.p.Get("blockingBlocks")
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
 }
 
 // SetBlockingBlocks sets the BlockingBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#blockingblocks
 func (n *NodeMaterialBuildStateSharedData) SetBlockingBlocks(blockingBlocks *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(blockingBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("blockingBlocks", blockingBlocks.JSObject())
+	return n
 }
 
 // BlocksWithDefines returns the BlocksWithDefines property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#blockswithdefines
-func (n *NodeMaterialBuildStateSharedData) BlocksWithDefines(blocksWithDefines *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(blocksWithDefines.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) BlocksWithDefines() *NodeMaterialBlock {
+	retVal := n.p.Get("blocksWithDefines")
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
 }
 
 // SetBlocksWithDefines sets the BlocksWithDefines property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#blockswithdefines
 func (n *NodeMaterialBuildStateSharedData) SetBlocksWithDefines(blocksWithDefines *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(blocksWithDefines.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("blocksWithDefines", blocksWithDefines.JSObject())
+	return n
 }
 
 // BlocksWithFallbacks returns the BlocksWithFallbacks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#blockswithfallbacks
-func (n *NodeMaterialBuildStateSharedData) BlocksWithFallbacks(blocksWithFallbacks *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(blocksWithFallbacks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) BlocksWithFallbacks() *NodeMaterialBlock {
+	retVal := n.p.Get("blocksWithFallbacks")
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
 }
 
 // SetBlocksWithFallbacks sets the BlocksWithFallbacks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#blockswithfallbacks
 func (n *NodeMaterialBuildStateSharedData) SetBlocksWithFallbacks(blocksWithFallbacks *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(blocksWithFallbacks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("blocksWithFallbacks", blocksWithFallbacks.JSObject())
+	return n
 }
 
 // BuildId returns the BuildId property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#buildid
-func (n *NodeMaterialBuildStateSharedData) BuildId(buildId float64) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(buildId)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) BuildId() float64 {
+	retVal := n.p.Get("buildId")
+	return retVal.Float()
 }
 
 // SetBuildId sets the BuildId property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#buildid
 func (n *NodeMaterialBuildStateSharedData) SetBuildId(buildId float64) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(buildId)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("buildId", buildId)
+	return n
 }
 
 // Checks returns the Checks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#checks
-func (n *NodeMaterialBuildStateSharedData) Checks(checks js.Value) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(checks)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) Checks() js.Value {
+	retVal := n.p.Get("checks")
+	return retVal
 }
 
 // SetChecks sets the Checks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#checks
 func (n *NodeMaterialBuildStateSharedData) SetChecks(checks js.Value) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(checks)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("checks", checks)
+	return n
 }
 
 // DefineNames returns the DefineNames property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#definenames
-func (n *NodeMaterialBuildStateSharedData) DefineNames(defineNames js.Value) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(defineNames)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) DefineNames() js.Value {
+	retVal := n.p.Get("defineNames")
+	return retVal
 }
 
 // SetDefineNames sets the DefineNames property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#definenames
 func (n *NodeMaterialBuildStateSharedData) SetDefineNames(defineNames js.Value) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(defineNames)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("defineNames", defineNames)
+	return n
 }
 
 // DynamicUniformBlocks returns the DynamicUniformBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#dynamicuniformblocks
-func (n *NodeMaterialBuildStateSharedData) DynamicUniformBlocks(dynamicUniformBlocks *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(dynamicUniformBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) DynamicUniformBlocks() *NodeMaterialBlock {
+	retVal := n.p.Get("dynamicUniformBlocks")
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
 }
 
 // SetDynamicUniformBlocks sets the DynamicUniformBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#dynamicuniformblocks
 func (n *NodeMaterialBuildStateSharedData) SetDynamicUniformBlocks(dynamicUniformBlocks *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(dynamicUniformBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("dynamicUniformBlocks", dynamicUniformBlocks.JSObject())
+	return n
 }
 
 // EmitComments returns the EmitComments property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#emitcomments
-func (n *NodeMaterialBuildStateSharedData) EmitComments(emitComments bool) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(emitComments)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) EmitComments() bool {
+	retVal := n.p.Get("emitComments")
+	return retVal.Bool()
 }
 
 // SetEmitComments sets the EmitComments property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#emitcomments
 func (n *NodeMaterialBuildStateSharedData) SetEmitComments(emitComments bool) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(emitComments)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("emitComments", emitComments)
+	return n
 }
 
 // Hints returns the Hints property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#hints
-func (n *NodeMaterialBuildStateSharedData) Hints(hints js.Value) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(hints)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) Hints() js.Value {
+	retVal := n.p.Get("hints")
+	return retVal
 }
 
 // SetHints sets the Hints property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#hints
 func (n *NodeMaterialBuildStateSharedData) SetHints(hints js.Value) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(hints)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("hints", hints)
+	return n
 }
 
 // InputBlocks returns the InputBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#inputblocks
-func (n *NodeMaterialBuildStateSharedData) InputBlocks(inputBlocks *InputBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(inputBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) InputBlocks() *InputBlock {
+	retVal := n.p.Get("inputBlocks")
+	return InputBlockFromJSObject(retVal, n.ctx)
 }
 
 // SetInputBlocks sets the InputBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#inputblocks
 func (n *NodeMaterialBuildStateSharedData) SetInputBlocks(inputBlocks *InputBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(inputBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("inputBlocks", inputBlocks.JSObject())
+	return n
 }
 
 // RepeatableContentBlocks returns the RepeatableContentBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#repeatablecontentblocks
-func (n *NodeMaterialBuildStateSharedData) RepeatableContentBlocks(repeatableContentBlocks *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(repeatableContentBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) RepeatableContentBlocks() *NodeMaterialBlock {
+	retVal := n.p.Get("repeatableContentBlocks")
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
 }
 
 // SetRepeatableContentBlocks sets the RepeatableContentBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#repeatablecontentblocks
 func (n *NodeMaterialBuildStateSharedData) SetRepeatableContentBlocks(repeatableContentBlocks *NodeMaterialBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(repeatableContentBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("repeatableContentBlocks", repeatableContentBlocks.JSObject())
+	return n
 }
 
 // Scene returns the Scene property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#scene
-func (n *NodeMaterialBuildStateSharedData) Scene(scene *Scene) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(scene.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) Scene() *Scene {
+	retVal := n.p.Get("scene")
+	return SceneFromJSObject(retVal, n.ctx)
 }
 
 // SetScene sets the Scene property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#scene
 func (n *NodeMaterialBuildStateSharedData) SetScene(scene *Scene) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(scene.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("scene", scene.JSObject())
+	return n
 }
 
 // Temps returns the Temps property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#temps
-func (n *NodeMaterialBuildStateSharedData) Temps(temps string) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(temps)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) Temps() string {
+	retVal := n.p.Get("temps")
+	return retVal.String()
 }
 
 // SetTemps sets the Temps property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#temps
 func (n *NodeMaterialBuildStateSharedData) SetTemps(temps string) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(temps)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("temps", temps)
+	return n
 }
 
 // TextureBlocks returns the TextureBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#textureblocks
-func (n *NodeMaterialBuildStateSharedData) TextureBlocks(textureBlocks *ReflectionTextureBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(textureBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) TextureBlocks() *ReflectionTextureBlock {
+	retVal := n.p.Get("textureBlocks")
+	return ReflectionTextureBlockFromJSObject(retVal, n.ctx)
 }
 
 // SetTextureBlocks sets the TextureBlocks property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#textureblocks
 func (n *NodeMaterialBuildStateSharedData) SetTextureBlocks(textureBlocks *ReflectionTextureBlock) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(textureBlocks.JSObject())
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("textureBlocks", textureBlocks.JSObject())
+	return n
 }
 
 // VariableNames returns the VariableNames property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#variablenames
-func (n *NodeMaterialBuildStateSharedData) VariableNames(variableNames js.Value) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(variableNames)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) VariableNames() js.Value {
+	retVal := n.p.Get("variableNames")
+	return retVal
 }
 
 // SetVariableNames sets the VariableNames property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#variablenames
 func (n *NodeMaterialBuildStateSharedData) SetVariableNames(variableNames js.Value) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(variableNames)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("variableNames", variableNames)
+	return n
 }
 
 // VaryingDeclaration returns the VaryingDeclaration property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#varyingdeclaration
-func (n *NodeMaterialBuildStateSharedData) VaryingDeclaration(varyingDeclaration string) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(varyingDeclaration)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) VaryingDeclaration() string {
+	retVal := n.p.Get("varyingDeclaration")
+	return retVal.String()
 }
 
 // SetVaryingDeclaration sets the VaryingDeclaration property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#varyingdeclaration
 func (n *NodeMaterialBuildStateSharedData) SetVaryingDeclaration(varyingDeclaration string) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(varyingDeclaration)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("varyingDeclaration", varyingDeclaration)
+	return n
 }
 
 // Varyings returns the Varyings property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#varyings
-func (n *NodeMaterialBuildStateSharedData) Varyings(varyings string) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(varyings)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) Varyings() string {
+	retVal := n.p.Get("varyings")
+	return retVal.String()
 }
 
 // SetVaryings sets the Varyings property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#varyings
 func (n *NodeMaterialBuildStateSharedData) SetVaryings(varyings string) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(varyings)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("varyings", varyings)
+	return n
 }
 
 // Verbose returns the Verbose property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#verbose
-func (n *NodeMaterialBuildStateSharedData) Verbose(verbose bool) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(verbose)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+func (n *NodeMaterialBuildStateSharedData) Verbose() bool {
+	retVal := n.p.Get("verbose")
+	return retVal.Bool()
 }
 
 // SetVerbose sets the Verbose property of class NodeMaterialBuildStateSharedData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#verbose
 func (n *NodeMaterialBuildStateSharedData) SetVerbose(verbose bool) *NodeMaterialBuildStateSharedData {
-	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New(verbose)
-	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
+	n.p.Set("verbose", verbose)
+	return n
 }
-
-*/

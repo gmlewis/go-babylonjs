@@ -39,438 +39,434 @@ func IEnvironmentHelperOptionsArrayToJSArray(array []*IEnvironmentHelperOptions)
 	return result
 }
 
-/*
-
 // BackgroundYRotation returns the BackgroundYRotation property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#backgroundyrotation
-func (i *IEnvironmentHelperOptions) BackgroundYRotation(backgroundYRotation float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(backgroundYRotation)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) BackgroundYRotation() float64 {
+	retVal := i.p.Get("backgroundYRotation")
+	return retVal.Float()
 }
 
 // SetBackgroundYRotation sets the BackgroundYRotation property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#backgroundyrotation
 func (i *IEnvironmentHelperOptions) SetBackgroundYRotation(backgroundYRotation float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(backgroundYRotation)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("backgroundYRotation", backgroundYRotation)
+	return i
 }
 
 // CameraContrast returns the CameraContrast property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#cameracontrast
-func (i *IEnvironmentHelperOptions) CameraContrast(cameraContrast float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(cameraContrast)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) CameraContrast() float64 {
+	retVal := i.p.Get("cameraContrast")
+	return retVal.Float()
 }
 
 // SetCameraContrast sets the CameraContrast property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#cameracontrast
 func (i *IEnvironmentHelperOptions) SetCameraContrast(cameraContrast float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(cameraContrast)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("cameraContrast", cameraContrast)
+	return i
 }
 
 // CameraExposure returns the CameraExposure property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#cameraexposure
-func (i *IEnvironmentHelperOptions) CameraExposure(cameraExposure float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(cameraExposure)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) CameraExposure() float64 {
+	retVal := i.p.Get("cameraExposure")
+	return retVal.Float()
 }
 
 // SetCameraExposure sets the CameraExposure property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#cameraexposure
 func (i *IEnvironmentHelperOptions) SetCameraExposure(cameraExposure float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(cameraExposure)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("cameraExposure", cameraExposure)
+	return i
 }
 
 // CreateGround returns the CreateGround property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#createground
-func (i *IEnvironmentHelperOptions) CreateGround(createGround bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(createGround)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) CreateGround() bool {
+	retVal := i.p.Get("createGround")
+	return retVal.Bool()
 }
 
 // SetCreateGround sets the CreateGround property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#createground
 func (i *IEnvironmentHelperOptions) SetCreateGround(createGround bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(createGround)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("createGround", createGround)
+	return i
 }
 
 // CreateSkybox returns the CreateSkybox property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#createskybox
-func (i *IEnvironmentHelperOptions) CreateSkybox(createSkybox bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(createSkybox)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) CreateSkybox() bool {
+	retVal := i.p.Get("createSkybox")
+	return retVal.Bool()
 }
 
 // SetCreateSkybox sets the CreateSkybox property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#createskybox
 func (i *IEnvironmentHelperOptions) SetCreateSkybox(createSkybox bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(createSkybox)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("createSkybox", createSkybox)
+	return i
 }
 
 // EnableGroundMirror returns the EnableGroundMirror property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#enablegroundmirror
-func (i *IEnvironmentHelperOptions) EnableGroundMirror(enableGroundMirror bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(enableGroundMirror)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) EnableGroundMirror() bool {
+	retVal := i.p.Get("enableGroundMirror")
+	return retVal.Bool()
 }
 
 // SetEnableGroundMirror sets the EnableGroundMirror property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#enablegroundmirror
 func (i *IEnvironmentHelperOptions) SetEnableGroundMirror(enableGroundMirror bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(enableGroundMirror)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("enableGroundMirror", enableGroundMirror)
+	return i
 }
 
 // EnableGroundShadow returns the EnableGroundShadow property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#enablegroundshadow
-func (i *IEnvironmentHelperOptions) EnableGroundShadow(enableGroundShadow bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(enableGroundShadow)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) EnableGroundShadow() bool {
+	retVal := i.p.Get("enableGroundShadow")
+	return retVal.Bool()
 }
 
 // SetEnableGroundShadow sets the EnableGroundShadow property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#enablegroundshadow
 func (i *IEnvironmentHelperOptions) SetEnableGroundShadow(enableGroundShadow bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(enableGroundShadow)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("enableGroundShadow", enableGroundShadow)
+	return i
 }
 
 // EnvironmentTexture returns the EnvironmentTexture property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#environmenttexture
-func (i *IEnvironmentHelperOptions) EnvironmentTexture(environmentTexture string) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(environmentTexture)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) EnvironmentTexture() string {
+	retVal := i.p.Get("environmentTexture")
+	return retVal.String()
 }
 
 // SetEnvironmentTexture sets the EnvironmentTexture property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#environmenttexture
 func (i *IEnvironmentHelperOptions) SetEnvironmentTexture(environmentTexture string) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(environmentTexture)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("environmentTexture", environmentTexture)
+	return i
 }
 
 // GroundColor returns the GroundColor property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundcolor
-func (i *IEnvironmentHelperOptions) GroundColor(groundColor *Color3) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundColor.JSObject())
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundColor() *Color3 {
+	retVal := i.p.Get("groundColor")
+	return Color3FromJSObject(retVal, i.ctx)
 }
 
 // SetGroundColor sets the GroundColor property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundcolor
 func (i *IEnvironmentHelperOptions) SetGroundColor(groundColor *Color3) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundColor.JSObject())
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundColor", groundColor.JSObject())
+	return i
 }
 
 // GroundMirrorAmount returns the GroundMirrorAmount property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirroramount
-func (i *IEnvironmentHelperOptions) GroundMirrorAmount(groundMirrorAmount float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorAmount)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundMirrorAmount() float64 {
+	retVal := i.p.Get("groundMirrorAmount")
+	return retVal.Float()
 }
 
 // SetGroundMirrorAmount sets the GroundMirrorAmount property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirroramount
 func (i *IEnvironmentHelperOptions) SetGroundMirrorAmount(groundMirrorAmount float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorAmount)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundMirrorAmount", groundMirrorAmount)
+	return i
 }
 
 // GroundMirrorBlurKernel returns the GroundMirrorBlurKernel property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirrorblurkernel
-func (i *IEnvironmentHelperOptions) GroundMirrorBlurKernel(groundMirrorBlurKernel float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorBlurKernel)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundMirrorBlurKernel() float64 {
+	retVal := i.p.Get("groundMirrorBlurKernel")
+	return retVal.Float()
 }
 
 // SetGroundMirrorBlurKernel sets the GroundMirrorBlurKernel property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirrorblurkernel
 func (i *IEnvironmentHelperOptions) SetGroundMirrorBlurKernel(groundMirrorBlurKernel float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorBlurKernel)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundMirrorBlurKernel", groundMirrorBlurKernel)
+	return i
 }
 
 // GroundMirrorFallOffDistance returns the GroundMirrorFallOffDistance property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirrorfalloffdistance
-func (i *IEnvironmentHelperOptions) GroundMirrorFallOffDistance(groundMirrorFallOffDistance float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorFallOffDistance)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundMirrorFallOffDistance() float64 {
+	retVal := i.p.Get("groundMirrorFallOffDistance")
+	return retVal.Float()
 }
 
 // SetGroundMirrorFallOffDistance sets the GroundMirrorFallOffDistance property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirrorfalloffdistance
 func (i *IEnvironmentHelperOptions) SetGroundMirrorFallOffDistance(groundMirrorFallOffDistance float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorFallOffDistance)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundMirrorFallOffDistance", groundMirrorFallOffDistance)
+	return i
 }
 
 // GroundMirrorFresnelWeight returns the GroundMirrorFresnelWeight property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirrorfresnelweight
-func (i *IEnvironmentHelperOptions) GroundMirrorFresnelWeight(groundMirrorFresnelWeight float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorFresnelWeight)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundMirrorFresnelWeight() float64 {
+	retVal := i.p.Get("groundMirrorFresnelWeight")
+	return retVal.Float()
 }
 
 // SetGroundMirrorFresnelWeight sets the GroundMirrorFresnelWeight property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirrorfresnelweight
 func (i *IEnvironmentHelperOptions) SetGroundMirrorFresnelWeight(groundMirrorFresnelWeight float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorFresnelWeight)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundMirrorFresnelWeight", groundMirrorFresnelWeight)
+	return i
 }
 
 // GroundMirrorSizeRatio returns the GroundMirrorSizeRatio property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirrorsizeratio
-func (i *IEnvironmentHelperOptions) GroundMirrorSizeRatio(groundMirrorSizeRatio float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorSizeRatio)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundMirrorSizeRatio() float64 {
+	retVal := i.p.Get("groundMirrorSizeRatio")
+	return retVal.Float()
 }
 
 // SetGroundMirrorSizeRatio sets the GroundMirrorSizeRatio property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirrorsizeratio
 func (i *IEnvironmentHelperOptions) SetGroundMirrorSizeRatio(groundMirrorSizeRatio float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorSizeRatio)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundMirrorSizeRatio", groundMirrorSizeRatio)
+	return i
 }
 
 // GroundMirrorTextureType returns the GroundMirrorTextureType property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirrortexturetype
-func (i *IEnvironmentHelperOptions) GroundMirrorTextureType(groundMirrorTextureType float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorTextureType)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundMirrorTextureType() float64 {
+	retVal := i.p.Get("groundMirrorTextureType")
+	return retVal.Float()
 }
 
 // SetGroundMirrorTextureType sets the GroundMirrorTextureType property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundmirrortexturetype
 func (i *IEnvironmentHelperOptions) SetGroundMirrorTextureType(groundMirrorTextureType float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundMirrorTextureType)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundMirrorTextureType", groundMirrorTextureType)
+	return i
 }
 
 // GroundOpacity returns the GroundOpacity property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundopacity
-func (i *IEnvironmentHelperOptions) GroundOpacity(groundOpacity float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundOpacity)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundOpacity() float64 {
+	retVal := i.p.Get("groundOpacity")
+	return retVal.Float()
 }
 
 // SetGroundOpacity sets the GroundOpacity property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundopacity
 func (i *IEnvironmentHelperOptions) SetGroundOpacity(groundOpacity float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundOpacity)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundOpacity", groundOpacity)
+	return i
 }
 
 // GroundShadowLevel returns the GroundShadowLevel property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundshadowlevel
-func (i *IEnvironmentHelperOptions) GroundShadowLevel(groundShadowLevel float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundShadowLevel)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundShadowLevel() float64 {
+	retVal := i.p.Get("groundShadowLevel")
+	return retVal.Float()
 }
 
 // SetGroundShadowLevel sets the GroundShadowLevel property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundshadowlevel
 func (i *IEnvironmentHelperOptions) SetGroundShadowLevel(groundShadowLevel float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundShadowLevel)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundShadowLevel", groundShadowLevel)
+	return i
 }
 
 // GroundSize returns the GroundSize property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundsize
-func (i *IEnvironmentHelperOptions) GroundSize(groundSize float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundSize)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundSize() float64 {
+	retVal := i.p.Get("groundSize")
+	return retVal.Float()
 }
 
 // SetGroundSize sets the GroundSize property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundsize
 func (i *IEnvironmentHelperOptions) SetGroundSize(groundSize float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundSize)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundSize", groundSize)
+	return i
 }
 
 // GroundTexture returns the GroundTexture property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundtexture
-func (i *IEnvironmentHelperOptions) GroundTexture(groundTexture string) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundTexture)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundTexture() string {
+	retVal := i.p.Get("groundTexture")
+	return retVal.String()
 }
 
 // SetGroundTexture sets the GroundTexture property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundtexture
 func (i *IEnvironmentHelperOptions) SetGroundTexture(groundTexture string) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundTexture)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundTexture", groundTexture)
+	return i
 }
 
 // GroundYBias returns the GroundYBias property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundybias
-func (i *IEnvironmentHelperOptions) GroundYBias(groundYBias float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundYBias)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) GroundYBias() float64 {
+	retVal := i.p.Get("groundYBias")
+	return retVal.Float()
 }
 
 // SetGroundYBias sets the GroundYBias property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#groundybias
 func (i *IEnvironmentHelperOptions) SetGroundYBias(groundYBias float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(groundYBias)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("groundYBias", groundYBias)
+	return i
 }
 
 // RootPosition returns the RootPosition property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#rootposition
-func (i *IEnvironmentHelperOptions) RootPosition(rootPosition *Vector3) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(rootPosition.JSObject())
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) RootPosition() *Vector3 {
+	retVal := i.p.Get("rootPosition")
+	return Vector3FromJSObject(retVal, i.ctx)
 }
 
 // SetRootPosition sets the RootPosition property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#rootposition
 func (i *IEnvironmentHelperOptions) SetRootPosition(rootPosition *Vector3) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(rootPosition.JSObject())
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("rootPosition", rootPosition.JSObject())
+	return i
 }
 
 // SetupImageProcessing returns the SetupImageProcessing property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#setupimageprocessing
-func (i *IEnvironmentHelperOptions) SetupImageProcessing(setupImageProcessing bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(setupImageProcessing)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) SetupImageProcessing() bool {
+	retVal := i.p.Get("setupImageProcessing")
+	return retVal.Bool()
 }
 
 // SetSetupImageProcessing sets the SetupImageProcessing property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#setupimageprocessing
 func (i *IEnvironmentHelperOptions) SetSetupImageProcessing(setupImageProcessing bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(setupImageProcessing)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("setupImageProcessing", setupImageProcessing)
+	return i
 }
 
 // SizeAuto returns the SizeAuto property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#sizeauto
-func (i *IEnvironmentHelperOptions) SizeAuto(sizeAuto bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(sizeAuto)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) SizeAuto() bool {
+	retVal := i.p.Get("sizeAuto")
+	return retVal.Bool()
 }
 
 // SetSizeAuto sets the SizeAuto property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#sizeauto
 func (i *IEnvironmentHelperOptions) SetSizeAuto(sizeAuto bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(sizeAuto)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("sizeAuto", sizeAuto)
+	return i
 }
 
 // SkyboxColor returns the SkyboxColor property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#skyboxcolor
-func (i *IEnvironmentHelperOptions) SkyboxColor(skyboxColor *Color3) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(skyboxColor.JSObject())
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) SkyboxColor() *Color3 {
+	retVal := i.p.Get("skyboxColor")
+	return Color3FromJSObject(retVal, i.ctx)
 }
 
 // SetSkyboxColor sets the SkyboxColor property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#skyboxcolor
 func (i *IEnvironmentHelperOptions) SetSkyboxColor(skyboxColor *Color3) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(skyboxColor.JSObject())
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("skyboxColor", skyboxColor.JSObject())
+	return i
 }
 
 // SkyboxSize returns the SkyboxSize property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#skyboxsize
-func (i *IEnvironmentHelperOptions) SkyboxSize(skyboxSize float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(skyboxSize)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) SkyboxSize() float64 {
+	retVal := i.p.Get("skyboxSize")
+	return retVal.Float()
 }
 
 // SetSkyboxSize sets the SkyboxSize property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#skyboxsize
 func (i *IEnvironmentHelperOptions) SetSkyboxSize(skyboxSize float64) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(skyboxSize)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("skyboxSize", skyboxSize)
+	return i
 }
 
 // SkyboxTexture returns the SkyboxTexture property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#skyboxtexture
-func (i *IEnvironmentHelperOptions) SkyboxTexture(skyboxTexture string) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(skyboxTexture)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) SkyboxTexture() string {
+	retVal := i.p.Get("skyboxTexture")
+	return retVal.String()
 }
 
 // SetSkyboxTexture sets the SkyboxTexture property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#skyboxtexture
 func (i *IEnvironmentHelperOptions) SetSkyboxTexture(skyboxTexture string) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(skyboxTexture)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("skyboxTexture", skyboxTexture)
+	return i
 }
 
 // ToneMappingEnabled returns the ToneMappingEnabled property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#tonemappingenabled
-func (i *IEnvironmentHelperOptions) ToneMappingEnabled(toneMappingEnabled bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(toneMappingEnabled)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+func (i *IEnvironmentHelperOptions) ToneMappingEnabled() bool {
+	retVal := i.p.Get("toneMappingEnabled")
+	return retVal.Bool()
 }
 
 // SetToneMappingEnabled sets the ToneMappingEnabled property of class IEnvironmentHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ienvironmenthelperoptions#tonemappingenabled
 func (i *IEnvironmentHelperOptions) SetToneMappingEnabled(toneMappingEnabled bool) *IEnvironmentHelperOptions {
-	p := ba.ctx.Get("IEnvironmentHelperOptions").New(toneMappingEnabled)
-	return IEnvironmentHelperOptionsFromJSObject(p, ba.ctx)
+	i.p.Set("toneMappingEnabled", toneMappingEnabled)
+	return i
 }
-
-*/

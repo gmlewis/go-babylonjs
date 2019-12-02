@@ -89,38 +89,34 @@ func (ba *Babylon) NewGrainPostProcess(name string, options float64, camera *Cam
 	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Animated returns the Animated property of class GrainPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#animated
-func (g *GrainPostProcess) Animated(animated bool) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(animated)
-	return GrainPostProcessFromJSObject(p, ba.ctx)
+func (g *GrainPostProcess) Animated() bool {
+	retVal := g.p.Get("animated")
+	return retVal.Bool()
 }
 
 // SetAnimated sets the Animated property of class GrainPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#animated
 func (g *GrainPostProcess) SetAnimated(animated bool) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(animated)
-	return GrainPostProcessFromJSObject(p, ba.ctx)
+	g.p.Set("animated", animated)
+	return g
 }
 
 // Intensity returns the Intensity property of class GrainPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#intensity
-func (g *GrainPostProcess) Intensity(intensity float64) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(intensity)
-	return GrainPostProcessFromJSObject(p, ba.ctx)
+func (g *GrainPostProcess) Intensity() float64 {
+	retVal := g.p.Get("intensity")
+	return retVal.Float()
 }
 
 // SetIntensity sets the Intensity property of class GrainPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#intensity
 func (g *GrainPostProcess) SetIntensity(intensity float64) *GrainPostProcess {
-	p := ba.ctx.Get("GrainPostProcess").New(intensity)
-	return GrainPostProcessFromJSObject(p, ba.ctx)
+	g.p.Set("intensity", intensity)
+	return g
 }
-
-*/

@@ -57,102 +57,98 @@ func (x *XRWindowsMotionController) Dispose() {
 	x.p.Call("dispose")
 }
 
-/*
-
 // OnThumbstickButtonStateChangedObservable returns the OnThumbstickButtonStateChangedObservable property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#onthumbstickbuttonstatechangedobservable
-func (x *XRWindowsMotionController) OnThumbstickButtonStateChangedObservable(onThumbstickButtonStateChangedObservable *Observable) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(onThumbstickButtonStateChangedObservable.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+func (x *XRWindowsMotionController) OnThumbstickButtonStateChangedObservable() *Observable {
+	retVal := x.p.Get("onThumbstickButtonStateChangedObservable")
+	return ObservableFromJSObject(retVal, x.ctx)
 }
 
 // SetOnThumbstickButtonStateChangedObservable sets the OnThumbstickButtonStateChangedObservable property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#onthumbstickbuttonstatechangedobservable
 func (x *XRWindowsMotionController) SetOnThumbstickButtonStateChangedObservable(onThumbstickButtonStateChangedObservable *Observable) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(onThumbstickButtonStateChangedObservable.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+	x.p.Set("onThumbstickButtonStateChangedObservable", onThumbstickButtonStateChangedObservable.JSObject())
+	return x
 }
 
 // OnThumbstickStateChangedObservable returns the OnThumbstickStateChangedObservable property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#onthumbstickstatechangedobservable
-func (x *XRWindowsMotionController) OnThumbstickStateChangedObservable(onThumbstickStateChangedObservable *Observable) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(onThumbstickStateChangedObservable.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+func (x *XRWindowsMotionController) OnThumbstickStateChangedObservable() *Observable {
+	retVal := x.p.Get("onThumbstickStateChangedObservable")
+	return ObservableFromJSObject(retVal, x.ctx)
 }
 
 // SetOnThumbstickStateChangedObservable sets the OnThumbstickStateChangedObservable property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#onthumbstickstatechangedobservable
 func (x *XRWindowsMotionController) SetOnThumbstickStateChangedObservable(onThumbstickStateChangedObservable *Observable) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(onThumbstickStateChangedObservable.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+	x.p.Set("onThumbstickStateChangedObservable", onThumbstickStateChangedObservable.JSObject())
+	return x
 }
 
 // OnThumbstickValuesChangedObservable returns the OnThumbstickValuesChangedObservable property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#onthumbstickvalueschangedobservable
-func (x *XRWindowsMotionController) OnThumbstickValuesChangedObservable(onThumbstickValuesChangedObservable *Observable) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(onThumbstickValuesChangedObservable.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+func (x *XRWindowsMotionController) OnThumbstickValuesChangedObservable() *Observable {
+	retVal := x.p.Get("onThumbstickValuesChangedObservable")
+	return ObservableFromJSObject(retVal, x.ctx)
 }
 
 // SetOnThumbstickValuesChangedObservable sets the OnThumbstickValuesChangedObservable property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#onthumbstickvalueschangedobservable
 func (x *XRWindowsMotionController) SetOnThumbstickValuesChangedObservable(onThumbstickValuesChangedObservable *Observable) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(onThumbstickValuesChangedObservable.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+	x.p.Set("onThumbstickValuesChangedObservable", onThumbstickValuesChangedObservable.JSObject())
+	return x
 }
 
 // OnTrackpadChangedObservable returns the OnTrackpadChangedObservable property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#ontrackpadchangedobservable
-func (x *XRWindowsMotionController) OnTrackpadChangedObservable(onTrackpadChangedObservable *Observable) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(onTrackpadChangedObservable.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+func (x *XRWindowsMotionController) OnTrackpadChangedObservable() *Observable {
+	retVal := x.p.Get("onTrackpadChangedObservable")
+	return ObservableFromJSObject(retVal, x.ctx)
 }
 
 // SetOnTrackpadChangedObservable sets the OnTrackpadChangedObservable property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#ontrackpadchangedobservable
 func (x *XRWindowsMotionController) SetOnTrackpadChangedObservable(onTrackpadChangedObservable *Observable) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(onTrackpadChangedObservable.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+	x.p.Set("onTrackpadChangedObservable", onTrackpadChangedObservable.JSObject())
+	return x
 }
 
 // OnTrackpadValuesChangedObservable returns the OnTrackpadValuesChangedObservable property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#ontrackpadvalueschangedobservable
-func (x *XRWindowsMotionController) OnTrackpadValuesChangedObservable(onTrackpadValuesChangedObservable *Observable) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(onTrackpadValuesChangedObservable.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+func (x *XRWindowsMotionController) OnTrackpadValuesChangedObservable() *Observable {
+	retVal := x.p.Get("onTrackpadValuesChangedObservable")
+	return ObservableFromJSObject(retVal, x.ctx)
 }
 
 // SetOnTrackpadValuesChangedObservable sets the OnTrackpadValuesChangedObservable property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#ontrackpadvalueschangedobservable
 func (x *XRWindowsMotionController) SetOnTrackpadValuesChangedObservable(onTrackpadValuesChangedObservable *Observable) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(onTrackpadValuesChangedObservable.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+	x.p.Set("onTrackpadValuesChangedObservable", onTrackpadValuesChangedObservable.JSObject())
+	return x
 }
 
 // ThumbstickValues returns the ThumbstickValues property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#thumbstickvalues
-func (x *XRWindowsMotionController) ThumbstickValues(thumbstickValues *StickValues) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(thumbstickValues.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+func (x *XRWindowsMotionController) ThumbstickValues() *StickValues {
+	retVal := x.p.Get("thumbstickValues")
+	return StickValuesFromJSObject(retVal, x.ctx)
 }
 
 // SetThumbstickValues sets the ThumbstickValues property of class XRWindowsMotionController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller#thumbstickvalues
 func (x *XRWindowsMotionController) SetThumbstickValues(thumbstickValues *StickValues) *XRWindowsMotionController {
-	p := ba.ctx.Get("XRWindowsMotionController").New(thumbstickValues.JSObject())
-	return XRWindowsMotionControllerFromJSObject(p, ba.ctx)
+	x.p.Set("thumbstickValues", thumbstickValues.JSObject())
+	return x
 }
-
-*/

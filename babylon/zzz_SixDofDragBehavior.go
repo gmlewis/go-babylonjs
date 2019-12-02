@@ -75,134 +75,130 @@ func (s *SixDofDragBehavior) Init() {
 	s.p.Call("init")
 }
 
-/*
-
 // CurrentDraggingPointerID returns the CurrentDraggingPointerID property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#currentdraggingpointerid
-func (s *SixDofDragBehavior) CurrentDraggingPointerID(currentDraggingPointerID float64) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(currentDraggingPointerID)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+func (s *SixDofDragBehavior) CurrentDraggingPointerID() float64 {
+	retVal := s.p.Get("currentDraggingPointerID")
+	return retVal.Float()
 }
 
 // SetCurrentDraggingPointerID sets the CurrentDraggingPointerID property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#currentdraggingpointerid
 func (s *SixDofDragBehavior) SetCurrentDraggingPointerID(currentDraggingPointerID float64) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(currentDraggingPointerID)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+	s.p.Set("currentDraggingPointerID", currentDraggingPointerID)
+	return s
 }
 
 // DetachCameraControls returns the DetachCameraControls property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#detachcameracontrols
-func (s *SixDofDragBehavior) DetachCameraControls(detachCameraControls bool) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(detachCameraControls)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+func (s *SixDofDragBehavior) DetachCameraControls() bool {
+	retVal := s.p.Get("detachCameraControls")
+	return retVal.Bool()
 }
 
 // SetDetachCameraControls sets the DetachCameraControls property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#detachcameracontrols
 func (s *SixDofDragBehavior) SetDetachCameraControls(detachCameraControls bool) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(detachCameraControls)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+	s.p.Set("detachCameraControls", detachCameraControls)
+	return s
 }
 
 // DragDeltaRatio returns the DragDeltaRatio property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#dragdeltaratio
-func (s *SixDofDragBehavior) DragDeltaRatio(dragDeltaRatio float64) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(dragDeltaRatio)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+func (s *SixDofDragBehavior) DragDeltaRatio() float64 {
+	retVal := s.p.Get("dragDeltaRatio")
+	return retVal.Float()
 }
 
 // SetDragDeltaRatio sets the DragDeltaRatio property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#dragdeltaratio
 func (s *SixDofDragBehavior) SetDragDeltaRatio(dragDeltaRatio float64) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(dragDeltaRatio)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+	s.p.Set("dragDeltaRatio", dragDeltaRatio)
+	return s
 }
 
 // Dragging returns the Dragging property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#dragging
-func (s *SixDofDragBehavior) Dragging(dragging bool) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(dragging)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+func (s *SixDofDragBehavior) Dragging() bool {
+	retVal := s.p.Get("dragging")
+	return retVal.Bool()
 }
 
 // SetDragging sets the Dragging property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#dragging
 func (s *SixDofDragBehavior) SetDragging(dragging bool) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(dragging)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+	s.p.Set("dragging", dragging)
+	return s
 }
 
 // Name returns the Name property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#name
-func (s *SixDofDragBehavior) Name(name string) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(name)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+func (s *SixDofDragBehavior) Name() string {
+	retVal := s.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#name
 func (s *SixDofDragBehavior) SetName(name string) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(name)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+	s.p.Set("name", name)
+	return s
 }
 
 // OnDragEndObservable returns the OnDragEndObservable property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#ondragendobservable
-func (s *SixDofDragBehavior) OnDragEndObservable(onDragEndObservable *Observable) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(onDragEndObservable.JSObject())
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+func (s *SixDofDragBehavior) OnDragEndObservable() *Observable {
+	retVal := s.p.Get("onDragEndObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnDragEndObservable sets the OnDragEndObservable property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#ondragendobservable
 func (s *SixDofDragBehavior) SetOnDragEndObservable(onDragEndObservable *Observable) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(onDragEndObservable.JSObject())
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+	s.p.Set("onDragEndObservable", onDragEndObservable.JSObject())
+	return s
 }
 
 // OnDragStartObservable returns the OnDragStartObservable property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#ondragstartobservable
-func (s *SixDofDragBehavior) OnDragStartObservable(onDragStartObservable *Observable) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(onDragStartObservable.JSObject())
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+func (s *SixDofDragBehavior) OnDragStartObservable() *Observable {
+	retVal := s.p.Get("onDragStartObservable")
+	return ObservableFromJSObject(retVal, s.ctx)
 }
 
 // SetOnDragStartObservable sets the OnDragStartObservable property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#ondragstartobservable
 func (s *SixDofDragBehavior) SetOnDragStartObservable(onDragStartObservable *Observable) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(onDragStartObservable.JSObject())
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+	s.p.Set("onDragStartObservable", onDragStartObservable.JSObject())
+	return s
 }
 
 // RotateDraggedObject returns the RotateDraggedObject property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#rotatedraggedobject
-func (s *SixDofDragBehavior) RotateDraggedObject(rotateDraggedObject bool) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(rotateDraggedObject)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+func (s *SixDofDragBehavior) RotateDraggedObject() bool {
+	retVal := s.p.Get("rotateDraggedObject")
+	return retVal.Bool()
 }
 
 // SetRotateDraggedObject sets the RotateDraggedObject property of class SixDofDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#rotatedraggedobject
 func (s *SixDofDragBehavior) SetRotateDraggedObject(rotateDraggedObject bool) *SixDofDragBehavior {
-	p := ba.ctx.Get("SixDofDragBehavior").New(rotateDraggedObject)
-	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
+	s.p.Set("rotateDraggedObject", rotateDraggedObject)
+	return s
 }
-
-*/

@@ -35,7 +35,3 @@ func ISamplerArrayToJSArray(array []*ISampler) []interface{} {
 	}
 	return result
 }
-
-/*
-
- */

@@ -62,230 +62,226 @@ func (p *PBRBaseSimpleMaterial) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // AlphaCutOff returns the AlphaCutOff property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#alphacutoff
-func (p *PBRBaseSimpleMaterial) AlphaCutOff(alphaCutOff float64) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(alphaCutOff)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) AlphaCutOff() float64 {
+	retVal := p.p.Get("alphaCutOff")
+	return retVal.Float()
 }
 
 // SetAlphaCutOff sets the AlphaCutOff property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#alphacutoff
 func (p *PBRBaseSimpleMaterial) SetAlphaCutOff(alphaCutOff float64) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(alphaCutOff)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("alphaCutOff", alphaCutOff)
+	return p
 }
 
 // DisableLighting returns the DisableLighting property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#disablelighting
-func (p *PBRBaseSimpleMaterial) DisableLighting(disableLighting bool) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(disableLighting)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) DisableLighting() bool {
+	retVal := p.p.Get("disableLighting")
+	return retVal.Bool()
 }
 
 // SetDisableLighting sets the DisableLighting property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#disablelighting
 func (p *PBRBaseSimpleMaterial) SetDisableLighting(disableLighting bool) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(disableLighting)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("disableLighting", disableLighting)
+	return p
 }
 
 // DoubleSided returns the DoubleSided property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#doublesided
-func (p *PBRBaseSimpleMaterial) DoubleSided(doubleSided bool) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(doubleSided)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) DoubleSided() bool {
+	retVal := p.p.Get("doubleSided")
+	return retVal.Bool()
 }
 
 // SetDoubleSided sets the DoubleSided property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#doublesided
 func (p *PBRBaseSimpleMaterial) SetDoubleSided(doubleSided bool) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(doubleSided)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("doubleSided", doubleSided)
+	return p
 }
 
 // EmissiveColor returns the EmissiveColor property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#emissivecolor
-func (p *PBRBaseSimpleMaterial) EmissiveColor(emissiveColor *Color3) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(emissiveColor.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) EmissiveColor() *Color3 {
+	retVal := p.p.Get("emissiveColor")
+	return Color3FromJSObject(retVal, p.ctx)
 }
 
 // SetEmissiveColor sets the EmissiveColor property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#emissivecolor
 func (p *PBRBaseSimpleMaterial) SetEmissiveColor(emissiveColor *Color3) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(emissiveColor.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("emissiveColor", emissiveColor.JSObject())
+	return p
 }
 
 // EmissiveTexture returns the EmissiveTexture property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#emissivetexture
-func (p *PBRBaseSimpleMaterial) EmissiveTexture(emissiveTexture *BaseTexture) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(emissiveTexture.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) EmissiveTexture() *BaseTexture {
+	retVal := p.p.Get("emissiveTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetEmissiveTexture sets the EmissiveTexture property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#emissivetexture
 func (p *PBRBaseSimpleMaterial) SetEmissiveTexture(emissiveTexture *BaseTexture) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(emissiveTexture.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("emissiveTexture", emissiveTexture.JSObject())
+	return p
 }
 
 // EnvironmentTexture returns the EnvironmentTexture property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#environmenttexture
-func (p *PBRBaseSimpleMaterial) EnvironmentTexture(environmentTexture *BaseTexture) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(environmentTexture.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) EnvironmentTexture() *BaseTexture {
+	retVal := p.p.Get("environmentTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetEnvironmentTexture sets the EnvironmentTexture property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#environmenttexture
 func (p *PBRBaseSimpleMaterial) SetEnvironmentTexture(environmentTexture *BaseTexture) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(environmentTexture.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("environmentTexture", environmentTexture.JSObject())
+	return p
 }
 
 // InvertNormalMapX returns the InvertNormalMapX property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#invertnormalmapx
-func (p *PBRBaseSimpleMaterial) InvertNormalMapX(invertNormalMapX bool) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(invertNormalMapX)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) InvertNormalMapX() bool {
+	retVal := p.p.Get("invertNormalMapX")
+	return retVal.Bool()
 }
 
 // SetInvertNormalMapX sets the InvertNormalMapX property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#invertnormalmapx
 func (p *PBRBaseSimpleMaterial) SetInvertNormalMapX(invertNormalMapX bool) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(invertNormalMapX)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("invertNormalMapX", invertNormalMapX)
+	return p
 }
 
 // InvertNormalMapY returns the InvertNormalMapY property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#invertnormalmapy
-func (p *PBRBaseSimpleMaterial) InvertNormalMapY(invertNormalMapY bool) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(invertNormalMapY)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) InvertNormalMapY() bool {
+	retVal := p.p.Get("invertNormalMapY")
+	return retVal.Bool()
 }
 
 // SetInvertNormalMapY sets the InvertNormalMapY property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#invertnormalmapy
 func (p *PBRBaseSimpleMaterial) SetInvertNormalMapY(invertNormalMapY bool) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(invertNormalMapY)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("invertNormalMapY", invertNormalMapY)
+	return p
 }
 
 // LightmapTexture returns the LightmapTexture property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#lightmaptexture
-func (p *PBRBaseSimpleMaterial) LightmapTexture(lightmapTexture *BaseTexture) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(lightmapTexture.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) LightmapTexture() *BaseTexture {
+	retVal := p.p.Get("lightmapTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetLightmapTexture sets the LightmapTexture property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#lightmaptexture
 func (p *PBRBaseSimpleMaterial) SetLightmapTexture(lightmapTexture *BaseTexture) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(lightmapTexture.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("lightmapTexture", lightmapTexture.JSObject())
+	return p
 }
 
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#maxsimultaneouslights
-func (p *PBRBaseSimpleMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(maxSimultaneousLights)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) MaxSimultaneousLights() float64 {
+	retVal := p.p.Get("maxSimultaneousLights")
+	return retVal.Float()
 }
 
 // SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#maxsimultaneouslights
 func (p *PBRBaseSimpleMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(maxSimultaneousLights)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("maxSimultaneousLights", maxSimultaneousLights)
+	return p
 }
 
 // NormalTexture returns the NormalTexture property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#normaltexture
-func (p *PBRBaseSimpleMaterial) NormalTexture(normalTexture *BaseTexture) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(normalTexture.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) NormalTexture() *BaseTexture {
+	retVal := p.p.Get("normalTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetNormalTexture sets the NormalTexture property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#normaltexture
 func (p *PBRBaseSimpleMaterial) SetNormalTexture(normalTexture *BaseTexture) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(normalTexture.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("normalTexture", normalTexture.JSObject())
+	return p
 }
 
 // OcclusionStrength returns the OcclusionStrength property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#occlusionstrength
-func (p *PBRBaseSimpleMaterial) OcclusionStrength(occlusionStrength float64) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(occlusionStrength)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) OcclusionStrength() float64 {
+	retVal := p.p.Get("occlusionStrength")
+	return retVal.Float()
 }
 
 // SetOcclusionStrength sets the OcclusionStrength property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#occlusionstrength
 func (p *PBRBaseSimpleMaterial) SetOcclusionStrength(occlusionStrength float64) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(occlusionStrength)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("occlusionStrength", occlusionStrength)
+	return p
 }
 
 // OcclusionTexture returns the OcclusionTexture property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#occlusiontexture
-func (p *PBRBaseSimpleMaterial) OcclusionTexture(occlusionTexture *BaseTexture) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(occlusionTexture.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) OcclusionTexture() *BaseTexture {
+	retVal := p.p.Get("occlusionTexture")
+	return BaseTextureFromJSObject(retVal, p.ctx)
 }
 
 // SetOcclusionTexture sets the OcclusionTexture property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#occlusiontexture
 func (p *PBRBaseSimpleMaterial) SetOcclusionTexture(occlusionTexture *BaseTexture) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(occlusionTexture.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("occlusionTexture", occlusionTexture.JSObject())
+	return p
 }
 
 // UseLightmapAsShadowmap returns the UseLightmapAsShadowmap property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#uselightmapasshadowmap
-func (p *PBRBaseSimpleMaterial) UseLightmapAsShadowmap(useLightmapAsShadowmap bool) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(useLightmapAsShadowmap)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+func (p *PBRBaseSimpleMaterial) UseLightmapAsShadowmap() bool {
+	retVal := p.p.Get("useLightmapAsShadowmap")
+	return retVal.Bool()
 }
 
 // SetUseLightmapAsShadowmap sets the UseLightmapAsShadowmap property of class PBRBaseSimpleMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial#uselightmapasshadowmap
 func (p *PBRBaseSimpleMaterial) SetUseLightmapAsShadowmap(useLightmapAsShadowmap bool) *PBRBaseSimpleMaterial {
-	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(useLightmapAsShadowmap)
-	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
+	p.p.Set("useLightmapAsShadowmap", useLightmapAsShadowmap)
+	return p
 }
-
-*/

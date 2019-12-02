@@ -185,54 +185,50 @@ func (s *SceneOptimizerOptions) ModerateDegradationAllowed(opts *SceneOptimizerO
 	return SceneOptimizerOptionsFromJSObject(retVal, s.ctx)
 }
 
-/*
-
 // Optimizations returns the Optimizations property of class SceneOptimizerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#optimizations
-func (s *SceneOptimizerOptions) Optimizations(optimizations *SceneOptimization) *SceneOptimizerOptions {
-	p := ba.ctx.Get("SceneOptimizerOptions").New(optimizations.JSObject())
-	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+func (s *SceneOptimizerOptions) Optimizations() *SceneOptimization {
+	retVal := s.p.Get("optimizations")
+	return SceneOptimizationFromJSObject(retVal, s.ctx)
 }
 
 // SetOptimizations sets the Optimizations property of class SceneOptimizerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#optimizations
 func (s *SceneOptimizerOptions) SetOptimizations(optimizations *SceneOptimization) *SceneOptimizerOptions {
-	p := ba.ctx.Get("SceneOptimizerOptions").New(optimizations.JSObject())
-	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+	s.p.Set("optimizations", optimizations.JSObject())
+	return s
 }
 
 // TargetFrameRate returns the TargetFrameRate property of class SceneOptimizerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#targetframerate
-func (s *SceneOptimizerOptions) TargetFrameRate(targetFrameRate float64) *SceneOptimizerOptions {
-	p := ba.ctx.Get("SceneOptimizerOptions").New(targetFrameRate)
-	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+func (s *SceneOptimizerOptions) TargetFrameRate() float64 {
+	retVal := s.p.Get("targetFrameRate")
+	return retVal.Float()
 }
 
 // SetTargetFrameRate sets the TargetFrameRate property of class SceneOptimizerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#targetframerate
 func (s *SceneOptimizerOptions) SetTargetFrameRate(targetFrameRate float64) *SceneOptimizerOptions {
-	p := ba.ctx.Get("SceneOptimizerOptions").New(targetFrameRate)
-	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+	s.p.Set("targetFrameRate", targetFrameRate)
+	return s
 }
 
 // TrackerDuration returns the TrackerDuration property of class SceneOptimizerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#trackerduration
-func (s *SceneOptimizerOptions) TrackerDuration(trackerDuration float64) *SceneOptimizerOptions {
-	p := ba.ctx.Get("SceneOptimizerOptions").New(trackerDuration)
-	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+func (s *SceneOptimizerOptions) TrackerDuration() float64 {
+	retVal := s.p.Get("trackerDuration")
+	return retVal.Float()
 }
 
 // SetTrackerDuration sets the TrackerDuration property of class SceneOptimizerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#trackerduration
 func (s *SceneOptimizerOptions) SetTrackerDuration(trackerDuration float64) *SceneOptimizerOptions {
-	p := ba.ctx.Get("SceneOptimizerOptions").New(trackerDuration)
-	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+	s.p.Set("trackerDuration", trackerDuration)
+	return s
 }
-
-*/

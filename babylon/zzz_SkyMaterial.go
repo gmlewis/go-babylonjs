@@ -200,182 +200,178 @@ func (s *SkyMaterial) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // Azimuth returns the Azimuth property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#azimuth
-func (s *SkyMaterial) Azimuth(azimuth float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(azimuth)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) Azimuth() float64 {
+	retVal := s.p.Get("azimuth")
+	return retVal.Float()
 }
 
 // SetAzimuth sets the Azimuth property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#azimuth
 func (s *SkyMaterial) SetAzimuth(azimuth float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(azimuth)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("azimuth", azimuth)
+	return s
 }
 
 // CameraOffset returns the CameraOffset property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#cameraoffset
-func (s *SkyMaterial) CameraOffset(cameraOffset *Vector3) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(cameraOffset.JSObject())
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) CameraOffset() *Vector3 {
+	retVal := s.p.Get("cameraOffset")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetCameraOffset sets the CameraOffset property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#cameraoffset
 func (s *SkyMaterial) SetCameraOffset(cameraOffset *Vector3) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(cameraOffset.JSObject())
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("cameraOffset", cameraOffset.JSObject())
+	return s
 }
 
 // Distance returns the Distance property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#distance
-func (s *SkyMaterial) Distance(distance float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(distance)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) Distance() float64 {
+	retVal := s.p.Get("distance")
+	return retVal.Float()
 }
 
 // SetDistance sets the Distance property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#distance
 func (s *SkyMaterial) SetDistance(distance float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(distance)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("distance", distance)
+	return s
 }
 
 // Inclination returns the Inclination property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#inclination
-func (s *SkyMaterial) Inclination(inclination float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(inclination)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) Inclination() float64 {
+	retVal := s.p.Get("inclination")
+	return retVal.Float()
 }
 
 // SetInclination sets the Inclination property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#inclination
 func (s *SkyMaterial) SetInclination(inclination float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(inclination)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("inclination", inclination)
+	return s
 }
 
 // Luminance returns the Luminance property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#luminance
-func (s *SkyMaterial) Luminance(luminance float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(luminance)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) Luminance() float64 {
+	retVal := s.p.Get("luminance")
+	return retVal.Float()
 }
 
 // SetLuminance sets the Luminance property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#luminance
 func (s *SkyMaterial) SetLuminance(luminance float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(luminance)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("luminance", luminance)
+	return s
 }
 
 // MieCoefficient returns the MieCoefficient property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#miecoefficient
-func (s *SkyMaterial) MieCoefficient(mieCoefficient float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(mieCoefficient)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) MieCoefficient() float64 {
+	retVal := s.p.Get("mieCoefficient")
+	return retVal.Float()
 }
 
 // SetMieCoefficient sets the MieCoefficient property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#miecoefficient
 func (s *SkyMaterial) SetMieCoefficient(mieCoefficient float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(mieCoefficient)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("mieCoefficient", mieCoefficient)
+	return s
 }
 
 // MieDirectionalG returns the MieDirectionalG property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#miedirectionalg
-func (s *SkyMaterial) MieDirectionalG(mieDirectionalG float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(mieDirectionalG)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) MieDirectionalG() float64 {
+	retVal := s.p.Get("mieDirectionalG")
+	return retVal.Float()
 }
 
 // SetMieDirectionalG sets the MieDirectionalG property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#miedirectionalg
 func (s *SkyMaterial) SetMieDirectionalG(mieDirectionalG float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(mieDirectionalG)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("mieDirectionalG", mieDirectionalG)
+	return s
 }
 
 // Rayleigh returns the Rayleigh property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#rayleigh
-func (s *SkyMaterial) Rayleigh(rayleigh float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(rayleigh)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) Rayleigh() float64 {
+	retVal := s.p.Get("rayleigh")
+	return retVal.Float()
 }
 
 // SetRayleigh sets the Rayleigh property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#rayleigh
 func (s *SkyMaterial) SetRayleigh(rayleigh float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(rayleigh)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("rayleigh", rayleigh)
+	return s
 }
 
 // SunPosition returns the SunPosition property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#sunposition
-func (s *SkyMaterial) SunPosition(sunPosition *Vector3) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(sunPosition.JSObject())
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) SunPosition() *Vector3 {
+	retVal := s.p.Get("sunPosition")
+	return Vector3FromJSObject(retVal, s.ctx)
 }
 
 // SetSunPosition sets the SunPosition property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#sunposition
 func (s *SkyMaterial) SetSunPosition(sunPosition *Vector3) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(sunPosition.JSObject())
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("sunPosition", sunPosition.JSObject())
+	return s
 }
 
 // Turbidity returns the Turbidity property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#turbidity
-func (s *SkyMaterial) Turbidity(turbidity float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(turbidity)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) Turbidity() float64 {
+	retVal := s.p.Get("turbidity")
+	return retVal.Float()
 }
 
 // SetTurbidity sets the Turbidity property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#turbidity
 func (s *SkyMaterial) SetTurbidity(turbidity float64) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(turbidity)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("turbidity", turbidity)
+	return s
 }
 
 // UseSunPosition returns the UseSunPosition property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#usesunposition
-func (s *SkyMaterial) UseSunPosition(useSunPosition bool) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(useSunPosition)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+func (s *SkyMaterial) UseSunPosition() bool {
+	retVal := s.p.Get("useSunPosition")
+	return retVal.Bool()
 }
 
 // SetUseSunPosition sets the UseSunPosition property of class SkyMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#usesunposition
 func (s *SkyMaterial) SetUseSunPosition(useSunPosition bool) *SkyMaterial {
-	p := ba.ctx.Get("SkyMaterial").New(useSunPosition)
-	return SkyMaterialFromJSObject(p, ba.ctx)
+	s.p.Set("useSunPosition", useSunPosition)
+	return s
 }
-
-*/

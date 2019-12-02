@@ -253,22 +253,18 @@ func (b *Buffer) UpdateDirectly(data []float64, offset float64, opts *BufferUpda
 	b.p.Call("updateDirectly", args...)
 }
 
-/*
-
 // ByteStride returns the ByteStride property of class Buffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer#bytestride
-func (b *Buffer) ByteStride(byteStride float64) *Buffer {
-	p := ba.ctx.Get("Buffer").New(byteStride)
-	return BufferFromJSObject(p, ba.ctx)
+func (b *Buffer) ByteStride() float64 {
+	retVal := b.p.Get("byteStride")
+	return retVal.Float()
 }
 
 // SetByteStride sets the ByteStride property of class Buffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer#bytestride
 func (b *Buffer) SetByteStride(byteStride float64) *Buffer {
-	p := ba.ctx.Get("Buffer").New(byteStride)
-	return BufferFromJSObject(p, ba.ctx)
+	b.p.Set("byteStride", byteStride)
+	return b
 }
-
-*/

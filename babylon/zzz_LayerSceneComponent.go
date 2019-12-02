@@ -112,38 +112,34 @@ func (l *LayerSceneComponent) RemoveFromContainer(container *AbstractScene, opts
 	l.p.Call("removeFromContainer", args...)
 }
 
-/*
-
 // Name returns the Name property of class LayerSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#name
-func (l *LayerSceneComponent) Name(name string) *LayerSceneComponent {
-	p := ba.ctx.Get("LayerSceneComponent").New(name)
-	return LayerSceneComponentFromJSObject(p, ba.ctx)
+func (l *LayerSceneComponent) Name() string {
+	retVal := l.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class LayerSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#name
 func (l *LayerSceneComponent) SetName(name string) *LayerSceneComponent {
-	p := ba.ctx.Get("LayerSceneComponent").New(name)
-	return LayerSceneComponentFromJSObject(p, ba.ctx)
+	l.p.Set("name", name)
+	return l
 }
 
 // Scene returns the Scene property of class LayerSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#scene
-func (l *LayerSceneComponent) Scene(scene *Scene) *LayerSceneComponent {
-	p := ba.ctx.Get("LayerSceneComponent").New(scene.JSObject())
-	return LayerSceneComponentFromJSObject(p, ba.ctx)
+func (l *LayerSceneComponent) Scene() *Scene {
+	retVal := l.p.Get("scene")
+	return SceneFromJSObject(retVal, l.ctx)
 }
 
 // SetScene sets the Scene property of class LayerSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#scene
 func (l *LayerSceneComponent) SetScene(scene *Scene) *LayerSceneComponent {
-	p := ba.ctx.Get("LayerSceneComponent").New(scene.JSObject())
-	return LayerSceneComponentFromJSObject(p, ba.ctx)
+	l.p.Set("scene", scene.JSObject())
+	return l
 }
-
-*/

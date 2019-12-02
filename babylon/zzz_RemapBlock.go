@@ -81,134 +81,130 @@ func (r *RemapBlock) _deserialize(serializationObject interface{}, scene *Scene,
 	r.p.Call("_deserialize", args...)
 }
 
-/*
-
 // Input returns the Input property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#input
-func (r *RemapBlock) Input(input *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(input.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+func (r *RemapBlock) Input() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("input")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetInput sets the Input property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#input
 func (r *RemapBlock) SetInput(input *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(input.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+	r.p.Set("input", input.JSObject())
+	return r
 }
 
 // Output returns the Output property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#output
-func (r *RemapBlock) Output(output *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(output.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+func (r *RemapBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetOutput sets the Output property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#output
 func (r *RemapBlock) SetOutput(output *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(output.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+	r.p.Set("output", output.JSObject())
+	return r
 }
 
 // SourceMax returns the SourceMax property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcemax
-func (r *RemapBlock) SourceMax(sourceMax *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(sourceMax.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+func (r *RemapBlock) SourceMax() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("sourceMax")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetSourceMax sets the SourceMax property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcemax
 func (r *RemapBlock) SetSourceMax(sourceMax *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(sourceMax.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+	r.p.Set("sourceMax", sourceMax.JSObject())
+	return r
 }
 
 // SourceMin returns the SourceMin property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcemin
-func (r *RemapBlock) SourceMin(sourceMin *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(sourceMin.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+func (r *RemapBlock) SourceMin() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("sourceMin")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetSourceMin sets the SourceMin property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcemin
 func (r *RemapBlock) SetSourceMin(sourceMin *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(sourceMin.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+	r.p.Set("sourceMin", sourceMin.JSObject())
+	return r
 }
 
 // SourceRange returns the SourceRange property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcerange
-func (r *RemapBlock) SourceRange(sourceRange *Vector2) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(sourceRange.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+func (r *RemapBlock) SourceRange() *Vector2 {
+	retVal := r.p.Get("sourceRange")
+	return Vector2FromJSObject(retVal, r.ctx)
 }
 
 // SetSourceRange sets the SourceRange property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcerange
 func (r *RemapBlock) SetSourceRange(sourceRange *Vector2) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(sourceRange.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+	r.p.Set("sourceRange", sourceRange.JSObject())
+	return r
 }
 
 // TargetMax returns the TargetMax property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#targetmax
-func (r *RemapBlock) TargetMax(targetMax *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(targetMax.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+func (r *RemapBlock) TargetMax() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("targetMax")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetTargetMax sets the TargetMax property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#targetmax
 func (r *RemapBlock) SetTargetMax(targetMax *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(targetMax.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+	r.p.Set("targetMax", targetMax.JSObject())
+	return r
 }
 
 // TargetMin returns the TargetMin property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#targetmin
-func (r *RemapBlock) TargetMin(targetMin *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(targetMin.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+func (r *RemapBlock) TargetMin() *NodeMaterialConnectionPoint {
+	retVal := r.p.Get("targetMin")
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
 }
 
 // SetTargetMin sets the TargetMin property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#targetmin
 func (r *RemapBlock) SetTargetMin(targetMin *NodeMaterialConnectionPoint) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(targetMin.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+	r.p.Set("targetMin", targetMin.JSObject())
+	return r
 }
 
 // TargetRange returns the TargetRange property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#targetrange
-func (r *RemapBlock) TargetRange(targetRange *Vector2) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(targetRange.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+func (r *RemapBlock) TargetRange() *Vector2 {
+	retVal := r.p.Get("targetRange")
+	return Vector2FromJSObject(retVal, r.ctx)
 }
 
 // SetTargetRange sets the TargetRange property of class RemapBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#targetrange
 func (r *RemapBlock) SetTargetRange(targetRange *Vector2) *RemapBlock {
-	p := ba.ctx.Get("RemapBlock").New(targetRange.JSObject())
-	return RemapBlockFromJSObject(p, ba.ctx)
+	r.p.Set("targetRange", targetRange.JSObject())
+	return r
 }
-
-*/

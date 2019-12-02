@@ -51,134 +51,130 @@ func (ba *Babylon) NewArc2(startPoint *Vector2, midPoint *Vector2, endPoint *Vec
 	return Arc2FromJSObject(p, ba.ctx)
 }
 
-/*
-
 // Angle returns the Angle property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#angle
-func (a *Arc2) Angle(angle *Angle) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(angle.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+func (a *Arc2) Angle() *Angle {
+	retVal := a.p.Get("angle")
+	return AngleFromJSObject(retVal, a.ctx)
 }
 
 // SetAngle sets the Angle property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#angle
 func (a *Arc2) SetAngle(angle *Angle) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(angle.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+	a.p.Set("angle", angle.JSObject())
+	return a
 }
 
 // CenterPoint returns the CenterPoint property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#centerpoint
-func (a *Arc2) CenterPoint(centerPoint *Vector2) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(centerPoint.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+func (a *Arc2) CenterPoint() *Vector2 {
+	retVal := a.p.Get("centerPoint")
+	return Vector2FromJSObject(retVal, a.ctx)
 }
 
 // SetCenterPoint sets the CenterPoint property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#centerpoint
 func (a *Arc2) SetCenterPoint(centerPoint *Vector2) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(centerPoint.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+	a.p.Set("centerPoint", centerPoint.JSObject())
+	return a
 }
 
 // EndPoint returns the EndPoint property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#endpoint
-func (a *Arc2) EndPoint(endPoint *Vector2) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(endPoint.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+func (a *Arc2) EndPoint() *Vector2 {
+	retVal := a.p.Get("endPoint")
+	return Vector2FromJSObject(retVal, a.ctx)
 }
 
 // SetEndPoint sets the EndPoint property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#endpoint
 func (a *Arc2) SetEndPoint(endPoint *Vector2) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(endPoint.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+	a.p.Set("endPoint", endPoint.JSObject())
+	return a
 }
 
 // MidPoint returns the MidPoint property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#midpoint
-func (a *Arc2) MidPoint(midPoint *Vector2) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(midPoint.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+func (a *Arc2) MidPoint() *Vector2 {
+	retVal := a.p.Get("midPoint")
+	return Vector2FromJSObject(retVal, a.ctx)
 }
 
 // SetMidPoint sets the MidPoint property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#midpoint
 func (a *Arc2) SetMidPoint(midPoint *Vector2) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(midPoint.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+	a.p.Set("midPoint", midPoint.JSObject())
+	return a
 }
 
 // Orientation returns the Orientation property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#orientation
-func (a *Arc2) Orientation(orientation *Orientation) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(orientation.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+func (a *Arc2) Orientation() js.Value {
+	retVal := a.p.Get("orientation")
+	return retVal
 }
 
 // SetOrientation sets the Orientation property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#orientation
-func (a *Arc2) SetOrientation(orientation *Orientation) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(orientation.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+func (a *Arc2) SetOrientation(orientation js.Value) *Arc2 {
+	a.p.Set("orientation", orientation)
+	return a
 }
 
 // Radius returns the Radius property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#radius
-func (a *Arc2) Radius(radius float64) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(radius)
-	return Arc2FromJSObject(p, ba.ctx)
+func (a *Arc2) Radius() float64 {
+	retVal := a.p.Get("radius")
+	return retVal.Float()
 }
 
 // SetRadius sets the Radius property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#radius
 func (a *Arc2) SetRadius(radius float64) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(radius)
-	return Arc2FromJSObject(p, ba.ctx)
+	a.p.Set("radius", radius)
+	return a
 }
 
 // StartAngle returns the StartAngle property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#startangle
-func (a *Arc2) StartAngle(startAngle *Angle) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(startAngle.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+func (a *Arc2) StartAngle() *Angle {
+	retVal := a.p.Get("startAngle")
+	return AngleFromJSObject(retVal, a.ctx)
 }
 
 // SetStartAngle sets the StartAngle property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#startangle
 func (a *Arc2) SetStartAngle(startAngle *Angle) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(startAngle.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+	a.p.Set("startAngle", startAngle.JSObject())
+	return a
 }
 
 // StartPoint returns the StartPoint property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#startpoint
-func (a *Arc2) StartPoint(startPoint *Vector2) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(startPoint.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+func (a *Arc2) StartPoint() *Vector2 {
+	retVal := a.p.Get("startPoint")
+	return Vector2FromJSObject(retVal, a.ctx)
 }
 
 // SetStartPoint sets the StartPoint property of class Arc2.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2#startpoint
 func (a *Arc2) SetStartPoint(startPoint *Vector2) *Arc2 {
-	p := ba.ctx.Get("Arc2").New(startPoint.JSObject())
-	return Arc2FromJSObject(p, ba.ctx)
+	a.p.Set("startPoint", startPoint.JSObject())
+	return a
 }
-
-*/

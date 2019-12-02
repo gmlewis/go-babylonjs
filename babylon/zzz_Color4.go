@@ -498,70 +498,66 @@ func (c *Color4) ToString() string {
 	return retVal.String()
 }
 
-/*
-
 // A returns the A property of class Color4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#a
-func (c *Color4) A(a float64) *Color4 {
-	p := ba.ctx.Get("Color4").New(a)
-	return Color4FromJSObject(p, ba.ctx)
+func (c *Color4) A() float64 {
+	retVal := c.p.Get("a")
+	return retVal.Float()
 }
 
 // SetA sets the A property of class Color4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#a
 func (c *Color4) SetA(a float64) *Color4 {
-	p := ba.ctx.Get("Color4").New(a)
-	return Color4FromJSObject(p, ba.ctx)
+	c.p.Set("a", a)
+	return c
 }
 
 // B returns the B property of class Color4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#b
-func (c *Color4) B(b float64) *Color4 {
-	p := ba.ctx.Get("Color4").New(b)
-	return Color4FromJSObject(p, ba.ctx)
+func (c *Color4) B() float64 {
+	retVal := c.p.Get("b")
+	return retVal.Float()
 }
 
 // SetB sets the B property of class Color4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#b
 func (c *Color4) SetB(b float64) *Color4 {
-	p := ba.ctx.Get("Color4").New(b)
-	return Color4FromJSObject(p, ba.ctx)
+	c.p.Set("b", b)
+	return c
 }
 
 // G returns the G property of class Color4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#g
-func (c *Color4) G(g float64) *Color4 {
-	p := ba.ctx.Get("Color4").New(g)
-	return Color4FromJSObject(p, ba.ctx)
+func (c *Color4) G() float64 {
+	retVal := c.p.Get("g")
+	return retVal.Float()
 }
 
 // SetG sets the G property of class Color4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#g
 func (c *Color4) SetG(g float64) *Color4 {
-	p := ba.ctx.Get("Color4").New(g)
-	return Color4FromJSObject(p, ba.ctx)
+	c.p.Set("g", g)
+	return c
 }
 
 // R returns the R property of class Color4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#r
-func (c *Color4) R(r float64) *Color4 {
-	p := ba.ctx.Get("Color4").New(r)
-	return Color4FromJSObject(p, ba.ctx)
+func (c *Color4) R() float64 {
+	retVal := c.p.Get("r")
+	return retVal.Float()
 }
 
 // SetR sets the R property of class Color4.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#r
 func (c *Color4) SetR(r float64) *Color4 {
-	p := ba.ctx.Get("Color4").New(r)
-	return Color4FromJSObject(p, ba.ctx)
+	c.p.Set("r", r)
+	return c
 }
-
-*/

@@ -38,22 +38,18 @@ func DistanceJointDataArrayToJSArray(array []*DistanceJointData) []interface{} {
 	return result
 }
 
-/*
-
 // MaxDistance returns the MaxDistance property of class DistanceJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distancejointdata#maxdistance
-func (d *DistanceJointData) MaxDistance(maxDistance float64) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(maxDistance)
-	return DistanceJointDataFromJSObject(p, ba.ctx)
+func (d *DistanceJointData) MaxDistance() float64 {
+	retVal := d.p.Get("maxDistance")
+	return retVal.Float()
 }
 
 // SetMaxDistance sets the MaxDistance property of class DistanceJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distancejointdata#maxdistance
 func (d *DistanceJointData) SetMaxDistance(maxDistance float64) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(maxDistance)
-	return DistanceJointDataFromJSObject(p, ba.ctx)
+	d.p.Set("maxDistance", maxDistance)
+	return d
 }
-
-*/

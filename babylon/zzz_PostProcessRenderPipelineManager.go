@@ -145,22 +145,18 @@ func (p *PostProcessRenderPipelineManager) Update() {
 	p.p.Call("update")
 }
 
-/*
-
 // SupportedPipelines returns the SupportedPipelines property of class PostProcessRenderPipelineManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#supportedpipelines
-func (p *PostProcessRenderPipelineManager) SupportedPipelines(supportedPipelines *PostProcessRenderPipeline) *PostProcessRenderPipelineManager {
-	p := ba.ctx.Get("PostProcessRenderPipelineManager").New(supportedPipelines.JSObject())
-	return PostProcessRenderPipelineManagerFromJSObject(p, ba.ctx)
+func (p *PostProcessRenderPipelineManager) SupportedPipelines() *PostProcessRenderPipeline {
+	retVal := p.p.Get("supportedPipelines")
+	return PostProcessRenderPipelineFromJSObject(retVal, p.ctx)
 }
 
 // SetSupportedPipelines sets the SupportedPipelines property of class PostProcessRenderPipelineManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#supportedpipelines
 func (p *PostProcessRenderPipelineManager) SetSupportedPipelines(supportedPipelines *PostProcessRenderPipeline) *PostProcessRenderPipelineManager {
-	p := ba.ctx.Get("PostProcessRenderPipelineManager").New(supportedPipelines.JSObject())
-	return PostProcessRenderPipelineManagerFromJSObject(p, ba.ctx)
+	p.p.Set("supportedPipelines", supportedPipelines.JSObject())
+	return p
 }
-
-*/

@@ -64,86 +64,82 @@ func (b *BinaryFileAssetTask) RunTask(scene *Scene, onSuccess func(), onError fu
 	b.p.Call("runTask", args...)
 }
 
-/*
-
 // Data returns the Data property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#data
-func (b *BinaryFileAssetTask) Data(data js.Value) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(data)
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
+func (b *BinaryFileAssetTask) Data() js.Value {
+	retVal := b.p.Get("data")
+	return retVal
 }
 
 // SetData sets the Data property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#data
 func (b *BinaryFileAssetTask) SetData(data js.Value) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(data)
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
+	b.p.Set("data", data)
+	return b
 }
 
 // Name returns the Name property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#name
-func (b *BinaryFileAssetTask) Name(name string) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(name)
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
+func (b *BinaryFileAssetTask) Name() string {
+	retVal := b.p.Get("name")
+	return retVal.String()
 }
 
 // SetName sets the Name property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#name
 func (b *BinaryFileAssetTask) SetName(name string) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(name)
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
+	b.p.Set("name", name)
+	return b
 }
 
 // OnError returns the OnError property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#onerror
-func (b *BinaryFileAssetTask) OnError(onError func()) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
+func (b *BinaryFileAssetTask) OnError() js.Value {
+	retVal := b.p.Get("onError")
+	return retVal
 }
 
 // SetOnError sets the OnError property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#onerror
 func (b *BinaryFileAssetTask) SetOnError(onError func()) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
+	b.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	return b
 }
 
 // OnSuccess returns the OnSuccess property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#onsuccess
-func (b *BinaryFileAssetTask) OnSuccess(onSuccess func()) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
+func (b *BinaryFileAssetTask) OnSuccess() js.Value {
+	retVal := b.p.Get("onSuccess")
+	return retVal
 }
 
 // SetOnSuccess sets the OnSuccess property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#onsuccess
 func (b *BinaryFileAssetTask) SetOnSuccess(onSuccess func()) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
+	b.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	return b
 }
 
 // Url returns the Url property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#url
-func (b *BinaryFileAssetTask) Url(url string) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(url)
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
+func (b *BinaryFileAssetTask) Url() string {
+	retVal := b.p.Get("url")
+	return retVal.String()
 }
 
 // SetUrl sets the Url property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#url
 func (b *BinaryFileAssetTask) SetUrl(url string) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(url)
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
+	b.p.Set("url", url)
+	return b
 }
-
-*/

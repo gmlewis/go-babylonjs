@@ -63,7 +63,3 @@ func (t *TiledPlaneBuilder) CreateTiledPlane(name string, options js.Value, opts
 	retVal := t.p.Call("CreateTiledPlane", args...)
 	return MeshFromJSObject(retVal, t.ctx)
 }
-
-/*
-
- */

@@ -90,86 +90,82 @@ func (ba *Babylon) NewCircleOfConfusionPostProcess(name string, depthTexture *Re
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
-/*
-
 // DepthTexture returns the DepthTexture property of class CircleOfConfusionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#depthtexture
-func (c *CircleOfConfusionPostProcess) DepthTexture(depthTexture *RenderTargetTexture) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(depthTexture.JSObject())
-	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+func (c *CircleOfConfusionPostProcess) DepthTexture() *RenderTargetTexture {
+	retVal := c.p.Get("depthTexture")
+	return RenderTargetTextureFromJSObject(retVal, c.ctx)
 }
 
 // SetDepthTexture sets the DepthTexture property of class CircleOfConfusionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#depthtexture
 func (c *CircleOfConfusionPostProcess) SetDepthTexture(depthTexture *RenderTargetTexture) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(depthTexture.JSObject())
-	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("depthTexture", depthTexture.JSObject())
+	return c
 }
 
 // FStop returns the FStop property of class CircleOfConfusionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#fstop
-func (c *CircleOfConfusionPostProcess) FStop(fStop float64) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(fStop)
-	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+func (c *CircleOfConfusionPostProcess) FStop() float64 {
+	retVal := c.p.Get("fStop")
+	return retVal.Float()
 }
 
 // SetFStop sets the FStop property of class CircleOfConfusionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#fstop
 func (c *CircleOfConfusionPostProcess) SetFStop(fStop float64) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(fStop)
-	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("fStop", fStop)
+	return c
 }
 
 // FocalLength returns the FocalLength property of class CircleOfConfusionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#focallength
-func (c *CircleOfConfusionPostProcess) FocalLength(focalLength float64) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(focalLength)
-	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+func (c *CircleOfConfusionPostProcess) FocalLength() float64 {
+	retVal := c.p.Get("focalLength")
+	return retVal.Float()
 }
 
 // SetFocalLength sets the FocalLength property of class CircleOfConfusionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#focallength
 func (c *CircleOfConfusionPostProcess) SetFocalLength(focalLength float64) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(focalLength)
-	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("focalLength", focalLength)
+	return c
 }
 
 // FocusDistance returns the FocusDistance property of class CircleOfConfusionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#focusdistance
-func (c *CircleOfConfusionPostProcess) FocusDistance(focusDistance float64) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(focusDistance)
-	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+func (c *CircleOfConfusionPostProcess) FocusDistance() float64 {
+	retVal := c.p.Get("focusDistance")
+	return retVal.Float()
 }
 
 // SetFocusDistance sets the FocusDistance property of class CircleOfConfusionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#focusdistance
 func (c *CircleOfConfusionPostProcess) SetFocusDistance(focusDistance float64) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(focusDistance)
-	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("focusDistance", focusDistance)
+	return c
 }
 
 // LensSize returns the LensSize property of class CircleOfConfusionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#lenssize
-func (c *CircleOfConfusionPostProcess) LensSize(lensSize float64) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(lensSize)
-	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+func (c *CircleOfConfusionPostProcess) LensSize() float64 {
+	retVal := c.p.Get("lensSize")
+	return retVal.Float()
 }
 
 // SetLensSize sets the LensSize property of class CircleOfConfusionPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#lenssize
 func (c *CircleOfConfusionPostProcess) SetLensSize(lensSize float64) *CircleOfConfusionPostProcess {
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(lensSize)
-	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+	c.p.Set("lensSize", lensSize)
+	return c
 }
-
-*/

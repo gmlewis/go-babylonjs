@@ -64,54 +64,50 @@ func (s *SceneLoaderProgressEvent) FromProgressEvent(event js.Value) *SceneLoade
 	return SceneLoaderProgressEventFromJSObject(retVal, s.ctx)
 }
 
-/*
-
 // LengthComputable returns the LengthComputable property of class SceneLoaderProgressEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent#lengthcomputable
-func (s *SceneLoaderProgressEvent) LengthComputable(lengthComputable bool) *SceneLoaderProgressEvent {
-	p := ba.ctx.Get("SceneLoaderProgressEvent").New(lengthComputable)
-	return SceneLoaderProgressEventFromJSObject(p, ba.ctx)
+func (s *SceneLoaderProgressEvent) LengthComputable() bool {
+	retVal := s.p.Get("lengthComputable")
+	return retVal.Bool()
 }
 
 // SetLengthComputable sets the LengthComputable property of class SceneLoaderProgressEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent#lengthcomputable
 func (s *SceneLoaderProgressEvent) SetLengthComputable(lengthComputable bool) *SceneLoaderProgressEvent {
-	p := ba.ctx.Get("SceneLoaderProgressEvent").New(lengthComputable)
-	return SceneLoaderProgressEventFromJSObject(p, ba.ctx)
+	s.p.Set("lengthComputable", lengthComputable)
+	return s
 }
 
 // Loaded returns the Loaded property of class SceneLoaderProgressEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent#loaded
-func (s *SceneLoaderProgressEvent) Loaded(loaded float64) *SceneLoaderProgressEvent {
-	p := ba.ctx.Get("SceneLoaderProgressEvent").New(loaded)
-	return SceneLoaderProgressEventFromJSObject(p, ba.ctx)
+func (s *SceneLoaderProgressEvent) Loaded() float64 {
+	retVal := s.p.Get("loaded")
+	return retVal.Float()
 }
 
 // SetLoaded sets the Loaded property of class SceneLoaderProgressEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent#loaded
 func (s *SceneLoaderProgressEvent) SetLoaded(loaded float64) *SceneLoaderProgressEvent {
-	p := ba.ctx.Get("SceneLoaderProgressEvent").New(loaded)
-	return SceneLoaderProgressEventFromJSObject(p, ba.ctx)
+	s.p.Set("loaded", loaded)
+	return s
 }
 
 // Total returns the Total property of class SceneLoaderProgressEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent#total
-func (s *SceneLoaderProgressEvent) Total(total float64) *SceneLoaderProgressEvent {
-	p := ba.ctx.Get("SceneLoaderProgressEvent").New(total)
-	return SceneLoaderProgressEventFromJSObject(p, ba.ctx)
+func (s *SceneLoaderProgressEvent) Total() float64 {
+	retVal := s.p.Get("total")
+	return retVal.Float()
 }
 
 // SetTotal sets the Total property of class SceneLoaderProgressEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent#total
 func (s *SceneLoaderProgressEvent) SetTotal(total float64) *SceneLoaderProgressEvent {
-	p := ba.ctx.Get("SceneLoaderProgressEvent").New(total)
-	return SceneLoaderProgressEventFromJSObject(p, ba.ctx)
+	s.p.Set("total", total)
+	return s
 }
-
-*/

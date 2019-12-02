@@ -74,166 +74,162 @@ func (b *BoneIKController) Update() {
 	b.p.Call("update")
 }
 
-/*
-
 // MaxAngle returns the MaxAngle property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#maxangle
-func (b *BoneIKController) MaxAngle(maxAngle float64) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(maxAngle)
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+func (b *BoneIKController) MaxAngle() float64 {
+	retVal := b.p.Get("maxAngle")
+	return retVal.Float()
 }
 
 // SetMaxAngle sets the MaxAngle property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#maxangle
 func (b *BoneIKController) SetMaxAngle(maxAngle float64) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(maxAngle)
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+	b.p.Set("maxAngle", maxAngle)
+	return b
 }
 
 // Mesh returns the Mesh property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#mesh
-func (b *BoneIKController) Mesh(mesh *AbstractMesh) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(mesh.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+func (b *BoneIKController) Mesh() *AbstractMesh {
+	retVal := b.p.Get("mesh")
+	return AbstractMeshFromJSObject(retVal, b.ctx)
 }
 
 // SetMesh sets the Mesh property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#mesh
 func (b *BoneIKController) SetMesh(mesh *AbstractMesh) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(mesh.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+	b.p.Set("mesh", mesh.JSObject())
+	return b
 }
 
 // PoleAngle returns the PoleAngle property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#poleangle
-func (b *BoneIKController) PoleAngle(poleAngle float64) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(poleAngle)
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+func (b *BoneIKController) PoleAngle() float64 {
+	retVal := b.p.Get("poleAngle")
+	return retVal.Float()
 }
 
 // SetPoleAngle sets the PoleAngle property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#poleangle
 func (b *BoneIKController) SetPoleAngle(poleAngle float64) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(poleAngle)
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+	b.p.Set("poleAngle", poleAngle)
+	return b
 }
 
 // PoleTargetBone returns the PoleTargetBone property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#poletargetbone
-func (b *BoneIKController) PoleTargetBone(poleTargetBone *Bone) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(poleTargetBone.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+func (b *BoneIKController) PoleTargetBone() *Bone {
+	retVal := b.p.Get("poleTargetBone")
+	return BoneFromJSObject(retVal, b.ctx)
 }
 
 // SetPoleTargetBone sets the PoleTargetBone property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#poletargetbone
 func (b *BoneIKController) SetPoleTargetBone(poleTargetBone *Bone) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(poleTargetBone.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+	b.p.Set("poleTargetBone", poleTargetBone.JSObject())
+	return b
 }
 
 // PoleTargetLocalOffset returns the PoleTargetLocalOffset property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#poletargetlocaloffset
-func (b *BoneIKController) PoleTargetLocalOffset(poleTargetLocalOffset *Vector3) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(poleTargetLocalOffset.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+func (b *BoneIKController) PoleTargetLocalOffset() *Vector3 {
+	retVal := b.p.Get("poleTargetLocalOffset")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetPoleTargetLocalOffset sets the PoleTargetLocalOffset property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#poletargetlocaloffset
 func (b *BoneIKController) SetPoleTargetLocalOffset(poleTargetLocalOffset *Vector3) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(poleTargetLocalOffset.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+	b.p.Set("poleTargetLocalOffset", poleTargetLocalOffset.JSObject())
+	return b
 }
 
 // PoleTargetMesh returns the PoleTargetMesh property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#poletargetmesh
-func (b *BoneIKController) PoleTargetMesh(poleTargetMesh *AbstractMesh) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(poleTargetMesh.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+func (b *BoneIKController) PoleTargetMesh() *AbstractMesh {
+	retVal := b.p.Get("poleTargetMesh")
+	return AbstractMeshFromJSObject(retVal, b.ctx)
 }
 
 // SetPoleTargetMesh sets the PoleTargetMesh property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#poletargetmesh
 func (b *BoneIKController) SetPoleTargetMesh(poleTargetMesh *AbstractMesh) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(poleTargetMesh.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+	b.p.Set("poleTargetMesh", poleTargetMesh.JSObject())
+	return b
 }
 
 // PoleTargetPosition returns the PoleTargetPosition property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#poletargetposition
-func (b *BoneIKController) PoleTargetPosition(poleTargetPosition *Vector3) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(poleTargetPosition.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+func (b *BoneIKController) PoleTargetPosition() *Vector3 {
+	retVal := b.p.Get("poleTargetPosition")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetPoleTargetPosition sets the PoleTargetPosition property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#poletargetposition
 func (b *BoneIKController) SetPoleTargetPosition(poleTargetPosition *Vector3) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(poleTargetPosition.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+	b.p.Set("poleTargetPosition", poleTargetPosition.JSObject())
+	return b
 }
 
 // SlerpAmount returns the SlerpAmount property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#slerpamount
-func (b *BoneIKController) SlerpAmount(slerpAmount float64) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(slerpAmount)
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+func (b *BoneIKController) SlerpAmount() float64 {
+	retVal := b.p.Get("slerpAmount")
+	return retVal.Float()
 }
 
 // SetSlerpAmount sets the SlerpAmount property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#slerpamount
 func (b *BoneIKController) SetSlerpAmount(slerpAmount float64) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(slerpAmount)
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+	b.p.Set("slerpAmount", slerpAmount)
+	return b
 }
 
 // TargetMesh returns the TargetMesh property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#targetmesh
-func (b *BoneIKController) TargetMesh(targetMesh *AbstractMesh) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(targetMesh.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+func (b *BoneIKController) TargetMesh() *AbstractMesh {
+	retVal := b.p.Get("targetMesh")
+	return AbstractMeshFromJSObject(retVal, b.ctx)
 }
 
 // SetTargetMesh sets the TargetMesh property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#targetmesh
 func (b *BoneIKController) SetTargetMesh(targetMesh *AbstractMesh) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(targetMesh.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+	b.p.Set("targetMesh", targetMesh.JSObject())
+	return b
 }
 
 // TargetPosition returns the TargetPosition property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#targetposition
-func (b *BoneIKController) TargetPosition(targetPosition *Vector3) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(targetPosition.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+func (b *BoneIKController) TargetPosition() *Vector3 {
+	retVal := b.p.Get("targetPosition")
+	return Vector3FromJSObject(retVal, b.ctx)
 }
 
 // SetTargetPosition sets the TargetPosition property of class BoneIKController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#targetposition
 func (b *BoneIKController) SetTargetPosition(targetPosition *Vector3) *BoneIKController {
-	p := ba.ctx.Get("BoneIKController").New(targetPosition.JSObject())
-	return BoneIKControllerFromJSObject(p, ba.ctx)
+	b.p.Set("targetPosition", targetPosition.JSObject())
+	return b
 }
-
-*/

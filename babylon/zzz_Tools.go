@@ -1000,438 +1000,426 @@ func (t *Tools) Warn(message string) {
 	t.p.Call("Warn", args...)
 }
 
-/*
-
 // AllLogLevel returns the AllLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#allloglevel
-func (t *Tools) AllLogLevel(AllLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(AllLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) AllLogLevel() float64 {
+	retVal := t.p.Get("AllLogLevel")
+	return retVal.Float()
 }
 
 // SetAllLogLevel sets the AllLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#allloglevel
 func (t *Tools) SetAllLogLevel(AllLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(AllLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("AllLogLevel", AllLogLevel)
+	return t
 }
 
 // BaseUrl returns the BaseUrl property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#baseurl
-func (t *Tools) BaseUrl(BaseUrl string) *Tools {
-	p := ba.ctx.Get("Tools").New(BaseUrl)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) BaseUrl() string {
+	retVal := t.p.Get("BaseUrl")
+	return retVal.String()
 }
 
 // SetBaseUrl sets the BaseUrl property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#baseurl
 func (t *Tools) SetBaseUrl(BaseUrl string) *Tools {
-	p := ba.ctx.Get("Tools").New(BaseUrl)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("BaseUrl", BaseUrl)
+	return t
 }
 
 // CorsBehavior returns the CorsBehavior property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#corsbehavior
-func (t *Tools) CorsBehavior(CorsBehavior string) *Tools {
-	p := ba.ctx.Get("Tools").New(CorsBehavior)
-	return ToolsFromJSObject(p, ba.ctx)
-}
-
-// SetCorsBehavior sets the CorsBehavior property of class Tools.
-//
-// https://doc.babylonjs.com/api/classes/babylon.tools#corsbehavior
-func (t *Tools) SetCorsBehavior(CorsBehavior string) *Tools {
-	p := ba.ctx.Get("Tools").New(CorsBehavior)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) CorsBehavior() string {
+	retVal := t.p.Get("CorsBehavior")
+	return retVal.String()
 }
 
 // CustomRequestHeaders returns the CustomRequestHeaders property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#customrequestheaders
-func (t *Tools) CustomRequestHeaders(CustomRequestHeaders js.Value) *Tools {
-	p := ba.ctx.Get("Tools").New(CustomRequestHeaders)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) CustomRequestHeaders() js.Value {
+	retVal := t.p.Get("CustomRequestHeaders")
+	return retVal
 }
 
 // SetCustomRequestHeaders sets the CustomRequestHeaders property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#customrequestheaders
 func (t *Tools) SetCustomRequestHeaders(CustomRequestHeaders js.Value) *Tools {
-	p := ba.ctx.Get("Tools").New(CustomRequestHeaders)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("CustomRequestHeaders", CustomRequestHeaders)
+	return t
 }
 
 // DefaultRetryStrategy returns the DefaultRetryStrategy property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#defaultretrystrategy
-func (t *Tools) DefaultRetryStrategy(DefaultRetryStrategy func()) *Tools {
-	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {DefaultRetryStrategy(); return nil}))
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) DefaultRetryStrategy() js.Value {
+	retVal := t.p.Get("DefaultRetryStrategy")
+	return retVal
 }
 
 // SetDefaultRetryStrategy sets the DefaultRetryStrategy property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#defaultretrystrategy
 func (t *Tools) SetDefaultRetryStrategy(DefaultRetryStrategy func()) *Tools {
-	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {DefaultRetryStrategy(); return nil}))
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("DefaultRetryStrategy", js.FuncOf(func(this js.Value, args []js.Value) interface{} { DefaultRetryStrategy(); return nil }))
+	return t
 }
 
 // EndPerformanceCounter returns the EndPerformanceCounter property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#endperformancecounter
-func (t *Tools) EndPerformanceCounter(EndPerformanceCounter func()) *Tools {
-	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {EndPerformanceCounter(); return nil}))
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) EndPerformanceCounter() js.Value {
+	retVal := t.p.Get("EndPerformanceCounter")
+	return retVal
 }
 
 // SetEndPerformanceCounter sets the EndPerformanceCounter property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#endperformancecounter
 func (t *Tools) SetEndPerformanceCounter(EndPerformanceCounter func()) *Tools {
-	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {EndPerformanceCounter(); return nil}))
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("EndPerformanceCounter", js.FuncOf(func(this js.Value, args []js.Value) interface{} { EndPerformanceCounter(); return nil }))
+	return t
 }
 
 // ErrorLogLevel returns the ErrorLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#errorloglevel
-func (t *Tools) ErrorLogLevel(ErrorLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(ErrorLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) ErrorLogLevel() float64 {
+	retVal := t.p.Get("ErrorLogLevel")
+	return retVal.Float()
 }
 
 // SetErrorLogLevel sets the ErrorLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#errorloglevel
 func (t *Tools) SetErrorLogLevel(ErrorLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(ErrorLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("ErrorLogLevel", ErrorLogLevel)
+	return t
 }
 
 // ErrorsCount returns the ErrorsCount property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#errorscount
-func (t *Tools) ErrorsCount(errorsCount float64) *Tools {
-	p := ba.ctx.Get("Tools").New(errorsCount)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) ErrorsCount() float64 {
+	retVal := t.p.Get("errorsCount")
+	return retVal.Float()
 }
 
 // SetErrorsCount sets the ErrorsCount property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#errorscount
 func (t *Tools) SetErrorsCount(errorsCount float64) *Tools {
-	p := ba.ctx.Get("Tools").New(errorsCount)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("errorsCount", errorsCount)
+	return t
 }
 
 // FallbackTexture returns the FallbackTexture property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#fallbacktexture
-func (t *Tools) FallbackTexture(fallbackTexture string) *Tools {
-	p := ba.ctx.Get("Tools").New(fallbackTexture)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) FallbackTexture() string {
+	retVal := t.p.Get("fallbackTexture")
+	return retVal.String()
 }
 
 // SetFallbackTexture sets the FallbackTexture property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#fallbacktexture
 func (t *Tools) SetFallbackTexture(fallbackTexture string) *Tools {
-	p := ba.ctx.Get("Tools").New(fallbackTexture)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("fallbackTexture", fallbackTexture)
+	return t
 }
 
 // GetDOMTextContent returns the GetDOMTextContent property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#getdomtextcontent
-func (t *Tools) GetDOMTextContent(GetDOMTextContent *GetDOMTextContent) *Tools {
-	p := ba.ctx.Get("Tools").New(GetDOMTextContent.JSObject())
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) GetDOMTextContent() js.Value {
+	retVal := t.p.Get("GetDOMTextContent")
+	return retVal
 }
 
 // SetGetDOMTextContent sets the GetDOMTextContent property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#getdomtextcontent
-func (t *Tools) SetGetDOMTextContent(GetDOMTextContent *GetDOMTextContent) *Tools {
-	p := ba.ctx.Get("Tools").New(GetDOMTextContent.JSObject())
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) SetGetDOMTextContent(GetDOMTextContent js.Value) *Tools {
+	t.p.Set("GetDOMTextContent", GetDOMTextContent)
+	return t
 }
 
 // IsWindowObjectExist returns the IsWindowObjectExist property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#iswindowobjectexist
-func (t *Tools) IsWindowObjectExist(IsWindowObjectExist *IsWindowObjectExist) *Tools {
-	p := ba.ctx.Get("Tools").New(IsWindowObjectExist.JSObject())
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) IsWindowObjectExist() js.Value {
+	retVal := t.p.Get("IsWindowObjectExist")
+	return retVal
 }
 
 // SetIsWindowObjectExist sets the IsWindowObjectExist property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#iswindowobjectexist
-func (t *Tools) SetIsWindowObjectExist(IsWindowObjectExist *IsWindowObjectExist) *Tools {
-	p := ba.ctx.Get("Tools").New(IsWindowObjectExist.JSObject())
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) SetIsWindowObjectExist(IsWindowObjectExist js.Value) *Tools {
+	t.p.Set("IsWindowObjectExist", IsWindowObjectExist)
+	return t
 }
 
 // LogCache returns the LogCache property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#logcache
-func (t *Tools) LogCache(LogCache string) *Tools {
-	p := ba.ctx.Get("Tools").New(LogCache)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) LogCache() string {
+	retVal := t.p.Get("LogCache")
+	return retVal.String()
 }
 
 // SetLogCache sets the LogCache property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#logcache
 func (t *Tools) SetLogCache(LogCache string) *Tools {
-	p := ba.ctx.Get("Tools").New(LogCache)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("LogCache", LogCache)
+	return t
 }
 
 // LogLevels returns the LogLevels property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#loglevels
-func (t *Tools) LogLevels(LogLevels float64) *Tools {
-	p := ba.ctx.Get("Tools").New(LogLevels)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) LogLevels() float64 {
+	retVal := t.p.Get("LogLevels")
+	return retVal.Float()
 }
 
 // SetLogLevels sets the LogLevels property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#loglevels
 func (t *Tools) SetLogLevels(LogLevels float64) *Tools {
-	p := ba.ctx.Get("Tools").New(LogLevels)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("LogLevels", LogLevels)
+	return t
 }
 
 // MessageLogLevel returns the MessageLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#messageloglevel
-func (t *Tools) MessageLogLevel(MessageLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(MessageLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) MessageLogLevel() float64 {
+	retVal := t.p.Get("MessageLogLevel")
+	return retVal.Float()
 }
 
 // SetMessageLogLevel sets the MessageLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#messageloglevel
 func (t *Tools) SetMessageLogLevel(MessageLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(MessageLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("MessageLogLevel", MessageLogLevel)
+	return t
 }
 
 // NoneLogLevel returns the NoneLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#noneloglevel
-func (t *Tools) NoneLogLevel(NoneLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(NoneLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) NoneLogLevel() float64 {
+	retVal := t.p.Get("NoneLogLevel")
+	return retVal.Float()
 }
 
 // SetNoneLogLevel sets the NoneLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#noneloglevel
 func (t *Tools) SetNoneLogLevel(NoneLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(NoneLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("NoneLogLevel", NoneLogLevel)
+	return t
 }
 
 // Now returns the Now property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#now
-func (t *Tools) Now(Now float64) *Tools {
-	p := ba.ctx.Get("Tools").New(Now)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) Now() float64 {
+	retVal := t.p.Get("Now")
+	return retVal.Float()
 }
 
 // SetNow sets the Now property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#now
 func (t *Tools) SetNow(Now float64) *Tools {
-	p := ba.ctx.Get("Tools").New(Now)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("Now", Now)
+	return t
 }
 
 // OnNewCacheEntry returns the OnNewCacheEntry property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#onnewcacheentry
-func (t *Tools) OnNewCacheEntry(OnNewCacheEntry func()) *Tools {
-	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {OnNewCacheEntry(); return nil}))
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) OnNewCacheEntry() js.Value {
+	retVal := t.p.Get("OnNewCacheEntry")
+	return retVal
 }
 
 // SetOnNewCacheEntry sets the OnNewCacheEntry property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#onnewcacheentry
 func (t *Tools) SetOnNewCacheEntry(OnNewCacheEntry func()) *Tools {
-	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {OnNewCacheEntry(); return nil}))
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("OnNewCacheEntry", js.FuncOf(func(this js.Value, args []js.Value) interface{} { OnNewCacheEntry(); return nil }))
+	return t
 }
 
 // PerformanceConsoleLogLevel returns the PerformanceConsoleLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#performanceconsoleloglevel
-func (t *Tools) PerformanceConsoleLogLevel(PerformanceConsoleLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(PerformanceConsoleLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) PerformanceConsoleLogLevel() float64 {
+	retVal := t.p.Get("PerformanceConsoleLogLevel")
+	return retVal.Float()
 }
 
 // SetPerformanceConsoleLogLevel sets the PerformanceConsoleLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#performanceconsoleloglevel
 func (t *Tools) SetPerformanceConsoleLogLevel(PerformanceConsoleLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(PerformanceConsoleLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("PerformanceConsoleLogLevel", PerformanceConsoleLogLevel)
+	return t
 }
 
 // PerformanceLogLevel returns the PerformanceLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#performanceloglevel
-func (t *Tools) PerformanceLogLevel(PerformanceLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(PerformanceLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) PerformanceLogLevel() float64 {
+	retVal := t.p.Get("PerformanceLogLevel")
+	return retVal.Float()
 }
 
 // SetPerformanceLogLevel sets the PerformanceLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#performanceloglevel
 func (t *Tools) SetPerformanceLogLevel(PerformanceLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(PerformanceLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("PerformanceLogLevel", PerformanceLogLevel)
+	return t
 }
 
 // PerformanceNoneLogLevel returns the PerformanceNoneLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#performancenoneloglevel
-func (t *Tools) PerformanceNoneLogLevel(PerformanceNoneLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(PerformanceNoneLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) PerformanceNoneLogLevel() float64 {
+	retVal := t.p.Get("PerformanceNoneLogLevel")
+	return retVal.Float()
 }
 
 // SetPerformanceNoneLogLevel sets the PerformanceNoneLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#performancenoneloglevel
 func (t *Tools) SetPerformanceNoneLogLevel(PerformanceNoneLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(PerformanceNoneLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("PerformanceNoneLogLevel", PerformanceNoneLogLevel)
+	return t
 }
 
 // PerformanceUserMarkLogLevel returns the PerformanceUserMarkLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#performanceusermarkloglevel
-func (t *Tools) PerformanceUserMarkLogLevel(PerformanceUserMarkLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(PerformanceUserMarkLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) PerformanceUserMarkLogLevel() float64 {
+	retVal := t.p.Get("PerformanceUserMarkLogLevel")
+	return retVal.Float()
 }
 
 // SetPerformanceUserMarkLogLevel sets the PerformanceUserMarkLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#performanceusermarkloglevel
 func (t *Tools) SetPerformanceUserMarkLogLevel(PerformanceUserMarkLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(PerformanceUserMarkLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("PerformanceUserMarkLogLevel", PerformanceUserMarkLogLevel)
+	return t
 }
 
 // PreprocessUrl returns the PreprocessUrl property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#preprocessurl
-func (t *Tools) PreprocessUrl(PreprocessUrl func()) *Tools {
-	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {PreprocessUrl(); return nil}))
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) PreprocessUrl() js.Value {
+	retVal := t.p.Get("PreprocessUrl")
+	return retVal
 }
 
 // SetPreprocessUrl sets the PreprocessUrl property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#preprocessurl
 func (t *Tools) SetPreprocessUrl(PreprocessUrl func()) *Tools {
-	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {PreprocessUrl(); return nil}))
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("PreprocessUrl", js.FuncOf(func(this js.Value, args []js.Value) interface{} { PreprocessUrl(); return nil }))
+	return t
 }
 
 // RegisteredExternalClasses returns the RegisteredExternalClasses property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#registeredexternalclasses
-func (t *Tools) RegisteredExternalClasses(RegisteredExternalClasses js.Value) *Tools {
-	p := ba.ctx.Get("Tools").New(RegisteredExternalClasses)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) RegisteredExternalClasses() js.Value {
+	retVal := t.p.Get("RegisteredExternalClasses")
+	return retVal
 }
 
 // SetRegisteredExternalClasses sets the RegisteredExternalClasses property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#registeredexternalclasses
 func (t *Tools) SetRegisteredExternalClasses(RegisteredExternalClasses js.Value) *Tools {
-	p := ba.ctx.Get("Tools").New(RegisteredExternalClasses)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("RegisteredExternalClasses", RegisteredExternalClasses)
+	return t
 }
 
 // StartPerformanceCounter returns the StartPerformanceCounter property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#startperformancecounter
-func (t *Tools) StartPerformanceCounter(StartPerformanceCounter func()) *Tools {
-	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {StartPerformanceCounter(); return nil}))
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) StartPerformanceCounter() js.Value {
+	retVal := t.p.Get("StartPerformanceCounter")
+	return retVal
 }
 
 // SetStartPerformanceCounter sets the StartPerformanceCounter property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#startperformancecounter
 func (t *Tools) SetStartPerformanceCounter(StartPerformanceCounter func()) *Tools {
-	p := ba.ctx.Get("Tools").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {StartPerformanceCounter(); return nil}))
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("StartPerformanceCounter", js.FuncOf(func(this js.Value, args []js.Value) interface{} { StartPerformanceCounter(); return nil }))
+	return t
 }
 
 // UseCustomRequestHeaders returns the UseCustomRequestHeaders property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#usecustomrequestheaders
-func (t *Tools) UseCustomRequestHeaders(UseCustomRequestHeaders bool) *Tools {
-	p := ba.ctx.Get("Tools").New(UseCustomRequestHeaders)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) UseCustomRequestHeaders() bool {
+	retVal := t.p.Get("UseCustomRequestHeaders")
+	return retVal.Bool()
 }
 
 // SetUseCustomRequestHeaders sets the UseCustomRequestHeaders property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#usecustomrequestheaders
 func (t *Tools) SetUseCustomRequestHeaders(UseCustomRequestHeaders bool) *Tools {
-	p := ba.ctx.Get("Tools").New(UseCustomRequestHeaders)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("UseCustomRequestHeaders", UseCustomRequestHeaders)
+	return t
 }
 
 // UseFallbackTexture returns the UseFallbackTexture property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#usefallbacktexture
-func (t *Tools) UseFallbackTexture(UseFallbackTexture bool) *Tools {
-	p := ba.ctx.Get("Tools").New(UseFallbackTexture)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) UseFallbackTexture() bool {
+	retVal := t.p.Get("UseFallbackTexture")
+	return retVal.Bool()
 }
 
 // SetUseFallbackTexture sets the UseFallbackTexture property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#usefallbacktexture
 func (t *Tools) SetUseFallbackTexture(UseFallbackTexture bool) *Tools {
-	p := ba.ctx.Get("Tools").New(UseFallbackTexture)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("UseFallbackTexture", UseFallbackTexture)
+	return t
 }
 
 // WarningLogLevel returns the WarningLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#warningloglevel
-func (t *Tools) WarningLogLevel(WarningLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(WarningLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+func (t *Tools) WarningLogLevel() float64 {
+	retVal := t.p.Get("WarningLogLevel")
+	return retVal.Float()
 }
 
 // SetWarningLogLevel sets the WarningLogLevel property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#warningloglevel
 func (t *Tools) SetWarningLogLevel(WarningLogLevel float64) *Tools {
-	p := ba.ctx.Get("Tools").New(WarningLogLevel)
-	return ToolsFromJSObject(p, ba.ctx)
+	t.p.Set("WarningLogLevel", WarningLogLevel)
+	return t
 }
-
-*/

@@ -90,38 +90,34 @@ func (s *SetValueAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-/*
-
 // PropertyPath returns the PropertyPath property of class SetValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setvalueaction#propertypath
-func (s *SetValueAction) PropertyPath(propertyPath string) *SetValueAction {
-	p := ba.ctx.Get("SetValueAction").New(propertyPath)
-	return SetValueActionFromJSObject(p, ba.ctx)
+func (s *SetValueAction) PropertyPath() string {
+	retVal := s.p.Get("propertyPath")
+	return retVal.String()
 }
 
 // SetPropertyPath sets the PropertyPath property of class SetValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setvalueaction#propertypath
 func (s *SetValueAction) SetPropertyPath(propertyPath string) *SetValueAction {
-	p := ba.ctx.Get("SetValueAction").New(propertyPath)
-	return SetValueActionFromJSObject(p, ba.ctx)
+	s.p.Set("propertyPath", propertyPath)
+	return s
 }
 
 // Value returns the Value property of class SetValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setvalueaction#value
-func (s *SetValueAction) Value(value interface{}) *SetValueAction {
-	p := ba.ctx.Get("SetValueAction").New(value)
-	return SetValueActionFromJSObject(p, ba.ctx)
+func (s *SetValueAction) Value() interface{} {
+	retVal := s.p.Get("value")
+	return retVal
 }
 
 // SetValue sets the Value property of class SetValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setvalueaction#value
 func (s *SetValueAction) SetValue(value interface{}) *SetValueAction {
-	p := ba.ctx.Get("SetValueAction").New(value)
-	return SetValueActionFromJSObject(p, ba.ctx)
+	s.p.Set("value", value)
+	return s
 }
-
-*/

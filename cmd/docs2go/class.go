@@ -164,79 +164,6 @@ func (c *classes) walker() filepath.WalkFunc {
 			log.Fatalf("%v: %v", filename, err)
 		}
 
-		/*
-			for _, div := range html.Div {
-				if div.ID != "wrapper" {
-					continue
-				}
-				html.Name = div.H1.InnerXML
-				if i := strings.Index(html.Name, "&lt;"); i >= 0 {
-					html.Name = html.Name[0:i]
-				}
-
-				for _, section := range div.Sections {
-						switch t := section.Type(); t {
-						case "tsd-comment":
-							lines := strings.Split(section.Lead.InnerXML, "\n")
-							for i, v := range lines {
-								lines[i] = strings.TrimSpace(v)
-							}
-							html.Summary = strings.Join(lines, "\n// ")
-
-							lines = strings.Split(section.Description.InnerXML, "\n")
-							for i, v := range lines {
-								lines[i] = strings.TrimSpace(v)
-							}
-							html.Description = strings.Join(lines, "\n// ")
-
-							html.SeeURL = section.SeeURL.InnerXML
-						case "tsd-hierarchy":
-							for _, v := range section.ListItems {
-								html.Parents = append(html.Parents, v.InnerXML)
-							}
-							for _, v := range section.Children {
-								html.Children = append(html.Children, v.InnerXML)
-							}
-						case "Implements":
-							for _, v := range section.ListItems {
-								html.Implements = append(html.Implements, v.InnerXML)
-							}
-						case "tsd-index-group":
-						case "tsd-member-group", "tsd-is-not-exported", "tsd-is-inherited": // Parse this for Constructors, Properties, and Methods
-							for _, v := range section.ConstructorsAndMethods {
-								if !strings.Contains(v.Class, "tsd-signature") {
-									continue
-								}
-								switch section.H2.InnerXML {
-								case "Constructors":
-									if ok := v.parseParameters(html.Name, processConstructorOverrides); ok {
-										html.ConstructorNames[v.GoName] = v
-									}
-								case "Methods":
-									if ok := v.parseParameters(html.Name, processMethodOverrides); ok {
-										html.MethodNames[v.GoName] = v
-									}
-								default:
-									log.Fatalf("%v: unknown ConstructorsAndMethods: h2=%v", filename, section.H2)
-								}
-							}
-							for _, v := range section.Properties {
-								if !strings.Contains(v.Class, "tsd-signature") {
-									continue
-								}
-								if ok := v.parseParameters(html.Name, nil); ok {
-									html.PropertyNames[v.GoName] = v
-								}
-							}
-						case "tsd-type-parameters": // ignore
-						case "tsd-parent-kind-module": // ignore
-						default:
-							log.Fatalf("Unknown section type: %v", t)
-						}
-				}
-			}
-		*/
-
 		logf("html.Name=%v", html.Name)
 		logf("html.Summary=%v", html.Summary)
 		logf("html.Description=%v", html.Description)
@@ -656,9 +583,11 @@ type Signature struct {
 	GoReturnType      string
 	GoReturnStatement string
 
-	HasOpts bool
+	HasOpts     bool
+	WriteSetter bool
 
-	GoParams         []string
+	GoParamsName     []string
+	GoParamsType     []string
 	GoOptsName       []string
 	GoOptsType       []string
 	NeedsArrayHelper []string
@@ -683,7 +612,7 @@ func processConstructorOverrides(className string, s *Signature, names []string,
 		override = false
 	}
 	if override {
-		logf("\n\nOVERRIDES: parseParameters[%v]: names(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, len(names), names, len(optional), optional, len(types), types)
+		logf("\n\nconstructor OVERRIDES: parseParameters[%v]: names(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, len(names), names, len(optional), optional, len(types), types)
 	}
 	return names, optional, types
 }
@@ -705,7 +634,53 @@ func processMethodOverrides(className string, s *Signature, names []string, opti
 		override = false
 	}
 	if override {
-		logf("\n\nOVERRIDES: parseParameters[%v]: names(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, len(names), names, len(optional), optional, len(types), types)
+		logf("\n\nmethod OVERRIDES: parseParameters[%v]: names(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, len(names), names, len(optional), optional, len(types), types)
+	}
+	return names, optional, types
+}
+
+func processPropertiesOverrides(className string, s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string) {
+	s.WriteSetter = true
+	override := true
+	switch className + "." + s.GoName {
+	case "ArcRotateCamera.Position",
+		"ArcRotateCamera.Target",
+		"BaseSubMesh.Effect",
+		"Bone.Position",
+		"Bone.Rotation",
+		"Bone.RotationQuaternion",
+		"IPhysicsEngine.Gravity",
+		"LensRenderingPipeline.ChromaticAberration",
+		"LensRenderingPipeline.DarkenOutOfFocus",
+		"LensRenderingPipeline.EdgeBlur",
+		"LensRenderingPipeline.EdgeDistortion",
+		"LensRenderingPipeline.GrainAmount",
+		"LensRenderingPipeline.HighlightsGain",
+		"LensRenderingPipeline.HighlightsThreshold",
+		"Light.Intensity",
+		"PhysicsEngine.Gravity",
+		"PhysicsImpostor.Mass",
+		"PhysicsRaycastResult.HitDistance",
+		"PointsCloudSystem.Particles",
+		"Scene.ClearColor",
+		"ShadowGenerator.Darkness",
+		"ShadowGenerator.TransparencyShadow",
+		"SolidParticleSystem.Particles",
+		"Tools.CorsBehavior",
+		"TransformNode.AbsolutePosition",
+		"VolumetricLightScatteringPostProcess.CustomMeshPosition":
+		s.WriteSetter = false
+	case "Light.Range":
+		names[0] = "r"
+	case "Matrix.M", "Matrix2D.M":
+		names[0] = "mm"
+	case "ReflectionTextureBlock.R":
+		names[0] = "rr"
+	default:
+		override = false
+	}
+	if override {
+		logf("\n\nproperties OVERRIDES: parseParameters[%v]: names(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, len(names), names, len(optional), optional, len(types), types)
 	}
 	return names, optional, types
 }
@@ -784,7 +759,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 					case "number", "float":
 						types = append(types, "float64")
 					case "TCamera": // special case
-						types = append(types, "*Camera")
+						types = append(types, "Camera")
 					case "DataArray":
 						types = append(types, "[]float64")
 					default:
@@ -911,7 +886,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 				case "func()": // special case - function callback
 					jsName = fmt.Sprintf(`js.FuncOf(func(this js.Value, args []js.Value) interface{} {%v(); return nil})`, name)
 					needsJSObject = false
-				case "[]*Worker":
+				case "[]*Worker", "[]*object", "[]object":
 					paramType = "[]js.Value"
 					needsJSObject = false
 				}
@@ -928,12 +903,13 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 			} else {
 				s.NeedsArrayHelper = append(s.NeedsArrayHelper, "")
 			}
-			s.GoParams = append(s.GoParams, fmt.Sprintf("%v %v", name, paramType))
+			s.GoParamsName = append(s.GoParamsName, name)
+			s.GoParamsType = append(s.GoParamsType, paramType)
 			s.JSParams = append(s.JSParams, jsName)
 		}
 	}
 
-	if len(types) > len(names) {
+	if len(types) > 0 {
 		var needsJSObject bool
 		s.GoReturnType, needsJSObject, _ = jsTypeToGoType(types[len(types)-1])
 
@@ -941,7 +917,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 		case "this":
 			s.GoReturnType = className
 			needsJSObject = true
-		case "[]*any":
+		case "[]*any", "[]*object", "[]object":
 			s.GoReturnType = "js.Value" // "[]interface{}"
 			needsJSObject = false
 		case "object":
@@ -957,6 +933,13 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 			lines := []string{fmt.Sprintf("result := %v{}", s.GoReturnType)}
 			lines = append(lines, "for ri := 0; ri < retVal.Length(); ri++ {")
 			lines = append(lines, "  result = append(result, retVal.Index(ri).Float())")
+			lines = append(lines, "}")
+			lines = append(lines, "return result")
+			s.GoReturnStatement = strings.Join(lines, "\n")
+		} else if strings.HasPrefix(s.GoReturnType, "[]string") {
+			lines := []string{fmt.Sprintf("result := %v{}", s.GoReturnType)}
+			lines = append(lines, "for ri := 0; ri < retVal.Length(); ri++ {")
+			lines = append(lines, "  result = append(result, retVal.Index(ri).String())")
 			lines = append(lines, "}")
 			lines = append(lines, "return result")
 			s.GoReturnStatement = strings.Join(lines, "\n")
@@ -990,7 +973,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 		}
 	}
 
-	logf("parseParameters[%v]: final params: HasOpts=%v, GoParams=%#v, GoOptsName=%#v, GoOptsType=%#v, JSParams=%#v, JSOpts=%#v, GoReturnType=%v\n\n", s.GoName, s.HasOpts, s.GoParams, s.GoOptsName, s.GoOptsType, s.JSParams, s.JSOpts, s.GoReturnType)
+	logf("parseParameters[%v]: final params: JSName=%v, HasOpts=%v, GoParamsName=%#v, GoParamsType=%#v, GoOptsName=%#v, GoOptsType=%#v, JSParams=%#v, JSOpts=%#v, GoReturnType=%v, GoReturnStatement=%v\n\n", s.GoName, s.JSName, s.HasOpts, s.GoParamsName, s.GoParamsType, s.GoOptsName, s.GoOptsType, s.JSParams, s.JSOpts, s.GoReturnType, s.GoReturnStatement)
 	return true
 }
 
@@ -1017,6 +1000,8 @@ func jsTypeToGoType(paramType string) (goType string, needsJSObject, needsArrayH
 		paramType = "[]bool"
 	case "void":
 		paramType = ""
+	case "String":
+		paramType = "string"
 	case "Boolean":
 		paramType = "bool"
 	case "*int", "int":
@@ -1185,10 +1170,17 @@ var unhandledTypes = []string{
 	"*XRInputSource",
 	"*XRReferenceSpaceType",
 	"*XRSessionMode",
+	"AccessorComponentType",
+	"AlphaState",
+	"AnimatedInputBlockTypes",
+	"AnimationChannelTargetPath",
+	"AnimationKeyInterpolation",
 	"ArrayBuffer",
 	"ArrayBufferView",
 	"ArrayLike",
+	"AssetTaskState",
 	"AudioBuffer",
+	"AudioContext",
 	"AudioNode",
 	"BabylonFileParser",
 	"Behavior",
@@ -1200,9 +1192,13 @@ var unhandledTypes = []string{
 	"CubeMapInfo",
 	"DDSInfo",
 	"DeepImmutable",
+	"DepthCullingState",
+	"DepthSortedParticle",
 	"DevicePose",
 	"DistanceJointData",
 	"Document",
+	"EXT_disjoint_timer_query",
+	"EXT_texture_filter_anisotropic",
 	"EffectWrapperCreationOptions",
 	"EngineCapabilities",
 	"EngineOptions",
@@ -1212,7 +1208,13 @@ var unhandledTypes = []string{
 	"File",
 	"Float32Array",
 	"FloatArray",
+	"GLTFLoaderAnimationStartMode",
+	"GLTFLoaderCoordinateSystemMode",
+	"GLTFLoaderState",
+	"GainNode",
+	"GetDOMTextContent",
 	"HDRInfo",
+	"HTMLButtonElement",
 	"HTMLCanvasElement",
 	"HTMLElement",
 	"HTMLImageElement",
@@ -1240,12 +1242,15 @@ var unhandledTypes = []string{
 	"IViewportOwnerLike",
 	"IndicesArray",
 	"IndividualBabylonFileParser",
+	"InspectableType",
 	"Int32Array",
 	"InternalTextureSource",
 	"IntersectionInfo",
+	"IsWindowObjectExist",
 	"JoystickAxis",
 	"KeyboardEvent",
 	"MediaStream",
+	"MediaStreamTrack",
 	"MediaTrackConstraints",
 	"MeshLoadOptions",
 	"MeshLoadOptions",
@@ -1256,6 +1261,8 @@ var unhandledTypes = []string{
 	"NodeMaterialConnectionPointDirection",
 	"NodeMaterialDefines",
 	"NodeMaterialSystemValues",
+	"Object",
+	"Orientation",
 	"PBRMaterialDefines",
 	"PhysicsGravitationalFieldEventData",
 	"PhysicsImpostorJoint",
@@ -1265,18 +1272,27 @@ var unhandledTypes = []string{
 	"PhysicsUpdraftMode",
 	"PointerEvent",
 	"PointerEventInit",
+	"PoseEnabledControllerType",
 	"ProgressEvent",
+	"RegExp",
 	"SceneOptions",
 	"SimplificationType",
 	"Space",
 	"SpringJointData",
 	"StandardMaterialDefines",
+	"StencilState",
+	"SubEmitterType",
+	"TEX",
+	"TextWrapping",
 	"TonemappingOperator",
 	"TrianglePickingPredicate",
+	"TrigonometryBlockOperations",
 	"Uint8Array",
 	"VRExperienceHelperOptions",
 	"VideoRecorderOptions",
 	"VideoTextureSettings",
+	"WEBGL_compressed_texture_s3tc",
+	"WaveBlockKind",
 	"WebGLBuffer",
 	"WebGLProgram",
 	"WebGLQuery",
@@ -1288,6 +1304,7 @@ var unhandledTypes = []string{
 	"WebXRState",
 	"Window",
 	"Worker",
+	"XMLHttpRequestResponseType",
 	"XREye",
 	"XRFrame",
 	"XRInputSource",
@@ -1296,6 +1313,8 @@ var unhandledTypes = []string{
 	"XRRenderState",
 	"XRSession",
 	"XRSessionMode",
+	"XRWebGLLayer",
+	"XRWebGLLayerOptions",
 	"_InstancesBatch",
 	"_TimeToken",
 	"null",

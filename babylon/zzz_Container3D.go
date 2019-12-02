@@ -117,118 +117,118 @@ func (c *Container3D) UpdateLayout() *Container3D {
 	return Container3DFromJSObject(retVal, c.ctx)
 }
 
-/*
-
 // BlockLayout returns the BlockLayout property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#blocklayout
-func (c *Container3D) BlockLayout(blockLayout bool) *Container3D {
-	p := ba.ctx.Get("Container3D").New(blockLayout)
-	return Container3DFromJSObject(p, ba.ctx)
+func (c *Container3D) BlockLayout() bool {
+	retVal := c.p.Get("blockLayout")
+	return retVal.Bool()
 }
 
 // SetBlockLayout sets the BlockLayout property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#blocklayout
 func (c *Container3D) SetBlockLayout(blockLayout bool) *Container3D {
-	p := ba.ctx.Get("Container3D").New(blockLayout)
-	return Container3DFromJSObject(p, ba.ctx)
+	c.p.Set("blockLayout", blockLayout)
+	return c
 }
 
 // Children returns the Children property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#children
-func (c *Container3D) Children(children []*Control3D) *Container3D {
-	p := ba.ctx.Get("Container3D").New(children)
-	return Container3DFromJSObject(p, ba.ctx)
+func (c *Container3D) Children() []*Control3D {
+	retVal := c.p.Get("children")
+	result := []*Control3D{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Control3DFromJSObject(retVal.Index(ri), c.ctx))
+	}
+	return result
 }
 
 // SetChildren sets the Children property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#children
 func (c *Container3D) SetChildren(children []*Control3D) *Container3D {
-	p := ba.ctx.Get("Container3D").New(children)
-	return Container3DFromJSObject(p, ba.ctx)
+	c.p.Set("children", children)
+	return c
 }
 
 // FACEFORWARDREVERSED_ORIENTATION returns the FACEFORWARDREVERSED_ORIENTATION property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#faceforwardreversed_orientation
-func (c *Container3D) FACEFORWARDREVERSED_ORIENTATION(FACEFORWARDREVERSED_ORIENTATION float64) *Container3D {
-	p := ba.ctx.Get("Container3D").New(FACEFORWARDREVERSED_ORIENTATION)
-	return Container3DFromJSObject(p, ba.ctx)
+func (c *Container3D) FACEFORWARDREVERSED_ORIENTATION() float64 {
+	retVal := c.p.Get("FACEFORWARDREVERSED_ORIENTATION")
+	return retVal.Float()
 }
 
 // SetFACEFORWARDREVERSED_ORIENTATION sets the FACEFORWARDREVERSED_ORIENTATION property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#faceforwardreversed_orientation
 func (c *Container3D) SetFACEFORWARDREVERSED_ORIENTATION(FACEFORWARDREVERSED_ORIENTATION float64) *Container3D {
-	p := ba.ctx.Get("Container3D").New(FACEFORWARDREVERSED_ORIENTATION)
-	return Container3DFromJSObject(p, ba.ctx)
+	c.p.Set("FACEFORWARDREVERSED_ORIENTATION", FACEFORWARDREVERSED_ORIENTATION)
+	return c
 }
 
 // FACEFORWARD_ORIENTATION returns the FACEFORWARD_ORIENTATION property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#faceforward_orientation
-func (c *Container3D) FACEFORWARD_ORIENTATION(FACEFORWARD_ORIENTATION float64) *Container3D {
-	p := ba.ctx.Get("Container3D").New(FACEFORWARD_ORIENTATION)
-	return Container3DFromJSObject(p, ba.ctx)
+func (c *Container3D) FACEFORWARD_ORIENTATION() float64 {
+	retVal := c.p.Get("FACEFORWARD_ORIENTATION")
+	return retVal.Float()
 }
 
 // SetFACEFORWARD_ORIENTATION sets the FACEFORWARD_ORIENTATION property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#faceforward_orientation
 func (c *Container3D) SetFACEFORWARD_ORIENTATION(FACEFORWARD_ORIENTATION float64) *Container3D {
-	p := ba.ctx.Get("Container3D").New(FACEFORWARD_ORIENTATION)
-	return Container3DFromJSObject(p, ba.ctx)
+	c.p.Set("FACEFORWARD_ORIENTATION", FACEFORWARD_ORIENTATION)
+	return c
 }
 
 // FACEORIGINREVERSED_ORIENTATION returns the FACEORIGINREVERSED_ORIENTATION property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#faceoriginreversed_orientation
-func (c *Container3D) FACEORIGINREVERSED_ORIENTATION(FACEORIGINREVERSED_ORIENTATION float64) *Container3D {
-	p := ba.ctx.Get("Container3D").New(FACEORIGINREVERSED_ORIENTATION)
-	return Container3DFromJSObject(p, ba.ctx)
+func (c *Container3D) FACEORIGINREVERSED_ORIENTATION() float64 {
+	retVal := c.p.Get("FACEORIGINREVERSED_ORIENTATION")
+	return retVal.Float()
 }
 
 // SetFACEORIGINREVERSED_ORIENTATION sets the FACEORIGINREVERSED_ORIENTATION property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#faceoriginreversed_orientation
 func (c *Container3D) SetFACEORIGINREVERSED_ORIENTATION(FACEORIGINREVERSED_ORIENTATION float64) *Container3D {
-	p := ba.ctx.Get("Container3D").New(FACEORIGINREVERSED_ORIENTATION)
-	return Container3DFromJSObject(p, ba.ctx)
+	c.p.Set("FACEORIGINREVERSED_ORIENTATION", FACEORIGINREVERSED_ORIENTATION)
+	return c
 }
 
 // FACEORIGIN_ORIENTATION returns the FACEORIGIN_ORIENTATION property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#faceorigin_orientation
-func (c *Container3D) FACEORIGIN_ORIENTATION(FACEORIGIN_ORIENTATION float64) *Container3D {
-	p := ba.ctx.Get("Container3D").New(FACEORIGIN_ORIENTATION)
-	return Container3DFromJSObject(p, ba.ctx)
+func (c *Container3D) FACEORIGIN_ORIENTATION() float64 {
+	retVal := c.p.Get("FACEORIGIN_ORIENTATION")
+	return retVal.Float()
 }
 
 // SetFACEORIGIN_ORIENTATION sets the FACEORIGIN_ORIENTATION property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#faceorigin_orientation
 func (c *Container3D) SetFACEORIGIN_ORIENTATION(FACEORIGIN_ORIENTATION float64) *Container3D {
-	p := ba.ctx.Get("Container3D").New(FACEORIGIN_ORIENTATION)
-	return Container3DFromJSObject(p, ba.ctx)
+	c.p.Set("FACEORIGIN_ORIENTATION", FACEORIGIN_ORIENTATION)
+	return c
 }
 
 // UNSET_ORIENTATION returns the UNSET_ORIENTATION property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#unset_orientation
-func (c *Container3D) UNSET_ORIENTATION(UNSET_ORIENTATION float64) *Container3D {
-	p := ba.ctx.Get("Container3D").New(UNSET_ORIENTATION)
-	return Container3DFromJSObject(p, ba.ctx)
+func (c *Container3D) UNSET_ORIENTATION() float64 {
+	retVal := c.p.Get("UNSET_ORIENTATION")
+	return retVal.Float()
 }
 
 // SetUNSET_ORIENTATION sets the UNSET_ORIENTATION property of class Container3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d#unset_orientation
 func (c *Container3D) SetUNSET_ORIENTATION(UNSET_ORIENTATION float64) *Container3D {
-	p := ba.ctx.Get("Container3D").New(UNSET_ORIENTATION)
-	return Container3DFromJSObject(p, ba.ctx)
+	c.p.Set("UNSET_ORIENTATION", UNSET_ORIENTATION)
+	return c
 }
-
-*/

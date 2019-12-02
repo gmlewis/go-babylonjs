@@ -103,182 +103,178 @@ func (s *StarfieldProceduralTexture) UpdateShaderUniforms() {
 	s.p.Call("updateShaderUniforms")
 }
 
-/*
-
 // Alpha returns the Alpha property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#alpha
-func (s *StarfieldProceduralTexture) Alpha(alpha float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(alpha)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Alpha() float64 {
+	retVal := s.p.Get("alpha")
+	return retVal.Float()
 }
 
 // SetAlpha sets the Alpha property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#alpha
 func (s *StarfieldProceduralTexture) SetAlpha(alpha float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(alpha)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("alpha", alpha)
+	return s
 }
 
 // Beta returns the Beta property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#beta
-func (s *StarfieldProceduralTexture) Beta(beta float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(beta)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Beta() float64 {
+	retVal := s.p.Get("beta")
+	return retVal.Float()
 }
 
 // SetBeta sets the Beta property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#beta
 func (s *StarfieldProceduralTexture) SetBeta(beta float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(beta)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("beta", beta)
+	return s
 }
 
 // Brightness returns the Brightness property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#brightness
-func (s *StarfieldProceduralTexture) Brightness(brightness float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(brightness)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Brightness() float64 {
+	retVal := s.p.Get("brightness")
+	return retVal.Float()
 }
 
 // SetBrightness sets the Brightness property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#brightness
 func (s *StarfieldProceduralTexture) SetBrightness(brightness float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(brightness)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("brightness", brightness)
+	return s
 }
 
 // Darkmatter returns the Darkmatter property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#darkmatter
-func (s *StarfieldProceduralTexture) Darkmatter(darkmatter float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(darkmatter)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Darkmatter() float64 {
+	retVal := s.p.Get("darkmatter")
+	return retVal.Float()
 }
 
 // SetDarkmatter sets the Darkmatter property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#darkmatter
 func (s *StarfieldProceduralTexture) SetDarkmatter(darkmatter float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(darkmatter)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("darkmatter", darkmatter)
+	return s
 }
 
 // Distfading returns the Distfading property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#distfading
-func (s *StarfieldProceduralTexture) Distfading(distfading float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(distfading)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Distfading() float64 {
+	retVal := s.p.Get("distfading")
+	return retVal.Float()
 }
 
 // SetDistfading sets the Distfading property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#distfading
 func (s *StarfieldProceduralTexture) SetDistfading(distfading float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(distfading)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("distfading", distfading)
+	return s
 }
 
 // Formuparam returns the Formuparam property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#formuparam
-func (s *StarfieldProceduralTexture) Formuparam(formuparam float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(formuparam)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Formuparam() float64 {
+	retVal := s.p.Get("formuparam")
+	return retVal.Float()
 }
 
 // SetFormuparam sets the Formuparam property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#formuparam
 func (s *StarfieldProceduralTexture) SetFormuparam(formuparam float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(formuparam)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("formuparam", formuparam)
+	return s
 }
 
 // Saturation returns the Saturation property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#saturation
-func (s *StarfieldProceduralTexture) Saturation(saturation float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(saturation)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Saturation() float64 {
+	retVal := s.p.Get("saturation")
+	return retVal.Float()
 }
 
 // SetSaturation sets the Saturation property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#saturation
 func (s *StarfieldProceduralTexture) SetSaturation(saturation float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(saturation)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("saturation", saturation)
+	return s
 }
 
 // Stepsize returns the Stepsize property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#stepsize
-func (s *StarfieldProceduralTexture) Stepsize(stepsize float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(stepsize)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Stepsize() float64 {
+	retVal := s.p.Get("stepsize")
+	return retVal.Float()
 }
 
 // SetStepsize sets the Stepsize property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#stepsize
 func (s *StarfieldProceduralTexture) SetStepsize(stepsize float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(stepsize)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("stepsize", stepsize)
+	return s
 }
 
 // Tile returns the Tile property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#tile
-func (s *StarfieldProceduralTexture) Tile(tile float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(tile)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Tile() float64 {
+	retVal := s.p.Get("tile")
+	return retVal.Float()
 }
 
 // SetTile sets the Tile property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#tile
 func (s *StarfieldProceduralTexture) SetTile(tile float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(tile)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("tile", tile)
+	return s
 }
 
 // Time returns the Time property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#time
-func (s *StarfieldProceduralTexture) Time(time float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(time)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Time() float64 {
+	retVal := s.p.Get("time")
+	return retVal.Float()
 }
 
 // SetTime sets the Time property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#time
 func (s *StarfieldProceduralTexture) SetTime(time float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(time)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("time", time)
+	return s
 }
 
 // Zoom returns the Zoom property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#zoom
-func (s *StarfieldProceduralTexture) Zoom(zoom float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(zoom)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+func (s *StarfieldProceduralTexture) Zoom() float64 {
+	retVal := s.p.Get("zoom")
+	return retVal.Float()
 }
 
 // SetZoom sets the Zoom property of class StarfieldProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#zoom
 func (s *StarfieldProceduralTexture) SetZoom(zoom float64) *StarfieldProceduralTexture {
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(zoom)
-	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
+	s.p.Set("zoom", zoom)
+	return s
 }
-
-*/

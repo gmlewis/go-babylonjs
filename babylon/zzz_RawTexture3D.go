@@ -98,22 +98,18 @@ func (r *RawTexture3D) Update(data js.Value) {
 	r.p.Call("update", args...)
 }
 
-/*
-
 // Format returns the Format property of class RawTexture3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#format
-func (r *RawTexture3D) Format(format float64) *RawTexture3D {
-	p := ba.ctx.Get("RawTexture3D").New(format)
-	return RawTexture3DFromJSObject(p, ba.ctx)
+func (r *RawTexture3D) Format() float64 {
+	retVal := r.p.Get("format")
+	return retVal.Float()
 }
 
 // SetFormat sets the Format property of class RawTexture3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#format
 func (r *RawTexture3D) SetFormat(format float64) *RawTexture3D {
-	p := ba.ctx.Get("RawTexture3D").New(format)
-	return RawTexture3DFromJSObject(p, ba.ctx)
+	r.p.Set("format", format)
+	return r
 }
-
-*/

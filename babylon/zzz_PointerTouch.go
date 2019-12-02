@@ -36,70 +36,66 @@ func PointerTouchArrayToJSArray(array []*PointerTouch) []interface{} {
 	return result
 }
 
-/*
-
 // PointerId returns the PointerId property of class PointerTouch.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointertouch#pointerid
-func (p *PointerTouch) PointerId(pointerId float64) *PointerTouch {
-	p := ba.ctx.Get("PointerTouch").New(pointerId)
-	return PointerTouchFromJSObject(p, ba.ctx)
+func (p *PointerTouch) PointerId() float64 {
+	retVal := p.p.Get("pointerId")
+	return retVal.Float()
 }
 
 // SetPointerId sets the PointerId property of class PointerTouch.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointertouch#pointerid
 func (p *PointerTouch) SetPointerId(pointerId float64) *PointerTouch {
-	p := ba.ctx.Get("PointerTouch").New(pointerId)
-	return PointerTouchFromJSObject(p, ba.ctx)
+	p.p.Set("pointerId", pointerId)
+	return p
 }
 
 // Type returns the Type property of class PointerTouch.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointertouch#type
-func (p *PointerTouch) Type(jsType interface{}) *PointerTouch {
-	p := ba.ctx.Get("PointerTouch").New(jsType)
-	return PointerTouchFromJSObject(p, ba.ctx)
+func (p *PointerTouch) Type() interface{} {
+	retVal := p.p.Get("type")
+	return retVal
 }
 
 // SetType sets the Type property of class PointerTouch.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointertouch#type
 func (p *PointerTouch) SetType(jsType interface{}) *PointerTouch {
-	p := ba.ctx.Get("PointerTouch").New(jsType)
-	return PointerTouchFromJSObject(p, ba.ctx)
+	p.p.Set("type", jsType)
+	return p
 }
 
 // X returns the X property of class PointerTouch.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointertouch#x
-func (p *PointerTouch) X(x float64) *PointerTouch {
-	p := ba.ctx.Get("PointerTouch").New(x)
-	return PointerTouchFromJSObject(p, ba.ctx)
+func (p *PointerTouch) X() float64 {
+	retVal := p.p.Get("x")
+	return retVal.Float()
 }
 
 // SetX sets the X property of class PointerTouch.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointertouch#x
 func (p *PointerTouch) SetX(x float64) *PointerTouch {
-	p := ba.ctx.Get("PointerTouch").New(x)
-	return PointerTouchFromJSObject(p, ba.ctx)
+	p.p.Set("x", x)
+	return p
 }
 
 // Y returns the Y property of class PointerTouch.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointertouch#y
-func (p *PointerTouch) Y(y float64) *PointerTouch {
-	p := ba.ctx.Get("PointerTouch").New(y)
-	return PointerTouchFromJSObject(p, ba.ctx)
+func (p *PointerTouch) Y() float64 {
+	retVal := p.p.Get("y")
+	return retVal.Float()
 }
 
 // SetY sets the Y property of class PointerTouch.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointertouch#y
 func (p *PointerTouch) SetY(y float64) *PointerTouch {
-	p := ba.ctx.Get("PointerTouch").New(y)
-	return PointerTouchFromJSObject(p, ba.ctx)
+	p.p.Set("y", y)
+	return p
 }
-
-*/

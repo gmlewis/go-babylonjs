@@ -76,7 +76,3 @@ func (h *HDRTools) RGBE_ReadPixels(uint8array js.Value, hdrInfo js.Value) js.Val
 	retVal := h.p.Call("RGBE_ReadPixels", args...)
 	return retVal
 }
-
-/*
-
- */

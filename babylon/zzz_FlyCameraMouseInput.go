@@ -119,134 +119,130 @@ func (f *FlyCameraMouseInput) GetSimpleName() string {
 	return retVal.String()
 }
 
-/*
-
 // ActiveButton returns the ActiveButton property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#activebutton
-func (f *FlyCameraMouseInput) ActiveButton(activeButton float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(activeButton)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraMouseInput) ActiveButton() float64 {
+	retVal := f.p.Get("activeButton")
+	return retVal.Float()
 }
 
 // SetActiveButton sets the ActiveButton property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#activebutton
 func (f *FlyCameraMouseInput) SetActiveButton(activeButton float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(activeButton)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+	f.p.Set("activeButton", activeButton)
+	return f
 }
 
 // AngularSensibility returns the AngularSensibility property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#angularsensibility
-func (f *FlyCameraMouseInput) AngularSensibility(angularSensibility float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(angularSensibility)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraMouseInput) AngularSensibility() float64 {
+	retVal := f.p.Get("angularSensibility")
+	return retVal.Float()
 }
 
 // SetAngularSensibility sets the AngularSensibility property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#angularsensibility
 func (f *FlyCameraMouseInput) SetAngularSensibility(angularSensibility float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(angularSensibility)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+	f.p.Set("angularSensibility", angularSensibility)
+	return f
 }
 
 // Buttons returns the Buttons property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttons
-func (f *FlyCameraMouseInput) Buttons(buttons float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(buttons)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraMouseInput) Buttons() float64 {
+	retVal := f.p.Get("buttons")
+	return retVal.Float()
 }
 
 // SetButtons sets the Buttons property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttons
 func (f *FlyCameraMouseInput) SetButtons(buttons float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(buttons)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+	f.p.Set("buttons", buttons)
+	return f
 }
 
 // ButtonsPitch returns the ButtonsPitch property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonspitch
-func (f *FlyCameraMouseInput) ButtonsPitch(buttonsPitch float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(buttonsPitch)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraMouseInput) ButtonsPitch() float64 {
+	retVal := f.p.Get("buttonsPitch")
+	return retVal.Float()
 }
 
 // SetButtonsPitch sets the ButtonsPitch property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonspitch
 func (f *FlyCameraMouseInput) SetButtonsPitch(buttonsPitch float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(buttonsPitch)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+	f.p.Set("buttonsPitch", buttonsPitch)
+	return f
 }
 
 // ButtonsRoll returns the ButtonsRoll property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonsroll
-func (f *FlyCameraMouseInput) ButtonsRoll(buttonsRoll float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(buttonsRoll)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraMouseInput) ButtonsRoll() float64 {
+	retVal := f.p.Get("buttonsRoll")
+	return retVal.Float()
 }
 
 // SetButtonsRoll sets the ButtonsRoll property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonsroll
 func (f *FlyCameraMouseInput) SetButtonsRoll(buttonsRoll float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(buttonsRoll)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+	f.p.Set("buttonsRoll", buttonsRoll)
+	return f
 }
 
 // ButtonsYaw returns the ButtonsYaw property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonsyaw
-func (f *FlyCameraMouseInput) ButtonsYaw(buttonsYaw float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(buttonsYaw)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraMouseInput) ButtonsYaw() float64 {
+	retVal := f.p.Get("buttonsYaw")
+	return retVal.Float()
 }
 
 // SetButtonsYaw sets the ButtonsYaw property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonsyaw
 func (f *FlyCameraMouseInput) SetButtonsYaw(buttonsYaw float64) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(buttonsYaw)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+	f.p.Set("buttonsYaw", buttonsYaw)
+	return f
 }
 
 // Camera returns the Camera property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#camera
-func (f *FlyCameraMouseInput) Camera(camera *FlyCamera) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(camera.JSObject())
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraMouseInput) Camera() *FlyCamera {
+	retVal := f.p.Get("camera")
+	return FlyCameraFromJSObject(retVal, f.ctx)
 }
 
 // SetCamera sets the Camera property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#camera
 func (f *FlyCameraMouseInput) SetCamera(camera *FlyCamera) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(camera.JSObject())
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+	f.p.Set("camera", camera.JSObject())
+	return f
 }
 
 // TouchEnabled returns the TouchEnabled property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#touchenabled
-func (f *FlyCameraMouseInput) TouchEnabled(touchEnabled bool) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(touchEnabled)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+func (f *FlyCameraMouseInput) TouchEnabled() bool {
+	retVal := f.p.Get("touchEnabled")
+	return retVal.Bool()
 }
 
 // SetTouchEnabled sets the TouchEnabled property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#touchenabled
 func (f *FlyCameraMouseInput) SetTouchEnabled(touchEnabled bool) *FlyCameraMouseInput {
-	p := ba.ctx.Get("FlyCameraMouseInput").New(touchEnabled)
-	return FlyCameraMouseInputFromJSObject(p, ba.ctx)
+	f.p.Set("touchEnabled", touchEnabled)
+	return f
 }
-
-*/

@@ -58,54 +58,50 @@ func (d *DerivativeBlock) GetClassName() string {
 	return retVal.String()
 }
 
-/*
-
 // Dx returns the Dx property of class DerivativeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock#dx
-func (d *DerivativeBlock) Dx(dx *NodeMaterialConnectionPoint) *DerivativeBlock {
-	p := ba.ctx.Get("DerivativeBlock").New(dx.JSObject())
-	return DerivativeBlockFromJSObject(p, ba.ctx)
+func (d *DerivativeBlock) Dx() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("dx")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetDx sets the Dx property of class DerivativeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock#dx
 func (d *DerivativeBlock) SetDx(dx *NodeMaterialConnectionPoint) *DerivativeBlock {
-	p := ba.ctx.Get("DerivativeBlock").New(dx.JSObject())
-	return DerivativeBlockFromJSObject(p, ba.ctx)
+	d.p.Set("dx", dx.JSObject())
+	return d
 }
 
 // Dy returns the Dy property of class DerivativeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock#dy
-func (d *DerivativeBlock) Dy(dy *NodeMaterialConnectionPoint) *DerivativeBlock {
-	p := ba.ctx.Get("DerivativeBlock").New(dy.JSObject())
-	return DerivativeBlockFromJSObject(p, ba.ctx)
+func (d *DerivativeBlock) Dy() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("dy")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetDy sets the Dy property of class DerivativeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock#dy
 func (d *DerivativeBlock) SetDy(dy *NodeMaterialConnectionPoint) *DerivativeBlock {
-	p := ba.ctx.Get("DerivativeBlock").New(dy.JSObject())
-	return DerivativeBlockFromJSObject(p, ba.ctx)
+	d.p.Set("dy", dy.JSObject())
+	return d
 }
 
 // Input returns the Input property of class DerivativeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock#input
-func (d *DerivativeBlock) Input(input *NodeMaterialConnectionPoint) *DerivativeBlock {
-	p := ba.ctx.Get("DerivativeBlock").New(input.JSObject())
-	return DerivativeBlockFromJSObject(p, ba.ctx)
+func (d *DerivativeBlock) Input() *NodeMaterialConnectionPoint {
+	retVal := d.p.Get("input")
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
 }
 
 // SetInput sets the Input property of class DerivativeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock#input
 func (d *DerivativeBlock) SetInput(input *NodeMaterialConnectionPoint) *DerivativeBlock {
-	p := ba.ctx.Get("DerivativeBlock").New(input.JSObject())
-	return DerivativeBlockFromJSObject(p, ba.ctx)
+	d.p.Set("input", input.JSObject())
+	return d
 }
-
-*/

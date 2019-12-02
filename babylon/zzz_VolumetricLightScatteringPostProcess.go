@@ -160,166 +160,154 @@ func (v *VolumetricLightScatteringPostProcess) SetCustomMeshPosition(position *V
 	v.p.Call("setCustomMeshPosition", args...)
 }
 
-/*
-
 // AttachedNode returns the AttachedNode property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#attachednode
-func (v *VolumetricLightScatteringPostProcess) AttachedNode(attachedNode js.Value) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(attachedNode)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+func (v *VolumetricLightScatteringPostProcess) AttachedNode() js.Value {
+	retVal := v.p.Get("attachedNode")
+	return retVal
 }
 
 // SetAttachedNode sets the AttachedNode property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#attachednode
 func (v *VolumetricLightScatteringPostProcess) SetAttachedNode(attachedNode js.Value) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(attachedNode)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+	v.p.Set("attachedNode", attachedNode)
+	return v
 }
 
 // CustomMeshPosition returns the CustomMeshPosition property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#custommeshposition
-func (v *VolumetricLightScatteringPostProcess) CustomMeshPosition(customMeshPosition *Vector3) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(customMeshPosition.JSObject())
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
-}
-
-// SetCustomMeshPosition sets the CustomMeshPosition property of class VolumetricLightScatteringPostProcess.
-//
-// https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#custommeshposition
-func (v *VolumetricLightScatteringPostProcess) SetCustomMeshPosition(customMeshPosition *Vector3) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(customMeshPosition.JSObject())
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+func (v *VolumetricLightScatteringPostProcess) CustomMeshPosition() *Vector3 {
+	retVal := v.p.Get("customMeshPosition")
+	return Vector3FromJSObject(retVal, v.ctx)
 }
 
 // Decay returns the Decay property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#decay
-func (v *VolumetricLightScatteringPostProcess) Decay(decay float64) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(decay)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+func (v *VolumetricLightScatteringPostProcess) Decay() float64 {
+	retVal := v.p.Get("decay")
+	return retVal.Float()
 }
 
 // SetDecay sets the Decay property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#decay
 func (v *VolumetricLightScatteringPostProcess) SetDecay(decay float64) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(decay)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+	v.p.Set("decay", decay)
+	return v
 }
 
 // Density returns the Density property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#density
-func (v *VolumetricLightScatteringPostProcess) Density(density float64) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(density)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+func (v *VolumetricLightScatteringPostProcess) Density() float64 {
+	retVal := v.p.Get("density")
+	return retVal.Float()
 }
 
 // SetDensity sets the Density property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#density
 func (v *VolumetricLightScatteringPostProcess) SetDensity(density float64) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(density)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+	v.p.Set("density", density)
+	return v
 }
 
 // ExcludedMeshes returns the ExcludedMeshes property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#excludedmeshes
-func (v *VolumetricLightScatteringPostProcess) ExcludedMeshes(excludedMeshes *AbstractMesh) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(excludedMeshes.JSObject())
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+func (v *VolumetricLightScatteringPostProcess) ExcludedMeshes() *AbstractMesh {
+	retVal := v.p.Get("excludedMeshes")
+	return AbstractMeshFromJSObject(retVal, v.ctx)
 }
 
 // SetExcludedMeshes sets the ExcludedMeshes property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#excludedmeshes
 func (v *VolumetricLightScatteringPostProcess) SetExcludedMeshes(excludedMeshes *AbstractMesh) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(excludedMeshes.JSObject())
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+	v.p.Set("excludedMeshes", excludedMeshes.JSObject())
+	return v
 }
 
 // Exposure returns the Exposure property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#exposure
-func (v *VolumetricLightScatteringPostProcess) Exposure(exposure float64) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(exposure)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+func (v *VolumetricLightScatteringPostProcess) Exposure() float64 {
+	retVal := v.p.Get("exposure")
+	return retVal.Float()
 }
 
 // SetExposure sets the Exposure property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#exposure
 func (v *VolumetricLightScatteringPostProcess) SetExposure(exposure float64) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(exposure)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+	v.p.Set("exposure", exposure)
+	return v
 }
 
 // Invert returns the Invert property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#invert
-func (v *VolumetricLightScatteringPostProcess) Invert(invert bool) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(invert)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+func (v *VolumetricLightScatteringPostProcess) Invert() bool {
+	retVal := v.p.Get("invert")
+	return retVal.Bool()
 }
 
 // SetInvert sets the Invert property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#invert
 func (v *VolumetricLightScatteringPostProcess) SetInvert(invert bool) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(invert)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+	v.p.Set("invert", invert)
+	return v
 }
 
 // Mesh returns the Mesh property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#mesh
-func (v *VolumetricLightScatteringPostProcess) Mesh(mesh *Mesh) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(mesh.JSObject())
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+func (v *VolumetricLightScatteringPostProcess) Mesh() *Mesh {
+	retVal := v.p.Get("mesh")
+	return MeshFromJSObject(retVal, v.ctx)
 }
 
 // SetMesh sets the Mesh property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#mesh
 func (v *VolumetricLightScatteringPostProcess) SetMesh(mesh *Mesh) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(mesh.JSObject())
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+	v.p.Set("mesh", mesh.JSObject())
+	return v
 }
 
 // UseCustomMeshPosition returns the UseCustomMeshPosition property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#usecustommeshposition
-func (v *VolumetricLightScatteringPostProcess) UseCustomMeshPosition(useCustomMeshPosition bool) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(useCustomMeshPosition)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+func (v *VolumetricLightScatteringPostProcess) UseCustomMeshPosition() bool {
+	retVal := v.p.Get("useCustomMeshPosition")
+	return retVal.Bool()
 }
 
 // SetUseCustomMeshPosition sets the UseCustomMeshPosition property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#usecustommeshposition
 func (v *VolumetricLightScatteringPostProcess) SetUseCustomMeshPosition(useCustomMeshPosition bool) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(useCustomMeshPosition)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+	v.p.Set("useCustomMeshPosition", useCustomMeshPosition)
+	return v
 }
 
 // Weight returns the Weight property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#weight
-func (v *VolumetricLightScatteringPostProcess) Weight(weight float64) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(weight)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+func (v *VolumetricLightScatteringPostProcess) Weight() float64 {
+	retVal := v.p.Get("weight")
+	return retVal.Float()
 }
 
 // SetWeight sets the Weight property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#weight
 func (v *VolumetricLightScatteringPostProcess) SetWeight(weight float64) *VolumetricLightScatteringPostProcess {
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(weight)
-	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
+	v.p.Set("weight", weight)
+	return v
 }
-
-*/

@@ -49,38 +49,34 @@ func (w *WebXRRenderTarget) InitializeXRLayerAsync(xrSession js.Value) *Promise 
 	return PromiseFromJSObject(retVal, w.ctx)
 }
 
-/*
-
 // CanvasContext returns the CanvasContext property of class WebXRRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrrendertarget#canvascontext
-func (w *WebXRRenderTarget) CanvasContext(canvasContext js.Value) *WebXRRenderTarget {
-	p := ba.ctx.Get("WebXRRenderTarget").New(canvasContext)
-	return WebXRRenderTargetFromJSObject(p, ba.ctx)
+func (w *WebXRRenderTarget) CanvasContext() js.Value {
+	retVal := w.p.Get("canvasContext")
+	return retVal
 }
 
 // SetCanvasContext sets the CanvasContext property of class WebXRRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrrendertarget#canvascontext
 func (w *WebXRRenderTarget) SetCanvasContext(canvasContext js.Value) *WebXRRenderTarget {
-	p := ba.ctx.Get("WebXRRenderTarget").New(canvasContext)
-	return WebXRRenderTargetFromJSObject(p, ba.ctx)
+	w.p.Set("canvasContext", canvasContext)
+	return w
 }
 
 // XrLayer returns the XrLayer property of class WebXRRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrrendertarget#xrlayer
-func (w *WebXRRenderTarget) XrLayer(xrLayer *XRWebGLLayer) *WebXRRenderTarget {
-	p := ba.ctx.Get("WebXRRenderTarget").New(xrLayer.JSObject())
-	return WebXRRenderTargetFromJSObject(p, ba.ctx)
+func (w *WebXRRenderTarget) XrLayer() js.Value {
+	retVal := w.p.Get("xrLayer")
+	return retVal
 }
 
 // SetXrLayer sets the XrLayer property of class WebXRRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrrendertarget#xrlayer
-func (w *WebXRRenderTarget) SetXrLayer(xrLayer *XRWebGLLayer) *WebXRRenderTarget {
-	p := ba.ctx.Get("WebXRRenderTarget").New(xrLayer.JSObject())
-	return WebXRRenderTargetFromJSObject(p, ba.ctx)
+func (w *WebXRRenderTarget) SetXrLayer(xrLayer js.Value) *WebXRRenderTarget {
+	w.p.Set("xrLayer", xrLayer)
+	return w
 }
-
-*/

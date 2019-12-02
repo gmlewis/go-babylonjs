@@ -36,102 +36,98 @@ func InstancingAttributeInfoArrayToJSArray(array []*InstancingAttributeInfo) []i
 	return result
 }
 
-/*
-
 // AttributeName returns the AttributeName property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#attributename
-func (i *InstancingAttributeInfo) AttributeName(attributeName string) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(attributeName)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+func (i *InstancingAttributeInfo) AttributeName() string {
+	retVal := i.p.Get("attributeName")
+	return retVal.String()
 }
 
 // SetAttributeName sets the AttributeName property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#attributename
 func (i *InstancingAttributeInfo) SetAttributeName(attributeName string) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(attributeName)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+	i.p.Set("attributeName", attributeName)
+	return i
 }
 
 // AttributeSize returns the AttributeSize property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#attributesize
-func (i *InstancingAttributeInfo) AttributeSize(attributeSize float64) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(attributeSize)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+func (i *InstancingAttributeInfo) AttributeSize() float64 {
+	retVal := i.p.Get("attributeSize")
+	return retVal.Float()
 }
 
 // SetAttributeSize sets the AttributeSize property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#attributesize
 func (i *InstancingAttributeInfo) SetAttributeSize(attributeSize float64) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(attributeSize)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+	i.p.Set("attributeSize", attributeSize)
+	return i
 }
 
 // AttributeType returns the AttributeType property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#attributetype
-func (i *InstancingAttributeInfo) AttributeType(attributeType float64) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(attributeType)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+func (i *InstancingAttributeInfo) AttributeType() float64 {
+	retVal := i.p.Get("attributeType")
+	return retVal.Float()
 }
 
 // SetAttributeType sets the AttributeType property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#attributetype
 func (i *InstancingAttributeInfo) SetAttributeType(attributeType float64) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(attributeType)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+	i.p.Set("attributeType", attributeType)
+	return i
 }
 
 // Index returns the Index property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#index
-func (i *InstancingAttributeInfo) Index(index float64) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(index)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+func (i *InstancingAttributeInfo) Index() float64 {
+	retVal := i.p.Get("index")
+	return retVal.Float()
 }
 
 // SetIndex sets the Index property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#index
 func (i *InstancingAttributeInfo) SetIndex(index float64) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(index)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+	i.p.Set("index", index)
+	return i
 }
 
 // Normalized returns the Normalized property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#normalized
-func (i *InstancingAttributeInfo) Normalized(normalized bool) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(normalized)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+func (i *InstancingAttributeInfo) Normalized() bool {
+	retVal := i.p.Get("normalized")
+	return retVal.Bool()
 }
 
 // SetNormalized sets the Normalized property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#normalized
 func (i *InstancingAttributeInfo) SetNormalized(normalized bool) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(normalized)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+	i.p.Set("normalized", normalized)
+	return i
 }
 
 // Offset returns the Offset property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#offset
-func (i *InstancingAttributeInfo) Offset(offset float64) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(offset)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+func (i *InstancingAttributeInfo) Offset() float64 {
+	retVal := i.p.Get("offset")
+	return retVal.Float()
 }
 
 // SetOffset sets the Offset property of class InstancingAttributeInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancingattributeinfo#offset
 func (i *InstancingAttributeInfo) SetOffset(offset float64) *InstancingAttributeInfo {
-	p := ba.ctx.Get("InstancingAttributeInfo").New(offset)
-	return InstancingAttributeInfoFromJSObject(p, ba.ctx)
+	i.p.Set("offset", offset)
+	return i
 }
-
-*/

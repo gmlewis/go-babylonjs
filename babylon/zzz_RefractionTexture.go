@@ -86,38 +86,34 @@ func (r *RefractionTexture) Serialize() interface{} {
 	return retVal
 }
 
-/*
-
 // Depth returns the Depth property of class RefractionTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractiontexture#depth
-func (r *RefractionTexture) Depth(depth float64) *RefractionTexture {
-	p := ba.ctx.Get("RefractionTexture").New(depth)
-	return RefractionTextureFromJSObject(p, ba.ctx)
+func (r *RefractionTexture) Depth() float64 {
+	retVal := r.p.Get("depth")
+	return retVal.Float()
 }
 
 // SetDepth sets the Depth property of class RefractionTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractiontexture#depth
 func (r *RefractionTexture) SetDepth(depth float64) *RefractionTexture {
-	p := ba.ctx.Get("RefractionTexture").New(depth)
-	return RefractionTextureFromJSObject(p, ba.ctx)
+	r.p.Set("depth", depth)
+	return r
 }
 
 // RefractionPlane returns the RefractionPlane property of class RefractionTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refractionplane
-func (r *RefractionTexture) RefractionPlane(refractionPlane *Plane) *RefractionTexture {
-	p := ba.ctx.Get("RefractionTexture").New(refractionPlane.JSObject())
-	return RefractionTextureFromJSObject(p, ba.ctx)
+func (r *RefractionTexture) RefractionPlane() *Plane {
+	retVal := r.p.Get("refractionPlane")
+	return PlaneFromJSObject(retVal, r.ctx)
 }
 
 // SetRefractionPlane sets the RefractionPlane property of class RefractionTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refractionplane
 func (r *RefractionTexture) SetRefractionPlane(refractionPlane *Plane) *RefractionTexture {
-	p := ba.ctx.Get("RefractionTexture").New(refractionPlane.JSObject())
-	return RefractionTextureFromJSObject(p, ba.ctx)
+	r.p.Set("refractionPlane", refractionPlane.JSObject())
+	return r
 }
-
-*/

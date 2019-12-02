@@ -81,54 +81,50 @@ func (w *WaveBlock) _deserialize(serializationObject interface{}, scene *Scene, 
 	w.p.Call("_deserialize", args...)
 }
 
-/*
-
 // Input returns the Input property of class WaveBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.waveblock#input
-func (w *WaveBlock) Input(input *NodeMaterialConnectionPoint) *WaveBlock {
-	p := ba.ctx.Get("WaveBlock").New(input.JSObject())
-	return WaveBlockFromJSObject(p, ba.ctx)
+func (w *WaveBlock) Input() *NodeMaterialConnectionPoint {
+	retVal := w.p.Get("input")
+	return NodeMaterialConnectionPointFromJSObject(retVal, w.ctx)
 }
 
 // SetInput sets the Input property of class WaveBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.waveblock#input
 func (w *WaveBlock) SetInput(input *NodeMaterialConnectionPoint) *WaveBlock {
-	p := ba.ctx.Get("WaveBlock").New(input.JSObject())
-	return WaveBlockFromJSObject(p, ba.ctx)
+	w.p.Set("input", input.JSObject())
+	return w
 }
 
 // Kind returns the Kind property of class WaveBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.waveblock#kind
-func (w *WaveBlock) Kind(kind *WaveBlockKind) *WaveBlock {
-	p := ba.ctx.Get("WaveBlock").New(kind.JSObject())
-	return WaveBlockFromJSObject(p, ba.ctx)
+func (w *WaveBlock) Kind() js.Value {
+	retVal := w.p.Get("kind")
+	return retVal
 }
 
 // SetKind sets the Kind property of class WaveBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.waveblock#kind
-func (w *WaveBlock) SetKind(kind *WaveBlockKind) *WaveBlock {
-	p := ba.ctx.Get("WaveBlock").New(kind.JSObject())
-	return WaveBlockFromJSObject(p, ba.ctx)
+func (w *WaveBlock) SetKind(kind js.Value) *WaveBlock {
+	w.p.Set("kind", kind)
+	return w
 }
 
 // Output returns the Output property of class WaveBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.waveblock#output
-func (w *WaveBlock) Output(output *NodeMaterialConnectionPoint) *WaveBlock {
-	p := ba.ctx.Get("WaveBlock").New(output.JSObject())
-	return WaveBlockFromJSObject(p, ba.ctx)
+func (w *WaveBlock) Output() *NodeMaterialConnectionPoint {
+	retVal := w.p.Get("output")
+	return NodeMaterialConnectionPointFromJSObject(retVal, w.ctx)
 }
 
 // SetOutput sets the Output property of class WaveBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.waveblock#output
 func (w *WaveBlock) SetOutput(output *NodeMaterialConnectionPoint) *WaveBlock {
-	p := ba.ctx.Get("WaveBlock").New(output.JSObject())
-	return WaveBlockFromJSObject(p, ba.ctx)
+	w.p.Set("output", output.JSObject())
+	return w
 }
-
-*/
