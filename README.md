@@ -2,6 +2,24 @@
 
 Experimental Go binding to Babylon.js using WebAssembly.
 
+
+## Dependencies
+
+- [Go](https://golang.org) version 1.13.4 or later
+- [TinyGo](https://tinygo.org) version 0.10.0 or later
+- [go-wasm-cli](https://github.com/mfrachet/go-wasm-cli)
+
+## Running an example
+
+You can use the `run.sh` bash script and the example number found in
+the [examples directory](/examples) to locally build and serve an
+example in your browser (using `go-wasm start`):
+
+```sh
+$ ./run.sh 11
+(ctrl-c to quit)
+```
+
 ----------------------------------------------------------------------
 
 Enjoy!
