@@ -72,9 +72,9 @@ func main() {
 			localOrigin := b.CreateBox("local_origin", &babylon.BoxOpts{Size: Float64(1)}, scene)
 			localOrigin.SetIsVisible(false)
 
-			pilotLocalAxisX.SetParent(localOrigin)
-			pilotLocalAxisY.SetParent(localOrigin)
-			pilotLocalAxisZ.SetParent(localOrigin)
+			pilotLocalAxisX.SetParent(localOrigin.Node)
+			pilotLocalAxisY.SetParent(localOrigin.Node)
+			pilotLocalAxisZ.SetParent(localOrigin.Node)
 
 			return localOrigin
 		}
@@ -84,10 +84,10 @@ func main() {
 		body := b.CreateCylinder("body", &babylon.CylinderOpts{Height: Float64(0.75), DiameterTop: Float64(0.2), DiameterBottom: Float64(0.5), Tessellation: Float64(6), Subdivisions: Float64(1)}, scene)
 		arm := b.CreateBox("arm", &babylon.BoxOpts{Height: Float64(0.75), Width: Float64(0.3), Depth: Float64(0.1875)}, scene)
 		arm.Position().SetX(0.125)
-		pilot := b.Mesh().MergeMeshes([]*babylon.Mesh{body, arm}, &babylon.MergeMeshesOpts{DisposeSource: Bool(true)})
+		pilot := b.Mesh().MergeMeshes([]*babylon.Mesh{body, arm}, &babylon.MeshMergeMeshesOpts{DisposeSource: Bool(true)})
 
 		localOrigin := localAxes(2)
-		localOrigin.parent = pilot
+		localOrigin.SetParent(pilot.Node)
 		/*************End Pilot****************************************/
 
 		//#####################BABYLON 101 DEMO CODE POSITION###################
@@ -98,36 +98,58 @@ func main() {
 
 		/*********************************Start World Axes********************/
 		showAxis := func(size float64) {
-			makeTextPlane := func(text string, color *babylon.Color4, size float64) *babylon.Plane {
-				dynamicTexture := b.NewDynamicTexture("DynamicTexture", 50, scene, true)
+			makeTextPlane := func(text string, color string, size float64) *babylon.Mesh {
+				dynamicTexture := b.NewDynamicTexture("DynamicTexture", 50, scene, true, nil)
 				dynamicTexture.SetHasAlpha(true)
-				dynamicTexture.DrawText(text, 5, 40, "bold 36px Arial", color, "transparent", true)
-				plane := b.CreatePlane("TextPlane", size, scene, true)
-				plane.SetMaterial(b.NewStandardMaterial("TextPlaneMaterial", scene))
-				plane.Material.SetBackFaceCulling(false)
-				plane.Material.SetSpecularColor(b.NewColor3(0, 0, 0))
-				plane.Material.SetDiffuseTexture(dynamicTexture)
+				dynamicTexture.DrawText(text, 5, 40, "bold 36px Arial", color, "transparent", &babylon.DynamicTextureDrawTextOpts{InvertY: Bool(true)})
+				plane := b.CreatePlane("TextPlane", &babylon.PlaneOpts{Size: &size}, scene)
+				// plane.SetMaterial(b.NewStandardMaterial("TextPlaneMaterial", scene))
+				mat := b.NewStandardMaterial("TextPlaneMaterial", scene)
+				plane.JSObject().Set("material", mat.JSObject())
+				plane.Material().SetBackFaceCulling(false)
+				mat.SetSpecularColor(b.NewColor3(0, 0, 0))
+				mat.SetDiffuseTexture(dynamicTexture.BaseTexture)
 				return plane
 			}
 
-			axisX := b.CreateLines("axisX", []*babylon.Vector3{
-				b.Vector3().Zero(), b.NewVector3(size, 0, 0), b.NewVector3(size*0.95, 0.05*size, 0),
-				b.NewVector3(size, 0, 0), b.NewVector3(size*0.95, -0.05*size, 0),
-			}, scene)
+			xOpts := &babylon.LinesOpts{
+				Points: []*babylon.Vector3{
+					b.Vector3().Zero(),
+					b.NewVector3(size, 0, 0),
+					b.NewVector3(size*0.95, 0.05*size, 0),
+					b.NewVector3(size, 0, 0),
+					b.NewVector3(size*0.95, -0.05*size, 0),
+				},
+			}
+			axisX := b.CreateLines("axisX", xOpts, scene)
 			axisX.SetColor(b.NewColor3(1, 0, 0))
 			xChar := makeTextPlane("X", "red", size/10)
 			xChar.SetPosition(b.NewVector3(0.9*size, -0.05*size, 0))
-			axisY := b.CreateLines("axisY", []*babylon.Vector3{
-				b.Vector3().Zero(), b.NewVector3(0, size, 0), b.NewVector3(-0.05*size, size*0.95, 0),
-				b.NewVector3(0, size, 0), b.NewVector3(0.05*size, size*0.95, 0),
-			}, scene)
+
+			yOpts := &babylon.LinesOpts{
+				Points: []*babylon.Vector3{
+					b.Vector3().Zero(),
+					b.NewVector3(0, size, 0),
+					b.NewVector3(-0.05*size, size*0.95, 0),
+					b.NewVector3(0, size, 0),
+					b.NewVector3(0.05*size, size*0.95, 0),
+				},
+			}
+			axisY := b.CreateLines("axisY", yOpts, scene)
 			axisY.SetColor(b.NewColor3(0, 1, 0))
 			yChar := makeTextPlane("Y", "green", size/10)
 			yChar.SetPosition(b.NewVector3(0, 0.9*size, -0.05*size))
-			axisZ := b.CreateLines("axisZ", []*babylon.Vector3{
-				b.Vector3().Zero(), b.NewVector3(0, 0, size), b.NewVector3(0, -0.05*size, size*0.95),
-				b.NewVector3(0, 0, size), b.NewVector3(0, 0.05*size, size*0.95),
-			}, scene)
+
+			zOpts := &babylon.LinesOpts{
+				Points: []*babylon.Vector3{
+					b.Vector3().Zero(),
+					b.NewVector3(0, 0, size),
+					b.NewVector3(0, -0.05*size, size*0.95),
+					b.NewVector3(0, 0, size),
+					b.NewVector3(0, 0.05*size, size*0.95),
+				},
+			}
+			axisZ := b.CreateLines("axisZ", zOpts, scene)
 			axisZ.SetColor(b.NewColor3(0, 0, 1))
 			zChar := makeTextPlane("Z", "blue", size/10)
 			zChar.SetPosition(b.NewVector3(0, 0.05*size, 0.9*size))
