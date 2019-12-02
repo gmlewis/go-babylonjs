@@ -50,18 +50,6 @@ func (ba *Babylon) NewSmartArrayNoDuplicate(capacity float64) *SmartArrayNoDupli
 	return SmartArrayNoDuplicateFromJSObject(p, ba.ctx)
 }
 
-// Concat calls the Concat method on the SmartArrayNoDuplicate object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#concat
-func (s *SmartArrayNoDuplicate) Concat(array interface{}) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, array)
-
-	s.p.Call("concat", args...)
-}
-
 // ConcatWithNoDuplicate calls the ConcatWithNoDuplicate method on the SmartArrayNoDuplicate object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#concatwithnoduplicate
@@ -72,52 +60,6 @@ func (s *SmartArrayNoDuplicate) ConcatWithNoDuplicate(array interface{}) {
 	args = append(args, array)
 
 	s.p.Call("concatWithNoDuplicate", args...)
-}
-
-// Contains calls the Contains method on the SmartArrayNoDuplicate object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#contains
-func (s *SmartArrayNoDuplicate) Contains(value *T) bool {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, value.JSObject())
-
-	retVal := s.p.Call("contains", args...)
-	return retVal.Bool()
-}
-
-// Dispose calls the Dispose method on the SmartArrayNoDuplicate object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#dispose
-func (s *SmartArrayNoDuplicate) Dispose() {
-
-	s.p.Call("dispose")
-}
-
-// ForEach calls the ForEach method on the SmartArrayNoDuplicate object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#foreach
-func (s *SmartArrayNoDuplicate) ForEach(jsFunc func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
-
-	s.p.Call("forEach", args...)
-}
-
-// IndexOf calls the IndexOf method on the SmartArrayNoDuplicate object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#indexof
-func (s *SmartArrayNoDuplicate) IndexOf(value *T) float64 {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, value.JSObject())
-
-	retVal := s.p.Call("indexOf", args...)
-	return retVal.Float()
 }
 
 // Push calls the Push method on the SmartArrayNoDuplicate object.
@@ -153,50 +95,6 @@ func (s *SmartArrayNoDuplicate) Reset() {
 	s.p.Call("reset")
 }
 
-// Sort calls the Sort method on the SmartArrayNoDuplicate object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#sort
-func (s *SmartArrayNoDuplicate) Sort(compareFn func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { compareFn(); return nil }))
-
-	s.p.Call("sort", args...)
-}
-
 /*
 
-// Data returns the Data property of class SmartArrayNoDuplicate.
-//
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#data
-func (s *SmartArrayNoDuplicate) Data(data []*T) *SmartArrayNoDuplicate {
-	p := ba.ctx.Get("SmartArrayNoDuplicate").New(data)
-	return SmartArrayNoDuplicateFromJSObject(p, ba.ctx)
-}
-
-// SetData sets the Data property of class SmartArrayNoDuplicate.
-//
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#data
-func (s *SmartArrayNoDuplicate) SetData(data []*T) *SmartArrayNoDuplicate {
-	p := ba.ctx.Get("SmartArrayNoDuplicate").New(data)
-	return SmartArrayNoDuplicateFromJSObject(p, ba.ctx)
-}
-
-// Length returns the Length property of class SmartArrayNoDuplicate.
-//
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#length
-func (s *SmartArrayNoDuplicate) Length(length float64) *SmartArrayNoDuplicate {
-	p := ba.ctx.Get("SmartArrayNoDuplicate").New(length)
-	return SmartArrayNoDuplicateFromJSObject(p, ba.ctx)
-}
-
-// SetLength sets the Length property of class SmartArrayNoDuplicate.
-//
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#length
-func (s *SmartArrayNoDuplicate) SetLength(length float64) *SmartArrayNoDuplicate {
-	p := ba.ctx.Get("SmartArrayNoDuplicate").New(length)
-	return SmartArrayNoDuplicateFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

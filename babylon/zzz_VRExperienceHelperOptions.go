@@ -38,22 +38,6 @@ func VRExperienceHelperOptionsArrayToJSArray(array []*VRExperienceHelperOptions)
 
 /*
 
-// ControllerMeshes returns the ControllerMeshes property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#controllermeshes
-func (v *VRExperienceHelperOptions) ControllerMeshes(controllerMeshes bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(controllerMeshes)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetControllerMeshes sets the ControllerMeshes property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#controllermeshes
-func (v *VRExperienceHelperOptions) SetControllerMeshes(controllerMeshes bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(controllerMeshes)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
 // CreateDeviceOrientationCamera returns the CreateDeviceOrientationCamera property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#createdeviceorientationcamera
@@ -86,70 +70,6 @@ func (v *VRExperienceHelperOptions) SetCreateFallbackVRDeviceOrientationFreeCame
 	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
 }
 
-// CustomVRButton returns the CustomVRButton property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#customvrbutton
-func (v *VRExperienceHelperOptions) CustomVRButton(customVRButton *HTMLButtonElement) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(customVRButton.JSObject())
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetCustomVRButton sets the CustomVRButton property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#customvrbutton
-func (v *VRExperienceHelperOptions) SetCustomVRButton(customVRButton *HTMLButtonElement) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(customVRButton.JSObject())
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// DefaultHeight returns the DefaultHeight property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#defaultheight
-func (v *VRExperienceHelperOptions) DefaultHeight(defaultHeight float64) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(defaultHeight)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetDefaultHeight sets the DefaultHeight property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#defaultheight
-func (v *VRExperienceHelperOptions) SetDefaultHeight(defaultHeight float64) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(defaultHeight)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// DefaultLightingOnControllers returns the DefaultLightingOnControllers property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#defaultlightingoncontrollers
-func (v *VRExperienceHelperOptions) DefaultLightingOnControllers(defaultLightingOnControllers bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(defaultLightingOnControllers)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetDefaultLightingOnControllers sets the DefaultLightingOnControllers property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#defaultlightingoncontrollers
-func (v *VRExperienceHelperOptions) SetDefaultLightingOnControllers(defaultLightingOnControllers bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(defaultLightingOnControllers)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// DisplayName returns the DisplayName property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#displayname
-func (v *VRExperienceHelperOptions) DisplayName(displayName string) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(displayName)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetDisplayName sets the DisplayName property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#displayname
-func (v *VRExperienceHelperOptions) SetDisplayName(displayName string) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(displayName)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
 // FloorMeshes returns the FloorMeshes property of class VRExperienceHelperOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#floormeshes
@@ -179,86 +99,6 @@ func (v *VRExperienceHelperOptions) LaserToggle(laserToggle bool) *VRExperienceH
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#lasertoggle
 func (v *VRExperienceHelperOptions) SetLaserToggle(laserToggle bool) *VRExperienceHelperOptions {
 	p := ba.ctx.Get("VRExperienceHelperOptions").New(laserToggle)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// PositionScale returns the PositionScale property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#positionscale
-func (v *VRExperienceHelperOptions) PositionScale(positionScale float64) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(positionScale)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetPositionScale sets the PositionScale property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#positionscale
-func (v *VRExperienceHelperOptions) SetPositionScale(positionScale float64) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(positionScale)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// RayLength returns the RayLength property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#raylength
-func (v *VRExperienceHelperOptions) RayLength(rayLength float64) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(rayLength)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetRayLength sets the RayLength property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#raylength
-func (v *VRExperienceHelperOptions) SetRayLength(rayLength float64) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(rayLength)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// TrackPosition returns the TrackPosition property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#trackposition
-func (v *VRExperienceHelperOptions) TrackPosition(trackPosition bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(trackPosition)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetTrackPosition sets the TrackPosition property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#trackposition
-func (v *VRExperienceHelperOptions) SetTrackPosition(trackPosition bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(trackPosition)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// UseCustomVRButton returns the UseCustomVRButton property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#usecustomvrbutton
-func (v *VRExperienceHelperOptions) UseCustomVRButton(useCustomVRButton bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(useCustomVRButton)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetUseCustomVRButton sets the UseCustomVRButton property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#usecustomvrbutton
-func (v *VRExperienceHelperOptions) SetUseCustomVRButton(useCustomVRButton bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(useCustomVRButton)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// UseMultiview returns the UseMultiview property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#usemultiview
-func (v *VRExperienceHelperOptions) UseMultiview(useMultiview bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(useMultiview)
-	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetUseMultiview sets the UseMultiview property of class VRExperienceHelperOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelperoptions#usemultiview
-func (v *VRExperienceHelperOptions) SetUseMultiview(useMultiview bool) *VRExperienceHelperOptions {
-	p := ba.ctx.Get("VRExperienceHelperOptions").New(useMultiview)
 	return VRExperienceHelperOptionsFromJSObject(p, ba.ctx)
 }
 

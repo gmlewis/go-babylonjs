@@ -36,14 +36,6 @@ func WebXRRenderTargetArrayToJSArray(array []*WebXRRenderTarget) []interface{} {
 	return result
 }
 
-// Dispose calls the Dispose method on the WebXRRenderTarget object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webxrrendertarget#dispose
-func (w *WebXRRenderTarget) Dispose() {
-
-	w.p.Call("dispose")
-}
-
 // InitializeXRLayerAsync calls the InitializeXRLayerAsync method on the WebXRRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrrendertarget#initializexrlayerasync

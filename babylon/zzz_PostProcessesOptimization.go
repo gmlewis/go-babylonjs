@@ -88,20 +88,4 @@ func (p *PostProcessesOptimization) GetDescription() string {
 
 /*
 
-// Priority returns the Priority property of class PostProcessesOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization#priority
-func (p *PostProcessesOptimization) Priority(priority float64) *PostProcessesOptimization {
-	p := ba.ctx.Get("PostProcessesOptimization").New(priority)
-	return PostProcessesOptimizationFromJSObject(p, ba.ctx)
-}
-
-// SetPriority sets the Priority property of class PostProcessesOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization#priority
-func (p *PostProcessesOptimization) SetPriority(priority float64) *PostProcessesOptimization {
-	p := ba.ctx.Get("PostProcessesOptimization").New(priority)
-	return PostProcessesOptimizationFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

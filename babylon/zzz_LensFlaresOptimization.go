@@ -88,20 +88,4 @@ func (l *LensFlaresOptimization) GetDescription() string {
 
 /*
 
-// Priority returns the Priority property of class LensFlaresOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization#priority
-func (l *LensFlaresOptimization) Priority(priority float64) *LensFlaresOptimization {
-	p := ba.ctx.Get("LensFlaresOptimization").New(priority)
-	return LensFlaresOptimizationFromJSObject(p, ba.ctx)
-}
-
-// SetPriority sets the Priority property of class LensFlaresOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization#priority
-func (l *LensFlaresOptimization) SetPriority(priority float64) *LensFlaresOptimization {
-	p := ba.ctx.Get("LensFlaresOptimization").New(priority)
-	return LensFlaresOptimizationFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

@@ -69,51 +69,7 @@ func (l *LightGizmo) Dispose() {
 	l.p.Call("dispose")
 }
 
-// SetCustomMesh calls the SetCustomMesh method on the LightGizmo object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#setcustommesh
-func (l *LightGizmo) SetCustomMesh(mesh *Mesh) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, mesh.JSObject())
-
-	l.p.Call("setCustomMesh", args...)
-}
-
 /*
-
-// AttachedMesh returns the AttachedMesh property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#attachedmesh
-func (l *LightGizmo) AttachedMesh(attachedMesh *AbstractMesh) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(attachedMesh.JSObject())
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetAttachedMesh sets the AttachedMesh property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#attachedmesh
-func (l *LightGizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(attachedMesh.JSObject())
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// GizmoLayer returns the GizmoLayer property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#gizmolayer
-func (l *LightGizmo) GizmoLayer(gizmoLayer *UtilityLayerRenderer) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(gizmoLayer.JSObject())
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetGizmoLayer sets the GizmoLayer property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#gizmolayer
-func (l *LightGizmo) SetGizmoLayer(gizmoLayer *UtilityLayerRenderer) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(gizmoLayer.JSObject())
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
 
 // Light returns the Light property of class LightGizmo.
 //
@@ -144,86 +100,6 @@ func (l *LightGizmo) Material(material *StandardMaterial) *LightGizmo {
 // https://doc.babylonjs.com/api/classes/babylon.lightgizmo#material
 func (l *LightGizmo) SetMaterial(material *StandardMaterial) *LightGizmo {
 	p := ba.ctx.Get("LightGizmo").New(material.JSObject())
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// ScaleRatio returns the ScaleRatio property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#scaleratio
-func (l *LightGizmo) ScaleRatio(scaleRatio float64) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(scaleRatio)
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetScaleRatio sets the ScaleRatio property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#scaleratio
-func (l *LightGizmo) SetScaleRatio(scaleRatio float64) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(scaleRatio)
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// UpdateGizmoPositionToMatchAttachedMesh returns the UpdateGizmoPositionToMatchAttachedMesh property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#updategizmopositiontomatchattachedmesh
-func (l *LightGizmo) UpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(updateGizmoPositionToMatchAttachedMesh)
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateGizmoPositionToMatchAttachedMesh sets the UpdateGizmoPositionToMatchAttachedMesh property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#updategizmopositiontomatchattachedmesh
-func (l *LightGizmo) SetUpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(updateGizmoPositionToMatchAttachedMesh)
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#updategizmorotationtomatchattachedmesh
-func (l *LightGizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateGizmoRotationToMatchAttachedMesh sets the UpdateGizmoRotationToMatchAttachedMesh property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#updategizmorotationtomatchattachedmesh
-func (l *LightGizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// UpdateScale returns the UpdateScale property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#updatescale
-func (l *LightGizmo) UpdateScale(updateScale bool) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(updateScale)
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateScale sets the UpdateScale property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#updatescale
-func (l *LightGizmo) SetUpdateScale(updateScale bool) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(updateScale)
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// _rootMesh returns the _rootMesh property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#_rootmesh
-func (l *LightGizmo) _rootMesh(_rootMesh *Mesh) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(_rootMesh.JSObject())
-	return LightGizmoFromJSObject(p, ba.ctx)
-}
-
-// Set_rootMesh sets the _rootMesh property of class LightGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightgizmo#_rootmesh
-func (l *LightGizmo) Set_rootMesh(_rootMesh *Mesh) *LightGizmo {
-	p := ba.ctx.Get("LightGizmo").New(_rootMesh.JSObject())
 	return LightGizmoFromJSObject(p, ba.ctx)
 }
 

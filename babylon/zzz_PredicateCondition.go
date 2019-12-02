@@ -59,15 +59,6 @@ func (p *PredicateCondition) IsValid() bool {
 	return retVal.Bool()
 }
 
-// Serialize calls the Serialize method on the PredicateCondition object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.predicatecondition#serialize
-func (p *PredicateCondition) Serialize() interface{} {
-
-	retVal := p.p.Call("serialize")
-	return retVal
-}
-
 /*
 
 // Predicate returns the Predicate property of class PredicateCondition.

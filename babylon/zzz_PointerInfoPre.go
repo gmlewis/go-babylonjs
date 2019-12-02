@@ -55,22 +55,6 @@ func (ba *Babylon) NewPointerInfoPre(jsType float64, event js.Value, localX floa
 
 /*
 
-// Event returns the Event property of class PointerInfoPre.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#event
-func (p *PointerInfoPre) Event(event js.Value) *PointerInfoPre {
-	p := ba.ctx.Get("PointerInfoPre").New(event)
-	return PointerInfoPreFromJSObject(p, ba.ctx)
-}
-
-// SetEvent sets the Event property of class PointerInfoPre.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#event
-func (p *PointerInfoPre) SetEvent(event js.Value) *PointerInfoPre {
-	p := ba.ctx.Get("PointerInfoPre").New(event)
-	return PointerInfoPreFromJSObject(p, ba.ctx)
-}
-
 // LocalPosition returns the LocalPosition property of class PointerInfoPre.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#localposition
@@ -116,22 +100,6 @@ func (p *PointerInfoPre) SkipOnPointerObservable(skipOnPointerObservable bool) *
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#skiponpointerobservable
 func (p *PointerInfoPre) SetSkipOnPointerObservable(skipOnPointerObservable bool) *PointerInfoPre {
 	p := ba.ctx.Get("PointerInfoPre").New(skipOnPointerObservable)
-	return PointerInfoPreFromJSObject(p, ba.ctx)
-}
-
-// Type returns the Type property of class PointerInfoPre.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#type
-func (p *PointerInfoPre) Type(jsType float64) *PointerInfoPre {
-	p := ba.ctx.Get("PointerInfoPre").New(jsType)
-	return PointerInfoPreFromJSObject(p, ba.ctx)
-}
-
-// SetType sets the Type property of class PointerInfoPre.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#type
-func (p *PointerInfoPre) SetType(jsType float64) *PointerInfoPre {
-	p := ba.ctx.Get("PointerInfoPre").New(jsType)
 	return PointerInfoPreFromJSObject(p, ba.ctx)
 }
 

@@ -77,15 +77,6 @@ func (d *DoNothingAction) Execute() {
 	d.p.Call("execute")
 }
 
-// GetTriggerParameter calls the GetTriggerParameter method on the DoNothingAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.donothingaction#gettriggerparameter
-func (d *DoNothingAction) GetTriggerParameter() interface{} {
-
-	retVal := d.p.Call("getTriggerParameter")
-	return retVal
-}
-
 // Serialize calls the Serialize method on the DoNothingAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.donothingaction#serialize
@@ -99,75 +90,6 @@ func (d *DoNothingAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-// SkipToNextActiveAction calls the SkipToNextActiveAction method on the DoNothingAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.donothingaction#skiptonextactiveaction
-func (d *DoNothingAction) SkipToNextActiveAction() {
-
-	d.p.Call("skipToNextActiveAction")
-}
-
-// Then calls the Then method on the DoNothingAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.donothingaction#then
-func (d *DoNothingAction) Then(action *Action) *Action {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, action.JSObject())
-
-	retVal := d.p.Call("then", args...)
-	return ActionFromJSObject(retVal, d.ctx)
-}
-
 /*
 
-// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class DoNothingAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.donothingaction#onbeforeexecuteobservable
-func (d *DoNothingAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *DoNothingAction {
-	p := ba.ctx.Get("DoNothingAction").New(onBeforeExecuteObservable.JSObject())
-	return DoNothingActionFromJSObject(p, ba.ctx)
-}
-
-// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class DoNothingAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.donothingaction#onbeforeexecuteobservable
-func (d *DoNothingAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *DoNothingAction {
-	p := ba.ctx.Get("DoNothingAction").New(onBeforeExecuteObservable.JSObject())
-	return DoNothingActionFromJSObject(p, ba.ctx)
-}
-
-// Trigger returns the Trigger property of class DoNothingAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.donothingaction#trigger
-func (d *DoNothingAction) Trigger(trigger float64) *DoNothingAction {
-	p := ba.ctx.Get("DoNothingAction").New(trigger)
-	return DoNothingActionFromJSObject(p, ba.ctx)
-}
-
-// SetTrigger sets the Trigger property of class DoNothingAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.donothingaction#trigger
-func (d *DoNothingAction) SetTrigger(trigger float64) *DoNothingAction {
-	p := ba.ctx.Get("DoNothingAction").New(trigger)
-	return DoNothingActionFromJSObject(p, ba.ctx)
-}
-
-// TriggerOptions returns the TriggerOptions property of class DoNothingAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.donothingaction#triggeroptions
-func (d *DoNothingAction) TriggerOptions(triggerOptions interface{}) *DoNothingAction {
-	p := ba.ctx.Get("DoNothingAction").New(triggerOptions)
-	return DoNothingActionFromJSObject(p, ba.ctx)
-}
-
-// SetTriggerOptions sets the TriggerOptions property of class DoNothingAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.donothingaction#triggeroptions
-func (d *DoNothingAction) SetTriggerOptions(triggerOptions interface{}) *DoNothingAction {
-	p := ba.ctx.Get("DoNothingAction").New(triggerOptions)
-	return DoNothingActionFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

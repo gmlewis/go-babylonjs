@@ -82,15 +82,6 @@ func (p *PlayAnimationAction) Execute() {
 	p.p.Call("execute")
 }
 
-// GetTriggerParameter calls the GetTriggerParameter method on the PlayAnimationAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.playanimationaction#gettriggerparameter
-func (p *PlayAnimationAction) GetTriggerParameter() interface{} {
-
-	retVal := p.p.Call("getTriggerParameter")
-	return retVal
-}
-
 // Serialize calls the Serialize method on the PlayAnimationAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#serialize
@@ -102,27 +93,6 @@ func (p *PlayAnimationAction) Serialize(parent interface{}) interface{} {
 
 	retVal := p.p.Call("serialize", args...)
 	return retVal
-}
-
-// SkipToNextActiveAction calls the SkipToNextActiveAction method on the PlayAnimationAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.playanimationaction#skiptonextactiveaction
-func (p *PlayAnimationAction) SkipToNextActiveAction() {
-
-	p.p.Call("skipToNextActiveAction")
-}
-
-// Then calls the Then method on the PlayAnimationAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.playanimationaction#then
-func (p *PlayAnimationAction) Then(action *Action) *Action {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, action.JSObject())
-
-	retVal := p.p.Call("then", args...)
-	return ActionFromJSObject(retVal, p.ctx)
 }
 
 /*
@@ -159,22 +129,6 @@ func (p *PlayAnimationAction) SetLoop(loop bool) *PlayAnimationAction {
 	return PlayAnimationActionFromJSObject(p, ba.ctx)
 }
 
-// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class PlayAnimationAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.playanimationaction#onbeforeexecuteobservable
-func (p *PlayAnimationAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(onBeforeExecuteObservable.JSObject())
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
-}
-
-// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class PlayAnimationAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.playanimationaction#onbeforeexecuteobservable
-func (p *PlayAnimationAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(onBeforeExecuteObservable.JSObject())
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
-}
-
 // To returns the To property of class PlayAnimationAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#to
@@ -188,38 +142,6 @@ func (p *PlayAnimationAction) To(to float64) *PlayAnimationAction {
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#to
 func (p *PlayAnimationAction) SetTo(to float64) *PlayAnimationAction {
 	p := ba.ctx.Get("PlayAnimationAction").New(to)
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
-}
-
-// Trigger returns the Trigger property of class PlayAnimationAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.playanimationaction#trigger
-func (p *PlayAnimationAction) Trigger(trigger float64) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(trigger)
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
-}
-
-// SetTrigger sets the Trigger property of class PlayAnimationAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.playanimationaction#trigger
-func (p *PlayAnimationAction) SetTrigger(trigger float64) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(trigger)
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
-}
-
-// TriggerOptions returns the TriggerOptions property of class PlayAnimationAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.playanimationaction#triggeroptions
-func (p *PlayAnimationAction) TriggerOptions(triggerOptions interface{}) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(triggerOptions)
-	return PlayAnimationActionFromJSObject(p, ba.ctx)
-}
-
-// SetTriggerOptions sets the TriggerOptions property of class PlayAnimationAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.playanimationaction#triggeroptions
-func (p *PlayAnimationAction) SetTriggerOptions(triggerOptions interface{}) *PlayAnimationAction {
-	p := ba.ctx.Get("PlayAnimationAction").New(triggerOptions)
 	return PlayAnimationActionFromJSObject(p, ba.ctx)
 }
 

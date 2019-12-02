@@ -74,33 +74,12 @@ func (ba *Babylon) NewStandardRenderingPipeline(name string, scene *Scene, ratio
 	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
-// AddEffect calls the AddEffect method on the StandardRenderingPipeline object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#addeffect
-func (s *StandardRenderingPipeline) AddEffect(renderEffect *PostProcessRenderEffect) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, renderEffect.JSObject())
-
-	s.p.Call("addEffect", args...)
-}
-
 // Dispose calls the Dispose method on the StandardRenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#dispose
 func (s *StandardRenderingPipeline) Dispose() {
 
 	s.p.Call("dispose")
-}
-
-// GetClassName calls the GetClassName method on the StandardRenderingPipeline object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#getclassname
-func (s *StandardRenderingPipeline) GetClassName() string {
-
-	retVal := s.p.Call("getClassName")
-	return retVal.String()
 }
 
 // Parse calls the Parse method on the StandardRenderingPipeline object.
@@ -222,22 +201,6 @@ func (s *StandardRenderingPipeline) BrightThreshold(brightThreshold float64) *St
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#brightthreshold
 func (s *StandardRenderingPipeline) SetBrightThreshold(brightThreshold float64) *StandardRenderingPipeline {
 	p := ba.ctx.Get("StandardRenderingPipeline").New(brightThreshold)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// Cameras returns the Cameras property of class StandardRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#cameras
-func (s *StandardRenderingPipeline) Cameras(cameras *Camera) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(cameras.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetCameras sets the Cameras property of class StandardRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#cameras
-func (s *StandardRenderingPipeline) SetCameras(cameras *Camera) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(cameras.JSObject())
 	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
@@ -462,38 +425,6 @@ func (s *StandardRenderingPipeline) HorizontalBlur(horizontalBlur bool) *Standar
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#horizontalblur
 func (s *StandardRenderingPipeline) SetHorizontalBlur(horizontalBlur bool) *StandardRenderingPipeline {
 	p := ba.ctx.Get("StandardRenderingPipeline").New(horizontalBlur)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// InspectableCustomProperties returns the InspectableCustomProperties property of class StandardRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#inspectablecustomproperties
-func (s *StandardRenderingPipeline) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(inspectableCustomProperties.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetInspectableCustomProperties sets the InspectableCustomProperties property of class StandardRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#inspectablecustomproperties
-func (s *StandardRenderingPipeline) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(inspectableCustomProperties.JSObject())
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// IsSupported returns the IsSupported property of class StandardRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#issupported
-func (s *StandardRenderingPipeline) IsSupported(isSupported bool) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(isSupported)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetIsSupported sets the IsSupported property of class StandardRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#issupported
-func (s *StandardRenderingPipeline) SetIsSupported(isSupported bool) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(isSupported)
 	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
@@ -782,22 +713,6 @@ func (s *StandardRenderingPipeline) MotionStrength(motionStrength float64) *Stan
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#motionstrength
 func (s *StandardRenderingPipeline) SetMotionStrength(motionStrength float64) *StandardRenderingPipeline {
 	p := ba.ctx.Get("StandardRenderingPipeline").New(motionStrength)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// Name returns the Name property of class StandardRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#name
-func (s *StandardRenderingPipeline) Name(name string) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(name)
-	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetName sets the Name property of class StandardRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#name
-func (s *StandardRenderingPipeline) SetName(name string) *StandardRenderingPipeline {
-	p := ba.ctx.Get("StandardRenderingPipeline").New(name)
 	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
 }
 

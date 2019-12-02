@@ -65,18 +65,6 @@ func (ba *Babylon) NewSSAO2RenderingPipeline(name string, scene *Scene, ratio in
 	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
 }
 
-// AddEffect calls the AddEffect method on the SSAO2RenderingPipeline object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#addeffect
-func (s *SSAO2RenderingPipeline) AddEffect(renderEffect *PostProcessRenderEffect) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, renderEffect.JSObject())
-
-	s.p.Call("addEffect", args...)
-}
-
 // SSAO2RenderingPipelineDisposeOpts contains optional parameters for SSAO2RenderingPipeline.Dispose.
 type SSAO2RenderingPipelineDisposeOpts struct {
 	DisableGeometryBufferRenderer *bool
@@ -152,22 +140,6 @@ func (s *SSAO2RenderingPipeline) SetBase(base float64) *SSAO2RenderingPipeline {
 	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
 }
 
-// Cameras returns the Cameras property of class SSAO2RenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#cameras
-func (s *SSAO2RenderingPipeline) Cameras(cameras *Camera) *SSAO2RenderingPipeline {
-	p := ba.ctx.Get("SSAO2RenderingPipeline").New(cameras.JSObject())
-	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetCameras sets the Cameras property of class SSAO2RenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#cameras
-func (s *SSAO2RenderingPipeline) SetCameras(cameras *Camera) *SSAO2RenderingPipeline {
-	p := ba.ctx.Get("SSAO2RenderingPipeline").New(cameras.JSObject())
-	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
-}
-
 // ExpensiveBlur returns the ExpensiveBlur property of class SSAO2RenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#expensiveblur
@@ -181,22 +153,6 @@ func (s *SSAO2RenderingPipeline) ExpensiveBlur(expensiveBlur bool) *SSAO2Renderi
 // https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#expensiveblur
 func (s *SSAO2RenderingPipeline) SetExpensiveBlur(expensiveBlur bool) *SSAO2RenderingPipeline {
 	p := ba.ctx.Get("SSAO2RenderingPipeline").New(expensiveBlur)
-	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// InspectableCustomProperties returns the InspectableCustomProperties property of class SSAO2RenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#inspectablecustomproperties
-func (s *SSAO2RenderingPipeline) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *SSAO2RenderingPipeline {
-	p := ba.ctx.Get("SSAO2RenderingPipeline").New(inspectableCustomProperties.JSObject())
-	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetInspectableCustomProperties sets the InspectableCustomProperties property of class SSAO2RenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#inspectablecustomproperties
-func (s *SSAO2RenderingPipeline) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *SSAO2RenderingPipeline {
-	p := ba.ctx.Get("SSAO2RenderingPipeline").New(inspectableCustomProperties.JSObject())
 	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
 }
 
@@ -245,22 +201,6 @@ func (s *SSAO2RenderingPipeline) MinZAspect(minZAspect float64) *SSAO2RenderingP
 // https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#minzaspect
 func (s *SSAO2RenderingPipeline) SetMinZAspect(minZAspect float64) *SSAO2RenderingPipeline {
 	p := ba.ctx.Get("SSAO2RenderingPipeline").New(minZAspect)
-	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// Name returns the Name property of class SSAO2RenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#name
-func (s *SSAO2RenderingPipeline) Name(name string) *SSAO2RenderingPipeline {
-	p := ba.ctx.Get("SSAO2RenderingPipeline").New(name)
-	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetName sets the Name property of class SSAO2RenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#name
-func (s *SSAO2RenderingPipeline) SetName(name string) *SSAO2RenderingPipeline {
-	p := ba.ctx.Get("SSAO2RenderingPipeline").New(name)
 	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
 }
 

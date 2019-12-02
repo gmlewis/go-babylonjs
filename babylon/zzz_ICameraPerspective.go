@@ -54,38 +54,6 @@ func (i *ICameraPerspective) SetAspectRatio(aspectRatio float64) *ICameraPerspec
 	return ICameraPerspectiveFromJSObject(p, ba.ctx)
 }
 
-// Extensions returns the Extensions property of class ICameraPerspective.
-//
-// https://doc.babylonjs.com/api/classes/babylon.icameraperspective#extensions
-func (i *ICameraPerspective) Extensions(extensions js.Value) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(extensions)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
-}
-
-// SetExtensions sets the Extensions property of class ICameraPerspective.
-//
-// https://doc.babylonjs.com/api/classes/babylon.icameraperspective#extensions
-func (i *ICameraPerspective) SetExtensions(extensions js.Value) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(extensions)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
-}
-
-// Extras returns the Extras property of class ICameraPerspective.
-//
-// https://doc.babylonjs.com/api/classes/babylon.icameraperspective#extras
-func (i *ICameraPerspective) Extras(extras interface{}) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(extras)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
-}
-
-// SetExtras sets the Extras property of class ICameraPerspective.
-//
-// https://doc.babylonjs.com/api/classes/babylon.icameraperspective#extras
-func (i *ICameraPerspective) SetExtras(extras interface{}) *ICameraPerspective {
-	p := ba.ctx.Get("ICameraPerspective").New(extras)
-	return ICameraPerspectiveFromJSObject(p, ba.ctx)
-}
-
 // Yfov returns the Yfov property of class ICameraPerspective.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraperspective#yfov

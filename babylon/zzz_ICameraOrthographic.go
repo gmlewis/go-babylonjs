@@ -38,38 +38,6 @@ func ICameraOrthographicArrayToJSArray(array []*ICameraOrthographic) []interface
 
 /*
 
-// Extensions returns the Extensions property of class ICameraOrthographic.
-//
-// https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#extensions
-func (i *ICameraOrthographic) Extensions(extensions js.Value) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(extensions)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
-}
-
-// SetExtensions sets the Extensions property of class ICameraOrthographic.
-//
-// https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#extensions
-func (i *ICameraOrthographic) SetExtensions(extensions js.Value) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(extensions)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
-}
-
-// Extras returns the Extras property of class ICameraOrthographic.
-//
-// https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#extras
-func (i *ICameraOrthographic) Extras(extras interface{}) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(extras)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
-}
-
-// SetExtras sets the Extras property of class ICameraOrthographic.
-//
-// https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#extras
-func (i *ICameraOrthographic) SetExtras(extras interface{}) *ICameraOrthographic {
-	p := ba.ctx.Get("ICameraOrthographic").New(extras)
-	return ICameraOrthographicFromJSObject(p, ba.ctx)
-}
-
 // Xmag returns the Xmag property of class ICameraOrthographic.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icameraorthographic#xmag

@@ -207,14 +207,6 @@ func (h *HighlightLayer) RemoveMesh(mesh *Mesh) {
 	h.p.Call("removeMesh", args...)
 }
 
-// Render calls the Render method on the HighlightLayer object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#render
-func (h *HighlightLayer) Render() {
-
-	h.p.Call("render")
-}
-
 // Serialize calls the Serialize method on the HighlightLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#serialize
@@ -267,22 +259,6 @@ func (h *HighlightLayer) SetBlurVerticalSize(blurVerticalSize float64) *Highligh
 	return HighlightLayerFromJSObject(p, ba.ctx)
 }
 
-// Camera returns the Camera property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#camera
-func (h *HighlightLayer) Camera(camera *Camera) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(camera.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// SetCamera sets the Camera property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#camera
-func (h *HighlightLayer) SetCamera(camera *Camera) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(camera.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
 // EffectName returns the EffectName property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#effectname
@@ -328,22 +304,6 @@ func (h *HighlightLayer) InnerGlow(innerGlow bool) *HighlightLayer {
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#innerglow
 func (h *HighlightLayer) SetInnerGlow(innerGlow bool) *HighlightLayer {
 	p := ba.ctx.Get("HighlightLayer").New(innerGlow)
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// IsEnabled returns the IsEnabled property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#isenabled
-func (h *HighlightLayer) IsEnabled(isEnabled bool) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(isEnabled)
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// SetIsEnabled sets the IsEnabled property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#isenabled
-func (h *HighlightLayer) SetIsEnabled(isEnabled bool) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(isEnabled)
 	return HighlightLayerFromJSObject(p, ba.ctx)
 }
 
@@ -411,38 +371,6 @@ func (h *HighlightLayer) SetOnAfterBlurObservable(onAfterBlurObservable *Observa
 	return HighlightLayerFromJSObject(p, ba.ctx)
 }
 
-// OnAfterComposeObservable returns the OnAfterComposeObservable property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onaftercomposeobservable
-func (h *HighlightLayer) OnAfterComposeObservable(onAfterComposeObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onAfterComposeObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// SetOnAfterComposeObservable sets the OnAfterComposeObservable property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onaftercomposeobservable
-func (h *HighlightLayer) SetOnAfterComposeObservable(onAfterComposeObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onAfterComposeObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// OnAfterRenderMeshToEffect returns the OnAfterRenderMeshToEffect property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onafterrendermeshtoeffect
-func (h *HighlightLayer) OnAfterRenderMeshToEffect(onAfterRenderMeshToEffect *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onAfterRenderMeshToEffect.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// SetOnAfterRenderMeshToEffect sets the OnAfterRenderMeshToEffect property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onafterrendermeshtoeffect
-func (h *HighlightLayer) SetOnAfterRenderMeshToEffect(onAfterRenderMeshToEffect *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onAfterRenderMeshToEffect.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
 // OnBeforeBlurObservable returns the OnBeforeBlurObservable property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onbeforeblurobservable
@@ -459,86 +387,6 @@ func (h *HighlightLayer) SetOnBeforeBlurObservable(onBeforeBlurObservable *Obser
 	return HighlightLayerFromJSObject(p, ba.ctx)
 }
 
-// OnBeforeComposeObservable returns the OnBeforeComposeObservable property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onbeforecomposeobservable
-func (h *HighlightLayer) OnBeforeComposeObservable(onBeforeComposeObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onBeforeComposeObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// SetOnBeforeComposeObservable sets the OnBeforeComposeObservable property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onbeforecomposeobservable
-func (h *HighlightLayer) SetOnBeforeComposeObservable(onBeforeComposeObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onBeforeComposeObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// OnBeforeRenderMainTextureObservable returns the OnBeforeRenderMainTextureObservable property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onbeforerendermaintextureobservable
-func (h *HighlightLayer) OnBeforeRenderMainTextureObservable(onBeforeRenderMainTextureObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onBeforeRenderMainTextureObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// SetOnBeforeRenderMainTextureObservable sets the OnBeforeRenderMainTextureObservable property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onbeforerendermaintextureobservable
-func (h *HighlightLayer) SetOnBeforeRenderMainTextureObservable(onBeforeRenderMainTextureObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onBeforeRenderMainTextureObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// OnBeforeRenderMeshToEffect returns the OnBeforeRenderMeshToEffect property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onbeforerendermeshtoeffect
-func (h *HighlightLayer) OnBeforeRenderMeshToEffect(onBeforeRenderMeshToEffect *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onBeforeRenderMeshToEffect.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// SetOnBeforeRenderMeshToEffect sets the OnBeforeRenderMeshToEffect property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onbeforerendermeshtoeffect
-func (h *HighlightLayer) SetOnBeforeRenderMeshToEffect(onBeforeRenderMeshToEffect *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onBeforeRenderMeshToEffect.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// OnDisposeObservable returns the OnDisposeObservable property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#ondisposeobservable
-func (h *HighlightLayer) OnDisposeObservable(onDisposeObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onDisposeObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// SetOnDisposeObservable sets the OnDisposeObservable property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#ondisposeobservable
-func (h *HighlightLayer) SetOnDisposeObservable(onDisposeObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onDisposeObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// OnSizeChangedObservable returns the OnSizeChangedObservable property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onsizechangedobservable
-func (h *HighlightLayer) OnSizeChangedObservable(onSizeChangedObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onSizeChangedObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#onsizechangedobservable
-func (h *HighlightLayer) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(onSizeChangedObservable.JSObject())
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
 // OuterGlow returns the OuterGlow property of class HighlightLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#outerglow
@@ -552,22 +400,6 @@ func (h *HighlightLayer) OuterGlow(outerGlow bool) *HighlightLayer {
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#outerglow
 func (h *HighlightLayer) SetOuterGlow(outerGlow bool) *HighlightLayer {
 	p := ba.ctx.Get("HighlightLayer").New(outerGlow)
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// RenderingGroupId returns the RenderingGroupId property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#renderinggroupid
-func (h *HighlightLayer) RenderingGroupId(renderingGroupId float64) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(renderingGroupId)
-	return HighlightLayerFromJSObject(p, ba.ctx)
-}
-
-// SetRenderingGroupId sets the RenderingGroupId property of class HighlightLayer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#renderinggroupid
-func (h *HighlightLayer) SetRenderingGroupId(renderingGroupId float64) *HighlightLayer {
-	p := ba.ctx.Get("HighlightLayer").New(renderingGroupId)
 	return HighlightLayerFromJSObject(p, ba.ctx)
 }
 

@@ -95,15 +95,6 @@ func (i *InterpolateValueAction) Execute() {
 	i.p.Call("execute")
 }
 
-// GetTriggerParameter calls the GetTriggerParameter method on the InterpolateValueAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#gettriggerparameter
-func (i *InterpolateValueAction) GetTriggerParameter() interface{} {
-
-	retVal := i.p.Call("getTriggerParameter")
-	return retVal
-}
-
 // Serialize calls the Serialize method on the InterpolateValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#serialize
@@ -115,27 +106,6 @@ func (i *InterpolateValueAction) Serialize(parent interface{}) interface{} {
 
 	retVal := i.p.Call("serialize", args...)
 	return retVal
-}
-
-// SkipToNextActiveAction calls the SkipToNextActiveAction method on the InterpolateValueAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#skiptonextactiveaction
-func (i *InterpolateValueAction) SkipToNextActiveAction() {
-
-	i.p.Call("skipToNextActiveAction")
-}
-
-// Then calls the Then method on the InterpolateValueAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#then
-func (i *InterpolateValueAction) Then(action *Action) *Action {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, action.JSObject())
-
-	retVal := i.p.Call("then", args...)
-	return ActionFromJSObject(retVal, i.ctx)
 }
 
 /*
@@ -153,22 +123,6 @@ func (i *InterpolateValueAction) Duration(duration float64) *InterpolateValueAct
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#duration
 func (i *InterpolateValueAction) SetDuration(duration float64) *InterpolateValueAction {
 	p := ba.ctx.Get("InterpolateValueAction").New(duration)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
-}
-
-// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class InterpolateValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#onbeforeexecuteobservable
-func (i *InterpolateValueAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(onBeforeExecuteObservable.JSObject())
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
-}
-
-// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class InterpolateValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#onbeforeexecuteobservable
-func (i *InterpolateValueAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(onBeforeExecuteObservable.JSObject())
 	return InterpolateValueActionFromJSObject(p, ba.ctx)
 }
 
@@ -233,38 +187,6 @@ func (i *InterpolateValueAction) StopOtherAnimations(stopOtherAnimations bool) *
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#stopotheranimations
 func (i *InterpolateValueAction) SetStopOtherAnimations(stopOtherAnimations bool) *InterpolateValueAction {
 	p := ba.ctx.Get("InterpolateValueAction").New(stopOtherAnimations)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
-}
-
-// Trigger returns the Trigger property of class InterpolateValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#trigger
-func (i *InterpolateValueAction) Trigger(trigger float64) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(trigger)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
-}
-
-// SetTrigger sets the Trigger property of class InterpolateValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#trigger
-func (i *InterpolateValueAction) SetTrigger(trigger float64) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(trigger)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
-}
-
-// TriggerOptions returns the TriggerOptions property of class InterpolateValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#triggeroptions
-func (i *InterpolateValueAction) TriggerOptions(triggerOptions interface{}) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(triggerOptions)
-	return InterpolateValueActionFromJSObject(p, ba.ctx)
-}
-
-// SetTriggerOptions sets the TriggerOptions property of class InterpolateValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#triggeroptions
-func (i *InterpolateValueAction) SetTriggerOptions(triggerOptions interface{}) *InterpolateValueAction {
-	p := ba.ctx.Get("InterpolateValueAction").New(triggerOptions)
 	return InterpolateValueActionFromJSObject(p, ba.ctx)
 }
 

@@ -50,30 +50,6 @@ func (i *ISceneSerializableComponent) AddFromContainer(container *AbstractScene)
 	i.p.Call("addFromContainer", args...)
 }
 
-// Dispose calls the Dispose method on the ISceneSerializableComponent object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.isceneserializablecomponent#dispose
-func (i *ISceneSerializableComponent) Dispose() {
-
-	i.p.Call("dispose")
-}
-
-// Rebuild calls the Rebuild method on the ISceneSerializableComponent object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.isceneserializablecomponent#rebuild
-func (i *ISceneSerializableComponent) Rebuild() {
-
-	i.p.Call("rebuild")
-}
-
-// Register calls the Register method on the ISceneSerializableComponent object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.isceneserializablecomponent#register
-func (i *ISceneSerializableComponent) Register() {
-
-	i.p.Call("register")
-}
-
 // ISceneSerializableComponentRemoveFromContainerOpts contains optional parameters for ISceneSerializableComponent.RemoveFromContainer.
 type ISceneSerializableComponentRemoveFromContainerOpts struct {
 	Dispose *bool
@@ -114,36 +90,4 @@ func (i *ISceneSerializableComponent) Serialize(serializationObject interface{})
 
 /*
 
-// Name returns the Name property of class ISceneSerializableComponent.
-//
-// https://doc.babylonjs.com/api/classes/babylon.isceneserializablecomponent#name
-func (i *ISceneSerializableComponent) Name(name string) *ISceneSerializableComponent {
-	p := ba.ctx.Get("ISceneSerializableComponent").New(name)
-	return ISceneSerializableComponentFromJSObject(p, ba.ctx)
-}
-
-// SetName sets the Name property of class ISceneSerializableComponent.
-//
-// https://doc.babylonjs.com/api/classes/babylon.isceneserializablecomponent#name
-func (i *ISceneSerializableComponent) SetName(name string) *ISceneSerializableComponent {
-	p := ba.ctx.Get("ISceneSerializableComponent").New(name)
-	return ISceneSerializableComponentFromJSObject(p, ba.ctx)
-}
-
-// Scene returns the Scene property of class ISceneSerializableComponent.
-//
-// https://doc.babylonjs.com/api/classes/babylon.isceneserializablecomponent#scene
-func (i *ISceneSerializableComponent) Scene(scene *Scene) *ISceneSerializableComponent {
-	p := ba.ctx.Get("ISceneSerializableComponent").New(scene.JSObject())
-	return ISceneSerializableComponentFromJSObject(p, ba.ctx)
-}
-
-// SetScene sets the Scene property of class ISceneSerializableComponent.
-//
-// https://doc.babylonjs.com/api/classes/babylon.isceneserializablecomponent#scene
-func (i *ISceneSerializableComponent) SetScene(scene *Scene) *ISceneSerializableComponent {
-	p := ba.ctx.Get("ISceneSerializableComponent").New(scene.JSObject())
-	return ISceneSerializableComponentFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

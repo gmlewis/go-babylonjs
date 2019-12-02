@@ -76,28 +76,6 @@ func (ba *Babylon) NewCubeTextureAssetTask(name string, url string, opts *NewCub
 	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
-// Reset calls the Reset method on the CubeTextureAssetTask object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#reset
-func (c *CubeTextureAssetTask) Reset() {
-
-	c.p.Call("reset")
-}
-
-// Run calls the Run method on the CubeTextureAssetTask object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#run
-func (c *CubeTextureAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
-
-	c.p.Call("run", args...)
-}
-
 // RunTask calls the RunTask method on the CubeTextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#runtask
@@ -113,22 +91,6 @@ func (c *CubeTextureAssetTask) RunTask(scene *Scene, onSuccess func(), onError f
 }
 
 /*
-
-// ErrorObject returns the ErrorObject property of class CubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#errorobject
-func (c *CubeTextureAssetTask) ErrorObject(errorObject js.Value) *CubeTextureAssetTask {
-	p := ba.ctx.Get("CubeTextureAssetTask").New(errorObject)
-	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetErrorObject sets the ErrorObject property of class CubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#errorobject
-func (c *CubeTextureAssetTask) SetErrorObject(errorObject js.Value) *CubeTextureAssetTask {
-	p := ba.ctx.Get("CubeTextureAssetTask").New(errorObject)
-	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
 
 // Extensions returns the Extensions property of class CubeTextureAssetTask.
 //
@@ -159,22 +121,6 @@ func (c *CubeTextureAssetTask) Files(files string) *CubeTextureAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#files
 func (c *CubeTextureAssetTask) SetFiles(files string) *CubeTextureAssetTask {
 	p := ba.ctx.Get("CubeTextureAssetTask").New(files)
-	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// IsCompleted returns the IsCompleted property of class CubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#iscompleted
-func (c *CubeTextureAssetTask) IsCompleted(isCompleted bool) *CubeTextureAssetTask {
-	p := ba.ctx.Get("CubeTextureAssetTask").New(isCompleted)
-	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetIsCompleted sets the IsCompleted property of class CubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#iscompleted
-func (c *CubeTextureAssetTask) SetIsCompleted(isCompleted bool) *CubeTextureAssetTask {
-	p := ba.ctx.Get("CubeTextureAssetTask").New(isCompleted)
 	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -239,22 +185,6 @@ func (c *CubeTextureAssetTask) OnSuccess(onSuccess func()) *CubeTextureAssetTask
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#onsuccess
 func (c *CubeTextureAssetTask) SetOnSuccess(onSuccess func()) *CubeTextureAssetTask {
 	p := ba.ctx.Get("CubeTextureAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// TaskState returns the TaskState property of class CubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#taskstate
-func (c *CubeTextureAssetTask) TaskState(taskState *AssetTaskState) *CubeTextureAssetTask {
-	p := ba.ctx.Get("CubeTextureAssetTask").New(taskState.JSObject())
-	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetTaskState sets the TaskState property of class CubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#taskstate
-func (c *CubeTextureAssetTask) SetTaskState(taskState *AssetTaskState) *CubeTextureAssetTask {
-	p := ba.ctx.Get("CubeTextureAssetTask").New(taskState.JSObject())
 	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 

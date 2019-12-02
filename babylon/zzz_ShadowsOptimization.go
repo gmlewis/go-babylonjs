@@ -88,20 +88,4 @@ func (s *ShadowsOptimization) GetDescription() string {
 
 /*
 
-// Priority returns the Priority property of class ShadowsOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.shadowsoptimization#priority
-func (s *ShadowsOptimization) Priority(priority float64) *ShadowsOptimization {
-	p := ba.ctx.Get("ShadowsOptimization").New(priority)
-	return ShadowsOptimizationFromJSObject(p, ba.ctx)
-}
-
-// SetPriority sets the Priority property of class ShadowsOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.shadowsoptimization#priority
-func (s *ShadowsOptimization) SetPriority(priority float64) *ShadowsOptimization {
-	p := ba.ctx.Get("ShadowsOptimization").New(priority)
-	return ShadowsOptimizationFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

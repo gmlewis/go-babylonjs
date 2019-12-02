@@ -88,20 +88,4 @@ func (p *ParticlesOptimization) GetDescription() string {
 
 /*
 
-// Priority returns the Priority property of class ParticlesOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.particlesoptimization#priority
-func (p *ParticlesOptimization) Priority(priority float64) *ParticlesOptimization {
-	p := ba.ctx.Get("ParticlesOptimization").New(priority)
-	return ParticlesOptimizationFromJSObject(p, ba.ctx)
-}
-
-// SetPriority sets the Priority property of class ParticlesOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.particlesoptimization#priority
-func (p *ParticlesOptimization) SetPriority(priority float64) *ParticlesOptimization {
-	p := ba.ctx.Get("ParticlesOptimization").New(priority)
-	return ParticlesOptimizationFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

@@ -88,82 +88,6 @@ func (p *PerturbNormalBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, op
 	p.p.Call("bind", args...)
 }
 
-// Build calls the Build method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#build
-func (p *PerturbNormalBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, state.JSObject())
-	args = append(args, activeBlocks.JSObject())
-
-	retVal := p.p.Call("build", args...)
-	return retVal.Bool()
-}
-
-// PerturbNormalBlockCloneOpts contains optional parameters for PerturbNormalBlock.Clone.
-type PerturbNormalBlockCloneOpts struct {
-	RootUrl *string
-}
-
-// Clone calls the Clone method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#clone
-func (p *PerturbNormalBlock) Clone(scene *Scene, opts *PerturbNormalBlockCloneOpts) *NodeMaterialBlock {
-	if opts == nil {
-		opts = &PerturbNormalBlockCloneOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, scene.JSObject())
-
-	if opts.RootUrl == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.RootUrl)
-	}
-
-	retVal := p.p.Call("clone", args...)
-	return NodeMaterialBlockFromJSObject(retVal, p.ctx)
-}
-
-// PerturbNormalBlockConnectToOpts contains optional parameters for PerturbNormalBlock.ConnectTo.
-type PerturbNormalBlockConnectToOpts struct {
-	Options map[string]interface{}
-}
-
-// ConnectTo calls the ConnectTo method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#connectto
-func (p *PerturbNormalBlock) ConnectTo(other *NodeMaterialBlock, opts *PerturbNormalBlockConnectToOpts) *PerturbNormalBlock {
-	if opts == nil {
-		opts = &PerturbNormalBlockConnectToOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, other.JSObject())
-
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
-
-	retVal := p.p.Call("connectTo", args...)
-	return PerturbNormalBlockFromJSObject(retVal, p.ctx)
-}
-
-// Dispose calls the Dispose method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#dispose
-func (p *PerturbNormalBlock) Dispose() {
-
-	p.p.Call("dispose")
-}
-
 // GetClassName calls the GetClassName method on the PerturbNormalBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#getclassname
@@ -171,164 +95,6 @@ func (p *PerturbNormalBlock) GetClassName() string {
 
 	retVal := p.p.Call("getClassName")
 	return retVal.String()
-}
-
-// PerturbNormalBlockGetFirstAvailableInputOpts contains optional parameters for PerturbNormalBlock.GetFirstAvailableInput.
-type PerturbNormalBlockGetFirstAvailableInputOpts struct {
-	ForOutput *NodeMaterialConnectionPoint
-}
-
-// GetFirstAvailableInput calls the GetFirstAvailableInput method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#getfirstavailableinput
-func (p *PerturbNormalBlock) GetFirstAvailableInput(opts *PerturbNormalBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
-	if opts == nil {
-		opts = &PerturbNormalBlockGetFirstAvailableInputOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.ForOutput == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.ForOutput.JSObject())
-	}
-
-	retVal := p.p.Call("getFirstAvailableInput", args...)
-	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
-}
-
-// PerturbNormalBlockGetFirstAvailableOutputOpts contains optional parameters for PerturbNormalBlock.GetFirstAvailableOutput.
-type PerturbNormalBlockGetFirstAvailableOutputOpts struct {
-	ForBlock *NodeMaterialBlock
-}
-
-// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#getfirstavailableoutput
-func (p *PerturbNormalBlock) GetFirstAvailableOutput(opts *PerturbNormalBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
-	if opts == nil {
-		opts = &PerturbNormalBlockGetFirstAvailableOutputOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.ForBlock == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.ForBlock.JSObject())
-	}
-
-	retVal := p.p.Call("getFirstAvailableOutput", args...)
-	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
-}
-
-// GetInputByName calls the GetInputByName method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#getinputbyname
-func (p *PerturbNormalBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, name)
-
-	retVal := p.p.Call("getInputByName", args...)
-	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
-}
-
-// GetOutputByName calls the GetOutputByName method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#getoutputbyname
-func (p *PerturbNormalBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, name)
-
-	retVal := p.p.Call("getOutputByName", args...)
-	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
-}
-
-// GetSiblingOutput calls the GetSiblingOutput method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#getsiblingoutput
-func (p *PerturbNormalBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, current.JSObject())
-
-	retVal := p.p.Call("getSiblingOutput", args...)
-	return NodeMaterialConnectionPointFromJSObject(retVal, p.ctx)
-}
-
-// Initialize calls the Initialize method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#initialize
-func (p *PerturbNormalBlock) Initialize(state *NodeMaterialBuildState) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, state.JSObject())
-
-	p.p.Call("initialize", args...)
-}
-
-// PerturbNormalBlockInitializeDefinesOpts contains optional parameters for PerturbNormalBlock.InitializeDefines.
-type PerturbNormalBlockInitializeDefinesOpts struct {
-	UseInstances *bool
-}
-
-// InitializeDefines calls the InitializeDefines method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#initializedefines
-func (p *PerturbNormalBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *PerturbNormalBlockInitializeDefinesOpts) {
-	if opts == nil {
-		opts = &PerturbNormalBlockInitializeDefinesOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+1)
-
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
-	args = append(args, defines)
-
-	if opts.UseInstances == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.UseInstances)
-	}
-
-	p.p.Call("initializeDefines", args...)
-}
-
-// PerturbNormalBlockIsReadyOpts contains optional parameters for PerturbNormalBlock.IsReady.
-type PerturbNormalBlockIsReadyOpts struct {
-	UseInstances *bool
-}
-
-// IsReady calls the IsReady method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#isready
-func (p *PerturbNormalBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *PerturbNormalBlockIsReadyOpts) bool {
-	if opts == nil {
-		opts = &PerturbNormalBlockIsReadyOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+1)
-
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
-	args = append(args, defines)
-
-	if opts.UseInstances == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.UseInstances)
-	}
-
-	retVal := p.p.Call("isReady", args...)
-	return retVal.Bool()
 }
 
 // PrepareDefines calls the PrepareDefines method on the PerturbNormalBlock object.
@@ -345,88 +111,6 @@ func (p *PerturbNormalBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *No
 	p.p.Call("prepareDefines", args...)
 }
 
-// ProvideFallbacks calls the ProvideFallbacks method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#providefallbacks
-func (p *PerturbNormalBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, mesh.JSObject())
-	args = append(args, fallbacks.JSObject())
-
-	p.p.Call("provideFallbacks", args...)
-}
-
-// PerturbNormalBlockRegisterInputOpts contains optional parameters for PerturbNormalBlock.RegisterInput.
-type PerturbNormalBlockRegisterInputOpts struct {
-	IsOptional *bool
-	Target     js.Value
-}
-
-// RegisterInput calls the RegisterInput method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#registerinput
-func (p *PerturbNormalBlock) RegisterInput(name string, jsType js.Value, opts *PerturbNormalBlockRegisterInputOpts) *PerturbNormalBlock {
-	if opts == nil {
-		opts = &PerturbNormalBlockRegisterInputOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+2)
-
-	args = append(args, name)
-	args = append(args, jsType)
-
-	if opts.IsOptional == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.IsOptional)
-	}
-	args = append(args, opts.Target)
-
-	retVal := p.p.Call("registerInput", args...)
-	return PerturbNormalBlockFromJSObject(retVal, p.ctx)
-}
-
-// PerturbNormalBlockRegisterOutputOpts contains optional parameters for PerturbNormalBlock.RegisterOutput.
-type PerturbNormalBlockRegisterOutputOpts struct {
-	Target js.Value
-}
-
-// RegisterOutput calls the RegisterOutput method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#registeroutput
-func (p *PerturbNormalBlock) RegisterOutput(name string, jsType js.Value, opts *PerturbNormalBlockRegisterOutputOpts) *PerturbNormalBlock {
-	if opts == nil {
-		opts = &PerturbNormalBlockRegisterOutputOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, name)
-	args = append(args, jsType)
-
-	args = append(args, opts.Target)
-
-	retVal := p.p.Call("registerOutput", args...)
-	return PerturbNormalBlockFromJSObject(retVal, p.ctx)
-}
-
-// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#replacerepeatablecontent
-func (p *PerturbNormalBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
-
-	args := make([]interface{}, 0, 4+0)
-
-	args = append(args, vertexShaderState.JSObject())
-	args = append(args, fragmentShaderState.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, defines)
-
-	p.p.Call("replaceRepeatableContent", args...)
-}
-
 // Serialize calls the Serialize method on the PerturbNormalBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#serialize
@@ -434,21 +118,6 @@ func (p *PerturbNormalBlock) Serialize() interface{} {
 
 	retVal := p.p.Call("serialize")
 	return retVal
-}
-
-// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the PerturbNormalBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#updateuniformsandsamples
-func (p *PerturbNormalBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
-
-	args := make([]interface{}, 0, 4+0)
-
-	args = append(args, state.JSObject())
-	args = append(args, nodeMaterial.JSObject())
-	args = append(args, defines)
-	args = append(args, uniformBuffers)
-
-	p.p.Call("updateUniformsAndSamples", args...)
 }
 
 // _deserialize calls the _deserialize method on the PerturbNormalBlock object.
@@ -466,54 +135,6 @@ func (p *PerturbNormalBlock) _deserialize(serializationObject interface{}, scene
 }
 
 /*
-
-// BuildId returns the BuildId property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#buildid
-func (p *PerturbNormalBlock) BuildId(buildId float64) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(buildId)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// SetBuildId sets the BuildId property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#buildid
-func (p *PerturbNormalBlock) SetBuildId(buildId float64) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(buildId)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// Comments returns the Comments property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#comments
-func (p *PerturbNormalBlock) Comments(comments string) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(comments)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// SetComments sets the Comments property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#comments
-func (p *PerturbNormalBlock) SetComments(comments string) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(comments)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// Inputs returns the Inputs property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#inputs
-func (p *PerturbNormalBlock) Inputs(inputs *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(inputs.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// SetInputs sets the Inputs property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#inputs
-func (p *PerturbNormalBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(inputs.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
 
 // InvertX returns the InvertX property of class PerturbNormalBlock.
 //
@@ -544,70 +165,6 @@ func (p *PerturbNormalBlock) InvertY(invertY bool) *PerturbNormalBlock {
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#inverty
 func (p *PerturbNormalBlock) SetInvertY(invertY bool) *PerturbNormalBlock {
 	p := ba.ctx.Get("PerturbNormalBlock").New(invertY)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// IsFinalMerger returns the IsFinalMerger property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#isfinalmerger
-func (p *PerturbNormalBlock) IsFinalMerger(isFinalMerger bool) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(isFinalMerger)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// SetIsFinalMerger sets the IsFinalMerger property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#isfinalmerger
-func (p *PerturbNormalBlock) SetIsFinalMerger(isFinalMerger bool) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(isFinalMerger)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// IsInput returns the IsInput property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#isinput
-func (p *PerturbNormalBlock) IsInput(isInput bool) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(isInput)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// SetIsInput sets the IsInput property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#isinput
-func (p *PerturbNormalBlock) SetIsInput(isInput bool) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(isInput)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// IsUnique returns the IsUnique property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#isunique
-func (p *PerturbNormalBlock) IsUnique(isUnique bool) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(isUnique)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// SetIsUnique sets the IsUnique property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#isunique
-func (p *PerturbNormalBlock) SetIsUnique(isUnique bool) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(isUnique)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// Name returns the Name property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#name
-func (p *PerturbNormalBlock) Name(name string) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(name)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// SetName sets the Name property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#name
-func (p *PerturbNormalBlock) SetName(name string) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(name)
 	return PerturbNormalBlockFromJSObject(p, ba.ctx)
 }
 
@@ -643,22 +200,6 @@ func (p *PerturbNormalBlock) SetOutput(output *NodeMaterialConnectionPoint) *Per
 	return PerturbNormalBlockFromJSObject(p, ba.ctx)
 }
 
-// Outputs returns the Outputs property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#outputs
-func (p *PerturbNormalBlock) Outputs(outputs *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(outputs.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// SetOutputs sets the Outputs property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#outputs
-func (p *PerturbNormalBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(outputs.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
 // Strength returns the Strength property of class PerturbNormalBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#strength
@@ -672,38 +213,6 @@ func (p *PerturbNormalBlock) Strength(strength *NodeMaterialConnectionPoint) *Pe
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#strength
 func (p *PerturbNormalBlock) SetStrength(strength *NodeMaterialConnectionPoint) *PerturbNormalBlock {
 	p := ba.ctx.Get("PerturbNormalBlock").New(strength.JSObject())
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// Target returns the Target property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#target
-func (p *PerturbNormalBlock) Target(target js.Value) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(target)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// SetTarget sets the Target property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#target
-func (p *PerturbNormalBlock) SetTarget(target js.Value) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(target)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// UniqueId returns the UniqueId property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#uniqueid
-func (p *PerturbNormalBlock) UniqueId(uniqueId float64) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(uniqueId)
-	return PerturbNormalBlockFromJSObject(p, ba.ctx)
-}
-
-// SetUniqueId sets the UniqueId property of class PerturbNormalBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#uniqueid
-func (p *PerturbNormalBlock) SetUniqueId(uniqueId float64) *PerturbNormalBlock {
-	p := ba.ctx.Get("PerturbNormalBlock").New(uniqueId)
 	return PerturbNormalBlockFromJSObject(p, ba.ctx)
 }
 

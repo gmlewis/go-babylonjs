@@ -36,14 +36,6 @@ func IEdgesRendererArrayToJSArray(array []*IEdgesRenderer) []interface{} {
 	return result
 }
 
-// Dispose calls the Dispose method on the IEdgesRenderer object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iedgesrenderer#dispose
-func (i *IEdgesRenderer) Dispose() {
-
-	i.p.Call("dispose")
-}
-
 // IsReady calls the IsReady method on the IEdgesRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iedgesrenderer#isready

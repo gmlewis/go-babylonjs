@@ -102,22 +102,6 @@ func (m *MergeMeshesOptimization) GetDescription() string {
 
 /*
 
-// Priority returns the Priority property of class MergeMeshesOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#priority
-func (m *MergeMeshesOptimization) Priority(priority float64) *MergeMeshesOptimization {
-	p := ba.ctx.Get("MergeMeshesOptimization").New(priority)
-	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
-}
-
-// SetPriority sets the Priority property of class MergeMeshesOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#priority
-func (m *MergeMeshesOptimization) SetPriority(priority float64) *MergeMeshesOptimization {
-	p := ba.ctx.Get("MergeMeshesOptimization").New(priority)
-	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
-}
-
 // UpdateSelectionTree returns the UpdateSelectionTree property of class MergeMeshesOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#updateselectiontree

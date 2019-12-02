@@ -123,49 +123,6 @@ func (f *FreeCamera) GetClassName() string {
 	return retVal.String()
 }
 
-// GetFrontPosition calls the GetFrontPosition method on the FreeCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#getfrontposition
-func (f *FreeCamera) GetFrontPosition(distance float64) *Vector3 {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, distance)
-
-	retVal := f.p.Call("getFrontPosition", args...)
-	return Vector3FromJSObject(retVal, f.ctx)
-}
-
-// GetTarget calls the GetTarget method on the FreeCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#gettarget
-func (f *FreeCamera) GetTarget() *Vector3 {
-
-	retVal := f.p.Call("getTarget")
-	return Vector3FromJSObject(retVal, f.ctx)
-}
-
-// SetTarget calls the SetTarget method on the FreeCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#settarget
-func (f *FreeCamera) SetTarget(target *Vector3) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, target.JSObject())
-
-	f.p.Call("setTarget", args...)
-}
-
-// StoreState calls the StoreState method on the FreeCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#storestate
-func (f *FreeCamera) StoreState() *Camera {
-
-	retVal := f.p.Call("storeState")
-	return CameraFromJSObject(retVal, f.ctx)
-}
-
 /*
 
 // AngularSensibility returns the AngularSensibility property of class FreeCamera.
@@ -197,38 +154,6 @@ func (f *FreeCamera) ApplyGravity(applyGravity bool) *FreeCamera {
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#applygravity
 func (f *FreeCamera) SetApplyGravity(applyGravity bool) *FreeCamera {
 	p := ba.ctx.Get("FreeCamera").New(applyGravity)
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// CameraDirection returns the CameraDirection property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#cameradirection
-func (f *FreeCamera) CameraDirection(cameraDirection *Vector3) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(cameraDirection.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetCameraDirection sets the CameraDirection property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#cameradirection
-func (f *FreeCamera) SetCameraDirection(cameraDirection *Vector3) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(cameraDirection.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// CameraRotation returns the CameraRotation property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#camerarotation
-func (f *FreeCamera) CameraRotation(cameraRotation *Vector2) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(cameraRotation.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetCameraRotation sets the CameraRotation property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#camerarotation
-func (f *FreeCamera) SetCameraRotation(cameraRotation *Vector2) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(cameraRotation.JSObject())
 	return FreeCameraFromJSObject(p, ba.ctx)
 }
 
@@ -376,38 +301,6 @@ func (f *FreeCamera) SetKeysUp(keysUp float64) *FreeCamera {
 	return FreeCameraFromJSObject(p, ba.ctx)
 }
 
-// LockedTarget returns the LockedTarget property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#lockedtarget
-func (f *FreeCamera) LockedTarget(lockedTarget interface{}) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(lockedTarget)
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetLockedTarget sets the LockedTarget property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#lockedtarget
-func (f *FreeCamera) SetLockedTarget(lockedTarget interface{}) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(lockedTarget)
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// NoRotationConstraint returns the NoRotationConstraint property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#norotationconstraint
-func (f *FreeCamera) NoRotationConstraint(noRotationConstraint bool) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(noRotationConstraint)
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetNoRotationConstraint sets the NoRotationConstraint property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#norotationconstraint
-func (f *FreeCamera) SetNoRotationConstraint(noRotationConstraint bool) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(noRotationConstraint)
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
 // OnCollide returns the OnCollide property of class FreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#oncollide
@@ -421,70 +314,6 @@ func (f *FreeCamera) OnCollide(onCollide func()) *FreeCamera {
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#oncollide
 func (f *FreeCamera) SetOnCollide(onCollide func()) *FreeCamera {
 	p := ba.ctx.Get("FreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// Rotation returns the Rotation property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#rotation
-func (f *FreeCamera) Rotation(rotation *Vector3) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(rotation.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetRotation sets the Rotation property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#rotation
-func (f *FreeCamera) SetRotation(rotation *Vector3) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(rotation.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// RotationQuaternion returns the RotationQuaternion property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#rotationquaternion
-func (f *FreeCamera) RotationQuaternion(rotationQuaternion *Quaternion) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(rotationQuaternion.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetRotationQuaternion sets the RotationQuaternion property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#rotationquaternion
-func (f *FreeCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(rotationQuaternion.JSObject())
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// Speed returns the Speed property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#speed
-func (f *FreeCamera) Speed(speed float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(speed)
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetSpeed sets the Speed property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#speed
-func (f *FreeCamera) SetSpeed(speed float64) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(speed)
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#updateupvectorfromrotation
-func (f *FreeCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(updateUpVectorFromRotation)
-	return FreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class FreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#updateupvectorfromrotation
-func (f *FreeCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *FreeCamera {
-	p := ba.ctx.Get("FreeCamera").New(updateUpVectorFromRotation)
 	return FreeCameraFromJSObject(p, ba.ctx)
 }
 

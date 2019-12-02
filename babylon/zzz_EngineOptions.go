@@ -38,38 +38,6 @@ func EngineOptionsArrayToJSArray(array []*EngineOptions) []interface{} {
 
 /*
 
-// Alpha returns the Alpha property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#alpha
-func (e *EngineOptions) Alpha(alpha bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(alpha)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetAlpha sets the Alpha property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#alpha
-func (e *EngineOptions) SetAlpha(alpha bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(alpha)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// Antialias returns the Antialias property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#antialias
-func (e *EngineOptions) Antialias(antialias bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(antialias)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetAntialias sets the Antialias property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#antialias
-func (e *EngineOptions) SetAntialias(antialias bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(antialias)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
 // AudioEngine returns the AudioEngine property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#audioengine
@@ -99,38 +67,6 @@ func (e *EngineOptions) AutoEnableWebVR(autoEnableWebVR bool) *EngineOptions {
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#autoenablewebvr
 func (e *EngineOptions) SetAutoEnableWebVR(autoEnableWebVR bool) *EngineOptions {
 	p := ba.ctx.Get("EngineOptions").New(autoEnableWebVR)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// Depth returns the Depth property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#depth
-func (e *EngineOptions) Depth(depth bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(depth)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetDepth sets the Depth property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#depth
-func (e *EngineOptions) SetDepth(depth bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(depth)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// Desynchronized returns the Desynchronized property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#desynchronized
-func (e *EngineOptions) Desynchronized(desynchronized bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(desynchronized)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetDesynchronized sets the Desynchronized property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#desynchronized
-func (e *EngineOptions) SetDesynchronized(desynchronized bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(desynchronized)
 	return EngineOptionsFromJSObject(p, ba.ctx)
 }
 
@@ -198,22 +134,6 @@ func (e *EngineOptions) SetDoNotHandleTouchAction(doNotHandleTouchAction bool) *
 	return EngineOptionsFromJSObject(p, ba.ctx)
 }
 
-// FailIfMajorPerformanceCaveat returns the FailIfMajorPerformanceCaveat property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#failifmajorperformancecaveat
-func (e *EngineOptions) FailIfMajorPerformanceCaveat(failIfMajorPerformanceCaveat bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(failIfMajorPerformanceCaveat)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetFailIfMajorPerformanceCaveat sets the FailIfMajorPerformanceCaveat property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#failifmajorperformancecaveat
-func (e *EngineOptions) SetFailIfMajorPerformanceCaveat(failIfMajorPerformanceCaveat bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(failIfMajorPerformanceCaveat)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
 // LimitDeviceRatio returns the LimitDeviceRatio property of class EngineOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#limitdeviceratio
@@ -243,70 +163,6 @@ func (e *EngineOptions) LockstepMaxSteps(lockstepMaxSteps float64) *EngineOption
 // https://doc.babylonjs.com/api/classes/babylon.engineoptions#lockstepmaxsteps
 func (e *EngineOptions) SetLockstepMaxSteps(lockstepMaxSteps float64) *EngineOptions {
 	p := ba.ctx.Get("EngineOptions").New(lockstepMaxSteps)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// PowerPreference returns the PowerPreference property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#powerpreference
-func (e *EngineOptions) PowerPreference(powerPreference *WebGLPowerPreference) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(powerPreference.JSObject())
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetPowerPreference sets the PowerPreference property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#powerpreference
-func (e *EngineOptions) SetPowerPreference(powerPreference *WebGLPowerPreference) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(powerPreference.JSObject())
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// PremultipliedAlpha returns the PremultipliedAlpha property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#premultipliedalpha
-func (e *EngineOptions) PremultipliedAlpha(premultipliedAlpha bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(premultipliedAlpha)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetPremultipliedAlpha sets the PremultipliedAlpha property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#premultipliedalpha
-func (e *EngineOptions) SetPremultipliedAlpha(premultipliedAlpha bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(premultipliedAlpha)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// PreserveDrawingBuffer returns the PreserveDrawingBuffer property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#preservedrawingbuffer
-func (e *EngineOptions) PreserveDrawingBuffer(preserveDrawingBuffer bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(preserveDrawingBuffer)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetPreserveDrawingBuffer sets the PreserveDrawingBuffer property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#preservedrawingbuffer
-func (e *EngineOptions) SetPreserveDrawingBuffer(preserveDrawingBuffer bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(preserveDrawingBuffer)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// Stencil returns the Stencil property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#stencil
-func (e *EngineOptions) Stencil(stencil bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(stencil)
-	return EngineOptionsFromJSObject(p, ba.ctx)
-}
-
-// SetStencil sets the Stencil property of class EngineOptions.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engineoptions#stencil
-func (e *EngineOptions) SetStencil(stencil bool) *EngineOptions {
-	p := ba.ctx.Get("EngineOptions").New(stencil)
 	return EngineOptionsFromJSObject(p, ba.ctx)
 }
 

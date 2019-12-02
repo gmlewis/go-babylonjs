@@ -50,28 +50,6 @@ func (ba *Babylon) NewTextFileAssetTask(name string, url string) *TextFileAssetT
 	return TextFileAssetTaskFromJSObject(p, ba.ctx)
 }
 
-// Reset calls the Reset method on the TextFileAssetTask object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textfileassettask#reset
-func (t *TextFileAssetTask) Reset() {
-
-	t.p.Call("reset")
-}
-
-// Run calls the Run method on the TextFileAssetTask object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textfileassettask#run
-func (t *TextFileAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
-
-	t.p.Call("run", args...)
-}
-
 // RunTask calls the RunTask method on the TextFileAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#runtask
@@ -87,38 +65,6 @@ func (t *TextFileAssetTask) RunTask(scene *Scene, onSuccess func(), onError func
 }
 
 /*
-
-// ErrorObject returns the ErrorObject property of class TextFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textfileassettask#errorobject
-func (t *TextFileAssetTask) ErrorObject(errorObject js.Value) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(errorObject)
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetErrorObject sets the ErrorObject property of class TextFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textfileassettask#errorobject
-func (t *TextFileAssetTask) SetErrorObject(errorObject js.Value) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(errorObject)
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// IsCompleted returns the IsCompleted property of class TextFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textfileassettask#iscompleted
-func (t *TextFileAssetTask) IsCompleted(isCompleted bool) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(isCompleted)
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetIsCompleted sets the IsCompleted property of class TextFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textfileassettask#iscompleted
-func (t *TextFileAssetTask) SetIsCompleted(isCompleted bool) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(isCompleted)
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
-}
 
 // Name returns the Name property of class TextFileAssetTask.
 //
@@ -165,22 +111,6 @@ func (t *TextFileAssetTask) OnSuccess(onSuccess func()) *TextFileAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onsuccess
 func (t *TextFileAssetTask) SetOnSuccess(onSuccess func()) *TextFileAssetTask {
 	p := ba.ctx.Get("TextFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// TaskState returns the TaskState property of class TextFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textfileassettask#taskstate
-func (t *TextFileAssetTask) TaskState(taskState *AssetTaskState) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(taskState.JSObject())
-	return TextFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetTaskState sets the TaskState property of class TextFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textfileassettask#taskstate
-func (t *TextFileAssetTask) SetTaskState(taskState *AssetTaskState) *TextFileAssetTask {
-	p := ba.ctx.Get("TextFileAssetTask").New(taskState.JSObject())
 	return TextFileAssetTaskFromJSObject(p, ba.ctx)
 }
 

@@ -120,20 +120,4 @@ func (c *CustomOptimization) SetOnGetDescription(onGetDescription func()) *Custo
 	return CustomOptimizationFromJSObject(p, ba.ctx)
 }
 
-// Priority returns the Priority property of class CustomOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.customoptimization#priority
-func (c *CustomOptimization) Priority(priority float64) *CustomOptimization {
-	p := ba.ctx.Get("CustomOptimization").New(priority)
-	return CustomOptimizationFromJSObject(p, ba.ctx)
-}
-
-// SetPriority sets the Priority property of class CustomOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.customoptimization#priority
-func (c *CustomOptimization) SetPriority(priority float64) *CustomOptimization {
-	p := ba.ctx.Get("CustomOptimization").New(priority)
-	return CustomOptimizationFromJSObject(p, ba.ctx)
-}
-
 */

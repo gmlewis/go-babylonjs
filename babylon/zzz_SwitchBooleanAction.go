@@ -75,15 +75,6 @@ func (s *SwitchBooleanAction) Execute() {
 	s.p.Call("execute")
 }
 
-// GetTriggerParameter calls the GetTriggerParameter method on the SwitchBooleanAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#gettriggerparameter
-func (s *SwitchBooleanAction) GetTriggerParameter() interface{} {
-
-	retVal := s.p.Call("getTriggerParameter")
-	return retVal
-}
-
 // Serialize calls the Serialize method on the SwitchBooleanAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#serialize
@@ -97,44 +88,7 @@ func (s *SwitchBooleanAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-// SkipToNextActiveAction calls the SkipToNextActiveAction method on the SwitchBooleanAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#skiptonextactiveaction
-func (s *SwitchBooleanAction) SkipToNextActiveAction() {
-
-	s.p.Call("skipToNextActiveAction")
-}
-
-// Then calls the Then method on the SwitchBooleanAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#then
-func (s *SwitchBooleanAction) Then(action *Action) *Action {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, action.JSObject())
-
-	retVal := s.p.Call("then", args...)
-	return ActionFromJSObject(retVal, s.ctx)
-}
-
 /*
-
-// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class SwitchBooleanAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#onbeforeexecuteobservable
-func (s *SwitchBooleanAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *SwitchBooleanAction {
-	p := ba.ctx.Get("SwitchBooleanAction").New(onBeforeExecuteObservable.JSObject())
-	return SwitchBooleanActionFromJSObject(p, ba.ctx)
-}
-
-// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class SwitchBooleanAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#onbeforeexecuteobservable
-func (s *SwitchBooleanAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *SwitchBooleanAction {
-	p := ba.ctx.Get("SwitchBooleanAction").New(onBeforeExecuteObservable.JSObject())
-	return SwitchBooleanActionFromJSObject(p, ba.ctx)
-}
 
 // PropertyPath returns the PropertyPath property of class SwitchBooleanAction.
 //
@@ -149,38 +103,6 @@ func (s *SwitchBooleanAction) PropertyPath(propertyPath string) *SwitchBooleanAc
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#propertypath
 func (s *SwitchBooleanAction) SetPropertyPath(propertyPath string) *SwitchBooleanAction {
 	p := ba.ctx.Get("SwitchBooleanAction").New(propertyPath)
-	return SwitchBooleanActionFromJSObject(p, ba.ctx)
-}
-
-// Trigger returns the Trigger property of class SwitchBooleanAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#trigger
-func (s *SwitchBooleanAction) Trigger(trigger float64) *SwitchBooleanAction {
-	p := ba.ctx.Get("SwitchBooleanAction").New(trigger)
-	return SwitchBooleanActionFromJSObject(p, ba.ctx)
-}
-
-// SetTrigger sets the Trigger property of class SwitchBooleanAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#trigger
-func (s *SwitchBooleanAction) SetTrigger(trigger float64) *SwitchBooleanAction {
-	p := ba.ctx.Get("SwitchBooleanAction").New(trigger)
-	return SwitchBooleanActionFromJSObject(p, ba.ctx)
-}
-
-// TriggerOptions returns the TriggerOptions property of class SwitchBooleanAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#triggeroptions
-func (s *SwitchBooleanAction) TriggerOptions(triggerOptions interface{}) *SwitchBooleanAction {
-	p := ba.ctx.Get("SwitchBooleanAction").New(triggerOptions)
-	return SwitchBooleanActionFromJSObject(p, ba.ctx)
-}
-
-// SetTriggerOptions sets the TriggerOptions property of class SwitchBooleanAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#triggeroptions
-func (s *SwitchBooleanAction) SetTriggerOptions(triggerOptions interface{}) *SwitchBooleanAction {
-	p := ba.ctx.Get("SwitchBooleanAction").New(triggerOptions)
 	return SwitchBooleanActionFromJSObject(p, ba.ctx)
 }
 

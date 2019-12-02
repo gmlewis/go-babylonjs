@@ -70,22 +70,6 @@ func (i *IGLTF) SetAnimations(animations *IAnimation) *IGLTF {
 	return IGLTFFromJSObject(p, ba.ctx)
 }
 
-// Asset returns the Asset property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#asset
-func (i *IGLTF) Asset(asset *IAsset) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(asset.JSObject())
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// SetAsset sets the Asset property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#asset
-func (i *IGLTF) SetAsset(asset *IAsset) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(asset.JSObject())
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
 // BufferViews returns the BufferViews property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#bufferviews
@@ -131,70 +115,6 @@ func (i *IGLTF) Cameras(cameras *ICamera) *IGLTF {
 // https://doc.babylonjs.com/api/classes/babylon.igltf#cameras
 func (i *IGLTF) SetCameras(cameras *ICamera) *IGLTF {
 	p := ba.ctx.Get("IGLTF").New(cameras.JSObject())
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// Extensions returns the Extensions property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#extensions
-func (i *IGLTF) Extensions(extensions js.Value) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(extensions)
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// SetExtensions sets the Extensions property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#extensions
-func (i *IGLTF) SetExtensions(extensions js.Value) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(extensions)
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// ExtensionsRequired returns the ExtensionsRequired property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#extensionsrequired
-func (i *IGLTF) ExtensionsRequired(extensionsRequired string) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(extensionsRequired)
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// SetExtensionsRequired sets the ExtensionsRequired property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#extensionsrequired
-func (i *IGLTF) SetExtensionsRequired(extensionsRequired string) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(extensionsRequired)
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// ExtensionsUsed returns the ExtensionsUsed property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#extensionsused
-func (i *IGLTF) ExtensionsUsed(extensionsUsed string) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(extensionsUsed)
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// SetExtensionsUsed sets the ExtensionsUsed property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#extensionsused
-func (i *IGLTF) SetExtensionsUsed(extensionsUsed string) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(extensionsUsed)
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// Extras returns the Extras property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#extras
-func (i *IGLTF) Extras(extras interface{}) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(extras)
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// SetExtras sets the Extras property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#extras
-func (i *IGLTF) SetExtras(extras interface{}) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(extras)
 	return IGLTFFromJSObject(p, ba.ctx)
 }
 
@@ -275,22 +195,6 @@ func (i *IGLTF) Samplers(samplers *ISampler) *IGLTF {
 // https://doc.babylonjs.com/api/classes/babylon.igltf#samplers
 func (i *IGLTF) SetSamplers(samplers *ISampler) *IGLTF {
 	p := ba.ctx.Get("IGLTF").New(samplers.JSObject())
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// Scene returns the Scene property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#scene
-func (i *IGLTF) Scene(scene float64) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(scene)
-	return IGLTFFromJSObject(p, ba.ctx)
-}
-
-// SetScene sets the Scene property of class IGLTF.
-//
-// https://doc.babylonjs.com/api/classes/babylon.igltf#scene
-func (i *IGLTF) SetScene(scene float64) *IGLTF {
-	p := ba.ctx.Get("IGLTF").New(scene)
 	return IGLTFFromJSObject(p, ba.ctx)
 }
 

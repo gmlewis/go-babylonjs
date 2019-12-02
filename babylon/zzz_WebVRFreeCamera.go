@@ -166,28 +166,6 @@ func (w *WebVRFreeCamera) GetForwardRay(opts *WebVRFreeCameraGetForwardRayOpts) 
 	return RayFromJSObject(retVal, w.ctx)
 }
 
-// GetFrontPosition calls the GetFrontPosition method on the WebVRFreeCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#getfrontposition
-func (w *WebVRFreeCamera) GetFrontPosition(distance float64) *Vector3 {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, distance)
-
-	retVal := w.p.Call("getFrontPosition", args...)
-	return Vector3FromJSObject(retVal, w.ctx)
-}
-
-// GetTarget calls the GetTarget method on the WebVRFreeCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#gettarget
-func (w *WebVRFreeCamera) GetTarget() *Vector3 {
-
-	retVal := w.p.Call("getTarget")
-	return Vector3FromJSObject(retVal, w.ctx)
-}
-
 // InitControllers calls the InitControllers method on the WebVRFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#initcontrollers
@@ -202,27 +180,6 @@ func (w *WebVRFreeCamera) InitControllers() {
 func (w *WebVRFreeCamera) ResetToCurrentRotation() {
 
 	w.p.Call("resetToCurrentRotation")
-}
-
-// SetTarget calls the SetTarget method on the WebVRFreeCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#settarget
-func (w *WebVRFreeCamera) SetTarget(target *Vector3) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, target.JSObject())
-
-	w.p.Call("setTarget", args...)
-}
-
-// StoreState calls the StoreState method on the WebVRFreeCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#storestate
-func (w *WebVRFreeCamera) StoreState() *Camera {
-
-	retVal := w.p.Call("storeState")
-	return CameraFromJSObject(retVal, w.ctx)
 }
 
 // Update calls the Update method on the WebVRFreeCamera object.
@@ -279,102 +236,6 @@ func (w *WebVRFreeCamera) UseStandingMatrixAsync() *Promise {
 }
 
 /*
-
-// AngularSensibility returns the AngularSensibility property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#angularsensibility
-func (w *WebVRFreeCamera) AngularSensibility(angularSensibility float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(angularSensibility)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetAngularSensibility sets the AngularSensibility property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#angularsensibility
-func (w *WebVRFreeCamera) SetAngularSensibility(angularSensibility float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(angularSensibility)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// ApplyGravity returns the ApplyGravity property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#applygravity
-func (w *WebVRFreeCamera) ApplyGravity(applyGravity bool) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(applyGravity)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetApplyGravity sets the ApplyGravity property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#applygravity
-func (w *WebVRFreeCamera) SetApplyGravity(applyGravity bool) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(applyGravity)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// CameraDirection returns the CameraDirection property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#cameradirection
-func (w *WebVRFreeCamera) CameraDirection(cameraDirection *Vector3) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(cameraDirection.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetCameraDirection sets the CameraDirection property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#cameradirection
-func (w *WebVRFreeCamera) SetCameraDirection(cameraDirection *Vector3) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(cameraDirection.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// CameraRotation returns the CameraRotation property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#camerarotation
-func (w *WebVRFreeCamera) CameraRotation(cameraRotation *Vector2) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(cameraRotation.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetCameraRotation sets the CameraRotation property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#camerarotation
-func (w *WebVRFreeCamera) SetCameraRotation(cameraRotation *Vector2) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(cameraRotation.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// CheckCollisions returns the CheckCollisions property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#checkcollisions
-func (w *WebVRFreeCamera) CheckCollisions(checkCollisions bool) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(checkCollisions)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetCheckCollisions sets the CheckCollisions property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#checkcollisions
-func (w *WebVRFreeCamera) SetCheckCollisions(checkCollisions bool) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(checkCollisions)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// CollisionMask returns the CollisionMask property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#collisionmask
-func (w *WebVRFreeCamera) CollisionMask(collisionMask float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(collisionMask)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetCollisionMask sets the CollisionMask property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#collisionmask
-func (w *WebVRFreeCamera) SetCollisionMask(collisionMask float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(collisionMask)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
 
 // Controllers returns the Controllers property of class WebVRFreeCamera.
 //
@@ -440,118 +301,6 @@ func (w *WebVRFreeCamera) SetDeviceScaleFactor(deviceScaleFactor float64) *WebVR
 	return WebVRFreeCameraFromJSObject(p, ba.ctx)
 }
 
-// Ellipsoid returns the Ellipsoid property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#ellipsoid
-func (w *WebVRFreeCamera) Ellipsoid(ellipsoid *Vector3) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(ellipsoid.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetEllipsoid sets the Ellipsoid property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#ellipsoid
-func (w *WebVRFreeCamera) SetEllipsoid(ellipsoid *Vector3) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(ellipsoid.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// EllipsoidOffset returns the EllipsoidOffset property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#ellipsoidoffset
-func (w *WebVRFreeCamera) EllipsoidOffset(ellipsoidOffset *Vector3) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(ellipsoidOffset.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetEllipsoidOffset sets the EllipsoidOffset property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#ellipsoidoffset
-func (w *WebVRFreeCamera) SetEllipsoidOffset(ellipsoidOffset *Vector3) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(ellipsoidOffset.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// Inputs returns the Inputs property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#inputs
-func (w *WebVRFreeCamera) Inputs(inputs *FreeCameraInputsManager) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(inputs.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetInputs sets the Inputs property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#inputs
-func (w *WebVRFreeCamera) SetInputs(inputs *FreeCameraInputsManager) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(inputs.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// KeysDown returns the KeysDown property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#keysdown
-func (w *WebVRFreeCamera) KeysDown(keysDown float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(keysDown)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetKeysDown sets the KeysDown property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#keysdown
-func (w *WebVRFreeCamera) SetKeysDown(keysDown float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(keysDown)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// KeysLeft returns the KeysLeft property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#keysleft
-func (w *WebVRFreeCamera) KeysLeft(keysLeft float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(keysLeft)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetKeysLeft sets the KeysLeft property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#keysleft
-func (w *WebVRFreeCamera) SetKeysLeft(keysLeft float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(keysLeft)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// KeysRight returns the KeysRight property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#keysright
-func (w *WebVRFreeCamera) KeysRight(keysRight float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(keysRight)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetKeysRight sets the KeysRight property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#keysright
-func (w *WebVRFreeCamera) SetKeysRight(keysRight float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(keysRight)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// KeysUp returns the KeysUp property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#keysup
-func (w *WebVRFreeCamera) KeysUp(keysUp float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(keysUp)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetKeysUp sets the KeysUp property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#keysup
-func (w *WebVRFreeCamera) SetKeysUp(keysUp float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(keysUp)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
 // LeftController returns the LeftController property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#leftcontroller
@@ -565,54 +314,6 @@ func (w *WebVRFreeCamera) LeftController(leftController *WebVRController) *WebVR
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#leftcontroller
 func (w *WebVRFreeCamera) SetLeftController(leftController *WebVRController) *WebVRFreeCamera {
 	p := ba.ctx.Get("WebVRFreeCamera").New(leftController.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// LockedTarget returns the LockedTarget property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#lockedtarget
-func (w *WebVRFreeCamera) LockedTarget(lockedTarget interface{}) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(lockedTarget)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetLockedTarget sets the LockedTarget property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#lockedtarget
-func (w *WebVRFreeCamera) SetLockedTarget(lockedTarget interface{}) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(lockedTarget)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// NoRotationConstraint returns the NoRotationConstraint property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#norotationconstraint
-func (w *WebVRFreeCamera) NoRotationConstraint(noRotationConstraint bool) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(noRotationConstraint)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetNoRotationConstraint sets the NoRotationConstraint property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#norotationconstraint
-func (w *WebVRFreeCamera) SetNoRotationConstraint(noRotationConstraint bool) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(noRotationConstraint)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// OnCollide returns the OnCollide property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#oncollide
-func (w *WebVRFreeCamera) OnCollide(onCollide func()) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetOnCollide sets the OnCollide property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#oncollide
-func (w *WebVRFreeCamera) SetOnCollide(onCollide func()) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCollide(); return nil}))
 	return WebVRFreeCameraFromJSObject(p, ba.ctx)
 }
 
@@ -709,70 +410,6 @@ func (w *WebVRFreeCamera) RightController(rightController *WebVRController) *Web
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rightcontroller
 func (w *WebVRFreeCamera) SetRightController(rightController *WebVRController) *WebVRFreeCamera {
 	p := ba.ctx.Get("WebVRFreeCamera").New(rightController.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// Rotation returns the Rotation property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rotation
-func (w *WebVRFreeCamera) Rotation(rotation *Vector3) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(rotation.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetRotation sets the Rotation property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rotation
-func (w *WebVRFreeCamera) SetRotation(rotation *Vector3) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(rotation.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// RotationQuaternion returns the RotationQuaternion property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rotationquaternion
-func (w *WebVRFreeCamera) RotationQuaternion(rotationQuaternion *Quaternion) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(rotationQuaternion.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetRotationQuaternion sets the RotationQuaternion property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#rotationquaternion
-func (w *WebVRFreeCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(rotationQuaternion.JSObject())
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// Speed returns the Speed property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#speed
-func (w *WebVRFreeCamera) Speed(speed float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(speed)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetSpeed sets the Speed property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#speed
-func (w *WebVRFreeCamera) SetSpeed(speed float64) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(speed)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#updateupvectorfromrotation
-func (w *WebVRFreeCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(updateUpVectorFromRotation)
-	return WebVRFreeCameraFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class WebVRFreeCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#updateupvectorfromrotation
-func (w *WebVRFreeCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *WebVRFreeCamera {
-	p := ba.ctx.Get("WebVRFreeCamera").New(updateUpVectorFromRotation)
 	return WebVRFreeCameraFromJSObject(p, ba.ctx)
 }
 

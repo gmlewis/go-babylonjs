@@ -54,38 +54,6 @@ func (i *IAsset) SetCopyright(copyright string) *IAsset {
 	return IAssetFromJSObject(p, ba.ctx)
 }
 
-// Extensions returns the Extensions property of class IAsset.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iasset#extensions
-func (i *IAsset) Extensions(extensions js.Value) *IAsset {
-	p := ba.ctx.Get("IAsset").New(extensions)
-	return IAssetFromJSObject(p, ba.ctx)
-}
-
-// SetExtensions sets the Extensions property of class IAsset.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iasset#extensions
-func (i *IAsset) SetExtensions(extensions js.Value) *IAsset {
-	p := ba.ctx.Get("IAsset").New(extensions)
-	return IAssetFromJSObject(p, ba.ctx)
-}
-
-// Extras returns the Extras property of class IAsset.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iasset#extras
-func (i *IAsset) Extras(extras interface{}) *IAsset {
-	p := ba.ctx.Get("IAsset").New(extras)
-	return IAssetFromJSObject(p, ba.ctx)
-}
-
-// SetExtras sets the Extras property of class IAsset.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iasset#extras
-func (i *IAsset) SetExtras(extras interface{}) *IAsset {
-	p := ba.ctx.Get("IAsset").New(extras)
-	return IAssetFromJSObject(p, ba.ctx)
-}
-
 // Generator returns the Generator property of class IAsset.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iasset#generator
@@ -115,22 +83,6 @@ func (i *IAsset) MinVersion(minVersion string) *IAsset {
 // https://doc.babylonjs.com/api/classes/babylon.iasset#minversion
 func (i *IAsset) SetMinVersion(minVersion string) *IAsset {
 	p := ba.ctx.Get("IAsset").New(minVersion)
-	return IAssetFromJSObject(p, ba.ctx)
-}
-
-// Name returns the Name property of class IAsset.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iasset#name
-func (i *IAsset) Name(name string) *IAsset {
-	p := ba.ctx.Get("IAsset").New(name)
-	return IAssetFromJSObject(p, ba.ctx)
-}
-
-// SetName sets the Name property of class IAsset.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iasset#name
-func (i *IAsset) SetName(name string) *IAsset {
-	p := ba.ctx.Get("IAsset").New(name)
 	return IAssetFromJSObject(p, ba.ctx)
 }
 

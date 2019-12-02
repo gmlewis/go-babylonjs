@@ -121,18 +121,6 @@ func (x *Xbox360Pad) Ondpadup(callback func()) {
 	x.p.Call("ondpadup", args...)
 }
 
-// Onleftstickchanged calls the Onleftstickchanged method on the Xbox360Pad object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#onleftstickchanged
-func (x *Xbox360Pad) Onleftstickchanged(callback func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
-
-	x.p.Call("onleftstickchanged", args...)
-}
-
 // Onlefttriggerchanged calls the Onlefttriggerchanged method on the Xbox360Pad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad#onlefttriggerchanged
@@ -143,18 +131,6 @@ func (x *Xbox360Pad) Onlefttriggerchanged(callback func()) {
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	x.p.Call("onlefttriggerchanged", args...)
-}
-
-// Onrightstickchanged calls the Onrightstickchanged method on the Xbox360Pad object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#onrightstickchanged
-func (x *Xbox360Pad) Onrightstickchanged(callback func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
-
-	x.p.Call("onrightstickchanged", args...)
 }
 
 // Onrighttriggerchanged calls the Onrighttriggerchanged method on the Xbox360Pad object.
@@ -178,22 +154,6 @@ func (x *Xbox360Pad) Update() {
 }
 
 /*
-
-// BrowserGamepad returns the BrowserGamepad property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#browsergamepad
-func (x *Xbox360Pad) BrowserGamepad(browserGamepad interface{}) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(browserGamepad)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetBrowserGamepad sets the BrowserGamepad property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#browsergamepad
-func (x *Xbox360Pad) SetBrowserGamepad(browserGamepad interface{}) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(browserGamepad)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
 
 // ButtonA returns the ButtonA property of class Xbox360Pad.
 //
@@ -419,118 +379,6 @@ func (x *Xbox360Pad) SetDPadUp(dPadUp float64) *Xbox360Pad {
 	return Xbox360PadFromJSObject(p, ba.ctx)
 }
 
-// DUALSHOCK returns the DUALSHOCK property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#dualshock
-func (x *Xbox360Pad) DUALSHOCK(DUALSHOCK float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(DUALSHOCK)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetDUALSHOCK sets the DUALSHOCK property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#dualshock
-func (x *Xbox360Pad) SetDUALSHOCK(DUALSHOCK float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(DUALSHOCK)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// GAMEPAD returns the GAMEPAD property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#gamepad
-func (x *Xbox360Pad) GAMEPAD(GAMEPAD float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(GAMEPAD)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetGAMEPAD sets the GAMEPAD property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#gamepad
-func (x *Xbox360Pad) SetGAMEPAD(GAMEPAD float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(GAMEPAD)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// GENERIC returns the GENERIC property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#generic
-func (x *Xbox360Pad) GENERIC(GENERIC float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(GENERIC)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetGENERIC sets the GENERIC property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#generic
-func (x *Xbox360Pad) SetGENERIC(GENERIC float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(GENERIC)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// Id returns the Id property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#id
-func (x *Xbox360Pad) Id(id string) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(id)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetId sets the Id property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#id
-func (x *Xbox360Pad) SetId(id string) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(id)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// Index returns the Index property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#index
-func (x *Xbox360Pad) Index(index float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(index)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetIndex sets the Index property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#index
-func (x *Xbox360Pad) SetIndex(index float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(index)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// IsConnected returns the IsConnected property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#isconnected
-func (x *Xbox360Pad) IsConnected(isConnected bool) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(isConnected)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetIsConnected sets the IsConnected property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#isconnected
-func (x *Xbox360Pad) SetIsConnected(isConnected bool) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(isConnected)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// LeftStick returns the LeftStick property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#leftstick
-func (x *Xbox360Pad) LeftStick(leftStick *StickValues) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(leftStick.JSObject())
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetLeftStick sets the LeftStick property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#leftstick
-func (x *Xbox360Pad) SetLeftStick(leftStick *StickValues) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(leftStick.JSObject())
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
 // LeftTrigger returns the LeftTrigger property of class Xbox360Pad.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad#lefttrigger
@@ -611,38 +459,6 @@ func (x *Xbox360Pad) SetOnPadUpObservable(onPadUpObservable *Observable) *Xbox36
 	return Xbox360PadFromJSObject(p, ba.ctx)
 }
 
-// POSE_ENABLED returns the POSE_ENABLED property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#pose_enabled
-func (x *Xbox360Pad) POSE_ENABLED(POSE_ENABLED float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(POSE_ENABLED)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetPOSE_ENABLED sets the POSE_ENABLED property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#pose_enabled
-func (x *Xbox360Pad) SetPOSE_ENABLED(POSE_ENABLED float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(POSE_ENABLED)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// RightStick returns the RightStick property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#rightstick
-func (x *Xbox360Pad) RightStick(rightStick *StickValues) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(rightStick.JSObject())
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetRightStick sets the RightStick property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#rightstick
-func (x *Xbox360Pad) SetRightStick(rightStick *StickValues) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(rightStick.JSObject())
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
 // RightTrigger returns the RightTrigger property of class Xbox360Pad.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad#righttrigger
@@ -656,38 +472,6 @@ func (x *Xbox360Pad) RightTrigger(rightTrigger float64) *Xbox360Pad {
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad#righttrigger
 func (x *Xbox360Pad) SetRightTrigger(rightTrigger float64) *Xbox360Pad {
 	p := ba.ctx.Get("Xbox360Pad").New(rightTrigger)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// Type returns the Type property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#type
-func (x *Xbox360Pad) Type(jsType float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(jsType)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetType sets the Type property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#type
-func (x *Xbox360Pad) SetType(jsType float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(jsType)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// XBOX returns the XBOX property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#xbox
-func (x *Xbox360Pad) XBOX(XBOX float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(XBOX)
-	return Xbox360PadFromJSObject(p, ba.ctx)
-}
-
-// SetXBOX sets the XBOX property of class Xbox360Pad.
-//
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#xbox
-func (x *Xbox360Pad) SetXBOX(XBOX float64) *Xbox360Pad {
-	p := ba.ctx.Get("Xbox360Pad").New(XBOX)
 	return Xbox360PadFromJSObject(p, ba.ctx)
 }
 

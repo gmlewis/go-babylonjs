@@ -40,54 +40,6 @@ func SpringJointDataArrayToJSArray(array []*SpringJointData) []interface{} {
 
 /*
 
-// Collision returns the Collision property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#collision
-func (s *SpringJointData) Collision(collision bool) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(collision)
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetCollision sets the Collision property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#collision
-func (s *SpringJointData) SetCollision(collision bool) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(collision)
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// ConnectedAxis returns the ConnectedAxis property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#connectedaxis
-func (s *SpringJointData) ConnectedAxis(connectedAxis *Vector3) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(connectedAxis.JSObject())
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetConnectedAxis sets the ConnectedAxis property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#connectedaxis
-func (s *SpringJointData) SetConnectedAxis(connectedAxis *Vector3) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(connectedAxis.JSObject())
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// ConnectedPivot returns the ConnectedPivot property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#connectedpivot
-func (s *SpringJointData) ConnectedPivot(connectedPivot *Vector3) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(connectedPivot.JSObject())
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetConnectedPivot sets the ConnectedPivot property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#connectedpivot
-func (s *SpringJointData) SetConnectedPivot(connectedPivot *Vector3) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(connectedPivot.JSObject())
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
 // Damping returns the Damping property of class SpringJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#damping
@@ -133,54 +85,6 @@ func (s *SpringJointData) Length(length float64) *SpringJointData {
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#length
 func (s *SpringJointData) SetLength(length float64) *SpringJointData {
 	p := ba.ctx.Get("SpringJointData").New(length)
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// MainAxis returns the MainAxis property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#mainaxis
-func (s *SpringJointData) MainAxis(mainAxis *Vector3) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(mainAxis.JSObject())
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetMainAxis sets the MainAxis property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#mainaxis
-func (s *SpringJointData) SetMainAxis(mainAxis *Vector3) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(mainAxis.JSObject())
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// MainPivot returns the MainPivot property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#mainpivot
-func (s *SpringJointData) MainPivot(mainPivot *Vector3) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(mainPivot.JSObject())
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetMainPivot sets the MainPivot property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#mainpivot
-func (s *SpringJointData) SetMainPivot(mainPivot *Vector3) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(mainPivot.JSObject())
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// NativeParams returns the NativeParams property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#nativeparams
-func (s *SpringJointData) NativeParams(nativeParams interface{}) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(nativeParams)
-	return SpringJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetNativeParams sets the NativeParams property of class SpringJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.springjointdata#nativeparams
-func (s *SpringJointData) SetNativeParams(nativeParams interface{}) *SpringJointData {
-	p := ba.ctx.Get("SpringJointData").New(nativeParams)
 	return SpringJointDataFromJSObject(p, ba.ctx)
 }
 

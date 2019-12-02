@@ -70,36 +70,4 @@ func (i *IAccessorSparseValues) SetByteOffset(byteOffset float64) *IAccessorSpar
 	return IAccessorSparseValuesFromJSObject(p, ba.ctx)
 }
 
-// Extensions returns the Extensions property of class IAccessorSparseValues.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iaccessorsparsevalues#extensions
-func (i *IAccessorSparseValues) Extensions(extensions js.Value) *IAccessorSparseValues {
-	p := ba.ctx.Get("IAccessorSparseValues").New(extensions)
-	return IAccessorSparseValuesFromJSObject(p, ba.ctx)
-}
-
-// SetExtensions sets the Extensions property of class IAccessorSparseValues.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iaccessorsparsevalues#extensions
-func (i *IAccessorSparseValues) SetExtensions(extensions js.Value) *IAccessorSparseValues {
-	p := ba.ctx.Get("IAccessorSparseValues").New(extensions)
-	return IAccessorSparseValuesFromJSObject(p, ba.ctx)
-}
-
-// Extras returns the Extras property of class IAccessorSparseValues.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iaccessorsparsevalues#extras
-func (i *IAccessorSparseValues) Extras(extras interface{}) *IAccessorSparseValues {
-	p := ba.ctx.Get("IAccessorSparseValues").New(extras)
-	return IAccessorSparseValuesFromJSObject(p, ba.ctx)
-}
-
-// SetExtras sets the Extras property of class IAccessorSparseValues.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iaccessorsparsevalues#extras
-func (i *IAccessorSparseValues) SetExtras(extras interface{}) *IAccessorSparseValues {
-	p := ba.ctx.Get("IAccessorSparseValues").New(extras)
-	return IAccessorSparseValuesFromJSObject(p, ba.ctx)
-}
-
 */

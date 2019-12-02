@@ -88,20 +88,4 @@ func (r *RenderTargetsOptimization) GetDescription() string {
 
 /*
 
-// Priority returns the Priority property of class RenderTargetsOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.rendertargetsoptimization#priority
-func (r *RenderTargetsOptimization) Priority(priority float64) *RenderTargetsOptimization {
-	p := ba.ctx.Get("RenderTargetsOptimization").New(priority)
-	return RenderTargetsOptimizationFromJSObject(p, ba.ctx)
-}
-
-// SetPriority sets the Priority property of class RenderTargetsOptimization.
-//
-// https://doc.babylonjs.com/api/classes/babylon.rendertargetsoptimization#priority
-func (r *RenderTargetsOptimization) SetPriority(priority float64) *RenderTargetsOptimization {
-	p := ba.ctx.Get("RenderTargetsOptimization").New(priority)
-	return RenderTargetsOptimizationFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

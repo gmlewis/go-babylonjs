@@ -54,22 +54,6 @@ func (ba *Babylon) NewPointerInfo(jsType float64, event js.Value, pickInfo *Pick
 
 /*
 
-// Event returns the Event property of class PointerInfo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#event
-func (p *PointerInfo) Event(event js.Value) *PointerInfo {
-	p := ba.ctx.Get("PointerInfo").New(event)
-	return PointerInfoFromJSObject(p, ba.ctx)
-}
-
-// SetEvent sets the Event property of class PointerInfo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#event
-func (p *PointerInfo) SetEvent(event js.Value) *PointerInfo {
-	p := ba.ctx.Get("PointerInfo").New(event)
-	return PointerInfoFromJSObject(p, ba.ctx)
-}
-
 // PickInfo returns the PickInfo property of class PointerInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfo#pickinfo
@@ -83,22 +67,6 @@ func (p *PointerInfo) PickInfo(pickInfo *PickingInfo) *PointerInfo {
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfo#pickinfo
 func (p *PointerInfo) SetPickInfo(pickInfo *PickingInfo) *PointerInfo {
 	p := ba.ctx.Get("PointerInfo").New(pickInfo.JSObject())
-	return PointerInfoFromJSObject(p, ba.ctx)
-}
-
-// Type returns the Type property of class PointerInfo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#type
-func (p *PointerInfo) Type(jsType float64) *PointerInfo {
-	p := ba.ctx.Get("PointerInfo").New(jsType)
-	return PointerInfoFromJSObject(p, ba.ctx)
-}
-
-// SetType sets the Type property of class PointerInfo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#type
-func (p *PointerInfo) SetType(jsType float64) *PointerInfo {
-	p := ba.ctx.Get("PointerInfo").New(jsType)
 	return PointerInfoFromJSObject(p, ba.ctx)
 }
 

@@ -38,59 +38,12 @@ func FollowCameraPointersInputArrayToJSArray(array []*FollowCameraPointersInput)
 	return result
 }
 
-// FollowCameraPointersInputAttachControlOpts contains optional parameters for FollowCameraPointersInput.AttachControl.
-type FollowCameraPointersInputAttachControlOpts struct {
-	NoPreventDefault *bool
-}
-
-// AttachControl calls the AttachControl method on the FollowCameraPointersInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamerapointersinput#attachcontrol
-func (f *FollowCameraPointersInput) AttachControl(element js.Value, opts *FollowCameraPointersInputAttachControlOpts) {
-	if opts == nil {
-		opts = &FollowCameraPointersInputAttachControlOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, element)
-
-	if opts.NoPreventDefault == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.NoPreventDefault)
-	}
-
-	f.p.Call("attachControl", args...)
-}
-
-// DetachControl calls the DetachControl method on the FollowCameraPointersInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamerapointersinput#detachcontrol
-func (f *FollowCameraPointersInput) DetachControl(element js.Value) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, element)
-
-	f.p.Call("detachControl", args...)
-}
-
 // GetClassName calls the GetClassName method on the FollowCameraPointersInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerapointersinput#getclassname
 func (f *FollowCameraPointersInput) GetClassName() string {
 
 	retVal := f.p.Call("getClassName")
-	return retVal.String()
-}
-
-// GetSimpleName calls the GetSimpleName method on the FollowCameraPointersInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamerapointersinput#getsimplename
-func (f *FollowCameraPointersInput) GetSimpleName() string {
-
-	retVal := f.p.Call("getSimpleName")
 	return retVal.String()
 }
 
@@ -269,22 +222,6 @@ func (f *FollowCameraPointersInput) AxisYControlRotation(axisYControlRotation bo
 // https://doc.babylonjs.com/api/classes/babylon.followcamerapointersinput#axisycontrolrotation
 func (f *FollowCameraPointersInput) SetAxisYControlRotation(axisYControlRotation bool) *FollowCameraPointersInput {
 	p := ba.ctx.Get("FollowCameraPointersInput").New(axisYControlRotation)
-	return FollowCameraPointersInputFromJSObject(p, ba.ctx)
-}
-
-// Buttons returns the Buttons property of class FollowCameraPointersInput.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamerapointersinput#buttons
-func (f *FollowCameraPointersInput) Buttons(buttons float64) *FollowCameraPointersInput {
-	p := ba.ctx.Get("FollowCameraPointersInput").New(buttons)
-	return FollowCameraPointersInputFromJSObject(p, ba.ctx)
-}
-
-// SetButtons sets the Buttons property of class FollowCameraPointersInput.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamerapointersinput#buttons
-func (f *FollowCameraPointersInput) SetButtons(buttons float64) *FollowCameraPointersInput {
-	p := ba.ctx.Get("FollowCameraPointersInput").New(buttons)
 	return FollowCameraPointersInputFromJSObject(p, ba.ctx)
 }
 

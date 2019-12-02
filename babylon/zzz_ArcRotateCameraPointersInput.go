@@ -38,59 +38,12 @@ func ArcRotateCameraPointersInputArrayToJSArray(array []*ArcRotateCameraPointers
 	return result
 }
 
-// ArcRotateCameraPointersInputAttachControlOpts contains optional parameters for ArcRotateCameraPointersInput.AttachControl.
-type ArcRotateCameraPointersInputAttachControlOpts struct {
-	NoPreventDefault *bool
-}
-
-// AttachControl calls the AttachControl method on the ArcRotateCameraPointersInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#attachcontrol
-func (a *ArcRotateCameraPointersInput) AttachControl(element js.Value, opts *ArcRotateCameraPointersInputAttachControlOpts) {
-	if opts == nil {
-		opts = &ArcRotateCameraPointersInputAttachControlOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, element)
-
-	if opts.NoPreventDefault == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.NoPreventDefault)
-	}
-
-	a.p.Call("attachControl", args...)
-}
-
-// DetachControl calls the DetachControl method on the ArcRotateCameraPointersInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#detachcontrol
-func (a *ArcRotateCameraPointersInput) DetachControl(element js.Value) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, element)
-
-	a.p.Call("detachControl", args...)
-}
-
 // GetClassName calls the GetClassName method on the ArcRotateCameraPointersInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#getclassname
 func (a *ArcRotateCameraPointersInput) GetClassName() string {
 
 	retVal := a.p.Call("getClassName")
-	return retVal.String()
-}
-
-// GetSimpleName calls the GetSimpleName method on the ArcRotateCameraPointersInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#getsimplename
-func (a *ArcRotateCameraPointersInput) GetSimpleName() string {
-
-	retVal := a.p.Call("getSimpleName")
 	return retVal.String()
 }
 

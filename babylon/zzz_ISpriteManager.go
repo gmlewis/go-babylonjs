@@ -36,14 +36,6 @@ func ISpriteManagerArrayToJSArray(array []*ISpriteManager) []interface{} {
 	return result
 }
 
-// Dispose calls the Dispose method on the ISpriteManager object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ispritemanager#dispose
-func (i *ISpriteManager) Dispose() {
-
-	i.p.Call("dispose")
-}
-
 // ISpriteManagerIntersectsOpts contains optional parameters for ISpriteManager.Intersects.
 type ISpriteManagerIntersectsOpts struct {
 	Predicate func()

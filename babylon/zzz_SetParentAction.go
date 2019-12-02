@@ -75,15 +75,6 @@ func (s *SetParentAction) Execute() {
 	s.p.Call("execute")
 }
 
-// GetTriggerParameter calls the GetTriggerParameter method on the SetParentAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.setparentaction#gettriggerparameter
-func (s *SetParentAction) GetTriggerParameter() interface{} {
-
-	retVal := s.p.Call("getTriggerParameter")
-	return retVal
-}
-
 // Serialize calls the Serialize method on the SetParentAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setparentaction#serialize
@@ -97,75 +88,6 @@ func (s *SetParentAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-// SkipToNextActiveAction calls the SkipToNextActiveAction method on the SetParentAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.setparentaction#skiptonextactiveaction
-func (s *SetParentAction) SkipToNextActiveAction() {
-
-	s.p.Call("skipToNextActiveAction")
-}
-
-// Then calls the Then method on the SetParentAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.setparentaction#then
-func (s *SetParentAction) Then(action *Action) *Action {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, action.JSObject())
-
-	retVal := s.p.Call("then", args...)
-	return ActionFromJSObject(retVal, s.ctx)
-}
-
 /*
 
-// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class SetParentAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.setparentaction#onbeforeexecuteobservable
-func (s *SetParentAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *SetParentAction {
-	p := ba.ctx.Get("SetParentAction").New(onBeforeExecuteObservable.JSObject())
-	return SetParentActionFromJSObject(p, ba.ctx)
-}
-
-// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class SetParentAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.setparentaction#onbeforeexecuteobservable
-func (s *SetParentAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *SetParentAction {
-	p := ba.ctx.Get("SetParentAction").New(onBeforeExecuteObservable.JSObject())
-	return SetParentActionFromJSObject(p, ba.ctx)
-}
-
-// Trigger returns the Trigger property of class SetParentAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.setparentaction#trigger
-func (s *SetParentAction) Trigger(trigger float64) *SetParentAction {
-	p := ba.ctx.Get("SetParentAction").New(trigger)
-	return SetParentActionFromJSObject(p, ba.ctx)
-}
-
-// SetTrigger sets the Trigger property of class SetParentAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.setparentaction#trigger
-func (s *SetParentAction) SetTrigger(trigger float64) *SetParentAction {
-	p := ba.ctx.Get("SetParentAction").New(trigger)
-	return SetParentActionFromJSObject(p, ba.ctx)
-}
-
-// TriggerOptions returns the TriggerOptions property of class SetParentAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.setparentaction#triggeroptions
-func (s *SetParentAction) TriggerOptions(triggerOptions interface{}) *SetParentAction {
-	p := ba.ctx.Get("SetParentAction").New(triggerOptions)
-	return SetParentActionFromJSObject(p, ba.ctx)
-}
-
-// SetTriggerOptions sets the TriggerOptions property of class SetParentAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.setparentaction#triggeroptions
-func (s *SetParentAction) SetTriggerOptions(triggerOptions interface{}) *SetParentAction {
-	p := ba.ctx.Get("SetParentAction").New(triggerOptions)
-	return SetParentActionFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

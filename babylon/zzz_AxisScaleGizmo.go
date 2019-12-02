@@ -111,22 +111,6 @@ func (a *AxisScaleGizmo) SetCustomMesh(mesh *Mesh, opts *AxisScaleGizmoSetCustom
 
 /*
 
-// AttachedMesh returns the AttachedMesh property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#attachedmesh
-func (a *AxisScaleGizmo) AttachedMesh(attachedMesh *AbstractMesh) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(attachedMesh.JSObject())
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetAttachedMesh sets the AttachedMesh property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#attachedmesh
-func (a *AxisScaleGizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(attachedMesh.JSObject())
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
 // DragBehavior returns the DragBehavior property of class AxisScaleGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#dragbehavior
@@ -140,22 +124,6 @@ func (a *AxisScaleGizmo) DragBehavior(dragBehavior *PointerDragBehavior) *AxisSc
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#dragbehavior
 func (a *AxisScaleGizmo) SetDragBehavior(dragBehavior *PointerDragBehavior) *AxisScaleGizmo {
 	p := ba.ctx.Get("AxisScaleGizmo").New(dragBehavior.JSObject())
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// GizmoLayer returns the GizmoLayer property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#gizmolayer
-func (a *AxisScaleGizmo) GizmoLayer(gizmoLayer *UtilityLayerRenderer) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(gizmoLayer.JSObject())
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetGizmoLayer sets the GizmoLayer property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#gizmolayer
-func (a *AxisScaleGizmo) SetGizmoLayer(gizmoLayer *UtilityLayerRenderer) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(gizmoLayer.JSObject())
 	return AxisScaleGizmoFromJSObject(p, ba.ctx)
 }
 
@@ -188,22 +156,6 @@ func (a *AxisScaleGizmo) OnSnapObservable(onSnapObservable *Observable) *AxisSca
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#onsnapobservable
 func (a *AxisScaleGizmo) SetOnSnapObservable(onSnapObservable *Observable) *AxisScaleGizmo {
 	p := ba.ctx.Get("AxisScaleGizmo").New(onSnapObservable.JSObject())
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// ScaleRatio returns the ScaleRatio property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#scaleratio
-func (a *AxisScaleGizmo) ScaleRatio(scaleRatio float64) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(scaleRatio)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetScaleRatio sets the ScaleRatio property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#scaleratio
-func (a *AxisScaleGizmo) SetScaleRatio(scaleRatio float64) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(scaleRatio)
 	return AxisScaleGizmoFromJSObject(p, ba.ctx)
 }
 
@@ -252,70 +204,6 @@ func (a *AxisScaleGizmo) UniformScaling(uniformScaling bool) *AxisScaleGizmo {
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#uniformscaling
 func (a *AxisScaleGizmo) SetUniformScaling(uniformScaling bool) *AxisScaleGizmo {
 	p := ba.ctx.Get("AxisScaleGizmo").New(uniformScaling)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// UpdateGizmoPositionToMatchAttachedMesh returns the UpdateGizmoPositionToMatchAttachedMesh property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#updategizmopositiontomatchattachedmesh
-func (a *AxisScaleGizmo) UpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(updateGizmoPositionToMatchAttachedMesh)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateGizmoPositionToMatchAttachedMesh sets the UpdateGizmoPositionToMatchAttachedMesh property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#updategizmopositiontomatchattachedmesh
-func (a *AxisScaleGizmo) SetUpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(updateGizmoPositionToMatchAttachedMesh)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#updategizmorotationtomatchattachedmesh
-func (a *AxisScaleGizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateGizmoRotationToMatchAttachedMesh sets the UpdateGizmoRotationToMatchAttachedMesh property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#updategizmorotationtomatchattachedmesh
-func (a *AxisScaleGizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// UpdateScale returns the UpdateScale property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#updatescale
-func (a *AxisScaleGizmo) UpdateScale(updateScale bool) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(updateScale)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateScale sets the UpdateScale property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#updatescale
-func (a *AxisScaleGizmo) SetUpdateScale(updateScale bool) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(updateScale)
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// _rootMesh returns the _rootMesh property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#_rootmesh
-func (a *AxisScaleGizmo) _rootMesh(_rootMesh *Mesh) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(_rootMesh.JSObject())
-	return AxisScaleGizmoFromJSObject(p, ba.ctx)
-}
-
-// Set_rootMesh sets the _rootMesh property of class AxisScaleGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#_rootmesh
-func (a *AxisScaleGizmo) Set_rootMesh(_rootMesh *Mesh) *AxisScaleGizmo {
-	p := ba.ctx.Get("AxisScaleGizmo").New(_rootMesh.JSObject())
 	return AxisScaleGizmoFromJSObject(p, ba.ctx)
 }
 

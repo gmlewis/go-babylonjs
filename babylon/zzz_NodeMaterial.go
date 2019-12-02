@@ -82,32 +82,6 @@ func (n *NodeMaterial) AddOutputNode(node *NodeMaterialBlock) *NodeMaterial {
 	return NodeMaterialFromJSObject(retVal, n.ctx)
 }
 
-// NodeMaterialBindOpts contains optional parameters for NodeMaterial.Bind.
-type NodeMaterialBindOpts struct {
-	Mesh *Mesh
-}
-
-// Bind calls the Bind method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#bind
-func (n *NodeMaterial) Bind(world *Matrix, opts *NodeMaterialBindOpts) {
-	if opts == nil {
-		opts = &NodeMaterialBindOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, world.JSObject())
-
-	if opts.Mesh == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Mesh.JSObject())
-	}
-
-	n.p.Call("bind", args...)
-}
-
 // BindForSubMesh calls the BindForSubMesh method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#bindforsubmesh
@@ -122,18 +96,6 @@ func (n *NodeMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMes
 	n.p.Call("bindForSubMesh", args...)
 }
 
-// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#bindonlynormalmatrix
-func (n *NodeMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, normalMatrix.JSObject())
-
-	n.p.Call("bindOnlyNormalMatrix", args...)
-}
-
 // BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#bindonlyworldmatrix
@@ -144,43 +106,6 @@ func (n *NodeMaterial) BindOnlyWorldMatrix(world *Matrix) {
 	args = append(args, world.JSObject())
 
 	n.p.Call("bindOnlyWorldMatrix", args...)
-}
-
-// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#bindsceneuniformbuffer
-func (n *NodeMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, effect.JSObject())
-	args = append(args, sceneUbo.JSObject())
-
-	n.p.Call("bindSceneUniformBuffer", args...)
-}
-
-// BindView calls the BindView method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#bindview
-func (n *NodeMaterial) BindView(effect *Effect) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, effect.JSObject())
-
-	n.p.Call("bindView", args...)
-}
-
-// BindViewProjection calls the BindViewProjection method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#bindviewprojection
-func (n *NodeMaterial) BindViewProjection(effect *Effect) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, effect.JSObject())
-
-	n.p.Call("bindViewProjection", args...)
 }
 
 // NodeMaterialBuildOpts contains optional parameters for NodeMaterial.Build.
@@ -213,19 +138,6 @@ func (n *NodeMaterial) Build(opts *NodeMaterialBuildOpts) {
 func (n *NodeMaterial) Clear() {
 
 	n.p.Call("clear")
-}
-
-// Clone calls the Clone method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#clone
-func (n *NodeMaterial) Clone(name string) *Material {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, name)
-
-	retVal := n.p.Call("clone", args...)
-	return MaterialFromJSObject(retVal, n.ctx)
 }
 
 // NodeMaterialCreateDefaultOpts contains optional parameters for NodeMaterial.CreateDefault.
@@ -316,71 +228,6 @@ func (n *NodeMaterial) Edit(opts *NodeMaterialEditOpts) *Promise {
 	return PromiseFromJSObject(retVal, n.ctx)
 }
 
-// NodeMaterialForceCompilationOpts contains optional parameters for NodeMaterial.ForceCompilation.
-type NodeMaterialForceCompilationOpts struct {
-	OnCompiled func()
-	Options    js.Value
-	OnError    func()
-}
-
-// ForceCompilation calls the ForceCompilation method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#forcecompilation
-func (n *NodeMaterial) ForceCompilation(mesh *AbstractMesh, opts *NodeMaterialForceCompilationOpts) {
-	if opts == nil {
-		opts = &NodeMaterialForceCompilationOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+3)
-
-	args = append(args, mesh.JSObject())
-
-	if opts.OnCompiled == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.OnCompiled)
-	}
-	args = append(args, opts.Options)
-	if opts.OnError == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.OnError)
-	}
-
-	n.p.Call("forceCompilation", args...)
-}
-
-// NodeMaterialForceCompilationAsyncOpts contains optional parameters for NodeMaterial.ForceCompilationAsync.
-type NodeMaterialForceCompilationAsyncOpts struct {
-	Options js.Value
-}
-
-// ForceCompilationAsync calls the ForceCompilationAsync method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#forcecompilationasync
-func (n *NodeMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *NodeMaterialForceCompilationAsyncOpts) *Promise {
-	if opts == nil {
-		opts = &NodeMaterialForceCompilationAsyncOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, mesh.JSObject())
-
-	args = append(args, opts.Options)
-
-	retVal := n.p.Call("forceCompilationAsync", args...)
-	return PromiseFromJSObject(retVal, n.ctx)
-}
-
-// Freeze calls the Freeze method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#freeze
-func (n *NodeMaterial) Freeze() {
-
-	n.p.Call("freeze")
-}
-
 // GenerateCode calls the GenerateCode method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#generatecode
@@ -397,24 +244,6 @@ func (n *NodeMaterial) GetActiveTextures() *BaseTexture {
 
 	retVal := n.p.Call("getActiveTextures")
 	return BaseTextureFromJSObject(retVal, n.ctx)
-}
-
-// GetAlphaTestTexture calls the GetAlphaTestTexture method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#getalphatesttexture
-func (n *NodeMaterial) GetAlphaTestTexture() *BaseTexture {
-
-	retVal := n.p.Call("getAlphaTestTexture")
-	return BaseTextureFromJSObject(retVal, n.ctx)
-}
-
-// GetBindedMeshes calls the GetBindedMeshes method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#getbindedmeshes
-func (n *NodeMaterial) GetBindedMeshes() *AbstractMesh {
-
-	retVal := n.p.Call("getBindedMeshes")
-	return AbstractMeshFromJSObject(retVal, n.ctx)
 }
 
 // GetBlockByName calls the GetBlockByName method on the NodeMaterial object.
@@ -452,15 +281,6 @@ func (n *NodeMaterial) GetClassName() string {
 	return retVal.String()
 }
 
-// GetEffect calls the GetEffect method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#geteffect
-func (n *NodeMaterial) GetEffect() *Effect {
-
-	retVal := n.p.Call("getEffect")
-	return EffectFromJSObject(retVal, n.ctx)
-}
-
 // GetInputBlockByPredicate calls the GetInputBlockByPredicate method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#getinputblockbypredicate
@@ -483,15 +303,6 @@ func (n *NodeMaterial) GetInputBlocks() *InputBlock {
 	return InputBlockFromJSObject(retVal, n.ctx)
 }
 
-// GetScene calls the GetScene method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#getscene
-func (n *NodeMaterial) GetScene() *Scene {
-
-	retVal := n.p.Call("getScene")
-	return SceneFromJSObject(retVal, n.ctx)
-}
-
 // GetTextureBlocks calls the GetTextureBlocks method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#gettextureblocks
@@ -511,37 +322,6 @@ func (n *NodeMaterial) HasTexture(texture *BaseTexture) bool {
 	args = append(args, texture.JSObject())
 
 	retVal := n.p.Call("hasTexture", args...)
-	return retVal.Bool()
-}
-
-// NodeMaterialIsReadyOpts contains optional parameters for NodeMaterial.IsReady.
-type NodeMaterialIsReadyOpts struct {
-	Mesh         *AbstractMesh
-	UseInstances *bool
-}
-
-// IsReady calls the IsReady method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#isready
-func (n *NodeMaterial) IsReady(opts *NodeMaterialIsReadyOpts) bool {
-	if opts == nil {
-		opts = &NodeMaterialIsReadyOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+2)
-
-	if opts.Mesh == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Mesh.JSObject())
-	}
-	if opts.UseInstances == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.UseInstances)
-	}
-
-	retVal := n.p.Call("isReady", args...)
 	return retVal.Bool()
 }
 
@@ -612,45 +392,12 @@ func (n *NodeMaterial) LoadFromSerialization(source interface{}, opts *NodeMater
 	n.p.Call("loadFromSerialization", args...)
 }
 
-// MarkAsDirty calls the MarkAsDirty method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#markasdirty
-func (n *NodeMaterial) MarkAsDirty(flag float64) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, flag)
-
-	n.p.Call("markAsDirty", args...)
-}
-
-// MarkDirty calls the MarkDirty method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#markdirty
-func (n *NodeMaterial) MarkDirty() {
-
-	n.p.Call("markDirty")
-}
-
 // NeedAlphaBlending calls the NeedAlphaBlending method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#needalphablending
 func (n *NodeMaterial) NeedAlphaBlending() bool {
 
 	retVal := n.p.Call("needAlphaBlending")
-	return retVal.Bool()
-}
-
-// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#needalphablendingformesh
-func (n *NodeMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, mesh.JSObject())
-
-	retVal := n.p.Call("needAlphaBlendingForMesh", args...)
 	return retVal.Bool()
 }
 
@@ -754,47 +501,6 @@ func (n *NodeMaterial) SetToDefault() {
 	n.p.Call("setToDefault")
 }
 
-// NodeMaterialToStringOpts contains optional parameters for NodeMaterial.ToString.
-type NodeMaterialToStringOpts struct {
-	FullDetails *bool
-}
-
-// ToString calls the ToString method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#tostring
-func (n *NodeMaterial) ToString(opts *NodeMaterialToStringOpts) string {
-	if opts == nil {
-		opts = &NodeMaterialToStringOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.FullDetails == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.FullDetails)
-	}
-
-	retVal := n.p.Call("toString", args...)
-	return retVal.String()
-}
-
-// Unbind calls the Unbind method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#unbind
-func (n *NodeMaterial) Unbind() {
-
-	n.p.Call("unbind")
-}
-
-// Unfreeze calls the Unfreeze method on the NodeMaterial object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#unfreeze
-func (n *NodeMaterial) Unfreeze() {
-
-	n.p.Call("unfreeze")
-}
-
 // UnregisterOptimizer calls the UnregisterOptimizer method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#unregisteroptimizer
@@ -809,86 +515,6 @@ func (n *NodeMaterial) UnregisterOptimizer(optimizer *NodeMaterialOptimizer) *No
 }
 
 /*
-
-// AllDirtyFlag returns the AllDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#alldirtyflag
-func (n *NodeMaterial) AllDirtyFlag(AllDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(AllDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetAllDirtyFlag sets the AllDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#alldirtyflag
-func (n *NodeMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(AllDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#allowshaderhotswapping
-func (n *NodeMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(allowShaderHotSwapping)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#allowshaderhotswapping
-func (n *NodeMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(allowShaderHotSwapping)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// Alpha returns the Alpha property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#alpha
-func (n *NodeMaterial) Alpha(alpha float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(alpha)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetAlpha sets the Alpha property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#alpha
-func (n *NodeMaterial) SetAlpha(alpha float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(alpha)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// AlphaMode returns the AlphaMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#alphamode
-func (n *NodeMaterial) AlphaMode(alphaMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(alphaMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetAlphaMode sets the AlphaMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#alphamode
-func (n *NodeMaterial) SetAlphaMode(alphaMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(alphaMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// Animations returns the Animations property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#animations
-func (n *NodeMaterial) Animations(animations []*Animation) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(animations)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetAnimations sets the Animations property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#animations
-func (n *NodeMaterial) SetAnimations(animations []*Animation) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(animations)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
 
 // AttachedBlocks returns the AttachedBlocks property of class NodeMaterial.
 //
@@ -906,86 +532,6 @@ func (n *NodeMaterial) SetAttachedBlocks(attachedBlocks *NodeMaterialBlock) *Nod
 	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 
-// AttributesDirtyFlag returns the AttributesDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#attributesdirtyflag
-func (n *NodeMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(AttributesDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#attributesdirtyflag
-func (n *NodeMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(AttributesDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// BackFaceCulling returns the BackFaceCulling property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#backfaceculling
-func (n *NodeMaterial) BackFaceCulling(backFaceCulling bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(backFaceCulling)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetBackFaceCulling sets the BackFaceCulling property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#backfaceculling
-func (n *NodeMaterial) SetBackFaceCulling(backFaceCulling bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(backFaceCulling)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#checkreadyoneverycall
-func (n *NodeMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(checkReadyOnEveryCall)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#checkreadyoneverycall
-func (n *NodeMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(checkReadyOnEveryCall)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#checkreadyonlyonce
-func (n *NodeMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(checkReadyOnlyOnce)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#checkreadyonlyonce
-func (n *NodeMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(checkReadyOnlyOnce)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#clockwisesideorientation
-func (n *NodeMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(ClockWiseSideOrientation)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#clockwisesideorientation
-func (n *NodeMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(ClockWiseSideOrientation)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
 // CompiledShaders returns the CompiledShaders property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#compiledshaders
@@ -999,70 +545,6 @@ func (n *NodeMaterial) CompiledShaders(compiledShaders string) *NodeMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#compiledshaders
 func (n *NodeMaterial) SetCompiledShaders(compiledShaders string) *NodeMaterial {
 	p := ba.ctx.Get("NodeMaterial").New(compiledShaders)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#counterclockwisesideorientation
-func (n *NodeMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(CounterClockWiseSideOrientation)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#counterclockwisesideorientation
-func (n *NodeMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(CounterClockWiseSideOrientation)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// DepthFunction returns the DepthFunction property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#depthfunction
-func (n *NodeMaterial) DepthFunction(depthFunction float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(depthFunction)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetDepthFunction sets the DepthFunction property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#depthfunction
-func (n *NodeMaterial) SetDepthFunction(depthFunction float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(depthFunction)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// DisableDepthWrite returns the DisableDepthWrite property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#disabledepthwrite
-func (n *NodeMaterial) DisableDepthWrite(disableDepthWrite bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(disableDepthWrite)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetDisableDepthWrite sets the DisableDepthWrite property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#disabledepthwrite
-func (n *NodeMaterial) SetDisableDepthWrite(disableDepthWrite bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(disableDepthWrite)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// DoNotSerialize returns the DoNotSerialize property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#donotserialize
-func (n *NodeMaterial) DoNotSerialize(doNotSerialize bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(doNotSerialize)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetDoNotSerialize sets the DoNotSerialize property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#donotserialize
-func (n *NodeMaterial) SetDoNotSerialize(doNotSerialize bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(doNotSerialize)
 	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1098,118 +580,6 @@ func (n *NodeMaterial) SetEditorURL(EditorURL string) *NodeMaterial {
 	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 
-// FillMode returns the FillMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#fillmode
-func (n *NodeMaterial) FillMode(fillMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(fillMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetFillMode sets the FillMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#fillmode
-func (n *NodeMaterial) SetFillMode(fillMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(fillMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// FogEnabled returns the FogEnabled property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#fogenabled
-func (n *NodeMaterial) FogEnabled(fogEnabled bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(fogEnabled)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetFogEnabled sets the FogEnabled property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#fogenabled
-func (n *NodeMaterial) SetFogEnabled(fogEnabled bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(fogEnabled)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// ForceDepthWrite returns the ForceDepthWrite property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#forcedepthwrite
-func (n *NodeMaterial) ForceDepthWrite(forceDepthWrite bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(forceDepthWrite)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetForceDepthWrite sets the ForceDepthWrite property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#forcedepthwrite
-func (n *NodeMaterial) SetForceDepthWrite(forceDepthWrite bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(forceDepthWrite)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// FresnelDirtyFlag returns the FresnelDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#fresneldirtyflag
-func (n *NodeMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(FresnelDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#fresneldirtyflag
-func (n *NodeMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(FresnelDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// GetRenderTargetTextures returns the GetRenderTargetTextures property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#getrendertargettextures
-func (n *NodeMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#getrendertargettextures
-func (n *NodeMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {getRenderTargetTextures(); return nil}))
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// HasRenderTargetTextures returns the HasRenderTargetTextures property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#hasrendertargettextures
-func (n *NodeMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(hasRenderTargetTextures)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#hasrendertargettextures
-func (n *NodeMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(hasRenderTargetTextures)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// Id returns the Id property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#id
-func (n *NodeMaterial) Id(id string) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(id)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetId sets the Id property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#id
-func (n *NodeMaterial) SetId(id string) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(id)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
 // IgnoreAlpha returns the IgnoreAlpha property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#ignorealpha
@@ -1242,102 +612,6 @@ func (n *NodeMaterial) SetImageProcessingConfiguration(imageProcessingConfigurat
 	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 
-// InspectableCustomProperties returns the InspectableCustomProperties property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#inspectablecustomproperties
-func (n *NodeMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(inspectableCustomProperties.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetInspectableCustomProperties sets the InspectableCustomProperties property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#inspectablecustomproperties
-func (n *NodeMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(inspectableCustomProperties.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// IsFrozen returns the IsFrozen property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#isfrozen
-func (n *NodeMaterial) IsFrozen(isFrozen bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(isFrozen)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetIsFrozen sets the IsFrozen property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#isfrozen
-func (n *NodeMaterial) SetIsFrozen(isFrozen bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(isFrozen)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// LightDirtyFlag returns the LightDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#lightdirtyflag
-func (n *NodeMaterial) LightDirtyFlag(LightDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(LightDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetLightDirtyFlag sets the LightDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#lightdirtyflag
-func (n *NodeMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(LightDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// LineListDrawMode returns the LineListDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#linelistdrawmode
-func (n *NodeMaterial) LineListDrawMode(LineListDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(LineListDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetLineListDrawMode sets the LineListDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#linelistdrawmode
-func (n *NodeMaterial) SetLineListDrawMode(LineListDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(LineListDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// LineLoopDrawMode returns the LineLoopDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#lineloopdrawmode
-func (n *NodeMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(LineLoopDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetLineLoopDrawMode sets the LineLoopDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#lineloopdrawmode
-func (n *NodeMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(LineLoopDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// LineStripDrawMode returns the LineStripDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#linestripdrawmode
-func (n *NodeMaterial) LineStripDrawMode(LineStripDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(LineStripDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetLineStripDrawMode sets the LineStripDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#linestripdrawmode
-func (n *NodeMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(LineStripDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
 // MaxSimultaneousLights returns the MaxSimultaneousLights property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#maxsimultaneouslights
@@ -1351,102 +625,6 @@ func (n *NodeMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *Nod
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#maxsimultaneouslights
 func (n *NodeMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *NodeMaterial {
 	p := ba.ctx.Get("NodeMaterial").New(maxSimultaneousLights)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// Metadata returns the Metadata property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#metadata
-func (n *NodeMaterial) Metadata(metadata interface{}) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(metadata)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetMetadata sets the Metadata property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#metadata
-func (n *NodeMaterial) SetMetadata(metadata interface{}) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(metadata)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// MiscDirtyFlag returns the MiscDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#miscdirtyflag
-func (n *NodeMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(MiscDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetMiscDirtyFlag sets the MiscDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#miscdirtyflag
-func (n *NodeMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(MiscDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// Name returns the Name property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#name
-func (n *NodeMaterial) Name(name string) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(name)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetName sets the Name property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#name
-func (n *NodeMaterial) SetName(name string) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(name)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// NeedDepthPrePass returns the NeedDepthPrePass property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#needdepthprepass
-func (n *NodeMaterial) NeedDepthPrePass(needDepthPrePass bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(needDepthPrePass)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetNeedDepthPrePass sets the NeedDepthPrePass property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#needdepthprepass
-func (n *NodeMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(needDepthPrePass)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// OnBind returns the OnBind property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#onbind
-func (n *NodeMaterial) OnBind(onBind func()) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetOnBind sets the OnBind property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#onbind
-func (n *NodeMaterial) SetOnBind(onBind func()) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onBind(); return nil}))
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// OnBindObservable returns the OnBindObservable property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#onbindobservable
-func (n *NodeMaterial) OnBindObservable(onBindObservable *Observable) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(onBindObservable.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetOnBindObservable sets the OnBindObservable property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#onbindobservable
-func (n *NodeMaterial) SetOnBindObservable(onBindObservable *Observable) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(onBindObservable.JSObject())
 	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 
@@ -1466,86 +644,6 @@ func (n *NodeMaterial) SetOnBuildObservable(onBuildObservable *Observable) *Node
 	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 
-// OnCompiled returns the OnCompiled property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#oncompiled
-func (n *NodeMaterial) OnCompiled(onCompiled func()) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetOnCompiled sets the OnCompiled property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#oncompiled
-func (n *NodeMaterial) SetOnCompiled(onCompiled func()) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onCompiled(); return nil}))
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// OnDispose returns the OnDispose property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#ondispose
-func (n *NodeMaterial) OnDispose(onDispose func()) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetOnDispose sets the OnDispose property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#ondispose
-func (n *NodeMaterial) SetOnDispose(onDispose func()) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onDispose(); return nil}))
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// OnDisposeObservable returns the OnDisposeObservable property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#ondisposeobservable
-func (n *NodeMaterial) OnDisposeObservable(onDisposeObservable *Observable) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(onDisposeObservable.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetOnDisposeObservable sets the OnDisposeObservable property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#ondisposeobservable
-func (n *NodeMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(onDisposeObservable.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// OnError returns the OnError property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#onerror
-func (n *NodeMaterial) OnError(onError func()) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetOnError sets the OnError property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#onerror
-func (n *NodeMaterial) SetOnError(onError func()) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onError(); return nil}))
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// OnUnBindObservable returns the OnUnBindObservable property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#onunbindobservable
-func (n *NodeMaterial) OnUnBindObservable(onUnBindObservable *Observable) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(onUnBindObservable.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetOnUnBindObservable sets the OnUnBindObservable property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#onunbindobservable
-func (n *NodeMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(onUnBindObservable.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
 // Options returns the Options property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#options
@@ -1559,262 +657,6 @@ func (n *NodeMaterial) Options(options *INodeMaterialOptions) *NodeMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#options
 func (n *NodeMaterial) SetOptions(options *INodeMaterialOptions) *NodeMaterial {
 	p := ba.ctx.Get("NodeMaterial").New(options.JSObject())
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// PointFillMode returns the PointFillMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#pointfillmode
-func (n *NodeMaterial) PointFillMode(PointFillMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(PointFillMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetPointFillMode sets the PointFillMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#pointfillmode
-func (n *NodeMaterial) SetPointFillMode(PointFillMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(PointFillMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// PointListDrawMode returns the PointListDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#pointlistdrawmode
-func (n *NodeMaterial) PointListDrawMode(PointListDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(PointListDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetPointListDrawMode sets the PointListDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#pointlistdrawmode
-func (n *NodeMaterial) SetPointListDrawMode(PointListDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(PointListDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// PointSize returns the PointSize property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#pointsize
-func (n *NodeMaterial) PointSize(pointSize float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(pointSize)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetPointSize sets the PointSize property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#pointsize
-func (n *NodeMaterial) SetPointSize(pointSize float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(pointSize)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// PointsCloud returns the PointsCloud property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#pointscloud
-func (n *NodeMaterial) PointsCloud(pointsCloud bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(pointsCloud)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetPointsCloud sets the PointsCloud property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#pointscloud
-func (n *NodeMaterial) SetPointsCloud(pointsCloud bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(pointsCloud)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// ReservedDataStore returns the ReservedDataStore property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#reserveddatastore
-func (n *NodeMaterial) ReservedDataStore(reservedDataStore interface{}) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(reservedDataStore)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetReservedDataStore sets the ReservedDataStore property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#reserveddatastore
-func (n *NodeMaterial) SetReservedDataStore(reservedDataStore interface{}) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(reservedDataStore)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SeparateCullingPass returns the SeparateCullingPass property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#separatecullingpass
-func (n *NodeMaterial) SeparateCullingPass(separateCullingPass bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(separateCullingPass)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetSeparateCullingPass sets the SeparateCullingPass property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#separatecullingpass
-func (n *NodeMaterial) SetSeparateCullingPass(separateCullingPass bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(separateCullingPass)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SideOrientation returns the SideOrientation property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#sideorientation
-func (n *NodeMaterial) SideOrientation(sideOrientation float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(sideOrientation)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetSideOrientation sets the SideOrientation property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#sideorientation
-func (n *NodeMaterial) SetSideOrientation(sideOrientation float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(sideOrientation)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// State returns the State property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#state
-func (n *NodeMaterial) State(state string) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(state)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetState sets the State property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#state
-func (n *NodeMaterial) SetState(state string) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(state)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// TextureDirtyFlag returns the TextureDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#texturedirtyflag
-func (n *NodeMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(TextureDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetTextureDirtyFlag sets the TextureDirtyFlag property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#texturedirtyflag
-func (n *NodeMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(TextureDirtyFlag)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// TriangleFanDrawMode returns the TriangleFanDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#trianglefandrawmode
-func (n *NodeMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(TriangleFanDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#trianglefandrawmode
-func (n *NodeMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(TriangleFanDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// TriangleFillMode returns the TriangleFillMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#trianglefillmode
-func (n *NodeMaterial) TriangleFillMode(TriangleFillMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(TriangleFillMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetTriangleFillMode sets the TriangleFillMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#trianglefillmode
-func (n *NodeMaterial) SetTriangleFillMode(TriangleFillMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(TriangleFillMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// TriangleStripDrawMode returns the TriangleStripDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#trianglestripdrawmode
-func (n *NodeMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(TriangleStripDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#trianglestripdrawmode
-func (n *NodeMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(TriangleStripDrawMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// UniqueId returns the UniqueId property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#uniqueid
-func (n *NodeMaterial) UniqueId(uniqueId float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(uniqueId)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetUniqueId sets the UniqueId property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#uniqueid
-func (n *NodeMaterial) SetUniqueId(uniqueId float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(uniqueId)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// WireFrameFillMode returns the WireFrameFillMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#wireframefillmode
-func (n *NodeMaterial) WireFrameFillMode(WireFrameFillMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(WireFrameFillMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetWireFrameFillMode sets the WireFrameFillMode property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#wireframefillmode
-func (n *NodeMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(WireFrameFillMode)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// Wireframe returns the Wireframe property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#wireframe
-func (n *NodeMaterial) Wireframe(wireframe bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(wireframe)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetWireframe sets the Wireframe property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#wireframe
-func (n *NodeMaterial) SetWireframe(wireframe bool) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(wireframe)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// ZOffset returns the ZOffset property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#zoffset
-func (n *NodeMaterial) ZOffset(zOffset float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(zOffset)
-	return NodeMaterialFromJSObject(p, ba.ctx)
-}
-
-// SetZOffset sets the ZOffset property of class NodeMaterial.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerial#zoffset
-func (n *NodeMaterial) SetZOffset(zOffset float64) *NodeMaterial {
-	p := ba.ctx.Get("NodeMaterial").New(zOffset)
 	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 

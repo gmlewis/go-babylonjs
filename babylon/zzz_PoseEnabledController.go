@@ -106,30 +106,6 @@ func (p *PoseEnabledController) GetForwardRay(opts *PoseEnabledControllerGetForw
 	return RayFromJSObject(retVal, p.ctx)
 }
 
-// Onleftstickchanged calls the Onleftstickchanged method on the PoseEnabledController object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#onleftstickchanged
-func (p *PoseEnabledController) Onleftstickchanged(callback func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
-
-	p.p.Call("onleftstickchanged", args...)
-}
-
-// Onrightstickchanged calls the Onrightstickchanged method on the PoseEnabledController object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#onrightstickchanged
-func (p *PoseEnabledController) Onrightstickchanged(callback func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
-
-	p.p.Call("onrightstickchanged", args...)
-}
-
 // Update calls the Update method on the PoseEnabledController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#update
@@ -152,22 +128,6 @@ func (p *PoseEnabledController) UpdateFromDevice(poseData js.Value) {
 
 /*
 
-// BrowserGamepad returns the BrowserGamepad property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#browsergamepad
-func (p *PoseEnabledController) BrowserGamepad(browserGamepad interface{}) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(browserGamepad)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetBrowserGamepad sets the BrowserGamepad property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#browsergamepad
-func (p *PoseEnabledController) SetBrowserGamepad(browserGamepad interface{}) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(browserGamepad)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
 // ControllerType returns the ControllerType property of class PoseEnabledController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#controllertype
@@ -181,22 +141,6 @@ func (p *PoseEnabledController) ControllerType(controllerType *PoseEnabledContro
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#controllertype
 func (p *PoseEnabledController) SetControllerType(controllerType *PoseEnabledControllerType) *PoseEnabledController {
 	p := ba.ctx.Get("PoseEnabledController").New(controllerType.JSObject())
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// DUALSHOCK returns the DUALSHOCK property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#dualshock
-func (p *PoseEnabledController) DUALSHOCK(DUALSHOCK float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(DUALSHOCK)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetDUALSHOCK sets the DUALSHOCK property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#dualshock
-func (p *PoseEnabledController) SetDUALSHOCK(DUALSHOCK float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(DUALSHOCK)
 	return PoseEnabledControllerFromJSObject(p, ba.ctx)
 }
 
@@ -248,86 +192,6 @@ func (p *PoseEnabledController) SetDeviceScaleFactor(deviceScaleFactor float64) 
 	return PoseEnabledControllerFromJSObject(p, ba.ctx)
 }
 
-// GAMEPAD returns the GAMEPAD property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#gamepad
-func (p *PoseEnabledController) GAMEPAD(GAMEPAD float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(GAMEPAD)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetGAMEPAD sets the GAMEPAD property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#gamepad
-func (p *PoseEnabledController) SetGAMEPAD(GAMEPAD float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(GAMEPAD)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// GENERIC returns the GENERIC property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#generic
-func (p *PoseEnabledController) GENERIC(GENERIC float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(GENERIC)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetGENERIC sets the GENERIC property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#generic
-func (p *PoseEnabledController) SetGENERIC(GENERIC float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(GENERIC)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// Id returns the Id property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#id
-func (p *PoseEnabledController) Id(id string) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(id)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetId sets the Id property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#id
-func (p *PoseEnabledController) SetId(id string) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(id)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// Index returns the Index property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#index
-func (p *PoseEnabledController) Index(index float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(index)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetIndex sets the Index property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#index
-func (p *PoseEnabledController) SetIndex(index float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(index)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// IsConnected returns the IsConnected property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#isconnected
-func (p *PoseEnabledController) IsConnected(isConnected bool) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(isConnected)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetIsConnected sets the IsConnected property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#isconnected
-func (p *PoseEnabledController) SetIsConnected(isConnected bool) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(isConnected)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
 // IsXR returns the IsXR property of class PoseEnabledController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#isxr
@@ -341,22 +205,6 @@ func (p *PoseEnabledController) IsXR(isXR bool) *PoseEnabledController {
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#isxr
 func (p *PoseEnabledController) SetIsXR(isXR bool) *PoseEnabledController {
 	p := ba.ctx.Get("PoseEnabledController").New(isXR)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// LeftStick returns the LeftStick property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#leftstick
-func (p *PoseEnabledController) LeftStick(leftStick *StickValues) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(leftStick.JSObject())
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetLeftStick sets the LeftStick property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#leftstick
-func (p *PoseEnabledController) SetLeftStick(leftStick *StickValues) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(leftStick.JSObject())
 	return PoseEnabledControllerFromJSObject(p, ba.ctx)
 }
 
@@ -392,22 +240,6 @@ func (p *PoseEnabledController) SetPOINTING_POSE(POINTING_POSE string) *PoseEnab
 	return PoseEnabledControllerFromJSObject(p, ba.ctx)
 }
 
-// POSE_ENABLED returns the POSE_ENABLED property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#pose_enabled
-func (p *PoseEnabledController) POSE_ENABLED(POSE_ENABLED float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(POSE_ENABLED)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetPOSE_ENABLED sets the POSE_ENABLED property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#pose_enabled
-func (p *PoseEnabledController) SetPOSE_ENABLED(POSE_ENABLED float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(POSE_ENABLED)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
 // Position returns the Position property of class PoseEnabledController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#position
@@ -440,22 +272,6 @@ func (p *PoseEnabledController) SetRawPose(rawPose js.Value) *PoseEnabledControl
 	return PoseEnabledControllerFromJSObject(p, ba.ctx)
 }
 
-// RightStick returns the RightStick property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#rightstick
-func (p *PoseEnabledController) RightStick(rightStick *StickValues) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(rightStick.JSObject())
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetRightStick sets the RightStick property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#rightstick
-func (p *PoseEnabledController) SetRightStick(rightStick *StickValues) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(rightStick.JSObject())
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
 // RotationQuaternion returns the RotationQuaternion property of class PoseEnabledController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#rotationquaternion
@@ -469,38 +285,6 @@ func (p *PoseEnabledController) RotationQuaternion(rotationQuaternion *Quaternio
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#rotationquaternion
 func (p *PoseEnabledController) SetRotationQuaternion(rotationQuaternion *Quaternion) *PoseEnabledController {
 	p := ba.ctx.Get("PoseEnabledController").New(rotationQuaternion.JSObject())
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// Type returns the Type property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#type
-func (p *PoseEnabledController) Type(jsType float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(jsType)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetType sets the Type property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#type
-func (p *PoseEnabledController) SetType(jsType float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(jsType)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// XBOX returns the XBOX property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#xbox
-func (p *PoseEnabledController) XBOX(XBOX float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(XBOX)
-	return PoseEnabledControllerFromJSObject(p, ba.ctx)
-}
-
-// SetXBOX sets the XBOX property of class PoseEnabledController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#xbox
-func (p *PoseEnabledController) SetXBOX(XBOX float64) *PoseEnabledController {
-	p := ba.ctx.Get("PoseEnabledController").New(XBOX)
 	return PoseEnabledControllerFromJSObject(p, ba.ctx)
 }
 

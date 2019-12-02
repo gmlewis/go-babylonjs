@@ -97,35 +97,6 @@ func (d *DepthOfFieldEffect) GetClassName() string {
 	return retVal.String()
 }
 
-// DepthOfFieldEffectGetPostProcessesOpts contains optional parameters for DepthOfFieldEffect.GetPostProcesses.
-type DepthOfFieldEffectGetPostProcessesOpts struct {
-	Camera *Camera
-}
-
-// GetPostProcesses calls the GetPostProcesses method on the DepthOfFieldEffect object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#getpostprocesses
-func (d *DepthOfFieldEffect) GetPostProcesses(opts *DepthOfFieldEffectGetPostProcessesOpts) []*PostProcess {
-	if opts == nil {
-		opts = &DepthOfFieldEffectGetPostProcessesOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.Camera == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Camera.JSObject())
-	}
-
-	retVal := d.p.Call("getPostProcesses", args...)
-	result := []*PostProcess{}
-	for ri := 0; ri < retVal.Length(); ri++ {
-		result = append(result, PostProcessFromJSObject(retVal.Index(ri), d.ctx))
-	}
-	return result
-}
-
 /*
 
 // DepthTexture returns the DepthTexture property of class DepthOfFieldEffect.
@@ -189,22 +160,6 @@ func (d *DepthOfFieldEffect) FocusDistance(focusDistance float64) *DepthOfFieldE
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#focusdistance
 func (d *DepthOfFieldEffect) SetFocusDistance(focusDistance float64) *DepthOfFieldEffect {
 	p := ba.ctx.Get("DepthOfFieldEffect").New(focusDistance)
-	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
-}
-
-// IsSupported returns the IsSupported property of class DepthOfFieldEffect.
-//
-// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#issupported
-func (d *DepthOfFieldEffect) IsSupported(isSupported bool) *DepthOfFieldEffect {
-	p := ba.ctx.Get("DepthOfFieldEffect").New(isSupported)
-	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
-}
-
-// SetIsSupported sets the IsSupported property of class DepthOfFieldEffect.
-//
-// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#issupported
-func (d *DepthOfFieldEffect) SetIsSupported(isSupported bool) *DepthOfFieldEffect {
-	p := ba.ctx.Get("DepthOfFieldEffect").New(isSupported)
 	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
 }
 

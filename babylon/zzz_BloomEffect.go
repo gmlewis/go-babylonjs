@@ -84,52 +84,7 @@ func (b *BloomEffect) DisposeEffects(camera *Camera) {
 	b.p.Call("disposeEffects", args...)
 }
 
-// BloomEffectGetPostProcessesOpts contains optional parameters for BloomEffect.GetPostProcesses.
-type BloomEffectGetPostProcessesOpts struct {
-	Camera *Camera
-}
-
-// GetPostProcesses calls the GetPostProcesses method on the BloomEffect object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bloomeffect#getpostprocesses
-func (b *BloomEffect) GetPostProcesses(opts *BloomEffectGetPostProcessesOpts) []*PostProcess {
-	if opts == nil {
-		opts = &BloomEffectGetPostProcessesOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.Camera == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Camera.JSObject())
-	}
-
-	retVal := b.p.Call("getPostProcesses", args...)
-	result := []*PostProcess{}
-	for ri := 0; ri < retVal.Length(); ri++ {
-		result = append(result, PostProcessFromJSObject(retVal.Index(ri), b.ctx))
-	}
-	return result
-}
-
 /*
-
-// IsSupported returns the IsSupported property of class BloomEffect.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bloomeffect#issupported
-func (b *BloomEffect) IsSupported(isSupported bool) *BloomEffect {
-	p := ba.ctx.Get("BloomEffect").New(isSupported)
-	return BloomEffectFromJSObject(p, ba.ctx)
-}
-
-// SetIsSupported sets the IsSupported property of class BloomEffect.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bloomeffect#issupported
-func (b *BloomEffect) SetIsSupported(isSupported bool) *BloomEffect {
-	p := ba.ctx.Get("BloomEffect").New(isSupported)
-	return BloomEffectFromJSObject(p, ba.ctx)
-}
 
 // Kernel returns the Kernel property of class BloomEffect.
 //

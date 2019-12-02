@@ -70,40 +70,6 @@ func (ba *Babylon) NewBounceEase(opts *NewBounceEaseOpts) *BounceEase {
 	return BounceEaseFromJSObject(p, ba.ctx)
 }
 
-// Ease calls the Ease method on the BounceEase object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bounceease#ease
-func (b *BounceEase) Ease(gradient float64) float64 {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, gradient)
-
-	retVal := b.p.Call("ease", args...)
-	return retVal.Float()
-}
-
-// GetEasingMode calls the GetEasingMode method on the BounceEase object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bounceease#geteasingmode
-func (b *BounceEase) GetEasingMode() float64 {
-
-	retVal := b.p.Call("getEasingMode")
-	return retVal.Float()
-}
-
-// SetEasingMode calls the SetEasingMode method on the BounceEase object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bounceease#seteasingmode
-func (b *BounceEase) SetEasingMode(easingMode float64) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, easingMode)
-
-	b.p.Call("setEasingMode", args...)
-}
-
 /*
 
 // Bounces returns the Bounces property of class BounceEase.
@@ -135,54 +101,6 @@ func (b *BounceEase) Bounciness(bounciness float64) *BounceEase {
 // https://doc.babylonjs.com/api/classes/babylon.bounceease#bounciness
 func (b *BounceEase) SetBounciness(bounciness float64) *BounceEase {
 	p := ba.ctx.Get("BounceEase").New(bounciness)
-	return BounceEaseFromJSObject(p, ba.ctx)
-}
-
-// EASINGMODE_EASEIN returns the EASINGMODE_EASEIN property of class BounceEase.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bounceease#easingmode_easein
-func (b *BounceEase) EASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *BounceEase {
-	p := ba.ctx.Get("BounceEase").New(EASINGMODE_EASEIN)
-	return BounceEaseFromJSObject(p, ba.ctx)
-}
-
-// SetEASINGMODE_EASEIN sets the EASINGMODE_EASEIN property of class BounceEase.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bounceease#easingmode_easein
-func (b *BounceEase) SetEASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *BounceEase {
-	p := ba.ctx.Get("BounceEase").New(EASINGMODE_EASEIN)
-	return BounceEaseFromJSObject(p, ba.ctx)
-}
-
-// EASINGMODE_EASEINOUT returns the EASINGMODE_EASEINOUT property of class BounceEase.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bounceease#easingmode_easeinout
-func (b *BounceEase) EASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *BounceEase {
-	p := ba.ctx.Get("BounceEase").New(EASINGMODE_EASEINOUT)
-	return BounceEaseFromJSObject(p, ba.ctx)
-}
-
-// SetEASINGMODE_EASEINOUT sets the EASINGMODE_EASEINOUT property of class BounceEase.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bounceease#easingmode_easeinout
-func (b *BounceEase) SetEASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *BounceEase {
-	p := ba.ctx.Get("BounceEase").New(EASINGMODE_EASEINOUT)
-	return BounceEaseFromJSObject(p, ba.ctx)
-}
-
-// EASINGMODE_EASEOUT returns the EASINGMODE_EASEOUT property of class BounceEase.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bounceease#easingmode_easeout
-func (b *BounceEase) EASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *BounceEase {
-	p := ba.ctx.Get("BounceEase").New(EASINGMODE_EASEOUT)
-	return BounceEaseFromJSObject(p, ba.ctx)
-}
-
-// SetEASINGMODE_EASEOUT sets the EASINGMODE_EASEOUT property of class BounceEase.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bounceease#easingmode_easeout
-func (b *BounceEase) SetEASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *BounceEase {
-	p := ba.ctx.Get("BounceEase").New(EASINGMODE_EASEOUT)
 	return BounceEaseFromJSObject(p, ba.ctx)
 }
 

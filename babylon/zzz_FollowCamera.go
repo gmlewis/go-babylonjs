@@ -115,49 +115,6 @@ func (f *FollowCamera) GetClassName() string {
 	return retVal.String()
 }
 
-// GetFrontPosition calls the GetFrontPosition method on the FollowCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#getfrontposition
-func (f *FollowCamera) GetFrontPosition(distance float64) *Vector3 {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, distance)
-
-	retVal := f.p.Call("getFrontPosition", args...)
-	return Vector3FromJSObject(retVal, f.ctx)
-}
-
-// GetTarget calls the GetTarget method on the FollowCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#gettarget
-func (f *FollowCamera) GetTarget() *Vector3 {
-
-	retVal := f.p.Call("getTarget")
-	return Vector3FromJSObject(retVal, f.ctx)
-}
-
-// SetTarget calls the SetTarget method on the FollowCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#settarget
-func (f *FollowCamera) SetTarget(target *Vector3) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, target.JSObject())
-
-	f.p.Call("setTarget", args...)
-}
-
-// StoreState calls the StoreState method on the FollowCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#storestate
-func (f *FollowCamera) StoreState() *Camera {
-
-	retVal := f.p.Call("storeState")
-	return CameraFromJSObject(retVal, f.ctx)
-}
-
 /*
 
 // CameraAcceleration returns the CameraAcceleration property of class FollowCamera.
@@ -173,38 +130,6 @@ func (f *FollowCamera) CameraAcceleration(cameraAcceleration float64) *FollowCam
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#cameraacceleration
 func (f *FollowCamera) SetCameraAcceleration(cameraAcceleration float64) *FollowCamera {
 	p := ba.ctx.Get("FollowCamera").New(cameraAcceleration)
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// CameraDirection returns the CameraDirection property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#cameradirection
-func (f *FollowCamera) CameraDirection(cameraDirection *Vector3) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(cameraDirection.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// SetCameraDirection sets the CameraDirection property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#cameradirection
-func (f *FollowCamera) SetCameraDirection(cameraDirection *Vector3) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(cameraDirection.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// CameraRotation returns the CameraRotation property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#camerarotation
-func (f *FollowCamera) CameraRotation(cameraRotation *Vector2) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(cameraRotation.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// SetCameraRotation sets the CameraRotation property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#camerarotation
-func (f *FollowCamera) SetCameraRotation(cameraRotation *Vector2) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(cameraRotation.JSObject())
 	return FollowCameraFromJSObject(p, ba.ctx)
 }
 
@@ -320,22 +245,6 @@ func (f *FollowCamera) SetMaxCameraSpeed(maxCameraSpeed float64) *FollowCamera {
 	return FollowCameraFromJSObject(p, ba.ctx)
 }
 
-// NoRotationConstraint returns the NoRotationConstraint property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#norotationconstraint
-func (f *FollowCamera) NoRotationConstraint(noRotationConstraint bool) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(noRotationConstraint)
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// SetNoRotationConstraint sets the NoRotationConstraint property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#norotationconstraint
-func (f *FollowCamera) SetNoRotationConstraint(noRotationConstraint bool) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(noRotationConstraint)
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
 // Radius returns the Radius property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#radius
@@ -352,22 +261,6 @@ func (f *FollowCamera) SetRadius(radius float64) *FollowCamera {
 	return FollowCameraFromJSObject(p, ba.ctx)
 }
 
-// Rotation returns the Rotation property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#rotation
-func (f *FollowCamera) Rotation(rotation *Vector3) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(rotation.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// SetRotation sets the Rotation property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#rotation
-func (f *FollowCamera) SetRotation(rotation *Vector3) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(rotation.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
 // RotationOffset returns the RotationOffset property of class FollowCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#rotationoffset
@@ -381,54 +274,6 @@ func (f *FollowCamera) RotationOffset(rotationOffset float64) *FollowCamera {
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#rotationoffset
 func (f *FollowCamera) SetRotationOffset(rotationOffset float64) *FollowCamera {
 	p := ba.ctx.Get("FollowCamera").New(rotationOffset)
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// RotationQuaternion returns the RotationQuaternion property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#rotationquaternion
-func (f *FollowCamera) RotationQuaternion(rotationQuaternion *Quaternion) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(rotationQuaternion.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// SetRotationQuaternion sets the RotationQuaternion property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#rotationquaternion
-func (f *FollowCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(rotationQuaternion.JSObject())
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// Speed returns the Speed property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#speed
-func (f *FollowCamera) Speed(speed float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(speed)
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// SetSpeed sets the Speed property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#speed
-func (f *FollowCamera) SetSpeed(speed float64) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(speed)
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#updateupvectorfromrotation
-func (f *FollowCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(updateUpVectorFromRotation)
-	return FollowCameraFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class FollowCamera.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamera#updateupvectorfromrotation
-func (f *FollowCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *FollowCamera {
-	p := ba.ctx.Get("FollowCamera").New(updateUpVectorFromRotation)
 	return FollowCameraFromJSObject(p, ba.ctx)
 }
 

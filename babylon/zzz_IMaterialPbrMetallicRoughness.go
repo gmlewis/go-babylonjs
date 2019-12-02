@@ -38,22 +38,6 @@ func IMaterialPbrMetallicRoughnessArrayToJSArray(array []*IMaterialPbrMetallicRo
 
 /*
 
-// BaseColorFactor returns the BaseColorFactor property of class IMaterialPbrMetallicRoughness.
-//
-// https://doc.babylonjs.com/api/classes/babylon.imaterialpbrmetallicroughness#basecolorfactor
-func (i *IMaterialPbrMetallicRoughness) BaseColorFactor(baseColorFactor float64) *IMaterialPbrMetallicRoughness {
-	p := ba.ctx.Get("IMaterialPbrMetallicRoughness").New(baseColorFactor)
-	return IMaterialPbrMetallicRoughnessFromJSObject(p, ba.ctx)
-}
-
-// SetBaseColorFactor sets the BaseColorFactor property of class IMaterialPbrMetallicRoughness.
-//
-// https://doc.babylonjs.com/api/classes/babylon.imaterialpbrmetallicroughness#basecolorfactor
-func (i *IMaterialPbrMetallicRoughness) SetBaseColorFactor(baseColorFactor float64) *IMaterialPbrMetallicRoughness {
-	p := ba.ctx.Get("IMaterialPbrMetallicRoughness").New(baseColorFactor)
-	return IMaterialPbrMetallicRoughnessFromJSObject(p, ba.ctx)
-}
-
 // BaseColorTexture returns the BaseColorTexture property of class IMaterialPbrMetallicRoughness.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterialpbrmetallicroughness#basecolortexture
@@ -70,22 +54,6 @@ func (i *IMaterialPbrMetallicRoughness) SetBaseColorTexture(baseColorTexture *IT
 	return IMaterialPbrMetallicRoughnessFromJSObject(p, ba.ctx)
 }
 
-// MetallicFactor returns the MetallicFactor property of class IMaterialPbrMetallicRoughness.
-//
-// https://doc.babylonjs.com/api/classes/babylon.imaterialpbrmetallicroughness#metallicfactor
-func (i *IMaterialPbrMetallicRoughness) MetallicFactor(metallicFactor float64) *IMaterialPbrMetallicRoughness {
-	p := ba.ctx.Get("IMaterialPbrMetallicRoughness").New(metallicFactor)
-	return IMaterialPbrMetallicRoughnessFromJSObject(p, ba.ctx)
-}
-
-// SetMetallicFactor sets the MetallicFactor property of class IMaterialPbrMetallicRoughness.
-//
-// https://doc.babylonjs.com/api/classes/babylon.imaterialpbrmetallicroughness#metallicfactor
-func (i *IMaterialPbrMetallicRoughness) SetMetallicFactor(metallicFactor float64) *IMaterialPbrMetallicRoughness {
-	p := ba.ctx.Get("IMaterialPbrMetallicRoughness").New(metallicFactor)
-	return IMaterialPbrMetallicRoughnessFromJSObject(p, ba.ctx)
-}
-
 // MetallicRoughnessTexture returns the MetallicRoughnessTexture property of class IMaterialPbrMetallicRoughness.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imaterialpbrmetallicroughness#metallicroughnesstexture
@@ -99,22 +67,6 @@ func (i *IMaterialPbrMetallicRoughness) MetallicRoughnessTexture(metallicRoughne
 // https://doc.babylonjs.com/api/classes/babylon.imaterialpbrmetallicroughness#metallicroughnesstexture
 func (i *IMaterialPbrMetallicRoughness) SetMetallicRoughnessTexture(metallicRoughnessTexture *ITextureInfo) *IMaterialPbrMetallicRoughness {
 	p := ba.ctx.Get("IMaterialPbrMetallicRoughness").New(metallicRoughnessTexture.JSObject())
-	return IMaterialPbrMetallicRoughnessFromJSObject(p, ba.ctx)
-}
-
-// RoughnessFactor returns the RoughnessFactor property of class IMaterialPbrMetallicRoughness.
-//
-// https://doc.babylonjs.com/api/classes/babylon.imaterialpbrmetallicroughness#roughnessfactor
-func (i *IMaterialPbrMetallicRoughness) RoughnessFactor(roughnessFactor float64) *IMaterialPbrMetallicRoughness {
-	p := ba.ctx.Get("IMaterialPbrMetallicRoughness").New(roughnessFactor)
-	return IMaterialPbrMetallicRoughnessFromJSObject(p, ba.ctx)
-}
-
-// SetRoughnessFactor sets the RoughnessFactor property of class IMaterialPbrMetallicRoughness.
-//
-// https://doc.babylonjs.com/api/classes/babylon.imaterialpbrmetallicroughness#roughnessfactor
-func (i *IMaterialPbrMetallicRoughness) SetRoughnessFactor(roughnessFactor float64) *IMaterialPbrMetallicRoughness {
-	p := ba.ctx.Get("IMaterialPbrMetallicRoughness").New(roughnessFactor)
 	return IMaterialPbrMetallicRoughnessFromJSObject(p, ba.ctx)
 }
 

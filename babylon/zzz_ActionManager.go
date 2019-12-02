@@ -82,16 +82,30 @@ func (a *ActionManager) GetTriggerName(trigger float64) string {
 	return retVal.String()
 }
 
+// ActionManagerHasSpecificTriggerOpts contains optional parameters for ActionManager.HasSpecificTrigger.
+type ActionManagerHasSpecificTriggerOpts struct {
+	ParameterPredicate func()
+}
+
 // HasSpecificTrigger calls the HasSpecificTrigger method on the ActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#hasspecifictrigger
-func (a *ActionManager) HasSpecificTrigger(trigger float64) bool {
+func (a *ActionManager) HasSpecificTrigger(trigger float64, opts *ActionManagerHasSpecificTriggerOpts) bool {
+	if opts == nil {
+		opts = &ActionManagerHasSpecificTriggerOpts{}
+	}
 
-	args := make([]interface{}, 0, 1+0)
+	args := make([]interface{}, 0, 1+1)
 
 	args = append(args, trigger)
 
-	retVal := a.p.Call("HasSpecificTrigger", args...)
+	if opts.ParameterPredicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ParameterPredicate)
+	}
+
+	retVal := a.p.Call("hasSpecificTrigger", args...)
 	return retVal.Bool()
 }
 
@@ -203,35 +217,19 @@ func (a *ActionManager) UnregisterAction(action *IAction) bool {
 
 /*
 
-// Actions returns the Actions property of class ActionManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager#actions
-func (a *ActionManager) Actions(actions *IAction) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(actions.JSObject())
-	return ActionManagerFromJSObject(p, ba.ctx)
-}
-
-// SetActions sets the Actions property of class ActionManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager#actions
-func (a *ActionManager) SetActions(actions *IAction) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(actions.JSObject())
-	return ActionManagerFromJSObject(p, ba.ctx)
-}
-
 // HasPickTriggers returns the HasPickTriggers property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#haspicktriggers
-func (a *ActionManager) HasPickTriggers(HasPickTriggers bool) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(HasPickTriggers)
+func (a *ActionManager) HasPickTriggers(hasPickTriggers bool) *ActionManager {
+	p := ba.ctx.Get("ActionManager").New(hasPickTriggers)
 	return ActionManagerFromJSObject(p, ba.ctx)
 }
 
 // SetHasPickTriggers sets the HasPickTriggers property of class ActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#haspicktriggers
-func (a *ActionManager) SetHasPickTriggers(HasPickTriggers bool) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(HasPickTriggers)
+func (a *ActionManager) SetHasPickTriggers(hasPickTriggers bool) *ActionManager {
+	p := ba.ctx.Get("ActionManager").New(hasPickTriggers)
 	return ActionManagerFromJSObject(p, ba.ctx)
 }
 
@@ -248,54 +246,6 @@ func (a *ActionManager) HasPointerTriggers(hasPointerTriggers bool) *ActionManag
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#haspointertriggers
 func (a *ActionManager) SetHasPointerTriggers(hasPointerTriggers bool) *ActionManager {
 	p := ba.ctx.Get("ActionManager").New(hasPointerTriggers)
-	return ActionManagerFromJSObject(p, ba.ctx)
-}
-
-// HasTriggers returns the HasTriggers property of class ActionManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager#hastriggers
-func (a *ActionManager) HasTriggers(HasTriggers bool) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(HasTriggers)
-	return ActionManagerFromJSObject(p, ba.ctx)
-}
-
-// SetHasTriggers sets the HasTriggers property of class ActionManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager#hastriggers
-func (a *ActionManager) SetHasTriggers(HasTriggers bool) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(HasTriggers)
-	return ActionManagerFromJSObject(p, ba.ctx)
-}
-
-// HoverCursor returns the HoverCursor property of class ActionManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager#hovercursor
-func (a *ActionManager) HoverCursor(hoverCursor string) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(hoverCursor)
-	return ActionManagerFromJSObject(p, ba.ctx)
-}
-
-// SetHoverCursor sets the HoverCursor property of class ActionManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager#hovercursor
-func (a *ActionManager) SetHoverCursor(hoverCursor string) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(hoverCursor)
-	return ActionManagerFromJSObject(p, ba.ctx)
-}
-
-// IsRecursive returns the IsRecursive property of class ActionManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager#isrecursive
-func (a *ActionManager) IsRecursive(isRecursive bool) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(isRecursive)
-	return ActionManagerFromJSObject(p, ba.ctx)
-}
-
-// SetIsRecursive sets the IsRecursive property of class ActionManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager#isrecursive
-func (a *ActionManager) SetIsRecursive(isRecursive bool) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(isRecursive)
 	return ActionManagerFromJSObject(p, ba.ctx)
 }
 
@@ -568,22 +518,6 @@ func (a *ActionManager) OnRightPickTrigger(OnRightPickTrigger float64) *ActionMa
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#onrightpicktrigger
 func (a *ActionManager) SetOnRightPickTrigger(OnRightPickTrigger float64) *ActionManager {
 	p := ba.ctx.Get("ActionManager").New(OnRightPickTrigger)
-	return ActionManagerFromJSObject(p, ba.ctx)
-}
-
-// Triggers returns the Triggers property of class ActionManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager#triggers
-func (a *ActionManager) Triggers(Triggers js.Value) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(Triggers)
-	return ActionManagerFromJSObject(p, ba.ctx)
-}
-
-// SetTriggers sets the Triggers property of class ActionManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager#triggers
-func (a *ActionManager) SetTriggers(Triggers js.Value) *ActionManager {
-	p := ba.ctx.Get("ActionManager").New(Triggers)
 	return ActionManagerFromJSObject(p, ba.ctx)
 }
 

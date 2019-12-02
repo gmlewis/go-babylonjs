@@ -99,22 +99,6 @@ func (p *PositionGizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *PositionGiz
 	return PositionGizmoFromJSObject(p, ba.ctx)
 }
 
-// GizmoLayer returns the GizmoLayer property of class PositionGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.positiongizmo#gizmolayer
-func (p *PositionGizmo) GizmoLayer(gizmoLayer *UtilityLayerRenderer) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(gizmoLayer.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetGizmoLayer sets the GizmoLayer property of class PositionGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.positiongizmo#gizmolayer
-func (p *PositionGizmo) SetGizmoLayer(gizmoLayer *UtilityLayerRenderer) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(gizmoLayer.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
-}
-
 // OnDragEndObservable returns the OnDragEndObservable property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#ondragendobservable
@@ -195,22 +179,6 @@ func (p *PositionGizmo) SetSnapDistance(snapDistance float64) *PositionGizmo {
 	return PositionGizmoFromJSObject(p, ba.ctx)
 }
 
-// UpdateGizmoPositionToMatchAttachedMesh returns the UpdateGizmoPositionToMatchAttachedMesh property of class PositionGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.positiongizmo#updategizmopositiontomatchattachedmesh
-func (p *PositionGizmo) UpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(updateGizmoPositionToMatchAttachedMesh)
-	return PositionGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateGizmoPositionToMatchAttachedMesh sets the UpdateGizmoPositionToMatchAttachedMesh property of class PositionGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.positiongizmo#updategizmopositiontomatchattachedmesh
-func (p *PositionGizmo) SetUpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(updateGizmoPositionToMatchAttachedMesh)
-	return PositionGizmoFromJSObject(p, ba.ctx)
-}
-
 // UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class PositionGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#updategizmorotationtomatchattachedmesh
@@ -224,22 +192,6 @@ func (p *PositionGizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotati
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#updategizmorotationtomatchattachedmesh
 func (p *PositionGizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *PositionGizmo {
 	p := ba.ctx.Get("PositionGizmo").New(updateGizmoRotationToMatchAttachedMesh)
-	return PositionGizmoFromJSObject(p, ba.ctx)
-}
-
-// UpdateScale returns the UpdateScale property of class PositionGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.positiongizmo#updatescale
-func (p *PositionGizmo) UpdateScale(updateScale bool) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(updateScale)
-	return PositionGizmoFromJSObject(p, ba.ctx)
-}
-
-// SetUpdateScale sets the UpdateScale property of class PositionGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.positiongizmo#updatescale
-func (p *PositionGizmo) SetUpdateScale(updateScale bool) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(updateScale)
 	return PositionGizmoFromJSObject(p, ba.ctx)
 }
 
@@ -336,22 +288,6 @@ func (p *PositionGizmo) ZPlaneGizmo(zPlaneGizmo *PlaneDragGizmo) *PositionGizmo 
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo#zplanegizmo
 func (p *PositionGizmo) SetZPlaneGizmo(zPlaneGizmo *PlaneDragGizmo) *PositionGizmo {
 	p := ba.ctx.Get("PositionGizmo").New(zPlaneGizmo.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
-}
-
-// _rootMesh returns the _rootMesh property of class PositionGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.positiongizmo#_rootmesh
-func (p *PositionGizmo) _rootMesh(_rootMesh *Mesh) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(_rootMesh.JSObject())
-	return PositionGizmoFromJSObject(p, ba.ctx)
-}
-
-// Set_rootMesh sets the _rootMesh property of class PositionGizmo.
-//
-// https://doc.babylonjs.com/api/classes/babylon.positiongizmo#_rootmesh
-func (p *PositionGizmo) Set_rootMesh(_rootMesh *Mesh) *PositionGizmo {
-	p := ba.ctx.Get("PositionGizmo").New(_rootMesh.JSObject())
 	return PositionGizmoFromJSObject(p, ba.ctx)
 }
 

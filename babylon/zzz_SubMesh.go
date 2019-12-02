@@ -339,32 +339,6 @@ func (s *SubMesh) SetBoundingInfo(boundingInfo *BoundingInfo) *SubMesh {
 	return SubMeshFromJSObject(retVal, s.ctx)
 }
 
-// SubMeshSetEffectOpts contains optional parameters for SubMesh.SetEffect.
-type SubMeshSetEffectOpts struct {
-	Defines *MaterialDefines
-}
-
-// SetEffect calls the SetEffect method on the SubMesh object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.submesh#seteffect
-func (s *SubMesh) SetEffect(effect *Effect, opts *SubMeshSetEffectOpts) {
-	if opts == nil {
-		opts = &SubMeshSetEffectOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, effect.JSObject())
-
-	if opts.Defines == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Defines.JSObject())
-	}
-
-	s.p.Call("setEffect", args...)
-}
-
 // UpdateBoundingInfo calls the UpdateBoundingInfo method on the SubMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#updateboundinginfo
@@ -379,22 +353,6 @@ func (s *SubMesh) UpdateBoundingInfo(world *Matrix) *SubMesh {
 }
 
 /*
-
-// Effect returns the Effect property of class SubMesh.
-//
-// https://doc.babylonjs.com/api/classes/babylon.submesh#effect
-func (s *SubMesh) Effect(effect *Effect) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(effect.JSObject())
-	return SubMeshFromJSObject(p, ba.ctx)
-}
-
-// SetEffect sets the Effect property of class SubMesh.
-//
-// https://doc.babylonjs.com/api/classes/babylon.submesh#effect
-func (s *SubMesh) SetEffect(effect *Effect) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(effect.JSObject())
-	return SubMeshFromJSObject(p, ba.ctx)
-}
 
 // IndexCount returns the IndexCount property of class SubMesh.
 //
@@ -441,22 +399,6 @@ func (s *SubMesh) IsGlobal(IsGlobal bool) *SubMesh {
 // https://doc.babylonjs.com/api/classes/babylon.submesh#isglobal
 func (s *SubMesh) SetIsGlobal(IsGlobal bool) *SubMesh {
 	p := ba.ctx.Get("SubMesh").New(IsGlobal)
-	return SubMeshFromJSObject(p, ba.ctx)
-}
-
-// MaterialDefines returns the MaterialDefines property of class SubMesh.
-//
-// https://doc.babylonjs.com/api/classes/babylon.submesh#materialdefines
-func (s *SubMesh) MaterialDefines(materialDefines *MaterialDefines) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(materialDefines.JSObject())
-	return SubMeshFromJSObject(p, ba.ctx)
-}
-
-// SetMaterialDefines sets the MaterialDefines property of class SubMesh.
-//
-// https://doc.babylonjs.com/api/classes/babylon.submesh#materialdefines
-func (s *SubMesh) SetMaterialDefines(materialDefines *MaterialDefines) *SubMesh {
-	p := ba.ctx.Get("SubMesh").New(materialDefines.JSObject())
 	return SubMeshFromJSObject(p, ba.ctx)
 }
 

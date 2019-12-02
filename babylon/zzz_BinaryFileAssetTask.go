@@ -50,28 +50,6 @@ func (ba *Babylon) NewBinaryFileAssetTask(name string, url string) *BinaryFileAs
 	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
 }
 
-// Reset calls the Reset method on the BinaryFileAssetTask object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#reset
-func (b *BinaryFileAssetTask) Reset() {
-
-	b.p.Call("reset")
-}
-
-// Run calls the Run method on the BinaryFileAssetTask object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#run
-func (b *BinaryFileAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
-
-	b.p.Call("run", args...)
-}
-
 // RunTask calls the RunTask method on the BinaryFileAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#runtask
@@ -101,38 +79,6 @@ func (b *BinaryFileAssetTask) Data(data js.Value) *BinaryFileAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#data
 func (b *BinaryFileAssetTask) SetData(data js.Value) *BinaryFileAssetTask {
 	p := ba.ctx.Get("BinaryFileAssetTask").New(data)
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// ErrorObject returns the ErrorObject property of class BinaryFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#errorobject
-func (b *BinaryFileAssetTask) ErrorObject(errorObject js.Value) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(errorObject)
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetErrorObject sets the ErrorObject property of class BinaryFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#errorobject
-func (b *BinaryFileAssetTask) SetErrorObject(errorObject js.Value) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(errorObject)
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// IsCompleted returns the IsCompleted property of class BinaryFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#iscompleted
-func (b *BinaryFileAssetTask) IsCompleted(isCompleted bool) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(isCompleted)
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetIsCompleted sets the IsCompleted property of class BinaryFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#iscompleted
-func (b *BinaryFileAssetTask) SetIsCompleted(isCompleted bool) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(isCompleted)
 	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -181,22 +127,6 @@ func (b *BinaryFileAssetTask) OnSuccess(onSuccess func()) *BinaryFileAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#onsuccess
 func (b *BinaryFileAssetTask) SetOnSuccess(onSuccess func()) *BinaryFileAssetTask {
 	p := ba.ctx.Get("BinaryFileAssetTask").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {onSuccess(); return nil}))
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// TaskState returns the TaskState property of class BinaryFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#taskstate
-func (b *BinaryFileAssetTask) TaskState(taskState *AssetTaskState) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(taskState.JSObject())
-	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetTaskState sets the TaskState property of class BinaryFileAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#taskstate
-func (b *BinaryFileAssetTask) SetTaskState(taskState *AssetTaskState) *BinaryFileAssetTask {
-	p := ba.ctx.Get("BinaryFileAssetTask").New(taskState.JSObject())
 	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
 }
 

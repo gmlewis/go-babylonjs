@@ -69,31 +69,6 @@ func (ba *Babylon) NewLineEdgesRenderer(source *AbstractMesh, opts *NewLineEdges
 	return LineEdgesRendererFromJSObject(p, ba.ctx)
 }
 
-// Dispose calls the Dispose method on the LineEdgesRenderer object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#dispose
-func (l *LineEdgesRenderer) Dispose() {
-
-	l.p.Call("dispose")
-}
-
-// IsReady calls the IsReady method on the LineEdgesRenderer object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#isready
-func (l *LineEdgesRenderer) IsReady() bool {
-
-	retVal := l.p.Call("isReady")
-	return retVal.Bool()
-}
-
-// Render calls the Render method on the LineEdgesRenderer object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#render
-func (l *LineEdgesRenderer) Render() {
-
-	l.p.Call("render")
-}
-
 // _generateEdgesLines calls the _generateEdgesLines method on the LineEdgesRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#_generateedgeslines
@@ -104,52 +79,4 @@ func (l *LineEdgesRenderer) _generateEdgesLines() {
 
 /*
 
-// EdgesWidthScalerForOrthographic returns the EdgesWidthScalerForOrthographic property of class LineEdgesRenderer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#edgeswidthscalerfororthographic
-func (l *LineEdgesRenderer) EdgesWidthScalerForOrthographic(edgesWidthScalerForOrthographic float64) *LineEdgesRenderer {
-	p := ba.ctx.Get("LineEdgesRenderer").New(edgesWidthScalerForOrthographic)
-	return LineEdgesRendererFromJSObject(p, ba.ctx)
-}
-
-// SetEdgesWidthScalerForOrthographic sets the EdgesWidthScalerForOrthographic property of class LineEdgesRenderer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#edgeswidthscalerfororthographic
-func (l *LineEdgesRenderer) SetEdgesWidthScalerForOrthographic(edgesWidthScalerForOrthographic float64) *LineEdgesRenderer {
-	p := ba.ctx.Get("LineEdgesRenderer").New(edgesWidthScalerForOrthographic)
-	return LineEdgesRendererFromJSObject(p, ba.ctx)
-}
-
-// EdgesWidthScalerForPerspective returns the EdgesWidthScalerForPerspective property of class LineEdgesRenderer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#edgeswidthscalerforperspective
-func (l *LineEdgesRenderer) EdgesWidthScalerForPerspective(edgesWidthScalerForPerspective float64) *LineEdgesRenderer {
-	p := ba.ctx.Get("LineEdgesRenderer").New(edgesWidthScalerForPerspective)
-	return LineEdgesRendererFromJSObject(p, ba.ctx)
-}
-
-// SetEdgesWidthScalerForPerspective sets the EdgesWidthScalerForPerspective property of class LineEdgesRenderer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#edgeswidthscalerforperspective
-func (l *LineEdgesRenderer) SetEdgesWidthScalerForPerspective(edgesWidthScalerForPerspective float64) *LineEdgesRenderer {
-	p := ba.ctx.Get("LineEdgesRenderer").New(edgesWidthScalerForPerspective)
-	return LineEdgesRendererFromJSObject(p, ba.ctx)
-}
-
-// IsEnabled returns the IsEnabled property of class LineEdgesRenderer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#isenabled
-func (l *LineEdgesRenderer) IsEnabled(isEnabled bool) *LineEdgesRenderer {
-	p := ba.ctx.Get("LineEdgesRenderer").New(isEnabled)
-	return LineEdgesRendererFromJSObject(p, ba.ctx)
-}
-
-// SetIsEnabled sets the IsEnabled property of class LineEdgesRenderer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer#isenabled
-func (l *LineEdgesRenderer) SetIsEnabled(isEnabled bool) *LineEdgesRenderer {
-	p := ba.ctx.Get("LineEdgesRenderer").New(isEnabled)
-	return LineEdgesRendererFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

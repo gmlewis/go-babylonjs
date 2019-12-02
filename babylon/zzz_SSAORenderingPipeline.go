@@ -65,18 +65,6 @@ func (ba *Babylon) NewSSAORenderingPipeline(name string, scene *Scene, ratio int
 	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
 }
 
-// AddEffect calls the AddEffect method on the SSAORenderingPipeline object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#addeffect
-func (s *SSAORenderingPipeline) AddEffect(renderEffect *PostProcessRenderEffect) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, renderEffect.JSObject())
-
-	s.p.Call("addEffect", args...)
-}
-
 // SSAORenderingPipelineDisposeOpts contains optional parameters for SSAORenderingPipeline.Dispose.
 type SSAORenderingPipelineDisposeOpts struct {
 	DisableDepthRender *bool
@@ -144,22 +132,6 @@ func (s *SSAORenderingPipeline) SetBase(base float64) *SSAORenderingPipeline {
 	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
 }
 
-// Cameras returns the Cameras property of class SSAORenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#cameras
-func (s *SSAORenderingPipeline) Cameras(cameras *Camera) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(cameras.JSObject())
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetCameras sets the Cameras property of class SSAORenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#cameras
-func (s *SSAORenderingPipeline) SetCameras(cameras *Camera) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(cameras.JSObject())
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
-}
-
 // FallOff returns the FallOff property of class SSAORenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#falloff
@@ -173,54 +145,6 @@ func (s *SSAORenderingPipeline) FallOff(fallOff float64) *SSAORenderingPipeline 
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#falloff
 func (s *SSAORenderingPipeline) SetFallOff(fallOff float64) *SSAORenderingPipeline {
 	p := ba.ctx.Get("SSAORenderingPipeline").New(fallOff)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// InspectableCustomProperties returns the InspectableCustomProperties property of class SSAORenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#inspectablecustomproperties
-func (s *SSAORenderingPipeline) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(inspectableCustomProperties.JSObject())
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetInspectableCustomProperties sets the InspectableCustomProperties property of class SSAORenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#inspectablecustomproperties
-func (s *SSAORenderingPipeline) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(inspectableCustomProperties.JSObject())
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// IsSupported returns the IsSupported property of class SSAORenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#issupported
-func (s *SSAORenderingPipeline) IsSupported(isSupported bool) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(isSupported)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetIsSupported sets the IsSupported property of class SSAORenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#issupported
-func (s *SSAORenderingPipeline) SetIsSupported(isSupported bool) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(isSupported)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// Name returns the Name property of class SSAORenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#name
-func (s *SSAORenderingPipeline) Name(name string) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(name)
-	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetName sets the Name property of class SSAORenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline#name
-func (s *SSAORenderingPipeline) SetName(name string) *SSAORenderingPipeline {
-	p := ba.ctx.Get("SSAORenderingPipeline").New(name)
 	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
 }
 

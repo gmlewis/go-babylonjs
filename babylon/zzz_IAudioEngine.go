@@ -39,14 +39,6 @@ func IAudioEngineArrayToJSArray(array []*IAudioEngine) []interface{} {
 	return result
 }
 
-// Dispose calls the Dispose method on the IAudioEngine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iaudioengine#dispose
-func (i *IAudioEngine) Dispose() {
-
-	i.p.Call("dispose")
-}
-
 // Lock calls the Lock method on the IAudioEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaudioengine#lock

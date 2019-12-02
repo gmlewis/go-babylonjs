@@ -49,61 +49,12 @@ func (ba *Babylon) NewWebVRController(vrGamepad interface{}) *WebVRController {
 	return WebVRControllerFromJSObject(p, ba.ctx)
 }
 
-// AttachToMesh calls the AttachToMesh method on the WebVRController object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#attachtomesh
-func (w *WebVRController) AttachToMesh(mesh *AbstractMesh) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, mesh.JSObject())
-
-	w.p.Call("attachToMesh", args...)
-}
-
-// AttachToPoseControlledCamera calls the AttachToPoseControlledCamera method on the WebVRController object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#attachtoposecontrolledcamera
-func (w *WebVRController) AttachToPoseControlledCamera(camera *TargetCamera) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, camera.JSObject())
-
-	w.p.Call("attachToPoseControlledCamera", args...)
-}
-
 // Dispose calls the Dispose method on the WebVRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#dispose
 func (w *WebVRController) Dispose() {
 
 	w.p.Call("dispose")
-}
-
-// WebVRControllerGetForwardRayOpts contains optional parameters for WebVRController.GetForwardRay.
-type WebVRControllerGetForwardRayOpts struct {
-	Length *float64
-}
-
-// GetForwardRay calls the GetForwardRay method on the WebVRController object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#getforwardray
-func (w *WebVRController) GetForwardRay(opts *WebVRControllerGetForwardRayOpts) *Ray {
-	if opts == nil {
-		opts = &WebVRControllerGetForwardRayOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.Length == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Length)
-	}
-
-	retVal := w.p.Call("getForwardRay", args...)
-	return RayFromJSObject(retVal, w.ctx)
 }
 
 // WebVRControllerInitControllerMeshOpts contains optional parameters for WebVRController.InitControllerMesh.
@@ -144,30 +95,6 @@ func (w *WebVRController) OnButtonStateChange(callback func()) {
 	w.p.Call("onButtonStateChange", args...)
 }
 
-// Onleftstickchanged calls the Onleftstickchanged method on the WebVRController object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onleftstickchanged
-func (w *WebVRController) Onleftstickchanged(callback func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
-
-	w.p.Call("onleftstickchanged", args...)
-}
-
-// Onrightstickchanged calls the Onrightstickchanged method on the WebVRController object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onrightstickchanged
-func (w *WebVRController) Onrightstickchanged(callback func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
-
-	w.p.Call("onrightstickchanged", args...)
-}
-
 // Update calls the Update method on the WebVRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#update
@@ -176,67 +103,7 @@ func (w *WebVRController) Update() {
 	w.p.Call("update")
 }
 
-// UpdateFromDevice calls the UpdateFromDevice method on the WebVRController object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#updatefromdevice
-func (w *WebVRController) UpdateFromDevice(poseData js.Value) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, poseData)
-
-	w.p.Call("updateFromDevice", args...)
-}
-
 /*
-
-// BrowserGamepad returns the BrowserGamepad property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#browsergamepad
-func (w *WebVRController) BrowserGamepad(browserGamepad interface{}) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(browserGamepad)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetBrowserGamepad sets the BrowserGamepad property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#browsergamepad
-func (w *WebVRController) SetBrowserGamepad(browserGamepad interface{}) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(browserGamepad)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// ControllerType returns the ControllerType property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#controllertype
-func (w *WebVRController) ControllerType(controllerType *PoseEnabledControllerType) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(controllerType.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetControllerType sets the ControllerType property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#controllertype
-func (w *WebVRController) SetControllerType(controllerType *PoseEnabledControllerType) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(controllerType.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// DUALSHOCK returns the DUALSHOCK property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#dualshock
-func (w *WebVRController) DUALSHOCK(DUALSHOCK float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(DUALSHOCK)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetDUALSHOCK sets the DUALSHOCK property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#dualshock
-func (w *WebVRController) SetDUALSHOCK(DUALSHOCK float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(DUALSHOCK)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
 
 // DefaultModel returns the DefaultModel property of class WebVRController.
 //
@@ -254,86 +121,6 @@ func (w *WebVRController) SetDefaultModel(defaultModel *AbstractMesh) *WebVRCont
 	return WebVRControllerFromJSObject(p, ba.ctx)
 }
 
-// DevicePosition returns the DevicePosition property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#deviceposition
-func (w *WebVRController) DevicePosition(devicePosition *Vector3) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(devicePosition.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetDevicePosition sets the DevicePosition property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#deviceposition
-func (w *WebVRController) SetDevicePosition(devicePosition *Vector3) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(devicePosition.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// DeviceRotationQuaternion returns the DeviceRotationQuaternion property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#devicerotationquaternion
-func (w *WebVRController) DeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(deviceRotationQuaternion.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetDeviceRotationQuaternion sets the DeviceRotationQuaternion property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#devicerotationquaternion
-func (w *WebVRController) SetDeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(deviceRotationQuaternion.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// DeviceScaleFactor returns the DeviceScaleFactor property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#devicescalefactor
-func (w *WebVRController) DeviceScaleFactor(deviceScaleFactor float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(deviceScaleFactor)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetDeviceScaleFactor sets the DeviceScaleFactor property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#devicescalefactor
-func (w *WebVRController) SetDeviceScaleFactor(deviceScaleFactor float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(deviceScaleFactor)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// GAMEPAD returns the GAMEPAD property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#gamepad
-func (w *WebVRController) GAMEPAD(GAMEPAD float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(GAMEPAD)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetGAMEPAD sets the GAMEPAD property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#gamepad
-func (w *WebVRController) SetGAMEPAD(GAMEPAD float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(GAMEPAD)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// GENERIC returns the GENERIC property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#generic
-func (w *WebVRController) GENERIC(GENERIC float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(GENERIC)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetGENERIC sets the GENERIC property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#generic
-func (w *WebVRController) SetGENERIC(GENERIC float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(GENERIC)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
 // Hand returns the Hand property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#hand
@@ -347,102 +134,6 @@ func (w *WebVRController) Hand(hand string) *WebVRController {
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#hand
 func (w *WebVRController) SetHand(hand string) *WebVRController {
 	p := ba.ctx.Get("WebVRController").New(hand)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// Id returns the Id property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#id
-func (w *WebVRController) Id(id string) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(id)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetId sets the Id property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#id
-func (w *WebVRController) SetId(id string) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(id)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// Index returns the Index property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#index
-func (w *WebVRController) Index(index float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(index)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetIndex sets the Index property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#index
-func (w *WebVRController) SetIndex(index float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(index)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// IsConnected returns the IsConnected property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#isconnected
-func (w *WebVRController) IsConnected(isConnected bool) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(isConnected)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetIsConnected sets the IsConnected property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#isconnected
-func (w *WebVRController) SetIsConnected(isConnected bool) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(isConnected)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// IsXR returns the IsXR property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#isxr
-func (w *WebVRController) IsXR(isXR bool) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(isXR)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetIsXR sets the IsXR property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#isxr
-func (w *WebVRController) SetIsXR(isXR bool) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(isXR)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// LeftStick returns the LeftStick property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#leftstick
-func (w *WebVRController) LeftStick(leftStick *StickValues) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(leftStick.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetLeftStick sets the LeftStick property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#leftstick
-func (w *WebVRController) SetLeftStick(leftStick *StickValues) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(leftStick.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// Mesh returns the Mesh property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#mesh
-func (w *WebVRController) Mesh(mesh *AbstractMesh) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(mesh.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetMesh sets the Mesh property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#mesh
-func (w *WebVRController) SetMesh(mesh *AbstractMesh) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(mesh.JSObject())
 	return WebVRControllerFromJSObject(p, ba.ctx)
 }
 
@@ -526,38 +217,6 @@ func (w *WebVRController) SetOnTriggerStateChangedObservable(onTriggerStateChang
 	return WebVRControllerFromJSObject(p, ba.ctx)
 }
 
-// POINTING_POSE returns the POINTING_POSE property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#pointing_pose
-func (w *WebVRController) POINTING_POSE(POINTING_POSE string) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(POINTING_POSE)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetPOINTING_POSE sets the POINTING_POSE property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#pointing_pose
-func (w *WebVRController) SetPOINTING_POSE(POINTING_POSE string) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(POINTING_POSE)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// POSE_ENABLED returns the POSE_ENABLED property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#pose_enabled
-func (w *WebVRController) POSE_ENABLED(POSE_ENABLED float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(POSE_ENABLED)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetPOSE_ENABLED sets the POSE_ENABLED property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#pose_enabled
-func (w *WebVRController) SetPOSE_ENABLED(POSE_ENABLED float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(POSE_ENABLED)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
 // Pad returns the Pad property of class WebVRController.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#pad
@@ -571,102 +230,6 @@ func (w *WebVRController) Pad(pad *StickValues) *WebVRController {
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#pad
 func (w *WebVRController) SetPad(pad *StickValues) *WebVRController {
 	p := ba.ctx.Get("WebVRController").New(pad.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// Position returns the Position property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#position
-func (w *WebVRController) Position(position *Vector3) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(position.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetPosition sets the Position property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#position
-func (w *WebVRController) SetPosition(position *Vector3) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(position.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// RawPose returns the RawPose property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#rawpose
-func (w *WebVRController) RawPose(rawPose js.Value) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(rawPose)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetRawPose sets the RawPose property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#rawpose
-func (w *WebVRController) SetRawPose(rawPose js.Value) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(rawPose)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// RightStick returns the RightStick property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#rightstick
-func (w *WebVRController) RightStick(rightStick *StickValues) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(rightStick.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetRightStick sets the RightStick property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#rightstick
-func (w *WebVRController) SetRightStick(rightStick *StickValues) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(rightStick.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// RotationQuaternion returns the RotationQuaternion property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#rotationquaternion
-func (w *WebVRController) RotationQuaternion(rotationQuaternion *Quaternion) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(rotationQuaternion.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetRotationQuaternion sets the RotationQuaternion property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#rotationquaternion
-func (w *WebVRController) SetRotationQuaternion(rotationQuaternion *Quaternion) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(rotationQuaternion.JSObject())
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// Type returns the Type property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#type
-func (w *WebVRController) Type(jsType float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(jsType)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetType sets the Type property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#type
-func (w *WebVRController) SetType(jsType float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(jsType)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// XBOX returns the XBOX property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#xbox
-func (w *WebVRController) XBOX(XBOX float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(XBOX)
-	return WebVRControllerFromJSObject(p, ba.ctx)
-}
-
-// SetXBOX sets the XBOX property of class WebVRController.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#xbox
-func (w *WebVRController) SetXBOX(XBOX float64) *WebVRController {
-	p := ba.ctx.Get("WebVRController").New(XBOX)
 	return WebVRControllerFromJSObject(p, ba.ctx)
 }
 

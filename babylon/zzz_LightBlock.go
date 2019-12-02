@@ -88,82 +88,6 @@ func (l *LightBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *Ligh
 	l.p.Call("bind", args...)
 }
 
-// Build calls the Build method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#build
-func (l *LightBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, state.JSObject())
-	args = append(args, activeBlocks.JSObject())
-
-	retVal := l.p.Call("build", args...)
-	return retVal.Bool()
-}
-
-// LightBlockCloneOpts contains optional parameters for LightBlock.Clone.
-type LightBlockCloneOpts struct {
-	RootUrl *string
-}
-
-// Clone calls the Clone method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#clone
-func (l *LightBlock) Clone(scene *Scene, opts *LightBlockCloneOpts) *NodeMaterialBlock {
-	if opts == nil {
-		opts = &LightBlockCloneOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, scene.JSObject())
-
-	if opts.RootUrl == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.RootUrl)
-	}
-
-	retVal := l.p.Call("clone", args...)
-	return NodeMaterialBlockFromJSObject(retVal, l.ctx)
-}
-
-// LightBlockConnectToOpts contains optional parameters for LightBlock.ConnectTo.
-type LightBlockConnectToOpts struct {
-	Options map[string]interface{}
-}
-
-// ConnectTo calls the ConnectTo method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#connectto
-func (l *LightBlock) ConnectTo(other *NodeMaterialBlock, opts *LightBlockConnectToOpts) *LightBlock {
-	if opts == nil {
-		opts = &LightBlockConnectToOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, other.JSObject())
-
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
-
-	retVal := l.p.Call("connectTo", args...)
-	return LightBlockFromJSObject(retVal, l.ctx)
-}
-
-// Dispose calls the Dispose method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#dispose
-func (l *LightBlock) Dispose() {
-
-	l.p.Call("dispose")
-}
-
 // GetClassName calls the GetClassName method on the LightBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#getclassname
@@ -171,164 +95,6 @@ func (l *LightBlock) GetClassName() string {
 
 	retVal := l.p.Call("getClassName")
 	return retVal.String()
-}
-
-// LightBlockGetFirstAvailableInputOpts contains optional parameters for LightBlock.GetFirstAvailableInput.
-type LightBlockGetFirstAvailableInputOpts struct {
-	ForOutput *NodeMaterialConnectionPoint
-}
-
-// GetFirstAvailableInput calls the GetFirstAvailableInput method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#getfirstavailableinput
-func (l *LightBlock) GetFirstAvailableInput(opts *LightBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
-	if opts == nil {
-		opts = &LightBlockGetFirstAvailableInputOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.ForOutput == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.ForOutput.JSObject())
-	}
-
-	retVal := l.p.Call("getFirstAvailableInput", args...)
-	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
-}
-
-// LightBlockGetFirstAvailableOutputOpts contains optional parameters for LightBlock.GetFirstAvailableOutput.
-type LightBlockGetFirstAvailableOutputOpts struct {
-	ForBlock *NodeMaterialBlock
-}
-
-// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#getfirstavailableoutput
-func (l *LightBlock) GetFirstAvailableOutput(opts *LightBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
-	if opts == nil {
-		opts = &LightBlockGetFirstAvailableOutputOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.ForBlock == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.ForBlock.JSObject())
-	}
-
-	retVal := l.p.Call("getFirstAvailableOutput", args...)
-	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
-}
-
-// GetInputByName calls the GetInputByName method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#getinputbyname
-func (l *LightBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, name)
-
-	retVal := l.p.Call("getInputByName", args...)
-	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
-}
-
-// GetOutputByName calls the GetOutputByName method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#getoutputbyname
-func (l *LightBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, name)
-
-	retVal := l.p.Call("getOutputByName", args...)
-	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
-}
-
-// GetSiblingOutput calls the GetSiblingOutput method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#getsiblingoutput
-func (l *LightBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, current.JSObject())
-
-	retVal := l.p.Call("getSiblingOutput", args...)
-	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
-}
-
-// Initialize calls the Initialize method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#initialize
-func (l *LightBlock) Initialize(state *NodeMaterialBuildState) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, state.JSObject())
-
-	l.p.Call("initialize", args...)
-}
-
-// LightBlockInitializeDefinesOpts contains optional parameters for LightBlock.InitializeDefines.
-type LightBlockInitializeDefinesOpts struct {
-	UseInstances *bool
-}
-
-// InitializeDefines calls the InitializeDefines method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#initializedefines
-func (l *LightBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *LightBlockInitializeDefinesOpts) {
-	if opts == nil {
-		opts = &LightBlockInitializeDefinesOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+1)
-
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
-	args = append(args, defines)
-
-	if opts.UseInstances == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.UseInstances)
-	}
-
-	l.p.Call("initializeDefines", args...)
-}
-
-// LightBlockIsReadyOpts contains optional parameters for LightBlock.IsReady.
-type LightBlockIsReadyOpts struct {
-	UseInstances *bool
-}
-
-// IsReady calls the IsReady method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#isready
-func (l *LightBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *LightBlockIsReadyOpts) bool {
-	if opts == nil {
-		opts = &LightBlockIsReadyOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+1)
-
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
-	args = append(args, defines)
-
-	if opts.UseInstances == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.UseInstances)
-	}
-
-	retVal := l.p.Call("isReady", args...)
-	return retVal.Bool()
 }
 
 // PrepareDefines calls the PrepareDefines method on the LightBlock object.
@@ -343,88 +109,6 @@ func (l *LightBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMateri
 	args = append(args, defines)
 
 	l.p.Call("prepareDefines", args...)
-}
-
-// ProvideFallbacks calls the ProvideFallbacks method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#providefallbacks
-func (l *LightBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, mesh.JSObject())
-	args = append(args, fallbacks.JSObject())
-
-	l.p.Call("provideFallbacks", args...)
-}
-
-// LightBlockRegisterInputOpts contains optional parameters for LightBlock.RegisterInput.
-type LightBlockRegisterInputOpts struct {
-	IsOptional *bool
-	Target     js.Value
-}
-
-// RegisterInput calls the RegisterInput method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#registerinput
-func (l *LightBlock) RegisterInput(name string, jsType js.Value, opts *LightBlockRegisterInputOpts) *LightBlock {
-	if opts == nil {
-		opts = &LightBlockRegisterInputOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+2)
-
-	args = append(args, name)
-	args = append(args, jsType)
-
-	if opts.IsOptional == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.IsOptional)
-	}
-	args = append(args, opts.Target)
-
-	retVal := l.p.Call("registerInput", args...)
-	return LightBlockFromJSObject(retVal, l.ctx)
-}
-
-// LightBlockRegisterOutputOpts contains optional parameters for LightBlock.RegisterOutput.
-type LightBlockRegisterOutputOpts struct {
-	Target js.Value
-}
-
-// RegisterOutput calls the RegisterOutput method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#registeroutput
-func (l *LightBlock) RegisterOutput(name string, jsType js.Value, opts *LightBlockRegisterOutputOpts) *LightBlock {
-	if opts == nil {
-		opts = &LightBlockRegisterOutputOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, name)
-	args = append(args, jsType)
-
-	args = append(args, opts.Target)
-
-	retVal := l.p.Call("registerOutput", args...)
-	return LightBlockFromJSObject(retVal, l.ctx)
-}
-
-// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the LightBlock object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#replacerepeatablecontent
-func (l *LightBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
-
-	args := make([]interface{}, 0, 4+0)
-
-	args = append(args, vertexShaderState.JSObject())
-	args = append(args, fragmentShaderState.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, defines)
-
-	l.p.Call("replaceRepeatableContent", args...)
 }
 
 // Serialize calls the Serialize method on the LightBlock object.
@@ -467,22 +151,6 @@ func (l *LightBlock) _deserialize(serializationObject interface{}, scene *Scene,
 
 /*
 
-// BuildId returns the BuildId property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#buildid
-func (l *LightBlock) BuildId(buildId float64) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(buildId)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// SetBuildId sets the BuildId property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#buildid
-func (l *LightBlock) SetBuildId(buildId float64) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(buildId)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
 // CameraPosition returns the CameraPosition property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#cameraposition
@@ -496,22 +164,6 @@ func (l *LightBlock) CameraPosition(cameraPosition *NodeMaterialConnectionPoint)
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#cameraposition
 func (l *LightBlock) SetCameraPosition(cameraPosition *NodeMaterialConnectionPoint) *LightBlock {
 	p := ba.ctx.Get("LightBlock").New(cameraPosition.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// Comments returns the Comments property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#comments
-func (l *LightBlock) Comments(comments string) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(comments)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// SetComments sets the Comments property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#comments
-func (l *LightBlock) SetComments(comments string) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(comments)
 	return LightBlockFromJSObject(p, ba.ctx)
 }
 
@@ -579,70 +231,6 @@ func (l *LightBlock) SetGlossiness(glossiness *NodeMaterialConnectionPoint) *Lig
 	return LightBlockFromJSObject(p, ba.ctx)
 }
 
-// Inputs returns the Inputs property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#inputs
-func (l *LightBlock) Inputs(inputs *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(inputs.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// SetInputs sets the Inputs property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#inputs
-func (l *LightBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(inputs.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// IsFinalMerger returns the IsFinalMerger property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#isfinalmerger
-func (l *LightBlock) IsFinalMerger(isFinalMerger bool) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(isFinalMerger)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// SetIsFinalMerger sets the IsFinalMerger property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#isfinalmerger
-func (l *LightBlock) SetIsFinalMerger(isFinalMerger bool) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(isFinalMerger)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// IsInput returns the IsInput property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#isinput
-func (l *LightBlock) IsInput(isInput bool) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(isInput)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// SetIsInput sets the IsInput property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#isinput
-func (l *LightBlock) SetIsInput(isInput bool) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(isInput)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// IsUnique returns the IsUnique property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#isunique
-func (l *LightBlock) IsUnique(isUnique bool) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(isUnique)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// SetIsUnique sets the IsUnique property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#isunique
-func (l *LightBlock) SetIsUnique(isUnique bool) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(isUnique)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
 // Light returns the Light property of class LightBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#light
@@ -656,38 +244,6 @@ func (l *LightBlock) Light(light *Light) *LightBlock {
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#light
 func (l *LightBlock) SetLight(light *Light) *LightBlock {
 	p := ba.ctx.Get("LightBlock").New(light.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// Name returns the Name property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#name
-func (l *LightBlock) Name(name string) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(name)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// SetName sets the Name property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#name
-func (l *LightBlock) SetName(name string) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(name)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// Outputs returns the Outputs property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#outputs
-func (l *LightBlock) Outputs(outputs *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(outputs.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// SetOutputs sets the Outputs property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#outputs
-func (l *LightBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(outputs.JSObject())
 	return LightBlockFromJSObject(p, ba.ctx)
 }
 
@@ -720,38 +276,6 @@ func (l *LightBlock) SpecularOutput(specularOutput *NodeMaterialConnectionPoint)
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#specularoutput
 func (l *LightBlock) SetSpecularOutput(specularOutput *NodeMaterialConnectionPoint) *LightBlock {
 	p := ba.ctx.Get("LightBlock").New(specularOutput.JSObject())
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// Target returns the Target property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#target
-func (l *LightBlock) Target(target js.Value) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(target)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// SetTarget sets the Target property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#target
-func (l *LightBlock) SetTarget(target js.Value) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(target)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// UniqueId returns the UniqueId property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#uniqueid
-func (l *LightBlock) UniqueId(uniqueId float64) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(uniqueId)
-	return LightBlockFromJSObject(p, ba.ctx)
-}
-
-// SetUniqueId sets the UniqueId property of class LightBlock.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lightblock#uniqueid
-func (l *LightBlock) SetUniqueId(uniqueId float64) *LightBlock {
-	p := ba.ctx.Get("LightBlock").New(uniqueId)
 	return LightBlockFromJSObject(p, ba.ctx)
 }
 

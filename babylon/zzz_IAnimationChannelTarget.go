@@ -38,38 +38,6 @@ func IAnimationChannelTargetArrayToJSArray(array []*IAnimationChannelTarget) []i
 
 /*
 
-// Extensions returns the Extensions property of class IAnimationChannelTarget.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ianimationchanneltarget#extensions
-func (i *IAnimationChannelTarget) Extensions(extensions js.Value) *IAnimationChannelTarget {
-	p := ba.ctx.Get("IAnimationChannelTarget").New(extensions)
-	return IAnimationChannelTargetFromJSObject(p, ba.ctx)
-}
-
-// SetExtensions sets the Extensions property of class IAnimationChannelTarget.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ianimationchanneltarget#extensions
-func (i *IAnimationChannelTarget) SetExtensions(extensions js.Value) *IAnimationChannelTarget {
-	p := ba.ctx.Get("IAnimationChannelTarget").New(extensions)
-	return IAnimationChannelTargetFromJSObject(p, ba.ctx)
-}
-
-// Extras returns the Extras property of class IAnimationChannelTarget.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ianimationchanneltarget#extras
-func (i *IAnimationChannelTarget) Extras(extras interface{}) *IAnimationChannelTarget {
-	p := ba.ctx.Get("IAnimationChannelTarget").New(extras)
-	return IAnimationChannelTargetFromJSObject(p, ba.ctx)
-}
-
-// SetExtras sets the Extras property of class IAnimationChannelTarget.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ianimationchanneltarget#extras
-func (i *IAnimationChannelTarget) SetExtras(extras interface{}) *IAnimationChannelTarget {
-	p := ba.ctx.Get("IAnimationChannelTarget").New(extras)
-	return IAnimationChannelTargetFromJSObject(p, ba.ctx)
-}
-
 // Node returns the Node property of class IAnimationChannelTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationchanneltarget#node

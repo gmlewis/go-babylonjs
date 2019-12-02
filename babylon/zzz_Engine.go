@@ -71,47 +71,6 @@ func (ba *Babylon) NewEngine(canvasOrContext js.Value, opts *NewEngineOpts) *Eng
 	return EngineFromJSObject(p, ba.ctx)
 }
 
-// ApplyStates calls the ApplyStates method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#applystates
-func (e *Engine) ApplyStates() {
-
-	e.p.Call("applyStates")
-}
-
-// AreAllEffectsReady calls the AreAllEffectsReady method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#arealleffectsready
-func (e *Engine) AreAllEffectsReady() bool {
-
-	retVal := e.p.Call("areAllEffectsReady")
-	return retVal.Bool()
-}
-
-// AttachContextLostEvent calls the AttachContextLostEvent method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#attachcontextlostevent
-func (e *Engine) AttachContextLostEvent(callback func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
-
-	e.p.Call("attachContextLostEvent", args...)
-}
-
-// AttachContextRestoredEvent calls the AttachContextRestoredEvent method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#attachcontextrestoredevent
-func (e *Engine) AttachContextRestoredEvent(callback func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
-
-	e.p.Call("attachContextRestoredEvent", args...)
-}
-
 // BeginFrame calls the BeginFrame method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#beginframe
@@ -146,104 +105,6 @@ func (e *Engine) BeginTransformFeedback(usePoints bool) {
 	e.p.Call("beginTransformFeedback", args...)
 }
 
-// BindArrayBuffer calls the BindArrayBuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#bindarraybuffer
-func (e *Engine) BindArrayBuffer(buffer *DataBuffer) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, buffer.JSObject())
-
-	e.p.Call("bindArrayBuffer", args...)
-}
-
-// BindBuffers calls the BindBuffers method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#bindbuffers
-func (e *Engine) BindBuffers(vertexBuffers js.Value, indexBuffer *DataBuffer, effect *Effect) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, vertexBuffers)
-	args = append(args, indexBuffer.JSObject())
-	args = append(args, effect.JSObject())
-
-	e.p.Call("bindBuffers", args...)
-}
-
-// BindBuffersDirectly calls the BindBuffersDirectly method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#bindbuffersdirectly
-func (e *Engine) BindBuffersDirectly(vertexBuffer *DataBuffer, indexBuffer *DataBuffer, vertexDeclaration float64, vertexStrideSize float64, effect *Effect) {
-
-	args := make([]interface{}, 0, 5+0)
-
-	args = append(args, vertexBuffer.JSObject())
-	args = append(args, indexBuffer.JSObject())
-	args = append(args, vertexDeclaration)
-	args = append(args, vertexStrideSize)
-	args = append(args, effect.JSObject())
-
-	e.p.Call("bindBuffersDirectly", args...)
-}
-
-// EngineBindFramebufferOpts contains optional parameters for Engine.BindFramebuffer.
-type EngineBindFramebufferOpts struct {
-	FaceIndex               *float64
-	RequiredWidth           *float64
-	RequiredHeight          *float64
-	ForceFullscreenViewport *bool
-	DepthStencilTexture     *InternalTexture
-	LodLevel                *float64
-}
-
-// BindFramebuffer calls the BindFramebuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#bindframebuffer
-func (e *Engine) BindFramebuffer(texture *InternalTexture, opts *EngineBindFramebufferOpts) {
-	if opts == nil {
-		opts = &EngineBindFramebufferOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+6)
-
-	args = append(args, texture.JSObject())
-
-	if opts.FaceIndex == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.FaceIndex)
-	}
-	if opts.RequiredWidth == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.RequiredWidth)
-	}
-	if opts.RequiredHeight == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.RequiredHeight)
-	}
-	if opts.ForceFullscreenViewport == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.ForceFullscreenViewport)
-	}
-	if opts.DepthStencilTexture == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.DepthStencilTexture.JSObject())
-	}
-	if opts.LodLevel == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.LodLevel)
-	}
-
-	e.p.Call("bindFramebuffer", args...)
-}
-
 // BindMultiviewFramebuffer calls the BindMultiviewFramebuffer method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#bindmultiviewframebuffer
@@ -254,18 +115,6 @@ func (e *Engine) BindMultiviewFramebuffer(multiviewTexture *InternalTexture) {
 	args = append(args, multiviewTexture.JSObject())
 
 	e.p.Call("bindMultiviewFramebuffer", args...)
-}
-
-// BindSamplers calls the BindSamplers method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#bindsamplers
-func (e *Engine) BindSamplers(effect *Effect) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, effect.JSObject())
-
-	e.p.Call("bindSamplers", args...)
 }
 
 // BindTransformFeedback calls the BindTransformFeedback method on the Engine object.
@@ -292,253 +141,12 @@ func (e *Engine) BindTransformFeedbackBuffer(value *DataBuffer) {
 	e.p.Call("bindTransformFeedbackBuffer", args...)
 }
 
-// BindUniformBlock calls the BindUniformBlock method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#binduniformblock
-func (e *Engine) BindUniformBlock(pipelineContext *IPipelineContext, blockName string, index float64) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, pipelineContext.JSObject())
-	args = append(args, blockName)
-	args = append(args, index)
-
-	e.p.Call("bindUniformBlock", args...)
-}
-
-// BindUniformBuffer calls the BindUniformBuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#binduniformbuffer
-func (e *Engine) BindUniformBuffer(buffer *DataBuffer) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, buffer.JSObject())
-
-	e.p.Call("bindUniformBuffer", args...)
-}
-
-// BindUniformBufferBase calls the BindUniformBufferBase method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#binduniformbufferbase
-func (e *Engine) BindUniformBufferBase(buffer *DataBuffer, location float64) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, buffer.JSObject())
-	args = append(args, location)
-
-	e.p.Call("bindUniformBufferBase", args...)
-}
-
-// BindVertexArrayObject calls the BindVertexArrayObject method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#bindvertexarrayobject
-func (e *Engine) BindVertexArrayObject(vertexArrayObject js.Value, indexBuffer *DataBuffer) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, vertexArrayObject)
-	args = append(args, indexBuffer.JSObject())
-
-	e.p.Call("bindVertexArrayObject", args...)
-}
-
 // CacheStencilState calls the CacheStencilState method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#cachestencilstate
 func (e *Engine) CacheStencilState() {
 
 	e.p.Call("cacheStencilState")
-}
-
-// CeilingPOT calls the CeilingPOT method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#ceilingpot
-func (e *Engine) CeilingPOT(x float64) float64 {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, x)
-
-	retVal := e.p.Call("CeilingPOT", args...)
-	return retVal.Float()
-}
-
-// EngineClearOpts contains optional parameters for Engine.Clear.
-type EngineClearOpts struct {
-	Stencil *bool
-}
-
-// Clear calls the Clear method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#clear
-func (e *Engine) Clear(color js.Value, backBuffer bool, depth bool, opts *EngineClearOpts) {
-	if opts == nil {
-		opts = &EngineClearOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+1)
-
-	args = append(args, color)
-	args = append(args, backBuffer)
-	args = append(args, depth)
-
-	if opts.Stencil == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Stencil)
-	}
-
-	e.p.Call("clear", args...)
-}
-
-// ClearInternalTexturesCache calls the ClearInternalTexturesCache method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#clearinternaltexturescache
-func (e *Engine) ClearInternalTexturesCache() {
-
-	e.p.Call("clearInternalTexturesCache")
-}
-
-// CreateCubeTexture calls the CreateCubeTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createcubetexture
-func (e *Engine) CreateCubeTexture(rootUrl string, scene *Scene, files string, noMipmap bool, onLoad func(), onError func(), format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64, fallback *InternalTexture, excludeLoaders []*IInternalTextureLoader) *InternalTexture {
-
-	args := make([]interface{}, 0, 13+0)
-
-	args = append(args, rootUrl)
-	args = append(args, scene.JSObject())
-	args = append(args, files)
-	args = append(args, noMipmap)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLoad(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
-	args = append(args, format)
-	args = append(args, forcedExtension)
-	args = append(args, createPolynomials)
-	args = append(args, lodScale)
-	args = append(args, lodOffset)
-	args = append(args, fallback.JSObject())
-	args = append(args, IInternalTextureLoaderArrayToJSArray(excludeLoaders))
-
-	retVal := e.p.Call("createCubeTexture", args...)
-	return InternalTextureFromJSObject(retVal, e.ctx)
-}
-
-// CreateDepthStencilTexture calls the CreateDepthStencilTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createdepthstenciltexture
-func (e *Engine) CreateDepthStencilTexture(size float64, options *DepthTextureCreationOptions) *InternalTexture {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, size)
-	args = append(args, options.JSObject())
-
-	retVal := e.p.Call("createDepthStencilTexture", args...)
-	return InternalTextureFromJSObject(retVal, e.ctx)
-}
-
-// CreateDynamicTexture calls the CreateDynamicTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createdynamictexture
-func (e *Engine) CreateDynamicTexture(width float64, height float64, generateMipMaps bool, samplingMode float64) *InternalTexture {
-
-	args := make([]interface{}, 0, 4+0)
-
-	args = append(args, width)
-	args = append(args, height)
-	args = append(args, generateMipMaps)
-	args = append(args, samplingMode)
-
-	retVal := e.p.Call("createDynamicTexture", args...)
-	return InternalTextureFromJSObject(retVal, e.ctx)
-}
-
-// CreateDynamicUniformBuffer calls the CreateDynamicUniformBuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createdynamicuniformbuffer
-func (e *Engine) CreateDynamicUniformBuffer(elements js.Value) *DataBuffer {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, elements)
-
-	retVal := e.p.Call("createDynamicUniformBuffer", args...)
-	return DataBufferFromJSObject(retVal, e.ctx)
-}
-
-// CreateDynamicVertexBuffer calls the CreateDynamicVertexBuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createdynamicvertexbuffer
-func (e *Engine) CreateDynamicVertexBuffer(data []float64) *DataBuffer {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, data)
-
-	retVal := e.p.Call("createDynamicVertexBuffer", args...)
-	return DataBufferFromJSObject(retVal, e.ctx)
-}
-
-// EngineCreateEffectOpts contains optional parameters for Engine.CreateEffect.
-type EngineCreateEffectOpts struct {
-	Samplers        *string
-	Defines         *string
-	Fallbacks       *IEffectFallbacks
-	OnCompiled      func()
-	OnError         func()
-	IndexParameters *interface{}
-}
-
-// CreateEffect calls the CreateEffect method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createeffect
-func (e *Engine) CreateEffect(baseName interface{}, attributesNamesOrOptions string, uniformsNamesOrEngine string, opts *EngineCreateEffectOpts) *Effect {
-	if opts == nil {
-		opts = &EngineCreateEffectOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+6)
-
-	args = append(args, baseName)
-	args = append(args, attributesNamesOrOptions)
-	args = append(args, uniformsNamesOrEngine)
-
-	if opts.Samplers == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Samplers)
-	}
-	if opts.Defines == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Defines)
-	}
-	if opts.Fallbacks == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Fallbacks.JSObject())
-	}
-	if opts.OnCompiled == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.OnCompiled)
-	}
-	if opts.OnError == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.OnError)
-	}
-	if opts.IndexParameters == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.IndexParameters)
-	}
-
-	retVal := e.p.Call("createEffect", args...)
-	return EffectFromJSObject(retVal, e.ctx)
 }
 
 // EngineCreateEffectForParticlesOpts contains optional parameters for Engine.CreateEffectForParticles.
@@ -583,33 +191,6 @@ func (e *Engine) CreateEffectForParticles(fragmentName string, uniformsNames str
 	return EffectFromJSObject(retVal, e.ctx)
 }
 
-// EngineCreateIndexBufferOpts contains optional parameters for Engine.CreateIndexBuffer.
-type EngineCreateIndexBufferOpts struct {
-	Updatable *bool
-}
-
-// CreateIndexBuffer calls the CreateIndexBuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createindexbuffer
-func (e *Engine) CreateIndexBuffer(indices js.Value, opts *EngineCreateIndexBufferOpts) *DataBuffer {
-	if opts == nil {
-		opts = &EngineCreateIndexBufferOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, indices)
-
-	if opts.Updatable == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Updatable)
-	}
-
-	retVal := e.p.Call("createIndexBuffer", args...)
-	return DataBufferFromJSObject(retVal, e.ctx)
-}
-
 // CreateInstancesBuffer calls the CreateInstancesBuffer method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createinstancesbuffer
@@ -623,20 +204,6 @@ func (e *Engine) CreateInstancesBuffer(capacity float64) *DataBuffer {
 	return DataBufferFromJSObject(retVal, e.ctx)
 }
 
-// CreateMultipleRenderTarget calls the CreateMultipleRenderTarget method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createmultiplerendertarget
-func (e *Engine) CreateMultipleRenderTarget(size interface{}, options *IMultiRenderTargetOptions) *InternalTexture {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, size)
-	args = append(args, options.JSObject())
-
-	retVal := e.p.Call("createMultipleRenderTarget", args...)
-	return InternalTextureFromJSObject(retVal, e.ctx)
-}
-
 // CreateMultiviewRenderTargetTexture calls the CreateMultiviewRenderTargetTexture method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createmultiviewrendertargettexture
@@ -648,69 +215,6 @@ func (e *Engine) CreateMultiviewRenderTargetTexture(width float64, height float6
 	args = append(args, height)
 
 	retVal := e.p.Call("createMultiviewRenderTargetTexture", args...)
-	return InternalTextureFromJSObject(retVal, e.ctx)
-}
-
-// CreatePipelineContext calls the CreatePipelineContext method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createpipelinecontext
-func (e *Engine) CreatePipelineContext() *IPipelineContext {
-
-	retVal := e.p.Call("createPipelineContext")
-	return IPipelineContextFromJSObject(retVal, e.ctx)
-}
-
-// EngineCreatePrefilteredCubeTextureOpts contains optional parameters for Engine.CreatePrefilteredCubeTexture.
-type EngineCreatePrefilteredCubeTextureOpts struct {
-	OnLoad            func()
-	OnError           func()
-	Format            *float64
-	ForcedExtension   *interface{}
-	CreatePolynomials *bool
-}
-
-// CreatePrefilteredCubeTexture calls the CreatePrefilteredCubeTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createprefilteredcubetexture
-func (e *Engine) CreatePrefilteredCubeTexture(rootUrl string, scene *Scene, lodScale float64, lodOffset float64, opts *EngineCreatePrefilteredCubeTextureOpts) *InternalTexture {
-	if opts == nil {
-		opts = &EngineCreatePrefilteredCubeTextureOpts{}
-	}
-
-	args := make([]interface{}, 0, 4+5)
-
-	args = append(args, rootUrl)
-	args = append(args, scene.JSObject())
-	args = append(args, lodScale)
-	args = append(args, lodOffset)
-
-	if opts.OnLoad == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.OnLoad)
-	}
-	if opts.OnError == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.OnError)
-	}
-	if opts.Format == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Format)
-	}
-	if opts.ForcedExtension == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.ForcedExtension)
-	}
-	if opts.CreatePolynomials == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.CreatePolynomials)
-	}
-
-	retVal := e.p.Call("createPrefilteredCubeTexture", args...)
 	return InternalTextureFromJSObject(retVal, e.ctx)
 }
 
@@ -763,37 +267,6 @@ func (e *Engine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size floa
 
 	retVal := e.p.Call("createRawCubeTextureFromUrl", args...)
 	return InternalTextureFromJSObject(retVal, e.ctx)
-}
-
-// EngineCreateRawShaderProgramOpts contains optional parameters for Engine.CreateRawShaderProgram.
-type EngineCreateRawShaderProgramOpts struct {
-	Context                   js.Value
-	TransformFeedbackVaryings *string
-}
-
-// CreateRawShaderProgram calls the CreateRawShaderProgram method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createrawshaderprogram
-func (e *Engine) CreateRawShaderProgram(pipelineContext *IPipelineContext, vertexCode string, fragmentCode string, opts *EngineCreateRawShaderProgramOpts) js.Value {
-	if opts == nil {
-		opts = &EngineCreateRawShaderProgramOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+2)
-
-	args = append(args, pipelineContext.JSObject())
-	args = append(args, vertexCode)
-	args = append(args, fragmentCode)
-
-	args = append(args, opts.Context)
-	if opts.TransformFeedbackVaryings == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.TransformFeedbackVaryings)
-	}
-
-	retVal := e.p.Call("createRawShaderProgram", args...)
-	return retVal
 }
 
 // CreateRawTexture calls the CreateRawTexture method on the Engine object.
@@ -861,47 +334,6 @@ func (e *Engine) CreateRawTexture3D(data js.Value, width float64, height float64
 	return InternalTextureFromJSObject(retVal, e.ctx)
 }
 
-// EngineCreateRenderTargetCubeTextureOpts contains optional parameters for Engine.CreateRenderTargetCubeTexture.
-type EngineCreateRenderTargetCubeTextureOpts struct {
-	Options *RenderTargetCreationOptions
-}
-
-// CreateRenderTargetCubeTexture calls the CreateRenderTargetCubeTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createrendertargetcubetexture
-func (e *Engine) CreateRenderTargetCubeTexture(size float64, opts *EngineCreateRenderTargetCubeTextureOpts) *InternalTexture {
-	if opts == nil {
-		opts = &EngineCreateRenderTargetCubeTextureOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, size)
-
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options.JSObject())
-	}
-
-	retVal := e.p.Call("createRenderTargetCubeTexture", args...)
-	return InternalTextureFromJSObject(retVal, e.ctx)
-}
-
-// CreateRenderTargetTexture calls the CreateRenderTargetTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createrendertargettexture
-func (e *Engine) CreateRenderTargetTexture(size float64, options bool) *InternalTexture {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, size)
-	args = append(args, options)
-
-	retVal := e.p.Call("createRenderTargetTexture", args...)
-	return InternalTextureFromJSObject(retVal, e.ctx)
-}
-
 // EngineCreateShaderProgramOpts contains optional parameters for Engine.CreateShaderProgram.
 type EngineCreateShaderProgramOpts struct {
 	Context                   js.Value
@@ -934,84 +366,6 @@ func (e *Engine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCo
 	return retVal
 }
 
-// EngineCreateTextureOpts contains optional parameters for Engine.CreateTexture.
-type EngineCreateTextureOpts struct {
-	SamplingMode    *float64
-	OnLoad          func()
-	OnError         func()
-	Buffer          *string
-	Fallback        *InternalTexture
-	Format          *float64
-	ForcedExtension *string
-	ExcludeLoaders  []js.Value
-	MimeType        *string
-}
-
-// CreateTexture calls the CreateTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createtexture
-func (e *Engine) CreateTexture(urlArg string, noMipmap bool, invertY bool, scene js.Value, opts *EngineCreateTextureOpts) *InternalTexture {
-	if opts == nil {
-		opts = &EngineCreateTextureOpts{}
-	}
-
-	args := make([]interface{}, 0, 4+9)
-
-	args = append(args, urlArg)
-	args = append(args, noMipmap)
-	args = append(args, invertY)
-	args = append(args, scene)
-
-	if opts.SamplingMode == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.SamplingMode)
-	}
-	if opts.OnLoad == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.OnLoad)
-	}
-	if opts.OnError == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.OnError)
-	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Buffer)
-	}
-	if opts.Fallback == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Fallback.JSObject())
-	}
-	if opts.Format == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Format)
-	}
-	if opts.ForcedExtension == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.ForcedExtension)
-	}
-	if opts.ExcludeLoaders == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.ExcludeLoaders)
-	}
-	if opts.MimeType == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.MimeType)
-	}
-
-	retVal := e.p.Call("createTexture", args...)
-	return InternalTextureFromJSObject(retVal, e.ctx)
-}
-
 // CreateTransformFeedback calls the CreateTransformFeedback method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createtransformfeedback
@@ -1019,32 +373,6 @@ func (e *Engine) CreateTransformFeedback() js.Value {
 
 	retVal := e.p.Call("createTransformFeedback")
 	return retVal
-}
-
-// CreateUniformBuffer calls the CreateUniformBuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createuniformbuffer
-func (e *Engine) CreateUniformBuffer(elements js.Value) *DataBuffer {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, elements)
-
-	retVal := e.p.Call("createUniformBuffer", args...)
-	return DataBufferFromJSObject(retVal, e.ctx)
-}
-
-// CreateVertexBuffer calls the CreateVertexBuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#createvertexbuffer
-func (e *Engine) CreateVertexBuffer(data []float64) *DataBuffer {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, data)
-
-	retVal := e.p.Call("createVertexBuffer", args...)
-	return DataBufferFromJSObject(retVal, e.ctx)
 }
 
 // DefaultLoadingScreenFactory calls the DefaultLoadingScreenFactory method on the Engine object.
@@ -1127,157 +455,6 @@ func (e *Engine) DisplayLoadingUI() {
 func (e *Engine) Dispose() {
 
 	e.p.Call("dispose")
-}
-
-// EngineDrawOpts contains optional parameters for Engine.Draw.
-type EngineDrawOpts struct {
-	InstancesCount *float64
-}
-
-// Draw calls the Draw method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#draw
-func (e *Engine) Draw(useTriangles bool, indexStart float64, indexCount float64, opts *EngineDrawOpts) {
-	if opts == nil {
-		opts = &EngineDrawOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+1)
-
-	args = append(args, useTriangles)
-	args = append(args, indexStart)
-	args = append(args, indexCount)
-
-	if opts.InstancesCount == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.InstancesCount)
-	}
-
-	e.p.Call("draw", args...)
-}
-
-// EngineDrawArraysTypeOpts contains optional parameters for Engine.DrawArraysType.
-type EngineDrawArraysTypeOpts struct {
-	InstancesCount *float64
-}
-
-// DrawArraysType calls the DrawArraysType method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#drawarraystype
-func (e *Engine) DrawArraysType(fillMode float64, verticesStart float64, verticesCount float64, opts *EngineDrawArraysTypeOpts) {
-	if opts == nil {
-		opts = &EngineDrawArraysTypeOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+1)
-
-	args = append(args, fillMode)
-	args = append(args, verticesStart)
-	args = append(args, verticesCount)
-
-	if opts.InstancesCount == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.InstancesCount)
-	}
-
-	e.p.Call("drawArraysType", args...)
-}
-
-// EngineDrawElementsTypeOpts contains optional parameters for Engine.DrawElementsType.
-type EngineDrawElementsTypeOpts struct {
-	InstancesCount *float64
-}
-
-// DrawElementsType calls the DrawElementsType method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#drawelementstype
-func (e *Engine) DrawElementsType(fillMode float64, indexStart float64, indexCount float64, opts *EngineDrawElementsTypeOpts) {
-	if opts == nil {
-		opts = &EngineDrawElementsTypeOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+1)
-
-	args = append(args, fillMode)
-	args = append(args, indexStart)
-	args = append(args, indexCount)
-
-	if opts.InstancesCount == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.InstancesCount)
-	}
-
-	e.p.Call("drawElementsType", args...)
-}
-
-// EngineDrawPointCloudsOpts contains optional parameters for Engine.DrawPointClouds.
-type EngineDrawPointCloudsOpts struct {
-	InstancesCount *float64
-}
-
-// DrawPointClouds calls the DrawPointClouds method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#drawpointclouds
-func (e *Engine) DrawPointClouds(verticesStart float64, verticesCount float64, opts *EngineDrawPointCloudsOpts) {
-	if opts == nil {
-		opts = &EngineDrawPointCloudsOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, verticesStart)
-	args = append(args, verticesCount)
-
-	if opts.InstancesCount == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.InstancesCount)
-	}
-
-	e.p.Call("drawPointClouds", args...)
-}
-
-// EngineDrawUnIndexedOpts contains optional parameters for Engine.DrawUnIndexed.
-type EngineDrawUnIndexedOpts struct {
-	InstancesCount *float64
-}
-
-// DrawUnIndexed calls the DrawUnIndexed method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#drawunindexed
-func (e *Engine) DrawUnIndexed(useTriangles bool, verticesStart float64, verticesCount float64, opts *EngineDrawUnIndexedOpts) {
-	if opts == nil {
-		opts = &EngineDrawUnIndexedOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+1)
-
-	args = append(args, useTriangles)
-	args = append(args, verticesStart)
-	args = append(args, verticesCount)
-
-	if opts.InstancesCount == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.InstancesCount)
-	}
-
-	e.p.Call("drawUnIndexed", args...)
-}
-
-// EnableEffect calls the EnableEffect method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#enableeffect
-func (e *Engine) EnableEffect(effect *Effect) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, effect.JSObject())
-
-	e.p.Call("enableEffect", args...)
 }
 
 // EnableScissor calls the EnableScissor method on the Engine object.
@@ -1385,27 +562,6 @@ func (e *Engine) ExitPointerlock() {
 	e.p.Call("exitPointerlock")
 }
 
-// FloorPOT calls the FloorPOT method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#floorpot
-func (e *Engine) FloorPOT(x float64) float64 {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, x)
-
-	retVal := e.p.Call("FloorPOT", args...)
-	return retVal.Float()
-}
-
-// FlushFramebuffer calls the FlushFramebuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#flushframebuffer
-func (e *Engine) FlushFramebuffer() {
-
-	e.p.Call("flushFramebuffer")
-}
-
 // GenerateMipMapsForCubemap calls the GenerateMipMapsForCubemap method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#generatemipmapsforcubemap
@@ -1463,38 +619,6 @@ func (e *Engine) GetAspectRatio(viewportOwner js.Value, opts *EngineGetAspectRat
 	return retVal.Float()
 }
 
-// GetAttributes calls the GetAttributes method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#getattributes
-func (e *Engine) GetAttributes(pipelineContext *IPipelineContext, attributesNames string) float64 {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, pipelineContext.JSObject())
-	args = append(args, attributesNames)
-
-	retVal := e.p.Call("getAttributes", args...)
-	return retVal.Float()
-}
-
-// GetCaps calls the GetCaps method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#getcaps
-func (e *Engine) GetCaps() js.Value {
-
-	retVal := e.p.Call("getCaps")
-	return retVal
-}
-
-// GetClassName calls the GetClassName method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#getclassname
-func (e *Engine) GetClassName() string {
-
-	retVal := e.p.Call("getClassName")
-	return retVal.String()
-}
-
 // GetColorWrite calls the GetColorWrite method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#getcolorwrite
@@ -1531,43 +655,6 @@ func (e *Engine) GetDepthWrite() bool {
 	return retVal.Bool()
 }
 
-// GetError calls the GetError method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#geterror
-func (e *Engine) GetError() float64 {
-
-	retVal := e.p.Call("getError")
-	return retVal.Float()
-}
-
-// EngineGetExponentOfTwoOpts contains optional parameters for Engine.GetExponentOfTwo.
-type EngineGetExponentOfTwoOpts struct {
-	Mode *float64
-}
-
-// GetExponentOfTwo calls the GetExponentOfTwo method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#getexponentoftwo
-func (e *Engine) GetExponentOfTwo(value float64, max float64, opts *EngineGetExponentOfTwoOpts) float64 {
-	if opts == nil {
-		opts = &EngineGetExponentOfTwoOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, value)
-	args = append(args, max)
-
-	if opts.Mode == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Mode)
-	}
-
-	retVal := e.p.Call("GetExponentOfTwo", args...)
-	return retVal.Float()
-}
-
 // GetFps calls the GetFps method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#getfps
@@ -1590,42 +677,6 @@ func (e *Engine) GetFragmentShaderSource(program js.Value) string {
 	return retVal.String()
 }
 
-// GetGlInfo calls the GetGlInfo method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#getglinfo
-func (e *Engine) GetGlInfo() js.Value {
-
-	retVal := e.p.Call("getGlInfo")
-	return retVal
-}
-
-// GetHardwareScalingLevel calls the GetHardwareScalingLevel method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#gethardwarescalinglevel
-func (e *Engine) GetHardwareScalingLevel() float64 {
-
-	retVal := e.p.Call("getHardwareScalingLevel")
-	return retVal.Float()
-}
-
-// GetHostDocument calls the GetHostDocument method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#gethostdocument
-func (e *Engine) GetHostDocument() js.Value {
-
-	retVal := e.p.Call("getHostDocument")
-	return retVal
-}
-
-// GetHostWindow calls the GetHostWindow method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#gethostwindow
-func (e *Engine) GetHostWindow() js.Value {
-
-	retVal := e.p.Call("getHostWindow")
-	return retVal
-}
-
 // GetInputElement calls the GetInputElement method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#getinputelement
@@ -1642,15 +693,6 @@ func (e *Engine) GetInputElementClientRect() js.Value {
 
 	retVal := e.p.Call("getInputElementClientRect")
 	return retVal
-}
-
-// GetLoadedTexturesCache calls the GetLoadedTexturesCache method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#getloadedtexturescache
-func (e *Engine) GetLoadedTexturesCache() *InternalTexture {
-
-	retVal := e.p.Call("getLoadedTexturesCache")
-	return InternalTextureFromJSObject(retVal, e.ctx)
 }
 
 // GetLockstepMaxSteps calls the GetLockstepMaxSteps method on the Engine object.
@@ -1673,65 +715,6 @@ func (e *Engine) GetQueryResult(query js.Value) float64 {
 
 	retVal := e.p.Call("getQueryResult", args...)
 	return retVal.Float()
-}
-
-// EngineGetRenderHeightOpts contains optional parameters for Engine.GetRenderHeight.
-type EngineGetRenderHeightOpts struct {
-	UseScreen *bool
-}
-
-// GetRenderHeight calls the GetRenderHeight method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#getrenderheight
-func (e *Engine) GetRenderHeight(opts *EngineGetRenderHeightOpts) float64 {
-	if opts == nil {
-		opts = &EngineGetRenderHeightOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.UseScreen == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.UseScreen)
-	}
-
-	retVal := e.p.Call("getRenderHeight", args...)
-	return retVal.Float()
-}
-
-// EngineGetRenderWidthOpts contains optional parameters for Engine.GetRenderWidth.
-type EngineGetRenderWidthOpts struct {
-	UseScreen *bool
-}
-
-// GetRenderWidth calls the GetRenderWidth method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#getrenderwidth
-func (e *Engine) GetRenderWidth(opts *EngineGetRenderWidthOpts) float64 {
-	if opts == nil {
-		opts = &EngineGetRenderWidthOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.UseScreen == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.UseScreen)
-	}
-
-	retVal := e.p.Call("getRenderWidth", args...)
-	return retVal.Float()
-}
-
-// GetRenderingCanvas calls the GetRenderingCanvas method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#getrenderingcanvas
-func (e *Engine) GetRenderingCanvas() js.Value {
-
-	retVal := e.p.Call("getRenderingCanvas")
-	return retVal
 }
 
 // GetRenderingCanvasClientRect calls the GetRenderingCanvasClientRect method on the Engine object.
@@ -1833,20 +816,6 @@ func (e *Engine) GetTimeStep() float64 {
 	return retVal.Float()
 }
 
-// GetUniforms calls the GetUniforms method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#getuniforms
-func (e *Engine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames string) js.Value {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, pipelineContext.JSObject())
-	args = append(args, uniformsNames)
-
-	retVal := e.p.Call("getUniforms", args...)
-	return retVal
-}
-
 // GetVRDevice calls the GetVRDevice method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#getvrdevice
@@ -1926,15 +895,6 @@ func (e *Engine) IsQueryResultAvailable(query js.Value) bool {
 	return retVal.Bool()
 }
 
-// IsSupported calls the IsSupported method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#issupported
-func (e *Engine) IsSupported() bool {
-
-	retVal := e.p.Call("isSupported")
-	return retVal.Bool()
-}
-
 // IsVRDevicePresent calls the IsVRDevicePresent method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#isvrdevicepresent
@@ -1979,46 +939,6 @@ func (e *Engine) MarkAllMaterialsAsDirty(flag float64, opts *EngineMarkAllMateri
 	e.p.Call("MarkAllMaterialsAsDirty", args...)
 }
 
-// NearestPOT calls the NearestPOT method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#nearestpot
-func (e *Engine) NearestPOT(x float64) float64 {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, x)
-
-	retVal := e.p.Call("NearestPOT", args...)
-	return retVal.Float()
-}
-
-// EngineQueueNewFrameOpts contains optional parameters for Engine.QueueNewFrame.
-type EngineQueueNewFrameOpts struct {
-	Requester *interface{}
-}
-
-// QueueNewFrame calls the QueueNewFrame method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#queuenewframe
-func (e *Engine) QueueNewFrame(jsFunc func(), opts *EngineQueueNewFrameOpts) float64 {
-	if opts == nil {
-		opts = &EngineQueueNewFrameOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
-
-	if opts.Requester == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Requester)
-	}
-
-	retVal := e.p.Call("QueueNewFrame", args...)
-	return retVal.Float()
-}
-
 // ReadPixels calls the ReadPixels method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#readpixels
@@ -2032,21 +952,6 @@ func (e *Engine) ReadPixels(x float64, y float64, width float64, height float64)
 	args = append(args, height)
 
 	retVal := e.p.Call("readPixels", args...)
-	return retVal
-}
-
-// RecordVertexArrayObject calls the RecordVertexArrayObject method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#recordvertexarrayobject
-func (e *Engine) RecordVertexArrayObject(vertexBuffers js.Value, indexBuffer *DataBuffer, effect *Effect) js.Value {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, vertexBuffers)
-	args = append(args, indexBuffer.JSObject())
-	args = append(args, effect.JSObject())
-
-	retVal := e.p.Call("recordVertexArrayObject", args...)
 	return retVal
 }
 
@@ -2077,34 +982,6 @@ func (e *Engine) RegisterView(canvas js.Value, opts *EngineRegisterViewOpts) *En
 	return EngineViewFromJSObject(retVal, e.ctx)
 }
 
-// ReleaseEffects calls the ReleaseEffects method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#releaseeffects
-func (e *Engine) ReleaseEffects() {
-
-	e.p.Call("releaseEffects")
-}
-
-// ReleaseVertexArrayObject calls the ReleaseVertexArrayObject method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#releasevertexarrayobject
-func (e *Engine) ReleaseVertexArrayObject(vao js.Value) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, vao)
-
-	e.p.Call("releaseVertexArrayObject", args...)
-}
-
-// ResetTextureCache calls the ResetTextureCache method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#resettexturecache
-func (e *Engine) ResetTextureCache() {
-
-	e.p.Call("resetTextureCache")
-}
-
 // Resize calls the Resize method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#resize
@@ -2113,32 +990,12 @@ func (e *Engine) Resize() {
 	e.p.Call("resize")
 }
 
-// RestoreDefaultFramebuffer calls the RestoreDefaultFramebuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#restoredefaultframebuffer
-func (e *Engine) RestoreDefaultFramebuffer() {
-
-	e.p.Call("restoreDefaultFramebuffer")
-}
-
 // RestoreStencilState calls the RestoreStencilState method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#restorestencilstate
 func (e *Engine) RestoreStencilState() {
 
 	e.p.Call("restoreStencilState")
-}
-
-// RunRenderLoop calls the RunRenderLoop method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#runrenderloop
-func (e *Engine) RunRenderLoop(renderFunction func()) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { renderFunction(); return nil }))
-
-	e.p.Call("runRenderLoop", args...)
 }
 
 // ScissorClear calls the ScissorClear method on the Engine object.
@@ -2208,58 +1065,6 @@ func (e *Engine) SetAlphaMode(mode float64, opts *EngineSetAlphaModeOpts) {
 	}
 
 	e.p.Call("setAlphaMode", args...)
-}
-
-// SetArray calls the SetArray method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setarray
-func (e *Engine) SetArray(uniform js.Value, array float64) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, array)
-
-	e.p.Call("setArray", args...)
-}
-
-// SetArray2 calls the SetArray2 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setarray2
-func (e *Engine) SetArray2(uniform js.Value, array float64) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, array)
-
-	e.p.Call("setArray2", args...)
-}
-
-// SetArray3 calls the SetArray3 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setarray3
-func (e *Engine) SetArray3(uniform js.Value, array float64) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, array)
-
-	e.p.Call("setArray3", args...)
-}
-
-// SetArray4 calls the SetArray4 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setarray4
-func (e *Engine) SetArray4(uniform js.Value, array float64) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, array)
-
-	e.p.Call("setArray4", args...)
 }
 
 // SetColorWrite calls the SetColorWrite method on the Engine object.
@@ -2384,64 +1189,6 @@ func (e *Engine) SetDitheringState(value bool) {
 	e.p.Call("setDitheringState", args...)
 }
 
-// SetFloat calls the SetFloat method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setfloat
-func (e *Engine) SetFloat(uniform js.Value, value float64) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, value)
-
-	e.p.Call("setFloat", args...)
-}
-
-// SetFloat2 calls the SetFloat2 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setfloat2
-func (e *Engine) SetFloat2(uniform js.Value, x float64, y float64) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, uniform)
-	args = append(args, x)
-	args = append(args, y)
-
-	e.p.Call("setFloat2", args...)
-}
-
-// SetFloat3 calls the SetFloat3 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setfloat3
-func (e *Engine) SetFloat3(uniform js.Value, x float64, y float64, z float64) {
-
-	args := make([]interface{}, 0, 4+0)
-
-	args = append(args, uniform)
-	args = append(args, x)
-	args = append(args, y)
-	args = append(args, z)
-
-	e.p.Call("setFloat3", args...)
-}
-
-// SetFloat4 calls the SetFloat4 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setfloat4
-func (e *Engine) SetFloat4(uniform js.Value, x float64, y float64, z float64, w float64) {
-
-	args := make([]interface{}, 0, 5+0)
-
-	args = append(args, uniform)
-	args = append(args, x)
-	args = append(args, y)
-	args = append(args, z)
-	args = append(args, w)
-
-	e.p.Call("setFloat4", args...)
-}
-
 // SetFrameBufferDepthStencilTexture calls the SetFrameBufferDepthStencilTexture method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#setframebufferdepthstenciltexture
@@ -2452,122 +1199,6 @@ func (e *Engine) SetFrameBufferDepthStencilTexture(renderTarget *RenderTargetTex
 	args = append(args, renderTarget.JSObject())
 
 	e.p.Call("setFrameBufferDepthStencilTexture", args...)
-}
-
-// SetHardwareScalingLevel calls the SetHardwareScalingLevel method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#sethardwarescalinglevel
-func (e *Engine) SetHardwareScalingLevel(level float64) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, level)
-
-	e.p.Call("setHardwareScalingLevel", args...)
-}
-
-// SetInt calls the SetInt method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setint
-func (e *Engine) SetInt(uniform js.Value, value float64) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, value)
-
-	e.p.Call("setInt", args...)
-}
-
-// SetIntArray calls the SetIntArray method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setintarray
-func (e *Engine) SetIntArray(uniform js.Value, array js.Value) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, array)
-
-	e.p.Call("setIntArray", args...)
-}
-
-// SetIntArray2 calls the SetIntArray2 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setintarray2
-func (e *Engine) SetIntArray2(uniform js.Value, array js.Value) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, array)
-
-	e.p.Call("setIntArray2", args...)
-}
-
-// SetIntArray3 calls the SetIntArray3 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setintarray3
-func (e *Engine) SetIntArray3(uniform js.Value, array js.Value) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, array)
-
-	e.p.Call("setIntArray3", args...)
-}
-
-// SetIntArray4 calls the SetIntArray4 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setintarray4
-func (e *Engine) SetIntArray4(uniform js.Value, array js.Value) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, array)
-
-	e.p.Call("setIntArray4", args...)
-}
-
-// SetMatrices calls the SetMatrices method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setmatrices
-func (e *Engine) SetMatrices(uniform js.Value, matrices js.Value) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, matrices)
-
-	e.p.Call("setMatrices", args...)
-}
-
-// SetMatrix2x2 calls the SetMatrix2x2 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setmatrix2x2
-func (e *Engine) SetMatrix2x2(uniform js.Value, matrix js.Value) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, matrix)
-
-	e.p.Call("setMatrix2x2", args...)
-}
-
-// SetMatrix3x3 calls the SetMatrix3x3 method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setmatrix3x3
-func (e *Engine) SetMatrix3x3(uniform js.Value, matrix js.Value) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, uniform)
-	args = append(args, matrix)
-
-	e.p.Call("setMatrix3x3", args...)
 }
 
 // SetRasterizerState calls the SetRasterizerState method on the Engine object.
@@ -2729,34 +1360,6 @@ func (e *Engine) SetStencilOperationPass(operation float64) {
 	e.p.Call("setStencilOperationPass", args...)
 }
 
-// SetTexture calls the SetTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#settexture
-func (e *Engine) SetTexture(channel float64, uniform js.Value, texture *BaseTexture) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, channel)
-	args = append(args, uniform)
-	args = append(args, texture.JSObject())
-
-	e.p.Call("setTexture", args...)
-}
-
-// SetTextureArray calls the SetTextureArray method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#settexturearray
-func (e *Engine) SetTextureArray(channel float64, uniform js.Value, textures *BaseTexture) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, channel)
-	args = append(args, uniform)
-	args = append(args, textures.JSObject())
-
-	e.p.Call("setTextureArray", args...)
-}
-
 // SetTextureFormatToUse calls the SetTextureFormatToUse method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#settextureformattouse
@@ -2809,38 +1412,6 @@ func (e *Engine) SetTranformFeedbackVaryings(program js.Value, value string) {
 	e.p.Call("setTranformFeedbackVaryings", args...)
 }
 
-// EngineSetViewportOpts contains optional parameters for Engine.SetViewport.
-type EngineSetViewportOpts struct {
-	RequiredWidth  *float64
-	RequiredHeight *float64
-}
-
-// SetViewport calls the SetViewport method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#setviewport
-func (e *Engine) SetViewport(viewport js.Value, opts *EngineSetViewportOpts) {
-	if opts == nil {
-		opts = &EngineSetViewportOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+2)
-
-	args = append(args, viewport)
-
-	if opts.RequiredWidth == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.RequiredWidth)
-	}
-	if opts.RequiredHeight == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.RequiredHeight)
-	}
-
-	e.p.Call("setViewport", args...)
-}
-
 // SetZOffset calls the SetZOffset method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#setzoffset
@@ -2862,30 +1433,6 @@ func (e *Engine) StartTimeQuery() js.Value {
 	return retVal
 }
 
-// EngineStopRenderLoopOpts contains optional parameters for Engine.StopRenderLoop.
-type EngineStopRenderLoopOpts struct {
-	RenderFunction func()
-}
-
-// StopRenderLoop calls the StopRenderLoop method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#stoprenderloop
-func (e *Engine) StopRenderLoop(opts *EngineStopRenderLoopOpts) {
-	if opts == nil {
-		opts = &EngineStopRenderLoopOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.RenderFunction == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.RenderFunction)
-	}
-
-	e.p.Call("stopRenderLoop", args...)
-}
-
 // SwitchFullscreen calls the SwitchFullscreen method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#switchfullscreen
@@ -2896,65 +1443,6 @@ func (e *Engine) SwitchFullscreen(requestPointerLock bool) {
 	args = append(args, requestPointerLock)
 
 	e.p.Call("switchFullscreen", args...)
-}
-
-// EngineUnBindFramebufferOpts contains optional parameters for Engine.UnBindFramebuffer.
-type EngineUnBindFramebufferOpts struct {
-	DisableGenerateMipMaps *bool
-	OnBeforeUnbind         func()
-}
-
-// UnBindFramebuffer calls the UnBindFramebuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#unbindframebuffer
-func (e *Engine) UnBindFramebuffer(texture *InternalTexture, opts *EngineUnBindFramebufferOpts) {
-	if opts == nil {
-		opts = &EngineUnBindFramebufferOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+2)
-
-	args = append(args, texture.JSObject())
-
-	if opts.DisableGenerateMipMaps == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.DisableGenerateMipMaps)
-	}
-	if opts.OnBeforeUnbind == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.OnBeforeUnbind)
-	}
-
-	e.p.Call("unBindFramebuffer", args...)
-}
-
-// EngineUnBindMultiColorAttachmentFramebufferOpts contains optional parameters for Engine.UnBindMultiColorAttachmentFramebuffer.
-type EngineUnBindMultiColorAttachmentFramebufferOpts struct {
-	OnBeforeUnbind func()
-}
-
-// UnBindMultiColorAttachmentFramebuffer calls the UnBindMultiColorAttachmentFramebuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#unbindmulticolorattachmentframebuffer
-func (e *Engine) UnBindMultiColorAttachmentFramebuffer(textures *InternalTexture, disableGenerateMipMaps bool, opts *EngineUnBindMultiColorAttachmentFramebufferOpts) {
-	if opts == nil {
-		opts = &EngineUnBindMultiColorAttachmentFramebufferOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, textures.JSObject())
-	args = append(args, disableGenerateMipMaps)
-
-	if opts.OnBeforeUnbind == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.OnBeforeUnbind)
-	}
-
-	e.p.Call("unBindMultiColorAttachmentFramebuffer", args...)
 }
 
 // UnRegisterView calls the UnRegisterView method on the Engine object.
@@ -2968,56 +1456,6 @@ func (e *Engine) UnRegisterView(canvas js.Value) *Engine {
 
 	retVal := e.p.Call("unRegisterView", args...)
 	return EngineFromJSObject(retVal, e.ctx)
-}
-
-// UnbindAllAttributes calls the UnbindAllAttributes method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#unbindallattributes
-func (e *Engine) UnbindAllAttributes() {
-
-	e.p.Call("unbindAllAttributes")
-}
-
-// UnbindAllTextures calls the UnbindAllTextures method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#unbindalltextures
-func (e *Engine) UnbindAllTextures() {
-
-	e.p.Call("unbindAllTextures")
-}
-
-// UnbindInstanceAttributes calls the UnbindInstanceAttributes method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#unbindinstanceattributes
-func (e *Engine) UnbindInstanceAttributes() {
-
-	e.p.Call("unbindInstanceAttributes")
-}
-
-// UpdateAndBindInstancesBuffer calls the UpdateAndBindInstancesBuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#updateandbindinstancesbuffer
-func (e *Engine) UpdateAndBindInstancesBuffer(instancesBuffer *DataBuffer, data js.Value, offsetLocations float64) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, instancesBuffer.JSObject())
-	args = append(args, data)
-	args = append(args, offsetLocations)
-
-	e.p.Call("updateAndBindInstancesBuffer", args...)
-}
-
-// UpdateArrayBuffer calls the UpdateArrayBuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#updatearraybuffer
-func (e *Engine) UpdateArrayBuffer(data js.Value) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, data)
-
-	e.p.Call("updateArrayBuffer", args...)
 }
 
 // EngineUpdateDynamicIndexBufferOpts contains optional parameters for Engine.UpdateDynamicIndexBuffer.
@@ -3045,46 +1483,6 @@ func (e *Engine) UpdateDynamicIndexBuffer(indexBuffer *DataBuffer, indices js.Va
 	}
 
 	e.p.Call("updateDynamicIndexBuffer", args...)
-}
-
-// EngineUpdateDynamicTextureOpts contains optional parameters for Engine.UpdateDynamicTexture.
-type EngineUpdateDynamicTextureOpts struct {
-	PremulAlpha      *bool
-	Format           *float64
-	ForceBindTexture *bool
-}
-
-// UpdateDynamicTexture calls the UpdateDynamicTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#updatedynamictexture
-func (e *Engine) UpdateDynamicTexture(texture *InternalTexture, canvas js.Value, invertY bool, opts *EngineUpdateDynamicTextureOpts) {
-	if opts == nil {
-		opts = &EngineUpdateDynamicTextureOpts{}
-	}
-
-	args := make([]interface{}, 0, 3+3)
-
-	args = append(args, texture.JSObject())
-	args = append(args, canvas)
-	args = append(args, invertY)
-
-	if opts.PremulAlpha == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.PremulAlpha)
-	}
-	if opts.Format == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Format)
-	}
-	if opts.ForceBindTexture == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.ForceBindTexture)
-	}
-
-	e.p.Call("updateDynamicTexture", args...)
 }
 
 // EngineUpdateDynamicVertexBufferOpts contains optional parameters for Engine.UpdateDynamicVertexBuffer.
@@ -3118,20 +1516,6 @@ func (e *Engine) UpdateDynamicVertexBuffer(vertexBuffer *DataBuffer, data []floa
 	}
 
 	e.p.Call("updateDynamicVertexBuffer", args...)
-}
-
-// UpdateMultipleRenderTargetTextureSampleCount calls the UpdateMultipleRenderTargetTextureSampleCount method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#updatemultiplerendertargettexturesamplecount
-func (e *Engine) UpdateMultipleRenderTargetTextureSampleCount(textures *InternalTexture, samples float64) float64 {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, textures.JSObject())
-	args = append(args, samples)
-
-	retVal := e.p.Call("updateMultipleRenderTargetTextureSampleCount", args...)
-	return retVal.Float()
 }
 
 // UpdateRawCubeTexture calls the UpdateRawCubeTexture method on the Engine object.
@@ -3222,90 +1606,6 @@ func (e *Engine) UpdateTextureComparisonFunction(texture *InternalTexture, compa
 	e.p.Call("updateTextureComparisonFunction", args...)
 }
 
-// UpdateTextureSamplingMode calls the UpdateTextureSamplingMode method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#updatetexturesamplingmode
-func (e *Engine) UpdateTextureSamplingMode(samplingMode float64, texture *InternalTexture) {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, samplingMode)
-	args = append(args, texture.JSObject())
-
-	e.p.Call("updateTextureSamplingMode", args...)
-}
-
-// EngineUpdateUniformBufferOpts contains optional parameters for Engine.UpdateUniformBuffer.
-type EngineUpdateUniformBufferOpts struct {
-	Offset *float64
-	Count  *float64
-}
-
-// UpdateUniformBuffer calls the UpdateUniformBuffer method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#updateuniformbuffer
-func (e *Engine) UpdateUniformBuffer(uniformBuffer *DataBuffer, elements js.Value, opts *EngineUpdateUniformBufferOpts) {
-	if opts == nil {
-		opts = &EngineUpdateUniformBufferOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+2)
-
-	args = append(args, uniformBuffer.JSObject())
-	args = append(args, elements)
-
-	if opts.Offset == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Offset)
-	}
-	if opts.Count == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Count)
-	}
-
-	e.p.Call("updateUniformBuffer", args...)
-}
-
-// UpdateVideoTexture calls the UpdateVideoTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#updatevideotexture
-func (e *Engine) UpdateVideoTexture(texture *InternalTexture, video js.Value, invertY bool) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, texture.JSObject())
-	args = append(args, video)
-	args = append(args, invertY)
-
-	e.p.Call("updateVideoTexture", args...)
-}
-
-// EngineWipeCachesOpts contains optional parameters for Engine.WipeCaches.
-type EngineWipeCachesOpts struct {
-	BruteForce *bool
-}
-
-// WipeCaches calls the WipeCaches method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#wipecaches
-func (e *Engine) WipeCaches(opts *EngineWipeCachesOpts) {
-	if opts == nil {
-		opts = &EngineWipeCachesOpts{}
-	}
-
-	args := make([]interface{}, 0, 0+1)
-
-	if opts.BruteForce == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.BruteForce)
-	}
-
-	e.p.Call("wipeCaches", args...)
-}
-
 // _ExitFullscreen calls the _ExitFullscreen method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#_exitfullscreen
@@ -3344,20 +1644,6 @@ func (e *Engine) _RequestPointerlock(element js.Value) {
 	args = append(args, element)
 
 	e.p.Call("_RequestPointerlock", args...)
-}
-
-// _createDepthStencilCubeTexture calls the _createDepthStencilCubeTexture method on the Engine object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#_createdepthstencilcubetexture
-func (e *Engine) _createDepthStencilCubeTexture(size float64, options *DepthTextureCreationOptions) *InternalTexture {
-
-	args := make([]interface{}, 0, 2+0)
-
-	args = append(args, size)
-	args = append(args, options.JSObject())
-
-	retVal := e.p.Call("_createDepthStencilCubeTexture", args...)
-	return InternalTextureFromJSObject(retVal, e.ctx)
 }
 
 // _deletePipelineContext calls the _deletePipelineContext method on the Engine object.
@@ -3602,22 +1888,6 @@ func (e *Engine) SetActiveView(activeView *EngineView) *Engine {
 	return EngineFromJSObject(p, ba.ctx)
 }
 
-// AlphaState returns the AlphaState property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#alphastate
-func (e *Engine) AlphaState(alphaState *AlphaState) *Engine {
-	p := ba.ctx.Get("Engine").New(alphaState.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetAlphaState sets the AlphaState property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#alphastate
-func (e *Engine) SetAlphaState(alphaState *AlphaState) *Engine {
-	p := ba.ctx.Get("Engine").New(alphaState.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
 // AudioEngine returns the AudioEngine property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#audioengine
@@ -3647,54 +1917,6 @@ func (e *Engine) AudioEngineFactory(AudioEngineFactory func()) *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.engine#audioenginefactory
 func (e *Engine) SetAudioEngineFactory(AudioEngineFactory func()) *Engine {
 	p := ba.ctx.Get("Engine").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {AudioEngineFactory(); return nil}))
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// CollisionsEpsilon returns the CollisionsEpsilon property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#collisionsepsilon
-func (e *Engine) CollisionsEpsilon(CollisionsEpsilon float64) *Engine {
-	p := ba.ctx.Get("Engine").New(CollisionsEpsilon)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetCollisionsEpsilon sets the CollisionsEpsilon property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#collisionsepsilon
-func (e *Engine) SetCollisionsEpsilon(CollisionsEpsilon float64) *Engine {
-	p := ba.ctx.Get("Engine").New(CollisionsEpsilon)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// CullBackFaces returns the CullBackFaces property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#cullbackfaces
-func (e *Engine) CullBackFaces(cullBackFaces bool) *Engine {
-	p := ba.ctx.Get("Engine").New(cullBackFaces)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetCullBackFaces sets the CullBackFaces property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#cullbackfaces
-func (e *Engine) SetCullBackFaces(cullBackFaces bool) *Engine {
-	p := ba.ctx.Get("Engine").New(cullBackFaces)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// CurrentViewport returns the CurrentViewport property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#currentviewport
-func (e *Engine) CurrentViewport(currentViewport js.Value) *Engine {
-	p := ba.ctx.Get("Engine").New(currentViewport)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetCurrentViewport sets the CurrentViewport property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#currentviewport
-func (e *Engine) SetCurrentViewport(currentViewport js.Value) *Engine {
-	p := ba.ctx.Get("Engine").New(currentViewport)
 	return EngineFromJSObject(p, ba.ctx)
 }
 
@@ -3810,38 +2032,6 @@ func (e *Engine) SetDELAYLOADSTATE_NOTLOADED(DELAYLOADSTATE_NOTLOADED float64) *
 	return EngineFromJSObject(p, ba.ctx)
 }
 
-// DepthCullingState returns the DepthCullingState property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#depthcullingstate
-func (e *Engine) DepthCullingState(depthCullingState *DepthCullingState) *Engine {
-	p := ba.ctx.Get("Engine").New(depthCullingState.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetDepthCullingState sets the DepthCullingState property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#depthcullingstate
-func (e *Engine) SetDepthCullingState(depthCullingState *DepthCullingState) *Engine {
-	p := ba.ctx.Get("Engine").New(depthCullingState.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// Description returns the Description property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#description
-func (e *Engine) Description(description string) *Engine {
-	p := ba.ctx.Get("Engine").New(description)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetDescription sets the Description property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#description
-func (e *Engine) SetDescription(description string) *Engine {
-	p := ba.ctx.Get("Engine").New(description)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
 // DisableManifestCheck returns the DisableManifestCheck property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#disablemanifestcheck
@@ -3874,54 +2064,6 @@ func (e *Engine) SetDisablePerformanceMonitorInBackground(disablePerformanceMoni
 	return EngineFromJSObject(p, ba.ctx)
 }
 
-// DisableUniformBuffers returns the DisableUniformBuffers property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#disableuniformbuffers
-func (e *Engine) DisableUniformBuffers(disableUniformBuffers bool) *Engine {
-	p := ba.ctx.Get("Engine").New(disableUniformBuffers)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetDisableUniformBuffers sets the DisableUniformBuffers property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#disableuniformbuffers
-func (e *Engine) SetDisableUniformBuffers(disableUniformBuffers bool) *Engine {
-	p := ba.ctx.Get("Engine").New(disableUniformBuffers)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// DisableVertexArrayObjects returns the DisableVertexArrayObjects property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#disablevertexarrayobjects
-func (e *Engine) DisableVertexArrayObjects(disableVertexArrayObjects bool) *Engine {
-	p := ba.ctx.Get("Engine").New(disableVertexArrayObjects)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetDisableVertexArrayObjects sets the DisableVertexArrayObjects property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#disablevertexarrayobjects
-func (e *Engine) SetDisableVertexArrayObjects(disableVertexArrayObjects bool) *Engine {
-	p := ba.ctx.Get("Engine").New(disableVertexArrayObjects)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// DoNotHandleContextLost returns the DoNotHandleContextLost property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#donothandlecontextlost
-func (e *Engine) DoNotHandleContextLost(doNotHandleContextLost bool) *Engine {
-	p := ba.ctx.Get("Engine").New(doNotHandleContextLost)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetDoNotHandleContextLost sets the DoNotHandleContextLost property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#donothandlecontextlost
-func (e *Engine) SetDoNotHandleContextLost(doNotHandleContextLost bool) *Engine {
-	p := ba.ctx.Get("Engine").New(doNotHandleContextLost)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
 // EQUAL returns the EQUAL property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#equal
@@ -3938,70 +2080,6 @@ func (e *Engine) SetEQUAL(EQUAL float64) *Engine {
 	return EngineFromJSObject(p, ba.ctx)
 }
 
-// EmptyCubeTexture returns the EmptyCubeTexture property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#emptycubetexture
-func (e *Engine) EmptyCubeTexture(emptyCubeTexture *InternalTexture) *Engine {
-	p := ba.ctx.Get("Engine").New(emptyCubeTexture.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetEmptyCubeTexture sets the EmptyCubeTexture property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#emptycubetexture
-func (e *Engine) SetEmptyCubeTexture(emptyCubeTexture *InternalTexture) *Engine {
-	p := ba.ctx.Get("Engine").New(emptyCubeTexture.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// EmptyTexture returns the EmptyTexture property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#emptytexture
-func (e *Engine) EmptyTexture(emptyTexture *InternalTexture) *Engine {
-	p := ba.ctx.Get("Engine").New(emptyTexture.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetEmptyTexture sets the EmptyTexture property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#emptytexture
-func (e *Engine) SetEmptyTexture(emptyTexture *InternalTexture) *Engine {
-	p := ba.ctx.Get("Engine").New(emptyTexture.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// EmptyTexture2DArray returns the EmptyTexture2DArray property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#emptytexture2darray
-func (e *Engine) EmptyTexture2DArray(emptyTexture2DArray *InternalTexture) *Engine {
-	p := ba.ctx.Get("Engine").New(emptyTexture2DArray.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetEmptyTexture2DArray sets the EmptyTexture2DArray property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#emptytexture2darray
-func (e *Engine) SetEmptyTexture2DArray(emptyTexture2DArray *InternalTexture) *Engine {
-	p := ba.ctx.Get("Engine").New(emptyTexture2DArray.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// EmptyTexture3D returns the EmptyTexture3D property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#emptytexture3d
-func (e *Engine) EmptyTexture3D(emptyTexture3D *InternalTexture) *Engine {
-	p := ba.ctx.Get("Engine").New(emptyTexture3D.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetEmptyTexture3D sets the EmptyTexture3D property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#emptytexture3d
-func (e *Engine) SetEmptyTexture3D(emptyTexture3D *InternalTexture) *Engine {
-	p := ba.ctx.Get("Engine").New(emptyTexture3D.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
 // EnableOfflineSupport returns the EnableOfflineSupport property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#enableofflinesupport
@@ -4015,54 +2093,6 @@ func (e *Engine) EnableOfflineSupport(enableOfflineSupport bool) *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.engine#enableofflinesupport
 func (e *Engine) SetEnableOfflineSupport(enableOfflineSupport bool) *Engine {
 	p := ba.ctx.Get("Engine").New(enableOfflineSupport)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// EnableUnpackFlipYCached returns the EnableUnpackFlipYCached property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#enableunpackflipycached
-func (e *Engine) EnableUnpackFlipYCached(enableUnpackFlipYCached bool) *Engine {
-	p := ba.ctx.Get("Engine").New(enableUnpackFlipYCached)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetEnableUnpackFlipYCached sets the EnableUnpackFlipYCached property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#enableunpackflipycached
-func (e *Engine) SetEnableUnpackFlipYCached(enableUnpackFlipYCached bool) *Engine {
-	p := ba.ctx.Get("Engine").New(enableUnpackFlipYCached)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// ExceptionList returns the ExceptionList property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#exceptionlist
-func (e *Engine) ExceptionList(ExceptionList js.Value) *Engine {
-	p := ba.ctx.Get("Engine").New(ExceptionList)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetExceptionList sets the ExceptionList property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#exceptionlist
-func (e *Engine) SetExceptionList(ExceptionList js.Value) *Engine {
-	p := ba.ctx.Get("Engine").New(ExceptionList)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// ForcePOTTextures returns the ForcePOTTextures property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#forcepottextures
-func (e *Engine) ForcePOTTextures(forcePOTTextures bool) *Engine {
-	p := ba.ctx.Get("Engine").New(forcePOTTextures)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetForcePOTTextures sets the ForcePOTTextures property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#forcepottextures
-func (e *Engine) SetForcePOTTextures(forcePOTTextures bool) *Engine {
-	p := ba.ctx.Get("Engine").New(forcePOTTextures)
 	return EngineFromJSObject(p, ba.ctx)
 }
 
@@ -4178,22 +2208,6 @@ func (e *Engine) SetInstances(Instances *Engine) *Engine {
 	return EngineFromJSObject(p, ba.ctx)
 }
 
-// IsFullscreen returns the IsFullscreen property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#isfullscreen
-func (e *Engine) IsFullscreen(isFullscreen bool) *Engine {
-	p := ba.ctx.Get("Engine").New(isFullscreen)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetIsFullscreen sets the IsFullscreen property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#isfullscreen
-func (e *Engine) SetIsFullscreen(isFullscreen bool) *Engine {
-	p := ba.ctx.Get("Engine").New(isFullscreen)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
 // IsInVRExclusivePointerMode returns the IsInVRExclusivePointerMode property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#isinvrexclusivepointermode
@@ -4223,22 +2237,6 @@ func (e *Engine) IsPointerLock(isPointerLock bool) *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.engine#ispointerlock
 func (e *Engine) SetIsPointerLock(isPointerLock bool) *Engine {
 	p := ba.ctx.Get("Engine").New(isPointerLock)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// IsStencilEnable returns the IsStencilEnable property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#isstencilenable
-func (e *Engine) IsStencilEnable(isStencilEnable bool) *Engine {
-	p := ba.ctx.Get("Engine").New(isStencilEnable)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetIsStencilEnable sets the IsStencilEnable property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#isstencilenable
-func (e *Engine) SetIsStencilEnable(isStencilEnable bool) *Engine {
-	p := ba.ctx.Get("Engine").New(isStencilEnable)
 	return EngineFromJSObject(p, ba.ctx)
 }
 
@@ -4402,22 +2400,6 @@ func (e *Engine) SetNOTEQUAL(NOTEQUAL float64) *Engine {
 	return EngineFromJSObject(p, ba.ctx)
 }
 
-// NeedPOTTextures returns the NeedPOTTextures property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#needpottextures
-func (e *Engine) NeedPOTTextures(needPOTTextures bool) *Engine {
-	p := ba.ctx.Get("Engine").New(needPOTTextures)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetNeedPOTTextures sets the NeedPOTTextures property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#needpottextures
-func (e *Engine) SetNeedPOTTextures(needPOTTextures bool) *Engine {
-	p := ba.ctx.Get("Engine").New(needPOTTextures)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
 // NpmPackage returns the NpmPackage property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#npmpackage
@@ -4482,22 +2464,6 @@ func (e *Engine) SetOnBeforeShaderCompilationObservable(onBeforeShaderCompilatio
 	return EngineFromJSObject(p, ba.ctx)
 }
 
-// OnBeforeTextureInitObservable returns the OnBeforeTextureInitObservable property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#onbeforetextureinitobservable
-func (e *Engine) OnBeforeTextureInitObservable(onBeforeTextureInitObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onBeforeTextureInitObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetOnBeforeTextureInitObservable sets the OnBeforeTextureInitObservable property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#onbeforetextureinitobservable
-func (e *Engine) SetOnBeforeTextureInitObservable(onBeforeTextureInitObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onBeforeTextureInitObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
 // OnBeginFrameObservable returns the OnBeginFrameObservable property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#onbeginframeobservable
@@ -4559,38 +2525,6 @@ func (e *Engine) OnCanvasPointerOutObservable(onCanvasPointerOutObservable *Obse
 // https://doc.babylonjs.com/api/classes/babylon.engine#oncanvaspointeroutobservable
 func (e *Engine) SetOnCanvasPointerOutObservable(onCanvasPointerOutObservable *Observable) *Engine {
 	p := ba.ctx.Get("Engine").New(onCanvasPointerOutObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// OnContextLostObservable returns the OnContextLostObservable property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#oncontextlostobservable
-func (e *Engine) OnContextLostObservable(onContextLostObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onContextLostObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetOnContextLostObservable sets the OnContextLostObservable property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#oncontextlostobservable
-func (e *Engine) SetOnContextLostObservable(onContextLostObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onContextLostObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// OnContextRestoredObservable returns the OnContextRestoredObservable property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#oncontextrestoredobservable
-func (e *Engine) OnContextRestoredObservable(onContextRestoredObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onContextRestoredObservable.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetOnContextRestoredObservable sets the OnContextRestoredObservable property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#oncontextrestoredobservable
-func (e *Engine) SetOnContextRestoredObservable(onContextRestoredObservable *Observable) *Engine {
-	p := ba.ctx.Get("Engine").New(onContextRestoredObservable.JSObject())
 	return EngineFromJSObject(p, ba.ctx)
 }
 
@@ -4722,38 +2656,6 @@ func (e *Engine) SetPostProcesses(postProcesses *PostProcess) *Engine {
 	return EngineFromJSObject(p, ba.ctx)
 }
 
-// PremultipliedAlpha returns the PremultipliedAlpha property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#premultipliedalpha
-func (e *Engine) PremultipliedAlpha(premultipliedAlpha bool) *Engine {
-	p := ba.ctx.Get("Engine").New(premultipliedAlpha)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetPremultipliedAlpha sets the PremultipliedAlpha property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#premultipliedalpha
-func (e *Engine) SetPremultipliedAlpha(premultipliedAlpha bool) *Engine {
-	p := ba.ctx.Get("Engine").New(premultipliedAlpha)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// PreventCacheWipeBetweenFrames returns the PreventCacheWipeBetweenFrames property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#preventcachewipebetweenframes
-func (e *Engine) PreventCacheWipeBetweenFrames(preventCacheWipeBetweenFrames bool) *Engine {
-	p := ba.ctx.Get("Engine").New(preventCacheWipeBetweenFrames)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetPreventCacheWipeBetweenFrames sets the PreventCacheWipeBetweenFrames property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#preventcachewipebetweenframes
-func (e *Engine) SetPreventCacheWipeBetweenFrames(preventCacheWipeBetweenFrames bool) *Engine {
-	p := ba.ctx.Get("Engine").New(preventCacheWipeBetweenFrames)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
 // REPLACE returns the REPLACE property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#replace
@@ -4767,22 +2669,6 @@ func (e *Engine) REPLACE(REPLACE float64) *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.engine#replace
 func (e *Engine) SetREPLACE(REPLACE float64) *Engine {
 	p := ba.ctx.Get("Engine").New(REPLACE)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// RenderEvenInBackground returns the RenderEvenInBackground property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#rendereveninbackground
-func (e *Engine) RenderEvenInBackground(renderEvenInBackground bool) *Engine {
-	p := ba.ctx.Get("Engine").New(renderEvenInBackground)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetRenderEvenInBackground sets the RenderEvenInBackground property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#rendereveninbackground
-func (e *Engine) SetRenderEvenInBackground(renderEvenInBackground bool) *Engine {
-	p := ba.ctx.Get("Engine").New(renderEvenInBackground)
 	return EngineFromJSObject(p, ba.ctx)
 }
 
@@ -4847,54 +2733,6 @@ func (e *Engine) Scenes(scenes *Scene) *Engine {
 // https://doc.babylonjs.com/api/classes/babylon.engine#scenes
 func (e *Engine) SetScenes(scenes *Scene) *Engine {
 	p := ba.ctx.Get("Engine").New(scenes.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// ShadersRepository returns the ShadersRepository property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#shadersrepository
-func (e *Engine) ShadersRepository(ShadersRepository string) *Engine {
-	p := ba.ctx.Get("Engine").New(ShadersRepository)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetShadersRepository sets the ShadersRepository property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#shadersrepository
-func (e *Engine) SetShadersRepository(ShadersRepository string) *Engine {
-	p := ba.ctx.Get("Engine").New(ShadersRepository)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// StencilState returns the StencilState property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#stencilstate
-func (e *Engine) StencilState(stencilState *StencilState) *Engine {
-	p := ba.ctx.Get("Engine").New(stencilState.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetStencilState sets the StencilState property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#stencilstate
-func (e *Engine) SetStencilState(stencilState *StencilState) *Engine {
-	p := ba.ctx.Get("Engine").New(stencilState.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SupportsUniformBuffers returns the SupportsUniformBuffers property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#supportsuniformbuffers
-func (e *Engine) SupportsUniformBuffers(supportsUniformBuffers bool) *Engine {
-	p := ba.ctx.Get("Engine").New(supportsUniformBuffers)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetSupportsUniformBuffers sets the SupportsUniformBuffers property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#supportsuniformbuffers
-func (e *Engine) SetSupportsUniformBuffers(supportsUniformBuffers bool) *Engine {
-	p := ba.ctx.Get("Engine").New(supportsUniformBuffers)
 	return EngineFromJSObject(p, ba.ctx)
 }
 
@@ -5826,70 +3664,6 @@ func (e *Engine) SetTEXTURE_WRAP_ADDRESSMODE(TEXTURE_WRAP_ADDRESSMODE float64) *
 	return EngineFromJSObject(p, ba.ctx)
 }
 
-// TextureFormatInUse returns the TextureFormatInUse property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#textureformatinuse
-func (e *Engine) TextureFormatInUse(textureFormatInUse string) *Engine {
-	p := ba.ctx.Get("Engine").New(textureFormatInUse)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetTextureFormatInUse sets the TextureFormatInUse property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#textureformatinuse
-func (e *Engine) SetTextureFormatInUse(textureFormatInUse string) *Engine {
-	p := ba.ctx.Get("Engine").New(textureFormatInUse)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// TexturesSupported returns the TexturesSupported property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#texturessupported
-func (e *Engine) TexturesSupported(texturesSupported []string) *Engine {
-	p := ba.ctx.Get("Engine").New(texturesSupported)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetTexturesSupported sets the TexturesSupported property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#texturessupported
-func (e *Engine) SetTexturesSupported(texturesSupported []string) *Engine {
-	p := ba.ctx.Get("Engine").New(texturesSupported)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// UseReverseDepthBuffer returns the UseReverseDepthBuffer property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#usereversedepthbuffer
-func (e *Engine) UseReverseDepthBuffer(useReverseDepthBuffer bool) *Engine {
-	p := ba.ctx.Get("Engine").New(useReverseDepthBuffer)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetUseReverseDepthBuffer sets the UseReverseDepthBuffer property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#usereversedepthbuffer
-func (e *Engine) SetUseReverseDepthBuffer(useReverseDepthBuffer bool) *Engine {
-	p := ba.ctx.Get("Engine").New(useReverseDepthBuffer)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// ValidateShaderPrograms returns the ValidateShaderPrograms property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#validateshaderprograms
-func (e *Engine) ValidateShaderPrograms(validateShaderPrograms bool) *Engine {
-	p := ba.ctx.Get("Engine").New(validateShaderPrograms)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetValidateShaderPrograms sets the ValidateShaderPrograms property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#validateshaderprograms
-func (e *Engine) SetValidateShaderPrograms(validateShaderPrograms bool) *Engine {
-	p := ba.ctx.Get("Engine").New(validateShaderPrograms)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
 // Version returns the Version property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#version
@@ -5935,22 +3709,6 @@ func (e *Engine) VrPresentationAttributes(vrPresentationAttributes *IVRPresentat
 // https://doc.babylonjs.com/api/classes/babylon.engine#vrpresentationattributes
 func (e *Engine) SetVrPresentationAttributes(vrPresentationAttributes *IVRPresentationAttributes) *Engine {
 	p := ba.ctx.Get("Engine").New(vrPresentationAttributes.JSObject())
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// WebGLVersion returns the WebGLVersion property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#webglversion
-func (e *Engine) WebGLVersion(webGLVersion float64) *Engine {
-	p := ba.ctx.Get("Engine").New(webGLVersion)
-	return EngineFromJSObject(p, ba.ctx)
-}
-
-// SetWebGLVersion sets the WebGLVersion property of class Engine.
-//
-// https://doc.babylonjs.com/api/classes/babylon.engine#webglversion
-func (e *Engine) SetWebGLVersion(webGLVersion float64) *Engine {
-	p := ba.ctx.Get("Engine").New(webGLVersion)
 	return EngineFromJSObject(p, ba.ctx)
 }
 

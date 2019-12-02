@@ -74,18 +74,6 @@ func (ba *Babylon) NewLensRenderingPipeline(name string, parameters interface{},
 	return LensRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
-// AddEffect calls the AddEffect method on the LensRenderingPipeline object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#addeffect
-func (l *LensRenderingPipeline) AddEffect(renderEffect *PostProcessRenderEffect) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, renderEffect.JSObject())
-
-	l.p.Call("addEffect", args...)
-}
-
 // DisableChromaticAberration calls the DisableChromaticAberration method on the LensRenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#disablechromaticaberration
@@ -325,22 +313,6 @@ func (l *LensRenderingPipeline) SetBlurNoise(blurNoise bool) *LensRenderingPipel
 	return LensRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
-// Cameras returns the Cameras property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#cameras
-func (l *LensRenderingPipeline) Cameras(cameras *Camera) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(cameras.JSObject())
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetCameras sets the Cameras property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#cameras
-func (l *LensRenderingPipeline) SetCameras(cameras *Camera) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(cameras.JSObject())
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
 // ChromaticAberration returns the ChromaticAberration property of class LensRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#chromaticaberration
@@ -482,54 +454,6 @@ func (l *LensRenderingPipeline) HighlightsThreshold(highlightsThreshold float64)
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#highlightsthreshold
 func (l *LensRenderingPipeline) SetHighlightsThreshold(highlightsThreshold float64) *LensRenderingPipeline {
 	p := ba.ctx.Get("LensRenderingPipeline").New(highlightsThreshold)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// InspectableCustomProperties returns the InspectableCustomProperties property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#inspectablecustomproperties
-func (l *LensRenderingPipeline) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(inspectableCustomProperties.JSObject())
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetInspectableCustomProperties sets the InspectableCustomProperties property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#inspectablecustomproperties
-func (l *LensRenderingPipeline) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(inspectableCustomProperties.JSObject())
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// IsSupported returns the IsSupported property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#issupported
-func (l *LensRenderingPipeline) IsSupported(isSupported bool) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(isSupported)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetIsSupported sets the IsSupported property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#issupported
-func (l *LensRenderingPipeline) SetIsSupported(isSupported bool) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(isSupported)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// Name returns the Name property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#name
-func (l *LensRenderingPipeline) Name(name string) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(name)
-	return LensRenderingPipelineFromJSObject(p, ba.ctx)
-}
-
-// SetName sets the Name property of class LensRenderingPipeline.
-//
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#name
-func (l *LensRenderingPipeline) SetName(name string) *LensRenderingPipeline {
-	p := ba.ctx.Get("LensRenderingPipeline").New(name)
 	return LensRenderingPipelineFromJSObject(p, ba.ctx)
 }
 

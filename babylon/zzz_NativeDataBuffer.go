@@ -38,38 +38,6 @@ func NativeDataBufferArrayToJSArray(array []*NativeDataBuffer) []interface{} {
 
 /*
 
-// Capacity returns the Capacity property of class NativeDataBuffer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#capacity
-func (n *NativeDataBuffer) Capacity(capacity float64) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(capacity)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
-}
-
-// SetCapacity sets the Capacity property of class NativeDataBuffer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#capacity
-func (n *NativeDataBuffer) SetCapacity(capacity float64) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(capacity)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
-}
-
-// Is32Bits returns the Is32Bits property of class NativeDataBuffer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#is32bits
-func (n *NativeDataBuffer) Is32Bits(is32Bits bool) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(is32Bits)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
-}
-
-// SetIs32Bits sets the Is32Bits property of class NativeDataBuffer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#is32bits
-func (n *NativeDataBuffer) SetIs32Bits(is32Bits bool) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(is32Bits)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
-}
-
 // NativeIndexBuffer returns the NativeIndexBuffer property of class NativeDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#nativeindexbuffer
@@ -99,38 +67,6 @@ func (n *NativeDataBuffer) NativeVertexBuffer(nativeVertexBuffer interface{}) *N
 // https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#nativevertexbuffer
 func (n *NativeDataBuffer) SetNativeVertexBuffer(nativeVertexBuffer interface{}) *NativeDataBuffer {
 	p := ba.ctx.Get("NativeDataBuffer").New(nativeVertexBuffer)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
-}
-
-// References returns the References property of class NativeDataBuffer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#references
-func (n *NativeDataBuffer) References(references float64) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(references)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
-}
-
-// SetReferences sets the References property of class NativeDataBuffer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#references
-func (n *NativeDataBuffer) SetReferences(references float64) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(references)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
-}
-
-// UnderlyingResource returns the UnderlyingResource property of class NativeDataBuffer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#underlyingresource
-func (n *NativeDataBuffer) UnderlyingResource(underlyingResource interface{}) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(underlyingResource)
-	return NativeDataBufferFromJSObject(p, ba.ctx)
-}
-
-// SetUnderlyingResource sets the UnderlyingResource property of class NativeDataBuffer.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#underlyingresource
-func (n *NativeDataBuffer) SetUnderlyingResource(underlyingResource interface{}) *NativeDataBuffer {
-	p := ba.ctx.Get("NativeDataBuffer").New(underlyingResource)
 	return NativeDataBufferFromJSObject(p, ba.ctx)
 }
 

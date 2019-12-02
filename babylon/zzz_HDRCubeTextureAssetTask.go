@@ -83,28 +83,6 @@ func (ba *Babylon) NewHDRCubeTextureAssetTask(name string, url string, size floa
 	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
-// Reset calls the Reset method on the HDRCubeTextureAssetTask object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#reset
-func (h *HDRCubeTextureAssetTask) Reset() {
-
-	h.p.Call("reset")
-}
-
-// Run calls the Run method on the HDRCubeTextureAssetTask object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#run
-func (h *HDRCubeTextureAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
-
-	h.p.Call("run", args...)
-}
-
 // RunTask calls the RunTask method on the HDRCubeTextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#runtask
@@ -120,22 +98,6 @@ func (h *HDRCubeTextureAssetTask) RunTask(scene *Scene, onSuccess func(), onErro
 }
 
 /*
-
-// ErrorObject returns the ErrorObject property of class HDRCubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#errorobject
-func (h *HDRCubeTextureAssetTask) ErrorObject(errorObject js.Value) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(errorObject)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetErrorObject sets the ErrorObject property of class HDRCubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#errorobject
-func (h *HDRCubeTextureAssetTask) SetErrorObject(errorObject js.Value) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(errorObject)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
 
 // GammaSpace returns the GammaSpace property of class HDRCubeTextureAssetTask.
 //
@@ -166,22 +128,6 @@ func (h *HDRCubeTextureAssetTask) GenerateHarmonics(generateHarmonics bool) *HDR
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#generateharmonics
 func (h *HDRCubeTextureAssetTask) SetGenerateHarmonics(generateHarmonics bool) *HDRCubeTextureAssetTask {
 	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(generateHarmonics)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// IsCompleted returns the IsCompleted property of class HDRCubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#iscompleted
-func (h *HDRCubeTextureAssetTask) IsCompleted(isCompleted bool) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(isCompleted)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetIsCompleted sets the IsCompleted property of class HDRCubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#iscompleted
-func (h *HDRCubeTextureAssetTask) SetIsCompleted(isCompleted bool) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(isCompleted)
 	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -278,22 +224,6 @@ func (h *HDRCubeTextureAssetTask) Size(size float64) *HDRCubeTextureAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#size
 func (h *HDRCubeTextureAssetTask) SetSize(size float64) *HDRCubeTextureAssetTask {
 	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(size)
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// TaskState returns the TaskState property of class HDRCubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#taskstate
-func (h *HDRCubeTextureAssetTask) TaskState(taskState *AssetTaskState) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(taskState.JSObject())
-	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetTaskState sets the TaskState property of class HDRCubeTextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#taskstate
-func (h *HDRCubeTextureAssetTask) SetTaskState(taskState *AssetTaskState) *HDRCubeTextureAssetTask {
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(taskState.JSObject())
 	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 

@@ -160,20 +160,6 @@ func (c *CylinderDirectedParticleEmitter) StartDirectionFunction(worldMatrix *Ma
 	c.p.Call("startDirectionFunction", args...)
 }
 
-// StartPositionFunction calls the StartPositionFunction method on the CylinderDirectedParticleEmitter object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#startpositionfunction
-func (c *CylinderDirectedParticleEmitter) StartPositionFunction(worldMatrix *Matrix, positionToUpdate *Vector3, particle *Particle) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, worldMatrix.JSObject())
-	args = append(args, positionToUpdate.JSObject())
-	args = append(args, particle.JSObject())
-
-	c.p.Call("startPositionFunction", args...)
-}
-
 /*
 
 // Direction1 returns the Direction1 property of class CylinderDirectedParticleEmitter.
@@ -205,70 +191,6 @@ func (c *CylinderDirectedParticleEmitter) Direction2(direction2 *Vector3) *Cylin
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#direction2
 func (c *CylinderDirectedParticleEmitter) SetDirection2(direction2 *Vector3) *CylinderDirectedParticleEmitter {
 	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(direction2.JSObject())
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
-}
-
-// DirectionRandomizer returns the DirectionRandomizer property of class CylinderDirectedParticleEmitter.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#directionrandomizer
-func (c *CylinderDirectedParticleEmitter) DirectionRandomizer(directionRandomizer float64) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(directionRandomizer)
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
-}
-
-// SetDirectionRandomizer sets the DirectionRandomizer property of class CylinderDirectedParticleEmitter.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#directionrandomizer
-func (c *CylinderDirectedParticleEmitter) SetDirectionRandomizer(directionRandomizer float64) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(directionRandomizer)
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
-}
-
-// Height returns the Height property of class CylinderDirectedParticleEmitter.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#height
-func (c *CylinderDirectedParticleEmitter) Height(height float64) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(height)
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
-}
-
-// SetHeight sets the Height property of class CylinderDirectedParticleEmitter.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#height
-func (c *CylinderDirectedParticleEmitter) SetHeight(height float64) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(height)
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
-}
-
-// Radius returns the Radius property of class CylinderDirectedParticleEmitter.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#radius
-func (c *CylinderDirectedParticleEmitter) Radius(radius float64) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(radius)
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
-}
-
-// SetRadius sets the Radius property of class CylinderDirectedParticleEmitter.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#radius
-func (c *CylinderDirectedParticleEmitter) SetRadius(radius float64) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(radius)
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
-}
-
-// RadiusRange returns the RadiusRange property of class CylinderDirectedParticleEmitter.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#radiusrange
-func (c *CylinderDirectedParticleEmitter) RadiusRange(radiusRange float64) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(radiusRange)
-	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
-}
-
-// SetRadiusRange sets the RadiusRange property of class CylinderDirectedParticleEmitter.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter#radiusrange
-func (c *CylinderDirectedParticleEmitter) SetRadiusRange(radiusRange float64) *CylinderDirectedParticleEmitter {
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(radiusRange)
 	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
 }
 

@@ -38,38 +38,6 @@ func IChildRootPropertyArrayToJSArray(array []*IChildRootProperty) []interface{}
 
 /*
 
-// Extensions returns the Extensions property of class IChildRootProperty.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ichildrootproperty#extensions
-func (i *IChildRootProperty) Extensions(extensions js.Value) *IChildRootProperty {
-	p := ba.ctx.Get("IChildRootProperty").New(extensions)
-	return IChildRootPropertyFromJSObject(p, ba.ctx)
-}
-
-// SetExtensions sets the Extensions property of class IChildRootProperty.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ichildrootproperty#extensions
-func (i *IChildRootProperty) SetExtensions(extensions js.Value) *IChildRootProperty {
-	p := ba.ctx.Get("IChildRootProperty").New(extensions)
-	return IChildRootPropertyFromJSObject(p, ba.ctx)
-}
-
-// Extras returns the Extras property of class IChildRootProperty.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ichildrootproperty#extras
-func (i *IChildRootProperty) Extras(extras interface{}) *IChildRootProperty {
-	p := ba.ctx.Get("IChildRootProperty").New(extras)
-	return IChildRootPropertyFromJSObject(p, ba.ctx)
-}
-
-// SetExtras sets the Extras property of class IChildRootProperty.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ichildrootproperty#extras
-func (i *IChildRootProperty) SetExtras(extras interface{}) *IChildRootProperty {
-	p := ba.ctx.Get("IChildRootProperty").New(extras)
-	return IChildRootPropertyFromJSObject(p, ba.ctx)
-}
-
 // Name returns the Name property of class IChildRootProperty.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ichildrootproperty#name

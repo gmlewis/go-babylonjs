@@ -40,86 +40,6 @@ func DistanceJointDataArrayToJSArray(array []*DistanceJointData) []interface{} {
 
 /*
 
-// Collision returns the Collision property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#collision
-func (d *DistanceJointData) Collision(collision bool) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(collision)
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetCollision sets the Collision property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#collision
-func (d *DistanceJointData) SetCollision(collision bool) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(collision)
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// ConnectedAxis returns the ConnectedAxis property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#connectedaxis
-func (d *DistanceJointData) ConnectedAxis(connectedAxis *Vector3) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(connectedAxis.JSObject())
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetConnectedAxis sets the ConnectedAxis property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#connectedaxis
-func (d *DistanceJointData) SetConnectedAxis(connectedAxis *Vector3) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(connectedAxis.JSObject())
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// ConnectedPivot returns the ConnectedPivot property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#connectedpivot
-func (d *DistanceJointData) ConnectedPivot(connectedPivot *Vector3) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(connectedPivot.JSObject())
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetConnectedPivot sets the ConnectedPivot property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#connectedpivot
-func (d *DistanceJointData) SetConnectedPivot(connectedPivot *Vector3) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(connectedPivot.JSObject())
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// MainAxis returns the MainAxis property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#mainaxis
-func (d *DistanceJointData) MainAxis(mainAxis *Vector3) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(mainAxis.JSObject())
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetMainAxis sets the MainAxis property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#mainaxis
-func (d *DistanceJointData) SetMainAxis(mainAxis *Vector3) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(mainAxis.JSObject())
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// MainPivot returns the MainPivot property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#mainpivot
-func (d *DistanceJointData) MainPivot(mainPivot *Vector3) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(mainPivot.JSObject())
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetMainPivot sets the MainPivot property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#mainpivot
-func (d *DistanceJointData) SetMainPivot(mainPivot *Vector3) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(mainPivot.JSObject())
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
 // MaxDistance returns the MaxDistance property of class DistanceJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distancejointdata#maxdistance
@@ -133,22 +53,6 @@ func (d *DistanceJointData) MaxDistance(maxDistance float64) *DistanceJointData 
 // https://doc.babylonjs.com/api/classes/babylon.distancejointdata#maxdistance
 func (d *DistanceJointData) SetMaxDistance(maxDistance float64) *DistanceJointData {
 	p := ba.ctx.Get("DistanceJointData").New(maxDistance)
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// NativeParams returns the NativeParams property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#nativeparams
-func (d *DistanceJointData) NativeParams(nativeParams interface{}) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(nativeParams)
-	return DistanceJointDataFromJSObject(p, ba.ctx)
-}
-
-// SetNativeParams sets the NativeParams property of class DistanceJointData.
-//
-// https://doc.babylonjs.com/api/classes/babylon.distancejointdata#nativeparams
-func (d *DistanceJointData) SetNativeParams(nativeParams interface{}) *DistanceJointData {
-	p := ba.ctx.Get("DistanceJointData").New(nativeParams)
 	return DistanceJointDataFromJSObject(p, ba.ctx)
 }
 

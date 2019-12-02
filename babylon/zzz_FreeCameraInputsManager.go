@@ -53,18 +53,6 @@ func (ba *Babylon) NewFreeCameraInputsManager(camera *FreeCamera) *FreeCameraInp
 	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
-// Add calls the Add method on the FreeCameraInputsManager object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#add
-func (f *FreeCameraInputsManager) Add(input *ICameraInput) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, input.JSObject())
-
-	f.p.Call("add", args...)
-}
-
 // AddDeviceOrientation calls the AddDeviceOrientation method on the FreeCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#adddeviceorientation
@@ -135,120 +123,12 @@ func (f *FreeCameraInputsManager) AddVirtualJoystick() *FreeCameraInputsManager 
 	return FreeCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
-// FreeCameraInputsManagerAttachElementOpts contains optional parameters for FreeCameraInputsManager.AttachElement.
-type FreeCameraInputsManagerAttachElementOpts struct {
-	NoPreventDefault *bool
-}
-
-// AttachElement calls the AttachElement method on the FreeCameraInputsManager object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#attachelement
-func (f *FreeCameraInputsManager) AttachElement(element js.Value, opts *FreeCameraInputsManagerAttachElementOpts) {
-	if opts == nil {
-		opts = &FreeCameraInputsManagerAttachElementOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, element)
-
-	if opts.NoPreventDefault == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.NoPreventDefault)
-	}
-
-	f.p.Call("attachElement", args...)
-}
-
-// AttachInput calls the AttachInput method on the FreeCameraInputsManager object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#attachinput
-func (f *FreeCameraInputsManager) AttachInput(input *ICameraInput) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, input.JSObject())
-
-	f.p.Call("attachInput", args...)
-}
-
 // Clear calls the Clear method on the FreeCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#clear
 func (f *FreeCameraInputsManager) Clear() {
 
 	f.p.Call("clear")
-}
-
-// FreeCameraInputsManagerDetachElementOpts contains optional parameters for FreeCameraInputsManager.DetachElement.
-type FreeCameraInputsManagerDetachElementOpts struct {
-	Disconnect *bool
-}
-
-// DetachElement calls the DetachElement method on the FreeCameraInputsManager object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#detachelement
-func (f *FreeCameraInputsManager) DetachElement(element js.Value, opts *FreeCameraInputsManagerDetachElementOpts) {
-	if opts == nil {
-		opts = &FreeCameraInputsManagerDetachElementOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, element)
-
-	if opts.Disconnect == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Disconnect)
-	}
-
-	f.p.Call("detachElement", args...)
-}
-
-// Parse calls the Parse method on the FreeCameraInputsManager object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#parse
-func (f *FreeCameraInputsManager) Parse(parsedCamera interface{}) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, parsedCamera)
-
-	f.p.Call("parse", args...)
-}
-
-// RebuildInputCheck calls the RebuildInputCheck method on the FreeCameraInputsManager object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#rebuildinputcheck
-func (f *FreeCameraInputsManager) RebuildInputCheck() {
-
-	f.p.Call("rebuildInputCheck")
-}
-
-// Remove calls the Remove method on the FreeCameraInputsManager object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#remove
-func (f *FreeCameraInputsManager) Remove(inputToRemove *ICameraInput) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, inputToRemove.JSObject())
-
-	f.p.Call("remove", args...)
-}
-
-// RemoveByType calls the RemoveByType method on the FreeCameraInputsManager object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#removebytype
-func (f *FreeCameraInputsManager) RemoveByType(inputType string) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, inputType)
-
-	f.p.Call("removeByType", args...)
 }
 
 // RemoveMouse calls the RemoveMouse method on the FreeCameraInputsManager object.
@@ -260,98 +140,6 @@ func (f *FreeCameraInputsManager) RemoveMouse() *FreeCameraInputsManager {
 	return FreeCameraInputsManagerFromJSObject(retVal, f.ctx)
 }
 
-// Serialize calls the Serialize method on the FreeCameraInputsManager object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#serialize
-func (f *FreeCameraInputsManager) Serialize(serializedCamera interface{}) {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, serializedCamera)
-
-	f.p.Call("serialize", args...)
-}
-
 /*
 
-// Attached returns the Attached property of class FreeCameraInputsManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#attached
-func (f *FreeCameraInputsManager) Attached(attached *CameraInputsMap) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(attached.JSObject())
-	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
-}
-
-// SetAttached sets the Attached property of class FreeCameraInputsManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#attached
-func (f *FreeCameraInputsManager) SetAttached(attached *CameraInputsMap) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(attached.JSObject())
-	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
-}
-
-// AttachedElement returns the AttachedElement property of class FreeCameraInputsManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#attachedelement
-func (f *FreeCameraInputsManager) AttachedElement(attachedElement js.Value) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(attachedElement)
-	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
-}
-
-// SetAttachedElement sets the AttachedElement property of class FreeCameraInputsManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#attachedelement
-func (f *FreeCameraInputsManager) SetAttachedElement(attachedElement js.Value) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(attachedElement)
-	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
-}
-
-// Camera returns the Camera property of class FreeCameraInputsManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#camera
-func (f *FreeCameraInputsManager) Camera(camera *FreeCamera) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(camera.JSObject())
-	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
-}
-
-// SetCamera sets the Camera property of class FreeCameraInputsManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#camera
-func (f *FreeCameraInputsManager) SetCamera(camera *FreeCamera) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(camera.JSObject())
-	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
-}
-
-// CheckInputs returns the CheckInputs property of class FreeCameraInputsManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#checkinputs
-func (f *FreeCameraInputsManager) CheckInputs(checkInputs func()) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
-	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
-}
-
-// SetCheckInputs sets the CheckInputs property of class FreeCameraInputsManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#checkinputs
-func (f *FreeCameraInputsManager) SetCheckInputs(checkInputs func()) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(js.FuncOf(func(this js.Value, args []js.Value) interface{} {checkInputs(); return nil}))
-	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
-}
-
-// NoPreventDefault returns the NoPreventDefault property of class FreeCameraInputsManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#nopreventdefault
-func (f *FreeCameraInputsManager) NoPreventDefault(noPreventDefault bool) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(noPreventDefault)
-	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
-}
-
-// SetNoPreventDefault sets the NoPreventDefault property of class FreeCameraInputsManager.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#nopreventdefault
-func (f *FreeCameraInputsManager) SetNoPreventDefault(noPreventDefault bool) *FreeCameraInputsManager {
-	p := ba.ctx.Get("FreeCameraInputsManager").New(noPreventDefault)
-	return FreeCameraInputsManagerFromJSObject(p, ba.ctx)
-}
-
-*/
+ */

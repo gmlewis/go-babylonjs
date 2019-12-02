@@ -76,28 +76,6 @@ func (ba *Babylon) NewTextureAssetTask(name string, url string, opts *NewTexture
 	return TextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
-// Reset calls the Reset method on the TextureAssetTask object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textureassettask#reset
-func (t *TextureAssetTask) Reset() {
-
-	t.p.Call("reset")
-}
-
-// Run calls the Run method on the TextureAssetTask object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textureassettask#run
-func (t *TextureAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
-
-	args := make([]interface{}, 0, 3+0)
-
-	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
-
-	t.p.Call("run", args...)
-}
-
 // RunTask calls the RunTask method on the TextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#runtask
@@ -114,22 +92,6 @@ func (t *TextureAssetTask) RunTask(scene *Scene, onSuccess func(), onError func(
 
 /*
 
-// ErrorObject returns the ErrorObject property of class TextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textureassettask#errorobject
-func (t *TextureAssetTask) ErrorObject(errorObject js.Value) *TextureAssetTask {
-	p := ba.ctx.Get("TextureAssetTask").New(errorObject)
-	return TextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetErrorObject sets the ErrorObject property of class TextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textureassettask#errorobject
-func (t *TextureAssetTask) SetErrorObject(errorObject js.Value) *TextureAssetTask {
-	p := ba.ctx.Get("TextureAssetTask").New(errorObject)
-	return TextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
 // InvertY returns the InvertY property of class TextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#inverty
@@ -143,22 +105,6 @@ func (t *TextureAssetTask) InvertY(invertY bool) *TextureAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#inverty
 func (t *TextureAssetTask) SetInvertY(invertY bool) *TextureAssetTask {
 	p := ba.ctx.Get("TextureAssetTask").New(invertY)
-	return TextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// IsCompleted returns the IsCompleted property of class TextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textureassettask#iscompleted
-func (t *TextureAssetTask) IsCompleted(isCompleted bool) *TextureAssetTask {
-	p := ba.ctx.Get("TextureAssetTask").New(isCompleted)
-	return TextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetIsCompleted sets the IsCompleted property of class TextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textureassettask#iscompleted
-func (t *TextureAssetTask) SetIsCompleted(isCompleted bool) *TextureAssetTask {
-	p := ba.ctx.Get("TextureAssetTask").New(isCompleted)
 	return TextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
@@ -239,22 +185,6 @@ func (t *TextureAssetTask) SamplingMode(samplingMode float64) *TextureAssetTask 
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#samplingmode
 func (t *TextureAssetTask) SetSamplingMode(samplingMode float64) *TextureAssetTask {
 	p := ba.ctx.Get("TextureAssetTask").New(samplingMode)
-	return TextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// TaskState returns the TaskState property of class TextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textureassettask#taskstate
-func (t *TextureAssetTask) TaskState(taskState *AssetTaskState) *TextureAssetTask {
-	p := ba.ctx.Get("TextureAssetTask").New(taskState.JSObject())
-	return TextureAssetTaskFromJSObject(p, ba.ctx)
-}
-
-// SetTaskState sets the TaskState property of class TextureAssetTask.
-//
-// https://doc.babylonjs.com/api/classes/babylon.textureassettask#taskstate
-func (t *TextureAssetTask) SetTaskState(taskState *AssetTaskState) *TextureAssetTask {
-	p := ba.ctx.Get("TextureAssetTask").New(taskState.JSObject())
 	return TextureAssetTaskFromJSObject(p, ba.ctx)
 }
 

@@ -77,15 +77,6 @@ func (i *IncrementValueAction) Execute() {
 	i.p.Call("execute")
 }
 
-// GetTriggerParameter calls the GetTriggerParameter method on the IncrementValueAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#gettriggerparameter
-func (i *IncrementValueAction) GetTriggerParameter() interface{} {
-
-	retVal := i.p.Call("getTriggerParameter")
-	return retVal
-}
-
 // Serialize calls the Serialize method on the IncrementValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#serialize
@@ -99,44 +90,7 @@ func (i *IncrementValueAction) Serialize(parent interface{}) interface{} {
 	return retVal
 }
 
-// SkipToNextActiveAction calls the SkipToNextActiveAction method on the IncrementValueAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#skiptonextactiveaction
-func (i *IncrementValueAction) SkipToNextActiveAction() {
-
-	i.p.Call("skipToNextActiveAction")
-}
-
-// Then calls the Then method on the IncrementValueAction object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#then
-func (i *IncrementValueAction) Then(action *Action) *Action {
-
-	args := make([]interface{}, 0, 1+0)
-
-	args = append(args, action.JSObject())
-
-	retVal := i.p.Call("then", args...)
-	return ActionFromJSObject(retVal, i.ctx)
-}
-
 /*
-
-// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class IncrementValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#onbeforeexecuteobservable
-func (i *IncrementValueAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *IncrementValueAction {
-	p := ba.ctx.Get("IncrementValueAction").New(onBeforeExecuteObservable.JSObject())
-	return IncrementValueActionFromJSObject(p, ba.ctx)
-}
-
-// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class IncrementValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#onbeforeexecuteobservable
-func (i *IncrementValueAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *IncrementValueAction {
-	p := ba.ctx.Get("IncrementValueAction").New(onBeforeExecuteObservable.JSObject())
-	return IncrementValueActionFromJSObject(p, ba.ctx)
-}
 
 // PropertyPath returns the PropertyPath property of class IncrementValueAction.
 //
@@ -151,38 +105,6 @@ func (i *IncrementValueAction) PropertyPath(propertyPath string) *IncrementValue
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#propertypath
 func (i *IncrementValueAction) SetPropertyPath(propertyPath string) *IncrementValueAction {
 	p := ba.ctx.Get("IncrementValueAction").New(propertyPath)
-	return IncrementValueActionFromJSObject(p, ba.ctx)
-}
-
-// Trigger returns the Trigger property of class IncrementValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#trigger
-func (i *IncrementValueAction) Trigger(trigger float64) *IncrementValueAction {
-	p := ba.ctx.Get("IncrementValueAction").New(trigger)
-	return IncrementValueActionFromJSObject(p, ba.ctx)
-}
-
-// SetTrigger sets the Trigger property of class IncrementValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#trigger
-func (i *IncrementValueAction) SetTrigger(trigger float64) *IncrementValueAction {
-	p := ba.ctx.Get("IncrementValueAction").New(trigger)
-	return IncrementValueActionFromJSObject(p, ba.ctx)
-}
-
-// TriggerOptions returns the TriggerOptions property of class IncrementValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#triggeroptions
-func (i *IncrementValueAction) TriggerOptions(triggerOptions interface{}) *IncrementValueAction {
-	p := ba.ctx.Get("IncrementValueAction").New(triggerOptions)
-	return IncrementValueActionFromJSObject(p, ba.ctx)
-}
-
-// SetTriggerOptions sets the TriggerOptions property of class IncrementValueAction.
-//
-// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#triggeroptions
-func (i *IncrementValueAction) SetTriggerOptions(triggerOptions interface{}) *IncrementValueAction {
-	p := ba.ctx.Get("IncrementValueAction").New(triggerOptions)
 	return IncrementValueActionFromJSObject(p, ba.ctx)
 }
 

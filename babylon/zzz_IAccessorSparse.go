@@ -54,38 +54,6 @@ func (i *IAccessorSparse) SetCount(count float64) *IAccessorSparse {
 	return IAccessorSparseFromJSObject(p, ba.ctx)
 }
 
-// Extensions returns the Extensions property of class IAccessorSparse.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#extensions
-func (i *IAccessorSparse) Extensions(extensions js.Value) *IAccessorSparse {
-	p := ba.ctx.Get("IAccessorSparse").New(extensions)
-	return IAccessorSparseFromJSObject(p, ba.ctx)
-}
-
-// SetExtensions sets the Extensions property of class IAccessorSparse.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#extensions
-func (i *IAccessorSparse) SetExtensions(extensions js.Value) *IAccessorSparse {
-	p := ba.ctx.Get("IAccessorSparse").New(extensions)
-	return IAccessorSparseFromJSObject(p, ba.ctx)
-}
-
-// Extras returns the Extras property of class IAccessorSparse.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#extras
-func (i *IAccessorSparse) Extras(extras interface{}) *IAccessorSparse {
-	p := ba.ctx.Get("IAccessorSparse").New(extras)
-	return IAccessorSparseFromJSObject(p, ba.ctx)
-}
-
-// SetExtras sets the Extras property of class IAccessorSparse.
-//
-// https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#extras
-func (i *IAccessorSparse) SetExtras(extras interface{}) *IAccessorSparse {
-	p := ba.ctx.Get("IAccessorSparse").New(extras)
-	return IAccessorSparseFromJSObject(p, ba.ctx)
-}
-
 // Indices returns the Indices property of class IAccessorSparse.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaccessorsparse#indices
