@@ -37,7 +37,7 @@ func main() {
 		sourcePlane.Normalize()
 
 		// Add and manipulate meshes in the scene
-		b.CreatePlane("plane", &babylon.PlaneOpts{Height: Float64(2), Width: Float64(1), SourcePlane: sourcePlane, SideOrientation: b.Mesh().DOUBLESIDE()}, scene)
+		b.CreatePlane("plane", &babylon.PlaneOpts{Height: Float64(2), Width: Float64(1), SourcePlane: sourcePlane, SideOrientation: Float64(b.Mesh().DOUBLESIDE())}, scene)
 
 		return scene
 	}
