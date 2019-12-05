@@ -45,7 +45,7 @@ type NewTextBlockOpts struct {
 // NewTextBlock returns a new TextBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textblock
-func (ba *Babylon) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
+func (gui *GUI) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
 	if opts == nil {
 		opts = &NewTextBlockOpts{}
 	}
@@ -63,8 +63,8 @@ func (ba *Babylon) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
 		args = append(args, *opts.Text)
 	}
 
-	p := ba.ctx.Get("TextBlock").New(args...)
-	return TextBlockFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("TextBlock").New(args...)
+	return TextBlockFromJSObject(p, gui.ctx)
 }
 
 // ComputeExpectedHeight calls the ComputeExpectedHeight method on the TextBlock object.

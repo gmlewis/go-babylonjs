@@ -44,7 +44,7 @@ type NewRectangleOpts struct {
 // NewRectangle returns a new Rectangle object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rectangle
-func (ba *Babylon) NewRectangle(opts *NewRectangleOpts) *Rectangle {
+func (gui *GUI) NewRectangle(opts *NewRectangleOpts) *Rectangle {
 	if opts == nil {
 		opts = &NewRectangleOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewRectangle(opts *NewRectangleOpts) *Rectangle {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Rectangle").New(args...)
-	return RectangleFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Rectangle").New(args...)
+	return RectangleFromJSObject(p, gui.ctx)
 }
 
 // CornerRadius returns the CornerRadius property of class Rectangle.

@@ -39,12 +39,12 @@ func VolumeBasedPanelArrayToJSArray(array []*VolumeBasedPanel) []interface{} {
 // NewVolumeBasedPanel returns a new VolumeBasedPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel
-func (ba *Babylon) NewVolumeBasedPanel() *VolumeBasedPanel {
+func (gui *GUI) NewVolumeBasedPanel() *VolumeBasedPanel {
 
 	args := make([]interface{}, 0, 0+0)
 
-	p := ba.ctx.Get("VolumeBasedPanel").New(args...)
-	return VolumeBasedPanelFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("VolumeBasedPanel").New(args...)
+	return VolumeBasedPanelFromJSObject(p, gui.ctx)
 }
 
 // Columns returns the Columns property of class VolumeBasedPanel.

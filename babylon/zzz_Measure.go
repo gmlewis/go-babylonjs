@@ -39,7 +39,7 @@ func MeasureArrayToJSArray(array []*Measure) []interface{} {
 // NewMeasure returns a new Measure object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure
-func (ba *Babylon) NewMeasure(left float64, top float64, width float64, height float64) *Measure {
+func (gui *GUI) NewMeasure(left float64, top float64, width float64, height float64) *Measure {
 
 	args := make([]interface{}, 0, 4+0)
 
@@ -48,8 +48,8 @@ func (ba *Babylon) NewMeasure(left float64, top float64, width float64, height f
 	args = append(args, width)
 	args = append(args, height)
 
-	p := ba.ctx.Get("Measure").New(args...)
-	return MeasureFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Measure").New(args...)
+	return MeasureFromJSObject(p, gui.ctx)
 }
 
 // CombineToRef calls the CombineToRef method on the Measure object.

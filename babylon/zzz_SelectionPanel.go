@@ -46,7 +46,7 @@ type NewSelectionPanelOpts struct {
 // NewSelectionPanel returns a new SelectionPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel
-func (ba *Babylon) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *SelectionPanel {
+func (gui *GUI) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *SelectionPanel {
 	if opts == nil {
 		opts = &NewSelectionPanelOpts{}
 	}
@@ -61,8 +61,8 @@ func (ba *Babylon) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *
 		args = append(args, opts.Groups.JSObject())
 	}
 
-	p := ba.ctx.Get("GUI").Get("SelectionPanel").New(args...)
-	return SelectionPanelFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("SelectionPanel").New(args...)
+	return SelectionPanelFromJSObject(p, gui.ctx)
 }
 
 // AddGroup calls the AddGroup method on the SelectionPanel object.

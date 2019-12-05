@@ -39,12 +39,12 @@ func ScatterPanelArrayToJSArray(array []*ScatterPanel) []interface{} {
 // NewScatterPanel returns a new ScatterPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel
-func (ba *Babylon) NewScatterPanel() *ScatterPanel {
+func (gui *GUI) NewScatterPanel() *ScatterPanel {
 
 	args := make([]interface{}, 0, 0+0)
 
-	p := ba.ctx.Get("ScatterPanel").New(args...)
-	return ScatterPanelFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("ScatterPanel").New(args...)
+	return ScatterPanelFromJSObject(p, gui.ctx)
 }
 
 // Iteration returns the Iteration property of class ScatterPanel.

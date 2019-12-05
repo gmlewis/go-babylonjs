@@ -45,7 +45,7 @@ type NewImageOpts struct {
 // NewImage returns a new Image object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image
-func (ba *Babylon) NewImage(opts *NewImageOpts) *Image {
+func (gui *GUI) NewImage(opts *NewImageOpts) *Image {
 	if opts == nil {
 		opts = &NewImageOpts{}
 	}
@@ -63,8 +63,8 @@ func (ba *Babylon) NewImage(opts *NewImageOpts) *Image {
 		args = append(args, *opts.Url)
 	}
 
-	p := ba.ctx.Get("Image").New(args...)
-	return ImageFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Image").New(args...)
+	return ImageFromJSObject(p, gui.ctx)
 }
 
 // Contains calls the Contains method on the Image object.

@@ -45,7 +45,7 @@ type NewHolographicButtonOpts struct {
 // NewHolographicButton returns a new HolographicButton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton
-func (ba *Babylon) NewHolographicButton(opts *NewHolographicButtonOpts) *HolographicButton {
+func (gui *GUI) NewHolographicButton(opts *NewHolographicButtonOpts) *HolographicButton {
 	if opts == nil {
 		opts = &NewHolographicButtonOpts{}
 	}
@@ -63,8 +63,8 @@ func (ba *Babylon) NewHolographicButton(opts *NewHolographicButtonOpts) *Hologra
 		args = append(args, *opts.ShareMaterials)
 	}
 
-	p := ba.ctx.Get("HolographicButton").New(args...)
-	return HolographicButtonFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("HolographicButton").New(args...)
+	return HolographicButtonFromJSObject(p, gui.ctx)
 }
 
 // Dispose calls the Dispose method on the HolographicButton object.

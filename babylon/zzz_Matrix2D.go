@@ -39,7 +39,7 @@ func Matrix2DArrayToJSArray(array []*Matrix2D) []interface{} {
 // NewMatrix2D returns a new Matrix2D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix2d
-func (ba *Babylon) NewMatrix2D(m00 float64, m01 float64, m10 float64, m11 float64, m20 float64, m21 float64) *Matrix2D {
+func (gui *GUI) NewMatrix2D(m00 float64, m01 float64, m10 float64, m11 float64, m20 float64, m21 float64) *Matrix2D {
 
 	args := make([]interface{}, 0, 6+0)
 
@@ -50,8 +50,8 @@ func (ba *Babylon) NewMatrix2D(m00 float64, m01 float64, m10 float64, m11 float6
 	args = append(args, m20)
 	args = append(args, m21)
 
-	p := ba.ctx.Get("Matrix2D").New(args...)
-	return Matrix2DFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Matrix2D").New(args...)
+	return Matrix2DFromJSObject(p, gui.ctx)
 }
 
 // ComposeToRef calls the ComposeToRef method on the Matrix2D object.

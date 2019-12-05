@@ -44,7 +44,7 @@ type NewScrollBarOpts struct {
 // NewScrollBar returns a new ScrollBar object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollbar
-func (ba *Babylon) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
+func (gui *GUI) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
 	if opts == nil {
 		opts = &NewScrollBarOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("ScrollBar").New(args...)
-	return ScrollBarFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("ScrollBar").New(args...)
+	return ScrollBarFromJSObject(p, gui.ctx)
 }
 
 // _draw calls the _draw method on the ScrollBar object.

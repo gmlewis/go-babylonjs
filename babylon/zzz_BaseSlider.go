@@ -44,7 +44,7 @@ type NewBaseSliderOpts struct {
 // NewBaseSlider returns a new BaseSlider object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider
-func (ba *Babylon) NewBaseSlider(opts *NewBaseSliderOpts) *BaseSlider {
+func (gui *GUI) NewBaseSlider(opts *NewBaseSliderOpts) *BaseSlider {
 	if opts == nil {
 		opts = &NewBaseSliderOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewBaseSlider(opts *NewBaseSliderOpts) *BaseSlider {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("BaseSlider").New(args...)
-	return BaseSliderFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("BaseSlider").New(args...)
+	return BaseSliderFromJSObject(p, gui.ctx)
 }
 
 // _onPointerDown calls the _onPointerDown method on the BaseSlider object.

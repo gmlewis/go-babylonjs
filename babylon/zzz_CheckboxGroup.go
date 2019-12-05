@@ -40,14 +40,14 @@ func CheckboxGroupArrayToJSArray(array []*CheckboxGroup) []interface{} {
 // NewCheckboxGroup returns a new CheckboxGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.checkboxgroup
-func (ba *Babylon) NewCheckboxGroup(name string) *CheckboxGroup {
+func (gui *GUI) NewCheckboxGroup(name string) *CheckboxGroup {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
-	p := ba.ctx.Get("CheckboxGroup").New(args...)
-	return CheckboxGroupFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("CheckboxGroup").New(args...)
+	return CheckboxGroupFromJSObject(p, gui.ctx)
 }
 
 // CheckboxGroupAddCheckboxOpts contains optional parameters for CheckboxGroup.AddCheckbox.

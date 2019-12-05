@@ -44,7 +44,7 @@ type NewStackPanelOpts struct {
 // NewStackPanel returns a new StackPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel
-func (ba *Babylon) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
+func (gui *GUI) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
 	if opts == nil {
 		opts = &NewStackPanelOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("StackPanel").New(args...)
-	return StackPanelFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("StackPanel").New(args...)
+	return StackPanelFromJSObject(p, gui.ctx)
 }
 
 // Height returns the Height property of class StackPanel.

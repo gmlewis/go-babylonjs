@@ -45,7 +45,7 @@ type NewScrollViewerOpts struct {
 // NewScrollViewer returns a new ScrollViewer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollviewer
-func (ba *Babylon) NewScrollViewer(opts *NewScrollViewerOpts) *ScrollViewer {
+func (gui *GUI) NewScrollViewer(opts *NewScrollViewerOpts) *ScrollViewer {
 	if opts == nil {
 		opts = &NewScrollViewerOpts{}
 	}
@@ -63,8 +63,8 @@ func (ba *Babylon) NewScrollViewer(opts *NewScrollViewerOpts) *ScrollViewer {
 		args = append(args, *opts.IsImageBased)
 	}
 
-	p := ba.ctx.Get("ScrollViewer").New(args...)
-	return ScrollViewerFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("ScrollViewer").New(args...)
+	return ScrollViewerFromJSObject(p, gui.ctx)
 }
 
 // AddControl calls the AddControl method on the ScrollViewer object.

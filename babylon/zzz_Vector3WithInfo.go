@@ -44,7 +44,7 @@ type NewVector3WithInfoOpts struct {
 // NewVector3WithInfo returns a new Vector3WithInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3withinfo
-func (ba *Babylon) NewVector3WithInfo(source *Vector3, opts *NewVector3WithInfoOpts) *Vector3WithInfo {
+func (gui *GUI) NewVector3WithInfo(source *Vector3, opts *NewVector3WithInfoOpts) *Vector3WithInfo {
 	if opts == nil {
 		opts = &NewVector3WithInfoOpts{}
 	}
@@ -59,8 +59,8 @@ func (ba *Babylon) NewVector3WithInfo(source *Vector3, opts *NewVector3WithInfoO
 		args = append(args, *opts.ButtonIndex)
 	}
 
-	p := ba.ctx.Get("Vector3WithInfo").New(args...)
-	return Vector3WithInfoFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Vector3WithInfo").New(args...)
+	return Vector3WithInfoFromJSObject(p, gui.ctx)
 }
 
 // ButtonIndex returns the ButtonIndex property of class Vector3WithInfo.

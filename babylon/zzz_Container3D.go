@@ -44,7 +44,7 @@ type NewContainer3DOpts struct {
 // NewContainer3D returns a new Container3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d
-func (ba *Babylon) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
+func (gui *GUI) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
 	if opts == nil {
 		opts = &NewContainer3DOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Container3D").New(args...)
-	return Container3DFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Container3D").New(args...)
+	return Container3DFromJSObject(p, gui.ctx)
 }
 
 // AddControl calls the AddControl method on the Container3D object.

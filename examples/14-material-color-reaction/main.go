@@ -103,22 +103,23 @@ func main() {
 			groundMat.SetDiffuseColor(mats[3])
 		}
 
-		matGroup := b.NewRadioGroup("Material Color")
+		gui := b.GUI()
+		matGroup := gui.NewRadioGroup("Material Color")
 		matGroup.AddRadio("Yellow", &babylon.RadioGroupAddRadioOpts{Func: makeYellow, Checked: Bool(true)})
 		matGroup.AddRadio("Purple", &babylon.RadioGroupAddRadioOpts{Func: makePurple})
 		matGroup.AddRadio("Cyan", &babylon.RadioGroupAddRadioOpts{Func: makeCyan})
 		matGroup.AddRadio("White", &babylon.RadioGroupAddRadioOpts{Func: makeWhite})
 
-		advancedTexture := b.AdvancedDynamicTexture().CreateFullscreenUI("UI", nil)
+		advancedTexture := gui.AdvancedDynamicTexture().CreateFullscreenUI("UI", nil)
 
-		selectBox := b.NewSelectionPanel("sp", &babylon.NewSelectionPanelOpts{Groups: matGroup.SelectorGroup})
+		selectBox := gui.NewSelectionPanel("sp", &babylon.NewSelectionPanelOpts{Groups: matGroup.SelectorGroup})
 		selectBox.SetWidth("0.25")
 		selectBox.SetHeight("50%")
 		selectBox.SetTop("4px")
 		selectBox.SetLeft("4px")
 		selectBox.SetBackground("white")
-		selectBox.SetHorizontalAlignment(b.Control().HORIZONTAL_ALIGNMENT_LEFT())
-		selectBox.SetVerticalAlignment(b.Control().VERTICAL_ALIGNMENT_TOP())
+		selectBox.SetHorizontalAlignment(gui.Control().HORIZONTAL_ALIGNMENT_LEFT())
+		selectBox.SetVerticalAlignment(gui.Control().VERTICAL_ALIGNMENT_TOP())
 
 		advancedTexture.AddControl(selectBox.Control)
 

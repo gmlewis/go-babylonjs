@@ -44,7 +44,7 @@ type NewEllipseOpts struct {
 // NewEllipse returns a new Ellipse object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ellipse
-func (ba *Babylon) NewEllipse(opts *NewEllipseOpts) *Ellipse {
+func (gui *GUI) NewEllipse(opts *NewEllipseOpts) *Ellipse {
 	if opts == nil {
 		opts = &NewEllipseOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewEllipse(opts *NewEllipseOpts) *Ellipse {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Ellipse").New(args...)
-	return EllipseFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Ellipse").New(args...)
+	return EllipseFromJSObject(p, gui.ctx)
 }
 
 // Name returns the Name property of class Ellipse.

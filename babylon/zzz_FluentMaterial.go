@@ -39,15 +39,15 @@ func FluentMaterialArrayToJSArray(array []*FluentMaterial) []interface{} {
 // NewFluentMaterial returns a new FluentMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial
-func (ba *Babylon) NewFluentMaterial(name string, scene *Scene) *FluentMaterial {
+func (gui *GUI) NewFluentMaterial(name string, scene *Scene) *FluentMaterial {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
 	args = append(args, scene.JSObject())
 
-	p := ba.ctx.Get("FluentMaterial").New(args...)
-	return FluentMaterialFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("FluentMaterial").New(args...)
+	return FluentMaterialFromJSObject(p, gui.ctx)
 }
 
 // BindForSubMesh calls the BindForSubMesh method on the FluentMaterial object.

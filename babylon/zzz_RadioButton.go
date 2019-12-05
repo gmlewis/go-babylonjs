@@ -44,7 +44,7 @@ type NewRadioButtonOpts struct {
 // NewRadioButton returns a new RadioButton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton
-func (ba *Babylon) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
+func (gui *GUI) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
 	if opts == nil {
 		opts = &NewRadioButtonOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("RadioButton").New(args...)
-	return RadioButtonFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("RadioButton").New(args...)
+	return RadioButtonFromJSObject(p, gui.ctx)
 }
 
 // AddRadioButtonWithHeader calls the AddRadioButtonWithHeader method on the RadioButton object.

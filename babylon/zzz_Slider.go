@@ -44,7 +44,7 @@ type NewSliderOpts struct {
 // NewSlider returns a new Slider object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.slider
-func (ba *Babylon) NewSlider(opts *NewSliderOpts) *Slider {
+func (gui *GUI) NewSlider(opts *NewSliderOpts) *Slider {
 	if opts == nil {
 		opts = &NewSliderOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewSlider(opts *NewSliderOpts) *Slider {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Slider").New(args...)
-	return SliderFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Slider").New(args...)
+	return SliderFromJSObject(p, gui.ctx)
 }
 
 // Slider_drawOpts contains optional parameters for Slider._draw.

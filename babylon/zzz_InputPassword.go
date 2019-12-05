@@ -45,7 +45,7 @@ type NewInputPasswordOpts struct {
 // NewInputPassword returns a new InputPassword object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputpassword
-func (ba *Babylon) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
+func (gui *GUI) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
 	if opts == nil {
 		opts = &NewInputPasswordOpts{}
 	}
@@ -63,6 +63,6 @@ func (ba *Babylon) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
 		args = append(args, *opts.Text)
 	}
 
-	p := ba.ctx.Get("InputPassword").New(args...)
-	return InputPasswordFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("InputPassword").New(args...)
+	return InputPasswordFromJSObject(p, gui.ctx)
 }

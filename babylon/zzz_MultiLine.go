@@ -44,7 +44,7 @@ type NewMultiLineOpts struct {
 // NewMultiLine returns a new MultiLine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline
-func (ba *Babylon) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
+func (gui *GUI) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
 	if opts == nil {
 		opts = &NewMultiLineOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("MultiLine").New(args...)
-	return MultiLineFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("MultiLine").New(args...)
+	return MultiLineFromJSObject(p, gui.ctx)
 }
 
 // Add calls the Add method on the MultiLine object.

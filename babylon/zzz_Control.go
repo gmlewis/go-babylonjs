@@ -19,9 +19,9 @@ type Control struct {
 func (c *Control) JSObject() js.Value { return c.p }
 
 // Control returns a Control JavaScript class.
-func (ba *Babylon) Control() *Control {
-	p := ba.ctx.Get("GUI").Get("Control")
-	return ControlFromJSObject(p, ba.ctx)
+func (gui *GUI) Control() *Control {
+	p := gui.ctx.Get("Control")
+	return ControlFromJSObject(p, gui.ctx)
 }
 
 // ControlFromJSObject returns a wrapped Control JavaScript class.
@@ -46,7 +46,7 @@ type NewControlOpts struct {
 // NewControl returns a new Control object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control
-func (ba *Babylon) NewControl(opts *NewControlOpts) *Control {
+func (gui *GUI) NewControl(opts *NewControlOpts) *Control {
 	if opts == nil {
 		opts = &NewControlOpts{}
 	}
@@ -59,8 +59,8 @@ func (ba *Babylon) NewControl(opts *NewControlOpts) *Control {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("GUI").Get("Control").New(args...)
-	return ControlFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Control").New(args...)
+	return ControlFromJSObject(p, gui.ctx)
 }
 
 // Contains calls the Contains method on the Control object.

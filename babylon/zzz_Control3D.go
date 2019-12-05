@@ -44,7 +44,7 @@ type NewControl3DOpts struct {
 // NewControl3D returns a new Control3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control3d
-func (ba *Babylon) NewControl3D(opts *NewControl3DOpts) *Control3D {
+func (gui *GUI) NewControl3D(opts *NewControl3DOpts) *Control3D {
 	if opts == nil {
 		opts = &NewControl3DOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewControl3D(opts *NewControl3DOpts) *Control3D {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Control3D").New(args...)
-	return Control3DFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Control3D").New(args...)
+	return Control3DFromJSObject(p, gui.ctx)
 }
 
 // AddBehavior calls the AddBehavior method on the Control3D object.

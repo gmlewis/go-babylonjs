@@ -39,14 +39,14 @@ func AdvancedDynamicTextureInstrumentationArrayToJSArray(array []*AdvancedDynami
 // NewAdvancedDynamicTextureInstrumentation returns a new AdvancedDynamicTextureInstrumentation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation
-func (ba *Babylon) NewAdvancedDynamicTextureInstrumentation(texture *AdvancedDynamicTexture) *AdvancedDynamicTextureInstrumentation {
+func (gui *GUI) NewAdvancedDynamicTextureInstrumentation(texture *AdvancedDynamicTexture) *AdvancedDynamicTextureInstrumentation {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, texture.JSObject())
 
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(args...)
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("AdvancedDynamicTextureInstrumentation").New(args...)
+	return AdvancedDynamicTextureInstrumentationFromJSObject(p, gui.ctx)
 }
 
 // Dispose calls the Dispose method on the AdvancedDynamicTextureInstrumentation object.

@@ -44,7 +44,7 @@ type NewImageBasedSliderOpts struct {
 // NewImageBasedSlider returns a new ImageBasedSlider object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider
-func (ba *Babylon) NewImageBasedSlider(opts *NewImageBasedSliderOpts) *ImageBasedSlider {
+func (gui *GUI) NewImageBasedSlider(opts *NewImageBasedSliderOpts) *ImageBasedSlider {
 	if opts == nil {
 		opts = &NewImageBasedSliderOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewImageBasedSlider(opts *NewImageBasedSliderOpts) *ImageBase
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("ImageBasedSlider").New(args...)
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("ImageBasedSlider").New(args...)
+	return ImageBasedSliderFromJSObject(p, gui.ctx)
 }
 
 // ImageBasedSlider_drawOpts contains optional parameters for ImageBasedSlider._draw.

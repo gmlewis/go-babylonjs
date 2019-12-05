@@ -71,10 +71,18 @@ func (c *classes) walker() filepath.WalkFunc {
 		d.Entity = xml.HTMLEntity
 
 		html := &ClassHTML{
+			ConstructorNamespaceReceiverName: "ba",       // default
+			ConstructorNamespaceReceiverType: "*Babylon", // default
+
 			ConstructorNames: map[string]*Signature{},
 			MethodNames:      map[string]*Signature{},
 			PropertyNames:    map[string]*Signature{},
 		}
+		if strings.Contains(filename, "babylon.gui") {
+			html.ConstructorNamespaceReceiverName = "gui"
+			html.ConstructorNamespaceReceiverType = "*GUI"
+		}
+
 		check("xml.Decode: %v", d.Decode(&html))
 
 		for _, div := range html.Div {
@@ -91,6 +99,8 @@ func (c *classes) walker() filepath.WalkFunc {
 				log.Fatalf("%v: unable to find class name.", filename)
 			}
 			logf("html.Name=%v", html.Name)
+			logf("html.ConstructorNamespaceReceiverName=%v", html.ConstructorNamespaceReceiverName)
+			logf("html.ConstructorNamespaceReceiverType=%v", html.ConstructorNamespaceReceiverType)
 
 			mainDiv := div.GetDiv(0).GetDiv(0).GetDiv(0)
 			if mainDiv == nil {
@@ -165,6 +175,8 @@ func (c *classes) walker() filepath.WalkFunc {
 		}
 
 		logf("html.Name=%v", html.Name)
+		logf("html.ConstructorNamespaceReceiverName=%v", html.ConstructorNamespaceReceiverName)
+		logf("html.ConstructorNamespaceReceiverType=%v", html.ConstructorNamespaceReceiverType)
 		logf("html.Summary=%v", html.Summary)
 		logf("html.Description=%v", html.Description)
 		logf("html.SeeURL=%v", html.SeeURL)
@@ -185,6 +197,9 @@ func (c *classes) walker() filepath.WalkFunc {
 type ClassHTML struct {
 	Title InnerXML `xml:"head>title"`
 	Div   []*Div   `xml:"body>div"`
+
+	ConstructorNamespaceReceiverName string `xml:"-"`
+	ConstructorNamespaceReceiverType string `xml:"-"`
 
 	Name             string                `xml:"-"`
 	Summary          string                `xml:"-"`
@@ -226,6 +241,9 @@ type Div struct {
 
 func (d *Div) GetSignature() *Signature {
 	return &Signature{
+		ConstructorNamespaceReceiverName: "ba",       // default
+		ConstructorNamespaceReceiverType: "*Babylon", // default
+
 		Class:    d.Class,
 		Classes:  d.Classes,
 		InnerXML: d.InnerXML,
@@ -480,6 +498,9 @@ type LI struct {
 
 func (l *LI) GetSignature() *Signature {
 	return &Signature{
+		ConstructorNamespaceReceiverName: "ba",       // default
+		ConstructorNamespaceReceiverType: "*Babylon", // default
+
 		Class:    l.Class,
 		Classes:  l.Classes,
 		InnerXML: l.InnerXML,
@@ -574,6 +595,9 @@ func (a *Anchor) GetInnerXML() string {
 type Signature struct {
 	Class   string
 	Classes map[string]bool
+
+	ConstructorNamespaceReceiverName string
+	ConstructorNamespaceReceiverType string
 
 	InnerXML string
 
@@ -797,13 +821,17 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 			addType()
 		}
 
-		if strings.HasPrefix(m[1], `a href="`) {
+		if strings.HasPrefix(m[1], `a href="babylon.gui.`) {
+			addType()
+			s.ConstructorNamespaceReceiverName = "gui"
+			s.ConstructorNamespaceReceiverType = "*GUI"
+		} else if strings.HasPrefix(m[1], `a href="`) {
 			addType()
 		}
 		logf("names(%v)=%v, optional(%v)=%v, types(%v)=%v", len(names), names, len(optional), optional, len(types), types)
 	}
 
-	logf("\n\nparseParameters[%v]: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, v, matches, len(names), names, len(optional), optional, len(types), types)
+	logf("\n\nparseParameters[%v]: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v, CNRName=%v, CNRT=%v\n\n", s.GoName, v, matches, len(names), names, len(optional), optional, len(types), types, s.ConstructorNamespaceReceiverName, s.ConstructorNamespaceReceiverType)
 
 	if len(names) != len(optional) || len(names) > len(types) {
 		log.Fatalf("badly parsed arguments: \n\nparseParameters[%v]: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, v, matches, len(names), names, len(optional), optional, len(types), types)

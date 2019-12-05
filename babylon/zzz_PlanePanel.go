@@ -39,10 +39,10 @@ func PlanePanelArrayToJSArray(array []*PlanePanel) []interface{} {
 // NewPlanePanel returns a new PlanePanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel
-func (ba *Babylon) NewPlanePanel() *PlanePanel {
+func (gui *GUI) NewPlanePanel() *PlanePanel {
 
 	args := make([]interface{}, 0, 0+0)
 
-	p := ba.ctx.Get("PlanePanel").New(args...)
-	return PlanePanelFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("PlanePanel").New(args...)
+	return PlanePanelFromJSObject(p, gui.ctx)
 }

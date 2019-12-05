@@ -46,7 +46,7 @@ type NewGUI3DManagerOpts struct {
 // NewGUI3DManager returns a new GUI3DManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager
-func (ba *Babylon) NewGUI3DManager(opts *NewGUI3DManagerOpts) *GUI3DManager {
+func (gui *GUI) NewGUI3DManager(opts *NewGUI3DManagerOpts) *GUI3DManager {
 	if opts == nil {
 		opts = &NewGUI3DManagerOpts{}
 	}
@@ -59,8 +59,8 @@ func (ba *Babylon) NewGUI3DManager(opts *NewGUI3DManagerOpts) *GUI3DManager {
 		args = append(args, opts.Scene.JSObject())
 	}
 
-	p := ba.ctx.Get("GUI3DManager").New(args...)
-	return GUI3DManagerFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("GUI3DManager").New(args...)
+	return GUI3DManagerFromJSObject(p, gui.ctx)
 }
 
 // AddControl calls the AddControl method on the GUI3DManager object.

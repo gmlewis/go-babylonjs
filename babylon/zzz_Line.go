@@ -44,7 +44,7 @@ type NewLineOpts struct {
 // NewLine returns a new Line object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line
-func (ba *Babylon) NewLine(opts *NewLineOpts) *Line {
+func (gui *GUI) NewLine(opts *NewLineOpts) *Line {
 	if opts == nil {
 		opts = &NewLineOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewLine(opts *NewLineOpts) *Line {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Line").New(args...)
-	return LineFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Line").New(args...)
+	return LineFromJSObject(p, gui.ctx)
 }
 
 // LineMoveToVector3Opts contains optional parameters for Line.MoveToVector3.

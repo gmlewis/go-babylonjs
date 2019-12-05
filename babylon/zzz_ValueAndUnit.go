@@ -45,7 +45,7 @@ type NewValueAndUnitOpts struct {
 // NewValueAndUnit returns a new ValueAndUnit object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valueandunit
-func (ba *Babylon) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *ValueAndUnit {
+func (gui *GUI) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *ValueAndUnit {
 	if opts == nil {
 		opts = &NewValueAndUnitOpts{}
 	}
@@ -65,8 +65,8 @@ func (ba *Babylon) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *Va
 		args = append(args, *opts.NegativeValueAllowed)
 	}
 
-	p := ba.ctx.Get("ValueAndUnit").New(args...)
-	return ValueAndUnitFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("ValueAndUnit").New(args...)
+	return ValueAndUnitFromJSObject(p, gui.ctx)
 }
 
 // FromString calls the FromString method on the ValueAndUnit object.

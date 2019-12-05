@@ -44,7 +44,7 @@ type NewCheckboxOpts struct {
 // NewCheckbox returns a new Checkbox object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.checkbox
-func (ba *Babylon) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
+func (gui *GUI) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
 	if opts == nil {
 		opts = &NewCheckboxOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Checkbox").New(args...)
-	return CheckboxFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Checkbox").New(args...)
+	return CheckboxFromJSObject(p, gui.ctx)
 }
 
 // AddCheckBoxWithHeader calls the AddCheckBoxWithHeader method on the Checkbox object.

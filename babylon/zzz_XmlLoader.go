@@ -44,7 +44,7 @@ type NewXmlLoaderOpts struct {
 // NewXmlLoader returns a new XmlLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xmlloader
-func (ba *Babylon) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
+func (gui *GUI) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
 	if opts == nil {
 		opts = &NewXmlLoaderOpts{}
 	}
@@ -53,8 +53,8 @@ func (ba *Babylon) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
 
 	args = append(args, opts.ParentClass)
 
-	p := ba.ctx.Get("XmlLoader").New(args...)
-	return XmlLoaderFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("XmlLoader").New(args...)
+	return XmlLoaderFromJSObject(p, gui.ctx)
 }
 
 // GetNodeById calls the GetNodeById method on the XmlLoader object.

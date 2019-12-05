@@ -40,14 +40,14 @@ func MultiLinePointArrayToJSArray(array []*MultiLinePoint) []interface{} {
 // NewMultiLinePoint returns a new MultiLinePoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multilinepoint
-func (ba *Babylon) NewMultiLinePoint(multiLine *MultiLine) *MultiLinePoint {
+func (gui *GUI) NewMultiLinePoint(multiLine *MultiLine) *MultiLinePoint {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, multiLine.JSObject())
 
-	p := ba.ctx.Get("MultiLinePoint").New(args...)
-	return MultiLinePointFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("MultiLinePoint").New(args...)
+	return MultiLinePointFromJSObject(p, gui.ctx)
 }
 
 // Dispose calls the Dispose method on the MultiLinePoint object.

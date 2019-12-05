@@ -40,14 +40,14 @@ func RadioGroupArrayToJSArray(array []*RadioGroup) []interface{} {
 // NewRadioGroup returns a new RadioGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiogroup
-func (ba *Babylon) NewRadioGroup(name string) *RadioGroup {
+func (gui *GUI) NewRadioGroup(name string) *RadioGroup {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
-	p := ba.ctx.Get("GUI").Get("RadioGroup").New(args...)
-	return RadioGroupFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("RadioGroup").New(args...)
+	return RadioGroupFromJSObject(p, gui.ctx)
 }
 
 // RadioGroupAddRadioOpts contains optional parameters for RadioGroup.AddRadio.

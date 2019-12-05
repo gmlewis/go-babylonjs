@@ -46,7 +46,7 @@ type NewContainerOpts struct {
 // NewContainer returns a new Container object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container
-func (ba *Babylon) NewContainer(opts *NewContainerOpts) *Container {
+func (gui *GUI) NewContainer(opts *NewContainerOpts) *Container {
 	if opts == nil {
 		opts = &NewContainerOpts{}
 	}
@@ -59,8 +59,8 @@ func (ba *Babylon) NewContainer(opts *NewContainerOpts) *Container {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Container").New(args...)
-	return ContainerFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Container").New(args...)
+	return ContainerFromJSObject(p, gui.ctx)
 }
 
 // AddControl calls the AddControl method on the Container object.

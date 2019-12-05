@@ -44,7 +44,7 @@ type NewGridOpts struct {
 // NewGrid returns a new Grid object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid
-func (ba *Babylon) NewGrid(opts *NewGridOpts) *Grid {
+func (gui *GUI) NewGrid(opts *NewGridOpts) *Grid {
 	if opts == nil {
 		opts = &NewGridOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewGrid(opts *NewGridOpts) *Grid {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Grid").New(args...)
-	return GridFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Grid").New(args...)
+	return GridFromJSObject(p, gui.ctx)
 }
 
 // GridAddColumnDefinitionOpts contains optional parameters for Grid.AddColumnDefinition.

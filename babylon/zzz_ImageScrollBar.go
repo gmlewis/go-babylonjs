@@ -44,7 +44,7 @@ type NewImageScrollBarOpts struct {
 // NewImageScrollBar returns a new ImageScrollBar object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar
-func (ba *Babylon) NewImageScrollBar(opts *NewImageScrollBarOpts) *ImageScrollBar {
+func (gui *GUI) NewImageScrollBar(opts *NewImageScrollBarOpts) *ImageScrollBar {
 	if opts == nil {
 		opts = &NewImageScrollBarOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewImageScrollBar(opts *NewImageScrollBarOpts) *ImageScrollBa
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("ImageScrollBar").New(args...)
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("ImageScrollBar").New(args...)
+	return ImageScrollBarFromJSObject(p, gui.ctx)
 }
 
 // _draw calls the _draw method on the ImageScrollBar object.

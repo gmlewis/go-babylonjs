@@ -44,7 +44,7 @@ type NewMeshButton3DOpts struct {
 // NewMeshButton3D returns a new MeshButton3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshbutton3d
-func (ba *Babylon) NewMeshButton3D(mesh *Mesh, opts *NewMeshButton3DOpts) *MeshButton3D {
+func (gui *GUI) NewMeshButton3D(mesh *Mesh, opts *NewMeshButton3DOpts) *MeshButton3D {
 	if opts == nil {
 		opts = &NewMeshButton3DOpts{}
 	}
@@ -59,6 +59,6 @@ func (ba *Babylon) NewMeshButton3D(mesh *Mesh, opts *NewMeshButton3DOpts) *MeshB
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("MeshButton3D").New(args...)
-	return MeshButton3DFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("MeshButton3D").New(args...)
+	return MeshButton3DFromJSObject(p, gui.ctx)
 }

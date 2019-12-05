@@ -44,7 +44,7 @@ type NewColorPickerOpts struct {
 // NewColorPicker returns a new ColorPicker object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker
-func (ba *Babylon) NewColorPicker(opts *NewColorPickerOpts) *ColorPicker {
+func (gui *GUI) NewColorPicker(opts *NewColorPickerOpts) *ColorPicker {
 	if opts == nil {
 		opts = &NewColorPickerOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewColorPicker(opts *NewColorPickerOpts) *ColorPicker {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("ColorPicker").New(args...)
-	return ColorPickerFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("ColorPicker").New(args...)
+	return ColorPickerFromJSObject(p, gui.ctx)
 }
 
 // ShowPickerDialogAsync calls the ShowPickerDialogAsync method on the ColorPicker object.

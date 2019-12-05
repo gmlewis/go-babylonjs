@@ -44,7 +44,7 @@ type NewVirtualKeyboardOpts struct {
 // NewVirtualKeyboard returns a new VirtualKeyboard object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard
-func (ba *Babylon) NewVirtualKeyboard(opts *NewVirtualKeyboardOpts) *VirtualKeyboard {
+func (gui *GUI) NewVirtualKeyboard(opts *NewVirtualKeyboardOpts) *VirtualKeyboard {
 	if opts == nil {
 		opts = &NewVirtualKeyboardOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewVirtualKeyboard(opts *NewVirtualKeyboardOpts) *VirtualKeyb
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("VirtualKeyboard").New(args...)
-	return VirtualKeyboardFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("VirtualKeyboard").New(args...)
+	return VirtualKeyboardFromJSObject(p, gui.ctx)
 }
 
 // VirtualKeyboardAddKeysRowOpts contains optional parameters for VirtualKeyboard.AddKeysRow.

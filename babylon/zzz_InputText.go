@@ -45,7 +45,7 @@ type NewInputTextOpts struct {
 // NewInputText returns a new InputText object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputtext
-func (ba *Babylon) NewInputText(opts *NewInputTextOpts) *InputText {
+func (gui *GUI) NewInputText(opts *NewInputTextOpts) *InputText {
 	if opts == nil {
 		opts = &NewInputTextOpts{}
 	}
@@ -63,8 +63,8 @@ func (ba *Babylon) NewInputText(opts *NewInputTextOpts) *InputText {
 		args = append(args, *opts.Text)
 	}
 
-	p := ba.ctx.Get("InputText").New(args...)
-	return InputTextFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("InputText").New(args...)
+	return InputTextFromJSObject(p, gui.ctx)
 }
 
 // Dispose calls the Dispose method on the InputText object.

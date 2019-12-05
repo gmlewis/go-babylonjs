@@ -40,14 +40,14 @@ func SelectorGroupArrayToJSArray(array []*SelectorGroup) []interface{} {
 // NewSelectorGroup returns a new SelectorGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup
-func (ba *Babylon) NewSelectorGroup(name string) *SelectorGroup {
+func (gui *GUI) NewSelectorGroup(name string) *SelectorGroup {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
-	p := ba.ctx.Get("SelectorGroup").New(args...)
-	return SelectorGroupFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("SelectorGroup").New(args...)
+	return SelectorGroupFromJSObject(p, gui.ctx)
 }
 
 // RemoveSelector calls the RemoveSelector method on the SelectorGroup object.

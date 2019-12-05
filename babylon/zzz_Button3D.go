@@ -44,7 +44,7 @@ type NewButton3DOpts struct {
 // NewButton3D returns a new Button3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button3d
-func (ba *Babylon) NewButton3D(opts *NewButton3DOpts) *Button3D {
+func (gui *GUI) NewButton3D(opts *NewButton3DOpts) *Button3D {
 	if opts == nil {
 		opts = &NewButton3DOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewButton3D(opts *NewButton3DOpts) *Button3D {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Button3D").New(args...)
-	return Button3DFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Button3D").New(args...)
+	return Button3DFromJSObject(p, gui.ctx)
 }
 
 // Dispose calls the Dispose method on the Button3D object.

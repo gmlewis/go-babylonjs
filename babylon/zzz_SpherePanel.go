@@ -39,12 +39,12 @@ func SpherePanelArrayToJSArray(array []*SpherePanel) []interface{} {
 // NewSpherePanel returns a new SpherePanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel
-func (ba *Babylon) NewSpherePanel() *SpherePanel {
+func (gui *GUI) NewSpherePanel() *SpherePanel {
 
 	args := make([]interface{}, 0, 0+0)
 
-	p := ba.ctx.Get("SpherePanel").New(args...)
-	return SpherePanelFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("SpherePanel").New(args...)
+	return SpherePanelFromJSObject(p, gui.ctx)
 }
 
 // Radius returns the Radius property of class SpherePanel.

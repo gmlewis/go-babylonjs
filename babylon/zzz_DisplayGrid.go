@@ -44,7 +44,7 @@ type NewDisplayGridOpts struct {
 // NewDisplayGrid returns a new DisplayGrid object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid
-func (ba *Babylon) NewDisplayGrid(opts *NewDisplayGridOpts) *DisplayGrid {
+func (gui *GUI) NewDisplayGrid(opts *NewDisplayGridOpts) *DisplayGrid {
 	if opts == nil {
 		opts = &NewDisplayGridOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewDisplayGrid(opts *NewDisplayGridOpts) *DisplayGrid {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("DisplayGrid").New(args...)
-	return DisplayGridFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("DisplayGrid").New(args...)
+	return DisplayGridFromJSObject(p, gui.ctx)
 }
 
 // DisplayGrid_drawOpts contains optional parameters for DisplayGrid._draw.

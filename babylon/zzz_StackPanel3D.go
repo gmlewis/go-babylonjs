@@ -44,7 +44,7 @@ type NewStackPanel3DOpts struct {
 // NewStackPanel3D returns a new StackPanel3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d
-func (ba *Babylon) NewStackPanel3D(opts *NewStackPanel3DOpts) *StackPanel3D {
+func (gui *GUI) NewStackPanel3D(opts *NewStackPanel3DOpts) *StackPanel3D {
 	if opts == nil {
 		opts = &NewStackPanel3DOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewStackPanel3D(opts *NewStackPanel3DOpts) *StackPanel3D {
 		args = append(args, *opts.IsVertical)
 	}
 
-	p := ba.ctx.Get("StackPanel3D").New(args...)
-	return StackPanel3DFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("StackPanel3D").New(args...)
+	return StackPanel3DFromJSObject(p, gui.ctx)
 }
 
 // IsVertical returns the IsVertical property of class StackPanel3D.

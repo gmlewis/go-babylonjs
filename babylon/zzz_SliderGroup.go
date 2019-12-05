@@ -40,14 +40,14 @@ func SliderGroupArrayToJSArray(array []*SliderGroup) []interface{} {
 // NewSliderGroup returns a new SliderGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.slidergroup
-func (ba *Babylon) NewSliderGroup(name string) *SliderGroup {
+func (gui *GUI) NewSliderGroup(name string) *SliderGroup {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, name)
 
-	p := ba.ctx.Get("SliderGroup").New(args...)
-	return SliderGroupFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("SliderGroup").New(args...)
+	return SliderGroupFromJSObject(p, gui.ctx)
 }
 
 // SliderGroupAddSliderOpts contains optional parameters for SliderGroup.AddSlider.

@@ -40,14 +40,14 @@ func StyleArrayToJSArray(array []*Style) []interface{} {
 // NewStyle returns a new Style object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style
-func (ba *Babylon) NewStyle(host *AdvancedDynamicTexture) *Style {
+func (gui *GUI) NewStyle(host *AdvancedDynamicTexture) *Style {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, host.JSObject())
 
-	p := ba.ctx.Get("Style").New(args...)
-	return StyleFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Style").New(args...)
+	return StyleFromJSObject(p, gui.ctx)
 }
 
 // Dispose calls the Dispose method on the Style object.

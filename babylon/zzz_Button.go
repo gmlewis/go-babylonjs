@@ -44,7 +44,7 @@ type NewButtonOpts struct {
 // NewButton returns a new Button object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button
-func (ba *Babylon) NewButton(opts *NewButtonOpts) *Button {
+func (gui *GUI) NewButton(opts *NewButtonOpts) *Button {
 	if opts == nil {
 		opts = &NewButtonOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewButton(opts *NewButtonOpts) *Button {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Button").New(args...)
-	return ButtonFromJSObject(p, ba.ctx)
+	p := gui.ctx.Get("Button").New(args...)
+	return ButtonFromJSObject(p, gui.ctx)
 }
 
 // CreateImageButton calls the CreateImageButton method on the Button object.
