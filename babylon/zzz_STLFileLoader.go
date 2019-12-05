@@ -93,7 +93,7 @@ func (s *STLFileLoader) LoadAssetContainer(scene *Scene, data string, rootUrl st
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("loadAssetContainer", args...)

@@ -82,12 +82,12 @@ func (ba *Babylon) NewCubeTexture(rootUrl string, scene *Scene, opts *NewCubeTex
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnLoad)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 	if opts.Format == nil {
 		args = append(args, js.Undefined())
@@ -290,7 +290,7 @@ func (c *CubeTexture) UpdateURL(url string, opts *CubeTextureUpdateURLOpts) {
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnLoad)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
 	}
 
 	c.p.Call("updateURL", args...)

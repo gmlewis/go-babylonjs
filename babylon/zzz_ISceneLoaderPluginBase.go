@@ -87,7 +87,7 @@ func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file js.Value, onSuccess
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnProgress)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
 	}
 	if opts.UseArrayBuffer == nil {
 		args = append(args, js.Undefined())
@@ -97,7 +97,7 @@ func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file js.Value, onSuccess
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 
 	retVal := i.p.Call("readFile", args...)
@@ -128,7 +128,7 @@ func (i *ISceneLoaderPluginBase) RequestFile(scene *Scene, url string, onSuccess
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnProgress)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
 	}
 	if opts.UseArrayBuffer == nil {
 		args = append(args, js.Undefined())
@@ -138,7 +138,7 @@ func (i *ISceneLoaderPluginBase) RequestFile(scene *Scene, url string, onSuccess
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 
 	retVal := i.p.Call("requestFile", args...)

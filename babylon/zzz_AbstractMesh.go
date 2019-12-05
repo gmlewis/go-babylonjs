@@ -746,7 +746,7 @@ func (a *AbstractMesh) NormalizeToUnitCube(opts *AbstractMeshNormalizeToUnitCube
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := a.p.Call("normalizeToUnitCube", args...)

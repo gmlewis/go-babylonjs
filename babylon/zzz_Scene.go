@@ -325,7 +325,7 @@ func (s *Scene) BeginAnimation(target interface{}, from float64, to float64, opt
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 	if opts.Animatable == nil {
 		args = append(args, js.Undefined())
@@ -340,12 +340,12 @@ func (s *Scene) BeginAnimation(target interface{}, from float64, to float64, opt
 	if opts.TargetMask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.TargetMask)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetMask(); return nil }) /* never freed! */)
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationLoop)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginAnimation", args...)
@@ -388,12 +388,12 @@ func (s *Scene) BeginDirectAnimation(target interface{}, animations *Animation, 
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationLoop)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginDirectAnimation", args...)
@@ -437,12 +437,12 @@ func (s *Scene) BeginDirectHierarchyAnimation(target *Node, directDescendantsOnl
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationLoop)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginDirectHierarchyAnimation", args...)
@@ -488,7 +488,7 @@ func (s *Scene) BeginHierarchyAnimation(target interface{}, directDescendantsOnl
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 	if opts.Animatable == nil {
 		args = append(args, js.Undefined())
@@ -503,12 +503,12 @@ func (s *Scene) BeginHierarchyAnimation(target interface{}, directDescendantsOnl
 	if opts.TargetMask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.TargetMask)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetMask(); return nil }) /* never freed! */)
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationLoop)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginHierarchyAnimation", args...)
@@ -553,7 +553,7 @@ func (s *Scene) BeginWeightedAnimation(target interface{}, from float64, to floa
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 	if opts.Animatable == nil {
 		args = append(args, js.Undefined())
@@ -563,12 +563,12 @@ func (s *Scene) BeginWeightedAnimation(target interface{}, from float64, to floa
 	if opts.TargetMask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.TargetMask)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetMask(); return nil }) /* never freed! */)
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationLoop)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginWeightedAnimation", args...)
@@ -1430,7 +1430,7 @@ func (s *Scene) GetCamerasByTags(tagsQuery string, opts *SceneGetCamerasByTagsOp
 	if opts.ForEach == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.ForEach)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ForEach(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("getCamerasByTags", args...)
@@ -1606,7 +1606,7 @@ func (s *Scene) GetLightsByTags(tagsQuery string, opts *SceneGetLightsByTagsOpts
 	if opts.ForEach == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.ForEach)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ForEach(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("getLightsByTags", args...)
@@ -1659,7 +1659,7 @@ func (s *Scene) GetMaterialByTags(tagsQuery string, opts *SceneGetMaterialByTags
 	if opts.ForEach == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.ForEach)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ForEach(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("getMaterialByTags", args...)
@@ -1755,7 +1755,7 @@ func (s *Scene) GetMeshesByTags(tagsQuery string, opts *SceneGetMeshesByTagsOpts
 	if opts.ForEach == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.ForEach)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ForEach(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("getMeshesByTags", args...)
@@ -2083,7 +2083,7 @@ func (s *Scene) GetWorldExtends(opts *SceneGetWorldExtendsOpts) js.Value {
 	if opts.FilterPredicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.FilterPredicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.FilterPredicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("getWorldExtends", args...)
@@ -2202,7 +2202,7 @@ func (s *Scene) MarkAllMaterialsAsDirty(flag float64, opts *SceneMarkAllMaterial
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	s.p.Call("markAllMaterialsAsDirty", args...)
@@ -2231,7 +2231,7 @@ func (s *Scene) MultiPick(x float64, y float64, opts *SceneMultiPickOpts) *Picki
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 	if opts.Camera == nil {
 		args = append(args, js.Undefined())
@@ -2266,7 +2266,7 @@ func (s *Scene) MultiPickSprite(x float64, y float64, opts *SceneMultiPickSprite
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 	if opts.Camera == nil {
 		args = append(args, js.Undefined())
@@ -2299,7 +2299,7 @@ func (s *Scene) MultiPickSpriteWithRay(ray *Ray, opts *SceneMultiPickSpriteWithR
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 	if opts.Camera == nil {
 		args = append(args, js.Undefined())
@@ -2359,7 +2359,7 @@ func (s *Scene) Pick(x float64, y float64, opts *ScenePickOpts) *PickingInfo {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -2400,7 +2400,7 @@ func (s *Scene) PickSprite(x float64, y float64, opts *ScenePickSpriteOpts) *Pic
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -2439,7 +2439,7 @@ func (s *Scene) PickSpriteWithRay(ray *Ray, opts *ScenePickSpriteWithRayOpts) *P
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -2478,7 +2478,7 @@ func (s *Scene) PickWithRay(ray *Ray, opts *ScenePickWithRayOpts) *PickingInfo {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -2910,17 +2910,17 @@ func (s *Scene) SetRenderingOrder(renderingGroupId float64, opts *SceneSetRender
 	if opts.OpaqueSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OpaqueSortCompareFn)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OpaqueSortCompareFn(); return nil }) /* never freed! */)
 	}
 	if opts.AlphaTestSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AlphaTestSortCompareFn)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.AlphaTestSortCompareFn(); return nil }) /* never freed! */)
 	}
 	if opts.TransparentSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.TransparentSortCompareFn)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TransparentSortCompareFn(); return nil }) /* never freed! */)
 	}
 
 	s.p.Call("setRenderingOrder", args...)
@@ -3088,7 +3088,7 @@ func (s *Scene) StopAnimation(target interface{}, opts *SceneStopAnimationOpts) 
 	if opts.TargetMask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.TargetMask)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetMask(); return nil }) /* never freed! */)
 	}
 
 	s.p.Call("stopAnimation", args...)

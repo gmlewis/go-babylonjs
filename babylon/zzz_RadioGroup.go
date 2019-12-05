@@ -46,7 +46,7 @@ func (ba *Babylon) NewRadioGroup(name string) *RadioGroup {
 
 	args = append(args, name)
 
-	p := ba.ctx.Get("RadioGroup").New(args...)
+	p := ba.ctx.Get("GUI").Get("RadioGroup").New(args...)
 	return RadioGroupFromJSObject(p, ba.ctx)
 }
 
@@ -71,7 +71,7 @@ func (r *RadioGroup) AddRadio(label string, opts *RadioGroupAddRadioOpts) {
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Func)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
 	}
 	if opts.Checked == nil {
 		args = append(args, js.Undefined())

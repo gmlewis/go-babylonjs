@@ -133,7 +133,7 @@ func (s *ShadowGenerator) ForceCompilation(opts *ShadowGeneratorForceCompilation
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnCompiled)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
 	}
 	if opts.Options == nil {
 		args = append(args, js.Undefined())

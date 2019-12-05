@@ -93,7 +93,7 @@ func (a *AssetContainer) InstantiateModelsToScene(opts *AssetContainerInstantiat
 	if opts.NameFunction == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.NameFunction)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.NameFunction(); return nil }) /* never freed! */)
 	}
 	if opts.CloneMaterials == nil {
 		args = append(args, js.Undefined())

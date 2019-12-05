@@ -59,7 +59,7 @@ func (s *ScreenshotTools) CreateScreenshot(engine *Engine, camera *Camera, size 
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SuccessCallback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -125,7 +125,7 @@ func (s *ScreenshotTools) CreateScreenshotUsingRenderTarget(engine *Engine, came
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SuccessCallback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())

@@ -69,7 +69,7 @@ func (v *ViveController) InitControllerMesh(scene *Scene, opts *ViveControllerIn
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.MeshLoaded)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.MeshLoaded(); return nil }) /* never freed! */)
 	}
 
 	v.p.Call("initControllerMesh", args...)

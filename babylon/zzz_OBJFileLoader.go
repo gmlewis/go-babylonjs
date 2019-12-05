@@ -104,7 +104,7 @@ func (o *OBJFileLoader) ImportMeshAsync(meshesNames interface{}, scene *Scene, d
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnProgress)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
 	}
 	if opts.FileName == nil {
 		args = append(args, js.Undefined())
@@ -139,7 +139,7 @@ func (o *OBJFileLoader) LoadAssetContainerAsync(scene *Scene, data string, rootU
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnProgress)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
 	}
 	if opts.FileName == nil {
 		args = append(args, js.Undefined())
@@ -174,7 +174,7 @@ func (o *OBJFileLoader) LoadAsync(scene *Scene, data string, rootUrl string, opt
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnProgress)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
 	}
 	if opts.FileName == nil {
 		args = append(args, js.Undefined())

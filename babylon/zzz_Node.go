@@ -135,7 +135,7 @@ func (n *Node) BeginAnimation(name string, opts *NodeBeginAnimationOpts) *Animat
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 
 	retVal := n.p.Call("beginAnimation", args...)
@@ -338,7 +338,7 @@ func (n *Node) GetChildMeshes(opts *NodeGetChildMeshesOpts) *AbstractMesh {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := n.p.Call("getChildMeshes", args...)
@@ -364,7 +364,7 @@ func (n *Node) GetChildren(opts *NodeGetChildrenOpts) *Node {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 	if opts.DirectDescendantsOnly == nil {
 		args = append(args, js.Undefined())
@@ -409,7 +409,7 @@ func (n *Node) GetDescendants(opts *NodeGetDescendantsOpts) *Node {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := n.p.Call("getDescendants", args...)
@@ -449,7 +449,7 @@ func (n *Node) GetHierarchyBoundingVectors(opts *NodeGetHierarchyBoundingVectors
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := n.p.Call("getHierarchyBoundingVectors", args...)

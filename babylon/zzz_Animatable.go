@@ -83,7 +83,7 @@ func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnim
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 	if opts.Animations == nil {
 		args = append(args, js.Undefined())
@@ -93,7 +93,7 @@ func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnim
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationLoop)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
 	}
 
 	p := ba.ctx.Get("Animatable").New(args...)
@@ -228,7 +228,7 @@ func (a *Animatable) Stop(opts *AnimatableStopOpts) {
 	if opts.TargetMask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.TargetMask)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetMask(); return nil }) /* never freed! */)
 	}
 
 	a.p.Call("stop", args...)

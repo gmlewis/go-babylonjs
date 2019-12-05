@@ -389,17 +389,17 @@ func (r *RenderTargetTexture) SetRenderingOrder(renderingGroupId float64, opts *
 	if opts.OpaqueSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OpaqueSortCompareFn)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OpaqueSortCompareFn(); return nil }) /* never freed! */)
 	}
 	if opts.AlphaTestSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.AlphaTestSortCompareFn)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.AlphaTestSortCompareFn(); return nil }) /* never freed! */)
 	}
 	if opts.TransparentSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.TransparentSortCompareFn)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TransparentSortCompareFn(); return nil }) /* never freed! */)
 	}
 
 	r.p.Call("setRenderingOrder", args...)

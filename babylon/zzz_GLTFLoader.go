@@ -138,7 +138,7 @@ func (g *GLTFLoader) LoadCameraAsync(context string, camera *ICamera, opts *GLTF
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Assign)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Assign(); return nil }) /* never freed! */)
 	}
 
 	retVal := g.p.Call("loadCameraAsync", args...)
@@ -224,7 +224,7 @@ func (g *GLTFLoader) LoadNodeAsync(context string, node *INode, opts *GLTFLoader
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Assign)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Assign(); return nil }) /* never freed! */)
 	}
 
 	retVal := g.p.Call("loadNodeAsync", args...)
@@ -266,7 +266,7 @@ func (g *GLTFLoader) LoadTextureInfoAsync(context string, textureInfo *ITextureI
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Assign)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Assign(); return nil }) /* never freed! */)
 	}
 
 	retVal := g.p.Call("loadTextureInfoAsync", args...)

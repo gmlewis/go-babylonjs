@@ -159,7 +159,7 @@ func (c *Container) GetDescendantsToRef(results *Control, opts *ContainerGetDesc
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	c.p.Call("getDescendantsToRef", args...)

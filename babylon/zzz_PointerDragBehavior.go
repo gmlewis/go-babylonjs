@@ -81,7 +81,7 @@ func (p *PointerDragBehavior) Attach(ownerNode *AbstractMesh, opts *PointerDragB
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	p.p.Call("attach", args...)

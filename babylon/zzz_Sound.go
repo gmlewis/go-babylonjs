@@ -62,7 +62,7 @@ func (ba *Babylon) NewSound(name string, urlOrArrayBuffer interface{}, scene *Sc
 	if opts.ReadyToPlayCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.ReadyToPlayCallback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ReadyToPlayCallback(); return nil }) /* never freed! */)
 	}
 	if opts.Options == nil {
 		args = append(args, js.Undefined())

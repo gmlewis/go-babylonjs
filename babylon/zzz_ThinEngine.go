@@ -454,12 +454,12 @@ func (t *ThinEngine) CreateEffect(baseName interface{}, attributesNamesOrOptions
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnCompiled)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 	if opts.IndexParameters == nil {
 		args = append(args, js.Undefined())
@@ -548,12 +548,12 @@ func (t *ThinEngine) CreatePrefilteredCubeTexture(rootUrl string, scene *Scene, 
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnLoad)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 	if opts.Format == nil {
 		args = append(args, js.Undefined())
@@ -867,12 +867,12 @@ func (t *ThinEngine) CreateTexture(urlArg string, noMipmap bool, invertY bool, s
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnLoad)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 	if opts.Buffer == nil {
 		args = append(args, js.Undefined())
@@ -1747,7 +1747,7 @@ func (t *ThinEngine) StopRenderLoop(opts *ThinEngineStopRenderLoopOpts) {
 	if opts.RenderFunction == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.RenderFunction)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.RenderFunction(); return nil }) /* never freed! */)
 	}
 
 	t.p.Call("stopRenderLoop", args...)
@@ -1779,7 +1779,7 @@ func (t *ThinEngine) UnBindFramebuffer(texture *InternalTexture, opts *ThinEngin
 	if opts.OnBeforeUnbind == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnBeforeUnbind)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnBeforeUnbind(); return nil }) /* never freed! */)
 	}
 
 	t.p.Call("unBindFramebuffer", args...)
@@ -1806,7 +1806,7 @@ func (t *ThinEngine) UnBindMultiColorAttachmentFramebuffer(textures *InternalTex
 	if opts.OnBeforeUnbind == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnBeforeUnbind)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnBeforeUnbind(); return nil }) /* never freed! */)
 	}
 
 	t.p.Call("unBindMultiColorAttachmentFramebuffer", args...)

@@ -80,7 +80,7 @@ func (ba *Babylon) NewInterpolateValueAction(triggerOptions interface{}, target 
 	if opts.OnInterpolationDone == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnInterpolationDone)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnInterpolationDone(); return nil }) /* never freed! */)
 	}
 
 	p := ba.ctx.Get("InterpolateValueAction").New(args...)

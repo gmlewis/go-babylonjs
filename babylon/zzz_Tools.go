@@ -80,7 +80,7 @@ func (t *Tools) CreateScreenshot(engine *Engine, camera *Camera, size *IScreensh
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SuccessCallback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -146,7 +146,7 @@ func (t *Tools) CreateScreenshotUsingRenderTarget(engine *Engine, camera *Camera
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SuccessCallback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -315,7 +315,7 @@ func (t *Tools) DumpFramebuffer(width float64, height float64, engine *Engine, o
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SuccessCallback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -351,7 +351,7 @@ func (t *Tools) EncodeScreenshotCanvasData(opts *ToolsEncodeScreenshotCanvasData
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SuccessCallback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -641,7 +641,7 @@ func (t *Tools) LoadFile(url string, onSuccess func(), opts *ToolsLoadFileOpts) 
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnProgress)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
 	}
 	if opts.OfflineProvider == nil {
 		args = append(args, js.Undefined())
@@ -656,7 +656,7 @@ func (t *Tools) LoadFile(url string, onSuccess func(), opts *ToolsLoadFileOpts) 
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 
 	retVal := t.p.Call("LoadFile", args...)
@@ -728,7 +728,7 @@ func (t *Tools) LoadScript(scriptUrl string, onSuccess func(), opts *ToolsLoadSc
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 	if opts.ScriptId == nil {
 		args = append(args, js.Undefined())
@@ -852,7 +852,7 @@ func (t *Tools) ReadFile(file js.Value, onSuccess func(), opts *ToolsReadFileOpt
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnProgress)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
 	}
 	if opts.UseArrayBuffer == nil {
 		args = append(args, js.Undefined())
@@ -862,7 +862,7 @@ func (t *Tools) ReadFile(file js.Value, onSuccess func(), opts *ToolsReadFileOpt
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 
 	retVal := t.p.Call("ReadFile", args...)

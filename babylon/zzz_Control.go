@@ -20,7 +20,7 @@ func (c *Control) JSObject() js.Value { return c.p }
 
 // Control returns a Control JavaScript class.
 func (ba *Babylon) Control() *Control {
-	p := ba.ctx.Get("Control")
+	p := ba.ctx.Get("GUI").Get("Control")
 	return ControlFromJSObject(p, ba.ctx)
 }
 
@@ -59,7 +59,7 @@ func (ba *Babylon) NewControl(opts *NewControlOpts) *Control {
 		args = append(args, *opts.Name)
 	}
 
-	p := ba.ctx.Get("Control").New(args...)
+	p := ba.ctx.Get("GUI").Get("Control").New(args...)
 	return ControlFromJSObject(p, ba.ctx)
 }
 
@@ -131,7 +131,7 @@ func (c *Control) GetDescendants(opts *ControlGetDescendantsOpts) *Control {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := c.p.Call("getDescendants", args...)
@@ -164,7 +164,7 @@ func (c *Control) GetDescendantsToRef(results *Control, opts *ControlGetDescenda
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	c.p.Call("getDescendantsToRef", args...)

@@ -62,7 +62,7 @@ func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, d
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 
 	retVal := i.p.Call("importMesh", args...)
@@ -91,7 +91,7 @@ func (i *ISceneLoaderPlugin) Load(scene *Scene, data interface{}, rootUrl string
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 
 	retVal := i.p.Call("load", args...)
@@ -120,7 +120,7 @@ func (i *ISceneLoaderPlugin) LoadAssetContainer(scene *Scene, data interface{}, 
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 
 	retVal := i.p.Call("loadAssetContainer", args...)

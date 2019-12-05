@@ -20,7 +20,7 @@ func (a *AdvancedDynamicTexture) JSObject() js.Value { return a.p }
 
 // AdvancedDynamicTexture returns a AdvancedDynamicTexture JavaScript class.
 func (ba *Babylon) AdvancedDynamicTexture() *AdvancedDynamicTexture {
-	p := ba.ctx.Get("AdvancedDynamicTexture")
+	p := ba.ctx.Get("GUI").Get("AdvancedDynamicTexture")
 	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
 }
 
@@ -70,7 +70,7 @@ func (ba *Babylon) NewAdvancedDynamicTexture(name string, width float64, height 
 		args = append(args, *opts.SamplingMode)
 	}
 
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(args...)
+	p := ba.ctx.Get("GUI").Get("AdvancedDynamicTexture").New(args...)
 	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
 }
 
@@ -294,7 +294,7 @@ func (a *AdvancedDynamicTexture) GetDescendants(opts *AdvancedDynamicTextureGetD
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := a.p.Call("getDescendants", args...)

@@ -272,7 +272,7 @@ func (t *TransformNode) GetChildTransformNodes(opts *TransformNodeGetChildTransf
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := t.p.Call("getChildTransformNodes", args...)
@@ -444,7 +444,7 @@ func (t *TransformNode) InstantiateHierarchy(opts *TransformNodeInstantiateHiera
 	if opts.OnNewNodeCreated == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnNewNodeCreated)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnNewNodeCreated(); return nil }) /* never freed! */)
 	}
 
 	retVal := t.p.Call("instantiateHierarchy", args...)
@@ -548,7 +548,7 @@ func (t *TransformNode) NormalizeToUnitCube(opts *TransformNodeNormalizeToUnitCu
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := t.p.Call("normalizeToUnitCube", args...)

@@ -268,12 +268,12 @@ func (n *NullEngine) CreateTexture(urlArg string, noMipmap bool, invertY bool, s
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnLoad)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 	args = append(args, opts.Buffer)
 	if opts.FallBack == nil {
@@ -917,7 +917,7 @@ func (n *NullEngine) UnBindFramebuffer(texture *InternalTexture, opts *NullEngin
 	if opts.OnBeforeUnbind == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnBeforeUnbind)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnBeforeUnbind(); return nil }) /* never freed! */)
 	}
 
 	n.p.Call("unBindFramebuffer", args...)

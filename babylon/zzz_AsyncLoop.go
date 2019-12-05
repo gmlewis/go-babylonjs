@@ -134,7 +134,7 @@ func (a *AsyncLoop) SyncAsyncForLoop(iterations float64, syncedIterations float6
 	if opts.BreakFunction == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.BreakFunction)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.BreakFunction(); return nil }) /* never freed! */)
 	}
 	if opts.Timeout == nil {
 		args = append(args, js.Undefined())

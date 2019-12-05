@@ -126,7 +126,7 @@ func (m *Mesh) ApplyDisplacementMap(url string, minHeight float64, maxHeight flo
 	if opts.OnSuccess == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnSuccess)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnSuccess(); return nil }) /* never freed! */)
 	}
 	if opts.UvOffset == nil {
 		args = append(args, js.Undefined())
@@ -564,7 +564,7 @@ func (m *Mesh) CreateGroundFromHeightMap(name string, url string, width float64,
 	if opts.OnReady == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnReady)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnReady(); return nil }) /* never freed! */)
 	}
 	if opts.AlphaFilter == nil {
 		args = append(args, js.Undefined())
@@ -1511,7 +1511,7 @@ func (m *Mesh) InstantiateHierarchy(opts *MeshInstantiateHierarchyOpts) *Transfo
 	if opts.OnNewNodeCreated == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnNewNodeCreated)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnNewNodeCreated(); return nil }) /* never freed! */)
 	}
 
 	retVal := m.p.Call("instantiateHierarchy", args...)
@@ -1705,7 +1705,7 @@ func (m *Mesh) OptimizeIndices(opts *MeshOptimizeIndicesOpts) *Mesh {
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SuccessCallback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
 	}
 
 	retVal := m.p.Call("optimizeIndices", args...)
@@ -1995,7 +1995,7 @@ func (m *Mesh) Simplify(settings []*ISimplificationSettings, opts *MeshSimplifyO
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.SuccessCallback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
 	}
 
 	retVal := m.p.Call("simplify", args...)

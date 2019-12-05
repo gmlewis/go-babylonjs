@@ -97,7 +97,7 @@ func (a *AnimationGroup) Clone(newName string, opts *AnimationGroupCloneOpts) *A
 	if opts.TargetConverter == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.TargetConverter)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetConverter(); return nil }) /* never freed! */)
 	}
 
 	retVal := a.p.Call("clone", args...)

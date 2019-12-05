@@ -102,7 +102,7 @@ func (a *ActionManager) HasSpecificTrigger(trigger float64, opts *ActionManagerH
 	if opts.ParameterPredicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.ParameterPredicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ParameterPredicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := a.p.Call("hasSpecificTrigger", args...)

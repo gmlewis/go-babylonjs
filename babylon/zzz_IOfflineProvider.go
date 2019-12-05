@@ -61,12 +61,12 @@ func (i *IOfflineProvider) LoadFile(url string, sceneLoaded func(), opts *IOffli
 	if opts.ProgressCallBack == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.ProgressCallBack)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ProgressCallBack(); return nil }) /* never freed! */)
 	}
 	if opts.ErrorCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.ErrorCallback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ErrorCallback(); return nil }) /* never freed! */)
 	}
 	if opts.UseArrayBuffer == nil {
 		args = append(args, js.Undefined())

@@ -832,6 +832,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 						paramType = "map[string]interface{}"
 					case "function", "Function":
 						paramType = "func()"
+						jsName = fmt.Sprintf(`js.FuncOf(func(this js.Value, args []js.Value) interface{} {opts.%v(); return nil}) /* never freed! */`, name)
 					case
 						"[]AbstractMesh",
 						"[]IInternalTextureLoader",

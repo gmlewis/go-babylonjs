@@ -340,7 +340,7 @@ func (g *Geometry) Load(scene *Scene, opts *GeometryLoadOpts) {
 	if opts.OnLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnLoaded)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoaded(); return nil }) /* never freed! */)
 	}
 
 	g.p.Call("load", args...)

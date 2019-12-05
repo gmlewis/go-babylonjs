@@ -58,7 +58,7 @@ func (i *ISpriteManager) Intersects(ray *Ray, camera *Camera, opts *ISpriteManag
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -91,7 +91,7 @@ func (i *ISpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *ISprite
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	retVal := i.p.Call("multiIntersects", args...)

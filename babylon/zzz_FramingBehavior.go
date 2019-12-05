@@ -101,7 +101,7 @@ func (f *FramingBehavior) ZoomOnBoundingInfo(minimumWorld *Vector3, maximumWorld
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 
 	f.p.Call("zoomOnBoundingInfo", args...)
@@ -133,7 +133,7 @@ func (f *FramingBehavior) ZoomOnMesh(mesh *AbstractMesh, opts *FramingBehaviorZo
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 
 	f.p.Call("zoomOnMesh", args...)
@@ -165,7 +165,7 @@ func (f *FramingBehavior) ZoomOnMeshHierarchy(mesh *AbstractMesh, opts *FramingB
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 
 	f.p.Call("zoomOnMeshHierarchy", args...)
@@ -197,7 +197,7 @@ func (f *FramingBehavior) ZoomOnMeshesHierarchy(meshes *AbstractMesh, opts *Fram
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 
 	f.p.Call("zoomOnMeshesHierarchy", args...)

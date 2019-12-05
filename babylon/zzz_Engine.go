@@ -179,12 +179,12 @@ func (e *Engine) CreateEffectForParticles(fragmentName string, uniformsNames str
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnCompiled)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnError)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
 	}
 
 	retVal := e.p.Call("createEffectForParticles", args...)
@@ -933,7 +933,7 @@ func (e *Engine) MarkAllMaterialsAsDirty(flag float64, opts *EngineMarkAllMateri
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Predicate)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
 	}
 
 	e.p.Call("MarkAllMaterialsAsDirty", args...)

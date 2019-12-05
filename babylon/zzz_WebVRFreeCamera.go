@@ -220,7 +220,7 @@ func (w *WebVRFreeCamera) UseStandingMatrix(opts *WebVRFreeCameraUseStandingMatr
 	if opts.Callback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Callback)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Callback(); return nil }) /* never freed! */)
 	}
 
 	w.p.Call("useStandingMatrix", args...)

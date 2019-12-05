@@ -69,7 +69,7 @@ func (g *GenericController) InitControllerMesh(scene *Scene, opts *GenericContro
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.MeshLoaded)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.MeshLoaded(); return nil }) /* never freed! */)
 	}
 
 	g.p.Call("initControllerMesh", args...)

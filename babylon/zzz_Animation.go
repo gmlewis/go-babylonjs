@@ -174,7 +174,7 @@ func (a *Animation) CreateAndStartAnimation(name string, node *Node, targetPrope
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 
 	retVal := a.p.Call("CreateAndStartAnimation", args...)
@@ -220,7 +220,7 @@ func (a *Animation) CreateAndStartHierarchyAnimation(name string, node *Node, di
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 
 	retVal := a.p.Call("CreateAndStartHierarchyAnimation", args...)
@@ -281,7 +281,7 @@ func (a *Animation) CreateMergeAndStartAnimation(name string, node *Node, target
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 
 	retVal := a.p.Call("CreateMergeAndStartAnimation", args...)
@@ -598,7 +598,7 @@ func (a *Animation) TransitionTo(property string, targetValue interface{}, host 
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 
 	retVal := a.p.Call("TransitionTo", args...)

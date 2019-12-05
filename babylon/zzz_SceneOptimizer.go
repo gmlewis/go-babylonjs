@@ -112,12 +112,12 @@ func (s *SceneOptimizer) OptimizeAsync(scene *Scene, opts *SceneOptimizerOptimiz
 	if opts.OnSuccess == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnSuccess)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnSuccess(); return nil }) /* never freed! */)
 	}
 	if opts.OnFailure == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnFailure)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnFailure(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("OptimizeAsync", args...)

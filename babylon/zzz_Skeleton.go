@@ -85,7 +85,7 @@ func (s *Skeleton) BeginAnimation(name string, opts *SkeletonBeginAnimationOpts)
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnAnimationEnd)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginAnimation", args...)

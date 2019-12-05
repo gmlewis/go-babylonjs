@@ -77,7 +77,7 @@ func (w *WebVRController) InitControllerMesh(scene *Scene, opts *WebVRController
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.MeshLoaded)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.MeshLoaded(); return nil }) /* never freed! */)
 	}
 
 	w.p.Call("initControllerMesh", args...)

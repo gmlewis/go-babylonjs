@@ -75,7 +75,7 @@ func (s *SliderGroup) AddSlider(label string, opts *SliderGroupAddSliderOpts) {
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Func)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
 	}
 	if opts.Unit == nil {
 		args = append(args, js.Undefined())
@@ -100,7 +100,7 @@ func (s *SliderGroup) AddSlider(label string, opts *SliderGroupAddSliderOpts) {
 	if opts.OnValueChange == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnValueChange)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnValueChange(); return nil }) /* never freed! */)
 	}
 
 	s.p.Call("addSlider", args...)

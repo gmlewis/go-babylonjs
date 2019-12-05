@@ -61,7 +61,7 @@ func (ba *Babylon) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *
 		args = append(args, opts.Groups.JSObject())
 	}
 
-	p := ba.ctx.Get("SelectionPanel").New(args...)
+	p := ba.ctx.Get("GUI").Get("SelectionPanel").New(args...)
 	return SelectionPanelFromJSObject(p, ba.ctx)
 }
 
@@ -99,7 +99,7 @@ func (s *SelectionPanel) AddToGroupCheckbox(groupNb float64, label string, opts 
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Func)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
 	}
 	if opts.Checked == nil {
 		args = append(args, js.Undefined())
@@ -132,7 +132,7 @@ func (s *SelectionPanel) AddToGroupRadio(groupNb float64, label string, opts *Se
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Func)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
 	}
 	if opts.Checked == nil {
 		args = append(args, js.Undefined())
@@ -169,7 +169,7 @@ func (s *SelectionPanel) AddToGroupSlider(groupNb float64, label string, opts *S
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Func)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
 	}
 	if opts.Unit == nil {
 		args = append(args, js.Undefined())
@@ -194,7 +194,7 @@ func (s *SelectionPanel) AddToGroupSlider(groupNb float64, label string, opts *S
 	if opts.OnVal == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.OnVal)
+		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnVal(); return nil }) /* never freed! */)
 	}
 
 	s.p.Call("addToGroupSlider", args...)
