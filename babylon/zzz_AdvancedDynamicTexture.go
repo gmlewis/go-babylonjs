@@ -279,7 +279,7 @@ type AdvancedDynamicTextureGetDescendantsOpts struct {
 // GetDescendants calls the GetDescendants method on the AdvancedDynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getdescendants
-func (a *AdvancedDynamicTexture) GetDescendants(opts *AdvancedDynamicTextureGetDescendantsOpts) *Control {
+func (a *AdvancedDynamicTexture) GetDescendants(opts *AdvancedDynamicTextureGetDescendantsOpts) []*Control {
 	if opts == nil {
 		opts = &AdvancedDynamicTextureGetDescendantsOpts{}
 	}
@@ -298,7 +298,11 @@ func (a *AdvancedDynamicTexture) GetDescendants(opts *AdvancedDynamicTextureGetD
 	}
 
 	retVal := a.p.Call("getDescendants", args...)
-	return ControlFromJSObject(retVal, a.ctx)
+	result := []*Control{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ControlFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // GetProjectedPosition calls the GetProjectedPosition method on the AdvancedDynamicTexture object.

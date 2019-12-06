@@ -306,7 +306,7 @@ func (m *MaterialHelper) HandleFallbacksForShadows(defines interface{}, fallback
 // PrepareAttributesForBones calls the PrepareAttributesForBones method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#prepareattributesforbones
-func (m *MaterialHelper) PrepareAttributesForBones(attribs string, mesh *AbstractMesh, defines interface{}, fallbacks *EffectFallbacks) {
+func (m *MaterialHelper) PrepareAttributesForBones(attribs []string, mesh *AbstractMesh, defines interface{}, fallbacks *EffectFallbacks) {
 
 	args := make([]interface{}, 0, 4+0)
 
@@ -321,7 +321,7 @@ func (m *MaterialHelper) PrepareAttributesForBones(attribs string, mesh *Abstrac
 // PrepareAttributesForInstances calls the PrepareAttributesForInstances method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#prepareattributesforinstances
-func (m *MaterialHelper) PrepareAttributesForInstances(attribs string, defines *MaterialDefines) {
+func (m *MaterialHelper) PrepareAttributesForInstances(attribs []string, defines *MaterialDefines) {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -334,7 +334,7 @@ func (m *MaterialHelper) PrepareAttributesForInstances(attribs string, defines *
 // PrepareAttributesForMorphTargets calls the PrepareAttributesForMorphTargets method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#prepareattributesformorphtargets
-func (m *MaterialHelper) PrepareAttributesForMorphTargets(attribs string, mesh *AbstractMesh, defines interface{}) {
+func (m *MaterialHelper) PrepareAttributesForMorphTargets(attribs []string, mesh *AbstractMesh, defines interface{}) {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -348,7 +348,7 @@ func (m *MaterialHelper) PrepareAttributesForMorphTargets(attribs string, mesh *
 // PrepareAttributesForMorphTargetsInfluencers calls the PrepareAttributesForMorphTargetsInfluencers method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#prepareattributesformorphtargetsinfluencers
-func (m *MaterialHelper) PrepareAttributesForMorphTargetsInfluencers(attribs string, mesh *AbstractMesh, influencers float64) {
+func (m *MaterialHelper) PrepareAttributesForMorphTargetsInfluencers(attribs []string, mesh *AbstractMesh, influencers float64) {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -552,13 +552,13 @@ func (m *MaterialHelper) PrepareDefinesForMultiview(scene *Scene, defines interf
 // MaterialHelperPrepareUniformsAndSamplersForLightOpts contains optional parameters for MaterialHelper.PrepareUniformsAndSamplersForLight.
 type MaterialHelperPrepareUniformsAndSamplersForLightOpts struct {
 	ProjectedLightTexture *interface{}
-	UniformBuffersList    *string
+	UniformBuffersList    []string
 }
 
 // PrepareUniformsAndSamplersForLight calls the PrepareUniformsAndSamplersForLight method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#prepareuniformsandsamplersforlight
-func (m *MaterialHelper) PrepareUniformsAndSamplersForLight(lightIndex float64, uniformsList string, samplersList string, opts *MaterialHelperPrepareUniformsAndSamplersForLightOpts) {
+func (m *MaterialHelper) PrepareUniformsAndSamplersForLight(lightIndex float64, uniformsList []string, samplersList []string, opts *MaterialHelperPrepareUniformsAndSamplersForLightOpts) {
 	if opts == nil {
 		opts = &MaterialHelperPrepareUniformsAndSamplersForLightOpts{}
 	}
@@ -577,7 +577,7 @@ func (m *MaterialHelper) PrepareUniformsAndSamplersForLight(lightIndex float64, 
 	if opts.UniformBuffersList == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.UniformBuffersList)
+		args = append(args, opts.UniformBuffersList)
 	}
 
 	m.p.Call("PrepareUniformsAndSamplersForLight", args...)
@@ -585,7 +585,7 @@ func (m *MaterialHelper) PrepareUniformsAndSamplersForLight(lightIndex float64, 
 
 // MaterialHelperPrepareUniformsAndSamplersListOpts contains optional parameters for MaterialHelper.PrepareUniformsAndSamplersList.
 type MaterialHelperPrepareUniformsAndSamplersListOpts struct {
-	SamplersList          *string
+	SamplersList          []string
 	Defines               *interface{}
 	MaxSimultaneousLights *float64
 }
@@ -593,7 +593,7 @@ type MaterialHelperPrepareUniformsAndSamplersListOpts struct {
 // PrepareUniformsAndSamplersList calls the PrepareUniformsAndSamplersList method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#prepareuniformsandsamplerslist
-func (m *MaterialHelper) PrepareUniformsAndSamplersList(uniformsListOrOptions string, opts *MaterialHelperPrepareUniformsAndSamplersListOpts) {
+func (m *MaterialHelper) PrepareUniformsAndSamplersList(uniformsListOrOptions []string, opts *MaterialHelperPrepareUniformsAndSamplersListOpts) {
 	if opts == nil {
 		opts = &MaterialHelperPrepareUniformsAndSamplersListOpts{}
 	}
@@ -605,7 +605,7 @@ func (m *MaterialHelper) PrepareUniformsAndSamplersList(uniformsListOrOptions st
 	if opts.SamplersList == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.SamplersList)
+		args = append(args, opts.SamplersList)
 	}
 	if opts.Defines == nil {
 		args = append(args, js.Undefined())
@@ -624,7 +624,7 @@ func (m *MaterialHelper) PrepareUniformsAndSamplersList(uniformsListOrOptions st
 // PushAttributesForInstances calls the PushAttributesForInstances method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#pushattributesforinstances
-func (m *MaterialHelper) PushAttributesForInstances(attribs string) {
+func (m *MaterialHelper) PushAttributesForInstances(attribs []string) {
 
 	args := make([]interface{}, 0, 1+0)
 

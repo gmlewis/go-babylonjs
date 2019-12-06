@@ -42,7 +42,7 @@ type NewDefaultRenderingPipelineOpts struct {
 	Name           *string
 	Hdr            *bool
 	Scene          *Scene
-	Cameras        *Camera
+	Cameras        []*Camera
 	AutomaticBuild *bool
 }
 
@@ -74,7 +74,7 @@ func (ba *Babylon) NewDefaultRenderingPipeline(opts *NewDefaultRenderingPipeline
 	if opts.Cameras == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Cameras.JSObject())
+		args = append(args, CameraArrayToJSArray(opts.Cameras))
 	}
 	if opts.AutomaticBuild == nil {
 		args = append(args, js.Undefined())
@@ -162,16 +162,20 @@ func (d *DefaultRenderingPipeline) Serialize() interface{} {
 // Animations returns the Animations property of class DefaultRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#animations
-func (d *DefaultRenderingPipeline) Animations() *Animation {
+func (d *DefaultRenderingPipeline) Animations() []*Animation {
 	retVal := d.p.Get("animations")
-	return AnimationFromJSObject(retVal, d.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), d.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class DefaultRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#animations
-func (d *DefaultRenderingPipeline) SetAnimations(animations *Animation) *DefaultRenderingPipeline {
-	d.p.Set("animations", animations.JSObject())
+func (d *DefaultRenderingPipeline) SetAnimations(animations []*Animation) *DefaultRenderingPipeline {
+	d.p.Set("animations", animations)
 	return d
 }
 

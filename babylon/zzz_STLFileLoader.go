@@ -40,7 +40,7 @@ func STLFileLoaderArrayToJSArray(array []*STLFileLoader) []interface{} {
 // ImportMesh calls the ImportMesh method on the STLFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stlfileloader#importmesh
-func (s *STLFileLoader) ImportMesh(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, meshes *AbstractMesh, particleSystems *IParticleSystem, skeletons *Skeleton) bool {
+func (s *STLFileLoader) ImportMesh(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, meshes []*AbstractMesh, particleSystems []*IParticleSystem, skeletons []*Skeleton) bool {
 
 	args := make([]interface{}, 0, 7+0)
 
@@ -48,9 +48,9 @@ func (s *STLFileLoader) ImportMesh(meshesNames interface{}, scene *Scene, data i
 	args = append(args, scene.JSObject())
 	args = append(args, data)
 	args = append(args, rootUrl)
-	args = append(args, meshes.JSObject())
-	args = append(args, particleSystems.JSObject())
-	args = append(args, skeletons.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(meshes))
+	args = append(args, IParticleSystemArrayToJSArray(particleSystems))
+	args = append(args, SkeletonArrayToJSArray(skeletons))
 
 	retVal := s.p.Call("importMesh", args...)
 	return retVal.Bool()

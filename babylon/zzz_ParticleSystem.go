@@ -867,16 +867,20 @@ func (p *ParticleSystem) SetOnDisposeObservable(onDisposeObservable *Observable)
 // Particles returns the Particles property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#particles
-func (p *ParticleSystem) Particles() *Particle {
+func (p *ParticleSystem) Particles() []*Particle {
 	retVal := p.p.Get("particles")
-	return ParticleFromJSObject(retVal, p.ctx)
+	result := []*Particle{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ParticleFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // SetParticles sets the Particles property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#particles
-func (p *ParticleSystem) SetParticles(particles *Particle) *ParticleSystem {
-	p.p.Set("particles", particles.JSObject())
+func (p *ParticleSystem) SetParticles(particles []*Particle) *ParticleSystem {
+	p.p.Set("particles", particles)
 	return p
 }
 

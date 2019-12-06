@@ -82,15 +82,19 @@ func (a *ArcRotateCameraPointersInput) SetAngularSensibilityY(angularSensibility
 // Buttons returns the Buttons property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#buttons
-func (a *ArcRotateCameraPointersInput) Buttons() float64 {
+func (a *ArcRotateCameraPointersInput) Buttons() []float64 {
 	retVal := a.p.Get("buttons")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetButtons sets the Buttons property of class ArcRotateCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerapointersinput#buttons
-func (a *ArcRotateCameraPointersInput) SetButtons(buttons float64) *ArcRotateCameraPointersInput {
+func (a *ArcRotateCameraPointersInput) SetButtons(buttons []float64) *ArcRotateCameraPointersInput {
 	a.p.Set("buttons", buttons)
 	return a
 }

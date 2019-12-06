@@ -232,7 +232,7 @@ func (p *ProceduralTexture) SetFloat(name string, value float64) *ProceduralText
 // SetFloats calls the SetFloats method on the ProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setfloats
-func (p *ProceduralTexture) SetFloats(name string, value float64) *ProceduralTexture {
+func (p *ProceduralTexture) SetFloats(name string, value []float64) *ProceduralTexture {
 
 	args := make([]interface{}, 0, 2+0)
 

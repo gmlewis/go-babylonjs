@@ -106,16 +106,20 @@ func (g *GrassProceduralTexture) UpdateShaderUniforms() {
 // GrassColors returns the GrassColors property of class GrassProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#grasscolors
-func (g *GrassProceduralTexture) GrassColors() *Color3 {
+func (g *GrassProceduralTexture) GrassColors() []*Color3 {
 	retVal := g.p.Get("grassColors")
-	return Color3FromJSObject(retVal, g.ctx)
+	result := []*Color3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Color3FromJSObject(retVal.Index(ri), g.ctx))
+	}
+	return result
 }
 
 // SetGrassColors sets the GrassColors property of class GrassProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#grasscolors
-func (g *GrassProceduralTexture) SetGrassColors(grassColors *Color3) *GrassProceduralTexture {
-	g.p.Set("grassColors", grassColors.JSObject())
+func (g *GrassProceduralTexture) SetGrassColors(grassColors []*Color3) *GrassProceduralTexture {
+	g.p.Set("grassColors", grassColors)
 	return g
 }
 

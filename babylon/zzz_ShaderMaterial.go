@@ -159,10 +159,14 @@ func (s *ShaderMaterial) Dispose(opts *ShaderMaterialDisposeOpts) {
 // GetActiveTextures calls the GetActiveTextures method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getactivetextures
-func (s *ShaderMaterial) GetActiveTextures() *BaseTexture {
+func (s *ShaderMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := s.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, s.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the ShaderMaterial object.
@@ -291,7 +295,7 @@ func (s *ShaderMaterial) Serialize() interface{} {
 // SetArray2 calls the SetArray2 method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setarray2
-func (s *ShaderMaterial) SetArray2(name string, value float64) *ShaderMaterial {
+func (s *ShaderMaterial) SetArray2(name string, value []float64) *ShaderMaterial {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -305,7 +309,7 @@ func (s *ShaderMaterial) SetArray2(name string, value float64) *ShaderMaterial {
 // SetArray3 calls the SetArray3 method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setarray3
-func (s *ShaderMaterial) SetArray3(name string, value float64) *ShaderMaterial {
+func (s *ShaderMaterial) SetArray3(name string, value []float64) *ShaderMaterial {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -319,7 +323,7 @@ func (s *ShaderMaterial) SetArray3(name string, value float64) *ShaderMaterial {
 // SetArray4 calls the SetArray4 method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setarray4
-func (s *ShaderMaterial) SetArray4(name string, value float64) *ShaderMaterial {
+func (s *ShaderMaterial) SetArray4(name string, value []float64) *ShaderMaterial {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -347,12 +351,12 @@ func (s *ShaderMaterial) SetColor3(name string, value *Color3) *ShaderMaterial {
 // SetColor3Array calls the SetColor3Array method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setcolor3array
-func (s *ShaderMaterial) SetColor3Array(name string, value *Color3) *ShaderMaterial {
+func (s *ShaderMaterial) SetColor3Array(name string, value []*Color3) *ShaderMaterial {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+	args = append(args, Color3ArrayToJSArray(value))
 
 	retVal := s.p.Call("setColor3Array", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
@@ -375,12 +379,12 @@ func (s *ShaderMaterial) SetColor4(name string, value *Color4) *ShaderMaterial {
 // SetColor4Array calls the SetColor4Array method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setcolor4array
-func (s *ShaderMaterial) SetColor4Array(name string, value *Color4) *ShaderMaterial {
+func (s *ShaderMaterial) SetColor4Array(name string, value []*Color4) *ShaderMaterial {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+	args = append(args, Color4ArrayToJSArray(value))
 
 	retVal := s.p.Call("setColor4Array", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
@@ -403,7 +407,7 @@ func (s *ShaderMaterial) SetFloat(name string, value float64) *ShaderMaterial {
 // SetFloats calls the SetFloats method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setfloats
-func (s *ShaderMaterial) SetFloats(name string, value float64) *ShaderMaterial {
+func (s *ShaderMaterial) SetFloats(name string, value []float64) *ShaderMaterial {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -431,12 +435,12 @@ func (s *ShaderMaterial) SetInt(name string, value float64) *ShaderMaterial {
 // SetMatrices calls the SetMatrices method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setmatrices
-func (s *ShaderMaterial) SetMatrices(name string, value *Matrix) *ShaderMaterial {
+func (s *ShaderMaterial) SetMatrices(name string, value []*Matrix) *ShaderMaterial {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+	args = append(args, MatrixArrayToJSArray(value))
 
 	retVal := s.p.Call("setMatrices", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
@@ -501,12 +505,12 @@ func (s *ShaderMaterial) SetTexture(name string, texture *Texture) *ShaderMateri
 // SetTextureArray calls the SetTextureArray method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#settexturearray
-func (s *ShaderMaterial) SetTextureArray(name string, textures *Texture) *ShaderMaterial {
+func (s *ShaderMaterial) SetTextureArray(name string, textures []*Texture) *ShaderMaterial {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, textures.JSObject())
+	args = append(args, TextureArrayToJSArray(textures))
 
 	retVal := s.p.Call("setTextureArray", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)

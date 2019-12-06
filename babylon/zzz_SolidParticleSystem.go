@@ -238,25 +238,29 @@ func (s *SolidParticleSystem) GetParticleById(id float64) *SolidParticle {
 // GetParticlesByShapeId calls the GetParticlesByShapeId method on the SolidParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#getparticlesbyshapeid
-func (s *SolidParticleSystem) GetParticlesByShapeId(shapeId float64) *SolidParticle {
+func (s *SolidParticleSystem) GetParticlesByShapeId(shapeId float64) []*SolidParticle {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, shapeId)
 
 	retVal := s.p.Call("getParticlesByShapeId", args...)
-	return SolidParticleFromJSObject(retVal, s.ctx)
+	result := []*SolidParticle{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SolidParticleFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // GetParticlesByShapeIdToRef calls the GetParticlesByShapeIdToRef method on the SolidParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#getparticlesbyshapeidtoref
-func (s *SolidParticleSystem) GetParticlesByShapeIdToRef(shapeId float64, ref *SolidParticle) *SolidParticleSystem {
+func (s *SolidParticleSystem) GetParticlesByShapeIdToRef(shapeId float64, ref []*SolidParticle) *SolidParticleSystem {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, shapeId)
-	args = append(args, ref.JSObject())
+	args = append(args, SolidParticleArrayToJSArray(ref))
 
 	retVal := s.p.Call("getParticlesByShapeIdToRef", args...)
 	return SolidParticleSystemFromJSObject(retVal, s.ctx)
@@ -273,11 +277,11 @@ func (s *SolidParticleSystem) InitParticles() {
 // InsertParticlesFromArray calls the InsertParticlesFromArray method on the SolidParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#insertparticlesfromarray
-func (s *SolidParticleSystem) InsertParticlesFromArray(solidParticleArray *SolidParticle) *SolidParticleSystem {
+func (s *SolidParticleSystem) InsertParticlesFromArray(solidParticleArray []*SolidParticle) *SolidParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, solidParticleArray.JSObject())
+	args = append(args, SolidParticleArrayToJSArray(solidParticleArray))
 
 	retVal := s.p.Call("insertParticlesFromArray", args...)
 	return SolidParticleSystemFromJSObject(retVal, s.ctx)
@@ -333,7 +337,7 @@ func (s *SolidParticleSystem) RefreshVisibleSize() *SolidParticleSystem {
 // RemoveParticles calls the RemoveParticles method on the SolidParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#removeparticles
-func (s *SolidParticleSystem) RemoveParticles(start float64, end float64) *SolidParticle {
+func (s *SolidParticleSystem) RemoveParticles(start float64, end float64) []*SolidParticle {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -341,17 +345,21 @@ func (s *SolidParticleSystem) RemoveParticles(start float64, end float64) *Solid
 	args = append(args, end)
 
 	retVal := s.p.Call("removeParticles", args...)
-	return SolidParticleFromJSObject(retVal, s.ctx)
+	result := []*SolidParticle{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SolidParticleFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetMultiMaterial calls the SetMultiMaterial method on the SolidParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#setmultimaterial
-func (s *SolidParticleSystem) SetMultiMaterial(materials *Material) {
+func (s *SolidParticleSystem) SetMultiMaterial(materials []*Material) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, materials.JSObject())
+	args = append(args, MaterialArrayToJSArray(materials))
 
 	s.p.Call("setMultiMaterial", args...)
 }
@@ -644,16 +652,20 @@ func (s *SolidParticleSystem) SetIsVisibilityBoxLocked(isVisibilityBoxLocked boo
 // Materials returns the Materials property of class SolidParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#materials
-func (s *SolidParticleSystem) Materials() *Material {
+func (s *SolidParticleSystem) Materials() []*Material {
 	retVal := s.p.Get("materials")
-	return MaterialFromJSObject(retVal, s.ctx)
+	result := []*Material{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MaterialFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetMaterials sets the Materials property of class SolidParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#materials
-func (s *SolidParticleSystem) SetMaterials(materials *Material) *SolidParticleSystem {
-	s.p.Set("materials", materials.JSObject())
+func (s *SolidParticleSystem) SetMaterials(materials []*Material) *SolidParticleSystem {
+	s.p.Set("materials", materials)
 	return s
 }
 
@@ -740,9 +752,13 @@ func (s *SolidParticleSystem) SetNbParticles(nbParticles float64) *SolidParticle
 // Particles returns the Particles property of class SolidParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#particles
-func (s *SolidParticleSystem) Particles() *SolidParticle {
+func (s *SolidParticleSystem) Particles() []*SolidParticle {
 	retVal := s.p.Get("particles")
-	return SolidParticleFromJSObject(retVal, s.ctx)
+	result := []*SolidParticle{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SolidParticleFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // PickedParticles returns the PickedParticles property of class SolidParticleSystem.

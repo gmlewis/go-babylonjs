@@ -81,10 +81,14 @@ func (c *Color3) AddToRef(otherColor *Color3, result *Color3) *Color3 {
 // AsArray calls the AsArray method on the Color3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3#asarray
-func (c *Color3) AsArray() float64 {
+func (c *Color3) AsArray() []float64 {
 
 	retVal := c.p.Call("asArray")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // Black calls the Black method on the Color3 object.

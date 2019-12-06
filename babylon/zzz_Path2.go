@@ -119,10 +119,14 @@ func (p *Path2) GetPointAtLengthPosition(normalizedLengthPosition float64) *Vect
 // GetPoints calls the GetPoints method on the Path2 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path2#getpoints
-func (p *Path2) GetPoints() *Vector2 {
+func (p *Path2) GetPoints() []*Vector2 {
 
 	retVal := p.p.Call("getPoints")
-	return Vector2FromJSObject(retVal, p.ctx)
+	result := []*Vector2{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector2FromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // Length calls the Length method on the Path2 object.

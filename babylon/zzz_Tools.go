@@ -234,8 +234,8 @@ func (t *Tools) DecodeBase64(uri string) js.Value {
 
 // ToolsDeepCopyOpts contains optional parameters for Tools.DeepCopy.
 type ToolsDeepCopyOpts struct {
-	DoNotCopyList *string
-	MustCopyList  *string
+	DoNotCopyList []string
+	MustCopyList  []string
 }
 
 // DeepCopy calls the DeepCopy method on the Tools object.
@@ -254,12 +254,12 @@ func (t *Tools) DeepCopy(source interface{}, destination interface{}, opts *Tool
 	if opts.DoNotCopyList == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.DoNotCopyList)
+		args = append(args, opts.DoNotCopyList)
 	}
 	if opts.MustCopyList == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.MustCopyList)
+		args = append(args, opts.MustCopyList)
 	}
 
 	t.p.Call("DeepCopy", args...)
@@ -900,7 +900,7 @@ func (t *Tools) RegisterTopRootEvents(windowElement js.Value, events js.Value) {
 // SetCorsBehavior calls the SetCorsBehavior method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#setcorsbehavior
-func (t *Tools) SetCorsBehavior(url string, element js.Value) {
+func (t *Tools) SetCorsBehavior(url []string, element js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 

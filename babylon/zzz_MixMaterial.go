@@ -104,10 +104,14 @@ func (m *MixMaterial) Dispose(opts *MixMaterialDisposeOpts) {
 // GetActiveTextures calls the GetActiveTextures method on the MixMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getactivetextures
-func (m *MixMaterial) GetActiveTextures() *BaseTexture {
+func (m *MixMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := m.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, m.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the MixMaterial object.
@@ -122,10 +126,14 @@ func (m *MixMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the MixMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getanimatables
-func (m *MixMaterial) GetAnimatables() *IAnimatable {
+func (m *MixMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := m.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, m.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the MixMaterial object.

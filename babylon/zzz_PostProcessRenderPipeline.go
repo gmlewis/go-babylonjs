@@ -84,32 +84,40 @@ func (p *PostProcessRenderPipeline) GetClassName() string {
 // Cameras returns the Cameras property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#cameras
-func (p *PostProcessRenderPipeline) Cameras() *Camera {
+func (p *PostProcessRenderPipeline) Cameras() []*Camera {
 	retVal := p.p.Get("cameras")
-	return CameraFromJSObject(retVal, p.ctx)
+	result := []*Camera{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, CameraFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // SetCameras sets the Cameras property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#cameras
-func (p *PostProcessRenderPipeline) SetCameras(cameras *Camera) *PostProcessRenderPipeline {
-	p.p.Set("cameras", cameras.JSObject())
+func (p *PostProcessRenderPipeline) SetCameras(cameras []*Camera) *PostProcessRenderPipeline {
+	p.p.Set("cameras", cameras)
 	return p
 }
 
 // InspectableCustomProperties returns the InspectableCustomProperties property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#inspectablecustomproperties
-func (p *PostProcessRenderPipeline) InspectableCustomProperties() *IInspectable {
+func (p *PostProcessRenderPipeline) InspectableCustomProperties() []*IInspectable {
 	retVal := p.p.Get("inspectableCustomProperties")
-	return IInspectableFromJSObject(retVal, p.ctx)
+	result := []*IInspectable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IInspectableFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class PostProcessRenderPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline#inspectablecustomproperties
-func (p *PostProcessRenderPipeline) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *PostProcessRenderPipeline {
-	p.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+func (p *PostProcessRenderPipeline) SetInspectableCustomProperties(inspectableCustomProperties []*IInspectable) *PostProcessRenderPipeline {
+	p.p.Set("inspectableCustomProperties", inspectableCustomProperties)
 	return p
 }
 

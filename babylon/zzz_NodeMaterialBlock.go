@@ -113,12 +113,12 @@ func (n *NodeMaterialBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opt
 // Build calls the Build method on the NodeMaterialBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#build
-func (n *NodeMaterialBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+func (n *NodeMaterialBlock) Build(state *NodeMaterialBuildState, activeBlocks []*NodeMaterialBlock) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, state.JSObject())
-	args = append(args, activeBlocks.JSObject())
+	args = append(args, NodeMaterialBlockArrayToJSArray(activeBlocks))
 
 	retVal := n.p.Call("build", args...)
 	return retVal.Bool()
@@ -475,7 +475,7 @@ func (n *NodeMaterialBlock) Serialize() interface{} {
 // UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the NodeMaterialBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#updateuniformsandsamples
-func (n *NodeMaterialBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+func (n *NodeMaterialBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers []string) {
 
 	args := make([]interface{}, 0, 4+0)
 
@@ -522,16 +522,20 @@ func (n *NodeMaterialBlock) SetComments(comments string) *NodeMaterialBlock {
 // Inputs returns the Inputs property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#inputs
-func (n *NodeMaterialBlock) Inputs() *NodeMaterialConnectionPoint {
+func (n *NodeMaterialBlock) Inputs() []*NodeMaterialConnectionPoint {
 	retVal := n.p.Get("inputs")
-	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+	result := []*NodeMaterialConnectionPoint{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, NodeMaterialConnectionPointFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // SetInputs sets the Inputs property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#inputs
-func (n *NodeMaterialBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *NodeMaterialBlock {
-	n.p.Set("inputs", inputs.JSObject())
+func (n *NodeMaterialBlock) SetInputs(inputs []*NodeMaterialConnectionPoint) *NodeMaterialBlock {
+	n.p.Set("inputs", inputs)
 	return n
 }
 
@@ -602,16 +606,20 @@ func (n *NodeMaterialBlock) SetName(name string) *NodeMaterialBlock {
 // Outputs returns the Outputs property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#outputs
-func (n *NodeMaterialBlock) Outputs() *NodeMaterialConnectionPoint {
+func (n *NodeMaterialBlock) Outputs() []*NodeMaterialConnectionPoint {
 	retVal := n.p.Get("outputs")
-	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+	result := []*NodeMaterialConnectionPoint{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, NodeMaterialConnectionPointFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // SetOutputs sets the Outputs property of class NodeMaterialBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#outputs
-func (n *NodeMaterialBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *NodeMaterialBlock {
-	n.p.Set("outputs", outputs.JSObject())
+func (n *NodeMaterialBlock) SetOutputs(outputs []*NodeMaterialConnectionPoint) *NodeMaterialBlock {
+	n.p.Set("outputs", outputs)
 	return n
 }
 

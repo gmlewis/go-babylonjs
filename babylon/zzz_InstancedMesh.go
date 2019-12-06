@@ -408,16 +408,20 @@ func (i *InstancedMesh) SetIsAnInstance(isAnInstance bool) *InstancedMesh {
 // LightSources returns the LightSources property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#lightsources
-func (i *InstancedMesh) LightSources() *Light {
+func (i *InstancedMesh) LightSources() []*Light {
 	retVal := i.p.Get("lightSources")
-	return LightFromJSObject(retVal, i.ctx)
+	result := []*Light{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, LightFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetLightSources sets the LightSources property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#lightsources
-func (i *InstancedMesh) SetLightSources(lightSources *Light) *InstancedMesh {
-	i.p.Set("lightSources", lightSources.JSObject())
+func (i *InstancedMesh) SetLightSources(lightSources []*Light) *InstancedMesh {
+	i.p.Set("lightSources", lightSources)
 	return i
 }
 
@@ -520,15 +524,19 @@ func (i *InstancedMesh) SetVisibility(visibility float64) *InstancedMesh {
 // _positions returns the _positions property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#_positions
-func (i *InstancedMesh) _positions() *Vector3 {
+func (i *InstancedMesh) _positions() []*Vector3 {
 	retVal := i.p.Get("_positions")
-	return Vector3FromJSObject(retVal, i.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // Set_positions sets the _positions property of class InstancedMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh#_positions
-func (i *InstancedMesh) Set_positions(_positions *Vector3) *InstancedMesh {
-	i.p.Set("_positions", _positions.JSObject())
+func (i *InstancedMesh) Set_positions(_positions []*Vector3) *InstancedMesh {
+	i.p.Set("_positions", _positions)
 	return i
 }

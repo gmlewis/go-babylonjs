@@ -612,11 +612,13 @@ type Signature struct {
 
 	GoParamsName     []string
 	GoParamsType     []string
-	GoOptsName       []string
-	GoOptsType       []string
 	NeedsArrayHelper []string
 	JSParams         []string
-	JSOpts           []string
+
+	GoOptsName           []string
+	GoOptsType           []string
+	OptsNeedsArrayHelper []string
+	JSOpts               []string
 }
 
 type processOverrider func(className string, s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string)
@@ -816,6 +818,25 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 				if strings.Contains(m[2], "&lt;") {
 					lastWasLessThan = true
 				}
+				if m[2] == "[]" &&
+					len(types) > 0 &&
+					!unhandledType[types[len(types)-1]] {
+					logf("ADDING ARRAY...")
+					switch t := types[len(types)-1]; t {
+					case "any", "object", "js.Value", "[]js.Value", "function": // ignore
+					case "String":
+						types[len(types)-1] = "[]string"
+					case "string", "float64", "int", "bool",
+						"[]string", "[]float64", "[]int", "[]bool":
+						types[len(types)-1] = "[]" + t
+					default:
+						if strings.HasPrefix(t, "[]") {
+							types[len(types)-1] = "[]" + t
+						} else {
+							types[len(types)-1] = "[]*" + t
+						}
+					}
+				}
 			}
 		case `span class="tsd-signature-type"`:
 			addType()
@@ -889,6 +910,17 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 					paramType = "*" + paramType
 				}
 			}
+
+			if strings.HasPrefix(paramType, "[]*") {
+				s.OptsNeedsArrayHelper = append(s.OptsNeedsArrayHelper, fmt.Sprintf("%vArrayToJSArray(opts.%v)", paramType[3:], name))
+				logf("paramType=%v, OptsNeedsArrayHelper=%v", paramType, s.OptsNeedsArrayHelper[len(s.OptsNeedsArrayHelper)-1])
+			} else if strings.HasPrefix(paramType, "[][]*") {
+				s.OptsNeedsArrayHelper = append(s.OptsNeedsArrayHelper, fmt.Sprintf("%vArray2DToJSArray(opts.%v)", paramType[5:], name))
+				logf("paramType=%v, OptsNeedsArrayHelper=%v", paramType, s.OptsNeedsArrayHelper[len(s.OptsNeedsArrayHelper)-1])
+			} else {
+				s.OptsNeedsArrayHelper = append(s.OptsNeedsArrayHelper, "")
+			}
+
 			s.GoOptsName = append(s.GoOptsName, name)
 			s.GoOptsType = append(s.GoOptsType, paramType)
 			s.HasOpts = true

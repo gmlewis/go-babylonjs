@@ -247,16 +247,20 @@ func (s *SceneOptimizer) SetOnSuccessObservable(onSuccessObservable *Observable)
 // Optimizations returns the Optimizations property of class SceneOptimizer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#optimizations
-func (s *SceneOptimizer) Optimizations() *SceneOptimization {
+func (s *SceneOptimizer) Optimizations() []*SceneOptimization {
 	retVal := s.p.Get("optimizations")
-	return SceneOptimizationFromJSObject(retVal, s.ctx)
+	result := []*SceneOptimization{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SceneOptimizationFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetOptimizations sets the Optimizations property of class SceneOptimizer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#optimizations
-func (s *SceneOptimizer) SetOptimizations(optimizations *SceneOptimization) *SceneOptimizer {
-	s.p.Set("optimizations", optimizations.JSObject())
+func (s *SceneOptimizer) SetOptimizations(optimizations []*SceneOptimization) *SceneOptimizer {
+	s.p.Set("optimizations", optimizations)
 	return s
 }
 

@@ -42,7 +42,7 @@ func StandardRenderingPipelineArrayToJSArray(array []*StandardRenderingPipeline)
 // NewStandardRenderingPipelineOpts contains optional parameters for NewStandardRenderingPipeline.
 type NewStandardRenderingPipelineOpts struct {
 	OriginalPostProcess *PostProcess
-	Cameras             *Camera
+	Cameras             []*Camera
 }
 
 // NewStandardRenderingPipeline returns a new StandardRenderingPipeline object.
@@ -67,7 +67,7 @@ func (ba *Babylon) NewStandardRenderingPipeline(name string, scene *Scene, ratio
 	if opts.Cameras == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Cameras.JSObject())
+		args = append(args, CameraArrayToJSArray(opts.Cameras))
 	}
 
 	p := ba.ctx.Get("StandardRenderingPipeline").New(args...)
@@ -109,48 +109,60 @@ func (s *StandardRenderingPipeline) Serialize() interface{} {
 // Animations returns the Animations property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#animations
-func (s *StandardRenderingPipeline) Animations() *Animation {
+func (s *StandardRenderingPipeline) Animations() []*Animation {
 	retVal := s.p.Get("animations")
-	return AnimationFromJSObject(retVal, s.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#animations
-func (s *StandardRenderingPipeline) SetAnimations(animations *Animation) *StandardRenderingPipeline {
-	s.p.Set("animations", animations.JSObject())
+func (s *StandardRenderingPipeline) SetAnimations(animations []*Animation) *StandardRenderingPipeline {
+	s.p.Set("animations", animations)
 	return s
 }
 
 // BlurHPostProcesses returns the BlurHPostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#blurhpostprocesses
-func (s *StandardRenderingPipeline) BlurHPostProcesses() *PostProcess {
+func (s *StandardRenderingPipeline) BlurHPostProcesses() []*PostProcess {
 	retVal := s.p.Get("blurHPostProcesses")
-	return PostProcessFromJSObject(retVal, s.ctx)
+	result := []*PostProcess{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PostProcessFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetBlurHPostProcesses sets the BlurHPostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#blurhpostprocesses
-func (s *StandardRenderingPipeline) SetBlurHPostProcesses(blurHPostProcesses *PostProcess) *StandardRenderingPipeline {
-	s.p.Set("blurHPostProcesses", blurHPostProcesses.JSObject())
+func (s *StandardRenderingPipeline) SetBlurHPostProcesses(blurHPostProcesses []*PostProcess) *StandardRenderingPipeline {
+	s.p.Set("blurHPostProcesses", blurHPostProcesses)
 	return s
 }
 
 // BlurVPostProcesses returns the BlurVPostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#blurvpostprocesses
-func (s *StandardRenderingPipeline) BlurVPostProcesses() *PostProcess {
+func (s *StandardRenderingPipeline) BlurVPostProcesses() []*PostProcess {
 	retVal := s.p.Get("blurVPostProcesses")
-	return PostProcessFromJSObject(retVal, s.ctx)
+	result := []*PostProcess{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PostProcessFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetBlurVPostProcesses sets the BlurVPostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#blurvpostprocesses
-func (s *StandardRenderingPipeline) SetBlurVPostProcesses(blurVPostProcesses *PostProcess) *StandardRenderingPipeline {
-	s.p.Set("blurVPostProcesses", blurVPostProcesses.JSObject())
+func (s *StandardRenderingPipeline) SetBlurVPostProcesses(blurVPostProcesses []*PostProcess) *StandardRenderingPipeline {
+	s.p.Set("blurVPostProcesses", blurVPostProcesses)
 	return s
 }
 
@@ -621,16 +633,20 @@ func (s *StandardRenderingPipeline) SetLensTexture(lensTexture *Texture) *Standa
 // LuminanceDownSamplePostProcesses returns the LuminanceDownSamplePostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#luminancedownsamplepostprocesses
-func (s *StandardRenderingPipeline) LuminanceDownSamplePostProcesses() *PostProcess {
+func (s *StandardRenderingPipeline) LuminanceDownSamplePostProcesses() []*PostProcess {
 	retVal := s.p.Get("luminanceDownSamplePostProcesses")
-	return PostProcessFromJSObject(retVal, s.ctx)
+	result := []*PostProcess{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PostProcessFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetLuminanceDownSamplePostProcesses sets the LuminanceDownSamplePostProcesses property of class StandardRenderingPipeline.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#luminancedownsamplepostprocesses
-func (s *StandardRenderingPipeline) SetLuminanceDownSamplePostProcesses(luminanceDownSamplePostProcesses *PostProcess) *StandardRenderingPipeline {
-	s.p.Set("luminanceDownSamplePostProcesses", luminanceDownSamplePostProcesses.JSObject())
+func (s *StandardRenderingPipeline) SetLuminanceDownSamplePostProcesses(luminanceDownSamplePostProcesses []*PostProcess) *StandardRenderingPipeline {
+	s.p.Set("luminanceDownSamplePostProcesses", luminanceDownSamplePostProcesses)
 	return s
 }
 

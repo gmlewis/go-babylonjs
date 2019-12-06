@@ -40,7 +40,7 @@ func UniformBufferArrayToJSArray(array []*UniformBuffer) []interface{} {
 
 // NewUniformBufferOpts contains optional parameters for NewUniformBuffer.
 type NewUniformBufferOpts struct {
-	Data    *float64
+	Data    []float64
 	Dynamic *bool
 }
 
@@ -59,7 +59,7 @@ func (ba *Babylon) NewUniformBuffer(engine *Engine, opts *NewUniformBufferOpts) 
 	if opts.Data == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Data)
+		args = append(args, opts.Data)
 	}
 	if opts.Dynamic == nil {
 		args = append(args, js.Undefined())
@@ -167,7 +167,7 @@ func (u *UniformBuffer) AddMatrix3x3(name string) {
 // AddUniform calls the AddUniform method on the UniformBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#adduniform
-func (u *UniformBuffer) AddUniform(name string, size float64) {
+func (u *UniformBuffer) AddUniform(name string, size []float64) {
 
 	args := make([]interface{}, 0, 2+0)
 

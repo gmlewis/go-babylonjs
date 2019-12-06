@@ -367,16 +367,20 @@ func (l *Light) SetExcludeWithLayerMask(excludeWithLayerMask float64) *Light {
 // ExcludedMeshes returns the ExcludedMeshes property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#excludedmeshes
-func (l *Light) ExcludedMeshes() *AbstractMesh {
+func (l *Light) ExcludedMeshes() []*AbstractMesh {
 	retVal := l.p.Get("excludedMeshes")
-	return AbstractMeshFromJSObject(retVal, l.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), l.ctx))
+	}
+	return result
 }
 
 // SetExcludedMeshes sets the ExcludedMeshes property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#excludedmeshes
-func (l *Light) SetExcludedMeshes(excludedMeshes *AbstractMesh) *Light {
-	l.p.Set("excludedMeshes", excludedMeshes.JSObject())
+func (l *Light) SetExcludedMeshes(excludedMeshes []*AbstractMesh) *Light {
+	l.p.Set("excludedMeshes", excludedMeshes)
 	return l
 }
 
@@ -559,16 +563,20 @@ func (l *Light) SetIncludeOnlyWithLayerMask(includeOnlyWithLayerMask float64) *L
 // IncludedOnlyMeshes returns the IncludedOnlyMeshes property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#includedonlymeshes
-func (l *Light) IncludedOnlyMeshes() *AbstractMesh {
+func (l *Light) IncludedOnlyMeshes() []*AbstractMesh {
 	retVal := l.p.Get("includedOnlyMeshes")
-	return AbstractMeshFromJSObject(retVal, l.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), l.ctx))
+	}
+	return result
 }
 
 // SetIncludedOnlyMeshes sets the IncludedOnlyMeshes property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#includedonlymeshes
-func (l *Light) SetIncludedOnlyMeshes(includedOnlyMeshes *AbstractMesh) *Light {
-	l.p.Set("includedOnlyMeshes", includedOnlyMeshes.JSObject())
+func (l *Light) SetIncludedOnlyMeshes(includedOnlyMeshes []*AbstractMesh) *Light {
+	l.p.Set("includedOnlyMeshes", includedOnlyMeshes)
 	return l
 }
 

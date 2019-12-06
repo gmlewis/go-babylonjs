@@ -142,16 +142,20 @@ func (g *GeometryBufferRenderer) SetEnableVelocity(enableVelocity bool) *Geometr
 // ExcludedSkinnedMeshesFromVelocity returns the ExcludedSkinnedMeshesFromVelocity property of class GeometryBufferRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#excludedskinnedmeshesfromvelocity
-func (g *GeometryBufferRenderer) ExcludedSkinnedMeshesFromVelocity() *AbstractMesh {
+func (g *GeometryBufferRenderer) ExcludedSkinnedMeshesFromVelocity() []*AbstractMesh {
 	retVal := g.p.Get("excludedSkinnedMeshesFromVelocity")
-	return AbstractMeshFromJSObject(retVal, g.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), g.ctx))
+	}
+	return result
 }
 
 // SetExcludedSkinnedMeshesFromVelocity sets the ExcludedSkinnedMeshesFromVelocity property of class GeometryBufferRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#excludedskinnedmeshesfromvelocity
-func (g *GeometryBufferRenderer) SetExcludedSkinnedMeshesFromVelocity(excludedSkinnedMeshesFromVelocity *AbstractMesh) *GeometryBufferRenderer {
-	g.p.Set("excludedSkinnedMeshesFromVelocity", excludedSkinnedMeshesFromVelocity.JSObject())
+func (g *GeometryBufferRenderer) SetExcludedSkinnedMeshesFromVelocity(excludedSkinnedMeshesFromVelocity []*AbstractMesh) *GeometryBufferRenderer {
+	g.p.Set("excludedSkinnedMeshesFromVelocity", excludedSkinnedMeshesFromVelocity)
 	return g
 }
 
@@ -206,16 +210,20 @@ func (g *GeometryBufferRenderer) SetRatio(ratio float64) *GeometryBufferRenderer
 // RenderList returns the RenderList property of class GeometryBufferRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#renderlist
-func (g *GeometryBufferRenderer) RenderList() *Mesh {
+func (g *GeometryBufferRenderer) RenderList() []*Mesh {
 	retVal := g.p.Get("renderList")
-	return MeshFromJSObject(retVal, g.ctx)
+	result := []*Mesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MeshFromJSObject(retVal.Index(ri), g.ctx))
+	}
+	return result
 }
 
 // SetRenderList sets the RenderList property of class GeometryBufferRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#renderlist
-func (g *GeometryBufferRenderer) SetRenderList(renderList *Mesh) *GeometryBufferRenderer {
-	g.p.Set("renderList", renderList.JSObject())
+func (g *GeometryBufferRenderer) SetRenderList(renderList []*Mesh) *GeometryBufferRenderer {
+	g.p.Set("renderList", renderList)
 	return g
 }
 

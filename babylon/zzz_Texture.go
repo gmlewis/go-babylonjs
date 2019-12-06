@@ -485,16 +485,20 @@ func (t *Texture) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *Texture {
 // InspectableCustomProperties returns the InspectableCustomProperties property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#inspectablecustomproperties
-func (t *Texture) InspectableCustomProperties() *IInspectable {
+func (t *Texture) InspectableCustomProperties() []*IInspectable {
 	retVal := t.p.Get("inspectableCustomProperties")
-	return IInspectableFromJSObject(retVal, t.ctx)
+	result := []*IInspectable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IInspectableFromJSObject(retVal.Index(ri), t.ctx))
+	}
+	return result
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class Texture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#inspectablecustomproperties
-func (t *Texture) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Texture {
-	t.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+func (t *Texture) SetInspectableCustomProperties(inspectableCustomProperties []*IInspectable) *Texture {
+	t.p.Set("inspectableCustomProperties", inspectableCustomProperties)
 	return t
 }
 

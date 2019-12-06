@@ -240,16 +240,20 @@ func (r *ReflectionProbe) SetRefreshRate(refreshRate float64) *ReflectionProbe {
 // RenderList returns the RenderList property of class ReflectionProbe.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#renderlist
-func (r *ReflectionProbe) RenderList() *AbstractMesh {
+func (r *ReflectionProbe) RenderList() []*AbstractMesh {
 	retVal := r.p.Get("renderList")
-	return AbstractMeshFromJSObject(retVal, r.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), r.ctx))
+	}
+	return result
 }
 
 // SetRenderList sets the RenderList property of class ReflectionProbe.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#renderlist
-func (r *ReflectionProbe) SetRenderList(renderList *AbstractMesh) *ReflectionProbe {
-	r.p.Set("renderList", renderList.JSObject())
+func (r *ReflectionProbe) SetRenderList(renderList []*AbstractMesh) *ReflectionProbe {
+	r.p.Set("renderList", renderList)
 	return r
 }
 

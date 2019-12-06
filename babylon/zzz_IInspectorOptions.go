@@ -87,16 +87,20 @@ func (i *IInspectorOptions) SetEnablePopup(enablePopup bool) *IInspectorOptions 
 // ExplorerExtensibility returns the ExplorerExtensibility property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#explorerextensibility
-func (i *IInspectorOptions) ExplorerExtensibility() *IExplorerExtensibilityGroup {
+func (i *IInspectorOptions) ExplorerExtensibility() []*IExplorerExtensibilityGroup {
 	retVal := i.p.Get("explorerExtensibility")
-	return IExplorerExtensibilityGroupFromJSObject(retVal, i.ctx)
+	result := []*IExplorerExtensibilityGroup{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IExplorerExtensibilityGroupFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetExplorerExtensibility sets the ExplorerExtensibility property of class IInspectorOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinspectoroptions#explorerextensibility
-func (i *IInspectorOptions) SetExplorerExtensibility(explorerExtensibility *IExplorerExtensibilityGroup) *IInspectorOptions {
-	i.p.Set("explorerExtensibility", explorerExtensibility.JSObject())
+func (i *IInspectorOptions) SetExplorerExtensibility(explorerExtensibility []*IExplorerExtensibilityGroup) *IInspectorOptions {
+	i.p.Set("explorerExtensibility", explorerExtensibility)
 	return i
 }
 

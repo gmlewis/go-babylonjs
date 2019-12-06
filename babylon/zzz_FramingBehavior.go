@@ -180,14 +180,14 @@ type FramingBehaviorZoomOnMeshesHierarchyOpts struct {
 // ZoomOnMeshesHierarchy calls the ZoomOnMeshesHierarchy method on the FramingBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.framingbehavior#zoomonmesheshierarchy
-func (f *FramingBehavior) ZoomOnMeshesHierarchy(meshes *AbstractMesh, opts *FramingBehaviorZoomOnMeshesHierarchyOpts) {
+func (f *FramingBehavior) ZoomOnMeshesHierarchy(meshes []*AbstractMesh, opts *FramingBehaviorZoomOnMeshesHierarchyOpts) {
 	if opts == nil {
 		opts = &FramingBehaviorZoomOnMeshesHierarchyOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, meshes.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(meshes))
 
 	if opts.FocusOnOriginXZ == nil {
 		args = append(args, js.Undefined())

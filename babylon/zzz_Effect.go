@@ -38,7 +38,7 @@ func EffectArrayToJSArray(array []*Effect) []interface{} {
 
 // NewEffectOpts contains optional parameters for NewEffect.
 type NewEffectOpts struct {
-	Samplers        *string
+	Samplers        []string
 	Engine          *ThinEngine
 	Defines         *string
 	Fallbacks       *IEffectFallbacks
@@ -50,7 +50,7 @@ type NewEffectOpts struct {
 // NewEffect returns a new Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect
-func (ba *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions string, uniformsNamesOrEngine string, opts *NewEffectOpts) *Effect {
+func (ba *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions []string, uniformsNamesOrEngine []string, opts *NewEffectOpts) *Effect {
 	if opts == nil {
 		opts = &NewEffectOpts{}
 	}
@@ -64,7 +64,7 @@ func (ba *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions stri
 	if opts.Samplers == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Samplers)
+		args = append(args, opts.Samplers)
 	}
 	if opts.Engine == nil {
 		args = append(args, js.Undefined())
@@ -194,10 +194,14 @@ func (e *Effect) GetAttributesCount() float64 {
 // GetAttributesNames calls the GetAttributesNames method on the Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#getattributesnames
-func (e *Effect) GetAttributesNames() string {
+func (e *Effect) GetAttributesNames() []string {
 
 	retVal := e.p.Call("getAttributesNames")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // GetCompilationError calls the GetCompilationError method on the Effect object.
@@ -230,10 +234,14 @@ func (e *Effect) GetPipelineContext() *IPipelineContext {
 // GetSamplers calls the GetSamplers method on the Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#getsamplers
-func (e *Effect) GetSamplers() string {
+func (e *Effect) GetSamplers() []string {
 
 	retVal := e.p.Call("getSamplers")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // GetUniform calls the GetUniform method on the Effect object.
@@ -314,7 +322,7 @@ func (e *Effect) ResetCache() {
 // SetArray calls the SetArray method on the Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#setarray
-func (e *Effect) SetArray(uniformName string, array float64) *Effect {
+func (e *Effect) SetArray(uniformName string, array []float64) *Effect {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -328,7 +336,7 @@ func (e *Effect) SetArray(uniformName string, array float64) *Effect {
 // SetArray2 calls the SetArray2 method on the Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#setarray2
-func (e *Effect) SetArray2(uniformName string, array float64) *Effect {
+func (e *Effect) SetArray2(uniformName string, array []float64) *Effect {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -342,7 +350,7 @@ func (e *Effect) SetArray2(uniformName string, array float64) *Effect {
 // SetArray3 calls the SetArray3 method on the Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#setarray3
-func (e *Effect) SetArray3(uniformName string, array float64) *Effect {
+func (e *Effect) SetArray3(uniformName string, array []float64) *Effect {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -356,7 +364,7 @@ func (e *Effect) SetArray3(uniformName string, array float64) *Effect {
 // SetArray4 calls the SetArray4 method on the Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#setarray4
-func (e *Effect) SetArray4(uniformName string, array float64) *Effect {
+func (e *Effect) SetArray4(uniformName string, array []float64) *Effect {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -697,12 +705,12 @@ func (e *Effect) SetTexture(channel string, texture *BaseTexture) {
 // SetTextureArray calls the SetTextureArray method on the Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#settexturearray
-func (e *Effect) SetTextureArray(channel string, textures *BaseTexture) {
+func (e *Effect) SetTextureArray(channel string, textures []*BaseTexture) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, channel)
-	args = append(args, textures.JSObject())
+	args = append(args, BaseTextureArrayToJSArray(textures))
 
 	e.p.Call("setTextureArray", args...)
 }

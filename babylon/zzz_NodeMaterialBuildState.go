@@ -51,15 +51,19 @@ func (n *NodeMaterialBuildState) Finalize(state *NodeMaterialBuildState) {
 // Attributes returns the Attributes property of class NodeMaterialBuildState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#attributes
-func (n *NodeMaterialBuildState) Attributes() string {
+func (n *NodeMaterialBuildState) Attributes() []string {
 	retVal := n.p.Get("attributes")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetAttributes sets the Attributes property of class NodeMaterialBuildState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#attributes
-func (n *NodeMaterialBuildState) SetAttributes(attributes string) *NodeMaterialBuildState {
+func (n *NodeMaterialBuildState) SetAttributes(attributes []string) *NodeMaterialBuildState {
 	n.p.Set("attributes", attributes)
 	return n
 }
@@ -83,15 +87,19 @@ func (n *NodeMaterialBuildState) SetCompilationString(compilationString string) 
 // Constants returns the Constants property of class NodeMaterialBuildState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#constants
-func (n *NodeMaterialBuildState) Constants() string {
+func (n *NodeMaterialBuildState) Constants() []string {
 	retVal := n.p.Get("constants")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetConstants sets the Constants property of class NodeMaterialBuildState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#constants
-func (n *NodeMaterialBuildState) SetConstants(constants string) *NodeMaterialBuildState {
+func (n *NodeMaterialBuildState) SetConstants(constants []string) *NodeMaterialBuildState {
 	n.p.Set("constants", constants)
 	return n
 }
@@ -147,15 +155,19 @@ func (n *NodeMaterialBuildState) SetFunctions(functions js.Value) *NodeMaterialB
 // Samplers returns the Samplers property of class NodeMaterialBuildState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#samplers
-func (n *NodeMaterialBuildState) Samplers() string {
+func (n *NodeMaterialBuildState) Samplers() []string {
 	retVal := n.p.Get("samplers")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetSamplers sets the Samplers property of class NodeMaterialBuildState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#samplers
-func (n *NodeMaterialBuildState) SetSamplers(samplers string) *NodeMaterialBuildState {
+func (n *NodeMaterialBuildState) SetSamplers(samplers []string) *NodeMaterialBuildState {
 	n.p.Set("samplers", samplers)
 	return n
 }
@@ -211,15 +223,19 @@ func (n *NodeMaterialBuildState) SetTarget(target js.Value) *NodeMaterialBuildSt
 // Uniforms returns the Uniforms property of class NodeMaterialBuildState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#uniforms
-func (n *NodeMaterialBuildState) Uniforms() string {
+func (n *NodeMaterialBuildState) Uniforms() []string {
 	retVal := n.p.Get("uniforms")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetUniforms sets the Uniforms property of class NodeMaterialBuildState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#uniforms
-func (n *NodeMaterialBuildState) SetUniforms(uniforms string) *NodeMaterialBuildState {
+func (n *NodeMaterialBuildState) SetUniforms(uniforms []string) *NodeMaterialBuildState {
 	n.p.Set("uniforms", uniforms)
 	return n
 }

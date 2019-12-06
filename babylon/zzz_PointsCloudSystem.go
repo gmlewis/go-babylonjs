@@ -505,9 +505,13 @@ func (p *PointsCloudSystem) SetNbParticles(nbParticles float64) *PointsCloudSyst
 // Particles returns the Particles property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#particles
-func (p *PointsCloudSystem) Particles() *CloudPoint {
+func (p *PointsCloudSystem) Particles() []*CloudPoint {
 	retVal := p.p.Get("particles")
-	return CloudPointFromJSObject(retVal, p.ctx)
+	result := []*CloudPoint{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, CloudPointFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // Vars returns the Vars property of class PointsCloudSystem.

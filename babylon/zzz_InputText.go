@@ -17,9 +17,9 @@ type InputText struct {
 func (i *InputText) JSObject() js.Value { return i.p }
 
 // InputText returns a InputText JavaScript class.
-func (ba *Babylon) InputText() *InputText {
-	p := ba.ctx.Get("InputText")
-	return InputTextFromJSObject(p, ba.ctx)
+func (gui *GUI) InputText() *InputText {
+	p := gui.ctx.Get("InputText")
+	return InputTextFromJSObject(p, gui.ctx)
 }
 
 // InputTextFromJSObject returns a wrapped InputText JavaScript class.
@@ -78,10 +78,14 @@ func (i *InputText) Dispose() {
 // KeepsFocusWith calls the KeepsFocusWith method on the InputText object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputtext#keepsfocuswith
-func (i *InputText) KeepsFocusWith() *Control {
+func (i *InputText) KeepsFocusWith() []*Control {
 
 	retVal := i.p.Call("keepsFocusWith")
-	return ControlFromJSObject(retVal, i.ctx)
+	result := []*Control{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ControlFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // ProcessKeyboard calls the ProcessKeyboard method on the InputText object.

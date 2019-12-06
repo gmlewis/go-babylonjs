@@ -17,9 +17,9 @@ type AdvancedDynamicTextureInstrumentation struct {
 func (a *AdvancedDynamicTextureInstrumentation) JSObject() js.Value { return a.p }
 
 // AdvancedDynamicTextureInstrumentation returns a AdvancedDynamicTextureInstrumentation JavaScript class.
-func (ba *Babylon) AdvancedDynamicTextureInstrumentation() *AdvancedDynamicTextureInstrumentation {
-	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation")
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
+func (gui *GUI) AdvancedDynamicTextureInstrumentation() *AdvancedDynamicTextureInstrumentation {
+	p := gui.ctx.Get("AdvancedDynamicTextureInstrumentation")
+	return AdvancedDynamicTextureInstrumentationFromJSObject(p, gui.ctx)
 }
 
 // AdvancedDynamicTextureInstrumentationFromJSObject returns a wrapped AdvancedDynamicTextureInstrumentation JavaScript class.

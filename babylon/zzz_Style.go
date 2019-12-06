@@ -18,9 +18,9 @@ type Style struct {
 func (s *Style) JSObject() js.Value { return s.p }
 
 // Style returns a Style JavaScript class.
-func (ba *Babylon) Style() *Style {
-	p := ba.ctx.Get("Style")
-	return StyleFromJSObject(p, ba.ctx)
+func (gui *GUI) Style() *Style {
+	p := gui.ctx.Get("Style")
+	return StyleFromJSObject(p, gui.ctx)
 }
 
 // StyleFromJSObject returns a wrapped Style JavaScript class.

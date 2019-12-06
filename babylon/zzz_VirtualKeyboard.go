@@ -17,9 +17,9 @@ type VirtualKeyboard struct {
 func (v *VirtualKeyboard) JSObject() js.Value { return v.p }
 
 // VirtualKeyboard returns a VirtualKeyboard JavaScript class.
-func (ba *Babylon) VirtualKeyboard() *VirtualKeyboard {
-	p := ba.ctx.Get("VirtualKeyboard")
-	return VirtualKeyboardFromJSObject(p, ba.ctx)
+func (gui *GUI) VirtualKeyboard() *VirtualKeyboard {
+	p := gui.ctx.Get("VirtualKeyboard")
+	return VirtualKeyboardFromJSObject(p, gui.ctx)
 }
 
 // VirtualKeyboardFromJSObject returns a wrapped VirtualKeyboard JavaScript class.

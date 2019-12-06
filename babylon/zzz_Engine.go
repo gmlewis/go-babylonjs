@@ -159,7 +159,7 @@ type EngineCreateEffectForParticlesOpts struct {
 // CreateEffectForParticles calls the CreateEffectForParticles method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createeffectforparticles
-func (e *Engine) CreateEffectForParticles(fragmentName string, uniformsNames string, samplers string, defines string, opts *EngineCreateEffectForParticlesOpts) *Effect {
+func (e *Engine) CreateEffectForParticles(fragmentName string, uniformsNames []string, samplers []string, defines string, opts *EngineCreateEffectForParticlesOpts) *Effect {
 	if opts == nil {
 		opts = &EngineCreateEffectForParticlesOpts{}
 	}
@@ -337,7 +337,7 @@ func (e *Engine) CreateRawTexture3D(data js.Value, width float64, height float64
 // EngineCreateShaderProgramOpts contains optional parameters for Engine.CreateShaderProgram.
 type EngineCreateShaderProgramOpts struct {
 	Context                   js.Value
-	TransformFeedbackVaryings *string
+	TransformFeedbackVaryings []string
 }
 
 // CreateShaderProgram calls the CreateShaderProgram method on the Engine object.
@@ -359,7 +359,7 @@ func (e *Engine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCo
 	if opts.TransformFeedbackVaryings == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.TransformFeedbackVaryings)
+		args = append(args, opts.TransformFeedbackVaryings)
 	}
 
 	retVal := e.p.Call("createShaderProgram", args...)
@@ -1402,7 +1402,7 @@ func (e *Engine) SetTextureFromPostProcessOutput(channel float64, postProcess *P
 // SetTranformFeedbackVaryings calls the SetTranformFeedbackVaryings method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#settranformfeedbackvaryings
-func (e *Engine) SetTranformFeedbackVaryings(program js.Value, value string) {
+func (e *Engine) SetTranformFeedbackVaryings(program js.Value, value []string) {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -2193,16 +2193,20 @@ func (e *Engine) SetInputElement(inputElement js.Value) *Engine {
 // Instances returns the Instances property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#instances
-func (e *Engine) Instances() *Engine {
+func (e *Engine) Instances() []*Engine {
 	retVal := e.p.Get("Instances")
-	return EngineFromJSObject(retVal, e.ctx)
+	result := []*Engine{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, EngineFromJSObject(retVal.Index(ri), e.ctx))
+	}
+	return result
 }
 
 // SetInstances sets the Instances property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#instances
-func (e *Engine) SetInstances(Instances *Engine) *Engine {
-	e.p.Set("Instances", Instances.JSObject())
+func (e *Engine) SetInstances(Instances []*Engine) *Engine {
+	e.p.Set("Instances", Instances)
 	return e
 }
 
@@ -2641,16 +2645,20 @@ func (e *Engine) SetPerformanceMonitor(performanceMonitor *PerformanceMonitor) *
 // PostProcesses returns the PostProcesses property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#postprocesses
-func (e *Engine) PostProcesses() *PostProcess {
+func (e *Engine) PostProcesses() []*PostProcess {
 	retVal := e.p.Get("postProcesses")
-	return PostProcessFromJSObject(retVal, e.ctx)
+	result := []*PostProcess{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PostProcessFromJSObject(retVal.Index(ri), e.ctx))
+	}
+	return result
 }
 
 // SetPostProcesses sets the PostProcesses property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#postprocesses
-func (e *Engine) SetPostProcesses(postProcesses *PostProcess) *Engine {
-	e.p.Set("postProcesses", postProcesses.JSObject())
+func (e *Engine) SetPostProcesses(postProcesses []*PostProcess) *Engine {
+	e.p.Set("postProcesses", postProcesses)
 	return e
 }
 
@@ -2721,16 +2729,20 @@ func (e *Engine) SetSCALEMODE_NEAREST(SCALEMODE_NEAREST float64) *Engine {
 // Scenes returns the Scenes property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#scenes
-func (e *Engine) Scenes() *Scene {
+func (e *Engine) Scenes() []*Scene {
 	retVal := e.p.Get("scenes")
-	return SceneFromJSObject(retVal, e.ctx)
+	result := []*Scene{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SceneFromJSObject(retVal.Index(ri), e.ctx))
+	}
+	return result
 }
 
 // SetScenes sets the Scenes property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#scenes
-func (e *Engine) SetScenes(scenes *Scene) *Engine {
-	e.p.Set("scenes", scenes.JSObject())
+func (e *Engine) SetScenes(scenes []*Scene) *Engine {
+	e.p.Set("scenes", scenes)
 	return e
 }
 
@@ -3681,16 +3693,20 @@ func (e *Engine) SetVersion(Version string) *Engine {
 // Views returns the Views property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#views
-func (e *Engine) Views() *EngineView {
+func (e *Engine) Views() []*EngineView {
 	retVal := e.p.Get("views")
-	return EngineViewFromJSObject(retVal, e.ctx)
+	result := []*EngineView{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, EngineViewFromJSObject(retVal.Index(ri), e.ctx))
+	}
+	return result
 }
 
 // SetViews sets the Views property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#views
-func (e *Engine) SetViews(views *EngineView) *Engine {
-	e.p.Set("views", views.JSObject())
+func (e *Engine) SetViews(views []*EngineView) *Engine {
+	e.p.Set("views", views)
 	return e
 }
 

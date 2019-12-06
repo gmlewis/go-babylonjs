@@ -219,16 +219,20 @@ func (v *VolumetricLightScatteringPostProcess) SetDensity(density float64) *Volu
 // ExcludedMeshes returns the ExcludedMeshes property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#excludedmeshes
-func (v *VolumetricLightScatteringPostProcess) ExcludedMeshes() *AbstractMesh {
+func (v *VolumetricLightScatteringPostProcess) ExcludedMeshes() []*AbstractMesh {
 	retVal := v.p.Get("excludedMeshes")
-	return AbstractMeshFromJSObject(retVal, v.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), v.ctx))
+	}
+	return result
 }
 
 // SetExcludedMeshes sets the ExcludedMeshes property of class VolumetricLightScatteringPostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#excludedmeshes
-func (v *VolumetricLightScatteringPostProcess) SetExcludedMeshes(excludedMeshes *AbstractMesh) *VolumetricLightScatteringPostProcess {
-	v.p.Set("excludedMeshes", excludedMeshes.JSObject())
+func (v *VolumetricLightScatteringPostProcess) SetExcludedMeshes(excludedMeshes []*AbstractMesh) *VolumetricLightScatteringPostProcess {
+	v.p.Set("excludedMeshes", excludedMeshes)
 	return v
 }
 

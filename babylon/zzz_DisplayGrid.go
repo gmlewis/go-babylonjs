@@ -17,9 +17,9 @@ type DisplayGrid struct {
 func (d *DisplayGrid) JSObject() js.Value { return d.p }
 
 // DisplayGrid returns a DisplayGrid JavaScript class.
-func (ba *Babylon) DisplayGrid() *DisplayGrid {
-	p := ba.ctx.Get("DisplayGrid")
-	return DisplayGridFromJSObject(p, ba.ctx)
+func (gui *GUI) DisplayGrid() *DisplayGrid {
+	p := gui.ctx.Get("DisplayGrid")
+	return DisplayGridFromJSObject(p, gui.ctx)
 }
 
 // DisplayGridFromJSObject returns a wrapped DisplayGrid JavaScript class.

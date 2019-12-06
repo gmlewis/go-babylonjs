@@ -42,7 +42,7 @@ func VideoDomeArrayToJSArray(array []*VideoDome) []interface{} {
 // NewVideoDome returns a new VideoDome object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome
-func (ba *Babylon) NewVideoDome(name string, urlsOrVideo string, options js.Value, scene *Scene) *VideoDome {
+func (ba *Babylon) NewVideoDome(name string, urlsOrVideo []string, options js.Value, scene *Scene) *VideoDome {
 
 	args := make([]interface{}, 0, 4+0)
 

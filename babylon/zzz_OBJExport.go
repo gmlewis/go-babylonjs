@@ -59,14 +59,14 @@ type OBJExportOBJOpts struct {
 // OBJ calls the OBJ method on the OBJExport object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objexport#obj
-func (o *OBJExport) OBJ(mesh *Mesh, opts *OBJExportOBJOpts) string {
+func (o *OBJExport) OBJ(mesh []*Mesh, opts *OBJExportOBJOpts) string {
 	if opts == nil {
 		opts = &OBJExportOBJOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, mesh.JSObject())
+	args = append(args, MeshArrayToJSArray(mesh))
 
 	if opts.Materials == nil {
 		args = append(args, js.Undefined())

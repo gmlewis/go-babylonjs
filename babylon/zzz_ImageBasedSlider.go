@@ -17,9 +17,9 @@ type ImageBasedSlider struct {
 func (i *ImageBasedSlider) JSObject() js.Value { return i.p }
 
 // ImageBasedSlider returns a ImageBasedSlider JavaScript class.
-func (ba *Babylon) ImageBasedSlider() *ImageBasedSlider {
-	p := ba.ctx.Get("ImageBasedSlider")
-	return ImageBasedSliderFromJSObject(p, ba.ctx)
+func (gui *GUI) ImageBasedSlider() *ImageBasedSlider {
+	p := gui.ctx.Get("ImageBasedSlider")
+	return ImageBasedSliderFromJSObject(p, gui.ctx)
 }
 
 // ImageBasedSliderFromJSObject returns a wrapped ImageBasedSlider JavaScript class.

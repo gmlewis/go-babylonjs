@@ -959,32 +959,40 @@ func (b *Bone) SetAnimationPropertiesOverride(animationPropertiesOverride *Anima
 // Animations returns the Animations property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#animations
-func (b *Bone) Animations() *Animation {
+func (b *Bone) Animations() []*Animation {
 	retVal := b.p.Get("animations")
-	return AnimationFromJSObject(retVal, b.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#animations
-func (b *Bone) SetAnimations(animations *Animation) *Bone {
-	b.p.Set("animations", animations.JSObject())
+func (b *Bone) SetAnimations(animations []*Animation) *Bone {
+	b.p.Set("animations", animations)
 	return b
 }
 
 // Children returns the Children property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#children
-func (b *Bone) Children() *Bone {
+func (b *Bone) Children() []*Bone {
 	retVal := b.p.Get("children")
-	return BoneFromJSObject(retVal, b.ctx)
+	result := []*Bone{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BoneFromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 // SetChildren sets the Children property of class Bone.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone#children
-func (b *Bone) SetChildren(children *Bone) *Bone {
-	b.p.Set("children", children.JSObject())
+func (b *Bone) SetChildren(children []*Bone) *Bone {
+	b.p.Set("children", children)
 	return b
 }
 

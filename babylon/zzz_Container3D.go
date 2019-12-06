@@ -17,9 +17,9 @@ type Container3D struct {
 func (c *Container3D) JSObject() js.Value { return c.p }
 
 // Container3D returns a Container3D JavaScript class.
-func (ba *Babylon) Container3D() *Container3D {
-	p := ba.ctx.Get("Container3D")
-	return Container3DFromJSObject(p, ba.ctx)
+func (gui *GUI) Container3D() *Container3D {
+	p := gui.ctx.Get("Container3D")
+	return Container3DFromJSObject(p, gui.ctx)
 }
 
 // Container3DFromJSObject returns a wrapped Container3D JavaScript class.

@@ -39,15 +39,19 @@ func IEffectCreationOptionsArrayToJSArray(array []*IEffectCreationOptions) []int
 // Attributes returns the Attributes property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#attributes
-func (i *IEffectCreationOptions) Attributes() string {
+func (i *IEffectCreationOptions) Attributes() []string {
 	retVal := i.p.Get("attributes")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetAttributes sets the Attributes property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#attributes
-func (i *IEffectCreationOptions) SetAttributes(attributes string) *IEffectCreationOptions {
+func (i *IEffectCreationOptions) SetAttributes(attributes []string) *IEffectCreationOptions {
 	i.p.Set("attributes", attributes)
 	return i
 }
@@ -151,15 +155,19 @@ func (i *IEffectCreationOptions) SetOnError(onError func()) *IEffectCreationOpti
 // Samplers returns the Samplers property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#samplers
-func (i *IEffectCreationOptions) Samplers() string {
+func (i *IEffectCreationOptions) Samplers() []string {
 	retVal := i.p.Get("samplers")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetSamplers sets the Samplers property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#samplers
-func (i *IEffectCreationOptions) SetSamplers(samplers string) *IEffectCreationOptions {
+func (i *IEffectCreationOptions) SetSamplers(samplers []string) *IEffectCreationOptions {
 	i.p.Set("samplers", samplers)
 	return i
 }
@@ -167,15 +175,19 @@ func (i *IEffectCreationOptions) SetSamplers(samplers string) *IEffectCreationOp
 // TransformFeedbackVaryings returns the TransformFeedbackVaryings property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#transformfeedbackvaryings
-func (i *IEffectCreationOptions) TransformFeedbackVaryings() string {
+func (i *IEffectCreationOptions) TransformFeedbackVaryings() []string {
 	retVal := i.p.Get("transformFeedbackVaryings")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetTransformFeedbackVaryings sets the TransformFeedbackVaryings property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#transformfeedbackvaryings
-func (i *IEffectCreationOptions) SetTransformFeedbackVaryings(transformFeedbackVaryings string) *IEffectCreationOptions {
+func (i *IEffectCreationOptions) SetTransformFeedbackVaryings(transformFeedbackVaryings []string) *IEffectCreationOptions {
 	i.p.Set("transformFeedbackVaryings", transformFeedbackVaryings)
 	return i
 }
@@ -183,15 +195,19 @@ func (i *IEffectCreationOptions) SetTransformFeedbackVaryings(transformFeedbackV
 // UniformBuffersNames returns the UniformBuffersNames property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#uniformbuffersnames
-func (i *IEffectCreationOptions) UniformBuffersNames() string {
+func (i *IEffectCreationOptions) UniformBuffersNames() []string {
 	retVal := i.p.Get("uniformBuffersNames")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetUniformBuffersNames sets the UniformBuffersNames property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#uniformbuffersnames
-func (i *IEffectCreationOptions) SetUniformBuffersNames(uniformBuffersNames string) *IEffectCreationOptions {
+func (i *IEffectCreationOptions) SetUniformBuffersNames(uniformBuffersNames []string) *IEffectCreationOptions {
 	i.p.Set("uniformBuffersNames", uniformBuffersNames)
 	return i
 }
@@ -199,15 +215,19 @@ func (i *IEffectCreationOptions) SetUniformBuffersNames(uniformBuffersNames stri
 // UniformsNames returns the UniformsNames property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#uniformsnames
-func (i *IEffectCreationOptions) UniformsNames() string {
+func (i *IEffectCreationOptions) UniformsNames() []string {
 	retVal := i.p.Get("uniformsNames")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetUniformsNames sets the UniformsNames property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#uniformsnames
-func (i *IEffectCreationOptions) SetUniformsNames(uniformsNames string) *IEffectCreationOptions {
+func (i *IEffectCreationOptions) SetUniformsNames(uniformsNames []string) *IEffectCreationOptions {
 	i.p.Set("uniformsNames", uniformsNames)
 	return i
 }

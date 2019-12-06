@@ -17,9 +17,9 @@ type Ellipse struct {
 func (e *Ellipse) JSObject() js.Value { return e.p }
 
 // Ellipse returns a Ellipse JavaScript class.
-func (ba *Babylon) Ellipse() *Ellipse {
-	p := ba.ctx.Get("Ellipse")
-	return EllipseFromJSObject(p, ba.ctx)
+func (gui *GUI) Ellipse() *Ellipse {
+	p := gui.ctx.Get("Ellipse")
+	return EllipseFromJSObject(p, gui.ctx)
 }
 
 // EllipseFromJSObject returns a wrapped Ellipse JavaScript class.

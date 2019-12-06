@@ -17,9 +17,9 @@ type SpherePanel struct {
 func (s *SpherePanel) JSObject() js.Value { return s.p }
 
 // SpherePanel returns a SpherePanel JavaScript class.
-func (ba *Babylon) SpherePanel() *SpherePanel {
-	p := ba.ctx.Get("SpherePanel")
-	return SpherePanelFromJSObject(p, ba.ctx)
+func (gui *GUI) SpherePanel() *SpherePanel {
+	p := gui.ctx.Get("SpherePanel")
+	return SpherePanelFromJSObject(p, gui.ctx)
 }
 
 // SpherePanelFromJSObject returns a wrapped SpherePanel JavaScript class.

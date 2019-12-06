@@ -137,16 +137,20 @@ func (p *PathCursor) Onchange(f func()) *PathCursor {
 // Animations returns the Animations property of class PathCursor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor#animations
-func (p *PathCursor) Animations() *Animation {
+func (p *PathCursor) Animations() []*Animation {
 	retVal := p.p.Get("animations")
-	return AnimationFromJSObject(retVal, p.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class PathCursor.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor#animations
-func (p *PathCursor) SetAnimations(animations *Animation) *PathCursor {
-	p.p.Set("animations", animations.JSObject())
+func (p *PathCursor) SetAnimations(animations []*Animation) *PathCursor {
+	p.p.Set("animations", animations)
 	return p
 }
 

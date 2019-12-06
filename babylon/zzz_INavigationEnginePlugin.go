@@ -39,7 +39,7 @@ func INavigationEnginePluginArrayToJSArray(array []*INavigationEnginePlugin) []i
 // ComputePath calls the ComputePath method on the INavigationEnginePlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inavigationengineplugin#computepath
-func (i *INavigationEnginePlugin) ComputePath(start *Vector3, end *Vector3) *Vector3 {
+func (i *INavigationEnginePlugin) ComputePath(start *Vector3, end *Vector3) []*Vector3 {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -47,7 +47,11 @@ func (i *INavigationEnginePlugin) ComputePath(start *Vector3, end *Vector3) *Vec
 	args = append(args, end.JSObject())
 
 	retVal := i.p.Call("computePath", args...)
-	return Vector3FromJSObject(retVal, i.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // CreateCrowd calls the CreateCrowd method on the INavigationEnginePlugin object.

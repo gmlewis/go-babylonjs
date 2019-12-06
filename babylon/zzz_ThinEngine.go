@@ -149,7 +149,7 @@ func (t *ThinEngine) BindBuffers(vertexBuffers js.Value, indexBuffer *DataBuffer
 // BindBuffersDirectly calls the BindBuffersDirectly method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#bindbuffersdirectly
-func (t *ThinEngine) BindBuffersDirectly(vertexBuffer *DataBuffer, indexBuffer *DataBuffer, vertexDeclaration float64, vertexStrideSize float64, effect *Effect) {
+func (t *ThinEngine) BindBuffersDirectly(vertexBuffer *DataBuffer, indexBuffer *DataBuffer, vertexDeclaration []float64, vertexStrideSize float64, effect *Effect) {
 
 	args := make([]interface{}, 0, 5+0)
 
@@ -334,7 +334,7 @@ func (t *ThinEngine) ClearInternalTexturesCache() {
 // CreateCubeTexture calls the CreateCubeTexture method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createcubetexture
-func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files string, noMipmap bool, onLoad func(), onError func(), format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64, fallback *InternalTexture, excludeLoaders []*IInternalTextureLoader) *InternalTexture {
+func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files []string, noMipmap bool, onLoad func(), onError func(), format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64, fallback *InternalTexture, excludeLoaders []*IInternalTextureLoader) *InternalTexture {
 
 	args := make([]interface{}, 0, 13+0)
 
@@ -414,7 +414,7 @@ func (t *ThinEngine) CreateDynamicVertexBuffer(data []float64) *DataBuffer {
 
 // ThinEngineCreateEffectOpts contains optional parameters for ThinEngine.CreateEffect.
 type ThinEngineCreateEffectOpts struct {
-	Samplers        *string
+	Samplers        []string
 	Defines         *string
 	Fallbacks       *IEffectFallbacks
 	OnCompiled      func()
@@ -425,7 +425,7 @@ type ThinEngineCreateEffectOpts struct {
 // CreateEffect calls the CreateEffect method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createeffect
-func (t *ThinEngine) CreateEffect(baseName interface{}, attributesNamesOrOptions string, uniformsNamesOrEngine string, opts *ThinEngineCreateEffectOpts) *Effect {
+func (t *ThinEngine) CreateEffect(baseName interface{}, attributesNamesOrOptions []string, uniformsNamesOrEngine []string, opts *ThinEngineCreateEffectOpts) *Effect {
 	if opts == nil {
 		opts = &ThinEngineCreateEffectOpts{}
 	}
@@ -439,7 +439,7 @@ func (t *ThinEngine) CreateEffect(baseName interface{}, attributesNamesOrOptions
 	if opts.Samplers == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Samplers)
+		args = append(args, opts.Samplers)
 	}
 	if opts.Defines == nil {
 		args = append(args, js.Undefined())
@@ -501,7 +501,7 @@ func (t *ThinEngine) CreateIndexBuffer(indices js.Value, opts *ThinEngineCreateI
 // CreateMultipleRenderTarget calls the CreateMultipleRenderTarget method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createmultiplerendertarget
-func (t *ThinEngine) CreateMultipleRenderTarget(size interface{}, options *IMultiRenderTargetOptions) *InternalTexture {
+func (t *ThinEngine) CreateMultipleRenderTarget(size interface{}, options *IMultiRenderTargetOptions) []*InternalTexture {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -509,7 +509,11 @@ func (t *ThinEngine) CreateMultipleRenderTarget(size interface{}, options *IMult
 	args = append(args, options.JSObject())
 
 	retVal := t.p.Call("createMultipleRenderTarget", args...)
-	return InternalTextureFromJSObject(retVal, t.ctx)
+	result := []*InternalTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, InternalTextureFromJSObject(retVal.Index(ri), t.ctx))
+	}
+	return result
 }
 
 // CreatePipelineContext calls the CreatePipelineContext method on the ThinEngine object.
@@ -611,7 +615,7 @@ func (t *ThinEngine) CreateRawCubeTexture(data js.Value, size float64, format fl
 // ThinEngineCreateRawShaderProgramOpts contains optional parameters for ThinEngine.CreateRawShaderProgram.
 type ThinEngineCreateRawShaderProgramOpts struct {
 	Context                   js.Value
-	TransformFeedbackVaryings *string
+	TransformFeedbackVaryings []string
 }
 
 // CreateRawShaderProgram calls the CreateRawShaderProgram method on the ThinEngine object.
@@ -632,7 +636,7 @@ func (t *ThinEngine) CreateRawShaderProgram(pipelineContext *IPipelineContext, v
 	if opts.TransformFeedbackVaryings == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.TransformFeedbackVaryings)
+		args = append(args, opts.TransformFeedbackVaryings)
 	}
 
 	retVal := t.p.Call("createRawShaderProgram", args...)
@@ -802,7 +806,7 @@ func (t *ThinEngine) CreateRenderTargetTexture(size float64, options bool) *Inte
 // ThinEngineCreateShaderProgramOpts contains optional parameters for ThinEngine.CreateShaderProgram.
 type ThinEngineCreateShaderProgramOpts struct {
 	Context                   js.Value
-	TransformFeedbackVaryings *string
+	TransformFeedbackVaryings []string
 }
 
 // CreateShaderProgram calls the CreateShaderProgram method on the ThinEngine object.
@@ -824,7 +828,7 @@ func (t *ThinEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vert
 	if opts.TransformFeedbackVaryings == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.TransformFeedbackVaryings)
+		args = append(args, opts.TransformFeedbackVaryings)
 	}
 
 	retVal := t.p.Call("createShaderProgram", args...)
@@ -1126,7 +1130,7 @@ func (t *ThinEngine) FlushFramebuffer() {
 // GetAttributes calls the GetAttributes method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#getattributes
-func (t *ThinEngine) GetAttributes(pipelineContext *IPipelineContext, attributesNames string) float64 {
+func (t *ThinEngine) GetAttributes(pipelineContext *IPipelineContext, attributesNames []string) []float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -1134,7 +1138,11 @@ func (t *ThinEngine) GetAttributes(pipelineContext *IPipelineContext, attributes
 	args = append(args, attributesNames)
 
 	retVal := t.p.Call("getAttributes", args...)
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // GetCaps calls the GetCaps method on the ThinEngine object.
@@ -1231,10 +1239,14 @@ func (t *ThinEngine) GetHostWindow() js.Value {
 // GetLoadedTexturesCache calls the GetLoadedTexturesCache method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#getloadedtexturescache
-func (t *ThinEngine) GetLoadedTexturesCache() *InternalTexture {
+func (t *ThinEngine) GetLoadedTexturesCache() []*InternalTexture {
 
 	retVal := t.p.Call("getLoadedTexturesCache")
-	return InternalTextureFromJSObject(retVal, t.ctx)
+	result := []*InternalTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, InternalTextureFromJSObject(retVal.Index(ri), t.ctx))
+	}
+	return result
 }
 
 // ThinEngineGetRenderHeightOpts contains optional parameters for ThinEngine.GetRenderHeight.
@@ -1299,7 +1311,7 @@ func (t *ThinEngine) GetRenderingCanvas() js.Value {
 // GetUniforms calls the GetUniforms method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#getuniforms
-func (t *ThinEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames string) js.Value {
+func (t *ThinEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames []string) js.Value {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -1433,7 +1445,7 @@ func (t *ThinEngine) RunRenderLoop(renderFunction func()) {
 // SetArray calls the SetArray method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#setarray
-func (t *ThinEngine) SetArray(uniform js.Value, array float64) {
+func (t *ThinEngine) SetArray(uniform js.Value, array []float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -1446,7 +1458,7 @@ func (t *ThinEngine) SetArray(uniform js.Value, array float64) {
 // SetArray2 calls the SetArray2 method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#setarray2
-func (t *ThinEngine) SetArray2(uniform js.Value, array float64) {
+func (t *ThinEngine) SetArray2(uniform js.Value, array []float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -1459,7 +1471,7 @@ func (t *ThinEngine) SetArray2(uniform js.Value, array float64) {
 // SetArray3 calls the SetArray3 method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#setarray3
-func (t *ThinEngine) SetArray3(uniform js.Value, array float64) {
+func (t *ThinEngine) SetArray3(uniform js.Value, array []float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -1472,7 +1484,7 @@ func (t *ThinEngine) SetArray3(uniform js.Value, array float64) {
 // SetArray4 calls the SetArray4 method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#setarray4
-func (t *ThinEngine) SetArray4(uniform js.Value, array float64) {
+func (t *ThinEngine) SetArray4(uniform js.Value, array []float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -1686,13 +1698,13 @@ func (t *ThinEngine) SetTexture(channel float64, uniform js.Value, texture *Base
 // SetTextureArray calls the SetTextureArray method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#settexturearray
-func (t *ThinEngine) SetTextureArray(channel float64, uniform js.Value, textures *BaseTexture) {
+func (t *ThinEngine) SetTextureArray(channel float64, uniform js.Value, textures []*BaseTexture) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, channel)
 	args = append(args, uniform)
-	args = append(args, textures.JSObject())
+	args = append(args, BaseTextureArrayToJSArray(textures))
 
 	t.p.Call("setTextureArray", args...)
 }
@@ -1793,14 +1805,14 @@ type ThinEngineUnBindMultiColorAttachmentFramebufferOpts struct {
 // UnBindMultiColorAttachmentFramebuffer calls the UnBindMultiColorAttachmentFramebuffer method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#unbindmulticolorattachmentframebuffer
-func (t *ThinEngine) UnBindMultiColorAttachmentFramebuffer(textures *InternalTexture, disableGenerateMipMaps bool, opts *ThinEngineUnBindMultiColorAttachmentFramebufferOpts) {
+func (t *ThinEngine) UnBindMultiColorAttachmentFramebuffer(textures []*InternalTexture, disableGenerateMipMaps bool, opts *ThinEngineUnBindMultiColorAttachmentFramebufferOpts) {
 	if opts == nil {
 		opts = &ThinEngineUnBindMultiColorAttachmentFramebufferOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, textures.JSObject())
+	args = append(args, InternalTextureArrayToJSArray(textures))
 	args = append(args, disableGenerateMipMaps)
 
 	if opts.OnBeforeUnbind == nil {
@@ -1839,7 +1851,7 @@ func (t *ThinEngine) UnbindInstanceAttributes() {
 // UpdateAndBindInstancesBuffer calls the UpdateAndBindInstancesBuffer method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#updateandbindinstancesbuffer
-func (t *ThinEngine) UpdateAndBindInstancesBuffer(instancesBuffer *DataBuffer, data js.Value, offsetLocations float64) {
+func (t *ThinEngine) UpdateAndBindInstancesBuffer(instancesBuffer *DataBuffer, data js.Value, offsetLocations [][]float64) {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -1905,11 +1917,11 @@ func (t *ThinEngine) UpdateDynamicTexture(texture *InternalTexture, canvas js.Va
 // UpdateMultipleRenderTargetTextureSampleCount calls the UpdateMultipleRenderTargetTextureSampleCount method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#updatemultiplerendertargettexturesamplecount
-func (t *ThinEngine) UpdateMultipleRenderTargetTextureSampleCount(textures *InternalTexture, samples float64) float64 {
+func (t *ThinEngine) UpdateMultipleRenderTargetTextureSampleCount(textures []*InternalTexture, samples float64) float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, textures.JSObject())
+	args = append(args, InternalTextureArrayToJSArray(textures))
 	args = append(args, samples)
 
 	retVal := t.p.Call("updateMultipleRenderTargetTextureSampleCount", args...)

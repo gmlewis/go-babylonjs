@@ -138,15 +138,19 @@ func (f *FreeCameraMouseInput) SetAngularSensibility(angularSensibility float64)
 // Buttons returns the Buttons property of class FreeCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#buttons
-func (f *FreeCameraMouseInput) Buttons() float64 {
+func (f *FreeCameraMouseInput) Buttons() []float64 {
 	retVal := f.p.Get("buttons")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetButtons sets the Buttons property of class FreeCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#buttons
-func (f *FreeCameraMouseInput) SetButtons(buttons float64) *FreeCameraMouseInput {
+func (f *FreeCameraMouseInput) SetButtons(buttons []float64) *FreeCameraMouseInput {
 	f.p.Set("buttons", buttons)
 	return f
 }

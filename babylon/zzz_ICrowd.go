@@ -101,10 +101,14 @@ func (i *ICrowd) GetAgentVelocity(index float64) *Vector3 {
 // GetAgents calls the GetAgents method on the ICrowd object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icrowd#getagents
-func (i *ICrowd) GetAgents() float64 {
+func (i *ICrowd) GetAgents() []float64 {
 
 	retVal := i.p.Call("getAgents")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // GetDefaultQueryExtent calls the GetDefaultQueryExtent method on the ICrowd object.

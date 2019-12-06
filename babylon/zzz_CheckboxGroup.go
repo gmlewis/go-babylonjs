@@ -18,9 +18,9 @@ type CheckboxGroup struct {
 func (c *CheckboxGroup) JSObject() js.Value { return c.p }
 
 // CheckboxGroup returns a CheckboxGroup JavaScript class.
-func (ba *Babylon) CheckboxGroup() *CheckboxGroup {
-	p := ba.ctx.Get("CheckboxGroup")
-	return CheckboxGroupFromJSObject(p, ba.ctx)
+func (gui *GUI) CheckboxGroup() *CheckboxGroup {
+	p := gui.ctx.Get("CheckboxGroup")
+	return CheckboxGroupFromJSObject(p, gui.ctx)
 }
 
 // CheckboxGroupFromJSObject returns a wrapped CheckboxGroup JavaScript class.

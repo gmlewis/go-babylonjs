@@ -153,14 +153,14 @@ type ArcRotateCameraFocusOnOpts struct {
 // FocusOn calls the FocusOn method on the ArcRotateCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#focuson
-func (a *ArcRotateCamera) FocusOn(meshesOrMinMaxVectorAndDistance *AbstractMesh, opts *ArcRotateCameraFocusOnOpts) {
+func (a *ArcRotateCamera) FocusOn(meshesOrMinMaxVectorAndDistance []*AbstractMesh, opts *ArcRotateCameraFocusOnOpts) {
 	if opts == nil {
 		opts = &ArcRotateCameraFocusOnOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, meshesOrMinMaxVectorAndDistance.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(meshesOrMinMaxVectorAndDistance))
 
 	if opts.DoNotUpdateMaxZ == nil {
 		args = append(args, js.Undefined())
@@ -251,7 +251,7 @@ func (a *ArcRotateCamera) StoreState() *Camera {
 
 // ArcRotateCameraZoomOnOpts contains optional parameters for ArcRotateCamera.ZoomOn.
 type ArcRotateCameraZoomOnOpts struct {
-	Meshes          *AbstractMesh
+	Meshes          []*AbstractMesh
 	DoNotUpdateMaxZ *bool
 }
 
@@ -268,7 +268,7 @@ func (a *ArcRotateCamera) ZoomOn(opts *ArcRotateCameraZoomOnOpts) {
 	if opts.Meshes == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Meshes.JSObject())
+		args = append(args, AbstractMeshArrayToJSArray(opts.Meshes))
 	}
 	if opts.DoNotUpdateMaxZ == nil {
 		args = append(args, js.Undefined())
@@ -538,15 +538,19 @@ func (a *ArcRotateCamera) SetInputs(inputs *ArcRotateCameraInputsManager) *ArcRo
 // KeysDown returns the KeysDown property of class ArcRotateCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysdown
-func (a *ArcRotateCamera) KeysDown() float64 {
+func (a *ArcRotateCamera) KeysDown() []float64 {
 	retVal := a.p.Get("keysDown")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysDown sets the KeysDown property of class ArcRotateCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysdown
-func (a *ArcRotateCamera) SetKeysDown(keysDown float64) *ArcRotateCamera {
+func (a *ArcRotateCamera) SetKeysDown(keysDown []float64) *ArcRotateCamera {
 	a.p.Set("keysDown", keysDown)
 	return a
 }
@@ -554,15 +558,19 @@ func (a *ArcRotateCamera) SetKeysDown(keysDown float64) *ArcRotateCamera {
 // KeysLeft returns the KeysLeft property of class ArcRotateCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysleft
-func (a *ArcRotateCamera) KeysLeft() float64 {
+func (a *ArcRotateCamera) KeysLeft() []float64 {
 	retVal := a.p.Get("keysLeft")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysLeft sets the KeysLeft property of class ArcRotateCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysleft
-func (a *ArcRotateCamera) SetKeysLeft(keysLeft float64) *ArcRotateCamera {
+func (a *ArcRotateCamera) SetKeysLeft(keysLeft []float64) *ArcRotateCamera {
 	a.p.Set("keysLeft", keysLeft)
 	return a
 }
@@ -570,15 +578,19 @@ func (a *ArcRotateCamera) SetKeysLeft(keysLeft float64) *ArcRotateCamera {
 // KeysRight returns the KeysRight property of class ArcRotateCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysright
-func (a *ArcRotateCamera) KeysRight() float64 {
+func (a *ArcRotateCamera) KeysRight() []float64 {
 	retVal := a.p.Get("keysRight")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysRight sets the KeysRight property of class ArcRotateCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysright
-func (a *ArcRotateCamera) SetKeysRight(keysRight float64) *ArcRotateCamera {
+func (a *ArcRotateCamera) SetKeysRight(keysRight []float64) *ArcRotateCamera {
 	a.p.Set("keysRight", keysRight)
 	return a
 }
@@ -586,15 +598,19 @@ func (a *ArcRotateCamera) SetKeysRight(keysRight float64) *ArcRotateCamera {
 // KeysUp returns the KeysUp property of class ArcRotateCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysup
-func (a *ArcRotateCamera) KeysUp() float64 {
+func (a *ArcRotateCamera) KeysUp() []float64 {
 	retVal := a.p.Get("keysUp")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysUp sets the KeysUp property of class ArcRotateCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysup
-func (a *ArcRotateCamera) SetKeysUp(keysUp float64) *ArcRotateCamera {
+func (a *ArcRotateCamera) SetKeysUp(keysUp []float64) *ArcRotateCamera {
 	a.p.Set("keysUp", keysUp)
 	return a
 }

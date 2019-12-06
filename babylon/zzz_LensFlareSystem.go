@@ -192,16 +192,20 @@ func (l *LensFlareSystem) SetLayerMask(layerMask float64) *LensFlareSystem {
 // LensFlares returns the LensFlares property of class LensFlareSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#lensflares
-func (l *LensFlareSystem) LensFlares() *LensFlare {
+func (l *LensFlareSystem) LensFlares() []*LensFlare {
 	retVal := l.p.Get("lensFlares")
-	return LensFlareFromJSObject(retVal, l.ctx)
+	result := []*LensFlare{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, LensFlareFromJSObject(retVal.Index(ri), l.ctx))
+	}
+	return result
 }
 
 // SetLensFlares sets the LensFlares property of class LensFlareSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#lensflares
-func (l *LensFlareSystem) SetLensFlares(lensFlares *LensFlare) *LensFlareSystem {
-	l.p.Set("lensFlares", lensFlares.JSObject())
+func (l *LensFlareSystem) SetLensFlares(lensFlares []*LensFlare) *LensFlareSystem {
+	l.p.Set("lensFlares", lensFlares)
 	return l
 }
 

@@ -17,9 +17,9 @@ type MultiLine struct {
 func (m *MultiLine) JSObject() js.Value { return m.p }
 
 // MultiLine returns a MultiLine JavaScript class.
-func (ba *Babylon) MultiLine() *MultiLine {
-	p := ba.ctx.Get("MultiLine")
-	return MultiLineFromJSObject(p, ba.ctx)
+func (gui *GUI) MultiLine() *MultiLine {
+	p := gui.ctx.Get("MultiLine")
+	return MultiLineFromJSObject(p, gui.ctx)
 }
 
 // MultiLineFromJSObject returns a wrapped MultiLine JavaScript class.
@@ -64,14 +64,18 @@ func (gui *GUI) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
 // Add calls the Add method on the MultiLine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#add
-func (m *MultiLine) Add(items *AbstractMesh) *MultiLinePoint {
+func (m *MultiLine) Add(items []*AbstractMesh) []*MultiLinePoint {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, items.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(items))
 
 	retVal := m.p.Call("add", args...)
-	return MultiLinePointFromJSObject(retVal, m.ctx)
+	result := []*MultiLinePoint{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MultiLinePointFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // Dispose calls the Dispose method on the MultiLine object.

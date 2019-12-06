@@ -17,9 +17,9 @@ type FluentMaterial struct {
 func (f *FluentMaterial) JSObject() js.Value { return f.p }
 
 // FluentMaterial returns a FluentMaterial JavaScript class.
-func (ba *Babylon) FluentMaterial() *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial")
-	return FluentMaterialFromJSObject(p, ba.ctx)
+func (gui *GUI) FluentMaterial() *FluentMaterial {
+	p := gui.ctx.Get("FluentMaterial")
+	return FluentMaterialFromJSObject(p, gui.ctx)
 }
 
 // FluentMaterialFromJSObject returns a wrapped FluentMaterial JavaScript class.
@@ -104,10 +104,14 @@ func (f *FluentMaterial) Dispose(opts *FluentMaterialDisposeOpts) {
 // GetActiveTextures calls the GetActiveTextures method on the FluentMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getactivetextures
-func (f *FluentMaterial) GetActiveTextures() *BaseTexture {
+func (f *FluentMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := f.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, f.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the FluentMaterial object.

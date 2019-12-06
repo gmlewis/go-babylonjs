@@ -17,9 +17,9 @@ type StackPanel3D struct {
 func (s *StackPanel3D) JSObject() js.Value { return s.p }
 
 // StackPanel3D returns a StackPanel3D JavaScript class.
-func (ba *Babylon) StackPanel3D() *StackPanel3D {
-	p := ba.ctx.Get("StackPanel3D")
-	return StackPanel3DFromJSObject(p, ba.ctx)
+func (gui *GUI) StackPanel3D() *StackPanel3D {
+	p := gui.ctx.Get("StackPanel3D")
+	return StackPanel3DFromJSObject(p, gui.ctx)
 }
 
 // StackPanel3DFromJSObject returns a wrapped StackPanel3D JavaScript class.

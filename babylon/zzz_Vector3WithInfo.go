@@ -17,9 +17,9 @@ type Vector3WithInfo struct {
 func (v *Vector3WithInfo) JSObject() js.Value { return v.p }
 
 // Vector3WithInfo returns a Vector3WithInfo JavaScript class.
-func (ba *Babylon) Vector3WithInfo() *Vector3WithInfo {
-	p := ba.ctx.Get("Vector3WithInfo")
-	return Vector3WithInfoFromJSObject(p, ba.ctx)
+func (gui *GUI) Vector3WithInfo() *Vector3WithInfo {
+	p := gui.ctx.Get("Vector3WithInfo")
+	return Vector3WithInfoFromJSObject(p, gui.ctx)
 }
 
 // Vector3WithInfoFromJSObject returns a wrapped Vector3WithInfo JavaScript class.

@@ -91,25 +91,29 @@ func (f *Frustum) GetNearPlaneToRef(transform *Matrix, frustumPlane *Plane) {
 // GetPlanes calls the GetPlanes method on the Frustum object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.frustum#getplanes
-func (f *Frustum) GetPlanes(transform *Matrix) *Plane {
+func (f *Frustum) GetPlanes(transform *Matrix) []*Plane {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, transform.JSObject())
 
 	retVal := f.p.Call("GetPlanes", args...)
-	return PlaneFromJSObject(retVal, f.ctx)
+	result := []*Plane{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PlaneFromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // GetPlanesToRef calls the GetPlanesToRef method on the Frustum object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.frustum#getplanestoref
-func (f *Frustum) GetPlanesToRef(transform *Matrix, frustumPlanes *Plane) {
+func (f *Frustum) GetPlanesToRef(transform *Matrix, frustumPlanes []*Plane) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, transform.JSObject())
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	f.p.Call("GetPlanesToRef", args...)
 }

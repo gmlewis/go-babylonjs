@@ -338,16 +338,20 @@ func (w *WebVRFreeCamera) SetOnControllerMeshLoadedObservable(onControllerMeshLo
 // OnControllersAttachedObservable returns the OnControllersAttachedObservable property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#oncontrollersattachedobservable
-func (w *WebVRFreeCamera) OnControllersAttachedObservable() *Observable {
+func (w *WebVRFreeCamera) OnControllersAttachedObservable() []*Observable {
 	retVal := w.p.Get("onControllersAttachedObservable")
-	return ObservableFromJSObject(retVal, w.ctx)
+	result := []*Observable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ObservableFromJSObject(retVal.Index(ri), w.ctx))
+	}
+	return result
 }
 
 // SetOnControllersAttachedObservable sets the OnControllersAttachedObservable property of class WebVRFreeCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#oncontrollersattachedobservable
-func (w *WebVRFreeCamera) SetOnControllersAttachedObservable(onControllersAttachedObservable *Observable) *WebVRFreeCamera {
-	w.p.Set("onControllersAttachedObservable", onControllersAttachedObservable.JSObject())
+func (w *WebVRFreeCamera) SetOnControllersAttachedObservable(onControllersAttachedObservable []*Observable) *WebVRFreeCamera {
+	w.p.Set("onControllersAttachedObservable", onControllersAttachedObservable)
 	return w
 }
 

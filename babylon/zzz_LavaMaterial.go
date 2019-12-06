@@ -104,10 +104,14 @@ func (l *LavaMaterial) Dispose(opts *LavaMaterialDisposeOpts) {
 // GetActiveTextures calls the GetActiveTextures method on the LavaMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getactivetextures
-func (l *LavaMaterial) GetActiveTextures() *BaseTexture {
+func (l *LavaMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := l.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, l.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), l.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the LavaMaterial object.
@@ -122,10 +126,14 @@ func (l *LavaMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the LavaMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getanimatables
-func (l *LavaMaterial) GetAnimatables() *IAnimatable {
+func (l *LavaMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := l.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, l.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), l.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the LavaMaterial object.

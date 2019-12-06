@@ -162,80 +162,100 @@ func (f *FireProceduralTexture) SetAutoGenerateTime(autoGenerateTime bool) *Fire
 // BlueFireColors returns the BlueFireColors property of class FireProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#bluefirecolors
-func (f *FireProceduralTexture) BlueFireColors() *Color3 {
+func (f *FireProceduralTexture) BlueFireColors() []*Color3 {
 	retVal := f.p.Get("BlueFireColors")
-	return Color3FromJSObject(retVal, f.ctx)
+	result := []*Color3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Color3FromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // SetBlueFireColors sets the BlueFireColors property of class FireProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#bluefirecolors
-func (f *FireProceduralTexture) SetBlueFireColors(BlueFireColors *Color3) *FireProceduralTexture {
-	f.p.Set("BlueFireColors", BlueFireColors.JSObject())
+func (f *FireProceduralTexture) SetBlueFireColors(BlueFireColors []*Color3) *FireProceduralTexture {
+	f.p.Set("BlueFireColors", BlueFireColors)
 	return f
 }
 
 // FireColors returns the FireColors property of class FireProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#firecolors
-func (f *FireProceduralTexture) FireColors() *Color3 {
+func (f *FireProceduralTexture) FireColors() []*Color3 {
 	retVal := f.p.Get("fireColors")
-	return Color3FromJSObject(retVal, f.ctx)
+	result := []*Color3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Color3FromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // SetFireColors sets the FireColors property of class FireProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#firecolors
-func (f *FireProceduralTexture) SetFireColors(fireColors *Color3) *FireProceduralTexture {
-	f.p.Set("fireColors", fireColors.JSObject())
+func (f *FireProceduralTexture) SetFireColors(fireColors []*Color3) *FireProceduralTexture {
+	f.p.Set("fireColors", fireColors)
 	return f
 }
 
 // GreenFireColors returns the GreenFireColors property of class FireProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#greenfirecolors
-func (f *FireProceduralTexture) GreenFireColors() *Color3 {
+func (f *FireProceduralTexture) GreenFireColors() []*Color3 {
 	retVal := f.p.Get("GreenFireColors")
-	return Color3FromJSObject(retVal, f.ctx)
+	result := []*Color3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Color3FromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // SetGreenFireColors sets the GreenFireColors property of class FireProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#greenfirecolors
-func (f *FireProceduralTexture) SetGreenFireColors(GreenFireColors *Color3) *FireProceduralTexture {
-	f.p.Set("GreenFireColors", GreenFireColors.JSObject())
+func (f *FireProceduralTexture) SetGreenFireColors(GreenFireColors []*Color3) *FireProceduralTexture {
+	f.p.Set("GreenFireColors", GreenFireColors)
 	return f
 }
 
 // PurpleFireColors returns the PurpleFireColors property of class FireProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#purplefirecolors
-func (f *FireProceduralTexture) PurpleFireColors() *Color3 {
+func (f *FireProceduralTexture) PurpleFireColors() []*Color3 {
 	retVal := f.p.Get("PurpleFireColors")
-	return Color3FromJSObject(retVal, f.ctx)
+	result := []*Color3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Color3FromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // SetPurpleFireColors sets the PurpleFireColors property of class FireProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#purplefirecolors
-func (f *FireProceduralTexture) SetPurpleFireColors(PurpleFireColors *Color3) *FireProceduralTexture {
-	f.p.Set("PurpleFireColors", PurpleFireColors.JSObject())
+func (f *FireProceduralTexture) SetPurpleFireColors(PurpleFireColors []*Color3) *FireProceduralTexture {
+	f.p.Set("PurpleFireColors", PurpleFireColors)
 	return f
 }
 
 // RedFireColors returns the RedFireColors property of class FireProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#redfirecolors
-func (f *FireProceduralTexture) RedFireColors() *Color3 {
+func (f *FireProceduralTexture) RedFireColors() []*Color3 {
 	retVal := f.p.Get("RedFireColors")
-	return Color3FromJSObject(retVal, f.ctx)
+	result := []*Color3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Color3FromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // SetRedFireColors sets the RedFireColors property of class FireProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#redfirecolors
-func (f *FireProceduralTexture) SetRedFireColors(RedFireColors *Color3) *FireProceduralTexture {
-	f.p.Set("RedFireColors", RedFireColors.JSObject())
+func (f *FireProceduralTexture) SetRedFireColors(RedFireColors []*Color3) *FireProceduralTexture {
+	f.p.Set("RedFireColors", RedFireColors)
 	return f
 }
 

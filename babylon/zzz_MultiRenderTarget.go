@@ -148,16 +148,20 @@ func (m *MultiRenderTarget) SetSamples(samples float64) *MultiRenderTarget {
 // Textures returns the Textures property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#textures
-func (m *MultiRenderTarget) Textures() *Texture {
+func (m *MultiRenderTarget) Textures() []*Texture {
 	retVal := m.p.Get("textures")
-	return TextureFromJSObject(retVal, m.ctx)
+	result := []*Texture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TextureFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // SetTextures sets the Textures property of class MultiRenderTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#textures
-func (m *MultiRenderTarget) SetTextures(textures *Texture) *MultiRenderTarget {
-	m.p.Set("textures", textures.JSObject())
+func (m *MultiRenderTarget) SetTextures(textures []*Texture) *MultiRenderTarget {
+	m.p.Set("textures", textures)
 	return m
 }
 

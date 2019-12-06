@@ -156,10 +156,14 @@ func (w *WaterMaterial) EnableRenderTargets(enable bool) {
 // GetActiveTextures calls the GetActiveTextures method on the WaterMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getactivetextures
-func (w *WaterMaterial) GetActiveTextures() *BaseTexture {
+func (w *WaterMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := w.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, w.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), w.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the WaterMaterial object.
@@ -174,10 +178,14 @@ func (w *WaterMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the WaterMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getanimatables
-func (w *WaterMaterial) GetAnimatables() *IAnimatable {
+func (w *WaterMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := w.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, w.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), w.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the WaterMaterial object.
@@ -192,10 +200,14 @@ func (w *WaterMaterial) GetClassName() string {
 // GetRenderList calls the GetRenderList method on the WaterMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#getrenderlist
-func (w *WaterMaterial) GetRenderList() *AbstractMesh {
+func (w *WaterMaterial) GetRenderList() []*AbstractMesh {
 
 	retVal := w.p.Call("getRenderList")
-	return AbstractMeshFromJSObject(retVal, w.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), w.ctx))
+	}
+	return result
 }
 
 // HasTexture calls the HasTexture method on the WaterMaterial object.

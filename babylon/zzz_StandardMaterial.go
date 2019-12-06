@@ -121,10 +121,14 @@ func (s *StandardMaterial) Dispose(opts *StandardMaterialDisposeOpts) {
 // GetActiveTextures calls the GetActiveTextures method on the StandardMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getactivetextures
-func (s *StandardMaterial) GetActiveTextures() *BaseTexture {
+func (s *StandardMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := s.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, s.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the StandardMaterial object.
@@ -139,10 +143,14 @@ func (s *StandardMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the StandardMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getanimatables
-func (s *StandardMaterial) GetAnimatables() *IAnimatable {
+func (s *StandardMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := s.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, s.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the StandardMaterial object.

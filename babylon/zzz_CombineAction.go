@@ -46,7 +46,7 @@ type NewCombineActionOpts struct {
 // NewCombineAction returns a new CombineAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.combineaction
-func (ba *Babylon) NewCombineAction(triggerOptions interface{}, children *Action, opts *NewCombineActionOpts) *CombineAction {
+func (ba *Babylon) NewCombineAction(triggerOptions interface{}, children []*Action, opts *NewCombineActionOpts) *CombineAction {
 	if opts == nil {
 		opts = &NewCombineActionOpts{}
 	}
@@ -54,7 +54,7 @@ func (ba *Babylon) NewCombineAction(triggerOptions interface{}, children *Action
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, triggerOptions)
-	args = append(args, children.JSObject())
+	args = append(args, children)
 
 	if opts.Condition == nil {
 		args = append(args, js.Undefined())
@@ -94,15 +94,19 @@ func (c *CombineAction) Serialize(parent interface{}) interface{} {
 // Children returns the Children property of class CombineAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.combineaction#children
-func (c *CombineAction) Children() *Action {
+func (c *CombineAction) Children() []*Action {
 	retVal := c.p.Get("children")
-	return ActionFromJSObject(retVal, c.ctx)
+	result := []*Action{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ActionFromJSObject(retVal.Index(ri), c.ctx))
+	}
+	return result
 }
 
 // SetChildren sets the Children property of class CombineAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.combineaction#children
-func (c *CombineAction) SetChildren(children *Action) *CombineAction {
-	c.p.Set("children", children.JSObject())
+func (c *CombineAction) SetChildren(children []*Action) *CombineAction {
+	c.p.Set("children", children)
 	return c
 }

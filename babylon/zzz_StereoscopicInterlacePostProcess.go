@@ -46,7 +46,7 @@ type NewStereoscopicInterlacePostProcessOpts struct {
 // NewStereoscopicInterlacePostProcess returns a new StereoscopicInterlacePostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess
-func (ba *Babylon) NewStereoscopicInterlacePostProcess(name string, rigCameras *Camera, isStereoscopicHoriz bool, opts *NewStereoscopicInterlacePostProcessOpts) *StereoscopicInterlacePostProcess {
+func (ba *Babylon) NewStereoscopicInterlacePostProcess(name string, rigCameras []*Camera, isStereoscopicHoriz bool, opts *NewStereoscopicInterlacePostProcessOpts) *StereoscopicInterlacePostProcess {
 	if opts == nil {
 		opts = &NewStereoscopicInterlacePostProcessOpts{}
 	}
@@ -54,7 +54,7 @@ func (ba *Babylon) NewStereoscopicInterlacePostProcess(name string, rigCameras *
 	args := make([]interface{}, 0, 3+3)
 
 	args = append(args, name)
-	args = append(args, rigCameras.JSObject())
+	args = append(args, rigCameras)
 	args = append(args, isStereoscopicHoriz)
 
 	if opts.SamplingMode == nil {

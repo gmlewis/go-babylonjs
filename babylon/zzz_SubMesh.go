@@ -244,7 +244,7 @@ type SubMeshIntersectsOpts struct {
 // Intersects calls the Intersects method on the SubMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#intersects
-func (s *SubMesh) Intersects(ray *Ray, positions *Vector3, indices js.Value, opts *SubMeshIntersectsOpts) js.Value {
+func (s *SubMesh) Intersects(ray *Ray, positions []*Vector3, indices js.Value, opts *SubMeshIntersectsOpts) js.Value {
 	if opts == nil {
 		opts = &SubMeshIntersectsOpts{}
 	}
@@ -252,7 +252,7 @@ func (s *SubMesh) Intersects(ray *Ray, positions *Vector3, indices js.Value, opt
 	args := make([]interface{}, 0, 3+2)
 
 	args = append(args, ray.JSObject())
-	args = append(args, positions.JSObject())
+	args = append(args, Vector3ArrayToJSArray(positions))
 	args = append(args, indices)
 
 	if opts.FastCheck == nil {
@@ -269,11 +269,11 @@ func (s *SubMesh) Intersects(ray *Ray, positions *Vector3, indices js.Value, opt
 // IsCompletelyInFrustum calls the IsCompletelyInFrustum method on the SubMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#iscompletelyinfrustum
-func (s *SubMesh) IsCompletelyInFrustum(frustumPlanes *Plane) bool {
+func (s *SubMesh) IsCompletelyInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := s.p.Call("isCompletelyInFrustum", args...)
 	return retVal.Bool()
@@ -282,11 +282,11 @@ func (s *SubMesh) IsCompletelyInFrustum(frustumPlanes *Plane) bool {
 // IsInFrustum calls the IsInFrustum method on the SubMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh#isinfrustum
-func (s *SubMesh) IsInFrustum(frustumPlanes *Plane) bool {
+func (s *SubMesh) IsInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := s.p.Call("isInFrustum", args...)
 	return retVal.Bool()

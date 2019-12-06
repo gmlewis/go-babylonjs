@@ -39,16 +39,20 @@ func IExplorerExtensibilityGroupArrayToJSArray(array []*IExplorerExtensibilityGr
 // Entries returns the Entries property of class IExplorerExtensibilityGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilitygroup#entries
-func (i *IExplorerExtensibilityGroup) Entries() *IExplorerExtensibilityOption {
+func (i *IExplorerExtensibilityGroup) Entries() []*IExplorerExtensibilityOption {
 	retVal := i.p.Get("entries")
-	return IExplorerExtensibilityOptionFromJSObject(retVal, i.ctx)
+	result := []*IExplorerExtensibilityOption{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IExplorerExtensibilityOptionFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetEntries sets the Entries property of class IExplorerExtensibilityGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilitygroup#entries
-func (i *IExplorerExtensibilityGroup) SetEntries(entries *IExplorerExtensibilityOption) *IExplorerExtensibilityGroup {
-	i.p.Set("entries", entries.JSObject())
+func (i *IExplorerExtensibilityGroup) SetEntries(entries []*IExplorerExtensibilityOption) *IExplorerExtensibilityGroup {
+	i.p.Set("entries", entries)
 	return i
 }
 

@@ -105,11 +105,11 @@ func (s *SolidParticle) IntersectsMesh(target *Mesh) bool {
 // IsInFrustum calls the IsInFrustum method on the SolidParticle object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle#isinfrustum
-func (s *SolidParticle) IsInFrustum(frustumPlanes *Plane) bool {
+func (s *SolidParticle) IsInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := s.p.Call("isInFrustum", args...)
 	return retVal.Bool()

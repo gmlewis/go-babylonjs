@@ -878,16 +878,20 @@ func (i *IParticleSystem) Stop() {
 // Animations returns the Animations property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#animations
-func (i *IParticleSystem) Animations() *Animation {
+func (i *IParticleSystem) Animations() []*Animation {
 	retVal := i.p.Get("animations")
-	return AnimationFromJSObject(retVal, i.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class IParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#animations
-func (i *IParticleSystem) SetAnimations(animations *Animation) *IParticleSystem {
-	i.p.Set("animations", animations.JSObject())
+func (i *IParticleSystem) SetAnimations(animations []*Animation) *IParticleSystem {
+	i.p.Set("animations", animations)
 	return i
 }
 

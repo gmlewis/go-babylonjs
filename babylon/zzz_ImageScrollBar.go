@@ -17,9 +17,9 @@ type ImageScrollBar struct {
 func (i *ImageScrollBar) JSObject() js.Value { return i.p }
 
 // ImageScrollBar returns a ImageScrollBar JavaScript class.
-func (ba *Babylon) ImageScrollBar() *ImageScrollBar {
-	p := ba.ctx.Get("ImageScrollBar")
-	return ImageScrollBarFromJSObject(p, ba.ctx)
+func (gui *GUI) ImageScrollBar() *ImageScrollBar {
+	p := gui.ctx.Get("ImageScrollBar")
+	return ImageScrollBarFromJSObject(p, gui.ctx)
 }
 
 // ImageScrollBarFromJSObject returns a wrapped ImageScrollBar JavaScript class.

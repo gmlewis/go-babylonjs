@@ -46,14 +46,14 @@ type NewPath3DOpts struct {
 // NewPath3D returns a new Path3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d
-func (ba *Babylon) NewPath3D(path *Vector3, opts *NewPath3DOpts) *Path3D {
+func (ba *Babylon) NewPath3D(path []*Vector3, opts *NewPath3DOpts) *Path3D {
 	if opts == nil {
 		opts = &NewPath3DOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, path.JSObject())
+	args = append(args, path)
 
 	if opts.FirstNormal == nil {
 		args = append(args, js.Undefined())
@@ -105,10 +105,14 @@ func (p *Path3D) GetBinormalAt(position float64, opts *Path3DGetBinormalAtOpts) 
 // GetBinormals calls the GetBinormals method on the Path3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#getbinormals
-func (p *Path3D) GetBinormals() *Vector3 {
+func (p *Path3D) GetBinormals() []*Vector3 {
 
 	retVal := p.p.Call("getBinormals")
-	return Vector3FromJSObject(retVal, p.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetClosestPositionTo calls the GetClosestPositionTo method on the Path3D object.
@@ -127,10 +131,14 @@ func (p *Path3D) GetClosestPositionTo(target *Vector3) float64 {
 // GetCurve calls the GetCurve method on the Path3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#getcurve
-func (p *Path3D) GetCurve() *Vector3 {
+func (p *Path3D) GetCurve() []*Vector3 {
 
 	retVal := p.p.Call("getCurve")
-	return Vector3FromJSObject(retVal, p.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetDistanceAt calls the GetDistanceAt method on the Path3D object.
@@ -149,10 +157,14 @@ func (p *Path3D) GetDistanceAt(position float64) float64 {
 // GetDistances calls the GetDistances method on the Path3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#getdistances
-func (p *Path3D) GetDistances() float64 {
+func (p *Path3D) GetDistances() []float64 {
 
 	retVal := p.p.Call("getDistances")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // Path3DGetNormalAtOpts contains optional parameters for Path3D.GetNormalAt.
@@ -185,10 +197,14 @@ func (p *Path3D) GetNormalAt(position float64, opts *Path3DGetNormalAtOpts) *Vec
 // GetNormals calls the GetNormals method on the Path3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#getnormals
-func (p *Path3D) GetNormals() *Vector3 {
+func (p *Path3D) GetNormals() []*Vector3 {
 
 	retVal := p.p.Call("getNormals")
-	return Vector3FromJSObject(retVal, p.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetPointAt calls the GetPointAt method on the Path3D object.
@@ -207,10 +223,14 @@ func (p *Path3D) GetPointAt(position float64) *Vector3 {
 // GetPoints calls the GetPoints method on the Path3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#getpoints
-func (p *Path3D) GetPoints() *Vector3 {
+func (p *Path3D) GetPoints() []*Vector3 {
 
 	retVal := p.p.Call("getPoints")
-	return Vector3FromJSObject(retVal, p.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetPreviousPointIndexAt calls the GetPreviousPointIndexAt method on the Path3D object.
@@ -269,10 +289,14 @@ func (p *Path3D) GetTangentAt(position float64, opts *Path3DGetTangentAtOpts) *V
 // GetTangents calls the GetTangents method on the Path3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#gettangents
-func (p *Path3D) GetTangents() *Vector3 {
+func (p *Path3D) GetTangents() []*Vector3 {
 
 	retVal := p.p.Call("getTangents")
-	return Vector3FromJSObject(retVal, p.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // Length calls the Length method on the Path3D object.
@@ -324,14 +348,14 @@ type Path3DUpdateOpts struct {
 // Update calls the Update method on the Path3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#update
-func (p *Path3D) Update(path *Vector3, opts *Path3DUpdateOpts) *Path3D {
+func (p *Path3D) Update(path []*Vector3, opts *Path3DUpdateOpts) *Path3D {
 	if opts == nil {
 		opts = &Path3DUpdateOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, path.JSObject())
+	args = append(args, Vector3ArrayToJSArray(path))
 
 	if opts.FirstNormal == nil {
 		args = append(args, js.Undefined())
@@ -351,15 +375,19 @@ func (p *Path3D) Update(path *Vector3, opts *Path3DUpdateOpts) *Path3D {
 // Path returns the Path property of class Path3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#path
-func (p *Path3D) Path() *Vector3 {
+func (p *Path3D) Path() []*Vector3 {
 	retVal := p.p.Get("path")
-	return Vector3FromJSObject(retVal, p.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // SetPath sets the Path property of class Path3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d#path
-func (p *Path3D) SetPath(path *Vector3) *Path3D {
-	p.p.Set("path", path.JSObject())
+func (p *Path3D) SetPath(path []*Vector3) *Path3D {
+	p.p.Set("path", path)
 	return p
 }

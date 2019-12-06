@@ -18,9 +18,9 @@ type MultiLinePoint struct {
 func (m *MultiLinePoint) JSObject() js.Value { return m.p }
 
 // MultiLinePoint returns a MultiLinePoint JavaScript class.
-func (ba *Babylon) MultiLinePoint() *MultiLinePoint {
-	p := ba.ctx.Get("MultiLinePoint")
-	return MultiLinePointFromJSObject(p, ba.ctx)
+func (gui *GUI) MultiLinePoint() *MultiLinePoint {
+	p := gui.ctx.Get("MultiLinePoint")
+	return MultiLinePointFromJSObject(p, gui.ctx)
 }
 
 // MultiLinePointFromJSObject returns a wrapped MultiLinePoint JavaScript class.

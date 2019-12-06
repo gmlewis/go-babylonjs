@@ -123,7 +123,7 @@ func (l *LightBlock) Serialize() interface{} {
 // UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the LightBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#updateuniformsandsamples
-func (l *LightBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+func (l *LightBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers []string) {
 
 	args := make([]interface{}, 0, 4+0)
 

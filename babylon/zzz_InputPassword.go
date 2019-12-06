@@ -17,9 +17,9 @@ type InputPassword struct {
 func (i *InputPassword) JSObject() js.Value { return i.p }
 
 // InputPassword returns a InputPassword JavaScript class.
-func (ba *Babylon) InputPassword() *InputPassword {
-	p := ba.ctx.Get("InputPassword")
-	return InputPasswordFromJSObject(p, ba.ctx)
+func (gui *GUI) InputPassword() *InputPassword {
+	p := gui.ctx.Get("InputPassword")
+	return InputPasswordFromJSObject(p, gui.ctx)
 }
 
 // InputPasswordFromJSObject returns a wrapped InputPassword JavaScript class.

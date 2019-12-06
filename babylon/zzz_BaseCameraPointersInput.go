@@ -97,15 +97,19 @@ func (b *BaseCameraPointersInput) GetSimpleName() string {
 // Buttons returns the Buttons property of class BaseCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basecamerapointersinput#buttons
-func (b *BaseCameraPointersInput) Buttons() float64 {
+func (b *BaseCameraPointersInput) Buttons() []float64 {
 	retVal := b.p.Get("buttons")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetButtons sets the Buttons property of class BaseCameraPointersInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basecamerapointersinput#buttons
-func (b *BaseCameraPointersInput) SetButtons(buttons float64) *BaseCameraPointersInput {
+func (b *BaseCameraPointersInput) SetButtons(buttons []float64) *BaseCameraPointersInput {
 	b.p.Set("buttons", buttons)
 	return b
 }

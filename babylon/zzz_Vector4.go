@@ -95,10 +95,14 @@ func (v *Vector4) AddToRef(otherVector *Vector4, result *Vector4) *Vector4 {
 // AsArray calls the AsArray method on the Vector4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4#asarray
-func (v *Vector4) AsArray() float64 {
+func (v *Vector4) AsArray() []float64 {
 
 	retVal := v.p.Call("asArray")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // Center calls the Center method on the Vector4 object.

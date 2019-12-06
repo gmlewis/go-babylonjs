@@ -17,9 +17,9 @@ type Checkbox struct {
 func (c *Checkbox) JSObject() js.Value { return c.p }
 
 // Checkbox returns a Checkbox JavaScript class.
-func (ba *Babylon) Checkbox() *Checkbox {
-	p := ba.ctx.Get("Checkbox")
-	return CheckboxFromJSObject(p, ba.ctx)
+func (gui *GUI) Checkbox() *Checkbox {
+	p := gui.ctx.Get("Checkbox")
+	return CheckboxFromJSObject(p, gui.ctx)
 }
 
 // CheckboxFromJSObject returns a wrapped Checkbox JavaScript class.

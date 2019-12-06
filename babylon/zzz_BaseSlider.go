@@ -17,9 +17,9 @@ type BaseSlider struct {
 func (b *BaseSlider) JSObject() js.Value { return b.p }
 
 // BaseSlider returns a BaseSlider JavaScript class.
-func (ba *Babylon) BaseSlider() *BaseSlider {
-	p := ba.ctx.Get("BaseSlider")
-	return BaseSliderFromJSObject(p, ba.ctx)
+func (gui *GUI) BaseSlider() *BaseSlider {
+	p := gui.ctx.Get("BaseSlider")
+	return BaseSliderFromJSObject(p, gui.ctx)
 }
 
 // BaseSliderFromJSObject returns a wrapped BaseSlider JavaScript class.

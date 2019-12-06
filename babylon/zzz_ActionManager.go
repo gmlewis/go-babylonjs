@@ -112,7 +112,7 @@ func (a *ActionManager) HasSpecificTrigger(trigger float64, opts *ActionManagerH
 // HasSpecificTriggers calls the HasSpecificTriggers method on the ActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#hasspecifictriggers
-func (a *ActionManager) HasSpecificTriggers(triggers float64) bool {
+func (a *ActionManager) HasSpecificTriggers(triggers []float64) bool {
 
 	args := make([]interface{}, 0, 1+0)
 

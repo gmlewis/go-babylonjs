@@ -112,7 +112,7 @@ func main() {
 
 		advancedTexture := gui.AdvancedDynamicTexture().CreateFullscreenUI("UI", nil)
 
-		selectBox := gui.NewSelectionPanel("sp", &babylon.NewSelectionPanelOpts{Groups: matGroup.SelectorGroup})
+		selectBox := gui.NewSelectionPanel("sp", &babylon.NewSelectionPanelOpts{Groups: []*babylon.SelectorGroup{matGroup.SelectorGroup}})
 		selectBox.SetWidth("0.25")
 		selectBox.SetHeight("50%")
 		selectBox.SetTop("4px")

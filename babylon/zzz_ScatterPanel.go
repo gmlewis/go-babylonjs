@@ -17,9 +17,9 @@ type ScatterPanel struct {
 func (s *ScatterPanel) JSObject() js.Value { return s.p }
 
 // ScatterPanel returns a ScatterPanel JavaScript class.
-func (ba *Babylon) ScatterPanel() *ScatterPanel {
-	p := ba.ctx.Get("ScatterPanel")
-	return ScatterPanelFromJSObject(p, ba.ctx)
+func (gui *GUI) ScatterPanel() *ScatterPanel {
+	p := gui.ctx.Get("ScatterPanel")
+	return ScatterPanelFromJSObject(p, gui.ctx)
 }
 
 // ScatterPanelFromJSObject returns a wrapped ScatterPanel JavaScript class.

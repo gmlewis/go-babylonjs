@@ -61,14 +61,14 @@ type PostProcessManagerDirectRenderOpts struct {
 // DirectRender calls the DirectRender method on the PostProcessManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessmanager#directrender
-func (p *PostProcessManager) DirectRender(postProcesses *PostProcess, opts *PostProcessManagerDirectRenderOpts) {
+func (p *PostProcessManager) DirectRender(postProcesses []*PostProcess, opts *PostProcessManagerDirectRenderOpts) {
 	if opts == nil {
 		opts = &PostProcessManagerDirectRenderOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+4)
 
-	args = append(args, postProcesses.JSObject())
+	args = append(args, PostProcessArrayToJSArray(postProcesses))
 
 	if opts.TargetTexture == nil {
 		args = append(args, js.Undefined())

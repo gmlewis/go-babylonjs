@@ -52,7 +52,7 @@ type NewPostProcessOpts struct {
 // NewPostProcess returns a new PostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess
-func (ba *Babylon) NewPostProcess(name string, fragmentUrl string, parameters string, samplers string, options float64, camera *Camera, opts *NewPostProcessOpts) *PostProcess {
+func (ba *Babylon) NewPostProcess(name string, fragmentUrl string, parameters []string, samplers []string, options float64, camera *Camera, opts *NewPostProcessOpts) *PostProcess {
 	if opts == nil {
 		opts = &NewPostProcessOpts{}
 	}
@@ -264,8 +264,8 @@ func (p *PostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
 // PostProcessUpdateEffectOpts contains optional parameters for PostProcess.UpdateEffect.
 type PostProcessUpdateEffectOpts struct {
 	Defines         *string
-	Uniforms        *string
-	Samplers        *string
+	Uniforms        []string
+	Samplers        []string
 	IndexParameters *interface{}
 	OnCompiled      func()
 	OnError         func()
@@ -289,12 +289,12 @@ func (p *PostProcess) UpdateEffect(opts *PostProcessUpdateEffectOpts) {
 	if opts.Uniforms == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Uniforms)
+		args = append(args, opts.Uniforms)
 	}
 	if opts.Samplers == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Samplers)
+		args = append(args, opts.Samplers)
 	}
 	if opts.IndexParameters == nil {
 		args = append(args, js.Undefined())
@@ -390,16 +390,20 @@ func (p *PostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *PostProcess {
 // Animations returns the Animations property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#animations
-func (p *PostProcess) Animations() *Animation {
+func (p *PostProcess) Animations() []*Animation {
 	retVal := p.p.Get("animations")
-	return AnimationFromJSObject(retVal, p.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#animations
-func (p *PostProcess) SetAnimations(animations *Animation) *PostProcess {
-	p.p.Set("animations", animations.JSObject())
+func (p *PostProcess) SetAnimations(animations []*Animation) *PostProcess {
+	p.p.Set("animations", animations)
 	return p
 }
 
@@ -518,16 +522,20 @@ func (p *PostProcess) SetInputTexture(inputTexture *InternalTexture) *PostProces
 // InspectableCustomProperties returns the InspectableCustomProperties property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#inspectablecustomproperties
-func (p *PostProcess) InspectableCustomProperties() *IInspectable {
+func (p *PostProcess) InspectableCustomProperties() []*IInspectable {
 	retVal := p.p.Get("inspectableCustomProperties")
-	return IInspectableFromJSObject(retVal, p.ctx)
+	result := []*IInspectable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IInspectableFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#inspectablecustomproperties
-func (p *PostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *PostProcess {
-	p.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+func (p *PostProcess) SetInspectableCustomProperties(inspectableCustomProperties []*IInspectable) *PostProcess {
+	p.p.Set("inspectableCustomProperties", inspectableCustomProperties)
 	return p
 }
 

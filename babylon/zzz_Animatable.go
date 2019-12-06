@@ -43,7 +43,7 @@ type NewAnimatableOpts struct {
 	LoopAnimation   *bool
 	SpeedRatio      *float64
 	OnAnimationEnd  func()
-	Animations      *Animation
+	Animations      []*Animation
 	OnAnimationLoop func()
 }
 
@@ -88,7 +88,7 @@ func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnim
 	if opts.Animations == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Animations.JSObject())
+		args = append(args, AnimationArrayToJSArray(opts.Animations))
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
@@ -103,12 +103,12 @@ func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnim
 // AppendAnimations calls the AppendAnimations method on the Animatable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#appendanimations
-func (a *Animatable) AppendAnimations(target interface{}, animations *Animation) {
+func (a *Animatable) AppendAnimations(target interface{}, animations []*Animation) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, target)
-	args = append(args, animations.JSObject())
+	args = append(args, AnimationArrayToJSArray(animations))
 
 	a.p.Call("appendAnimations", args...)
 }
@@ -149,10 +149,14 @@ func (a *Animatable) GetAnimationByTargetProperty(property string) *Animation {
 // GetAnimations calls the GetAnimations method on the Animatable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#getanimations
-func (a *Animatable) GetAnimations() *RuntimeAnimation {
+func (a *Animatable) GetAnimations() []*RuntimeAnimation {
 
 	retVal := a.p.Call("getAnimations")
-	return RuntimeAnimationFromJSObject(retVal, a.ctx)
+	result := []*RuntimeAnimation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, RuntimeAnimationFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // GetRuntimeAnimationByTargetProperty calls the GetRuntimeAnimationByTargetProperty method on the Animatable object.

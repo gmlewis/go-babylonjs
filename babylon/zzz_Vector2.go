@@ -106,10 +106,14 @@ func (v *Vector2) AddVector3(otherVector *Vector3) *Vector2 {
 // AsArray calls the AsArray method on the Vector2 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2#asarray
-func (v *Vector2) AsArray() float64 {
+func (v *Vector2) AsArray() []float64 {
 
 	retVal := v.p.Call("asArray")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // CatmullRom calls the CatmullRom method on the Vector2 object.

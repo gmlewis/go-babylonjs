@@ -46,7 +46,7 @@ type NewAnaglyphPostProcessOpts struct {
 // NewAnaglyphPostProcess returns a new AnaglyphPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess
-func (ba *Babylon) NewAnaglyphPostProcess(name string, options float64, rigCameras *Camera, opts *NewAnaglyphPostProcessOpts) *AnaglyphPostProcess {
+func (ba *Babylon) NewAnaglyphPostProcess(name string, options float64, rigCameras []*Camera, opts *NewAnaglyphPostProcessOpts) *AnaglyphPostProcess {
 	if opts == nil {
 		opts = &NewAnaglyphPostProcessOpts{}
 	}
@@ -55,7 +55,7 @@ func (ba *Babylon) NewAnaglyphPostProcess(name string, options float64, rigCamer
 
 	args = append(args, name)
 	args = append(args, options)
-	args = append(args, rigCameras.JSObject())
+	args = append(args, rigCameras)
 
 	if opts.SamplingMode == nil {
 		args = append(args, js.Undefined())

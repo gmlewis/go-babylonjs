@@ -17,9 +17,9 @@ type Grid struct {
 func (g *Grid) JSObject() js.Value { return g.p }
 
 // Grid returns a Grid JavaScript class.
-func (ba *Babylon) Grid() *Grid {
-	p := ba.ctx.Get("Grid")
-	return GridFromJSObject(p, ba.ctx)
+func (gui *GUI) Grid() *Grid {
+	p := gui.ctx.Get("Grid")
+	return GridFromJSObject(p, gui.ctx)
 }
 
 // GridFromJSObject returns a wrapped Grid JavaScript class.
@@ -347,16 +347,20 @@ func (g *Grid) SetCells(cells js.Value) *Grid {
 // Children returns the Children property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#children
-func (g *Grid) Children() *Control {
+func (g *Grid) Children() []*Control {
 	retVal := g.p.Get("children")
-	return ControlFromJSObject(retVal, g.ctx)
+	result := []*Control{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ControlFromJSObject(retVal.Index(ri), g.ctx))
+	}
+	return result
 }
 
 // SetChildren sets the Children property of class Grid.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid#children
-func (g *Grid) SetChildren(children *Control) *Grid {
-	g.p.Set("children", children.JSObject())
+func (g *Grid) SetChildren(children []*Control) *Grid {
+	g.p.Set("children", children)
 	return g
 }
 

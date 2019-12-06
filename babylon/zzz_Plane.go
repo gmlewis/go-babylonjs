@@ -55,10 +55,14 @@ func (ba *Babylon) NewPlane(a float64, b float64, c float64, d float64) *Plane {
 // AsArray calls the AsArray method on the Plane object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.plane#asarray
-func (p *Plane) AsArray() float64 {
+func (p *Plane) AsArray() []float64 {
 
 	retVal := p.p.Call("asArray")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // Clone calls the Clone method on the Plane object.

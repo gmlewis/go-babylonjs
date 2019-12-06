@@ -233,16 +233,20 @@ func (b *BoundingBox) SetCenterWorld(centerWorld *Vector3) *BoundingBox {
 // Directions returns the Directions property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#directions
-func (b *BoundingBox) Directions() *Vector3 {
+func (b *BoundingBox) Directions() []*Vector3 {
 	retVal := b.p.Get("directions")
-	return Vector3FromJSObject(retVal, b.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 // SetDirections sets the Directions property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#directions
-func (b *BoundingBox) SetDirections(directions *Vector3) *BoundingBox {
-	b.p.Set("directions", directions.JSObject())
+func (b *BoundingBox) SetDirections(directions []*Vector3) *BoundingBox {
+	b.p.Set("directions", directions)
 	return b
 }
 
@@ -345,31 +349,39 @@ func (b *BoundingBox) SetMinimumWorld(minimumWorld *Vector3) *BoundingBox {
 // Vectors returns the Vectors property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#vectors
-func (b *BoundingBox) Vectors() *Vector3 {
+func (b *BoundingBox) Vectors() []*Vector3 {
 	retVal := b.p.Get("vectors")
-	return Vector3FromJSObject(retVal, b.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 // SetVectors sets the Vectors property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#vectors
-func (b *BoundingBox) SetVectors(vectors *Vector3) *BoundingBox {
-	b.p.Set("vectors", vectors.JSObject())
+func (b *BoundingBox) SetVectors(vectors []*Vector3) *BoundingBox {
+	b.p.Set("vectors", vectors)
 	return b
 }
 
 // VectorsWorld returns the VectorsWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#vectorsworld
-func (b *BoundingBox) VectorsWorld() *Vector3 {
+func (b *BoundingBox) VectorsWorld() []*Vector3 {
 	retVal := b.p.Get("vectorsWorld")
-	return Vector3FromJSObject(retVal, b.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 // SetVectorsWorld sets the VectorsWorld property of class BoundingBox.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox#vectorsworld
-func (b *BoundingBox) SetVectorsWorld(vectorsWorld *Vector3) *BoundingBox {
-	b.p.Set("vectorsWorld", vectorsWorld.JSObject())
+func (b *BoundingBox) SetVectorsWorld(vectorsWorld []*Vector3) *BoundingBox {
+	b.p.Set("vectorsWorld", vectorsWorld)
 	return b
 }

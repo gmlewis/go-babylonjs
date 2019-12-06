@@ -460,16 +460,20 @@ func (b *BaseParticleSystem) GetVelocityGradients() []*FactorGradient {
 // Animations returns the Animations property of class BaseParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseparticlesystem#animations
-func (b *BaseParticleSystem) Animations() *Animation {
+func (b *BaseParticleSystem) Animations() []*Animation {
 	retVal := b.p.Get("animations")
-	return AnimationFromJSObject(retVal, b.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class BaseParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseparticlesystem#animations
-func (b *BaseParticleSystem) SetAnimations(animations *Animation) *BaseParticleSystem {
-	b.p.Set("animations", animations.JSObject())
+func (b *BaseParticleSystem) SetAnimations(animations []*Animation) *BaseParticleSystem {
+	b.p.Set("animations", animations)
 	return b
 }
 

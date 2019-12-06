@@ -95,8 +95,8 @@ func (ba *Babylon) NewDepthOfFieldMergePostProcess(name string, originalFromInpu
 // DepthOfFieldMergePostProcessUpdateEffectOpts contains optional parameters for DepthOfFieldMergePostProcess.UpdateEffect.
 type DepthOfFieldMergePostProcessUpdateEffectOpts struct {
 	Defines         *string
-	Uniforms        *string
-	Samplers        *string
+	Uniforms        []string
+	Samplers        []string
 	IndexParameters *interface{}
 	OnCompiled      func()
 	OnError         func()
@@ -120,12 +120,12 @@ func (d *DepthOfFieldMergePostProcess) UpdateEffect(opts *DepthOfFieldMergePostP
 	if opts.Uniforms == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Uniforms)
+		args = append(args, opts.Uniforms)
 	}
 	if opts.Samplers == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Samplers)
+		args = append(args, opts.Samplers)
 	}
 	if opts.IndexParameters == nil {
 		args = append(args, js.Undefined())

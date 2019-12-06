@@ -662,16 +662,20 @@ func (b *BackgroundMaterial) SetShadowLevel(shadowLevel float64) *BackgroundMate
 // ShadowLights returns the ShadowLights property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#shadowlights
-func (b *BackgroundMaterial) ShadowLights() *IShadowLight {
+func (b *BackgroundMaterial) ShadowLights() []*IShadowLight {
 	retVal := b.p.Get("shadowLights")
-	return IShadowLightFromJSObject(retVal, b.ctx)
+	result := []*IShadowLight{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IShadowLightFromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 // SetShadowLights sets the ShadowLights property of class BackgroundMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#shadowlights
-func (b *BackgroundMaterial) SetShadowLights(shadowLights *IShadowLight) *BackgroundMaterial {
-	b.p.Set("shadowLights", shadowLights.JSObject())
+func (b *BackgroundMaterial) SetShadowLights(shadowLights []*IShadowLight) *BackgroundMaterial {
+	b.p.Set("shadowLights", shadowLights)
 	return b
 }
 

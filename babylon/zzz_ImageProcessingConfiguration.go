@@ -133,7 +133,7 @@ func (i *ImageProcessingConfiguration) PrepareDefines(defines js.Value, opts *Im
 // PrepareSamplers calls the PrepareSamplers method on the ImageProcessingConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#preparesamplers
-func (i *ImageProcessingConfiguration) PrepareSamplers(samplersList string, defines js.Value) {
+func (i *ImageProcessingConfiguration) PrepareSamplers(samplersList []string, defines js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -146,7 +146,7 @@ func (i *ImageProcessingConfiguration) PrepareSamplers(samplersList string, defi
 // PrepareUniforms calls the PrepareUniforms method on the ImageProcessingConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#prepareuniforms
-func (i *ImageProcessingConfiguration) PrepareUniforms(uniforms string, defines js.Value) {
+func (i *ImageProcessingConfiguration) PrepareUniforms(uniforms []string, defines js.Value) {
 
 	args := make([]interface{}, 0, 2+0)
 

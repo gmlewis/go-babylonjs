@@ -84,16 +84,20 @@ func (g *GradientBlock) _deserialize(serializationObject interface{}, scene *Sce
 // ColorSteps returns the ColorSteps property of class GradientBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#colorsteps
-func (g *GradientBlock) ColorSteps() *GradientBlockColorStep {
+func (g *GradientBlock) ColorSteps() []*GradientBlockColorStep {
 	retVal := g.p.Get("colorSteps")
-	return GradientBlockColorStepFromJSObject(retVal, g.ctx)
+	result := []*GradientBlockColorStep{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, GradientBlockColorStepFromJSObject(retVal.Index(ri), g.ctx))
+	}
+	return result
 }
 
 // SetColorSteps sets the ColorSteps property of class GradientBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#colorsteps
-func (g *GradientBlock) SetColorSteps(colorSteps *GradientBlockColorStep) *GradientBlock {
-	g.p.Set("colorSteps", colorSteps.JSObject())
+func (g *GradientBlock) SetColorSteps(colorSteps []*GradientBlockColorStep) *GradientBlock {
+	g.p.Set("colorSteps", colorSteps)
 	return g
 }
 

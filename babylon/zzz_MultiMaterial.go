@@ -119,19 +119,27 @@ func (m *MultiMaterial) Dispose(opts *MultiMaterialDisposeOpts) {
 // GetActiveTextures calls the GetActiveTextures method on the MultiMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#getactivetextures
-func (m *MultiMaterial) GetActiveTextures() *BaseTexture {
+func (m *MultiMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := m.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, m.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // GetChildren calls the GetChildren method on the MultiMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#getchildren
-func (m *MultiMaterial) GetChildren() *Material {
+func (m *MultiMaterial) GetChildren() []*Material {
 
 	retVal := m.p.Call("getChildren")
-	return MaterialFromJSObject(retVal, m.ctx)
+	result := []*Material{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MaterialFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the MultiMaterial object.
@@ -210,15 +218,19 @@ func (m *MultiMaterial) Serialize() interface{} {
 // SubMaterials returns the SubMaterials property of class MultiMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#submaterials
-func (m *MultiMaterial) SubMaterials() *Material {
+func (m *MultiMaterial) SubMaterials() []*Material {
 	retVal := m.p.Get("subMaterials")
-	return MaterialFromJSObject(retVal, m.ctx)
+	result := []*Material{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MaterialFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // SetSubMaterials sets the SubMaterials property of class MultiMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#submaterials
-func (m *MultiMaterial) SetSubMaterials(subMaterials *Material) *MultiMaterial {
-	m.p.Set("subMaterials", subMaterials.JSObject())
+func (m *MultiMaterial) SetSubMaterials(subMaterials []*Material) *MultiMaterial {
+	m.p.Set("subMaterials", subMaterials)
 	return m
 }

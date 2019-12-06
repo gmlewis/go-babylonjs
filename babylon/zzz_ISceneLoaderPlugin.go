@@ -44,7 +44,7 @@ type ISceneLoaderPluginImportMeshOpts struct {
 // ImportMesh calls the ImportMesh method on the ISceneLoaderPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderplugin#importmesh
-func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, meshes *AbstractMesh, particleSystems *IParticleSystem, skeletons *Skeleton, opts *ISceneLoaderPluginImportMeshOpts) bool {
+func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, meshes []*AbstractMesh, particleSystems []*IParticleSystem, skeletons []*Skeleton, opts *ISceneLoaderPluginImportMeshOpts) bool {
 	if opts == nil {
 		opts = &ISceneLoaderPluginImportMeshOpts{}
 	}
@@ -55,9 +55,9 @@ func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, d
 	args = append(args, scene.JSObject())
 	args = append(args, data)
 	args = append(args, rootUrl)
-	args = append(args, meshes.JSObject())
-	args = append(args, particleSystems.JSObject())
-	args = append(args, skeletons.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(meshes))
+	args = append(args, IParticleSystemArrayToJSArray(particleSystems))
+	args = append(args, SkeletonArrayToJSArray(skeletons))
 
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())

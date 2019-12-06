@@ -17,9 +17,9 @@ type XmlLoader struct {
 func (x *XmlLoader) JSObject() js.Value { return x.p }
 
 // XmlLoader returns a XmlLoader JavaScript class.
-func (ba *Babylon) XmlLoader() *XmlLoader {
-	p := ba.ctx.Get("XmlLoader")
-	return XmlLoaderFromJSObject(p, ba.ctx)
+func (gui *GUI) XmlLoader() *XmlLoader {
+	p := gui.ctx.Get("XmlLoader")
+	return XmlLoaderFromJSObject(p, gui.ctx)
 }
 
 // XmlLoaderFromJSObject returns a wrapped XmlLoader JavaScript class.

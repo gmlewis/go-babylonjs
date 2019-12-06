@@ -104,7 +104,7 @@ func (f *FurMaterial) Dispose(opts *FurMaterialDisposeOpts) {
 // FurifyMesh calls the FurifyMesh method on the FurMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#furifymesh
-func (f *FurMaterial) FurifyMesh(sourceMesh *Mesh, quality float64) *Mesh {
+func (f *FurMaterial) FurifyMesh(sourceMesh *Mesh, quality float64) []*Mesh {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -112,7 +112,11 @@ func (f *FurMaterial) FurifyMesh(sourceMesh *Mesh, quality float64) *Mesh {
 	args = append(args, quality)
 
 	retVal := f.p.Call("FurifyMesh", args...)
-	return MeshFromJSObject(retVal, f.ctx)
+	result := []*Mesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MeshFromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // GenerateTexture calls the GenerateTexture method on the FurMaterial object.
@@ -132,10 +136,14 @@ func (f *FurMaterial) GenerateTexture(name string, scene *Scene) *DynamicTexture
 // GetActiveTextures calls the GetActiveTextures method on the FurMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#getactivetextures
-func (f *FurMaterial) GetActiveTextures() *BaseTexture {
+func (f *FurMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := f.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, f.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the FurMaterial object.
@@ -150,10 +158,14 @@ func (f *FurMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the FurMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#getanimatables
-func (f *FurMaterial) GetAnimatables() *IAnimatable {
+func (f *FurMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := f.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, f.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the FurMaterial object.
@@ -531,15 +543,19 @@ func (f *FurMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *F
 // _meshes returns the _meshes property of class FurMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#_meshes
-func (f *FurMaterial) _meshes() *AbstractMesh {
+func (f *FurMaterial) _meshes() []*AbstractMesh {
 	retVal := f.p.Get("_meshes")
-	return AbstractMeshFromJSObject(retVal, f.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // Set_meshes sets the _meshes property of class FurMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial#_meshes
-func (f *FurMaterial) Set_meshes(_meshes *AbstractMesh) *FurMaterial {
-	f.p.Set("_meshes", _meshes.JSObject())
+func (f *FurMaterial) Set_meshes(_meshes []*AbstractMesh) *FurMaterial {
+	f.p.Set("_meshes", _meshes)
 	return f
 }

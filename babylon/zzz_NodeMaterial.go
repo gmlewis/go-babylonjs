@@ -240,10 +240,14 @@ func (n *NodeMaterial) GenerateCode() string {
 // GetActiveTextures calls the GetActiveTextures method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#getactivetextures
-func (n *NodeMaterial) GetActiveTextures() *BaseTexture {
+func (n *NodeMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := n.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, n.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // GetBlockByName calls the GetBlockByName method on the NodeMaterial object.
@@ -297,19 +301,27 @@ func (n *NodeMaterial) GetInputBlockByPredicate(predicate func()) *InputBlock {
 // GetInputBlocks calls the GetInputBlocks method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#getinputblocks
-func (n *NodeMaterial) GetInputBlocks() *InputBlock {
+func (n *NodeMaterial) GetInputBlocks() []*InputBlock {
 
 	retVal := n.p.Call("getInputBlocks")
-	return InputBlockFromJSObject(retVal, n.ctx)
+	result := []*InputBlock{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, InputBlockFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // GetTextureBlocks calls the GetTextureBlocks method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#gettextureblocks
-func (n *NodeMaterial) GetTextureBlocks() *ReflectionTextureBlock {
+func (n *NodeMaterial) GetTextureBlocks() []*ReflectionTextureBlock {
 
 	retVal := n.p.Call("getTextureBlocks")
-	return ReflectionTextureBlockFromJSObject(retVal, n.ctx)
+	result := []*ReflectionTextureBlock{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ReflectionTextureBlockFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // HasTexture calls the HasTexture method on the NodeMaterial object.
@@ -517,16 +529,20 @@ func (n *NodeMaterial) UnregisterOptimizer(optimizer *NodeMaterialOptimizer) *No
 // AttachedBlocks returns the AttachedBlocks property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#attachedblocks
-func (n *NodeMaterial) AttachedBlocks() *NodeMaterialBlock {
+func (n *NodeMaterial) AttachedBlocks() []*NodeMaterialBlock {
 	retVal := n.p.Get("attachedBlocks")
-	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
+	result := []*NodeMaterialBlock{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, NodeMaterialBlockFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // SetAttachedBlocks sets the AttachedBlocks property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#attachedblocks
-func (n *NodeMaterial) SetAttachedBlocks(attachedBlocks *NodeMaterialBlock) *NodeMaterial {
-	n.p.Set("attachedBlocks", attachedBlocks.JSObject())
+func (n *NodeMaterial) SetAttachedBlocks(attachedBlocks []*NodeMaterialBlock) *NodeMaterial {
+	n.p.Set("attachedBlocks", attachedBlocks)
 	return n
 }
 
@@ -661,31 +677,39 @@ func (n *NodeMaterial) SetOptions(options *INodeMaterialOptions) *NodeMaterial {
 // _fragmentOutputNodes returns the _fragmentOutputNodes property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#_fragmentoutputnodes
-func (n *NodeMaterial) _fragmentOutputNodes() *NodeMaterialBlock {
+func (n *NodeMaterial) _fragmentOutputNodes() []*NodeMaterialBlock {
 	retVal := n.p.Get("_fragmentOutputNodes")
-	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
+	result := []*NodeMaterialBlock{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, NodeMaterialBlockFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // Set_fragmentOutputNodes sets the _fragmentOutputNodes property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#_fragmentoutputnodes
-func (n *NodeMaterial) Set_fragmentOutputNodes(_fragmentOutputNodes *NodeMaterialBlock) *NodeMaterial {
-	n.p.Set("_fragmentOutputNodes", _fragmentOutputNodes.JSObject())
+func (n *NodeMaterial) Set_fragmentOutputNodes(_fragmentOutputNodes []*NodeMaterialBlock) *NodeMaterial {
+	n.p.Set("_fragmentOutputNodes", _fragmentOutputNodes)
 	return n
 }
 
 // _vertexOutputNodes returns the _vertexOutputNodes property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#_vertexoutputnodes
-func (n *NodeMaterial) _vertexOutputNodes() *NodeMaterialBlock {
+func (n *NodeMaterial) _vertexOutputNodes() []*NodeMaterialBlock {
 	retVal := n.p.Get("_vertexOutputNodes")
-	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
+	result := []*NodeMaterialBlock{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, NodeMaterialBlockFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // Set_vertexOutputNodes sets the _vertexOutputNodes property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#_vertexoutputnodes
-func (n *NodeMaterial) Set_vertexOutputNodes(_vertexOutputNodes *NodeMaterialBlock) *NodeMaterial {
-	n.p.Set("_vertexOutputNodes", _vertexOutputNodes.JSObject())
+func (n *NodeMaterial) Set_vertexOutputNodes(_vertexOutputNodes []*NodeMaterialBlock) *NodeMaterial {
+	n.p.Set("_vertexOutputNodes", _vertexOutputNodes)
 	return n
 }

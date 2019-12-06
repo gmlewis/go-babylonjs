@@ -113,10 +113,14 @@ func (g *GradientMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the GradientMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getanimatables
-func (g *GradientMaterial) GetAnimatables() *IAnimatable {
+func (g *GradientMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := g.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, g.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), g.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the GradientMaterial object.

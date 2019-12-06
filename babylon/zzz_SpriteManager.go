@@ -137,7 +137,7 @@ type SpriteManagerMultiIntersectsOpts struct {
 // MultiIntersects calls the MultiIntersects method on the SpriteManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#multiintersects
-func (s *SpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *SpriteManagerMultiIntersectsOpts) *PickingInfo {
+func (s *SpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *SpriteManagerMultiIntersectsOpts) []*PickingInfo {
 	if opts == nil {
 		opts = &SpriteManagerMultiIntersectsOpts{}
 	}
@@ -154,7 +154,11 @@ func (s *SpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *SpriteMa
 	}
 
 	retVal := s.p.Call("multiIntersects", args...)
-	return PickingInfoFromJSObject(retVal, s.ctx)
+	result := []*PickingInfo{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PickingInfoFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // Render calls the Render method on the SpriteManager object.
@@ -312,16 +316,20 @@ func (s *SpriteManager) SetRenderingGroupId(renderingGroupId float64) *SpriteMan
 // Sprites returns the Sprites property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#sprites
-func (s *SpriteManager) Sprites() *Sprite {
+func (s *SpriteManager) Sprites() []*Sprite {
 	retVal := s.p.Get("sprites")
-	return SpriteFromJSObject(retVal, s.ctx)
+	result := []*Sprite{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SpriteFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetSprites sets the Sprites property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#sprites
-func (s *SpriteManager) SetSprites(sprites *Sprite) *SpriteManager {
-	s.p.Set("sprites", sprites.JSObject())
+func (s *SpriteManager) SetSprites(sprites []*Sprite) *SpriteManager {
+	s.p.Set("sprites", sprites)
 	return s
 }
 

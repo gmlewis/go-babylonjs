@@ -119,16 +119,20 @@ func (s *Sprite) SetAngle(angle float64) *Sprite {
 // Animations returns the Animations property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#animations
-func (s *Sprite) Animations() *Animation {
+func (s *Sprite) Animations() []*Animation {
 	retVal := s.p.Get("animations")
-	return AnimationFromJSObject(retVal, s.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class Sprite.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#animations
-func (s *Sprite) SetAnimations(animations *Animation) *Sprite {
-	s.p.Set("animations", animations.JSObject())
+func (s *Sprite) SetAnimations(animations []*Animation) *Sprite {
+	s.p.Set("animations", animations)
 	return s
 }
 

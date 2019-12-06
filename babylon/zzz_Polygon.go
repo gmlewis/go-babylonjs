@@ -48,7 +48,7 @@ type PolygonCircleOpts struct {
 // Circle calls the Circle method on the Polygon object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.polygon#circle
-func (p *Polygon) Circle(radius float64, opts *PolygonCircleOpts) *Vector2 {
+func (p *Polygon) Circle(radius float64, opts *PolygonCircleOpts) []*Vector2 {
 	if opts == nil {
 		opts = &PolygonCircleOpts{}
 	}
@@ -74,26 +74,34 @@ func (p *Polygon) Circle(radius float64, opts *PolygonCircleOpts) *Vector2 {
 	}
 
 	retVal := p.p.Call("Circle", args...)
-	return Vector2FromJSObject(retVal, p.ctx)
+	result := []*Vector2{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector2FromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // Parse calls the Parse method on the Polygon object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.polygon#parse
-func (p *Polygon) Parse(input string) *Vector2 {
+func (p *Polygon) Parse(input string) []*Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
 	args = append(args, input)
 
 	retVal := p.p.Call("Parse", args...)
-	return Vector2FromJSObject(retVal, p.ctx)
+	result := []*Vector2{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector2FromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // Rectangle calls the Rectangle method on the Polygon object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.polygon#rectangle
-func (p *Polygon) Rectangle(xmin float64, ymin float64, xmax float64, ymax float64) *Vector2 {
+func (p *Polygon) Rectangle(xmin float64, ymin float64, xmax float64, ymax float64) []*Vector2 {
 
 	args := make([]interface{}, 0, 4+0)
 
@@ -103,7 +111,11 @@ func (p *Polygon) Rectangle(xmin float64, ymin float64, xmax float64, ymax float
 	args = append(args, ymax)
 
 	retVal := p.p.Call("Rectangle", args...)
-	return Vector2FromJSObject(retVal, p.ctx)
+	result := []*Vector2{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector2FromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // StartingAt calls the StartingAt method on the Polygon object.

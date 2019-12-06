@@ -82,15 +82,19 @@ func (v *VRCameraMetrics) SetAspectRatioFov(aspectRatioFov float64) *VRCameraMet
 // ChromaAbCorrection returns the ChromaAbCorrection property of class VRCameraMetrics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#chromaabcorrection
-func (v *VRCameraMetrics) ChromaAbCorrection() float64 {
+func (v *VRCameraMetrics) ChromaAbCorrection() []float64 {
 	retVal := v.p.Get("chromaAbCorrection")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetChromaAbCorrection sets the ChromaAbCorrection property of class VRCameraMetrics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#chromaabcorrection
-func (v *VRCameraMetrics) SetChromaAbCorrection(chromaAbCorrection float64) *VRCameraMetrics {
+func (v *VRCameraMetrics) SetChromaAbCorrection(chromaAbCorrection []float64) *VRCameraMetrics {
 	v.p.Set("chromaAbCorrection", chromaAbCorrection)
 	return v
 }
@@ -114,15 +118,19 @@ func (v *VRCameraMetrics) SetCompensateDistortion(compensateDistortion bool) *VR
 // DistortionK returns the DistortionK property of class VRCameraMetrics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#distortionk
-func (v *VRCameraMetrics) DistortionK() float64 {
+func (v *VRCameraMetrics) DistortionK() []float64 {
 	retVal := v.p.Get("distortionK")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetDistortionK sets the DistortionK property of class VRCameraMetrics.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#distortionk
-func (v *VRCameraMetrics) SetDistortionK(distortionK float64) *VRCameraMetrics {
+func (v *VRCameraMetrics) SetDistortionK(distortionK []float64) *VRCameraMetrics {
 	v.p.Set("distortionK", distortionK)
 	return v
 }

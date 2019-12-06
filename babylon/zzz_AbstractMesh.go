@@ -410,28 +410,36 @@ func (a *AbstractMesh) GetFacetDataParameters() interface{} {
 // GetFacetLocalNormals calls the GetFacetLocalNormals method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getfacetlocalnormals
-func (a *AbstractMesh) GetFacetLocalNormals() *Vector3 {
+func (a *AbstractMesh) GetFacetLocalNormals() []*Vector3 {
 
 	retVal := a.p.Call("getFacetLocalNormals")
-	return Vector3FromJSObject(retVal, a.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // GetFacetLocalPartitioning calls the GetFacetLocalPartitioning method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getfacetlocalpartitioning
-func (a *AbstractMesh) GetFacetLocalPartitioning() float64 {
+func (a *AbstractMesh) GetFacetLocalPartitioning() js.Value /* [][]float64 */ {
 
 	retVal := a.p.Call("getFacetLocalPartitioning")
-	return retVal.Float()
+	return retVal
 }
 
 // GetFacetLocalPositions calls the GetFacetLocalPositions method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getfacetlocalpositions
-func (a *AbstractMesh) GetFacetLocalPositions() *Vector3 {
+func (a *AbstractMesh) GetFacetLocalPositions() []*Vector3 {
 
 	retVal := a.p.Call("getFacetLocalPositions")
-	return Vector3FromJSObject(retVal, a.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // GetFacetNormal calls the GetFacetNormal method on the AbstractMesh object.
@@ -491,7 +499,7 @@ func (a *AbstractMesh) GetFacetPositionToRef(i float64, ref *Vector3) *AbstractM
 // GetFacetsAtLocalCoordinates calls the GetFacetsAtLocalCoordinates method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getfacetsatlocalcoordinates
-func (a *AbstractMesh) GetFacetsAtLocalCoordinates(x float64, y float64, z float64) float64 {
+func (a *AbstractMesh) GetFacetsAtLocalCoordinates(x float64, y float64, z float64) []float64 {
 
 	args := make([]interface{}, 0, 3+0)
 
@@ -500,7 +508,11 @@ func (a *AbstractMesh) GetFacetsAtLocalCoordinates(x float64, y float64, z float
 	args = append(args, z)
 
 	retVal := a.p.Call("getFacetsAtLocalCoordinates", args...)
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // GetIndices calls the GetIndices method on the AbstractMesh object.
@@ -652,11 +664,11 @@ func (a *AbstractMesh) IntersectsPoint(point *Vector3) bool {
 // IsCompletelyInFrustum calls the IsCompletelyInFrustum method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#iscompletelyinfrustum
-func (a *AbstractMesh) IsCompletelyInFrustum(frustumPlanes *Plane) bool {
+func (a *AbstractMesh) IsCompletelyInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := a.p.Call("isCompletelyInFrustum", args...)
 	return retVal.Bool()
@@ -665,11 +677,11 @@ func (a *AbstractMesh) IsCompletelyInFrustum(frustumPlanes *Plane) bool {
 // IsInFrustum calls the IsInFrustum method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#isinfrustum
-func (a *AbstractMesh) IsInFrustum(frustumPlanes *Plane) bool {
+func (a *AbstractMesh) IsInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := a.p.Call("isInFrustum", args...)
 	return retVal.Bool()
@@ -1681,16 +1693,20 @@ func (a *AbstractMesh) SetLayerMask(layerMask float64) *AbstractMesh {
 // LightSources returns the LightSources property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#lightsources
-func (a *AbstractMesh) LightSources() *Light {
+func (a *AbstractMesh) LightSources() []*Light {
 	retVal := a.p.Get("lightSources")
-	return LightFromJSObject(retVal, a.ctx)
+	result := []*Light{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, LightFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetLightSources sets the LightSources property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#lightsources
-func (a *AbstractMesh) SetLightSources(lightSources *Light) *AbstractMesh {
-	a.p.Set("lightSources", lightSources.JSObject())
+func (a *AbstractMesh) SetLightSources(lightSources []*Light) *AbstractMesh {
+	a.p.Set("lightSources", lightSources)
 	return a
 }
 
@@ -2209,16 +2225,20 @@ func (a *AbstractMesh) SetSkeleton(skeleton *Skeleton) *AbstractMesh {
 // SubMeshes returns the SubMeshes property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#submeshes
-func (a *AbstractMesh) SubMeshes() *SubMesh {
+func (a *AbstractMesh) SubMeshes() []*SubMesh {
 	retVal := a.p.Get("subMeshes")
-	return SubMeshFromJSObject(retVal, a.ctx)
+	result := []*SubMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SubMeshFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetSubMeshes sets the SubMeshes property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#submeshes
-func (a *AbstractMesh) SetSubMeshes(subMeshes *SubMesh) *AbstractMesh {
-	a.p.Set("subMeshes", subMeshes.JSObject())
+func (a *AbstractMesh) SetSubMeshes(subMeshes []*SubMesh) *AbstractMesh {
+	a.p.Set("subMeshes", subMeshes)
 	return a
 }
 

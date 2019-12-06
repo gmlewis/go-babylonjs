@@ -17,9 +17,9 @@ type ValueAndUnit struct {
 func (v *ValueAndUnit) JSObject() js.Value { return v.p }
 
 // ValueAndUnit returns a ValueAndUnit JavaScript class.
-func (ba *Babylon) ValueAndUnit() *ValueAndUnit {
-	p := ba.ctx.Get("ValueAndUnit")
-	return ValueAndUnitFromJSObject(p, ba.ctx)
+func (gui *GUI) ValueAndUnit() *ValueAndUnit {
+	p := gui.ctx.Get("ValueAndUnit")
+	return ValueAndUnitFromJSObject(p, gui.ctx)
 }
 
 // ValueAndUnitFromJSObject returns a wrapped ValueAndUnit JavaScript class.

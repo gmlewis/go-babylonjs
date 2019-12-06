@@ -246,10 +246,14 @@ func (s *Skeleton) EnableBlending(opts *SkeletonEnableBlendingOpts) {
 // GetAnimatables calls the GetAnimatables method on the Skeleton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#getanimatables
-func (s *Skeleton) GetAnimatables() *IAnimatable {
+func (s *Skeleton) GetAnimatables() []*IAnimatable {
 
 	retVal := s.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, s.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // GetAnimationRange calls the GetAnimationRange method on the Skeleton object.
@@ -268,10 +272,14 @@ func (s *Skeleton) GetAnimationRange(name string) *AnimationRange {
 // GetAnimationRanges calls the GetAnimationRanges method on the Skeleton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#getanimationranges
-func (s *Skeleton) GetAnimationRanges() *AnimationRange {
+func (s *Skeleton) GetAnimationRanges() []*AnimationRange {
 
 	retVal := s.p.Call("getAnimationRanges")
-	return AnimationRangeFromJSObject(retVal, s.ctx)
+	result := []*AnimationRange{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationRangeFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // GetBoneIndexByName calls the GetBoneIndexByName method on the Skeleton object.
@@ -464,16 +472,20 @@ func (s *Skeleton) SetAnimations(animations []*Animation) *Skeleton {
 // Bones returns the Bones property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#bones
-func (s *Skeleton) Bones() *Bone {
+func (s *Skeleton) Bones() []*Bone {
 	retVal := s.p.Get("bones")
-	return BoneFromJSObject(retVal, s.ctx)
+	result := []*Bone{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BoneFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetBones sets the Bones property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#bones
-func (s *Skeleton) SetBones(bones *Bone) *Skeleton {
-	s.p.Set("bones", bones.JSObject())
+func (s *Skeleton) SetBones(bones []*Bone) *Skeleton {
+	s.p.Set("bones", bones)
 	return s
 }
 
@@ -528,16 +540,20 @@ func (s *Skeleton) SetId(id string) *Skeleton {
 // InspectableCustomProperties returns the InspectableCustomProperties property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#inspectablecustomproperties
-func (s *Skeleton) InspectableCustomProperties() *IInspectable {
+func (s *Skeleton) InspectableCustomProperties() []*IInspectable {
 	retVal := s.p.Get("inspectableCustomProperties")
-	return IInspectableFromJSObject(retVal, s.ctx)
+	result := []*IInspectable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IInspectableFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class Skeleton.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#inspectablecustomproperties
-func (s *Skeleton) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Skeleton {
-	s.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+func (s *Skeleton) SetInspectableCustomProperties(inspectableCustomProperties []*IInspectable) *Skeleton {
+	s.p.Set("inspectableCustomProperties", inspectableCustomProperties)
 	return s
 }
 

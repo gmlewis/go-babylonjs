@@ -300,15 +300,19 @@ func (f *FlyCamera) SetInputs(inputs *FlyCameraInputsManager) *FlyCamera {
 // KeysBackward returns the KeysBackward property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysbackward
-func (f *FlyCamera) KeysBackward() float64 {
+func (f *FlyCamera) KeysBackward() []float64 {
 	retVal := f.p.Get("keysBackward")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysBackward sets the KeysBackward property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysbackward
-func (f *FlyCamera) SetKeysBackward(keysBackward float64) *FlyCamera {
+func (f *FlyCamera) SetKeysBackward(keysBackward []float64) *FlyCamera {
 	f.p.Set("keysBackward", keysBackward)
 	return f
 }
@@ -316,15 +320,19 @@ func (f *FlyCamera) SetKeysBackward(keysBackward float64) *FlyCamera {
 // KeysDown returns the KeysDown property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysdown
-func (f *FlyCamera) KeysDown() float64 {
+func (f *FlyCamera) KeysDown() []float64 {
 	retVal := f.p.Get("keysDown")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysDown sets the KeysDown property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysdown
-func (f *FlyCamera) SetKeysDown(keysDown float64) *FlyCamera {
+func (f *FlyCamera) SetKeysDown(keysDown []float64) *FlyCamera {
 	f.p.Set("keysDown", keysDown)
 	return f
 }
@@ -332,15 +340,19 @@ func (f *FlyCamera) SetKeysDown(keysDown float64) *FlyCamera {
 // KeysForward returns the KeysForward property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysforward
-func (f *FlyCamera) KeysForward() float64 {
+func (f *FlyCamera) KeysForward() []float64 {
 	retVal := f.p.Get("keysForward")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysForward sets the KeysForward property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysforward
-func (f *FlyCamera) SetKeysForward(keysForward float64) *FlyCamera {
+func (f *FlyCamera) SetKeysForward(keysForward []float64) *FlyCamera {
 	f.p.Set("keysForward", keysForward)
 	return f
 }
@@ -348,15 +360,19 @@ func (f *FlyCamera) SetKeysForward(keysForward float64) *FlyCamera {
 // KeysLeft returns the KeysLeft property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysleft
-func (f *FlyCamera) KeysLeft() float64 {
+func (f *FlyCamera) KeysLeft() []float64 {
 	retVal := f.p.Get("keysLeft")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysLeft sets the KeysLeft property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysleft
-func (f *FlyCamera) SetKeysLeft(keysLeft float64) *FlyCamera {
+func (f *FlyCamera) SetKeysLeft(keysLeft []float64) *FlyCamera {
 	f.p.Set("keysLeft", keysLeft)
 	return f
 }
@@ -364,15 +380,19 @@ func (f *FlyCamera) SetKeysLeft(keysLeft float64) *FlyCamera {
 // KeysRight returns the KeysRight property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysright
-func (f *FlyCamera) KeysRight() float64 {
+func (f *FlyCamera) KeysRight() []float64 {
 	retVal := f.p.Get("keysRight")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysRight sets the KeysRight property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysright
-func (f *FlyCamera) SetKeysRight(keysRight float64) *FlyCamera {
+func (f *FlyCamera) SetKeysRight(keysRight []float64) *FlyCamera {
 	f.p.Set("keysRight", keysRight)
 	return f
 }
@@ -380,15 +400,19 @@ func (f *FlyCamera) SetKeysRight(keysRight float64) *FlyCamera {
 // KeysUp returns the KeysUp property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysup
-func (f *FlyCamera) KeysUp() float64 {
+func (f *FlyCamera) KeysUp() []float64 {
 	retVal := f.p.Get("keysUp")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysUp sets the KeysUp property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#keysup
-func (f *FlyCamera) SetKeysUp(keysUp float64) *FlyCamera {
+func (f *FlyCamera) SetKeysUp(keysUp []float64) *FlyCamera {
 	f.p.Set("keysUp", keysUp)
 	return f
 }

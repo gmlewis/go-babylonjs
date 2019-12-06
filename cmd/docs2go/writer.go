@@ -230,7 +230,7 @@ if opts == nil {
   if opts.{{index $value.GoOptsName $index}} == nil {
     args = append(args, js.Undefined())
   } else {
-    args = append(args, {{$element}})
+    args = append(args, {{if index $value.OptsNeedsArrayHelper $index}}{{index $value.OptsNeedsArrayHelper $index}}{{else}}{{$element}}{{end}})
   }
   {{end}}{{end}}
 
@@ -268,7 +268,7 @@ opts = &{{$name}}{{$key}}Opts{}
   if opts.{{index $value.GoOptsName $index}} == nil {
     args = append(args, js.Undefined())
   } else {
-    args = append(args, {{$element}})
+    args = append(args, {{if index $value.OptsNeedsArrayHelper $index}}{{index $value.OptsNeedsArrayHelper $index}}{{else}}{{$element}}{{end}})
   }
   {{end}}{{end}}
 

@@ -402,7 +402,7 @@ type MeshCreateDashedLinesOpts struct {
 // CreateDashedLines calls the CreateDashedLines method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#createdashedlines
-func (m *Mesh) CreateDashedLines(name string, points *Vector3, dashSize float64, gapSize float64, dashNb float64, opts *MeshCreateDashedLinesOpts) *LinesMesh {
+func (m *Mesh) CreateDashedLines(name string, points []*Vector3, dashSize float64, gapSize float64, dashNb float64, opts *MeshCreateDashedLinesOpts) *LinesMesh {
 	if opts == nil {
 		opts = &MeshCreateDashedLinesOpts{}
 	}
@@ -410,7 +410,7 @@ func (m *Mesh) CreateDashedLines(name string, points *Vector3, dashSize float64,
 	args := make([]interface{}, 0, 5+3)
 
 	args = append(args, name)
-	args = append(args, points.JSObject())
+	args = append(args, Vector3ArrayToJSArray(points))
 	args = append(args, dashSize)
 	args = append(args, gapSize)
 	args = append(args, dashNb)
@@ -642,7 +642,7 @@ type MeshCreateLatheOpts struct {
 // CreateLathe calls the CreateLathe method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#createlathe
-func (m *Mesh) CreateLathe(name string, shape *Vector3, radius float64, tessellation float64, scene *Scene, opts *MeshCreateLatheOpts) *Mesh {
+func (m *Mesh) CreateLathe(name string, shape []*Vector3, radius float64, tessellation float64, scene *Scene, opts *MeshCreateLatheOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshCreateLatheOpts{}
 	}
@@ -650,7 +650,7 @@ func (m *Mesh) CreateLathe(name string, shape *Vector3, radius float64, tessella
 	args := make([]interface{}, 0, 5+2)
 
 	args = append(args, name)
-	args = append(args, shape.JSObject())
+	args = append(args, Vector3ArrayToJSArray(shape))
 	args = append(args, radius)
 	args = append(args, tessellation)
 	args = append(args, scene.JSObject())
@@ -680,7 +680,7 @@ type MeshCreateLinesOpts struct {
 // CreateLines calls the CreateLines method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#createlines
-func (m *Mesh) CreateLines(name string, points *Vector3, opts *MeshCreateLinesOpts) *LinesMesh {
+func (m *Mesh) CreateLines(name string, points []*Vector3, opts *MeshCreateLinesOpts) *LinesMesh {
 	if opts == nil {
 		opts = &MeshCreateLinesOpts{}
 	}
@@ -688,7 +688,7 @@ func (m *Mesh) CreateLines(name string, points *Vector3, opts *MeshCreateLinesOp
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, name)
-	args = append(args, points.JSObject())
+	args = append(args, Vector3ArrayToJSArray(points))
 
 	if opts.Scene == nil {
 		args = append(args, js.Undefined())
@@ -747,7 +747,7 @@ func (m *Mesh) CreatePlane(name string, size float64, scene *Scene, opts *MeshCr
 
 // MeshCreatePolygonOpts contains optional parameters for Mesh.CreatePolygon.
 type MeshCreatePolygonOpts struct {
-	Holes           *Vector3
+	Holes           [][]*Vector3
 	Updatable       *bool
 	SideOrientation *float64
 	EarcutInjection *interface{}
@@ -756,7 +756,7 @@ type MeshCreatePolygonOpts struct {
 // CreatePolygon calls the CreatePolygon method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#createpolygon
-func (m *Mesh) CreatePolygon(name string, shape *Vector3, scene *Scene, opts *MeshCreatePolygonOpts) *Mesh {
+func (m *Mesh) CreatePolygon(name string, shape []*Vector3, scene *Scene, opts *MeshCreatePolygonOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshCreatePolygonOpts{}
 	}
@@ -764,13 +764,13 @@ func (m *Mesh) CreatePolygon(name string, shape *Vector3, scene *Scene, opts *Me
 	args := make([]interface{}, 0, 3+4)
 
 	args = append(args, name)
-	args = append(args, shape.JSObject())
+	args = append(args, Vector3ArrayToJSArray(shape))
 	args = append(args, scene.JSObject())
 
 	if opts.Holes == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Holes.JSObject())
+		args = append(args, Vector3Array2DToJSArray(opts.Holes))
 	}
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -818,7 +818,7 @@ type MeshCreateRibbonOpts struct {
 // CreateRibbon calls the CreateRibbon method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#createribbon
-func (m *Mesh) CreateRibbon(name string, pathArray *Vector3, closeArray bool, closePath bool, offset float64, opts *MeshCreateRibbonOpts) *Mesh {
+func (m *Mesh) CreateRibbon(name string, pathArray [][]*Vector3, closeArray bool, closePath bool, offset float64, opts *MeshCreateRibbonOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshCreateRibbonOpts{}
 	}
@@ -826,7 +826,7 @@ func (m *Mesh) CreateRibbon(name string, pathArray *Vector3, closeArray bool, cl
 	args := make([]interface{}, 0, 5+4)
 
 	args = append(args, name)
-	args = append(args, pathArray.JSObject())
+	args = append(args, pathArray)
 	args = append(args, closeArray)
 	args = append(args, closePath)
 	args = append(args, offset)
@@ -1028,7 +1028,7 @@ type MeshCreateTubeOpts struct {
 // CreateTube calls the CreateTube method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#createtube
-func (m *Mesh) CreateTube(name string, path *Vector3, radius float64, tessellation float64, radiusFunction func(), cap float64, scene *Scene, opts *MeshCreateTubeOpts) *Mesh {
+func (m *Mesh) CreateTube(name string, path []*Vector3, radius float64, tessellation float64, radiusFunction func(), cap float64, scene *Scene, opts *MeshCreateTubeOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshCreateTubeOpts{}
 	}
@@ -1036,7 +1036,7 @@ func (m *Mesh) CreateTube(name string, path *Vector3, radius float64, tessellati
 	args := make([]interface{}, 0, 7+3)
 
 	args = append(args, name)
-	args = append(args, path.JSObject())
+	args = append(args, Vector3ArrayToJSArray(path))
 	args = append(args, radius)
 	args = append(args, tessellation)
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { radiusFunction(); return nil }))
@@ -1095,7 +1095,7 @@ func (m *Mesh) Dispose(opts *MeshDisposeOpts) {
 
 // MeshExtrudePolygonOpts contains optional parameters for Mesh.ExtrudePolygon.
 type MeshExtrudePolygonOpts struct {
-	Holes           *Vector3
+	Holes           [][]*Vector3
 	Updatable       *bool
 	SideOrientation *float64
 	EarcutInjection *interface{}
@@ -1104,7 +1104,7 @@ type MeshExtrudePolygonOpts struct {
 // ExtrudePolygon calls the ExtrudePolygon method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#extrudepolygon
-func (m *Mesh) ExtrudePolygon(name string, shape *Vector3, depth float64, scene *Scene, opts *MeshExtrudePolygonOpts) *Mesh {
+func (m *Mesh) ExtrudePolygon(name string, shape []*Vector3, depth float64, scene *Scene, opts *MeshExtrudePolygonOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshExtrudePolygonOpts{}
 	}
@@ -1112,14 +1112,14 @@ func (m *Mesh) ExtrudePolygon(name string, shape *Vector3, depth float64, scene 
 	args := make([]interface{}, 0, 4+4)
 
 	args = append(args, name)
-	args = append(args, shape.JSObject())
+	args = append(args, Vector3ArrayToJSArray(shape))
 	args = append(args, depth)
 	args = append(args, scene.JSObject())
 
 	if opts.Holes == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Holes.JSObject())
+		args = append(args, Vector3Array2DToJSArray(opts.Holes))
 	}
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -1152,7 +1152,7 @@ type MeshExtrudeShapeOpts struct {
 // ExtrudeShape calls the ExtrudeShape method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#extrudeshape
-func (m *Mesh) ExtrudeShape(name string, shape *Vector3, path *Vector3, scale float64, rotation float64, cap float64, opts *MeshExtrudeShapeOpts) *Mesh {
+func (m *Mesh) ExtrudeShape(name string, shape []*Vector3, path []*Vector3, scale float64, rotation float64, cap float64, opts *MeshExtrudeShapeOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshExtrudeShapeOpts{}
 	}
@@ -1160,8 +1160,8 @@ func (m *Mesh) ExtrudeShape(name string, shape *Vector3, path *Vector3, scale fl
 	args := make([]interface{}, 0, 6+4)
 
 	args = append(args, name)
-	args = append(args, shape.JSObject())
-	args = append(args, path.JSObject())
+	args = append(args, Vector3ArrayToJSArray(shape))
+	args = append(args, Vector3ArrayToJSArray(path))
 	args = append(args, scale)
 	args = append(args, rotation)
 	args = append(args, cap)
@@ -1201,7 +1201,7 @@ type MeshExtrudeShapeCustomOpts struct {
 // ExtrudeShapeCustom calls the ExtrudeShapeCustom method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#extrudeshapecustom
-func (m *Mesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector3, scaleFunction func(), rotationFunction func(), ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *MeshExtrudeShapeCustomOpts) *Mesh {
+func (m *Mesh) ExtrudeShapeCustom(name string, shape []*Vector3, path []*Vector3, scaleFunction func(), rotationFunction func(), ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *MeshExtrudeShapeCustomOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshExtrudeShapeCustomOpts{}
 	}
@@ -1209,8 +1209,8 @@ func (m *Mesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector3, sc
 	args := make([]interface{}, 0, 9+3)
 
 	args = append(args, name)
-	args = append(args, shape.JSObject())
-	args = append(args, path.JSObject())
+	args = append(args, Vector3ArrayToJSArray(shape))
+	args = append(args, Vector3ArrayToJSArray(path))
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { scaleFunction(); return nil }))
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { rotationFunction(); return nil }))
 	args = append(args, ribbonCloseArray)
@@ -1283,10 +1283,14 @@ func (m *Mesh) FreezeNormals() *Mesh {
 // GetAnimatables calls the GetAnimatables method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#getanimatables
-func (m *Mesh) GetAnimatables() *IAnimatable {
+func (m *Mesh) GetAnimatables() []*IAnimatable {
 
 	retVal := m.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, m.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the Mesh object.
@@ -1301,19 +1305,27 @@ func (m *Mesh) GetClassName() string {
 // GetEmittedParticleSystems calls the GetEmittedParticleSystems method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#getemittedparticlesystems
-func (m *Mesh) GetEmittedParticleSystems() *IParticleSystem {
+func (m *Mesh) GetEmittedParticleSystems() []*IParticleSystem {
 
 	retVal := m.p.Call("getEmittedParticleSystems")
-	return IParticleSystemFromJSObject(retVal, m.ctx)
+	result := []*IParticleSystem{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IParticleSystemFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // GetHierarchyEmittedParticleSystems calls the GetHierarchyEmittedParticleSystems method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#gethierarchyemittedparticlesystems
-func (m *Mesh) GetHierarchyEmittedParticleSystems() *IParticleSystem {
+func (m *Mesh) GetHierarchyEmittedParticleSystems() []*IParticleSystem {
 
 	retVal := m.p.Call("getHierarchyEmittedParticleSystems")
-	return IParticleSystemFromJSObject(retVal, m.ctx)
+	result := []*IParticleSystem{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IParticleSystemFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // MeshGetIndicesOpts contains optional parameters for Mesh.GetIndices.
@@ -1390,10 +1402,14 @@ func (m *Mesh) GetLODLevelAtDistance(distance float64) *Mesh {
 // GetLODLevels calls the GetLODLevels method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#getlodlevels
-func (m *Mesh) GetLODLevels() *MeshLODLevel {
+func (m *Mesh) GetLODLevels() []*MeshLODLevel {
 
 	retVal := m.p.Call("getLODLevels")
-	return MeshLODLevelFromJSObject(retVal, m.ctx)
+	result := []*MeshLODLevel{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MeshLODLevelFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // GetTotalIndices calls the GetTotalIndices method on the Mesh object.
@@ -1463,10 +1479,14 @@ func (m *Mesh) GetVerticesData(kind string, opts *MeshGetVerticesDataOpts) js.Va
 // GetVerticesDataKinds calls the GetVerticesDataKinds method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#getverticesdatakinds
-func (m *Mesh) GetVerticesDataKinds() string {
+func (m *Mesh) GetVerticesDataKinds() []string {
 
 	retVal := m.p.Call("getVerticesDataKinds")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // IncreaseVertices calls the IncreaseVertices method on the Mesh object.
@@ -1521,11 +1541,11 @@ func (m *Mesh) InstantiateHierarchy(opts *MeshInstantiateHierarchyOpts) *Transfo
 // IsInFrustum calls the IsInFrustum method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#isinfrustum
-func (m *Mesh) IsInFrustum(frustumPlanes *Plane) bool {
+func (m *Mesh) IsInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := m.p.Call("isInFrustum", args...)
 	return retVal.Bool()
@@ -1677,11 +1697,11 @@ func (m *Mesh) MergeMeshes(meshes []*Mesh, opts *MeshMergeMeshesOpts) *Mesh {
 // MinMax calls the MinMax method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#minmax
-func (m *Mesh) MinMax(meshes *AbstractMesh) js.Value {
+func (m *Mesh) MinMax(meshes []*AbstractMesh) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, meshes.JSObject())
+	args = append(args, AbstractMeshArrayToJSArray(meshes))
 
 	retVal := m.p.Call("MinMax", args...)
 	return retVal
@@ -2502,16 +2522,20 @@ func (m *Mesh) SetHasLODLevels(hasLODLevels bool) *Mesh {
 // Instances returns the Instances property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#instances
-func (m *Mesh) Instances() *InstancedMesh {
+func (m *Mesh) Instances() []*InstancedMesh {
 	retVal := m.p.Get("instances")
-	return InstancedMeshFromJSObject(retVal, m.ctx)
+	result := []*InstancedMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, InstancedMeshFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // SetInstances sets the Instances property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#instances
-func (m *Mesh) SetInstances(instances *InstancedMesh) *Mesh {
-	m.p.Set("instances", instances.JSObject())
+func (m *Mesh) SetInstances(instances []*InstancedMesh) *Mesh {
+	m.p.Set("instances", instances)
 	return m
 }
 

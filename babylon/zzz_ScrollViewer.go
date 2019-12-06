@@ -17,9 +17,9 @@ type ScrollViewer struct {
 func (s *ScrollViewer) JSObject() js.Value { return s.p }
 
 // ScrollViewer returns a ScrollViewer JavaScript class.
-func (ba *Babylon) ScrollViewer() *ScrollViewer {
-	p := ba.ctx.Get("ScrollViewer")
-	return ScrollViewerFromJSObject(p, ba.ctx)
+func (gui *GUI) ScrollViewer() *ScrollViewer {
+	p := gui.ctx.Get("ScrollViewer")
+	return ScrollViewerFromJSObject(p, gui.ctx)
 }
 
 // ScrollViewerFromJSObject returns a wrapped ScrollViewer JavaScript class.
@@ -224,16 +224,20 @@ func (s *ScrollViewer) SetBarSize(barSize float64) *ScrollViewer {
 // Children returns the Children property of class ScrollViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollviewer#children
-func (s *ScrollViewer) Children() *Control {
+func (s *ScrollViewer) Children() []*Control {
 	retVal := s.p.Get("children")
-	return ControlFromJSObject(retVal, s.ctx)
+	result := []*Control{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ControlFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetChildren sets the Children property of class ScrollViewer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollviewer#children
-func (s *ScrollViewer) SetChildren(children *Control) *ScrollViewer {
-	s.p.Set("children", children.JSObject())
+func (s *ScrollViewer) SetChildren(children []*Control) *ScrollViewer {
+	s.p.Set("children", children)
 	return s
 }
 

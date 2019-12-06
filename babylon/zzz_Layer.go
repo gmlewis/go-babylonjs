@@ -317,16 +317,20 @@ func (l *Layer) SetRenderOnlyInRenderTargetTextures(renderOnlyInRenderTargetText
 // RenderTargetTextures returns the RenderTargetTextures property of class Layer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#rendertargettextures
-func (l *Layer) RenderTargetTextures() *RenderTargetTexture {
+func (l *Layer) RenderTargetTextures() []*RenderTargetTexture {
 	retVal := l.p.Get("renderTargetTextures")
-	return RenderTargetTextureFromJSObject(retVal, l.ctx)
+	result := []*RenderTargetTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, RenderTargetTextureFromJSObject(retVal.Index(ri), l.ctx))
+	}
+	return result
 }
 
 // SetRenderTargetTextures sets the RenderTargetTextures property of class Layer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#rendertargettextures
-func (l *Layer) SetRenderTargetTextures(renderTargetTextures *RenderTargetTexture) *Layer {
-	l.p.Set("renderTargetTextures", renderTargetTextures.JSObject())
+func (l *Layer) SetRenderTargetTextures(renderTargetTextures []*RenderTargetTexture) *Layer {
+	l.p.Set("renderTargetTextures", renderTargetTextures)
 	return l
 }
 

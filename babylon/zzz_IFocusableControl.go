@@ -17,9 +17,9 @@ type IFocusableControl struct {
 func (i *IFocusableControl) JSObject() js.Value { return i.p }
 
 // IFocusableControl returns a IFocusableControl JavaScript class.
-func (ba *Babylon) IFocusableControl() *IFocusableControl {
-	p := ba.ctx.Get("IFocusableControl")
-	return IFocusableControlFromJSObject(p, ba.ctx)
+func (gui *GUI) IFocusableControl() *IFocusableControl {
+	p := gui.ctx.Get("IFocusableControl")
+	return IFocusableControlFromJSObject(p, gui.ctx)
 }
 
 // IFocusableControlFromJSObject returns a wrapped IFocusableControl JavaScript class.
@@ -39,10 +39,14 @@ func IFocusableControlArrayToJSArray(array []*IFocusableControl) []interface{} {
 // KeepsFocusWith calls the KeepsFocusWith method on the IFocusableControl object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ifocusablecontrol#keepsfocuswith
-func (i *IFocusableControl) KeepsFocusWith() *Control {
+func (i *IFocusableControl) KeepsFocusWith() []*Control {
 
 	retVal := i.p.Call("keepsFocusWith")
-	return ControlFromJSObject(retVal, i.ctx)
+	result := []*Control{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ControlFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // OnBlur calls the OnBlur method on the IFocusableControl object.

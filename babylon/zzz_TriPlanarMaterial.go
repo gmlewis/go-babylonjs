@@ -104,10 +104,14 @@ func (t *TriPlanarMaterial) Dispose(opts *TriPlanarMaterialDisposeOpts) {
 // GetActiveTextures calls the GetActiveTextures method on the TriPlanarMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getactivetextures
-func (t *TriPlanarMaterial) GetActiveTextures() *BaseTexture {
+func (t *TriPlanarMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := t.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, t.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), t.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the TriPlanarMaterial object.
@@ -122,10 +126,14 @@ func (t *TriPlanarMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the TriPlanarMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getanimatables
-func (t *TriPlanarMaterial) GetAnimatables() *IAnimatable {
+func (t *TriPlanarMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := t.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, t.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), t.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the TriPlanarMaterial object.

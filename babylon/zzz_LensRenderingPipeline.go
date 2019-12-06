@@ -42,7 +42,7 @@ func LensRenderingPipelineArrayToJSArray(array []*LensRenderingPipeline) []inter
 // NewLensRenderingPipelineOpts contains optional parameters for NewLensRenderingPipeline.
 type NewLensRenderingPipelineOpts struct {
 	Ratio   *float64
-	Cameras *Camera
+	Cameras []*Camera
 }
 
 // NewLensRenderingPipeline returns a new LensRenderingPipeline object.
@@ -67,7 +67,7 @@ func (ba *Babylon) NewLensRenderingPipeline(name string, parameters interface{},
 	if opts.Cameras == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Cameras.JSObject())
+		args = append(args, CameraArrayToJSArray(opts.Cameras))
 	}
 
 	p := ba.ctx.Get("LensRenderingPipeline").New(args...)

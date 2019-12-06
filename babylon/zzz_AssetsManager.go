@@ -67,9 +67,9 @@ func (a *AssetsManager) AddBinaryFileTask(taskName string, url string) *BinaryFi
 
 // AssetsManagerAddCubeTextureTaskOpts contains optional parameters for AssetsManager.AddCubeTextureTask.
 type AssetsManagerAddCubeTextureTaskOpts struct {
-	Extensions *string
+	Extensions []string
 	NoMipmap   *bool
-	Files      *string
+	Files      []string
 }
 
 // AddCubeTextureTask calls the AddCubeTextureTask method on the AssetsManager object.
@@ -88,7 +88,7 @@ func (a *AssetsManager) AddCubeTextureTask(taskName string, url string, opts *As
 	if opts.Extensions == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Extensions)
+		args = append(args, opts.Extensions)
 	}
 	if opts.NoMipmap == nil {
 		args = append(args, js.Undefined())
@@ -98,7 +98,7 @@ func (a *AssetsManager) AddCubeTextureTask(taskName string, url string, opts *As
 	if opts.Files == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Files)
+		args = append(args, opts.Files)
 	}
 
 	retVal := a.p.Call("addCubeTextureTask", args...)
@@ -441,16 +441,20 @@ func (a *AssetsManager) SetOnTaskSuccessObservable(onTaskSuccessObservable *Obse
 // OnTasksDoneObservable returns the OnTasksDoneObservable property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksdoneobservable
-func (a *AssetsManager) OnTasksDoneObservable() *Observable {
+func (a *AssetsManager) OnTasksDoneObservable() []*Observable {
 	retVal := a.p.Get("onTasksDoneObservable")
-	return ObservableFromJSObject(retVal, a.ctx)
+	result := []*Observable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ObservableFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetOnTasksDoneObservable sets the OnTasksDoneObservable property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksdoneobservable
-func (a *AssetsManager) SetOnTasksDoneObservable(onTasksDoneObservable *Observable) *AssetsManager {
-	a.p.Set("onTasksDoneObservable", onTasksDoneObservable.JSObject())
+func (a *AssetsManager) SetOnTasksDoneObservable(onTasksDoneObservable []*Observable) *AssetsManager {
+	a.p.Set("onTasksDoneObservable", onTasksDoneObservable)
 	return a
 }
 

@@ -235,64 +235,80 @@ func (a *AbstractScene) RemoveReflectionProbe(toRemove *ReflectionProbe) float64
 // ActionManagers returns the ActionManagers property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#actionmanagers
-func (a *AbstractScene) ActionManagers() *AbstractActionManager {
+func (a *AbstractScene) ActionManagers() []*AbstractActionManager {
 	retVal := a.p.Get("actionManagers")
-	return AbstractActionManagerFromJSObject(retVal, a.ctx)
+	result := []*AbstractActionManager{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractActionManagerFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetActionManagers sets the ActionManagers property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#actionmanagers
-func (a *AbstractScene) SetActionManagers(actionManagers *AbstractActionManager) *AbstractScene {
-	a.p.Set("actionManagers", actionManagers.JSObject())
+func (a *AbstractScene) SetActionManagers(actionManagers []*AbstractActionManager) *AbstractScene {
+	a.p.Set("actionManagers", actionManagers)
 	return a
 }
 
 // AnimationGroups returns the AnimationGroups property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#animationgroups
-func (a *AbstractScene) AnimationGroups() *AnimationGroup {
+func (a *AbstractScene) AnimationGroups() []*AnimationGroup {
 	retVal := a.p.Get("animationGroups")
-	return AnimationGroupFromJSObject(retVal, a.ctx)
+	result := []*AnimationGroup{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationGroupFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetAnimationGroups sets the AnimationGroups property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#animationgroups
-func (a *AbstractScene) SetAnimationGroups(animationGroups *AnimationGroup) *AbstractScene {
-	a.p.Set("animationGroups", animationGroups.JSObject())
+func (a *AbstractScene) SetAnimationGroups(animationGroups []*AnimationGroup) *AbstractScene {
+	a.p.Set("animationGroups", animationGroups)
 	return a
 }
 
 // Animations returns the Animations property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#animations
-func (a *AbstractScene) Animations() *Animation {
+func (a *AbstractScene) Animations() []*Animation {
 	retVal := a.p.Get("animations")
-	return AnimationFromJSObject(retVal, a.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#animations
-func (a *AbstractScene) SetAnimations(animations *Animation) *AbstractScene {
-	a.p.Set("animations", animations.JSObject())
+func (a *AbstractScene) SetAnimations(animations []*Animation) *AbstractScene {
+	a.p.Set("animations", animations)
 	return a
 }
 
 // Cameras returns the Cameras property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#cameras
-func (a *AbstractScene) Cameras() *Camera {
+func (a *AbstractScene) Cameras() []*Camera {
 	retVal := a.p.Get("cameras")
-	return CameraFromJSObject(retVal, a.ctx)
+	result := []*Camera{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, CameraFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetCameras sets the Cameras property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#cameras
-func (a *AbstractScene) SetCameras(cameras *Camera) *AbstractScene {
-	a.p.Set("cameras", cameras.JSObject())
+func (a *AbstractScene) SetCameras(cameras []*Camera) *AbstractScene {
+	a.p.Set("cameras", cameras)
 	return a
 }
 
@@ -335,16 +351,20 @@ func (a *AbstractScene) SetEnvironmentTexture(environmentTexture *BaseTexture) *
 // Geometries returns the Geometries property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#geometries
-func (a *AbstractScene) Geometries() *Geometry {
+func (a *AbstractScene) Geometries() []*Geometry {
 	retVal := a.p.Get("geometries")
-	return GeometryFromJSObject(retVal, a.ctx)
+	result := []*Geometry{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, GeometryFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetGeometries sets the Geometries property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#geometries
-func (a *AbstractScene) SetGeometries(geometries *Geometry) *AbstractScene {
-	a.p.Set("geometries", geometries.JSObject())
+func (a *AbstractScene) SetGeometries(geometries []*Geometry) *AbstractScene {
+	a.p.Set("geometries", geometries)
 	return a
 }
 
@@ -391,96 +411,120 @@ func (a *AbstractScene) SetLensFlareSystems(lensFlareSystems []*LensFlareSystem)
 // Lights returns the Lights property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#lights
-func (a *AbstractScene) Lights() *Light {
+func (a *AbstractScene) Lights() []*Light {
 	retVal := a.p.Get("lights")
-	return LightFromJSObject(retVal, a.ctx)
+	result := []*Light{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, LightFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetLights sets the Lights property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#lights
-func (a *AbstractScene) SetLights(lights *Light) *AbstractScene {
-	a.p.Set("lights", lights.JSObject())
+func (a *AbstractScene) SetLights(lights []*Light) *AbstractScene {
+	a.p.Set("lights", lights)
 	return a
 }
 
 // Materials returns the Materials property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#materials
-func (a *AbstractScene) Materials() *Material {
+func (a *AbstractScene) Materials() []*Material {
 	retVal := a.p.Get("materials")
-	return MaterialFromJSObject(retVal, a.ctx)
+	result := []*Material{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MaterialFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetMaterials sets the Materials property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#materials
-func (a *AbstractScene) SetMaterials(materials *Material) *AbstractScene {
-	a.p.Set("materials", materials.JSObject())
+func (a *AbstractScene) SetMaterials(materials []*Material) *AbstractScene {
+	a.p.Set("materials", materials)
 	return a
 }
 
 // Meshes returns the Meshes property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#meshes
-func (a *AbstractScene) Meshes() *AbstractMesh {
+func (a *AbstractScene) Meshes() []*AbstractMesh {
 	retVal := a.p.Get("meshes")
-	return AbstractMeshFromJSObject(retVal, a.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetMeshes sets the Meshes property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#meshes
-func (a *AbstractScene) SetMeshes(meshes *AbstractMesh) *AbstractScene {
-	a.p.Set("meshes", meshes.JSObject())
+func (a *AbstractScene) SetMeshes(meshes []*AbstractMesh) *AbstractScene {
+	a.p.Set("meshes", meshes)
 	return a
 }
 
 // MorphTargetManagers returns the MorphTargetManagers property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#morphtargetmanagers
-func (a *AbstractScene) MorphTargetManagers() *MorphTargetManager {
+func (a *AbstractScene) MorphTargetManagers() []*MorphTargetManager {
 	retVal := a.p.Get("morphTargetManagers")
-	return MorphTargetManagerFromJSObject(retVal, a.ctx)
+	result := []*MorphTargetManager{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MorphTargetManagerFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetMorphTargetManagers sets the MorphTargetManagers property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#morphtargetmanagers
-func (a *AbstractScene) SetMorphTargetManagers(morphTargetManagers *MorphTargetManager) *AbstractScene {
-	a.p.Set("morphTargetManagers", morphTargetManagers.JSObject())
+func (a *AbstractScene) SetMorphTargetManagers(morphTargetManagers []*MorphTargetManager) *AbstractScene {
+	a.p.Set("morphTargetManagers", morphTargetManagers)
 	return a
 }
 
 // MultiMaterials returns the MultiMaterials property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#multimaterials
-func (a *AbstractScene) MultiMaterials() *MultiMaterial {
+func (a *AbstractScene) MultiMaterials() []*MultiMaterial {
 	retVal := a.p.Get("multiMaterials")
-	return MultiMaterialFromJSObject(retVal, a.ctx)
+	result := []*MultiMaterial{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MultiMaterialFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetMultiMaterials sets the MultiMaterials property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#multimaterials
-func (a *AbstractScene) SetMultiMaterials(multiMaterials *MultiMaterial) *AbstractScene {
-	a.p.Set("multiMaterials", multiMaterials.JSObject())
+func (a *AbstractScene) SetMultiMaterials(multiMaterials []*MultiMaterial) *AbstractScene {
+	a.p.Set("multiMaterials", multiMaterials)
 	return a
 }
 
 // ParticleSystems returns the ParticleSystems property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#particlesystems
-func (a *AbstractScene) ParticleSystems() *IParticleSystem {
+func (a *AbstractScene) ParticleSystems() []*IParticleSystem {
 	retVal := a.p.Get("particleSystems")
-	return IParticleSystemFromJSObject(retVal, a.ctx)
+	result := []*IParticleSystem{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IParticleSystemFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetParticleSystems sets the ParticleSystems property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#particlesystems
-func (a *AbstractScene) SetParticleSystems(particleSystems *IParticleSystem) *AbstractScene {
-	a.p.Set("particleSystems", particleSystems.JSObject())
+func (a *AbstractScene) SetParticleSystems(particleSystems []*IParticleSystem) *AbstractScene {
+	a.p.Set("particleSystems", particleSystems)
 	return a
 }
 
@@ -527,32 +571,40 @@ func (a *AbstractScene) SetReflectionProbes(reflectionProbes []*ReflectionProbe)
 // RootNodes returns the RootNodes property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#rootnodes
-func (a *AbstractScene) RootNodes() *Node {
+func (a *AbstractScene) RootNodes() []*Node {
 	retVal := a.p.Get("rootNodes")
-	return NodeFromJSObject(retVal, a.ctx)
+	result := []*Node{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, NodeFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetRootNodes sets the RootNodes property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#rootnodes
-func (a *AbstractScene) SetRootNodes(rootNodes *Node) *AbstractScene {
-	a.p.Set("rootNodes", rootNodes.JSObject())
+func (a *AbstractScene) SetRootNodes(rootNodes []*Node) *AbstractScene {
+	a.p.Set("rootNodes", rootNodes)
 	return a
 }
 
 // Skeletons returns the Skeletons property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#skeletons
-func (a *AbstractScene) Skeletons() *Skeleton {
+func (a *AbstractScene) Skeletons() []*Skeleton {
 	retVal := a.p.Get("skeletons")
-	return SkeletonFromJSObject(retVal, a.ctx)
+	result := []*Skeleton{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SkeletonFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetSkeletons sets the Skeletons property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#skeletons
-func (a *AbstractScene) SetSkeletons(skeletons *Skeleton) *AbstractScene {
-	a.p.Set("skeletons", skeletons.JSObject())
+func (a *AbstractScene) SetSkeletons(skeletons []*Skeleton) *AbstractScene {
+	a.p.Set("skeletons", skeletons)
 	return a
 }
 
@@ -579,31 +631,39 @@ func (a *AbstractScene) SetSounds(sounds []*Sound) *AbstractScene {
 // Textures returns the Textures property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#textures
-func (a *AbstractScene) Textures() *BaseTexture {
+func (a *AbstractScene) Textures() []*BaseTexture {
 	retVal := a.p.Get("textures")
-	return BaseTextureFromJSObject(retVal, a.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetTextures sets the Textures property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#textures
-func (a *AbstractScene) SetTextures(textures *BaseTexture) *AbstractScene {
-	a.p.Set("textures", textures.JSObject())
+func (a *AbstractScene) SetTextures(textures []*BaseTexture) *AbstractScene {
+	a.p.Set("textures", textures)
 	return a
 }
 
 // TransformNodes returns the TransformNodes property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#transformnodes
-func (a *AbstractScene) TransformNodes() *TransformNode {
+func (a *AbstractScene) TransformNodes() []*TransformNode {
 	retVal := a.p.Get("transformNodes")
-	return TransformNodeFromJSObject(retVal, a.ctx)
+	result := []*TransformNode{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TransformNodeFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetTransformNodes sets the TransformNodes property of class AbstractScene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#transformnodes
-func (a *AbstractScene) SetTransformNodes(transformNodes *TransformNode) *AbstractScene {
-	a.p.Set("transformNodes", transformNodes.JSObject())
+func (a *AbstractScene) SetTransformNodes(transformNodes []*TransformNode) *AbstractScene {
+	a.p.Set("transformNodes", transformNodes)
 	return a
 }

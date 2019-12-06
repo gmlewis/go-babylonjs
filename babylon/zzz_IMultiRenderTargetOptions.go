@@ -135,15 +135,19 @@ func (i *IMultiRenderTargetOptions) SetGenerateStencilBuffer(generateStencilBuff
 // SamplingModes returns the SamplingModes property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#samplingmodes
-func (i *IMultiRenderTargetOptions) SamplingModes() float64 {
+func (i *IMultiRenderTargetOptions) SamplingModes() []float64 {
 	retVal := i.p.Get("samplingModes")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetSamplingModes sets the SamplingModes property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#samplingmodes
-func (i *IMultiRenderTargetOptions) SetSamplingModes(samplingModes float64) *IMultiRenderTargetOptions {
+func (i *IMultiRenderTargetOptions) SetSamplingModes(samplingModes []float64) *IMultiRenderTargetOptions {
 	i.p.Set("samplingModes", samplingModes)
 	return i
 }
@@ -167,15 +171,19 @@ func (i *IMultiRenderTargetOptions) SetTextureCount(textureCount float64) *IMult
 // Types returns the Types property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#types
-func (i *IMultiRenderTargetOptions) Types() float64 {
+func (i *IMultiRenderTargetOptions) Types() []float64 {
 	retVal := i.p.Get("types")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetTypes sets the Types property of class IMultiRenderTargetOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imultirendertargetoptions#types
-func (i *IMultiRenderTargetOptions) SetTypes(types float64) *IMultiRenderTargetOptions {
+func (i *IMultiRenderTargetOptions) SetTypes(types []float64) *IMultiRenderTargetOptions {
 	i.p.Set("types", types)
 	return i
 }

@@ -117,10 +117,14 @@ func (r *RecastJSCrowd) GetAgentVelocity(index float64) *Vector3 {
 // GetAgents calls the GetAgents method on the RecastJSCrowd object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#getagents
-func (r *RecastJSCrowd) GetAgents() float64 {
+func (r *RecastJSCrowd) GetAgents() []float64 {
 
 	retVal := r.p.Call("getAgents")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // GetDefaultQueryExtent calls the GetDefaultQueryExtent method on the RecastJSCrowd object.
@@ -171,15 +175,19 @@ func (r *RecastJSCrowd) Update(deltaTime float64) {
 // Agents returns the Agents property of class RecastJSCrowd.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#agents
-func (r *RecastJSCrowd) Agents() float64 {
+func (r *RecastJSCrowd) Agents() []float64 {
 	retVal := r.p.Get("agents")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetAgents sets the Agents property of class RecastJSCrowd.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#agents
-func (r *RecastJSCrowd) SetAgents(agents float64) *RecastJSCrowd {
+func (r *RecastJSCrowd) SetAgents(agents []float64) *RecastJSCrowd {
 	r.p.Set("agents", agents)
 	return r
 }
@@ -219,15 +227,19 @@ func (r *RecastJSCrowd) SetRecastCrowd(recastCrowd interface{}) *RecastJSCrowd {
 // Transforms returns the Transforms property of class RecastJSCrowd.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#transforms
-func (r *RecastJSCrowd) Transforms() *TransformNode {
+func (r *RecastJSCrowd) Transforms() []*TransformNode {
 	retVal := r.p.Get("transforms")
-	return TransformNodeFromJSObject(retVal, r.ctx)
+	result := []*TransformNode{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TransformNodeFromJSObject(retVal.Index(ri), r.ctx))
+	}
+	return result
 }
 
 // SetTransforms sets the Transforms property of class RecastJSCrowd.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#transforms
-func (r *RecastJSCrowd) SetTransforms(transforms *TransformNode) *RecastJSCrowd {
-	r.p.Set("transforms", transforms.JSObject())
+func (r *RecastJSCrowd) SetTransforms(transforms []*TransformNode) *RecastJSCrowd {
+	r.p.Set("transforms", transforms)
 	return r
 }

@@ -18,9 +18,9 @@ type SelectorGroup struct {
 func (s *SelectorGroup) JSObject() js.Value { return s.p }
 
 // SelectorGroup returns a SelectorGroup JavaScript class.
-func (ba *Babylon) SelectorGroup() *SelectorGroup {
-	p := ba.ctx.Get("SelectorGroup")
-	return SelectorGroupFromJSObject(p, ba.ctx)
+func (gui *GUI) SelectorGroup() *SelectorGroup {
+	p := gui.ctx.Get("SelectorGroup")
+	return SelectorGroupFromJSObject(p, gui.ctx)
 }
 
 // SelectorGroupFromJSObject returns a wrapped SelectorGroup JavaScript class.
@@ -113,15 +113,19 @@ func (s *SelectorGroup) SetName(name string) *SelectorGroup {
 // Selectors returns the Selectors property of class SelectorGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup#selectors
-func (s *SelectorGroup) Selectors() *StackPanel {
+func (s *SelectorGroup) Selectors() []*StackPanel {
 	retVal := s.p.Get("selectors")
-	return StackPanelFromJSObject(retVal, s.ctx)
+	result := []*StackPanel{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, StackPanelFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetSelectors sets the Selectors property of class SelectorGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup#selectors
-func (s *SelectorGroup) SetSelectors(selectors *StackPanel) *SelectorGroup {
-	s.p.Set("selectors", selectors.JSObject())
+func (s *SelectorGroup) SetSelectors(selectors []*StackPanel) *SelectorGroup {
+	s.p.Set("selectors", selectors)
 	return s
 }

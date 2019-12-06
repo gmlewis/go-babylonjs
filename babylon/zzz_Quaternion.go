@@ -125,10 +125,14 @@ func (q *Quaternion) AreClose(quat0 *Quaternion, quat1 *Quaternion) bool {
 // AsArray calls the AsArray method on the Quaternion object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion#asarray
-func (q *Quaternion) AsArray() float64 {
+func (q *Quaternion) AsArray() []float64 {
 
 	retVal := q.p.Call("asArray")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // Clone calls the Clone method on the Quaternion object.

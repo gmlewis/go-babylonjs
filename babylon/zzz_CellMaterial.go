@@ -104,10 +104,14 @@ func (c *CellMaterial) Dispose(opts *CellMaterialDisposeOpts) {
 // GetActiveTextures calls the GetActiveTextures method on the CellMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getactivetextures
-func (c *CellMaterial) GetActiveTextures() *BaseTexture {
+func (c *CellMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := c.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, c.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), c.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the CellMaterial object.
@@ -122,10 +126,14 @@ func (c *CellMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the CellMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getanimatables
-func (c *CellMaterial) GetAnimatables() *IAnimatable {
+func (c *CellMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := c.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, c.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), c.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the CellMaterial object.

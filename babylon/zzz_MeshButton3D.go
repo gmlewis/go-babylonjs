@@ -17,9 +17,9 @@ type MeshButton3D struct {
 func (m *MeshButton3D) JSObject() js.Value { return m.p }
 
 // MeshButton3D returns a MeshButton3D JavaScript class.
-func (ba *Babylon) MeshButton3D() *MeshButton3D {
-	p := ba.ctx.Get("MeshButton3D")
-	return MeshButton3DFromJSObject(p, ba.ctx)
+func (gui *GUI) MeshButton3D() *MeshButton3D {
+	p := gui.ctx.Get("MeshButton3D")
+	return MeshButton3DFromJSObject(p, gui.ctx)
 }
 
 // MeshButton3DFromJSObject returns a wrapped MeshButton3D JavaScript class.

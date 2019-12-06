@@ -64,7 +64,7 @@ func (ba *Babylon) NewRecastJSPlugin(opts *NewRecastJSPluginOpts) *RecastJSPlugi
 // ComputePath calls the ComputePath method on the RecastJSPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#computepath
-func (r *RecastJSPlugin) ComputePath(start *Vector3, end *Vector3) *Vector3 {
+func (r *RecastJSPlugin) ComputePath(start *Vector3, end *Vector3) []*Vector3 {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -72,7 +72,11 @@ func (r *RecastJSPlugin) ComputePath(start *Vector3, end *Vector3) *Vector3 {
 	args = append(args, end.JSObject())
 
 	retVal := r.p.Call("computePath", args...)
-	return Vector3FromJSObject(retVal, r.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), r.ctx))
+	}
+	return result
 }
 
 // CreateCrowd calls the CreateCrowd method on the RecastJSPlugin object.

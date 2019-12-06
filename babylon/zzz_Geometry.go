@@ -270,10 +270,14 @@ func (g *Geometry) GetVerticesData(kind string, opts *GeometryGetVerticesDataOpt
 // GetVerticesDataKinds calls the GetVerticesDataKinds method on the Geometry object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#getverticesdatakinds
-func (g *Geometry) GetVerticesDataKinds() string {
+func (g *Geometry) GetVerticesDataKinds() []string {
 
 	retVal := g.p.Call("getVerticesDataKinds")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // IsDisposed calls the IsDisposed method on the Geometry object.

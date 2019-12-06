@@ -39,31 +39,39 @@ func IAnimationArrayToJSArray(array []*IAnimation) []interface{} {
 // Channels returns the Channels property of class IAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimation#channels
-func (i *IAnimation) Channels() *IAnimationChannel {
+func (i *IAnimation) Channels() []*IAnimationChannel {
 	retVal := i.p.Get("channels")
-	return IAnimationChannelFromJSObject(retVal, i.ctx)
+	result := []*IAnimationChannel{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimationChannelFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetChannels sets the Channels property of class IAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimation#channels
-func (i *IAnimation) SetChannels(channels *IAnimationChannel) *IAnimation {
-	i.p.Set("channels", channels.JSObject())
+func (i *IAnimation) SetChannels(channels []*IAnimationChannel) *IAnimation {
+	i.p.Set("channels", channels)
 	return i
 }
 
 // Samplers returns the Samplers property of class IAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimation#samplers
-func (i *IAnimation) Samplers() *IAnimationSampler {
+func (i *IAnimation) Samplers() []*IAnimationSampler {
 	retVal := i.p.Get("samplers")
-	return IAnimationSamplerFromJSObject(retVal, i.ctx)
+	result := []*IAnimationSampler{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimationSamplerFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetSamplers sets the Samplers property of class IAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimation#samplers
-func (i *IAnimation) SetSamplers(samplers *IAnimationSampler) *IAnimation {
-	i.p.Set("samplers", samplers.JSObject())
+func (i *IAnimation) SetSamplers(samplers []*IAnimationSampler) *IAnimation {
+	i.p.Set("samplers", samplers)
 	return i
 }

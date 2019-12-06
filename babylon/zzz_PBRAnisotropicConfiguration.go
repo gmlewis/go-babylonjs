@@ -67,7 +67,7 @@ func (p *PBRAnisotropicConfiguration) AddFallbacks(defines js.Value, fallbacks *
 // AddSamplers calls the AddSamplers method on the PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#addsamplers
-func (p *PBRAnisotropicConfiguration) AddSamplers(samplers string) {
+func (p *PBRAnisotropicConfiguration) AddSamplers(samplers []string) {
 
 	args := make([]interface{}, 0, 1+0)
 
@@ -79,7 +79,7 @@ func (p *PBRAnisotropicConfiguration) AddSamplers(samplers string) {
 // AddUniforms calls the AddUniforms method on the PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#adduniforms
-func (p *PBRAnisotropicConfiguration) AddUniforms(uniforms string) {
+func (p *PBRAnisotropicConfiguration) AddUniforms(uniforms []string) {
 
 	args := make([]interface{}, 0, 1+0)
 
@@ -141,11 +141,11 @@ func (p *PBRAnisotropicConfiguration) Dispose(opts *PBRAnisotropicConfigurationD
 // GetActiveTextures calls the GetActiveTextures method on the PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#getactivetextures
-func (p *PBRAnisotropicConfiguration) GetActiveTextures(activeTextures *BaseTexture) {
+func (p *PBRAnisotropicConfiguration) GetActiveTextures(activeTextures []*BaseTexture) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, activeTextures.JSObject())
+	args = append(args, BaseTextureArrayToJSArray(activeTextures))
 
 	p.p.Call("getActiveTextures", args...)
 }
@@ -153,11 +153,11 @@ func (p *PBRAnisotropicConfiguration) GetActiveTextures(activeTextures *BaseText
 // GetAnimatables calls the GetAnimatables method on the PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#getanimatables
-func (p *PBRAnisotropicConfiguration) GetAnimatables(animatables *IAnimatable) {
+func (p *PBRAnisotropicConfiguration) GetAnimatables(animatables []*IAnimatable) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, animatables.JSObject())
+	args = append(args, IAnimatableArrayToJSArray(animatables))
 
 	p.p.Call("getAnimatables", args...)
 }

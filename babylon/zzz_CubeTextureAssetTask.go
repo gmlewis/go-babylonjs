@@ -38,9 +38,9 @@ func CubeTextureAssetTaskArrayToJSArray(array []*CubeTextureAssetTask) []interfa
 
 // NewCubeTextureAssetTaskOpts contains optional parameters for NewCubeTextureAssetTask.
 type NewCubeTextureAssetTaskOpts struct {
-	Extensions *string
+	Extensions []string
 	NoMipmap   *bool
-	Files      *string
+	Files      []string
 }
 
 // NewCubeTextureAssetTask returns a new CubeTextureAssetTask object.
@@ -59,7 +59,7 @@ func (ba *Babylon) NewCubeTextureAssetTask(name string, url string, opts *NewCub
 	if opts.Extensions == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Extensions)
+		args = append(args, opts.Extensions)
 	}
 	if opts.NoMipmap == nil {
 		args = append(args, js.Undefined())
@@ -69,7 +69,7 @@ func (ba *Babylon) NewCubeTextureAssetTask(name string, url string, opts *NewCub
 	if opts.Files == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Files)
+		args = append(args, opts.Files)
 	}
 
 	p := ba.ctx.Get("CubeTextureAssetTask").New(args...)
@@ -93,15 +93,19 @@ func (c *CubeTextureAssetTask) RunTask(scene *Scene, onSuccess func(), onError f
 // Extensions returns the Extensions property of class CubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#extensions
-func (c *CubeTextureAssetTask) Extensions() string {
+func (c *CubeTextureAssetTask) Extensions() []string {
 	retVal := c.p.Get("extensions")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetExtensions sets the Extensions property of class CubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#extensions
-func (c *CubeTextureAssetTask) SetExtensions(extensions string) *CubeTextureAssetTask {
+func (c *CubeTextureAssetTask) SetExtensions(extensions []string) *CubeTextureAssetTask {
 	c.p.Set("extensions", extensions)
 	return c
 }
@@ -109,15 +113,19 @@ func (c *CubeTextureAssetTask) SetExtensions(extensions string) *CubeTextureAsse
 // Files returns the Files property of class CubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#files
-func (c *CubeTextureAssetTask) Files() string {
+func (c *CubeTextureAssetTask) Files() []string {
 	retVal := c.p.Get("files")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetFiles sets the Files property of class CubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#files
-func (c *CubeTextureAssetTask) SetFiles(files string) *CubeTextureAssetTask {
+func (c *CubeTextureAssetTask) SetFiles(files []string) *CubeTextureAssetTask {
 	c.p.Set("files", files)
 	return c
 }

@@ -115,10 +115,14 @@ func (s *SkyMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the SkyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#getanimatables
-func (s *SkyMaterial) GetAnimatables() *IAnimatable {
+func (s *SkyMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := s.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, s.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the SkyMaterial object.

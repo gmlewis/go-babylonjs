@@ -97,16 +97,20 @@ func (g *GamepadManager) GetGamepadByType(opts *GamepadManagerGetGamepadByTypeOp
 // Gamepads returns the Gamepads property of class GamepadManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#gamepads
-func (g *GamepadManager) Gamepads() *Gamepad {
+func (g *GamepadManager) Gamepads() []*Gamepad {
 	retVal := g.p.Get("gamepads")
-	return GamepadFromJSObject(retVal, g.ctx)
+	result := []*Gamepad{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, GamepadFromJSObject(retVal.Index(ri), g.ctx))
+	}
+	return result
 }
 
 // SetGamepads sets the Gamepads property of class GamepadManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#gamepads
-func (g *GamepadManager) SetGamepads(gamepads *Gamepad) *GamepadManager {
-	g.p.Set("gamepads", gamepads.JSObject())
+func (g *GamepadManager) SetGamepads(gamepads []*Gamepad) *GamepadManager {
+	g.p.Set("gamepads", gamepads)
 	return g
 }
 

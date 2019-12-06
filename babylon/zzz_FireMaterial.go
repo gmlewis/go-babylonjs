@@ -104,10 +104,14 @@ func (f *FireMaterial) Dispose(opts *FireMaterialDisposeOpts) {
 // GetActiveTextures calls the GetActiveTextures method on the FireMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getactivetextures
-func (f *FireMaterial) GetActiveTextures() *BaseTexture {
+func (f *FireMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := f.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, f.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the FireMaterial object.
@@ -122,10 +126,14 @@ func (f *FireMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the FireMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#getanimatables
-func (f *FireMaterial) GetAnimatables() *IAnimatable {
+func (f *FireMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := f.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, f.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), f.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the FireMaterial object.

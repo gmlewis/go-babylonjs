@@ -270,10 +270,14 @@ func (m *Material) Freeze() {
 // GetActiveTextures calls the GetActiveTextures method on the Material object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#getactivetextures
-func (m *Material) GetActiveTextures() *BaseTexture {
+func (m *Material) GetActiveTextures() []*BaseTexture {
 
 	retVal := m.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, m.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the Material object.
@@ -288,10 +292,14 @@ func (m *Material) GetAlphaTestTexture() *BaseTexture {
 // GetBindedMeshes calls the GetBindedMeshes method on the Material object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#getbindedmeshes
-func (m *Material) GetBindedMeshes() *AbstractMesh {
+func (m *Material) GetBindedMeshes() []*AbstractMesh {
 
 	retVal := m.p.Call("getBindedMeshes")
-	return AbstractMeshFromJSObject(retVal, m.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the Material object.
@@ -836,16 +844,20 @@ func (m *Material) SetId(id string) *Material {
 // InspectableCustomProperties returns the InspectableCustomProperties property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#inspectablecustomproperties
-func (m *Material) InspectableCustomProperties() *IInspectable {
+func (m *Material) InspectableCustomProperties() []*IInspectable {
 	retVal := m.p.Get("inspectableCustomProperties")
-	return IInspectableFromJSObject(retVal, m.ctx)
+	result := []*IInspectable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IInspectableFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#inspectablecustomproperties
-func (m *Material) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Material {
-	m.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+func (m *Material) SetInspectableCustomProperties(inspectableCustomProperties []*IInspectable) *Material {
+	m.p.Set("inspectableCustomProperties", inspectableCustomProperties)
 	return m
 }
 

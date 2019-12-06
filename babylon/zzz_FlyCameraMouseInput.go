@@ -154,15 +154,19 @@ func (f *FlyCameraMouseInput) SetAngularSensibility(angularSensibility float64) 
 // Buttons returns the Buttons property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttons
-func (f *FlyCameraMouseInput) Buttons() float64 {
+func (f *FlyCameraMouseInput) Buttons() []float64 {
 	retVal := f.p.Get("buttons")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetButtons sets the Buttons property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttons
-func (f *FlyCameraMouseInput) SetButtons(buttons float64) *FlyCameraMouseInput {
+func (f *FlyCameraMouseInput) SetButtons(buttons []float64) *FlyCameraMouseInput {
 	f.p.Set("buttons", buttons)
 	return f
 }
@@ -170,15 +174,19 @@ func (f *FlyCameraMouseInput) SetButtons(buttons float64) *FlyCameraMouseInput {
 // ButtonsPitch returns the ButtonsPitch property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonspitch
-func (f *FlyCameraMouseInput) ButtonsPitch() float64 {
+func (f *FlyCameraMouseInput) ButtonsPitch() []float64 {
 	retVal := f.p.Get("buttonsPitch")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetButtonsPitch sets the ButtonsPitch property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonspitch
-func (f *FlyCameraMouseInput) SetButtonsPitch(buttonsPitch float64) *FlyCameraMouseInput {
+func (f *FlyCameraMouseInput) SetButtonsPitch(buttonsPitch []float64) *FlyCameraMouseInput {
 	f.p.Set("buttonsPitch", buttonsPitch)
 	return f
 }
@@ -186,15 +194,19 @@ func (f *FlyCameraMouseInput) SetButtonsPitch(buttonsPitch float64) *FlyCameraMo
 // ButtonsRoll returns the ButtonsRoll property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonsroll
-func (f *FlyCameraMouseInput) ButtonsRoll() float64 {
+func (f *FlyCameraMouseInput) ButtonsRoll() []float64 {
 	retVal := f.p.Get("buttonsRoll")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetButtonsRoll sets the ButtonsRoll property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonsroll
-func (f *FlyCameraMouseInput) SetButtonsRoll(buttonsRoll float64) *FlyCameraMouseInput {
+func (f *FlyCameraMouseInput) SetButtonsRoll(buttonsRoll []float64) *FlyCameraMouseInput {
 	f.p.Set("buttonsRoll", buttonsRoll)
 	return f
 }
@@ -202,15 +214,19 @@ func (f *FlyCameraMouseInput) SetButtonsRoll(buttonsRoll float64) *FlyCameraMous
 // ButtonsYaw returns the ButtonsYaw property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonsyaw
-func (f *FlyCameraMouseInput) ButtonsYaw() float64 {
+func (f *FlyCameraMouseInput) ButtonsYaw() []float64 {
 	retVal := f.p.Get("buttonsYaw")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetButtonsYaw sets the ButtonsYaw property of class FlyCameraMouseInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#buttonsyaw
-func (f *FlyCameraMouseInput) SetButtonsYaw(buttonsYaw float64) *FlyCameraMouseInput {
+func (f *FlyCameraMouseInput) SetButtonsYaw(buttonsYaw []float64) *FlyCameraMouseInput {
 	f.p.Set("buttonsYaw", buttonsYaw)
 	return f
 }

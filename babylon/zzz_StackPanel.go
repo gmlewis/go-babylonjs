@@ -17,9 +17,9 @@ type StackPanel struct {
 func (s *StackPanel) JSObject() js.Value { return s.p }
 
 // StackPanel returns a StackPanel JavaScript class.
-func (ba *Babylon) StackPanel() *StackPanel {
-	p := ba.ctx.Get("StackPanel")
-	return StackPanelFromJSObject(p, ba.ctx)
+func (gui *GUI) StackPanel() *StackPanel {
+	p := gui.ctx.Get("StackPanel")
+	return StackPanelFromJSObject(p, gui.ctx)
 }
 
 // StackPanelFromJSObject returns a wrapped StackPanel JavaScript class.

@@ -295,10 +295,14 @@ func (n *Node) GetAnimationRange(name string) *AnimationRange {
 // GetAnimationRanges calls the GetAnimationRanges method on the Node object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#getanimationranges
-func (n *Node) GetAnimationRanges() *AnimationRange {
+func (n *Node) GetAnimationRanges() []*AnimationRange {
 
 	retVal := n.p.Call("getAnimationRanges")
-	return AnimationRangeFromJSObject(retVal, n.ctx)
+	result := []*AnimationRange{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationRangeFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // GetBehaviorByName calls the GetBehaviorByName method on the Node object.
@@ -323,7 +327,7 @@ type NodeGetChildMeshesOpts struct {
 // GetChildMeshes calls the GetChildMeshes method on the Node object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#getchildmeshes
-func (n *Node) GetChildMeshes(opts *NodeGetChildMeshesOpts) *AbstractMesh {
+func (n *Node) GetChildMeshes(opts *NodeGetChildMeshesOpts) []*AbstractMesh {
 	if opts == nil {
 		opts = &NodeGetChildMeshesOpts{}
 	}
@@ -342,7 +346,11 @@ func (n *Node) GetChildMeshes(opts *NodeGetChildMeshesOpts) *AbstractMesh {
 	}
 
 	retVal := n.p.Call("getChildMeshes", args...)
-	return AbstractMeshFromJSObject(retVal, n.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // NodeGetChildrenOpts contains optional parameters for Node.GetChildren.
@@ -354,7 +362,7 @@ type NodeGetChildrenOpts struct {
 // GetChildren calls the GetChildren method on the Node object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#getchildren
-func (n *Node) GetChildren(opts *NodeGetChildrenOpts) *Node {
+func (n *Node) GetChildren(opts *NodeGetChildrenOpts) []*Node {
 	if opts == nil {
 		opts = &NodeGetChildrenOpts{}
 	}
@@ -373,7 +381,11 @@ func (n *Node) GetChildren(opts *NodeGetChildrenOpts) *Node {
 	}
 
 	retVal := n.p.Call("getChildren", args...)
-	return NodeFromJSObject(retVal, n.ctx)
+	result := []*Node{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, NodeFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the Node object.
@@ -394,7 +406,7 @@ type NodeGetDescendantsOpts struct {
 // GetDescendants calls the GetDescendants method on the Node object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#getdescendants
-func (n *Node) GetDescendants(opts *NodeGetDescendantsOpts) *Node {
+func (n *Node) GetDescendants(opts *NodeGetDescendantsOpts) []*Node {
 	if opts == nil {
 		opts = &NodeGetDescendantsOpts{}
 	}
@@ -413,7 +425,11 @@ func (n *Node) GetDescendants(opts *NodeGetDescendantsOpts) *Node {
 	}
 
 	retVal := n.p.Call("getDescendants", args...)
-	return NodeFromJSObject(retVal, n.ctx)
+	result := []*Node{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, NodeFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // GetEngine calls the GetEngine method on the Node object.
@@ -613,16 +629,20 @@ func (n *Node) SetAnimationPropertiesOverride(animationPropertiesOverride *Anima
 // Animations returns the Animations property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#animations
-func (n *Node) Animations() *Animation {
+func (n *Node) Animations() []*Animation {
 	retVal := n.p.Get("animations")
-	return AnimationFromJSObject(retVal, n.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#animations
-func (n *Node) SetAnimations(animations *Animation) *Node {
-	n.p.Set("animations", animations.JSObject())
+func (n *Node) SetAnimations(animations []*Animation) *Node {
+	n.p.Set("animations", animations)
 	return n
 }
 
@@ -677,16 +697,20 @@ func (n *Node) SetId(id string) *Node {
 // InspectableCustomProperties returns the InspectableCustomProperties property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#inspectablecustomproperties
-func (n *Node) InspectableCustomProperties() *IInspectable {
+func (n *Node) InspectableCustomProperties() []*IInspectable {
 	retVal := n.p.Get("inspectableCustomProperties")
-	return IInspectableFromJSObject(retVal, n.ctx)
+	result := []*IInspectable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IInspectableFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // SetInspectableCustomProperties sets the InspectableCustomProperties property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#inspectablecustomproperties
-func (n *Node) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Node {
-	n.p.Set("inspectableCustomProperties", inspectableCustomProperties.JSObject())
+func (n *Node) SetInspectableCustomProperties(inspectableCustomProperties []*IInspectable) *Node {
+	n.p.Set("inspectableCustomProperties", inspectableCustomProperties)
 	return n
 }
 

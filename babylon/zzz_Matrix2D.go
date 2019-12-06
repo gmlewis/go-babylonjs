@@ -17,9 +17,9 @@ type Matrix2D struct {
 func (m *Matrix2D) JSObject() js.Value { return m.p }
 
 // Matrix2D returns a Matrix2D JavaScript class.
-func (ba *Babylon) Matrix2D() *Matrix2D {
-	p := ba.ctx.Get("Matrix2D")
-	return Matrix2DFromJSObject(p, ba.ctx)
+func (gui *GUI) Matrix2D() *Matrix2D {
+	p := gui.ctx.Get("Matrix2D")
+	return Matrix2DFromJSObject(p, gui.ctx)
 }
 
 // Matrix2DFromJSObject returns a wrapped Matrix2D JavaScript class.

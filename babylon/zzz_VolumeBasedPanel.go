@@ -17,9 +17,9 @@ type VolumeBasedPanel struct {
 func (v *VolumeBasedPanel) JSObject() js.Value { return v.p }
 
 // VolumeBasedPanel returns a VolumeBasedPanel JavaScript class.
-func (ba *Babylon) VolumeBasedPanel() *VolumeBasedPanel {
-	p := ba.ctx.Get("VolumeBasedPanel")
-	return VolumeBasedPanelFromJSObject(p, ba.ctx)
+func (gui *GUI) VolumeBasedPanel() *VolumeBasedPanel {
+	p := gui.ctx.Get("VolumeBasedPanel")
+	return VolumeBasedPanelFromJSObject(p, gui.ctx)
 }
 
 // VolumeBasedPanelFromJSObject returns a wrapped VolumeBasedPanel JavaScript class.

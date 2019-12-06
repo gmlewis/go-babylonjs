@@ -112,7 +112,7 @@ func (c *ColorCurves) Parse(source interface{}) *ColorCurves {
 // PrepareUniforms calls the PrepareUniforms method on the ColorCurves object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcurves#prepareuniforms
-func (c *ColorCurves) PrepareUniforms(uniformsList string) {
+func (c *ColorCurves) PrepareUniforms(uniformsList []string) {
 
 	args := make([]interface{}, 0, 1+0)
 

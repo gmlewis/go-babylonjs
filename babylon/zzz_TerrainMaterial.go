@@ -104,10 +104,14 @@ func (t *TerrainMaterial) Dispose(opts *TerrainMaterialDisposeOpts) {
 // GetActiveTextures calls the GetActiveTextures method on the TerrainMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getactivetextures
-func (t *TerrainMaterial) GetActiveTextures() *BaseTexture {
+func (t *TerrainMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := t.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, t.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), t.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the TerrainMaterial object.
@@ -122,10 +126,14 @@ func (t *TerrainMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the TerrainMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getanimatables
-func (t *TerrainMaterial) GetAnimatables() *IAnimatable {
+func (t *TerrainMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := t.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, t.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), t.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the TerrainMaterial object.

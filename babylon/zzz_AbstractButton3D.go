@@ -17,9 +17,9 @@ type AbstractButton3D struct {
 func (a *AbstractButton3D) JSObject() js.Value { return a.p }
 
 // AbstractButton3D returns a AbstractButton3D JavaScript class.
-func (ba *Babylon) AbstractButton3D() *AbstractButton3D {
-	p := ba.ctx.Get("AbstractButton3D")
-	return AbstractButton3DFromJSObject(p, ba.ctx)
+func (gui *GUI) AbstractButton3D() *AbstractButton3D {
+	p := gui.ctx.Get("AbstractButton3D")
+	return AbstractButton3DFromJSObject(p, gui.ctx)
 }
 
 // AbstractButton3DFromJSObject returns a wrapped AbstractButton3D JavaScript class.

@@ -17,9 +17,9 @@ type Rectangle struct {
 func (r *Rectangle) JSObject() js.Value { return r.p }
 
 // Rectangle returns a Rectangle JavaScript class.
-func (ba *Babylon) Rectangle() *Rectangle {
-	p := ba.ctx.Get("Rectangle")
-	return RectangleFromJSObject(p, ba.ctx)
+func (gui *GUI) Rectangle() *Rectangle {
+	p := gui.ctx.Get("Rectangle")
+	return RectangleFromJSObject(p, gui.ctx)
 }
 
 // RectangleFromJSObject returns a wrapped Rectangle JavaScript class.

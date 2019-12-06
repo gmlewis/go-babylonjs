@@ -38,9 +38,9 @@ func CubeTextureArrayToJSArray(array []*CubeTexture) []interface{} {
 
 // NewCubeTextureOpts contains optional parameters for NewCubeTexture.
 type NewCubeTextureOpts struct {
-	Extensions        *string
+	Extensions        []string
 	NoMipmap          *bool
-	Files             *string
+	Files             []string
 	OnLoad            func()
 	OnError           func()
 	Format            *float64
@@ -67,7 +67,7 @@ func (ba *Babylon) NewCubeTexture(rootUrl string, scene *Scene, opts *NewCubeTex
 	if opts.Extensions == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Extensions)
+		args = append(args, opts.Extensions)
 	}
 	if opts.NoMipmap == nil {
 		args = append(args, js.Undefined())
@@ -77,7 +77,7 @@ func (ba *Babylon) NewCubeTexture(rootUrl string, scene *Scene, opts *NewCubeTex
 	if opts.Files == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Files)
+		args = append(args, opts.Files)
 	}
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
@@ -141,7 +141,7 @@ type CubeTextureCreateFromImagesOpts struct {
 // CreateFromImages calls the CreateFromImages method on the CubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#createfromimages
-func (c *CubeTexture) CreateFromImages(files string, scene *Scene, opts *CubeTextureCreateFromImagesOpts) *CubeTexture {
+func (c *CubeTexture) CreateFromImages(files []string, scene *Scene, opts *CubeTextureCreateFromImagesOpts) *CubeTexture {
 	if opts == nil {
 		opts = &CubeTextureCreateFromImagesOpts{}
 	}

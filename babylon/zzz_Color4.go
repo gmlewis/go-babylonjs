@@ -81,16 +81,20 @@ func (c *Color4) AddInPlace(right *Color4) *Color4 {
 // AsArray calls the AsArray method on the Color4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#asarray
-func (c *Color4) AsArray() float64 {
+func (c *Color4) AsArray() []float64 {
 
 	retVal := c.p.Call("asArray")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // CheckColors4 calls the CheckColors4 method on the Color4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#checkcolors4
-func (c *Color4) CheckColors4(colors float64, count float64) float64 {
+func (c *Color4) CheckColors4(colors []float64, count float64) []float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -98,7 +102,11 @@ func (c *Color4) CheckColors4(colors float64, count float64) float64 {
 	args = append(args, count)
 
 	retVal := c.p.Call("CheckColors4", args...)
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // ClampToRef calls the ClampToRef method on the Color4 object.
@@ -417,7 +425,7 @@ type Color4ToArrayOpts struct {
 // ToArray calls the ToArray method on the Color4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4#toarray
-func (c *Color4) ToArray(array float64, opts *Color4ToArrayOpts) *Color4 {
+func (c *Color4) ToArray(array []float64, opts *Color4ToArrayOpts) *Color4 {
 	if opts == nil {
 		opts = &Color4ToArrayOpts{}
 	}

@@ -112,10 +112,14 @@ func (v *Vector3) AddToRef(otherVector *Vector3, result *Vector3) *Vector3 {
 // AsArray calls the AsArray method on the Vector3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3#asarray
-func (v *Vector3) AsArray() float64 {
+func (v *Vector3) AsArray() []float64 {
 
 	retVal := v.p.Call("asArray")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // Backward calls the Backward method on the Vector3 object.

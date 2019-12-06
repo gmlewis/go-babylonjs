@@ -135,16 +135,20 @@ func (e *EnvironmentHelper) SetGroundMirror(groundMirror *MirrorTexture) *Enviro
 // GroundMirrorRenderList returns the GroundMirrorRenderList property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#groundmirrorrenderlist
-func (e *EnvironmentHelper) GroundMirrorRenderList() *AbstractMesh {
+func (e *EnvironmentHelper) GroundMirrorRenderList() []*AbstractMesh {
 	retVal := e.p.Get("groundMirrorRenderList")
-	return AbstractMeshFromJSObject(retVal, e.ctx)
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), e.ctx))
+	}
+	return result
 }
 
 // SetGroundMirrorRenderList sets the GroundMirrorRenderList property of class EnvironmentHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper#groundmirrorrenderlist
-func (e *EnvironmentHelper) SetGroundMirrorRenderList(groundMirrorRenderList *AbstractMesh) *EnvironmentHelper {
-	e.p.Set("groundMirrorRenderList", groundMirrorRenderList.JSObject())
+func (e *EnvironmentHelper) SetGroundMirrorRenderList(groundMirrorRenderList []*AbstractMesh) *EnvironmentHelper {
+	e.p.Set("groundMirrorRenderList", groundMirrorRenderList)
 	return e
 }
 

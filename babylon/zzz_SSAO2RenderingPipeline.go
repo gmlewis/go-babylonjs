@@ -38,7 +38,7 @@ func SSAO2RenderingPipelineArrayToJSArray(array []*SSAO2RenderingPipeline) []int
 
 // NewSSAO2RenderingPipelineOpts contains optional parameters for NewSSAO2RenderingPipeline.
 type NewSSAO2RenderingPipelineOpts struct {
-	Cameras *Camera
+	Cameras []*Camera
 }
 
 // NewSSAO2RenderingPipeline returns a new SSAO2RenderingPipeline object.
@@ -58,7 +58,7 @@ func (ba *Babylon) NewSSAO2RenderingPipeline(name string, scene *Scene, ratio in
 	if opts.Cameras == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Cameras.JSObject())
+		args = append(args, CameraArrayToJSArray(opts.Cameras))
 	}
 
 	p := ba.ctx.Get("SSAO2RenderingPipeline").New(args...)

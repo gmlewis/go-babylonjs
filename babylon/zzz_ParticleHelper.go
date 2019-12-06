@@ -106,11 +106,11 @@ func (p *ParticleHelper) CreateDefault(emitter *AbstractMesh, opts *ParticleHelp
 // ExportSet calls the ExportSet method on the ParticleHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlehelper#exportset
-func (p *ParticleHelper) ExportSet(systems *IParticleSystem) *ParticleSystemSet {
+func (p *ParticleHelper) ExportSet(systems []*IParticleSystem) *ParticleSystemSet {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, systems.JSObject())
+	args = append(args, IParticleSystemArrayToJSArray(systems))
 
 	retVal := p.p.Call("ExportSet", args...)
 	return ParticleSystemSetFromJSObject(retVal, p.ctx)

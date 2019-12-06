@@ -17,9 +17,9 @@ type Control3D struct {
 func (c *Control3D) JSObject() js.Value { return c.p }
 
 // Control3D returns a Control3D JavaScript class.
-func (ba *Babylon) Control3D() *Control3D {
-	p := ba.ctx.Get("Control3D")
-	return Control3DFromJSObject(p, ba.ctx)
+func (gui *GUI) Control3D() *Control3D {
+	p := gui.ctx.Get("Control3D")
+	return Control3DFromJSObject(p, gui.ctx)
 }
 
 // Control3DFromJSObject returns a wrapped Control3D JavaScript class.

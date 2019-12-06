@@ -81,7 +81,7 @@ func (p *PBRCustomMaterial) AttachAfterBind(mesh *Mesh, effect *Effect) {
 // Builder calls the Builder method on the PBRCustomMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#builder
-func (p *PBRCustomMaterial) Builder(shaderName string, uniforms string, uniformBuffers string, samplers string, defines js.Value) string {
+func (p *PBRCustomMaterial) Builder(shaderName string, uniforms []string, uniformBuffers []string, samplers []string, defines js.Value) string {
 
 	args := make([]interface{}, 0, 5+0)
 
@@ -228,7 +228,7 @@ func (p *PBRCustomMaterial) Fragment_MainBegin(shaderPart string) *PBRCustomMate
 // ReviewUniform calls the ReviewUniform method on the PBRCustomMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#reviewuniform
-func (p *PBRCustomMaterial) ReviewUniform(name string, arr string) string {
+func (p *PBRCustomMaterial) ReviewUniform(name string, arr []string) []string {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -236,7 +236,11 @@ func (p *PBRCustomMaterial) ReviewUniform(name string, arr string) string {
 	args = append(args, arr)
 
 	retVal := p.p.Call("ReviewUniform", args...)
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // Vertex_Before_NormalUpdated calls the Vertex_Before_NormalUpdated method on the PBRCustomMaterial object.
@@ -400,15 +404,19 @@ func (p *PBRCustomMaterial) Set_createdShaderName(_createdShaderName string) *PB
 // _customUniform returns the _customUniform property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_customuniform
-func (p *PBRCustomMaterial) _customUniform() string {
+func (p *PBRCustomMaterial) _customUniform() []string {
 	retVal := p.p.Get("_customUniform")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // Set_customUniform sets the _customUniform property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_customuniform
-func (p *PBRCustomMaterial) Set_customUniform(_customUniform string) *PBRCustomMaterial {
+func (p *PBRCustomMaterial) Set_customUniform(_customUniform []string) *PBRCustomMaterial {
 	p.p.Set("_customUniform", _customUniform)
 	return p
 }
@@ -432,16 +440,20 @@ func (p *PBRCustomMaterial) Set_isCreatedShader(_isCreatedShader bool) *PBRCusto
 // _newSamplerInstances returns the _newSamplerInstances property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_newsamplerinstances
-func (p *PBRCustomMaterial) _newSamplerInstances() *Texture {
+func (p *PBRCustomMaterial) _newSamplerInstances() []*Texture {
 	retVal := p.p.Get("_newSamplerInstances")
-	return TextureFromJSObject(retVal, p.ctx)
+	result := []*Texture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TextureFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // Set_newSamplerInstances sets the _newSamplerInstances property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_newsamplerinstances
-func (p *PBRCustomMaterial) Set_newSamplerInstances(_newSamplerInstances *Texture) *PBRCustomMaterial {
-	p.p.Set("_newSamplerInstances", _newSamplerInstances.JSObject())
+func (p *PBRCustomMaterial) Set_newSamplerInstances(_newSamplerInstances []*Texture) *PBRCustomMaterial {
+	p.p.Set("_newSamplerInstances", _newSamplerInstances)
 	return p
 }
 
@@ -464,15 +476,19 @@ func (p *PBRCustomMaterial) Set_newUniformInstances(_newUniformInstances interfa
 // _newUniforms returns the _newUniforms property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_newuniforms
-func (p *PBRCustomMaterial) _newUniforms() string {
+func (p *PBRCustomMaterial) _newUniforms() []string {
 	retVal := p.p.Get("_newUniforms")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // Set_newUniforms sets the _newUniforms property of class PBRCustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#_newuniforms
-func (p *PBRCustomMaterial) Set_newUniforms(_newUniforms string) *PBRCustomMaterial {
+func (p *PBRCustomMaterial) Set_newUniforms(_newUniforms []string) *PBRCustomMaterial {
 	p.p.Set("_newUniforms", _newUniforms)
 	return p
 }

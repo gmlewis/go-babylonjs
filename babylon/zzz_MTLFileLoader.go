@@ -53,15 +53,19 @@ func (m *MTLFileLoader) ParseMTL(scene *Scene, data string, rootUrl string) {
 // Materials returns the Materials property of class MTLFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mtlfileloader#materials
-func (m *MTLFileLoader) Materials() *StandardMaterial {
+func (m *MTLFileLoader) Materials() []*StandardMaterial {
 	retVal := m.p.Get("materials")
-	return StandardMaterialFromJSObject(retVal, m.ctx)
+	result := []*StandardMaterial{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, StandardMaterialFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // SetMaterials sets the Materials property of class MTLFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mtlfileloader#materials
-func (m *MTLFileLoader) SetMaterials(materials *StandardMaterial) *MTLFileLoader {
-	m.p.Set("materials", materials.JSObject())
+func (m *MTLFileLoader) SetMaterials(materials []*StandardMaterial) *MTLFileLoader {
+	m.p.Set("materials", materials)
 	return m
 }

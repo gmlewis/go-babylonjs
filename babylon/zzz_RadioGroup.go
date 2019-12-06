@@ -18,9 +18,9 @@ type RadioGroup struct {
 func (r *RadioGroup) JSObject() js.Value { return r.p }
 
 // RadioGroup returns a RadioGroup JavaScript class.
-func (ba *Babylon) RadioGroup() *RadioGroup {
-	p := ba.ctx.Get("RadioGroup")
-	return RadioGroupFromJSObject(p, ba.ctx)
+func (gui *GUI) RadioGroup() *RadioGroup {
+	p := gui.ctx.Get("RadioGroup")
+	return RadioGroupFromJSObject(p, gui.ctx)
 }
 
 // RadioGroupFromJSObject returns a wrapped RadioGroup JavaScript class.

@@ -17,9 +17,9 @@ type Image struct {
 func (i *Image) JSObject() js.Value { return i.p }
 
 // Image returns a Image JavaScript class.
-func (ba *Babylon) Image() *Image {
-	p := ba.ctx.Get("Image")
-	return ImageFromJSObject(p, ba.ctx)
+func (gui *GUI) Image() *Image {
+	p := gui.ctx.Get("Image")
+	return ImageFromJSObject(p, gui.ctx)
 }
 
 // ImageFromJSObject returns a wrapped Image JavaScript class.

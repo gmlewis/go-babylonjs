@@ -243,11 +243,11 @@ func (b *BaseTexture) UpdateSamplingMode(samplingMode float64) {
 // WhenAllReady calls the WhenAllReady method on the BaseTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#whenallready
-func (b *BaseTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+func (b *BaseTexture) WhenAllReady(textures []*BaseTexture, callback func()) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, textures.JSObject())
+	args = append(args, BaseTextureArrayToJSArray(textures))
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
 
 	b.p.Call("WhenAllReady", args...)
@@ -256,16 +256,20 @@ func (b *BaseTexture) WhenAllReady(textures *BaseTexture, callback func()) {
 // Animations returns the Animations property of class BaseTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#animations
-func (b *BaseTexture) Animations() *Animation {
+func (b *BaseTexture) Animations() []*Animation {
 	retVal := b.p.Get("animations")
-	return AnimationFromJSObject(retVal, b.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class BaseTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#animations
-func (b *BaseTexture) SetAnimations(animations *Animation) *BaseTexture {
-	b.p.Set("animations", animations.JSObject())
+func (b *BaseTexture) SetAnimations(animations []*Animation) *BaseTexture {
+	b.p.Set("animations", animations)
 	return b
 }
 

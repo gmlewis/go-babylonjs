@@ -17,9 +17,9 @@ type Slider struct {
 func (s *Slider) JSObject() js.Value { return s.p }
 
 // Slider returns a Slider JavaScript class.
-func (ba *Babylon) Slider() *Slider {
-	p := ba.ctx.Get("Slider")
-	return SliderFromJSObject(p, ba.ctx)
+func (gui *GUI) Slider() *Slider {
+	p := gui.ctx.Get("Slider")
+	return SliderFromJSObject(p, gui.ctx)
 }
 
 // SliderFromJSObject returns a wrapped Slider JavaScript class.

@@ -17,9 +17,9 @@ type Button struct {
 func (b *Button) JSObject() js.Value { return b.p }
 
 // Button returns a Button JavaScript class.
-func (ba *Babylon) Button() *Button {
-	p := ba.ctx.Get("Button")
-	return ButtonFromJSObject(p, ba.ctx)
+func (gui *GUI) Button() *Button {
+	p := gui.ctx.Get("Button")
+	return ButtonFromJSObject(p, gui.ctx)
 }
 
 // ButtonFromJSObject returns a wrapped Button JavaScript class.

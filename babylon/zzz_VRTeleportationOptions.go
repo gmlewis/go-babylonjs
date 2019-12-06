@@ -71,16 +71,20 @@ func (v *VRTeleportationOptions) SetFloorMeshName(floorMeshName string) *VRTelep
 // FloorMeshes returns the FloorMeshes property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#floormeshes
-func (v *VRTeleportationOptions) FloorMeshes() *Mesh {
+func (v *VRTeleportationOptions) FloorMeshes() []*Mesh {
 	retVal := v.p.Get("floorMeshes")
-	return MeshFromJSObject(retVal, v.ctx)
+	result := []*Mesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MeshFromJSObject(retVal.Index(ri), v.ctx))
+	}
+	return result
 }
 
 // SetFloorMeshes sets the FloorMeshes property of class VRTeleportationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrteleportationoptions#floormeshes
-func (v *VRTeleportationOptions) SetFloorMeshes(floorMeshes *Mesh) *VRTeleportationOptions {
-	v.p.Set("floorMeshes", floorMeshes.JSObject())
+func (v *VRTeleportationOptions) SetFloorMeshes(floorMeshes []*Mesh) *VRTeleportationOptions {
+	v.p.Set("floorMeshes", floorMeshes)
 	return v
 }
 

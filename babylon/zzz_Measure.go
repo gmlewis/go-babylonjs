@@ -17,9 +17,9 @@ type Measure struct {
 func (m *Measure) JSObject() js.Value { return m.p }
 
 // Measure returns a Measure JavaScript class.
-func (ba *Babylon) Measure() *Measure {
-	p := ba.ctx.Get("Measure")
-	return MeasureFromJSObject(p, ba.ctx)
+func (gui *GUI) Measure() *Measure {
+	p := gui.ctx.Get("Measure")
+	return MeasureFromJSObject(p, gui.ctx)
 }
 
 // MeasureFromJSObject returns a wrapped Measure JavaScript class.

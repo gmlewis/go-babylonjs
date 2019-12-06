@@ -17,9 +17,9 @@ type Line struct {
 func (l *Line) JSObject() js.Value { return l.p }
 
 // Line returns a Line JavaScript class.
-func (ba *Babylon) Line() *Line {
-	p := ba.ctx.Get("Line")
-	return LineFromJSObject(p, ba.ctx)
+func (gui *GUI) Line() *Line {
+	p := gui.ctx.Get("Line")
+	return LineFromJSObject(p, gui.ctx)
 }
 
 // LineFromJSObject returns a wrapped Line JavaScript class.

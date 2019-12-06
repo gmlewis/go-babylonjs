@@ -39,15 +39,19 @@ func IShaderMaterialOptionsArrayToJSArray(array []*IShaderMaterialOptions) []int
 // Attributes returns the Attributes property of class IShaderMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadermaterialoptions#attributes
-func (i *IShaderMaterialOptions) Attributes() string {
+func (i *IShaderMaterialOptions) Attributes() []string {
 	retVal := i.p.Get("attributes")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetAttributes sets the Attributes property of class IShaderMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadermaterialoptions#attributes
-func (i *IShaderMaterialOptions) SetAttributes(attributes string) *IShaderMaterialOptions {
+func (i *IShaderMaterialOptions) SetAttributes(attributes []string) *IShaderMaterialOptions {
 	i.p.Set("attributes", attributes)
 	return i
 }
@@ -55,15 +59,19 @@ func (i *IShaderMaterialOptions) SetAttributes(attributes string) *IShaderMateri
 // Defines returns the Defines property of class IShaderMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadermaterialoptions#defines
-func (i *IShaderMaterialOptions) Defines() string {
+func (i *IShaderMaterialOptions) Defines() []string {
 	retVal := i.p.Get("defines")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetDefines sets the Defines property of class IShaderMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadermaterialoptions#defines
-func (i *IShaderMaterialOptions) SetDefines(defines string) *IShaderMaterialOptions {
+func (i *IShaderMaterialOptions) SetDefines(defines []string) *IShaderMaterialOptions {
 	i.p.Set("defines", defines)
 	return i
 }
@@ -103,15 +111,19 @@ func (i *IShaderMaterialOptions) SetNeedAlphaTesting(needAlphaTesting bool) *ISh
 // Samplers returns the Samplers property of class IShaderMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadermaterialoptions#samplers
-func (i *IShaderMaterialOptions) Samplers() string {
+func (i *IShaderMaterialOptions) Samplers() []string {
 	retVal := i.p.Get("samplers")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetSamplers sets the Samplers property of class IShaderMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadermaterialoptions#samplers
-func (i *IShaderMaterialOptions) SetSamplers(samplers string) *IShaderMaterialOptions {
+func (i *IShaderMaterialOptions) SetSamplers(samplers []string) *IShaderMaterialOptions {
 	i.p.Set("samplers", samplers)
 	return i
 }
@@ -119,15 +131,19 @@ func (i *IShaderMaterialOptions) SetSamplers(samplers string) *IShaderMaterialOp
 // UniformBuffers returns the UniformBuffers property of class IShaderMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadermaterialoptions#uniformbuffers
-func (i *IShaderMaterialOptions) UniformBuffers() string {
+func (i *IShaderMaterialOptions) UniformBuffers() []string {
 	retVal := i.p.Get("uniformBuffers")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetUniformBuffers sets the UniformBuffers property of class IShaderMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadermaterialoptions#uniformbuffers
-func (i *IShaderMaterialOptions) SetUniformBuffers(uniformBuffers string) *IShaderMaterialOptions {
+func (i *IShaderMaterialOptions) SetUniformBuffers(uniformBuffers []string) *IShaderMaterialOptions {
 	i.p.Set("uniformBuffers", uniformBuffers)
 	return i
 }
@@ -135,15 +151,19 @@ func (i *IShaderMaterialOptions) SetUniformBuffers(uniformBuffers string) *IShad
 // Uniforms returns the Uniforms property of class IShaderMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadermaterialoptions#uniforms
-func (i *IShaderMaterialOptions) Uniforms() string {
+func (i *IShaderMaterialOptions) Uniforms() []string {
 	retVal := i.p.Get("uniforms")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetUniforms sets the Uniforms property of class IShaderMaterialOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadermaterialoptions#uniforms
-func (i *IShaderMaterialOptions) SetUniforms(uniforms string) *IShaderMaterialOptions {
+func (i *IShaderMaterialOptions) SetUniforms(uniforms []string) *IShaderMaterialOptions {
 	i.p.Set("uniforms", uniforms)
 	return i
 }

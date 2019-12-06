@@ -17,9 +17,9 @@ type PlanePanel struct {
 func (p *PlanePanel) JSObject() js.Value { return p.p }
 
 // PlanePanel returns a PlanePanel JavaScript class.
-func (ba *Babylon) PlanePanel() *PlanePanel {
-	p := ba.ctx.Get("PlanePanel")
-	return PlanePanelFromJSObject(p, ba.ctx)
+func (gui *GUI) PlanePanel() *PlanePanel {
+	p := gui.ctx.Get("PlanePanel")
+	return PlanePanelFromJSObject(p, gui.ctx)
 }
 
 // PlanePanelFromJSObject returns a wrapped PlanePanel JavaScript class.

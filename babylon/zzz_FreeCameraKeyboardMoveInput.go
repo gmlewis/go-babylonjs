@@ -121,15 +121,19 @@ func (f *FreeCameraKeyboardMoveInput) SetCamera(camera *FreeCamera) *FreeCameraK
 // KeysDown returns the KeysDown property of class FreeCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#keysdown
-func (f *FreeCameraKeyboardMoveInput) KeysDown() float64 {
+func (f *FreeCameraKeyboardMoveInput) KeysDown() []float64 {
 	retVal := f.p.Get("keysDown")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysDown sets the KeysDown property of class FreeCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#keysdown
-func (f *FreeCameraKeyboardMoveInput) SetKeysDown(keysDown float64) *FreeCameraKeyboardMoveInput {
+func (f *FreeCameraKeyboardMoveInput) SetKeysDown(keysDown []float64) *FreeCameraKeyboardMoveInput {
 	f.p.Set("keysDown", keysDown)
 	return f
 }
@@ -137,15 +141,19 @@ func (f *FreeCameraKeyboardMoveInput) SetKeysDown(keysDown float64) *FreeCameraK
 // KeysLeft returns the KeysLeft property of class FreeCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#keysleft
-func (f *FreeCameraKeyboardMoveInput) KeysLeft() float64 {
+func (f *FreeCameraKeyboardMoveInput) KeysLeft() []float64 {
 	retVal := f.p.Get("keysLeft")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysLeft sets the KeysLeft property of class FreeCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#keysleft
-func (f *FreeCameraKeyboardMoveInput) SetKeysLeft(keysLeft float64) *FreeCameraKeyboardMoveInput {
+func (f *FreeCameraKeyboardMoveInput) SetKeysLeft(keysLeft []float64) *FreeCameraKeyboardMoveInput {
 	f.p.Set("keysLeft", keysLeft)
 	return f
 }
@@ -153,15 +161,19 @@ func (f *FreeCameraKeyboardMoveInput) SetKeysLeft(keysLeft float64) *FreeCameraK
 // KeysRight returns the KeysRight property of class FreeCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#keysright
-func (f *FreeCameraKeyboardMoveInput) KeysRight() float64 {
+func (f *FreeCameraKeyboardMoveInput) KeysRight() []float64 {
 	retVal := f.p.Get("keysRight")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysRight sets the KeysRight property of class FreeCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#keysright
-func (f *FreeCameraKeyboardMoveInput) SetKeysRight(keysRight float64) *FreeCameraKeyboardMoveInput {
+func (f *FreeCameraKeyboardMoveInput) SetKeysRight(keysRight []float64) *FreeCameraKeyboardMoveInput {
 	f.p.Set("keysRight", keysRight)
 	return f
 }
@@ -169,15 +181,19 @@ func (f *FreeCameraKeyboardMoveInput) SetKeysRight(keysRight float64) *FreeCamer
 // KeysUp returns the KeysUp property of class FreeCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#keysup
-func (f *FreeCameraKeyboardMoveInput) KeysUp() float64 {
+func (f *FreeCameraKeyboardMoveInput) KeysUp() []float64 {
 	retVal := f.p.Get("keysUp")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysUp sets the KeysUp property of class FreeCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerakeyboardmoveinput#keysup
-func (f *FreeCameraKeyboardMoveInput) SetKeysUp(keysUp float64) *FreeCameraKeyboardMoveInput {
+func (f *FreeCameraKeyboardMoveInput) SetKeysUp(keysUp []float64) *FreeCameraKeyboardMoveInput {
 	f.p.Set("keysUp", keysUp)
 	return f
 }

@@ -191,7 +191,7 @@ type AnimationCreateAndStartHierarchyAnimationOpts struct {
 // CreateAndStartHierarchyAnimation calls the CreateAndStartHierarchyAnimation method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#createandstarthierarchyanimation
-func (a *Animation) CreateAndStartHierarchyAnimation(name string, node *Node, directDescendantsOnly bool, targetProperty string, framePerSecond float64, totalFrame float64, from interface{}, to interface{}, opts *AnimationCreateAndStartHierarchyAnimationOpts) *Animatable {
+func (a *Animation) CreateAndStartHierarchyAnimation(name string, node *Node, directDescendantsOnly bool, targetProperty string, framePerSecond float64, totalFrame float64, from interface{}, to interface{}, opts *AnimationCreateAndStartHierarchyAnimationOpts) []*Animatable {
 	if opts == nil {
 		opts = &AnimationCreateAndStartHierarchyAnimationOpts{}
 	}
@@ -224,7 +224,11 @@ func (a *Animation) CreateAndStartHierarchyAnimation(name string, node *Node, di
 	}
 
 	retVal := a.p.Call("CreateAndStartHierarchyAnimation", args...)
-	return AnimatableFromJSObject(retVal, a.ctx)
+	result := []*Animatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimatableFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // CreateAnimation calls the CreateAnimation method on the Animation object.
@@ -372,10 +376,14 @@ func (a *Animation) GetEasingFunction() *IEasingFunction {
 // GetEvents calls the GetEvents method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#getevents
-func (a *Animation) GetEvents() *AnimationEvent {
+func (a *Animation) GetEvents() []*AnimationEvent {
 
 	retVal := a.p.Call("getEvents")
-	return AnimationEventFromJSObject(retVal, a.ctx)
+	result := []*AnimationEvent{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationEventFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // GetHighestFrame calls the GetHighestFrame method on the Animation object.
@@ -992,16 +1000,20 @@ func (a *Animation) SetName(name string) *Animation {
 // RuntimeAnimations returns the RuntimeAnimations property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#runtimeanimations
-func (a *Animation) RuntimeAnimations() *RuntimeAnimation {
+func (a *Animation) RuntimeAnimations() []*RuntimeAnimation {
 	retVal := a.p.Get("runtimeAnimations")
-	return RuntimeAnimationFromJSObject(retVal, a.ctx)
+	result := []*RuntimeAnimation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, RuntimeAnimationFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetRuntimeAnimations sets the RuntimeAnimations property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#runtimeanimations
-func (a *Animation) SetRuntimeAnimations(runtimeAnimations *RuntimeAnimation) *Animation {
-	a.p.Set("runtimeAnimations", runtimeAnimations.JSObject())
+func (a *Animation) SetRuntimeAnimations(runtimeAnimations []*RuntimeAnimation) *Animation {
+	a.p.Set("runtimeAnimations", runtimeAnimations)
 	return a
 }
 
@@ -1024,15 +1036,19 @@ func (a *Animation) SetTargetProperty(targetProperty string) *Animation {
 // TargetPropertyPath returns the TargetPropertyPath property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#targetpropertypath
-func (a *Animation) TargetPropertyPath() string {
+func (a *Animation) TargetPropertyPath() []string {
 	retVal := a.p.Get("targetPropertyPath")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetTargetPropertyPath sets the TargetPropertyPath property of class Animation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#targetpropertypath
-func (a *Animation) SetTargetPropertyPath(targetPropertyPath string) *Animation {
+func (a *Animation) SetTargetPropertyPath(targetPropertyPath []string) *Animation {
 	a.p.Set("targetPropertyPath", targetPropertyPath)
 	return a
 }

@@ -39,12 +39,12 @@ func NodeMaterialOptimizerArrayToJSArray(array []*NodeMaterialOptimizer) []inter
 // Optimize calls the Optimize method on the NodeMaterialOptimizer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialoptimizer#optimize
-func (n *NodeMaterialOptimizer) Optimize(vertexOutputNodes *NodeMaterialBlock, fragmentOutputNodes *NodeMaterialBlock) {
+func (n *NodeMaterialOptimizer) Optimize(vertexOutputNodes []*NodeMaterialBlock, fragmentOutputNodes []*NodeMaterialBlock) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, vertexOutputNodes.JSObject())
-	args = append(args, fragmentOutputNodes.JSObject())
+	args = append(args, NodeMaterialBlockArrayToJSArray(vertexOutputNodes))
+	args = append(args, NodeMaterialBlockArrayToJSArray(fragmentOutputNodes))
 
 	n.p.Call("optimize", args...)
 }

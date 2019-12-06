@@ -42,11 +42,11 @@ func Curve3ArrayToJSArray(array []*Curve3) []interface{} {
 // NewCurve3 returns a new Curve3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.curve3
-func (ba *Babylon) NewCurve3(points *Vector3) *Curve3 {
+func (ba *Babylon) NewCurve3(points []*Vector3) *Curve3 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, points.JSObject())
+	args = append(args, points)
 
 	p := ba.ctx.Get("Curve3").New(args...)
 	return Curve3FromJSObject(p, ba.ctx)
@@ -73,14 +73,14 @@ type Curve3CreateCatmullRomSplineOpts struct {
 // CreateCatmullRomSpline calls the CreateCatmullRomSpline method on the Curve3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.curve3#createcatmullromspline
-func (c *Curve3) CreateCatmullRomSpline(points *Vector3, nbPoints float64, opts *Curve3CreateCatmullRomSplineOpts) *Curve3 {
+func (c *Curve3) CreateCatmullRomSpline(points []*Vector3, nbPoints float64, opts *Curve3CreateCatmullRomSplineOpts) *Curve3 {
 	if opts == nil {
 		opts = &Curve3CreateCatmullRomSplineOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, points.JSObject())
+	args = append(args, Vector3ArrayToJSArray(points))
 	args = append(args, nbPoints)
 
 	if opts.Closed == nil {
@@ -146,10 +146,14 @@ func (c *Curve3) CreateQuadraticBezier(v0 *Vector3, v1 *Vector3, v2 *Vector3, nb
 // GetPoints calls the GetPoints method on the Curve3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.curve3#getpoints
-func (c *Curve3) GetPoints() *Vector3 {
+func (c *Curve3) GetPoints() []*Vector3 {
 
 	retVal := c.p.Call("getPoints")
-	return Vector3FromJSObject(retVal, c.ctx)
+	result := []*Vector3{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Vector3FromJSObject(retVal.Index(ri), c.ctx))
+	}
+	return result
 }
 
 // Length calls the Length method on the Curve3 object.

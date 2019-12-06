@@ -41,11 +41,11 @@ func ICullableArrayToJSArray(array []*ICullable) []interface{} {
 // IsCompletelyInFrustum calls the IsCompletelyInFrustum method on the ICullable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icullable#iscompletelyinfrustum
-func (i *ICullable) IsCompletelyInFrustum(frustumPlanes *Plane) bool {
+func (i *ICullable) IsCompletelyInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := i.p.Call("isCompletelyInFrustum", args...)
 	return retVal.Bool()
@@ -54,11 +54,11 @@ func (i *ICullable) IsCompletelyInFrustum(frustumPlanes *Plane) bool {
 // IsInFrustum calls the IsInFrustum method on the ICullable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icullable#isinfrustum
-func (i *ICullable) IsInFrustum(frustumPlanes *Plane) bool {
+func (i *ICullable) IsInFrustum(frustumPlanes []*Plane) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := i.p.Call("isInFrustum", args...)
 	return retVal.Bool()

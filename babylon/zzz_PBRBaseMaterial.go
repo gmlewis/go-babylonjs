@@ -137,10 +137,14 @@ func (p *PBRBaseMaterial) ForceCompilation(mesh *AbstractMesh, opts *PBRBaseMate
 // GetActiveTextures calls the GetActiveTextures method on the PBRBaseMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#getactivetextures
-func (p *PBRBaseMaterial) GetActiveTextures() *BaseTexture {
+func (p *PBRBaseMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := p.p.Call("getActiveTextures")
-	return BaseTextureFromJSObject(retVal, p.ctx)
+	result := []*BaseTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BaseTextureFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the PBRBaseMaterial object.
@@ -155,10 +159,14 @@ func (p *PBRBaseMaterial) GetAlphaTestTexture() *BaseTexture {
 // GetAnimatables calls the GetAnimatables method on the PBRBaseMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#getanimatables
-func (p *PBRBaseMaterial) GetAnimatables() *IAnimatable {
+func (p *PBRBaseMaterial) GetAnimatables() []*IAnimatable {
 
 	retVal := p.p.Call("getAnimatables")
-	return IAnimatableFromJSObject(retVal, p.ctx)
+	result := []*IAnimatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimatableFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the PBRBaseMaterial object.

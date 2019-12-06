@@ -116,7 +116,7 @@ type ControlGetDescendantsOpts struct {
 // GetDescendants calls the GetDescendants method on the Control object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#getdescendants
-func (c *Control) GetDescendants(opts *ControlGetDescendantsOpts) *Control {
+func (c *Control) GetDescendants(opts *ControlGetDescendantsOpts) []*Control {
 	if opts == nil {
 		opts = &ControlGetDescendantsOpts{}
 	}
@@ -135,7 +135,11 @@ func (c *Control) GetDescendants(opts *ControlGetDescendantsOpts) *Control {
 	}
 
 	retVal := c.p.Call("getDescendants", args...)
-	return ControlFromJSObject(retVal, c.ctx)
+	result := []*Control{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ControlFromJSObject(retVal.Index(ri), c.ctx))
+	}
+	return result
 }
 
 // ControlGetDescendantsToRefOpts contains optional parameters for Control.GetDescendantsToRef.
@@ -147,14 +151,14 @@ type ControlGetDescendantsToRefOpts struct {
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Control object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#getdescendantstoref
-func (c *Control) GetDescendantsToRef(results *Control, opts *ControlGetDescendantsToRefOpts) {
+func (c *Control) GetDescendantsToRef(results []*Control, opts *ControlGetDescendantsToRefOpts) {
 	if opts == nil {
 		opts = &ControlGetDescendantsToRefOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, results.JSObject())
+	args = append(args, ControlArrayToJSArray(results))
 
 	if opts.DirectDescendantsOnly == nil {
 		args = append(args, js.Undefined())

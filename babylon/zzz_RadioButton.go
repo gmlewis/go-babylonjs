@@ -17,9 +17,9 @@ type RadioButton struct {
 func (r *RadioButton) JSObject() js.Value { return r.p }
 
 // RadioButton returns a RadioButton JavaScript class.
-func (ba *Babylon) RadioButton() *RadioButton {
-	p := ba.ctx.Get("RadioButton")
-	return RadioButtonFromJSObject(p, ba.ctx)
+func (gui *GUI) RadioButton() *RadioButton {
+	p := gui.ctx.Get("RadioButton")
+	return RadioButtonFromJSObject(p, gui.ctx)
 }
 
 // RadioButtonFromJSObject returns a wrapped RadioButton JavaScript class.

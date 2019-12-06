@@ -144,14 +144,14 @@ type OctreeSelectOpts struct {
 // Select calls the Select method on the Octree object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#select
-func (o *Octree) Select(frustumPlanes *Plane, opts *OctreeSelectOpts) *SmartArray {
+func (o *Octree) Select(frustumPlanes []*Plane, opts *OctreeSelectOpts) *SmartArray {
 	if opts == nil {
 		opts = &OctreeSelectOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	if opts.AllowDuplicate == nil {
 		args = append(args, js.Undefined())
@@ -166,13 +166,13 @@ func (o *Octree) Select(frustumPlanes *Plane, opts *OctreeSelectOpts) *SmartArra
 // Update calls the Update method on the Octree object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#update
-func (o *Octree) Update(worldMin *Vector3, worldMax *Vector3, entries *T) {
+func (o *Octree) Update(worldMin *Vector3, worldMax *Vector3, entries []*T) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, worldMin.JSObject())
 	args = append(args, worldMax.JSObject())
-	args = append(args, entries.JSObject())
+	args = append(args, TArrayToJSArray(entries))
 
 	o.p.Call("update", args...)
 }
@@ -232,16 +232,20 @@ func (o *Octree) SetCreationFuncForSubMeshes(CreationFuncForSubMeshes func()) *O
 // DynamicContent returns the DynamicContent property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#dynamiccontent
-func (o *Octree) DynamicContent() *T {
+func (o *Octree) DynamicContent() []*T {
 	retVal := o.p.Get("dynamicContent")
-	return TFromJSObject(retVal, o.ctx)
+	result := []*T{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TFromJSObject(retVal.Index(ri), o.ctx))
+	}
+	return result
 }
 
 // SetDynamicContent sets the DynamicContent property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#dynamiccontent
-func (o *Octree) SetDynamicContent(dynamicContent *T) *Octree {
-	o.p.Set("dynamicContent", dynamicContent.JSObject())
+func (o *Octree) SetDynamicContent(dynamicContent []*T) *Octree {
+	o.p.Set("dynamicContent", dynamicContent)
 	return o
 }
 

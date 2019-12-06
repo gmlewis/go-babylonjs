@@ -78,7 +78,7 @@ type ISpriteManagerMultiIntersectsOpts struct {
 // MultiIntersects calls the MultiIntersects method on the ISpriteManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ispritemanager#multiintersects
-func (i *ISpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *ISpriteManagerMultiIntersectsOpts) *PickingInfo {
+func (i *ISpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *ISpriteManagerMultiIntersectsOpts) []*PickingInfo {
 	if opts == nil {
 		opts = &ISpriteManagerMultiIntersectsOpts{}
 	}
@@ -95,7 +95,11 @@ func (i *ISpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *ISprite
 	}
 
 	retVal := i.p.Call("multiIntersects", args...)
-	return PickingInfoFromJSObject(retVal, i.ctx)
+	result := []*PickingInfo{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PickingInfoFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // Render calls the Render method on the ISpriteManager object.

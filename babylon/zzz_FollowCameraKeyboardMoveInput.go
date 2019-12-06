@@ -137,15 +137,19 @@ func (f *FollowCameraKeyboardMoveInput) SetHeightSensibility(heightSensibility f
 // KeysHeightOffsetDecr returns the KeysHeightOffsetDecr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysheightoffsetdecr
-func (f *FollowCameraKeyboardMoveInput) KeysHeightOffsetDecr() float64 {
+func (f *FollowCameraKeyboardMoveInput) KeysHeightOffsetDecr() []float64 {
 	retVal := f.p.Get("keysHeightOffsetDecr")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysHeightOffsetDecr sets the KeysHeightOffsetDecr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysheightoffsetdecr
-func (f *FollowCameraKeyboardMoveInput) SetKeysHeightOffsetDecr(keysHeightOffsetDecr float64) *FollowCameraKeyboardMoveInput {
+func (f *FollowCameraKeyboardMoveInput) SetKeysHeightOffsetDecr(keysHeightOffsetDecr []float64) *FollowCameraKeyboardMoveInput {
 	f.p.Set("keysHeightOffsetDecr", keysHeightOffsetDecr)
 	return f
 }
@@ -153,15 +157,19 @@ func (f *FollowCameraKeyboardMoveInput) SetKeysHeightOffsetDecr(keysHeightOffset
 // KeysHeightOffsetIncr returns the KeysHeightOffsetIncr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysheightoffsetincr
-func (f *FollowCameraKeyboardMoveInput) KeysHeightOffsetIncr() float64 {
+func (f *FollowCameraKeyboardMoveInput) KeysHeightOffsetIncr() []float64 {
 	retVal := f.p.Get("keysHeightOffsetIncr")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysHeightOffsetIncr sets the KeysHeightOffsetIncr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysheightoffsetincr
-func (f *FollowCameraKeyboardMoveInput) SetKeysHeightOffsetIncr(keysHeightOffsetIncr float64) *FollowCameraKeyboardMoveInput {
+func (f *FollowCameraKeyboardMoveInput) SetKeysHeightOffsetIncr(keysHeightOffsetIncr []float64) *FollowCameraKeyboardMoveInput {
 	f.p.Set("keysHeightOffsetIncr", keysHeightOffsetIncr)
 	return f
 }
@@ -217,15 +225,19 @@ func (f *FollowCameraKeyboardMoveInput) SetKeysHeightOffsetModifierShift(keysHei
 // KeysRadiusDecr returns the KeysRadiusDecr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysradiusdecr
-func (f *FollowCameraKeyboardMoveInput) KeysRadiusDecr() float64 {
+func (f *FollowCameraKeyboardMoveInput) KeysRadiusDecr() []float64 {
 	retVal := f.p.Get("keysRadiusDecr")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysRadiusDecr sets the KeysRadiusDecr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysradiusdecr
-func (f *FollowCameraKeyboardMoveInput) SetKeysRadiusDecr(keysRadiusDecr float64) *FollowCameraKeyboardMoveInput {
+func (f *FollowCameraKeyboardMoveInput) SetKeysRadiusDecr(keysRadiusDecr []float64) *FollowCameraKeyboardMoveInput {
 	f.p.Set("keysRadiusDecr", keysRadiusDecr)
 	return f
 }
@@ -233,15 +245,19 @@ func (f *FollowCameraKeyboardMoveInput) SetKeysRadiusDecr(keysRadiusDecr float64
 // KeysRadiusIncr returns the KeysRadiusIncr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysradiusincr
-func (f *FollowCameraKeyboardMoveInput) KeysRadiusIncr() float64 {
+func (f *FollowCameraKeyboardMoveInput) KeysRadiusIncr() []float64 {
 	retVal := f.p.Get("keysRadiusIncr")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysRadiusIncr sets the KeysRadiusIncr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysradiusincr
-func (f *FollowCameraKeyboardMoveInput) SetKeysRadiusIncr(keysRadiusIncr float64) *FollowCameraKeyboardMoveInput {
+func (f *FollowCameraKeyboardMoveInput) SetKeysRadiusIncr(keysRadiusIncr []float64) *FollowCameraKeyboardMoveInput {
 	f.p.Set("keysRadiusIncr", keysRadiusIncr)
 	return f
 }
@@ -297,15 +313,19 @@ func (f *FollowCameraKeyboardMoveInput) SetKeysRadiusModifierShift(keysRadiusMod
 // KeysRotationOffsetDecr returns the KeysRotationOffsetDecr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysrotationoffsetdecr
-func (f *FollowCameraKeyboardMoveInput) KeysRotationOffsetDecr() float64 {
+func (f *FollowCameraKeyboardMoveInput) KeysRotationOffsetDecr() []float64 {
 	retVal := f.p.Get("keysRotationOffsetDecr")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysRotationOffsetDecr sets the KeysRotationOffsetDecr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysrotationoffsetdecr
-func (f *FollowCameraKeyboardMoveInput) SetKeysRotationOffsetDecr(keysRotationOffsetDecr float64) *FollowCameraKeyboardMoveInput {
+func (f *FollowCameraKeyboardMoveInput) SetKeysRotationOffsetDecr(keysRotationOffsetDecr []float64) *FollowCameraKeyboardMoveInput {
 	f.p.Set("keysRotationOffsetDecr", keysRotationOffsetDecr)
 	return f
 }
@@ -313,15 +333,19 @@ func (f *FollowCameraKeyboardMoveInput) SetKeysRotationOffsetDecr(keysRotationOf
 // KeysRotationOffsetIncr returns the KeysRotationOffsetIncr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysrotationoffsetincr
-func (f *FollowCameraKeyboardMoveInput) KeysRotationOffsetIncr() float64 {
+func (f *FollowCameraKeyboardMoveInput) KeysRotationOffsetIncr() []float64 {
 	retVal := f.p.Get("keysRotationOffsetIncr")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysRotationOffsetIncr sets the KeysRotationOffsetIncr property of class FollowCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput#keysrotationoffsetincr
-func (f *FollowCameraKeyboardMoveInput) SetKeysRotationOffsetIncr(keysRotationOffsetIncr float64) *FollowCameraKeyboardMoveInput {
+func (f *FollowCameraKeyboardMoveInput) SetKeysRotationOffsetIncr(keysRotationOffsetIncr []float64) *FollowCameraKeyboardMoveInput {
 	f.p.Set("keysRotationOffsetIncr", keysRotationOffsetIncr)
 	return f
 }

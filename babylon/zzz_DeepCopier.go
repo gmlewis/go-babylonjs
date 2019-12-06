@@ -38,8 +38,8 @@ func DeepCopierArrayToJSArray(array []*DeepCopier) []interface{} {
 
 // DeepCopierDeepCopyOpts contains optional parameters for DeepCopier.DeepCopy.
 type DeepCopierDeepCopyOpts struct {
-	DoNotCopyList *string
-	MustCopyList  *string
+	DoNotCopyList []string
+	MustCopyList  []string
 }
 
 // DeepCopy calls the DeepCopy method on the DeepCopier object.
@@ -58,12 +58,12 @@ func (d *DeepCopier) DeepCopy(source interface{}, destination interface{}, opts 
 	if opts.DoNotCopyList == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.DoNotCopyList)
+		args = append(args, opts.DoNotCopyList)
 	}
 	if opts.MustCopyList == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.MustCopyList)
+		args = append(args, opts.MustCopyList)
 	}
 
 	d.p.Call("DeepCopy", args...)

@@ -39,15 +39,19 @@ func ICustomShaderOptionsArrayToJSArray(array []*ICustomShaderOptions) []interfa
 // Attributes returns the Attributes property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#attributes
-func (i *ICustomShaderOptions) Attributes() string {
+func (i *ICustomShaderOptions) Attributes() []string {
 	retVal := i.p.Get("attributes")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetAttributes sets the Attributes property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#attributes
-func (i *ICustomShaderOptions) SetAttributes(attributes string) *ICustomShaderOptions {
+func (i *ICustomShaderOptions) SetAttributes(attributes []string) *ICustomShaderOptions {
 	i.p.Set("attributes", attributes)
 	return i
 }
@@ -55,15 +59,19 @@ func (i *ICustomShaderOptions) SetAttributes(attributes string) *ICustomShaderOp
 // Defines returns the Defines property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#defines
-func (i *ICustomShaderOptions) Defines() string {
+func (i *ICustomShaderOptions) Defines() []string {
 	retVal := i.p.Get("defines")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetDefines sets the Defines property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#defines
-func (i *ICustomShaderOptions) SetDefines(defines string) *ICustomShaderOptions {
+func (i *ICustomShaderOptions) SetDefines(defines []string) *ICustomShaderOptions {
 	i.p.Set("defines", defines)
 	return i
 }
@@ -71,15 +79,19 @@ func (i *ICustomShaderOptions) SetDefines(defines string) *ICustomShaderOptions 
 // Samplers returns the Samplers property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#samplers
-func (i *ICustomShaderOptions) Samplers() string {
+func (i *ICustomShaderOptions) Samplers() []string {
 	retVal := i.p.Get("samplers")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetSamplers sets the Samplers property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#samplers
-func (i *ICustomShaderOptions) SetSamplers(samplers string) *ICustomShaderOptions {
+func (i *ICustomShaderOptions) SetSamplers(samplers []string) *ICustomShaderOptions {
 	i.p.Set("samplers", samplers)
 	return i
 }
@@ -103,15 +115,19 @@ func (i *ICustomShaderOptions) SetShaderName(shaderName string) *ICustomShaderOp
 // Uniforms returns the Uniforms property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#uniforms
-func (i *ICustomShaderOptions) Uniforms() string {
+func (i *ICustomShaderOptions) Uniforms() []string {
 	retVal := i.p.Get("uniforms")
-	return retVal.String()
+	result := []string{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).String())
+	}
+	return result
 }
 
 // SetUniforms sets the Uniforms property of class ICustomShaderOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomshaderoptions#uniforms
-func (i *ICustomShaderOptions) SetUniforms(uniforms string) *ICustomShaderOptions {
+func (i *ICustomShaderOptions) SetUniforms(uniforms []string) *ICustomShaderOptions {
 	i.p.Set("uniforms", uniforms)
 	return i
 }

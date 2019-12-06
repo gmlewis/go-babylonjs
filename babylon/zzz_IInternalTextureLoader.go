@@ -70,7 +70,7 @@ func (i *IInternalTextureLoader) GetFallbackTextureUrl(rootUrl string, textureFo
 // LoadCubeData calls the LoadCubeData method on the IInternalTextureLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinternaltextureloader#loadcubedata
-func (i *IInternalTextureLoader) LoadCubeData(data string, texture *InternalTexture, createPolynomials bool, onLoad func(), onError func()) {
+func (i *IInternalTextureLoader) LoadCubeData(data []string, texture *InternalTexture, createPolynomials bool, onLoad func(), onError func()) {
 
 	args := make([]interface{}, 0, 5+0)
 

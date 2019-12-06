@@ -19,9 +19,9 @@ type SelectionPanel struct {
 func (s *SelectionPanel) JSObject() js.Value { return s.p }
 
 // SelectionPanel returns a SelectionPanel JavaScript class.
-func (ba *Babylon) SelectionPanel() *SelectionPanel {
-	p := ba.ctx.Get("SelectionPanel")
-	return SelectionPanelFromJSObject(p, ba.ctx)
+func (gui *GUI) SelectionPanel() *SelectionPanel {
+	p := gui.ctx.Get("SelectionPanel")
+	return SelectionPanelFromJSObject(p, gui.ctx)
 }
 
 // SelectionPanelFromJSObject returns a wrapped SelectionPanel JavaScript class.
@@ -40,7 +40,7 @@ func SelectionPanelArrayToJSArray(array []*SelectionPanel) []interface{} {
 
 // NewSelectionPanelOpts contains optional parameters for NewSelectionPanel.
 type NewSelectionPanelOpts struct {
-	Groups *SelectorGroup
+	Groups []*SelectorGroup
 }
 
 // NewSelectionPanel returns a new SelectionPanel object.
@@ -58,7 +58,7 @@ func (gui *GUI) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *Sel
 	if opts.Groups == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.Groups.JSObject())
+		args = append(args, SelectorGroupArrayToJSArray(opts.Groups))
 	}
 
 	p := gui.ctx.Get("SelectionPanel").New(args...)
@@ -319,16 +319,20 @@ func (s *SelectionPanel) SetButtonColor(buttonColor string) *SelectionPanel {
 // Groups returns the Groups property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#groups
-func (s *SelectionPanel) Groups() *SelectorGroup {
+func (s *SelectionPanel) Groups() []*SelectorGroup {
 	retVal := s.p.Get("groups")
-	return SelectorGroupFromJSObject(retVal, s.ctx)
+	result := []*SelectorGroup{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SelectorGroupFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetGroups sets the Groups property of class SelectionPanel.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel#groups
-func (s *SelectionPanel) SetGroups(groups *SelectorGroup) *SelectionPanel {
-	s.p.Set("groups", groups.JSObject())
+func (s *SelectionPanel) SetGroups(groups []*SelectorGroup) *SelectionPanel {
+	s.p.Set("groups", groups)
 	return s
 }
 

@@ -39,12 +39,12 @@ func WeightedSoundArrayToJSArray(array []*WeightedSound) []interface{} {
 // NewWeightedSound returns a new WeightedSound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound
-func (ba *Babylon) NewWeightedSound(loop bool, sounds *Sound, weights float64) *WeightedSound {
+func (ba *Babylon) NewWeightedSound(loop bool, sounds []*Sound, weights []float64) *WeightedSound {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, loop)
-	args = append(args, sounds.JSObject())
+	args = append(args, sounds)
 	args = append(args, weights)
 
 	p := ba.ctx.Get("WeightedSound").New(args...)

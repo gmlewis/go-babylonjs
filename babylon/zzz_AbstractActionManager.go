@@ -63,7 +63,7 @@ func (a *AbstractActionManager) HasSpecificTrigger(trigger float64) bool {
 // HasSpecificTriggers calls the HasSpecificTriggers method on the AbstractActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#hasspecifictriggers
-func (a *AbstractActionManager) HasSpecificTriggers(triggers float64) bool {
+func (a *AbstractActionManager) HasSpecificTriggers(triggers []float64) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
@@ -155,16 +155,20 @@ func (a *AbstractActionManager) UnregisterAction(action *IAction) bool {
 // Actions returns the Actions property of class AbstractActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#actions
-func (a *AbstractActionManager) Actions() *IAction {
+func (a *AbstractActionManager) Actions() []*IAction {
 	retVal := a.p.Get("actions")
-	return IActionFromJSObject(retVal, a.ctx)
+	result := []*IAction{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IActionFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // SetActions sets the Actions property of class AbstractActionManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#actions
-func (a *AbstractActionManager) SetActions(actions *IAction) *AbstractActionManager {
-	a.p.Set("actions", actions.JSObject())
+func (a *AbstractActionManager) SetActions(actions []*IAction) *AbstractActionManager {
+	a.p.Set("actions", actions)
 	return a
 }
 

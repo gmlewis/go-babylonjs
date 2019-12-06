@@ -137,15 +137,19 @@ func (a *ArcRotateCameraKeyboardMoveInput) SetCamera(camera *ArcRotateCamera) *A
 // KeysDown returns the KeysDown property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysdown
-func (a *ArcRotateCameraKeyboardMoveInput) KeysDown() float64 {
+func (a *ArcRotateCameraKeyboardMoveInput) KeysDown() []float64 {
 	retVal := a.p.Get("keysDown")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysDown sets the KeysDown property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysdown
-func (a *ArcRotateCameraKeyboardMoveInput) SetKeysDown(keysDown float64) *ArcRotateCameraKeyboardMoveInput {
+func (a *ArcRotateCameraKeyboardMoveInput) SetKeysDown(keysDown []float64) *ArcRotateCameraKeyboardMoveInput {
 	a.p.Set("keysDown", keysDown)
 	return a
 }
@@ -153,15 +157,19 @@ func (a *ArcRotateCameraKeyboardMoveInput) SetKeysDown(keysDown float64) *ArcRot
 // KeysLeft returns the KeysLeft property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysleft
-func (a *ArcRotateCameraKeyboardMoveInput) KeysLeft() float64 {
+func (a *ArcRotateCameraKeyboardMoveInput) KeysLeft() []float64 {
 	retVal := a.p.Get("keysLeft")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysLeft sets the KeysLeft property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysleft
-func (a *ArcRotateCameraKeyboardMoveInput) SetKeysLeft(keysLeft float64) *ArcRotateCameraKeyboardMoveInput {
+func (a *ArcRotateCameraKeyboardMoveInput) SetKeysLeft(keysLeft []float64) *ArcRotateCameraKeyboardMoveInput {
 	a.p.Set("keysLeft", keysLeft)
 	return a
 }
@@ -169,15 +177,19 @@ func (a *ArcRotateCameraKeyboardMoveInput) SetKeysLeft(keysLeft float64) *ArcRot
 // KeysReset returns the KeysReset property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysreset
-func (a *ArcRotateCameraKeyboardMoveInput) KeysReset() float64 {
+func (a *ArcRotateCameraKeyboardMoveInput) KeysReset() []float64 {
 	retVal := a.p.Get("keysReset")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysReset sets the KeysReset property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysreset
-func (a *ArcRotateCameraKeyboardMoveInput) SetKeysReset(keysReset float64) *ArcRotateCameraKeyboardMoveInput {
+func (a *ArcRotateCameraKeyboardMoveInput) SetKeysReset(keysReset []float64) *ArcRotateCameraKeyboardMoveInput {
 	a.p.Set("keysReset", keysReset)
 	return a
 }
@@ -185,15 +197,19 @@ func (a *ArcRotateCameraKeyboardMoveInput) SetKeysReset(keysReset float64) *ArcR
 // KeysRight returns the KeysRight property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysright
-func (a *ArcRotateCameraKeyboardMoveInput) KeysRight() float64 {
+func (a *ArcRotateCameraKeyboardMoveInput) KeysRight() []float64 {
 	retVal := a.p.Get("keysRight")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysRight sets the KeysRight property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysright
-func (a *ArcRotateCameraKeyboardMoveInput) SetKeysRight(keysRight float64) *ArcRotateCameraKeyboardMoveInput {
+func (a *ArcRotateCameraKeyboardMoveInput) SetKeysRight(keysRight []float64) *ArcRotateCameraKeyboardMoveInput {
 	a.p.Set("keysRight", keysRight)
 	return a
 }
@@ -201,15 +217,19 @@ func (a *ArcRotateCameraKeyboardMoveInput) SetKeysRight(keysRight float64) *ArcR
 // KeysUp returns the KeysUp property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysup
-func (a *ArcRotateCameraKeyboardMoveInput) KeysUp() float64 {
+func (a *ArcRotateCameraKeyboardMoveInput) KeysUp() []float64 {
 	retVal := a.p.Get("keysUp")
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // SetKeysUp sets the KeysUp property of class ArcRotateCameraKeyboardMoveInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerakeyboardmoveinput#keysup
-func (a *ArcRotateCameraKeyboardMoveInput) SetKeysUp(keysUp float64) *ArcRotateCameraKeyboardMoveInput {
+func (a *ArcRotateCameraKeyboardMoveInput) SetKeysUp(keysUp []float64) *ArcRotateCameraKeyboardMoveInput {
 	a.p.Set("keysUp", keysUp)
 	return a
 }

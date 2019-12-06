@@ -39,207 +39,259 @@ func IGLTFArrayToJSArray(array []*IGLTF) []interface{} {
 // Accessors returns the Accessors property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#accessors
-func (i *IGLTF) Accessors() *IAccessor {
+func (i *IGLTF) Accessors() []*IAccessor {
 	retVal := i.p.Get("accessors")
-	return IAccessorFromJSObject(retVal, i.ctx)
+	result := []*IAccessor{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAccessorFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetAccessors sets the Accessors property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#accessors
-func (i *IGLTF) SetAccessors(accessors *IAccessor) *IGLTF {
-	i.p.Set("accessors", accessors.JSObject())
+func (i *IGLTF) SetAccessors(accessors []*IAccessor) *IGLTF {
+	i.p.Set("accessors", accessors)
 	return i
 }
 
 // Animations returns the Animations property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#animations
-func (i *IGLTF) Animations() *IAnimation {
+func (i *IGLTF) Animations() []*IAnimation {
 	retVal := i.p.Get("animations")
-	return IAnimationFromJSObject(retVal, i.ctx)
+	result := []*IAnimation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimationFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#animations
-func (i *IGLTF) SetAnimations(animations *IAnimation) *IGLTF {
-	i.p.Set("animations", animations.JSObject())
+func (i *IGLTF) SetAnimations(animations []*IAnimation) *IGLTF {
+	i.p.Set("animations", animations)
 	return i
 }
 
 // BufferViews returns the BufferViews property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#bufferviews
-func (i *IGLTF) BufferViews() *IBufferView {
+func (i *IGLTF) BufferViews() []*IBufferView {
 	retVal := i.p.Get("bufferViews")
-	return IBufferViewFromJSObject(retVal, i.ctx)
+	result := []*IBufferView{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IBufferViewFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetBufferViews sets the BufferViews property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#bufferviews
-func (i *IGLTF) SetBufferViews(bufferViews *IBufferView) *IGLTF {
-	i.p.Set("bufferViews", bufferViews.JSObject())
+func (i *IGLTF) SetBufferViews(bufferViews []*IBufferView) *IGLTF {
+	i.p.Set("bufferViews", bufferViews)
 	return i
 }
 
 // Buffers returns the Buffers property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#buffers
-func (i *IGLTF) Buffers() *IBuffer {
+func (i *IGLTF) Buffers() []*IBuffer {
 	retVal := i.p.Get("buffers")
-	return IBufferFromJSObject(retVal, i.ctx)
+	result := []*IBuffer{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IBufferFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetBuffers sets the Buffers property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#buffers
-func (i *IGLTF) SetBuffers(buffers *IBuffer) *IGLTF {
-	i.p.Set("buffers", buffers.JSObject())
+func (i *IGLTF) SetBuffers(buffers []*IBuffer) *IGLTF {
+	i.p.Set("buffers", buffers)
 	return i
 }
 
 // Cameras returns the Cameras property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#cameras
-func (i *IGLTF) Cameras() *ICamera {
+func (i *IGLTF) Cameras() []*ICamera {
 	retVal := i.p.Get("cameras")
-	return ICameraFromJSObject(retVal, i.ctx)
+	result := []*ICamera{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ICameraFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetCameras sets the Cameras property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#cameras
-func (i *IGLTF) SetCameras(cameras *ICamera) *IGLTF {
-	i.p.Set("cameras", cameras.JSObject())
+func (i *IGLTF) SetCameras(cameras []*ICamera) *IGLTF {
+	i.p.Set("cameras", cameras)
 	return i
 }
 
 // Images returns the Images property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#images
-func (i *IGLTF) Images() *IImage {
+func (i *IGLTF) Images() []*IImage {
 	retVal := i.p.Get("images")
-	return IImageFromJSObject(retVal, i.ctx)
+	result := []*IImage{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IImageFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetImages sets the Images property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#images
-func (i *IGLTF) SetImages(images *IImage) *IGLTF {
-	i.p.Set("images", images.JSObject())
+func (i *IGLTF) SetImages(images []*IImage) *IGLTF {
+	i.p.Set("images", images)
 	return i
 }
 
 // Materials returns the Materials property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#materials
-func (i *IGLTF) Materials() *IMaterial {
+func (i *IGLTF) Materials() []*IMaterial {
 	retVal := i.p.Get("materials")
-	return IMaterialFromJSObject(retVal, i.ctx)
+	result := []*IMaterial{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IMaterialFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetMaterials sets the Materials property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#materials
-func (i *IGLTF) SetMaterials(materials *IMaterial) *IGLTF {
-	i.p.Set("materials", materials.JSObject())
+func (i *IGLTF) SetMaterials(materials []*IMaterial) *IGLTF {
+	i.p.Set("materials", materials)
 	return i
 }
 
 // Meshes returns the Meshes property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#meshes
-func (i *IGLTF) Meshes() *IMesh {
+func (i *IGLTF) Meshes() []*IMesh {
 	retVal := i.p.Get("meshes")
-	return IMeshFromJSObject(retVal, i.ctx)
+	result := []*IMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IMeshFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetMeshes sets the Meshes property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#meshes
-func (i *IGLTF) SetMeshes(meshes *IMesh) *IGLTF {
-	i.p.Set("meshes", meshes.JSObject())
+func (i *IGLTF) SetMeshes(meshes []*IMesh) *IGLTF {
+	i.p.Set("meshes", meshes)
 	return i
 }
 
 // Nodes returns the Nodes property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#nodes
-func (i *IGLTF) Nodes() *INode {
+func (i *IGLTF) Nodes() []*INode {
 	retVal := i.p.Get("nodes")
-	return INodeFromJSObject(retVal, i.ctx)
+	result := []*INode{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, INodeFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetNodes sets the Nodes property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#nodes
-func (i *IGLTF) SetNodes(nodes *INode) *IGLTF {
-	i.p.Set("nodes", nodes.JSObject())
+func (i *IGLTF) SetNodes(nodes []*INode) *IGLTF {
+	i.p.Set("nodes", nodes)
 	return i
 }
 
 // Samplers returns the Samplers property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#samplers
-func (i *IGLTF) Samplers() *ISampler {
+func (i *IGLTF) Samplers() []*ISampler {
 	retVal := i.p.Get("samplers")
-	return ISamplerFromJSObject(retVal, i.ctx)
+	result := []*ISampler{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ISamplerFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetSamplers sets the Samplers property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#samplers
-func (i *IGLTF) SetSamplers(samplers *ISampler) *IGLTF {
-	i.p.Set("samplers", samplers.JSObject())
+func (i *IGLTF) SetSamplers(samplers []*ISampler) *IGLTF {
+	i.p.Set("samplers", samplers)
 	return i
 }
 
 // Scenes returns the Scenes property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#scenes
-func (i *IGLTF) Scenes() *IScene {
+func (i *IGLTF) Scenes() []*IScene {
 	retVal := i.p.Get("scenes")
-	return ISceneFromJSObject(retVal, i.ctx)
+	result := []*IScene{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ISceneFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetScenes sets the Scenes property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#scenes
-func (i *IGLTF) SetScenes(scenes *IScene) *IGLTF {
-	i.p.Set("scenes", scenes.JSObject())
+func (i *IGLTF) SetScenes(scenes []*IScene) *IGLTF {
+	i.p.Set("scenes", scenes)
 	return i
 }
 
 // Skins returns the Skins property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#skins
-func (i *IGLTF) Skins() *ISkin {
+func (i *IGLTF) Skins() []*ISkin {
 	retVal := i.p.Get("skins")
-	return ISkinFromJSObject(retVal, i.ctx)
+	result := []*ISkin{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ISkinFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetSkins sets the Skins property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#skins
-func (i *IGLTF) SetSkins(skins *ISkin) *IGLTF {
-	i.p.Set("skins", skins.JSObject())
+func (i *IGLTF) SetSkins(skins []*ISkin) *IGLTF {
+	i.p.Set("skins", skins)
 	return i
 }
 
 // Textures returns the Textures property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#textures
-func (i *IGLTF) Textures() *ITexture {
+func (i *IGLTF) Textures() []*ITexture {
 	retVal := i.p.Get("textures")
-	return ITextureFromJSObject(retVal, i.ctx)
+	result := []*ITexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ITextureFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // SetTextures sets the Textures property of class IGLTF.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltf#textures
-func (i *IGLTF) SetTextures(textures *ITexture) *IGLTF {
-	i.p.Set("textures", textures.JSObject())
+func (i *IGLTF) SetTextures(textures []*ITexture) *IGLTF {
+	i.p.Set("textures", textures)
 	return i
 }

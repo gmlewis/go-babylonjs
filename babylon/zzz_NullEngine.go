@@ -411,7 +411,7 @@ func (n *NullEngine) EnableEffect(effect *Effect) {
 // GetAttributes calls the GetAttributes method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getattributes
-func (n *NullEngine) GetAttributes(pipelineContext *IPipelineContext, attributesNames string) float64 {
+func (n *NullEngine) GetAttributes(pipelineContext *IPipelineContext, attributesNames []string) []float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -419,7 +419,11 @@ func (n *NullEngine) GetAttributes(pipelineContext *IPipelineContext, attributes
 	args = append(args, attributesNames)
 
 	retVal := n.p.Call("getAttributes", args...)
-	return retVal.Float()
+	result := []float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, retVal.Index(ri).Float())
+	}
+	return result
 }
 
 // GetHardwareScalingLevel calls the GetHardwareScalingLevel method on the NullEngine object.
@@ -493,7 +497,7 @@ func (n *NullEngine) GetRenderWidth(opts *NullEngineGetRenderWidthOpts) float64 
 // GetUniforms calls the GetUniforms method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#getuniforms
-func (n *NullEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames string) js.Value {
+func (n *NullEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames []string) js.Value {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -558,7 +562,7 @@ func (n *NullEngine) SetAlphaMode(mode float64, opts *NullEngineSetAlphaModeOpts
 // SetArray calls the SetArray method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray
-func (n *NullEngine) SetArray(uniform js.Value, array float64) {
+func (n *NullEngine) SetArray(uniform js.Value, array []float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -571,7 +575,7 @@ func (n *NullEngine) SetArray(uniform js.Value, array float64) {
 // SetArray2 calls the SetArray2 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray2
-func (n *NullEngine) SetArray2(uniform js.Value, array float64) {
+func (n *NullEngine) SetArray2(uniform js.Value, array []float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -584,7 +588,7 @@ func (n *NullEngine) SetArray2(uniform js.Value, array float64) {
 // SetArray3 calls the SetArray3 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray3
-func (n *NullEngine) SetArray3(uniform js.Value, array float64) {
+func (n *NullEngine) SetArray3(uniform js.Value, array []float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
@@ -597,7 +601,7 @@ func (n *NullEngine) SetArray3(uniform js.Value, array float64) {
 // SetArray4 calls the SetArray4 method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray4
-func (n *NullEngine) SetArray4(uniform js.Value, array float64) {
+func (n *NullEngine) SetArray4(uniform js.Value, array []float64) {
 
 	args := make([]interface{}, 0, 2+0)
 

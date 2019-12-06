@@ -101,8 +101,8 @@ func (ba *Babylon) NewBlurPostProcess(name string, direction *Vector2, kernel fl
 // BlurPostProcessUpdateEffectOpts contains optional parameters for BlurPostProcess.UpdateEffect.
 type BlurPostProcessUpdateEffectOpts struct {
 	Defines         *string
-	Uniforms        *string
-	Samplers        *string
+	Uniforms        []string
+	Samplers        []string
 	IndexParameters *interface{}
 	OnCompiled      func()
 	OnError         func()
@@ -126,12 +126,12 @@ func (b *BlurPostProcess) UpdateEffect(opts *BlurPostProcessUpdateEffectOpts) {
 	if opts.Uniforms == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Uniforms)
+		args = append(args, opts.Uniforms)
 	}
 	if opts.Samplers == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Samplers)
+		args = append(args, opts.Samplers)
 	}
 	if opts.IndexParameters == nil {
 		args = append(args, js.Undefined())

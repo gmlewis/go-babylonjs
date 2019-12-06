@@ -67,7 +67,7 @@ func (p *PBRSheenConfiguration) AddFallbacks(defines js.Value, fallbacks *Effect
 // AddSamplers calls the AddSamplers method on the PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#addsamplers
-func (p *PBRSheenConfiguration) AddSamplers(samplers string) {
+func (p *PBRSheenConfiguration) AddSamplers(samplers []string) {
 
 	args := make([]interface{}, 0, 1+0)
 
@@ -79,7 +79,7 @@ func (p *PBRSheenConfiguration) AddSamplers(samplers string) {
 // AddUniforms calls the AddUniforms method on the PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#adduniforms
-func (p *PBRSheenConfiguration) AddUniforms(uniforms string) {
+func (p *PBRSheenConfiguration) AddUniforms(uniforms []string) {
 
 	args := make([]interface{}, 0, 1+0)
 
@@ -141,11 +141,11 @@ func (p *PBRSheenConfiguration) Dispose(opts *PBRSheenConfigurationDisposeOpts) 
 // GetActiveTextures calls the GetActiveTextures method on the PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#getactivetextures
-func (p *PBRSheenConfiguration) GetActiveTextures(activeTextures *BaseTexture) {
+func (p *PBRSheenConfiguration) GetActiveTextures(activeTextures []*BaseTexture) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, activeTextures.JSObject())
+	args = append(args, BaseTextureArrayToJSArray(activeTextures))
 
 	p.p.Call("getActiveTextures", args...)
 }
@@ -153,11 +153,11 @@ func (p *PBRSheenConfiguration) GetActiveTextures(activeTextures *BaseTexture) {
 // GetAnimatables calls the GetAnimatables method on the PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#getanimatables
-func (p *PBRSheenConfiguration) GetAnimatables(animatables *IAnimatable) {
+func (p *PBRSheenConfiguration) GetAnimatables(animatables []*IAnimatable) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, animatables.JSObject())
+	args = append(args, IAnimatableArrayToJSArray(animatables))
 
 	p.p.Call("getAnimatables", args...)
 }

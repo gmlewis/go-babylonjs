@@ -17,9 +17,9 @@ type ScrollBar struct {
 func (s *ScrollBar) JSObject() js.Value { return s.p }
 
 // ScrollBar returns a ScrollBar JavaScript class.
-func (ba *Babylon) ScrollBar() *ScrollBar {
-	p := ba.ctx.Get("ScrollBar")
-	return ScrollBarFromJSObject(p, ba.ctx)
+func (gui *GUI) ScrollBar() *ScrollBar {
+	p := gui.ctx.Get("ScrollBar")
+	return ScrollBarFromJSObject(p, gui.ctx)
 }
 
 // ScrollBarFromJSObject returns a wrapped ScrollBar JavaScript class.

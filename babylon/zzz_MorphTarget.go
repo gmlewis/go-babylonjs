@@ -247,16 +247,20 @@ func (m *MorphTarget) SetAnimationPropertiesOverride(animationPropertiesOverride
 // Animations returns the Animations property of class MorphTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#animations
-func (m *MorphTarget) Animations() *Animation {
+func (m *MorphTarget) Animations() []*Animation {
 	retVal := m.p.Get("animations")
-	return AnimationFromJSObject(retVal, m.ctx)
+	result := []*Animation{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimationFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 // SetAnimations sets the Animations property of class MorphTarget.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#animations
-func (m *MorphTarget) SetAnimations(animations *Animation) *MorphTarget {
-	m.p.Set("animations", animations.JSObject())
+func (m *MorphTarget) SetAnimations(animations []*Animation) *MorphTarget {
+	m.p.Set("animations", animations)
 	return m
 }
 

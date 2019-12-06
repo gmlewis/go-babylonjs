@@ -17,9 +17,9 @@ type HolographicButton struct {
 func (h *HolographicButton) JSObject() js.Value { return h.p }
 
 // HolographicButton returns a HolographicButton JavaScript class.
-func (ba *Babylon) HolographicButton() *HolographicButton {
-	p := ba.ctx.Get("HolographicButton")
-	return HolographicButtonFromJSObject(p, ba.ctx)
+func (gui *GUI) HolographicButton() *HolographicButton {
+	p := gui.ctx.Get("HolographicButton")
+	return HolographicButtonFromJSObject(p, gui.ctx)
 }
 
 // HolographicButtonFromJSObject returns a wrapped HolographicButton JavaScript class.

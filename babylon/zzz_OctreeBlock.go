@@ -59,11 +59,11 @@ func (ba *Babylon) NewOctreeBlock(minPoint *Vector3, maxPoint *Vector3, capacity
 // AddEntries calls the AddEntries method on the OctreeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#addentries
-func (o *OctreeBlock) AddEntries(entries *T) {
+func (o *OctreeBlock) AddEntries(entries []*T) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, entries.JSObject())
+	args = append(args, TArrayToJSArray(entries))
 
 	o.p.Call("addEntries", args...)
 }
@@ -149,14 +149,14 @@ type OctreeBlockSelectOpts struct {
 // Select calls the Select method on the OctreeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#select
-func (o *OctreeBlock) Select(frustumPlanes *Plane, selection *SmartArrayNoDuplicate, opts *OctreeBlockSelectOpts) {
+func (o *OctreeBlock) Select(frustumPlanes []*Plane, selection *SmartArrayNoDuplicate, opts *OctreeBlockSelectOpts) {
 	if opts == nil {
 		opts = &OctreeBlockSelectOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, frustumPlanes.JSObject())
+	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 	args = append(args, selection.JSObject())
 
 	if opts.AllowDuplicate == nil {
@@ -207,16 +207,20 @@ func (o *OctreeBlock) SetCapacity(capacity float64) *OctreeBlock {
 // Entries returns the Entries property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#entries
-func (o *OctreeBlock) Entries() *T {
+func (o *OctreeBlock) Entries() []*T {
 	retVal := o.p.Get("entries")
-	return TFromJSObject(retVal, o.ctx)
+	result := []*T{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TFromJSObject(retVal.Index(ri), o.ctx))
+	}
+	return result
 }
 
 // SetEntries sets the Entries property of class OctreeBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock#entries
-func (o *OctreeBlock) SetEntries(entries *T) *OctreeBlock {
-	o.p.Set("entries", entries.JSObject())
+func (o *OctreeBlock) SetEntries(entries []*T) *OctreeBlock {
+	o.p.Set("entries", entries)
 	return o
 }
 

@@ -18,9 +18,9 @@ type SliderGroup struct {
 func (s *SliderGroup) JSObject() js.Value { return s.p }
 
 // SliderGroup returns a SliderGroup JavaScript class.
-func (ba *Babylon) SliderGroup() *SliderGroup {
-	p := ba.ctx.Get("SliderGroup")
-	return SliderGroupFromJSObject(p, ba.ctx)
+func (gui *GUI) SliderGroup() *SliderGroup {
+	p := gui.ctx.Get("SliderGroup")
+	return SliderGroupFromJSObject(p, gui.ctx)
 }
 
 // SliderGroupFromJSObject returns a wrapped SliderGroup JavaScript class.

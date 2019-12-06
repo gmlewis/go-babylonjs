@@ -237,8 +237,8 @@ func (v *VertexData) CreatePlane(options js.Value) *VertexData {
 
 // VertexDataCreatePolygonOpts contains optional parameters for VertexData.CreatePolygon.
 type VertexDataCreatePolygonOpts struct {
-	FUV      *Vector4
-	FColors  *Color4
+	FUV      []*Vector4
+	FColors  []*Color4
 	FrontUVs *Vector4
 	BackUVs  *Vector4
 }
@@ -259,12 +259,12 @@ func (v *VertexData) CreatePolygon(polygon *Mesh, sideOrientation float64, opts 
 	if opts.FUV == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.FUV.JSObject())
+		args = append(args, Vector4ArrayToJSArray(opts.FUV))
 	}
 	if opts.FColors == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, opts.FColors.JSObject())
+		args = append(args, Color4ArrayToJSArray(opts.FColors))
 	}
 	if opts.FrontUVs == nil {
 		args = append(args, js.Undefined())

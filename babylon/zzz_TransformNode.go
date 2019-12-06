@@ -257,7 +257,7 @@ type TransformNodeGetChildTransformNodesOpts struct {
 // GetChildTransformNodes calls the GetChildTransformNodes method on the TransformNode object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#getchildtransformnodes
-func (t *TransformNode) GetChildTransformNodes(opts *TransformNodeGetChildTransformNodesOpts) *TransformNode {
+func (t *TransformNode) GetChildTransformNodes(opts *TransformNodeGetChildTransformNodesOpts) []*TransformNode {
 	if opts == nil {
 		opts = &TransformNodeGetChildTransformNodesOpts{}
 	}
@@ -276,7 +276,11 @@ func (t *TransformNode) GetChildTransformNodes(opts *TransformNodeGetChildTransf
 	}
 
 	retVal := t.p.Call("getChildTransformNodes", args...)
-	return TransformNodeFromJSObject(retVal, t.ctx)
+	result := []*TransformNode{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TransformNodeFromJSObject(retVal.Index(ri), t.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the TransformNode object.

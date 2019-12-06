@@ -47,7 +47,7 @@ type NewPolygonMeshBuilderOpts struct {
 // NewPolygonMeshBuilder returns a new PolygonMeshBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder
-func (ba *Babylon) NewPolygonMeshBuilder(name string, contours *Path2, opts *NewPolygonMeshBuilderOpts) *PolygonMeshBuilder {
+func (ba *Babylon) NewPolygonMeshBuilder(name string, contours []*Path2, opts *NewPolygonMeshBuilderOpts) *PolygonMeshBuilder {
 	if opts == nil {
 		opts = &NewPolygonMeshBuilderOpts{}
 	}
@@ -55,7 +55,7 @@ func (ba *Babylon) NewPolygonMeshBuilder(name string, contours *Path2, opts *New
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, name)
-	args = append(args, contours.JSObject())
+	args = append(args, contours)
 
 	if opts.Scene == nil {
 		args = append(args, js.Undefined())
@@ -75,11 +75,11 @@ func (ba *Babylon) NewPolygonMeshBuilder(name string, contours *Path2, opts *New
 // AddHole calls the AddHole method on the PolygonMeshBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#addhole
-func (p *PolygonMeshBuilder) AddHole(hole *Vector2) *PolygonMeshBuilder {
+func (p *PolygonMeshBuilder) AddHole(hole []*Vector2) *PolygonMeshBuilder {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, hole.JSObject())
+	args = append(args, Vector2ArrayToJSArray(hole))
 
 	retVal := p.p.Call("addHole", args...)
 	return PolygonMeshBuilderFromJSObject(retVal, p.ctx)

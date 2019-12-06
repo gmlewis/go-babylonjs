@@ -188,16 +188,20 @@ func (s *SceneOptimizerOptions) ModerateDegradationAllowed(opts *SceneOptimizerO
 // Optimizations returns the Optimizations property of class SceneOptimizerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#optimizations
-func (s *SceneOptimizerOptions) Optimizations() *SceneOptimization {
+func (s *SceneOptimizerOptions) Optimizations() []*SceneOptimization {
 	retVal := s.p.Get("optimizations")
-	return SceneOptimizationFromJSObject(retVal, s.ctx)
+	result := []*SceneOptimization{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, SceneOptimizationFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SetOptimizations sets the Optimizations property of class SceneOptimizerOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#optimizations
-func (s *SceneOptimizerOptions) SetOptimizations(optimizations *SceneOptimization) *SceneOptimizerOptions {
-	s.p.Set("optimizations", optimizations.JSObject())
+func (s *SceneOptimizerOptions) SetOptimizations(optimizations []*SceneOptimization) *SceneOptimizerOptions {
+	s.p.Set("optimizations", optimizations)
 	return s
 }
 

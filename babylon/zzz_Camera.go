@@ -626,16 +626,20 @@ func (c *Camera) SetCameraRigMode(cameraRigMode float64) *Camera {
 // CustomRenderTargets returns the CustomRenderTargets property of class Camera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#customrendertargets
-func (c *Camera) CustomRenderTargets() *RenderTargetTexture {
+func (c *Camera) CustomRenderTargets() []*RenderTargetTexture {
 	retVal := c.p.Get("customRenderTargets")
-	return RenderTargetTextureFromJSObject(retVal, c.ctx)
+	result := []*RenderTargetTexture{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, RenderTargetTextureFromJSObject(retVal.Index(ri), c.ctx))
+	}
+	return result
 }
 
 // SetCustomRenderTargets sets the CustomRenderTargets property of class Camera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#customrendertargets
-func (c *Camera) SetCustomRenderTargets(customRenderTargets *RenderTargetTexture) *Camera {
-	c.p.Set("customRenderTargets", customRenderTargets.JSObject())
+func (c *Camera) SetCustomRenderTargets(customRenderTargets []*RenderTargetTexture) *Camera {
+	c.p.Set("customRenderTargets", customRenderTargets)
 	return c
 }
 

@@ -19,9 +19,9 @@ type Container struct {
 func (c *Container) JSObject() js.Value { return c.p }
 
 // Container returns a Container JavaScript class.
-func (ba *Babylon) Container() *Container {
-	p := ba.ctx.Get("Container")
-	return ContainerFromJSObject(p, ba.ctx)
+func (gui *GUI) Container() *Container {
+	p := gui.ctx.Get("Container")
+	return ContainerFromJSObject(p, gui.ctx)
 }
 
 // ContainerFromJSObject returns a wrapped Container JavaScript class.
@@ -142,14 +142,14 @@ type ContainerGetDescendantsToRefOpts struct {
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Container object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#getdescendantstoref
-func (c *Container) GetDescendantsToRef(results *Control, opts *ContainerGetDescendantsToRefOpts) {
+func (c *Container) GetDescendantsToRef(results []*Control, opts *ContainerGetDescendantsToRefOpts) {
 	if opts == nil {
 		opts = &ContainerGetDescendantsToRefOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, results.JSObject())
+	args = append(args, ControlArrayToJSArray(results))
 
 	if opts.DirectDescendantsOnly == nil {
 		args = append(args, js.Undefined())
@@ -237,16 +237,20 @@ func (c *Container) SetBackground(background string) *Container {
 // Children returns the Children property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#children
-func (c *Container) Children() *Control {
+func (c *Container) Children() []*Control {
 	retVal := c.p.Get("children")
-	return ControlFromJSObject(retVal, c.ctx)
+	result := []*Control{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ControlFromJSObject(retVal.Index(ri), c.ctx))
+	}
+	return result
 }
 
 // SetChildren sets the Children property of class Container.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container#children
-func (c *Container) SetChildren(children *Control) *Container {
-	c.p.Set("children", children.JSObject())
+func (c *Container) SetChildren(children []*Control) *Container {
+	c.p.Set("children", children)
 	return c
 }
 

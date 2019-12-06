@@ -56,16 +56,20 @@ func (e *EngineStore) SetFallbackTexture(FallbackTexture string) *EngineStore {
 // Instances returns the Instances property of class EngineStore.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginestore#instances
-func (e *EngineStore) Instances() *Engine {
+func (e *EngineStore) Instances() []*Engine {
 	retVal := e.p.Get("Instances")
-	return EngineFromJSObject(retVal, e.ctx)
+	result := []*Engine{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, EngineFromJSObject(retVal.Index(ri), e.ctx))
+	}
+	return result
 }
 
 // SetInstances sets the Instances property of class EngineStore.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginestore#instances
-func (e *EngineStore) SetInstances(Instances *Engine) *EngineStore {
-	e.p.Set("Instances", Instances.JSObject())
+func (e *EngineStore) SetInstances(Instances []*Engine) *EngineStore {
+	e.p.Set("Instances", Instances)
 	return e
 }
 

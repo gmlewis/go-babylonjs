@@ -17,9 +17,9 @@ type CylinderPanel struct {
 func (c *CylinderPanel) JSObject() js.Value { return c.p }
 
 // CylinderPanel returns a CylinderPanel JavaScript class.
-func (ba *Babylon) CylinderPanel() *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel")
-	return CylinderPanelFromJSObject(p, ba.ctx)
+func (gui *GUI) CylinderPanel() *CylinderPanel {
+	p := gui.ctx.Get("CylinderPanel")
+	return CylinderPanelFromJSObject(p, gui.ctx)
 }
 
 // CylinderPanelFromJSObject returns a wrapped CylinderPanel JavaScript class.

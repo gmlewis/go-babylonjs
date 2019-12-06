@@ -17,9 +17,9 @@ type TextBlock struct {
 func (t *TextBlock) JSObject() js.Value { return t.p }
 
 // TextBlock returns a TextBlock JavaScript class.
-func (ba *Babylon) TextBlock() *TextBlock {
-	p := ba.ctx.Get("TextBlock")
-	return TextBlockFromJSObject(p, ba.ctx)
+func (gui *GUI) TextBlock() *TextBlock {
+	p := gui.ctx.Get("TextBlock")
+	return TextBlockFromJSObject(p, gui.ctx)
 }
 
 // TextBlockFromJSObject returns a wrapped TextBlock JavaScript class.

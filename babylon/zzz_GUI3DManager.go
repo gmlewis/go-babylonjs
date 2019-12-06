@@ -19,9 +19,9 @@ type GUI3DManager struct {
 func (g *GUI3DManager) JSObject() js.Value { return g.p }
 
 // GUI3DManager returns a GUI3DManager JavaScript class.
-func (ba *Babylon) GUI3DManager() *GUI3DManager {
-	p := ba.ctx.Get("GUI3DManager")
-	return GUI3DManagerFromJSObject(p, ba.ctx)
+func (gui *GUI) GUI3DManager() *GUI3DManager {
+	p := gui.ctx.Get("GUI3DManager")
+	return GUI3DManagerFromJSObject(p, gui.ctx)
 }
 
 // GUI3DManagerFromJSObject returns a wrapped GUI3DManager JavaScript class.

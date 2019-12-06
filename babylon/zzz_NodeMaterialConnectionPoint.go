@@ -262,16 +262,20 @@ func (n *NodeMaterialConnectionPoint) SetDirection(direction js.Value) *NodeMate
 // Endpoints returns the Endpoints property of class NodeMaterialConnectionPoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#endpoints
-func (n *NodeMaterialConnectionPoint) Endpoints() *NodeMaterialConnectionPoint {
+func (n *NodeMaterialConnectionPoint) Endpoints() []*NodeMaterialConnectionPoint {
 	retVal := n.p.Get("endpoints")
-	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+	result := []*NodeMaterialConnectionPoint{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, NodeMaterialConnectionPointFromJSObject(retVal.Index(ri), n.ctx))
+	}
+	return result
 }
 
 // SetEndpoints sets the Endpoints property of class NodeMaterialConnectionPoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#endpoints
-func (n *NodeMaterialConnectionPoint) SetEndpoints(endpoints *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
-	n.p.Set("endpoints", endpoints.JSObject())
+func (n *NodeMaterialConnectionPoint) SetEndpoints(endpoints []*NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+	n.p.Set("endpoints", endpoints)
 	return n
 }
 

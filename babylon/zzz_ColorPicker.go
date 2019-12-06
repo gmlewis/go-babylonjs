@@ -17,9 +17,9 @@ type ColorPicker struct {
 func (c *ColorPicker) JSObject() js.Value { return c.p }
 
 // ColorPicker returns a ColorPicker JavaScript class.
-func (ba *Babylon) ColorPicker() *ColorPicker {
-	p := ba.ctx.Get("ColorPicker")
-	return ColorPickerFromJSObject(p, ba.ctx)
+func (gui *GUI) ColorPicker() *ColorPicker {
+	p := gui.ctx.Get("ColorPicker")
+	return ColorPickerFromJSObject(p, gui.ctx)
 }
 
 // ColorPickerFromJSObject returns a wrapped ColorPicker JavaScript class.
