@@ -364,26 +364,6 @@ func (l *Light) SetExcludeWithLayerMask(excludeWithLayerMask float64) *Light {
 	return l
 }
 
-// ExcludedMeshes returns the ExcludedMeshes property of class Light.
-//
-// https://doc.babylonjs.com/api/classes/babylon.light#excludedmeshes
-func (l *Light) ExcludedMeshes() []*AbstractMesh {
-	retVal := l.p.Get("excludedMeshes")
-	result := []*AbstractMesh{}
-	for ri := 0; ri < retVal.Length(); ri++ {
-		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), l.ctx))
-	}
-	return result
-}
-
-// SetExcludedMeshes sets the ExcludedMeshes property of class Light.
-//
-// https://doc.babylonjs.com/api/classes/babylon.light#excludedmeshes
-func (l *Light) SetExcludedMeshes(excludedMeshes []*AbstractMesh) *Light {
-	l.p.Set("excludedMeshes", excludedMeshes)
-	return l
-}
-
 // FALLOFF_DEFAULT returns the FALLOFF_DEFAULT property of class Light.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#falloff_default
@@ -557,26 +537,6 @@ func (l *Light) IncludeOnlyWithLayerMask() float64 {
 // https://doc.babylonjs.com/api/classes/babylon.light#includeonlywithlayermask
 func (l *Light) SetIncludeOnlyWithLayerMask(includeOnlyWithLayerMask float64) *Light {
 	l.p.Set("includeOnlyWithLayerMask", includeOnlyWithLayerMask)
-	return l
-}
-
-// IncludedOnlyMeshes returns the IncludedOnlyMeshes property of class Light.
-//
-// https://doc.babylonjs.com/api/classes/babylon.light#includedonlymeshes
-func (l *Light) IncludedOnlyMeshes() []*AbstractMesh {
-	retVal := l.p.Get("includedOnlyMeshes")
-	result := []*AbstractMesh{}
-	for ri := 0; ri < retVal.Length(); ri++ {
-		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), l.ctx))
-	}
-	return result
-}
-
-// SetIncludedOnlyMeshes sets the IncludedOnlyMeshes property of class Light.
-//
-// https://doc.babylonjs.com/api/classes/babylon.light#includedonlymeshes
-func (l *Light) SetIncludedOnlyMeshes(includedOnlyMeshes []*AbstractMesh) *Light {
-	l.p.Set("includedOnlyMeshes", includedOnlyMeshes)
 	return l
 }
 

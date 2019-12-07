@@ -1,10 +1,11 @@
-// 31-intersecting-spot-lights is a port to Go of the Babylon example located here:
-// https://www.babylonjs-playground.com/#20OAV9#9
+// 33-excluding-lights is a port to Go of the Babylon example located here:
+// https://www.babylonjs-playground.com/#20OAV9#8
 // and linked from here:
 // https://doc.babylonjs.com/babylon101/lights
 package main
 
 import (
+	"fmt"
 	"math"
 	"syscall/js"
 
@@ -23,22 +24,35 @@ func main() {
 	createScene := func() *babylon.Scene {
 		scene := b.NewScene(engine, nil)
 
-		camera := b.NewArcRotateCamera("Camera", -math.Pi/2, math.Pi/4, 5, b.Vector3().Zero(), scene, nil)
+		// Set up camera
+		camera := b.NewArcRotateCamera("Camera", -math.Pi/2, math.Pi/4, 8, b.Vector3().Zero(), scene, nil)
 		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: Bool(true)})
 
-		//red light
-		light := b.NewSpotLight("spotLight", b.NewVector3(-math.Cos(math.Pi/6), 1, -math.Sin(math.Pi/6)), b.NewVector3(0, -1, 0), math.Pi/2, 1.5, scene)
-		light.SetDiffuse(b.NewColor3(1, 0, 0))
+		//Light direction is up and left
+		light0 := b.NewHemisphericLight("hemiLight", b.NewVector3(-1, 1, 0), scene)
+		light0.SetDiffuse(b.NewColor3(1, 0, 0))
+		light0.SetSpecular(b.NewColor3(0, 1, 0))
+		light0.SetGroundColor(b.NewColor3(0, 1, 0))
 
-		//green light
-		light1 := b.NewSpotLight("spotLight1", b.NewVector3(0, 1, 1-math.Sin(math.Pi/6)), b.NewVector3(0, -1, 0), math.Pi/2, 1.5, scene)
-		light1.SetDiffuse(b.NewColor3(0, 1, 0))
+		light1 := b.NewHemisphericLight("hemiLight", b.NewVector3(-1, 1, 0), scene)
+		light1.SetDiffuse(b.NewColor3(1, 1, 1))
+		light1.SetSpecular(b.NewColor3(1, 1, 1))
+		light1.SetGroundColor(b.NewColor3(0, 0, 0))
 
-		//blue light
-		light2 := b.NewSpotLight("spotLight2", b.NewVector3(math.Cos(math.Pi/6), 1, -math.Sin(math.Pi/6)), b.NewVector3(0, -1, 0), math.Pi/2, 1.5, scene)
-		light2.SetDiffuse(b.NewColor3(0, 0, 1))
+		sphere := b.MeshBuilder().CreateSphere("sphere", &babylon.SphereOpts{Diameter: Float64(0.5)}, scene)
 
-		b.MeshBuilder().CreateGround("ground", &babylon.GroundOpts{Width: Float64(4), Height: Float64(4)}, scene)
+		spheres := []*babylon.AbstractMesh{}
+		for i := 0; i < 25; i++ {
+			name := fmt.Sprintf("sphere%v", i)
+			s := sphere.Clone(&babylon.MeshCloneOpts{Name: &name})
+			s.Position().SetX(-2.0 + float64(i%5))
+			s.Position().SetY(2.0 - math.Floor(float64(i)/5.0))
+			spheres = append(spheres, s)
+		}
+
+		// Try commenting out one or both of these lines to see the effect.
+		light0.ExcludedMeshes().Push(spheres[7], spheres[18])
+		light1.IncludedOnlyMeshes().Push(spheres[7], spheres[18])
 
 		return scene
 	}

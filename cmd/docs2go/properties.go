@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"log"
 )
 
 func (html *ClassHTML) parseProperties() error {
@@ -36,7 +37,12 @@ func (html *ClassHTML) parseProperties() error {
 			}
 			v := div.GetSignature()
 			if ok := v.parseParameters(html.Name, processPropertiesOverrides); ok {
-				html.PropertyNames[v.GoName] = v
+				propertyName := html.Name + "." + v.GoName
+				if blacklist[propertyName] {
+					log.Printf("Skipping %v", propertyName)
+				} else {
+					html.PropertyNames[v.GoName] = v
+				}
 			}
 		}
 	}

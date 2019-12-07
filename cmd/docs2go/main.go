@@ -18,6 +18,8 @@ var (
 		"Camera.AttachControl":          true,
 		"FollowCamera.AttachControl":    true,
 		"FreeCamera.AttachControl":      true,
+		"Light.ExcludedMeshes":          true,
+		"Light.IncludedOnlyMeshes":      true,
 		"MeshBuilder.CreateBox":         true,
 		"MeshBuilder.CreateCylinder":    true,
 		"MeshBuilder.CreateDashedLines": true,
