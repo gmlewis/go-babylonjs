@@ -36,7 +36,7 @@ func main() {
 
 		greenMat := b.NewStandardMaterial("greenMat", scene)
 		greenMat.SetAmbientTexture(b.NewTexture("textures/grass.png", scene, nil).BaseTexture)
-		greenMat.JSObject().Set("alpha", 0.5)
+		greenMat.SetAlpha(0.5)
 
 		mb := b.MeshBuilder()
 

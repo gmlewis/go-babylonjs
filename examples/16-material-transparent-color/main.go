@@ -36,7 +36,7 @@ func main() {
 
 		greenMat := b.NewStandardMaterial("greenMat", scene)
 		greenMat.SetDiffuseColor(b.NewColor3(0, 1, 0))
-		greenMat.JSObject().Set("alpha", 0.5)
+		greenMat.SetAlpha(0.5)
 
 		mb := b.MeshBuilder()
 

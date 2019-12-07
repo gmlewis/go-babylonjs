@@ -36,9 +36,9 @@ func main() {
 
 		// material
 		mat := b.NewStandardMaterial("mat1", scene)
-		mat.JSObject().Set("alpha", 1.0)
+		mat.SetAlpha(1.0)
 		mat.SetDiffuseColor(b.NewColor3(0.5, 0.5, 1.0))
-		mat.JSObject().Set("backFaceCulling", false)
+		mat.SetBackFaceCulling(false)
 
 		mb := b.MeshBuilder()
 
@@ -130,8 +130,8 @@ func main() {
 				plane := mb.CreatePlane("TextPlane", &babylon.PlaneOpts{Size: Float64(size)}, scene)
 				plane.SetMaterial(b.NewStandardMaterial("TextPlaneMaterial", scene).Material)
 				plane.Material().SetBackFaceCulling(false)
-				plane.Material().JSObject().Set("specularColor", b.NewColor3(0, 0, 0).JSObject())
-				plane.Material().JSObject().Set("diffuseTexture", dynamicTexture.JSObject())
+				plane.Material().SetSpecularColor(b.NewColor3(0, 0, 0))
+				plane.Material().SetDiffuseTexture(dynamicTexture.BaseTexture)
 				return plane
 			}
 
