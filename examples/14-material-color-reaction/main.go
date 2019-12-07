@@ -67,26 +67,26 @@ func main() {
 		mb := b.MeshBuilder()
 
 		redSphere := mb.CreateSphere("sphere", &babylon.SphereOpts{Diameter: Float64(0.25)}, scene)
-		redSphere.JSObject().Set("material", redMat.JSObject())
+		redSphere.SetMaterial(redMat.Material)
 		redSphere.SetPosition(lightRed.Position())
 
 		greenSphere := mb.CreateSphere("sphere", &babylon.SphereOpts{Diameter: Float64(0.25)}, scene)
-		greenSphere.JSObject().Set("material", greenMat.JSObject())
+		greenSphere.SetMaterial(greenMat.Material)
 		greenSphere.SetPosition(lightGreen.Position())
 
 		blueSphere := mb.CreateSphere("sphere", &babylon.SphereOpts{Diameter: Float64(0.25)}, scene)
-		blueSphere.JSObject().Set("material", blueMat.JSObject())
+		blueSphere.SetMaterial(blueMat.Material)
 		blueSphere.SetPosition(lightBlue.Position())
 
 		whiteSphere := mb.CreateSphere("sphere", &babylon.SphereOpts{Diameter: Float64(0.25)}, scene)
-		whiteSphere.JSObject().Set("material", whiteMat.JSObject())
+		whiteSphere.SetMaterial(whiteMat.Material)
 		whiteSphere.SetPosition(lightWhite.Position())
 
 		groundMat := b.NewStandardMaterial("groundMat", scene)
 		groundMat.SetDiffuseColor(mats[0])
 
 		ground := mb.CreateGround("ground", &babylon.GroundOpts{Width: Float64(4), Height: Float64(6)}, scene)
-		ground.JSObject().Set("material", groundMat.JSObject())
+		ground.SetMaterial(groundMat.Material)
 
 		/*******************GUI***********************/
 		makeYellow := func() {

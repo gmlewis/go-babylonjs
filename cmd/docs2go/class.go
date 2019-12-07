@@ -150,6 +150,12 @@ func (c *classes) walker() filepath.WalkFunc {
 				}
 			}
 
+			// Special cases...
+			switch html.Name {
+			case "StandardMaterial":
+				html.Parents = append(html.Parents, "Material")
+			}
+
 			implementsSection := mainDiv.FindSections(func(s *Section) bool { return s.H3.GetInnerXML() == "Implements" })
 			if len(implementsSection) > 0 { // optional
 				for _, ul := range implementsSection[0].ULs {

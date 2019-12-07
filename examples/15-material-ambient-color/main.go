@@ -47,11 +47,11 @@ func main() {
 
 		//Red Ambient
 		sphere1 := mb.CreateSphere("sphere1", nil, scene)
-		sphere1.JSObject().Set("material", redMat.JSObject())
+		sphere1.SetMaterial(redMat.Material)
 
 		//Green Ambient
 		sphere2 := mb.CreateSphere("sphere2", nil, scene)
-		sphere2.JSObject().Set("material", greenMat.JSObject())
+		sphere2.SetMaterial(greenMat.Material)
 		sphere2.Position().SetX(1.5)
 
 		return scene

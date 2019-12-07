@@ -38,7 +38,7 @@ func main() {
 		mat.DiffuseTexture().SetHasAlpha(true)
 		mat.JSObject().Set("backFaceCulling", true)
 		box := b.MeshBuilder().CreateBox("box", nil, scene)
-		box.JSObject().Set("material", mat.JSObject())
+		box.SetMaterial(mat.Material)
 
 		return scene
 	}

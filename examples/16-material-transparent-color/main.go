@@ -42,12 +42,12 @@ func main() {
 
 		//Red
 		sphere1 := mb.CreateSphere("sphere1", nil, scene)
-		sphere1.JSObject().Set("material", redMat.JSObject())
+		sphere1.SetMaterial(redMat.Material)
 		sphere1.Position().SetZ(1.5)
 
 		//Green Transparent
 		sphere2 := mb.CreateSphere("sphere2", nil, scene)
-		sphere2.JSObject().Set("material", greenMat.JSObject())
+		sphere2.SetMaterial(greenMat.Material)
 
 		return scene
 	}

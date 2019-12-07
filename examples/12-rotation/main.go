@@ -100,10 +100,10 @@ func main() {
 		}, scene)
 		greyMat := b.NewStandardMaterial("grey", scene)
 		greyMat.SetEmissiveColor(b.NewColor3(0.2, 0.2, 0.2))
-		pilot.JSObject().Set("material", greyMat.JSObject())
+		pilot.SetMaterial(greyMat.Material)
 
 		arm := mb.CreateBox("arm", &babylon.BoxOpts{Height: Float64(0.75), Width: Float64(0.3), Depth: Float64(0.1875)}, scene)
-		arm.JSObject().Set("material", greyMat.JSObject())
+		arm.SetMaterial(greyMat.Material)
 		arm.Position().SetX(0.125)
 		arm.SetParent(pilot.Node)
 		/****************************************************************/
@@ -128,7 +128,7 @@ func main() {
 				dynamicTexture.SetHasAlpha(true)
 				dynamicTexture.DrawText(text, 5, 40, "bold 36px Arial", color, "transparent", &babylon.DynamicTextureDrawTextOpts{InvertY: Bool(true)})
 				plane := mb.CreatePlane("TextPlane", &babylon.PlaneOpts{Size: Float64(size)}, scene)
-				plane.JSObject().Set("material", b.NewStandardMaterial("TextPlaneMaterial", scene).JSObject())
+				plane.SetMaterial(b.NewStandardMaterial("TextPlaneMaterial", scene).Material)
 				plane.Material().SetBackFaceCulling(false)
 				plane.Material().JSObject().Set("specularColor", b.NewColor3(0, 0, 0).JSObject())
 				plane.Material().JSObject().Set("diffuseTexture", dynamicTexture.JSObject())

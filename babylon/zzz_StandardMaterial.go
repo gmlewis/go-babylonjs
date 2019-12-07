@@ -12,7 +12,7 @@ import (
 //
 // See: http://doc.babylonjs.com/babylon101/materials
 type StandardMaterial struct {
-	p   js.Value
+	*Material
 	ctx js.Value
 }
 
@@ -27,7 +27,7 @@ func (ba *Babylon) StandardMaterial() *StandardMaterial {
 
 // StandardMaterialFromJSObject returns a wrapped StandardMaterial JavaScript class.
 func StandardMaterialFromJSObject(p js.Value, ctx js.Value) *StandardMaterial {
-	return &StandardMaterial{p: p, ctx: ctx}
+	return &StandardMaterial{Material: MaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
 // StandardMaterialArrayToJSArray returns a JavaScript Array for the wrapped array.

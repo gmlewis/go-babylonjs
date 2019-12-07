@@ -107,7 +107,7 @@ func main() {
 				plane := mb.CreatePlane("TextPlane", &babylon.PlaneOpts{Size: &size}, scene)
 				// plane.SetMaterial(b.NewStandardMaterial("TextPlaneMaterial", scene))
 				mat := b.NewStandardMaterial("TextPlaneMaterial", scene)
-				plane.JSObject().Set("material", mat.JSObject())
+				plane.SetMaterial(mat.Material)
 				plane.Material().SetBackFaceCulling(false)
 				mat.SetSpecularColor(b.NewColor3(0, 0, 0))
 				mat.SetDiffuseTexture(dynamicTexture.BaseTexture)
