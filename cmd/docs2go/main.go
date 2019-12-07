@@ -16,6 +16,7 @@ var (
 	// blacklist is a list of class.method names to skip creating.
 	blacklist = map[string]bool{
 		"Camera.AttachControl":          true,
+		"FollowCamera.AttachControl":    true,
 		"FreeCamera.AttachControl":      true,
 		"MeshBuilder.CreateBox":         true,
 		"MeshBuilder.CreateCylinder":    true,
