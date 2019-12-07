@@ -68,32 +68,6 @@ func (ba *Babylon) NewFreeCamera(name string, position *Vector3, scene *Scene, o
 	return FreeCameraFromJSObject(p, ba.ctx)
 }
 
-// FreeCameraAttachControlOpts contains optional parameters for FreeCamera.AttachControl.
-type FreeCameraAttachControlOpts struct {
-	NoPreventDefault *bool
-}
-
-// AttachControl calls the AttachControl method on the FreeCamera object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecamera#attachcontrol
-func (f *FreeCamera) AttachControl(element js.Value, opts *FreeCameraAttachControlOpts) {
-	if opts == nil {
-		opts = &FreeCameraAttachControlOpts{}
-	}
-
-	args := make([]interface{}, 0, 1+1)
-
-	args = append(args, element)
-
-	if opts.NoPreventDefault == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.NoPreventDefault)
-	}
-
-	f.p.Call("attachControl", args...)
-}
-
 // DetachControl calls the DetachControl method on the FreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#detachcontrol
