@@ -45,7 +45,7 @@ func main() {
 		}
 
 		// Create lines
-		b.CreateLines("lines", &babylon.LinesOpts{Points: myPoints}, scene)
+		b.MeshBuilder().CreateLines("lines", &babylon.LinesOpts{Points: myPoints}, scene)
 
 		return scene
 	}

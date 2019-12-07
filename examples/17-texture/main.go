@@ -41,17 +41,19 @@ func main() {
 		grass2.SetAmbientTexture(b.NewTexture("textures/grass.png", scene, nil).BaseTexture)
 		grass2.SetDiffuseColor(b.NewColor3(1, 0, 0))
 
+		mb := b.MeshBuilder()
+
 		//diffuse texture
-		sphere0 := b.CreateSphere("sphere0", nil, scene)
+		sphere0 := mb.CreateSphere("sphere0", nil, scene)
 		sphere0.Position().SetX(-1.5)
 		sphere0.JSObject().Set("material", grass0.JSObject())
 
 		//emissive texture
-		sphere1 := b.CreateSphere("sphere1", nil, scene)
+		sphere1 := mb.CreateSphere("sphere1", nil, scene)
 		sphere1.JSObject().Set("material", grass1.JSObject())
 
 		//ambient texture and diffuse color
-		sphere2 := b.CreateSphere("sphere2", nil, scene)
+		sphere2 := mb.CreateSphere("sphere2", nil, scene)
 		sphere2.JSObject().Set("material", grass2.JSObject())
 		sphere2.Position().SetX(1.5)
 

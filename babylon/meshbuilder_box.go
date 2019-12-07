@@ -13,7 +13,7 @@ type BoxOpts struct {
 }
 
 // CreateBox calls the JavaScript method of the same name.
-func (b *Babylon) CreateBox(name string, opts *BoxOpts, scene *Scene) *Mesh {
+func (mb *MeshBuilder) CreateBox(name string, opts *BoxOpts, scene *Scene) *Mesh {
 	params := map[string]interface{}{}
 	if opts != nil {
 		if opts.Size != nil {
@@ -44,7 +44,6 @@ func (b *Babylon) CreateBox(name string, opts *BoxOpts, scene *Scene) *Mesh {
 		}
 	}
 
-	mb := b.ctx.Get("MeshBuilder")
-	p := mb.Call("CreateBox", name, params, scene.JSObject())
-	return MeshFromJSObject(p, b.ctx)
+	p := mb.p.Call("CreateBox", name, params, scene.JSObject())
+	return MeshFromJSObject(p, mb.ctx)
 }

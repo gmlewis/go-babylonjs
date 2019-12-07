@@ -34,7 +34,7 @@ func main() {
 		b.NewPointLight("light2", b.NewVector3(0, 1, -1), scene)
 
 		// Add and manipulate meshes in the scene
-		b.CreatePlane("plane", &babylon.PlaneOpts{Height: Float64(2), Width: Float64(1)}, scene)
+		b.MeshBuilder().CreatePlane("plane", &babylon.PlaneOpts{Height: Float64(2), Width: Float64(1)}, scene)
 
 		return scene
 	}

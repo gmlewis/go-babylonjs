@@ -20,15 +20,3 @@ func Vector3Array2DToJSArray(array [][]*Vector3) []interface{} {
 	}
 	return result
 }
-
-// // SetX sets the x property.
-// func (v *Vector3) SetX(x float64) *Vector3 {
-// 	v.p.Set("x", x)
-// 	return v
-// }
-
-// // Zero returns a new Vector3 set to (0, 0, 0).
-// func (v *Vector3) Zero() *Vector3 {
-// 	p := v.ctx.Get("Vector3").New(0, 0, 0)
-// 	return Vector3FromJSObject(p, v.ctx)
-// }

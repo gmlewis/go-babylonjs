@@ -36,90 +36,6 @@ func MeshBuilderArrayToJSArray(array []*MeshBuilder) []interface{} {
 	return result
 }
 
-// MeshBuilderCreateBoxOpts contains optional parameters for MeshBuilder.CreateBox.
-type MeshBuilderCreateBoxOpts struct {
-	Scene *Scene
-}
-
-// CreateBox calls the CreateBox method on the MeshBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.meshbuilder#createbox
-func (m *MeshBuilder) CreateBox(name string, options js.Value, opts *MeshBuilderCreateBoxOpts) *Mesh {
-	if opts == nil {
-		opts = &MeshBuilderCreateBoxOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, name)
-	args = append(args, options)
-
-	if opts.Scene == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Scene.JSObject())
-	}
-
-	retVal := m.p.Call("CreateBox", args...)
-	return MeshFromJSObject(retVal, m.ctx)
-}
-
-// MeshBuilderCreateCylinderOpts contains optional parameters for MeshBuilder.CreateCylinder.
-type MeshBuilderCreateCylinderOpts struct {
-	Scene *Scene
-}
-
-// CreateCylinder calls the CreateCylinder method on the MeshBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.meshbuilder#createcylinder
-func (m *MeshBuilder) CreateCylinder(name string, options js.Value, opts *MeshBuilderCreateCylinderOpts) *Mesh {
-	if opts == nil {
-		opts = &MeshBuilderCreateCylinderOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, name)
-	args = append(args, options)
-
-	if opts.Scene == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Scene.JSObject())
-	}
-
-	retVal := m.p.Call("CreateCylinder", args...)
-	return MeshFromJSObject(retVal, m.ctx)
-}
-
-// MeshBuilderCreateDashedLinesOpts contains optional parameters for MeshBuilder.CreateDashedLines.
-type MeshBuilderCreateDashedLinesOpts struct {
-	Scene *Scene
-}
-
-// CreateDashedLines calls the CreateDashedLines method on the MeshBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.meshbuilder#createdashedlines
-func (m *MeshBuilder) CreateDashedLines(name string, options js.Value, opts *MeshBuilderCreateDashedLinesOpts) *LinesMesh {
-	if opts == nil {
-		opts = &MeshBuilderCreateDashedLinesOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, name)
-	args = append(args, options)
-
-	if opts.Scene == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Scene.JSObject())
-	}
-
-	retVal := m.p.Call("CreateDashedLines", args...)
-	return LinesMeshFromJSObject(retVal, m.ctx)
-}
-
 // CreateDecal calls the CreateDecal method on the MeshBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshbuilder#createdecal
@@ -160,34 +76,6 @@ func (m *MeshBuilder) CreateDisc(name string, options js.Value, opts *MeshBuilde
 	}
 
 	retVal := m.p.Call("CreateDisc", args...)
-	return MeshFromJSObject(retVal, m.ctx)
-}
-
-// MeshBuilderCreateGroundOpts contains optional parameters for MeshBuilder.CreateGround.
-type MeshBuilderCreateGroundOpts struct {
-	Scene *Scene
-}
-
-// CreateGround calls the CreateGround method on the MeshBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.meshbuilder#createground
-func (m *MeshBuilder) CreateGround(name string, options js.Value, opts *MeshBuilderCreateGroundOpts) *Mesh {
-	if opts == nil {
-		opts = &MeshBuilderCreateGroundOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, name)
-	args = append(args, options)
-
-	if opts.Scene == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Scene.JSObject())
-	}
-
-	retVal := m.p.Call("CreateGround", args...)
 	return MeshFromJSObject(retVal, m.ctx)
 }
 
@@ -291,62 +179,6 @@ func (m *MeshBuilder) CreateLineSystem(name string, options js.Value, scene *Sce
 	return LinesMeshFromJSObject(retVal, m.ctx)
 }
 
-// MeshBuilderCreateLinesOpts contains optional parameters for MeshBuilder.CreateLines.
-type MeshBuilderCreateLinesOpts struct {
-	Scene *Scene
-}
-
-// CreateLines calls the CreateLines method on the MeshBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.meshbuilder#createlines
-func (m *MeshBuilder) CreateLines(name string, options js.Value, opts *MeshBuilderCreateLinesOpts) *LinesMesh {
-	if opts == nil {
-		opts = &MeshBuilderCreateLinesOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, name)
-	args = append(args, options)
-
-	if opts.Scene == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Scene.JSObject())
-	}
-
-	retVal := m.p.Call("CreateLines", args...)
-	return LinesMeshFromJSObject(retVal, m.ctx)
-}
-
-// MeshBuilderCreatePlaneOpts contains optional parameters for MeshBuilder.CreatePlane.
-type MeshBuilderCreatePlaneOpts struct {
-	Scene *Scene
-}
-
-// CreatePlane calls the CreatePlane method on the MeshBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.meshbuilder#createplane
-func (m *MeshBuilder) CreatePlane(name string, options js.Value, opts *MeshBuilderCreatePlaneOpts) *Mesh {
-	if opts == nil {
-		opts = &MeshBuilderCreatePlaneOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, name)
-	args = append(args, options)
-
-	if opts.Scene == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Scene.JSObject())
-	}
-
-	retVal := m.p.Call("CreatePlane", args...)
-	return MeshFromJSObject(retVal, m.ctx)
-}
-
 // MeshBuilderCreatePolygonOpts contains optional parameters for MeshBuilder.CreatePolygon.
 type MeshBuilderCreatePolygonOpts struct {
 	Scene           *Scene
@@ -434,34 +266,6 @@ func (m *MeshBuilder) CreateRibbon(name string, options js.Value, opts *MeshBuil
 	}
 
 	retVal := m.p.Call("CreateRibbon", args...)
-	return MeshFromJSObject(retVal, m.ctx)
-}
-
-// MeshBuilderCreateSphereOpts contains optional parameters for MeshBuilder.CreateSphere.
-type MeshBuilderCreateSphereOpts struct {
-	Scene *Scene
-}
-
-// CreateSphere calls the CreateSphere method on the MeshBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.meshbuilder#createsphere
-func (m *MeshBuilder) CreateSphere(name string, options js.Value, opts *MeshBuilderCreateSphereOpts) *Mesh {
-	if opts == nil {
-		opts = &MeshBuilderCreateSphereOpts{}
-	}
-
-	args := make([]interface{}, 0, 2+1)
-
-	args = append(args, name)
-	args = append(args, options)
-
-	if opts.Scene == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Scene.JSObject())
-	}
-
-	retVal := m.p.Call("CreateSphere", args...)
 	return MeshFromJSObject(retVal, m.ctx)
 }
 

@@ -40,6 +40,8 @@ func main() {
 		mat.SetDiffuseColor(b.NewColor3(0.5, 0.5, 1.0))
 		mat.JSObject().Set("backFaceCulling", false)
 
+		mb := b.MeshBuilder()
+
 		//Local Axes
 		localAxes := func(size float64) *babylon.Mesh {
 			xOpts := &babylon.LinesOpts{
@@ -51,7 +53,7 @@ func main() {
 					b.NewVector3(size*0.95, -0.05*size, 0),
 				},
 			}
-			pilotLocalAxisX := b.CreateLines("pilotLocalAxisX", xOpts, scene)
+			pilotLocalAxisX := mb.CreateLines("pilotLocalAxisX", xOpts, scene)
 			pilotLocalAxisX.SetColor(b.NewColor3(1, 0, 0))
 
 			yOpts := &babylon.LinesOpts{
@@ -63,7 +65,7 @@ func main() {
 					b.NewVector3(0.05*size, size*0.95, 0),
 				},
 			}
-			pilotLocalAxisY := b.CreateLines("pilotLocalAxisY", yOpts, scene)
+			pilotLocalAxisY := mb.CreateLines("pilotLocalAxisY", yOpts, scene)
 			pilotLocalAxisY.SetColor(b.NewColor3(0, 1, 0))
 
 			zOpts := &babylon.LinesOpts{
@@ -75,10 +77,10 @@ func main() {
 					b.NewVector3(0, 0.05*size, size*0.95),
 				},
 			}
-			pilotLocalAxisZ := b.CreateLines("pilotLocalAxisZ", zOpts, scene)
+			pilotLocalAxisZ := mb.CreateLines("pilotLocalAxisZ", zOpts, scene)
 			pilotLocalAxisZ.SetColor(b.NewColor3(0, 0, 1))
 
-			localOrigin := b.CreateBox("localOrigin", &babylon.BoxOpts{Size: Float64(1)}, scene)
+			localOrigin := mb.CreateBox("localOrigin", &babylon.BoxOpts{Size: Float64(1)}, scene)
 			localOrigin.SetIsVisible(false)
 
 			pilotLocalAxisX.SetParent(localOrigin.Node)
@@ -89,7 +91,7 @@ func main() {
 		}
 
 		/************Creations of Pilot*********************************/
-		pilot := b.CreateCylinder("pilot", &babylon.CylinderOpts{
+		pilot := mb.CreateCylinder("pilot", &babylon.CylinderOpts{
 			Height:         Float64(0.75),
 			DiameterTop:    Float64(0.2),
 			DiameterBottom: Float64(0.5),
@@ -100,7 +102,7 @@ func main() {
 		greyMat.SetEmissiveColor(b.NewColor3(0.2, 0.2, 0.2))
 		pilot.JSObject().Set("material", greyMat.JSObject())
 
-		arm := b.CreateBox("arm", &babylon.BoxOpts{Height: Float64(0.75), Width: Float64(0.3), Depth: Float64(0.1875)}, scene)
+		arm := mb.CreateBox("arm", &babylon.BoxOpts{Height: Float64(0.75), Width: Float64(0.3), Depth: Float64(0.1875)}, scene)
 		arm.JSObject().Set("material", greyMat.JSObject())
 		arm.Position().SetX(0.125)
 		arm.SetParent(pilot.Node)
@@ -125,7 +127,7 @@ func main() {
 				dynamicTexture := b.NewDynamicTexture("DynamicTexture", 50, scene, true, nil)
 				dynamicTexture.SetHasAlpha(true)
 				dynamicTexture.DrawText(text, 5, 40, "bold 36px Arial", color, "transparent", &babylon.DynamicTextureDrawTextOpts{InvertY: Bool(true)})
-				plane := b.CreatePlane("TextPlane", &babylon.PlaneOpts{Size: Float64(size)}, scene)
+				plane := mb.CreatePlane("TextPlane", &babylon.PlaneOpts{Size: Float64(size)}, scene)
 				plane.JSObject().Set("material", b.NewStandardMaterial("TextPlaneMaterial", scene).JSObject())
 				plane.Material().SetBackFaceCulling(false)
 				plane.Material().JSObject().Set("specularColor", b.NewColor3(0, 0, 0).JSObject())
@@ -142,7 +144,7 @@ func main() {
 					b.NewVector3(size*0.95, -0.05*size, 0),
 				},
 			}
-			axisX := b.CreateLines("axisX", xOpts, scene)
+			axisX := mb.CreateLines("axisX", xOpts, scene)
 			axisX.SetColor(b.NewColor3(1, 0, 0))
 			xChar := makeTextPlane("X", "red", size/10)
 			xChar.SetPosition(b.NewVector3(0.9*size, -0.05*size, 0))
@@ -156,7 +158,7 @@ func main() {
 					b.NewVector3(0.05*size, size*0.95, 0),
 				},
 			}
-			axisY := b.CreateLines("axisY", yOpts, scene)
+			axisY := mb.CreateLines("axisY", yOpts, scene)
 			axisY.SetColor(b.NewColor3(0, 1, 0))
 			yChar := makeTextPlane("Y", "green", size/10)
 			yChar.SetPosition(b.NewVector3(0, 0.9*size, -0.05*size))
@@ -170,7 +172,7 @@ func main() {
 					b.NewVector3(0, 0.05*size, size*0.95),
 				},
 			}
-			axisZ := b.CreateLines("axisZ", zOpts, scene)
+			axisZ := mb.CreateLines("axisZ", zOpts, scene)
 			axisZ.SetColor(b.NewColor3(0, 0, 1))
 			zChar := makeTextPlane("Z", "blue", size/10)
 			zChar.SetPosition(b.NewVector3(0, 0.05*size, 0.9*size))

@@ -45,7 +45,7 @@ func main() {
 		}
 
 		// Create lines
-		b.CreateDashedLines("lines", &babylon.DashedLinesOpts{Points: myPoints, DashNb: Float64(400)}, scene)
+		b.MeshBuilder().CreateDashedLines("lines", &babylon.DashedLinesOpts{Points: myPoints, DashNb: Float64(400)}, scene)
 
 		return scene
 	}

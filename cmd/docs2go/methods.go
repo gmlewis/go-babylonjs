@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"log"
 )
 
 func (html *ClassHTML) parseMethods() error {
@@ -36,7 +37,12 @@ func (html *ClassHTML) parseMethods() error {
 			}
 			v := li.GetSignature()
 			if ok := v.parseParameters(html.Name, processMethodOverrides); ok {
-				html.MethodNames[v.GoName] = v
+				methodName := html.Name + "." + v.GoName
+				if blacklist[methodName] {
+					log.Printf("Skipping %v", methodName)
+				} else {
+					html.MethodNames[v.GoName] = v
+				}
 			}
 		}
 	}

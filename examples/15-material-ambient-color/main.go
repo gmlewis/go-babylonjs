@@ -39,16 +39,18 @@ func main() {
 		greenMat := b.NewStandardMaterial("redMat", scene)
 		greenMat.SetAmbientColor(b.NewColor3(0, 1, 0))
 
+		mb := b.MeshBuilder()
+
 		//No ambient color
-		sphere0 := b.CreateSphere("sphere0", nil, scene)
+		sphere0 := mb.CreateSphere("sphere0", nil, scene)
 		sphere0.Position().SetX(-1.5)
 
 		//Red Ambient
-		sphere1 := b.CreateSphere("sphere1", nil, scene)
+		sphere1 := mb.CreateSphere("sphere1", nil, scene)
 		sphere1.JSObject().Set("material", redMat.JSObject())
 
 		//Green Ambient
-		sphere2 := b.CreateSphere("sphere2", nil, scene)
+		sphere2 := mb.CreateSphere("sphere2", nil, scene)
 		sphere2.JSObject().Set("material", greenMat.JSObject())
 		sphere2.Position().SetX(1.5)
 

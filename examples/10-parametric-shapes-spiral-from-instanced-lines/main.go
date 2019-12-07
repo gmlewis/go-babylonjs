@@ -45,7 +45,8 @@ func main() {
 		}
 
 		// Create lines
-		lines := b.CreateLines("lines", &babylon.LinesOpts{Points: myPoints, Updatable: Bool(true)}, scene)
+		mb := b.MeshBuilder()
+		lines := mb.CreateLines("lines", &babylon.LinesOpts{Points: myPoints, Updatable: Bool(true)}, scene)
 
 		// Re-set points data and re-draw Lines
 		myPoints = nil
@@ -63,7 +64,7 @@ func main() {
 		}
 
 		// Update lines
-		b.CreateLines("lines", &babylon.LinesOpts{Points: myPoints, Instance: lines}, scene)
+		mb.CreateLines("lines", &babylon.LinesOpts{Points: myPoints, Instance: lines}, scene)
 
 		return scene
 	}

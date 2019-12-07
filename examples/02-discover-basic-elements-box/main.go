@@ -34,7 +34,7 @@ func main() {
 		b.NewPointLight("light2", b.NewVector3(0, 1, -1), scene)
 
 		// Add and manipulate meshes in the scene
-		b.CreateBox("box", &babylon.BoxOpts{Height: Float64(1), Width: Float64(0.75), Depth: Float64(0.25)}, scene)
+		b.MeshBuilder().CreateBox("box", &babylon.BoxOpts{Height: Float64(1), Width: Float64(0.75), Depth: Float64(0.25)}, scene)
 
 		return scene
 	}

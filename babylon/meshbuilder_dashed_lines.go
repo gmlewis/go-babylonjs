@@ -11,7 +11,7 @@ type DashedLinesOpts struct {
 }
 
 // CreateDashedLines calls the JavaScript method of the same name.
-func (b *Babylon) CreateDashedLines(name string, opts *DashedLinesOpts, scene *Scene) *LinesMesh {
+func (mb *MeshBuilder) CreateDashedLines(name string, opts *DashedLinesOpts, scene *Scene) *LinesMesh {
 	params := map[string]interface{}{}
 	if opts != nil {
 		if opts.Points != nil {
@@ -37,7 +37,6 @@ func (b *Babylon) CreateDashedLines(name string, opts *DashedLinesOpts, scene *S
 		}
 	}
 
-	mb := b.ctx.Get("MeshBuilder")
-	p := mb.Call("CreateDashedLines", name, params, scene.JSObject())
-	return LinesMeshFromJSObject(p, b.ctx)
+	p := mb.p.Call("CreateDashedLines", name, params, scene.JSObject())
+	return LinesMeshFromJSObject(p, mb.ctx)
 }

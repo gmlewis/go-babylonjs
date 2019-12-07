@@ -13,8 +13,16 @@ var (
 	destDir = flag.String("dest", "/home/glenn/go/src/github.com/gmlewis/go-babylonjs/babylon", "Destination directory for generated Go code")
 	verbose = flag.String("v", "", "Debug with verbose log messages for this class")
 
-	// blacklist is a list of filenames to skip.
-	blacklist = map[string]bool{}
+	// blacklist is a list of class.method names to skip creating.
+	blacklist = map[string]bool{
+		"MeshBuilder.CreateBox":         true,
+		"MeshBuilder.CreateCylinder":    true,
+		"MeshBuilder.CreateDashedLines": true,
+		"MeshBuilder.CreateGround":      true,
+		"MeshBuilder.CreateLines":       true,
+		"MeshBuilder.CreatePlane":       true,
+		"MeshBuilder.CreateSphere":      true,
+	}
 )
 
 func main() {

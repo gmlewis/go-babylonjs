@@ -21,7 +21,7 @@ type CylinderOpts struct {
 }
 
 // CreateCylinder calls the JavaScript method of the same name.
-func (b *Babylon) CreateCylinder(name string, opts *CylinderOpts, scene *Scene) *Mesh {
+func (mb *MeshBuilder) CreateCylinder(name string, opts *CylinderOpts, scene *Scene) *Mesh {
 	params := map[string]interface{}{}
 	if opts != nil {
 		if opts.Arc != nil {
@@ -76,7 +76,6 @@ func (b *Babylon) CreateCylinder(name string, opts *CylinderOpts, scene *Scene) 
 		}
 	}
 
-	mb := b.ctx.Get("MeshBuilder")
-	p := mb.Call("CreateCylinder", name, params, scene.JSObject())
-	return MeshFromJSObject(p, b.ctx)
+	p := mb.p.Call("CreateCylinder", name, params, scene.JSObject())
+	return MeshFromJSObject(p, mb.ctx)
 }

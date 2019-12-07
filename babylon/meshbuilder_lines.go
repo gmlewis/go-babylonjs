@@ -10,7 +10,7 @@ type LinesOpts struct {
 }
 
 // CreateLines calls the JavaScript method of the same name.
-func (b *Babylon) CreateLines(name string, opts *LinesOpts, scene *Scene) *LinesMesh {
+func (mb *MeshBuilder) CreateLines(name string, opts *LinesOpts, scene *Scene) *LinesMesh {
 	params := map[string]interface{}{}
 	if opts != nil {
 		if opts.Points != nil {
@@ -32,7 +32,6 @@ func (b *Babylon) CreateLines(name string, opts *LinesOpts, scene *Scene) *Lines
 		}
 	}
 
-	mb := b.ctx.Get("MeshBuilder")
-	p := mb.Call("CreateLines", name, params, scene.JSObject())
-	return LinesMeshFromJSObject(p, b.ctx)
+	p := mb.p.Call("CreateLines", name, params, scene.JSObject())
+	return LinesMeshFromJSObject(p, mb.ctx)
 }

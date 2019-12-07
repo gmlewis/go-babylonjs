@@ -13,7 +13,7 @@ type PlaneOpts struct {
 }
 
 // CreatePlane calls the JavaScript method of the same name.
-func (b *Babylon) CreatePlane(name string, opts *PlaneOpts, scene *Scene) *Mesh {
+func (mb *MeshBuilder) CreatePlane(name string, opts *PlaneOpts, scene *Scene) *Mesh {
 	params := map[string]interface{}{}
 	if opts != nil {
 		if opts.Size != nil {
@@ -44,7 +44,6 @@ func (b *Babylon) CreatePlane(name string, opts *PlaneOpts, scene *Scene) *Mesh 
 		}
 	}
 
-	mb := b.ctx.Get("MeshBuilder")
-	p := mb.Call("CreatePlane", name, params, scene.JSObject())
-	return MeshFromJSObject(p, b.ctx)
+	p := mb.p.Call("CreatePlane", name, params, scene.JSObject())
+	return MeshFromJSObject(p, mb.ctx)
 }

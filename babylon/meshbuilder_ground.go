@@ -9,7 +9,7 @@ type GroundOpts struct {
 }
 
 // CreateGround calls the JavaScript method of the same name.
-func (b *Babylon) CreateGround(name string, opts *GroundOpts, scene *Scene) *Mesh {
+func (mb *MeshBuilder) CreateGround(name string, opts *GroundOpts, scene *Scene) *Mesh {
 	params := map[string]interface{}{}
 	if opts != nil {
 		if opts.Width != nil {
@@ -26,7 +26,6 @@ func (b *Babylon) CreateGround(name string, opts *GroundOpts, scene *Scene) *Mes
 		}
 	}
 
-	mb := b.ctx.Get("MeshBuilder")
-	p := mb.Call("CreateGround", name, params, scene.JSObject())
-	return MeshFromJSObject(p, b.ctx)
+	p := mb.p.Call("CreateGround", name, params, scene.JSObject())
+	return MeshFromJSObject(p, mb.ctx)
 }

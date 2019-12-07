@@ -38,13 +38,15 @@ func main() {
 		greenMat.SetDiffuseColor(b.NewColor3(0, 1, 0))
 		greenMat.JSObject().Set("alpha", 0.5)
 
+		mb := b.MeshBuilder()
+
 		//Red
-		sphere1 := b.CreateSphere("sphere1", nil, scene)
+		sphere1 := mb.CreateSphere("sphere1", nil, scene)
 		sphere1.JSObject().Set("material", redMat.JSObject())
 		sphere1.Position().SetZ(1.5)
 
 		//Green Transparent
-		sphere2 := b.CreateSphere("sphere2", nil, scene)
+		sphere2 := mb.CreateSphere("sphere2", nil, scene)
 		sphere2.JSObject().Set("material", greenMat.JSObject())
 
 		return scene

@@ -37,7 +37,7 @@ func main() {
 		mat.SetDiffuseTexture(b.NewTexture("https://upload.wikimedia.org/wikipedia/commons/8/87/Alaskan_Malamute%2BBlank.png", scene, nil).BaseTexture)
 		mat.DiffuseTexture().SetHasAlpha(true)
 		mat.JSObject().Set("backFaceCulling", true)
-		box := b.CreateBox("box", nil, scene)
+		box := b.MeshBuilder().CreateBox("box", nil, scene)
 		box.JSObject().Set("material", mat.JSObject())
 
 		return scene

@@ -14,7 +14,7 @@ type SphereOpts struct {
 }
 
 // CreateSphere calls the JavaScript method of the same name.
-func (b *Babylon) CreateSphere(name string, opts *SphereOpts, scene *Scene) *Mesh {
+func (mb *MeshBuilder) CreateSphere(name string, opts *SphereOpts, scene *Scene) *Mesh {
 	params := map[string]interface{}{}
 	if opts != nil {
 		if opts.Segments != nil {
@@ -46,7 +46,6 @@ func (b *Babylon) CreateSphere(name string, opts *SphereOpts, scene *Scene) *Mes
 		}
 	}
 
-	mb := b.ctx.Get("MeshBuilder")
-	p := mb.Call("CreateSphere", name, params, scene.JSObject())
-	return MeshFromJSObject(p, b.ctx)
+	p := mb.p.Call("CreateSphere", name, params, scene.JSObject())
+	return MeshFromJSObject(p, mb.ctx)
 }

@@ -29,14 +29,16 @@ func main() {
 
 		b.NewHemisphericLight("hemi", b.NewVector3(0, 1, 0), scene)
 
+		mb := b.MeshBuilder()
+
 		//Creation of 3 boxes and 2 spheres
-		box1 := b.CreateBox("Box1", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
-		box2 := b.CreateBox("Box2", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
-		box3 := b.CreateBox("Box3", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
-		box4 := b.CreateBox("Box4", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
-		box5 := b.CreateBox("Box5", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
-		box6 := b.CreateBox("Box6", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
-		box7 := b.CreateBox("Box7", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
+		box1 := mb.CreateBox("Box1", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
+		box2 := mb.CreateBox("Box2", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
+		box3 := mb.CreateBox("Box3", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
+		box4 := mb.CreateBox("Box4", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
+		box5 := mb.CreateBox("Box5", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
+		box6 := mb.CreateBox("Box6", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
+		box7 := mb.CreateBox("Box7", &babylon.BoxOpts{Size: Float64(6.0)}, scene)
 
 		//Moving boxes on the x axis
 		box1.Position().SetX(-20)
