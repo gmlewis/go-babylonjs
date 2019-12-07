@@ -1,7 +1,7 @@
-# Babylon Directional Light Example
+# Babylon Spot Light Example
 
-27-directional-light is a port to Go of the Babylon example located here:
-https://www.babylonjs-playground.com/#20OAV9#1
+28-spot-light is a port to Go of the Babylon example located here:
+https://www.babylonjs-playground.com/#20OAV9#3
 and linked from here:
 https://doc.babylonjs.com/babylon101/lights
 

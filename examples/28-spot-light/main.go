@@ -1,5 +1,5 @@
-// 27-directional-light is a port to Go of the Babylon example located here:
-// https://www.babylonjs-playground.com/#20OAV9#1
+// 28-spot-light is a port to Go of the Babylon example located here:
+// https://www.babylonjs-playground.com/#20OAV9#3
 // and linked from here:
 // https://doc.babylonjs.com/babylon101/lights
 package main
@@ -26,12 +26,17 @@ func main() {
 		camera := b.NewArcRotateCamera("Camera", -math.Pi/2, math.Pi/2, 5, b.Vector3().Zero(), scene, nil)
 		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: Bool(true)})
 
-		light := b.NewDirectionalLight("DirectionalLight", b.NewVector3(0, -1, 0), scene)
+		//Light direction is directly down from a position one unit up, slow decay
+		light := b.NewSpotLight("spotLight", b.NewVector3(-1, 1, -1), b.NewVector3(0, -1, 0), math.Pi/2, 10, scene)
 		light.SetDiffuse(b.NewColor3(1, 0, 0))
 		light.SetSpecular(b.NewColor3(0, 1, 0))
 
-		sphere := b.MeshBuilder().CreateSphere("sphere", nil, scene)
-		sphere.Position().SetZ(1)
+		//Light direction is directly down from a position one unit up, fast decay
+		light1 := b.NewSpotLight("spotLight1", b.NewVector3(1, 1, 1), b.NewVector3(0, -1, 0), math.Pi/2, 50, scene)
+		light1.SetDiffuse(b.NewColor3(0, 1, 0))
+		light1.SetSpecular(b.NewColor3(0, 1, 0))
+
+		b.MeshBuilder().CreateGround("ground", &babylon.GroundOpts{Width: Float64(4), Height: Float64(4)}, scene)
 
 		return scene
 	}
