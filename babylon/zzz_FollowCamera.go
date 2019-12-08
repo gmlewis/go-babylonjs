@@ -68,6 +68,19 @@ func (ba *Babylon) NewFollowCamera(name string, position *Vector3, scene *Scene,
 	return FollowCameraFromJSObject(p, ba.ctx)
 }
 
+// AttachControl calls the AttachControl method on the FollowCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamera#attachcontrol
+func (f *FollowCamera) AttachControl(element js.Value, noPreventDefault bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, element)
+	args = append(args, noPreventDefault)
+
+	f.p.Call("attachControl", args...)
+}
+
 // DetachControl calls the DetachControl method on the FollowCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera#detachcontrol

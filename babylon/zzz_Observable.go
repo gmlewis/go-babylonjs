@@ -41,26 +41,14 @@ func ObservableArrayToJSArray(array []*Observable) []interface{} {
 	return result
 }
 
-// NewObservableOpts contains optional parameters for NewObservable.
-type NewObservableOpts struct {
-	OnObserverAdded func()
-}
-
 // NewObservable returns a new Observable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable
-func (ba *Babylon) NewObservable(opts *NewObservableOpts) *Observable {
-	if opts == nil {
-		opts = &NewObservableOpts{}
-	}
+func (ba *Babylon) NewObservable(onObserverAdded func()) *Observable {
 
-	args := make([]interface{}, 0, 0+1)
+	args := make([]interface{}, 0, 1+0)
 
-	if opts.OnObserverAdded == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnObserverAdded(); return nil }) /* never freed! */)
-	}
+	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onObserverAdded(); return nil }))
 
 	p := ba.ctx.Get("Observable").New(args...)
 	return ObservableFromJSObject(p, ba.ctx)

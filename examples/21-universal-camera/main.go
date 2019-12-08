@@ -31,7 +31,7 @@ func main() {
 		camera.SetTarget(b.Vector3().Zero())
 
 		// This attaches the camera to the canvas
-		camera.AttachControl(canvas, Bool(true))
+		camera.AttachControl(canvas, true)
 
 		/**************************************************************/
 

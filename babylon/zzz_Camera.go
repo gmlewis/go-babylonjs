@@ -67,6 +67,19 @@ func (ba *Babylon) NewCamera(name string, position *Vector3, scene *Scene, opts 
 	return CameraFromJSObject(p, ba.ctx)
 }
 
+// AttachControl calls the AttachControl method on the Camera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.camera#attachcontrol
+func (c *Camera) AttachControl(element js.Value, noPreventDefault bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, element)
+	args = append(args, noPreventDefault)
+
+	c.p.Call("attachControl", args...)
+}
+
 // CameraAttachPostProcessOpts contains optional parameters for Camera.AttachPostProcess.
 type CameraAttachPostProcessOpts struct {
 	InsertAt *float64

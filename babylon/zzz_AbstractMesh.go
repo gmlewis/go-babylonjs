@@ -917,26 +917,14 @@ func (a *AbstractMesh) SetVerticesData(kind string, data js.Value, opts *Abstrac
 	return AbstractMeshFromJSObject(retVal, a.ctx)
 }
 
-// AbstractMeshToStringOpts contains optional parameters for AbstractMesh.ToString.
-type AbstractMeshToStringOpts struct {
-	FullDetails *bool
-}
-
 // ToString calls the ToString method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#tostring
-func (a *AbstractMesh) ToString(opts *AbstractMeshToStringOpts) string {
-	if opts == nil {
-		opts = &AbstractMeshToStringOpts{}
-	}
+func (a *AbstractMesh) ToString(fullDetails bool) string {
 
-	args := make([]interface{}, 0, 0+1)
+	args := make([]interface{}, 0, 1+0)
 
-	if opts.FullDetails == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.FullDetails)
-	}
+	args = append(args, fullDetails)
 
 	retVal := a.p.Call("toString", args...)
 	return retVal.String()

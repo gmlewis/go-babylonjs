@@ -68,6 +68,19 @@ func (ba *Babylon) NewFreeCamera(name string, position *Vector3, scene *Scene, o
 	return FreeCameraFromJSObject(p, ba.ctx)
 }
 
+// AttachControl calls the AttachControl method on the FreeCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecamera#attachcontrol
+func (f *FreeCamera) AttachControl(element js.Value, noPreventDefault bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, element)
+	args = append(args, noPreventDefault)
+
+	f.p.Call("attachControl", args...)
+}
+
 // DetachControl calls the DetachControl method on the FreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera#detachcontrol

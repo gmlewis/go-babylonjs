@@ -627,15 +627,18 @@ type Signature struct {
 	JSOpts               []string
 }
 
-type processOverrider func(className string, s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string)
+type processOverrider func(className string, s *Signature, names []string, optional []bool, types []string) (bool, []string, []bool, []string)
 
-func processConstructorOverrides(className string, s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string) {
+func processConstructorOverrides(className string, s *Signature, names []string, optional []bool, types []string) (bool, []string, []bool, []string) {
+	var avoidUsingOptions bool
 	override := true
 	switch s.GoName {
 	case "NewColor3":
 		optional = []bool{false, false, false}
 	case "NewColor4":
 		optional = []bool{false, false, false, false}
+	case "NewObservable":
+		avoidUsingOptions = true
 	case "NewVector2":
 		optional = []bool{false, false}
 	case "NewVector3":
@@ -646,16 +649,22 @@ func processConstructorOverrides(className string, s *Signature, names []string,
 	if override {
 		logf("\n\nconstructor OVERRIDES: parseParameters[%v]: names(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, len(names), names, len(optional), optional, len(types), types)
 	}
-	return names, optional, types
+	return avoidUsingOptions, names, optional, types
 }
 
-func processMethodOverrides(className string, s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string) {
+func processMethodOverrides(className string, s *Signature, names []string, optional []bool, types []string) (bool, []string, []bool, []string) {
+	var avoidUsingOptions bool
 	override := true
 	switch className + "." + s.GoName {
 	case "Angle.BetweenTwoPoints":
 		names[0] = "av"
+	case "Camera.AttachControl", "FollowCamera.AttachControl", "FreeCamera.AttachControl",
+		"AbstractMesh.ToString":
+		avoidUsingOptions = true
 	case "InstancedMesh.GetFacetNormal", "InstancedMesh.GetFacetNormalToRef", "InstancedMesh.GetFacetPosition", "InstancedMesh.GetFacetPositionToRef":
 		names[0] = "index"
+	case "PointsCloudSystem.AddSurfacePoints", "PointsCloudSystem.AddVolumePoints":
+		names[4] = "numRange"
 	case "Quaternion.Inverse", "Quaternion.InverseToRef":
 		names[0] = "v"
 	case "Vector3.CheckExtends", "Vector3WithInfo.CheckExtends":
@@ -668,10 +677,11 @@ func processMethodOverrides(className string, s *Signature, names []string, opti
 	if override {
 		logf("\n\nmethod OVERRIDES: parseParameters[%v]: names(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, len(names), names, len(optional), optional, len(types), types)
 	}
-	return names, optional, types
+	return avoidUsingOptions, names, optional, types
 }
 
-func processPropertiesOverrides(className string, s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string) {
+func processPropertiesOverrides(className string, s *Signature, names []string, optional []bool, types []string) (bool, []string, []bool, []string) {
+	var avoidUsingOptions bool
 	s.WriteSetter = true
 	override := true
 	switch className + "." + s.GoName {
@@ -714,7 +724,7 @@ func processPropertiesOverrides(className string, s *Signature, names []string, 
 	if override {
 		logf("\n\nproperties OVERRIDES: parseParameters[%v]: names(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, len(names), names, len(optional), optional, len(types), types)
 	}
-	return names, optional, types
+	return avoidUsingOptions, names, optional, types
 }
 
 func (s *Signature) parseParameters(className string, processOverrides processOverrider) bool {
@@ -864,14 +874,15 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 		log.Fatalf("badly parsed arguments: \n\nparseParameters[%v]: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.GoName, v, matches, len(names), names, len(optional), optional, len(types), types)
 	}
 
+	var avoidUsingOptions bool
 	if processOverrides != nil {
-		names, optional, types = processOverrides(className, s, names, optional, types)
+		avoidUsingOptions, names, optional, types = processOverrides(className, s, names, optional, types)
 	}
 
 	for i, v := range names {
 		paramType := "interface{}" // unknown type
 
-		if optional[i] {
+		if !avoidUsingOptions && optional[i] {
 			name := strings.Title(v)
 			jsName := "opts." + name
 

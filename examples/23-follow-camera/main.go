@@ -47,7 +47,7 @@ func main() {
 		//camera.target is set after the target's creation
 
 		// This attaches the camera to the canvas
-		camera.AttachControl(canvas, Bool(true))
+		camera.AttachControl(canvas, true)
 
 		/**************************************************************/
 

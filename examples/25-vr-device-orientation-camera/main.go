@@ -31,7 +31,7 @@ func main() {
 		camera.SetTarget(b.NewVector3(0, 0, 10))
 
 		// This attaches the camera to the canvas
-		camera.AttachControl(canvas, Bool(true))
+		camera.AttachControl(canvas, true)
 		/**************************************************************/
 
 		// This creates a light, aiming 0,1,0 - to the sky (non-mesh)

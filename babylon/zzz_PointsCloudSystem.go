@@ -101,7 +101,7 @@ func (p *PointsCloudSystem) AddPoints(nb float64, opts *PointsCloudSystemAddPoin
 type PointsCloudSystemAddSurfacePointsOpts struct {
 	ColorWith *float64
 	Color     *Color4
-	Range     *float64
+	NumRange  *float64
 }
 
 // AddSurfacePoints calls the AddSurfacePoints method on the PointsCloudSystem object.
@@ -127,10 +127,10 @@ func (p *PointsCloudSystem) AddSurfacePoints(mesh *Mesh, nb float64, opts *Point
 	} else {
 		args = append(args, opts.Color.JSObject())
 	}
-	if opts.Range == nil {
+	if opts.NumRange == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Range)
+		args = append(args, *opts.NumRange)
 	}
 
 	retVal := p.p.Call("addSurfacePoints", args...)
@@ -141,7 +141,7 @@ func (p *PointsCloudSystem) AddSurfacePoints(mesh *Mesh, nb float64, opts *Point
 type PointsCloudSystemAddVolumePointsOpts struct {
 	ColorWith *float64
 	Color     *Color4
-	Range     *float64
+	NumRange  *float64
 }
 
 // AddVolumePoints calls the AddVolumePoints method on the PointsCloudSystem object.
@@ -167,10 +167,10 @@ func (p *PointsCloudSystem) AddVolumePoints(mesh *Mesh, nb float64, opts *Points
 	} else {
 		args = append(args, opts.Color.JSObject())
 	}
-	if opts.Range == nil {
+	if opts.NumRange == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, *opts.Range)
+		args = append(args, *opts.NumRange)
 	}
 
 	retVal := p.p.Call("addVolumePoints", args...)
