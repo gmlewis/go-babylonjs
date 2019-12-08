@@ -91,11 +91,11 @@ func (t *ThinEngine) AreAllEffectsReady() bool {
 // AttachContextLostEvent calls the AttachContextLostEvent method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#attachcontextlostevent
-func (t *ThinEngine) AttachContextLostEvent(callback func()) {
+func (t *ThinEngine) AttachContextLostEvent(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	t.p.Call("attachContextLostEvent", args...)
 }
@@ -103,11 +103,11 @@ func (t *ThinEngine) AttachContextLostEvent(callback func()) {
 // AttachContextRestoredEvent calls the AttachContextRestoredEvent method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#attachcontextrestoredevent
-func (t *ThinEngine) AttachContextRestoredEvent(callback func()) {
+func (t *ThinEngine) AttachContextRestoredEvent(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	t.p.Call("attachContextRestoredEvent", args...)
 }
@@ -334,7 +334,7 @@ func (t *ThinEngine) ClearInternalTexturesCache() {
 // CreateCubeTexture calls the CreateCubeTexture method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createcubetexture
-func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files []string, noMipmap bool, onLoad func(), onError func(), format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64, fallback *InternalTexture, excludeLoaders []*IInternalTextureLoader) *InternalTexture {
+func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files []string, noMipmap bool, onLoad JSFunc, onError JSFunc, format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64, fallback *InternalTexture, excludeLoaders []*IInternalTextureLoader) *InternalTexture {
 
 	args := make([]interface{}, 0, 13+0)
 
@@ -342,8 +342,8 @@ func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files []str
 	args = append(args, scene.JSObject())
 	args = append(args, files)
 	args = append(args, noMipmap)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLoad(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onLoad))
+	args = append(args, js.FuncOf(onError))
 	args = append(args, format)
 	args = append(args, forcedExtension)
 	args = append(args, createPolynomials)
@@ -417,8 +417,8 @@ type ThinEngineCreateEffectOpts struct {
 	Samplers        []string
 	Defines         *string
 	Fallbacks       *IEffectFallbacks
-	OnCompiled      func()
-	OnError         func()
+	OnCompiled      JSFunc
+	OnError         JSFunc
 	IndexParameters *interface{}
 }
 
@@ -454,12 +454,12 @@ func (t *ThinEngine) CreateEffect(baseName interface{}, attributesNamesOrOptions
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnCompiled) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.IndexParameters == nil {
 		args = append(args, js.Undefined())
@@ -527,8 +527,8 @@ func (t *ThinEngine) CreatePipelineContext() *IPipelineContext {
 
 // ThinEngineCreatePrefilteredCubeTextureOpts contains optional parameters for ThinEngine.CreatePrefilteredCubeTexture.
 type ThinEngineCreatePrefilteredCubeTextureOpts struct {
-	OnLoad            func()
-	OnError           func()
+	OnLoad            JSFunc
+	OnError           JSFunc
 	Format            *float64
 	ForcedExtension   *interface{}
 	CreatePolynomials *bool
@@ -552,12 +552,12 @@ func (t *ThinEngine) CreatePrefilteredCubeTexture(rootUrl string, scene *Scene, 
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnLoad) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.Format == nil {
 		args = append(args, js.Undefined())
@@ -838,8 +838,8 @@ func (t *ThinEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vert
 // ThinEngineCreateTextureOpts contains optional parameters for ThinEngine.CreateTexture.
 type ThinEngineCreateTextureOpts struct {
 	SamplingMode    *float64
-	OnLoad          func()
-	OnError         func()
+	OnLoad          JSFunc
+	OnError         JSFunc
 	Buffer          *string
 	Fallback        *InternalTexture
 	Format          *float64
@@ -871,12 +871,12 @@ func (t *ThinEngine) CreateTexture(urlArg string, noMipmap bool, invertY bool, s
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnLoad) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.Buffer == nil {
 		args = append(args, js.Undefined())
@@ -1352,14 +1352,14 @@ type ThinEngineQueueNewFrameOpts struct {
 // QueueNewFrame calls the QueueNewFrame method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#queuenewframe
-func (t *ThinEngine) QueueNewFrame(jsFunc func(), opts *ThinEngineQueueNewFrameOpts) float64 {
+func (t *ThinEngine) QueueNewFrame(jsFunc JSFunc, opts *ThinEngineQueueNewFrameOpts) float64 {
 	if opts == nil {
 		opts = &ThinEngineQueueNewFrameOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	if opts.Requester == nil {
 		args = append(args, js.Undefined())
@@ -1433,11 +1433,11 @@ func (t *ThinEngine) RestoreDefaultFramebuffer() {
 // RunRenderLoop calls the RunRenderLoop method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#runrenderloop
-func (t *ThinEngine) RunRenderLoop(renderFunction func()) {
+func (t *ThinEngine) RunRenderLoop(renderFunction JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { renderFunction(); return nil }))
+	args = append(args, js.FuncOf(renderFunction))
 
 	t.p.Call("runRenderLoop", args...)
 }
@@ -1743,7 +1743,7 @@ func (t *ThinEngine) SetViewport(viewport js.Value, opts *ThinEngineSetViewportO
 
 // ThinEngineStopRenderLoopOpts contains optional parameters for ThinEngine.StopRenderLoop.
 type ThinEngineStopRenderLoopOpts struct {
-	RenderFunction func()
+	RenderFunction JSFunc
 }
 
 // StopRenderLoop calls the StopRenderLoop method on the ThinEngine object.
@@ -1759,7 +1759,7 @@ func (t *ThinEngine) StopRenderLoop(opts *ThinEngineStopRenderLoopOpts) {
 	if opts.RenderFunction == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.RenderFunction(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.RenderFunction) /* never freed! */)
 	}
 
 	t.p.Call("stopRenderLoop", args...)
@@ -1768,7 +1768,7 @@ func (t *ThinEngine) StopRenderLoop(opts *ThinEngineStopRenderLoopOpts) {
 // ThinEngineUnBindFramebufferOpts contains optional parameters for ThinEngine.UnBindFramebuffer.
 type ThinEngineUnBindFramebufferOpts struct {
 	DisableGenerateMipMaps *bool
-	OnBeforeUnbind         func()
+	OnBeforeUnbind         JSFunc
 }
 
 // UnBindFramebuffer calls the UnBindFramebuffer method on the ThinEngine object.
@@ -1791,7 +1791,7 @@ func (t *ThinEngine) UnBindFramebuffer(texture *InternalTexture, opts *ThinEngin
 	if opts.OnBeforeUnbind == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnBeforeUnbind(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnBeforeUnbind) /* never freed! */)
 	}
 
 	t.p.Call("unBindFramebuffer", args...)
@@ -1799,7 +1799,7 @@ func (t *ThinEngine) UnBindFramebuffer(texture *InternalTexture, opts *ThinEngin
 
 // ThinEngineUnBindMultiColorAttachmentFramebufferOpts contains optional parameters for ThinEngine.UnBindMultiColorAttachmentFramebuffer.
 type ThinEngineUnBindMultiColorAttachmentFramebufferOpts struct {
-	OnBeforeUnbind func()
+	OnBeforeUnbind JSFunc
 }
 
 // UnBindMultiColorAttachmentFramebuffer calls the UnBindMultiColorAttachmentFramebuffer method on the ThinEngine object.
@@ -1818,7 +1818,7 @@ func (t *ThinEngine) UnBindMultiColorAttachmentFramebuffer(textures []*InternalT
 	if opts.OnBeforeUnbind == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnBeforeUnbind(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnBeforeUnbind) /* never freed! */)
 	}
 
 	t.p.Call("unBindMultiColorAttachmentFramebuffer", args...)

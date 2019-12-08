@@ -265,8 +265,8 @@ func (m *MultiLine) OnPointUpdate() js.Value {
 // SetOnPointUpdate sets the OnPointUpdate property of class MultiLine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline#onpointupdate
-func (m *MultiLine) SetOnPointUpdate(onPointUpdate func()) *MultiLine {
-	m.p.Set("onPointUpdate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onPointUpdate(); return nil }))
+func (m *MultiLine) SetOnPointUpdate(onPointUpdate JSFunc) *MultiLine {
+	m.p.Set("onPointUpdate", js.FuncOf(onPointUpdate))
 	return m
 }
 

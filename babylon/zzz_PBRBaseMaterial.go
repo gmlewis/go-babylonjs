@@ -108,7 +108,7 @@ func (p *PBRBaseMaterial) Dispose(opts *PBRBaseMaterialDisposeOpts) {
 
 // PBRBaseMaterialForceCompilationOpts contains optional parameters for PBRBaseMaterial.ForceCompilation.
 type PBRBaseMaterialForceCompilationOpts struct {
-	OnCompiled func()
+	OnCompiled JSFunc
 	Options    js.Value
 }
 
@@ -127,7 +127,7 @@ func (p *PBRBaseMaterial) ForceCompilation(mesh *AbstractMesh, opts *PBRBaseMate
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnCompiled) /* never freed! */)
 	}
 	args = append(args, opts.Options)
 
@@ -326,8 +326,8 @@ func (p *PBRBaseMaterial) CustomShaderNameResolve() js.Value {
 // SetCustomShaderNameResolve sets the CustomShaderNameResolve property of class PBRBaseMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#customshadernameresolve
-func (p *PBRBaseMaterial) SetCustomShaderNameResolve(customShaderNameResolve func()) *PBRBaseMaterial {
-	p.p.Set("customShaderNameResolve", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customShaderNameResolve(); return nil }))
+func (p *PBRBaseMaterial) SetCustomShaderNameResolve(customShaderNameResolve JSFunc) *PBRBaseMaterial {
+	p.p.Set("customShaderNameResolve", js.FuncOf(customShaderNameResolve))
 	return p
 }
 

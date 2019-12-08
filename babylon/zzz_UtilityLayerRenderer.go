@@ -143,8 +143,8 @@ func (u *UtilityLayerRenderer) MainSceneTrackerPredicate() js.Value {
 // SetMainSceneTrackerPredicate sets the MainSceneTrackerPredicate property of class UtilityLayerRenderer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#mainscenetrackerpredicate
-func (u *UtilityLayerRenderer) SetMainSceneTrackerPredicate(mainSceneTrackerPredicate func()) *UtilityLayerRenderer {
-	u.p.Set("mainSceneTrackerPredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { mainSceneTrackerPredicate(); return nil }))
+func (u *UtilityLayerRenderer) SetMainSceneTrackerPredicate(mainSceneTrackerPredicate JSFunc) *UtilityLayerRenderer {
+	u.p.Set("mainSceneTrackerPredicate", js.FuncOf(mainSceneTrackerPredicate))
 	return u
 }
 

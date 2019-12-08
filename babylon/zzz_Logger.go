@@ -72,8 +72,8 @@ func (l *Logger) Error() js.Value {
 // SetError sets the Error property of class Logger.
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#error
-func (l *Logger) SetError(Error func()) *Logger {
-	l.p.Set("Error", js.FuncOf(func(this js.Value, args []js.Value) interface{} { Error(); return nil }))
+func (l *Logger) SetError(Error JSFunc) *Logger {
+	l.p.Set("Error", js.FuncOf(Error))
 	return l
 }
 
@@ -120,8 +120,8 @@ func (l *Logger) Log() js.Value {
 // SetLog sets the Log property of class Logger.
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#log
-func (l *Logger) SetLog(Log func()) *Logger {
-	l.p.Set("Log", js.FuncOf(func(this js.Value, args []js.Value) interface{} { Log(); return nil }))
+func (l *Logger) SetLog(Log JSFunc) *Logger {
+	l.p.Set("Log", js.FuncOf(Log))
 	return l
 }
 
@@ -200,8 +200,8 @@ func (l *Logger) OnNewCacheEntry() js.Value {
 // SetOnNewCacheEntry sets the OnNewCacheEntry property of class Logger.
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#onnewcacheentry
-func (l *Logger) SetOnNewCacheEntry(OnNewCacheEntry func()) *Logger {
-	l.p.Set("OnNewCacheEntry", js.FuncOf(func(this js.Value, args []js.Value) interface{} { OnNewCacheEntry(); return nil }))
+func (l *Logger) SetOnNewCacheEntry(OnNewCacheEntry JSFunc) *Logger {
+	l.p.Set("OnNewCacheEntry", js.FuncOf(OnNewCacheEntry))
 	return l
 }
 
@@ -216,8 +216,8 @@ func (l *Logger) Warn() js.Value {
 // SetWarn sets the Warn property of class Logger.
 //
 // https://doc.babylonjs.com/api/classes/babylon.logger#warn
-func (l *Logger) SetWarn(Warn func()) *Logger {
-	l.p.Set("Warn", js.FuncOf(func(this js.Value, args []js.Value) interface{} { Warn(); return nil }))
+func (l *Logger) SetWarn(Warn JSFunc) *Logger {
+	l.p.Set("Warn", js.FuncOf(Warn))
 	return l
 }
 

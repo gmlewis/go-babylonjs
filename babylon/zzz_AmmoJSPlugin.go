@@ -780,8 +780,8 @@ func (a *AmmoJSPlugin) OnCreateCustomShape() js.Value {
 // SetOnCreateCustomShape sets the OnCreateCustomShape property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#oncreatecustomshape
-func (a *AmmoJSPlugin) SetOnCreateCustomShape(onCreateCustomShape func()) *AmmoJSPlugin {
-	a.p.Set("onCreateCustomShape", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCreateCustomShape(); return nil }))
+func (a *AmmoJSPlugin) SetOnCreateCustomShape(onCreateCustomShape JSFunc) *AmmoJSPlugin {
+	a.p.Set("onCreateCustomShape", js.FuncOf(onCreateCustomShape))
 	return a
 }
 

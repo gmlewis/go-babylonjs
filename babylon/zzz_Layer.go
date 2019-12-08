@@ -213,8 +213,8 @@ func (l *Layer) OnAfterRender() js.Value {
 // SetOnAfterRender sets the OnAfterRender property of class Layer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#onafterrender
-func (l *Layer) SetOnAfterRender(onAfterRender func()) *Layer {
-	l.p.Set("onAfterRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAfterRender(); return nil }))
+func (l *Layer) SetOnAfterRender(onAfterRender JSFunc) *Layer {
+	l.p.Set("onAfterRender", js.FuncOf(onAfterRender))
 	return l
 }
 
@@ -245,8 +245,8 @@ func (l *Layer) OnBeforeRender() js.Value {
 // SetOnBeforeRender sets the OnBeforeRender property of class Layer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#onbeforerender
-func (l *Layer) SetOnBeforeRender(onBeforeRender func()) *Layer {
-	l.p.Set("onBeforeRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onBeforeRender(); return nil }))
+func (l *Layer) SetOnBeforeRender(onBeforeRender JSFunc) *Layer {
+	l.p.Set("onBeforeRender", js.FuncOf(onBeforeRender))
 	return l
 }
 
@@ -277,8 +277,8 @@ func (l *Layer) OnDispose() js.Value {
 // SetOnDispose sets the OnDispose property of class Layer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer#ondispose
-func (l *Layer) SetOnDispose(onDispose func()) *Layer {
-	l.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+func (l *Layer) SetOnDispose(onDispose JSFunc) *Layer {
+	l.p.Set("onDispose", js.FuncOf(onDispose))
 	return l
 }
 

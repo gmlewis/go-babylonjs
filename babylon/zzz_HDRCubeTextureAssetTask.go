@@ -86,13 +86,13 @@ func (ba *Babylon) NewHDRCubeTextureAssetTask(name string, url string, size floa
 // RunTask calls the RunTask method on the HDRCubeTextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#runtask
-func (h *HDRCubeTextureAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+func (h *HDRCubeTextureAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
+	args = append(args, js.FuncOf(onError))
 
 	h.p.Call("runTask", args...)
 }
@@ -172,8 +172,8 @@ func (h *HDRCubeTextureAssetTask) OnError() js.Value {
 // SetOnError sets the OnError property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#onerror
-func (h *HDRCubeTextureAssetTask) SetOnError(onError func()) *HDRCubeTextureAssetTask {
-	h.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (h *HDRCubeTextureAssetTask) SetOnError(onError JSFunc) *HDRCubeTextureAssetTask {
+	h.p.Set("onError", js.FuncOf(onError))
 	return h
 }
 
@@ -188,8 +188,8 @@ func (h *HDRCubeTextureAssetTask) OnSuccess() js.Value {
 // SetOnSuccess sets the OnSuccess property of class HDRCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#onsuccess
-func (h *HDRCubeTextureAssetTask) SetOnSuccess(onSuccess func()) *HDRCubeTextureAssetTask {
-	h.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+func (h *HDRCubeTextureAssetTask) SetOnSuccess(onSuccess JSFunc) *HDRCubeTextureAssetTask {
+	h.p.Set("onSuccess", js.FuncOf(onSuccess))
 	return h
 }
 

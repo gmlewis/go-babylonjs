@@ -243,8 +243,8 @@ func (g *GlowLayer) CustomEmissiveColorSelector() js.Value {
 // SetCustomEmissiveColorSelector sets the CustomEmissiveColorSelector property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#customemissivecolorselector
-func (g *GlowLayer) SetCustomEmissiveColorSelector(customEmissiveColorSelector func()) *GlowLayer {
-	g.p.Set("customEmissiveColorSelector", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customEmissiveColorSelector(); return nil }))
+func (g *GlowLayer) SetCustomEmissiveColorSelector(customEmissiveColorSelector JSFunc) *GlowLayer {
+	g.p.Set("customEmissiveColorSelector", js.FuncOf(customEmissiveColorSelector))
 	return g
 }
 
@@ -259,8 +259,8 @@ func (g *GlowLayer) CustomEmissiveTextureSelector() js.Value {
 // SetCustomEmissiveTextureSelector sets the CustomEmissiveTextureSelector property of class GlowLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#customemissivetextureselector
-func (g *GlowLayer) SetCustomEmissiveTextureSelector(customEmissiveTextureSelector func()) *GlowLayer {
-	g.p.Set("customEmissiveTextureSelector", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customEmissiveTextureSelector(); return nil }))
+func (g *GlowLayer) SetCustomEmissiveTextureSelector(customEmissiveTextureSelector JSFunc) *GlowLayer {
+	g.p.Set("customEmissiveTextureSelector", js.FuncOf(customEmissiveTextureSelector))
 	return g
 }
 

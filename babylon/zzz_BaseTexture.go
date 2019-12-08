@@ -243,12 +243,12 @@ func (b *BaseTexture) UpdateSamplingMode(samplingMode float64) {
 // WhenAllReady calls the WhenAllReady method on the BaseTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#whenallready
-func (b *BaseTexture) WhenAllReady(textures []*BaseTexture, callback func()) {
+func (b *BaseTexture) WhenAllReady(textures []*BaseTexture, callback JSFunc) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, BaseTextureArrayToJSArray(textures))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	b.p.Call("WhenAllReady", args...)
 }
@@ -668,8 +668,8 @@ func (b *BaseTexture) OnDispose() js.Value {
 // SetOnDispose sets the OnDispose property of class BaseTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#ondispose
-func (b *BaseTexture) SetOnDispose(onDispose func()) *BaseTexture {
-	b.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+func (b *BaseTexture) SetOnDispose(onDispose JSFunc) *BaseTexture {
+	b.p.Set("onDispose", js.FuncOf(onDispose))
 	return b
 }
 

@@ -64,14 +64,14 @@ func (gui *GUI) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
 // AddRadioButtonWithHeader calls the AddRadioButtonWithHeader method on the RadioButton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton#addradiobuttonwithheader
-func (r *RadioButton) AddRadioButtonWithHeader(title string, group string, isChecked bool, onValueChanged func()) *StackPanel {
+func (r *RadioButton) AddRadioButtonWithHeader(title string, group string, isChecked bool, onValueChanged JSFunc) *StackPanel {
 
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, title)
 	args = append(args, group)
 	args = append(args, isChecked)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onValueChanged(); return nil }))
+	args = append(args, js.FuncOf(onValueChanged))
 
 	retVal := r.p.Call("AddRadioButtonWithHeader", args...)
 	return StackPanelFromJSObject(retVal, r.ctx)

@@ -51,7 +51,7 @@ func (ba *Babylon) NewGenericController(vrGamepad interface{}) *GenericControlle
 
 // GenericControllerInitControllerMeshOpts contains optional parameters for GenericController.InitControllerMesh.
 type GenericControllerInitControllerMeshOpts struct {
-	MeshLoaded func()
+	MeshLoaded JSFunc
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the GenericController object.
@@ -69,7 +69,7 @@ func (g *GenericController) InitControllerMesh(scene *Scene, opts *GenericContro
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.MeshLoaded(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.MeshLoaded) /* never freed! */)
 	}
 
 	g.p.Call("initControllerMesh", args...)

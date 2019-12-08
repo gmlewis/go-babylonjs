@@ -49,8 +49,8 @@ func (i *ILoadingScreen) DisplayLoadingUI() js.Value {
 // SetDisplayLoadingUI sets the DisplayLoadingUI property of class ILoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iloadingscreen#displayloadingui
-func (i *ILoadingScreen) SetDisplayLoadingUI(displayLoadingUI func()) *ILoadingScreen {
-	i.p.Set("displayLoadingUI", js.FuncOf(func(this js.Value, args []js.Value) interface{} { displayLoadingUI(); return nil }))
+func (i *ILoadingScreen) SetDisplayLoadingUI(displayLoadingUI JSFunc) *ILoadingScreen {
+	i.p.Set("displayLoadingUI", js.FuncOf(displayLoadingUI))
 	return i
 }
 
@@ -65,8 +65,8 @@ func (i *ILoadingScreen) HideLoadingUI() js.Value {
 // SetHideLoadingUI sets the HideLoadingUI property of class ILoadingScreen.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iloadingscreen#hideloadingui
-func (i *ILoadingScreen) SetHideLoadingUI(hideLoadingUI func()) *ILoadingScreen {
-	i.p.Set("hideLoadingUI", js.FuncOf(func(this js.Value, args []js.Value) interface{} { hideLoadingUI(); return nil }))
+func (i *ILoadingScreen) SetHideLoadingUI(hideLoadingUI JSFunc) *ILoadingScreen {
+	i.p.Set("hideLoadingUI", js.FuncOf(hideLoadingUI))
 	return i
 }
 

@@ -414,8 +414,8 @@ func (i *InputBlock) ValueCallback() js.Value {
 // SetValueCallback sets the ValueCallback property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#valuecallback
-func (i *InputBlock) SetValueCallback(valueCallback func()) *InputBlock {
-	i.p.Set("valueCallback", js.FuncOf(func(this js.Value, args []js.Value) interface{} { valueCallback(); return nil }))
+func (i *InputBlock) SetValueCallback(valueCallback JSFunc) *InputBlock {
+	i.p.Set("valueCallback", js.FuncOf(valueCallback))
 	return i
 }
 

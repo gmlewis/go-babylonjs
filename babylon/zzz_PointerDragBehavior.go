@@ -63,7 +63,7 @@ func (ba *Babylon) NewPointerDragBehavior(opts *NewPointerDragBehaviorOpts) *Poi
 
 // PointerDragBehaviorAttachOpts contains optional parameters for PointerDragBehavior.Attach.
 type PointerDragBehaviorAttachOpts struct {
-	Predicate func()
+	Predicate JSFunc
 }
 
 // Attach calls the Attach method on the PointerDragBehavior object.
@@ -81,7 +81,7 @@ func (p *PointerDragBehavior) Attach(ownerNode *AbstractMesh, opts *PointerDragB
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	p.p.Call("attach", args...)
@@ -430,7 +430,7 @@ func (p *PointerDragBehavior) ValidateDrag() js.Value {
 // SetValidateDrag sets the ValidateDrag property of class PointerDragBehavior.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#validatedrag
-func (p *PointerDragBehavior) SetValidateDrag(validateDrag func()) *PointerDragBehavior {
-	p.p.Set("validateDrag", js.FuncOf(func(this js.Value, args []js.Value) interface{} { validateDrag(); return nil }))
+func (p *PointerDragBehavior) SetValidateDrag(validateDrag JSFunc) *PointerDragBehavior {
+	p.p.Set("validateDrag", js.FuncOf(validateDrag))
 	return p
 }

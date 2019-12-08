@@ -178,8 +178,8 @@ func (b *Button) PointerDownAnimation() js.Value {
 // SetPointerDownAnimation sets the PointerDownAnimation property of class Button.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointerdownanimation
-func (b *Button) SetPointerDownAnimation(pointerDownAnimation func()) *Button {
-	b.p.Set("pointerDownAnimation", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerDownAnimation(); return nil }))
+func (b *Button) SetPointerDownAnimation(pointerDownAnimation JSFunc) *Button {
+	b.p.Set("pointerDownAnimation", js.FuncOf(pointerDownAnimation))
 	return b
 }
 
@@ -194,8 +194,8 @@ func (b *Button) PointerEnterAnimation() js.Value {
 // SetPointerEnterAnimation sets the PointerEnterAnimation property of class Button.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointerenteranimation
-func (b *Button) SetPointerEnterAnimation(pointerEnterAnimation func()) *Button {
-	b.p.Set("pointerEnterAnimation", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerEnterAnimation(); return nil }))
+func (b *Button) SetPointerEnterAnimation(pointerEnterAnimation JSFunc) *Button {
+	b.p.Set("pointerEnterAnimation", js.FuncOf(pointerEnterAnimation))
 	return b
 }
 
@@ -210,8 +210,8 @@ func (b *Button) PointerOutAnimation() js.Value {
 // SetPointerOutAnimation sets the PointerOutAnimation property of class Button.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointeroutanimation
-func (b *Button) SetPointerOutAnimation(pointerOutAnimation func()) *Button {
-	b.p.Set("pointerOutAnimation", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerOutAnimation(); return nil }))
+func (b *Button) SetPointerOutAnimation(pointerOutAnimation JSFunc) *Button {
+	b.p.Set("pointerOutAnimation", js.FuncOf(pointerOutAnimation))
 	return b
 }
 
@@ -226,8 +226,8 @@ func (b *Button) PointerUpAnimation() js.Value {
 // SetPointerUpAnimation sets the PointerUpAnimation property of class Button.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button#pointerupanimation
-func (b *Button) SetPointerUpAnimation(pointerUpAnimation func()) *Button {
-	b.p.Set("pointerUpAnimation", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerUpAnimation(); return nil }))
+func (b *Button) SetPointerUpAnimation(pointerUpAnimation JSFunc) *Button {
+	b.p.Set("pointerUpAnimation", js.FuncOf(pointerUpAnimation))
 	return b
 }
 

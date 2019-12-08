@@ -39,11 +39,11 @@ func PBRSubSurfaceConfigurationArrayToJSArray(array []*PBRSubSurfaceConfiguratio
 // NewPBRSubSurfaceConfiguration returns a new PBRSubSurfaceConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration
-func (ba *Babylon) NewPBRSubSurfaceConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRSubSurfaceConfiguration {
+func (ba *Babylon) NewPBRSubSurfaceConfiguration(markAllSubMeshesAsTexturesDirty JSFunc) *PBRSubSurfaceConfiguration {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { markAllSubMeshesAsTexturesDirty(); return nil }))
+	args = append(args, js.FuncOf(markAllSubMeshesAsTexturesDirty))
 
 	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(args...)
 	return PBRSubSurfaceConfigurationFromJSObject(p, ba.ctx)

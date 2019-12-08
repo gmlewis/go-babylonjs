@@ -56,11 +56,11 @@ func (ba *Babylon) NewPhysicsJoint(jsType float64, jointData js.Value) *PhysicsJ
 // ExecuteNativeFunction calls the ExecuteNativeFunction method on the PhysicsJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjoint#executenativefunction
-func (p *PhysicsJoint) ExecuteNativeFunction(jsFunc func()) {
+func (p *PhysicsJoint) ExecuteNativeFunction(jsFunc JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	p.p.Call("executeNativeFunction", args...)
 }

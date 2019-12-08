@@ -65,15 +65,15 @@ func (i *ISceneLoaderPluginBase) DirectLoad(scene *Scene, data string) interface
 
 // ISceneLoaderPluginBaseReadFileOpts contains optional parameters for ISceneLoaderPluginBase.ReadFile.
 type ISceneLoaderPluginBaseReadFileOpts struct {
-	OnProgress     func()
+	OnProgress     JSFunc
 	UseArrayBuffer *bool
-	OnError        func()
+	OnError        JSFunc
 }
 
 // ReadFile calls the ReadFile method on the ISceneLoaderPluginBase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginbase#readfile
-func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file js.Value, onSuccess func(), opts *ISceneLoaderPluginBaseReadFileOpts) *IFileRequest {
+func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file js.Value, onSuccess JSFunc, opts *ISceneLoaderPluginBaseReadFileOpts) *IFileRequest {
 	if opts == nil {
 		opts = &ISceneLoaderPluginBaseReadFileOpts{}
 	}
@@ -82,12 +82,12 @@ func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file js.Value, onSuccess
 
 	args = append(args, scene.JSObject())
 	args = append(args, file)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
 
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.UseArrayBuffer == nil {
 		args = append(args, js.Undefined())
@@ -97,7 +97,7 @@ func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file js.Value, onSuccess
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	retVal := i.p.Call("readFile", args...)
@@ -106,15 +106,15 @@ func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file js.Value, onSuccess
 
 // ISceneLoaderPluginBaseRequestFileOpts contains optional parameters for ISceneLoaderPluginBase.RequestFile.
 type ISceneLoaderPluginBaseRequestFileOpts struct {
-	OnProgress     func()
+	OnProgress     JSFunc
 	UseArrayBuffer *bool
-	OnError        func()
+	OnError        JSFunc
 }
 
 // RequestFile calls the RequestFile method on the ISceneLoaderPluginBase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginbase#requestfile
-func (i *ISceneLoaderPluginBase) RequestFile(scene *Scene, url string, onSuccess func(), opts *ISceneLoaderPluginBaseRequestFileOpts) *IFileRequest {
+func (i *ISceneLoaderPluginBase) RequestFile(scene *Scene, url string, onSuccess JSFunc, opts *ISceneLoaderPluginBaseRequestFileOpts) *IFileRequest {
 	if opts == nil {
 		opts = &ISceneLoaderPluginBaseRequestFileOpts{}
 	}
@@ -123,12 +123,12 @@ func (i *ISceneLoaderPluginBase) RequestFile(scene *Scene, url string, onSuccess
 
 	args = append(args, scene.JSObject())
 	args = append(args, url)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
 
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.UseArrayBuffer == nil {
 		args = append(args, js.Undefined())
@@ -138,7 +138,7 @@ func (i *ISceneLoaderPluginBase) RequestFile(scene *Scene, url string, onSuccess
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	retVal := i.p.Call("requestFile", args...)

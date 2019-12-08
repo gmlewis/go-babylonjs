@@ -18,7 +18,7 @@ func main() {
 
 	b := babylon.New()
 
-	engine := b.NewEngine(canvas, &babylon.NewEngineOpts{Antialias: babylon.Bool(true)}) // Generate the BABYLON 3D engine
+	engine := b.NewEngine(canvas, &babylon.NewEngineOpts{Antialias: Bool(true)}) // Generate the BABYLON 3D engine
 
 	/******* Add the create scene function ******/
 	createScene := func() *babylon.Scene {
@@ -99,7 +99,7 @@ func main() {
 		orbitRadius := 20.0
 
 		//Move the box to see that the camera follows it
-		scene.RegisterBeforeRender(func() {
+		scene.RegisterBeforeRender(func(this js.Value, args []js.Value) interface{} {
 			alpha += 0.01
 			box.Position().SetX(orbitRadius * math.Cos(alpha))
 			box.Position().SetY(orbitRadius * math.Sin(alpha))
@@ -107,6 +107,7 @@ func main() {
 
 			//change the viewing angle of the camera as it follows the box
 			camera.SetRotationOffset(math.Mod(18*alpha, 360))
+			return nil
 		})
 
 		return scene
@@ -116,18 +117,12 @@ func main() {
 	scene := createScene() //Call the createScene function
 
 	// Register a render loop to repeatedly render the scene
-	engine.RunRenderLoop(func() {
-		scene.Render(nil)
-	})
+	engine.RunRenderLoop(scene.RenderLoopFunc(nil))
 
 	// Watch for browser/canvas resize events
 	window := js.Global().Get("window")
-	cb := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
-		engine.Resize()
-		return nil
-	})
-	// Note that "cb" is never released since it is needed for resizing.
-	window.Call("addEventListener", "resize", cb)
+	// Note that engine.ResizeFunc is never released since it is needed for resizing.
+	window.Call("addEventListener", "resize", engine.ResizeFunc())
 
 	// prevent program from terminating
 	c := make(chan struct{}, 0)

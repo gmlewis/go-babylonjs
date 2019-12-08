@@ -1272,8 +1272,8 @@ func (b *BaseParticleSystem) OnAnimationEnd() js.Value {
 // SetOnAnimationEnd sets the OnAnimationEnd property of class BaseParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseparticlesystem#onanimationend
-func (b *BaseParticleSystem) SetOnAnimationEnd(onAnimationEnd func()) *BaseParticleSystem {
-	b.p.Set("onAnimationEnd", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAnimationEnd(); return nil }))
+func (b *BaseParticleSystem) SetOnAnimationEnd(onAnimationEnd JSFunc) *BaseParticleSystem {
+	b.p.Set("onAnimationEnd", js.FuncOf(onAnimationEnd))
 	return b
 }
 

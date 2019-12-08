@@ -97,7 +97,7 @@ func (s *SpriteManager) Dispose() {
 
 // SpriteManagerIntersectsOpts contains optional parameters for SpriteManager.Intersects.
 type SpriteManagerIntersectsOpts struct {
-	Predicate func()
+	Predicate JSFunc
 	FastCheck *bool
 }
 
@@ -117,7 +117,7 @@ func (s *SpriteManager) Intersects(ray *Ray, camera *Camera, opts *SpriteManager
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -131,7 +131,7 @@ func (s *SpriteManager) Intersects(ray *Ray, camera *Camera, opts *SpriteManager
 
 // SpriteManagerMultiIntersectsOpts contains optional parameters for SpriteManager.MultiIntersects.
 type SpriteManagerMultiIntersectsOpts struct {
-	Predicate func()
+	Predicate JSFunc
 }
 
 // MultiIntersects calls the MultiIntersects method on the SpriteManager object.
@@ -150,7 +150,7 @@ func (s *SpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *SpriteMa
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	retVal := s.p.Call("multiIntersects", args...)
@@ -276,8 +276,8 @@ func (s *SpriteManager) OnDispose() js.Value {
 // SetOnDispose sets the OnDispose property of class SpriteManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager#ondispose
-func (s *SpriteManager) SetOnDispose(onDispose func()) *SpriteManager {
-	s.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+func (s *SpriteManager) SetOnDispose(onDispose JSFunc) *SpriteManager {
+	s.p.Set("onDispose", js.FuncOf(onDispose))
 	return s
 }
 

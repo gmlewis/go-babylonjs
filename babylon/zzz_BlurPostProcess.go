@@ -104,8 +104,8 @@ type BlurPostProcessUpdateEffectOpts struct {
 	Uniforms        []string
 	Samplers        []string
 	IndexParameters *interface{}
-	OnCompiled      func()
-	OnError         func()
+	OnCompiled      JSFunc
+	OnError         JSFunc
 }
 
 // UpdateEffect calls the UpdateEffect method on the BlurPostProcess object.
@@ -141,12 +141,12 @@ func (b *BlurPostProcess) UpdateEffect(opts *BlurPostProcessUpdateEffectOpts) {
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnCompiled) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	b.p.Call("updateEffect", args...)

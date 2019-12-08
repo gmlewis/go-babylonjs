@@ -39,12 +39,12 @@ func PredicateConditionArrayToJSArray(array []*PredicateCondition) []interface{}
 // NewPredicateCondition returns a new PredicateCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition
-func (ba *Babylon) NewPredicateCondition(actionManager *ActionManager, predicate func()) *PredicateCondition {
+func (ba *Babylon) NewPredicateCondition(actionManager *ActionManager, predicate JSFunc) *PredicateCondition {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, actionManager.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
+	args = append(args, js.FuncOf(predicate))
 
 	p := ba.ctx.Get("PredicateCondition").New(args...)
 	return PredicateConditionFromJSObject(p, ba.ctx)
@@ -70,7 +70,7 @@ func (p *PredicateCondition) Predicate() js.Value {
 // SetPredicate sets the Predicate property of class PredicateCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition#predicate
-func (p *PredicateCondition) SetPredicate(predicate func()) *PredicateCondition {
-	p.p.Set("predicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
+func (p *PredicateCondition) SetPredicate(predicate JSFunc) *PredicateCondition {
+	p.p.Set("predicate", js.FuncOf(predicate))
 	return p
 }

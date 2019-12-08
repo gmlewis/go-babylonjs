@@ -183,8 +183,8 @@ func (a *AudioSceneComponent) AudioListenerPositionProvider() js.Value {
 // SetAudioListenerPositionProvider sets the AudioListenerPositionProvider property of class AudioSceneComponent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#audiolistenerpositionprovider
-func (a *AudioSceneComponent) SetAudioListenerPositionProvider(audioListenerPositionProvider func()) *AudioSceneComponent {
-	a.p.Set("audioListenerPositionProvider", js.FuncOf(func(this js.Value, args []js.Value) interface{} { audioListenerPositionProvider(); return nil }))
+func (a *AudioSceneComponent) SetAudioListenerPositionProvider(audioListenerPositionProvider JSFunc) *AudioSceneComponent {
+	a.p.Set("audioListenerPositionProvider", js.FuncOf(audioListenerPositionProvider))
 	return a
 }
 

@@ -843,8 +843,8 @@ func (p *ParticleSystem) OnDispose() js.Value {
 // SetOnDispose sets the OnDispose property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#ondispose
-func (p *ParticleSystem) SetOnDispose(onDispose func()) *ParticleSystem {
-	p.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+func (p *ParticleSystem) SetOnDispose(onDispose JSFunc) *ParticleSystem {
+	p.p.Set("onDispose", js.FuncOf(onDispose))
 	return p
 }
 
@@ -895,8 +895,8 @@ func (p *ParticleSystem) RecycleParticle() js.Value {
 // SetRecycleParticle sets the RecycleParticle property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#recycleparticle
-func (p *ParticleSystem) SetRecycleParticle(recycleParticle func()) *ParticleSystem {
-	p.p.Set("recycleParticle", js.FuncOf(func(this js.Value, args []js.Value) interface{} { recycleParticle(); return nil }))
+func (p *ParticleSystem) SetRecycleParticle(recycleParticle JSFunc) *ParticleSystem {
+	p.p.Set("recycleParticle", js.FuncOf(recycleParticle))
 	return p
 }
 
@@ -911,8 +911,8 @@ func (p *ParticleSystem) StartDirectionFunction() js.Value {
 // SetStartDirectionFunction sets the StartDirectionFunction property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#startdirectionfunction
-func (p *ParticleSystem) SetStartDirectionFunction(startDirectionFunction func()) *ParticleSystem {
-	p.p.Set("startDirectionFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { startDirectionFunction(); return nil }))
+func (p *ParticleSystem) SetStartDirectionFunction(startDirectionFunction JSFunc) *ParticleSystem {
+	p.p.Set("startDirectionFunction", js.FuncOf(startDirectionFunction))
 	return p
 }
 
@@ -927,8 +927,8 @@ func (p *ParticleSystem) StartPositionFunction() js.Value {
 // SetStartPositionFunction sets the StartPositionFunction property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#startpositionfunction
-func (p *ParticleSystem) SetStartPositionFunction(startPositionFunction func()) *ParticleSystem {
-	p.p.Set("startPositionFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { startPositionFunction(); return nil }))
+func (p *ParticleSystem) SetStartPositionFunction(startPositionFunction JSFunc) *ParticleSystem {
+	p.p.Set("startPositionFunction", js.FuncOf(startPositionFunction))
 	return p
 }
 
@@ -963,8 +963,8 @@ func (p *ParticleSystem) UpdateFunction() js.Value {
 // SetUpdateFunction sets the UpdateFunction property of class ParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#updatefunction
-func (p *ParticleSystem) SetUpdateFunction(updateFunction func()) *ParticleSystem {
-	p.p.Set("updateFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateFunction(); return nil }))
+func (p *ParticleSystem) SetUpdateFunction(updateFunction JSFunc) *ParticleSystem {
+	p.p.Set("updateFunction", js.FuncOf(updateFunction))
 	return p
 }
 

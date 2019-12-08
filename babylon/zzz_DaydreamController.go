@@ -51,7 +51,7 @@ func (ba *Babylon) NewDaydreamController(vrGamepad interface{}) *DaydreamControl
 
 // DaydreamControllerInitControllerMeshOpts contains optional parameters for DaydreamController.InitControllerMesh.
 type DaydreamControllerInitControllerMeshOpts struct {
-	MeshLoaded func()
+	MeshLoaded JSFunc
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the DaydreamController object.
@@ -69,7 +69,7 @@ func (d *DaydreamController) InitControllerMesh(scene *Scene, opts *DaydreamCont
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.MeshLoaded(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.MeshLoaded) /* never freed! */)
 	}
 
 	d.p.Call("initControllerMesh", args...)

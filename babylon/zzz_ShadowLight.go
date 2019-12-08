@@ -228,8 +228,8 @@ func (s *ShadowLight) CustomProjectionMatrixBuilder() js.Value {
 // SetCustomProjectionMatrixBuilder sets the CustomProjectionMatrixBuilder property of class ShadowLight.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight#customprojectionmatrixbuilder
-func (s *ShadowLight) SetCustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *ShadowLight {
-	s.p.Set("customProjectionMatrixBuilder", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customProjectionMatrixBuilder(); return nil }))
+func (s *ShadowLight) SetCustomProjectionMatrixBuilder(customProjectionMatrixBuilder JSFunc) *ShadowLight {
+	s.p.Set("customProjectionMatrixBuilder", js.FuncOf(customProjectionMatrixBuilder))
 	return s
 }
 

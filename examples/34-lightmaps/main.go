@@ -17,7 +17,7 @@ func main() {
 
 	b := babylon.New()
 
-	engine := b.NewEngine(canvas, &babylon.NewEngineOpts{Antialias: babylon.Bool(true)}) // Generate the BABYLON 3D engine
+	engine := b.NewEngine(canvas, &babylon.NewEngineOpts{Antialias: Bool(true)}) // Generate the BABYLON 3D engine
 
 	/******* Add the create scene function ******/
 	createScene := func() *babylon.Scene {
@@ -47,14 +47,15 @@ func main() {
 		sphere := mb.CreateSphere("sphere1", 16, 1, &babylon.MeshCreateSphereOpts{Scene: scene})
 		sphere.Position().SetZ(-1)
 		sphere.Position().SetY(2)
-		shadowGenerator := b.NewShadowGenerator(1024, babylon.IShadowLightFromJSObject(light.JSObject(), b.JSObject()), nil)
+		shadowGenerator := b.NewShadowGenerator(1024, light.IShadowLight(), nil)
 		shadowGenerator.AddShadowCaster(sphere.AbstractMesh, nil)
 
 		// Move light in the scene
 		curTime := 0.0
-		scene.OnBeforeRenderObservable().Add(func() {
+		scene.OnBeforeRenderObservable().Add(func(this js.Value, args []js.Value) interface{} {
 			curTime += engine.GetDeltaTime()
 			light.Position().SetX(math.Sin(curTime/1000.0) * 5.0)
+			return nil
 		}, nil)
 
 		// Press space to swich lightmap mode
@@ -85,18 +86,12 @@ func main() {
 	scene := createScene() //Call the createScene function
 
 	// Register a render loop to repeatedly render the scene
-	engine.RunRenderLoop(func() {
-		scene.Render(nil)
-	})
+	engine.RunRenderLoop(scene.RenderLoopFunc(nil))
 
 	// Watch for browser/canvas resize events
 	window := js.Global().Get("window")
-	cb := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
-		engine.Resize()
-		return nil
-	})
-	// Note that "cb" is never released since it is needed for resizing.
-	window.Call("addEventListener", "resize", cb)
+	// Note that engine.ResizeFunc is never released since it is needed for resizing.
+	window.Call("addEventListener", "resize", engine.ResizeFunc())
 
 	// prevent program from terminating
 	c := make(chan struct{}, 0)

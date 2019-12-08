@@ -43,8 +43,8 @@ type NewTextureOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       func()
-	OnError      func()
+	OnLoad       JSFunc
+	OnError      JSFunc
 	Buffer       *string
 	DeleteBuffer *bool
 	Format       *float64
@@ -82,12 +82,12 @@ func (ba *Babylon) NewTexture(url string, sceneOrEngine *Scene, opts *NewTexture
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnLoad) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.Buffer == nil {
 		args = append(args, js.Undefined())
@@ -128,8 +128,8 @@ type TextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       func()
-	OnError      func()
+	OnLoad       JSFunc
+	OnError      JSFunc
 	Format       *float64
 }
 
@@ -165,12 +165,12 @@ func (t *Texture) CreateFromBase64String(data string, name string, scene *Scene,
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnLoad) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.Format == nil {
 		args = append(args, js.Undefined())
@@ -239,8 +239,8 @@ type TextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       func()
-	OnError      func()
+	OnLoad       JSFunc
+	OnError      JSFunc
 	Format       *float64
 }
 
@@ -281,12 +281,12 @@ func (t *Texture) LoadFromDataString(name string, buffer interface{}, scene *Sce
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnLoad) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.Format == nil {
 		args = append(args, js.Undefined())
@@ -325,7 +325,7 @@ func (t *Texture) Serialize() interface{} {
 // TextureUpdateURLOpts contains optional parameters for Texture.UpdateURL.
 type TextureUpdateURLOpts struct {
 	Buffer *string
-	OnLoad func()
+	OnLoad JSFunc
 }
 
 // UpdateURL calls the UpdateURL method on the Texture object.
@@ -348,7 +348,7 @@ func (t *Texture) UpdateURL(url string, opts *TextureUpdateURLOpts) {
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnLoad) /* never freed! */)
 	}
 
 	t.p.Call("updateURL", args...)

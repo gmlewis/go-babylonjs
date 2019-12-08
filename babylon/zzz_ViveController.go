@@ -51,7 +51,7 @@ func (ba *Babylon) NewViveController(vrGamepad interface{}) *ViveController {
 
 // ViveControllerInitControllerMeshOpts contains optional parameters for ViveController.InitControllerMesh.
 type ViveControllerInitControllerMeshOpts struct {
-	MeshLoaded func()
+	MeshLoaded JSFunc
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the ViveController object.
@@ -69,7 +69,7 @@ func (v *ViveController) InitControllerMesh(scene *Scene, opts *ViveControllerIn
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.MeshLoaded(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.MeshLoaded) /* never freed! */)
 	}
 
 	v.p.Call("initControllerMesh", args...)

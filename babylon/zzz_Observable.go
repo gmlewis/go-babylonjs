@@ -44,11 +44,11 @@ func ObservableArrayToJSArray(array []*Observable) []interface{} {
 // NewObservable returns a new Observable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable
-func (ba *Babylon) NewObservable(onObserverAdded func()) *Observable {
+func (ba *Babylon) NewObservable(onObserverAdded JSFunc) *Observable {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onObserverAdded(); return nil }))
+	args = append(args, js.FuncOf(onObserverAdded))
 
 	p := ba.ctx.Get("Observable").New(args...)
 	return ObservableFromJSObject(p, ba.ctx)
@@ -65,14 +65,14 @@ type ObservableAddOpts struct {
 // Add calls the Add method on the Observable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#add
-func (o *Observable) Add(callback func(), opts *ObservableAddOpts) *Observer {
+func (o *Observable) Add(callback JSFunc, opts *ObservableAddOpts) *Observer {
 	if opts == nil {
 		opts = &ObservableAddOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+4)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	if opts.Mask == nil {
 		args = append(args, js.Undefined())
@@ -102,11 +102,11 @@ func (o *Observable) Add(callback func(), opts *ObservableAddOpts) *Observer {
 // AddOnce calls the AddOnce method on the Observable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#addonce
-func (o *Observable) AddOnce(callback func()) *Observer {
+func (o *Observable) AddOnce(callback JSFunc) *Observer {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	retVal := o.p.Call("addOnce", args...)
 	return ObserverFromJSObject(retVal, o.ctx)
@@ -313,14 +313,14 @@ type ObservableRemoveCallbackOpts struct {
 // RemoveCallback calls the RemoveCallback method on the Observable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable#removecallback
-func (o *Observable) RemoveCallback(callback func(), opts *ObservableRemoveCallbackOpts) bool {
+func (o *Observable) RemoveCallback(callback JSFunc, opts *ObservableRemoveCallbackOpts) bool {
 	if opts == nil {
 		opts = &ObservableRemoveCallbackOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	if opts.Scope == nil {
 		args = append(args, js.Undefined())

@@ -60,11 +60,11 @@ func (w *WorkerPool) Dispose() {
 // Push calls the Push method on the WorkerPool object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.workerpool#push
-func (w *WorkerPool) Push(action func()) {
+func (w *WorkerPool) Push(action JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
+	args = append(args, js.FuncOf(action))
 
 	w.p.Call("push", args...)
 }

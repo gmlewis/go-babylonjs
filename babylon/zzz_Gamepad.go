@@ -94,11 +94,11 @@ func (g *Gamepad) Dispose() {
 // Onleftstickchanged calls the Onleftstickchanged method on the Gamepad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepad#onleftstickchanged
-func (g *Gamepad) Onleftstickchanged(callback func()) {
+func (g *Gamepad) Onleftstickchanged(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	g.p.Call("onleftstickchanged", args...)
 }
@@ -106,11 +106,11 @@ func (g *Gamepad) Onleftstickchanged(callback func()) {
 // Onrightstickchanged calls the Onrightstickchanged method on the Gamepad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepad#onrightstickchanged
-func (g *Gamepad) Onrightstickchanged(callback func()) {
+func (g *Gamepad) Onrightstickchanged(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	g.p.Call("onrightstickchanged", args...)
 }

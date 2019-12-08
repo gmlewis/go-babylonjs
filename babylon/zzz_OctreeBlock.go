@@ -41,7 +41,7 @@ func OctreeBlockArrayToJSArray(array []*OctreeBlock) []interface{} {
 // NewOctreeBlock returns a new OctreeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock
-func (ba *Babylon) NewOctreeBlock(minPoint *Vector3, maxPoint *Vector3, capacity float64, depth float64, maxDepth float64, creationFunc func()) *OctreeBlock {
+func (ba *Babylon) NewOctreeBlock(minPoint *Vector3, maxPoint *Vector3, capacity float64, depth float64, maxDepth float64, creationFunc JSFunc) *OctreeBlock {
 
 	args := make([]interface{}, 0, 6+0)
 
@@ -50,7 +50,7 @@ func (ba *Babylon) NewOctreeBlock(minPoint *Vector3, maxPoint *Vector3, capacity
 	args = append(args, capacity)
 	args = append(args, depth)
 	args = append(args, maxDepth)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { creationFunc(); return nil }))
+	args = append(args, js.FuncOf(creationFunc))
 
 	p := ba.ctx.Get("OctreeBlock").New(args...)
 	return OctreeBlockFromJSObject(p, ba.ctx)

@@ -47,7 +47,7 @@ type NewPostProcessRenderEffectOpts struct {
 // NewPostProcessRenderEffect returns a new PostProcessRenderEffect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect
-func (ba *Babylon) NewPostProcessRenderEffect(engine *Engine, name string, getPostProcesses func(), opts *NewPostProcessRenderEffectOpts) *PostProcessRenderEffect {
+func (ba *Babylon) NewPostProcessRenderEffect(engine *Engine, name string, getPostProcesses JSFunc, opts *NewPostProcessRenderEffectOpts) *PostProcessRenderEffect {
 	if opts == nil {
 		opts = &NewPostProcessRenderEffectOpts{}
 	}
@@ -56,7 +56,7 @@ func (ba *Babylon) NewPostProcessRenderEffect(engine *Engine, name string, getPo
 
 	args = append(args, engine.JSObject())
 	args = append(args, name)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { getPostProcesses(); return nil }))
+	args = append(args, js.FuncOf(getPostProcesses))
 
 	if opts.SingleInstance == nil {
 		args = append(args, js.Undefined())

@@ -17,7 +17,7 @@ func main() {
 
 	b := babylon.New()
 
-	engine := b.NewEngine(canvas, &babylon.NewEngineOpts{Antialias: babylon.Bool(true)}) // Generate the BABYLON 3D engine
+	engine := b.NewEngine(canvas, &babylon.NewEngineOpts{Antialias: Bool(true)}) // Generate the BABYLON 3D engine
 
 	/******* Add the create scene function ******/
 	createScene := func() *babylon.Scene {
@@ -89,20 +89,24 @@ func main() {
 		ground.SetMaterial(groundMat.Material)
 
 		/*******************GUI***********************/
-		makeYellow := func() {
+		makeYellow := func(this js.Value, args []js.Value) interface{} {
 			groundMat.SetDiffuseColor(mats[0])
+			return nil
 		}
 
-		makePurple := func() {
+		makePurple := func(this js.Value, args []js.Value) interface{} {
 			groundMat.SetDiffuseColor(mats[1])
+			return nil
 		}
 
-		makeCyan := func() {
+		makeCyan := func(this js.Value, args []js.Value) interface{} {
 			groundMat.SetDiffuseColor(mats[2])
+			return nil
 		}
 
-		makeWhite := func() {
+		makeWhite := func(this js.Value, args []js.Value) interface{} {
 			groundMat.SetDiffuseColor(mats[3])
+			return nil
 		}
 
 		gui := b.GUI()
@@ -132,18 +136,12 @@ func main() {
 	scene := createScene() //Call the createScene function
 
 	// Register a render loop to repeatedly render the scene
-	engine.RunRenderLoop(func() {
-		scene.Render(nil)
-	})
+	engine.RunRenderLoop(scene.RenderLoopFunc(nil))
 
 	// Watch for browser/canvas resize events
 	window := js.Global().Get("window")
-	cb := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
-		engine.Resize()
-		return nil
-	})
-	// Note that "cb" is never released since it is needed for resizing.
-	window.Call("addEventListener", "resize", cb)
+	// Note that engine.ResizeFunc is never released since it is needed for resizing.
+	window.Call("addEventListener", "resize", engine.ResizeFunc())
 
 	// prevent program from terminating
 	c := make(chan struct{}, 0)

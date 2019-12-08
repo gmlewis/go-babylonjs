@@ -107,7 +107,7 @@ func (n *Node) AddNodeConstructor(jsType string, constructorFunc js.Value) {
 type NodeBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd func()
+	OnAnimationEnd JSFunc
 }
 
 // BeginAnimation calls the BeginAnimation method on the Node object.
@@ -135,7 +135,7 @@ func (n *Node) BeginAnimation(name string, opts *NodeBeginAnimationOpts) *Animat
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 
 	retVal := n.p.Call("beginAnimation", args...)
@@ -321,7 +321,7 @@ func (n *Node) GetBehaviorByName(name string) js.Value {
 // NodeGetChildMeshesOpts contains optional parameters for Node.GetChildMeshes.
 type NodeGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             func()
+	Predicate             JSFunc
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the Node object.
@@ -342,7 +342,7 @@ func (n *Node) GetChildMeshes(opts *NodeGetChildMeshesOpts) []*AbstractMesh {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	retVal := n.p.Call("getChildMeshes", args...)
@@ -355,7 +355,7 @@ func (n *Node) GetChildMeshes(opts *NodeGetChildMeshesOpts) []*AbstractMesh {
 
 // NodeGetChildrenOpts contains optional parameters for Node.GetChildren.
 type NodeGetChildrenOpts struct {
-	Predicate             func()
+	Predicate             JSFunc
 	DirectDescendantsOnly *bool
 }
 
@@ -372,7 +372,7 @@ func (n *Node) GetChildren(opts *NodeGetChildrenOpts) []*Node {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 	if opts.DirectDescendantsOnly == nil {
 		args = append(args, js.Undefined())
@@ -400,7 +400,7 @@ func (n *Node) GetClassName() string {
 // NodeGetDescendantsOpts contains optional parameters for Node.GetDescendants.
 type NodeGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             func()
+	Predicate             JSFunc
 }
 
 // GetDescendants calls the GetDescendants method on the Node object.
@@ -421,7 +421,7 @@ func (n *Node) GetDescendants(opts *NodeGetDescendantsOpts) []*Node {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	retVal := n.p.Call("getDescendants", args...)
@@ -444,7 +444,7 @@ func (n *Node) GetEngine() *Engine {
 // NodeGetHierarchyBoundingVectorsOpts contains optional parameters for Node.GetHierarchyBoundingVectors.
 type NodeGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          func()
+	Predicate          JSFunc
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the Node object.
@@ -465,7 +465,7 @@ func (n *Node) GetHierarchyBoundingVectors(opts *NodeGetHierarchyBoundingVectors
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	retVal := n.p.Call("getHierarchyBoundingVectors", args...)
@@ -757,8 +757,8 @@ func (n *Node) OnDispose() js.Value {
 // SetOnDispose sets the OnDispose property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#ondispose
-func (n *Node) SetOnDispose(onDispose func()) *Node {
-	n.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+func (n *Node) SetOnDispose(onDispose JSFunc) *Node {
+	n.p.Set("onDispose", js.FuncOf(onDispose))
 	return n
 }
 
@@ -789,8 +789,8 @@ func (n *Node) OnReady() js.Value {
 // SetOnReady sets the OnReady property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#onready
-func (n *Node) SetOnReady(onReady func()) *Node {
-	n.p.Set("onReady", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onReady(); return nil }))
+func (n *Node) SetOnReady(onReady JSFunc) *Node {
+	n.p.Set("onReady", js.FuncOf(onReady))
 	return n
 }
 

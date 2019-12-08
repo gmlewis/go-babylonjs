@@ -59,7 +59,7 @@ func (w *WebVRController) Dispose() {
 
 // WebVRControllerInitControllerMeshOpts contains optional parameters for WebVRController.InitControllerMesh.
 type WebVRControllerInitControllerMeshOpts struct {
-	MeshLoaded func()
+	MeshLoaded JSFunc
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the WebVRController object.
@@ -77,7 +77,7 @@ func (w *WebVRController) InitControllerMesh(scene *Scene, opts *WebVRController
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.MeshLoaded(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.MeshLoaded) /* never freed! */)
 	}
 
 	w.p.Call("initControllerMesh", args...)
@@ -86,11 +86,11 @@ func (w *WebVRController) InitControllerMesh(scene *Scene, opts *WebVRController
 // OnButtonStateChange calls the OnButtonStateChange method on the WebVRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#onbuttonstatechange
-func (w *WebVRController) OnButtonStateChange(callback func()) {
+func (w *WebVRController) OnButtonStateChange(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	w.p.Call("onButtonStateChange", args...)
 }

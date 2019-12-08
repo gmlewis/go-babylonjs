@@ -46,7 +46,7 @@ type NewExecuteCodeActionOpts struct {
 // NewExecuteCodeAction returns a new ExecuteCodeAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction
-func (ba *Babylon) NewExecuteCodeAction(triggerOptions interface{}, jsFunc func(), opts *NewExecuteCodeActionOpts) *ExecuteCodeAction {
+func (ba *Babylon) NewExecuteCodeAction(triggerOptions interface{}, jsFunc JSFunc, opts *NewExecuteCodeActionOpts) *ExecuteCodeAction {
 	if opts == nil {
 		opts = &NewExecuteCodeActionOpts{}
 	}
@@ -54,7 +54,7 @@ func (ba *Babylon) NewExecuteCodeAction(triggerOptions interface{}, jsFunc func(
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, triggerOptions)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	if opts.Condition == nil {
 		args = append(args, js.Undefined())
@@ -89,7 +89,7 @@ func (e *ExecuteCodeAction) Func() js.Value {
 // SetFunc sets the Func property of class ExecuteCodeAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction#func
-func (e *ExecuteCodeAction) SetFunc(jsFunc func()) *ExecuteCodeAction {
-	e.p.Set("func", js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+func (e *ExecuteCodeAction) SetFunc(jsFunc JSFunc) *ExecuteCodeAction {
+	e.p.Set("func", js.FuncOf(jsFunc))
 	return e
 }

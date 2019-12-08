@@ -64,12 +64,12 @@ func (gui *GUI) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
 // AddCheckBoxWithHeader calls the AddCheckBoxWithHeader method on the Checkbox object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.checkbox#addcheckboxwithheader
-func (c *Checkbox) AddCheckBoxWithHeader(title string, onValueChanged func()) *StackPanel {
+func (c *Checkbox) AddCheckBoxWithHeader(title string, onValueChanged JSFunc) *StackPanel {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, title)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onValueChanged(); return nil }))
+	args = append(args, js.FuncOf(onValueChanged))
 
 	retVal := c.p.Call("AddCheckBoxWithHeader", args...)
 	return StackPanelFromJSObject(retVal, c.ctx)

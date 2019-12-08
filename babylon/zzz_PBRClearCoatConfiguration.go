@@ -39,11 +39,11 @@ func PBRClearCoatConfigurationArrayToJSArray(array []*PBRClearCoatConfiguration)
 // NewPBRClearCoatConfiguration returns a new PBRClearCoatConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration
-func (ba *Babylon) NewPBRClearCoatConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRClearCoatConfiguration {
+func (ba *Babylon) NewPBRClearCoatConfiguration(markAllSubMeshesAsTexturesDirty JSFunc) *PBRClearCoatConfiguration {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { markAllSubMeshesAsTexturesDirty(); return nil }))
+	args = append(args, js.FuncOf(markAllSubMeshesAsTexturesDirty))
 
 	p := ba.ctx.Get("PBRClearCoatConfiguration").New(args...)
 	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)

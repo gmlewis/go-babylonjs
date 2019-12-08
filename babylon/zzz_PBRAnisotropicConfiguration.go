@@ -39,11 +39,11 @@ func PBRAnisotropicConfigurationArrayToJSArray(array []*PBRAnisotropicConfigurat
 // NewPBRAnisotropicConfiguration returns a new PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration
-func (ba *Babylon) NewPBRAnisotropicConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRAnisotropicConfiguration {
+func (ba *Babylon) NewPBRAnisotropicConfiguration(markAllSubMeshesAsTexturesDirty JSFunc) *PBRAnisotropicConfiguration {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { markAllSubMeshesAsTexturesDirty(); return nil }))
+	args = append(args, js.FuncOf(markAllSubMeshesAsTexturesDirty))
 
 	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(args...)
 	return PBRAnisotropicConfigurationFromJSObject(p, ba.ctx)

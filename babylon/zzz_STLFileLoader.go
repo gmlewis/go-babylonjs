@@ -73,7 +73,7 @@ func (s *STLFileLoader) Load(scene *Scene, data interface{}, rootUrl string) boo
 
 // STLFileLoaderLoadAssetContainerOpts contains optional parameters for STLFileLoader.LoadAssetContainer.
 type STLFileLoaderLoadAssetContainerOpts struct {
-	OnError func()
+	OnError JSFunc
 }
 
 // LoadAssetContainer calls the LoadAssetContainer method on the STLFileLoader object.
@@ -93,7 +93,7 @@ func (s *STLFileLoader) LoadAssetContainer(scene *Scene, data string, rootUrl st
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	retVal := s.p.Call("loadAssetContainer", args...)

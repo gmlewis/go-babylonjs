@@ -110,7 +110,7 @@ func (c *Control) GetClassName() string {
 // ControlGetDescendantsOpts contains optional parameters for Control.GetDescendants.
 type ControlGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             func()
+	Predicate             JSFunc
 }
 
 // GetDescendants calls the GetDescendants method on the Control object.
@@ -131,7 +131,7 @@ func (c *Control) GetDescendants(opts *ControlGetDescendantsOpts) []*Control {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	retVal := c.p.Call("getDescendants", args...)
@@ -145,7 +145,7 @@ func (c *Control) GetDescendants(opts *ControlGetDescendantsOpts) []*Control {
 // ControlGetDescendantsToRefOpts contains optional parameters for Control.GetDescendantsToRef.
 type ControlGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             func()
+	Predicate             JSFunc
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Control object.
@@ -168,7 +168,7 @@ func (c *Control) GetDescendantsToRef(results []*Control, opts *ControlGetDescen
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	c.p.Call("getDescendantsToRef", args...)

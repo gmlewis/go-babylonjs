@@ -42,9 +42,9 @@ type NewAnimatableOpts struct {
 	ToFrame         *float64
 	LoopAnimation   *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  func()
+	OnAnimationEnd  JSFunc
 	Animations      []*Animation
-	OnAnimationLoop func()
+	OnAnimationLoop JSFunc
 }
 
 // NewAnimatable returns a new Animatable object.
@@ -83,7 +83,7 @@ func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnim
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 	if opts.Animations == nil {
 		args = append(args, js.Undefined())
@@ -93,7 +93,7 @@ func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnim
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationLoop) /* never freed! */)
 	}
 
 	p := ba.ctx.Get("Animatable").New(args...)
@@ -211,7 +211,7 @@ func (a *Animatable) Restart() {
 // AnimatableStopOpts contains optional parameters for Animatable.Stop.
 type AnimatableStopOpts struct {
 	AnimationName *string
-	TargetMask    func()
+	TargetMask    JSFunc
 }
 
 // Stop calls the Stop method on the Animatable object.
@@ -232,7 +232,7 @@ func (a *Animatable) Stop(opts *AnimatableStopOpts) {
 	if opts.TargetMask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetMask(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.TargetMask) /* never freed! */)
 	}
 
 	a.p.Call("stop", args...)
@@ -351,8 +351,8 @@ func (a *Animatable) OnAnimationEnd() js.Value {
 // SetOnAnimationEnd sets the OnAnimationEnd property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationend
-func (a *Animatable) SetOnAnimationEnd(onAnimationEnd func()) *Animatable {
-	a.p.Set("onAnimationEnd", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAnimationEnd(); return nil }))
+func (a *Animatable) SetOnAnimationEnd(onAnimationEnd JSFunc) *Animatable {
+	a.p.Set("onAnimationEnd", js.FuncOf(onAnimationEnd))
 	return a
 }
 
@@ -383,8 +383,8 @@ func (a *Animatable) OnAnimationLoop() js.Value {
 // SetOnAnimationLoop sets the OnAnimationLoop property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#onanimationloop
-func (a *Animatable) SetOnAnimationLoop(onAnimationLoop func()) *Animatable {
-	a.p.Set("onAnimationLoop", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAnimationLoop(); return nil }))
+func (a *Animatable) SetOnAnimationLoop(onAnimationLoop JSFunc) *Animatable {
+	a.p.Set("onAnimationLoop", js.FuncOf(onAnimationLoop))
 	return a
 }
 

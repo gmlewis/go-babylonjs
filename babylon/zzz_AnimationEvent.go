@@ -44,7 +44,7 @@ type NewAnimationEventOpts struct {
 // NewAnimationEvent returns a new AnimationEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent
-func (ba *Babylon) NewAnimationEvent(frame float64, action func(), opts *NewAnimationEventOpts) *AnimationEvent {
+func (ba *Babylon) NewAnimationEvent(frame float64, action JSFunc, opts *NewAnimationEventOpts) *AnimationEvent {
 	if opts == nil {
 		opts = &NewAnimationEventOpts{}
 	}
@@ -52,7 +52,7 @@ func (ba *Babylon) NewAnimationEvent(frame float64, action func(), opts *NewAnim
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, frame)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
+	args = append(args, js.FuncOf(action))
 
 	if opts.OnlyOnce == nil {
 		args = append(args, js.Undefined())
@@ -75,8 +75,8 @@ func (a *AnimationEvent) Action() js.Value {
 // SetAction sets the Action property of class AnimationEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent#action
-func (a *AnimationEvent) SetAction(action func()) *AnimationEvent {
-	a.p.Set("action", js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
+func (a *AnimationEvent) SetAction(action JSFunc) *AnimationEvent {
+	a.p.Set("action", js.FuncOf(action))
 	return a
 }
 

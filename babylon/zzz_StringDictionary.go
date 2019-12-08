@@ -88,11 +88,11 @@ func (s *StringDictionary) CopyFrom(source *StringDictionary) {
 // ForEach calls the ForEach method on the StringDictionary object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stringdictionary#foreach
-func (s *StringDictionary) ForEach(callback func()) {
+func (s *StringDictionary) ForEach(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	s.p.Call("forEach", args...)
 }
@@ -140,12 +140,12 @@ func (s *StringDictionary) GetOrAdd(key string, val *T) *T {
 // GetOrAddWithFactory calls the GetOrAddWithFactory method on the StringDictionary object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stringdictionary#getoraddwithfactory
-func (s *StringDictionary) GetOrAddWithFactory(key string, factory func()) *T {
+func (s *StringDictionary) GetOrAddWithFactory(key string, factory JSFunc) *T {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, key)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { factory(); return nil }))
+	args = append(args, js.FuncOf(factory))
 
 	retVal := s.p.Call("getOrAddWithFactory", args...)
 	return TFromJSObject(retVal, s.ctx)

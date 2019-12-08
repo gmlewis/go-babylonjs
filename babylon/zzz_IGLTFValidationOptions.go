@@ -47,8 +47,8 @@ func (i *IGLTFValidationOptions) ExternalResourceFunction() js.Value {
 // SetExternalResourceFunction sets the ExternalResourceFunction property of class IGLTFValidationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.igltfvalidationoptions#externalresourcefunction
-func (i *IGLTFValidationOptions) SetExternalResourceFunction(externalResourceFunction func()) *IGLTFValidationOptions {
-	i.p.Set("externalResourceFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { externalResourceFunction(); return nil }))
+func (i *IGLTFValidationOptions) SetExternalResourceFunction(externalResourceFunction JSFunc) *IGLTFValidationOptions {
+	i.p.Set("externalResourceFunction", js.FuncOf(externalResourceFunction))
 	return i
 }
 

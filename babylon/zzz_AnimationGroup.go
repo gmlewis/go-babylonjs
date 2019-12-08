@@ -79,7 +79,7 @@ func (a *AnimationGroup) AddTargetedAnimation(animation *Animation, target inter
 
 // AnimationGroupCloneOpts contains optional parameters for AnimationGroup.Clone.
 type AnimationGroupCloneOpts struct {
-	TargetConverter func()
+	TargetConverter JSFunc
 }
 
 // Clone calls the Clone method on the AnimationGroup object.
@@ -97,7 +97,7 @@ func (a *AnimationGroup) Clone(newName string, opts *AnimationGroupCloneOpts) *A
 	if opts.TargetConverter == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetConverter(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.TargetConverter) /* never freed! */)
 	}
 
 	retVal := a.p.Call("clone", args...)

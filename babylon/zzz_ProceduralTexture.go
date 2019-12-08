@@ -384,8 +384,8 @@ func (p *ProceduralTexture) OnGenerated() js.Value {
 // SetOnGenerated sets the OnGenerated property of class ProceduralTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongenerated
-func (p *ProceduralTexture) SetOnGenerated(onGenerated func()) *ProceduralTexture {
-	p.p.Set("onGenerated", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onGenerated(); return nil }))
+func (p *ProceduralTexture) SetOnGenerated(onGenerated JSFunc) *ProceduralTexture {
+	p.p.Set("onGenerated", js.FuncOf(onGenerated))
 	return p
 }
 

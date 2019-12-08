@@ -162,7 +162,7 @@ func (v *VertexBuffer) Dispose() {
 // ForEach calls the ForEach method on the VertexBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#foreach
-func (v *VertexBuffer) ForEach(data []float64, byteOffset float64, byteStride float64, componentCount float64, componentType float64, count float64, normalized bool, callback func()) {
+func (v *VertexBuffer) ForEach(data []float64, byteOffset float64, byteStride float64, componentCount float64, componentType float64, count float64, normalized bool, callback JSFunc) {
 
 	args := make([]interface{}, 0, 8+0)
 
@@ -173,7 +173,7 @@ func (v *VertexBuffer) ForEach(data []float64, byteOffset float64, byteStride fl
 	args = append(args, componentType)
 	args = append(args, count)
 	args = append(args, normalized)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	v.p.Call("ForEach", args...)
 }

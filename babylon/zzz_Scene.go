@@ -291,11 +291,11 @@ func (s *Scene) AttachControl(opts *SceneAttachControlOpts) {
 type SceneBeginAnimationOpts struct {
 	Loop            *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  func()
+	OnAnimationEnd  JSFunc
 	Animatable      *Animatable
 	StopCurrent     *bool
-	TargetMask      func()
-	OnAnimationLoop func()
+	TargetMask      JSFunc
+	OnAnimationLoop JSFunc
 }
 
 // BeginAnimation calls the BeginAnimation method on the Scene object.
@@ -325,7 +325,7 @@ func (s *Scene) BeginAnimation(target interface{}, from float64, to float64, opt
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 	if opts.Animatable == nil {
 		args = append(args, js.Undefined())
@@ -340,12 +340,12 @@ func (s *Scene) BeginAnimation(target interface{}, from float64, to float64, opt
 	if opts.TargetMask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetMask(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.TargetMask) /* never freed! */)
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationLoop) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginAnimation", args...)
@@ -356,8 +356,8 @@ func (s *Scene) BeginAnimation(target interface{}, from float64, to float64, opt
 type SceneBeginDirectAnimationOpts struct {
 	Loop            *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  func()
-	OnAnimationLoop func()
+	OnAnimationEnd  JSFunc
+	OnAnimationLoop JSFunc
 }
 
 // BeginDirectAnimation calls the BeginDirectAnimation method on the Scene object.
@@ -388,12 +388,12 @@ func (s *Scene) BeginDirectAnimation(target interface{}, animations []*Animation
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationLoop) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginDirectAnimation", args...)
@@ -404,8 +404,8 @@ func (s *Scene) BeginDirectAnimation(target interface{}, animations []*Animation
 type SceneBeginDirectHierarchyAnimationOpts struct {
 	Loop            *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  func()
-	OnAnimationLoop func()
+	OnAnimationEnd  JSFunc
+	OnAnimationLoop JSFunc
 }
 
 // BeginDirectHierarchyAnimation calls the BeginDirectHierarchyAnimation method on the Scene object.
@@ -437,12 +437,12 @@ func (s *Scene) BeginDirectHierarchyAnimation(target *Node, directDescendantsOnl
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationLoop) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginDirectHierarchyAnimation", args...)
@@ -457,11 +457,11 @@ func (s *Scene) BeginDirectHierarchyAnimation(target *Node, directDescendantsOnl
 type SceneBeginHierarchyAnimationOpts struct {
 	Loop            *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  func()
+	OnAnimationEnd  JSFunc
 	Animatable      *Animatable
 	StopCurrent     *bool
-	TargetMask      func()
-	OnAnimationLoop func()
+	TargetMask      JSFunc
+	OnAnimationLoop JSFunc
 }
 
 // BeginHierarchyAnimation calls the BeginHierarchyAnimation method on the Scene object.
@@ -492,7 +492,7 @@ func (s *Scene) BeginHierarchyAnimation(target interface{}, directDescendantsOnl
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 	if opts.Animatable == nil {
 		args = append(args, js.Undefined())
@@ -507,12 +507,12 @@ func (s *Scene) BeginHierarchyAnimation(target interface{}, directDescendantsOnl
 	if opts.TargetMask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetMask(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.TargetMask) /* never freed! */)
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationLoop) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginHierarchyAnimation", args...)
@@ -527,10 +527,10 @@ func (s *Scene) BeginHierarchyAnimation(target interface{}, directDescendantsOnl
 type SceneBeginWeightedAnimationOpts struct {
 	Loop            *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  func()
+	OnAnimationEnd  JSFunc
 	Animatable      *Animatable
-	TargetMask      func()
-	OnAnimationLoop func()
+	TargetMask      JSFunc
+	OnAnimationLoop JSFunc
 }
 
 // BeginWeightedAnimation calls the BeginWeightedAnimation method on the Scene object.
@@ -561,7 +561,7 @@ func (s *Scene) BeginWeightedAnimation(target interface{}, from float64, to floa
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 	if opts.Animatable == nil {
 		args = append(args, js.Undefined())
@@ -571,12 +571,12 @@ func (s *Scene) BeginWeightedAnimation(target interface{}, from float64, to floa
 	if opts.TargetMask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetMask(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.TargetMask) /* never freed! */)
 	}
 	if opts.OnAnimationLoop == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationLoop(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationLoop) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginWeightedAnimation", args...)
@@ -680,26 +680,14 @@ func (s *Scene) CreateDefaultCameraOrLight(opts *SceneCreateDefaultCameraOrLight
 	s.p.Call("createDefaultCameraOrLight", args...)
 }
 
-// SceneCreateDefaultEnvironmentOpts contains optional parameters for Scene.CreateDefaultEnvironment.
-type SceneCreateDefaultEnvironmentOpts struct {
-	Options *IEnvironmentHelperOptions
-}
-
 // CreateDefaultEnvironment calls the CreateDefaultEnvironment method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#createdefaultenvironment
-func (s *Scene) CreateDefaultEnvironment(opts *SceneCreateDefaultEnvironmentOpts) *EnvironmentHelper {
-	if opts == nil {
-		opts = &SceneCreateDefaultEnvironmentOpts{}
-	}
+func (s *Scene) CreateDefaultEnvironment(options *IEnvironmentHelperOptions) *EnvironmentHelper {
 
-	args := make([]interface{}, 0, 0+1)
+	args := make([]interface{}, 0, 1+0)
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options.JSObject())
-	}
+	args = append(args, options.JSObject())
 
 	retVal := s.p.Call("createDefaultEnvironment", args...)
 	return EnvironmentHelperFromJSObject(retVal, s.ctx)
@@ -1129,14 +1117,14 @@ type SceneExecuteOnceBeforeRenderOpts struct {
 // ExecuteOnceBeforeRender calls the ExecuteOnceBeforeRender method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#executeoncebeforerender
-func (s *Scene) ExecuteOnceBeforeRender(jsFunc func(), opts *SceneExecuteOnceBeforeRenderOpts) {
+func (s *Scene) ExecuteOnceBeforeRender(jsFunc JSFunc, opts *SceneExecuteOnceBeforeRenderOpts) {
 	if opts == nil {
 		opts = &SceneExecuteOnceBeforeRenderOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	if opts.Timeout == nil {
 		args = append(args, js.Undefined())
@@ -1150,11 +1138,11 @@ func (s *Scene) ExecuteOnceBeforeRender(jsFunc func(), opts *SceneExecuteOnceBef
 // ExecuteWhenReady calls the ExecuteWhenReady method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#executewhenready
-func (s *Scene) ExecuteWhenReady(jsFunc func()) {
+func (s *Scene) ExecuteWhenReady(jsFunc JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	s.p.Call("executeWhenReady", args...)
 }
@@ -1420,7 +1408,7 @@ func (s *Scene) GetCameraByUniqueID(uniqueId float64) *Camera {
 
 // SceneGetCamerasByTagsOpts contains optional parameters for Scene.GetCamerasByTags.
 type SceneGetCamerasByTagsOpts struct {
-	ForEach func()
+	ForEach JSFunc
 }
 
 // GetCamerasByTags calls the GetCamerasByTags method on the Scene object.
@@ -1438,7 +1426,7 @@ func (s *Scene) GetCamerasByTags(tagsQuery string, opts *SceneGetCamerasByTagsOp
 	if opts.ForEach == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ForEach(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ForEach) /* never freed! */)
 	}
 
 	retVal := s.p.Call("getCamerasByTags", args...)
@@ -1604,7 +1592,7 @@ func (s *Scene) GetLightByUniqueID(uniqueId float64) *Light {
 
 // SceneGetLightsByTagsOpts contains optional parameters for Scene.GetLightsByTags.
 type SceneGetLightsByTagsOpts struct {
-	ForEach func()
+	ForEach JSFunc
 }
 
 // GetLightsByTags calls the GetLightsByTags method on the Scene object.
@@ -1622,7 +1610,7 @@ func (s *Scene) GetLightsByTags(tagsQuery string, opts *SceneGetLightsByTagsOpts
 	if opts.ForEach == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ForEach(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ForEach) /* never freed! */)
 	}
 
 	retVal := s.p.Call("getLightsByTags", args...)
@@ -1661,7 +1649,7 @@ func (s *Scene) GetMaterialByName(name string) *Material {
 
 // SceneGetMaterialByTagsOpts contains optional parameters for Scene.GetMaterialByTags.
 type SceneGetMaterialByTagsOpts struct {
-	ForEach func()
+	ForEach JSFunc
 }
 
 // GetMaterialByTags calls the GetMaterialByTags method on the Scene object.
@@ -1679,7 +1667,7 @@ func (s *Scene) GetMaterialByTags(tagsQuery string, opts *SceneGetMaterialByTags
 	if opts.ForEach == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ForEach(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ForEach) /* never freed! */)
 	}
 
 	retVal := s.p.Call("getMaterialByTags", args...)
@@ -1761,7 +1749,7 @@ func (s *Scene) GetMeshesByID(id string) []*AbstractMesh {
 
 // SceneGetMeshesByTagsOpts contains optional parameters for Scene.GetMeshesByTags.
 type SceneGetMeshesByTagsOpts struct {
-	ForEach func()
+	ForEach JSFunc
 }
 
 // GetMeshesByTags calls the GetMeshesByTags method on the Scene object.
@@ -1779,7 +1767,7 @@ func (s *Scene) GetMeshesByTags(tagsQuery string, opts *SceneGetMeshesByTagsOpts
 	if opts.ForEach == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ForEach(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ForEach) /* never freed! */)
 	}
 
 	retVal := s.p.Call("getMeshesByTags", args...)
@@ -2095,7 +2083,7 @@ func (s *Scene) GetWaitingItemsCount() float64 {
 
 // SceneGetWorldExtendsOpts contains optional parameters for Scene.GetWorldExtends.
 type SceneGetWorldExtendsOpts struct {
-	FilterPredicate func()
+	FilterPredicate JSFunc
 }
 
 // GetWorldExtends calls the GetWorldExtends method on the Scene object.
@@ -2111,7 +2099,7 @@ func (s *Scene) GetWorldExtends(opts *SceneGetWorldExtendsOpts) js.Value {
 	if opts.FilterPredicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.FilterPredicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.FilterPredicate) /* never freed! */)
 	}
 
 	retVal := s.p.Call("getWorldExtends", args...)
@@ -2212,7 +2200,7 @@ func (s *Scene) IsReady() bool {
 
 // SceneMarkAllMaterialsAsDirtyOpts contains optional parameters for Scene.MarkAllMaterialsAsDirty.
 type SceneMarkAllMaterialsAsDirtyOpts struct {
-	Predicate func()
+	Predicate JSFunc
 }
 
 // MarkAllMaterialsAsDirty calls the MarkAllMaterialsAsDirty method on the Scene object.
@@ -2230,7 +2218,7 @@ func (s *Scene) MarkAllMaterialsAsDirty(flag float64, opts *SceneMarkAllMaterial
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	s.p.Call("markAllMaterialsAsDirty", args...)
@@ -2238,7 +2226,7 @@ func (s *Scene) MarkAllMaterialsAsDirty(flag float64, opts *SceneMarkAllMaterial
 
 // SceneMultiPickOpts contains optional parameters for Scene.MultiPick.
 type SceneMultiPickOpts struct {
-	Predicate         func()
+	Predicate         JSFunc
 	Camera            *Camera
 	TrianglePredicate js.Value
 }
@@ -2259,7 +2247,7 @@ func (s *Scene) MultiPick(x float64, y float64, opts *SceneMultiPickOpts) []*Pic
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 	if opts.Camera == nil {
 		args = append(args, js.Undefined())
@@ -2278,7 +2266,7 @@ func (s *Scene) MultiPick(x float64, y float64, opts *SceneMultiPickOpts) []*Pic
 
 // SceneMultiPickSpriteOpts contains optional parameters for Scene.MultiPickSprite.
 type SceneMultiPickSpriteOpts struct {
-	Predicate func()
+	Predicate JSFunc
 	Camera    *Camera
 }
 
@@ -2298,7 +2286,7 @@ func (s *Scene) MultiPickSprite(x float64, y float64, opts *SceneMultiPickSprite
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 	if opts.Camera == nil {
 		args = append(args, js.Undefined())
@@ -2316,7 +2304,7 @@ func (s *Scene) MultiPickSprite(x float64, y float64, opts *SceneMultiPickSprite
 
 // SceneMultiPickSpriteWithRayOpts contains optional parameters for Scene.MultiPickSpriteWithRay.
 type SceneMultiPickSpriteWithRayOpts struct {
-	Predicate func()
+	Predicate JSFunc
 	Camera    *Camera
 }
 
@@ -2335,7 +2323,7 @@ func (s *Scene) MultiPickSpriteWithRay(ray *Ray, opts *SceneMultiPickSpriteWithR
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 	if opts.Camera == nil {
 		args = append(args, js.Undefined())
@@ -2359,7 +2347,7 @@ type SceneMultiPickWithRayOpts struct {
 // MultiPickWithRay calls the MultiPickWithRay method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#multipickwithray
-func (s *Scene) MultiPickWithRay(ray *Ray, predicate func(), opts *SceneMultiPickWithRayOpts) []*PickingInfo {
+func (s *Scene) MultiPickWithRay(ray *Ray, predicate JSFunc, opts *SceneMultiPickWithRayOpts) []*PickingInfo {
 	if opts == nil {
 		opts = &SceneMultiPickWithRayOpts{}
 	}
@@ -2367,7 +2355,7 @@ func (s *Scene) MultiPickWithRay(ray *Ray, predicate func(), opts *SceneMultiPic
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, ray.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
+	args = append(args, js.FuncOf(predicate))
 
 	args = append(args, opts.TrianglePredicate)
 
@@ -2381,7 +2369,7 @@ func (s *Scene) MultiPickWithRay(ray *Ray, predicate func(), opts *SceneMultiPic
 
 // ScenePickOpts contains optional parameters for Scene.Pick.
 type ScenePickOpts struct {
-	Predicate         func()
+	Predicate         JSFunc
 	FastCheck         *bool
 	Camera            *Camera
 	TrianglePredicate js.Value
@@ -2403,7 +2391,7 @@ func (s *Scene) Pick(x float64, y float64, opts *ScenePickOpts) *PickingInfo {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -2423,7 +2411,7 @@ func (s *Scene) Pick(x float64, y float64, opts *ScenePickOpts) *PickingInfo {
 
 // ScenePickSpriteOpts contains optional parameters for Scene.PickSprite.
 type ScenePickSpriteOpts struct {
-	Predicate func()
+	Predicate JSFunc
 	FastCheck *bool
 	Camera    *Camera
 }
@@ -2444,7 +2432,7 @@ func (s *Scene) PickSprite(x float64, y float64, opts *ScenePickSpriteOpts) *Pic
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -2463,7 +2451,7 @@ func (s *Scene) PickSprite(x float64, y float64, opts *ScenePickSpriteOpts) *Pic
 
 // ScenePickSpriteWithRayOpts contains optional parameters for Scene.PickSpriteWithRay.
 type ScenePickSpriteWithRayOpts struct {
-	Predicate func()
+	Predicate JSFunc
 	FastCheck *bool
 	Camera    *Camera
 }
@@ -2483,7 +2471,7 @@ func (s *Scene) PickSpriteWithRay(ray *Ray, opts *ScenePickSpriteWithRayOpts) *P
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -2502,7 +2490,7 @@ func (s *Scene) PickSpriteWithRay(ray *Ray, opts *ScenePickSpriteWithRayOpts) *P
 
 // ScenePickWithRayOpts contains optional parameters for Scene.PickWithRay.
 type ScenePickWithRayOpts struct {
-	Predicate         func()
+	Predicate         JSFunc
 	FastCheck         *bool
 	TrianglePredicate js.Value
 }
@@ -2522,7 +2510,7 @@ func (s *Scene) PickWithRay(ray *Ray, opts *ScenePickWithRayOpts) *PickingInfo {
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -2565,11 +2553,11 @@ func (s *Scene) PushGeometry(geometry *Geometry, opts *ScenePushGeometryOpts) bo
 // RegisterAfterRender calls the RegisterAfterRender method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#registerafterrender
-func (s *Scene) RegisterAfterRender(jsFunc func()) {
+func (s *Scene) RegisterAfterRender(jsFunc JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	s.p.Call("registerAfterRender", args...)
 }
@@ -2577,11 +2565,11 @@ func (s *Scene) RegisterAfterRender(jsFunc func()) {
 // RegisterBeforeRender calls the RegisterBeforeRender method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#registerbeforerender
-func (s *Scene) RegisterBeforeRender(jsFunc func()) {
+func (s *Scene) RegisterBeforeRender(jsFunc JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	s.p.Call("registerBeforeRender", args...)
 }
@@ -2934,9 +2922,9 @@ func (s *Scene) SetRenderingAutoClearDepthStencil(renderingGroupId float64, auto
 
 // SceneSetRenderingOrderOpts contains optional parameters for Scene.SetRenderingOrder.
 type SceneSetRenderingOrderOpts struct {
-	OpaqueSortCompareFn      func()
-	AlphaTestSortCompareFn   func()
-	TransparentSortCompareFn func()
+	OpaqueSortCompareFn      JSFunc
+	AlphaTestSortCompareFn   JSFunc
+	TransparentSortCompareFn JSFunc
 }
 
 // SetRenderingOrder calls the SetRenderingOrder method on the Scene object.
@@ -2954,17 +2942,17 @@ func (s *Scene) SetRenderingOrder(renderingGroupId float64, opts *SceneSetRender
 	if opts.OpaqueSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OpaqueSortCompareFn(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OpaqueSortCompareFn) /* never freed! */)
 	}
 	if opts.AlphaTestSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.AlphaTestSortCompareFn(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.AlphaTestSortCompareFn) /* never freed! */)
 	}
 	if opts.TransparentSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TransparentSortCompareFn(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.TransparentSortCompareFn) /* never freed! */)
 	}
 
 	s.p.Call("setRenderingOrder", args...)
@@ -3109,7 +3097,7 @@ func (s *Scene) StopAllAnimations() {
 // SceneStopAnimationOpts contains optional parameters for Scene.StopAnimation.
 type SceneStopAnimationOpts struct {
 	AnimationName *string
-	TargetMask    func()
+	TargetMask    JSFunc
 }
 
 // StopAnimation calls the StopAnimation method on the Scene object.
@@ -3132,7 +3120,7 @@ func (s *Scene) StopAnimation(target interface{}, opts *SceneStopAnimationOpts) 
 	if opts.TargetMask == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TargetMask(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.TargetMask) /* never freed! */)
 	}
 
 	s.p.Call("stopAnimation", args...)
@@ -3184,11 +3172,11 @@ func (s *Scene) UnfreezeMaterials() {
 // UnregisterAfterRender calls the UnregisterAfterRender method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#unregisterafterrender
-func (s *Scene) UnregisterAfterRender(jsFunc func()) {
+func (s *Scene) UnregisterAfterRender(jsFunc JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	s.p.Call("unregisterAfterRender", args...)
 }
@@ -3196,11 +3184,11 @@ func (s *Scene) UnregisterAfterRender(jsFunc func()) {
 // UnregisterBeforeRender calls the UnregisterBeforeRender method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#unregisterbeforerender
-func (s *Scene) UnregisterBeforeRender(jsFunc func()) {
+func (s *Scene) UnregisterBeforeRender(jsFunc JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	s.p.Call("unregisterBeforeRender", args...)
 }
@@ -3333,8 +3321,8 @@ func (s *Scene) AfterCameraRender() js.Value {
 // SetAfterCameraRender sets the AfterCameraRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#aftercamerarender
-func (s *Scene) SetAfterCameraRender(afterCameraRender func()) *Scene {
-	s.p.Set("afterCameraRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { afterCameraRender(); return nil }))
+func (s *Scene) SetAfterCameraRender(afterCameraRender JSFunc) *Scene {
+	s.p.Set("afterCameraRender", js.FuncOf(afterCameraRender))
 	return s
 }
 
@@ -3349,8 +3337,8 @@ func (s *Scene) AfterRender() js.Value {
 // SetAfterRender sets the AfterRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#afterrender
-func (s *Scene) SetAfterRender(afterRender func()) *Scene {
-	s.p.Set("afterRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { afterRender(); return nil }))
+func (s *Scene) SetAfterRender(afterRender JSFunc) *Scene {
+	s.p.Set("afterRender", js.FuncOf(afterRender))
 	return s
 }
 
@@ -3465,8 +3453,8 @@ func (s *Scene) AudioListenerPositionProvider() js.Value {
 // SetAudioListenerPositionProvider sets the AudioListenerPositionProvider property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#audiolistenerpositionprovider
-func (s *Scene) SetAudioListenerPositionProvider(audioListenerPositionProvider func()) *Scene {
-	s.p.Set("audioListenerPositionProvider", js.FuncOf(func(this js.Value, args []js.Value) interface{} { audioListenerPositionProvider(); return nil }))
+func (s *Scene) SetAudioListenerPositionProvider(audioListenerPositionProvider JSFunc) *Scene {
+	s.p.Set("audioListenerPositionProvider", js.FuncOf(audioListenerPositionProvider))
 	return s
 }
 
@@ -3529,8 +3517,8 @@ func (s *Scene) BeforeCameraRender() js.Value {
 // SetBeforeCameraRender sets the BeforeCameraRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beforecamerarender
-func (s *Scene) SetBeforeCameraRender(beforeCameraRender func()) *Scene {
-	s.p.Set("beforeCameraRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { beforeCameraRender(); return nil }))
+func (s *Scene) SetBeforeCameraRender(beforeCameraRender JSFunc) *Scene {
+	s.p.Set("beforeCameraRender", js.FuncOf(beforeCameraRender))
 	return s
 }
 
@@ -3545,8 +3533,8 @@ func (s *Scene) BeforeRender() js.Value {
 // SetBeforeRender sets the BeforeRender property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beforerender
-func (s *Scene) SetBeforeRender(beforeRender func()) *Scene {
-	s.p.Set("beforeRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { beforeRender(); return nil }))
+func (s *Scene) SetBeforeRender(beforeRender JSFunc) *Scene {
+	s.p.Set("beforeRender", js.FuncOf(beforeRender))
 	return s
 }
 
@@ -3713,8 +3701,8 @@ func (s *Scene) CustomLODSelector() js.Value {
 // SetCustomLODSelector sets the CustomLODSelector property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#customlodselector
-func (s *Scene) SetCustomLODSelector(customLODSelector func()) *Scene {
-	s.p.Set("customLODSelector", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customLODSelector(); return nil }))
+func (s *Scene) SetCustomLODSelector(customLODSelector JSFunc) *Scene {
+	s.p.Set("customLODSelector", js.FuncOf(customLODSelector))
 	return s
 }
 
@@ -4233,8 +4221,8 @@ func (s *Scene) GetActiveMeshCandidates() js.Value {
 // SetGetActiveMeshCandidates sets the GetActiveMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivemeshcandidates
-func (s *Scene) SetGetActiveMeshCandidates(getActiveMeshCandidates func()) *Scene {
-	s.p.Set("getActiveMeshCandidates", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getActiveMeshCandidates(); return nil }))
+func (s *Scene) SetGetActiveMeshCandidates(getActiveMeshCandidates JSFunc) *Scene {
+	s.p.Set("getActiveMeshCandidates", js.FuncOf(getActiveMeshCandidates))
 	return s
 }
 
@@ -4249,8 +4237,8 @@ func (s *Scene) GetActiveSubMeshCandidates() js.Value {
 // SetGetActiveSubMeshCandidates sets the GetActiveSubMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getactivesubmeshcandidates
-func (s *Scene) SetGetActiveSubMeshCandidates(getActiveSubMeshCandidates func()) *Scene {
-	s.p.Set("getActiveSubMeshCandidates", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getActiveSubMeshCandidates(); return nil }))
+func (s *Scene) SetGetActiveSubMeshCandidates(getActiveSubMeshCandidates JSFunc) *Scene {
+	s.p.Set("getActiveSubMeshCandidates", js.FuncOf(getActiveSubMeshCandidates))
 	return s
 }
 
@@ -4265,8 +4253,8 @@ func (s *Scene) GetCollidingSubMeshCandidates() js.Value {
 // SetGetCollidingSubMeshCandidates sets the GetCollidingSubMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getcollidingsubmeshcandidates
-func (s *Scene) SetGetCollidingSubMeshCandidates(getCollidingSubMeshCandidates func()) *Scene {
-	s.p.Set("getCollidingSubMeshCandidates", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getCollidingSubMeshCandidates(); return nil }))
+func (s *Scene) SetGetCollidingSubMeshCandidates(getCollidingSubMeshCandidates JSFunc) *Scene {
+	s.p.Set("getCollidingSubMeshCandidates", js.FuncOf(getCollidingSubMeshCandidates))
 	return s
 }
 
@@ -4281,8 +4269,8 @@ func (s *Scene) GetDeterministicFrameTime() js.Value {
 // SetGetDeterministicFrameTime sets the GetDeterministicFrameTime property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getdeterministicframetime
-func (s *Scene) SetGetDeterministicFrameTime(getDeterministicFrameTime func()) *Scene {
-	s.p.Set("getDeterministicFrameTime", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getDeterministicFrameTime(); return nil }))
+func (s *Scene) SetGetDeterministicFrameTime(getDeterministicFrameTime JSFunc) *Scene {
+	s.p.Set("getDeterministicFrameTime", js.FuncOf(getDeterministicFrameTime))
 	return s
 }
 
@@ -4297,8 +4285,8 @@ func (s *Scene) GetIntersectingSubMeshCandidates() js.Value {
 // SetGetIntersectingSubMeshCandidates sets the GetIntersectingSubMeshCandidates property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getintersectingsubmeshcandidates
-func (s *Scene) SetGetIntersectingSubMeshCandidates(getIntersectingSubMeshCandidates func()) *Scene {
-	s.p.Set("getIntersectingSubMeshCandidates", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getIntersectingSubMeshCandidates(); return nil }))
+func (s *Scene) SetGetIntersectingSubMeshCandidates(getIntersectingSubMeshCandidates JSFunc) *Scene {
+	s.p.Set("getIntersectingSubMeshCandidates", js.FuncOf(getIntersectingSubMeshCandidates))
 	return s
 }
 
@@ -5005,8 +4993,8 @@ func (s *Scene) OnDispose() js.Value {
 // SetOnDispose sets the OnDispose property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#ondispose
-func (s *Scene) SetOnDispose(onDispose func()) *Scene {
-	s.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+func (s *Scene) SetOnDispose(onDispose JSFunc) *Scene {
+	s.p.Set("onDispose", js.FuncOf(onDispose))
 	return s
 }
 
@@ -5261,8 +5249,8 @@ func (s *Scene) OnPointerDown() js.Value {
 // SetOnPointerDown sets the OnPointerDown property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerdown
-func (s *Scene) SetOnPointerDown(onPointerDown func()) *Scene {
-	s.p.Set("onPointerDown", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onPointerDown(); return nil }))
+func (s *Scene) SetOnPointerDown(onPointerDown JSFunc) *Scene {
+	s.p.Set("onPointerDown", js.FuncOf(onPointerDown))
 	return s
 }
 
@@ -5277,8 +5265,8 @@ func (s *Scene) OnPointerMove() js.Value {
 // SetOnPointerMove sets the OnPointerMove property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointermove
-func (s *Scene) SetOnPointerMove(onPointerMove func()) *Scene {
-	s.p.Set("onPointerMove", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onPointerMove(); return nil }))
+func (s *Scene) SetOnPointerMove(onPointerMove JSFunc) *Scene {
+	s.p.Set("onPointerMove", js.FuncOf(onPointerMove))
 	return s
 }
 
@@ -5309,8 +5297,8 @@ func (s *Scene) OnPointerPick() js.Value {
 // SetOnPointerPick sets the OnPointerPick property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerpick
-func (s *Scene) SetOnPointerPick(onPointerPick func()) *Scene {
-	s.p.Set("onPointerPick", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onPointerPick(); return nil }))
+func (s *Scene) SetOnPointerPick(onPointerPick JSFunc) *Scene {
+	s.p.Set("onPointerPick", js.FuncOf(onPointerPick))
 	return s
 }
 
@@ -5325,8 +5313,8 @@ func (s *Scene) OnPointerUp() js.Value {
 // SetOnPointerUp sets the OnPointerUp property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#onpointerup
-func (s *Scene) SetOnPointerUp(onPointerUp func()) *Scene {
-	s.p.Set("onPointerUp", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onPointerUp(); return nil }))
+func (s *Scene) SetOnPointerUp(onPointerUp JSFunc) *Scene {
+	s.p.Set("onPointerUp", js.FuncOf(onPointerUp))
 	return s
 }
 
@@ -5453,8 +5441,8 @@ func (s *Scene) PointerDownPredicate() js.Value {
 // SetPointerDownPredicate sets the PointerDownPredicate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointerdownpredicate
-func (s *Scene) SetPointerDownPredicate(pointerDownPredicate func()) *Scene {
-	s.p.Set("pointerDownPredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerDownPredicate(); return nil }))
+func (s *Scene) SetPointerDownPredicate(pointerDownPredicate JSFunc) *Scene {
+	s.p.Set("pointerDownPredicate", js.FuncOf(pointerDownPredicate))
 	return s
 }
 
@@ -5469,8 +5457,8 @@ func (s *Scene) PointerMovePredicate() js.Value {
 // SetPointerMovePredicate sets the PointerMovePredicate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointermovepredicate
-func (s *Scene) SetPointerMovePredicate(pointerMovePredicate func()) *Scene {
-	s.p.Set("pointerMovePredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerMovePredicate(); return nil }))
+func (s *Scene) SetPointerMovePredicate(pointerMovePredicate JSFunc) *Scene {
+	s.p.Set("pointerMovePredicate", js.FuncOf(pointerMovePredicate))
 	return s
 }
 
@@ -5485,8 +5473,8 @@ func (s *Scene) PointerUpPredicate() js.Value {
 // SetPointerUpPredicate sets the PointerUpPredicate property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#pointeruppredicate
-func (s *Scene) SetPointerUpPredicate(pointerUpPredicate func()) *Scene {
-	s.p.Set("pointerUpPredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerUpPredicate(); return nil }))
+func (s *Scene) SetPointerUpPredicate(pointerUpPredicate JSFunc) *Scene {
+	s.p.Set("pointerUpPredicate", js.FuncOf(pointerUpPredicate))
 	return s
 }
 

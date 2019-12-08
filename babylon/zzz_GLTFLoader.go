@@ -119,7 +119,7 @@ func (g *GLTFLoader) LoadBufferViewAsync(context string, bufferView *IBufferView
 
 // GLTFLoaderLoadCameraAsyncOpts contains optional parameters for GLTFLoader.LoadCameraAsync.
 type GLTFLoaderLoadCameraAsyncOpts struct {
-	Assign func()
+	Assign JSFunc
 }
 
 // LoadCameraAsync calls the LoadCameraAsync method on the GLTFLoader object.
@@ -138,7 +138,7 @@ func (g *GLTFLoader) LoadCameraAsync(context string, camera *ICamera, opts *GLTF
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Assign(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Assign) /* never freed! */)
 	}
 
 	retVal := g.p.Call("loadCameraAsync", args...)
@@ -205,7 +205,7 @@ func (g *GLTFLoader) LoadMaterialPropertiesAsync(context string, material *IMate
 
 // GLTFLoaderLoadNodeAsyncOpts contains optional parameters for GLTFLoader.LoadNodeAsync.
 type GLTFLoaderLoadNodeAsyncOpts struct {
-	Assign func()
+	Assign JSFunc
 }
 
 // LoadNodeAsync calls the LoadNodeAsync method on the GLTFLoader object.
@@ -224,7 +224,7 @@ func (g *GLTFLoader) LoadNodeAsync(context string, node *INode, opts *GLTFLoader
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Assign(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Assign) /* never freed! */)
 	}
 
 	retVal := g.p.Call("loadNodeAsync", args...)
@@ -247,7 +247,7 @@ func (g *GLTFLoader) LoadSceneAsync(context string, scene *IScene) *Promise {
 
 // GLTFLoaderLoadTextureInfoAsyncOpts contains optional parameters for GLTFLoader.LoadTextureInfoAsync.
 type GLTFLoaderLoadTextureInfoAsyncOpts struct {
-	Assign func()
+	Assign JSFunc
 }
 
 // LoadTextureInfoAsync calls the LoadTextureInfoAsync method on the GLTFLoader object.
@@ -266,7 +266,7 @@ func (g *GLTFLoader) LoadTextureInfoAsync(context string, textureInfo *ITextureI
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Assign(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Assign) /* never freed! */)
 	}
 
 	retVal := g.p.Call("loadTextureInfoAsync", args...)
@@ -323,12 +323,12 @@ func (g *GLTFLoader) LogOpen(message string) {
 // RegisterExtension calls the RegisterExtension method on the GLTFLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfloader#registerextension
-func (g *GLTFLoader) RegisterExtension(name string, factory func()) {
+func (g *GLTFLoader) RegisterExtension(name string, factory JSFunc) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { factory(); return nil }))
+	args = append(args, js.FuncOf(factory))
 
 	g.p.Call("RegisterExtension", args...)
 }

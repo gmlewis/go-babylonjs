@@ -47,8 +47,8 @@ func (i *ICustomAnimationFrameRequester) RenderFunction() js.Value {
 // SetRenderFunction sets the RenderFunction property of class ICustomAnimationFrameRequester.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomanimationframerequester#renderfunction
-func (i *ICustomAnimationFrameRequester) SetRenderFunction(renderFunction func()) *ICustomAnimationFrameRequester {
-	i.p.Set("renderFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { renderFunction(); return nil }))
+func (i *ICustomAnimationFrameRequester) SetRenderFunction(renderFunction JSFunc) *ICustomAnimationFrameRequester {
+	i.p.Set("renderFunction", js.FuncOf(renderFunction))
 	return i
 }
 
@@ -63,8 +63,8 @@ func (i *ICustomAnimationFrameRequester) RequestAnimationFrame() js.Value {
 // SetRequestAnimationFrame sets the RequestAnimationFrame property of class ICustomAnimationFrameRequester.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icustomanimationframerequester#requestanimationframe
-func (i *ICustomAnimationFrameRequester) SetRequestAnimationFrame(requestAnimationFrame func()) *ICustomAnimationFrameRequester {
-	i.p.Set("requestAnimationFrame", js.FuncOf(func(this js.Value, args []js.Value) interface{} { requestAnimationFrame(); return nil }))
+func (i *ICustomAnimationFrameRequester) SetRequestAnimationFrame(requestAnimationFrame JSFunc) *ICustomAnimationFrameRequester {
+	i.p.Set("requestAnimationFrame", js.FuncOf(requestAnimationFrame))
 	return i
 }
 

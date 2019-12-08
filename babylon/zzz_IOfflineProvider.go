@@ -40,15 +40,15 @@ func IOfflineProviderArrayToJSArray(array []*IOfflineProvider) []interface{} {
 
 // IOfflineProviderLoadFileOpts contains optional parameters for IOfflineProvider.LoadFile.
 type IOfflineProviderLoadFileOpts struct {
-	ProgressCallBack func()
-	ErrorCallback    func()
+	ProgressCallBack JSFunc
+	ErrorCallback    JSFunc
 	UseArrayBuffer   *bool
 }
 
 // LoadFile calls the LoadFile method on the IOfflineProvider object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iofflineprovider#loadfile
-func (i *IOfflineProvider) LoadFile(url string, sceneLoaded func(), opts *IOfflineProviderLoadFileOpts) {
+func (i *IOfflineProvider) LoadFile(url string, sceneLoaded JSFunc, opts *IOfflineProviderLoadFileOpts) {
 	if opts == nil {
 		opts = &IOfflineProviderLoadFileOpts{}
 	}
@@ -56,17 +56,17 @@ func (i *IOfflineProvider) LoadFile(url string, sceneLoaded func(), opts *IOffli
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, url)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { sceneLoaded(); return nil }))
+	args = append(args, js.FuncOf(sceneLoaded))
 
 	if opts.ProgressCallBack == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ProgressCallBack(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ProgressCallBack) /* never freed! */)
 	}
 	if opts.ErrorCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ErrorCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ErrorCallback) /* never freed! */)
 	}
 	if opts.UseArrayBuffer == nil {
 		args = append(args, js.Undefined())
@@ -93,12 +93,12 @@ func (i *IOfflineProvider) LoadImage(url string, image js.Value) {
 // Open calls the Open method on the IOfflineProvider object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iofflineprovider#open
-func (i *IOfflineProvider) Open(successCallback func(), errorCallback func()) {
+func (i *IOfflineProvider) Open(successCallback JSFunc, errorCallback JSFunc) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { errorCallback(); return nil }))
+	args = append(args, js.FuncOf(successCallback))
+	args = append(args, js.FuncOf(errorCallback))
 
 	i.p.Call("open", args...)
 }

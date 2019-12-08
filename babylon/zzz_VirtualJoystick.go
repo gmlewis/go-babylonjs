@@ -72,11 +72,11 @@ func (v *VirtualJoystick) ReleaseCanvas() {
 // SetActionOnTouch calls the SetActionOnTouch method on the VirtualJoystick object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#setactionontouch
-func (v *VirtualJoystick) SetActionOnTouch(action func()) {
+func (v *VirtualJoystick) SetActionOnTouch(action JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
+	args = append(args, js.FuncOf(action))
 
 	v.p.Call("setActionOnTouch", args...)
 }

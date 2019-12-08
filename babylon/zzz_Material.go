@@ -204,9 +204,9 @@ func (m *Material) Dispose(opts *MaterialDisposeOpts) {
 
 // MaterialForceCompilationOpts contains optional parameters for Material.ForceCompilation.
 type MaterialForceCompilationOpts struct {
-	OnCompiled func()
+	OnCompiled JSFunc
 	Options    js.Value
-	OnError    func()
+	OnError    JSFunc
 }
 
 // ForceCompilation calls the ForceCompilation method on the Material object.
@@ -224,13 +224,13 @@ func (m *Material) ForceCompilation(mesh *AbstractMesh, opts *MaterialForceCompi
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnCompiled) /* never freed! */)
 	}
 	args = append(args, opts.Options)
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	m.p.Call("forceCompilation", args...)
@@ -804,8 +804,8 @@ func (m *Material) GetRenderTargetTextures() js.Value {
 // SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#getrendertargettextures
-func (m *Material) SetGetRenderTargetTextures(getRenderTargetTextures func()) *Material {
-	m.p.Set("getRenderTargetTextures", js.FuncOf(func(this js.Value, args []js.Value) interface{} { getRenderTargetTextures(); return nil }))
+func (m *Material) SetGetRenderTargetTextures(getRenderTargetTextures JSFunc) *Material {
+	m.p.Set("getRenderTargetTextures", js.FuncOf(getRenderTargetTextures))
 	return m
 }
 
@@ -1016,8 +1016,8 @@ func (m *Material) OnBind() js.Value {
 // SetOnBind sets the OnBind property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onbind
-func (m *Material) SetOnBind(onBind func()) *Material {
-	m.p.Set("onBind", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onBind(); return nil }))
+func (m *Material) SetOnBind(onBind JSFunc) *Material {
+	m.p.Set("onBind", js.FuncOf(onBind))
 	return m
 }
 
@@ -1048,8 +1048,8 @@ func (m *Material) OnCompiled() js.Value {
 // SetOnCompiled sets the OnCompiled property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#oncompiled
-func (m *Material) SetOnCompiled(onCompiled func()) *Material {
-	m.p.Set("onCompiled", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCompiled(); return nil }))
+func (m *Material) SetOnCompiled(onCompiled JSFunc) *Material {
+	m.p.Set("onCompiled", js.FuncOf(onCompiled))
 	return m
 }
 
@@ -1064,8 +1064,8 @@ func (m *Material) OnDispose() js.Value {
 // SetOnDispose sets the OnDispose property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#ondispose
-func (m *Material) SetOnDispose(onDispose func()) *Material {
-	m.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+func (m *Material) SetOnDispose(onDispose JSFunc) *Material {
+	m.p.Set("onDispose", js.FuncOf(onDispose))
 	return m
 }
 
@@ -1096,8 +1096,8 @@ func (m *Material) OnError() js.Value {
 // SetOnError sets the OnError property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#onerror
-func (m *Material) SetOnError(onError func()) *Material {
-	m.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (m *Material) SetOnError(onError JSFunc) *Material {
+	m.p.Set("onError", js.FuncOf(onError))
 	return m
 }
 

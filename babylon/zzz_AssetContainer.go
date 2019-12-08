@@ -76,7 +76,7 @@ func (a *AssetContainer) Dispose() {
 
 // AssetContainerInstantiateModelsToSceneOpts contains optional parameters for AssetContainer.InstantiateModelsToScene.
 type AssetContainerInstantiateModelsToSceneOpts struct {
-	NameFunction   func()
+	NameFunction   JSFunc
 	CloneMaterials *bool
 }
 
@@ -93,7 +93,7 @@ func (a *AssetContainer) InstantiateModelsToScene(opts *AssetContainerInstantiat
 	if opts.NameFunction == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.NameFunction(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.NameFunction) /* never freed! */)
 	}
 	if opts.CloneMaterials == nil {
 		args = append(args, js.Undefined())

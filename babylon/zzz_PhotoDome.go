@@ -41,7 +41,7 @@ func PhotoDomeArrayToJSArray(array []*PhotoDome) []interface{} {
 
 // NewPhotoDomeOpts contains optional parameters for NewPhotoDome.
 type NewPhotoDomeOpts struct {
-	OnError func()
+	OnError JSFunc
 }
 
 // NewPhotoDome returns a new PhotoDome object.
@@ -62,7 +62,7 @@ func (ba *Babylon) NewPhotoDome(name string, urlOfPhoto string, options js.Value
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	p := ba.ctx.Get("PhotoDome").New(args...)

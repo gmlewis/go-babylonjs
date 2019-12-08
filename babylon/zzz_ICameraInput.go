@@ -120,7 +120,7 @@ func (i *ICameraInput) CheckInputs() js.Value {
 // SetCheckInputs sets the CheckInputs property of class ICameraInput.
 //
 // https://doc.babylonjs.com/api/classes/babylon.icamerainput#checkinputs
-func (i *ICameraInput) SetCheckInputs(checkInputs func()) *ICameraInput {
-	i.p.Set("checkInputs", js.FuncOf(func(this js.Value, args []js.Value) interface{} { checkInputs(); return nil }))
+func (i *ICameraInput) SetCheckInputs(checkInputs JSFunc) *ICameraInput {
+	i.p.Set("checkInputs", js.FuncOf(checkInputs))
 	return i
 }

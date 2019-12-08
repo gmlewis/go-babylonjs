@@ -669,8 +669,8 @@ func (a *ArcRotateCamera) OnCollide() js.Value {
 // SetOnCollide sets the OnCollide property of class ArcRotateCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#oncollide
-func (a *ArcRotateCamera) SetOnCollide(onCollide func()) *ArcRotateCamera {
-	a.p.Set("onCollide", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCollide(); return nil }))
+func (a *ArcRotateCamera) SetOnCollide(onCollide JSFunc) *ArcRotateCamera {
+	a.p.Set("onCollide", js.FuncOf(onCollide))
 	return a
 }
 

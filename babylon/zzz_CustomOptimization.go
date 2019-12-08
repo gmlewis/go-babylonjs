@@ -97,8 +97,8 @@ func (c *CustomOptimization) OnApply() js.Value {
 // SetOnApply sets the OnApply property of class CustomOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#onapply
-func (c *CustomOptimization) SetOnApply(onApply func()) *CustomOptimization {
-	c.p.Set("onApply", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onApply(); return nil }))
+func (c *CustomOptimization) SetOnApply(onApply JSFunc) *CustomOptimization {
+	c.p.Set("onApply", js.FuncOf(onApply))
 	return c
 }
 
@@ -113,7 +113,7 @@ func (c *CustomOptimization) OnGetDescription() js.Value {
 // SetOnGetDescription sets the OnGetDescription property of class CustomOptimization.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization#ongetdescription
-func (c *CustomOptimization) SetOnGetDescription(onGetDescription func()) *CustomOptimization {
-	c.p.Set("onGetDescription", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onGetDescription(); return nil }))
+func (c *CustomOptimization) SetOnGetDescription(onGetDescription JSFunc) *CustomOptimization {
+	c.p.Set("onGetDescription", js.FuncOf(onGetDescription))
 	return c
 }

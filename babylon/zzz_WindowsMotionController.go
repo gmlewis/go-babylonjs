@@ -84,7 +84,7 @@ func (w *WindowsMotionController) GetForwardRay(opts *WindowsMotionControllerGet
 
 // WindowsMotionControllerInitControllerMeshOpts contains optional parameters for WindowsMotionController.InitControllerMesh.
 type WindowsMotionControllerInitControllerMeshOpts struct {
-	MeshLoaded   func()
+	MeshLoaded   JSFunc
 	ForceDefault *bool
 }
 
@@ -103,7 +103,7 @@ func (w *WindowsMotionController) InitControllerMesh(scene *Scene, opts *Windows
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.MeshLoaded(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.MeshLoaded) /* never freed! */)
 	}
 	if opts.ForceDefault == nil {
 		args = append(args, js.Undefined())

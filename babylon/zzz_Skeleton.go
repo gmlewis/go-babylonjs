@@ -57,7 +57,7 @@ func (ba *Babylon) NewSkeleton(name string, id string, scene *Scene) *Skeleton {
 type SkeletonBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd func()
+	OnAnimationEnd JSFunc
 }
 
 // BeginAnimation calls the BeginAnimation method on the Skeleton object.
@@ -85,7 +85,7 @@ func (s *Skeleton) BeginAnimation(name string, opts *SkeletonBeginAnimationOpts)
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 
 	retVal := s.p.Call("beginAnimation", args...)

@@ -52,7 +52,7 @@ func (gui *GUI) NewCheckboxGroup(name string) *CheckboxGroup {
 
 // CheckboxGroupAddCheckboxOpts contains optional parameters for CheckboxGroup.AddCheckbox.
 type CheckboxGroupAddCheckboxOpts struct {
-	Func    func()
+	Func    JSFunc
 	Checked *bool
 }
 
@@ -71,7 +71,7 @@ func (c *CheckboxGroup) AddCheckbox(text string, opts *CheckboxGroupAddCheckboxO
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Func) /* never freed! */)
 	}
 	if opts.Checked == nil {
 		args = append(args, js.Undefined())

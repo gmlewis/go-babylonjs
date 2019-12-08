@@ -267,8 +267,8 @@ type PostProcessUpdateEffectOpts struct {
 	Uniforms        []string
 	Samplers        []string
 	IndexParameters *interface{}
-	OnCompiled      func()
-	OnError         func()
+	OnCompiled      JSFunc
+	OnError         JSFunc
 }
 
 // UpdateEffect calls the UpdateEffect method on the PostProcess object.
@@ -304,12 +304,12 @@ func (p *PostProcess) UpdateEffect(opts *PostProcessUpdateEffectOpts) {
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnCompiled) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	p.p.Call("updateEffect", args...)
@@ -582,8 +582,8 @@ func (p *PostProcess) OnActivate() js.Value {
 // SetOnActivate sets the OnActivate property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onactivate
-func (p *PostProcess) SetOnActivate(onActivate func()) *PostProcess {
-	p.p.Set("onActivate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onActivate(); return nil }))
+func (p *PostProcess) SetOnActivate(onActivate JSFunc) *PostProcess {
+	p.p.Set("onActivate", js.FuncOf(onActivate))
 	return p
 }
 
@@ -614,8 +614,8 @@ func (p *PostProcess) OnAfterRender() js.Value {
 // SetOnAfterRender sets the OnAfterRender property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onafterrender
-func (p *PostProcess) SetOnAfterRender(onAfterRender func()) *PostProcess {
-	p.p.Set("onAfterRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAfterRender(); return nil }))
+func (p *PostProcess) SetOnAfterRender(onAfterRender JSFunc) *PostProcess {
+	p.p.Set("onAfterRender", js.FuncOf(onAfterRender))
 	return p
 }
 
@@ -646,8 +646,8 @@ func (p *PostProcess) OnApply() js.Value {
 // SetOnApply sets the OnApply property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onapply
-func (p *PostProcess) SetOnApply(onApply func()) *PostProcess {
-	p.p.Set("onApply", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onApply(); return nil }))
+func (p *PostProcess) SetOnApply(onApply JSFunc) *PostProcess {
+	p.p.Set("onApply", js.FuncOf(onApply))
 	return p
 }
 
@@ -678,8 +678,8 @@ func (p *PostProcess) OnBeforeRender() js.Value {
 // SetOnBeforeRender sets the OnBeforeRender property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onbeforerender
-func (p *PostProcess) SetOnBeforeRender(onBeforeRender func()) *PostProcess {
-	p.p.Set("onBeforeRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onBeforeRender(); return nil }))
+func (p *PostProcess) SetOnBeforeRender(onBeforeRender JSFunc) *PostProcess {
+	p.p.Set("onBeforeRender", js.FuncOf(onBeforeRender))
 	return p
 }
 
@@ -710,8 +710,8 @@ func (p *PostProcess) OnSizeChanged() js.Value {
 // SetOnSizeChanged sets the OnSizeChanged property of class PostProcess.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess#onsizechanged
-func (p *PostProcess) SetOnSizeChanged(onSizeChanged func()) *PostProcess {
-	p.p.Set("onSizeChanged", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSizeChanged(); return nil }))
+func (p *PostProcess) SetOnSizeChanged(onSizeChanged JSFunc) *PostProcess {
+	p.p.Set("onSizeChanged", js.FuncOf(onSizeChanged))
 	return p
 }
 

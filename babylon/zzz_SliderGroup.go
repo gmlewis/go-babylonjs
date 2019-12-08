@@ -52,12 +52,12 @@ func (gui *GUI) NewSliderGroup(name string) *SliderGroup {
 
 // SliderGroupAddSliderOpts contains optional parameters for SliderGroup.AddSlider.
 type SliderGroupAddSliderOpts struct {
-	Func          func()
+	Func          JSFunc
 	Unit          *string
 	Min           *float64
 	Max           *float64
 	Value         *float64
-	OnValueChange func()
+	OnValueChange JSFunc
 }
 
 // AddSlider calls the AddSlider method on the SliderGroup object.
@@ -75,7 +75,7 @@ func (s *SliderGroup) AddSlider(label string, opts *SliderGroupAddSliderOpts) {
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Func) /* never freed! */)
 	}
 	if opts.Unit == nil {
 		args = append(args, js.Undefined())
@@ -100,7 +100,7 @@ func (s *SliderGroup) AddSlider(label string, opts *SliderGroupAddSliderOpts) {
 	if opts.OnValueChange == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnValueChange(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnValueChange) /* never freed! */)
 	}
 
 	s.p.Call("addSlider", args...)

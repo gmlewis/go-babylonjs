@@ -70,15 +70,15 @@ func (i *IInternalTextureLoader) GetFallbackTextureUrl(rootUrl string, textureFo
 // LoadCubeData calls the LoadCubeData method on the IInternalTextureLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinternaltextureloader#loadcubedata
-func (i *IInternalTextureLoader) LoadCubeData(data []string, texture *InternalTexture, createPolynomials bool, onLoad func(), onError func()) {
+func (i *IInternalTextureLoader) LoadCubeData(data []string, texture *InternalTexture, createPolynomials bool, onLoad JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, data)
 	args = append(args, texture.JSObject())
 	args = append(args, createPolynomials)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLoad(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onLoad))
+	args = append(args, js.FuncOf(onError))
 
 	i.p.Call("loadCubeData", args...)
 }
@@ -86,13 +86,13 @@ func (i *IInternalTextureLoader) LoadCubeData(data []string, texture *InternalTe
 // LoadData calls the LoadData method on the IInternalTextureLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iinternaltextureloader#loaddata
-func (i *IInternalTextureLoader) LoadData(data js.Value, texture *InternalTexture, callback func()) {
+func (i *IInternalTextureLoader) LoadData(data js.Value, texture *InternalTexture, callback JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, data)
 	args = append(args, texture.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	i.p.Call("loadData", args...)
 }

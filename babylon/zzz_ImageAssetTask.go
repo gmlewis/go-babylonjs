@@ -53,13 +53,13 @@ func (ba *Babylon) NewImageAssetTask(name string, url string) *ImageAssetTask {
 // RunTask calls the RunTask method on the ImageAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#runtask
-func (i *ImageAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+func (i *ImageAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
+	args = append(args, js.FuncOf(onError))
 
 	i.p.Call("runTask", args...)
 }
@@ -107,8 +107,8 @@ func (i *ImageAssetTask) OnError() js.Value {
 // SetOnError sets the OnError property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#onerror
-func (i *ImageAssetTask) SetOnError(onError func()) *ImageAssetTask {
-	i.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (i *ImageAssetTask) SetOnError(onError JSFunc) *ImageAssetTask {
+	i.p.Set("onError", js.FuncOf(onError))
 	return i
 }
 
@@ -123,8 +123,8 @@ func (i *ImageAssetTask) OnSuccess() js.Value {
 // SetOnSuccess sets the OnSuccess property of class ImageAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask#onsuccess
-func (i *ImageAssetTask) SetOnSuccess(onSuccess func()) *ImageAssetTask {
-	i.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+func (i *ImageAssetTask) SetOnSuccess(onSuccess JSFunc) *ImageAssetTask {
+	i.p.Set("onSuccess", js.FuncOf(onSuccess))
 	return i
 }
 

@@ -369,9 +369,9 @@ func (r *RenderTargetTexture) SetRenderingAutoClearDepthStencil(renderingGroupId
 
 // RenderTargetTextureSetRenderingOrderOpts contains optional parameters for RenderTargetTexture.SetRenderingOrder.
 type RenderTargetTextureSetRenderingOrderOpts struct {
-	OpaqueSortCompareFn      func()
-	AlphaTestSortCompareFn   func()
-	TransparentSortCompareFn func()
+	OpaqueSortCompareFn      JSFunc
+	AlphaTestSortCompareFn   JSFunc
+	TransparentSortCompareFn JSFunc
 }
 
 // SetRenderingOrder calls the SetRenderingOrder method on the RenderTargetTexture object.
@@ -389,17 +389,17 @@ func (r *RenderTargetTexture) SetRenderingOrder(renderingGroupId float64, opts *
 	if opts.OpaqueSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OpaqueSortCompareFn(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OpaqueSortCompareFn) /* never freed! */)
 	}
 	if opts.AlphaTestSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.AlphaTestSortCompareFn(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.AlphaTestSortCompareFn) /* never freed! */)
 	}
 	if opts.TransparentSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TransparentSortCompareFn(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.TransparentSortCompareFn) /* never freed! */)
 	}
 
 	r.p.Call("setRenderingOrder", args...)
@@ -512,8 +512,8 @@ func (r *RenderTargetTexture) CustomRenderFunction() js.Value {
 // SetCustomRenderFunction sets the CustomRenderFunction property of class RenderTargetTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#customrenderfunction
-func (r *RenderTargetTexture) SetCustomRenderFunction(customRenderFunction func()) *RenderTargetTexture {
-	r.p.Set("customRenderFunction", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customRenderFunction(); return nil }))
+func (r *RenderTargetTexture) SetCustomRenderFunction(customRenderFunction JSFunc) *RenderTargetTexture {
+	r.p.Set("customRenderFunction", js.FuncOf(customRenderFunction))
 	return r
 }
 
@@ -576,8 +576,8 @@ func (r *RenderTargetTexture) OnAfterRender() js.Value {
 // SetOnAfterRender sets the OnAfterRender property of class RenderTargetTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onafterrender
-func (r *RenderTargetTexture) SetOnAfterRender(onAfterRender func()) *RenderTargetTexture {
-	r.p.Set("onAfterRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAfterRender(); return nil }))
+func (r *RenderTargetTexture) SetOnAfterRender(onAfterRender JSFunc) *RenderTargetTexture {
+	r.p.Set("onAfterRender", js.FuncOf(onAfterRender))
 	return r
 }
 
@@ -608,8 +608,8 @@ func (r *RenderTargetTexture) OnAfterUnbind() js.Value {
 // SetOnAfterUnbind sets the OnAfterUnbind property of class RenderTargetTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onafterunbind
-func (r *RenderTargetTexture) SetOnAfterUnbind(onAfterUnbind func()) *RenderTargetTexture {
-	r.p.Set("onAfterUnbind", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAfterUnbind(); return nil }))
+func (r *RenderTargetTexture) SetOnAfterUnbind(onAfterUnbind JSFunc) *RenderTargetTexture {
+	r.p.Set("onAfterUnbind", js.FuncOf(onAfterUnbind))
 	return r
 }
 
@@ -656,8 +656,8 @@ func (r *RenderTargetTexture) OnBeforeRender() js.Value {
 // SetOnBeforeRender sets the OnBeforeRender property of class RenderTargetTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onbeforerender
-func (r *RenderTargetTexture) SetOnBeforeRender(onBeforeRender func()) *RenderTargetTexture {
-	r.p.Set("onBeforeRender", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onBeforeRender(); return nil }))
+func (r *RenderTargetTexture) SetOnBeforeRender(onBeforeRender JSFunc) *RenderTargetTexture {
+	r.p.Set("onBeforeRender", js.FuncOf(onBeforeRender))
 	return r
 }
 
@@ -688,8 +688,8 @@ func (r *RenderTargetTexture) OnClear() js.Value {
 // SetOnClear sets the OnClear property of class RenderTargetTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onclear
-func (r *RenderTargetTexture) SetOnClear(onClear func()) *RenderTargetTexture {
-	r.p.Set("onClear", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onClear(); return nil }))
+func (r *RenderTargetTexture) SetOnClear(onClear JSFunc) *RenderTargetTexture {
+	r.p.Set("onClear", js.FuncOf(onClear))
 	return r
 }
 
@@ -820,8 +820,8 @@ func (r *RenderTargetTexture) RenderListPredicate() js.Value {
 // SetRenderListPredicate sets the RenderListPredicate property of class RenderTargetTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#renderlistpredicate
-func (r *RenderTargetTexture) SetRenderListPredicate(renderListPredicate func()) *RenderTargetTexture {
-	r.p.Set("renderListPredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { renderListPredicate(); return nil }))
+func (r *RenderTargetTexture) SetRenderListPredicate(renderListPredicate JSFunc) *RenderTargetTexture {
+	r.p.Set("renderListPredicate", js.FuncOf(renderListPredicate))
 	return r
 }
 

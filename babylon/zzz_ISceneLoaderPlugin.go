@@ -38,7 +38,7 @@ func ISceneLoaderPluginArrayToJSArray(array []*ISceneLoaderPlugin) []interface{}
 
 // ISceneLoaderPluginImportMeshOpts contains optional parameters for ISceneLoaderPlugin.ImportMesh.
 type ISceneLoaderPluginImportMeshOpts struct {
-	OnError func()
+	OnError JSFunc
 }
 
 // ImportMesh calls the ImportMesh method on the ISceneLoaderPlugin object.
@@ -62,7 +62,7 @@ func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, d
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	retVal := i.p.Call("importMesh", args...)
@@ -71,7 +71,7 @@ func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, d
 
 // ISceneLoaderPluginLoadOpts contains optional parameters for ISceneLoaderPlugin.Load.
 type ISceneLoaderPluginLoadOpts struct {
-	OnError func()
+	OnError JSFunc
 }
 
 // Load calls the Load method on the ISceneLoaderPlugin object.
@@ -91,7 +91,7 @@ func (i *ISceneLoaderPlugin) Load(scene *Scene, data interface{}, rootUrl string
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	retVal := i.p.Call("load", args...)
@@ -100,7 +100,7 @@ func (i *ISceneLoaderPlugin) Load(scene *Scene, data interface{}, rootUrl string
 
 // ISceneLoaderPluginLoadAssetContainerOpts contains optional parameters for ISceneLoaderPlugin.LoadAssetContainer.
 type ISceneLoaderPluginLoadAssetContainerOpts struct {
-	OnError func()
+	OnError JSFunc
 }
 
 // LoadAssetContainer calls the LoadAssetContainer method on the ISceneLoaderPlugin object.
@@ -120,7 +120,7 @@ func (i *ISceneLoaderPlugin) LoadAssetContainer(scene *Scene, data interface{}, 
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	retVal := i.p.Call("loadAssetContainer", args...)

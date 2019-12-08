@@ -340,8 +340,8 @@ func (v *VRExperienceHelper) MeshSelectionPredicate() js.Value {
 // SetMeshSelectionPredicate sets the MeshSelectionPredicate property of class VRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#meshselectionpredicate
-func (v *VRExperienceHelper) SetMeshSelectionPredicate(meshSelectionPredicate func()) *VRExperienceHelper {
-	v.p.Set("meshSelectionPredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { meshSelectionPredicate(); return nil }))
+func (v *VRExperienceHelper) SetMeshSelectionPredicate(meshSelectionPredicate JSFunc) *VRExperienceHelper {
+	v.p.Set("meshSelectionPredicate", js.FuncOf(meshSelectionPredicate))
 	return v
 }
 
@@ -580,8 +580,8 @@ func (v *VRExperienceHelper) RaySelectionPredicate() js.Value {
 // SetRaySelectionPredicate sets the RaySelectionPredicate property of class VRExperienceHelper.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#rayselectionpredicate
-func (v *VRExperienceHelper) SetRaySelectionPredicate(raySelectionPredicate func()) *VRExperienceHelper {
-	v.p.Set("raySelectionPredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { raySelectionPredicate(); return nil }))
+func (v *VRExperienceHelper) SetRaySelectionPredicate(raySelectionPredicate JSFunc) *VRExperienceHelper {
+	v.p.Set("raySelectionPredicate", js.FuncOf(raySelectionPredicate))
 	return v
 }
 

@@ -53,13 +53,13 @@ func (ba *Babylon) NewBinaryFileAssetTask(name string, url string) *BinaryFileAs
 // RunTask calls the RunTask method on the BinaryFileAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#runtask
-func (b *BinaryFileAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+func (b *BinaryFileAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
+	args = append(args, js.FuncOf(onError))
 
 	b.p.Call("runTask", args...)
 }
@@ -107,8 +107,8 @@ func (b *BinaryFileAssetTask) OnError() js.Value {
 // SetOnError sets the OnError property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#onerror
-func (b *BinaryFileAssetTask) SetOnError(onError func()) *BinaryFileAssetTask {
-	b.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (b *BinaryFileAssetTask) SetOnError(onError JSFunc) *BinaryFileAssetTask {
+	b.p.Set("onError", js.FuncOf(onError))
 	return b
 }
 
@@ -123,8 +123,8 @@ func (b *BinaryFileAssetTask) OnSuccess() js.Value {
 // SetOnSuccess sets the OnSuccess property of class BinaryFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#onsuccess
-func (b *BinaryFileAssetTask) SetOnSuccess(onSuccess func()) *BinaryFileAssetTask {
-	b.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+func (b *BinaryFileAssetTask) SetOnSuccess(onSuccess JSFunc) *BinaryFileAssetTask {
+	b.p.Set("onSuccess", js.FuncOf(onSuccess))
 	return b
 }
 

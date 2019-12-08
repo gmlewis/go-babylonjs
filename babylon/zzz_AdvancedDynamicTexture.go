@@ -230,14 +230,14 @@ type AdvancedDynamicTextureExecuteOnAllControlsOpts struct {
 // ExecuteOnAllControls calls the ExecuteOnAllControls method on the AdvancedDynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#executeonallcontrols
-func (a *AdvancedDynamicTexture) ExecuteOnAllControls(jsFunc func(), opts *AdvancedDynamicTextureExecuteOnAllControlsOpts) {
+func (a *AdvancedDynamicTexture) ExecuteOnAllControls(jsFunc JSFunc, opts *AdvancedDynamicTextureExecuteOnAllControlsOpts) {
 	if opts == nil {
 		opts = &AdvancedDynamicTextureExecuteOnAllControlsOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	if opts.Container == nil {
 		args = append(args, js.Undefined())
@@ -273,7 +273,7 @@ func (a *AdvancedDynamicTexture) GetClassName() string {
 // AdvancedDynamicTextureGetDescendantsOpts contains optional parameters for AdvancedDynamicTexture.GetDescendants.
 type AdvancedDynamicTextureGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             func()
+	Predicate             JSFunc
 }
 
 // GetDescendants calls the GetDescendants method on the AdvancedDynamicTexture object.
@@ -294,7 +294,7 @@ func (a *AdvancedDynamicTexture) GetDescendants(opts *AdvancedDynamicTextureGetD
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	retVal := a.p.Call("getDescendants", args...)

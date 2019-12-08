@@ -39,11 +39,11 @@ func PBRSheenConfigurationArrayToJSArray(array []*PBRSheenConfiguration) []inter
 // NewPBRSheenConfiguration returns a new PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration
-func (ba *Babylon) NewPBRSheenConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRSheenConfiguration {
+func (ba *Babylon) NewPBRSheenConfiguration(markAllSubMeshesAsTexturesDirty JSFunc) *PBRSheenConfiguration {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { markAllSubMeshesAsTexturesDirty(); return nil }))
+	args = append(args, js.FuncOf(markAllSubMeshesAsTexturesDirty))
 
 	p := ba.ctx.Get("PBRSheenConfiguration").New(args...)
 	return PBRSheenConfigurationFromJSObject(p, ba.ctx)

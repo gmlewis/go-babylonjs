@@ -44,14 +44,14 @@ type NewObserverOpts struct {
 // NewObserver returns a new Observer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer
-func (ba *Babylon) NewObserver(callback func(), mask float64, opts *NewObserverOpts) *Observer {
+func (ba *Babylon) NewObserver(callback JSFunc, mask float64, opts *NewObserverOpts) *Observer {
 	if opts == nil {
 		opts = &NewObserverOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 	args = append(args, mask)
 
 	if opts.Scope == nil {
@@ -75,8 +75,8 @@ func (o *Observer) Callback() js.Value {
 // SetCallback sets the Callback property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#callback
-func (o *Observer) SetCallback(callback func()) *Observer {
-	o.p.Set("callback", js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+func (o *Observer) SetCallback(callback JSFunc) *Observer {
+	o.p.Set("callback", js.FuncOf(callback))
 	return o
 }
 

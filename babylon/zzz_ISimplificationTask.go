@@ -115,7 +115,7 @@ func (i *ISimplificationTask) SuccessCallback() js.Value {
 // SetSuccessCallback sets the SuccessCallback property of class ISimplificationTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplificationtask#successcallback
-func (i *ISimplificationTask) SetSuccessCallback(successCallback func()) *ISimplificationTask {
-	i.p.Set("successCallback", js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
+func (i *ISimplificationTask) SetSuccessCallback(successCallback JSFunc) *ISimplificationTask {
+	i.p.Set("successCallback", js.FuncOf(successCallback))
 	return i
 }

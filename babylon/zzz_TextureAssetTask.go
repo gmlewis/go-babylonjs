@@ -79,13 +79,13 @@ func (ba *Babylon) NewTextureAssetTask(name string, url string, opts *NewTexture
 // RunTask calls the RunTask method on the TextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#runtask
-func (t *TextureAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+func (t *TextureAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
+	args = append(args, js.FuncOf(onError))
 
 	t.p.Call("runTask", args...)
 }
@@ -149,8 +149,8 @@ func (t *TextureAssetTask) OnError() js.Value {
 // SetOnError sets the OnError property of class TextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#onerror
-func (t *TextureAssetTask) SetOnError(onError func()) *TextureAssetTask {
-	t.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (t *TextureAssetTask) SetOnError(onError JSFunc) *TextureAssetTask {
+	t.p.Set("onError", js.FuncOf(onError))
 	return t
 }
 
@@ -165,8 +165,8 @@ func (t *TextureAssetTask) OnSuccess() js.Value {
 // SetOnSuccess sets the OnSuccess property of class TextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask#onsuccess
-func (t *TextureAssetTask) SetOnSuccess(onSuccess func()) *TextureAssetTask {
-	t.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+func (t *TextureAssetTask) SetOnSuccess(onSuccess JSFunc) *TextureAssetTask {
+	t.p.Set("onSuccess", js.FuncOf(onSuccess))
 	return t
 }
 

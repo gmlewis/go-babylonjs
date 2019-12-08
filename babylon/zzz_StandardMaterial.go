@@ -488,8 +488,8 @@ func (s *StandardMaterial) CustomShaderNameResolve() js.Value {
 // SetCustomShaderNameResolve sets the CustomShaderNameResolve property of class StandardMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardmaterial#customshadernameresolve
-func (s *StandardMaterial) SetCustomShaderNameResolve(customShaderNameResolve func()) *StandardMaterial {
-	s.p.Set("customShaderNameResolve", js.FuncOf(func(this js.Value, args []js.Value) interface{} { customShaderNameResolve(); return nil }))
+func (s *StandardMaterial) SetCustomShaderNameResolve(customShaderNameResolve JSFunc) *StandardMaterial {
+	s.p.Set("customShaderNameResolve", js.FuncOf(customShaderNameResolve))
 	return s
 }
 

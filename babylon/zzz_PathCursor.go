@@ -124,11 +124,11 @@ func (p *PathCursor) MoveBack(opts *PathCursorMoveBackOpts) *PathCursor {
 // Onchange calls the Onchange method on the PathCursor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor#onchange
-func (p *PathCursor) Onchange(f func()) *PathCursor {
+func (p *PathCursor) Onchange(f JSFunc) *PathCursor {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { f(); return nil }))
+	args = append(args, js.FuncOf(f))
 
 	retVal := p.p.Call("onchange", args...)
 	return PathCursorFromJSObject(retVal, p.ctx)

@@ -152,8 +152,8 @@ func (e *Engine) CacheStencilState() {
 // EngineCreateEffectForParticlesOpts contains optional parameters for Engine.CreateEffectForParticles.
 type EngineCreateEffectForParticlesOpts struct {
 	Fallbacks  *EffectFallbacks
-	OnCompiled func()
-	OnError    func()
+	OnCompiled JSFunc
+	OnError    JSFunc
 }
 
 // CreateEffectForParticles calls the CreateEffectForParticles method on the Engine object.
@@ -179,12 +179,12 @@ func (e *Engine) CreateEffectForParticles(fragmentName string, uniformsNames []s
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnCompiled) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	retVal := e.p.Call("createEffectForParticles", args...)
@@ -250,7 +250,7 @@ func (e *Engine) CreateRawCubeTexture(data js.Value, size float64, format float6
 // CreateRawCubeTextureFromUrl calls the CreateRawCubeTextureFromUrl method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#createrawcubetexturefromurl
-func (e *Engine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size float64, format float64, jsType float64, noMipmap bool, callback func(), mipmapGenerator func(), onLoad func(), onError func()) *InternalTexture {
+func (e *Engine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size float64, format float64, jsType float64, noMipmap bool, callback JSFunc, mipmapGenerator JSFunc, onLoad JSFunc, onError JSFunc) *InternalTexture {
 
 	args := make([]interface{}, 0, 10+0)
 
@@ -260,10 +260,10 @@ func (e *Engine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size floa
 	args = append(args, format)
 	args = append(args, jsType)
 	args = append(args, noMipmap)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { mipmapGenerator(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLoad(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(callback))
+	args = append(args, js.FuncOf(mipmapGenerator))
+	args = append(args, js.FuncOf(onLoad))
+	args = append(args, js.FuncOf(onError))
 
 	retVal := e.p.Call("createRawCubeTextureFromUrl", args...)
 	return InternalTextureFromJSObject(retVal, e.ctx)
@@ -915,7 +915,7 @@ func (e *Engine) IsVRPresenting() bool {
 
 // EngineMarkAllMaterialsAsDirtyOpts contains optional parameters for Engine.MarkAllMaterialsAsDirty.
 type EngineMarkAllMaterialsAsDirtyOpts struct {
-	Predicate func()
+	Predicate JSFunc
 }
 
 // MarkAllMaterialsAsDirty calls the MarkAllMaterialsAsDirty method on the Engine object.
@@ -933,7 +933,7 @@ func (e *Engine) MarkAllMaterialsAsDirty(flag float64, opts *EngineMarkAllMateri
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	e.p.Call("MarkAllMaterialsAsDirty", args...)
@@ -1913,8 +1913,8 @@ func (e *Engine) AudioEngineFactory() js.Value {
 // SetAudioEngineFactory sets the AudioEngineFactory property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#audioenginefactory
-func (e *Engine) SetAudioEngineFactory(AudioEngineFactory func()) *Engine {
-	e.p.Set("AudioEngineFactory", js.FuncOf(func(this js.Value, args []js.Value) interface{} { AudioEngineFactory(); return nil }))
+func (e *Engine) SetAudioEngineFactory(AudioEngineFactory JSFunc) *Engine {
+	e.p.Set("AudioEngineFactory", js.FuncOf(AudioEngineFactory))
 	return e
 }
 
@@ -2429,8 +2429,8 @@ func (e *Engine) OfflineProviderFactory() js.Value {
 // SetOfflineProviderFactory sets the OfflineProviderFactory property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#offlineproviderfactory
-func (e *Engine) SetOfflineProviderFactory(OfflineProviderFactory func()) *Engine {
-	e.p.Set("OfflineProviderFactory", js.FuncOf(func(this js.Value, args []js.Value) interface{} { OfflineProviderFactory(); return nil }))
+func (e *Engine) SetOfflineProviderFactory(OfflineProviderFactory JSFunc) *Engine {
+	e.p.Set("OfflineProviderFactory", js.FuncOf(OfflineProviderFactory))
 	return e
 }
 
@@ -3737,7 +3737,7 @@ func (e *Engine) _RescalePostProcessFactory() js.Value {
 // Set_RescalePostProcessFactory sets the _RescalePostProcessFactory property of class Engine.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#_rescalepostprocessfactory
-func (e *Engine) Set_RescalePostProcessFactory(_RescalePostProcessFactory func()) *Engine {
-	e.p.Set("_RescalePostProcessFactory", js.FuncOf(func(this js.Value, args []js.Value) interface{} { _RescalePostProcessFactory(); return nil }))
+func (e *Engine) Set_RescalePostProcessFactory(_RescalePostProcessFactory JSFunc) *Engine {
+	e.p.Set("_RescalePostProcessFactory", js.FuncOf(_RescalePostProcessFactory))
 	return e
 }

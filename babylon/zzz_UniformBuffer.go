@@ -321,8 +321,8 @@ func (u *UniformBuffer) UpdateColor3() js.Value {
 // SetUpdateColor3 sets the UpdateColor3 property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatecolor3
-func (u *UniformBuffer) SetUpdateColor3(updateColor3 func()) *UniformBuffer {
-	u.p.Set("updateColor3", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateColor3(); return nil }))
+func (u *UniformBuffer) SetUpdateColor3(updateColor3 JSFunc) *UniformBuffer {
+	u.p.Set("updateColor3", js.FuncOf(updateColor3))
 	return u
 }
 
@@ -337,8 +337,8 @@ func (u *UniformBuffer) UpdateColor4() js.Value {
 // SetUpdateColor4 sets the UpdateColor4 property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatecolor4
-func (u *UniformBuffer) SetUpdateColor4(updateColor4 func()) *UniformBuffer {
-	u.p.Set("updateColor4", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateColor4(); return nil }))
+func (u *UniformBuffer) SetUpdateColor4(updateColor4 JSFunc) *UniformBuffer {
+	u.p.Set("updateColor4", js.FuncOf(updateColor4))
 	return u
 }
 
@@ -353,8 +353,8 @@ func (u *UniformBuffer) UpdateFloat() js.Value {
 // SetUpdateFloat sets the UpdateFloat property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat
-func (u *UniformBuffer) SetUpdateFloat(updateFloat func()) *UniformBuffer {
-	u.p.Set("updateFloat", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateFloat(); return nil }))
+func (u *UniformBuffer) SetUpdateFloat(updateFloat JSFunc) *UniformBuffer {
+	u.p.Set("updateFloat", js.FuncOf(updateFloat))
 	return u
 }
 
@@ -369,8 +369,8 @@ func (u *UniformBuffer) UpdateFloat2() js.Value {
 // SetUpdateFloat2 sets the UpdateFloat2 property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat2
-func (u *UniformBuffer) SetUpdateFloat2(updateFloat2 func()) *UniformBuffer {
-	u.p.Set("updateFloat2", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateFloat2(); return nil }))
+func (u *UniformBuffer) SetUpdateFloat2(updateFloat2 JSFunc) *UniformBuffer {
+	u.p.Set("updateFloat2", js.FuncOf(updateFloat2))
 	return u
 }
 
@@ -385,8 +385,8 @@ func (u *UniformBuffer) UpdateFloat3() js.Value {
 // SetUpdateFloat3 sets the UpdateFloat3 property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat3
-func (u *UniformBuffer) SetUpdateFloat3(updateFloat3 func()) *UniformBuffer {
-	u.p.Set("updateFloat3", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateFloat3(); return nil }))
+func (u *UniformBuffer) SetUpdateFloat3(updateFloat3 JSFunc) *UniformBuffer {
+	u.p.Set("updateFloat3", js.FuncOf(updateFloat3))
 	return u
 }
 
@@ -401,8 +401,8 @@ func (u *UniformBuffer) UpdateFloat4() js.Value {
 // SetUpdateFloat4 sets the UpdateFloat4 property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat4
-func (u *UniformBuffer) SetUpdateFloat4(updateFloat4 func()) *UniformBuffer {
-	u.p.Set("updateFloat4", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateFloat4(); return nil }))
+func (u *UniformBuffer) SetUpdateFloat4(updateFloat4 JSFunc) *UniformBuffer {
+	u.p.Set("updateFloat4", js.FuncOf(updateFloat4))
 	return u
 }
 
@@ -417,8 +417,8 @@ func (u *UniformBuffer) UpdateMatrix() js.Value {
 // SetUpdateMatrix sets the UpdateMatrix property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix
-func (u *UniformBuffer) SetUpdateMatrix(updateMatrix func()) *UniformBuffer {
-	u.p.Set("updateMatrix", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateMatrix(); return nil }))
+func (u *UniformBuffer) SetUpdateMatrix(updateMatrix JSFunc) *UniformBuffer {
+	u.p.Set("updateMatrix", js.FuncOf(updateMatrix))
 	return u
 }
 
@@ -433,8 +433,8 @@ func (u *UniformBuffer) UpdateMatrix2x2() js.Value {
 // SetUpdateMatrix2x2 sets the UpdateMatrix2x2 property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix2x2
-func (u *UniformBuffer) SetUpdateMatrix2x2(updateMatrix2x2 func()) *UniformBuffer {
-	u.p.Set("updateMatrix2x2", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateMatrix2x2(); return nil }))
+func (u *UniformBuffer) SetUpdateMatrix2x2(updateMatrix2x2 JSFunc) *UniformBuffer {
+	u.p.Set("updateMatrix2x2", js.FuncOf(updateMatrix2x2))
 	return u
 }
 
@@ -449,8 +449,8 @@ func (u *UniformBuffer) UpdateMatrix3x3() js.Value {
 // SetUpdateMatrix3x3 sets the UpdateMatrix3x3 property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix3x3
-func (u *UniformBuffer) SetUpdateMatrix3x3(updateMatrix3x3 func()) *UniformBuffer {
-	u.p.Set("updateMatrix3x3", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateMatrix3x3(); return nil }))
+func (u *UniformBuffer) SetUpdateMatrix3x3(updateMatrix3x3 JSFunc) *UniformBuffer {
+	u.p.Set("updateMatrix3x3", js.FuncOf(updateMatrix3x3))
 	return u
 }
 
@@ -465,8 +465,8 @@ func (u *UniformBuffer) UpdateVector3() js.Value {
 // SetUpdateVector3 sets the UpdateVector3 property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatevector3
-func (u *UniformBuffer) SetUpdateVector3(updateVector3 func()) *UniformBuffer {
-	u.p.Set("updateVector3", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateVector3(); return nil }))
+func (u *UniformBuffer) SetUpdateVector3(updateVector3 JSFunc) *UniformBuffer {
+	u.p.Set("updateVector3", js.FuncOf(updateVector3))
 	return u
 }
 
@@ -481,8 +481,8 @@ func (u *UniformBuffer) UpdateVector4() js.Value {
 // SetUpdateVector4 sets the UpdateVector4 property of class UniformBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatevector4
-func (u *UniformBuffer) SetUpdateVector4(updateVector4 func()) *UniformBuffer {
-	u.p.Set("updateVector4", js.FuncOf(func(this js.Value, args []js.Value) interface{} { updateVector4(); return nil }))
+func (u *UniformBuffer) SetUpdateVector4(updateVector4 JSFunc) *UniformBuffer {
+	u.p.Set("updateVector4", js.FuncOf(updateVector4))
 	return u
 }
 

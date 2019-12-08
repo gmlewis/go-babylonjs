@@ -140,7 +140,7 @@ func (a *Animation) Color4InterpolateFunction(startValue *Color4, endValue *Colo
 type AnimationCreateAndStartAnimationOpts struct {
 	LoopMode       *float64
 	EasingFunction *EasingFunction
-	OnAnimationEnd func()
+	OnAnimationEnd JSFunc
 }
 
 // CreateAndStartAnimation calls the CreateAndStartAnimation method on the Animation object.
@@ -174,7 +174,7 @@ func (a *Animation) CreateAndStartAnimation(name string, node *Node, targetPrope
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 
 	retVal := a.p.Call("CreateAndStartAnimation", args...)
@@ -185,7 +185,7 @@ func (a *Animation) CreateAndStartAnimation(name string, node *Node, targetPrope
 type AnimationCreateAndStartHierarchyAnimationOpts struct {
 	LoopMode       *float64
 	EasingFunction *EasingFunction
-	OnAnimationEnd func()
+	OnAnimationEnd JSFunc
 }
 
 // CreateAndStartHierarchyAnimation calls the CreateAndStartHierarchyAnimation method on the Animation object.
@@ -220,7 +220,7 @@ func (a *Animation) CreateAndStartHierarchyAnimation(name string, node *Node, di
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 
 	retVal := a.p.Call("CreateAndStartHierarchyAnimation", args...)
@@ -251,7 +251,7 @@ func (a *Animation) CreateAnimation(property string, animationType float64, fram
 type AnimationCreateMergeAndStartAnimationOpts struct {
 	LoopMode       *float64
 	EasingFunction *EasingFunction
-	OnAnimationEnd func()
+	OnAnimationEnd JSFunc
 }
 
 // CreateMergeAndStartAnimation calls the CreateMergeAndStartAnimation method on the Animation object.
@@ -285,7 +285,7 @@ func (a *Animation) CreateMergeAndStartAnimation(name string, node *Node, target
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 
 	retVal := a.p.Call("CreateMergeAndStartAnimation", args...)
@@ -582,7 +582,7 @@ func (a *Animation) ToString(opts *AnimationToStringOpts) string {
 
 // AnimationTransitionToOpts contains optional parameters for Animation.TransitionTo.
 type AnimationTransitionToOpts struct {
-	OnAnimationEnd func()
+	OnAnimationEnd JSFunc
 }
 
 // TransitionTo calls the TransitionTo method on the Animation object.
@@ -606,7 +606,7 @@ func (a *Animation) TransitionTo(property string, targetValue interface{}, host 
 	if opts.OnAnimationEnd == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnAnimationEnd(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnAnimationEnd) /* never freed! */)
 	}
 
 	retVal := a.p.Call("TransitionTo", args...)

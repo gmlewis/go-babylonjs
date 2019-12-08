@@ -55,13 +55,13 @@ func (ba *Babylon) NewMeshAssetTask(name string, meshesNames interface{}, rootUr
 // RunTask calls the RunTask method on the MeshAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#runtask
-func (m *MeshAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+func (m *MeshAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
+	args = append(args, js.FuncOf(onError))
 
 	m.p.Call("runTask", args...)
 }
@@ -189,8 +189,8 @@ func (m *MeshAssetTask) OnError() js.Value {
 // SetOnError sets the OnError property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#onerror
-func (m *MeshAssetTask) SetOnError(onError func()) *MeshAssetTask {
-	m.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (m *MeshAssetTask) SetOnError(onError JSFunc) *MeshAssetTask {
+	m.p.Set("onError", js.FuncOf(onError))
 	return m
 }
 
@@ -205,8 +205,8 @@ func (m *MeshAssetTask) OnSuccess() js.Value {
 // SetOnSuccess sets the OnSuccess property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#onsuccess
-func (m *MeshAssetTask) SetOnSuccess(onSuccess func()) *MeshAssetTask {
-	m.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+func (m *MeshAssetTask) SetOnSuccess(onSuccess JSFunc) *MeshAssetTask {
+	m.p.Set("onSuccess", js.FuncOf(onSuccess))
 	return m
 }
 

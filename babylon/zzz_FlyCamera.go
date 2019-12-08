@@ -428,8 +428,8 @@ func (f *FlyCamera) OnCollide() js.Value {
 // SetOnCollide sets the OnCollide property of class FlyCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#oncollide
-func (f *FlyCamera) SetOnCollide(onCollide func()) *FlyCamera {
-	f.p.Set("onCollide", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCollide(); return nil }))
+func (f *FlyCamera) SetOnCollide(onCollide JSFunc) *FlyCamera {
+	f.p.Set("onCollide", js.FuncOf(onCollide))
 	return f
 }
 

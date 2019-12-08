@@ -85,11 +85,11 @@ func (s *SmartArray) Dispose() {
 // ForEach calls the ForEach method on the SmartArray object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#foreach
-func (s *SmartArray) ForEach(jsFunc func()) {
+func (s *SmartArray) ForEach(jsFunc JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	s.p.Call("forEach", args...)
 }
@@ -130,11 +130,11 @@ func (s *SmartArray) Reset() {
 // Sort calls the Sort method on the SmartArray object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#sort
-func (s *SmartArray) Sort(compareFn func()) {
+func (s *SmartArray) Sort(compareFn JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { compareFn(); return nil }))
+	args = append(args, js.FuncOf(compareFn))
 
 	s.p.Call("sort", args...)
 }

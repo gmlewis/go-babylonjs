@@ -47,8 +47,8 @@ func (i *IExplorerExtensibilityOption) Action() js.Value {
 // SetAction sets the Action property of class IExplorerExtensibilityOption.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilityoption#action
-func (i *IExplorerExtensibilityOption) SetAction(action func()) *IExplorerExtensibilityOption {
-	i.p.Set("action", js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
+func (i *IExplorerExtensibilityOption) SetAction(action JSFunc) *IExplorerExtensibilityOption {
+	i.p.Set("action", js.FuncOf(action))
 	return i
 }
 

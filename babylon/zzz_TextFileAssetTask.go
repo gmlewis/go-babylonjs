@@ -53,13 +53,13 @@ func (ba *Babylon) NewTextFileAssetTask(name string, url string) *TextFileAssetT
 // RunTask calls the RunTask method on the TextFileAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#runtask
-func (t *TextFileAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+func (t *TextFileAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
+	args = append(args, js.FuncOf(onError))
 
 	t.p.Call("runTask", args...)
 }
@@ -91,8 +91,8 @@ func (t *TextFileAssetTask) OnError() js.Value {
 // SetOnError sets the OnError property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onerror
-func (t *TextFileAssetTask) SetOnError(onError func()) *TextFileAssetTask {
-	t.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (t *TextFileAssetTask) SetOnError(onError JSFunc) *TextFileAssetTask {
+	t.p.Set("onError", js.FuncOf(onError))
 	return t
 }
 
@@ -107,8 +107,8 @@ func (t *TextFileAssetTask) OnSuccess() js.Value {
 // SetOnSuccess sets the OnSuccess property of class TextFileAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask#onsuccess
-func (t *TextFileAssetTask) SetOnSuccess(onSuccess func()) *TextFileAssetTask {
-	t.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+func (t *TextFileAssetTask) SetOnSuccess(onSuccess JSFunc) *TextFileAssetTask {
+	t.p.Set("onSuccess", js.FuncOf(onSuccess))
 	return t
 }
 

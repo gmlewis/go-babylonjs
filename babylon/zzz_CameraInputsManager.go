@@ -251,8 +251,8 @@ func (c *CameraInputsManager) CheckInputs() js.Value {
 // SetCheckInputs sets the CheckInputs property of class CameraInputsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#checkinputs
-func (c *CameraInputsManager) SetCheckInputs(checkInputs func()) *CameraInputsManager {
-	c.p.Set("checkInputs", js.FuncOf(func(this js.Value, args []js.Value) interface{} { checkInputs(); return nil }))
+func (c *CameraInputsManager) SetCheckInputs(checkInputs JSFunc) *CameraInputsManager {
+	c.p.Set("checkInputs", js.FuncOf(checkInputs))
 	return c
 }
 

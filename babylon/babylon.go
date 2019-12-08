@@ -9,6 +9,9 @@ type JSObject interface {
 	JSObject() js.Value
 }
 
+// JSFunc represents a JavaScript function callback.
+type JSFunc func(this js.Value, args []js.Value) interface{}
+
 // Babylon represents the babylon.js API.
 type Babylon struct {
 	ctx js.Value

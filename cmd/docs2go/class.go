@@ -661,7 +661,7 @@ func processMethodOverrides(className string, s *Signature, names []string, opti
 	case "ArcRotateCamera.AttachControl":
 		optional[1] = false
 	case "Camera.AttachControl", "FollowCamera.AttachControl", "FreeCamera.AttachControl",
-		"AbstractMesh.ToString":
+		"AbstractMesh.ToString", "Scene.CreateDefaultEnvironment":
 		avoidUsingOptions = true
 	case "InstancedMesh.GetFacetNormal", "InstancedMesh.GetFacetNormalToRef", "InstancedMesh.GetFacetPosition", "InstancedMesh.GetFacetPositionToRef":
 		names[0] = "index"
@@ -899,8 +899,8 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 					case "object":
 						paramType = "map[string]interface{}"
 					case "function", "Function":
-						paramType = "func()"
-						jsName = fmt.Sprintf(`js.FuncOf(func(this js.Value, args []js.Value) interface{} {opts.%v(); return nil}) /* never freed! */`, name)
+						paramType = "JSFunc"
+						jsName = fmt.Sprintf(`js.FuncOf(opts.%v) /* never freed! */`, name)
 					case
 						"[]AbstractMesh",
 						"[]IInternalTextureLoader",
@@ -963,8 +963,9 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 				case "object":
 					paramType = "js.Value"
 					needsJSObject = false
-				case "func()": // special case - function callback
-					jsName = fmt.Sprintf(`js.FuncOf(func(this js.Value, args []js.Value) interface{} {%v(); return nil})`, name)
+				case "func()", "JSFunc": // special case - function callback
+					paramType = "JSFunc"
+					jsName = fmt.Sprintf(`js.FuncOf(%v)`, name)
 					needsJSObject = false
 				case "[]*Worker", "[]*object", "[]object":
 					paramType = "[]js.Value"
@@ -1004,7 +1005,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 			// s.GoReturnType = "map[string]interface{}"
 			s.GoReturnType = "js.Value"
 			needsJSObject = false
-		case "func()":
+		case "func()", "JSFunc":
 			s.GoReturnType = "js.Value"
 			needsJSObject = false
 		}
@@ -1058,7 +1059,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 }
 
 func isReferenceType(s string) bool {
-	return strings.HasPrefix(s, "*") || s == "js.Value" || strings.HasPrefix(s, "[]") || strings.HasPrefix(s, "map[") || strings.HasPrefix(s, "func(")
+	return strings.HasPrefix(s, "*") || s == "js.Value" || strings.HasPrefix(s, "[]") || strings.HasPrefix(s, "map[") || strings.HasPrefix(s, "func(") || s == "JSFunc"
 }
 
 func jsTypeToGoType(paramType string) (goType string, needsJSObject, needsArrayHelper bool) {
@@ -1070,7 +1071,7 @@ func jsTypeToGoType(paramType string) (goType string, needsJSObject, needsArrayH
 	case "any":
 		paramType = "interface{}"
 	case "function", "Function":
-		paramType = "func()"
+		paramType = "JSFunc"
 	case "string", "float64", "bool", "[]string", "[]float64", "[]bool":
 	case "[]*string":
 		paramType = "[]string"

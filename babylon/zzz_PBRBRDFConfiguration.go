@@ -39,11 +39,11 @@ func PBRBRDFConfigurationArrayToJSArray(array []*PBRBRDFConfiguration) []interfa
 // NewPBRBRDFConfiguration returns a new PBRBRDFConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration
-func (ba *Babylon) NewPBRBRDFConfiguration(markAllSubMeshesAsMiscDirty func()) *PBRBRDFConfiguration {
+func (ba *Babylon) NewPBRBRDFConfiguration(markAllSubMeshesAsMiscDirty JSFunc) *PBRBRDFConfiguration {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { markAllSubMeshesAsMiscDirty(); return nil }))
+	args = append(args, js.FuncOf(markAllSubMeshesAsMiscDirty))
 
 	p := ba.ctx.Get("PBRBRDFConfiguration").New(args...)
 	return PBRBRDFConfigurationFromJSObject(p, ba.ctx)

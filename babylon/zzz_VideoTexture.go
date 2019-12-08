@@ -104,7 +104,7 @@ type VideoTextureCreateFromWebCamOpts struct {
 // CreateFromWebCam calls the CreateFromWebCam method on the VideoTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture#createfromwebcam
-func (v *VideoTexture) CreateFromWebCam(scene *Scene, onReady func(), constraints js.Value, opts *VideoTextureCreateFromWebCamOpts) {
+func (v *VideoTexture) CreateFromWebCam(scene *Scene, onReady JSFunc, constraints js.Value, opts *VideoTextureCreateFromWebCamOpts) {
 	if opts == nil {
 		opts = &VideoTextureCreateFromWebCamOpts{}
 	}
@@ -112,7 +112,7 @@ func (v *VideoTexture) CreateFromWebCam(scene *Scene, onReady func(), constraint
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onReady(); return nil }))
+	args = append(args, js.FuncOf(onReady))
 	args = append(args, constraints)
 
 	args = append(args, opts.AudioConstaints)

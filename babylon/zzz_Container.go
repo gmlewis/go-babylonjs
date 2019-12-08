@@ -136,7 +136,7 @@ func (c *Container) GetChildByType(name string, jsType string) *Control {
 // ContainerGetDescendantsToRefOpts contains optional parameters for Container.GetDescendantsToRef.
 type ContainerGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             func()
+	Predicate             JSFunc
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Container object.
@@ -159,7 +159,7 @@ func (c *Container) GetDescendantsToRef(results []*Control, opts *ContainerGetDe
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	c.p.Call("getDescendantsToRef", args...)

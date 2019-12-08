@@ -77,15 +77,15 @@ type SceneOptimizerOptionsAddCustomOptimizationOpts struct {
 // AddCustomOptimization calls the AddCustomOptimization method on the SceneOptimizerOptions object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#addcustomoptimization
-func (s *SceneOptimizerOptions) AddCustomOptimization(onApply func(), onGetDescription func(), opts *SceneOptimizerOptionsAddCustomOptimizationOpts) *SceneOptimizerOptions {
+func (s *SceneOptimizerOptions) AddCustomOptimization(onApply JSFunc, onGetDescription JSFunc, opts *SceneOptimizerOptionsAddCustomOptimizationOpts) *SceneOptimizerOptions {
 	if opts == nil {
 		opts = &SceneOptimizerOptionsAddCustomOptimizationOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onApply(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onGetDescription(); return nil }))
+	args = append(args, js.FuncOf(onApply))
+	args = append(args, js.FuncOf(onGetDescription))
 
 	if opts.Priority == nil {
 		args = append(args, js.Undefined())

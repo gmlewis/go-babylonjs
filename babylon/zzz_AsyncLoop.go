@@ -44,7 +44,7 @@ type NewAsyncLoopOpts struct {
 // NewAsyncLoop returns a new AsyncLoop object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop
-func (ba *Babylon) NewAsyncLoop(iterations float64, jsFunc func(), successCallback func(), opts *NewAsyncLoopOpts) *AsyncLoop {
+func (ba *Babylon) NewAsyncLoop(iterations float64, jsFunc JSFunc, successCallback JSFunc, opts *NewAsyncLoopOpts) *AsyncLoop {
 	if opts == nil {
 		opts = &NewAsyncLoopOpts{}
 	}
@@ -52,8 +52,8 @@ func (ba *Babylon) NewAsyncLoop(iterations float64, jsFunc func(), successCallba
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, iterations)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
+	args = append(args, js.FuncOf(successCallback))
 
 	if opts.Offset == nil {
 		args = append(args, js.Undefined())
@@ -89,7 +89,7 @@ type AsyncLoopRunOpts struct {
 // Run calls the Run method on the AsyncLoop object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop#run
-func (a *AsyncLoop) Run(iterations float64, fn func(), successCallback func(), opts *AsyncLoopRunOpts) *AsyncLoop {
+func (a *AsyncLoop) Run(iterations float64, fn JSFunc, successCallback JSFunc, opts *AsyncLoopRunOpts) *AsyncLoop {
 	if opts == nil {
 		opts = &AsyncLoopRunOpts{}
 	}
@@ -97,8 +97,8 @@ func (a *AsyncLoop) Run(iterations float64, fn func(), successCallback func(), o
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, iterations)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { fn(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
+	args = append(args, js.FuncOf(fn))
+	args = append(args, js.FuncOf(successCallback))
 
 	if opts.Offset == nil {
 		args = append(args, js.Undefined())
@@ -112,14 +112,14 @@ func (a *AsyncLoop) Run(iterations float64, fn func(), successCallback func(), o
 
 // AsyncLoopSyncAsyncForLoopOpts contains optional parameters for AsyncLoop.SyncAsyncForLoop.
 type AsyncLoopSyncAsyncForLoopOpts struct {
-	BreakFunction func()
+	BreakFunction JSFunc
 	Timeout       *float64
 }
 
 // SyncAsyncForLoop calls the SyncAsyncForLoop method on the AsyncLoop object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop#syncasyncforloop
-func (a *AsyncLoop) SyncAsyncForLoop(iterations float64, syncedIterations float64, fn func(), callback func(), opts *AsyncLoopSyncAsyncForLoopOpts) *AsyncLoop {
+func (a *AsyncLoop) SyncAsyncForLoop(iterations float64, syncedIterations float64, fn JSFunc, callback JSFunc, opts *AsyncLoopSyncAsyncForLoopOpts) *AsyncLoop {
 	if opts == nil {
 		opts = &AsyncLoopSyncAsyncForLoopOpts{}
 	}
@@ -128,13 +128,13 @@ func (a *AsyncLoop) SyncAsyncForLoop(iterations float64, syncedIterations float6
 
 	args = append(args, iterations)
 	args = append(args, syncedIterations)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { fn(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(fn))
+	args = append(args, js.FuncOf(callback))
 
 	if opts.BreakFunction == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.BreakFunction(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.BreakFunction) /* never freed! */)
 	}
 	if opts.Timeout == nil {
 		args = append(args, js.Undefined())

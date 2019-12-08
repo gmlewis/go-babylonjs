@@ -238,8 +238,8 @@ func (n *NullEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vert
 // NullEngineCreateTextureOpts contains optional parameters for NullEngine.CreateTexture.
 type NullEngineCreateTextureOpts struct {
 	SamplingMode *float64
-	OnLoad       func()
-	OnError      func()
+	OnLoad       JSFunc
+	OnError      JSFunc
 	Buffer       js.Value
 	FallBack     *InternalTexture
 	Format       *float64
@@ -268,12 +268,12 @@ func (n *NullEngine) CreateTexture(urlArg string, noMipmap bool, invertY bool, s
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnLoad) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	args = append(args, opts.Buffer)
 	if opts.FallBack == nil {
@@ -898,7 +898,7 @@ func (n *NullEngine) SetViewport(viewport js.Value, opts *NullEngineSetViewportO
 // NullEngineUnBindFramebufferOpts contains optional parameters for NullEngine.UnBindFramebuffer.
 type NullEngineUnBindFramebufferOpts struct {
 	DisableGenerateMipMaps *bool
-	OnBeforeUnbind         func()
+	OnBeforeUnbind         JSFunc
 }
 
 // UnBindFramebuffer calls the UnBindFramebuffer method on the NullEngine object.
@@ -921,7 +921,7 @@ func (n *NullEngine) UnBindFramebuffer(texture *InternalTexture, opts *NullEngin
 	if opts.OnBeforeUnbind == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnBeforeUnbind(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnBeforeUnbind) /* never freed! */)
 	}
 
 	n.p.Call("unBindFramebuffer", args...)

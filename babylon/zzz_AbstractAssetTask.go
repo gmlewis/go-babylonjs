@@ -60,13 +60,13 @@ func (a *AbstractAssetTask) Reset() {
 // Run calls the Run method on the AbstractAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask#run
-func (a *AbstractAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
+func (a *AbstractAssetTask) Run(scene *Scene, onSuccess JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
+	args = append(args, js.FuncOf(onError))
 
 	a.p.Call("run", args...)
 }
@@ -74,13 +74,13 @@ func (a *AbstractAssetTask) Run(scene *Scene, onSuccess func(), onError func()) 
 // RunTask calls the RunTask method on the AbstractAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask#runtask
-func (a *AbstractAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+func (a *AbstractAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
+	args = append(args, js.FuncOf(onError))
 
 	a.p.Call("runTask", args...)
 }
@@ -144,8 +144,8 @@ func (a *AbstractAssetTask) OnError() js.Value {
 // SetOnError sets the OnError property of class AbstractAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask#onerror
-func (a *AbstractAssetTask) SetOnError(onError func()) *AbstractAssetTask {
-	a.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (a *AbstractAssetTask) SetOnError(onError JSFunc) *AbstractAssetTask {
+	a.p.Set("onError", js.FuncOf(onError))
 	return a
 }
 
@@ -160,8 +160,8 @@ func (a *AbstractAssetTask) OnSuccess() js.Value {
 // SetOnSuccess sets the OnSuccess property of class AbstractAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask#onsuccess
-func (a *AbstractAssetTask) SetOnSuccess(onSuccess func()) *AbstractAssetTask {
-	a.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+func (a *AbstractAssetTask) SetOnSuccess(onSuccess JSFunc) *AbstractAssetTask {
+	a.p.Set("onSuccess", js.FuncOf(onSuccess))
 	return a
 }
 

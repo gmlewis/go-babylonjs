@@ -39,11 +39,11 @@ func TimingToolsArrayToJSArray(array []*TimingTools) []interface{} {
 // SetImmediate calls the SetImmediate method on the TimingTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.timingtools#setimmediate
-func (t *TimingTools) SetImmediate(action func()) {
+func (t *TimingTools) SetImmediate(action JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
+	args = append(args, js.FuncOf(action))
 
 	t.p.Call("SetImmediate", args...)
 }

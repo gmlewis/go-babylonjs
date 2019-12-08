@@ -131,8 +131,8 @@ func (i *IEffectCreationOptions) OnCompiled() js.Value {
 // SetOnCompiled sets the OnCompiled property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#oncompiled
-func (i *IEffectCreationOptions) SetOnCompiled(onCompiled func()) *IEffectCreationOptions {
-	i.p.Set("onCompiled", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCompiled(); return nil }))
+func (i *IEffectCreationOptions) SetOnCompiled(onCompiled JSFunc) *IEffectCreationOptions {
+	i.p.Set("onCompiled", js.FuncOf(onCompiled))
 	return i
 }
 
@@ -147,8 +147,8 @@ func (i *IEffectCreationOptions) OnError() js.Value {
 // SetOnError sets the OnError property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#onerror
-func (i *IEffectCreationOptions) SetOnError(onError func()) *IEffectCreationOptions {
-	i.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (i *IEffectCreationOptions) SetOnError(onError JSFunc) *IEffectCreationOptions {
+	i.p.Set("onError", js.FuncOf(onError))
 	return i
 }
 

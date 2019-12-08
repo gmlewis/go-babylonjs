@@ -38,7 +38,7 @@ func ISpriteManagerArrayToJSArray(array []*ISpriteManager) []interface{} {
 
 // ISpriteManagerIntersectsOpts contains optional parameters for ISpriteManager.Intersects.
 type ISpriteManagerIntersectsOpts struct {
-	Predicate func()
+	Predicate JSFunc
 	FastCheck *bool
 }
 
@@ -58,7 +58,7 @@ func (i *ISpriteManager) Intersects(ray *Ray, camera *Camera, opts *ISpriteManag
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -72,7 +72,7 @@ func (i *ISpriteManager) Intersects(ray *Ray, camera *Camera, opts *ISpriteManag
 
 // ISpriteManagerMultiIntersectsOpts contains optional parameters for ISpriteManager.MultiIntersects.
 type ISpriteManagerMultiIntersectsOpts struct {
-	Predicate func()
+	Predicate JSFunc
 }
 
 // MultiIntersects calls the MultiIntersects method on the ISpriteManager object.
@@ -91,7 +91,7 @@ func (i *ISpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *ISprite
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	retVal := i.p.Call("multiIntersects", args...)

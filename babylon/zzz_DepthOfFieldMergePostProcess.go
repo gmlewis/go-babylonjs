@@ -98,8 +98,8 @@ type DepthOfFieldMergePostProcessUpdateEffectOpts struct {
 	Uniforms        []string
 	Samplers        []string
 	IndexParameters *interface{}
-	OnCompiled      func()
-	OnError         func()
+	OnCompiled      JSFunc
+	OnError         JSFunc
 }
 
 // UpdateEffect calls the UpdateEffect method on the DepthOfFieldMergePostProcess object.
@@ -135,12 +135,12 @@ func (d *DepthOfFieldMergePostProcess) UpdateEffect(opts *DepthOfFieldMergePostP
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnCompiled) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	d.p.Call("updateEffect", args...)

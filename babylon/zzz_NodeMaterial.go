@@ -266,11 +266,11 @@ func (n *NodeMaterial) GetBlockByName(name string) *NodeMaterialBlock {
 // GetBlockByPredicate calls the GetBlockByPredicate method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#getblockbypredicate
-func (n *NodeMaterial) GetBlockByPredicate(predicate func()) *NodeMaterialBlock {
+func (n *NodeMaterial) GetBlockByPredicate(predicate JSFunc) *NodeMaterialBlock {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
+	args = append(args, js.FuncOf(predicate))
 
 	retVal := n.p.Call("getBlockByPredicate", args...)
 	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
@@ -288,11 +288,11 @@ func (n *NodeMaterial) GetClassName() string {
 // GetInputBlockByPredicate calls the GetInputBlockByPredicate method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#getinputblockbypredicate
-func (n *NodeMaterial) GetInputBlockByPredicate(predicate func()) *InputBlock {
+func (n *NodeMaterial) GetInputBlockByPredicate(predicate JSFunc) *InputBlock {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
+	args = append(args, js.FuncOf(predicate))
 
 	retVal := n.p.Call("getInputBlockByPredicate", args...)
 	return InputBlockFromJSObject(retVal, n.ctx)

@@ -84,7 +84,7 @@ func (a *ActionManager) GetTriggerName(trigger float64) string {
 
 // ActionManagerHasSpecificTriggerOpts contains optional parameters for ActionManager.HasSpecificTrigger.
 type ActionManagerHasSpecificTriggerOpts struct {
-	ParameterPredicate func()
+	ParameterPredicate JSFunc
 }
 
 // HasSpecificTrigger calls the HasSpecificTrigger method on the ActionManager object.
@@ -102,7 +102,7 @@ func (a *ActionManager) HasSpecificTrigger(trigger float64, opts *ActionManagerH
 	if opts.ParameterPredicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ParameterPredicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ParameterPredicate) /* never freed! */)
 	}
 
 	retVal := a.p.Call("hasSpecificTrigger", args...)

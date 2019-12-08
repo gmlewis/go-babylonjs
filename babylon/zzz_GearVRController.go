@@ -51,7 +51,7 @@ func (ba *Babylon) NewGearVRController(vrGamepad interface{}) *GearVRController 
 
 // GearVRControllerInitControllerMeshOpts contains optional parameters for GearVRController.InitControllerMesh.
 type GearVRControllerInitControllerMeshOpts struct {
-	MeshLoaded func()
+	MeshLoaded JSFunc
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the GearVRController object.
@@ -69,7 +69,7 @@ func (g *GearVRController) InitControllerMesh(scene *Scene, opts *GearVRControll
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.MeshLoaded(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.MeshLoaded) /* never freed! */)
 	}
 
 	g.p.Call("initControllerMesh", args...)

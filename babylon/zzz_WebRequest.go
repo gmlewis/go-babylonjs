@@ -130,8 +130,8 @@ func (w *WebRequest) CustomRequestModifiers() js.Value {
 // SetCustomRequestModifiers sets the CustomRequestModifiers property of class WebRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webrequest#customrequestmodifiers
-func (w *WebRequest) SetCustomRequestModifiers(CustomRequestModifiers func()) *WebRequest {
-	w.p.Set("CustomRequestModifiers", js.FuncOf(func(this js.Value, args []js.Value) interface{} { CustomRequestModifiers(); return nil }))
+func (w *WebRequest) SetCustomRequestModifiers(CustomRequestModifiers JSFunc) *WebRequest {
+	w.p.Set("CustomRequestModifiers", js.FuncOf(CustomRequestModifiers))
 	return w
 }
 
@@ -146,8 +146,8 @@ func (w *WebRequest) Onprogress() js.Value {
 // SetOnprogress sets the Onprogress property of class WebRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webrequest#onprogress
-func (w *WebRequest) SetOnprogress(onprogress func()) *WebRequest {
-	w.p.Set("onprogress", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onprogress(); return nil }))
+func (w *WebRequest) SetOnprogress(onprogress JSFunc) *WebRequest {
+	w.p.Set("onprogress", js.FuncOf(onprogress))
 	return w
 }
 

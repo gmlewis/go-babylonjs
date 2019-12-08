@@ -204,7 +204,7 @@ func (w *WebVRFreeCamera) UpdateFromDevice(poseData js.Value) {
 
 // WebVRFreeCameraUseStandingMatrixOpts contains optional parameters for WebVRFreeCamera.UseStandingMatrix.
 type WebVRFreeCameraUseStandingMatrixOpts struct {
-	Callback func()
+	Callback JSFunc
 }
 
 // UseStandingMatrix calls the UseStandingMatrix method on the WebVRFreeCamera object.
@@ -220,7 +220,7 @@ func (w *WebVRFreeCamera) UseStandingMatrix(opts *WebVRFreeCameraUseStandingMatr
 	if opts.Callback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Callback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Callback) /* never freed! */)
 	}
 
 	w.p.Call("useStandingMatrix", args...)

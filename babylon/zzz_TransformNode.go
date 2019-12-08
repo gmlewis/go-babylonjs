@@ -251,7 +251,7 @@ func (t *TransformNode) GetAbsolutePosition() *Vector3 {
 // TransformNodeGetChildTransformNodesOpts contains optional parameters for TransformNode.GetChildTransformNodes.
 type TransformNodeGetChildTransformNodesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             func()
+	Predicate             JSFunc
 }
 
 // GetChildTransformNodes calls the GetChildTransformNodes method on the TransformNode object.
@@ -272,7 +272,7 @@ func (t *TransformNode) GetChildTransformNodes(opts *TransformNodeGetChildTransf
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	retVal := t.p.Call("getChildTransformNodes", args...)
@@ -422,7 +422,7 @@ func (t *TransformNode) GetPositionInCameraSpace(opts *TransformNodeGetPositionI
 type TransformNodeInstantiateHierarchyOpts struct {
 	NewParent        *TransformNode
 	Options          map[string]interface{}
-	OnNewNodeCreated func()
+	OnNewNodeCreated JSFunc
 }
 
 // InstantiateHierarchy calls the InstantiateHierarchy method on the TransformNode object.
@@ -448,7 +448,7 @@ func (t *TransformNode) InstantiateHierarchy(opts *TransformNodeInstantiateHiera
 	if opts.OnNewNodeCreated == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnNewNodeCreated(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnNewNodeCreated) /* never freed! */)
 	}
 
 	retVal := t.p.Call("instantiateHierarchy", args...)
@@ -526,7 +526,7 @@ func (t *TransformNode) MarkAsDirty(property string) *TransformNode {
 type TransformNodeNormalizeToUnitCubeOpts struct {
 	IncludeDescendants *bool
 	IgnoreRotation     *bool
-	Predicate          func()
+	Predicate          JSFunc
 }
 
 // NormalizeToUnitCube calls the NormalizeToUnitCube method on the TransformNode object.
@@ -552,7 +552,7 @@ func (t *TransformNode) NormalizeToUnitCube(opts *TransformNodeNormalizeToUnitCu
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	retVal := t.p.Call("normalizeToUnitCube", args...)
@@ -577,11 +577,11 @@ func (t *TransformNode) Parse(parsedTransformNode interface{}, scene *Scene, roo
 // RegisterAfterWorldMatrixUpdate calls the RegisterAfterWorldMatrixUpdate method on the TransformNode object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#registerafterworldmatrixupdate
-func (t *TransformNode) RegisterAfterWorldMatrixUpdate(jsFunc func()) *TransformNode {
+func (t *TransformNode) RegisterAfterWorldMatrixUpdate(jsFunc JSFunc) *TransformNode {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	retVal := t.p.Call("registerAfterWorldMatrixUpdate", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -828,11 +828,11 @@ func (t *TransformNode) UnfreezeWorldMatrix() *TransformNode {
 // UnregisterAfterWorldMatrixUpdate calls the UnregisterAfterWorldMatrixUpdate method on the TransformNode object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#unregisterafterworldmatrixupdate
-func (t *TransformNode) UnregisterAfterWorldMatrixUpdate(jsFunc func()) *TransformNode {
+func (t *TransformNode) UnregisterAfterWorldMatrixUpdate(jsFunc JSFunc) *TransformNode {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	retVal := t.p.Call("unregisterAfterWorldMatrixUpdate", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)

@@ -63,7 +63,7 @@ func (s *Sprite) Dispose() {
 // PlayAnimation calls the PlayAnimation method on the Sprite object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite#playanimation
-func (s *Sprite) PlayAnimation(from float64, to float64, loop bool, delay float64, onAnimationEnd func()) {
+func (s *Sprite) PlayAnimation(from float64, to float64, loop bool, delay float64, onAnimationEnd JSFunc) {
 
 	args := make([]interface{}, 0, 5+0)
 
@@ -71,7 +71,7 @@ func (s *Sprite) PlayAnimation(from float64, to float64, loop bool, delay float6
 	args = append(args, to)
 	args = append(args, loop)
 	args = append(args, delay)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onAnimationEnd(); return nil }))
+	args = append(args, js.FuncOf(onAnimationEnd))
 
 	s.p.Call("playAnimation", args...)
 }

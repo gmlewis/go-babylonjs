@@ -74,13 +74,13 @@ func (ba *Babylon) NewEquiRectangularCubeTextureAssetTask(name string, url strin
 // RunTask calls the RunTask method on the EquiRectangularCubeTextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#runtask
-func (e *EquiRectangularCubeTextureAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+func (e *EquiRectangularCubeTextureAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
+	args = append(args, js.FuncOf(onError))
 
 	e.p.Call("runTask", args...)
 }
@@ -144,8 +144,8 @@ func (e *EquiRectangularCubeTextureAssetTask) OnError() js.Value {
 // SetOnError sets the OnError property of class EquiRectangularCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#onerror
-func (e *EquiRectangularCubeTextureAssetTask) SetOnError(onError func()) *EquiRectangularCubeTextureAssetTask {
-	e.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (e *EquiRectangularCubeTextureAssetTask) SetOnError(onError JSFunc) *EquiRectangularCubeTextureAssetTask {
+	e.p.Set("onError", js.FuncOf(onError))
 	return e
 }
 
@@ -160,8 +160,8 @@ func (e *EquiRectangularCubeTextureAssetTask) OnSuccess() js.Value {
 // SetOnSuccess sets the OnSuccess property of class EquiRectangularCubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#onsuccess
-func (e *EquiRectangularCubeTextureAssetTask) SetOnSuccess(onSuccess func()) *EquiRectangularCubeTextureAssetTask {
-	e.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+func (e *EquiRectangularCubeTextureAssetTask) SetOnSuccess(onSuccess JSFunc) *EquiRectangularCubeTextureAssetTask {
+	e.p.Set("onSuccess", js.FuncOf(onSuccess))
 	return e
 }
 

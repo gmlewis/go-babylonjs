@@ -39,12 +39,12 @@ func AndOrNotEvaluatorArrayToJSArray(array []*AndOrNotEvaluator) []interface{} {
 // Eval calls the Eval method on the AndOrNotEvaluator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.andornotevaluator#eval
-func (a *AndOrNotEvaluator) Eval(query string, evaluateCallback func()) bool {
+func (a *AndOrNotEvaluator) Eval(query string, evaluateCallback JSFunc) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, query)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { evaluateCallback(); return nil }))
+	args = append(args, js.FuncOf(evaluateCallback))
 
 	retVal := a.p.Call("Eval", args...)
 	return retVal.Bool()

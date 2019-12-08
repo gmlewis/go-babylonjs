@@ -74,8 +74,8 @@ func (d *Deferred) Reject() js.Value {
 // SetReject sets the Reject property of class Deferred.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#reject
-func (d *Deferred) SetReject(reject func()) *Deferred {
-	d.p.Set("reject", js.FuncOf(func(this js.Value, args []js.Value) interface{} { reject(); return nil }))
+func (d *Deferred) SetReject(reject JSFunc) *Deferred {
+	d.p.Set("reject", js.FuncOf(reject))
 	return d
 }
 
@@ -90,7 +90,7 @@ func (d *Deferred) Resolve() js.Value {
 // SetResolve sets the Resolve property of class Deferred.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred#resolve
-func (d *Deferred) SetResolve(resolve func()) *Deferred {
-	d.p.Set("resolve", js.FuncOf(func(this js.Value, args []js.Value) interface{} { resolve(); return nil }))
+func (d *Deferred) SetResolve(resolve JSFunc) *Deferred {
+	d.p.Set("resolve", js.FuncOf(resolve))
 	return d
 }

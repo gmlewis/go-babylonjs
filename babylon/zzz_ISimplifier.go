@@ -40,13 +40,13 @@ func ISimplifierArrayToJSArray(array []*ISimplifier) []interface{} {
 
 // ISimplifierSimplifyOpts contains optional parameters for ISimplifier.Simplify.
 type ISimplifierSimplifyOpts struct {
-	ErrorCallback func()
+	ErrorCallback JSFunc
 }
 
 // Simplify calls the Simplify method on the ISimplifier object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isimplifier#simplify
-func (i *ISimplifier) Simplify(settings *ISimplificationSettings, successCallback func(), opts *ISimplifierSimplifyOpts) {
+func (i *ISimplifier) Simplify(settings *ISimplificationSettings, successCallback JSFunc, opts *ISimplifierSimplifyOpts) {
 	if opts == nil {
 		opts = &ISimplifierSimplifyOpts{}
 	}
@@ -54,12 +54,12 @@ func (i *ISimplifier) Simplify(settings *ISimplificationSettings, successCallbac
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, settings.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
+	args = append(args, js.FuncOf(successCallback))
 
 	if opts.ErrorCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ErrorCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ErrorCallback) /* never freed! */)
 	}
 
 	i.p.Call("simplify", args...)

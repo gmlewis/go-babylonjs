@@ -82,7 +82,7 @@ func (o *OBJFileLoader) CreatePlugin() *ISceneLoaderPluginAsync {
 
 // OBJFileLoaderImportMeshAsyncOpts contains optional parameters for OBJFileLoader.ImportMeshAsync.
 type OBJFileLoaderImportMeshAsyncOpts struct {
-	OnProgress func()
+	OnProgress JSFunc
 	FileName   *string
 }
 
@@ -104,7 +104,7 @@ func (o *OBJFileLoader) ImportMeshAsync(meshesNames interface{}, scene *Scene, d
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.FileName == nil {
 		args = append(args, js.Undefined())
@@ -118,7 +118,7 @@ func (o *OBJFileLoader) ImportMeshAsync(meshesNames interface{}, scene *Scene, d
 
 // OBJFileLoaderLoadAssetContainerAsyncOpts contains optional parameters for OBJFileLoader.LoadAssetContainerAsync.
 type OBJFileLoaderLoadAssetContainerAsyncOpts struct {
-	OnProgress func()
+	OnProgress JSFunc
 	FileName   *string
 }
 
@@ -139,7 +139,7 @@ func (o *OBJFileLoader) LoadAssetContainerAsync(scene *Scene, data string, rootU
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.FileName == nil {
 		args = append(args, js.Undefined())
@@ -153,7 +153,7 @@ func (o *OBJFileLoader) LoadAssetContainerAsync(scene *Scene, data string, rootU
 
 // OBJFileLoaderLoadAsyncOpts contains optional parameters for OBJFileLoader.LoadAsync.
 type OBJFileLoaderLoadAsyncOpts struct {
-	OnProgress func()
+	OnProgress JSFunc
 	FileName   *string
 }
 
@@ -174,7 +174,7 @@ func (o *OBJFileLoader) LoadAsync(scene *Scene, data string, rootUrl string, opt
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.FileName == nil {
 		args = append(args, js.Undefined())

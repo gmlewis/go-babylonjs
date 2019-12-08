@@ -337,8 +337,8 @@ func (a *AssetsManager) OnFinish() js.Value {
 // SetOnFinish sets the OnFinish property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onfinish
-func (a *AssetsManager) SetOnFinish(onFinish func()) *AssetsManager {
-	a.p.Set("onFinish", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onFinish(); return nil }))
+func (a *AssetsManager) SetOnFinish(onFinish JSFunc) *AssetsManager {
+	a.p.Set("onFinish", js.FuncOf(onFinish))
 	return a
 }
 
@@ -353,8 +353,8 @@ func (a *AssetsManager) OnProgress() js.Value {
 // SetOnProgress sets the OnProgress property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#onprogress
-func (a *AssetsManager) SetOnProgress(onProgress func()) *AssetsManager {
-	a.p.Set("onProgress", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onProgress(); return nil }))
+func (a *AssetsManager) SetOnProgress(onProgress JSFunc) *AssetsManager {
+	a.p.Set("onProgress", js.FuncOf(onProgress))
 	return a
 }
 
@@ -385,8 +385,8 @@ func (a *AssetsManager) OnTaskError() js.Value {
 // SetOnTaskError sets the OnTaskError property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontaskerror
-func (a *AssetsManager) SetOnTaskError(onTaskError func()) *AssetsManager {
-	a.p.Set("onTaskError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onTaskError(); return nil }))
+func (a *AssetsManager) SetOnTaskError(onTaskError JSFunc) *AssetsManager {
+	a.p.Set("onTaskError", js.FuncOf(onTaskError))
 	return a
 }
 
@@ -417,8 +417,8 @@ func (a *AssetsManager) OnTaskSuccess() js.Value {
 // SetOnTaskSuccess sets the OnTaskSuccess property of class AssetsManager.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#ontasksuccess
-func (a *AssetsManager) SetOnTaskSuccess(onTaskSuccess func()) *AssetsManager {
-	a.p.Set("onTaskSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onTaskSuccess(); return nil }))
+func (a *AssetsManager) SetOnTaskSuccess(onTaskSuccess JSFunc) *AssetsManager {
+	a.p.Set("onTaskSuccess", js.FuncOf(onTaskSuccess))
 	return a
 }
 

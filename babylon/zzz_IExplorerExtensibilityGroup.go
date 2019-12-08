@@ -67,7 +67,7 @@ func (i *IExplorerExtensibilityGroup) Predicate() js.Value {
 // SetPredicate sets the Predicate property of class IExplorerExtensibilityGroup.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexplorerextensibilitygroup#predicate
-func (i *IExplorerExtensibilityGroup) SetPredicate(predicate func()) *IExplorerExtensibilityGroup {
-	i.p.Set("predicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
+func (i *IExplorerExtensibilityGroup) SetPredicate(predicate JSFunc) *IExplorerExtensibilityGroup {
+	i.p.Set("predicate", js.FuncOf(predicate))
 	return i
 }

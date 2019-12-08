@@ -47,14 +47,14 @@ type NewOctreeOpts struct {
 // NewOctree returns a new Octree object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree
-func (ba *Babylon) NewOctree(creationFunc func(), opts *NewOctreeOpts) *Octree {
+func (ba *Babylon) NewOctree(creationFunc JSFunc, opts *NewOctreeOpts) *Octree {
 	if opts == nil {
 		opts = &NewOctreeOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { creationFunc(); return nil }))
+	args = append(args, js.FuncOf(creationFunc))
 
 	if opts.MaxBlockCapacity == nil {
 		args = append(args, js.Undefined())
@@ -208,8 +208,8 @@ func (o *Octree) CreationFuncForMeshes() js.Value {
 // SetCreationFuncForMeshes sets the CreationFuncForMeshes property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#creationfuncformeshes
-func (o *Octree) SetCreationFuncForMeshes(CreationFuncForMeshes func()) *Octree {
-	o.p.Set("CreationFuncForMeshes", js.FuncOf(func(this js.Value, args []js.Value) interface{} { CreationFuncForMeshes(); return nil }))
+func (o *Octree) SetCreationFuncForMeshes(CreationFuncForMeshes JSFunc) *Octree {
+	o.p.Set("CreationFuncForMeshes", js.FuncOf(CreationFuncForMeshes))
 	return o
 }
 
@@ -224,8 +224,8 @@ func (o *Octree) CreationFuncForSubMeshes() js.Value {
 // SetCreationFuncForSubMeshes sets the CreationFuncForSubMeshes property of class Octree.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree#creationfuncforsubmeshes
-func (o *Octree) SetCreationFuncForSubMeshes(CreationFuncForSubMeshes func()) *Octree {
-	o.p.Set("CreationFuncForSubMeshes", js.FuncOf(func(this js.Value, args []js.Value) interface{} { CreationFuncForSubMeshes(); return nil }))
+func (o *Octree) SetCreationFuncForSubMeshes(CreationFuncForSubMeshes JSFunc) *Octree {
+	o.p.Set("CreationFuncForSubMeshes", js.FuncOf(CreationFuncForSubMeshes))
 	return o
 }
 

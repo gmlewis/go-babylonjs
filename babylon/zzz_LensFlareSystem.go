@@ -220,8 +220,8 @@ func (l *LensFlareSystem) MeshesSelectionPredicate() js.Value {
 // SetMeshesSelectionPredicate sets the MeshesSelectionPredicate property of class LensFlareSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#meshesselectionpredicate
-func (l *LensFlareSystem) SetMeshesSelectionPredicate(meshesSelectionPredicate func()) *LensFlareSystem {
-	l.p.Set("meshesSelectionPredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { meshesSelectionPredicate(); return nil }))
+func (l *LensFlareSystem) SetMeshesSelectionPredicate(meshesSelectionPredicate JSFunc) *LensFlareSystem {
+	l.p.Set("meshesSelectionPredicate", js.FuncOf(meshesSelectionPredicate))
 	return l
 }
 

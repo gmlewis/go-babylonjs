@@ -38,7 +38,7 @@ func ScreenshotToolsArrayToJSArray(array []*ScreenshotTools) []interface{} {
 
 // ScreenshotToolsCreateScreenshotOpts contains optional parameters for ScreenshotTools.CreateScreenshot.
 type ScreenshotToolsCreateScreenshotOpts struct {
-	SuccessCallback func()
+	SuccessCallback JSFunc
 	MimeType        *string
 }
 
@@ -59,7 +59,7 @@ func (s *ScreenshotTools) CreateScreenshot(engine *Engine, camera *Camera, size 
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.SuccessCallback) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -101,7 +101,7 @@ func (s *ScreenshotTools) CreateScreenshotAsync(engine *Engine, camera *Camera, 
 
 // ScreenshotToolsCreateScreenshotUsingRenderTargetOpts contains optional parameters for ScreenshotTools.CreateScreenshotUsingRenderTarget.
 type ScreenshotToolsCreateScreenshotUsingRenderTargetOpts struct {
-	SuccessCallback func()
+	SuccessCallback JSFunc
 	MimeType        *string
 	Samples         *float64
 	Antialiasing    *bool
@@ -125,7 +125,7 @@ func (s *ScreenshotTools) CreateScreenshotUsingRenderTarget(engine *Engine, came
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.SuccessCallback) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())

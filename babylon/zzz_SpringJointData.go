@@ -65,8 +65,8 @@ func (s *SpringJointData) ForceApplicationCallback() js.Value {
 // SetForceApplicationCallback sets the ForceApplicationCallback property of class SpringJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.springjointdata#forceapplicationcallback
-func (s *SpringJointData) SetForceApplicationCallback(forceApplicationCallback func()) *SpringJointData {
-	s.p.Set("forceApplicationCallback", js.FuncOf(func(this js.Value, args []js.Value) interface{} { forceApplicationCallback(); return nil }))
+func (s *SpringJointData) SetForceApplicationCallback(forceApplicationCallback JSFunc) *SpringJointData {
+	s.p.Set("forceApplicationCallback", js.FuncOf(forceApplicationCallback))
 	return s
 }
 

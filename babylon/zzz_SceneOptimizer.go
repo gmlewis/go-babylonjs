@@ -88,8 +88,8 @@ func (s *SceneOptimizer) Dispose() {
 // SceneOptimizerOptimizeAsyncOpts contains optional parameters for SceneOptimizer.OptimizeAsync.
 type SceneOptimizerOptimizeAsyncOpts struct {
 	Options   *SceneOptimizerOptions
-	OnSuccess func()
-	OnFailure func()
+	OnSuccess JSFunc
+	OnFailure JSFunc
 }
 
 // OptimizeAsync calls the OptimizeAsync method on the SceneOptimizer object.
@@ -112,12 +112,12 @@ func (s *SceneOptimizer) OptimizeAsync(scene *Scene, opts *SceneOptimizerOptimiz
 	if opts.OnSuccess == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnSuccess(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnSuccess) /* never freed! */)
 	}
 	if opts.OnFailure == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnFailure(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnFailure) /* never freed! */)
 	}
 
 	retVal := s.p.Call("OptimizeAsync", args...)

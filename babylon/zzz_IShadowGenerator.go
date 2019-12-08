@@ -59,7 +59,7 @@ func (i *IShadowGenerator) Dispose() {
 
 // IShadowGeneratorForceCompilationOpts contains optional parameters for IShadowGenerator.ForceCompilation.
 type IShadowGeneratorForceCompilationOpts struct {
-	OnCompiled func()
+	OnCompiled JSFunc
 	Options    map[string]interface{}
 }
 
@@ -76,7 +76,7 @@ func (i *IShadowGenerator) ForceCompilation(opts *IShadowGeneratorForceCompilati
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnCompiled) /* never freed! */)
 	}
 	if opts.Options == nil {
 		args = append(args, js.Undefined())

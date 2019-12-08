@@ -211,8 +211,8 @@ func (b *BoundingBoxGizmo) IncludeChildPredicate() js.Value {
 // SetIncludeChildPredicate sets the IncludeChildPredicate property of class BoundingBoxGizmo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#includechildpredicate
-func (b *BoundingBoxGizmo) SetIncludeChildPredicate(includeChildPredicate func()) *BoundingBoxGizmo {
-	b.p.Set("includeChildPredicate", js.FuncOf(func(this js.Value, args []js.Value) interface{} { includeChildPredicate(); return nil }))
+func (b *BoundingBoxGizmo) SetIncludeChildPredicate(includeChildPredicate JSFunc) *BoundingBoxGizmo {
+	b.p.Set("includeChildPredicate", js.FuncOf(includeChildPredicate))
 	return b
 }
 

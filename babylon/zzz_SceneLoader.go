@@ -42,9 +42,9 @@ func SceneLoaderArrayToJSArray(array []*SceneLoader) []interface{} {
 type SceneLoaderAppendOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnSuccess       func()
-	OnProgress      func()
-	OnError         func()
+	OnSuccess       JSFunc
+	OnProgress      JSFunc
+	OnError         JSFunc
 	PluginExtension *string
 }
 
@@ -73,17 +73,17 @@ func (s *SceneLoader) Append(rootUrl string, opts *SceneLoaderAppendOpts) *IScen
 	if opts.OnSuccess == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnSuccess(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnSuccess) /* never freed! */)
 	}
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.PluginExtension == nil {
 		args = append(args, js.Undefined())
@@ -99,7 +99,7 @@ func (s *SceneLoader) Append(rootUrl string, opts *SceneLoaderAppendOpts) *IScen
 type SceneLoaderAppendAsyncOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnProgress      func()
+	OnProgress      JSFunc
 	PluginExtension *string
 }
 
@@ -128,7 +128,7 @@ func (s *SceneLoader) AppendAsync(rootUrl string, opts *SceneLoaderAppendAsyncOp
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.PluginExtension == nil {
 		args = append(args, js.Undefined())
@@ -157,9 +157,9 @@ func (s *SceneLoader) GetPluginForExtension(extension string) *ISceneLoaderPlugi
 type SceneLoaderImportMeshOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnSuccess       func()
-	OnProgress      func()
-	OnError         func()
+	OnSuccess       JSFunc
+	OnProgress      JSFunc
+	OnError         JSFunc
 	PluginExtension *string
 }
 
@@ -189,17 +189,17 @@ func (s *SceneLoader) ImportMesh(meshNames interface{}, rootUrl string, opts *Sc
 	if opts.OnSuccess == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnSuccess(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnSuccess) /* never freed! */)
 	}
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.PluginExtension == nil {
 		args = append(args, js.Undefined())
@@ -215,7 +215,7 @@ func (s *SceneLoader) ImportMesh(meshNames interface{}, rootUrl string, opts *Sc
 type SceneLoaderImportMeshAsyncOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnProgress      func()
+	OnProgress      JSFunc
 	PluginExtension *string
 }
 
@@ -245,7 +245,7 @@ func (s *SceneLoader) ImportMeshAsync(meshNames interface{}, rootUrl string, opt
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.PluginExtension == nil {
 		args = append(args, js.Undefined())
@@ -274,9 +274,9 @@ func (s *SceneLoader) IsPluginForExtensionAvailable(extension string) bool {
 type SceneLoaderLoadOpts struct {
 	SceneFilename   *string
 	Engine          *Engine
-	OnSuccess       func()
-	OnProgress      func()
-	OnError         func()
+	OnSuccess       JSFunc
+	OnProgress      JSFunc
+	OnError         JSFunc
 	PluginExtension *string
 }
 
@@ -305,17 +305,17 @@ func (s *SceneLoader) Load(rootUrl string, opts *SceneLoaderLoadOpts) *ISceneLoa
 	if opts.OnSuccess == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnSuccess(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnSuccess) /* never freed! */)
 	}
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.PluginExtension == nil {
 		args = append(args, js.Undefined())
@@ -331,9 +331,9 @@ func (s *SceneLoader) Load(rootUrl string, opts *SceneLoaderLoadOpts) *ISceneLoa
 type SceneLoaderLoadAssetContainerOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnSuccess       func()
-	OnProgress      func()
-	OnError         func()
+	OnSuccess       JSFunc
+	OnProgress      JSFunc
+	OnError         JSFunc
 	PluginExtension *string
 }
 
@@ -362,17 +362,17 @@ func (s *SceneLoader) LoadAssetContainer(rootUrl string, opts *SceneLoaderLoadAs
 	if opts.OnSuccess == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnSuccess(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnSuccess) /* never freed! */)
 	}
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.PluginExtension == nil {
 		args = append(args, js.Undefined())
@@ -388,7 +388,7 @@ func (s *SceneLoader) LoadAssetContainer(rootUrl string, opts *SceneLoaderLoadAs
 type SceneLoaderLoadAssetContainerAsyncOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnProgress      func()
+	OnProgress      JSFunc
 	PluginExtension *string
 }
 
@@ -417,7 +417,7 @@ func (s *SceneLoader) LoadAssetContainerAsync(rootUrl string, opts *SceneLoaderL
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.PluginExtension == nil {
 		args = append(args, js.Undefined())
@@ -433,7 +433,7 @@ func (s *SceneLoader) LoadAssetContainerAsync(rootUrl string, opts *SceneLoaderL
 type SceneLoaderLoadAsyncOpts struct {
 	SceneFilename   *string
 	Engine          *Engine
-	OnProgress      func()
+	OnProgress      JSFunc
 	PluginExtension *string
 }
 
@@ -462,7 +462,7 @@ func (s *SceneLoader) LoadAsync(rootUrl string, opts *SceneLoaderLoadAsyncOpts) 
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.PluginExtension == nil {
 		args = append(args, js.Undefined())

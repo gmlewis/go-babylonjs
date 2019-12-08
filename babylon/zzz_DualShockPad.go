@@ -62,11 +62,11 @@ func (d *DualShockPad) Dispose() {
 // Onbuttondown calls the Onbuttondown method on the DualShockPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onbuttondown
-func (d *DualShockPad) Onbuttondown(callback func()) {
+func (d *DualShockPad) Onbuttondown(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	d.p.Call("onbuttondown", args...)
 }
@@ -74,11 +74,11 @@ func (d *DualShockPad) Onbuttondown(callback func()) {
 // Onbuttonup calls the Onbuttonup method on the DualShockPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onbuttonup
-func (d *DualShockPad) Onbuttonup(callback func()) {
+func (d *DualShockPad) Onbuttonup(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	d.p.Call("onbuttonup", args...)
 }
@@ -86,11 +86,11 @@ func (d *DualShockPad) Onbuttonup(callback func()) {
 // Ondpaddown calls the Ondpaddown method on the DualShockPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dualshockpad#ondpaddown
-func (d *DualShockPad) Ondpaddown(callback func()) {
+func (d *DualShockPad) Ondpaddown(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	d.p.Call("ondpaddown", args...)
 }
@@ -98,11 +98,11 @@ func (d *DualShockPad) Ondpaddown(callback func()) {
 // Ondpadup calls the Ondpadup method on the DualShockPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dualshockpad#ondpadup
-func (d *DualShockPad) Ondpadup(callback func()) {
+func (d *DualShockPad) Ondpadup(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	d.p.Call("ondpadup", args...)
 }
@@ -110,11 +110,11 @@ func (d *DualShockPad) Ondpadup(callback func()) {
 // Onlefttriggerchanged calls the Onlefttriggerchanged method on the DualShockPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onlefttriggerchanged
-func (d *DualShockPad) Onlefttriggerchanged(callback func()) {
+func (d *DualShockPad) Onlefttriggerchanged(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	d.p.Call("onlefttriggerchanged", args...)
 }
@@ -122,11 +122,11 @@ func (d *DualShockPad) Onlefttriggerchanged(callback func()) {
 // Onrighttriggerchanged calls the Onrighttriggerchanged method on the DualShockPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onrighttriggerchanged
-func (d *DualShockPad) Onrighttriggerchanged(callback func()) {
+func (d *DualShockPad) Onrighttriggerchanged(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	d.p.Call("onrighttriggerchanged", args...)
 }

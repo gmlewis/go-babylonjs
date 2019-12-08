@@ -103,7 +103,7 @@ func (m *Mesh) AddLODLevel(distance float64, mesh *Mesh) *Mesh {
 
 // MeshApplyDisplacementMapOpts contains optional parameters for Mesh.ApplyDisplacementMap.
 type MeshApplyDisplacementMapOpts struct {
-	OnSuccess   func()
+	OnSuccess   JSFunc
 	UvOffset    *Vector2
 	UvScale     *Vector2
 	ForceUpdate *bool
@@ -126,7 +126,7 @@ func (m *Mesh) ApplyDisplacementMap(url string, minHeight float64, maxHeight flo
 	if opts.OnSuccess == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnSuccess(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnSuccess) /* never freed! */)
 	}
 	if opts.UvOffset == nil {
 		args = append(args, js.Undefined())
@@ -533,7 +533,7 @@ func (m *Mesh) CreateGround(name string, width float64, height float64, subdivis
 // MeshCreateGroundFromHeightMapOpts contains optional parameters for Mesh.CreateGroundFromHeightMap.
 type MeshCreateGroundFromHeightMapOpts struct {
 	Updatable   *bool
-	OnReady     func()
+	OnReady     JSFunc
 	AlphaFilter *float64
 }
 
@@ -564,7 +564,7 @@ func (m *Mesh) CreateGroundFromHeightMap(name string, url string, width float64,
 	if opts.OnReady == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnReady(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnReady) /* never freed! */)
 	}
 	if opts.AlphaFilter == nil {
 		args = append(args, js.Undefined())
@@ -1028,7 +1028,7 @@ type MeshCreateTubeOpts struct {
 // CreateTube calls the CreateTube method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#createtube
-func (m *Mesh) CreateTube(name string, path []*Vector3, radius float64, tessellation float64, radiusFunction func(), cap float64, scene *Scene, opts *MeshCreateTubeOpts) *Mesh {
+func (m *Mesh) CreateTube(name string, path []*Vector3, radius float64, tessellation float64, radiusFunction JSFunc, cap float64, scene *Scene, opts *MeshCreateTubeOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshCreateTubeOpts{}
 	}
@@ -1039,7 +1039,7 @@ func (m *Mesh) CreateTube(name string, path []*Vector3, radius float64, tessella
 	args = append(args, Vector3ArrayToJSArray(path))
 	args = append(args, radius)
 	args = append(args, tessellation)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { radiusFunction(); return nil }))
+	args = append(args, js.FuncOf(radiusFunction))
 	args = append(args, cap)
 	args = append(args, scene.JSObject())
 
@@ -1201,7 +1201,7 @@ type MeshExtrudeShapeCustomOpts struct {
 // ExtrudeShapeCustom calls the ExtrudeShapeCustom method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#extrudeshapecustom
-func (m *Mesh) ExtrudeShapeCustom(name string, shape []*Vector3, path []*Vector3, scaleFunction func(), rotationFunction func(), ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *MeshExtrudeShapeCustomOpts) *Mesh {
+func (m *Mesh) ExtrudeShapeCustom(name string, shape []*Vector3, path []*Vector3, scaleFunction JSFunc, rotationFunction JSFunc, ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *MeshExtrudeShapeCustomOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshExtrudeShapeCustomOpts{}
 	}
@@ -1211,8 +1211,8 @@ func (m *Mesh) ExtrudeShapeCustom(name string, shape []*Vector3, path []*Vector3
 	args = append(args, name)
 	args = append(args, Vector3ArrayToJSArray(shape))
 	args = append(args, Vector3ArrayToJSArray(path))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { scaleFunction(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { rotationFunction(); return nil }))
+	args = append(args, js.FuncOf(scaleFunction))
+	args = append(args, js.FuncOf(rotationFunction))
 	args = append(args, ribbonCloseArray)
 	args = append(args, ribbonClosePath)
 	args = append(args, cap)
@@ -1505,7 +1505,7 @@ func (m *Mesh) IncreaseVertices(numberPerEdge float64) {
 type MeshInstantiateHierarchyOpts struct {
 	NewParent        *TransformNode
 	Options          map[string]interface{}
-	OnNewNodeCreated func()
+	OnNewNodeCreated JSFunc
 }
 
 // InstantiateHierarchy calls the InstantiateHierarchy method on the Mesh object.
@@ -1531,7 +1531,7 @@ func (m *Mesh) InstantiateHierarchy(opts *MeshInstantiateHierarchyOpts) *Transfo
 	if opts.OnNewNodeCreated == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnNewNodeCreated(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnNewNodeCreated) /* never freed! */)
 	}
 
 	retVal := m.p.Call("instantiateHierarchy", args...)
@@ -1709,7 +1709,7 @@ func (m *Mesh) MinMax(meshes []*AbstractMesh) js.Value {
 
 // MeshOptimizeIndicesOpts contains optional parameters for Mesh.OptimizeIndices.
 type MeshOptimizeIndicesOpts struct {
-	SuccessCallback func()
+	SuccessCallback JSFunc
 }
 
 // OptimizeIndices calls the OptimizeIndices method on the Mesh object.
@@ -1725,7 +1725,7 @@ func (m *Mesh) OptimizeIndices(opts *MeshOptimizeIndicesOpts) *Mesh {
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.SuccessCallback) /* never freed! */)
 	}
 
 	retVal := m.p.Call("optimizeIndices", args...)
@@ -1775,11 +1775,11 @@ func (m *Mesh) RefreshBoundingInfo(opts *MeshRefreshBoundingInfoOpts) *Mesh {
 // RegisterAfterRender calls the RegisterAfterRender method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#registerafterrender
-func (m *Mesh) RegisterAfterRender(jsFunc func()) *Mesh {
+func (m *Mesh) RegisterAfterRender(jsFunc JSFunc) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	retVal := m.p.Call("registerAfterRender", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -1788,11 +1788,11 @@ func (m *Mesh) RegisterAfterRender(jsFunc func()) *Mesh {
 // RegisterBeforeRender calls the RegisterBeforeRender method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#registerbeforerender
-func (m *Mesh) RegisterBeforeRender(jsFunc func()) *Mesh {
+func (m *Mesh) RegisterBeforeRender(jsFunc JSFunc) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	retVal := m.p.Call("registerBeforeRender", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -1991,7 +1991,7 @@ func (m *Mesh) SetVerticesData(kind string, data js.Value, opts *MeshSetVertices
 type MeshSimplifyOpts struct {
 	ParallelProcessing *bool
 	SimplificationType js.Value
-	SuccessCallback    func()
+	SuccessCallback    JSFunc
 }
 
 // Simplify calls the Simplify method on the Mesh object.
@@ -2015,7 +2015,7 @@ func (m *Mesh) Simplify(settings []*ISimplificationSettings, opts *MeshSimplifyO
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.SuccessCallback) /* never freed! */)
 	}
 
 	retVal := m.p.Call("simplify", args...)
@@ -2089,11 +2089,11 @@ func (m *Mesh) UnfreezeNormals() *Mesh {
 // UnregisterAfterRender calls the UnregisterAfterRender method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#unregisterafterrender
-func (m *Mesh) UnregisterAfterRender(jsFunc func()) *Mesh {
+func (m *Mesh) UnregisterAfterRender(jsFunc JSFunc) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	retVal := m.p.Call("unregisterAfterRender", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -2102,11 +2102,11 @@ func (m *Mesh) UnregisterAfterRender(jsFunc func()) *Mesh {
 // UnregisterBeforeRender calls the UnregisterBeforeRender method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#unregisterbeforerender
-func (m *Mesh) UnregisterBeforeRender(jsFunc func()) *Mesh {
+func (m *Mesh) UnregisterBeforeRender(jsFunc JSFunc) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	retVal := m.p.Call("unregisterBeforeRender", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -2153,14 +2153,14 @@ type MeshUpdateMeshPositionsOpts struct {
 // UpdateMeshPositions calls the UpdateMeshPositions method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#updatemeshpositions
-func (m *Mesh) UpdateMeshPositions(positionFunction func(), opts *MeshUpdateMeshPositionsOpts) *Mesh {
+func (m *Mesh) UpdateMeshPositions(positionFunction JSFunc, opts *MeshUpdateMeshPositionsOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshUpdateMeshPositionsOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { positionFunction(); return nil }))
+	args = append(args, js.FuncOf(positionFunction))
 
 	if opts.ComputeNormals == nil {
 		args = append(args, js.Undefined())
@@ -2694,8 +2694,8 @@ func (m *Mesh) OnBeforeDraw() js.Value {
 // SetOnBeforeDraw sets the OnBeforeDraw property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onbeforedraw
-func (m *Mesh) SetOnBeforeDraw(onBeforeDraw func()) *Mesh {
-	m.p.Set("onBeforeDraw", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onBeforeDraw(); return nil }))
+func (m *Mesh) SetOnBeforeDraw(onBeforeDraw JSFunc) *Mesh {
+	m.p.Set("onBeforeDraw", js.FuncOf(onBeforeDraw))
 	return m
 }
 
@@ -2742,8 +2742,8 @@ func (m *Mesh) OnLODLevelSelection() js.Value {
 // SetOnLODLevelSelection sets the OnLODLevelSelection property of class Mesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#onlodlevelselection
-func (m *Mesh) SetOnLODLevelSelection(onLODLevelSelection func()) *Mesh {
-	m.p.Set("onLODLevelSelection", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLODLevelSelection(); return nil }))
+func (m *Mesh) SetOnLODLevelSelection(onLODLevelSelection JSFunc) *Mesh {
+	m.p.Set("onLODLevelSelection", js.FuncOf(onLODLevelSelection))
 	return m
 }
 

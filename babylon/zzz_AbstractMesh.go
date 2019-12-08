@@ -732,7 +732,7 @@ func (a *AbstractMesh) MoveWithCollisions(displacement *Vector3) *AbstractMesh {
 type AbstractMeshNormalizeToUnitCubeOpts struct {
 	IncludeDescendants *bool
 	IgnoreRotation     *bool
-	Predicate          func()
+	Predicate          JSFunc
 }
 
 // NormalizeToUnitCube calls the NormalizeToUnitCube method on the AbstractMesh object.
@@ -758,7 +758,7 @@ func (a *AbstractMesh) NormalizeToUnitCube(opts *AbstractMeshNormalizeToUnitCube
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Predicate(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Predicate) /* never freed! */)
 	}
 
 	retVal := a.p.Call("normalizeToUnitCube", args...)
@@ -1885,8 +1885,8 @@ func (a *AbstractMesh) OnCollide() js.Value {
 // SetOnCollide sets the OnCollide property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollide
-func (a *AbstractMesh) SetOnCollide(onCollide func()) *AbstractMesh {
-	a.p.Set("onCollide", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCollide(); return nil }))
+func (a *AbstractMesh) SetOnCollide(onCollide JSFunc) *AbstractMesh {
+	a.p.Set("onCollide", js.FuncOf(onCollide))
 	return a
 }
 
@@ -1917,8 +1917,8 @@ func (a *AbstractMesh) OnCollisionPositionChange() js.Value {
 // SetOnCollisionPositionChange sets the OnCollisionPositionChange property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#oncollisionpositionchange
-func (a *AbstractMesh) SetOnCollisionPositionChange(onCollisionPositionChange func()) *AbstractMesh {
-	a.p.Set("onCollisionPositionChange", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCollisionPositionChange(); return nil }))
+func (a *AbstractMesh) SetOnCollisionPositionChange(onCollisionPositionChange JSFunc) *AbstractMesh {
+	a.p.Set("onCollisionPositionChange", js.FuncOf(onCollisionPositionChange))
 	return a
 }
 

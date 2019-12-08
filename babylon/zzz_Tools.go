@@ -59,7 +59,7 @@ func (t *Tools) ClearLogCache() {
 
 // ToolsCreateScreenshotOpts contains optional parameters for Tools.CreateScreenshot.
 type ToolsCreateScreenshotOpts struct {
-	SuccessCallback func()
+	SuccessCallback JSFunc
 	MimeType        *string
 }
 
@@ -80,7 +80,7 @@ func (t *Tools) CreateScreenshot(engine *Engine, camera *Camera, size *IScreensh
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.SuccessCallback) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -122,7 +122,7 @@ func (t *Tools) CreateScreenshotAsync(engine *Engine, camera *Camera, size *IScr
 
 // ToolsCreateScreenshotUsingRenderTargetOpts contains optional parameters for Tools.CreateScreenshotUsingRenderTarget.
 type ToolsCreateScreenshotUsingRenderTargetOpts struct {
-	SuccessCallback func()
+	SuccessCallback JSFunc
 	MimeType        *string
 	Samples         *float64
 	Antialiasing    *bool
@@ -146,7 +146,7 @@ func (t *Tools) CreateScreenshotUsingRenderTarget(engine *Engine, camera *Camera
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.SuccessCallback) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -293,7 +293,7 @@ func (t *Tools) Download(blob js.Value, fileName string) {
 
 // ToolsDumpFramebufferOpts contains optional parameters for Tools.DumpFramebuffer.
 type ToolsDumpFramebufferOpts struct {
-	SuccessCallback func()
+	SuccessCallback JSFunc
 	MimeType        *string
 	FileName        *string
 }
@@ -315,7 +315,7 @@ func (t *Tools) DumpFramebuffer(width float64, height float64, engine *Engine, o
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.SuccessCallback) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -333,7 +333,7 @@ func (t *Tools) DumpFramebuffer(width float64, height float64, engine *Engine, o
 
 // ToolsEncodeScreenshotCanvasDataOpts contains optional parameters for Tools.EncodeScreenshotCanvasData.
 type ToolsEncodeScreenshotCanvasDataOpts struct {
-	SuccessCallback func()
+	SuccessCallback JSFunc
 	MimeType        *string
 	FileName        *string
 }
@@ -351,7 +351,7 @@ func (t *Tools) EncodeScreenshotCanvasData(opts *ToolsEncodeScreenshotCanvasData
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.SuccessCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.SuccessCallback) /* never freed! */)
 	}
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -619,16 +619,16 @@ func (t *Tools) IsExponentOfTwo(value float64) bool {
 
 // ToolsLoadFileOpts contains optional parameters for Tools.LoadFile.
 type ToolsLoadFileOpts struct {
-	OnProgress      func()
+	OnProgress      JSFunc
 	OfflineProvider *IOfflineProvider
 	UseArrayBuffer  *bool
-	OnError         func()
+	OnError         JSFunc
 }
 
 // LoadFile calls the LoadFile method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#loadfile
-func (t *Tools) LoadFile(url string, onSuccess func(), opts *ToolsLoadFileOpts) *IFileRequest {
+func (t *Tools) LoadFile(url string, onSuccess JSFunc, opts *ToolsLoadFileOpts) *IFileRequest {
 	if opts == nil {
 		opts = &ToolsLoadFileOpts{}
 	}
@@ -636,12 +636,12 @@ func (t *Tools) LoadFile(url string, onSuccess func(), opts *ToolsLoadFileOpts) 
 	args := make([]interface{}, 0, 2+4)
 
 	args = append(args, url)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
 
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.OfflineProvider == nil {
 		args = append(args, js.Undefined())
@@ -656,7 +656,7 @@ func (t *Tools) LoadFile(url string, onSuccess func(), opts *ToolsLoadFileOpts) 
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	retVal := t.p.Call("LoadFile", args...)
@@ -684,7 +684,7 @@ type ToolsLoadImageOpts struct {
 // LoadImage calls the LoadImage method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#loadimage
-func (t *Tools) LoadImage(input string, onLoad func(), onError func(), offlineProvider *IOfflineProvider, opts *ToolsLoadImageOpts) js.Value {
+func (t *Tools) LoadImage(input string, onLoad JSFunc, onError JSFunc, offlineProvider *IOfflineProvider, opts *ToolsLoadImageOpts) js.Value {
 	if opts == nil {
 		opts = &ToolsLoadImageOpts{}
 	}
@@ -692,8 +692,8 @@ func (t *Tools) LoadImage(input string, onLoad func(), onError func(), offlinePr
 	args := make([]interface{}, 0, 4+1)
 
 	args = append(args, input)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onLoad(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onLoad))
+	args = append(args, js.FuncOf(onError))
 	args = append(args, offlineProvider.JSObject())
 
 	if opts.MimeType == nil {
@@ -708,14 +708,14 @@ func (t *Tools) LoadImage(input string, onLoad func(), onError func(), offlinePr
 
 // ToolsLoadScriptOpts contains optional parameters for Tools.LoadScript.
 type ToolsLoadScriptOpts struct {
-	OnError  func()
+	OnError  JSFunc
 	ScriptId *string
 }
 
 // LoadScript calls the LoadScript method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#loadscript
-func (t *Tools) LoadScript(scriptUrl string, onSuccess func(), opts *ToolsLoadScriptOpts) {
+func (t *Tools) LoadScript(scriptUrl string, onSuccess JSFunc, opts *ToolsLoadScriptOpts) {
 	if opts == nil {
 		opts = &ToolsLoadScriptOpts{}
 	}
@@ -723,12 +723,12 @@ func (t *Tools) LoadScript(scriptUrl string, onSuccess func(), opts *ToolsLoadSc
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, scriptUrl)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
 
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.ScriptId == nil {
 		args = append(args, js.Undefined())
@@ -831,15 +831,15 @@ func (t *Tools) RandomId() string {
 
 // ToolsReadFileOpts contains optional parameters for Tools.ReadFile.
 type ToolsReadFileOpts struct {
-	OnProgress     func()
+	OnProgress     JSFunc
 	UseArrayBuffer *bool
-	OnError        func()
+	OnError        JSFunc
 }
 
 // ReadFile calls the ReadFile method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#readfile
-func (t *Tools) ReadFile(file js.Value, onSuccess func(), opts *ToolsReadFileOpts) *IFileRequest {
+func (t *Tools) ReadFile(file js.Value, onSuccess JSFunc, opts *ToolsReadFileOpts) *IFileRequest {
 	if opts == nil {
 		opts = &ToolsReadFileOpts{}
 	}
@@ -847,12 +847,12 @@ func (t *Tools) ReadFile(file js.Value, onSuccess func(), opts *ToolsReadFileOpt
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, file)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
 
 	if opts.OnProgress == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnProgress(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnProgress) /* never freed! */)
 	}
 	if opts.UseArrayBuffer == nil {
 		args = append(args, js.Undefined())
@@ -862,7 +862,7 @@ func (t *Tools) ReadFile(file js.Value, onSuccess func(), opts *ToolsReadFileOpt
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 
 	retVal := t.p.Call("ReadFile", args...)
@@ -872,13 +872,13 @@ func (t *Tools) ReadFile(file js.Value, onSuccess func(), opts *ToolsReadFileOpt
 // ReadFileAsDataURL calls the ReadFileAsDataURL method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#readfileasdataurl
-func (t *Tools) ReadFileAsDataURL(fileToLoad js.Value, callback func(), progressCallback func()) *IFileRequest {
+func (t *Tools) ReadFileAsDataURL(fileToLoad js.Value, callback JSFunc, progressCallback JSFunc) *IFileRequest {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, fileToLoad)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { progressCallback(); return nil }))
+	args = append(args, js.FuncOf(callback))
+	args = append(args, js.FuncOf(progressCallback))
 
 	retVal := t.p.Call("ReadFileAsDataURL", args...)
 	return IFileRequestFromJSObject(retVal, t.ctx)
@@ -913,11 +913,11 @@ func (t *Tools) SetCorsBehavior(url []string, element js.Value) {
 // SetImmediate calls the SetImmediate method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#setimmediate
-func (t *Tools) SetImmediate(action func()) {
+func (t *Tools) SetImmediate(action JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { action(); return nil }))
+	args = append(args, js.FuncOf(action))
 
 	t.p.Call("SetImmediate", args...)
 }
@@ -930,7 +930,7 @@ type ToolsToBlobOpts struct {
 // ToBlob calls the ToBlob method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#toblob
-func (t *Tools) ToBlob(canvas js.Value, successCallback func(), opts *ToolsToBlobOpts) {
+func (t *Tools) ToBlob(canvas js.Value, successCallback JSFunc, opts *ToolsToBlobOpts) {
 	if opts == nil {
 		opts = &ToolsToBlobOpts{}
 	}
@@ -938,7 +938,7 @@ func (t *Tools) ToBlob(canvas js.Value, successCallback func(), opts *ToolsToBlo
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, canvas)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
+	args = append(args, js.FuncOf(successCallback))
 
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -1067,8 +1067,8 @@ func (t *Tools) DefaultRetryStrategy() js.Value {
 // SetDefaultRetryStrategy sets the DefaultRetryStrategy property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#defaultretrystrategy
-func (t *Tools) SetDefaultRetryStrategy(DefaultRetryStrategy func()) *Tools {
-	t.p.Set("DefaultRetryStrategy", js.FuncOf(func(this js.Value, args []js.Value) interface{} { DefaultRetryStrategy(); return nil }))
+func (t *Tools) SetDefaultRetryStrategy(DefaultRetryStrategy JSFunc) *Tools {
+	t.p.Set("DefaultRetryStrategy", js.FuncOf(DefaultRetryStrategy))
 	return t
 }
 
@@ -1083,8 +1083,8 @@ func (t *Tools) EndPerformanceCounter() js.Value {
 // SetEndPerformanceCounter sets the EndPerformanceCounter property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#endperformancecounter
-func (t *Tools) SetEndPerformanceCounter(EndPerformanceCounter func()) *Tools {
-	t.p.Set("EndPerformanceCounter", js.FuncOf(func(this js.Value, args []js.Value) interface{} { EndPerformanceCounter(); return nil }))
+func (t *Tools) SetEndPerformanceCounter(EndPerformanceCounter JSFunc) *Tools {
+	t.p.Set("EndPerformanceCounter", js.FuncOf(EndPerformanceCounter))
 	return t
 }
 
@@ -1259,8 +1259,8 @@ func (t *Tools) OnNewCacheEntry() js.Value {
 // SetOnNewCacheEntry sets the OnNewCacheEntry property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#onnewcacheentry
-func (t *Tools) SetOnNewCacheEntry(OnNewCacheEntry func()) *Tools {
-	t.p.Set("OnNewCacheEntry", js.FuncOf(func(this js.Value, args []js.Value) interface{} { OnNewCacheEntry(); return nil }))
+func (t *Tools) SetOnNewCacheEntry(OnNewCacheEntry JSFunc) *Tools {
+	t.p.Set("OnNewCacheEntry", js.FuncOf(OnNewCacheEntry))
 	return t
 }
 
@@ -1339,8 +1339,8 @@ func (t *Tools) PreprocessUrl() js.Value {
 // SetPreprocessUrl sets the PreprocessUrl property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#preprocessurl
-func (t *Tools) SetPreprocessUrl(PreprocessUrl func()) *Tools {
-	t.p.Set("PreprocessUrl", js.FuncOf(func(this js.Value, args []js.Value) interface{} { PreprocessUrl(); return nil }))
+func (t *Tools) SetPreprocessUrl(PreprocessUrl JSFunc) *Tools {
+	t.p.Set("PreprocessUrl", js.FuncOf(PreprocessUrl))
 	return t
 }
 
@@ -1371,8 +1371,8 @@ func (t *Tools) StartPerformanceCounter() js.Value {
 // SetStartPerformanceCounter sets the StartPerformanceCounter property of class Tools.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#startperformancecounter
-func (t *Tools) SetStartPerformanceCounter(StartPerformanceCounter func()) *Tools {
-	t.p.Set("StartPerformanceCounter", js.FuncOf(func(this js.Value, args []js.Value) interface{} { StartPerformanceCounter(); return nil }))
+func (t *Tools) SetStartPerformanceCounter(StartPerformanceCounter JSFunc) *Tools {
+	t.p.Set("StartPerformanceCounter", js.FuncOf(StartPerformanceCounter))
 	return t
 }
 

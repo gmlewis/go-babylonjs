@@ -41,7 +41,7 @@ func SoundArrayToJSArray(array []*Sound) []interface{} {
 
 // NewSoundOpts contains optional parameters for NewSound.
 type NewSoundOpts struct {
-	ReadyToPlayCallback func()
+	ReadyToPlayCallback JSFunc
 	Options             *ISoundOptions
 }
 
@@ -62,7 +62,7 @@ func (ba *Babylon) NewSound(name string, urlOrArrayBuffer interface{}, scene *Sc
 	if opts.ReadyToPlayCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ReadyToPlayCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ReadyToPlayCallback) /* never freed! */)
 	}
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
@@ -235,11 +235,11 @@ func (s *Sound) Serialize() interface{} {
 // SetAttenuationFunction calls the SetAttenuationFunction method on the Sound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#setattenuationfunction
-func (s *Sound) SetAttenuationFunction(callback func()) {
+func (s *Sound) SetAttenuationFunction(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	s.p.Call("setAttenuationFunction", args...)
 }

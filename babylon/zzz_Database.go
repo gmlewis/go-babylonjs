@@ -46,7 +46,7 @@ type NewDatabaseOpts struct {
 // NewDatabase returns a new Database object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database
-func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func(), opts *NewDatabaseOpts) *Database {
+func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked JSFunc, opts *NewDatabaseOpts) *Database {
 	if opts == nil {
 		opts = &NewDatabaseOpts{}
 	}
@@ -54,7 +54,7 @@ func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func()
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, urlToScene)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callbackManifestChecked(); return nil }))
+	args = append(args, js.FuncOf(callbackManifestChecked))
 
 	if opts.DisableManifestCheck == nil {
 		args = append(args, js.Undefined())
@@ -68,15 +68,15 @@ func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func()
 
 // DatabaseLoadFileOpts contains optional parameters for Database.LoadFile.
 type DatabaseLoadFileOpts struct {
-	ProgressCallBack func()
-	ErrorCallback    func()
+	ProgressCallBack JSFunc
+	ErrorCallback    JSFunc
 	UseArrayBuffer   *bool
 }
 
 // LoadFile calls the LoadFile method on the Database object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database#loadfile
-func (d *Database) LoadFile(url string, sceneLoaded func(), opts *DatabaseLoadFileOpts) {
+func (d *Database) LoadFile(url string, sceneLoaded JSFunc, opts *DatabaseLoadFileOpts) {
 	if opts == nil {
 		opts = &DatabaseLoadFileOpts{}
 	}
@@ -84,17 +84,17 @@ func (d *Database) LoadFile(url string, sceneLoaded func(), opts *DatabaseLoadFi
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, url)
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { sceneLoaded(); return nil }))
+	args = append(args, js.FuncOf(sceneLoaded))
 
 	if opts.ProgressCallBack == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ProgressCallBack(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ProgressCallBack) /* never freed! */)
 	}
 	if opts.ErrorCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.ErrorCallback(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.ErrorCallback) /* never freed! */)
 	}
 	if opts.UseArrayBuffer == nil {
 		args = append(args, js.Undefined())
@@ -121,12 +121,12 @@ func (d *Database) LoadImage(url string, image js.Value) {
 // Open calls the Open method on the Database object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database#open
-func (d *Database) Open(successCallback func(), errorCallback func()) {
+func (d *Database) Open(successCallback JSFunc, errorCallback JSFunc) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { successCallback(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { errorCallback(); return nil }))
+	args = append(args, js.FuncOf(successCallback))
+	args = append(args, js.FuncOf(errorCallback))
 
 	d.p.Call("open", args...)
 }

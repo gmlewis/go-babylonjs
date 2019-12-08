@@ -49,8 +49,8 @@ func (p *PhysicsRadialExplosionEventOptions) AffectedImpostorsCallback() js.Valu
 // SetAffectedImpostorsCallback sets the AffectedImpostorsCallback property of class PhysicsRadialExplosionEventOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#affectedimpostorscallback
-func (p *PhysicsRadialExplosionEventOptions) SetAffectedImpostorsCallback(affectedImpostorsCallback func()) *PhysicsRadialExplosionEventOptions {
-	p.p.Set("affectedImpostorsCallback", js.FuncOf(func(this js.Value, args []js.Value) interface{} { affectedImpostorsCallback(); return nil }))
+func (p *PhysicsRadialExplosionEventOptions) SetAffectedImpostorsCallback(affectedImpostorsCallback JSFunc) *PhysicsRadialExplosionEventOptions {
+	p.p.Set("affectedImpostorsCallback", js.FuncOf(affectedImpostorsCallback))
 	return p
 }
 

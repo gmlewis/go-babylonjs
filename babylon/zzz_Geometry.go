@@ -326,7 +326,7 @@ func (g *Geometry) IsVerticesDataPresent(kind string) bool {
 
 // GeometryLoadOpts contains optional parameters for Geometry.Load.
 type GeometryLoadOpts struct {
-	OnLoaded func()
+	OnLoaded JSFunc
 }
 
 // Load calls the Load method on the Geometry object.
@@ -344,7 +344,7 @@ func (g *Geometry) Load(scene *Scene, opts *GeometryLoadOpts) {
 	if opts.OnLoaded == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoaded(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnLoaded) /* never freed! */)
 	}
 
 	g.p.Call("load", args...)
@@ -749,8 +749,8 @@ func (g *Geometry) OnGeometryUpdated() js.Value {
 // SetOnGeometryUpdated sets the OnGeometryUpdated property of class Geometry.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#ongeometryupdated
-func (g *Geometry) SetOnGeometryUpdated(onGeometryUpdated func()) *Geometry {
-	g.p.Set("onGeometryUpdated", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onGeometryUpdated(); return nil }))
+func (g *Geometry) SetOnGeometryUpdated(onGeometryUpdated JSFunc) *Geometry {
+	g.p.Set("onGeometryUpdated", js.FuncOf(onGeometryUpdated))
 	return g
 }
 

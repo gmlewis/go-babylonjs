@@ -163,9 +163,9 @@ func (r *RenderingManager) SetRenderingAutoClearDepthStencil(renderingGroupId fl
 
 // RenderingManagerSetRenderingOrderOpts contains optional parameters for RenderingManager.SetRenderingOrder.
 type RenderingManagerSetRenderingOrderOpts struct {
-	OpaqueSortCompareFn      func()
-	AlphaTestSortCompareFn   func()
-	TransparentSortCompareFn func()
+	OpaqueSortCompareFn      JSFunc
+	AlphaTestSortCompareFn   JSFunc
+	TransparentSortCompareFn JSFunc
 }
 
 // SetRenderingOrder calls the SetRenderingOrder method on the RenderingManager object.
@@ -183,17 +183,17 @@ func (r *RenderingManager) SetRenderingOrder(renderingGroupId float64, opts *Ren
 	if opts.OpaqueSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OpaqueSortCompareFn(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OpaqueSortCompareFn) /* never freed! */)
 	}
 	if opts.AlphaTestSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.AlphaTestSortCompareFn(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.AlphaTestSortCompareFn) /* never freed! */)
 	}
 	if opts.TransparentSortCompareFn == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.TransparentSortCompareFn(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.TransparentSortCompareFn) /* never freed! */)
 	}
 
 	r.p.Call("setRenderingOrder", args...)

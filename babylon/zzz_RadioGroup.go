@@ -52,7 +52,7 @@ func (gui *GUI) NewRadioGroup(name string) *RadioGroup {
 
 // RadioGroupAddRadioOpts contains optional parameters for RadioGroup.AddRadio.
 type RadioGroupAddRadioOpts struct {
-	Func    func()
+	Func    JSFunc
 	Checked *bool
 }
 
@@ -71,7 +71,7 @@ func (r *RadioGroup) AddRadio(label string, opts *RadioGroupAddRadioOpts) {
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Func) /* never freed! */)
 	}
 	if opts.Checked == nil {
 		args = append(args, js.Undefined())

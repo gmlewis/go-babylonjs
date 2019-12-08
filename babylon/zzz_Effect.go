@@ -42,8 +42,8 @@ type NewEffectOpts struct {
 	Engine          *ThinEngine
 	Defines         *string
 	Fallbacks       *IEffectFallbacks
-	OnCompiled      func()
-	OnError         func()
+	OnCompiled      JSFunc
+	OnError         JSFunc
 	IndexParameters *interface{}
 }
 
@@ -84,12 +84,12 @@ func (ba *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions []st
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnCompiled(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnCompiled) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.IndexParameters == nil {
 		args = append(args, js.Undefined())
@@ -147,11 +147,11 @@ func (e *Effect) Dispose() {
 // ExecuteWhenCompiled calls the ExecuteWhenCompiled method on the Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#executewhencompiled
-func (e *Effect) ExecuteWhenCompiled(jsFunc func()) {
+func (e *Effect) ExecuteWhenCompiled(jsFunc JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { jsFunc(); return nil }))
+	args = append(args, js.FuncOf(jsFunc))
 
 	e.p.Call("executeWhenCompiled", args...)
 }
@@ -874,8 +874,8 @@ func (e *Effect) OnBind() js.Value {
 // SetOnBind sets the OnBind property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#onbind
-func (e *Effect) SetOnBind(onBind func()) *Effect {
-	e.p.Set("onBind", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onBind(); return nil }))
+func (e *Effect) SetOnBind(onBind JSFunc) *Effect {
+	e.p.Set("onBind", js.FuncOf(onBind))
 	return e
 }
 
@@ -922,8 +922,8 @@ func (e *Effect) OnCompiled() js.Value {
 // SetOnCompiled sets the OnCompiled property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#oncompiled
-func (e *Effect) SetOnCompiled(onCompiled func()) *Effect {
-	e.p.Set("onCompiled", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCompiled(); return nil }))
+func (e *Effect) SetOnCompiled(onCompiled JSFunc) *Effect {
+	e.p.Set("onCompiled", js.FuncOf(onCompiled))
 	return e
 }
 
@@ -938,8 +938,8 @@ func (e *Effect) OnError() js.Value {
 // SetOnError sets the OnError property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#onerror
-func (e *Effect) SetOnError(onError func()) *Effect {
-	e.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (e *Effect) SetOnError(onError JSFunc) *Effect {
+	e.p.Set("onError", js.FuncOf(onError))
 	return e
 }
 

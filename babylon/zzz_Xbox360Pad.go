@@ -76,11 +76,11 @@ func (x *Xbox360Pad) Dispose() {
 // Onbuttondown calls the Onbuttondown method on the Xbox360Pad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad#onbuttondown
-func (x *Xbox360Pad) Onbuttondown(callback func()) {
+func (x *Xbox360Pad) Onbuttondown(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	x.p.Call("onbuttondown", args...)
 }
@@ -88,11 +88,11 @@ func (x *Xbox360Pad) Onbuttondown(callback func()) {
 // Onbuttonup calls the Onbuttonup method on the Xbox360Pad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad#onbuttonup
-func (x *Xbox360Pad) Onbuttonup(callback func()) {
+func (x *Xbox360Pad) Onbuttonup(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	x.p.Call("onbuttonup", args...)
 }
@@ -100,11 +100,11 @@ func (x *Xbox360Pad) Onbuttonup(callback func()) {
 // Ondpaddown calls the Ondpaddown method on the Xbox360Pad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad#ondpaddown
-func (x *Xbox360Pad) Ondpaddown(callback func()) {
+func (x *Xbox360Pad) Ondpaddown(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	x.p.Call("ondpaddown", args...)
 }
@@ -112,11 +112,11 @@ func (x *Xbox360Pad) Ondpaddown(callback func()) {
 // Ondpadup calls the Ondpadup method on the Xbox360Pad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad#ondpadup
-func (x *Xbox360Pad) Ondpadup(callback func()) {
+func (x *Xbox360Pad) Ondpadup(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	x.p.Call("ondpadup", args...)
 }
@@ -124,11 +124,11 @@ func (x *Xbox360Pad) Ondpadup(callback func()) {
 // Onlefttriggerchanged calls the Onlefttriggerchanged method on the Xbox360Pad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad#onlefttriggerchanged
-func (x *Xbox360Pad) Onlefttriggerchanged(callback func()) {
+func (x *Xbox360Pad) Onlefttriggerchanged(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	x.p.Call("onlefttriggerchanged", args...)
 }
@@ -136,11 +136,11 @@ func (x *Xbox360Pad) Onlefttriggerchanged(callback func()) {
 // Onrighttriggerchanged calls the Onrighttriggerchanged method on the Xbox360Pad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad#onrighttriggerchanged
-func (x *Xbox360Pad) Onrighttriggerchanged(callback func()) {
+func (x *Xbox360Pad) Onrighttriggerchanged(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	x.p.Call("onrighttriggerchanged", args...)
 }

@@ -79,7 +79,7 @@ func (s *SelectionPanel) AddGroup(group *SelectorGroup) {
 
 // SelectionPanelAddToGroupCheckboxOpts contains optional parameters for SelectionPanel.AddToGroupCheckbox.
 type SelectionPanelAddToGroupCheckboxOpts struct {
-	Func    func()
+	Func    JSFunc
 	Checked *bool
 }
 
@@ -99,7 +99,7 @@ func (s *SelectionPanel) AddToGroupCheckbox(groupNb float64, label string, opts 
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Func) /* never freed! */)
 	}
 	if opts.Checked == nil {
 		args = append(args, js.Undefined())
@@ -112,7 +112,7 @@ func (s *SelectionPanel) AddToGroupCheckbox(groupNb float64, label string, opts 
 
 // SelectionPanelAddToGroupRadioOpts contains optional parameters for SelectionPanel.AddToGroupRadio.
 type SelectionPanelAddToGroupRadioOpts struct {
-	Func    func()
+	Func    JSFunc
 	Checked *bool
 }
 
@@ -132,7 +132,7 @@ func (s *SelectionPanel) AddToGroupRadio(groupNb float64, label string, opts *Se
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Func) /* never freed! */)
 	}
 	if opts.Checked == nil {
 		args = append(args, js.Undefined())
@@ -145,12 +145,12 @@ func (s *SelectionPanel) AddToGroupRadio(groupNb float64, label string, opts *Se
 
 // SelectionPanelAddToGroupSliderOpts contains optional parameters for SelectionPanel.AddToGroupSlider.
 type SelectionPanelAddToGroupSliderOpts struct {
-	Func  func()
+	Func  JSFunc
 	Unit  *string
 	Min   *float64
 	Max   *float64
 	Value *float64
-	OnVal func()
+	OnVal JSFunc
 }
 
 // AddToGroupSlider calls the AddToGroupSlider method on the SelectionPanel object.
@@ -169,7 +169,7 @@ func (s *SelectionPanel) AddToGroupSlider(groupNb float64, label string, opts *S
 	if opts.Func == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.Func(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.Func) /* never freed! */)
 	}
 	if opts.Unit == nil {
 		args = append(args, js.Undefined())
@@ -194,7 +194,7 @@ func (s *SelectionPanel) AddToGroupSlider(groupNb float64, label string, opts *S
 	if opts.OnVal == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnVal(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnVal) /* never freed! */)
 	}
 
 	s.p.Call("addToGroupSlider", args...)

@@ -79,13 +79,13 @@ func (ba *Babylon) NewCubeTextureAssetTask(name string, url string, opts *NewCub
 // RunTask calls the RunTask method on the CubeTextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#runtask
-func (c *CubeTextureAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+func (c *CubeTextureAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFunc) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, scene.JSObject())
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+	args = append(args, js.FuncOf(onSuccess))
+	args = append(args, js.FuncOf(onError))
 
 	c.p.Call("runTask", args...)
 }
@@ -173,8 +173,8 @@ func (c *CubeTextureAssetTask) OnError() js.Value {
 // SetOnError sets the OnError property of class CubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#onerror
-func (c *CubeTextureAssetTask) SetOnError(onError func()) *CubeTextureAssetTask {
-	c.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (c *CubeTextureAssetTask) SetOnError(onError JSFunc) *CubeTextureAssetTask {
+	c.p.Set("onError", js.FuncOf(onError))
 	return c
 }
 
@@ -189,8 +189,8 @@ func (c *CubeTextureAssetTask) OnSuccess() js.Value {
 // SetOnSuccess sets the OnSuccess property of class CubeTextureAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#onsuccess
-func (c *CubeTextureAssetTask) SetOnSuccess(onSuccess func()) *CubeTextureAssetTask {
-	c.p.Set("onSuccess", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onSuccess(); return nil }))
+func (c *CubeTextureAssetTask) SetOnSuccess(onSuccess JSFunc) *CubeTextureAssetTask {
+	c.p.Set("onSuccess", js.FuncOf(onSuccess))
 	return c
 }
 

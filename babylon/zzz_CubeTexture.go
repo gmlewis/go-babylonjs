@@ -41,8 +41,8 @@ type NewCubeTextureOpts struct {
 	Extensions        []string
 	NoMipmap          *bool
 	Files             []string
-	OnLoad            func()
-	OnError           func()
+	OnLoad            JSFunc
+	OnError           JSFunc
 	Format            *float64
 	Prefiltered       *bool
 	ForcedExtension   *interface{}
@@ -82,12 +82,12 @@ func (ba *Babylon) NewCubeTexture(rootUrl string, scene *Scene, opts *NewCubeTex
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnLoad) /* never freed! */)
 	}
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnError(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnError) /* never freed! */)
 	}
 	if opts.Format == nil {
 		args = append(args, js.Undefined())
@@ -267,7 +267,7 @@ func (c *CubeTexture) SetReflectionTextureMatrix(value *Matrix) {
 // CubeTextureUpdateURLOpts contains optional parameters for CubeTexture.UpdateURL.
 type CubeTextureUpdateURLOpts struct {
 	ForcedExtension *string
-	OnLoad          func()
+	OnLoad          JSFunc
 }
 
 // UpdateURL calls the UpdateURL method on the CubeTexture object.
@@ -290,7 +290,7 @@ func (c *CubeTexture) UpdateURL(url string, opts *CubeTextureUpdateURLOpts) {
 	if opts.OnLoad == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnLoad(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnLoad) /* never freed! */)
 	}
 
 	c.p.Call("updateURL", args...)

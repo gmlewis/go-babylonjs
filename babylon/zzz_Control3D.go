@@ -333,8 +333,8 @@ func (c *Control3D) PointerDownAnimation() js.Value {
 // SetPointerDownAnimation sets the PointerDownAnimation property of class Control3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control3d#pointerdownanimation
-func (c *Control3D) SetPointerDownAnimation(pointerDownAnimation func()) *Control3D {
-	c.p.Set("pointerDownAnimation", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerDownAnimation(); return nil }))
+func (c *Control3D) SetPointerDownAnimation(pointerDownAnimation JSFunc) *Control3D {
+	c.p.Set("pointerDownAnimation", js.FuncOf(pointerDownAnimation))
 	return c
 }
 
@@ -349,8 +349,8 @@ func (c *Control3D) PointerEnterAnimation() js.Value {
 // SetPointerEnterAnimation sets the PointerEnterAnimation property of class Control3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control3d#pointerenteranimation
-func (c *Control3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *Control3D {
-	c.p.Set("pointerEnterAnimation", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerEnterAnimation(); return nil }))
+func (c *Control3D) SetPointerEnterAnimation(pointerEnterAnimation JSFunc) *Control3D {
+	c.p.Set("pointerEnterAnimation", js.FuncOf(pointerEnterAnimation))
 	return c
 }
 
@@ -365,8 +365,8 @@ func (c *Control3D) PointerOutAnimation() js.Value {
 // SetPointerOutAnimation sets the PointerOutAnimation property of class Control3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control3d#pointeroutanimation
-func (c *Control3D) SetPointerOutAnimation(pointerOutAnimation func()) *Control3D {
-	c.p.Set("pointerOutAnimation", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerOutAnimation(); return nil }))
+func (c *Control3D) SetPointerOutAnimation(pointerOutAnimation JSFunc) *Control3D {
+	c.p.Set("pointerOutAnimation", js.FuncOf(pointerOutAnimation))
 	return c
 }
 
@@ -381,8 +381,8 @@ func (c *Control3D) PointerUpAnimation() js.Value {
 // SetPointerUpAnimation sets the PointerUpAnimation property of class Control3D.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control3d#pointerupanimation
-func (c *Control3D) SetPointerUpAnimation(pointerUpAnimation func()) *Control3D {
-	c.p.Set("pointerUpAnimation", js.FuncOf(func(this js.Value, args []js.Value) interface{} { pointerUpAnimation(); return nil }))
+func (c *Control3D) SetPointerUpAnimation(pointerUpAnimation JSFunc) *Control3D {
+	c.p.Set("pointerUpAnimation", js.FuncOf(pointerUpAnimation))
 	return c
 }
 

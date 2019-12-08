@@ -62,11 +62,11 @@ func (g *GenericPad) Dispose() {
 // Onbuttondown calls the Onbuttondown method on the GenericPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttondown
-func (g *GenericPad) Onbuttondown(callback func()) {
+func (g *GenericPad) Onbuttondown(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	g.p.Call("onbuttondown", args...)
 }
@@ -74,11 +74,11 @@ func (g *GenericPad) Onbuttondown(callback func()) {
 // Onbuttonup calls the Onbuttonup method on the GenericPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttonup
-func (g *GenericPad) Onbuttonup(callback func()) {
+func (g *GenericPad) Onbuttonup(callback JSFunc) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { callback(); return nil }))
+	args = append(args, js.FuncOf(callback))
 
 	g.p.Call("onbuttonup", args...)
 }

@@ -44,7 +44,7 @@ type NewInterpolateValueActionOpts struct {
 	Duration            *float64
 	Condition           *Condition
 	StopOtherAnimations *bool
-	OnInterpolationDone func()
+	OnInterpolationDone JSFunc
 }
 
 // NewInterpolateValueAction returns a new InterpolateValueAction object.
@@ -80,7 +80,7 @@ func (ba *Babylon) NewInterpolateValueAction(triggerOptions interface{}, target 
 	if opts.OnInterpolationDone == nil {
 		args = append(args, js.Undefined())
 	} else {
-		args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { opts.OnInterpolationDone(); return nil }) /* never freed! */)
+		args = append(args, js.FuncOf(opts.OnInterpolationDone) /* never freed! */)
 	}
 
 	p := ba.ctx.Get("InterpolateValueAction").New(args...)
@@ -135,8 +135,8 @@ func (i *InterpolateValueAction) OnInterpolationDone() js.Value {
 // SetOnInterpolationDone sets the OnInterpolationDone property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#oninterpolationdone
-func (i *InterpolateValueAction) SetOnInterpolationDone(onInterpolationDone func()) *InterpolateValueAction {
-	i.p.Set("onInterpolationDone", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onInterpolationDone(); return nil }))
+func (i *InterpolateValueAction) SetOnInterpolationDone(onInterpolationDone JSFunc) *InterpolateValueAction {
+	i.p.Set("onInterpolationDone", js.FuncOf(onInterpolationDone))
 	return i
 }
 

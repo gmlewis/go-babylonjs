@@ -235,8 +235,8 @@ func (g *GLTFFileLoader) OnCameraLoaded() js.Value {
 // SetOnCameraLoaded sets the OnCameraLoaded property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncameraloaded
-func (g *GLTFFileLoader) SetOnCameraLoaded(onCameraLoaded func()) *GLTFFileLoader {
-	g.p.Set("onCameraLoaded", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onCameraLoaded(); return nil }))
+func (g *GLTFFileLoader) SetOnCameraLoaded(onCameraLoaded JSFunc) *GLTFFileLoader {
+	g.p.Set("onCameraLoaded", js.FuncOf(onCameraLoaded))
 	return g
 }
 
@@ -267,8 +267,8 @@ func (g *GLTFFileLoader) OnComplete() js.Value {
 // SetOnComplete sets the OnComplete property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncomplete
-func (g *GLTFFileLoader) SetOnComplete(onComplete func()) *GLTFFileLoader {
-	g.p.Set("onComplete", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onComplete(); return nil }))
+func (g *GLTFFileLoader) SetOnComplete(onComplete JSFunc) *GLTFFileLoader {
+	g.p.Set("onComplete", js.FuncOf(onComplete))
 	return g
 }
 
@@ -299,8 +299,8 @@ func (g *GLTFFileLoader) OnDispose() js.Value {
 // SetOnDispose sets the OnDispose property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ondispose
-func (g *GLTFFileLoader) SetOnDispose(onDispose func()) *GLTFFileLoader {
-	g.p.Set("onDispose", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onDispose(); return nil }))
+func (g *GLTFFileLoader) SetOnDispose(onDispose JSFunc) *GLTFFileLoader {
+	g.p.Set("onDispose", js.FuncOf(onDispose))
 	return g
 }
 
@@ -331,8 +331,8 @@ func (g *GLTFFileLoader) OnError() js.Value {
 // SetOnError sets the OnError property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onerror
-func (g *GLTFFileLoader) SetOnError(onError func()) *GLTFFileLoader {
-	g.p.Set("onError", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onError(); return nil }))
+func (g *GLTFFileLoader) SetOnError(onError JSFunc) *GLTFFileLoader {
+	g.p.Set("onError", js.FuncOf(onError))
 	return g
 }
 
@@ -363,8 +363,8 @@ func (g *GLTFFileLoader) OnExtensionLoaded() js.Value {
 // SetOnExtensionLoaded sets the OnExtensionLoaded property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onextensionloaded
-func (g *GLTFFileLoader) SetOnExtensionLoaded(onExtensionLoaded func()) *GLTFFileLoader {
-	g.p.Set("onExtensionLoaded", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onExtensionLoaded(); return nil }))
+func (g *GLTFFileLoader) SetOnExtensionLoaded(onExtensionLoaded JSFunc) *GLTFFileLoader {
+	g.p.Set("onExtensionLoaded", js.FuncOf(onExtensionLoaded))
 	return g
 }
 
@@ -395,8 +395,8 @@ func (g *GLTFFileLoader) OnMaterialLoaded() js.Value {
 // SetOnMaterialLoaded sets the OnMaterialLoaded property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmaterialloaded
-func (g *GLTFFileLoader) SetOnMaterialLoaded(onMaterialLoaded func()) *GLTFFileLoader {
-	g.p.Set("onMaterialLoaded", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onMaterialLoaded(); return nil }))
+func (g *GLTFFileLoader) SetOnMaterialLoaded(onMaterialLoaded JSFunc) *GLTFFileLoader {
+	g.p.Set("onMaterialLoaded", js.FuncOf(onMaterialLoaded))
 	return g
 }
 
@@ -427,8 +427,8 @@ func (g *GLTFFileLoader) OnMeshLoaded() js.Value {
 // SetOnMeshLoaded sets the OnMeshLoaded property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmeshloaded
-func (g *GLTFFileLoader) SetOnMeshLoaded(onMeshLoaded func()) *GLTFFileLoader {
-	g.p.Set("onMeshLoaded", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onMeshLoaded(); return nil }))
+func (g *GLTFFileLoader) SetOnMeshLoaded(onMeshLoaded JSFunc) *GLTFFileLoader {
+	g.p.Set("onMeshLoaded", js.FuncOf(onMeshLoaded))
 	return g
 }
 
@@ -459,8 +459,8 @@ func (g *GLTFFileLoader) OnParsed() js.Value {
 // SetOnParsed sets the OnParsed property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onparsed
-func (g *GLTFFileLoader) SetOnParsed(onParsed func()) *GLTFFileLoader {
-	g.p.Set("onParsed", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onParsed(); return nil }))
+func (g *GLTFFileLoader) SetOnParsed(onParsed JSFunc) *GLTFFileLoader {
+	g.p.Set("onParsed", js.FuncOf(onParsed))
 	return g
 }
 
@@ -491,8 +491,8 @@ func (g *GLTFFileLoader) OnTextureLoaded() js.Value {
 // SetOnTextureLoaded sets the OnTextureLoaded property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ontextureloaded
-func (g *GLTFFileLoader) SetOnTextureLoaded(onTextureLoaded func()) *GLTFFileLoader {
-	g.p.Set("onTextureLoaded", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onTextureLoaded(); return nil }))
+func (g *GLTFFileLoader) SetOnTextureLoaded(onTextureLoaded JSFunc) *GLTFFileLoader {
+	g.p.Set("onTextureLoaded", js.FuncOf(onTextureLoaded))
 	return g
 }
 
@@ -523,8 +523,8 @@ func (g *GLTFFileLoader) OnValidated() js.Value {
 // SetOnValidated sets the OnValidated property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onvalidated
-func (g *GLTFFileLoader) SetOnValidated(onValidated func()) *GLTFFileLoader {
-	g.p.Set("onValidated", js.FuncOf(func(this js.Value, args []js.Value) interface{} { onValidated(); return nil }))
+func (g *GLTFFileLoader) SetOnValidated(onValidated JSFunc) *GLTFFileLoader {
+	g.p.Set("onValidated", js.FuncOf(onValidated))
 	return g
 }
 
@@ -555,8 +555,8 @@ func (g *GLTFFileLoader) PreprocessUrlAsync() js.Value {
 // SetPreprocessUrlAsync sets the PreprocessUrlAsync property of class GLTFFileLoader.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltffileloader#preprocessurlasync
-func (g *GLTFFileLoader) SetPreprocessUrlAsync(preprocessUrlAsync func()) *GLTFFileLoader {
-	g.p.Set("preprocessUrlAsync", js.FuncOf(func(this js.Value, args []js.Value) interface{} { preprocessUrlAsync(); return nil }))
+func (g *GLTFFileLoader) SetPreprocessUrlAsync(preprocessUrlAsync JSFunc) *GLTFFileLoader {
+	g.p.Set("preprocessUrlAsync", js.FuncOf(preprocessUrlAsync))
 	return g
 }
 

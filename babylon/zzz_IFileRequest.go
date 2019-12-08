@@ -47,8 +47,8 @@ func (i *IFileRequest) Abort() js.Value {
 // SetAbort sets the Abort property of class IFileRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ifilerequest#abort
-func (i *IFileRequest) SetAbort(abort func()) *IFileRequest {
-	i.p.Set("abort", js.FuncOf(func(this js.Value, args []js.Value) interface{} { abort(); return nil }))
+func (i *IFileRequest) SetAbort(abort JSFunc) *IFileRequest {
+	i.p.Set("abort", js.FuncOf(abort))
 	return i
 }
 
