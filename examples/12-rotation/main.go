@@ -25,13 +25,12 @@ func main() {
 		scene.SetClearColor(b.NewColor4(.5, .5, .5, 1))
 
 		// camera
-		camera := b.NewArcRotateCamera("camera1", 0, 0, 0,
-			b.NewVector3(5, 3, 0), scene, nil)
+		camera := b.NewArcRotateCamera("camera1", 0, 0, 0, b.NewVector3(5, 3, 0), scene, nil)
 		camera.SetPosition(b.NewVector3(10.253, 5.82251, -9.45717))
-		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: babylon.Bool(true)})
+		camera.AttachControl(canvas, true, nil)
+
 		// lights
-		light := b.NewHemisphericLight("light1",
-			b.NewVector3(1, 0.5, 0), scene)
+		light := b.NewHemisphericLight("light1", b.NewVector3(1, 0.5, 0), scene)
 		light.SetIntensity(0.8)
 
 		// material

@@ -5,7 +5,6 @@
 package main
 
 import (
-	"log"
 	"math"
 	"syscall/js"
 
@@ -56,7 +55,6 @@ func main() {
 		scene.OnBeforeRenderObservable().Add(func() {
 			curTime += engine.GetDeltaTime()
 			light.Position().SetX(math.Sin(curTime/1000.0) * 5.0)
-			log.Printf("curTime=%v", curTime)
 		}, nil)
 
 		// Press space to swich lightmap mode

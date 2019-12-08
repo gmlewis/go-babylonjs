@@ -23,7 +23,7 @@ func main() {
 	createScene := func() *babylon.Scene {
 		scene := b.NewScene(engine, nil)
 		camera := b.NewArcRotateCamera("Camera", -math.Pi/2, math.Pi/3, 10, b.Vector3().Zero(), scene, nil)
-		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: Bool(true)})
+		camera.AttachControl(canvas, true, nil)
 
 		mats := []*babylon.Color3{
 			b.NewColor3(1, 1, 0),

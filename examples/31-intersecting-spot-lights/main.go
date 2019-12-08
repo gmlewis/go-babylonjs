@@ -24,7 +24,7 @@ func main() {
 		scene := b.NewScene(engine, nil)
 
 		camera := b.NewArcRotateCamera("Camera", -math.Pi/2, math.Pi/4, 5, b.Vector3().Zero(), scene, nil)
-		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: Bool(true)})
+		camera.AttachControl(canvas, true, nil)
 
 		//red light
 		light := b.NewSpotLight("spotLight", b.NewVector3(-math.Cos(math.Pi/6), 1, -math.Sin(math.Pi/6)), b.NewVector3(0, -1, 0), math.Pi/2, 1.5, scene)

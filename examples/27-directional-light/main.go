@@ -24,7 +24,7 @@ func main() {
 		scene := b.NewScene(engine, nil)
 
 		camera := b.NewArcRotateCamera("Camera", -math.Pi/2, math.Pi/2, 5, b.Vector3().Zero(), scene, nil)
-		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: Bool(true)})
+		camera.AttachControl(canvas, true, nil)
 
 		light := b.NewDirectionalLight("DirectionalLight", b.NewVector3(0, -1, 0), scene)
 		light.SetDiffuse(b.NewColor3(1, 0, 0))

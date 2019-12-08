@@ -75,7 +75,6 @@ func (ba *Babylon) NewArcRotateCamera(name string, alpha float64, beta float64, 
 
 // ArcRotateCameraAttachControlOpts contains optional parameters for ArcRotateCamera.AttachControl.
 type ArcRotateCameraAttachControlOpts struct {
-	NoPreventDefault   *bool
 	UseCtrlForPanning  *bool
 	PanningMouseButton *float64
 }
@@ -83,20 +82,16 @@ type ArcRotateCameraAttachControlOpts struct {
 // AttachControl calls the AttachControl method on the ArcRotateCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#attachcontrol
-func (a *ArcRotateCamera) AttachControl(element js.Value, opts *ArcRotateCameraAttachControlOpts) {
+func (a *ArcRotateCamera) AttachControl(element js.Value, noPreventDefault bool, opts *ArcRotateCameraAttachControlOpts) {
 	if opts == nil {
 		opts = &ArcRotateCameraAttachControlOpts{}
 	}
 
-	args := make([]interface{}, 0, 1+3)
+	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, element)
+	args = append(args, noPreventDefault)
 
-	if opts.NoPreventDefault == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.NoPreventDefault)
-	}
 	if opts.UseCtrlForPanning == nil {
 		args = append(args, js.Undefined())
 	} else {

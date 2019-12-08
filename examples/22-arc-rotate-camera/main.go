@@ -31,7 +31,7 @@ func main() {
 		camera.SetPosition(b.NewVector3(0, 0, -10))
 
 		// This attaches the camera to the canvas
-		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: Bool(true)})
+		camera.AttachControl(canvas, true, nil)
 
 		/**************************************************************/
 

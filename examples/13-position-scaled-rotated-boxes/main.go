@@ -24,8 +24,7 @@ func main() {
 		scene := b.NewScene(engine, nil)
 
 		camera := b.NewArcRotateCamera("Camera", math.Pi, math.Pi/8, 150, b.Vector3().Zero(), scene, nil)
-
-		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: Bool(true)})
+		camera.AttachControl(canvas, true, nil)
 
 		b.NewHemisphericLight("hemi", b.NewVector3(0, 1, 0), scene)
 

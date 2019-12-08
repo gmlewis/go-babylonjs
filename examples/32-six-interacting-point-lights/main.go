@@ -26,7 +26,7 @@ func main() {
 		// Set up camera
 		camera := b.NewArcRotateCamera("Camera", 0, 0, 10, b.Vector3().Zero(), scene, nil)
 		camera.SetPosition(b.NewVector3(-10, 10, 0))
-		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: Bool(true)})
+		camera.AttachControl(canvas, true, nil)
 
 		// Lights
 		light0 := b.NewPointLight("Omni0", b.NewVector3(0, 10, 0), scene)

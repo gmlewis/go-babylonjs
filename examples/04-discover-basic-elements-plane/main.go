@@ -27,7 +27,7 @@ func main() {
 
 		// Add a camera to the scene and attach it to the canvas
 		camera := b.NewArcRotateCamera("Camera", -math.Pi/2, math.Pi/2, 4, b.Vector3().Zero(), scene, nil)
-		camera.AttachControl(canvas, &babylon.ArcRotateCameraAttachControlOpts{NoPreventDefault: babylon.Bool(true)})
+		camera.AttachControl(canvas, true, nil)
 
 		// Add lights to the scene
 		b.NewHemisphericLight("light1", b.NewVector3(1, 1, 0), scene)

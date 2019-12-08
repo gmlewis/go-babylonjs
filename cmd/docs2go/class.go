@@ -658,6 +658,8 @@ func processMethodOverrides(className string, s *Signature, names []string, opti
 	switch className + "." + s.GoName {
 	case "Angle.BetweenTwoPoints":
 		names[0] = "av"
+	case "ArcRotateCamera.AttachControl":
+		optional[1] = false
 	case "Camera.AttachControl", "FollowCamera.AttachControl", "FreeCamera.AttachControl",
 		"AbstractMesh.ToString":
 		avoidUsingOptions = true
