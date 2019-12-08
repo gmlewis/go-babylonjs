@@ -722,6 +722,8 @@ func processPropertiesOverrides(className string, s *Signature, names []string, 
 		names[0] = "r"
 	case "Matrix.M", "Matrix2D.M":
 		names[0] = "mm"
+	case "Node.Animations":
+		types[0] = "AnimationArray"
 	case "ReflectionTextureBlock.R":
 		names[0] = "rr"
 	default:

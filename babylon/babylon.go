@@ -21,7 +21,7 @@ type Babylon struct {
 func New() *Babylon { return &Babylon{ctx: js.Global().Get("BABYLON")} }
 
 // JSObject returns the underlying *js.JavaScript class.
-func (t *Babylon) JSObject() js.Value { return t.ctx }
+func (b *Babylon) JSObject() js.Value { return b.ctx }
 
 // Bool returns the pointer to the provided bool.
 func Bool(v bool) *bool {

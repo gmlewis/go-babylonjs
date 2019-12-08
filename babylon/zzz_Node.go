@@ -656,20 +656,16 @@ func (n *Node) SetAnimationPropertiesOverride(animationPropertiesOverride *Anima
 // Animations returns the Animations property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#animations
-func (n *Node) Animations() []*Animation {
+func (n *Node) Animations() *AnimationArray {
 	retVal := n.p.Get("animations")
-	result := []*Animation{}
-	for ri := 0; ri < retVal.Length(); ri++ {
-		result = append(result, AnimationFromJSObject(retVal.Index(ri), n.ctx))
-	}
-	return result
+	return AnimationArrayFromJSObject(retVal, n.ctx)
 }
 
 // SetAnimations sets the Animations property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#animations
-func (n *Node) SetAnimations(animations []*Animation) *Node {
-	n.p.Set("animations", animations)
+func (n *Node) SetAnimations(animations *AnimationArray) *Node {
+	n.p.Set("animations", animations.JSObject())
 	return n
 }
 

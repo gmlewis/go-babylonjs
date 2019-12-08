@@ -12,6 +12,7 @@ type AbstractMeshArray struct {
 func (ama *AbstractMeshArray) Push(meshes ...*AbstractMesh) {
 	args := []interface{}{}
 	for _, m := range meshes {
+		ama.am = append(ama.am, m)
 		args = append(args, m.JSObject())
 	}
 	ama.p.Call("push", args...)
