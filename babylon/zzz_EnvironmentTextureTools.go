@@ -45,7 +45,11 @@ func (e *EnvironmentTextureTools) CreateEnvTextureAsync(texture *CubeTexture) *P
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := e.p.Call("CreateEnvTextureAsync", args...)
 	return PromiseFromJSObject(retVal, e.ctx)
@@ -54,11 +58,16 @@ func (e *EnvironmentTextureTools) CreateEnvTextureAsync(texture *CubeTexture) *P
 // CreateImageDataArrayBufferViews calls the CreateImageDataArrayBufferViews method on the EnvironmentTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#createimagedataarraybufferviews
-func (e *EnvironmentTextureTools) CreateImageDataArrayBufferViews(arrayBuffer interface{}, info js.Value) js.Value /* [][]ArrayBufferView */ {
+func (e *EnvironmentTextureTools) CreateImageDataArrayBufferViews(arrayBuffer JSObject, info js.Value) js.Value /* [][]ArrayBufferView */ {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, arrayBuffer)
+	if arrayBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, arrayBuffer.JSObject())
+	}
+
 	args = append(args, info)
 
 	retVal := e.p.Call("CreateImageDataArrayBufferViews", args...)
@@ -81,12 +90,22 @@ func (e *EnvironmentTextureTools) GetEnvInfo(data js.Value) js.Value {
 // UploadEnvLevelsAsync calls the UploadEnvLevelsAsync method on the EnvironmentTextureTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#uploadenvlevelsasync
-func (e *EnvironmentTextureTools) UploadEnvLevelsAsync(texture *InternalTexture, arrayBuffer interface{}, info js.Value) *Promise {
+func (e *EnvironmentTextureTools) UploadEnvLevelsAsync(texture *InternalTexture, arrayBuffer JSObject, info js.Value) *Promise {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, texture.JSObject())
-	args = append(args, arrayBuffer)
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
+	if arrayBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, arrayBuffer.JSObject())
+	}
+
 	args = append(args, info)
 
 	retVal := e.p.Call("UploadEnvLevelsAsync", args...)
@@ -100,7 +119,12 @@ func (e *EnvironmentTextureTools) UploadEnvSpherical(texture *InternalTexture, i
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, info)
 
 	e.p.Call("UploadEnvSpherical", args...)
@@ -113,7 +137,12 @@ func (e *EnvironmentTextureTools) UploadLevelsAsync(texture *InternalTexture, im
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, imageData)
 
 	retVal := e.p.Call("UploadLevelsAsync", args...)

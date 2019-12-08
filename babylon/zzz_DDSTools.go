@@ -39,11 +39,15 @@ func DDSToolsArrayToJSArray(array []*DDSTools) []interface{} {
 // GetDDSInfo calls the GetDDSInfo method on the DDSTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ddstools#getddsinfo
-func (d *DDSTools) GetDDSInfo(arrayBuffer interface{}) js.Value {
+func (d *DDSTools) GetDDSInfo(arrayBuffer JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, arrayBuffer)
+	if arrayBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, arrayBuffer.JSObject())
+	}
 
 	retVal := d.p.Call("GetDDSInfo", args...)
 	return retVal

@@ -44,7 +44,7 @@ type NewSSAORenderingPipelineOpts struct {
 // NewSSAORenderingPipeline returns a new SSAORenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline
-func (ba *Babylon) NewSSAORenderingPipeline(name string, scene *Scene, ratio interface{}, opts *NewSSAORenderingPipelineOpts) *SSAORenderingPipeline {
+func (ba *Babylon) NewSSAORenderingPipeline(name string, scene *Scene, ratio JSObject, opts *NewSSAORenderingPipelineOpts) *SSAORenderingPipeline {
 	if opts == nil {
 		opts = &NewSSAORenderingPipelineOpts{}
 	}
@@ -53,7 +53,7 @@ func (ba *Babylon) NewSSAORenderingPipeline(name string, scene *Scene, ratio int
 
 	args = append(args, name)
 	args = append(args, scene.JSObject())
-	args = append(args, ratio)
+	args = append(args, ratio.JSObject())
 
 	if opts.Cameras == nil {
 		args = append(args, js.Undefined())

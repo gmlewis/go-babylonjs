@@ -106,7 +106,11 @@ func (v *VirtualKeyboard) Connect(input *InputText) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, input.JSObject())
+	if input == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, input.JSObject())
+	}
 
 	v.p.Call("connect", args...)
 }

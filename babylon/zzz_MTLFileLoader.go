@@ -43,8 +43,14 @@ func (m *MTLFileLoader) ParseMTL(scene *Scene, data string, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, data)
+
 	args = append(args, rootUrl)
 
 	m.p.Call("parseMTL", args...)

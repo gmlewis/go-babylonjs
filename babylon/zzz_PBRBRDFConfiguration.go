@@ -56,7 +56,11 @@ func (p *PBRBRDFConfiguration) CopyTo(brdfConfiguration *PBRBRDFConfiguration) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, brdfConfiguration.JSObject())
+	if brdfConfiguration == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, brdfConfiguration.JSObject())
+	}
 
 	p.p.Call("copyTo", args...)
 }
@@ -73,12 +77,22 @@ func (p *PBRBRDFConfiguration) GetClassName() string {
 // Parse calls the Parse method on the PBRBRDFConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#parse
-func (p *PBRBRDFConfiguration) Parse(source interface{}, scene *Scene, rootUrl string) {
+func (p *PBRBRDFConfiguration) Parse(source JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	p.p.Call("parse", args...)
@@ -99,7 +113,7 @@ func (p *PBRBRDFConfiguration) PrepareDefines(defines js.Value) {
 // Serialize calls the Serialize method on the PBRBRDFConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration#serialize
-func (p *PBRBRDFConfiguration) Serialize() interface{} {
+func (p *PBRBRDFConfiguration) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal

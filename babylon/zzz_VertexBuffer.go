@@ -52,14 +52,14 @@ type NewVertexBufferOpts struct {
 // NewVertexBuffer returns a new VertexBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer
-func (ba *Babylon) NewVertexBuffer(engine interface{}, data []float64, kind string, updatable bool, opts *NewVertexBufferOpts) *VertexBuffer {
+func (ba *Babylon) NewVertexBuffer(engine JSObject, data []float64, kind string, updatable bool, opts *NewVertexBufferOpts) *VertexBuffer {
 	if opts == nil {
 		opts = &NewVertexBufferOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+9)
 
-	args = append(args, engine)
+	args = append(args, engine.JSObject())
 	args = append(args, data)
 	args = append(args, kind)
 	args = append(args, updatable)
@@ -167,12 +167,19 @@ func (v *VertexBuffer) ForEach(data []float64, byteOffset float64, byteStride fl
 	args := make([]interface{}, 0, 8+0)
 
 	args = append(args, data)
+
 	args = append(args, byteOffset)
+
 	args = append(args, byteStride)
+
 	args = append(args, componentCount)
+
 	args = append(args, componentType)
+
 	args = append(args, count)
+
 	args = append(args, normalized)
+
 	args = append(args, js.FuncOf(callback))
 
 	v.p.Call("ForEach", args...)
@@ -304,6 +311,7 @@ func (v *VertexBuffer) UpdateDirectly(data []float64, offset float64, opts *Vert
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, data)
+
 	args = append(args, offset)
 
 	if opts.UseBytes == nil {

@@ -52,11 +52,15 @@ func (ba *Babylon) NewSmartArray(capacity float64) *SmartArray {
 // Concat calls the Concat method on the SmartArray object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray#concat
-func (s *SmartArray) Concat(array interface{}) {
+func (s *SmartArray) Concat(array JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, array)
+	if array == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, array.JSObject())
+	}
 
 	s.p.Call("concat", args...)
 }
@@ -68,7 +72,11 @@ func (s *SmartArray) Contains(value *T) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("contains", args...)
 	return retVal.Bool()
@@ -101,7 +109,11 @@ func (s *SmartArray) IndexOf(value *T) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("indexOf", args...)
 	return retVal.Float()
@@ -114,7 +126,11 @@ func (s *SmartArray) Push(value *T) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	s.p.Call("push", args...)
 }

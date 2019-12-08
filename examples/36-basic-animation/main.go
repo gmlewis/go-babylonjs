@@ -51,16 +51,14 @@ func main() {
 
 		onSuccess := func(this js.Value, args []js.Value) interface{} {
 			newMeshes, skeletons := args[0], args[2]
-			skeleton := SkeletonFromJSObject(skeletons.Index(0), this)
+			skeleton := babylon.SkeletonFromJSObject(skeletons.Index(0), this)
 
-			shadowGenerator.AddShadowCaster(scene.Meshes()[0], true)
+			shadowGenerator.AddShadowCaster(scene.Meshes()[0], &babylon.ShadowGeneratorAddShadowCasterOpts{IncludeDescendants: Bool(true)})
 			for index := 0; index < newMeshes.Length(); index++ {
 				newMeshes.Index(index).Set("receiveShadows", false)
 			}
 
-			helper := scene.CreateDefaultEnvironment(&babylon.IEnvironmentHelperOptions{
-				EnableGroundShadow: Bool(true),
-			})
+			helper := scene.CreateDefaultEnvironment(b.NewIEnvironmentHelperOptions().SetEnableGroundShadow(true))
 			helper.SetMainColor(b.Color3().Gray())
 			groundPos := helper.Ground().Position()
 			groundPos.SetY(groundPos.Y() + 0.01)
@@ -78,104 +76,111 @@ func main() {
 			rightRange := skeleton.GetAnimationRange("YBot_RightStrafeWalk")
 
 			// IDLE
-			if idleRange {
-				scene.BeginAnimation(skeleton, idleRange.from, idleRange.to, true)
+			if idleRange != nil {
+				scene.BeginAnimation(skeleton, idleRange.From(), idleRange.To(), &babylon.SceneBeginAnimationOpts{Loop: Bool(true)})
 			}
 
 			// UI
-			advancedTexture := b.GUI().AdvancedDynamicTexture.CreateFullscreenUI("UI")
-			UiPanel := b.NewGUI.StackPanel()
-			UiPanel.width = "220px"
-			UiPanel.fontSize = "14px"
-			UiPanel.horizontalAlignment = b.GUI().Control.HORIZONTAL_ALIGNMENT_RIGHT
-			UiPanel.verticalAlignment = b.GUI().Control.VERTICAL_ALIGNMENT_CENTER
-			advancedTexture.addControl(UiPanel)
+			gui := b.GUI()
+			advancedTexture := gui.AdvancedDynamicTexture().CreateFullscreenUI("UI", nil)
+			UIPanel := gui.NewStackPanel(nil)
+			UIPanel.SetWidth("220px")
+			UIPanel.SetFontSize("14px")
+			UIPanel.SetHorizontalAlignment(gui.Control().HORIZONTAL_ALIGNMENT_RIGHT())
+			UIPanel.SetVerticalAlignment(gui.Control().VERTICAL_ALIGNMENT_CENTER())
+			advancedTexture.AddControl(UIPanel.Control)
 			// ..
-			button := b.GUI().Button.CreateSimpleButton("but1", "Play Idle")
-			button.paddingTop = "10px"
-			button.width = "100px"
-			button.height = "50px"
-			button.color = "white"
-			button.background = "green"
-			button.OnPointerDownObservable().Add(func(this js.Value, args []js.Value) interface{} {
-				if idleRange {
-					scene.beginAnimation(skeleton, idleRange.from, idleRange.to, true)
+			button1 := gui.Button().CreateSimpleButton("but1", "Play Idle")
+			button1.SetPaddingTop("10px")
+			button1.SetWidth("100px")
+			button1.SetHeight("50px")
+			button1.SetColor("white")
+			button1.SetBackground("green")
+			button1.OnPointerDownObservable().Add(func(this js.Value, args []js.Value) interface{} {
+				if idleRange != nil {
+					scene.BeginAnimation(skeleton, idleRange.From(), idleRange.To(), &babylon.SceneBeginAnimationOpts{Loop: Bool(true)})
 				}
-			})
-			UiPanel.addControl(button)
+				return nil
+			}, nil)
+			UIPanel.AddControl(button1.Control)
 			// ..
-			button1 := b.GUI().Button.CreateSimpleButton("but2", "Play Walk")
-			button1.paddingTop = "10px"
-			button1.width = "100px"
-			button1.height = "50px"
-			button1.color = "white"
-			button1.background = "green"
-			button1.onPointerDownObservable.add(func(this js.Value, args []js.Value) interface{} {
-				if walkRange {
-					scene.beginAnimation(skeleton, walkRange.from, walkRange.to, true)
+			button2 := gui.Button().CreateSimpleButton("but2", "Play Walk")
+			button2.SetPaddingTop("10px")
+			button2.SetWidth("100px")
+			button2.SetHeight("50px")
+			button2.SetColor("white")
+			button2.SetBackground("green")
+			button2.OnPointerDownObservable().Add(func(this js.Value, args []js.Value) interface{} {
+				if walkRange != nil {
+					scene.BeginAnimation(skeleton, walkRange.From(), walkRange.To(), &babylon.SceneBeginAnimationOpts{Loop: Bool(true)})
 				}
-			})
-			UiPanel.addControl(button1)
+				return nil
+			}, nil)
+			UIPanel.AddControl(button2.Control)
 			// ..
-			button1 := b.GUI().Button.CreateSimpleButton("but3", "Play Run")
-			button1.paddingTop = "10px"
-			button1.width = "100px"
-			button1.height = "50px"
-			button1.color = "white"
-			button1.background = "green"
-			button1.onPointerDownObservable.add(func(this js.Value, args []js.Value) interface{} {
-				if runRange {
-					scene.beginAnimation(skeleton, runRange.from, runRange.to, true)
+			button3 := gui.Button().CreateSimpleButton("but3", "Play Run")
+			button3.SetPaddingTop("10px")
+			button3.SetWidth("100px")
+			button3.SetHeight("50px")
+			button3.SetColor("white")
+			button3.SetBackground("green")
+			button3.OnPointerDownObservable().Add(func(this js.Value, args []js.Value) interface{} {
+				if runRange != nil {
+					scene.BeginAnimation(skeleton, runRange.From(), runRange.To(), &babylon.SceneBeginAnimationOpts{Loop: Bool(true)})
 				}
-			})
-			UiPanel.addControl(button1)
+				return nil
+			}, nil)
+			UIPanel.AddControl(button3.Control)
 			// ..
-			button1 := b.GUI().Button.CreateSimpleButton("but4", "Play Left")
-			button1.paddingTop = "10px"
-			button1.width = "100px"
-			button1.height = "50px"
-			button1.color = "white"
-			button1.background = "green"
-			button1.onPointerDownObservable.add(func(this js.Value, args []js.Value) interface{} {
-				if leftRange {
-					scene.beginAnimation(skeleton, leftRange.from, leftRange.to, true)
+			button4 := gui.Button().CreateSimpleButton("but4", "Play Left")
+			button4.SetPaddingTop("10px")
+			button4.SetWidth("100px")
+			button4.SetHeight("50px")
+			button4.SetColor("white")
+			button4.SetBackground("green")
+			button4.OnPointerDownObservable().Add(func(this js.Value, args []js.Value) interface{} {
+				if leftRange != nil {
+					scene.BeginAnimation(skeleton, leftRange.From(), leftRange.To(), &babylon.SceneBeginAnimationOpts{Loop: Bool(true)})
 				}
-			})
-			UiPanel.addControl(button1)
+				return nil
+			}, nil)
+			UIPanel.AddControl(button4.Control)
 			// ..
-			button1 := b.GUI().Button.CreateSimpleButton("but5", "Play Right")
-			button1.paddingTop = "10px"
-			button1.width = "100px"
-			button1.height = "50px"
-			button1.color = "white"
-			button1.background = "green"
-			button1.onPointerDownObservable.add(func(this js.Value, args []js.Value) interface{} {
-				if rightRange {
-					scene.beginAnimation(skeleton, rightRange.from, rightRange.to, true)
+			button5 := gui.Button().CreateSimpleButton("but5", "Play Right")
+			button5.SetPaddingTop("10px")
+			button5.SetWidth("100px")
+			button5.SetHeight("50px")
+			button5.SetColor("white")
+			button5.SetBackground("green")
+			button5.OnPointerDownObservable().Add(func(this js.Value, args []js.Value) interface{} {
+				if rightRange != nil {
+					scene.BeginAnimation(skeleton, rightRange.From(), rightRange.To(), &babylon.SceneBeginAnimationOpts{Loop: Bool(true)})
 				}
-			})
-			UiPanel.addControl(button1)
+				return nil
+			}, nil)
+			UIPanel.AddControl(button5.Control)
 			// ..
-			button1 := b.GUI().Button.CreateSimpleButton("but6", "Play Blend")
-			button1.paddingTop = "10px"
-			button1.width = "100px"
-			button1.height = "50px"
-			button1.color = "white"
-			button1.background = "green"
-			button1.onPointerDownObservable.add(func(this js.Value, args []js.Value) interface{} {
-				if walkRange && leftRange {
-					scene.stopAnimation(skeleton)
-					walkAnim := scene.beginWeightedAnimation(skeleton, walkRange.from, walkRange.to, 0.5, true)
-					leftAnim := scene.beginWeightedAnimation(skeleton, leftRange.from, leftRange.to, 0.5, true)
+			button6 := gui.Button().CreateSimpleButton("but6", "Play Blend")
+			button6.SetPaddingTop("10px")
+			button6.SetWidth("100px")
+			button6.SetHeight("50px")
+			button6.SetColor("white")
+			button6.SetBackground("green")
+			button6.OnPointerDownObservable().Add(func(this js.Value, args []js.Value) interface{} {
+				if walkRange != nil && leftRange != nil {
+					scene.StopAnimation(skeleton, nil)
+					walkAnim := scene.BeginWeightedAnimation(skeleton, walkRange.From(), walkRange.To(), 0.5, &babylon.SceneBeginWeightedAnimationOpts{Loop: Bool(true)})
+					leftAnim := scene.BeginWeightedAnimation(skeleton, leftRange.From(), leftRange.To(), 0.5, &babylon.SceneBeginWeightedAnimationOpts{Loop: Bool(true)})
 
 					// Note: Sync Speed Ratio With Master Walk Animation
-					walkAnim.syncWith(null)
-					leftAnim.syncWith(walkAnim)
+					walkAnim.SyncWith(nil)
+					leftAnim.SyncWith(walkAnim)
 				}
-			})
-			UiPanel.addControl(button1)
+				return nil
+			}, nil)
+			UIPanel.AddControl(button6.Control)
 
-			engine.hideLoadingUI()
+			engine.HideLoadingUI()
 			return nil
 		}
 		opts := &babylon.SceneLoaderImportMeshOpts{
@@ -211,5 +216,10 @@ func Bool(v bool) *bool {
 
 // Float64 returns the pointer to the provided float64.
 func Float64(v float64) *float64 {
+	return &v
+}
+
+// String returns the pointer to the provided string.
+func String(v string) *string {
 	return &v
 }

@@ -144,8 +144,14 @@ func (t *Texture) CreateFromBase64String(data string, name string, scene *Scene,
 	args := make([]interface{}, 0, 3+6)
 
 	args = append(args, data)
+
 	args = append(args, name)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.NoMipmap == nil {
 		args = append(args, js.Undefined())
@@ -247,7 +253,7 @@ type TextureLoadFromDataStringOpts struct {
 // LoadFromDataString calls the LoadFromDataString method on the Texture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#loadfromdatastring
-func (t *Texture) LoadFromDataString(name string, buffer interface{}, scene *Scene, opts *TextureLoadFromDataStringOpts) *Texture {
+func (t *Texture) LoadFromDataString(name string, buffer JSObject, scene *Scene, opts *TextureLoadFromDataStringOpts) *Texture {
 	if opts == nil {
 		opts = &TextureLoadFromDataStringOpts{}
 	}
@@ -255,8 +261,18 @@ func (t *Texture) LoadFromDataString(name string, buffer interface{}, scene *Sce
 	args := make([]interface{}, 0, 3+7)
 
 	args = append(args, name)
-	args = append(args, buffer)
-	args = append(args, scene.JSObject())
+
+	if buffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, buffer.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.DeleteBuffer == nil {
 		args = append(args, js.Undefined())
@@ -301,12 +317,22 @@ func (t *Texture) LoadFromDataString(name string, buffer interface{}, scene *Sce
 // Parse calls the Parse method on the Texture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#parse
-func (t *Texture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *BaseTexture {
+func (t *Texture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *BaseTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := t.p.Call("Parse", args...)
@@ -316,7 +342,7 @@ func (t *Texture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string)
 // Serialize calls the Serialize method on the Texture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture#serialize
-func (t *Texture) Serialize() interface{} {
+func (t *Texture) Serialize() js.Value {
 
 	retVal := t.p.Call("serialize")
 	return retVal

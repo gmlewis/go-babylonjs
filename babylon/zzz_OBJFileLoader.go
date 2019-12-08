@@ -89,16 +89,31 @@ type OBJFileLoaderImportMeshAsyncOpts struct {
 // ImportMeshAsync calls the ImportMeshAsync method on the OBJFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader#importmeshasync
-func (o *OBJFileLoader) ImportMeshAsync(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, opts *OBJFileLoaderImportMeshAsyncOpts) *Promise {
+func (o *OBJFileLoader) ImportMeshAsync(meshesNames JSObject, scene *Scene, data JSObject, rootUrl string, opts *OBJFileLoaderImportMeshAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &OBJFileLoaderImportMeshAsyncOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, meshesNames)
-	args = append(args, scene.JSObject())
-	args = append(args, data)
+	if meshesNames == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, meshesNames.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if data == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, data.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	if opts.OnProgress == nil {
@@ -132,8 +147,14 @@ func (o *OBJFileLoader) LoadAssetContainerAsync(scene *Scene, data string, rootU
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, data)
+
 	args = append(args, rootUrl)
 
 	if opts.OnProgress == nil {
@@ -167,8 +188,14 @@ func (o *OBJFileLoader) LoadAsync(scene *Scene, data string, rootUrl string, opt
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, data)
+
 	args = append(args, rootUrl)
 
 	if opts.OnProgress == nil {

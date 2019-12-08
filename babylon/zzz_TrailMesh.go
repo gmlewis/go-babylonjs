@@ -85,7 +85,12 @@ func (t *TrailMesh) Clone(name string, newGenerator *AbstractMesh) *TrailMesh {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, newGenerator.JSObject())
+
+	if newGenerator == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newGenerator.JSObject())
+	}
 
 	retVal := t.p.Call("clone", args...)
 	return TrailMeshFromJSObject(retVal, t.ctx)
@@ -103,12 +108,21 @@ func (t *TrailMesh) GetClassName() string {
 // Parse calls the Parse method on the TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#parse
-func (t *TrailMesh) Parse(parsedMesh interface{}, scene *Scene) *TrailMesh {
+func (t *TrailMesh) Parse(parsedMesh JSObject, scene *Scene) *TrailMesh {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedMesh)
-	args = append(args, scene.JSObject())
+	if parsedMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedMesh.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := t.p.Call("Parse", args...)
 	return TrailMeshFromJSObject(retVal, t.ctx)
@@ -117,11 +131,15 @@ func (t *TrailMesh) Parse(parsedMesh interface{}, scene *Scene) *TrailMesh {
 // Serialize calls the Serialize method on the TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh#serialize
-func (t *TrailMesh) Serialize(serializationObject interface{}) {
+func (t *TrailMesh) Serialize(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	t.p.Call("serialize", args...)
 }

@@ -47,7 +47,7 @@ type STLExportCreateSTLOpts struct {
 // CreateSTL calls the CreateSTL method on the STLExport object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stlexport#createstl
-func (s *STLExport) CreateSTL(meshes []*Mesh, opts *STLExportCreateSTLOpts) interface{} {
+func (s *STLExport) CreateSTL(meshes []*Mesh, opts *STLExportCreateSTLOpts) js.Value {
 	if opts == nil {
 		opts = &STLExportCreateSTLOpts{}
 	}

@@ -43,7 +43,11 @@ func (s *SphericalPolynomial) AddAmbient(color *Color3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, color.JSObject())
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	s.p.Call("addAmbient", args...)
 }
@@ -68,7 +72,11 @@ func (s *SphericalPolynomial) FromHarmonics(harmonics *SphericalHarmonics) *Sphe
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, harmonics.JSObject())
+	if harmonics == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, harmonics.JSObject())
+	}
 
 	retVal := s.p.Call("FromHarmonics", args...)
 	return SphericalPolynomialFromJSObject(retVal, s.ctx)

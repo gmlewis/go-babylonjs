@@ -81,7 +81,11 @@ func (s *SphereDirectedParticleEmitter) ApplyToShader(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	s.p.Call("applyToShader", args...)
 }
@@ -116,11 +120,15 @@ func (s *SphereDirectedParticleEmitter) GetEffectDefines() string {
 // Parse calls the Parse method on the SphereDirectedParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#parse
-func (s *SphereDirectedParticleEmitter) Parse(serializationObject interface{}) {
+func (s *SphereDirectedParticleEmitter) Parse(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	s.p.Call("parse", args...)
 }
@@ -128,7 +136,7 @@ func (s *SphereDirectedParticleEmitter) Parse(serializationObject interface{}) {
 // Serialize calls the Serialize method on the SphereDirectedParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#serialize
-func (s *SphereDirectedParticleEmitter) Serialize() interface{} {
+func (s *SphereDirectedParticleEmitter) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal
@@ -141,9 +149,23 @@ func (s *SphereDirectedParticleEmitter) StartDirectionFunction(worldMatrix *Matr
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, worldMatrix.JSObject())
-	args = append(args, directionToUpdate.JSObject())
-	args = append(args, particle.JSObject())
+	if worldMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMatrix.JSObject())
+	}
+
+	if directionToUpdate == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, directionToUpdate.JSObject())
+	}
+
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	s.p.Call("startDirectionFunction", args...)
 }

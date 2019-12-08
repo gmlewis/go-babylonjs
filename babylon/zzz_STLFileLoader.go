@@ -40,16 +40,34 @@ func STLFileLoaderArrayToJSArray(array []*STLFileLoader) []interface{} {
 // ImportMesh calls the ImportMesh method on the STLFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stlfileloader#importmesh
-func (s *STLFileLoader) ImportMesh(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, meshes []*AbstractMesh, particleSystems []*IParticleSystem, skeletons []*Skeleton) bool {
+func (s *STLFileLoader) ImportMesh(meshesNames JSObject, scene *Scene, data JSObject, rootUrl string, meshes []*AbstractMesh, particleSystems []*IParticleSystem, skeletons []*Skeleton) bool {
 
 	args := make([]interface{}, 0, 7+0)
 
-	args = append(args, meshesNames)
-	args = append(args, scene.JSObject())
-	args = append(args, data)
+	if meshesNames == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, meshesNames.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if data == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, data.JSObject())
+	}
+
 	args = append(args, rootUrl)
+
 	args = append(args, AbstractMeshArrayToJSArray(meshes))
+
 	args = append(args, IParticleSystemArrayToJSArray(particleSystems))
+
 	args = append(args, SkeletonArrayToJSArray(skeletons))
 
 	retVal := s.p.Call("importMesh", args...)
@@ -59,12 +77,22 @@ func (s *STLFileLoader) ImportMesh(meshesNames interface{}, scene *Scene, data i
 // Load calls the Load method on the STLFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stlfileloader#load
-func (s *STLFileLoader) Load(scene *Scene, data interface{}, rootUrl string) bool {
+func (s *STLFileLoader) Load(scene *Scene, data JSObject, rootUrl string) bool {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, scene.JSObject())
-	args = append(args, data)
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if data == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, data.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := s.p.Call("load", args...)
@@ -86,8 +114,14 @@ func (s *STLFileLoader) LoadAssetContainer(scene *Scene, data string, rootUrl st
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, data)
+
 	args = append(args, rootUrl)
 
 	if opts.OnError == nil {

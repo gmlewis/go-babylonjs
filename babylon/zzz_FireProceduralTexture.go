@@ -74,12 +74,22 @@ func (ba *Babylon) NewFireProceduralTexture(name string, size float64, scene *Sc
 // Parse calls the Parse method on the FireProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#parse
-func (f *FireProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *FireProceduralTexture {
+func (f *FireProceduralTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *FireProceduralTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := f.p.Call("Parse", args...)
@@ -113,7 +123,7 @@ func (f *FireProceduralTexture) Render(opts *FireProceduralTextureRenderOpts) {
 // Serialize calls the Serialize method on the FireProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#serialize
-func (f *FireProceduralTexture) Serialize() interface{} {
+func (f *FireProceduralTexture) Serialize() js.Value {
 
 	retVal := f.p.Call("serialize")
 	return retVal

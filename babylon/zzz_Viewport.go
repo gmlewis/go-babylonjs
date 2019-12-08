@@ -69,6 +69,7 @@ func (v *Viewport) ToGlobal(renderWidth float64, renderHeight float64) *Viewport
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, renderWidth)
+
 	args = append(args, renderHeight)
 
 	retVal := v.p.Call("toGlobal", args...)
@@ -83,8 +84,14 @@ func (v *Viewport) ToGlobalToRef(renderWidth float64, renderHeight float64, ref 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, renderWidth)
+
 	args = append(args, renderHeight)
-	args = append(args, ref.JSObject())
+
+	if ref == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ref.JSObject())
+	}
 
 	retVal := v.p.Call("toGlobalToRef", args...)
 	return ViewportFromJSObject(retVal, v.ctx)

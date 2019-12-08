@@ -41,7 +41,7 @@ func PolygonMeshBuilderArrayToJSArray(array []*PolygonMeshBuilder) []interface{}
 // NewPolygonMeshBuilderOpts contains optional parameters for NewPolygonMeshBuilder.
 type NewPolygonMeshBuilderOpts struct {
 	Scene           *Scene
-	EarcutInjection *interface{}
+	EarcutInjection interface{}
 }
 
 // NewPolygonMeshBuilder returns a new PolygonMeshBuilder object.
@@ -144,7 +144,7 @@ func (p *PolygonMeshBuilder) BuildVertexData(opts *PolygonMeshBuilderBuildVertex
 // BjsEarcut returns the BjsEarcut property of class PolygonMeshBuilder.
 //
 // https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#bjsearcut
-func (p *PolygonMeshBuilder) BjsEarcut() interface{} {
+func (p *PolygonMeshBuilder) BjsEarcut() js.Value {
 	retVal := p.p.Get("bjsEarcut")
 	return retVal
 }
@@ -152,7 +152,7 @@ func (p *PolygonMeshBuilder) BjsEarcut() interface{} {
 // SetBjsEarcut sets the BjsEarcut property of class PolygonMeshBuilder.
 //
 // https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#bjsearcut
-func (p *PolygonMeshBuilder) SetBjsEarcut(bjsEarcut interface{}) *PolygonMeshBuilder {
-	p.p.Set("bjsEarcut", bjsEarcut)
+func (p *PolygonMeshBuilder) SetBjsEarcut(bjsEarcut JSObject) *PolygonMeshBuilder {
+	p.p.Set("bjsEarcut", bjsEarcut.JSObject())
 	return p
 }

@@ -43,7 +43,11 @@ func (o *OBJExport) MTL(mesh *Mesh) string {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := o.p.Call("MTL", args...)
 	return retVal.String()

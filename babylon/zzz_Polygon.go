@@ -106,8 +106,11 @@ func (p *Polygon) Rectangle(xmin float64, ymin float64, xmax float64, ymax float
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, xmin)
+
 	args = append(args, ymin)
+
 	args = append(args, xmax)
+
 	args = append(args, ymax)
 
 	retVal := p.p.Call("Rectangle", args...)
@@ -126,6 +129,7 @@ func (p *Polygon) StartingAt(x float64, y float64) *Path2 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	retVal := p.p.Call("StartingAt", args...)

@@ -46,7 +46,9 @@ func (i *IParticleSystem) AddAlphaRemapGradient(gradient float64, min float64, m
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, gradient)
+
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := i.p.Call("addAlphaRemapGradient", args...)
@@ -69,6 +71,7 @@ func (i *IParticleSystem) AddAngularSpeedGradient(gradient float64, factor float
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -97,7 +100,12 @@ func (i *IParticleSystem) AddColorGradient(gradient float64, color1 *Color4, opt
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
-	args = append(args, color1.JSObject())
+
+	if color1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color1.JSObject())
+	}
 
 	if opts.Color2 == nil {
 		args = append(args, js.Undefined())
@@ -117,7 +125,9 @@ func (i *IParticleSystem) AddColorRemapGradient(gradient float64, min float64, m
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, gradient)
+
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := i.p.Call("addColorRemapGradient", args...)
@@ -140,6 +150,7 @@ func (i *IParticleSystem) AddDragGradient(gradient float64, factor float64, opts
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -168,6 +179,7 @@ func (i *IParticleSystem) AddEmitRateGradient(gradient float64, factor float64, 
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -196,6 +208,7 @@ func (i *IParticleSystem) AddLifeTimeGradient(gradient float64, factor float64, 
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -224,6 +237,7 @@ func (i *IParticleSystem) AddLimitVelocityGradient(gradient float64, factor floa
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -244,7 +258,12 @@ func (i *IParticleSystem) AddRampGradient(gradient float64, color *Color3) *IPar
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, gradient)
-	args = append(args, color.JSObject())
+
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	retVal := i.p.Call("addRampGradient", args...)
 	return IParticleSystemFromJSObject(retVal, i.ctx)
@@ -266,6 +285,7 @@ func (i *IParticleSystem) AddSizeGradient(gradient float64, factor float64, opts
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -294,6 +314,7 @@ func (i *IParticleSystem) AddStartSizeGradient(gradient float64, factor float64,
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -322,6 +343,7 @@ func (i *IParticleSystem) AddVelocityGradient(gradient float64, factor float64, 
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -345,12 +367,17 @@ func (i *IParticleSystem) Animate() {
 // Clone calls the Clone method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#clone
-func (i *IParticleSystem) Clone(name string, newEmitter interface{}) *IParticleSystem {
+func (i *IParticleSystem) Clone(name string, newEmitter JSObject) *IParticleSystem {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, newEmitter)
+
+	if newEmitter == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newEmitter.JSObject())
+	}
 
 	retVal := i.p.Call("clone", args...)
 	return IParticleSystemFromJSObject(retVal, i.ctx)
@@ -363,10 +390,29 @@ func (i *IParticleSystem) CreateBoxEmitter(direction1 *Vector3, direction2 *Vect
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, direction1.JSObject())
-	args = append(args, direction2.JSObject())
-	args = append(args, minEmitBox.JSObject())
-	args = append(args, maxEmitBox.JSObject())
+	if direction1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction1.JSObject())
+	}
+
+	if direction2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction2.JSObject())
+	}
+
+	if minEmitBox == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, minEmitBox.JSObject())
+	}
+
+	if maxEmitBox == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, maxEmitBox.JSObject())
+	}
 
 	retVal := i.p.Call("createBoxEmitter", args...)
 	return BoxParticleEmitterFromJSObject(retVal, i.ctx)
@@ -380,6 +426,7 @@ func (i *IParticleSystem) CreateConeEmitter(radius float64, angle float64) *Cone
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, radius)
+
 	args = append(args, angle)
 
 	retVal := i.p.Call("createConeEmitter", args...)
@@ -394,8 +441,11 @@ func (i *IParticleSystem) CreateCylinderEmitter(radius float64, height float64, 
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, radius)
+
 	args = append(args, height)
+
 	args = append(args, radiusRange)
+
 	args = append(args, directionRandomizer)
 
 	retVal := i.p.Call("createCylinderEmitter", args...)
@@ -410,10 +460,22 @@ func (i *IParticleSystem) CreateDirectedCylinderEmitter(radius float64, height f
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, radius)
+
 	args = append(args, height)
+
 	args = append(args, radiusRange)
-	args = append(args, direction1.JSObject())
-	args = append(args, direction2.JSObject())
+
+	if direction1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction1.JSObject())
+	}
+
+	if direction2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction2.JSObject())
+	}
 
 	retVal := i.p.Call("createDirectedCylinderEmitter", args...)
 	return SphereDirectedParticleEmitterFromJSObject(retVal, i.ctx)
@@ -427,8 +489,18 @@ func (i *IParticleSystem) CreateDirectedSphereEmitter(radius float64, direction1
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, radius)
-	args = append(args, direction1.JSObject())
-	args = append(args, direction2.JSObject())
+
+	if direction1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction1.JSObject())
+	}
+
+	if direction2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction2.JSObject())
+	}
 
 	retVal := i.p.Call("createDirectedSphereEmitter", args...)
 	return SphereDirectedParticleEmitterFromJSObject(retVal, i.ctx)
@@ -442,6 +514,7 @@ func (i *IParticleSystem) CreateHemisphericEmitter(radius float64, radiusRange f
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, radius)
+
 	args = append(args, radiusRange)
 
 	retVal := i.p.Call("createHemisphericEmitter", args...)
@@ -455,8 +528,17 @@ func (i *IParticleSystem) CreatePointEmitter(direction1 *Vector3, direction2 *Ve
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, direction1.JSObject())
-	args = append(args, direction2.JSObject())
+	if direction1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction1.JSObject())
+	}
+
+	if direction2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction2.JSObject())
+	}
 
 	retVal := i.p.Call("createPointEmitter", args...)
 	return PointParticleEmitterFromJSObject(retVal, i.ctx)
@@ -470,6 +552,7 @@ func (i *IParticleSystem) CreateSphereEmitter(radius float64, radiusRange float6
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, radius)
+
 	args = append(args, radiusRange)
 
 	retVal := i.p.Call("createSphereEmitter", args...)
@@ -837,7 +920,7 @@ func (i *IParticleSystem) Reset() {
 // Serialize calls the Serialize method on the IParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iparticlesystem#serialize
-func (i *IParticleSystem) Serialize() interface{} {
+func (i *IParticleSystem) Serialize() js.Value {
 
 	retVal := i.p.Call("serialize")
 	return retVal

@@ -50,7 +50,7 @@ type NewAnimatableOpts struct {
 // NewAnimatable returns a new Animatable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable
-func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnimatableOpts) *Animatable {
+func (ba *Babylon) NewAnimatable(scene *Scene, target JSObject, opts *NewAnimatableOpts) *Animatable {
 	if opts == nil {
 		opts = &NewAnimatableOpts{}
 	}
@@ -58,7 +58,7 @@ func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnim
 	args := make([]interface{}, 0, 2+7)
 
 	args = append(args, scene.JSObject())
-	args = append(args, target)
+	args = append(args, target.JSObject())
 
 	if opts.FromFrame == nil {
 		args = append(args, js.Undefined())
@@ -103,11 +103,16 @@ func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnim
 // AppendAnimations calls the AppendAnimations method on the Animatable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#appendanimations
-func (a *Animatable) AppendAnimations(target interface{}, animations []*Animation) {
+func (a *Animatable) AppendAnimations(target JSObject, animations []*Animation) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, target)
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
 	args = append(args, AnimationArrayToJSArray(animations))
 
 	a.p.Call("appendAnimations", args...)
@@ -245,7 +250,11 @@ func (a *Animatable) SyncWith(root *Animatable) *Animatable {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, root.JSObject())
+	if root == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, root.JSObject())
+	}
 
 	retVal := a.p.Call("syncWith", args...)
 	return AnimatableFromJSObject(retVal, a.ctx)
@@ -439,7 +448,7 @@ func (a *Animatable) SetSyncRoot(syncRoot *Animatable) *Animatable {
 // Target returns the Target property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#target
-func (a *Animatable) Target() interface{} {
+func (a *Animatable) Target() js.Value {
 	retVal := a.p.Get("target")
 	return retVal
 }
@@ -447,8 +456,8 @@ func (a *Animatable) Target() interface{} {
 // SetTarget sets the Target property of class Animatable.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable#target
-func (a *Animatable) SetTarget(target interface{}) *Animatable {
-	a.p.Set("target", target)
+func (a *Animatable) SetTarget(target JSObject) *Animatable {
+	a.p.Set("target", target.JSObject())
 	return a
 }
 

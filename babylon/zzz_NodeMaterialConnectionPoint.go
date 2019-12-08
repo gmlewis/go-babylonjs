@@ -58,7 +58,11 @@ func (n *NodeMaterialConnectionPoint) CanConnectTo(connectionPoint *NodeMaterial
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, connectionPoint.JSObject())
+	if connectionPoint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, connectionPoint.JSObject())
+	}
 
 	retVal := n.p.Call("canConnectTo", args...)
 	return retVal.Bool()
@@ -71,7 +75,11 @@ func (n *NodeMaterialConnectionPoint) CheckCompatibilityState(connectionPoint *N
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, connectionPoint.JSObject())
+	if connectionPoint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, connectionPoint.JSObject())
+	}
 
 	retVal := n.p.Call("checkCompatibilityState", args...)
 	return retVal
@@ -92,7 +100,11 @@ func (n *NodeMaterialConnectionPoint) ConnectTo(connectionPoint *NodeMaterialCon
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, connectionPoint.JSObject())
+	if connectionPoint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, connectionPoint.JSObject())
+	}
 
 	if opts.IgnoreConstraints == nil {
 		args = append(args, js.Undefined())
@@ -111,7 +123,11 @@ func (n *NodeMaterialConnectionPoint) DisconnectFrom(endpoint *NodeMaterialConne
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, endpoint.JSObject())
+	if endpoint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endpoint.JSObject())
+	}
 
 	retVal := n.p.Call("disconnectFrom", args...)
 	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
@@ -137,7 +153,7 @@ func (n *NodeMaterialConnectionPoint) GetClassName() string {
 // Serialize calls the Serialize method on the NodeMaterialConnectionPoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#serialize
-func (n *NodeMaterialConnectionPoint) Serialize() interface{} {
+func (n *NodeMaterialConnectionPoint) Serialize() js.Value {
 
 	retVal := n.p.Call("serialize")
 	return retVal

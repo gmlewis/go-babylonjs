@@ -44,9 +44,17 @@ func (i *IInternalTextureLoader) CanLoad(extension string, textureFormatInUse st
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, extension)
+
 	args = append(args, textureFormatInUse)
-	args = append(args, fallback.JSObject())
+
+	if fallback == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fallback.JSObject())
+	}
+
 	args = append(args, isBase64)
+
 	args = append(args, isBuffer)
 
 	retVal := i.p.Call("canLoad", args...)
@@ -61,6 +69,7 @@ func (i *IInternalTextureLoader) GetFallbackTextureUrl(rootUrl string, textureFo
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, rootUrl)
+
 	args = append(args, textureFormatInUse)
 
 	retVal := i.p.Call("getFallbackTextureUrl", args...)
@@ -75,9 +84,17 @@ func (i *IInternalTextureLoader) LoadCubeData(data []string, texture *InternalTe
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, data)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, createPolynomials)
+
 	args = append(args, js.FuncOf(onLoad))
+
 	args = append(args, js.FuncOf(onError))
 
 	i.p.Call("loadCubeData", args...)
@@ -91,7 +108,13 @@ func (i *IInternalTextureLoader) LoadData(data js.Value, texture *InternalTextur
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, data)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, js.FuncOf(callback))
 
 	i.p.Call("loadData", args...)
@@ -105,6 +128,7 @@ func (i *IInternalTextureLoader) TransformUrl(rootUrl string, textureFormatInUse
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, rootUrl)
+
 	args = append(args, textureFormatInUse)
 
 	retVal := i.p.Call("transformUrl", args...)

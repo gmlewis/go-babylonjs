@@ -70,7 +70,11 @@ func (c *Container) AddControl(control *Control) *Container {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := c.p.Call("addControl", args...)
 	return ContainerFromJSObject(retVal, c.ctx)
@@ -92,7 +96,11 @@ func (c *Container) ContainsControl(control *Control) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := c.p.Call("containsControl", args...)
 	return retVal.Bool()
@@ -127,6 +135,7 @@ func (c *Container) GetChildByType(name string, jsType string) *Control {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, jsType)
 
 	retVal := c.p.Call("getChildByType", args...)
@@ -172,7 +181,11 @@ func (c *Container) RemoveControl(control *Control) *Container {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := c.p.Call("removeControl", args...)
 	return ContainerFromJSObject(retVal, c.ctx)

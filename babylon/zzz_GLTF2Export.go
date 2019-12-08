@@ -51,7 +51,12 @@ func (g *GLTF2Export) GLBAsync(scene *Scene, filePrefix string, opts *GLTF2Expor
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, filePrefix)
 
 	if opts.Options == nil {
@@ -79,7 +84,12 @@ func (g *GLTF2Export) GLTFAsync(scene *Scene, filePrefix string, opts *GLTF2Expo
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, filePrefix)
 
 	if opts.Options == nil {

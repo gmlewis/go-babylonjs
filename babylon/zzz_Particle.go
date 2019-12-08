@@ -57,7 +57,11 @@ func (p *Particle) CopyTo(other *Particle) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	p.p.Call("copyTo", args...)
 }

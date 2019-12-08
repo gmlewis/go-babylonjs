@@ -89,7 +89,12 @@ func (v *VideoTexture) CreateFromStreamAsync(scene *Scene, stream js.Value) *Pro
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, stream)
 
 	retVal := v.p.Call("CreateFromStreamAsync", args...)
@@ -111,8 +116,14 @@ func (v *VideoTexture) CreateFromWebCam(scene *Scene, onReady JSFunc, constraint
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, js.FuncOf(onReady))
+
 	args = append(args, constraints)
 
 	args = append(args, opts.AudioConstaints)
@@ -135,7 +146,12 @@ func (v *VideoTexture) CreateFromWebCamAsync(scene *Scene, constraints js.Value,
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, constraints)
 
 	args = append(args, opts.AudioConstaints)

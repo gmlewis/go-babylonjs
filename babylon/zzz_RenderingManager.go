@@ -67,7 +67,11 @@ func (r *RenderingManager) Dispatch(subMesh *SubMesh, opts *RenderingManagerDisp
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, subMesh.JSObject())
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -90,7 +94,11 @@ func (r *RenderingManager) DispatchParticles(particleSystem *IParticleSystem) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, particleSystem.JSObject())
+	if particleSystem == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particleSystem.JSObject())
+	}
 
 	r.p.Call("dispatchParticles", args...)
 }
@@ -102,7 +110,11 @@ func (r *RenderingManager) DispatchSprites(spriteManager *ISpriteManager) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, spriteManager.JSObject())
+	if spriteManager == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, spriteManager.JSObject())
+	}
 
 	r.p.Call("dispatchSprites", args...)
 }
@@ -145,6 +157,7 @@ func (r *RenderingManager) SetRenderingAutoClearDepthStencil(renderingGroupId fl
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, renderingGroupId)
+
 	args = append(args, autoClearDepthStencil)
 
 	if opts.Depth == nil {

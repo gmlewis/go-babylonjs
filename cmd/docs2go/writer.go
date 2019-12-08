@@ -19,10 +19,12 @@ var (
 	goTmpl = template.Must(template.New("source").Funcs(funcMap).Parse(source))
 
 	funcMap = map[string]interface{}{
-		"formatParents":              formatParents,
-		"fromJSObject":               fromJSObject,
 		"constructorParameterGoList": constructorParameterGoList,
 		"constructorParameterJSList": constructorParameterJSList,
+		"formatParents":              formatParents,
+		"fromJSObject":               fromJSObject,
+		"hasSuffix":                  strings.HasSuffix,
+		"trimSuffix":                 strings.TrimSuffix,
 		"methodParameterGoList":      methodParameterGoList,
 		"methodParameterJSList":      methodParameterJSList,
 		"propertyParameterGoList":    propertyParameterGoList,
@@ -260,7 +262,17 @@ opts = &{{$name}}{{$key}}Opts{}
   {{if or $value.JSParams $value.JSOpts}}args := make([]interface{}, 0, {{$value.JSParams | len}} + {{$value.JSOpts | len}}){{end}}
 
   {{range $index, $element := $value.JSParams -}}
-  args = append(args, {{if index $value.NeedsArrayHelper $index}}{{index $value.NeedsArrayHelper $index}}{{else}}{{$element}}{{end}})
+  {{if index $value.NeedsArrayHelper $index}}
+  args = append(args, {{index $value.NeedsArrayHelper $index}})
+  {{else if hasSuffix $element ".JSObject()"}}
+  if {{trimSuffix $element ".JSObject()"}} == nil {
+    args = append(args, js.Null())
+  } else {
+    args = append(args, {{$element}})
+  }
+  {{else}}
+  args = append(args, {{$element}})
+  {{end}}
   {{end}}
 
   {{range $index, $element := $value.JSOpts -}}{{if index $value.GoOptsType $index | eq "js.Value"}}args = append(args, opts.{{index $value.GoOptsName $index}})

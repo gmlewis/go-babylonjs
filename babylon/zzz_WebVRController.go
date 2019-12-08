@@ -39,11 +39,11 @@ func WebVRControllerArrayToJSArray(array []*WebVRController) []interface{} {
 // NewWebVRController returns a new WebVRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller
-func (ba *Babylon) NewWebVRController(vrGamepad interface{}) *WebVRController {
+func (ba *Babylon) NewWebVRController(vrGamepad JSObject) *WebVRController {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vrGamepad)
+	args = append(args, vrGamepad.JSObject())
 
 	p := ba.ctx.Get("WebVRController").New(args...)
 	return WebVRControllerFromJSObject(p, ba.ctx)
@@ -72,7 +72,11 @@ func (w *WebVRController) InitControllerMesh(scene *Scene, opts *WebVRController
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())

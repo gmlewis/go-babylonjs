@@ -59,7 +59,7 @@ func (i *IEffectCreationOptions) SetAttributes(attributes []string) *IEffectCrea
 // Defines returns the Defines property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#defines
-func (i *IEffectCreationOptions) Defines() interface{} {
+func (i *IEffectCreationOptions) Defines() js.Value {
 	retVal := i.p.Get("defines")
 	return retVal
 }
@@ -67,8 +67,8 @@ func (i *IEffectCreationOptions) Defines() interface{} {
 // SetDefines sets the Defines property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#defines
-func (i *IEffectCreationOptions) SetDefines(defines interface{}) *IEffectCreationOptions {
-	i.p.Set("defines", defines)
+func (i *IEffectCreationOptions) SetDefines(defines JSObject) *IEffectCreationOptions {
+	i.p.Set("defines", defines.JSObject())
 	return i
 }
 
@@ -91,7 +91,7 @@ func (i *IEffectCreationOptions) SetFallbacks(fallbacks *IEffectFallbacks) *IEff
 // IndexParameters returns the IndexParameters property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#indexparameters
-func (i *IEffectCreationOptions) IndexParameters() interface{} {
+func (i *IEffectCreationOptions) IndexParameters() js.Value {
 	retVal := i.p.Get("indexParameters")
 	return retVal
 }
@@ -99,8 +99,8 @@ func (i *IEffectCreationOptions) IndexParameters() interface{} {
 // SetIndexParameters sets the IndexParameters property of class IEffectCreationOptions.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ieffectcreationoptions#indexparameters
-func (i *IEffectCreationOptions) SetIndexParameters(indexParameters interface{}) *IEffectCreationOptions {
-	i.p.Set("indexParameters", indexParameters)
+func (i *IEffectCreationOptions) SetIndexParameters(indexParameters JSObject) *IEffectCreationOptions {
+	i.p.Set("indexParameters", indexParameters.JSObject())
 	return i
 }
 

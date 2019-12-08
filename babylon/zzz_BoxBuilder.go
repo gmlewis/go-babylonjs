@@ -52,6 +52,7 @@ func (b *BoxBuilder) CreateBox(name string, options js.Value, opts *BoxBuilderCr
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

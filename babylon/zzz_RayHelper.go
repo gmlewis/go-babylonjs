@@ -69,7 +69,11 @@ func (r *RayHelper) AttachToMesh(mesh *AbstractMesh, opts *RayHelperAttachToMesh
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.MeshSpaceDirection == nil {
 		args = append(args, js.Undefined())
@@ -97,9 +101,23 @@ func (r *RayHelper) CreateAndShow(ray *Ray, scene *Scene, color *Color3) *RayHel
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, ray.JSObject())
-	args = append(args, scene.JSObject())
-	args = append(args, color.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	retVal := r.p.Call("CreateAndShow", args...)
 	return RayHelperFromJSObject(retVal, r.ctx)
@@ -144,7 +162,11 @@ func (r *RayHelper) Show(scene *Scene, opts *RayHelperShowOpts) {
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Color == nil {
 		args = append(args, js.Undefined())

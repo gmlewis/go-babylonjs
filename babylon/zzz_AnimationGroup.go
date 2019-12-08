@@ -66,12 +66,21 @@ func (ba *Babylon) NewAnimationGroup(name string, opts *NewAnimationGroupOpts) *
 // AddTargetedAnimation calls the AddTargetedAnimation method on the AnimationGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#addtargetedanimation
-func (a *AnimationGroup) AddTargetedAnimation(animation *Animation, target interface{}) *TargetedAnimation {
+func (a *AnimationGroup) AddTargetedAnimation(animation *Animation, target JSObject) *TargetedAnimation {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, animation.JSObject())
-	args = append(args, target)
+	if animation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, animation.JSObject())
+	}
+
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	retVal := a.p.Call("addTargetedAnimation", args...)
 	return TargetedAnimationFromJSObject(retVal, a.ctx)
@@ -168,12 +177,21 @@ func (a *AnimationGroup) Normalize(opts *AnimationGroupNormalizeOpts) *Animation
 // Parse calls the Parse method on the AnimationGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#parse
-func (a *AnimationGroup) Parse(parsedAnimationGroup interface{}, scene *Scene) *AnimationGroup {
+func (a *AnimationGroup) Parse(parsedAnimationGroup JSObject, scene *Scene) *AnimationGroup {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedAnimationGroup)
-	args = append(args, scene.JSObject())
+	if parsedAnimationGroup == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedAnimationGroup.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := a.p.Call("Parse", args...)
 	return AnimationGroupFromJSObject(retVal, a.ctx)
@@ -234,7 +252,7 @@ func (a *AnimationGroup) Restart() *AnimationGroup {
 // Serialize calls the Serialize method on the AnimationGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup#serialize
-func (a *AnimationGroup) Serialize() interface{} {
+func (a *AnimationGroup) Serialize() js.Value {
 
 	retVal := a.p.Call("serialize")
 	return retVal
@@ -312,7 +330,11 @@ func (a *AnimationGroup) SyncAllAnimationsWith(root *Animatable) *AnimationGroup
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, root.JSObject())
+	if root == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, root.JSObject())
+	}
 
 	retVal := a.p.Call("syncAllAnimationsWith", args...)
 	return AnimationGroupFromJSObject(retVal, a.ctx)

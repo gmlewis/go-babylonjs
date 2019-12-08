@@ -45,7 +45,11 @@ func (i *IPhysicsEngine) AddImpostor(impostor *PhysicsImpostor) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	i.p.Call("addImpostor", args...)
 }
@@ -57,9 +61,23 @@ func (i *IPhysicsEngine) AddJoint(mainImpostor *PhysicsImpostor, connectedImpost
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, mainImpostor.JSObject())
-	args = append(args, connectedImpostor.JSObject())
-	args = append(args, joint.JSObject())
+	if mainImpostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mainImpostor.JSObject())
+	}
+
+	if connectedImpostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, connectedImpostor.JSObject())
+	}
+
+	if joint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, joint.JSObject())
+	}
 
 	i.p.Call("addJoint", args...)
 }
@@ -79,7 +97,11 @@ func (i *IPhysicsEngine) GetImpostorForPhysicsObject(object *IPhysicsEnabledObje
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, object.JSObject())
+	if object == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, object.JSObject())
+	}
 
 	retVal := i.p.Call("getImpostorForPhysicsObject", args...)
 	return PhysicsImpostorFromJSObject(retVal, i.ctx)
@@ -88,11 +110,15 @@ func (i *IPhysicsEngine) GetImpostorForPhysicsObject(object *IPhysicsEnabledObje
 // GetImpostorWithPhysicsBody calls the GetImpostorWithPhysicsBody method on the IPhysicsEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsengine#getimpostorwithphysicsbody
-func (i *IPhysicsEngine) GetImpostorWithPhysicsBody(body interface{}) *PhysicsImpostor {
+func (i *IPhysicsEngine) GetImpostorWithPhysicsBody(body JSObject) *PhysicsImpostor {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, body)
+	if body == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, body.JSObject())
+	}
 
 	retVal := i.p.Call("getImpostorWithPhysicsBody", args...)
 	return PhysicsImpostorFromJSObject(retVal, i.ctx)
@@ -154,8 +180,17 @@ func (i *IPhysicsEngine) Raycast(from *Vector3, to *Vector3) *PhysicsRaycastResu
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, from.JSObject())
-	args = append(args, to.JSObject())
+	if from == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, from.JSObject())
+	}
+
+	if to == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, to.JSObject())
+	}
 
 	retVal := i.p.Call("raycast", args...)
 	return PhysicsRaycastResultFromJSObject(retVal, i.ctx)
@@ -168,7 +203,11 @@ func (i *IPhysicsEngine) RemoveImpostor(impostor *PhysicsImpostor) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	i.p.Call("removeImpostor", args...)
 }
@@ -180,9 +219,23 @@ func (i *IPhysicsEngine) RemoveJoint(mainImpostor *PhysicsImpostor, connectedImp
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, mainImpostor.JSObject())
-	args = append(args, connectedImpostor.JSObject())
-	args = append(args, joint.JSObject())
+	if mainImpostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mainImpostor.JSObject())
+	}
+
+	if connectedImpostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, connectedImpostor.JSObject())
+	}
+
+	if joint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, joint.JSObject())
+	}
 
 	i.p.Call("removeJoint", args...)
 }
@@ -194,7 +247,11 @@ func (i *IPhysicsEngine) SetGravity(gravity *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, gravity.JSObject())
+	if gravity == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, gravity.JSObject())
+	}
 
 	i.p.Call("setGravity", args...)
 }

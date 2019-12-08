@@ -80,7 +80,11 @@ func (r *ReflectionProbe) AttachToMesh(mesh *AbstractMesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	r.p.Call("attachToMesh", args...)
 }
@@ -114,12 +118,22 @@ func (r *ReflectionProbe) GetScene() *Scene {
 // Parse calls the Parse method on the ReflectionProbe object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#parse
-func (r *ReflectionProbe) Parse(parsedReflectionProbe interface{}, scene *Scene, rootUrl string) *ReflectionProbe {
+func (r *ReflectionProbe) Parse(parsedReflectionProbe JSObject, scene *Scene, rootUrl string) *ReflectionProbe {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedReflectionProbe)
-	args = append(args, scene.JSObject())
+	if parsedReflectionProbe == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedReflectionProbe.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := r.p.Call("Parse", args...)
@@ -129,7 +143,7 @@ func (r *ReflectionProbe) Parse(parsedReflectionProbe interface{}, scene *Scene,
 // Serialize calls the Serialize method on the ReflectionProbe object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#serialize
-func (r *ReflectionProbe) Serialize() interface{} {
+func (r *ReflectionProbe) Serialize() js.Value {
 
 	retVal := r.p.Call("serialize")
 	return retVal
@@ -143,6 +157,7 @@ func (r *ReflectionProbe) SetRenderingAutoClearDepthStencil(renderingGroupId flo
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, renderingGroupId)
+
 	args = append(args, autoClearDepthStencil)
 
 	r.p.Call("setRenderingAutoClearDepthStencil", args...)

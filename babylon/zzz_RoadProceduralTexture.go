@@ -74,12 +74,22 @@ func (ba *Babylon) NewRoadProceduralTexture(name string, size float64, scene *Sc
 // Parse calls the Parse method on the RoadProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#parse
-func (r *RoadProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *RoadProceduralTexture {
+func (r *RoadProceduralTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *RoadProceduralTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := r.p.Call("Parse", args...)
@@ -89,7 +99,7 @@ func (r *RoadProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, r
 // Serialize calls the Serialize method on the RoadProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#serialize
-func (r *RoadProceduralTexture) Serialize() interface{} {
+func (r *RoadProceduralTexture) Serialize() js.Value {
 
 	retVal := r.p.Call("serialize")
 	return retVal

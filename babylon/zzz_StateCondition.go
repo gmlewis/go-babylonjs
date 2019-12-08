@@ -39,12 +39,12 @@ func StateConditionArrayToJSArray(array []*StateCondition) []interface{} {
 // NewStateCondition returns a new StateCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.statecondition
-func (ba *Babylon) NewStateCondition(actionManager *ActionManager, target interface{}, value string) *StateCondition {
+func (ba *Babylon) NewStateCondition(actionManager *ActionManager, target JSObject, value string) *StateCondition {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, actionManager.JSObject())
-	args = append(args, target)
+	args = append(args, target.JSObject())
 	args = append(args, value)
 
 	p := ba.ctx.Get("StateCondition").New(args...)
@@ -63,7 +63,7 @@ func (s *StateCondition) IsValid() bool {
 // Serialize calls the Serialize method on the StateCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.statecondition#serialize
-func (s *StateCondition) Serialize() interface{} {
+func (s *StateCondition) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal

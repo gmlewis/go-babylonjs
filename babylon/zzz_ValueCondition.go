@@ -44,7 +44,7 @@ type NewValueConditionOpts struct {
 // NewValueCondition returns a new ValueCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition
-func (ba *Babylon) NewValueCondition(actionManager *ActionManager, target interface{}, propertyPath string, value interface{}, opts *NewValueConditionOpts) *ValueCondition {
+func (ba *Babylon) NewValueCondition(actionManager *ActionManager, target JSObject, propertyPath string, value JSObject, opts *NewValueConditionOpts) *ValueCondition {
 	if opts == nil {
 		opts = &NewValueConditionOpts{}
 	}
@@ -52,9 +52,9 @@ func (ba *Babylon) NewValueCondition(actionManager *ActionManager, target interf
 	args := make([]interface{}, 0, 4+1)
 
 	args = append(args, actionManager.JSObject())
-	args = append(args, target)
+	args = append(args, target.JSObject())
 	args = append(args, propertyPath)
-	args = append(args, value)
+	args = append(args, value.JSObject())
 
 	if opts.Operator == nil {
 		args = append(args, js.Undefined())
@@ -91,7 +91,7 @@ func (v *ValueCondition) IsValid() bool {
 // Serialize calls the Serialize method on the ValueCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#serialize
-func (v *ValueCondition) Serialize() interface{} {
+func (v *ValueCondition) Serialize() js.Value {
 
 	retVal := v.p.Call("serialize")
 	return retVal
@@ -196,7 +196,7 @@ func (v *ValueCondition) SetPropertyPath(propertyPath string) *ValueCondition {
 // Value returns the Value property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#value
-func (v *ValueCondition) Value() interface{} {
+func (v *ValueCondition) Value() js.Value {
 	retVal := v.p.Get("value")
 	return retVal
 }
@@ -204,7 +204,7 @@ func (v *ValueCondition) Value() interface{} {
 // SetValue sets the Value property of class ValueCondition.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition#value
-func (v *ValueCondition) SetValue(value interface{}) *ValueCondition {
-	v.p.Set("value", value)
+func (v *ValueCondition) SetValue(value JSObject) *ValueCondition {
+	v.p.Set("value", value.JSObject())
 	return v
 }

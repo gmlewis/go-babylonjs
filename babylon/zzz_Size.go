@@ -57,7 +57,11 @@ func (s *Size) Add(otherSize *Size) *Size {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherSize.JSObject())
+	if otherSize == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherSize.JSObject())
+	}
 
 	retVal := s.p.Call("add", args...)
 	return SizeFromJSObject(retVal, s.ctx)
@@ -79,7 +83,11 @@ func (s *Size) CopyFrom(src *Size) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, src.JSObject())
+	if src == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, src.JSObject())
+	}
 
 	s.p.Call("copyFrom", args...)
 }
@@ -92,6 +100,7 @@ func (s *Size) CopyFromFloats(width float64, height float64) *Size {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
 
 	retVal := s.p.Call("copyFromFloats", args...)
@@ -105,7 +114,11 @@ func (s *Size) Equals(other *Size) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := s.p.Call("equals", args...)
 	return retVal.Bool()
@@ -136,8 +149,18 @@ func (s *Size) Lerp(start *Size, end *Size, amount float64) *Size {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, start.JSObject())
-	args = append(args, end.JSObject())
+	if start == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, start.JSObject())
+	}
+
+	if end == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, end.JSObject())
+	}
+
 	args = append(args, amount)
 
 	retVal := s.p.Call("Lerp", args...)
@@ -152,6 +175,7 @@ func (s *Size) MultiplyByFloats(w float64, h float64) *Size {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, w)
+
 	args = append(args, h)
 
 	retVal := s.p.Call("multiplyByFloats", args...)
@@ -166,6 +190,7 @@ func (s *Size) Set(width float64, height float64) *Size {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
 
 	retVal := s.p.Call("set", args...)
@@ -179,7 +204,11 @@ func (s *Size) Subtract(otherSize *Size) *Size {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherSize.JSObject())
+	if otherSize == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherSize.JSObject())
+	}
 
 	retVal := s.p.Call("subtract", args...)
 	return SizeFromJSObject(retVal, s.ctx)

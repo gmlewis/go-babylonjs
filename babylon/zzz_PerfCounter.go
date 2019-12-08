@@ -60,6 +60,7 @@ func (p *PerfCounter) AddCount(newCount float64, fetchResult bool) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, newCount)
+
 	args = append(args, fetchResult)
 
 	p.p.Call("addCount", args...)

@@ -64,8 +64,17 @@ func (i *ImageProcessingBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, 
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, effect.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -92,7 +101,11 @@ func (i *ImageProcessingBlock) Initialize(state *NodeMaterialBuildState) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, state.JSObject())
+	if state == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, state.JSObject())
+	}
 
 	i.p.Call("initialize", args...)
 }
@@ -104,8 +117,18 @@ func (i *ImageProcessingBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMat
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
 
 	retVal := i.p.Call("isReady", args...)
@@ -119,8 +142,18 @@ func (i *ImageProcessingBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
 
 	i.p.Call("prepareDefines", args...)

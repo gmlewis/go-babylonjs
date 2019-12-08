@@ -67,11 +67,15 @@ func (ba *Babylon) NewWaterMaterial(name string, scene *Scene, opts *NewWaterMat
 // AddToRenderList calls the AddToRenderList method on the WaterMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#addtorenderlist
-func (w *WaterMaterial) AddToRenderList(node interface{}) {
+func (w *WaterMaterial) AddToRenderList(node JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, node)
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
 
 	w.p.Call("addToRenderList", args...)
 }
@@ -83,9 +87,23 @@ func (w *WaterMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMe
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	w.p.Call("bindForSubMesh", args...)
 }
@@ -111,7 +129,12 @@ func (w *WaterMaterial) CreateDefaultMesh(name string, scene *Scene) *Mesh {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := w.p.Call("CreateDefaultMesh", args...)
 	return MeshFromJSObject(retVal, w.ctx)
@@ -217,7 +240,11 @@ func (w *WaterMaterial) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := w.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -238,8 +265,17 @@ func (w *WaterMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, 
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -272,12 +308,22 @@ func (w *WaterMaterial) NeedAlphaTesting() bool {
 // Parse calls the Parse method on the WaterMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#parse
-func (w *WaterMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *WaterMaterial {
+func (w *WaterMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *WaterMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := w.p.Call("Parse", args...)
@@ -287,7 +333,7 @@ func (w *WaterMaterial) Parse(source interface{}, scene *Scene, rootUrl string) 
 // Serialize calls the Serialize method on the WaterMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial#serialize
-func (w *WaterMaterial) Serialize() interface{} {
+func (w *WaterMaterial) Serialize() js.Value {
 
 	retVal := w.p.Call("serialize")
 	return retVal

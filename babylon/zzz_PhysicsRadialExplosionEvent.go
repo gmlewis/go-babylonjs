@@ -90,8 +90,17 @@ func (p *PhysicsRadialExplosionEvent) GetImpostorHitData(impostor *PhysicsImpost
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
-	args = append(args, origin.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
+	if origin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, origin.JSObject())
+	}
 
 	retVal := p.p.Call("getImpostorHitData", args...)
 	return PhysicsHitDataFromJSObject(retVal, p.ctx)

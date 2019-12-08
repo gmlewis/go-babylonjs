@@ -74,12 +74,22 @@ func (ba *Babylon) NewCloudProceduralTexture(name string, size float64, scene *S
 // Parse calls the Parse method on the CloudProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#parse
-func (c *CloudProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *CloudProceduralTexture {
+func (c *CloudProceduralTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *CloudProceduralTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := c.p.Call("Parse", args...)
@@ -89,7 +99,7 @@ func (c *CloudProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, 
 // Serialize calls the Serialize method on the CloudProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#serialize
-func (c *CloudProceduralTexture) Serialize() interface{} {
+func (c *CloudProceduralTexture) Serialize() js.Value {
 
 	retVal := c.p.Call("serialize")
 	return retVal

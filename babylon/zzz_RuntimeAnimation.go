@@ -39,11 +39,11 @@ func RuntimeAnimationArrayToJSArray(array []*RuntimeAnimation) []interface{} {
 // NewRuntimeAnimation returns a new RuntimeAnimation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation
-func (ba *Babylon) NewRuntimeAnimation(target interface{}, animation *Animation, scene *Scene, host *Animatable) *RuntimeAnimation {
+func (ba *Babylon) NewRuntimeAnimation(target JSObject, animation *Animation, scene *Scene, host *Animatable) *RuntimeAnimation {
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, target)
+	args = append(args, target.JSObject())
 	args = append(args, animation.JSObject())
 	args = append(args, scene.JSObject())
 	args = append(args, host.JSObject())
@@ -68,9 +68,13 @@ func (r *RuntimeAnimation) Animate(delay float64, from float64, to float64, loop
 	args := make([]interface{}, 0, 5+1)
 
 	args = append(args, delay)
+
 	args = append(args, from)
+
 	args = append(args, to)
+
 	args = append(args, loop)
+
 	args = append(args, speedRatio)
 
 	if opts.Weight == nil {
@@ -139,11 +143,16 @@ func (r *RuntimeAnimation) Reset(opts *RuntimeAnimationResetOpts) {
 // SetValue calls the SetValue method on the RuntimeAnimation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#setvalue
-func (r *RuntimeAnimation) SetValue(currentValue interface{}, weight float64) {
+func (r *RuntimeAnimation) SetValue(currentValue JSObject, weight float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, currentValue)
+	if currentValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, currentValue.JSObject())
+	}
+
 	args = append(args, weight)
 
 	r.p.Call("setValue", args...)
@@ -184,7 +193,7 @@ func (r *RuntimeAnimation) SetCurrentFrame(currentFrame float64) *RuntimeAnimati
 // CurrentValue returns the CurrentValue property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#currentvalue
-func (r *RuntimeAnimation) CurrentValue() interface{} {
+func (r *RuntimeAnimation) CurrentValue() js.Value {
 	retVal := r.p.Get("currentValue")
 	return retVal
 }
@@ -192,15 +201,15 @@ func (r *RuntimeAnimation) CurrentValue() interface{} {
 // SetCurrentValue sets the CurrentValue property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#currentvalue
-func (r *RuntimeAnimation) SetCurrentValue(currentValue interface{}) *RuntimeAnimation {
-	r.p.Set("currentValue", currentValue)
+func (r *RuntimeAnimation) SetCurrentValue(currentValue JSObject) *RuntimeAnimation {
+	r.p.Set("currentValue", currentValue.JSObject())
 	return r
 }
 
 // Target returns the Target property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#target
-func (r *RuntimeAnimation) Target() interface{} {
+func (r *RuntimeAnimation) Target() js.Value {
 	retVal := r.p.Get("target")
 	return retVal
 }
@@ -208,8 +217,8 @@ func (r *RuntimeAnimation) Target() interface{} {
 // SetTarget sets the Target property of class RuntimeAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#target
-func (r *RuntimeAnimation) SetTarget(target interface{}) *RuntimeAnimation {
-	r.p.Set("target", target)
+func (r *RuntimeAnimation) SetTarget(target JSObject) *RuntimeAnimation {
+	r.p.Set("target", target.JSObject())
 	return r
 }
 

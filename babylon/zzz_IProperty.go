@@ -55,7 +55,7 @@ func (i *IProperty) SetExtensions(extensions js.Value) *IProperty {
 // Extras returns the Extras property of class IProperty.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iproperty#extras
-func (i *IProperty) Extras() interface{} {
+func (i *IProperty) Extras() js.Value {
 	retVal := i.p.Get("extras")
 	return retVal
 }
@@ -63,7 +63,7 @@ func (i *IProperty) Extras() interface{} {
 // SetExtras sets the Extras property of class IProperty.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iproperty#extras
-func (i *IProperty) SetExtras(extras interface{}) *IProperty {
-	i.p.Set("extras", extras)
+func (i *IProperty) SetExtras(extras JSObject) *IProperty {
+	i.p.Set("extras", extras.JSObject())
 	return i
 }

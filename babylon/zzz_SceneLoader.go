@@ -174,6 +174,7 @@ func (s *SceneLoader) ImportMesh(meshNames interface{}, rootUrl string, opts *Sc
 	args := make([]interface{}, 0, 2+6)
 
 	args = append(args, meshNames)
+
 	args = append(args, rootUrl)
 
 	if opts.SceneFilename == nil {
@@ -222,14 +223,19 @@ type SceneLoaderImportMeshAsyncOpts struct {
 // ImportMeshAsync calls the ImportMeshAsync method on the SceneLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloader#importmeshasync
-func (s *SceneLoader) ImportMeshAsync(meshNames interface{}, rootUrl string, opts *SceneLoaderImportMeshAsyncOpts) *Promise {
+func (s *SceneLoader) ImportMeshAsync(meshNames JSObject, rootUrl string, opts *SceneLoaderImportMeshAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &SceneLoaderImportMeshAsyncOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+4)
 
-	args = append(args, meshNames)
+	if meshNames == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, meshNames.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	if opts.SceneFilename == nil {
@@ -481,7 +487,11 @@ func (s *SceneLoader) RegisterPlugin(plugin *ISceneLoaderPlugin) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, plugin.JSObject())
+	if plugin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, plugin.JSObject())
+	}
 
 	s.p.Call("RegisterPlugin", args...)
 }

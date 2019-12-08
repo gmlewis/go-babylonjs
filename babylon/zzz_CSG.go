@@ -85,7 +85,11 @@ func (c *CSG) CopyTransformAttributes(csg *CSG) *CSG {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, csg.JSObject())
+	if csg == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, csg.JSObject())
+	}
 
 	retVal := c.p.Call("copyTransformAttributes", args...)
 	return CSGFromJSObject(retVal, c.ctx)
@@ -98,7 +102,11 @@ func (c *CSG) FromMesh(mesh *Mesh) *CSG {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := c.p.Call("FromMesh", args...)
 	return CSGFromJSObject(retVal, c.ctx)
@@ -111,7 +119,11 @@ func (c *CSG) Intersect(csg *CSG) *CSG {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, csg.JSObject())
+	if csg == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, csg.JSObject())
+	}
 
 	retVal := c.p.Call("intersect", args...)
 	return CSGFromJSObject(retVal, c.ctx)
@@ -124,7 +136,11 @@ func (c *CSG) IntersectInPlace(csg *CSG) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, csg.JSObject())
+	if csg == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, csg.JSObject())
+	}
 
 	c.p.Call("intersectInPlace", args...)
 }
@@ -153,7 +169,11 @@ func (c *CSG) Subtract(csg *CSG) *CSG {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, csg.JSObject())
+	if csg == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, csg.JSObject())
+	}
 
 	retVal := c.p.Call("subtract", args...)
 	return CSGFromJSObject(retVal, c.ctx)
@@ -166,7 +186,11 @@ func (c *CSG) SubtractInPlace(csg *CSG) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, csg.JSObject())
+	if csg == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, csg.JSObject())
+	}
 
 	c.p.Call("subtractInPlace", args...)
 }
@@ -217,7 +241,11 @@ func (c *CSG) Union(csg *CSG) *CSG {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, csg.JSObject())
+	if csg == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, csg.JSObject())
+	}
 
 	retVal := c.p.Call("union", args...)
 	return CSGFromJSObject(retVal, c.ctx)
@@ -230,7 +258,11 @@ func (c *CSG) UnionInPlace(csg *CSG) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, csg.JSObject())
+	if csg == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, csg.JSObject())
+	}
 
 	c.p.Call("unionInPlace", args...)
 }

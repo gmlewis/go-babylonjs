@@ -52,6 +52,7 @@ func (l *LinesBuilder) CreateDashedLines(name string, options js.Value, opts *Li
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -72,8 +73,14 @@ func (l *LinesBuilder) CreateLineSystem(name string, options js.Value, scene *Sc
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, options)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := l.p.Call("CreateLineSystem", args...)
 	return LinesMeshFromJSObject(retVal, l.ctx)
@@ -95,6 +102,7 @@ func (l *LinesBuilder) CreateLines(name string, options js.Value, opts *LinesBui
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

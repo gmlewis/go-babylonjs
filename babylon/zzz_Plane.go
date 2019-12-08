@@ -81,9 +81,23 @@ func (p *Plane) CopyFromPoints(point1 *Vector3, point2 *Vector3, point3 *Vector3
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, point1.JSObject())
-	args = append(args, point2.JSObject())
-	args = append(args, point3.JSObject())
+	if point1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point1.JSObject())
+	}
+
+	if point2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point2.JSObject())
+	}
+
+	if point3 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point3.JSObject())
+	}
 
 	retVal := p.p.Call("copyFromPoints", args...)
 	return PlaneFromJSObject(retVal, p.ctx)
@@ -96,7 +110,11 @@ func (p *Plane) DotCoordinate(point *Vector3) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, point.JSObject())
+	if point == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point.JSObject())
+	}
 
 	retVal := p.p.Call("dotCoordinate", args...)
 	return retVal.Float()
@@ -122,9 +140,23 @@ func (p *Plane) FromPoints(point1 *Vector3, point2 *Vector3, point3 *Vector3) *P
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, point1.JSObject())
-	args = append(args, point2.JSObject())
-	args = append(args, point3.JSObject())
+	if point1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point1.JSObject())
+	}
+
+	if point2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point2.JSObject())
+	}
+
+	if point3 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point3.JSObject())
+	}
 
 	retVal := p.p.Call("FromPoints", args...)
 	return PlaneFromJSObject(retVal, p.ctx)
@@ -137,8 +169,17 @@ func (p *Plane) FromPositionAndNormal(origin *Vector3, normal *Vector3) *Plane {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, origin.JSObject())
-	args = append(args, normal.JSObject())
+	if origin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, origin.JSObject())
+	}
+
+	if normal == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, normal.JSObject())
+	}
 
 	retVal := p.p.Call("FromPositionAndNormal", args...)
 	return PlaneFromJSObject(retVal, p.ctx)
@@ -169,7 +210,12 @@ func (p *Plane) IsFrontFacingTo(direction *Vector3, epsilon float64) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, direction.JSObject())
+	if direction == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction.JSObject())
+	}
+
 	args = append(args, epsilon)
 
 	retVal := p.p.Call("isFrontFacingTo", args...)
@@ -192,7 +238,11 @@ func (p *Plane) SignedDistanceTo(point *Vector3) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, point.JSObject())
+	if point == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point.JSObject())
+	}
 
 	retVal := p.p.Call("signedDistanceTo", args...)
 	return retVal.Float()
@@ -205,9 +255,23 @@ func (p *Plane) SignedDistanceToPlaneFromPositionAndNormal(origin *Vector3, norm
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, origin.JSObject())
-	args = append(args, normal.JSObject())
-	args = append(args, point.JSObject())
+	if origin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, origin.JSObject())
+	}
+
+	if normal == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, normal.JSObject())
+	}
+
+	if point == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point.JSObject())
+	}
 
 	retVal := p.p.Call("SignedDistanceToPlaneFromPositionAndNormal", args...)
 	return retVal.Float()
@@ -220,7 +284,11 @@ func (p *Plane) Transform(transformation *Matrix) *Plane {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, transformation.JSObject())
+	if transformation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transformation.JSObject())
+	}
 
 	retVal := p.p.Call("transform", args...)
 	return PlaneFromJSObject(retVal, p.ctx)

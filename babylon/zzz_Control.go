@@ -71,6 +71,7 @@ func (c *Control) Contains(x float64, y float64) bool {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	retVal := c.p.Call("contains", args...)
@@ -181,7 +182,11 @@ func (c *Control) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, globalCoordinates.JSObject())
+	if globalCoordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, globalCoordinates.JSObject())
+	}
 
 	retVal := c.p.Call("getLocalCoordinates", args...)
 	return Vector2FromJSObject(retVal, c.ctx)
@@ -194,8 +199,17 @@ func (c *Control) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *V
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, globalCoordinates.JSObject())
-	args = append(args, result.JSObject())
+	if globalCoordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, globalCoordinates.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := c.p.Call("getLocalCoordinatesToRef", args...)
 	return ControlFromJSObject(retVal, c.ctx)
@@ -208,7 +222,11 @@ func (c *Control) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, globalCoordinates.JSObject())
+	if globalCoordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, globalCoordinates.JSObject())
+	}
 
 	retVal := c.p.Call("getParentLocalCoordinates", args...)
 	return Vector2FromJSObject(retVal, c.ctx)
@@ -221,7 +239,11 @@ func (c *Control) IsAscendant(container *Control) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	retVal := c.p.Call("isAscendant", args...)
 	return retVal.Bool()
@@ -234,7 +256,11 @@ func (c *Control) LinkWithMesh(mesh *AbstractMesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	c.p.Call("linkWithMesh", args...)
 }
@@ -246,8 +272,17 @@ func (c *Control) MoveToVector3(position *Vector3, scene *Scene) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, position.JSObject())
-	args = append(args, scene.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	c.p.Call("moveToVector3", args...)
 }
@@ -831,7 +866,7 @@ func (c *Control) SetLinkedMesh(linkedMesh *AbstractMesh) *Control {
 // Metadata returns the Metadata property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#metadata
-func (c *Control) Metadata() interface{} {
+func (c *Control) Metadata() js.Value {
 	retVal := c.p.Get("metadata")
 	return retVal
 }
@@ -839,8 +874,8 @@ func (c *Control) Metadata() interface{} {
 // SetMetadata sets the Metadata property of class Control.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control#metadata
-func (c *Control) SetMetadata(metadata interface{}) *Control {
-	c.p.Set("metadata", metadata)
+func (c *Control) SetMetadata(metadata JSObject) *Control {
+	c.p.Set("metadata", metadata.JSObject())
 	return c
 }
 

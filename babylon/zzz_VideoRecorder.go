@@ -77,7 +77,11 @@ func (v *VideoRecorder) IsSupported(engine *Engine) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, engine.JSObject())
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
 
 	retVal := v.p.Call("IsSupported", args...)
 	return retVal.Bool()

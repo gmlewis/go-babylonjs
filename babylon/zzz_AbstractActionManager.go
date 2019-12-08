@@ -81,6 +81,7 @@ func (a *AbstractActionManager) HasSpecificTriggers2(triggerA float64, triggerB 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, triggerA)
+
 	args = append(args, triggerB)
 
 	retVal := a.p.Call("hasSpecificTriggers2", args...)
@@ -120,7 +121,11 @@ func (a *AbstractActionManager) RegisterAction(action *IAction) *IAction {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action.JSObject())
+	if action == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, action.JSObject())
+	}
 
 	retVal := a.p.Call("registerAction", args...)
 	return IActionFromJSObject(retVal, a.ctx)
@@ -129,7 +134,7 @@ func (a *AbstractActionManager) RegisterAction(action *IAction) *IAction {
 // Serialize calls the Serialize method on the AbstractActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#serialize
-func (a *AbstractActionManager) Serialize(name string) interface{} {
+func (a *AbstractActionManager) Serialize(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
@@ -146,7 +151,11 @@ func (a *AbstractActionManager) UnregisterAction(action *IAction) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action.JSObject())
+	if action == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, action.JSObject())
+	}
 
 	retVal := a.p.Call("unregisterAction", args...)
 	return retVal.Bool()

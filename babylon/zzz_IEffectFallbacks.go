@@ -44,7 +44,12 @@ func (i *IEffectFallbacks) Reduce(currentDefines string, effect *Effect) string 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, currentDefines)
-	args = append(args, effect.JSObject())
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	retVal := i.p.Call("reduce", args...)
 	return retVal.String()

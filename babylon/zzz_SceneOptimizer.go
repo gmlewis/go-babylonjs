@@ -102,7 +102,11 @@ func (s *SceneOptimizer) OptimizeAsync(scene *Scene, opts *SceneOptimizerOptimiz
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Options == nil {
 		args = append(args, js.Undefined())

@@ -56,7 +56,11 @@ func (l *LightBlock) AutoConfigure(material *NodeMaterial) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, material.JSObject())
+	if material == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, material.JSObject())
+	}
 
 	l.p.Call("autoConfigure", args...)
 }
@@ -76,8 +80,17 @@ func (l *LightBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *Ligh
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, effect.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -104,8 +117,18 @@ func (l *LightBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMateri
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
 
 	l.p.Call("prepareDefines", args...)
@@ -114,7 +137,7 @@ func (l *LightBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMateri
 // Serialize calls the Serialize method on the LightBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#serialize
-func (l *LightBlock) Serialize() interface{} {
+func (l *LightBlock) Serialize() js.Value {
 
 	retVal := l.p.Call("serialize")
 	return retVal
@@ -127,9 +150,20 @@ func (l *LightBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nod
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, state.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if state == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, state.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
+
 	args = append(args, uniformBuffers)
 
 	l.p.Call("updateUniformsAndSamples", args...)
@@ -138,12 +172,22 @@ func (l *LightBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nod
 // _deserialize calls the _deserialize method on the LightBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightblock#_deserialize
-func (l *LightBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (l *LightBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	l.p.Call("_deserialize", args...)

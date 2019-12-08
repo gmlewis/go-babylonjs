@@ -39,11 +39,11 @@ func WindowsMotionControllerArrayToJSArray(array []*WindowsMotionController) []i
 // NewWindowsMotionController returns a new WindowsMotionController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller
-func (ba *Babylon) NewWindowsMotionController(vrGamepad interface{}) *WindowsMotionController {
+func (ba *Babylon) NewWindowsMotionController(vrGamepad JSObject) *WindowsMotionController {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vrGamepad)
+	args = append(args, vrGamepad.JSObject())
 
 	p := ba.ctx.Get("WindowsMotionController").New(args...)
 	return WindowsMotionControllerFromJSObject(p, ba.ctx)
@@ -98,7 +98,11 @@ func (w *WindowsMotionController) InitControllerMesh(scene *Scene, opts *Windows
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())

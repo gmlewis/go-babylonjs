@@ -138,7 +138,11 @@ func (i *InstancedMesh) GetLOD(camera *Camera) *AbstractMesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	retVal := i.p.Call("getLOD", args...)
 	return AbstractMeshFromJSObject(retVal, i.ctx)
@@ -305,6 +309,7 @@ func (i *InstancedMesh) SetVerticesData(kind string, data js.Value, opts *Instan
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, kind)
+
 	args = append(args, data)
 
 	if opts.Updatable == nil {
@@ -339,6 +344,7 @@ func (i *InstancedMesh) UpdateVerticesData(kind string, data js.Value, opts *Ins
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, kind)
+
 	args = append(args, data)
 
 	if opts.UpdateExtends == nil {
@@ -363,7 +369,12 @@ func (i *InstancedMesh) _removeLightSource(light *Light, dispose bool) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, light.JSObject())
+	if light == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, light.JSObject())
+	}
+
 	args = append(args, dispose)
 
 	i.p.Call("_removeLightSource", args...)
@@ -376,7 +387,11 @@ func (i *InstancedMesh) _resyncLightSource(light *Light) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, light.JSObject())
+	if light == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, light.JSObject())
+	}
 
 	i.p.Call("_resyncLightSource", args...)
 }

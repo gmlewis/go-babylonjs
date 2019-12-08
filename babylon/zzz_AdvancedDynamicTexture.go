@@ -81,7 +81,11 @@ func (a *AdvancedDynamicTexture) AddControl(control *Control) *AdvancedDynamicTe
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := a.p.Call("addControl", args...)
 	return AdvancedDynamicTextureFromJSObject(retVal, a.ctx)
@@ -110,7 +114,11 @@ func (a *AdvancedDynamicTexture) AttachToMesh(mesh *AbstractMesh, opts *Advanced
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.SupportPointerMove == nil {
 		args = append(args, js.Undefined())
@@ -139,7 +147,11 @@ func (a *AdvancedDynamicTexture) CreateForMesh(mesh *AbstractMesh, opts *Advance
 
 	args := make([]interface{}, 0, 1+4)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.Width == nil {
 		args = append(args, js.Undefined())
@@ -312,8 +324,17 @@ func (a *AdvancedDynamicTexture) GetProjectedPosition(position *Vector3, worldMa
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, position.JSObject())
-	args = append(args, worldMatrix.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
+	if worldMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMatrix.JSObject())
+	}
 
 	retVal := a.p.Call("getProjectedPosition", args...)
 	return Vector2FromJSObject(retVal, a.ctx)
@@ -327,8 +348,11 @@ func (a *AdvancedDynamicTexture) InvalidateRect(invalidMinX float64, invalidMinY
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, invalidMinX)
+
 	args = append(args, invalidMinY)
+
 	args = append(args, invalidMaxX)
+
 	args = append(args, invalidMaxY)
 
 	a.p.Call("invalidateRect", args...)
@@ -349,7 +373,11 @@ func (a *AdvancedDynamicTexture) MoveFocusToControl(control *IFocusableControl) 
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	a.p.Call("moveFocusToControl", args...)
 }
@@ -369,7 +397,11 @@ func (a *AdvancedDynamicTexture) RemoveControl(control *Control) *AdvancedDynami
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := a.p.Call("removeControl", args...)
 	return AdvancedDynamicTextureFromJSObject(retVal, a.ctx)

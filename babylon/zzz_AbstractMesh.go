@@ -70,7 +70,11 @@ func (a *AbstractMesh) AddChild(mesh *AbstractMesh) *AbstractMesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := a.p.Call("addChild", args...)
 	return AbstractMeshFromJSObject(retVal, a.ctx)
@@ -91,7 +95,11 @@ func (a *AbstractMesh) AlignWithNormal(normal *Vector3, opts *AbstractMeshAlignW
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, normal.JSObject())
+	if normal == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, normal.JSObject())
+	}
 
 	if opts.UpDirection == nil {
 		args = append(args, js.Undefined())
@@ -110,8 +118,17 @@ func (a *AbstractMesh) ApplyImpulse(force *Vector3, contactPoint *Vector3) *Abst
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, force.JSObject())
-	args = append(args, contactPoint.JSObject())
+	if force == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, force.JSObject())
+	}
+
+	if contactPoint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, contactPoint.JSObject())
+	}
 
 	retVal := a.p.Call("applyImpulse", args...)
 	return AbstractMeshFromJSObject(retVal, a.ctx)
@@ -125,7 +142,9 @@ func (a *AbstractMesh) CalcMovePOV(amountRight float64, amountUp float64, amount
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, amountRight)
+
 	args = append(args, amountUp)
+
 	args = append(args, amountForward)
 
 	retVal := a.p.Call("calcMovePOV", args...)
@@ -140,7 +159,9 @@ func (a *AbstractMesh) CalcRotatePOV(flipBack float64, twirlClockwise float64, t
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, flipBack)
+
 	args = append(args, twirlClockwise)
+
 	args = append(args, tiltRight)
 
 	retVal := a.p.Call("calcRotatePOV", args...)
@@ -163,7 +184,12 @@ func (a *AbstractMesh) Clone(name string, newParent *Node, opts *AbstractMeshClo
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
-	args = append(args, newParent.JSObject())
+
+	if newParent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newParent.JSObject())
+	}
 
 	if opts.DoNotCloneChildren == nil {
 		args = append(args, js.Undefined())
@@ -334,7 +360,9 @@ func (a *AbstractMesh) GetClosestFacetAtCoordinates(x float64, y float64, z floa
 	args := make([]interface{}, 0, 3+3)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	if opts.Projected == nil {
@@ -375,7 +403,9 @@ func (a *AbstractMesh) GetClosestFacetAtLocalCoordinates(x float64, y float64, z
 	args := make([]interface{}, 0, 3+3)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	if opts.Projected == nil {
@@ -401,7 +431,7 @@ func (a *AbstractMesh) GetClosestFacetAtLocalCoordinates(x float64, y float64, z
 // GetFacetDataParameters calls the GetFacetDataParameters method on the AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#getfacetdataparameters
-func (a *AbstractMesh) GetFacetDataParameters() interface{} {
+func (a *AbstractMesh) GetFacetDataParameters() js.Value {
 
 	retVal := a.p.Call("getFacetDataParameters")
 	return retVal
@@ -463,7 +493,12 @@ func (a *AbstractMesh) GetFacetNormalToRef(i float64, ref *Vector3) *AbstractMes
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, i)
-	args = append(args, ref.JSObject())
+
+	if ref == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ref.JSObject())
+	}
 
 	retVal := a.p.Call("getFacetNormalToRef", args...)
 	return AbstractMeshFromJSObject(retVal, a.ctx)
@@ -490,7 +525,12 @@ func (a *AbstractMesh) GetFacetPositionToRef(i float64, ref *Vector3) *AbstractM
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, i)
-	args = append(args, ref.JSObject())
+
+	if ref == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ref.JSObject())
+	}
 
 	retVal := a.p.Call("getFacetPositionToRef", args...)
 	return AbstractMeshFromJSObject(retVal, a.ctx)
@@ -504,7 +544,9 @@ func (a *AbstractMesh) GetFacetsAtLocalCoordinates(x float64, y float64, z float
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	retVal := a.p.Call("getFacetsAtLocalCoordinates", args...)
@@ -531,7 +573,11 @@ func (a *AbstractMesh) GetLOD(camera *Camera) *AbstractMesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	retVal := a.p.Call("getLOD", args...)
 	return AbstractMeshFromJSObject(retVal, a.ctx)
@@ -602,7 +648,11 @@ func (a *AbstractMesh) Intersects(ray *Ray, opts *AbstractMeshIntersectsOpts) *P
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, ray.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
 
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -631,7 +681,11 @@ func (a *AbstractMesh) IntersectsMesh(mesh *AbstractMesh, opts *AbstractMeshInte
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.Precise == nil {
 		args = append(args, js.Undefined())
@@ -655,7 +709,11 @@ func (a *AbstractMesh) IntersectsPoint(point *Vector3) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, point.JSObject())
+	if point == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point.JSObject())
+	}
 
 	retVal := a.p.Call("intersectsPoint", args...)
 	return retVal.Bool()
@@ -708,7 +766,9 @@ func (a *AbstractMesh) MovePOV(amountRight float64, amountUp float64, amountForw
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, amountRight)
+
 	args = append(args, amountUp)
+
 	args = append(args, amountForward)
 
 	retVal := a.p.Call("movePOV", args...)
@@ -722,7 +782,11 @@ func (a *AbstractMesh) MoveWithCollisions(displacement *Vector3) *AbstractMesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, displacement.JSObject())
+	if displacement == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, displacement.JSObject())
+	}
 
 	retVal := a.p.Call("moveWithCollisions", args...)
 	return AbstractMeshFromJSObject(retVal, a.ctx)
@@ -806,7 +870,11 @@ func (a *AbstractMesh) RemoveChild(mesh *AbstractMesh) *AbstractMesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := a.p.Call("removeChild", args...)
 	return AbstractMeshFromJSObject(retVal, a.ctx)
@@ -820,7 +888,9 @@ func (a *AbstractMesh) RotatePOV(flipBack float64, twirlClockwise float64, tiltR
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, flipBack)
+
 	args = append(args, twirlClockwise)
+
 	args = append(args, tiltRight)
 
 	retVal := a.p.Call("rotatePOV", args...)
@@ -834,7 +904,11 @@ func (a *AbstractMesh) SetBoundingInfo(boundingInfo *BoundingInfo) *AbstractMesh
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, boundingInfo.JSObject())
+	if boundingInfo == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, boundingInfo.JSObject())
+	}
 
 	retVal := a.p.Call("setBoundingInfo", args...)
 	return AbstractMeshFromJSObject(retVal, a.ctx)
@@ -848,6 +922,7 @@ func (a *AbstractMesh) SetIndices(indices js.Value, totalVertices float64) *Abst
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, indices)
+
 	args = append(args, totalVertices)
 
 	retVal := a.p.Call("setIndices", args...)
@@ -856,7 +931,7 @@ func (a *AbstractMesh) SetIndices(indices js.Value, totalVertices float64) *Abst
 
 // AbstractMeshSetPhysicsLinkWithOpts contains optional parameters for AbstractMesh.SetPhysicsLinkWith.
 type AbstractMeshSetPhysicsLinkWithOpts struct {
-	Options *interface{}
+	Options interface{}
 }
 
 // SetPhysicsLinkWith calls the SetPhysicsLinkWith method on the AbstractMesh object.
@@ -869,9 +944,23 @@ func (a *AbstractMesh) SetPhysicsLinkWith(otherMesh *Mesh, pivot1 *Vector3, pivo
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, otherMesh.JSObject())
-	args = append(args, pivot1.JSObject())
-	args = append(args, pivot2.JSObject())
+	if otherMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherMesh.JSObject())
+	}
+
+	if pivot1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pivot1.JSObject())
+	}
+
+	if pivot2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pivot2.JSObject())
+	}
 
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
@@ -900,6 +989,7 @@ func (a *AbstractMesh) SetVerticesData(kind string, data js.Value, opts *Abstrac
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, kind)
+
 	args = append(args, data)
 
 	if opts.Updatable == nil {
@@ -989,6 +1079,7 @@ func (a *AbstractMesh) UpdateVerticesData(kind string, data js.Value, opts *Abst
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, kind)
+
 	args = append(args, data)
 
 	if opts.UpdateExtends == nil {

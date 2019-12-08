@@ -127,7 +127,11 @@ func (t *ThinEngine) BindArrayBuffer(buffer *DataBuffer) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, buffer.JSObject())
+	if buffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, buffer.JSObject())
+	}
 
 	t.p.Call("bindArrayBuffer", args...)
 }
@@ -140,8 +144,18 @@ func (t *ThinEngine) BindBuffers(vertexBuffers js.Value, indexBuffer *DataBuffer
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, vertexBuffers)
-	args = append(args, indexBuffer.JSObject())
-	args = append(args, effect.JSObject())
+
+	if indexBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, indexBuffer.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	t.p.Call("bindBuffers", args...)
 }
@@ -153,11 +167,27 @@ func (t *ThinEngine) BindBuffersDirectly(vertexBuffer *DataBuffer, indexBuffer *
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, vertexBuffer.JSObject())
-	args = append(args, indexBuffer.JSObject())
+	if vertexBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vertexBuffer.JSObject())
+	}
+
+	if indexBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, indexBuffer.JSObject())
+	}
+
 	args = append(args, vertexDeclaration)
+
 	args = append(args, vertexStrideSize)
-	args = append(args, effect.JSObject())
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	t.p.Call("bindBuffersDirectly", args...)
 }
@@ -182,7 +212,11 @@ func (t *ThinEngine) BindFramebuffer(texture *InternalTexture, opts *ThinEngineB
 
 	args := make([]interface{}, 0, 1+6)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	if opts.FaceIndex == nil {
 		args = append(args, js.Undefined())
@@ -225,7 +259,11 @@ func (t *ThinEngine) BindSamplers(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	t.p.Call("bindSamplers", args...)
 }
@@ -237,8 +275,14 @@ func (t *ThinEngine) BindUniformBlock(pipelineContext *IPipelineContext, blockNa
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, pipelineContext.JSObject())
+	if pipelineContext == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pipelineContext.JSObject())
+	}
+
 	args = append(args, blockName)
+
 	args = append(args, index)
 
 	t.p.Call("bindUniformBlock", args...)
@@ -251,7 +295,11 @@ func (t *ThinEngine) BindUniformBuffer(buffer *DataBuffer) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, buffer.JSObject())
+	if buffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, buffer.JSObject())
+	}
 
 	t.p.Call("bindUniformBuffer", args...)
 }
@@ -263,7 +311,12 @@ func (t *ThinEngine) BindUniformBufferBase(buffer *DataBuffer, location float64)
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, buffer.JSObject())
+	if buffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, buffer.JSObject())
+	}
+
 	args = append(args, location)
 
 	t.p.Call("bindUniformBufferBase", args...)
@@ -277,7 +330,12 @@ func (t *ThinEngine) BindVertexArrayObject(vertexArrayObject js.Value, indexBuff
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, vertexArrayObject)
-	args = append(args, indexBuffer.JSObject())
+
+	if indexBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, indexBuffer.JSObject())
+	}
 
 	t.p.Call("bindVertexArrayObject", args...)
 }
@@ -311,7 +369,9 @@ func (t *ThinEngine) Clear(color js.Value, backBuffer bool, depth bool, opts *Th
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, color)
+
 	args = append(args, backBuffer)
+
 	args = append(args, depth)
 
 	if opts.Stencil == nil {
@@ -334,22 +394,46 @@ func (t *ThinEngine) ClearInternalTexturesCache() {
 // CreateCubeTexture calls the CreateCubeTexture method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createcubetexture
-func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files []string, noMipmap bool, onLoad JSFunc, onError JSFunc, format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64, fallback *InternalTexture, excludeLoaders []*IInternalTextureLoader) *InternalTexture {
+func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files []string, noMipmap bool, onLoad JSFunc, onError JSFunc, format float64, forcedExtension JSObject, createPolynomials bool, lodScale float64, lodOffset float64, fallback *InternalTexture, excludeLoaders []*IInternalTextureLoader) *InternalTexture {
 
 	args := make([]interface{}, 0, 13+0)
 
 	args = append(args, rootUrl)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, files)
+
 	args = append(args, noMipmap)
+
 	args = append(args, js.FuncOf(onLoad))
+
 	args = append(args, js.FuncOf(onError))
+
 	args = append(args, format)
-	args = append(args, forcedExtension)
+
+	if forcedExtension == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, forcedExtension.JSObject())
+	}
+
 	args = append(args, createPolynomials)
+
 	args = append(args, lodScale)
+
 	args = append(args, lodOffset)
-	args = append(args, fallback.JSObject())
+
+	if fallback == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fallback.JSObject())
+	}
+
 	args = append(args, IInternalTextureLoaderArrayToJSArray(excludeLoaders))
 
 	retVal := t.p.Call("createCubeTexture", args...)
@@ -364,7 +448,12 @@ func (t *ThinEngine) CreateDepthStencilTexture(size float64, options *DepthTextu
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, size)
-	args = append(args, options.JSObject())
+
+	if options == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, options.JSObject())
+	}
 
 	retVal := t.p.Call("createDepthStencilTexture", args...)
 	return InternalTextureFromJSObject(retVal, t.ctx)
@@ -378,8 +467,11 @@ func (t *ThinEngine) CreateDynamicTexture(width float64, height float64, generat
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, generateMipMaps)
+
 	args = append(args, samplingMode)
 
 	retVal := t.p.Call("createDynamicTexture", args...)
@@ -419,21 +511,27 @@ type ThinEngineCreateEffectOpts struct {
 	Fallbacks       *IEffectFallbacks
 	OnCompiled      JSFunc
 	OnError         JSFunc
-	IndexParameters *interface{}
+	IndexParameters interface{}
 }
 
 // CreateEffect calls the CreateEffect method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createeffect
-func (t *ThinEngine) CreateEffect(baseName interface{}, attributesNamesOrOptions []string, uniformsNamesOrEngine []string, opts *ThinEngineCreateEffectOpts) *Effect {
+func (t *ThinEngine) CreateEffect(baseName JSObject, attributesNamesOrOptions []string, uniformsNamesOrEngine []string, opts *ThinEngineCreateEffectOpts) *Effect {
 	if opts == nil {
 		opts = &ThinEngineCreateEffectOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+6)
 
-	args = append(args, baseName)
+	if baseName == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, baseName.JSObject())
+	}
+
 	args = append(args, attributesNamesOrOptions)
+
 	args = append(args, uniformsNamesOrEngine)
 
 	if opts.Samplers == nil {
@@ -501,12 +599,21 @@ func (t *ThinEngine) CreateIndexBuffer(indices js.Value, opts *ThinEngineCreateI
 // CreateMultipleRenderTarget calls the CreateMultipleRenderTarget method on the ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine#createmultiplerendertarget
-func (t *ThinEngine) CreateMultipleRenderTarget(size interface{}, options *IMultiRenderTargetOptions) []*InternalTexture {
+func (t *ThinEngine) CreateMultipleRenderTarget(size JSObject, options *IMultiRenderTargetOptions) []*InternalTexture {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, size)
-	args = append(args, options.JSObject())
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
+
+	if options == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, options.JSObject())
+	}
 
 	retVal := t.p.Call("createMultipleRenderTarget", args...)
 	result := []*InternalTexture{}
@@ -530,7 +637,7 @@ type ThinEngineCreatePrefilteredCubeTextureOpts struct {
 	OnLoad            JSFunc
 	OnError           JSFunc
 	Format            *float64
-	ForcedExtension   *interface{}
+	ForcedExtension   interface{}
 	CreatePolynomials *bool
 }
 
@@ -545,8 +652,15 @@ func (t *ThinEngine) CreatePrefilteredCubeTexture(rootUrl string, scene *Scene, 
 	args := make([]interface{}, 0, 4+5)
 
 	args = append(args, rootUrl)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, lodScale)
+
 	args = append(args, lodOffset)
 
 	if opts.OnLoad == nil {
@@ -595,11 +709,17 @@ func (t *ThinEngine) CreateRawCubeTexture(data js.Value, size float64, format fl
 	args := make([]interface{}, 0, 7+1)
 
 	args = append(args, data)
+
 	args = append(args, size)
+
 	args = append(args, format)
+
 	args = append(args, jsType)
+
 	args = append(args, generateMipMaps)
+
 	args = append(args, invertY)
+
 	args = append(args, samplingMode)
 
 	if opts.Compression == nil {
@@ -628,8 +748,14 @@ func (t *ThinEngine) CreateRawShaderProgram(pipelineContext *IPipelineContext, v
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, pipelineContext.JSObject())
+	if pipelineContext == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pipelineContext.JSObject())
+	}
+
 	args = append(args, vertexCode)
+
 	args = append(args, fragmentCode)
 
 	args = append(args, opts.Context)
@@ -660,11 +786,17 @@ func (t *ThinEngine) CreateRawTexture(data js.Value, width float64, height float
 	args := make([]interface{}, 0, 7+2)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, format)
+
 	args = append(args, generateMipMaps)
+
 	args = append(args, invertY)
+
 	args = append(args, samplingMode)
 
 	if opts.Compression == nil {
@@ -699,12 +831,19 @@ func (t *ThinEngine) CreateRawTexture2DArray(data js.Value, width float64, heigh
 	args := make([]interface{}, 0, 8+2)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, depth)
+
 	args = append(args, format)
+
 	args = append(args, generateMipMaps)
+
 	args = append(args, invertY)
+
 	args = append(args, samplingMode)
 
 	if opts.Compression == nil {
@@ -739,12 +878,19 @@ func (t *ThinEngine) CreateRawTexture3D(data js.Value, width float64, height flo
 	args := make([]interface{}, 0, 8+2)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, depth)
+
 	args = append(args, format)
+
 	args = append(args, generateMipMaps)
+
 	args = append(args, invertY)
+
 	args = append(args, samplingMode)
 
 	if opts.Compression == nil {
@@ -797,6 +943,7 @@ func (t *ThinEngine) CreateRenderTargetTexture(size float64, options bool) *Inte
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, size)
+
 	args = append(args, options)
 
 	retVal := t.p.Call("createRenderTargetTexture", args...)
@@ -819,9 +966,16 @@ func (t *ThinEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vert
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, pipelineContext.JSObject())
+	if pipelineContext == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pipelineContext.JSObject())
+	}
+
 	args = append(args, vertexCode)
+
 	args = append(args, fragmentCode)
+
 	args = append(args, defines)
 
 	args = append(args, opts.Context)
@@ -859,8 +1013,11 @@ func (t *ThinEngine) CreateTexture(urlArg string, noMipmap bool, invertY bool, s
 	args := make([]interface{}, 0, 4+9)
 
 	args = append(args, urlArg)
+
 	args = append(args, noMipmap)
+
 	args = append(args, invertY)
+
 	args = append(args, scene)
 
 	if opts.SamplingMode == nil {
@@ -963,7 +1120,9 @@ func (t *ThinEngine) Draw(useTriangles bool, indexStart float64, indexCount floa
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, useTriangles)
+
 	args = append(args, indexStart)
+
 	args = append(args, indexCount)
 
 	if opts.InstancesCount == nil {
@@ -991,7 +1150,9 @@ func (t *ThinEngine) DrawArraysType(fillMode float64, verticesStart float64, ver
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, fillMode)
+
 	args = append(args, verticesStart)
+
 	args = append(args, verticesCount)
 
 	if opts.InstancesCount == nil {
@@ -1019,7 +1180,9 @@ func (t *ThinEngine) DrawElementsType(fillMode float64, indexStart float64, inde
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, fillMode)
+
 	args = append(args, indexStart)
+
 	args = append(args, indexCount)
 
 	if opts.InstancesCount == nil {
@@ -1047,6 +1210,7 @@ func (t *ThinEngine) DrawPointClouds(verticesStart float64, verticesCount float6
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, verticesStart)
+
 	args = append(args, verticesCount)
 
 	if opts.InstancesCount == nil {
@@ -1074,7 +1238,9 @@ func (t *ThinEngine) DrawUnIndexed(useTriangles bool, verticesStart float64, ver
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, useTriangles)
+
 	args = append(args, verticesStart)
+
 	args = append(args, verticesCount)
 
 	if opts.InstancesCount == nil {
@@ -1093,7 +1259,11 @@ func (t *ThinEngine) EnableEffect(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	t.p.Call("enableEffect", args...)
 }
@@ -1134,7 +1304,12 @@ func (t *ThinEngine) GetAttributes(pipelineContext *IPipelineContext, attributes
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext.JSObject())
+	if pipelineContext == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pipelineContext.JSObject())
+	}
+
 	args = append(args, attributesNames)
 
 	retVal := t.p.Call("getAttributes", args...)
@@ -1188,6 +1363,7 @@ func (t *ThinEngine) GetExponentOfTwo(value float64, max float64, opts *ThinEngi
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, value)
+
 	args = append(args, max)
 
 	if opts.Mode == nil {
@@ -1315,7 +1491,12 @@ func (t *ThinEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsName
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext.JSObject())
+	if pipelineContext == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pipelineContext.JSObject())
+	}
+
 	args = append(args, uniformsNames)
 
 	retVal := t.p.Call("getUniforms", args...)
@@ -1346,7 +1527,7 @@ func (t *ThinEngine) NearestPOT(x float64) float64 {
 
 // ThinEngineQueueNewFrameOpts contains optional parameters for ThinEngine.QueueNewFrame.
 type ThinEngineQueueNewFrameOpts struct {
-	Requester *interface{}
+	Requester interface{}
 }
 
 // QueueNewFrame calls the QueueNewFrame method on the ThinEngine object.
@@ -1379,8 +1560,18 @@ func (t *ThinEngine) RecordVertexArrayObject(vertexBuffers js.Value, indexBuffer
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, vertexBuffers)
-	args = append(args, indexBuffer.JSObject())
-	args = append(args, effect.JSObject())
+
+	if indexBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, indexBuffer.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	retVal := t.p.Call("recordVertexArrayObject", args...)
 	return retVal
@@ -1450,6 +1641,7 @@ func (t *ThinEngine) SetArray(uniform js.Value, array []float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	t.p.Call("setArray", args...)
@@ -1463,6 +1655,7 @@ func (t *ThinEngine) SetArray2(uniform js.Value, array []float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	t.p.Call("setArray2", args...)
@@ -1476,6 +1669,7 @@ func (t *ThinEngine) SetArray3(uniform js.Value, array []float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	t.p.Call("setArray3", args...)
@@ -1489,6 +1683,7 @@ func (t *ThinEngine) SetArray4(uniform js.Value, array []float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	t.p.Call("setArray4", args...)
@@ -1502,6 +1697,7 @@ func (t *ThinEngine) SetFloat(uniform js.Value, value float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, value)
 
 	t.p.Call("setFloat", args...)
@@ -1515,7 +1711,9 @@ func (t *ThinEngine) SetFloat2(uniform js.Value, x float64, y float64) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, uniform)
+
 	args = append(args, x)
+
 	args = append(args, y)
 
 	t.p.Call("setFloat2", args...)
@@ -1529,8 +1727,11 @@ func (t *ThinEngine) SetFloat3(uniform js.Value, x float64, y float64, z float64
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, uniform)
+
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	t.p.Call("setFloat3", args...)
@@ -1544,9 +1745,13 @@ func (t *ThinEngine) SetFloat4(uniform js.Value, x float64, y float64, z float64
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, uniform)
+
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
+
 	args = append(args, w)
 
 	t.p.Call("setFloat4", args...)
@@ -1572,6 +1777,7 @@ func (t *ThinEngine) SetInt(uniform js.Value, value float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, value)
 
 	t.p.Call("setInt", args...)
@@ -1585,6 +1791,7 @@ func (t *ThinEngine) SetIntArray(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	t.p.Call("setIntArray", args...)
@@ -1598,6 +1805,7 @@ func (t *ThinEngine) SetIntArray2(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	t.p.Call("setIntArray2", args...)
@@ -1611,6 +1819,7 @@ func (t *ThinEngine) SetIntArray3(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	t.p.Call("setIntArray3", args...)
@@ -1624,6 +1833,7 @@ func (t *ThinEngine) SetIntArray4(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	t.p.Call("setIntArray4", args...)
@@ -1637,6 +1847,7 @@ func (t *ThinEngine) SetMatrices(uniform js.Value, matrices js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, matrices)
 
 	t.p.Call("setMatrices", args...)
@@ -1650,6 +1861,7 @@ func (t *ThinEngine) SetMatrix2x2(uniform js.Value, matrix js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, matrix)
 
 	t.p.Call("setMatrix2x2", args...)
@@ -1663,6 +1875,7 @@ func (t *ThinEngine) SetMatrix3x3(uniform js.Value, matrix js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, matrix)
 
 	t.p.Call("setMatrix3x3", args...)
@@ -1676,6 +1889,7 @@ func (t *ThinEngine) SetSize(width float64, height float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
 
 	t.p.Call("setSize", args...)
@@ -1689,8 +1903,14 @@ func (t *ThinEngine) SetTexture(channel float64, uniform js.Value, texture *Base
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, channel)
+
 	args = append(args, uniform)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	t.p.Call("setTexture", args...)
 }
@@ -1703,7 +1923,9 @@ func (t *ThinEngine) SetTextureArray(channel float64, uniform js.Value, textures
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, channel)
+
 	args = append(args, uniform)
+
 	args = append(args, BaseTextureArrayToJSArray(textures))
 
 	t.p.Call("setTextureArray", args...)
@@ -1781,7 +2003,11 @@ func (t *ThinEngine) UnBindFramebuffer(texture *InternalTexture, opts *ThinEngin
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	if opts.DisableGenerateMipMaps == nil {
 		args = append(args, js.Undefined())
@@ -1813,6 +2039,7 @@ func (t *ThinEngine) UnBindMultiColorAttachmentFramebuffer(textures []*InternalT
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, InternalTextureArrayToJSArray(textures))
+
 	args = append(args, disableGenerateMipMaps)
 
 	if opts.OnBeforeUnbind == nil {
@@ -1855,8 +2082,14 @@ func (t *ThinEngine) UpdateAndBindInstancesBuffer(instancesBuffer *DataBuffer, d
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, instancesBuffer.JSObject())
+	if instancesBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, instancesBuffer.JSObject())
+	}
+
 	args = append(args, data)
+
 	args = append(args, offsetLocations)
 
 	t.p.Call("updateAndBindInstancesBuffer", args...)
@@ -1891,8 +2124,14 @@ func (t *ThinEngine) UpdateDynamicTexture(texture *InternalTexture, canvas js.Va
 
 	args := make([]interface{}, 0, 3+3)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, canvas)
+
 	args = append(args, invertY)
 
 	if opts.PremulAlpha == nil {
@@ -1922,6 +2161,7 @@ func (t *ThinEngine) UpdateMultipleRenderTargetTextureSampleCount(textures []*In
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, InternalTextureArrayToJSArray(textures))
+
 	args = append(args, samples)
 
 	retVal := t.p.Call("updateMultipleRenderTargetTextureSampleCount", args...)
@@ -1936,7 +2176,12 @@ func (t *ThinEngine) UpdateTextureSamplingMode(samplingMode float64, texture *In
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, samplingMode)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	t.p.Call("updateTextureSamplingMode", args...)
 }
@@ -1957,7 +2202,12 @@ func (t *ThinEngine) UpdateUniformBuffer(uniformBuffer *DataBuffer, elements js.
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, uniformBuffer.JSObject())
+	if uniformBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, uniformBuffer.JSObject())
+	}
+
 	args = append(args, elements)
 
 	if opts.Offset == nil {
@@ -1981,8 +2231,14 @@ func (t *ThinEngine) UpdateVideoTexture(texture *InternalTexture, video js.Value
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, video)
+
 	args = append(args, invertY)
 
 	t.p.Call("updateVideoTexture", args...)
@@ -2020,7 +2276,12 @@ func (t *ThinEngine) _createDepthStencilCubeTexture(size float64, options *Depth
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, size)
-	args = append(args, options.JSObject())
+
+	if options == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, options.JSObject())
+	}
 
 	retVal := t.p.Call("_createDepthStencilCubeTexture", args...)
 	return InternalTextureFromJSObject(retVal, t.ctx)

@@ -39,13 +39,13 @@ func GenericPadArrayToJSArray(array []*GenericPad) []interface{} {
 // NewGenericPad returns a new GenericPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad
-func (ba *Babylon) NewGenericPad(id string, index float64, browserGamepad interface{}) *GenericPad {
+func (ba *Babylon) NewGenericPad(id string, index float64, browserGamepad JSObject) *GenericPad {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, id)
 	args = append(args, index)
-	args = append(args, browserGamepad)
+	args = append(args, browserGamepad.JSObject())
 
 	p := ba.ctx.Get("GenericPad").New(args...)
 	return GenericPadFromJSObject(p, ba.ctx)

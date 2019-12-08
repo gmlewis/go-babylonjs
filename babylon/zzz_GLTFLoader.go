@@ -44,6 +44,7 @@ func (g *GLTFLoader) AddPointerMetadata(babylonObject js.Value, pointer string) 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, babylonObject)
+
 	args = append(args, pointer)
 
 	g.p.Call("AddPointerMetadata", args...)
@@ -57,7 +58,13 @@ func (g *GLTFLoader) CreateMaterial(context string, material *IMaterial, babylon
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, context)
-	args = append(args, material.JSObject())
+
+	if material == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, material.JSObject())
+	}
+
 	args = append(args, babylonDrawMode)
 
 	retVal := g.p.Call("createMaterial", args...)
@@ -97,7 +104,12 @@ func (g *GLTFLoader) LoadAnimationAsync(context string, animation *IAnimation) *
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, context)
-	args = append(args, animation.JSObject())
+
+	if animation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, animation.JSObject())
+	}
 
 	retVal := g.p.Call("loadAnimationAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
@@ -111,7 +123,12 @@ func (g *GLTFLoader) LoadBufferViewAsync(context string, bufferView *IBufferView
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, context)
-	args = append(args, bufferView.JSObject())
+
+	if bufferView == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, bufferView.JSObject())
+	}
 
 	retVal := g.p.Call("loadBufferViewAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
@@ -133,7 +150,12 @@ func (g *GLTFLoader) LoadCameraAsync(context string, camera *ICamera, opts *GLTF
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, context)
-	args = append(args, camera.JSObject())
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
@@ -153,7 +175,12 @@ func (g *GLTFLoader) LoadImageAsync(context string, image *IImage) *Promise {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, context)
-	args = append(args, image.JSObject())
+
+	if image == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, image.JSObject())
+	}
 
 	retVal := g.p.Call("loadImageAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
@@ -167,8 +194,18 @@ func (g *GLTFLoader) LoadMaterialAlphaProperties(context string, material *IMate
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, context)
-	args = append(args, material.JSObject())
-	args = append(args, babylonMaterial.JSObject())
+
+	if material == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, material.JSObject())
+	}
+
+	if babylonMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, babylonMaterial.JSObject())
+	}
 
 	g.p.Call("loadMaterialAlphaProperties", args...)
 }
@@ -181,8 +218,18 @@ func (g *GLTFLoader) LoadMaterialBasePropertiesAsync(context string, material *I
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, context)
-	args = append(args, material.JSObject())
-	args = append(args, babylonMaterial.JSObject())
+
+	if material == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, material.JSObject())
+	}
+
+	if babylonMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, babylonMaterial.JSObject())
+	}
 
 	retVal := g.p.Call("loadMaterialBasePropertiesAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
@@ -196,8 +243,18 @@ func (g *GLTFLoader) LoadMaterialPropertiesAsync(context string, material *IMate
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, context)
-	args = append(args, material.JSObject())
-	args = append(args, babylonMaterial.JSObject())
+
+	if material == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, material.JSObject())
+	}
+
+	if babylonMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, babylonMaterial.JSObject())
+	}
 
 	retVal := g.p.Call("loadMaterialPropertiesAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
@@ -219,7 +276,12 @@ func (g *GLTFLoader) LoadNodeAsync(context string, node *INode, opts *GLTFLoader
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, context)
-	args = append(args, node.JSObject())
+
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
 
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
@@ -239,7 +301,12 @@ func (g *GLTFLoader) LoadSceneAsync(context string, scene *IScene) *Promise {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, context)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := g.p.Call("loadSceneAsync", args...)
 	return PromiseFromJSObject(retVal, g.ctx)
@@ -261,7 +328,12 @@ func (g *GLTFLoader) LoadTextureInfoAsync(context string, textureInfo *ITextureI
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, context)
-	args = append(args, textureInfo.JSObject())
+
+	if textureInfo == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, textureInfo.JSObject())
+	}
 
 	if opts.Assign == nil {
 		args = append(args, js.Undefined())
@@ -281,7 +353,13 @@ func (g *GLTFLoader) LoadUriAsync(context string, property *IProperty, uri strin
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, context)
-	args = append(args, property.JSObject())
+
+	if property == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, property.JSObject())
+	}
+
 	args = append(args, uri)
 
 	retVal := g.p.Call("loadUriAsync", args...)
@@ -328,6 +406,7 @@ func (g *GLTFLoader) RegisterExtension(name string, factory JSFunc) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, js.FuncOf(factory))
 
 	g.p.Call("RegisterExtension", args...)

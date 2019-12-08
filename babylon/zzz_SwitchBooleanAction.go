@@ -46,15 +46,15 @@ type NewSwitchBooleanActionOpts struct {
 // NewSwitchBooleanAction returns a new SwitchBooleanAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction
-func (ba *Babylon) NewSwitchBooleanAction(triggerOptions interface{}, target interface{}, propertyPath string, opts *NewSwitchBooleanActionOpts) *SwitchBooleanAction {
+func (ba *Babylon) NewSwitchBooleanAction(triggerOptions JSObject, target JSObject, propertyPath string, opts *NewSwitchBooleanActionOpts) *SwitchBooleanAction {
 	if opts == nil {
 		opts = &NewSwitchBooleanActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, triggerOptions)
-	args = append(args, target)
+	args = append(args, triggerOptions.JSObject())
+	args = append(args, target.JSObject())
 	args = append(args, propertyPath)
 
 	if opts.Condition == nil {
@@ -78,11 +78,15 @@ func (s *SwitchBooleanAction) Execute() {
 // Serialize calls the Serialize method on the SwitchBooleanAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#serialize
-func (s *SwitchBooleanAction) Serialize(parent interface{}) interface{} {
+func (s *SwitchBooleanAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := s.p.Call("serialize", args...)
 	return retVal

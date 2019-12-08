@@ -64,8 +64,14 @@ func (a *AbstractAssetTask) Run(scene *Scene, onSuccess JSFunc, onError JSFunc) 
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, js.FuncOf(onSuccess))
+
 	args = append(args, js.FuncOf(onError))
 
 	a.p.Call("run", args...)
@@ -78,8 +84,14 @@ func (a *AbstractAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFu
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, js.FuncOf(onSuccess))
+
 	args = append(args, js.FuncOf(onError))
 
 	a.p.Call("runTask", args...)

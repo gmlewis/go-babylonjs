@@ -68,11 +68,15 @@ func (f *FilesInput) Dispose() {
 // LoadFiles calls the LoadFiles method on the FilesInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinput#loadfiles
-func (f *FilesInput) LoadFiles(event interface{}) {
+func (f *FilesInput) LoadFiles(event JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, event)
+	if event == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, event.JSObject())
+	}
 
 	f.p.Call("loadFiles", args...)
 }

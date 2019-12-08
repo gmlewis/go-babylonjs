@@ -45,7 +45,7 @@ type NewCubeTextureOpts struct {
 	OnError           JSFunc
 	Format            *float64
 	Prefiltered       *bool
-	ForcedExtension   *interface{}
+	ForcedExtension   interface{}
 	CreatePolynomials *bool
 	LodScale          *float64
 	LodOffset         *float64
@@ -149,7 +149,12 @@ func (c *CubeTexture) CreateFromImages(files []string, scene *Scene, opts *CubeT
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, files)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.NoMipmap == nil {
 		args = append(args, js.Undefined())
@@ -163,7 +168,7 @@ func (c *CubeTexture) CreateFromImages(files []string, scene *Scene, opts *CubeT
 
 // CubeTextureCreateFromPrefilteredDataOpts contains optional parameters for CubeTexture.CreateFromPrefilteredData.
 type CubeTextureCreateFromPrefilteredDataOpts struct {
-	ForcedExtension   *interface{}
+	ForcedExtension   interface{}
 	CreatePolynomials *bool
 }
 
@@ -178,7 +183,12 @@ func (c *CubeTexture) CreateFromPrefilteredData(url string, scene *Scene, opts *
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, url)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.ForcedExtension == nil {
 		args = append(args, js.Undefined())
@@ -240,12 +250,22 @@ func (c *CubeTexture) GetReflectionTextureMatrix() *Matrix {
 // Parse calls the Parse method on the CubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture#parse
-func (c *CubeTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *CubeTexture {
+func (c *CubeTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *CubeTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := c.p.Call("Parse", args...)
@@ -259,7 +279,11 @@ func (c *CubeTexture) SetReflectionTextureMatrix(value *Matrix) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	c.p.Call("setReflectionTextureMatrix", args...)
 }

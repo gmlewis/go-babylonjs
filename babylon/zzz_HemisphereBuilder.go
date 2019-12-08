@@ -39,13 +39,19 @@ func HemisphereBuilderArrayToJSArray(array []*HemisphereBuilder) []interface{} {
 // CreateHemisphere calls the CreateHemisphere method on the HemisphereBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemispherebuilder#createhemisphere
-func (h *HemisphereBuilder) CreateHemisphere(name string, options js.Value, scene interface{}) *Mesh {
+func (h *HemisphereBuilder) CreateHemisphere(name string, options js.Value, scene JSObject) *Mesh {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, options)
-	args = append(args, scene)
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := h.p.Call("CreateHemisphere", args...)
 	return MeshFromJSObject(retVal, h.ctx)

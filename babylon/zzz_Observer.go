@@ -38,7 +38,7 @@ func ObserverArrayToJSArray(array []*Observer) []interface{} {
 
 // NewObserverOpts contains optional parameters for NewObserver.
 type NewObserverOpts struct {
-	Scope *interface{}
+	Scope interface{}
 }
 
 // NewObserver returns a new Observer object.
@@ -99,7 +99,7 @@ func (o *Observer) SetMask(mask float64) *Observer {
 // Scope returns the Scope property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#scope
-func (o *Observer) Scope() interface{} {
+func (o *Observer) Scope() js.Value {
 	retVal := o.p.Get("scope")
 	return retVal
 }
@@ -107,8 +107,8 @@ func (o *Observer) Scope() interface{} {
 // SetScope sets the Scope property of class Observer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer#scope
-func (o *Observer) SetScope(scope interface{}) *Observer {
-	o.p.Set("scope", scope)
+func (o *Observer) SetScope(scope JSObject) *Observer {
+	o.p.Set("scope", scope.JSObject())
 	return o
 }
 

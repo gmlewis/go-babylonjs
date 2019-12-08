@@ -74,12 +74,22 @@ func (ba *Babylon) NewPerlinNoiseProceduralTexture(name string, size float64, sc
 // Parse calls the Parse method on the PerlinNoiseProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture#parse
-func (p *PerlinNoiseProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *PerlinNoiseProceduralTexture {
+func (p *PerlinNoiseProceduralTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *PerlinNoiseProceduralTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := p.p.Call("Parse", args...)
@@ -113,12 +123,21 @@ func (p *PerlinNoiseProceduralTexture) Render(opts *PerlinNoiseProceduralTexture
 // Resize calls the Resize method on the PerlinNoiseProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture#resize
-func (p *PerlinNoiseProceduralTexture) Resize(size interface{}, generateMipMaps interface{}) {
+func (p *PerlinNoiseProceduralTexture) Resize(size JSObject, generateMipMaps JSObject) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, size)
-	args = append(args, generateMipMaps)
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
+
+	if generateMipMaps == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, generateMipMaps.JSObject())
+	}
 
 	p.p.Call("resize", args...)
 }
@@ -126,7 +145,7 @@ func (p *PerlinNoiseProceduralTexture) Resize(size interface{}, generateMipMaps 
 // Serialize calls the Serialize method on the PerlinNoiseProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture#serialize
-func (p *PerlinNoiseProceduralTexture) Serialize() interface{} {
+func (p *PerlinNoiseProceduralTexture) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal

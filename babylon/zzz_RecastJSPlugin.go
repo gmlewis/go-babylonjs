@@ -38,7 +38,7 @@ func RecastJSPluginArrayToJSArray(array []*RecastJSPlugin) []interface{} {
 
 // NewRecastJSPluginOpts contains optional parameters for NewRecastJSPlugin.
 type NewRecastJSPluginOpts struct {
-	RecastInjection *interface{}
+	RecastInjection interface{}
 }
 
 // NewRecastJSPlugin returns a new RecastJSPlugin object.
@@ -68,8 +68,17 @@ func (r *RecastJSPlugin) ComputePath(start *Vector3, end *Vector3) []*Vector3 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, start.JSObject())
-	args = append(args, end.JSObject())
+	if start == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, start.JSObject())
+	}
+
+	if end == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, end.JSObject())
+	}
 
 	retVal := r.p.Call("computePath", args...)
 	result := []*Vector3{}
@@ -87,8 +96,14 @@ func (r *RecastJSPlugin) CreateCrowd(maxAgents float64, maxAgentRadius float64, 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, maxAgents)
+
 	args = append(args, maxAgentRadius)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := r.p.Call("createCrowd", args...)
 	return ICrowdFromJSObject(retVal, r.ctx)
@@ -101,7 +116,11 @@ func (r *RecastJSPlugin) CreateDebugNavMesh(scene *Scene) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := r.p.Call("createDebugNavMesh", args...)
 	return MeshFromJSObject(retVal, r.ctx)
@@ -115,7 +134,12 @@ func (r *RecastJSPlugin) CreateMavMesh(meshes []*Mesh, parameters *INavMeshParam
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, MeshArrayToJSArray(meshes))
-	args = append(args, parameters.JSObject())
+
+	if parameters == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parameters.JSObject())
+	}
 
 	r.p.Call("createMavMesh", args...)
 }
@@ -135,7 +159,11 @@ func (r *RecastJSPlugin) GetClosestPoint(position *Vector3) *Vector3 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
 
 	retVal := r.p.Call("getClosestPoint", args...)
 	return Vector3FromJSObject(retVal, r.ctx)
@@ -157,7 +185,12 @@ func (r *RecastJSPlugin) GetRandomPointAround(position *Vector3, maxRadius float
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
 	args = append(args, maxRadius)
 
 	retVal := r.p.Call("getRandomPointAround", args...)
@@ -180,8 +213,17 @@ func (r *RecastJSPlugin) MoveAlong(position *Vector3, destination *Vector3) *Vec
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, position.JSObject())
-	args = append(args, destination.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
+	if destination == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, destination.JSObject())
+	}
 
 	retVal := r.p.Call("moveAlong", args...)
 	return Vector3FromJSObject(retVal, r.ctx)
@@ -194,7 +236,11 @@ func (r *RecastJSPlugin) SetDefaultQueryExtent(extent *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, extent.JSObject())
+	if extent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, extent.JSObject())
+	}
 
 	r.p.Call("setDefaultQueryExtent", args...)
 }
@@ -202,7 +248,7 @@ func (r *RecastJSPlugin) SetDefaultQueryExtent(extent *Vector3) {
 // BjsRECAST returns the BjsRECAST property of class RecastJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#bjsrecast
-func (r *RecastJSPlugin) BjsRECAST() interface{} {
+func (r *RecastJSPlugin) BjsRECAST() js.Value {
 	retVal := r.p.Get("bjsRECAST")
 	return retVal
 }
@@ -210,8 +256,8 @@ func (r *RecastJSPlugin) BjsRECAST() interface{} {
 // SetBjsRECAST sets the BjsRECAST property of class RecastJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#bjsrecast
-func (r *RecastJSPlugin) SetBjsRECAST(bjsRECAST interface{}) *RecastJSPlugin {
-	r.p.Set("bjsRECAST", bjsRECAST)
+func (r *RecastJSPlugin) SetBjsRECAST(bjsRECAST JSObject) *RecastJSPlugin {
+	r.p.Set("bjsRECAST", bjsRECAST.JSObject())
 	return r
 }
 
@@ -234,7 +280,7 @@ func (r *RecastJSPlugin) SetName(name string) *RecastJSPlugin {
 // NavMesh returns the NavMesh property of class RecastJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#navmesh
-func (r *RecastJSPlugin) NavMesh() interface{} {
+func (r *RecastJSPlugin) NavMesh() js.Value {
 	retVal := r.p.Get("navMesh")
 	return retVal
 }
@@ -242,7 +288,7 @@ func (r *RecastJSPlugin) NavMesh() interface{} {
 // SetNavMesh sets the NavMesh property of class RecastJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#navmesh
-func (r *RecastJSPlugin) SetNavMesh(navMesh interface{}) *RecastJSPlugin {
-	r.p.Set("navMesh", navMesh)
+func (r *RecastJSPlugin) SetNavMesh(navMesh JSObject) *RecastJSPlugin {
+	r.p.Set("navMesh", navMesh.JSObject())
 	return r
 }

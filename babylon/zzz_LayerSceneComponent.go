@@ -57,7 +57,11 @@ func (l *LayerSceneComponent) AddFromContainer(container *AbstractScene) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	l.p.Call("addFromContainer", args...)
 }
@@ -101,7 +105,11 @@ func (l *LayerSceneComponent) RemoveFromContainer(container *AbstractScene, opts
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	if opts.Dispose == nil {
 		args = append(args, js.Undefined())

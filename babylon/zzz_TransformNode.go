@@ -79,7 +79,9 @@ func (t *TransformNode) AddRotation(x float64, y float64, z float64) *TransformN
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	retVal := t.p.Call("addRotation", args...)
@@ -93,8 +95,17 @@ func (t *TransformNode) AttachToBone(bone *Bone, affectedTransformNode *Transfor
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, bone.JSObject())
-	args = append(args, affectedTransformNode.JSObject())
+	if bone == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, bone.JSObject())
+	}
+
+	if affectedTransformNode == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, affectedTransformNode.JSObject())
+	}
 
 	retVal := t.p.Call("attachToBone", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -116,7 +127,12 @@ func (t *TransformNode) Clone(name string, newParent *Node, opts *TransformNodeC
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
-	args = append(args, newParent.JSObject())
+
+	if newParent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newParent.JSObject())
+	}
 
 	if opts.DoNotCloneChildren == nil {
 		args = append(args, js.Undefined())
@@ -233,7 +249,11 @@ func (t *TransformNode) GetAbsolutePivotPointToRef(result *Vector3) *TransformNo
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := t.p.Call("getAbsolutePivotPointToRef", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -299,7 +319,11 @@ func (t *TransformNode) GetDirection(localAxis *Vector3) *Vector3 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, localAxis.JSObject())
+	if localAxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, localAxis.JSObject())
+	}
 
 	retVal := t.p.Call("getDirection", args...)
 	return Vector3FromJSObject(retVal, t.ctx)
@@ -312,8 +336,17 @@ func (t *TransformNode) GetDirectionToRef(localAxis *Vector3, result *Vector3) *
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, localAxis.JSObject())
-	args = append(args, result.JSObject())
+	if localAxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, localAxis.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := t.p.Call("getDirectionToRef", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -369,7 +402,11 @@ func (t *TransformNode) GetPivotPointToRef(result *Vector3) *TransformNode {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := t.p.Call("getPivotPointToRef", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -462,7 +499,11 @@ func (t *TransformNode) LocallyTranslate(vector3 *Vector3) *TransformNode {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vector3.JSObject())
+	if vector3 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vector3.JSObject())
+	}
 
 	retVal := t.p.Call("locallyTranslate", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -486,7 +527,11 @@ func (t *TransformNode) LookAt(targetPoint *Vector3, opts *TransformNodeLookAtOp
 
 	args := make([]interface{}, 0, 1+4)
 
-	args = append(args, targetPoint.JSObject())
+	if targetPoint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, targetPoint.JSObject())
+	}
 
 	if opts.YawCor == nil {
 		args = append(args, js.Undefined())
@@ -562,12 +607,22 @@ func (t *TransformNode) NormalizeToUnitCube(opts *TransformNodeNormalizeToUnitCu
 // Parse calls the Parse method on the TransformNode object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#parse
-func (t *TransformNode) Parse(parsedTransformNode interface{}, scene *Scene, rootUrl string) *TransformNode {
+func (t *TransformNode) Parse(parsedTransformNode JSObject, scene *Scene, rootUrl string) *TransformNode {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTransformNode)
-	args = append(args, scene.JSObject())
+	if parsedTransformNode == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTransformNode.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := t.p.Call("Parse", args...)
@@ -602,7 +657,12 @@ func (t *TransformNode) Rotate(axis *Vector3, amount float64, opts *TransformNod
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, axis.JSObject())
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, amount)
 
 	args = append(args, opts.Space)
@@ -618,8 +678,18 @@ func (t *TransformNode) RotateAround(point *Vector3, axis *Vector3, amount float
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, point.JSObject())
-	args = append(args, axis.JSObject())
+	if point == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point.JSObject())
+	}
+
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, amount)
 
 	retVal := t.p.Call("rotateAround", args...)
@@ -628,13 +698,13 @@ func (t *TransformNode) RotateAround(point *Vector3, axis *Vector3, amount float
 
 // TransformNodeSerializeOpts contains optional parameters for TransformNode.Serialize.
 type TransformNodeSerializeOpts struct {
-	CurrentSerializationObject *interface{}
+	CurrentSerializationObject interface{}
 }
 
 // Serialize calls the Serialize method on the TransformNode object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode#serialize
-func (t *TransformNode) Serialize(opts *TransformNodeSerializeOpts) interface{} {
+func (t *TransformNode) Serialize(opts *TransformNodeSerializeOpts) js.Value {
 	if opts == nil {
 		opts = &TransformNodeSerializeOpts{}
 	}
@@ -658,7 +728,11 @@ func (t *TransformNode) SetAbsolutePosition(absolutePosition *Vector3) *Transfor
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, absolutePosition.JSObject())
+	if absolutePosition == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, absolutePosition.JSObject())
+	}
 
 	retVal := t.p.Call("setAbsolutePosition", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -681,7 +755,11 @@ func (t *TransformNode) SetDirection(localAxis *Vector3, opts *TransformNodeSetD
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, localAxis.JSObject())
+	if localAxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, localAxis.JSObject())
+	}
 
 	if opts.YawCor == nil {
 		args = append(args, js.Undefined())
@@ -710,7 +788,11 @@ func (t *TransformNode) SetParent(node *Node) *TransformNode {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, node.JSObject())
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
 
 	retVal := t.p.Call("setParent", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -731,7 +813,11 @@ func (t *TransformNode) SetPivotMatrix(matrix *Matrix, opts *TransformNodeSetPiv
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, matrix.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
 
 	if opts.PostMultiplyPivotMatrix == nil {
 		args = append(args, js.Undefined())
@@ -758,7 +844,11 @@ func (t *TransformNode) SetPivotPoint(point *Vector3, opts *TransformNodeSetPivo
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, point.JSObject())
+	if point == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point.JSObject())
+	}
 
 	args = append(args, opts.Space)
 
@@ -773,7 +863,11 @@ func (t *TransformNode) SetPositionWithLocalVector(vector3 *Vector3) *TransformN
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vector3.JSObject())
+	if vector3 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vector3.JSObject())
+	}
 
 	retVal := t.p.Call("setPositionWithLocalVector", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -786,7 +880,11 @@ func (t *TransformNode) SetPreTransformMatrix(matrix *Matrix) *TransformNode {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, matrix.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
 
 	retVal := t.p.Call("setPreTransformMatrix", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -807,7 +905,12 @@ func (t *TransformNode) Translate(axis *Vector3, distance float64, opts *Transfo
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, axis.JSObject())
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, distance)
 
 	args = append(args, opts.Space)
@@ -845,7 +948,11 @@ func (t *TransformNode) UpdatePoseMatrix(matrix *Matrix) *TransformNode {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, matrix.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
 
 	retVal := t.p.Call("updatePoseMatrix", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)

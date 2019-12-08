@@ -59,9 +59,23 @@ func (s *SkyMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	s.p.Call("bindForSubMesh", args...)
 }
@@ -149,8 +163,17 @@ func (s *SkyMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, op
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -183,12 +206,22 @@ func (s *SkyMaterial) NeedAlphaTesting() bool {
 // Parse calls the Parse method on the SkyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#parse
-func (s *SkyMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *SkyMaterial {
+func (s *SkyMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *SkyMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := s.p.Call("Parse", args...)
@@ -198,7 +231,7 @@ func (s *SkyMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *S
 // Serialize calls the Serialize method on the SkyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial#serialize
-func (s *SkyMaterial) Serialize() interface{} {
+func (s *SkyMaterial) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal

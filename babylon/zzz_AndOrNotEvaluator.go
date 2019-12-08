@@ -44,6 +44,7 @@ func (a *AndOrNotEvaluator) Eval(query string, evaluateCallback JSFunc) bool {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, query)
+
 	args = append(args, js.FuncOf(evaluateCallback))
 
 	retVal := a.p.Call("Eval", args...)

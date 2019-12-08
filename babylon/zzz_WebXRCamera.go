@@ -59,7 +59,11 @@ func (w *WebXRCamera) UpdateFromXRSessionManager(xrSessionManager *WebXRSessionM
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, xrSessionManager.JSObject())
+	if xrSessionManager == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, xrSessionManager.JSObject())
+	}
 
 	retVal := w.p.Call("updateFromXRSessionManager", args...)
 	return retVal.Bool()

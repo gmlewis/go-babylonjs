@@ -70,7 +70,11 @@ func (m *MorphTargetManager) AddTarget(target *MorphTarget) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	m.p.Call("addTarget", args...)
 }
@@ -113,12 +117,21 @@ func (m *MorphTargetManager) GetTarget(index float64) *MorphTarget {
 // Parse calls the Parse method on the MorphTargetManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#parse
-func (m *MorphTargetManager) Parse(serializationObject interface{}, scene *Scene) *MorphTargetManager {
+func (m *MorphTargetManager) Parse(serializationObject JSObject, scene *Scene) *MorphTargetManager {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := m.p.Call("Parse", args...)
 	return MorphTargetManagerFromJSObject(retVal, m.ctx)
@@ -131,7 +144,11 @@ func (m *MorphTargetManager) RemoveTarget(target *MorphTarget) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	m.p.Call("removeTarget", args...)
 }
@@ -139,7 +156,7 @@ func (m *MorphTargetManager) RemoveTarget(target *MorphTarget) {
 // Serialize calls the Serialize method on the MorphTargetManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#serialize
-func (m *MorphTargetManager) Serialize() interface{} {
+func (m *MorphTargetManager) Serialize() js.Value {
 
 	retVal := m.p.Call("serialize")
 	return retVal

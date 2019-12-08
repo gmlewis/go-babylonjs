@@ -57,7 +57,13 @@ func (p *PBRSubSurfaceConfiguration) AddFallbacks(defines js.Value, fallbacks *E
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, defines)
-	args = append(args, fallbacks.JSObject())
+
+	if fallbacks == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fallbacks.JSObject())
+	}
+
 	args = append(args, currentRank)
 
 	retVal := p.p.Call("AddFallbacks", args...)
@@ -95,10 +101,26 @@ func (p *PBRSubSurfaceConfiguration) BindForSubMesh(uniformBuffer *UniformBuffer
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, uniformBuffer.JSObject())
-	args = append(args, scene.JSObject())
-	args = append(args, engine.JSObject())
+	if uniformBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, uniformBuffer.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
 	args = append(args, isFrozen)
+
 	args = append(args, lodBasedMicrosurface)
 
 	p.p.Call("bindForSubMesh", args...)
@@ -111,7 +133,11 @@ func (p *PBRSubSurfaceConfiguration) CopyTo(configuration *PBRSubSurfaceConfigur
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, configuration.JSObject())
+	if configuration == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, configuration.JSObject())
+	}
 
 	p.p.Call("copyTo", args...)
 }
@@ -147,7 +173,11 @@ func (p *PBRSubSurfaceConfiguration) FillRenderTargetTextures(renderTargets *Sma
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, renderTargets.JSObject())
+	if renderTargets == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, renderTargets.JSObject())
+	}
 
 	p.p.Call("fillRenderTargetTextures", args...)
 }
@@ -201,7 +231,11 @@ func (p *PBRSubSurfaceConfiguration) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := p.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -215,7 +249,12 @@ func (p *PBRSubSurfaceConfiguration) IsReadyForSubMesh(defines js.Value, scene *
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, defines)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := p.p.Call("isReadyForSubMesh", args...)
 	return retVal.Bool()
@@ -224,12 +263,22 @@ func (p *PBRSubSurfaceConfiguration) IsReadyForSubMesh(defines js.Value, scene *
 // Parse calls the Parse method on the PBRSubSurfaceConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#parse
-func (p *PBRSubSurfaceConfiguration) Parse(source interface{}, scene *Scene, rootUrl string) {
+func (p *PBRSubSurfaceConfiguration) Parse(source JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	p.p.Call("parse", args...)
@@ -243,7 +292,12 @@ func (p *PBRSubSurfaceConfiguration) PrepareDefines(defines js.Value, scene *Sce
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, defines)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	p.p.Call("prepareDefines", args...)
 }
@@ -255,7 +309,11 @@ func (p *PBRSubSurfaceConfiguration) PrepareUniformBuffer(uniformBuffer *Uniform
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, uniformBuffer.JSObject())
+	if uniformBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, uniformBuffer.JSObject())
+	}
 
 	p.p.Call("PrepareUniformBuffer", args...)
 }
@@ -263,7 +321,7 @@ func (p *PBRSubSurfaceConfiguration) PrepareUniformBuffer(uniformBuffer *Uniform
 // Serialize calls the Serialize method on the PBRSubSurfaceConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration#serialize
-func (p *PBRSubSurfaceConfiguration) Serialize() interface{} {
+func (p *PBRSubSurfaceConfiguration) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal
@@ -276,7 +334,11 @@ func (p *PBRSubSurfaceConfiguration) Unbind(activeEffect *Effect) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, activeEffect.JSObject())
+	if activeEffect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, activeEffect.JSObject())
+	}
 
 	retVal := p.p.Call("unbind", args...)
 	return retVal.Bool()

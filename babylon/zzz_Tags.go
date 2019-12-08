@@ -39,11 +39,16 @@ func TagsArrayToJSArray(array []*Tags) []interface{} {
 // AddTagsTo calls the AddTagsTo method on the Tags object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tags#addtagsto
-func (t *Tags) AddTagsTo(obj interface{}, tagsString string) {
+func (t *Tags) AddTagsTo(obj JSObject, tagsString string) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, obj)
+	if obj == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, obj.JSObject())
+	}
+
 	args = append(args, tagsString)
 
 	t.p.Call("AddTagsTo", args...)
@@ -52,11 +57,15 @@ func (t *Tags) AddTagsTo(obj interface{}, tagsString string) {
 // DisableFor calls the DisableFor method on the Tags object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tags#disablefor
-func (t *Tags) DisableFor(obj interface{}) {
+func (t *Tags) DisableFor(obj JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, obj)
+	if obj == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, obj.JSObject())
+	}
 
 	t.p.Call("DisableFor", args...)
 }
@@ -64,11 +73,15 @@ func (t *Tags) DisableFor(obj interface{}) {
 // EnableFor calls the EnableFor method on the Tags object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tags#enablefor
-func (t *Tags) EnableFor(obj interface{}) {
+func (t *Tags) EnableFor(obj JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, obj)
+	if obj == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, obj.JSObject())
+	}
 
 	t.p.Call("EnableFor", args...)
 }
@@ -81,14 +94,18 @@ type TagsGetTagsOpts struct {
 // GetTags calls the GetTags method on the Tags object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tags#gettags
-func (t *Tags) GetTags(obj interface{}, opts *TagsGetTagsOpts) interface{} {
+func (t *Tags) GetTags(obj JSObject, opts *TagsGetTagsOpts) js.Value {
 	if opts == nil {
 		opts = &TagsGetTagsOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, obj)
+	if obj == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, obj.JSObject())
+	}
 
 	if opts.AsString == nil {
 		args = append(args, js.Undefined())
@@ -103,11 +120,15 @@ func (t *Tags) GetTags(obj interface{}, opts *TagsGetTagsOpts) interface{} {
 // HasTags calls the HasTags method on the Tags object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tags#hastags
-func (t *Tags) HasTags(obj interface{}) bool {
+func (t *Tags) HasTags(obj JSObject) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, obj)
+	if obj == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, obj.JSObject())
+	}
 
 	retVal := t.p.Call("HasTags", args...)
 	return retVal.Bool()
@@ -116,11 +137,16 @@ func (t *Tags) HasTags(obj interface{}) bool {
 // MatchesQuery calls the MatchesQuery method on the Tags object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tags#matchesquery
-func (t *Tags) MatchesQuery(obj interface{}, tagsQuery string) bool {
+func (t *Tags) MatchesQuery(obj JSObject, tagsQuery string) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, obj)
+	if obj == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, obj.JSObject())
+	}
+
 	args = append(args, tagsQuery)
 
 	retVal := t.p.Call("MatchesQuery", args...)
@@ -130,11 +156,16 @@ func (t *Tags) MatchesQuery(obj interface{}, tagsQuery string) bool {
 // RemoveTagsFrom calls the RemoveTagsFrom method on the Tags object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tags#removetagsfrom
-func (t *Tags) RemoveTagsFrom(obj interface{}, tagsString string) {
+func (t *Tags) RemoveTagsFrom(obj JSObject, tagsString string) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, obj)
+	if obj == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, obj.JSObject())
+	}
+
 	args = append(args, tagsString)
 
 	t.p.Call("RemoveTagsFrom", args...)

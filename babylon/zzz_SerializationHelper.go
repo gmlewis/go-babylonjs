@@ -39,12 +39,21 @@ func SerializationHelperArrayToJSArray(array []*SerializationHelper) []interface
 // AppendSerializedAnimations calls the AppendSerializedAnimations method on the SerializationHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.serializationhelper#appendserializedanimations
-func (s *SerializationHelper) AppendSerializedAnimations(source *IAnimatable, destination interface{}) {
+func (s *SerializationHelper) AppendSerializedAnimations(source *IAnimatable, destination JSObject) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, source.JSObject())
-	args = append(args, destination)
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if destination == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, destination.JSObject())
+	}
 
 	s.p.Call("AppendSerializedAnimations", args...)
 }

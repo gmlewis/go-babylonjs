@@ -74,12 +74,22 @@ func (ba *Babylon) NewWoodProceduralTexture(name string, size float64, scene *Sc
 // Parse calls the Parse method on the WoodProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#parse
-func (w *WoodProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *WoodProceduralTexture {
+func (w *WoodProceduralTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *WoodProceduralTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := w.p.Call("Parse", args...)
@@ -89,7 +99,7 @@ func (w *WoodProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, r
 // Serialize calls the Serialize method on the WoodProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#serialize
-func (w *WoodProceduralTexture) Serialize() interface{} {
+func (w *WoodProceduralTexture) Serialize() js.Value {
 
 	retVal := w.p.Call("serialize")
 	return retVal

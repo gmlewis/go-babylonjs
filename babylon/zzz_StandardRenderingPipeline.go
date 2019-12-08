@@ -85,12 +85,22 @@ func (s *StandardRenderingPipeline) Dispose() {
 // Parse calls the Parse method on the StandardRenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#parse
-func (s *StandardRenderingPipeline) Parse(source interface{}, scene *Scene, rootUrl string) *StandardRenderingPipeline {
+func (s *StandardRenderingPipeline) Parse(source JSObject, scene *Scene, rootUrl string) *StandardRenderingPipeline {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := s.p.Call("Parse", args...)
@@ -100,7 +110,7 @@ func (s *StandardRenderingPipeline) Parse(source interface{}, scene *Scene, root
 // Serialize calls the Serialize method on the StandardRenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline#serialize
-func (s *StandardRenderingPipeline) Serialize() interface{} {
+func (s *StandardRenderingPipeline) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal

@@ -57,7 +57,11 @@ func (s *ShadowGeneratorSceneComponent) AddFromContainer(container *AbstractScen
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	s.p.Call("addFromContainer", args...)
 }
@@ -101,7 +105,11 @@ func (s *ShadowGeneratorSceneComponent) RemoveFromContainer(container *AbstractS
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	if opts.Dispose == nil {
 		args = append(args, js.Undefined())
@@ -115,11 +123,15 @@ func (s *ShadowGeneratorSceneComponent) RemoveFromContainer(container *AbstractS
 // Serialize calls the Serialize method on the ShadowGeneratorSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#serialize
-func (s *ShadowGeneratorSceneComponent) Serialize(serializationObject interface{}) {
+func (s *ShadowGeneratorSceneComponent) Serialize(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	s.p.Call("serialize", args...)
 }

@@ -57,9 +57,23 @@ func (s *ShadowOnlyMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	s.p.Call("bindForSubMesh", args...)
 }
@@ -110,8 +124,17 @@ func (s *ShadowOnlyMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubM
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -144,12 +167,22 @@ func (s *ShadowOnlyMaterial) NeedAlphaTesting() bool {
 // Parse calls the Parse method on the ShadowOnlyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#parse
-func (s *ShadowOnlyMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *ShadowOnlyMaterial {
+func (s *ShadowOnlyMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *ShadowOnlyMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := s.p.Call("Parse", args...)
@@ -159,7 +192,7 @@ func (s *ShadowOnlyMaterial) Parse(source interface{}, scene *Scene, rootUrl str
 // Serialize calls the Serialize method on the ShadowOnlyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#serialize
-func (s *ShadowOnlyMaterial) Serialize() interface{} {
+func (s *ShadowOnlyMaterial) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal

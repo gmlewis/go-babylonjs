@@ -106,7 +106,11 @@ func (t *TargetCamera) SetTarget(target *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	t.p.Call("setTarget", args...)
 }
@@ -155,7 +159,7 @@ func (t *TargetCamera) SetCameraRotation(cameraRotation *Vector2) *TargetCamera 
 // LockedTarget returns the LockedTarget property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#lockedtarget
-func (t *TargetCamera) LockedTarget() interface{} {
+func (t *TargetCamera) LockedTarget() js.Value {
 	retVal := t.p.Get("lockedTarget")
 	return retVal
 }
@@ -163,8 +167,8 @@ func (t *TargetCamera) LockedTarget() interface{} {
 // SetLockedTarget sets the LockedTarget property of class TargetCamera.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera#lockedtarget
-func (t *TargetCamera) SetLockedTarget(lockedTarget interface{}) *TargetCamera {
-	t.p.Set("lockedTarget", lockedTarget)
+func (t *TargetCamera) SetLockedTarget(lockedTarget JSObject) *TargetCamera {
+	t.p.Set("lockedTarget", lockedTarget.JSObject())
 	return t
 }
 

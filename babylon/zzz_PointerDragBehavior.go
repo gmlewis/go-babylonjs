@@ -76,7 +76,11 @@ func (p *PointerDragBehavior) Attach(ownerNode *AbstractMesh, opts *PointerDragB
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, ownerNode.JSObject())
+	if ownerNode == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ownerNode.JSObject())
+	}
 
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())

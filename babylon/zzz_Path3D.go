@@ -122,7 +122,11 @@ func (p *Path3D) GetClosestPositionTo(target *Vector3) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	retVal := p.p.Call("getClosestPositionTo", args...)
 	return retVal.Float()

@@ -57,7 +57,11 @@ func (v *Vector2) Add(otherVector *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	retVal := v.p.Call("add", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -70,7 +74,11 @@ func (v *Vector2) AddInPlace(otherVector *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	retVal := v.p.Call("addInPlace", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -83,8 +91,17 @@ func (v *Vector2) AddToRef(otherVector *Vector2, result *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, otherVector.JSObject())
-	args = append(args, result.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := v.p.Call("addToRef", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -97,7 +114,11 @@ func (v *Vector2) AddVector3(otherVector *Vector3) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	retVal := v.p.Call("addVector3", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -123,10 +144,30 @@ func (v *Vector2) CatmullRom(value1 *Vector2, value2 *Vector2, value3 *Vector2, 
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, value1.JSObject())
-	args = append(args, value2.JSObject())
-	args = append(args, value3.JSObject())
-	args = append(args, value4.JSObject())
+	if value1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value1.JSObject())
+	}
+
+	if value2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value2.JSObject())
+	}
+
+	if value3 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value3.JSObject())
+	}
+
+	if value4 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value4.JSObject())
+	}
+
 	args = append(args, amount)
 
 	retVal := v.p.Call("CatmullRom", args...)
@@ -140,8 +181,17 @@ func (v *Vector2) Center(value1 *Vector2, value2 *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, value1.JSObject())
-	args = append(args, value2.JSObject())
+	if value1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value1.JSObject())
+	}
+
+	if value2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value2.JSObject())
+	}
 
 	retVal := v.p.Call("Center", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -154,9 +204,23 @@ func (v *Vector2) Clamp(value *Vector2, min *Vector2, max *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, value.JSObject())
-	args = append(args, min.JSObject())
-	args = append(args, max.JSObject())
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
+
+	if min == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, min.JSObject())
+	}
+
+	if max == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, max.JSObject())
+	}
 
 	retVal := v.p.Call("Clamp", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -178,7 +242,11 @@ func (v *Vector2) CopyFrom(source *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, source.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
 
 	retVal := v.p.Call("copyFrom", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -192,6 +260,7 @@ func (v *Vector2) CopyFromFloats(x float64, y float64) *Vector2 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	retVal := v.p.Call("copyFromFloats", args...)
@@ -205,8 +274,17 @@ func (v *Vector2) Distance(value1 *Vector2, value2 *Vector2) float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, value1.JSObject())
-	args = append(args, value2.JSObject())
+	if value1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value1.JSObject())
+	}
+
+	if value2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value2.JSObject())
+	}
 
 	retVal := v.p.Call("Distance", args...)
 	return retVal.Float()
@@ -219,9 +297,23 @@ func (v *Vector2) DistanceOfPointFromSegment(p *Vector2, segA *Vector2, segB *Ve
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, p.JSObject())
-	args = append(args, segA.JSObject())
-	args = append(args, segB.JSObject())
+	if p == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, p.JSObject())
+	}
+
+	if segA == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, segA.JSObject())
+	}
+
+	if segB == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, segB.JSObject())
+	}
 
 	retVal := v.p.Call("DistanceOfPointFromSegment", args...)
 	return retVal.Float()
@@ -234,8 +326,17 @@ func (v *Vector2) DistanceSquared(value1 *Vector2, value2 *Vector2) float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, value1.JSObject())
-	args = append(args, value2.JSObject())
+	if value1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value1.JSObject())
+	}
+
+	if value2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value2.JSObject())
+	}
 
 	retVal := v.p.Call("DistanceSquared", args...)
 	return retVal.Float()
@@ -248,7 +349,11 @@ func (v *Vector2) Divide(otherVector *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	retVal := v.p.Call("divide", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -261,7 +366,11 @@ func (v *Vector2) DivideInPlace(otherVector *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	retVal := v.p.Call("divideInPlace", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -274,8 +383,17 @@ func (v *Vector2) DivideToRef(otherVector *Vector2, result *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, otherVector.JSObject())
-	args = append(args, result.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := v.p.Call("divideToRef", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -288,8 +406,17 @@ func (v *Vector2) Dot(left *Vector2, right *Vector2) float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, left.JSObject())
-	args = append(args, right.JSObject())
+	if left == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, left.JSObject())
+	}
+
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
 
 	retVal := v.p.Call("Dot", args...)
 	return retVal.Float()
@@ -302,7 +429,11 @@ func (v *Vector2) Equals(otherVector *Vector2) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	retVal := v.p.Call("equals", args...)
 	return retVal.Bool()
@@ -323,7 +454,11 @@ func (v *Vector2) EqualsWithEpsilon(otherVector *Vector2, opts *Vector2EqualsWit
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	if opts.Epsilon == nil {
 		args = append(args, js.Undefined())
@@ -388,8 +523,14 @@ func (v *Vector2) FromArrayToRef(array js.Value, offset float64, result *Vector2
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, array)
+
 	args = append(args, offset)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	v.p.Call("FromArrayToRef", args...)
 }
@@ -419,10 +560,30 @@ func (v *Vector2) Hermite(value1 *Vector2, tangent1 *Vector2, value2 *Vector2, t
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, value1.JSObject())
-	args = append(args, tangent1.JSObject())
-	args = append(args, value2.JSObject())
-	args = append(args, tangent2.JSObject())
+	if value1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value1.JSObject())
+	}
+
+	if tangent1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, tangent1.JSObject())
+	}
+
+	if value2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value2.JSObject())
+	}
+
+	if tangent2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, tangent2.JSObject())
+	}
+
 	args = append(args, amount)
 
 	retVal := v.p.Call("Hermite", args...)
@@ -454,8 +615,18 @@ func (v *Vector2) Lerp(start *Vector2, end *Vector2, amount float64) *Vector2 {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, start.JSObject())
-	args = append(args, end.JSObject())
+	if start == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, start.JSObject())
+	}
+
+	if end == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, end.JSObject())
+	}
+
 	args = append(args, amount)
 
 	retVal := v.p.Call("Lerp", args...)
@@ -469,8 +640,17 @@ func (v *Vector2) Maximize(left *Vector2, right *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, left.JSObject())
-	args = append(args, right.JSObject())
+	if left == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, left.JSObject())
+	}
+
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
 
 	retVal := v.p.Call("Maximize", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -483,8 +663,17 @@ func (v *Vector2) Minimize(left *Vector2, right *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, left.JSObject())
-	args = append(args, right.JSObject())
+	if left == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, left.JSObject())
+	}
+
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
 
 	retVal := v.p.Call("Minimize", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -497,7 +686,11 @@ func (v *Vector2) Multiply(otherVector *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	retVal := v.p.Call("multiply", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -511,6 +704,7 @@ func (v *Vector2) MultiplyByFloats(x float64, y float64) *Vector2 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	retVal := v.p.Call("multiplyByFloats", args...)
@@ -524,7 +718,11 @@ func (v *Vector2) MultiplyInPlace(otherVector *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	retVal := v.p.Call("multiplyInPlace", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -537,8 +735,17 @@ func (v *Vector2) MultiplyToRef(otherVector *Vector2, result *Vector2) *Vector2 
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, otherVector.JSObject())
-	args = append(args, result.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := v.p.Call("multiplyToRef", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -560,7 +767,11 @@ func (v *Vector2) Normalize(vector *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vector.JSObject())
+	if vector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vector.JSObject())
+	}
 
 	retVal := v.p.Call("Normalize", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -582,10 +793,29 @@ func (v *Vector2) PointInTriangle(p *Vector2, p0 *Vector2, p1 *Vector2, p2 *Vect
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, p.JSObject())
-	args = append(args, p0.JSObject())
-	args = append(args, p1.JSObject())
-	args = append(args, p2.JSObject())
+	if p == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, p.JSObject())
+	}
+
+	if p0 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, p0.JSObject())
+	}
+
+	if p1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, p1.JSObject())
+	}
+
+	if p2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, p2.JSObject())
+	}
 
 	retVal := v.p.Call("PointInTriangle", args...)
 	return retVal.Bool()
@@ -612,7 +842,12 @@ func (v *Vector2) ScaleAndAddToRef(scale float64, result *Vector2) *Vector2 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, scale)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := v.p.Call("scaleAndAddToRef", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -639,7 +874,12 @@ func (v *Vector2) ScaleToRef(scale float64, result *Vector2) *Vector2 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, scale)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := v.p.Call("scaleToRef", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -653,6 +893,7 @@ func (v *Vector2) Set(x float64, y float64) *Vector2 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	retVal := v.p.Call("set", args...)
@@ -666,7 +907,11 @@ func (v *Vector2) Subtract(otherVector *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	retVal := v.p.Call("subtract", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -679,7 +924,11 @@ func (v *Vector2) SubtractInPlace(otherVector *Vector2) *Vector2 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherVector.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
 
 	retVal := v.p.Call("subtractInPlace", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -692,8 +941,17 @@ func (v *Vector2) SubtractToRef(otherVector *Vector2, result *Vector2) *Vector2 
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, otherVector.JSObject())
-	args = append(args, result.JSObject())
+	if otherVector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherVector.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := v.p.Call("subtractToRef", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -742,8 +1000,17 @@ func (v *Vector2) Transform(vector *Vector2, transformation *Matrix) *Vector2 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, vector.JSObject())
-	args = append(args, transformation.JSObject())
+	if vector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vector.JSObject())
+	}
+
+	if transformation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transformation.JSObject())
+	}
 
 	retVal := v.p.Call("Transform", args...)
 	return Vector2FromJSObject(retVal, v.ctx)
@@ -756,9 +1023,23 @@ func (v *Vector2) TransformToRef(vector *Vector2, transformation *Matrix, result
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, vector.JSObject())
-	args = append(args, transformation.JSObject())
-	args = append(args, result.JSObject())
+	if vector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vector.JSObject())
+	}
+
+	if transformation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transformation.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	v.p.Call("TransformToRef", args...)
 }

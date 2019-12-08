@@ -64,10 +64,22 @@ func (l *LensFlare) AddFlare(size float64, position float64, color *Color3, imgU
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, size)
+
 	args = append(args, position)
-	args = append(args, color.JSObject())
+
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
+
 	args = append(args, imgUrl)
-	args = append(args, system.JSObject())
+
+	if system == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, system.JSObject())
+	}
 
 	retVal := l.p.Call("AddFlare", args...)
 	return LensFlareFromJSObject(retVal, l.ctx)

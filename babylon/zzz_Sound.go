@@ -48,7 +48,7 @@ type NewSoundOpts struct {
 // NewSound returns a new Sound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound
-func (ba *Babylon) NewSound(name string, urlOrArrayBuffer interface{}, scene *Scene, opts *NewSoundOpts) *Sound {
+func (ba *Babylon) NewSound(name string, urlOrArrayBuffer JSObject, scene *Scene, opts *NewSoundOpts) *Sound {
 	if opts == nil {
 		opts = &NewSoundOpts{}
 	}
@@ -56,7 +56,7 @@ func (ba *Babylon) NewSound(name string, urlOrArrayBuffer interface{}, scene *Sc
 	args := make([]interface{}, 0, 3+2)
 
 	args = append(args, name)
-	args = append(args, urlOrArrayBuffer)
+	args = append(args, urlOrArrayBuffer.JSObject())
 	args = append(args, scene.JSObject())
 
 	if opts.ReadyToPlayCallback == nil {
@@ -81,7 +81,11 @@ func (s *Sound) AttachToMesh(transformNode *TransformNode) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, transformNode.JSObject())
+	if transformNode == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transformNode.JSObject())
+	}
 
 	s.p.Call("attachToMesh", args...)
 }
@@ -158,15 +162,25 @@ type SoundParseOpts struct {
 // Parse calls the Parse method on the Sound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#parse
-func (s *Sound) Parse(parsedSound interface{}, scene *Scene, rootUrl string, opts *SoundParseOpts) *Sound {
+func (s *Sound) Parse(parsedSound JSObject, scene *Scene, rootUrl string, opts *SoundParseOpts) *Sound {
 	if opts == nil {
 		opts = &SoundParseOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, parsedSound)
-	args = append(args, scene.JSObject())
+	if parsedSound == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedSound.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	if opts.SourceSound == nil {
@@ -226,7 +240,7 @@ func (s *Sound) Play(opts *SoundPlayOpts) {
 // Serialize calls the Serialize method on the Sound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound#serialize
-func (s *Sound) Serialize() interface{} {
+func (s *Sound) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal
@@ -264,7 +278,9 @@ func (s *Sound) SetDirectionalCone(coneInnerAngle float64, coneOuterAngle float6
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, coneInnerAngle)
+
 	args = append(args, coneOuterAngle)
+
 	args = append(args, coneOuterGain)
 
 	s.p.Call("setDirectionalCone", args...)
@@ -277,7 +293,11 @@ func (s *Sound) SetLocalDirectionToMesh(newLocalDirection *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newLocalDirection.JSObject())
+	if newLocalDirection == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newLocalDirection.JSObject())
+	}
 
 	s.p.Call("setLocalDirectionToMesh", args...)
 }
@@ -301,7 +321,11 @@ func (s *Sound) SetPosition(newPosition *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newPosition.JSObject())
+	if newPosition == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newPosition.JSObject())
+	}
 
 	s.p.Call("setPosition", args...)
 }
@@ -379,7 +403,11 @@ func (s *Sound) UpdateOptions(options *ISoundOptions) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, options.JSObject())
+	if options == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, options.JSObject())
+	}
 
 	s.p.Call("updateOptions", args...)
 }

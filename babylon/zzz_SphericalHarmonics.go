@@ -43,8 +43,18 @@ func (s *SphericalHarmonics) AddLight(direction *Vector3, color *Color3, deltaSo
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, direction.JSObject())
-	args = append(args, color.JSObject())
+	if direction == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction.JSObject())
+	}
+
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
+
 	args = append(args, deltaSolidAngle)
 
 	s.p.Call("addLight", args...)
@@ -86,7 +96,11 @@ func (s *SphericalHarmonics) FromPolynomial(polynomial *SphericalPolynomial) *Sp
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, polynomial.JSObject())
+	if polynomial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, polynomial.JSObject())
+	}
 
 	retVal := s.p.Call("FromPolynomial", args...)
 	return SphericalHarmonicsFromJSObject(retVal, s.ctx)

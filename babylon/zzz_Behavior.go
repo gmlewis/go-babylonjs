@@ -43,7 +43,11 @@ func (b *Behavior) Attach(target *T) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	b.p.Call("attach", args...)
 }

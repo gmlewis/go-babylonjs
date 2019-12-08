@@ -47,7 +47,7 @@ type NewGamepadOpts struct {
 // NewGamepad returns a new Gamepad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepad
-func (ba *Babylon) NewGamepad(id string, index float64, browserGamepad interface{}, opts *NewGamepadOpts) *Gamepad {
+func (ba *Babylon) NewGamepad(id string, index float64, browserGamepad JSObject, opts *NewGamepadOpts) *Gamepad {
 	if opts == nil {
 		opts = &NewGamepadOpts{}
 	}
@@ -56,7 +56,7 @@ func (ba *Babylon) NewGamepad(id string, index float64, browserGamepad interface
 
 	args = append(args, id)
 	args = append(args, index)
-	args = append(args, browserGamepad)
+	args = append(args, browserGamepad.JSObject())
 
 	if opts.LeftStickX == nil {
 		args = append(args, js.Undefined())
@@ -126,7 +126,7 @@ func (g *Gamepad) Update() {
 // BrowserGamepad returns the BrowserGamepad property of class Gamepad.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepad#browsergamepad
-func (g *Gamepad) BrowserGamepad() interface{} {
+func (g *Gamepad) BrowserGamepad() js.Value {
 	retVal := g.p.Get("browserGamepad")
 	return retVal
 }
@@ -134,8 +134,8 @@ func (g *Gamepad) BrowserGamepad() interface{} {
 // SetBrowserGamepad sets the BrowserGamepad property of class Gamepad.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepad#browsergamepad
-func (g *Gamepad) SetBrowserGamepad(browserGamepad interface{}) *Gamepad {
-	g.p.Set("browserGamepad", browserGamepad)
+func (g *Gamepad) SetBrowserGamepad(browserGamepad JSObject) *Gamepad {
+	g.p.Set("browserGamepad", browserGamepad.JSObject())
 	return g
 }
 

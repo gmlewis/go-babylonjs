@@ -179,8 +179,17 @@ func (m *MultiMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *BaseSubMe
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -195,12 +204,21 @@ func (m *MultiMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *BaseSubMe
 // ParseMultiMaterial calls the ParseMultiMaterial method on the MultiMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#parsemultimaterial
-func (m *MultiMaterial) ParseMultiMaterial(parsedMultiMaterial interface{}, scene *Scene) *MultiMaterial {
+func (m *MultiMaterial) ParseMultiMaterial(parsedMultiMaterial JSObject, scene *Scene) *MultiMaterial {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedMultiMaterial)
-	args = append(args, scene.JSObject())
+	if parsedMultiMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedMultiMaterial.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := m.p.Call("ParseMultiMaterial", args...)
 	return MultiMaterialFromJSObject(retVal, m.ctx)
@@ -209,7 +227,7 @@ func (m *MultiMaterial) ParseMultiMaterial(parsedMultiMaterial interface{}, scen
 // Serialize calls the Serialize method on the MultiMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial#serialize
-func (m *MultiMaterial) Serialize() interface{} {
+func (m *MultiMaterial) Serialize() js.Value {
 
 	retVal := m.p.Call("serialize")
 	return retVal

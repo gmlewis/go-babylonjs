@@ -70,7 +70,11 @@ func (g *GUI3DManager) AddControl(control *Control3D) *GUI3DManager {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := g.p.Call("addControl", args...)
 	return GUI3DManagerFromJSObject(retVal, g.ctx)
@@ -83,7 +87,11 @@ func (g *GUI3DManager) ContainsControl(control *Control3D) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := g.p.Call("containsControl", args...)
 	return retVal.Bool()
@@ -104,7 +112,11 @@ func (g *GUI3DManager) RemoveControl(control *Control3D) *GUI3DManager {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := g.p.Call("removeControl", args...)
 	return GUI3DManagerFromJSObject(retVal, g.ctx)

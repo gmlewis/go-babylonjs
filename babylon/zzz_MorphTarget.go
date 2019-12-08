@@ -96,7 +96,11 @@ func (m *MorphTarget) FromMesh(mesh *AbstractMesh, opts *MorphTargetFromMeshOpts
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.Name == nil {
 		args = append(args, js.Undefined())
@@ -161,11 +165,15 @@ func (m *MorphTarget) GetUVs() js.Value {
 // Parse calls the Parse method on the MorphTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#parse
-func (m *MorphTarget) Parse(serializationObject interface{}) *MorphTarget {
+func (m *MorphTarget) Parse(serializationObject JSObject) *MorphTarget {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	retVal := m.p.Call("Parse", args...)
 	return MorphTargetFromJSObject(retVal, m.ctx)
@@ -174,7 +182,7 @@ func (m *MorphTarget) Parse(serializationObject interface{}) *MorphTarget {
 // Serialize calls the Serialize method on the MorphTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget#serialize
-func (m *MorphTarget) Serialize() interface{} {
+func (m *MorphTarget) Serialize() js.Value {
 
 	retVal := m.p.Call("serialize")
 	return retVal

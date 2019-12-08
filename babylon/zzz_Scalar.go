@@ -77,6 +77,7 @@ func (s *Scalar) DeltaAngle(current float64, target float64) float64 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, current)
+
 	args = append(args, target)
 
 	retVal := s.p.Call("DeltaAngle", args...)
@@ -91,7 +92,9 @@ func (s *Scalar) Denormalize(normalized float64, min float64, max float64) float
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, normalized)
+
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := s.p.Call("Denormalize", args...)
@@ -106,9 +109,13 @@ func (s *Scalar) Hermite(value1 float64, tangent1 float64, value2 float64, tange
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, value1)
+
 	args = append(args, tangent1)
+
 	args = append(args, value2)
+
 	args = append(args, tangent2)
+
 	args = append(args, amount)
 
 	retVal := s.p.Call("Hermite", args...)
@@ -123,7 +130,9 @@ func (s *Scalar) InverseLerp(a float64, b float64, value float64) float64 {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, a)
+
 	args = append(args, b)
+
 	args = append(args, value)
 
 	retVal := s.p.Call("InverseLerp", args...)
@@ -138,7 +147,9 @@ func (s *Scalar) Lerp(start float64, end float64, amount float64) float64 {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, start)
+
 	args = append(args, end)
+
 	args = append(args, amount)
 
 	retVal := s.p.Call("Lerp", args...)
@@ -153,7 +164,9 @@ func (s *Scalar) LerpAngle(start float64, end float64, amount float64) float64 {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, start)
+
 	args = append(args, end)
+
 	args = append(args, amount)
 
 	retVal := s.p.Call("LerpAngle", args...)
@@ -181,7 +194,9 @@ func (s *Scalar) MoveTowards(current float64, target float64, maxDelta float64) 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, current)
+
 	args = append(args, target)
+
 	args = append(args, maxDelta)
 
 	retVal := s.p.Call("MoveTowards", args...)
@@ -196,7 +211,9 @@ func (s *Scalar) MoveTowardsAngle(current float64, target float64, maxDelta floa
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, current)
+
 	args = append(args, target)
+
 	args = append(args, maxDelta)
 
 	retVal := s.p.Call("MoveTowardsAngle", args...)
@@ -211,7 +228,9 @@ func (s *Scalar) Normalize(value float64, min float64, max float64) float64 {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, value)
+
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := s.p.Call("Normalize", args...)
@@ -239,7 +258,9 @@ func (s *Scalar) PercentToRange(percent float64, min float64, max float64) float
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, percent)
+
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := s.p.Call("PercentToRange", args...)
@@ -254,6 +275,7 @@ func (s *Scalar) PingPong(tx float64, length float64) float64 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, tx)
+
 	args = append(args, length)
 
 	retVal := s.p.Call("PingPong", args...)
@@ -268,6 +290,7 @@ func (s *Scalar) RandomRange(min float64, max float64) float64 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := s.p.Call("RandomRange", args...)
@@ -282,7 +305,9 @@ func (s *Scalar) RangeToPercent(number float64, min float64, max float64) float6
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, number)
+
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := s.p.Call("RangeToPercent", args...)
@@ -297,6 +322,7 @@ func (s *Scalar) Repeat(value float64, length float64) float64 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, value)
+
 	args = append(args, length)
 
 	retVal := s.p.Call("Repeat", args...)
@@ -324,7 +350,9 @@ func (s *Scalar) SmoothStep(from float64, to float64, tx float64) float64 {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, from)
+
 	args = append(args, to)
+
 	args = append(args, tx)
 
 	retVal := s.p.Call("SmoothStep", args...)
@@ -360,6 +388,7 @@ func (s *Scalar) WithinEpsilon(a float64, b float64, opts *ScalarWithinEpsilonOp
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, a)
+
 	args = append(args, b)
 
 	if opts.Epsilon == nil {

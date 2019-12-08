@@ -106,6 +106,7 @@ func (i *InternalTexture) UpdateSize(width int, height int, opts *InternalTextur
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, width)
+
 	args = append(args, height)
 
 	if opts.Depth == nil {

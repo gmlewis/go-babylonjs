@@ -69,12 +69,22 @@ func (s *SubEmitter) Dispose() {
 // Parse calls the Parse method on the SubEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subemitter#parse
-func (s *SubEmitter) Parse(serializationObject interface{}, scene *Scene, rootUrl string) *SubEmitter {
+func (s *SubEmitter) Parse(serializationObject JSObject, scene *Scene, rootUrl string) *SubEmitter {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := s.p.Call("Parse", args...)
@@ -84,7 +94,7 @@ func (s *SubEmitter) Parse(serializationObject interface{}, scene *Scene, rootUr
 // Serialize calls the Serialize method on the SubEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subemitter#serialize
-func (s *SubEmitter) Serialize() interface{} {
+func (s *SubEmitter) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal

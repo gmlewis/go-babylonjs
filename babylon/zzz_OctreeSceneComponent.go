@@ -74,7 +74,11 @@ func (o *OctreeSceneComponent) GetActiveSubMeshCandidates(mesh *AbstractMesh) js
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := o.p.Call("getActiveSubMeshCandidates", args...)
 	return retVal
@@ -87,7 +91,12 @@ func (o *OctreeSceneComponent) GetCollidingSubMeshCandidates(mesh *AbstractMesh,
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
 	args = append(args, collider)
 
 	retVal := o.p.Call("getCollidingSubMeshCandidates", args...)
@@ -101,8 +110,17 @@ func (o *OctreeSceneComponent) GetIntersectingSubMeshCandidates(mesh *AbstractMe
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, localRay.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if localRay == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, localRay.JSObject())
+	}
 
 	retVal := o.p.Call("getIntersectingSubMeshCandidates", args...)
 	return retVal

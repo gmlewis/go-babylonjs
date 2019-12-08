@@ -74,12 +74,22 @@ func (ba *Babylon) NewGrassProceduralTexture(name string, size float64, scene *S
 // Parse calls the Parse method on the GrassProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#parse
-func (g *GrassProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *GrassProceduralTexture {
+func (g *GrassProceduralTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *GrassProceduralTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := g.p.Call("Parse", args...)
@@ -89,7 +99,7 @@ func (g *GrassProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, 
 // Serialize calls the Serialize method on the GrassProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#serialize
-func (g *GrassProceduralTexture) Serialize() interface{} {
+func (g *GrassProceduralTexture) Serialize() js.Value {
 
 	retVal := g.p.Call("serialize")
 	return retVal

@@ -88,7 +88,11 @@ func (w *WebXRController) GetWorldPointerRayToRef(result *Ray) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	w.p.Call("getWorldPointerRayToRef", args...)
 }
@@ -101,6 +105,7 @@ func (w *WebXRController) UpdateFromXRFrame(xrFrame js.Value, referenceSpace js.
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, xrFrame)
+
 	args = append(args, referenceSpace)
 
 	w.p.Call("updateFromXRFrame", args...)

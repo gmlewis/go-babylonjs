@@ -46,16 +46,16 @@ type NewSetParentActionOpts struct {
 // NewSetParentAction returns a new SetParentAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setparentaction
-func (ba *Babylon) NewSetParentAction(triggerOptions interface{}, target interface{}, parent interface{}, opts *NewSetParentActionOpts) *SetParentAction {
+func (ba *Babylon) NewSetParentAction(triggerOptions JSObject, target JSObject, parent JSObject, opts *NewSetParentActionOpts) *SetParentAction {
 	if opts == nil {
 		opts = &NewSetParentActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, triggerOptions)
-	args = append(args, target)
-	args = append(args, parent)
+	args = append(args, triggerOptions.JSObject())
+	args = append(args, target.JSObject())
+	args = append(args, parent.JSObject())
 
 	if opts.Condition == nil {
 		args = append(args, js.Undefined())
@@ -78,11 +78,15 @@ func (s *SetParentAction) Execute() {
 // Serialize calls the Serialize method on the SetParentAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setparentaction#serialize
-func (s *SetParentAction) Serialize(parent interface{}) interface{} {
+func (s *SetParentAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := s.p.Call("serialize", args...)
 	return retVal

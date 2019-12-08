@@ -75,6 +75,7 @@ func (i *Image) Contains(x float64, y float64) bool {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	retVal := i.p.Call("contains", args...)

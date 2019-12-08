@@ -39,7 +39,7 @@ func IActionEventArrayToJSArray(array []*IActionEvent) []interface{} {
 // AdditionalData returns the AdditionalData property of class IActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iactionevent#additionaldata
-func (i *IActionEvent) AdditionalData() interface{} {
+func (i *IActionEvent) AdditionalData() js.Value {
 	retVal := i.p.Get("additionalData")
 	return retVal
 }
@@ -47,8 +47,8 @@ func (i *IActionEvent) AdditionalData() interface{} {
 // SetAdditionalData sets the AdditionalData property of class IActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iactionevent#additionaldata
-func (i *IActionEvent) SetAdditionalData(additionalData interface{}) *IActionEvent {
-	i.p.Set("additionalData", additionalData)
+func (i *IActionEvent) SetAdditionalData(additionalData JSObject) *IActionEvent {
+	i.p.Set("additionalData", additionalData.JSObject())
 	return i
 }
 
@@ -103,7 +103,7 @@ func (i *IActionEvent) SetPointerY(pointerY float64) *IActionEvent {
 // Source returns the Source property of class IActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iactionevent#source
-func (i *IActionEvent) Source() interface{} {
+func (i *IActionEvent) Source() js.Value {
 	retVal := i.p.Get("source")
 	return retVal
 }
@@ -111,15 +111,15 @@ func (i *IActionEvent) Source() interface{} {
 // SetSource sets the Source property of class IActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iactionevent#source
-func (i *IActionEvent) SetSource(source interface{}) *IActionEvent {
-	i.p.Set("source", source)
+func (i *IActionEvent) SetSource(source JSObject) *IActionEvent {
+	i.p.Set("source", source.JSObject())
 	return i
 }
 
 // SourceEvent returns the SourceEvent property of class IActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iactionevent#sourceevent
-func (i *IActionEvent) SourceEvent() interface{} {
+func (i *IActionEvent) SourceEvent() js.Value {
 	retVal := i.p.Get("sourceEvent")
 	return retVal
 }
@@ -127,7 +127,7 @@ func (i *IActionEvent) SourceEvent() interface{} {
 // SetSourceEvent sets the SourceEvent property of class IActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iactionevent#sourceevent
-func (i *IActionEvent) SetSourceEvent(sourceEvent interface{}) *IActionEvent {
-	i.p.Set("sourceEvent", sourceEvent)
+func (i *IActionEvent) SetSourceEvent(sourceEvent JSObject) *IActionEvent {
+	i.p.Set("sourceEvent", sourceEvent.JSObject())
 	return i
 }

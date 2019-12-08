@@ -44,19 +44,37 @@ type ISceneLoaderPluginImportMeshOpts struct {
 // ImportMesh calls the ImportMesh method on the ISceneLoaderPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderplugin#importmesh
-func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, meshes []*AbstractMesh, particleSystems []*IParticleSystem, skeletons []*Skeleton, opts *ISceneLoaderPluginImportMeshOpts) bool {
+func (i *ISceneLoaderPlugin) ImportMesh(meshesNames JSObject, scene *Scene, data JSObject, rootUrl string, meshes []*AbstractMesh, particleSystems []*IParticleSystem, skeletons []*Skeleton, opts *ISceneLoaderPluginImportMeshOpts) bool {
 	if opts == nil {
 		opts = &ISceneLoaderPluginImportMeshOpts{}
 	}
 
 	args := make([]interface{}, 0, 7+1)
 
-	args = append(args, meshesNames)
-	args = append(args, scene.JSObject())
-	args = append(args, data)
+	if meshesNames == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, meshesNames.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if data == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, data.JSObject())
+	}
+
 	args = append(args, rootUrl)
+
 	args = append(args, AbstractMeshArrayToJSArray(meshes))
+
 	args = append(args, IParticleSystemArrayToJSArray(particleSystems))
+
 	args = append(args, SkeletonArrayToJSArray(skeletons))
 
 	if opts.OnError == nil {
@@ -77,15 +95,25 @@ type ISceneLoaderPluginLoadOpts struct {
 // Load calls the Load method on the ISceneLoaderPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderplugin#load
-func (i *ISceneLoaderPlugin) Load(scene *Scene, data interface{}, rootUrl string, opts *ISceneLoaderPluginLoadOpts) bool {
+func (i *ISceneLoaderPlugin) Load(scene *Scene, data JSObject, rootUrl string, opts *ISceneLoaderPluginLoadOpts) bool {
 	if opts == nil {
 		opts = &ISceneLoaderPluginLoadOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, scene.JSObject())
-	args = append(args, data)
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if data == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, data.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	if opts.OnError == nil {
@@ -106,15 +134,25 @@ type ISceneLoaderPluginLoadAssetContainerOpts struct {
 // LoadAssetContainer calls the LoadAssetContainer method on the ISceneLoaderPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderplugin#loadassetcontainer
-func (i *ISceneLoaderPlugin) LoadAssetContainer(scene *Scene, data interface{}, rootUrl string, opts *ISceneLoaderPluginLoadAssetContainerOpts) *AssetContainer {
+func (i *ISceneLoaderPlugin) LoadAssetContainer(scene *Scene, data JSObject, rootUrl string, opts *ISceneLoaderPluginLoadAssetContainerOpts) *AssetContainer {
 	if opts == nil {
 		opts = &ISceneLoaderPluginLoadAssetContainerOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, scene.JSObject())
-	args = append(args, data)
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if data == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, data.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	if opts.OnError == nil {

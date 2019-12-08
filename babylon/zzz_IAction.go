@@ -39,7 +39,7 @@ func IActionArrayToJSArray(array []*IAction) []interface{} {
 // GetTriggerParameter calls the GetTriggerParameter method on the IAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaction#gettriggerparameter
-func (i *IAction) GetTriggerParameter() interface{} {
+func (i *IAction) GetTriggerParameter() js.Value {
 
 	retVal := i.p.Call("getTriggerParameter")
 	return retVal
@@ -48,11 +48,15 @@ func (i *IAction) GetTriggerParameter() interface{} {
 // Serialize calls the Serialize method on the IAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaction#serialize
-func (i *IAction) Serialize(parent interface{}) interface{} {
+func (i *IAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := i.p.Call("serialize", args...)
 	return retVal
@@ -65,7 +69,11 @@ func (i *IAction) Then(action *IAction) *IAction {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action.JSObject())
+	if action == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, action.JSObject())
+	}
 
 	retVal := i.p.Call("then", args...)
 	return IActionFromJSObject(retVal, i.ctx)
@@ -90,7 +98,7 @@ func (i *IAction) SetTrigger(trigger float64) *IAction {
 // TriggerOptions returns the TriggerOptions property of class IAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaction#triggeroptions
-func (i *IAction) TriggerOptions() interface{} {
+func (i *IAction) TriggerOptions() js.Value {
 	retVal := i.p.Get("triggerOptions")
 	return retVal
 }
@@ -98,7 +106,7 @@ func (i *IAction) TriggerOptions() interface{} {
 // SetTriggerOptions sets the TriggerOptions property of class IAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iaction#triggeroptions
-func (i *IAction) SetTriggerOptions(triggerOptions interface{}) *IAction {
-	i.p.Set("triggerOptions", triggerOptions)
+func (i *IAction) SetTriggerOptions(triggerOptions JSObject) *IAction {
+	i.p.Set("triggerOptions", triggerOptions.JSObject())
 	return i
 }

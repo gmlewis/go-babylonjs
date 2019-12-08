@@ -73,7 +73,11 @@ func (g *GlowLayer) AddExcludedMesh(mesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	g.p.Call("addExcludedMesh", args...)
 }
@@ -85,7 +89,11 @@ func (g *GlowLayer) AddIncludedOnlyMesh(mesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	g.p.Call("addIncludedOnlyMesh", args...)
 }
@@ -115,7 +123,11 @@ func (g *GlowLayer) HasMesh(mesh *AbstractMesh) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := g.p.Call("hasMesh", args...)
 	return retVal.Bool()
@@ -128,7 +140,12 @@ func (g *GlowLayer) IsReady(subMesh *SubMesh, useInstances bool) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, subMesh.JSObject())
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
+
 	args = append(args, useInstances)
 
 	retVal := g.p.Call("isReady", args...)
@@ -147,12 +164,22 @@ func (g *GlowLayer) NeedStencil() bool {
 // Parse calls the Parse method on the GlowLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#parse
-func (g *GlowLayer) Parse(parsedGlowLayer interface{}, scene *Scene, rootUrl string) *GlowLayer {
+func (g *GlowLayer) Parse(parsedGlowLayer JSObject, scene *Scene, rootUrl string) *GlowLayer {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedGlowLayer)
-	args = append(args, scene.JSObject())
+	if parsedGlowLayer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedGlowLayer.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := g.p.Call("Parse", args...)
@@ -166,7 +193,11 @@ func (g *GlowLayer) ReferenceMeshToUseItsOwnMaterial(mesh *AbstractMesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	g.p.Call("referenceMeshToUseItsOwnMaterial", args...)
 }
@@ -178,7 +209,11 @@ func (g *GlowLayer) RemoveExcludedMesh(mesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	g.p.Call("removeExcludedMesh", args...)
 }
@@ -190,7 +225,11 @@ func (g *GlowLayer) RemoveIncludedOnlyMesh(mesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	g.p.Call("removeIncludedOnlyMesh", args...)
 }
@@ -198,7 +237,7 @@ func (g *GlowLayer) RemoveIncludedOnlyMesh(mesh *Mesh) {
 // Serialize calls the Serialize method on the GlowLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer#serialize
-func (g *GlowLayer) Serialize() interface{} {
+func (g *GlowLayer) Serialize() js.Value {
 
 	retVal := g.p.Call("serialize")
 	return retVal
@@ -211,7 +250,11 @@ func (g *GlowLayer) UnReferenceMeshFromUsingItsOwnMaterial(mesh *AbstractMesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	g.p.Call("unReferenceMeshFromUsingItsOwnMaterial", args...)
 }

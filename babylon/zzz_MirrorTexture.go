@@ -108,7 +108,7 @@ func (m *MirrorTexture) Dispose() {
 // Serialize calls the Serialize method on the MirrorTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture#serialize
-func (m *MirrorTexture) Serialize() interface{} {
+func (m *MirrorTexture) Serialize() js.Value {
 
 	retVal := m.p.Call("serialize")
 	return retVal

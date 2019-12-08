@@ -79,12 +79,22 @@ func (p *PBRMaterial) GetClassName() string {
 // Parse calls the Parse method on the PBRMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#parse
-func (p *PBRMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *PBRMaterial {
+func (p *PBRMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *PBRMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := p.p.Call("Parse", args...)
@@ -94,7 +104,7 @@ func (p *PBRMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *P
 // Serialize calls the Serialize method on the PBRMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial#serialize
-func (p *PBRMaterial) Serialize() interface{} {
+func (p *PBRMaterial) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal

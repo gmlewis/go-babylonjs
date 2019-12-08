@@ -130,6 +130,7 @@ func (a *ActionManager) HasSpecificTriggers2(triggerA float64, triggerB float64)
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, triggerA)
+
 	args = append(args, triggerB)
 
 	retVal := a.p.Call("hasSpecificTriggers2", args...)
@@ -139,13 +140,27 @@ func (a *ActionManager) HasSpecificTriggers2(triggerA float64, triggerB float64)
 // Parse calls the Parse method on the ActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#parse
-func (a *ActionManager) Parse(parsedActions interface{}, object *AbstractMesh, scene *Scene) {
+func (a *ActionManager) Parse(parsedActions JSObject, object *AbstractMesh, scene *Scene) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedActions)
-	args = append(args, object.JSObject())
-	args = append(args, scene.JSObject())
+	if parsedActions == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedActions.JSObject())
+	}
+
+	if object == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, object.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	a.p.Call("Parse", args...)
 }
@@ -183,7 +198,11 @@ func (a *ActionManager) RegisterAction(action *IAction) *IAction {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action.JSObject())
+	if action == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, action.JSObject())
+	}
 
 	retVal := a.p.Call("registerAction", args...)
 	return IActionFromJSObject(retVal, a.ctx)
@@ -192,7 +211,7 @@ func (a *ActionManager) RegisterAction(action *IAction) *IAction {
 // Serialize calls the Serialize method on the ActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager#serialize
-func (a *ActionManager) Serialize(name string) interface{} {
+func (a *ActionManager) Serialize(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
@@ -209,7 +228,11 @@ func (a *ActionManager) UnregisterAction(action *IAction) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action.JSObject())
+	if action == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, action.JSObject())
+	}
 
 	retVal := a.p.Call("unregisterAction", args...)
 	return retVal.Bool()

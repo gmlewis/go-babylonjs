@@ -74,7 +74,11 @@ func (h *HighlightLayer) AddExcludedMesh(mesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	h.p.Call("addExcludedMesh", args...)
 }
@@ -94,8 +98,17 @@ func (h *HighlightLayer) AddMesh(mesh *Mesh, color *Color3, opts *HighlightLayer
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, color.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	if opts.GlowEmissiveOnly == nil {
 		args = append(args, js.Undefined())
@@ -139,7 +152,11 @@ func (h *HighlightLayer) HasMesh(mesh *AbstractMesh) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := h.p.Call("hasMesh", args...)
 	return retVal.Bool()
@@ -152,7 +169,12 @@ func (h *HighlightLayer) IsReady(subMesh *SubMesh, useInstances bool) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, subMesh.JSObject())
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
+
 	args = append(args, useInstances)
 
 	retVal := h.p.Call("isReady", args...)
@@ -171,12 +193,22 @@ func (h *HighlightLayer) NeedStencil() bool {
 // Parse calls the Parse method on the HighlightLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#parse
-func (h *HighlightLayer) Parse(parsedHightlightLayer interface{}, scene *Scene, rootUrl string) *HighlightLayer {
+func (h *HighlightLayer) Parse(parsedHightlightLayer JSObject, scene *Scene, rootUrl string) *HighlightLayer {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedHightlightLayer)
-	args = append(args, scene.JSObject())
+	if parsedHightlightLayer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedHightlightLayer.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := h.p.Call("Parse", args...)
@@ -190,7 +222,11 @@ func (h *HighlightLayer) RemoveExcludedMesh(mesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	h.p.Call("removeExcludedMesh", args...)
 }
@@ -202,7 +238,11 @@ func (h *HighlightLayer) RemoveMesh(mesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	h.p.Call("removeMesh", args...)
 }
@@ -210,7 +250,7 @@ func (h *HighlightLayer) RemoveMesh(mesh *Mesh) {
 // Serialize calls the Serialize method on the HighlightLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer#serialize
-func (h *HighlightLayer) Serialize() interface{} {
+func (h *HighlightLayer) Serialize() js.Value {
 
 	retVal := h.p.Call("serialize")
 	return retVal

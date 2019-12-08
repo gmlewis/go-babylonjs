@@ -75,6 +75,7 @@ func (c *Camera) AttachControl(element js.Value, noPreventDefault bool) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, element)
+
 	args = append(args, noPreventDefault)
 
 	c.p.Call("attachControl", args...)
@@ -95,7 +96,11 @@ func (c *Camera) AttachPostProcess(postProcess *PostProcess, opts *CameraAttachP
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, postProcess.JSObject())
+	if postProcess == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, postProcess.JSObject())
+	}
 
 	if opts.InsertAt == nil {
 		args = append(args, js.Undefined())
@@ -148,7 +153,11 @@ func (c *Camera) DetachPostProcess(postProcess *PostProcess) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, postProcess.JSObject())
+	if postProcess == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, postProcess.JSObject())
+	}
 
 	c.p.Call("detachPostProcess", args...)
 }
@@ -242,8 +251,14 @@ func (c *Camera) GetConstructorFromName(jsType string, name string, scene *Scene
 	args := make([]interface{}, 0, 3+2)
 
 	args = append(args, jsType)
+
 	args = append(args, name)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Interaxial_distance == nil {
 		args = append(args, js.Undefined())
@@ -267,7 +282,11 @@ func (c *Camera) GetDirection(localAxis *Vector3) *Vector3 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, localAxis.JSObject())
+	if localAxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, localAxis.JSObject())
+	}
 
 	retVal := c.p.Call("getDirection", args...)
 	return Vector3FromJSObject(retVal, c.ctx)
@@ -280,8 +299,17 @@ func (c *Camera) GetDirectionToRef(localAxis *Vector3, result *Vector3) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, localAxis.JSObject())
-	args = append(args, result.JSObject())
+	if localAxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, localAxis.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	c.p.Call("getDirectionToRef", args...)
 }
@@ -416,7 +444,11 @@ func (c *Camera) IsActiveMesh(mesh *Mesh) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := c.p.Call("isActiveMesh", args...)
 	return retVal.Bool()
@@ -429,7 +461,11 @@ func (c *Camera) IsCompletelyInFrustum(target *ICullable) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	retVal := c.p.Call("isCompletelyInFrustum", args...)
 	return retVal.Bool()
@@ -450,7 +486,11 @@ func (c *Camera) IsInFrustum(target *ICullable, opts *CameraIsInFrustumOpts) boo
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	if opts.CheckRigCameras == nil {
 		args = append(args, js.Undefined())
@@ -490,12 +530,21 @@ func (c *Camera) IsReady(opts *CameraIsReadyOpts) bool {
 // Parse calls the Parse method on the Camera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#parse
-func (c *Camera) Parse(parsedCamera interface{}, scene *Scene) *Camera {
+func (c *Camera) Parse(parsedCamera JSObject, scene *Scene) *Camera {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedCamera)
-	args = append(args, scene.JSObject())
+	if parsedCamera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedCamera.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := c.p.Call("Parse", args...)
 	return CameraFromJSObject(retVal, c.ctx)
@@ -513,7 +562,7 @@ func (c *Camera) RestoreState() bool {
 // Serialize calls the Serialize method on the Camera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera#serialize
-func (c *Camera) Serialize() interface{} {
+func (c *Camera) Serialize() js.Value {
 
 	retVal := c.p.Call("serialize")
 	return retVal

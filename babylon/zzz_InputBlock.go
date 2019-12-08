@@ -68,7 +68,11 @@ func (i *InputBlock) Animate(scene *Scene) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	i.p.Call("animate", args...)
 }
@@ -89,7 +93,11 @@ func (i *InputBlock) Initialize(state *NodeMaterialBuildState) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, state.JSObject())
+	if state == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, state.JSObject())
+	}
 
 	i.p.Call("initialize", args...)
 }
@@ -97,7 +105,7 @@ func (i *InputBlock) Initialize(state *NodeMaterialBuildState) {
 // Serialize calls the Serialize method on the InputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#serialize
-func (i *InputBlock) Serialize() interface{} {
+func (i *InputBlock) Serialize() js.Value {
 
 	retVal := i.p.Call("serialize")
 	return retVal
@@ -152,12 +160,22 @@ func (i *InputBlock) SetDefaultValue() {
 // _deserialize calls the _deserialize method on the InputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#_deserialize
-func (i *InputBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (i *InputBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	i.p.Call("_deserialize", args...)
@@ -390,7 +408,7 @@ func (i *InputBlock) SetType(jsType js.Value) *InputBlock {
 // Value returns the Value property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#value
-func (i *InputBlock) Value() interface{} {
+func (i *InputBlock) Value() js.Value {
 	retVal := i.p.Get("value")
 	return retVal
 }
@@ -398,8 +416,8 @@ func (i *InputBlock) Value() interface{} {
 // SetValue sets the Value property of class InputBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock#value
-func (i *InputBlock) SetValue(value interface{}) *InputBlock {
-	i.p.Set("value", value)
+func (i *InputBlock) SetValue(value JSObject) *InputBlock {
+	i.p.Set("value", value.JSObject())
 	return i
 }
 

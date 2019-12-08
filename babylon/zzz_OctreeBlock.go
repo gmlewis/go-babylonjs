@@ -75,7 +75,11 @@ func (o *OctreeBlock) AddEntry(entry *T) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, entry.JSObject())
+	if entry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, entry.JSObject())
+	}
 
 	o.p.Call("addEntry", args...)
 }
@@ -103,9 +107,19 @@ func (o *OctreeBlock) Intersects(sphereCenter *Vector3, sphereRadius float64, se
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, sphereCenter.JSObject())
+	if sphereCenter == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sphereCenter.JSObject())
+	}
+
 	args = append(args, sphereRadius)
-	args = append(args, selection.JSObject())
+
+	if selection == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, selection.JSObject())
+	}
 
 	if opts.AllowDuplicate == nil {
 		args = append(args, js.Undefined())
@@ -123,8 +137,17 @@ func (o *OctreeBlock) IntersectsRay(ray *Ray, selection *SmartArrayNoDuplicate) 
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, ray.JSObject())
-	args = append(args, selection.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
+
+	if selection == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, selection.JSObject())
+	}
 
 	o.p.Call("intersectsRay", args...)
 }
@@ -136,7 +159,11 @@ func (o *OctreeBlock) RemoveEntry(entry *T) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, entry.JSObject())
+	if entry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, entry.JSObject())
+	}
 
 	o.p.Call("removeEntry", args...)
 }
@@ -157,7 +184,12 @@ func (o *OctreeBlock) Select(frustumPlanes []*Plane, selection *SmartArrayNoDupl
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, PlaneArrayToJSArray(frustumPlanes))
-	args = append(args, selection.JSObject())
+
+	if selection == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, selection.JSObject())
+	}
 
 	if opts.AllowDuplicate == nil {
 		args = append(args, js.Undefined())

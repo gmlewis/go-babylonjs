@@ -87,7 +87,7 @@ func (d *DataBuffer) SetReferences(references float64) *DataBuffer {
 // UnderlyingResource returns the UnderlyingResource property of class DataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.databuffer#underlyingresource
-func (d *DataBuffer) UnderlyingResource() interface{} {
+func (d *DataBuffer) UnderlyingResource() js.Value {
 	retVal := d.p.Get("underlyingResource")
 	return retVal
 }
@@ -95,7 +95,7 @@ func (d *DataBuffer) UnderlyingResource() interface{} {
 // SetUnderlyingResource sets the UnderlyingResource property of class DataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.databuffer#underlyingresource
-func (d *DataBuffer) SetUnderlyingResource(underlyingResource interface{}) *DataBuffer {
-	d.p.Set("underlyingResource", underlyingResource)
+func (d *DataBuffer) SetUnderlyingResource(underlyingResource JSObject) *DataBuffer {
+	d.p.Set("underlyingResource", underlyingResource.JSObject())
 	return d
 }

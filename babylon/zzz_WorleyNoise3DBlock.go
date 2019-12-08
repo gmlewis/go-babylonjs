@@ -61,7 +61,7 @@ func (w *WorleyNoise3DBlock) GetClassName() string {
 // Serialize calls the Serialize method on the WorleyNoise3DBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#serialize
-func (w *WorleyNoise3DBlock) Serialize() interface{} {
+func (w *WorleyNoise3DBlock) Serialize() js.Value {
 
 	retVal := w.p.Call("serialize")
 	return retVal
@@ -70,12 +70,22 @@ func (w *WorleyNoise3DBlock) Serialize() interface{} {
 // _deserialize calls the _deserialize method on the WorleyNoise3DBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#_deserialize
-func (w *WorleyNoise3DBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (w *WorleyNoise3DBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	w.p.Call("_deserialize", args...)

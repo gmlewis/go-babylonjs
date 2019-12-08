@@ -158,7 +158,12 @@ func (s *Skeleton) CopyAnimationRange(source *Skeleton, name string, opts *Skele
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, source.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
 	args = append(args, name)
 
 	if opts.RescaleAsRequired == nil {
@@ -179,7 +184,9 @@ func (s *Skeleton) CreateAnimationRange(name string, from float64, to float64) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, from)
+
 	args = append(args, to)
 
 	s.p.Call("createAnimationRange", args...)
@@ -342,7 +349,11 @@ func (s *Skeleton) GetTransformMatrices(mesh *AbstractMesh) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := s.p.Call("getTransformMatrices", args...)
 	return retVal
@@ -355,7 +366,11 @@ func (s *Skeleton) GetTransformMatrixTexture(mesh *AbstractMesh) *RawTexture {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := s.p.Call("getTransformMatrixTexture", args...)
 	return RawTextureFromJSObject(retVal, s.ctx)
@@ -364,12 +379,21 @@ func (s *Skeleton) GetTransformMatrixTexture(mesh *AbstractMesh) *RawTexture {
 // Parse calls the Parse method on the Skeleton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#parse
-func (s *Skeleton) Parse(parsedSkeleton interface{}, scene *Scene) *Skeleton {
+func (s *Skeleton) Parse(parsedSkeleton JSObject, scene *Scene) *Skeleton {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedSkeleton)
-	args = append(args, scene.JSObject())
+	if parsedSkeleton == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedSkeleton.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := s.p.Call("Parse", args...)
 	return SkeletonFromJSObject(retVal, s.ctx)
@@ -394,7 +418,7 @@ func (s *Skeleton) ReturnToRest() {
 // Serialize calls the Serialize method on the Skeleton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton#serialize
-func (s *Skeleton) Serialize() interface{} {
+func (s *Skeleton) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal

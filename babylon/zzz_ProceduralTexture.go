@@ -49,7 +49,7 @@ type NewProceduralTextureOpts struct {
 // NewProceduralTexture returns a new ProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture
-func (ba *Babylon) NewProceduralTexture(name string, size interface{}, fragment interface{}, scene *Scene, opts *NewProceduralTextureOpts) *ProceduralTexture {
+func (ba *Babylon) NewProceduralTexture(name string, size JSObject, fragment JSObject, scene *Scene, opts *NewProceduralTextureOpts) *ProceduralTexture {
 	if opts == nil {
 		opts = &NewProceduralTextureOpts{}
 	}
@@ -57,8 +57,8 @@ func (ba *Babylon) NewProceduralTexture(name string, size interface{}, fragment 
 	args := make([]interface{}, 0, 4+3)
 
 	args = append(args, name)
-	args = append(args, size)
-	args = append(args, fragment)
+	args = append(args, size.JSObject())
+	args = append(args, fragment.JSObject())
 	args = append(args, scene.JSObject())
 
 	if opts.FallbackTexture == nil {
@@ -182,6 +182,7 @@ func (p *ProceduralTexture) Resize(size float64, generateMipMaps bool) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, size)
+
 	args = append(args, generateMipMaps)
 
 	p.p.Call("resize", args...)
@@ -195,7 +196,12 @@ func (p *ProceduralTexture) SetColor3(name string, value *Color3) *ProceduralTex
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := p.p.Call("setColor3", args...)
 	return ProceduralTextureFromJSObject(retVal, p.ctx)
@@ -209,7 +215,12 @@ func (p *ProceduralTexture) SetColor4(name string, value *Color4) *ProceduralTex
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := p.p.Call("setColor4", args...)
 	return ProceduralTextureFromJSObject(retVal, p.ctx)
@@ -223,6 +234,7 @@ func (p *ProceduralTexture) SetFloat(name string, value float64) *ProceduralText
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := p.p.Call("setFloat", args...)
@@ -237,6 +249,7 @@ func (p *ProceduralTexture) SetFloats(name string, value []float64) *ProceduralT
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := p.p.Call("setFloats", args...)
@@ -246,11 +259,15 @@ func (p *ProceduralTexture) SetFloats(name string, value []float64) *ProceduralT
 // SetFragment calls the SetFragment method on the ProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setfragment
-func (p *ProceduralTexture) SetFragment(fragment interface{}) {
+func (p *ProceduralTexture) SetFragment(fragment JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, fragment)
+	if fragment == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fragment.JSObject())
+	}
 
 	p.p.Call("setFragment", args...)
 }
@@ -263,6 +280,7 @@ func (p *ProceduralTexture) SetInt(name string, value float64) *ProceduralTextur
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := p.p.Call("setInt", args...)
@@ -277,7 +295,12 @@ func (p *ProceduralTexture) SetMatrix(name string, value *Matrix) *ProceduralTex
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := p.p.Call("setMatrix", args...)
 	return ProceduralTextureFromJSObject(retVal, p.ctx)
@@ -291,7 +314,12 @@ func (p *ProceduralTexture) SetTexture(name string, texture *Texture) *Procedura
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := p.p.Call("setTexture", args...)
 	return ProceduralTextureFromJSObject(retVal, p.ctx)
@@ -305,7 +333,12 @@ func (p *ProceduralTexture) SetVector2(name string, value *Vector2) *ProceduralT
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := p.p.Call("setVector2", args...)
 	return ProceduralTextureFromJSObject(retVal, p.ctx)
@@ -319,7 +352,12 @@ func (p *ProceduralTexture) SetVector3(name string, value *Vector3) *ProceduralT
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := p.p.Call("setVector3", args...)
 	return ProceduralTextureFromJSObject(retVal, p.ctx)

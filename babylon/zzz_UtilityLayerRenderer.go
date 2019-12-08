@@ -95,7 +95,11 @@ func (u *UtilityLayerRenderer) SetRenderCamera(cam *Camera) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, cam.JSObject())
+	if cam == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, cam.JSObject())
+	}
 
 	u.p.Call("setRenderCamera", args...)
 }

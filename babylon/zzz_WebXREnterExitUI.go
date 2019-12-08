@@ -43,9 +43,23 @@ func (w *WebXREnterExitUI) CreateAsync(scene *Scene, helper *WebXRExperienceHelp
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, scene.JSObject())
-	args = append(args, helper.JSObject())
-	args = append(args, options.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if helper == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, helper.JSObject())
+	}
+
+	if options == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, options.JSObject())
+	}
 
 	retVal := w.p.Call("CreateAsync", args...)
 	return PromiseFromJSObject(retVal, w.ctx)

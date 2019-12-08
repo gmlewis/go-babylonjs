@@ -52,8 +52,17 @@ func (i *ISpriteManager) Intersects(ray *Ray, camera *Camera, opts *ISpriteManag
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, ray.JSObject())
-	args = append(args, camera.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
@@ -85,8 +94,17 @@ func (i *ISpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *ISprite
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, ray.JSObject())
-	args = append(args, camera.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())

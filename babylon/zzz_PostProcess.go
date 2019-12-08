@@ -45,7 +45,7 @@ type NewPostProcessOpts struct {
 	Defines          *string
 	TextureType      *float64
 	VertexUrl        *string
-	IndexParameters  *interface{}
+	IndexParameters  interface{}
 	BlockCompilation *bool
 }
 
@@ -127,7 +127,11 @@ func (p *PostProcess) Activate(camera *Camera, opts *PostProcessActivateOpts) *I
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	if opts.SourceTexture == nil {
 		args = append(args, js.Undefined())
@@ -255,7 +259,11 @@ func (p *PostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, postProcess.JSObject())
+	if postProcess == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, postProcess.JSObject())
+	}
 
 	retVal := p.p.Call("shareOutputWith", args...)
 	return PostProcessFromJSObject(retVal, p.ctx)
@@ -266,7 +274,7 @@ type PostProcessUpdateEffectOpts struct {
 	Defines         *string
 	Uniforms        []string
 	Samplers        []string
-	IndexParameters *interface{}
+	IndexParameters interface{}
 	OnCompiled      JSFunc
 	OnError         JSFunc
 }

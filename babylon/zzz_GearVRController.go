@@ -39,11 +39,11 @@ func GearVRControllerArrayToJSArray(array []*GearVRController) []interface{} {
 // NewGearVRController returns a new GearVRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller
-func (ba *Babylon) NewGearVRController(vrGamepad interface{}) *GearVRController {
+func (ba *Babylon) NewGearVRController(vrGamepad JSObject) *GearVRController {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vrGamepad)
+	args = append(args, vrGamepad.JSObject())
 
 	p := ba.ctx.Get("GearVRController").New(args...)
 	return GearVRControllerFromJSObject(p, ba.ctx)
@@ -64,7 +64,11 @@ func (g *GearVRController) InitControllerMesh(scene *Scene, opts *GearVRControll
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())

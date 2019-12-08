@@ -72,7 +72,11 @@ func (s *SelectionPanel) AddGroup(group *SelectorGroup) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, group.JSObject())
+	if group == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, group.JSObject())
+	}
 
 	s.p.Call("addGroup", args...)
 }
@@ -94,6 +98,7 @@ func (s *SelectionPanel) AddToGroupCheckbox(groupNb float64, label string, opts 
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, groupNb)
+
 	args = append(args, label)
 
 	if opts.Func == nil {
@@ -127,6 +132,7 @@ func (s *SelectionPanel) AddToGroupRadio(groupNb float64, label string, opts *Se
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, groupNb)
+
 	args = append(args, label)
 
 	if opts.Func == nil {
@@ -164,6 +170,7 @@ func (s *SelectionPanel) AddToGroupSlider(groupNb float64, label string, opts *S
 	args := make([]interface{}, 0, 2+6)
 
 	args = append(args, groupNb)
+
 	args = append(args, label)
 
 	if opts.Func == nil {
@@ -208,7 +215,9 @@ func (s *SelectionPanel) Relabel(label string, groupNb float64, selectorNb float
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, label)
+
 	args = append(args, groupNb)
+
 	args = append(args, selectorNb)
 
 	s.p.Call("relabel", args...)
@@ -222,6 +231,7 @@ func (s *SelectionPanel) RemoveFromGroupSelector(groupNb float64, selectorNb flo
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, groupNb)
+
 	args = append(args, selectorNb)
 
 	s.p.Call("removeFromGroupSelector", args...)
@@ -247,6 +257,7 @@ func (s *SelectionPanel) SetHeaderName(label string, groupNb float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, label)
+
 	args = append(args, groupNb)
 
 	s.p.Call("setHeaderName", args...)

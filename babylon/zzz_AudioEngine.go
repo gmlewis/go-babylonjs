@@ -67,7 +67,11 @@ func (a *AudioEngine) ConnectToAnalyser(analyser *Analyser) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, analyser.JSObject())
+	if analyser == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, analyser.JSObject())
+	}
 
 	a.p.Call("connectToAnalyser", args...)
 }

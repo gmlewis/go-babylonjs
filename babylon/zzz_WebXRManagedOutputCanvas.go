@@ -82,11 +82,15 @@ func (w *WebXRManagedOutputCanvas) Dispose() {
 // InitializeXRLayerAsync calls the InitializeXRLayerAsync method on the WebXRManagedOutputCanvas object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#initializexrlayerasync
-func (w *WebXRManagedOutputCanvas) InitializeXRLayerAsync(xrSession interface{}) interface{} {
+func (w *WebXRManagedOutputCanvas) InitializeXRLayerAsync(xrSession JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, xrSession)
+	if xrSession == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, xrSession.JSObject())
+	}
 
 	retVal := w.p.Call("initializeXRLayerAsync", args...)
 	return retVal

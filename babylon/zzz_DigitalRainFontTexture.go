@@ -80,12 +80,21 @@ func (d *DigitalRainFontTexture) Clone() *DigitalRainFontTexture {
 // Parse calls the Parse method on the DigitalRainFontTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#parse
-func (d *DigitalRainFontTexture) Parse(source interface{}, scene *Scene) *DigitalRainFontTexture {
+func (d *DigitalRainFontTexture) Parse(source JSObject, scene *Scene) *DigitalRainFontTexture {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := d.p.Call("Parse", args...)
 	return DigitalRainFontTextureFromJSObject(retVal, d.ctx)

@@ -134,7 +134,11 @@ func (i *InputManager) SetPointerOverMesh(mesh *AbstractMesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	i.p.Call("setPointerOverMesh", args...)
 }
@@ -154,7 +158,11 @@ func (i *InputManager) SimulatePointerDown(pickResult *PickingInfo, opts *InputM
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, pickResult.JSObject())
+	if pickResult == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pickResult.JSObject())
+	}
 
 	args = append(args, opts.PointerEventInit)
 
@@ -176,7 +184,11 @@ func (i *InputManager) SimulatePointerMove(pickResult *PickingInfo, opts *InputM
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, pickResult.JSObject())
+	if pickResult == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pickResult.JSObject())
+	}
 
 	args = append(args, opts.PointerEventInit)
 
@@ -199,7 +211,11 @@ func (i *InputManager) SimulatePointerUp(pickResult *PickingInfo, opts *InputMan
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, pickResult.JSObject())
+	if pickResult == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pickResult.JSObject())
+	}
 
 	args = append(args, opts.PointerEventInit)
 	if opts.DoubleTap == nil {

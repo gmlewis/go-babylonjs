@@ -76,7 +76,9 @@ func (g *GPUParticleSystem) AddAlphaRemapGradient(gradient float64, min float64,
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, gradient)
+
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := g.p.Call("addAlphaRemapGradient", args...)
@@ -91,6 +93,7 @@ func (g *GPUParticleSystem) AddAngularSpeedGradient(gradient float64, factor flo
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	retVal := g.p.Call("addAngularSpeedGradient", args...)
@@ -113,7 +116,12 @@ func (g *GPUParticleSystem) AddColorGradient(gradient float64, color1 *Color4, o
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
-	args = append(args, color1.JSObject())
+
+	if color1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color1.JSObject())
+	}
 
 	if opts.Color2 == nil {
 		args = append(args, js.Undefined())
@@ -133,7 +141,9 @@ func (g *GPUParticleSystem) AddColorRemapGradient(gradient float64, min float64,
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, gradient)
+
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := g.p.Call("addColorRemapGradient", args...)
@@ -148,6 +158,7 @@ func (g *GPUParticleSystem) AddDragGradient(gradient float64, factor float64) *G
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	retVal := g.p.Call("addDragGradient", args...)
@@ -170,6 +181,7 @@ func (g *GPUParticleSystem) AddEmitRateGradient(gradient float64, factor float64
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -198,6 +210,7 @@ func (g *GPUParticleSystem) AddLifeTimeGradient(gradient float64, factor float64
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -218,6 +231,7 @@ func (g *GPUParticleSystem) AddLimitVelocityGradient(gradient float64, factor fl
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	retVal := g.p.Call("addLimitVelocityGradient", args...)
@@ -232,7 +246,12 @@ func (g *GPUParticleSystem) AddRampGradient(gradient float64, color *Color3) *IP
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, gradient)
-	args = append(args, color.JSObject())
+
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	retVal := g.p.Call("addRampGradient", args...)
 	return IParticleSystemFromJSObject(retVal, g.ctx)
@@ -246,6 +265,7 @@ func (g *GPUParticleSystem) AddSizeGradient(gradient float64, factor float64) *G
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	retVal := g.p.Call("addSizeGradient", args...)
@@ -268,6 +288,7 @@ func (g *GPUParticleSystem) AddStartSizeGradient(gradient float64, factor float6
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -288,6 +309,7 @@ func (g *GPUParticleSystem) AddVelocityGradient(gradient float64, factor float64
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	retVal := g.p.Call("addVelocityGradient", args...)
@@ -321,12 +343,17 @@ func (g *GPUParticleSystem) Animate(opts *GPUParticleSystemAnimateOpts) {
 // Clone calls the Clone method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#clone
-func (g *GPUParticleSystem) Clone(name string, newEmitter interface{}) *GPUParticleSystem {
+func (g *GPUParticleSystem) Clone(name string, newEmitter JSObject) *GPUParticleSystem {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, newEmitter)
+
+	if newEmitter == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newEmitter.JSObject())
+	}
 
 	retVal := g.p.Call("clone", args...)
 	return GPUParticleSystemFromJSObject(retVal, g.ctx)
@@ -413,15 +440,25 @@ type GPUParticleSystemParseOpts struct {
 // Parse calls the Parse method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#parse
-func (g *GPUParticleSystem) Parse(parsedParticleSystem interface{}, scene *Scene, rootUrl string, opts *GPUParticleSystemParseOpts) *GPUParticleSystem {
+func (g *GPUParticleSystem) Parse(parsedParticleSystem JSObject, scene *Scene, rootUrl string, opts *GPUParticleSystemParseOpts) *GPUParticleSystem {
 	if opts == nil {
 		opts = &GPUParticleSystemParseOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, parsedParticleSystem)
-	args = append(args, scene.JSObject())
+	if parsedParticleSystem == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedParticleSystem.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	if opts.DoNotStart == nil {
@@ -622,7 +659,7 @@ func (g *GPUParticleSystem) Reset() {
 // Serialize calls the Serialize method on the GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#serialize
-func (g *GPUParticleSystem) Serialize() interface{} {
+func (g *GPUParticleSystem) Serialize() js.Value {
 
 	retVal := g.p.Call("serialize")
 	return retVal

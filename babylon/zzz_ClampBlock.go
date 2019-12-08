@@ -61,7 +61,7 @@ func (c *ClampBlock) GetClassName() string {
 // Serialize calls the Serialize method on the ClampBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock#serialize
-func (c *ClampBlock) Serialize() interface{} {
+func (c *ClampBlock) Serialize() js.Value {
 
 	retVal := c.p.Call("serialize")
 	return retVal
@@ -70,12 +70,22 @@ func (c *ClampBlock) Serialize() interface{} {
 // _deserialize calls the _deserialize method on the ClampBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock#_deserialize
-func (c *ClampBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (c *ClampBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	c.p.Call("_deserialize", args...)

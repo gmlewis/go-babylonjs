@@ -57,7 +57,11 @@ func (l *LensFlareSystemSceneComponent) AddFromContainer(container *AbstractScen
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	l.p.Call("addFromContainer", args...)
 }
@@ -101,7 +105,11 @@ func (l *LensFlareSystemSceneComponent) RemoveFromContainer(container *AbstractS
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	if opts.Dispose == nil {
 		args = append(args, js.Undefined())
@@ -115,11 +123,15 @@ func (l *LensFlareSystemSceneComponent) RemoveFromContainer(container *AbstractS
 // Serialize calls the Serialize method on the LensFlareSystemSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#serialize
-func (l *LensFlareSystemSceneComponent) Serialize(serializationObject interface{}) {
+func (l *LensFlareSystemSceneComponent) Serialize(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	l.p.Call("serialize", args...)
 }

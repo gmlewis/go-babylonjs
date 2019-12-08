@@ -44,8 +44,11 @@ func (p *PanoramaToCubeMapTools) ConvertPanoramaToCubemap(float32Array js.Value,
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, float32Array)
+
 	args = append(args, inputWidth)
+
 	args = append(args, inputHeight)
+
 	args = append(args, size)
 
 	retVal := p.p.Call("ConvertPanoramaToCubemap", args...)

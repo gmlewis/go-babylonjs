@@ -62,12 +62,26 @@ func (m *Matrix2D) ComposeToRef(tx float64, ty float64, angle float64, scaleX fl
 	args := make([]interface{}, 0, 7+0)
 
 	args = append(args, tx)
+
 	args = append(args, ty)
+
 	args = append(args, angle)
+
 	args = append(args, scaleX)
+
 	args = append(args, scaleY)
-	args = append(args, parentMatrix.JSObject())
-	args = append(args, result.JSObject())
+
+	if parentMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parentMatrix.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("ComposeToRef", args...)
 }
@@ -89,10 +103,15 @@ func (m *Matrix2D) FromValues(m00 float64, m01 float64, m10 float64, m11 float64
 	args := make([]interface{}, 0, 6+0)
 
 	args = append(args, m00)
+
 	args = append(args, m01)
+
 	args = append(args, m10)
+
 	args = append(args, m11)
+
 	args = append(args, m20)
+
 	args = append(args, m21)
 
 	retVal := m.p.Call("fromValues", args...)
@@ -115,7 +134,11 @@ func (m *Matrix2D) InvertToRef(result *Matrix2D) *Matrix2D {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := m.p.Call("invertToRef", args...)
 	return Matrix2DFromJSObject(retVal, m.ctx)
@@ -128,8 +151,17 @@ func (m *Matrix2D) MultiplyToRef(other *Matrix2D, result *Matrix2D) *Matrix2D {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, other.JSObject())
-	args = append(args, result.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := m.p.Call("multiplyToRef", args...)
 	return Matrix2DFromJSObject(retVal, m.ctx)
@@ -143,7 +175,12 @@ func (m *Matrix2D) RotationToRef(angle float64, result *Matrix2D) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, angle)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("RotationToRef", args...)
 }
@@ -156,8 +193,14 @@ func (m *Matrix2D) ScalingToRef(x float64, y float64, result *Matrix2D) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("ScalingToRef", args...)
 }
@@ -170,8 +213,14 @@ func (m *Matrix2D) TransformCoordinates(x float64, y float64, result *Vector2) *
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := m.p.Call("transformCoordinates", args...)
 	return Matrix2DFromJSObject(retVal, m.ctx)
@@ -185,8 +234,14 @@ func (m *Matrix2D) TranslationToRef(x float64, y float64, result *Matrix2D) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("TranslationToRef", args...)
 }

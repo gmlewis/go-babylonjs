@@ -56,7 +56,11 @@ func (r *ReflectionTextureBlock) AutoConfigure(material *NodeMaterial) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, material.JSObject())
+	if material == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, material.JSObject())
+	}
 
 	r.p.Call("autoConfigure", args...)
 }
@@ -76,8 +80,17 @@ func (r *ReflectionTextureBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, effect.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -113,8 +126,18 @@ func (r *ReflectionTextureBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
 
 	r.p.Call("prepareDefines", args...)
@@ -123,7 +146,7 @@ func (r *ReflectionTextureBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial
 // Serialize calls the Serialize method on the ReflectionTextureBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#serialize
-func (r *ReflectionTextureBlock) Serialize() interface{} {
+func (r *ReflectionTextureBlock) Serialize() js.Value {
 
 	retVal := r.p.Call("serialize")
 	return retVal
@@ -132,12 +155,22 @@ func (r *ReflectionTextureBlock) Serialize() interface{} {
 // _deserialize calls the _deserialize method on the ReflectionTextureBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#_deserialize
-func (r *ReflectionTextureBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (r *ReflectionTextureBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	r.p.Call("_deserialize", args...)

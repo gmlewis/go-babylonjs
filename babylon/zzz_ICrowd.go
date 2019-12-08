@@ -43,9 +43,23 @@ func (i *ICrowd) AddAgent(pos *Vector3, parameters *IAgentParameters, transform 
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, pos.JSObject())
-	args = append(args, parameters.JSObject())
-	args = append(args, transform.JSObject())
+	if pos == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pos.JSObject())
+	}
+
+	if parameters == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parameters.JSObject())
+	}
+
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
 
 	retVal := i.p.Call("addAgent", args...)
 	return retVal.Float()
@@ -59,7 +73,12 @@ func (i *ICrowd) AgentGoto(index float64, destination *Vector3) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, index)
-	args = append(args, destination.JSObject())
+
+	if destination == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, destination.JSObject())
+	}
 
 	i.p.Call("agentGoto", args...)
 }
@@ -139,7 +158,11 @@ func (i *ICrowd) SetDefaultQueryExtent(extent *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, extent.JSObject())
+	if extent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, extent.JSObject())
+	}
 
 	i.p.Call("setDefaultQueryExtent", args...)
 }

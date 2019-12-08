@@ -87,6 +87,7 @@ func (e *Engine) BeginOcclusionQuery(algorithmType float64, query js.Value) *Eng
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, algorithmType)
+
 	args = append(args, query)
 
 	retVal := e.p.Call("beginOcclusionQuery", args...)
@@ -112,7 +113,11 @@ func (e *Engine) BindMultiviewFramebuffer(multiviewTexture *InternalTexture) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, multiviewTexture.JSObject())
+	if multiviewTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, multiviewTexture.JSObject())
+	}
 
 	e.p.Call("bindMultiviewFramebuffer", args...)
 }
@@ -136,7 +141,11 @@ func (e *Engine) BindTransformFeedbackBuffer(value *DataBuffer) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	e.p.Call("bindTransformFeedbackBuffer", args...)
 }
@@ -167,8 +176,11 @@ func (e *Engine) CreateEffectForParticles(fragmentName string, uniformsNames []s
 	args := make([]interface{}, 0, 4+3)
 
 	args = append(args, fragmentName)
+
 	args = append(args, uniformsNames)
+
 	args = append(args, samplers)
+
 	args = append(args, defines)
 
 	if opts.Fallbacks == nil {
@@ -212,6 +224,7 @@ func (e *Engine) CreateMultiviewRenderTargetTexture(width float64, height float6
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
 
 	retVal := e.p.Call("createMultiviewRenderTargetTexture", args...)
@@ -235,12 +248,19 @@ func (e *Engine) CreateRawCubeTexture(data js.Value, size float64, format float6
 	args := make([]interface{}, 0, 8+0)
 
 	args = append(args, data)
+
 	args = append(args, size)
+
 	args = append(args, format)
+
 	args = append(args, jsType)
+
 	args = append(args, generateMipMaps)
+
 	args = append(args, invertY)
+
 	args = append(args, samplingMode)
+
 	args = append(args, compression)
 
 	retVal := e.p.Call("createRawCubeTexture", args...)
@@ -255,14 +275,27 @@ func (e *Engine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size floa
 	args := make([]interface{}, 0, 10+0)
 
 	args = append(args, url)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, size)
+
 	args = append(args, format)
+
 	args = append(args, jsType)
+
 	args = append(args, noMipmap)
+
 	args = append(args, js.FuncOf(callback))
+
 	args = append(args, js.FuncOf(mipmapGenerator))
+
 	args = append(args, js.FuncOf(onLoad))
+
 	args = append(args, js.FuncOf(onError))
 
 	retVal := e.p.Call("createRawCubeTextureFromUrl", args...)
@@ -277,13 +310,21 @@ func (e *Engine) CreateRawTexture(data js.Value, width float64, height float64, 
 	args := make([]interface{}, 0, 9+0)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, format)
+
 	args = append(args, generateMipMaps)
+
 	args = append(args, invertY)
+
 	args = append(args, samplingMode)
+
 	args = append(args, compression)
+
 	args = append(args, jsType)
 
 	retVal := e.p.Call("createRawTexture", args...)
@@ -298,14 +339,23 @@ func (e *Engine) CreateRawTexture2DArray(data js.Value, width float64, height fl
 	args := make([]interface{}, 0, 10+0)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, depth)
+
 	args = append(args, format)
+
 	args = append(args, generateMipMaps)
+
 	args = append(args, invertY)
+
 	args = append(args, samplingMode)
+
 	args = append(args, compression)
+
 	args = append(args, textureType)
 
 	retVal := e.p.Call("createRawTexture2DArray", args...)
@@ -320,14 +370,23 @@ func (e *Engine) CreateRawTexture3D(data js.Value, width float64, height float64
 	args := make([]interface{}, 0, 10+0)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, depth)
+
 	args = append(args, format)
+
 	args = append(args, generateMipMaps)
+
 	args = append(args, invertY)
+
 	args = append(args, samplingMode)
+
 	args = append(args, compression)
+
 	args = append(args, textureType)
 
 	retVal := e.p.Call("createRawTexture3D", args...)
@@ -350,9 +409,16 @@ func (e *Engine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCo
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, pipelineContext.JSObject())
+	if pipelineContext == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pipelineContext.JSObject())
+	}
+
 	args = append(args, vertexCode)
+
 	args = append(args, fragmentCode)
+
 	args = append(args, defines)
 
 	args = append(args, opts.Context)
@@ -465,8 +531,11 @@ func (e *Engine) EnableScissor(x float64, y float64, width float64, height float
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, width)
+
 	args = append(args, height)
 
 	e.p.Call("enableScissor", args...)
@@ -569,7 +638,11 @@ func (e *Engine) GenerateMipMapsForCubemap(texture *InternalTexture) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	e.p.Call("generateMipMapsForCubemap", args...)
 }
@@ -819,7 +892,7 @@ func (e *Engine) GetTimeStep() float64 {
 // GetVRDevice calls the GetVRDevice method on the Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine#getvrdevice
-func (e *Engine) GetVRDevice() interface{} {
+func (e *Engine) GetVRDevice() js.Value {
 
 	retVal := e.p.Call("getVRDevice")
 	return retVal
@@ -947,8 +1020,11 @@ func (e *Engine) ReadPixels(x float64, y float64, width float64, height float64)
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, width)
+
 	args = append(args, height)
 
 	retVal := e.p.Call("readPixels", args...)
@@ -1006,9 +1082,13 @@ func (e *Engine) ScissorClear(x float64, y float64, width float64, height float6
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, clearColor)
 
 	e.p.Call("scissorClear", args...)
@@ -1022,8 +1102,11 @@ func (e *Engine) SetAlphaConstants(r float64, g float64, b float64, a float64) {
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, r)
+
 	args = append(args, g)
+
 	args = append(args, b)
+
 	args = append(args, a)
 
 	e.p.Call("setAlphaConstants", args...)
@@ -1143,8 +1226,14 @@ func (e *Engine) SetDepthStencilTexture(channel float64, uniform js.Value, textu
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, channel)
+
 	args = append(args, uniform)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	e.p.Call("setDepthStencilTexture", args...)
 }
@@ -1169,8 +1258,11 @@ func (e *Engine) SetDirectViewport(x float64, y float64, width float64, height f
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, width)
+
 	args = append(args, height)
 
 	retVal := e.p.Call("setDirectViewport", args...)
@@ -1196,7 +1288,11 @@ func (e *Engine) SetFrameBufferDepthStencilTexture(renderTarget *RenderTargetTex
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, renderTarget.JSObject())
+	if renderTarget == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, renderTarget.JSObject())
+	}
 
 	e.p.Call("setFrameBufferDepthStencilTexture", args...)
 }
@@ -1221,6 +1317,7 @@ func (e *Engine) SetSize(width float64, height float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
 
 	e.p.Call("setSize", args...)
@@ -1381,7 +1478,12 @@ func (e *Engine) SetTextureFromPostProcess(channel float64, postProcess *PostPro
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, channel)
-	args = append(args, postProcess.JSObject())
+
+	if postProcess == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, postProcess.JSObject())
+	}
 
 	e.p.Call("setTextureFromPostProcess", args...)
 }
@@ -1394,7 +1496,12 @@ func (e *Engine) SetTextureFromPostProcessOutput(channel float64, postProcess *P
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, channel)
-	args = append(args, postProcess.JSObject())
+
+	if postProcess == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, postProcess.JSObject())
+	}
 
 	e.p.Call("setTextureFromPostProcessOutput", args...)
 }
@@ -1407,6 +1514,7 @@ func (e *Engine) SetTranformFeedbackVaryings(program js.Value, value []string) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, program)
+
 	args = append(args, value)
 
 	e.p.Call("setTranformFeedbackVaryings", args...)
@@ -1473,7 +1581,12 @@ func (e *Engine) UpdateDynamicIndexBuffer(indexBuffer *DataBuffer, indices js.Va
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, indexBuffer.JSObject())
+	if indexBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, indexBuffer.JSObject())
+	}
+
 	args = append(args, indices)
 
 	if opts.Offset == nil {
@@ -1501,7 +1614,12 @@ func (e *Engine) UpdateDynamicVertexBuffer(vertexBuffer *DataBuffer, data []floa
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, vertexBuffer.JSObject())
+	if vertexBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vertexBuffer.JSObject())
+	}
+
 	args = append(args, data)
 
 	if opts.ByteOffset == nil {
@@ -1525,10 +1643,18 @@ func (e *Engine) UpdateRawCubeTexture(texture *InternalTexture, data js.Value, f
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, data)
+
 	args = append(args, format)
+
 	args = append(args, jsType)
+
 	args = append(args, invertY)
 
 	e.p.Call("updateRawCubeTexture", args...)
@@ -1541,9 +1667,16 @@ func (e *Engine) UpdateRawTexture(texture *InternalTexture, data js.Value, forma
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, data)
+
 	args = append(args, format)
+
 	args = append(args, invertY)
 
 	e.p.Call("updateRawTexture", args...)
@@ -1556,9 +1689,16 @@ func (e *Engine) UpdateRawTexture2DArray(texture *InternalTexture, data js.Value
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, data)
+
 	args = append(args, format)
+
 	args = append(args, invertY)
 
 	e.p.Call("updateRawTexture2DArray", args...)
@@ -1571,9 +1711,16 @@ func (e *Engine) UpdateRawTexture3D(texture *InternalTexture, data js.Value, for
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, data)
+
 	args = append(args, format)
+
 	args = append(args, invertY)
 
 	e.p.Call("updateRawTexture3D", args...)
@@ -1586,7 +1733,12 @@ func (e *Engine) UpdateRenderTargetTextureSampleCount(texture *InternalTexture, 
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, samples)
 
 	retVal := e.p.Call("updateRenderTargetTextureSampleCount", args...)
@@ -1600,7 +1752,12 @@ func (e *Engine) UpdateTextureComparisonFunction(texture *InternalTexture, compa
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, comparisonFunction)
 
 	e.p.Call("updateTextureComparisonFunction", args...)
@@ -1653,7 +1810,11 @@ func (e *Engine) _deletePipelineContext(pipelineContext *IPipelineContext) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, pipelineContext.JSObject())
+	if pipelineContext == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pipelineContext.JSObject())
+	}
 
 	e.p.Call("_deletePipelineContext", args...)
 }
@@ -1665,7 +1826,11 @@ func (e *Engine) _releaseTexture(texture *InternalTexture) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	e.p.Call("_releaseTexture", args...)
 }

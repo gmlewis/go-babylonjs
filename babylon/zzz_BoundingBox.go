@@ -80,8 +80,17 @@ func (b *BoundingBox) Intersects(box0 *BoundingBox, box1 *BoundingBox) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, box0.JSObject())
-	args = append(args, box1.JSObject())
+	if box0 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, box0.JSObject())
+	}
+
+	if box1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, box1.JSObject())
+	}
 
 	retVal := b.p.Call("Intersects", args...)
 	return retVal.Bool()
@@ -94,8 +103,17 @@ func (b *BoundingBox) IntersectsMinMax(min *Vector3, max *Vector3) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, min.JSObject())
-	args = append(args, max.JSObject())
+	if min == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, min.JSObject())
+	}
+
+	if max == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, max.JSObject())
+	}
 
 	retVal := b.p.Call("intersectsMinMax", args...)
 	return retVal.Bool()
@@ -108,7 +126,11 @@ func (b *BoundingBox) IntersectsPoint(point *Vector3) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, point.JSObject())
+	if point == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point.JSObject())
+	}
 
 	retVal := b.p.Call("intersectsPoint", args...)
 	return retVal.Bool()
@@ -121,9 +143,24 @@ func (b *BoundingBox) IntersectsSphere(minPoint *Vector3, maxPoint *Vector3, sph
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, minPoint.JSObject())
-	args = append(args, maxPoint.JSObject())
-	args = append(args, sphereCenter.JSObject())
+	if minPoint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, minPoint.JSObject())
+	}
+
+	if maxPoint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, maxPoint.JSObject())
+	}
+
+	if sphereCenter == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sphereCenter.JSObject())
+	}
+
 	args = append(args, sphereRadius)
 
 	retVal := b.p.Call("IntersectsSphere", args...)
@@ -138,6 +175,7 @@ func (b *BoundingBox) IsCompletelyInFrustum(boundingVectors []*Vector3, frustumP
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, Vector3ArrayToJSArray(boundingVectors))
+
 	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := b.p.Call("IsCompletelyInFrustum", args...)
@@ -152,6 +190,7 @@ func (b *BoundingBox) IsInFrustum(boundingVectors []*Vector3, frustumPlanes []*P
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, Vector3ArrayToJSArray(boundingVectors))
+
 	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	retVal := b.p.Call("IsInFrustum", args...)
@@ -173,8 +212,17 @@ func (b *BoundingBox) ReConstruct(min *Vector3, max *Vector3, opts *BoundingBoxR
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, min.JSObject())
-	args = append(args, max.JSObject())
+	if min == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, min.JSObject())
+	}
+
+	if max == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, max.JSObject())
+	}
 
 	if opts.WorldMatrix == nil {
 		args = append(args, js.Undefined())

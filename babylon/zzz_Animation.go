@@ -79,7 +79,11 @@ func (a *Animation) AddEvent(event *AnimationEvent) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, event.JSObject())
+	if event == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, event.JSObject())
+	}
 
 	a.p.Call("addEvent", args...)
 }
@@ -87,12 +91,21 @@ func (a *Animation) AddEvent(event *AnimationEvent) {
 // AppendSerializedAnimations calls the AppendSerializedAnimations method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#appendserializedanimations
-func (a *Animation) AppendSerializedAnimations(source *IAnimatable, destination interface{}) {
+func (a *Animation) AppendSerializedAnimations(source *IAnimatable, destination JSObject) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, source.JSObject())
-	args = append(args, destination)
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if destination == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, destination.JSObject())
+	}
 
 	a.p.Call("AppendSerializedAnimations", args...)
 }
@@ -113,8 +126,18 @@ func (a *Animation) Color3InterpolateFunction(startValue *Color3, endValue *Colo
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("color3InterpolateFunction", args...)
@@ -128,8 +151,18 @@ func (a *Animation) Color4InterpolateFunction(startValue *Color4, endValue *Colo
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("color4InterpolateFunction", args...)
@@ -146,7 +179,7 @@ type AnimationCreateAndStartAnimationOpts struct {
 // CreateAndStartAnimation calls the CreateAndStartAnimation method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#createandstartanimation
-func (a *Animation) CreateAndStartAnimation(name string, node *Node, targetProperty string, framePerSecond float64, totalFrame float64, from interface{}, to interface{}, opts *AnimationCreateAndStartAnimationOpts) *Animatable {
+func (a *Animation) CreateAndStartAnimation(name string, node *Node, targetProperty string, framePerSecond float64, totalFrame float64, from JSObject, to JSObject, opts *AnimationCreateAndStartAnimationOpts) *Animatable {
 	if opts == nil {
 		opts = &AnimationCreateAndStartAnimationOpts{}
 	}
@@ -154,12 +187,30 @@ func (a *Animation) CreateAndStartAnimation(name string, node *Node, targetPrope
 	args := make([]interface{}, 0, 7+3)
 
 	args = append(args, name)
-	args = append(args, node.JSObject())
+
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
+
 	args = append(args, targetProperty)
+
 	args = append(args, framePerSecond)
+
 	args = append(args, totalFrame)
-	args = append(args, from)
-	args = append(args, to)
+
+	if from == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, from.JSObject())
+	}
+
+	if to == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, to.JSObject())
+	}
 
 	if opts.LoopMode == nil {
 		args = append(args, js.Undefined())
@@ -191,7 +242,7 @@ type AnimationCreateAndStartHierarchyAnimationOpts struct {
 // CreateAndStartHierarchyAnimation calls the CreateAndStartHierarchyAnimation method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#createandstarthierarchyanimation
-func (a *Animation) CreateAndStartHierarchyAnimation(name string, node *Node, directDescendantsOnly bool, targetProperty string, framePerSecond float64, totalFrame float64, from interface{}, to interface{}, opts *AnimationCreateAndStartHierarchyAnimationOpts) []*Animatable {
+func (a *Animation) CreateAndStartHierarchyAnimation(name string, node *Node, directDescendantsOnly bool, targetProperty string, framePerSecond float64, totalFrame float64, from JSObject, to JSObject, opts *AnimationCreateAndStartHierarchyAnimationOpts) []*Animatable {
 	if opts == nil {
 		opts = &AnimationCreateAndStartHierarchyAnimationOpts{}
 	}
@@ -199,13 +250,32 @@ func (a *Animation) CreateAndStartHierarchyAnimation(name string, node *Node, di
 	args := make([]interface{}, 0, 8+3)
 
 	args = append(args, name)
-	args = append(args, node.JSObject())
+
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
+
 	args = append(args, directDescendantsOnly)
+
 	args = append(args, targetProperty)
+
 	args = append(args, framePerSecond)
+
 	args = append(args, totalFrame)
-	args = append(args, from)
-	args = append(args, to)
+
+	if from == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, from.JSObject())
+	}
+
+	if to == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, to.JSObject())
+	}
 
 	if opts.LoopMode == nil {
 		args = append(args, js.Undefined())
@@ -239,9 +309,16 @@ func (a *Animation) CreateAnimation(property string, animationType float64, fram
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, property)
+
 	args = append(args, animationType)
+
 	args = append(args, framePerSecond)
-	args = append(args, easingFunction.JSObject())
+
+	if easingFunction == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, easingFunction.JSObject())
+	}
 
 	retVal := a.p.Call("CreateAnimation", args...)
 	return AnimationFromJSObject(retVal, a.ctx)
@@ -257,7 +334,7 @@ type AnimationCreateMergeAndStartAnimationOpts struct {
 // CreateMergeAndStartAnimation calls the CreateMergeAndStartAnimation method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#createmergeandstartanimation
-func (a *Animation) CreateMergeAndStartAnimation(name string, node *Node, targetProperty string, framePerSecond float64, totalFrame float64, from interface{}, to interface{}, opts *AnimationCreateMergeAndStartAnimationOpts) *Animatable {
+func (a *Animation) CreateMergeAndStartAnimation(name string, node *Node, targetProperty string, framePerSecond float64, totalFrame float64, from JSObject, to JSObject, opts *AnimationCreateMergeAndStartAnimationOpts) *Animatable {
 	if opts == nil {
 		opts = &AnimationCreateMergeAndStartAnimationOpts{}
 	}
@@ -265,12 +342,30 @@ func (a *Animation) CreateMergeAndStartAnimation(name string, node *Node, target
 	args := make([]interface{}, 0, 7+3)
 
 	args = append(args, name)
-	args = append(args, node.JSObject())
+
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
+
 	args = append(args, targetProperty)
+
 	args = append(args, framePerSecond)
+
 	args = append(args, totalFrame)
-	args = append(args, from)
-	args = append(args, to)
+
+	if from == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, from.JSObject())
+	}
+
+	if to == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, to.JSObject())
+	}
 
 	if opts.LoopMode == nil {
 		args = append(args, js.Undefined())
@@ -300,7 +395,9 @@ func (a *Animation) CreateRange(name string, from float64, to float64) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, from)
+
 	args = append(args, to)
 
 	a.p.Call("createRange", args...)
@@ -340,7 +437,9 @@ func (a *Animation) FloatInterpolateFunction(startValue float64, endValue float6
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, startValue)
+
 	args = append(args, endValue)
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("floatInterpolateFunction", args...)
@@ -355,9 +454,13 @@ func (a *Animation) FloatInterpolateFunctionWithTangents(startValue float64, out
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, startValue)
+
 	args = append(args, outTangent)
+
 	args = append(args, endValue)
+
 	args = append(args, inTangent)
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("floatInterpolateFunctionWithTangents", args...)
@@ -436,8 +539,18 @@ func (a *Animation) MatrixInterpolateFunction(startValue *Matrix, endValue *Matr
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	if opts.Result == nil {
@@ -453,11 +566,15 @@ func (a *Animation) MatrixInterpolateFunction(startValue *Matrix, endValue *Matr
 // Parse calls the Parse method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#parse
-func (a *Animation) Parse(parsedAnimation interface{}) *Animation {
+func (a *Animation) Parse(parsedAnimation JSObject) *Animation {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parsedAnimation)
+	if parsedAnimation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedAnimation.JSObject())
+	}
 
 	retVal := a.p.Call("Parse", args...)
 	return AnimationFromJSObject(retVal, a.ctx)
@@ -470,8 +587,18 @@ func (a *Animation) QuaternionInterpolateFunction(startValue *Quaternion, endVal
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("quaternionInterpolateFunction", args...)
@@ -485,10 +612,30 @@ func (a *Animation) QuaternionInterpolateFunctionWithTangents(startValue *Quater
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, outTangent.JSObject())
-	args = append(args, endValue.JSObject())
-	args = append(args, inTangent.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if outTangent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, outTangent.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
+	if inTangent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, inTangent.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("quaternionInterpolateFunctionWithTangents", args...)
@@ -510,7 +657,7 @@ func (a *Animation) RemoveEvents(frame float64) {
 // Serialize calls the Serialize method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#serialize
-func (a *Animation) Serialize() interface{} {
+func (a *Animation) Serialize() js.Value {
 
 	retVal := a.p.Call("serialize")
 	return retVal
@@ -523,7 +670,11 @@ func (a *Animation) SetEasingFunction(easingFunction *EasingFunction) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, easingFunction.JSObject())
+	if easingFunction == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, easingFunction.JSObject())
+	}
 
 	a.p.Call("setEasingFunction", args...)
 }
@@ -547,8 +698,18 @@ func (a *Animation) SizeInterpolateFunction(startValue *Size, endValue *Size, gr
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("sizeInterpolateFunction", args...)
@@ -588,7 +749,7 @@ type AnimationTransitionToOpts struct {
 // TransitionTo calls the TransitionTo method on the Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation#transitionto
-func (a *Animation) TransitionTo(property string, targetValue interface{}, host interface{}, scene *Scene, frameRate float64, transition *Animation, duration float64, opts *AnimationTransitionToOpts) *Animatable {
+func (a *Animation) TransitionTo(property string, targetValue JSObject, host JSObject, scene *Scene, frameRate float64, transition *Animation, duration float64, opts *AnimationTransitionToOpts) *Animatable {
 	if opts == nil {
 		opts = &AnimationTransitionToOpts{}
 	}
@@ -596,11 +757,33 @@ func (a *Animation) TransitionTo(property string, targetValue interface{}, host 
 	args := make([]interface{}, 0, 7+1)
 
 	args = append(args, property)
-	args = append(args, targetValue)
-	args = append(args, host)
-	args = append(args, scene.JSObject())
+
+	if targetValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, targetValue.JSObject())
+	}
+
+	if host == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, host.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, frameRate)
-	args = append(args, transition.JSObject())
+
+	if transition == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transition.JSObject())
+	}
+
 	args = append(args, duration)
 
 	if opts.OnAnimationEnd == nil {
@@ -620,8 +803,18 @@ func (a *Animation) Vector2InterpolateFunction(startValue *Vector2, endValue *Ve
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("vector2InterpolateFunction", args...)
@@ -635,10 +828,30 @@ func (a *Animation) Vector2InterpolateFunctionWithTangents(startValue *Vector2, 
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, outTangent.JSObject())
-	args = append(args, endValue.JSObject())
-	args = append(args, inTangent.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if outTangent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, outTangent.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
+	if inTangent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, inTangent.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("vector2InterpolateFunctionWithTangents", args...)
@@ -652,8 +865,18 @@ func (a *Animation) Vector3InterpolateFunction(startValue *Vector3, endValue *Ve
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("vector3InterpolateFunction", args...)
@@ -667,10 +890,30 @@ func (a *Animation) Vector3InterpolateFunctionWithTangents(startValue *Vector3, 
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, outTangent.JSObject())
-	args = append(args, endValue.JSObject())
-	args = append(args, inTangent.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if outTangent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, outTangent.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
+	if inTangent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, inTangent.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := a.p.Call("vector3InterpolateFunctionWithTangents", args...)

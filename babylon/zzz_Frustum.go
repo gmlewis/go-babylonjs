@@ -43,8 +43,17 @@ func (f *Frustum) GetBottomPlaneToRef(transform *Matrix, frustumPlane *Plane) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, transform.JSObject())
-	args = append(args, frustumPlane.JSObject())
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
+
+	if frustumPlane == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, frustumPlane.JSObject())
+	}
 
 	f.p.Call("GetBottomPlaneToRef", args...)
 }
@@ -56,8 +65,17 @@ func (f *Frustum) GetFarPlaneToRef(transform *Matrix, frustumPlane *Plane) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, transform.JSObject())
-	args = append(args, frustumPlane.JSObject())
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
+
+	if frustumPlane == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, frustumPlane.JSObject())
+	}
 
 	f.p.Call("GetFarPlaneToRef", args...)
 }
@@ -69,8 +87,17 @@ func (f *Frustum) GetLeftPlaneToRef(transform *Matrix, frustumPlane *Plane) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, transform.JSObject())
-	args = append(args, frustumPlane.JSObject())
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
+
+	if frustumPlane == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, frustumPlane.JSObject())
+	}
 
 	f.p.Call("GetLeftPlaneToRef", args...)
 }
@@ -82,8 +109,17 @@ func (f *Frustum) GetNearPlaneToRef(transform *Matrix, frustumPlane *Plane) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, transform.JSObject())
-	args = append(args, frustumPlane.JSObject())
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
+
+	if frustumPlane == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, frustumPlane.JSObject())
+	}
 
 	f.p.Call("GetNearPlaneToRef", args...)
 }
@@ -95,7 +131,11 @@ func (f *Frustum) GetPlanes(transform *Matrix) []*Plane {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, transform.JSObject())
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
 
 	retVal := f.p.Call("GetPlanes", args...)
 	result := []*Plane{}
@@ -112,7 +152,12 @@ func (f *Frustum) GetPlanesToRef(transform *Matrix, frustumPlanes []*Plane) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, transform.JSObject())
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
+
 	args = append(args, PlaneArrayToJSArray(frustumPlanes))
 
 	f.p.Call("GetPlanesToRef", args...)
@@ -125,8 +170,17 @@ func (f *Frustum) GetRightPlaneToRef(transform *Matrix, frustumPlane *Plane) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, transform.JSObject())
-	args = append(args, frustumPlane.JSObject())
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
+
+	if frustumPlane == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, frustumPlane.JSObject())
+	}
 
 	f.p.Call("GetRightPlaneToRef", args...)
 }
@@ -138,8 +192,17 @@ func (f *Frustum) GetTopPlaneToRef(transform *Matrix, frustumPlane *Plane) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, transform.JSObject())
-	args = append(args, frustumPlane.JSObject())
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
+
+	if frustumPlane == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, frustumPlane.JSObject())
+	}
 
 	f.p.Call("GetTopPlaneToRef", args...)
 }

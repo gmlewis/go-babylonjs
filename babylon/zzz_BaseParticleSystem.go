@@ -60,10 +60,29 @@ func (b *BaseParticleSystem) CreateBoxEmitter(direction1 *Vector3, direction2 *V
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, direction1.JSObject())
-	args = append(args, direction2.JSObject())
-	args = append(args, minEmitBox.JSObject())
-	args = append(args, maxEmitBox.JSObject())
+	if direction1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction1.JSObject())
+	}
+
+	if direction2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction2.JSObject())
+	}
+
+	if minEmitBox == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, minEmitBox.JSObject())
+	}
+
+	if maxEmitBox == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, maxEmitBox.JSObject())
+	}
 
 	retVal := b.p.Call("createBoxEmitter", args...)
 	return BoxParticleEmitterFromJSObject(retVal, b.ctx)
@@ -267,8 +286,17 @@ func (b *BaseParticleSystem) CreatePointEmitter(direction1 *Vector3, direction2 
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, direction1.JSObject())
-	args = append(args, direction2.JSObject())
+	if direction1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction1.JSObject())
+	}
+
+	if direction2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, direction2.JSObject())
+	}
 
 	retVal := b.p.Call("createPointEmitter", args...)
 	return PointParticleEmitterFromJSObject(retVal, b.ctx)
@@ -704,7 +732,7 @@ func (b *BaseParticleSystem) SetColorDead(colorDead *Color4) *BaseParticleSystem
 // CustomShader returns the CustomShader property of class BaseParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseparticlesystem#customshader
-func (b *BaseParticleSystem) CustomShader() interface{} {
+func (b *BaseParticleSystem) CustomShader() js.Value {
 	retVal := b.p.Get("customShader")
 	return retVal
 }
@@ -712,8 +740,8 @@ func (b *BaseParticleSystem) CustomShader() interface{} {
 // SetCustomShader sets the CustomShader property of class BaseParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseparticlesystem#customshader
-func (b *BaseParticleSystem) SetCustomShader(customShader interface{}) *BaseParticleSystem {
-	b.p.Set("customShader", customShader)
+func (b *BaseParticleSystem) SetCustomShader(customShader JSObject) *BaseParticleSystem {
+	b.p.Set("customShader", customShader.JSObject())
 	return b
 }
 

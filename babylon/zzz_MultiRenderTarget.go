@@ -47,7 +47,7 @@ type NewMultiRenderTargetOpts struct {
 // NewMultiRenderTarget returns a new MultiRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget
-func (ba *Babylon) NewMultiRenderTarget(name string, size interface{}, count float64, scene *Scene, opts *NewMultiRenderTargetOpts) *MultiRenderTarget {
+func (ba *Babylon) NewMultiRenderTarget(name string, size JSObject, count float64, scene *Scene, opts *NewMultiRenderTargetOpts) *MultiRenderTarget {
 	if opts == nil {
 		opts = &NewMultiRenderTargetOpts{}
 	}
@@ -55,7 +55,7 @@ func (ba *Babylon) NewMultiRenderTarget(name string, size interface{}, count flo
 	args := make([]interface{}, 0, 4+1)
 
 	args = append(args, name)
-	args = append(args, size)
+	args = append(args, size.JSObject())
 	args = append(args, count)
 	args = append(args, scene.JSObject())
 
@@ -88,11 +88,15 @@ func (m *MultiRenderTarget) ReleaseInternalTextures() {
 // Resize calls the Resize method on the MultiRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget#resize
-func (m *MultiRenderTarget) Resize(size interface{}) {
+func (m *MultiRenderTarget) Resize(size JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, size)
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
 
 	m.p.Call("resize", args...)
 }

@@ -213,7 +213,7 @@ func (b *BaseTexture) Scale(ratio float64) {
 // Serialize calls the Serialize method on the BaseTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#serialize
-func (b *BaseTexture) Serialize() interface{} {
+func (b *BaseTexture) Serialize() js.Value {
 
 	retVal := b.p.Call("serialize")
 	return retVal
@@ -248,6 +248,7 @@ func (b *BaseTexture) WhenAllReady(textures []*BaseTexture, callback JSFunc) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, BaseTextureArrayToJSArray(textures))
+
 	args = append(args, js.FuncOf(callback))
 
 	b.p.Call("WhenAllReady", args...)
@@ -612,7 +613,7 @@ func (b *BaseTexture) SetLodGenerationScale(lodGenerationScale float64) *BaseTex
 // Metadata returns the Metadata property of class BaseTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#metadata
-func (b *BaseTexture) Metadata() interface{} {
+func (b *BaseTexture) Metadata() js.Value {
 	retVal := b.p.Get("metadata")
 	return retVal
 }
@@ -620,8 +621,8 @@ func (b *BaseTexture) Metadata() interface{} {
 // SetMetadata sets the Metadata property of class BaseTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#metadata
-func (b *BaseTexture) SetMetadata(metadata interface{}) *BaseTexture {
-	b.p.Set("metadata", metadata)
+func (b *BaseTexture) SetMetadata(metadata JSObject) *BaseTexture {
+	b.p.Set("metadata", metadata.JSObject())
 	return b
 }
 
@@ -692,7 +693,7 @@ func (b *BaseTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *B
 // ReservedDataStore returns the ReservedDataStore property of class BaseTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#reserveddatastore
-func (b *BaseTexture) ReservedDataStore() interface{} {
+func (b *BaseTexture) ReservedDataStore() js.Value {
 	retVal := b.p.Get("reservedDataStore")
 	return retVal
 }
@@ -700,8 +701,8 @@ func (b *BaseTexture) ReservedDataStore() interface{} {
 // SetReservedDataStore sets the ReservedDataStore property of class BaseTexture.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture#reserveddatastore
-func (b *BaseTexture) SetReservedDataStore(reservedDataStore interface{}) *BaseTexture {
-	b.p.Set("reservedDataStore", reservedDataStore)
+func (b *BaseTexture) SetReservedDataStore(reservedDataStore JSObject) *BaseTexture {
+	b.p.Set("reservedDataStore", reservedDataStore.JSObject())
 	return b
 }
 

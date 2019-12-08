@@ -56,7 +56,11 @@ func (s *SimplificationQueue) AddTask(task *ISimplificationTask) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, task.JSObject())
+	if task == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, task.JSObject())
+	}
 
 	s.p.Call("addTask", args...)
 }
@@ -76,7 +80,11 @@ func (s *SimplificationQueue) RunSimplification(task *ISimplificationTask) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, task.JSObject())
+	if task == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, task.JSObject())
+	}
 
 	s.p.Call("runSimplification", args...)
 }

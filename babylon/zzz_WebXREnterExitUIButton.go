@@ -58,7 +58,11 @@ func (w *WebXREnterExitUIButton) Update(activeButton *WebXREnterExitUIButton) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, activeButton.JSObject())
+	if activeButton == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, activeButton.JSObject())
+	}
 
 	w.p.Call("update", args...)
 }

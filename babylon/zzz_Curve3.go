@@ -59,7 +59,11 @@ func (c *Curve3) Continue(curve *Curve3) *Curve3 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, curve.JSObject())
+	if curve == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, curve.JSObject())
+	}
 
 	retVal := c.p.Call("continue", args...)
 	return Curve3FromJSObject(retVal, c.ctx)
@@ -81,6 +85,7 @@ func (c *Curve3) CreateCatmullRomSpline(points []*Vector3, nbPoints float64, opt
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, Vector3ArrayToJSArray(points))
+
 	args = append(args, nbPoints)
 
 	if opts.Closed == nil {
@@ -100,10 +105,30 @@ func (c *Curve3) CreateCubicBezier(v0 *Vector3, v1 *Vector3, v2 *Vector3, v3 *Ve
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, v0.JSObject())
-	args = append(args, v1.JSObject())
-	args = append(args, v2.JSObject())
-	args = append(args, v3.JSObject())
+	if v0 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, v0.JSObject())
+	}
+
+	if v1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, v1.JSObject())
+	}
+
+	if v2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, v2.JSObject())
+	}
+
+	if v3 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, v3.JSObject())
+	}
+
 	args = append(args, nbPoints)
 
 	retVal := c.p.Call("CreateCubicBezier", args...)
@@ -117,10 +142,30 @@ func (c *Curve3) CreateHermiteSpline(p1 *Vector3, t1 *Vector3, p2 *Vector3, t2 *
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, p1.JSObject())
-	args = append(args, t1.JSObject())
-	args = append(args, p2.JSObject())
-	args = append(args, t2.JSObject())
+	if p1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, p1.JSObject())
+	}
+
+	if t1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, t1.JSObject())
+	}
+
+	if p2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, p2.JSObject())
+	}
+
+	if t2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, t2.JSObject())
+	}
+
 	args = append(args, nbPoints)
 
 	retVal := c.p.Call("CreateHermiteSpline", args...)
@@ -134,9 +179,24 @@ func (c *Curve3) CreateQuadraticBezier(v0 *Vector3, v1 *Vector3, v2 *Vector3, nb
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, v0.JSObject())
-	args = append(args, v1.JSObject())
-	args = append(args, v2.JSObject())
+	if v0 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, v0.JSObject())
+	}
+
+	if v1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, v1.JSObject())
+	}
+
+	if v2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, v2.JSObject())
+	}
+
 	args = append(args, nbPoints)
 
 	retVal := c.p.Call("CreateQuadraticBezier", args...)

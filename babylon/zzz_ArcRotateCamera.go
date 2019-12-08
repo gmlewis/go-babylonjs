@@ -90,6 +90,7 @@ func (a *ArcRotateCamera) AttachControl(element js.Value, noPreventDefault bool,
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, element)
+
 	args = append(args, noPreventDefault)
 
 	if opts.UseCtrlForPanning == nil {
@@ -114,6 +115,7 @@ func (a *ArcRotateCamera) CreateRigCamera(name string, cameraIndex float64) *Cam
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, cameraIndex)
 
 	retVal := a.p.Call("createRigCamera", args...)
@@ -198,7 +200,11 @@ func (a *ArcRotateCamera) SetPosition(position *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
 
 	a.p.Call("setPosition", args...)
 }
@@ -219,7 +225,11 @@ func (a *ArcRotateCamera) SetTarget(target *AbstractMesh, opts *ArcRotateCameraS
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	if opts.ToBoundingCenter == nil {
 		args = append(args, js.Undefined())

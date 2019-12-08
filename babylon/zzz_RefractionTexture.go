@@ -80,7 +80,7 @@ func (r *RefractionTexture) Clone() *RefractionTexture {
 // Serialize calls the Serialize method on the RefractionTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractiontexture#serialize
-func (r *RefractionTexture) Serialize() interface{} {
+func (r *RefractionTexture) Serialize() js.Value {
 
 	retVal := r.p.Call("serialize")
 	return retVal

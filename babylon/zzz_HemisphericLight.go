@@ -91,11 +91,16 @@ func (h *HemisphericLight) GetTypeID() float64 {
 // PrepareLightSpecificDefines calls the PrepareLightSpecificDefines method on the HemisphericLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#preparelightspecificdefines
-func (h *HemisphericLight) PrepareLightSpecificDefines(defines interface{}, lightIndex float64) {
+func (h *HemisphericLight) PrepareLightSpecificDefines(defines JSObject, lightIndex float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines)
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	h.p.Call("prepareLightSpecificDefines", args...)
@@ -108,7 +113,11 @@ func (h *HemisphericLight) SetDirectionToTarget(target *Vector3) *Vector3 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	retVal := h.p.Call("setDirectionToTarget", args...)
 	return Vector3FromJSObject(retVal, h.ctx)
@@ -121,7 +130,12 @@ func (h *HemisphericLight) TransferToEffect(effect *Effect, lightIndex string) *
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	retVal := h.p.Call("transferToEffect", args...)
@@ -135,7 +149,12 @@ func (h *HemisphericLight) TransferToNodeMaterialEffect(effect *Effect, lightDat
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightDataUniformName)
 
 	retVal := h.p.Call("transferToNodeMaterialEffect", args...)

@@ -51,8 +51,14 @@ func (t *TextureTools) CreateResizedCopy(texture *Texture, width float64, height
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, width)
+
 	args = append(args, height)
 
 	if opts.UseBilinearMode == nil {

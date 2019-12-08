@@ -53,7 +53,12 @@ func (i *ISimplifier) Simplify(settings *ISimplificationSettings, successCallbac
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, settings.JSObject())
+	if settings == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, settings.JSObject())
+	}
+
 	args = append(args, js.FuncOf(successCallback))
 
 	if opts.ErrorCallback == nil {

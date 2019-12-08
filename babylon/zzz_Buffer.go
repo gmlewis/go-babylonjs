@@ -48,14 +48,14 @@ type NewBufferOpts struct {
 // NewBuffer returns a new Buffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer
-func (ba *Babylon) NewBuffer(engine interface{}, data []float64, updatable bool, opts *NewBufferOpts) *Buffer {
+func (ba *Babylon) NewBuffer(engine JSObject, data []float64, updatable bool, opts *NewBufferOpts) *Buffer {
 	if opts == nil {
 		opts = &NewBufferOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+5)
 
-	args = append(args, engine)
+	args = append(args, engine.JSObject())
 	args = append(args, data)
 	args = append(args, updatable)
 
@@ -132,7 +132,9 @@ func (b *Buffer) CreateVertexBuffer(kind string, offset float64, size float64, o
 	args := make([]interface{}, 0, 3+4)
 
 	args = append(args, kind)
+
 	args = append(args, offset)
+
 	args = append(args, size)
 
 	if opts.Stride == nil {
@@ -237,6 +239,7 @@ func (b *Buffer) UpdateDirectly(data []float64, offset float64, opts *BufferUpda
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, data)
+
 	args = append(args, offset)
 
 	if opts.VertexCount == nil {

@@ -103,7 +103,7 @@ type BlurPostProcessUpdateEffectOpts struct {
 	Defines         *string
 	Uniforms        []string
 	Samplers        []string
-	IndexParameters *interface{}
+	IndexParameters interface{}
 	OnCompiled      JSFunc
 	OnError         JSFunc
 }

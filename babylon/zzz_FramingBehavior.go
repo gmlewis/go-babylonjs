@@ -45,7 +45,11 @@ func (f *FramingBehavior) Attach(camera *ArcRotateCamera) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	f.p.Call("attach", args...)
 }
@@ -90,8 +94,17 @@ func (f *FramingBehavior) ZoomOnBoundingInfo(minimumWorld *Vector3, maximumWorld
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, minimumWorld.JSObject())
-	args = append(args, maximumWorld.JSObject())
+	if minimumWorld == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, minimumWorld.JSObject())
+	}
+
+	if maximumWorld == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, maximumWorld.JSObject())
+	}
 
 	if opts.FocusOnOriginXZ == nil {
 		args = append(args, js.Undefined())
@@ -123,7 +136,11 @@ func (f *FramingBehavior) ZoomOnMesh(mesh *AbstractMesh, opts *FramingBehaviorZo
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.FocusOnOriginXZ == nil {
 		args = append(args, js.Undefined())
@@ -155,7 +172,11 @@ func (f *FramingBehavior) ZoomOnMeshHierarchy(mesh *AbstractMesh, opts *FramingB
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.FocusOnOriginXZ == nil {
 		args = append(args, js.Undefined())

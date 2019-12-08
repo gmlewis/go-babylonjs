@@ -39,12 +39,12 @@ func MeshAssetTaskArrayToJSArray(array []*MeshAssetTask) []interface{} {
 // NewMeshAssetTask returns a new MeshAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask
-func (ba *Babylon) NewMeshAssetTask(name string, meshesNames interface{}, rootUrl string, sceneFilename string) *MeshAssetTask {
+func (ba *Babylon) NewMeshAssetTask(name string, meshesNames JSObject, rootUrl string, sceneFilename string) *MeshAssetTask {
 
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, name)
-	args = append(args, meshesNames)
+	args = append(args, meshesNames.JSObject())
 	args = append(args, rootUrl)
 	args = append(args, sceneFilename)
 
@@ -59,8 +59,14 @@ func (m *MeshAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFunc) 
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, js.FuncOf(onSuccess))
+
 	args = append(args, js.FuncOf(onError))
 
 	m.p.Call("runTask", args...)
@@ -149,7 +155,7 @@ func (m *MeshAssetTask) SetLoadedSkeletons(loadedSkeletons []*Skeleton) *MeshAss
 // MeshesNames returns the MeshesNames property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#meshesnames
-func (m *MeshAssetTask) MeshesNames() interface{} {
+func (m *MeshAssetTask) MeshesNames() js.Value {
 	retVal := m.p.Get("meshesNames")
 	return retVal
 }
@@ -157,8 +163,8 @@ func (m *MeshAssetTask) MeshesNames() interface{} {
 // SetMeshesNames sets the MeshesNames property of class MeshAssetTask.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask#meshesnames
-func (m *MeshAssetTask) SetMeshesNames(meshesNames interface{}) *MeshAssetTask {
-	m.p.Set("meshesNames", meshesNames)
+func (m *MeshAssetTask) SetMeshesNames(meshesNames JSObject) *MeshAssetTask {
+	m.p.Set("meshesNames", meshesNames.JSObject())
 	return m
 }
 

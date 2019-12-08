@@ -39,7 +39,7 @@ func IDisplayChangedEventArgsArrayToJSArray(array []*IDisplayChangedEventArgs) [
 // VrDisplay returns the VrDisplay property of class IDisplayChangedEventArgs.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idisplaychangedeventargs#vrdisplay
-func (i *IDisplayChangedEventArgs) VrDisplay() interface{} {
+func (i *IDisplayChangedEventArgs) VrDisplay() js.Value {
 	retVal := i.p.Get("vrDisplay")
 	return retVal
 }
@@ -47,8 +47,8 @@ func (i *IDisplayChangedEventArgs) VrDisplay() interface{} {
 // SetVrDisplay sets the VrDisplay property of class IDisplayChangedEventArgs.
 //
 // https://doc.babylonjs.com/api/classes/babylon.idisplaychangedeventargs#vrdisplay
-func (i *IDisplayChangedEventArgs) SetVrDisplay(vrDisplay interface{}) *IDisplayChangedEventArgs {
-	i.p.Set("vrDisplay", vrDisplay)
+func (i *IDisplayChangedEventArgs) SetVrDisplay(vrDisplay JSObject) *IDisplayChangedEventArgs {
+	i.p.Set("vrDisplay", vrDisplay.JSObject())
 	return i
 }
 

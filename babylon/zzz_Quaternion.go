@@ -89,7 +89,11 @@ func (q *Quaternion) Add(other *Quaternion) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := q.p.Call("add", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -102,7 +106,11 @@ func (q *Quaternion) AddInPlace(other *Quaternion) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := q.p.Call("addInPlace", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -115,8 +123,17 @@ func (q *Quaternion) AreClose(quat0 *Quaternion, quat1 *Quaternion) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, quat0.JSObject())
-	args = append(args, quat1.JSObject())
+	if quat0 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, quat0.JSObject())
+	}
+
+	if quat1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, quat1.JSObject())
+	}
 
 	retVal := q.p.Call("AreClose", args...)
 	return retVal.Bool()
@@ -169,7 +186,11 @@ func (q *Quaternion) ConjugateToRef(ref *Quaternion) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, ref.JSObject())
+	if ref == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ref.JSObject())
+	}
 
 	retVal := q.p.Call("conjugateToRef", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -182,7 +203,11 @@ func (q *Quaternion) CopyFrom(other *Quaternion) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := q.p.Call("copyFrom", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -196,8 +221,11 @@ func (q *Quaternion) CopyFromFloats(x float64, y float64, z float64, w float64) 
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
+
 	args = append(args, w)
 
 	retVal := q.p.Call("copyFromFloats", args...)
@@ -211,8 +239,17 @@ func (q *Quaternion) Dot(left *Quaternion, right *Quaternion) float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, left.JSObject())
-	args = append(args, right.JSObject())
+	if left == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, left.JSObject())
+	}
+
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
 
 	retVal := q.p.Call("Dot", args...)
 	return retVal.Float()
@@ -225,7 +262,11 @@ func (q *Quaternion) Equals(otherQuaternion *Quaternion) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherQuaternion.JSObject())
+	if otherQuaternion == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherQuaternion.JSObject())
+	}
 
 	retVal := q.p.Call("equals", args...)
 	return retVal.Bool()
@@ -266,7 +307,9 @@ func (q *Quaternion) FromEulerAngles(x float64, y float64, z float64) *Quaternio
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	retVal := q.p.Call("FromEulerAngles", args...)
@@ -281,9 +324,16 @@ func (q *Quaternion) FromEulerAnglesToRef(x float64, y float64, z float64, resul
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := q.p.Call("FromEulerAnglesToRef", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -296,7 +346,11 @@ func (q *Quaternion) FromEulerVector(vec *Vector3) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vec.JSObject())
+	if vec == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vec.JSObject())
+	}
 
 	retVal := q.p.Call("FromEulerVector", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -309,8 +363,17 @@ func (q *Quaternion) FromEulerVectorToRef(vec *Vector3, result *Quaternion) *Qua
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, vec.JSObject())
-	args = append(args, result.JSObject())
+	if vec == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vec.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := q.p.Call("FromEulerVectorToRef", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -323,7 +386,11 @@ func (q *Quaternion) FromRotationMatrix(matrix *Matrix) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, matrix.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
 
 	retVal := q.p.Call("FromRotationMatrix", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -336,8 +403,17 @@ func (q *Quaternion) FromRotationMatrixToRef(matrix *Matrix, result *Quaternion)
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, matrix.JSObject())
-	args = append(args, result.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	q.p.Call("FromRotationMatrixToRef", args...)
 }
@@ -367,10 +443,30 @@ func (q *Quaternion) Hermite(value1 *Quaternion, tangent1 *Quaternion, value2 *Q
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, value1.JSObject())
-	args = append(args, tangent1.JSObject())
-	args = append(args, value2.JSObject())
-	args = append(args, tangent2.JSObject())
+	if value1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value1.JSObject())
+	}
+
+	if tangent1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, tangent1.JSObject())
+	}
+
+	if value2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value2.JSObject())
+	}
+
+	if tangent2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, tangent2.JSObject())
+	}
+
 	args = append(args, amount)
 
 	retVal := q.p.Call("Hermite", args...)
@@ -393,7 +489,11 @@ func (q *Quaternion) Inverse(v *Quaternion) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, v.JSObject())
+	if v == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, v.JSObject())
+	}
 
 	retVal := q.p.Call("Inverse", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -406,8 +506,17 @@ func (q *Quaternion) InverseToRef(v *Quaternion, result *Quaternion) *Quaternion
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, v.JSObject())
-	args = append(args, result.JSObject())
+	if v == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, v.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := q.p.Call("InverseToRef", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -420,7 +529,11 @@ func (q *Quaternion) IsIdentity(quaternion *Quaternion) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, quaternion.JSObject())
+	if quaternion == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, quaternion.JSObject())
+	}
 
 	retVal := q.p.Call("IsIdentity", args...)
 	return retVal.Bool()
@@ -442,7 +555,11 @@ func (q *Quaternion) Multiply(q1 *Quaternion) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, q1.JSObject())
+	if q1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, q1.JSObject())
+	}
 
 	retVal := q.p.Call("multiply", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -455,7 +572,11 @@ func (q *Quaternion) MultiplyInPlace(q1 *Quaternion) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, q1.JSObject())
+	if q1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, q1.JSObject())
+	}
 
 	retVal := q.p.Call("multiplyInPlace", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -468,8 +589,17 @@ func (q *Quaternion) MultiplyToRef(q1 *Quaternion, result *Quaternion) *Quaterni
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, q1.JSObject())
-	args = append(args, result.JSObject())
+	if q1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, q1.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := q.p.Call("multiplyToRef", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -492,7 +622,9 @@ func (q *Quaternion) RotationAlphaBetaGamma(alpha float64, beta float64, gamma f
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, alpha)
+
 	args = append(args, beta)
+
 	args = append(args, gamma)
 
 	retVal := q.p.Call("RotationAlphaBetaGamma", args...)
@@ -507,9 +639,16 @@ func (q *Quaternion) RotationAlphaBetaGammaToRef(alpha float64, beta float64, ga
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, alpha)
+
 	args = append(args, beta)
+
 	args = append(args, gamma)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	q.p.Call("RotationAlphaBetaGammaToRef", args...)
 }
@@ -521,7 +660,12 @@ func (q *Quaternion) RotationAxis(axis *Vector3, angle float64) *Quaternion {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, axis.JSObject())
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, angle)
 
 	retVal := q.p.Call("RotationAxis", args...)
@@ -535,9 +679,19 @@ func (q *Quaternion) RotationAxisToRef(axis *Vector3, angle float64, result *Qua
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, axis.JSObject())
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, angle)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := q.p.Call("RotationAxisToRef", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -550,9 +704,23 @@ func (q *Quaternion) RotationQuaternionFromAxis(axis1 *Vector3, axis2 *Vector3, 
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, axis1.JSObject())
-	args = append(args, axis2.JSObject())
-	args = append(args, axis3.JSObject())
+	if axis1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis1.JSObject())
+	}
+
+	if axis2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis2.JSObject())
+	}
+
+	if axis3 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis3.JSObject())
+	}
 
 	retVal := q.p.Call("RotationQuaternionFromAxis", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -565,10 +733,29 @@ func (q *Quaternion) RotationQuaternionFromAxisToRef(axis1 *Vector3, axis2 *Vect
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, axis1.JSObject())
-	args = append(args, axis2.JSObject())
-	args = append(args, axis3.JSObject())
-	args = append(args, ref.JSObject())
+	if axis1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis1.JSObject())
+	}
+
+	if axis2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis2.JSObject())
+	}
+
+	if axis3 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis3.JSObject())
+	}
+
+	if ref == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ref.JSObject())
+	}
 
 	q.p.Call("RotationQuaternionFromAxisToRef", args...)
 }
@@ -581,7 +768,9 @@ func (q *Quaternion) RotationYawPitchRoll(yaw float64, pitch float64, roll float
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, yaw)
+
 	args = append(args, pitch)
+
 	args = append(args, roll)
 
 	retVal := q.p.Call("RotationYawPitchRoll", args...)
@@ -596,9 +785,16 @@ func (q *Quaternion) RotationYawPitchRollToRef(yaw float64, pitch float64, roll 
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, yaw)
+
 	args = append(args, pitch)
+
 	args = append(args, roll)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	q.p.Call("RotationYawPitchRollToRef", args...)
 }
@@ -624,7 +820,12 @@ func (q *Quaternion) ScaleAndAddToRef(scale float64, result *Quaternion) *Quater
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, scale)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := q.p.Call("scaleAndAddToRef", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -651,7 +852,12 @@ func (q *Quaternion) ScaleToRef(scale float64, result *Quaternion) *Quaternion {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, scale)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := q.p.Call("scaleToRef", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -665,8 +871,11 @@ func (q *Quaternion) Set(x float64, y float64, z float64, w float64) *Quaternion
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
+
 	args = append(args, w)
 
 	retVal := q.p.Call("set", args...)
@@ -680,8 +889,18 @@ func (q *Quaternion) Slerp(left *Quaternion, right *Quaternion, amount float64) 
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, left.JSObject())
-	args = append(args, right.JSObject())
+	if left == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, left.JSObject())
+	}
+
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
+
 	args = append(args, amount)
 
 	retVal := q.p.Call("Slerp", args...)
@@ -695,10 +914,25 @@ func (q *Quaternion) SlerpToRef(left *Quaternion, right *Quaternion, amount floa
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, left.JSObject())
-	args = append(args, right.JSObject())
+	if left == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, left.JSObject())
+	}
+
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
+
 	args = append(args, amount)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	q.p.Call("SlerpToRef", args...)
 }
@@ -710,7 +944,11 @@ func (q *Quaternion) Subtract(other *Quaternion) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := q.p.Call("subtract", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -748,7 +986,11 @@ func (q *Quaternion) ToEulerAnglesToRef(result *Vector3) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := q.p.Call("toEulerAnglesToRef", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)
@@ -761,7 +1003,11 @@ func (q *Quaternion) ToRotationMatrix(result *Matrix) *Quaternion {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := q.p.Call("toRotationMatrix", args...)
 	return QuaternionFromJSObject(retVal, q.ctx)

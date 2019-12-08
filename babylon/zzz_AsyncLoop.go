@@ -97,7 +97,9 @@ func (a *AsyncLoop) Run(iterations float64, fn JSFunc, successCallback JSFunc, o
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, iterations)
+
 	args = append(args, js.FuncOf(fn))
+
 	args = append(args, js.FuncOf(successCallback))
 
 	if opts.Offset == nil {
@@ -127,8 +129,11 @@ func (a *AsyncLoop) SyncAsyncForLoop(iterations float64, syncedIterations float6
 	args := make([]interface{}, 0, 4+2)
 
 	args = append(args, iterations)
+
 	args = append(args, syncedIterations)
+
 	args = append(args, js.FuncOf(fn))
+
 	args = append(args, js.FuncOf(callback))
 
 	if opts.BreakFunction == nil {

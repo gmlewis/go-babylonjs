@@ -39,7 +39,7 @@ func EnvironmentTextureInfoArrayToJSArray(array []*EnvironmentTextureInfo) []int
 // Irradiance returns the Irradiance property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#irradiance
-func (e *EnvironmentTextureInfo) Irradiance() interface{} {
+func (e *EnvironmentTextureInfo) Irradiance() js.Value {
 	retVal := e.p.Get("irradiance")
 	return retVal
 }
@@ -47,15 +47,15 @@ func (e *EnvironmentTextureInfo) Irradiance() interface{} {
 // SetIrradiance sets the Irradiance property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#irradiance
-func (e *EnvironmentTextureInfo) SetIrradiance(irradiance interface{}) *EnvironmentTextureInfo {
-	e.p.Set("irradiance", irradiance)
+func (e *EnvironmentTextureInfo) SetIrradiance(irradiance JSObject) *EnvironmentTextureInfo {
+	e.p.Set("irradiance", irradiance.JSObject())
 	return e
 }
 
 // Specular returns the Specular property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#specular
-func (e *EnvironmentTextureInfo) Specular() interface{} {
+func (e *EnvironmentTextureInfo) Specular() js.Value {
 	retVal := e.p.Get("specular")
 	return retVal
 }
@@ -63,8 +63,8 @@ func (e *EnvironmentTextureInfo) Specular() interface{} {
 // SetSpecular sets the Specular property of class EnvironmentTextureInfo.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenttextureinfo#specular
-func (e *EnvironmentTextureInfo) SetSpecular(specular interface{}) *EnvironmentTextureInfo {
-	e.p.Set("specular", specular)
+func (e *EnvironmentTextureInfo) SetSpecular(specular JSObject) *EnvironmentTextureInfo {
+	e.p.Set("specular", specular.JSObject())
 	return e
 }
 

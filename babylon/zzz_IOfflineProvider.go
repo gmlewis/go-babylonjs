@@ -56,6 +56,7 @@ func (i *IOfflineProvider) LoadFile(url string, sceneLoaded JSFunc, opts *IOffli
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, url)
+
 	args = append(args, js.FuncOf(sceneLoaded))
 
 	if opts.ProgressCallBack == nil {
@@ -85,6 +86,7 @@ func (i *IOfflineProvider) LoadImage(url string, image js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, url)
+
 	args = append(args, image)
 
 	i.p.Call("loadImage", args...)
@@ -98,6 +100,7 @@ func (i *IOfflineProvider) Open(successCallback JSFunc, errorCallback JSFunc) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, js.FuncOf(successCallback))
+
 	args = append(args, js.FuncOf(errorCallback))
 
 	i.p.Call("open", args...)

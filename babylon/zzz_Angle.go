@@ -56,8 +56,17 @@ func (a *Angle) BetweenTwoPoints(av *Vector2, b *Vector2) *Angle {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, av.JSObject())
-	args = append(args, b.JSObject())
+	if av == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, av.JSObject())
+	}
+
+	if b == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, b.JSObject())
+	}
 
 	retVal := a.p.Call("BetweenTwoPoints", args...)
 	return AngleFromJSObject(retVal, a.ctx)

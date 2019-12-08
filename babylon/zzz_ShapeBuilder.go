@@ -52,6 +52,7 @@ func (s *ShapeBuilder) ExtrudeShape(name string, options js.Value, opts *ShapeBu
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -80,6 +81,7 @@ func (s *ShapeBuilder) ExtrudeShapeCustom(name string, options js.Value, opts *S
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

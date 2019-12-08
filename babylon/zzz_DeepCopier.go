@@ -45,15 +45,24 @@ type DeepCopierDeepCopyOpts struct {
 // DeepCopy calls the DeepCopy method on the DeepCopier object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deepcopier#deepcopy
-func (d *DeepCopier) DeepCopy(source interface{}, destination interface{}, opts *DeepCopierDeepCopyOpts) {
+func (d *DeepCopier) DeepCopy(source JSObject, destination JSObject, opts *DeepCopierDeepCopyOpts) {
 	if opts == nil {
 		opts = &DeepCopierDeepCopyOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, source)
-	args = append(args, destination)
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if destination == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, destination.JSObject())
+	}
 
 	if opts.DoNotCopyList == nil {
 		args = append(args, js.Undefined())

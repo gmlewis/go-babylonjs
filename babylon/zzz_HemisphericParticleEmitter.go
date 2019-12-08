@@ -81,7 +81,11 @@ func (h *HemisphericParticleEmitter) ApplyToShader(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	h.p.Call("applyToShader", args...)
 }
@@ -116,11 +120,15 @@ func (h *HemisphericParticleEmitter) GetEffectDefines() string {
 // Parse calls the Parse method on the HemisphericParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#parse
-func (h *HemisphericParticleEmitter) Parse(serializationObject interface{}) {
+func (h *HemisphericParticleEmitter) Parse(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	h.p.Call("parse", args...)
 }
@@ -128,7 +136,7 @@ func (h *HemisphericParticleEmitter) Parse(serializationObject interface{}) {
 // Serialize calls the Serialize method on the HemisphericParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#serialize
-func (h *HemisphericParticleEmitter) Serialize() interface{} {
+func (h *HemisphericParticleEmitter) Serialize() js.Value {
 
 	retVal := h.p.Call("serialize")
 	return retVal
@@ -141,9 +149,23 @@ func (h *HemisphericParticleEmitter) StartDirectionFunction(worldMatrix *Matrix,
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, worldMatrix.JSObject())
-	args = append(args, directionToUpdate.JSObject())
-	args = append(args, particle.JSObject())
+	if worldMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMatrix.JSObject())
+	}
+
+	if directionToUpdate == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, directionToUpdate.JSObject())
+	}
+
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	h.p.Call("startDirectionFunction", args...)
 }
@@ -155,9 +177,23 @@ func (h *HemisphericParticleEmitter) StartPositionFunction(worldMatrix *Matrix, 
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, worldMatrix.JSObject())
-	args = append(args, positionToUpdate.JSObject())
-	args = append(args, particle.JSObject())
+	if worldMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMatrix.JSObject())
+	}
+
+	if positionToUpdate == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, positionToUpdate.JSObject())
+	}
+
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	h.p.Call("startPositionFunction", args...)
 }

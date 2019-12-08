@@ -85,7 +85,11 @@ func (e *EffectLayer) HasMesh(mesh *AbstractMesh) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := e.p.Call("hasMesh", args...)
 	return retVal.Bool()
@@ -98,7 +102,12 @@ func (e *EffectLayer) IsReady(subMesh *SubMesh, useInstances bool) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, subMesh.JSObject())
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
+
 	args = append(args, useInstances)
 
 	retVal := e.p.Call("isReady", args...)
@@ -117,12 +126,22 @@ func (e *EffectLayer) NeedStencil() bool {
 // Parse calls the Parse method on the EffectLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#parse
-func (e *EffectLayer) Parse(parsedEffectLayer interface{}, scene *Scene, rootUrl string) *EffectLayer {
+func (e *EffectLayer) Parse(parsedEffectLayer JSObject, scene *Scene, rootUrl string) *EffectLayer {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedEffectLayer)
-	args = append(args, scene.JSObject())
+	if parsedEffectLayer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedEffectLayer.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := e.p.Call("Parse", args...)
@@ -140,7 +159,7 @@ func (e *EffectLayer) Render() {
 // Serialize calls the Serialize method on the EffectLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer#serialize
-func (e *EffectLayer) Serialize() interface{} {
+func (e *EffectLayer) Serialize() js.Value {
 
 	retVal := e.p.Call("serialize")
 	return retVal
@@ -162,7 +181,11 @@ func (e *EffectLayer) _disposeMesh(mesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	e.p.Call("_disposeMesh", args...)
 }

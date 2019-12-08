@@ -76,8 +76,17 @@ func (l *Line) MoveToVector3(position *Vector3, scene *Scene, opts *LineMoveToVe
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, position.JSObject())
-	args = append(args, scene.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.End == nil {
 		args = append(args, js.Undefined())
@@ -123,7 +132,11 @@ func (l *Line) _moveToProjectedPosition(projectedPosition *Vector3, opts *Line_m
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, projectedPosition.JSObject())
+	if projectedPosition == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, projectedPosition.JSObject())
+	}
 
 	if opts.End == nil {
 		args = append(args, js.Undefined())

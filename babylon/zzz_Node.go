@@ -98,6 +98,7 @@ func (n *Node) AddNodeConstructor(jsType string, constructorFunc js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, jsType)
+
 	args = append(args, constructorFunc)
 
 	n.p.Call("AddNodeConstructor", args...)
@@ -169,7 +170,7 @@ func (n *Node) ComputeWorldMatrix(opts *NodeComputeWorldMatrixOpts) *Matrix {
 
 // NodeConstructOpts contains optional parameters for Node.Construct.
 type NodeConstructOpts struct {
-	Options *interface{}
+	Options interface{}
 }
 
 // Construct calls the Construct method on the Node object.
@@ -183,8 +184,14 @@ func (n *Node) Construct(jsType string, name string, scene *Scene, opts *NodeCon
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, jsType)
+
 	args = append(args, name)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
@@ -204,7 +211,9 @@ func (n *Node) CreateAnimationRange(name string, from float64, to float64) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, from)
+
 	args = append(args, to)
 
 	n.p.Call("createAnimationRange", args...)
@@ -497,7 +506,11 @@ func (n *Node) IsDescendantOf(ancestor *Node) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, ancestor.JSObject())
+	if ancestor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ancestor.JSObject())
+	}
 
 	retVal := n.p.Call("isDescendantOf", args...)
 	return retVal.Bool()
@@ -565,13 +578,27 @@ func (n *Node) IsReady(opts *NodeIsReadyOpts) bool {
 // ParseAnimationRanges calls the ParseAnimationRanges method on the Node object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#parseanimationranges
-func (n *Node) ParseAnimationRanges(node *Node, parsedNode interface{}, scene *Scene) {
+func (n *Node) ParseAnimationRanges(node *Node, parsedNode JSObject, scene *Scene) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, node.JSObject())
-	args = append(args, parsedNode)
-	args = append(args, scene.JSObject())
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
+
+	if parsedNode == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedNode.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	n.p.Call("ParseAnimationRanges", args...)
 }
@@ -592,7 +619,7 @@ func (n *Node) RemoveBehavior(behavior js.Value) *Node {
 // SerializeAnimationRanges calls the SerializeAnimationRanges method on the Node object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#serializeanimationranges
-func (n *Node) SerializeAnimationRanges() interface{} {
+func (n *Node) SerializeAnimationRanges() js.Value {
 
 	retVal := n.p.Call("serializeAnimationRanges")
 	return retVal
@@ -717,7 +744,7 @@ func (n *Node) SetInspectableCustomProperties(inspectableCustomProperties []*IIn
 // Metadata returns the Metadata property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#metadata
-func (n *Node) Metadata() interface{} {
+func (n *Node) Metadata() js.Value {
 	retVal := n.p.Get("metadata")
 	return retVal
 }
@@ -725,8 +752,8 @@ func (n *Node) Metadata() interface{} {
 // SetMetadata sets the Metadata property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#metadata
-func (n *Node) SetMetadata(metadata interface{}) *Node {
-	n.p.Set("metadata", metadata)
+func (n *Node) SetMetadata(metadata JSObject) *Node {
+	n.p.Set("metadata", metadata.JSObject())
 	return n
 }
 
@@ -813,7 +840,7 @@ func (n *Node) SetParent(parent *Node) *Node {
 // ReservedDataStore returns the ReservedDataStore property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#reserveddatastore
-func (n *Node) ReservedDataStore() interface{} {
+func (n *Node) ReservedDataStore() js.Value {
 	retVal := n.p.Get("reservedDataStore")
 	return retVal
 }
@@ -821,8 +848,8 @@ func (n *Node) ReservedDataStore() interface{} {
 // SetReservedDataStore sets the ReservedDataStore property of class Node.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node#reserveddatastore
-func (n *Node) SetReservedDataStore(reservedDataStore interface{}) *Node {
-	n.p.Set("reservedDataStore", reservedDataStore)
+func (n *Node) SetReservedDataStore(reservedDataStore JSObject) *Node {
+	n.p.Set("reservedDataStore", reservedDataStore.JSObject())
 	return n
 }
 

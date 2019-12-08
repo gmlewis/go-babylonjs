@@ -44,7 +44,11 @@ func (c *CubeMapToSphericalPolynomialTools) ConvertCubeMapTextureToSphericalPoly
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := c.p.Call("ConvertCubeMapTextureToSphericalPolynomial", args...)
 	return SphericalPolynomialFromJSObject(retVal, c.ctx)

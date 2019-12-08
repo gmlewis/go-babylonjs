@@ -80,12 +80,21 @@ func (a *AsciiArtFontTexture) Clone() *AsciiArtFontTexture {
 // Parse calls the Parse method on the AsciiArtFontTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#parse
-func (a *AsciiArtFontTexture) Parse(source interface{}, scene *Scene) *AsciiArtFontTexture {
+func (a *AsciiArtFontTexture) Parse(source JSObject, scene *Scene) *AsciiArtFontTexture {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := a.p.Call("Parse", args...)
 	return AsciiArtFontTextureFromJSObject(retVal, a.ctx)

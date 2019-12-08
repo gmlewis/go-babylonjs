@@ -105,11 +105,23 @@ func (b *Bone) CopyAnimationRange(source *Bone, rangeName string, frameOffset fl
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, source.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
 	args = append(args, rangeName)
+
 	args = append(args, frameOffset)
+
 	args = append(args, rescaleAsRequired)
-	args = append(args, skelDimensionsRatio.JSObject())
+
+	if skelDimensionsRatio == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, skelDimensionsRatio.JSObject())
+	}
 
 	retVal := b.p.Call("copyAnimationRange", args...)
 	return retVal.Bool()
@@ -155,7 +167,11 @@ func (b *Bone) GetAbsolutePositionFromLocal(position *Vector3, opts *BoneGetAbso
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -174,9 +190,23 @@ func (b *Bone) GetAbsolutePositionFromLocalToRef(position *Vector3, mesh *Abstra
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, position.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, result.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	b.p.Call("getAbsolutePositionFromLocalToRef", args...)
 }
@@ -188,8 +218,17 @@ func (b *Bone) GetAbsolutePositionToRef(mesh *AbstractMesh, result *Vector3) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, result.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	b.p.Call("getAbsolutePositionToRef", args...)
 }
@@ -249,7 +288,11 @@ func (b *Bone) GetDirection(localAxis *Vector3, opts *BoneGetDirectionOpts) *Vec
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, localAxis.JSObject())
+	if localAxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, localAxis.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -268,9 +311,23 @@ func (b *Bone) GetDirectionToRef(localAxis *Vector3, mesh *AbstractMesh, result 
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, localAxis.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, result.JSObject())
+	if localAxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, localAxis.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	b.p.Call("getDirectionToRef", args...)
 }
@@ -317,7 +374,11 @@ func (b *Bone) GetLocalPositionFromAbsolute(position *Vector3, opts *BoneGetLoca
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -336,9 +397,23 @@ func (b *Bone) GetLocalPositionFromAbsoluteToRef(position *Vector3, mesh *Abstra
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, position.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, result.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	b.p.Call("getLocalPositionFromAbsoluteToRef", args...)
 }
@@ -387,8 +462,18 @@ func (b *Bone) GetPositionToRef(space js.Value, mesh *AbstractMesh, result *Vect
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, space)
-	args = append(args, mesh.JSObject())
-	args = append(args, result.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	b.p.Call("getPositionToRef", args...)
 }
@@ -437,7 +522,12 @@ func (b *Bone) GetRotationMatrix(space js.Value, mesh *AbstractMesh) *Matrix {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, space)
-	args = append(args, mesh.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := b.p.Call("getRotationMatrix", args...)
 	return MatrixFromJSObject(retVal, b.ctx)
@@ -451,8 +541,18 @@ func (b *Bone) GetRotationMatrixToRef(space js.Value, mesh *AbstractMesh, result
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, space)
-	args = append(args, mesh.JSObject())
-	args = append(args, result.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	b.p.Call("getRotationMatrixToRef", args...)
 }
@@ -492,8 +592,18 @@ func (b *Bone) GetRotationQuaternionToRef(space js.Value, mesh *AbstractMesh, re
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, space)
-	args = append(args, mesh.JSObject())
-	args = append(args, result.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	b.p.Call("getRotationQuaternionToRef", args...)
 }
@@ -506,8 +616,18 @@ func (b *Bone) GetRotationToRef(space js.Value, mesh *AbstractMesh, result *Vect
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, space)
-	args = append(args, mesh.JSObject())
-	args = append(args, result.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	b.p.Call("getRotationToRef", args...)
 }
@@ -528,7 +648,11 @@ func (b *Bone) GetScaleToRef(result *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	b.p.Call("getScaleToRef", args...)
 }
@@ -567,7 +691,11 @@ func (b *Bone) LinkTransformNode(transformNode *TransformNode) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, transformNode.JSObject())
+	if transformNode == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transformNode.JSObject())
+	}
 
 	b.p.Call("linkTransformNode", args...)
 }
@@ -604,7 +732,12 @@ func (b *Bone) Rotate(axis *Vector3, amount float64, opts *BoneRotateOpts) {
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, axis.JSObject())
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, amount)
 
 	args = append(args, opts.Space)
@@ -633,7 +766,9 @@ func (b *Bone) Scale(x float64, y float64, z float64, opts *BoneScaleOpts) {
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	if opts.ScaleChildren == nil {
@@ -660,7 +795,11 @@ func (b *Bone) SetAbsolutePosition(position *Vector3, opts *BoneSetAbsolutePosit
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -687,7 +826,12 @@ func (b *Bone) SetAxisAngle(axis *Vector3, angle float64, opts *BoneSetAxisAngle
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, axis.JSObject())
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, angle)
 
 	args = append(args, opts.Space)
@@ -715,7 +859,11 @@ func (b *Bone) SetParent(parent *Bone, opts *BoneSetParentOpts) {
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, parent.JSObject())
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	if opts.UpdateDifferenceMatrix == nil {
 		args = append(args, js.Undefined())
@@ -742,7 +890,11 @@ func (b *Bone) SetPosition(position *Vector3, opts *BoneSetPositionOpts) {
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
 
 	args = append(args, opts.Space)
 	if opts.Mesh == nil {
@@ -770,7 +922,11 @@ func (b *Bone) SetRotation(rotation *Vector3, opts *BoneSetRotationOpts) {
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, rotation.JSObject())
+	if rotation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, rotation.JSObject())
+	}
 
 	args = append(args, opts.Space)
 	if opts.Mesh == nil {
@@ -798,7 +954,11 @@ func (b *Bone) SetRotationMatrix(rotMat *Matrix, opts *BoneSetRotationMatrixOpts
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, rotMat.JSObject())
+	if rotMat == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, rotMat.JSObject())
+	}
 
 	args = append(args, opts.Space)
 	if opts.Mesh == nil {
@@ -826,7 +986,11 @@ func (b *Bone) SetRotationQuaternion(quat *Quaternion, opts *BoneSetRotationQuat
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, quat.JSObject())
+	if quat == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, quat.JSObject())
+	}
 
 	args = append(args, opts.Space)
 	if opts.Mesh == nil {
@@ -845,7 +1009,11 @@ func (b *Bone) SetScale(scale *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, scale.JSObject())
+	if scale == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scale.JSObject())
+	}
 
 	b.p.Call("setScale", args...)
 }
@@ -867,7 +1035,9 @@ func (b *Bone) SetYawPitchRoll(yaw float64, pitch float64, roll float64, opts *B
 	args := make([]interface{}, 0, 3+2)
 
 	args = append(args, yaw)
+
 	args = append(args, pitch)
+
 	args = append(args, roll)
 
 	args = append(args, opts.Space)
@@ -896,7 +1066,11 @@ func (b *Bone) Translate(vec *Vector3, opts *BoneTranslateOpts) {
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, vec.JSObject())
+	if vec == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vec.JSObject())
+	}
 
 	args = append(args, opts.Space)
 	if opts.Mesh == nil {
@@ -924,7 +1098,11 @@ func (b *Bone) UpdateMatrix(matrix *Matrix, opts *BoneUpdateMatrixOpts) {
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, matrix.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
 
 	if opts.UpdateDifferenceMatrix == nil {
 		args = append(args, js.Undefined())

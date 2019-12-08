@@ -43,7 +43,11 @@ func (n *NodeMaterialBuildState) Finalize(state *NodeMaterialBuildState) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, state.JSObject())
+	if state == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, state.JSObject())
+	}
 
 	n.p.Call("finalize", args...)
 }

@@ -130,7 +130,11 @@ func (m *MotionBlurPostProcess) ExcludeSkinnedMesh(skinnedMesh *AbstractMesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, skinnedMesh.JSObject())
+	if skinnedMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, skinnedMesh.JSObject())
+	}
 
 	m.p.Call("excludeSkinnedMesh", args...)
 }
@@ -142,7 +146,11 @@ func (m *MotionBlurPostProcess) RemoveExcludedSkinnedMesh(skinnedMesh *AbstractM
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, skinnedMesh.JSObject())
+	if skinnedMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, skinnedMesh.JSObject())
+	}
 
 	m.p.Call("removeExcludedSkinnedMesh", args...)
 }

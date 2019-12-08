@@ -60,9 +60,23 @@ func (s *StandardMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *Su
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	s.p.Call("bindForSubMesh", args...)
 }
@@ -169,7 +183,11 @@ func (s *StandardMaterial) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := s.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -190,8 +208,17 @@ func (s *StandardMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMes
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -224,12 +251,22 @@ func (s *StandardMaterial) NeedAlphaTesting() bool {
 // Parse calls the Parse method on the StandardMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardmaterial#parse
-func (s *StandardMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *StandardMaterial {
+func (s *StandardMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *StandardMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := s.p.Call("Parse", args...)
@@ -239,7 +276,7 @@ func (s *StandardMaterial) Parse(source interface{}, scene *Scene, rootUrl strin
 // Serialize calls the Serialize method on the StandardMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardmaterial#serialize
-func (s *StandardMaterial) Serialize() interface{} {
+func (s *StandardMaterial) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal

@@ -57,9 +57,23 @@ func (f *FireMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMes
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	f.p.Call("bindForSubMesh", args...)
 }
@@ -152,7 +166,11 @@ func (f *FireMaterial) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := f.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -173,8 +191,17 @@ func (f *FireMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, o
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -207,12 +234,22 @@ func (f *FireMaterial) NeedAlphaTesting() bool {
 // Parse calls the Parse method on the FireMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#parse
-func (f *FireMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *FireMaterial {
+func (f *FireMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *FireMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := f.p.Call("Parse", args...)
@@ -222,7 +259,7 @@ func (f *FireMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *
 // Serialize calls the Serialize method on the FireMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial#serialize
-func (f *FireMaterial) Serialize() interface{} {
+func (f *FireMaterial) Serialize() js.Value {
 
 	retVal := f.p.Call("serialize")
 	return retVal

@@ -82,7 +82,11 @@ func (c *ConeParticleEmitter) ApplyToShader(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	c.p.Call("applyToShader", args...)
 }
@@ -117,11 +121,15 @@ func (c *ConeParticleEmitter) GetEffectDefines() string {
 // Parse calls the Parse method on the ConeParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#parse
-func (c *ConeParticleEmitter) Parse(serializationObject interface{}) {
+func (c *ConeParticleEmitter) Parse(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	c.p.Call("parse", args...)
 }
@@ -129,7 +137,7 @@ func (c *ConeParticleEmitter) Parse(serializationObject interface{}) {
 // Serialize calls the Serialize method on the ConeParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#serialize
-func (c *ConeParticleEmitter) Serialize() interface{} {
+func (c *ConeParticleEmitter) Serialize() js.Value {
 
 	retVal := c.p.Call("serialize")
 	return retVal
@@ -142,9 +150,23 @@ func (c *ConeParticleEmitter) StartDirectionFunction(worldMatrix *Matrix, direct
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, worldMatrix.JSObject())
-	args = append(args, directionToUpdate.JSObject())
-	args = append(args, particle.JSObject())
+	if worldMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMatrix.JSObject())
+	}
+
+	if directionToUpdate == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, directionToUpdate.JSObject())
+	}
+
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	c.p.Call("startDirectionFunction", args...)
 }
@@ -156,9 +178,23 @@ func (c *ConeParticleEmitter) StartPositionFunction(worldMatrix *Matrix, positio
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, worldMatrix.JSObject())
-	args = append(args, positionToUpdate.JSObject())
-	args = append(args, particle.JSObject())
+	if worldMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMatrix.JSObject())
+	}
+
+	if positionToUpdate == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, positionToUpdate.JSObject())
+	}
+
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	c.p.Call("startPositionFunction", args...)
 }

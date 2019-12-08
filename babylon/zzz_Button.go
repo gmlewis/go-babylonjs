@@ -69,7 +69,9 @@ func (b *Button) CreateImageButton(name string, text string, imageUrl string) *B
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, text)
+
 	args = append(args, imageUrl)
 
 	retVal := b.p.Call("CreateImageButton", args...)
@@ -84,6 +86,7 @@ func (b *Button) CreateImageOnlyButton(name string, imageUrl string) *Button {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, imageUrl)
 
 	retVal := b.p.Call("CreateImageOnlyButton", args...)
@@ -98,7 +101,9 @@ func (b *Button) CreateImageWithCenterTextButton(name string, text string, image
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, text)
+
 	args = append(args, imageUrl)
 
 	retVal := b.p.Call("CreateImageWithCenterTextButton", args...)
@@ -113,6 +118,7 @@ func (b *Button) CreateSimpleButton(name string, text string) *Button {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, text)
 
 	retVal := b.p.Call("CreateSimpleButton", args...)

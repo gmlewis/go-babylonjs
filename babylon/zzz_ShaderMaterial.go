@@ -48,7 +48,7 @@ type NewShaderMaterialOpts struct {
 // NewShaderMaterial returns a new ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial
-func (ba *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath interface{}, opts *NewShaderMaterialOpts) *ShaderMaterial {
+func (ba *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath JSObject, opts *NewShaderMaterialOpts) *ShaderMaterial {
 	if opts == nil {
 		opts = &NewShaderMaterialOpts{}
 	}
@@ -57,7 +57,7 @@ func (ba *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath inter
 
 	args = append(args, name)
 	args = append(args, scene.JSObject())
-	args = append(args, shaderPath)
+	args = append(args, shaderPath.JSObject())
 
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
@@ -84,7 +84,11 @@ func (s *ShaderMaterial) Bind(world *Matrix, opts *ShaderMaterialBindOpts) {
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, world.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -102,7 +106,11 @@ func (s *ShaderMaterial) BindOnlyWorldMatrix(world *Matrix) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, world.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
 
 	s.p.Call("bindOnlyWorldMatrix", args...)
 }
@@ -185,7 +193,11 @@ func (s *ShaderMaterial) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := s.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -237,8 +249,17 @@ func (s *ShaderMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *BaseSubM
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -271,12 +292,22 @@ func (s *ShaderMaterial) NeedAlphaTesting() bool {
 // Parse calls the Parse method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#parse
-func (s *ShaderMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *ShaderMaterial {
+func (s *ShaderMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *ShaderMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := s.p.Call("Parse", args...)
@@ -286,7 +317,7 @@ func (s *ShaderMaterial) Parse(source interface{}, scene *Scene, rootUrl string)
 // Serialize calls the Serialize method on the ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#serialize
-func (s *ShaderMaterial) Serialize() interface{} {
+func (s *ShaderMaterial) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal
@@ -300,6 +331,7 @@ func (s *ShaderMaterial) SetArray2(name string, value []float64) *ShaderMaterial
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := s.p.Call("setArray2", args...)
@@ -314,6 +346,7 @@ func (s *ShaderMaterial) SetArray3(name string, value []float64) *ShaderMaterial
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := s.p.Call("setArray3", args...)
@@ -328,6 +361,7 @@ func (s *ShaderMaterial) SetArray4(name string, value []float64) *ShaderMaterial
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := s.p.Call("setArray4", args...)
@@ -342,7 +376,12 @@ func (s *ShaderMaterial) SetColor3(name string, value *Color3) *ShaderMaterial {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("setColor3", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
@@ -356,6 +395,7 @@ func (s *ShaderMaterial) SetColor3Array(name string, value []*Color3) *ShaderMat
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, Color3ArrayToJSArray(value))
 
 	retVal := s.p.Call("setColor3Array", args...)
@@ -370,7 +410,12 @@ func (s *ShaderMaterial) SetColor4(name string, value *Color4) *ShaderMaterial {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("setColor4", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
@@ -384,6 +429,7 @@ func (s *ShaderMaterial) SetColor4Array(name string, value []*Color4) *ShaderMat
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, Color4ArrayToJSArray(value))
 
 	retVal := s.p.Call("setColor4Array", args...)
@@ -398,6 +444,7 @@ func (s *ShaderMaterial) SetFloat(name string, value float64) *ShaderMaterial {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := s.p.Call("setFloat", args...)
@@ -412,6 +459,7 @@ func (s *ShaderMaterial) SetFloats(name string, value []float64) *ShaderMaterial
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := s.p.Call("setFloats", args...)
@@ -426,6 +474,7 @@ func (s *ShaderMaterial) SetInt(name string, value float64) *ShaderMaterial {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := s.p.Call("setInt", args...)
@@ -440,6 +489,7 @@ func (s *ShaderMaterial) SetMatrices(name string, value []*Matrix) *ShaderMateri
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, MatrixArrayToJSArray(value))
 
 	retVal := s.p.Call("setMatrices", args...)
@@ -454,7 +504,12 @@ func (s *ShaderMaterial) SetMatrix(name string, value *Matrix) *ShaderMaterial {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("setMatrix", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
@@ -468,6 +523,7 @@ func (s *ShaderMaterial) SetMatrix2x2(name string, value js.Value) *ShaderMateri
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := s.p.Call("setMatrix2x2", args...)
@@ -482,6 +538,7 @@ func (s *ShaderMaterial) SetMatrix3x3(name string, value js.Value) *ShaderMateri
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	retVal := s.p.Call("setMatrix3x3", args...)
@@ -496,7 +553,12 @@ func (s *ShaderMaterial) SetTexture(name string, texture *Texture) *ShaderMateri
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := s.p.Call("setTexture", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
@@ -510,6 +572,7 @@ func (s *ShaderMaterial) SetTextureArray(name string, textures []*Texture) *Shad
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, TextureArrayToJSArray(textures))
 
 	retVal := s.p.Call("setTextureArray", args...)
@@ -524,7 +587,12 @@ func (s *ShaderMaterial) SetVector2(name string, value *Vector2) *ShaderMaterial
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("setVector2", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
@@ -538,7 +606,12 @@ func (s *ShaderMaterial) SetVector3(name string, value *Vector3) *ShaderMaterial
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("setVector3", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
@@ -552,7 +625,12 @@ func (s *ShaderMaterial) SetVector4(name string, value *Vector4) *ShaderMaterial
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("setVector4", args...)
 	return ShaderMaterialFromJSObject(retVal, s.ctx)
@@ -577,7 +655,7 @@ func (s *ShaderMaterial) SetOptions(options *IShaderMaterialOptions) *ShaderMate
 // ShaderPath returns the ShaderPath property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#shaderpath
-func (s *ShaderMaterial) ShaderPath() interface{} {
+func (s *ShaderMaterial) ShaderPath() js.Value {
 	retVal := s.p.Get("shaderPath")
 	return retVal
 }
@@ -585,7 +663,7 @@ func (s *ShaderMaterial) ShaderPath() interface{} {
 // SetShaderPath sets the ShaderPath property of class ShaderMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial#shaderpath
-func (s *ShaderMaterial) SetShaderPath(shaderPath interface{}) *ShaderMaterial {
-	s.p.Set("shaderPath", shaderPath)
+func (s *ShaderMaterial) SetShaderPath(shaderPath JSObject) *ShaderMaterial {
+	s.p.Set("shaderPath", shaderPath.JSObject())
 	return s
 }

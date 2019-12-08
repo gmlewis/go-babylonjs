@@ -108,10 +108,15 @@ func (d *DynamicTexture) DrawText(text string, x float64, y float64, font string
 	args := make([]interface{}, 0, 6+2)
 
 	args = append(args, text)
+
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, font)
+
 	args = append(args, color)
+
 	args = append(args, clearColor)
 
 	if opts.InvertY == nil {
@@ -166,6 +171,7 @@ func (d *DynamicTexture) ScaleTo(width float64, height float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
 
 	d.p.Call("scaleTo", args...)
@@ -174,7 +180,7 @@ func (d *DynamicTexture) ScaleTo(width float64, height float64) {
 // Serialize calls the Serialize method on the DynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture#serialize
-func (d *DynamicTexture) Serialize() interface{} {
+func (d *DynamicTexture) Serialize() js.Value {
 
 	retVal := d.p.Call("serialize")
 	return retVal

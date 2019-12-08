@@ -57,9 +57,23 @@ func (t *TriPlanarMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *S
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	t.p.Call("bindForSubMesh", args...)
 }
@@ -152,7 +166,11 @@ func (t *TriPlanarMaterial) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := t.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -173,8 +191,17 @@ func (t *TriPlanarMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMe
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -207,12 +234,22 @@ func (t *TriPlanarMaterial) NeedAlphaTesting() bool {
 // Parse calls the Parse method on the TriPlanarMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#parse
-func (t *TriPlanarMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *TriPlanarMaterial {
+func (t *TriPlanarMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *TriPlanarMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := t.p.Call("Parse", args...)
@@ -222,7 +259,7 @@ func (t *TriPlanarMaterial) Parse(source interface{}, scene *Scene, rootUrl stri
 // Serialize calls the Serialize method on the TriPlanarMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#serialize
-func (t *TriPlanarMaterial) Serialize() interface{} {
+func (t *TriPlanarMaterial) Serialize() js.Value {
 
 	retVal := t.p.Call("serialize")
 	return retVal

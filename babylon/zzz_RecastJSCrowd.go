@@ -59,9 +59,23 @@ func (r *RecastJSCrowd) AddAgent(pos *Vector3, parameters *IAgentParameters, tra
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, pos.JSObject())
-	args = append(args, parameters.JSObject())
-	args = append(args, transform.JSObject())
+	if pos == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pos.JSObject())
+	}
+
+	if parameters == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parameters.JSObject())
+	}
+
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
 
 	retVal := r.p.Call("addAgent", args...)
 	return retVal.Float()
@@ -75,7 +89,12 @@ func (r *RecastJSCrowd) AgentGoto(index float64, destination *Vector3) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, index)
-	args = append(args, destination.JSObject())
+
+	if destination == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, destination.JSObject())
+	}
 
 	r.p.Call("agentGoto", args...)
 }
@@ -155,7 +174,11 @@ func (r *RecastJSCrowd) SetDefaultQueryExtent(extent *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, extent.JSObject())
+	if extent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, extent.JSObject())
+	}
 
 	r.p.Call("setDefaultQueryExtent", args...)
 }
@@ -211,7 +234,7 @@ func (r *RecastJSCrowd) SetBjsRECASTPlugin(bjsRECASTPlugin *RecastJSPlugin) *Rec
 // RecastCrowd returns the RecastCrowd property of class RecastJSCrowd.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#recastcrowd
-func (r *RecastJSCrowd) RecastCrowd() interface{} {
+func (r *RecastJSCrowd) RecastCrowd() js.Value {
 	retVal := r.p.Get("recastCrowd")
 	return retVal
 }
@@ -219,8 +242,8 @@ func (r *RecastJSCrowd) RecastCrowd() interface{} {
 // SetRecastCrowd sets the RecastCrowd property of class RecastJSCrowd.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#recastcrowd
-func (r *RecastJSCrowd) SetRecastCrowd(recastCrowd interface{}) *RecastJSCrowd {
-	r.p.Set("recastCrowd", recastCrowd)
+func (r *RecastJSCrowd) SetRecastCrowd(recastCrowd JSObject) *RecastJSCrowd {
+	r.p.Set("recastCrowd", recastCrowd.JSObject())
 	return r
 }
 

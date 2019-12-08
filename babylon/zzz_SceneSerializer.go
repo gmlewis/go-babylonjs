@@ -47,11 +47,15 @@ func (s *SceneSerializer) ClearCache() {
 // Serialize calls the Serialize method on the SceneSerializer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneserializer#serialize
-func (s *SceneSerializer) Serialize(scene *Scene) interface{} {
+func (s *SceneSerializer) Serialize(scene *Scene) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := s.p.Call("Serialize", args...)
 	return retVal
@@ -66,14 +70,18 @@ type SceneSerializerSerializeMeshOpts struct {
 // SerializeMesh calls the SerializeMesh method on the SceneSerializer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneserializer#serializemesh
-func (s *SceneSerializer) SerializeMesh(toSerialize interface{}, opts *SceneSerializerSerializeMeshOpts) interface{} {
+func (s *SceneSerializer) SerializeMesh(toSerialize JSObject, opts *SceneSerializerSerializeMeshOpts) js.Value {
 	if opts == nil {
 		opts = &SceneSerializerSerializeMeshOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, toSerialize)
+	if toSerialize == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toSerialize.JSObject())
+	}
 
 	if opts.WithParents == nil {
 		args = append(args, js.Undefined())

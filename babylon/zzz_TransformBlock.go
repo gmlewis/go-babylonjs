@@ -61,7 +61,7 @@ func (t *TransformBlock) GetClassName() string {
 // Serialize calls the Serialize method on the TransformBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#serialize
-func (t *TransformBlock) Serialize() interface{} {
+func (t *TransformBlock) Serialize() js.Value {
 
 	retVal := t.p.Call("serialize")
 	return retVal
@@ -70,12 +70,22 @@ func (t *TransformBlock) Serialize() interface{} {
 // _deserialize calls the _deserialize method on the TransformBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock#_deserialize
-func (t *TransformBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (t *TransformBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	t.p.Call("_deserialize", args...)

@@ -64,7 +64,11 @@ func (p *PhysicsViewer) HideImpostor(impostor *PhysicsImpostor) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	p.p.Call("hideImpostor", args...)
 }
@@ -84,7 +88,11 @@ func (p *PhysicsViewer) ShowImpostor(impostor *PhysicsImpostor, opts *PhysicsVie
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	if opts.TargetMesh == nil {
 		args = append(args, js.Undefined())

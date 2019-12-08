@@ -111,7 +111,11 @@ func (c *Control3D) LinkToTransformNode(node *TransformNode) *Control3D {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, node.JSObject())
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
 
 	retVal := c.p.Call("linkToTransformNode", args...)
 	return Control3DFromJSObject(retVal, c.ctx)

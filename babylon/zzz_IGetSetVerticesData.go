@@ -129,6 +129,7 @@ func (i *IGetSetVerticesData) SetIndices(indices js.Value, totalVertices float64
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, indices)
+
 	args = append(args, totalVertices)
 
 	if opts.Updatable == nil {
@@ -148,7 +149,9 @@ func (i *IGetSetVerticesData) SetVerticesData(kind string, data js.Value, updata
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, kind)
+
 	args = append(args, data)
+
 	args = append(args, updatable)
 
 	i.p.Call("setVerticesData", args...)
@@ -171,6 +174,7 @@ func (i *IGetSetVerticesData) UpdateVerticesData(kind string, data js.Value, opt
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, kind)
+
 	args = append(args, data)
 
 	if opts.UpdateExtends == nil {

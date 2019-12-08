@@ -83,7 +83,11 @@ func (s *SolidParticle) CopyToRef(target *SolidParticle) *SolidParticle {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	retVal := s.p.Call("copyToRef", args...)
 	return SolidParticleFromJSObject(retVal, s.ctx)
@@ -96,7 +100,11 @@ func (s *SolidParticle) IntersectsMesh(target *Mesh) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	retVal := s.p.Call("intersectsMesh", args...)
 	return retVal.Bool()

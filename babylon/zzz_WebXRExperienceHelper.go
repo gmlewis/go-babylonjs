@@ -45,7 +45,11 @@ func (w *WebXRExperienceHelper) CreateAsync(scene *Scene) *Promise {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := w.p.Call("CreateAsync", args...)
 	return PromiseFromJSObject(retVal, w.ctx)
@@ -67,8 +71,14 @@ func (w *WebXRExperienceHelper) EnterXRAsync(sessionMode js.Value, referenceSpac
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, sessionMode)
+
 	args = append(args, referenceSpaceType)
-	args = append(args, renderTarget.JSObject())
+
+	if renderTarget == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, renderTarget.JSObject())
+	}
 
 	retVal := w.p.Call("enterXRAsync", args...)
 	return PromiseFromJSObject(retVal, w.ctx)
@@ -90,7 +100,11 @@ func (w *WebXRExperienceHelper) RotateCameraByQuaternionUsingContainer(rotation 
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, rotation.JSObject())
+	if rotation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, rotation.JSObject())
+	}
 
 	w.p.Call("rotateCameraByQuaternionUsingContainer", args...)
 }
@@ -102,7 +116,11 @@ func (w *WebXRExperienceHelper) SetPositionOfCameraUsingContainer(position *Vect
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
 
 	w.p.Call("setPositionOfCameraUsingContainer", args...)
 }

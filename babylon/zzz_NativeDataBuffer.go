@@ -39,7 +39,7 @@ func NativeDataBufferArrayToJSArray(array []*NativeDataBuffer) []interface{} {
 // NativeIndexBuffer returns the NativeIndexBuffer property of class NativeDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#nativeindexbuffer
-func (n *NativeDataBuffer) NativeIndexBuffer() interface{} {
+func (n *NativeDataBuffer) NativeIndexBuffer() js.Value {
 	retVal := n.p.Get("nativeIndexBuffer")
 	return retVal
 }
@@ -47,15 +47,15 @@ func (n *NativeDataBuffer) NativeIndexBuffer() interface{} {
 // SetNativeIndexBuffer sets the NativeIndexBuffer property of class NativeDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#nativeindexbuffer
-func (n *NativeDataBuffer) SetNativeIndexBuffer(nativeIndexBuffer interface{}) *NativeDataBuffer {
-	n.p.Set("nativeIndexBuffer", nativeIndexBuffer)
+func (n *NativeDataBuffer) SetNativeIndexBuffer(nativeIndexBuffer JSObject) *NativeDataBuffer {
+	n.p.Set("nativeIndexBuffer", nativeIndexBuffer.JSObject())
 	return n
 }
 
 // NativeVertexBuffer returns the NativeVertexBuffer property of class NativeDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#nativevertexbuffer
-func (n *NativeDataBuffer) NativeVertexBuffer() interface{} {
+func (n *NativeDataBuffer) NativeVertexBuffer() js.Value {
 	retVal := n.p.Get("nativeVertexBuffer")
 	return retVal
 }
@@ -63,7 +63,7 @@ func (n *NativeDataBuffer) NativeVertexBuffer() interface{} {
 // SetNativeVertexBuffer sets the NativeVertexBuffer property of class NativeDataBuffer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer#nativevertexbuffer
-func (n *NativeDataBuffer) SetNativeVertexBuffer(nativeVertexBuffer interface{}) *NativeDataBuffer {
-	n.p.Set("nativeVertexBuffer", nativeVertexBuffer)
+func (n *NativeDataBuffer) SetNativeVertexBuffer(nativeVertexBuffer JSObject) *NativeDataBuffer {
+	n.p.Set("nativeVertexBuffer", nativeVertexBuffer.JSObject())
 	return n
 }

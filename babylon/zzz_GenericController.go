@@ -39,11 +39,11 @@ func GenericControllerArrayToJSArray(array []*GenericController) []interface{} {
 // NewGenericController returns a new GenericController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericcontroller
-func (ba *Babylon) NewGenericController(vrGamepad interface{}) *GenericController {
+func (ba *Babylon) NewGenericController(vrGamepad JSObject) *GenericController {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vrGamepad)
+	args = append(args, vrGamepad.JSObject())
 
 	p := ba.ctx.Get("GenericController").New(args...)
 	return GenericControllerFromJSObject(p, ba.ctx)
@@ -64,7 +64,11 @@ func (g *GenericController) InitControllerMesh(scene *Scene, opts *GenericContro
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())

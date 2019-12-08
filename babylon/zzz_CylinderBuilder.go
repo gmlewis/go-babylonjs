@@ -39,13 +39,19 @@ func CylinderBuilderArrayToJSArray(array []*CylinderBuilder) []interface{} {
 // CreateCylinder calls the CreateCylinder method on the CylinderBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderbuilder#createcylinder
-func (c *CylinderBuilder) CreateCylinder(name string, options js.Value, scene interface{}) *Mesh {
+func (c *CylinderBuilder) CreateCylinder(name string, options js.Value, scene JSObject) *Mesh {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, options)
-	args = append(args, scene)
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := c.p.Call("CreateCylinder", args...)
 	return MeshFromJSObject(retVal, c.ctx)

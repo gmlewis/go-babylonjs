@@ -39,7 +39,7 @@ func EngineCapabilitiesArrayToJSArray(array []*EngineCapabilities) []interface{}
 // Astc returns the Astc property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#astc
-func (e *EngineCapabilities) Astc() interface{} {
+func (e *EngineCapabilities) Astc() js.Value {
 	retVal := e.p.Get("astc")
 	return retVal
 }
@@ -47,8 +47,8 @@ func (e *EngineCapabilities) Astc() interface{} {
 // SetAstc sets the Astc property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#astc
-func (e *EngineCapabilities) SetAstc(astc interface{}) *EngineCapabilities {
-	e.p.Set("astc", astc)
+func (e *EngineCapabilities) SetAstc(astc JSObject) *EngineCapabilities {
+	e.p.Set("astc", astc.JSObject())
 	return e
 }
 
@@ -135,7 +135,7 @@ func (e *EngineCapabilities) SetDrawBuffersExtension(drawBuffersExtension bool) 
 // Etc1 returns the Etc1 property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#etc1
-func (e *EngineCapabilities) Etc1() interface{} {
+func (e *EngineCapabilities) Etc1() js.Value {
 	retVal := e.p.Get("etc1")
 	return retVal
 }
@@ -143,15 +143,15 @@ func (e *EngineCapabilities) Etc1() interface{} {
 // SetEtc1 sets the Etc1 property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#etc1
-func (e *EngineCapabilities) SetEtc1(etc1 interface{}) *EngineCapabilities {
-	e.p.Set("etc1", etc1)
+func (e *EngineCapabilities) SetEtc1(etc1 JSObject) *EngineCapabilities {
+	e.p.Set("etc1", etc1.JSObject())
 	return e
 }
 
 // Etc2 returns the Etc2 property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#etc2
-func (e *EngineCapabilities) Etc2() interface{} {
+func (e *EngineCapabilities) Etc2() js.Value {
 	retVal := e.p.Get("etc2")
 	return retVal
 }
@@ -159,8 +159,8 @@ func (e *EngineCapabilities) Etc2() interface{} {
 // SetEtc2 sets the Etc2 property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#etc2
-func (e *EngineCapabilities) SetEtc2(etc2 interface{}) *EngineCapabilities {
-	e.p.Set("etc2", etc2)
+func (e *EngineCapabilities) SetEtc2(etc2 JSObject) *EngineCapabilities {
+	e.p.Set("etc2", etc2.JSObject())
 	return e
 }
 
@@ -423,7 +423,7 @@ func (e *EngineCapabilities) SetMaxVertexUniformVectors(maxVertexUniformVectors 
 // Multiview returns the Multiview property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#multiview
-func (e *EngineCapabilities) Multiview() interface{} {
+func (e *EngineCapabilities) Multiview() js.Value {
 	retVal := e.p.Get("multiview")
 	return retVal
 }
@@ -431,15 +431,15 @@ func (e *EngineCapabilities) Multiview() interface{} {
 // SetMultiview sets the Multiview property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#multiview
-func (e *EngineCapabilities) SetMultiview(multiview interface{}) *EngineCapabilities {
-	e.p.Set("multiview", multiview)
+func (e *EngineCapabilities) SetMultiview(multiview JSObject) *EngineCapabilities {
+	e.p.Set("multiview", multiview.JSObject())
 	return e
 }
 
 // OculusMultiview returns the OculusMultiview property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#oculusmultiview
-func (e *EngineCapabilities) OculusMultiview() interface{} {
+func (e *EngineCapabilities) OculusMultiview() js.Value {
 	retVal := e.p.Get("oculusMultiview")
 	return retVal
 }
@@ -447,8 +447,8 @@ func (e *EngineCapabilities) OculusMultiview() interface{} {
 // SetOculusMultiview sets the OculusMultiview property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#oculusmultiview
-func (e *EngineCapabilities) SetOculusMultiview(oculusMultiview interface{}) *EngineCapabilities {
-	e.p.Set("oculusMultiview", oculusMultiview)
+func (e *EngineCapabilities) SetOculusMultiview(oculusMultiview JSObject) *EngineCapabilities {
+	e.p.Set("oculusMultiview", oculusMultiview.JSObject())
 	return e
 }
 
@@ -471,7 +471,7 @@ func (e *EngineCapabilities) SetParallelShaderCompile(parallelShaderCompile js.V
 // Pvrtc returns the Pvrtc property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#pvrtc
-func (e *EngineCapabilities) Pvrtc() interface{} {
+func (e *EngineCapabilities) Pvrtc() js.Value {
 	retVal := e.p.Get("pvrtc")
 	return retVal
 }
@@ -479,8 +479,8 @@ func (e *EngineCapabilities) Pvrtc() interface{} {
 // SetPvrtc sets the Pvrtc property of class EngineCapabilities.
 //
 // https://doc.babylonjs.com/api/classes/babylon.enginecapabilities#pvrtc
-func (e *EngineCapabilities) SetPvrtc(pvrtc interface{}) *EngineCapabilities {
-	e.p.Set("pvrtc", pvrtc)
+func (e *EngineCapabilities) SetPvrtc(pvrtc JSObject) *EngineCapabilities {
+	e.p.Set("pvrtc", pvrtc.JSObject())
 	return e
 }
 

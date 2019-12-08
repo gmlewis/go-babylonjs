@@ -77,14 +77,18 @@ type DebugLayerSelectOpts struct {
 // Select calls the Select method on the DebugLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer#select
-func (d *DebugLayer) Select(entity interface{}, opts *DebugLayerSelectOpts) {
+func (d *DebugLayer) Select(entity JSObject, opts *DebugLayerSelectOpts) {
 	if opts == nil {
 		opts = &DebugLayerSelectOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, entity)
+	if entity == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, entity.JSObject())
+	}
 
 	if opts.LineContainerTitle == nil {
 		args = append(args, js.Undefined())
@@ -139,7 +143,7 @@ func (d *DebugLayer) SetInspectorURL(InspectorURL string) *DebugLayer {
 // OnPropertyChangedObservable returns the OnPropertyChangedObservable property of class DebugLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer#onpropertychangedobservable
-func (d *DebugLayer) OnPropertyChangedObservable() interface{} {
+func (d *DebugLayer) OnPropertyChangedObservable() js.Value {
 	retVal := d.p.Get("onPropertyChangedObservable")
 	return retVal
 }
@@ -147,7 +151,7 @@ func (d *DebugLayer) OnPropertyChangedObservable() interface{} {
 // SetOnPropertyChangedObservable sets the OnPropertyChangedObservable property of class DebugLayer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer#onpropertychangedobservable
-func (d *DebugLayer) SetOnPropertyChangedObservable(onPropertyChangedObservable interface{}) *DebugLayer {
-	d.p.Set("onPropertyChangedObservable", onPropertyChangedObservable)
+func (d *DebugLayer) SetOnPropertyChangedObservable(onPropertyChangedObservable JSObject) *DebugLayer {
+	d.p.Set("onPropertyChangedObservable", onPropertyChangedObservable.JSObject())
 	return d
 }

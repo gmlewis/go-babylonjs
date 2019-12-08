@@ -68,9 +68,13 @@ func (s *Sprite) PlayAnimation(from float64, to float64, loop bool, delay float6
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, from)
+
 	args = append(args, to)
+
 	args = append(args, loop)
+
 	args = append(args, delay)
+
 	args = append(args, js.FuncOf(onAnimationEnd))
 
 	s.p.Call("playAnimation", args...)

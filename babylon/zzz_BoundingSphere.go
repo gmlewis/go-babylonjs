@@ -80,8 +80,17 @@ func (b *BoundingSphere) Intersects(sphere0 *BoundingSphere, sphere1 *BoundingSp
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, sphere0.JSObject())
-	args = append(args, sphere1.JSObject())
+	if sphere0 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sphere0.JSObject())
+	}
+
+	if sphere1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sphere1.JSObject())
+	}
 
 	retVal := b.p.Call("Intersects", args...)
 	return retVal.Bool()
@@ -94,7 +103,11 @@ func (b *BoundingSphere) IntersectsPoint(point *Vector3) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, point.JSObject())
+	if point == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point.JSObject())
+	}
 
 	retVal := b.p.Call("intersectsPoint", args...)
 	return retVal.Bool()
@@ -141,8 +154,17 @@ func (b *BoundingSphere) ReConstruct(min *Vector3, max *Vector3, opts *BoundingS
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, min.JSObject())
-	args = append(args, max.JSObject())
+	if min == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, min.JSObject())
+	}
+
+	if max == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, max.JSObject())
+	}
 
 	if opts.WorldMatrix == nil {
 		args = append(args, js.Undefined())

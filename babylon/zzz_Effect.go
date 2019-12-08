@@ -44,20 +44,20 @@ type NewEffectOpts struct {
 	Fallbacks       *IEffectFallbacks
 	OnCompiled      JSFunc
 	OnError         JSFunc
-	IndexParameters *interface{}
+	IndexParameters interface{}
 }
 
 // NewEffect returns a new Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect
-func (ba *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions []string, uniformsNamesOrEngine []string, opts *NewEffectOpts) *Effect {
+func (ba *Babylon) NewEffect(baseName JSObject, attributesNamesOrOptions []string, uniformsNamesOrEngine []string, opts *NewEffectOpts) *Effect {
 	if opts == nil {
 		opts = &NewEffectOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+7)
 
-	args = append(args, baseName)
+	args = append(args, baseName.JSObject())
 	args = append(args, attributesNamesOrOptions)
 	args = append(args, uniformsNamesOrEngine)
 
@@ -118,6 +118,7 @@ func (e *Effect) BindUniformBlock(blockName string, index float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, blockName)
+
 	args = append(args, index)
 
 	e.p.Call("bindUniformBlock", args...)
@@ -130,7 +131,12 @@ func (e *Effect) BindUniformBuffer(buffer *DataBuffer, name string) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, buffer.JSObject())
+	if buffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, buffer.JSObject())
+	}
+
 	args = append(args, name)
 
 	e.p.Call("bindUniformBuffer", args...)
@@ -327,6 +333,7 @@ func (e *Effect) SetArray(uniformName string, array []float64) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setArray", args...)
@@ -341,6 +348,7 @@ func (e *Effect) SetArray2(uniformName string, array []float64) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setArray2", args...)
@@ -355,6 +363,7 @@ func (e *Effect) SetArray3(uniformName string, array []float64) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setArray3", args...)
@@ -369,6 +378,7 @@ func (e *Effect) SetArray4(uniformName string, array []float64) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setArray4", args...)
@@ -383,6 +393,7 @@ func (e *Effect) SetBool(uniformName string, bool bool) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, bool)
 
 	retVal := e.p.Call("setBool", args...)
@@ -397,6 +408,7 @@ func (e *Effect) SetColor3(uniformName string, color3 js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, color3)
 
 	retVal := e.p.Call("setColor3", args...)
@@ -411,7 +423,9 @@ func (e *Effect) SetColor4(uniformName string, color3 js.Value, alpha float64) *
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, color3)
+
 	args = append(args, alpha)
 
 	retVal := e.p.Call("setColor4", args...)
@@ -426,7 +440,12 @@ func (e *Effect) SetDepthStencilTexture(channel string, texture *RenderTargetTex
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, channel)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	e.p.Call("setDepthStencilTexture", args...)
 }
@@ -439,6 +458,7 @@ func (e *Effect) SetDirectColor4(uniformName string, color4 js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, color4)
 
 	retVal := e.p.Call("setDirectColor4", args...)
@@ -453,6 +473,7 @@ func (e *Effect) SetFloat(uniformName string, value float64) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, value)
 
 	retVal := e.p.Call("setFloat", args...)
@@ -467,7 +488,9 @@ func (e *Effect) SetFloat2(uniformName string, x float64, y float64) *Effect {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, x)
+
 	args = append(args, y)
 
 	retVal := e.p.Call("setFloat2", args...)
@@ -482,8 +505,11 @@ func (e *Effect) SetFloat3(uniformName string, x float64, y float64, z float64) 
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	retVal := e.p.Call("setFloat3", args...)
@@ -498,9 +524,13 @@ func (e *Effect) SetFloat4(uniformName string, x float64, y float64, z float64, 
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
+
 	args = append(args, w)
 
 	retVal := e.p.Call("setFloat4", args...)
@@ -515,6 +545,7 @@ func (e *Effect) SetFloatArray(uniformName string, array js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setFloatArray", args...)
@@ -529,6 +560,7 @@ func (e *Effect) SetFloatArray2(uniformName string, array js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setFloatArray2", args...)
@@ -543,6 +575,7 @@ func (e *Effect) SetFloatArray3(uniformName string, array js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setFloatArray3", args...)
@@ -557,6 +590,7 @@ func (e *Effect) SetFloatArray4(uniformName string, array js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setFloatArray4", args...)
@@ -571,6 +605,7 @@ func (e *Effect) SetInt(uniformName string, value float64) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, value)
 
 	retVal := e.p.Call("setInt", args...)
@@ -585,6 +620,7 @@ func (e *Effect) SetIntArray(uniformName string, array js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setIntArray", args...)
@@ -599,6 +635,7 @@ func (e *Effect) SetIntArray2(uniformName string, array js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setIntArray2", args...)
@@ -613,6 +650,7 @@ func (e *Effect) SetIntArray3(uniformName string, array js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setIntArray3", args...)
@@ -627,6 +665,7 @@ func (e *Effect) SetIntArray4(uniformName string, array js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, array)
 
 	retVal := e.p.Call("setIntArray4", args...)
@@ -641,6 +680,7 @@ func (e *Effect) SetMatrices(uniformName string, matrices js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, matrices)
 
 	retVal := e.p.Call("setMatrices", args...)
@@ -655,6 +695,7 @@ func (e *Effect) SetMatrix(uniformName string, matrix js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, matrix)
 
 	retVal := e.p.Call("setMatrix", args...)
@@ -669,6 +710,7 @@ func (e *Effect) SetMatrix2x2(uniformName string, matrix js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, matrix)
 
 	retVal := e.p.Call("setMatrix2x2", args...)
@@ -683,6 +725,7 @@ func (e *Effect) SetMatrix3x3(uniformName string, matrix js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, matrix)
 
 	retVal := e.p.Call("setMatrix3x3", args...)
@@ -697,7 +740,12 @@ func (e *Effect) SetTexture(channel string, texture *BaseTexture) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, channel)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	e.p.Call("setTexture", args...)
 }
@@ -710,6 +758,7 @@ func (e *Effect) SetTextureArray(channel string, textures []*BaseTexture) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, channel)
+
 	args = append(args, BaseTextureArrayToJSArray(textures))
 
 	e.p.Call("setTextureArray", args...)
@@ -723,7 +772,12 @@ func (e *Effect) SetTextureFromPostProcess(channel string, postProcess *PostProc
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, channel)
-	args = append(args, postProcess.JSObject())
+
+	if postProcess == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, postProcess.JSObject())
+	}
 
 	e.p.Call("setTextureFromPostProcess", args...)
 }
@@ -736,7 +790,12 @@ func (e *Effect) SetTextureFromPostProcessOutput(channel string, postProcess *Po
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, channel)
-	args = append(args, postProcess.JSObject())
+
+	if postProcess == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, postProcess.JSObject())
+	}
 
 	e.p.Call("setTextureFromPostProcessOutput", args...)
 }
@@ -749,6 +808,7 @@ func (e *Effect) SetVector2(uniformName string, vector2 js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, vector2)
 
 	retVal := e.p.Call("setVector2", args...)
@@ -763,6 +823,7 @@ func (e *Effect) SetVector3(uniformName string, vector3 js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, vector3)
 
 	retVal := e.p.Call("setVector3", args...)
@@ -777,6 +838,7 @@ func (e *Effect) SetVector4(uniformName string, vector4 js.Value) *Effect {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, vector4)
 
 	retVal := e.p.Call("setVector4", args...)
@@ -850,7 +912,7 @@ func (e *Effect) SetKey(key string) *Effect {
 // Name returns the Name property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#name
-func (e *Effect) Name() interface{} {
+func (e *Effect) Name() js.Value {
 	retVal := e.p.Get("name")
 	return retVal
 }
@@ -858,8 +920,8 @@ func (e *Effect) Name() interface{} {
 // SetName sets the Name property of class Effect.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect#name
-func (e *Effect) SetName(name interface{}) *Effect {
-	e.p.Set("name", name)
+func (e *Effect) SetName(name JSObject) *Effect {
+	e.p.Set("name", name.JSObject())
 	return e
 }
 

@@ -60,7 +60,12 @@ func (c *CloudPoint) IntersectsMesh(target *Mesh, isSphere bool) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
 	args = append(args, isSphere)
 
 	retVal := c.p.Call("intersectsMesh", args...)

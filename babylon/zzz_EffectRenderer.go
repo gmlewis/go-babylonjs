@@ -70,7 +70,11 @@ func (e *EffectRenderer) ApplyEffectWrapper(effectWrapper *EffectWrapper) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effectWrapper.JSObject())
+	if effectWrapper == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effectWrapper.JSObject())
+	}
 
 	e.p.Call("applyEffectWrapper", args...)
 }
@@ -82,7 +86,11 @@ func (e *EffectRenderer) BindBuffers(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	e.p.Call("bindBuffers", args...)
 }

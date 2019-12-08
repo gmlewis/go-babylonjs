@@ -69,8 +69,11 @@ func (r *RadioButton) AddRadioButtonWithHeader(title string, group string, isChe
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, title)
+
 	args = append(args, group)
+
 	args = append(args, isChecked)
+
 	args = append(args, js.FuncOf(onValueChanged))
 
 	retVal := r.p.Call("AddRadioButtonWithHeader", args...)
@@ -96,9 +99,20 @@ func (r *RadioButton) _onPointerDown(target *Control, coordinates *Vector2, poin
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
+
 	args = append(args, buttonIndex)
 
 	retVal := r.p.Call("_onPointerDown", args...)

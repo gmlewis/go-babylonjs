@@ -85,6 +85,7 @@ func (s *SceneOptimizerOptions) AddCustomOptimization(onApply JSFunc, onGetDescr
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, js.FuncOf(onApply))
+
 	args = append(args, js.FuncOf(onGetDescription))
 
 	if opts.Priority == nil {
@@ -104,7 +105,11 @@ func (s *SceneOptimizerOptions) AddOptimization(optimization *SceneOptimization)
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, optimization.JSObject())
+	if optimization == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, optimization.JSObject())
+	}
 
 	retVal := s.p.Call("addOptimization", args...)
 	return SceneOptimizerOptionsFromJSObject(retVal, s.ctx)

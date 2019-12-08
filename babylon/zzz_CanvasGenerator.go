@@ -44,6 +44,7 @@ func (c *CanvasGenerator) CreateCanvas(width float64, height float64) js.Value {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
 
 	retVal := c.p.Call("CreateCanvas", args...)

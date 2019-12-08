@@ -53,13 +53,19 @@ func (ba *Babylon) NewCustomMaterial(name string, scene *Scene) *CustomMaterial 
 // AddUniform calls the AddUniform method on the CustomMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.custommaterial#adduniform
-func (c *CustomMaterial) AddUniform(name string, kind string, param interface{}) *CustomMaterial {
+func (c *CustomMaterial) AddUniform(name string, kind string, param JSObject) *CustomMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, kind)
-	args = append(args, param)
+
+	if param == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, param.JSObject())
+	}
 
 	retVal := c.p.Call("AddUniform", args...)
 	return CustomMaterialFromJSObject(retVal, c.ctx)
@@ -72,8 +78,17 @@ func (c *CustomMaterial) AttachAfterBind(mesh *Mesh, effect *Effect) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, effect.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	c.p.Call("AttachAfterBind", args...)
 }
@@ -86,9 +101,13 @@ func (c *CustomMaterial) Builder(shaderName string, uniforms []string, uniformBu
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, shaderName)
+
 	args = append(args, uniforms)
+
 	args = append(args, uniformBuffers)
+
 	args = append(args, samplers)
+
 	args = append(args, defines)
 
 	retVal := c.p.Call("Builder", args...)
@@ -207,6 +226,7 @@ func (c *CustomMaterial) ReviewUniform(name string, arr []string) []string {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, arr)
 
 	retVal := c.p.Call("ReviewUniform", args...)
@@ -434,7 +454,7 @@ func (c *CustomMaterial) Set_newSamplerInstances(_newSamplerInstances []*Texture
 // _newUniformInstances returns the _newUniformInstances property of class CustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.custommaterial#_newuniforminstances
-func (c *CustomMaterial) _newUniformInstances() interface{} {
+func (c *CustomMaterial) _newUniformInstances() js.Value {
 	retVal := c.p.Get("_newUniformInstances")
 	return retVal
 }
@@ -442,8 +462,8 @@ func (c *CustomMaterial) _newUniformInstances() interface{} {
 // Set_newUniformInstances sets the _newUniformInstances property of class CustomMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.custommaterial#_newuniforminstances
-func (c *CustomMaterial) Set_newUniformInstances(_newUniformInstances interface{}) *CustomMaterial {
-	c.p.Set("_newUniformInstances", _newUniformInstances)
+func (c *CustomMaterial) Set_newUniformInstances(_newUniformInstances JSObject) *CustomMaterial {
+	c.p.Set("_newUniformInstances", _newUniformInstances.JSObject())
 	return c
 }
 

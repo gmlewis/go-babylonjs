@@ -46,14 +46,14 @@ type NewKhronosTextureContainerOpts struct {
 // NewKhronosTextureContainer returns a new KhronosTextureContainer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer
-func (ba *Babylon) NewKhronosTextureContainer(arrayBuffer interface{}, facesExpected float64, opts *NewKhronosTextureContainerOpts) *KhronosTextureContainer {
+func (ba *Babylon) NewKhronosTextureContainer(arrayBuffer JSObject, facesExpected float64, opts *NewKhronosTextureContainerOpts) *KhronosTextureContainer {
 	if opts == nil {
 		opts = &NewKhronosTextureContainerOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, arrayBuffer)
+	args = append(args, arrayBuffer.JSObject())
 	args = append(args, facesExpected)
 
 	if opts.ThreeDExpected == nil {
@@ -74,7 +74,7 @@ func (ba *Babylon) NewKhronosTextureContainer(arrayBuffer interface{}, facesExpe
 // ArrayBuffer returns the ArrayBuffer property of class KhronosTextureContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#arraybuffer
-func (k *KhronosTextureContainer) ArrayBuffer() interface{} {
+func (k *KhronosTextureContainer) ArrayBuffer() js.Value {
 	retVal := k.p.Get("arrayBuffer")
 	return retVal
 }
@@ -82,8 +82,8 @@ func (k *KhronosTextureContainer) ArrayBuffer() interface{} {
 // SetArrayBuffer sets the ArrayBuffer property of class KhronosTextureContainer.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#arraybuffer
-func (k *KhronosTextureContainer) SetArrayBuffer(arrayBuffer interface{}) *KhronosTextureContainer {
-	k.p.Set("arrayBuffer", arrayBuffer)
+func (k *KhronosTextureContainer) SetArrayBuffer(arrayBuffer JSObject) *KhronosTextureContainer {
+	k.p.Set("arrayBuffer", arrayBuffer.JSObject())
 	return k
 }
 

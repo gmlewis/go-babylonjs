@@ -45,7 +45,11 @@ func (b *BouncingBehavior) Attach(camera *ArcRotateCamera) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	b.p.Call("attach", args...)
 }

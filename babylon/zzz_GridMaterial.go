@@ -58,9 +58,23 @@ func (g *GridMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMes
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	g.p.Call("bindForSubMesh", args...)
 }
@@ -126,8 +140,17 @@ func (g *GridMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, o
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -155,7 +178,11 @@ func (g *GridMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := g.p.Call("needAlphaBlendingForMesh", args...)
 	return retVal.Bool()
@@ -164,12 +191,22 @@ func (g *GridMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 // Parse calls the Parse method on the GridMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#parse
-func (g *GridMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *GridMaterial {
+func (g *GridMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *GridMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := g.p.Call("Parse", args...)
@@ -179,7 +216,7 @@ func (g *GridMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *
 // Serialize calls the Serialize method on the GridMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial#serialize
-func (g *GridMaterial) Serialize() interface{} {
+func (g *GridMaterial) Serialize() js.Value {
 
 	retVal := g.p.Call("serialize")
 	return retVal

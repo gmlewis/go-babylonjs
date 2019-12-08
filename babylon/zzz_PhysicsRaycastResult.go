@@ -83,8 +83,17 @@ func (p *PhysicsRaycastResult) SetHitData(hitNormalWorld *IXYZ, hitPointWorld *I
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, hitNormalWorld.JSObject())
-	args = append(args, hitPointWorld.JSObject())
+	if hitNormalWorld == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, hitNormalWorld.JSObject())
+	}
+
+	if hitPointWorld == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, hitPointWorld.JSObject())
+	}
 
 	p.p.Call("setHitData", args...)
 }

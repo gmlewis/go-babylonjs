@@ -39,7 +39,7 @@ func InstantiationToolsArrayToJSArray(array []*InstantiationTools) []interface{}
 // Instantiate calls the Instantiate method on the InstantiationTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instantiationtools#instantiate
-func (i *InstantiationTools) Instantiate(className string) interface{} {
+func (i *InstantiationTools) Instantiate(className string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 

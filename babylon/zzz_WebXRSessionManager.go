@@ -123,7 +123,7 @@ func (w *WebXRSessionManager) InitializeAsync() *Promise {
 
 // WebXRSessionManagerInitializeSessionAsyncOpts contains optional parameters for WebXRSessionManager.InitializeSessionAsync.
 type WebXRSessionManagerInitializeSessionAsyncOpts struct {
-	OptionalFeatures *interface{}
+	OptionalFeatures interface{}
 }
 
 // InitializeSessionAsync calls the InitializeSessionAsync method on the WebXRSessionManager object.

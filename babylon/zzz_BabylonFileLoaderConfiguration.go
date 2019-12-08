@@ -39,7 +39,7 @@ func BabylonFileLoaderConfigurationArrayToJSArray(array []*BabylonFileLoaderConf
 // LoaderInjectedPhysicsEngine returns the LoaderInjectedPhysicsEngine property of class BabylonFileLoaderConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.babylonfileloaderconfiguration#loaderinjectedphysicsengine
-func (b *BabylonFileLoaderConfiguration) LoaderInjectedPhysicsEngine() interface{} {
+func (b *BabylonFileLoaderConfiguration) LoaderInjectedPhysicsEngine() js.Value {
 	retVal := b.p.Get("LoaderInjectedPhysicsEngine")
 	return retVal
 }
@@ -47,7 +47,7 @@ func (b *BabylonFileLoaderConfiguration) LoaderInjectedPhysicsEngine() interface
 // SetLoaderInjectedPhysicsEngine sets the LoaderInjectedPhysicsEngine property of class BabylonFileLoaderConfiguration.
 //
 // https://doc.babylonjs.com/api/classes/babylon.babylonfileloaderconfiguration#loaderinjectedphysicsengine
-func (b *BabylonFileLoaderConfiguration) SetLoaderInjectedPhysicsEngine(LoaderInjectedPhysicsEngine interface{}) *BabylonFileLoaderConfiguration {
-	b.p.Set("LoaderInjectedPhysicsEngine", LoaderInjectedPhysicsEngine)
+func (b *BabylonFileLoaderConfiguration) SetLoaderInjectedPhysicsEngine(LoaderInjectedPhysicsEngine JSObject) *BabylonFileLoaderConfiguration {
+	b.p.Set("LoaderInjectedPhysicsEngine", LoaderInjectedPhysicsEngine.JSObject())
 	return b
 }

@@ -70,6 +70,7 @@ func (s *StringTools) EndsWith(str string, suffix string) bool {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, str)
+
 	args = append(args, suffix)
 
 	retVal := s.p.Call("EndsWith", args...)
@@ -84,6 +85,7 @@ func (s *StringTools) StartsWith(str string, suffix string) bool {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, str)
+
 	args = append(args, suffix)
 
 	retVal := s.p.Call("StartsWith", args...)

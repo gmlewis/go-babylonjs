@@ -60,7 +60,7 @@ func (gui *GUI) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
 // GetNodeById calls the GetNodeById method on the XmlLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xmlloader#getnodebyid
-func (x *XmlLoader) GetNodeById(id string) interface{} {
+func (x *XmlLoader) GetNodeById(id string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
@@ -73,7 +73,7 @@ func (x *XmlLoader) GetNodeById(id string) interface{} {
 // GetNodes calls the GetNodes method on the XmlLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xmlloader#getnodes
-func (x *XmlLoader) GetNodes() interface{} {
+func (x *XmlLoader) GetNodes() js.Value {
 
 	retVal := x.p.Call("getNodes")
 	return retVal
@@ -91,13 +91,27 @@ func (x *XmlLoader) IsLoaded() bool {
 // LoadLayout calls the LoadLayout method on the XmlLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xmlloader#loadlayout
-func (x *XmlLoader) LoadLayout(xmlFile interface{}, rootNode interface{}, callback interface{}) {
+func (x *XmlLoader) LoadLayout(xmlFile JSObject, rootNode JSObject, callback JSObject) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, xmlFile)
-	args = append(args, rootNode)
-	args = append(args, callback)
+	if xmlFile == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, xmlFile.JSObject())
+	}
+
+	if rootNode == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, rootNode.JSObject())
+	}
+
+	if callback == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, callback.JSObject())
+	}
 
 	x.p.Call("loadLayout", args...)
 }

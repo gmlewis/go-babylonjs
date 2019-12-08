@@ -61,7 +61,7 @@ func (t *TrigonometryBlock) GetClassName() string {
 // Serialize calls the Serialize method on the TrigonometryBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#serialize
-func (t *TrigonometryBlock) Serialize() interface{} {
+func (t *TrigonometryBlock) Serialize() js.Value {
 
 	retVal := t.p.Call("serialize")
 	return retVal
@@ -70,12 +70,22 @@ func (t *TrigonometryBlock) Serialize() interface{} {
 // _deserialize calls the _deserialize method on the TrigonometryBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#_deserialize
-func (t *TrigonometryBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (t *TrigonometryBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	t.p.Call("_deserialize", args...)

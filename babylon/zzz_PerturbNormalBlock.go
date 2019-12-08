@@ -56,7 +56,11 @@ func (p *PerturbNormalBlock) AutoConfigure(material *NodeMaterial) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, material.JSObject())
+	if material == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, material.JSObject())
+	}
 
 	p.p.Call("autoConfigure", args...)
 }
@@ -76,8 +80,17 @@ func (p *PerturbNormalBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, op
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, effect.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -104,8 +117,18 @@ func (p *PerturbNormalBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *No
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
 
 	p.p.Call("prepareDefines", args...)
@@ -114,7 +137,7 @@ func (p *PerturbNormalBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *No
 // Serialize calls the Serialize method on the PerturbNormalBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#serialize
-func (p *PerturbNormalBlock) Serialize() interface{} {
+func (p *PerturbNormalBlock) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal
@@ -123,12 +146,22 @@ func (p *PerturbNormalBlock) Serialize() interface{} {
 // _deserialize calls the _deserialize method on the PerturbNormalBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#_deserialize
-func (p *PerturbNormalBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (p *PerturbNormalBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	p.p.Call("_deserialize", args...)

@@ -39,13 +39,19 @@ func GroundBuilderArrayToJSArray(array []*GroundBuilder) []interface{} {
 // CreateGround calls the CreateGround method on the GroundBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundbuilder#createground
-func (g *GroundBuilder) CreateGround(name string, options js.Value, scene interface{}) *Mesh {
+func (g *GroundBuilder) CreateGround(name string, options js.Value, scene JSObject) *Mesh {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, options)
-	args = append(args, scene)
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := g.p.Call("CreateGround", args...)
 	return MeshFromJSObject(retVal, g.ctx)
@@ -67,7 +73,9 @@ func (g *GroundBuilder) CreateGroundFromHeightMap(name string, url string, optio
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, name)
+
 	args = append(args, url)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -96,6 +104,7 @@ func (g *GroundBuilder) CreateTiledGround(name string, options js.Value, opts *G
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

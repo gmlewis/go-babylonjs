@@ -59,9 +59,23 @@ func (m *Measure) CombineToRef(a *Measure, b *Measure, result *Measure) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, a.JSObject())
-	args = append(args, b.JSObject())
-	args = append(args, result.JSObject())
+	if a == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, a.JSObject())
+	}
+
+	if b == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, b.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("CombineToRef", args...)
 }
@@ -73,7 +87,11 @@ func (m *Measure) CopyFrom(other *Measure) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	m.p.Call("copyFrom", args...)
 }
@@ -86,8 +104,11 @@ func (m *Measure) CopyFromFloats(left float64, top float64, width float64, heigh
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, left)
+
 	args = append(args, top)
+
 	args = append(args, width)
+
 	args = append(args, height)
 
 	m.p.Call("copyFromFloats", args...)
@@ -109,7 +130,11 @@ func (m *Measure) IsEqualsTo(other *Measure) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := m.p.Call("isEqualsTo", args...)
 	return retVal.Bool()
@@ -122,8 +147,17 @@ func (m *Measure) TransformToRef(transform *Matrix2D, result *Measure) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, transform.JSObject())
-	args = append(args, result.JSObject())
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("transformToRef", args...)
 }

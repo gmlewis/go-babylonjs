@@ -55,7 +55,7 @@ func (i *IAnimationKey) SetFrame(frame float64) *IAnimationKey {
 // InTangent returns the InTangent property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#intangent
-func (i *IAnimationKey) InTangent() interface{} {
+func (i *IAnimationKey) InTangent() js.Value {
 	retVal := i.p.Get("inTangent")
 	return retVal
 }
@@ -63,8 +63,8 @@ func (i *IAnimationKey) InTangent() interface{} {
 // SetInTangent sets the InTangent property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#intangent
-func (i *IAnimationKey) SetInTangent(inTangent interface{}) *IAnimationKey {
-	i.p.Set("inTangent", inTangent)
+func (i *IAnimationKey) SetInTangent(inTangent JSObject) *IAnimationKey {
+	i.p.Set("inTangent", inTangent.JSObject())
 	return i
 }
 
@@ -87,7 +87,7 @@ func (i *IAnimationKey) SetInterpolation(interpolation js.Value) *IAnimationKey 
 // OutTangent returns the OutTangent property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#outtangent
-func (i *IAnimationKey) OutTangent() interface{} {
+func (i *IAnimationKey) OutTangent() js.Value {
 	retVal := i.p.Get("outTangent")
 	return retVal
 }
@@ -95,15 +95,15 @@ func (i *IAnimationKey) OutTangent() interface{} {
 // SetOutTangent sets the OutTangent property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#outtangent
-func (i *IAnimationKey) SetOutTangent(outTangent interface{}) *IAnimationKey {
-	i.p.Set("outTangent", outTangent)
+func (i *IAnimationKey) SetOutTangent(outTangent JSObject) *IAnimationKey {
+	i.p.Set("outTangent", outTangent.JSObject())
 	return i
 }
 
 // Value returns the Value property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#value
-func (i *IAnimationKey) Value() interface{} {
+func (i *IAnimationKey) Value() js.Value {
 	retVal := i.p.Get("value")
 	return retVal
 }
@@ -111,7 +111,7 @@ func (i *IAnimationKey) Value() interface{} {
 // SetValue sets the Value property of class IAnimationKey.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ianimationkey#value
-func (i *IAnimationKey) SetValue(value interface{}) *IAnimationKey {
-	i.p.Set("value", value)
+func (i *IAnimationKey) SetValue(value JSObject) *IAnimationKey {
+	i.p.Set("value", value.JSObject())
 	return i
 }

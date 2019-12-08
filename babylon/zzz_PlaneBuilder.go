@@ -52,6 +52,7 @@ func (p *PlaneBuilder) CreatePlane(name string, options js.Value, opts *PlaneBui
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

@@ -93,7 +93,11 @@ func (d *DefaultRenderingPipeline) AddCamera(camera *Camera) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	d.p.Call("addCamera", args...)
 }
@@ -118,12 +122,22 @@ func (d *DefaultRenderingPipeline) GetClassName() string {
 // Parse calls the Parse method on the DefaultRenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#parse
-func (d *DefaultRenderingPipeline) Parse(source interface{}, scene *Scene, rootUrl string) *DefaultRenderingPipeline {
+func (d *DefaultRenderingPipeline) Parse(source JSObject, scene *Scene, rootUrl string) *DefaultRenderingPipeline {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := d.p.Call("Parse", args...)
@@ -145,7 +159,11 @@ func (d *DefaultRenderingPipeline) RemoveCamera(camera *Camera) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	d.p.Call("removeCamera", args...)
 }
@@ -153,7 +171,7 @@ func (d *DefaultRenderingPipeline) RemoveCamera(camera *Camera) {
 // Serialize calls the Serialize method on the DefaultRenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#serialize
-func (d *DefaultRenderingPipeline) Serialize() interface{} {
+func (d *DefaultRenderingPipeline) Serialize() js.Value {
 
 	retVal := d.p.Call("serialize")
 	return retVal

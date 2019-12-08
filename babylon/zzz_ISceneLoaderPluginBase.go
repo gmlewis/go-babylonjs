@@ -52,11 +52,16 @@ func (i *ISceneLoaderPluginBase) CanDirectLoad(data string) bool {
 // DirectLoad calls the DirectLoad method on the ISceneLoaderPluginBase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginbase#directload
-func (i *ISceneLoaderPluginBase) DirectLoad(scene *Scene, data string) interface{} {
+func (i *ISceneLoaderPluginBase) DirectLoad(scene *Scene, data string) js.Value {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, data)
 
 	retVal := i.p.Call("directLoad", args...)
@@ -80,8 +85,14 @@ func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file js.Value, onSuccess
 
 	args := make([]interface{}, 0, 3+3)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, file)
+
 	args = append(args, js.FuncOf(onSuccess))
 
 	if opts.OnProgress == nil {
@@ -121,8 +132,14 @@ func (i *ISceneLoaderPluginBase) RequestFile(scene *Scene, url string, onSuccess
 
 	args := make([]interface{}, 0, 3+3)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, url)
+
 	args = append(args, js.FuncOf(onSuccess))
 
 	if opts.OnProgress == nil {

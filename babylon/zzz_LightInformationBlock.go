@@ -64,8 +64,17 @@ func (l *LightInformationBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial,
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, effect.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -92,8 +101,18 @@ func (l *LightInformationBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial 
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
 
 	l.p.Call("prepareDefines", args...)
@@ -102,7 +121,7 @@ func (l *LightInformationBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial 
 // Serialize calls the Serialize method on the LightInformationBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#serialize
-func (l *LightInformationBlock) Serialize() interface{} {
+func (l *LightInformationBlock) Serialize() js.Value {
 
 	retVal := l.p.Call("serialize")
 	return retVal
@@ -111,12 +130,22 @@ func (l *LightInformationBlock) Serialize() interface{} {
 // _deserialize calls the _deserialize method on the LightInformationBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#_deserialize
-func (l *LightInformationBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (l *LightInformationBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	l.p.Call("_deserialize", args...)

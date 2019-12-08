@@ -39,7 +39,7 @@ func TargetedAnimationArrayToJSArray(array []*TargetedAnimation) []interface{} {
 // Serialize calls the Serialize method on the TargetedAnimation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetedanimation#serialize
-func (t *TargetedAnimation) Serialize() interface{} {
+func (t *TargetedAnimation) Serialize() js.Value {
 
 	retVal := t.p.Call("serialize")
 	return retVal
@@ -64,7 +64,7 @@ func (t *TargetedAnimation) SetAnimation(animation *Animation) *TargetedAnimatio
 // Target returns the Target property of class TargetedAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetedanimation#target
-func (t *TargetedAnimation) Target() interface{} {
+func (t *TargetedAnimation) Target() js.Value {
 	retVal := t.p.Get("target")
 	return retVal
 }
@@ -72,7 +72,7 @@ func (t *TargetedAnimation) Target() interface{} {
 // SetTarget sets the Target property of class TargetedAnimation.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetedanimation#target
-func (t *TargetedAnimation) SetTarget(target interface{}) *TargetedAnimation {
-	t.p.Set("target", target)
+func (t *TargetedAnimation) SetTarget(target JSObject) *TargetedAnimation {
+	t.p.Set("target", target.JSObject())
 	return t
 }

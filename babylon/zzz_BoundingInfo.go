@@ -71,8 +71,17 @@ func (b *BoundingInfo) CenterOn(center *Vector3, extend *Vector3) *BoundingInfo 
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, center.JSObject())
-	args = append(args, extend.JSObject())
+	if center == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, center.JSObject())
+	}
+
+	if extend == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, extend.JSObject())
+	}
 
 	retVal := b.p.Call("centerOn", args...)
 	return BoundingInfoFromJSObject(retVal, b.ctx)
@@ -85,7 +94,12 @@ func (b *BoundingInfo) Intersects(boundingInfo *BoundingInfo, precise bool) bool
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, boundingInfo.JSObject())
+	if boundingInfo == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, boundingInfo.JSObject())
+	}
+
 	args = append(args, precise)
 
 	retVal := b.p.Call("intersects", args...)
@@ -99,7 +113,11 @@ func (b *BoundingInfo) IntersectsPoint(point *Vector3) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, point.JSObject())
+	if point == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, point.JSObject())
+	}
 
 	retVal := b.p.Call("intersectsPoint", args...)
 	return retVal.Bool()
@@ -160,8 +178,17 @@ func (b *BoundingInfo) ReConstruct(min *Vector3, max *Vector3, opts *BoundingInf
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, min.JSObject())
-	args = append(args, max.JSObject())
+	if min == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, min.JSObject())
+	}
+
+	if max == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, max.JSObject())
+	}
 
 	if opts.WorldMatrix == nil {
 		args = append(args, js.Undefined())
@@ -192,7 +219,11 @@ func (b *BoundingInfo) Update(world *Matrix) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, world.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
 
 	b.p.Call("update", args...)
 }

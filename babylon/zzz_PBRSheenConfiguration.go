@@ -57,7 +57,13 @@ func (p *PBRSheenConfiguration) AddFallbacks(defines js.Value, fallbacks *Effect
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, defines)
-	args = append(args, fallbacks.JSObject())
+
+	if fallbacks == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fallbacks.JSObject())
+	}
+
 	args = append(args, currentRank)
 
 	retVal := p.p.Call("AddFallbacks", args...)
@@ -95,8 +101,18 @@ func (p *PBRSheenConfiguration) BindForSubMesh(uniformBuffer *UniformBuffer, sce
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, uniformBuffer.JSObject())
-	args = append(args, scene.JSObject())
+	if uniformBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, uniformBuffer.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, isFrozen)
 
 	p.p.Call("bindForSubMesh", args...)
@@ -109,7 +125,11 @@ func (p *PBRSheenConfiguration) CopyTo(sheenConfiguration *PBRSheenConfiguration
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, sheenConfiguration.JSObject())
+	if sheenConfiguration == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sheenConfiguration.JSObject())
+	}
 
 	p.p.Call("copyTo", args...)
 }
@@ -178,7 +198,11 @@ func (p *PBRSheenConfiguration) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := p.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -192,7 +216,12 @@ func (p *PBRSheenConfiguration) IsReadyForSubMesh(defines js.Value, scene *Scene
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, defines)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := p.p.Call("isReadyForSubMesh", args...)
 	return retVal.Bool()
@@ -201,12 +230,22 @@ func (p *PBRSheenConfiguration) IsReadyForSubMesh(defines js.Value, scene *Scene
 // Parse calls the Parse method on the PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#parse
-func (p *PBRSheenConfiguration) Parse(source interface{}, scene *Scene, rootUrl string) {
+func (p *PBRSheenConfiguration) Parse(source JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	p.p.Call("parse", args...)
@@ -220,7 +259,12 @@ func (p *PBRSheenConfiguration) PrepareDefines(defines js.Value, scene *Scene) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, defines)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	p.p.Call("prepareDefines", args...)
 }
@@ -232,7 +276,11 @@ func (p *PBRSheenConfiguration) PrepareUniformBuffer(uniformBuffer *UniformBuffe
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, uniformBuffer.JSObject())
+	if uniformBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, uniformBuffer.JSObject())
+	}
 
 	p.p.Call("PrepareUniformBuffer", args...)
 }
@@ -240,7 +288,7 @@ func (p *PBRSheenConfiguration) PrepareUniformBuffer(uniformBuffer *UniformBuffe
 // Serialize calls the Serialize method on the PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#serialize
-func (p *PBRSheenConfiguration) Serialize() interface{} {
+func (p *PBRSheenConfiguration) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal

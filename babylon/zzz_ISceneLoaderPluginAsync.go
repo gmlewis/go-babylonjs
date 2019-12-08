@@ -45,16 +45,31 @@ type ISceneLoaderPluginAsyncImportMeshAsyncOpts struct {
 // ImportMeshAsync calls the ImportMeshAsync method on the ISceneLoaderPluginAsync object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginasync#importmeshasync
-func (i *ISceneLoaderPluginAsync) ImportMeshAsync(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, opts *ISceneLoaderPluginAsyncImportMeshAsyncOpts) *Promise {
+func (i *ISceneLoaderPluginAsync) ImportMeshAsync(meshesNames JSObject, scene *Scene, data JSObject, rootUrl string, opts *ISceneLoaderPluginAsyncImportMeshAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ISceneLoaderPluginAsyncImportMeshAsyncOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, meshesNames)
-	args = append(args, scene.JSObject())
-	args = append(args, data)
+	if meshesNames == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, meshesNames.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if data == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, data.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	if opts.OnProgress == nil {
@@ -81,15 +96,25 @@ type ISceneLoaderPluginAsyncLoadAssetContainerAsyncOpts struct {
 // LoadAssetContainerAsync calls the LoadAssetContainerAsync method on the ISceneLoaderPluginAsync object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginasync#loadassetcontainerasync
-func (i *ISceneLoaderPluginAsync) LoadAssetContainerAsync(scene *Scene, data interface{}, rootUrl string, opts *ISceneLoaderPluginAsyncLoadAssetContainerAsyncOpts) *Promise {
+func (i *ISceneLoaderPluginAsync) LoadAssetContainerAsync(scene *Scene, data JSObject, rootUrl string, opts *ISceneLoaderPluginAsyncLoadAssetContainerAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ISceneLoaderPluginAsyncLoadAssetContainerAsyncOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, scene.JSObject())
-	args = append(args, data)
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if data == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, data.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	if opts.OnProgress == nil {
@@ -116,15 +141,25 @@ type ISceneLoaderPluginAsyncLoadAsyncOpts struct {
 // LoadAsync calls the LoadAsync method on the ISceneLoaderPluginAsync object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneloaderpluginasync#loadasync
-func (i *ISceneLoaderPluginAsync) LoadAsync(scene *Scene, data interface{}, rootUrl string, opts *ISceneLoaderPluginAsyncLoadAsyncOpts) *Promise {
+func (i *ISceneLoaderPluginAsync) LoadAsync(scene *Scene, data JSObject, rootUrl string, opts *ISceneLoaderPluginAsyncLoadAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ISceneLoaderPluginAsyncLoadAsyncOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, scene.JSObject())
-	args = append(args, data)
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if data == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, data.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	if opts.OnProgress == nil {

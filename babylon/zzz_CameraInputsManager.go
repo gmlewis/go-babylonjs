@@ -59,7 +59,11 @@ func (c *CameraInputsManager) Add(input *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, input.JSObject())
+	if input == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, input.JSObject())
+	}
 
 	c.p.Call("add", args...)
 }
@@ -97,7 +101,11 @@ func (c *CameraInputsManager) AttachInput(input *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, input.JSObject())
+	if input == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, input.JSObject())
+	}
 
 	c.p.Call("attachInput", args...)
 }
@@ -139,11 +147,15 @@ func (c *CameraInputsManager) DetachElement(element js.Value, opts *CameraInputs
 // Parse calls the Parse method on the CameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#parse
-func (c *CameraInputsManager) Parse(parsedCamera interface{}) {
+func (c *CameraInputsManager) Parse(parsedCamera JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parsedCamera)
+	if parsedCamera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedCamera.JSObject())
+	}
 
 	c.p.Call("parse", args...)
 }
@@ -163,7 +175,11 @@ func (c *CameraInputsManager) Remove(inputToRemove *ICameraInput) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, inputToRemove.JSObject())
+	if inputToRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, inputToRemove.JSObject())
+	}
 
 	c.p.Call("remove", args...)
 }
@@ -183,11 +199,15 @@ func (c *CameraInputsManager) RemoveByType(inputType string) {
 // Serialize calls the Serialize method on the CameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#serialize
-func (c *CameraInputsManager) Serialize(serializedCamera interface{}) {
+func (c *CameraInputsManager) Serialize(serializedCamera JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializedCamera)
+	if serializedCamera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializedCamera.JSObject())
+	}
 
 	c.p.Call("serialize", args...)
 }

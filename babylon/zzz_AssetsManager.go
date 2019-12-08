@@ -59,6 +59,7 @@ func (a *AssetsManager) AddBinaryFileTask(taskName string, url string) *BinaryFi
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, taskName)
+
 	args = append(args, url)
 
 	retVal := a.p.Call("addBinaryFileTask", args...)
@@ -83,6 +84,7 @@ func (a *AssetsManager) AddCubeTextureTask(taskName string, url string, opts *As
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, taskName)
+
 	args = append(args, url)
 
 	if opts.Extensions == nil {
@@ -122,7 +124,9 @@ func (a *AssetsManager) AddEquiRectangularCubeTextureAssetTask(taskName string, 
 	args := make([]interface{}, 0, 3+2)
 
 	args = append(args, taskName)
+
 	args = append(args, url)
+
 	args = append(args, size)
 
 	if opts.NoMipmap == nil {
@@ -159,7 +163,9 @@ func (a *AssetsManager) AddHDRCubeTextureTask(taskName string, url string, size 
 	args := make([]interface{}, 0, 3+4)
 
 	args = append(args, taskName)
+
 	args = append(args, url)
+
 	args = append(args, size)
 
 	if opts.NoMipmap == nil {
@@ -195,6 +201,7 @@ func (a *AssetsManager) AddImageTask(taskName string, url string) *ImageAssetTas
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, taskName)
+
 	args = append(args, url)
 
 	retVal := a.p.Call("addImageTask", args...)
@@ -204,13 +211,20 @@ func (a *AssetsManager) AddImageTask(taskName string, url string) *ImageAssetTas
 // AddMeshTask calls the AddMeshTask method on the AssetsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager#addmeshtask
-func (a *AssetsManager) AddMeshTask(taskName string, meshesNames interface{}, rootUrl string, sceneFilename string) *MeshAssetTask {
+func (a *AssetsManager) AddMeshTask(taskName string, meshesNames JSObject, rootUrl string, sceneFilename string) *MeshAssetTask {
 
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, taskName)
-	args = append(args, meshesNames)
+
+	if meshesNames == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, meshesNames.JSObject())
+	}
+
 	args = append(args, rootUrl)
+
 	args = append(args, sceneFilename)
 
 	retVal := a.p.Call("addMeshTask", args...)
@@ -225,6 +239,7 @@ func (a *AssetsManager) AddTextFileTask(taskName string, url string) *TextFileAs
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, taskName)
+
 	args = append(args, url)
 
 	retVal := a.p.Call("addTextFileTask", args...)
@@ -249,6 +264,7 @@ func (a *AssetsManager) AddTextureTask(taskName string, url string, opts *Assets
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, taskName)
+
 	args = append(args, url)
 
 	if opts.NoMipmap == nil {
@@ -296,7 +312,11 @@ func (a *AssetsManager) RemoveTask(task *AbstractAssetTask) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, task.JSObject())
+	if task == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, task.JSObject())
+	}
 
 	a.p.Call("removeTask", args...)
 }

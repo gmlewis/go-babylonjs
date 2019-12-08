@@ -43,7 +43,11 @@ func (m *MaterialDefines) CloneTo(other *MaterialDefines) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	m.p.Call("cloneTo", args...)
 }
@@ -55,7 +59,11 @@ func (m *MaterialDefines) IsEqual(other *MaterialDefines) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := m.p.Call("isEqual", args...)
 	return retVal.Bool()

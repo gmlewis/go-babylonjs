@@ -43,8 +43,17 @@ func (i *INavigationEnginePlugin) ComputePath(start *Vector3, end *Vector3) []*V
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, start.JSObject())
-	args = append(args, end.JSObject())
+	if start == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, start.JSObject())
+	}
+
+	if end == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, end.JSObject())
+	}
 
 	retVal := i.p.Call("computePath", args...)
 	result := []*Vector3{}
@@ -62,8 +71,14 @@ func (i *INavigationEnginePlugin) CreateCrowd(maxAgents float64, maxAgentRadius 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, maxAgents)
+
 	args = append(args, maxAgentRadius)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := i.p.Call("createCrowd", args...)
 	return ICrowdFromJSObject(retVal, i.ctx)
@@ -76,7 +91,11 @@ func (i *INavigationEnginePlugin) CreateDebugNavMesh(scene *Scene) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := i.p.Call("createDebugNavMesh", args...)
 	return MeshFromJSObject(retVal, i.ctx)
@@ -90,7 +109,12 @@ func (i *INavigationEnginePlugin) CreateMavMesh(meshes []*Mesh, parameters *INav
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, MeshArrayToJSArray(meshes))
-	args = append(args, parameters.JSObject())
+
+	if parameters == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parameters.JSObject())
+	}
 
 	i.p.Call("createMavMesh", args...)
 }
@@ -110,7 +134,11 @@ func (i *INavigationEnginePlugin) GetClosestPoint(position *Vector3) *Vector3 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
 
 	retVal := i.p.Call("getClosestPoint", args...)
 	return Vector3FromJSObject(retVal, i.ctx)
@@ -132,7 +160,12 @@ func (i *INavigationEnginePlugin) GetRandomPointAround(position *Vector3, maxRad
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
 	args = append(args, maxRadius)
 
 	retVal := i.p.Call("getRandomPointAround", args...)
@@ -155,8 +188,17 @@ func (i *INavigationEnginePlugin) MoveAlong(position *Vector3, destination *Vect
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, position.JSObject())
-	args = append(args, destination.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
+	if destination == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, destination.JSObject())
+	}
 
 	retVal := i.p.Call("moveAlong", args...)
 	return Vector3FromJSObject(retVal, i.ctx)
@@ -169,7 +211,11 @@ func (i *INavigationEnginePlugin) SetDefaultQueryExtent(extent *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, extent.JSObject())
+	if extent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, extent.JSObject())
+	}
 
 	i.p.Call("setDefaultQueryExtent", args...)
 }

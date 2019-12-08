@@ -637,6 +637,8 @@ func processConstructorOverrides(className string, s *Signature, names []string,
 		optional = []bool{false, false, false}
 	case "NewColor4":
 		optional = []bool{false, false, false, false}
+	case "NewDynamicTexture":
+		types[1] = "interface{}"
 	case "NewObservable":
 		avoidUsingOptions = true
 	case "NewVector2":
@@ -667,6 +669,8 @@ func processMethodOverrides(className string, s *Signature, names []string, opti
 		names[0] = "index"
 	case "PointsCloudSystem.AddSurfacePoints", "PointsCloudSystem.AddVolumePoints":
 		names[4] = "numRange"
+	case "SceneLoader.ImportMesh":
+		types[0] = "interface{}"
 	case "Quaternion.Inverse", "Quaternion.InverseToRef":
 		names[0] = "v"
 	case "Vector3.CheckExtends", "Vector3WithInfo.CheckExtends":
@@ -1005,7 +1009,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 			// s.GoReturnType = "map[string]interface{}"
 			s.GoReturnType = "js.Value"
 			needsJSObject = false
-		case "func()", "JSFunc":
+		case "func()", "JSFunc", "JSObject":
 			s.GoReturnType = "js.Value"
 			needsJSObject = false
 		}
@@ -1059,7 +1063,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 }
 
 func isReferenceType(s string) bool {
-	return strings.HasPrefix(s, "*") || s == "js.Value" || strings.HasPrefix(s, "[]") || strings.HasPrefix(s, "map[") || strings.HasPrefix(s, "func(") || s == "JSFunc"
+	return strings.HasPrefix(s, "*") || s == "js.Value" || strings.HasPrefix(s, "[]") || strings.HasPrefix(s, "map[") || strings.HasPrefix(s, "func(") || s == "JSFunc" || s == "JSObject" || s == "interface{}"
 }
 
 func jsTypeToGoType(paramType string) (goType string, needsJSObject, needsArrayHelper bool) {
@@ -1069,7 +1073,9 @@ func jsTypeToGoType(paramType string) (goType string, needsJSObject, needsArrayH
 
 	switch paramType {
 	case "any":
-		paramType = "interface{}"
+		paramType = "JSObject"
+		needsJSObject = true
+	case "interface{}": // needsJSObject=false
 	case "function", "Function":
 		paramType = "JSFunc"
 	case "string", "float64", "bool", "[]string", "[]float64", "[]bool":

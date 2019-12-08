@@ -47,15 +47,15 @@ type NewSetStateActionOpts struct {
 // NewSetStateAction returns a new SetStateAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setstateaction
-func (ba *Babylon) NewSetStateAction(triggerOptions interface{}, target interface{}, value string, opts *NewSetStateActionOpts) *SetStateAction {
+func (ba *Babylon) NewSetStateAction(triggerOptions JSObject, target JSObject, value string, opts *NewSetStateActionOpts) *SetStateAction {
 	if opts == nil {
 		opts = &NewSetStateActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, triggerOptions)
-	args = append(args, target)
+	args = append(args, triggerOptions.JSObject())
+	args = append(args, target.JSObject())
 	args = append(args, value)
 
 	if opts.Condition == nil {
@@ -79,11 +79,15 @@ func (s *SetStateAction) Execute() {
 // Serialize calls the Serialize method on the SetStateAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setstateaction#serialize
-func (s *SetStateAction) Serialize(parent interface{}) interface{} {
+func (s *SetStateAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := s.p.Call("serialize", args...)
 	return retVal

@@ -67,7 +67,11 @@ func (e *EnvironmentHelper) SetMainColor(color *Color3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, color.JSObject())
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	e.p.Call("setMainColor", args...)
 }
@@ -79,7 +83,11 @@ func (e *EnvironmentHelper) UpdateOptions(options *IEnvironmentHelperOptions) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, options.JSObject())
+	if options == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, options.JSObject())
+	}
 
 	e.p.Call("updateOptions", args...)
 }

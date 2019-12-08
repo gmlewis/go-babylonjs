@@ -91,11 +91,20 @@ func (s *SubMesh) AddToMesh(materialIndex float64, verticesStart float64, vertic
 	args := make([]interface{}, 0, 6+2)
 
 	args = append(args, materialIndex)
+
 	args = append(args, verticesStart)
+
 	args = append(args, verticesCount)
+
 	args = append(args, indexStart)
+
 	args = append(args, indexCount)
-	args = append(args, mesh.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.RenderingMesh == nil {
 		args = append(args, js.Undefined())
@@ -119,7 +128,11 @@ func (s *SubMesh) CanIntersects(ray *Ray) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, ray.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
 
 	retVal := s.p.Call("canIntersects", args...)
 	return retVal.Bool()
@@ -140,7 +153,11 @@ func (s *SubMesh) Clone(newMesh *AbstractMesh, opts *SubMeshCloneOpts) *SubMesh 
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, newMesh.JSObject())
+	if newMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newMesh.JSObject())
+	}
 
 	if opts.NewRenderingMesh == nil {
 		args = append(args, js.Undefined())
@@ -168,9 +185,16 @@ func (s *SubMesh) CreateFromIndices(materialIndex float64, startIndex float64, i
 	args := make([]interface{}, 0, 4+1)
 
 	args = append(args, materialIndex)
+
 	args = append(args, startIndex)
+
 	args = append(args, indexCount)
-	args = append(args, mesh.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.RenderingMesh == nil {
 		args = append(args, js.Undefined())
@@ -251,8 +275,14 @@ func (s *SubMesh) Intersects(ray *Ray, positions []*Vector3, indices js.Value, o
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, ray.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
+
 	args = append(args, Vector3ArrayToJSArray(positions))
+
 	args = append(args, indices)
 
 	if opts.FastCheck == nil {
@@ -333,7 +363,11 @@ func (s *SubMesh) SetBoundingInfo(boundingInfo *BoundingInfo) *SubMesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, boundingInfo.JSObject())
+	if boundingInfo == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, boundingInfo.JSObject())
+	}
 
 	retVal := s.p.Call("setBoundingInfo", args...)
 	return SubMeshFromJSObject(retVal, s.ctx)
@@ -346,7 +380,11 @@ func (s *SubMesh) UpdateBoundingInfo(world *Matrix) *SubMesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, world.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
 
 	retVal := s.p.Call("updateBoundingInfo", args...)
 	return SubMeshFromJSObject(retVal, s.ctx)

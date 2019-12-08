@@ -53,7 +53,11 @@ func (i *ImageProcessingConfiguration) Bind(effect *Effect, opts *ImageProcessin
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	if opts.OverrideAspectRatio == nil {
 		args = append(args, js.Undefined())
@@ -94,11 +98,15 @@ func (i *ImageProcessingConfiguration) IsReady() bool {
 // Parse calls the Parse method on the ImageProcessingConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#parse
-func (i *ImageProcessingConfiguration) Parse(source interface{}) *ImageProcessingConfiguration {
+func (i *ImageProcessingConfiguration) Parse(source JSObject) *ImageProcessingConfiguration {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, source)
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
 
 	retVal := i.p.Call("Parse", args...)
 	return ImageProcessingConfigurationFromJSObject(retVal, i.ctx)
@@ -138,6 +146,7 @@ func (i *ImageProcessingConfiguration) PrepareSamplers(samplersList []string, de
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, samplersList)
+
 	args = append(args, defines)
 
 	i.p.Call("PrepareSamplers", args...)
@@ -151,6 +160,7 @@ func (i *ImageProcessingConfiguration) PrepareUniforms(uniforms []string, define
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniforms)
+
 	args = append(args, defines)
 
 	i.p.Call("PrepareUniforms", args...)
@@ -159,7 +169,7 @@ func (i *ImageProcessingConfiguration) PrepareUniforms(uniforms []string, define
 // Serialize calls the Serialize method on the ImageProcessingConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#serialize
-func (i *ImageProcessingConfiguration) Serialize() interface{} {
+func (i *ImageProcessingConfiguration) Serialize() js.Value {
 
 	retVal := i.p.Call("serialize")
 	return retVal

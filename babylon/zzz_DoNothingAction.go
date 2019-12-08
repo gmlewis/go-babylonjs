@@ -40,7 +40,7 @@ func DoNothingActionArrayToJSArray(array []*DoNothingAction) []interface{} {
 
 // NewDoNothingActionOpts contains optional parameters for NewDoNothingAction.
 type NewDoNothingActionOpts struct {
-	TriggerOptions *interface{}
+	TriggerOptions interface{}
 	Condition      *Condition
 }
 
@@ -80,11 +80,15 @@ func (d *DoNothingAction) Execute() {
 // Serialize calls the Serialize method on the DoNothingAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.donothingaction#serialize
-func (d *DoNothingAction) Serialize(parent interface{}) interface{} {
+func (d *DoNothingAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := d.p.Call("serialize", args...)
 	return retVal

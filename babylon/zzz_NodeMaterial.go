@@ -76,7 +76,11 @@ func (n *NodeMaterial) AddOutputNode(node *NodeMaterialBlock) *NodeMaterial {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, node.JSObject())
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
 
 	retVal := n.p.Call("addOutputNode", args...)
 	return NodeMaterialFromJSObject(retVal, n.ctx)
@@ -89,9 +93,23 @@ func (n *NodeMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMes
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	n.p.Call("bindForSubMesh", args...)
 }
@@ -103,7 +121,11 @@ func (n *NodeMaterial) BindOnlyWorldMatrix(world *Matrix) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, world.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
 
 	n.p.Call("bindOnlyWorldMatrix", args...)
 }
@@ -331,7 +353,11 @@ func (n *NodeMaterial) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := n.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -352,8 +378,17 @@ func (n *NodeMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, o
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -386,14 +421,18 @@ type NodeMaterialLoadFromSerializationOpts struct {
 // LoadFromSerialization calls the LoadFromSerialization method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#loadfromserialization
-func (n *NodeMaterial) LoadFromSerialization(source interface{}, opts *NodeMaterialLoadFromSerializationOpts) {
+func (n *NodeMaterial) LoadFromSerialization(source JSObject, opts *NodeMaterialLoadFromSerializationOpts) {
 	if opts == nil {
 		opts = &NodeMaterialLoadFromSerializationOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, source)
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
 
 	if opts.RootUrl == nil {
 		args = append(args, js.Undefined())
@@ -438,15 +477,24 @@ type NodeMaterialParseOpts struct {
 // Parse calls the Parse method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#parse
-func (n *NodeMaterial) Parse(source interface{}, scene *Scene, opts *NodeMaterialParseOpts) *NodeMaterial {
+func (n *NodeMaterial) Parse(source JSObject, scene *Scene, opts *NodeMaterialParseOpts) *NodeMaterial {
 	if opts == nil {
 		opts = &NodeMaterialParseOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.RootUrl == nil {
 		args = append(args, js.Undefined())
@@ -465,7 +513,11 @@ func (n *NodeMaterial) RegisterOptimizer(optimizer *NodeMaterialOptimizer) *Node
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, optimizer.JSObject())
+	if optimizer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, optimizer.JSObject())
+	}
 
 	retVal := n.p.Call("registerOptimizer", args...)
 	return NodeMaterialFromJSObject(retVal, n.ctx)
@@ -478,7 +530,11 @@ func (n *NodeMaterial) RemoveBlock(block *NodeMaterialBlock) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, block.JSObject())
+	if block == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, block.JSObject())
+	}
 
 	n.p.Call("removeBlock", args...)
 }
@@ -490,7 +546,11 @@ func (n *NodeMaterial) RemoveOutputNode(node *NodeMaterialBlock) *NodeMaterial {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, node.JSObject())
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
 
 	retVal := n.p.Call("removeOutputNode", args...)
 	return NodeMaterialFromJSObject(retVal, n.ctx)
@@ -499,7 +559,7 @@ func (n *NodeMaterial) RemoveOutputNode(node *NodeMaterialBlock) *NodeMaterial {
 // Serialize calls the Serialize method on the NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#serialize
-func (n *NodeMaterial) Serialize() interface{} {
+func (n *NodeMaterial) Serialize() js.Value {
 
 	retVal := n.p.Call("serialize")
 	return retVal
@@ -520,7 +580,11 @@ func (n *NodeMaterial) UnregisterOptimizer(optimizer *NodeMaterialOptimizer) *No
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, optimizer.JSObject())
+	if optimizer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, optimizer.JSObject())
+	}
 
 	retVal := n.p.Call("unregisterOptimizer", args...)
 	return NodeMaterialFromJSObject(retVal, n.ctx)
@@ -565,7 +629,7 @@ func (n *NodeMaterial) SetCompiledShaders(compiledShaders string) *NodeMaterial 
 // EditorData returns the EditorData property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#editordata
-func (n *NodeMaterial) EditorData() interface{} {
+func (n *NodeMaterial) EditorData() js.Value {
 	retVal := n.p.Get("editorData")
 	return retVal
 }
@@ -573,8 +637,8 @@ func (n *NodeMaterial) EditorData() interface{} {
 // SetEditorData sets the EditorData property of class NodeMaterial.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial#editordata
-func (n *NodeMaterial) SetEditorData(editorData interface{}) *NodeMaterial {
-	n.p.Set("editorData", editorData)
+func (n *NodeMaterial) SetEditorData(editorData JSObject) *NodeMaterial {
+	n.p.Set("editorData", editorData.JSObject())
 	return n
 }
 

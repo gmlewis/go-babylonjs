@@ -55,7 +55,7 @@ func (p *PointerTouch) SetPointerId(pointerId float64) *PointerTouch {
 // Type returns the Type property of class PointerTouch.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointertouch#type
-func (p *PointerTouch) Type() interface{} {
+func (p *PointerTouch) Type() js.Value {
 	retVal := p.p.Get("type")
 	return retVal
 }
@@ -63,8 +63,8 @@ func (p *PointerTouch) Type() interface{} {
 // SetType sets the Type property of class PointerTouch.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointertouch#type
-func (p *PointerTouch) SetType(jsType interface{}) *PointerTouch {
-	p.p.Set("type", jsType)
+func (p *PointerTouch) SetType(jsType JSObject) *PointerTouch {
+	p.p.Set("type", jsType.JSObject())
 	return p
 }
 

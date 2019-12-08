@@ -104,7 +104,11 @@ func (g *Grid) AddControl(control *Control, opts *GridAddControlOpts) *Grid {
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	if opts.Row == nil {
 		args = append(args, js.Undefined())
@@ -163,7 +167,11 @@ func (g *Grid) GetChildCellInfo(child *Control) string {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, child.JSObject())
+	if child == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, child.JSObject())
+	}
 
 	retVal := g.p.Call("getChildCellInfo", args...)
 	return retVal.String()
@@ -177,6 +185,7 @@ func (g *Grid) GetChildrenAt(row float64, column float64) []*Control {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, row)
+
 	args = append(args, column)
 
 	retVal := g.p.Call("getChildrenAt", args...)
@@ -233,7 +242,11 @@ func (g *Grid) RemoveControl(control *Control) *Container {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := g.p.Call("removeControl", args...)
 	return ContainerFromJSObject(retVal, g.ctx)
@@ -268,6 +281,7 @@ func (g *Grid) SetColumnDefinition(index float64, width float64, opts *GridSetCo
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, index)
+
 	args = append(args, width)
 
 	if opts.IsPixel == nil {
@@ -296,6 +310,7 @@ func (g *Grid) SetRowDefinition(index float64, height float64, opts *GridSetRowD
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, index)
+
 	args = append(args, height)
 
 	if opts.IsPixel == nil {

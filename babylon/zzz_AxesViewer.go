@@ -111,10 +111,29 @@ func (a *AxesViewer) Update(position *Vector3, xaxis *Vector3, yaxis *Vector3, z
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, position.JSObject())
-	args = append(args, xaxis.JSObject())
-	args = append(args, yaxis.JSObject())
-	args = append(args, zaxis.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
+	if xaxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, xaxis.JSObject())
+	}
+
+	if yaxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, yaxis.JSObject())
+	}
+
+	if zaxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, zaxis.JSObject())
+	}
 
 	a.p.Call("update", args...)
 }

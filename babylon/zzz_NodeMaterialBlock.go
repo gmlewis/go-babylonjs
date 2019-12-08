@@ -78,7 +78,11 @@ func (n *NodeMaterialBlock) AutoConfigure(material *NodeMaterial) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, material.JSObject())
+	if material == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, material.JSObject())
+	}
 
 	n.p.Call("autoConfigure", args...)
 }
@@ -98,8 +102,17 @@ func (n *NodeMaterialBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opt
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, effect.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -117,7 +130,12 @@ func (n *NodeMaterialBlock) Build(state *NodeMaterialBuildState, activeBlocks []
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, state.JSObject())
+	if state == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, state.JSObject())
+	}
+
 	args = append(args, NodeMaterialBlockArrayToJSArray(activeBlocks))
 
 	retVal := n.p.Call("build", args...)
@@ -139,7 +157,11 @@ func (n *NodeMaterialBlock) Clone(scene *Scene, opts *NodeMaterialBlockCloneOpts
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.RootUrl == nil {
 		args = append(args, js.Undefined())
@@ -166,7 +188,11 @@ func (n *NodeMaterialBlock) ConnectTo(other *NodeMaterialBlock, opts *NodeMateri
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
@@ -278,7 +304,11 @@ func (n *NodeMaterialBlock) GetSiblingOutput(current *NodeMaterialConnectionPoin
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, current.JSObject())
+	if current == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, current.JSObject())
+	}
 
 	retVal := n.p.Call("getSiblingOutput", args...)
 	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
@@ -291,7 +321,11 @@ func (n *NodeMaterialBlock) Initialize(state *NodeMaterialBuildState) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, state.JSObject())
+	if state == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, state.JSObject())
+	}
 
 	n.p.Call("initialize", args...)
 }
@@ -311,8 +345,18 @@ func (n *NodeMaterialBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
 
 	if opts.UseInstances == nil {
@@ -339,8 +383,18 @@ func (n *NodeMaterialBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMateri
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
 
 	if opts.UseInstances == nil {
@@ -368,8 +422,18 @@ func (n *NodeMaterialBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *Nod
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
 
 	if opts.UseInstances == nil {
@@ -388,8 +452,17 @@ func (n *NodeMaterialBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *Effe
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, fallbacks.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if fallbacks == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fallbacks.JSObject())
+	}
 
 	n.p.Call("provideFallbacks", args...)
 }
@@ -411,6 +484,7 @@ func (n *NodeMaterialBlock) RegisterInput(name string, jsType js.Value, opts *No
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, name)
+
 	args = append(args, jsType)
 
 	if opts.IsOptional == nil {
@@ -440,6 +514,7 @@ func (n *NodeMaterialBlock) RegisterOutput(name string, jsType js.Value, opts *N
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, jsType)
 
 	args = append(args, opts.Target)
@@ -455,9 +530,24 @@ func (n *NodeMaterialBlock) ReplaceRepeatableContent(vertexShaderState *NodeMate
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, vertexShaderState.JSObject())
-	args = append(args, fragmentShaderState.JSObject())
-	args = append(args, mesh.JSObject())
+	if vertexShaderState == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vertexShaderState.JSObject())
+	}
+
+	if fragmentShaderState == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fragmentShaderState.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
 	args = append(args, defines)
 
 	n.p.Call("replaceRepeatableContent", args...)
@@ -466,7 +556,7 @@ func (n *NodeMaterialBlock) ReplaceRepeatableContent(vertexShaderState *NodeMate
 // Serialize calls the Serialize method on the NodeMaterialBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#serialize
-func (n *NodeMaterialBlock) Serialize() interface{} {
+func (n *NodeMaterialBlock) Serialize() js.Value {
 
 	retVal := n.p.Call("serialize")
 	return retVal
@@ -479,9 +569,20 @@ func (n *NodeMaterialBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildSta
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, state.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if state == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, state.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
+
 	args = append(args, uniformBuffers)
 
 	n.p.Call("updateUniformsAndSamples", args...)

@@ -45,7 +45,12 @@ func (e *EffectFallbacks) AddCPUSkinningFallback(rank float64, mesh *AbstractMes
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, rank)
-	args = append(args, mesh.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	e.p.Call("addCPUSkinningFallback", args...)
 }
@@ -58,6 +63,7 @@ func (e *EffectFallbacks) AddFallback(rank float64, define string) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, rank)
+
 	args = append(args, define)
 
 	e.p.Call("addFallback", args...)
@@ -71,7 +77,12 @@ func (e *EffectFallbacks) Reduce(currentDefines string, effect *Effect) string {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, currentDefines)
-	args = append(args, effect.JSObject())
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	retVal := e.p.Call("reduce", args...)
 	return retVal.String()

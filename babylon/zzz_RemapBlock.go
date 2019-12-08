@@ -61,7 +61,7 @@ func (r *RemapBlock) GetClassName() string {
 // Serialize calls the Serialize method on the RemapBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#serialize
-func (r *RemapBlock) Serialize() interface{} {
+func (r *RemapBlock) Serialize() js.Value {
 
 	retVal := r.p.Call("serialize")
 	return retVal
@@ -70,12 +70,22 @@ func (r *RemapBlock) Serialize() interface{} {
 // _deserialize calls the _deserialize method on the RemapBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock#_deserialize
-func (r *RemapBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (r *RemapBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	r.p.Call("_deserialize", args...)

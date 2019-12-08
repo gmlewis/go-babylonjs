@@ -72,12 +72,30 @@ func (r *Ray) CreateNew(x float64, y float64, viewportWidth float64, viewportHei
 	args := make([]interface{}, 0, 7+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, viewportWidth)
+
 	args = append(args, viewportHeight)
-	args = append(args, world.JSObject())
-	args = append(args, view.JSObject())
-	args = append(args, projection.JSObject())
+
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if view == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, view.JSObject())
+	}
+
+	if projection == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, projection.JSObject())
+	}
 
 	retVal := r.p.Call("CreateNew", args...)
 	return RayFromJSObject(retVal, r.ctx)
@@ -98,8 +116,17 @@ func (r *Ray) CreateNewFromTo(origin *Vector3, end *Vector3, opts *RayCreateNewF
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, origin.JSObject())
-	args = append(args, end.JSObject())
+	if origin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, origin.JSObject())
+	}
+
+	if end == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, end.JSObject())
+	}
 
 	if opts.World == nil {
 		args = append(args, js.Undefined())
@@ -118,8 +145,18 @@ func (r *Ray) IntersectionSegment(sega *Vector3, segb *Vector3, threshold float6
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, sega.JSObject())
-	args = append(args, segb.JSObject())
+	if sega == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sega.JSObject())
+	}
+
+	if segb == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, segb.JSObject())
+	}
+
 	args = append(args, threshold)
 
 	retVal := r.p.Call("intersectionSegment", args...)
@@ -168,7 +205,11 @@ func (r *Ray) IntersectsBox(box *BoundingBox, opts *RayIntersectsBoxOpts) bool {
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, box.JSObject())
+	if box == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, box.JSObject())
+	}
 
 	if opts.IntersectionTreshold == nil {
 		args = append(args, js.Undefined())
@@ -195,8 +236,17 @@ func (r *Ray) IntersectsBoxMinMax(minimum *Vector3, maximum *Vector3, opts *RayI
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, minimum.JSObject())
-	args = append(args, maximum.JSObject())
+	if minimum == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, minimum.JSObject())
+	}
+
+	if maximum == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, maximum.JSObject())
+	}
 
 	if opts.IntersectionTreshold == nil {
 		args = append(args, js.Undefined())
@@ -223,7 +273,11 @@ func (r *Ray) IntersectsMesh(mesh *AbstractMesh, opts *RayIntersectsMeshOpts) *P
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.FastCheck == nil {
 		args = append(args, js.Undefined())
@@ -279,7 +333,11 @@ func (r *Ray) IntersectsPlane(plane *Plane) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, plane.JSObject())
+	if plane == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, plane.JSObject())
+	}
 
 	retVal := r.p.Call("intersectsPlane", args...)
 	return retVal.Float()
@@ -300,7 +358,11 @@ func (r *Ray) IntersectsSphere(sphere *BoundingSphere, opts *RayIntersectsSphere
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, sphere.JSObject())
+	if sphere == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sphere.JSObject())
+	}
 
 	if opts.IntersectionTreshold == nil {
 		args = append(args, js.Undefined())
@@ -319,9 +381,23 @@ func (r *Ray) IntersectsTriangle(vertex0 *Vector3, vertex1 *Vector3, vertex2 *Ve
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, vertex0.JSObject())
-	args = append(args, vertex1.JSObject())
-	args = append(args, vertex2.JSObject())
+	if vertex0 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vertex0.JSObject())
+	}
+
+	if vertex1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vertex1.JSObject())
+	}
+
+	if vertex2 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vertex2.JSObject())
+	}
 
 	retVal := r.p.Call("intersectsTriangle", args...)
 	return retVal
@@ -334,8 +410,17 @@ func (r *Ray) Transform(ray *Ray, matrix *Matrix) *Ray {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, ray.JSObject())
-	args = append(args, matrix.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
+
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
 
 	retVal := r.p.Call("Transform", args...)
 	return RayFromJSObject(retVal, r.ctx)
@@ -348,9 +433,23 @@ func (r *Ray) TransformToRef(ray *Ray, matrix *Matrix, result *Ray) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, ray.JSObject())
-	args = append(args, matrix.JSObject())
-	args = append(args, result.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
+
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	r.p.Call("TransformToRef", args...)
 }
@@ -363,12 +462,30 @@ func (r *Ray) UnprojectRayToRef(sourceX float64, sourceY float64, viewportWidth 
 	args := make([]interface{}, 0, 7+0)
 
 	args = append(args, sourceX)
+
 	args = append(args, sourceY)
+
 	args = append(args, viewportWidth)
+
 	args = append(args, viewportHeight)
-	args = append(args, world.JSObject())
-	args = append(args, view.JSObject())
-	args = append(args, projection.JSObject())
+
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if view == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, view.JSObject())
+	}
+
+	if projection == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, projection.JSObject())
+	}
 
 	r.p.Call("unprojectRayToRef", args...)
 }
@@ -381,12 +498,30 @@ func (r *Ray) Update(x float64, y float64, viewportWidth float64, viewportHeight
 	args := make([]interface{}, 0, 7+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, viewportWidth)
+
 	args = append(args, viewportHeight)
-	args = append(args, world.JSObject())
-	args = append(args, view.JSObject())
-	args = append(args, projection.JSObject())
+
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if view == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, view.JSObject())
+	}
+
+	if projection == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, projection.JSObject())
+	}
 
 	retVal := r.p.Call("update", args...)
 	return RayFromJSObject(retVal, r.ctx)

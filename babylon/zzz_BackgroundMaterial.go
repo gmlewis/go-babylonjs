@@ -57,9 +57,23 @@ func (b *BackgroundMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	b.p.Call("bindForSubMesh", args...)
 }
@@ -71,7 +85,11 @@ func (b *BackgroundMaterial) BindOnlyWorldMatrix(world *Matrix) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, world.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
 
 	b.p.Call("bindOnlyWorldMatrix", args...)
 }
@@ -143,7 +161,11 @@ func (b *BackgroundMaterial) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := b.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -164,8 +186,17 @@ func (b *BackgroundMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubM
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -198,12 +229,22 @@ func (b *BackgroundMaterial) NeedAlphaTesting() bool {
 // Parse calls the Parse method on the BackgroundMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#parse
-func (b *BackgroundMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *BackgroundMaterial {
+func (b *BackgroundMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *BackgroundMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := b.p.Call("Parse", args...)
@@ -213,7 +254,7 @@ func (b *BackgroundMaterial) Parse(source interface{}, scene *Scene, rootUrl str
 // Serialize calls the Serialize method on the BackgroundMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#serialize
-func (b *BackgroundMaterial) Serialize() interface{} {
+func (b *BackgroundMaterial) Serialize() js.Value {
 
 	retVal := b.p.Call("serialize")
 	return retVal

@@ -121,7 +121,7 @@ func (p *PhysicsJointData) SetMainPivot(mainPivot *Vector3) *PhysicsJointData {
 // NativeParams returns the NativeParams property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#nativeparams
-func (p *PhysicsJointData) NativeParams() interface{} {
+func (p *PhysicsJointData) NativeParams() js.Value {
 	retVal := p.p.Get("nativeParams")
 	return retVal
 }
@@ -129,7 +129,7 @@ func (p *PhysicsJointData) NativeParams() interface{} {
 // SetNativeParams sets the NativeParams property of class PhysicsJointData.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjointdata#nativeparams
-func (p *PhysicsJointData) SetNativeParams(nativeParams interface{}) *PhysicsJointData {
-	p.p.Set("nativeParams", nativeParams)
+func (p *PhysicsJointData) SetNativeParams(nativeParams JSObject) *PhysicsJointData {
+	p.p.Set("nativeParams", nativeParams.JSObject())
 	return p
 }

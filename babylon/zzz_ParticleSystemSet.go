@@ -52,15 +52,24 @@ type ParticleSystemSetParseOpts struct {
 // Parse calls the Parse method on the ParticleSystemSet object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#parse
-func (p *ParticleSystemSet) Parse(data interface{}, scene *Scene, opts *ParticleSystemSetParseOpts) *ParticleSystemSet {
+func (p *ParticleSystemSet) Parse(data JSObject, scene *Scene, opts *ParticleSystemSetParseOpts) *ParticleSystemSet {
 	if opts == nil {
 		opts = &ParticleSystemSetParseOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, data)
-	args = append(args, scene.JSObject())
+	if data == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, data.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Gpu == nil {
 		args = append(args, js.Undefined())
@@ -75,7 +84,7 @@ func (p *ParticleSystemSet) Parse(data interface{}, scene *Scene, opts *Particle
 // Serialize calls the Serialize method on the ParticleSystemSet object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystemset#serialize
-func (p *ParticleSystemSet) Serialize() interface{} {
+func (p *ParticleSystemSet) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal
@@ -89,8 +98,14 @@ func (p *ParticleSystemSet) SetEmitterAsSphere(options js.Value, renderingGroupI
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, options)
+
 	args = append(args, renderingGroupId)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	p.p.Call("setEmitterAsSphere", args...)
 }

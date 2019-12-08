@@ -136,12 +136,22 @@ func (h *HDRCubeTexture) GetReflectionTextureMatrix() *Matrix {
 // Parse calls the Parse method on the HDRCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#parse
-func (h *HDRCubeTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *HDRCubeTexture {
+func (h *HDRCubeTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *HDRCubeTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := h.p.Call("Parse", args...)
@@ -151,7 +161,7 @@ func (h *HDRCubeTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl 
 // Serialize calls the Serialize method on the HDRCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#serialize
-func (h *HDRCubeTexture) Serialize() interface{} {
+func (h *HDRCubeTexture) Serialize() js.Value {
 
 	retVal := h.p.Call("serialize")
 	return retVal
@@ -164,7 +174,11 @@ func (h *HDRCubeTexture) SetReflectionTextureMatrix(value *Matrix) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	h.p.Call("setReflectionTextureMatrix", args...)
 }

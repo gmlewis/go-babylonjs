@@ -84,7 +84,12 @@ func (s *SolidParticleSystem) AddShape(mesh *Mesh, nb float64, opts *SolidPartic
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
 	args = append(args, nb)
 
 	if opts.Options == nil {
@@ -202,7 +207,11 @@ func (s *SolidParticleSystem) Digest(mesh *Mesh, opts *SolidParticleSystemDigest
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
@@ -260,6 +269,7 @@ func (s *SolidParticleSystem) GetParticlesByShapeIdToRef(shapeId float64, ref []
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, shapeId)
+
 	args = append(args, SolidParticleArrayToJSArray(ref))
 
 	retVal := s.p.Call("getParticlesByShapeIdToRef", args...)
@@ -319,7 +329,11 @@ func (s *SolidParticleSystem) RecycleParticle(particle *SolidParticle) *SolidPar
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, particle.JSObject())
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	retVal := s.p.Call("recycleParticle", args...)
 	return SolidParticleFromJSObject(retVal, s.ctx)
@@ -342,6 +356,7 @@ func (s *SolidParticleSystem) RemoveParticles(start float64, end float64) []*Sol
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, start)
+
 	args = append(args, end)
 
 	retVal := s.p.Call("removeParticles", args...)
@@ -420,7 +435,11 @@ func (s *SolidParticleSystem) UpdateParticle(particle *SolidParticle) *SolidPart
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, particle.JSObject())
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	retVal := s.p.Call("updateParticle", args...)
 	return SolidParticleFromJSObject(retVal, s.ctx)
@@ -433,8 +452,18 @@ func (s *SolidParticleSystem) UpdateParticleVertex(particle *SolidParticle, vert
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, particle.JSObject())
-	args = append(args, vertex.JSObject())
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
+
+	if vertex == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vertex.JSObject())
+	}
+
 	args = append(args, pt)
 
 	retVal := s.p.Call("updateParticleVertex", args...)
@@ -812,7 +841,7 @@ func (s *SolidParticleSystem) SetUseModelMaterial(useModelMaterial bool) *SolidP
 // Vars returns the Vars property of class SolidParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#vars
-func (s *SolidParticleSystem) Vars() interface{} {
+func (s *SolidParticleSystem) Vars() js.Value {
 	retVal := s.p.Get("vars")
 	return retVal
 }
@@ -820,7 +849,7 @@ func (s *SolidParticleSystem) Vars() interface{} {
 // SetVars sets the Vars property of class SolidParticleSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#vars
-func (s *SolidParticleSystem) SetVars(vars interface{}) *SolidParticleSystem {
-	s.p.Set("vars", vars)
+func (s *SolidParticleSystem) SetVars(vars JSObject) *SolidParticleSystem {
+	s.p.Set("vars", vars.JSObject())
 	return s
 }

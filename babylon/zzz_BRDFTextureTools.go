@@ -43,7 +43,11 @@ func (b *BRDFTextureTools) GetEnvironmentBRDFTexture(scene *Scene) *BaseTexture 
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := b.p.Call("GetEnvironmentBRDFTexture", args...)
 	return BaseTextureFromJSObject(retVal, b.ctx)

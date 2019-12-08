@@ -47,15 +47,15 @@ type NewPlayAnimationActionOpts struct {
 // NewPlayAnimationAction returns a new PlayAnimationAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction
-func (ba *Babylon) NewPlayAnimationAction(triggerOptions interface{}, target interface{}, from float64, to float64, opts *NewPlayAnimationActionOpts) *PlayAnimationAction {
+func (ba *Babylon) NewPlayAnimationAction(triggerOptions JSObject, target JSObject, from float64, to float64, opts *NewPlayAnimationActionOpts) *PlayAnimationAction {
 	if opts == nil {
 		opts = &NewPlayAnimationActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, triggerOptions)
-	args = append(args, target)
+	args = append(args, triggerOptions.JSObject())
+	args = append(args, target.JSObject())
 	args = append(args, from)
 	args = append(args, to)
 
@@ -85,11 +85,15 @@ func (p *PlayAnimationAction) Execute() {
 // Serialize calls the Serialize method on the PlayAnimationAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction#serialize
-func (p *PlayAnimationAction) Serialize(parent interface{}) interface{} {
+func (p *PlayAnimationAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := p.p.Call("serialize", args...)
 	return retVal

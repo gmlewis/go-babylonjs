@@ -84,12 +84,21 @@ func (ba *Babylon) NewNoiseProceduralTexture(name string, opts *NewNoiseProcedur
 // Parse calls the Parse method on the NoiseProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#parse
-func (n *NoiseProceduralTexture) Parse(parsedTexture interface{}, scene *Scene) *NoiseProceduralTexture {
+func (n *NoiseProceduralTexture) Parse(parsedTexture JSObject, scene *Scene) *NoiseProceduralTexture {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := n.p.Call("Parse", args...)
 	return NoiseProceduralTextureFromJSObject(retVal, n.ctx)
@@ -122,7 +131,7 @@ func (n *NoiseProceduralTexture) Render(opts *NoiseProceduralTextureRenderOpts) 
 // Serialize calls the Serialize method on the NoiseProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#serialize
-func (n *NoiseProceduralTexture) Serialize() interface{} {
+func (n *NoiseProceduralTexture) Serialize() js.Value {
 
 	retVal := n.p.Call("serialize")
 	return retVal

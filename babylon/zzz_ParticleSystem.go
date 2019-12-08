@@ -89,7 +89,9 @@ func (p *ParticleSystem) AddAlphaRemapGradient(gradient float64, min float64, ma
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, gradient)
+
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := p.p.Call("addAlphaRemapGradient", args...)
@@ -112,6 +114,7 @@ func (p *ParticleSystem) AddAngularSpeedGradient(gradient float64, factor float6
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -140,7 +143,12 @@ func (p *ParticleSystem) AddColorGradient(gradient float64, color1 *Color4, opts
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
-	args = append(args, color1.JSObject())
+
+	if color1 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color1.JSObject())
+	}
 
 	if opts.Color2 == nil {
 		args = append(args, js.Undefined())
@@ -160,7 +168,9 @@ func (p *ParticleSystem) AddColorRemapGradient(gradient float64, min float64, ma
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, gradient)
+
 	args = append(args, min)
+
 	args = append(args, max)
 
 	retVal := p.p.Call("addColorRemapGradient", args...)
@@ -183,6 +193,7 @@ func (p *ParticleSystem) AddDragGradient(gradient float64, factor float64, opts 
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -211,6 +222,7 @@ func (p *ParticleSystem) AddEmitRateGradient(gradient float64, factor float64, o
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -239,6 +251,7 @@ func (p *ParticleSystem) AddLifeTimeGradient(gradient float64, factor float64, o
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -267,6 +280,7 @@ func (p *ParticleSystem) AddLimitVelocityGradient(gradient float64, factor float
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -287,7 +301,12 @@ func (p *ParticleSystem) AddRampGradient(gradient float64, color *Color3) *Parti
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, gradient)
-	args = append(args, color.JSObject())
+
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	retVal := p.p.Call("addRampGradient", args...)
 	return ParticleSystemFromJSObject(retVal, p.ctx)
@@ -309,6 +328,7 @@ func (p *ParticleSystem) AddSizeGradient(gradient float64, factor float64, opts 
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -337,6 +357,7 @@ func (p *ParticleSystem) AddStartSizeGradient(gradient float64, factor float64, 
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -365,6 +386,7 @@ func (p *ParticleSystem) AddVelocityGradient(gradient float64, factor float64, o
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, gradient)
+
 	args = append(args, factor)
 
 	if opts.Factor2 == nil {
@@ -404,12 +426,17 @@ func (p *ParticleSystem) Animate(opts *ParticleSystemAnimateOpts) {
 // Clone calls the Clone method on the ParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#clone
-func (p *ParticleSystem) Clone(name string, newEmitter interface{}) *ParticleSystem {
+func (p *ParticleSystem) Clone(name string, newEmitter JSObject) *ParticleSystem {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, newEmitter)
+
+	if newEmitter == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newEmitter.JSObject())
+	}
 
 	retVal := p.p.Call("clone", args...)
 	return ParticleSystemFromJSObject(retVal, p.ctx)
@@ -505,15 +532,25 @@ type ParticleSystemParseOpts struct {
 // Parse calls the Parse method on the ParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#parse
-func (p *ParticleSystem) Parse(parsedParticleSystem interface{}, scene *Scene, rootUrl string, opts *ParticleSystemParseOpts) *ParticleSystem {
+func (p *ParticleSystem) Parse(parsedParticleSystem JSObject, scene *Scene, rootUrl string, opts *ParticleSystemParseOpts) *ParticleSystem {
 	if opts == nil {
 		opts = &ParticleSystemParseOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, parsedParticleSystem)
-	args = append(args, scene.JSObject())
+	if parsedParticleSystem == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedParticleSystem.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	if opts.DoNotStart == nil {
@@ -710,7 +747,7 @@ func (p *ParticleSystem) Reset() {
 // Serialize calls the Serialize method on the ParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem#serialize
-func (p *ParticleSystem) Serialize() interface{} {
+func (p *ParticleSystem) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal

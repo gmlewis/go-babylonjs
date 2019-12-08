@@ -45,7 +45,11 @@ func (a *AbstractScene) AddEffectLayer(newEffectLayer *EffectLayer) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newEffectLayer.JSObject())
+	if newEffectLayer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newEffectLayer.JSObject())
+	}
 
 	a.p.Call("addEffectLayer", args...)
 }
@@ -58,6 +62,7 @@ func (a *AbstractScene) AddIndividualParser(name string, parser js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, parser)
 
 	a.p.Call("AddIndividualParser", args...)
@@ -70,7 +75,11 @@ func (a *AbstractScene) AddLensFlareSystem(newLensFlareSystem *LensFlareSystem) 
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newLensFlareSystem.JSObject())
+	if newLensFlareSystem == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newLensFlareSystem.JSObject())
+	}
 
 	a.p.Call("addLensFlareSystem", args...)
 }
@@ -83,6 +92,7 @@ func (a *AbstractScene) AddParser(name string, parser js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, parser)
 
 	a.p.Call("AddParser", args...)
@@ -95,7 +105,11 @@ func (a *AbstractScene) AddReflectionProbe(newReflectionProbe *ReflectionProbe) 
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newReflectionProbe.JSObject())
+	if newReflectionProbe == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newReflectionProbe.JSObject())
+	}
 
 	a.p.Call("addReflectionProbe", args...)
 }
@@ -181,13 +195,28 @@ func (a *AbstractScene) GetParser(name string) js.Value {
 // Parse calls the Parse method on the AbstractScene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractscene#parse
-func (a *AbstractScene) Parse(jsonData interface{}, scene *Scene, container *AssetContainer, rootUrl string) {
+func (a *AbstractScene) Parse(jsonData JSObject, scene *Scene, container *AssetContainer, rootUrl string) {
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, jsonData)
-	args = append(args, scene.JSObject())
-	args = append(args, container.JSObject())
+	if jsonData == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, jsonData.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	a.p.Call("Parse", args...)
@@ -200,7 +229,11 @@ func (a *AbstractScene) RemoveEffectLayer(toRemove *EffectLayer) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := a.p.Call("removeEffectLayer", args...)
 	return retVal.Float()
@@ -213,7 +246,11 @@ func (a *AbstractScene) RemoveLensFlareSystem(toRemove *LensFlareSystem) float64
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := a.p.Call("removeLensFlareSystem", args...)
 	return retVal.Float()
@@ -226,7 +263,11 @@ func (a *AbstractScene) RemoveReflectionProbe(toRemove *ReflectionProbe) float64
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := a.p.Call("removeReflectionProbe", args...)
 	return retVal.Float()

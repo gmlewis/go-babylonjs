@@ -83,8 +83,14 @@ func (t *TextureAssetTask) RunTask(scene *Scene, onSuccess JSFunc, onError JSFun
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, js.FuncOf(onSuccess))
+
 	args = append(args, js.FuncOf(onError))
 
 	t.p.Call("runTask", args...)

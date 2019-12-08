@@ -74,12 +74,22 @@ func (ba *Babylon) NewMarbleProceduralTexture(name string, size float64, scene *
 // Parse calls the Parse method on the MarbleProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#parse
-func (m *MarbleProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *MarbleProceduralTexture {
+func (m *MarbleProceduralTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *MarbleProceduralTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := m.p.Call("Parse", args...)
@@ -89,7 +99,7 @@ func (m *MarbleProceduralTexture) Parse(parsedTexture interface{}, scene *Scene,
 // Serialize calls the Serialize method on the MarbleProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#serialize
-func (m *MarbleProceduralTexture) Serialize() interface{} {
+func (m *MarbleProceduralTexture) Serialize() js.Value {
 
 	retVal := m.p.Call("serialize")
 	return retVal

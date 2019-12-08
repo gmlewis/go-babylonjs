@@ -69,6 +69,7 @@ func (c *Checkbox) AddCheckBoxWithHeader(title string, onValueChanged JSFunc) *S
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, title)
+
 	args = append(args, js.FuncOf(onValueChanged))
 
 	retVal := c.p.Call("AddCheckBoxWithHeader", args...)

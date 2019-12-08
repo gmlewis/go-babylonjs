@@ -175,7 +175,12 @@ func (i *IPhysicsEnabledObject) Rotate(axis *Vector3, amount float64, opts *IPhy
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, axis.JSObject())
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, amount)
 
 	args = append(args, opts.Space)
@@ -191,7 +196,11 @@ func (i *IPhysicsEnabledObject) SetAbsolutePosition(absolutePosition *Vector3) *
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, absolutePosition.JSObject())
+	if absolutePosition == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, absolutePosition.JSObject())
+	}
 
 	retVal := i.p.Call("setAbsolutePosition", args...)
 	return TransformNodeFromJSObject(retVal, i.ctx)
@@ -212,7 +221,12 @@ func (i *IPhysicsEnabledObject) Translate(axis *Vector3, distance float64, opts 
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, axis.JSObject())
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, distance)
 
 	args = append(args, opts.Space)
@@ -224,7 +238,7 @@ func (i *IPhysicsEnabledObject) Translate(axis *Vector3, distance float64, opts 
 // Parent returns the Parent property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#parent
-func (i *IPhysicsEnabledObject) Parent() interface{} {
+func (i *IPhysicsEnabledObject) Parent() js.Value {
 	retVal := i.p.Get("parent")
 	return retVal
 }
@@ -232,8 +246,8 @@ func (i *IPhysicsEnabledObject) Parent() interface{} {
 // SetParent sets the Parent property of class IPhysicsEnabledObject.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iphysicsenabledobject#parent
-func (i *IPhysicsEnabledObject) SetParent(parent interface{}) *IPhysicsEnabledObject {
-	i.p.Set("parent", parent)
+func (i *IPhysicsEnabledObject) SetParent(parent JSObject) *IPhysicsEnabledObject {
+	i.p.Set("parent", parent.JSObject())
 	return i
 }
 

@@ -84,6 +84,7 @@ func (d *Database) LoadFile(url string, sceneLoaded JSFunc, opts *DatabaseLoadFi
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, url)
+
 	args = append(args, js.FuncOf(sceneLoaded))
 
 	if opts.ProgressCallBack == nil {
@@ -113,6 +114,7 @@ func (d *Database) LoadImage(url string, image js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, url)
+
 	args = append(args, image)
 
 	d.p.Call("loadImage", args...)
@@ -126,6 +128,7 @@ func (d *Database) Open(successCallback JSFunc, errorCallback JSFunc) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, js.FuncOf(successCallback))
+
 	args = append(args, js.FuncOf(errorCallback))
 
 	d.p.Call("open", args...)

@@ -120,8 +120,11 @@ func (r *RawCubeTexture) Update(data js.Value, format float64, jsType float64, i
 	args := make([]interface{}, 0, 4+1)
 
 	args = append(args, data)
+
 	args = append(args, format)
+
 	args = append(args, jsType)
+
 	args = append(args, invertY)
 
 	if opts.Compression == nil {

@@ -52,6 +52,7 @@ func (r *RibbonBuilder) CreateRibbon(name string, options js.Value, opts *Ribbon
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

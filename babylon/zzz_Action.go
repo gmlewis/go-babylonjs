@@ -46,14 +46,14 @@ type NewActionOpts struct {
 // NewAction returns a new Action object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.action
-func (ba *Babylon) NewAction(triggerOptions interface{}, opts *NewActionOpts) *Action {
+func (ba *Babylon) NewAction(triggerOptions JSObject, opts *NewActionOpts) *Action {
 	if opts == nil {
 		opts = &NewActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, triggerOptions)
+	args = append(args, triggerOptions.JSObject())
 
 	if opts.Condition == nil {
 		args = append(args, js.Undefined())
@@ -92,7 +92,7 @@ func (a *Action) Execute(opts *ActionExecuteOpts) {
 // GetTriggerParameter calls the GetTriggerParameter method on the Action object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.action#gettriggerparameter
-func (a *Action) GetTriggerParameter() interface{} {
+func (a *Action) GetTriggerParameter() js.Value {
 
 	retVal := a.p.Call("getTriggerParameter")
 	return retVal
@@ -101,11 +101,15 @@ func (a *Action) GetTriggerParameter() interface{} {
 // Serialize calls the Serialize method on the Action object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.action#serialize
-func (a *Action) Serialize(parent interface{}) interface{} {
+func (a *Action) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := a.p.Call("serialize", args...)
 	return retVal
@@ -126,7 +130,11 @@ func (a *Action) Then(action *Action) *Action {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, action.JSObject())
+	if action == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, action.JSObject())
+	}
 
 	retVal := a.p.Call("then", args...)
 	return ActionFromJSObject(retVal, a.ctx)
@@ -167,7 +175,7 @@ func (a *Action) SetTrigger(trigger float64) *Action {
 // TriggerOptions returns the TriggerOptions property of class Action.
 //
 // https://doc.babylonjs.com/api/classes/babylon.action#triggeroptions
-func (a *Action) TriggerOptions() interface{} {
+func (a *Action) TriggerOptions() js.Value {
 	retVal := a.p.Get("triggerOptions")
 	return retVal
 }
@@ -175,7 +183,7 @@ func (a *Action) TriggerOptions() interface{} {
 // SetTriggerOptions sets the TriggerOptions property of class Action.
 //
 // https://doc.babylonjs.com/api/classes/babylon.action#triggeroptions
-func (a *Action) SetTriggerOptions(triggerOptions interface{}) *Action {
-	a.p.Set("triggerOptions", triggerOptions)
+func (a *Action) SetTriggerOptions(triggerOptions JSObject) *Action {
+	a.p.Set("triggerOptions", triggerOptions.JSObject())
 	return a
 }

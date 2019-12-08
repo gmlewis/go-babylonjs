@@ -103,7 +103,7 @@ func (t *TextBlock) SetLineSpacing(lineSpacing string) *TextBlock {
 // Lines returns the Lines property of class TextBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textblock#lines
-func (t *TextBlock) Lines() interface{} {
+func (t *TextBlock) Lines() js.Value {
 	retVal := t.p.Get("lines")
 	return retVal
 }
@@ -111,8 +111,8 @@ func (t *TextBlock) Lines() interface{} {
 // SetLines sets the Lines property of class TextBlock.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textblock#lines
-func (t *TextBlock) SetLines(lines interface{}) *TextBlock {
-	t.p.Set("lines", lines)
+func (t *TextBlock) SetLines(lines JSObject) *TextBlock {
+	t.p.Set("lines", lines.JSObject())
 	return t
 }
 

@@ -52,6 +52,7 @@ func (t *TiledBoxBuilder) CreateTiledBox(name string, options js.Value, opts *Ti
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

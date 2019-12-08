@@ -42,7 +42,7 @@ func TGAToolsArrayToJSArray(array []*TGATools) []interface{} {
 // GetTGAHeader calls the GetTGAHeader method on the TGATools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tgatools#gettgaheader
-func (t *TGATools) GetTGAHeader(data js.Value) interface{} {
+func (t *TGATools) GetTGAHeader(data js.Value) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 

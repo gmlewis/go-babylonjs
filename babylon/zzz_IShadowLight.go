@@ -76,7 +76,11 @@ func (i *IShadowLight) GetDepthMaxZ(activeCamera *Camera) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, activeCamera.JSObject())
+	if activeCamera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, activeCamera.JSObject())
+	}
 
 	retVal := i.p.Call("getDepthMaxZ", args...)
 	return retVal.Float()
@@ -89,7 +93,11 @@ func (i *IShadowLight) GetDepthMinZ(activeCamera *Camera) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, activeCamera.JSObject())
+	if activeCamera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, activeCamera.JSObject())
+	}
 
 	retVal := i.p.Call("getDepthMinZ", args...)
 	return retVal.Float()
@@ -163,8 +171,18 @@ func (i *IShadowLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Mat
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, matrix.JSObject())
-	args = append(args, viewMatrix.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
+
+	if viewMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, viewMatrix.JSObject())
+	}
+
 	args = append(args, AbstractMeshArrayToJSArray(renderList))
 
 	retVal := i.p.Call("setShadowProjectionMatrix", args...)

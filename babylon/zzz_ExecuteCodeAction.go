@@ -46,14 +46,14 @@ type NewExecuteCodeActionOpts struct {
 // NewExecuteCodeAction returns a new ExecuteCodeAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction
-func (ba *Babylon) NewExecuteCodeAction(triggerOptions interface{}, jsFunc JSFunc, opts *NewExecuteCodeActionOpts) *ExecuteCodeAction {
+func (ba *Babylon) NewExecuteCodeAction(triggerOptions JSObject, jsFunc JSFunc, opts *NewExecuteCodeActionOpts) *ExecuteCodeAction {
 	if opts == nil {
 		opts = &NewExecuteCodeActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, triggerOptions)
+	args = append(args, triggerOptions.JSObject())
 	args = append(args, js.FuncOf(jsFunc))
 
 	if opts.Condition == nil {
@@ -73,7 +73,11 @@ func (e *ExecuteCodeAction) Execute(evt *ActionEvent) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, evt.JSObject())
+	if evt == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, evt.JSObject())
+	}
 
 	e.p.Call("execute", args...)
 }

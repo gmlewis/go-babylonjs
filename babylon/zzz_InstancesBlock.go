@@ -58,7 +58,11 @@ func (i *InstancesBlock) AutoConfigure(material *NodeMaterial) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, material.JSObject())
+	if material == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, material.JSObject())
+	}
 
 	i.p.Call("autoConfigure", args...)
 }
@@ -87,8 +91,18 @@ func (i *InstancesBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMa
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, nodeMaterial.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if nodeMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, nodeMaterial.JSObject())
+	}
+
 	args = append(args, defines)
 
 	if opts.UseInstances == nil {

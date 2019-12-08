@@ -47,17 +47,17 @@ type NewSetValueActionOpts struct {
 // NewSetValueAction returns a new SetValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setvalueaction
-func (ba *Babylon) NewSetValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewSetValueActionOpts) *SetValueAction {
+func (ba *Babylon) NewSetValueAction(triggerOptions JSObject, target JSObject, propertyPath string, value JSObject, opts *NewSetValueActionOpts) *SetValueAction {
 	if opts == nil {
 		opts = &NewSetValueActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+1)
 
-	args = append(args, triggerOptions)
-	args = append(args, target)
+	args = append(args, triggerOptions.JSObject())
+	args = append(args, target.JSObject())
 	args = append(args, propertyPath)
-	args = append(args, value)
+	args = append(args, value.JSObject())
 
 	if opts.Condition == nil {
 		args = append(args, js.Undefined())
@@ -80,11 +80,15 @@ func (s *SetValueAction) Execute() {
 // Serialize calls the Serialize method on the SetValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setvalueaction#serialize
-func (s *SetValueAction) Serialize(parent interface{}) interface{} {
+func (s *SetValueAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := s.p.Call("serialize", args...)
 	return retVal
@@ -109,7 +113,7 @@ func (s *SetValueAction) SetPropertyPath(propertyPath string) *SetValueAction {
 // Value returns the Value property of class SetValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setvalueaction#value
-func (s *SetValueAction) Value() interface{} {
+func (s *SetValueAction) Value() js.Value {
 	retVal := s.p.Get("value")
 	return retVal
 }
@@ -117,7 +121,7 @@ func (s *SetValueAction) Value() interface{} {
 // SetValue sets the Value property of class SetValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setvalueaction#value
-func (s *SetValueAction) SetValue(value interface{}) *SetValueAction {
-	s.p.Set("value", value)
+func (s *SetValueAction) SetValue(value JSObject) *SetValueAction {
+	s.p.Set("value", value.JSObject())
 	return s
 }

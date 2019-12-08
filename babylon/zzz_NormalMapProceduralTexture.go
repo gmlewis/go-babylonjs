@@ -74,12 +74,22 @@ func (ba *Babylon) NewNormalMapProceduralTexture(name string, size float64, scen
 // Parse calls the Parse method on the NormalMapProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#parse
-func (n *NormalMapProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *NormalMapProceduralTexture {
+func (n *NormalMapProceduralTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *NormalMapProceduralTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := n.p.Call("Parse", args...)
@@ -113,12 +123,21 @@ func (n *NormalMapProceduralTexture) Render(opts *NormalMapProceduralTextureRend
 // Resize calls the Resize method on the NormalMapProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#resize
-func (n *NormalMapProceduralTexture) Resize(size interface{}, generateMipMaps interface{}) {
+func (n *NormalMapProceduralTexture) Resize(size JSObject, generateMipMaps JSObject) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, size)
-	args = append(args, generateMipMaps)
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
+
+	if generateMipMaps == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, generateMipMaps.JSObject())
+	}
 
 	n.p.Call("resize", args...)
 }
@@ -126,7 +145,7 @@ func (n *NormalMapProceduralTexture) Resize(size interface{}, generateMipMaps in
 // Serialize calls the Serialize method on the NormalMapProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#serialize
-func (n *NormalMapProceduralTexture) Serialize() interface{} {
+func (n *NormalMapProceduralTexture) Serialize() js.Value {
 
 	retVal := n.p.Call("serialize")
 	return retVal

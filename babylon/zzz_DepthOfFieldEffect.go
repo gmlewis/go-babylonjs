@@ -83,7 +83,11 @@ func (d *DepthOfFieldEffect) DisposeEffects(camera *Camera) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	d.p.Call("disposeEffects", args...)
 }

@@ -69,8 +69,19 @@ func (l *Light) BindLight(lightIndex float64, scene *Scene, effect *Effect, useS
 	args := make([]interface{}, 0, 4+2)
 
 	args = append(args, lightIndex)
-	args = append(args, scene.JSObject())
-	args = append(args, effect.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, useSpecular)
 
 	if opts.UsePhysicalLightFalloff == nil {
@@ -94,7 +105,11 @@ func (l *Light) CanAffectMesh(mesh *AbstractMesh) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := l.p.Call("canAffectMesh", args...)
 	return retVal.Bool()
@@ -120,8 +135,17 @@ func (l *Light) CompareLightsPriority(a *Light, b *Light) float64 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, a.JSObject())
-	args = append(args, b.JSObject())
+	if a == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, a.JSObject())
+	}
+
+	if b == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, b.JSObject())
+	}
 
 	retVal := l.p.Call("CompareLightsPriority", args...)
 	return retVal.Float()
@@ -183,8 +207,14 @@ func (l *Light) GetConstructorFromName(jsType float64, name string, scene *Scene
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, jsType)
+
 	args = append(args, name)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := l.p.Call("GetConstructorFromName", args...)
 	return retVal
@@ -220,12 +250,21 @@ func (l *Light) GetTypeID() float64 {
 // Parse calls the Parse method on the Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#parse
-func (l *Light) Parse(parsedLight interface{}, scene *Scene) *Light {
+func (l *Light) Parse(parsedLight JSObject, scene *Scene) *Light {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedLight)
-	args = append(args, scene.JSObject())
+	if parsedLight == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedLight.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := l.p.Call("Parse", args...)
 	return LightFromJSObject(retVal, l.ctx)
@@ -234,11 +273,16 @@ func (l *Light) Parse(parsedLight interface{}, scene *Scene) *Light {
 // PrepareLightSpecificDefines calls the PrepareLightSpecificDefines method on the Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#preparelightspecificdefines
-func (l *Light) PrepareLightSpecificDefines(defines interface{}, lightIndex float64) {
+func (l *Light) PrepareLightSpecificDefines(defines JSObject, lightIndex float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines)
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	l.p.Call("prepareLightSpecificDefines", args...)
@@ -247,7 +291,7 @@ func (l *Light) PrepareLightSpecificDefines(defines interface{}, lightIndex floa
 // Serialize calls the Serialize method on the Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light#serialize
-func (l *Light) Serialize() interface{} {
+func (l *Light) Serialize() js.Value {
 
 	retVal := l.p.Call("serialize")
 	return retVal
@@ -297,7 +341,12 @@ func (l *Light) TransferTexturesToEffect(effect *Effect, lightIndex string) *Lig
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	retVal := l.p.Call("transferTexturesToEffect", args...)
@@ -311,7 +360,12 @@ func (l *Light) TransferToEffect(effect *Effect, lightIndex string) *Light {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	retVal := l.p.Call("transferToEffect", args...)
@@ -325,7 +379,12 @@ func (l *Light) TransferToNodeMaterialEffect(effect *Effect, lightDataUniformNam
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightDataUniformName)
 
 	retVal := l.p.Call("transferToNodeMaterialEffect", args...)

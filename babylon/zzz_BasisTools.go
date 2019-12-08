@@ -57,8 +57,17 @@ func (b *BasisTools) LoadTextureFromTranscodeResult(texture *InternalTexture, tr
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, texture.JSObject())
-	args = append(args, transcodeResult.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
+	if transcodeResult == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transcodeResult.JSObject())
+	}
 
 	b.p.Call("LoadTextureFromTranscodeResult", args...)
 }
@@ -71,7 +80,12 @@ func (b *BasisTools) TranscodeAsync(imageData js.Value, config *BasisTranscodeCo
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, imageData)
-	args = append(args, config.JSObject())
+
+	if config == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, config.JSObject())
+	}
 
 	retVal := b.p.Call("TranscodeAsync", args...)
 	return PromiseFromJSObject(retVal, b.ctx)

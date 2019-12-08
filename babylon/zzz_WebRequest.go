@@ -65,6 +65,7 @@ func (w *WebRequest) Open(method string, url string) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, method)
+
 	args = append(args, url)
 
 	w.p.Call("open", args...)
@@ -98,6 +99,7 @@ func (w *WebRequest) SetRequestHeader(name string, value string) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, value)
 
 	w.p.Call("setRequestHeader", args...)
@@ -170,7 +172,7 @@ func (w *WebRequest) SetReadyState(readyState float64) *WebRequest {
 // Response returns the Response property of class WebRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webrequest#response
-func (w *WebRequest) Response() interface{} {
+func (w *WebRequest) Response() js.Value {
 	retVal := w.p.Get("response")
 	return retVal
 }
@@ -178,8 +180,8 @@ func (w *WebRequest) Response() interface{} {
 // SetResponse sets the Response property of class WebRequest.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webrequest#response
-func (w *WebRequest) SetResponse(response interface{}) *WebRequest {
-	w.p.Set("response", response)
+func (w *WebRequest) SetResponse(response JSObject) *WebRequest {
+	w.p.Set("response", response.JSObject())
 	return w
 }
 

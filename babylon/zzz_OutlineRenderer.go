@@ -65,7 +65,12 @@ func (o *OutlineRenderer) IsReady(subMesh *SubMesh, useInstances bool) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, subMesh.JSObject())
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
+
 	args = append(args, useInstances)
 
 	retVal := o.p.Call("isReady", args...)
@@ -103,7 +108,12 @@ func (o *OutlineRenderer) Render(subMesh *SubMesh, batch js.Value, opts *Outline
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, subMesh.JSObject())
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
+
 	args = append(args, batch)
 
 	if opts.UseOverlay == nil {

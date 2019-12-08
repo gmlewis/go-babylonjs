@@ -89,7 +89,11 @@ func (v *ValueAndUnit) GetValue(host *AdvancedDynamicTexture) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, host.JSObject())
+	if host == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, host.JSObject())
+	}
 
 	retVal := v.p.Call("getValue", args...)
 	return retVal.Float()
@@ -102,7 +106,12 @@ func (v *ValueAndUnit) GetValueInPixel(host *AdvancedDynamicTexture, refValue fl
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, host.JSObject())
+	if host == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, host.JSObject())
+	}
+
 	args = append(args, refValue)
 
 	retVal := v.p.Call("getValueInPixel", args...)
@@ -124,7 +133,11 @@ func (v *ValueAndUnit) ToString(host *AdvancedDynamicTexture, opts *ValueAndUnit
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, host.JSObject())
+	if host == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, host.JSObject())
+	}
 
 	if opts.Decimals == nil {
 		args = append(args, js.Undefined())

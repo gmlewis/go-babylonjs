@@ -39,7 +39,7 @@ func PolygonBuilderArrayToJSArray(array []*PolygonBuilder) []interface{} {
 // PolygonBuilderCreatePolygonOpts contains optional parameters for PolygonBuilder.CreatePolygon.
 type PolygonBuilderCreatePolygonOpts struct {
 	Scene           *Scene
-	EarcutInjection *interface{}
+	EarcutInjection interface{}
 }
 
 // CreatePolygon calls the CreatePolygon method on the PolygonBuilder object.
@@ -53,6 +53,7 @@ func (p *PolygonBuilder) CreatePolygon(name string, options js.Value, opts *Poly
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -73,7 +74,7 @@ func (p *PolygonBuilder) CreatePolygon(name string, options js.Value, opts *Poly
 // PolygonBuilderExtrudePolygonOpts contains optional parameters for PolygonBuilder.ExtrudePolygon.
 type PolygonBuilderExtrudePolygonOpts struct {
 	Scene           *Scene
-	EarcutInjection *interface{}
+	EarcutInjection interface{}
 }
 
 // ExtrudePolygon calls the ExtrudePolygon method on the PolygonBuilder object.
@@ -87,6 +88,7 @@ func (p *PolygonBuilder) ExtrudePolygon(name string, options js.Value, opts *Pol
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

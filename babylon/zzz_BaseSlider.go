@@ -68,9 +68,20 @@ func (b *BaseSlider) _onPointerDown(target *Control, coordinates *Vector2, point
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
+
 	args = append(args, buttonIndex)
 
 	retVal := b.p.Call("_onPointerDown", args...)
@@ -84,8 +95,18 @@ func (b *BaseSlider) _onPointerMove(target *Control, coordinates *Vector2, point
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
 
 	b.p.Call("_onPointerMove", args...)
@@ -98,10 +119,22 @@ func (b *BaseSlider) _onPointerUp(target *Control, coordinates *Vector2, pointer
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
+
 	args = append(args, buttonIndex)
+
 	args = append(args, notifyClick)
 
 	b.p.Call("_onPointerUp", args...)

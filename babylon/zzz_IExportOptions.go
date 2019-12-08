@@ -39,11 +39,15 @@ func IExportOptionsArrayToJSArray(array []*IExportOptions) []interface{} {
 // MetadataSelector calls the MetadataSelector method on the IExportOptions object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.iexportoptions#metadataselector
-func (i *IExportOptions) MetadataSelector(metadata interface{}) interface{} {
+func (i *IExportOptions) MetadataSelector(metadata JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, metadata)
+	if metadata == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, metadata.JSObject())
+	}
 
 	retVal := i.p.Call("metadataSelector", args...)
 	return retVal
@@ -56,7 +60,11 @@ func (i *IExportOptions) ShouldExportNode(node *Node) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, node.JSObject())
+	if node == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, node.JSObject())
+	}
 
 	retVal := i.p.Call("shouldExportNode", args...)
 	return retVal.Bool()

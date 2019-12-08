@@ -54,7 +54,11 @@ func (m *Matrix) Add(other *Matrix) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := m.p.Call("add", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -68,6 +72,7 @@ func (m *Matrix) AddAtIndex(index float64, value float64) *Matrix {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, index)
+
 	args = append(args, value)
 
 	retVal := m.p.Call("addAtIndex", args...)
@@ -81,8 +86,17 @@ func (m *Matrix) AddToRef(other *Matrix, result *Matrix) *Matrix {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, other.JSObject())
-	args = append(args, result.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := m.p.Call("addToRef", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -95,7 +109,11 @@ func (m *Matrix) AddToSelf(other *Matrix) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := m.p.Call("addToSelf", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -109,7 +127,9 @@ func (m *Matrix) AddTranslationFromFloats(x float64, y float64, z float64) *Matr
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	retVal := m.p.Call("addTranslationFromFloats", args...)
@@ -141,9 +161,23 @@ func (m *Matrix) Compose(scale *Vector3, rotation *Quaternion, translation *Vect
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, scale.JSObject())
-	args = append(args, rotation.JSObject())
-	args = append(args, translation.JSObject())
+	if scale == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scale.JSObject())
+	}
+
+	if rotation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, rotation.JSObject())
+	}
+
+	if translation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, translation.JSObject())
+	}
 
 	retVal := m.p.Call("Compose", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -156,10 +190,29 @@ func (m *Matrix) ComposeToRef(scale *Vector3, rotation *Quaternion, translation 
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, scale.JSObject())
-	args = append(args, rotation.JSObject())
-	args = append(args, translation.JSObject())
-	args = append(args, result.JSObject())
+	if scale == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scale.JSObject())
+	}
+
+	if rotation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, rotation.JSObject())
+	}
+
+	if translation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, translation.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("ComposeToRef", args...)
 }
@@ -171,7 +224,11 @@ func (m *Matrix) CopyFrom(other *Matrix) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := m.p.Call("copyFrom", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -248,8 +305,18 @@ func (m *Matrix) DecomposeLerp(startValue *Matrix, endValue *Matrix, gradient fl
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := m.p.Call("DecomposeLerp", args...)
@@ -263,10 +330,25 @@ func (m *Matrix) DecomposeLerpToRef(startValue *Matrix, endValue *Matrix, gradie
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("DecomposeLerpToRef", args...)
 }
@@ -287,7 +369,11 @@ func (m *Matrix) Equals(value *Matrix) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := m.p.Call("equals", args...)
 	return retVal.Bool()
@@ -328,8 +414,14 @@ func (m *Matrix) FromArrayToRef(array js.Value, offset float64, result *Matrix) 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, array)
+
 	args = append(args, offset)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("FromArrayToRef", args...)
 }
@@ -342,9 +434,16 @@ func (m *Matrix) FromFloat32ArrayToRefScaled(array js.Value, offset float64, sca
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, array)
+
 	args = append(args, offset)
+
 	args = append(args, scale)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("FromFloat32ArrayToRefScaled", args...)
 }
@@ -356,8 +455,17 @@ func (m *Matrix) FromQuaternionToRef(quat *Quaternion, result *Matrix) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, quat.JSObject())
-	args = append(args, result.JSObject())
+	if quat == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, quat.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("FromQuaternionToRef", args...)
 }
@@ -370,20 +478,35 @@ func (m *Matrix) FromValues(initialM11 float64, initialM12 float64, initialM13 f
 	args := make([]interface{}, 0, 16+0)
 
 	args = append(args, initialM11)
+
 	args = append(args, initialM12)
+
 	args = append(args, initialM13)
+
 	args = append(args, initialM14)
+
 	args = append(args, initialM21)
+
 	args = append(args, initialM22)
+
 	args = append(args, initialM23)
+
 	args = append(args, initialM24)
+
 	args = append(args, initialM31)
+
 	args = append(args, initialM32)
+
 	args = append(args, initialM33)
+
 	args = append(args, initialM34)
+
 	args = append(args, initialM41)
+
 	args = append(args, initialM42)
+
 	args = append(args, initialM43)
+
 	args = append(args, initialM44)
 
 	retVal := m.p.Call("FromValues", args...)
@@ -398,22 +521,42 @@ func (m *Matrix) FromValuesToRef(initialM11 float64, initialM12 float64, initial
 	args := make([]interface{}, 0, 17+0)
 
 	args = append(args, initialM11)
+
 	args = append(args, initialM12)
+
 	args = append(args, initialM13)
+
 	args = append(args, initialM14)
+
 	args = append(args, initialM21)
+
 	args = append(args, initialM22)
+
 	args = append(args, initialM23)
+
 	args = append(args, initialM24)
+
 	args = append(args, initialM31)
+
 	args = append(args, initialM32)
+
 	args = append(args, initialM33)
+
 	args = append(args, initialM34)
+
 	args = append(args, initialM41)
+
 	args = append(args, initialM42)
+
 	args = append(args, initialM43)
+
 	args = append(args, initialM44)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("FromValuesToRef", args...)
 }
@@ -425,10 +568,29 @@ func (m *Matrix) FromXYZAxesToRef(xaxis *Vector3, yaxis *Vector3, zaxis *Vector3
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, xaxis.JSObject())
-	args = append(args, yaxis.JSObject())
-	args = append(args, zaxis.JSObject())
-	args = append(args, result.JSObject())
+	if xaxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, xaxis.JSObject())
+	}
+
+	if yaxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, yaxis.JSObject())
+	}
+
+	if zaxis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, zaxis.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("FromXYZAxesToRef", args...)
 }
@@ -440,7 +602,11 @@ func (m *Matrix) GetAsMatrix2x2(matrix *Matrix) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, matrix.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
 
 	retVal := m.p.Call("GetAsMatrix2x2", args...)
 	return retVal
@@ -453,7 +619,11 @@ func (m *Matrix) GetAsMatrix3x3(matrix *Matrix) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, matrix.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
 
 	retVal := m.p.Call("GetAsMatrix3x3", args...)
 	return retVal
@@ -475,11 +645,32 @@ func (m *Matrix) GetFinalMatrix(viewport *Viewport, world *Matrix, view *Matrix,
 
 	args := make([]interface{}, 0, 6+0)
 
-	args = append(args, viewport.JSObject())
-	args = append(args, world.JSObject())
-	args = append(args, view.JSObject())
-	args = append(args, projection.JSObject())
+	if viewport == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, viewport.JSObject())
+	}
+
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if view == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, view.JSObject())
+	}
+
+	if projection == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, projection.JSObject())
+	}
+
 	args = append(args, zmin)
+
 	args = append(args, zmax)
 
 	retVal := m.p.Call("GetFinalMatrix", args...)
@@ -511,7 +702,11 @@ func (m *Matrix) GetRotationMatrixToRef(result *Matrix) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := m.p.Call("getRotationMatrixToRef", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -546,7 +741,11 @@ func (m *Matrix) GetTranslationToRef(result *Vector3) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := m.p.Call("getTranslationToRef", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -568,7 +767,11 @@ func (m *Matrix) IdentityToRef(result *Matrix) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("IdentityToRef", args...)
 }
@@ -580,7 +783,11 @@ func (m *Matrix) Invert(source *Matrix) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, source.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
 
 	retVal := m.p.Call("Invert", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -593,7 +800,11 @@ func (m *Matrix) InvertToRef(other *Matrix) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := m.p.Call("invertToRef", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -624,8 +835,18 @@ func (m *Matrix) Lerp(startValue *Matrix, endValue *Matrix, gradient float64) *M
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
 
 	retVal := m.p.Call("Lerp", args...)
@@ -639,10 +860,25 @@ func (m *Matrix) LerpToRef(startValue *Matrix, endValue *Matrix, gradient float6
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, startValue.JSObject())
-	args = append(args, endValue.JSObject())
+	if startValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, startValue.JSObject())
+	}
+
+	if endValue == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, endValue.JSObject())
+	}
+
 	args = append(args, gradient)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("LerpToRef", args...)
 }
@@ -654,9 +890,23 @@ func (m *Matrix) LookAtLH(eye *Vector3, target *Vector3, up *Vector3) *Matrix {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, eye.JSObject())
-	args = append(args, target.JSObject())
-	args = append(args, up.JSObject())
+	if eye == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, eye.JSObject())
+	}
+
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if up == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, up.JSObject())
+	}
 
 	retVal := m.p.Call("LookAtLH", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -669,10 +919,29 @@ func (m *Matrix) LookAtLHToRef(eye *Vector3, target *Vector3, up *Vector3, resul
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, eye.JSObject())
-	args = append(args, target.JSObject())
-	args = append(args, up.JSObject())
-	args = append(args, result.JSObject())
+	if eye == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, eye.JSObject())
+	}
+
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if up == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, up.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("LookAtLHToRef", args...)
 }
@@ -684,9 +953,23 @@ func (m *Matrix) LookAtRH(eye *Vector3, target *Vector3, up *Vector3) *Matrix {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, eye.JSObject())
-	args = append(args, target.JSObject())
-	args = append(args, up.JSObject())
+	if eye == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, eye.JSObject())
+	}
+
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if up == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, up.JSObject())
+	}
 
 	retVal := m.p.Call("LookAtRH", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -699,10 +982,29 @@ func (m *Matrix) LookAtRHToRef(eye *Vector3, target *Vector3, up *Vector3, resul
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, eye.JSObject())
-	args = append(args, target.JSObject())
-	args = append(args, up.JSObject())
-	args = append(args, result.JSObject())
+	if eye == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, eye.JSObject())
+	}
+
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if up == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, up.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("LookAtRHToRef", args...)
 }
@@ -714,7 +1016,11 @@ func (m *Matrix) Multiply(other *Matrix) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	retVal := m.p.Call("multiply", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -728,6 +1034,7 @@ func (m *Matrix) MultiplyAtIndex(index float64, value float64) *Matrix {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, index)
+
 	args = append(args, value)
 
 	retVal := m.p.Call("multiplyAtIndex", args...)
@@ -741,8 +1048,14 @@ func (m *Matrix) MultiplyToArray(other *Matrix, result js.Value, offset float64)
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
+
 	args = append(args, result)
+
 	args = append(args, offset)
 
 	retVal := m.p.Call("multiplyToArray", args...)
@@ -756,8 +1069,17 @@ func (m *Matrix) MultiplyToRef(other *Matrix, result *Matrix) *Matrix {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, other.JSObject())
-	args = append(args, result.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := m.p.Call("multiplyToRef", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -771,8 +1093,11 @@ func (m *Matrix) OrthoLH(width float64, height float64, znear float64, zfar floa
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
 
 	retVal := m.p.Call("OrthoLH", args...)
@@ -787,10 +1112,18 @@ func (m *Matrix) OrthoLHToRef(width float64, height float64, znear float64, zfar
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("OrthoLHToRef", args...)
 }
@@ -803,10 +1136,15 @@ func (m *Matrix) OrthoOffCenterLH(left float64, right float64, bottom float64, t
 	args := make([]interface{}, 0, 6+0)
 
 	args = append(args, left)
+
 	args = append(args, right)
+
 	args = append(args, bottom)
+
 	args = append(args, top)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
 
 	retVal := m.p.Call("OrthoOffCenterLH", args...)
@@ -821,12 +1159,22 @@ func (m *Matrix) OrthoOffCenterLHToRef(left float64, right float64, bottom float
 	args := make([]interface{}, 0, 7+0)
 
 	args = append(args, left)
+
 	args = append(args, right)
+
 	args = append(args, bottom)
+
 	args = append(args, top)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("OrthoOffCenterLHToRef", args...)
 }
@@ -839,10 +1187,15 @@ func (m *Matrix) OrthoOffCenterRH(left float64, right float64, bottom float64, t
 	args := make([]interface{}, 0, 6+0)
 
 	args = append(args, left)
+
 	args = append(args, right)
+
 	args = append(args, bottom)
+
 	args = append(args, top)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
 
 	retVal := m.p.Call("OrthoOffCenterRH", args...)
@@ -857,12 +1210,22 @@ func (m *Matrix) OrthoOffCenterRHToRef(left float64, right float64, bottom float
 	args := make([]interface{}, 0, 7+0)
 
 	args = append(args, left)
+
 	args = append(args, right)
+
 	args = append(args, bottom)
+
 	args = append(args, top)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("OrthoOffCenterRHToRef", args...)
 }
@@ -875,8 +1238,11 @@ func (m *Matrix) PerspectiveFovLH(fov float64, aspect float64, znear float64, zf
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, fov)
+
 	args = append(args, aspect)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
 
 	retVal := m.p.Call("PerspectiveFovLH", args...)
@@ -899,10 +1265,18 @@ func (m *Matrix) PerspectiveFovLHToRef(fov float64, aspect float64, znear float6
 	args := make([]interface{}, 0, 5+1)
 
 	args = append(args, fov)
+
 	args = append(args, aspect)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	if opts.IsVerticalFovFixed == nil {
 		args = append(args, js.Undefined())
@@ -921,8 +1295,11 @@ func (m *Matrix) PerspectiveFovRH(fov float64, aspect float64, znear float64, zf
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, fov)
+
 	args = append(args, aspect)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
 
 	retVal := m.p.Call("PerspectiveFovRH", args...)
@@ -945,10 +1322,18 @@ func (m *Matrix) PerspectiveFovRHToRef(fov float64, aspect float64, znear float6
 	args := make([]interface{}, 0, 5+1)
 
 	args = append(args, fov)
+
 	args = append(args, aspect)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	if opts.IsVerticalFovFixed == nil {
 		args = append(args, js.Undefined())
@@ -975,10 +1360,18 @@ func (m *Matrix) PerspectiveFovReverseLHToRef(fov float64, aspect float64, znear
 	args := make([]interface{}, 0, 5+1)
 
 	args = append(args, fov)
+
 	args = append(args, aspect)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	if opts.IsVerticalFovFixed == nil {
 		args = append(args, js.Undefined())
@@ -1005,10 +1398,18 @@ func (m *Matrix) PerspectiveFovReverseRHToRef(fov float64, aspect float64, znear
 	args := make([]interface{}, 0, 5+1)
 
 	args = append(args, fov)
+
 	args = append(args, aspect)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	if opts.IsVerticalFovFixed == nil {
 		args = append(args, js.Undefined())
@@ -1035,9 +1436,16 @@ func (m *Matrix) PerspectiveFovWebVRToRef(fov js.Value, znear float64, zfar floa
 	args := make([]interface{}, 0, 4+1)
 
 	args = append(args, fov)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	if opts.RightHanded == nil {
 		args = append(args, js.Undefined())
@@ -1056,8 +1464,11 @@ func (m *Matrix) PerspectiveLH(width float64, height float64, znear float64, zfa
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, znear)
+
 	args = append(args, zfar)
 
 	retVal := m.p.Call("PerspectiveLH", args...)
@@ -1085,7 +1496,12 @@ func (m *Matrix) ReflectionToRef(plane js.Value, result *Matrix) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, plane)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("ReflectionToRef", args...)
 }
@@ -1115,9 +1531,23 @@ func (m *Matrix) RotationAlignToRef(from *Vector3, to *Vector3, result *Matrix) 
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, from.JSObject())
-	args = append(args, to.JSObject())
-	args = append(args, result.JSObject())
+	if from == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, from.JSObject())
+	}
+
+	if to == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, to.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("RotationAlignToRef", args...)
 }
@@ -1129,7 +1559,12 @@ func (m *Matrix) RotationAxis(axis *Vector3, angle float64) *Matrix {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, axis.JSObject())
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, angle)
 
 	retVal := m.p.Call("RotationAxis", args...)
@@ -1143,9 +1578,19 @@ func (m *Matrix) RotationAxisToRef(axis *Vector3, angle float64, result *Matrix)
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, axis.JSObject())
+	if axis == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, axis.JSObject())
+	}
+
 	args = append(args, angle)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("RotationAxisToRef", args...)
 }
@@ -1171,7 +1616,12 @@ func (m *Matrix) RotationXToRef(angle float64, result *Matrix) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, angle)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("RotationXToRef", args...)
 }
@@ -1197,7 +1647,12 @@ func (m *Matrix) RotationYToRef(angle float64, result *Matrix) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, angle)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("RotationYToRef", args...)
 }
@@ -1210,7 +1665,9 @@ func (m *Matrix) RotationYawPitchRoll(yaw float64, pitch float64, roll float64) 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, yaw)
+
 	args = append(args, pitch)
+
 	args = append(args, roll)
 
 	retVal := m.p.Call("RotationYawPitchRoll", args...)
@@ -1225,9 +1682,16 @@ func (m *Matrix) RotationYawPitchRollToRef(yaw float64, pitch float64, roll floa
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, yaw)
+
 	args = append(args, pitch)
+
 	args = append(args, roll)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("RotationYawPitchRollToRef", args...)
 }
@@ -1253,7 +1717,12 @@ func (m *Matrix) RotationZToRef(angle float64, result *Matrix) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, angle)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("RotationZToRef", args...)
 }
@@ -1279,7 +1748,12 @@ func (m *Matrix) ScaleAndAddToRef(scale float64, result *Matrix) *Matrix {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, scale)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := m.p.Call("scaleAndAddToRef", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -1293,7 +1767,12 @@ func (m *Matrix) ScaleToRef(scale float64, result *Matrix) *Matrix {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, scale)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := m.p.Call("scaleToRef", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -1307,7 +1786,9 @@ func (m *Matrix) Scaling(x float64, y float64, z float64) *Matrix {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	retVal := m.p.Call("Scaling", args...)
@@ -1322,9 +1803,16 @@ func (m *Matrix) ScalingToRef(x float64, y float64, z float64, result *Matrix) {
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("ScalingToRef", args...)
 }
@@ -1337,7 +1825,12 @@ func (m *Matrix) SetRow(index float64, row *Vector4) *Matrix {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, index)
-	args = append(args, row.JSObject())
+
+	if row == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, row.JSObject())
+	}
 
 	retVal := m.p.Call("setRow", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -1351,9 +1844,13 @@ func (m *Matrix) SetRowFromFloats(index float64, x float64, y float64, z float64
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, index)
+
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
+
 	args = append(args, w)
 
 	retVal := m.p.Call("setRowFromFloats", args...)
@@ -1367,7 +1864,11 @@ func (m *Matrix) SetTranslation(vector3 *Vector3) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vector3.JSObject())
+	if vector3 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vector3.JSObject())
+	}
 
 	retVal := m.p.Call("setTranslation", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -1381,7 +1882,9 @@ func (m *Matrix) SetTranslationFromFloats(x float64, y float64, z float64) *Matr
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	retVal := m.p.Call("setTranslationFromFloats", args...)
@@ -1404,7 +1907,11 @@ func (m *Matrix) ToNormalMatrix(ref *Matrix) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, ref.JSObject())
+	if ref == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ref.JSObject())
+	}
 
 	m.p.Call("toNormalMatrix", args...)
 }
@@ -1433,7 +1940,9 @@ func (m *Matrix) Translation(x float64, y float64, z float64) *Matrix {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	retVal := m.p.Call("Translation", args...)
@@ -1448,9 +1957,16 @@ func (m *Matrix) TranslationToRef(x float64, y float64, z float64, result *Matri
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("TranslationToRef", args...)
 }
@@ -1462,7 +1978,11 @@ func (m *Matrix) Transpose(matrix *Matrix) *Matrix {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, matrix.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
 
 	retVal := m.p.Call("Transpose", args...)
 	return MatrixFromJSObject(retVal, m.ctx)
@@ -1475,8 +1995,17 @@ func (m *Matrix) TransposeToRef(matrix *Matrix, result *Matrix) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, matrix.JSObject())
-	args = append(args, result.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	m.p.Call("TransposeToRef", args...)
 }

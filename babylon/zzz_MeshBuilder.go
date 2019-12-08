@@ -44,7 +44,13 @@ func (m *MeshBuilder) CreateDecal(name string, sourceMesh *AbstractMesh, options
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
-	args = append(args, sourceMesh.JSObject())
+
+	if sourceMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sourceMesh.JSObject())
+	}
+
 	args = append(args, options)
 
 	retVal := m.p.Call("CreateDecal", args...)
@@ -67,6 +73,7 @@ func (m *MeshBuilder) CreateDisc(name string, options js.Value, opts *MeshBuilde
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -95,7 +102,9 @@ func (m *MeshBuilder) CreateGroundFromHeightMap(name string, url string, options
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, name)
+
 	args = append(args, url)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -124,6 +133,7 @@ func (m *MeshBuilder) CreateIcoSphere(name string, options js.Value, opts *MeshB
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -152,6 +162,7 @@ func (m *MeshBuilder) CreateLathe(name string, options js.Value, opts *MeshBuild
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -172,8 +183,14 @@ func (m *MeshBuilder) CreateLineSystem(name string, options js.Value, scene *Sce
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, options)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := m.p.Call("CreateLineSystem", args...)
 	return LinesMeshFromJSObject(retVal, m.ctx)
@@ -182,7 +199,7 @@ func (m *MeshBuilder) CreateLineSystem(name string, options js.Value, scene *Sce
 // MeshBuilderCreatePolygonOpts contains optional parameters for MeshBuilder.CreatePolygon.
 type MeshBuilderCreatePolygonOpts struct {
 	Scene           *Scene
-	EarcutInjection *interface{}
+	EarcutInjection interface{}
 }
 
 // CreatePolygon calls the CreatePolygon method on the MeshBuilder object.
@@ -196,6 +213,7 @@ func (m *MeshBuilder) CreatePolygon(name string, options js.Value, opts *MeshBui
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -229,6 +247,7 @@ func (m *MeshBuilder) CreatePolyhedron(name string, options js.Value, opts *Mesh
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -257,6 +276,7 @@ func (m *MeshBuilder) CreateRibbon(name string, options js.Value, opts *MeshBuil
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -285,6 +305,7 @@ func (m *MeshBuilder) CreateTiledBox(name string, options js.Value, opts *MeshBu
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -313,6 +334,7 @@ func (m *MeshBuilder) CreateTiledGround(name string, options js.Value, opts *Mes
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -341,6 +363,7 @@ func (m *MeshBuilder) CreateTiledPlane(name string, options js.Value, opts *Mesh
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -369,6 +392,7 @@ func (m *MeshBuilder) CreateTorus(name string, options js.Value, opts *MeshBuild
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -397,6 +421,7 @@ func (m *MeshBuilder) CreateTorusKnot(name string, options js.Value, opts *MeshB
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -425,6 +450,7 @@ func (m *MeshBuilder) CreateTube(name string, options js.Value, opts *MeshBuilde
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -440,7 +466,7 @@ func (m *MeshBuilder) CreateTube(name string, options js.Value, opts *MeshBuilde
 // MeshBuilderExtrudePolygonOpts contains optional parameters for MeshBuilder.ExtrudePolygon.
 type MeshBuilderExtrudePolygonOpts struct {
 	Scene           *Scene
-	EarcutInjection *interface{}
+	EarcutInjection interface{}
 }
 
 // ExtrudePolygon calls the ExtrudePolygon method on the MeshBuilder object.
@@ -454,6 +480,7 @@ func (m *MeshBuilder) ExtrudePolygon(name string, options js.Value, opts *MeshBu
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -487,6 +514,7 @@ func (m *MeshBuilder) ExtrudeShape(name string, options js.Value, opts *MeshBuil
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {
@@ -515,6 +543,7 @@ func (m *MeshBuilder) ExtrudeShapeCustom(name string, options js.Value, opts *Me
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

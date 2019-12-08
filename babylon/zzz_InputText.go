@@ -133,9 +133,20 @@ func (i *InputText) _onPointerDown(target *Control, coordinates *Vector2, pointe
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
+
 	args = append(args, buttonIndex)
 
 	retVal := i.p.Call("_onPointerDown", args...)
@@ -149,8 +160,18 @@ func (i *InputText) _onPointerMove(target *Control, coordinates *Vector2, pointe
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
 
 	i.p.Call("_onPointerMove", args...)
@@ -163,10 +184,22 @@ func (i *InputText) _onPointerUp(target *Control, coordinates *Vector2, pointerI
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
+
 	args = append(args, buttonIndex)
+
 	args = append(args, notifyClick)
 
 	i.p.Call("_onPointerUp", args...)

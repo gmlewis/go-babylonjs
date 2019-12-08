@@ -78,7 +78,11 @@ func (o *Octree) AddMesh(entry *T) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, entry.JSObject())
+	if entry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, entry.JSObject())
+	}
 
 	o.p.Call("addMesh", args...)
 }
@@ -98,7 +102,12 @@ func (o *Octree) Intersects(sphereCenter *Vector3, sphereRadius float64, opts *O
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, sphereCenter.JSObject())
+	if sphereCenter == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sphereCenter.JSObject())
+	}
+
 	args = append(args, sphereRadius)
 
 	if opts.AllowDuplicate == nil {
@@ -118,7 +127,11 @@ func (o *Octree) IntersectsRay(ray *Ray) *SmartArray {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, ray.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
 
 	retVal := o.p.Call("intersectsRay", args...)
 	return SmartArrayFromJSObject(retVal, o.ctx)
@@ -131,7 +144,11 @@ func (o *Octree) RemoveMesh(entry *T) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, entry.JSObject())
+	if entry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, entry.JSObject())
+	}
 
 	o.p.Call("removeMesh", args...)
 }
@@ -170,8 +187,18 @@ func (o *Octree) Update(worldMin *Vector3, worldMax *Vector3, entries []*T) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, worldMin.JSObject())
-	args = append(args, worldMax.JSObject())
+	if worldMin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMin.JSObject())
+	}
+
+	if worldMax == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMax.JSObject())
+	}
+
 	args = append(args, TArrayToJSArray(entries))
 
 	o.p.Call("update", args...)

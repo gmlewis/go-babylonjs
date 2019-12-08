@@ -56,7 +56,11 @@ func (p *PostProcessRenderPipelineManager) AddPipeline(renderPipeline *PostProce
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, renderPipeline.JSObject())
+	if renderPipeline == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, renderPipeline.JSObject())
+	}
 
 	p.p.Call("addPipeline", args...)
 }
@@ -69,7 +73,7 @@ type PostProcessRenderPipelineManagerAttachCamerasToRenderPipelineOpts struct {
 // AttachCamerasToRenderPipeline calls the AttachCamerasToRenderPipeline method on the PostProcessRenderPipelineManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#attachcamerastorenderpipeline
-func (p *PostProcessRenderPipelineManager) AttachCamerasToRenderPipeline(renderPipelineName string, cameras interface{}, opts *PostProcessRenderPipelineManagerAttachCamerasToRenderPipelineOpts) {
+func (p *PostProcessRenderPipelineManager) AttachCamerasToRenderPipeline(renderPipelineName string, cameras JSObject, opts *PostProcessRenderPipelineManagerAttachCamerasToRenderPipelineOpts) {
 	if opts == nil {
 		opts = &PostProcessRenderPipelineManagerAttachCamerasToRenderPipelineOpts{}
 	}
@@ -77,7 +81,12 @@ func (p *PostProcessRenderPipelineManager) AttachCamerasToRenderPipeline(renderP
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, renderPipelineName)
-	args = append(args, cameras)
+
+	if cameras == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, cameras.JSObject())
+	}
 
 	if opts.Unique == nil {
 		args = append(args, js.Undefined())
@@ -91,12 +100,17 @@ func (p *PostProcessRenderPipelineManager) AttachCamerasToRenderPipeline(renderP
 // DetachCamerasFromRenderPipeline calls the DetachCamerasFromRenderPipeline method on the PostProcessRenderPipelineManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#detachcamerasfromrenderpipeline
-func (p *PostProcessRenderPipelineManager) DetachCamerasFromRenderPipeline(renderPipelineName string, cameras interface{}) {
+func (p *PostProcessRenderPipelineManager) DetachCamerasFromRenderPipeline(renderPipelineName string, cameras JSObject) {
 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, renderPipelineName)
-	args = append(args, cameras)
+
+	if cameras == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, cameras.JSObject())
+	}
 
 	p.p.Call("detachCamerasFromRenderPipeline", args...)
 }
@@ -104,13 +118,19 @@ func (p *PostProcessRenderPipelineManager) DetachCamerasFromRenderPipeline(rende
 // DisableEffectInPipeline calls the DisableEffectInPipeline method on the PostProcessRenderPipelineManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#disableeffectinpipeline
-func (p *PostProcessRenderPipelineManager) DisableEffectInPipeline(renderPipelineName string, renderEffectName string, cameras interface{}) {
+func (p *PostProcessRenderPipelineManager) DisableEffectInPipeline(renderPipelineName string, renderEffectName string, cameras JSObject) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, renderPipelineName)
+
 	args = append(args, renderEffectName)
-	args = append(args, cameras)
+
+	if cameras == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, cameras.JSObject())
+	}
 
 	p.p.Call("disableEffectInPipeline", args...)
 }
@@ -126,13 +146,19 @@ func (p *PostProcessRenderPipelineManager) Dispose() {
 // EnableEffectInPipeline calls the EnableEffectInPipeline method on the PostProcessRenderPipelineManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#enableeffectinpipeline
-func (p *PostProcessRenderPipelineManager) EnableEffectInPipeline(renderPipelineName string, renderEffectName string, cameras interface{}) {
+func (p *PostProcessRenderPipelineManager) EnableEffectInPipeline(renderPipelineName string, renderEffectName string, cameras JSObject) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, renderPipelineName)
+
 	args = append(args, renderEffectName)
-	args = append(args, cameras)
+
+	if cameras == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, cameras.JSObject())
+	}
 
 	p.p.Call("enableEffectInPipeline", args...)
 }

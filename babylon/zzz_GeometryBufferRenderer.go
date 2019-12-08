@@ -100,7 +100,12 @@ func (g *GeometryBufferRenderer) IsReady(subMesh *SubMesh, useInstances bool) bo
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, subMesh.JSObject())
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
+
 	args = append(args, useInstances)
 
 	retVal := g.p.Call("isReady", args...)

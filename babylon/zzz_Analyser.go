@@ -59,6 +59,7 @@ func (a *Analyser) ConnectAudioNodes(inputAudioNode js.Value, outputAudioNode js
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, inputAudioNode)
+
 	args = append(args, outputAudioNode)
 
 	a.p.Call("connectAudioNodes", args...)

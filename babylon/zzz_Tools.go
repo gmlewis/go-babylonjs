@@ -73,9 +73,23 @@ func (t *Tools) CreateScreenshot(engine *Engine, camera *Camera, size *IScreensh
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, engine.JSObject())
-	args = append(args, camera.JSObject())
-	args = append(args, size.JSObject())
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
+
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
 
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
@@ -106,9 +120,23 @@ func (t *Tools) CreateScreenshotAsync(engine *Engine, camera *Camera, size *IScr
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, engine.JSObject())
-	args = append(args, camera.JSObject())
-	args = append(args, size.JSObject())
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
+
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
 
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -139,9 +167,23 @@ func (t *Tools) CreateScreenshotUsingRenderTarget(engine *Engine, camera *Camera
 
 	args := make([]interface{}, 0, 3+5)
 
-	args = append(args, engine.JSObject())
-	args = append(args, camera.JSObject())
-	args = append(args, size.JSObject())
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
+
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
 
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
@@ -190,9 +232,23 @@ func (t *Tools) CreateScreenshotUsingRenderTargetAsync(engine *Engine, camera *C
 
 	args := make([]interface{}, 0, 3+4)
 
-	args = append(args, engine.JSObject())
-	args = append(args, camera.JSObject())
-	args = append(args, size.JSObject())
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
+
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
 
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -241,15 +297,24 @@ type ToolsDeepCopyOpts struct {
 // DeepCopy calls the DeepCopy method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#deepcopy
-func (t *Tools) DeepCopy(source interface{}, destination interface{}, opts *ToolsDeepCopyOpts) {
+func (t *Tools) DeepCopy(source JSObject, destination JSObject, opts *ToolsDeepCopyOpts) {
 	if opts == nil {
 		opts = &ToolsDeepCopyOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, source)
-	args = append(args, destination)
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if destination == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, destination.JSObject())
+	}
 
 	if opts.DoNotCopyList == nil {
 		args = append(args, js.Undefined())
@@ -286,6 +351,7 @@ func (t *Tools) Download(blob js.Value, fileName string) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, blob)
+
 	args = append(args, fileName)
 
 	t.p.Call("Download", args...)
@@ -309,8 +375,14 @@ func (t *Tools) DumpFramebuffer(width float64, height float64, engine *Engine, o
 	args := make([]interface{}, 0, 3+3)
 
 	args = append(args, width)
+
 	args = append(args, height)
-	args = append(args, engine.JSObject())
+
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
 
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
@@ -387,10 +459,15 @@ func (t *Tools) FetchToRef(u float64, v float64, width float64, height float64, 
 	args := make([]interface{}, 0, 6+0)
 
 	args = append(args, u)
+
 	args = append(args, v)
+
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, pixels)
+
 	args = append(args, color)
 
 	t.p.Call("FetchToRef", args...)
@@ -470,14 +547,18 @@ type ToolsGetClassNameOpts struct {
 // GetClassName calls the GetClassName method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#getclassname
-func (t *Tools) GetClassName(object interface{}, opts *ToolsGetClassNameOpts) string {
+func (t *Tools) GetClassName(object JSObject, opts *ToolsGetClassNameOpts) string {
 	if opts == nil {
 		opts = &ToolsGetClassNameOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, object)
+	if object == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, object.JSObject())
+	}
 
 	if opts.IsType == nil {
 		args = append(args, js.Undefined())
@@ -537,14 +618,18 @@ type ToolsGetFullClassNameOpts struct {
 // GetFullClassName calls the GetFullClassName method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#getfullclassname
-func (t *Tools) GetFullClassName(object interface{}, opts *ToolsGetFullClassNameOpts) string {
+func (t *Tools) GetFullClassName(object JSObject, opts *ToolsGetFullClassNameOpts) string {
 	if opts == nil {
 		opts = &ToolsGetFullClassNameOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, object)
+	if object == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, object.JSObject())
+	}
 
 	if opts.IsType == nil {
 		args = append(args, js.Undefined())
@@ -568,7 +653,7 @@ func (t *Tools) GetPointerPrefix() string {
 // Instantiate calls the Instantiate method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#instantiate
-func (t *Tools) Instantiate(className string) interface{} {
+func (t *Tools) Instantiate(className string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
@@ -594,11 +679,15 @@ func (t *Tools) IsBase64(uri string) bool {
 // IsEmpty calls the IsEmpty method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#isempty
-func (t *Tools) IsEmpty(obj interface{}) bool {
+func (t *Tools) IsEmpty(obj JSObject) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, obj)
+	if obj == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, obj.JSObject())
+	}
 
 	retVal := t.p.Call("IsEmpty", args...)
 	return retVal.Bool()
@@ -636,6 +725,7 @@ func (t *Tools) LoadFile(url string, onSuccess JSFunc, opts *ToolsLoadFileOpts) 
 	args := make([]interface{}, 0, 2+4)
 
 	args = append(args, url)
+
 	args = append(args, js.FuncOf(onSuccess))
 
 	if opts.OnProgress == nil {
@@ -692,9 +782,16 @@ func (t *Tools) LoadImage(input string, onLoad JSFunc, onError JSFunc, offlinePr
 	args := make([]interface{}, 0, 4+1)
 
 	args = append(args, input)
+
 	args = append(args, js.FuncOf(onLoad))
+
 	args = append(args, js.FuncOf(onError))
-	args = append(args, offlineProvider.JSObject())
+
+	if offlineProvider == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, offlineProvider.JSObject())
+	}
 
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -723,6 +820,7 @@ func (t *Tools) LoadScript(scriptUrl string, onSuccess JSFunc, opts *ToolsLoadSc
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, scriptUrl)
+
 	args = append(args, js.FuncOf(onSuccess))
 
 	if opts.OnError == nil {
@@ -786,14 +884,18 @@ type ToolsMakeArrayOpts struct {
 // MakeArray calls the MakeArray method on the Tools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tools#makearray
-func (t *Tools) MakeArray(obj interface{}, opts *ToolsMakeArrayOpts) js.Value {
+func (t *Tools) MakeArray(obj JSObject, opts *ToolsMakeArrayOpts) js.Value {
 	if opts == nil {
 		opts = &ToolsMakeArrayOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, obj)
+	if obj == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, obj.JSObject())
+	}
 
 	if opts.AllowsNullUndefined == nil {
 		args = append(args, js.Undefined())
@@ -813,7 +915,9 @@ func (t *Tools) Mix(a float64, b float64, alpha float64) float64 {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, a)
+
 	args = append(args, b)
+
 	args = append(args, alpha)
 
 	retVal := t.p.Call("Mix", args...)
@@ -847,6 +951,7 @@ func (t *Tools) ReadFile(file js.Value, onSuccess JSFunc, opts *ToolsReadFileOpt
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, file)
+
 	args = append(args, js.FuncOf(onSuccess))
 
 	if opts.OnProgress == nil {
@@ -877,7 +982,9 @@ func (t *Tools) ReadFileAsDataURL(fileToLoad js.Value, callback JSFunc, progress
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, fileToLoad)
+
 	args = append(args, js.FuncOf(callback))
+
 	args = append(args, js.FuncOf(progressCallback))
 
 	retVal := t.p.Call("ReadFileAsDataURL", args...)
@@ -892,6 +999,7 @@ func (t *Tools) RegisterTopRootEvents(windowElement js.Value, events js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, windowElement)
+
 	args = append(args, events)
 
 	t.p.Call("RegisterTopRootEvents", args...)
@@ -905,6 +1013,7 @@ func (t *Tools) SetCorsBehavior(url []string, element js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, url)
+
 	args = append(args, element)
 
 	t.p.Call("SetCorsBehavior", args...)
@@ -938,6 +1047,7 @@ func (t *Tools) ToBlob(canvas js.Value, successCallback JSFunc, opts *ToolsToBlo
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, canvas)
+
 	args = append(args, js.FuncOf(successCallback))
 
 	if opts.MimeType == nil {
@@ -983,6 +1093,7 @@ func (t *Tools) UnregisterTopRootEvents(windowElement js.Value, events js.Value)
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, windowElement)
+
 	args = append(args, events)
 
 	t.p.Call("UnregisterTopRootEvents", args...)

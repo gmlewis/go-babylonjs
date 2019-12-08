@@ -61,7 +61,7 @@ func (g *GradientBlock) GetClassName() string {
 // Serialize calls the Serialize method on the GradientBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#serialize
-func (g *GradientBlock) Serialize() interface{} {
+func (g *GradientBlock) Serialize() js.Value {
 
 	retVal := g.p.Call("serialize")
 	return retVal
@@ -70,12 +70,22 @@ func (g *GradientBlock) Serialize() interface{} {
 // _deserialize calls the _deserialize method on the GradientBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock#_deserialize
-func (g *GradientBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+func (g *GradientBlock) _deserialize(serializationObject JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, serializationObject)
-	args = append(args, scene.JSObject())
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	g.p.Call("_deserialize", args...)

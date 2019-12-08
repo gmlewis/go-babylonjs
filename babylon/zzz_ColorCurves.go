@@ -56,8 +56,17 @@ func (c *ColorCurves) Bind(colorCurves *ColorCurves, effect *Effect, opts *Color
 
 	args := make([]interface{}, 0, 2+3)
 
-	args = append(args, colorCurves.JSObject())
-	args = append(args, effect.JSObject())
+	if colorCurves == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, colorCurves.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	if opts.PositiveUniform == nil {
 		args = append(args, js.Undefined())
@@ -99,11 +108,15 @@ func (c *ColorCurves) GetClassName() string {
 // Parse calls the Parse method on the ColorCurves object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcurves#parse
-func (c *ColorCurves) Parse(source interface{}) *ColorCurves {
+func (c *ColorCurves) Parse(source JSObject) *ColorCurves {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, source)
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
 
 	retVal := c.p.Call("Parse", args...)
 	return ColorCurvesFromJSObject(retVal, c.ctx)
@@ -124,7 +137,7 @@ func (c *ColorCurves) PrepareUniforms(uniformsList []string) {
 // Serialize calls the Serialize method on the ColorCurves object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcurves#serialize
-func (c *ColorCurves) Serialize() interface{} {
+func (c *ColorCurves) Serialize() js.Value {
 
 	retVal := c.p.Call("serialize")
 	return retVal

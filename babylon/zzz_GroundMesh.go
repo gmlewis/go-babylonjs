@@ -67,6 +67,7 @@ func (g *GroundMesh) GetHeightAtCoordinates(x float64, z float64) float64 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, x)
+
 	args = append(args, z)
 
 	retVal := g.p.Call("getHeightAtCoordinates", args...)
@@ -81,6 +82,7 @@ func (g *GroundMesh) GetNormalAtCoordinates(x float64, z float64) *Vector3 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, x)
+
 	args = append(args, z)
 
 	retVal := g.p.Call("getNormalAtCoordinates", args...)
@@ -95,8 +97,14 @@ func (g *GroundMesh) GetNormalAtCoordinatesToRef(x float64, z float64, ref *Vect
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, x)
+
 	args = append(args, z)
-	args = append(args, ref.JSObject())
+
+	if ref == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ref.JSObject())
+	}
 
 	retVal := g.p.Call("getNormalAtCoordinatesToRef", args...)
 	return GroundMeshFromJSObject(retVal, g.ctx)
@@ -131,12 +139,21 @@ func (g *GroundMesh) Optimize(chunksCount float64, opts *GroundMeshOptimizeOpts)
 // Parse calls the Parse method on the GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#parse
-func (g *GroundMesh) Parse(parsedMesh interface{}, scene *Scene) *GroundMesh {
+func (g *GroundMesh) Parse(parsedMesh JSObject, scene *Scene) *GroundMesh {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedMesh)
-	args = append(args, scene.JSObject())
+	if parsedMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedMesh.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := g.p.Call("Parse", args...)
 	return GroundMeshFromJSObject(retVal, g.ctx)
@@ -145,11 +162,15 @@ func (g *GroundMesh) Parse(parsedMesh interface{}, scene *Scene) *GroundMesh {
 // Serialize calls the Serialize method on the GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh#serialize
-func (g *GroundMesh) Serialize(serializationObject interface{}) {
+func (g *GroundMesh) Serialize(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	g.p.Call("serialize", args...)
 }

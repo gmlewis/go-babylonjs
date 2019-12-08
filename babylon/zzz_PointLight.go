@@ -109,11 +109,16 @@ func (p *PointLight) NeedCube() bool {
 // PrepareLightSpecificDefines calls the PrepareLightSpecificDefines method on the PointLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight#preparelightspecificdefines
-func (p *PointLight) PrepareLightSpecificDefines(defines interface{}, lightIndex float64) {
+func (p *PointLight) PrepareLightSpecificDefines(defines JSObject, lightIndex float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines)
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	p.p.Call("prepareLightSpecificDefines", args...)
@@ -126,7 +131,12 @@ func (p *PointLight) TransferToEffect(effect *Effect, lightIndex string) *PointL
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	retVal := p.p.Call("transferToEffect", args...)
@@ -140,7 +150,12 @@ func (p *PointLight) TransferToNodeMaterialEffect(effect *Effect, lightDataUnifo
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightDataUniformName)
 
 	retVal := p.p.Call("transferToNodeMaterialEffect", args...)

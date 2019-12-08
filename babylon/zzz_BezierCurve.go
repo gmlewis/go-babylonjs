@@ -44,9 +44,13 @@ func (b *BezierCurve) Interpolate(t float64, x1 float64, y1 float64, x2 float64,
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, t)
+
 	args = append(args, x1)
+
 	args = append(args, y1)
+
 	args = append(args, x2)
+
 	args = append(args, y2)
 
 	retVal := b.p.Call("Interpolate", args...)

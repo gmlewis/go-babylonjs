@@ -59,7 +59,11 @@ func (c *Color4) Add(right *Color4) *Color4 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, right.JSObject())
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
 
 	retVal := c.p.Call("add", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -72,7 +76,11 @@ func (c *Color4) AddInPlace(right *Color4) *Color4 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, right.JSObject())
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
 
 	retVal := c.p.Call("addInPlace", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -99,6 +107,7 @@ func (c *Color4) CheckColors4(colors []float64, count float64) []float64 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, colors)
+
 	args = append(args, count)
 
 	retVal := c.p.Call("CheckColors4", args...)
@@ -117,8 +126,14 @@ func (c *Color4) ClampToRef(min float64, max float64, result *Color4) *Color4 {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, min)
+
 	args = append(args, max)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := c.p.Call("clampToRef", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -140,7 +155,11 @@ func (c *Color4) CopyFrom(source *Color4) *Color4 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, source.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
 
 	retVal := c.p.Call("copyFrom", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -154,8 +173,11 @@ func (c *Color4) CopyFromFloats(r float64, g float64, b float64, a float64) *Col
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, r)
+
 	args = append(args, g)
+
 	args = append(args, b)
+
 	args = append(args, a)
 
 	retVal := c.p.Call("copyFromFloats", args...)
@@ -169,7 +191,11 @@ func (c *Color4) Equals(otherColor *Color4) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, otherColor.JSObject())
+	if otherColor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherColor.JSObject())
+	}
 
 	retVal := c.p.Call("equals", args...)
 	return retVal.Bool()
@@ -217,7 +243,11 @@ func (c *Color4) FromColor3(color3 *Color3, opts *Color4FromColor3Opts) *Color4 
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, color3.JSObject())
+	if color3 == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color3.JSObject())
+	}
 
 	if opts.Alpha == nil {
 		args = append(args, js.Undefined())
@@ -250,8 +280,11 @@ func (c *Color4) FromInts(r float64, g float64, b float64, a float64) *Color4 {
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, r)
+
 	args = append(args, g)
+
 	args = append(args, b)
+
 	args = append(args, a)
 
 	retVal := c.p.Call("FromInts", args...)
@@ -283,8 +316,18 @@ func (c *Color4) Lerp(left *Color4, right *Color4, amount float64) *Color4 {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, left.JSObject())
-	args = append(args, right.JSObject())
+	if left == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, left.JSObject())
+	}
+
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
+
 	args = append(args, amount)
 
 	retVal := c.p.Call("Lerp", args...)
@@ -298,10 +341,25 @@ func (c *Color4) LerpToRef(left *Color4, right *Color4, amount float64, result *
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, left.JSObject())
-	args = append(args, right.JSObject())
+	if left == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, left.JSObject())
+	}
+
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
+
 	args = append(args, amount)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	c.p.Call("LerpToRef", args...)
 }
@@ -313,7 +371,11 @@ func (c *Color4) Multiply(color *Color4) *Color4 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, color.JSObject())
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	retVal := c.p.Call("multiply", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -326,8 +388,17 @@ func (c *Color4) MultiplyToRef(color *Color4, result *Color4) *Color4 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, color.JSObject())
-	args = append(args, result.JSObject())
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := c.p.Call("multiplyToRef", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -354,7 +425,12 @@ func (c *Color4) ScaleAndAddToRef(scale float64, result *Color4) *Color4 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, scale)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := c.p.Call("scaleAndAddToRef", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -368,7 +444,12 @@ func (c *Color4) ScaleToRef(scale float64, result *Color4) *Color4 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, scale)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := c.p.Call("scaleToRef", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -382,8 +463,11 @@ func (c *Color4) Set(r float64, g float64, b float64, a float64) *Color4 {
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, r)
+
 	args = append(args, g)
+
 	args = append(args, b)
+
 	args = append(args, a)
 
 	retVal := c.p.Call("set", args...)
@@ -397,7 +481,11 @@ func (c *Color4) Subtract(right *Color4) *Color4 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, right.JSObject())
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
 
 	retVal := c.p.Call("subtract", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -410,8 +498,17 @@ func (c *Color4) SubtractToRef(right *Color4, result *Color4) *Color4 {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, right.JSObject())
-	args = append(args, result.JSObject())
+	if right == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, right.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	retVal := c.p.Call("subtractToRef", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -460,7 +557,11 @@ func (c *Color4) ToGammaSpaceToRef(convertedColor *Color4) *Color4 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, convertedColor.JSObject())
+	if convertedColor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, convertedColor.JSObject())
+	}
 
 	retVal := c.p.Call("toGammaSpaceToRef", args...)
 	return Color4FromJSObject(retVal, c.ctx)
@@ -491,7 +592,11 @@ func (c *Color4) ToLinearSpaceToRef(convertedColor *Color4) *Color4 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, convertedColor.JSObject())
+	if convertedColor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, convertedColor.JSObject())
+	}
 
 	retVal := c.p.Call("toLinearSpaceToRef", args...)
 	return Color4FromJSObject(retVal, c.ctx)

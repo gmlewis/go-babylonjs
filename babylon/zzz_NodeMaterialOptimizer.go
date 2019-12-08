@@ -44,6 +44,7 @@ func (n *NodeMaterialOptimizer) Optimize(vertexOutputNodes []*NodeMaterialBlock,
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, NodeMaterialBlockArrayToJSArray(vertexOutputNodes))
+
 	args = append(args, NodeMaterialBlockArrayToJSArray(fragmentOutputNodes))
 
 	n.p.Call("optimize", args...)

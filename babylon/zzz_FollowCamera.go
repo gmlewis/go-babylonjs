@@ -76,6 +76,7 @@ func (f *FollowCamera) AttachControl(element js.Value, noPreventDefault bool) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, element)
+
 	args = append(args, noPreventDefault)
 
 	f.p.Call("attachControl", args...)

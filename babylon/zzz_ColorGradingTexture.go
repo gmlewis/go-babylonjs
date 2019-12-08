@@ -84,12 +84,21 @@ func (c *ColorGradingTexture) GetTextureMatrix() *Matrix {
 // Parse calls the Parse method on the ColorGradingTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#parse
-func (c *ColorGradingTexture) Parse(parsedTexture interface{}, scene *Scene) *ColorGradingTexture {
+func (c *ColorGradingTexture) Parse(parsedTexture JSObject, scene *Scene) *ColorGradingTexture {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := c.p.Call("Parse", args...)
 	return ColorGradingTextureFromJSObject(retVal, c.ctx)
@@ -98,7 +107,7 @@ func (c *ColorGradingTexture) Parse(parsedTexture interface{}, scene *Scene) *Co
 // Serialize calls the Serialize method on the ColorGradingTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#serialize
-func (c *ColorGradingTexture) Serialize() interface{} {
+func (c *ColorGradingTexture) Serialize() js.Value {
 
 	retVal := c.p.Call("serialize")
 	return retVal

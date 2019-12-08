@@ -39,8 +39,8 @@ func EventStateArrayToJSArray(array []*EventState) []interface{} {
 // NewEventStateOpts contains optional parameters for NewEventState.
 type NewEventStateOpts struct {
 	SkipNextObservers *bool
-	Target            *interface{}
-	CurrentTarget     *interface{}
+	Target            interface{}
+	CurrentTarget     interface{}
 }
 
 // NewEventState returns a new EventState object.
@@ -78,8 +78,8 @@ func (ba *Babylon) NewEventState(mask float64, opts *NewEventStateOpts) *EventSt
 // EventStateInitalizeOpts contains optional parameters for EventState.Initalize.
 type EventStateInitalizeOpts struct {
 	SkipNextObservers *bool
-	Target            *interface{}
-	CurrentTarget     *interface{}
+	Target            interface{}
+	CurrentTarget     interface{}
 }
 
 // Initalize calls the Initalize method on the EventState object.
@@ -117,7 +117,7 @@ func (e *EventState) Initalize(mask float64, opts *EventStateInitalizeOpts) *Eve
 // CurrentTarget returns the CurrentTarget property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#currenttarget
-func (e *EventState) CurrentTarget() interface{} {
+func (e *EventState) CurrentTarget() js.Value {
 	retVal := e.p.Get("currentTarget")
 	return retVal
 }
@@ -125,15 +125,15 @@ func (e *EventState) CurrentTarget() interface{} {
 // SetCurrentTarget sets the CurrentTarget property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#currenttarget
-func (e *EventState) SetCurrentTarget(currentTarget interface{}) *EventState {
-	e.p.Set("currentTarget", currentTarget)
+func (e *EventState) SetCurrentTarget(currentTarget JSObject) *EventState {
+	e.p.Set("currentTarget", currentTarget.JSObject())
 	return e
 }
 
 // LastReturnValue returns the LastReturnValue property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#lastreturnvalue
-func (e *EventState) LastReturnValue() interface{} {
+func (e *EventState) LastReturnValue() js.Value {
 	retVal := e.p.Get("lastReturnValue")
 	return retVal
 }
@@ -141,8 +141,8 @@ func (e *EventState) LastReturnValue() interface{} {
 // SetLastReturnValue sets the LastReturnValue property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#lastreturnvalue
-func (e *EventState) SetLastReturnValue(lastReturnValue interface{}) *EventState {
-	e.p.Set("lastReturnValue", lastReturnValue)
+func (e *EventState) SetLastReturnValue(lastReturnValue JSObject) *EventState {
+	e.p.Set("lastReturnValue", lastReturnValue.JSObject())
 	return e
 }
 
@@ -181,7 +181,7 @@ func (e *EventState) SetSkipNextObservers(skipNextObservers bool) *EventState {
 // Target returns the Target property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#target
-func (e *EventState) Target() interface{} {
+func (e *EventState) Target() js.Value {
 	retVal := e.p.Get("target")
 	return retVal
 }
@@ -189,7 +189,7 @@ func (e *EventState) Target() interface{} {
 // SetTarget sets the Target property of class EventState.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate#target
-func (e *EventState) SetTarget(target interface{}) *EventState {
-	e.p.Set("target", target)
+func (e *EventState) SetTarget(target JSObject) *EventState {
+	e.p.Set("target", target.JSObject())
 	return e
 }

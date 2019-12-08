@@ -68,7 +68,11 @@ func (s *Scene) AddActionManager(newActionManager *AbstractActionManager) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newActionManager.JSObject())
+	if newActionManager == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newActionManager.JSObject())
+	}
 
 	s.p.Call("addActionManager", args...)
 }
@@ -80,7 +84,11 @@ func (s *Scene) AddAnimation(newAnimation *Animation) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newAnimation.JSObject())
+	if newAnimation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newAnimation.JSObject())
+	}
 
 	s.p.Call("addAnimation", args...)
 }
@@ -92,7 +100,11 @@ func (s *Scene) AddAnimationGroup(newAnimationGroup *AnimationGroup) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newAnimationGroup.JSObject())
+	if newAnimationGroup == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newAnimationGroup.JSObject())
+	}
 
 	s.p.Call("addAnimationGroup", args...)
 }
@@ -104,7 +116,11 @@ func (s *Scene) AddCamera(newCamera *Camera) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newCamera.JSObject())
+	if newCamera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newCamera.JSObject())
+	}
 
 	s.p.Call("addCamera", args...)
 }
@@ -116,7 +132,11 @@ func (s *Scene) AddGeometry(newGeometry *Geometry) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newGeometry.JSObject())
+	if newGeometry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newGeometry.JSObject())
+	}
 
 	s.p.Call("addGeometry", args...)
 }
@@ -128,7 +148,11 @@ func (s *Scene) AddLight(newLight *Light) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newLight.JSObject())
+	if newLight == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newLight.JSObject())
+	}
 
 	s.p.Call("addLight", args...)
 }
@@ -140,7 +164,11 @@ func (s *Scene) AddMaterial(newMaterial *Material) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newMaterial.JSObject())
+	if newMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newMaterial.JSObject())
+	}
 
 	s.p.Call("addMaterial", args...)
 }
@@ -160,7 +188,11 @@ func (s *Scene) AddMesh(newMesh *AbstractMesh, opts *SceneAddMeshOpts) {
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, newMesh.JSObject())
+	if newMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newMesh.JSObject())
+	}
 
 	if opts.Recursive == nil {
 		args = append(args, js.Undefined())
@@ -178,7 +210,11 @@ func (s *Scene) AddMorphTargetManager(newMorphTargetManager *MorphTargetManager)
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newMorphTargetManager.JSObject())
+	if newMorphTargetManager == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newMorphTargetManager.JSObject())
+	}
 
 	s.p.Call("addMorphTargetManager", args...)
 }
@@ -190,7 +226,11 @@ func (s *Scene) AddMultiMaterial(newMultiMaterial *MultiMaterial) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newMultiMaterial.JSObject())
+	if newMultiMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newMultiMaterial.JSObject())
+	}
 
 	s.p.Call("addMultiMaterial", args...)
 }
@@ -202,7 +242,11 @@ func (s *Scene) AddParticleSystem(newParticleSystem *IParticleSystem) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newParticleSystem.JSObject())
+	if newParticleSystem == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newParticleSystem.JSObject())
+	}
 
 	s.p.Call("addParticleSystem", args...)
 }
@@ -214,7 +258,11 @@ func (s *Scene) AddSkeleton(newSkeleton *Skeleton) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newSkeleton.JSObject())
+	if newSkeleton == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newSkeleton.JSObject())
+	}
 
 	s.p.Call("addSkeleton", args...)
 }
@@ -226,7 +274,11 @@ func (s *Scene) AddTexture(newTexture *BaseTexture) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newTexture.JSObject())
+	if newTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newTexture.JSObject())
+	}
 
 	s.p.Call("addTexture", args...)
 }
@@ -238,7 +290,11 @@ func (s *Scene) AddTransformNode(newTransformNode *TransformNode) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newTransformNode.JSObject())
+	if newTransformNode == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newTransformNode.JSObject())
+	}
 
 	s.p.Call("addTransformNode", args...)
 }
@@ -301,15 +357,21 @@ type SceneBeginAnimationOpts struct {
 // BeginAnimation calls the BeginAnimation method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beginanimation
-func (s *Scene) BeginAnimation(target interface{}, from float64, to float64, opts *SceneBeginAnimationOpts) *Animatable {
+func (s *Scene) BeginAnimation(target JSObject, from float64, to float64, opts *SceneBeginAnimationOpts) *Animatable {
 	if opts == nil {
 		opts = &SceneBeginAnimationOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+7)
 
-	args = append(args, target)
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
 	args = append(args, from)
+
 	args = append(args, to)
 
 	if opts.Loop == nil {
@@ -363,16 +425,23 @@ type SceneBeginDirectAnimationOpts struct {
 // BeginDirectAnimation calls the BeginDirectAnimation method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#begindirectanimation
-func (s *Scene) BeginDirectAnimation(target interface{}, animations []*Animation, from float64, to float64, opts *SceneBeginDirectAnimationOpts) *Animatable {
+func (s *Scene) BeginDirectAnimation(target JSObject, animations []*Animation, from float64, to float64, opts *SceneBeginDirectAnimationOpts) *Animatable {
 	if opts == nil {
 		opts = &SceneBeginDirectAnimationOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+4)
 
-	args = append(args, target)
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
 	args = append(args, AnimationArrayToJSArray(animations))
+
 	args = append(args, from)
+
 	args = append(args, to)
 
 	if opts.Loop == nil {
@@ -418,10 +487,18 @@ func (s *Scene) BeginDirectHierarchyAnimation(target *Node, directDescendantsOnl
 
 	args := make([]interface{}, 0, 5+4)
 
-	args = append(args, target.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
 	args = append(args, directDescendantsOnly)
+
 	args = append(args, AnimationArrayToJSArray(animations))
+
 	args = append(args, from)
+
 	args = append(args, to)
 
 	if opts.Loop == nil {
@@ -467,16 +544,23 @@ type SceneBeginHierarchyAnimationOpts struct {
 // BeginHierarchyAnimation calls the BeginHierarchyAnimation method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beginhierarchyanimation
-func (s *Scene) BeginHierarchyAnimation(target interface{}, directDescendantsOnly bool, from float64, to float64, opts *SceneBeginHierarchyAnimationOpts) []*Animatable {
+func (s *Scene) BeginHierarchyAnimation(target JSObject, directDescendantsOnly bool, from float64, to float64, opts *SceneBeginHierarchyAnimationOpts) []*Animatable {
 	if opts == nil {
 		opts = &SceneBeginHierarchyAnimationOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+7)
 
-	args = append(args, target)
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
 	args = append(args, directDescendantsOnly)
+
 	args = append(args, from)
+
 	args = append(args, to)
 
 	if opts.Loop == nil {
@@ -536,16 +620,23 @@ type SceneBeginWeightedAnimationOpts struct {
 // BeginWeightedAnimation calls the BeginWeightedAnimation method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#beginweightedanimation
-func (s *Scene) BeginWeightedAnimation(target interface{}, from float64, to float64, weight float64, opts *SceneBeginWeightedAnimationOpts) *Animatable {
+func (s *Scene) BeginWeightedAnimation(target JSObject, from float64, to float64, weight float64, opts *SceneBeginWeightedAnimationOpts) *Animatable {
 	if opts == nil {
 		opts = &SceneBeginWeightedAnimationOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+6)
 
-	args = append(args, target)
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
 	args = append(args, from)
+
 	args = append(args, to)
+
 	args = append(args, weight)
 
 	if opts.Loop == nil {
@@ -687,7 +778,11 @@ func (s *Scene) CreateDefaultEnvironment(options *IEnvironmentHelperOptions) *En
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, options.JSObject())
+	if options == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, options.JSObject())
+	}
 
 	retVal := s.p.Call("createDefaultEnvironment", args...)
 	return EnvironmentHelperFromJSObject(retVal, s.ctx)
@@ -794,7 +889,11 @@ func (s *Scene) CreateDefaultXRExperienceAsync(options *WebXRDefaultExperienceOp
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, options.JSObject())
+	if options == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, options.JSObject())
+	}
 
 	retVal := s.p.Call("createDefaultXRExperienceAsync", args...)
 	return PromiseFromJSObject(retVal, s.ctx)
@@ -847,9 +946,20 @@ func (s *Scene) CreatePickingRay(x float64, y float64, world *Matrix, camera *Ca
 	args := make([]interface{}, 0, 4+1)
 
 	args = append(args, x)
+
 	args = append(args, y)
-	args = append(args, world.JSObject())
-	args = append(args, camera.JSObject())
+
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	if opts.CameraViewSpace == nil {
 		args = append(args, js.Undefined())
@@ -877,6 +987,7 @@ func (s *Scene) CreatePickingRayInCameraSpace(x float64, y float64, opts *SceneC
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	if opts.Camera == nil {
@@ -905,8 +1016,14 @@ func (s *Scene) CreatePickingRayInCameraSpaceToRef(x float64, y float64, result 
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, x)
+
 	args = append(args, y)
-	args = append(args, result.JSObject())
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	if opts.Camera == nil {
 		args = append(args, js.Undefined())
@@ -934,10 +1051,26 @@ func (s *Scene) CreatePickingRayToRef(x float64, y float64, world *Matrix, resul
 	args := make([]interface{}, 0, 5+1)
 
 	args = append(args, x)
+
 	args = append(args, y)
-	args = append(args, world.JSObject())
-	args = append(args, result.JSObject())
-	args = append(args, camera.JSObject())
+
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	if opts.CameraViewSpace == nil {
 		args = append(args, js.Undefined())
@@ -956,7 +1089,11 @@ func (s *Scene) DefaultMaterialFactory(scene *Scene) *Material {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := s.p.Call("DefaultMaterialFactory", args...)
 	return MaterialFromJSObject(retVal, s.ctx)
@@ -965,11 +1102,15 @@ func (s *Scene) DefaultMaterialFactory(scene *Scene) *Material {
 // DeleteCompoundImpostor calls the DeleteCompoundImpostor method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#deletecompoundimpostor
-func (s *Scene) DeleteCompoundImpostor(compound interface{}) {
+func (s *Scene) DeleteCompoundImpostor(compound JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, compound)
+	if compound == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, compound.JSObject())
+	}
 
 	s.p.Call("deleteCompoundImpostor", args...)
 }
@@ -1101,7 +1242,11 @@ func (s *Scene) EnablePhysics(gravity *Vector3, opts *SceneEnablePhysicsOpts) bo
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, gravity.JSObject())
+	if gravity == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, gravity.JSObject())
+	}
 
 	args = append(args, opts.Plugin)
 
@@ -1243,11 +1388,15 @@ func (s *Scene) GetActiveParticles() float64 {
 // GetAllAnimatablesByTarget calls the GetAllAnimatablesByTarget method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getallanimatablesbytarget
-func (s *Scene) GetAllAnimatablesByTarget(target interface{}) []*Animatable {
+func (s *Scene) GetAllAnimatablesByTarget(target JSObject) []*Animatable {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target)
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	retVal := s.p.Call("getAllAnimatablesByTarget", args...)
 	result := []*Animatable{}
@@ -1260,11 +1409,15 @@ func (s *Scene) GetAllAnimatablesByTarget(target interface{}) []*Animatable {
 // GetAnimatableByTarget calls the GetAnimatableByTarget method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#getanimatablebytarget
-func (s *Scene) GetAnimatableByTarget(target interface{}) *Animatable {
+func (s *Scene) GetAnimatableByTarget(target JSObject) *Animatable {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, target)
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	retVal := s.p.Call("getAnimatableByTarget", args...)
 	return AnimatableFromJSObject(retVal, s.ctx)
@@ -2121,7 +2274,11 @@ func (s *Scene) IsActiveMesh(mesh *AbstractMesh) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := s.p.Call("isActiveMesh", args...)
 	return retVal.Bool()
@@ -2142,8 +2299,17 @@ func (s *Scene) IsCachedMaterialInvalid(material *Material, effect *Effect, opts
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, material.JSObject())
-	args = append(args, effect.JSObject())
+	if material == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, material.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	if opts.Visibility == nil {
 		args = append(args, js.Undefined())
@@ -2242,6 +2408,7 @@ func (s *Scene) MultiPick(x float64, y float64, opts *SceneMultiPickOpts) []*Pic
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	if opts.Predicate == nil {
@@ -2281,6 +2448,7 @@ func (s *Scene) MultiPickSprite(x float64, y float64, opts *SceneMultiPickSprite
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	if opts.Predicate == nil {
@@ -2318,7 +2486,11 @@ func (s *Scene) MultiPickSpriteWithRay(ray *Ray, opts *SceneMultiPickSpriteWithR
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, ray.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
 
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
@@ -2354,7 +2526,12 @@ func (s *Scene) MultiPickWithRay(ray *Ray, predicate JSFunc, opts *SceneMultiPic
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, ray.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
+
 	args = append(args, js.FuncOf(predicate))
 
 	args = append(args, opts.TrianglePredicate)
@@ -2386,6 +2563,7 @@ func (s *Scene) Pick(x float64, y float64, opts *ScenePickOpts) *PickingInfo {
 	args := make([]interface{}, 0, 2+4)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	if opts.Predicate == nil {
@@ -2427,6 +2605,7 @@ func (s *Scene) PickSprite(x float64, y float64, opts *ScenePickSpriteOpts) *Pic
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	if opts.Predicate == nil {
@@ -2466,7 +2645,11 @@ func (s *Scene) PickSpriteWithRay(ray *Ray, opts *ScenePickSpriteWithRayOpts) *P
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, ray.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
 
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
@@ -2505,7 +2688,11 @@ func (s *Scene) PickWithRay(ray *Ray, opts *ScenePickWithRayOpts) *PickingInfo {
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, ray.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
 
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
@@ -2538,7 +2725,11 @@ func (s *Scene) PushGeometry(geometry *Geometry, opts *ScenePushGeometryOpts) bo
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, geometry.JSObject())
+	if geometry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, geometry.JSObject())
+	}
 
 	if opts.Force == nil {
 		args = append(args, js.Undefined())
@@ -2581,7 +2772,11 @@ func (s *Scene) RemoveActionManager(toRemove *AbstractActionManager) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeActionManager", args...)
 	return retVal.Float()
@@ -2594,7 +2789,11 @@ func (s *Scene) RemoveAnimation(toRemove *Animation) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeAnimation", args...)
 	return retVal.Float()
@@ -2607,7 +2806,11 @@ func (s *Scene) RemoveAnimationGroup(toRemove *AnimationGroup) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeAnimationGroup", args...)
 	return retVal.Float()
@@ -2620,7 +2823,11 @@ func (s *Scene) RemoveCamera(toRemove *Camera) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeCamera", args...)
 	return retVal.Float()
@@ -2646,7 +2853,11 @@ func (s *Scene) RemoveGeometry(geometry *Geometry) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, geometry.JSObject())
+	if geometry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, geometry.JSObject())
+	}
 
 	retVal := s.p.Call("removeGeometry", args...)
 	return retVal.Bool()
@@ -2659,7 +2870,11 @@ func (s *Scene) RemoveLight(toRemove *Light) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeLight", args...)
 	return retVal.Float()
@@ -2672,7 +2887,11 @@ func (s *Scene) RemoveMaterial(toRemove *Material) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeMaterial", args...)
 	return retVal.Float()
@@ -2693,7 +2912,11 @@ func (s *Scene) RemoveMesh(toRemove *AbstractMesh, opts *SceneRemoveMeshOpts) fl
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	if opts.Recursive == nil {
 		args = append(args, js.Undefined())
@@ -2712,7 +2935,11 @@ func (s *Scene) RemoveMorphTargetManager(toRemove *MorphTargetManager) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeMorphTargetManager", args...)
 	return retVal.Float()
@@ -2725,7 +2952,11 @@ func (s *Scene) RemoveMultiMaterial(toRemove *MultiMaterial) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeMultiMaterial", args...)
 	return retVal.Float()
@@ -2738,7 +2969,11 @@ func (s *Scene) RemoveParticleSystem(toRemove *IParticleSystem) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeParticleSystem", args...)
 	return retVal.Float()
@@ -2751,7 +2986,11 @@ func (s *Scene) RemoveSkeleton(toRemove *Skeleton) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeSkeleton", args...)
 	return retVal.Float()
@@ -2764,7 +3003,11 @@ func (s *Scene) RemoveTexture(toRemove *BaseTexture) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeTexture", args...)
 	return retVal.Float()
@@ -2777,7 +3020,11 @@ func (s *Scene) RemoveTransformNode(toRemove *TransformNode) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, toRemove.JSObject())
+	if toRemove == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, toRemove.JSObject())
+	}
 
 	retVal := s.p.Call("removeTransformNode", args...)
 	return retVal.Float()
@@ -2870,7 +3117,11 @@ func (s *Scene) SetPointerOverMesh(mesh *AbstractMesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	s.p.Call("setPointerOverMesh", args...)
 }
@@ -2882,7 +3133,11 @@ func (s *Scene) SetPointerOverSprite(sprite *Sprite) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, sprite.JSObject())
+	if sprite == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sprite.JSObject())
+	}
 
 	s.p.Call("setPointerOverSprite", args...)
 }
@@ -2904,6 +3159,7 @@ func (s *Scene) SetRenderingAutoClearDepthStencil(renderingGroupId float64, auto
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, renderingGroupId)
+
 	args = append(args, autoClearDepthStencil)
 
 	if opts.Depth == nil {
@@ -2986,8 +3242,17 @@ func (s *Scene) SetTransformMatrix(viewL *Matrix, projectionL *Matrix, opts *Sce
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, viewL.JSObject())
-	args = append(args, projectionL.JSObject())
+	if viewL == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, viewL.JSObject())
+	}
+
+	if projectionL == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, projectionL.JSObject())
+	}
 
 	if opts.ViewR == nil {
 		args = append(args, js.Undefined())
@@ -3018,7 +3283,11 @@ func (s *Scene) SimulatePointerDown(pickResult *PickingInfo, opts *SceneSimulate
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, pickResult.JSObject())
+	if pickResult == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pickResult.JSObject())
+	}
 
 	args = append(args, opts.PointerEventInit)
 
@@ -3041,7 +3310,11 @@ func (s *Scene) SimulatePointerMove(pickResult *PickingInfo, opts *SceneSimulate
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, pickResult.JSObject())
+	if pickResult == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pickResult.JSObject())
+	}
 
 	args = append(args, opts.PointerEventInit)
 
@@ -3065,7 +3338,11 @@ func (s *Scene) SimulatePointerUp(pickResult *PickingInfo, opts *SceneSimulatePo
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, pickResult.JSObject())
+	if pickResult == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pickResult.JSObject())
+	}
 
 	args = append(args, opts.PointerEventInit)
 	if opts.DoubleTap == nil {
@@ -3103,14 +3380,18 @@ type SceneStopAnimationOpts struct {
 // StopAnimation calls the StopAnimation method on the Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#stopanimation
-func (s *Scene) StopAnimation(target interface{}, opts *SceneStopAnimationOpts) {
+func (s *Scene) StopAnimation(target JSObject, opts *SceneStopAnimationOpts) {
 	if opts == nil {
 		opts = &SceneStopAnimationOpts{}
 	}
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, target)
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
 
 	if opts.AnimationName == nil {
 		args = append(args, js.Undefined())
@@ -3141,7 +3422,11 @@ func (s *Scene) SwitchActiveCamera(newCamera *Camera, opts *SceneSwitchActiveCam
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, newCamera.JSObject())
+	if newCamera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newCamera.JSObject())
+	}
 
 	if opts.AttachControl == nil {
 		args = append(args, js.Undefined())
@@ -4521,7 +4806,7 @@ func (s *Scene) SetMeshUnderPointer(meshUnderPointer *AbstractMesh) *Scene {
 // Metadata returns the Metadata property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#metadata
-func (s *Scene) Metadata() interface{} {
+func (s *Scene) Metadata() js.Value {
 	retVal := s.p.Get("metadata")
 	return retVal
 }
@@ -4529,8 +4814,8 @@ func (s *Scene) Metadata() interface{} {
 // SetMetadata sets the Metadata property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#metadata
-func (s *Scene) SetMetadata(metadata interface{}) *Scene {
-	s.p.Set("metadata", metadata)
+func (s *Scene) SetMetadata(metadata JSObject) *Scene {
+	s.p.Set("metadata", metadata.JSObject())
 	return s
 }
 
@@ -5677,7 +5962,7 @@ func (s *Scene) SetRequireLightSorting(requireLightSorting bool) *Scene {
 // ReservedDataStore returns the ReservedDataStore property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#reserveddatastore
-func (s *Scene) ReservedDataStore() interface{} {
+func (s *Scene) ReservedDataStore() js.Value {
 	retVal := s.p.Get("reservedDataStore")
 	return retVal
 }
@@ -5685,8 +5970,8 @@ func (s *Scene) ReservedDataStore() interface{} {
 // SetReservedDataStore sets the ReservedDataStore property of class Scene.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene#reserveddatastore
-func (s *Scene) SetReservedDataStore(reservedDataStore interface{}) *Scene {
-	s.p.Set("reservedDataStore", reservedDataStore)
+func (s *Scene) SetReservedDataStore(reservedDataStore JSObject) *Scene {
+	s.p.Set("reservedDataStore", reservedDataStore.JSObject())
 	return s
 }
 

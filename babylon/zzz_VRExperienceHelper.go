@@ -67,7 +67,11 @@ func (v *VRExperienceHelper) AddFloorMesh(floorMesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, floorMesh.JSObject())
+	if floorMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, floorMesh.JSObject())
+	}
 
 	v.p.Call("addFloorMesh", args...)
 }
@@ -79,7 +83,11 @@ func (v *VRExperienceHelper) ChangeGazeColor(color *Color3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, color.JSObject())
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	v.p.Call("changeGazeColor", args...)
 }
@@ -91,7 +99,11 @@ func (v *VRExperienceHelper) ChangeLaserColor(color *Color3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, color.JSObject())
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	v.p.Call("changeLaserColor", args...)
 }
@@ -168,7 +180,11 @@ func (v *VRExperienceHelper) RemoveFloorMesh(floorMesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, floorMesh.JSObject())
+	if floorMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, floorMesh.JSObject())
+	}
 
 	v.p.Call("removeFloorMesh", args...)
 }
@@ -180,7 +196,11 @@ func (v *VRExperienceHelper) TeleportCamera(location *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, location.JSObject())
+	if location == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, location.JSObject())
+	}
 
 	v.p.Call("teleportCamera", args...)
 }

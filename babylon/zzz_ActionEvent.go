@@ -38,21 +38,21 @@ func ActionEventArrayToJSArray(array []*ActionEvent) []interface{} {
 
 // NewActionEventOpts contains optional parameters for NewActionEvent.
 type NewActionEventOpts struct {
-	SourceEvent    *interface{}
-	AdditionalData *interface{}
+	SourceEvent    interface{}
+	AdditionalData interface{}
 }
 
 // NewActionEvent returns a new ActionEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent
-func (ba *Babylon) NewActionEvent(source interface{}, pointerX float64, pointerY float64, meshUnderPointer *AbstractMesh, opts *NewActionEventOpts) *ActionEvent {
+func (ba *Babylon) NewActionEvent(source JSObject, pointerX float64, pointerY float64, meshUnderPointer *AbstractMesh, opts *NewActionEventOpts) *ActionEvent {
 	if opts == nil {
 		opts = &NewActionEventOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, source)
+	args = append(args, source.JSObject())
 	args = append(args, pointerX)
 	args = append(args, pointerY)
 	args = append(args, meshUnderPointer.JSObject())
@@ -75,7 +75,7 @@ func (ba *Babylon) NewActionEvent(source interface{}, pointerX float64, pointerY
 // ActionEventCreateNewOpts contains optional parameters for ActionEvent.CreateNew.
 type ActionEventCreateNewOpts struct {
 	Evt            js.Value
-	AdditionalData *interface{}
+	AdditionalData interface{}
 }
 
 // CreateNew calls the CreateNew method on the ActionEvent object.
@@ -88,7 +88,11 @@ func (a *ActionEvent) CreateNew(source *AbstractMesh, opts *ActionEventCreateNew
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, source.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
 
 	args = append(args, opts.Evt)
 	if opts.AdditionalData == nil {
@@ -104,21 +108,30 @@ func (a *ActionEvent) CreateNew(source *AbstractMesh, opts *ActionEventCreateNew
 // ActionEventCreateNewFromPrimitiveOpts contains optional parameters for ActionEvent.CreateNewFromPrimitive.
 type ActionEventCreateNewFromPrimitiveOpts struct {
 	Evt            js.Value
-	AdditionalData *interface{}
+	AdditionalData interface{}
 }
 
 // CreateNewFromPrimitive calls the CreateNewFromPrimitive method on the ActionEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#createnewfromprimitive
-func (a *ActionEvent) CreateNewFromPrimitive(prim interface{}, pointerPos *Vector2, opts *ActionEventCreateNewFromPrimitiveOpts) *ActionEvent {
+func (a *ActionEvent) CreateNewFromPrimitive(prim JSObject, pointerPos *Vector2, opts *ActionEventCreateNewFromPrimitiveOpts) *ActionEvent {
 	if opts == nil {
 		opts = &ActionEventCreateNewFromPrimitiveOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, prim)
-	args = append(args, pointerPos.JSObject())
+	if prim == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, prim.JSObject())
+	}
+
+	if pointerPos == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pointerPos.JSObject())
+	}
 
 	args = append(args, opts.Evt)
 	if opts.AdditionalData == nil {
@@ -138,7 +151,12 @@ func (a *ActionEvent) CreateNewFromScene(scene *Scene, evt js.Value) *ActionEven
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, evt)
 
 	retVal := a.p.Call("CreateNewFromScene", args...)
@@ -148,7 +166,7 @@ func (a *ActionEvent) CreateNewFromScene(scene *Scene, evt js.Value) *ActionEven
 // ActionEventCreateNewFromSpriteOpts contains optional parameters for ActionEvent.CreateNewFromSprite.
 type ActionEventCreateNewFromSpriteOpts struct {
 	Evt            js.Value
-	AdditionalData *interface{}
+	AdditionalData interface{}
 }
 
 // CreateNewFromSprite calls the CreateNewFromSprite method on the ActionEvent object.
@@ -161,8 +179,17 @@ func (a *ActionEvent) CreateNewFromSprite(source *Sprite, scene *Scene, opts *Ac
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, source.JSObject())
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	args = append(args, opts.Evt)
 	if opts.AdditionalData == nil {
@@ -178,7 +205,7 @@ func (a *ActionEvent) CreateNewFromSprite(source *Sprite, scene *Scene, opts *Ac
 // AdditionalData returns the AdditionalData property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#additionaldata
-func (a *ActionEvent) AdditionalData() interface{} {
+func (a *ActionEvent) AdditionalData() js.Value {
 	retVal := a.p.Get("additionalData")
 	return retVal
 }
@@ -186,8 +213,8 @@ func (a *ActionEvent) AdditionalData() interface{} {
 // SetAdditionalData sets the AdditionalData property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#additionaldata
-func (a *ActionEvent) SetAdditionalData(additionalData interface{}) *ActionEvent {
-	a.p.Set("additionalData", additionalData)
+func (a *ActionEvent) SetAdditionalData(additionalData JSObject) *ActionEvent {
+	a.p.Set("additionalData", additionalData.JSObject())
 	return a
 }
 
@@ -242,7 +269,7 @@ func (a *ActionEvent) SetPointerY(pointerY float64) *ActionEvent {
 // Source returns the Source property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#source
-func (a *ActionEvent) Source() interface{} {
+func (a *ActionEvent) Source() js.Value {
 	retVal := a.p.Get("source")
 	return retVal
 }
@@ -250,15 +277,15 @@ func (a *ActionEvent) Source() interface{} {
 // SetSource sets the Source property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#source
-func (a *ActionEvent) SetSource(source interface{}) *ActionEvent {
-	a.p.Set("source", source)
+func (a *ActionEvent) SetSource(source JSObject) *ActionEvent {
+	a.p.Set("source", source.JSObject())
 	return a
 }
 
 // SourceEvent returns the SourceEvent property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#sourceevent
-func (a *ActionEvent) SourceEvent() interface{} {
+func (a *ActionEvent) SourceEvent() js.Value {
 	retVal := a.p.Get("sourceEvent")
 	return retVal
 }
@@ -266,7 +293,7 @@ func (a *ActionEvent) SourceEvent() interface{} {
 // SetSourceEvent sets the SourceEvent property of class ActionEvent.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent#sourceevent
-func (a *ActionEvent) SetSourceEvent(sourceEvent interface{}) *ActionEvent {
-	a.p.Set("sourceEvent", sourceEvent)
+func (a *ActionEvent) SetSourceEvent(sourceEvent JSObject) *ActionEvent {
+	a.p.Set("sourceEvent", sourceEvent.JSObject())
 	return a
 }

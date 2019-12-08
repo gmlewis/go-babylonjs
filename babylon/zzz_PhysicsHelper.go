@@ -67,7 +67,12 @@ func (p *PhysicsHelper) ApplyRadialExplosionForce(origin *Vector3, radiusOrEvent
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, origin.JSObject())
+	if origin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, origin.JSObject())
+	}
+
 	args = append(args, radiusOrEventOptions)
 
 	if opts.Strength == nil {
@@ -97,7 +102,12 @@ func (p *PhysicsHelper) ApplyRadialExplosionImpulse(origin *Vector3, radiusOrEve
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, origin.JSObject())
+	if origin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, origin.JSObject())
+	}
+
 	args = append(args, radiusOrEventOptions)
 
 	if opts.Strength == nil {
@@ -127,7 +137,12 @@ func (p *PhysicsHelper) GravitationalField(origin *Vector3, radiusOrEventOptions
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, origin.JSObject())
+	if origin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, origin.JSObject())
+	}
+
 	args = append(args, radiusOrEventOptions)
 
 	if opts.Strength == nil {
@@ -158,7 +173,12 @@ func (p *PhysicsHelper) Updraft(origin *Vector3, radiusOrEventOptions float64, o
 
 	args := make([]interface{}, 0, 2+3)
 
-	args = append(args, origin.JSObject())
+	if origin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, origin.JSObject())
+	}
+
 	args = append(args, radiusOrEventOptions)
 
 	if opts.Strength == nil {
@@ -193,7 +213,12 @@ func (p *PhysicsHelper) Vortex(origin *Vector3, radiusOrEventOptions float64, op
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, origin.JSObject())
+	if origin == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, origin.JSObject())
+	}
+
 	args = append(args, radiusOrEventOptions)
 
 	if opts.Strength == nil {

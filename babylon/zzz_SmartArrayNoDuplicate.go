@@ -53,11 +53,15 @@ func (ba *Babylon) NewSmartArrayNoDuplicate(capacity float64) *SmartArrayNoDupli
 // ConcatWithNoDuplicate calls the ConcatWithNoDuplicate method on the SmartArrayNoDuplicate object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#concatwithnoduplicate
-func (s *SmartArrayNoDuplicate) ConcatWithNoDuplicate(array interface{}) {
+func (s *SmartArrayNoDuplicate) ConcatWithNoDuplicate(array JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, array)
+	if array == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, array.JSObject())
+	}
 
 	s.p.Call("concatWithNoDuplicate", args...)
 }
@@ -69,7 +73,11 @@ func (s *SmartArrayNoDuplicate) Push(value *T) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	s.p.Call("push", args...)
 }
@@ -81,7 +89,11 @@ func (s *SmartArrayNoDuplicate) PushNoDuplicate(value *T) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, value.JSObject())
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("pushNoDuplicate", args...)
 	return retVal.Bool()

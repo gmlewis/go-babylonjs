@@ -47,17 +47,17 @@ type NewIncrementValueActionOpts struct {
 // NewIncrementValueAction returns a new IncrementValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction
-func (ba *Babylon) NewIncrementValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewIncrementValueActionOpts) *IncrementValueAction {
+func (ba *Babylon) NewIncrementValueAction(triggerOptions JSObject, target JSObject, propertyPath string, value JSObject, opts *NewIncrementValueActionOpts) *IncrementValueAction {
 	if opts == nil {
 		opts = &NewIncrementValueActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+1)
 
-	args = append(args, triggerOptions)
-	args = append(args, target)
+	args = append(args, triggerOptions.JSObject())
+	args = append(args, target.JSObject())
 	args = append(args, propertyPath)
-	args = append(args, value)
+	args = append(args, value.JSObject())
 
 	if opts.Condition == nil {
 		args = append(args, js.Undefined())
@@ -80,11 +80,15 @@ func (i *IncrementValueAction) Execute() {
 // Serialize calls the Serialize method on the IncrementValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#serialize
-func (i *IncrementValueAction) Serialize(parent interface{}) interface{} {
+func (i *IncrementValueAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := i.p.Call("serialize", args...)
 	return retVal
@@ -109,7 +113,7 @@ func (i *IncrementValueAction) SetPropertyPath(propertyPath string) *IncrementVa
 // Value returns the Value property of class IncrementValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#value
-func (i *IncrementValueAction) Value() interface{} {
+func (i *IncrementValueAction) Value() js.Value {
 	retVal := i.p.Get("value")
 	return retVal
 }
@@ -117,7 +121,7 @@ func (i *IncrementValueAction) Value() interface{} {
 // SetValue sets the Value property of class IncrementValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#value
-func (i *IncrementValueAction) SetValue(value interface{}) *IncrementValueAction {
-	i.p.Set("value", value)
+func (i *IncrementValueAction) SetValue(value JSObject) *IncrementValueAction {
+	i.p.Set("value", value.JSObject())
 	return i
 }

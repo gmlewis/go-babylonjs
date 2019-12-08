@@ -42,12 +42,12 @@ func LensFlareSystemArrayToJSArray(array []*LensFlareSystem) []interface{} {
 // NewLensFlareSystem returns a new LensFlareSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem
-func (ba *Babylon) NewLensFlareSystem(name string, emitter interface{}, scene *Scene) *LensFlareSystem {
+func (ba *Babylon) NewLensFlareSystem(name string, emitter JSObject, scene *Scene) *LensFlareSystem {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
-	args = append(args, emitter)
+	args = append(args, emitter.JSObject())
 	args = append(args, scene.JSObject())
 
 	p := ba.ctx.Get("LensFlareSystem").New(args...)
@@ -65,7 +65,7 @@ func (l *LensFlareSystem) Dispose() {
 // GetEmitter calls the GetEmitter method on the LensFlareSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#getemitter
-func (l *LensFlareSystem) GetEmitter() interface{} {
+func (l *LensFlareSystem) GetEmitter() js.Value {
 
 	retVal := l.p.Call("getEmitter")
 	return retVal
@@ -92,12 +92,22 @@ func (l *LensFlareSystem) GetScene() *Scene {
 // Parse calls the Parse method on the LensFlareSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#parse
-func (l *LensFlareSystem) Parse(parsedLensFlareSystem interface{}, scene *Scene, rootUrl string) *LensFlareSystem {
+func (l *LensFlareSystem) Parse(parsedLensFlareSystem JSObject, scene *Scene, rootUrl string) *LensFlareSystem {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedLensFlareSystem)
-	args = append(args, scene.JSObject())
+	if parsedLensFlareSystem == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedLensFlareSystem.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := l.p.Call("Parse", args...)
@@ -107,7 +117,7 @@ func (l *LensFlareSystem) Parse(parsedLensFlareSystem interface{}, scene *Scene,
 // Serialize calls the Serialize method on the LensFlareSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#serialize
-func (l *LensFlareSystem) Serialize() interface{} {
+func (l *LensFlareSystem) Serialize() js.Value {
 
 	retVal := l.p.Call("serialize")
 	return retVal
@@ -116,11 +126,15 @@ func (l *LensFlareSystem) Serialize() interface{} {
 // SetEmitter calls the SetEmitter method on the LensFlareSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#setemitter
-func (l *LensFlareSystem) SetEmitter(newEmitter interface{}) {
+func (l *LensFlareSystem) SetEmitter(newEmitter JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, newEmitter)
+	if newEmitter == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newEmitter.JSObject())
+	}
 
 	l.p.Call("setEmitter", args...)
 }

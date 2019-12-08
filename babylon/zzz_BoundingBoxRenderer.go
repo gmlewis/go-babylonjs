@@ -93,7 +93,11 @@ func (b *BoundingBoxRenderer) RenderOcclusionBoundingBox(mesh *AbstractMesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	b.p.Call("renderOcclusionBoundingBox", args...)
 }

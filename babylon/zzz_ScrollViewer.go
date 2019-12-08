@@ -74,7 +74,11 @@ func (s *ScrollViewer) AddControl(control *Control) *Container {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := s.p.Call("addControl", args...)
 	return ContainerFromJSObject(retVal, s.ctx)
@@ -95,7 +99,11 @@ func (s *ScrollViewer) RemoveControl(control *Control) *Container {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := s.p.Call("removeControl", args...)
 	return ContainerFromJSObject(retVal, s.ctx)
@@ -124,7 +132,11 @@ func (s *ScrollViewer) _link(host *AdvancedDynamicTexture) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, host.JSObject())
+	if host == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, host.JSObject())
+	}
 
 	s.p.Call("_link", args...)
 }

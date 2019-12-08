@@ -43,7 +43,11 @@ func (c *ColorGradient) GetColorToRef(result *Color4) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, result.JSObject())
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	c.p.Call("getColorToRef", args...)
 }

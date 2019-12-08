@@ -78,12 +78,22 @@ func (p *PBRSpecularGlossinessMaterial) GetClassName() string {
 // Parse calls the Parse method on the PBRSpecularGlossinessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#parse
-func (p *PBRSpecularGlossinessMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *PBRSpecularGlossinessMaterial {
+func (p *PBRSpecularGlossinessMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *PBRSpecularGlossinessMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := p.p.Call("Parse", args...)
@@ -93,7 +103,7 @@ func (p *PBRSpecularGlossinessMaterial) Parse(source interface{}, scene *Scene, 
 // Serialize calls the Serialize method on the PBRSpecularGlossinessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#serialize
-func (p *PBRSpecularGlossinessMaterial) Serialize() interface{} {
+func (p *PBRSpecularGlossinessMaterial) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal

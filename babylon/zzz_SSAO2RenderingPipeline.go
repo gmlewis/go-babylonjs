@@ -44,7 +44,7 @@ type NewSSAO2RenderingPipelineOpts struct {
 // NewSSAO2RenderingPipeline returns a new SSAO2RenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline
-func (ba *Babylon) NewSSAO2RenderingPipeline(name string, scene *Scene, ratio interface{}, opts *NewSSAO2RenderingPipelineOpts) *SSAO2RenderingPipeline {
+func (ba *Babylon) NewSSAO2RenderingPipeline(name string, scene *Scene, ratio JSObject, opts *NewSSAO2RenderingPipelineOpts) *SSAO2RenderingPipeline {
 	if opts == nil {
 		opts = &NewSSAO2RenderingPipelineOpts{}
 	}
@@ -53,7 +53,7 @@ func (ba *Babylon) NewSSAO2RenderingPipeline(name string, scene *Scene, ratio in
 
 	args = append(args, name)
 	args = append(args, scene.JSObject())
-	args = append(args, ratio)
+	args = append(args, ratio.JSObject())
 
 	if opts.Cameras == nil {
 		args = append(args, js.Undefined())
@@ -101,12 +101,22 @@ func (s *SSAO2RenderingPipeline) GetClassName() string {
 // Parse calls the Parse method on the SSAO2RenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#parse
-func (s *SSAO2RenderingPipeline) Parse(source interface{}, scene *Scene, rootUrl string) *SSAO2RenderingPipeline {
+func (s *SSAO2RenderingPipeline) Parse(source JSObject, scene *Scene, rootUrl string) *SSAO2RenderingPipeline {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := s.p.Call("Parse", args...)
@@ -116,7 +126,7 @@ func (s *SSAO2RenderingPipeline) Parse(source interface{}, scene *Scene, rootUrl
 // Serialize calls the Serialize method on the SSAO2RenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#serialize
-func (s *SSAO2RenderingPipeline) Serialize() interface{} {
+func (s *SSAO2RenderingPipeline) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal

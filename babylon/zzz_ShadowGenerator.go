@@ -81,7 +81,11 @@ func (s *ShadowGenerator) AddShadowCaster(mesh *AbstractMesh, opts *ShadowGenera
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.IncludeDescendants == nil {
 		args = append(args, js.Undefined())
@@ -101,7 +105,12 @@ func (s *ShadowGenerator) BindShadowLight(lightIndex string, effect *Effect) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, lightIndex)
-	args = append(args, effect.JSObject())
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	s.p.Call("bindShadowLight", args...)
 }
@@ -230,7 +239,12 @@ func (s *ShadowGenerator) IsReady(subMesh *SubMesh, useInstances bool) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, subMesh.JSObject())
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
+
 	args = append(args, useInstances)
 
 	retVal := s.p.Call("isReady", args...)
@@ -240,12 +254,21 @@ func (s *ShadowGenerator) IsReady(subMesh *SubMesh, useInstances bool) bool {
 // Parse calls the Parse method on the ShadowGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#parse
-func (s *ShadowGenerator) Parse(parsedShadowGenerator interface{}, scene *Scene) *ShadowGenerator {
+func (s *ShadowGenerator) Parse(parsedShadowGenerator JSObject, scene *Scene) *ShadowGenerator {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedShadowGenerator)
-	args = append(args, scene.JSObject())
+	if parsedShadowGenerator == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedShadowGenerator.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := s.p.Call("Parse", args...)
 	return ShadowGeneratorFromJSObject(retVal, s.ctx)
@@ -254,11 +277,16 @@ func (s *ShadowGenerator) Parse(parsedShadowGenerator interface{}, scene *Scene)
 // PrepareDefines calls the PrepareDefines method on the ShadowGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#preparedefines
-func (s *ShadowGenerator) PrepareDefines(defines interface{}, lightIndex float64) {
+func (s *ShadowGenerator) PrepareDefines(defines JSObject, lightIndex float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines)
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	s.p.Call("prepareDefines", args...)
@@ -287,7 +315,11 @@ func (s *ShadowGenerator) RemoveShadowCaster(mesh *AbstractMesh, opts *ShadowGen
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.IncludeDescendants == nil {
 		args = append(args, js.Undefined())
@@ -302,7 +334,7 @@ func (s *ShadowGenerator) RemoveShadowCaster(mesh *AbstractMesh, opts *ShadowGen
 // Serialize calls the Serialize method on the ShadowGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#serialize
-func (s *ShadowGenerator) Serialize() interface{} {
+func (s *ShadowGenerator) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal

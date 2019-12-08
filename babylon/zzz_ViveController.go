@@ -39,11 +39,11 @@ func ViveControllerArrayToJSArray(array []*ViveController) []interface{} {
 // NewViveController returns a new ViveController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller
-func (ba *Babylon) NewViveController(vrGamepad interface{}) *ViveController {
+func (ba *Babylon) NewViveController(vrGamepad JSObject) *ViveController {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vrGamepad)
+	args = append(args, vrGamepad.JSObject())
 
 	p := ba.ctx.Get("ViveController").New(args...)
 	return ViveControllerFromJSObject(p, ba.ctx)
@@ -64,7 +64,11 @@ func (v *ViveController) InitControllerMesh(scene *Scene, opts *ViveControllerIn
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())

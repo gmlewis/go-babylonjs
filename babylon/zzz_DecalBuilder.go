@@ -44,7 +44,13 @@ func (d *DecalBuilder) CreateDecal(name string, sourceMesh *AbstractMesh, option
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
-	args = append(args, sourceMesh.JSObject())
+
+	if sourceMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sourceMesh.JSObject())
+	}
+
 	args = append(args, options)
 
 	retVal := d.p.Call("CreateDecal", args...)

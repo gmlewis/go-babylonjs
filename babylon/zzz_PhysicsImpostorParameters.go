@@ -153,7 +153,7 @@ func (p *PhysicsImpostorParameters) SetMass(mass float64) *PhysicsImpostorParame
 // NativeOptions returns the NativeOptions property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#nativeoptions
-func (p *PhysicsImpostorParameters) NativeOptions() interface{} {
+func (p *PhysicsImpostorParameters) NativeOptions() js.Value {
 	retVal := p.p.Get("nativeOptions")
 	return retVal
 }
@@ -161,15 +161,15 @@ func (p *PhysicsImpostorParameters) NativeOptions() interface{} {
 // SetNativeOptions sets the NativeOptions property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#nativeoptions
-func (p *PhysicsImpostorParameters) SetNativeOptions(nativeOptions interface{}) *PhysicsImpostorParameters {
-	p.p.Set("nativeOptions", nativeOptions)
+func (p *PhysicsImpostorParameters) SetNativeOptions(nativeOptions JSObject) *PhysicsImpostorParameters {
+	p.p.Set("nativeOptions", nativeOptions.JSObject())
 	return p
 }
 
 // Path returns the Path property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#path
-func (p *PhysicsImpostorParameters) Path() interface{} {
+func (p *PhysicsImpostorParameters) Path() js.Value {
 	retVal := p.p.Get("path")
 	return retVal
 }
@@ -177,8 +177,8 @@ func (p *PhysicsImpostorParameters) Path() interface{} {
 // SetPath sets the Path property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#path
-func (p *PhysicsImpostorParameters) SetPath(path interface{}) *PhysicsImpostorParameters {
-	p.p.Set("path", path)
+func (p *PhysicsImpostorParameters) SetPath(path JSObject) *PhysicsImpostorParameters {
+	p.p.Set("path", path.JSObject())
 	return p
 }
 
@@ -233,7 +233,7 @@ func (p *PhysicsImpostorParameters) SetRestitution(restitution float64) *Physics
 // Shape returns the Shape property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#shape
-func (p *PhysicsImpostorParameters) Shape() interface{} {
+func (p *PhysicsImpostorParameters) Shape() js.Value {
 	retVal := p.p.Get("shape")
 	return retVal
 }
@@ -241,8 +241,8 @@ func (p *PhysicsImpostorParameters) Shape() interface{} {
 // SetShape sets the Shape property of class PhysicsImpostorParameters.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostorparameters#shape
-func (p *PhysicsImpostorParameters) SetShape(shape interface{}) *PhysicsImpostorParameters {
-	p.p.Set("shape", shape)
+func (p *PhysicsImpostorParameters) SetShape(shape JSObject) *PhysicsImpostorParameters {
+	p.p.Set("shape", shape.JSObject())
 	return p
 }
 

@@ -49,7 +49,7 @@ type NewVolumetricLightScatteringPostProcessOpts struct {
 // NewVolumetricLightScatteringPostProcess returns a new VolumetricLightScatteringPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess
-func (ba *Babylon) NewVolumetricLightScatteringPostProcess(name string, ratio interface{}, camera *Camera, opts *NewVolumetricLightScatteringPostProcessOpts) *VolumetricLightScatteringPostProcess {
+func (ba *Babylon) NewVolumetricLightScatteringPostProcess(name string, ratio JSObject, camera *Camera, opts *NewVolumetricLightScatteringPostProcessOpts) *VolumetricLightScatteringPostProcess {
 	if opts == nil {
 		opts = &NewVolumetricLightScatteringPostProcessOpts{}
 	}
@@ -57,7 +57,7 @@ func (ba *Babylon) NewVolumetricLightScatteringPostProcess(name string, ratio in
 	args := make([]interface{}, 0, 3+6)
 
 	args = append(args, name)
-	args = append(args, ratio)
+	args = append(args, ratio.JSObject())
 	args = append(args, camera.JSObject())
 
 	if opts.Mesh == nil {
@@ -103,7 +103,12 @@ func (v *VolumetricLightScatteringPostProcess) CreateDefaultMesh(name string, sc
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := v.p.Call("CreateDefaultMesh", args...)
 	return MeshFromJSObject(retVal, v.ctx)
@@ -116,7 +121,11 @@ func (v *VolumetricLightScatteringPostProcess) Dispose(camera *Camera) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	v.p.Call("dispose", args...)
 }
@@ -155,7 +164,11 @@ func (v *VolumetricLightScatteringPostProcess) SetCustomMeshPosition(position *V
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, position.JSObject())
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
 
 	v.p.Call("setCustomMeshPosition", args...)
 }

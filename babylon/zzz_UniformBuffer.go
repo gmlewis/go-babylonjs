@@ -79,7 +79,12 @@ func (u *UniformBuffer) AddColor3(name string, color *Color3) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, color.JSObject())
+
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	u.p.Call("addColor3", args...)
 }
@@ -92,7 +97,13 @@ func (u *UniformBuffer) AddColor4(name string, color *Color3, alpha float64) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
-	args = append(args, color.JSObject())
+
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
+
 	args = append(args, alpha)
 
 	u.p.Call("addColor4", args...)
@@ -106,7 +117,9 @@ func (u *UniformBuffer) AddFloat2(name string, x float64, y float64) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, x)
+
 	args = append(args, y)
 
 	u.p.Call("addFloat2", args...)
@@ -120,8 +133,11 @@ func (u *UniformBuffer) AddFloat3(name string, x float64, y float64, z float64) 
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, name)
+
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	u.p.Call("addFloat3", args...)
@@ -135,7 +151,12 @@ func (u *UniformBuffer) AddMatrix(name string, mat *Matrix) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, mat.JSObject())
+
+	if mat == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mat.JSObject())
+	}
 
 	u.p.Call("addMatrix", args...)
 }
@@ -172,6 +193,7 @@ func (u *UniformBuffer) AddUniform(name string, size []float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
+
 	args = append(args, size)
 
 	u.p.Call("addUniform", args...)
@@ -185,7 +207,12 @@ func (u *UniformBuffer) AddVector3(name string, vector *Vector3) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, vector.JSObject())
+
+	if vector == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vector.JSObject())
+	}
 
 	u.p.Call("addVector3", args...)
 }
@@ -197,7 +224,12 @@ func (u *UniformBuffer) BindToEffect(effect *Effect, name string) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, name)
 
 	u.p.Call("bindToEffect", args...)
@@ -254,7 +286,12 @@ func (u *UniformBuffer) SetTexture(name string, texture *BaseTexture) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, name)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	u.p.Call("setTexture", args...)
 }
@@ -275,7 +312,9 @@ func (u *UniformBuffer) UpdateUniform(uniformName string, data js.Value, size fl
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, data)
+
 	args = append(args, size)
 
 	u.p.Call("updateUniform", args...)
@@ -289,6 +328,7 @@ func (u *UniformBuffer) UpdateUniformDirectly(uniformName string, data js.Value)
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniformName)
+
 	args = append(args, data)
 
 	u.p.Call("updateUniformDirectly", args...)

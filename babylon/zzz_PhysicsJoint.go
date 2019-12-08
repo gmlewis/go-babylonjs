@@ -164,7 +164,7 @@ func (p *PhysicsJoint) SetLockJoint(LockJoint float64) *PhysicsJoint {
 // PhysicsJoint returns the PhysicsJoint property of class PhysicsJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjoint#physicsjoint
-func (p *PhysicsJoint) PhysicsJoint() interface{} {
+func (p *PhysicsJoint) PhysicsJoint() js.Value {
 	retVal := p.p.Get("physicsJoint")
 	return retVal
 }
@@ -172,8 +172,8 @@ func (p *PhysicsJoint) PhysicsJoint() interface{} {
 // SetPhysicsJoint sets the PhysicsJoint property of class PhysicsJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjoint#physicsjoint
-func (p *PhysicsJoint) SetPhysicsJoint(physicsJoint interface{}) *PhysicsJoint {
-	p.p.Set("physicsJoint", physicsJoint)
+func (p *PhysicsJoint) SetPhysicsJoint(physicsJoint JSObject) *PhysicsJoint {
+	p.p.Set("physicsJoint", physicsJoint.JSObject())
 	return p
 }
 

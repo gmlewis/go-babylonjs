@@ -44,7 +44,12 @@ func (i *IShadowGenerator) BindShadowLight(lightIndex string, effect *Effect) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, lightIndex)
-	args = append(args, effect.JSObject())
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	i.p.Call("bindShadowLight", args...)
 }
@@ -146,7 +151,12 @@ func (i *IShadowGenerator) IsReady(subMesh *SubMesh, useInstances bool) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, subMesh.JSObject())
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
+
 	args = append(args, useInstances)
 
 	retVal := i.p.Call("isReady", args...)
@@ -160,7 +170,12 @@ func (i *IShadowGenerator) PrepareDefines(defines *MaterialDefines, lightIndex f
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines.JSObject())
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	i.p.Call("prepareDefines", args...)
@@ -177,7 +192,7 @@ func (i *IShadowGenerator) RecreateShadowMap() {
 // Serialize calls the Serialize method on the IShadowGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ishadowgenerator#serialize
-func (i *IShadowGenerator) Serialize() interface{} {
+func (i *IShadowGenerator) Serialize() js.Value {
 
 	retVal := i.p.Call("serialize")
 	return retVal

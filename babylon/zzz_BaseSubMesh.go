@@ -51,7 +51,11 @@ func (b *BaseSubMesh) SetEffect(effect *Effect, opts *BaseSubMeshSetEffectOpts) 
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	if opts.Defines == nil {
 		args = append(args, js.Undefined())

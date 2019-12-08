@@ -50,17 +50,17 @@ type NewInterpolateValueActionOpts struct {
 // NewInterpolateValueAction returns a new InterpolateValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction
-func (ba *Babylon) NewInterpolateValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewInterpolateValueActionOpts) *InterpolateValueAction {
+func (ba *Babylon) NewInterpolateValueAction(triggerOptions JSObject, target JSObject, propertyPath string, value JSObject, opts *NewInterpolateValueActionOpts) *InterpolateValueAction {
 	if opts == nil {
 		opts = &NewInterpolateValueActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+4)
 
-	args = append(args, triggerOptions)
-	args = append(args, target)
+	args = append(args, triggerOptions.JSObject())
+	args = append(args, target.JSObject())
 	args = append(args, propertyPath)
-	args = append(args, value)
+	args = append(args, value.JSObject())
 
 	if opts.Duration == nil {
 		args = append(args, js.Undefined())
@@ -98,11 +98,15 @@ func (i *InterpolateValueAction) Execute() {
 // Serialize calls the Serialize method on the InterpolateValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#serialize
-func (i *InterpolateValueAction) Serialize(parent interface{}) interface{} {
+func (i *InterpolateValueAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := i.p.Call("serialize", args...)
 	return retVal
@@ -191,7 +195,7 @@ func (i *InterpolateValueAction) SetStopOtherAnimations(stopOtherAnimations bool
 // Value returns the Value property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#value
-func (i *InterpolateValueAction) Value() interface{} {
+func (i *InterpolateValueAction) Value() js.Value {
 	retVal := i.p.Get("value")
 	return retVal
 }
@@ -199,7 +203,7 @@ func (i *InterpolateValueAction) Value() interface{} {
 // SetValue sets the Value property of class InterpolateValueAction.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#value
-func (i *InterpolateValueAction) SetValue(value interface{}) *InterpolateValueAction {
-	i.p.Set("value", value)
+func (i *InterpolateValueAction) SetValue(value JSObject) *InterpolateValueAction {
+	i.p.Set("value", value.JSObject())
 	return i
 }

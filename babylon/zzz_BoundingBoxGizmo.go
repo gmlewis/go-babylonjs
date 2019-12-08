@@ -90,7 +90,11 @@ func (b *BoundingBoxGizmo) MakeNotPickableAndWrapInBoundingBox(mesh *Mesh) *Mesh
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := b.p.Call("MakeNotPickableAndWrapInBoundingBox", args...)
 	return MeshFromJSObject(retVal, b.ctx)
@@ -103,7 +107,11 @@ func (b *BoundingBoxGizmo) SetColor(color *Color3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, color.JSObject())
+	if color == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, color.JSObject())
+	}
 
 	b.p.Call("setColor", args...)
 }
@@ -115,7 +123,11 @@ func (b *BoundingBoxGizmo) SetCustomMesh(mesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	b.p.Call("setCustomMesh", args...)
 }

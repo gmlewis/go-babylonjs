@@ -78,12 +78,22 @@ func (p *PBRMetallicRoughnessMaterial) GetClassName() string {
 // Parse calls the Parse method on the PBRMetallicRoughnessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#parse
-func (p *PBRMetallicRoughnessMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *PBRMetallicRoughnessMaterial {
+func (p *PBRMetallicRoughnessMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *PBRMetallicRoughnessMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := p.p.Call("Parse", args...)
@@ -93,7 +103,7 @@ func (p *PBRMetallicRoughnessMaterial) Parse(source interface{}, scene *Scene, r
 // Serialize calls the Serialize method on the PBRMetallicRoughnessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#serialize
-func (p *PBRMetallicRoughnessMaterial) Serialize() interface{} {
+func (p *PBRMetallicRoughnessMaterial) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal

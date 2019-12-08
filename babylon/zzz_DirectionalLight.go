@@ -70,7 +70,11 @@ func (d *DirectionalLight) GetDepthMaxZ(activeCamera *Camera) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, activeCamera.JSObject())
+	if activeCamera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, activeCamera.JSObject())
+	}
 
 	retVal := d.p.Call("getDepthMaxZ", args...)
 	return retVal.Float()
@@ -83,7 +87,11 @@ func (d *DirectionalLight) GetDepthMinZ(activeCamera *Camera) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, activeCamera.JSObject())
+	if activeCamera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, activeCamera.JSObject())
+	}
 
 	retVal := d.p.Call("getDepthMinZ", args...)
 	return retVal.Float()
@@ -101,11 +109,16 @@ func (d *DirectionalLight) GetTypeID() float64 {
 // PrepareLightSpecificDefines calls the PrepareLightSpecificDefines method on the DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight#preparelightspecificdefines
-func (d *DirectionalLight) PrepareLightSpecificDefines(defines interface{}, lightIndex float64) {
+func (d *DirectionalLight) PrepareLightSpecificDefines(defines JSObject, lightIndex float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines)
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	d.p.Call("prepareLightSpecificDefines", args...)
@@ -118,7 +131,12 @@ func (d *DirectionalLight) TransferToEffect(effect *Effect, lightIndex string) *
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	retVal := d.p.Call("transferToEffect", args...)
@@ -132,7 +150,12 @@ func (d *DirectionalLight) TransferToNodeMaterialEffect(effect *Effect, lightDat
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightDataUniformName)
 
 	retVal := d.p.Call("transferToNodeMaterialEffect", args...)

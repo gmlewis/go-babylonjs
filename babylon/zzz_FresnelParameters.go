@@ -50,11 +50,15 @@ func (f *FresnelParameters) Clone() *FresnelParameters {
 // Parse calls the Parse method on the FresnelParameters object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#parse
-func (f *FresnelParameters) Parse(parsedFresnelParameters interface{}) *FresnelParameters {
+func (f *FresnelParameters) Parse(parsedFresnelParameters JSObject) *FresnelParameters {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parsedFresnelParameters)
+	if parsedFresnelParameters == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedFresnelParameters.JSObject())
+	}
 
 	retVal := f.p.Call("Parse", args...)
 	return FresnelParametersFromJSObject(retVal, f.ctx)
@@ -63,7 +67,7 @@ func (f *FresnelParameters) Parse(parsedFresnelParameters interface{}) *FresnelP
 // Serialize calls the Serialize method on the FresnelParameters object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelparameters#serialize
-func (f *FresnelParameters) Serialize() interface{} {
+func (f *FresnelParameters) Serialize() js.Value {
 
 	retVal := f.p.Call("serialize")
 	return retVal

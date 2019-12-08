@@ -44,6 +44,7 @@ func (h *HDRTools) GetCubeMapTextureData(buffer js.Value, size float64) js.Value
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, buffer)
+
 	args = append(args, size)
 
 	retVal := h.p.Call("GetCubeMapTextureData", args...)
@@ -71,6 +72,7 @@ func (h *HDRTools) RGBE_ReadPixels(uint8array js.Value, hdrInfo js.Value) js.Val
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uint8array)
+
 	args = append(args, hdrInfo)
 
 	retVal := h.p.Call("RGBE_ReadPixels", args...)

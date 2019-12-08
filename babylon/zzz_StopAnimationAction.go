@@ -46,15 +46,15 @@ type NewStopAnimationActionOpts struct {
 // NewStopAnimationAction returns a new StopAnimationAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stopanimationaction
-func (ba *Babylon) NewStopAnimationAction(triggerOptions interface{}, target interface{}, opts *NewStopAnimationActionOpts) *StopAnimationAction {
+func (ba *Babylon) NewStopAnimationAction(triggerOptions JSObject, target JSObject, opts *NewStopAnimationActionOpts) *StopAnimationAction {
 	if opts == nil {
 		opts = &NewStopAnimationActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, triggerOptions)
-	args = append(args, target)
+	args = append(args, triggerOptions.JSObject())
+	args = append(args, target.JSObject())
 
 	if opts.Condition == nil {
 		args = append(args, js.Undefined())
@@ -77,11 +77,15 @@ func (s *StopAnimationAction) Execute() {
 // Serialize calls the Serialize method on the StopAnimationAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#serialize
-func (s *StopAnimationAction) Serialize(parent interface{}) interface{} {
+func (s *StopAnimationAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := s.p.Call("serialize", args...)
 	return retVal

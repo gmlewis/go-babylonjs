@@ -51,7 +51,11 @@ func (v *VertexData) ApplyToGeometry(geometry *Geometry, opts *VertexDataApplyTo
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, geometry.JSObject())
+	if geometry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, geometry.JSObject())
+	}
 
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -78,7 +82,11 @@ func (v *VertexData) ApplyToMesh(mesh *Mesh, opts *VertexDataApplyToMeshOpts) *V
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -98,16 +106,30 @@ type VertexDataComputeNormalsOpts struct {
 // ComputeNormals calls the ComputeNormals method on the VertexData object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#computenormals
-func (v *VertexData) ComputeNormals(positions interface{}, indices interface{}, normals interface{}, opts *VertexDataComputeNormalsOpts) {
+func (v *VertexData) ComputeNormals(positions JSObject, indices JSObject, normals JSObject, opts *VertexDataComputeNormalsOpts) {
 	if opts == nil {
 		opts = &VertexDataComputeNormalsOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, positions)
-	args = append(args, indices)
-	args = append(args, normals)
+	if positions == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, positions.JSObject())
+	}
+
+	if indices == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, indices.JSObject())
+	}
+
+	if normals == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, normals.JSObject())
+	}
 
 	if opts.Options == nil {
 		args = append(args, js.Undefined())
@@ -253,7 +275,12 @@ func (v *VertexData) CreatePolygon(polygon *Mesh, sideOrientation float64, opts 
 
 	args := make([]interface{}, 0, 2+4)
 
-	args = append(args, polygon.JSObject())
+	if polygon == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, polygon.JSObject())
+	}
+
 	args = append(args, sideOrientation)
 
 	if opts.FUV == nil {
@@ -401,7 +428,11 @@ func (v *VertexData) ExtractFromGeometry(geometry *Geometry, opts *VertexDataExt
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, geometry.JSObject())
+	if geometry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, geometry.JSObject())
+	}
 
 	if opts.CopyWhenShared == nil {
 		args = append(args, js.Undefined())
@@ -434,7 +465,11 @@ func (v *VertexData) ExtractFromMesh(mesh *Mesh, opts *VertexDataExtractFromMesh
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.CopyWhenShared == nil {
 		args = append(args, js.Undefined())
@@ -454,12 +489,21 @@ func (v *VertexData) ExtractFromMesh(mesh *Mesh, opts *VertexDataExtractFromMesh
 // ImportVertexData calls the ImportVertexData method on the VertexData object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#importvertexdata
-func (v *VertexData) ImportVertexData(parsedVertexData interface{}, geometry *Geometry) {
+func (v *VertexData) ImportVertexData(parsedVertexData JSObject, geometry *Geometry) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, parsedVertexData)
-	args = append(args, geometry.JSObject())
+	if parsedVertexData == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedVertexData.JSObject())
+	}
+
+	if geometry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, geometry.JSObject())
+	}
 
 	v.p.Call("ImportVertexData", args...)
 }
@@ -479,7 +523,11 @@ func (v *VertexData) Merge(other *VertexData, opts *VertexDataMergeOpts) *Vertex
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, other.JSObject())
+	if other == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, other.JSObject())
+	}
 
 	if opts.Use32BitsIndices == nil {
 		args = append(args, js.Undefined())
@@ -494,7 +542,7 @@ func (v *VertexData) Merge(other *VertexData, opts *VertexDataMergeOpts) *Vertex
 // Serialize calls the Serialize method on the VertexData object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexdata#serialize
-func (v *VertexData) Serialize() interface{} {
+func (v *VertexData) Serialize() js.Value {
 
 	retVal := v.p.Call("serialize")
 	return retVal
@@ -508,6 +556,7 @@ func (v *VertexData) Set(data js.Value, kind string) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, data)
+
 	args = append(args, kind)
 
 	v.p.Call("set", args...)
@@ -520,7 +569,11 @@ func (v *VertexData) Transform(matrix *Matrix) *VertexData {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, matrix.JSObject())
+	if matrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, matrix.JSObject())
+	}
 
 	retVal := v.p.Call("transform", args...)
 	return VertexDataFromJSObject(retVal, v.ctx)
@@ -533,7 +586,11 @@ func (v *VertexData) UpdateGeometry(geometry *Geometry) *VertexData {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, geometry.JSObject())
+	if geometry == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, geometry.JSObject())
+	}
 
 	retVal := v.p.Call("updateGeometry", args...)
 	return VertexDataFromJSObject(retVal, v.ctx)
@@ -546,7 +603,11 @@ func (v *VertexData) UpdateMesh(mesh *Mesh) *VertexData {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := v.p.Call("updateMesh", args...)
 	return VertexDataFromJSObject(retVal, v.ctx)

@@ -52,6 +52,7 @@ func (i *IcoSphereBuilder) CreateIcoSphere(name string, options js.Value, opts *
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

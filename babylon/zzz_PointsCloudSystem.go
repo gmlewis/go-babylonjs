@@ -72,7 +72,7 @@ func (ba *Babylon) NewPointsCloudSystem(name string, pointSize float64, scene *S
 
 // PointsCloudSystemAddPointsOpts contains optional parameters for PointsCloudSystem.AddPoints.
 type PointsCloudSystemAddPointsOpts struct {
-	PointFunction *interface{}
+	PointFunction interface{}
 }
 
 // AddPoints calls the AddPoints method on the PointsCloudSystem object.
@@ -114,7 +114,12 @@ func (p *PointsCloudSystem) AddSurfacePoints(mesh *Mesh, nb float64, opts *Point
 
 	args := make([]interface{}, 0, 2+3)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
 	args = append(args, nb)
 
 	if opts.ColorWith == nil {
@@ -154,7 +159,12 @@ func (p *PointsCloudSystem) AddVolumePoints(mesh *Mesh, nb float64, opts *Points
 
 	args := make([]interface{}, 0, 2+3)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
 	args = append(args, nb)
 
 	if opts.ColorWith == nil {
@@ -281,7 +291,11 @@ func (p *PointsCloudSystem) RecycleParticle(particle *CloudPoint) *CloudPoint {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, particle.JSObject())
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	retVal := p.p.Call("recycleParticle", args...)
 	return CloudPointFromJSObject(retVal, p.ctx)
@@ -352,7 +366,11 @@ func (p *PointsCloudSystem) UpdateParticle(particle *CloudPoint) *CloudPoint {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, particle.JSObject())
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	retVal := p.p.Call("updateParticle", args...)
 	return CloudPointFromJSObject(retVal, p.ctx)
@@ -517,7 +535,7 @@ func (p *PointsCloudSystem) Particles() []*CloudPoint {
 // Vars returns the Vars property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#vars
-func (p *PointsCloudSystem) Vars() interface{} {
+func (p *PointsCloudSystem) Vars() js.Value {
 	retVal := p.p.Get("vars")
 	return retVal
 }
@@ -525,7 +543,7 @@ func (p *PointsCloudSystem) Vars() interface{} {
 // SetVars sets the Vars property of class PointsCloudSystem.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#vars
-func (p *PointsCloudSystem) SetVars(vars interface{}) *PointsCloudSystem {
-	p.p.Set("vars", vars)
+func (p *PointsCloudSystem) SetVars(vars JSObject) *PointsCloudSystem {
+	p.p.Set("vars", vars.JSObject())
 	return p
 }

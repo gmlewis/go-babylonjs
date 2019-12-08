@@ -80,9 +80,20 @@ func (i *ImageScrollBar) _onPointerDown(target *Control, coordinates *Vector2, p
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
+
 	args = append(args, buttonIndex)
 
 	retVal := i.p.Call("_onPointerDown", args...)

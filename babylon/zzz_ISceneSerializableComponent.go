@@ -45,7 +45,11 @@ func (i *ISceneSerializableComponent) AddFromContainer(container *AbstractScene)
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	i.p.Call("addFromContainer", args...)
 }
@@ -65,7 +69,11 @@ func (i *ISceneSerializableComponent) RemoveFromContainer(container *AbstractSce
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	if opts.Dispose == nil {
 		args = append(args, js.Undefined())
@@ -79,11 +87,15 @@ func (i *ISceneSerializableComponent) RemoveFromContainer(container *AbstractSce
 // Serialize calls the Serialize method on the ISceneSerializableComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.isceneserializablecomponent#serialize
-func (i *ISceneSerializableComponent) Serialize(serializationObject interface{}) {
+func (i *ISceneSerializableComponent) Serialize(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	i.p.Call("serialize", args...)
 }

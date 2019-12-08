@@ -66,8 +66,11 @@ func (p *Path2) AddArcTo(midX float64, midY float64, endX float64, endY float64,
 	args := make([]interface{}, 0, 4+1)
 
 	args = append(args, midX)
+
 	args = append(args, midY)
+
 	args = append(args, endX)
+
 	args = append(args, endY)
 
 	if opts.NumberOfSegments == nil {
@@ -88,6 +91,7 @@ func (p *Path2) AddLineTo(x float64, y float64) *Path2 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	retVal := p.p.Call("addLineTo", args...)
@@ -146,6 +150,7 @@ func (p *Path2) StartingAt(x float64, y float64) *Path2 {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, x)
+
 	args = append(args, y)
 
 	retVal := p.p.Call("StartingAt", args...)

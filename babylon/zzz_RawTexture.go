@@ -105,9 +105,16 @@ func (r *RawTexture) CreateAlphaTexture(data js.Value, width float64, height flo
 	args := make([]interface{}, 0, 4+3)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.GenerateMipMaps == nil {
 		args = append(args, js.Undefined())
@@ -147,9 +154,16 @@ func (r *RawTexture) CreateLuminanceAlphaTexture(data js.Value, width float64, h
 	args := make([]interface{}, 0, 4+3)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.GenerateMipMaps == nil {
 		args = append(args, js.Undefined())
@@ -189,9 +203,16 @@ func (r *RawTexture) CreateLuminanceTexture(data js.Value, width float64, height
 	args := make([]interface{}, 0, 4+3)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.GenerateMipMaps == nil {
 		args = append(args, js.Undefined())
@@ -232,9 +253,16 @@ func (r *RawTexture) CreateRGBATexture(data js.Value, width float64, height floa
 	args := make([]interface{}, 0, 4+4)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.GenerateMipMaps == nil {
 		args = append(args, js.Undefined())
@@ -280,9 +308,16 @@ func (r *RawTexture) CreateRGBTexture(data js.Value, width float64, height float
 	args := make([]interface{}, 0, 4+4)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.GenerateMipMaps == nil {
 		args = append(args, js.Undefined())
@@ -328,9 +363,16 @@ func (r *RawTexture) CreateRTexture(data js.Value, width float64, height float64
 	args := make([]interface{}, 0, 4+4)
 
 	args = append(args, data)
+
 	args = append(args, width)
+
 	args = append(args, height)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.GenerateMipMaps == nil {
 		args = append(args, js.Undefined())

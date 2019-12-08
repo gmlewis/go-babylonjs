@@ -43,7 +43,11 @@ func (r *RGBDTextureTools) ExpandRGBDTexture(texture *Texture) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	r.p.Call("ExpandRGBDTexture", args...)
 }

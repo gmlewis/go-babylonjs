@@ -46,7 +46,12 @@ func (s *StringDictionary) Add(key string, value *T) bool {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, key)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("add", args...)
 	return retVal.Bool()
@@ -80,7 +85,11 @@ func (s *StringDictionary) CopyFrom(source *StringDictionary) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, source.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
 
 	s.p.Call("copyFrom", args...)
 }
@@ -131,7 +140,12 @@ func (s *StringDictionary) GetOrAdd(key string, val *T) *T {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, key)
-	args = append(args, val.JSObject())
+
+	if val == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, val.JSObject())
+	}
 
 	retVal := s.p.Call("getOrAdd", args...)
 	return TFromJSObject(retVal, s.ctx)
@@ -145,6 +159,7 @@ func (s *StringDictionary) GetOrAddWithFactory(key string, factory JSFunc) *T {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, key)
+
 	args = append(args, js.FuncOf(factory))
 
 	retVal := s.p.Call("getOrAddWithFactory", args...)
@@ -172,7 +187,12 @@ func (s *StringDictionary) Set(key string, value *T) bool {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, key)
-	args = append(args, value.JSObject())
+
+	if value == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, value.JSObject())
+	}
 
 	retVal := s.p.Call("set", args...)
 	return retVal.Bool()

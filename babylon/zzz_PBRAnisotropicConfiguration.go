@@ -57,7 +57,13 @@ func (p *PBRAnisotropicConfiguration) AddFallbacks(defines js.Value, fallbacks *
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, defines)
-	args = append(args, fallbacks.JSObject())
+
+	if fallbacks == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fallbacks.JSObject())
+	}
+
 	args = append(args, currentRank)
 
 	retVal := p.p.Call("AddFallbacks", args...)
@@ -95,8 +101,18 @@ func (p *PBRAnisotropicConfiguration) BindForSubMesh(uniformBuffer *UniformBuffe
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, uniformBuffer.JSObject())
-	args = append(args, scene.JSObject())
+	if uniformBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, uniformBuffer.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, isFrozen)
 
 	p.p.Call("bindForSubMesh", args...)
@@ -109,7 +125,11 @@ func (p *PBRAnisotropicConfiguration) CopyTo(anisotropicConfiguration *PBRAnisot
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, anisotropicConfiguration.JSObject())
+	if anisotropicConfiguration == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, anisotropicConfiguration.JSObject())
+	}
 
 	p.p.Call("copyTo", args...)
 }
@@ -178,7 +198,11 @@ func (p *PBRAnisotropicConfiguration) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := p.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -192,7 +216,12 @@ func (p *PBRAnisotropicConfiguration) IsReadyForSubMesh(defines js.Value, scene 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, defines)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := p.p.Call("isReadyForSubMesh", args...)
 	return retVal.Bool()
@@ -201,12 +230,22 @@ func (p *PBRAnisotropicConfiguration) IsReadyForSubMesh(defines js.Value, scene 
 // Parse calls the Parse method on the PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#parse
-func (p *PBRAnisotropicConfiguration) Parse(source interface{}, scene *Scene, rootUrl string) {
+func (p *PBRAnisotropicConfiguration) Parse(source JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	p.p.Call("parse", args...)
@@ -220,8 +259,18 @@ func (p *PBRAnisotropicConfiguration) PrepareDefines(defines js.Value, mesh *Abs
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, defines)
-	args = append(args, mesh.JSObject())
-	args = append(args, scene.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	p.p.Call("prepareDefines", args...)
 }
@@ -233,7 +282,11 @@ func (p *PBRAnisotropicConfiguration) PrepareUniformBuffer(uniformBuffer *Unifor
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, uniformBuffer.JSObject())
+	if uniformBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, uniformBuffer.JSObject())
+	}
 
 	p.p.Call("PrepareUniformBuffer", args...)
 }
@@ -241,7 +294,7 @@ func (p *PBRAnisotropicConfiguration) PrepareUniformBuffer(uniformBuffer *Unifor
 // Serialize calls the Serialize method on the PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#serialize
-func (p *PBRAnisotropicConfiguration) Serialize() interface{} {
+func (p *PBRAnisotropicConfiguration) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal

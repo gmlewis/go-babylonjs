@@ -87,11 +87,16 @@ func (s *SpotLight) GetTypeID() float64 {
 // PrepareLightSpecificDefines calls the PrepareLightSpecificDefines method on the SpotLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight#preparelightspecificdefines
-func (s *SpotLight) PrepareLightSpecificDefines(defines interface{}, lightIndex float64) {
+func (s *SpotLight) PrepareLightSpecificDefines(defines JSObject, lightIndex float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, defines)
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	s.p.Call("prepareLightSpecificDefines", args...)
@@ -104,7 +109,12 @@ func (s *SpotLight) TransferTexturesToEffect(effect *Effect, lightIndex string) 
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	retVal := s.p.Call("transferTexturesToEffect", args...)
@@ -118,7 +128,12 @@ func (s *SpotLight) TransferToEffect(effect *Effect, lightIndex string) *SpotLig
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	retVal := s.p.Call("transferToEffect", args...)
@@ -132,7 +147,12 @@ func (s *SpotLight) TransferToNodeMaterialEffect(effect *Effect, lightDataUnifor
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightDataUniformName)
 
 	retVal := s.p.Call("transferToNodeMaterialEffect", args...)

@@ -74,12 +74,22 @@ func (ba *Babylon) NewBrickProceduralTexture(name string, size float64, scene *S
 // Parse calls the Parse method on the BrickProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#parse
-func (b *BrickProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *BrickProceduralTexture {
+func (b *BrickProceduralTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *BrickProceduralTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := b.p.Call("Parse", args...)
@@ -89,7 +99,7 @@ func (b *BrickProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, 
 // Serialize calls the Serialize method on the BrickProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#serialize
-func (b *BrickProceduralTexture) Serialize() interface{} {
+func (b *BrickProceduralTexture) Serialize() js.Value {
 
 	retVal := b.p.Call("serialize")
 	return retVal

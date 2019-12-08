@@ -43,8 +43,17 @@ func (w *WebXRDefaultExperience) CreateAsync(scene *Scene, options *WebXRDefault
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, scene.JSObject())
-	args = append(args, options.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if options == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, options.JSObject())
+	}
 
 	retVal := w.p.Call("CreateAsync", args...)
 	return PromiseFromJSObject(retVal, w.ctx)

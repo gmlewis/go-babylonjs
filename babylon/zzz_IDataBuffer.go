@@ -44,6 +44,7 @@ func (i *IDataBuffer) ReadAsync(byteOffset float64, byteLength float64) *Promise
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, byteOffset)
+
 	args = append(args, byteLength)
 
 	retVal := i.p.Call("readAsync", args...)

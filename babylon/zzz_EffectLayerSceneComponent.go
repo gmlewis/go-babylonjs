@@ -57,7 +57,11 @@ func (e *EffectLayerSceneComponent) AddFromContainer(container *AbstractScene) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	e.p.Call("addFromContainer", args...)
 }
@@ -101,7 +105,11 @@ func (e *EffectLayerSceneComponent) RemoveFromContainer(container *AbstractScene
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	if opts.Dispose == nil {
 		args = append(args, js.Undefined())
@@ -115,11 +123,15 @@ func (e *EffectLayerSceneComponent) RemoveFromContainer(container *AbstractScene
 // Serialize calls the Serialize method on the EffectLayerSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#serialize
-func (e *EffectLayerSceneComponent) Serialize(serializationObject interface{}) {
+func (e *EffectLayerSceneComponent) Serialize(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	e.p.Call("serialize", args...)
 }

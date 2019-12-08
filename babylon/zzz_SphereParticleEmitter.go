@@ -81,7 +81,11 @@ func (s *SphereParticleEmitter) ApplyToShader(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	s.p.Call("applyToShader", args...)
 }
@@ -116,11 +120,15 @@ func (s *SphereParticleEmitter) GetEffectDefines() string {
 // Parse calls the Parse method on the SphereParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#parse
-func (s *SphereParticleEmitter) Parse(serializationObject interface{}) {
+func (s *SphereParticleEmitter) Parse(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	s.p.Call("parse", args...)
 }
@@ -128,7 +136,7 @@ func (s *SphereParticleEmitter) Parse(serializationObject interface{}) {
 // Serialize calls the Serialize method on the SphereParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#serialize
-func (s *SphereParticleEmitter) Serialize() interface{} {
+func (s *SphereParticleEmitter) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal
@@ -141,9 +149,23 @@ func (s *SphereParticleEmitter) StartDirectionFunction(worldMatrix *Matrix, dire
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, worldMatrix.JSObject())
-	args = append(args, directionToUpdate.JSObject())
-	args = append(args, particle.JSObject())
+	if worldMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMatrix.JSObject())
+	}
+
+	if directionToUpdate == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, directionToUpdate.JSObject())
+	}
+
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	s.p.Call("startDirectionFunction", args...)
 }
@@ -155,9 +177,23 @@ func (s *SphereParticleEmitter) StartPositionFunction(worldMatrix *Matrix, posit
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, worldMatrix.JSObject())
-	args = append(args, positionToUpdate.JSObject())
-	args = append(args, particle.JSObject())
+	if worldMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMatrix.JSObject())
+	}
+
+	if positionToUpdate == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, positionToUpdate.JSObject())
+	}
+
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	s.p.Call("startPositionFunction", args...)
 }

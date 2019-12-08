@@ -42,8 +42,8 @@ func AmmoJSPluginArrayToJSArray(array []*AmmoJSPlugin) []interface{} {
 // NewAmmoJSPluginOpts contains optional parameters for NewAmmoJSPlugin.
 type NewAmmoJSPluginOpts struct {
 	_useDeltaForWorldStep *bool
-	AmmoInjection         *interface{}
-	OverlappingPairCache  *interface{}
+	AmmoInjection         interface{}
+	OverlappingPairCache  interface{}
 }
 
 // NewAmmoJSPlugin returns a new AmmoJSPlugin object.
@@ -92,9 +92,20 @@ func (a *AmmoJSPlugin) AppendAnchor(impostor *PhysicsImpostor, otherImpostor *Ph
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, impostor.JSObject())
-	args = append(args, otherImpostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
+	if otherImpostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherImpostor.JSObject())
+	}
+
 	args = append(args, width)
+
 	args = append(args, height)
 
 	if opts.Influence == nil {
@@ -127,8 +138,18 @@ func (a *AmmoJSPlugin) AppendHook(impostor *PhysicsImpostor, otherImpostor *Phys
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, impostor.JSObject())
-	args = append(args, otherImpostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
+	if otherImpostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, otherImpostor.JSObject())
+	}
+
 	args = append(args, length)
 
 	if opts.Influence == nil {
@@ -152,9 +173,23 @@ func (a *AmmoJSPlugin) ApplyForce(impostor *PhysicsImpostor, force *Vector3, con
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, impostor.JSObject())
-	args = append(args, force.JSObject())
-	args = append(args, contactPoint.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
+	if force == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, force.JSObject())
+	}
+
+	if contactPoint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, contactPoint.JSObject())
+	}
 
 	a.p.Call("applyForce", args...)
 }
@@ -166,9 +201,23 @@ func (a *AmmoJSPlugin) ApplyImpulse(impostor *PhysicsImpostor, force *Vector3, c
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, impostor.JSObject())
-	args = append(args, force.JSObject())
-	args = append(args, contactPoint.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
+	if force == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, force.JSObject())
+	}
+
+	if contactPoint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, contactPoint.JSObject())
+	}
 
 	a.p.Call("applyImpulse", args...)
 }
@@ -189,6 +238,7 @@ func (a *AmmoJSPlugin) ExecuteStep(delta float64, impostors []*PhysicsImpostor) 
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, delta)
+
 	args = append(args, PhysicsImpostorArrayToJSArray(impostors))
 
 	a.p.Call("executeStep", args...)
@@ -213,7 +263,11 @@ func (a *AmmoJSPlugin) GeneratePhysicsBody(impostor *PhysicsImpostor) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	a.p.Call("generatePhysicsBody", args...)
 }
@@ -225,7 +279,11 @@ func (a *AmmoJSPlugin) GetAngularVelocity(impostor *PhysicsImpostor) *Vector3 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	retVal := a.p.Call("getAngularVelocity", args...)
 	return Vector3FromJSObject(retVal, a.ctx)
@@ -238,7 +296,11 @@ func (a *AmmoJSPlugin) GetBodyFriction(impostor *PhysicsImpostor) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	retVal := a.p.Call("getBodyFriction", args...)
 	return retVal.Float()
@@ -251,7 +313,11 @@ func (a *AmmoJSPlugin) GetBodyMass(impostor *PhysicsImpostor) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	retVal := a.p.Call("getBodyMass", args...)
 	return retVal.Float()
@@ -264,7 +330,11 @@ func (a *AmmoJSPlugin) GetBodyPositionIterations(impostor *PhysicsImpostor) floa
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	retVal := a.p.Call("getBodyPositionIterations", args...)
 	return retVal.Float()
@@ -277,7 +347,11 @@ func (a *AmmoJSPlugin) GetBodyPressure(impostor *PhysicsImpostor) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	retVal := a.p.Call("getBodyPressure", args...)
 	return retVal.Float()
@@ -290,7 +364,11 @@ func (a *AmmoJSPlugin) GetBodyRestitution(impostor *PhysicsImpostor) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	retVal := a.p.Call("getBodyRestitution", args...)
 	return retVal.Float()
@@ -303,7 +381,11 @@ func (a *AmmoJSPlugin) GetBodyStiffness(impostor *PhysicsImpostor) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	retVal := a.p.Call("getBodyStiffness", args...)
 	return retVal.Float()
@@ -316,7 +398,11 @@ func (a *AmmoJSPlugin) GetBodyVelocityIterations(impostor *PhysicsImpostor) floa
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	retVal := a.p.Call("getBodyVelocityIterations", args...)
 	return retVal.Float()
@@ -329,8 +415,17 @@ func (a *AmmoJSPlugin) GetBoxSizeToRef(impostor *PhysicsImpostor, result *Vector
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
-	args = append(args, result.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
+	if result == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, result.JSObject())
+	}
 
 	a.p.Call("getBoxSizeToRef", args...)
 }
@@ -342,7 +437,11 @@ func (a *AmmoJSPlugin) GetLinearVelocity(impostor *PhysicsImpostor) *Vector3 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	retVal := a.p.Call("getLinearVelocity", args...)
 	return Vector3FromJSObject(retVal, a.ctx)
@@ -355,7 +454,11 @@ func (a *AmmoJSPlugin) GetRadius(impostor *PhysicsImpostor) float64 {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	retVal := a.p.Call("getRadius", args...)
 	return retVal.Float()
@@ -386,8 +489,17 @@ func (a *AmmoJSPlugin) Raycast(from *Vector3, to *Vector3) *PhysicsRaycastResult
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, from.JSObject())
-	args = append(args, to.JSObject())
+	if from == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, from.JSObject())
+	}
+
+	if to == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, to.JSObject())
+	}
 
 	retVal := a.p.Call("raycast", args...)
 	return PhysicsRaycastResultFromJSObject(retVal, a.ctx)
@@ -412,7 +524,11 @@ func (a *AmmoJSPlugin) RemovePhysicsBody(impostor *PhysicsImpostor) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	a.p.Call("removePhysicsBody", args...)
 }
@@ -424,8 +540,17 @@ func (a *AmmoJSPlugin) SetAngularVelocity(impostor *PhysicsImpostor, velocity *V
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
-	args = append(args, velocity.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
+	if velocity == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, velocity.JSObject())
+	}
 
 	a.p.Call("setAngularVelocity", args...)
 }
@@ -437,7 +562,12 @@ func (a *AmmoJSPlugin) SetBodyFriction(impostor *PhysicsImpostor, friction float
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
 	args = append(args, friction)
 
 	a.p.Call("setBodyFriction", args...)
@@ -450,7 +580,12 @@ func (a *AmmoJSPlugin) SetBodyMass(impostor *PhysicsImpostor, mass float64) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
 	args = append(args, mass)
 
 	a.p.Call("setBodyMass", args...)
@@ -463,7 +598,12 @@ func (a *AmmoJSPlugin) SetBodyPositionIterations(impostor *PhysicsImpostor, posi
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
 	args = append(args, positionIterations)
 
 	a.p.Call("setBodyPositionIterations", args...)
@@ -476,7 +616,12 @@ func (a *AmmoJSPlugin) SetBodyPressure(impostor *PhysicsImpostor, pressure float
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
 	args = append(args, pressure)
 
 	a.p.Call("setBodyPressure", args...)
@@ -489,7 +634,12 @@ func (a *AmmoJSPlugin) SetBodyRestitution(impostor *PhysicsImpostor, restitution
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
 	args = append(args, restitution)
 
 	a.p.Call("setBodyRestitution", args...)
@@ -502,7 +652,12 @@ func (a *AmmoJSPlugin) SetBodyStiffness(impostor *PhysicsImpostor, stiffness flo
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
 	args = append(args, stiffness)
 
 	a.p.Call("setBodyStiffness", args...)
@@ -515,7 +670,12 @@ func (a *AmmoJSPlugin) SetBodyVelocityIterations(impostor *PhysicsImpostor, velo
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
 	args = append(args, velocityIterations)
 
 	a.p.Call("setBodyVelocityIterations", args...)
@@ -540,7 +700,11 @@ func (a *AmmoJSPlugin) SetGravity(gravity *Vector3) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, gravity.JSObject())
+	if gravity == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, gravity.JSObject())
+	}
 
 	a.p.Call("setGravity", args...)
 }
@@ -560,7 +724,12 @@ func (a *AmmoJSPlugin) SetLimit(joint *IMotorEnabledJoint, upperLimit float64, o
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, joint.JSObject())
+	if joint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, joint.JSObject())
+	}
+
 	args = append(args, upperLimit)
 
 	if opts.LowerLimit == nil {
@@ -579,8 +748,17 @@ func (a *AmmoJSPlugin) SetLinearVelocity(impostor *PhysicsImpostor, velocity *Ve
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, impostor.JSObject())
-	args = append(args, velocity.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
+	if velocity == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, velocity.JSObject())
+	}
 
 	a.p.Call("setLinearVelocity", args...)
 }
@@ -614,7 +792,11 @@ func (a *AmmoJSPlugin) SetMotor(joint *IMotorEnabledJoint, opts *AmmoJSPluginSet
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, joint.JSObject())
+	if joint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, joint.JSObject())
+	}
 
 	if opts.Speed == nil {
 		args = append(args, js.Undefined())
@@ -642,9 +824,23 @@ func (a *AmmoJSPlugin) SetPhysicsBodyTransformation(impostor *PhysicsImpostor, n
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, impostor.JSObject())
-	args = append(args, newPosition.JSObject())
-	args = append(args, newRotation.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
+
+	if newPosition == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newPosition.JSObject())
+	}
+
+	if newRotation == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, newRotation.JSObject())
+	}
 
 	a.p.Call("setPhysicsBodyTransformation", args...)
 }
@@ -668,7 +864,11 @@ func (a *AmmoJSPlugin) SetTransformationFromPhysicsBody(impostor *PhysicsImposto
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	a.p.Call("setTransformationFromPhysicsBody", args...)
 }
@@ -680,7 +880,11 @@ func (a *AmmoJSPlugin) SleepBody(impostor *PhysicsImpostor) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	a.p.Call("sleepBody", args...)
 }
@@ -692,8 +896,17 @@ func (a *AmmoJSPlugin) SyncMeshWithImpostor(mesh *AbstractMesh, impostor *Physic
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, impostor.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	a.p.Call("syncMeshWithImpostor", args...)
 }
@@ -713,7 +926,12 @@ func (a *AmmoJSPlugin) UpdateDistanceJoint(joint *PhysicsJoint, maxDistance floa
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, joint.JSObject())
+	if joint == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, joint.JSObject())
+	}
+
 	args = append(args, maxDistance)
 
 	if opts.MinDistance == nil {
@@ -732,7 +950,11 @@ func (a *AmmoJSPlugin) WakeUpBody(impostor *PhysicsImpostor) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, impostor.JSObject())
+	if impostor == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, impostor.JSObject())
+	}
 
 	a.p.Call("wakeUpBody", args...)
 }
@@ -740,7 +962,7 @@ func (a *AmmoJSPlugin) WakeUpBody(impostor *PhysicsImpostor) {
 // BjsAMMO returns the BjsAMMO property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#bjsammo
-func (a *AmmoJSPlugin) BjsAMMO() interface{} {
+func (a *AmmoJSPlugin) BjsAMMO() js.Value {
 	retVal := a.p.Get("bjsAMMO")
 	return retVal
 }
@@ -748,8 +970,8 @@ func (a *AmmoJSPlugin) BjsAMMO() interface{} {
 // SetBjsAMMO sets the BjsAMMO property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#bjsammo
-func (a *AmmoJSPlugin) SetBjsAMMO(bjsAMMO interface{}) *AmmoJSPlugin {
-	a.p.Set("bjsAMMO", bjsAMMO)
+func (a *AmmoJSPlugin) SetBjsAMMO(bjsAMMO JSObject) *AmmoJSPlugin {
+	a.p.Set("bjsAMMO", bjsAMMO.JSObject())
 	return a
 }
 
@@ -788,7 +1010,7 @@ func (a *AmmoJSPlugin) SetOnCreateCustomShape(onCreateCustomShape JSFunc) *AmmoJ
 // World returns the World property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#world
-func (a *AmmoJSPlugin) World() interface{} {
+func (a *AmmoJSPlugin) World() js.Value {
 	retVal := a.p.Get("world")
 	return retVal
 }
@@ -796,7 +1018,7 @@ func (a *AmmoJSPlugin) World() interface{} {
 // SetWorld sets the World property of class AmmoJSPlugin.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#world
-func (a *AmmoJSPlugin) SetWorld(world interface{}) *AmmoJSPlugin {
-	a.p.Set("world", world)
+func (a *AmmoJSPlugin) SetWorld(world JSObject) *AmmoJSPlugin {
+	a.p.Set("world", world.JSObject())
 	return a
 }

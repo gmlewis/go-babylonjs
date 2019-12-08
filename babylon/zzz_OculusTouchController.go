@@ -39,11 +39,11 @@ func OculusTouchControllerArrayToJSArray(array []*OculusTouchController) []inter
 // NewOculusTouchController returns a new OculusTouchController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller
-func (ba *Babylon) NewOculusTouchController(vrGamepad interface{}) *OculusTouchController {
+func (ba *Babylon) NewOculusTouchController(vrGamepad JSObject) *OculusTouchController {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vrGamepad)
+	args = append(args, vrGamepad.JSObject())
 
 	p := ba.ctx.Get("OculusTouchController").New(args...)
 	return OculusTouchControllerFromJSObject(p, ba.ctx)
@@ -64,7 +64,11 @@ func (o *OculusTouchController) InitControllerMesh(scene *Scene, opts *OculusTou
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())

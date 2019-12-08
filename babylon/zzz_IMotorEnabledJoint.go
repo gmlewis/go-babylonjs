@@ -109,7 +109,7 @@ func (i *IMotorEnabledJoint) SetMotor(opts *IMotorEnabledJointSetMotorOpts) {
 // PhysicsJoint returns the PhysicsJoint property of class IMotorEnabledJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imotorenabledjoint#physicsjoint
-func (i *IMotorEnabledJoint) PhysicsJoint() interface{} {
+func (i *IMotorEnabledJoint) PhysicsJoint() js.Value {
 	retVal := i.p.Get("physicsJoint")
 	return retVal
 }
@@ -117,7 +117,7 @@ func (i *IMotorEnabledJoint) PhysicsJoint() interface{} {
 // SetPhysicsJoint sets the PhysicsJoint property of class IMotorEnabledJoint.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imotorenabledjoint#physicsjoint
-func (i *IMotorEnabledJoint) SetPhysicsJoint(physicsJoint interface{}) *IMotorEnabledJoint {
-	i.p.Set("physicsJoint", physicsJoint)
+func (i *IMotorEnabledJoint) SetPhysicsJoint(physicsJoint JSObject) *IMotorEnabledJoint {
+	i.p.Set("physicsJoint", physicsJoint.JSObject())
 	return i
 }

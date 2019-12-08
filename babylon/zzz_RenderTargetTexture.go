@@ -128,7 +128,11 @@ func (r *RenderTargetTexture) AddPostProcess(postProcess *PostProcess) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, postProcess.JSObject())
+	if postProcess == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, postProcess.JSObject())
+	}
 
 	r.p.Call("addPostProcess", args...)
 }
@@ -278,7 +282,11 @@ func (r *RenderTargetTexture) RemovePostProcess(postProcess *PostProcess) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, postProcess.JSObject())
+	if postProcess == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, postProcess.JSObject())
+	}
 
 	r.p.Call("removePostProcess", args...)
 }
@@ -348,7 +356,7 @@ func (r *RenderTargetTexture) Scale(ratio float64) {
 // Serialize calls the Serialize method on the RenderTargetTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#serialize
-func (r *RenderTargetTexture) Serialize() interface{} {
+func (r *RenderTargetTexture) Serialize() js.Value {
 
 	retVal := r.p.Call("serialize")
 	return retVal
@@ -362,6 +370,7 @@ func (r *RenderTargetTexture) SetRenderingAutoClearDepthStencil(renderingGroupId
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, renderingGroupId)
+
 	args = append(args, autoClearDepthStencil)
 
 	r.p.Call("setRenderingAutoClearDepthStencil", args...)

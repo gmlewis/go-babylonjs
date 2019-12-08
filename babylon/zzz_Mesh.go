@@ -95,7 +95,12 @@ func (m *Mesh) AddLODLevel(distance float64, mesh *Mesh) *Mesh {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, distance)
-	args = append(args, mesh.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := m.p.Call("addLODLevel", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -120,7 +125,9 @@ func (m *Mesh) ApplyDisplacementMap(url string, minHeight float64, maxHeight flo
 	args := make([]interface{}, 0, 3+4)
 
 	args = append(args, url)
+
 	args = append(args, minHeight)
+
 	args = append(args, maxHeight)
 
 	if opts.OnSuccess == nil {
@@ -166,9 +173,13 @@ func (m *Mesh) ApplyDisplacementMapFromBuffer(buffer js.Value, heightMapWidth fl
 	args := make([]interface{}, 0, 5+3)
 
 	args = append(args, buffer)
+
 	args = append(args, heightMapWidth)
+
 	args = append(args, heightMapHeight)
+
 	args = append(args, minHeight)
+
 	args = append(args, maxHeight)
 
 	if opts.UvOffset == nil {
@@ -198,7 +209,11 @@ func (m *Mesh) ApplySkeleton(skeleton *Skeleton) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, skeleton.JSObject())
+	if skeleton == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, skeleton.JSObject())
+	}
 
 	retVal := m.p.Call("applySkeleton", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -220,7 +235,11 @@ func (m *Mesh) BakeTransformIntoVertices(transform *Matrix) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, transform.JSObject())
+	if transform == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, transform.JSObject())
+	}
 
 	retVal := m.p.Call("bakeTransformIntoVertices", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -326,6 +345,7 @@ func (m *Mesh) CreateBox(name string, size float64, opts *MeshCreateBoxOpts) *Me
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, name)
+
 	args = append(args, size)
 
 	if opts.Scene == nil {
@@ -351,14 +371,14 @@ func (m *Mesh) CreateBox(name string, size float64, opts *MeshCreateBoxOpts) *Me
 // MeshCreateCylinderOpts contains optional parameters for Mesh.CreateCylinder.
 type MeshCreateCylinderOpts struct {
 	Scene           *Scene
-	Updatable       *interface{}
+	Updatable       interface{}
 	SideOrientation *float64
 }
 
 // CreateCylinder calls the CreateCylinder method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#createcylinder
-func (m *Mesh) CreateCylinder(name string, height float64, diameterTop float64, diameterBottom float64, tessellation float64, subdivisions interface{}, opts *MeshCreateCylinderOpts) *Mesh {
+func (m *Mesh) CreateCylinder(name string, height float64, diameterTop float64, diameterBottom float64, tessellation float64, subdivisions JSObject, opts *MeshCreateCylinderOpts) *Mesh {
 	if opts == nil {
 		opts = &MeshCreateCylinderOpts{}
 	}
@@ -366,11 +386,20 @@ func (m *Mesh) CreateCylinder(name string, height float64, diameterTop float64, 
 	args := make([]interface{}, 0, 6+3)
 
 	args = append(args, name)
+
 	args = append(args, height)
+
 	args = append(args, diameterTop)
+
 	args = append(args, diameterBottom)
+
 	args = append(args, tessellation)
-	args = append(args, subdivisions)
+
+	if subdivisions == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subdivisions.JSObject())
+	}
 
 	if opts.Scene == nil {
 		args = append(args, js.Undefined())
@@ -410,9 +439,13 @@ func (m *Mesh) CreateDashedLines(name string, points []*Vector3, dashSize float6
 	args := make([]interface{}, 0, 5+3)
 
 	args = append(args, name)
+
 	args = append(args, Vector3ArrayToJSArray(points))
+
 	args = append(args, dashSize)
+
 	args = append(args, gapSize)
+
 	args = append(args, dashNb)
 
 	if opts.Scene == nil {
@@ -443,10 +476,31 @@ func (m *Mesh) CreateDecal(name string, sourceMesh *AbstractMesh, position *Vect
 	args := make([]interface{}, 0, 6+0)
 
 	args = append(args, name)
-	args = append(args, sourceMesh.JSObject())
-	args = append(args, position.JSObject())
-	args = append(args, normal.JSObject())
-	args = append(args, size.JSObject())
+
+	if sourceMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sourceMesh.JSObject())
+	}
+
+	if position == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, position.JSObject())
+	}
+
+	if normal == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, normal.JSObject())
+	}
+
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
+
 	args = append(args, angle)
 
 	retVal := m.p.Call("CreateDecal", args...)
@@ -471,7 +525,9 @@ func (m *Mesh) CreateDisc(name string, radius float64, tessellation float64, opt
 	args := make([]interface{}, 0, 3+3)
 
 	args = append(args, name)
+
 	args = append(args, radius)
+
 	args = append(args, tessellation)
 
 	if opts.Scene == nil {
@@ -511,8 +567,11 @@ func (m *Mesh) CreateGround(name string, width float64, height float64, subdivis
 	args := make([]interface{}, 0, 4+2)
 
 	args = append(args, name)
+
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, subdivisions)
 
 	if opts.Scene == nil {
@@ -548,13 +607,24 @@ func (m *Mesh) CreateGroundFromHeightMap(name string, url string, width float64,
 	args := make([]interface{}, 0, 8+3)
 
 	args = append(args, name)
+
 	args = append(args, url)
+
 	args = append(args, width)
+
 	args = append(args, height)
+
 	args = append(args, subdivisions)
+
 	args = append(args, minHeight)
+
 	args = append(args, maxHeight)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -592,7 +662,9 @@ func (m *Mesh) CreateHemisphere(name string, segments float64, diameter float64,
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, name)
+
 	args = append(args, segments)
+
 	args = append(args, diameter)
 
 	if opts.Scene == nil {
@@ -613,8 +685,14 @@ func (m *Mesh) CreateIcoSphere(name string, options js.Value, scene *Scene) *Mes
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, options)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := m.p.Call("CreateIcoSphere", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -650,10 +728,18 @@ func (m *Mesh) CreateLathe(name string, shape []*Vector3, radius float64, tessel
 	args := make([]interface{}, 0, 5+2)
 
 	args = append(args, name)
+
 	args = append(args, Vector3ArrayToJSArray(shape))
+
 	args = append(args, radius)
+
 	args = append(args, tessellation)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -688,6 +774,7 @@ func (m *Mesh) CreateLines(name string, points []*Vector3, opts *MeshCreateLines
 	args := make([]interface{}, 0, 2+3)
 
 	args = append(args, name)
+
 	args = append(args, Vector3ArrayToJSArray(points))
 
 	if opts.Scene == nil {
@@ -727,8 +814,14 @@ func (m *Mesh) CreatePlane(name string, size float64, scene *Scene, opts *MeshCr
 	args := make([]interface{}, 0, 3+2)
 
 	args = append(args, name)
+
 	args = append(args, size)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -750,7 +843,7 @@ type MeshCreatePolygonOpts struct {
 	Holes           [][]*Vector3
 	Updatable       *bool
 	SideOrientation *float64
-	EarcutInjection *interface{}
+	EarcutInjection interface{}
 }
 
 // CreatePolygon calls the CreatePolygon method on the Mesh object.
@@ -764,8 +857,14 @@ func (m *Mesh) CreatePolygon(name string, shape []*Vector3, scene *Scene, opts *
 	args := make([]interface{}, 0, 3+4)
 
 	args = append(args, name)
+
 	args = append(args, Vector3ArrayToJSArray(shape))
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Holes == nil {
 		args = append(args, js.Undefined())
@@ -800,8 +899,14 @@ func (m *Mesh) CreatePolyhedron(name string, options js.Value, scene *Scene) *Me
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, name)
+
 	args = append(args, options)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := m.p.Call("CreatePolyhedron", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -826,9 +931,13 @@ func (m *Mesh) CreateRibbon(name string, pathArray [][]*Vector3, closeArray bool
 	args := make([]interface{}, 0, 5+4)
 
 	args = append(args, name)
+
 	args = append(args, pathArray)
+
 	args = append(args, closeArray)
+
 	args = append(args, closePath)
+
 	args = append(args, offset)
 
 	if opts.Scene == nil {
@@ -874,7 +983,9 @@ func (m *Mesh) CreateSphere(name string, segments float64, diameter float64, opt
 	args := make([]interface{}, 0, 3+3)
 
 	args = append(args, name)
+
 	args = append(args, segments)
+
 	args = append(args, diameter)
 
 	if opts.Scene == nil {
@@ -913,13 +1024,24 @@ func (m *Mesh) CreateTiledGround(name string, xmin float64, zmin float64, xmax f
 	args := make([]interface{}, 0, 8+1)
 
 	args = append(args, name)
+
 	args = append(args, xmin)
+
 	args = append(args, zmin)
+
 	args = append(args, xmax)
+
 	args = append(args, zmax)
+
 	args = append(args, subdivisions)
+
 	args = append(args, precision)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -949,8 +1071,11 @@ func (m *Mesh) CreateTorus(name string, diameter float64, thickness float64, tes
 	args := make([]interface{}, 0, 4+3)
 
 	args = append(args, name)
+
 	args = append(args, diameter)
+
 	args = append(args, thickness)
+
 	args = append(args, tessellation)
 
 	if opts.Scene == nil {
@@ -991,11 +1116,17 @@ func (m *Mesh) CreateTorusKnot(name string, radius float64, tube float64, radial
 	args := make([]interface{}, 0, 7+3)
 
 	args = append(args, name)
+
 	args = append(args, radius)
+
 	args = append(args, tube)
+
 	args = append(args, radialSegments)
+
 	args = append(args, tubularSegments)
+
 	args = append(args, p)
+
 	args = append(args, q)
 
 	if opts.Scene == nil {
@@ -1036,12 +1167,22 @@ func (m *Mesh) CreateTube(name string, path []*Vector3, radius float64, tessella
 	args := make([]interface{}, 0, 7+3)
 
 	args = append(args, name)
+
 	args = append(args, Vector3ArrayToJSArray(path))
+
 	args = append(args, radius)
+
 	args = append(args, tessellation)
+
 	args = append(args, js.FuncOf(radiusFunction))
+
 	args = append(args, cap)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -1098,7 +1239,7 @@ type MeshExtrudePolygonOpts struct {
 	Holes           [][]*Vector3
 	Updatable       *bool
 	SideOrientation *float64
-	EarcutInjection *interface{}
+	EarcutInjection interface{}
 }
 
 // ExtrudePolygon calls the ExtrudePolygon method on the Mesh object.
@@ -1112,9 +1253,16 @@ func (m *Mesh) ExtrudePolygon(name string, shape []*Vector3, depth float64, scen
 	args := make([]interface{}, 0, 4+4)
 
 	args = append(args, name)
+
 	args = append(args, Vector3ArrayToJSArray(shape))
+
 	args = append(args, depth)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Holes == nil {
 		args = append(args, js.Undefined())
@@ -1160,10 +1308,15 @@ func (m *Mesh) ExtrudeShape(name string, shape []*Vector3, path []*Vector3, scal
 	args := make([]interface{}, 0, 6+4)
 
 	args = append(args, name)
+
 	args = append(args, Vector3ArrayToJSArray(shape))
+
 	args = append(args, Vector3ArrayToJSArray(path))
+
 	args = append(args, scale)
+
 	args = append(args, rotation)
+
 	args = append(args, cap)
 
 	if opts.Scene == nil {
@@ -1209,14 +1362,26 @@ func (m *Mesh) ExtrudeShapeCustom(name string, shape []*Vector3, path []*Vector3
 	args := make([]interface{}, 0, 9+3)
 
 	args = append(args, name)
+
 	args = append(args, Vector3ArrayToJSArray(shape))
+
 	args = append(args, Vector3ArrayToJSArray(path))
+
 	args = append(args, js.FuncOf(scaleFunction))
+
 	args = append(args, js.FuncOf(rotationFunction))
+
 	args = append(args, ribbonCloseArray)
+
 	args = append(args, ribbonClosePath)
+
 	args = append(args, cap)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -1374,7 +1539,11 @@ func (m *Mesh) GetLOD(camera *Camera, opts *MeshGetLODOpts) *AbstractMesh {
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	if opts.BoundingSphere == nil {
 		args = append(args, js.Undefined())
@@ -1735,12 +1904,22 @@ func (m *Mesh) OptimizeIndices(opts *MeshOptimizeIndicesOpts) *Mesh {
 // Parse calls the Parse method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#parse
-func (m *Mesh) Parse(parsedMesh interface{}, scene *Scene, rootUrl string) *Mesh {
+func (m *Mesh) Parse(parsedMesh JSObject, scene *Scene, rootUrl string) *Mesh {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedMesh)
-	args = append(args, scene.JSObject())
+	if parsedMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedMesh.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := m.p.Call("Parse", args...)
@@ -1806,6 +1985,7 @@ func (m *Mesh) RegisterInstancedBuffer(kind string, stride float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, kind)
+
 	args = append(args, stride)
 
 	m.p.Call("registerInstancedBuffer", args...)
@@ -1818,7 +1998,11 @@ func (m *Mesh) RemoveLODLevel(mesh *Mesh) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := m.p.Call("removeLODLevel", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -1851,7 +2035,12 @@ func (m *Mesh) Render(subMesh *SubMesh, enableAlphaMode bool, opts *MeshRenderOp
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, subMesh.JSObject())
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
+
 	args = append(args, enableAlphaMode)
 
 	if opts.EffectiveMeshReplacement == nil {
@@ -1867,11 +2056,15 @@ func (m *Mesh) Render(subMesh *SubMesh, enableAlphaMode bool, opts *MeshRenderOp
 // Serialize calls the Serialize method on the Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh#serialize
-func (m *Mesh) Serialize(serializationObject interface{}) {
+func (m *Mesh) Serialize(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	m.p.Call("serialize", args...)
 }
@@ -1947,7 +2140,11 @@ func (m *Mesh) SetVerticesBuffer(buffer *VertexBuffer) *Mesh {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, buffer.JSObject())
+	if buffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, buffer.JSObject())
+	}
 
 	retVal := m.p.Call("setVerticesBuffer", args...)
 	return MeshFromJSObject(retVal, m.ctx)
@@ -1970,6 +2167,7 @@ func (m *Mesh) SetVerticesData(kind string, data js.Value, opts *MeshSetVertices
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, kind)
+
 	args = append(args, data)
 
 	if opts.Updatable == nil {
@@ -2189,6 +2387,7 @@ func (m *Mesh) UpdateVerticesData(kind string, data js.Value, opts *MeshUpdateVe
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, kind)
+
 	args = append(args, data)
 
 	if opts.UpdateExtends == nil {

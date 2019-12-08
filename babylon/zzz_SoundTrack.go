@@ -73,7 +73,11 @@ func (s *SoundTrack) AddSound(sound *Sound) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, sound.JSObject())
+	if sound == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sound.JSObject())
+	}
 
 	s.p.Call("AddSound", args...)
 }
@@ -85,7 +89,11 @@ func (s *SoundTrack) ConnectToAnalyser(analyser *Analyser) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, analyser.JSObject())
+	if analyser == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, analyser.JSObject())
+	}
 
 	s.p.Call("connectToAnalyser", args...)
 }
@@ -105,7 +113,11 @@ func (s *SoundTrack) RemoveSound(sound *Sound) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, sound.JSObject())
+	if sound == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sound.JSObject())
+	}
 
 	s.p.Call("RemoveSound", args...)
 }

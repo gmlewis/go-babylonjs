@@ -52,6 +52,7 @@ func (l *LatheBuilder) CreateLathe(name string, options js.Value, opts *LatheBui
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, name)
+
 	args = append(args, options)
 
 	if opts.Scene == nil {

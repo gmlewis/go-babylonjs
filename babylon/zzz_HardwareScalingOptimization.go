@@ -82,8 +82,17 @@ func (h *HardwareScalingOptimization) Apply(scene *Scene, optimizer *SceneOptimi
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, scene.JSObject())
-	args = append(args, optimizer.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if optimizer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, optimizer.JSObject())
+	}
 
 	retVal := h.p.Call("apply", args...)
 	return retVal.Bool()

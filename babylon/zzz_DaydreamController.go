@@ -39,11 +39,11 @@ func DaydreamControllerArrayToJSArray(array []*DaydreamController) []interface{}
 // NewDaydreamController returns a new DaydreamController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller
-func (ba *Babylon) NewDaydreamController(vrGamepad interface{}) *DaydreamController {
+func (ba *Babylon) NewDaydreamController(vrGamepad JSObject) *DaydreamController {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, vrGamepad)
+	args = append(args, vrGamepad.JSObject())
 
 	p := ba.ctx.Get("DaydreamController").New(args...)
 	return DaydreamControllerFromJSObject(p, ba.ctx)
@@ -64,7 +64,11 @@ func (d *DaydreamController) InitControllerMesh(scene *Scene, opts *DaydreamCont
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.MeshLoaded == nil {
 		args = append(args, js.Undefined())

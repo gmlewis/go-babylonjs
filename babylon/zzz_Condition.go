@@ -61,7 +61,7 @@ func (c *Condition) IsValid() bool {
 // Serialize calls the Serialize method on the Condition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.condition#serialize
-func (c *Condition) Serialize() interface{} {
+func (c *Condition) Serialize() js.Value {
 
 	retVal := c.p.Call("serialize")
 	return retVal

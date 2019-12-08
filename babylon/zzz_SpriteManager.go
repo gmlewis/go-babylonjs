@@ -49,7 +49,7 @@ type NewSpriteManagerOpts struct {
 // NewSpriteManager returns a new SpriteManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager
-func (ba *Babylon) NewSpriteManager(name string, imgUrl string, capacity float64, cellSize interface{}, scene *Scene, opts *NewSpriteManagerOpts) *SpriteManager {
+func (ba *Babylon) NewSpriteManager(name string, imgUrl string, capacity float64, cellSize JSObject, scene *Scene, opts *NewSpriteManagerOpts) *SpriteManager {
 	if opts == nil {
 		opts = &NewSpriteManagerOpts{}
 	}
@@ -59,7 +59,7 @@ func (ba *Babylon) NewSpriteManager(name string, imgUrl string, capacity float64
 	args = append(args, name)
 	args = append(args, imgUrl)
 	args = append(args, capacity)
-	args = append(args, cellSize)
+	args = append(args, cellSize.JSObject())
 	args = append(args, scene.JSObject())
 
 	if opts.Epsilon == nil {
@@ -111,8 +111,17 @@ func (s *SpriteManager) Intersects(ray *Ray, camera *Camera, opts *SpriteManager
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, ray.JSObject())
-	args = append(args, camera.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())
@@ -144,8 +153,17 @@ func (s *SpriteManager) MultiIntersects(ray *Ray, camera *Camera, opts *SpriteMa
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, ray.JSObject())
-	args = append(args, camera.JSObject())
+	if ray == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ray.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	if opts.Predicate == nil {
 		args = append(args, js.Undefined())

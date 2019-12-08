@@ -76,8 +76,17 @@ func (m *MaterialHelper) BindClipPlane(effect *Effect, scene *Scene) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
-	args = append(args, scene.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	m.p.Call("BindClipPlane", args...)
 }
@@ -89,8 +98,17 @@ func (m *MaterialHelper) BindEyePosition(effect *Effect, scene *Scene) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
-	args = append(args, scene.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	m.p.Call("BindEyePosition", args...)
 }
@@ -110,9 +128,23 @@ func (m *MaterialHelper) BindFogParameters(scene *Scene, mesh *AbstractMesh, eff
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, scene.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, effect.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	if opts.LinearSpace == nil {
 		args = append(args, js.Undefined())
@@ -139,10 +171,26 @@ func (m *MaterialHelper) BindLight(light *Light, lightIndex float64, scene *Scen
 
 	args := make([]interface{}, 0, 5+2)
 
-	args = append(args, light.JSObject())
+	if light == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, light.JSObject())
+	}
+
 	args = append(args, lightIndex)
-	args = append(args, scene.JSObject())
-	args = append(args, effect.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, useSpecular)
 
 	if opts.UsePhysicalLightFalloff == nil {
@@ -166,8 +214,18 @@ func (m *MaterialHelper) BindLightProperties(light *Light, effect *Effect, light
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, light.JSObject())
-	args = append(args, effect.JSObject())
+	if light == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, light.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
 	args = append(args, lightIndex)
 
 	m.p.Call("BindLightProperties", args...)
@@ -183,17 +241,36 @@ type MaterialHelperBindLightsOpts struct {
 // BindLights calls the BindLights method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#bindlights
-func (m *MaterialHelper) BindLights(scene *Scene, mesh *AbstractMesh, effect *Effect, defines interface{}, opts *MaterialHelperBindLightsOpts) {
+func (m *MaterialHelper) BindLights(scene *Scene, mesh *AbstractMesh, effect *Effect, defines JSObject, opts *MaterialHelperBindLightsOpts) {
 	if opts == nil {
 		opts = &MaterialHelperBindLightsOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+3)
 
-	args = append(args, scene.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, effect.JSObject())
-	args = append(args, defines)
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
 
 	if opts.MaxSimultaneousLights == nil {
 		args = append(args, js.Undefined())
@@ -217,13 +294,27 @@ func (m *MaterialHelper) BindLights(scene *Scene, mesh *AbstractMesh, effect *Ef
 // BindLogDepth calls the BindLogDepth method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#bindlogdepth
-func (m *MaterialHelper) BindLogDepth(defines interface{}, effect *Effect, scene *Scene) {
+func (m *MaterialHelper) BindLogDepth(defines JSObject, effect *Effect, scene *Scene) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, defines)
-	args = append(args, effect.JSObject())
-	args = append(args, scene.JSObject())
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	m.p.Call("BindLogDepth", args...)
 }
@@ -235,8 +326,17 @@ func (m *MaterialHelper) BindMorphTargetParameters(abstractMesh *AbstractMesh, e
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, abstractMesh.JSObject())
-	args = append(args, effect.JSObject())
+	if abstractMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, abstractMesh.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	m.p.Call("BindMorphTargetParameters", args...)
 }
@@ -248,8 +348,18 @@ func (m *MaterialHelper) BindTextureMatrix(texture *BaseTexture, uniformBuffer *
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, texture.JSObject())
-	args = append(args, uniformBuffer.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
+	if uniformBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, uniformBuffer.JSObject())
+	}
+
 	args = append(args, key)
 
 	m.p.Call("BindTextureMatrix", args...)
@@ -262,8 +372,17 @@ func (m *MaterialHelper) GetFogState(mesh *AbstractMesh, scene *Scene) bool {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, scene.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	retVal := m.p.Call("GetFogState", args...)
 	return retVal.Bool()
@@ -278,15 +397,24 @@ type MaterialHelperHandleFallbacksForShadowsOpts struct {
 // HandleFallbacksForShadows calls the HandleFallbacksForShadows method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#handlefallbacksforshadows
-func (m *MaterialHelper) HandleFallbacksForShadows(defines interface{}, fallbacks *EffectFallbacks, opts *MaterialHelperHandleFallbacksForShadowsOpts) float64 {
+func (m *MaterialHelper) HandleFallbacksForShadows(defines JSObject, fallbacks *EffectFallbacks, opts *MaterialHelperHandleFallbacksForShadowsOpts) float64 {
 	if opts == nil {
 		opts = &MaterialHelperHandleFallbacksForShadowsOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+2)
 
-	args = append(args, defines)
-	args = append(args, fallbacks.JSObject())
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
+	if fallbacks == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fallbacks.JSObject())
+	}
 
 	if opts.MaxSimultaneousLights == nil {
 		args = append(args, js.Undefined())
@@ -306,14 +434,29 @@ func (m *MaterialHelper) HandleFallbacksForShadows(defines interface{}, fallback
 // PrepareAttributesForBones calls the PrepareAttributesForBones method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#prepareattributesforbones
-func (m *MaterialHelper) PrepareAttributesForBones(attribs []string, mesh *AbstractMesh, defines interface{}, fallbacks *EffectFallbacks) {
+func (m *MaterialHelper) PrepareAttributesForBones(attribs []string, mesh *AbstractMesh, defines JSObject, fallbacks *EffectFallbacks) {
 
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, attribs)
-	args = append(args, mesh.JSObject())
-	args = append(args, defines)
-	args = append(args, fallbacks.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
+	if fallbacks == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fallbacks.JSObject())
+	}
 
 	m.p.Call("PrepareAttributesForBones", args...)
 }
@@ -326,7 +469,12 @@ func (m *MaterialHelper) PrepareAttributesForInstances(attribs []string, defines
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, attribs)
-	args = append(args, defines.JSObject())
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
 
 	m.p.Call("PrepareAttributesForInstances", args...)
 }
@@ -334,13 +482,23 @@ func (m *MaterialHelper) PrepareAttributesForInstances(attribs []string, defines
 // PrepareAttributesForMorphTargets calls the PrepareAttributesForMorphTargets method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#prepareattributesformorphtargets
-func (m *MaterialHelper) PrepareAttributesForMorphTargets(attribs []string, mesh *AbstractMesh, defines interface{}) {
+func (m *MaterialHelper) PrepareAttributesForMorphTargets(attribs []string, mesh *AbstractMesh, defines JSObject) {
 
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, attribs)
-	args = append(args, mesh.JSObject())
-	args = append(args, defines)
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
 
 	m.p.Call("PrepareAttributesForMorphTargets", args...)
 }
@@ -353,7 +511,13 @@ func (m *MaterialHelper) PrepareAttributesForMorphTargetsInfluencers(attribs []s
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, attribs)
-	args = append(args, mesh.JSObject())
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
 	args = append(args, influencers)
 
 	m.p.Call("PrepareAttributesForMorphTargetsInfluencers", args...)
@@ -368,16 +532,27 @@ type MaterialHelperPrepareDefinesForAttributesOpts struct {
 // PrepareDefinesForAttributes calls the PrepareDefinesForAttributes method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#preparedefinesforattributes
-func (m *MaterialHelper) PrepareDefinesForAttributes(mesh *AbstractMesh, defines interface{}, useVertexColor bool, useBones bool, opts *MaterialHelperPrepareDefinesForAttributesOpts) bool {
+func (m *MaterialHelper) PrepareDefinesForAttributes(mesh *AbstractMesh, defines JSObject, useVertexColor bool, useBones bool, opts *MaterialHelperPrepareDefinesForAttributesOpts) bool {
 	if opts == nil {
 		opts = &MaterialHelperPrepareDefinesForAttributesOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, defines)
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, useVertexColor)
+
 	args = append(args, useBones)
 
 	if opts.UseMorphTargets == nil {
@@ -398,12 +573,21 @@ func (m *MaterialHelper) PrepareDefinesForAttributes(mesh *AbstractMesh, defines
 // PrepareDefinesForBones calls the PrepareDefinesForBones method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#preparedefinesforbones
-func (m *MaterialHelper) PrepareDefinesForBones(mesh *AbstractMesh, defines interface{}) {
+func (m *MaterialHelper) PrepareDefinesForBones(mesh *AbstractMesh, defines JSObject) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, defines)
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
 
 	m.p.Call("PrepareDefinesForBones", args...)
 }
@@ -416,16 +600,31 @@ type MaterialHelperPrepareDefinesForFrameBoundValuesOpts struct {
 // PrepareDefinesForFrameBoundValues calls the PrepareDefinesForFrameBoundValues method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#preparedefinesforframeboundvalues
-func (m *MaterialHelper) PrepareDefinesForFrameBoundValues(scene *Scene, engine *Engine, defines interface{}, useInstances bool, opts *MaterialHelperPrepareDefinesForFrameBoundValuesOpts) {
+func (m *MaterialHelper) PrepareDefinesForFrameBoundValues(scene *Scene, engine *Engine, defines JSObject, useInstances bool, opts *MaterialHelperPrepareDefinesForFrameBoundValuesOpts) {
 	if opts == nil {
 		opts = &MaterialHelperPrepareDefinesForFrameBoundValuesOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+1)
 
-	args = append(args, scene.JSObject())
-	args = append(args, engine.JSObject())
-	args = append(args, defines)
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, useInstances)
 
 	if opts.UseClipPlane == nil {
@@ -440,16 +639,38 @@ func (m *MaterialHelper) PrepareDefinesForFrameBoundValues(scene *Scene, engine 
 // PrepareDefinesForLight calls the PrepareDefinesForLight method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#preparedefinesforlight
-func (m *MaterialHelper) PrepareDefinesForLight(scene *Scene, mesh *AbstractMesh, light *Light, lightIndex float64, defines interface{}, specularSupported bool, state js.Value) {
+func (m *MaterialHelper) PrepareDefinesForLight(scene *Scene, mesh *AbstractMesh, light *Light, lightIndex float64, defines JSObject, specularSupported bool, state js.Value) {
 
 	args := make([]interface{}, 0, 7+0)
 
-	args = append(args, scene.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, light.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if light == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, light.JSObject())
+	}
+
 	args = append(args, lightIndex)
-	args = append(args, defines)
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, specularSupported)
+
 	args = append(args, state)
 
 	m.p.Call("PrepareDefinesForLight", args...)
@@ -464,16 +685,31 @@ type MaterialHelperPrepareDefinesForLightsOpts struct {
 // PrepareDefinesForLights calls the PrepareDefinesForLights method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#preparedefinesforlights
-func (m *MaterialHelper) PrepareDefinesForLights(scene *Scene, mesh *AbstractMesh, defines interface{}, specularSupported bool, opts *MaterialHelperPrepareDefinesForLightsOpts) bool {
+func (m *MaterialHelper) PrepareDefinesForLights(scene *Scene, mesh *AbstractMesh, defines JSObject, specularSupported bool, opts *MaterialHelperPrepareDefinesForLightsOpts) bool {
 	if opts == nil {
 		opts = &MaterialHelperPrepareDefinesForLightsOpts{}
 	}
 
 	args := make([]interface{}, 0, 4+2)
 
-	args = append(args, scene.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, defines)
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, specularSupported)
 
 	if opts.MaxSimultaneousLights == nil {
@@ -494,12 +730,22 @@ func (m *MaterialHelper) PrepareDefinesForLights(scene *Scene, mesh *AbstractMes
 // PrepareDefinesForMergedUV calls the PrepareDefinesForMergedUV method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#preparedefinesformergeduv
-func (m *MaterialHelper) PrepareDefinesForMergedUV(texture *BaseTexture, defines interface{}, key string) {
+func (m *MaterialHelper) PrepareDefinesForMergedUV(texture *BaseTexture, defines JSObject, key string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, texture.JSObject())
-	args = append(args, defines)
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
+
 	args = append(args, key)
 
 	m.p.Call("PrepareDefinesForMergedUV", args...)
@@ -508,17 +754,35 @@ func (m *MaterialHelper) PrepareDefinesForMergedUV(texture *BaseTexture, defines
 // PrepareDefinesForMisc calls the PrepareDefinesForMisc method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#preparedefinesformisc
-func (m *MaterialHelper) PrepareDefinesForMisc(mesh *AbstractMesh, scene *Scene, useLogarithmicDepth bool, pointsCloud bool, fogEnabled bool, alphaTest bool, defines interface{}) {
+func (m *MaterialHelper) PrepareDefinesForMisc(mesh *AbstractMesh, scene *Scene, useLogarithmicDepth bool, pointsCloud bool, fogEnabled bool, alphaTest bool, defines JSObject) {
 
 	args := make([]interface{}, 0, 7+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, scene.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, useLogarithmicDepth)
+
 	args = append(args, pointsCloud)
+
 	args = append(args, fogEnabled)
+
 	args = append(args, alphaTest)
-	args = append(args, defines)
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
 
 	m.p.Call("PrepareDefinesForMisc", args...)
 }
@@ -526,12 +790,21 @@ func (m *MaterialHelper) PrepareDefinesForMisc(mesh *AbstractMesh, scene *Scene,
 // PrepareDefinesForMorphTargets calls the PrepareDefinesForMorphTargets method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#preparedefinesformorphtargets
-func (m *MaterialHelper) PrepareDefinesForMorphTargets(mesh *AbstractMesh, defines interface{}) {
+func (m *MaterialHelper) PrepareDefinesForMorphTargets(mesh *AbstractMesh, defines JSObject) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, defines)
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
 
 	m.p.Call("PrepareDefinesForMorphTargets", args...)
 }
@@ -539,19 +812,28 @@ func (m *MaterialHelper) PrepareDefinesForMorphTargets(mesh *AbstractMesh, defin
 // PrepareDefinesForMultiview calls the PrepareDefinesForMultiview method on the MaterialHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.materialhelper#preparedefinesformultiview
-func (m *MaterialHelper) PrepareDefinesForMultiview(scene *Scene, defines interface{}) {
+func (m *MaterialHelper) PrepareDefinesForMultiview(scene *Scene, defines JSObject) {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, scene.JSObject())
-	args = append(args, defines)
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if defines == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, defines.JSObject())
+	}
 
 	m.p.Call("PrepareDefinesForMultiview", args...)
 }
 
 // MaterialHelperPrepareUniformsAndSamplersForLightOpts contains optional parameters for MaterialHelper.PrepareUniformsAndSamplersForLight.
 type MaterialHelperPrepareUniformsAndSamplersForLightOpts struct {
-	ProjectedLightTexture *interface{}
+	ProjectedLightTexture interface{}
 	UniformBuffersList    []string
 }
 
@@ -566,7 +848,9 @@ func (m *MaterialHelper) PrepareUniformsAndSamplersForLight(lightIndex float64, 
 	args := make([]interface{}, 0, 3+2)
 
 	args = append(args, lightIndex)
+
 	args = append(args, uniformsList)
+
 	args = append(args, samplersList)
 
 	if opts.ProjectedLightTexture == nil {
@@ -586,7 +870,7 @@ func (m *MaterialHelper) PrepareUniformsAndSamplersForLight(lightIndex float64, 
 // MaterialHelperPrepareUniformsAndSamplersListOpts contains optional parameters for MaterialHelper.PrepareUniformsAndSamplersList.
 type MaterialHelperPrepareUniformsAndSamplersListOpts struct {
 	SamplersList          []string
-	Defines               *interface{}
+	Defines               interface{}
 	MaxSimultaneousLights *float64
 }
 

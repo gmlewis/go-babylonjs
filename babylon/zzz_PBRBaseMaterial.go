@@ -61,9 +61,23 @@ func (p *PBRBaseMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *Sub
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	p.p.Call("bindForSubMesh", args...)
 }
@@ -122,7 +136,11 @@ func (p *PBRBaseMaterial) ForceCompilation(mesh *AbstractMesh, opts *PBRBaseMate
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
@@ -185,7 +203,11 @@ func (p *PBRBaseMaterial) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := p.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -215,8 +237,17 @@ func (p *PBRBaseMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -244,7 +275,11 @@ func (p *PBRBaseMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := p.p.Call("needAlphaBlendingForMesh", args...)
 	return retVal.Bool()

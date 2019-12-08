@@ -52,7 +52,12 @@ func (p *ParticleHelper) CreateAsync(jsType string, scene *Scene, opts *Particle
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, jsType)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.Gpu == nil {
 		args = append(args, js.Undefined())
@@ -81,7 +86,11 @@ func (p *ParticleHelper) CreateDefault(emitter *AbstractMesh, opts *ParticleHelp
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, emitter.JSObject())
+	if emitter == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, emitter.JSObject())
+	}
 
 	if opts.Capacity == nil {
 		args = append(args, js.Undefined())

@@ -87,7 +87,11 @@ func (c *CylinderParticleEmitter) ApplyToShader(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	c.p.Call("applyToShader", args...)
 }
@@ -122,11 +126,15 @@ func (c *CylinderParticleEmitter) GetEffectDefines() string {
 // Parse calls the Parse method on the CylinderParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#parse
-func (c *CylinderParticleEmitter) Parse(serializationObject interface{}) {
+func (c *CylinderParticleEmitter) Parse(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	c.p.Call("parse", args...)
 }
@@ -134,7 +142,7 @@ func (c *CylinderParticleEmitter) Parse(serializationObject interface{}) {
 // Serialize calls the Serialize method on the CylinderParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#serialize
-func (c *CylinderParticleEmitter) Serialize() interface{} {
+func (c *CylinderParticleEmitter) Serialize() js.Value {
 
 	retVal := c.p.Call("serialize")
 	return retVal
@@ -147,9 +155,23 @@ func (c *CylinderParticleEmitter) StartDirectionFunction(worldMatrix *Matrix, di
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, worldMatrix.JSObject())
-	args = append(args, directionToUpdate.JSObject())
-	args = append(args, particle.JSObject())
+	if worldMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMatrix.JSObject())
+	}
+
+	if directionToUpdate == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, directionToUpdate.JSObject())
+	}
+
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	c.p.Call("startDirectionFunction", args...)
 }
@@ -161,9 +183,23 @@ func (c *CylinderParticleEmitter) StartPositionFunction(worldMatrix *Matrix, pos
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, worldMatrix.JSObject())
-	args = append(args, positionToUpdate.JSObject())
-	args = append(args, particle.JSObject())
+	if worldMatrix == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, worldMatrix.JSObject())
+	}
+
+	if positionToUpdate == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, positionToUpdate.JSObject())
+	}
+
+	if particle == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, particle.JSObject())
+	}
 
 	c.p.Call("startPositionFunction", args...)
 }

@@ -44,7 +44,9 @@ func (g *GradientHelper) GetCurrentGradient(ratio float64, gradients []*IValueGr
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, ratio)
+
 	args = append(args, IValueGradientArrayToJSArray(gradients))
+
 	args = append(args, js.FuncOf(updateFunc))
 
 	g.p.Call("GetCurrentGradient", args...)

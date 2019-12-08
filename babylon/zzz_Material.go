@@ -79,7 +79,11 @@ func (m *Material) Bind(world *Matrix, opts *MaterialBindOpts) {
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, world.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
 
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
@@ -97,9 +101,23 @@ func (m *Material) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	m.p.Call("bindForSubMesh", args...)
 }
@@ -111,7 +129,11 @@ func (m *Material) BindOnlyWorldMatrix(world *Matrix) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, world.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
 
 	m.p.Call("bindOnlyWorldMatrix", args...)
 }
@@ -123,8 +145,17 @@ func (m *Material) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffe
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, effect.JSObject())
-	args = append(args, sceneUbo.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
+
+	if sceneUbo == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, sceneUbo.JSObject())
+	}
 
 	m.p.Call("bindSceneUniformBuffer", args...)
 }
@@ -136,7 +167,11 @@ func (m *Material) BindView(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	m.p.Call("bindView", args...)
 }
@@ -148,7 +183,11 @@ func (m *Material) BindViewProjection(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	m.p.Call("bindViewProjection", args...)
 }
@@ -219,7 +258,11 @@ func (m *Material) ForceCompilation(mesh *AbstractMesh, opts *MaterialForceCompi
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.OnCompiled == nil {
 		args = append(args, js.Undefined())
@@ -251,7 +294,11 @@ func (m *Material) ForceCompilationAsync(mesh *AbstractMesh, opts *MaterialForce
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	args = append(args, opts.Options)
 
@@ -336,7 +383,11 @@ func (m *Material) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := m.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -388,8 +439,17 @@ func (m *Material) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *BaseSubMesh, o
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -437,7 +497,11 @@ func (m *Material) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := m.p.Call("needAlphaBlendingForMesh", args...)
 	return retVal.Bool()
@@ -455,12 +519,22 @@ func (m *Material) NeedAlphaTesting() bool {
 // Parse calls the Parse method on the Material object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#parse
-func (m *Material) Parse(parsedMaterial interface{}, scene *Scene, rootUrl string) *Material {
+func (m *Material) Parse(parsedMaterial JSObject, scene *Scene, rootUrl string) *Material {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedMaterial)
-	args = append(args, scene.JSObject())
+	if parsedMaterial == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedMaterial.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := m.p.Call("Parse", args...)
@@ -470,7 +544,7 @@ func (m *Material) Parse(parsedMaterial interface{}, scene *Scene, rootUrl strin
 // Serialize calls the Serialize method on the Material object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#serialize
-func (m *Material) Serialize() interface{} {
+func (m *Material) Serialize() js.Value {
 
 	retVal := m.p.Call("serialize")
 	return retVal
@@ -944,7 +1018,7 @@ func (m *Material) SetLineStripDrawMode(LineStripDrawMode float64) *Material {
 // Metadata returns the Metadata property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#metadata
-func (m *Material) Metadata() interface{} {
+func (m *Material) Metadata() js.Value {
 	retVal := m.p.Get("metadata")
 	return retVal
 }
@@ -952,8 +1026,8 @@ func (m *Material) Metadata() interface{} {
 // SetMetadata sets the Metadata property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#metadata
-func (m *Material) SetMetadata(metadata interface{}) *Material {
-	m.p.Set("metadata", metadata)
+func (m *Material) SetMetadata(metadata JSObject) *Material {
+	m.p.Set("metadata", metadata.JSObject())
 	return m
 }
 
@@ -1184,7 +1258,7 @@ func (m *Material) SetPointsCloud(pointsCloud bool) *Material {
 // ReservedDataStore returns the ReservedDataStore property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#reserveddatastore
-func (m *Material) ReservedDataStore() interface{} {
+func (m *Material) ReservedDataStore() js.Value {
 	retVal := m.p.Get("reservedDataStore")
 	return retVal
 }
@@ -1192,8 +1266,8 @@ func (m *Material) ReservedDataStore() interface{} {
 // SetReservedDataStore sets the ReservedDataStore property of class Material.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material#reserveddatastore
-func (m *Material) SetReservedDataStore(reservedDataStore interface{}) *Material {
-	m.p.Set("reservedDataStore", reservedDataStore)
+func (m *Material) SetReservedDataStore(reservedDataStore JSObject) *Material {
+	m.p.Set("reservedDataStore", reservedDataStore.JSObject())
 	return m
 }
 

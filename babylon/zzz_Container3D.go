@@ -68,7 +68,11 @@ func (c *Container3D) AddControl(control *Control3D) *Container3D {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := c.p.Call("addControl", args...)
 	return Container3DFromJSObject(retVal, c.ctx)
@@ -81,7 +85,11 @@ func (c *Container3D) ContainsControl(control *Control3D) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := c.p.Call("containsControl", args...)
 	return retVal.Bool()
@@ -102,7 +110,11 @@ func (c *Container3D) RemoveControl(control *Control3D) *Container3D {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, control.JSObject())
+	if control == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, control.JSObject())
+	}
 
 	retVal := c.p.Call("removeControl", args...)
 	return Container3DFromJSObject(retVal, c.ctx)

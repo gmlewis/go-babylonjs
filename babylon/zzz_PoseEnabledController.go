@@ -39,11 +39,11 @@ func PoseEnabledControllerArrayToJSArray(array []*PoseEnabledController) []inter
 // NewPoseEnabledController returns a new PoseEnabledController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller
-func (ba *Babylon) NewPoseEnabledController(browserGamepad interface{}) *PoseEnabledController {
+func (ba *Babylon) NewPoseEnabledController(browserGamepad JSObject) *PoseEnabledController {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, browserGamepad)
+	args = append(args, browserGamepad.JSObject())
 
 	p := ba.ctx.Get("PoseEnabledController").New(args...)
 	return PoseEnabledControllerFromJSObject(p, ba.ctx)
@@ -56,7 +56,11 @@ func (p *PoseEnabledController) AttachToMesh(mesh *AbstractMesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	p.p.Call("attachToMesh", args...)
 }
@@ -68,7 +72,11 @@ func (p *PoseEnabledController) AttachToPoseControlledCamera(camera *TargetCamer
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, camera.JSObject())
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
 
 	p.p.Call("attachToPoseControlledCamera", args...)
 }

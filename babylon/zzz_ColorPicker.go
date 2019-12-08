@@ -68,7 +68,12 @@ func (c *ColorPicker) ShowPickerDialogAsync(advancedTexture *AdvancedDynamicText
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, advancedTexture.JSObject())
+	if advancedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, advancedTexture.JSObject())
+	}
+
 	args = append(args, options)
 
 	retVal := c.p.Call("ShowPickerDialogAsync", args...)
@@ -82,9 +87,20 @@ func (c *ColorPicker) _onPointerDown(target *Control, coordinates *Vector2, poin
 
 	args := make([]interface{}, 0, 4+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
+
 	args = append(args, buttonIndex)
 
 	retVal := c.p.Call("_onPointerDown", args...)
@@ -98,8 +114,18 @@ func (c *ColorPicker) _onPointerMove(target *Control, coordinates *Vector2, poin
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
 
 	c.p.Call("_onPointerMove", args...)
@@ -112,10 +138,22 @@ func (c *ColorPicker) _onPointerUp(target *Control, coordinates *Vector2, pointe
 
 	args := make([]interface{}, 0, 5+0)
 
-	args = append(args, target.JSObject())
-	args = append(args, coordinates.JSObject())
+	if target == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, target.JSObject())
+	}
+
+	if coordinates == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, coordinates.JSObject())
+	}
+
 	args = append(args, pointerId)
+
 	args = append(args, buttonIndex)
+
 	args = append(args, notifyClick)
 
 	c.p.Call("_onPointerUp", args...)

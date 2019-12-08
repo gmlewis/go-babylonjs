@@ -98,7 +98,11 @@ func (a *AxisScaleGizmo) SetCustomMesh(mesh *Mesh, opts *AxisScaleGizmoSetCustom
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.UseGizmoMaterial == nil {
 		args = append(args, js.Undefined())

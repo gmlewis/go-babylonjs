@@ -57,7 +57,13 @@ func (p *PBRClearCoatConfiguration) AddFallbacks(defines js.Value, fallbacks *Ef
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, defines)
-	args = append(args, fallbacks.JSObject())
+
+	if fallbacks == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, fallbacks.JSObject())
+	}
+
 	args = append(args, currentRank)
 
 	retVal := p.p.Call("AddFallbacks", args...)
@@ -95,12 +101,30 @@ func (p *PBRClearCoatConfiguration) BindForSubMesh(uniformBuffer *UniformBuffer,
 
 	args := make([]interface{}, 0, 7+0)
 
-	args = append(args, uniformBuffer.JSObject())
-	args = append(args, scene.JSObject())
-	args = append(args, engine.JSObject())
+	if uniformBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, uniformBuffer.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
 	args = append(args, disableBumpMap)
+
 	args = append(args, isFrozen)
+
 	args = append(args, invertNormalMapX)
+
 	args = append(args, invertNormalMapY)
 
 	p.p.Call("bindForSubMesh", args...)
@@ -113,7 +137,11 @@ func (p *PBRClearCoatConfiguration) CopyTo(clearCoatConfiguration *PBRClearCoatC
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, clearCoatConfiguration.JSObject())
+	if clearCoatConfiguration == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, clearCoatConfiguration.JSObject())
+	}
 
 	p.p.Call("copyTo", args...)
 }
@@ -182,7 +210,11 @@ func (p *PBRClearCoatConfiguration) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	retVal := p.p.Call("hasTexture", args...)
 	return retVal.Bool()
@@ -196,8 +228,19 @@ func (p *PBRClearCoatConfiguration) IsReadyForSubMesh(defines js.Value, scene *S
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, defines)
-	args = append(args, scene.JSObject())
-	args = append(args, engine.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
 	args = append(args, disableBumpMap)
 
 	retVal := p.p.Call("isReadyForSubMesh", args...)
@@ -207,12 +250,22 @@ func (p *PBRClearCoatConfiguration) IsReadyForSubMesh(defines js.Value, scene *S
 // Parse calls the Parse method on the PBRClearCoatConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#parse
-func (p *PBRClearCoatConfiguration) Parse(source interface{}, scene *Scene, rootUrl string) {
+func (p *PBRClearCoatConfiguration) Parse(source JSObject, scene *Scene, rootUrl string) {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	p.p.Call("parse", args...)
@@ -226,7 +279,12 @@ func (p *PBRClearCoatConfiguration) PrepareDefines(defines js.Value, scene *Scen
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, defines)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	p.p.Call("prepareDefines", args...)
 }
@@ -238,7 +296,11 @@ func (p *PBRClearCoatConfiguration) PrepareUniformBuffer(uniformBuffer *UniformB
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, uniformBuffer.JSObject())
+	if uniformBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, uniformBuffer.JSObject())
+	}
 
 	p.p.Call("PrepareUniformBuffer", args...)
 }
@@ -246,7 +308,7 @@ func (p *PBRClearCoatConfiguration) PrepareUniformBuffer(uniformBuffer *UniformB
 // Serialize calls the Serialize method on the PBRClearCoatConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#serialize
-func (p *PBRClearCoatConfiguration) Serialize() interface{} {
+func (p *PBRClearCoatConfiguration) Serialize() js.Value {
 
 	retVal := p.p.Call("serialize")
 	return retVal

@@ -83,7 +83,11 @@ func (g *Geometry) ApplyToMesh(mesh *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	g.p.Call("applyToMesh", args...)
 }
@@ -108,7 +112,11 @@ func (g *Geometry) CreateGeometryForMesh(mesh *Mesh) *Geometry {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	retVal := g.p.Call("CreateGeometryForMesh", args...)
 	return GeometryFromJSObject(retVal, g.ctx)
@@ -129,7 +137,12 @@ func (g *Geometry) ExtractFromMesh(mesh *Mesh, id string) *Geometry {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
 	args = append(args, id)
 
 	retVal := g.p.Call("ExtractFromMesh", args...)
@@ -339,7 +352,11 @@ func (g *Geometry) Load(scene *Scene, opts *GeometryLoadOpts) {
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, scene.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.OnLoaded == nil {
 		args = append(args, js.Undefined())
@@ -353,12 +370,22 @@ func (g *Geometry) Load(scene *Scene, opts *GeometryLoadOpts) {
 // Parse calls the Parse method on the Geometry object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#parse
-func (g *Geometry) Parse(parsedVertexData interface{}, scene *Scene, rootUrl string) *Geometry {
+func (g *Geometry) Parse(parsedVertexData JSObject, scene *Scene, rootUrl string) *Geometry {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedVertexData)
-	args = append(args, scene.JSObject())
+	if parsedVertexData == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedVertexData.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := g.p.Call("Parse", args...)
@@ -389,7 +416,11 @@ func (g *Geometry) ReleaseForMesh(mesh *Mesh, opts *GeometryReleaseForMeshOpts) 
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, mesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
 
 	if opts.ShouldDispose == nil {
 		args = append(args, js.Undefined())
@@ -415,7 +446,7 @@ func (g *Geometry) RemoveVerticesData(kind string) {
 // Serialize calls the Serialize method on the Geometry object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#serialize
-func (g *Geometry) Serialize() interface{} {
+func (g *Geometry) Serialize() js.Value {
 
 	retVal := g.p.Call("serialize")
 	return retVal
@@ -424,7 +455,7 @@ func (g *Geometry) Serialize() interface{} {
 // SerializeVerticeData calls the SerializeVerticeData method on the Geometry object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry#serializeverticedata
-func (g *Geometry) SerializeVerticeData() interface{} {
+func (g *Geometry) SerializeVerticeData() js.Value {
 
 	retVal := g.p.Call("serializeVerticeData")
 	return retVal
@@ -445,7 +476,11 @@ func (g *Geometry) SetAllVerticesData(vertexData *VertexData, opts *GeometrySetA
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, vertexData.JSObject())
+	if vertexData == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, vertexData.JSObject())
+	}
 
 	if opts.Updatable == nil {
 		args = append(args, js.Undefined())
@@ -503,7 +538,11 @@ func (g *Geometry) SetVerticesBuffer(buffer *VertexBuffer, opts *GeometrySetVert
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, buffer.JSObject())
+	if buffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, buffer.JSObject())
+	}
 
 	if opts.TotalVertices == nil {
 		args = append(args, js.Undefined())
@@ -531,6 +570,7 @@ func (g *Geometry) SetVerticesData(kind string, data js.Value, opts *GeometrySet
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, kind)
+
 	args = append(args, data)
 
 	if opts.Updatable == nil {
@@ -603,6 +643,7 @@ func (g *Geometry) UpdateVerticesData(kind string, data js.Value, opts *Geometry
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, kind)
+
 	args = append(args, data)
 
 	if opts.UpdateExtends == nil {
@@ -630,7 +671,9 @@ func (g *Geometry) UpdateVerticesDataDirectly(kind string, data []float64, offse
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, kind)
+
 	args = append(args, data)
+
 	args = append(args, offset)
 
 	if opts.UseBytes == nil {

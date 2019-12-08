@@ -46,14 +46,14 @@ type NewCombineActionOpts struct {
 // NewCombineAction returns a new CombineAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.combineaction
-func (ba *Babylon) NewCombineAction(triggerOptions interface{}, children []*Action, opts *NewCombineActionOpts) *CombineAction {
+func (ba *Babylon) NewCombineAction(triggerOptions JSObject, children []*Action, opts *NewCombineActionOpts) *CombineAction {
 	if opts == nil {
 		opts = &NewCombineActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, triggerOptions)
+	args = append(args, triggerOptions.JSObject())
 	args = append(args, children)
 
 	if opts.Condition == nil {
@@ -73,7 +73,11 @@ func (c *CombineAction) Execute(evt *ActionEvent) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, evt.JSObject())
+	if evt == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, evt.JSObject())
+	}
 
 	c.p.Call("execute", args...)
 }
@@ -81,11 +85,15 @@ func (c *CombineAction) Execute(evt *ActionEvent) {
 // Serialize calls the Serialize method on the CombineAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.combineaction#serialize
-func (c *CombineAction) Serialize(parent interface{}) interface{} {
+func (c *CombineAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := c.p.Call("serialize", args...)
 	return retVal

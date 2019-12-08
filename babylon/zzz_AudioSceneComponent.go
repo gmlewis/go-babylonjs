@@ -57,7 +57,11 @@ func (a *AudioSceneComponent) AddFromContainer(container *AbstractScene) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	a.p.Call("addFromContainer", args...)
 }
@@ -117,7 +121,11 @@ func (a *AudioSceneComponent) RemoveFromContainer(container *AbstractScene, opts
 
 	args := make([]interface{}, 0, 1+1)
 
-	args = append(args, container.JSObject())
+	if container == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, container.JSObject())
+	}
 
 	if opts.Dispose == nil {
 		args = append(args, js.Undefined())
@@ -131,11 +139,15 @@ func (a *AudioSceneComponent) RemoveFromContainer(container *AbstractScene, opts
 // Serialize calls the Serialize method on the AudioSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#serialize
-func (a *AudioSceneComponent) Serialize(serializationObject interface{}) {
+func (a *AudioSceneComponent) Serialize(serializationObject JSObject) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, serializationObject)
+	if serializationObject == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, serializationObject.JSObject())
+	}
 
 	a.p.Call("serialize", args...)
 }

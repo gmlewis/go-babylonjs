@@ -70,8 +70,17 @@ func (c *CustomOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) bool
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, scene.JSObject())
-	args = append(args, optimizer.JSObject())
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
+	if optimizer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, optimizer.JSObject())
+	}
 
 	retVal := c.p.Call("apply", args...)
 	return retVal.Bool()

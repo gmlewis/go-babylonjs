@@ -57,9 +57,23 @@ func (g *GradientMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *Su
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, world.JSObject())
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if world == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, world.JSObject())
+	}
+
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	g.p.Call("bindForSubMesh", args...)
 }
@@ -147,8 +161,17 @@ func (g *GradientMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMes
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, mesh.JSObject())
-	args = append(args, subMesh.JSObject())
+	if mesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, mesh.JSObject())
+	}
+
+	if subMesh == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, subMesh.JSObject())
+	}
 
 	if opts.UseInstances == nil {
 		args = append(args, js.Undefined())
@@ -181,12 +204,22 @@ func (g *GradientMaterial) NeedAlphaTesting() bool {
 // Parse calls the Parse method on the GradientMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#parse
-func (g *GradientMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *GradientMaterial {
+func (g *GradientMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *GradientMaterial {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, source)
-	args = append(args, scene.JSObject())
+	if source == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, source.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := g.p.Call("Parse", args...)
@@ -196,7 +229,7 @@ func (g *GradientMaterial) Parse(source interface{}, scene *Scene, rootUrl strin
 // Serialize calls the Serialize method on the GradientMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#serialize
-func (g *GradientMaterial) Serialize() interface{} {
+func (g *GradientMaterial) Serialize() js.Value {
 
 	retVal := g.p.Call("serialize")
 	return retVal

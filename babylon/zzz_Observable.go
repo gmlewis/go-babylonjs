@@ -58,7 +58,7 @@ func (ba *Babylon) NewObservable(onObserverAdded JSFunc) *Observable {
 type ObservableAddOpts struct {
 	Mask                  *float64
 	InsertFirst           *bool
-	Scope                 *interface{}
+	Scope                 interface{}
 	UnregisterOnFirstCall *bool
 }
 
@@ -170,7 +170,11 @@ func (o *Observable) MakeObserverBottomPriority(observer *Observer) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, observer.JSObject())
+	if observer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, observer.JSObject())
+	}
 
 	o.p.Call("makeObserverBottomPriority", args...)
 }
@@ -182,7 +186,11 @@ func (o *Observable) MakeObserverTopPriority(observer *Observer) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, observer.JSObject())
+	if observer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, observer.JSObject())
+	}
 
 	o.p.Call("makeObserverTopPriority", args...)
 }
@@ -202,8 +210,17 @@ func (o *Observable) NotifyObserver(observer *Observer, eventData *T, opts *Obse
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, observer.JSObject())
-	args = append(args, eventData.JSObject())
+	if observer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, observer.JSObject())
+	}
+
+	if eventData == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, eventData.JSObject())
+	}
 
 	if opts.Mask == nil {
 		args = append(args, js.Undefined())
@@ -217,8 +234,8 @@ func (o *Observable) NotifyObserver(observer *Observer, eventData *T, opts *Obse
 // ObservableNotifyObserversOpts contains optional parameters for Observable.NotifyObservers.
 type ObservableNotifyObserversOpts struct {
 	Mask          *float64
-	Target        *interface{}
-	CurrentTarget *interface{}
+	Target        interface{}
+	CurrentTarget interface{}
 }
 
 // NotifyObservers calls the NotifyObservers method on the Observable object.
@@ -231,7 +248,11 @@ func (o *Observable) NotifyObservers(eventData *T, opts *ObservableNotifyObserve
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, eventData.JSObject())
+	if eventData == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, eventData.JSObject())
+	}
 
 	if opts.Mask == nil {
 		args = append(args, js.Undefined())
@@ -256,8 +277,8 @@ func (o *Observable) NotifyObservers(eventData *T, opts *ObservableNotifyObserve
 // ObservableNotifyObserversWithPromiseOpts contains optional parameters for Observable.NotifyObserversWithPromise.
 type ObservableNotifyObserversWithPromiseOpts struct {
 	Mask          *float64
-	Target        *interface{}
-	CurrentTarget *interface{}
+	Target        interface{}
+	CurrentTarget interface{}
 }
 
 // NotifyObserversWithPromise calls the NotifyObserversWithPromise method on the Observable object.
@@ -270,7 +291,11 @@ func (o *Observable) NotifyObserversWithPromise(eventData *T, opts *ObservableNo
 
 	args := make([]interface{}, 0, 1+3)
 
-	args = append(args, eventData.JSObject())
+	if eventData == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, eventData.JSObject())
+	}
 
 	if opts.Mask == nil {
 		args = append(args, js.Undefined())
@@ -299,7 +324,11 @@ func (o *Observable) Remove(observer *Observer) bool {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, observer.JSObject())
+	if observer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, observer.JSObject())
+	}
 
 	retVal := o.p.Call("remove", args...)
 	return retVal.Bool()
@@ -307,7 +336,7 @@ func (o *Observable) Remove(observer *Observer) bool {
 
 // ObservableRemoveCallbackOpts contains optional parameters for Observable.RemoveCallback.
 type ObservableRemoveCallbackOpts struct {
-	Scope *interface{}
+	Scope interface{}
 }
 
 // RemoveCallback calls the RemoveCallback method on the Observable object.

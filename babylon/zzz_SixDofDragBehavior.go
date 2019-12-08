@@ -54,7 +54,11 @@ func (s *SixDofDragBehavior) Attach(ownerNode *Mesh) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, ownerNode.JSObject())
+	if ownerNode == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, ownerNode.JSObject())
+	}
 
 	s.p.Call("attach", args...)
 }

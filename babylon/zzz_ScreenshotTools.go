@@ -52,9 +52,23 @@ func (s *ScreenshotTools) CreateScreenshot(engine *Engine, camera *Camera, size 
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, engine.JSObject())
-	args = append(args, camera.JSObject())
-	args = append(args, size.JSObject())
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
+
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
 
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
@@ -78,16 +92,30 @@ type ScreenshotToolsCreateScreenshotAsyncOpts struct {
 // CreateScreenshotAsync calls the CreateScreenshotAsync method on the ScreenshotTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.screenshottools#createscreenshotasync
-func (s *ScreenshotTools) CreateScreenshotAsync(engine *Engine, camera *Camera, size interface{}, opts *ScreenshotToolsCreateScreenshotAsyncOpts) *Promise {
+func (s *ScreenshotTools) CreateScreenshotAsync(engine *Engine, camera *Camera, size JSObject, opts *ScreenshotToolsCreateScreenshotAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ScreenshotToolsCreateScreenshotAsyncOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+1)
 
-	args = append(args, engine.JSObject())
-	args = append(args, camera.JSObject())
-	args = append(args, size)
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
+
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
 
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())
@@ -118,9 +146,23 @@ func (s *ScreenshotTools) CreateScreenshotUsingRenderTarget(engine *Engine, came
 
 	args := make([]interface{}, 0, 3+5)
 
-	args = append(args, engine.JSObject())
-	args = append(args, camera.JSObject())
-	args = append(args, size.JSObject())
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
+
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
 
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
@@ -162,16 +204,30 @@ type ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts struct {
 // CreateScreenshotUsingRenderTargetAsync calls the CreateScreenshotUsingRenderTargetAsync method on the ScreenshotTools object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.screenshottools#createscreenshotusingrendertargetasync
-func (s *ScreenshotTools) CreateScreenshotUsingRenderTargetAsync(engine *Engine, camera *Camera, size interface{}, opts *ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts) *Promise {
+func (s *ScreenshotTools) CreateScreenshotUsingRenderTargetAsync(engine *Engine, camera *Camera, size JSObject, opts *ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts) *Promise {
 	if opts == nil {
 		opts = &ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts{}
 	}
 
 	args := make([]interface{}, 0, 3+4)
 
-	args = append(args, engine.JSObject())
-	args = append(args, camera.JSObject())
-	args = append(args, size)
+	if engine == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, engine.JSObject())
+	}
+
+	if camera == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, camera.JSObject())
+	}
+
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
 
 	if opts.MimeType == nil {
 		args = append(args, js.Undefined())

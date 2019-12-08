@@ -44,14 +44,14 @@ type NewStopSoundActionOpts struct {
 // NewStopSoundAction returns a new StopSoundAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stopsoundaction
-func (ba *Babylon) NewStopSoundAction(triggerOptions interface{}, sound *Sound, opts *NewStopSoundActionOpts) *StopSoundAction {
+func (ba *Babylon) NewStopSoundAction(triggerOptions JSObject, sound *Sound, opts *NewStopSoundActionOpts) *StopSoundAction {
 	if opts == nil {
 		opts = &NewStopSoundActionOpts{}
 	}
 
 	args := make([]interface{}, 0, 2+1)
 
-	args = append(args, triggerOptions)
+	args = append(args, triggerOptions.JSObject())
 	args = append(args, sound.JSObject())
 
 	if opts.Condition == nil {
@@ -75,11 +75,15 @@ func (s *StopSoundAction) Execute() {
 // Serialize calls the Serialize method on the StopSoundAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#serialize
-func (s *StopSoundAction) Serialize(parent interface{}) interface{} {
+func (s *StopSoundAction) Serialize(parent JSObject) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, parent)
+	if parent == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parent.JSObject())
+	}
 
 	retVal := s.p.Call("serialize", args...)
 	return retVal

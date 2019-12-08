@@ -74,12 +74,22 @@ func (ba *Babylon) NewStarfieldProceduralTexture(name string, size float64, scen
 // Parse calls the Parse method on the StarfieldProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#parse
-func (s *StarfieldProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *StarfieldProceduralTexture {
+func (s *StarfieldProceduralTexture) Parse(parsedTexture JSObject, scene *Scene, rootUrl string) *StarfieldProceduralTexture {
 
 	args := make([]interface{}, 0, 3+0)
 
-	args = append(args, parsedTexture)
-	args = append(args, scene.JSObject())
+	if parsedTexture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, parsedTexture.JSObject())
+	}
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
+
 	args = append(args, rootUrl)
 
 	retVal := s.p.Call("Parse", args...)
@@ -89,7 +99,7 @@ func (s *StarfieldProceduralTexture) Parse(parsedTexture interface{}, scene *Sce
 // Serialize calls the Serialize method on the StarfieldProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#serialize
-func (s *StarfieldProceduralTexture) Serialize() interface{} {
+func (s *StarfieldProceduralTexture) Serialize() js.Value {
 
 	retVal := s.p.Call("serialize")
 	return retVal

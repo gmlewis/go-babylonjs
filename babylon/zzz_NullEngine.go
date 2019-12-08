@@ -79,8 +79,18 @@ func (n *NullEngine) BindBuffers(vertexBuffers js.Value, indexBuffer *DataBuffer
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, vertexBuffers)
-	args = append(args, indexBuffer.JSObject())
-	args = append(args, effect.JSObject())
+
+	if indexBuffer == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, indexBuffer.JSObject())
+	}
+
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	n.p.Call("bindBuffers", args...)
 }
@@ -103,7 +113,11 @@ func (n *NullEngine) BindFramebuffer(texture *InternalTexture, opts *NullEngineB
 
 	args := make([]interface{}, 0, 1+4)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	if opts.FaceIndex == nil {
 		args = append(args, js.Undefined())
@@ -136,7 +150,11 @@ func (n *NullEngine) BindSamplers(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	n.p.Call("bindSamplers", args...)
 }
@@ -157,7 +175,9 @@ func (n *NullEngine) Clear(color js.Value, backBuffer bool, depth bool, opts *Nu
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, color)
+
 	args = append(args, backBuffer)
+
 	args = append(args, depth)
 
 	if opts.Stencil == nil {
@@ -198,11 +218,16 @@ func (n *NullEngine) CreateIndexBuffer(indices js.Value) *DataBuffer {
 // CreateRenderTargetTexture calls the CreateRenderTargetTexture method on the NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine#createrendertargettexture
-func (n *NullEngine) CreateRenderTargetTexture(size interface{}, options bool) *InternalTexture {
+func (n *NullEngine) CreateRenderTargetTexture(size JSObject, options bool) *InternalTexture {
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, size)
+	if size == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, size.JSObject())
+	}
+
 	args = append(args, options)
 
 	retVal := n.p.Call("createRenderTargetTexture", args...)
@@ -224,9 +249,16 @@ func (n *NullEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vert
 
 	args := make([]interface{}, 0, 4+1)
 
-	args = append(args, pipelineContext.JSObject())
+	if pipelineContext == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pipelineContext.JSObject())
+	}
+
 	args = append(args, vertexCode)
+
 	args = append(args, fragmentCode)
+
 	args = append(args, defines)
 
 	args = append(args, opts.Context)
@@ -256,9 +288,16 @@ func (n *NullEngine) CreateTexture(urlArg string, noMipmap bool, invertY bool, s
 	args := make([]interface{}, 0, 4+6)
 
 	args = append(args, urlArg)
+
 	args = append(args, noMipmap)
+
 	args = append(args, invertY)
-	args = append(args, scene.JSObject())
+
+	if scene == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, scene.JSObject())
+	}
 
 	if opts.SamplingMode == nil {
 		args = append(args, js.Undefined())
@@ -328,7 +367,9 @@ func (n *NullEngine) Draw(useTriangles bool, indexStart float64, indexCount floa
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, useTriangles)
+
 	args = append(args, indexStart)
+
 	args = append(args, indexCount)
 
 	if opts.InstancesCount == nil {
@@ -356,7 +397,9 @@ func (n *NullEngine) DrawArraysType(fillMode float64, verticesStart float64, ver
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, fillMode)
+
 	args = append(args, verticesStart)
+
 	args = append(args, verticesCount)
 
 	if opts.InstancesCount == nil {
@@ -384,7 +427,9 @@ func (n *NullEngine) DrawElementsType(fillMode float64, indexStart float64, inde
 	args := make([]interface{}, 0, 3+1)
 
 	args = append(args, fillMode)
+
 	args = append(args, indexStart)
+
 	args = append(args, indexCount)
 
 	if opts.InstancesCount == nil {
@@ -403,7 +448,11 @@ func (n *NullEngine) EnableEffect(effect *Effect) {
 
 	args := make([]interface{}, 0, 1+0)
 
-	args = append(args, effect.JSObject())
+	if effect == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, effect.JSObject())
+	}
 
 	n.p.Call("enableEffect", args...)
 }
@@ -415,7 +464,12 @@ func (n *NullEngine) GetAttributes(pipelineContext *IPipelineContext, attributes
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext.JSObject())
+	if pipelineContext == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pipelineContext.JSObject())
+	}
+
 	args = append(args, attributesNames)
 
 	retVal := n.p.Call("getAttributes", args...)
@@ -501,7 +555,12 @@ func (n *NullEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsName
 
 	args := make([]interface{}, 0, 2+0)
 
-	args = append(args, pipelineContext.JSObject())
+	if pipelineContext == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, pipelineContext.JSObject())
+	}
+
 	args = append(args, uniformsNames)
 
 	retVal := n.p.Call("getUniforms", args...)
@@ -567,6 +626,7 @@ func (n *NullEngine) SetArray(uniform js.Value, array []float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setArray", args...)
@@ -580,6 +640,7 @@ func (n *NullEngine) SetArray2(uniform js.Value, array []float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setArray2", args...)
@@ -593,6 +654,7 @@ func (n *NullEngine) SetArray3(uniform js.Value, array []float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setArray3", args...)
@@ -606,6 +668,7 @@ func (n *NullEngine) SetArray4(uniform js.Value, array []float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setArray4", args...)
@@ -619,6 +682,7 @@ func (n *NullEngine) SetBool(uniform js.Value, bool float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, bool)
 
 	n.p.Call("setBool", args...)
@@ -632,6 +696,7 @@ func (n *NullEngine) SetFloat(uniform js.Value, value float64) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, value)
 
 	n.p.Call("setFloat", args...)
@@ -645,7 +710,9 @@ func (n *NullEngine) SetFloat2(uniform js.Value, x float64, y float64) {
 	args := make([]interface{}, 0, 3+0)
 
 	args = append(args, uniform)
+
 	args = append(args, x)
+
 	args = append(args, y)
 
 	n.p.Call("setFloat2", args...)
@@ -659,8 +726,11 @@ func (n *NullEngine) SetFloat3(uniform js.Value, x float64, y float64, z float64
 	args := make([]interface{}, 0, 4+0)
 
 	args = append(args, uniform)
+
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
 
 	n.p.Call("setFloat3", args...)
@@ -674,9 +744,13 @@ func (n *NullEngine) SetFloat4(uniform js.Value, x float64, y float64, z float64
 	args := make([]interface{}, 0, 5+0)
 
 	args = append(args, uniform)
+
 	args = append(args, x)
+
 	args = append(args, y)
+
 	args = append(args, z)
+
 	args = append(args, w)
 
 	n.p.Call("setFloat4", args...)
@@ -690,6 +764,7 @@ func (n *NullEngine) SetFloatArray(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setFloatArray", args...)
@@ -703,6 +778,7 @@ func (n *NullEngine) SetFloatArray2(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setFloatArray2", args...)
@@ -716,6 +792,7 @@ func (n *NullEngine) SetFloatArray3(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setFloatArray3", args...)
@@ -729,6 +806,7 @@ func (n *NullEngine) SetFloatArray4(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setFloatArray4", args...)
@@ -742,6 +820,7 @@ func (n *NullEngine) SetIntArray(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setIntArray", args...)
@@ -755,6 +834,7 @@ func (n *NullEngine) SetIntArray2(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setIntArray2", args...)
@@ -768,6 +848,7 @@ func (n *NullEngine) SetIntArray3(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setIntArray3", args...)
@@ -781,6 +862,7 @@ func (n *NullEngine) SetIntArray4(uniform js.Value, array js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, array)
 
 	n.p.Call("setIntArray4", args...)
@@ -794,6 +876,7 @@ func (n *NullEngine) SetMatrices(uniform js.Value, matrices js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, matrices)
 
 	n.p.Call("setMatrices", args...)
@@ -807,6 +890,7 @@ func (n *NullEngine) SetMatrix2x2(uniform js.Value, matrix js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, matrix)
 
 	n.p.Call("setMatrix2x2", args...)
@@ -820,6 +904,7 @@ func (n *NullEngine) SetMatrix3x3(uniform js.Value, matrix js.Value) {
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, uniform)
+
 	args = append(args, matrix)
 
 	n.p.Call("setMatrix3x3", args...)
@@ -911,7 +996,11 @@ func (n *NullEngine) UnBindFramebuffer(texture *InternalTexture, opts *NullEngin
 
 	args := make([]interface{}, 0, 1+2)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	if opts.DisableGenerateMipMaps == nil {
 		args = append(args, js.Undefined())
@@ -943,6 +1032,7 @@ func (n *NullEngine) UpdateDynamicIndexBuffer(indexBuffer js.Value, indices js.V
 	args := make([]interface{}, 0, 2+1)
 
 	args = append(args, indexBuffer)
+
 	args = append(args, indices)
 
 	if opts.Offset == nil {
@@ -970,8 +1060,14 @@ func (n *NullEngine) UpdateDynamicTexture(texture *InternalTexture, canvas js.Va
 
 	args := make([]interface{}, 0, 3+2)
 
-	args = append(args, texture.JSObject())
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
+
 	args = append(args, canvas)
+
 	args = append(args, invertY)
 
 	if opts.PremulAlpha == nil {
@@ -1005,6 +1101,7 @@ func (n *NullEngine) UpdateDynamicVertexBuffer(vertexBuffer js.Value, vertices j
 	args := make([]interface{}, 0, 2+2)
 
 	args = append(args, vertexBuffer)
+
 	args = append(args, vertices)
 
 	if opts.ByteOffset == nil {
@@ -1029,7 +1126,12 @@ func (n *NullEngine) UpdateTextureSamplingMode(samplingMode float64, texture *In
 	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, samplingMode)
-	args = append(args, texture.JSObject())
+
+	if texture == nil {
+		args = append(args, js.Null())
+	} else {
+		args = append(args, texture.JSObject())
+	}
 
 	n.p.Call("updateTextureSamplingMode", args...)
 }
