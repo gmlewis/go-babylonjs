@@ -66,28 +66,16 @@ func (ba *Babylon) NewFlyCamera(name string, position *Vector3, scene *Scene, op
 	return FlyCameraFromJSObject(p, ba.ctx)
 }
 
-// FlyCameraAttachControlOpts contains optional parameters for FlyCamera.AttachControl.
-type FlyCameraAttachControlOpts struct {
-	NoPreventDefault *bool
-}
-
 // AttachControl calls the AttachControl method on the FlyCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera#attachcontrol
-func (f *FlyCamera) AttachControl(element js.Value, opts *FlyCameraAttachControlOpts) {
-	if opts == nil {
-		opts = &FlyCameraAttachControlOpts{}
-	}
+func (f *FlyCamera) AttachControl(element js.Value, noPreventDefault bool) {
 
-	args := make([]interface{}, 0, 1+1)
+	args := make([]interface{}, 0, 2+0)
 
 	args = append(args, element)
 
-	if opts.NoPreventDefault == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.NoPreventDefault)
-	}
+	args = append(args, noPreventDefault)
 
 	f.p.Call("attachControl", args...)
 }

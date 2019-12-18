@@ -663,7 +663,7 @@ func processMethodOverrides(className string, s *Signature, names []string, opti
 	case "ArcRotateCamera.AttachControl":
 		optional[1] = false
 	case "Camera.AttachControl", "FollowCamera.AttachControl", "FreeCamera.AttachControl",
-		"AbstractMesh.ToString", "Scene.CreateDefaultEnvironment":
+		"FlyCamera.AttachControl", "AbstractMesh.ToString", "Scene.CreateDefaultEnvironment":
 		avoidUsingOptions = true
 	case "InstancedMesh.GetFacetNormal", "InstancedMesh.GetFacetNormalToRef", "InstancedMesh.GetFacetPosition", "InstancedMesh.GetFacetPositionToRef":
 		names[0] = "index"
