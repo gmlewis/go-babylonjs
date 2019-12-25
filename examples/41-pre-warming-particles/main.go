@@ -58,8 +58,8 @@ func main() {
 		sunEmitter.SetRadiusRange(0) // emit only from shape surface
 
 		// Assign particles to emitters
-		surfaceParticles.SetEmitter(coreSphere.AbstractMesh) // the starting object, the emitter
-		surfaceParticles.SetParticleEmitterType(babylon.IParticleEmitterTypeFromJSObject(sunEmitter.JSObject(), b.JSObject()))  // TODO: Improve this.
+		surfaceParticles.SetEmitter(coreSphere.AbstractMesh)                                                                   // the starting object, the emitter
+		surfaceParticles.SetParticleEmitterType(babylon.IParticleEmitterTypeFromJSObject(sunEmitter.JSObject(), b.JSObject())) // TODO: Improve this.
 
 		// Color gradient over time
 		surfaceParticles.AddColorGradient(0, b.NewColor4(0.8509, 0.4784, 0.1019, 0.0), nil)
