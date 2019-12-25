@@ -38,7 +38,7 @@ func NormalizeBlockArrayToJSArray(array []*NormalizeBlock) []interface{} {
 
 // NewNormalizeBlock returns a new NormalizeBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.normalizeblock
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#constructor
 func (ba *Babylon) NewNormalizeBlock(name string) *NormalizeBlock {
 
 	args := make([]interface{}, 0, 1+0)

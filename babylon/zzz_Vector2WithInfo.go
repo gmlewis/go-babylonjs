@@ -43,7 +43,7 @@ type NewVector2WithInfoOpts struct {
 
 // NewVector2WithInfo returns a new Vector2WithInfo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.vector2withinfo
+// https://doc.babylonjs.com/api/classes/babylon.gui.vector2withinfo#constructor
 func (gui *GUI) NewVector2WithInfo(source *Vector2, opts *NewVector2WithInfoOpts) *Vector2WithInfo {
 	if opts == nil {
 		opts = &NewVector2WithInfoOpts{}

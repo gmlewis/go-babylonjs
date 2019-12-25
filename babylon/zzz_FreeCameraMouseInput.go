@@ -45,7 +45,7 @@ type NewFreeCameraMouseInputOpts struct {
 
 // NewFreeCameraMouseInput returns a new FreeCameraMouseInput object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#constructor
 func (ba *Babylon) NewFreeCameraMouseInput(opts *NewFreeCameraMouseInputOpts) *FreeCameraMouseInput {
 	if opts == nil {
 		opts = &NewFreeCameraMouseInputOpts{}

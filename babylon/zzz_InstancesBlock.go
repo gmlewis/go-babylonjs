@@ -40,7 +40,7 @@ func InstancesBlockArrayToJSArray(array []*InstancesBlock) []interface{} {
 
 // NewInstancesBlock returns a new InstancesBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.instancesblock
+// https://doc.babylonjs.com/api/classes/babylon.instancesblock#constructor
 func (ba *Babylon) NewInstancesBlock(name string) *InstancesBlock {
 
 	args := make([]interface{}, 0, 1+0)

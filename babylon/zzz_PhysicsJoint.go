@@ -41,7 +41,7 @@ func PhysicsJointArrayToJSArray(array []*PhysicsJoint) []interface{} {
 
 // NewPhysicsJoint returns a new PhysicsJoint object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.physicsjoint
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#constructor
 func (ba *Babylon) NewPhysicsJoint(jsType float64, jointData js.Value) *PhysicsJoint {
 
 	args := make([]interface{}, 0, 2+0)

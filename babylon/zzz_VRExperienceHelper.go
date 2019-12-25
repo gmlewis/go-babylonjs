@@ -44,7 +44,7 @@ type NewVRExperienceHelperOpts struct {
 
 // NewVRExperienceHelper returns a new VRExperienceHelper object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#constructor
 func (ba *Babylon) NewVRExperienceHelper(scene *Scene, opts *NewVRExperienceHelperOpts) *VRExperienceHelper {
 	if opts == nil {
 		opts = &NewVRExperienceHelperOpts{}

@@ -46,7 +46,7 @@ type NewDefaultLoadingScreenOpts struct {
 
 // NewDefaultLoadingScreen returns a new DefaultLoadingScreen object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#constructor
 func (ba *Babylon) NewDefaultLoadingScreen(_renderingCanvas js.Value, opts *NewDefaultLoadingScreenOpts) *DefaultLoadingScreen {
 	if opts == nil {
 		opts = &NewDefaultLoadingScreenOpts{}

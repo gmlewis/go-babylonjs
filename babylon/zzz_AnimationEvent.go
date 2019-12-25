@@ -43,7 +43,7 @@ type NewAnimationEventOpts struct {
 
 // NewAnimationEvent returns a new AnimationEvent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.animationevent
+// https://doc.babylonjs.com/api/classes/babylon.animationevent#constructor
 func (ba *Babylon) NewAnimationEvent(frame float64, action JSFunc, opts *NewAnimationEventOpts) *AnimationEvent {
 	if opts == nil {
 		opts = &NewAnimationEventOpts{}

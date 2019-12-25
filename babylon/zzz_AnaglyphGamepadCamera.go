@@ -40,7 +40,7 @@ func AnaglyphGamepadCameraArrayToJSArray(array []*AnaglyphGamepadCamera) []inter
 
 // NewAnaglyphGamepadCamera returns a new AnaglyphGamepadCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera#constructor
 func (ba *Babylon) NewAnaglyphGamepadCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphGamepadCamera {
 
 	args := make([]interface{}, 0, 4+0)

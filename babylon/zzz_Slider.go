@@ -43,7 +43,7 @@ type NewSliderOpts struct {
 
 // NewSlider returns a new Slider object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.slider
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#constructor
 func (gui *GUI) NewSlider(opts *NewSliderOpts) *Slider {
 	if opts == nil {
 		opts = &NewSliderOpts{}

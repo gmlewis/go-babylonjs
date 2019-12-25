@@ -49,7 +49,7 @@ type NewParticleSystemOpts struct {
 
 // NewParticleSystem returns a new ParticleSystem object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.particlesystem
+// https://doc.babylonjs.com/api/classes/babylon.particlesystem#constructor
 func (ba *Babylon) NewParticleSystem(name string, capacity float64, scene *Scene, opts *NewParticleSystemOpts) *ParticleSystem {
 	if opts == nil {
 		opts = &NewParticleSystemOpts{}

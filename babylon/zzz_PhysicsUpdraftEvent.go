@@ -38,7 +38,7 @@ func PhysicsUpdraftEventArrayToJSArray(array []*PhysicsUpdraftEvent) []interface
 
 // NewPhysicsUpdraftEvent returns a new PhysicsUpdraftEvent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent
+// https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent#constructor
 func (ba *Babylon) NewPhysicsUpdraftEvent(_scene *Scene, _origin *Vector3, _options *PhysicsUpdraftEventOptions) *PhysicsUpdraftEvent {
 
 	args := make([]interface{}, 0, 3+0)

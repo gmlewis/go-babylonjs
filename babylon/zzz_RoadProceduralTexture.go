@@ -44,7 +44,7 @@ type NewRoadProceduralTextureOpts struct {
 
 // NewRoadProceduralTexture returns a new RoadProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture#constructor
 func (ba *Babylon) NewRoadProceduralTexture(name string, size float64, scene *Scene, opts *NewRoadProceduralTextureOpts) *RoadProceduralTexture {
 	if opts == nil {
 		opts = &NewRoadProceduralTextureOpts{}

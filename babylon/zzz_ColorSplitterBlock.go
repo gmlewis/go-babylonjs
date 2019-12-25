@@ -38,7 +38,7 @@ func ColorSplitterBlockArrayToJSArray(array []*ColorSplitterBlock) []interface{}
 
 // NewColorSplitterBlock returns a new ColorSplitterBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#constructor
 func (ba *Babylon) NewColorSplitterBlock(name string) *ColorSplitterBlock {
 
 	args := make([]interface{}, 0, 1+0)

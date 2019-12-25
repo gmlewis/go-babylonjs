@@ -54,7 +54,7 @@ type NewRenderTargetTextureOpts struct {
 
 // NewRenderTargetTexture returns a new RenderTargetTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#constructor
 func (ba *Babylon) NewRenderTargetTexture(name string, size float64, scene *Scene, opts *NewRenderTargetTextureOpts) *RenderTargetTexture {
 	if opts == nil {
 		opts = &NewRenderTargetTextureOpts{}

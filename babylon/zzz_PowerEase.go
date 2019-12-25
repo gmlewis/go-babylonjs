@@ -46,7 +46,7 @@ type NewPowerEaseOpts struct {
 
 // NewPowerEase returns a new PowerEase object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.powerease
+// https://doc.babylonjs.com/api/classes/babylon.powerease#constructor
 func (ba *Babylon) NewPowerEase(opts *NewPowerEaseOpts) *PowerEase {
 	if opts == nil {
 		opts = &NewPowerEaseOpts{}

@@ -38,7 +38,7 @@ func PlaneArrayToJSArray(array []*Plane) []interface{} {
 
 // NewPlane returns a new Plane object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.plane
+// https://doc.babylonjs.com/api/classes/babylon.plane#constructor
 func (ba *Babylon) NewPlane(a float64, b float64, c float64, d float64) *Plane {
 
 	args := make([]interface{}, 0, 4+0)

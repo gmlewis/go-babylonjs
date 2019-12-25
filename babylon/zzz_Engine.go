@@ -45,7 +45,7 @@ type NewEngineOpts struct {
 
 // NewEngine returns a new Engine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.engine
+// https://doc.babylonjs.com/api/classes/babylon.engine#constructor
 func (ba *Babylon) NewEngine(canvasOrContext js.Value, opts *NewEngineOpts) *Engine {
 	if opts == nil {
 		opts = &NewEngineOpts{}

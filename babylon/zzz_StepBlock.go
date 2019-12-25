@@ -38,7 +38,7 @@ func StepBlockArrayToJSArray(array []*StepBlock) []interface{} {
 
 // NewStepBlock returns a new StepBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stepblock
+// https://doc.babylonjs.com/api/classes/babylon.stepblock#constructor
 func (ba *Babylon) NewStepBlock(name string) *StepBlock {
 
 	args := make([]interface{}, 0, 1+0)

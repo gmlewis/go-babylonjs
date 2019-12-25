@@ -48,7 +48,7 @@ type NewArcRotateCameraOpts struct {
 
 // NewArcRotateCamera returns a new ArcRotateCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#constructor
 func (ba *Babylon) NewArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, scene *Scene, opts *NewArcRotateCameraOpts) *ArcRotateCamera {
 	if opts == nil {
 		opts = &NewArcRotateCameraOpts{}

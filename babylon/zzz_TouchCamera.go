@@ -41,7 +41,7 @@ func TouchCameraArrayToJSArray(array []*TouchCamera) []interface{} {
 
 // NewTouchCamera returns a new TouchCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.touchcamera
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#constructor
 func (ba *Babylon) NewTouchCamera(name string, position *Vector3, scene *Scene) *TouchCamera {
 
 	args := make([]interface{}, 0, 3+0)

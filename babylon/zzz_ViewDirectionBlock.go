@@ -38,7 +38,7 @@ func ViewDirectionBlockArrayToJSArray(array []*ViewDirectionBlock) []interface{}
 
 // NewViewDirectionBlock returns a new ViewDirectionBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock
+// https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock#constructor
 func (ba *Babylon) NewViewDirectionBlock(name string) *ViewDirectionBlock {
 
 	args := make([]interface{}, 0, 1+0)

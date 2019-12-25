@@ -43,7 +43,7 @@ type NewRectangleOpts struct {
 
 // NewRectangle returns a new Rectangle object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.rectangle
+// https://doc.babylonjs.com/api/classes/babylon.gui.rectangle#constructor
 func (gui *GUI) NewRectangle(opts *NewRectangleOpts) *Rectangle {
 	if opts == nil {
 		opts = &NewRectangleOpts{}

@@ -45,7 +45,7 @@ type NewBoneIKControllerOpts struct {
 
 // NewBoneIKController returns a new BoneIKController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.boneikcontroller
+// https://doc.babylonjs.com/api/classes/babylon.boneikcontroller#constructor
 func (ba *Babylon) NewBoneIKController(mesh *AbstractMesh, bone *Bone, opts *NewBoneIKControllerOpts) *BoneIKController {
 	if opts == nil {
 		opts = &NewBoneIKControllerOpts{}

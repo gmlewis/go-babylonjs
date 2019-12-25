@@ -48,7 +48,7 @@ type NewRawCubeTextureOpts struct {
 
 // NewRawCubeTexture returns a new RawCubeTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rawcubetexture
+// https://doc.babylonjs.com/api/classes/babylon.rawcubetexture#constructor
 func (ba *Babylon) NewRawCubeTexture(scene *Scene, data js.Value, size float64, opts *NewRawCubeTextureOpts) *RawCubeTexture {
 	if opts == nil {
 		opts = &NewRawCubeTextureOpts{}

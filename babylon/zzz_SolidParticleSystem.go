@@ -48,7 +48,7 @@ type NewSolidParticleSystemOpts struct {
 
 // NewSolidParticleSystem returns a new SolidParticleSystem object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#constructor
 func (ba *Babylon) NewSolidParticleSystem(name string, scene *Scene, opts *NewSolidParticleSystemOpts) *SolidParticleSystem {
 	if opts == nil {
 		opts = &NewSolidParticleSystemOpts{}

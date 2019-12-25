@@ -43,7 +43,7 @@ type NewBoundingBoxOpts struct {
 
 // NewBoundingBox returns a new BoundingBox object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.boundingbox
+// https://doc.babylonjs.com/api/classes/babylon.boundingbox#constructor
 func (ba *Babylon) NewBoundingBox(min *Vector3, max *Vector3, opts *NewBoundingBoxOpts) *BoundingBox {
 	if opts == nil {
 		opts = &NewBoundingBoxOpts{}

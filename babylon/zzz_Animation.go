@@ -44,7 +44,7 @@ type NewAnimationOpts struct {
 
 // NewAnimation returns a new Animation object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.animation
+// https://doc.babylonjs.com/api/classes/babylon.animation#constructor
 func (ba *Babylon) NewAnimation(name string, targetProperty string, framePerSecond float64, dataType float64, opts *NewAnimationOpts) *Animation {
 	if opts == nil {
 		opts = &NewAnimationOpts{}

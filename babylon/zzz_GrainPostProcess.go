@@ -47,7 +47,7 @@ type NewGrainPostProcessOpts struct {
 
 // NewGrainPostProcess returns a new GrainPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grainpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.grainpostprocess#constructor
 func (ba *Babylon) NewGrainPostProcess(name string, options float64, camera *Camera, opts *NewGrainPostProcessOpts) *GrainPostProcess {
 	if opts == nil {
 		opts = &NewGrainPostProcessOpts{}

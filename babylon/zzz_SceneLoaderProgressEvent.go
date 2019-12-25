@@ -38,7 +38,7 @@ func SceneLoaderProgressEventArrayToJSArray(array []*SceneLoaderProgressEvent) [
 
 // NewSceneLoaderProgressEvent returns a new SceneLoaderProgressEvent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent
+// https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent#constructor
 func (ba *Babylon) NewSceneLoaderProgressEvent(lengthComputable bool, loaded float64, total float64) *SceneLoaderProgressEvent {
 
 	args := make([]interface{}, 0, 3+0)

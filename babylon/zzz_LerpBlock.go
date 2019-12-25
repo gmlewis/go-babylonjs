@@ -38,7 +38,7 @@ func LerpBlockArrayToJSArray(array []*LerpBlock) []interface{} {
 
 // NewLerpBlock returns a new LerpBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.lerpblock
+// https://doc.babylonjs.com/api/classes/babylon.lerpblock#constructor
 func (ba *Babylon) NewLerpBlock(name string) *LerpBlock {
 
 	args := make([]interface{}, 0, 1+0)

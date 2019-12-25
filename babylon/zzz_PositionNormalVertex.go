@@ -44,7 +44,7 @@ type NewPositionNormalVertexOpts struct {
 
 // NewPositionNormalVertex returns a new PositionNormalVertex object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.positionnormalvertex
+// https://doc.babylonjs.com/api/classes/babylon.positionnormalvertex#constructor
 func (ba *Babylon) NewPositionNormalVertex(opts *NewPositionNormalVertexOpts) *PositionNormalVertex {
 	if opts == nil {
 		opts = &NewPositionNormalVertexOpts{}

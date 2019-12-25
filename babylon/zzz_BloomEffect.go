@@ -44,7 +44,7 @@ type NewBloomEffectOpts struct {
 
 // NewBloomEffect returns a new BloomEffect object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.bloomeffect
+// https://doc.babylonjs.com/api/classes/babylon.bloomeffect#constructor
 func (ba *Babylon) NewBloomEffect(scene *Scene, bloomScale float64, bloomWeight float64, bloomKernel float64, opts *NewBloomEffectOpts) *BloomEffect {
 	if opts == nil {
 		opts = &NewBloomEffectOpts{}

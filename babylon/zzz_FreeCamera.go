@@ -46,7 +46,7 @@ type NewFreeCameraOpts struct {
 
 // NewFreeCamera returns a new FreeCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.freecamera
+// https://doc.babylonjs.com/api/classes/babylon.freecamera#constructor
 func (ba *Babylon) NewFreeCamera(name string, position *Vector3, scene *Scene, opts *NewFreeCameraOpts) *FreeCamera {
 	if opts == nil {
 		opts = &NewFreeCameraOpts{}

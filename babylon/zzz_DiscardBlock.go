@@ -38,7 +38,7 @@ func DiscardBlockArrayToJSArray(array []*DiscardBlock) []interface{} {
 
 // NewDiscardBlock returns a new DiscardBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.discardblock
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#constructor
 func (ba *Babylon) NewDiscardBlock(name string) *DiscardBlock {
 
 	args := make([]interface{}, 0, 1+0)

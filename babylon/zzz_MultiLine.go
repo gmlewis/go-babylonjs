@@ -43,7 +43,7 @@ type NewMultiLineOpts struct {
 
 // NewMultiLine returns a new MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.multiline
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#constructor
 func (gui *GUI) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
 	if opts == nil {
 		opts = &NewMultiLineOpts{}

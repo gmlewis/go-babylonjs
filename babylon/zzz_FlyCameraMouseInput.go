@@ -45,7 +45,7 @@ type NewFlyCameraMouseInputOpts struct {
 
 // NewFlyCameraMouseInput returns a new FlyCameraMouseInput object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput
+// https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput#constructor
 func (ba *Babylon) NewFlyCameraMouseInput(opts *NewFlyCameraMouseInputOpts) *FlyCameraMouseInput {
 	if opts == nil {
 		opts = &NewFlyCameraMouseInputOpts{}

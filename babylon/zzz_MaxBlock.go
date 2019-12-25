@@ -38,7 +38,7 @@ func MaxBlockArrayToJSArray(array []*MaxBlock) []interface{} {
 
 // NewMaxBlock returns a new MaxBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.maxblock
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#constructor
 func (ba *Babylon) NewMaxBlock(name string) *MaxBlock {
 
 	args := make([]interface{}, 0, 1+0)

@@ -46,7 +46,7 @@ type NewDynamicTextureOpts struct {
 
 // NewDynamicTexture returns a new DynamicTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.dynamictexture
+// https://doc.babylonjs.com/api/classes/babylon.dynamictexture#constructor
 func (ba *Babylon) NewDynamicTexture(name string, options interface{}, scene *Scene, generateMipMaps bool, opts *NewDynamicTextureOpts) *DynamicTexture {
 	if opts == nil {
 		opts = &NewDynamicTextureOpts{}

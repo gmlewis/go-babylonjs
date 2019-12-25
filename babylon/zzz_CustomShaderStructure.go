@@ -38,7 +38,7 @@ func CustomShaderStructureArrayToJSArray(array []*CustomShaderStructure) []inter
 
 // NewCustomShaderStructure returns a new CustomShaderStructure object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.customshaderstructure
+// https://doc.babylonjs.com/api/classes/babylon.customshaderstructure#constructor
 func (ba *Babylon) NewCustomShaderStructure() *CustomShaderStructure {
 
 	args := make([]interface{}, 0, 0+0)

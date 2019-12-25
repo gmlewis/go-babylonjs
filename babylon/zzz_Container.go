@@ -45,7 +45,7 @@ type NewContainerOpts struct {
 
 // NewContainer returns a new Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.container
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#constructor
 func (gui *GUI) NewContainer(opts *NewContainerOpts) *Container {
 	if opts == nil {
 		opts = &NewContainerOpts{}

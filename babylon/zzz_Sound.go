@@ -47,7 +47,7 @@ type NewSoundOpts struct {
 
 // NewSound returns a new Sound object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.sound
+// https://doc.babylonjs.com/api/classes/babylon.sound#constructor
 func (ba *Babylon) NewSound(name string, urlOrArrayBuffer JSObject, scene *Scene, opts *NewSoundOpts) *Sound {
 	if opts == nil {
 		opts = &NewSoundOpts{}

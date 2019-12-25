@@ -43,7 +43,7 @@ type NewNodeOpts struct {
 
 // NewNode returns a new Node object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.node
+// https://doc.babylonjs.com/api/classes/babylon.node#constructor
 func (ba *Babylon) NewNode(name string, opts *NewNodeOpts) *Node {
 	if opts == nil {
 		opts = &NewNodeOpts{}

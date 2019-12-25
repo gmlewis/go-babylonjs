@@ -44,7 +44,7 @@ type NewSubMeshOpts struct {
 
 // NewSubMesh returns a new SubMesh object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.submesh
+// https://doc.babylonjs.com/api/classes/babylon.submesh#constructor
 func (ba *Babylon) NewSubMesh(materialIndex float64, verticesStart float64, verticesCount float64, indexStart float64, indexCount float64, mesh *AbstractMesh, opts *NewSubMeshOpts) *SubMesh {
 	if opts == nil {
 		opts = &NewSubMeshOpts{}

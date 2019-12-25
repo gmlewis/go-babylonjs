@@ -38,7 +38,7 @@ func RemapBlockArrayToJSArray(array []*RemapBlock) []interface{} {
 
 // NewRemapBlock returns a new RemapBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.remapblock
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#constructor
 func (ba *Babylon) NewRemapBlock(name string) *RemapBlock {
 
 	args := make([]interface{}, 0, 1+0)

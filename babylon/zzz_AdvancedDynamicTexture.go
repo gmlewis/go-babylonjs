@@ -46,7 +46,7 @@ type NewAdvancedDynamicTextureOpts struct {
 
 // NewAdvancedDynamicTexture returns a new AdvancedDynamicTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.advanceddynamictexture
+// https://doc.babylonjs.com/api/classes/babylon.gui.advanceddynamictexture#constructor
 func (gui *GUI) NewAdvancedDynamicTexture(name string, width float64, height float64, scene *Scene, opts *NewAdvancedDynamicTextureOpts) *AdvancedDynamicTexture {
 	if opts == nil {
 		opts = &NewAdvancedDynamicTextureOpts{}

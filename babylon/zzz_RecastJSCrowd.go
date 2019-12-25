@@ -38,7 +38,7 @@ func RecastJSCrowdArrayToJSArray(array []*RecastJSCrowd) []interface{} {
 
 // NewRecastJSCrowd returns a new RecastJSCrowd object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#constructor
 func (ba *Babylon) NewRecastJSCrowd(plugin *RecastJSPlugin, maxAgents float64, maxAgentRadius float64, scene *Scene) *RecastJSCrowd {
 
 	args := make([]interface{}, 0, 4+0)

@@ -41,7 +41,7 @@ func DirectionalLightArrayToJSArray(array []*DirectionalLight) []interface{} {
 
 // NewDirectionalLight returns a new DirectionalLight object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.directionallight
+// https://doc.babylonjs.com/api/classes/babylon.directionallight#constructor
 func (ba *Babylon) NewDirectionalLight(name string, direction *Vector3, scene *Scene) *DirectionalLight {
 
 	args := make([]interface{}, 0, 3+0)

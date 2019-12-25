@@ -38,7 +38,7 @@ func InputManagerArrayToJSArray(array []*InputManager) []interface{} {
 
 // NewInputManager returns a new InputManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputmanager
+// https://doc.babylonjs.com/api/classes/babylon.inputmanager#constructor
 func (ba *Babylon) NewInputManager(scene *Scene) *InputManager {
 
 	args := make([]interface{}, 0, 1+0)

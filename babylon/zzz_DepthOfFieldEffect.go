@@ -45,7 +45,7 @@ type NewDepthOfFieldEffectOpts struct {
 
 // NewDepthOfFieldEffect returns a new DepthOfFieldEffect object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#constructor
 func (ba *Babylon) NewDepthOfFieldEffect(scene *Scene, depthTexture *RenderTargetTexture, opts *NewDepthOfFieldEffectOpts) *DepthOfFieldEffect {
 	if opts == nil {
 		opts = &NewDepthOfFieldEffectOpts{}

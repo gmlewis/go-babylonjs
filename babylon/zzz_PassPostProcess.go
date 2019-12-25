@@ -48,7 +48,7 @@ type NewPassPostProcessOpts struct {
 
 // NewPassPostProcess returns a new PassPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.passpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.passpostprocess#constructor
 func (ba *Babylon) NewPassPostProcess(name string, options float64, opts *NewPassPostProcessOpts) *PassPostProcess {
 	if opts == nil {
 		opts = &NewPassPostProcessOpts{}

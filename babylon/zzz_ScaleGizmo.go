@@ -43,7 +43,7 @@ type NewScaleGizmoOpts struct {
 
 // NewScaleGizmo returns a new ScaleGizmo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scalegizmo
+// https://doc.babylonjs.com/api/classes/babylon.scalegizmo#constructor
 func (ba *Babylon) NewScaleGizmo(opts *NewScaleGizmoOpts) *ScaleGizmo {
 	if opts == nil {
 		opts = &NewScaleGizmoOpts{}

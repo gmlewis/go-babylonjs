@@ -46,7 +46,7 @@ type NewGPUParticleSystemOpts struct {
 
 // NewGPUParticleSystem returns a new GPUParticleSystem object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#constructor
 func (ba *Babylon) NewGPUParticleSystem(name string, options js.Value, scene *Scene, opts *NewGPUParticleSystemOpts) *GPUParticleSystem {
 	if opts == nil {
 		opts = &NewGPUParticleSystemOpts{}

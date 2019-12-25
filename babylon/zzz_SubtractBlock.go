@@ -38,7 +38,7 @@ func SubtractBlockArrayToJSArray(array []*SubtractBlock) []interface{} {
 
 // NewSubtractBlock returns a new SubtractBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.subtractblock
+// https://doc.babylonjs.com/api/classes/babylon.subtractblock#constructor
 func (ba *Babylon) NewSubtractBlock(name string) *SubtractBlock {
 
 	args := make([]interface{}, 0, 1+0)

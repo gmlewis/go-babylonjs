@@ -46,7 +46,7 @@ type NewVRDeviceOrientationGamepadCameraOpts struct {
 
 // NewVRDeviceOrientationGamepadCamera returns a new VRDeviceOrientationGamepadCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationgamepadcamera
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationgamepadcamera#constructor
 func (ba *Babylon) NewVRDeviceOrientationGamepadCamera(name string, position *Vector3, scene *Scene, opts *NewVRDeviceOrientationGamepadCameraOpts) *VRDeviceOrientationGamepadCamera {
 	if opts == nil {
 		opts = &NewVRDeviceOrientationGamepadCameraOpts{}

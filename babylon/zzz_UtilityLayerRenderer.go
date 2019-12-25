@@ -43,7 +43,7 @@ type NewUtilityLayerRendererOpts struct {
 
 // NewUtilityLayerRenderer returns a new UtilityLayerRenderer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#constructor
 func (ba *Babylon) NewUtilityLayerRenderer(originalScene *Scene, opts *NewUtilityLayerRendererOpts) *UtilityLayerRenderer {
 	if opts == nil {
 		opts = &NewUtilityLayerRendererOpts{}

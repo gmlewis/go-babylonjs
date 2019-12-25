@@ -39,7 +39,7 @@ func EffectLayerSceneComponentArrayToJSArray(array []*EffectLayerSceneComponent)
 
 // NewEffectLayerSceneComponent returns a new EffectLayerSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#constructor
 func (ba *Babylon) NewEffectLayerSceneComponent(scene *Scene) *EffectLayerSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

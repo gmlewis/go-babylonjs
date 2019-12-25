@@ -51,7 +51,7 @@ type NewVertexBufferOpts struct {
 
 // NewVertexBuffer returns a new VertexBuffer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vertexbuffer
+// https://doc.babylonjs.com/api/classes/babylon.vertexbuffer#constructor
 func (ba *Babylon) NewVertexBuffer(engine JSObject, data []float64, kind string, updatable bool, opts *NewVertexBufferOpts) *VertexBuffer {
 	if opts == nil {
 		opts = &NewVertexBufferOpts{}

@@ -47,7 +47,7 @@ type NewMeshOpts struct {
 
 // NewMesh returns a new Mesh object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.mesh
+// https://doc.babylonjs.com/api/classes/babylon.mesh#constructor
 func (ba *Babylon) NewMesh(name string, opts *NewMeshOpts) *Mesh {
 	if opts == nil {
 		opts = &NewMeshOpts{}

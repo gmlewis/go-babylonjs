@@ -38,7 +38,7 @@ func PBRAnisotropicConfigurationArrayToJSArray(array []*PBRAnisotropicConfigurat
 
 // NewPBRAnisotropicConfiguration returns a new PBRAnisotropicConfiguration object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration
+// https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration#constructor
 func (ba *Babylon) NewPBRAnisotropicConfiguration(markAllSubMeshesAsTexturesDirty JSFunc) *PBRAnisotropicConfiguration {
 
 	args := make([]interface{}, 0, 1+0)

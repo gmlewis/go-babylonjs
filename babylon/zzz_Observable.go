@@ -43,7 +43,7 @@ func ObservableArrayToJSArray(array []*Observable) []interface{} {
 
 // NewObservable returns a new Observable object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.observable
+// https://doc.babylonjs.com/api/classes/babylon.observable#constructor
 func (ba *Babylon) NewObservable(onObserverAdded JSFunc) *Observable {
 
 	args := make([]interface{}, 0, 1+0)

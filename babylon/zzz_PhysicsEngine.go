@@ -45,7 +45,7 @@ type NewPhysicsEngineOpts struct {
 
 // NewPhysicsEngine returns a new PhysicsEngine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.physicsengine
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#constructor
 func (ba *Babylon) NewPhysicsEngine(gravity *Vector3, opts *NewPhysicsEngineOpts) *PhysicsEngine {
 	if opts == nil {
 		opts = &NewPhysicsEngineOpts{}

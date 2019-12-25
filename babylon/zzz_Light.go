@@ -40,7 +40,7 @@ func LightArrayToJSArray(array []*Light) []interface{} {
 
 // NewLight returns a new Light object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.light
+// https://doc.babylonjs.com/api/classes/babylon.light#constructor
 func (ba *Babylon) NewLight(name string, scene *Scene) *Light {
 
 	args := make([]interface{}, 0, 2+0)

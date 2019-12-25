@@ -38,7 +38,7 @@ func SimplexPerlin3DBlockArrayToJSArray(array []*SimplexPerlin3DBlock) []interfa
 
 // NewSimplexPerlin3DBlock returns a new SimplexPerlin3DBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock
+// https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock#constructor
 func (ba *Babylon) NewSimplexPerlin3DBlock(name string) *SimplexPerlin3DBlock {
 
 	args := make([]interface{}, 0, 1+0)

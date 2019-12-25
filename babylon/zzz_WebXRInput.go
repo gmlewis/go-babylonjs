@@ -38,7 +38,7 @@ func WebXRInputArrayToJSArray(array []*WebXRInput) []interface{} {
 
 // NewWebXRInput returns a new WebXRInput object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webxrinput
+// https://doc.babylonjs.com/api/classes/babylon.webxrinput#constructor
 func (ba *Babylon) NewWebXRInput(baseExperience *WebXRExperienceHelper) *WebXRInput {
 
 	args := make([]interface{}, 0, 1+0)

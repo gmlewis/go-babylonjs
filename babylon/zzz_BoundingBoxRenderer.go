@@ -39,7 +39,7 @@ func BoundingBoxRendererArrayToJSArray(array []*BoundingBoxRenderer) []interface
 
 // NewBoundingBoxRenderer returns a new BoundingBoxRenderer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer#constructor
 func (ba *Babylon) NewBoundingBoxRenderer(scene *Scene) *BoundingBoxRenderer {
 
 	args := make([]interface{}, 0, 1+0)

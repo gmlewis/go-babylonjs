@@ -38,7 +38,7 @@ func WaveBlockArrayToJSArray(array []*WaveBlock) []interface{} {
 
 // NewWaveBlock returns a new WaveBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.waveblock
+// https://doc.babylonjs.com/api/classes/babylon.waveblock#constructor
 func (ba *Babylon) NewWaveBlock(name string) *WaveBlock {
 
 	args := make([]interface{}, 0, 1+0)

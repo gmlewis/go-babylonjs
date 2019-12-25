@@ -44,7 +44,7 @@ type NewMarbleProceduralTextureOpts struct {
 
 // NewMarbleProceduralTexture returns a new MarbleProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.marbleproceduraltexture#constructor
 func (ba *Babylon) NewMarbleProceduralTexture(name string, size float64, scene *Scene, opts *NewMarbleProceduralTextureOpts) *MarbleProceduralTexture {
 	if opts == nil {
 		opts = &NewMarbleProceduralTextureOpts{}

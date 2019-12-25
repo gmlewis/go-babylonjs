@@ -45,7 +45,7 @@ type NewPath3DOpts struct {
 
 // NewPath3D returns a new Path3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.path3d
+// https://doc.babylonjs.com/api/classes/babylon.path3d#constructor
 func (ba *Babylon) NewPath3D(path []*Vector3, opts *NewPath3DOpts) *Path3D {
 	if opts == nil {
 		opts = &NewPath3DOpts{}

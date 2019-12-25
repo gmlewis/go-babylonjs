@@ -38,7 +38,7 @@ func OculusTouchControllerArrayToJSArray(array []*OculusTouchController) []inter
 
 // NewOculusTouchController returns a new OculusTouchController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller
+// https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller#constructor
 func (ba *Babylon) NewOculusTouchController(vrGamepad JSObject) *OculusTouchController {
 
 	args := make([]interface{}, 0, 1+0)

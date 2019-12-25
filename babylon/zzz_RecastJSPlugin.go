@@ -43,7 +43,7 @@ type NewRecastJSPluginOpts struct {
 
 // NewRecastJSPlugin returns a new RecastJSPlugin object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.recastjsplugin
+// https://doc.babylonjs.com/api/classes/babylon.recastjsplugin#constructor
 func (ba *Babylon) NewRecastJSPlugin(opts *NewRecastJSPluginOpts) *RecastJSPlugin {
 	if opts == nil {
 		opts = &NewRecastJSPluginOpts{}

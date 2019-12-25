@@ -38,7 +38,7 @@ func ReciprocalBlockArrayToJSArray(array []*ReciprocalBlock) []interface{} {
 
 // NewReciprocalBlock returns a new ReciprocalBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#constructor
 func (ba *Babylon) NewReciprocalBlock(name string) *ReciprocalBlock {
 
 	args := make([]interface{}, 0, 1+0)

@@ -38,7 +38,7 @@ func BackgroundMaterialArrayToJSArray(array []*BackgroundMaterial) []interface{}
 
 // NewBackgroundMaterial returns a new BackgroundMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial
+// https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial#constructor
 func (ba *Babylon) NewBackgroundMaterial(name string, scene *Scene) *BackgroundMaterial {
 
 	args := make([]interface{}, 0, 2+0)

@@ -38,7 +38,7 @@ func EffectWrapperArrayToJSArray(array []*EffectWrapper) []interface{} {
 
 // NewEffectWrapper returns a new EffectWrapper object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.effectwrapper
+// https://doc.babylonjs.com/api/classes/babylon.effectwrapper#constructor
 func (ba *Babylon) NewEffectWrapper(creationOptions js.Value) *EffectWrapper {
 
 	args := make([]interface{}, 0, 1+0)

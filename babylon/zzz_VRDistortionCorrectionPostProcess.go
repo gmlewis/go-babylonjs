@@ -38,7 +38,7 @@ func VRDistortionCorrectionPostProcessArrayToJSArray(array []*VRDistortionCorrec
 
 // NewVRDistortionCorrectionPostProcess returns a new VRDistortionCorrectionPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess#constructor
 func (ba *Babylon) NewVRDistortionCorrectionPostProcess(name string, camera *Camera, isRightEye bool, vrMetrics *VRCameraMetrics) *VRDistortionCorrectionPostProcess {
 
 	args := make([]interface{}, 0, 4+0)

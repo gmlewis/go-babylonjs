@@ -38,7 +38,7 @@ func CellMaterialArrayToJSArray(array []*CellMaterial) []interface{} {
 
 // NewCellMaterial returns a new CellMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.cellmaterial
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#constructor
 func (ba *Babylon) NewCellMaterial(name string, scene *Scene) *CellMaterial {
 
 	args := make([]interface{}, 0, 2+0)

@@ -38,7 +38,7 @@ func FluentMaterialArrayToJSArray(array []*FluentMaterial) []interface{} {
 
 // NewFluentMaterial returns a new FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#constructor
 func (gui *GUI) NewFluentMaterial(name string, scene *Scene) *FluentMaterial {
 
 	args := make([]interface{}, 0, 2+0)

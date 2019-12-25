@@ -49,7 +49,7 @@ type NewFxaaPostProcessOpts struct {
 
 // NewFxaaPostProcess returns a new FxaaPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#constructor
 func (ba *Babylon) NewFxaaPostProcess(name string, options float64, opts *NewFxaaPostProcessOpts) *FxaaPostProcess {
 	if opts == nil {
 		opts = &NewFxaaPostProcessOpts{}

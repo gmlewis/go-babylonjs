@@ -45,7 +45,7 @@ type NewStopAnimationActionOpts struct {
 
 // NewStopAnimationAction returns a new StopAnimationAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#constructor
 func (ba *Babylon) NewStopAnimationAction(triggerOptions JSObject, target JSObject, opts *NewStopAnimationActionOpts) *StopAnimationAction {
 	if opts == nil {
 		opts = &NewStopAnimationActionOpts{}

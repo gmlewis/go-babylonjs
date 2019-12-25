@@ -44,7 +44,7 @@ type NewCloudProceduralTextureOpts struct {
 
 // NewCloudProceduralTexture returns a new CloudProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture#constructor
 func (ba *Babylon) NewCloudProceduralTexture(name string, size float64, scene *Scene, opts *NewCloudProceduralTextureOpts) *CloudProceduralTexture {
 	if opts == nil {
 		opts = &NewCloudProceduralTextureOpts{}

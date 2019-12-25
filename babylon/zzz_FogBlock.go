@@ -38,7 +38,7 @@ func FogBlockArrayToJSArray(array []*FogBlock) []interface{} {
 
 // NewFogBlock returns a new FogBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fogblock
+// https://doc.babylonjs.com/api/classes/babylon.fogblock#constructor
 func (ba *Babylon) NewFogBlock(name string) *FogBlock {
 
 	args := make([]interface{}, 0, 1+0)

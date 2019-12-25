@@ -39,7 +39,7 @@ func SpriteSceneComponentArrayToJSArray(array []*SpriteSceneComponent) []interfa
 
 // NewSpriteSceneComponent returns a new SpriteSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#constructor
 func (ba *Babylon) NewSpriteSceneComponent(scene *Scene) *SpriteSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

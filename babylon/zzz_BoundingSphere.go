@@ -43,7 +43,7 @@ type NewBoundingSphereOpts struct {
 
 // NewBoundingSphere returns a new BoundingSphere object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.boundingsphere
+// https://doc.babylonjs.com/api/classes/babylon.boundingsphere#constructor
 func (ba *Babylon) NewBoundingSphere(min *Vector3, max *Vector3, opts *NewBoundingSphereOpts) *BoundingSphere {
 	if opts == nil {
 		opts = &NewBoundingSphereOpts{}

@@ -38,7 +38,7 @@ func DaydreamControllerArrayToJSArray(array []*DaydreamController) []interface{}
 
 // NewDaydreamController returns a new DaydreamController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#constructor
 func (ba *Babylon) NewDaydreamController(vrGamepad JSObject) *DaydreamController {
 
 	args := make([]interface{}, 0, 1+0)

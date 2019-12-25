@@ -40,7 +40,7 @@ func WebXRSessionManagerArrayToJSArray(array []*WebXRSessionManager) []interface
 
 // NewWebXRSessionManager returns a new WebXRSessionManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager
+// https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager#constructor
 func (ba *Babylon) NewWebXRSessionManager(scene *Scene) *WebXRSessionManager {
 
 	args := make([]interface{}, 0, 1+0)

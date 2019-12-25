@@ -46,7 +46,7 @@ type NewPhotoDomeOpts struct {
 
 // NewPhotoDome returns a new PhotoDome object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.photodome
+// https://doc.babylonjs.com/api/classes/babylon.photodome#constructor
 func (ba *Babylon) NewPhotoDome(name string, urlOfPhoto string, options js.Value, scene *Scene, opts *NewPhotoDomeOpts) *PhotoDome {
 	if opts == nil {
 		opts = &NewPhotoDomeOpts{}

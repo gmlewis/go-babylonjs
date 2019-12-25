@@ -45,7 +45,7 @@ type NewRenderTargetsOptimizationOpts struct {
 
 // NewRenderTargetsOptimization returns a new RenderTargetsOptimization object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rendertargetsoptimization
+// https://doc.babylonjs.com/api/classes/babylon.rendertargetsoptimization#constructor
 func (ba *Babylon) NewRenderTargetsOptimization(opts *NewRenderTargetsOptimizationOpts) *RenderTargetsOptimization {
 	if opts == nil {
 		opts = &NewRenderTargetsOptimizationOpts{}

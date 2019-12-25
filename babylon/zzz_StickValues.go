@@ -38,7 +38,7 @@ func StickValuesArrayToJSArray(array []*StickValues) []interface{} {
 
 // NewStickValues returns a new StickValues object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stickvalues
+// https://doc.babylonjs.com/api/classes/babylon.stickvalues#constructor
 func (ba *Babylon) NewStickValues(x float64, y float64) *StickValues {
 
 	args := make([]interface{}, 0, 2+0)

@@ -38,7 +38,7 @@ func ViveControllerArrayToJSArray(array []*ViveController) []interface{} {
 
 // NewViveController returns a new ViveController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vivecontroller
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#constructor
 func (ba *Babylon) NewViveController(vrGamepad JSObject) *ViveController {
 
 	args := make([]interface{}, 0, 1+0)

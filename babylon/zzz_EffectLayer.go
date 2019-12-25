@@ -40,7 +40,7 @@ func EffectLayerArrayToJSArray(array []*EffectLayer) []interface{} {
 
 // NewEffectLayer returns a new EffectLayer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.effectlayer
+// https://doc.babylonjs.com/api/classes/babylon.effectlayer#constructor
 func (ba *Babylon) NewEffectLayer(name string, scene *Scene) *EffectLayer {
 
 	args := make([]interface{}, 0, 2+0)

@@ -45,7 +45,7 @@ type NewTonemapPostProcessOpts struct {
 
 // NewTonemapPostProcess returns a new TonemapPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess
+// https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess#constructor
 func (ba *Babylon) NewTonemapPostProcess(name string, _operator js.Value, exposureAdjustment float64, camera *Camera, opts *NewTonemapPostProcessOpts) *TonemapPostProcess {
 	if opts == nil {
 		opts = &NewTonemapPostProcessOpts{}

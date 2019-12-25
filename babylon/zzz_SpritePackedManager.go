@@ -47,7 +47,7 @@ type NewSpritePackedManagerOpts struct {
 
 // NewSpritePackedManager returns a new SpritePackedManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#constructor
 func (ba *Babylon) NewSpritePackedManager(name string, imgUrl string, capacity float64, scene *Scene, opts *NewSpritePackedManagerOpts) *SpritePackedManager {
 	if opts == nil {
 		opts = &NewSpritePackedManagerOpts{}

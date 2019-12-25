@@ -47,7 +47,7 @@ type NewHardwareScalingOptimizationOpts struct {
 
 // NewHardwareScalingOptimization returns a new HardwareScalingOptimization object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization
+// https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization#constructor
 func (ba *Babylon) NewHardwareScalingOptimization(opts *NewHardwareScalingOptimizationOpts) *HardwareScalingOptimization {
 	if opts == nil {
 		opts = &NewHardwareScalingOptimizationOpts{}

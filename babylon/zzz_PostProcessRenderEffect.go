@@ -46,7 +46,7 @@ type NewPostProcessRenderEffectOpts struct {
 
 // NewPostProcessRenderEffect returns a new PostProcessRenderEffect object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect#constructor
 func (ba *Babylon) NewPostProcessRenderEffect(engine *Engine, name string, getPostProcesses JSFunc, opts *NewPostProcessRenderEffectOpts) *PostProcessRenderEffect {
 	if opts == nil {
 		opts = &NewPostProcessRenderEffectOpts{}

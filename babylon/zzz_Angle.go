@@ -38,7 +38,7 @@ func AngleArrayToJSArray(array []*Angle) []interface{} {
 
 // NewAngle returns a new Angle object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.angle
+// https://doc.babylonjs.com/api/classes/babylon.angle#constructor
 func (ba *Babylon) NewAngle(radians float64) *Angle {
 
 	args := make([]interface{}, 0, 1+0)

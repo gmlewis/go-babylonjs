@@ -38,7 +38,7 @@ func VectorMergerBlockArrayToJSArray(array []*VectorMergerBlock) []interface{} {
 
 // NewVectorMergerBlock returns a new VectorMergerBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#constructor
 func (ba *Babylon) NewVectorMergerBlock(name string) *VectorMergerBlock {
 
 	args := make([]interface{}, 0, 1+0)

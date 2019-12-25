@@ -44,7 +44,7 @@ type NewInputBlockOpts struct {
 
 // NewInputBlock returns a new InputBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputblock
+// https://doc.babylonjs.com/api/classes/babylon.inputblock#constructor
 func (ba *Babylon) NewInputBlock(name string, opts *NewInputBlockOpts) *InputBlock {
 	if opts == nil {
 		opts = &NewInputBlockOpts{}

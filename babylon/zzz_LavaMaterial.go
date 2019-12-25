@@ -38,7 +38,7 @@ func LavaMaterialArrayToJSArray(array []*LavaMaterial) []interface{} {
 
 // NewLavaMaterial returns a new LavaMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.lavamaterial
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#constructor
 func (ba *Babylon) NewLavaMaterial(name string, scene *Scene) *LavaMaterial {
 
 	args := make([]interface{}, 0, 2+0)

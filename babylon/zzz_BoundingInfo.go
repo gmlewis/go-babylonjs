@@ -43,7 +43,7 @@ type NewBoundingInfoOpts struct {
 
 // NewBoundingInfo returns a new BoundingInfo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.boundinginfo
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#constructor
 func (ba *Babylon) NewBoundingInfo(minimum *Vector3, maximum *Vector3, opts *NewBoundingInfoOpts) *BoundingInfo {
 	if opts == nil {
 		opts = &NewBoundingInfoOpts{}

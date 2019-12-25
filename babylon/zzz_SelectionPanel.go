@@ -45,7 +45,7 @@ type NewSelectionPanelOpts struct {
 
 // NewSelectionPanel returns a new SelectionPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#constructor
 func (gui *GUI) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *SelectionPanel {
 	if opts == nil {
 		opts = &NewSelectionPanelOpts{}

@@ -46,7 +46,7 @@ type NewPlayAnimationActionOpts struct {
 
 // NewPlayAnimationAction returns a new PlayAnimationAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.playanimationaction
+// https://doc.babylonjs.com/api/classes/babylon.playanimationaction#constructor
 func (ba *Babylon) NewPlayAnimationAction(triggerOptions JSObject, target JSObject, from float64, to float64, opts *NewPlayAnimationActionOpts) *PlayAnimationAction {
 	if opts == nil {
 		opts = &NewPlayAnimationActionOpts{}

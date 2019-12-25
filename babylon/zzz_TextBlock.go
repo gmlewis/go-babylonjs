@@ -44,7 +44,7 @@ type NewTextBlockOpts struct {
 
 // NewTextBlock returns a new TextBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.textblock
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#constructor
 func (gui *GUI) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
 	if opts == nil {
 		opts = &NewTextBlockOpts{}

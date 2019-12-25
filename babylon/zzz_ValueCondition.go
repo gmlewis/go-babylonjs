@@ -43,7 +43,7 @@ type NewValueConditionOpts struct {
 
 // NewValueCondition returns a new ValueCondition object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valuecondition
+// https://doc.babylonjs.com/api/classes/babylon.valuecondition#constructor
 func (ba *Babylon) NewValueCondition(actionManager *ActionManager, target JSObject, propertyPath string, value JSObject, opts *NewValueConditionOpts) *ValueCondition {
 	if opts == nil {
 		opts = &NewValueConditionOpts{}

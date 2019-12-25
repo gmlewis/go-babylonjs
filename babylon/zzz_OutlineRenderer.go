@@ -39,7 +39,7 @@ func OutlineRendererArrayToJSArray(array []*OutlineRenderer) []interface{} {
 
 // NewOutlineRenderer returns a new OutlineRenderer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#constructor
 func (ba *Babylon) NewOutlineRenderer(scene *Scene) *OutlineRenderer {
 
 	args := make([]interface{}, 0, 1+0)

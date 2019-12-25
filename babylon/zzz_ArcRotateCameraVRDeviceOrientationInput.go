@@ -40,7 +40,7 @@ func ArcRotateCameraVRDeviceOrientationInputArrayToJSArray(array []*ArcRotateCam
 
 // NewArcRotateCameraVRDeviceOrientationInput returns a new ArcRotateCameraVRDeviceOrientationInput object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput#constructor
 func (ba *Babylon) NewArcRotateCameraVRDeviceOrientationInput() *ArcRotateCameraVRDeviceOrientationInput {
 
 	args := make([]interface{}, 0, 0+0)

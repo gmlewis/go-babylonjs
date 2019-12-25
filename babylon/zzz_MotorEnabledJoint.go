@@ -40,7 +40,7 @@ func MotorEnabledJointArrayToJSArray(array []*MotorEnabledJoint) []interface{} {
 
 // NewMotorEnabledJoint returns a new MotorEnabledJoint object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.motorenabledjoint
+// https://doc.babylonjs.com/api/classes/babylon.motorenabledjoint#constructor
 func (ba *Babylon) NewMotorEnabledJoint(jsType float64, jointData js.Value) *MotorEnabledJoint {
 
 	args := make([]interface{}, 0, 2+0)

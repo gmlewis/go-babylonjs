@@ -48,7 +48,7 @@ type NewPointsCloudSystemOpts struct {
 
 // NewPointsCloudSystem returns a new PointsCloudSystem object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#constructor
 func (ba *Babylon) NewPointsCloudSystem(name string, pointSize float64, scene *Scene, opts *NewPointsCloudSystemOpts) *PointsCloudSystem {
 	if opts == nil {
 		opts = &NewPointsCloudSystemOpts{}

@@ -38,7 +38,7 @@ func GLTFDataArrayToJSArray(array []*GLTFData) []interface{} {
 
 // NewGLTFData returns a new GLTFData object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gltfdata
+// https://doc.babylonjs.com/api/classes/babylon.gltfdata#constructor
 func (ba *Babylon) NewGLTFData() *GLTFData {
 
 	args := make([]interface{}, 0, 0+0)

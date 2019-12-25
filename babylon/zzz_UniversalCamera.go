@@ -41,7 +41,7 @@ func UniversalCameraArrayToJSArray(array []*UniversalCamera) []interface{} {
 
 // NewUniversalCamera returns a new UniversalCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.universalcamera
+// https://doc.babylonjs.com/api/classes/babylon.universalcamera#constructor
 func (ba *Babylon) NewUniversalCamera(name string, position *Vector3, scene *Scene) *UniversalCamera {
 
 	args := make([]interface{}, 0, 3+0)

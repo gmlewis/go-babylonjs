@@ -38,7 +38,7 @@ func ShadowOnlyMaterialArrayToJSArray(array []*ShadowOnlyMaterial) []interface{}
 
 // NewShadowOnlyMaterial returns a new ShadowOnlyMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial
+// https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial#constructor
 func (ba *Babylon) NewShadowOnlyMaterial(name string, scene *Scene) *ShadowOnlyMaterial {
 
 	args := make([]interface{}, 0, 2+0)

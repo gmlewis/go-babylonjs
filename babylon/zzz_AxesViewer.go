@@ -47,7 +47,7 @@ type NewAxesViewerOpts struct {
 
 // NewAxesViewer returns a new AxesViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.axesviewer
+// https://doc.babylonjs.com/api/classes/babylon.axesviewer#constructor
 func (ba *Babylon) NewAxesViewer(scene *Scene, opts *NewAxesViewerOpts) *AxesViewer {
 	if opts == nil {
 		opts = &NewAxesViewerOpts{}

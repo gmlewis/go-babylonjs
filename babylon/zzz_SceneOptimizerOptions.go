@@ -46,7 +46,7 @@ type NewSceneOptimizerOptionsOpts struct {
 
 // NewSceneOptimizerOptions returns a new SceneOptimizerOptions object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#constructor
 func (ba *Babylon) NewSceneOptimizerOptions(opts *NewSceneOptimizerOptionsOpts) *SceneOptimizerOptions {
 	if opts == nil {
 		opts = &NewSceneOptimizerOptionsOpts{}

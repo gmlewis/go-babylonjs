@@ -39,7 +39,7 @@ func ShadowGeneratorSceneComponentArrayToJSArray(array []*ShadowGeneratorSceneCo
 
 // NewShadowGeneratorSceneComponent returns a new ShadowGeneratorSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#constructor
 func (ba *Babylon) NewShadowGeneratorSceneComponent(scene *Scene) *ShadowGeneratorSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

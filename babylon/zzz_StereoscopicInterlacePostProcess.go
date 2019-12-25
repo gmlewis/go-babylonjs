@@ -45,7 +45,7 @@ type NewStereoscopicInterlacePostProcessOpts struct {
 
 // NewStereoscopicInterlacePostProcess returns a new StereoscopicInterlacePostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#constructor
 func (ba *Babylon) NewStereoscopicInterlacePostProcess(name string, rigCameras []*Camera, isStereoscopicHoriz bool, opts *NewStereoscopicInterlacePostProcessOpts) *StereoscopicInterlacePostProcess {
 	if opts == nil {
 		opts = &NewStereoscopicInterlacePostProcessOpts{}

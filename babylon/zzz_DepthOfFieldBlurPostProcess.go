@@ -51,7 +51,7 @@ type NewDepthOfFieldBlurPostProcessOpts struct {
 
 // NewDepthOfFieldBlurPostProcess returns a new DepthOfFieldBlurPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess#constructor
 func (ba *Babylon) NewDepthOfFieldBlurPostProcess(name string, scene *Scene, direction *Vector2, kernel float64, options float64, camera *Camera, circleOfConfusion *PostProcess, opts *NewDepthOfFieldBlurPostProcessOpts) *DepthOfFieldBlurPostProcess {
 	if opts == nil {
 		opts = &NewDepthOfFieldBlurPostProcessOpts{}

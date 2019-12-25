@@ -40,7 +40,7 @@ func AssetsManagerArrayToJSArray(array []*AssetsManager) []interface{} {
 
 // NewAssetsManager returns a new AssetsManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.assetsmanager
+// https://doc.babylonjs.com/api/classes/babylon.assetsmanager#constructor
 func (ba *Babylon) NewAssetsManager(scene *Scene) *AssetsManager {
 
 	args := make([]interface{}, 0, 1+0)

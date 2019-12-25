@@ -44,7 +44,7 @@ type NewNormalMapProceduralTextureOpts struct {
 
 // NewNormalMapProceduralTexture returns a new NormalMapProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture#constructor
 func (ba *Babylon) NewNormalMapProceduralTexture(name string, size float64, scene *Scene, opts *NewNormalMapProceduralTextureOpts) *NormalMapProceduralTexture {
 	if opts == nil {
 		opts = &NewNormalMapProceduralTextureOpts{}

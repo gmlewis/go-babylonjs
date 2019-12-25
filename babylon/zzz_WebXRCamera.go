@@ -40,7 +40,7 @@ func WebXRCameraArrayToJSArray(array []*WebXRCamera) []interface{} {
 
 // NewWebXRCamera returns a new WebXRCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webxrcamera
+// https://doc.babylonjs.com/api/classes/babylon.webxrcamera#constructor
 func (ba *Babylon) NewWebXRCamera(name string, scene *Scene) *WebXRCamera {
 
 	args := make([]interface{}, 0, 2+0)

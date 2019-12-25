@@ -38,7 +38,7 @@ func PhysicsVortexEventArrayToJSArray(array []*PhysicsVortexEvent) []interface{}
 
 // NewPhysicsVortexEvent returns a new PhysicsVortexEvent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent
+// https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent#constructor
 func (ba *Babylon) NewPhysicsVortexEvent(_scene *Scene, _origin *Vector3, _options *PhysicsVortexEventOptions) *PhysicsVortexEvent {
 
 	args := make([]interface{}, 0, 3+0)

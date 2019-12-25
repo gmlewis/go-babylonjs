@@ -45,7 +45,7 @@ type NewThinEngineOpts struct {
 
 // NewThinEngine returns a new ThinEngine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.thinengine
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#constructor
 func (ba *Babylon) NewThinEngine(canvasOrContext js.Value, opts *NewThinEngineOpts) *ThinEngine {
 	if opts == nil {
 		opts = &NewThinEngineOpts{}

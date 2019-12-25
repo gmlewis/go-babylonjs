@@ -43,7 +43,7 @@ type NewObserverOpts struct {
 
 // NewObserver returns a new Observer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.observer
+// https://doc.babylonjs.com/api/classes/babylon.observer#constructor
 func (ba *Babylon) NewObserver(callback JSFunc, mask float64, opts *NewObserverOpts) *Observer {
 	if opts == nil {
 		opts = &NewObserverOpts{}

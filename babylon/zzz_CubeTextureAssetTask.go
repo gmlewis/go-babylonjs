@@ -45,7 +45,7 @@ type NewCubeTextureAssetTaskOpts struct {
 
 // NewCubeTextureAssetTask returns a new CubeTextureAssetTask object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask
+// https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask#constructor
 func (ba *Babylon) NewCubeTextureAssetTask(name string, url string, opts *NewCubeTextureAssetTaskOpts) *CubeTextureAssetTask {
 	if opts == nil {
 		opts = &NewCubeTextureAssetTaskOpts{}

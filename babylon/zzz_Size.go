@@ -38,7 +38,7 @@ func SizeArrayToJSArray(array []*Size) []interface{} {
 
 // NewSize returns a new Size object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.size
+// https://doc.babylonjs.com/api/classes/babylon.size#constructor
 func (ba *Babylon) NewSize(width float64, height float64) *Size {
 
 	args := make([]interface{}, 0, 2+0)

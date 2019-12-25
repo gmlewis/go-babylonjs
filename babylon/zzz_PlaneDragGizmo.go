@@ -45,7 +45,7 @@ type NewPlaneDragGizmoOpts struct {
 
 // NewPlaneDragGizmo returns a new PlaneDragGizmo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.planedraggizmo
+// https://doc.babylonjs.com/api/classes/babylon.planedraggizmo#constructor
 func (ba *Babylon) NewPlaneDragGizmo(dragPlaneNormal *Vector3, opts *NewPlaneDragGizmoOpts) *PlaneDragGizmo {
 	if opts == nil {
 		opts = &NewPlaneDragGizmoOpts{}

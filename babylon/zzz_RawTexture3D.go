@@ -46,7 +46,7 @@ type NewRawTexture3DOpts struct {
 
 // NewRawTexture3D returns a new RawTexture3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rawtexture3d
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture3d#constructor
 func (ba *Babylon) NewRawTexture3D(data js.Value, width float64, height float64, depth float64, format float64, scene *Scene, opts *NewRawTexture3DOpts) *RawTexture3D {
 	if opts == nil {
 		opts = &NewRawTexture3DOpts{}

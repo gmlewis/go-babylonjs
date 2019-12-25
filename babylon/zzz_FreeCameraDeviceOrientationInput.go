@@ -41,7 +41,7 @@ func FreeCameraDeviceOrientationInputArrayToJSArray(array []*FreeCameraDeviceOri
 
 // NewFreeCameraDeviceOrientationInput returns a new FreeCameraDeviceOrientationInput object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput
+// https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#constructor
 func (ba *Babylon) NewFreeCameraDeviceOrientationInput() *FreeCameraDeviceOrientationInput {
 
 	args := make([]interface{}, 0, 0+0)

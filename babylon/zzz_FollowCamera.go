@@ -46,7 +46,7 @@ type NewFollowCameraOpts struct {
 
 // NewFollowCamera returns a new FollowCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.followcamera
+// https://doc.babylonjs.com/api/classes/babylon.followcamera#constructor
 func (ba *Babylon) NewFollowCamera(name string, position *Vector3, scene *Scene, opts *NewFollowCameraOpts) *FollowCamera {
 	if opts == nil {
 		opts = &NewFollowCameraOpts{}

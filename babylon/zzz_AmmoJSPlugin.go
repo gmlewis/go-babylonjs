@@ -48,7 +48,7 @@ type NewAmmoJSPluginOpts struct {
 
 // NewAmmoJSPlugin returns a new AmmoJSPlugin object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#constructor
 func (ba *Babylon) NewAmmoJSPlugin(opts *NewAmmoJSPluginOpts) *AmmoJSPlugin {
 	if opts == nil {
 		opts = &NewAmmoJSPluginOpts{}

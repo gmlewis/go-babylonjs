@@ -45,7 +45,7 @@ type NewGUI3DManagerOpts struct {
 
 // NewGUI3DManager returns a new GUI3DManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.gui3dmanager
+// https://doc.babylonjs.com/api/classes/babylon.gui.gui3dmanager#constructor
 func (gui *GUI) NewGUI3DManager(opts *NewGUI3DManagerOpts) *GUI3DManager {
 	if opts == nil {
 		opts = &NewGUI3DManagerOpts{}

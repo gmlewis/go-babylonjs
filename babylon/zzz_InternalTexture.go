@@ -44,7 +44,7 @@ type NewInternalTextureOpts struct {
 
 // NewInternalTexture returns a new InternalTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.internaltexture
+// https://doc.babylonjs.com/api/classes/babylon.internaltexture#constructor
 func (ba *Babylon) NewInternalTexture(engine *ThinEngine, source js.Value, opts *NewInternalTextureOpts) *InternalTexture {
 	if opts == nil {
 		opts = &NewInternalTextureOpts{}

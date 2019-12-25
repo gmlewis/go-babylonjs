@@ -45,7 +45,7 @@ type NewAxisScaleGizmoOpts struct {
 
 // NewAxisScaleGizmo returns a new AxisScaleGizmo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo
+// https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo#constructor
 func (ba *Babylon) NewAxisScaleGizmo(dragAxis *Vector3, opts *NewAxisScaleGizmoOpts) *AxisScaleGizmo {
 	if opts == nil {
 		opts = &NewAxisScaleGizmoOpts{}

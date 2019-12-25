@@ -38,7 +38,7 @@ func FireMaterialArrayToJSArray(array []*FireMaterial) []interface{} {
 
 // NewFireMaterial returns a new FireMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.firematerial
+// https://doc.babylonjs.com/api/classes/babylon.firematerial#constructor
 func (ba *Babylon) NewFireMaterial(name string, scene *Scene) *FireMaterial {
 
 	args := make([]interface{}, 0, 2+0)

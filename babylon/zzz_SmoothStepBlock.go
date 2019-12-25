@@ -38,7 +38,7 @@ func SmoothStepBlockArrayToJSArray(array []*SmoothStepBlock) []interface{} {
 
 // NewSmoothStepBlock returns a new SmoothStepBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.smoothstepblock
+// https://doc.babylonjs.com/api/classes/babylon.smoothstepblock#constructor
 func (ba *Babylon) NewSmoothStepBlock(name string) *SmoothStepBlock {
 
 	args := make([]interface{}, 0, 1+0)

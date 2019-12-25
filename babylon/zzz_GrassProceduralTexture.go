@@ -44,7 +44,7 @@ type NewGrassProceduralTextureOpts struct {
 
 // NewGrassProceduralTexture returns a new GrassProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#constructor
 func (ba *Babylon) NewGrassProceduralTexture(name string, size float64, scene *Scene, opts *NewGrassProceduralTextureOpts) *GrassProceduralTexture {
 	if opts == nil {
 		opts = &NewGrassProceduralTextureOpts{}

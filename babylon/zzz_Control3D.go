@@ -43,7 +43,7 @@ type NewControl3DOpts struct {
 
 // NewControl3D returns a new Control3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.control3d
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#constructor
 func (gui *GUI) NewControl3D(opts *NewControl3DOpts) *Control3D {
 	if opts == nil {
 		opts = &NewControl3DOpts{}

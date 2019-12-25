@@ -48,7 +48,7 @@ type NewHighlightsPostProcessOpts struct {
 
 // NewHighlightsPostProcess returns a new HighlightsPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess
+// https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess#constructor
 func (ba *Babylon) NewHighlightsPostProcess(name string, options float64, camera *Camera, opts *NewHighlightsPostProcessOpts) *HighlightsPostProcess {
 	if opts == nil {
 		opts = &NewHighlightsPostProcessOpts{}

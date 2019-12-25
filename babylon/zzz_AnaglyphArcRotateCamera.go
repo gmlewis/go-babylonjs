@@ -40,7 +40,7 @@ func AnaglyphArcRotateCameraArrayToJSArray(array []*AnaglyphArcRotateCamera) []i
 
 // NewAnaglyphArcRotateCamera returns a new AnaglyphArcRotateCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera
+// https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera#constructor
 func (ba *Babylon) NewAnaglyphArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphArcRotateCamera {
 
 	args := make([]interface{}, 0, 7+0)

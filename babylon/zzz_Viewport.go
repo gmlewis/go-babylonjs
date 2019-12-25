@@ -38,7 +38,7 @@ func ViewportArrayToJSArray(array []*Viewport) []interface{} {
 
 // NewViewport returns a new Viewport object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.viewport
+// https://doc.babylonjs.com/api/classes/babylon.viewport#constructor
 func (ba *Babylon) NewViewport(x float64, y float64, width float64, height float64) *Viewport {
 
 	args := make([]interface{}, 0, 4+0)

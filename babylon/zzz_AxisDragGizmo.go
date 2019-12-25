@@ -45,7 +45,7 @@ type NewAxisDragGizmoOpts struct {
 
 // NewAxisDragGizmo returns a new AxisDragGizmo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#constructor
 func (ba *Babylon) NewAxisDragGizmo(dragAxis *Vector3, opts *NewAxisDragGizmoOpts) *AxisDragGizmo {
 	if opts == nil {
 		opts = &NewAxisDragGizmoOpts{}

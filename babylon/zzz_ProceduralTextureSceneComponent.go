@@ -39,7 +39,7 @@ func ProceduralTextureSceneComponentArrayToJSArray(array []*ProceduralTextureSce
 
 // NewProceduralTextureSceneComponent returns a new ProceduralTextureSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#constructor
 func (ba *Babylon) NewProceduralTextureSceneComponent(scene *Scene) *ProceduralTextureSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

@@ -38,7 +38,7 @@ func ColorMergerBlockArrayToJSArray(array []*ColorMergerBlock) []interface{} {
 
 // NewColorMergerBlock returns a new ColorMergerBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colormergerblock
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#constructor
 func (ba *Babylon) NewColorMergerBlock(name string) *ColorMergerBlock {
 
 	args := make([]interface{}, 0, 1+0)

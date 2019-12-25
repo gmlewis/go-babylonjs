@@ -49,7 +49,7 @@ type NewBoneOpts struct {
 
 // NewBone returns a new Bone object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.bone
+// https://doc.babylonjs.com/api/classes/babylon.bone#constructor
 func (ba *Babylon) NewBone(name string, skeleton *Skeleton, opts *NewBoneOpts) *Bone {
 	if opts == nil {
 		opts = &NewBoneOpts{}

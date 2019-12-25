@@ -47,7 +47,7 @@ type NewPlaneRotationGizmoOpts struct {
 
 // NewPlaneRotationGizmo returns a new PlaneRotationGizmo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#constructor
 func (ba *Babylon) NewPlaneRotationGizmo(planeNormal *Vector3, opts *NewPlaneRotationGizmoOpts) *PlaneRotationGizmo {
 	if opts == nil {
 		opts = &NewPlaneRotationGizmoOpts{}

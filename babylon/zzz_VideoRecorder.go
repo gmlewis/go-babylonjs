@@ -46,7 +46,7 @@ type NewVideoRecorderOpts struct {
 
 // NewVideoRecorder returns a new VideoRecorder object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.videorecorder
+// https://doc.babylonjs.com/api/classes/babylon.videorecorder#constructor
 func (ba *Babylon) NewVideoRecorder(engine *Engine, opts *NewVideoRecorderOpts) *VideoRecorder {
 	if opts == nil {
 		opts = &NewVideoRecorderOpts{}

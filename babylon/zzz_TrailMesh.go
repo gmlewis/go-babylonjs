@@ -45,7 +45,7 @@ type NewTrailMeshOpts struct {
 
 // NewTrailMesh returns a new TrailMesh object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.trailmesh
+// https://doc.babylonjs.com/api/classes/babylon.trailmesh#constructor
 func (ba *Babylon) NewTrailMesh(name string, generator *AbstractMesh, scene *Scene, opts *NewTrailMeshOpts) *TrailMesh {
 	if opts == nil {
 		opts = &NewTrailMeshOpts{}

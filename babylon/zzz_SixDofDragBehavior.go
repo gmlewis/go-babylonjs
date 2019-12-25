@@ -38,7 +38,7 @@ func SixDofDragBehaviorArrayToJSArray(array []*SixDofDragBehavior) []interface{}
 
 // NewSixDofDragBehavior returns a new SixDofDragBehavior object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior
+// https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior#constructor
 func (ba *Babylon) NewSixDofDragBehavior() *SixDofDragBehavior {
 
 	args := make([]interface{}, 0, 0+0)

@@ -46,7 +46,7 @@ type NewSetStateActionOpts struct {
 
 // NewSetStateAction returns a new SetStateAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.setstateaction
+// https://doc.babylonjs.com/api/classes/babylon.setstateaction#constructor
 func (ba *Babylon) NewSetStateAction(triggerOptions JSObject, target JSObject, value string, opts *NewSetStateActionOpts) *SetStateAction {
 	if opts == nil {
 		opts = &NewSetStateActionOpts{}

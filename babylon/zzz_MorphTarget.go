@@ -46,7 +46,7 @@ type NewMorphTargetOpts struct {
 
 // NewMorphTarget returns a new MorphTarget object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.morphtarget
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#constructor
 func (ba *Babylon) NewMorphTarget(name string, opts *NewMorphTargetOpts) *MorphTarget {
 	if opts == nil {
 		opts = &NewMorphTargetOpts{}

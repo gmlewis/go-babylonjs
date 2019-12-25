@@ -44,7 +44,7 @@ type NewFireProceduralTextureOpts struct {
 
 // NewFireProceduralTexture returns a new FireProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture#constructor
 func (ba *Babylon) NewFireProceduralTexture(name string, size float64, scene *Scene, opts *NewFireProceduralTextureOpts) *FireProceduralTexture {
 	if opts == nil {
 		opts = &NewFireProceduralTextureOpts{}

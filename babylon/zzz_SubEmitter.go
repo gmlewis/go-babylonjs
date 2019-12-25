@@ -38,7 +38,7 @@ func SubEmitterArrayToJSArray(array []*SubEmitter) []interface{} {
 
 // NewSubEmitter returns a new SubEmitter object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.subemitter
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#constructor
 func (ba *Babylon) NewSubEmitter(particleSystem *ParticleSystem) *SubEmitter {
 
 	args := make([]interface{}, 0, 1+0)

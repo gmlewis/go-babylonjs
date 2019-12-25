@@ -46,7 +46,7 @@ type NewRawTexture2DArrayOpts struct {
 
 // NewRawTexture2DArray returns a new RawTexture2DArray object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rawtexture2darray
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture2darray#constructor
 func (ba *Babylon) NewRawTexture2DArray(data js.Value, width float64, height float64, depth float64, format float64, scene *Scene, opts *NewRawTexture2DArrayOpts) *RawTexture2DArray {
 	if opts == nil {
 		opts = &NewRawTexture2DArrayOpts{}

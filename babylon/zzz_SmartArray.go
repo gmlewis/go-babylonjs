@@ -38,7 +38,7 @@ func SmartArrayArrayToJSArray(array []*SmartArray) []interface{} {
 
 // NewSmartArray returns a new SmartArray object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.smartarray
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#constructor
 func (ba *Babylon) NewSmartArray(capacity float64) *SmartArray {
 
 	args := make([]interface{}, 0, 1+0)

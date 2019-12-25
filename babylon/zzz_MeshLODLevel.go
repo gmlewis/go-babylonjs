@@ -40,7 +40,7 @@ func MeshLODLevelArrayToJSArray(array []*MeshLODLevel) []interface{} {
 
 // NewMeshLODLevel returns a new MeshLODLevel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.meshlodlevel
+// https://doc.babylonjs.com/api/classes/babylon.meshlodlevel#constructor
 func (ba *Babylon) NewMeshLODLevel(distance float64, mesh *Mesh) *MeshLODLevel {
 
 	args := make([]interface{}, 0, 2+0)

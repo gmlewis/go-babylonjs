@@ -38,7 +38,7 @@ func ReplaceColorBlockArrayToJSArray(array []*ReplaceColorBlock) []interface{} {
 
 // NewReplaceColorBlock returns a new ReplaceColorBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.replacecolorblock
+// https://doc.babylonjs.com/api/classes/babylon.replacecolorblock#constructor
 func (ba *Babylon) NewReplaceColorBlock(name string) *ReplaceColorBlock {
 
 	args := make([]interface{}, 0, 1+0)

@@ -41,7 +41,7 @@ func LensFlareArrayToJSArray(array []*LensFlare) []interface{} {
 
 // NewLensFlare returns a new LensFlare object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.lensflare
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#constructor
 func (ba *Babylon) NewLensFlare(size float64, position float64, color *Color3, imgUrl string, system *LensFlareSystem) *LensFlare {
 
 	args := make([]interface{}, 0, 5+0)

@@ -38,7 +38,7 @@ func MinBlockArrayToJSArray(array []*MinBlock) []interface{} {
 
 // NewMinBlock returns a new MinBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.minblock
+// https://doc.babylonjs.com/api/classes/babylon.minblock#constructor
 func (ba *Babylon) NewMinBlock(name string) *MinBlock {
 
 	args := make([]interface{}, 0, 1+0)

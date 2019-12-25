@@ -38,7 +38,7 @@ func WebVRControllerArrayToJSArray(array []*WebVRController) []interface{} {
 
 // NewWebVRController returns a new WebVRController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller
+// https://doc.babylonjs.com/api/classes/babylon.webvrcontroller#constructor
 func (ba *Babylon) NewWebVRController(vrGamepad JSObject) *WebVRController {
 
 	args := make([]interface{}, 0, 1+0)

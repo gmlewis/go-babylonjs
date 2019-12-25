@@ -39,7 +39,7 @@ func VRMultiviewToSingleviewPostProcessArrayToJSArray(array []*VRMultiviewToSing
 
 // NewVRMultiviewToSingleviewPostProcess returns a new VRMultiviewToSingleviewPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess#constructor
 func (ba *Babylon) NewVRMultiviewToSingleviewPostProcess(name string, camera *Camera, scaleFactor float64) *VRMultiviewToSingleviewPostProcess {
 
 	args := make([]interface{}, 0, 3+0)

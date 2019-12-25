@@ -46,7 +46,7 @@ type NewNoiseProceduralTextureOpts struct {
 
 // NewNoiseProceduralTexture returns a new NoiseProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#constructor
 func (ba *Babylon) NewNoiseProceduralTexture(name string, opts *NewNoiseProceduralTextureOpts) *NoiseProceduralTexture {
 	if opts == nil {
 		opts = &NewNoiseProceduralTextureOpts{}

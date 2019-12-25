@@ -46,7 +46,7 @@ type NewSetValueActionOpts struct {
 
 // NewSetValueAction returns a new SetValueAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.setvalueaction
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#constructor
 func (ba *Babylon) NewSetValueAction(triggerOptions JSObject, target JSObject, propertyPath string, value JSObject, opts *NewSetValueActionOpts) *SetValueAction {
 	if opts == nil {
 		opts = &NewSetValueActionOpts{}

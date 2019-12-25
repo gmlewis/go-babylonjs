@@ -45,7 +45,7 @@ type NewSwitchBooleanActionOpts struct {
 
 // NewSwitchBooleanAction returns a new SwitchBooleanAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#constructor
 func (ba *Babylon) NewSwitchBooleanAction(triggerOptions JSObject, target JSObject, propertyPath string, opts *NewSwitchBooleanActionOpts) *SwitchBooleanAction {
 	if opts == nil {
 		opts = &NewSwitchBooleanActionOpts{}

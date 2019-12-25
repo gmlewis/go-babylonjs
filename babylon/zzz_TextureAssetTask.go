@@ -45,7 +45,7 @@ type NewTextureAssetTaskOpts struct {
 
 // NewTextureAssetTask returns a new TextureAssetTask object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textureassettask
+// https://doc.babylonjs.com/api/classes/babylon.textureassettask#constructor
 func (ba *Babylon) NewTextureAssetTask(name string, url string, opts *NewTextureAssetTaskOpts) *TextureAssetTask {
 	if opts == nil {
 		opts = &NewTextureAssetTaskOpts{}

@@ -43,7 +43,7 @@ type NewDisplayGridOpts struct {
 
 // NewDisplayGrid returns a new DisplayGrid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#constructor
 func (gui *GUI) NewDisplayGrid(opts *NewDisplayGridOpts) *DisplayGrid {
 	if opts == nil {
 		opts = &NewDisplayGridOpts{}

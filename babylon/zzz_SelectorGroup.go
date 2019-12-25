@@ -39,7 +39,7 @@ func SelectorGroupArrayToJSArray(array []*SelectorGroup) []interface{} {
 
 // NewSelectorGroup returns a new SelectorGroup object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup#constructor
 func (gui *GUI) NewSelectorGroup(name string) *SelectorGroup {
 
 	args := make([]interface{}, 0, 1+0)

@@ -46,7 +46,7 @@ type NewAudioEngineOpts struct {
 
 // NewAudioEngine returns a new AudioEngine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.audioengine
+// https://doc.babylonjs.com/api/classes/babylon.audioengine#constructor
 func (ba *Babylon) NewAudioEngine(opts *NewAudioEngineOpts) *AudioEngine {
 	if opts == nil {
 		opts = &NewAudioEngineOpts{}

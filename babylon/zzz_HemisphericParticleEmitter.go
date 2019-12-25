@@ -46,7 +46,7 @@ type NewHemisphericParticleEmitterOpts struct {
 
 // NewHemisphericParticleEmitter returns a new HemisphericParticleEmitter object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#constructor
 func (ba *Babylon) NewHemisphericParticleEmitter(opts *NewHemisphericParticleEmitterOpts) *HemisphericParticleEmitter {
 	if opts == nil {
 		opts = &NewHemisphericParticleEmitterOpts{}

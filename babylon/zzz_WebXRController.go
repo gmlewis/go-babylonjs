@@ -43,7 +43,7 @@ type NewWebXRControllerOpts struct {
 
 // NewWebXRController returns a new WebXRController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webxrcontroller
+// https://doc.babylonjs.com/api/classes/babylon.webxrcontroller#constructor
 func (ba *Babylon) NewWebXRController(scene *Scene, inputSource js.Value, opts *NewWebXRControllerOpts) *WebXRController {
 	if opts == nil {
 		opts = &NewWebXRControllerOpts{}

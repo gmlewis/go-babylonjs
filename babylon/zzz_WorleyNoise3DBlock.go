@@ -38,7 +38,7 @@ func WorleyNoise3DBlockArrayToJSArray(array []*WorleyNoise3DBlock) []interface{}
 
 // NewWorleyNoise3DBlock returns a new WorleyNoise3DBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#constructor
 func (ba *Babylon) NewWorleyNoise3DBlock(name string) *WorleyNoise3DBlock {
 
 	args := make([]interface{}, 0, 1+0)

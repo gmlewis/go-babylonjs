@@ -41,7 +41,7 @@ func Vector3ArrayToJSArray(array []*Vector3) []interface{} {
 
 // NewVector3 returns a new Vector3 object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vector3
+// https://doc.babylonjs.com/api/classes/babylon.vector3#constructor
 func (ba *Babylon) NewVector3(x float64, y float64, z float64) *Vector3 {
 
 	args := make([]interface{}, 0, 3+0)

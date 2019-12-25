@@ -41,7 +41,7 @@ func ArcFollowCameraArrayToJSArray(array []*ArcFollowCamera) []interface{} {
 
 // NewArcFollowCamera returns a new ArcFollowCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera
+// https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera#constructor
 func (ba *Babylon) NewArcFollowCamera(name string, alpha float64, beta float64, radius float64, target *AbstractMesh, scene *Scene) *ArcFollowCamera {
 
 	args := make([]interface{}, 0, 6+0)

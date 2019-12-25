@@ -45,7 +45,7 @@ type NewFilterPostProcessOpts struct {
 
 // NewFilterPostProcess returns a new FilterPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.filterpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.filterpostprocess#constructor
 func (ba *Babylon) NewFilterPostProcess(name string, kernelMatrix *Matrix, options float64, camera *Camera, opts *NewFilterPostProcessOpts) *FilterPostProcess {
 	if opts == nil {
 		opts = &NewFilterPostProcessOpts{}

@@ -38,7 +38,7 @@ func PowBlockArrayToJSArray(array []*PowBlock) []interface{} {
 
 // NewPowBlock returns a new PowBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.powblock
+// https://doc.babylonjs.com/api/classes/babylon.powblock#constructor
 func (ba *Babylon) NewPowBlock(name string) *PowBlock {
 
 	args := make([]interface{}, 0, 1+0)

@@ -38,7 +38,7 @@ func NormalMaterialArrayToJSArray(array []*NormalMaterial) []interface{} {
 
 // NewNormalMaterial returns a new NormalMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.normalmaterial
+// https://doc.babylonjs.com/api/classes/babylon.normalmaterial#constructor
 func (ba *Babylon) NewNormalMaterial(name string, scene *Scene) *NormalMaterial {
 
 	args := make([]interface{}, 0, 2+0)

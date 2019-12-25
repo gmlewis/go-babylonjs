@@ -41,7 +41,7 @@ func Curve3ArrayToJSArray(array []*Curve3) []interface{} {
 
 // NewCurve3 returns a new Curve3 object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.curve3
+// https://doc.babylonjs.com/api/classes/babylon.curve3#constructor
 func (ba *Babylon) NewCurve3(points []*Vector3) *Curve3 {
 
 	args := make([]interface{}, 0, 1+0)

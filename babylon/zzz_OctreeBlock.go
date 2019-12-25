@@ -40,7 +40,7 @@ func OctreeBlockArrayToJSArray(array []*OctreeBlock) []interface{} {
 
 // NewOctreeBlock returns a new OctreeBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.octreeblock
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#constructor
 func (ba *Babylon) NewOctreeBlock(minPoint *Vector3, maxPoint *Vector3, capacity float64, depth float64, maxDepth float64, creationFunc JSFunc) *OctreeBlock {
 
 	args := make([]interface{}, 0, 6+0)

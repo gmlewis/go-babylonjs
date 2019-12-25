@@ -46,7 +46,7 @@ type NewGamepadOpts struct {
 
 // NewGamepad returns a new Gamepad object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gamepad
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#constructor
 func (ba *Babylon) NewGamepad(id string, index float64, browserGamepad JSObject, opts *NewGamepadOpts) *Gamepad {
 	if opts == nil {
 		opts = &NewGamepadOpts{}

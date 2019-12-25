@@ -44,7 +44,7 @@ type NewOBJFileLoaderOpts struct {
 
 // NewOBJFileLoader returns a new OBJFileLoader object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.objfileloader
+// https://doc.babylonjs.com/api/classes/babylon.objfileloader#constructor
 func (ba *Babylon) NewOBJFileLoader(opts *NewOBJFileLoaderOpts) *OBJFileLoader {
 	if opts == nil {
 		opts = &NewOBJFileLoaderOpts{}

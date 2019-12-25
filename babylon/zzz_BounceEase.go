@@ -47,7 +47,7 @@ type NewBounceEaseOpts struct {
 
 // NewBounceEase returns a new BounceEase object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.bounceease
+// https://doc.babylonjs.com/api/classes/babylon.bounceease#constructor
 func (ba *Babylon) NewBounceEase(opts *NewBounceEaseOpts) *BounceEase {
 	if opts == nil {
 		opts = &NewBounceEaseOpts{}

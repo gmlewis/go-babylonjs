@@ -45,7 +45,7 @@ type NewCombineActionOpts struct {
 
 // NewCombineAction returns a new CombineAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.combineaction
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#constructor
 func (ba *Babylon) NewCombineAction(triggerOptions JSObject, children []*Action, opts *NewCombineActionOpts) *CombineAction {
 	if opts == nil {
 		opts = &NewCombineActionOpts{}

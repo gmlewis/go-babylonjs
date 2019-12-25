@@ -43,7 +43,7 @@ type NewRadioButtonOpts struct {
 
 // NewRadioButton returns a new RadioButton object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#constructor
 func (gui *GUI) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
 	if opts == nil {
 		opts = &NewRadioButtonOpts{}

@@ -53,7 +53,7 @@ type NewTextureOpts struct {
 
 // NewTexture returns a new Texture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.texture
+// https://doc.babylonjs.com/api/classes/babylon.texture#constructor
 func (ba *Babylon) NewTexture(url string, sceneOrEngine *Scene, opts *NewTextureOpts) *Texture {
 	if opts == nil {
 		opts = &NewTextureOpts{}

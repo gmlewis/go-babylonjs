@@ -48,7 +48,7 @@ type NewSharpenPostProcessOpts struct {
 
 // NewSharpenPostProcess returns a new SharpenPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#constructor
 func (ba *Babylon) NewSharpenPostProcess(name string, options float64, camera *Camera, opts *NewSharpenPostProcessOpts) *SharpenPostProcess {
 	if opts == nil {
 		opts = &NewSharpenPostProcessOpts{}

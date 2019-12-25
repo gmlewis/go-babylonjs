@@ -46,7 +46,7 @@ type NewReflectionProbeOpts struct {
 
 // NewReflectionProbe returns a new ReflectionProbe object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#constructor
 func (ba *Babylon) NewReflectionProbe(name string, size float64, scene *Scene, opts *NewReflectionProbeOpts) *ReflectionProbe {
 	if opts == nil {
 		opts = &NewReflectionProbeOpts{}

@@ -38,7 +38,7 @@ func DeferredArrayToJSArray(array []*Deferred) []interface{} {
 
 // NewDeferred returns a new Deferred object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.deferred
+// https://doc.babylonjs.com/api/classes/babylon.deferred#constructor
 func (ba *Babylon) NewDeferred() *Deferred {
 
 	args := make([]interface{}, 0, 0+0)

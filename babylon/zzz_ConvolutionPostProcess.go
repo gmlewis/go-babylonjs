@@ -48,7 +48,7 @@ type NewConvolutionPostProcessOpts struct {
 
 // NewConvolutionPostProcess returns a new ConvolutionPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#constructor
 func (ba *Babylon) NewConvolutionPostProcess(name string, kernel []float64, options float64, camera *Camera, opts *NewConvolutionPostProcessOpts) *ConvolutionPostProcess {
 	if opts == nil {
 		opts = &NewConvolutionPostProcessOpts{}

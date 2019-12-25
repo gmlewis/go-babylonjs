@@ -43,7 +43,7 @@ func ColorGradingTextureArrayToJSArray(array []*ColorGradingTexture) []interface
 
 // NewColorGradingTexture returns a new ColorGradingTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture
+// https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture#constructor
 func (ba *Babylon) NewColorGradingTexture(url string, scene *Scene) *ColorGradingTexture {
 
 	args := make([]interface{}, 0, 2+0)

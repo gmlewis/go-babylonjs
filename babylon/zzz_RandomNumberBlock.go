@@ -38,7 +38,7 @@ func RandomNumberBlockArrayToJSArray(array []*RandomNumberBlock) []interface{} {
 
 // NewRandomNumberBlock returns a new RandomNumberBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.randomnumberblock
+// https://doc.babylonjs.com/api/classes/babylon.randomnumberblock#constructor
 func (ba *Babylon) NewRandomNumberBlock(name string) *RandomNumberBlock {
 
 	args := make([]interface{}, 0, 1+0)

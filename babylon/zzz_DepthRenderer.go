@@ -46,7 +46,7 @@ type NewDepthRendererOpts struct {
 
 // NewDepthRenderer returns a new DepthRenderer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.depthrenderer
+// https://doc.babylonjs.com/api/classes/babylon.depthrenderer#constructor
 func (ba *Babylon) NewDepthRenderer(scene *Scene, opts *NewDepthRendererOpts) *DepthRenderer {
 	if opts == nil {
 		opts = &NewDepthRendererOpts{}

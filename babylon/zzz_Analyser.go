@@ -40,7 +40,7 @@ func AnalyserArrayToJSArray(array []*Analyser) []interface{} {
 
 // NewAnalyser returns a new Analyser object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.analyser
+// https://doc.babylonjs.com/api/classes/babylon.analyser#constructor
 func (ba *Babylon) NewAnalyser(scene *Scene) *Analyser {
 
 	args := make([]interface{}, 0, 1+0)

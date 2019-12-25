@@ -38,7 +38,7 @@ func NodeMaterialBuildStateSharedDataArrayToJSArray(array []*NodeMaterialBuildSt
 
 // NewNodeMaterialBuildStateSharedData returns a new NodeMaterialBuildStateSharedData object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata#constructor
 func (ba *Babylon) NewNodeMaterialBuildStateSharedData() *NodeMaterialBuildStateSharedData {
 
 	args := make([]interface{}, 0, 0+0)

@@ -46,7 +46,7 @@ type NewPolygonMeshBuilderOpts struct {
 
 // NewPolygonMeshBuilder returns a new PolygonMeshBuilder object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder
+// https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#constructor
 func (ba *Babylon) NewPolygonMeshBuilder(name string, contours []*Path2, opts *NewPolygonMeshBuilderOpts) *PolygonMeshBuilder {
 	if opts == nil {
 		opts = &NewPolygonMeshBuilderOpts{}

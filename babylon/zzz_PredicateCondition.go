@@ -38,7 +38,7 @@ func PredicateConditionArrayToJSArray(array []*PredicateCondition) []interface{}
 
 // NewPredicateCondition returns a new PredicateCondition object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.predicatecondition
+// https://doc.babylonjs.com/api/classes/babylon.predicatecondition#constructor
 func (ba *Babylon) NewPredicateCondition(actionManager *ActionManager, predicate JSFunc) *PredicateCondition {
 
 	args := make([]interface{}, 0, 2+0)

@@ -51,7 +51,7 @@ type NewPostProcessOpts struct {
 
 // NewPostProcess returns a new PostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.postprocess
+// https://doc.babylonjs.com/api/classes/babylon.postprocess#constructor
 func (ba *Babylon) NewPostProcess(name string, fragmentUrl string, parameters []string, samplers []string, options float64, camera *Camera, opts *NewPostProcessOpts) *PostProcess {
 	if opts == nil {
 		opts = &NewPostProcessOpts{}

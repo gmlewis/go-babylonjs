@@ -45,7 +45,7 @@ type NewDisplayPassPostProcessOpts struct {
 
 // NewDisplayPassPostProcess returns a new DisplayPassPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess
+// https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess#constructor
 func (ba *Babylon) NewDisplayPassPostProcess(name string, options float64, camera *Camera, opts *NewDisplayPassPostProcessOpts) *DisplayPassPostProcess {
 	if opts == nil {
 		opts = &NewDisplayPassPostProcessOpts{}

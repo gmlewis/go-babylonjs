@@ -43,7 +43,7 @@ type NewPositionGizmoOpts struct {
 
 // NewPositionGizmo returns a new PositionGizmo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.positiongizmo
+// https://doc.babylonjs.com/api/classes/babylon.positiongizmo#constructor
 func (ba *Babylon) NewPositionGizmo(opts *NewPositionGizmoOpts) *PositionGizmo {
 	if opts == nil {
 		opts = &NewPositionGizmoOpts{}

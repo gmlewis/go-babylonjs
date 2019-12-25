@@ -47,7 +47,7 @@ type NewTextureOptimizationOpts struct {
 
 // NewTextureOptimization returns a new TextureOptimization object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textureoptimization
+// https://doc.babylonjs.com/api/classes/babylon.textureoptimization#constructor
 func (ba *Babylon) NewTextureOptimization(opts *NewTextureOptimizationOpts) *TextureOptimization {
 	if opts == nil {
 		opts = &NewTextureOptimizationOpts{}

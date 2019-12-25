@@ -46,7 +46,7 @@ type NewAsciiArtPostProcessOpts struct {
 
 // NewAsciiArtPostProcess returns a new AsciiArtPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#constructor
 func (ba *Babylon) NewAsciiArtPostProcess(name string, camera *Camera, opts *NewAsciiArtPostProcessOpts) *AsciiArtPostProcess {
 	if opts == nil {
 		opts = &NewAsciiArtPostProcessOpts{}

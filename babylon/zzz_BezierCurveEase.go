@@ -49,7 +49,7 @@ type NewBezierCurveEaseOpts struct {
 
 // NewBezierCurveEase returns a new BezierCurveEase object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.beziercurveease
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#constructor
 func (ba *Babylon) NewBezierCurveEase(opts *NewBezierCurveEaseOpts) *BezierCurveEase {
 	if opts == nil {
 		opts = &NewBezierCurveEaseOpts{}

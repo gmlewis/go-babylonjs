@@ -46,7 +46,7 @@ type NewDoNothingActionOpts struct {
 
 // NewDoNothingAction returns a new DoNothingAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.donothingaction
+// https://doc.babylonjs.com/api/classes/babylon.donothingaction#constructor
 func (ba *Babylon) NewDoNothingAction(opts *NewDoNothingActionOpts) *DoNothingAction {
 	if opts == nil {
 		opts = &NewDoNothingActionOpts{}

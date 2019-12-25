@@ -38,7 +38,7 @@ func FresnelBlockArrayToJSArray(array []*FresnelBlock) []interface{} {
 
 // NewFresnelBlock returns a new FresnelBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fresnelblock
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#constructor
 func (ba *Babylon) NewFresnelBlock(name string) *FresnelBlock {
 
 	args := make([]interface{}, 0, 1+0)

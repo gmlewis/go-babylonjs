@@ -38,7 +38,7 @@ func DistanceBlockArrayToJSArray(array []*DistanceBlock) []interface{} {
 
 // NewDistanceBlock returns a new DistanceBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.distanceblock
+// https://doc.babylonjs.com/api/classes/babylon.distanceblock#constructor
 func (ba *Babylon) NewDistanceBlock(name string) *DistanceBlock {
 
 	args := make([]interface{}, 0, 1+0)

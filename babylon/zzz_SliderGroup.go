@@ -39,7 +39,7 @@ func SliderGroupArrayToJSArray(array []*SliderGroup) []interface{} {
 
 // NewSliderGroup returns a new SliderGroup object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.slidergroup
+// https://doc.babylonjs.com/api/classes/babylon.gui.slidergroup#constructor
 func (gui *GUI) NewSliderGroup(name string) *SliderGroup {
 
 	args := make([]interface{}, 0, 1+0)

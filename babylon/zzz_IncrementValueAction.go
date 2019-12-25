@@ -46,7 +46,7 @@ type NewIncrementValueActionOpts struct {
 
 // NewIncrementValueAction returns a new IncrementValueAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction
+// https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction#constructor
 func (ba *Babylon) NewIncrementValueAction(triggerOptions JSObject, target JSObject, propertyPath string, value JSObject, opts *NewIncrementValueActionOpts) *IncrementValueAction {
 	if opts == nil {
 		opts = &NewIncrementValueActionOpts{}

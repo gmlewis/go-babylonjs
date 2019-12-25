@@ -38,7 +38,7 @@ func MorphTargetsBlockArrayToJSArray(array []*MorphTargetsBlock) []interface{} {
 
 // NewMorphTargetsBlock returns a new MorphTargetsBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#constructor
 func (ba *Babylon) NewMorphTargetsBlock(name string) *MorphTargetsBlock {
 
 	args := make([]interface{}, 0, 1+0)

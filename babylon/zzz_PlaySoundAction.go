@@ -43,7 +43,7 @@ type NewPlaySoundActionOpts struct {
 
 // NewPlaySoundAction returns a new PlaySoundAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.playsoundaction
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#constructor
 func (ba *Babylon) NewPlaySoundAction(triggerOptions JSObject, sound *Sound, opts *NewPlaySoundActionOpts) *PlaySoundAction {
 	if opts == nil {
 		opts = &NewPlaySoundActionOpts{}

@@ -49,7 +49,7 @@ type NewInterpolateValueActionOpts struct {
 
 // NewInterpolateValueAction returns a new InterpolateValueAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction
+// https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction#constructor
 func (ba *Babylon) NewInterpolateValueAction(triggerOptions JSObject, target JSObject, propertyPath string, value JSObject, opts *NewInterpolateValueActionOpts) *InterpolateValueAction {
 	if opts == nil {
 		opts = &NewInterpolateValueActionOpts{}

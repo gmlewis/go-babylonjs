@@ -43,7 +43,7 @@ type NewLineOpts struct {
 
 // NewLine returns a new Line object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.line
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#constructor
 func (gui *GUI) NewLine(opts *NewLineOpts) *Line {
 	if opts == nil {
 		opts = &NewLineOpts{}

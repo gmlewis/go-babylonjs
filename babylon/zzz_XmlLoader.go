@@ -43,7 +43,7 @@ type NewXmlLoaderOpts struct {
 
 // NewXmlLoader returns a new XmlLoader object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.xmlloader
+// https://doc.babylonjs.com/api/classes/babylon.gui.xmlloader#constructor
 func (gui *GUI) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
 	if opts == nil {
 		opts = &NewXmlLoaderOpts{}

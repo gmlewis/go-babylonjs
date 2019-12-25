@@ -38,7 +38,7 @@ func Vector2ArrayToJSArray(array []*Vector2) []interface{} {
 
 // NewVector2 returns a new Vector2 object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vector2
+// https://doc.babylonjs.com/api/classes/babylon.vector2#constructor
 func (ba *Babylon) NewVector2(x float64, y float64) *Vector2 {
 
 	args := make([]interface{}, 0, 2+0)

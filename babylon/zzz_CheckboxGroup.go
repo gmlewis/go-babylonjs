@@ -39,7 +39,7 @@ func CheckboxGroupArrayToJSArray(array []*CheckboxGroup) []interface{} {
 
 // NewCheckboxGroup returns a new CheckboxGroup object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.checkboxgroup
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkboxgroup#constructor
 func (gui *GUI) NewCheckboxGroup(name string) *CheckboxGroup {
 
 	args := make([]interface{}, 0, 1+0)

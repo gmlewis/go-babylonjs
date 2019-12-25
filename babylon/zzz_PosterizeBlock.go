@@ -40,7 +40,7 @@ func PosterizeBlockArrayToJSArray(array []*PosterizeBlock) []interface{} {
 
 // NewPosterizeBlock returns a new PosterizeBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.posterizeblock
+// https://doc.babylonjs.com/api/classes/babylon.posterizeblock#constructor
 func (ba *Babylon) NewPosterizeBlock(name string) *PosterizeBlock {
 
 	args := make([]interface{}, 0, 1+0)

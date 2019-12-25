@@ -38,7 +38,7 @@ func GamepadSystemSceneComponentArrayToJSArray(array []*GamepadSystemSceneCompon
 
 // NewGamepadSystemSceneComponent returns a new GamepadSystemSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent#constructor
 func (ba *Babylon) NewGamepadSystemSceneComponent(scene *Scene) *GamepadSystemSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

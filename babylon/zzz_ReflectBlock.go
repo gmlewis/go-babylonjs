@@ -38,7 +38,7 @@ func ReflectBlockArrayToJSArray(array []*ReflectBlock) []interface{} {
 
 // NewReflectBlock returns a new ReflectBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.reflectblock
+// https://doc.babylonjs.com/api/classes/babylon.reflectblock#constructor
 func (ba *Babylon) NewReflectBlock(name string) *ReflectBlock {
 
 	args := make([]interface{}, 0, 1+0)

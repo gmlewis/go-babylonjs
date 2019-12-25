@@ -45,7 +45,7 @@ type NewBoneAxesViewerOpts struct {
 
 // NewBoneAxesViewer returns a new BoneAxesViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer
+// https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer#constructor
 func (ba *Babylon) NewBoneAxesViewer(scene *Scene, bone *Bone, mesh *Mesh, opts *NewBoneAxesViewerOpts) *BoneAxesViewer {
 	if opts == nil {
 		opts = &NewBoneAxesViewerOpts{}

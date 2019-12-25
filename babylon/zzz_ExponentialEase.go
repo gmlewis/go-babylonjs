@@ -46,7 +46,7 @@ type NewExponentialEaseOpts struct {
 
 // NewExponentialEase returns a new ExponentialEase object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.exponentialease
+// https://doc.babylonjs.com/api/classes/babylon.exponentialease#constructor
 func (ba *Babylon) NewExponentialEase(opts *NewExponentialEaseOpts) *ExponentialEase {
 	if opts == nil {
 		opts = &NewExponentialEaseOpts{}

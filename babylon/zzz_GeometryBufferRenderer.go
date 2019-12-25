@@ -43,7 +43,7 @@ type NewGeometryBufferRendererOpts struct {
 
 // NewGeometryBufferRenderer returns a new GeometryBufferRenderer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#constructor
 func (ba *Babylon) NewGeometryBufferRenderer(scene *Scene, opts *NewGeometryBufferRendererOpts) *GeometryBufferRenderer {
 	if opts == nil {
 		opts = &NewGeometryBufferRendererOpts{}

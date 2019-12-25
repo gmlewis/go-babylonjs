@@ -38,7 +38,7 @@ func AddBlockArrayToJSArray(array []*AddBlock) []interface{} {
 
 // NewAddBlock returns a new AddBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.addblock
+// https://doc.babylonjs.com/api/classes/babylon.addblock#constructor
 func (ba *Babylon) NewAddBlock(name string) *AddBlock {
 
 	args := make([]interface{}, 0, 1+0)

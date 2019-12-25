@@ -50,7 +50,7 @@ type NewLinesMeshOpts struct {
 
 // NewLinesMesh returns a new LinesMesh object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.linesmesh
+// https://doc.babylonjs.com/api/classes/babylon.linesmesh#constructor
 func (ba *Babylon) NewLinesMesh(name string, opts *NewLinesMeshOpts) *LinesMesh {
 	if opts == nil {
 		opts = &NewLinesMeshOpts{}

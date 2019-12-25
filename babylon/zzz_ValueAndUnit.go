@@ -44,7 +44,7 @@ type NewValueAndUnitOpts struct {
 
 // NewValueAndUnit returns a new ValueAndUnit object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#constructor
 func (gui *GUI) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *ValueAndUnit {
 	if opts == nil {
 		opts = &NewValueAndUnitOpts{}

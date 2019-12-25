@@ -38,7 +38,7 @@ func NormalBlendBlockArrayToJSArray(array []*NormalBlendBlock) []interface{} {
 
 // NewNormalBlendBlock returns a new NormalBlendBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.normalblendblock
+// https://doc.babylonjs.com/api/classes/babylon.normalblendblock#constructor
 func (ba *Babylon) NewNormalBlendBlock(name string) *NormalBlendBlock {
 
 	args := make([]interface{}, 0, 1+0)

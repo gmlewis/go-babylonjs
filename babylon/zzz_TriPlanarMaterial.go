@@ -38,7 +38,7 @@ func TriPlanarMaterialArrayToJSArray(array []*TriPlanarMaterial) []interface{} {
 
 // NewTriPlanarMaterial returns a new TriPlanarMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#constructor
 func (ba *Babylon) NewTriPlanarMaterial(name string, scene *Scene) *TriPlanarMaterial {
 
 	args := make([]interface{}, 0, 2+0)

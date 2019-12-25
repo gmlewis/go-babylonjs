@@ -43,7 +43,7 @@ type NewMaterialOpts struct {
 
 // NewMaterial returns a new Material object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.material
+// https://doc.babylonjs.com/api/classes/babylon.material#constructor
 func (ba *Babylon) NewMaterial(name string, scene *Scene, opts *NewMaterialOpts) *Material {
 	if opts == nil {
 		opts = &NewMaterialOpts{}

@@ -39,7 +39,7 @@ func DeviceOrientationCameraArrayToJSArray(array []*DeviceOrientationCamera) []i
 
 // NewDeviceOrientationCamera returns a new DeviceOrientationCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera
+// https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera#constructor
 func (ba *Babylon) NewDeviceOrientationCamera(name string, position *Vector3, scene *Scene) *DeviceOrientationCamera {
 
 	args := make([]interface{}, 0, 3+0)

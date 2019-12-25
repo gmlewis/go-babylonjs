@@ -51,7 +51,7 @@ type NewMirrorTextureOpts struct {
 
 // NewMirrorTexture returns a new MirrorTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.mirrortexture
+// https://doc.babylonjs.com/api/classes/babylon.mirrortexture#constructor
 func (ba *Babylon) NewMirrorTexture(name string, size float64, scene *Scene, opts *NewMirrorTextureOpts) *MirrorTexture {
 	if opts == nil {
 		opts = &NewMirrorTextureOpts{}

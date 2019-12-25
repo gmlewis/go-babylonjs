@@ -44,7 +44,7 @@ type NewEquiRectangularCubeTextureAssetTaskOpts struct {
 
 // NewEquiRectangularCubeTextureAssetTask returns a new EquiRectangularCubeTextureAssetTask object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#constructor
 func (ba *Babylon) NewEquiRectangularCubeTextureAssetTask(name string, url string, size float64, opts *NewEquiRectangularCubeTextureAssetTaskOpts) *EquiRectangularCubeTextureAssetTask {
 	if opts == nil {
 		opts = &NewEquiRectangularCubeTextureAssetTaskOpts{}

@@ -40,7 +40,7 @@ func SceneInstrumentationArrayToJSArray(array []*SceneInstrumentation) []interfa
 
 // NewSceneInstrumentation returns a new SceneInstrumentation object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#constructor
 func (ba *Babylon) NewSceneInstrumentation(scene *Scene) *SceneInstrumentation {
 
 	args := make([]interface{}, 0, 1+0)

@@ -45,7 +45,7 @@ type NewParticlesOptimizationOpts struct {
 
 // NewParticlesOptimization returns a new ParticlesOptimization object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.particlesoptimization
+// https://doc.babylonjs.com/api/classes/babylon.particlesoptimization#constructor
 func (ba *Babylon) NewParticlesOptimization(opts *NewParticlesOptimizationOpts) *ParticlesOptimization {
 	if opts == nil {
 		opts = &NewParticlesOptimizationOpts{}

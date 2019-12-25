@@ -39,7 +39,7 @@ func MultiLinePointArrayToJSArray(array []*MultiLinePoint) []interface{} {
 
 // NewMultiLinePoint returns a new MultiLinePoint object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.multilinepoint
+// https://doc.babylonjs.com/api/classes/babylon.gui.multilinepoint#constructor
 func (gui *GUI) NewMultiLinePoint(multiLine *MultiLine) *MultiLinePoint {
 
 	args := make([]interface{}, 0, 1+0)

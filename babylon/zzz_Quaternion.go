@@ -49,7 +49,7 @@ type NewQuaternionOpts struct {
 
 // NewQuaternion returns a new Quaternion object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.quaternion
+// https://doc.babylonjs.com/api/classes/babylon.quaternion#constructor
 func (ba *Babylon) NewQuaternion(opts *NewQuaternionOpts) *Quaternion {
 	if opts == nil {
 		opts = &NewQuaternionOpts{}

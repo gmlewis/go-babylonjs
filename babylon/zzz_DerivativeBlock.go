@@ -38,7 +38,7 @@ func DerivativeBlockArrayToJSArray(array []*DerivativeBlock) []interface{} {
 
 // NewDerivativeBlock returns a new DerivativeBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.derivativeblock
+// https://doc.babylonjs.com/api/classes/babylon.derivativeblock#constructor
 func (ba *Babylon) NewDerivativeBlock(name string) *DerivativeBlock {
 
 	args := make([]interface{}, 0, 1+0)

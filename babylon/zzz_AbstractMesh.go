@@ -43,7 +43,7 @@ type NewAbstractMeshOpts struct {
 
 // NewAbstractMesh returns a new AbstractMesh object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.abstractmesh
+// https://doc.babylonjs.com/api/classes/babylon.abstractmesh#constructor
 func (ba *Babylon) NewAbstractMesh(name string, opts *NewAbstractMeshOpts) *AbstractMesh {
 	if opts == nil {
 		opts = &NewAbstractMeshOpts{}

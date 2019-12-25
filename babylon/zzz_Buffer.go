@@ -47,7 +47,7 @@ type NewBufferOpts struct {
 
 // NewBuffer returns a new Buffer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.buffer
+// https://doc.babylonjs.com/api/classes/babylon.buffer#constructor
 func (ba *Babylon) NewBuffer(engine JSObject, data []float64, updatable bool, opts *NewBufferOpts) *Buffer {
 	if opts == nil {
 		opts = &NewBufferOpts{}

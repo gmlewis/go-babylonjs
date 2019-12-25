@@ -43,7 +43,7 @@ type NewImageScrollBarOpts struct {
 
 // NewImageScrollBar returns a new ImageScrollBar object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.imagescrollbar
+// https://doc.babylonjs.com/api/classes/babylon.gui.imagescrollbar#constructor
 func (gui *GUI) NewImageScrollBar(opts *NewImageScrollBarOpts) *ImageScrollBar {
 	if opts == nil {
 		opts = &NewImageScrollBarOpts{}

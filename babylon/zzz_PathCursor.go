@@ -38,7 +38,7 @@ func PathCursorArrayToJSArray(array []*PathCursor) []interface{} {
 
 // NewPathCursor returns a new PathCursor object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pathcursor
+// https://doc.babylonjs.com/api/classes/babylon.pathcursor#constructor
 func (ba *Babylon) NewPathCursor(path *Path2) *PathCursor {
 
 	args := make([]interface{}, 0, 1+0)

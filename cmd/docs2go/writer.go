@@ -215,7 +215,7 @@ type {{$key}}Opts struct {
 
 // {{$key}} returns a new {{$name}} object.
 //
-// {{$apiDocsBaseURL}}.{{$name | toLower}}
+// {{$apiDocsBaseURL}}.{{$name | toLower}}#constructor
 func ({{$value.ConstructorNamespaceReceiverName}} {{$value.ConstructorNamespaceReceiverType}}) {{$key}}({{constructorParameterGoList $key $value}}) *{{$name}} { {{if $value.HasOpts}}
 if opts == nil {
   opts = &{{$key}}Opts{}

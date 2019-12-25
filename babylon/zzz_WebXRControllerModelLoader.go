@@ -38,7 +38,7 @@ func WebXRControllerModelLoaderArrayToJSArray(array []*WebXRControllerModelLoade
 
 // NewWebXRControllerModelLoader returns a new WebXRControllerModelLoader object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webxrcontrollermodelloader
+// https://doc.babylonjs.com/api/classes/babylon.webxrcontrollermodelloader#constructor
 func (ba *Babylon) NewWebXRControllerModelLoader(input *WebXRInput) *WebXRControllerModelLoader {
 
 	args := make([]interface{}, 0, 1+0)

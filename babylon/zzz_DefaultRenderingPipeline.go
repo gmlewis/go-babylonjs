@@ -48,7 +48,7 @@ type NewDefaultRenderingPipelineOpts struct {
 
 // NewDefaultRenderingPipeline returns a new DefaultRenderingPipeline object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#constructor
 func (ba *Babylon) NewDefaultRenderingPipeline(opts *NewDefaultRenderingPipelineOpts) *DefaultRenderingPipeline {
 	if opts == nil {
 		opts = &NewDefaultRenderingPipelineOpts{}

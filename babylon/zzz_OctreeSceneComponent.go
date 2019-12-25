@@ -39,7 +39,7 @@ func OctreeSceneComponentArrayToJSArray(array []*OctreeSceneComponent) []interfa
 
 // NewOctreeSceneComponent returns a new OctreeSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#constructor
 func (ba *Babylon) NewOctreeSceneComponent(scene *Scene) *OctreeSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

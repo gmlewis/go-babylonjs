@@ -40,7 +40,7 @@ func StereoscopicGamepadCameraArrayToJSArray(array []*StereoscopicGamepadCamera)
 
 // NewStereoscopicGamepadCamera returns a new StereoscopicGamepadCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#constructor
 func (ba *Babylon) NewStereoscopicGamepadCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicGamepadCamera {
 
 	args := make([]interface{}, 0, 5+0)

@@ -45,7 +45,7 @@ type NewExecuteCodeActionOpts struct {
 
 // NewExecuteCodeAction returns a new ExecuteCodeAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.executecodeaction
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#constructor
 func (ba *Babylon) NewExecuteCodeAction(triggerOptions JSObject, jsFunc JSFunc, opts *NewExecuteCodeActionOpts) *ExecuteCodeAction {
 	if opts == nil {
 		opts = &NewExecuteCodeActionOpts{}

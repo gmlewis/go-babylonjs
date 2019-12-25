@@ -38,7 +38,7 @@ func VertexOutputBlockArrayToJSArray(array []*VertexOutputBlock) []interface{} {
 
 // NewVertexOutputBlock returns a new VertexOutputBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vertexoutputblock
+// https://doc.babylonjs.com/api/classes/babylon.vertexoutputblock#constructor
 func (ba *Babylon) NewVertexOutputBlock(name string) *VertexOutputBlock {
 
 	args := make([]interface{}, 0, 1+0)

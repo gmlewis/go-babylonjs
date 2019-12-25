@@ -45,7 +45,7 @@ type NewCustomOptimizationOpts struct {
 
 // NewCustomOptimization returns a new CustomOptimization object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.customoptimization
+// https://doc.babylonjs.com/api/classes/babylon.customoptimization#constructor
 func (ba *Babylon) NewCustomOptimization(opts *NewCustomOptimizationOpts) *CustomOptimization {
 	if opts == nil {
 		opts = &NewCustomOptimizationOpts{}

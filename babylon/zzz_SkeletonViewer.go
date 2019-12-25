@@ -46,7 +46,7 @@ type NewSkeletonViewerOpts struct {
 
 // NewSkeletonViewer returns a new SkeletonViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.skeletonviewer
+// https://doc.babylonjs.com/api/classes/babylon.skeletonviewer#constructor
 func (ba *Babylon) NewSkeletonViewer(skeleton *Skeleton, mesh *AbstractMesh, scene *Scene, opts *NewSkeletonViewerOpts) *SkeletonViewer {
 	if opts == nil {
 		opts = &NewSkeletonViewerOpts{}

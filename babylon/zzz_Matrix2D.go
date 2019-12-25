@@ -38,7 +38,7 @@ func Matrix2DArrayToJSArray(array []*Matrix2D) []interface{} {
 
 // NewMatrix2D returns a new Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#constructor
 func (gui *GUI) NewMatrix2D(m00 float64, m01 float64, m10 float64, m11 float64, m20 float64, m21 float64) *Matrix2D {
 
 	args := make([]interface{}, 0, 6+0)

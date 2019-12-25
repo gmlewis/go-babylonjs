@@ -42,7 +42,7 @@ func BaseParticleSystemArrayToJSArray(array []*BaseParticleSystem) []interface{}
 
 // NewBaseParticleSystem returns a new BaseParticleSystem object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseparticlesystem
+// https://doc.babylonjs.com/api/classes/babylon.baseparticlesystem#constructor
 func (ba *Babylon) NewBaseParticleSystem(name string) *BaseParticleSystem {
 
 	args := make([]interface{}, 0, 1+0)

@@ -38,7 +38,7 @@ func PerturbNormalBlockArrayToJSArray(array []*PerturbNormalBlock) []interface{}
 
 // NewPerturbNormalBlock returns a new PerturbNormalBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock
+// https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock#constructor
 func (ba *Babylon) NewPerturbNormalBlock(name string) *PerturbNormalBlock {
 
 	args := make([]interface{}, 0, 1+0)

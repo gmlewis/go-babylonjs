@@ -43,7 +43,7 @@ type NewCheckboxOpts struct {
 
 // NewCheckbox returns a new Checkbox object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#constructor
 func (gui *GUI) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
 	if opts == nil {
 		opts = &NewCheckboxOpts{}

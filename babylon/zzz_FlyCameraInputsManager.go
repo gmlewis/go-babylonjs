@@ -41,7 +41,7 @@ func FlyCameraInputsManagerArrayToJSArray(array []*FlyCameraInputsManager) []int
 
 // NewFlyCameraInputsManager returns a new FlyCameraInputsManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#constructor
 func (ba *Babylon) NewFlyCameraInputsManager(camera *FlyCamera) *FlyCameraInputsManager {
 
 	args := make([]interface{}, 0, 1+0)

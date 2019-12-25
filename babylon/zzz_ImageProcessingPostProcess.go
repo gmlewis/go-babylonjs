@@ -50,7 +50,7 @@ type NewImageProcessingPostProcessOpts struct {
 
 // NewImageProcessingPostProcess returns a new ImageProcessingPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#constructor
 func (ba *Babylon) NewImageProcessingPostProcess(name string, options float64, opts *NewImageProcessingPostProcessOpts) *ImageProcessingPostProcess {
 	if opts == nil {
 		opts = &NewImageProcessingPostProcessOpts{}

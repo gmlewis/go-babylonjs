@@ -43,7 +43,7 @@ type NewAnimationGroupOpts struct {
 
 // NewAnimationGroup returns a new AnimationGroup object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.animationgroup
+// https://doc.babylonjs.com/api/classes/babylon.animationgroup#constructor
 func (ba *Babylon) NewAnimationGroup(name string, opts *NewAnimationGroupOpts) *AnimationGroup {
 	if opts == nil {
 		opts = &NewAnimationGroupOpts{}

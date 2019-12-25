@@ -38,7 +38,7 @@ func MeasureArrayToJSArray(array []*Measure) []interface{} {
 
 // NewMeasure returns a new Measure object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.measure
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#constructor
 func (gui *GUI) NewMeasure(left float64, top float64, width float64, height float64) *Measure {
 
 	args := make([]interface{}, 0, 4+0)

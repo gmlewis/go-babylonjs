@@ -49,7 +49,7 @@ type NewEffectOpts struct {
 
 // NewEffect returns a new Effect object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.effect
+// https://doc.babylonjs.com/api/classes/babylon.effect#constructor
 func (ba *Babylon) NewEffect(baseName JSObject, attributesNamesOrOptions []string, uniformsNamesOrEngine []string, opts *NewEffectOpts) *Effect {
 	if opts == nil {
 		opts = &NewEffectOpts{}

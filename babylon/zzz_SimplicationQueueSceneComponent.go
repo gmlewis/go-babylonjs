@@ -39,7 +39,7 @@ func SimplicationQueueSceneComponentArrayToJSArray(array []*SimplicationQueueSce
 
 // NewSimplicationQueueSceneComponent returns a new SimplicationQueueSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#constructor
 func (ba *Babylon) NewSimplicationQueueSceneComponent(scene *Scene) *SimplicationQueueSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

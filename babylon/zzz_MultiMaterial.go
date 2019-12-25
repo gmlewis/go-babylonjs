@@ -41,7 +41,7 @@ func MultiMaterialArrayToJSArray(array []*MultiMaterial) []interface{} {
 
 // NewMultiMaterial returns a new MultiMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multimaterial
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#constructor
 func (ba *Babylon) NewMultiMaterial(name string, scene *Scene) *MultiMaterial {
 
 	args := make([]interface{}, 0, 2+0)

@@ -38,7 +38,7 @@ func CustomMaterialArrayToJSArray(array []*CustomMaterial) []interface{} {
 
 // NewCustomMaterial returns a new CustomMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.custommaterial
+// https://doc.babylonjs.com/api/classes/babylon.custommaterial#constructor
 func (ba *Babylon) NewCustomMaterial(name string, scene *Scene) *CustomMaterial {
 
 	args := make([]interface{}, 0, 2+0)

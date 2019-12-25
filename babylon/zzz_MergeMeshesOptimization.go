@@ -45,7 +45,7 @@ type NewMergeMeshesOptimizationOpts struct {
 
 // NewMergeMeshesOptimization returns a new MergeMeshesOptimization object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization
+// https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#constructor
 func (ba *Babylon) NewMergeMeshesOptimization(opts *NewMergeMeshesOptimizationOpts) *MergeMeshesOptimization {
 	if opts == nil {
 		opts = &NewMergeMeshesOptimizationOpts{}

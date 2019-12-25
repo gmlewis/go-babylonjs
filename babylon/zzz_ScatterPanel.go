@@ -38,7 +38,7 @@ func ScatterPanelArrayToJSArray(array []*ScatterPanel) []interface{} {
 
 // NewScatterPanel returns a new ScatterPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.scatterpanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.scatterpanel#constructor
 func (gui *GUI) NewScatterPanel() *ScatterPanel {
 
 	args := make([]interface{}, 0, 0+0)

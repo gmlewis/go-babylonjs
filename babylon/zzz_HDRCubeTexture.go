@@ -51,7 +51,7 @@ type NewHDRCubeTextureOpts struct {
 
 // NewHDRCubeTexture returns a new HDRCubeTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture
+// https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture#constructor
 func (ba *Babylon) NewHDRCubeTexture(url string, scene *Scene, size float64, opts *NewHDRCubeTextureOpts) *HDRCubeTexture {
 	if opts == nil {
 		opts = &NewHDRCubeTextureOpts{}

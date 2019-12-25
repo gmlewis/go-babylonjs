@@ -40,7 +40,7 @@ func AnaglyphUniversalCameraArrayToJSArray(array []*AnaglyphUniversalCamera) []i
 
 // NewAnaglyphUniversalCamera returns a new AnaglyphUniversalCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#constructor
 func (ba *Babylon) NewAnaglyphUniversalCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphUniversalCamera {
 
 	args := make([]interface{}, 0, 4+0)

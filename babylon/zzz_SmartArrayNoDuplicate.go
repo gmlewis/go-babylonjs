@@ -39,7 +39,7 @@ func SmartArrayNoDuplicateArrayToJSArray(array []*SmartArrayNoDuplicate) []inter
 
 // NewSmartArrayNoDuplicate returns a new SmartArrayNoDuplicate object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate
+// https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate#constructor
 func (ba *Babylon) NewSmartArrayNoDuplicate(capacity float64) *SmartArrayNoDuplicate {
 
 	args := make([]interface{}, 0, 1+0)

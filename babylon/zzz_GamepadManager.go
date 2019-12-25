@@ -43,7 +43,7 @@ type NewGamepadManagerOpts struct {
 
 // NewGamepadManager returns a new GamepadManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gamepadmanager
+// https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#constructor
 func (ba *Babylon) NewGamepadManager(opts *NewGamepadManagerOpts) *GamepadManager {
 	if opts == nil {
 		opts = &NewGamepadManagerOpts{}

@@ -38,7 +38,7 @@ func SimpleMaterialArrayToJSArray(array []*SimpleMaterial) []interface{} {
 
 // NewSimpleMaterial returns a new SimpleMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.simplematerial
+// https://doc.babylonjs.com/api/classes/babylon.simplematerial#constructor
 func (ba *Babylon) NewSimpleMaterial(name string, scene *Scene) *SimpleMaterial {
 
 	args := make([]interface{}, 0, 2+0)

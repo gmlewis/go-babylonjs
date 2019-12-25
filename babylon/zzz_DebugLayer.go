@@ -41,7 +41,7 @@ func DebugLayerArrayToJSArray(array []*DebugLayer) []interface{} {
 
 // NewDebugLayer returns a new DebugLayer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.debuglayer
+// https://doc.babylonjs.com/api/classes/babylon.debuglayer#constructor
 func (ba *Babylon) NewDebugLayer(scene *Scene) *DebugLayer {
 
 	args := make([]interface{}, 0, 1+0)

@@ -44,7 +44,7 @@ type NewStarfieldProceduralTextureOpts struct {
 
 // NewStarfieldProceduralTexture returns a new StarfieldProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.starfieldproceduraltexture#constructor
 func (ba *Babylon) NewStarfieldProceduralTexture(name string, size float64, scene *Scene, opts *NewStarfieldProceduralTextureOpts) *StarfieldProceduralTexture {
 	if opts == nil {
 		opts = &NewStarfieldProceduralTextureOpts{}

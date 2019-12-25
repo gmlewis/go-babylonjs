@@ -47,7 +47,7 @@ type NewLayerOpts struct {
 
 // NewLayer returns a new Layer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.layer
+// https://doc.babylonjs.com/api/classes/babylon.layer#constructor
 func (ba *Babylon) NewLayer(name string, imgUrl string, scene *Scene, opts *NewLayerOpts) *Layer {
 	if opts == nil {
 		opts = &NewLayerOpts{}

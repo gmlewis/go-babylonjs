@@ -38,7 +38,7 @@ func TrigonometryBlockArrayToJSArray(array []*TrigonometryBlock) []interface{} {
 
 // NewTrigonometryBlock returns a new TrigonometryBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.trigonometryblock
+// https://doc.babylonjs.com/api/classes/babylon.trigonometryblock#constructor
 func (ba *Babylon) NewTrigonometryBlock(name string) *TrigonometryBlock {
 
 	args := make([]interface{}, 0, 1+0)

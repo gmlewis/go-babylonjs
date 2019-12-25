@@ -39,7 +39,7 @@ func BoxParticleEmitterArrayToJSArray(array []*BoxParticleEmitter) []interface{}
 
 // NewBoxParticleEmitter returns a new BoxParticleEmitter object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter
+// https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter#constructor
 func (ba *Babylon) NewBoxParticleEmitter() *BoxParticleEmitter {
 
 	args := make([]interface{}, 0, 0+0)

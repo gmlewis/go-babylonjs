@@ -38,7 +38,7 @@ func RuntimeAnimationArrayToJSArray(array []*RuntimeAnimation) []interface{} {
 
 // NewRuntimeAnimation returns a new RuntimeAnimation object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.runtimeanimation
+// https://doc.babylonjs.com/api/classes/babylon.runtimeanimation#constructor
 func (ba *Babylon) NewRuntimeAnimation(target JSObject, animation *Animation, scene *Scene, host *Animatable) *RuntimeAnimation {
 
 	args := make([]interface{}, 0, 4+0)

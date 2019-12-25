@@ -47,7 +47,7 @@ type NewDepthOfFieldMergePostProcessOpts struct {
 
 // NewDepthOfFieldMergePostProcess returns a new DepthOfFieldMergePostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#constructor
 func (ba *Babylon) NewDepthOfFieldMergePostProcess(name string, originalFromInput *PostProcess, circleOfConfusion *PostProcess, blurSteps []*PostProcess, options float64, camera *Camera, opts *NewDepthOfFieldMergePostProcessOpts) *DepthOfFieldMergePostProcess {
 	if opts == nil {
 		opts = &NewDepthOfFieldMergePostProcessOpts{}

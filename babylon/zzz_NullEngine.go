@@ -44,7 +44,7 @@ type NewNullEngineOpts struct {
 
 // NewNullEngine returns a new NullEngine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.nullengine
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#constructor
 func (ba *Babylon) NewNullEngine(opts *NewNullEngineOpts) *NullEngine {
 	if opts == nil {
 		opts = &NewNullEngineOpts{}

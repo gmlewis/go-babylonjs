@@ -45,7 +45,7 @@ type NewPostProcessesOptimizationOpts struct {
 
 // NewPostProcessesOptimization returns a new PostProcessesOptimization object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization
+// https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization#constructor
 func (ba *Babylon) NewPostProcessesOptimization(opts *NewPostProcessesOptimizationOpts) *PostProcessesOptimization {
 	if opts == nil {
 		opts = &NewPostProcessesOptimizationOpts{}

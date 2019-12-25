@@ -46,7 +46,7 @@ type NewWebVRFreeCameraOpts struct {
 
 // NewWebVRFreeCamera returns a new WebVRFreeCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera
+// https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera#constructor
 func (ba *Babylon) NewWebVRFreeCamera(name string, position *Vector3, scene *Scene, opts *NewWebVRFreeCameraOpts) *WebVRFreeCamera {
 	if opts == nil {
 		opts = &NewWebVRFreeCameraOpts{}

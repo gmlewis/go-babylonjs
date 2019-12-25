@@ -38,7 +38,7 @@ func LightInformationBlockArrayToJSArray(array []*LightInformationBlock) []inter
 
 // NewLightInformationBlock returns a new LightInformationBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.lightinformationblock
+// https://doc.babylonjs.com/api/classes/babylon.lightinformationblock#constructor
 func (ba *Babylon) NewLightInformationBlock(name string) *LightInformationBlock {
 
 	args := make([]interface{}, 0, 1+0)

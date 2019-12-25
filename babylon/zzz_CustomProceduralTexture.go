@@ -47,7 +47,7 @@ type NewCustomProceduralTextureOpts struct {
 
 // NewCustomProceduralTexture returns a new CustomProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.customproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.customproceduraltexture#constructor
 func (ba *Babylon) NewCustomProceduralTexture(name string, texturePath string, size float64, scene *Scene, opts *NewCustomProceduralTextureOpts) *CustomProceduralTexture {
 	if opts == nil {
 		opts = &NewCustomProceduralTextureOpts{}

@@ -44,7 +44,7 @@ type NewWoodProceduralTextureOpts struct {
 
 // NewWoodProceduralTexture returns a new WoodProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture#constructor
 func (ba *Babylon) NewWoodProceduralTexture(name string, size float64, scene *Scene, opts *NewWoodProceduralTextureOpts) *WoodProceduralTexture {
 	if opts == nil {
 		opts = &NewWoodProceduralTextureOpts{}

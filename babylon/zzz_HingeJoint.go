@@ -40,7 +40,7 @@ func HingeJointArrayToJSArray(array []*HingeJoint) []interface{} {
 
 // NewHingeJoint returns a new HingeJoint object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.hingejoint
+// https://doc.babylonjs.com/api/classes/babylon.hingejoint#constructor
 func (ba *Babylon) NewHingeJoint(jointData js.Value) *HingeJoint {
 
 	args := make([]interface{}, 0, 1+0)

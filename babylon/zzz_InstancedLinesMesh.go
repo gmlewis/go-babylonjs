@@ -38,7 +38,7 @@ func InstancedLinesMeshArrayToJSArray(array []*InstancedLinesMesh) []interface{}
 
 // NewInstancedLinesMesh returns a new InstancedLinesMesh object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#constructor
 func (ba *Babylon) NewInstancedLinesMesh(name string, source *LinesMesh) *InstancedLinesMesh {
 
 	args := make([]interface{}, 0, 2+0)

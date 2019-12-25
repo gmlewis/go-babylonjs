@@ -47,7 +47,7 @@ type NewShaderMaterialOpts struct {
 
 // NewShaderMaterial returns a new ShaderMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.shadermaterial
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#constructor
 func (ba *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath JSObject, opts *NewShaderMaterialOpts) *ShaderMaterial {
 	if opts == nil {
 		opts = &NewShaderMaterialOpts{}

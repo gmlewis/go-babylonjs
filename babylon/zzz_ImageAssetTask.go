@@ -38,7 +38,7 @@ func ImageAssetTaskArrayToJSArray(array []*ImageAssetTask) []interface{} {
 
 // NewImageAssetTask returns a new ImageAssetTask object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.imageassettask
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#constructor
 func (ba *Babylon) NewImageAssetTask(name string, url string) *ImageAssetTask {
 
 	args := make([]interface{}, 0, 2+0)

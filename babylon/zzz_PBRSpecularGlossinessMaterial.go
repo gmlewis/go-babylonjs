@@ -41,7 +41,7 @@ func PBRSpecularGlossinessMaterialArrayToJSArray(array []*PBRSpecularGlossinessM
 
 // NewPBRSpecularGlossinessMaterial returns a new PBRSpecularGlossinessMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial
+// https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial#constructor
 func (ba *Babylon) NewPBRSpecularGlossinessMaterial(name string, scene *Scene) *PBRSpecularGlossinessMaterial {
 
 	args := make([]interface{}, 0, 2+0)

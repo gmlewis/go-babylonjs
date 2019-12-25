@@ -45,7 +45,7 @@ type NewBoneLookControllerOpts struct {
 
 // NewBoneLookController returns a new BoneLookController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#constructor
 func (ba *Babylon) NewBoneLookController(mesh *AbstractMesh, bone *Bone, target *Vector3, opts *NewBoneLookControllerOpts) *BoneLookController {
 	if opts == nil {
 		opts = &NewBoneLookControllerOpts{}

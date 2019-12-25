@@ -43,7 +43,7 @@ type NewMeshExploderOpts struct {
 
 // NewMeshExploder returns a new MeshExploder object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.meshexploder
+// https://doc.babylonjs.com/api/classes/babylon.meshexploder#constructor
 func (ba *Babylon) NewMeshExploder(meshes []*Mesh, opts *NewMeshExploderOpts) *MeshExploder {
 	if opts == nil {
 		opts = &NewMeshExploderOpts{}

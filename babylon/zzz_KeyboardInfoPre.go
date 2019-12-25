@@ -39,7 +39,7 @@ func KeyboardInfoPreArrayToJSArray(array []*KeyboardInfoPre) []interface{} {
 
 // NewKeyboardInfoPre returns a new KeyboardInfoPre object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keyboardinfopre
+// https://doc.babylonjs.com/api/classes/babylon.keyboardinfopre#constructor
 func (ba *Babylon) NewKeyboardInfoPre(jsType float64, event js.Value) *KeyboardInfoPre {
 
 	args := make([]interface{}, 0, 2+0)

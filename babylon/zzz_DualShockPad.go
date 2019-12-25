@@ -38,7 +38,7 @@ func DualShockPadArrayToJSArray(array []*DualShockPad) []interface{} {
 
 // NewDualShockPad returns a new DualShockPad object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.dualshockpad
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#constructor
 func (ba *Babylon) NewDualShockPad(id string, index float64, gamepad JSObject) *DualShockPad {
 
 	args := make([]interface{}, 0, 3+0)

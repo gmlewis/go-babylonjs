@@ -40,7 +40,7 @@ func EngineInstrumentationArrayToJSArray(array []*EngineInstrumentation) []inter
 
 // NewEngineInstrumentation returns a new EngineInstrumentation object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#constructor
 func (ba *Babylon) NewEngineInstrumentation(engine *Engine) *EngineInstrumentation {
 
 	args := make([]interface{}, 0, 1+0)

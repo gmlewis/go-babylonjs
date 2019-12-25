@@ -38,7 +38,7 @@ func DataReaderArrayToJSArray(array []*DataReader) []interface{} {
 
 // NewDataReader returns a new DataReader object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.datareader
+// https://doc.babylonjs.com/api/classes/babylon.datareader#constructor
 func (ba *Babylon) NewDataReader(buffer *IDataBuffer) *DataReader {
 
 	args := make([]interface{}, 0, 1+0)

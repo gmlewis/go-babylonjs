@@ -45,7 +45,7 @@ type NewRotationGizmoOpts struct {
 
 // NewRotationGizmo returns a new RotationGizmo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#constructor
 func (ba *Babylon) NewRotationGizmo(opts *NewRotationGizmoOpts) *RotationGizmo {
 	if opts == nil {
 		opts = &NewRotationGizmoOpts{}

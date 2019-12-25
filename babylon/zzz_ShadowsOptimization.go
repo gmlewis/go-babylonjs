@@ -45,7 +45,7 @@ type NewShadowsOptimizationOpts struct {
 
 // NewShadowsOptimization returns a new ShadowsOptimization object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.shadowsoptimization
+// https://doc.babylonjs.com/api/classes/babylon.shadowsoptimization#constructor
 func (ba *Babylon) NewShadowsOptimization(opts *NewShadowsOptimizationOpts) *ShadowsOptimization {
 	if opts == nil {
 		opts = &NewShadowsOptimizationOpts{}

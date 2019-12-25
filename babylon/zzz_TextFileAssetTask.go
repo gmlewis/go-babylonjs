@@ -38,7 +38,7 @@ func TextFileAssetTaskArrayToJSArray(array []*TextFileAssetTask) []interface{} {
 
 // NewTextFileAssetTask returns a new TextFileAssetTask object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textfileassettask
+// https://doc.babylonjs.com/api/classes/babylon.textfileassettask#constructor
 func (ba *Babylon) NewTextFileAssetTask(name string, url string) *TextFileAssetTask {
 
 	args := make([]interface{}, 0, 2+0)

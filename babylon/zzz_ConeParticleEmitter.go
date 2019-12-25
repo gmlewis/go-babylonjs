@@ -47,7 +47,7 @@ type NewConeParticleEmitterOpts struct {
 
 // NewConeParticleEmitter returns a new ConeParticleEmitter object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#constructor
 func (ba *Babylon) NewConeParticleEmitter(opts *NewConeParticleEmitterOpts) *ConeParticleEmitter {
 	if opts == nil {
 		opts = &NewConeParticleEmitterOpts{}

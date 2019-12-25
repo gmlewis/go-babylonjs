@@ -43,7 +43,7 @@ type NewEffectRendererOpts struct {
 
 // NewEffectRenderer returns a new EffectRenderer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.effectrenderer
+// https://doc.babylonjs.com/api/classes/babylon.effectrenderer#constructor
 func (ba *Babylon) NewEffectRenderer(engine *ThinEngine, opts *NewEffectRendererOpts) *EffectRenderer {
 	if opts == nil {
 		opts = &NewEffectRendererOpts{}

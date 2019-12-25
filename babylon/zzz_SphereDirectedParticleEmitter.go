@@ -46,7 +46,7 @@ type NewSphereDirectedParticleEmitterOpts struct {
 
 // NewSphereDirectedParticleEmitter returns a new SphereDirectedParticleEmitter object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter
+// https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter#constructor
 func (ba *Babylon) NewSphereDirectedParticleEmitter(opts *NewSphereDirectedParticleEmitterOpts) *SphereDirectedParticleEmitter {
 	if opts == nil {
 		opts = &NewSphereDirectedParticleEmitterOpts{}

@@ -44,7 +44,7 @@ type NewImageOpts struct {
 
 // NewImage returns a new Image object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.image
+// https://doc.babylonjs.com/api/classes/babylon.gui.image#constructor
 func (gui *GUI) NewImage(opts *NewImageOpts) *Image {
 	if opts == nil {
 		opts = &NewImageOpts{}

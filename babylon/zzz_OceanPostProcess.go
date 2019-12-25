@@ -49,7 +49,7 @@ type NewOceanPostProcessOpts struct {
 
 // NewOceanPostProcess returns a new OceanPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#constructor
 func (ba *Babylon) NewOceanPostProcess(name string, camera *TargetCamera, opts *NewOceanPostProcessOpts) *OceanPostProcess {
 	if opts == nil {
 		opts = &NewOceanPostProcessOpts{}

@@ -38,7 +38,7 @@ func AttachToBoxBehaviorArrayToJSArray(array []*AttachToBoxBehavior) []interface
 
 // NewAttachToBoxBehavior returns a new AttachToBoxBehavior object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior
+// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#constructor
 func (ba *Babylon) NewAttachToBoxBehavior(ui *TransformNode) *AttachToBoxBehavior {
 
 	args := make([]interface{}, 0, 1+0)

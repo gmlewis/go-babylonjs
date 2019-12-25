@@ -43,7 +43,7 @@ type NewStopSoundActionOpts struct {
 
 // NewStopSoundAction returns a new StopSoundAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#constructor
 func (ba *Babylon) NewStopSoundAction(triggerOptions JSObject, sound *Sound, opts *NewStopSoundActionOpts) *StopSoundAction {
 	if opts == nil {
 		opts = &NewStopSoundActionOpts{}

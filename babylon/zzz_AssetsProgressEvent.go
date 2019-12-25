@@ -38,7 +38,7 @@ func AssetsProgressEventArrayToJSArray(array []*AssetsProgressEvent) []interface
 
 // NewAssetsProgressEvent returns a new AssetsProgressEvent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent
+// https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent#constructor
 func (ba *Babylon) NewAssetsProgressEvent(remainingCount float64, totalCount float64, task *AbstractAssetTask) *AssetsProgressEvent {
 
 	args := make([]interface{}, 0, 3+0)

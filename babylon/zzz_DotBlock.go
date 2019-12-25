@@ -38,7 +38,7 @@ func DotBlockArrayToJSArray(array []*DotBlock) []interface{} {
 
 // NewDotBlock returns a new DotBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.dotblock
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#constructor
 func (ba *Babylon) NewDotBlock(name string) *DotBlock {
 
 	args := make([]interface{}, 0, 1+0)

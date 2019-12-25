@@ -38,7 +38,7 @@ func GearVRControllerArrayToJSArray(array []*GearVRController) []interface{} {
 
 // NewGearVRController returns a new GearVRController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#constructor
 func (ba *Babylon) NewGearVRController(vrGamepad JSObject) *GearVRController {
 
 	args := make([]interface{}, 0, 1+0)

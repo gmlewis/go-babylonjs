@@ -38,7 +38,7 @@ func ConditionArrayToJSArray(array []*Condition) []interface{} {
 
 // NewCondition returns a new Condition object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.condition
+// https://doc.babylonjs.com/api/classes/babylon.condition#constructor
 func (ba *Babylon) NewCondition(actionManager *ActionManager) *Condition {
 
 	args := make([]interface{}, 0, 1+0)

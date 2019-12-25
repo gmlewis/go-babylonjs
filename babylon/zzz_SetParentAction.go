@@ -45,7 +45,7 @@ type NewSetParentActionOpts struct {
 
 // NewSetParentAction returns a new SetParentAction object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.setparentaction
+// https://doc.babylonjs.com/api/classes/babylon.setparentaction#constructor
 func (ba *Babylon) NewSetParentAction(triggerOptions JSObject, target JSObject, parent JSObject, opts *NewSetParentActionOpts) *SetParentAction {
 	if opts == nil {
 		opts = &NewSetParentActionOpts{}

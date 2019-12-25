@@ -38,7 +38,7 @@ func WebXREnterExitUIButtonArrayToJSArray(array []*WebXREnterExitUIButton) []int
 
 // NewWebXREnterExitUIButton returns a new WebXREnterExitUIButton object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton#constructor
 func (ba *Babylon) NewWebXREnterExitUIButton(element js.Value, sessionMode js.Value, referenceSpaceType js.Value) *WebXREnterExitUIButton {
 
 	args := make([]interface{}, 0, 3+0)

@@ -43,7 +43,7 @@ type NewPointerDragBehaviorOpts struct {
 
 // NewPointerDragBehavior returns a new PointerDragBehavior object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#constructor
 func (ba *Babylon) NewPointerDragBehavior(opts *NewPointerDragBehaviorOpts) *PointerDragBehavior {
 	if opts == nil {
 		opts = &NewPointerDragBehaviorOpts{}

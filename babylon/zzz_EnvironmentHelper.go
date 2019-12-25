@@ -40,7 +40,7 @@ func EnvironmentHelperArrayToJSArray(array []*EnvironmentHelper) []interface{} {
 
 // NewEnvironmentHelper returns a new EnvironmentHelper object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.environmenthelper
+// https://doc.babylonjs.com/api/classes/babylon.environmenthelper#constructor
 func (ba *Babylon) NewEnvironmentHelper(options *IEnvironmentHelperOptions, scene *Scene) *EnvironmentHelper {
 
 	args := make([]interface{}, 0, 2+0)

@@ -39,7 +39,7 @@ func PointerInfoArrayToJSArray(array []*PointerInfo) []interface{} {
 
 // NewPointerInfo returns a new PointerInfo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfo
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#constructor
 func (ba *Babylon) NewPointerInfo(jsType float64, event js.Value, pickInfo *PickingInfo) *PointerInfo {
 
 	args := make([]interface{}, 0, 3+0)

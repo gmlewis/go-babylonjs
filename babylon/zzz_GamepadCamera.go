@@ -41,7 +41,7 @@ func GamepadCameraArrayToJSArray(array []*GamepadCamera) []interface{} {
 
 // NewGamepadCamera returns a new GamepadCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gamepadcamera
+// https://doc.babylonjs.com/api/classes/babylon.gamepadcamera#constructor
 func (ba *Babylon) NewGamepadCamera(name string, position *Vector3, scene *Scene) *GamepadCamera {
 
 	args := make([]interface{}, 0, 3+0)

@@ -44,7 +44,7 @@ func HtmlElementTextureArrayToJSArray(array []*HtmlElementTexture) []interface{}
 
 // NewHtmlElementTexture returns a new HtmlElementTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture
+// https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture#constructor
 func (ba *Babylon) NewHtmlElementTexture(name string, element js.Value, options *IHtmlElementTextureOptions) *HtmlElementTexture {
 
 	args := make([]interface{}, 0, 3+0)

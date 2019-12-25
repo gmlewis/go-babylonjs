@@ -38,7 +38,7 @@ func FilesInputArrayToJSArray(array []*FilesInput) []interface{} {
 
 // NewFilesInput returns a new FilesInput object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.filesinput
+// https://doc.babylonjs.com/api/classes/babylon.filesinput#constructor
 func (ba *Babylon) NewFilesInput(engine *Engine, scene *Scene, sceneLoadedCallback JSFunc, progressCallback JSFunc, additionalRenderLoopLogicCallback JSFunc, textureLoadingCallback JSFunc, startingProcessingFilesCallback JSFunc, onReloadCallback JSFunc, errorCallback JSFunc) *FilesInput {
 
 	args := make([]interface{}, 0, 9+0)

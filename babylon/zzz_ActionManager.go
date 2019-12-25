@@ -41,7 +41,7 @@ func ActionManagerArrayToJSArray(array []*ActionManager) []interface{} {
 
 // NewActionManager returns a new ActionManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.actionmanager
+// https://doc.babylonjs.com/api/classes/babylon.actionmanager#constructor
 func (ba *Babylon) NewActionManager(scene *Scene) *ActionManager {
 
 	args := make([]interface{}, 0, 1+0)

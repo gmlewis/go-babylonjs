@@ -42,7 +42,7 @@ func SpotLightArrayToJSArray(array []*SpotLight) []interface{} {
 
 // NewSpotLight returns a new SpotLight object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.spotlight
+// https://doc.babylonjs.com/api/classes/babylon.spotlight#constructor
 func (ba *Babylon) NewSpotLight(name string, position *Vector3, direction *Vector3, angle float64, exponent float64, scene *Scene) *SpotLight {
 
 	args := make([]interface{}, 0, 6+0)

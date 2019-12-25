@@ -45,7 +45,7 @@ type NewBlackAndWhitePostProcessOpts struct {
 
 // NewBlackAndWhitePostProcess returns a new BlackAndWhitePostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess
+// https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess#constructor
 func (ba *Babylon) NewBlackAndWhitePostProcess(name string, options float64, camera *Camera, opts *NewBlackAndWhitePostProcessOpts) *BlackAndWhitePostProcess {
 	if opts == nil {
 		opts = &NewBlackAndWhitePostProcessOpts{}

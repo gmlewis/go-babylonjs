@@ -38,7 +38,7 @@ func ReflectionTextureBlockArrayToJSArray(array []*ReflectionTextureBlock) []int
 
 // NewReflectionTextureBlock returns a new ReflectionTextureBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#constructor
 func (ba *Babylon) NewReflectionTextureBlock(name string) *ReflectionTextureBlock {
 
 	args := make([]interface{}, 0, 1+0)

@@ -38,7 +38,7 @@ func GradientBlockArrayToJSArray(array []*GradientBlock) []interface{} {
 
 // NewGradientBlock returns a new GradientBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gradientblock
+// https://doc.babylonjs.com/api/classes/babylon.gradientblock#constructor
 func (ba *Babylon) NewGradientBlock(name string) *GradientBlock {
 
 	args := make([]interface{}, 0, 1+0)

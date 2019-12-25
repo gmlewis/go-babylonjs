@@ -40,7 +40,7 @@ func SimplificationQueueArrayToJSArray(array []*SimplificationQueue) []interface
 
 // NewSimplificationQueue returns a new SimplificationQueue object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.simplificationqueue
+// https://doc.babylonjs.com/api/classes/babylon.simplificationqueue#constructor
 func (ba *Babylon) NewSimplificationQueue() *SimplificationQueue {
 
 	args := make([]interface{}, 0, 0+0)

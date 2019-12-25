@@ -45,7 +45,7 @@ type NewLensFlaresOptimizationOpts struct {
 
 // NewLensFlaresOptimization returns a new LensFlaresOptimization object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization#constructor
 func (ba *Babylon) NewLensFlaresOptimization(opts *NewLensFlaresOptimizationOpts) *LensFlaresOptimization {
 	if opts == nil {
 		opts = &NewLensFlaresOptimizationOpts{}

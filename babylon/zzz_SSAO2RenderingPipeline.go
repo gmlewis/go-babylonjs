@@ -43,7 +43,7 @@ type NewSSAO2RenderingPipelineOpts struct {
 
 // NewSSAO2RenderingPipeline returns a new SSAO2RenderingPipeline object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#constructor
 func (ba *Babylon) NewSSAO2RenderingPipeline(name string, scene *Scene, ratio JSObject, opts *NewSSAO2RenderingPipelineOpts) *SSAO2RenderingPipeline {
 	if opts == nil {
 		opts = &NewSSAO2RenderingPipelineOpts{}

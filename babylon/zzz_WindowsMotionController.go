@@ -38,7 +38,7 @@ func WindowsMotionControllerArrayToJSArray(array []*WindowsMotionController) []i
 
 // NewWindowsMotionController returns a new WindowsMotionController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller
+// https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller#constructor
 func (ba *Babylon) NewWindowsMotionController(vrGamepad JSObject) *WindowsMotionController {
 
 	args := make([]interface{}, 0, 1+0)

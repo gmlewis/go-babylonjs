@@ -38,7 +38,7 @@ func MultiplyBlockArrayToJSArray(array []*MultiplyBlock) []interface{} {
 
 // NewMultiplyBlock returns a new MultiplyBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiplyblock
+// https://doc.babylonjs.com/api/classes/babylon.multiplyblock#constructor
 func (ba *Babylon) NewMultiplyBlock(name string) *MultiplyBlock {
 
 	args := make([]interface{}, 0, 1+0)

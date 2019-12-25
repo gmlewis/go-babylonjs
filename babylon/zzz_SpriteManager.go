@@ -48,7 +48,7 @@ type NewSpriteManagerOpts struct {
 
 // NewSpriteManager returns a new SpriteManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.spritemanager
+// https://doc.babylonjs.com/api/classes/babylon.spritemanager#constructor
 func (ba *Babylon) NewSpriteManager(name string, imgUrl string, capacity float64, cellSize JSObject, scene *Scene, opts *NewSpriteManagerOpts) *SpriteManager {
 	if opts == nil {
 		opts = &NewSpriteManagerOpts{}

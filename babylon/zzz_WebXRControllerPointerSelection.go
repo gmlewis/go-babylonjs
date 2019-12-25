@@ -38,7 +38,7 @@ func WebXRControllerPointerSelectionArrayToJSArray(array []*WebXRControllerPoint
 
 // NewWebXRControllerPointerSelection returns a new WebXRControllerPointerSelection object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webxrcontrollerpointerselection
+// https://doc.babylonjs.com/api/classes/babylon.webxrcontrollerpointerselection#constructor
 func (ba *Babylon) NewWebXRControllerPointerSelection(input *WebXRInput) *WebXRControllerPointerSelection {
 
 	args := make([]interface{}, 0, 1+0)

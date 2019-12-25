@@ -40,7 +40,7 @@ func SpriteArrayToJSArray(array []*Sprite) []interface{} {
 
 // NewSprite returns a new Sprite object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.sprite
+// https://doc.babylonjs.com/api/classes/babylon.sprite#constructor
 func (ba *Babylon) NewSprite(name string, manager *ISpriteManager) *Sprite {
 
 	args := make([]interface{}, 0, 2+0)

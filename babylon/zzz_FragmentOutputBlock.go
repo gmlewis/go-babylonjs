@@ -38,7 +38,7 @@ func FragmentOutputBlockArrayToJSArray(array []*FragmentOutputBlock) []interface
 
 // NewFragmentOutputBlock returns a new FragmentOutputBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#constructor
 func (ba *Babylon) NewFragmentOutputBlock(name string) *FragmentOutputBlock {
 
 	args := make([]interface{}, 0, 1+0)

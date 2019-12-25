@@ -42,7 +42,7 @@ func PBRBaseMaterialArrayToJSArray(array []*PBRBaseMaterial) []interface{} {
 
 // NewPBRBaseMaterial returns a new PBRBaseMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#constructor
 func (ba *Babylon) NewPBRBaseMaterial(name string, scene *Scene) *PBRBaseMaterial {
 
 	args := make([]interface{}, 0, 2+0)

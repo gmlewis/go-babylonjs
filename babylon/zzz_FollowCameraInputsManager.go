@@ -41,7 +41,7 @@ func FollowCameraInputsManagerArrayToJSArray(array []*FollowCameraInputsManager)
 
 // NewFollowCameraInputsManager returns a new FollowCameraInputsManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#constructor
 func (ba *Babylon) NewFollowCameraInputsManager(camera *FollowCamera) *FollowCameraInputsManager {
 
 	args := make([]interface{}, 0, 1+0)

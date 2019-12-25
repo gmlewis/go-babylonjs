@@ -39,7 +39,7 @@ func GeometryBufferRendererSceneComponentArrayToJSArray(array []*GeometryBufferR
 
 // NewGeometryBufferRendererSceneComponent returns a new GeometryBufferRendererSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#constructor
 func (ba *Babylon) NewGeometryBufferRendererSceneComponent(scene *Scene) *GeometryBufferRendererSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

@@ -45,7 +45,7 @@ type NewKhronosTextureContainerOpts struct {
 
 // NewKhronosTextureContainer returns a new KhronosTextureContainer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#constructor
 func (ba *Babylon) NewKhronosTextureContainer(arrayBuffer JSObject, facesExpected float64, opts *NewKhronosTextureContainerOpts) *KhronosTextureContainer {
 	if opts == nil {
 		opts = &NewKhronosTextureContainerOpts{}

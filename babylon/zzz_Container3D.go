@@ -43,7 +43,7 @@ type NewContainer3DOpts struct {
 
 // NewContainer3D returns a new Container3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.container3d
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#constructor
 func (gui *GUI) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
 	if opts == nil {
 		opts = &NewContainer3DOpts{}

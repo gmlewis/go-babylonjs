@@ -38,7 +38,7 @@ func GradientBlockColorStepArrayToJSArray(array []*GradientBlockColorStep) []int
 
 // NewGradientBlockColorStep returns a new GradientBlockColorStep object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gradientblockcolorstep
+// https://doc.babylonjs.com/api/classes/babylon.gradientblockcolorstep#constructor
 func (ba *Babylon) NewGradientBlockColorStep(step float64, color *Color3) *GradientBlockColorStep {
 
 	args := make([]interface{}, 0, 2+0)

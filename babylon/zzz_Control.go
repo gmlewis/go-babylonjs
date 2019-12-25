@@ -45,7 +45,7 @@ type NewControlOpts struct {
 
 // NewControl returns a new Control object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.control
+// https://doc.babylonjs.com/api/classes/babylon.gui.control#constructor
 func (gui *GUI) NewControl(opts *NewControlOpts) *Control {
 	if opts == nil {
 		opts = &NewControlOpts{}

@@ -48,7 +48,7 @@ type NewVolumetricLightScatteringPostProcessOpts struct {
 
 // NewVolumetricLightScatteringPostProcess returns a new VolumetricLightScatteringPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess#constructor
 func (ba *Babylon) NewVolumetricLightScatteringPostProcess(name string, ratio JSObject, camera *Camera, opts *NewVolumetricLightScatteringPostProcessOpts) *VolumetricLightScatteringPostProcess {
 	if opts == nil {
 		opts = &NewVolumetricLightScatteringPostProcessOpts{}

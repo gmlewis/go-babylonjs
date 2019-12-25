@@ -40,7 +40,7 @@ func StereoscopicUniversalCameraArrayToJSArray(array []*StereoscopicUniversalCam
 
 // NewStereoscopicUniversalCamera returns a new StereoscopicUniversalCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#constructor
 func (ba *Babylon) NewStereoscopicUniversalCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicUniversalCamera {
 
 	args := make([]interface{}, 0, 5+0)

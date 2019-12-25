@@ -40,7 +40,7 @@ func PostProcessRenderPipelineManagerArrayToJSArray(array []*PostProcessRenderPi
 
 // NewPostProcessRenderPipelineManager returns a new PostProcessRenderPipelineManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#constructor
 func (ba *Babylon) NewPostProcessRenderPipelineManager() *PostProcessRenderPipelineManager {
 
 	args := make([]interface{}, 0, 0+0)

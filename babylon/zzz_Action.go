@@ -45,7 +45,7 @@ type NewActionOpts struct {
 
 // NewAction returns a new Action object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.action
+// https://doc.babylonjs.com/api/classes/babylon.action#constructor
 func (ba *Babylon) NewAction(triggerOptions JSObject, opts *NewActionOpts) *Action {
 	if opts == nil {
 		opts = &NewActionOpts{}

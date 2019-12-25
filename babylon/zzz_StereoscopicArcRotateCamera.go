@@ -40,7 +40,7 @@ func StereoscopicArcRotateCameraArrayToJSArray(array []*StereoscopicArcRotateCam
 
 // NewStereoscopicArcRotateCamera returns a new StereoscopicArcRotateCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#constructor
 func (ba *Babylon) NewStereoscopicArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicArcRotateCamera {
 
 	args := make([]interface{}, 0, 8+0)

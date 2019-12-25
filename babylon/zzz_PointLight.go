@@ -41,7 +41,7 @@ func PointLightArrayToJSArray(array []*PointLight) []interface{} {
 
 // NewPointLight returns a new PointLight object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pointlight
+// https://doc.babylonjs.com/api/classes/babylon.pointlight#constructor
 func (ba *Babylon) NewPointLight(name string, position *Vector3, scene *Scene) *PointLight {
 
 	args := make([]interface{}, 0, 3+0)

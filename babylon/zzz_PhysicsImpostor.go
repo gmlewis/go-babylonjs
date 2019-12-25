@@ -46,7 +46,7 @@ type NewPhysicsImpostorOpts struct {
 
 // NewPhysicsImpostor returns a new PhysicsImpostor object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.physicsimpostor
+// https://doc.babylonjs.com/api/classes/babylon.physicsimpostor#constructor
 func (ba *Babylon) NewPhysicsImpostor(object *IPhysicsEnabledObject, jsType float64, opts *NewPhysicsImpostorOpts) *PhysicsImpostor {
 	if opts == nil {
 		opts = &NewPhysicsImpostorOpts{}

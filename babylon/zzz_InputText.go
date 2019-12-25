@@ -44,7 +44,7 @@ type NewInputTextOpts struct {
 
 // NewInputText returns a new InputText object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#constructor
 func (gui *GUI) NewInputText(opts *NewInputTextOpts) *InputText {
 	if opts == nil {
 		opts = &NewInputTextOpts{}

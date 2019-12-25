@@ -46,7 +46,7 @@ type NewEquiRectangularCubeTextureOpts struct {
 
 // NewEquiRectangularCubeTexture returns a new EquiRectangularCubeTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#constructor
 func (ba *Babylon) NewEquiRectangularCubeTexture(url string, scene *Scene, size float64, opts *NewEquiRectangularCubeTextureOpts) *EquiRectangularCubeTexture {
 	if opts == nil {
 		opts = &NewEquiRectangularCubeTextureOpts{}

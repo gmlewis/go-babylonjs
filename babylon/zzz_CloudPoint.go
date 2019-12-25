@@ -38,7 +38,7 @@ func CloudPointArrayToJSArray(array []*CloudPoint) []interface{} {
 
 // NewCloudPoint returns a new CloudPoint object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.cloudpoint
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#constructor
 func (ba *Babylon) NewCloudPoint(particleIndex float64, group *PointsGroup, groupId float64, idxInGroup float64, pcs *PointsCloudSystem) *CloudPoint {
 
 	args := make([]interface{}, 0, 5+0)

@@ -45,7 +45,7 @@ type NewEdgesRendererOpts struct {
 
 // NewEdgesRenderer returns a new EdgesRenderer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#constructor
 func (ba *Babylon) NewEdgesRenderer(source *AbstractMesh, opts *NewEdgesRendererOpts) *EdgesRenderer {
 	if opts == nil {
 		opts = &NewEdgesRendererOpts{}

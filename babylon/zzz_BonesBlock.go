@@ -38,7 +38,7 @@ func BonesBlockArrayToJSArray(array []*BonesBlock) []interface{} {
 
 // NewBonesBlock returns a new BonesBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.bonesblock
+// https://doc.babylonjs.com/api/classes/babylon.bonesblock#constructor
 func (ba *Babylon) NewBonesBlock(name string) *BonesBlock {
 
 	args := make([]interface{}, 0, 1+0)

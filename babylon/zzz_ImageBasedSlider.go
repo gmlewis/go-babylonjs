@@ -43,7 +43,7 @@ type NewImageBasedSliderOpts struct {
 
 // NewImageBasedSlider returns a new ImageBasedSlider object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.imagebasedslider
+// https://doc.babylonjs.com/api/classes/babylon.gui.imagebasedslider#constructor
 func (gui *GUI) NewImageBasedSlider(opts *NewImageBasedSliderOpts) *ImageBasedSlider {
 	if opts == nil {
 		opts = &NewImageBasedSliderOpts{}

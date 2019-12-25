@@ -39,7 +39,7 @@ func ParticleArrayToJSArray(array []*Particle) []interface{} {
 
 // NewParticle returns a new Particle object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.particle
+// https://doc.babylonjs.com/api/classes/babylon.particle#constructor
 func (ba *Babylon) NewParticle(particleSystem *ParticleSystem) *Particle {
 
 	args := make([]interface{}, 0, 1+0)

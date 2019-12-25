@@ -43,7 +43,7 @@ type NewVirtualKeyboardOpts struct {
 
 // NewVirtualKeyboard returns a new VirtualKeyboard object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#constructor
 func (gui *GUI) NewVirtualKeyboard(opts *NewVirtualKeyboardOpts) *VirtualKeyboard {
 	if opts == nil {
 		opts = &NewVirtualKeyboardOpts{}

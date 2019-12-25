@@ -45,7 +45,7 @@ type NewMorphTargetManagerOpts struct {
 
 // NewMorphTargetManager returns a new MorphTargetManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#constructor
 func (ba *Babylon) NewMorphTargetManager(opts *NewMorphTargetManagerOpts) *MorphTargetManager {
 	if opts == nil {
 		opts = &NewMorphTargetManagerOpts{}

@@ -46,7 +46,7 @@ type NewHDRCubeTextureAssetTaskOpts struct {
 
 // NewHDRCubeTextureAssetTask returns a new HDRCubeTextureAssetTask object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask
+// https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask#constructor
 func (ba *Babylon) NewHDRCubeTextureAssetTask(name string, url string, size float64, opts *NewHDRCubeTextureAssetTaskOpts) *HDRCubeTextureAssetTask {
 	if opts == nil {
 		opts = &NewHDRCubeTextureAssetTaskOpts{}

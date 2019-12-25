@@ -49,7 +49,7 @@ type NewAnimatableOpts struct {
 
 // NewAnimatable returns a new Animatable object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.animatable
+// https://doc.babylonjs.com/api/classes/babylon.animatable#constructor
 func (ba *Babylon) NewAnimatable(scene *Scene, target JSObject, opts *NewAnimatableOpts) *Animatable {
 	if opts == nil {
 		opts = &NewAnimatableOpts{}

@@ -41,7 +41,7 @@ func CameraInputsManagerArrayToJSArray(array []*CameraInputsManager) []interface
 
 // NewCameraInputsManager returns a new CameraInputsManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager
+// https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager#constructor
 func (ba *Babylon) NewCameraInputsManager(camera *Camera) *CameraInputsManager {
 
 	args := make([]interface{}, 0, 1+0)

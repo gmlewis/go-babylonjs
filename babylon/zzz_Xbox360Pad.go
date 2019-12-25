@@ -43,7 +43,7 @@ type NewXbox360PadOpts struct {
 
 // NewXbox360Pad returns a new Xbox360Pad object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.xbox360pad
+// https://doc.babylonjs.com/api/classes/babylon.xbox360pad#constructor
 func (ba *Babylon) NewXbox360Pad(id string, index float64, gamepad JSObject, opts *NewXbox360PadOpts) *Xbox360Pad {
 	if opts == nil {
 		opts = &NewXbox360PadOpts{}

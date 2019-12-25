@@ -46,7 +46,7 @@ type NewAsciiArtFontTextureOpts struct {
 
 // NewAsciiArtFontTexture returns a new AsciiArtFontTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture
+// https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture#constructor
 func (ba *Babylon) NewAsciiArtFontTexture(name string, font string, text string, opts *NewAsciiArtFontTextureOpts) *AsciiArtFontTexture {
 	if opts == nil {
 		opts = &NewAsciiArtFontTextureOpts{}

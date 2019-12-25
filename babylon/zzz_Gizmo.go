@@ -43,7 +43,7 @@ type NewGizmoOpts struct {
 
 // NewGizmo returns a new Gizmo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gizmo
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#constructor
 func (ba *Babylon) NewGizmo(opts *NewGizmoOpts) *Gizmo {
 	if opts == nil {
 		opts = &NewGizmoOpts{}

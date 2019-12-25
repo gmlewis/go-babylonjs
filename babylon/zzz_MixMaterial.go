@@ -38,7 +38,7 @@ func MixMaterialArrayToJSArray(array []*MixMaterial) []interface{} {
 
 // NewMixMaterial returns a new MixMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.mixmaterial
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#constructor
 func (ba *Babylon) NewMixMaterial(name string, scene *Scene) *MixMaterial {
 
 	args := make([]interface{}, 0, 2+0)

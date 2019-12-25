@@ -38,7 +38,7 @@ func PBRCustomMaterialArrayToJSArray(array []*PBRCustomMaterial) []interface{} {
 
 // NewPBRCustomMaterial returns a new PBRCustomMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial
+// https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial#constructor
 func (ba *Babylon) NewPBRCustomMaterial(name string, scene *Scene) *PBRCustomMaterial {
 
 	args := make([]interface{}, 0, 2+0)

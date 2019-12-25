@@ -38,7 +38,7 @@ func Path2ArrayToJSArray(array []*Path2) []interface{} {
 
 // NewPath2 returns a new Path2 object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.path2
+// https://doc.babylonjs.com/api/classes/babylon.path2#constructor
 func (ba *Babylon) NewPath2(x float64, y float64) *Path2 {
 
 	args := make([]interface{}, 0, 2+0)

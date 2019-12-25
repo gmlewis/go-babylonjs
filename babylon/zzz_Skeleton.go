@@ -40,7 +40,7 @@ func SkeletonArrayToJSArray(array []*Skeleton) []interface{} {
 
 // NewSkeleton returns a new Skeleton object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.skeleton
+// https://doc.babylonjs.com/api/classes/babylon.skeleton#constructor
 func (ba *Babylon) NewSkeleton(name string, id string, scene *Scene) *Skeleton {
 
 	args := make([]interface{}, 0, 3+0)

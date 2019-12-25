@@ -46,7 +46,7 @@ type NewSoundTrackOpts struct {
 
 // NewSoundTrack returns a new SoundTrack object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.soundtrack
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#constructor
 func (ba *Babylon) NewSoundTrack(scene *Scene, opts *NewSoundTrackOpts) *SoundTrack {
 	if opts == nil {
 		opts = &NewSoundTrackOpts{}

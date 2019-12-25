@@ -38,7 +38,7 @@ func MeshAssetTaskArrayToJSArray(array []*MeshAssetTask) []interface{} {
 
 // NewMeshAssetTask returns a new MeshAssetTask object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.meshassettask
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#constructor
 func (ba *Babylon) NewMeshAssetTask(name string, meshesNames JSObject, rootUrl string, sceneFilename string) *MeshAssetTask {
 
 	args := make([]interface{}, 0, 4+0)

@@ -47,7 +47,7 @@ type NewLensRenderingPipelineOpts struct {
 
 // NewLensRenderingPipeline returns a new LensRenderingPipeline object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline
+// https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline#constructor
 func (ba *Babylon) NewLensRenderingPipeline(name string, parameters JSObject, scene *Scene, opts *NewLensRenderingPipelineOpts) *LensRenderingPipeline {
 	if opts == nil {
 		opts = &NewLensRenderingPipelineOpts{}

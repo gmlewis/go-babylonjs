@@ -38,7 +38,7 @@ func PostProcessRenderPipelineManagerSceneComponentArrayToJSArray(array []*PostP
 
 // NewPostProcessRenderPipelineManagerSceneComponent returns a new PostProcessRenderPipelineManagerSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#constructor
 func (ba *Babylon) NewPostProcessRenderPipelineManagerSceneComponent(scene *Scene) *PostProcessRenderPipelineManagerSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

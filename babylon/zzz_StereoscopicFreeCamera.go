@@ -40,7 +40,7 @@ func StereoscopicFreeCameraArrayToJSArray(array []*StereoscopicFreeCamera) []int
 
 // NewStereoscopicFreeCamera returns a new StereoscopicFreeCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera#constructor
 func (ba *Babylon) NewStereoscopicFreeCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicFreeCamera {
 
 	args := make([]interface{}, 0, 5+0)

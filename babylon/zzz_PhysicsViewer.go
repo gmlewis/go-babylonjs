@@ -38,7 +38,7 @@ func PhysicsViewerArrayToJSArray(array []*PhysicsViewer) []interface{} {
 
 // NewPhysicsViewer returns a new PhysicsViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.physicsviewer
+// https://doc.babylonjs.com/api/classes/babylon.physicsviewer#constructor
 func (ba *Babylon) NewPhysicsViewer(scene *Scene) *PhysicsViewer {
 
 	args := make([]interface{}, 0, 1+0)

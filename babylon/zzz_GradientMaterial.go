@@ -38,7 +38,7 @@ func GradientMaterialArrayToJSArray(array []*GradientMaterial) []interface{} {
 
 // NewGradientMaterial returns a new GradientMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#constructor
 func (ba *Babylon) NewGradientMaterial(name string, scene *Scene) *GradientMaterial {
 
 	args := make([]interface{}, 0, 2+0)

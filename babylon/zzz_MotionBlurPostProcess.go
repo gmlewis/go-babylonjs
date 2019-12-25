@@ -56,7 +56,7 @@ type NewMotionBlurPostProcessOpts struct {
 
 // NewMotionBlurPostProcess returns a new MotionBlurPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess#constructor
 func (ba *Babylon) NewMotionBlurPostProcess(name string, scene *Scene, options float64, camera *Camera, opts *NewMotionBlurPostProcessOpts) *MotionBlurPostProcess {
 	if opts == nil {
 		opts = &NewMotionBlurPostProcessOpts{}

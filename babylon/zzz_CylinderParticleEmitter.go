@@ -47,7 +47,7 @@ type NewCylinderParticleEmitterOpts struct {
 
 // NewCylinderParticleEmitter returns a new CylinderParticleEmitter object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#constructor
 func (ba *Babylon) NewCylinderParticleEmitter(opts *NewCylinderParticleEmitterOpts) *CylinderParticleEmitter {
 	if opts == nil {
 		opts = &NewCylinderParticleEmitterOpts{}

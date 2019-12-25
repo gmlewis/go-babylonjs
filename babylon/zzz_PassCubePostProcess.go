@@ -48,7 +48,7 @@ type NewPassCubePostProcessOpts struct {
 
 // NewPassCubePostProcess returns a new PassCubePostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess
+// https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess#constructor
 func (ba *Babylon) NewPassCubePostProcess(name string, options float64, opts *NewPassCubePostProcessOpts) *PassCubePostProcess {
 	if opts == nil {
 		opts = &NewPassCubePostProcessOpts{}

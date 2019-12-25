@@ -38,7 +38,7 @@ func VectorSplitterBlockArrayToJSArray(array []*VectorSplitterBlock) []interface
 
 // NewVectorSplitterBlock returns a new VectorSplitterBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock
+// https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock#constructor
 func (ba *Babylon) NewVectorSplitterBlock(name string) *VectorSplitterBlock {
 
 	args := make([]interface{}, 0, 1+0)

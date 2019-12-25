@@ -40,7 +40,7 @@ func PhysicsHelperArrayToJSArray(array []*PhysicsHelper) []interface{} {
 
 // NewPhysicsHelper returns a new PhysicsHelper object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.physicshelper
+// https://doc.babylonjs.com/api/classes/babylon.physicshelper#constructor
 func (ba *Babylon) NewPhysicsHelper(scene *Scene) *PhysicsHelper {
 
 	args := make([]interface{}, 0, 1+0)

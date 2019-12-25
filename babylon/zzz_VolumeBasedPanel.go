@@ -38,7 +38,7 @@ func VolumeBasedPanelArrayToJSArray(array []*VolumeBasedPanel) []interface{} {
 
 // NewVolumeBasedPanel returns a new VolumeBasedPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel#constructor
 func (gui *GUI) NewVolumeBasedPanel() *VolumeBasedPanel {
 
 	args := make([]interface{}, 0, 0+0)

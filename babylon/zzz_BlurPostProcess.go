@@ -49,7 +49,7 @@ type NewBlurPostProcessOpts struct {
 
 // NewBlurPostProcess returns a new BlurPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.blurpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.blurpostprocess#constructor
 func (ba *Babylon) NewBlurPostProcess(name string, direction *Vector2, kernel float64, options float64, camera *Camera, opts *NewBlurPostProcessOpts) *BlurPostProcess {
 	if opts == nil {
 		opts = &NewBlurPostProcessOpts{}

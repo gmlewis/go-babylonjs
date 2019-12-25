@@ -43,7 +43,7 @@ type NewWaterMaterialOpts struct {
 
 // NewWaterMaterial returns a new WaterMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.watermaterial
+// https://doc.babylonjs.com/api/classes/babylon.watermaterial#constructor
 func (ba *Babylon) NewWaterMaterial(name string, scene *Scene, opts *NewWaterMaterialOpts) *WaterMaterial {
 	if opts == nil {
 		opts = &NewWaterMaterialOpts{}

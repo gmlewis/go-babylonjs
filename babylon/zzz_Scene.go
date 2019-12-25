@@ -45,7 +45,7 @@ type NewSceneOpts struct {
 
 // NewScene returns a new Scene object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scene
+// https://doc.babylonjs.com/api/classes/babylon.scene#constructor
 func (ba *Babylon) NewScene(engine *Engine, opts *NewSceneOpts) *Scene {
 	if opts == nil {
 		opts = &NewSceneOpts{}

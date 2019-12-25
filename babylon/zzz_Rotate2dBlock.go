@@ -38,7 +38,7 @@ func Rotate2dBlockArrayToJSArray(array []*Rotate2dBlock) []interface{} {
 
 // NewRotate2dBlock returns a new Rotate2dBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rotate2dblock
+// https://doc.babylonjs.com/api/classes/babylon.rotate2dblock#constructor
 func (ba *Babylon) NewRotate2dBlock(name string) *Rotate2dBlock {
 
 	args := make([]interface{}, 0, 1+0)

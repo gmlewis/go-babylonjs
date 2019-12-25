@@ -39,7 +39,7 @@ func PointerInfoPreArrayToJSArray(array []*PointerInfoPre) []interface{} {
 
 // NewPointerInfoPre returns a new PointerInfoPre object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#constructor
 func (ba *Babylon) NewPointerInfoPre(jsType float64, event js.Value, localX float64, localY float64) *PointerInfoPre {
 
 	args := make([]interface{}, 0, 4+0)

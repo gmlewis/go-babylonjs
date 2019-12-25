@@ -47,7 +47,7 @@ type NewDracoCompressionOpts struct {
 
 // NewDracoCompression returns a new DracoCompression object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.dracocompression
+// https://doc.babylonjs.com/api/classes/babylon.dracocompression#constructor
 func (ba *Babylon) NewDracoCompression(opts *NewDracoCompressionOpts) *DracoCompression {
 	if opts == nil {
 		opts = &NewDracoCompressionOpts{}

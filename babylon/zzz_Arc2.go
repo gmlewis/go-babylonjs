@@ -38,7 +38,7 @@ func Arc2ArrayToJSArray(array []*Arc2) []interface{} {
 
 // NewArc2 returns a new Arc2 object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.arc2
+// https://doc.babylonjs.com/api/classes/babylon.arc2#constructor
 func (ba *Babylon) NewArc2(startPoint *Vector2, midPoint *Vector2, endPoint *Vector2) *Arc2 {
 
 	args := make([]interface{}, 0, 3+0)

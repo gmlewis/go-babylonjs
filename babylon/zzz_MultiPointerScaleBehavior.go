@@ -38,7 +38,7 @@ func MultiPointerScaleBehaviorArrayToJSArray(array []*MultiPointerScaleBehavior)
 
 // NewMultiPointerScaleBehavior returns a new MultiPointerScaleBehavior object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior
+// https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior#constructor
 func (ba *Babylon) NewMultiPointerScaleBehavior() *MultiPointerScaleBehavior {
 
 	args := make([]interface{}, 0, 0+0)

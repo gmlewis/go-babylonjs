@@ -44,7 +44,7 @@ type NewHolographicButtonOpts struct {
 
 // NewHolographicButton returns a new HolographicButton object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#constructor
 func (gui *GUI) NewHolographicButton(opts *NewHolographicButtonOpts) *HolographicButton {
 	if opts == nil {
 		opts = &NewHolographicButtonOpts{}

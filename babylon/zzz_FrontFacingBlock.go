@@ -38,7 +38,7 @@ func FrontFacingBlockArrayToJSArray(array []*FrontFacingBlock) []interface{} {
 
 // NewFrontFacingBlock returns a new FrontFacingBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.frontfacingblock
+// https://doc.babylonjs.com/api/classes/babylon.frontfacingblock#constructor
 func (ba *Babylon) NewFrontFacingBlock(name string) *FrontFacingBlock {
 
 	args := make([]interface{}, 0, 1+0)

@@ -47,7 +47,7 @@ type NewRefractionPostProcessOpts struct {
 
 // NewRefractionPostProcess returns a new RefractionPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#constructor
 func (ba *Babylon) NewRefractionPostProcess(name string, refractionTextureUrl string, color *Color3, depth float64, colorLevel float64, options float64, camera *Camera, opts *NewRefractionPostProcessOpts) *RefractionPostProcess {
 	if opts == nil {
 		opts = &NewRefractionPostProcessOpts{}

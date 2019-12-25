@@ -38,7 +38,7 @@ func ClampBlockArrayToJSArray(array []*ClampBlock) []interface{} {
 
 // NewClampBlock returns a new ClampBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.clampblock
+// https://doc.babylonjs.com/api/classes/babylon.clampblock#constructor
 func (ba *Babylon) NewClampBlock(name string) *ClampBlock {
 
 	args := make([]interface{}, 0, 1+0)

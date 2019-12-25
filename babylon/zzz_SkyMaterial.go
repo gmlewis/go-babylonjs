@@ -40,7 +40,7 @@ func SkyMaterialArrayToJSArray(array []*SkyMaterial) []interface{} {
 
 // NewSkyMaterial returns a new SkyMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.skymaterial
+// https://doc.babylonjs.com/api/classes/babylon.skymaterial#constructor
 func (ba *Babylon) NewSkyMaterial(name string, scene *Scene) *SkyMaterial {
 
 	args := make([]interface{}, 0, 2+0)

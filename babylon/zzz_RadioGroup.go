@@ -39,7 +39,7 @@ func RadioGroupArrayToJSArray(array []*RadioGroup) []interface{} {
 
 // NewRadioGroup returns a new RadioGroup object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.radiogroup
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiogroup#constructor
 func (gui *GUI) NewRadioGroup(name string) *RadioGroup {
 
 	args := make([]interface{}, 0, 1+0)

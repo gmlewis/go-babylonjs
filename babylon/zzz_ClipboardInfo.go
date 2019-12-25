@@ -38,7 +38,7 @@ func ClipboardInfoArrayToJSArray(array []*ClipboardInfo) []interface{} {
 
 // NewClipboardInfo returns a new ClipboardInfo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.clipboardinfo
+// https://doc.babylonjs.com/api/classes/babylon.clipboardinfo#constructor
 func (ba *Babylon) NewClipboardInfo(jsType float64, event js.Value) *ClipboardInfo {
 
 	args := make([]interface{}, 0, 2+0)

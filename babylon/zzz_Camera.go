@@ -45,7 +45,7 @@ type NewCameraOpts struct {
 
 // NewCamera returns a new Camera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.camera
+// https://doc.babylonjs.com/api/classes/babylon.camera#constructor
 func (ba *Babylon) NewCamera(name string, position *Vector3, scene *Scene, opts *NewCameraOpts) *Camera {
 	if opts == nil {
 		opts = &NewCameraOpts{}

@@ -40,7 +40,7 @@ func RenderingManagerArrayToJSArray(array []*RenderingManager) []interface{} {
 
 // NewRenderingManager returns a new RenderingManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.renderingmanager
+// https://doc.babylonjs.com/api/classes/babylon.renderingmanager#constructor
 func (ba *Babylon) NewRenderingManager(scene *Scene) *RenderingManager {
 
 	args := make([]interface{}, 0, 1+0)

@@ -45,7 +45,7 @@ type NewShadowGeneratorOpts struct {
 
 // NewShadowGenerator returns a new ShadowGenerator object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.shadowgenerator
+// https://doc.babylonjs.com/api/classes/babylon.shadowgenerator#constructor
 func (ba *Babylon) NewShadowGenerator(mapSize float64, light *IShadowLight, opts *NewShadowGeneratorOpts) *ShadowGenerator {
 	if opts == nil {
 		opts = &NewShadowGeneratorOpts{}

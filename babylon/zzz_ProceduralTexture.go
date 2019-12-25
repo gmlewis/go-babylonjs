@@ -48,7 +48,7 @@ type NewProceduralTextureOpts struct {
 
 // NewProceduralTexture returns a new ProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#constructor
 func (ba *Babylon) NewProceduralTexture(name string, size JSObject, fragment JSObject, scene *Scene, opts *NewProceduralTextureOpts) *ProceduralTexture {
 	if opts == nil {
 		opts = &NewProceduralTextureOpts{}

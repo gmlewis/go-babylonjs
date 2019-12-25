@@ -44,7 +44,7 @@ type NewPerlinNoiseProceduralTextureOpts struct {
 
 // NewPerlinNoiseProceduralTexture returns a new PerlinNoiseProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture#constructor
 func (ba *Babylon) NewPerlinNoiseProceduralTexture(name string, size float64, scene *Scene, opts *NewPerlinNoiseProceduralTextureOpts) *PerlinNoiseProceduralTexture {
 	if opts == nil {
 		opts = &NewPerlinNoiseProceduralTextureOpts{}

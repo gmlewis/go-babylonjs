@@ -43,7 +43,7 @@ type NewVirtualJoystickOpts struct {
 
 // NewVirtualJoystick returns a new VirtualJoystick object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#constructor
 func (ba *Babylon) NewVirtualJoystick(opts *NewVirtualJoystickOpts) *VirtualJoystick {
 	if opts == nil {
 		opts = &NewVirtualJoystickOpts{}

@@ -42,7 +42,7 @@ func ArcRotateCameraInputsManagerArrayToJSArray(array []*ArcRotateCameraInputsMa
 
 // NewArcRotateCameraInputsManager returns a new ArcRotateCameraInputsManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager#constructor
 func (ba *Babylon) NewArcRotateCameraInputsManager(camera *ArcRotateCamera) *ArcRotateCameraInputsManager {
 
 	args := make([]interface{}, 0, 1+0)

@@ -44,7 +44,7 @@ type NewBoundingBoxGizmoOpts struct {
 
 // NewBoundingBoxGizmo returns a new BoundingBoxGizmo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#constructor
 func (ba *Babylon) NewBoundingBoxGizmo(opts *NewBoundingBoxGizmoOpts) *BoundingBoxGizmo {
 	if opts == nil {
 		opts = &NewBoundingBoxGizmoOpts{}

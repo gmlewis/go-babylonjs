@@ -45,7 +45,7 @@ type NewEventStateOpts struct {
 
 // NewEventState returns a new EventState object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.eventstate
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#constructor
 func (ba *Babylon) NewEventState(mask float64, opts *NewEventStateOpts) *EventState {
 	if opts == nil {
 		opts = &NewEventStateOpts{}

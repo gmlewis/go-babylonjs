@@ -45,7 +45,7 @@ type NewWebXRManagedOutputCanvasOpts struct {
 
 // NewWebXRManagedOutputCanvas returns a new WebXRManagedOutputCanvas object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#constructor
 func (ba *Babylon) NewWebXRManagedOutputCanvas(engine *ThinEngine, opts *NewWebXRManagedOutputCanvasOpts) *WebXRManagedOutputCanvas {
 	if opts == nil {
 		opts = &NewWebXRManagedOutputCanvasOpts{}

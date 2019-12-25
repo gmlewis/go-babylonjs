@@ -45,7 +45,7 @@ type NewNodeMaterialBlockOpts struct {
 
 // NewNodeMaterialBlock returns a new NodeMaterialBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#constructor
 func (ba *Babylon) NewNodeMaterialBlock(name string, opts *NewNodeMaterialBlockOpts) *NodeMaterialBlock {
 	if opts == nil {
 		opts = &NewNodeMaterialBlockOpts{}

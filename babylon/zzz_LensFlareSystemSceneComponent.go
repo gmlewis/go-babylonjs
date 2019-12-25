@@ -39,7 +39,7 @@ func LensFlareSystemSceneComponentArrayToJSArray(array []*LensFlareSystemSceneCo
 
 // NewLensFlareSystemSceneComponent returns a new LensFlareSystemSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#constructor
 func (ba *Babylon) NewLensFlareSystemSceneComponent(scene *Scene) *LensFlareSystemSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

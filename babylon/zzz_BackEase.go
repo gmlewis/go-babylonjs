@@ -46,7 +46,7 @@ type NewBackEaseOpts struct {
 
 // NewBackEase returns a new BackEase object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.backease
+// https://doc.babylonjs.com/api/classes/babylon.backease#constructor
 func (ba *Babylon) NewBackEase(opts *NewBackEaseOpts) *BackEase {
 	if opts == nil {
 		opts = &NewBackEaseOpts{}

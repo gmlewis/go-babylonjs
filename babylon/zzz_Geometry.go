@@ -45,7 +45,7 @@ type NewGeometryOpts struct {
 
 // NewGeometry returns a new Geometry object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.geometry
+// https://doc.babylonjs.com/api/classes/babylon.geometry#constructor
 func (ba *Babylon) NewGeometry(id string, scene *Scene, opts *NewGeometryOpts) *Geometry {
 	if opts == nil {
 		opts = &NewGeometryOpts{}

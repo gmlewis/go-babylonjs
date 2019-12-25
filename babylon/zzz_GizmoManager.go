@@ -38,7 +38,7 @@ func GizmoManagerArrayToJSArray(array []*GizmoManager) []interface{} {
 
 // NewGizmoManager returns a new GizmoManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gizmomanager
+// https://doc.babylonjs.com/api/classes/babylon.gizmomanager#constructor
 func (ba *Babylon) NewGizmoManager(scene *Scene) *GizmoManager {
 
 	args := make([]interface{}, 0, 1+0)

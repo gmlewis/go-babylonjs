@@ -46,7 +46,7 @@ type NewMultiRenderTargetOpts struct {
 
 // NewMultiRenderTarget returns a new MultiRenderTarget object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multirendertarget
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#constructor
 func (ba *Babylon) NewMultiRenderTarget(name string, size JSObject, count float64, scene *Scene, opts *NewMultiRenderTargetOpts) *MultiRenderTarget {
 	if opts == nil {
 		opts = &NewMultiRenderTargetOpts{}

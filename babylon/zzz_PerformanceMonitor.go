@@ -43,7 +43,7 @@ type NewPerformanceMonitorOpts struct {
 
 // NewPerformanceMonitor returns a new PerformanceMonitor object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.performancemonitor
+// https://doc.babylonjs.com/api/classes/babylon.performancemonitor#constructor
 func (ba *Babylon) NewPerformanceMonitor(opts *NewPerformanceMonitorOpts) *PerformanceMonitor {
 	if opts == nil {
 		opts = &NewPerformanceMonitorOpts{}

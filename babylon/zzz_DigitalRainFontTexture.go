@@ -46,7 +46,7 @@ type NewDigitalRainFontTextureOpts struct {
 
 // NewDigitalRainFontTexture returns a new DigitalRainFontTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture
+// https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture#constructor
 func (ba *Babylon) NewDigitalRainFontTexture(name string, font string, text string, opts *NewDigitalRainFontTextureOpts) *DigitalRainFontTexture {
 	if opts == nil {
 		opts = &NewDigitalRainFontTextureOpts{}

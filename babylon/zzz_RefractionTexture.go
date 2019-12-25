@@ -46,7 +46,7 @@ type NewRefractionTextureOpts struct {
 
 // NewRefractionTexture returns a new RefractionTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.refractiontexture
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#constructor
 func (ba *Babylon) NewRefractionTexture(name string, size float64, scene *Scene, opts *NewRefractionTextureOpts) *RefractionTexture {
 	if opts == nil {
 		opts = &NewRefractionTextureOpts{}

@@ -38,7 +38,7 @@ func AnimationRangeArrayToJSArray(array []*AnimationRange) []interface{} {
 
 // NewAnimationRange returns a new AnimationRange object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.animationrange
+// https://doc.babylonjs.com/api/classes/babylon.animationrange#constructor
 func (ba *Babylon) NewAnimationRange(name string, from float64, to float64) *AnimationRange {
 
 	args := make([]interface{}, 0, 3+0)

@@ -45,7 +45,7 @@ type NewMultiviewRenderTargetOpts struct {
 
 // NewMultiviewRenderTarget returns a new MultiviewRenderTarget object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget
+// https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget#constructor
 func (ba *Babylon) NewMultiviewRenderTarget(scene *Scene, opts *NewMultiviewRenderTargetOpts) *MultiviewRenderTarget {
 	if opts == nil {
 		opts = &NewMultiviewRenderTargetOpts{}

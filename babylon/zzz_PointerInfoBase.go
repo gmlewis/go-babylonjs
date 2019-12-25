@@ -38,7 +38,7 @@ func PointerInfoBaseArrayToJSArray(array []*PointerInfoBase) []interface{} {
 
 // NewPointerInfoBase returns a new PointerInfoBase object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pointerinfobase
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfobase#constructor
 func (ba *Babylon) NewPointerInfoBase(jsType float64, event js.Value) *PointerInfoBase {
 
 	args := make([]interface{}, 0, 2+0)

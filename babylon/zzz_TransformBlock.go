@@ -38,7 +38,7 @@ func TransformBlockArrayToJSArray(array []*TransformBlock) []interface{} {
 
 // NewTransformBlock returns a new TransformBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.transformblock
+// https://doc.babylonjs.com/api/classes/babylon.transformblock#constructor
 func (ba *Babylon) NewTransformBlock(name string) *TransformBlock {
 
 	args := make([]interface{}, 0, 1+0)

@@ -38,7 +38,7 @@ func PhysicsRadialExplosionEventArrayToJSArray(array []*PhysicsRadialExplosionEv
 
 // NewPhysicsRadialExplosionEvent returns a new PhysicsRadialExplosionEvent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent#constructor
 func (ba *Babylon) NewPhysicsRadialExplosionEvent(_scene *Scene, _options *PhysicsRadialExplosionEventOptions) *PhysicsRadialExplosionEvent {
 
 	args := make([]interface{}, 0, 2+0)

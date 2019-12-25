@@ -43,7 +43,7 @@ type NewButton3DOpts struct {
 
 // NewButton3D returns a new Button3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.button3d
+// https://doc.babylonjs.com/api/classes/babylon.gui.button3d#constructor
 func (gui *GUI) NewButton3D(opts *NewButton3DOpts) *Button3D {
 	if opts == nil {
 		opts = &NewButton3DOpts{}

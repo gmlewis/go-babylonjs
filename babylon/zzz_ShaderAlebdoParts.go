@@ -38,7 +38,7 @@ func ShaderAlebdoPartsArrayToJSArray(array []*ShaderAlebdoParts) []interface{} {
 
 // NewShaderAlebdoParts returns a new ShaderAlebdoParts object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.shaderalebdoparts
+// https://doc.babylonjs.com/api/classes/babylon.shaderalebdoparts#constructor
 func (ba *Babylon) NewShaderAlebdoParts() *ShaderAlebdoParts {
 
 	args := make([]interface{}, 0, 0+0)

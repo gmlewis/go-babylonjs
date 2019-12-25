@@ -43,7 +43,7 @@ type NewColorPickerOpts struct {
 
 // NewColorPicker returns a new ColorPicker object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#constructor
 func (gui *GUI) NewColorPicker(opts *NewColorPickerOpts) *ColorPicker {
 	if opts == nil {
 		opts = &NewColorPickerOpts{}

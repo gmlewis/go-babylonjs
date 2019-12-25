@@ -39,7 +39,7 @@ func HemisphericLightArrayToJSArray(array []*HemisphericLight) []interface{} {
 
 // NewHemisphericLight returns a new HemisphericLight object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.hemisphericlight
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericlight#constructor
 func (ba *Babylon) NewHemisphericLight(name string, direction *Vector3, scene *Scene) *HemisphericLight {
 
 	args := make([]interface{}, 0, 3+0)

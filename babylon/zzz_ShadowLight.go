@@ -39,7 +39,7 @@ func ShadowLightArrayToJSArray(array []*ShadowLight) []interface{} {
 
 // NewShadowLight returns a new ShadowLight object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.shadowlight
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#constructor
 func (ba *Babylon) NewShadowLight(name string, scene *Scene) *ShadowLight {
 
 	args := make([]interface{}, 0, 2+0)

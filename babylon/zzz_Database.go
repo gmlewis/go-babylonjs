@@ -45,7 +45,7 @@ type NewDatabaseOpts struct {
 
 // NewDatabase returns a new Database object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.database
+// https://doc.babylonjs.com/api/classes/babylon.database#constructor
 func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked JSFunc, opts *NewDatabaseOpts) *Database {
 	if opts == nil {
 		opts = &NewDatabaseOpts{}

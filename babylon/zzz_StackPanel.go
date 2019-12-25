@@ -43,7 +43,7 @@ type NewStackPanelOpts struct {
 
 // NewStackPanel returns a new StackPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#constructor
 func (gui *GUI) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
 	if opts == nil {
 		opts = &NewStackPanelOpts{}

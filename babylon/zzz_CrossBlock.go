@@ -38,7 +38,7 @@ func CrossBlockArrayToJSArray(array []*CrossBlock) []interface{} {
 
 // NewCrossBlock returns a new CrossBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.crossblock
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#constructor
 func (ba *Babylon) NewCrossBlock(name string) *CrossBlock {
 
 	args := make([]interface{}, 0, 1+0)

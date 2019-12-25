@@ -38,7 +38,7 @@ func StateConditionArrayToJSArray(array []*StateCondition) []interface{} {
 
 // NewStateCondition returns a new StateCondition object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.statecondition
+// https://doc.babylonjs.com/api/classes/babylon.statecondition#constructor
 func (ba *Babylon) NewStateCondition(actionManager *ActionManager, target JSObject, value string) *StateCondition {
 
 	args := make([]interface{}, 0, 3+0)

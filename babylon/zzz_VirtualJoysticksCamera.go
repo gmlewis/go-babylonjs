@@ -42,7 +42,7 @@ func VirtualJoysticksCameraArrayToJSArray(array []*VirtualJoysticksCamera) []int
 
 // NewVirtualJoysticksCamera returns a new VirtualJoysticksCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera#constructor
 func (ba *Babylon) NewVirtualJoysticksCamera(name string, position *Vector3, scene *Scene) *VirtualJoysticksCamera {
 
 	args := make([]interface{}, 0, 3+0)

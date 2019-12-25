@@ -38,7 +38,7 @@ func DesaturateBlockArrayToJSArray(array []*DesaturateBlock) []interface{} {
 
 // NewDesaturateBlock returns a new DesaturateBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.desaturateblock
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#constructor
 func (ba *Babylon) NewDesaturateBlock(name string) *DesaturateBlock {
 
 	args := make([]interface{}, 0, 1+0)

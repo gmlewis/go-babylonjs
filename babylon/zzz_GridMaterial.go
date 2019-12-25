@@ -39,7 +39,7 @@ func GridMaterialArrayToJSArray(array []*GridMaterial) []interface{} {
 
 // NewGridMaterial returns a new GridMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gridmaterial
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#constructor
 func (ba *Babylon) NewGridMaterial(name string, scene *Scene) *GridMaterial {
 
 	args := make([]interface{}, 0, 2+0)

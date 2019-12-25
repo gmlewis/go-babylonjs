@@ -38,7 +38,7 @@ func ScaleBlockArrayToJSArray(array []*ScaleBlock) []interface{} {
 
 // NewScaleBlock returns a new ScaleBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scaleblock
+// https://doc.babylonjs.com/api/classes/babylon.scaleblock#constructor
 func (ba *Babylon) NewScaleBlock(name string) *ScaleBlock {
 
 	args := make([]interface{}, 0, 1+0)

@@ -53,7 +53,7 @@ type NewColorCorrectionPostProcessOpts struct {
 
 // NewColorCorrectionPostProcess returns a new ColorCorrectionPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#constructor
 func (ba *Babylon) NewColorCorrectionPostProcess(name string, colorTableUrl string, options float64, camera *Camera, opts *NewColorCorrectionPostProcessOpts) *ColorCorrectionPostProcess {
 	if opts == nil {
 		opts = &NewColorCorrectionPostProcessOpts{}

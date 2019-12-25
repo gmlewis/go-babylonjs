@@ -46,7 +46,7 @@ type NewOctreeOpts struct {
 
 // NewOctree returns a new Octree object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.octree
+// https://doc.babylonjs.com/api/classes/babylon.octree#constructor
 func (ba *Babylon) NewOctree(creationFunc JSFunc, opts *NewOctreeOpts) *Octree {
 	if opts == nil {
 		opts = &NewOctreeOpts{}

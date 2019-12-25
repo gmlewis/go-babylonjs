@@ -46,7 +46,7 @@ type NewUniformBufferOpts struct {
 
 // NewUniformBuffer returns a new UniformBuffer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#constructor
 func (ba *Babylon) NewUniformBuffer(engine *Engine, opts *NewUniformBufferOpts) *UniformBuffer {
 	if opts == nil {
 		opts = &NewUniformBufferOpts{}

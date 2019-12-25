@@ -38,7 +38,7 @@ func PhysicsGravitationalFieldEventArrayToJSArray(array []*PhysicsGravitationalF
 
 // NewPhysicsGravitationalFieldEvent returns a new PhysicsGravitationalFieldEvent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent
+// https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent#constructor
 func (ba *Babylon) NewPhysicsGravitationalFieldEvent(_physicsHelper *PhysicsHelper, _scene *Scene, _origin *Vector3, _options *PhysicsRadialExplosionEventOptions) *PhysicsGravitationalFieldEvent {
 
 	args := make([]interface{}, 0, 4+0)

@@ -38,7 +38,7 @@ func OneMinusBlockArrayToJSArray(array []*OneMinusBlock) []interface{} {
 
 // NewOneMinusBlock returns a new OneMinusBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.oneminusblock
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#constructor
 func (ba *Babylon) NewOneMinusBlock(name string) *OneMinusBlock {
 
 	args := make([]interface{}, 0, 1+0)

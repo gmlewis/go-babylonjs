@@ -38,7 +38,7 @@ func MatrixArrayToJSArray(array []*Matrix) []interface{} {
 
 // NewMatrix returns a new Matrix object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix
+// https://doc.babylonjs.com/api/classes/babylon.matrix#constructor
 func (ba *Babylon) NewMatrix() *Matrix {
 
 	args := make([]interface{}, 0, 0+0)

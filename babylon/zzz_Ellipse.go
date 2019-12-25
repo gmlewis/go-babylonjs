@@ -43,7 +43,7 @@ type NewEllipseOpts struct {
 
 // NewEllipse returns a new Ellipse object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.ellipse
+// https://doc.babylonjs.com/api/classes/babylon.gui.ellipse#constructor
 func (gui *GUI) NewEllipse(opts *NewEllipseOpts) *Ellipse {
 	if opts == nil {
 		opts = &NewEllipseOpts{}

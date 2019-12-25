@@ -38,7 +38,7 @@ func FadeInOutBehaviorArrayToJSArray(array []*FadeInOutBehavior) []interface{} {
 
 // NewFadeInOutBehavior returns a new FadeInOutBehavior object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#constructor
 func (ba *Babylon) NewFadeInOutBehavior() *FadeInOutBehavior {
 
 	args := make([]interface{}, 0, 0+0)

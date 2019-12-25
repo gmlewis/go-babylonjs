@@ -39,7 +39,7 @@ func LayerSceneComponentArrayToJSArray(array []*LayerSceneComponent) []interface
 
 // NewLayerSceneComponent returns a new LayerSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#constructor
 func (ba *Babylon) NewLayerSceneComponent(scene *Scene) *LayerSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

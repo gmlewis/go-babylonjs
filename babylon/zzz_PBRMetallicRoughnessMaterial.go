@@ -41,7 +41,7 @@ func PBRMetallicRoughnessMaterialArrayToJSArray(array []*PBRMetallicRoughnessMat
 
 // NewPBRMetallicRoughnessMaterial returns a new PBRMetallicRoughnessMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial
+// https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial#constructor
 func (ba *Babylon) NewPBRMetallicRoughnessMaterial(name string, scene *Scene) *PBRMetallicRoughnessMaterial {
 
 	args := make([]interface{}, 0, 2+0)

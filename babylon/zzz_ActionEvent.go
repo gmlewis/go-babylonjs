@@ -44,7 +44,7 @@ type NewActionEventOpts struct {
 
 // NewActionEvent returns a new ActionEvent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.actionevent
+// https://doc.babylonjs.com/api/classes/babylon.actionevent#constructor
 func (ba *Babylon) NewActionEvent(source JSObject, pointerX float64, pointerY float64, meshUnderPointer *AbstractMesh, opts *NewActionEventOpts) *ActionEvent {
 	if opts == nil {
 		opts = &NewActionEventOpts{}

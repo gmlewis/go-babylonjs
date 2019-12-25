@@ -40,7 +40,7 @@ func RollingAverageArrayToJSArray(array []*RollingAverage) []interface{} {
 
 // NewRollingAverage returns a new RollingAverage object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rollingaverage
+// https://doc.babylonjs.com/api/classes/babylon.rollingaverage#constructor
 func (ba *Babylon) NewRollingAverage(length float64) *RollingAverage {
 
 	args := make([]interface{}, 0, 1+0)

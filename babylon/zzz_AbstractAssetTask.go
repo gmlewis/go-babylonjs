@@ -38,7 +38,7 @@ func AbstractAssetTaskArrayToJSArray(array []*AbstractAssetTask) []interface{} {
 
 // NewAbstractAssetTask returns a new AbstractAssetTask object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.abstractassettask
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#constructor
 func (ba *Babylon) NewAbstractAssetTask(name string) *AbstractAssetTask {
 
 	args := make([]interface{}, 0, 1+0)

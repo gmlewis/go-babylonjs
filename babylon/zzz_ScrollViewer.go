@@ -44,7 +44,7 @@ type NewScrollViewerOpts struct {
 
 // NewScrollViewer returns a new ScrollViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#constructor
 func (gui *GUI) NewScrollViewer(opts *NewScrollViewerOpts) *ScrollViewer {
 	if opts == nil {
 		opts = &NewScrollViewerOpts{}

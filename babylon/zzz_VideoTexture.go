@@ -49,7 +49,7 @@ type NewVideoTextureOpts struct {
 
 // NewVideoTexture returns a new VideoTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.videotexture
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#constructor
 func (ba *Babylon) NewVideoTexture(name string, src []string, scene *Scene, opts *NewVideoTextureOpts) *VideoTexture {
 	if opts == nil {
 		opts = &NewVideoTextureOpts{}

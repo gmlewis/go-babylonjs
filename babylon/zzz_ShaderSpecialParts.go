@@ -38,7 +38,7 @@ func ShaderSpecialPartsArrayToJSArray(array []*ShaderSpecialParts) []interface{}
 
 // NewShaderSpecialParts returns a new ShaderSpecialParts object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts
+// https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts#constructor
 func (ba *Babylon) NewShaderSpecialParts() *ShaderSpecialParts {
 
 	args := make([]interface{}, 0, 0+0)

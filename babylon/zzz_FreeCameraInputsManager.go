@@ -42,7 +42,7 @@ func FreeCameraInputsManagerArrayToJSArray(array []*FreeCameraInputsManager) []i
 
 // NewFreeCameraInputsManager returns a new FreeCameraInputsManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager
+// https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager#constructor
 func (ba *Babylon) NewFreeCameraInputsManager(camera *FreeCamera) *FreeCameraInputsManager {
 
 	args := make([]interface{}, 0, 1+0)

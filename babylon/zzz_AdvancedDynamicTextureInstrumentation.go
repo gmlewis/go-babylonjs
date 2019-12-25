@@ -38,7 +38,7 @@ func AdvancedDynamicTextureInstrumentationArrayToJSArray(array []*AdvancedDynami
 
 // NewAdvancedDynamicTextureInstrumentation returns a new AdvancedDynamicTextureInstrumentation object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.advanceddynamictextureinstrumentation
+// https://doc.babylonjs.com/api/classes/babylon.gui.advanceddynamictextureinstrumentation#constructor
 func (gui *GUI) NewAdvancedDynamicTextureInstrumentation(texture *AdvancedDynamicTexture) *AdvancedDynamicTextureInstrumentation {
 
 	args := make([]interface{}, 0, 1+0)

@@ -39,7 +39,7 @@ func StyleArrayToJSArray(array []*Style) []interface{} {
 
 // NewStyle returns a new Style object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.style
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#constructor
 func (gui *GUI) NewStyle(host *AdvancedDynamicTexture) *Style {
 
 	args := make([]interface{}, 0, 1+0)

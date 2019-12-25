@@ -38,7 +38,7 @@ func TextureBlockArrayToJSArray(array []*TextureBlock) []interface{} {
 
 // NewTextureBlock returns a new TextureBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textureblock
+// https://doc.babylonjs.com/api/classes/babylon.textureblock#constructor
 func (ba *Babylon) NewTextureBlock(name string) *TextureBlock {
 
 	args := make([]interface{}, 0, 1+0)

@@ -38,7 +38,7 @@ func PoseEnabledControllerArrayToJSArray(array []*PoseEnabledController) []inter
 
 // NewPoseEnabledController returns a new PoseEnabledController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#constructor
 func (ba *Babylon) NewPoseEnabledController(browserGamepad JSObject) *PoseEnabledController {
 
 	args := make([]interface{}, 0, 1+0)

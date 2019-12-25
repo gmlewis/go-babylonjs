@@ -39,7 +39,7 @@ func DepthRendererSceneComponentArrayToJSArray(array []*DepthRendererSceneCompon
 
 // NewDepthRendererSceneComponent returns a new DepthRendererSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent#constructor
 func (ba *Babylon) NewDepthRendererSceneComponent(scene *Scene) *DepthRendererSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

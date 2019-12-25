@@ -43,7 +43,7 @@ type NewGridOpts struct {
 
 // NewGrid returns a new Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.grid
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#constructor
 func (gui *GUI) NewGrid(opts *NewGridOpts) *Grid {
 	if opts == nil {
 		opts = &NewGridOpts{}

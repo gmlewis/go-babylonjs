@@ -38,7 +38,7 @@ func WeightedSoundArrayToJSArray(array []*WeightedSound) []interface{} {
 
 // NewWeightedSound returns a new WeightedSound object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.weightedsound
+// https://doc.babylonjs.com/api/classes/babylon.weightedsound#constructor
 func (ba *Babylon) NewWeightedSound(loop bool, sounds []*Sound, weights []float64) *WeightedSound {
 
 	args := make([]interface{}, 0, 3+0)

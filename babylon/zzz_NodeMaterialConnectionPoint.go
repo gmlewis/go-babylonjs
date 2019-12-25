@@ -38,7 +38,7 @@ func NodeMaterialConnectionPointArrayToJSArray(array []*NodeMaterialConnectionPo
 
 // NewNodeMaterialConnectionPoint returns a new NodeMaterialConnectionPoint object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#constructor
 func (ba *Babylon) NewNodeMaterialConnectionPoint(name string, ownerBlock *NodeMaterialBlock, direction js.Value) *NodeMaterialConnectionPoint {
 
 	args := make([]interface{}, 0, 3+0)

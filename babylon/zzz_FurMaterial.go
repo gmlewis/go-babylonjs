@@ -38,7 +38,7 @@ func FurMaterialArrayToJSArray(array []*FurMaterial) []interface{} {
 
 // NewFurMaterial returns a new FurMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.furmaterial
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#constructor
 func (ba *Babylon) NewFurMaterial(name string, scene *Scene) *FurMaterial {
 
 	args := make([]interface{}, 0, 2+0)

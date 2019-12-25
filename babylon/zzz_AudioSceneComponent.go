@@ -39,7 +39,7 @@ func AudioSceneComponentArrayToJSArray(array []*AudioSceneComponent) []interface
 
 // NewAudioSceneComponent returns a new AudioSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent#constructor
 func (ba *Babylon) NewAudioSceneComponent(scene *Scene) *AudioSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

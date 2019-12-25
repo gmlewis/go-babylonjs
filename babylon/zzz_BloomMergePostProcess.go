@@ -47,7 +47,7 @@ type NewBloomMergePostProcessOpts struct {
 
 // NewBloomMergePostProcess returns a new BloomMergePostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#constructor
 func (ba *Babylon) NewBloomMergePostProcess(name string, originalFromInput *PostProcess, blurred *PostProcess, weight float64, options float64, camera *Camera, opts *NewBloomMergePostProcessOpts) *BloomMergePostProcess {
 	if opts == nil {
 		opts = &NewBloomMergePostProcessOpts{}

@@ -45,7 +45,7 @@ type NewPositionNormalTextureVertexOpts struct {
 
 // NewPositionNormalTextureVertex returns a new PositionNormalTextureVertex object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.positionnormaltexturevertex
+// https://doc.babylonjs.com/api/classes/babylon.positionnormaltexturevertex#constructor
 func (ba *Babylon) NewPositionNormalTextureVertex(opts *NewPositionNormalTextureVertexOpts) *PositionNormalTextureVertex {
 	if opts == nil {
 		opts = &NewPositionNormalTextureVertexOpts{}

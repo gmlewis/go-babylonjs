@@ -43,7 +43,7 @@ func PerfCounterArrayToJSArray(array []*PerfCounter) []interface{} {
 
 // NewPerfCounter returns a new PerfCounter object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.perfcounter
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#constructor
 func (ba *Babylon) NewPerfCounter() *PerfCounter {
 
 	args := make([]interface{}, 0, 0+0)

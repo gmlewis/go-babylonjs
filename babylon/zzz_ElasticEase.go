@@ -47,7 +47,7 @@ type NewElasticEaseOpts struct {
 
 // NewElasticEase returns a new ElasticEase object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.elasticease
+// https://doc.babylonjs.com/api/classes/babylon.elasticease#constructor
 func (ba *Babylon) NewElasticEase(opts *NewElasticEaseOpts) *ElasticEase {
 	if opts == nil {
 		opts = &NewElasticEaseOpts{}

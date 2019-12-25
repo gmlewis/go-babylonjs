@@ -44,7 +44,7 @@ type NewBrickProceduralTextureOpts struct {
 
 // NewBrickProceduralTexture returns a new BrickProceduralTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture
+// https://doc.babylonjs.com/api/classes/babylon.brickproceduraltexture#constructor
 func (ba *Babylon) NewBrickProceduralTexture(name string, size float64, scene *Scene, opts *NewBrickProceduralTextureOpts) *BrickProceduralTexture {
 	if opts == nil {
 		opts = &NewBrickProceduralTextureOpts{}

@@ -43,7 +43,7 @@ type NewScrollBarOpts struct {
 
 // NewScrollBar returns a new ScrollBar object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar#constructor
 func (gui *GUI) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
 	if opts == nil {
 		opts = &NewScrollBarOpts{}

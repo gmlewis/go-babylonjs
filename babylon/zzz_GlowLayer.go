@@ -45,7 +45,7 @@ type NewGlowLayerOpts struct {
 
 // NewGlowLayer returns a new GlowLayer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.glowlayer
+// https://doc.babylonjs.com/api/classes/babylon.glowlayer#constructor
 func (ba *Babylon) NewGlowLayer(name string, scene *Scene, opts *NewGlowLayerOpts) *GlowLayer {
 	if opts == nil {
 		opts = &NewGlowLayerOpts{}

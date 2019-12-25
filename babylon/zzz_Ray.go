@@ -43,7 +43,7 @@ type NewRayOpts struct {
 
 // NewRay returns a new Ray object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ray
+// https://doc.babylonjs.com/api/classes/babylon.ray#constructor
 func (ba *Babylon) NewRay(origin *Vector3, direction *Vector3, opts *NewRayOpts) *Ray {
 	if opts == nil {
 		opts = &NewRayOpts{}

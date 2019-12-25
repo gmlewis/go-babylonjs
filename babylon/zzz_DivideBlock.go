@@ -38,7 +38,7 @@ func DivideBlockArrayToJSArray(array []*DivideBlock) []interface{} {
 
 // NewDivideBlock returns a new DivideBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.divideblock
+// https://doc.babylonjs.com/api/classes/babylon.divideblock#constructor
 func (ba *Babylon) NewDivideBlock(name string) *DivideBlock {
 
 	args := make([]interface{}, 0, 1+0)

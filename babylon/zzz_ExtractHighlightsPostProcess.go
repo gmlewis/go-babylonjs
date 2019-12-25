@@ -47,7 +47,7 @@ type NewExtractHighlightsPostProcessOpts struct {
 
 // NewExtractHighlightsPostProcess returns a new ExtractHighlightsPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#constructor
 func (ba *Babylon) NewExtractHighlightsPostProcess(name string, options float64, camera *Camera, opts *NewExtractHighlightsPostProcessOpts) *ExtractHighlightsPostProcess {
 	if opts == nil {
 		opts = &NewExtractHighlightsPostProcessOpts{}

@@ -47,7 +47,7 @@ type NewCircleOfConfusionPostProcessOpts struct {
 
 // NewCircleOfConfusionPostProcess returns a new CircleOfConfusionPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#constructor
 func (ba *Babylon) NewCircleOfConfusionPostProcess(name string, depthTexture *RenderTargetTexture, options float64, camera *Camera, opts *NewCircleOfConfusionPostProcessOpts) *CircleOfConfusionPostProcess {
 	if opts == nil {
 		opts = &NewCircleOfConfusionPostProcessOpts{}

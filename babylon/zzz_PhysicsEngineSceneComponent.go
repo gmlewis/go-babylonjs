@@ -38,7 +38,7 @@ func PhysicsEngineSceneComponentArrayToJSArray(array []*PhysicsEngineSceneCompon
 
 // NewPhysicsEngineSceneComponent returns a new PhysicsEngineSceneComponent object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent
+// https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#constructor
 func (ba *Babylon) NewPhysicsEngineSceneComponent(scene *Scene) *PhysicsEngineSceneComponent {
 
 	args := make([]interface{}, 0, 1+0)

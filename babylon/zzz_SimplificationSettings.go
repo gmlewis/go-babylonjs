@@ -45,7 +45,7 @@ type NewSimplificationSettingsOpts struct {
 
 // NewSimplificationSettings returns a new SimplificationSettings object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.simplificationsettings
+// https://doc.babylonjs.com/api/classes/babylon.simplificationsettings#constructor
 func (ba *Babylon) NewSimplificationSettings(quality float64, distance float64, opts *NewSimplificationSettingsOpts) *SimplificationSettings {
 	if opts == nil {
 		opts = &NewSimplificationSettingsOpts{}

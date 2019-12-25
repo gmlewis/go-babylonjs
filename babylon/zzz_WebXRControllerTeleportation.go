@@ -43,7 +43,7 @@ type NewWebXRControllerTeleportationOpts struct {
 
 // NewWebXRControllerTeleportation returns a new WebXRControllerTeleportation object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.webxrcontrollerteleportation
+// https://doc.babylonjs.com/api/classes/babylon.webxrcontrollerteleportation#constructor
 func (ba *Babylon) NewWebXRControllerTeleportation(input *WebXRInput, opts *NewWebXRControllerTeleportationOpts) *WebXRControllerTeleportation {
 	if opts == nil {
 		opts = &NewWebXRControllerTeleportationOpts{}

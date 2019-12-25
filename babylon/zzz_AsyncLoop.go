@@ -43,7 +43,7 @@ type NewAsyncLoopOpts struct {
 
 // NewAsyncLoop returns a new AsyncLoop object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.asyncloop
+// https://doc.babylonjs.com/api/classes/babylon.asyncloop#constructor
 func (ba *Babylon) NewAsyncLoop(iterations float64, jsFunc JSFunc, successCallback JSFunc, opts *NewAsyncLoopOpts) *AsyncLoop {
 	if opts == nil {
 		opts = &NewAsyncLoopOpts{}

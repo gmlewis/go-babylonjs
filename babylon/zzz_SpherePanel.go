@@ -38,7 +38,7 @@ func SpherePanelArrayToJSArray(array []*SpherePanel) []interface{} {
 
 // NewSpherePanel returns a new SpherePanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.spherepanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.spherepanel#constructor
 func (gui *GUI) NewSpherePanel() *SpherePanel {
 
 	args := make([]interface{}, 0, 0+0)

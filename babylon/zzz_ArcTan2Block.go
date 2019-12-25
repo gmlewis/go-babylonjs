@@ -38,7 +38,7 @@ func ArcTan2BlockArrayToJSArray(array []*ArcTan2Block) []interface{} {
 
 // NewArcTan2Block returns a new ArcTan2Block object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.arctan2block
+// https://doc.babylonjs.com/api/classes/babylon.arctan2block#constructor
 func (ba *Babylon) NewArcTan2Block(name string) *ArcTan2Block {
 
 	args := make([]interface{}, 0, 1+0)

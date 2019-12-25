@@ -38,7 +38,7 @@ func NegateBlockArrayToJSArray(array []*NegateBlock) []interface{} {
 
 // NewNegateBlock returns a new NegateBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.negateblock
+// https://doc.babylonjs.com/api/classes/babylon.negateblock#constructor
 func (ba *Babylon) NewNegateBlock(name string) *NegateBlock {
 
 	args := make([]interface{}, 0, 1+0)

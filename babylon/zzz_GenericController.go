@@ -38,7 +38,7 @@ func GenericControllerArrayToJSArray(array []*GenericController) []interface{} {
 
 // NewGenericController returns a new GenericController object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.genericcontroller
+// https://doc.babylonjs.com/api/classes/babylon.genericcontroller#constructor
 func (ba *Babylon) NewGenericController(vrGamepad JSObject) *GenericController {
 
 	args := make([]interface{}, 0, 1+0)

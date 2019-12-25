@@ -38,7 +38,7 @@ func GroundMeshArrayToJSArray(array []*GroundMesh) []interface{} {
 
 // NewGroundMesh returns a new GroundMesh object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.groundmesh
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#constructor
 func (ba *Babylon) NewGroundMesh(name string, scene *Scene) *GroundMesh {
 
 	args := make([]interface{}, 0, 2+0)

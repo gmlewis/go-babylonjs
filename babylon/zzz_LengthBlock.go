@@ -38,7 +38,7 @@ func LengthBlockArrayToJSArray(array []*LengthBlock) []interface{} {
 
 // NewLengthBlock returns a new LengthBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.lengthblock
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#constructor
 func (ba *Babylon) NewLengthBlock(name string) *LengthBlock {
 
 	args := make([]interface{}, 0, 1+0)

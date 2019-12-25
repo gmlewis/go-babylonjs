@@ -38,7 +38,7 @@ func BinaryFileAssetTaskArrayToJSArray(array []*BinaryFileAssetTask) []interface
 
 // NewBinaryFileAssetTask returns a new BinaryFileAssetTask object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask
+// https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask#constructor
 func (ba *Babylon) NewBinaryFileAssetTask(name string, url string) *BinaryFileAssetTask {
 
 	args := make([]interface{}, 0, 2+0)

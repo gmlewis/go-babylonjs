@@ -46,7 +46,7 @@ type NewDigitalRainPostProcessOpts struct {
 
 // NewDigitalRainPostProcess returns a new DigitalRainPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess#constructor
 func (ba *Babylon) NewDigitalRainPostProcess(name string, camera *Camera, opts *NewDigitalRainPostProcessOpts) *DigitalRainPostProcess {
 	if opts == nil {
 		opts = &NewDigitalRainPostProcessOpts{}

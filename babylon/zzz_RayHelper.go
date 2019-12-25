@@ -41,7 +41,7 @@ func RayHelperArrayToJSArray(array []*RayHelper) []interface{} {
 
 // NewRayHelper returns a new RayHelper object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rayhelper
+// https://doc.babylonjs.com/api/classes/babylon.rayhelper#constructor
 func (ba *Babylon) NewRayHelper(ray *Ray) *RayHelper {
 
 	args := make([]interface{}, 0, 1+0)

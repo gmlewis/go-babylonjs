@@ -39,7 +39,7 @@ func PointParticleEmitterArrayToJSArray(array []*PointParticleEmitter) []interfa
 
 // NewPointParticleEmitter returns a new PointParticleEmitter object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter
+// https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter#constructor
 func (ba *Babylon) NewPointParticleEmitter() *PointParticleEmitter {
 
 	args := make([]interface{}, 0, 0+0)

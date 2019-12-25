@@ -38,7 +38,7 @@ func ImageProcessingBlockArrayToJSArray(array []*ImageProcessingBlock) []interfa
 
 // NewImageProcessingBlock returns a new ImageProcessingBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock#constructor
 func (ba *Babylon) NewImageProcessingBlock(name string) *ImageProcessingBlock {
 
 	args := make([]interface{}, 0, 1+0)

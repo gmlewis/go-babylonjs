@@ -38,7 +38,7 @@ func AssetContainerArrayToJSArray(array []*AssetContainer) []interface{} {
 
 // NewAssetContainer returns a new AssetContainer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.assetcontainer
+// https://doc.babylonjs.com/api/classes/babylon.assetcontainer#constructor
 func (ba *Babylon) NewAssetContainer(scene *Scene) *AssetContainer {
 
 	args := make([]interface{}, 0, 1+0)

@@ -40,7 +40,7 @@ func DistanceJointArrayToJSArray(array []*DistanceJoint) []interface{} {
 
 // NewDistanceJoint returns a new DistanceJoint object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.distancejoint
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#constructor
 func (ba *Babylon) NewDistanceJoint(jointData js.Value) *DistanceJoint {
 
 	args := make([]interface{}, 0, 1+0)

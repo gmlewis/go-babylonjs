@@ -47,7 +47,7 @@ type NewChromaticAberrationPostProcessOpts struct {
 
 // NewChromaticAberrationPostProcess returns a new ChromaticAberrationPostProcess object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess
+// https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess#constructor
 func (ba *Babylon) NewChromaticAberrationPostProcess(name string, screenWidth float64, screenHeight float64, options float64, camera *Camera, opts *NewChromaticAberrationPostProcessOpts) *ChromaticAberrationPostProcess {
 	if opts == nil {
 		opts = &NewChromaticAberrationPostProcessOpts{}

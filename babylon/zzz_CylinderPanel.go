@@ -38,7 +38,7 @@ func CylinderPanelArrayToJSArray(array []*CylinderPanel) []interface{} {
 
 // NewCylinderPanel returns a new CylinderPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.gui.cylinderpanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.cylinderpanel#constructor
 func (gui *GUI) NewCylinderPanel() *CylinderPanel {
 
 	args := make([]interface{}, 0, 0+0)

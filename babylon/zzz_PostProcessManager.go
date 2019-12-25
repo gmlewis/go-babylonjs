@@ -39,7 +39,7 @@ func PostProcessManagerArrayToJSArray(array []*PostProcessManager) []interface{}
 
 // NewPostProcessManager returns a new PostProcessManager object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.postprocessmanager
+// https://doc.babylonjs.com/api/classes/babylon.postprocessmanager#constructor
 func (ba *Babylon) NewPostProcessManager(scene *Scene) *PostProcessManager {
 
 	args := make([]interface{}, 0, 1+0)

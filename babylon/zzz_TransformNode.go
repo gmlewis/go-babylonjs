@@ -46,7 +46,7 @@ type NewTransformNodeOpts struct {
 
 // NewTransformNode returns a new TransformNode object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.transformnode
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#constructor
 func (ba *Babylon) NewTransformNode(name string, opts *NewTransformNodeOpts) *TransformNode {
 	if opts == nil {
 		opts = &NewTransformNodeOpts{}

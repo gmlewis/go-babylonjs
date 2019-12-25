@@ -38,7 +38,7 @@ func Color3ArrayToJSArray(array []*Color3) []interface{} {
 
 // NewColor3 returns a new Color3 object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.color3
+// https://doc.babylonjs.com/api/classes/babylon.color3#constructor
 func (ba *Babylon) NewColor3(r float64, g float64, b float64) *Color3 {
 
 	args := make([]interface{}, 0, 3+0)

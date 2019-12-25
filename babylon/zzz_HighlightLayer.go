@@ -46,7 +46,7 @@ type NewHighlightLayerOpts struct {
 
 // NewHighlightLayer returns a new HighlightLayer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.highlightlayer
+// https://doc.babylonjs.com/api/classes/babylon.highlightlayer#constructor
 func (ba *Babylon) NewHighlightLayer(name string, scene *Scene, opts *NewHighlightLayerOpts) *HighlightLayer {
 	if opts == nil {
 		opts = &NewHighlightLayerOpts{}

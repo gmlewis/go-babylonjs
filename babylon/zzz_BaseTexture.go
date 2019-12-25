@@ -40,7 +40,7 @@ func BaseTextureArrayToJSArray(array []*BaseTexture) []interface{} {
 
 // NewBaseTexture returns a new BaseTexture object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.basetexture
+// https://doc.babylonjs.com/api/classes/babylon.basetexture#constructor
 func (ba *Babylon) NewBaseTexture(scene *Scene) *BaseTexture {
 
 	args := make([]interface{}, 0, 1+0)

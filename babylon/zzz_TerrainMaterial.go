@@ -38,7 +38,7 @@ func TerrainMaterialArrayToJSArray(array []*TerrainMaterial) []interface{} {
 
 // NewTerrainMaterial returns a new TerrainMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#constructor
 func (ba *Babylon) NewTerrainMaterial(name string, scene *Scene) *TerrainMaterial {
 
 	args := make([]interface{}, 0, 2+0)
