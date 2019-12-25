@@ -38,7 +38,7 @@ func GUIDArrayToJSArray(array []*GUID) []interface{} {
 
 // RandomId calls the RandomId method on the GUID object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.guid#randomid
+// https://doc.babylonjs.com/api/classes/babylon.gui.guid#randomid
 func (g *GUID) RandomId() string {
 
 	retVal := g.p.Call("RandomId")

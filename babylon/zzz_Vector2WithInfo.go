@@ -43,7 +43,7 @@ type NewVector2WithInfoOpts struct {
 
 // NewVector2WithInfo returns a new Vector2WithInfo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vector2withinfo
+// https://doc.babylonjs.com/api/classes/babylon.gui.vector2withinfo
 func (gui *GUI) NewVector2WithInfo(source *Vector2, opts *NewVector2WithInfoOpts) *Vector2WithInfo {
 	if opts == nil {
 		opts = &NewVector2WithInfoOpts{}
@@ -65,7 +65,7 @@ func (gui *GUI) NewVector2WithInfo(source *Vector2, opts *NewVector2WithInfoOpts
 
 // ButtonIndex returns the ButtonIndex property of class Vector2WithInfo.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#buttonindex
+// https://doc.babylonjs.com/api/classes/babylon.gui.vector2withinfo#buttonindex
 func (v *Vector2WithInfo) ButtonIndex() float64 {
 	retVal := v.p.Get("buttonIndex")
 	return retVal.Float()
@@ -73,7 +73,7 @@ func (v *Vector2WithInfo) ButtonIndex() float64 {
 
 // SetButtonIndex sets the ButtonIndex property of class Vector2WithInfo.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vector2withinfo#buttonindex
+// https://doc.babylonjs.com/api/classes/babylon.gui.vector2withinfo#buttonindex
 func (v *Vector2WithInfo) SetButtonIndex(buttonIndex float64) *Vector2WithInfo {
 	v.p.Set("buttonIndex", buttonIndex)
 	return v

@@ -38,7 +38,7 @@ func VolumeBasedPanelArrayToJSArray(array []*VolumeBasedPanel) []interface{} {
 
 // NewVolumeBasedPanel returns a new VolumeBasedPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel
 func (gui *GUI) NewVolumeBasedPanel() *VolumeBasedPanel {
 
 	args := make([]interface{}, 0, 0+0)
@@ -49,7 +49,7 @@ func (gui *GUI) NewVolumeBasedPanel() *VolumeBasedPanel {
 
 // Columns returns the Columns property of class VolumeBasedPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#columns
+// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel#columns
 func (v *VolumeBasedPanel) Columns() int {
 	retVal := v.p.Get("columns")
 	return retVal.Int()
@@ -57,7 +57,7 @@ func (v *VolumeBasedPanel) Columns() int {
 
 // SetColumns sets the Columns property of class VolumeBasedPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#columns
+// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel#columns
 func (v *VolumeBasedPanel) SetColumns(columns int) *VolumeBasedPanel {
 	v.p.Set("columns", columns)
 	return v
@@ -65,7 +65,7 @@ func (v *VolumeBasedPanel) SetColumns(columns int) *VolumeBasedPanel {
 
 // Margin returns the Margin property of class VolumeBasedPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#margin
+// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel#margin
 func (v *VolumeBasedPanel) Margin() float64 {
 	retVal := v.p.Get("margin")
 	return retVal.Float()
@@ -73,7 +73,7 @@ func (v *VolumeBasedPanel) Margin() float64 {
 
 // SetMargin sets the Margin property of class VolumeBasedPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#margin
+// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel#margin
 func (v *VolumeBasedPanel) SetMargin(margin float64) *VolumeBasedPanel {
 	v.p.Set("margin", margin)
 	return v
@@ -81,7 +81,7 @@ func (v *VolumeBasedPanel) SetMargin(margin float64) *VolumeBasedPanel {
 
 // Orientation returns the Orientation property of class VolumeBasedPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel#orientation
 func (v *VolumeBasedPanel) Orientation() float64 {
 	retVal := v.p.Get("orientation")
 	return retVal.Float()
@@ -89,7 +89,7 @@ func (v *VolumeBasedPanel) Orientation() float64 {
 
 // SetOrientation sets the Orientation property of class VolumeBasedPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel#orientation
 func (v *VolumeBasedPanel) SetOrientation(orientation float64) *VolumeBasedPanel {
 	v.p.Set("orientation", orientation)
 	return v
@@ -97,7 +97,7 @@ func (v *VolumeBasedPanel) SetOrientation(orientation float64) *VolumeBasedPanel
 
 // Rows returns the Rows property of class VolumeBasedPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#rows
+// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel#rows
 func (v *VolumeBasedPanel) Rows() int {
 	retVal := v.p.Get("rows")
 	return retVal.Int()
@@ -105,7 +105,7 @@ func (v *VolumeBasedPanel) Rows() int {
 
 // SetRows sets the Rows property of class VolumeBasedPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel#rows
+// https://doc.babylonjs.com/api/classes/babylon.gui.volumebasedpanel#rows
 func (v *VolumeBasedPanel) SetRows(rows int) *VolumeBasedPanel {
 	v.p.Set("rows", rows)
 	return v

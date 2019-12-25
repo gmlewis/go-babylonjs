@@ -43,7 +43,7 @@ type NewXmlLoaderOpts struct {
 
 // NewXmlLoader returns a new XmlLoader object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.xmlloader
+// https://doc.babylonjs.com/api/classes/babylon.gui.xmlloader
 func (gui *GUI) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
 	if opts == nil {
 		opts = &NewXmlLoaderOpts{}
@@ -59,7 +59,7 @@ func (gui *GUI) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
 
 // GetNodeById calls the GetNodeById method on the XmlLoader object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.xmlloader#getnodebyid
+// https://doc.babylonjs.com/api/classes/babylon.gui.xmlloader#getnodebyid
 func (x *XmlLoader) GetNodeById(id string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
@@ -72,7 +72,7 @@ func (x *XmlLoader) GetNodeById(id string) js.Value {
 
 // GetNodes calls the GetNodes method on the XmlLoader object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.xmlloader#getnodes
+// https://doc.babylonjs.com/api/classes/babylon.gui.xmlloader#getnodes
 func (x *XmlLoader) GetNodes() js.Value {
 
 	retVal := x.p.Call("getNodes")
@@ -81,7 +81,7 @@ func (x *XmlLoader) GetNodes() js.Value {
 
 // IsLoaded calls the IsLoaded method on the XmlLoader object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.xmlloader#isloaded
+// https://doc.babylonjs.com/api/classes/babylon.gui.xmlloader#isloaded
 func (x *XmlLoader) IsLoaded() bool {
 
 	retVal := x.p.Call("isLoaded")
@@ -90,7 +90,7 @@ func (x *XmlLoader) IsLoaded() bool {
 
 // LoadLayout calls the LoadLayout method on the XmlLoader object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.xmlloader#loadlayout
+// https://doc.babylonjs.com/api/classes/babylon.gui.xmlloader#loadlayout
 func (x *XmlLoader) LoadLayout(xmlFile JSObject, rootNode JSObject, callback JSObject) {
 
 	args := make([]interface{}, 0, 3+0)

@@ -44,7 +44,7 @@ type NewInputPasswordOpts struct {
 
 // NewInputPassword returns a new InputPassword object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputpassword
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputpassword
 func (gui *GUI) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
 	if opts == nil {
 		opts = &NewInputPasswordOpts{}

@@ -43,7 +43,7 @@ type NewControl3DOpts struct {
 
 // NewControl3D returns a new Control3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d
 func (gui *GUI) NewControl3D(opts *NewControl3DOpts) *Control3D {
 	if opts == nil {
 		opts = &NewControl3DOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewControl3D(opts *NewControl3DOpts) *Control3D {
 
 // AddBehavior calls the AddBehavior method on the Control3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#addbehavior
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#addbehavior
 func (c *Control3D) AddBehavior(behavior js.Value) *Control3D {
 
 	args := make([]interface{}, 0, 1+0)
@@ -76,7 +76,7 @@ func (c *Control3D) AddBehavior(behavior js.Value) *Control3D {
 
 // Dispose calls the Dispose method on the Control3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#dispose
 func (c *Control3D) Dispose() {
 
 	c.p.Call("dispose")
@@ -84,7 +84,7 @@ func (c *Control3D) Dispose() {
 
 // GetBehaviorByName calls the GetBehaviorByName method on the Control3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#getbehaviorbyname
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#getbehaviorbyname
 func (c *Control3D) GetBehaviorByName(name string) js.Value {
 
 	args := make([]interface{}, 0, 1+0)
@@ -97,7 +97,7 @@ func (c *Control3D) GetBehaviorByName(name string) js.Value {
 
 // GetClassName calls the GetClassName method on the Control3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#getclassname
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#getclassname
 func (c *Control3D) GetClassName() string {
 
 	retVal := c.p.Call("getClassName")
@@ -106,7 +106,7 @@ func (c *Control3D) GetClassName() string {
 
 // LinkToTransformNode calls the LinkToTransformNode method on the Control3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#linktotransformnode
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#linktotransformnode
 func (c *Control3D) LinkToTransformNode(node *TransformNode) *Control3D {
 
 	args := make([]interface{}, 0, 1+0)
@@ -123,7 +123,7 @@ func (c *Control3D) LinkToTransformNode(node *TransformNode) *Control3D {
 
 // RemoveBehavior calls the RemoveBehavior method on the Control3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#removebehavior
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#removebehavior
 func (c *Control3D) RemoveBehavior(behavior js.Value) *Control3D {
 
 	args := make([]interface{}, 0, 1+0)
@@ -136,7 +136,7 @@ func (c *Control3D) RemoveBehavior(behavior js.Value) *Control3D {
 
 // Behaviors returns the Behaviors property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#behaviors
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#behaviors
 func (c *Control3D) Behaviors() js.Value {
 	retVal := c.p.Get("behaviors")
 	return retVal
@@ -144,7 +144,7 @@ func (c *Control3D) Behaviors() js.Value {
 
 // SetBehaviors sets the Behaviors property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#behaviors
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#behaviors
 func (c *Control3D) SetBehaviors(behaviors js.Value) *Control3D {
 	c.p.Set("behaviors", behaviors)
 	return c
@@ -152,7 +152,7 @@ func (c *Control3D) SetBehaviors(behaviors js.Value) *Control3D {
 
 // IsVisible returns the IsVisible property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#isvisible
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#isvisible
 func (c *Control3D) IsVisible() bool {
 	retVal := c.p.Get("isVisible")
 	return retVal.Bool()
@@ -160,7 +160,7 @@ func (c *Control3D) IsVisible() bool {
 
 // SetIsVisible sets the IsVisible property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#isvisible
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#isvisible
 func (c *Control3D) SetIsVisible(isVisible bool) *Control3D {
 	c.p.Set("isVisible", isVisible)
 	return c
@@ -168,7 +168,7 @@ func (c *Control3D) SetIsVisible(isVisible bool) *Control3D {
 
 // Mesh returns the Mesh property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#mesh
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#mesh
 func (c *Control3D) Mesh() *AbstractMesh {
 	retVal := c.p.Get("mesh")
 	return AbstractMeshFromJSObject(retVal, c.ctx)
@@ -176,7 +176,7 @@ func (c *Control3D) Mesh() *AbstractMesh {
 
 // SetMesh sets the Mesh property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#mesh
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#mesh
 func (c *Control3D) SetMesh(mesh *AbstractMesh) *Control3D {
 	c.p.Set("mesh", mesh.JSObject())
 	return c
@@ -184,7 +184,7 @@ func (c *Control3D) SetMesh(mesh *AbstractMesh) *Control3D {
 
 // Name returns the Name property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#name
 func (c *Control3D) Name() string {
 	retVal := c.p.Get("name")
 	return retVal.String()
@@ -192,7 +192,7 @@ func (c *Control3D) Name() string {
 
 // SetName sets the Name property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#name
 func (c *Control3D) SetName(name string) *Control3D {
 	c.p.Set("name", name)
 	return c
@@ -200,7 +200,7 @@ func (c *Control3D) SetName(name string) *Control3D {
 
 // Node returns the Node property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#node
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#node
 func (c *Control3D) Node() *TransformNode {
 	retVal := c.p.Get("node")
 	return TransformNodeFromJSObject(retVal, c.ctx)
@@ -208,7 +208,7 @@ func (c *Control3D) Node() *TransformNode {
 
 // SetNode sets the Node property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#node
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#node
 func (c *Control3D) SetNode(node *TransformNode) *Control3D {
 	c.p.Set("node", node.JSObject())
 	return c
@@ -216,7 +216,7 @@ func (c *Control3D) SetNode(node *TransformNode) *Control3D {
 
 // OnPointerClickObservable returns the OnPointerClickObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerclickobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointerclickobservable
 func (c *Control3D) OnPointerClickObservable() *Observable {
 	retVal := c.p.Get("onPointerClickObservable")
 	return ObservableFromJSObject(retVal, c.ctx)
@@ -224,7 +224,7 @@ func (c *Control3D) OnPointerClickObservable() *Observable {
 
 // SetOnPointerClickObservable sets the OnPointerClickObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerclickobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointerclickobservable
 func (c *Control3D) SetOnPointerClickObservable(onPointerClickObservable *Observable) *Control3D {
 	c.p.Set("onPointerClickObservable", onPointerClickObservable.JSObject())
 	return c
@@ -232,7 +232,7 @@ func (c *Control3D) SetOnPointerClickObservable(onPointerClickObservable *Observ
 
 // OnPointerDownObservable returns the OnPointerDownObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerdownobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointerdownobservable
 func (c *Control3D) OnPointerDownObservable() *Observable {
 	retVal := c.p.Get("onPointerDownObservable")
 	return ObservableFromJSObject(retVal, c.ctx)
@@ -240,7 +240,7 @@ func (c *Control3D) OnPointerDownObservable() *Observable {
 
 // SetOnPointerDownObservable sets the OnPointerDownObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerdownobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointerdownobservable
 func (c *Control3D) SetOnPointerDownObservable(onPointerDownObservable *Observable) *Control3D {
 	c.p.Set("onPointerDownObservable", onPointerDownObservable.JSObject())
 	return c
@@ -248,7 +248,7 @@ func (c *Control3D) SetOnPointerDownObservable(onPointerDownObservable *Observab
 
 // OnPointerEnterObservable returns the OnPointerEnterObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerenterobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointerenterobservable
 func (c *Control3D) OnPointerEnterObservable() *Observable {
 	retVal := c.p.Get("onPointerEnterObservable")
 	return ObservableFromJSObject(retVal, c.ctx)
@@ -256,7 +256,7 @@ func (c *Control3D) OnPointerEnterObservable() *Observable {
 
 // SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerenterobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointerenterobservable
 func (c *Control3D) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *Control3D {
 	c.p.Set("onPointerEnterObservable", onPointerEnterObservable.JSObject())
 	return c
@@ -264,7 +264,7 @@ func (c *Control3D) SetOnPointerEnterObservable(onPointerEnterObservable *Observ
 
 // OnPointerMoveObservable returns the OnPointerMoveObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointermoveobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointermoveobservable
 func (c *Control3D) OnPointerMoveObservable() *Observable {
 	retVal := c.p.Get("onPointerMoveObservable")
 	return ObservableFromJSObject(retVal, c.ctx)
@@ -272,7 +272,7 @@ func (c *Control3D) OnPointerMoveObservable() *Observable {
 
 // SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointermoveobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointermoveobservable
 func (c *Control3D) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *Control3D {
 	c.p.Set("onPointerMoveObservable", onPointerMoveObservable.JSObject())
 	return c
@@ -280,7 +280,7 @@ func (c *Control3D) SetOnPointerMoveObservable(onPointerMoveObservable *Observab
 
 // OnPointerOutObservable returns the OnPointerOutObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointeroutobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointeroutobservable
 func (c *Control3D) OnPointerOutObservable() *Observable {
 	retVal := c.p.Get("onPointerOutObservable")
 	return ObservableFromJSObject(retVal, c.ctx)
@@ -288,7 +288,7 @@ func (c *Control3D) OnPointerOutObservable() *Observable {
 
 // SetOnPointerOutObservable sets the OnPointerOutObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointeroutobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointeroutobservable
 func (c *Control3D) SetOnPointerOutObservable(onPointerOutObservable *Observable) *Control3D {
 	c.p.Set("onPointerOutObservable", onPointerOutObservable.JSObject())
 	return c
@@ -296,7 +296,7 @@ func (c *Control3D) SetOnPointerOutObservable(onPointerOutObservable *Observable
 
 // OnPointerUpObservable returns the OnPointerUpObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerupobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointerupobservable
 func (c *Control3D) OnPointerUpObservable() *Observable {
 	retVal := c.p.Get("onPointerUpObservable")
 	return ObservableFromJSObject(retVal, c.ctx)
@@ -304,7 +304,7 @@ func (c *Control3D) OnPointerUpObservable() *Observable {
 
 // SetOnPointerUpObservable sets the OnPointerUpObservable property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerupobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#onpointerupobservable
 func (c *Control3D) SetOnPointerUpObservable(onPointerUpObservable *Observable) *Control3D {
 	c.p.Set("onPointerUpObservable", onPointerUpObservable.JSObject())
 	return c
@@ -312,7 +312,7 @@ func (c *Control3D) SetOnPointerUpObservable(onPointerUpObservable *Observable) 
 
 // Parent returns the Parent property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#parent
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#parent
 func (c *Control3D) Parent() *Container3D {
 	retVal := c.p.Get("parent")
 	return Container3DFromJSObject(retVal, c.ctx)
@@ -320,7 +320,7 @@ func (c *Control3D) Parent() *Container3D {
 
 // SetParent sets the Parent property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#parent
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#parent
 func (c *Control3D) SetParent(parent *Container3D) *Control3D {
 	c.p.Set("parent", parent.JSObject())
 	return c
@@ -328,7 +328,7 @@ func (c *Control3D) SetParent(parent *Container3D) *Control3D {
 
 // PointerDownAnimation returns the PointerDownAnimation property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerdownanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#pointerdownanimation
 func (c *Control3D) PointerDownAnimation() js.Value {
 	retVal := c.p.Get("pointerDownAnimation")
 	return retVal
@@ -336,7 +336,7 @@ func (c *Control3D) PointerDownAnimation() js.Value {
 
 // SetPointerDownAnimation sets the PointerDownAnimation property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerdownanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#pointerdownanimation
 func (c *Control3D) SetPointerDownAnimation(pointerDownAnimation JSFunc) *Control3D {
 	c.p.Set("pointerDownAnimation", js.FuncOf(pointerDownAnimation))
 	return c
@@ -344,7 +344,7 @@ func (c *Control3D) SetPointerDownAnimation(pointerDownAnimation JSFunc) *Contro
 
 // PointerEnterAnimation returns the PointerEnterAnimation property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerenteranimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#pointerenteranimation
 func (c *Control3D) PointerEnterAnimation() js.Value {
 	retVal := c.p.Get("pointerEnterAnimation")
 	return retVal
@@ -352,7 +352,7 @@ func (c *Control3D) PointerEnterAnimation() js.Value {
 
 // SetPointerEnterAnimation sets the PointerEnterAnimation property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerenteranimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#pointerenteranimation
 func (c *Control3D) SetPointerEnterAnimation(pointerEnterAnimation JSFunc) *Control3D {
 	c.p.Set("pointerEnterAnimation", js.FuncOf(pointerEnterAnimation))
 	return c
@@ -360,7 +360,7 @@ func (c *Control3D) SetPointerEnterAnimation(pointerEnterAnimation JSFunc) *Cont
 
 // PointerOutAnimation returns the PointerOutAnimation property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#pointeroutanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#pointeroutanimation
 func (c *Control3D) PointerOutAnimation() js.Value {
 	retVal := c.p.Get("pointerOutAnimation")
 	return retVal
@@ -368,7 +368,7 @@ func (c *Control3D) PointerOutAnimation() js.Value {
 
 // SetPointerOutAnimation sets the PointerOutAnimation property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#pointeroutanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#pointeroutanimation
 func (c *Control3D) SetPointerOutAnimation(pointerOutAnimation JSFunc) *Control3D {
 	c.p.Set("pointerOutAnimation", js.FuncOf(pointerOutAnimation))
 	return c
@@ -376,7 +376,7 @@ func (c *Control3D) SetPointerOutAnimation(pointerOutAnimation JSFunc) *Control3
 
 // PointerUpAnimation returns the PointerUpAnimation property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerupanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#pointerupanimation
 func (c *Control3D) PointerUpAnimation() js.Value {
 	retVal := c.p.Get("pointerUpAnimation")
 	return retVal
@@ -384,7 +384,7 @@ func (c *Control3D) PointerUpAnimation() js.Value {
 
 // SetPointerUpAnimation sets the PointerUpAnimation property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerupanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#pointerupanimation
 func (c *Control3D) SetPointerUpAnimation(pointerUpAnimation JSFunc) *Control3D {
 	c.p.Set("pointerUpAnimation", js.FuncOf(pointerUpAnimation))
 	return c
@@ -392,7 +392,7 @@ func (c *Control3D) SetPointerUpAnimation(pointerUpAnimation JSFunc) *Control3D 
 
 // Position returns the Position property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#position
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#position
 func (c *Control3D) Position() *Vector3 {
 	retVal := c.p.Get("position")
 	return Vector3FromJSObject(retVal, c.ctx)
@@ -400,7 +400,7 @@ func (c *Control3D) Position() *Vector3 {
 
 // SetPosition sets the Position property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#position
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#position
 func (c *Control3D) SetPosition(position *Vector3) *Control3D {
 	c.p.Set("position", position.JSObject())
 	return c
@@ -408,7 +408,7 @@ func (c *Control3D) SetPosition(position *Vector3) *Control3D {
 
 // Scaling returns the Scaling property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#scaling
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#scaling
 func (c *Control3D) Scaling() *Vector3 {
 	retVal := c.p.Get("scaling")
 	return Vector3FromJSObject(retVal, c.ctx)
@@ -416,7 +416,7 @@ func (c *Control3D) Scaling() *Vector3 {
 
 // SetScaling sets the Scaling property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#scaling
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#scaling
 func (c *Control3D) SetScaling(scaling *Vector3) *Control3D {
 	c.p.Set("scaling", scaling.JSObject())
 	return c
@@ -424,7 +424,7 @@ func (c *Control3D) SetScaling(scaling *Vector3) *Control3D {
 
 // TypeName returns the TypeName property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#typename
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#typename
 func (c *Control3D) TypeName() string {
 	retVal := c.p.Get("typeName")
 	return retVal.String()
@@ -432,7 +432,7 @@ func (c *Control3D) TypeName() string {
 
 // SetTypeName sets the TypeName property of class Control3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.control3d#typename
+// https://doc.babylonjs.com/api/classes/babylon.gui.control3d#typename
 func (c *Control3D) SetTypeName(typeName string) *Control3D {
 	c.p.Set("typeName", typeName)
 	return c

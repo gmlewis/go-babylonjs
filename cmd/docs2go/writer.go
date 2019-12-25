@@ -168,6 +168,7 @@ import (
 
 {{$root := .}}
 {{$name := .Name}}
+{{$apiDocsBaseURL := .DocsBaseURL}}
 
 // {{$name}} represents a babylon.js {{$name}}.
 // {{.Summary}}
@@ -214,7 +215,7 @@ type {{$key}}Opts struct {
 
 // {{$key}} returns a new {{$name}} object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.{{$name | toLower}}
+// {{$apiDocsBaseURL}}.{{$name | toLower}}
 func ({{$value.ConstructorNamespaceReceiverName}} {{$value.ConstructorNamespaceReceiverType}}) {{$key}}({{constructorParameterGoList $key $value}}) *{{$name}} { {{if $value.HasOpts}}
 if opts == nil {
   opts = &{{$key}}Opts{}
@@ -252,7 +253,7 @@ type {{$name}}{{$key}}Opts struct {
 
 // {{$key}} calls the {{$key}} method on the {{$name}} object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.{{$name | toLower}}#{{$key | toLower}}
+// {{$apiDocsBaseURL}}.{{$name | toLower}}#{{$key | toLower}}
 func ({{$name | receiver}} *{{$name}}) {{$key}}({{methodParameterGoList $name $key $value}}) {{$value.GoReturnType}} { {{if $value.HasOpts}}
 if opts == nil {
 opts = &{{$name}}{{$key}}Opts{}
@@ -292,7 +293,7 @@ opts = &{{$name}}{{$key}}Opts{}
 {{range $key, $value := .PropertyNames}}
 // {{$key}} returns the {{$key}} property of class {{$name}}.
 //
-// https://doc.babylonjs.com/api/classes/babylon.{{$name | toLower}}#{{$key | toLower}}
+// {{$apiDocsBaseURL}}.{{$name | toLower}}#{{$key | toLower}}
 func ({{$name | receiver}} *{{$name}}) {{$key}}() {{$value.GoReturnType}} {
 	retVal := {{$name | receiver}}.p.Get("{{$value.JSName}}")
 	{{$value.GoReturnStatement}}
@@ -300,7 +301,7 @@ func ({{$name | receiver}} *{{$name}}) {{$key}}() {{$value.GoReturnType}} {
 
 {{if $value.WriteSetter}}// Set{{$key}} sets the {{$key}} property of class {{$name}}.
 //
-// https://doc.babylonjs.com/api/classes/babylon.{{$name | toLower}}#{{$key | toLower}}
+// {{$apiDocsBaseURL}}.{{$name | toLower}}#{{$key | toLower}}
 func ({{$name | receiver}} *{{$name}}) Set{{$key}}({{propertyParameterGoList $key $value}}) *{{$name}} {
 	{{$name | receiver}}.p.Set("{{$value.JSName}}", {{index $value.JSParams 0}})
 	return {{$name | receiver}}

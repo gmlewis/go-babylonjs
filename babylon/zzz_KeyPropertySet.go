@@ -38,7 +38,7 @@ func KeyPropertySetArrayToJSArray(array []*KeyPropertySet) []interface{} {
 
 // Background returns the Background property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#background
 func (k *KeyPropertySet) Background() string {
 	retVal := k.p.Get("background")
 	return retVal.String()
@@ -46,7 +46,7 @@ func (k *KeyPropertySet) Background() string {
 
 // SetBackground sets the Background property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#background
 func (k *KeyPropertySet) SetBackground(background string) *KeyPropertySet {
 	k.p.Set("background", background)
 	return k
@@ -54,7 +54,7 @@ func (k *KeyPropertySet) SetBackground(background string) *KeyPropertySet {
 
 // Color returns the Color property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#color
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#color
 func (k *KeyPropertySet) Color() string {
 	retVal := k.p.Get("color")
 	return retVal.String()
@@ -62,7 +62,7 @@ func (k *KeyPropertySet) Color() string {
 
 // SetColor sets the Color property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#color
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#color
 func (k *KeyPropertySet) SetColor(color string) *KeyPropertySet {
 	k.p.Set("color", color)
 	return k
@@ -70,7 +70,7 @@ func (k *KeyPropertySet) SetColor(color string) *KeyPropertySet {
 
 // Height returns the Height property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#height
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#height
 func (k *KeyPropertySet) Height() string {
 	retVal := k.p.Get("height")
 	return retVal.String()
@@ -78,7 +78,7 @@ func (k *KeyPropertySet) Height() string {
 
 // SetHeight sets the Height property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#height
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#height
 func (k *KeyPropertySet) SetHeight(height string) *KeyPropertySet {
 	k.p.Set("height", height)
 	return k
@@ -86,7 +86,7 @@ func (k *KeyPropertySet) SetHeight(height string) *KeyPropertySet {
 
 // PaddingBottom returns the PaddingBottom property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingbottom
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#paddingbottom
 func (k *KeyPropertySet) PaddingBottom() string {
 	retVal := k.p.Get("paddingBottom")
 	return retVal.String()
@@ -94,7 +94,7 @@ func (k *KeyPropertySet) PaddingBottom() string {
 
 // SetPaddingBottom sets the PaddingBottom property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingbottom
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#paddingbottom
 func (k *KeyPropertySet) SetPaddingBottom(paddingBottom string) *KeyPropertySet {
 	k.p.Set("paddingBottom", paddingBottom)
 	return k
@@ -102,7 +102,7 @@ func (k *KeyPropertySet) SetPaddingBottom(paddingBottom string) *KeyPropertySet 
 
 // PaddingLeft returns the PaddingLeft property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingleft
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#paddingleft
 func (k *KeyPropertySet) PaddingLeft() string {
 	retVal := k.p.Get("paddingLeft")
 	return retVal.String()
@@ -110,7 +110,7 @@ func (k *KeyPropertySet) PaddingLeft() string {
 
 // SetPaddingLeft sets the PaddingLeft property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingleft
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#paddingleft
 func (k *KeyPropertySet) SetPaddingLeft(paddingLeft string) *KeyPropertySet {
 	k.p.Set("paddingLeft", paddingLeft)
 	return k
@@ -118,7 +118,7 @@ func (k *KeyPropertySet) SetPaddingLeft(paddingLeft string) *KeyPropertySet {
 
 // PaddingRight returns the PaddingRight property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingright
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#paddingright
 func (k *KeyPropertySet) PaddingRight() string {
 	retVal := k.p.Get("paddingRight")
 	return retVal.String()
@@ -126,7 +126,7 @@ func (k *KeyPropertySet) PaddingRight() string {
 
 // SetPaddingRight sets the PaddingRight property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingright
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#paddingright
 func (k *KeyPropertySet) SetPaddingRight(paddingRight string) *KeyPropertySet {
 	k.p.Set("paddingRight", paddingRight)
 	return k
@@ -134,7 +134,7 @@ func (k *KeyPropertySet) SetPaddingRight(paddingRight string) *KeyPropertySet {
 
 // PaddingTop returns the PaddingTop property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingtop
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#paddingtop
 func (k *KeyPropertySet) PaddingTop() string {
 	retVal := k.p.Get("paddingTop")
 	return retVal.String()
@@ -142,7 +142,7 @@ func (k *KeyPropertySet) PaddingTop() string {
 
 // SetPaddingTop sets the PaddingTop property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingtop
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#paddingtop
 func (k *KeyPropertySet) SetPaddingTop(paddingTop string) *KeyPropertySet {
 	k.p.Set("paddingTop", paddingTop)
 	return k
@@ -150,7 +150,7 @@ func (k *KeyPropertySet) SetPaddingTop(paddingTop string) *KeyPropertySet {
 
 // Width returns the Width property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#width
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#width
 func (k *KeyPropertySet) Width() string {
 	retVal := k.p.Get("width")
 	return retVal.String()
@@ -158,7 +158,7 @@ func (k *KeyPropertySet) Width() string {
 
 // SetWidth sets the Width property of class KeyPropertySet.
 //
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#width
+// https://doc.babylonjs.com/api/classes/babylon.gui.keypropertyset#width
 func (k *KeyPropertySet) SetWidth(width string) *KeyPropertySet {
 	k.p.Set("width", width)
 	return k

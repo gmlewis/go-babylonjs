@@ -44,7 +44,7 @@ type NewScrollViewerOpts struct {
 
 // NewScrollViewer returns a new ScrollViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer
 func (gui *GUI) NewScrollViewer(opts *NewScrollViewerOpts) *ScrollViewer {
 	if opts == nil {
 		opts = &NewScrollViewerOpts{}
@@ -69,7 +69,7 @@ func (gui *GUI) NewScrollViewer(opts *NewScrollViewerOpts) *ScrollViewer {
 
 // AddControl calls the AddControl method on the ScrollViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#addcontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#addcontrol
 func (s *ScrollViewer) AddControl(control *Control) *Container {
 
 	args := make([]interface{}, 0, 1+0)
@@ -86,7 +86,7 @@ func (s *ScrollViewer) AddControl(control *Control) *Container {
 
 // Dispose calls the Dispose method on the ScrollViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#dispose
 func (s *ScrollViewer) Dispose() {
 
 	s.p.Call("dispose")
@@ -94,7 +94,7 @@ func (s *ScrollViewer) Dispose() {
 
 // RemoveControl calls the RemoveControl method on the ScrollViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#removecontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#removecontrol
 func (s *ScrollViewer) RemoveControl(control *Control) *Container {
 
 	args := make([]interface{}, 0, 1+0)
@@ -111,7 +111,7 @@ func (s *ScrollViewer) RemoveControl(control *Control) *Container {
 
 // ResetWindow calls the ResetWindow method on the ScrollViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#resetwindow
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#resetwindow
 func (s *ScrollViewer) ResetWindow() {
 
 	s.p.Call("resetWindow")
@@ -119,7 +119,7 @@ func (s *ScrollViewer) ResetWindow() {
 
 // _flagDescendantsAsMatrixDirty calls the _flagDescendantsAsMatrixDirty method on the ScrollViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#_flagdescendantsasmatrixdirty
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#_flagdescendantsasmatrixdirty
 func (s *ScrollViewer) _flagDescendantsAsMatrixDirty() {
 
 	s.p.Call("_flagDescendantsAsMatrixDirty")
@@ -127,7 +127,7 @@ func (s *ScrollViewer) _flagDescendantsAsMatrixDirty() {
 
 // _link calls the _link method on the ScrollViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#_link
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#_link
 func (s *ScrollViewer) _link(host *AdvancedDynamicTexture) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -143,7 +143,7 @@ func (s *ScrollViewer) _link(host *AdvancedDynamicTexture) {
 
 // _renderHighlightSpecific calls the _renderHighlightSpecific method on the ScrollViewer object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#_renderhighlightspecific
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#_renderhighlightspecific
 func (s *ScrollViewer) _renderHighlightSpecific(context js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -155,7 +155,7 @@ func (s *ScrollViewer) _renderHighlightSpecific(context js.Value) {
 
 // BarBackground returns the BarBackground property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#barbackground
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#barbackground
 func (s *ScrollViewer) BarBackground() string {
 	retVal := s.p.Get("barBackground")
 	return retVal.String()
@@ -163,7 +163,7 @@ func (s *ScrollViewer) BarBackground() string {
 
 // SetBarBackground sets the BarBackground property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#barbackground
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#barbackground
 func (s *ScrollViewer) SetBarBackground(barBackground string) *ScrollViewer {
 	s.p.Set("barBackground", barBackground)
 	return s
@@ -171,7 +171,7 @@ func (s *ScrollViewer) SetBarBackground(barBackground string) *ScrollViewer {
 
 // BarColor returns the BarColor property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#barcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#barcolor
 func (s *ScrollViewer) BarColor() string {
 	retVal := s.p.Get("barColor")
 	return retVal.String()
@@ -179,7 +179,7 @@ func (s *ScrollViewer) BarColor() string {
 
 // SetBarColor sets the BarColor property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#barcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#barcolor
 func (s *ScrollViewer) SetBarColor(barColor string) *ScrollViewer {
 	s.p.Set("barColor", barColor)
 	return s
@@ -187,7 +187,7 @@ func (s *ScrollViewer) SetBarColor(barColor string) *ScrollViewer {
 
 // BarImage returns the BarImage property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#barimage
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#barimage
 func (s *ScrollViewer) BarImage() *Image {
 	retVal := s.p.Get("barImage")
 	return ImageFromJSObject(retVal, s.ctx)
@@ -195,7 +195,7 @@ func (s *ScrollViewer) BarImage() *Image {
 
 // SetBarImage sets the BarImage property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#barimage
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#barimage
 func (s *ScrollViewer) SetBarImage(barImage *Image) *ScrollViewer {
 	s.p.Set("barImage", barImage.JSObject())
 	return s
@@ -203,7 +203,7 @@ func (s *ScrollViewer) SetBarImage(barImage *Image) *ScrollViewer {
 
 // BarImageHeight returns the BarImageHeight property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#barimageheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#barimageheight
 func (s *ScrollViewer) BarImageHeight() float64 {
 	retVal := s.p.Get("barImageHeight")
 	return retVal.Float()
@@ -211,7 +211,7 @@ func (s *ScrollViewer) BarImageHeight() float64 {
 
 // SetBarImageHeight sets the BarImageHeight property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#barimageheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#barimageheight
 func (s *ScrollViewer) SetBarImageHeight(barImageHeight float64) *ScrollViewer {
 	s.p.Set("barImageHeight", barImageHeight)
 	return s
@@ -219,7 +219,7 @@ func (s *ScrollViewer) SetBarImageHeight(barImageHeight float64) *ScrollViewer {
 
 // BarSize returns the BarSize property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#barsize
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#barsize
 func (s *ScrollViewer) BarSize() float64 {
 	retVal := s.p.Get("barSize")
 	return retVal.Float()
@@ -227,7 +227,7 @@ func (s *ScrollViewer) BarSize() float64 {
 
 // SetBarSize sets the BarSize property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#barsize
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#barsize
 func (s *ScrollViewer) SetBarSize(barSize float64) *ScrollViewer {
 	s.p.Set("barSize", barSize)
 	return s
@@ -235,7 +235,7 @@ func (s *ScrollViewer) SetBarSize(barSize float64) *ScrollViewer {
 
 // Children returns the Children property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#children
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#children
 func (s *ScrollViewer) Children() []*Control {
 	retVal := s.p.Get("children")
 	result := []*Control{}
@@ -247,7 +247,7 @@ func (s *ScrollViewer) Children() []*Control {
 
 // SetChildren sets the Children property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#children
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#children
 func (s *ScrollViewer) SetChildren(children []*Control) *ScrollViewer {
 	s.p.Set("children", children)
 	return s
@@ -255,7 +255,7 @@ func (s *ScrollViewer) SetChildren(children []*Control) *ScrollViewer {
 
 // HorizontalBar returns the HorizontalBar property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#horizontalbar
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#horizontalbar
 func (s *ScrollViewer) HorizontalBar() *ScrollBar {
 	retVal := s.p.Get("horizontalBar")
 	return ScrollBarFromJSObject(retVal, s.ctx)
@@ -263,7 +263,7 @@ func (s *ScrollViewer) HorizontalBar() *ScrollBar {
 
 // SetHorizontalBar sets the HorizontalBar property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#horizontalbar
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#horizontalbar
 func (s *ScrollViewer) SetHorizontalBar(horizontalBar *ScrollBar) *ScrollViewer {
 	s.p.Set("horizontalBar", horizontalBar.JSObject())
 	return s
@@ -271,7 +271,7 @@ func (s *ScrollViewer) SetHorizontalBar(horizontalBar *ScrollBar) *ScrollViewer 
 
 // ScrollBackground returns the ScrollBackground property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#scrollbackground
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#scrollbackground
 func (s *ScrollViewer) ScrollBackground() string {
 	retVal := s.p.Get("scrollBackground")
 	return retVal.String()
@@ -279,7 +279,7 @@ func (s *ScrollViewer) ScrollBackground() string {
 
 // SetScrollBackground sets the ScrollBackground property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#scrollbackground
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#scrollbackground
 func (s *ScrollViewer) SetScrollBackground(scrollBackground string) *ScrollViewer {
 	s.p.Set("scrollBackground", scrollBackground)
 	return s
@@ -287,7 +287,7 @@ func (s *ScrollViewer) SetScrollBackground(scrollBackground string) *ScrollViewe
 
 // ThumbHeight returns the ThumbHeight property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#thumbheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#thumbheight
 func (s *ScrollViewer) ThumbHeight() float64 {
 	retVal := s.p.Get("thumbHeight")
 	return retVal.Float()
@@ -295,7 +295,7 @@ func (s *ScrollViewer) ThumbHeight() float64 {
 
 // SetThumbHeight sets the ThumbHeight property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#thumbheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#thumbheight
 func (s *ScrollViewer) SetThumbHeight(thumbHeight float64) *ScrollViewer {
 	s.p.Set("thumbHeight", thumbHeight)
 	return s
@@ -303,7 +303,7 @@ func (s *ScrollViewer) SetThumbHeight(thumbHeight float64) *ScrollViewer {
 
 // ThumbImage returns the ThumbImage property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#thumbimage
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#thumbimage
 func (s *ScrollViewer) ThumbImage() *Image {
 	retVal := s.p.Get("thumbImage")
 	return ImageFromJSObject(retVal, s.ctx)
@@ -311,7 +311,7 @@ func (s *ScrollViewer) ThumbImage() *Image {
 
 // SetThumbImage sets the ThumbImage property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#thumbimage
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#thumbimage
 func (s *ScrollViewer) SetThumbImage(thumbImage *Image) *ScrollViewer {
 	s.p.Set("thumbImage", thumbImage.JSObject())
 	return s
@@ -319,7 +319,7 @@ func (s *ScrollViewer) SetThumbImage(thumbImage *Image) *ScrollViewer {
 
 // ThumbLength returns the ThumbLength property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#thumblength
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#thumblength
 func (s *ScrollViewer) ThumbLength() float64 {
 	retVal := s.p.Get("thumbLength")
 	return retVal.Float()
@@ -327,7 +327,7 @@ func (s *ScrollViewer) ThumbLength() float64 {
 
 // SetThumbLength sets the ThumbLength property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#thumblength
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#thumblength
 func (s *ScrollViewer) SetThumbLength(thumbLength float64) *ScrollViewer {
 	s.p.Set("thumbLength", thumbLength)
 	return s
@@ -335,7 +335,7 @@ func (s *ScrollViewer) SetThumbLength(thumbLength float64) *ScrollViewer {
 
 // VerticalBar returns the VerticalBar property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#verticalbar
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#verticalbar
 func (s *ScrollViewer) VerticalBar() *ScrollBar {
 	retVal := s.p.Get("verticalBar")
 	return ScrollBarFromJSObject(retVal, s.ctx)
@@ -343,7 +343,7 @@ func (s *ScrollViewer) VerticalBar() *ScrollBar {
 
 // SetVerticalBar sets the VerticalBar property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#verticalbar
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#verticalbar
 func (s *ScrollViewer) SetVerticalBar(verticalBar *ScrollBar) *ScrollViewer {
 	s.p.Set("verticalBar", verticalBar.JSObject())
 	return s
@@ -351,7 +351,7 @@ func (s *ScrollViewer) SetVerticalBar(verticalBar *ScrollBar) *ScrollViewer {
 
 // WheelPrecision returns the WheelPrecision property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#wheelprecision
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#wheelprecision
 func (s *ScrollViewer) WheelPrecision() float64 {
 	retVal := s.p.Get("wheelPrecision")
 	return retVal.Float()
@@ -359,7 +359,7 @@ func (s *ScrollViewer) WheelPrecision() float64 {
 
 // SetWheelPrecision sets the WheelPrecision property of class ScrollViewer.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollviewer#wheelprecision
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollviewer#wheelprecision
 func (s *ScrollViewer) SetWheelPrecision(wheelPrecision float64) *ScrollViewer {
 	s.p.Set("wheelPrecision", wheelPrecision)
 	return s

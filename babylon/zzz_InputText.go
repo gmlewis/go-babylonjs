@@ -44,7 +44,7 @@ type NewInputTextOpts struct {
 
 // NewInputText returns a new InputText object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext
 func (gui *GUI) NewInputText(opts *NewInputTextOpts) *InputText {
 	if opts == nil {
 		opts = &NewInputTextOpts{}
@@ -69,7 +69,7 @@ func (gui *GUI) NewInputText(opts *NewInputTextOpts) *InputText {
 
 // Dispose calls the Dispose method on the InputText object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#dispose
 func (i *InputText) Dispose() {
 
 	i.p.Call("dispose")
@@ -77,7 +77,7 @@ func (i *InputText) Dispose() {
 
 // KeepsFocusWith calls the KeepsFocusWith method on the InputText object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#keepsfocuswith
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#keepsfocuswith
 func (i *InputText) KeepsFocusWith() []*Control {
 
 	retVal := i.p.Call("keepsFocusWith")
@@ -90,7 +90,7 @@ func (i *InputText) KeepsFocusWith() []*Control {
 
 // ProcessKeyboard calls the ProcessKeyboard method on the InputText object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#processkeyboard
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#processkeyboard
 func (i *InputText) ProcessKeyboard(evt js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -107,7 +107,7 @@ type InputText_drawOpts struct {
 
 // _draw calls the _draw method on the InputText object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#_draw
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#_draw
 func (i *InputText) _draw(context js.Value, opts *InputText_drawOpts) {
 	if opts == nil {
 		opts = &InputText_drawOpts{}
@@ -128,7 +128,7 @@ func (i *InputText) _draw(context js.Value, opts *InputText_drawOpts) {
 
 // _onPointerDown calls the _onPointerDown method on the InputText object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#_onpointerdown
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#_onpointerdown
 func (i *InputText) _onPointerDown(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64) bool {
 
 	args := make([]interface{}, 0, 4+0)
@@ -155,7 +155,7 @@ func (i *InputText) _onPointerDown(target *Control, coordinates *Vector2, pointe
 
 // _onPointerMove calls the _onPointerMove method on the InputText object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#_onpointermove
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#_onpointermove
 func (i *InputText) _onPointerMove(target *Control, coordinates *Vector2, pointerId float64) {
 
 	args := make([]interface{}, 0, 3+0)
@@ -179,7 +179,7 @@ func (i *InputText) _onPointerMove(target *Control, coordinates *Vector2, pointe
 
 // _onPointerUp calls the _onPointerUp method on the InputText object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#_onpointerup
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#_onpointerup
 func (i *InputText) _onPointerUp(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64, notifyClick bool) {
 
 	args := make([]interface{}, 0, 5+0)
@@ -207,7 +207,7 @@ func (i *InputText) _onPointerUp(target *Control, coordinates *Vector2, pointerI
 
 // AddKey returns the AddKey property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#addkey
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#addkey
 func (i *InputText) AddKey() bool {
 	retVal := i.p.Get("addKey")
 	return retVal.Bool()
@@ -215,7 +215,7 @@ func (i *InputText) AddKey() bool {
 
 // SetAddKey sets the AddKey property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#addkey
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#addkey
 func (i *InputText) SetAddKey(addKey bool) *InputText {
 	i.p.Set("addKey", addKey)
 	return i
@@ -223,7 +223,7 @@ func (i *InputText) SetAddKey(addKey bool) *InputText {
 
 // AutoStretchWidth returns the AutoStretchWidth property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#autostretchwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#autostretchwidth
 func (i *InputText) AutoStretchWidth() bool {
 	retVal := i.p.Get("autoStretchWidth")
 	return retVal.Bool()
@@ -231,7 +231,7 @@ func (i *InputText) AutoStretchWidth() bool {
 
 // SetAutoStretchWidth sets the AutoStretchWidth property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#autostretchwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#autostretchwidth
 func (i *InputText) SetAutoStretchWidth(autoStretchWidth bool) *InputText {
 	i.p.Set("autoStretchWidth", autoStretchWidth)
 	return i
@@ -239,7 +239,7 @@ func (i *InputText) SetAutoStretchWidth(autoStretchWidth bool) *InputText {
 
 // Background returns the Background property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#background
 func (i *InputText) Background() string {
 	retVal := i.p.Get("background")
 	return retVal.String()
@@ -247,7 +247,7 @@ func (i *InputText) Background() string {
 
 // SetBackground sets the Background property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#background
 func (i *InputText) SetBackground(background string) *InputText {
 	i.p.Set("background", background)
 	return i
@@ -255,7 +255,7 @@ func (i *InputText) SetBackground(background string) *InputText {
 
 // CurrentKey returns the CurrentKey property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#currentkey
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#currentkey
 func (i *InputText) CurrentKey() string {
 	retVal := i.p.Get("currentKey")
 	return retVal.String()
@@ -263,7 +263,7 @@ func (i *InputText) CurrentKey() string {
 
 // SetCurrentKey sets the CurrentKey property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#currentkey
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#currentkey
 func (i *InputText) SetCurrentKey(currentKey string) *InputText {
 	i.p.Set("currentKey", currentKey)
 	return i
@@ -271,7 +271,7 @@ func (i *InputText) SetCurrentKey(currentKey string) *InputText {
 
 // DeadKey returns the DeadKey property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#deadkey
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#deadkey
 func (i *InputText) DeadKey() bool {
 	retVal := i.p.Get("deadKey")
 	return retVal.Bool()
@@ -279,7 +279,7 @@ func (i *InputText) DeadKey() bool {
 
 // SetDeadKey sets the DeadKey property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#deadkey
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#deadkey
 func (i *InputText) SetDeadKey(deadKey bool) *InputText {
 	i.p.Set("deadKey", deadKey)
 	return i
@@ -287,7 +287,7 @@ func (i *InputText) SetDeadKey(deadKey bool) *InputText {
 
 // DisableMobilePrompt returns the DisableMobilePrompt property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#disablemobileprompt
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#disablemobileprompt
 func (i *InputText) DisableMobilePrompt() bool {
 	retVal := i.p.Get("disableMobilePrompt")
 	return retVal.Bool()
@@ -295,7 +295,7 @@ func (i *InputText) DisableMobilePrompt() bool {
 
 // SetDisableMobilePrompt sets the DisableMobilePrompt property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#disablemobileprompt
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#disablemobileprompt
 func (i *InputText) SetDisableMobilePrompt(disableMobilePrompt bool) *InputText {
 	i.p.Set("disableMobilePrompt", disableMobilePrompt)
 	return i
@@ -303,7 +303,7 @@ func (i *InputText) SetDisableMobilePrompt(disableMobilePrompt bool) *InputText 
 
 // FocusedBackground returns the FocusedBackground property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#focusedbackground
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#focusedbackground
 func (i *InputText) FocusedBackground() string {
 	retVal := i.p.Get("focusedBackground")
 	return retVal.String()
@@ -311,7 +311,7 @@ func (i *InputText) FocusedBackground() string {
 
 // SetFocusedBackground sets the FocusedBackground property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#focusedbackground
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#focusedbackground
 func (i *InputText) SetFocusedBackground(focusedBackground string) *InputText {
 	i.p.Set("focusedBackground", focusedBackground)
 	return i
@@ -319,7 +319,7 @@ func (i *InputText) SetFocusedBackground(focusedBackground string) *InputText {
 
 // FocusedColor returns the FocusedColor property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#focusedcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#focusedcolor
 func (i *InputText) FocusedColor() string {
 	retVal := i.p.Get("focusedColor")
 	return retVal.String()
@@ -327,7 +327,7 @@ func (i *InputText) FocusedColor() string {
 
 // SetFocusedColor sets the FocusedColor property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#focusedcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#focusedcolor
 func (i *InputText) SetFocusedColor(focusedColor string) *InputText {
 	i.p.Set("focusedColor", focusedColor)
 	return i
@@ -335,7 +335,7 @@ func (i *InputText) SetFocusedColor(focusedColor string) *InputText {
 
 // HighligherOpacity returns the HighligherOpacity property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#highligheropacity
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#highligheropacity
 func (i *InputText) HighligherOpacity() float64 {
 	retVal := i.p.Get("highligherOpacity")
 	return retVal.Float()
@@ -343,7 +343,7 @@ func (i *InputText) HighligherOpacity() float64 {
 
 // SetHighligherOpacity sets the HighligherOpacity property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#highligheropacity
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#highligheropacity
 func (i *InputText) SetHighligherOpacity(highligherOpacity float64) *InputText {
 	i.p.Set("highligherOpacity", highligherOpacity)
 	return i
@@ -351,7 +351,7 @@ func (i *InputText) SetHighligherOpacity(highligherOpacity float64) *InputText {
 
 // HighlightedText returns the HighlightedText property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#highlightedtext
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#highlightedtext
 func (i *InputText) HighlightedText() string {
 	retVal := i.p.Get("highlightedText")
 	return retVal.String()
@@ -359,7 +359,7 @@ func (i *InputText) HighlightedText() string {
 
 // SetHighlightedText sets the HighlightedText property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#highlightedtext
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#highlightedtext
 func (i *InputText) SetHighlightedText(highlightedText string) *InputText {
 	i.p.Set("highlightedText", highlightedText)
 	return i
@@ -367,7 +367,7 @@ func (i *InputText) SetHighlightedText(highlightedText string) *InputText {
 
 // Margin returns the Margin property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#margin
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#margin
 func (i *InputText) Margin() string {
 	retVal := i.p.Get("margin")
 	return retVal.String()
@@ -375,7 +375,7 @@ func (i *InputText) Margin() string {
 
 // SetMargin sets the Margin property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#margin
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#margin
 func (i *InputText) SetMargin(margin string) *InputText {
 	i.p.Set("margin", margin)
 	return i
@@ -383,7 +383,7 @@ func (i *InputText) SetMargin(margin string) *InputText {
 
 // MarginInPixels returns the MarginInPixels property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#margininpixels
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#margininpixels
 func (i *InputText) MarginInPixels() float64 {
 	retVal := i.p.Get("marginInPixels")
 	return retVal.Float()
@@ -391,7 +391,7 @@ func (i *InputText) MarginInPixels() float64 {
 
 // SetMarginInPixels sets the MarginInPixels property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#margininpixels
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#margininpixels
 func (i *InputText) SetMarginInPixels(marginInPixels float64) *InputText {
 	i.p.Set("marginInPixels", marginInPixels)
 	return i
@@ -399,7 +399,7 @@ func (i *InputText) SetMarginInPixels(marginInPixels float64) *InputText {
 
 // MaxWidth returns the MaxWidth property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#maxwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#maxwidth
 func (i *InputText) MaxWidth() string {
 	retVal := i.p.Get("maxWidth")
 	return retVal.String()
@@ -407,7 +407,7 @@ func (i *InputText) MaxWidth() string {
 
 // SetMaxWidth sets the MaxWidth property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#maxwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#maxwidth
 func (i *InputText) SetMaxWidth(maxWidth string) *InputText {
 	i.p.Set("maxWidth", maxWidth)
 	return i
@@ -415,7 +415,7 @@ func (i *InputText) SetMaxWidth(maxWidth string) *InputText {
 
 // MaxWidthInPixels returns the MaxWidthInPixels property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#maxwidthinpixels
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#maxwidthinpixels
 func (i *InputText) MaxWidthInPixels() float64 {
 	retVal := i.p.Get("maxWidthInPixels")
 	return retVal.Float()
@@ -423,7 +423,7 @@ func (i *InputText) MaxWidthInPixels() float64 {
 
 // SetMaxWidthInPixels sets the MaxWidthInPixels property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#maxwidthinpixels
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#maxwidthinpixels
 func (i *InputText) SetMaxWidthInPixels(maxWidthInPixels float64) *InputText {
 	i.p.Set("maxWidthInPixels", maxWidthInPixels)
 	return i
@@ -431,7 +431,7 @@ func (i *InputText) SetMaxWidthInPixels(maxWidthInPixels float64) *InputText {
 
 // Name returns the Name property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#name
 func (i *InputText) Name() string {
 	retVal := i.p.Get("name")
 	return retVal.String()
@@ -439,7 +439,7 @@ func (i *InputText) Name() string {
 
 // SetName sets the Name property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#name
 func (i *InputText) SetName(name string) *InputText {
 	i.p.Set("name", name)
 	return i
@@ -447,7 +447,7 @@ func (i *InputText) SetName(name string) *InputText {
 
 // OnBeforeKeyAddObservable returns the OnBeforeKeyAddObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#onbeforekeyaddobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#onbeforekeyaddobservable
 func (i *InputText) OnBeforeKeyAddObservable() *Observable {
 	retVal := i.p.Get("onBeforeKeyAddObservable")
 	return ObservableFromJSObject(retVal, i.ctx)
@@ -455,7 +455,7 @@ func (i *InputText) OnBeforeKeyAddObservable() *Observable {
 
 // SetOnBeforeKeyAddObservable sets the OnBeforeKeyAddObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#onbeforekeyaddobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#onbeforekeyaddobservable
 func (i *InputText) SetOnBeforeKeyAddObservable(onBeforeKeyAddObservable *Observable) *InputText {
 	i.p.Set("onBeforeKeyAddObservable", onBeforeKeyAddObservable.JSObject())
 	return i
@@ -463,7 +463,7 @@ func (i *InputText) SetOnBeforeKeyAddObservable(onBeforeKeyAddObservable *Observ
 
 // OnBlurObservable returns the OnBlurObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#onblurobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#onblurobservable
 func (i *InputText) OnBlurObservable() *Observable {
 	retVal := i.p.Get("onBlurObservable")
 	return ObservableFromJSObject(retVal, i.ctx)
@@ -471,7 +471,7 @@ func (i *InputText) OnBlurObservable() *Observable {
 
 // SetOnBlurObservable sets the OnBlurObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#onblurobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#onblurobservable
 func (i *InputText) SetOnBlurObservable(onBlurObservable *Observable) *InputText {
 	i.p.Set("onBlurObservable", onBlurObservable.JSObject())
 	return i
@@ -479,7 +479,7 @@ func (i *InputText) SetOnBlurObservable(onBlurObservable *Observable) *InputText
 
 // OnFocusObservable returns the OnFocusObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#onfocusobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#onfocusobservable
 func (i *InputText) OnFocusObservable() *Observable {
 	retVal := i.p.Get("onFocusObservable")
 	return ObservableFromJSObject(retVal, i.ctx)
@@ -487,7 +487,7 @@ func (i *InputText) OnFocusObservable() *Observable {
 
 // SetOnFocusObservable sets the OnFocusObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#onfocusobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#onfocusobservable
 func (i *InputText) SetOnFocusObservable(onFocusObservable *Observable) *InputText {
 	i.p.Set("onFocusObservable", onFocusObservable.JSObject())
 	return i
@@ -495,7 +495,7 @@ func (i *InputText) SetOnFocusObservable(onFocusObservable *Observable) *InputTe
 
 // OnFocusSelectAll returns the OnFocusSelectAll property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#onfocusselectall
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#onfocusselectall
 func (i *InputText) OnFocusSelectAll() bool {
 	retVal := i.p.Get("onFocusSelectAll")
 	return retVal.Bool()
@@ -503,7 +503,7 @@ func (i *InputText) OnFocusSelectAll() bool {
 
 // SetOnFocusSelectAll sets the OnFocusSelectAll property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#onfocusselectall
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#onfocusselectall
 func (i *InputText) SetOnFocusSelectAll(onFocusSelectAll bool) *InputText {
 	i.p.Set("onFocusSelectAll", onFocusSelectAll)
 	return i
@@ -511,7 +511,7 @@ func (i *InputText) SetOnFocusSelectAll(onFocusSelectAll bool) *InputText {
 
 // OnKeyboardEventProcessedObservable returns the OnKeyboardEventProcessedObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#onkeyboardeventprocessedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#onkeyboardeventprocessedobservable
 func (i *InputText) OnKeyboardEventProcessedObservable() *Observable {
 	retVal := i.p.Get("onKeyboardEventProcessedObservable")
 	return ObservableFromJSObject(retVal, i.ctx)
@@ -519,7 +519,7 @@ func (i *InputText) OnKeyboardEventProcessedObservable() *Observable {
 
 // SetOnKeyboardEventProcessedObservable sets the OnKeyboardEventProcessedObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#onkeyboardeventprocessedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#onkeyboardeventprocessedobservable
 func (i *InputText) SetOnKeyboardEventProcessedObservable(onKeyboardEventProcessedObservable *Observable) *InputText {
 	i.p.Set("onKeyboardEventProcessedObservable", onKeyboardEventProcessedObservable.JSObject())
 	return i
@@ -527,7 +527,7 @@ func (i *InputText) SetOnKeyboardEventProcessedObservable(onKeyboardEventProcess
 
 // OnTextChangedObservable returns the OnTextChangedObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextchangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#ontextchangedobservable
 func (i *InputText) OnTextChangedObservable() *Observable {
 	retVal := i.p.Get("onTextChangedObservable")
 	return ObservableFromJSObject(retVal, i.ctx)
@@ -535,7 +535,7 @@ func (i *InputText) OnTextChangedObservable() *Observable {
 
 // SetOnTextChangedObservable sets the OnTextChangedObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextchangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#ontextchangedobservable
 func (i *InputText) SetOnTextChangedObservable(onTextChangedObservable *Observable) *InputText {
 	i.p.Set("onTextChangedObservable", onTextChangedObservable.JSObject())
 	return i
@@ -543,7 +543,7 @@ func (i *InputText) SetOnTextChangedObservable(onTextChangedObservable *Observab
 
 // OnTextCopyObservable returns the OnTextCopyObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextcopyobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#ontextcopyobservable
 func (i *InputText) OnTextCopyObservable() *Observable {
 	retVal := i.p.Get("onTextCopyObservable")
 	return ObservableFromJSObject(retVal, i.ctx)
@@ -551,7 +551,7 @@ func (i *InputText) OnTextCopyObservable() *Observable {
 
 // SetOnTextCopyObservable sets the OnTextCopyObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextcopyobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#ontextcopyobservable
 func (i *InputText) SetOnTextCopyObservable(onTextCopyObservable *Observable) *InputText {
 	i.p.Set("onTextCopyObservable", onTextCopyObservable.JSObject())
 	return i
@@ -559,7 +559,7 @@ func (i *InputText) SetOnTextCopyObservable(onTextCopyObservable *Observable) *I
 
 // OnTextCutObservable returns the OnTextCutObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextcutobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#ontextcutobservable
 func (i *InputText) OnTextCutObservable() *Observable {
 	retVal := i.p.Get("onTextCutObservable")
 	return ObservableFromJSObject(retVal, i.ctx)
@@ -567,7 +567,7 @@ func (i *InputText) OnTextCutObservable() *Observable {
 
 // SetOnTextCutObservable sets the OnTextCutObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextcutobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#ontextcutobservable
 func (i *InputText) SetOnTextCutObservable(onTextCutObservable *Observable) *InputText {
 	i.p.Set("onTextCutObservable", onTextCutObservable.JSObject())
 	return i
@@ -575,7 +575,7 @@ func (i *InputText) SetOnTextCutObservable(onTextCutObservable *Observable) *Inp
 
 // OnTextHighlightObservable returns the OnTextHighlightObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontexthighlightobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#ontexthighlightobservable
 func (i *InputText) OnTextHighlightObservable() *Observable {
 	retVal := i.p.Get("onTextHighlightObservable")
 	return ObservableFromJSObject(retVal, i.ctx)
@@ -583,7 +583,7 @@ func (i *InputText) OnTextHighlightObservable() *Observable {
 
 // SetOnTextHighlightObservable sets the OnTextHighlightObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontexthighlightobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#ontexthighlightobservable
 func (i *InputText) SetOnTextHighlightObservable(onTextHighlightObservable *Observable) *InputText {
 	i.p.Set("onTextHighlightObservable", onTextHighlightObservable.JSObject())
 	return i
@@ -591,7 +591,7 @@ func (i *InputText) SetOnTextHighlightObservable(onTextHighlightObservable *Obse
 
 // OnTextPasteObservable returns the OnTextPasteObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextpasteobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#ontextpasteobservable
 func (i *InputText) OnTextPasteObservable() *Observable {
 	retVal := i.p.Get("onTextPasteObservable")
 	return ObservableFromJSObject(retVal, i.ctx)
@@ -599,7 +599,7 @@ func (i *InputText) OnTextPasteObservable() *Observable {
 
 // SetOnTextPasteObservable sets the OnTextPasteObservable property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextpasteobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#ontextpasteobservable
 func (i *InputText) SetOnTextPasteObservable(onTextPasteObservable *Observable) *InputText {
 	i.p.Set("onTextPasteObservable", onTextPasteObservable.JSObject())
 	return i
@@ -607,7 +607,7 @@ func (i *InputText) SetOnTextPasteObservable(onTextPasteObservable *Observable) 
 
 // PlaceholderColor returns the PlaceholderColor property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#placeholdercolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#placeholdercolor
 func (i *InputText) PlaceholderColor() string {
 	retVal := i.p.Get("placeholderColor")
 	return retVal.String()
@@ -615,7 +615,7 @@ func (i *InputText) PlaceholderColor() string {
 
 // SetPlaceholderColor sets the PlaceholderColor property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#placeholdercolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#placeholdercolor
 func (i *InputText) SetPlaceholderColor(placeholderColor string) *InputText {
 	i.p.Set("placeholderColor", placeholderColor)
 	return i
@@ -623,7 +623,7 @@ func (i *InputText) SetPlaceholderColor(placeholderColor string) *InputText {
 
 // PlaceholderText returns the PlaceholderText property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#placeholdertext
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#placeholdertext
 func (i *InputText) PlaceholderText() string {
 	retVal := i.p.Get("placeholderText")
 	return retVal.String()
@@ -631,7 +631,7 @@ func (i *InputText) PlaceholderText() string {
 
 // SetPlaceholderText sets the PlaceholderText property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#placeholdertext
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#placeholdertext
 func (i *InputText) SetPlaceholderText(placeholderText string) *InputText {
 	i.p.Set("placeholderText", placeholderText)
 	return i
@@ -639,7 +639,7 @@ func (i *InputText) SetPlaceholderText(placeholderText string) *InputText {
 
 // PromptMessage returns the PromptMessage property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#promptmessage
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#promptmessage
 func (i *InputText) PromptMessage() string {
 	retVal := i.p.Get("promptMessage")
 	return retVal.String()
@@ -647,7 +647,7 @@ func (i *InputText) PromptMessage() string {
 
 // SetPromptMessage sets the PromptMessage property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#promptmessage
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#promptmessage
 func (i *InputText) SetPromptMessage(promptMessage string) *InputText {
 	i.p.Set("promptMessage", promptMessage)
 	return i
@@ -655,7 +655,7 @@ func (i *InputText) SetPromptMessage(promptMessage string) *InputText {
 
 // Text returns the Text property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#text
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#text
 func (i *InputText) Text() string {
 	retVal := i.p.Get("text")
 	return retVal.String()
@@ -663,7 +663,7 @@ func (i *InputText) Text() string {
 
 // SetText sets the Text property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#text
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#text
 func (i *InputText) SetText(text string) *InputText {
 	i.p.Set("text", text)
 	return i
@@ -671,7 +671,7 @@ func (i *InputText) SetText(text string) *InputText {
 
 // TextHighlightColor returns the TextHighlightColor property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#texthighlightcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#texthighlightcolor
 func (i *InputText) TextHighlightColor() string {
 	retVal := i.p.Get("textHighlightColor")
 	return retVal.String()
@@ -679,7 +679,7 @@ func (i *InputText) TextHighlightColor() string {
 
 // SetTextHighlightColor sets the TextHighlightColor property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#texthighlightcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#texthighlightcolor
 func (i *InputText) SetTextHighlightColor(textHighlightColor string) *InputText {
 	i.p.Set("textHighlightColor", textHighlightColor)
 	return i
@@ -687,7 +687,7 @@ func (i *InputText) SetTextHighlightColor(textHighlightColor string) *InputText 
 
 // Thickness returns the Thickness property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#thickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#thickness
 func (i *InputText) Thickness() float64 {
 	retVal := i.p.Get("thickness")
 	return retVal.Float()
@@ -695,7 +695,7 @@ func (i *InputText) Thickness() float64 {
 
 // SetThickness sets the Thickness property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#thickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#thickness
 func (i *InputText) SetThickness(thickness float64) *InputText {
 	i.p.Set("thickness", thickness)
 	return i
@@ -703,7 +703,7 @@ func (i *InputText) SetThickness(thickness float64) *InputText {
 
 // Width returns the Width property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#width
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#width
 func (i *InputText) Width() string {
 	retVal := i.p.Get("width")
 	return retVal.String()
@@ -711,7 +711,7 @@ func (i *InputText) Width() string {
 
 // SetWidth sets the Width property of class InputText.
 //
-// https://doc.babylonjs.com/api/classes/babylon.inputtext#width
+// https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#width
 func (i *InputText) SetWidth(width string) *InputText {
 	i.p.Set("width", width)
 	return i

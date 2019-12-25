@@ -43,7 +43,7 @@ type NewVirtualKeyboardOpts struct {
 
 // NewVirtualKeyboard returns a new VirtualKeyboard object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard
 func (gui *GUI) NewVirtualKeyboard(opts *NewVirtualKeyboardOpts) *VirtualKeyboard {
 	if opts == nil {
 		opts = &NewVirtualKeyboardOpts{}
@@ -68,7 +68,7 @@ type VirtualKeyboardAddKeysRowOpts struct {
 
 // AddKeysRow calls the AddKeysRow method on the VirtualKeyboard object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#addkeysrow
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#addkeysrow
 func (v *VirtualKeyboard) AddKeysRow(keys []string, opts *VirtualKeyboardAddKeysRowOpts) {
 	if opts == nil {
 		opts = &VirtualKeyboardAddKeysRowOpts{}
@@ -89,7 +89,7 @@ func (v *VirtualKeyboard) AddKeysRow(keys []string, opts *VirtualKeyboardAddKeys
 
 // ApplyShiftState calls the ApplyShiftState method on the VirtualKeyboard object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#applyshiftstate
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#applyshiftstate
 func (v *VirtualKeyboard) ApplyShiftState(shiftState float64) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -101,7 +101,7 @@ func (v *VirtualKeyboard) ApplyShiftState(shiftState float64) {
 
 // Connect calls the Connect method on the VirtualKeyboard object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#connect
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#connect
 func (v *VirtualKeyboard) Connect(input *InputText) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -122,7 +122,7 @@ type VirtualKeyboardCreateDefaultLayoutOpts struct {
 
 // CreateDefaultLayout calls the CreateDefaultLayout method on the VirtualKeyboard object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#createdefaultlayout
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#createdefaultlayout
 func (v *VirtualKeyboard) CreateDefaultLayout(opts *VirtualKeyboardCreateDefaultLayoutOpts) *VirtualKeyboard {
 	if opts == nil {
 		opts = &VirtualKeyboardCreateDefaultLayoutOpts{}
@@ -147,7 +147,7 @@ type VirtualKeyboardDisconnectOpts struct {
 
 // Disconnect calls the Disconnect method on the VirtualKeyboard object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#disconnect
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#disconnect
 func (v *VirtualKeyboard) Disconnect(opts *VirtualKeyboardDisconnectOpts) {
 	if opts == nil {
 		opts = &VirtualKeyboardDisconnectOpts{}
@@ -166,7 +166,7 @@ func (v *VirtualKeyboard) Disconnect(opts *VirtualKeyboardDisconnectOpts) {
 
 // Dispose calls the Dispose method on the VirtualKeyboard object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#dispose
 func (v *VirtualKeyboard) Dispose() {
 
 	v.p.Call("dispose")
@@ -174,7 +174,7 @@ func (v *VirtualKeyboard) Dispose() {
 
 // ConnectedInputText returns the ConnectedInputText property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#connectedinputtext
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#connectedinputtext
 func (v *VirtualKeyboard) ConnectedInputText() *InputText {
 	retVal := v.p.Get("connectedInputText")
 	return InputTextFromJSObject(retVal, v.ctx)
@@ -182,7 +182,7 @@ func (v *VirtualKeyboard) ConnectedInputText() *InputText {
 
 // SetConnectedInputText sets the ConnectedInputText property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#connectedinputtext
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#connectedinputtext
 func (v *VirtualKeyboard) SetConnectedInputText(connectedInputText *InputText) *VirtualKeyboard {
 	v.p.Set("connectedInputText", connectedInputText.JSObject())
 	return v
@@ -190,7 +190,7 @@ func (v *VirtualKeyboard) SetConnectedInputText(connectedInputText *InputText) *
 
 // DefaultButtonBackground returns the DefaultButtonBackground property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonbackground
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonbackground
 func (v *VirtualKeyboard) DefaultButtonBackground() string {
 	retVal := v.p.Get("defaultButtonBackground")
 	return retVal.String()
@@ -198,7 +198,7 @@ func (v *VirtualKeyboard) DefaultButtonBackground() string {
 
 // SetDefaultButtonBackground sets the DefaultButtonBackground property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonbackground
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonbackground
 func (v *VirtualKeyboard) SetDefaultButtonBackground(defaultButtonBackground string) *VirtualKeyboard {
 	v.p.Set("defaultButtonBackground", defaultButtonBackground)
 	return v
@@ -206,7 +206,7 @@ func (v *VirtualKeyboard) SetDefaultButtonBackground(defaultButtonBackground str
 
 // DefaultButtonColor returns the DefaultButtonColor property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttoncolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttoncolor
 func (v *VirtualKeyboard) DefaultButtonColor() string {
 	retVal := v.p.Get("defaultButtonColor")
 	return retVal.String()
@@ -214,7 +214,7 @@ func (v *VirtualKeyboard) DefaultButtonColor() string {
 
 // SetDefaultButtonColor sets the DefaultButtonColor property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttoncolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttoncolor
 func (v *VirtualKeyboard) SetDefaultButtonColor(defaultButtonColor string) *VirtualKeyboard {
 	v.p.Set("defaultButtonColor", defaultButtonColor)
 	return v
@@ -222,7 +222,7 @@ func (v *VirtualKeyboard) SetDefaultButtonColor(defaultButtonColor string) *Virt
 
 // DefaultButtonHeight returns the DefaultButtonHeight property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonheight
 func (v *VirtualKeyboard) DefaultButtonHeight() string {
 	retVal := v.p.Get("defaultButtonHeight")
 	return retVal.String()
@@ -230,7 +230,7 @@ func (v *VirtualKeyboard) DefaultButtonHeight() string {
 
 // SetDefaultButtonHeight sets the DefaultButtonHeight property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonheight
 func (v *VirtualKeyboard) SetDefaultButtonHeight(defaultButtonHeight string) *VirtualKeyboard {
 	v.p.Set("defaultButtonHeight", defaultButtonHeight)
 	return v
@@ -238,7 +238,7 @@ func (v *VirtualKeyboard) SetDefaultButtonHeight(defaultButtonHeight string) *Vi
 
 // DefaultButtonPaddingBottom returns the DefaultButtonPaddingBottom property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingbottom
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonpaddingbottom
 func (v *VirtualKeyboard) DefaultButtonPaddingBottom() string {
 	retVal := v.p.Get("defaultButtonPaddingBottom")
 	return retVal.String()
@@ -246,7 +246,7 @@ func (v *VirtualKeyboard) DefaultButtonPaddingBottom() string {
 
 // SetDefaultButtonPaddingBottom sets the DefaultButtonPaddingBottom property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingbottom
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonpaddingbottom
 func (v *VirtualKeyboard) SetDefaultButtonPaddingBottom(defaultButtonPaddingBottom string) *VirtualKeyboard {
 	v.p.Set("defaultButtonPaddingBottom", defaultButtonPaddingBottom)
 	return v
@@ -254,7 +254,7 @@ func (v *VirtualKeyboard) SetDefaultButtonPaddingBottom(defaultButtonPaddingBott
 
 // DefaultButtonPaddingLeft returns the DefaultButtonPaddingLeft property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingleft
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonpaddingleft
 func (v *VirtualKeyboard) DefaultButtonPaddingLeft() string {
 	retVal := v.p.Get("defaultButtonPaddingLeft")
 	return retVal.String()
@@ -262,7 +262,7 @@ func (v *VirtualKeyboard) DefaultButtonPaddingLeft() string {
 
 // SetDefaultButtonPaddingLeft sets the DefaultButtonPaddingLeft property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingleft
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonpaddingleft
 func (v *VirtualKeyboard) SetDefaultButtonPaddingLeft(defaultButtonPaddingLeft string) *VirtualKeyboard {
 	v.p.Set("defaultButtonPaddingLeft", defaultButtonPaddingLeft)
 	return v
@@ -270,7 +270,7 @@ func (v *VirtualKeyboard) SetDefaultButtonPaddingLeft(defaultButtonPaddingLeft s
 
 // DefaultButtonPaddingRight returns the DefaultButtonPaddingRight property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingright
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonpaddingright
 func (v *VirtualKeyboard) DefaultButtonPaddingRight() string {
 	retVal := v.p.Get("defaultButtonPaddingRight")
 	return retVal.String()
@@ -278,7 +278,7 @@ func (v *VirtualKeyboard) DefaultButtonPaddingRight() string {
 
 // SetDefaultButtonPaddingRight sets the DefaultButtonPaddingRight property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingright
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonpaddingright
 func (v *VirtualKeyboard) SetDefaultButtonPaddingRight(defaultButtonPaddingRight string) *VirtualKeyboard {
 	v.p.Set("defaultButtonPaddingRight", defaultButtonPaddingRight)
 	return v
@@ -286,7 +286,7 @@ func (v *VirtualKeyboard) SetDefaultButtonPaddingRight(defaultButtonPaddingRight
 
 // DefaultButtonPaddingTop returns the DefaultButtonPaddingTop property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingtop
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonpaddingtop
 func (v *VirtualKeyboard) DefaultButtonPaddingTop() string {
 	retVal := v.p.Get("defaultButtonPaddingTop")
 	return retVal.String()
@@ -294,7 +294,7 @@ func (v *VirtualKeyboard) DefaultButtonPaddingTop() string {
 
 // SetDefaultButtonPaddingTop sets the DefaultButtonPaddingTop property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingtop
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonpaddingtop
 func (v *VirtualKeyboard) SetDefaultButtonPaddingTop(defaultButtonPaddingTop string) *VirtualKeyboard {
 	v.p.Set("defaultButtonPaddingTop", defaultButtonPaddingTop)
 	return v
@@ -302,7 +302,7 @@ func (v *VirtualKeyboard) SetDefaultButtonPaddingTop(defaultButtonPaddingTop str
 
 // DefaultButtonWidth returns the DefaultButtonWidth property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonwidth
 func (v *VirtualKeyboard) DefaultButtonWidth() string {
 	retVal := v.p.Get("defaultButtonWidth")
 	return retVal.String()
@@ -310,7 +310,7 @@ func (v *VirtualKeyboard) DefaultButtonWidth() string {
 
 // SetDefaultButtonWidth sets the DefaultButtonWidth property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#defaultbuttonwidth
 func (v *VirtualKeyboard) SetDefaultButtonWidth(defaultButtonWidth string) *VirtualKeyboard {
 	v.p.Set("defaultButtonWidth", defaultButtonWidth)
 	return v
@@ -318,7 +318,7 @@ func (v *VirtualKeyboard) SetDefaultButtonWidth(defaultButtonWidth string) *Virt
 
 // OnKeyPressObservable returns the OnKeyPressObservable property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onkeypressobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#onkeypressobservable
 func (v *VirtualKeyboard) OnKeyPressObservable() *Observable {
 	retVal := v.p.Get("onKeyPressObservable")
 	return ObservableFromJSObject(retVal, v.ctx)
@@ -326,7 +326,7 @@ func (v *VirtualKeyboard) OnKeyPressObservable() *Observable {
 
 // SetOnKeyPressObservable sets the OnKeyPressObservable property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onkeypressobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#onkeypressobservable
 func (v *VirtualKeyboard) SetOnKeyPressObservable(onKeyPressObservable *Observable) *VirtualKeyboard {
 	v.p.Set("onKeyPressObservable", onKeyPressObservable.JSObject())
 	return v
@@ -334,7 +334,7 @@ func (v *VirtualKeyboard) SetOnKeyPressObservable(onKeyPressObservable *Observab
 
 // SelectedShiftThickness returns the SelectedShiftThickness property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#selectedshiftthickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#selectedshiftthickness
 func (v *VirtualKeyboard) SelectedShiftThickness() float64 {
 	retVal := v.p.Get("selectedShiftThickness")
 	return retVal.Float()
@@ -342,7 +342,7 @@ func (v *VirtualKeyboard) SelectedShiftThickness() float64 {
 
 // SetSelectedShiftThickness sets the SelectedShiftThickness property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#selectedshiftthickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#selectedshiftthickness
 func (v *VirtualKeyboard) SetSelectedShiftThickness(selectedShiftThickness float64) *VirtualKeyboard {
 	v.p.Set("selectedShiftThickness", selectedShiftThickness)
 	return v
@@ -350,7 +350,7 @@ func (v *VirtualKeyboard) SetSelectedShiftThickness(selectedShiftThickness float
 
 // ShiftButtonColor returns the ShiftButtonColor property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shiftbuttoncolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#shiftbuttoncolor
 func (v *VirtualKeyboard) ShiftButtonColor() string {
 	retVal := v.p.Get("shiftButtonColor")
 	return retVal.String()
@@ -358,7 +358,7 @@ func (v *VirtualKeyboard) ShiftButtonColor() string {
 
 // SetShiftButtonColor sets the ShiftButtonColor property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shiftbuttoncolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#shiftbuttoncolor
 func (v *VirtualKeyboard) SetShiftButtonColor(shiftButtonColor string) *VirtualKeyboard {
 	v.p.Set("shiftButtonColor", shiftButtonColor)
 	return v
@@ -366,7 +366,7 @@ func (v *VirtualKeyboard) SetShiftButtonColor(shiftButtonColor string) *VirtualK
 
 // ShiftState returns the ShiftState property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shiftstate
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#shiftstate
 func (v *VirtualKeyboard) ShiftState() float64 {
 	retVal := v.p.Get("shiftState")
 	return retVal.Float()
@@ -374,7 +374,7 @@ func (v *VirtualKeyboard) ShiftState() float64 {
 
 // SetShiftState sets the ShiftState property of class VirtualKeyboard.
 //
-// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shiftstate
+// https://doc.babylonjs.com/api/classes/babylon.gui.virtualkeyboard#shiftstate
 func (v *VirtualKeyboard) SetShiftState(shiftState float64) *VirtualKeyboard {
 	v.p.Set("shiftState", shiftState)
 	return v

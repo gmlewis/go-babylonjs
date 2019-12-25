@@ -43,7 +43,7 @@ type NewBaseSliderOpts struct {
 
 // NewBaseSlider returns a new BaseSlider object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider
 func (gui *GUI) NewBaseSlider(opts *NewBaseSliderOpts) *BaseSlider {
 	if opts == nil {
 		opts = &NewBaseSliderOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewBaseSlider(opts *NewBaseSliderOpts) *BaseSlider {
 
 // _onPointerDown calls the _onPointerDown method on the BaseSlider object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#_onpointerdown
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#_onpointerdown
 func (b *BaseSlider) _onPointerDown(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64) bool {
 
 	args := make([]interface{}, 0, 4+0)
@@ -90,7 +90,7 @@ func (b *BaseSlider) _onPointerDown(target *Control, coordinates *Vector2, point
 
 // _onPointerMove calls the _onPointerMove method on the BaseSlider object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#_onpointermove
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#_onpointermove
 func (b *BaseSlider) _onPointerMove(target *Control, coordinates *Vector2, pointerId float64) {
 
 	args := make([]interface{}, 0, 3+0)
@@ -114,7 +114,7 @@ func (b *BaseSlider) _onPointerMove(target *Control, coordinates *Vector2, point
 
 // _onPointerUp calls the _onPointerUp method on the BaseSlider object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#_onpointerup
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#_onpointerup
 func (b *BaseSlider) _onPointerUp(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64, notifyClick bool) {
 
 	args := make([]interface{}, 0, 5+0)
@@ -142,7 +142,7 @@ func (b *BaseSlider) _onPointerUp(target *Control, coordinates *Vector2, pointer
 
 // BarOffset returns the BarOffset property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#baroffset
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#baroffset
 func (b *BaseSlider) BarOffset() string {
 	retVal := b.p.Get("barOffset")
 	return retVal.String()
@@ -150,7 +150,7 @@ func (b *BaseSlider) BarOffset() string {
 
 // SetBarOffset sets the BarOffset property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#baroffset
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#baroffset
 func (b *BaseSlider) SetBarOffset(barOffset string) *BaseSlider {
 	b.p.Set("barOffset", barOffset)
 	return b
@@ -158,7 +158,7 @@ func (b *BaseSlider) SetBarOffset(barOffset string) *BaseSlider {
 
 // BarOffsetInPixels returns the BarOffsetInPixels property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#baroffsetinpixels
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#baroffsetinpixels
 func (b *BaseSlider) BarOffsetInPixels() float64 {
 	retVal := b.p.Get("barOffsetInPixels")
 	return retVal.Float()
@@ -166,7 +166,7 @@ func (b *BaseSlider) BarOffsetInPixels() float64 {
 
 // SetBarOffsetInPixels sets the BarOffsetInPixels property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#baroffsetinpixels
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#baroffsetinpixels
 func (b *BaseSlider) SetBarOffsetInPixels(barOffsetInPixels float64) *BaseSlider {
 	b.p.Set("barOffsetInPixels", barOffsetInPixels)
 	return b
@@ -174,7 +174,7 @@ func (b *BaseSlider) SetBarOffsetInPixels(barOffsetInPixels float64) *BaseSlider
 
 // DisplayThumb returns the DisplayThumb property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#displaythumb
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#displaythumb
 func (b *BaseSlider) DisplayThumb() bool {
 	retVal := b.p.Get("displayThumb")
 	return retVal.Bool()
@@ -182,7 +182,7 @@ func (b *BaseSlider) DisplayThumb() bool {
 
 // SetDisplayThumb sets the DisplayThumb property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#displaythumb
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#displaythumb
 func (b *BaseSlider) SetDisplayThumb(displayThumb bool) *BaseSlider {
 	b.p.Set("displayThumb", displayThumb)
 	return b
@@ -190,7 +190,7 @@ func (b *BaseSlider) SetDisplayThumb(displayThumb bool) *BaseSlider {
 
 // IsThumbClamped returns the IsThumbClamped property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#isthumbclamped
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#isthumbclamped
 func (b *BaseSlider) IsThumbClamped() bool {
 	retVal := b.p.Get("isThumbClamped")
 	return retVal.Bool()
@@ -198,7 +198,7 @@ func (b *BaseSlider) IsThumbClamped() bool {
 
 // SetIsThumbClamped sets the IsThumbClamped property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#isthumbclamped
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#isthumbclamped
 func (b *BaseSlider) SetIsThumbClamped(isThumbClamped bool) *BaseSlider {
 	b.p.Set("isThumbClamped", isThumbClamped)
 	return b
@@ -206,7 +206,7 @@ func (b *BaseSlider) SetIsThumbClamped(isThumbClamped bool) *BaseSlider {
 
 // IsVertical returns the IsVertical property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#isvertical
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#isvertical
 func (b *BaseSlider) IsVertical() bool {
 	retVal := b.p.Get("isVertical")
 	return retVal.Bool()
@@ -214,7 +214,7 @@ func (b *BaseSlider) IsVertical() bool {
 
 // SetIsVertical sets the IsVertical property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#isvertical
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#isvertical
 func (b *BaseSlider) SetIsVertical(isVertical bool) *BaseSlider {
 	b.p.Set("isVertical", isVertical)
 	return b
@@ -222,7 +222,7 @@ func (b *BaseSlider) SetIsVertical(isVertical bool) *BaseSlider {
 
 // Maximum returns the Maximum property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#maximum
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#maximum
 func (b *BaseSlider) Maximum() float64 {
 	retVal := b.p.Get("maximum")
 	return retVal.Float()
@@ -230,7 +230,7 @@ func (b *BaseSlider) Maximum() float64 {
 
 // SetMaximum sets the Maximum property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#maximum
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#maximum
 func (b *BaseSlider) SetMaximum(maximum float64) *BaseSlider {
 	b.p.Set("maximum", maximum)
 	return b
@@ -238,7 +238,7 @@ func (b *BaseSlider) SetMaximum(maximum float64) *BaseSlider {
 
 // Minimum returns the Minimum property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#minimum
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#minimum
 func (b *BaseSlider) Minimum() float64 {
 	retVal := b.p.Get("minimum")
 	return retVal.Float()
@@ -246,7 +246,7 @@ func (b *BaseSlider) Minimum() float64 {
 
 // SetMinimum sets the Minimum property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#minimum
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#minimum
 func (b *BaseSlider) SetMinimum(minimum float64) *BaseSlider {
 	b.p.Set("minimum", minimum)
 	return b
@@ -254,7 +254,7 @@ func (b *BaseSlider) SetMinimum(minimum float64) *BaseSlider {
 
 // Name returns the Name property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#name
 func (b *BaseSlider) Name() string {
 	retVal := b.p.Get("name")
 	return retVal.String()
@@ -262,7 +262,7 @@ func (b *BaseSlider) Name() string {
 
 // SetName sets the Name property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#name
 func (b *BaseSlider) SetName(name string) *BaseSlider {
 	b.p.Set("name", name)
 	return b
@@ -270,7 +270,7 @@ func (b *BaseSlider) SetName(name string) *BaseSlider {
 
 // OnValueChangedObservable returns the OnValueChangedObservable property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#onvaluechangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#onvaluechangedobservable
 func (b *BaseSlider) OnValueChangedObservable() *Observable {
 	retVal := b.p.Get("onValueChangedObservable")
 	return ObservableFromJSObject(retVal, b.ctx)
@@ -278,7 +278,7 @@ func (b *BaseSlider) OnValueChangedObservable() *Observable {
 
 // SetOnValueChangedObservable sets the OnValueChangedObservable property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#onvaluechangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#onvaluechangedobservable
 func (b *BaseSlider) SetOnValueChangedObservable(onValueChangedObservable *Observable) *BaseSlider {
 	b.p.Set("onValueChangedObservable", onValueChangedObservable.JSObject())
 	return b
@@ -286,7 +286,7 @@ func (b *BaseSlider) SetOnValueChangedObservable(onValueChangedObservable *Obser
 
 // Step returns the Step property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#step
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#step
 func (b *BaseSlider) Step() float64 {
 	retVal := b.p.Get("step")
 	return retVal.Float()
@@ -294,7 +294,7 @@ func (b *BaseSlider) Step() float64 {
 
 // SetStep sets the Step property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#step
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#step
 func (b *BaseSlider) SetStep(step float64) *BaseSlider {
 	b.p.Set("step", step)
 	return b
@@ -302,7 +302,7 @@ func (b *BaseSlider) SetStep(step float64) *BaseSlider {
 
 // ThumbWidth returns the ThumbWidth property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#thumbwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#thumbwidth
 func (b *BaseSlider) ThumbWidth() string {
 	retVal := b.p.Get("thumbWidth")
 	return retVal.String()
@@ -310,7 +310,7 @@ func (b *BaseSlider) ThumbWidth() string {
 
 // SetThumbWidth sets the ThumbWidth property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#thumbwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#thumbwidth
 func (b *BaseSlider) SetThumbWidth(thumbWidth string) *BaseSlider {
 	b.p.Set("thumbWidth", thumbWidth)
 	return b
@@ -318,7 +318,7 @@ func (b *BaseSlider) SetThumbWidth(thumbWidth string) *BaseSlider {
 
 // ThumbWidthInPixels returns the ThumbWidthInPixels property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#thumbwidthinpixels
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#thumbwidthinpixels
 func (b *BaseSlider) ThumbWidthInPixels() float64 {
 	retVal := b.p.Get("thumbWidthInPixels")
 	return retVal.Float()
@@ -326,7 +326,7 @@ func (b *BaseSlider) ThumbWidthInPixels() float64 {
 
 // SetThumbWidthInPixels sets the ThumbWidthInPixels property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#thumbwidthinpixels
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#thumbwidthinpixels
 func (b *BaseSlider) SetThumbWidthInPixels(thumbWidthInPixels float64) *BaseSlider {
 	b.p.Set("thumbWidthInPixels", thumbWidthInPixels)
 	return b
@@ -334,7 +334,7 @@ func (b *BaseSlider) SetThumbWidthInPixels(thumbWidthInPixels float64) *BaseSlid
 
 // Value returns the Value property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#value
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#value
 func (b *BaseSlider) Value() float64 {
 	retVal := b.p.Get("value")
 	return retVal.Float()
@@ -342,7 +342,7 @@ func (b *BaseSlider) Value() float64 {
 
 // SetValue sets the Value property of class BaseSlider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.baseslider#value
+// https://doc.babylonjs.com/api/classes/babylon.gui.baseslider#value
 func (b *BaseSlider) SetValue(value float64) *BaseSlider {
 	b.p.Set("value", value)
 	return b

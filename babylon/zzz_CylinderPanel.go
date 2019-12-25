@@ -38,7 +38,7 @@ func CylinderPanelArrayToJSArray(array []*CylinderPanel) []interface{} {
 
 // NewCylinderPanel returns a new CylinderPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.cylinderpanel
 func (gui *GUI) NewCylinderPanel() *CylinderPanel {
 
 	args := make([]interface{}, 0, 0+0)
@@ -49,7 +49,7 @@ func (gui *GUI) NewCylinderPanel() *CylinderPanel {
 
 // Radius returns the Radius property of class CylinderPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#radius
+// https://doc.babylonjs.com/api/classes/babylon.gui.cylinderpanel#radius
 func (c *CylinderPanel) Radius() float64 {
 	retVal := c.p.Get("radius")
 	return retVal.Float()
@@ -57,7 +57,7 @@ func (c *CylinderPanel) Radius() float64 {
 
 // SetRadius sets the Radius property of class CylinderPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#radius
+// https://doc.babylonjs.com/api/classes/babylon.gui.cylinderpanel#radius
 func (c *CylinderPanel) SetRadius(radius float64) *CylinderPanel {
 	c.p.Set("radius", radius)
 	return c

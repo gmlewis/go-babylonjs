@@ -43,7 +43,7 @@ type NewSliderOpts struct {
 
 // NewSlider returns a new Slider object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider
 func (gui *GUI) NewSlider(opts *NewSliderOpts) *Slider {
 	if opts == nil {
 		opts = &NewSliderOpts{}
@@ -68,7 +68,7 @@ type Slider_drawOpts struct {
 
 // _draw calls the _draw method on the Slider object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#_draw
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#_draw
 func (s *Slider) _draw(context js.Value, opts *Slider_drawOpts) {
 	if opts == nil {
 		opts = &Slider_drawOpts{}
@@ -89,7 +89,7 @@ func (s *Slider) _draw(context js.Value, opts *Slider_drawOpts) {
 
 // Background returns the Background property of class Slider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#background
 func (s *Slider) Background() string {
 	retVal := s.p.Get("background")
 	return retVal.String()
@@ -97,7 +97,7 @@ func (s *Slider) Background() string {
 
 // SetBackground sets the Background property of class Slider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#background
 func (s *Slider) SetBackground(background string) *Slider {
 	s.p.Set("background", background)
 	return s
@@ -105,7 +105,7 @@ func (s *Slider) SetBackground(background string) *Slider {
 
 // BorderColor returns the BorderColor property of class Slider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#bordercolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#bordercolor
 func (s *Slider) BorderColor() string {
 	retVal := s.p.Get("borderColor")
 	return retVal.String()
@@ -113,7 +113,7 @@ func (s *Slider) BorderColor() string {
 
 // SetBorderColor sets the BorderColor property of class Slider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#bordercolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#bordercolor
 func (s *Slider) SetBorderColor(borderColor string) *Slider {
 	s.p.Set("borderColor", borderColor)
 	return s
@@ -121,7 +121,7 @@ func (s *Slider) SetBorderColor(borderColor string) *Slider {
 
 // DisplayValueBar returns the DisplayValueBar property of class Slider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#displayvaluebar
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#displayvaluebar
 func (s *Slider) DisplayValueBar() bool {
 	retVal := s.p.Get("displayValueBar")
 	return retVal.Bool()
@@ -129,7 +129,7 @@ func (s *Slider) DisplayValueBar() bool {
 
 // SetDisplayValueBar sets the DisplayValueBar property of class Slider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#displayvaluebar
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#displayvaluebar
 func (s *Slider) SetDisplayValueBar(displayValueBar bool) *Slider {
 	s.p.Set("displayValueBar", displayValueBar)
 	return s
@@ -137,7 +137,7 @@ func (s *Slider) SetDisplayValueBar(displayValueBar bool) *Slider {
 
 // IsThumbCircle returns the IsThumbCircle property of class Slider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#isthumbcircle
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#isthumbcircle
 func (s *Slider) IsThumbCircle() bool {
 	retVal := s.p.Get("isThumbCircle")
 	return retVal.Bool()
@@ -145,7 +145,7 @@ func (s *Slider) IsThumbCircle() bool {
 
 // SetIsThumbCircle sets the IsThumbCircle property of class Slider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#isthumbcircle
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#isthumbcircle
 func (s *Slider) SetIsThumbCircle(isThumbCircle bool) *Slider {
 	s.p.Set("isThumbCircle", isThumbCircle)
 	return s
@@ -153,7 +153,7 @@ func (s *Slider) SetIsThumbCircle(isThumbCircle bool) *Slider {
 
 // Name returns the Name property of class Slider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#name
 func (s *Slider) Name() string {
 	retVal := s.p.Get("name")
 	return retVal.String()
@@ -161,7 +161,7 @@ func (s *Slider) Name() string {
 
 // SetName sets the Name property of class Slider.
 //
-// https://doc.babylonjs.com/api/classes/babylon.slider#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.slider#name
 func (s *Slider) SetName(name string) *Slider {
 	s.p.Set("name", name)
 	return s

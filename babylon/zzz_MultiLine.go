@@ -43,7 +43,7 @@ type NewMultiLineOpts struct {
 
 // NewMultiLine returns a new MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline
 func (gui *GUI) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
 	if opts == nil {
 		opts = &NewMultiLineOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
 
 // Add calls the Add method on the MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#add
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#add
 func (m *MultiLine) Add(items []*AbstractMesh) []*MultiLinePoint {
 
 	args := make([]interface{}, 0, 1+0)
@@ -80,7 +80,7 @@ func (m *MultiLine) Add(items []*AbstractMesh) []*MultiLinePoint {
 
 // Dispose calls the Dispose method on the MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#dispose
 func (m *MultiLine) Dispose() {
 
 	m.p.Call("dispose")
@@ -88,7 +88,7 @@ func (m *MultiLine) Dispose() {
 
 // GetAt calls the GetAt method on the MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#getat
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#getat
 func (m *MultiLine) GetAt(index float64) *MultiLinePoint {
 
 	args := make([]interface{}, 0, 1+0)
@@ -106,7 +106,7 @@ type MultiLinePushOpts struct {
 
 // Push calls the Push method on the MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#push
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#push
 func (m *MultiLine) Push(opts *MultiLinePushOpts) *MultiLinePoint {
 	if opts == nil {
 		opts = &MultiLinePushOpts{}
@@ -126,7 +126,7 @@ func (m *MultiLine) Push(opts *MultiLinePushOpts) *MultiLinePoint {
 
 // Remove calls the Remove method on the MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#remove
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#remove
 func (m *MultiLine) Remove(value float64) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -138,7 +138,7 @@ func (m *MultiLine) Remove(value float64) {
 
 // Reset calls the Reset method on the MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#reset
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#reset
 func (m *MultiLine) Reset() {
 
 	m.p.Call("reset")
@@ -146,7 +146,7 @@ func (m *MultiLine) Reset() {
 
 // ResetLinks calls the ResetLinks method on the MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#resetlinks
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#resetlinks
 func (m *MultiLine) ResetLinks() {
 
 	m.p.Call("resetLinks")
@@ -159,7 +159,7 @@ type MultiLine_drawOpts struct {
 
 // _draw calls the _draw method on the MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#_draw
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#_draw
 func (m *MultiLine) _draw(context js.Value, opts *MultiLine_drawOpts) {
 	if opts == nil {
 		opts = &MultiLine_drawOpts{}
@@ -180,7 +180,7 @@ func (m *MultiLine) _draw(context js.Value, opts *MultiLine_drawOpts) {
 
 // _measure calls the _measure method on the MultiLine object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#_measure
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#_measure
 func (m *MultiLine) _measure() {
 
 	m.p.Call("_measure")
@@ -188,7 +188,7 @@ func (m *MultiLine) _measure() {
 
 // Dash returns the Dash property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#dash
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#dash
 func (m *MultiLine) Dash() []float64 {
 	retVal := m.p.Get("dash")
 	result := []float64{}
@@ -200,7 +200,7 @@ func (m *MultiLine) Dash() []float64 {
 
 // SetDash sets the Dash property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#dash
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#dash
 func (m *MultiLine) SetDash(dash []float64) *MultiLine {
 	m.p.Set("dash", dash)
 	return m
@@ -208,7 +208,7 @@ func (m *MultiLine) SetDash(dash []float64) *MultiLine {
 
 // HorizontalAlignment returns the HorizontalAlignment property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#horizontalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#horizontalalignment
 func (m *MultiLine) HorizontalAlignment() float64 {
 	retVal := m.p.Get("horizontalAlignment")
 	return retVal.Float()
@@ -216,7 +216,7 @@ func (m *MultiLine) HorizontalAlignment() float64 {
 
 // SetHorizontalAlignment sets the HorizontalAlignment property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#horizontalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#horizontalalignment
 func (m *MultiLine) SetHorizontalAlignment(horizontalAlignment float64) *MultiLine {
 	m.p.Set("horizontalAlignment", horizontalAlignment)
 	return m
@@ -224,7 +224,7 @@ func (m *MultiLine) SetHorizontalAlignment(horizontalAlignment float64) *MultiLi
 
 // LineWidth returns the LineWidth property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#linewidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#linewidth
 func (m *MultiLine) LineWidth() float64 {
 	retVal := m.p.Get("lineWidth")
 	return retVal.Float()
@@ -232,7 +232,7 @@ func (m *MultiLine) LineWidth() float64 {
 
 // SetLineWidth sets the LineWidth property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#linewidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#linewidth
 func (m *MultiLine) SetLineWidth(lineWidth float64) *MultiLine {
 	m.p.Set("lineWidth", lineWidth)
 	return m
@@ -240,7 +240,7 @@ func (m *MultiLine) SetLineWidth(lineWidth float64) *MultiLine {
 
 // Name returns the Name property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#name
 func (m *MultiLine) Name() string {
 	retVal := m.p.Get("name")
 	return retVal.String()
@@ -248,7 +248,7 @@ func (m *MultiLine) Name() string {
 
 // SetName sets the Name property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#name
 func (m *MultiLine) SetName(name string) *MultiLine {
 	m.p.Set("name", name)
 	return m
@@ -256,7 +256,7 @@ func (m *MultiLine) SetName(name string) *MultiLine {
 
 // OnPointUpdate returns the OnPointUpdate property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#onpointupdate
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#onpointupdate
 func (m *MultiLine) OnPointUpdate() js.Value {
 	retVal := m.p.Get("onPointUpdate")
 	return retVal
@@ -264,7 +264,7 @@ func (m *MultiLine) OnPointUpdate() js.Value {
 
 // SetOnPointUpdate sets the OnPointUpdate property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#onpointupdate
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#onpointupdate
 func (m *MultiLine) SetOnPointUpdate(onPointUpdate JSFunc) *MultiLine {
 	m.p.Set("onPointUpdate", js.FuncOf(onPointUpdate))
 	return m
@@ -272,7 +272,7 @@ func (m *MultiLine) SetOnPointUpdate(onPointUpdate JSFunc) *MultiLine {
 
 // VerticalAlignment returns the VerticalAlignment property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#verticalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#verticalalignment
 func (m *MultiLine) VerticalAlignment() float64 {
 	retVal := m.p.Get("verticalAlignment")
 	return retVal.Float()
@@ -280,7 +280,7 @@ func (m *MultiLine) VerticalAlignment() float64 {
 
 // SetVerticalAlignment sets the VerticalAlignment property of class MultiLine.
 //
-// https://doc.babylonjs.com/api/classes/babylon.multiline#verticalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.multiline#verticalalignment
 func (m *MultiLine) SetVerticalAlignment(verticalAlignment float64) *MultiLine {
 	m.p.Set("verticalAlignment", verticalAlignment)
 	return m

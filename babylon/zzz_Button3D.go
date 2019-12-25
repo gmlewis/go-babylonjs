@@ -43,7 +43,7 @@ type NewButton3DOpts struct {
 
 // NewButton3D returns a new Button3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button3d
+// https://doc.babylonjs.com/api/classes/babylon.gui.button3d
 func (gui *GUI) NewButton3D(opts *NewButton3DOpts) *Button3D {
 	if opts == nil {
 		opts = &NewButton3DOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewButton3D(opts *NewButton3DOpts) *Button3D {
 
 // Dispose calls the Dispose method on the Button3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button3d#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.button3d#dispose
 func (b *Button3D) Dispose() {
 
 	b.p.Call("dispose")
@@ -71,7 +71,7 @@ func (b *Button3D) Dispose() {
 
 // Content returns the Content property of class Button3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button3d#content
+// https://doc.babylonjs.com/api/classes/babylon.gui.button3d#content
 func (b *Button3D) Content() *Control {
 	retVal := b.p.Get("content")
 	return ControlFromJSObject(retVal, b.ctx)
@@ -79,7 +79,7 @@ func (b *Button3D) Content() *Control {
 
 // SetContent sets the Content property of class Button3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button3d#content
+// https://doc.babylonjs.com/api/classes/babylon.gui.button3d#content
 func (b *Button3D) SetContent(content *Control) *Button3D {
 	b.p.Set("content", content.JSObject())
 	return b
@@ -87,7 +87,7 @@ func (b *Button3D) SetContent(content *Control) *Button3D {
 
 // ContentResolution returns the ContentResolution property of class Button3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button3d#contentresolution
+// https://doc.babylonjs.com/api/classes/babylon.gui.button3d#contentresolution
 func (b *Button3D) ContentResolution() int {
 	retVal := b.p.Get("contentResolution")
 	return retVal.Int()
@@ -95,7 +95,7 @@ func (b *Button3D) ContentResolution() int {
 
 // SetContentResolution sets the ContentResolution property of class Button3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button3d#contentresolution
+// https://doc.babylonjs.com/api/classes/babylon.gui.button3d#contentresolution
 func (b *Button3D) SetContentResolution(contentResolution int) *Button3D {
 	b.p.Set("contentResolution", contentResolution)
 	return b
@@ -103,7 +103,7 @@ func (b *Button3D) SetContentResolution(contentResolution int) *Button3D {
 
 // ContentScaleRatio returns the ContentScaleRatio property of class Button3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button3d#contentscaleratio
+// https://doc.babylonjs.com/api/classes/babylon.gui.button3d#contentscaleratio
 func (b *Button3D) ContentScaleRatio() float64 {
 	retVal := b.p.Get("contentScaleRatio")
 	return retVal.Float()
@@ -111,7 +111,7 @@ func (b *Button3D) ContentScaleRatio() float64 {
 
 // SetContentScaleRatio sets the ContentScaleRatio property of class Button3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button3d#contentscaleratio
+// https://doc.babylonjs.com/api/classes/babylon.gui.button3d#contentscaleratio
 func (b *Button3D) SetContentScaleRatio(contentScaleRatio float64) *Button3D {
 	b.p.Set("contentScaleRatio", contentScaleRatio)
 	return b

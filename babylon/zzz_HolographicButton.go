@@ -44,7 +44,7 @@ type NewHolographicButtonOpts struct {
 
 // NewHolographicButton returns a new HolographicButton object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton
 func (gui *GUI) NewHolographicButton(opts *NewHolographicButtonOpts) *HolographicButton {
 	if opts == nil {
 		opts = &NewHolographicButtonOpts{}
@@ -69,7 +69,7 @@ func (gui *GUI) NewHolographicButton(opts *NewHolographicButtonOpts) *Holographi
 
 // Dispose calls the Dispose method on the HolographicButton object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#dispose
 func (h *HolographicButton) Dispose() {
 
 	h.p.Call("dispose")
@@ -77,7 +77,7 @@ func (h *HolographicButton) Dispose() {
 
 // BackMaterial returns the BackMaterial property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#backmaterial
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#backmaterial
 func (h *HolographicButton) BackMaterial() *FluentMaterial {
 	retVal := h.p.Get("backMaterial")
 	return FluentMaterialFromJSObject(retVal, h.ctx)
@@ -85,7 +85,7 @@ func (h *HolographicButton) BackMaterial() *FluentMaterial {
 
 // SetBackMaterial sets the BackMaterial property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#backmaterial
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#backmaterial
 func (h *HolographicButton) SetBackMaterial(backMaterial *FluentMaterial) *HolographicButton {
 	h.p.Set("backMaterial", backMaterial.JSObject())
 	return h
@@ -93,7 +93,7 @@ func (h *HolographicButton) SetBackMaterial(backMaterial *FluentMaterial) *Holog
 
 // FrontMaterial returns the FrontMaterial property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#frontmaterial
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#frontmaterial
 func (h *HolographicButton) FrontMaterial() *FluentMaterial {
 	retVal := h.p.Get("frontMaterial")
 	return FluentMaterialFromJSObject(retVal, h.ctx)
@@ -101,7 +101,7 @@ func (h *HolographicButton) FrontMaterial() *FluentMaterial {
 
 // SetFrontMaterial sets the FrontMaterial property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#frontmaterial
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#frontmaterial
 func (h *HolographicButton) SetFrontMaterial(frontMaterial *FluentMaterial) *HolographicButton {
 	h.p.Set("frontMaterial", frontMaterial.JSObject())
 	return h
@@ -109,7 +109,7 @@ func (h *HolographicButton) SetFrontMaterial(frontMaterial *FluentMaterial) *Hol
 
 // ImageUrl returns the ImageUrl property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#imageurl
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#imageurl
 func (h *HolographicButton) ImageUrl() string {
 	retVal := h.p.Get("imageUrl")
 	return retVal.String()
@@ -117,7 +117,7 @@ func (h *HolographicButton) ImageUrl() string {
 
 // SetImageUrl sets the ImageUrl property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#imageurl
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#imageurl
 func (h *HolographicButton) SetImageUrl(imageUrl string) *HolographicButton {
 	h.p.Set("imageUrl", imageUrl)
 	return h
@@ -125,7 +125,7 @@ func (h *HolographicButton) SetImageUrl(imageUrl string) *HolographicButton {
 
 // PlateMaterial returns the PlateMaterial property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#platematerial
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#platematerial
 func (h *HolographicButton) PlateMaterial() *StandardMaterial {
 	retVal := h.p.Get("plateMaterial")
 	return StandardMaterialFromJSObject(retVal, h.ctx)
@@ -133,7 +133,7 @@ func (h *HolographicButton) PlateMaterial() *StandardMaterial {
 
 // SetPlateMaterial sets the PlateMaterial property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#platematerial
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#platematerial
 func (h *HolographicButton) SetPlateMaterial(plateMaterial *StandardMaterial) *HolographicButton {
 	h.p.Set("plateMaterial", plateMaterial.JSObject())
 	return h
@@ -141,7 +141,7 @@ func (h *HolographicButton) SetPlateMaterial(plateMaterial *StandardMaterial) *H
 
 // RenderingGroupId returns the RenderingGroupId property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#renderinggroupid
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#renderinggroupid
 func (h *HolographicButton) RenderingGroupId() float64 {
 	retVal := h.p.Get("renderingGroupId")
 	return retVal.Float()
@@ -149,7 +149,7 @@ func (h *HolographicButton) RenderingGroupId() float64 {
 
 // SetRenderingGroupId sets the RenderingGroupId property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#renderinggroupid
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#renderinggroupid
 func (h *HolographicButton) SetRenderingGroupId(renderingGroupId float64) *HolographicButton {
 	h.p.Set("renderingGroupId", renderingGroupId)
 	return h
@@ -157,7 +157,7 @@ func (h *HolographicButton) SetRenderingGroupId(renderingGroupId float64) *Holog
 
 // ShareMaterials returns the ShareMaterials property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#sharematerials
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#sharematerials
 func (h *HolographicButton) ShareMaterials() bool {
 	retVal := h.p.Get("shareMaterials")
 	return retVal.Bool()
@@ -165,7 +165,7 @@ func (h *HolographicButton) ShareMaterials() bool {
 
 // SetShareMaterials sets the ShareMaterials property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#sharematerials
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#sharematerials
 func (h *HolographicButton) SetShareMaterials(shareMaterials bool) *HolographicButton {
 	h.p.Set("shareMaterials", shareMaterials)
 	return h
@@ -173,7 +173,7 @@ func (h *HolographicButton) SetShareMaterials(shareMaterials bool) *HolographicB
 
 // Text returns the Text property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#text
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#text
 func (h *HolographicButton) Text() string {
 	retVal := h.p.Get("text")
 	return retVal.String()
@@ -181,7 +181,7 @@ func (h *HolographicButton) Text() string {
 
 // SetText sets the Text property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#text
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#text
 func (h *HolographicButton) SetText(text string) *HolographicButton {
 	h.p.Set("text", text)
 	return h
@@ -189,7 +189,7 @@ func (h *HolographicButton) SetText(text string) *HolographicButton {
 
 // TooltipText returns the TooltipText property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#tooltiptext
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#tooltiptext
 func (h *HolographicButton) TooltipText() string {
 	retVal := h.p.Get("tooltipText")
 	return retVal.String()
@@ -197,7 +197,7 @@ func (h *HolographicButton) TooltipText() string {
 
 // SetTooltipText sets the TooltipText property of class HolographicButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.holographicbutton#tooltiptext
+// https://doc.babylonjs.com/api/classes/babylon.gui.holographicbutton#tooltiptext
 func (h *HolographicButton) SetTooltipText(tooltipText string) *HolographicButton {
 	h.p.Set("tooltipText", tooltipText)
 	return h

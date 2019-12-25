@@ -44,7 +44,7 @@ type NewTextBlockOpts struct {
 
 // NewTextBlock returns a new TextBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock
 func (gui *GUI) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
 	if opts == nil {
 		opts = &NewTextBlockOpts{}
@@ -69,7 +69,7 @@ func (gui *GUI) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
 
 // ComputeExpectedHeight calls the ComputeExpectedHeight method on the TextBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#computeexpectedheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#computeexpectedheight
 func (t *TextBlock) ComputeExpectedHeight() float64 {
 
 	retVal := t.p.Call("computeExpectedHeight")
@@ -78,7 +78,7 @@ func (t *TextBlock) ComputeExpectedHeight() float64 {
 
 // Dispose calls the Dispose method on the TextBlock object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#dispose
 func (t *TextBlock) Dispose() {
 
 	t.p.Call("dispose")
@@ -86,7 +86,7 @@ func (t *TextBlock) Dispose() {
 
 // LineSpacing returns the LineSpacing property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#linespacing
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#linespacing
 func (t *TextBlock) LineSpacing() string {
 	retVal := t.p.Get("lineSpacing")
 	return retVal.String()
@@ -94,7 +94,7 @@ func (t *TextBlock) LineSpacing() string {
 
 // SetLineSpacing sets the LineSpacing property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#linespacing
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#linespacing
 func (t *TextBlock) SetLineSpacing(lineSpacing string) *TextBlock {
 	t.p.Set("lineSpacing", lineSpacing)
 	return t
@@ -102,7 +102,7 @@ func (t *TextBlock) SetLineSpacing(lineSpacing string) *TextBlock {
 
 // Lines returns the Lines property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#lines
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#lines
 func (t *TextBlock) Lines() js.Value {
 	retVal := t.p.Get("lines")
 	return retVal
@@ -110,7 +110,7 @@ func (t *TextBlock) Lines() js.Value {
 
 // SetLines sets the Lines property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#lines
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#lines
 func (t *TextBlock) SetLines(lines JSObject) *TextBlock {
 	t.p.Set("lines", lines.JSObject())
 	return t
@@ -118,7 +118,7 @@ func (t *TextBlock) SetLines(lines JSObject) *TextBlock {
 
 // Name returns the Name property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#name
 func (t *TextBlock) Name() string {
 	retVal := t.p.Get("name")
 	return retVal.String()
@@ -126,7 +126,7 @@ func (t *TextBlock) Name() string {
 
 // SetName sets the Name property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#name
 func (t *TextBlock) SetName(name string) *TextBlock {
 	t.p.Set("name", name)
 	return t
@@ -134,7 +134,7 @@ func (t *TextBlock) SetName(name string) *TextBlock {
 
 // OnLinesReadyObservable returns the OnLinesReadyObservable property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#onlinesreadyobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#onlinesreadyobservable
 func (t *TextBlock) OnLinesReadyObservable() *Observable {
 	retVal := t.p.Get("onLinesReadyObservable")
 	return ObservableFromJSObject(retVal, t.ctx)
@@ -142,7 +142,7 @@ func (t *TextBlock) OnLinesReadyObservable() *Observable {
 
 // SetOnLinesReadyObservable sets the OnLinesReadyObservable property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#onlinesreadyobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#onlinesreadyobservable
 func (t *TextBlock) SetOnLinesReadyObservable(onLinesReadyObservable *Observable) *TextBlock {
 	t.p.Set("onLinesReadyObservable", onLinesReadyObservable.JSObject())
 	return t
@@ -150,7 +150,7 @@ func (t *TextBlock) SetOnLinesReadyObservable(onLinesReadyObservable *Observable
 
 // OnTextChangedObservable returns the OnTextChangedObservable property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#ontextchangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#ontextchangedobservable
 func (t *TextBlock) OnTextChangedObservable() *Observable {
 	retVal := t.p.Get("onTextChangedObservable")
 	return ObservableFromJSObject(retVal, t.ctx)
@@ -158,7 +158,7 @@ func (t *TextBlock) OnTextChangedObservable() *Observable {
 
 // SetOnTextChangedObservable sets the OnTextChangedObservable property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#ontextchangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#ontextchangedobservable
 func (t *TextBlock) SetOnTextChangedObservable(onTextChangedObservable *Observable) *TextBlock {
 	t.p.Set("onTextChangedObservable", onTextChangedObservable.JSObject())
 	return t
@@ -166,7 +166,7 @@ func (t *TextBlock) SetOnTextChangedObservable(onTextChangedObservable *Observab
 
 // OutlineColor returns the OutlineColor property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#outlinecolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#outlinecolor
 func (t *TextBlock) OutlineColor() string {
 	retVal := t.p.Get("outlineColor")
 	return retVal.String()
@@ -174,7 +174,7 @@ func (t *TextBlock) OutlineColor() string {
 
 // SetOutlineColor sets the OutlineColor property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#outlinecolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#outlinecolor
 func (t *TextBlock) SetOutlineColor(outlineColor string) *TextBlock {
 	t.p.Set("outlineColor", outlineColor)
 	return t
@@ -182,7 +182,7 @@ func (t *TextBlock) SetOutlineColor(outlineColor string) *TextBlock {
 
 // OutlineWidth returns the OutlineWidth property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#outlinewidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#outlinewidth
 func (t *TextBlock) OutlineWidth() float64 {
 	retVal := t.p.Get("outlineWidth")
 	return retVal.Float()
@@ -190,7 +190,7 @@ func (t *TextBlock) OutlineWidth() float64 {
 
 // SetOutlineWidth sets the OutlineWidth property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#outlinewidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#outlinewidth
 func (t *TextBlock) SetOutlineWidth(outlineWidth float64) *TextBlock {
 	t.p.Set("outlineWidth", outlineWidth)
 	return t
@@ -198,7 +198,7 @@ func (t *TextBlock) SetOutlineWidth(outlineWidth float64) *TextBlock {
 
 // ResizeToFit returns the ResizeToFit property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#resizetofit
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#resizetofit
 func (t *TextBlock) ResizeToFit() bool {
 	retVal := t.p.Get("resizeToFit")
 	return retVal.Bool()
@@ -206,7 +206,7 @@ func (t *TextBlock) ResizeToFit() bool {
 
 // SetResizeToFit sets the ResizeToFit property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#resizetofit
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#resizetofit
 func (t *TextBlock) SetResizeToFit(resizeToFit bool) *TextBlock {
 	t.p.Set("resizeToFit", resizeToFit)
 	return t
@@ -214,7 +214,7 @@ func (t *TextBlock) SetResizeToFit(resizeToFit bool) *TextBlock {
 
 // Text returns the Text property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#text
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#text
 func (t *TextBlock) Text() string {
 	retVal := t.p.Get("text")
 	return retVal.String()
@@ -222,7 +222,7 @@ func (t *TextBlock) Text() string {
 
 // SetText sets the Text property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#text
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#text
 func (t *TextBlock) SetText(text string) *TextBlock {
 	t.p.Set("text", text)
 	return t
@@ -230,7 +230,7 @@ func (t *TextBlock) SetText(text string) *TextBlock {
 
 // TextHorizontalAlignment returns the TextHorizontalAlignment property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#texthorizontalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#texthorizontalalignment
 func (t *TextBlock) TextHorizontalAlignment() float64 {
 	retVal := t.p.Get("textHorizontalAlignment")
 	return retVal.Float()
@@ -238,7 +238,7 @@ func (t *TextBlock) TextHorizontalAlignment() float64 {
 
 // SetTextHorizontalAlignment sets the TextHorizontalAlignment property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#texthorizontalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#texthorizontalalignment
 func (t *TextBlock) SetTextHorizontalAlignment(textHorizontalAlignment float64) *TextBlock {
 	t.p.Set("textHorizontalAlignment", textHorizontalAlignment)
 	return t
@@ -246,7 +246,7 @@ func (t *TextBlock) SetTextHorizontalAlignment(textHorizontalAlignment float64) 
 
 // TextVerticalAlignment returns the TextVerticalAlignment property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#textverticalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#textverticalalignment
 func (t *TextBlock) TextVerticalAlignment() float64 {
 	retVal := t.p.Get("textVerticalAlignment")
 	return retVal.Float()
@@ -254,7 +254,7 @@ func (t *TextBlock) TextVerticalAlignment() float64 {
 
 // SetTextVerticalAlignment sets the TextVerticalAlignment property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#textverticalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#textverticalalignment
 func (t *TextBlock) SetTextVerticalAlignment(textVerticalAlignment float64) *TextBlock {
 	t.p.Set("textVerticalAlignment", textVerticalAlignment)
 	return t
@@ -262,7 +262,7 @@ func (t *TextBlock) SetTextVerticalAlignment(textVerticalAlignment float64) *Tex
 
 // TextWrapping returns the TextWrapping property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#textwrapping
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#textwrapping
 func (t *TextBlock) TextWrapping() js.Value {
 	retVal := t.p.Get("textWrapping")
 	return retVal
@@ -270,7 +270,7 @@ func (t *TextBlock) TextWrapping() js.Value {
 
 // SetTextWrapping sets the TextWrapping property of class TextBlock.
 //
-// https://doc.babylonjs.com/api/classes/babylon.textblock#textwrapping
+// https://doc.babylonjs.com/api/classes/babylon.gui.textblock#textwrapping
 func (t *TextBlock) SetTextWrapping(textWrapping js.Value) *TextBlock {
 	t.p.Set("textWrapping", textWrapping)
 	return t

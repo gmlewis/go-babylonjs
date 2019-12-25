@@ -39,7 +39,7 @@ func StyleArrayToJSArray(array []*Style) []interface{} {
 
 // NewStyle returns a new Style object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style
+// https://doc.babylonjs.com/api/classes/babylon.gui.style
 func (gui *GUI) NewStyle(host *AdvancedDynamicTexture) *Style {
 
 	args := make([]interface{}, 0, 1+0)
@@ -52,7 +52,7 @@ func (gui *GUI) NewStyle(host *AdvancedDynamicTexture) *Style {
 
 // Dispose calls the Dispose method on the Style object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#dispose
 func (s *Style) Dispose() {
 
 	s.p.Call("dispose")
@@ -60,7 +60,7 @@ func (s *Style) Dispose() {
 
 // FontFamily returns the FontFamily property of class Style.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#fontfamily
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#fontfamily
 func (s *Style) FontFamily() string {
 	retVal := s.p.Get("fontFamily")
 	return retVal.String()
@@ -68,7 +68,7 @@ func (s *Style) FontFamily() string {
 
 // SetFontFamily sets the FontFamily property of class Style.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#fontfamily
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#fontfamily
 func (s *Style) SetFontFamily(fontFamily string) *Style {
 	s.p.Set("fontFamily", fontFamily)
 	return s
@@ -76,7 +76,7 @@ func (s *Style) SetFontFamily(fontFamily string) *Style {
 
 // FontSize returns the FontSize property of class Style.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#fontsize
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#fontsize
 func (s *Style) FontSize() string {
 	retVal := s.p.Get("fontSize")
 	return retVal.String()
@@ -84,7 +84,7 @@ func (s *Style) FontSize() string {
 
 // SetFontSize sets the FontSize property of class Style.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#fontsize
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#fontsize
 func (s *Style) SetFontSize(fontSize string) *Style {
 	s.p.Set("fontSize", fontSize)
 	return s
@@ -92,7 +92,7 @@ func (s *Style) SetFontSize(fontSize string) *Style {
 
 // FontStyle returns the FontStyle property of class Style.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#fontstyle
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#fontstyle
 func (s *Style) FontStyle() string {
 	retVal := s.p.Get("fontStyle")
 	return retVal.String()
@@ -100,7 +100,7 @@ func (s *Style) FontStyle() string {
 
 // SetFontStyle sets the FontStyle property of class Style.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#fontstyle
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#fontstyle
 func (s *Style) SetFontStyle(fontStyle string) *Style {
 	s.p.Set("fontStyle", fontStyle)
 	return s
@@ -108,7 +108,7 @@ func (s *Style) SetFontStyle(fontStyle string) *Style {
 
 // FontWeight returns the FontWeight property of class Style.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#fontweight
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#fontweight
 func (s *Style) FontWeight() string {
 	retVal := s.p.Get("fontWeight")
 	return retVal.String()
@@ -116,7 +116,7 @@ func (s *Style) FontWeight() string {
 
 // SetFontWeight sets the FontWeight property of class Style.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#fontweight
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#fontweight
 func (s *Style) SetFontWeight(fontWeight string) *Style {
 	s.p.Set("fontWeight", fontWeight)
 	return s
@@ -124,7 +124,7 @@ func (s *Style) SetFontWeight(fontWeight string) *Style {
 
 // OnChangedObservable returns the OnChangedObservable property of class Style.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#onchangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#onchangedobservable
 func (s *Style) OnChangedObservable() *Observable {
 	retVal := s.p.Get("onChangedObservable")
 	return ObservableFromJSObject(retVal, s.ctx)
@@ -132,7 +132,7 @@ func (s *Style) OnChangedObservable() *Observable {
 
 // SetOnChangedObservable sets the OnChangedObservable property of class Style.
 //
-// https://doc.babylonjs.com/api/classes/babylon.style#onchangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.style#onchangedobservable
 func (s *Style) SetOnChangedObservable(onChangedObservable *Observable) *Style {
 	s.p.Set("onChangedObservable", onChangedObservable.JSObject())
 	return s

@@ -43,7 +43,7 @@ type NewRectangleOpts struct {
 
 // NewRectangle returns a new Rectangle object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rectangle
+// https://doc.babylonjs.com/api/classes/babylon.gui.rectangle
 func (gui *GUI) NewRectangle(opts *NewRectangleOpts) *Rectangle {
 	if opts == nil {
 		opts = &NewRectangleOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewRectangle(opts *NewRectangleOpts) *Rectangle {
 
 // CornerRadius returns the CornerRadius property of class Rectangle.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rectangle#cornerradius
+// https://doc.babylonjs.com/api/classes/babylon.gui.rectangle#cornerradius
 func (r *Rectangle) CornerRadius() float64 {
 	retVal := r.p.Get("cornerRadius")
 	return retVal.Float()
@@ -71,7 +71,7 @@ func (r *Rectangle) CornerRadius() float64 {
 
 // SetCornerRadius sets the CornerRadius property of class Rectangle.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rectangle#cornerradius
+// https://doc.babylonjs.com/api/classes/babylon.gui.rectangle#cornerradius
 func (r *Rectangle) SetCornerRadius(cornerRadius float64) *Rectangle {
 	r.p.Set("cornerRadius", cornerRadius)
 	return r
@@ -79,7 +79,7 @@ func (r *Rectangle) SetCornerRadius(cornerRadius float64) *Rectangle {
 
 // Name returns the Name property of class Rectangle.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rectangle#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.rectangle#name
 func (r *Rectangle) Name() string {
 	retVal := r.p.Get("name")
 	return retVal.String()
@@ -87,7 +87,7 @@ func (r *Rectangle) Name() string {
 
 // SetName sets the Name property of class Rectangle.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rectangle#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.rectangle#name
 func (r *Rectangle) SetName(name string) *Rectangle {
 	r.p.Set("name", name)
 	return r
@@ -95,7 +95,7 @@ func (r *Rectangle) SetName(name string) *Rectangle {
 
 // Thickness returns the Thickness property of class Rectangle.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rectangle#thickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.rectangle#thickness
 func (r *Rectangle) Thickness() float64 {
 	retVal := r.p.Get("thickness")
 	return retVal.Float()
@@ -103,7 +103,7 @@ func (r *Rectangle) Thickness() float64 {
 
 // SetThickness sets the Thickness property of class Rectangle.
 //
-// https://doc.babylonjs.com/api/classes/babylon.rectangle#thickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.rectangle#thickness
 func (r *Rectangle) SetThickness(thickness float64) *Rectangle {
 	r.p.Set("thickness", thickness)
 	return r

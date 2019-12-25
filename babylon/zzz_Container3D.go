@@ -43,7 +43,7 @@ type NewContainer3DOpts struct {
 
 // NewContainer3D returns a new Container3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d
 func (gui *GUI) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
 	if opts == nil {
 		opts = &NewContainer3DOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
 
 // AddControl calls the AddControl method on the Container3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#addcontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#addcontrol
 func (c *Container3D) AddControl(control *Control3D) *Container3D {
 
 	args := make([]interface{}, 0, 1+0)
@@ -80,7 +80,7 @@ func (c *Container3D) AddControl(control *Control3D) *Container3D {
 
 // ContainsControl calls the ContainsControl method on the Container3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#containscontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#containscontrol
 func (c *Container3D) ContainsControl(control *Control3D) bool {
 
 	args := make([]interface{}, 0, 1+0)
@@ -97,7 +97,7 @@ func (c *Container3D) ContainsControl(control *Control3D) bool {
 
 // Dispose calls the Dispose method on the Container3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#dispose
 func (c *Container3D) Dispose() {
 
 	c.p.Call("dispose")
@@ -105,7 +105,7 @@ func (c *Container3D) Dispose() {
 
 // RemoveControl calls the RemoveControl method on the Container3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#removecontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#removecontrol
 func (c *Container3D) RemoveControl(control *Control3D) *Container3D {
 
 	args := make([]interface{}, 0, 1+0)
@@ -122,7 +122,7 @@ func (c *Container3D) RemoveControl(control *Control3D) *Container3D {
 
 // UpdateLayout calls the UpdateLayout method on the Container3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#updatelayout
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#updatelayout
 func (c *Container3D) UpdateLayout() *Container3D {
 
 	retVal := c.p.Call("updateLayout")
@@ -131,7 +131,7 @@ func (c *Container3D) UpdateLayout() *Container3D {
 
 // BlockLayout returns the BlockLayout property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#blocklayout
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#blocklayout
 func (c *Container3D) BlockLayout() bool {
 	retVal := c.p.Get("blockLayout")
 	return retVal.Bool()
@@ -139,7 +139,7 @@ func (c *Container3D) BlockLayout() bool {
 
 // SetBlockLayout sets the BlockLayout property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#blocklayout
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#blocklayout
 func (c *Container3D) SetBlockLayout(blockLayout bool) *Container3D {
 	c.p.Set("blockLayout", blockLayout)
 	return c
@@ -147,7 +147,7 @@ func (c *Container3D) SetBlockLayout(blockLayout bool) *Container3D {
 
 // Children returns the Children property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#children
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#children
 func (c *Container3D) Children() []*Control3D {
 	retVal := c.p.Get("children")
 	result := []*Control3D{}
@@ -159,7 +159,7 @@ func (c *Container3D) Children() []*Control3D {
 
 // SetChildren sets the Children property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#children
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#children
 func (c *Container3D) SetChildren(children []*Control3D) *Container3D {
 	c.p.Set("children", children)
 	return c
@@ -167,7 +167,7 @@ func (c *Container3D) SetChildren(children []*Control3D) *Container3D {
 
 // FACEFORWARDREVERSED_ORIENTATION returns the FACEFORWARDREVERSED_ORIENTATION property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#faceforwardreversed_orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#faceforwardreversed_orientation
 func (c *Container3D) FACEFORWARDREVERSED_ORIENTATION() float64 {
 	retVal := c.p.Get("FACEFORWARDREVERSED_ORIENTATION")
 	return retVal.Float()
@@ -175,7 +175,7 @@ func (c *Container3D) FACEFORWARDREVERSED_ORIENTATION() float64 {
 
 // SetFACEFORWARDREVERSED_ORIENTATION sets the FACEFORWARDREVERSED_ORIENTATION property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#faceforwardreversed_orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#faceforwardreversed_orientation
 func (c *Container3D) SetFACEFORWARDREVERSED_ORIENTATION(FACEFORWARDREVERSED_ORIENTATION float64) *Container3D {
 	c.p.Set("FACEFORWARDREVERSED_ORIENTATION", FACEFORWARDREVERSED_ORIENTATION)
 	return c
@@ -183,7 +183,7 @@ func (c *Container3D) SetFACEFORWARDREVERSED_ORIENTATION(FACEFORWARDREVERSED_ORI
 
 // FACEFORWARD_ORIENTATION returns the FACEFORWARD_ORIENTATION property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#faceforward_orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#faceforward_orientation
 func (c *Container3D) FACEFORWARD_ORIENTATION() float64 {
 	retVal := c.p.Get("FACEFORWARD_ORIENTATION")
 	return retVal.Float()
@@ -191,7 +191,7 @@ func (c *Container3D) FACEFORWARD_ORIENTATION() float64 {
 
 // SetFACEFORWARD_ORIENTATION sets the FACEFORWARD_ORIENTATION property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#faceforward_orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#faceforward_orientation
 func (c *Container3D) SetFACEFORWARD_ORIENTATION(FACEFORWARD_ORIENTATION float64) *Container3D {
 	c.p.Set("FACEFORWARD_ORIENTATION", FACEFORWARD_ORIENTATION)
 	return c
@@ -199,7 +199,7 @@ func (c *Container3D) SetFACEFORWARD_ORIENTATION(FACEFORWARD_ORIENTATION float64
 
 // FACEORIGINREVERSED_ORIENTATION returns the FACEORIGINREVERSED_ORIENTATION property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#faceoriginreversed_orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#faceoriginreversed_orientation
 func (c *Container3D) FACEORIGINREVERSED_ORIENTATION() float64 {
 	retVal := c.p.Get("FACEORIGINREVERSED_ORIENTATION")
 	return retVal.Float()
@@ -207,7 +207,7 @@ func (c *Container3D) FACEORIGINREVERSED_ORIENTATION() float64 {
 
 // SetFACEORIGINREVERSED_ORIENTATION sets the FACEORIGINREVERSED_ORIENTATION property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#faceoriginreversed_orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#faceoriginreversed_orientation
 func (c *Container3D) SetFACEORIGINREVERSED_ORIENTATION(FACEORIGINREVERSED_ORIENTATION float64) *Container3D {
 	c.p.Set("FACEORIGINREVERSED_ORIENTATION", FACEORIGINREVERSED_ORIENTATION)
 	return c
@@ -215,7 +215,7 @@ func (c *Container3D) SetFACEORIGINREVERSED_ORIENTATION(FACEORIGINREVERSED_ORIEN
 
 // FACEORIGIN_ORIENTATION returns the FACEORIGIN_ORIENTATION property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#faceorigin_orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#faceorigin_orientation
 func (c *Container3D) FACEORIGIN_ORIENTATION() float64 {
 	retVal := c.p.Get("FACEORIGIN_ORIENTATION")
 	return retVal.Float()
@@ -223,7 +223,7 @@ func (c *Container3D) FACEORIGIN_ORIENTATION() float64 {
 
 // SetFACEORIGIN_ORIENTATION sets the FACEORIGIN_ORIENTATION property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#faceorigin_orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#faceorigin_orientation
 func (c *Container3D) SetFACEORIGIN_ORIENTATION(FACEORIGIN_ORIENTATION float64) *Container3D {
 	c.p.Set("FACEORIGIN_ORIENTATION", FACEORIGIN_ORIENTATION)
 	return c
@@ -231,7 +231,7 @@ func (c *Container3D) SetFACEORIGIN_ORIENTATION(FACEORIGIN_ORIENTATION float64) 
 
 // UNSET_ORIENTATION returns the UNSET_ORIENTATION property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#unset_orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#unset_orientation
 func (c *Container3D) UNSET_ORIENTATION() float64 {
 	retVal := c.p.Get("UNSET_ORIENTATION")
 	return retVal.Float()
@@ -239,7 +239,7 @@ func (c *Container3D) UNSET_ORIENTATION() float64 {
 
 // SetUNSET_ORIENTATION sets the UNSET_ORIENTATION property of class Container3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container3d#unset_orientation
+// https://doc.babylonjs.com/api/classes/babylon.gui.container3d#unset_orientation
 func (c *Container3D) SetUNSET_ORIENTATION(UNSET_ORIENTATION float64) *Container3D {
 	c.p.Set("UNSET_ORIENTATION", UNSET_ORIENTATION)
 	return c

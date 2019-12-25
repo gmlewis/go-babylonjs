@@ -45,7 +45,7 @@ type NewContainerOpts struct {
 
 // NewContainer returns a new Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container
+// https://doc.babylonjs.com/api/classes/babylon.gui.container
 func (gui *GUI) NewContainer(opts *NewContainerOpts) *Container {
 	if opts == nil {
 		opts = &NewContainerOpts{}
@@ -65,7 +65,7 @@ func (gui *GUI) NewContainer(opts *NewContainerOpts) *Container {
 
 // AddControl calls the AddControl method on the Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#addcontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#addcontrol
 func (c *Container) AddControl(control *Control) *Container {
 
 	args := make([]interface{}, 0, 1+0)
@@ -82,7 +82,7 @@ func (c *Container) AddControl(control *Control) *Container {
 
 // ClearControls calls the ClearControls method on the Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#clearcontrols
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#clearcontrols
 func (c *Container) ClearControls() *Container {
 
 	retVal := c.p.Call("clearControls")
@@ -91,7 +91,7 @@ func (c *Container) ClearControls() *Container {
 
 // ContainsControl calls the ContainsControl method on the Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#containscontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#containscontrol
 func (c *Container) ContainsControl(control *Control) bool {
 
 	args := make([]interface{}, 0, 1+0)
@@ -108,7 +108,7 @@ func (c *Container) ContainsControl(control *Control) bool {
 
 // Dispose calls the Dispose method on the Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#dispose
 func (c *Container) Dispose() {
 
 	c.p.Call("dispose")
@@ -116,7 +116,7 @@ func (c *Container) Dispose() {
 
 // GetChildByName calls the GetChildByName method on the Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#getchildbyname
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#getchildbyname
 func (c *Container) GetChildByName(name string) *Control {
 
 	args := make([]interface{}, 0, 1+0)
@@ -129,7 +129,7 @@ func (c *Container) GetChildByName(name string) *Control {
 
 // GetChildByType calls the GetChildByType method on the Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#getchildbytype
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#getchildbytype
 func (c *Container) GetChildByType(name string, jsType string) *Control {
 
 	args := make([]interface{}, 0, 2+0)
@@ -150,7 +150,7 @@ type ContainerGetDescendantsToRefOpts struct {
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#getdescendantstoref
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#getdescendantstoref
 func (c *Container) GetDescendantsToRef(results []*Control, opts *ContainerGetDescendantsToRefOpts) {
 	if opts == nil {
 		opts = &ContainerGetDescendantsToRefOpts{}
@@ -176,7 +176,7 @@ func (c *Container) GetDescendantsToRef(results []*Control, opts *ContainerGetDe
 
 // RemoveControl calls the RemoveControl method on the Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#removecontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#removecontrol
 func (c *Container) RemoveControl(control *Control) *Container {
 
 	args := make([]interface{}, 0, 1+0)
@@ -193,7 +193,7 @@ func (c *Container) RemoveControl(control *Control) *Container {
 
 // _flagDescendantsAsMatrixDirty calls the _flagDescendantsAsMatrixDirty method on the Container object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#_flagdescendantsasmatrixdirty
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#_flagdescendantsasmatrixdirty
 func (c *Container) _flagDescendantsAsMatrixDirty() {
 
 	c.p.Call("_flagDescendantsAsMatrixDirty")
@@ -201,7 +201,7 @@ func (c *Container) _flagDescendantsAsMatrixDirty() {
 
 // AdaptHeightToChildren returns the AdaptHeightToChildren property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#adaptheighttochildren
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#adaptheighttochildren
 func (c *Container) AdaptHeightToChildren() bool {
 	retVal := c.p.Get("adaptHeightToChildren")
 	return retVal.Bool()
@@ -209,7 +209,7 @@ func (c *Container) AdaptHeightToChildren() bool {
 
 // SetAdaptHeightToChildren sets the AdaptHeightToChildren property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#adaptheighttochildren
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#adaptheighttochildren
 func (c *Container) SetAdaptHeightToChildren(adaptHeightToChildren bool) *Container {
 	c.p.Set("adaptHeightToChildren", adaptHeightToChildren)
 	return c
@@ -217,7 +217,7 @@ func (c *Container) SetAdaptHeightToChildren(adaptHeightToChildren bool) *Contai
 
 // AdaptWidthToChildren returns the AdaptWidthToChildren property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#adaptwidthtochildren
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#adaptwidthtochildren
 func (c *Container) AdaptWidthToChildren() bool {
 	retVal := c.p.Get("adaptWidthToChildren")
 	return retVal.Bool()
@@ -225,7 +225,7 @@ func (c *Container) AdaptWidthToChildren() bool {
 
 // SetAdaptWidthToChildren sets the AdaptWidthToChildren property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#adaptwidthtochildren
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#adaptwidthtochildren
 func (c *Container) SetAdaptWidthToChildren(adaptWidthToChildren bool) *Container {
 	c.p.Set("adaptWidthToChildren", adaptWidthToChildren)
 	return c
@@ -233,7 +233,7 @@ func (c *Container) SetAdaptWidthToChildren(adaptWidthToChildren bool) *Containe
 
 // Background returns the Background property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#background
 func (c *Container) Background() string {
 	retVal := c.p.Get("background")
 	return retVal.String()
@@ -241,7 +241,7 @@ func (c *Container) Background() string {
 
 // SetBackground sets the Background property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#background
 func (c *Container) SetBackground(background string) *Container {
 	c.p.Set("background", background)
 	return c
@@ -249,7 +249,7 @@ func (c *Container) SetBackground(background string) *Container {
 
 // Children returns the Children property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#children
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#children
 func (c *Container) Children() []*Control {
 	retVal := c.p.Get("children")
 	result := []*Control{}
@@ -261,7 +261,7 @@ func (c *Container) Children() []*Control {
 
 // SetChildren sets the Children property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#children
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#children
 func (c *Container) SetChildren(children []*Control) *Container {
 	c.p.Set("children", children)
 	return c
@@ -269,7 +269,7 @@ func (c *Container) SetChildren(children []*Control) *Container {
 
 // LogLayoutCycleErrors returns the LogLayoutCycleErrors property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#loglayoutcycleerrors
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#loglayoutcycleerrors
 func (c *Container) LogLayoutCycleErrors() bool {
 	retVal := c.p.Get("logLayoutCycleErrors")
 	return retVal.Bool()
@@ -277,7 +277,7 @@ func (c *Container) LogLayoutCycleErrors() bool {
 
 // SetLogLayoutCycleErrors sets the LogLayoutCycleErrors property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#loglayoutcycleerrors
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#loglayoutcycleerrors
 func (c *Container) SetLogLayoutCycleErrors(logLayoutCycleErrors bool) *Container {
 	c.p.Set("logLayoutCycleErrors", logLayoutCycleErrors)
 	return c
@@ -285,7 +285,7 @@ func (c *Container) SetLogLayoutCycleErrors(logLayoutCycleErrors bool) *Containe
 
 // MaxLayoutCycle returns the MaxLayoutCycle property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#maxlayoutcycle
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#maxlayoutcycle
 func (c *Container) MaxLayoutCycle() float64 {
 	retVal := c.p.Get("maxLayoutCycle")
 	return retVal.Float()
@@ -293,7 +293,7 @@ func (c *Container) MaxLayoutCycle() float64 {
 
 // SetMaxLayoutCycle sets the MaxLayoutCycle property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#maxlayoutcycle
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#maxlayoutcycle
 func (c *Container) SetMaxLayoutCycle(maxLayoutCycle float64) *Container {
 	c.p.Set("maxLayoutCycle", maxLayoutCycle)
 	return c
@@ -301,7 +301,7 @@ func (c *Container) SetMaxLayoutCycle(maxLayoutCycle float64) *Container {
 
 // Name returns the Name property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#name
 func (c *Container) Name() string {
 	retVal := c.p.Get("name")
 	return retVal.String()
@@ -309,7 +309,7 @@ func (c *Container) Name() string {
 
 // SetName sets the Name property of class Container.
 //
-// https://doc.babylonjs.com/api/classes/babylon.container#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.container#name
 func (c *Container) SetName(name string) *Container {
 	c.p.Set("name", name)
 	return c

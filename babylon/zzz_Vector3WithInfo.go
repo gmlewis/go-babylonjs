@@ -43,7 +43,7 @@ type NewVector3WithInfoOpts struct {
 
 // NewVector3WithInfo returns a new Vector3WithInfo object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo
+// https://doc.babylonjs.com/api/classes/babylon.gui.vector3withinfo
 func (gui *GUI) NewVector3WithInfo(source *Vector3, opts *NewVector3WithInfoOpts) *Vector3WithInfo {
 	if opts == nil {
 		opts = &NewVector3WithInfoOpts{}
@@ -65,7 +65,7 @@ func (gui *GUI) NewVector3WithInfo(source *Vector3, opts *NewVector3WithInfoOpts
 
 // ButtonIndex returns the ButtonIndex property of class Vector3WithInfo.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#buttonindex
+// https://doc.babylonjs.com/api/classes/babylon.gui.vector3withinfo#buttonindex
 func (v *Vector3WithInfo) ButtonIndex() float64 {
 	retVal := v.p.Get("buttonIndex")
 	return retVal.Float()
@@ -73,7 +73,7 @@ func (v *Vector3WithInfo) ButtonIndex() float64 {
 
 // SetButtonIndex sets the ButtonIndex property of class Vector3WithInfo.
 //
-// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#buttonindex
+// https://doc.babylonjs.com/api/classes/babylon.gui.vector3withinfo#buttonindex
 func (v *Vector3WithInfo) SetButtonIndex(buttonIndex float64) *Vector3WithInfo {
 	v.p.Set("buttonIndex", buttonIndex)
 	return v

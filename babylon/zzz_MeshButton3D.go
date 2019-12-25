@@ -43,7 +43,7 @@ type NewMeshButton3DOpts struct {
 
 // NewMeshButton3D returns a new MeshButton3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d
+// https://doc.babylonjs.com/api/classes/babylon.gui.meshbutton3d
 func (gui *GUI) NewMeshButton3D(mesh *Mesh, opts *NewMeshButton3DOpts) *MeshButton3D {
 	if opts == nil {
 		opts = &NewMeshButton3DOpts{}

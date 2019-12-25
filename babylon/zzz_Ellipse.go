@@ -43,7 +43,7 @@ type NewEllipseOpts struct {
 
 // NewEllipse returns a new Ellipse object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ellipse
+// https://doc.babylonjs.com/api/classes/babylon.gui.ellipse
 func (gui *GUI) NewEllipse(opts *NewEllipseOpts) *Ellipse {
 	if opts == nil {
 		opts = &NewEllipseOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewEllipse(opts *NewEllipseOpts) *Ellipse {
 
 // Name returns the Name property of class Ellipse.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ellipse#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.ellipse#name
 func (e *Ellipse) Name() string {
 	retVal := e.p.Get("name")
 	return retVal.String()
@@ -71,7 +71,7 @@ func (e *Ellipse) Name() string {
 
 // SetName sets the Name property of class Ellipse.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ellipse#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.ellipse#name
 func (e *Ellipse) SetName(name string) *Ellipse {
 	e.p.Set("name", name)
 	return e
@@ -79,7 +79,7 @@ func (e *Ellipse) SetName(name string) *Ellipse {
 
 // Thickness returns the Thickness property of class Ellipse.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ellipse#thickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.ellipse#thickness
 func (e *Ellipse) Thickness() float64 {
 	retVal := e.p.Get("thickness")
 	return retVal.Float()
@@ -87,7 +87,7 @@ func (e *Ellipse) Thickness() float64 {
 
 // SetThickness sets the Thickness property of class Ellipse.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ellipse#thickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.ellipse#thickness
 func (e *Ellipse) SetThickness(thickness float64) *Ellipse {
 	e.p.Set("thickness", thickness)
 	return e

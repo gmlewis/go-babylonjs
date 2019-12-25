@@ -43,7 +43,7 @@ type NewCheckboxOpts struct {
 
 // NewCheckbox returns a new Checkbox object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox
 func (gui *GUI) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
 	if opts == nil {
 		opts = &NewCheckboxOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
 
 // AddCheckBoxWithHeader calls the AddCheckBoxWithHeader method on the Checkbox object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#addcheckboxwithheader
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#addcheckboxwithheader
 func (c *Checkbox) AddCheckBoxWithHeader(title string, onValueChanged JSFunc) *StackPanel {
 
 	args := make([]interface{}, 0, 2+0)
@@ -78,7 +78,7 @@ func (c *Checkbox) AddCheckBoxWithHeader(title string, onValueChanged JSFunc) *S
 
 // Background returns the Background property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#background
 func (c *Checkbox) Background() string {
 	retVal := c.p.Get("background")
 	return retVal.String()
@@ -86,7 +86,7 @@ func (c *Checkbox) Background() string {
 
 // SetBackground sets the Background property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#background
 func (c *Checkbox) SetBackground(background string) *Checkbox {
 	c.p.Set("background", background)
 	return c
@@ -94,7 +94,7 @@ func (c *Checkbox) SetBackground(background string) *Checkbox {
 
 // CheckSizeRatio returns the CheckSizeRatio property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#checksizeratio
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#checksizeratio
 func (c *Checkbox) CheckSizeRatio() float64 {
 	retVal := c.p.Get("checkSizeRatio")
 	return retVal.Float()
@@ -102,7 +102,7 @@ func (c *Checkbox) CheckSizeRatio() float64 {
 
 // SetCheckSizeRatio sets the CheckSizeRatio property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#checksizeratio
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#checksizeratio
 func (c *Checkbox) SetCheckSizeRatio(checkSizeRatio float64) *Checkbox {
 	c.p.Set("checkSizeRatio", checkSizeRatio)
 	return c
@@ -110,7 +110,7 @@ func (c *Checkbox) SetCheckSizeRatio(checkSizeRatio float64) *Checkbox {
 
 // IsChecked returns the IsChecked property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#ischecked
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#ischecked
 func (c *Checkbox) IsChecked() bool {
 	retVal := c.p.Get("isChecked")
 	return retVal.Bool()
@@ -118,7 +118,7 @@ func (c *Checkbox) IsChecked() bool {
 
 // SetIsChecked sets the IsChecked property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#ischecked
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#ischecked
 func (c *Checkbox) SetIsChecked(isChecked bool) *Checkbox {
 	c.p.Set("isChecked", isChecked)
 	return c
@@ -126,7 +126,7 @@ func (c *Checkbox) SetIsChecked(isChecked bool) *Checkbox {
 
 // Name returns the Name property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#name
 func (c *Checkbox) Name() string {
 	retVal := c.p.Get("name")
 	return retVal.String()
@@ -134,7 +134,7 @@ func (c *Checkbox) Name() string {
 
 // SetName sets the Name property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#name
 func (c *Checkbox) SetName(name string) *Checkbox {
 	c.p.Set("name", name)
 	return c
@@ -142,7 +142,7 @@ func (c *Checkbox) SetName(name string) *Checkbox {
 
 // OnIsCheckedChangedObservable returns the OnIsCheckedChangedObservable property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#onischeckedchangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#onischeckedchangedobservable
 func (c *Checkbox) OnIsCheckedChangedObservable() *Observable {
 	retVal := c.p.Get("onIsCheckedChangedObservable")
 	return ObservableFromJSObject(retVal, c.ctx)
@@ -150,7 +150,7 @@ func (c *Checkbox) OnIsCheckedChangedObservable() *Observable {
 
 // SetOnIsCheckedChangedObservable sets the OnIsCheckedChangedObservable property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#onischeckedchangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#onischeckedchangedobservable
 func (c *Checkbox) SetOnIsCheckedChangedObservable(onIsCheckedChangedObservable *Observable) *Checkbox {
 	c.p.Set("onIsCheckedChangedObservable", onIsCheckedChangedObservable.JSObject())
 	return c
@@ -158,7 +158,7 @@ func (c *Checkbox) SetOnIsCheckedChangedObservable(onIsCheckedChangedObservable 
 
 // Thickness returns the Thickness property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#thickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#thickness
 func (c *Checkbox) Thickness() float64 {
 	retVal := c.p.Get("thickness")
 	return retVal.Float()
@@ -166,7 +166,7 @@ func (c *Checkbox) Thickness() float64 {
 
 // SetThickness sets the Thickness property of class Checkbox.
 //
-// https://doc.babylonjs.com/api/classes/babylon.checkbox#thickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.checkbox#thickness
 func (c *Checkbox) SetThickness(thickness float64) *Checkbox {
 	c.p.Set("thickness", thickness)
 	return c

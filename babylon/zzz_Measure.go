@@ -38,7 +38,7 @@ func MeasureArrayToJSArray(array []*Measure) []interface{} {
 
 // NewMeasure returns a new Measure object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure
 func (gui *GUI) NewMeasure(left float64, top float64, width float64, height float64) *Measure {
 
 	args := make([]interface{}, 0, 4+0)
@@ -54,7 +54,7 @@ func (gui *GUI) NewMeasure(left float64, top float64, width float64, height floa
 
 // CombineToRef calls the CombineToRef method on the Measure object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#combinetoref
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#combinetoref
 func (m *Measure) CombineToRef(a *Measure, b *Measure, result *Measure) {
 
 	args := make([]interface{}, 0, 3+0)
@@ -82,7 +82,7 @@ func (m *Measure) CombineToRef(a *Measure, b *Measure, result *Measure) {
 
 // CopyFrom calls the CopyFrom method on the Measure object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#copyfrom
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#copyfrom
 func (m *Measure) CopyFrom(other *Measure) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -98,7 +98,7 @@ func (m *Measure) CopyFrom(other *Measure) {
 
 // CopyFromFloats calls the CopyFromFloats method on the Measure object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#copyfromfloats
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#copyfromfloats
 func (m *Measure) CopyFromFloats(left float64, top float64, width float64, height float64) {
 
 	args := make([]interface{}, 0, 4+0)
@@ -116,7 +116,7 @@ func (m *Measure) CopyFromFloats(left float64, top float64, width float64, heigh
 
 // Empty calls the Empty method on the Measure object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#empty
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#empty
 func (m *Measure) Empty() *Measure {
 
 	retVal := m.p.Call("Empty")
@@ -125,7 +125,7 @@ func (m *Measure) Empty() *Measure {
 
 // IsEqualsTo calls the IsEqualsTo method on the Measure object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#isequalsto
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#isequalsto
 func (m *Measure) IsEqualsTo(other *Measure) bool {
 
 	args := make([]interface{}, 0, 1+0)
@@ -142,7 +142,7 @@ func (m *Measure) IsEqualsTo(other *Measure) bool {
 
 // TransformToRef calls the TransformToRef method on the Measure object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#transformtoref
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#transformtoref
 func (m *Measure) TransformToRef(transform *Matrix2D, result *Measure) {
 
 	args := make([]interface{}, 0, 2+0)
@@ -164,7 +164,7 @@ func (m *Measure) TransformToRef(transform *Matrix2D, result *Measure) {
 
 // Height returns the Height property of class Measure.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#height
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#height
 func (m *Measure) Height() float64 {
 	retVal := m.p.Get("height")
 	return retVal.Float()
@@ -172,7 +172,7 @@ func (m *Measure) Height() float64 {
 
 // SetHeight sets the Height property of class Measure.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#height
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#height
 func (m *Measure) SetHeight(height float64) *Measure {
 	m.p.Set("height", height)
 	return m
@@ -180,7 +180,7 @@ func (m *Measure) SetHeight(height float64) *Measure {
 
 // Left returns the Left property of class Measure.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#left
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#left
 func (m *Measure) Left() float64 {
 	retVal := m.p.Get("left")
 	return retVal.Float()
@@ -188,7 +188,7 @@ func (m *Measure) Left() float64 {
 
 // SetLeft sets the Left property of class Measure.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#left
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#left
 func (m *Measure) SetLeft(left float64) *Measure {
 	m.p.Set("left", left)
 	return m
@@ -196,7 +196,7 @@ func (m *Measure) SetLeft(left float64) *Measure {
 
 // Top returns the Top property of class Measure.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#top
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#top
 func (m *Measure) Top() float64 {
 	retVal := m.p.Get("top")
 	return retVal.Float()
@@ -204,7 +204,7 @@ func (m *Measure) Top() float64 {
 
 // SetTop sets the Top property of class Measure.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#top
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#top
 func (m *Measure) SetTop(top float64) *Measure {
 	m.p.Set("top", top)
 	return m
@@ -212,7 +212,7 @@ func (m *Measure) SetTop(top float64) *Measure {
 
 // Width returns the Width property of class Measure.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#width
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#width
 func (m *Measure) Width() float64 {
 	retVal := m.p.Get("width")
 	return retVal.Float()
@@ -220,7 +220,7 @@ func (m *Measure) Width() float64 {
 
 // SetWidth sets the Width property of class Measure.
 //
-// https://doc.babylonjs.com/api/classes/babylon.measure#width
+// https://doc.babylonjs.com/api/classes/babylon.gui.measure#width
 func (m *Measure) SetWidth(width float64) *Measure {
 	m.p.Set("width", width)
 	return m

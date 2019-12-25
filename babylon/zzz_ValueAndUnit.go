@@ -44,7 +44,7 @@ type NewValueAndUnitOpts struct {
 
 // NewValueAndUnit returns a new ValueAndUnit object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit
 func (gui *GUI) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *ValueAndUnit {
 	if opts == nil {
 		opts = &NewValueAndUnitOpts{}
@@ -71,7 +71,7 @@ func (gui *GUI) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *Value
 
 // FromString calls the FromString method on the ValueAndUnit object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#fromstring
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#fromstring
 func (v *ValueAndUnit) FromString(source string) bool {
 
 	args := make([]interface{}, 0, 1+0)
@@ -84,7 +84,7 @@ func (v *ValueAndUnit) FromString(source string) bool {
 
 // GetValue calls the GetValue method on the ValueAndUnit object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#getvalue
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#getvalue
 func (v *ValueAndUnit) GetValue(host *AdvancedDynamicTexture) float64 {
 
 	args := make([]interface{}, 0, 1+0)
@@ -101,7 +101,7 @@ func (v *ValueAndUnit) GetValue(host *AdvancedDynamicTexture) float64 {
 
 // GetValueInPixel calls the GetValueInPixel method on the ValueAndUnit object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#getvalueinpixel
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#getvalueinpixel
 func (v *ValueAndUnit) GetValueInPixel(host *AdvancedDynamicTexture, refValue float64) float64 {
 
 	args := make([]interface{}, 0, 2+0)
@@ -125,7 +125,7 @@ type ValueAndUnitToStringOpts struct {
 
 // ToString calls the ToString method on the ValueAndUnit object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#tostring
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#tostring
 func (v *ValueAndUnit) ToString(host *AdvancedDynamicTexture, opts *ValueAndUnitToStringOpts) string {
 	if opts == nil {
 		opts = &ValueAndUnitToStringOpts{}
@@ -156,7 +156,7 @@ type ValueAndUnitUpdateInPlaceOpts struct {
 
 // UpdateInPlace calls the UpdateInPlace method on the ValueAndUnit object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#updateinplace
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#updateinplace
 func (v *ValueAndUnit) UpdateInPlace(value float64, opts *ValueAndUnitUpdateInPlaceOpts) *ValueAndUnit {
 	if opts == nil {
 		opts = &ValueAndUnitUpdateInPlaceOpts{}
@@ -178,7 +178,7 @@ func (v *ValueAndUnit) UpdateInPlace(value float64, opts *ValueAndUnitUpdateInPl
 
 // IgnoreAdaptiveScaling returns the IgnoreAdaptiveScaling property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ignoreadaptivescaling
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#ignoreadaptivescaling
 func (v *ValueAndUnit) IgnoreAdaptiveScaling() bool {
 	retVal := v.p.Get("ignoreAdaptiveScaling")
 	return retVal.Bool()
@@ -186,7 +186,7 @@ func (v *ValueAndUnit) IgnoreAdaptiveScaling() bool {
 
 // SetIgnoreAdaptiveScaling sets the IgnoreAdaptiveScaling property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ignoreadaptivescaling
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#ignoreadaptivescaling
 func (v *ValueAndUnit) SetIgnoreAdaptiveScaling(ignoreAdaptiveScaling bool) *ValueAndUnit {
 	v.p.Set("ignoreAdaptiveScaling", ignoreAdaptiveScaling)
 	return v
@@ -194,7 +194,7 @@ func (v *ValueAndUnit) SetIgnoreAdaptiveScaling(ignoreAdaptiveScaling bool) *Val
 
 // InternalValue returns the InternalValue property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#internalvalue
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#internalvalue
 func (v *ValueAndUnit) InternalValue() float64 {
 	retVal := v.p.Get("internalValue")
 	return retVal.Float()
@@ -202,7 +202,7 @@ func (v *ValueAndUnit) InternalValue() float64 {
 
 // SetInternalValue sets the InternalValue property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#internalvalue
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#internalvalue
 func (v *ValueAndUnit) SetInternalValue(internalValue float64) *ValueAndUnit {
 	v.p.Set("internalValue", internalValue)
 	return v
@@ -210,7 +210,7 @@ func (v *ValueAndUnit) SetInternalValue(internalValue float64) *ValueAndUnit {
 
 // IsPercentage returns the IsPercentage property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ispercentage
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#ispercentage
 func (v *ValueAndUnit) IsPercentage() bool {
 	retVal := v.p.Get("isPercentage")
 	return retVal.Bool()
@@ -218,7 +218,7 @@ func (v *ValueAndUnit) IsPercentage() bool {
 
 // SetIsPercentage sets the IsPercentage property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ispercentage
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#ispercentage
 func (v *ValueAndUnit) SetIsPercentage(isPercentage bool) *ValueAndUnit {
 	v.p.Set("isPercentage", isPercentage)
 	return v
@@ -226,7 +226,7 @@ func (v *ValueAndUnit) SetIsPercentage(isPercentage bool) *ValueAndUnit {
 
 // IsPixel returns the IsPixel property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ispixel
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#ispixel
 func (v *ValueAndUnit) IsPixel() bool {
 	retVal := v.p.Get("isPixel")
 	return retVal.Bool()
@@ -234,7 +234,7 @@ func (v *ValueAndUnit) IsPixel() bool {
 
 // SetIsPixel sets the IsPixel property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ispixel
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#ispixel
 func (v *ValueAndUnit) SetIsPixel(isPixel bool) *ValueAndUnit {
 	v.p.Set("isPixel", isPixel)
 	return v
@@ -242,7 +242,7 @@ func (v *ValueAndUnit) SetIsPixel(isPixel bool) *ValueAndUnit {
 
 // NegativeValueAllowed returns the NegativeValueAllowed property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#negativevalueallowed
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#negativevalueallowed
 func (v *ValueAndUnit) NegativeValueAllowed() bool {
 	retVal := v.p.Get("negativeValueAllowed")
 	return retVal.Bool()
@@ -250,7 +250,7 @@ func (v *ValueAndUnit) NegativeValueAllowed() bool {
 
 // SetNegativeValueAllowed sets the NegativeValueAllowed property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#negativevalueallowed
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#negativevalueallowed
 func (v *ValueAndUnit) SetNegativeValueAllowed(negativeValueAllowed bool) *ValueAndUnit {
 	v.p.Set("negativeValueAllowed", negativeValueAllowed)
 	return v
@@ -258,7 +258,7 @@ func (v *ValueAndUnit) SetNegativeValueAllowed(negativeValueAllowed bool) *Value
 
 // UNITMODE_PERCENTAGE returns the UNITMODE_PERCENTAGE property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unitmode_percentage
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#unitmode_percentage
 func (v *ValueAndUnit) UNITMODE_PERCENTAGE() float64 {
 	retVal := v.p.Get("UNITMODE_PERCENTAGE")
 	return retVal.Float()
@@ -266,7 +266,7 @@ func (v *ValueAndUnit) UNITMODE_PERCENTAGE() float64 {
 
 // SetUNITMODE_PERCENTAGE sets the UNITMODE_PERCENTAGE property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unitmode_percentage
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#unitmode_percentage
 func (v *ValueAndUnit) SetUNITMODE_PERCENTAGE(UNITMODE_PERCENTAGE float64) *ValueAndUnit {
 	v.p.Set("UNITMODE_PERCENTAGE", UNITMODE_PERCENTAGE)
 	return v
@@ -274,7 +274,7 @@ func (v *ValueAndUnit) SetUNITMODE_PERCENTAGE(UNITMODE_PERCENTAGE float64) *Valu
 
 // UNITMODE_PIXEL returns the UNITMODE_PIXEL property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unitmode_pixel
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#unitmode_pixel
 func (v *ValueAndUnit) UNITMODE_PIXEL() float64 {
 	retVal := v.p.Get("UNITMODE_PIXEL")
 	return retVal.Float()
@@ -282,7 +282,7 @@ func (v *ValueAndUnit) UNITMODE_PIXEL() float64 {
 
 // SetUNITMODE_PIXEL sets the UNITMODE_PIXEL property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unitmode_pixel
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#unitmode_pixel
 func (v *ValueAndUnit) SetUNITMODE_PIXEL(UNITMODE_PIXEL float64) *ValueAndUnit {
 	v.p.Set("UNITMODE_PIXEL", UNITMODE_PIXEL)
 	return v
@@ -290,7 +290,7 @@ func (v *ValueAndUnit) SetUNITMODE_PIXEL(UNITMODE_PIXEL float64) *ValueAndUnit {
 
 // Unit returns the Unit property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unit
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#unit
 func (v *ValueAndUnit) Unit() float64 {
 	retVal := v.p.Get("unit")
 	return retVal.Float()
@@ -298,7 +298,7 @@ func (v *ValueAndUnit) Unit() float64 {
 
 // SetUnit sets the Unit property of class ValueAndUnit.
 //
-// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unit
+// https://doc.babylonjs.com/api/classes/babylon.gui.valueandunit#unit
 func (v *ValueAndUnit) SetUnit(unit float64) *ValueAndUnit {
 	v.p.Set("unit", unit)
 	return v

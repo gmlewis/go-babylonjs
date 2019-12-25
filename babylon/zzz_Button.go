@@ -43,7 +43,7 @@ type NewButtonOpts struct {
 
 // NewButton returns a new Button object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button
+// https://doc.babylonjs.com/api/classes/babylon.gui.button
 func (gui *GUI) NewButton(opts *NewButtonOpts) *Button {
 	if opts == nil {
 		opts = &NewButtonOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewButton(opts *NewButtonOpts) *Button {
 
 // CreateImageButton calls the CreateImageButton method on the Button object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#createimagebutton
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#createimagebutton
 func (b *Button) CreateImageButton(name string, text string, imageUrl string) *Button {
 
 	args := make([]interface{}, 0, 3+0)
@@ -80,7 +80,7 @@ func (b *Button) CreateImageButton(name string, text string, imageUrl string) *B
 
 // CreateImageOnlyButton calls the CreateImageOnlyButton method on the Button object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#createimageonlybutton
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#createimageonlybutton
 func (b *Button) CreateImageOnlyButton(name string, imageUrl string) *Button {
 
 	args := make([]interface{}, 0, 2+0)
@@ -95,7 +95,7 @@ func (b *Button) CreateImageOnlyButton(name string, imageUrl string) *Button {
 
 // CreateImageWithCenterTextButton calls the CreateImageWithCenterTextButton method on the Button object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#createimagewithcentertextbutton
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#createimagewithcentertextbutton
 func (b *Button) CreateImageWithCenterTextButton(name string, text string, imageUrl string) *Button {
 
 	args := make([]interface{}, 0, 3+0)
@@ -112,7 +112,7 @@ func (b *Button) CreateImageWithCenterTextButton(name string, text string, image
 
 // CreateSimpleButton calls the CreateSimpleButton method on the Button object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#createsimplebutton
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#createsimplebutton
 func (b *Button) CreateSimpleButton(name string, text string) *Button {
 
 	args := make([]interface{}, 0, 2+0)
@@ -127,7 +127,7 @@ func (b *Button) CreateSimpleButton(name string, text string) *Button {
 
 // DelegatePickingToChildren returns the DelegatePickingToChildren property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#delegatepickingtochildren
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#delegatepickingtochildren
 func (b *Button) DelegatePickingToChildren() bool {
 	retVal := b.p.Get("delegatePickingToChildren")
 	return retVal.Bool()
@@ -135,7 +135,7 @@ func (b *Button) DelegatePickingToChildren() bool {
 
 // SetDelegatePickingToChildren sets the DelegatePickingToChildren property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#delegatepickingtochildren
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#delegatepickingtochildren
 func (b *Button) SetDelegatePickingToChildren(delegatePickingToChildren bool) *Button {
 	b.p.Set("delegatePickingToChildren", delegatePickingToChildren)
 	return b
@@ -143,7 +143,7 @@ func (b *Button) SetDelegatePickingToChildren(delegatePickingToChildren bool) *B
 
 // Image returns the Image property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#image
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#image
 func (b *Button) Image() *Image {
 	retVal := b.p.Get("image")
 	return ImageFromJSObject(retVal, b.ctx)
@@ -151,7 +151,7 @@ func (b *Button) Image() *Image {
 
 // SetImage sets the Image property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#image
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#image
 func (b *Button) SetImage(image *Image) *Button {
 	b.p.Set("image", image.JSObject())
 	return b
@@ -159,7 +159,7 @@ func (b *Button) SetImage(image *Image) *Button {
 
 // Name returns the Name property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#name
 func (b *Button) Name() string {
 	retVal := b.p.Get("name")
 	return retVal.String()
@@ -167,7 +167,7 @@ func (b *Button) Name() string {
 
 // SetName sets the Name property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#name
 func (b *Button) SetName(name string) *Button {
 	b.p.Set("name", name)
 	return b
@@ -175,7 +175,7 @@ func (b *Button) SetName(name string) *Button {
 
 // PointerDownAnimation returns the PointerDownAnimation property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#pointerdownanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#pointerdownanimation
 func (b *Button) PointerDownAnimation() js.Value {
 	retVal := b.p.Get("pointerDownAnimation")
 	return retVal
@@ -183,7 +183,7 @@ func (b *Button) PointerDownAnimation() js.Value {
 
 // SetPointerDownAnimation sets the PointerDownAnimation property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#pointerdownanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#pointerdownanimation
 func (b *Button) SetPointerDownAnimation(pointerDownAnimation JSFunc) *Button {
 	b.p.Set("pointerDownAnimation", js.FuncOf(pointerDownAnimation))
 	return b
@@ -191,7 +191,7 @@ func (b *Button) SetPointerDownAnimation(pointerDownAnimation JSFunc) *Button {
 
 // PointerEnterAnimation returns the PointerEnterAnimation property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#pointerenteranimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#pointerenteranimation
 func (b *Button) PointerEnterAnimation() js.Value {
 	retVal := b.p.Get("pointerEnterAnimation")
 	return retVal
@@ -199,7 +199,7 @@ func (b *Button) PointerEnterAnimation() js.Value {
 
 // SetPointerEnterAnimation sets the PointerEnterAnimation property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#pointerenteranimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#pointerenteranimation
 func (b *Button) SetPointerEnterAnimation(pointerEnterAnimation JSFunc) *Button {
 	b.p.Set("pointerEnterAnimation", js.FuncOf(pointerEnterAnimation))
 	return b
@@ -207,7 +207,7 @@ func (b *Button) SetPointerEnterAnimation(pointerEnterAnimation JSFunc) *Button 
 
 // PointerOutAnimation returns the PointerOutAnimation property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#pointeroutanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#pointeroutanimation
 func (b *Button) PointerOutAnimation() js.Value {
 	retVal := b.p.Get("pointerOutAnimation")
 	return retVal
@@ -215,7 +215,7 @@ func (b *Button) PointerOutAnimation() js.Value {
 
 // SetPointerOutAnimation sets the PointerOutAnimation property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#pointeroutanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#pointeroutanimation
 func (b *Button) SetPointerOutAnimation(pointerOutAnimation JSFunc) *Button {
 	b.p.Set("pointerOutAnimation", js.FuncOf(pointerOutAnimation))
 	return b
@@ -223,7 +223,7 @@ func (b *Button) SetPointerOutAnimation(pointerOutAnimation JSFunc) *Button {
 
 // PointerUpAnimation returns the PointerUpAnimation property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#pointerupanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#pointerupanimation
 func (b *Button) PointerUpAnimation() js.Value {
 	retVal := b.p.Get("pointerUpAnimation")
 	return retVal
@@ -231,7 +231,7 @@ func (b *Button) PointerUpAnimation() js.Value {
 
 // SetPointerUpAnimation sets the PointerUpAnimation property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#pointerupanimation
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#pointerupanimation
 func (b *Button) SetPointerUpAnimation(pointerUpAnimation JSFunc) *Button {
 	b.p.Set("pointerUpAnimation", js.FuncOf(pointerUpAnimation))
 	return b
@@ -239,7 +239,7 @@ func (b *Button) SetPointerUpAnimation(pointerUpAnimation JSFunc) *Button {
 
 // TextBlock returns the TextBlock property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#textblock
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#textblock
 func (b *Button) TextBlock() *TextBlock {
 	retVal := b.p.Get("textBlock")
 	return TextBlockFromJSObject(retVal, b.ctx)
@@ -247,7 +247,7 @@ func (b *Button) TextBlock() *TextBlock {
 
 // SetTextBlock sets the TextBlock property of class Button.
 //
-// https://doc.babylonjs.com/api/classes/babylon.button#textblock
+// https://doc.babylonjs.com/api/classes/babylon.gui.button#textblock
 func (b *Button) SetTextBlock(textBlock *TextBlock) *Button {
 	b.p.Set("textBlock", textBlock.JSObject())
 	return b

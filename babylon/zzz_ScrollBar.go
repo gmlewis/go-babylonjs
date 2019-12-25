@@ -43,7 +43,7 @@ type NewScrollBarOpts struct {
 
 // NewScrollBar returns a new ScrollBar object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollbar
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar
 func (gui *GUI) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
 	if opts == nil {
 		opts = &NewScrollBarOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
 
 // _draw calls the _draw method on the ScrollBar object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollbar#_draw
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar#_draw
 func (s *ScrollBar) _draw(context js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -75,7 +75,7 @@ func (s *ScrollBar) _draw(context js.Value) {
 
 // _onPointerDown calls the _onPointerDown method on the ScrollBar object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollbar#_onpointerdown
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar#_onpointerdown
 func (s *ScrollBar) _onPointerDown(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64) bool {
 
 	args := make([]interface{}, 0, 4+0)
@@ -102,7 +102,7 @@ func (s *ScrollBar) _onPointerDown(target *Control, coordinates *Vector2, pointe
 
 // Background returns the Background property of class ScrollBar.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollbar#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar#background
 func (s *ScrollBar) Background() string {
 	retVal := s.p.Get("background")
 	return retVal.String()
@@ -110,7 +110,7 @@ func (s *ScrollBar) Background() string {
 
 // SetBackground sets the Background property of class ScrollBar.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollbar#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar#background
 func (s *ScrollBar) SetBackground(background string) *ScrollBar {
 	s.p.Set("background", background)
 	return s
@@ -118,7 +118,7 @@ func (s *ScrollBar) SetBackground(background string) *ScrollBar {
 
 // BorderColor returns the BorderColor property of class ScrollBar.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollbar#bordercolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar#bordercolor
 func (s *ScrollBar) BorderColor() string {
 	retVal := s.p.Get("borderColor")
 	return retVal.String()
@@ -126,7 +126,7 @@ func (s *ScrollBar) BorderColor() string {
 
 // SetBorderColor sets the BorderColor property of class ScrollBar.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollbar#bordercolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar#bordercolor
 func (s *ScrollBar) SetBorderColor(borderColor string) *ScrollBar {
 	s.p.Set("borderColor", borderColor)
 	return s
@@ -134,7 +134,7 @@ func (s *ScrollBar) SetBorderColor(borderColor string) *ScrollBar {
 
 // Name returns the Name property of class ScrollBar.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollbar#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar#name
 func (s *ScrollBar) Name() string {
 	retVal := s.p.Get("name")
 	return retVal.String()
@@ -142,7 +142,7 @@ func (s *ScrollBar) Name() string {
 
 // SetName sets the Name property of class ScrollBar.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scrollbar#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.scrollbar#name
 func (s *ScrollBar) SetName(name string) *ScrollBar {
 	s.p.Set("name", name)
 	return s

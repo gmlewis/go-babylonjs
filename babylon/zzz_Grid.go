@@ -43,7 +43,7 @@ type NewGridOpts struct {
 
 // NewGrid returns a new Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid
 func (gui *GUI) NewGrid(opts *NewGridOpts) *Grid {
 	if opts == nil {
 		opts = &NewGridOpts{}
@@ -68,7 +68,7 @@ type GridAddColumnDefinitionOpts struct {
 
 // AddColumnDefinition calls the AddColumnDefinition method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#addcolumndefinition
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#addcolumndefinition
 func (g *Grid) AddColumnDefinition(width float64, opts *GridAddColumnDefinitionOpts) *Grid {
 	if opts == nil {
 		opts = &GridAddColumnDefinitionOpts{}
@@ -96,7 +96,7 @@ type GridAddControlOpts struct {
 
 // AddControl calls the AddControl method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#addcontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#addcontrol
 func (g *Grid) AddControl(control *Control, opts *GridAddControlOpts) *Grid {
 	if opts == nil {
 		opts = &GridAddControlOpts{}
@@ -132,7 +132,7 @@ type GridAddRowDefinitionOpts struct {
 
 // AddRowDefinition calls the AddRowDefinition method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#addrowdefinition
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#addrowdefinition
 func (g *Grid) AddRowDefinition(height float64, opts *GridAddRowDefinitionOpts) *Grid {
 	if opts == nil {
 		opts = &GridAddRowDefinitionOpts{}
@@ -154,7 +154,7 @@ func (g *Grid) AddRowDefinition(height float64, opts *GridAddRowDefinitionOpts) 
 
 // Dispose calls the Dispose method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#dispose
 func (g *Grid) Dispose() {
 
 	g.p.Call("dispose")
@@ -162,7 +162,7 @@ func (g *Grid) Dispose() {
 
 // GetChildCellInfo calls the GetChildCellInfo method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#getchildcellinfo
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#getchildcellinfo
 func (g *Grid) GetChildCellInfo(child *Control) string {
 
 	args := make([]interface{}, 0, 1+0)
@@ -179,7 +179,7 @@ func (g *Grid) GetChildCellInfo(child *Control) string {
 
 // GetChildrenAt calls the GetChildrenAt method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#getchildrenat
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#getchildrenat
 func (g *Grid) GetChildrenAt(row float64, column float64) []*Control {
 
 	args := make([]interface{}, 0, 2+0)
@@ -198,7 +198,7 @@ func (g *Grid) GetChildrenAt(row float64, column float64) []*Control {
 
 // GetColumnDefinition calls the GetColumnDefinition method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#getcolumndefinition
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#getcolumndefinition
 func (g *Grid) GetColumnDefinition(index float64) *ValueAndUnit {
 
 	args := make([]interface{}, 0, 1+0)
@@ -211,7 +211,7 @@ func (g *Grid) GetColumnDefinition(index float64) *ValueAndUnit {
 
 // GetRowDefinition calls the GetRowDefinition method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#getrowdefinition
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#getrowdefinition
 func (g *Grid) GetRowDefinition(index float64) *ValueAndUnit {
 
 	args := make([]interface{}, 0, 1+0)
@@ -224,7 +224,7 @@ func (g *Grid) GetRowDefinition(index float64) *ValueAndUnit {
 
 // RemoveColumnDefinition calls the RemoveColumnDefinition method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#removecolumndefinition
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#removecolumndefinition
 func (g *Grid) RemoveColumnDefinition(index float64) *Grid {
 
 	args := make([]interface{}, 0, 1+0)
@@ -237,7 +237,7 @@ func (g *Grid) RemoveColumnDefinition(index float64) *Grid {
 
 // RemoveControl calls the RemoveControl method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#removecontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#removecontrol
 func (g *Grid) RemoveControl(control *Control) *Container {
 
 	args := make([]interface{}, 0, 1+0)
@@ -254,7 +254,7 @@ func (g *Grid) RemoveControl(control *Control) *Container {
 
 // RemoveRowDefinition calls the RemoveRowDefinition method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#removerowdefinition
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#removerowdefinition
 func (g *Grid) RemoveRowDefinition(index float64) *Grid {
 
 	args := make([]interface{}, 0, 1+0)
@@ -272,7 +272,7 @@ type GridSetColumnDefinitionOpts struct {
 
 // SetColumnDefinition calls the SetColumnDefinition method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#setcolumndefinition
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#setcolumndefinition
 func (g *Grid) SetColumnDefinition(index float64, width float64, opts *GridSetColumnDefinitionOpts) *Grid {
 	if opts == nil {
 		opts = &GridSetColumnDefinitionOpts{}
@@ -301,7 +301,7 @@ type GridSetRowDefinitionOpts struct {
 
 // SetRowDefinition calls the SetRowDefinition method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#setrowdefinition
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#setrowdefinition
 func (g *Grid) SetRowDefinition(index float64, height float64, opts *GridSetRowDefinitionOpts) *Grid {
 	if opts == nil {
 		opts = &GridSetRowDefinitionOpts{}
@@ -325,7 +325,7 @@ func (g *Grid) SetRowDefinition(index float64, height float64, opts *GridSetRowD
 
 // _flagDescendantsAsMatrixDirty calls the _flagDescendantsAsMatrixDirty method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#_flagdescendantsasmatrixdirty
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#_flagdescendantsasmatrixdirty
 func (g *Grid) _flagDescendantsAsMatrixDirty() {
 
 	g.p.Call("_flagDescendantsAsMatrixDirty")
@@ -333,7 +333,7 @@ func (g *Grid) _flagDescendantsAsMatrixDirty() {
 
 // _renderHighlightSpecific calls the _renderHighlightSpecific method on the Grid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#_renderhighlightspecific
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#_renderhighlightspecific
 func (g *Grid) _renderHighlightSpecific(context js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -345,7 +345,7 @@ func (g *Grid) _renderHighlightSpecific(context js.Value) {
 
 // Cells returns the Cells property of class Grid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#cells
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#cells
 func (g *Grid) Cells() js.Value {
 	retVal := g.p.Get("cells")
 	return retVal
@@ -353,7 +353,7 @@ func (g *Grid) Cells() js.Value {
 
 // SetCells sets the Cells property of class Grid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#cells
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#cells
 func (g *Grid) SetCells(cells js.Value) *Grid {
 	g.p.Set("cells", cells)
 	return g
@@ -361,7 +361,7 @@ func (g *Grid) SetCells(cells js.Value) *Grid {
 
 // Children returns the Children property of class Grid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#children
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#children
 func (g *Grid) Children() []*Control {
 	retVal := g.p.Get("children")
 	result := []*Control{}
@@ -373,7 +373,7 @@ func (g *Grid) Children() []*Control {
 
 // SetChildren sets the Children property of class Grid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#children
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#children
 func (g *Grid) SetChildren(children []*Control) *Grid {
 	g.p.Set("children", children)
 	return g
@@ -381,7 +381,7 @@ func (g *Grid) SetChildren(children []*Control) *Grid {
 
 // ColumnCount returns the ColumnCount property of class Grid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#columncount
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#columncount
 func (g *Grid) ColumnCount() float64 {
 	retVal := g.p.Get("columnCount")
 	return retVal.Float()
@@ -389,7 +389,7 @@ func (g *Grid) ColumnCount() float64 {
 
 // SetColumnCount sets the ColumnCount property of class Grid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#columncount
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#columncount
 func (g *Grid) SetColumnCount(columnCount float64) *Grid {
 	g.p.Set("columnCount", columnCount)
 	return g
@@ -397,7 +397,7 @@ func (g *Grid) SetColumnCount(columnCount float64) *Grid {
 
 // Name returns the Name property of class Grid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#name
 func (g *Grid) Name() string {
 	retVal := g.p.Get("name")
 	return retVal.String()
@@ -405,7 +405,7 @@ func (g *Grid) Name() string {
 
 // SetName sets the Name property of class Grid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#name
 func (g *Grid) SetName(name string) *Grid {
 	g.p.Set("name", name)
 	return g
@@ -413,7 +413,7 @@ func (g *Grid) SetName(name string) *Grid {
 
 // RowCount returns the RowCount property of class Grid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#rowcount
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#rowcount
 func (g *Grid) RowCount() float64 {
 	retVal := g.p.Get("rowCount")
 	return retVal.Float()
@@ -421,7 +421,7 @@ func (g *Grid) RowCount() float64 {
 
 // SetRowCount sets the RowCount property of class Grid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.grid#rowcount
+// https://doc.babylonjs.com/api/classes/babylon.gui.grid#rowcount
 func (g *Grid) SetRowCount(rowCount float64) *Grid {
 	g.p.Set("rowCount", rowCount)
 	return g

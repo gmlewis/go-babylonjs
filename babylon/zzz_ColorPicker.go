@@ -43,7 +43,7 @@ type NewColorPickerOpts struct {
 
 // NewColorPicker returns a new ColorPicker object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker
 func (gui *GUI) NewColorPicker(opts *NewColorPickerOpts) *ColorPicker {
 	if opts == nil {
 		opts = &NewColorPickerOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewColorPicker(opts *NewColorPickerOpts) *ColorPicker {
 
 // ShowPickerDialogAsync calls the ShowPickerDialogAsync method on the ColorPicker object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#showpickerdialogasync
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#showpickerdialogasync
 func (c *ColorPicker) ShowPickerDialogAsync(advancedTexture *AdvancedDynamicTexture, options js.Value) *Promise {
 
 	args := make([]interface{}, 0, 2+0)
@@ -82,7 +82,7 @@ func (c *ColorPicker) ShowPickerDialogAsync(advancedTexture *AdvancedDynamicText
 
 // _onPointerDown calls the _onPointerDown method on the ColorPicker object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#_onpointerdown
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#_onpointerdown
 func (c *ColorPicker) _onPointerDown(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64) bool {
 
 	args := make([]interface{}, 0, 4+0)
@@ -109,7 +109,7 @@ func (c *ColorPicker) _onPointerDown(target *Control, coordinates *Vector2, poin
 
 // _onPointerMove calls the _onPointerMove method on the ColorPicker object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#_onpointermove
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#_onpointermove
 func (c *ColorPicker) _onPointerMove(target *Control, coordinates *Vector2, pointerId float64) {
 
 	args := make([]interface{}, 0, 3+0)
@@ -133,7 +133,7 @@ func (c *ColorPicker) _onPointerMove(target *Control, coordinates *Vector2, poin
 
 // _onPointerUp calls the _onPointerUp method on the ColorPicker object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#_onpointerup
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#_onpointerup
 func (c *ColorPicker) _onPointerUp(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64, notifyClick bool) {
 
 	args := make([]interface{}, 0, 5+0)
@@ -161,7 +161,7 @@ func (c *ColorPicker) _onPointerUp(target *Control, coordinates *Vector2, pointe
 
 // Height returns the Height property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#height
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#height
 func (c *ColorPicker) Height() string {
 	retVal := c.p.Get("height")
 	return retVal.String()
@@ -169,7 +169,7 @@ func (c *ColorPicker) Height() string {
 
 // SetHeight sets the Height property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#height
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#height
 func (c *ColorPicker) SetHeight(height string) *ColorPicker {
 	c.p.Set("height", height)
 	return c
@@ -177,7 +177,7 @@ func (c *ColorPicker) SetHeight(height string) *ColorPicker {
 
 // Name returns the Name property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#name
 func (c *ColorPicker) Name() string {
 	retVal := c.p.Get("name")
 	return retVal.String()
@@ -185,7 +185,7 @@ func (c *ColorPicker) Name() string {
 
 // SetName sets the Name property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#name
 func (c *ColorPicker) SetName(name string) *ColorPicker {
 	c.p.Set("name", name)
 	return c
@@ -193,7 +193,7 @@ func (c *ColorPicker) SetName(name string) *ColorPicker {
 
 // OnValueChangedObservable returns the OnValueChangedObservable property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#onvaluechangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#onvaluechangedobservable
 func (c *ColorPicker) OnValueChangedObservable() *Observable {
 	retVal := c.p.Get("onValueChangedObservable")
 	return ObservableFromJSObject(retVal, c.ctx)
@@ -201,7 +201,7 @@ func (c *ColorPicker) OnValueChangedObservable() *Observable {
 
 // SetOnValueChangedObservable sets the OnValueChangedObservable property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#onvaluechangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#onvaluechangedobservable
 func (c *ColorPicker) SetOnValueChangedObservable(onValueChangedObservable *Observable) *ColorPicker {
 	c.p.Set("onValueChangedObservable", onValueChangedObservable.JSObject())
 	return c
@@ -209,7 +209,7 @@ func (c *ColorPicker) SetOnValueChangedObservable(onValueChangedObservable *Obse
 
 // Size returns the Size property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#size
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#size
 func (c *ColorPicker) Size() string {
 	retVal := c.p.Get("size")
 	return retVal.String()
@@ -217,7 +217,7 @@ func (c *ColorPicker) Size() string {
 
 // SetSize sets the Size property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#size
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#size
 func (c *ColorPicker) SetSize(size string) *ColorPicker {
 	c.p.Set("size", size)
 	return c
@@ -225,7 +225,7 @@ func (c *ColorPicker) SetSize(size string) *ColorPicker {
 
 // Value returns the Value property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#value
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#value
 func (c *ColorPicker) Value() *Color3 {
 	retVal := c.p.Get("value")
 	return Color3FromJSObject(retVal, c.ctx)
@@ -233,7 +233,7 @@ func (c *ColorPicker) Value() *Color3 {
 
 // SetValue sets the Value property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#value
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#value
 func (c *ColorPicker) SetValue(value *Color3) *ColorPicker {
 	c.p.Set("value", value.JSObject())
 	return c
@@ -241,7 +241,7 @@ func (c *ColorPicker) SetValue(value *Color3) *ColorPicker {
 
 // Width returns the Width property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#width
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#width
 func (c *ColorPicker) Width() string {
 	retVal := c.p.Get("width")
 	return retVal.String()
@@ -249,7 +249,7 @@ func (c *ColorPicker) Width() string {
 
 // SetWidth sets the Width property of class ColorPicker.
 //
-// https://doc.babylonjs.com/api/classes/babylon.colorpicker#width
+// https://doc.babylonjs.com/api/classes/babylon.gui.colorpicker#width
 func (c *ColorPicker) SetWidth(width string) *ColorPicker {
 	c.p.Set("width", width)
 	return c

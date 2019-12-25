@@ -43,7 +43,7 @@ type NewStackPanel3DOpts struct {
 
 // NewStackPanel3D returns a new StackPanel3D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel3d
 func (gui *GUI) NewStackPanel3D(opts *NewStackPanel3DOpts) *StackPanel3D {
 	if opts == nil {
 		opts = &NewStackPanel3DOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewStackPanel3D(opts *NewStackPanel3DOpts) *StackPanel3D {
 
 // IsVertical returns the IsVertical property of class StackPanel3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#isvertical
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel3d#isvertical
 func (s *StackPanel3D) IsVertical() bool {
 	retVal := s.p.Get("isVertical")
 	return retVal.Bool()
@@ -71,7 +71,7 @@ func (s *StackPanel3D) IsVertical() bool {
 
 // SetIsVertical sets the IsVertical property of class StackPanel3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#isvertical
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel3d#isvertical
 func (s *StackPanel3D) SetIsVertical(isVertical bool) *StackPanel3D {
 	s.p.Set("isVertical", isVertical)
 	return s
@@ -79,7 +79,7 @@ func (s *StackPanel3D) SetIsVertical(isVertical bool) *StackPanel3D {
 
 // Margin returns the Margin property of class StackPanel3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#margin
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel3d#margin
 func (s *StackPanel3D) Margin() float64 {
 	retVal := s.p.Get("margin")
 	return retVal.Float()
@@ -87,7 +87,7 @@ func (s *StackPanel3D) Margin() float64 {
 
 // SetMargin sets the Margin property of class StackPanel3D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#margin
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel3d#margin
 func (s *StackPanel3D) SetMargin(margin float64) *StackPanel3D {
 	s.p.Set("margin", margin)
 	return s

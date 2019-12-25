@@ -39,7 +39,7 @@ func RadioGroupArrayToJSArray(array []*RadioGroup) []interface{} {
 
 // NewRadioGroup returns a new RadioGroup object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiogroup
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiogroup
 func (gui *GUI) NewRadioGroup(name string) *RadioGroup {
 
 	args := make([]interface{}, 0, 1+0)
@@ -58,7 +58,7 @@ type RadioGroupAddRadioOpts struct {
 
 // AddRadio calls the AddRadio method on the RadioGroup object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiogroup#addradio
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiogroup#addradio
 func (r *RadioGroup) AddRadio(label string, opts *RadioGroupAddRadioOpts) {
 	if opts == nil {
 		opts = &RadioGroupAddRadioOpts{}

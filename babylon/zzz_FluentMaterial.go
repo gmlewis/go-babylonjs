@@ -38,7 +38,7 @@ func FluentMaterialArrayToJSArray(array []*FluentMaterial) []interface{} {
 
 // NewFluentMaterial returns a new FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial
 func (gui *GUI) NewFluentMaterial(name string, scene *Scene) *FluentMaterial {
 
 	args := make([]interface{}, 0, 2+0)
@@ -52,7 +52,7 @@ func (gui *GUI) NewFluentMaterial(name string, scene *Scene) *FluentMaterial {
 
 // BindForSubMesh calls the BindForSubMesh method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#bindforsubmesh
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#bindforsubmesh
 func (f *FluentMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
 
 	args := make([]interface{}, 0, 3+0)
@@ -80,7 +80,7 @@ func (f *FluentMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubM
 
 // Clone calls the Clone method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#clone
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#clone
 func (f *FluentMaterial) Clone(name string) *FluentMaterial {
 
 	args := make([]interface{}, 0, 1+0)
@@ -98,7 +98,7 @@ type FluentMaterialDisposeOpts struct {
 
 // Dispose calls the Dispose method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#dispose
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#dispose
 func (f *FluentMaterial) Dispose(opts *FluentMaterialDisposeOpts) {
 	if opts == nil {
 		opts = &FluentMaterialDisposeOpts{}
@@ -117,7 +117,7 @@ func (f *FluentMaterial) Dispose(opts *FluentMaterialDisposeOpts) {
 
 // GetActiveTextures calls the GetActiveTextures method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getactivetextures
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#getactivetextures
 func (f *FluentMaterial) GetActiveTextures() []*BaseTexture {
 
 	retVal := f.p.Call("getActiveTextures")
@@ -130,7 +130,7 @@ func (f *FluentMaterial) GetActiveTextures() []*BaseTexture {
 
 // GetAlphaTestTexture calls the GetAlphaTestTexture method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getalphatesttexture
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#getalphatesttexture
 func (f *FluentMaterial) GetAlphaTestTexture() *BaseTexture {
 
 	retVal := f.p.Call("getAlphaTestTexture")
@@ -139,7 +139,7 @@ func (f *FluentMaterial) GetAlphaTestTexture() *BaseTexture {
 
 // GetClassName calls the GetClassName method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getclassname
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#getclassname
 func (f *FluentMaterial) GetClassName() string {
 
 	retVal := f.p.Call("getClassName")
@@ -148,7 +148,7 @@ func (f *FluentMaterial) GetClassName() string {
 
 // HasTexture calls the HasTexture method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hastexture
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#hastexture
 func (f *FluentMaterial) HasTexture(texture *BaseTexture) bool {
 
 	args := make([]interface{}, 0, 1+0)
@@ -170,7 +170,7 @@ type FluentMaterialIsReadyForSubMeshOpts struct {
 
 // IsReadyForSubMesh calls the IsReadyForSubMesh method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#isreadyforsubmesh
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#isreadyforsubmesh
 func (f *FluentMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *FluentMaterialIsReadyForSubMeshOpts) bool {
 	if opts == nil {
 		opts = &FluentMaterialIsReadyForSubMeshOpts{}
@@ -202,7 +202,7 @@ func (f *FluentMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh,
 
 // NeedAlphaBlending calls the NeedAlphaBlending method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#needalphablending
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#needalphablending
 func (f *FluentMaterial) NeedAlphaBlending() bool {
 
 	retVal := f.p.Call("needAlphaBlending")
@@ -211,7 +211,7 @@ func (f *FluentMaterial) NeedAlphaBlending() bool {
 
 // NeedAlphaTesting calls the NeedAlphaTesting method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#needalphatesting
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#needalphatesting
 func (f *FluentMaterial) NeedAlphaTesting() bool {
 
 	retVal := f.p.Call("needAlphaTesting")
@@ -220,7 +220,7 @@ func (f *FluentMaterial) NeedAlphaTesting() bool {
 
 // Parse calls the Parse method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#parse
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#parse
 func (f *FluentMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *FluentMaterial {
 
 	args := make([]interface{}, 0, 3+0)
@@ -245,7 +245,7 @@ func (f *FluentMaterial) Parse(source JSObject, scene *Scene, rootUrl string) *F
 
 // Serialize calls the Serialize method on the FluentMaterial object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#serialize
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#serialize
 func (f *FluentMaterial) Serialize() js.Value {
 
 	retVal := f.p.Call("serialize")
@@ -254,7 +254,7 @@ func (f *FluentMaterial) Serialize() js.Value {
 
 // AlbedoColor returns the AlbedoColor property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedocolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#albedocolor
 func (f *FluentMaterial) AlbedoColor() *Color3 {
 	retVal := f.p.Get("albedoColor")
 	return Color3FromJSObject(retVal, f.ctx)
@@ -262,7 +262,7 @@ func (f *FluentMaterial) AlbedoColor() *Color3 {
 
 // SetAlbedoColor sets the AlbedoColor property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedocolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#albedocolor
 func (f *FluentMaterial) SetAlbedoColor(albedoColor *Color3) *FluentMaterial {
 	f.p.Set("albedoColor", albedoColor.JSObject())
 	return f
@@ -270,7 +270,7 @@ func (f *FluentMaterial) SetAlbedoColor(albedoColor *Color3) *FluentMaterial {
 
 // AlbedoTexture returns the AlbedoTexture property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedotexture
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#albedotexture
 func (f *FluentMaterial) AlbedoTexture() *BaseTexture {
 	retVal := f.p.Get("albedoTexture")
 	return BaseTextureFromJSObject(retVal, f.ctx)
@@ -278,7 +278,7 @@ func (f *FluentMaterial) AlbedoTexture() *BaseTexture {
 
 // SetAlbedoTexture sets the AlbedoTexture property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedotexture
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#albedotexture
 func (f *FluentMaterial) SetAlbedoTexture(albedoTexture *BaseTexture) *FluentMaterial {
 	f.p.Set("albedoTexture", albedoTexture.JSObject())
 	return f
@@ -286,7 +286,7 @@ func (f *FluentMaterial) SetAlbedoTexture(albedoTexture *BaseTexture) *FluentMat
 
 // Alpha returns the Alpha property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#alpha
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#alpha
 func (f *FluentMaterial) Alpha() float64 {
 	retVal := f.p.Get("alpha")
 	return retVal.Float()
@@ -294,7 +294,7 @@ func (f *FluentMaterial) Alpha() float64 {
 
 // SetAlpha sets the Alpha property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#alpha
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#alpha
 func (f *FluentMaterial) SetAlpha(alpha float64) *FluentMaterial {
 	f.p.Set("alpha", alpha)
 	return f
@@ -302,7 +302,7 @@ func (f *FluentMaterial) SetAlpha(alpha float64) *FluentMaterial {
 
 // BorderMinValue returns the BorderMinValue property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderminvalue
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#borderminvalue
 func (f *FluentMaterial) BorderMinValue() float64 {
 	retVal := f.p.Get("borderMinValue")
 	return retVal.Float()
@@ -310,7 +310,7 @@ func (f *FluentMaterial) BorderMinValue() float64 {
 
 // SetBorderMinValue sets the BorderMinValue property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderminvalue
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#borderminvalue
 func (f *FluentMaterial) SetBorderMinValue(borderMinValue float64) *FluentMaterial {
 	f.p.Set("borderMinValue", borderMinValue)
 	return f
@@ -318,7 +318,7 @@ func (f *FluentMaterial) SetBorderMinValue(borderMinValue float64) *FluentMateri
 
 // BorderWidth returns the BorderWidth property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#borderwidth
 func (f *FluentMaterial) BorderWidth() float64 {
 	retVal := f.p.Get("borderWidth")
 	return retVal.Float()
@@ -326,7 +326,7 @@ func (f *FluentMaterial) BorderWidth() float64 {
 
 // SetBorderWidth sets the BorderWidth property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#borderwidth
 func (f *FluentMaterial) SetBorderWidth(borderWidth float64) *FluentMaterial {
 	f.p.Set("borderWidth", borderWidth)
 	return f
@@ -334,7 +334,7 @@ func (f *FluentMaterial) SetBorderWidth(borderWidth float64) *FluentMaterial {
 
 // EdgeSmoothingValue returns the EdgeSmoothingValue property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#edgesmoothingvalue
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#edgesmoothingvalue
 func (f *FluentMaterial) EdgeSmoothingValue() float64 {
 	retVal := f.p.Get("edgeSmoothingValue")
 	return retVal.Float()
@@ -342,7 +342,7 @@ func (f *FluentMaterial) EdgeSmoothingValue() float64 {
 
 // SetEdgeSmoothingValue sets the EdgeSmoothingValue property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#edgesmoothingvalue
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#edgesmoothingvalue
 func (f *FluentMaterial) SetEdgeSmoothingValue(edgeSmoothingValue float64) *FluentMaterial {
 	f.p.Set("edgeSmoothingValue", edgeSmoothingValue)
 	return f
@@ -350,7 +350,7 @@ func (f *FluentMaterial) SetEdgeSmoothingValue(edgeSmoothingValue float64) *Flue
 
 // HoverColor returns the HoverColor property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hovercolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#hovercolor
 func (f *FluentMaterial) HoverColor() *Color4 {
 	retVal := f.p.Get("hoverColor")
 	return Color4FromJSObject(retVal, f.ctx)
@@ -358,7 +358,7 @@ func (f *FluentMaterial) HoverColor() *Color4 {
 
 // SetHoverColor sets the HoverColor property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hovercolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#hovercolor
 func (f *FluentMaterial) SetHoverColor(hoverColor *Color4) *FluentMaterial {
 	f.p.Set("hoverColor", hoverColor.JSObject())
 	return f
@@ -366,7 +366,7 @@ func (f *FluentMaterial) SetHoverColor(hoverColor *Color4) *FluentMaterial {
 
 // HoverPosition returns the HoverPosition property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverposition
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#hoverposition
 func (f *FluentMaterial) HoverPosition() *Vector3 {
 	retVal := f.p.Get("hoverPosition")
 	return Vector3FromJSObject(retVal, f.ctx)
@@ -374,7 +374,7 @@ func (f *FluentMaterial) HoverPosition() *Vector3 {
 
 // SetHoverPosition sets the HoverPosition property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverposition
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#hoverposition
 func (f *FluentMaterial) SetHoverPosition(hoverPosition *Vector3) *FluentMaterial {
 	f.p.Set("hoverPosition", hoverPosition.JSObject())
 	return f
@@ -382,7 +382,7 @@ func (f *FluentMaterial) SetHoverPosition(hoverPosition *Vector3) *FluentMateria
 
 // HoverRadius returns the HoverRadius property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverradius
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#hoverradius
 func (f *FluentMaterial) HoverRadius() float64 {
 	retVal := f.p.Get("hoverRadius")
 	return retVal.Float()
@@ -390,7 +390,7 @@ func (f *FluentMaterial) HoverRadius() float64 {
 
 // SetHoverRadius sets the HoverRadius property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverradius
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#hoverradius
 func (f *FluentMaterial) SetHoverRadius(hoverRadius float64) *FluentMaterial {
 	f.p.Set("hoverRadius", hoverRadius)
 	return f
@@ -398,7 +398,7 @@ func (f *FluentMaterial) SetHoverRadius(hoverRadius float64) *FluentMaterial {
 
 // InnerGlowColor returns the InnerGlowColor property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#innerglowcolor
 func (f *FluentMaterial) InnerGlowColor() *Color3 {
 	retVal := f.p.Get("innerGlowColor")
 	return Color3FromJSObject(retVal, f.ctx)
@@ -406,7 +406,7 @@ func (f *FluentMaterial) InnerGlowColor() *Color3 {
 
 // SetInnerGlowColor sets the InnerGlowColor property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#innerglowcolor
 func (f *FluentMaterial) SetInnerGlowColor(innerGlowColor *Color3) *FluentMaterial {
 	f.p.Set("innerGlowColor", innerGlowColor.JSObject())
 	return f
@@ -414,7 +414,7 @@ func (f *FluentMaterial) SetInnerGlowColor(innerGlowColor *Color3) *FluentMateri
 
 // InnerGlowColorIntensity returns the InnerGlowColorIntensity property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolorintensity
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#innerglowcolorintensity
 func (f *FluentMaterial) InnerGlowColorIntensity() float64 {
 	retVal := f.p.Get("innerGlowColorIntensity")
 	return retVal.Float()
@@ -422,7 +422,7 @@ func (f *FluentMaterial) InnerGlowColorIntensity() float64 {
 
 // SetInnerGlowColorIntensity sets the InnerGlowColorIntensity property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolorintensity
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#innerglowcolorintensity
 func (f *FluentMaterial) SetInnerGlowColorIntensity(innerGlowColorIntensity float64) *FluentMaterial {
 	f.p.Set("innerGlowColorIntensity", innerGlowColorIntensity)
 	return f
@@ -430,7 +430,7 @@ func (f *FluentMaterial) SetInnerGlowColorIntensity(innerGlowColorIntensity floa
 
 // RenderBorders returns the RenderBorders property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderborders
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#renderborders
 func (f *FluentMaterial) RenderBorders() bool {
 	retVal := f.p.Get("renderBorders")
 	return retVal.Bool()
@@ -438,7 +438,7 @@ func (f *FluentMaterial) RenderBorders() bool {
 
 // SetRenderBorders sets the RenderBorders property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderborders
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#renderborders
 func (f *FluentMaterial) SetRenderBorders(renderBorders bool) *FluentMaterial {
 	f.p.Set("renderBorders", renderBorders)
 	return f
@@ -446,7 +446,7 @@ func (f *FluentMaterial) SetRenderBorders(renderBorders bool) *FluentMaterial {
 
 // RenderHoverLight returns the RenderHoverLight property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderhoverlight
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#renderhoverlight
 func (f *FluentMaterial) RenderHoverLight() bool {
 	retVal := f.p.Get("renderHoverLight")
 	return retVal.Bool()
@@ -454,7 +454,7 @@ func (f *FluentMaterial) RenderHoverLight() bool {
 
 // SetRenderHoverLight sets the RenderHoverLight property of class FluentMaterial.
 //
-// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderhoverlight
+// https://doc.babylonjs.com/api/classes/babylon.gui.fluentmaterial#renderhoverlight
 func (f *FluentMaterial) SetRenderHoverLight(renderHoverLight bool) *FluentMaterial {
 	f.p.Set("renderHoverLight", renderHoverLight)
 	return f

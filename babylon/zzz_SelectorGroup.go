@@ -39,7 +39,7 @@ func SelectorGroupArrayToJSArray(array []*SelectorGroup) []interface{} {
 
 // NewSelectorGroup returns a new SelectorGroup object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectorgroup
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup
 func (gui *GUI) NewSelectorGroup(name string) *SelectorGroup {
 
 	args := make([]interface{}, 0, 1+0)
@@ -52,7 +52,7 @@ func (gui *GUI) NewSelectorGroup(name string) *SelectorGroup {
 
 // RemoveSelector calls the RemoveSelector method on the SelectorGroup object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectorgroup#removeselector
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup#removeselector
 func (s *SelectorGroup) RemoveSelector(selectorNb float64) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -64,7 +64,7 @@ func (s *SelectorGroup) RemoveSelector(selectorNb float64) {
 
 // GroupPanel returns the GroupPanel property of class SelectorGroup.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectorgroup#grouppanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup#grouppanel
 func (s *SelectorGroup) GroupPanel() *StackPanel {
 	retVal := s.p.Get("groupPanel")
 	return StackPanelFromJSObject(retVal, s.ctx)
@@ -72,7 +72,7 @@ func (s *SelectorGroup) GroupPanel() *StackPanel {
 
 // SetGroupPanel sets the GroupPanel property of class SelectorGroup.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectorgroup#grouppanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup#grouppanel
 func (s *SelectorGroup) SetGroupPanel(groupPanel *StackPanel) *SelectorGroup {
 	s.p.Set("groupPanel", groupPanel.JSObject())
 	return s
@@ -80,7 +80,7 @@ func (s *SelectorGroup) SetGroupPanel(groupPanel *StackPanel) *SelectorGroup {
 
 // Header returns the Header property of class SelectorGroup.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectorgroup#header
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup#header
 func (s *SelectorGroup) Header() string {
 	retVal := s.p.Get("header")
 	return retVal.String()
@@ -88,7 +88,7 @@ func (s *SelectorGroup) Header() string {
 
 // SetHeader sets the Header property of class SelectorGroup.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectorgroup#header
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup#header
 func (s *SelectorGroup) SetHeader(header string) *SelectorGroup {
 	s.p.Set("header", header)
 	return s
@@ -96,7 +96,7 @@ func (s *SelectorGroup) SetHeader(header string) *SelectorGroup {
 
 // Name returns the Name property of class SelectorGroup.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectorgroup#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup#name
 func (s *SelectorGroup) Name() string {
 	retVal := s.p.Get("name")
 	return retVal.String()
@@ -104,7 +104,7 @@ func (s *SelectorGroup) Name() string {
 
 // SetName sets the Name property of class SelectorGroup.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectorgroup#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup#name
 func (s *SelectorGroup) SetName(name string) *SelectorGroup {
 	s.p.Set("name", name)
 	return s
@@ -112,7 +112,7 @@ func (s *SelectorGroup) SetName(name string) *SelectorGroup {
 
 // Selectors returns the Selectors property of class SelectorGroup.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectorgroup#selectors
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup#selectors
 func (s *SelectorGroup) Selectors() []*StackPanel {
 	retVal := s.p.Get("selectors")
 	result := []*StackPanel{}
@@ -124,7 +124,7 @@ func (s *SelectorGroup) Selectors() []*StackPanel {
 
 // SetSelectors sets the Selectors property of class SelectorGroup.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectorgroup#selectors
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectorgroup#selectors
 func (s *SelectorGroup) SetSelectors(selectors []*StackPanel) *SelectorGroup {
 	s.p.Set("selectors", selectors)
 	return s

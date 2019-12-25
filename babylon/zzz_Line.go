@@ -43,7 +43,7 @@ type NewLineOpts struct {
 
 // NewLine returns a new Line object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line
+// https://doc.babylonjs.com/api/classes/babylon.gui.line
 func (gui *GUI) NewLine(opts *NewLineOpts) *Line {
 	if opts == nil {
 		opts = &NewLineOpts{}
@@ -68,7 +68,7 @@ type LineMoveToVector3Opts struct {
 
 // MoveToVector3 calls the MoveToVector3 method on the Line object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#movetovector3
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#movetovector3
 func (l *Line) MoveToVector3(position *Vector3, scene *Scene, opts *LineMoveToVector3Opts) {
 	if opts == nil {
 		opts = &LineMoveToVector3Opts{}
@@ -99,7 +99,7 @@ func (l *Line) MoveToVector3(position *Vector3, scene *Scene, opts *LineMoveToVe
 
 // _draw calls the _draw method on the Line object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#_draw
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#_draw
 func (l *Line) _draw(context js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -111,7 +111,7 @@ func (l *Line) _draw(context js.Value) {
 
 // _measure calls the _measure method on the Line object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#_measure
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#_measure
 func (l *Line) _measure() {
 
 	l.p.Call("_measure")
@@ -124,7 +124,7 @@ type Line_moveToProjectedPositionOpts struct {
 
 // _moveToProjectedPosition calls the _moveToProjectedPosition method on the Line object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#_movetoprojectedposition
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#_movetoprojectedposition
 func (l *Line) _moveToProjectedPosition(projectedPosition *Vector3, opts *Line_moveToProjectedPositionOpts) {
 	if opts == nil {
 		opts = &Line_moveToProjectedPositionOpts{}
@@ -149,7 +149,7 @@ func (l *Line) _moveToProjectedPosition(projectedPosition *Vector3, opts *Line_m
 
 // ConnectedControl returns the ConnectedControl property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#connectedcontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#connectedcontrol
 func (l *Line) ConnectedControl() *Control {
 	retVal := l.p.Get("connectedControl")
 	return ControlFromJSObject(retVal, l.ctx)
@@ -157,7 +157,7 @@ func (l *Line) ConnectedControl() *Control {
 
 // SetConnectedControl sets the ConnectedControl property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#connectedcontrol
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#connectedcontrol
 func (l *Line) SetConnectedControl(connectedControl *Control) *Line {
 	l.p.Set("connectedControl", connectedControl.JSObject())
 	return l
@@ -165,7 +165,7 @@ func (l *Line) SetConnectedControl(connectedControl *Control) *Line {
 
 // Dash returns the Dash property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#dash
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#dash
 func (l *Line) Dash() []float64 {
 	retVal := l.p.Get("dash")
 	result := []float64{}
@@ -177,7 +177,7 @@ func (l *Line) Dash() []float64 {
 
 // SetDash sets the Dash property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#dash
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#dash
 func (l *Line) SetDash(dash []float64) *Line {
 	l.p.Set("dash", dash)
 	return l
@@ -185,7 +185,7 @@ func (l *Line) SetDash(dash []float64) *Line {
 
 // HorizontalAlignment returns the HorizontalAlignment property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#horizontalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#horizontalalignment
 func (l *Line) HorizontalAlignment() float64 {
 	retVal := l.p.Get("horizontalAlignment")
 	return retVal.Float()
@@ -193,7 +193,7 @@ func (l *Line) HorizontalAlignment() float64 {
 
 // SetHorizontalAlignment sets the HorizontalAlignment property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#horizontalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#horizontalalignment
 func (l *Line) SetHorizontalAlignment(horizontalAlignment float64) *Line {
 	l.p.Set("horizontalAlignment", horizontalAlignment)
 	return l
@@ -201,7 +201,7 @@ func (l *Line) SetHorizontalAlignment(horizontalAlignment float64) *Line {
 
 // LineWidth returns the LineWidth property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#linewidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#linewidth
 func (l *Line) LineWidth() float64 {
 	retVal := l.p.Get("lineWidth")
 	return retVal.Float()
@@ -209,7 +209,7 @@ func (l *Line) LineWidth() float64 {
 
 // SetLineWidth sets the LineWidth property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#linewidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#linewidth
 func (l *Line) SetLineWidth(lineWidth float64) *Line {
 	l.p.Set("lineWidth", lineWidth)
 	return l
@@ -217,7 +217,7 @@ func (l *Line) SetLineWidth(lineWidth float64) *Line {
 
 // Name returns the Name property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#name
 func (l *Line) Name() string {
 	retVal := l.p.Get("name")
 	return retVal.String()
@@ -225,7 +225,7 @@ func (l *Line) Name() string {
 
 // SetName sets the Name property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#name
 func (l *Line) SetName(name string) *Line {
 	l.p.Set("name", name)
 	return l
@@ -233,7 +233,7 @@ func (l *Line) SetName(name string) *Line {
 
 // VerticalAlignment returns the VerticalAlignment property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#verticalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#verticalalignment
 func (l *Line) VerticalAlignment() float64 {
 	retVal := l.p.Get("verticalAlignment")
 	return retVal.Float()
@@ -241,7 +241,7 @@ func (l *Line) VerticalAlignment() float64 {
 
 // SetVerticalAlignment sets the VerticalAlignment property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#verticalalignment
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#verticalalignment
 func (l *Line) SetVerticalAlignment(verticalAlignment float64) *Line {
 	l.p.Set("verticalAlignment", verticalAlignment)
 	return l
@@ -249,7 +249,7 @@ func (l *Line) SetVerticalAlignment(verticalAlignment float64) *Line {
 
 // X1 returns the X1 property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#x1
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#x1
 func (l *Line) X1() string {
 	retVal := l.p.Get("x1")
 	return retVal.String()
@@ -257,7 +257,7 @@ func (l *Line) X1() string {
 
 // SetX1 sets the X1 property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#x1
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#x1
 func (l *Line) SetX1(x1 string) *Line {
 	l.p.Set("x1", x1)
 	return l
@@ -265,7 +265,7 @@ func (l *Line) SetX1(x1 string) *Line {
 
 // X2 returns the X2 property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#x2
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#x2
 func (l *Line) X2() string {
 	retVal := l.p.Get("x2")
 	return retVal.String()
@@ -273,7 +273,7 @@ func (l *Line) X2() string {
 
 // SetX2 sets the X2 property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#x2
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#x2
 func (l *Line) SetX2(x2 string) *Line {
 	l.p.Set("x2", x2)
 	return l
@@ -281,7 +281,7 @@ func (l *Line) SetX2(x2 string) *Line {
 
 // Y1 returns the Y1 property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#y1
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#y1
 func (l *Line) Y1() string {
 	retVal := l.p.Get("y1")
 	return retVal.String()
@@ -289,7 +289,7 @@ func (l *Line) Y1() string {
 
 // SetY1 sets the Y1 property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#y1
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#y1
 func (l *Line) SetY1(y1 string) *Line {
 	l.p.Set("y1", y1)
 	return l
@@ -297,7 +297,7 @@ func (l *Line) SetY1(y1 string) *Line {
 
 // Y2 returns the Y2 property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#y2
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#y2
 func (l *Line) Y2() string {
 	retVal := l.p.Get("y2")
 	return retVal.String()
@@ -305,7 +305,7 @@ func (l *Line) Y2() string {
 
 // SetY2 sets the Y2 property of class Line.
 //
-// https://doc.babylonjs.com/api/classes/babylon.line#y2
+// https://doc.babylonjs.com/api/classes/babylon.gui.line#y2
 func (l *Line) SetY2(y2 string) *Line {
 	l.p.Set("y2", y2)
 	return l

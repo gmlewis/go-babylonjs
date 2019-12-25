@@ -38,7 +38,7 @@ func ScatterPanelArrayToJSArray(array []*ScatterPanel) []interface{} {
 
 // NewScatterPanel returns a new ScatterPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scatterpanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.scatterpanel
 func (gui *GUI) NewScatterPanel() *ScatterPanel {
 
 	args := make([]interface{}, 0, 0+0)
@@ -49,7 +49,7 @@ func (gui *GUI) NewScatterPanel() *ScatterPanel {
 
 // Iteration returns the Iteration property of class ScatterPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scatterpanel#iteration
+// https://doc.babylonjs.com/api/classes/babylon.gui.scatterpanel#iteration
 func (s *ScatterPanel) Iteration() float64 {
 	retVal := s.p.Get("iteration")
 	return retVal.Float()
@@ -57,7 +57,7 @@ func (s *ScatterPanel) Iteration() float64 {
 
 // SetIteration sets the Iteration property of class ScatterPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scatterpanel#iteration
+// https://doc.babylonjs.com/api/classes/babylon.gui.scatterpanel#iteration
 func (s *ScatterPanel) SetIteration(iteration float64) *ScatterPanel {
 	s.p.Set("iteration", iteration)
 	return s

@@ -45,7 +45,7 @@ type NewSelectionPanelOpts struct {
 
 // NewSelectionPanel returns a new SelectionPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel
 func (gui *GUI) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *SelectionPanel {
 	if opts == nil {
 		opts = &NewSelectionPanelOpts{}
@@ -67,7 +67,7 @@ func (gui *GUI) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *Sel
 
 // AddGroup calls the AddGroup method on the SelectionPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#addgroup
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#addgroup
 func (s *SelectionPanel) AddGroup(group *SelectorGroup) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -89,7 +89,7 @@ type SelectionPanelAddToGroupCheckboxOpts struct {
 
 // AddToGroupCheckbox calls the AddToGroupCheckbox method on the SelectionPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#addtogroupcheckbox
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#addtogroupcheckbox
 func (s *SelectionPanel) AddToGroupCheckbox(groupNb float64, label string, opts *SelectionPanelAddToGroupCheckboxOpts) {
 	if opts == nil {
 		opts = &SelectionPanelAddToGroupCheckboxOpts{}
@@ -123,7 +123,7 @@ type SelectionPanelAddToGroupRadioOpts struct {
 
 // AddToGroupRadio calls the AddToGroupRadio method on the SelectionPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#addtogroupradio
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#addtogroupradio
 func (s *SelectionPanel) AddToGroupRadio(groupNb float64, label string, opts *SelectionPanelAddToGroupRadioOpts) {
 	if opts == nil {
 		opts = &SelectionPanelAddToGroupRadioOpts{}
@@ -161,7 +161,7 @@ type SelectionPanelAddToGroupSliderOpts struct {
 
 // AddToGroupSlider calls the AddToGroupSlider method on the SelectionPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#addtogroupslider
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#addtogroupslider
 func (s *SelectionPanel) AddToGroupSlider(groupNb float64, label string, opts *SelectionPanelAddToGroupSliderOpts) {
 	if opts == nil {
 		opts = &SelectionPanelAddToGroupSliderOpts{}
@@ -209,7 +209,7 @@ func (s *SelectionPanel) AddToGroupSlider(groupNb float64, label string, opts *S
 
 // Relabel calls the Relabel method on the SelectionPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#relabel
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#relabel
 func (s *SelectionPanel) Relabel(label string, groupNb float64, selectorNb float64) {
 
 	args := make([]interface{}, 0, 3+0)
@@ -225,7 +225,7 @@ func (s *SelectionPanel) Relabel(label string, groupNb float64, selectorNb float
 
 // RemoveFromGroupSelector calls the RemoveFromGroupSelector method on the SelectionPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#removefromgroupselector
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#removefromgroupselector
 func (s *SelectionPanel) RemoveFromGroupSelector(groupNb float64, selectorNb float64) {
 
 	args := make([]interface{}, 0, 2+0)
@@ -239,7 +239,7 @@ func (s *SelectionPanel) RemoveFromGroupSelector(groupNb float64, selectorNb flo
 
 // RemoveGroup calls the RemoveGroup method on the SelectionPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#removegroup
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#removegroup
 func (s *SelectionPanel) RemoveGroup(groupNb float64) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -251,7 +251,7 @@ func (s *SelectionPanel) RemoveGroup(groupNb float64) {
 
 // SetHeaderName calls the SetHeaderName method on the SelectionPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#setheadername
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#setheadername
 func (s *SelectionPanel) SetHeaderName(label string, groupNb float64) {
 
 	args := make([]interface{}, 0, 2+0)
@@ -265,7 +265,7 @@ func (s *SelectionPanel) SetHeaderName(label string, groupNb float64) {
 
 // BarColor returns the BarColor property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#barcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#barcolor
 func (s *SelectionPanel) BarColor() string {
 	retVal := s.p.Get("barColor")
 	return retVal.String()
@@ -273,7 +273,7 @@ func (s *SelectionPanel) BarColor() string {
 
 // SetBarColor sets the BarColor property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#barcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#barcolor
 func (s *SelectionPanel) SetBarColor(barColor string) *SelectionPanel {
 	s.p.Set("barColor", barColor)
 	return s
@@ -281,7 +281,7 @@ func (s *SelectionPanel) SetBarColor(barColor string) *SelectionPanel {
 
 // BarHeight returns the BarHeight property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#barheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#barheight
 func (s *SelectionPanel) BarHeight() string {
 	retVal := s.p.Get("barHeight")
 	return retVal.String()
@@ -289,7 +289,7 @@ func (s *SelectionPanel) BarHeight() string {
 
 // SetBarHeight sets the BarHeight property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#barheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#barheight
 func (s *SelectionPanel) SetBarHeight(barHeight string) *SelectionPanel {
 	s.p.Set("barHeight", barHeight)
 	return s
@@ -297,7 +297,7 @@ func (s *SelectionPanel) SetBarHeight(barHeight string) *SelectionPanel {
 
 // ButtonBackground returns the ButtonBackground property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#buttonbackground
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#buttonbackground
 func (s *SelectionPanel) ButtonBackground() string {
 	retVal := s.p.Get("buttonBackground")
 	return retVal.String()
@@ -305,7 +305,7 @@ func (s *SelectionPanel) ButtonBackground() string {
 
 // SetButtonBackground sets the ButtonBackground property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#buttonbackground
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#buttonbackground
 func (s *SelectionPanel) SetButtonBackground(buttonBackground string) *SelectionPanel {
 	s.p.Set("buttonBackground", buttonBackground)
 	return s
@@ -313,7 +313,7 @@ func (s *SelectionPanel) SetButtonBackground(buttonBackground string) *Selection
 
 // ButtonColor returns the ButtonColor property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#buttoncolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#buttoncolor
 func (s *SelectionPanel) ButtonColor() string {
 	retVal := s.p.Get("buttonColor")
 	return retVal.String()
@@ -321,7 +321,7 @@ func (s *SelectionPanel) ButtonColor() string {
 
 // SetButtonColor sets the ButtonColor property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#buttoncolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#buttoncolor
 func (s *SelectionPanel) SetButtonColor(buttonColor string) *SelectionPanel {
 	s.p.Set("buttonColor", buttonColor)
 	return s
@@ -329,7 +329,7 @@ func (s *SelectionPanel) SetButtonColor(buttonColor string) *SelectionPanel {
 
 // Groups returns the Groups property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#groups
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#groups
 func (s *SelectionPanel) Groups() []*SelectorGroup {
 	retVal := s.p.Get("groups")
 	result := []*SelectorGroup{}
@@ -341,7 +341,7 @@ func (s *SelectionPanel) Groups() []*SelectorGroup {
 
 // SetGroups sets the Groups property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#groups
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#groups
 func (s *SelectionPanel) SetGroups(groups []*SelectorGroup) *SelectionPanel {
 	s.p.Set("groups", groups)
 	return s
@@ -349,7 +349,7 @@ func (s *SelectionPanel) SetGroups(groups []*SelectorGroup) *SelectionPanel {
 
 // HeaderColor returns the HeaderColor property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#headercolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#headercolor
 func (s *SelectionPanel) HeaderColor() string {
 	retVal := s.p.Get("headerColor")
 	return retVal.String()
@@ -357,7 +357,7 @@ func (s *SelectionPanel) HeaderColor() string {
 
 // SetHeaderColor sets the HeaderColor property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#headercolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#headercolor
 func (s *SelectionPanel) SetHeaderColor(headerColor string) *SelectionPanel {
 	s.p.Set("headerColor", headerColor)
 	return s
@@ -365,7 +365,7 @@ func (s *SelectionPanel) SetHeaderColor(headerColor string) *SelectionPanel {
 
 // LabelColor returns the LabelColor property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#labelcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#labelcolor
 func (s *SelectionPanel) LabelColor() string {
 	retVal := s.p.Get("labelColor")
 	return retVal.String()
@@ -373,7 +373,7 @@ func (s *SelectionPanel) LabelColor() string {
 
 // SetLabelColor sets the LabelColor property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#labelcolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#labelcolor
 func (s *SelectionPanel) SetLabelColor(labelColor string) *SelectionPanel {
 	s.p.Set("labelColor", labelColor)
 	return s
@@ -381,7 +381,7 @@ func (s *SelectionPanel) SetLabelColor(labelColor string) *SelectionPanel {
 
 // Name returns the Name property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#name
 func (s *SelectionPanel) Name() string {
 	retVal := s.p.Get("name")
 	return retVal.String()
@@ -389,7 +389,7 @@ func (s *SelectionPanel) Name() string {
 
 // SetName sets the Name property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#name
 func (s *SelectionPanel) SetName(name string) *SelectionPanel {
 	s.p.Set("name", name)
 	return s
@@ -397,7 +397,7 @@ func (s *SelectionPanel) SetName(name string) *SelectionPanel {
 
 // SpacerHeight returns the SpacerHeight property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#spacerheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#spacerheight
 func (s *SelectionPanel) SpacerHeight() string {
 	retVal := s.p.Get("spacerHeight")
 	return retVal.String()
@@ -405,7 +405,7 @@ func (s *SelectionPanel) SpacerHeight() string {
 
 // SetSpacerHeight sets the SpacerHeight property of class SelectionPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.selectionpanel#spacerheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.selectionpanel#spacerheight
 func (s *SelectionPanel) SetSpacerHeight(spacerHeight string) *SelectionPanel {
 	s.p.Set("spacerHeight", spacerHeight)
 	return s

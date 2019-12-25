@@ -43,7 +43,7 @@ type NewStackPanelOpts struct {
 
 // NewStackPanel returns a new StackPanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel
 func (gui *GUI) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
 	if opts == nil {
 		opts = &NewStackPanelOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
 
 // Height returns the Height property of class StackPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel#height
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#height
 func (s *StackPanel) Height() string {
 	retVal := s.p.Get("height")
 	return retVal.String()
@@ -71,7 +71,7 @@ func (s *StackPanel) Height() string {
 
 // SetHeight sets the Height property of class StackPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel#height
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#height
 func (s *StackPanel) SetHeight(height string) *StackPanel {
 	s.p.Set("height", height)
 	return s
@@ -79,7 +79,7 @@ func (s *StackPanel) SetHeight(height string) *StackPanel {
 
 // IgnoreLayoutWarnings returns the IgnoreLayoutWarnings property of class StackPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ignorelayoutwarnings
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#ignorelayoutwarnings
 func (s *StackPanel) IgnoreLayoutWarnings() bool {
 	retVal := s.p.Get("ignoreLayoutWarnings")
 	return retVal.Bool()
@@ -87,7 +87,7 @@ func (s *StackPanel) IgnoreLayoutWarnings() bool {
 
 // SetIgnoreLayoutWarnings sets the IgnoreLayoutWarnings property of class StackPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ignorelayoutwarnings
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#ignorelayoutwarnings
 func (s *StackPanel) SetIgnoreLayoutWarnings(ignoreLayoutWarnings bool) *StackPanel {
 	s.p.Set("ignoreLayoutWarnings", ignoreLayoutWarnings)
 	return s
@@ -95,7 +95,7 @@ func (s *StackPanel) SetIgnoreLayoutWarnings(ignoreLayoutWarnings bool) *StackPa
 
 // IsVertical returns the IsVertical property of class StackPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isvertical
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#isvertical
 func (s *StackPanel) IsVertical() bool {
 	retVal := s.p.Get("isVertical")
 	return retVal.Bool()
@@ -103,7 +103,7 @@ func (s *StackPanel) IsVertical() bool {
 
 // SetIsVertical sets the IsVertical property of class StackPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isvertical
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#isvertical
 func (s *StackPanel) SetIsVertical(isVertical bool) *StackPanel {
 	s.p.Set("isVertical", isVertical)
 	return s
@@ -111,7 +111,7 @@ func (s *StackPanel) SetIsVertical(isVertical bool) *StackPanel {
 
 // Name returns the Name property of class StackPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#name
 func (s *StackPanel) Name() string {
 	retVal := s.p.Get("name")
 	return retVal.String()
@@ -119,7 +119,7 @@ func (s *StackPanel) Name() string {
 
 // SetName sets the Name property of class StackPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#name
 func (s *StackPanel) SetName(name string) *StackPanel {
 	s.p.Set("name", name)
 	return s
@@ -127,7 +127,7 @@ func (s *StackPanel) SetName(name string) *StackPanel {
 
 // Width returns the Width property of class StackPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel#width
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#width
 func (s *StackPanel) Width() string {
 	retVal := s.p.Get("width")
 	return retVal.String()
@@ -135,7 +135,7 @@ func (s *StackPanel) Width() string {
 
 // SetWidth sets the Width property of class StackPanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.stackpanel#width
+// https://doc.babylonjs.com/api/classes/babylon.gui.stackpanel#width
 func (s *StackPanel) SetWidth(width string) *StackPanel {
 	s.p.Set("width", width)
 	return s

@@ -43,7 +43,7 @@ type NewRadioButtonOpts struct {
 
 // NewRadioButton returns a new RadioButton object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton
 func (gui *GUI) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
 	if opts == nil {
 		opts = &NewRadioButtonOpts{}
@@ -63,7 +63,7 @@ func (gui *GUI) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
 
 // AddRadioButtonWithHeader calls the AddRadioButtonWithHeader method on the RadioButton object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#addradiobuttonwithheader
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#addradiobuttonwithheader
 func (r *RadioButton) AddRadioButtonWithHeader(title string, group string, isChecked bool, onValueChanged JSFunc) *StackPanel {
 
 	args := make([]interface{}, 0, 4+0)
@@ -82,7 +82,7 @@ func (r *RadioButton) AddRadioButtonWithHeader(title string, group string, isChe
 
 // _draw calls the _draw method on the RadioButton object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#_draw
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#_draw
 func (r *RadioButton) _draw(context js.Value) {
 
 	args := make([]interface{}, 0, 1+0)
@@ -94,7 +94,7 @@ func (r *RadioButton) _draw(context js.Value) {
 
 // _onPointerDown calls the _onPointerDown method on the RadioButton object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#_onpointerdown
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#_onpointerdown
 func (r *RadioButton) _onPointerDown(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64) bool {
 
 	args := make([]interface{}, 0, 4+0)
@@ -121,7 +121,7 @@ func (r *RadioButton) _onPointerDown(target *Control, coordinates *Vector2, poin
 
 // Background returns the Background property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#background
 func (r *RadioButton) Background() string {
 	retVal := r.p.Get("background")
 	return retVal.String()
@@ -129,7 +129,7 @@ func (r *RadioButton) Background() string {
 
 // SetBackground sets the Background property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#background
 func (r *RadioButton) SetBackground(background string) *RadioButton {
 	r.p.Set("background", background)
 	return r
@@ -137,7 +137,7 @@ func (r *RadioButton) SetBackground(background string) *RadioButton {
 
 // CheckSizeRatio returns the CheckSizeRatio property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#checksizeratio
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#checksizeratio
 func (r *RadioButton) CheckSizeRatio() float64 {
 	retVal := r.p.Get("checkSizeRatio")
 	return retVal.Float()
@@ -145,7 +145,7 @@ func (r *RadioButton) CheckSizeRatio() float64 {
 
 // SetCheckSizeRatio sets the CheckSizeRatio property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#checksizeratio
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#checksizeratio
 func (r *RadioButton) SetCheckSizeRatio(checkSizeRatio float64) *RadioButton {
 	r.p.Set("checkSizeRatio", checkSizeRatio)
 	return r
@@ -153,7 +153,7 @@ func (r *RadioButton) SetCheckSizeRatio(checkSizeRatio float64) *RadioButton {
 
 // Group returns the Group property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#group
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#group
 func (r *RadioButton) Group() string {
 	retVal := r.p.Get("group")
 	return retVal.String()
@@ -161,7 +161,7 @@ func (r *RadioButton) Group() string {
 
 // SetGroup sets the Group property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#group
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#group
 func (r *RadioButton) SetGroup(group string) *RadioButton {
 	r.p.Set("group", group)
 	return r
@@ -169,7 +169,7 @@ func (r *RadioButton) SetGroup(group string) *RadioButton {
 
 // IsChecked returns the IsChecked property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#ischecked
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#ischecked
 func (r *RadioButton) IsChecked() bool {
 	retVal := r.p.Get("isChecked")
 	return retVal.Bool()
@@ -177,7 +177,7 @@ func (r *RadioButton) IsChecked() bool {
 
 // SetIsChecked sets the IsChecked property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#ischecked
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#ischecked
 func (r *RadioButton) SetIsChecked(isChecked bool) *RadioButton {
 	r.p.Set("isChecked", isChecked)
 	return r
@@ -185,7 +185,7 @@ func (r *RadioButton) SetIsChecked(isChecked bool) *RadioButton {
 
 // Name returns the Name property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#name
 func (r *RadioButton) Name() string {
 	retVal := r.p.Get("name")
 	return retVal.String()
@@ -193,7 +193,7 @@ func (r *RadioButton) Name() string {
 
 // SetName sets the Name property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#name
 func (r *RadioButton) SetName(name string) *RadioButton {
 	r.p.Set("name", name)
 	return r
@@ -201,7 +201,7 @@ func (r *RadioButton) SetName(name string) *RadioButton {
 
 // OnIsCheckedChangedObservable returns the OnIsCheckedChangedObservable property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#onischeckedchangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#onischeckedchangedobservable
 func (r *RadioButton) OnIsCheckedChangedObservable() *Observable {
 	retVal := r.p.Get("onIsCheckedChangedObservable")
 	return ObservableFromJSObject(retVal, r.ctx)
@@ -209,7 +209,7 @@ func (r *RadioButton) OnIsCheckedChangedObservable() *Observable {
 
 // SetOnIsCheckedChangedObservable sets the OnIsCheckedChangedObservable property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#onischeckedchangedobservable
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#onischeckedchangedobservable
 func (r *RadioButton) SetOnIsCheckedChangedObservable(onIsCheckedChangedObservable *Observable) *RadioButton {
 	r.p.Set("onIsCheckedChangedObservable", onIsCheckedChangedObservable.JSObject())
 	return r
@@ -217,7 +217,7 @@ func (r *RadioButton) SetOnIsCheckedChangedObservable(onIsCheckedChangedObservab
 
 // Thickness returns the Thickness property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#thickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#thickness
 func (r *RadioButton) Thickness() float64 {
 	retVal := r.p.Get("thickness")
 	return retVal.Float()
@@ -225,7 +225,7 @@ func (r *RadioButton) Thickness() float64 {
 
 // SetThickness sets the Thickness property of class RadioButton.
 //
-// https://doc.babylonjs.com/api/classes/babylon.radiobutton#thickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.radiobutton#thickness
 func (r *RadioButton) SetThickness(thickness float64) *RadioButton {
 	r.p.Set("thickness", thickness)
 	return r

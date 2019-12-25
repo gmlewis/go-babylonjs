@@ -38,7 +38,7 @@ func IFocusableControlArrayToJSArray(array []*IFocusableControl) []interface{} {
 
 // KeepsFocusWith calls the KeepsFocusWith method on the IFocusableControl object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ifocusablecontrol#keepsfocuswith
+// https://doc.babylonjs.com/api/classes/babylon.gui.ifocusablecontrol#keepsfocuswith
 func (i *IFocusableControl) KeepsFocusWith() []*Control {
 
 	retVal := i.p.Call("keepsFocusWith")
@@ -51,7 +51,7 @@ func (i *IFocusableControl) KeepsFocusWith() []*Control {
 
 // OnBlur calls the OnBlur method on the IFocusableControl object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ifocusablecontrol#onblur
+// https://doc.babylonjs.com/api/classes/babylon.gui.ifocusablecontrol#onblur
 func (i *IFocusableControl) OnBlur() {
 
 	i.p.Call("onBlur")
@@ -59,7 +59,7 @@ func (i *IFocusableControl) OnBlur() {
 
 // OnFocus calls the OnFocus method on the IFocusableControl object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ifocusablecontrol#onfocus
+// https://doc.babylonjs.com/api/classes/babylon.gui.ifocusablecontrol#onfocus
 func (i *IFocusableControl) OnFocus() {
 
 	i.p.Call("onFocus")
@@ -67,7 +67,7 @@ func (i *IFocusableControl) OnFocus() {
 
 // ProcessKeyboard calls the ProcessKeyboard method on the IFocusableControl object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.ifocusablecontrol#processkeyboard
+// https://doc.babylonjs.com/api/classes/babylon.gui.ifocusablecontrol#processkeyboard
 func (i *IFocusableControl) ProcessKeyboard(evt js.Value) {
 
 	args := make([]interface{}, 0, 1+0)

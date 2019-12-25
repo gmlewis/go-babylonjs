@@ -43,7 +43,7 @@ type NewDisplayGridOpts struct {
 
 // NewDisplayGrid returns a new DisplayGrid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid
 func (gui *GUI) NewDisplayGrid(opts *NewDisplayGridOpts) *DisplayGrid {
 	if opts == nil {
 		opts = &NewDisplayGridOpts{}
@@ -68,7 +68,7 @@ type DisplayGrid_drawOpts struct {
 
 // _draw calls the _draw method on the DisplayGrid object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#_draw
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#_draw
 func (d *DisplayGrid) _draw(context js.Value, opts *DisplayGrid_drawOpts) {
 	if opts == nil {
 		opts = &DisplayGrid_drawOpts{}
@@ -89,7 +89,7 @@ func (d *DisplayGrid) _draw(context js.Value, opts *DisplayGrid_drawOpts) {
 
 // Background returns the Background property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#background
 func (d *DisplayGrid) Background() string {
 	retVal := d.p.Get("background")
 	return retVal.String()
@@ -97,7 +97,7 @@ func (d *DisplayGrid) Background() string {
 
 // SetBackground sets the Background property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#background
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#background
 func (d *DisplayGrid) SetBackground(background string) *DisplayGrid {
 	d.p.Set("background", background)
 	return d
@@ -105,7 +105,7 @@ func (d *DisplayGrid) SetBackground(background string) *DisplayGrid {
 
 // CellHeight returns the CellHeight property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#cellheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#cellheight
 func (d *DisplayGrid) CellHeight() float64 {
 	retVal := d.p.Get("cellHeight")
 	return retVal.Float()
@@ -113,7 +113,7 @@ func (d *DisplayGrid) CellHeight() float64 {
 
 // SetCellHeight sets the CellHeight property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#cellheight
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#cellheight
 func (d *DisplayGrid) SetCellHeight(cellHeight float64) *DisplayGrid {
 	d.p.Set("cellHeight", cellHeight)
 	return d
@@ -121,7 +121,7 @@ func (d *DisplayGrid) SetCellHeight(cellHeight float64) *DisplayGrid {
 
 // CellWidth returns the CellWidth property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#cellwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#cellwidth
 func (d *DisplayGrid) CellWidth() float64 {
 	retVal := d.p.Get("cellWidth")
 	return retVal.Float()
@@ -129,7 +129,7 @@ func (d *DisplayGrid) CellWidth() float64 {
 
 // SetCellWidth sets the CellWidth property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#cellwidth
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#cellwidth
 func (d *DisplayGrid) SetCellWidth(cellWidth float64) *DisplayGrid {
 	d.p.Set("cellWidth", cellWidth)
 	return d
@@ -137,7 +137,7 @@ func (d *DisplayGrid) SetCellWidth(cellWidth float64) *DisplayGrid {
 
 // DisplayMajorLines returns the DisplayMajorLines property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#displaymajorlines
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#displaymajorlines
 func (d *DisplayGrid) DisplayMajorLines() bool {
 	retVal := d.p.Get("displayMajorLines")
 	return retVal.Bool()
@@ -145,7 +145,7 @@ func (d *DisplayGrid) DisplayMajorLines() bool {
 
 // SetDisplayMajorLines sets the DisplayMajorLines property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#displaymajorlines
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#displaymajorlines
 func (d *DisplayGrid) SetDisplayMajorLines(displayMajorLines bool) *DisplayGrid {
 	d.p.Set("displayMajorLines", displayMajorLines)
 	return d
@@ -153,7 +153,7 @@ func (d *DisplayGrid) SetDisplayMajorLines(displayMajorLines bool) *DisplayGrid 
 
 // DisplayMinorLines returns the DisplayMinorLines property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#displayminorlines
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#displayminorlines
 func (d *DisplayGrid) DisplayMinorLines() bool {
 	retVal := d.p.Get("displayMinorLines")
 	return retVal.Bool()
@@ -161,7 +161,7 @@ func (d *DisplayGrid) DisplayMinorLines() bool {
 
 // SetDisplayMinorLines sets the DisplayMinorLines property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#displayminorlines
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#displayminorlines
 func (d *DisplayGrid) SetDisplayMinorLines(displayMinorLines bool) *DisplayGrid {
 	d.p.Set("displayMinorLines", displayMinorLines)
 	return d
@@ -169,7 +169,7 @@ func (d *DisplayGrid) SetDisplayMinorLines(displayMinorLines bool) *DisplayGrid 
 
 // MajorLineColor returns the MajorLineColor property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinecolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#majorlinecolor
 func (d *DisplayGrid) MajorLineColor() string {
 	retVal := d.p.Get("majorLineColor")
 	return retVal.String()
@@ -177,7 +177,7 @@ func (d *DisplayGrid) MajorLineColor() string {
 
 // SetMajorLineColor sets the MajorLineColor property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinecolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#majorlinecolor
 func (d *DisplayGrid) SetMajorLineColor(majorLineColor string) *DisplayGrid {
 	d.p.Set("majorLineColor", majorLineColor)
 	return d
@@ -185,7 +185,7 @@ func (d *DisplayGrid) SetMajorLineColor(majorLineColor string) *DisplayGrid {
 
 // MajorLineFrequency returns the MajorLineFrequency property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinefrequency
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#majorlinefrequency
 func (d *DisplayGrid) MajorLineFrequency() float64 {
 	retVal := d.p.Get("majorLineFrequency")
 	return retVal.Float()
@@ -193,7 +193,7 @@ func (d *DisplayGrid) MajorLineFrequency() float64 {
 
 // SetMajorLineFrequency sets the MajorLineFrequency property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinefrequency
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#majorlinefrequency
 func (d *DisplayGrid) SetMajorLineFrequency(majorLineFrequency float64) *DisplayGrid {
 	d.p.Set("majorLineFrequency", majorLineFrequency)
 	return d
@@ -201,7 +201,7 @@ func (d *DisplayGrid) SetMajorLineFrequency(majorLineFrequency float64) *Display
 
 // MajorLineTickness returns the MajorLineTickness property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinetickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#majorlinetickness
 func (d *DisplayGrid) MajorLineTickness() float64 {
 	retVal := d.p.Get("majorLineTickness")
 	return retVal.Float()
@@ -209,7 +209,7 @@ func (d *DisplayGrid) MajorLineTickness() float64 {
 
 // SetMajorLineTickness sets the MajorLineTickness property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#majorlinetickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#majorlinetickness
 func (d *DisplayGrid) SetMajorLineTickness(majorLineTickness float64) *DisplayGrid {
 	d.p.Set("majorLineTickness", majorLineTickness)
 	return d
@@ -217,7 +217,7 @@ func (d *DisplayGrid) SetMajorLineTickness(majorLineTickness float64) *DisplayGr
 
 // MinorLineColor returns the MinorLineColor property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#minorlinecolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#minorlinecolor
 func (d *DisplayGrid) MinorLineColor() string {
 	retVal := d.p.Get("minorLineColor")
 	return retVal.String()
@@ -225,7 +225,7 @@ func (d *DisplayGrid) MinorLineColor() string {
 
 // SetMinorLineColor sets the MinorLineColor property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#minorlinecolor
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#minorlinecolor
 func (d *DisplayGrid) SetMinorLineColor(minorLineColor string) *DisplayGrid {
 	d.p.Set("minorLineColor", minorLineColor)
 	return d
@@ -233,7 +233,7 @@ func (d *DisplayGrid) SetMinorLineColor(minorLineColor string) *DisplayGrid {
 
 // MinorLineTickness returns the MinorLineTickness property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#minorlinetickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#minorlinetickness
 func (d *DisplayGrid) MinorLineTickness() float64 {
 	retVal := d.p.Get("minorLineTickness")
 	return retVal.Float()
@@ -241,7 +241,7 @@ func (d *DisplayGrid) MinorLineTickness() float64 {
 
 // SetMinorLineTickness sets the MinorLineTickness property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#minorlinetickness
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#minorlinetickness
 func (d *DisplayGrid) SetMinorLineTickness(minorLineTickness float64) *DisplayGrid {
 	d.p.Set("minorLineTickness", minorLineTickness)
 	return d
@@ -249,7 +249,7 @@ func (d *DisplayGrid) SetMinorLineTickness(minorLineTickness float64) *DisplayGr
 
 // Name returns the Name property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#name
 func (d *DisplayGrid) Name() string {
 	retVal := d.p.Get("name")
 	return retVal.String()
@@ -257,7 +257,7 @@ func (d *DisplayGrid) Name() string {
 
 // SetName sets the Name property of class DisplayGrid.
 //
-// https://doc.babylonjs.com/api/classes/babylon.displaygrid#name
+// https://doc.babylonjs.com/api/classes/babylon.gui.displaygrid#name
 func (d *DisplayGrid) SetName(name string) *DisplayGrid {
 	d.p.Set("name", name)
 	return d

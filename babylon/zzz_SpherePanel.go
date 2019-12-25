@@ -38,7 +38,7 @@ func SpherePanelArrayToJSArray(array []*SpherePanel) []interface{} {
 
 // NewSpherePanel returns a new SpherePanel object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.spherepanel
+// https://doc.babylonjs.com/api/classes/babylon.gui.spherepanel
 func (gui *GUI) NewSpherePanel() *SpherePanel {
 
 	args := make([]interface{}, 0, 0+0)
@@ -49,7 +49,7 @@ func (gui *GUI) NewSpherePanel() *SpherePanel {
 
 // Radius returns the Radius property of class SpherePanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.spherepanel#radius
+// https://doc.babylonjs.com/api/classes/babylon.gui.spherepanel#radius
 func (s *SpherePanel) Radius() float64 {
 	retVal := s.p.Get("radius")
 	return retVal.Float()
@@ -57,7 +57,7 @@ func (s *SpherePanel) Radius() float64 {
 
 // SetRadius sets the Radius property of class SpherePanel.
 //
-// https://doc.babylonjs.com/api/classes/babylon.spherepanel#radius
+// https://doc.babylonjs.com/api/classes/babylon.gui.spherepanel#radius
 func (s *SpherePanel) SetRadius(radius float64) *SpherePanel {
 	s.p.Set("radius", radius)
 	return s

@@ -20,6 +20,10 @@ var (
 	unhandledType = map[string]bool{}
 )
 
+const (
+	apiDocsBaseURL = "https://doc.babylonjs.com/api/classes/babylon"
+)
+
 func init() {
 	for _, v := range unhandledTypes {
 		unhandledType[v] = true
@@ -73,12 +77,14 @@ func (c *classes) walker() filepath.WalkFunc {
 		html := &ClassHTML{
 			ConstructorNamespaceReceiverName: "ba",       // default
 			ConstructorNamespaceReceiverType: "*Babylon", // default
+			DocsBaseURL:                      apiDocsBaseURL,
 
 			ConstructorNames: map[string]*Signature{},
 			MethodNames:      map[string]*Signature{},
 			PropertyNames:    map[string]*Signature{},
 		}
 		if strings.Contains(filename, "babylon.gui") {
+			html.DocsBaseURL = apiDocsBaseURL + ".gui"
 			html.ConstructorNamespaceReceiverName = "gui"
 			html.ConstructorNamespaceReceiverType = "*GUI"
 		}
@@ -204,6 +210,7 @@ type ClassHTML struct {
 	Title InnerXML `xml:"head>title"`
 	Div   []*Div   `xml:"body>div"`
 
+	DocsBaseURL                      string `xml:"-"`
 	ConstructorNamespaceReceiverName string `xml:"-"`
 	ConstructorNamespaceReceiverType string `xml:"-"`
 

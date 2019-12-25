@@ -38,7 +38,7 @@ func Matrix2DArrayToJSArray(array []*Matrix2D) []interface{} {
 
 // NewMatrix2D returns a new Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d
 func (gui *GUI) NewMatrix2D(m00 float64, m01 float64, m10 float64, m11 float64, m20 float64, m21 float64) *Matrix2D {
 
 	args := make([]interface{}, 0, 6+0)
@@ -56,7 +56,7 @@ func (gui *GUI) NewMatrix2D(m00 float64, m01 float64, m10 float64, m11 float64, 
 
 // ComposeToRef calls the ComposeToRef method on the Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#composetoref
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#composetoref
 func (m *Matrix2D) ComposeToRef(tx float64, ty float64, angle float64, scaleX float64, scaleY float64, parentMatrix *Matrix2D, result *Matrix2D) {
 
 	args := make([]interface{}, 0, 7+0)
@@ -88,7 +88,7 @@ func (m *Matrix2D) ComposeToRef(tx float64, ty float64, angle float64, scaleX fl
 
 // Determinant calls the Determinant method on the Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#determinant
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#determinant
 func (m *Matrix2D) Determinant() float64 {
 
 	retVal := m.p.Call("determinant")
@@ -97,7 +97,7 @@ func (m *Matrix2D) Determinant() float64 {
 
 // FromValues calls the FromValues method on the Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#fromvalues
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#fromvalues
 func (m *Matrix2D) FromValues(m00 float64, m01 float64, m10 float64, m11 float64, m20 float64, m21 float64) *Matrix2D {
 
 	args := make([]interface{}, 0, 6+0)
@@ -120,7 +120,7 @@ func (m *Matrix2D) FromValues(m00 float64, m01 float64, m10 float64, m11 float64
 
 // Identity calls the Identity method on the Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#identity
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#identity
 func (m *Matrix2D) Identity() *Matrix2D {
 
 	retVal := m.p.Call("Identity")
@@ -129,7 +129,7 @@ func (m *Matrix2D) Identity() *Matrix2D {
 
 // InvertToRef calls the InvertToRef method on the Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#inverttoref
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#inverttoref
 func (m *Matrix2D) InvertToRef(result *Matrix2D) *Matrix2D {
 
 	args := make([]interface{}, 0, 1+0)
@@ -146,7 +146,7 @@ func (m *Matrix2D) InvertToRef(result *Matrix2D) *Matrix2D {
 
 // MultiplyToRef calls the MultiplyToRef method on the Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#multiplytoref
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#multiplytoref
 func (m *Matrix2D) MultiplyToRef(other *Matrix2D, result *Matrix2D) *Matrix2D {
 
 	args := make([]interface{}, 0, 2+0)
@@ -169,7 +169,7 @@ func (m *Matrix2D) MultiplyToRef(other *Matrix2D, result *Matrix2D) *Matrix2D {
 
 // RotationToRef calls the RotationToRef method on the Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#rotationtoref
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#rotationtoref
 func (m *Matrix2D) RotationToRef(angle float64, result *Matrix2D) {
 
 	args := make([]interface{}, 0, 2+0)
@@ -187,7 +187,7 @@ func (m *Matrix2D) RotationToRef(angle float64, result *Matrix2D) {
 
 // ScalingToRef calls the ScalingToRef method on the Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#scalingtoref
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#scalingtoref
 func (m *Matrix2D) ScalingToRef(x float64, y float64, result *Matrix2D) {
 
 	args := make([]interface{}, 0, 3+0)
@@ -207,7 +207,7 @@ func (m *Matrix2D) ScalingToRef(x float64, y float64, result *Matrix2D) {
 
 // TransformCoordinates calls the TransformCoordinates method on the Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#transformcoordinates
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#transformcoordinates
 func (m *Matrix2D) TransformCoordinates(x float64, y float64, result *Vector2) *Matrix2D {
 
 	args := make([]interface{}, 0, 3+0)
@@ -228,7 +228,7 @@ func (m *Matrix2D) TransformCoordinates(x float64, y float64, result *Vector2) *
 
 // TranslationToRef calls the TranslationToRef method on the Matrix2D object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#translationtoref
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#translationtoref
 func (m *Matrix2D) TranslationToRef(x float64, y float64, result *Matrix2D) {
 
 	args := make([]interface{}, 0, 3+0)
@@ -248,7 +248,7 @@ func (m *Matrix2D) TranslationToRef(x float64, y float64, result *Matrix2D) {
 
 // M returns the M property of class Matrix2D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#m
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#m
 func (m *Matrix2D) M() js.Value {
 	retVal := m.p.Get("m")
 	return retVal
@@ -256,7 +256,7 @@ func (m *Matrix2D) M() js.Value {
 
 // SetM sets the M property of class Matrix2D.
 //
-// https://doc.babylonjs.com/api/classes/babylon.matrix2d#m
+// https://doc.babylonjs.com/api/classes/babylon.gui.matrix2d#m
 func (m *Matrix2D) SetM(mm js.Value) *Matrix2D {
 	m.p.Set("m", mm)
 	return m
