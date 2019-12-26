@@ -646,6 +646,8 @@ func processConstructorOverrides(className string, s *Signature, names []string,
 		optional = []bool{false, false, false, false}
 	case "NewDynamicTexture":
 		types[1] = "interface{}"
+	case "NewInputText":
+		optional = []bool{false, true}
 	case "NewObservable":
 		avoidUsingOptions = true
 	case "NewTextBlock":

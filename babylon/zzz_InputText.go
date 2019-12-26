@@ -38,25 +38,21 @@ func InputTextArrayToJSArray(array []*InputText) []interface{} {
 
 // NewInputTextOpts contains optional parameters for NewInputText.
 type NewInputTextOpts struct {
-	Name *string
 	Text *string
 }
 
 // NewInputText returns a new InputText object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui.inputtext#constructor
-func (gui *GUI) NewInputText(opts *NewInputTextOpts) *InputText {
+func (gui *GUI) NewInputText(name string, opts *NewInputTextOpts) *InputText {
 	if opts == nil {
 		opts = &NewInputTextOpts{}
 	}
 
-	args := make([]interface{}, 0, 0+2)
+	args := make([]interface{}, 0, 1+1)
 
-	if opts.Name == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Name)
-	}
+	args = append(args, name)
+
 	if opts.Text == nil {
 		args = append(args, js.Undefined())
 	} else {
