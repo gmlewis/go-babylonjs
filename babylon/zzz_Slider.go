@@ -36,26 +36,14 @@ func SliderArrayToJSArray(array []*Slider) []interface{} {
 	return result
 }
 
-// NewSliderOpts contains optional parameters for NewSlider.
-type NewSliderOpts struct {
-	Name *string
-}
-
 // NewSlider returns a new Slider object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui.slider#constructor
-func (gui *GUI) NewSlider(opts *NewSliderOpts) *Slider {
-	if opts == nil {
-		opts = &NewSliderOpts{}
-	}
+func (gui *GUI) NewSlider(name string) *Slider {
 
-	args := make([]interface{}, 0, 0+1)
+	args := make([]interface{}, 0, 1+0)
 
-	if opts.Name == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Name)
-	}
+	args = append(args, name)
 
 	p := gui.ctx.Get("Slider").New(args...)
 	return SliderFromJSObject(p, gui.ctx)
