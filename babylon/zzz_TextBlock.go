@@ -36,32 +36,15 @@ func TextBlockArrayToJSArray(array []*TextBlock) []interface{} {
 	return result
 }
 
-// NewTextBlockOpts contains optional parameters for NewTextBlock.
-type NewTextBlockOpts struct {
-	Name *string
-	Text *string
-}
-
 // NewTextBlock returns a new TextBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui.textblock#constructor
-func (gui *GUI) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
-	if opts == nil {
-		opts = &NewTextBlockOpts{}
-	}
+func (gui *GUI) NewTextBlock(name string, text string) *TextBlock {
 
-	args := make([]interface{}, 0, 0+2)
+	args := make([]interface{}, 0, 2+0)
 
-	if opts.Name == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Name)
-	}
-	if opts.Text == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, *opts.Text)
-	}
+	args = append(args, name)
+	args = append(args, text)
 
 	p := gui.ctx.Get("TextBlock").New(args...)
 	return TextBlockFromJSObject(p, gui.ctx)

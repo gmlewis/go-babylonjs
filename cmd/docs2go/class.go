@@ -648,6 +648,8 @@ func processConstructorOverrides(className string, s *Signature, names []string,
 		types[1] = "interface{}"
 	case "NewObservable":
 		avoidUsingOptions = true
+	case "NewTextBlock":
+		optional = []bool{false, false}
 	case "NewVector2":
 		optional = []bool{false, false}
 	case "NewVector3":
