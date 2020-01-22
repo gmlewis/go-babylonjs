@@ -1,6 +1,6 @@
 # go-babylonjs
 
-[![GoDoc](https://godoc.org/github.com/gmlewis/go-babylonjs?status.svg)](https://godoc.org/github.com/gmlewis/go-babylonjs)
+[![GoDoc](https://godoc.org/github.com/gmlewis/go-babylonjs/babylon?status.svg)](https://godoc.org/github.com/gmlewis/go-babylonjs/babylon)
 [![Test Status](https://github.com/gmlewis/go-babylonjs/workflows/tests/badge.svg)](https://github.com/gmlewis/go-babylonjs/actions?query=workflow%3Atests)
 
 Experimental Go binding to Babylon.js using WebAssembly.
