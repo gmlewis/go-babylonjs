@@ -1,3 +1,10 @@
+# ARCHIVED on 2020-02-22
+
+This was a fun experiment, but I have stopped using Babylon.JS in
+favor of the awesome [entity-component-system](https://wikipedia.org/wiki/Entity_component_system)
+[aframe.io](https://aframe.io/). Therefore, I've decided to archive
+this repo and move on.
+
 # go-babylonjs
 
 [![GoDoc](https://godoc.org/github.com/gmlewis/go-babylonjs/babylon?status.svg)](https://godoc.org/github.com/gmlewis/go-babylonjs/babylon)
